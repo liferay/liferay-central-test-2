@@ -24,10 +24,10 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.impl.ThemeImpl;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;

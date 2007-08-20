@@ -24,7 +24,7 @@ package com.liferay.portlet.bookmarks.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;

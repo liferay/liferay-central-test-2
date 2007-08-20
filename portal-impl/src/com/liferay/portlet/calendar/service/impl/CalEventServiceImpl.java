@@ -25,7 +25,7 @@ package com.liferay.portlet.calendar.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.cal.Recurrence;
-import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;

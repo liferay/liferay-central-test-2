@@ -24,8 +24,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Phone;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.PhoneService;
 import com.liferay.portal.service.permission.CommonPermission;

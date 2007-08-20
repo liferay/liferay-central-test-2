@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.quicknote.action;
 
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;

@@ -24,9 +24,9 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.ThemeImpl;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetService;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;

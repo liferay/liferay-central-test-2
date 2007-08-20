@@ -24,9 +24,9 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.OrgLaborLocalServiceUtil;
 import com.liferay.portal.service.OrgLaborService;
 import com.liferay.portal.service.permission.LocationPermission;

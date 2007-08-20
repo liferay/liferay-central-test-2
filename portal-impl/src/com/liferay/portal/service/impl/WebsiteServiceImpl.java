@@ -24,8 +24,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Website;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.service.WebsiteService;
 import com.liferay.portal.service.permission.CommonPermission;
