@@ -462,7 +462,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 			if (selLayout == null) {
 				tabs3Names = StringUtil.replace(tabs3Names, "page,", StringPool.BLANK);
 
-				if (GroupPermission.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)) {
+				if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)) {
 					if (!tabs1.equals("staging") && company.isCommunityLogo()) {
 						tabs3Names += ",logo";
 					}

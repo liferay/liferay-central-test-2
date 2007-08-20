@@ -41,7 +41,7 @@ RoleDisplayTerms displayTerms = (RoleDisplayTerms)searchContainer.getDisplayTerm
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-roles" />" />
 
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ROLE) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>">
 		<input type="button" value="<liferay-ui:message key="add-role" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 	</c:if>
 </div>

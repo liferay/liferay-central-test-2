@@ -133,7 +133,7 @@ else {
 }
 
 urlConfiguration.setParameter("portletResource", portletDisplay.getId());
-urlConfiguration.setParameter("resourcePrimKey", PortletPermission.getPrimaryKey(plid.longValue(), portlet.getPortletId()));
+urlConfiguration.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(plid.longValue(), portlet.getPortletId()));
 urlConfiguration.setParameter("redirect", currentURL);
 urlConfiguration.setParameter("backURL", currentURL);
 

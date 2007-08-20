@@ -39,23 +39,23 @@ if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || (!organizationsTab && po
 	editable = true;
 
 	if (organizationsTab) {
-		if (!OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
+		if (!OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
 			editable = false;
 		}
 
-		if ((organizationId <= 0) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) {
+		if ((organizationId <= 0) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) {
 			editable = true;
 		}
 	}
 	else {
-		if (!LocationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
+		if (!LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
 			editable = false;
 		}
 
 		if ((organizationId <= 0)) {
 			editable = true;
 
-			if ((parentOrganizationId > 0) && !OrganizationPermission.contains(permissionChecker, parentOrganizationId, ActionKeys.ADD_LOCATION)) {
+			if ((parentOrganizationId > 0) && !OrganizationPermissionUtil.contains(permissionChecker, parentOrganizationId, ActionKeys.ADD_LOCATION)) {
 				editable = false;
 			}
 		}

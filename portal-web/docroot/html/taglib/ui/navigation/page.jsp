@@ -111,7 +111,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 		for (int i = 0; i < layoutChildren.size(); i++) {
 			Layout layoutChild = (Layout)layoutChildren.get(i);
 
-			if (!layoutChild.isHidden() && LayoutPermission.contains(themeDisplay.getPermissionChecker(), layoutChild, ActionKeys.VIEW)) {
+			if (!layoutChild.isHidden() && LayoutPermissionUtil.contains(themeDisplay.getPermissionChecker(), layoutChild, ActionKeys.VIEW)) {
 				String layoutURL = PortalUtil.getLayoutURL(layoutChild, themeDisplay);
 				String target = PortalUtil.getLayoutTarget(layoutChild);
 

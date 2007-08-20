@@ -33,7 +33,7 @@ if (!user.isDefaultUser()) {
 	tabs1Names += ",orders";
 }
 
-if (PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.SHOPPING, ActionKeys.MANAGE_COUPONS)) {
+if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.SHOPPING, ActionKeys.MANAGE_COUPONS)) {
 	tabs1Names += ",coupons";
 }
 

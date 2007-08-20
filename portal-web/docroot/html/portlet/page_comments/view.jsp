@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/page_comments/init.jsp" %>
 
-<c:if test="<%= LayoutPermission.contains(permissionChecker, layout, ActionKeys.ADD_DISCUSSION) %>">
+<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.ADD_DISCUSSION) %>">
 	<portlet:actionURL var="discussionURL">
 		<portlet:param name="struts_action" value="/page_comments/edit_page_discussion" />
 	</portlet:actionURL>

@@ -30,7 +30,7 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 MBBan ban = (MBBan)row.getObject();
 %>
 
-<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER) %>">
+<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER) %>">
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
 		<portlet:param name="struts_action" value="/message_boards/ban_user" />
 		<portlet:param name="<%= Constants.CMD %>" value="unban" />

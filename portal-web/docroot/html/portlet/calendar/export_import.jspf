@@ -22,7 +22,7 @@
  */
 %>
 
-<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.CALENDAR, ActionKeys.EXPORT_ALL_EVENTS) %>">
+<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.CALENDAR, ActionKeys.EXPORT_ALL_EVENTS) %>">
 	<liferay-ui:tabs
 		names="export"
 	/>

@@ -33,7 +33,7 @@ Group group = (Group)objArray[0];
 String tabs1 = (String)objArray[1];
 %>
 
-<c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.UPDATE) %>">
+<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.UPDATE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/communities/edit_community" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -43,7 +43,7 @@ String tabs1 = (String)objArray[1];
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 </c:if>
 
-<c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.PERMISSIONS) %>">
+<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.PERMISSIONS) %>">
 	<liferay-security:permissionsURL
 		modelResource="<%= Group.class.getName() %>"
 		modelResourceDescription="<%= group.getName() %>"
@@ -54,7 +54,7 @@ String tabs1 = (String)objArray[1];
 	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 </c:if>
 
-<c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
+<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
 		<portlet:param name="struts_action" value="/communities/edit_pages" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -64,7 +64,7 @@ String tabs1 = (String)objArray[1];
 	<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
 </c:if>
 
-<c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.DELEGATE) %>">
+<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.DELEGATE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUserRolesURL">
 		<portlet:param name="struts_action" value="/communities/edit_user_roles" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -74,7 +74,7 @@ String tabs1 = (String)objArray[1];
 	<liferay-ui:icon image="assign_user_roles" url="<%= assignUserRolesURL %>" />
 </c:if>
 
-<c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_USERS) %>">
+<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_USERS) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUserPermissionsURL">
 		<portlet:param name="struts_action" value="/communities/edit_user_permissions" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -121,7 +121,7 @@ String tabs1 = (String)objArray[1];
 	</c:otherwise>
 </c:choose>
 
-<c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.DELETE) %>">
+<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.DELETE) %>">
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 		<portlet:param name="struts_action" value="/communities/edit_community" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />

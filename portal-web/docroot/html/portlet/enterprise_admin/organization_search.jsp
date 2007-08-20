@@ -104,7 +104,7 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 	%>
 
 	<c:if test="<%= showButtons %>">
-		<c:if test="<%= (organizationsTab && PortalPermission.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) || !organizationsTab %>">
+		<c:if test="<%= (organizationsTab && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) || !organizationsTab %>">
 			<input type="button" value="<liferay-ui:message key='<%= organizationsTab ? "add-organization" : "add-location" %>' />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= "/enterprise_admin/edit_" + (organizationsTab ? "organization" : "location") %>' /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 		</c:if>
 	</c:if>

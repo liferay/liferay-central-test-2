@@ -25,11 +25,14 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * <a href="PortalUtil.java.html"><b><i>View Source</i></b></a>
@@ -57,6 +60,50 @@ public class PortalUtil {
 
 		if (returnObj != null) {
 			return (HttpServletResponse)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static String getUserPassword(HttpSession ses) {
+		Object returnObj = _invoke(_METHOD_GETUSERPASSWORD, ses);
+
+		if (returnObj != null) {
+			return (String)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static String getUserPassword(HttpServletRequest req) {
+		Object returnObj = _invoke(_METHOD_GETUSERPASSWORD, req);
+
+		if (returnObj != null) {
+			return (String)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static String getUserPassword(ActionRequest req) {
+		Object returnObj = _invoke(_METHOD_GETUSERPASSWORD, req);
+
+		if (returnObj != null) {
+			return (String)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static String getUserPassword(RenderRequest req) {
+		Object returnObj = _invoke(_METHOD_GETUSERPASSWORD, req);
+
+		if (returnObj != null) {
+			return (String)returnObj;
 		}
 		else {
 			return null;
@@ -111,6 +158,8 @@ public class PortalUtil {
 
 	private static final String _METHOD_GETHTTPSERVLETRESPONSE =
 		"getHttpServletResponse";
+
+	private static final String _METHOD_GETUSERPASSWORD = "getUserPassword";
 
 	private static final String _METHOD_SETPAGESUBTITLE = "setPageSubtitle";
 

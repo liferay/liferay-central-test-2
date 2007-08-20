@@ -31,7 +31,7 @@ String portletId = portlet.getPortletId();
 String rootPortletId = portlet.getRootPortletId();
 String instanceId = portlet.getInstanceId();
 
-String portletPrimaryKey = PortletPermission.getPrimaryKey(plid.longValue(), portletId);
+String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(plid.longValue(), portletId);
 
 String queryString = (String)request.getAttribute(WebKeys.RENDER_PORTLET_QUERY_STRING);
 String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID);
@@ -63,8 +63,8 @@ catch (NoSuchResourceException nsre) {
 			Group group = layout.getGroup();
 
 			if (group.isCommunity()) {
-				if (GroupPermission.contains(permissionChecker, portletGroupId.longValue(), ActionKeys.MANAGE_LAYOUTS) ||
-					LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
+				if (GroupPermissionUtil.contains(permissionChecker, portletGroupId.longValue(), ActionKeys.MANAGE_LAYOUTS) ||
+					LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
 
 					addDefaultResource = true;
 				}
@@ -72,8 +72,8 @@ catch (NoSuchResourceException nsre) {
 			else if (group.isOrganization()) {
 				Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
 
-				if ((!organization.isLocation() && OrganizationPermission.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) ||
-					(organization.isLocation() && LocationPermission.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE))) {
+				if ((!organization.isLocation() && OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) ||
+					(organization.isLocation() && LocationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE))) {
 
 					addDefaultResource = true;
 				}
@@ -96,7 +96,7 @@ catch (NoSuchResourceException nsre) {
 	}
 }
 
-boolean access = PortletPermission.contains(permissionChecker, plid.longValue(), portlet, ActionKeys.VIEW);
+boolean access = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portlet, ActionKeys.VIEW);
 
 boolean stateMax = layoutTypePortlet.hasStateMaxPortletId(portletId);
 boolean stateMin = layoutTypePortlet.hasStateMinPortletId(portletId);
@@ -224,14 +224,14 @@ if ((portletParallelRender != null) && (portletParallelRender.booleanValue() == 
 }
 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
-	if (PortletPermission.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION)) {
+	if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION)) {
 		showConfigurationIcon = true;
 		showPortletCssIcon = true;
 	}
 }
 
 if (portlet.hasPortletMode(responseContentType, PortletMode.EDIT)) {
-	if (PortletPermission.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.PREFERENCES)) {
+	if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.PREFERENCES)) {
 		showEditIcon = true;
 	}
 }
@@ -252,7 +252,7 @@ if (responseContentType.equals(ContentTypes.XHTML_MP) && portlet.hasMultipleMime
 // cannot modify the layout
 
 if (!themeDisplay.isSignedIn() ||
-	!LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
+	!LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
 
 	showCloseIcon = false;
 	showMaxIcon = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LAYOUT_GUEST_SHOW_MAX_ICON));
@@ -542,7 +542,7 @@ else {
 			}
 		</c:if>
 
-		<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION) %>">
+		<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION) %>">
 			jQuery(
 				function() {
 					Liferay.Util.portletTitleEdit(

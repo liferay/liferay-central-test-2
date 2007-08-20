@@ -67,7 +67,7 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 
 	long searchUserId = user.getUserId();
 
-	if (PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.SHOPPING, ActionKeys.MANAGE_ORDERS)) {
+	if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.SHOPPING, ActionKeys.MANAGE_ORDERS)) {
 		searchUserId = 0;
 	}
 

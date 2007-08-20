@@ -52,7 +52,7 @@ JournalStructure structure = (JournalStructure)row.getObject();
 	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 </c:if>
 
-<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
+<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL">
 		<portlet:param name="struts_action" value="/journal/edit_article" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -72,7 +72,7 @@ JournalStructure structure = (JournalStructure)row.getObject();
 
 <liferay-ui:icon image="view_articles" message="view-articles" url="<%= viewArticleURL %>" />
 
-<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_TEMPLATE) %>">
+<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_TEMPLATE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addTemplateURL">
 		<portlet:param name="struts_action" value="/journal/edit_template" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />

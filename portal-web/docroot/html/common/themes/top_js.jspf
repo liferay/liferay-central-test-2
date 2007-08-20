@@ -242,7 +242,7 @@
         </c:choose>
 	</c:if>
 
-	<c:if test="<%= (layout != null) && (LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
+	<c:if test="<%= (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
 		jQuery(document).ready(
 			function() {
 				if (themeDisplay.isFreeformLayout()) {

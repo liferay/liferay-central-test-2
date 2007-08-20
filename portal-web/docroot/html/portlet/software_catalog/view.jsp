@@ -33,11 +33,11 @@ if (themeDisplay.isSignedIn()) {
 	tabs1Names += ",my-products";
 }
 
-if (PortalPermission.contains(permissionChecker, ActionKeys.ADD_LICENSE)) {
+if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LICENSE)) {
 	tabs1Names += ",licenses";
 }
 
-if (PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION)) {
+if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION)) {
 	tabs1Names += ",framework-versions";
 }
 
@@ -165,7 +165,7 @@ portletURL.setParameter("tabs1", tabs1);
 			resultRows.add(row);
 		}
 
-		boolean showAddProductEntryButton = PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
+		boolean showAddProductEntryButton = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
 		%>
 
 		<c:if test="<%= showAddProductEntryButton || (results.size() > 0) %>">
@@ -261,7 +261,7 @@ portletURL.setParameter("tabs1", tabs1);
 		}
 		%>
 
-		<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION) %>">
+		<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION) %>">
 			<input type="button" value="<liferay-ui:message key="add-framework-version" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_framework_version" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" /><br />
 
 			<c:if test="<%= results.size() > 0 %>">
@@ -352,7 +352,7 @@ portletURL.setParameter("tabs1", tabs1);
 		}
 		%>
 
-		<c:if test="<%= PortalPermission.contains(permissionChecker, ActionKeys.ADD_LICENSE) %>">
+		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LICENSE) %>">
 			<input type="button" value="<liferay-ui:message key="add-license" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_license" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" /><br />
 
 			<c:if test="<%= results.size() > 0 %>">

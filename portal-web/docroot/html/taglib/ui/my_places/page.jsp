@@ -77,8 +77,8 @@
 			if (organizationCommunity) {
 				organization = OrganizationLocalServiceUtil.getOrganization(community.getClassPK());
 
-				if ((!organization.isLocation() && OrganizationPermission.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) ||
-					(organization.isLocation() && LocationPermission.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE))) {
+				if ((!organization.isLocation() && OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) ||
+					(organization.isLocation() && LocationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE))) {
 
 					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
 
@@ -97,7 +97,7 @@
 				}
 			}
 			else if (regularCommunity) {
-				if (GroupPermission.contains(permissionChecker, community.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+				if (GroupPermissionUtil.contains(permissionChecker, community.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
 					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
 
 					addPageURL.setWindowState(WindowState.NORMAL);

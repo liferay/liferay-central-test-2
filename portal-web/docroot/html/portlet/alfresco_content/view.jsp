@@ -49,7 +49,7 @@ uuid = (String)renderRequest.getAttribute("uuid");
 	</div>
 
 	<c:if test="<%= themeDisplay.isSignedIn() && !preview %>">
-		<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
+		<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
 			<liferay-ui:icon image="configuration" message="select-content" url="<%= portletDisplay.getURLConfiguration() %>" />
 		</c:if>
 

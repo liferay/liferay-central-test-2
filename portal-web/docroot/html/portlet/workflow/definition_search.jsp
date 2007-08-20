@@ -59,7 +59,7 @@ DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.ge
 
 	<input type="submit" value="<liferay-ui:message key="search-definitions" />" />
 
-	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.WORKFLOW, ActionKeys.ADD_DEFINITION) %>">
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.WORKFLOW, ActionKeys.ADD_DEFINITION) %>">
 		<input type="button" value="<liferay-ui:message key="add-definition" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/workflow/edit_definition" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 	</c:if>
 </div>

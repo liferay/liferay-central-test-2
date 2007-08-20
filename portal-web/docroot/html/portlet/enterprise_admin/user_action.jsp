@@ -41,7 +41,7 @@
 	long locationId = user2.getLocation().getOrganizationId();
 	%>
 
-	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) %>">
+	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editUserURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -51,7 +51,7 @@
 		<liferay-ui:icon image="edit" url="<%= editUserURL %>" />
 	</c:if>
 
-	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.PERMISSIONS) %>">
+	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= User.class.getName() %>"
 			modelResourceDescription="<%= user2.getFullName() %>"
@@ -62,7 +62,7 @@
 		<liferay-ui:icon image="permissions" url="<%= permissionsUserURL %>" />
 	</c:if>
 
-	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) && user2.isLayoutsRequired() %>">
+	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) && user2.isLayoutsRequired() %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -73,7 +73,7 @@
 	</c:if>
 
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-		<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE)) && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE)) && (user.getUserId() != user2.getUserId()) && !themeDisplay.isImpersonated() && UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.IMPERSONATE) %>">
+		<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE)) && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE)) && (user.getUserId() != user2.getUserId()) && !themeDisplay.isImpersonated() && UserPermissionUtil.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.IMPERSONATE) %>">
 			<liferay-security:doAsURL
 				doAsUserId="<%= user2.getUserId() %>"
 				var="impersonateUserURL"
@@ -82,7 +82,7 @@
 			<liferay-ui:icon image="impersonate_user" url="<%= impersonateUserURL %>" target="_blank" />
 		</c:if>
 
-		<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.DELETE) %>">
+		<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.DELETE) %>">
 			<c:if test="<%= !searchTerms.isActive() %>">
 				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="restoreUserURL">
 					<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />

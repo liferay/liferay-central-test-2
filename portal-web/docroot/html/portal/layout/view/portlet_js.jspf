@@ -55,7 +55,7 @@ function addPortletHTML(url, placeHolder) {
 			jQuery(portletBound).evalScripts();
 		}
 
-		<c:if test="<%= (layout != null) && (LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
+		<c:if test="<%= (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
 			if (!portletBound.isStatic) {
 				if (themeDisplay.isFreeformLayout()) {
 					Liferay.Freeform.add(portletBound);

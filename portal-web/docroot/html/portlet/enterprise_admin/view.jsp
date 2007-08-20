@@ -648,7 +648,7 @@ portletURL.setParameter("tabs3", tabs3);
 
 		headerNames.add(StringPool.BLANK);
 
-		if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_USER_GROUP)) {
+		if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP)) {
 			RowChecker rowChecker = new RowChecker(renderResponse);
 
 			searchContainer.setRowChecker(rowChecker);
@@ -676,7 +676,7 @@ portletURL.setParameter("tabs3", tabs3);
 
 			<div class="separator"><!-- --></div>
 
-			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
+			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
 				<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteUserGroups();" />
 			</c:if>
 

@@ -189,12 +189,12 @@ public class LanguageUtil {
 		return getLanguage().getTimeDescription(pageContext, milliseconds);
 	}
 
-	public void setLanguage(Language language) {
-		_language = language;
-	}
-
 	public static void updateCookie(HttpServletResponse res, Locale locale) {
 		getLanguage().updateCookie(res, locale);
+	}
+
+	public void setLanguage(Language language) {
+		_language = language;
 	}
 
 	private static LanguageUtil _getUtil() {

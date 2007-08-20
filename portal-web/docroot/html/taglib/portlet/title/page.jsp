@@ -32,7 +32,7 @@ boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-p
 	<span class="portlet-title" id="portlet-title-bar_<%= portletDisplay.getId() %>"><%= portletDisplay.getTitle() %></span>
 </div>
 
-<c:if test="<%= Validator.isNotNull(portletDisplay.getId()) && editable && themeDisplay.isSignedIn() && PortletPermission.contains(permissionChecker, themeDisplay.getPlid(), portletDisplay.getId(), ActionKeys.CONFIGURATION) %>">
+<c:if test="<%= Validator.isNotNull(portletDisplay.getId()) && editable && themeDisplay.isSignedIn() && PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), portletDisplay.getId(), ActionKeys.CONFIGURATION) %>">
 	<script type="text/javascript">
 		QuickEdit.create("portlet-title-bar_<%= portletDisplay.getId() %>", {
 			<c:if test="<%= portletDisplay.isShowMoveIcon() %>">

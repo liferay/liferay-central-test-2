@@ -41,7 +41,7 @@ UserGroupDisplayTerms displayTerms = (UserGroupDisplayTerms)searchContainer.getD
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-user-groups" />" />
 
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermission.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
 		<input type="button" value="<liferay-ui:message key="add-user-group" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 	</c:if>
 </div>

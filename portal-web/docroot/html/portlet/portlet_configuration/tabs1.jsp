@@ -67,7 +67,7 @@ permissionsURL.setParameter("struts_action", "/portlet_configuration/edit_permis
 permissionsURL.setParameter("redirect", redirect);
 permissionsURL.setParameter("backURL", backURL);
 permissionsURL.setParameter("portletResource", portletResource);
-permissionsURL.setParameter("resourcePrimKey", PortletPermission.getPrimaryKey(layout.getPlid(), portletResource));
+permissionsURL.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(layout.getPlid(), portletResource));
 permissionsURL.setParameter("previewWidth", previewWidth);
 %>
 

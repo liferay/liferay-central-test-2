@@ -123,11 +123,11 @@ String addUserURLString = null;
 
 <c:choose>
 	<c:when test="<%= portletName.equals(PortletKeys.LOCATION_ADMIN) %>">
-		<c:if test="<%= !organizationsTab && LocationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
+		<c:if test="<%= !organizationsTab && LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
 			<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
 		</c:if>
 
-		<c:if test="<%= LocationPermission.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
+		<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
 			<liferay-security:permissionsURL
 				modelResource="<%= Location.class.getName() %>"
 				modelResourceDescription="<%= organization.getName() %>"
@@ -138,13 +138,13 @@ String addUserURLString = null;
 			<liferay-ui:icon image="permissions" url="<%= editLocationPermissionsURL %>" />
 		</c:if>
 
-		<c:if test="<%= LocationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
+		<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
 			<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURLString %>" />
 		</c:if>
 
 		<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 
-		<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && LocationPermission.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
+		<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
 			<liferay-ui:icon-delete url="<%= deleteOrganizationURL %>" />
 		</c:if>
 	</c:when>
@@ -152,12 +152,12 @@ String addUserURLString = null;
 		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 			<c:choose>
 				<c:when test="<%= organizationsTab %>">
-					<c:if test="<%= OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
+					<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
 						<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<c:if test="<%= LocationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
+					<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
 						<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
 					</c:if>
 				</c:otherwise>
@@ -165,7 +165,7 @@ String addUserURLString = null;
 
 			<c:choose>
 				<c:when test="<%= organizationsTab %>">
-					<c:if test="<%= OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
+					<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
 						<liferay-security:permissionsURL
 							modelResource="<%= Organization.class.getName() %>"
 							modelResourceDescription="<%= organization.getName() %>"
@@ -177,7 +177,7 @@ String addUserURLString = null;
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<c:if test="<%= LocationPermission.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
+					<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
 						<liferay-security:permissionsURL
 							modelResource="<%= Location.class.getName() %>"
 							modelResourceDescription="<%= organization.getName() %>"
@@ -192,12 +192,12 @@ String addUserURLString = null;
 
 			<c:choose>
 				<c:when test="<%= organizationsTab %>">
-					<c:if test="<%= OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
+					<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
 						<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<c:if test="<%= LocationPermission.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
+					<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
 						<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
 					</c:if>
 				</c:otherwise>
@@ -205,12 +205,12 @@ String addUserURLString = null;
 
 			<c:choose>
 				<c:when test="<%= organizationsTab %>">
-					<c:if test="<%= OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
+					<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
 						<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURLString %>" />
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<c:if test="<%= LocationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
+					<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
 						<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURLString %>" />
 					</c:if>
 				</c:otherwise>
@@ -224,7 +224,7 @@ String addUserURLString = null;
 		</c:if>
 
 		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-			<c:if test="<%= organizationsTab && OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_LOCATION) %>">
+			<c:if test="<%= organizationsTab && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_LOCATION) %>">
 				<liferay-ui:icon image="add_location" message="add-location" url="<%= addLocationURL %>" />
 			</c:if>
 		</c:if>
@@ -235,12 +235,12 @@ String addUserURLString = null;
 
 		<c:choose>
 			<c:when test="<%= organizationsTab %>">
-				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && OrganizationPermission.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
+				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
 					<liferay-ui:icon-delete url="<%= deleteOrganizationURL %>" />
 				</c:if>
 			</c:when>
 			<c:otherwise>
-				<c:if test="<%= LocationPermission.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
+				<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
 					<liferay-ui:icon-delete url="<%= deleteOrganizationURL %>" />
 				</c:if>
 			</c:otherwise>

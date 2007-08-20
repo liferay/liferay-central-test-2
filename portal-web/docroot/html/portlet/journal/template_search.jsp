@@ -65,7 +65,7 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-templates" />" />
 
-	<c:if test="<%= PortletPermission.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_TEMPLATE) %>">
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_TEMPLATE) %>">
 		<input type="button" value="<liferay-ui:message key="add-template" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 	</c:if>
 </div>

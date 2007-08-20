@@ -178,7 +178,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 				sm.append(" (0)");
 			}
 
-			if ((stagingGroup != null) && GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+			if ((stagingGroup != null) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
 				rowURL.setParameter("groupId", String.valueOf(stagingGroup.getGroupId()));
 				rowURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
@@ -214,7 +214,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 				sm.append(" (0)");
 			}
 
-			if ((stagingGroup != null) && GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+			if ((stagingGroup != null) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
 				rowURL.setParameter("groupId", String.valueOf(stagingGroup.getGroupId()));
 				rowURL.setParameter("privateLayout", Boolean.TRUE.toString());
 
