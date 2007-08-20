@@ -26,6 +26,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.WebsiteURLException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.ListTypeImpl;
@@ -34,7 +35,6 @@ import com.liferay.portal.service.base.WebsiteLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.Validator;
 
 import java.net.MalformedURLException;
 import java.net.URL;

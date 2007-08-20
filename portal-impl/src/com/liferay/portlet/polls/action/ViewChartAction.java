@@ -23,11 +23,11 @@
 package com.liferay.portlet.polls.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.polls.util.PollsUtil;
-import com.liferay.util.ParamUtil;
 
 import java.io.OutputStream;
 

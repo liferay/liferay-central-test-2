@@ -24,11 +24,11 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 import java.util.Iterator;
 import java.util.List;

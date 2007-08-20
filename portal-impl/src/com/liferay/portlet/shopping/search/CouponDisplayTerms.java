@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.shopping.search;
 
-import com.liferay.util.ParamUtil;
-import com.liferay.util.dao.search.DisplayTerms;
+import com.liferay.portal.kernel.dao.search.DisplayTerms;
+import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.portlet.RenderRequest;
 

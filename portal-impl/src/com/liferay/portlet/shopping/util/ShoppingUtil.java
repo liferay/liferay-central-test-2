@@ -27,9 +27,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.NoSuchCartException;
@@ -55,10 +57,8 @@ import com.liferay.portlet.shopping.util.comparator.ItemNameComparator;
 import com.liferay.portlet.shopping.util.comparator.ItemPriceComparator;
 import com.liferay.portlet.shopping.util.comparator.ItemSKUComparator;
 import com.liferay.portlet.shopping.util.comparator.OrderDateComparator;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.MathUtil;
-import com.liferay.util.StringUtil;
 
 import java.text.NumberFormat;
 

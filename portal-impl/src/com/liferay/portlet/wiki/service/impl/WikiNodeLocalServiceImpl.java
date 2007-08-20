@@ -26,6 +26,8 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.User;
@@ -41,8 +43,6 @@ import com.liferay.portlet.wiki.service.base.WikiNodeLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.portlet.wiki.util.Indexer;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;

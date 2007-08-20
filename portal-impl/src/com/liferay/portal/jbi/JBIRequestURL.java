@@ -22,9 +22,9 @@
 
 package com.liferay.portal.jbi;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.util.Http;
-import com.liferay.util.Validator;
 
 import java.io.IOException;
 

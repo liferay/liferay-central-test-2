@@ -24,6 +24,8 @@ package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
@@ -33,8 +35,6 @@ import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;

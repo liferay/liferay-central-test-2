@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.messageboards.util.comparator;
 
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.util.DateUtil;
 
 /**
  * <a href="MessageCreateDateComparator.java.html"><b><i>View Source</i></b></a>

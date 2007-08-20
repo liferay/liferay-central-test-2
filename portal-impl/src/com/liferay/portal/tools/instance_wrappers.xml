@@ -66,27 +66,27 @@
 		src-file="com/liferay/portal/kernel/servlet/BrowserSniffer.java"
 	/>
 	<instance-wrapper
-		parent-dir="../util-java/src"
-		src-file="com/liferay/util/ArrayUtil.java"
+		parent-dir="../portal-kernel/src"
+		src-file="com/liferay/portal/kernel/util/ArrayUtil.java"
 	/>
 	<instance-wrapper
-		parent-dir="../util-java/src"
-		src-file="com/liferay/util/DateUtil.java"
+		parent-dir="../portal-kernel/src"
+		src-file="com/liferay/portal/kernel/util/DateUtil.java"
 	/>
 	<instance-wrapper
-		parent-dir="../util-java/src"
-		src-file="com/liferay/util/GetterUtil.java"
+		parent-dir="../portal-kernel/src"
+		src-file="com/liferay/portal/kernel/util/GetterUtil.java"
 	/>
 	<instance-wrapper
-		parent-dir="../util-java/src"
-		src-file="com/liferay/util/Randomizer.java"
+		parent-dir="../portal-kernel/src"
+		src-file="com/liferay/portal/kernel/util/Randomizer.java"
 	/>
 	<instance-wrapper
-		parent-dir="../util-java/src"
-		src-file="com/liferay/util/StringUtil.java"
+		parent-dir="../portal-kernel/src"
+		src-file="com/liferay/portal/kernel/util/StringUtil.java"
 	/>
 	<instance-wrapper
-		parent-dir="../util-java/src"
-		src-file="com/liferay/util/UnicodeFormatter.java"
+		parent-dir="../portal-kernel/src"
+		src-file="com/liferay/portal/kernel/util/UnicodeFormatter.java"
 	/>
 </instance-wrappers>

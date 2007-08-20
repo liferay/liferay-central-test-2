@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.mail.model;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.util.ArrayList;
 import java.util.Date;

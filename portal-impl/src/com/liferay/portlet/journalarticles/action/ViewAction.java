@@ -23,10 +23,10 @@
 package com.liferay.portlet.journalarticles.action;
 
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.util.GetterUtil;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;

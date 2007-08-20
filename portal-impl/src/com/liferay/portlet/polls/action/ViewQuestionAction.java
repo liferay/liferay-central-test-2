@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.polls.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portlet.polls.service.PollsVoteServiceUtil;
 import com.liferay.portlet.polls.util.PollsUtil;
-import com.liferay.util.ParamUtil;
 
 import javax.portlet.ActionRequest;
 

@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.words.util;
 
+import com.liferay.portal.kernel.util.Randomizer;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portlet.words.ScramblerException;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.ListUtil;
-import com.liferay.util.Randomizer;
-import com.liferay.util.StringUtil;
 import com.liferay.util.jazzy.BasicSpellCheckListener;
 
 import com.swabunga.spell.engine.SpellDictionaryHashMap;

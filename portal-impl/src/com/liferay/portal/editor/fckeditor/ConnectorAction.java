@@ -25,9 +25,9 @@ package com.liferay.portal.editor.fckeditor;
 import com.liferay.portal.editor.fckeditor.command.Command;
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.command.CommandFactory;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.ParamUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

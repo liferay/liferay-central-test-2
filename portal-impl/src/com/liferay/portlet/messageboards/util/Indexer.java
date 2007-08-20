@@ -24,12 +24,12 @@ package com.liferay.portlet.messageboards.util;
 
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portlet.messageboards.service.jms.IndexProducer;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
 
 import java.io.IOException;
 

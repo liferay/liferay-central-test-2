@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.journal.TransformException;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.StringUtil;
 import com.liferay.util.xml.CDATAUtil;
 
 import java.io.IOException;

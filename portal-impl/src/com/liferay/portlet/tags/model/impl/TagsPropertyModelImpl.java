@@ -22,10 +22,11 @@
 
 package com.liferay.portlet.tags.model.impl;
 
+import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
 import java.io.Serializable;
@@ -67,7 +68,7 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 			{ "key_", new Integer(Types.VARCHAR) },
 			{ "value", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table TagsProperty (propertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,entryId LONG,key_ VARCHAR(75) null,value VARCHAR(75) null)";
+	public static String TABLE_SQL_CREATE = "create table TagsProperty (propertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,entryId LONG,key_ VARCHAR(75) null,value VARCHAR(300) null)";
 	public static String TABLE_SQL_DROP = "drop table TagsProperty";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.tags.model.TagsProperty"),

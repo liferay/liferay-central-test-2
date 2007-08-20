@@ -24,9 +24,9 @@ package com.liferay.portlet.alfrescocontent.util;
 
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 
 import java.io.IOException;

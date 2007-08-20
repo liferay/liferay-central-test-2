@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
-import com.liferay.util.StringUtil;
 
 /**
  * <a href="ShoppingItemFieldImpl.java.html"><b><i>View Source</i></b></a>

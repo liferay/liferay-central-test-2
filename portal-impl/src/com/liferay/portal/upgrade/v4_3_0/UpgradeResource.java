@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Location;
@@ -62,7 +63,6 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.util.ArrayUtil;
 import com.liferay.util.CollectionFactory;
 
 import java.sql.Types;

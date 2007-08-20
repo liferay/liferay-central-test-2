@@ -25,7 +25,7 @@ package com.liferay.portal.language;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.LanguageWrapper;
 import com.liferay.portal.kernel.language.UnicodeLanguage;
-import com.liferay.util.UnicodeFormatter;
+import com.liferay.portal.kernel.util.UnicodeFormatter;
 
 import java.util.Locale;
 

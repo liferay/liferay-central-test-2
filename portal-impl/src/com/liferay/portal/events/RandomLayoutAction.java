@@ -22,6 +22,8 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -33,8 +35,6 @@ import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Randomizer;
 
 import java.util.List;
 

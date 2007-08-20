@@ -25,11 +25,11 @@ package com.liferay.portlet.workflow.service.impl;
 import com.liferay.portal.kernel.jbi.WorkflowComponent;
 import com.liferay.portal.kernel.jbi.WorkflowComponentException;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.workflow.jbi.WorkflowURL;
 import com.liferay.portlet.workflow.jbi.WorkflowXMLUtil;
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
-import com.liferay.util.StringUtil;
 
 import java.util.List;
 import java.util.Map;

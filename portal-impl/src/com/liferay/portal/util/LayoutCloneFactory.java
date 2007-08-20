@@ -23,7 +23,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * <a href="LayoutCloneFactory.java.html"><b><i>View Source</i></b></a>

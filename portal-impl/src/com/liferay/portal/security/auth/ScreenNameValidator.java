@@ -22,7 +22,7 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * <a href="ScreenNameValidator.java.html"><b><i>View Source</i></b></a>

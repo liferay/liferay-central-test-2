@@ -23,13 +23,13 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.OpenIdUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.List;

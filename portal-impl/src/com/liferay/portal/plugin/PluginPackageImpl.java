@@ -24,8 +24,8 @@ package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;

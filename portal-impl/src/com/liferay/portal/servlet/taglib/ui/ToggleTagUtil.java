@@ -23,11 +23,11 @@
 package com.liferay.portal.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.SessionClicks;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.Validator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;

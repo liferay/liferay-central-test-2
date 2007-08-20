@@ -24,6 +24,7 @@ package com.liferay.portal.events;
 
 import com.liferay.lock.service.LockServiceUtil;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
@@ -36,7 +37,6 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.verify.VerifyProcess;
-import com.liferay.util.GetterUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

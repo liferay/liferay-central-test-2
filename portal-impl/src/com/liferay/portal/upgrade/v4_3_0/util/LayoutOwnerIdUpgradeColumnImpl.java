@@ -22,11 +22,11 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
-import com.liferay.util.GetterUtil;
 
 /**
  * <a href="LayoutOwnerIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>

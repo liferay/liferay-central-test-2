@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.workflow.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.workflow.model.WorkflowDefinition;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil;
-import com.liferay.util.ParamUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;

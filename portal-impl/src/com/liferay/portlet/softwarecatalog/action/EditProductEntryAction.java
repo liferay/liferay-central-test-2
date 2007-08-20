@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.action;
 
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
@@ -35,7 +36,6 @@ import com.liferay.portlet.softwarecatalog.ProductEntryPageURLException;
 import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
 import com.liferay.portlet.softwarecatalog.ProductEntryTypeException;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;

@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchReleaseException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.service.base.ReleaseLocalServiceBaseImpl;
@@ -33,7 +34,6 @@ import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;

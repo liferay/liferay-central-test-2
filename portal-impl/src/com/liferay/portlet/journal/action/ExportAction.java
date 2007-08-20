@@ -25,8 +25,12 @@ package com.liferay.portlet.journal.action;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
@@ -59,11 +63,7 @@ import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUti
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.util.ArrayList;

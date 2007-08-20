@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.messageboards.smtp;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.Html;
-import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;

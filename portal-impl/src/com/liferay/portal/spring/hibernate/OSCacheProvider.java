@@ -22,8 +22,8 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
 
 import com.opensymphony.oscache.base.CacheEntry;
 

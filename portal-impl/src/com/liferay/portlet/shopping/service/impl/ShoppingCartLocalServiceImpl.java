@@ -25,6 +25,8 @@ package com.liferay.portlet.shopping.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -46,8 +48,6 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.portlet.shopping.util.ShoppingUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Date;

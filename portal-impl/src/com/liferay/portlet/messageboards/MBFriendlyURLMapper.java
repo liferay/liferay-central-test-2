@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.messageboards;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.BaseFriendlyURLMapper;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 
 import java.util.Map;
 

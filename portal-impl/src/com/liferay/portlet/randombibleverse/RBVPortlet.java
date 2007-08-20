@@ -23,8 +23,8 @@
 package com.liferay.portlet.randombibleverse;
 
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portlet.JSPPortlet;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionMessages;
 
 import java.io.IOException;

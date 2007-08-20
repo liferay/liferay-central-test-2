@@ -24,12 +24,12 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceUtil;
 import com.liferay.portlet.shopping.util.comparator.ItemNameComparator;
-import com.liferay.util.StringUtil;
 
 import java.util.List;
 

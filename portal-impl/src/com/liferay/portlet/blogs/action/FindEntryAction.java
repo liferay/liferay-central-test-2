@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.blogs.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.util.ParamUtil;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletURL;

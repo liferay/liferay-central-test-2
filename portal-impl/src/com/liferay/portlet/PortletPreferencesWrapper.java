@@ -22,8 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
 
 import java.io.IOException;
 import java.io.Serializable;

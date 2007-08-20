@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.bookmarks.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
-import com.liferay.util.ParamUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;

@@ -24,10 +24,10 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
-import com.liferay.util.GetterUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

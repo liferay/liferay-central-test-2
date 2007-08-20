@@ -23,7 +23,7 @@
 package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Iterator;
 import java.util.Map;

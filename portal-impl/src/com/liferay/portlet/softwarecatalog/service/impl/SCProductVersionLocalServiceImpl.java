@@ -25,6 +25,7 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.softwarecatalog.ProductVersionChangeLogException;
@@ -36,7 +37,6 @@ import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductVersionLocalServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
-import com.liferay.util.Validator;
 
 import java.util.Date;
 import java.util.Iterator;

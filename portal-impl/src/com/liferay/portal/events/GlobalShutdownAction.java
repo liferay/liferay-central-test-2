@@ -30,11 +30,11 @@ import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.job.JobScheduler;
 import com.liferay.portal.kernel.log.Jdk14LogFactoryImpl;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

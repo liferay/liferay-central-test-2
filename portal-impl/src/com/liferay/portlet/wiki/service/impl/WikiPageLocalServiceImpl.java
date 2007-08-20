@@ -26,6 +26,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -48,7 +49,6 @@ import com.liferay.portlet.wiki.util.NodeFilter;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.util.MathUtil;
-import com.liferay.util.Validator;
 
 import java.io.IOException;
 

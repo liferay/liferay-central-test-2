@@ -25,13 +25,13 @@ package com.liferay.portal.security.pwd;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.PasswordTrackerLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.words.util.WordsUtil;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.PwdGenerator;
 
 import java.util.Date;

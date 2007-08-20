@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.polls.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
-import com.liferay.util.ParamUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;

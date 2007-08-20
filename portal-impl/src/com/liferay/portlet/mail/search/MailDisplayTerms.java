@@ -23,13 +23,13 @@
 package com.liferay.portlet.mail.search;
 
 import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.dao.search.DisplayTerms;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
-import com.liferay.util.dao.search.DisplayTerms;
 
 import java.util.Calendar;
 import java.util.Date;

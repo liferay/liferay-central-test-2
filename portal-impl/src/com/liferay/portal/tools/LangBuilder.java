@@ -22,12 +22,12 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.translator.model.Translation;
 import com.liferay.portlet.translator.util.TranslationConverter;
 import com.liferay.util.FileUtil;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

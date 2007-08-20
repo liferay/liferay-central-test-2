@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.RenderResponse;
 

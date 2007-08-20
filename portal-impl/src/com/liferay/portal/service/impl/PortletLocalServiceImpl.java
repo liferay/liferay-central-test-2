@@ -26,6 +26,8 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletInfo;
@@ -40,9 +42,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLSafeReader;
 
 import java.io.IOException;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.enterpriseadmin.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.OrgLabor;
@@ -42,7 +43,6 @@ import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.ParamUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;

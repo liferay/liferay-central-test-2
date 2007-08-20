@@ -23,6 +23,8 @@
 package com.liferay.portlet.language.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
@@ -33,8 +35,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import java.util.List;
 import java.util.Locale;

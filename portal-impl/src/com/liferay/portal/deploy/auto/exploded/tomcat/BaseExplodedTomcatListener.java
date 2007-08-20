@@ -24,11 +24,11 @@ package com.liferay.portal.deploy.auto.exploded.tomcat;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Validator;
 
 import java.io.File;
 import java.io.StringReader;

@@ -23,7 +23,9 @@
 package com.liferay.portal.webdav.methods;
 
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
@@ -32,8 +34,6 @@ import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.xml.DocUtil;
 import com.liferay.util.xml.XMLFormatter;

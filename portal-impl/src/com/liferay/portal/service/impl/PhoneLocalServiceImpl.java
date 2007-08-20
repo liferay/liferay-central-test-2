@@ -26,6 +26,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
@@ -34,7 +35,6 @@ import com.liferay.portal.service.base.PhoneLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PhoneUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.format.PhoneNumberUtil;
 
 import java.rmi.RemoteException;

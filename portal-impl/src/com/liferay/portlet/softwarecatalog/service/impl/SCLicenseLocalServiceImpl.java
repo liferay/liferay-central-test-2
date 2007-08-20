@@ -25,12 +25,12 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.softwarecatalog.LicenseNameException;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.service.base.SCLicenseLocalServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
-import com.liferay.util.Validator;
 
 import java.util.List;
 

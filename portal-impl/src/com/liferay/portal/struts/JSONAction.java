@@ -24,8 +24,8 @@ package com.liferay.portal.struts;
 
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.PrintWriter;
 

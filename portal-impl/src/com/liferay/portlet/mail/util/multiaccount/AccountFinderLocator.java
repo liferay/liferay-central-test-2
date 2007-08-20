@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.mail.util.multiaccount;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
 
 /**
  * <a href="AccountFinderLocator.java.html"><b><i>View Source</i></b></a>

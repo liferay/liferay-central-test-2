@@ -26,12 +26,12 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.plugin.PluginPackageImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
-import com.liferay.util.Validator;
 import com.liferay.util.Version;
 
 import java.io.IOException;

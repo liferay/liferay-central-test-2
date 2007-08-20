@@ -23,9 +23,9 @@
 package com.liferay.portlet.tagscompiler;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.BaseFriendlyURLMapper;
-import com.liferay.util.StringUtil;
 
 import java.util.Map;
 

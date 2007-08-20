@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.wsrp;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.util.WSRPUtil;
 import com.liferay.portlet.StrutsPortlet;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionMessages;
 
 import java.io.IOException;

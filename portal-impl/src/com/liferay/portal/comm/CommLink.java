@@ -24,8 +24,8 @@ package com.liferay.portal.comm;
 
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.Validator;
 
 import java.io.Serializable;
 

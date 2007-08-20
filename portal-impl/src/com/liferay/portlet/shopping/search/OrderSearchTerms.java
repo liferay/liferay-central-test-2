@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.shopping.search;
 
+import com.liferay.portal.kernel.dao.DAOParamUtil;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
-import com.liferay.util.dao.DAOParamUtil;
 
 import javax.portlet.RenderRequest;
 

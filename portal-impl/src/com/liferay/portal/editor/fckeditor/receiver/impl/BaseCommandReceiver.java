@@ -25,10 +25,10 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.editor.fckeditor.receiver.CommandReceiver;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.servlet.UploadServletRequest;
 import com.liferay.util.servlet.fileupload.LiferayFileItemFactory;
 

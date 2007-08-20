@@ -23,6 +23,8 @@
 package com.liferay.portlet.shopping.action;
 
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.shopping.CartMinQuantityException;
@@ -36,8 +38,6 @@ import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
 import com.liferay.portlet.shopping.util.ShoppingUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 

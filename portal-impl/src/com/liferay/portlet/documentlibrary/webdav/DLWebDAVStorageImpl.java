@@ -23,7 +23,9 @@
 package com.liferay.portlet.documentlibrary.webdav;
 
 import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.webdav.BaseResourceImpl;
@@ -44,9 +46,7 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.util.FileUtil;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;
 

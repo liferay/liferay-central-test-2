@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.enterpriseadmin.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PluginSettingServiceUtil;
 import com.liferay.portal.service.PortletServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.Arrays;

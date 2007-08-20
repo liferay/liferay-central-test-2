@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
@@ -48,7 +49,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.GroupNameUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutOwnerIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutPlidUpgradeColumnImpl;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.ArrayUtil;
 import com.liferay.util.CollectionFactory;
 
 import java.sql.Types;

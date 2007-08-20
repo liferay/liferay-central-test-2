@@ -27,11 +27,11 @@ import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.RequiredUserGroupException;
 import com.liferay.portal.UserGroupNameException;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;

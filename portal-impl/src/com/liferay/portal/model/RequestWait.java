@@ -22,8 +22,8 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
 
 /**
  * <a href="RequestWait.java.html"><b><i>View Source</i></b></a>

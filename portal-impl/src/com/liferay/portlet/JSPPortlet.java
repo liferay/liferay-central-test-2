@@ -23,10 +23,10 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 
 import java.io.IOException;
 

@@ -24,10 +24,10 @@ package com.liferay.portlet.reverendfun.util;
 
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebCacheable;
-import com.liferay.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

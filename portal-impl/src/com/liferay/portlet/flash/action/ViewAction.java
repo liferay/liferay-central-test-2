@@ -23,8 +23,8 @@
 package com.liferay.portlet.flash.action;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.util.Validator;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;

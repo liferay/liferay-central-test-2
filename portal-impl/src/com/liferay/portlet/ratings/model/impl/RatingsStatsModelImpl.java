@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.ratings.model.impl;
 
+import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.GetterUtil;
 
 import java.io.Serializable;
 

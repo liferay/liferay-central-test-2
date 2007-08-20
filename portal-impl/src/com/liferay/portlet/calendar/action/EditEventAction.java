@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -39,7 +40,6 @@ import com.liferay.portlet.calendar.EventStartDateException;
 import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.NoSuchEventException;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.ArrayList;

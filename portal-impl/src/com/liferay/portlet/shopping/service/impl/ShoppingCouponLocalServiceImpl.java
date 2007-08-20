@@ -26,6 +26,8 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -50,8 +52,6 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.Date;

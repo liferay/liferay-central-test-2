@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.calendar.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
-import com.liferay.util.ParamUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;

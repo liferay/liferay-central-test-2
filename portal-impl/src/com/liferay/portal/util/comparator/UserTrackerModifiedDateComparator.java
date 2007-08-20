@@ -22,8 +22,8 @@
 
 package com.liferay.portal.util.comparator;
 
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.model.UserTracker;
-import com.liferay.util.DateUtil;
 
 import java.io.Serializable;
 

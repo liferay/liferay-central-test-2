@@ -23,12 +23,12 @@
 package com.liferay.portal.servlet.taglib.security;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Http;
-import com.liferay.util.Validator;
 
 import java.security.Key;
 

@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.util.Http;
 
 import java.io.StringReader;

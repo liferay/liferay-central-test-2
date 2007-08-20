@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.PropertiesUtil;
-import com.liferay.util.StringUtil;
 
 import java.util.Iterator;
 import java.util.Map;

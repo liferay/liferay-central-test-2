@@ -24,12 +24,12 @@ package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.GetterUtil;
 
 import java.io.Serializable;
 

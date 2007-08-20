@@ -25,13 +25,13 @@ package com.liferay.portal.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.impl.ClassNameImpl;
 import com.liferay.portal.service.base.ClassNameLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.ClassNameUtil;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.Validator;
 
 import java.util.List;
 import java.util.Map;

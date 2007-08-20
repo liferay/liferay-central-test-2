@@ -22,6 +22,7 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -35,7 +36,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messaging.util.MessagingUtil;
-import com.liferay.util.GetterUtil;
 
 import java.util.Iterator;
 

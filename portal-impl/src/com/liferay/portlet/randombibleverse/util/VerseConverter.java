@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.randombibleverse.util;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.randombibleverse.model.Verse;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
-import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 
 /**

@@ -22,8 +22,8 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.GetterUtil;
 
 import java.io.File;
 

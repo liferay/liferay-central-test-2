@@ -23,11 +23,11 @@
 package com.liferay.portlet.translator.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.translator.model.Translation;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
-import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 
 import java.net.URL;

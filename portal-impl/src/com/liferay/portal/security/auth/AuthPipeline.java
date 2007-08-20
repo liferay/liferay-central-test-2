@@ -22,10 +22,10 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.impl.CompanyImpl;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 
 import java.util.Map;
 

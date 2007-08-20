@@ -22,7 +22,7 @@
 
 package com.liferay.portal.velocity;
 
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.StringWriter;
 

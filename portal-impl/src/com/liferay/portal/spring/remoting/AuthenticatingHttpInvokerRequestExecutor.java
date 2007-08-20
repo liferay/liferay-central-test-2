@@ -23,9 +23,9 @@
 package com.liferay.portal.spring.remoting;
 
 import com.liferay.portal.PwdEncryptorException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.pwd.PwdEncryptor;
-import com.liferay.util.GetterUtil;
 
 import java.io.IOException;
 

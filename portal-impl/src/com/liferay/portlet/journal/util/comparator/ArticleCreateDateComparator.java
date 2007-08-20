@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.journal.util.comparator;
 
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.util.DateUtil;
 
 /**
  * <a href="ArticleCreateDateComparator.java.html"><b><i>View Source</i></b></a>

@@ -22,9 +22,9 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
-import com.liferay.util.StringUtil;
 
 /**
  * <a href="JournalTemplateXSLUpgradeColumnImpl.java.html"><b><i>View Source</i>

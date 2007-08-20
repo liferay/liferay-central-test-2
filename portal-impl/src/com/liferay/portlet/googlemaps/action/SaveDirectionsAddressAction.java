@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.googlemaps.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.JSONAction;
-import com.liferay.util.ParamUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

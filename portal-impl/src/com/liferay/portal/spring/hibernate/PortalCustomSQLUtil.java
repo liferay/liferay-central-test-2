@@ -22,12 +22,12 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.StringUtil;
 
 import java.sql.SQLException;
 

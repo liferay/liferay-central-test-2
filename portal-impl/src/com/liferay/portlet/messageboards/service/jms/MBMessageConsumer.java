@@ -24,6 +24,8 @@ package com.liferay.portlet.messageboards.service.jms;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
@@ -31,8 +33,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
 
 import java.util.List;
 import java.util.Set;

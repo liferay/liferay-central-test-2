@@ -23,7 +23,9 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Role;
@@ -31,8 +33,6 @@ import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.ArrayUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 
 import java.util.Iterator;

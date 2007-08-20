@@ -25,6 +25,8 @@ package com.liferay.portlet.admin.action;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -37,9 +39,7 @@ import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.Time;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.NullServletResponse;
 import com.liferay.util.servlet.SessionErrors;
 

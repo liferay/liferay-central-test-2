@@ -22,9 +22,9 @@
 
 package com.liferay.portal.lucene;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.GetterUtil;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

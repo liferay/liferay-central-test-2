@@ -27,6 +27,7 @@ import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
@@ -36,7 +37,6 @@ import com.liferay.portlet.workflow.NoSuchDefinitionException;
 import com.liferay.portlet.workflow.model.WorkflowDefinition;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
-import com.liferay.util.GetterUtil;
 
 import java.rmi.RemoteException;
 

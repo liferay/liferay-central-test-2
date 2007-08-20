@@ -22,10 +22,10 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.ReleaseInfo;
-import com.liferay.util.GetterUtil;
 
 import java.io.InputStream;
 

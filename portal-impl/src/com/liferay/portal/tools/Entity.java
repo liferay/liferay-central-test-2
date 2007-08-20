@@ -22,7 +22,7 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.util.TextFormatter;
 
 import java.util.List;

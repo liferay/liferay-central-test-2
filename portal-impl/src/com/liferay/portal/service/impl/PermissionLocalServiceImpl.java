@@ -28,6 +28,8 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.model.Organization;
@@ -55,8 +57,6 @@ import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.comparator.PermissionComparator;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.Iterator;

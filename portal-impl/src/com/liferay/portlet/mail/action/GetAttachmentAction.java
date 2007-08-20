@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.mail.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portlet.mail.util.MailUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServletRequest;

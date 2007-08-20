@@ -23,7 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

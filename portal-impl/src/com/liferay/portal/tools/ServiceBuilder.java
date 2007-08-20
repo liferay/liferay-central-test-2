@@ -22,18 +22,18 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
-import com.liferay.util.ArrayUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.TextFormatter;
 import com.liferay.util.Time;
-import com.liferay.util.Validator;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
@@ -179,8 +179,10 @@ public class ServiceBuilder {
 			"com.liferay.portal.kernel.log.Log",
 			"com.liferay.portal.kernel.log.LogFactoryUtil",
 			"com.liferay.portal.kernel.util.BooleanWrapper",
+			"com.liferay.portal.kernel.util.DateUtil",
 			"com.liferay.portal.kernel.util.DoubleWrapper",
 			"com.liferay.portal.kernel.util.FloatWrapper",
+			"com.liferay.portal.kernel.util.GetterUtil",
 			"com.liferay.portal.kernel.util.IntegerWrapper",
 			"com.liferay.portal.kernel.util.LongWrapper",
 			"com.liferay.portal.kernel.util.MethodWrapper",
@@ -194,8 +196,6 @@ public class ServiceBuilder {
 			"com.liferay.portal.spring.hibernate.FinderCache",
 			"com.liferay.portal.spring.hibernate.HibernateUtil",
 			"com.liferay.portal.util.PropsUtil",
-			"com.liferay.util.DateUtil",
-			"com.liferay.util.GetterUtil",
 			"com.liferay.util.XSSUtil",
 			"com.liferay.util.dao.hibernate.QueryPos",
 			"com.liferay.util.dao.hibernate.QueryUtil",
@@ -463,6 +463,7 @@ public class ServiceBuilder {
 				String ejbName = entityEl.attributeValue("name");
 
 				String table = entityEl.attributeValue("table");
+
 				if (Validator.isNull(table)) {
 					table = ejbName;
 
@@ -825,9 +826,9 @@ public class ServiceBuilder {
 
 		// Imports
 
+		sm.append("import com.liferay.portal.kernel.util.DateUtil;");
 		sm.append("import com.liferay.portal.kernel.util.StringMaker;");
 		sm.append("import com.liferay.portal.kernel.util.StringPool;");
-		sm.append("import com.liferay.util.DateUtil;");
 		sm.append("import java.io.Serializable;");
 		sm.append("import java.util.Date;");
 
@@ -1726,10 +1727,10 @@ public class ServiceBuilder {
 			sm.append("import " + _packagePath + ".service.persistence." + entity.getName() + "PK;");
 		}
 
+		sm.append("import com.liferay.portal.kernel.util.DateUtil;");
+		sm.append("import com.liferay.portal.kernel.util.GetterUtil;");
 		sm.append("import com.liferay.portal.model.impl.BaseModelImpl;");
 		sm.append("import com.liferay.portal.util.PropsUtil;");
-		sm.append("import com.liferay.util.DateUtil;");
-		sm.append("import com.liferay.util.GetterUtil;");
 		sm.append("import com.liferay.util.XSSUtil;");
 		sm.append("import java.io.Serializable;");
 		sm.append("import java.sql.Types;");
@@ -4447,10 +4448,10 @@ public class ServiceBuilder {
 
 		// Imports
 
+		sm.append("import com.liferay.portal.kernel.util.GetterUtil;");
+		sm.append("import com.liferay.portal.kernel.util.Validator;");
 		sm.append("import com.liferay.portal.model.ModelListener;");
 		sm.append("import com.liferay.portal.util.PropsUtil;");
-		sm.append("import com.liferay.util.GetterUtil;");
-		sm.append("import com.liferay.util.Validator;");
 		sm.append("import org.apache.commons.logging.Log;");
 		sm.append("import org.apache.commons.logging.LogFactory;");
 

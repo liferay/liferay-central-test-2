@@ -22,10 +22,10 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

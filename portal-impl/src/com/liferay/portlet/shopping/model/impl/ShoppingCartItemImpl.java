@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.shopping.model.ShoppingCartItem;
 import com.liferay.portlet.shopping.model.ShoppingItem;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 /**
  * <a href="ShoppingCartItemImpl.java.html"><b><i>View Source</i></b></a>

@@ -23,10 +23,10 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.Validator;
 
 import java.util.Locale;
 

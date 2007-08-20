@@ -22,10 +22,10 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.util.GetterUtil;
 
 import java.sql.Types;
 

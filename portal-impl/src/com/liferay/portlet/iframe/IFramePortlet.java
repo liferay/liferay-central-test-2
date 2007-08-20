@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.iframe;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.StrutsPortlet;
-import com.liferay.util.Validator;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletException;

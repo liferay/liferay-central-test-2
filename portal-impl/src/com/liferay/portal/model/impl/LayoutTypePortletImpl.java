@@ -25,7 +25,10 @@ package com.liferay.portal.model.impl;
 import com.germinus.easyconf.Filter;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTemplate;
@@ -35,11 +38,8 @@ import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.ArrayUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;

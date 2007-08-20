@@ -23,9 +23,9 @@
 package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.LayoutImportException;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 import com.liferay.util.servlet.UploadPortletRequest;

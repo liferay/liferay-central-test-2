@@ -25,6 +25,8 @@ package com.liferay.portlet.layoutconfiguration.util;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
@@ -35,8 +37,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 import java.io.StringWriter;
 

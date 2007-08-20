@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.messageboards.util.comparator;
 
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.util.DateUtil;
 
 import java.io.Serializable;
 

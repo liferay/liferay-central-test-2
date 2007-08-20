@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.job.JobScheduler;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.lucene.CleanUpJob;
@@ -30,7 +31,6 @@ import com.liferay.portal.lucene.LuceneIndexer;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
 
 import java.util.ArrayList;
 import java.util.List;

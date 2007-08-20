@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -31,7 +32,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserTrackerLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserTrackerUtil;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;

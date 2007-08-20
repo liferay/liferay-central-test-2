@@ -22,8 +22,8 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
 
 import java.io.InputStream;
 

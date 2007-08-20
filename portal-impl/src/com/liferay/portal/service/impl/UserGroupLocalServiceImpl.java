@@ -30,6 +30,7 @@ import com.liferay.portal.RequiredUserGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserGroupNameException;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.ResourceImpl;
@@ -42,7 +43,6 @@ import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.util.Validator;
 
 import java.util.LinkedHashMap;
 import java.util.List;

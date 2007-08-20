@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.currencyconverter.util;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.currencyconverter.model.Currency;
 import com.liferay.util.ConverterException;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.Time;
 

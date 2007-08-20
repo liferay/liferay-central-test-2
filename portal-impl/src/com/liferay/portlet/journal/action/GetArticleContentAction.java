@@ -23,9 +23,9 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portlet.journal.util.JournalUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServletRequest;

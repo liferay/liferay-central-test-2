@@ -24,6 +24,8 @@ package com.liferay.portal.security.permission;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.PortletImpl;
@@ -33,9 +35,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.StringUtil;
 import com.liferay.util.UniqueList;
-import com.liferay.util.Validator;
 
 import java.io.StringReader;
 

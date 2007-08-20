@@ -37,6 +37,8 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
@@ -59,9 +61,7 @@ import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
 import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
 import com.liferay.portlet.calendar.util.CalUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
-import com.liferay.util.Validator;
 import com.liferay.util.cal.CalendarUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 

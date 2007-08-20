@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -37,7 +38,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.PrefsOwnerTypeUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.PrefsPlidUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.PrefsXMLUpgradeColumnImpl;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.util.ArrayUtil;
 
 import java.sql.Types;
 

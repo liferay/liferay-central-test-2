@@ -23,10 +23,10 @@
 package com.liferay.portlet.network.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.network.model.Whois;
 import com.liferay.util.ConverterException;
-import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 
 import java.io.BufferedReader;

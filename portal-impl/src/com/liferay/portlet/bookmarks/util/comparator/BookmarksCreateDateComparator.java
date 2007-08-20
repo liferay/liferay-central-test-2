@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.bookmarks.util.comparator;
 
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.util.DateUtil;
 
 /**
  * <a href="BookmarksCreateDateComparator.java.html"><b><i>View Source</i></b>

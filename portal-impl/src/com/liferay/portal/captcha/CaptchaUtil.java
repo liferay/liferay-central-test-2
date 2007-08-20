@@ -22,10 +22,10 @@
 
 package com.liferay.portal.captcha;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.ParamUtil;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;

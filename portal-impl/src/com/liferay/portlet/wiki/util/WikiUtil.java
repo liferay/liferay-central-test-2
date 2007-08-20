@@ -25,9 +25,9 @@ package com.liferay.portlet.wiki.util;
 import com.efsol.friki.PageRepository;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.Http;
-import com.liferay.util.StringUtil;
 
 import java.io.IOException;
 import java.io.StringReader;

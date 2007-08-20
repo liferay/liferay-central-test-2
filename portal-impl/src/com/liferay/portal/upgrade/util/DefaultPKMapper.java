@@ -22,8 +22,8 @@
 
 package com.liferay.portal.upgrade.util;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.upgrade.StagnantRowException;
-import com.liferay.util.GetterUtil;
 
 /**
  * <a href="DefaultPKMapper.java.html"><b><i>View Source</i></b></a>

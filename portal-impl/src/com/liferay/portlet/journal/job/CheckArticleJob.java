@@ -23,9 +23,9 @@
 package com.liferay.portlet.journal.job;
 
 import com.liferay.portal.job.IntervalJob;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.Time;
 
 import org.apache.commons.logging.Log;

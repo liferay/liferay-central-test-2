@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.mail.util.multiaccount;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.AccountNotFoundException;
 import com.liferay.portlet.mail.MailAccountsException;
-import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;

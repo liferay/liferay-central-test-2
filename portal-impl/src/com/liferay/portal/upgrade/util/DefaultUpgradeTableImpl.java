@@ -23,9 +23,9 @@
 package com.liferay.portal.upgrade.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.tools.comparator.ColumnsComparator;
 import com.liferay.portal.upgrade.StagnantRowException;
-import com.liferay.util.Validator;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

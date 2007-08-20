@@ -24,8 +24,8 @@ package com.liferay.portlet.navigation.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionMessages;
 
 import javax.portlet.ActionRequest;

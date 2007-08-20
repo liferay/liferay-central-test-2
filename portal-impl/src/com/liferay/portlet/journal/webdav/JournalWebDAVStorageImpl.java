@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.webdav;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.BaseWebDAVStorageImpl;
 import com.liferay.portal.webdav.Resource;
@@ -34,7 +35,6 @@ import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
-import com.liferay.util.StringUtil;
 
 import java.io.File;
 

@@ -23,10 +23,10 @@
 package com.liferay.portlet.mail.util.recipient;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.util.Validator;
 
 import java.util.LinkedHashMap;
 import java.util.List;

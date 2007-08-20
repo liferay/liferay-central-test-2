@@ -24,10 +24,10 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.GetterUtil;
 
 import java.util.Map;
 

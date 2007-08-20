@@ -23,8 +23,11 @@
 package com.liferay.portlet.mail.action;
 
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -41,9 +44,6 @@ import com.liferay.portlet.mail.util.multiaccount.MailAccount;
 import com.liferay.portlet.mail.util.multiaccount.MailAccounts;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Html;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.mail.InternetAddressUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;

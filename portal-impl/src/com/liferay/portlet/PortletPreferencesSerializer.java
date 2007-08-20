@@ -25,8 +25,8 @@ package com.liferay.portlet;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 import java.io.StringReader;

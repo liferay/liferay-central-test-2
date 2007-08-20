@@ -23,13 +23,13 @@
 package com.liferay.portlet.chat.action;
 
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messaging.util.MessagingUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

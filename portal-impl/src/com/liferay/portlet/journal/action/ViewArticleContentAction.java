@@ -24,7 +24,9 @@ package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.struts.ActionConstants;
@@ -39,9 +41,7 @@ import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.UploadServletRequest;
 
 import java.io.File;

@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.enterpriseadmin.search;
 
+import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
-import com.liferay.util.dao.search.RowChecker;
 
 import javax.portlet.RenderResponse;
 

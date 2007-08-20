@@ -23,11 +23,11 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;

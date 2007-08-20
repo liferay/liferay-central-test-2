@@ -25,6 +25,8 @@ package com.liferay.portlet;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.URLEncoder;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -33,8 +35,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 
 import java.io.IOException;
 import java.io.OutputStream;

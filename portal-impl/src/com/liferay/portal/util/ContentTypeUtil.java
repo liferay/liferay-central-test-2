@@ -23,9 +23,9 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.ExtPropertiesLoader;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 /**
  * <a href="ContentTypeUtil.java.html"><b><i>View Source</i></b></a>

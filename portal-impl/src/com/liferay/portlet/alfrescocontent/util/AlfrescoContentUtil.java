@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.alfrescocontent.util;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Http;
-import com.liferay.util.Validator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

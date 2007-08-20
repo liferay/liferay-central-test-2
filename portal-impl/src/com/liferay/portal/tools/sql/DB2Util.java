@@ -23,9 +23,9 @@
 package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.dao.DataAccess;
 
 import java.io.BufferedReader;

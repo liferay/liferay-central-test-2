@@ -24,10 +24,10 @@ package com.liferay.portal.security.pwd;
 
 import com.liferay.portal.PwdEncryptorException;
 import com.liferay.portal.kernel.util.Digester;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

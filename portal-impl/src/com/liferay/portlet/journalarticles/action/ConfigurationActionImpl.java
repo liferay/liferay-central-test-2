@@ -25,9 +25,9 @@ package com.liferay.portlet.journalarticles.action;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 

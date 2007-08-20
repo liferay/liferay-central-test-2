@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -34,7 +35,6 @@ import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
-import com.liferay.util.ParamUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;

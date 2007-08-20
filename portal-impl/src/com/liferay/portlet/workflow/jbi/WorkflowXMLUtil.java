@@ -22,15 +22,15 @@
 
 package com.liferay.portlet.workflow.jbi;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.workflow.model.WorkflowDefinition;
 import com.liferay.portlet.workflow.model.WorkflowInstance;
 import com.liferay.portlet.workflow.model.WorkflowTask;
 import com.liferay.portlet.workflow.model.WorkflowTaskFormElement;
 import com.liferay.portlet.workflow.model.WorkflowToken;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 
 import java.io.StringReader;
 

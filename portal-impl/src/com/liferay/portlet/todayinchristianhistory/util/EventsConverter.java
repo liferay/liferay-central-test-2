@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.todayinchristianhistory.util;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.todayinchristianhistory.model.Event;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
-import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 
 import java.util.ArrayList;

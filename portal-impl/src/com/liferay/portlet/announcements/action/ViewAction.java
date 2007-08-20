@@ -23,9 +23,9 @@
 package com.liferay.portlet.announcements.action;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.announcements.AnnouncementsContentException;
-import com.liferay.util.Validator;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;

@@ -25,6 +25,7 @@ package com.liferay.portal.struts;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
@@ -40,7 +41,6 @@ import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletRequestDispatcherImpl;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.util.Validator;
 
 import java.io.IOException;
 

@@ -27,12 +27,12 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.util.Html;
 import com.liferay.util.License;
-import com.liferay.util.StringUtil;
 
 import java.io.IOException;
 

@@ -23,9 +23,9 @@
 package com.liferay.portlet.layoutconfiguration.util.xml;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
-import com.liferay.util.Validator;
 
 import java.io.StringReader;
 

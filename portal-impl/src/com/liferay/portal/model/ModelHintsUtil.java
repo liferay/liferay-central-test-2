@@ -22,12 +22,12 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
-import com.liferay.util.StringUtil;
 
 import java.io.StringReader;
 

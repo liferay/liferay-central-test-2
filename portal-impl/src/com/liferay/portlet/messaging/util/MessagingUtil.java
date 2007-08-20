@@ -24,7 +24,9 @@ package com.liferay.portlet.messaging.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -32,8 +34,6 @@ import com.liferay.portlet.chat.model.RosterUpdateListener;
 import com.liferay.portlet.messaging.model.JabberSession;
 import com.liferay.portlet.messaging.model.MessageListener;
 import com.liferay.portlet.messaging.util.comparator.NameComparator;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -24,8 +24,8 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
-import com.liferay.util.Validator;
 
 /**
  * <a href="ContactImpl.java.html"><b><i>View Source</i></b></a>

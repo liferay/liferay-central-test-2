@@ -23,13 +23,13 @@
 package com.liferay.portal.servlet.taglib.portlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.util.MapUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import java.util.Map;
 

@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.ActionConstants;
@@ -36,7 +37,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.InputStream;

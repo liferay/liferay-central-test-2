@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.tags.util;
 
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * <a href="TagsUtil.java.html"><b><i>View Source</i></b></a>

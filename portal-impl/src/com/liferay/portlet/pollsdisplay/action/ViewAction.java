@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.pollsdisplay.action;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.polls.NoSuchQuestionException;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
-import com.liferay.util.GetterUtil;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;

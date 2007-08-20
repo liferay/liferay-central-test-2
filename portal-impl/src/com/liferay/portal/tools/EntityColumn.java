@@ -22,8 +22,8 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.TextFormatter;
-import com.liferay.util.Validator;
 
 /**
  * <a href="EntityColumn.java.html"><b><i>View Source</i></b></a>

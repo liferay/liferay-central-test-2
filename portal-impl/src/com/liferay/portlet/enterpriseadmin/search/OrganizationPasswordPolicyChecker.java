@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.enterpriseadmin.search;
 
+import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.util.dao.search.RowChecker;
 
 import javax.portlet.RenderResponse;
 

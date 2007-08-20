@@ -22,9 +22,9 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.SessionClicks;
-import com.liferay.util.ParamUtil;
 
 import java.util.Enumeration;
 

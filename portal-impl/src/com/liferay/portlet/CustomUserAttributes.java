@@ -22,7 +22,7 @@
 
 package com.liferay.portlet;
 
-import com.liferay.util.Randomizer;
+import com.liferay.portal.kernel.util.Randomizer;
 
 import java.util.Map;
 

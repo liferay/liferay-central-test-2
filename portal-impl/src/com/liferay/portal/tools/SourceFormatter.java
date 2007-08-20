@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ListUtil;
-import com.liferay.util.StringUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
 import java.io.File;

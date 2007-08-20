@@ -22,8 +22,8 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.Validator;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

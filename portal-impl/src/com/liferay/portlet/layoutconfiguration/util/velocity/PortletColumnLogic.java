@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -30,7 +31,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.util.comparator.PortletRenderWeightComparator;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
-import com.liferay.util.GetterUtil;
 
 import java.util.List;
 import java.util.Map;

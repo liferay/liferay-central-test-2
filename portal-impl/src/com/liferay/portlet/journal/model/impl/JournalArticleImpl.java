@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.journal.model.impl;
 
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 import java.io.StringReader;
 

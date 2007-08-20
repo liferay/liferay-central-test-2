@@ -23,10 +23,10 @@
 package com.liferay.portlet.journalcontent;
 
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 
 import java.util.Map;
 

@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.wsrp;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.axis.SimpleHTTPSender;
 
 import java.util.Iterator;

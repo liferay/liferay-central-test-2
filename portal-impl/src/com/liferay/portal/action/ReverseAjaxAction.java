@@ -22,12 +22,12 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.RequestWait;
 import com.liferay.portal.model.ReverseAjax;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messaging.util.MessagingUtil;
-import com.liferay.util.ParamUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

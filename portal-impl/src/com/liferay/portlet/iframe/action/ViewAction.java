@@ -24,7 +24,9 @@ package com.liferay.portlet.iframe.action;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -32,8 +34,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;

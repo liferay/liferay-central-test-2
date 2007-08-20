@@ -28,6 +28,7 @@ import com.liferay.portal.AddressStreetException;
 import com.liferay.portal.AddressZipException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
@@ -36,7 +37,6 @@ import com.liferay.portal.service.base.AddressLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.AddressUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.Validator;
 
 import java.rmi.RemoteException;
 

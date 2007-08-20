@@ -32,6 +32,7 @@ import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
@@ -55,7 +56,6 @@ import com.liferay.portal.service.persistence.OrganizationFinder;
 import com.liferay.portal.service.persistence.OrganizationUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
-import com.liferay.util.Validator;
 
 import java.rmi.RemoteException;
 

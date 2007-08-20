@@ -25,6 +25,7 @@ package com.liferay.portlet.polls.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -40,7 +41,6 @@ import com.liferay.portlet.polls.service.base.PollsQuestionLocalServiceBaseImpl;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
-import com.liferay.util.Validator;
 
 import java.util.Date;
 import java.util.Iterator;

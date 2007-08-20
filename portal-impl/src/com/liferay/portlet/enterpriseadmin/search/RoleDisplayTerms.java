@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.enterpriseadmin.search;
 
+import com.liferay.portal.kernel.dao.search.DisplayTerms;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.dao.search.DisplayTerms;
 
 import javax.portlet.RenderRequest;
 

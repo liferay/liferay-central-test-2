@@ -22,10 +22,10 @@
 
 package com.liferay.portal.security.jaas.ext;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.jaas.PortalPrincipal;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.util.GetterUtil;
 
 import java.io.IOException;
 

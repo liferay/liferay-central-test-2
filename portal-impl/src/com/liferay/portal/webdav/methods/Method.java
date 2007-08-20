@@ -22,9 +22,9 @@
 
 package com.liferay.portal.webdav.methods;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
-import com.liferay.util.StringUtil;
 
 /**
  * <a href="Method.java.html"><b><i>View Source</i></b></a>

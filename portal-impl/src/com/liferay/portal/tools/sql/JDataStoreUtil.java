@@ -22,7 +22,7 @@
 
 package com.liferay.portal.tools.sql;
 
-import com.liferay.util.StringUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
 

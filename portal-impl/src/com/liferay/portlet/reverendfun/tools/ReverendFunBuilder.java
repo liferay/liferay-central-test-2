@@ -23,11 +23,11 @@
 package com.liferay.portlet.reverendfun.tools;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.reverendfun.util.ReverendFunConverter;
 import com.liferay.util.FileUtil;
-import com.liferay.util.StringUtil;
 
 import java.io.File;
 

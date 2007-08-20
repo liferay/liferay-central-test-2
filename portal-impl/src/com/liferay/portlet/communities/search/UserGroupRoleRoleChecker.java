@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.communities.search;
 
+import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
-import com.liferay.util.dao.search.RowChecker;
 
 import javax.portlet.RenderResponse;
 

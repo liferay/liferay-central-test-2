@@ -23,11 +23,11 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutSetException;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SitemapUtil;
-import com.liferay.util.ParamUtil;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;

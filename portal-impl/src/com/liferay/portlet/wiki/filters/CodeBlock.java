@@ -23,7 +23,7 @@
 package com.liferay.portlet.wiki.filters;
 
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.util.StringUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import org.stringtree.factory.AbstractStringFetcher;
 import org.stringtree.regex.Matcher;

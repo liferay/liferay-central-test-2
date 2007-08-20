@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.journal.search;
 
-import com.liferay.util.dao.search.SearchContainer;
+import com.liferay.portal.kernel.dao.search.SearchContainer;
 
 import java.util.ArrayList;
 import java.util.List;

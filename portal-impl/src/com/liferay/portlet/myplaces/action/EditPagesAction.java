@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.myplaces.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -31,7 +32,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.util.ParamUtil;
 
 import java.util.List;
 

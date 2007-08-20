@@ -22,14 +22,14 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLFormatter;
 import com.liferay.util.xml.XMLMerger;
 import com.liferay.util.xml.descriptor.FacesXMLDescriptor;

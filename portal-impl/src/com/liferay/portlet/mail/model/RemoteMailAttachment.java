@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.mail.model;
 
-import com.liferay.util.StringUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 /**
  * <a href="RemoteMailAttachment.java.html"><b><i>View Source</i></b></a>

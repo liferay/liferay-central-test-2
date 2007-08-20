@@ -25,7 +25,7 @@ package com.liferay.portal.deploy.auto;
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;
 

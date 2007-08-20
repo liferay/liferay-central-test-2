@@ -28,13 +28,13 @@ import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;

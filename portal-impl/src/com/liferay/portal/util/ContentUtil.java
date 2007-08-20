@@ -22,8 +22,8 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.StringUtil;
 
 import java.io.IOException;
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.admin.util;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -29,7 +30,6 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.StringUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

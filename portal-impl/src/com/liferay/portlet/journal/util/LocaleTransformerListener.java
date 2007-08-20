@@ -23,8 +23,8 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.StringUtil;
 
 import java.io.StringReader;
 

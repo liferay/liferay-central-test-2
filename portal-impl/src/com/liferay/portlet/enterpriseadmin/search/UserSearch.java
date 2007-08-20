@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.enterpriseadmin.search;
 
+import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.util.dao.search.SearchContainer;
 
 import java.util.ArrayList;
 import java.util.List;

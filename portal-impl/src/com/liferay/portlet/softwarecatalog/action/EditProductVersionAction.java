@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.action;
 
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
@@ -31,7 +32,6 @@ import com.liferay.portlet.softwarecatalog.ProductVersionDownloadURLException;
 import com.liferay.portlet.softwarecatalog.ProductVersionFrameworkVersionException;
 import com.liferay.portlet.softwarecatalog.ProductVersionNameException;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;

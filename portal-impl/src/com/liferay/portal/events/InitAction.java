@@ -26,9 +26,12 @@ import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.jcr.jackrabbit.JCRFactoryImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaProps;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.log.CommonsLogFactoryImpl;
 import com.liferay.portal.security.jaas.PortalConfiguration;
 import com.liferay.portal.struts.ActionException;
@@ -36,11 +39,8 @@ import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.velocity.LiferayResourceLoader;
 import com.liferay.util.FileUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;
-import com.liferay.util.Validator;
 
 import java.io.File;
 

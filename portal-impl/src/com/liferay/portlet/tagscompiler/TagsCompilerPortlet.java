@@ -23,15 +23,15 @@
 package com.liferay.portlet.tagscompiler;
 
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.RenderParametersPool;
 import com.liferay.portlet.tagscompiler.util.TagsCompilerSessionUtil;
-import com.liferay.util.ArrayUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
 
 import java.io.IOException;
 

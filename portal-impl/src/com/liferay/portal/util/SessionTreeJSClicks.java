@@ -23,9 +23,9 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 

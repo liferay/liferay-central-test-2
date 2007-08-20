@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.journal.search;
 
+import com.liferay.portal.kernel.dao.DAOParamUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.dao.DAOParamUtil;
 
 import javax.portlet.RenderRequest;
 

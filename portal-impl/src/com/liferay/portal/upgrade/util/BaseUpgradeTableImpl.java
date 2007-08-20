@@ -22,18 +22,18 @@
 
 package com.liferay.portal.upgrade.util;
 
+import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.DateUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.dao.DataAccess;
 import com.liferay.util.dao.hibernate.BooleanType;
 import com.liferay.util.dao.hibernate.DoubleType;

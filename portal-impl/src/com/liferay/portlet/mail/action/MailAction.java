@@ -23,7 +23,10 @@
 package com.liferay.portlet.mail.action;
 
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -41,10 +44,7 @@ import com.liferay.portlet.mail.util.comparator.SubjectComparator;
 import com.liferay.portlet.mail.util.recipient.RecipientFinder;
 import com.liferay.portlet.mail.util.recipient.RecipientFinderLocator;
 import com.liferay.util.Autocomplete;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.TextFormatter;
 
 import java.util.Comparator;

@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Resource;
@@ -42,7 +43,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.permission.UserPermission;
-import com.liferay.util.GetterUtil;
 
 /**
  * <a href="PermissionServiceImpl.java.html"><b><i>View Source</i></b></a>

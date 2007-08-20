@@ -23,10 +23,10 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Http;
-import com.liferay.util.Validator;
 
 import java.io.IOException;
 

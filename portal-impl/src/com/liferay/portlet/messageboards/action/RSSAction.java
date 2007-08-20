@@ -22,7 +22,9 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -30,9 +32,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.RSSUtil;
-import com.liferay.util.dao.search.SearchContainer;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.portlet.PortletPreferences;

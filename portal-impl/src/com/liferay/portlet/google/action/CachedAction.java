@@ -25,10 +25,10 @@ package com.liferay.portlet.google.action;
 import com.google.soap.search.GoogleSearch;
 import com.google.soap.search.GoogleSearchFault;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.google.util.GoogleUtil;
-import com.liferay.util.ParamUtil;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;

@@ -23,15 +23,16 @@
 package com.liferay.portlet.journalcontent.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
+import com.liferay.util.portlet.PortletRequestUtil;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -82,7 +83,7 @@ public class ViewAction extends PortletAction {
 		boolean disableCaching = GetterUtil.getBoolean(
 			prefs.getValue("disable-caching", StringPool.BLANK));
 
-		String xmlRequest = ParamUtil.toXML(req, res);
+		String xmlRequest = PortletRequestUtil.toXML(req, res);
 
 		JournalArticleDisplay articleDisplay = null;
 

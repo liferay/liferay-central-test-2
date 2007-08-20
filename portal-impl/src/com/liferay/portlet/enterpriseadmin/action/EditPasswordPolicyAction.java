@@ -25,10 +25,10 @@ package com.liferay.portlet.enterpriseadmin.action;
 import com.liferay.portal.NoSuchPasswordPolicyException;
 import com.liferay.portal.RequiredPasswordPolicyException;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PasswordPolicyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;

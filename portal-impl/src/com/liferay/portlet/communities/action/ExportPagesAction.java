@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.communities.action;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.ActionResponseImpl;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.portlet.ActionRequest;

@@ -25,6 +25,7 @@ package com.liferay.portal.security.permission;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -43,7 +44,6 @@ import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.GetterUtil;
 
 import java.io.Serializable;
 

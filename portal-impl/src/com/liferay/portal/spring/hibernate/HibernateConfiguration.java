@@ -22,8 +22,8 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.Validator;
 
 import java.io.InputStream;
 
