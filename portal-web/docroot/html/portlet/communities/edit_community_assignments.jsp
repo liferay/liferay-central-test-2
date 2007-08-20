@@ -254,7 +254,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					updateRoleAssignmentsURL.setParameter("struts_action", "/communities/edit_community_assignments");
 					updateRoleAssignmentsURL.setParameter("tabs1", tabs1);
 					updateRoleAssignmentsURL.setParameter("tabs2", tabs2);
-					updateRoleAssignmentsURL.setParameter("redirect", Http.decodeURL(Http.getParameter(redirect, renderResponse.getNamespace() + "redirect", false)));
+					updateRoleAssignmentsURL.setParameter("redirect", HttpUtil.decodeURL(Http.getParameter(redirect, renderResponse.getNamespace() + "redirect", false)));
 					updateRoleAssignmentsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					%>
 

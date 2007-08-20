@@ -57,7 +57,7 @@ import com.liferay.portlet.shopping.util.comparator.ItemNameComparator;
 import com.liferay.portlet.shopping.util.comparator.ItemPriceComparator;
 import com.liferay.portlet.shopping.util.comparator.ItemSKUComparator;
 import com.liferay.portlet.shopping.util.comparator.OrderDateComparator;
-import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.MathUtil;
 
 import java.text.NumberFormat;
@@ -881,7 +881,7 @@ public class ShoppingUtil {
 			String returnURL, String notifyURL)
 		throws PortalException, SystemException {
 
-		String payPalEmailAddress = Http.encodeURL(
+		String payPalEmailAddress = HttpUtil.encodeURL(
 			prefs.getPayPalEmailAddress());
 
 		NumberFormat doubleFormat = NumberFormat.getNumberInstance();
@@ -891,15 +891,15 @@ public class ShoppingUtil {
 
 		String amount = doubleFormat.format(total);
 
-		returnURL = Http.encodeURL(returnURL);
-		notifyURL = Http.encodeURL(notifyURL);
+		returnURL = HttpUtil.encodeURL(returnURL);
+		notifyURL = HttpUtil.encodeURL(notifyURL);
 
-		String firstName = Http.encodeURL(order.getBillingFirstName());
-		String lastName = Http.encodeURL(order.getBillingLastName());
-		String address1 = Http.encodeURL(order.getBillingStreet());
-		String city = Http.encodeURL(order.getBillingCity());
-		String state = Http.encodeURL(order.getBillingState());
-		String zip = Http.encodeURL(order.getBillingZip());
+		String firstName = HttpUtil.encodeURL(order.getBillingFirstName());
+		String lastName = HttpUtil.encodeURL(order.getBillingLastName());
+		String address1 = HttpUtil.encodeURL(order.getBillingStreet());
+		String city = HttpUtil.encodeURL(order.getBillingCity());
+		String state = HttpUtil.encodeURL(order.getBillingState());
+		String zip = HttpUtil.encodeURL(order.getBillingZip());
 
 		String currencyCode = prefs.getCurrencyId();
 

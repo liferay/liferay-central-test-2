@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 
 import java.util.StringTokenizer;
 
@@ -96,7 +97,7 @@ public class RenderURLParamsTagUtil {
 						value = kvp[1];
 					}
 
-					value = Http.decodeURL(value);
+					value = HttpUtil.decodeURL(value);
 
 					sm.append("<input name=\"");
 					sm.append(key);

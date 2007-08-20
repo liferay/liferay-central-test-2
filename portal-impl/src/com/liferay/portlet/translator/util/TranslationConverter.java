@@ -28,6 +28,7 @@ import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.translator.model.Translation;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
 import java.net.URL;
@@ -52,7 +53,7 @@ public class TranslationConverter implements WebCacheable {
 			StringMaker url = new StringMaker();
 
 			url.append("http://babelfish.altavista.com/babelfish/tr?doit=done");
-			url.append("&urltext=").append(Http.encodeURL(_fromText));
+			url.append("&urltext=").append(HttpUtil.encodeURL(_fromText));
 			url.append("&lp=").append(_translationId);
 
 			String text = Http.URLtoString(new URL(url.toString()));

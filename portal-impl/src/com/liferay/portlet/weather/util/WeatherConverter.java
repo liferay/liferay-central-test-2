@@ -28,6 +28,7 @@ import com.liferay.portlet.weather.model.Weather;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
 /**
@@ -48,7 +49,7 @@ public class WeatherConverter implements WebCacheable {
 		try {
 			String text = Html.stripComments(Http.URLtoString(
 				"http://weather.yahoo.com/search/weather2?p=" +
-					Http.encodeURL(_zip)));
+					HttpUtil.encodeURL(_zip)));
 
 			int x = text.indexOf("forecast-temperature");
 

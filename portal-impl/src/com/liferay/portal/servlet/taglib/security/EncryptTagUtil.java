@@ -28,7 +28,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
-import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 
 import java.security.Key;
 
@@ -103,11 +103,11 @@ public class EncryptTagUtil {
 					sm.append(param).append("=");
 
 					if (unencryptedParamsSet.contains(param)) {
-						sm.append(Http.encodeURL(value));
+						sm.append(HttpUtil.encodeURL(value));
 					}
 					else {
 						try {
-							sm.append(Http.encodeURL(
+							sm.append(HttpUtil.encodeURL(
 								Encryptor.encrypt(key, value)));
 						}
 						catch (EncryptorException ee) {

@@ -28,6 +28,7 @@ import com.liferay.portlet.randombibleverse.model.Verse;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
 /**
@@ -49,7 +50,7 @@ public class VerseConverter implements WebCacheable {
 		try {
 			String url =
 				"http://www.biblegateway.com/passage/?search=" +
-					Http.encodeURL(_location) + "&version=" + _versionId;
+					HttpUtil.encodeURL(_location) + "&version=" + _versionId;
 
 			String text = Http.URLtoString(url);
 

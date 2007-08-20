@@ -393,7 +393,7 @@ urlConfiguration.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimar
 urlConfiguration.setParameter("redirect", currentURL);
 urlConfiguration.setParameter("backURL", currentURL);
 
-portletDisplay.setURLConfiguration("javascript: self.location = '" + Http.encodeURL(urlConfiguration.toString()) + "&" + PortalUtil.getPortletNamespace(PortletKeys.PORTLET_CONFIGURATION) + "previewWidth=' + document.getElementById('p_p_id" + portletDisplay.getNamespace() + "').offsetWidth;");
+portletDisplay.setURLConfiguration("javascript: self.location = '" + HttpUtil.encodeURL(urlConfiguration.toString()) + "&" + PortalUtil.getPortletNamespace(PortletKeys.PORTLET_CONFIGURATION) + "previewWidth=' + document.getElementById('p_p_id" + portletDisplay.getNamespace() + "').offsetWidth;");
 
 // URL edit
 

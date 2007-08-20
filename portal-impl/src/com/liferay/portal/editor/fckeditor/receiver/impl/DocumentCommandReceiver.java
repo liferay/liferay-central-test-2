@@ -38,7 +38,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
-import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.File;
@@ -161,7 +161,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 				url.append("/document_library/get_file?folderId=");
 				url.append(fileEntry.getFolderId());
 				url.append("&name=");
-				url.append(Http.encodeURL(fileEntry.getName()));
+				url.append(HttpUtil.encodeURL(fileEntry.getName()));
 
 				fileEl.setAttribute("url", url.toString());
 			}

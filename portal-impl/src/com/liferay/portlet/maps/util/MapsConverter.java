@@ -28,6 +28,7 @@ import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.maps.model.MapsAddress;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
 /**
@@ -73,10 +74,14 @@ public class MapsConverter implements WebCacheable {
 			StringMaker url = new StringMaker();
 
 			url.append("http://www.mapquest.com/maps/map.adp?country=US");
-			url.append("&address=").append(Http.encodeURL(street));
-			url.append("&city=").append(Http.encodeURL(city));
-			url.append("&state=").append(Http.encodeURL(state));
-			url.append("&zipcode=").append(Http.encodeURL(zip));
+			url.append("&address=");
+			url.append(HttpUtil.encodeURL(street));
+			url.append("&city=");
+			url.append(HttpUtil.encodeURL(city));
+			url.append("&state=");
+			url.append(HttpUtil.encodeURL(state));
+			url.append("&zipcode=");
+			url.append(HttpUtil.encodeURL(zip));
 
 			String text = Http.URLtoString(url.toString());
 
@@ -93,7 +98,7 @@ public class MapsConverter implements WebCacheable {
 			String mapDirect = text.substring(
 				mapDirectPos, text.indexOf("\"", mapDirectPos));
 
-			mapDirect = Http.decodeURL(mapDirect);
+			mapDirect = HttpUtil.decodeURL(mapDirect);
 
 			map = new MapsAddress(street, city, state, zip, mapDirect);
 		}

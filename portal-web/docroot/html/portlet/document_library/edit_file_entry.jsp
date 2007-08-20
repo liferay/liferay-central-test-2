@@ -103,7 +103,7 @@ portletURL.setParameter("name", name);
 			<liferay-ui:message key="name" />
 		</td>
 		<td>
-			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>">
+			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= HttpUtil.encodeURL(name) %>">
 			<%= fileEntry.getTitle() %>
 			</a>
 		</td>
@@ -143,7 +143,7 @@ portletURL.setParameter("name", name);
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + folderId + "&name=" + Http.encodeURL(name) %>'
+				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
 			/>
 		</td>
 	</tr>
@@ -271,7 +271,7 @@ portletURL.setParameter("name", name);
 				sm.append("/document_library/get_file?folderId=");
 				sm.append(folderId);
 				sm.append("&name=");
-				sm.append(Http.encodeURL(name));
+				sm.append(HttpUtil.encodeURL(name));
 				sm.append("&version=");
 				sm.append(String.valueOf(fileVersion.getVersion()));
 

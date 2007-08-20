@@ -27,6 +27,7 @@ import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.cszsearch.model.CSZAddress;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
 import java.io.BufferedReader;
@@ -78,8 +79,8 @@ public class Zip4Converter implements WebCacheable {
 			String text = Http.URLtoString(
 				"http://zip4.usps.com/zip4/zcl_0_results.jsp?visited=1&" +
 					"pagenumber=all&firmname=&urbanization=&address1=&" +
-						"address2=" + Http.encodeURL(street) + "&city=" +
-							Http.encodeURL(city) + "&state=" + state +
+						"address2=" + HttpUtil.encodeURL(street) + "&city=" +
+							HttpUtil.encodeURL(city) + "&state=" + state +
 								"&zip5=" + zip);
 
 			if (text.indexOf("headers=\"full\"") > -1) {

@@ -155,6 +155,7 @@
 <%@ page import="com.liferay.util.FileUtil" %>
 <%@ page import="com.liferay.util.Html" %>
 <%@ page import="com.liferay.util.Http" %>
+<%@ page import="com.liferay.util.HttpUtil" %>
 <%@ page import="com.liferay.util.JS" %>
 <%@ page import="com.liferay.util.ListUtil" %>
 <%@ page import="com.liferay.util.LocaleUtil" %>

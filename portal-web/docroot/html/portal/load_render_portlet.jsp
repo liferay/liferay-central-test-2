@@ -79,7 +79,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 		}
 
 		url.append("&currentURL=");
-		url.append(Http.encodeURL(currentURL));
+		url.append(HttpUtil.encodeURL(currentURL));
 
 		String ppid = ParamUtil.getString(request, "p_p_id");
 
@@ -96,7 +96,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 						url.append(StringPool.AMPERSAND);
 						url.append(name);
 						url.append(StringPool.EQUAL);
-						url.append(Http.encodeURL(values[i]));
+						url.append(HttpUtil.encodeURL(values[i]));
 					}
 				}
 			}

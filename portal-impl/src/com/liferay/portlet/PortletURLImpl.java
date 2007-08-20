@@ -43,6 +43,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 
 import java.io.Serializable;
 
@@ -671,11 +672,11 @@ public class PortletURLImpl implements PortletURL, Serializable {
 
 	protected String processValue(Key key, String value) {
 		if (key == null) {
-			return Http.encodeURL(value);
+			return HttpUtil.encodeURL(value);
 		}
 		else {
 			try {
-				return Http.encodeURL(Encryptor.encrypt(key, value));
+				return HttpUtil.encodeURL(Encryptor.encrypt(key, value));
 			}
 			catch (EncryptorException ee) {
 				return value;

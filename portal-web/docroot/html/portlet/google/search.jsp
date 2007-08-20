@@ -157,7 +157,7 @@ for (int i = 0; i < resultElements.length; i++) {
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/google/search");
-portletURL.setParameter("args", Http.encodeURL(searchResult.getSearchQuery()));
+portletURL.setParameter("args", HttpUtil.encodeURL(searchResult.getSearchQuery()));
 %>
 
-<liferay-ui:page-iterator curParam='<%= renderResponse.getNamespace() + "start" %>' curValue="<%= ParamUtil.get(request, \"start\", 1) %>" delta="10" maxPages="10" total="<%= searchResult.getEstimatedTotalResultsCount() %>" url="<%= Http.decodeURL(portletURL.toString()) %>" />
+<liferay-ui:page-iterator curParam='<%= renderResponse.getNamespace() + "start" %>' curValue="<%= ParamUtil.get(request, \"start\", 1) %>" delta="10" maxPages="10" total="<%= searchResult.getEstimatedTotalResultsCount() %>" url="<%= HttpUtil.decodeURL(portletURL.toString()) %>" />

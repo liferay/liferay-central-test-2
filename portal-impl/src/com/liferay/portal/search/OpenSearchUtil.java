@@ -22,7 +22,7 @@
 
 package com.liferay.portal.search;
 
-import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 
 import java.text.SimpleDateFormat;
 
@@ -93,8 +93,8 @@ public class OpenSearchUtil {
 		link.addAttribute("rel", rel);
 		link.addAttribute(
 			"href",
-			searchURL + "?keywords=" + Http.encodeURL(keywords) + "&p=" + page +
-				"&c=" + itemsPerPage + "&format=atom");
+			searchURL + "?keywords=" + HttpUtil.encodeURL(keywords) + "&p=" +
+				page + "&c=" + itemsPerPage + "&format=atom");
 		link.addAttribute("type", "application/atom+xml");
 	}
 

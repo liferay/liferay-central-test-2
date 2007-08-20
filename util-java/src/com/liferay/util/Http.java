@@ -30,12 +30,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -76,8 +73,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class Http {
-
-	public static final String FILE_ENCODING = "file.encoding";
 
 	public static final String HTTP = "http";
 
@@ -168,37 +163,23 @@ public class Http {
 			url += StringPool.AMPERSAND;
 		}
 
-		return url + name + StringPool.EQUAL + encodeURL(value);
+		return url + name + StringPool.EQUAL + HttpUtil.encodeURL(value);
 	}
 
+	/**
+	 * @deprecated this method has been moved to
+	 * <code>com.liferay.util.HttpUtil</code>.
+	 */
 	public static String decodeURL(String url) {
-		if (url == null) {
-			return null;
-		}
-
-		try {
-			return URLDecoder.decode(url, SystemProperties.get(FILE_ENCODING));
-		}
-		catch (UnsupportedEncodingException uee) {
-			_log.error(uee, uee);
-
-			return StringPool.BLANK;
-		}
+		return HttpUtil.decodeURL(url);
 	}
 
+	/**
+	 * @deprecated this method has been moved to
+	 * <code>com.liferay.util.HttpUtil</code>.
+	 */
 	public static String encodeURL(String url) {
-		if (url == null) {
-			return null;
-		}
-
-		try {
-			return URLEncoder.encode(url, SystemProperties.get(FILE_ENCODING));
-		}
-		catch (UnsupportedEncodingException uee) {
-			_log.error(uee, uee);
-
-			return StringPool.BLANK;
-		}
+		return HttpUtil.encodeURL(url);
 	}
 
 	public static HttpClient getClient(HostConfiguration hostConfig)

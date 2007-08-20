@@ -136,7 +136,7 @@
 		var refreshPortletList = getRefreshPortletList();
 
 		if (refreshPortletList["_" + portletId]) {
-			self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&referer=<%= Http.encodeURL(currentURL) %>&refresh=1";
+			self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&referer=<%= HttpUtil.encodeURL(currentURL) %>&refresh=1";
 		}
 		else {
 			var loadingDiv = document.createElement("div");
@@ -150,7 +150,7 @@
 
 			container.appendChild(loadingDiv);
 
-			var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&currentURL=<%= Http.encodeURL(currentURL) %>";
+			var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&currentURL=<%= HttpUtil.encodeURL(currentURL) %>";
 
 			addPortletHTML(queryString, loadingDiv);
 		}

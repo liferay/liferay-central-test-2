@@ -27,12 +27,20 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.io.UnsupportedEncodingException;
+
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="HttpUtil.java.html"><b><i>View Source</i></b></a>
@@ -42,6 +50,38 @@ import java.util.StringTokenizer;
  *
  */
 public class HttpUtil {
+
+	public static final String FILE_ENCODING = "file.encoding";
+
+	public static String decodeURL(String url) {
+		if (url == null) {
+			return null;
+		}
+
+		try {
+			return URLDecoder.decode(url, SystemProperties.get(FILE_ENCODING));
+		}
+		catch (UnsupportedEncodingException uee) {
+			_log.error(uee, uee);
+
+			return StringPool.BLANK;
+		}
+	}
+
+	public static String encodeURL(String url) {
+		if (url == null) {
+			return null;
+		}
+
+		try {
+			return URLEncoder.encode(url, SystemProperties.get(FILE_ENCODING));
+		}
+		catch (UnsupportedEncodingException uee) {
+			_log.error(uee, uee);
+
+			return StringPool.BLANK;
+		}
+	}
 
 	public static Map parameterMapFromString(String queryString) {
 		Map parameterMap = new LinkedHashMap();
@@ -132,7 +172,7 @@ public class HttpUtil {
 				for (int i = 0; i < values.length; i++) {
 					sm.append(name);
 					sm.append(StringPool.EQUAL);
-					sm.append(Http.encodeURL(values[i]));
+					sm.append(encodeURL(values[i]));
 					sm.append(StringPool.AMPERSAND);
 				}
 			}
@@ -142,5 +182,7 @@ public class HttpUtil {
 
 		return sm.toString();
 	}
+
+	private static Log _log = LogFactory.getLog(HttpUtil.class);
 
 }

@@ -29,6 +29,7 @@ import com.liferay.portlet.cszsearch.model.CSZAddress;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
 import java.io.BufferedReader;
@@ -70,8 +71,8 @@ public class CityStateConverter implements WebCacheable {
 		try {
 			String text = Http.URLtoString(
 				"http://zip4.usps.com/zip4/zcl_1_results.jsp?pagenumber=all" +
-					"&city=" + Http.encodeURL(city) + "&state=" +
-						Http.encodeURL(state));
+					"&city=" + HttpUtil.encodeURL(city) + "&state=" +
+						HttpUtil.encodeURL(state));
 
 			int x = text.indexOf("<!-- **");
 			int y = text.lastIndexOf("<!-- **");

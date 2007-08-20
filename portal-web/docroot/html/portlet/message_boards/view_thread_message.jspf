@@ -347,7 +347,7 @@
 							if (StringUtil.endsWith(fileName, ".gif") || StringUtil.endsWith(fileName, ".jpg") || StringUtil.endsWith(fileName, ".png")) {
 						%>
 
-								<img src="<%= themeDisplay.getPathMain() %>/message_boards/get_message_attachment?messageId=<%= message.getMessageId() %>&attachment=<%= Http.encodeURL(fileName) %>" />
+								<img src="<%= themeDisplay.getPathMain() %>/message_boards/get_message_attachment?messageId=<%= message.getMessageId() %>&attachment=<%= HttpUtil.encodeURL(fileName) %>" />
 
 								<br /><br />
 

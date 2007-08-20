@@ -1923,7 +1923,7 @@ public class PortalUtil {
 			// and using up all the available space by remembering only the
 			// first redirect.
 
-			String redirect = Http.decodeURL(
+			String redirect = HttpUtil.decodeURL(
 				GetterUtil.getString(redirectValues[0]));
 
 			int pos = redirect.indexOf(StringPool.QUESTION);
@@ -1941,7 +1941,7 @@ public class PortalUtil {
 				if ((subredirectValues != null) &&
 					(subredirectValues.length > 0)) {
 
-					String subredirect = Http.decodeURL(
+					String subredirect = HttpUtil.decodeURL(
 						GetterUtil.getString(subredirectValues[0]));
 
 					parameterMap.put(redirectParam, new String[] {subredirect});

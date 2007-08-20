@@ -161,7 +161,7 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append("/document_library/get_file?folderId=");
 		sm.append(folder.getFolderId());
 		sm.append("&name=");
-		sm.append(Http.encodeURL(fileEntry.getName()));
+		sm.append(HttpUtil.encodeURL(fileEntry.getName()));
 
 		String rowHREF = sm.toString();
 
@@ -199,7 +199,7 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append("@main_path@/document_library/get_file?folderId=");
 		sm.append(fileEntry.getFolderId());
 		sm.append("&name=");
-		sm.append(Http.encodeURL(fileEntry.getName()));
+		sm.append(HttpUtil.encodeURL(fileEntry.getName()));
 		sm.append("'); window.close();");
 
 		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sm.toString());
