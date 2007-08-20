@@ -7,13 +7,6 @@ Replace !    !\t!
 # "code" block
 FilterLock com.liferay.portlet.wiki.filters.CodeBlock !\[code\](.|\n)*?\[/code\]!&~0!
 
-# Headers
-Replace !(^|\n)={5,}(.+?)={5,}!\n<h5>$2</h5>\n!
-Replace !(^|\n)={4}(.+?)={4}!\n<h4>$2</h4>\n!
-Replace !(^|\n)={3}(.+?)={3}!\n<h3>$2</h3>\n!
-Replace !(^|\n)={2}(.+?)={2}!\n<h2>$2</h2>\n!
-Replace !(^|\n)={1}(.+?)={1}!\n<h1>$2</h1>\n!
-
 # Make sure formatted embedded HTML removes formatting (pre-whitespace) so it 
 # doesn't get defeated by other rules
 Replace !^\s*<!<!
@@ -24,13 +17,23 @@ Replace !''''''!<b></b>!
 # "hands-off" block
 Lock !\[\n((.|\n)*?)\n\]!<pre>&1</pre>!
 
+# empty lines to <br>
+Lock ![\n]{3}!\n<br/><br/><br/>\n!
+Lock ![\n]{2}!\n<br/><br/>\n!
+
+# Headers
+Replace !(^|\n)={5,}(.+?)={5,}!\n<h5>$2</h5>\n!
+Replace !(^|\n)={4}(.+?)={4}!\n<h4>$2</h4>\n!
+Replace !(^|\n)={3}(.+?)={3}!\n<h3>$2</h3>\n!
+Replace !(^|\n)={2}(.+?)={2}!\n<h2>$2</h2>\n!
+Replace !(^|\n)={1}(.+?)={1}!\n<h1>$2</h1>\n!
+
 # bold, emphasis and rulers
-Replace !(^|\n)(^|\n)!\n<br/>\n!
 Replace !_(.+?)_!<u>$1</u>!
 Replace !'{5}(.+?)'{5}!<b><i>$1</i></b>!
 Replace !'{3}(.+?)'{3}!<b>$1</b>!
 Replace !'{2}(.+?)'{2}!<i>$1</i>!
-Replace !(^|\n)-{4,}!\n<div class='separator'></div>\n!
+Replace !(^|\n)-{4,}!\n<hr/>\n!
 
 # ordered/unordered list
 FilterReplace wiki.ListRow !(^\t+(\*|[1234567890]+)\.?\s*(.+)(\n|\z))+!\n&~0!
