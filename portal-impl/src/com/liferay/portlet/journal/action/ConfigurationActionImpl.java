@@ -91,7 +91,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return "/html/portlet/journal/edit_configuration.jsp";
+		return "/html/portlet/journal/configuration.jsp";
 	}
 
 	protected void updateEmailFrom(ActionRequest req, PortletPreferences prefs)

@@ -72,7 +72,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return "/html/portlet/language/edit_configuration.jsp";
+		return "/html/portlet/language/configuration.jsp";
 	}
 
 }

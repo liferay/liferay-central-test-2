@@ -91,7 +91,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return "/html/portlet/google_adsense/edit_configuration.jsp";
+		return "/html/portlet/google_adsense/configuration.jsp";
 	}
 
 }

@@ -82,7 +82,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return "/html/portlet/alfresco_content/edit_configuration.jsp";
+		return "/html/portlet/alfresco_content/configuration.jsp";
 	}
 
 }

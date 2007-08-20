@@ -96,7 +96,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return "/html/portlet/google_maps/edit_configuration.jsp";
+		return "/html/portlet/google_maps/configuration.jsp";
 	}
 
 }

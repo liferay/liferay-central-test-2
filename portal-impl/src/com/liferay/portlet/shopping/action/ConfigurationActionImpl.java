@@ -98,7 +98,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return "/html/portlet/shopping/edit_configuration.jsp";
+		return "/html/portlet/shopping/configuration.jsp";
 	}
 
 	protected void updateEmailFrom(ActionRequest req, ShoppingPreferences prefs)

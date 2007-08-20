@@ -88,7 +88,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return "/html/portlet/amazon_rankings/edit_configuration.jsp";
+		return "/html/portlet/amazon_rankings/configuration.jsp";
 	}
 
 }

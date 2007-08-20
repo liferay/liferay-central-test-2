@@ -115,7 +115,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return "/html/portlet/iframe/edit_configuration.jsp";
+		return "/html/portlet/iframe/configuration.jsp";
 	}
 
 }

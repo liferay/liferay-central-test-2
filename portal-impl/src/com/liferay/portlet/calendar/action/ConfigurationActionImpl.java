@@ -82,7 +82,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return "/html/portlet/calendar/edit_configuration.jsp";
+		return "/html/portlet/calendar/configuration.jsp";
 	}
 
 	protected void updateEmailFrom(ActionRequest req, PortletPreferences prefs)

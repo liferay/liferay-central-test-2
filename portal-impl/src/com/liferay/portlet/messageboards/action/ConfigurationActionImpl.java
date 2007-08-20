@@ -104,7 +104,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return "/html/portlet/message_boards/edit_configuration.jsp";
+		return "/html/portlet/message_boards/configuration.jsp";
 	}
 
 	protected void updateDisplaySettings(
