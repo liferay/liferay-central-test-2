@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
@@ -58,7 +59,6 @@ import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.PropertiesUtil;
 
 import java.util.HashSet;
 import java.util.Iterator;

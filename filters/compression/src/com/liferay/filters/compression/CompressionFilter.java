@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.util.Http;
-import com.liferay.util.SystemProperties;
 
 import java.io.IOException;
 

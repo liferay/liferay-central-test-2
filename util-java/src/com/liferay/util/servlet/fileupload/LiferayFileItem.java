@@ -24,8 +24,8 @@ package com.liferay.util.servlet.fileupload;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.util.FileUtil;
-import com.liferay.util.SystemProperties;
 
 import java.io.File;
 

@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.communities.form;
 
-import com.liferay.util.NullSafeProperties;
+import com.liferay.portal.kernel.util.NullSafeProperties;
 
 import java.util.Properties;
 

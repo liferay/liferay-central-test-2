@@ -20,59 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.StringPool;
-
-import java.io.PrintStream;
-import java.io.PrintWriter;
-
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Properties;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.Vector;
 
 /**
- * <a href="SortedProperties.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrderedProperties.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SortedProperties extends Properties {
+public class OrderedProperties extends Properties {
 
-	public SortedProperties() {
+	public OrderedProperties() {
 		super();
 
-		_names = new TreeSet();
-	}
-
-	public void list(PrintStream out) {
-		System.out.println("-- listing properties --");
-
-		Enumeration enu = propertyNames();
-
-		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
-
-			out.println(name + StringPool.EQUAL + getProperty(name));
-		}
-	}
-
-	public void list(PrintWriter out) {
-		System.out.println("-- listing properties --");
-
-		Enumeration enu = propertyNames();
-
-		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
-
-			out.println(name + StringPool.EQUAL + getProperty(name));
-		}
+		_names = new Vector();
 	}
 
 	public Enumeration propertyNames() {
-		return Collections.enumeration(_names);
+		return _names.elements();
 	}
 
 	public Object put(Object key, Object value) {
@@ -91,6 +60,6 @@ public class SortedProperties extends Properties {
 		return super.remove(key);
 	}
 
-	private Set _names;
+	private Vector _names;
 
 }

@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -54,7 +55,6 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.FiniteUniqueStack;
 import com.liferay.util.Http;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.PropertiesUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;

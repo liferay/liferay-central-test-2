@@ -20,14 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
-
-import com.liferay.portal.kernel.util.ByteArrayMaker;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.UnicodeFormatter;
-import com.liferay.portal.kernel.util.Validator;
+package com.liferay.portal.kernel.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

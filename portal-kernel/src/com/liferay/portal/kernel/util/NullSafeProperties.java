@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.util;
 
 import java.util.Properties;
 

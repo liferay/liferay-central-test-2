@@ -27,6 +27,7 @@ import EDU.oswego.cs.dl.util.concurrent.SyncSet;
 import EDU.oswego.cs.dl.util.concurrent.WriterPreferenceReadWriteLock;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.SystemProperties;
 
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;

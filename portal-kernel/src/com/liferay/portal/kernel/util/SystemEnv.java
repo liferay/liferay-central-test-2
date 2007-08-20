@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
-
-import com.liferay.portal.kernel.util.StringPool;
+package com.liferay.portal.kernel.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;

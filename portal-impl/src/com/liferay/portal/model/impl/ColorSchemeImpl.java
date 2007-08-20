@@ -22,12 +22,12 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.NullSafeProperties;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.NullSafeProperties;
-import com.liferay.util.PropertiesUtil;
 
 import java.io.IOException;
 

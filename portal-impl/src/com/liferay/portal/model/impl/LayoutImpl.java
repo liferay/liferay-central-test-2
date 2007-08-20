@@ -27,6 +27,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.NullSafeProperties;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -52,8 +54,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.Http;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.NullSafeProperties;
-import com.liferay.util.PropertiesUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;

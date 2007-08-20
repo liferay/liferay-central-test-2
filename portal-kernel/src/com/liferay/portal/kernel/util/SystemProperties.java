@@ -20,16 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
-
-import EDU.oswego.cs.dl.util.concurrent.SyncMap;
-import EDU.oswego.cs.dl.util.concurrent.WriterPreferenceReadWriteLock;
-
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
-
-import gnu.trove.THashMap;
+package com.liferay.portal.kernel.util;
 
 import java.io.InputStream;
 
@@ -156,30 +147,7 @@ public class SystemProperties {
 			}
 		}
 
-		// You cannot call CollectionFactory directly because CollectionFactory
-		// also references SystemProperties
-
-		//_props = CollectionFactory.getSyncHashMap();
-
-		boolean useTrove = false;
-
-		if (GetterUtil.getBoolean(System.getProperty("trove"), true)) {
-			try {
-				Class.forName("gnu.trove.THashMap");
-			}
-			catch (Exception e) {
-				useTrove = false;
-			}
-		}
-
-		if (useTrove) {
-			_props = new SyncMap(
-				new THashMap(), new WriterPreferenceReadWriteLock());
-		}
-		else {
-			_props = new SyncMap(
-				new HashMap(), new WriterPreferenceReadWriteLock());
-		}
+		_props = new HashMap();
 
 		// Use a fast synchronized hash map implementation instead of the slower
 		// java.util.Properties

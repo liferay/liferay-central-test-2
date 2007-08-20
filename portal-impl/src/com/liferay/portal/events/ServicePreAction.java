@@ -32,7 +32,9 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -78,8 +80,6 @@ import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.CookieUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.NullSafeProperties;
-import com.liferay.util.PropertiesUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.servlet.SessionErrors;
 

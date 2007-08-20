@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.JavaProps;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.log.CommonsLogFactoryImpl;
 import com.liferay.portal.security.jaas.PortalConfiguration;
@@ -39,7 +40,6 @@ import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.velocity.LiferayResourceLoader;
 import com.liferay.util.FileUtil;
-import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;
 
 import java.io.File;

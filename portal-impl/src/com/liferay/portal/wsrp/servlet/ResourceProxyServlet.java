@@ -22,7 +22,7 @@
 
 package com.liferay.portal.wsrp.servlet;
 
-import com.liferay.util.SystemProperties;
+import com.liferay.portal.kernel.util.SystemProperties;
 
 import java.io.InputStream;
 import java.io.OutputStream;
