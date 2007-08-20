@@ -51,7 +51,6 @@
 	<classpathentry kind="lib" path="lib/development/zql.jar"/>
 	<classpathentry kind="lib" path="lib/global/portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/activemq.jar"/>
-	<classpathentry kind="lib" path="lib/portal/alfresco-client.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ant.jar"/>
 	<classpathentry kind="lib" path="lib/portal/antlr.jar"/>
 	<classpathentry kind="lib" path="lib/portal/aopalliance.jar"/>
@@ -60,7 +59,6 @@
 	<classpathentry kind="lib" path="lib/portal/axis.jar"/>
 	<classpathentry kind="lib" path="lib/portal/axis-ant.jar"/>
 	<classpathentry kind="lib" path="lib/portal/backport-concurrent.jar"/>
-	<classpathentry kind="lib" path="lib/portal/bcprov-jdk15.jar"/>
 	<classpathentry kind="lib" path="lib/portal/burlap.jar"/>
 	<classpathentry kind="lib" path="lib/portal/casclient.jar"/>
 	<classpathentry kind="lib" path="lib/portal/cglib.jar"/>
@@ -125,7 +123,6 @@
 	<classpathentry kind="lib" path="lib/portal/nekohtml.jar"/>
 	<classpathentry kind="lib" path="lib/portal/odmg.jar"/>
 	<classpathentry kind="lib" path="lib/portal/openid4java.jar"/>
-	<classpathentry kind="lib" path="lib/portal/opensaml.jar"/>
 	<classpathentry kind="lib" path="lib/portal/openxri-client.jar"/>
 	<classpathentry kind="lib" path="lib/portal/openxri-syntax.jar"/>
 	<classpathentry kind="lib" path="lib/portal/oro.jar"/>
@@ -154,7 +151,6 @@
 	<classpathentry kind="lib" path="lib/portal/trove.jar"/>
 	<classpathentry kind="lib" path="lib/portal/velocity.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsdl4j.jar"/>
-	<classpathentry kind="lib" path="lib/portal/wss4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xalan.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xml-apis.jar"/>
