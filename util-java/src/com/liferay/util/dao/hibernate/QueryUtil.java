@@ -23,7 +23,7 @@
 package com.liferay.util.dao.hibernate;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.util.Randomizer;
+import com.liferay.portal.kernel.util.Randomizer;
 
 import java.util.ArrayList;
 import java.util.Iterator;

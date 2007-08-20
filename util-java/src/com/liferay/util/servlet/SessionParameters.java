@@ -22,8 +22,8 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.SystemProperties;
 

@@ -22,7 +22,7 @@
 
 package com.liferay.util.xml;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import org.dom4j.Element;
 

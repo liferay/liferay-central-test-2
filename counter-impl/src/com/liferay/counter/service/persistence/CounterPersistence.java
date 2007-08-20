@@ -25,10 +25,10 @@ package com.liferay.counter.service.persistence;
 import com.liferay.counter.model.Counter;
 import com.liferay.counter.model.CounterRegister;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.GetterUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

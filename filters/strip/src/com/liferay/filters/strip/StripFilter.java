@@ -22,10 +22,10 @@
 
 package com.liferay.filters.strip;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.util.Http;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
 

@@ -22,9 +22,9 @@
 
 package com.liferay.test.spring.remoting;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.test.ResultPrinter;
 import com.liferay.test.spring.remoting.portal.PortalHttpTest;
-import com.liferay.util.Validator;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

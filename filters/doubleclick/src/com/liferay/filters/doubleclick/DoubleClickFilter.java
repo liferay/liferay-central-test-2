@@ -22,7 +22,7 @@
 
 package com.liferay.filters.doubleclick;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.SystemProperties;
 

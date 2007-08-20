@@ -22,6 +22,9 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+
 import javax.servlet.ServletRequest;
 
 import org.apache.commons.beanutils.PropertyUtils;

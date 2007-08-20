@@ -24,14 +24,37 @@
 
 <%@ include file="/html/portlet/portlet_configuration/init.jsp" %>
 
+<%
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
+
+String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
+%>
+
 <liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="setup" />
 </liferay-util:include>
 
-<%
-String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
-%>
+<c:if test="<%= (selPortlet != null) && Validator.isNotNull(path) %>">
+	<c:choose>
+		<c:when test="<%= selPortlet.isWARFile() %>">
 
-<c:if test="<%= Validator.isNotNull(path) %>">
-	<liferay-util:include page="<%= path %>" />
+			<%
+			PortletConfig selPortletConfig = PortletConfigFactory.create(selPortlet, application);
+			PortletContextImpl selPortletCtx = (PortletContextImpl)selPortletConfig.getPortletContext();
+
+			RequestDispatcher selRd = selPortletCtx.getServletContext().getRequestDispatcher(path);
+
+			StringServletResponse stringServletRes = new StringServletResponse(response);
+
+			selRd.include(request, stringServletRes);
+			%>
+
+			<%= stringServletRes.getString() %>
+		</c:when>
+		<c:otherwise>
+			<liferay-util:include page="<%= path %>" />
+		</c:otherwise>
+	</c:choose>
 </c:if>

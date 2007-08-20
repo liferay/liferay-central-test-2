@@ -23,7 +23,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;

@@ -22,8 +22,8 @@
 
 package com.liferay.util.axis;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.SystemProperties;
 
 import java.io.BufferedInputStream;

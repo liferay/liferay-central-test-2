@@ -22,7 +22,7 @@
 
 package com.liferay.taglib.security;
 
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;

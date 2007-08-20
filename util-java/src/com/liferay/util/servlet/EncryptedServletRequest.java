@@ -23,9 +23,9 @@
 package com.liferay.util.servlet;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
-import com.liferay.util.Validator;
 
 import java.security.Key;
 

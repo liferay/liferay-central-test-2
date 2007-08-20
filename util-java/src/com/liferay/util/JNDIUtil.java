@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 

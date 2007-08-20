@@ -24,6 +24,8 @@ package com.liferay.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * <a href="CreditCard.java.html"><b><i>View Source</i></b></a>

@@ -32,9 +32,9 @@ import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactory;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

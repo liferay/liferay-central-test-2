@@ -22,8 +22,8 @@
  */
 %>
 
-<%@ page import="com.liferay.util.ParamUtil" %>
-<%@ page import="com.liferay.util.Validator" %>
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.Validator" %>
 
 <%
 String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);

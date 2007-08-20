@@ -22,9 +22,9 @@
 
 package com.liferay.util.bridges.jsf.common;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.util.GetterUtil;
 
 import javax.faces.context.FacesContext;
 

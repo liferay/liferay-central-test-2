@@ -22,7 +22,7 @@
 
 package com.liferay.util.format;
 
-import com.liferay.util.StringUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 /**
  * <a href="USAPhoneNumberFormat.java.html"><b><i>View Source</i></b></a>

@@ -22,10 +22,10 @@
 
 package com.liferay.util.bridges.php;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Enumeration;
 import java.util.HashMap;

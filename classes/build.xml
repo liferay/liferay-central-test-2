@@ -61,19 +61,4 @@
 			<arg value="SELECT * FROM User_" />
 		</java>
 	</target>
-
-	<target name="MusicBuilder" depends="compile">
-		<java
-			classname="MusicBuilder"
-			classpathref="project.classpath"
-			fork="true"
-		>
-			<arg value="E:/Temp/MP3" />
-		</java>
-		<delete>
-			<fileset dir="E:/Temp/MP3">
-				<include name="**/Thumbs.db" />
-			</fileset>
-		</delete>
-	</target>
 </project>

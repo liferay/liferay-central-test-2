@@ -23,7 +23,7 @@
 package com.liferay.util.xml;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.StringUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.TextFormatter;
 
 import java.lang.reflect.Method;

@@ -24,11 +24,11 @@ package com.liferay.taglib.portletext;
 
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;

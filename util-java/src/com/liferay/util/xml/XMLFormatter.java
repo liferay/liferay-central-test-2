@@ -23,7 +23,7 @@
 package com.liferay.util.xml;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
-import com.liferay.util.StringUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
 import java.io.StringReader;

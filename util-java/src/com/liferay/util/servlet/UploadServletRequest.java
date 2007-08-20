@@ -22,7 +22,7 @@
 
 package com.liferay.util.servlet;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.fileupload.LiferayFileItem;
 import com.liferay.util.servlet.fileupload.LiferayFileItemFactory;

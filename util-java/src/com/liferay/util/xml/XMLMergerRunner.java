@@ -23,9 +23,9 @@
 package com.liferay.util.xml;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.FileUtil;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.xml.descriptor.XMLDescriptor;
 
 import java.io.File;

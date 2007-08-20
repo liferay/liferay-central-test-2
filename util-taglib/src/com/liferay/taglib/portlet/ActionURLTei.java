@@ -22,7 +22,7 @@
 
 package com.liferay.taglib.portlet;
 
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.PortletURL;
 

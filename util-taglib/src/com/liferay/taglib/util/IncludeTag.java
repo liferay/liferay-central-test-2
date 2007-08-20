@@ -25,9 +25,9 @@ package com.liferay.taglib.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.StringServletResponse;
 
 import javax.servlet.RequestDispatcher;

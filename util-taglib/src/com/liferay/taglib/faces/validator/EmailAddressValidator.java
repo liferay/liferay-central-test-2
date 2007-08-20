@@ -23,7 +23,7 @@
 package com.liferay.taglib.faces.validator;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Locale;
 

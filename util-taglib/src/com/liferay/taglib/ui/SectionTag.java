@@ -24,8 +24,8 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAncestorTagImpl;
-import com.liferay.util.Validator;
 
 import javax.portlet.RenderResponse;
 

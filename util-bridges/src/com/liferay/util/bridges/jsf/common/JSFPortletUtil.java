@@ -22,7 +22,7 @@
 
 package com.liferay.util.bridges.jsf.common;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.lang.reflect.Method;
 

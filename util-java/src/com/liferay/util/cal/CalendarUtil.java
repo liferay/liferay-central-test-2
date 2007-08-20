@@ -24,8 +24,8 @@ package com.liferay.util.cal;
 
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.Validator;
 
 import java.sql.Timestamp;
 
@@ -368,7 +368,7 @@ public class CalendarUtil {
 	}
 
 	public static boolean isDate(int month, int day, int year) {
-		return isGregorianDate(month, day, year);
+		return Validator.isDate(month, day, year);
 	}
 
 	public static boolean isFuture(int month, int year) {
@@ -437,55 +437,11 @@ public class CalendarUtil {
 	}
 
 	public static boolean isGregorianDate(int month, int day, int year) {
-		if ((month < 0) || (month > 11)) {
-			return false;
-		}
-
-		int[] months = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-		if (month == 1) {
-			int febMax = 28;
-
-			if (((year % 4) == 0) && ((year % 100) != 0) ||
-				((year % 400) == 0)) {
-
-				febMax = 29;
-			}
-
-			if ((day < 1) || (day > febMax)) {
-				return false;
-			}
-		}
-		else if ((day < 1) || (day > months[month])) {
-			return false;
-		}
-
-		return true;
+		return Validator.isGregorianDate(month, day, year);
 	}
 
 	public static boolean isJulianDate(int month, int day, int year) {
-		if ((month < 0) || (month > 11)) {
-			return false;
-		}
-
-		int[] months = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-		if (month == 1) {
-			int febMax = 28;
-
-			if ((year % 4) == 0) {
-				febMax = 29;
-			}
-
-			if ((day < 1) || (day > febMax)) {
-				return false;
-			}
-		}
-		else if ((day < 1) || (day > months[month])) {
-			return false;
-		}
-
-		return true;
+		return Validator.isJulianDate(month, day, year);
 	}
 
 	public static Calendar roundByMinutes(Calendar cal, int interval) {

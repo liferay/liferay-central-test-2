@@ -25,7 +25,7 @@ package com.liferay.taglib.security;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.util.StringUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -24,7 +24,7 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.util.dao.search.DisplayTerms" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.DisplayTerms" %>
 
 <%
 String randomNamespace = (String)request.getAttribute("liferay-ui:search-toggle:randomNamespace");

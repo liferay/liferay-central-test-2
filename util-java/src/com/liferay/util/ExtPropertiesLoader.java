@@ -26,6 +26,8 @@ import com.germinus.easyconf.ComponentConfiguration;
 import com.germinus.easyconf.ComponentProperties;
 import com.germinus.easyconf.EasyConf;
 
+import com.liferay.portal.kernel.util.Validator;
+
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;

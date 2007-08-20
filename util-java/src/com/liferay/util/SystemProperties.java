@@ -25,6 +25,10 @@ package com.liferay.util;
 import EDU.oswego.cs.dl.util.concurrent.SyncMap;
 import EDU.oswego.cs.dl.util.concurrent.WriterPreferenceReadWriteLock;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+
 import gnu.trove.THashMap;
 
 import java.io.InputStream;

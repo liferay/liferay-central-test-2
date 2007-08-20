@@ -22,10 +22,10 @@
 
 package com.liferay.test.http;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.test.TestCase;
 import com.liferay.test.TestProps;
-import com.liferay.util.GetterUtil;
 
 /**
  * <a href="BaseHttpTest.java.html"><b><i>View Source</i></b></a>

@@ -25,9 +25,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 
 <%@ page import="com.liferay.portal.kernel.servlet.BrowserSniffer" %>
-<%@ page import="com.liferay.util.ParamUtil" %>
-<%@ page import="com.liferay.util.StringUtil" %>
-<%@ page import="com.liferay.util.Validator" %>
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.Validator" %>
 
 <%
 String panel = ParamUtil.get(request, "panel", (BrowserSniffer.is_ie_5_5_up(request) ? DEFAULT_PANEL_IE : DEFAULT_PANEL_MOZILLA));

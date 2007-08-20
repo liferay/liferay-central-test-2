@@ -24,6 +24,7 @@ package com.liferay.test.service;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
@@ -32,7 +33,6 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.test.TestCase;
 import com.liferay.test.TestProps;
-import com.liferay.util.GetterUtil;
 
 /**
  * <a href="BaseServiceTest.java.html"><b><i>View Source</i></b></a>

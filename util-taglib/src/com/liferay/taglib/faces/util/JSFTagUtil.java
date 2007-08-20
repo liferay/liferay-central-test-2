@@ -22,7 +22,7 @@
 
 package com.liferay.taglib.faces.util;
 
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.faces.application.Application;
 import javax.faces.context.FacesContext;

@@ -22,7 +22,7 @@
 
 package com.liferay.util.dao.hibernate;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.Serializable;
 

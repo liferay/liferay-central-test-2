@@ -22,8 +22,8 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.taglib.util.IncludeTag;
-import com.liferay.util.dao.search.SearchContainer;
 
 import javax.servlet.ServletRequest;
 

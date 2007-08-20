@@ -23,7 +23,7 @@
 package com.liferay.jbpm.db;
 
 import com.liferay.jbpm.util.JbpmWebProps;
-import com.liferay.util.StringUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 /**
  * <a href="JbpmCustomSQLUtil.java.html"><b><i>View Source</i></b></a>

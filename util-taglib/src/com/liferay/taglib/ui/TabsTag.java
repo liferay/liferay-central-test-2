@@ -22,11 +22,11 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAncestorTagImpl;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.PortletURL;
 

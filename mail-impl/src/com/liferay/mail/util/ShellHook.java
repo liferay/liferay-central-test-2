@@ -25,8 +25,8 @@ package com.liferay.mail.util;
 import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.StringUtil;
 
 import java.util.List;
 

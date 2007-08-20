@@ -22,10 +22,10 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.Validator;
-import com.liferay.util.dao.search.DisplayTerms;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;

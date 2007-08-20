@@ -3,8 +3,8 @@ package com.ext.portlet.reports.service.persistence;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

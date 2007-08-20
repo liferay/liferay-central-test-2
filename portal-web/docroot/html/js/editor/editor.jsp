@@ -24,9 +24,9 @@
 
 <%@ page import="com.liferay.portal.kernel.servlet.BrowserSniffer" %>
 <%@ page import="com.liferay.portal.kernel.util.Constants" %>
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.struts.StrutsUtil" %>
 <%@ page import="com.liferay.portal.util.PropsUtil" %>
-<%@ page import="com.liferay.util.ParamUtil" %>
 
 <%
 String editorImpl = ParamUtil.get(request, "editorImpl", PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY));

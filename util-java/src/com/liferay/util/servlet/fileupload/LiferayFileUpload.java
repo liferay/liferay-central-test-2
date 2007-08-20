@@ -22,7 +22,7 @@
 
 package com.liferay.util.servlet.fileupload;
 
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
 import java.util.Map;

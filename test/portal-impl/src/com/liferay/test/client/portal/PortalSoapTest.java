@@ -27,10 +27,10 @@ import com.liferay.client.portal.service.http.PortalServiceSoap;
 import com.liferay.client.portal.service.http.PortalServiceSoapServiceLocator;
 import com.liferay.client.portal.service.http.UserServiceSoap;
 import com.liferay.client.portal.service.http.UserServiceSoapServiceLocator;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.test.TestConstants;
 import com.liferay.test.TestProps;
 import com.liferay.test.client.BaseSoapTest;
-import com.liferay.util.GetterUtil;
 
 import java.util.Calendar;
 import java.util.Locale;

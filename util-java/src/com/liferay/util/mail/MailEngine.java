@@ -23,9 +23,9 @@
 package com.liferay.util.mail;
 
 import com.liferay.portal.kernel.mail.MailMessage;
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.JNDIUtil;
-import com.liferay.util.Validator;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

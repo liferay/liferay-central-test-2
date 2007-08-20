@@ -25,8 +25,8 @@ package com.liferay.jbpm.handler;
 import com.liferay.client.portal.model.GroupSoap;
 import com.liferay.client.portal.model.RoleSoap;
 import com.liferay.client.portal.model.UserSoap;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import org.jbpm.graph.exe.ExecutionContext;
 import org.jbpm.taskmgmt.def.AssignmentHandler;

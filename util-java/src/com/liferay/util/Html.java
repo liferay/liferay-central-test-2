@@ -23,6 +23,7 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringUtil;
 
 /**
  * <a href="Html.java.html"><b><i>View Source</i></b></a>

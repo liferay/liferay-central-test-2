@@ -22,8 +22,8 @@
 
 package com.liferay.util.dao.hibernate;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.ExtPropertiesLoader;
-import com.liferay.util.StringUtil;
 
 import java.io.InputStream;
 

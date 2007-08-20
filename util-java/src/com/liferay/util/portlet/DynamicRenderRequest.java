@@ -22,7 +22,7 @@
 
 package com.liferay.util.portlet;
 
-import com.liferay.util.ArrayUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

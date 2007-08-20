@@ -23,10 +23,10 @@
 package com.liferay.mail.service.jms;
 
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.ArrayUtil;
 import com.liferay.util.mail.MailEngine;
 
 import javax.jms.Message;

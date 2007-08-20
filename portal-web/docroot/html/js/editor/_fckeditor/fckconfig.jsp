@@ -22,8 +22,8 @@
  */
 %>
 
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.util.Http" %>
-<%@ page import="com.liferay.util.ParamUtil" %>
 
 <%
 String plid = ParamUtil.getString(request, "p_l_id");
