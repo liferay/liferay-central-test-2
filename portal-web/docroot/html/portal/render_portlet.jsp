@@ -194,6 +194,8 @@ renderRequestImpl.defineObjects(portletConfig, renderResponseImpl);
 
 String responseContentType = renderRequestImpl.getResponseContentType();
 
+String currentURL = PortalUtil.getCurrentURL(request);
+
 Portlet portletResourcePortlet = null;
 
 if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
@@ -336,12 +338,242 @@ portletDisplay.setShowRefreshIcon(showRefreshIcon);
 
 portletDisplay.setRestoreCurrentView(portlet.isRestoreCurrentView());
 
+// Portlet icon
+
+String portletIcon = null;
+
+if (portletResourcePortlet != null) {
+	portletIcon = portletResourcePortlet.getContextPath() + portletResourcePortlet.getIcon();
+}
+else {
+	portletIcon = portlet.getContextPath() + portlet.getIcon();
+}
+
+portletDisplay.setURLPortlet(portletIcon);
+
+// Portlet title
+
+String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, LocaleUtil.toLanguageId(locale));
+
+if (portletDisplay.isAccess() && portletDisplay.isActive()) {
+	if (Validator.isNull(portletTitle)) {
+		portletTitle = renderResponseImpl.getTitle();
+	}
+}
+
+if (Validator.isNull(portletTitle)) {
+	ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
+
+	portletTitle = resourceBundle.getString(JavaConstants.JAVAX_PORTLET_TITLE);
+}
+
+portletDisplay.setTitle(portletTitle);
+
+// URL close
+
+String urlClose = "javascript: closePortlet('" + plid.longValue() + "', '" + portletDisplay.getId() + "', '" + themeDisplay.getDoAsUserId() + "');";
+
+portletDisplay.setURLClose(urlClose.toString());
+
+// URL configuration
+
+PortletURLImpl urlConfiguration = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid.longValue(), false);
+
+urlConfiguration.setWindowState(WindowState.MAXIMIZED);
+
+if (Validator.isNotNull(portlet.getConfigurationActionClass())) {
+	urlConfiguration.setParameter("struts_action", "/portlet_configuration/edit_configuration");
+}
+else {
+	urlConfiguration.setParameter("struts_action", "/portlet_configuration/edit_permissions");
+}
+
+urlConfiguration.setParameter("portletResource", portletDisplay.getId());
+urlConfiguration.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(plid.longValue(), portlet.getPortletId()));
+urlConfiguration.setParameter("redirect", currentURL);
+urlConfiguration.setParameter("backURL", currentURL);
+
+portletDisplay.setURLConfiguration("javascript: self.location = '" + Http.encodeURL(urlConfiguration.toString()) + "&" + PortalUtil.getPortletNamespace(PortletKeys.PORTLET_CONFIGURATION) + "previewWidth=' + document.getElementById('p_p_id" + portletDisplay.getNamespace() + "').offsetWidth;");
+
+// URL edit
+
+PortletURLImpl urlEdit = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), false);
+
+if (portletDisplay.isModeEdit()) {
+	urlEdit.setWindowState(WindowState.NORMAL);
+	urlEdit.setPortletMode(PortletMode.VIEW);
+}
+else {
+	if (portlet.isMaximizeEdit()) {
+		urlEdit.setWindowState(WindowState.MAXIMIZED);
+	}
+	else {
+		urlEdit.setWindowState(WindowState.NORMAL);
+	}
+
+	urlEdit.setPortletMode(PortletMode.EDIT);
+}
+
+portletDisplay.setURLEdit(urlEdit.toString());
+
+// URL edit guest
+
+PortletURLImpl urlEditGuest = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), false);
+
+if (portletDisplay.isModeEditGuest()) {
+	urlEditGuest.setWindowState(WindowState.NORMAL);
+	urlEditGuest.setPortletMode(PortletMode.VIEW);
+}
+else {
+	if (portlet.isMaximizeEdit()) {
+		urlEditGuest.setWindowState(WindowState.MAXIMIZED);
+	}
+	else {
+		urlEditGuest.setWindowState(WindowState.NORMAL);
+	}
+
+	urlEditGuest.setPortletMode(LiferayPortletMode.EDIT_GUEST);
+}
+
+portletDisplay.setURLEditGuest(urlEditGuest.toString());
+
+// URL help
+
+PortletURLImpl urlHelp = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), false);
+
+if (portletDisplay.isModeHelp()) {
+	urlHelp.setWindowState(WindowState.NORMAL);
+	urlHelp.setPortletMode(PortletMode.VIEW);
+}
+else {
+	if (portlet.isMaximizeHelp()) {
+		urlHelp.setWindowState(WindowState.MAXIMIZED);
+	}
+	else {
+		urlHelp.setWindowState(WindowState.NORMAL);
+	}
+
+	urlHelp.setPortletMode(PortletMode.HELP);
+}
+
+portletDisplay.setURLHelp(urlHelp.toString());
+
+// URL max
+
+boolean action = !portletDisplay.isRestoreCurrentView();
+
+PortletURLImpl urlMax = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), action);
+
+if (portletDisplay.isStateMax()) {
+	urlMax.setWindowState(WindowState.NORMAL);
+}
+else {
+	urlMax.setWindowState(WindowState.MAXIMIZED);
+}
+
+if (!action) {
+	String portletNamespace = portletDisplay.getNamespace();
+
+	Map renderParameters = RenderParametersPool.get(request, plid.longValue(), portletDisplay.getId());
+
+	Iterator itr = renderParameters.entrySet().iterator();
+
+	while (itr.hasNext()) {
+		Map.Entry entry = (Map.Entry)itr.next();
+
+		String key = (String)entry.getKey();
+
+		if (key.startsWith(portletNamespace)) {
+			key = key.substring(portletNamespace.length(), key.length());
+
+			String[] values = (String[])entry.getValue();
+
+			urlMax.setParameter(key, values);
+		}
+	}
+}
+
+portletDisplay.setURLMax(urlMax.toString());
+
+// URL min
+
+String urlMin = "javascript: minimizePortlet('" + plid.longValue() + "', '" + portletDisplay.getId() + "', " + portletDisplay.isStateMin() + ", '" + themeDisplay.getDoAsUserId() + "');";
+
+portletDisplay.setURLMin(urlMin);
+
+// URL portlet css
+
+String urlPortletCss = "javascript: Liferay.PortletCSS.init('" + portletDisplay.getId() + "');";
+
+portletDisplay.setURLPortletCss(urlPortletCss.toString());
+
+// URL print
+
+PortletURLImpl urlPrint = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), false);
+
+if (portletDisplay.isModePrint()) {
+	urlPrint.setWindowState(WindowState.NORMAL);
+	urlPrint.setPortletMode(PortletMode.VIEW);
+}
+else {
+	if (portlet.isPopUpPrint()) {
+		urlPrint.setWindowState(LiferayWindowState.POP_UP);
+	}
+	else {
+		urlPrint.setWindowState(WindowState.NORMAL);
+	}
+
+	urlPrint.setPortletMode(LiferayPortletMode.PRINT);
+}
+
+portletDisplay.setURLPrint(urlPrint.toString());
+
+// URL refresh
+
+String urlRefresh = "javascript: " + portletDisplay.getNamespace() + "refreshPortlet();";
+
+portletDisplay.setURLRefresh(urlRefresh);
+
+// URL back
+
+String urlBack = null;
+
+if (portletDisplay.isModeEdit()) {
+	urlBack = urlEdit.toString();
+}
+else if (portletDisplay.isModeHelp()) {
+	urlBack = urlHelp.toString();
+}
+else if (portletDisplay.isModePrint()) {
+	urlBack = urlPrint.toString();
+}
+else if (portletDisplay.isStateMax()) {
+	if (portletDisplay.getId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
+		/*String portletResource = ParamUtil.getString(request, "portletResource");
+
+		urlMax.setAnchor(false);
+
+		urlBack = urlMax.toString() + "#p_" + portletResource;*/
+
+		urlBack = ParamUtil.getString(request, "backURL");
+	}
+	else {
+		urlBack = urlMax.toString();
+	}
+}
+
+if (urlBack != null) {
+	portletDisplay.setShowBackIcon(true);
+	portletDisplay.setURLBack(urlBack);
+}
+
+// Make sure the Tiles context is reset for the next portlet
+
 if ((cachePortlet != null) && cachePortlet.isStrutsPortlet()) {
-
-	// Make sure the Tiles context is reset for the next portlet
-
 	request.removeAttribute(ComponentConstants.COMPONENT_CONTEXT);
 }
+
+// Render portlet
 
 boolean portletException = false;
 
