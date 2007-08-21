@@ -599,12 +599,6 @@ public class PropsUtil {
 
 	public static final String AMAZON_LICENSE = "amazon.license.";
 
-	// Google License Keys
-
-	public static final String GOOGLE_LICENSE = "google.license.";
-
-	public static final String GOOGLE_MAPS_LICENSE = "google.maps.license";
-
 	// Instant Messenger
 
 	public static final String AIM_LOGIN = "aim.login";

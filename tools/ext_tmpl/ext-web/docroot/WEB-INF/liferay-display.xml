@@ -59,12 +59,6 @@
 		<portlet id="16" />
 		<portlet id="61" />
 	</category>
-	<category name="category.google">
-		<portlet id="35" />
-		<portlet id="94" />
-		<portlet id="95" />
-		<portlet id="96" />
-	</category>
 	<category name="category.news">
 		<portlet id="4" />
 		<portlet id="5" />

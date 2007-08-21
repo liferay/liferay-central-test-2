@@ -528,45 +528,6 @@
 			<forward name="portlet.iframe.view" path="portlet.iframe.view" />
 		</action>
 
-		<!-- Google -->
-
-		<action path="/google/cached" type="com.liferay.portlet.google.action.CachedAction">
-			<forward name="portlet.google.cached" path="/portlet/google/cached.jsp" />
-			<forward name="portlet.google.error" path="portlet.google.error" />
-		</action>
-
-		<action path="/google/edit" type="com.liferay.portlet.google.action.EditPreferencesAction">
-			<forward name="portlet.google.edit" path="portlet.google.edit" />
-		</action>
-
-		<action path="/google/search" type="com.liferay.portlet.google.action.SearchAction">
-			<forward name="portlet.google.error" path="portlet.google.error" />
-			<forward name="portlet.google.search" path="portlet.google.search" />
-		</action>
-
-		<action path="/google/spell" type="com.liferay.portlet.google.action.SpellAction">
-			<forward name="portlet.google.error" path="portlet.google.error" />
-			<forward name="portlet.google.spell" path="portlet.google.spell" />
-		</action>
-
-		<action path="/google/view" forward="portlet.google.view" />
-
-		<!-- Google AdSense -->
-
-		<action path="/google_adsense/view" forward="portlet.google_adsense.view" />
-
-		<!-- Google Gadget -->
-
-		<action path="/google_gadget/view" forward="portlet.google_gadget.view" />
-
-		<!-- Google Maps -->
-
-		<action path="/google_maps/save_directions_address" type="com.liferay.portlet.googlemaps.action.SaveDirectionsAddressAction" />
-
-		<action path="/google_maps/save_map_address" type="com.liferay.portlet.googlemaps.action.SaveMapAddressAction" />
-
-		<action path="/google_maps/view" forward="portlet.google_maps.view"  />
-
 		<!-- IFrame -->
 
 		<action path="/iframe/proxy" forward="/portlet/iframe/proxy.jsp" />

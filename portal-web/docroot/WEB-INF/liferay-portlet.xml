@@ -384,18 +384,6 @@
 		<render-weight>0</render-weight>
 	</portlet>
 	<portlet>
-		<portlet-name>35</portlet-name>
-		<icon>/html/portlet/google/icon.png</icon>
-		<struts-path>google</struts-path>
-		<preferences-unique-per-layout>false</preferences-unique-per-layout>
-		<preferences-owned-by-group>false</preferences-owned-by-group>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
-	</portlet>
-	<portlet>
 		<portlet-name>36</portlet-name>
 		<icon>/html/portlet/wiki/icon.png</icon>
 		<struts-path>wiki</struts-path>
@@ -882,45 +870,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
-	</portlet>
-	<portlet>
-		<portlet-name>94</portlet-name>
-		<icon>/html/portlet/google_adsense/icon.png</icon>
-		<struts-path>google_adsense</struts-path>
-		<configuration-action-class>com.liferay.portlet.googleadsense.action.ConfigurationActionImpl</configuration-action-class>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<instanceable>true</instanceable>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-		<ajaxable>false</ajaxable>
-	</portlet>
-	<portlet>
-		<portlet-name>95</portlet-name>
-		<icon>/html/portlet/google_gadget/icon.png</icon>
-		<struts-path>google_gadget</struts-path>
-		<configuration-action-class>com.liferay.portlet.googlegadget.action.ConfigurationActionImpl</configuration-action-class>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<instanceable>true</instanceable>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-		<ajaxable>false</ajaxable>
-	</portlet>
-	<portlet>
-		<portlet-name>96</portlet-name>
-		<icon>/html/portlet/google_maps/icon.png</icon>
-		<struts-path>google_maps</struts-path>
-		<configuration-action-class>com.liferay.portlet.googlemaps.action.ConfigurationActionImpl</configuration-action-class>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<instanceable>true</instanceable>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-		<ajaxable>false</ajaxable>
 	</portlet>
 	<portlet>
 		<portlet-name>97</portlet-name>

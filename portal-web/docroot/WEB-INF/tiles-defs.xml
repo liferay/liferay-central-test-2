@@ -455,60 +455,6 @@
 		<put name="portlet_content" value="/portlet/games/view.jsp" />
 	</definition>
 
-	<!-- Google -->
-
-	<definition name="portlet.google" extends="portlet" />
-
-	<definition name="portlet.google.edit" extends="portlet.google">
-		<put name="portlet_content" value="/portlet/google/edit.jsp" />
-	</definition>
-
-	<definition name="portlet.google.error" extends="portlet.google">
-		<put name="portlet_content" value="/portlet/google/error.jsp" />
-	</definition>
-
-	<definition name="portlet.google.search" extends="portlet.google">
-		<put name="portlet_content" value="/portlet/google/search.jsp" />
-	</definition>
-
-	<definition name="portlet.google.spell" extends="portlet.google">
-		<put name="portlet_content" value="/portlet/google/spell.jsp" />
-	</definition>
-
-	<definition name="portlet.google.view" extends="portlet.google">
-		<put name="portlet_content" value="/portlet/google/view.jsp" />
-	</definition>
-
-	<!-- Google AdSense -->
-
-	<definition name="portlet.google_adsense" extends="portlet">
-		<put name="portlet_decorate" value="true" />
-	</definition>
-
-	<definition name="portlet.google_adsense.view" extends="portlet.google_adsense">
-		<put name="portlet_content" value="/portlet/google_adsense/view.jsp" />
-	</definition>
-
-	<!-- Google Gadget -->
-
-	<definition name="portlet.google_gadget" extends="portlet">
-		<put name="portlet_decorate" value="true" />
-	</definition>
-
-	<definition name="portlet.google_gadget.view" extends="portlet.google_gadget">
-		<put name="portlet_content" value="/portlet/google_gadget/view.jsp" />
-	</definition>
-
-	<!-- Google Maps -->
-
-	<definition name="portlet.google_maps" extends="portlet">
-		<put name="portlet_decorate" value="true" />
-	</definition>
-
-	<definition name="portlet.google_maps.view" extends="portlet.google_maps">
-		<put name="portlet_content" value="/portlet/google_maps/view.jsp" />
-	</definition>
-
 	<!-- IFrame -->
 
 	<definition name="portlet.iframe" extends="portlet" />

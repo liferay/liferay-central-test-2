@@ -194,11 +194,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>35</portlet-name>
-		<struts-path>google</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>36</portlet-name>
 		<struts-path>wiki</struts-path>
 		<include>true</include>
@@ -411,21 +406,6 @@
 	<portlet>
 		<portlet-name>93</portlet-name>
 		<struts-path>workflow</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
-		<portlet-name>94</portlet-name>
-		<struts-path>google_adsense</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
-		<portlet-name>95</portlet-name>
-		<struts-path>google_gadget</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
-		<portlet-name>96</portlet-name>
-		<struts-path>google_maps</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>
