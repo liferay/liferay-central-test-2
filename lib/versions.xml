@@ -286,7 +286,7 @@
 	</library>
 	<library>
 		<file-name>development/jtds.jar</file-name>
-		<version>1.2</version>
+		<version>1.2.1</version>
 		<project-name>jTDS</project-name>
 		<project-url>http://jtds.sourceforge.net</project-url>
 		<licenses>
