@@ -1471,6 +1471,10 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 				includes="cms-web/**,jbpm-web/**,mule-web/**,servicemix-web/**"
 			/>
 		</delete>
+
+		<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
+
+		<copy file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" todir="dist" />
 	</target>
 
 	<target name="dist-jdk5">
