@@ -81,7 +81,9 @@ type = ParamUtil.getString(request, "type", type);
 <br />
 
 <c:if test="<%= article != null %>">
-	<div class="portlet-msg-info"><liferay-ui:message key="displaying-content" />: <%= articleId %></div>
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="displaying-content" />: <%= articleId %>
+	</div>
 
 	<%
 	String structureId = article.getStructureId();

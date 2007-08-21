@@ -701,7 +701,6 @@ launch=Oběd
 layer-type=typ vrstvy
 layout=Šablona
 leave-edit-preferences=Opusť editaci preferencí
-leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=* zanech uživatelské jméno a heslo prázdné pro použití současných přihlašovacích údajů.
 leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku=Zanech prázdné pokud kupón nebude kontrolovat SKU.
 leave-this-blank-if-the-coupon-does-not-check-for-the-parent-categories-of-an-item=Zanech prázdné pokud kupón nebude určený pro konkrétní kategorii.
 left=Vlevo

@@ -25,6 +25,7 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.taglib.util.PortalIncludeUtil;
 import com.liferay.util.Html;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -59,7 +60,7 @@ public class ErrorTag extends TagSupport {
 			if ((_exception != null) && (Validator.isNull(_message)) &&
 				(SessionErrors.contains(renderRequest, _exception.getName()))) {
 
-				pageContext.include(getStartPage());
+				PortalIncludeUtil.include(pageContext, getStartPage());
 
 				pageContext.setAttribute(
 					"errorException",
@@ -97,7 +98,7 @@ public class ErrorTag extends TagSupport {
 			}
 
 			if (includeEndPage) {
-				pageContext.include(getEndPage());
+				PortalIncludeUtil.include(pageContext, getEndPage());
 			}
 
 			return EVAL_PAGE;

@@ -185,11 +185,9 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 </c:if>
 
 <c:if test="<%= latestProductVersion == null %>">
-	<div class="portlet-msg-info">
-		<b><liferay-ui:message key="note" />:</b> <liferay-ui:message key="this-product-does-not-have-any-released-versions" />
+	<div class="portlet-msg-error">
+		<liferay-ui:message key="this-product-does-not-have-any-released-versions" />
 	</div>
-
-	<br />
 </c:if>
 
 <liferay-ui:ratings

@@ -107,11 +107,12 @@
 /* ---------- Help messages, general additional information, etc. ---------- */
 
 .portlet-msg-info {
-	background: #FAFAFA;
+	background: #FAFAFA url(../images/messages/info.png) no-repeat 0.5em 50%;
 	border: 1px solid #53B2F8;
 	color: #777;
 	display: block;
-	padding: 2px;
+	margin: 0.15em auto 1.2em;
+	padding: 0.5em 0.5em 0.5em 2.8em;
 	text-align: left;
 }
 

@@ -40,6 +40,10 @@ String htmlAttributes =
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
+<div class="portlet-msg-info">
+<liferay-ui:message key="leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information" />
+</div>
+
 <table class="liferay-table">
 <tr>
 	<td>
@@ -132,12 +136,6 @@ String htmlAttributes =
 </table>
 
 <br />
-
-<span class="portlet-msg-error" style="font-size: x-small;">
-<liferay-ui:message key="leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information" />
-</span>
-
-<br /><br />
 
 <input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 

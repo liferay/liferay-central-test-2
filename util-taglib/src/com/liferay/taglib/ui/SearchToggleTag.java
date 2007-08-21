@@ -25,6 +25,7 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.taglib.util.PortalIncludeUtil;
 import com.liferay.util.PwdGenerator;
 
 import javax.servlet.ServletRequest;
@@ -54,7 +55,7 @@ public class SearchToggleTag extends TagSupport {
 			req.setAttribute(
 				"liferay-ui:search-toggle:displayTerms", _displayTerms);
 
-			pageContext.include(getStartPage());
+			PortalIncludeUtil.include(pageContext, getStartPage());
 
 			return EVAL_BODY_INCLUDE;
 		}
@@ -65,7 +66,7 @@ public class SearchToggleTag extends TagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
-			pageContext.include(getEndPage());
+			PortalIncludeUtil.include(pageContext, getEndPage());
 
 			return EVAL_PAGE;
 		}

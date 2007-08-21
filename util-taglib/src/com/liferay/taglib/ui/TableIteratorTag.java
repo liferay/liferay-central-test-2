@@ -24,6 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.taglib.util.PortalIncludeUtil;
 import com.liferay.util.Html;
 
 import java.util.List;
@@ -56,7 +57,7 @@ public class TableIteratorTag extends TagSupport {
 				req.setAttribute(
 					"liferay-ui:table-iterator:rowBreak", _rowBreak);
 
-				pageContext.include(getStartPage());
+				PortalIncludeUtil.include(pageContext, getStartPage());
 
 				pageContext.setAttribute(
 					"tableIteratorObj", _list.get(_listPos));
@@ -81,7 +82,7 @@ public class TableIteratorTag extends TagSupport {
 			req.setAttribute(
 				"liferay-ui:table-iterator:listPos", String.valueOf(_listPos));
 
-			pageContext.include(getBodyPage());
+			PortalIncludeUtil.include(pageContext, getBodyPage());
 
 			_listPos++;
 
@@ -105,7 +106,7 @@ public class TableIteratorTag extends TagSupport {
 	public int doEndTag() throws JspException {
 		try {
 			if (_list.size() > 0) {
-				pageContext.include(getEndPage());
+				PortalIncludeUtil.include(pageContext, getEndPage());
 			}
 
 			return EVAL_PAGE;

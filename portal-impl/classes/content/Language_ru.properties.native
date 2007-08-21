@@ -991,7 +991,6 @@ launch=Запустить
 layer-type=Тип слоя
 layout=Макет
 leave-edit-preferences=Покинуть редактирование свойств
-leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=* Оставьте поля имя пользователя и пароль пустыми если хотите использовать текущие значения.
 leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku=Leave this blank if the coupon does not check for the item SKU.
 leave-this-blank-if-the-coupon-does-not-check-for-the-parent-categories-of-an-item=Leave this blank if the coupon does not check for the parent categories of an item.
 left=Влево

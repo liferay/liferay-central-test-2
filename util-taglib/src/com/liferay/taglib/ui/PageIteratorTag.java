@@ -24,6 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.taglib.util.PortalIncludeUtil;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
@@ -66,7 +67,7 @@ public class PageIteratorTag extends TagSupport {
 				req.setAttribute(
 					"liferay-ui:page-iterator:pages", String.valueOf(_pages));
 
-				pageContext.include(getStartPage());
+				PortalIncludeUtil.include(pageContext, getStartPage());
 			}
 
 			return EVAL_BODY_INCLUDE;
@@ -79,7 +80,7 @@ public class PageIteratorTag extends TagSupport {
 	public int doEndTag() throws JspException {
 		try {
 			if (_pages > 1) {
-				pageContext.include(getEndPage());
+				PortalIncludeUtil.include(pageContext, getEndPage());
 			}
 
 			return EVAL_PAGE;

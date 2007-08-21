@@ -589,11 +589,10 @@ if (portlet.isActive() && access && supportsMimeType) {
 	catch (Exception e) {
 		portletException = true;
 
+		e.printStackTrace();
+
 		LogUtil.log(_log, e);
 	}
-
-	SessionMessages.clear(renderRequestImpl);
-	SessionErrors.clear(renderRequestImpl);
 }
 %>
 
@@ -792,6 +791,9 @@ else {
 </c:if>
 
 <%
+SessionMessages.clear(renderRequestImpl);
+SessionErrors.clear(renderRequestImpl);
+
 RenderRequestFactory.recycle(renderRequestImpl);
 RenderResponseFactory.recycle(renderResponseImpl);
 %>
