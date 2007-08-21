@@ -82,8 +82,19 @@ public class AutoLoginFilter implements Filter {
 					(AutoLogin)InstancePool.get(autoLogins[i]);
 
 				try {
-					String loginRemoteUser =
-						login(httpReq, httpRes, ses, autoLogin);
+					String[] credentials = autoLogin.login(httpReq, httpRes);
+
+					String redirect = (String)req.getAttribute(
+						AutoLogin.AUTO_LOGIN_REDIRECT);
+
+					if (redirect != null) {
+						httpRes.sendRedirect(redirect);
+
+						return;
+					}
+
+					String loginRemoteUser = getLoginRemoteUser(
+						httpReq, httpRes, ses, credentials);
 
 					if (loginRemoteUser != null) {
 						req = new ProtectedServletRequest(
@@ -109,12 +120,10 @@ public class AutoLoginFilter implements Filter {
 	public void destroy() {
 	}
 
-	protected String login(
+	protected String getLoginRemoteUser(
 			HttpServletRequest req, HttpServletResponse res, HttpSession ses,
-			AutoLogin autoLogin)
+			String[] credentials)
 		throws Exception {
-
-		String[] credentials = autoLogin.login(req, res);
 
 		if ((credentials != null) && (credentials.length == 3)) {
 			String jUsername = credentials[0];

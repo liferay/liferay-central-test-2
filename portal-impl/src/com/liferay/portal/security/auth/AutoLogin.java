@@ -33,6 +33,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface AutoLogin {
 
+	/**
+	 * Set a request attribute with this variable to tell the AutoLoginFilter to
+	 * redirect the user to a specified location.
+	 */
+	public static final String AUTO_LOGIN_REDIRECT = "AUTO_LOGIN_REDIRECT";
+
 	public String[] login(HttpServletRequest req, HttpServletResponse res)
 		throws AutoLoginException;
 
