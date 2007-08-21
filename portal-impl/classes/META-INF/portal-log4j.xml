@@ -472,6 +472,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="de.hunsicker">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="de.nava.informa">
 		<priority value="ERROR" />
 	</category>
