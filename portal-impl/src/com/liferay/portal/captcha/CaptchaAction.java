@@ -22,6 +22,7 @@
 
 package com.liferay.portal.captcha;
 
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PropsFiles;
 import com.liferay.portal.util.WebKeys;
@@ -77,6 +78,8 @@ public class CaptchaAction extends PortletAction {
 				((ActionResponseImpl)res).getHttpServletResponse();
 
 			_producer.createImage(httpRes.getOutputStream(), captchaText);
+
+			setForward(req, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
 			_log.error(e);

@@ -23,6 +23,7 @@
 package com.liferay.portlet.calendar.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -86,6 +87,8 @@ public class ExportEventsAction extends PortletAction {
 				((ActionResponseImpl)res).getHttpServletResponse();
 
 			ServletResponseUtil.sendFile(httpRes, file.getName(), is);
+
+			setForward(req, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

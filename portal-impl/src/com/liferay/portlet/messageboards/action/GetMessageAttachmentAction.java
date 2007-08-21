@@ -87,6 +87,8 @@ public class GetMessageAttachmentAction extends PortletAction {
 			((ActionResponseImpl)res).getHttpServletResponse();
 
 		getFile(messageId, fileName, httpRes);
+
+		setForward(req, ActionConstants.COMMON_NULL);
 	}
 
 	protected void getFile(

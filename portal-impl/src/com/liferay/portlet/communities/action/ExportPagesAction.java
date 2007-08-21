@@ -24,6 +24,7 @@ package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -65,6 +66,8 @@ public class ExportPagesAction extends PortletAction {
 				((ActionResponseImpl)res).getHttpServletResponse();
 
 			ServletResponseUtil.sendFile(httpRes, fileName, byteArray);
+
+			setForward(req, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

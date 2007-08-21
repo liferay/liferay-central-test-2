@@ -107,6 +107,8 @@ public class GetFileAction extends PortletAction {
 			((ActionResponseImpl)res).getHttpServletResponse();
 
 		getFile(folderId, name, version, fileShortcutId, themeDisplay, httpRes);
+
+		setForward(req, ActionConstants.COMMON_NULL);
 	}
 
 	protected void getFile(

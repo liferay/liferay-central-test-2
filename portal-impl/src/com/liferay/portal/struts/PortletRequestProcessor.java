@@ -250,6 +250,15 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		if (forward == null) {
 			_log.error("Forward does not exist");
 		}
+		else {
+
+			// Don't render a null path. This is useful if you're sending a file
+			// in an exclusive window state.
+
+			if (forward.getPath().equals(ActionConstants.COMMON_NULL)) {
+				return;
+			}
+		}
 
 		super.processForwardConfig(req, res, forward);
 	}
