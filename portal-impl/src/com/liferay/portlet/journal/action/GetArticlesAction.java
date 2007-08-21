@@ -175,7 +175,7 @@ public class GetArticlesAction extends Action {
 		Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
 		Document resultsDoc =
-			DocumentFactory.getInstance().createDocument();
+			DocumentFactory.getInstance().createDocument("UTF-8");
 
 		Element resultSetEl = resultsDoc.addElement("result-set");
 
@@ -201,7 +201,7 @@ public class GetArticlesAction extends Action {
 			JournalUtil.addAllReservedEls(resultEl, tokens, article);
 		}
 
-		return JournalUtil.formatXML(resultsDoc).getBytes();
+		return JournalUtil.formatXML(resultsDoc).getBytes("UTF-8");
 	}
 
 	private static Log _log = LogFactory.getLog(GetArticlesAction.class);
