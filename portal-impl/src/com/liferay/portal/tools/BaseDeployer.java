@@ -290,7 +290,10 @@ public class BaseDeployer {
 
 			String excludes = StringPool.BLANK;
 
-			if (appServerType.equals("tomcat")) {
+			if (appServerType.startsWith("jboss")) {
+				excludes += "**/WEB-INF/lib/log4j.jar,";
+			}
+			else if (appServerType.equals("tomcat")) {
 				String[] libs = FileUtil.listFiles(tomcatLibDir);
 
 				for (int i = 0; i < libs.length; i++) {

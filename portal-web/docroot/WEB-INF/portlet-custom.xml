@@ -910,26 +910,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>38</portlet-name>
-		<display-name>Theme Gallery</display-name>
-		<portlet-class>com.liferay.portlet.JSPPortlet</portlet-class>
-		<init-param>
-			<name>view-jsp</name>
-			<value>/portlet/theme_gallery/view.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>39</portlet-name>
 		<display-name>RSS</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>

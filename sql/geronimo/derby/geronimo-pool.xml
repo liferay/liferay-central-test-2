@@ -4,7 +4,7 @@
         <dep:moduleId>
             <dep:groupId>liferay</dep:groupId>
             <dep:artifactId>liferay-pool</dep:artifactId>
-            <dep:version>4.3.0</dep:version>
+            <dep:version>4.3.1</dep:version>
             <dep:type>car</dep:type>
         </dep:moduleId>
         <dep:dependencies>

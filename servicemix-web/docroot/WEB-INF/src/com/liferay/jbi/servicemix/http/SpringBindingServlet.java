@@ -25,7 +25,7 @@ package com.liferay.jbi.servicemix.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
-import com.liferay.util.ContentTypes;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.util.servlet.UploadServletRequest;
 
 import java.io.IOException;

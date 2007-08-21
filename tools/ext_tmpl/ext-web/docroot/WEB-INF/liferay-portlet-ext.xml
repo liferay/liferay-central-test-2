@@ -204,11 +204,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>38</portlet-name>
-		<struts-path>theme_gallery</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>39</portlet-name>
 		<struts-path>rss</struts-path>
 		<include>true</include>

@@ -38,7 +38,7 @@
 		<filter-class>com.liferay.filters.header.HeaderFilter</filter-class>
 		<init-param>
 			<param-name>Cache-Control</param-name>
-			<param-value>max-age=3660</param-value>
+			<param-value>max-age=3660, public</param-value>
 		</init-param>
 	</filter>
 	<filter>

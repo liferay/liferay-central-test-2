@@ -407,15 +407,6 @@
 		<render-weight>0</render-weight>
 	</portlet>
 	<portlet>
-		<portlet-name>38</portlet-name>
-		<icon>/html/portlet/theme_gallery/icon.png</icon>
-		<struts-path>theme_gallery</struts-path>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
-	</portlet>
-	<portlet>
 		<portlet-name>39</portlet-name>
 		<icon>/html/portlet/rss/icon.png</icon>
 		<struts-path>rss</struts-path>

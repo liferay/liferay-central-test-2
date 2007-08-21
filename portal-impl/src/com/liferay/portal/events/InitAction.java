@@ -115,10 +115,6 @@ public class InitAction extends SimpleAction {
 
 			ClassLoader classLoader = getClass().getClassLoader();
 
-			Logger rootLogger = Logger.getRootLogger();
-
-			rootLogger.removeAllAppenders();
-
 			configureLog4J(
 				classLoader.getResource("META-INF/portal-log4j.xml"));
 			configureLog4J(
