@@ -279,7 +279,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = DLFolderUtil.findByGroupId(groupId).iterator();
+		Iterator itr = DLFolderUtil.findByG_P(
+			groupId, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID).iterator();
 
 		while (itr.hasNext()) {
 			DLFolder folder = (DLFolder)itr.next();

@@ -208,7 +208,8 @@ public class BookmarksFolderLocalServiceImpl
 	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = BookmarksFolderUtil.findByGroupId(groupId).iterator();
+		Iterator itr = BookmarksFolderUtil.findByG_P(
+			groupId, BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID).iterator();
 
 		while (itr.hasNext()) {
 			BookmarksFolder folder = (BookmarksFolder)itr.next();

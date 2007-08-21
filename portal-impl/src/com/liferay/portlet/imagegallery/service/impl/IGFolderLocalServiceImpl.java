@@ -220,7 +220,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = IGFolderUtil.findByGroupId(groupId).iterator();
+		Iterator itr = IGFolderUtil.findByG_P(
+			groupId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID).iterator();
 
 		while (itr.hasNext()) {
 			IGFolder folder = (IGFolder)itr.next();
