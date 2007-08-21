@@ -66,6 +66,17 @@ public class PortalUtil {
 		}
 	}
 
+	public static String getPortletNamespace(String portletName) {
+		Object returnObj = _invoke(_METHOD_GETPORTLETNAMESPACE, portletName);
+
+		if (returnObj != null) {
+			return (String)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
 	public static String getUserPassword(HttpSession ses) {
 		Object returnObj = _invoke(_METHOD_GETUSERPASSWORD, ses);
 
@@ -158,6 +169,9 @@ public class PortalUtil {
 
 	private static final String _METHOD_GETHTTPSERVLETRESPONSE =
 		"getHttpServletResponse";
+
+	private static final String _METHOD_GETPORTLETNAMESPACE =
+		"getPortletNamespace";
 
 	private static final String _METHOD_GETUSERPASSWORD = "getUserPassword";
 

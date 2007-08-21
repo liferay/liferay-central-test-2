@@ -968,7 +968,13 @@ public class PortalUtil {
 	}
 
 	public static String getPortletNamespace(String portletName) {
-		return StringPool.UNDERLINE + portletName + StringPool.UNDERLINE;
+		StringMaker sm = new StringMaker();
+
+		sm.append(StringPool.UNDERLINE);
+		sm.append(portletName);
+		sm.append(StringPool.UNDERLINE);
+
+		return sm.toString();
 	}
 
 	public static String getPortletXmlFileName()

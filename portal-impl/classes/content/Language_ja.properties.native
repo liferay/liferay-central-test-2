@@ -1212,6 +1212,7 @@ gifts=ギフト
 global-tags-are-injected-to-all-pages-that-you-visit=全体的な札はあなたが訪問するすべてのページに注入される。あなたが気遣う付けられた内容があなたのために約自動的に取り出されるように内容を個人化するのにそれらが使用されている。
 go-to-paypal-and-set-up-ipn-to-post-to-x=Go to PayPal and set up IPN to post to {0}.
 go=行きなさい
+google-license=Google 免許証
 googles-spelling-suggestion-for=Google's spelling suggestion for {0} is {1}.
 government=政府
 grace-limit-help=これは新しいパスワードを入れるようにそれらが要求される前にパスワードが切れた後ユーザーがログインできる時の数を定める。

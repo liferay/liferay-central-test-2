@@ -1215,6 +1215,7 @@ gifts=Presentes
 global-tags-are-injected-to-all-pages-that-you-visit=Os Tag globais são injetados a todas as páginas que você visita. São usados personalizar o índice de modo que o índice que etiquetado você se importa seja recuperado aproximadamente automaticamente para você.
 go-to-paypal-and-set-up-ipn-to-post-to-x=Go to PayPal and set up IPN to post to {0}.
 go=Vá
+google-license=Licença De Google
 googles-spelling-suggestion-for=Google's spelling suggestion for {0} is {1}.
 government=Governo
 grace-limit-help=Isto determina o número das épocas um início de uma sessão da lata do usuário depois que sua senha expirou, antes que estejam requeridos para incorporar uma senha nova.

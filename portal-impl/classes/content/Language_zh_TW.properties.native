@@ -1215,6 +1215,7 @@ gifts=禮物
 global-tags-are-injected-to-all-pages-that-you-visit=全球性標記被注射對您參觀的所有頁。他們被使用個人化內容以便您關心的被標記的內容自動地被檢索為您。
 go-to-paypal-and-set-up-ipn-to-post-to-x=到 PayPal 設定 IPN 貼入 {0}.
 go=確認
+google-license=Google 執照
 googles-spelling-suggestion-for=Google's 的 {0} 拼字建議是 {1}.
 government=政府
 grace-limit-help=這確定用戶能登錄的次數在他們的密碼到期了之後, 在他們必需輸入一個新新口令之前。
