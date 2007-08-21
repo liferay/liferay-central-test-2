@@ -1211,6 +1211,10 @@
 			<finder-column name="userId" />
 			<finder-column name="type" />
 		</finder>
+		<finder name="T_E" return-type="UserIdMapper">
+			<finder-column name="type" />
+			<finder-column name="externalUserId" />
+		</finder>
 	</entity>
 	<entity name="UserTracker" local-service="true" remote-service="false">
 

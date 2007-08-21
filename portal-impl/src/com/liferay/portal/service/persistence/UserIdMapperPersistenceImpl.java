@@ -464,6 +464,111 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public UserIdMapper findByT_E(String type, String externalUserId)
+		throws NoSuchUserIdMapperException, SystemException {
+		UserIdMapper userIdMapper = fetchByT_E(type, externalUserId);
+
+		if (userIdMapper == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No UserIdMapper exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("type=");
+			msg.append(type);
+			msg.append(", ");
+			msg.append("externalUserId=");
+			msg.append(externalUserId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchUserIdMapperException(msg.toString());
+		}
+
+		return userIdMapper;
+	}
+
+	public UserIdMapper fetchByT_E(String type, String externalUserId)
+		throws SystemException {
+		String finderClassName = UserIdMapper.class.getName();
+		String finderMethodName = "fetchByT_E";
+		String[] finderParams = new String[] {
+				String.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { type, externalUserId };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portal.model.UserIdMapper WHERE ");
+
+				if (type == null) {
+					query.append("type_ IS NULL");
+				}
+				else {
+					query.append("type_ = ?");
+				}
+
+				query.append(" AND ");
+
+				if (externalUserId == null) {
+					query.append("externalUserId IS NULL");
+				}
+				else {
+					query.append("externalUserId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (type != null) {
+					q.setString(queryPos++, type);
+				}
+
+				if (externalUserId != null) {
+					q.setString(queryPos++, externalUserId);
+				}
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (UserIdMapper)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (UserIdMapper)list.get(0);
+			}
+		}
+	}
+
 	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		Session session = null;
@@ -578,6 +683,12 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		remove(userIdMapper);
 	}
 
+	public void removeByT_E(String type, String externalUserId)
+		throws NoSuchUserIdMapperException, SystemException {
+		UserIdMapper userIdMapper = findByT_E(type, externalUserId);
+		remove(userIdMapper);
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -677,6 +788,85 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				if (type != null) {
 					q.setString(queryPos++, type);
+				}
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByT_E(String type, String externalUserId)
+		throws SystemException {
+		String finderClassName = UserIdMapper.class.getName();
+		String finderMethodName = "countByT_E";
+		String[] finderParams = new String[] {
+				String.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { type, externalUserId };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs);
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portal.model.UserIdMapper WHERE ");
+
+				if (type == null) {
+					query.append("type_ IS NULL");
+				}
+				else {
+					query.append("type_ = ?");
+				}
+
+				query.append(" AND ");
+
+				if (externalUserId == null) {
+					query.append("externalUserId IS NULL");
+				}
+				else {
+					query.append("externalUserId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (type != null) {
+					q.setString(queryPos++, type);
+				}
+
+				if (externalUserId != null) {
+					q.setString(queryPos++, externalUserId);
 				}
 
 				Long count = null;

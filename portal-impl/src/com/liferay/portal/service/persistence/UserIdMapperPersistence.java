@@ -89,6 +89,15 @@ public interface UserIdMapperPersistence {
 	public com.liferay.portal.model.UserIdMapper fetchByU_T(long userId,
 		java.lang.String type) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserIdMapper findByT_E(
+		java.lang.String type, java.lang.String externalUserId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserIdMapperException;
+
+	public com.liferay.portal.model.UserIdMapper fetchByT_E(
+		java.lang.String type, java.lang.String externalUserId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -113,12 +122,20 @@ public interface UserIdMapperPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserIdMapperException;
 
+	public void removeByT_E(java.lang.String type,
+		java.lang.String externalUserId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserIdMapperException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByU_T(long userId, java.lang.String type)
+		throws com.liferay.portal.SystemException;
+
+	public int countByT_E(java.lang.String type, java.lang.String externalUserId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

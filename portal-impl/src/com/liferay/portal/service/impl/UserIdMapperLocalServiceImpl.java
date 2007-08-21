@@ -51,6 +51,13 @@ public class UserIdMapperLocalServiceImpl
 		return UserIdMapperUtil.findByU_T(userId, type);
 	}
 
+	public UserIdMapper getUserIdMapperByExternalUserId(
+			String type, String externalUserId)
+		throws PortalException, SystemException {
+
+		return UserIdMapperUtil.findByT_E(type, externalUserId);
+	}
+
 	public List getUserIdMappers(long userId) throws SystemException {
 		return UserIdMapperUtil.findByUserId(userId);
 	}
