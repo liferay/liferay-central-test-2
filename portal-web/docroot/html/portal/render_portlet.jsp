@@ -351,24 +351,6 @@ else {
 
 portletDisplay.setURLPortlet(portletIcon);
 
-// Portlet title
-
-String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, LocaleUtil.toLanguageId(locale));
-
-if (portletDisplay.isAccess() && portletDisplay.isActive()) {
-	if (Validator.isNull(portletTitle)) {
-		portletTitle = renderResponseImpl.getTitle();
-	}
-}
-
-if (Validator.isNull(portletTitle)) {
-	ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
-
-	portletTitle = resourceBundle.getString(JavaConstants.JAVAX_PORTLET_TITLE);
-}
-
-portletDisplay.setTitle(portletTitle);
-
 // URL close
 
 String urlClose = "javascript: closePortlet('" + plid.longValue() + "', '" + portletDisplay.getId() + "', '" + themeDisplay.getDoAsUserId() + "');";

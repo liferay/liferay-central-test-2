@@ -35,6 +35,8 @@ Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 
 PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(request, portletDisplay.getId(), true, true);
 
+RenderResponseImpl renderResponseImpl = (RenderResponseImpl)renderResponse;
+
 // Portlet decorate
 
 boolean tilesPortletDecorateBoolean = GetterUtil.getBoolean(tilesPortletDecorate, true);
@@ -58,6 +60,24 @@ if (portletDecorateObj != null) {
 //if (!renderRequest.getWindowState().equals(WindowState.NORMAL)) {
 //	portletDecorate = true;
 //}
+
+// Portlet title
+
+String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, LocaleUtil.toLanguageId(locale));
+
+if (portletDisplay.isAccess() && portletDisplay.isActive()) {
+	if (Validator.isNull(portletTitle)) {
+		portletTitle = renderResponseImpl.getTitle();
+	}
+}
+
+if (Validator.isNull(portletTitle)) {
+	ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
+
+	portletTitle = resourceBundle.getString(JavaConstants.JAVAX_PORTLET_TITLE);
+}
+
+portletDisplay.setTitle(portletTitle);
 
 Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
 
