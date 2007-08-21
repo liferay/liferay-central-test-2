@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.action;
 
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -29,6 +30,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -37,6 +39,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -92,21 +96,37 @@ public class RSSAction extends Action {
 					"/blogs/find_category?p_l_id=" + plid + "&categoryId=" +
 						categoryId;
 
-			rss = BlogsEntryServiceUtil.getCategoryBlogsRSS(
-				categoryId, SearchContainer.DEFAULT_DELTA, type, version,
-				feedURL, entryURL);
+			try {
+				rss = BlogsEntryServiceUtil.getCategoryBlogsRSS(
+					categoryId, SearchContainer.DEFAULT_DELTA, type, version,
+					feedURL, entryURL);
+			}
+			catch (NoSuchCategoryException nsce) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsce);
+				}
+			}
 		}
 		else {
 			String feedURL =
 				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
 					"/blogs/find_entry?p_l_id=" + plid;
 
-			rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
-				groupId, SearchContainer.DEFAULT_DELTA, type, version,
-				feedURL, entryURL);
+			try {
+				rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
+					groupId, SearchContainer.DEFAULT_DELTA, type, version,
+					feedURL, entryURL);
+			}
+			catch (NoSuchGroupException nsge) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsge);
+				}
+			}
 		}
 
 		return rss.getBytes();
 	}
+
+	private static Log _log = LogFactory.getLog(RSSAction.class);
 
 }

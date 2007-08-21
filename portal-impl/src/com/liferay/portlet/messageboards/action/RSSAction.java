@@ -31,6 +31,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -41,6 +42,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -100,9 +103,16 @@ public class RSSAction extends Action {
 					"/message_boards/find_category?p_l_id=" + plid +
 						"&categoryId=" + categoryId;
 
-			rss = MBMessageServiceUtil.getCategoryMessagesRSS(
-				categoryId, SearchContainer.DEFAULT_DELTA, type, version,
-				feedURL, entryURL, prefs);
+			try {
+				rss = MBMessageServiceUtil.getCategoryMessagesRSS(
+					categoryId, SearchContainer.DEFAULT_DELTA, type, version,
+					feedURL, entryURL, prefs);
+			}
+			catch (NoSuchCategoryException nsce) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsce);
+				}
+			}
 		}
 		else {
 			String feedURL =
@@ -117,5 +127,7 @@ public class RSSAction extends Action {
 
 		return rss.getBytes();
 	}
+
+	private static Log _log = LogFactory.getLog(RSSAction.class);
 
 }
