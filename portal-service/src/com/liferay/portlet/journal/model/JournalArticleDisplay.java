@@ -54,4 +54,14 @@ public interface JournalArticleDisplay extends Serializable {
 
 	public void setContent(String content);
 
+	public String getType();
+
+	public String getStructureId();
+
+	public void setStructureId(String structureId);
+
+	public String getTemplateId();
+
+	public void setTemplateId(String templateId);
+
 }

@@ -32,12 +32,11 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
  */
 public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 
-	public JournalArticleDisplayImpl(long id, long resourcePrimKey,
-									 long groupId, long userId,
-									 String articleId, double version,
-									 String title, String description,
-									 String[] availableLocales,
-									 String content) {
+	public JournalArticleDisplayImpl(
+		long id, long resourcePrimKey, long groupId, long userId,
+		String articleId, double version, String title, String description,
+		String[] availableLocales, String content, String type,
+		String structureId, String templateId) {
 
 		_id = id;
 		_resourcePrimKey = resourcePrimKey;
@@ -49,6 +48,9 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		_description = description;
 		_availableLocales = availableLocales;
 		_content = content;
+		_type = type;
+		_structureId = structureId;
+		_templateId = templateId;
 	}
 
 	public long getId() {
@@ -95,6 +97,26 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		_content = content;
 	}
 
+	public String getType() {
+		return _type;
+	}
+
+	public String getStructureId() {
+		return _structureId;
+	}
+
+	public void setStructureId(String structureId) {
+		_structureId = structureId;
+	}
+
+	public String getTemplateId() {
+		return _templateId;
+	}
+
+	public void setTemplateId(String templateId) {
+		_templateId = templateId;
+	}
+
 	private long _id;
 	private long _resourcePrimKey;
 	private long _groupId;
@@ -105,5 +127,8 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 	private String _description;
 	private String[] _availableLocales;
 	private String _content;
+	private String _type;
+	private String _structureId;
+	private String _templateId;
 
 }

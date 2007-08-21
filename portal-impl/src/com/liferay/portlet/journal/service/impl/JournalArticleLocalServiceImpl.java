@@ -869,7 +869,8 @@ public class JournalArticleLocalServiceImpl
 			article.getId(), article.getResourcePrimKey(), article.getGroupId(),
 			article.getUserId(), article.getArticleId(), article.getVersion(),
 			article.getTitle(), article.getDescription(),
-			article.getAvailableLocales(), content);
+			article.getAvailableLocales(), content, article.getType(),
+			article.getStructureId(), templateId);
 	}
 
 	public List getArticles() throws SystemException {
