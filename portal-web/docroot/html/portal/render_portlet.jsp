@@ -589,8 +589,6 @@ if (portlet.isActive() && access && supportsMimeType) {
 	catch (Exception e) {
 		portletException = true;
 
-		e.printStackTrace();
-
 		LogUtil.log(_log, e);
 	}
 }
