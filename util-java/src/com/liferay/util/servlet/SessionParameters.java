@@ -23,9 +23,9 @@
 package com.liferay.util.servlet;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.PwdGenerator;
+import com.liferay.util.SystemProperties;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

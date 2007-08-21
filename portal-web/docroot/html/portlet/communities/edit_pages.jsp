@@ -1194,12 +1194,14 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							while (itr2.hasNext()) {
 								Portlet curPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), (String)itr2.next());
 
-								PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
+								if (curPortlet != null) {
+									PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
 
-								if ((portletDataHandler != null) && !portletIdsSet.contains(curPortlet.getRootPortletId())) {
-									portletIdsSet.add(curPortlet.getRootPortletId());
+									if ((portletDataHandler != null) && !portletIdsSet.contains(curPortlet.getRootPortletId())) {
+										portletIdsSet.add(curPortlet.getRootPortletId());
 
-									portletsList.add(curPortlet);
+										portletsList.add(curPortlet);
+									}
 								}
 							}
 						}

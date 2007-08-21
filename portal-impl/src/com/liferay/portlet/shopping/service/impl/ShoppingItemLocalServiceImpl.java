@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
@@ -63,6 +62,7 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Http;
 import com.liferay.util.PwdGenerator;
+import com.liferay.util.SystemProperties;
 
 import java.io.File;
 import java.io.FileOutputStream;

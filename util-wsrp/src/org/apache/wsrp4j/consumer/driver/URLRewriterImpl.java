@@ -32,7 +32,7 @@ import org.apache.wsrp4j.log.LogManager;
 import org.apache.wsrp4j.log.Logger;
 import org.apache.wsrp4j.util.Constants;
 
-import com.liferay.portal.kernel.util.SystemProperties;
+import com.liferay.util.SystemProperties;
 
 /**
  * This class implements the URLRewriter-interface providing a method

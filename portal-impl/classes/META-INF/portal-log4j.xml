@@ -480,8 +480,12 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="net.sf.ehcache">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="net.sf.hibernate">
-		<priority value="WARN" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="org.apache.activemq">

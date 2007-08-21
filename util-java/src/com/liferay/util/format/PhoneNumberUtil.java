@@ -24,7 +24,7 @@ package com.liferay.util.format;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.kernel.util.SystemProperties;
+import com.liferay.util.SystemProperties;
 
 /**
  * <a href="PhoneNumberUtil.java.html"><b><i>View Source</i></b></a>

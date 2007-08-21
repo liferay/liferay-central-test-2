@@ -25,7 +25,6 @@ package com.liferay.util;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.UnsupportedEncodingException;
@@ -52,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class HttpUtil {
 
-	public static final String FILE_ENCODING = "file.encoding";
+	public static final String ENCODING = "UTF-8";
 
 	public static String decodeURL(String url) {
 		if (url == null) {
@@ -60,7 +59,7 @@ public class HttpUtil {
 		}
 
 		try {
-			return URLDecoder.decode(url, SystemProperties.get(FILE_ENCODING));
+			return URLDecoder.decode(url, ENCODING);
 		}
 		catch (UnsupportedEncodingException uee) {
 			_log.error(uee, uee);
@@ -75,7 +74,7 @@ public class HttpUtil {
 		}
 
 		try {
-			return URLEncoder.encode(url, SystemProperties.get(FILE_ENCODING));
+			return URLEncoder.encode(url, ENCODING);
 		}
 		catch (UnsupportedEncodingException uee) {
 			_log.error(uee, uee);

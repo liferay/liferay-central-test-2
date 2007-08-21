@@ -22,8 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.util.SystemProperties;
 
 /**
  * <a href="ValueMapperUtil.java.html"><b><i>View Source</i></b></a>

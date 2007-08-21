@@ -23,7 +23,7 @@
 package com.liferay.portal.lucene;
 
 import com.liferay.portal.job.IntervalJob;
-import com.liferay.portal.kernel.util.SystemProperties;
+import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;
 import com.liferay.util.ant.DeleteTask;
 
