@@ -964,7 +964,6 @@ enter-the-encryption-algorithm-used-for-passwords-stored-in-the-ldap-server=أد
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=أدخل الرابط التشعبي الودّي والذي سيستخدم من قبل الصفحات العامة والخاصة.
 enter-the-name,-image,-and-priority-level-in-descending-order=أدخل الإسم، الصورة ومستوى الأولوية بترتيب تنازلي. النقاشات بالأولويات الأعلى ستعرض قبل تلك بالأولويات الأدنى. الإسم هو إسم العرض للأولوية. الصورة هي صورة العرض للأولوية ويمكن أن تكون رابط تشعبي كامل أو رابط تشعبي نسبة للملمح.
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=أدخل الموقع الإفتراضي الخاص والعام والذي سيقترن بالرابط التشعبي الودي الخاص والعام
-enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=أدخل فلتر البحث والذي سيستخدم لإختبار صحة شرعية مستخدم. الرموز @company_id@، @email_address@، @user_id@ سيتم إستبدالها بالقيم الصحيحة عند التنفيذ.
 enter-the-workflow-definition-below-in-xml-format=أدخل نص تدفق العمل بصيغة الـXML.
 enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite=أدخل عناوين البريد الإلكتروني لأصدقاءك الذين ترغب بدعوتهم وذلك {0} عنوان كحد أعلى. أدخل كل عنوان على سطر بحدة.
 enterprise-logo=شعار المنظمة العليا
