@@ -191,7 +191,9 @@
 						redirect="<%= currentURL %>"
 					/>
 
-					<br />
+					<c:if test="<%= pluginPackages.size() > 0 %>">
+						<br />
+					</c:if>
 
 					<input type="button" value="<liferay-ui:message key="install-more-plugins" />" onClick="self.location = '<%= pluginInstallerURL.toString() %>';" />
 
