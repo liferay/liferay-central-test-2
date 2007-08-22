@@ -131,6 +131,12 @@ public class ThemeLocalUtil {
 		Theme theme = (Theme)_getThemes(companyId).get(themeId);
 
 		if (theme == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"No theme found for specified theme id " + themeId +
+						". Returning the default theme.");
+			}
+
 			if (wapTheme) {
 				themeId = ThemeImpl.getDefaultWapThemeId();
 			}
@@ -139,6 +145,20 @@ public class ThemeLocalUtil {
 			}
 
 			theme = (Theme)_themes.get(themeId);
+		}
+
+		if (theme == null) {
+			_log.error(
+				"No theme found for default theme id " + themeId +
+					". Returning a random theme.");
+
+			Iterator itr = _themes.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry entry = (Map.Entry)itr.next();
+
+				theme = (Theme)entry.getValue();
+			}
 		}
 
 		return theme;
