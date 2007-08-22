@@ -13,10 +13,7 @@
 			/>
 		</copy>
 
-		<copy
-			file="${project.dir}/portal-impl/classes/META-INF/portal-log4j.xml"
-			tofile="docroot/WEB-INF/classes/log4j.xml"
-		/>
+		<copy file="${project.dir}/classes/log4j.properties" todir="docroot/WEB-INF/classes" />
 
 		<antcall target="build-common-web.war" />
 	</target>
