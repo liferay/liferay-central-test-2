@@ -141,22 +141,24 @@ public class LayoutAction extends Action {
 				if (action.equals("1")) {
 					Portlet portlet = processActionRequest(req, res);
 
-					ActionResponseImpl actionResponseImpl =
-						(ActionResponseImpl)req.getAttribute(
-							JavaConstants.JAVAX_PORTLET_RESPONSE);
+					if (portlet != null) {
+						ActionResponseImpl actionResponseImpl =
+							(ActionResponseImpl)req.getAttribute(
+								JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-					String redirectLocation =
-						actionResponseImpl.getRedirectLocation();
+						String redirectLocation =
+							actionResponseImpl.getRedirectLocation();
 
-					if (Validator.isNotNull(redirectLocation)) {
-						res.sendRedirect(redirectLocation);
+						if (Validator.isNotNull(redirectLocation)) {
+							res.sendRedirect(redirectLocation);
 
-						return null;
-					}
+							return null;
+						}
 
-					if (portlet.isActionURLRedirect()) {
-						redirectActionURL(
-							req, res, actionResponseImpl, portlet);
+						if (portlet.isActionURLRedirect()) {
+							redirectActionURL(
+								req, res, actionResponseImpl, portlet);
+						}
 					}
 				}
 				else if (action.equals("0")) {
@@ -311,6 +313,10 @@ public class LayoutAction extends Action {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			companyId, portletId);
+
+		if (portlet == null) {
+			return null;
+		}
 
 		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
 
