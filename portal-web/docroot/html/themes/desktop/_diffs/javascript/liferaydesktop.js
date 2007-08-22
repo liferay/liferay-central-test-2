@@ -11,8 +11,8 @@ var LiferayDesktop = {
 
 		Liferay.Portlet.last(function() {
 			LiferayDesktop.moveBar();
-			_$J(window).resize(LiferayDesktop.moveBar);
-			_$J(window).scroll(LiferayDesktop.moveBar);
+			jQuery(window).resize(LiferayDesktop.moveBar);
+			jQuery(window).scroll(LiferayDesktop.moveBar);
 
 			jQuery("#layout-desktop-icons").mouseout(function() {
 				Fisheye.reset = true;
@@ -50,7 +50,7 @@ var LiferayDesktop = {
 			icon.onclick = function() {
 				LiferayDesktop.maximize(plid, portletId, doAsUserId);
 			};
-			_$J("#p_p_id_" + portletId + "_").css("display", "none");
+			jQuery("#p_p_id_" + portletId + "_").css("display", "none");
 		}
 		else {
 			icon.onclick = function() {
@@ -61,20 +61,20 @@ var LiferayDesktop = {
 		iconDock.appendChild(icon);
 		
 		if (minimized) {
-			_$J(icon).fadeTo("fast", 0.5);
+			jQuery(icon).fadeTo("fast", 0.5);
 		}
 	},
 
 	remove: function(plid, portletId, doAsUserId) {
 		var icon = document.getElementById("liferay-desktop-icon_" + portletId);
-		var portlet = _$J("#p_p_id_" + portletId + "_");
+		var portlet = jQuery("#p_p_id_" + portletId + "_");
 		
 		portlet.DropOutDown("normal", function() {
 			closePortlet(plid, portletId, doAsUserId, true);
 		});
 	
 		/*
-		_$J(icon).Shrink("normal", function() {
+		jQuery(icon).Shrink("normal", function() {
 			icon.parentNode.removeChild(icon);
 		});
 		*/
@@ -91,7 +91,7 @@ var LiferayDesktop = {
 			LiferayDesktop.jiggleAnimate,
 			{
 				count: 0,
-				element: _$J("#liferay-desktop-icon_" + portletId),
+				element: jQuery("#liferay-desktop-icon_" + portletId),
 				sound: sound
 			}
 		);
@@ -102,7 +102,7 @@ var LiferayDesktop = {
 			LiferayDesktop.jiggleAnimate,
 			{
 				count: 0,
-				element: _$J("#p_p_id_" + portletId + "_ table:first"),
+				element: jQuery("#p_p_id_" + portletId + "_ table:first"),
 				multiple: 2,
 				sound: false
 			}
@@ -144,7 +144,7 @@ var LiferayDesktop = {
 	},
 
 	maximize: function(plid, portletId, doAsUserId) {
-		var portlet = _$J("#p_p_id_" + portletId + "_");
+		var portlet = jQuery("#p_p_id_" + portletId + "_");
 		var table = portlet.find("#p_p_table_" + portletId);
 		
 		if (table.css("display") == "none") {
@@ -154,7 +154,7 @@ var LiferayDesktop = {
 			this.toggle(plid, portletId, doAsUserId, true);
 			LiferayDesktop.toTop(portletId);
 			
-	    	_$J("#liferay-desktop-icon_" + portletId).TransferTo( {
+	    	jQuery("#liferay-desktop-icon_" + portletId).TransferTo( {
 		    	duration: 300, 
 		    	to:  "p_p_id_" + portletId + "_",
 		    	className: 'desktop-icon-transfer'
@@ -165,13 +165,13 @@ var LiferayDesktop = {
 				LiferayDesktop.toTop(portletId);
 			};
 
-			_$J(icon).fadeTo("normal", 1);
+			jQuery(icon).fadeTo("normal", 1);
 		}
 
 	},
 
 	minimize: function(plid, portletId, doAsUserId) {
-		var portlet = _$J("#p_p_id_" + portletId + "_");
+		var portlet = jQuery("#p_p_id_" + portletId + "_");
 		var table = portlet.find("#p_p_table_" + portletId);
 		var icon = document.getElementById("liferay-desktop-icon_" + portletId);
 
@@ -191,11 +191,11 @@ var LiferayDesktop = {
 			LiferayDesktop.maximize(plid, portletId, doAsUserId);
 		};
 		
-		_$J(icon).fadeTo("normal", 0.5);
+		jQuery(icon).fadeTo("normal", 0.5);
 	},
 
 	toggle: function(plid, portletId, doAsUserId, restore) {
-		_$J.ajax({
+		jQuery.ajax({
 			url: themeDisplay.getPathMain() + "/portal/update_layout",
 			type: "POST",
 			data: {
@@ -209,7 +209,7 @@ var LiferayDesktop = {
 	},
 
 	moveBar: function() {
-		_$J("#layout-desktop-icons-box").css("top",(Viewport.frame().y + Viewport.scroll().y) + "px");
+		jQuery("#layout-desktop-icons-box").css("top",(Viewport.frame().y + Viewport.scroll().y) + "px");
 	}
 };
 

@@ -7,10 +7,10 @@ Liferay.Service = {
 		params.serviceParameters = Liferay.Service.getParameters(params);
 
 		if (callback) {
-			_$J.getJSON(Liferay.Service.url, params, callback);
+			jQuery.getJSON(Liferay.Service.url, params, callback);
 		}
 		else {
-			var xHR = _$J.ajax(
+			var xHR = jQuery.ajax(
 				{
 					url: Liferay.Service.url,
 					data: params,

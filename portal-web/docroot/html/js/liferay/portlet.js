@@ -42,14 +42,14 @@ Liferay.Portlet = {
 
 	processAll: function(id) {
 		for (var i = 0; i < this.fnAll.length; i++) {
-			this.fnAll[i](id, _$J("#p_p_id_" + id + "_"));
+			this.fnAll[i](id, jQuery("#p_p_id_" + id + "_"));
 		}
 	},
 
 	processPortlet: function(id) {
 		if (this.fn[id]) {
 			for (var i = 0; i < this.fn[id].length; i++) {
-				this.fn[id][i](id, _$J("#p_p_id_" + id + "_"));
+				this.fn[id][i](id, jQuery("#p_p_id_" + id + "_"));
 			}
 			this.fn[id] = [];
 		}
@@ -91,7 +91,7 @@ Liferay.Portlet = {
 	findIndex: function(portlet) {
 		var index = -1;
 
-		_$J(".portlet-boundary", portlet.parentNode).each(function(i) {
+		jQuery(".portlet-boundary", portlet.parentNode).each(function(i) {
 			if (this == portlet) {
 				index = i;
 			}

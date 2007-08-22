@@ -169,7 +169,7 @@
 		AjaxUtil.update(url, message, {onComplete: function(){Liferay.Popup.center()}});
 	}
 
-	_$J(document).ready(
+	jQuery(document).ready(
 		function() {
 			Liferay.Util.addInputType();
 			Liferay.Util.addInputFocus();
@@ -184,7 +184,7 @@
 
 	<c:if test="<%= !themeDisplay.isStatePopUp() %>">
 		<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-			_$J(document).ready(
+			jQuery(document).ready(
 				function() {
 					Messaging.init("<%= request.getRemoteUser() %>");
 				}
@@ -193,7 +193,7 @@
 
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED)) && themeDisplay.isSignedIn()%>">
 			if (!Liferay.Browser.is_safari) {
-				_$J(document).last(
+				jQuery(document).last(
 					function() {
 						ReverseAjax.initialize();
 					}
@@ -206,7 +206,7 @@
 		%>
 
 		<c:if test="<%= Validator.isNotNull(scroll) %>">
-			_$J(document).last(
+			jQuery(document).last(
 				function() {
 					document.getElementById("<%= scroll %>").scrollIntoView();
 				}
@@ -233,7 +233,7 @@
                 %>};
             </c:when>
             <c:otherwise>
-                _$J(document).ready(
+                jQuery(document).ready(
                     function() {
                             Liferay.Portlet.processLast();
                     }

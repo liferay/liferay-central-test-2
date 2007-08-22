@@ -128,11 +128,11 @@ var Mail = {
 			
 			if (Mail.isMoveAllowed(folderItem.folder.id)) {
 				if (coord.inside(folderItem.nwOffset, folderItem.seOffset)) {
-						_$J(folderItem).addClass(Mail.selectedClassName);
+						jQuery(folderItem).addClass(Mail.selectedClassName);
 						foundInside = true;
 				}
 				else {
-					_$J(folderItem).removeClass(Mail.selectedClassName);
+					jQuery(folderItem).removeClass(Mail.selectedClassName);
 				}
 			}
 		}
@@ -448,7 +448,7 @@ var Mail = {
 			if (folder.id == Mail.currentFolderId) {
 				/* Previous folder ID was set */
 				selectedFolder = folder;
-				_$J(folderItem).addClass(Mail.selectedClassName);
+				jQuery(folderItem).addClass(Mail.selectedClassName);
 			}
 			
 			if (i == Mail.DEFAULT_FOLDERS.length - 1) {
@@ -598,125 +598,125 @@ var Mail = {
 		Mail.DEFAULT_FOLDERS = new Array(inbox, drafts, sent, spam, trash);
 
 		/* Vertical main folder bar */
-		_$J("#portlet-mail-folder-pane").lResize({
+		jQuery("#portlet-mail-folder-pane").lResize({
 			handle: "#portlet-mail-handle",
 			direction: "horizontal",
 			mode: "add",
 			onComplete: Mail.updateFolderWidth
 		});
 
-		_$J("#portlet-mail-msgs-preview").lResize({
+		jQuery("#portlet-mail-msgs-preview").lResize({
 			handle: "#portlet-mail-handle",
 			direction: "horizontal",
 			mode: "subtract"
 		});
 		
-		_$J("#portlet-mail-msg-detailed-pane").lResize({
+		jQuery("#portlet-mail-msg-detailed-pane").lResize({
 			handle: "#portlet-mail-handle",
 			direction: "horizontal",
 			mode: "subtract"
 		});
 
-		_$J("#portlet-mail-msg-header").lResize({
+		jQuery("#portlet-mail-msg-header").lResize({
 			handle: "#portlet-mail-handle",
 			direction: "horizontal",
 			mode: "subtract"
 		});
 		
 		/* Horizontal message bar */
-		_$J("#portlet-mail-msgs-preview-pane").lResize({
+		jQuery("#portlet-mail-msgs-preview-pane").lResize({
 			handle: "#portlet-mail-msgs-handle",
 			direction: "vertical",
 			mode: "add",
 			onComplete: Mail.updatePreviewHeight
 		});
 
-		_$J("#portlet-mail-msg-detailed-frame").lResize({
+		jQuery("#portlet-mail-msg-detailed-frame").lResize({
 			handle: "#portlet-mail-msgs-handle",
 			direction: "vertical",
 			mode: "subtract"
 		});
 
 		/* Preview headers - From */
-		_$J("#portlet-mail-msgs-title-from").lResize({
+		jQuery("#portlet-mail-msgs-title-from").lResize({
 			handle: "#portlet-mail-msgs-from-handle",
 			direction: "horizontal",
 			mode: "add",
 			onComplete: Mail.updateFromWidth
 		});
 		
-		_$J("#portlet-mail-msgs-from").lResize({
+		jQuery("#portlet-mail-msgs-from").lResize({
 			handle: "#portlet-mail-msgs-from-handle",
 			direction: "horizontal",
 			mode: "add"
 		});
 		
-		_$J("#portlet-mail-msgs-title-subject").lResize({
+		jQuery("#portlet-mail-msgs-title-subject").lResize({
 			handle: "#portlet-mail-msgs-from-handle",
 			direction: "horizontal",
 			mode: "subtract"
 		});
 		
-		_$J("#portlet-mail-msgs-subject").lResize({
+		jQuery("#portlet-mail-msgs-subject").lResize({
 			handle: "#portlet-mail-msgs-from-handle",
 			direction: "horizontal",
 			mode: "subtract"
 		});
 
 		/* Preview headers - Subject */
-		_$J("#portlet-mail-msgs-title-subject").lResize({
+		jQuery("#portlet-mail-msgs-title-subject").lResize({
 			handle: "#portlet-mail-msgs-subject-handle",
 			direction: "horizontal",
 			mode: "add",
 			onComplete: Mail.updateSubjectWidth
 		});
 		
-		_$J("#portlet-mail-msgs-subject").lResize({
+		jQuery("#portlet-mail-msgs-subject").lResize({
 			handle: "#portlet-mail-msgs-subject-handle",
 			direction: "horizontal",
 			mode: "add"
 		});
 
-		_$J("#portlet-mail-msgs-title-received").lResize({
+		jQuery("#portlet-mail-msgs-title-received").lResize({
 			handle: "#portlet-mail-msgs-subject-handle",
 			direction: "horizontal",
 			mode: "subtract"
 		});
 		
-		_$J("#portlet-mail-msgs-received").lResize({
+		jQuery("#portlet-mail-msgs-received").lResize({
 			handle: "#portlet-mail-msgs-subject-handle",
 			direction: "horizontal",
 			mode: "subtract"
 		});
 		
 		/* Preview headers - Received */
-		_$J("#portlet-mail-msgs-title-received").lResize({
+		jQuery("#portlet-mail-msgs-title-received").lResize({
 			handle: "#portlet-mail-msgs-received-handle",
 			direction: "horizontal",
 			mode: "add",
 			onComplete: Mail.updateReceivedWidth
 		});
 		
-		_$J("#portlet-mail-msgs-received").lResize({
+		jQuery("#portlet-mail-msgs-received").lResize({
 			handle: "#portlet-mail-msgs-received-handle",
 			direction: "horizontal",
 			mode: "add"
 		});
 		
-		_$J("#portlet-mail-msgs-title-size").lResize({
+		jQuery("#portlet-mail-msgs-title-size").lResize({
 			handle: "#portlet-mail-msgs-received-handle",
 			direction: "horizontal",
 			mode: "subtract"
 		});
 
-		_$J("#portlet-mail-msgs-size").lResize({
+		jQuery("#portlet-mail-msgs-size").lResize({
 			handle: "#portlet-mail-msgs-received-handle",
 			direction: "horizontal",
 			mode: "subtract"
 		});
 		
 		/* Bottom handle */
-		_$J("#portlet-mail-msg-detailed-frame").lResize({
+		jQuery("#portlet-mail-msg-detailed-frame").lResize({
 			handle: "#portlet-mail-bottom-handle",
 			direction: "vertical",
 			mode: "add",
@@ -747,15 +747,15 @@ var Mail = {
 		Mail.sortBy = msgsTitleReceived;
 		Mail.updateSortArrow();
 		
-		_$J(document).keydown(Mail.onMailKeyPress);
+		jQuery(document).keydown(Mail.onMailKeyPress);
 		
-		var previewPane = _$J("#portlet-mail-msgs-preview-pane");
+		var previewPane = jQuery("#portlet-mail-msgs-preview-pane");
 		previewPane[0].onselectstart = function() {return false;}; // ie
 		previewPane.mousedown(function() {this.focus(); return false;}); // mozilla
 		previewPane.scroll(Mail.onPreviewScroll);
 
 		/* Memory cleanup */
-		_$J(window).unload(Mail.clearPreview);
+		jQuery(window).unload(Mail.clearPreview);
 		
 		Mail.getFolders();
 	},
@@ -1300,11 +1300,11 @@ var Mail = {
 				continue;
 			}
 			else if (Mail.currentFolderId == folderItem.folder.id) {
-				_$J(folderItem).addClass(Mail.selectedClassName);
+				jQuery(folderItem).addClass(Mail.selectedClassName);
 				Mail.currentFolder.li = folderItem;
 			}
 			else {
-				_$J(folderItem).removeClass(Mail.selectedClassName);
+				jQuery(folderItem).removeClass(Mail.selectedClassName);
 			}
 		}
 
@@ -1376,10 +1376,10 @@ var Mail = {
 		var row = msObj.row;
 		for (var i = 0; i < row.length; i++) {
 			if (setOff) {
-				_$J(row[i]).removeClass(Mail.selectedClassName);
+				jQuery(row[i]).removeClass(Mail.selectedClassName);
 			}
 			else {
-				_$J(row[i]).addClass(Mail.selectedClassName);
+				jQuery(row[i]).addClass(Mail.selectedClassName);
 			}
 		}
 	},

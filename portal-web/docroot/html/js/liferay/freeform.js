@@ -21,14 +21,14 @@
 
 		add: function(portlet) {
 			var instance = this;
-			portlet = _$J.getOne(portlet);
+			portlet = jQuery.getOne(portlet);
 
-			var handle = _$J(".portlet-header-bar, .portlet-title-default, .portlet-topper", portlet).get(0);
+			var handle = jQuery(".portlet-header-bar, .portlet-title-default, .portlet-topper", portlet).get(0);
 
 			handle.style.cursor = "move";
 			portlet.style.position = "absolute";
 
-			_$J(portlet).lDrag({
+			jQuery(portlet).lDrag({
 				handle: handle,
 				portlet: portlet,
 				onStart: function(settings) {
@@ -58,7 +58,7 @@
 				}
 			});
 
-			_$J(portlet).click(function() {
+			jQuery(portlet).click(function() {
 				if (instance._current != this) {
 					instance.moveToTop(this);
 					instance.savePosition(this, true);
@@ -66,16 +66,16 @@
 				}
 			});
 
-			var resizeBox = _$J(".portlet-content-container, .portlet-borderless-container", portlet);
-			var resizeHandle = _$J(".portlet-resize-handle", portlet);
+			var resizeBox = jQuery(".portlet-content-container, .portlet-borderless-container", portlet);
+			var resizeHandle = jQuery(".portlet-resize-handle", portlet);
 
 			if (!resizeHandle.length) {
 				resizeBox.append("<div style='position:relative'><div class='portlet-resize-handle'></div></div>");
-				resizeHandle = _$J(".portlet-resize-handle", portlet);
+				resizeHandle = jQuery(".portlet-resize-handle", portlet);
 			}
 
 			if (resizeBox.length && resizeHandle.length) {
-				_$J(portlet).lResize({
+				jQuery(portlet).lResize({
 					handle: resizeHandle[0],
 					direction: "horizontal",
 					mode: "add",
@@ -85,7 +85,7 @@
 					},
 					onComplete: function(settings) {
 						var portlet = settings.container.resizeSettings.portlet;
-						var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
+						var resizeBox = jQuery(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
 						var height = parseInt(resizeBox.style.height);
 						var width = parseInt(portlet.style.width);
 
@@ -114,7 +114,7 @@
 		findPosition: function(portlet) {
 			var position = -1;
 
-			_$J(".portlet-boundary", portlet.parentNode).each(function(i) {
+			jQuery(".portlet-boundary", portlet.parentNode).each(function(i) {
 				if (this == portlet) {
 					position = i;
 				}
@@ -133,7 +133,7 @@
 
 		savePosition : function(portlet, wasClicked) {
 			var instance = this;
-			var resizeBox = _$J(portlet).find(".portlet-content-container, .portlet-borderless-container")[0];
+			var resizeBox = jQuery(portlet).find(".portlet-content-container, .portlet-borderless-container")[0];
 			var newPosition = Liferay.Portlet.findIndex(portlet);
 			var cmd;
 

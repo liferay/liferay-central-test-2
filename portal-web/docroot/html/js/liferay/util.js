@@ -111,8 +111,8 @@ Liferay.Util = {
 				item = document.body;
 			}
 
-			_$J("input", item).each(function() {
-				var current = _$J(this);
+			jQuery("input", item).each(function() {
+				var current = jQuery(this);
 				var type = this.type || "text";
 
 				current.addClass(type);
@@ -732,7 +732,7 @@ Liferay.Util = {
 	toggle: function(obj, returnState, displayType) {
 		var hidden = false;
 		var display = "";
-		obj = _$J.getOne(obj);
+		obj = jQuery.getOne(obj);
 
 		if (displayType != null) {
 			display = displayType;
@@ -819,7 +819,7 @@ function cloneObject (obj, recurse) {
 Element = {};
 
 Element.disable = function(element) {
-	element = _$J.getOne(element);
+	element = jQuery.getOne(element);
 
 	var items = element.getElementsByTagName("*");
 

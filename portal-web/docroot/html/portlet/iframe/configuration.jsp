@@ -58,7 +58,7 @@ String htmlAttributes =
 		<liferay-ui:message key="relative-to-context-path" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="relative" defaultValue="<%= relative %>" onClick='<%= "_$J('#" + renderResponse.getNamespace() + "context-path-text').toggle();" %>' />
+		<liferay-ui:input-checkbox param="relative" defaultValue="<%= relative %>" onClick='<%= "jQuery('#" + renderResponse.getNamespace() + "context-path-text').toggle();" %>' />
 	</td>
 </tr>
 <tr>

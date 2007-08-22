@@ -13852,7 +13852,6 @@ var FlashObject=deconcept.SWFObject;
 var SWFObject=deconcept.SWFObject;
 
 $ = null;
-var _$J = jQuery;
 
 Function.prototype.extendNativeFunctionObject = jQuery.extend;
 
@@ -14108,8 +14107,8 @@ Liferay.Util = {
 				item = document.body;
 			}
 
-			_$J("input", item).each(function() {
-				var current = _$J(this);
+			jQuery("input", item).each(function() {
+				var current = jQuery(this);
 				var type = this.type || "text";
 
 				current.addClass(type);
@@ -14729,7 +14728,7 @@ Liferay.Util = {
 	toggle: function(obj, returnState, displayType) {
 		var hidden = false;
 		var display = "";
-		obj = _$J.getOne(obj);
+		obj = jQuery.getOne(obj);
 
 		if (displayType != null) {
 			display = displayType;
@@ -14816,7 +14815,7 @@ function cloneObject (obj, recurse) {
 Element = {};
 
 Element.disable = function(element) {
-	element = _$J.getOne(element);
+	element = jQuery.getOne(element);
 
 	var items = element.getElementsByTagName("*");
 
@@ -16495,7 +16494,7 @@ jQuery.fn.xySize = function() {
 })(Liferay);
 var DragLink = {
 	create: function(item, dragId) {
-		item.dragId = _$J.getOne(dragId);
+		item.dragId = jQuery.getOne(dragId);
 		item.clickLink = item.href;
 		item.href = "javascript:void(0)";
 		item.onclick = DragLink.onLinkClick;
@@ -16516,14 +16515,14 @@ var DragLink = {
 var NavFlyout = {
 	zIndex: 1,
 	initialize: function (nav) {
-		var nav = _$J.getOne(nav);
-		var navMapList = _$J("portlet-nav-map-list", nav);
+		var nav = jQuery.getOne(nav);
+		var navMapList = jQuery("portlet-nav-map-list", nav);
 
 		navMapList.not(".portlet-nav-map-level_1, .portlet-nav-map-level_2")
 			.css({position: "absolute", display: "none"});
 
-		_$J(".portlet-nav-map-list a", nav).each(function(){
-			var item = _$J(this.parentNode.parentNode);
+		jQuery(".portlet-nav-map-list a", nav).each(function(){
+			var item = jQuery(this.parentNode.parentNode);
 				if (item.is(".portlet-nav-map-level_1")) {
 					item.mouseover(function() {
 						NavFlyout.hide(this.parentNode);
@@ -16536,8 +16535,8 @@ var NavFlyout = {
 	},
 
 	initToggle: function(nav, imgSrc) {
-		var nav = _$J.getOne(nav);
-		var navMapList = _$J(".portlet-nav-map-level_1 > li", nav);
+		var nav = jQuery.getOne(nav);
+		var navMapList = jQuery(".portlet-nav-map-level_1 > li", nav);
 		navMapList.click(NavFlyout.onToggle);
 		navMapList.css({ backgroundImage: "url(" + imgSrc + ")" });
 	},
@@ -16550,7 +16549,7 @@ var NavFlyout = {
 		var listItem = this.parentNode;
 
 		// Hide all other submenus
-		if (_$J(listItem.parentNode).is(".portlet-nav-map-level_2")) {
+		if (jQuery(listItem.parentNode).is(".portlet-nav-map-level_2")) {
 			NavFlyout.hide(listItem.parentNode.parentNode.parentNode);
 		}
 		else {
@@ -16558,7 +16557,7 @@ var NavFlyout = {
 		}
 
 		// Show current submenu
-		_$J(listItem.childNodes).filter("ul")
+		jQuery(listItem.childNodes).filter("ul")
 			.css({
 				display: "block",
 				top: "5px",
@@ -16578,7 +16577,7 @@ var NavFlyout = {
 	},
 
 	onToggle: function() {
-		var subMenu = _$J("ul:first", this).get(0);
+		var subMenu = jQuery("ul:first", this).get(0);
 
 		if (this.isShowing) {
 			subMenu.style.display = "none";
@@ -16602,7 +16601,7 @@ var PortletHeaderBar = {
 		var id = data.id;
 
 		var changed = false;
-		var icons = _$J("#portlet-header-bar_" + id + " .portlet-small-icon-bar");
+		var icons = jQuery("#portlet-header-bar_" + id + " .portlet-small-icon-bar");
 
 		if (PortletHeaderBar.mode[id] == "in") {
 			if (count <= 10) {
@@ -16656,7 +16655,7 @@ PhotoSlider.prototype = {
 		this.timer = 0;
 		this.start = 0;
 
-		this.photos = _$J.getOne(photos);
+		this.photos = jQuery.getOne(photos);
 		this.photos.style.position = "relative";
 		this.photos.style.left = "0px";
 
@@ -16749,7 +16748,7 @@ var StarRating = new Class({
 		 */
 			this.options = options || {};
 			this.rating = this.options.rating || 0;
-			var item = _$J("#" + id);
+			var item = jQuery("#" + id);
 			this.stars = item.find("img");
 			var self = this;
 
@@ -16758,7 +16757,7 @@ var StarRating = new Class({
 
 				this.stars.each(function(index) {
 					this.index = index + 1;
-					_$J(this).bind("click", {self: self}, self.onClick)
+					jQuery(this).bind("click", {self: self}, self.onClick)
 						   .bind("mouseover", {self: self}, self.onHoverOver);
 				})
 			}
@@ -16911,14 +16910,14 @@ Liferay.Portlet = {
 
 	processAll: function(id) {
 		for (var i = 0; i < this.fnAll.length; i++) {
-			this.fnAll[i](id, _$J("#p_p_id_" + id + "_"));
+			this.fnAll[i](id, jQuery("#p_p_id_" + id + "_"));
 		}
 	},
 
 	processPortlet: function(id) {
 		if (this.fn[id]) {
 			for (var i = 0; i < this.fn[id].length; i++) {
-				this.fn[id][i](id, _$J("#p_p_id_" + id + "_"));
+				this.fn[id][i](id, jQuery("#p_p_id_" + id + "_"));
 			}
 			this.fn[id] = [];
 		}
@@ -16960,7 +16959,7 @@ Liferay.Portlet = {
 	findIndex: function(portlet) {
 		var index = -1;
 
-		_$J(".portlet-boundary", portlet.parentNode).each(function(i) {
+		jQuery(".portlet-boundary", portlet.parentNode).each(function(i) {
 			if (this == portlet) {
 				index = i;
 			}
@@ -17100,10 +17099,10 @@ Liferay.Service = {
 		params.serviceParameters = Liferay.Service.getParameters(params);
 
 		if (callback) {
-			_$J.getJSON(Liferay.Service.url, params, callback);
+			jQuery.getJSON(Liferay.Service.url, params, callback);
 		}
 		else {
-			var xHR = _$J.ajax(
+			var xHR = jQuery.ajax(
 				{
 					url: Liferay.Service.url,
 					data: params,
@@ -20633,14 +20632,14 @@ Liferay.DynamicSelect = new Class({
 
 		add: function(portlet) {
 			var instance = this;
-			portlet = _$J.getOne(portlet);
+			portlet = jQuery.getOne(portlet);
 
-			var handle = _$J(".portlet-header-bar, .portlet-title-default, .portlet-topper", portlet).get(0);
+			var handle = jQuery(".portlet-header-bar, .portlet-title-default, .portlet-topper", portlet).get(0);
 
 			handle.style.cursor = "move";
 			portlet.style.position = "absolute";
 
-			_$J(portlet).lDrag({
+			jQuery(portlet).lDrag({
 				handle: handle,
 				portlet: portlet,
 				onStart: function(settings) {
@@ -20670,7 +20669,7 @@ Liferay.DynamicSelect = new Class({
 				}
 			});
 
-			_$J(portlet).click(function() {
+			jQuery(portlet).click(function() {
 				if (instance._current != this) {
 					instance.moveToTop(this);
 					instance.savePosition(this, true);
@@ -20678,16 +20677,16 @@ Liferay.DynamicSelect = new Class({
 				}
 			});
 
-			var resizeBox = _$J(".portlet-content-container, .portlet-borderless-container", portlet);
-			var resizeHandle = _$J(".portlet-resize-handle", portlet);
+			var resizeBox = jQuery(".portlet-content-container, .portlet-borderless-container", portlet);
+			var resizeHandle = jQuery(".portlet-resize-handle", portlet);
 
 			if (!resizeHandle.length) {
 				resizeBox.append("<div style='position:relative'><div class='portlet-resize-handle'></div></div>");
-				resizeHandle = _$J(".portlet-resize-handle", portlet);
+				resizeHandle = jQuery(".portlet-resize-handle", portlet);
 			}
 
 			if (resizeBox.length && resizeHandle.length) {
-				_$J(portlet).lResize({
+				jQuery(portlet).lResize({
 					handle: resizeHandle[0],
 					direction: "horizontal",
 					mode: "add",
@@ -20697,7 +20696,7 @@ Liferay.DynamicSelect = new Class({
 					},
 					onComplete: function(settings) {
 						var portlet = settings.container.resizeSettings.portlet;
-						var resizeBox = _$J(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
+						var resizeBox = jQuery(portlet).getOne(".portlet-content-container, .portlet-borderless-container");
 						var height = parseInt(resizeBox.style.height);
 						var width = parseInt(portlet.style.width);
 
@@ -20726,7 +20725,7 @@ Liferay.DynamicSelect = new Class({
 		findPosition: function(portlet) {
 			var position = -1;
 
-			_$J(".portlet-boundary", portlet.parentNode).each(function(i) {
+			jQuery(".portlet-boundary", portlet.parentNode).each(function(i) {
 				if (this == portlet) {
 					position = i;
 				}
@@ -20745,7 +20744,7 @@ Liferay.DynamicSelect = new Class({
 
 		savePosition : function(portlet, wasClicked) {
 			var instance = this;
-			var resizeBox = _$J(portlet).find(".portlet-content-container, .portlet-borderless-container")[0];
+			var resizeBox = jQuery(portlet).find(".portlet-content-container, .portlet-borderless-container")[0];
 			var newPosition = Liferay.Portlet.findIndex(portlet);
 			var cmd;
 
@@ -20913,7 +20912,7 @@ var LayoutConfiguration = {
 		}
 
 		var data = parent.rows[1].cells[0];
-		var pane = _$J(".layout_configuration_category_pane:first", data).get(0);
+		var pane = jQuery(".layout_configuration_category_pane:first", data).get(0);
 		var image = obj.getElementsByTagName("img")[0];
 		var imagePath = themeDisplay.getPathThemeImages();
 
@@ -20953,7 +20952,7 @@ var Messaging = {
 
 		var msg = msgObj || Messaging.msgQueue.shift();
 		var toDivId = msg.toId.replace(/\./g, "_");
-		var chatBox = _$J("#msg-chat-box_" + toDivId)[0];
+		var chatBox = jQuery("#msg-chat-box_" + toDivId)[0];
 
 		if (!chatBox) {
 			var contents =
@@ -20974,10 +20973,10 @@ var Messaging = {
 			});
 
 			if (msg.status && msg.status == "unavailable") {
-				_$J(chatBox).append(
+				jQuery(chatBox).append(
 					"<img src='" + themeDisplay.getPathThemeImages() + "/chat/add_user.png' " +
 						"style='cursor: pointer; margin-top: 2px' " +
-						"onclick=\"MessagingRoster.addEntry('" + msg.toId + "'); _$J(this).remove()\"" +
+						"onclick=\"MessagingRoster.addEntry('" + msg.toId + "'); jQuery(this).remove()\"" +
 					"/>"
 				);
 			}
@@ -20985,7 +20984,7 @@ var Messaging = {
 			Messaging.populateChatBox(chatBox, msg);
 
 			if (msg.top != null && msg.left != null) {
-				_$J(chatBox).parents(".popup:first").css({
+				jQuery(chatBox).parents(".popup:first").css({
 					top: msg.top + "px",
 					left: msg.left + "px"
 				});
@@ -20993,7 +20992,7 @@ var Messaging = {
 			else {
 				var count = Liferay.Popup.count();
 
-				_$J(chatBox).parents(".popup:first").css({
+				jQuery(chatBox).parents(".popup:first").css({
 					top: (count * 10) + "px",
 					left: (count * 10) + "px"
 				});
@@ -21005,8 +21004,8 @@ var Messaging = {
 	},
 
 	populateChatBox : function(chatBox, msg) {
-		var typeArea = _$J.getOne(".msg-type-area", chatBox);
-		var chatArea = _$J.getOne(".msg-chat-area", chatBox);
+		var typeArea = jQuery.getOne(".msg-type-area", chatBox);
+		var chatArea = jQuery.getOne(".msg-chat-area", chatBox);
 
 		if (msg.body != null) {
 			var name = msg.toName.split(/[ ,.-]/);
@@ -21069,7 +21068,7 @@ var Messaging = {
 		var body = document.getElementsByTagName("body")[0];
 		this.userId = userId;
 
-		var msgJSON = _$J.cookie(this.userId + "_chats");
+		var msgJSON = jQuery.cookie(this.userId + "_chats");
 
 		if (msgJSON) {
 			var chatArray = eval("(" + msgJSON + ")");
@@ -21086,9 +21085,9 @@ var Messaging = {
 	},
 
 	maximizeChat : function(id) {
-		var chatBox = _$J.getOne(id);
-		var widthDiv = _$J.getOne(".msg-chat-box-width");
-		var chatArea = _$J.getOne(".msg-chat-area");
+		var chatBox = jQuery.getOne(id);
+		var widthDiv = jQuery.getOne(".msg-chat-box-width");
+		var chatArea = jQuery.getOne(".msg-chat-area");
 
 		chatBox.style.left = Viewport.scroll().x + "px";
 		chatBox.style.top = Viewport.scroll().y + "px";
@@ -21097,35 +21096,35 @@ var Messaging = {
 	},
 
 	minimizeChat : function(id) {
-		var chatBox = _$J.getOne(id);
-		var widthDiv = _$J.getOne(".msg-chat-box-width");
-		var chatArea = _$J.getOne(".msg-chat-area");
+		var chatBox = jQuery.getOne(id);
+		var widthDiv = jQuery.getOne(".msg-chat-box-width");
+		var chatArea = jQuery.getOne(".msg-chat-area");
 
 		widthDiv.style.width = 250 + "px";
 		chatArea.style.height = 100 + "px";
 	},
 
 	removeChat : function(id) {
-		var chatBox = _$J.getOne(id);
+		var chatBox = jQuery.getOne(id);
 
 		Element.remove(chatBox);
 		this.saveCookie();
 	},
 
 	saveCookie : function() {
-		var chatList = _$J(".msg-chat-box");
+		var chatList = jQuery(".msg-chat-box");
 		var jsonString = "[";
 
 		chatList.each(function(i){
 			var item = this;
-			var popup = _$J(item).parents(".popup:first");
+			var popup = jQuery(item).parents(".popup:first");
 
 			jsonString += "{"
 				+ "toName:\"" + popup.find(".popup-title")[0].innerHTML + "\","
-				+ "toId:\"" +_$J(".msg-to-input-id", item)[0].value + "\","
+				+ "toId:\"" +jQuery(".msg-to-input-id", item)[0].value + "\","
 				+ "top:" + parseInt(popup.css("top")) + ","
 				+ "left:" + parseInt(popup.css("left")) + ","
-				+ "messages:\"" + Liferay.Util.toJSONString(_$J(".msg-chat-area", item)[0].innerHTML) + "\"}";
+				+ "messages:\"" + Liferay.Util.toJSONString(jQuery(".msg-chat-area", item)[0].innerHTML) + "\"}";
 
 			if (i < chatList.length - 1) {
 				jsonString += ",";
@@ -21133,7 +21132,7 @@ var Messaging = {
 		});
 		jsonString += "]";
 
-		_$J.cookie(this.userId + "_chats", jsonString);
+		jQuery.cookie(this.userId + "_chats", jsonString);
 	},
 
 	sendChat : function(obj, e) {
@@ -21209,7 +21208,7 @@ var MessagingRoster = {
 			url = themeDisplay.getPathMain() + "/chat/roster?cmd=addEntry&userId=" + userId;
 		}
 		else {
-			var email = _$J.getOne("#portlet-chat-roster-email").value;
+			var email = jQuery.getOne("#portlet-chat-roster-email").value;
 			url = themeDisplay.getPathMain() + "/chat/roster?cmd=addEntry&email=" + email
 		}
 
@@ -21224,10 +21223,10 @@ var MessagingRoster = {
 				alert("No such user exists");
 			}
 			else {
-				var rosterDiv = _$J.getOne("#portlet-chat-roster-list");
+				var rosterDiv = jQuery.getOne("#portlet-chat-roster-list");
 
 				if (rosterDiv) {
-					var entries = _$J(".portlet-chat-roster-entry", rosterDiv);
+					var entries = jQuery(".portlet-chat-roster-entry", rosterDiv);
 					var userId = msg.user;
 
 					var userExists = entries.filter(function(i){
@@ -21312,7 +21311,7 @@ var MessagingRoster = {
 	},
 
 	updateEntries : function(roster) {
-		var rosterDiv = _$J.getOne("#portlet-chat-roster-list");
+		var rosterDiv = jQuery.getOne("#portlet-chat-roster-list");
 
 		if (rosterDiv != null) {
 			rosterDiv.innerHTML = "";
@@ -21362,12 +21361,12 @@ var MessagingRoster = {
 	},
 
 	toggleEmail : function() {
-		var emailDiv = _$J.getOne("#portlet-chat-roster-email-div");
+		var emailDiv = jQuery.getOne("#portlet-chat-roster-email-div");
 
 		if (emailDiv.style.display == "none") {
 			emailDiv.style.display = "block";
 
-			emailInput = _$J.getOne("#portlet-chat-roster-email");
+			emailInput = jQuery.getOne("#portlet-chat-roster-email");
 			emailInput.value = "";
 			emailInput.focus();
 		}

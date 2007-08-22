@@ -14,7 +14,7 @@ var Messaging = {
 
 		var msg = msgObj || Messaging.msgQueue.shift();
 		var toDivId = msg.toId.replace(/\./g, "_");
-		var chatBox = _$J("#msg-chat-box_" + toDivId)[0];
+		var chatBox = jQuery("#msg-chat-box_" + toDivId)[0];
 
 		if (!chatBox) {
 			var contents =
@@ -35,10 +35,10 @@ var Messaging = {
 			});
 
 			if (msg.status && msg.status == "unavailable") {
-				_$J(chatBox).append(
+				jQuery(chatBox).append(
 					"<img src='" + themeDisplay.getPathThemeImages() + "/chat/add_user.png' " +
 						"style='cursor: pointer; margin-top: 2px' " +
-						"onclick=\"MessagingRoster.addEntry('" + msg.toId + "'); _$J(this).remove()\"" +
+						"onclick=\"MessagingRoster.addEntry('" + msg.toId + "'); jQuery(this).remove()\"" +
 					"/>"
 				);
 			}
@@ -46,7 +46,7 @@ var Messaging = {
 			Messaging.populateChatBox(chatBox, msg);
 
 			if (msg.top != null && msg.left != null) {
-				_$J(chatBox).parents(".popup:first").css({
+				jQuery(chatBox).parents(".popup:first").css({
 					top: msg.top + "px",
 					left: msg.left + "px"
 				});
@@ -54,7 +54,7 @@ var Messaging = {
 			else {
 				var count = Liferay.Popup.count();
 
-				_$J(chatBox).parents(".popup:first").css({
+				jQuery(chatBox).parents(".popup:first").css({
 					top: (count * 10) + "px",
 					left: (count * 10) + "px"
 				});
@@ -66,8 +66,8 @@ var Messaging = {
 	},
 
 	populateChatBox : function(chatBox, msg) {
-		var typeArea = _$J.getOne(".msg-type-area", chatBox);
-		var chatArea = _$J.getOne(".msg-chat-area", chatBox);
+		var typeArea = jQuery.getOne(".msg-type-area", chatBox);
+		var chatArea = jQuery.getOne(".msg-chat-area", chatBox);
 
 		if (msg.body != null) {
 			var name = msg.toName.split(/[ ,.-]/);
@@ -130,7 +130,7 @@ var Messaging = {
 		var body = document.getElementsByTagName("body")[0];
 		this.userId = userId;
 
-		var msgJSON = _$J.cookie(this.userId + "_chats");
+		var msgJSON = jQuery.cookie(this.userId + "_chats");
 
 		if (msgJSON) {
 			var chatArray = eval("(" + msgJSON + ")");
@@ -147,9 +147,9 @@ var Messaging = {
 	},
 
 	maximizeChat : function(id) {
-		var chatBox = _$J.getOne(id);
-		var widthDiv = _$J.getOne(".msg-chat-box-width");
-		var chatArea = _$J.getOne(".msg-chat-area");
+		var chatBox = jQuery.getOne(id);
+		var widthDiv = jQuery.getOne(".msg-chat-box-width");
+		var chatArea = jQuery.getOne(".msg-chat-area");
 
 		chatBox.style.left = Viewport.scroll().x + "px";
 		chatBox.style.top = Viewport.scroll().y + "px";
@@ -158,35 +158,35 @@ var Messaging = {
 	},
 
 	minimizeChat : function(id) {
-		var chatBox = _$J.getOne(id);
-		var widthDiv = _$J.getOne(".msg-chat-box-width");
-		var chatArea = _$J.getOne(".msg-chat-area");
+		var chatBox = jQuery.getOne(id);
+		var widthDiv = jQuery.getOne(".msg-chat-box-width");
+		var chatArea = jQuery.getOne(".msg-chat-area");
 
 		widthDiv.style.width = 250 + "px";
 		chatArea.style.height = 100 + "px";
 	},
 
 	removeChat : function(id) {
-		var chatBox = _$J.getOne(id);
+		var chatBox = jQuery.getOne(id);
 
 		Element.remove(chatBox);
 		this.saveCookie();
 	},
 
 	saveCookie : function() {
-		var chatList = _$J(".msg-chat-box");
+		var chatList = jQuery(".msg-chat-box");
 		var jsonString = "[";
 
 		chatList.each(function(i){
 			var item = this;
-			var popup = _$J(item).parents(".popup:first");
+			var popup = jQuery(item).parents(".popup:first");
 
 			jsonString += "{"
 				+ "toName:\"" + popup.find(".popup-title")[0].innerHTML + "\","
-				+ "toId:\"" +_$J(".msg-to-input-id", item)[0].value + "\","
+				+ "toId:\"" +jQuery(".msg-to-input-id", item)[0].value + "\","
 				+ "top:" + parseInt(popup.css("top")) + ","
 				+ "left:" + parseInt(popup.css("left")) + ","
-				+ "messages:\"" + Liferay.Util.toJSONString(_$J(".msg-chat-area", item)[0].innerHTML) + "\"}";
+				+ "messages:\"" + Liferay.Util.toJSONString(jQuery(".msg-chat-area", item)[0].innerHTML) + "\"}";
 
 			if (i < chatList.length - 1) {
 				jsonString += ",";
@@ -194,7 +194,7 @@ var Messaging = {
 		});
 		jsonString += "]";
 
-		_$J.cookie(this.userId + "_chats", jsonString);
+		jQuery.cookie(this.userId + "_chats", jsonString);
 	},
 
 	sendChat : function(obj, e) {
@@ -270,7 +270,7 @@ var MessagingRoster = {
 			url = themeDisplay.getPathMain() + "/chat/roster?cmd=addEntry&userId=" + userId;
 		}
 		else {
-			var email = _$J.getOne("#portlet-chat-roster-email").value;
+			var email = jQuery.getOne("#portlet-chat-roster-email").value;
 			url = themeDisplay.getPathMain() + "/chat/roster?cmd=addEntry&email=" + email
 		}
 
@@ -285,10 +285,10 @@ var MessagingRoster = {
 				alert("No such user exists");
 			}
 			else {
-				var rosterDiv = _$J.getOne("#portlet-chat-roster-list");
+				var rosterDiv = jQuery.getOne("#portlet-chat-roster-list");
 
 				if (rosterDiv) {
-					var entries = _$J(".portlet-chat-roster-entry", rosterDiv);
+					var entries = jQuery(".portlet-chat-roster-entry", rosterDiv);
 					var userId = msg.user;
 
 					var userExists = entries.filter(function(i){
@@ -373,7 +373,7 @@ var MessagingRoster = {
 	},
 
 	updateEntries : function(roster) {
-		var rosterDiv = _$J.getOne("#portlet-chat-roster-list");
+		var rosterDiv = jQuery.getOne("#portlet-chat-roster-list");
 
 		if (rosterDiv != null) {
 			rosterDiv.innerHTML = "";
@@ -423,12 +423,12 @@ var MessagingRoster = {
 	},
 
 	toggleEmail : function() {
-		var emailDiv = _$J.getOne("#portlet-chat-roster-email-div");
+		var emailDiv = jQuery.getOne("#portlet-chat-roster-email-div");
 
 		if (emailDiv.style.display == "none") {
 			emailDiv.style.display = "block";
 
-			emailInput = _$J.getOne("#portlet-chat-roster-email");
+			emailInput = jQuery.getOne("#portlet-chat-roster-email");
 			emailInput.value = "";
 			emailInput.focus();
 		}

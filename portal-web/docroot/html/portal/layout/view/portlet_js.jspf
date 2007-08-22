@@ -34,7 +34,7 @@ function addPortletHTML(url, placeHolder) {
 		addDiv.style.display = "none";
 		addDiv.innerHTML = html;
 
-		var portletBound = _$J(".portlet-boundary:first", addDiv).get(0);
+		var portletBound = jQuery(".portlet-boundary:first", addDiv).get(0);
 
 		portletBound.parentNode.removeChild(portletBound);
 
@@ -66,7 +66,7 @@ function addPortletHTML(url, placeHolder) {
 			}
 		</c:if>
 
-		if (_$J.browser.firefox) {
+		if (jQuery.browser.firefox) {
 			setTimeout("Liferay.Portlet.process(\"" + portletId + "\")", 0);
 		}
 		else {

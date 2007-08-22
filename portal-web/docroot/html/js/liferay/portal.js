@@ -1,6 +1,6 @@
 var DragLink = {
 	create: function(item, dragId) {
-		item.dragId = _$J.getOne(dragId);
+		item.dragId = jQuery.getOne(dragId);
 		item.clickLink = item.href;
 		item.href = "javascript:void(0)";
 		item.onclick = DragLink.onLinkClick;
@@ -21,14 +21,14 @@ var DragLink = {
 var NavFlyout = {
 	zIndex: 1,
 	initialize: function (nav) {
-		var nav = _$J.getOne(nav);
-		var navMapList = _$J("portlet-nav-map-list", nav);
+		var nav = jQuery.getOne(nav);
+		var navMapList = jQuery("portlet-nav-map-list", nav);
 
 		navMapList.not(".portlet-nav-map-level_1, .portlet-nav-map-level_2")
 			.css({position: "absolute", display: "none"});
 
-		_$J(".portlet-nav-map-list a", nav).each(function(){
-			var item = _$J(this.parentNode.parentNode);
+		jQuery(".portlet-nav-map-list a", nav).each(function(){
+			var item = jQuery(this.parentNode.parentNode);
 				if (item.is(".portlet-nav-map-level_1")) {
 					item.mouseover(function() {
 						NavFlyout.hide(this.parentNode);
@@ -41,8 +41,8 @@ var NavFlyout = {
 	},
 
 	initToggle: function(nav, imgSrc) {
-		var nav = _$J.getOne(nav);
-		var navMapList = _$J(".portlet-nav-map-level_1 > li", nav);
+		var nav = jQuery.getOne(nav);
+		var navMapList = jQuery(".portlet-nav-map-level_1 > li", nav);
 		navMapList.click(NavFlyout.onToggle);
 		navMapList.css({ backgroundImage: "url(" + imgSrc + ")" });
 	},
@@ -55,7 +55,7 @@ var NavFlyout = {
 		var listItem = this.parentNode;
 
 		// Hide all other submenus
-		if (_$J(listItem.parentNode).is(".portlet-nav-map-level_2")) {
+		if (jQuery(listItem.parentNode).is(".portlet-nav-map-level_2")) {
 			NavFlyout.hide(listItem.parentNode.parentNode.parentNode);
 		}
 		else {
@@ -63,7 +63,7 @@ var NavFlyout = {
 		}
 
 		// Show current submenu
-		_$J(listItem.childNodes).filter("ul")
+		jQuery(listItem.childNodes).filter("ul")
 			.css({
 				display: "block",
 				top: "5px",
@@ -83,7 +83,7 @@ var NavFlyout = {
 	},
 
 	onToggle: function() {
-		var subMenu = _$J("ul:first", this).get(0);
+		var subMenu = jQuery("ul:first", this).get(0);
 
 		if (this.isShowing) {
 			subMenu.style.display = "none";
@@ -107,7 +107,7 @@ var PortletHeaderBar = {
 		var id = data.id;
 
 		var changed = false;
-		var icons = _$J("#portlet-header-bar_" + id + " .portlet-small-icon-bar");
+		var icons = jQuery("#portlet-header-bar_" + id + " .portlet-small-icon-bar");
 
 		if (PortletHeaderBar.mode[id] == "in") {
 			if (count <= 10) {
@@ -161,7 +161,7 @@ PhotoSlider.prototype = {
 		this.timer = 0;
 		this.start = 0;
 
-		this.photos = _$J.getOne(photos);
+		this.photos = jQuery.getOne(photos);
 		this.photos.style.position = "relative";
 		this.photos.style.left = "0px";
 
@@ -254,7 +254,7 @@ var StarRating = new Class({
 		 */
 			this.options = options || {};
 			this.rating = this.options.rating || 0;
-			var item = _$J("#" + id);
+			var item = jQuery("#" + id);
 			this.stars = item.find("img");
 			var self = this;
 
@@ -263,7 +263,7 @@ var StarRating = new Class({
 
 				this.stars.each(function(index) {
 					this.index = index + 1;
-					_$J(this).bind("click", {self: self}, self.onClick)
+					jQuery(this).bind("click", {self: self}, self.onClick)
 						   .bind("mouseover", {self: self}, self.onHoverOver);
 				})
 			}

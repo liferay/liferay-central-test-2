@@ -192,7 +192,7 @@ String imageMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUt
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />file);
 	</c:if>
 
-	_$J(document).ready(function() {
+	jQuery(document).ready(function() {
 		parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
 	});
 </script>

@@ -144,7 +144,7 @@ var LayoutConfiguration = {
 		}
 
 		var data = parent.rows[1].cells[0];
-		var pane = _$J(".layout_configuration_category_pane:first", data).get(0);
+		var pane = jQuery(".layout_configuration_category_pane:first", data).get(0);
 		var image = obj.getElementsByTagName("img")[0];
 		var imagePath = themeDisplay.getPathThemeImages();
 

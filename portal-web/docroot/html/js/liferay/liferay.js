@@ -1,5 +1,4 @@
 $ = null;
-var _$J = jQuery;
 
 Function.prototype.extendNativeFunctionObject = jQuery.extend;
 

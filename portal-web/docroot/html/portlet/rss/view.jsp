@@ -77,7 +77,7 @@ WindowState windowState = renderRequest.getWindowState();
 					currentPortlet.Accordion({
 						headerSelector: '.portlet-rss-header',
 						panelSelector: '.portlet-rss-content',
-						panelHeight: _$J("#p_p_id<portlet:namespace /> .portlet-rss-content:first").height(),
+						panelHeight: jQuery("#p_p_id<portlet:namespace /> .portlet-rss-content:first").height(),
 						speed: 300
 					});
 
