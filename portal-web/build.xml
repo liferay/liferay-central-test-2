@@ -9,6 +9,7 @@
 
 	<target name="clean" depends="build-common-web.clean">
 		<delete dir="classes" />
+		<delete dir="docroot/dtd" />
 		<delete dir="docroot/html/js/editor/fckeditor" />
 		<delete dir="docroot/html/skin/color" />
 		<delete dir="docroot/html/themes/classic/color_schemes" />
@@ -518,6 +519,12 @@
 		>
 			<arg line="${css.file}" />
 		</java>
+	</target>
+
+	<target name="build-dtd">
+		<copy todir="docroot/dtd">
+			<fileset dir="${project.dir}/definitions" />
+		</copy>
 	</target>
 
 	<target name="build-fckeditor">
