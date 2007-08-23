@@ -179,6 +179,10 @@ public class JournalUtil {
 			article.getDescription());
 
 		JournalUtil.addReservedEl(
+			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_TYPE,
+			article.getType());
+
+		JournalUtil.addReservedEl(
 			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_CREATE_DATE,
 			article.getCreateDate().toString());
 

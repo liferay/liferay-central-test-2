@@ -46,6 +46,9 @@ public class JournalStructureImpl
 	public static final String RESERVED_ARTICLE_DESCRIPTION =
 		"reserved-article-description";
 
+	public static final String RESERVED_ARTICLE_TYPE =
+		"reserved-article-type";
+
 	public static final String RESERVED_ARTICLE_CREATE_DATE =
 		"reserved-article-create-date";
 
