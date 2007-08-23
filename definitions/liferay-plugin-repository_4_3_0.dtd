@@ -40,9 +40,10 @@ Setting name and value. Current supported names are:
 <!--
 The plugin element contains the declarative data of a plugin.
 -->
-<!ELEMENT plugin-package (name, module-id, types, tags?, short-description,
-long-description?, change-log, page-url, download-url?, screenshots?, author,
-licenses, liferay-versions)*>
+<!ELEMENT plugin-package (name, module-id, recommended-deployment-context?,
+types, tags?, short-description, long-description?, change-log, page-url?,
+download-url?, screenshots?, author, licenses, liferay-versions,
+deployment-settings?)>
 
 <!--
 The name element contains the name of the plugin package that will be shown to
@@ -57,6 +58,13 @@ Maven based syntax: groupId/artifactId/version/file-type.
 Example: liferay-samples/sample-struts-portlet/4.3.0/war
 -->
 <!ELEMENT module-id (#PCDATA)>
+
+<!--
+The recommended-deployment-context element determines the context to which this
+plugin should be deployed. Some portlet packages require this because their own
+code references itself through URLs that include the context
+-->
+<!ELEMENT recommended-deployment-context (#PCDATA)>
 
 <!--
 The types element contains a list of plugin types included in the package.
@@ -183,3 +191,29 @@ The liferay-version element contains a version of Liferay Portal that is
 supported by the plugin.
 -->
 <!ELEMENT liferay-version (#PCDATA)>
+
+<!--
+The deployment-settings element contains a list of parameters that specify how
+the package should be deployed.
+-->
+<!ELEMENT deployment-settings (setting)+>
+
+<!--
+The setting element specifies a name value pair that provides information of how
+the package should be deployed.
+-->
+<!ELEMENT setting (#PCDATA)>
+
+<!--
+The name attribute specifies the name of the setting.
+-->
+<!ATTLIST setting
+	name CDATA #IMPLIED
+>
+
+<!--
+The value attribute specifies the value of the setting.
+-->
+<!ATTLIST setting
+	value CDATA #IMPLIED
+>
