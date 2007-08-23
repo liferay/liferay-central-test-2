@@ -62,7 +62,7 @@ Example: liferay-samples/sample-struts-portlet/4.3.0/war
 <!--
 The recommended-deployment-context element determines the context to which this
 plugin should be deployed. Some portlet packages require this because their own
-code references itself through URLs that include the context
+code references itself through URLs that include the context.
 -->
 <!ELEMENT recommended-deployment-context (#PCDATA)>
 
