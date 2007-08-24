@@ -888,26 +888,34 @@
 			<exec dir="${app.server.geronimo-tomcat.bin.dir}" executable="startup.bat" resolveexecutable="true" />
 
 			<sequential>
-				<sleep seconds="30" />
+				<sleep seconds="20" />
 
 				<ant dir="sql" target="deploy-geronimo-tomcat-derby" inheritAll="false" />
 
 				<sleep seconds="10" />
 
-				<java
+				<!--<java
 					fork="true"
 					jar="${app.server.geronimo-tomcat.dir}/bin/deployer.jar"
 				>
 					<arg line="${app.server.geronimo-tomcat.credentials} deploy dist/liferay-portal-${lp.version.file.name}-with-dependencies.war" />
 				</java>
 
-				<sleep seconds="60" />
+				<sleep seconds="60" />-->
 
 				<exec dir="${app.server.geronimo-tomcat.bin.dir}" executable="shutdown.bat" resolveexecutable="true">
 					<arg line="${app.server.geronimo-tomcat.credentials}" />
 				</exec>
+
+				<sleep seconds="10" />
 			</sequential>
 		</parallel>
+
+		<echo file="app.server.${env.COMPUTERNAME}.properties">app.server.type=geronimo-tomcat</echo>
+
+		<antcall target="deploy" inheritAll="false" />
+
+		<delete file="app.server.${env.COMPUTERNAME}.properties" />
 
 		<delete>
 			<fileset dir="${app.server.geronimo-tomcat.dir}/var/log" includes="*.log" />

@@ -37,13 +37,14 @@
 				<import>classes</import>
 			</dependency>
 			<dependency>
+				<artifactId>sharedlib</artifactId>
+			</dependency>
+			<dependency>
 				<groupId>liferay</groupId>
 				<artifactId>liferay-pool</artifactId>
 				<type>car</type>
 			</dependency>
 		</dependencies>
-		<hidden-classes />
-		<non-overridable-classes />
 	</environment>
 	<context-root>/</context-root>
 	<security-realm-name>PortalRealm</security-realm-name>
