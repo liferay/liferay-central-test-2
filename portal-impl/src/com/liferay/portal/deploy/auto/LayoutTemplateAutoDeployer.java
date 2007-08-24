@@ -50,6 +50,8 @@ public class LayoutTemplateAutoDeployer
 				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
 			destDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR);
 			appServerType = ServerDetector.getServerId();
+			jbossPrefix = PrefsPropsUtil.getString(
+				PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX);
 			unpackWar = PrefsPropsUtil.getBoolean(
 				PropsUtil.AUTO_DEPLOY_UNPACK_WAR);
 
