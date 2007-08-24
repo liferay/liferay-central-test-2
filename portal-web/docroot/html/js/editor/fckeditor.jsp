@@ -56,8 +56,14 @@ String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
 		}
 
 		function initFckArea() {
+
+			// LEP-3563
+
 			if (!document.all && window.frameElement.clientWidth == 0) {
-				//This is hack since fckeditor doesn't initialize properly in gecko if the editor is hidden...
+
+				// This is hack since FCKEditor doesn't initialize properly in
+				// Gecko if the editor is hidden.
+
 				setTimeout('initFckArea();',250);
 			}
 			else {
@@ -73,7 +79,7 @@ String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
 				fckEditor.Width = "100%";
 				fckEditor.Height = "100%";
 				fckEditor.ToolbarSet = '<%= toolbarSet %>';
-	
+
 				fckEditor.ReplaceTextarea();
 			}
 		}
