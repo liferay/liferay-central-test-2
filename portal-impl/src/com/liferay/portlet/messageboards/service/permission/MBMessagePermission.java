@@ -75,7 +75,13 @@ public class MBMessagePermission {
 		throws PortalException, SystemException {
 
 		MBCategory category = message.getCategory();
-        long groupId = (category != null) ? category.getGroupId() : 0L;
+
+		long groupId = 0;
+
+		if (category != null) {
+			groupId = category.getGroupId();
+		}
+
 		if (MBBanLocalServiceUtil.hasBan(
 				groupId, permissionChecker.getUserId())) {
 
@@ -83,8 +89,8 @@ public class MBMessagePermission {
 		}
 		else {
 			return permissionChecker.hasPermission(
-				groupId, MBMessage.class.getName(),
-				message.getMessageId(), actionId);
+				groupId, MBMessage.class.getName(), message.getMessageId(),
+				actionId);
 		}
 	}
 
