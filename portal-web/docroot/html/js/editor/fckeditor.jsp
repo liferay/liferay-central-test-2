@@ -56,20 +56,26 @@ String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
 		}
 
 		function initFckArea() {
-			var textArea = document.getElementById("FCKeditor1");
+			if (!document.all && window.frameElement.clientWidth == 0) {
+				//This is hack since fckeditor doesn't initialize properly in gecko if the editor is hidden...
+				setTimeout('initFckArea();',250);
+			}
+			else {
+				var textArea = document.getElementById("FCKeditor1");
 
-			textArea.value = parent.<%= initMethod %>();
+				textArea.value = parent.<%= initMethod %>();
 
-			var fckEditor = new FCKeditor("FCKeditor1");
+				var fckEditor = new FCKeditor("FCKeditor1");
 
-			fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= mainPath %>&doAsUserId=<%= doAsUserId %>";
+				fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= mainPath %>&doAsUserId=<%= doAsUserId %>";
 
-			fckEditor.BasePath = "fckeditor/";
-			fckEditor.Width = "100%";
-			fckEditor.Height = "100%";
-			fckEditor.ToolbarSet = '<%= toolbarSet %>';
-
-			fckEditor.ReplaceTextarea();
+				fckEditor.BasePath = "fckeditor/";
+				fckEditor.Width = "100%";
+				fckEditor.Height = "100%";
+				fckEditor.ToolbarSet = '<%= toolbarSet %>';
+	
+				fckEditor.ReplaceTextarea();
+			}
 		}
 
 		function onChangeCallback() {
