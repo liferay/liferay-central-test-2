@@ -69,7 +69,7 @@
 						}
 						%>
 
-						<c:if test="<%= (user.getUserId() != user2.getUserId()) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER) %>">
+						<c:if test="<%= (user2 != null) && (user.getUserId() != user2.getUserId()) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER) %>">
 							<hr />
 
 							<c:choose>
