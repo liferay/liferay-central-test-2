@@ -67,10 +67,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		newRow.id = "<portlet:namespace />file" + <portlet:namespace />fileIndex;
 
 		if (remoteFile == null) {
-			var browser = Liferay.Util.createInputElement("<portlet:namespace />attachment" + <portlet:namespace />fileIndex);
-
-			browser.type = "file";
-			browser.size = "30";
+			var browser = jQuery('<input name="<portlet:namespace />attachment' + <portlet:namespace />fileIndex + '"size="30" type="file"  />')[0];
 
 			var del = document.createElement("a");
 
@@ -81,11 +78,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 			newRow.insertCell(1).appendChild(del);
 		}
 		else {
-			var checkbox = Liferay.Util.createInputElement("<portlet:namespace />remoteAttachment" + remoteFile);
-
-			checkbox.type = "checkbox";
-			checkbox.checked = true;
-			checkbox.value = contentPath;
+			var checkbox = jQuery('<input checked="checked" name="<portlet:namespace />remoteAttachment' + remoteFile + '" type="checkbox" value="' + contentPath + '" />')[0];
 
 			var filename = document.createElement("span");
 

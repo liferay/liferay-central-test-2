@@ -154,7 +154,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 					// also nasty because subsequent updates to the generated
 					// HTML will add another set of div tags.
 
-					if (!startsWith(value, "<DIV>") && !endsWith(value, "</DIV>")) {
+					if (!Liferay.Util.startsWith(value, "<DIV>") && !Liferay.Util.endsWith(value, "</DIV>")) {
 						value = "<DIV>" + value + "</DIV>";
 					}
 				}
