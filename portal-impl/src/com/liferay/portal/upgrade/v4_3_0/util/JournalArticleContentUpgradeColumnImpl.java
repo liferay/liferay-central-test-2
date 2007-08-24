@@ -23,12 +23,12 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.BaseUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.IdReplacer;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
@@ -206,61 +206,21 @@ public class JournalArticleContentUpgradeColumnImpl
 	}
 
 	protected String replaceIds(String content) throws Exception {
-		ValueMapper folderIdMapper = AvailableMappersUtil.getDLFolderIdMapper();
+		ValueMapper dlFolderIdMapper = AvailableMappersUtil.getDLFolderIdMapper();
 
-		content = replaceIds(
-			content, "/document_library/get_file?folderId=", "&",
-			folderIdMapper);
-		content = replaceIds(
+		content = IdReplacer.replaceLongIds(
+			content, "/document_library/get_file?folderId=", dlFolderIdMapper);
+		content = IdReplacer.replaceLongIds(
 			content,
 			"_20_struts_action=%2Fdocument_library%2Fget_file&_20_folderId=",
-			"&", folderIdMapper);
+			dlFolderIdMapper);
+
+		ValueMapper igImageIdMapper = AvailableMappersUtil.getIGImageIdMapper();
+
+		content = IdReplacer.replaceLongIds(
+			content, "/image_gallery?img_id=", igImageIdMapper);
 
 		return content;
-	}
-
-	protected String replaceIds(
-			String s, String begin, String end, ValueMapper valueMapper)
-		throws Exception {
-
-		if ((s == null) || (begin == null) || (end == null) ||
-			(valueMapper == null) || (valueMapper.size() == 0)) {
-
-			return s;
-		}
-
-		StringMaker sm = new StringMaker(s.length());
-
-		int pos = 0;
-
-		while (true) {
-			int x = s.indexOf(begin, pos);
-			int y = s.indexOf(end, x + begin.length());
-
-			if ((x == -1) || (y == -1)) {
-				sm.append(s.substring(pos, s.length()));
-
-				break;
-			}
-			else {
-				sm.append(s.substring(pos, x + begin.length()));
-
-				Long oldValue = new Long(GetterUtil.getLong(
-					s.substring(x + begin.length(), y)));
-
-				Long newValue = (Long)valueMapper.getNewValue(oldValue);
-
-				if (newValue == null) {
-					newValue = oldValue;
-				}
-
-				sm.append(newValue);
-
-				pos = y;
-			}
-		}
-
-		return sm.toString();
 	}
 
 	private static final String _IMG_ID_PATH =
