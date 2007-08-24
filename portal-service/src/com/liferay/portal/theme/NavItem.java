@@ -62,6 +62,10 @@ public class NavItem implements Serializable {
 		_layout = layout;
 	}
 
+	public Layout getLayout() {
+		return _layout;
+	}
+
 	public boolean isSelected() {
 		ThemeDisplay themeDisplay = _vars.getThemeDisplay();
 
