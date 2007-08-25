@@ -200,7 +200,7 @@ Liferay.Util = {
 		}
 	},
 
-	endsWith: function() {
+	endsWith: function(str, x) {
 		return (str.lastIndexOf(x) === (str.length - x.length));
 	},
 

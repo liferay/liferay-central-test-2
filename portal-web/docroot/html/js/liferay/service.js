@@ -32,7 +32,7 @@ Liferay.Service = {
 			}
 		}
 
-		if (endsWith(serviceParameters, ",")) {
+		if (Liferay.Util.endsWith(serviceParameters, ",")) {
 			serviceParameters = serviceParameters.substring(0, serviceParameters.length - 1);
 		}
 
