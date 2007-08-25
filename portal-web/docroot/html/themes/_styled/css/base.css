@@ -46,6 +46,10 @@ html, body {
 	height: 100%;
 }
 
+table {
+	clear: both;
+}
+
 /* ---------- Links ---------- */
 
 a {
