@@ -226,6 +226,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	function <portlet:namespace />downloadArticleContent() {
 		document.<portlet:namespace />fm.xml.value = <portlet:namespace />getArticleContent();
 		document.<portlet:namespace />fm.action = "<%= themeDisplay.getPathMain() %>/journal/get_article_content";
+		document.<portlet:namespace />fm.enctype = "";
 		document.<portlet:namespace />fm.submit();
 		<portlet:namespace />resetForm();
 	}
@@ -418,6 +419,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 
 	function <portlet:namespace />resetForm() {
 		document.<portlet:namespace />fm.action = "<portlet:actionURL><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:actionURL>";
+		document.<portlet:namespace />fm.enctype = "multipart/form-data"
 		document.<portlet:namespace />fm.target = "_self";
 	}
 

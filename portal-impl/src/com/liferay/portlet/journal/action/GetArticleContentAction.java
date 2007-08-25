@@ -51,7 +51,9 @@ public class GetArticleContentAction extends Action {
 		throws Exception {
 
 		try {
-			String xml = JournalUtil.formatXML(ParamUtil.getString(req, "xml"));
+			String xml = ParamUtil.getString(req, "xml");
+
+			xml = JournalUtil.formatXML(xml);
 
 			String fileName = "content.xml";
 			byte[] byteArray = xml.getBytes();
