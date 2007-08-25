@@ -307,7 +307,7 @@ public class MainServlet extends ActionServlet {
 
 		long companyId = PortalInstances.getCompanyId(req);
 
-		CompanyThreadLocal.setCompanyId(companyId);
+		//CompanyThreadLocal.setCompanyId(companyId);
 
 		// CTX
 

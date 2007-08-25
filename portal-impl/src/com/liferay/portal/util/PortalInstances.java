@@ -179,6 +179,8 @@ public class PortalInstances {
 
 		req.setAttribute(WebKeys.COMPANY_ID, new Long(companyId));
 
+		CompanyThreadLocal.setCompanyId(companyId);
+
 		return companyId;
 	}
 
