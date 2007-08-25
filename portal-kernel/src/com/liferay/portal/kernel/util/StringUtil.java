@@ -22,22 +22,22 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
-
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * <a href="StringUtil.java.html"><b><i>View Source</i></b></a>
@@ -1051,6 +1051,21 @@ public class StringUtil {
 		}
 
 		return sm.toString();
+	}
+
+	public static String encodeURL( String url ) {
+		if (url == null) {
+			return null;
+		}
+
+		try {
+			return URLEncoder.encode(url, StringPool.UTF8);
+		}
+		catch (UnsupportedEncodingException uee) {
+			_log.error(uee, uee);
+
+			return StringPool.BLANK;
+		}
 	}
 
 	private static boolean _isTrimable(char c, char[] exceptions) {
