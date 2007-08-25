@@ -82,11 +82,28 @@ public interface TagsAssetLocalService {
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getAssets(long[] entryIds, long[] notEntryIds,
+		boolean andOperator, java.util.Date publishDate,
+		java.util.Date expirationDate, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
 	public int getAssetsCount(long[] entryIds, long[] notEntryIds,
 		boolean andOperator) throws com.liferay.portal.SystemException;
 
+	public int getAssetsCount(long[] entryIds, long[] notEntryIds,
+		boolean andOperator, java.util.Date publishDate,
+		java.util.Date expirationDate)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
 		java.lang.String className, long classPK, java.lang.String[] entryNames)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
+		java.lang.String className, long classPK,
+		java.lang.String[] entryNames, java.util.Date publishDate,
+		java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

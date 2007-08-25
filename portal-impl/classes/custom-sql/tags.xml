@@ -8,7 +8,7 @@
 			FROM
 				TagsAssets_TagsEntries
 			WHERE
-				entryId = ? and assetId IN (
+				entryId = ?  [$DATES$] and assetId IN (
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.countByOrEntryIds">
@@ -24,7 +24,7 @@
 				TagsEntry ON
 					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId)
 			WHERE
-				([$ENTRY_ID$]) [$NOT_ENTRY_ID$]
+				([$ENTRY_ID$]) [$NOT_ENTRY_ID$] [$DATES$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.findByAndEntryIds">
@@ -50,7 +50,7 @@
 				TagsEntry ON
 					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId)
 			WHERE
-				([$ENTRY_ID$]) [$NOT_ENTRY_ID$]
+				([$ENTRY_ID$]) [$NOT_ENTRY_ID$] [$DATES$]
 			ORDER BY
 				TagsAsset.modifiedDate DESC
 		]]>

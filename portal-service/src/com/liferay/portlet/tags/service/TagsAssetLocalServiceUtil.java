@@ -66,31 +66,31 @@ public class TagsAssetLocalServiceUtil {
 	}
 
 	public static void deleteAsset(long assetId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 		tagsAssetLocalService.deleteAsset(assetId);
 	}
 
 	public static void deleteAsset(java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 		tagsAssetLocalService.deleteAsset(className, classPK);
 	}
 
 	public static void deleteAsset(
 		com.liferay.portlet.tags.model.TagsAsset asset)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 		tagsAssetLocalService.deleteAsset(asset);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset getAsset(
 		long assetId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 
 		return tagsAssetLocalService.getAsset(assetId);
@@ -98,8 +98,8 @@ public class TagsAssetLocalServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsAsset getAsset(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 
 		return tagsAssetLocalService.getAsset(className, classPK);
@@ -114,6 +114,16 @@ public class TagsAssetLocalServiceUtil {
 			andOperator, begin, end);
 	}
 
+	public static java.util.List getAssets(long[] entryIds, long[] notEntryIds,
+		boolean andOperator, java.util.Date publishDate,
+		java.util.Date expirationDate, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getAssets(entryIds, notEntryIds,
+			andOperator, publishDate, expirationDate, begin, end);
+	}
+
 	public static int getAssetsCount(long[] entryIds, long[] notEntryIds,
 		boolean andOperator) throws com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
@@ -122,15 +132,37 @@ public class TagsAssetLocalServiceUtil {
 			andOperator);
 	}
 
+	public static int getAssetsCount(long[] entryIds, long[] notEntryIds,
+		boolean andOperator, java.util.Date publishDate,
+		java.util.Date expirationDate)
+		throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getAssetsCount(entryIds, notEntryIds,
+			andOperator, publishDate, expirationDate);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
 		long userId, java.lang.String className, long classPK,
 		java.lang.String[] entryNames)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 
 		return tagsAssetLocalService.updateAsset(userId, className, classPK,
 			entryNames);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
+		long userId, java.lang.String className, long classPK,
+		java.lang.String[] entryNames, java.util.Date publishDate,
+		java.util.Date expirationDate)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.updateAsset(userId, className, classPK,
+			entryNames, publishDate, expirationDate);
 	}
 
 	public static void validate(java.lang.String className,

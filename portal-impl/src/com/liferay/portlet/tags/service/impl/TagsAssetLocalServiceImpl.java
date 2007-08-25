@@ -91,17 +91,26 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	}
 
 	public List getAssets(
-			long[] entryIds, long[] notEntryIds, boolean andOperator, int begin,
-			int end)
+			long[] entryIds, long[] notEntryIds, boolean andOperator,
+			int begin, int end)
+		throws SystemException {
+
+		return getAssets( entryIds, notEntryIds, andOperator, null, null, begin, end );
+	}
+
+	public List getAssets(
+			long[] entryIds, long[] notEntryIds, boolean andOperator,
+			Date publishDate, Date expirationDate,
+			int begin, int end)
 		throws SystemException {
 
 		if (andOperator) {
 			return TagsAssetFinder.findByAndEntryIds(
-				entryIds, notEntryIds, begin, end);
+				entryIds, notEntryIds, publishDate, expirationDate, begin, end);
 		}
 		else {
 			return TagsAssetFinder.findByOrEntryIds(
-				entryIds, notEntryIds, begin, end);
+					entryIds, notEntryIds, publishDate, expirationDate, begin, end);
 		}
 	}
 
@@ -109,16 +118,34 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			long[] entryIds, long[] notEntryIds, boolean andOperator)
 		throws SystemException {
 
+		return getAssetsCount( entryIds, notEntryIds, andOperator, null, null );
+	}
+
+	public int getAssetsCount(
+			long[] entryIds, long[] notEntryIds, boolean andOperator,
+			Date publishDate, Date expirationDate)
+		throws SystemException {
+
 		if (andOperator) {
-			return TagsAssetFinder.countByAndEntryIds(entryIds, notEntryIds);
+			return TagsAssetFinder.countByAndEntryIds(
+					entryIds, notEntryIds, publishDate, expirationDate);
 		}
 		else {
-			return TagsAssetFinder.countByOrEntryIds(entryIds, notEntryIds);
+			return TagsAssetFinder.countByOrEntryIds(
+					entryIds, notEntryIds, publishDate, expirationDate);
 		}
 	}
 
 	public TagsAsset updateAsset(
 			long userId, String className, long classPK, String[] entryNames)
+		throws PortalException, SystemException {
+
+			return updateAsset( userId, className, classPK, entryNames, null, null );
+		}
+
+		public TagsAsset updateAsset(
+			long userId, String className, long classPK, String[] entryNames,
+			Date publishDate, Date expirationDate)
 		throws PortalException, SystemException {
 
 		// Asset
@@ -140,11 +167,15 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			asset.setUserId(user.getUserId());
 			asset.setUserName(user.getFullName());
 			asset.setCreateDate(now);
+			asset.setPublishDate(publishDate);
+			asset.setExpirationDate(expirationDate);
 			asset.setClassNameId(classNameId);
 			asset.setClassPK(classPK);
 		}
 
 		asset.setModifiedDate(now);
+		asset.setPublishDate(publishDate);
+		asset.setExpirationDate(expirationDate);
 
 		TagsAssetUtil.update(asset);
 
