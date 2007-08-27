@@ -34,6 +34,7 @@ import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.sql.Timestamp;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -64,8 +65,8 @@ public class TagsAssetFinder {
 		TagsAssetFinder.class.getName() + ".findByOrEntryIds";
 
 	public static int countByAndEntryIds(
-			long[] entryIds, long[] notEntryIds,
-			Date publishDate, Date expirationDate )
+			long[] entryIds, long[] notEntryIds, Date publishDate,
+			Date expirationDate)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -150,8 +151,8 @@ public class TagsAssetFinder {
 	}
 
 	public static int countByOrEntryIds(
-			long[] entryIds, long[] notEntryIds,
-			Date publishDate, Date expirationDate )
+			long[] entryIds, long[] notEntryIds, Date publishDate,
+			Date expirationDate )
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -227,9 +228,8 @@ public class TagsAssetFinder {
 	}
 
 	public static List findByAndEntryIds(
-			long[] entryIds, long[] notEntryIds,
-			Date publishDate, Date expirationDate,
-			int begin, int end)
+			long[] entryIds, long[] notEntryIds, Date publishDate,
+			Date expirationDate, int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -310,15 +310,13 @@ public class TagsAssetFinder {
 		throws SystemException {
 
 		return findByOrEntryIds(
-			entryIds, notEntryIds,
-			publishDate, expirationDate,
+			entryIds, notEntryIds, publishDate, expirationDate,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public static List findByOrEntryIds(
-			long[] entryIds, long[] notEntryIds,
-			Date publishDate, Date expirationDate,
-			int begin, int end)
+			long[] entryIds, long[] notEntryIds, Date publishDate,
+			Date expirationDate, int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -405,31 +403,37 @@ public class TagsAssetFinder {
 		}
 	}
 
-	private static String _addDates(String sql, Date publishDate, Date expirationDate) {
+	private static String _addDates(
+		String sql, Date publishDate, Date expirationDate) {
+
 		StringMaker sm = new StringMaker();
 
-		if( publishDate != null ) {
+		if (publishDate != null) {
 			sm.append( " AND (publishDate IS NULL OR publishDate < ?)" );
 		}
-		if( expirationDate != null ) {
+
+		if (expirationDate != null) {
 			sm.append( " AND (expirationDate IS NULL OR expirationDate > ?)" );
 		}
 
-		sql = StringUtil.replace(
-			sql, "[$DATES$]", sm.toString());
+		sql = StringUtil.replace(sql, "[$DATES$]", sm.toString());
 
 		return sql;
 	}
 
-	private static void _setDates(QueryPos qPos, Date publishDate, Date expirationDate) {
+	private static void _setDates(
+		QueryPos qPos, Date publishDate, Date expirationDate) {
 
-		if( publishDate != null ) {
+		if (publishDate != null) {
 			Timestamp publishDate_TS = CalendarUtil.getTimestamp(publishDate);
+
 			qPos.add(publishDate_TS);
 		}
 
-		if( expirationDate != null ) {
-			Timestamp expirationDate_TS = CalendarUtil.getTimestamp(expirationDate);
+		if (expirationDate != null) {
+			Timestamp expirationDate_TS =
+				CalendarUtil.getTimestamp(expirationDate);
+
 			qPos.add(expirationDate_TS);
 		}
 	}

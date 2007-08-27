@@ -294,8 +294,8 @@ public class JournalArticleLocalServiceImpl
 
 		TagsAssetLocalServiceUtil.updateAsset(
 			userId, JournalArticle.class.getName(),
-			article.getResourcePrimKey(), tagsEntries,
-			article.getDisplayDate(), article.getExpirationDate());
+			article.getResourcePrimKey(), tagsEntries,article.getDisplayDate(),
+			article.getExpirationDate());
 
 		// Email
 
@@ -1347,8 +1347,8 @@ public class JournalArticleLocalServiceImpl
 
 		TagsAssetLocalServiceUtil.updateAsset(
 			userId, JournalArticle.class.getName(),
-			article.getResourcePrimKey(), tagsEntries,
-			article.getDisplayDate(), article.getExpirationDate());
+			article.getResourcePrimKey(), tagsEntries, article.getDisplayDate(),
+			article.getExpirationDate());
 
 		// Email
 
