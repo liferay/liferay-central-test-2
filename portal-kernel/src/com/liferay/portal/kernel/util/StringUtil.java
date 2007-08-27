@@ -604,6 +604,11 @@ public class StringUtil {
 		return new String(reverse);
 	}
 
+	public static String safePath(String path) {
+		return StringUtil.replace(
+			path, StringPool.DOUBLE_SLASH, StringPool.SLASH);
+	}
+
 	public static String shorten(String s) {
 		return shorten(s, 20);
 	}

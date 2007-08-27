@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.PluginSetting;
@@ -569,6 +570,7 @@ public class ThemeLocalUtil {
 				themeModel.getTemplatesPath());
 
 			templatesPath = themeContextReplace.replace(templatesPath);
+			templatesPath = StringUtil.safePath(templatesPath);
 
 			themeContextReplace.addValue("templates-path", templatesPath);
 
@@ -576,6 +578,7 @@ public class ThemeLocalUtil {
 				theme.elementText("css-path"), themeModel.getCssPath());
 
 			cssPath = themeContextReplace.replace(cssPath);
+			cssPath = StringUtil.safePath(cssPath);
 
 			themeContextReplace.addValue("css-path", cssPath);
 
@@ -584,6 +587,7 @@ public class ThemeLocalUtil {
 				themeModel.getImagesPath());
 
 			imagesPath = themeContextReplace.replace(imagesPath);
+			imagesPath = StringUtil.safePath(imagesPath);
 
 			themeContextReplace.addValue("images-path", imagesPath);
 
@@ -592,6 +596,7 @@ public class ThemeLocalUtil {
 				themeModel.getJavaScriptPath());
 
 			javaScriptPath = themeContextReplace.replace(javaScriptPath);
+			javaScriptPath = StringUtil.safePath(javaScriptPath);
 
 			themeContextReplace.addValue("javascript-path", javaScriptPath);
 

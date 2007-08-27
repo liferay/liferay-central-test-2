@@ -179,6 +179,10 @@ public class StringUtil_IW {
 		return StringUtil.reverse(s);
 	}
 
+	public java.lang.String safePath(java.lang.String path) {
+		return StringUtil.safePath(path);
+	}
+
 	public java.lang.String shorten(java.lang.String s) {
 		return StringUtil.shorten(s);
 	}
