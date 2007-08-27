@@ -82,10 +82,7 @@ function addPortletHTML(url, placeHolder) {
 
 		return portletId;
 	};
-	jQuery.ajax({url: url, complete: function(xHR) {
-		addPortletReturn(xHR.responseText);
-	}});
-return;
+
 	AjaxUtil.request(url, {
 		onComplete: function(xmlHttpReq){
 			addPortletReturn(xmlHttpReq.responseText);

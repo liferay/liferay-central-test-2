@@ -403,6 +403,10 @@
 				<delete dir="docroot/html/js/editor/codepress" />
 
 				<unzip src="docroot/html/js/editor/${codepress.file}" dest="docroot/html/js/editor" />
+
+				<copy todir="docroot/html/js/editor/codepress" overwrite="yes">
+					<fileset dir="docroot/html/js/editor/_codepress" />
+				</copy>
 			</then>
 		</if>
 	</target>

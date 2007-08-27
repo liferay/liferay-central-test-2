@@ -40,7 +40,6 @@ else {
 }
 %>
 
-
 <script type="text/javascript">
 	function getEditorContent() {
 		var content = decodeURIComponent(opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value);

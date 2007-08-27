@@ -206,6 +206,7 @@ Liferay.Util = {
 
 	evalScripts: function(obj) {
 		var instance = this;
+
 		jQuery(obj).find('script').each(
 			function(){
 				if ( this.src ) {
@@ -217,7 +218,7 @@ Liferay.Util = {
 			}
 		);
 	},
-	
+
 	focusFormField: function(el) {
 		jQuery(
 			function() {
@@ -304,7 +305,7 @@ Liferay.Util = {
 		}
 
 		var opts = jQuery(box).find('option[@value!=]');
-		
+
 		opts.each(
 			function() {
 				s.push(this.value);
@@ -480,9 +481,11 @@ Liferay.Util = {
 	resizeTextarea: function(elString) {
 		var init = function() {
 			var el = jQuery('#' + elString);
+
 			if (!el.length) {
 				el = jQuery('textarea[@name=' + elString + ']');
 			}
+
 			if (el.length) {
 				var pageBody = jQuery('body');
 
