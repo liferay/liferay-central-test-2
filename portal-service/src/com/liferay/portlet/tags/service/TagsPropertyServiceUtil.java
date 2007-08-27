@@ -51,8 +51,8 @@ package com.liferay.portlet.tags.service;
 public class TagsPropertyServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long entryId, java.lang.String key, java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
 
 		return tagsPropertyService.addProperty(entryId, key, value);
@@ -60,22 +60,22 @@ public class TagsPropertyServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		java.lang.String entryName, java.lang.String key, java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
 
 		return tagsPropertyService.addProperty(entryName, key, value);
 	}
 
 	public static void deleteProperty(long propertyId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
 		tagsPropertyService.deleteProperty(propertyId);
 	}
 
 	public static java.util.List getProperties(long entryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
 
 		return tagsPropertyService.getProperties(entryId);
@@ -83,7 +83,7 @@ public class TagsPropertyServiceUtil {
 
 	public static java.util.List getPropertyValues(long companyId,
 		java.lang.String key)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
 
 		return tagsPropertyService.getPropertyValues(companyId, key);
@@ -91,8 +91,8 @@ public class TagsPropertyServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsProperty updateProperty(
 		long propertyId, java.lang.String key, java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
 
 		return tagsPropertyService.updateProperty(propertyId, key, value);

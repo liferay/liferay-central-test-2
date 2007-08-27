@@ -50,16 +50,16 @@ package com.liferay.portlet.tags.service;
  */
 public class TagsAssetServiceUtil {
 	public static void deleteAsset(long assetId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
 		tagsAssetService.deleteAsset(assetId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset getAsset(
 		long assetId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
 
 		return tagsAssetService.getAsset(assetId);

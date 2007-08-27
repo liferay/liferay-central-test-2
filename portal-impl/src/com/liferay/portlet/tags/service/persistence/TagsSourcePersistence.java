@@ -32,8 +32,8 @@ public interface TagsSourcePersistence {
 	public com.liferay.portlet.tags.model.TagsSource create(long sourceId);
 
 	public com.liferay.portlet.tags.model.TagsSource remove(long sourceId)
-		throws com.liferay.portlet.tags.NoSuchSourceException, 
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchSourceException;
 
 	public com.liferay.portlet.tags.model.TagsSource remove(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
@@ -49,8 +49,8 @@ public interface TagsSourcePersistence {
 
 	public com.liferay.portlet.tags.model.TagsSource findByPrimaryKey(
 		long sourceId)
-		throws com.liferay.portlet.tags.NoSuchSourceException, 
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchSourceException;
 
 	public com.liferay.portlet.tags.model.TagsSource fetchByPrimaryKey(
 		long sourceId) throws com.liferay.portal.SystemException;

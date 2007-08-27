@@ -124,6 +124,7 @@ long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), 
 long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
 
 Date now = new Date();
+
 int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, notEntryIds, andOperator, now, now);
 
 searchContainer.setTotal(total);

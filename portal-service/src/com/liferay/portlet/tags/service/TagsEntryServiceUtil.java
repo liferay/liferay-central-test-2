@@ -51,8 +51,8 @@ package com.liferay.portlet.tags.service;
 public class TagsEntryServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
 		java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.addEntry(name);
@@ -60,24 +60,24 @@ public class TagsEntryServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
 		java.lang.String name, java.lang.String[] properties)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.addEntry(name, properties);
 	}
 
 	public static void deleteEntry(long entryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 		tagsEntryService.deleteEntry(entryId);
 	}
 
 	public static java.util.List getEntries(java.lang.String className,
 		long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.getEntries(className, classPK);
@@ -85,7 +85,7 @@ public class TagsEntryServiceUtil {
 
 	public static java.util.List search(long companyId, java.lang.String name,
 		java.lang.String[] properties)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.search(companyId, name, properties);
@@ -93,7 +93,7 @@ public class TagsEntryServiceUtil {
 
 	public static java.util.List search(long companyId, java.lang.String name,
 		java.lang.String[] properties, int begin, int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.search(companyId, name, properties, begin, end);
@@ -102,7 +102,7 @@ public class TagsEntryServiceUtil {
 	public static com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
 		long companyId, java.lang.String name, java.lang.String[] properties,
 		int begin, int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.searchAutocomplete(companyId, name, properties,
@@ -111,7 +111,7 @@ public class TagsEntryServiceUtil {
 
 	public static int searchCount(long companyId, java.lang.String name,
 		java.lang.String[] properties)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.searchCount(companyId, name, properties);
@@ -119,8 +119,8 @@ public class TagsEntryServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
 		long entryId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.updateEntry(entryId, name);
@@ -128,8 +128,8 @@ public class TagsEntryServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
 		long entryId, java.lang.String name, java.lang.String[] properties)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.updateEntry(entryId, name, properties);

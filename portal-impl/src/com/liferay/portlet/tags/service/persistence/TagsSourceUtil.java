@@ -44,8 +44,8 @@ public class TagsSourceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsSource remove(
 		long sourceId)
-		throws com.liferay.portlet.tags.NoSuchSourceException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchSourceException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -140,8 +140,8 @@ public class TagsSourceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsSource findByPrimaryKey(
 		long sourceId)
-		throws com.liferay.portlet.tags.NoSuchSourceException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchSourceException {
 		return getPersistence().findByPrimaryKey(sourceId);
 	}
 

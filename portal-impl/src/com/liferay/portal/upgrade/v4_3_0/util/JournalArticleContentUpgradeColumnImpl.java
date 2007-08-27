@@ -206,7 +206,8 @@ public class JournalArticleContentUpgradeColumnImpl
 	}
 
 	protected String replaceIds(String content) throws Exception {
-		ValueMapper dlFolderIdMapper = AvailableMappersUtil.getDLFolderIdMapper();
+		ValueMapper dlFolderIdMapper =
+			AvailableMappersUtil.getDLFolderIdMapper();
 
 		content = IdReplacer.replaceLongIds(
 			content, "/document_library/get_file?folderId=", dlFolderIdMapper);

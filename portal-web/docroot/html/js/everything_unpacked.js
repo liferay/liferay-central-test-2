@@ -14196,7 +14196,7 @@ Liferay.Util = {
 		}
 	},
 
-	endsWith: function() {
+	endsWith: function(str, x) {
 		return (str.lastIndexOf(x) === (str.length - x.length));
 	},
 
@@ -16950,7 +16950,7 @@ Liferay.Service = {
 			}
 		}
 
-		if (endsWith(serviceParameters, ",")) {
+		if (Liferay.Util.endsWith(serviceParameters, ",")) {
 			serviceParameters = serviceParameters.substring(0, serviceParameters.length - 1);
 		}
 

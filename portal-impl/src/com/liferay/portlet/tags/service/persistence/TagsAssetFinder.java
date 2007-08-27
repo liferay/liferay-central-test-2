@@ -117,7 +117,7 @@ public class TagsAssetFinder {
 
 			String sql = sm.toString();
 
-			_addDates(sql, publishDate, expirationDate);
+			sql = _getDates(sql, publishDate, expirationDate);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -127,7 +127,6 @@ public class TagsAssetFinder {
 
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
-
 			_setDates(qPos, publishDate, expirationDate);
 
 			Iterator itr = q.list().iterator();
@@ -194,7 +193,7 @@ public class TagsAssetFinder {
 					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
 			}
 
-			sql = _addDates(sql, publishDate, expirationDate);
+			sql = _getDates(sql, publishDate, expirationDate);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -204,7 +203,6 @@ public class TagsAssetFinder {
 
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
-
 			_setDates(qPos, publishDate, expirationDate);
 
 			Iterator itr = q.list().iterator();
@@ -282,7 +280,7 @@ public class TagsAssetFinder {
 
 			String sql = sm.toString();
 
-			sql = _addDates(sql, publishDate, expirationDate);
+			sql = _getDates(sql, publishDate, expirationDate);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -292,8 +290,7 @@ public class TagsAssetFinder {
 
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
-
-			_setDates( qPos, publishDate, expirationDate );
+			_setDates(qPos, publishDate, expirationDate);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
@@ -358,7 +355,7 @@ public class TagsAssetFinder {
 					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
 			}
 
-			sql = _addDates(sql, publishDate, expirationDate);
+			sql = _getDates(sql, publishDate, expirationDate);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -368,8 +365,7 @@ public class TagsAssetFinder {
 
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
-
-			_setDates( qPos, publishDate, expirationDate );
+			_setDates(qPos, publishDate, expirationDate);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
@@ -379,6 +375,24 @@ public class TagsAssetFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
+	}
+
+	private static String _getDates(
+		String sql, Date publishDate, Date expirationDate) {
+
+		StringMaker sm = new StringMaker();
+
+		if (publishDate != null) {
+			sm.append(" AND (publishDate IS NULL OR publishDate < ?)");
+		}
+
+		if (expirationDate != null) {
+			sm.append(" AND (expirationDate IS NULL OR expirationDate > ?)");
+		}
+
+		sql = StringUtil.replace(sql, "[$DATES$]", sm.toString());
+
+		return sql;
 	}
 
 	private static String _getEntryIds(long[] entryIds, String operator) {
@@ -401,24 +415,6 @@ public class TagsAssetFinder {
 		for (int i = 0; i < entryIds.length; i++) {
 			qPos.add(entryIds[i]);
 		}
-	}
-
-	private static String _addDates(
-		String sql, Date publishDate, Date expirationDate) {
-
-		StringMaker sm = new StringMaker();
-
-		if (publishDate != null) {
-			sm.append( " AND (publishDate IS NULL OR publishDate < ?)" );
-		}
-
-		if (expirationDate != null) {
-			sm.append( " AND (expirationDate IS NULL OR expirationDate > ?)" );
-		}
-
-		sql = StringUtil.replace(sql, "[$DATES$]", sm.toString());
-
-		return sql;
 	}
 
 	private static void _setDates(
