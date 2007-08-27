@@ -15,7 +15,7 @@
 		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://model.tags.portlet.liferay.com" name="getAsset" qname="operNS:getAsset" returnQName="getAssetReturn" returnType="rtns:TagsAssetSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="assetId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="getAsset deleteAsset"/>
+		<parameter name="allowedMethods" value="deleteAsset getAsset"/>
 		<typeMapping xmlns:ns="http://model.tags.portlet.liferay.com" qname="ns:TagsAssetSoap" type="java:com.liferay.portlet.tags.model.TagsAssetSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 </deployment>
