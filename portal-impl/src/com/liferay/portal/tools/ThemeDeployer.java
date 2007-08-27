@@ -86,6 +86,52 @@ public class ThemeDeployer extends BaseDeployer {
 
 		sm.append(extraContent);
 
+		// HeaderFilter
+
+		sm.append("<filter>");
+		sm.append("<filter-name>Header Filter</filter-name>");
+		sm.append("<filter-class>");
+		sm.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
+		sm.append("</filter-class>");
+		sm.append("<init-param>");
+		sm.append("<param-name>filter-class</param-name>");
+		sm.append("<param-value>");
+		sm.append("com.liferay.filters.header.HeaderFilter");
+		sm.append("</param-value>");
+		sm.append("</init-param>");
+		sm.append("<init-param>");
+		sm.append("<param-name>Cache-Control</param-name>");
+		sm.append("<param-value>max-age=3660, public</param-value>");
+		sm.append("</init-param>");
+		sm.append("</filter>");
+
+		sm.append("<filter-mapping>");
+		sm.append("<filter-name>Header Filter</filter-name>");
+		sm.append("<url-pattern>*.css</url-pattern>");
+		sm.append("</filter-mapping>");
+		sm.append("<filter-mapping>");
+		sm.append("<filter-name>Header Filter</filter-name>");
+		sm.append("<url-pattern>*.gif</url-pattern>");
+		sm.append("</filter-mapping>");
+		sm.append("<filter-mapping>");
+		sm.append("<filter-name>Header Filter</filter-name>");
+		sm.append("<url-pattern>*.html</url-pattern>");
+		sm.append("</filter-mapping>");
+		sm.append("<filter-mapping>");
+		sm.append("<filter-name>Header Filter</filter-name>");
+		sm.append("<url-pattern>*.jpg</url-pattern>");
+		sm.append("</filter-mapping>");
+		sm.append("<filter-mapping>");
+		sm.append("<filter-name>Header Filter</filter-name>");
+		sm.append("<url-pattern>*.js</url-pattern>");
+		sm.append("</filter-mapping>");
+		sm.append("<filter-mapping>");
+		sm.append("<filter-name>Header Filter</filter-name>");
+		sm.append("<url-pattern>*.png</url-pattern>");
+		sm.append("</filter-mapping>");
+
+		// VelocityFilter
+
 		sm.append("<filter>");
 		sm.append("<filter-name>Velocity Filter</filter-name>");
 		sm.append("<filter-class>");
@@ -103,7 +149,7 @@ public class ThemeDeployer extends BaseDeployer {
 		sm.append("</init-param>");
 		sm.append("</filter>");
 
-		sm.append("<filter-mapping>");
+		/*sm.append("<filter-mapping>");
 		sm.append("<filter-name>Velocity Filter</filter-name>");
 		sm.append("<url-pattern>*.css</url-pattern>");
 
@@ -113,7 +159,9 @@ public class ThemeDeployer extends BaseDeployer {
 			sm.append("<dispatcher>REQUEST</dispatcher>");
 		}
 
-		sm.append("</filter-mapping>");
+		sm.append("</filter-mapping>");*/
+
+		// ThemeContextListener
 
 		sm.append("<listener>");
 		sm.append("<listener-class>");
