@@ -2509,7 +2509,6 @@ jQuery.extend({
 	}
 });
 })();
-
 /**
  * Cookie plugin
  *
@@ -14314,13 +14313,16 @@ Liferay.Util = {
 
 	checkAll: function(form, name, allBox) {
 		var inputs;
+
 		if (Liferay.Util.isArray(name)) {
 			var names = 'input[@name='+ name.join(']:checkbox,input[@name=') + ']:checkbox';
+
 			inputs = jQuery(names, form);
 		}
 		else {
 			inputs = jQuery('input[@name=' + name + ']:checkbox', form);
 		}
+
 		inputs.attr('checked', allBox.checked);
 	},
 
@@ -14331,17 +14333,18 @@ Liferay.Util = {
 
 		if (Liferay.Util.isArray(name)) {
 			var names = 'input[@name='+ name.join(']:checkbox,input[@name=') + ']:checkbox';
+
 			inputs = jQuery(names, form);
 		}
 		else {
 			inputs = jQuery('input[@name=' + name + ']:checkbox', form);
 		}
-		
+
 		inputs = inputs.not(allBox);
-		
+
 		totalBoxes = inputs.length;
 		totalOn = inputs.filter(':checked').length;
-		
+
 		allBox.checked = (totalBoxes == totalOn);
 	},
 
@@ -14363,13 +14366,14 @@ Liferay.Util = {
 			event.returnValue = false;
 		}
 	},
-	
-	endsWith: function() {
+
+	endsWith: function(str, x) {
 		return (str.lastIndexOf(x) === (str.length - x.length));
 	},
 
 	evalScripts: function(obj) {
 		var instance = this;
+
 		jQuery(obj).find('script').each(
 			function(){
 				if ( this.src ) {
@@ -14381,7 +14385,7 @@ Liferay.Util = {
 			}
 		);
 	},
-	
+
 	focusFormField: function(el) {
 		jQuery(
 			function() {
@@ -14435,24 +14439,26 @@ Liferay.Util = {
 	listChecked: function(form) {
 		var s = [];
 		var inputs = jQuery('input[@value!=]:checked:checkbox', form);
-		
+
 		inputs.each(
 			function() {
 				s.push(this.value);
 			}
 		);
+
 		return s.join(',');
 	},
 
 	listCheckedExcept: function(form, except) {
 		var s = [];
 		var inputs = jQuery('input[@value!=][@name!="' + except + '"]:checked:checkbox', form);
-		
+
 		inputs.each(
 			function() {
 				s.push(this.value);
 			}
 		);
+
 		return s.join(',');
 	},
 
@@ -14464,13 +14470,15 @@ Liferay.Util = {
 		if (box == null) {
 			return "";
 		}
+
 		var opts = jQuery(box).find('option[@value!=]');
+
 		opts.each(
 			function() {
-				s.push(this.value);	
+				s.push(this.value);
 			}
 		);
-		
+
 		if (s[0] == '.none') {
 			return '';
 		}
@@ -14482,26 +14490,27 @@ Liferay.Util = {
 	listUncheckedExcept: function(form, except) {
 		var s = [];
 		var inputs = jQuery('input[@value!=][@name!="' + except + '"]:checkbox:not(:checked)', form);
-		
+
 		inputs.each(
 			function() {
 				s.push(this.value);
 			}
 		);
+
 		return s.join(',');
 	},
 
 	moveItem: function(fromBox, toBox, sort) {
-			if (fromBox.selectedIndex >= 0) {
-	
-				var toSelect = jQuery(toBox);
-				var selectedOption = jQuery(fromBox).find('option:selected');
-				toSelect.append(selectedOption);
-			}
+		if (fromBox.selectedIndex >= 0) {
+			var toSelect = jQuery(toBox);
+			var selectedOption = jQuery(fromBox).find('option:selected');
 
-			if (selectedOption.text() != '' && sort == true) {
-					Liferay.Util.sortBox(toBox);
-			}
+			toSelect.append(selectedOption);
+		}
+
+		if (selectedOption.text() != '' && sort == true) {
+			Liferay.Util.sortBox(toBox);
+		}
 	},
 
 	portletTitleEdit: function(options) {
@@ -14578,6 +14587,7 @@ Liferay.Util = {
 
 	removeItem: function(box, value) {
 		var selectEl = jQuery(box);
+
 		if (!value) {
 			selectEl.find('option:selected').remove();
 		}
@@ -14638,9 +14648,11 @@ Liferay.Util = {
 	resizeTextarea: function(elString) {
 		var init = function() {
 			var el = jQuery('#' + elString);
+
 			if (!el.length) {
 				el = jQuery('textarea[@name=' + elString + ']');
 			}
+
 			if (el.length) {
 				var pageBody = jQuery('body');
 
@@ -14769,15 +14781,16 @@ Liferay.Util = {
 			return 0;
 		}
 	},
-	
+
 	startsWith: function(str, x) {
 		return (str.indexOf(x) === 0);
 	},
 
 	toggleByIdSpan: function(obj, id) {
 		jQuery('#' + id).toggle();
+
 		var spans = jQuery(obj).find('span');
-		
+
 		spans.toggle();
 	},
 
@@ -14785,6 +14798,7 @@ Liferay.Util = {
 		if (typeof obj == 'string') {
 			obj = '#' + obj;
 		}
+
 		var el = jQuery(obj);
 		var hidden = el.toggle().is(':visible');
 
@@ -14951,8 +14965,6 @@ LinkedList.prototype.each = function(func) {
 LinkedList.prototype.size = function() {
 	return this.each();
 };
-
-
 
 function submitForm(form, action, singleSubmit) {
 	if (Liferay.Util.submitCountdown == 0) {
@@ -17128,7 +17140,7 @@ Liferay.Service = {
 			}
 		}
 
-		if (endsWith(serviceParameters, ",")) {
+		if (Liferay.Util.endsWith(serviceParameters, ",")) {
 			serviceParameters = serviceParameters.substring(0, serviceParameters.length - 1);
 		}
 
