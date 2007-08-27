@@ -24,8 +24,6 @@
 
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
-<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
-
 <script type="text/javascript">
 	function getEditorContent() {
 		return opener.<portlet:namespace />getXsd();
@@ -64,3 +62,5 @@
 		}
 	);
 </script>
+
+<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>

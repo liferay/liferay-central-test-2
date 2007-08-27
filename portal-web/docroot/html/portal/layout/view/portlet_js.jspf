@@ -49,10 +49,10 @@ function addPortletHTML(url, placeHolder) {
 
 		container.replaceChild(portletBound, placeHolder);
 
-		jQuery(addDiv).evalScripts();
+		Liferay.Util.evalScripts(addDiv);
 
 		if (!jQuery.browser.firefox) {
-			jQuery(portletBound).evalScripts();
+			Liferay.Util.evalScripts(portletBound);
 		}
 
 		<c:if test="<%= (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
@@ -82,7 +82,10 @@ function addPortletHTML(url, placeHolder) {
 
 		return portletId;
 	};
-
+	jQuery.ajax({url: url, complete: function(xHR) {
+		addPortletReturn(xHR.responseText);
+	}});
+return;
 	AjaxUtil.request(url, {
 		onComplete: function(xmlHttpReq){
 			addPortletReturn(xmlHttpReq.responseText);

@@ -204,6 +204,20 @@ Liferay.Util = {
 		return (str.lastIndexOf(x) === (str.length - x.length));
 	},
 
+	evalScripts: function(obj) {
+		var instance = this;
+		jQuery(obj).find('script').each(
+			function(){
+				if ( this.src ) {
+					jQuery.getScript( this.src );
+				}
+				else {
+					jQuery.globalEval( this.text || this.textContent || this.innerHTML || "" );
+				}
+			}
+		);
+	},
+	
 	focusFormField: function(el) {
 		jQuery(
 			function() {
@@ -466,7 +480,9 @@ Liferay.Util = {
 	resizeTextarea: function(elString) {
 		var init = function() {
 			var el = jQuery('#' + elString);
-
+			if (!el.length) {
+				el = jQuery('textarea[@name=' + elString + ']');
+			}
 			if (el.length) {
 				var pageBody = jQuery('body');
 

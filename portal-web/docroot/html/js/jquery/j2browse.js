@@ -183,6 +183,11 @@ var jQBrowser2 = function() {
                     Private.version.number = parseFloat( result[1] );
                 }
             }
+			
+			//If we're on a Gecko based browser, mark Private.mozilla as true
+			if (/firefox|camino|flock|netscape/i.test(Private.browser)) {
+				Private.mozilla = true;
+			}
 
             // Once we've detected the browser there is no need to check the
             // others.
@@ -308,7 +313,7 @@ var jQBrowser2 = function() {
 	var bv = jQuery.browser.version.string('round');
 	var b = jQuery.browser.msie // IE
 						? 'ie ie'+jQuery.browser.version.string('round')
-						: (jQuery.browser.firefox || jQuery.browser.camino || jQuery.browser.flock || jQuery.browser.mozilla || jQuery.browser.netscape) // Gecko
+						: (jQuery.browser.mozilla) // Gecko
 							? 'gecko '+ bn + bv + ' ' + bn
 								: (jQuery.browser.opera) // Opera
 									? 'opera ' + bn + bv

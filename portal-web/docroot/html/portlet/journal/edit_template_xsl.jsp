@@ -40,7 +40,6 @@ else {
 }
 %>
 
-<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 	function getEditorContent() {
@@ -83,3 +82,5 @@ else {
 		}
 	);
 </script>
+
+<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>

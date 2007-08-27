@@ -38,7 +38,7 @@ Liferay.Browser = {
 		instance._browserVars.is_ie_6 = (instance.is_ie && version == 6);
 		instance._browserVars.is_ie_7 = (instance.is_ie && version == 7);
 
-		instance._browserVars.is_mozilla = (jQuery.browser.firefox || jQuery.browser.camino || jQuery.browser.flock || jQuery.browser.mozilla || jQuery.browser.netscape);
+		instance._browserVars.is_mozilla = (jQuery.browser.mozilla);
 		instance._browserVars.is_mozilla_1_3_up = (instance.is_mozilla && exactVersion > 1.3);
 
 		instance._browserVars.is_ns_4 = (jQuery.browser.netscape && version == 4);
