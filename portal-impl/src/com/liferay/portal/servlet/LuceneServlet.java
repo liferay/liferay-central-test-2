@@ -64,6 +64,10 @@ public class LuceneServlet extends HttpServlet {
 			if (GetterUtil.getBoolean(
 					PropsUtil.get(PropsUtil.INDEX_ON_STARTUP))) {
 
+				if (_log.isInfoEnabled()) {
+					_log.info("Indexing Lucene on startup");
+				}
+
 				LuceneIndexer indexer = new LuceneIndexer(companyId);
 				Thread indexerThread = null;
 

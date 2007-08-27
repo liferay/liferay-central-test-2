@@ -41,6 +41,8 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.upgrade.util.IdReplacer;
+import com.liferay.portal.upgrade.util.MemoryValueMapper;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.util.comparator.LayoutComparator;
@@ -71,6 +73,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -120,15 +123,18 @@ public class ExportAction extends Action {
 				long cmsGroupId = ParamUtil.getLong(
 					req, "cmsGroupId", DEFAULT_CMS_GROUP_ID);
 
+				_primaryKeys.clear();
+				_primaryKeyCount = 1500;
+
 				ZipWriter zipWriter = new ZipWriter();
 
 				List journalContentSearches = new ArrayList();
 
+				insertDataImage(zipWriter);
 				insertDataCMSLayout(
 					siteGroupId, zipWriter, journalContentSearches);
 				insertDataCMSContent(
 					cmsGroupId, zipWriter, journalContentSearches);
-				insertDataImage(zipWriter);
 
 				String fileName = "journal.zip";
 
@@ -217,6 +223,44 @@ public class ExportAction extends Action {
 		sm.append("', ");
 	}
 
+	protected void addPKColumn(StringMaker sm, long value) {
+		sm.append(getNewPrimaryKey(value));
+		sm.append(", ");
+	}
+
+	protected void addPKColumn(StringMaker sm, String value) {
+		sm.append("'");
+		sm.append(getNewPrimaryKey(value));
+		sm.append("', ");
+	}
+
+	protected String getNewPrimaryKey(String pk) {
+		if (Validator.isNumber(pk)) {
+			long pkLong = GetterUtil.getLong(pk);
+
+			return String.valueOf(getNewPrimaryKey(pkLong));
+		}
+		else {
+			return pk;
+		}
+	}
+
+	protected long getNewPrimaryKey(long pk) {
+		Long pkObj = new Long(pk);
+
+		Long newPkObj = (Long)_primaryKeys.get(pkObj);
+
+		if (newPkObj == null) {
+			newPkObj = new Long(_primaryKeyCount);
+
+			_primaryKeyCount++;
+
+			_primaryKeys.put(pkObj, newPkObj);
+		}
+
+		return newPkObj.longValue();
+	}
+
 	protected void insertDataCMSContent(
 			long cmsGroupId, ZipWriter zipWriter, List journalContentSearches)
 		throws Exception {
@@ -235,10 +279,11 @@ public class ExportAction extends Action {
 			sm.append("folderId, groupId, companyId, userId, createDate, ");
 			sm.append("modifiedDate, parentFolderId, name");
 			sm.append(") values (");
-			addColumn(sm, folder.getFolderId());
+			addPKColumn(sm, folder.getFolderId());
 			addColumn(sm, folder.getGroupId());
 			addColumn(sm, folder.getCompanyId());
-			addColumn(sm, folder.getUserId());
+			//addColumn(sm, folder.getUserId());
+			addColumn(sm, DEFAULT_USER_ID);
 			addColumn(sm, folder.getCreateDate());
 			addColumn(sm, folder.getModifiedDate());
 			addColumn(sm, folder.getParentFolderId());
@@ -263,15 +308,16 @@ public class ExportAction extends Action {
 			sm.append("imageId, companyId, userId, createDate, modifiedDate, ");
 			sm.append("folderId, description, smallImageId, largeImageId");
 			sm.append(") values (");
-			addColumn(sm, image.getImageId());
+			addPKColumn(sm, image.getImageId());
 			addColumn(sm, image.getCompanyId());
-			addColumn(sm, image.getUserId());
+			//addColumn(sm, image.getUserId());
+			addColumn(sm, DEFAULT_USER_ID);
 			addColumn(sm, image.getCreateDate());
 			addColumn(sm, image.getModifiedDate());
-			addColumn(sm, image.getFolderId());
+			addPKColumn(sm, image.getFolderId());
 			addColumn(sm, image.getDescription());
-			addColumn(sm, image.getSmallImageId());
-			addColumn(sm, image.getLargeImageId());
+			addPKColumn(sm, image.getSmallImageId());
+			addPKColumn(sm, image.getLargeImageId());
 			removeTrailingComma(sm);
 			sm.append(");\n");
 		}
@@ -296,7 +342,7 @@ public class ExportAction extends Action {
 				sm.append("templateId, displayDate, approved, ");
 				sm.append("approvedByUserId, approvedByUserName, expired");
 				sm.append(") values (");
-				addColumn(sm, article.getId());
+				addPKColumn(sm, article.getId());
 				addColumn(sm, article.getGroupId());
 				addColumn(sm, article.getCompanyId());
 				//addColumn(sm, article.getUserId());
@@ -305,14 +351,14 @@ public class ExportAction extends Action {
 				addColumn(sm, DEFAULT_USER_NAME);
 				addColumn(sm, article.getCreateDate());
 				addColumn(sm, article.getModifiedDate());
-				addColumn(sm, article.getArticleId());
+				addPKColumn(sm, article.getArticleId());
 				addColumn(sm, JournalArticleImpl.DEFAULT_VERSION);
 				addColumn(sm, article.getTitle());
 				addColumn(sm, article.getDescription());
-				addColumn(sm, article.getContent());
+				addColumn(sm, replaceIds(article.getContent()));
 				addColumn(sm, article.getType());
-				addColumn(sm, article.getStructureId());
-				addColumn(sm, article.getTemplateId());
+				addPKColumn(sm, article.getStructureId());
+				addPKColumn(sm, article.getTemplateId());
 				addColumn(sm, article.getDisplayDate(), false);
 				addColumn(sm, article.getApproved());
 				//addColumn(sm, article.getApprovedByUserId());
@@ -339,9 +385,9 @@ public class ExportAction extends Action {
 			sm.append("articleImageId, groupId, articleId, version, elName, ");
 			sm.append("languageId, tempImage");
 			sm.append(") values (");
-			addColumn(sm, articleImage.getArticleImageId());
+			addPKColumn(sm, articleImage.getArticleImageId());
 			addColumn(sm, articleImage.getGroupId());
-			addColumn(sm, articleImage.getArticleId());
+			addPKColumn(sm, articleImage.getArticleId());
 			addColumn(sm, articleImage.getVersion());
 			addColumn(sm, articleImage.getElName());
 			addColumn(sm, articleImage.getLanguageId());
@@ -362,9 +408,9 @@ public class ExportAction extends Action {
 			sm.append("insert into JournalArticleResource (");
 			sm.append("resourcePrimKey, groupId, articleId");
 			sm.append(") values (");
-			addColumn(sm, articleResource.getResourcePrimKey());
+			addPKColumn(sm, articleResource.getResourcePrimKey());
 			addColumn(sm, articleResource.getGroupId());
-			addColumn(sm, articleResource.getArticleId());
+			addPKColumn(sm, articleResource.getArticleId());
 			removeTrailingComma(sm);
 			sm.append(");\n");
 		}
@@ -381,13 +427,13 @@ public class ExportAction extends Action {
 			sm.append("contentSearchId, groupId, companyId, privateLayout, ");
 			sm.append("layoutId, portletId, articleId");
 			sm.append(") values (");
-			addColumn(sm, contentSearch.getContentSearchId());
+			addPKColumn(sm, contentSearch.getContentSearchId());
 			addColumn(sm, contentSearch.getGroupId());
 			addColumn(sm, contentSearch.getCompanyId());
 			addColumn(sm, contentSearch.isPrivateLayout());
 			addColumn(sm, contentSearch.getLayoutId());
 			addColumn(sm, contentSearch.getPortletId());
-			addColumn(sm, contentSearch.getArticleId());
+			addPKColumn(sm, contentSearch.getArticleId());
 			removeTrailingComma(sm);
 			sm.append(");\n");
 		}
@@ -405,17 +451,19 @@ public class ExportAction extends Action {
 			sm.append("createDate, modifiedDate, structureId, name, ");
 			sm.append("description, xsd");
 			sm.append(") values (");
-			addColumn(sm, structure.getId());
+			addPKColumn(sm, structure.getId());
 			addColumn(sm, structure.getGroupId());
 			addColumn(sm, structure.getCompanyId());
-			addColumn(sm, structure.getUserId());
-			addColumn(sm, structure.getUserName());
+			//addColumn(sm, structure.getUserId());
+			//addColumn(sm, structure.getUserName());
+			addColumn(sm, DEFAULT_USER_ID);
+			addColumn(sm, DEFAULT_USER_NAME);
 			addColumn(sm, structure.getCreateDate());
 			addColumn(sm, structure.getModifiedDate());
-			addColumn(sm, structure.getStructureId());
+			addPKColumn(sm, structure.getStructureId());
 			addColumn(sm, structure.getName());
 			addColumn(sm, structure.getDescription());
-			addColumn(sm, structure.getXsd());
+			addColumn(sm, replaceIds(structure.getXsd()));
 			removeTrailingComma(sm);
 			sm.append(");\n");
 		}
@@ -434,21 +482,23 @@ public class ExportAction extends Action {
 			sm.append("name, description, xsl, langType, smallImage, ");
 			sm.append("smallImageId, smallImageURL");
 			sm.append(") values (");
-			addColumn(sm, template.getId());
+			addPKColumn(sm, template.getId());
 			addColumn(sm, template.getGroupId());
 			addColumn(sm, template.getCompanyId());
-			addColumn(sm, template.getUserId());
-			addColumn(sm, template.getUserName());
+			//addColumn(sm, template.getUserId());
+			//addColumn(sm, template.getUserName());
+			addColumn(sm, DEFAULT_USER_ID);
+			addColumn(sm, DEFAULT_USER_NAME);
 			addColumn(sm, template.getCreateDate());
 			addColumn(sm, template.getModifiedDate());
-			addColumn(sm, template.getTemplateId());
-			addColumn(sm, template.getStructureId());
+			addPKColumn(sm, template.getTemplateId());
+			addPKColumn(sm, template.getStructureId());
 			addColumn(sm, template.getName());
 			addColumn(sm, template.getDescription());
-			addColumn(sm, template.getXsl());
+			addColumn(sm, replaceIds(template.getXsl()));
 			addColumn(sm, template.getLangType());
 			addColumn(sm, template.getSmallImage());
-			addColumn(sm, template.getSmallImageId());
+			addPKColumn(sm, template.getSmallImageId());
 			addColumn(sm, template.getSmallImageURL());
 			removeTrailingComma(sm);
 			sm.append(");\n");
@@ -468,6 +518,14 @@ public class ExportAction extends Action {
 
 		List layouts = LayoutLocalServiceUtil.getLayouts(siteGroupId, false);
 
+		sm.append("update LayoutSet ");
+		sm.append("set themeId = 'liferaynoir_WAR_liferaynoirtheme', ");
+		sm.append("pageCount = ");
+		sm.append(layouts.size());
+		sm.append(" where groupId = ");
+		sm.append(siteGroupId);
+		sm.append(" and privateLayout = FALSE;\n\n");
+
 		Collections.sort(layouts, new LayoutComparator(true));
 
 		Iterator itr = layouts.iterator();
@@ -479,10 +537,10 @@ public class ExportAction extends Action {
 			sm.append("plid, groupId, companyId, privateLayout, layoutId, ");
 			sm.append("parentLayoutId, name, title, type_, typeSettings, ");
 			sm.append("hidden_, friendlyURL, iconImage, iconImageId, ");
-			sm.append("themeId, colorSchemeId, wapThemeId, wapColorSchemeId, ");
+			//sm.append("themeId, colorSchemeId, wapThemeId, wapColorSchemeId, ");
 			sm.append("css, priority");
 			sm.append(") values (");
-			addColumn(sm, layout.getPlid());
+			addPKColumn(sm, layout.getPlid());
 			addColumn(sm, layout.getGroupId());
 			addColumn(sm, layout.getCompanyId());
 			addColumn(sm, layout.isPrivateLayout());
@@ -492,14 +550,14 @@ public class ExportAction extends Action {
 			addColumn(sm, layout.getTitle());
 			addColumn(sm, layout.getType());
 			addColumn(sm, layout.getTypeSettings());
-			addColumn(sm, layout.getHidden());
+			addColumn(sm, layout.isHidden());
 			addColumn(sm, layout.getFriendlyURL());
 			addColumn(sm, layout.isIconImage());
 			addColumn(sm, layout.getIconImageId());
-			addColumn(sm, layout.getThemeId());
-			addColumn(sm, layout.getColorSchemeId());
-			addColumn(sm, layout.getWapThemeId());
-			addColumn(sm, layout.getWapColorSchemeId());
+			//addColumn(sm, layout.getThemeId());
+			//addColumn(sm, layout.getColorSchemeId());
+			//addColumn(sm, layout.getWapThemeId());
+			//addColumn(sm, layout.getWapColorSchemeId());
 			addColumn(sm, layout.getCss());
 			addColumn(sm, layout.getPriority());
 			removeTrailingComma(sm);
@@ -543,11 +601,17 @@ public class ExportAction extends Action {
 					articleId = articleId.toUpperCase();
 
 					if (Validator.isNotNull(articleId)) {
+						if (!JournalArticleLocalServiceUtil.hasArticle(
+								layout.getGroupId(), articleId)) {
+
+							continue;
+						}
 
 						// Make sure article id is upper case in the preferences
 						// XML
 
-						prefs.setValue("article-id", articleId);
+						prefs.setValue(
+							"article-id", getNewPrimaryKey(articleId));
 
 						prefsXml = PortletPreferencesSerializer.toXML(prefs);
 
@@ -569,7 +633,8 @@ public class ExportAction extends Action {
 						journalContentSearch.setPortletId(portletId);
 						journalContentSearch.setLayoutId(layout.getLayoutId());
 						journalContentSearch.setPortletId(portletId);
-						journalContentSearch.setArticleId(articleId);
+						journalContentSearch.setArticleId(
+							getNewPrimaryKey(articleId));
 
 						journalContentSearches.add(journalContentSearch);
 					}
@@ -578,10 +643,11 @@ public class ExportAction extends Action {
 					sm.append("portletPreferencesId, ownerId, ownerType, ");
 					sm.append("plid, portletId, preferences");
 					sm.append(") values (");
-					addColumn(sm, portletPreferences.getPortletPreferencesId());
+					addPKColumn(
+						sm, portletPreferences.getPortletPreferencesId());
 					addColumn(sm, portletPreferences.getOwnerId());
 					addColumn(sm, portletPreferences.getOwnerType());
-					addColumn(sm, portletPreferences.getPlid());
+					addPKColumn(sm, portletPreferences.getPlid());
 					addColumn(sm, portletId);
 					addColumn(sm, prefsXml);
 					removeTrailingComma(sm);
@@ -613,7 +679,7 @@ public class ExportAction extends Action {
 			sm.append("imageId, modifiedDate, text_, type_, height, width, ");
 			sm.append("size_");
 			sm.append(") values (");
-			addColumn(sm, image.getImageId());
+			addPKColumn(sm, image.getImageId());
 			addColumn(sm, image.getModifiedDate());
 			addColumn(sm, image.getText(), false);
 			addColumn(sm, image.getType());
@@ -639,6 +705,16 @@ public class ExportAction extends Action {
 		}
 	}
 
+	protected String replaceIds(String content) throws Exception {
+		content = IdReplacer.replaceLongIds(content, "?img_id=", _valueMapper);
+
+		return content;
+	}
+
 	private static Log _log = LogFactory.getLog(ExportAction.class);
+
+	private MemoryValueMapper _valueMapper = new MemoryValueMapper();
+	private Map _primaryKeys = _valueMapper.getMap();
+	private int _primaryKeyCount;
 
 }

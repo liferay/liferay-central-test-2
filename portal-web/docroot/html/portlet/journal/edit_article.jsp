@@ -181,11 +181,11 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	function <portlet:namespace />changeLanguageView() {
 		if (<portlet:namespace />contentChangedFlag) {
 			if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "would-you-like-to-save-the-changes-made-to-this-language") %>")) {
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+				document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 			}
 			else {
 				if (!confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-switch-the-languages-view") %>")) {
-					var languageIdOptions = document.<portlet:namespace />fm.<portlet:namespace />languageId.options;
+					var languageIdOptions = document.<portlet:namespace />fm1.<portlet:namespace />languageId.options;
 
 					for (var i = 0; i < languageIdOptions.length; i++) {
 						if (languageIdOptions[i].value == "<%= languageId %>") {
@@ -198,9 +198,9 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 			}
 		}
 
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=" + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
-		document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
-		submitForm(document.<portlet:namespace />fm);
+		document.<portlet:namespace />fm1.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=" + document.<portlet:namespace />fm1.<portlet:namespace />languageId.value;
+		document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
+		submitForm(document.<portlet:namespace />fm1);
 	}
 
 	function <portlet:namespace />contentChanged() {
@@ -209,26 +209,25 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 
 	function <portlet:namespace />deleteArticle() {
 		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this") %>")) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			submitForm(document.<portlet:namespace />fm);
+			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+			submitForm(document.<portlet:namespace />fm1);
 		}
 	}
 
 	function <portlet:namespace />disableInputDate(date, checked) {
-		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "Month.disabled = " + checked + ";");
-		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "Day.disabled = " + checked + ";");
-		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "Year.disabled = " + checked + ";");
-		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "Hour.disabled = " + checked + ";");
-		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "Minute.disabled = " + checked + ";");
-		eval("document.<portlet:namespace />fm.<portlet:namespace />" + date + "AmPm.disabled = " + checked + ";");
+		eval("document.<portlet:namespace />fm1.<portlet:namespace />" + date + "Month.disabled = " + checked + ";");
+		eval("document.<portlet:namespace />fm1.<portlet:namespace />" + date + "Day.disabled = " + checked + ";");
+		eval("document.<portlet:namespace />fm1.<portlet:namespace />" + date + "Year.disabled = " + checked + ";");
+		eval("document.<portlet:namespace />fm1.<portlet:namespace />" + date + "Hour.disabled = " + checked + ";");
+		eval("document.<portlet:namespace />fm1.<portlet:namespace />" + date + "Minute.disabled = " + checked + ";");
+		eval("document.<portlet:namespace />fm1.<portlet:namespace />" + date + "AmPm.disabled = " + checked + ";");
 	}
 
 	function <portlet:namespace />downloadArticleContent() {
-		document.<portlet:namespace />fm.xml.value = <portlet:namespace />getArticleContent();
-		document.<portlet:namespace />fm.action = "<%= themeDisplay.getPathMain() %>/journal/get_article_content";
-		document.<portlet:namespace />fm.enctype = "";
-		document.<portlet:namespace />fm.submit();
-		<portlet:namespace />resetForm();
+		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/get_article_content";
+		document.<portlet:namespace />fm2.target = "_self";
+		document.<portlet:namespace />fm2.xml.value = <portlet:namespace />getArticleContent();
+		document.<portlet:namespace />fm2.submit();
 	}
 
 	function <portlet:namespace />editorContentChanged(text) {
@@ -236,8 +235,8 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	}
 
 	function <portlet:namespace />expireArticle() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.EXPIRE %>";
-		submitForm(document.<portlet:namespace />fm);
+		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.EXPIRE %>";
+		submitForm(document.<portlet:namespace />fm1);
 	}
 
 	function <portlet:namespace />getArticleContent() {
@@ -262,7 +261,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 					xsd += " default-locale='<%= defaultLanguageId %>'";
 				}
 
-				var availableLocales = document.<portlet:namespace />fm.<portlet:namespace />available_locales;
+				var availableLocales = document.<portlet:namespace />fm1.<portlet:namespace />available_locales;
 
 				if (stillLocalized && availableLocales.length > 1) {
 					xsd += " available-locales='";
@@ -381,9 +380,9 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	}
 
 	function <portlet:namespace />getChoice(value) {
-		for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
-			if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value == value) {
-				return document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].index;
+		for (var i = 0; i < document.<portlet:namespace />fm1.<portlet:namespace />languageId.length; i++) {
+			if (document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[i].value == value) {
+				return document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[i].index;
 			}
 		}
 
@@ -395,36 +394,29 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	}
 
 	function <portlet:namespace />previewArticle() {
-		document.<portlet:namespace />fm.title.value = document.<portlet:namespace />fm.<portlet:namespace />title.value;
-		document.<portlet:namespace />fm.xml.value = <portlet:namespace />getArticleContent();
-		document.<portlet:namespace />fm.action = "<%= themeDisplay.getPathMain() %>/journal/view_article_content?<%= Constants.CMD %>=<%= Constants.PREVIEW %>&groupId=<%= String.valueOf(groupId) %>&articleId=<%= HttpUtil.encodeURL(articleId) %>&version=<%= version %>&languageId=" + document.<portlet:namespace />fm.<portlet:namespace />languageId.value + "&templateId=" + Liferay.Util.getSelectedRadioValue(document.<portlet:namespace />fm.<portlet:namespace />templateId);
-		document.<portlet:namespace />fm.target = "_blank";
-		document.<portlet:namespace />fm.submit();
-		<portlet:namespace />resetForm();
+		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/view_article_content?<%= Constants.CMD %>=<%= Constants.PREVIEW %>&groupId=<%= String.valueOf(groupId) %>&articleId=<%= HttpUtil.encodeURL(articleId) %>&version=<%= version %>&languageId=" + document.<portlet:namespace />fm1.<portlet:namespace />languageId.value + "&templateId=" + Liferay.Util.getSelectedRadioValue(document.<portlet:namespace />fm1.<portlet:namespace />templateId);
+		document.<portlet:namespace />fm2.target = "_blank";
+		document.<portlet:namespace />fm2.title.value = document.<portlet:namespace />fm1.<portlet:namespace />title.value;
+		document.<portlet:namespace />fm2.xml.value = <portlet:namespace />getArticleContent();
+		document.<portlet:namespace />fm2.submit();
 	}
 
 	function <portlet:namespace />removeArticleLocale() {
 		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this-language") %>")) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "removeArticlesLocale";
-			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=<%= defaultLanguageId %>";
-			submitForm(document.<portlet:namespace />fm);
+			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "removeArticlesLocale";
+			document.<portlet:namespace />fm1.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=<%= defaultLanguageId %>";
+			submitForm(document.<portlet:namespace />fm1);
 		}
 	}
 
 	function <portlet:namespace />removeStructure() {
-		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = "";
-		document.<portlet:namespace />fm.<portlet:namespace />content.value = "";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />resetForm() {
-		document.<portlet:namespace />fm.action = "<portlet:actionURL><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:actionURL>";
-		document.<portlet:namespace />fm.enctype = "multipart/form-data"
-		document.<portlet:namespace />fm.target = "_self";
+		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
+		document.<portlet:namespace />fm1.<portlet:namespace />content.value = "";
+		submitForm(document.<portlet:namespace />fm1);
 	}
 
 	function <portlet:namespace />saveAndApproveArticle() {
-		document.<portlet:namespace />fm.<portlet:namespace />approve.value = "1";
+		document.<portlet:namespace />fm1.<portlet:namespace />approve.value = "1";
 		<portlet:namespace />saveArticle();
 	}
 
@@ -433,14 +425,14 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 			cmd = "<%= article == null ? Constants.ADD : Constants.UPDATE %>";
 		}
 
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 
 		<c:if test="<%= article == null %>">
-			document.<portlet:namespace />fm.<portlet:namespace />articleId.value = document.<portlet:namespace />fm.<portlet:namespace />newArticleId.value;
+			document.<portlet:namespace />fm1.<portlet:namespace />articleId.value = document.<portlet:namespace />fm1.<portlet:namespace />newArticleId.value;
 		</c:if>
 
-		document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
-		submitForm(document.<portlet:namespace />fm);
+		document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
+		submitForm(document.<portlet:namespace />fm1);
 	}
 
 	function <portlet:namespace />selectDocumentLibrary(url) {
@@ -452,19 +444,19 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	}
 
 	function <portlet:namespace />selectStructure(structureId) {
-		if (document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId) {
-			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
-			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
-			document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
-			submitForm(document.<portlet:namespace />fm);
+		if (document.<portlet:namespace />fm1.<portlet:namespace />structureId.value != structureId) {
+			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
+			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = "";
+			document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
+			submitForm(document.<portlet:namespace />fm1);
 		}
 	}
 
 	function <portlet:namespace />selectTemplate(structureId, templateId) {
-		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
-		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = templateId;
-		document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
-		submitForm(document.<portlet:namespace />fm);
+		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
+		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = templateId;
+		document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
+		submitForm(document.<portlet:namespace />fm1);
 	}
 
 	function <portlet:namespace />setImageDeleteState(button, hidden, img, file) {
@@ -485,7 +477,15 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:actionURL>" class="uni-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveArticle(); return false;">
+<form method="post" name="<portlet:namespace />fm2">
+<input name="groupId" type="hidden" value="" />
+<input name="articleId" type="hidden" value="" />
+<input name="version" type="hidden" value="" />
+<input name="title" type="hidden" value="" />
+<input name="xml" type="hidden" value="" />
+</form>
+
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:actionURL>" class="uni-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveArticle(); return false;">
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>" />
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
@@ -499,12 +499,10 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <input name="<portlet:namespace />approve" type="hidden" value="" />
 <input name="<portlet:namespace />deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 <input name="<portlet:namespace />expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
-<input name="title" type="hidden" value="" />
-<input name="xml" type="hidden" value="" />
-<input name="xsl" type="hidden" value="" />
 
 <liferay-ui:tabs
 	names="article"
+	formName="fm1"
 	backURL="<%= redirect %>"
 />
 
@@ -518,7 +516,7 @@ String[] availableLocales = null;
 
 <liferay-ui:tabs
 	names="summary,content,schedule"
-	formName="fm"
+	formName="fm1"
 	param="tabs2"
 	refresh="<%= false %>"
 >
@@ -951,7 +949,7 @@ String[] availableLocales = null;
 								<input name="<portlet:namespace />available_locales" type="hidden" value="<%= availableLocales[i] %>" />
 
 								<script type="text/javascript">
-									document.<portlet:namespace />fm.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
+									document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
 								</script>
 
 				<%
@@ -960,7 +958,7 @@ String[] availableLocales = null;
 							%>
 
 								<script type="text/javascript">
-									document.<portlet:namespace />fm.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
+									document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
 								</script>
 
 				<%
@@ -978,7 +976,7 @@ String[] availableLocales = null;
 						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= languageId %>"/>
 
 						<script type="text/javascript">
-							document.<portlet:namespace />fm.<portlet:namespace />removeArticleLocaleButton.disabled = true;
+							document.<portlet:namespace />fm1.<portlet:namespace />removeArticleLocaleButton.disabled = true;
 						</script>
 
 				<%
@@ -1093,7 +1091,7 @@ String[] availableLocales = null;
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		//Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (article == null) ? "newArticleId" : "title" %>);
+		//Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace /><%= (article == null) ? "newArticleId" : "title" %>);
 	</script>
 </c:if>
 

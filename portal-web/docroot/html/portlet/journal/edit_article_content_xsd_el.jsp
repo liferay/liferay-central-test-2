@@ -271,7 +271,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 						<span style="font-size: xx-small;"><b><%= TextFormatter.format(elName, TextFormatter.J) %></b></span>
 					</td>
 					<td>
-						<input type="checkbox" <%= elLanguageId.equals(StringPool.BLANK) ? "" : "checked" %> onClick="if (this.checked) { document.<portlet:namespace />fm.<portlet:namespace />structure_el<%= count.getValue() %>_localized.value = '<%= languageId %>'; } else { if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view") %>')) { document.<portlet:namespace />fm.<portlet:namespace />structure_el<%= count.getValue() %>_localized.value = 'false'; } else { this.checked = true; }};" /> <span style="font-size: xx-small;"><liferay-ui:message key="localized" /></span>
+						<input type="checkbox" <%= elLanguageId.equals(StringPool.BLANK) ? "" : "checked" %> onClick="if (this.checked) { document.<portlet:namespace />fm1.<portlet:namespace />structure_el<%= count.getValue() %>_localized.value = '<%= languageId %>'; } else { if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view") %>')) { document.<portlet:namespace />fm1.<portlet:namespace />structure_el<%= count.getValue() %>_localized.value = 'false'; } else { this.checked = true; }};" /> <span style="font-size: xx-small;"><liferay-ui:message key="localized" /></span>
 					</td>
 				</tr>
 				</table>

@@ -696,7 +696,7 @@ public class JournalUtil {
 
 			path.push(xsdRoot.getName());
 
-			_merge(
+			_mergeLocaleContent(
 				path, curContentDoc, newContentDoc, xsdRoot,
 				LocaleUtil.toLanguageId(Locale.getDefault()));
 
@@ -775,6 +775,30 @@ public class JournalUtil {
 
 			removeArticleLocale(dynamicEl, languageId);
 		}
+	}
+
+	public static String removeOldContent(String content, String xsd) {
+		try {
+			SAXReader reader = new SAXReader();
+
+			Document contentDoc = reader.read(new StringReader(content));
+			Document xsdDoc = reader.read(new StringReader(xsd));
+
+			Element contentRoot = contentDoc.getRootElement();
+
+			Stack path = new Stack();
+
+			path.push(contentRoot.getName());
+
+			_removeOldContent(path, contentRoot, xsdDoc);
+
+			content = formatXML(contentDoc);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return content;
 	}
 
 	public static void removeRecentArticle(
@@ -936,7 +960,7 @@ public class JournalUtil {
 		return output;
 	}
 
-	private static void _merge(
+	private static void _mergeLocaleContent(
 			Stack path, Document curDoc, Document newDoc, Element xsdEl,
 			String defaultLocale)
 		throws SystemException {
@@ -953,120 +977,158 @@ public class JournalUtil {
 			if ((xsdNode instanceof Element) &&
 				(xsdNode.getName().equals("dynamic-element"))) {
 
-				Element xsdElement = (Element)xsdNode;
+				_mergeLocaleContent(
+					path, curDoc, newDoc, (Element)xsdNode, defaultLocale,
+					elPath);
+			}
+		}
+	}
 
-				String localPath =
-					"dynamic-element[@name='" +
-						xsdElement.attributeValue("name") + "']";
+	private static void _mergeLocaleContent(
+			Stack path, Document curDoc, Document newDoc, Element xsdEl,
+			String defaultLocale, String elPath)
+		throws SystemException {
 
-				String fullPath = elPath + "/" + localPath;
+		String name = xsdEl.attributeValue("name");
 
-				XPath xPathSelector = DocumentHelper.createXPath(fullPath);
+		String localPath = "dynamic-element[@name='" + name + "']";
 
-				List curElements = xPathSelector.selectNodes(curDoc);
+		String fullPath = elPath + "/" + localPath;
 
-				Element newEl =
-					(Element)xPathSelector.selectNodes(newDoc).get(0);
+		XPath xPathSelector = DocumentHelper.createXPath(fullPath);
 
-				if (curElements.size() > 0) {
-					Element curEl = (Element)curElements.get(0);
+		List curElements = xPathSelector.selectNodes(curDoc);
 
-					List curDynamicContents = curEl.elements("dynamic-content");
+		Element newEl = (Element)xPathSelector.selectNodes(newDoc).get(0);
 
-					Element newContentEl = newEl.element("dynamic-content");
+		if (curElements.size() > 0) {
+			Element curEl = (Element)curElements.get(0);
 
-					String newContentLanguageId = newContentEl.attributeValue(
+			List curDynamicContents = curEl.elements("dynamic-content");
+
+			Element newContentEl = newEl.element("dynamic-content");
+
+			String newContentLanguageId = newContentEl.attributeValue(
+				"language-id", StringPool.BLANK);
+
+			if (newContentLanguageId.equals(StringPool.BLANK)) {
+				for (int k = curDynamicContents.size() - 1; k >= 0 ; k--) {
+					Element curContentEl = (Element)curDynamicContents.get(k);
+
+					String curContentLanguageId = curContentEl.attributeValue(
 						"language-id", StringPool.BLANK);
 
-					if (newContentLanguageId.equals(StringPool.BLANK)) {
-						for (int k = curDynamicContents.size() - 1; k >= 0 ;
-								k--) {
+					if ((curEl.attributeValue("type").equals("image")) &&
+						(!curContentLanguageId.equals(defaultLocale) &&
+						 !curContentLanguageId.equals(StringPool.BLANK))) {
 
-							Element curContentEl =
-								(Element)curDynamicContents.get(k);
+						long id = GetterUtil.getLong(
+							curContentEl.attributeValue("id"));
 
-							String curContentLanguageId =
-								curContentEl.attributeValue(
-									"language-id", StringPool.BLANK);
-
-							if ((curEl.attributeValue("type").equals(
-									"image")) &&
-								(!curContentLanguageId.equals(defaultLocale) &&
-								 !curContentLanguageId.equals(
-									StringPool.BLANK))) {
-
-								long id = GetterUtil.getLong(
-									curContentEl.attributeValue("id"));
-
-								ImageLocalUtil.deleteImage(id);
-							}
-
-							curContentEl.detach();
-						}
-
-						curEl.content().add(newContentEl.createCopy());
+						ImageLocalUtil.deleteImage(id);
 					}
-					else {
-						boolean match = false;
 
-						for (int k = curDynamicContents.size() - 1; k >= 0 ;
-								k--) {
-
-							Element curContentEl =
-								(Element)curDynamicContents.get(k);
-
-							String curContentLanguageId =
-								curContentEl.attributeValue(
-									"language-id", StringPool.BLANK);
-
-							if ((newContentLanguageId.equals(
-									curContentLanguageId)) ||
-								(newContentLanguageId.equals(defaultLocale) &&
-								 curContentLanguageId.equals(
-									StringPool.BLANK))) {
-
-								curContentEl.detach();
-
-								curEl.content().add(
-									k, newContentEl.createCopy());
-
-								match = true;
-							}
-
-							if (curContentLanguageId.equals(StringPool.BLANK)) {
-								curContentEl.addAttribute(
-									"language-id", defaultLocale);
-							}
-						}
-
-						if (!match) {
-							curEl.content().add(newContentEl.createCopy());
-						}
-					}
-				}
-				else {
-					xPathSelector = DocumentHelper.createXPath(elPath);
-
-					Element parentEl =
-						(Element)xPathSelector.selectNodes(curDoc).get(0);
-
-					parentEl.content().add(newEl.createCopy());
+					curContentEl.detach();
 				}
 
-				String xsdElementType =
-					xsdElement.attributeValue("type", StringPool.BLANK);
+				curEl.content().add(newContentEl.createCopy());
+			}
+			else {
+				boolean match = false;
 
-				if (!xsdElementType.equals("list") &&
-					!xsdElementType.equals("multi-list")) {
+				for (int k = curDynamicContents.size() - 1; k >= 0 ; k--) {
+					Element curContentEl = (Element)curDynamicContents.get(k);
 
-					path.push(localPath);
+					String curContentLanguageId = curContentEl.attributeValue(
+						"language-id", StringPool.BLANK);
 
-					_merge(path, curDoc, newDoc, xsdElement, defaultLocale);
+					if ((newContentLanguageId.equals(curContentLanguageId)) ||
+						(newContentLanguageId.equals(defaultLocale) &&
+						 curContentLanguageId.equals(StringPool.BLANK))) {
 
-					path.pop();
+						curContentEl.detach();
+
+						curEl.content().add(k, newContentEl.createCopy());
+
+						match = true;
+					}
+
+					if (curContentLanguageId.equals(StringPool.BLANK)) {
+						curContentEl.addAttribute("language-id", defaultLocale);
+					}
+				}
+
+				if (!match) {
+					curEl.content().add(newContentEl.createCopy());
 				}
 			}
 		}
+		else {
+			xPathSelector = DocumentHelper.createXPath(elPath);
+
+			Element parentEl =
+				(Element)xPathSelector.selectNodes(curDoc).get(0);
+
+			parentEl.content().add(newEl.createCopy());
+		}
+
+		String type = xsdEl.attributeValue("type", StringPool.BLANK);
+
+		if (!type.equals("list") && !type.equals("multi-list")) {
+			path.push(localPath);
+
+			_mergeLocaleContent(path, curDoc, newDoc, xsdEl, defaultLocale);
+
+			path.pop();
+		}
+	}
+
+	private static void _removeOldContent(
+			Stack path, Element contentEl, Document xsdDoc)
+		throws SystemException {
+
+		String elPath = "";
+
+		for (int i = 0; i < path.size(); i++) {
+			elPath += "/" + path.elementAt(i);
+		}
+
+		for (int i = 0; i < contentEl.nodeCount(); i++) {
+			Node contentNode = contentEl.node(i);
+
+			if (contentNode instanceof Element) {
+				_removeOldContent(path, (Element)contentNode, xsdDoc, elPath);
+			}
+		}
+	}
+
+	private static void _removeOldContent(
+			Stack path, Element contentEl, Document xsdDoc, String elPath)
+		throws SystemException {
+
+		String name = contentEl.attributeValue("name");
+
+		if (Validator.isNull(name)) {
+			return;
+		}
+
+		String localPath = "dynamic-element[@name='" + name + "']";
+
+		String fullPath = elPath + "/" + localPath;
+
+		XPath xPathSelector = DocumentHelper.createXPath(fullPath);
+
+		List curElements = xPathSelector.selectNodes(xsdDoc);
+
+		if (curElements.size() == 0) {
+			contentEl.detach();
+		}
+
+		path.push(localPath);
+
+		_removeOldContent(path, contentEl, xsdDoc);
+
+		path.pop();
 	}
 
 	private static Log _log = LogFactory.getLog(JournalUtil.class);

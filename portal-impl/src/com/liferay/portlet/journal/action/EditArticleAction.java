@@ -48,7 +48,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
+import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.FileUtil;
@@ -377,11 +377,13 @@ public class EditArticleAction extends PortletAction {
 
 				if (Validator.isNotNull(curArticle.getStructureId())) {
 					JournalStructure structure =
-						JournalStructureServiceUtil.getStructure(
+						JournalStructureLocalServiceUtil.getStructure(
 							groupId, structureId);
 
 					content = JournalUtil.mergeLocaleContent(
 						curArticle.getContent(), content, structure.getXsd());
+					content = JournalUtil.removeOldContent(
+						content, structure.getXsd());
 				}
 			}
 

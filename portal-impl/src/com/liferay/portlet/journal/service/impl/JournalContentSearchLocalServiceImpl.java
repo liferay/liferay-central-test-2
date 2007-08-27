@@ -47,6 +47,9 @@ import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="JournalContentSearchLocalServiceImpl.java.html"><b><i>View Source
  * </i></b></a>
@@ -59,6 +62,10 @@ public class JournalContentSearchLocalServiceImpl
 
 	public void checkContentSearches(long companyId)
 		throws PortalException, SystemException {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Checking journal content search for " + companyId);
+		}
 
 		List layouts = new ArrayList();
 
@@ -219,5 +226,8 @@ public class JournalContentSearchLocalServiceImpl
 
 		return contentSearches;
 	}
+
+	private static Log _log =
+		LogFactory.getLog(JournalContentSearchLocalServiceImpl.class);
 
 }
