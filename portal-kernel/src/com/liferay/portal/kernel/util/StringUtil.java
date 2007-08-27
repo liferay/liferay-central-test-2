@@ -30,10 +30,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 
 import java.net.URL;
-import java.net.URLEncoder;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -1053,21 +1051,6 @@ public class StringUtil {
 		}
 
 		return sm.toString();
-	}
-
-	public static String encodeURL( String url ) {
-		if (url == null) {
-			return null;
-		}
-
-		try {
-			return URLEncoder.encode(url, StringPool.UTF8);
-		}
-		catch (UnsupportedEncodingException uee) {
-			_log.error(uee, uee);
-
-			return StringPool.BLANK;
-		}
 	}
 
 	private static boolean _isTrimable(char c, char[] exceptions) {

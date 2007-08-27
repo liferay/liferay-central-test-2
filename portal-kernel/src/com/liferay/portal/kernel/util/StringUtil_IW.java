@@ -64,10 +64,6 @@ public class StringUtil_IW {
 		return StringUtil.count(s, text);
 	}
 
-	public java.lang.String encodeURL(java.lang.String s) {
-		return StringUtil.encodeURL(s);
-	}
-
 	public boolean endsWith(java.lang.String s, char end) {
 		return StringUtil.endsWith(s, end);
 	}

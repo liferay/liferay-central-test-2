@@ -60,6 +60,7 @@ import com.liferay.portal.util.SessionClicks_IW;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLFactory;
+import com.liferay.util.HttpUtil_IW;
 
 import java.util.Iterator;
 import java.util.List;
@@ -105,6 +106,10 @@ public class VelocityVariables {
 		// Getter util
 
 		vc.put("getterUtil", GetterUtil_IW.getInstance());
+
+		// Http util
+
+		vc.put("httpUtil", HttpUtil_IW.getInstance());
 
 		// Language util
 
