@@ -79,6 +79,10 @@ public class MemoryValueMapper implements ValueMapper {
 		return _map.size();
 	}
 
+	public Map getMap() {
+		return _map;
+	}
+
 	private Map _map;
 	private Set _exceptions;
 

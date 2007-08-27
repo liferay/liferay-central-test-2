@@ -910,7 +910,8 @@ public class PortalUtil {
 			}
 		}
 
-		friendlyURL = StringUtil.replace(friendlyURL, "//", StringPool.SLASH);
+		friendlyURL = StringUtil.replace(
+			friendlyURL, StringPool.DOUBLE_SLASH, StringPool.SLASH);
 
 		if (friendlyURL.endsWith(StringPool.SLASH)) {
 			friendlyURL = friendlyURL.substring(0, friendlyURL.length() - 1);

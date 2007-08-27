@@ -115,7 +115,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return LayoutFriendlyURLException.ENDS_WITH_SLASH;
 		}
 
-		if (friendlyURL.indexOf("//") != -1) {
+		if (friendlyURL.indexOf(StringPool.DOUBLE_SLASH) != -1) {
 			return LayoutFriendlyURLException.ADJACENT_SLASHES;
 		}
 

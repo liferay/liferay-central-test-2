@@ -29,7 +29,7 @@
 				<copy todir="${app.server.classes.portal.dir}/com/liferay/portal/tools/sql/dependencies">
 					<fileset
 						dir="${project.dir}/sql"
-						includes="portal-tables.sql,portal-data-*.*,indexes.sql,sequences.sql,update-*.sql"
+						includes="portal-data-common.sql,portal-data-counter.sql,portal-data-release.sql,portal-data-sample.vm,portal-tables.sql,indexes.sql,sequences.sql,update-*.sql"
 					/>
 				</copy>
 
