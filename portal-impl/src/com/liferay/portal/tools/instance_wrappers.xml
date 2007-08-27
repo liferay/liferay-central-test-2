@@ -41,4 +41,8 @@
 		parent-dir="../portal-kernel/src"
 		src-file="com/liferay/portal/kernel/util/UnicodeFormatter.java"
 	/>
+	<instance-wrapper
+		parent-dir="../util-java/src"
+		src-file="com/liferay/util/HttpUtil.java"
+	/>
 </instance-wrappers>
