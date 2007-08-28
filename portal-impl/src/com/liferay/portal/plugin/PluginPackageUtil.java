@@ -307,7 +307,7 @@ public class PluginPackageUtil {
 		String name = pluginPackageEl.elementText("name");
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Reading pluginPackage definition: " + name);
+			_log.debug("Reading pluginPackage definition " + name);
 		}
 
 		PluginPackage pluginPackage = new PluginPackageImpl(
@@ -698,7 +698,8 @@ public class PluginPackageUtil {
 		List supportedPluginTypes = Arrays.asList(getSupportedTypes());
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Plugin Repository: " + xml);
+			_log.debug(
+				"Loading plugin repository " + repositoryURL + ":\n" + xml);
 		}
 
 		RemotePluginPackageRepository pluginPackageRepository =
