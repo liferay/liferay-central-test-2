@@ -26,7 +26,9 @@ import com.liferay.lock.service.LockServiceUtil;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Release;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
@@ -65,6 +67,10 @@ public class StartupAction extends SimpleAction {
 			catch (Exception e) {
 				e.printStackTrace();
 			}
+
+			// Lucene
+
+			LuceneUtil.checkLuceneDir(CompanyImpl.SYSTEM);
 
 			// Add shutdown hook
 
