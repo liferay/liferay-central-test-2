@@ -80,7 +80,8 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void addRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
-		RolePermissionUtil.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
+		RolePermissionUtil.check(
+			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.addRoleUsers(roleId, userIds);
 	}
@@ -225,7 +226,8 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
-		RolePermissionUtil.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
+		RolePermissionUtil.check(
+			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.setRoleUsers(roleId, userIds);
 	}
@@ -262,7 +264,8 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	public void unsetRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
-		RolePermissionUtil.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
+		RolePermissionUtil.check(
+			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		UserLocalServiceUtil.unsetRoleUsers(roleId, userIds);
 	}

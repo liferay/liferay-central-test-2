@@ -66,11 +66,26 @@ public class PortletURLUtil {
 		return portletURL;
 	}
 
+	public static PortletURL clone(PortletURL portletURL, RenderResponse res)
+		throws PortletException {
+
+		PortletURLImpl portletURLImpl = (PortletURLImpl)portletURL;
+
+		return clone(portletURLImpl, portletURLImpl.isAction(), res);
+	}
+
 	public static PortletURL clone(
 			PortletURL portletURL, boolean action, RenderResponse res)
 		throws PortletException {
 
 		PortletURLImpl portletURLImpl = (PortletURLImpl)portletURL;
+
+		return clone(portletURLImpl, action, res);
+	}
+
+	public static PortletURL clone(
+			PortletURLImpl portletURLImpl, boolean action, RenderResponse res)
+		throws PortletException {
 
 		PortletURL newURL = null;
 

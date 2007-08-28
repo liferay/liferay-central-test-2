@@ -124,11 +124,9 @@ public class EditUserAction extends PortletAction {
 				user = updateLockout(req);
 			}
 
-			String redirect = null;
+			String redirect = ParamUtil.getString(req, "redirect");
 
 			if (user != null) {
-				redirect = ParamUtil.getString(req, "redirect");
-
 				if (Validator.isNotNull(oldScreenName)) {
 
 					// This will fix the redirect if the user is on his personal

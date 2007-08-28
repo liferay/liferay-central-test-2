@@ -25,6 +25,10 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+PasswordPolicySearch searchContainer = (PasswordPolicySearch)request.getAttribute("liferay-ui:search:searchContainer");
+
+String redirect = searchContainer.getIteratorURL().toString();
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
@@ -33,7 +37,7 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 <c:if test="<%= PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.UPDATE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL ">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
 	</portlet:renderURL>
 
@@ -64,7 +68,7 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
 	</portlet:actionURL>
 

@@ -63,7 +63,8 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public void deleteLayout(long plid)
 		throws PortalException, SystemException {
 
-		LayoutPermissionUtil.check(getPermissionChecker(), plid, ActionKeys.DELETE);
+		LayoutPermissionUtil.check(
+			getPermissionChecker(), plid, ActionKeys.DELETE);
 
 		LayoutLocalServiceUtil.deleteLayout(plid);
 	}
@@ -197,7 +198,8 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public Layout updateName(long plid, String name, String languageId)
 		throws PortalException, SystemException {
 
-		LayoutPermissionUtil.check(getPermissionChecker(), plid, ActionKeys.UPDATE);
+		LayoutPermissionUtil.check(
+			getPermissionChecker(), plid, ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateName(plid, name, languageId);
 	}
@@ -218,7 +220,8 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public Layout updateParentLayoutId(long plid, long parentPlid)
 		throws PortalException, SystemException {
 
-		LayoutPermissionUtil.check(getPermissionChecker(), plid, ActionKeys.UPDATE);
+		LayoutPermissionUtil.check(
+			getPermissionChecker(), plid, ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateParentLayoutId(plid, parentPlid);
 	}
@@ -239,7 +242,8 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public Layout updatePriority(long plid, int priority)
 		throws PortalException, SystemException {
 
-		LayoutPermissionUtil.check(getPermissionChecker(), plid, ActionKeys.UPDATE);
+		LayoutPermissionUtil.check(
+			getPermissionChecker(), plid, ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updatePriority(plid, priority);
 	}

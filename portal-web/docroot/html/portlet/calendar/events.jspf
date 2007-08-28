@@ -23,7 +23,7 @@
 %>
 
 <%
-PortletURL iteratorURL = PortletURLUtil.clone(portletURL, false, renderResponse);
+PortletURL iteratorURL = PortletURLUtil.clone(portletURL, renderResponse);
 
 List headerNames = new ArrayList();
 

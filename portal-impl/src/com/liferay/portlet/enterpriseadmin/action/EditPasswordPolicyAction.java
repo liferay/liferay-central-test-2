@@ -23,6 +23,7 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.NoSuchPasswordPolicyException;
+import com.liferay.portal.PasswordPolicyNameException;
 import com.liferay.portal.RequiredPasswordPolicyException;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -72,7 +73,8 @@ public class EditPasswordPolicyAction extends PortletAction {
 
 				setForward(req, "portlet.enterprise_admin.error");
 			}
-			else if (e instanceof NoSuchPasswordPolicyException ||
+			else if (e instanceof PasswordPolicyNameException ||
+					 e instanceof NoSuchPasswordPolicyException ||
 					 e instanceof RequiredPasswordPolicyException) {
 
 				SessionErrors.add(req, e.getClass().getName());

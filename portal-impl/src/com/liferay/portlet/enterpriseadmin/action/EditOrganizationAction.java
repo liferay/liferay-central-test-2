@@ -77,12 +77,10 @@ public class EditOrganizationAction extends PortletAction {
 				deleteOrganizations(req);
 			}
 
-			String redirect = null;
+			String redirect = ParamUtil.getString(req, "redirect");
 
 			if (organization != null) {
-				redirect =
-					ParamUtil.getString(req, "redirect") +
-						organization.getOrganizationId();
+				redirect += organization.getOrganizationId();
 			}
 
 			sendRedirect(req, res, redirect);

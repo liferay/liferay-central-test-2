@@ -24,6 +24,7 @@ package com.liferay.util;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 import javax.portlet.ActionRequest;
@@ -385,6 +387,50 @@ public class Http {
 
 			state.setProxyCredentials(scope, proxyCredentials);
 		}
+	}
+
+	public static String removeParameter(String url, String name) {
+		int pos = url.indexOf(StringPool.QUESTION);
+
+		if (pos == -1) {
+			return url;
+		}
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(url.substring(0, pos + 1));
+
+		StringTokenizer st = new StringTokenizer(
+			url.substring(pos + 1, url.length()), StringPool.AMPERSAND);
+
+		while (st.hasMoreTokens()) {
+			String token = st.nextToken();
+
+			if (Validator.isNotNull(token)) {
+				String[] kvp = StringUtil.split(token, StringPool.EQUAL);
+
+				String key = kvp[0];
+
+				String value = StringPool.BLANK;
+
+				if (kvp.length > 1) {
+					value = kvp[1];
+				}
+
+				if (!key.equals(name)) {
+					sm.append(key);
+					sm.append(StringPool.EQUAL);
+					sm.append(value);
+					sm.append(StringPool.AMPERSAND);
+				}
+			}
+		}
+
+		url = StringUtil.replace(
+			sm.toString(), StringPool.AMPERSAND + StringPool.AMPERSAND,
+			StringPool.AMPERSAND);
+
+		return url;
 	}
 
 	public static String removeProtocol(String url) {

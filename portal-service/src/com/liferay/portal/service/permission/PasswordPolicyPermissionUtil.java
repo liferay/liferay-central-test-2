@@ -27,7 +27,8 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
 
 /**
- * <a href="PasswordPolicyPermissionUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PasswordPolicyPermissionUtil.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *

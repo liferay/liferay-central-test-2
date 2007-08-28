@@ -119,7 +119,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	function <portlet:namespace />saveOrganizationPermissions(organizationIdsPos, organizationIdsPosValue) {
 
 		<%
-		PortletURL saveOrganizationPermissionsRedirectURL = PortletURLUtil.clone(portletURL, false, renderResponse);
+		PortletURL saveOrganizationPermissionsRedirectURL = PortletURLUtil.clone(portletURL, renderResponse);
 
 		new OrganizationSearch(renderRequest, saveOrganizationPermissionsRedirectURL);
 		%>

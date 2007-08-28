@@ -25,6 +25,10 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+OrganizationSearch searchContainer = (OrganizationSearch)request.getAttribute("liferay-ui:search:searchContainer");
+
+String redirect = searchContainer.getIteratorURL().toString();
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 Organization organization = (Organization)row.getObject();
@@ -43,19 +47,19 @@ if (!organizationsTab) {
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationURL">
 	<portlet:param name="struts_action" value="<%= strutsAction %>" />
 	<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:renderURL>
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteOrganizationURL">
 	<portlet:param name="struts_action" value="<%= strutsAction %>" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	<portlet:param name="deleteOrganizationIds" value="<%= String.valueOf(organizationId) %>" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:actionURL>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="groupId" value="<%= String.valueOf(organization.getGroup().getGroupId()) %>" />
 </portlet:renderURL>
 

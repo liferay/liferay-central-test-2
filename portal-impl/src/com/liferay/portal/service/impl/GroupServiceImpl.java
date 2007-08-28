@@ -72,7 +72,8 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 	public void addRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
-		RolePermissionUtil.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
+		RolePermissionUtil.check(
+			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		GroupLocalServiceUtil.addRoleGroups(roleId, groupIds);
 	}
@@ -140,7 +141,8 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 	public void setRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
-		RolePermissionUtil.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
+		RolePermissionUtil.check(
+			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		GroupLocalServiceUtil.setRoleGroups(roleId, groupIds);
 	}
@@ -148,7 +150,8 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 	public void unsetRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
-		RolePermissionUtil.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
+		RolePermissionUtil.check(
+			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
 		GroupLocalServiceUtil.unsetRoleGroups(roleId, groupIds);
 	}

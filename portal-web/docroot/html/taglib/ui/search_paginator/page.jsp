@@ -26,6 +26,10 @@
 
 <%
 SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
+
+PortletURL iteratorURL = searchContainer.getIteratorURL();
+
+String url = Http.removeParameter(iteratorURL.toString(), namespace + searchContainer.getCurParam());
 %>
 
 <c:if test="<%= searchContainer.getTotal() > searchContainer.getDelta() %>">
@@ -38,5 +42,5 @@ SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay
 	delta="<%= searchContainer.getDelta() %>"
 	maxPages="10"
 	total="<%= searchContainer.getTotal() %>"
-	url="<%= searchContainer.getIteratorURL().toString() %>"
+	url="<%= url %>"
 />

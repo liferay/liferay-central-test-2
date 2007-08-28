@@ -78,12 +78,13 @@ if (!organizationsTab) {
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="<%= strutsAction %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization('<%= organization == null ? Constants.ADD : Constants.UPDATE %>'); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="<%= strutsAction %>" /><portlet:param name="redirect" value="<%= redirect %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="<%= strutsAction %>" /><portlet:param name="backURL" value="<%= backURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" />
+<input name="<portlet:namespace />backURL" type="hidden" value="<%= backURL %>" />
 <input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
 
 <liferay-ui:tabs
 	names='<%= organizationsTab ? "organization" : "location" %>'
-	backURL="<%= redirect %>"
+	backURL="<%= backURL %>"
 />
 
 <liferay-util:include page="/html/portlet/my_account/tabs1.jsp">

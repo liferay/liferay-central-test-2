@@ -30,6 +30,7 @@ String tabs3 = ParamUtil.getString(request, "tabs3", "email-addresses");
 String tabs4 = ParamUtil.getString(request, "tabs4", "phone-numbers");
 
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 User user2 = PortalUtil.getSelectedUser(request);
 
@@ -66,7 +67,6 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 <script type="text/javascript">
 	function <portlet:namespace />saveUser(cmd) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>&<portlet:namespace />tabs2=" + document.<portlet:namespace />fm.<portlet:namespace />tabs2.value + "&<portlet:namespace />tabs3=" + document.<portlet:namespace />fm.<portlet:namespace />tabs3.value + "&<portlet:namespace />tabs4=" + document.<portlet:namespace />fm.<portlet:namespace />tabs4.value + "&<portlet:namespace />redirect=<%= HttpUtil.encodeURL(redirect) %>&<portlet:namespace />p_u_i_d=";
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:actionURL>");
 	}
 </script>
@@ -76,12 +76,13 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
 <input name="<portlet:namespace />tabs4" type="hidden" value="<%= tabs4 %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>&<portlet:namespace />tabs2=" + document.<portlet:namespace />fm.<portlet:namespace />tabs2.value + "&<portlet:namespace />tabs3=" + document.<portlet:namespace />fm.<portlet:namespace />tabs3.value + "&<portlet:namespace />tabs4=" + document.<portlet:namespace />fm.<portlet:namespace />tabs4.value + "&<portlet:namespace />backURL=<%= HttpUtil.encodeURL(backURL) %>&<portlet:namespace />p_u_i_d=" />
+<input name="<portlet:namespace />backURL" type="hidden" value="<%= backURL %>" />
 <input name="<portlet:namespace />p_u_i_d" type="hidden" value='<%= (user2 != null) ? user2.getUserId() : 0 %>' />
 
 <liferay-ui:tabs
 	names="user"
-	backURL="<%= redirect %>"
+	backURL="<%= backURL %>"
 />
 
 <liferay-util:include page="/html/portlet/my_account/tabs1.jsp">

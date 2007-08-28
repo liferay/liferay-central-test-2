@@ -438,7 +438,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 		<td valign="top" width="75%">
 
 			<%
-			PortletURL breadcrumbURL = PortletURLUtil.clone(portletURL, false, renderResponse);
+			PortletURL breadcrumbURL = PortletURLUtil.clone(portletURL, renderResponse);
 			%>
 
 			<c:choose>

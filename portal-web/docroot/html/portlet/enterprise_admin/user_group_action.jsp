@@ -25,6 +25,10 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+UserGroupSearch searchContainer = (UserGroupSearch)request.getAttribute("liferay-ui:search:searchContainer");
+
+String redirect = searchContainer.getIteratorURL().toString();
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 UserGroup userGroup = (UserGroup)row.getObject();
@@ -33,7 +37,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 <c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.UPDATE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 	</portlet:renderURL>
 
@@ -82,7 +86,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="deleteUserGroupIds" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 	</portlet:actionURL>
 

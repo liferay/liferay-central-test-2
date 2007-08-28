@@ -47,7 +47,8 @@ public class SCLicenseServiceImpl
 			boolean recommended)
 		throws PortalException, SystemException {
 
-		PortalPermissionUtil.check(getPermissionChecker(), ActionKeys.ADD_LICENSE);
+		PortalPermissionUtil.check(
+			getPermissionChecker(), ActionKeys.ADD_LICENSE);
 
 		return SCLicenseLocalServiceUtil.addLicense(
 			name, url, openSource, active, recommended);

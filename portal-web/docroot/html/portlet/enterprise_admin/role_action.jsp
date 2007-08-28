@@ -25,6 +25,10 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+RoleSearch searchContainer = (RoleSearch)request.getAttribute("liferay-ui:search:searchContainer");
+
+String redirect = searchContainer.getIteratorURL().toString();
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 Role role = (Role)row.getObject();
@@ -33,7 +37,7 @@ Role role = (Role)row.getObject();
 <c:if test="<%= !PortalUtil.isSystemRole(role.getName()) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL ">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 	</portlet:renderURL>
 
@@ -92,7 +96,7 @@ Role role = (Role)row.getObject();
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 	</portlet:actionURL>
 

@@ -29,6 +29,8 @@
 	<%
 	UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
+	String redirect = searchContainer.getIteratorURL().toString();
+
 	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
 	ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
@@ -44,7 +46,7 @@
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editUserURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
 		</portlet:renderURL>
 
@@ -65,7 +67,7 @@
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) && user2.isLayoutsRequired() %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(user2.getGroup().getGroupId()) %>" />
 		</portlet:renderURL>
 
@@ -87,7 +89,7 @@
 				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="restoreUserURL">
 					<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
 					<portlet:param name="deleteUserIds" value="<%= String.valueOf(userId) %>" />
 				</portlet:actionURL>
 
@@ -97,7 +99,7 @@
 			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteUserURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>" />
-				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
 				<portlet:param name="deleteUserIds" value="<%= String.valueOf(userId) %>" />
 			</portlet:actionURL>
 

@@ -129,7 +129,7 @@ if (Validator.isNotNull(modelResource)) {
 	function <portlet:namespace />saveUserPermissions(userIdsPos, userIdsPosValue) {
 
 		<%
-		PortletURL saveUserPermissionsRedirectURL = PortletURLUtil.clone(portletURL, false, renderResponse);
+		PortletURL saveUserPermissionsRedirectURL = PortletURLUtil.clone(portletURL, renderResponse);
 
 		new UserSearch(renderRequest, saveUserPermissionsRedirectURL);
 		%>

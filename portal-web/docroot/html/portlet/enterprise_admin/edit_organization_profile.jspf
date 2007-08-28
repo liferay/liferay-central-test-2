@@ -177,7 +177,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
 	<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveOrganization('<%= organization == null ? Constants.ADD : Constants.UPDATE %>');" />
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" /><br />
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= backURL %>';" /><br />
 </c:if>
 
 <c:if test="<%= organization != null %>">

@@ -38,22 +38,26 @@ portletURL.setParameter("struts_action", "/enterprise_admin/view");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
+
+String portletURLString = portletURL.toString();
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />deleteOrganizations() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-" + (organizationsTab ? "organizations" : "locations")) %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value;
 			document.<portlet:namespace />fm.<portlet:namespace />deleteOrganizationIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>");
 		}
 	}
 
 	function <portlet:namespace />deleteUserGroups() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-user-groups") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />userGroupsRedirect.value;
 			document.<portlet:namespace />fm.<portlet:namespace />deleteUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /></portlet:actionURL>");
 		}
 	}
 
@@ -73,8 +77,9 @@ portletURL.setParameter("tabs3", tabs3);
 
 		if (deleteUsers) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />usersRedirect.value;
 			document.<portlet:namespace />fm.<portlet:namespace />deleteUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:actionURL>");
 		}
 	}
 
@@ -142,12 +147,12 @@ portletURL.setParameter("tabs3", tabs3);
 	);
 </script>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<form action="<%= portletURLString %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURLString %>" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp" />
 
@@ -170,7 +175,11 @@ portletURL.setParameter("tabs3", tabs3);
 
 			searchContainer.setRowChecker(rowChecker);
 		}
+
+		portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
 		%>
+
+		<input name="<portlet:namespace />usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 		<liferay-ui:search-form
 			page="/html/portlet/enterprise_admin/user_search.jsp"
@@ -452,7 +461,11 @@ portletURL.setParameter("tabs3", tabs3);
 
 			searchContainer.setRowChecker(rowChecker);
 		}
+
+		portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
 		%>
+
+		<input name="<portlet:namespace />organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 		<c:if test="<%= showSearch %>">
 			<liferay-ui:search-form
@@ -672,7 +685,11 @@ portletURL.setParameter("tabs3", tabs3);
 			List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), null, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
+
+			portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
 			%>
+
+			<input name="<portlet:namespace />userGroupsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 			<div class="separator"><!-- --></div>
 
@@ -746,7 +763,11 @@ portletURL.setParameter("tabs3", tabs3);
 			List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getTypeObj(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
+
+			portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
 			%>
+
+			<input name="<portlet:namespace />rolesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 			<div class="separator"><!-- --></div>
 
@@ -806,10 +827,6 @@ portletURL.setParameter("tabs3", tabs3);
 
 		headerNames.add("description");
 		headerNames.add(StringPool.BLANK);
-
-		RowChecker rowChecker = new RowChecker(renderResponse);
-
-		searchContainer.setRowChecker(rowChecker);
 		%>
 
 		<c:if test="<%= !passwordPolicyEnabled %>">
@@ -831,7 +848,13 @@ portletURL.setParameter("tabs3", tabs3);
 			List results = PasswordPolicyLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
+
+			PortletURL passwordPoliciesRedirect = PortletURLUtil.clone(portletURL, renderResponse);
+
+			passwordPoliciesRedirect.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
 			%>
+
+			<input name="<portlet:namespace />passwordPoliciesRedirect" type="hidden" value="<%= passwordPoliciesRedirect.toString() %>" />
 
 			<div class="separator"><!-- --></div>
 
@@ -878,7 +901,7 @@ portletURL.setParameter("tabs3", tabs3);
 		<liferay-ui:tabs
 			names="general,authentication,default-user-associations,reserved-screen-names,mail-host-names,email-notifications"
 			param="tabs2"
-			url="<%= portletURL.toString() %>"
+			url="<%= portletURLString %>"
 		/>
 
 		<c:choose>
@@ -886,7 +909,7 @@ portletURL.setParameter("tabs3", tabs3);
 				<liferay-ui:tabs
 					names="general,ldap,cas,open-id"
 					param="tabs3"
-					url="<%= portletURL.toString() %>"
+					url="<%= portletURLString %>"
 				/>
 
 				<liferay-ui:error key="ldapAuthentication" message="failed-to-bind-to-the-ldap-server-with-given-values" />
@@ -1379,7 +1402,7 @@ portletURL.setParameter("tabs3", tabs3);
 				<liferay-ui:tabs
 					names="general,account-created-notification,password-changed-notification"
 					param="tabs3"
-					url="<%= portletURL.toString() %>"
+					url="<%= portletURLString %>"
 				/>
 
 				<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
@@ -1578,7 +1601,7 @@ portletURL.setParameter("tabs3", tabs3);
 				<liferay-ui:tabs
 					names="live-sessions"
 					param="tabs2"
-					url="<%= portletURL.toString() %>"
+					url="<%= portletURLString %>"
 				/>
 
 				<%
