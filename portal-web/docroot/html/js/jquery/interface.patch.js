@@ -24,29 +24,31 @@ jQuery.iAuto = {
 
 	clear : function()
 	{
-		jQuery.iAuto.items = null;
-		jQuery.iAuto.selectedItem = null;
-		jQuery.iAuto.lastValue = jQuery.iAuto.subject.value;
-		if(jQuery.iAuto.helper.css('display') == 'block') {
-			if (jQuery.iAuto.subject.autoCFG.fx) {
-				switch(jQuery.iAuto.subject.autoCFG.fx.type) {
-					case 'fade':
-						jQuery.iAuto.helper.fadeOut(jQuery.iAuto.subject.autoCFG.fx.duration, jQuery.iAuto.empty);
-						break;
-					case 'slide':
-						jQuery.iAuto.helper.SlideOutUp(jQuery.iAuto.subject.autoCFG.fx.duration, jQuery.iAuto.empty);
-						break;
-					case 'blind':
-						jQuery.iAuto.helper.BlindUp(jQuery.iAuto.subject.autoCFG.fx.duration, jQuery.iAuto.empty);
-						break;
+		if (jQuery.iAuto.subject) {
+			jQuery.iAuto.items = null;
+			jQuery.iAuto.selectedItem = null;
+			jQuery.iAuto.lastValue = jQuery.iAuto.subject.value;
+			if(jQuery.iAuto.helper.css('display') == 'block') {
+				if (jQuery.iAuto.subject.autoCFG.fx) {
+					switch(jQuery.iAuto.subject.autoCFG.fx.type) {
+						case 'fade':
+							jQuery.iAuto.helper.fadeOut(jQuery.iAuto.subject.autoCFG.fx.duration, jQuery.iAuto.empty);
+							break;
+						case 'slide':
+							jQuery.iAuto.helper.SlideOutUp(jQuery.iAuto.subject.autoCFG.fx.duration, jQuery.iAuto.empty);
+							break;
+						case 'blind':
+							jQuery.iAuto.helper.BlindUp(jQuery.iAuto.subject.autoCFG.fx.duration, jQuery.iAuto.empty);
+							break;
+					}
+				} else {
+					jQuery.iAuto.helper.hide();
 				}
+				if (jQuery.iAuto.subject.autoCFG.onHide)
+					jQuery.iAuto.subject.autoCFG.onHide.apply(jQuery.iAuto.subject, [jQuery.iAuto.helper, jQuery.iAuto.iframe]);
 			} else {
-				jQuery.iAuto.helper.hide();
+				jQuery.iAuto.empty();
 			}
-			if (jQuery.iAuto.subject.autoCFG.onHide)
-				jQuery.iAuto.subject.autoCFG.onHide.apply(jQuery.iAuto.subject, [jQuery.iAuto.helper, jQuery.iAuto.iframe]);
-		} else {
-			jQuery.iAuto.empty();
 		}
 		window.clearTimeout(jQuery.iAuto.timer);
 	},

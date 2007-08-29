@@ -68,6 +68,14 @@ if (curTagsParam != null) {
 
 	jQuery(
 		function() {
+			jQuery('#<%= randomNamespace %>tags').keypress(
+				function(event) {
+					if (event.keyCode == 13 && !jQuery(this).is('.showing-list')) {
+						jQuery('#<%= randomNamespace %>addTag').trigger('click');
+						return false;
+					}
+				}
+			);
 			<%= randomNamespace %> = new Liferay.TagsSelector(
 				{
 					instanceVar: "<%= randomNamespace %>",

@@ -45,8 +45,12 @@ Liferay.TagsSelector = new Class({
 						textRange.select();
 					}
 				},
-				onShow: function() {},
-				onHide: function() {}
+				onShow: function() {
+					jQuery(this).addClass('showing-list');
+				},
+				onHide: function() {
+					jQuery(this).removeClass('showing-list');
+				}
 			}
 		);
 
