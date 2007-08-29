@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.portlet;
+package com.liferay.portal.kernel.portlet;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
 

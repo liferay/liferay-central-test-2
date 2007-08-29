@@ -20,28 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.portlet;
-
-import javax.portlet.ActionRequest;
+package com.liferay.portal.kernel.util;
 
 /**
- * <a href="ProtectedActionRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebKeys.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ProtectedActionRequest extends ActionRequestWrapper {
+public interface WebKeys {
 
-	public ProtectedActionRequest(ActionRequest req, String remoteUser) {
-		super(req);
-
-		_remoteUser = remoteUser;
-	}
-
-	public String getRemoteUser() {
-		return _remoteUser;
-	}
-
-	private String _remoteUser;
+	public static final String THEME_DISPLAY = "THEME_DISPLAY";
 
 }

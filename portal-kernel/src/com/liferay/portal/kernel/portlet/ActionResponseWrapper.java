@@ -20,61 +20,61 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.portlet;
+package com.liferay.portal.kernel.portlet;
+
+import java.io.IOException;
 
 import java.util.Map;
 
+import javax.portlet.ActionResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
-import javax.portlet.PortletSecurityException;
-import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
 /**
- * <a href="PortletURLWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="ActionResponseWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletURLWrapper implements PortletURL {
+public class ActionResponseWrapper
+	extends PortletResponseWrapper implements ActionResponse {
 
-	public PortletURLWrapper(PortletURL portletURL) {
-		_portletURL = portletURL;
+	public ActionResponseWrapper(ActionResponse res) {
+		super(res);
+
+		_res = res;
 	}
 
 	public void setWindowState(WindowState windowState)
 		throws WindowStateException {
 
-		_portletURL.setWindowState(windowState);
+		_res.setWindowState(windowState);
 	}
 
 	public void setPortletMode(PortletMode portletMode)
-		throws PortletModeException{
+		throws PortletModeException {
 
-		_portletURL.setPortletMode(portletMode);
+		_res.setPortletMode(portletMode);
 	}
 
-	public void setParameter(String name, String value) {
-		_portletURL.setParameter(name, value);
+	public void sendRedirect(String location) throws IOException {
+		_res.sendRedirect(location);
 	}
 
-	public void setParameter(String name, String[] values) {
-		_portletURL.setParameter(name, values);
+	public void setRenderParameters(Map parameters) {
+		_res.setRenderParameters(parameters);
 	}
 
-	public void setParameters(Map parameters) {
-		_portletURL.setParameters(parameters);
+	public void setRenderParameter(String key, String value) {
+		_res.setRenderParameter(key, value);
 	}
 
-	public void setSecure(boolean secure) throws PortletSecurityException {
-		_portletURL.setSecure(secure);
+	public void setRenderParameter(String key, String[] values) {
+		_res.setRenderParameter(key, values);
 	}
 
-	public String toString() {
-		return _portletURL.toString();
-	}
-
-	private PortletURL _portletURL;
+	private ActionResponse _res;
 
 }

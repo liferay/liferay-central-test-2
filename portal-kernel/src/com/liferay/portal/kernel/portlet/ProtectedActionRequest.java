@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.portlet;
+package com.liferay.portal.kernel.portlet;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.ActionRequest;
 
 /**
- * <a href="ProtectedRenderRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ProtectedActionRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ProtectedRenderRequest extends RenderRequestWrapper {
+public class ProtectedActionRequest extends ActionRequestWrapper {
 
-	public ProtectedRenderRequest(RenderRequest req, String remoteUser) {
+	public ProtectedActionRequest(ActionRequest req, String remoteUser) {
 		super(req);
 
 		_remoteUser = remoteUser;

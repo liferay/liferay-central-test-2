@@ -257,27 +257,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		if ((path != null) && (_lastPaths.contains(path)) &&
 			(!_trackerIgnorePaths.contains(path))) {
 
-			boolean saveLastPath = true;
-
-			// /login/view
-
-			String strutsAction = req.getParameter("_58_struts_action");
-
-			if ((strutsAction != null) &&
-				(strutsAction.equals(_PATH_LOGIN_VIEW))) {
-
-				saveLastPath = false;
-			}
-
-			// /my_account/create_account
-
-			strutsAction = req.getParameter("_2_struts_action");
-
-			if ((strutsAction != null) &&
-				(strutsAction.equals(_PATH_MY_ACCOUNT_CREATE_ACCOUNT))) {
-
-				saveLastPath = false;
-			}
+			boolean saveLastPath = ParamUtil.getBoolean(
+				req, "save_last_path", true);
 
 			// Exclusive and pop up window states should never be set as the
 			// last path
@@ -744,11 +725,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	private static String _PATH_COMMON_ERROR = "/common/error";
 
 	private static String _PATH_J_SECURITY_CHECK = "/j_security_check";
-
-	private static String _PATH_LOGIN_VIEW = "/login/view";
-
-	private static String _PATH_MY_ACCOUNT_CREATE_ACCOUNT =
-		"/my_account/create_account";
 
 	private static String _PATH_PORTAL = "/portal";
 

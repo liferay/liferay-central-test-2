@@ -20,34 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portal.kernel.portlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import javax.portlet.RenderRequest;
 
 /**
- * <a href="PropsUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ProtectedRenderRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PropsUtil {
+public class ProtectedRenderRequest extends RenderRequestWrapper {
 
-	public static String get(String key) throws Exception {
-		Object returnObj = PortalClassInvoker.invoke(_CLASS, _METHOD_GET, key);
+	public ProtectedRenderRequest(RenderRequest req, String remoteUser) {
+		super(req);
 
-		if (returnObj != null) {
-			return (String)returnObj;
-		}
-		else {
-			return null;
-		}
+		_remoteUser = remoteUser;
 	}
 
-	private static final String _CLASS = "com.liferay.portal.util.PropsUtil";
+	public String getRemoteUser() {
+		return _remoteUser;
+	}
 
-	private static final String _METHOD_GET = "get";
-
-	private static Log _log = LogFactoryUtil.getLog(PropsUtil.class);
+	private String _remoteUser;
 
 }

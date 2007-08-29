@@ -288,6 +288,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.struts.PortalRequestProcessor">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.struts.PortletRequestProcessor">
 		<priority value="WARN" />
 	</category>

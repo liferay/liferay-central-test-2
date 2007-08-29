@@ -42,8 +42,11 @@ import javax.servlet.http.HttpSession;
  */
 public class PortalUtil {
 
-	public static HttpServletRequest getHttpServletRequest(PortletRequest req) {
-		Object returnObj = _invoke(_METHOD_GETHTTPSERVLETREQUEST, req);
+	public static HttpServletRequest getHttpServletRequest(PortletRequest req)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETHTTPSERVLETREQUEST, req);
 
 		if (returnObj != null) {
 			return (HttpServletRequest)returnObj;
@@ -54,9 +57,11 @@ public class PortalUtil {
 	}
 
 	public static HttpServletResponse getHttpServletResponse(
-		PortletResponse res) {
+			PortletResponse res)
+		throws Exception {
 
-		Object returnObj = _invoke(_METHOD_GETHTTPSERVLETRESPONSE, res);
+		Object returnObj = PortalClassInvoker.invoke(_CLASS,
+			_METHOD_GETHTTPSERVLETRESPONSE, res);
 
 		if (returnObj != null) {
 			return (HttpServletResponse)returnObj;
@@ -66,8 +71,11 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getPortletNamespace(String portletName) {
-		Object returnObj = _invoke(_METHOD_GETPORTLETNAMESPACE, portletName);
+	public static String getPortletNamespace(String portletName)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETPORTLETNAMESPACE, portletName);
 
 		if (returnObj != null) {
 			return (String)returnObj;
@@ -77,8 +85,11 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getUserPassword(HttpSession ses) {
-		Object returnObj = _invoke(_METHOD_GETUSERPASSWORD, ses);
+	public static String getUserPassword(HttpSession ses)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETUSERPASSWORD, ses);
 
 		if (returnObj != null) {
 			return (String)returnObj;
@@ -88,8 +99,11 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getUserPassword(HttpServletRequest req) {
-		Object returnObj = _invoke(_METHOD_GETUSERPASSWORD, req);
+	public static String getUserPassword(HttpServletRequest req)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETUSERPASSWORD, req);
 
 		if (returnObj != null) {
 			return (String)returnObj;
@@ -99,8 +113,11 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getUserPassword(ActionRequest req) {
-		Object returnObj = _invoke(_METHOD_GETUSERPASSWORD, req);
+	public static String getUserPassword(ActionRequest req)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETUSERPASSWORD, req);
 
 		if (returnObj != null) {
 			return (String)returnObj;
@@ -110,8 +127,11 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getUserPassword(RenderRequest req) {
-		Object returnObj = _invoke(_METHOD_GETUSERPASSWORD, req);
+	public static String getUserPassword(RenderRequest req)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETUSERPASSWORD, req);
 
 		if (returnObj != null) {
 			return (String)returnObj;
@@ -122,44 +142,17 @@ public class PortalUtil {
 	}
 
 	public static void setPageSubtitle(
-		String subtitle, HttpServletRequest req) {
+			String subtitle, HttpServletRequest req)
+		throws Exception {
 
-		_invoke(_METHOD_SETPAGESUBTITLE, subtitle, req);
+		PortalClassInvoker.invoke(
+			_CLASS, _METHOD_SETPAGESUBTITLE, subtitle, req);
 	}
 
-	public static void setPageTitle(String title, HttpServletRequest req) {
-		_invoke(_METHOD_SETPAGETITLE, title, req);
-	}
+	public static void setPageTitle(String title, HttpServletRequest req)
+		throws Exception {
 
-	private static Object _invoke(String method, Object arg) {
-		return _invoke(method, new Object[] {arg});
-	}
-
-	private static Object _invoke(String method, Object arg1, Object arg2) {
-		return _invoke(method, new Object[] {arg1, arg2});
-	}
-
-	private static Object _invoke(String method, Object[] args) {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
-
-		try {
-			Thread.currentThread().setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_CLASS, method, args);
-
-			return MethodInvoker.invoke(methodWrapper, false);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			return null;
-		}
-		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
-		}
+		PortalClassInvoker.invoke(_CLASS, _METHOD_SETPAGETITLE, title, req);
 	}
 
 	private static final String _CLASS = "com.liferay.portal.util.PortalUtil";

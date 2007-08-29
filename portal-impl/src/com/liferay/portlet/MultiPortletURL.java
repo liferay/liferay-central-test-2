@@ -22,11 +22,11 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.portlet.PortletURLWrapper;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.portlet.PortletURLWrapper;
 
 import java.util.HashMap;
 import java.util.Iterator;

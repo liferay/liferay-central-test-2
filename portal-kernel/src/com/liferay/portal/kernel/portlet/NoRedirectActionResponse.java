@@ -20,42 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.portlet;
+package com.liferay.portal.kernel.portlet;
 
-import javax.portlet.PortletResponse;
+import java.io.IOException;
+
+import javax.portlet.ActionResponse;
 
 /**
- * <a href="PortletResponseWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="NoRedirectActionResponse.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletResponseWrapper implements PortletResponse {
+public class NoRedirectActionResponse extends ActionResponseWrapper {
 
-	public PortletResponseWrapper(PortletResponse res) {
-		_res = res;
+	public NoRedirectActionResponse(ActionResponse res) {
+		super(res);
 	}
 
-	public void addProperty(String key, String value) {
-		_res.addProperty(key, value);
+	public String getRedirectLocation() {
+		return _redirectLocation;
 	}
 
-	public void setProperty(String key, String value) {
-		_res.setProperty(key, value);
+	public void sendRedirect(String location) throws IOException {
+
+		// Disable send redirect
+
+		_redirectLocation = location;
 	}
 
-	public String encodeURL(String path) {
-		return _res.encodeURL(path);
-	}
-
-	public PortletResponse getPortletResponse() {
-		return _res;
-	}
-
-	public void setPortletResponse(PortletResponse res) {
-		_res = res;
-	}
-
-	private PortletResponse _res;
+	private String _redirectLocation;
 
 }

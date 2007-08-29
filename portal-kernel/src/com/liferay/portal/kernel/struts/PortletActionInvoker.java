@@ -20,34 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portal.kernel.struts;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.PortalClassInvoker;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
 
 /**
- * <a href="PropsUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletActionInvoker.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PropsUtil {
+public class PortletActionInvoker {
 
-	public static String get(String key) throws Exception {
-		Object returnObj = PortalClassInvoker.invoke(_CLASS, _METHOD_GET, key);
+	public static void processAction(
+			String className, PortletConfig config, ActionRequest req,
+			ActionResponse res)
+		throws Exception {
 
-		if (returnObj != null) {
-			return (String)returnObj;
-		}
-		else {
-			return null;
-		}
+		Object mapping = new NullWrapper(
+			"org.apache.struts.action.ActionMapping");
+		Object form = new NullWrapper(
+			"org.apache.struts.action.ActionForm");
+
+		PortalClassInvoker.invoke(
+			className, "processAction",
+			new Object[] {mapping, form, config, req, res});
 	}
-
-	private static final String _CLASS = "com.liferay.portal.util.PropsUtil";
-
-	private static final String _METHOD_GET = "get";
-
-	private static Log _log = LogFactoryUtil.getLog(PropsUtil.class);
 
 }

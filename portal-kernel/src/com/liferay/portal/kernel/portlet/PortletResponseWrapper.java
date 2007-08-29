@@ -20,61 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.portlet;
+package com.liferay.portal.kernel.portlet;
 
-import java.io.IOException;
-
-import java.util.Map;
-
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletMode;
-import javax.portlet.PortletModeException;
-import javax.portlet.WindowState;
-import javax.portlet.WindowStateException;
+import javax.portlet.PortletResponse;
 
 /**
- * <a href="ActionResponseWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletResponseWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ActionResponseWrapper
-	extends PortletResponseWrapper implements ActionResponse {
+public class PortletResponseWrapper implements PortletResponse {
 
-	public ActionResponseWrapper(ActionResponse res) {
-		super(res);
-
+	public PortletResponseWrapper(PortletResponse res) {
 		_res = res;
 	}
 
-	public void setWindowState(WindowState windowState)
-		throws WindowStateException {
-
-		_res.setWindowState(windowState);
+	public void addProperty(String key, String value) {
+		_res.addProperty(key, value);
 	}
 
-	public void setPortletMode(PortletMode portletMode)
-		throws PortletModeException {
-
-		_res.setPortletMode(portletMode);
+	public void setProperty(String key, String value) {
+		_res.setProperty(key, value);
 	}
 
-	public void sendRedirect(String location) throws IOException {
-		_res.sendRedirect(location);
+	public String encodeURL(String path) {
+		return _res.encodeURL(path);
 	}
 
-	public void setRenderParameters(Map parameters) {
-		_res.setRenderParameters(parameters);
+	public PortletResponse getPortletResponse() {
+		return _res;
 	}
 
-	public void setRenderParameter(String key, String value) {
-		_res.setRenderParameter(key, value);
+	public void setPortletResponse(PortletResponse res) {
+		_res = res;
 	}
 
-	public void setRenderParameter(String key, String[] values) {
-		_res.setRenderParameter(key, values);
-	}
-
-	private ActionResponse _res;
+	private PortletResponse _res;
 
 }

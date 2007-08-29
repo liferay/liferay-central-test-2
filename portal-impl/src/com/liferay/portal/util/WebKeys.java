@@ -31,13 +31,11 @@ import com.liferay.util.bridges.jsf.sun.LiferayConfigureListener;
  * @author Brian Myunghun Kim
  *
  */
-public class WebKeys {
+public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String ADDRESS = "ADDRESS";
 
 	public static final String ADDRESS_BOOK_RECIPIENTS = "ADDRESS_BOOK_RECIPIENTS";
-
-	public static final String ALFRESCO_CONTENT = "ALFRESCO_CONTENT";
 
 	public static final String ASSOCIATE_KEY = LiferayConfigureListener.ASSOCIATE_KEY;
 
@@ -86,12 +84,6 @@ public class WebKeys {
 	public static final String FORWARD_URL = "FORWARD_URL";
 
 	public static final String FRIENDLY_URL = "FRIENDLY_URL";
-
-	public static final String GOOGLE_CACHED_PAGE = "GOOGLE_CACHED_PAGE";
-
-	public static final String GOOGLE_SEARCH_RESULT = "GOOGLE_SEARCH_RESULT";
-
-	public static final String GOOGLE_SPELLING_SUGGESTION = "GOOGLE_SPELLING_SUGGESTION";
 
 	public static final String GROUP = "GROUP";
 
@@ -296,8 +288,6 @@ public class WebKeys {
 	public static final String TASK_LIST = "TASK_LIST";
 
 	public static final String THEME = "THEME";
-
-	public static final String THEME_DISPLAY = "THEME_DISPLAY";
 
 	public static final String TRANSLATOR_TRANSLATION = "TRANSLATOR_TRANSLATION";
 
