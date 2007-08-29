@@ -182,6 +182,26 @@ public class PluginPackageIndexer implements Indexer {
 		}
 	}
 
+	public static void cleanIndex() throws IOException{
+		synchronized (PluginPackageIndexer.class) {
+			IndexReader reader = null;
+
+			try {
+				reader = LuceneUtil.getReader(CompanyImpl.SYSTEM);
+
+				reader.deleteDocuments(
+					new Term(
+						LuceneFields.PORTLET_ID,
+						PluginPackageIndexer.PORTLET_ID));
+			}
+			finally {
+				if (reader != null) {
+					reader.close();
+				}
+			}
+		}
+	}
+
 	public static void removePluginPackage(
 			String moduleId, String repositoryURL)
 		throws IOException {

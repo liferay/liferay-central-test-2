@@ -353,6 +353,8 @@ public class PluginPackageUtil {
 
 	public static void reIndex() throws SystemException {
 		try {
+			PluginPackageIndexer.cleanIndex();
+
 			Iterator itr = getAllAvailablePluginPackages().iterator();
 
 			while (itr.hasNext()) {
@@ -370,7 +372,7 @@ public class PluginPackageUtil {
 	}
 
 	public static RepositoryReport reloadRepositories()
-		throws PluginPackageException {
+		throws SystemException {
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Reloading repositories");
@@ -395,7 +397,11 @@ public class PluginPackageUtil {
 					"Unable to load repository " + repositoryURL + " " +
 						pe.toString());
 			}
+
 		}
+
+		reIndex();
+
 		return report;
 	}
 
@@ -406,22 +412,10 @@ public class PluginPackageUtil {
 
 		_updateAvailable = null;
 
-		try {
-			reIndex();
-		}
-		catch (SystemException se) {
-			_log.warn("The repositories could not be reindexed", se);
-		}
+		_indexPluginPackage(pluginPackage);
 	}
 
-	public static void registerInstallingPluginPackage(
-		PluginPackage pluginPackage) {
-
-		_installedPluginPackages.registerPluginPackageInstallation(
-			pluginPackage);
-	}
-
-	public static void registerInstallingPluginPackage(
+	public static void registerPluginPackageInstallation(
 		String preliminaryContext) {
 
 		_installedPluginPackages.registerPluginPackageInstallation(

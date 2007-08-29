@@ -223,7 +223,7 @@ public class InstallPluginAction extends PortletAction {
 		}
 
 		try {
-			PluginPackageUtil.registerInstallingPluginPackage(
+			PluginPackageUtil.registerPluginPackageInstallation(
 				deploymentContext);
 
 			String source = file.toString();
@@ -281,7 +281,7 @@ public class InstallPluginAction extends PortletAction {
 				}
 			}
 
-			PluginPackageUtil.registerInstallingPluginPackage(
+			PluginPackageUtil.registerPluginPackageInstallation(
 				deploymentContext);
 
 			int responseCode = client.executeMethod(hostConfig, getMethod);

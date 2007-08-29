@@ -25,6 +25,7 @@ package com.liferay.portal.plugin;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -288,17 +289,21 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 		return hashCodeBuilder.hashCode();
 	}
 
+	public String toString() {
+		return "/" + _context + ": " + _moduleId;
+	}
+
 	private ModuleId _moduleId;
 	private String _recommendedDeploymentContext;
 	private String _name;
 	private String _author;
-	private List _types;
+	private List _types = new ArrayList();
 	private List _tags = new ArrayList();
 	private List _licenses = new ArrayList();
 	private List _liferayVersions = new ArrayList();
-	private String _shortDescription;
-	private String _longDescription;
-	private String _changeLog;
+	private String _shortDescription = StringPool.BLANK;
+	private String _longDescription = StringPool.BLANK;
+	private String _changeLog = StringPool.BLANK;
 	private List _screenshots = new ArrayList();
 	private String _pageURL;
 	private String _downloadURL;

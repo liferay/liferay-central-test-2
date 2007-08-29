@@ -23,7 +23,6 @@
 package com.liferay.portlet.admin.job;
 
 import com.liferay.portal.job.IntervalJob;
-import com.liferay.portal.plugin.PluginPackageException;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.util.Time;
 
@@ -48,7 +47,7 @@ public class CheckRemoteRepositoriesJob implements IntervalJob {
 		try {
 			PluginPackageUtil.reloadRepositories();
 		}
-		catch (PluginPackageException e) {
+		catch (Exception e) {
 			throw new JobExecutionException(e);
 		}
 	}
