@@ -23231,7 +23231,7 @@ Liferay.Navigation = new Class({
 
 			currentLink.hover(
 				function(event) {
-					if (event.shiftKey) {
+					if (!themeDisplay.isStateMaximized() || event.shiftKey) {
 						currentSpan.css('cursor', 'text');
 					}
 				},
@@ -23240,9 +23240,10 @@ Liferay.Navigation = new Class({
 
 			currentSpan.click(
 				function(event) {
-					if (!event.shiftKey) {
+					if (themeDisplay.isStateMaximized() && !event.shiftKey) {
 						return;
 					}
+
 					var span = jQuery(this);
 					var text = span.text();
 
@@ -23257,6 +23258,7 @@ Liferay.Navigation = new Class({
 
 					var pageBlur = function(event) {
 						event.stopPropagation();
+
 						if (!jQuery(this).is('li')) {
 							cancelPage.trigger('click');
 						}
@@ -23274,6 +23276,7 @@ Liferay.Navigation = new Class({
 						function(event) {
 							instance._savePage(event, this, instance, text);
 							pageParents.unbind('blur', pageBlur);
+							pageParents.unbind('click', pageBlur);
 						}
 					);
 
@@ -23285,6 +23288,7 @@ Liferay.Navigation = new Class({
 						function(event) {
 							instance._cancelPage(event, this, text);
 							pageParents.unbind('blur', pageBlur);
+							pageParents.unbind('click', pageBlur);
 						}
 					);
 
@@ -23293,10 +23297,12 @@ Liferay.Navigation = new Class({
 							if (event.keyCode == 13) {
 								savePage.trigger('click');
 								pageParents.unbind('blur', pageBlur);
+								pageParents.unbind('click', pageBlur);
 							}
 							else if (event.keyCode == 27) {
 								cancelPage.trigger('click');
 								pageParents.unbind('blur', pageBlur);
+								pageParents.unbind('click', pageBlur);
 							}
 						}
 					);
