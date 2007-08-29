@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/admin/init.jsp" %>
+<%@ include file="/html/portlet/update_manager/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
@@ -57,4 +57,8 @@ if (availablePluginPackage != null) {
 		message="update"
 		url='<%= "javascript: " + uploadProgressId + ".startProgress(); self.location = '" + updateURL + "';" %>'
 	/>
+	<c:if test="<%= !PluginPackageUtil.isTrusted(availablePluginPackage.getRepositoryURL())%>">
+		<br>
+		<liferay-ui:message key="untrusted"/>
+	</c:if>
 </c:if>

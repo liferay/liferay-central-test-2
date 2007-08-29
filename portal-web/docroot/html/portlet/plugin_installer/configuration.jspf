@@ -198,12 +198,22 @@ String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="plugin-repositories" /><br />
+		<liferay-ui:message key="trusted-plugin-repositories" /><br />
 
 		<span style="font-size: xx-small;">(<liferay-ui:message key="enter-one-url-per-line" />)</span>
 	</td>
 	<td>
-		<textarea class="liferay-textarea" name="<portlet:namespace />pluginRepositories" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES) %></textarea>
+		<textarea class="liferay-textarea" name="<portlet:namespace />pluginRepositoriesTrusted" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES_TRUSTED) %></textarea>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="untrusted-plugin-repositories" /><br />
+
+		<span style="font-size: xx-small;">(<liferay-ui:message key="enter-one-url-per-line" />)</span>
+	</td>
+	<td>
+		<textarea class="liferay-textarea" name="<portlet:namespace />pluginRepositoriesUntrusted" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED) %></textarea>
 	</td>
 </tr>
 </table>

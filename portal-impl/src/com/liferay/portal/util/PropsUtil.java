@@ -113,7 +113,9 @@ public class PropsUtil {
 
 	public static final String PLUGIN_TYPES = "plugin.types";
 
-	public static final String PLUGIN_REPOSITORIES = "plugin.repositories";
+	public static final String PLUGIN_REPOSITORIES_TRUSTED = "plugin.repositories.trusted";
+
+	public static final String PLUGIN_REPOSITORIES_UNTRUSTED = "plugin.repositories.untrusted";
 
 	// Portlet
 

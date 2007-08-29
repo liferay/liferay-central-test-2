@@ -129,8 +129,10 @@ public class InstallPluginAction extends PortletAction {
 		String jbossPrefix = ParamUtil.getString(req, "jbossPrefix");
 		String tomcatConfDir = ParamUtil.getString(req, "tomcatConfDir");
 		String tomcatLibDir = ParamUtil.getString(req, "tomcatLibDir");
-		String pluginRepositories = ParamUtil.getString(
-			req, "pluginRepositories");
+		String pluginRepositoriesTrusted = ParamUtil.getString(
+			req, "pluginRepositoriesTrusted");
+		String pluginRepositoriesUntrusted = ParamUtil.getString(
+			req, "pluginRepositoriesUntrusted");
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
@@ -154,11 +156,15 @@ public class InstallPluginAction extends PortletAction {
 		String oldPluginRepositories = PrefsPropsUtil.getString(
 			PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
 
-		prefs.setValue(PropsUtil.PLUGIN_REPOSITORIES, pluginRepositories);
+		prefs.setValue(
+			PropsUtil.PLUGIN_REPOSITORIES_TRUSTED, pluginRepositoriesTrusted);
+		prefs.setValue(
+			PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED,
+			pluginRepositoriesUntrusted);
 
 		prefs.store();
 
-		if (!pluginRepositories.equals(oldPluginRepositories)) {
+		if (!pluginRepositoriesTrusted.equals(oldPluginRepositories)) {
 			reloadRepositories(req);
 		}
 

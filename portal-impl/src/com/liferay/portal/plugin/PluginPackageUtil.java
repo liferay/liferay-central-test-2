@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
@@ -213,7 +214,16 @@ public class PluginPackageUtil {
 
 	public static String[] getRepositoryURLs() throws PluginPackageException {
 		try {
-			return PrefsPropsUtil.getStringArray(PropsUtil.PLUGIN_REPOSITORIES);
+			String[] trusted = PrefsPropsUtil.getStringArray(
+				PropsUtil.PLUGIN_REPOSITORIES_TRUSTED);
+			String[] untrusted = PrefsPropsUtil.getStringArray(
+				PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED);
+
+			String[] result = new String[trusted.length + untrusted.length];
+
+			ArrayUtil.combine(trusted, untrusted, result);
+
+			return result;
 		}
 		catch (Exception e) {
 			throw new PluginPackageException(
@@ -249,6 +259,26 @@ public class PluginPackageUtil {
 		}
 		else {
 			return false;
+		}
+	}
+
+	public static boolean isTrusted(String repositoryURL)
+		throws PluginPackageException {
+		try {
+			String[] trusted = PrefsPropsUtil.getStringArray(
+				PropsUtil.PLUGIN_REPOSITORIES_TRUSTED);
+
+			if (ArrayUtil.contains(trusted, repositoryURL)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+
+		}
+		catch (Exception e) {
+			throw new PluginPackageException(
+				"Unable to read repository list", e);
 		}
 	}
 

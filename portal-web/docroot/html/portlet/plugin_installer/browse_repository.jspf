@@ -126,6 +126,7 @@ try {
 	List headerNames = new ArrayList();
 
 	headerNames.add(pluginType + "-plugin");
+	headerNames.add("trusted");
 	headerNames.add("tags");
 	headerNames.add("installed-version");
 	headerNames.add("available-version");
@@ -195,9 +196,18 @@ try {
 
 		row.addText(sm.toString());
 
-		// Tags
+		// Trusted
 
 		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, pluginPackageTags, null, null, null);
+
+		if (PluginPackageUtil.isTrusted(pluginPackageRepositoryURL)) {
+			row.addText(LanguageUtil.get(pageContext, "yes"));
+		}
+		else {
+			row.addText(LanguageUtil.get(pageContext, "no"));
+		}
+
+		// Tags
 
 		row.addText(rowTextEntry);
 
