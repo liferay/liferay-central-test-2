@@ -40,7 +40,7 @@ Liferay.TagsSelector = new Class({
 					if (this.createTextRange) {
 						var value = this.value;
 						var textRange = this.createTextRange();
-	
+
 						textRange.moveStart('character', value.length);
 						textRange.select();
 					}

@@ -23888,31 +23888,51 @@ Liferay.TagsSelector = new Class({
 					type: 'slide',
 					duration: 400
 				},
-				autofill: true,
+				autofill: false,
 				dataSourceType: 'json',
 				helperClass: 'autocomplete-box',
 				selectClass: 'autocomplete-selected',
-				minchars: 1,
+                multiple: true,
+                mutipleSeparator: ',',
+                minchars: 1,
 				onSelect: function(option) {
-					textInput.val('');
+					if (this.createTextRange) {
+						var value = this.value;
+						var textRange = this.createTextRange();
 
-					var curTags = instance._curTags;
-					var selTag = option.text;
-
-					if (curTags.indexOf(selTag) == -1) {
-						curTags.push(selTag);
+						textRange.moveStart('character', value.length);
+						textRange.select();
 					}
-
-					curTags = curTags.sort();
-
-					instance._update(instance);
 				},
 				onShow: function() {},
 				onHide: function() {}
 			}
 		);
 
-		if (params.focus) {
+        var addTagButton = jQuery('#' + params.addTagButton);
+
+        addTagButton.click(
+			function() {
+				    var curTags = instance._curTags;
+                    var newTags = textInput.val().split(",");
+
+                    jQuery.each(newTags, function (i, n) {
+                        n = jQuery.trim(n);
+                        if (curTags.indexOf(n) == -1) {
+                            if ( n != "") {
+                                curTags.push(n);
+                            }                           
+                        }
+                    });
+
+                    curTags = curTags.sort();
+                    textInput.val('');
+
+                    instance._update(instance);
+                }
+        );
+
+        if (params.focus) {
 			textInput.focus();
 		}
 
@@ -23985,6 +24005,7 @@ Liferay.TagsSelector = new Class({
 		tagsSummary.html(html);
 	}
 });
+
 /*  Copyright Mihai Bazon, 2002-2005  |  www.bazon.net/mishoo
  * -----------------------------------------------------------
  *

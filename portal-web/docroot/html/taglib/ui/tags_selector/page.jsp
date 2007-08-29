@@ -50,29 +50,23 @@ if (curTagsParam != null) {
 
 <input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
 
-<div id="display-container" class="lfr-column">
-	<input id="<%= randomNamespace %>tags" type="text" size="30" />
-	<input type="button" id="<%= randomNamespace %>addTag" value="<liferay-ui:message key="add" />" />
-</div>
+<table class="liferay-table">
+<tr>
+	<td>
+		<input id="<%= randomNamespace %>tags" size="30" type="text" />
 
-<span id="<%= randomNamespace %>tagsSummary"></span>
-<a href="javascript: ;" id="addtag-header"><liferay-ui:message key="add-tags" /></a>
+		<input id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
+	</td>
+	<td>
+		<span id="<%= randomNamespace %>tagsSummary"></span>
+	</td>
+</tr>
+</table>
 
 <script type="text/javascript">
 	var <%= randomNamespace %> = null;
-    jQuery(
-		function() {
-			jQuery('#display-container').hide();
-			jQuery('#addtag-header').click(
-				function() {
-					jQuery('#addtag-header, #display-container').toggle();
-				}
-			);
-    	}
-	);
 
-
-    jQuery(
+	jQuery(
 		function() {
 			<%= randomNamespace %> = new Liferay.TagsSelector(
 				{

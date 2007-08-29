@@ -191,7 +191,9 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
             if (entry == null) {
                 String defaultProperties = "0:category:no category";
 
-                TagsEntry newTagsEntry = TagsEntryLocalServiceUtil.addEntry(user.getUserId(), entryNames[i], new String[] {defaultProperties});
+                TagsEntry newTagsEntry = TagsEntryLocalServiceUtil.addEntry(
+					user.getUserId(), entryNames[i],
+					new String[] {defaultProperties});
 
 				entries.add(newTagsEntry);
             }
