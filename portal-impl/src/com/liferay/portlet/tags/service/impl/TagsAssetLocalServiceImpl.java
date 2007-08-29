@@ -32,6 +32,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsAssetLocalServiceBaseImpl;
 import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
@@ -187,7 +188,14 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			TagsEntry entry = TagsEntryUtil.fetchByC_N(
 				user.getCompanyId(), entryNames[i]);
 
-			if (entry != null) {
+            if (entry == null) {
+                String defaultProperties = "0:category:no category";
+
+                TagsEntry newTagsEntry = TagsEntryLocalServiceUtil.addEntry(user.getUserId(), entryNames[i], new String[] {defaultProperties});
+
+				entries.add(newTagsEntry);
+            }
+			else {
 				entries.add(entry);
 			}
 		}

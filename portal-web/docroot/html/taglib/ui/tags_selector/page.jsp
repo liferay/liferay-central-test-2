@@ -50,21 +50,29 @@ if (curTagsParam != null) {
 
 <input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
 
-<table class="liferay-table">
-<tr>
-	<td>
-		<input id="<%= randomNamespace %>tags" type="text" />
-	</td>
-	<td>
-		<span id="<%= randomNamespace %>tagsSummary"></span>
-	</td>
-</tr>
-</table>
+<div id="display-container" class="lfr-column">
+	<input id="<%= randomNamespace %>tags" type="text" size="30" />
+	<input type="button" id="<%= randomNamespace %>addTag" value="<liferay-ui:message key="add" />" />
+</div>
+
+<span id="<%= randomNamespace %>tagsSummary"></span>
+<a href="javascript: ;" id="addtag-header"><liferay-ui:message key="add-tags" /></a>
 
 <script type="text/javascript">
 	var <%= randomNamespace %> = null;
+    jQuery(
+		function() {
+			jQuery('#display-container').hide();
+			jQuery('#addtag-header').click(
+				function() {
+					jQuery('#addtag-header, #display-container').toggle();
+				}
+			);
+    	}
+	);
 
-	jQuery(
+
+    jQuery(
 		function() {
 			<%= randomNamespace %> = new Liferay.TagsSelector(
 				{
@@ -73,8 +81,9 @@ if (curTagsParam != null) {
 					textInput: "<%= randomNamespace %>tags",
 					summarySpan: "<%= randomNamespace %>tagsSummary",
 					curTags: "<%= curTags %>",
-					focus: <%= focus %>
-				}
+					focus: <%= focus %>,
+                    addTagButton: "<%= randomNamespace %>addTag"
+                }
 			);
 		}
 	);
