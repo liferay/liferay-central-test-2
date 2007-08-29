@@ -77,6 +77,15 @@ Liferay.TagsSelector = new Class({
                 }
         );
 
+		textInput.keypress(
+			function(event) {
+				if (event.keyCode == 13 && !jQuery(this).is('.showing-list')) {
+					addTagButton.trigger('click');
+					return false;
+				}
+			}
+		);
+
         if (params.focus) {
 			textInput.focus();
 		}
