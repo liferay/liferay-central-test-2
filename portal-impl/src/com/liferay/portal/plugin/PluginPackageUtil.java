@@ -248,6 +248,35 @@ public class PluginPackageUtil {
 		return false;
 	}
 
+	public static boolean isIgnored(PluginPackage pluginPackage)
+		throws PortalException, SystemException {
+
+		String packageId = pluginPackage.getPackageId();
+
+		String[] pluginPackagesIgnored = PrefsPropsUtil.getStringArray(
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
+
+		for (int i = 0; i < pluginPackagesIgnored.length; i++) {
+			String curPluginPackagesIgnored = pluginPackagesIgnored[i];
+
+			if (curPluginPackagesIgnored.endsWith(StringPool.STAR)) {
+				String prefix = curPluginPackagesIgnored.substring(
+					0, curPluginPackagesIgnored.length() - 2);
+
+				if (packageId.startsWith(prefix)) {
+					return true;
+				}
+			}
+			else {
+				if (packageId.equals(curPluginPackagesIgnored)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
 	public static boolean isInstallationInProcess(String context) {
 		if (_installedPluginPackages.getInstallingPluginPackage(
 				context) != null) {
@@ -257,35 +286,6 @@ public class PluginPackageUtil {
 		else {
 			return false;
 		}
-	}
-
-	public static boolean isIgnored(PluginPackage pluginPackage)
-		throws SystemException, PortalException {
-		String[] ignored = PrefsPropsUtil.getStringArray(
-				PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
-
-		String packageId = pluginPackage.getPackageId();
-
-		for (int i = 0; i < ignored.length; i++) {
-			String ignoredPackageId = ignored[i];
-
-			if (ignoredPackageId.endsWith(StringPool.STAR)) {
-				String prefix = ignoredPackageId.substring(
-					0, ignoredPackageId.length() - 2);
-
-				if (packageId.startsWith(prefix)) {
-					return true;
-				}
-			}
-			else {
-				if (packageId.equals(ignoredPackageId)) {
-					return true;
-				}
-			}
-
-		}
-
-		return false;
 	}
 
 	public static boolean isTrusted(String repositoryURL)
@@ -309,10 +309,11 @@ public class PluginPackageUtil {
 	}
 
 	public static boolean isUpdateAvailable()
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
 				PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED)) {
+
 			return false;
 		}
 
@@ -418,6 +419,10 @@ public class PluginPackageUtil {
 		return pluginPackage;
 	}
 
+	public static void refreshUpdatesAvailableCache() {
+		_updateAvailable = null;
+	}
+
 	public static void reIndex() throws SystemException {
 		try {
 			PluginPackageIndexer.cleanIndex();
@@ -436,10 +441,6 @@ public class PluginPackageUtil {
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
-	}
-
-	public static void refreshUpdatesAvailableCache() {
-		_updateAvailable = null;
 	}
 
 	public static RepositoryReport reloadRepositories() throws SystemException {

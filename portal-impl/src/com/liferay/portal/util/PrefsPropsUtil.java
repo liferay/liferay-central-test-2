@@ -243,7 +243,8 @@ public class PrefsPropsUtil {
 
 		String value = PropsUtil.get(name);
 
-		return StringUtil.split(prefs.getValue(name, value), "\n");
+		return StringUtil.split(
+			prefs.getValue(name, value), StringPool.NEW_LINE);
 	}
 
 }

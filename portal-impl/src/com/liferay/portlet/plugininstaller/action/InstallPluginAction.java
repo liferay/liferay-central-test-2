@@ -106,6 +106,9 @@ public class InstallPluginAction extends PortletAction {
 		if (cmd.equals("deployConfiguration")) {
 			deployConfiguration(req);
 		}
+		else if (cmd.equals("ignorePackages")) {
+			ignorePackages(req);
+		}
 		else if (cmd.equals("localDeploy")) {
 			localDeploy(req);
 		}
@@ -114,9 +117,6 @@ public class InstallPluginAction extends PortletAction {
 		}
 		else if (cmd.equals("remoteDeploy")) {
 			remoteDeploy(req);
-		}
-		else if (cmd.equals("ignorePackages")) {
-			ignorePackages(req);
 		}
 		else if (cmd.equals("unignorePackages")) {
 			unignorePackages(req);
@@ -168,11 +168,9 @@ public class InstallPluginAction extends PortletAction {
 		prefs.setValue(
 			PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED,
 			String.valueOf(pluginNotificationsEnabled));
-
 		prefs.setValue(
 			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
 			pluginPackagesIgnored);
-
 		prefs.setValue(
 			PropsUtil.PLUGIN_REPOSITORIES_TRUSTED, pluginRepositoriesTrusted);
 		prefs.setValue(
@@ -208,6 +206,29 @@ public class InstallPluginAction extends PortletAction {
 				_log.info("Not registering auto deploy directories");
 			}
 		}
+	}
+
+	protected void ignorePackages(ActionRequest req) throws Exception {
+		String pluginPackagesIgnored = ParamUtil.getString(
+			req, "pluginPackagesIgnored");
+
+		String oldPluginPackagesIgnored= PrefsPropsUtil.getString(
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(oldPluginPackagesIgnored);
+		sm.append(StringPool.NEW_LINE);
+		sm.append(pluginPackagesIgnored);
+
+		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
+
+		prefs.setValue(
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sm.toString());
+
+		prefs.store();
+
+		PluginPackageUtil.refreshUpdatesAvailableCache();
 	}
 
 	protected void localDeploy(ActionRequest req) throws Exception {
@@ -386,53 +407,26 @@ public class InstallPluginAction extends PortletAction {
 		}
 	}
 
-	protected void ignorePackages(ActionRequest req) throws Exception {
-		String pluginPackagesIgnored = ParamUtil.getString(
-			req, "pluginPackagesIgnored");
-
-		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
-
-		String oldPluginPackagesIgnored= PrefsPropsUtil.getString(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
-
-		StringMaker sm = new StringMaker();
-		sm.append(oldPluginPackagesIgnored);
-		sm.append(StringPool.NEW_LINE);
-		sm.append(pluginPackagesIgnored);
-
-		prefs.setValue(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sm.toString());
-
-		prefs.store();
-
-		PluginPackageUtil.refreshUpdatesAvailableCache();
-	}
-
 	protected void unignorePackages(ActionRequest req) throws Exception {
-		String pluginPackagesUnignored = ParamUtil.getString(
-			req, "pluginPackagesUnignored");
+		String[] pluginPackagesUnignored = StringUtil.split(
+			ParamUtil.getString(req, "pluginPackagesUnignored"),
+			StringPool.NEW_LINE);
 
-		String[] unignoredPluginPackages =
-			StringUtil.split(pluginPackagesUnignored, StringPool.NEW_LINE);
-
-		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
-
-		String oldPluginPackagesIgnored= PrefsPropsUtil.getString(
+		String[] pluginPackagesIgnored = PrefsPropsUtil.getStringArray(
 			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
-
-		String[] currentPluginPackages =
-			StringUtil.split(oldPluginPackagesIgnored, StringPool.NEW_LINE);
 
 		StringMaker sm = new StringMaker();
 
-		for (int i = 0; i < currentPluginPackages.length; i++) {
-			String currentPluginPackage = currentPluginPackages[i];
-			if (!ArrayUtil.contains(
-					unignoredPluginPackages, currentPluginPackage)) {
-				sm.append(currentPluginPackage);
+		for (int i = 0; i < pluginPackagesIgnored.length; i++) {
+			String packageId = pluginPackagesIgnored[i];
+
+			if (!ArrayUtil.contains(pluginPackagesUnignored, packageId)) {
+				sm.append(packageId);
 				sm.append(StringPool.NEW_LINE);
 			}
 		}
+
+		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
 		prefs.setValue(
 			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sm.toString());

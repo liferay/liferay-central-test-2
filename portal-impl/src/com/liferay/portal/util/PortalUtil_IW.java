@@ -528,7 +528,9 @@ public class PortalUtil_IW {
 		return PortalUtil.isSystemRole(roleName);
 	}
 
-	public boolean isUpdateAvailable() {
+	public boolean isUpdateAvailable()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		return PortalUtil.isUpdateAvailable();
 	}
 

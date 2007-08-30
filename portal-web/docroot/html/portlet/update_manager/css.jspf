@@ -23,44 +23,43 @@
 %>
 
 <style type="text/css">
-.portlet-section-body.status-installation-in-process td {
-	background-color: #99CCFF;
-}
+	.portlet-section-body.status-installation-in-process td {
+		background-color: #99CCFF;
+	}
 
-.portlet-section-alternate.status-installation-in-process td {
-	background-color: #99CCFF;
-}
+	.portlet-section-alternate.status-installation-in-process td {
+		background-color: #99CCFF;
+	}
 
-.portlet-section-body.status-up-to-date td {
-	background-color: #CCFFCC;
-}
+	.portlet-section-body.status-up-to-date td {
+		background-color: #CCFFCC;
+	}
 
-.portlet-section-alternate.status-up-to-date td {
-	background-color: #CCFFCC;
-}
+	.portlet-section-alternate.status-up-to-date td {
+		background-color: #CCFFCC;
+	}
 
-.portlet-section-body.status-unknown td {
-	background-color: #FFFFCC;
-}
+	.portlet-section-body.status-unknown td {
+		background-color: #FFFFCC;
+	}
 
-.portlet-section-alternate.status-unknown td {
-	background-color: #FFFFCC;
-}
+	.portlet-section-alternate.status-unknown td {
+		background-color: #FFFFCC;
+	}
 
-.portlet-section-body.status-update-available td {
-	background-color: #FF9999;
-}
+	.portlet-section-body.status-update-available td {
+		background-color: #FF9999;
+	}
 
-.portlet-section-alternate.status-update-available td {
-	background-color: #FF9999;
-}
+	.portlet-section-alternate.status-update-available td {
+		background-color: #FF9999;
+	}
 
-.portlet-section-body.status-update-ignored td {
-	background-color: #99CCFF;
-}
+	.portlet-section-body.status-update-ignored td {
+		background-color: #99CCFF;
+	}
 
-.portlet-section-alternate.status-update-ignored td {
-	background-color: #99CCFF;
-}
-
+	.portlet-section-alternate.status-update-ignored td {
+		background-color: #99CCFF;
+	}
 </style>

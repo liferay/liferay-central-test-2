@@ -1379,7 +1379,8 @@ public class PortalUtil {
 	}
 
 	public static boolean isUpdateAvailable()
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
+
 		return PluginPackageUtil.isUpdateAvailable();
 	}
 
