@@ -54,24 +54,41 @@ public class InstancePool {
 		Object obj = _classPool.get(className);
 
 		if (obj == null) {
-			try {
-				ClassLoader contextClassLoader =
-					Thread.currentThread().getContextClassLoader();
+			ClassLoader portalClassLoader =
+				PortalClassLoaderUtil.getClassLoader();
 
-				Class classObj = contextClassLoader.loadClass(className);
+			try {
+				Class classObj = portalClassLoader.loadClass(className);
 
 				obj = classObj.newInstance();
 
 				_put(className, obj);
 			}
-			catch (ClassNotFoundException cnofe) {
-				_log.error(cnofe, cnofe);
-			}
-			catch (InstantiationException ie) {
-				_log.error(ie, ie);
-			}
-			catch (IllegalAccessException iae) {
-				_log.error(iae, iae);
+			catch (Exception e1) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to load " + className +
+							" with the portal class loader",
+						e1);
+				}
+
+				ClassLoader contextClassLoader =
+					Thread.currentThread().getContextClassLoader();
+
+				try {
+					Class classObj = contextClassLoader.loadClass(className);
+
+					obj = classObj.newInstance();
+
+					_put(className, obj);
+				}
+				catch (Exception e2) {
+					_log.error(
+						"Unable to load " + className +
+							" with the portal class loader or the current " +
+								"context class loader",
+						e2);
+				}
 			}
 		}
 
