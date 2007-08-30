@@ -772,6 +772,7 @@ enter-one-city-or-zip-code-per-line=Introdueixi una sola ciutat o codi postal <b
 enter-one-email-address-per-line=Introdueixi una adreçad'email <b>per línia</b>.
 enter-one-isbn-number-per-line-to-add-books=Introdueixi únicament un número ISBN <b>per línia</b> per afegir llibres. Pot afegir fins a {0} cada vegada.
 enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x=Introdueixi un nom de servidor de correu <b>per línia</b> per a tots els servidors de correu adicionals a més de <i>{0}</i>.
+enter-one-plugin-package-id-per-line=Enter one plugin package ID <b>per line</b>.
 enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page=Enter one role name <b>per line</b>. A user must belong to one of these roles in order to add this plugin to a page.
 enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-portlet-to-a-page=Introdueixi un rol <b>per línia</b>. únicament els usuario que disposin d'aquest rol podran afegir-lo a les seves pàgines.
 enter-one-screen-name-per-line-to-reserve-the-screen-name=Enter one screen name <b>per line</b> to reserve the screen name.

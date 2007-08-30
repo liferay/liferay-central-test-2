@@ -198,34 +198,6 @@ String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="plugin-notifications-enabled" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="pluginNotificationsEnabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED) %>" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="plugin-packages-with-updates-ignored" /><br />
-
-		<span style="font-size: xx-small;">(<liferay-ui:message key="enter-one-plugin-package-id-per-line" />)</span>
-	</td>
-	<td>
-		<textarea class="liferay-textarea" name="<portlet:namespace />pluginPackagesIgnored" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED) %></textarea>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
 		<liferay-ui:message key="trusted-plugin-repositories" /><br />
 
 		<span style="font-size: xx-small;">(<liferay-ui:message key="enter-one-url-per-line" />)</span>
@@ -247,6 +219,39 @@ String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_
 	</td>
 	<td>
 		<textarea class="liferay-textarea" name="<portlet:namespace />pluginRepositoriesUntrusted" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED) %></textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="plugin-notifications-enabled" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="pluginNotificationsEnabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED) %>" />
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="plugin-packages-with-updates-ignored" /><br />
+
+		<span style="font-size: xx-small;">(<liferay-ui:message key="enter-one-plugin-package-id-per-line" />)</span>
+	</td>
+	<td>
+		<textarea class="liferay-textarea" name="<portlet:namespace />pluginPackagesIgnored" wrap="soft"><%= GetterUtil.getString(PrefsPropsUtil.getString(PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED)) %></textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br />
 	</td>
 </tr>
 </table>

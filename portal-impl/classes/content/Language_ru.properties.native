@@ -734,6 +734,7 @@ enter-one-city-or-zip-code-per-line=Введите только один гор�
 enter-one-email-address-per-line=Введите только один email адрес <b>на каждой строке</b>.
 enter-one-isbn-number-per-line-to-add-books=Введите только один ISBN номер <b>на каждой строке</b> для добавления книг. Вы можете добавлять до {0} книг за один раз.
 enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x=Введите по одному имени хоста <b>на каждой строке</b>, кроме <i>{0}</i>, для расширения списка почтовых хостов
+enter-one-plugin-package-id-per-line=Enter one plugin package ID <b>per line</b>.
 enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page=Enter one role name <b>per line</b>. A user must belong to one of these roles in order to add this plugin to a page.
 enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-portlet-to-a-page=Введите по одному имени роли <b>на каждой строке</b>. Пользователь должен иметь одну из этих ролей для добавления этого портлета на страницу.
 enter-one-screen-name-per-line-to-reserve-the-screen-name=Enter one screen name <b>per line</b> to reserve the screen name.

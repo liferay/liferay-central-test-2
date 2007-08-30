@@ -794,6 +794,7 @@ enter-one-city-or-zip-code-per-line=يک شهر و يا کدپستی وارد ک
 enter-one-email-address-per-line=يک آدرس ايميل وارد کنيد <b>در هر خط</b>.
 enter-one-isbn-number-per-line-to-add-books=يک شماره ISBN وارد کنيد <b>در هر خط</b> برای اضافه کردن کتاب. شما می توانيد در هر مرحله تعداد {0} وارد کنيد.
 enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x=نام ميزبان ايميل را وارد کنيد <b>يک عدد در هر خط</b> برای تمام ميزبان ها غير از <i>{0}</i>.
+enter-one-plugin-package-id-per-line=Enter one plugin package ID <b>per line</b>.
 enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page=Enter one role name <b>per line</b>. A user must belong to one of these roles in order to add this plugin to a page.
 enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-portlet-to-a-page=نام نقش را وارد کنيد <b>در هر خط</b>. يک کاربر بايد دارای يکی از اين نقش ها باشد تا بتواند پرتلت در صفحه اضافه کند.
 enter-one-screen-name-per-line-to-reserve-the-screen-name=Enter one screen name <b>per line</b> to reserve the screen name.

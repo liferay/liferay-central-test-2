@@ -40,9 +40,11 @@ String downloadURL = StringPool.BLANK;
 if (availablePluginPackage != null) {
 	downloadURL = availablePluginPackage.getDownloadURL();
 }
+
+System.out.println(pluginPackage);
 %>
 
-<c:if test='<%= pluginPackageStatus.equals("update-available") || pluginPackageStatus.equals("update-ignored")%>'>
+<c:if test='<%= pluginPackageStatus.equals("update-available") || pluginPackageStatus.equals("update-ignored") %>'>
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="updateURL">
 		<portlet:param name="struts_action" value="/update_manager/install_plugin" />
 		<portlet:param name="<%= Constants.CMD %>" value="remoteDeploy" />

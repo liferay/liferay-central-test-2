@@ -138,14 +138,14 @@ public class InstallPluginAction extends PortletAction {
 		String jbossPrefix = ParamUtil.getString(req, "jbossPrefix");
 		String tomcatConfDir = ParamUtil.getString(req, "tomcatConfDir");
 		String tomcatLibDir = ParamUtil.getString(req, "tomcatLibDir");
-		boolean pluginNotificationsEnabled = ParamUtil.getBoolean(
-			req, "pluginNotificationsEnabled");
-		String pluginPackagesIgnored = ParamUtil.getString(
-			req, "pluginPackagesIgnored");
 		String pluginRepositoriesTrusted = ParamUtil.getString(
 			req, "pluginRepositoriesTrusted");
 		String pluginRepositoriesUntrusted = ParamUtil.getString(
 			req, "pluginRepositoriesUntrusted");
+		boolean pluginNotificationsEnabled = ParamUtil.getBoolean(
+			req, "pluginNotificationsEnabled");
+		String pluginPackagesIgnored = ParamUtil.getString(
+			req, "pluginPackagesIgnored");
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
@@ -166,16 +166,16 @@ public class InstallPluginAction extends PortletAction {
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_TOMCAT_CONF_DIR, tomcatConfDir);
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR, tomcatLibDir);
 		prefs.setValue(
+			PropsUtil.PLUGIN_REPOSITORIES_TRUSTED, pluginRepositoriesTrusted);
+		prefs.setValue(
+			PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED,
+			pluginRepositoriesUntrusted);
+		prefs.setValue(
 			PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED,
 			String.valueOf(pluginNotificationsEnabled));
 		prefs.setValue(
 			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
 			pluginPackagesIgnored);
-		prefs.setValue(
-			PropsUtil.PLUGIN_REPOSITORIES_TRUSTED, pluginRepositoriesTrusted);
-		prefs.setValue(
-			PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED,
-			pluginRepositoriesUntrusted);
 
 		prefs.store();
 
