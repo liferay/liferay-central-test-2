@@ -665,6 +665,7 @@
 		<icon>/html/portlet/wsrp/icon.png</icon>
 		<struts-path>wsrp</struts-path>
 		<restore-current-view>false</restore-current-view>
+		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
