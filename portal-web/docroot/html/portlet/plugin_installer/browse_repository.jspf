@@ -133,17 +133,24 @@ try {
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.get(pageContext, "no-" + pluginType + "-plugins-were-found"));
 
-	Hits hits = PluginPackageUtil.search(keywords, pluginType, tag, license, repositoryURL, installStatus);
+	List hits = PluginPackageUtil.search(keywords, pluginType, tag, license, repositoryURL, installStatus).toList();
 
-	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-	int total = hits.getLength();
+	DocumentComparator docComparator = new DocumentComparator();
+
+	docComparator.addOrderBy(LuceneFields.TITLE);
+	docComparator.addOrderBy("version");
+
+	Collections.sort(hits, docComparator);
+
+	List results = ListUtil.subList(hits, searchContainer.getStart(), searchContainer.getEnd());
+	int total = hits.size();
 
 	searchContainer.setTotal(total);
 
 	List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.getLength(); i++) {
-		Document doc = results.doc(i);
+	for (int i = 0; i < results.size(); i++) {
+		Document doc = (Document)results.get(i);
 
 		String pluginPackageModuleId = doc.get("moduleId");
 		String pluginPackageGroupId = doc.get("groupId");

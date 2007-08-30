@@ -24,6 +24,8 @@ package com.liferay.portal.kernel.search;
 
 import java.io.Serializable;
 
+import java.util.List;
+
 /**
  * <a href="Hits.java.html"><b><i>View Source</i></b></a>
  *
@@ -61,5 +63,7 @@ public interface Hits extends Serializable {
 	public float score(int n);
 
 	public Hits subset(int begin, int end);
+
+	public List toList();
 
 }

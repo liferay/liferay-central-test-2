@@ -28,6 +28,9 @@ import com.liferay.util.Time;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.lucene.search.Searcher;
 
 /**
@@ -161,6 +164,16 @@ public class HitsImpl implements Hits {
 				(float)(System.currentTimeMillis() - _start) / Time.SECOND;
 
 			subset.setSearchTime(getSearchTime());
+		}
+
+		return subset;
+	}
+
+	public List toList() {
+		List subset = new ArrayList(_length);
+
+		for (int i = 0; i < _length; i++) {
+			subset.add(doc(i));
 		}
 
 		return subset;

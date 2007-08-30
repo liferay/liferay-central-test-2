@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,21 +19,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal.kernel.search;
 
-<%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
-<%@ page import="com.liferay.portal.kernel.search.Document" %>
-<%@ page import="com.liferay.portal.kernel.search.DocumentComparator" %>
-<%@ page import="com.liferay.portal.kernel.search.Hits" %>
-<%@ page import="com.liferay.portal.plugin.PluginPackageException" %>
-<%@ page import="com.liferay.portal.plugin.PluginPackageImpl" %>
-<%@ page import="com.liferay.portal.plugin.PluginPackageUtil" %>
-<%@ page import="com.liferay.portal.plugin.RepositoryReport" %>
-<%@ page import="com.liferay.util.License" %>
-<%@ page import="com.liferay.util.Screenshot" %>
+/**
+ * <a href="DocumentComparatorOrderBy.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class DocumentComparatorOrderBy {
 
-<%
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-%>
+	public DocumentComparatorOrderBy(String name, boolean asc,
+									 boolean caseSensitive) {
+
+		_name = name;
+		_asc = asc;
+		_caseSensitive = caseSensitive;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public boolean isAsc() {
+		return _asc;
+	}
+
+	public boolean isCaseSensitive() {
+		return _caseSensitive;
+	}
+
+	private String _name;
+	private boolean _asc;
+	private boolean _caseSensitive;
+
+}
