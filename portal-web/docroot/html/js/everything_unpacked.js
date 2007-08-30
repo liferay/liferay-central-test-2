@@ -15698,7 +15698,7 @@ jQuery.fn.xySize = function() {
 
 	$.fn.lDrag = function(options) {
 		this.each(function() {
-			$.lDrag.create(this, options)
+			$.lDrag.create(this, options);
 		});
 	};
 
