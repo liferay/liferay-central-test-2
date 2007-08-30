@@ -734,41 +734,41 @@ public class ServicePreAction extends Action {
 
 					String stateMax = props.getProperty(
 							LayoutTypePortletImpl.STATE_MAX);
-						String stateMaxPrevious = props.getProperty(
-								LayoutTypePortletImpl.STATE_MAX_PREVIOUS);
-						String stateMin = props.getProperty(
-								LayoutTypePortletImpl.STATE_MIN);
-						String modeAbout = props.getProperty(
-								LayoutTypePortletImpl.MODE_ABOUT);
-						String modeConfig = props.getProperty(
-								LayoutTypePortletImpl.MODE_CONFIG);
-						String modeEdit = props.getProperty(
-								LayoutTypePortletImpl.MODE_EDIT);
-						String modeEditDefaults = props.getProperty(
-								LayoutTypePortletImpl.MODE_EDIT_DEFAULTS);
-						String modeEditGuest = props.getProperty(
-								LayoutTypePortletImpl.MODE_EDIT_GUEST);
-						String modeHelp = props.getProperty(
-								LayoutTypePortletImpl.MODE_HELP);
-						String modePreview = props.getProperty(
-								LayoutTypePortletImpl.MODE_PREVIEW);
-						String modePrint = props.getProperty(
-								LayoutTypePortletImpl.MODE_PRINT);
+					String stateMaxPrevious = props.getProperty(
+							LayoutTypePortletImpl.STATE_MAX_PREVIOUS);
+					String stateMin = props.getProperty(
+							LayoutTypePortletImpl.STATE_MIN);
+					String modeAbout = props.getProperty(
+							LayoutTypePortletImpl.MODE_ABOUT);
+					String modeConfig = props.getProperty(
+							LayoutTypePortletImpl.MODE_CONFIG);
+					String modeEdit = props.getProperty(
+							LayoutTypePortletImpl.MODE_EDIT);
+					String modeEditDefaults = props.getProperty(
+							LayoutTypePortletImpl.MODE_EDIT_DEFAULTS);
+					String modeEditGuest = props.getProperty(
+							LayoutTypePortletImpl.MODE_EDIT_GUEST);
+					String modeHelp = props.getProperty(
+							LayoutTypePortletImpl.MODE_HELP);
+					String modePreview = props.getProperty(
+							LayoutTypePortletImpl.MODE_PREVIEW);
+					String modePrint = props.getProperty(
+							LayoutTypePortletImpl.MODE_PRINT);
 
-						LayoutTypePortlet layoutTypePortlet =
-							(LayoutTypePortlet)layout.getLayoutType();
+					LayoutTypePortlet layoutTypePortlet =
+						(LayoutTypePortlet)layout.getLayoutType();
 
-						layoutTypePortlet.setStateMax(stateMax);
-						layoutTypePortlet.setStateMaxPrevious(stateMaxPrevious);
-						layoutTypePortlet.setStateMin(stateMin);
-						layoutTypePortlet.setModeAbout(modeAbout);
-						layoutTypePortlet.setModeConfig(modeConfig);
-						layoutTypePortlet.setModeEdit(modeEdit);
-						layoutTypePortlet.setModeEditDefaults(modeEditDefaults);
-						layoutTypePortlet.setModeEditGuest(modeEditGuest);
-						layoutTypePortlet.setModeHelp(modeHelp);
-						layoutTypePortlet.setModePreview(modePreview);
-						layoutTypePortlet.setModePrint(modePrint);
+					layoutTypePortlet.setStateMax(stateMax);
+					layoutTypePortlet.setStateMaxPrevious(stateMaxPrevious);
+					layoutTypePortlet.setStateMin(stateMin);
+					layoutTypePortlet.setModeAbout(modeAbout);
+					layoutTypePortlet.setModeConfig(modeConfig);
+					layoutTypePortlet.setModeEdit(modeEdit);
+					layoutTypePortlet.setModeEditDefaults(modeEditDefaults);
+					layoutTypePortlet.setModeEditGuest(modeEditGuest);
+					layoutTypePortlet.setModeHelp(modeHelp);
+					layoutTypePortlet.setModePreview(modePreview);
+					layoutTypePortlet.setModePrint(modePrint);
 				}
 			}
 		}
