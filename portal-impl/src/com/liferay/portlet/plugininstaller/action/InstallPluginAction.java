@@ -164,9 +164,7 @@ public class InstallPluginAction extends PortletAction {
 
 		prefs.store();
 
-		if (!pluginRepositoriesTrusted.equals(oldPluginRepositories)) {
-			reloadRepositories(req);
-		}
+		reloadRepositories(req);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Unregistering auto deploy directories");

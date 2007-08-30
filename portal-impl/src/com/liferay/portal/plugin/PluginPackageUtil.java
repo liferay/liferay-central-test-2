@@ -26,10 +26,10 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
@@ -219,11 +219,7 @@ public class PluginPackageUtil {
 			String[] untrusted = PrefsPropsUtil.getStringArray(
 				PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED);
 
-			String[] result = new String[trusted.length + untrusted.length];
-
-			ArrayUtil.combine(trusted, untrusted, result);
-
-			return result;
+			return ArrayUtil.append(trusted, untrusted);
 		}
 		catch (Exception e) {
 			throw new PluginPackageException(
@@ -264,6 +260,7 @@ public class PluginPackageUtil {
 
 	public static boolean isTrusted(String repositoryURL)
 		throws PluginPackageException {
+
 		try {
 			String[] trusted = PrefsPropsUtil.getStringArray(
 				PropsUtil.PLUGIN_REPOSITORIES_TRUSTED);
@@ -274,7 +271,6 @@ public class PluginPackageUtil {
 			else {
 				return false;
 			}
-
 		}
 		catch (Exception e) {
 			throw new PluginPackageException(
@@ -401,9 +397,7 @@ public class PluginPackageUtil {
 		}
 	}
 
-	public static RepositoryReport reloadRepositories()
-		throws SystemException {
-
+	public static RepositoryReport reloadRepositories()	throws SystemException {
 		if (_log.isInfoEnabled()) {
 			_log.info("Reloading repositories");
 		}

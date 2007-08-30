@@ -161,12 +161,15 @@ PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(modul
 	</td>
 	<td>
 		<a href="<%= pluginPackage.getRepositoryURL() %>"><%= pluginPackage.getRepositoryURL() %></a>
-		<c:if test="<%= PluginPackageUtil.isTrusted(pluginPackage.getRepositoryURL()) %>">
-			(<liferay-ui:message key="trusted" />)
-		</c:if>
-		<c:if test="<%= !PluginPackageUtil.isTrusted(pluginPackage.getRepositoryURL()) %>">
-			(<liferay-ui:message key="untrusted" />)
-		</c:if>
+
+		<c:choose>
+			<c:when test="<%= PluginPackageUtil.isTrusted(pluginPackage.getRepositoryURL()) %>">
+				(<liferay-ui:message key="trusted" />)
+			</c:when>
+			<c:otherwise>
+				(<liferay-ui:message key="untrusted" />)
+			</c:otherwise>
+		</c:choose>
 	</td>
 </tr>
 <tr>

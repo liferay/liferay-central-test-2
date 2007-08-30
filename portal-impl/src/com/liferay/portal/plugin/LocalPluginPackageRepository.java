@@ -176,8 +176,8 @@ public class LocalPluginPackageRepository {
 	}
 
 	public void unregisterPluginPackageInstallation(String context) {
-		_pendingPackages.remove(context);
 		_pluginPackages.remove(context);
+		_pendingPackages.remove(context);
 	}
 
 	private static Log _log =

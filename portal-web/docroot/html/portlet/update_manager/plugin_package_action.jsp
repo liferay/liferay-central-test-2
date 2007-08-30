@@ -57,8 +57,15 @@ if (availablePluginPackage != null) {
 		message="update"
 		url='<%= "javascript: " + uploadProgressId + ".startProgress(); self.location = '" + updateURL + "';" %>'
 	/>
-	<c:if test="<%= !PluginPackageUtil.isTrusted(availablePluginPackage.getRepositoryURL())%>">
-		<br>
-		<liferay-ui:message key="untrusted"/>
-	</c:if>
+
+	<br />
+
+	<c:choose>
+		<c:when test="<%= PluginPackageUtil.isTrusted(availablePluginPackage.getRepositoryURL()) %>">
+			<liferay-ui:message key="trusted" />
+		</c:when>
+		<c:otherwise>
+			<liferay-ui:message key="untrusted" />
+		</c:otherwise>
+	</c:choose>
 </c:if>

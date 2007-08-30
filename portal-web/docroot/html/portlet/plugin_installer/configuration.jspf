@@ -207,6 +207,11 @@ String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_
 	</td>
 </tr>
 <tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
 	<td>
 		<liferay-ui:message key="untrusted-plugin-repositories" /><br />
 

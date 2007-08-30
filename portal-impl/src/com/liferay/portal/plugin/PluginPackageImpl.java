@@ -25,6 +25,7 @@ package com.liferay.portal.plugin;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -290,7 +291,14 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 	}
 
 	public String toString() {
-		return "/" + _context + ": " + _moduleId;
+		StringMaker sm = new StringMaker();
+
+		sm.append(StringPool.SLASH);
+		sm.append(_context);
+		sm.append(StringPool.COLON);
+		sm.append(_moduleId);
+
+		return sm.toString();
 	}
 
 	private ModuleId _moduleId;
