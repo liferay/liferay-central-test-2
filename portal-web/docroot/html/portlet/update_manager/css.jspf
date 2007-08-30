@@ -55,11 +55,11 @@
 	background-color: #FF9999;
 }
 
-.portlet-section-body.status-update-dismissed td {
+.portlet-section-body.status-update-ignored td {
 	background-color: #99CCFF;
 }
 
-.portlet-section-alternate.status-update-dismissed td {
+.portlet-section-alternate.status-update-ignored td {
 	background-color: #99CCFF;
 }
 

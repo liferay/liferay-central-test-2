@@ -259,26 +259,26 @@ public class PluginPackageUtil {
 		}
 	}
 
-	public static boolean isDismissed(PluginPackage pluginPackage)
+	public static boolean isIgnored(PluginPackage pluginPackage)
 		throws SystemException, PortalException {
-		String[] dismissed = PrefsPropsUtil.getStringArray(
-				PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED);
+		String[] ignored = PrefsPropsUtil.getStringArray(
+				PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
 
 		String packageId = pluginPackage.getPackageId();
 
-		for (int i = 0; i < dismissed.length; i++) {
-			String dismissedPackageId = dismissed[i];
+		for (int i = 0; i < ignored.length; i++) {
+			String ignoredPackageId = ignored[i];
 
-			if (dismissedPackageId.endsWith(StringPool.STAR)) {
-				String prefix = dismissedPackageId.substring(
-					0, dismissedPackageId.length() - 2);
+			if (ignoredPackageId.endsWith(StringPool.STAR)) {
+				String prefix = ignoredPackageId.substring(
+					0, ignoredPackageId.length() - 2);
 
 				if (packageId.startsWith(prefix)) {
 					return true;
 				}
 			}
 			else {
-				if (packageId.equals(dismissedPackageId)) {
+				if (packageId.equals(ignoredPackageId)) {
 					return true;
 				}
 			}
@@ -327,7 +327,7 @@ public class PluginPackageUtil {
 
 			PluginPackage availablePluginPackage = null;
 
-			if (isDismissed(pluginPackage)) {
+			if (isIgnored(pluginPackage)) {
 				continue;
 			}
 

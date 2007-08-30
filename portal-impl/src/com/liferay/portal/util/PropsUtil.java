@@ -119,7 +119,7 @@ public class PropsUtil {
 
 	public static final String PLUGIN_NOTIFICATIONS_ENABLED = "plugin.notifications.enabled";
 	
-	public static final String PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED = "plugin.notifications.packages.dismissed";
+	public static final String PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED = "plugin.notifications.packages.ignored";
 
 	// Portlet
 

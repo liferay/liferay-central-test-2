@@ -115,11 +115,11 @@ public class InstallPluginAction extends PortletAction {
 		else if (cmd.equals("remoteDeploy")) {
 			remoteDeploy(req);
 		}
-		else if (cmd.equals("dismissPackages")) {
-			dismissPackages(req);
+		else if (cmd.equals("ignorePackages")) {
+			ignorePackages(req);
 		}
-		else if (cmd.equals("undismissPackages")) {
-			undismissPackages(req);
+		else if (cmd.equals("unignorePackages")) {
+			unignorePackages(req);
 		}
 
 		sendRedirect(req, res);
@@ -140,8 +140,8 @@ public class InstallPluginAction extends PortletAction {
 		String tomcatLibDir = ParamUtil.getString(req, "tomcatLibDir");
 		boolean pluginNotificationsEnabled = ParamUtil.getBoolean(
 			req, "pluginNotificationsEnabled");
-		String pluginPackagesDismissed = ParamUtil.getString(
-			req, "pluginPackagesDismissed");
+		String pluginPackagesIgnored = ParamUtil.getString(
+			req, "pluginPackagesIgnored");
 		String pluginRepositoriesTrusted = ParamUtil.getString(
 			req, "pluginRepositoriesTrusted");
 		String pluginRepositoriesUntrusted = ParamUtil.getString(
@@ -170,8 +170,8 @@ public class InstallPluginAction extends PortletAction {
 			String.valueOf(pluginNotificationsEnabled));
 
 		prefs.setValue(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED,
-			pluginPackagesDismissed);
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
+			pluginPackagesIgnored);
 
 		prefs.setValue(
 			PropsUtil.PLUGIN_REPOSITORIES_TRUSTED, pluginRepositoriesTrusted);
@@ -386,56 +386,56 @@ public class InstallPluginAction extends PortletAction {
 		}
 	}
 
-	protected void dismissPackages(ActionRequest req) throws Exception {
-		String pluginPackagesDismissed = ParamUtil.getString(
-			req, "pluginPackagesDismissed");
+	protected void ignorePackages(ActionRequest req) throws Exception {
+		String pluginPackagesIgnored = ParamUtil.getString(
+			req, "pluginPackagesIgnored");
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
-		String oldPluginPackagesDismissed= PrefsPropsUtil.getString(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED);
+		String oldPluginPackagesIgnored= PrefsPropsUtil.getString(
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
 
 		StringMaker sm = new StringMaker();
-		sm.append(oldPluginPackagesDismissed);
+		sm.append(oldPluginPackagesIgnored);
 		sm.append(StringPool.NEW_LINE);
-		sm.append(pluginPackagesDismissed);
+		sm.append(pluginPackagesIgnored);
 
 		prefs.setValue(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED, sm.toString());
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sm.toString());
 
 		prefs.store();
 
 		PluginPackageUtil.refreshUpdatesAvailableCache();
 	}
 
-	protected void undismissPackages(ActionRequest req) throws Exception {
-		String pluginPackagesDismissed = ParamUtil.getString(
-			req, "pluginPackagesUndismissed");
+	protected void unignorePackages(ActionRequest req) throws Exception {
+		String pluginPackagesUnignored = ParamUtil.getString(
+			req, "pluginPackagesUnignored");
 
-		String[] undismissedPluginPackages =
-			StringUtil.split(pluginPackagesDismissed, StringPool.NEW_LINE);
+		String[] unignoredPluginPackages =
+			StringUtil.split(pluginPackagesUnignored, StringPool.NEW_LINE);
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
-		String oldPluginPackagesDismissed= PrefsPropsUtil.getString(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED);
+		String oldPluginPackagesIgnored= PrefsPropsUtil.getString(
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
 
 		String[] currentPluginPackages =
-			StringUtil.split(oldPluginPackagesDismissed, StringPool.NEW_LINE);
+			StringUtil.split(oldPluginPackagesIgnored, StringPool.NEW_LINE);
 
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < currentPluginPackages.length; i++) {
 			String currentPluginPackage = currentPluginPackages[i];
 			if (!ArrayUtil.contains(
-					undismissedPluginPackages, currentPluginPackage)) {
+					unignoredPluginPackages, currentPluginPackage)) {
 				sm.append(currentPluginPackage);
 				sm.append(StringPool.NEW_LINE);
 			}
 		}
 
 		prefs.setValue(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED, sm.toString());
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sm.toString());
 
 		prefs.store();
 

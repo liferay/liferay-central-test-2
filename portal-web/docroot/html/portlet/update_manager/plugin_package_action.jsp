@@ -42,7 +42,7 @@ if (availablePluginPackage != null) {
 }
 %>
 
-<c:if test='<%= pluginPackageStatus.equals("update-available") || pluginPackageStatus.equals("update-dismissed")%>'>
+<c:if test='<%= pluginPackageStatus.equals("update-available") || pluginPackageStatus.equals("update-ignored")%>'>
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="updateURL">
 		<portlet:param name="struts_action" value="/update_manager/install_plugin" />
 		<portlet:param name="<%= Constants.CMD %>" value="remoteDeploy" />
@@ -59,32 +59,32 @@ if (availablePluginPackage != null) {
 	/>
 
 	<c:choose>
-		<c:when test="<%= !PluginPackageUtil.isDismissed(pluginPackage) %>">
-			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="dismissURL">
+		<c:when test="<%= !PluginPackageUtil.isIgnored(pluginPackage) %>">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="ignoreURL">
 				<portlet:param name="struts_action" value="/update_manager/install_plugin" />
-				<portlet:param name="<%= Constants.CMD %>" value="dismissPackages" />
+				<portlet:param name="<%= Constants.CMD %>" value="ignorePackages" />
 				<portlet:param name="redirect" value="<%= redirect %>" />
-				<portlet:param name="pluginPackagesDismissed" value="<%= pluginPackage.getPackageId() %>" />
+				<portlet:param name="pluginPackagesIgnored" value="<%= pluginPackage.getPackageId() %>" />
 			</portlet:actionURL>
 
 			<liferay-ui:icon
 				image="unsubscribe"
-				message="dissmiss"
-				url='<%= dismissURL.toString() %>'
+				message="ignore"
+				url='<%= ignoreURL.toString() %>'
 			/>
 		</c:when>
 		<c:otherwise>
-			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="undismissURL">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unignoreURL">
 				<portlet:param name="struts_action" value="/update_manager/install_plugin" />
-				<portlet:param name="<%= Constants.CMD %>" value="undismissPackages" />
+				<portlet:param name="<%= Constants.CMD %>" value="unignorePackages" />
 				<portlet:param name="redirect" value="<%= redirect %>" />
-				<portlet:param name="pluginPackagesUndismissed" value="<%= pluginPackage.getPackageId() %>" />
+				<portlet:param name="pluginPackagesUnignored" value="<%= pluginPackage.getPackageId() %>" />
 			</portlet:actionURL>
 
 			<liferay-ui:icon
 				image="subscribe"
-				message="undismiss"
-				url='<%= undismissURL.toString() %>'
+				message="unignore"
+				url='<%= unignoreURL.toString() %>'
 			/>
 		</c:otherwise>
 	</c:choose>
