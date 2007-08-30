@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  * <a href="FinderCache.java.html"><b><i>View Source</i></b></a>
@@ -65,6 +66,13 @@ public class FinderCache {
 	public static Object getResult(
 		String className, String methodName, String[] params, Object[] args) {
 
+		return getResult(className, methodName, params, args, null);
+	}
+
+	public static Object getResult(
+		String className, String methodName, String[] params, Object[] args,
+		SessionFactory sessionFactory) {
+
 		String key = _encodeKey(className, methodName, params, args);
 
 		Object primaryKey = MultiVMPoolUtil.get(_cache, key);
@@ -73,7 +81,7 @@ public class FinderCache {
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = HibernateUtil.openSession(sessionFactory);
 
 				return _primaryKeyToResult(session, primaryKey);
 			}
@@ -90,6 +98,13 @@ public class FinderCache {
 		String sql, String[] classNames, String methodName, String[] params,
 		Object[] args) {
 
+		return getResult(sql, classNames, methodName, params, args, null);
+	}
+
+	public static Object getResult(
+		String sql, String[] classNames, String methodName, String[] params,
+		Object[] args, SessionFactory sessionFactory) {
+
 		String key = _encodeKey(sql, methodName, params, args);
 
 		Object primaryKey = MultiVMPoolUtil.get(_cache, key);
@@ -98,7 +113,7 @@ public class FinderCache {
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = HibernateUtil.openSession(sessionFactory);
 
 				return _primaryKeyToResult(session, primaryKey);
 			}

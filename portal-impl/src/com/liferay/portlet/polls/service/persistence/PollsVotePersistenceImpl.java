@@ -190,7 +190,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(questionId) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -244,7 +244,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -370,7 +370,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(choiceId) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -424,7 +424,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -579,7 +579,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				new Long(questionId), new Long(userId)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -689,7 +689,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -767,7 +767,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(questionId) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -820,7 +820,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(choiceId) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -878,7 +878,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 				new Long(questionId), new Long(userId)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -934,7 +934,7 @@ public class PollsVotePersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;

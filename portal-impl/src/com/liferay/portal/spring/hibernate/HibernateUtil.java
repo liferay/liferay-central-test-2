@@ -24,6 +24,7 @@ package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.dao.hibernate.LiferayClassicSession;
@@ -163,6 +164,10 @@ public class HibernateUtil {
 	public static Session openSession(String sessionFactoryName)
 		throws HibernateException {
 
+		if (Validator.isNull(sessionFactoryName)) {
+			return openSession();
+		}
+
 		SessionFactoryImplementor sessionFactory =
 			getSessionFactory(sessionFactoryName);
 
@@ -171,6 +176,10 @@ public class HibernateUtil {
 
 	public static Session openSession(SessionFactory sessionFactory)
 		throws HibernateException {
+
+		if (sessionFactory == null) {
+			return openSession();
+		}
 
 		// Let Spring manage sessions
 

@@ -192,7 +192,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(organizationId) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -248,7 +248,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 				String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -434,7 +434,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -504,7 +504,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(organizationId) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -556,7 +556,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;

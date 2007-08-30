@@ -232,7 +232,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -288,7 +288,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -423,7 +423,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -479,7 +479,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -619,7 +619,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				new Long(companyId), new Long(parentOrganizationId)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -679,7 +679,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -855,7 +855,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -977,7 +977,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -1069,7 +1069,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -1122,7 +1122,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -1180,7 +1180,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				new Long(companyId), new Long(parentOrganizationId)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -1239,7 +1239,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(companyId), name };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -1305,7 +1305,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] {  };
 		Object[] finderArgs = new Object[] {  };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -1369,7 +1369,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -1421,7 +1421,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -1472,7 +1472,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(groupPK) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			try {
@@ -1695,7 +1695,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -1743,7 +1743,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(pk) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			Session session = null;
@@ -1793,7 +1793,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] { new Long(pk), new Long(userPK) };
 		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs);
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
 		if (result == null) {
 			try {

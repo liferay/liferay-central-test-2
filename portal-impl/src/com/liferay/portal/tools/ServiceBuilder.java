@@ -2674,7 +2674,7 @@ public class ServiceBuilder {
 				}
 
 				sm.append("};");
-				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());");
 				sm.append("if (result == null) {");
 				sm.append("Session session = null;");
 				sm.append("try {");
@@ -2856,7 +2856,7 @@ public class ServiceBuilder {
 				}
 
 				sm.append("};");
-				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());");
 				sm.append("if (result == null) {");
 				sm.append("Session session = null;");
 				sm.append("try {");
@@ -3038,7 +3038,7 @@ public class ServiceBuilder {
 
 				sm.append("String.valueOf(begin), String.valueOf(end), String.valueOf(obc)");
 				sm.append("};");
-				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());");
 				sm.append("if (result == null) {");
 				sm.append("Session session = null;");
 				sm.append("try {");
@@ -3466,7 +3466,7 @@ public class ServiceBuilder {
 		sm.append("Object finderArgs[] = new Object[] {");
 		sm.append("String.valueOf(begin), String.valueOf(end), String.valueOf(obc)");
 		sm.append("};");
-		sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+		sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());");
 		sm.append("if (result == null) {");
 		sm.append("Session session = null;");
 		sm.append("try {");
@@ -3664,7 +3664,7 @@ public class ServiceBuilder {
 			}
 
 			sm.append("};");
-			sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+			sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());");
 			sm.append("if (result == null) {");
 			sm.append("Session session = null;");
 			sm.append("try {");
@@ -3771,7 +3771,7 @@ public class ServiceBuilder {
 		sm.append("String finderMethodName = \"countAll\";");
 		sm.append("String finderParams[] = new String[] {};");
 		sm.append("Object finderArgs[] = new Object[] {};");
-		sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+		sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());");
 		sm.append("if (result == null) {");
 		sm.append("Session session = null;");
 		sm.append("try {");
@@ -3856,7 +3856,7 @@ public class ServiceBuilder {
 
 				sm.append(", String.valueOf(begin), String.valueOf(end), String.valueOf(obc)");
 				sm.append("};");
-				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());");
 				sm.append("if (result == null) {");
 				sm.append("Session session = null;");
 				sm.append("try {");
@@ -3938,7 +3938,7 @@ public class ServiceBuilder {
 				}
 
 				sm.append("};");
-				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());");
 				sm.append("if (result == null) {");
 				sm.append("Session session = null;");
 				sm.append("try {");
@@ -4020,7 +4020,7 @@ public class ServiceBuilder {
 				}
 
 				sm.append("};");
-				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs);");
+				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());");
 				sm.append("if (result == null) {");
 				sm.append("try {");
 				sm.append("Boolean value = new Boolean(contains" + tempEntity.getName() + ".contains(pk, " + tempEntity.getVarName() + "PK));");
