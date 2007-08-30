@@ -1364,7 +1364,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 
-		validatePassword(user.getCompanyId(), userId, password1, password2);
+		// Use silentUpdate so that imported user passwords are not exported
+		// or validated.
+
+		if (!silentUpdate) {
+			validatePassword(user.getCompanyId(), userId, password1, password2);
+		}
 
 		String oldEncPwd = user.getPassword();
 
