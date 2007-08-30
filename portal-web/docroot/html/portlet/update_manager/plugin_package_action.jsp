@@ -40,8 +40,6 @@ String downloadURL = StringPool.BLANK;
 if (availablePluginPackage != null) {
 	downloadURL = availablePluginPackage.getDownloadURL();
 }
-
-System.out.println(pluginPackage);
 %>
 
 <c:if test='<%= pluginPackageStatus.equals("update-available") || pluginPackageStatus.equals("update-ignored") %>'>
