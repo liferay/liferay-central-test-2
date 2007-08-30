@@ -64,6 +64,10 @@ public class ModuleId {
 		return _artifactId;
 	}
 
+	public String getPackageId() {
+		return _groupId + StringPool.SLASH + _artifactId;
+	}
+
 	public String getVersion() {
 		return _pluginVersion.toString();
 	}

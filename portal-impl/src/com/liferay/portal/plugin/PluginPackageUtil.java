@@ -22,6 +22,7 @@
 
 package com.liferay.portal.plugin;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
@@ -258,6 +259,35 @@ public class PluginPackageUtil {
 		}
 	}
 
+	public static boolean isDismissed(PluginPackage pluginPackage)
+		throws SystemException, PortalException {
+		String[] dismissed = PrefsPropsUtil.getStringArray(
+				PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED);
+
+		String packageId = pluginPackage.getPackageId();
+
+		for (int i = 0; i < dismissed.length; i++) {
+			String dismissedPackageId = dismissed[i];
+
+			if (dismissedPackageId.endsWith(StringPool.STAR)) {
+				String prefix = dismissedPackageId.substring(
+					0, dismissedPackageId.length() - 2);
+
+				if (packageId.startsWith(prefix)) {
+					return true;
+				}
+			}
+			else {
+				if (packageId.equals(dismissedPackageId)) {
+					return true;
+				}
+			}
+
+		}
+
+		return false;
+	}
+
 	public static boolean isTrusted(String repositoryURL)
 		throws PluginPackageException {
 
@@ -278,7 +308,14 @@ public class PluginPackageUtil {
 		}
 	}
 
-	public static boolean isUpdateAvailable() {
+	public static boolean isUpdateAvailable()
+		throws SystemException, PortalException {
+
+		if (!PrefsPropsUtil.getBoolean(
+				PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED)) {
+			return false;
+		}
+
 		if (_updateAvailable != null) {
 			return _updateAvailable.booleanValue();
 		}
@@ -289,6 +326,10 @@ public class PluginPackageUtil {
 			PluginPackage pluginPackage = (PluginPackage)itr.next();
 
 			PluginPackage availablePluginPackage = null;
+
+			if (isDismissed(pluginPackage)) {
+				continue;
+			}
 
 			try {
 				availablePluginPackage =
@@ -397,7 +438,11 @@ public class PluginPackageUtil {
 		}
 	}
 
-	public static RepositoryReport reloadRepositories()	throws SystemException {
+	public static void refreshUpdatesAvailableCache() {
+		_updateAvailable = null;
+	}
+
+	public static RepositoryReport reloadRepositories() throws SystemException {
 		if (_log.isInfoEnabled()) {
 			_log.info("Reloading repositories");
 		}

@@ -117,6 +117,10 @@ public class PropsUtil {
 
 	public static final String PLUGIN_REPOSITORIES_UNTRUSTED = "plugin.repositories.untrusted";
 
+	public static final String PLUGIN_NOTIFICATIONS_ENABLED = "plugin.notifications.enabled";
+	
+	public static final String PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED = "plugin.notifications.packages.dismissed";
+
 	// Portlet
 
 	public static final String PORTLET_VIRTUAL_PATH = "portlet.virtual.path";

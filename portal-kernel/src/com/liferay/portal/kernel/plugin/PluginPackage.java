@@ -103,6 +103,8 @@ public interface PluginPackage {
 
 	public String getGroupId();
 
+	public String getPackageId();
+
 	public String getVersion();
 
 	public Properties getDeploymentSettings();

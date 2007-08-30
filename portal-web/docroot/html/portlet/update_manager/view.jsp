@@ -26,6 +26,10 @@
 
 <%@ include file="/html/portlet/update_manager/css.jspf" %>
 
+<%
+List updatablePackageIds = new ArrayList();
+%>
+
 <c:choose>
 	<c:when test="<%= permissionChecker.isOmniadmin() %>">
 		<c:choose>
@@ -112,7 +116,14 @@
 							pluginPackageStatus = "installation-in-process";
 						}
 						else if ((availablePluginPackage != null) && Version.getInstance(availablePluginPackage.getVersion()).isLaterVersionThan(pluginPackageVersion)) {
-							pluginPackageStatus = "update-available";
+							if (PluginPackageUtil.isDismissed(pluginPackage)) {
+								pluginPackageStatus = "update-dismissed";
+							}
+							else {
+								pluginPackageStatus = "update-available";
+							}
+
+							updatablePackageIds.add(pluginPackage.getPackageId());
 						}
 						else if (pluginPackage.getVersion().equals(Version.UNKNOWN)) {
 							pluginPackageStatus = "unknown";
@@ -196,6 +207,17 @@
 					</c:if>
 
 					<input type="button" value="<liferay-ui:message key="install-more-plugins" />" onClick="self.location = '<%= pluginInstallerURL.toString() %>';" />
+
+					<c:if test="<%= !updatablePackageIds.isEmpty() %>">
+						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="dismissAllURL">
+							<portlet:param name="struts_action" value="/update_manager/install_plugin" />
+							<portlet:param name="<%= Constants.CMD %>" value="dismissPackages" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="pluginPackagesDismissed" value='<%= StringUtil.merge(updatablePackageIds, "\n") %>' />
+						</portlet:actionURL>
+
+						<input type="button" value="<liferay-ui:message key="dismiss-all-updates" />" onClick="self.location = '<%= dismissAllURL.toString() %>';" />
+					</c:if>
 
 					<div class="separator"><!-- --></div>
 

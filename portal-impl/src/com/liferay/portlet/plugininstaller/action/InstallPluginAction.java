@@ -26,10 +26,13 @@ import com.liferay.portal.events.GlobalStartupAction;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.plugin.RepositoryReport;
@@ -112,6 +115,12 @@ public class InstallPluginAction extends PortletAction {
 		else if (cmd.equals("remoteDeploy")) {
 			remoteDeploy(req);
 		}
+		else if (cmd.equals("dismissPackages")) {
+			dismissPackages(req);
+		}
+		else if (cmd.equals("undismissPackages")) {
+			undismissPackages(req);
+		}
 
 		sendRedirect(req, res);
 	}
@@ -129,6 +138,10 @@ public class InstallPluginAction extends PortletAction {
 		String jbossPrefix = ParamUtil.getString(req, "jbossPrefix");
 		String tomcatConfDir = ParamUtil.getString(req, "tomcatConfDir");
 		String tomcatLibDir = ParamUtil.getString(req, "tomcatLibDir");
+		boolean pluginNotificationsEnabled = ParamUtil.getBoolean(
+			req, "pluginNotificationsEnabled");
+		String pluginPackagesDismissed = ParamUtil.getString(
+			req, "pluginPackagesDismissed");
 		String pluginRepositoriesTrusted = ParamUtil.getString(
 			req, "pluginRepositoriesTrusted");
 		String pluginRepositoriesUntrusted = ParamUtil.getString(
@@ -152,9 +165,13 @@ public class InstallPluginAction extends PortletAction {
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX, jbossPrefix);
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_TOMCAT_CONF_DIR, tomcatConfDir);
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR, tomcatLibDir);
+		prefs.setValue(
+			PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED,
+			String.valueOf(pluginNotificationsEnabled));
 
-		String oldPluginRepositories = PrefsPropsUtil.getString(
-			PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
+		prefs.setValue(
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED,
+			pluginPackagesDismissed);
 
 		prefs.setValue(
 			PropsUtil.PLUGIN_REPOSITORIES_TRUSTED, pluginRepositoriesTrusted);
@@ -367,6 +384,62 @@ public class InstallPluginAction extends PortletAction {
 
 			PluginPackageUtil.endPluginPackageInstallation(deploymentContext);
 		}
+	}
+
+	protected void dismissPackages(ActionRequest req) throws Exception {
+		String pluginPackagesDismissed = ParamUtil.getString(
+			req, "pluginPackagesDismissed");
+
+		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
+
+		String oldPluginPackagesDismissed= PrefsPropsUtil.getString(
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED);
+
+		StringMaker sm = new StringMaker();
+		sm.append(oldPluginPackagesDismissed);
+		sm.append(StringPool.NEW_LINE);
+		sm.append(pluginPackagesDismissed);
+
+		prefs.setValue(
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED, sm.toString());
+
+		prefs.store();
+
+		PluginPackageUtil.refreshUpdatesAvailableCache();
+	}
+
+	protected void undismissPackages(ActionRequest req) throws Exception {
+		String pluginPackagesDismissed = ParamUtil.getString(
+			req, "pluginPackagesUndismissed");
+
+		String[] undismissedPluginPackages =
+			StringUtil.split(pluginPackagesDismissed, StringPool.NEW_LINE);
+
+		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
+
+		String oldPluginPackagesDismissed= PrefsPropsUtil.getString(
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED);
+
+		String[] currentPluginPackages =
+			StringUtil.split(oldPluginPackagesDismissed, StringPool.NEW_LINE);
+
+		StringMaker sm = new StringMaker();
+
+		for (int i = 0; i < currentPluginPackages.length; i++) {
+			String currentPluginPackage = currentPluginPackages[i];
+			if (!ArrayUtil.contains(
+					undismissedPluginPackages, currentPluginPackage)) {
+				sm.append(currentPluginPackage);
+				sm.append(StringPool.NEW_LINE);
+			}
+		}
+
+		prefs.setValue(
+			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_DISMISSED, sm.toString());
+
+		prefs.store();
+
+		PluginPackageUtil.refreshUpdatesAvailableCache();
 	}
 
 	private static final String _DOWNLOAD_DIR = "download";

@@ -247,6 +247,10 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 		return _moduleId.getGroupId();
 	}
 
+	public String getPackageId() {
+		return _moduleId.getPackageId();
+	}
+
 	public Properties getDeploymentSettings() {
 		return _deploymentSettings;
 	}

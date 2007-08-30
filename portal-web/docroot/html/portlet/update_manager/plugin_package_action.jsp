@@ -42,7 +42,7 @@ if (availablePluginPackage != null) {
 }
 %>
 
-<c:if test='<%= pluginPackageStatus.equals("update-available") %>'>
+<c:if test='<%= pluginPackageStatus.equals("update-available") || pluginPackageStatus.equals("update-dismissed")%>'>
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="updateURL">
 		<portlet:param name="struts_action" value="/update_manager/install_plugin" />
 		<portlet:param name="<%= Constants.CMD %>" value="remoteDeploy" />
@@ -57,6 +57,37 @@ if (availablePluginPackage != null) {
 		message="update"
 		url='<%= "javascript: " + uploadProgressId + ".startProgress(); self.location = '" + updateURL + "';" %>'
 	/>
+
+	<c:choose>
+		<c:when test="<%= !PluginPackageUtil.isDismissed(pluginPackage) %>">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="dismissURL">
+				<portlet:param name="struts_action" value="/update_manager/install_plugin" />
+				<portlet:param name="<%= Constants.CMD %>" value="dismissPackages" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
+				<portlet:param name="pluginPackagesDismissed" value="<%= pluginPackage.getPackageId() %>" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon
+				image="unsubscribe"
+				message="dissmiss"
+				url='<%= dismissURL.toString() %>'
+			/>
+		</c:when>
+		<c:otherwise>
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="undismissURL">
+				<portlet:param name="struts_action" value="/update_manager/install_plugin" />
+				<portlet:param name="<%= Constants.CMD %>" value="undismissPackages" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
+				<portlet:param name="pluginPackagesUndismissed" value="<%= pluginPackage.getPackageId() %>" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon
+				image="subscribe"
+				message="undismiss"
+				url='<%= undismissURL.toString() %>'
+			/>
+		</c:otherwise>
+	</c:choose>
 
 	<br />
 

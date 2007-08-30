@@ -1378,7 +1378,8 @@ public class PortalUtil {
 		return _instance._isSystemRole(roleName);
 	}
 
-	public static boolean isUpdateAvailable() {
+	public static boolean isUpdateAvailable()
+		throws SystemException, PortalException {
 		return PluginPackageUtil.isUpdateAvailable();
 	}
 

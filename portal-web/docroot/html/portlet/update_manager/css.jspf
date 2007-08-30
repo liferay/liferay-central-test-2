@@ -54,4 +54,13 @@
 .portlet-section-alternate.status-update-available td {
 	background-color: #FF9999;
 }
+
+.portlet-section-body.status-update-dismissed td {
+	background-color: #99CCFF;
+}
+
+.portlet-section-alternate.status-update-dismissed td {
+	background-color: #99CCFF;
+}
+
 </style>
