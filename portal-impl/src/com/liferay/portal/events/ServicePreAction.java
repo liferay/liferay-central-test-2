@@ -733,27 +733,27 @@ public class ServicePreAction extends Action {
 					PropertiesUtil.load(props, typeSettings);
 
 					String stateMax = props.getProperty(
-							LayoutTypePortletImpl.STATE_MAX);
+						LayoutTypePortletImpl.STATE_MAX);
 					String stateMaxPrevious = props.getProperty(
-							LayoutTypePortletImpl.STATE_MAX_PREVIOUS);
+						LayoutTypePortletImpl.STATE_MAX_PREVIOUS);
 					String stateMin = props.getProperty(
-							LayoutTypePortletImpl.STATE_MIN);
+						LayoutTypePortletImpl.STATE_MIN);
 					String modeAbout = props.getProperty(
-							LayoutTypePortletImpl.MODE_ABOUT);
+						LayoutTypePortletImpl.MODE_ABOUT);
 					String modeConfig = props.getProperty(
-							LayoutTypePortletImpl.MODE_CONFIG);
+						LayoutTypePortletImpl.MODE_CONFIG);
 					String modeEdit = props.getProperty(
-							LayoutTypePortletImpl.MODE_EDIT);
+						LayoutTypePortletImpl.MODE_EDIT);
 					String modeEditDefaults = props.getProperty(
-							LayoutTypePortletImpl.MODE_EDIT_DEFAULTS);
+						LayoutTypePortletImpl.MODE_EDIT_DEFAULTS);
 					String modeEditGuest = props.getProperty(
-							LayoutTypePortletImpl.MODE_EDIT_GUEST);
+						LayoutTypePortletImpl.MODE_EDIT_GUEST);
 					String modeHelp = props.getProperty(
-							LayoutTypePortletImpl.MODE_HELP);
+						LayoutTypePortletImpl.MODE_HELP);
 					String modePreview = props.getProperty(
-							LayoutTypePortletImpl.MODE_PREVIEW);
+						LayoutTypePortletImpl.MODE_PREVIEW);
 					String modePrint = props.getProperty(
-							LayoutTypePortletImpl.MODE_PRINT);
+						LayoutTypePortletImpl.MODE_PRINT);
 
 					LayoutTypePortlet layoutTypePortlet =
 						(LayoutTypePortlet)layout.getLayoutType();
