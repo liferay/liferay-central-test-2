@@ -672,7 +672,7 @@ public class PortalLDAPUtil {
 				companyId, emailAddress);
 
 			if (updatePassword) {
-				UserLocalServiceUtil.updatePassword(
+				user = UserLocalServiceUtil.updatePassword(
 					user.getUserId(), password, password, passwordReset,
 					true);
 			}
