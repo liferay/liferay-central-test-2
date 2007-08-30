@@ -150,7 +150,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(sessionId);
 			</td>
 		</tr>
 		<tr class="portlet-section-header">
-			<td>
+			<td colspan="2">
 				<div id="<portlet:namespace />accessedUrls" style="display: none;">
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
 
@@ -197,7 +197,7 @@ UserTracker userTracker = (UserTracker)liveUsers.get(sessionId);
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td colspan="2">
 				<div id="<portlet:namespace />sessionAttributes" style="display: none;">
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
 

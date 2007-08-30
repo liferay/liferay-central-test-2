@@ -23,8 +23,12 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.util.LiveUsers;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.util.MailSessionLock;
@@ -64,13 +68,6 @@ public class PortalSessionListener implements HttpSessionListener {
 	public void sessionDestroyed(HttpSessionEvent event) {
 		HttpSession ses = event.getSession();
 
-		ses.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
-		ses.removeAttribute(WebKeys.REVERSE_AJAX);
-
-		MessagingUtil.closeXMPPConnection(ses);
-
-		PortalSessionContext.remove(ses.getId());
-
 		try {
 			Long userIdObj = (Long)ses.getAttribute(WebKeys.USER_ID);
 
@@ -82,9 +79,15 @@ public class PortalSessionListener implements HttpSessionListener {
 				return;
 			}
 
+			long userId = userIdObj.longValue();
+
+			if (CompanyThreadLocal.getCompanyId() == 0) {
+				setCompanyId(userId);
+			}
+
 			MailSessionLock.cleanUp(ses);
 
-			LiveUsers.signOut(ses.getId(), userIdObj.longValue());
+			LiveUsers.signOut(ses.getId(), userId);
 		}
 		catch (IllegalStateException ise) {
 			_log.warn("Please upgrade to a servlet 2.4 compliant container");
@@ -92,6 +95,13 @@ public class PortalSessionListener implements HttpSessionListener {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+
+		ses.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
+		ses.removeAttribute(WebKeys.REVERSE_AJAX);
+
+		MessagingUtil.closeXMPPConnection(ses);
+
+		PortalSessionContext.remove(ses.getId());
 
 		// Process session destroyed events
 
@@ -101,6 +111,33 @@ public class PortalSessionListener implements HttpSessionListener {
 		}
 		catch (ActionException ae) {
 			_log.error(ae, ae);
+		}
+	}
+
+	protected void setCompanyId(long userId) throws Exception {
+		long[] companyIds = PortalInstances.getCompanyIds();
+
+		long companyId = 0;
+
+		if (companyIds.length == 1) {
+			companyId = companyIds[0];
+		}
+		else if (companyIds.length > 1) {
+			try {
+				User user = UserLocalServiceUtil.getUserById(userId);
+
+				companyId = user.getCompanyId();
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to set the company id for user " + userId, e);
+				}
+			}
+		}
+
+		if (companyId > 0) {
+			CompanyThreadLocal.setCompanyId(companyId);
 		}
 	}
 
