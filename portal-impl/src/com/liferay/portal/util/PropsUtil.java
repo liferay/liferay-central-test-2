@@ -233,6 +233,8 @@ public class PropsUtil {
 
 	public static final String ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED = "organizations.parent.organization.required";
 
+	public static final String ORGANIZATIONS_COUNTRY_REQUIRED = "organizations.country.required";
+
 	public static final String ORGANIZATIONS_LOCATION_REQUIRED = "organizations.location.required";
 
 	public static final String ORGANIZATIONS_LOCATION_ENABLED = "organizations.location.enabled";

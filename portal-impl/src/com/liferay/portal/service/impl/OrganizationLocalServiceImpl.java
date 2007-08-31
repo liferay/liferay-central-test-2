@@ -30,6 +30,7 @@ import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -55,6 +56,7 @@ import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrganizationFinder;
 import com.liferay.portal.service.persistence.OrganizationUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
 
 import java.rmi.RemoteException;
@@ -769,7 +771,12 @@ public class OrganizationLocalServiceImpl
 		}
 
 		try {
-			CountryServiceUtil.getCountry(countryId);
+			boolean countryRequired = GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.ORGANIZATIONS_COUNTRY_REQUIRED));
+
+			if ((countryId != 0) || countryRequired) {
+				CountryServiceUtil.getCountry(countryId);
+			}
 
 			ListTypeServiceUtil.validate(
 				statusId, ListTypeImpl.ORGANIZATION_STATUS);
