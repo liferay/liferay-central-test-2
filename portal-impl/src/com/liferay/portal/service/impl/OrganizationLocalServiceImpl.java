@@ -774,7 +774,7 @@ public class OrganizationLocalServiceImpl
 			boolean countryRequired = GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.ORGANIZATIONS_COUNTRY_REQUIRED));
 
-			if ((countryId != 0) || countryRequired) {
+			if ((countryId > 0) || countryRequired) {
 				CountryServiceUtil.getCountry(countryId);
 			}
 

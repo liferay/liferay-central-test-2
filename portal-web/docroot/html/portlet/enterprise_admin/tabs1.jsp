@@ -34,9 +34,11 @@
 	tabs1URL.setParameter("struts_action", "/enterprise_admin/view");
 
 	String tabs1Names = "users,organizations";
+
 	if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_ENABLED))) {
 		tabs1Names += ",locations";
 	}
+
 	tabs1Names += ",user-groups";
 
 	String tabs1Values = tabs1Names;

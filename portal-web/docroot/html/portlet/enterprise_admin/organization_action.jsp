@@ -113,6 +113,18 @@ String addUserURLString = null;
 	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
 </portlet:renderURL>
 
+<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addLocationURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_location" />
+	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
+	<portlet:param name="parentOrganizationName" value="<%= organization.getName() %>" />
+</portlet:renderURL>
+
+<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewLocationsURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/view" />
+	<portlet:param name="tabs1" value="locations" />
+	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
+</portlet:renderURL>
+
 <c:choose>
 	<c:when test="<%= portletName.equals(PortletKeys.LOCATION_ADMIN) %>">
 		<c:if test="<%= !organizationsTab && LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
@@ -217,23 +229,11 @@ String addUserURLString = null;
 
 		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 			<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_ENABLED)) && organizationsTab && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_LOCATION) %>">
-				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addLocationURL">
-					<portlet:param name="struts_action" value="/enterprise_admin/edit_location" />
-					<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
-					<portlet:param name="parentOrganizationName" value="<%= organization.getName() %>" />
-				</portlet:renderURL>
-
 				<liferay-ui:icon image="add_location" message="add-location" url="<%= addLocationURL %>" />
 			</c:if>
 		</c:if>
 
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_ENABLED)) && organizationsTab %>">
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewLocationsURL">
-				<portlet:param name="struts_action" value="/enterprise_admin/view" />
-				<portlet:param name="tabs1" value="locations" />
-				<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
-			</portlet:renderURL>
-
 			<liferay-ui:icon image="view_locations" message="view-locations" url="<%= viewLocationsURL %>" />
 		</c:if>
 
