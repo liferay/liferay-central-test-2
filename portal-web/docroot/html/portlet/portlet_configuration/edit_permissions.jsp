@@ -231,7 +231,11 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 <%
 //String tabs2Names = "users,organizations,locations,user-groups,community,guest,associated";
-String tabs2Names = "users,organizations,locations,user-groups,community,guest";
+String tabs2Names = "users,organizations";
+if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_ENABLED))) {
+	tabs2Names += ",locations";
+}
+tabs2Names += ",user-groups,community,guest";
 
 if (modelResource.equals(Organization.class.getName()) || modelResource.equals(Location.class.getName()) || modelResource.equals("com.liferay.portal.model.Role") || modelResource.equals("com.liferay.portal.model.User")) {
 	tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);

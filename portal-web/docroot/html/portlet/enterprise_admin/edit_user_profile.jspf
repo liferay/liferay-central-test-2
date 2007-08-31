@@ -335,26 +335,30 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 				</c:if>
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="location" />
-			</td>
-			<td>
-				<input name="<portlet:namespace />locationId" type="hidden" value="<%= locationId %>" />
 
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_location" /><portlet:param name="organizationId" value="<%= String.valueOf(locationId) %>" /></portlet:renderURL>" id="<portlet:namespace />locationName">
-				<%= locationName %>
-				</a>
+		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_ENABLED)) %>">
+			<tr>
+				<td>
+					<liferay-ui:message key="location" />
+				</td>
+				<td>
+					<input name="<portlet:namespace />locationId" type="hidden" value="<%= locationId %>" />
 
-				<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && editable %>">
-					<input type="button" value="<liferay-ui:message key="select" />" onClick="var locationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_location" /></portlet:renderURL>&<portlet:namespace />parentOrganizationId=' + document.<portlet:namespace />fm.<portlet:namespace />organizationId.value, 'location', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); locationWindow.focus();" />
+					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_location" /><portlet:param name="organizationId" value="<%= String.valueOf(locationId) %>" /></portlet:renderURL>" id="<portlet:namespace />locationName">
+					<%= locationName %>
+					</a>
 
-					<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED)) %>">
-						<input <%= (locationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeLocationButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeLocation();">
+					<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && editable %>">
+						<input type="button" value="<liferay-ui:message key="select" />" onClick="var locationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_location" /></portlet:renderURL>&<portlet:namespace />parentOrganizationId=' + document.<portlet:namespace />fm.<portlet:namespace />organizationId.value, 'location', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); locationWindow.focus();" />
+
+						<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED)) %>">
+							<input <%= (locationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeLocationButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeLocation();">
+						</c:if>
 					</c:if>
-				</c:if>
-			</td>
-		</tr>
+				</td>
+			</tr>
+		</c:if>
+
 		<tr>
 			<td>
 				<liferay-ui:message key="job-title" />

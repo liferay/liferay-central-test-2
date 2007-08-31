@@ -235,6 +235,8 @@ public class PropsUtil {
 
 	public static final String ORGANIZATIONS_LOCATION_REQUIRED = "organizations.location.required";
 
+	public static final String ORGANIZATIONS_LOCATION_ENABLED = "organizations.location.enabled";
+
 	// Look and Feel
 
 	public static final String LOOK_AND_FEEL_MODIFIABLE = "look.and.feel.modifiable";

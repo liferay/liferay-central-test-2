@@ -42,6 +42,12 @@ portletURL.setParameter("tabs3", tabs3);
 String portletURLString = portletURL.toString();
 %>
 
+<c:choose>
+	<c:when test="<%= portletName.equals(PortletKeys.LOCATION_ADMIN) && !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_ENABLED)) %>">
+		<liferay-ui:message key="location-administration-is-disabled"/>
+	</c:when>
+	<c:otherwise>
+
 <script type="text/javascript">
 	function <portlet:namespace />deleteOrganizations() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-" + (organizationsTab ? "organizations" : "locations")) %>')) {
@@ -1704,6 +1710,9 @@ String portletURLString = portletURL.toString();
 </c:choose>
 
 </form>
+
+	</c:otherwise>
+</c:choose>
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.enterprise_admin.view.jsp";
