@@ -266,6 +266,12 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				</span>
 			</c:if>
 
+			<c:if test="<%= SessionErrors.contains(request, CaptchaTextException.class.getName()) %>">
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="text-verification-failed" />
+				</span>
+			</c:if>
+
 			<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
 				<span class="portlet-msg-error">
 				<liferay-ui:message key="the-email-address-you-requested-is-not-registered-in-our-database" />
@@ -301,6 +307,8 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 		</table>
 
 		<br />
+
+		<liferay-ui:captcha url='<%= themeDisplay.getPathMain() + "/portal/login_captcha" %>' />
 
 		<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
 

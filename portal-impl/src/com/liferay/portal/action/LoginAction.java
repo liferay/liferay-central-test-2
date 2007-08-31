@@ -33,6 +33,8 @@ import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
+import com.liferay.portal.captcha.CaptchaTextException;
+import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -358,7 +360,8 @@ public class LoginAction extends Action {
 				return mapping.findForward("portal.login");
 			}
 			catch (Exception e) {
-				if (e instanceof NoSuchUserException ||
+				if (e instanceof CaptchaTextException ||
+					e instanceof NoSuchUserException ||
 					e instanceof SendPasswordException ||
 					e instanceof UserEmailAddressException) {
 
@@ -390,6 +393,17 @@ public class LoginAction extends Action {
 	}
 
 	protected void sendPassword(HttpServletRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Company company = themeDisplay.getCompany();
+
+		if (!company.isSendPassword()) {
+			return;
+		}
+
+		CaptchaUtil.check(req);
+
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
 
 		String remoteAddr = req.getRemoteAddr();

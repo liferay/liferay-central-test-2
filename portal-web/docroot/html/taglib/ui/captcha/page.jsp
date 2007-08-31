@@ -28,9 +28,18 @@
 
 <%
 String url = (String)request.getAttribute("liferay-ui:captcha:url");
+
+boolean captchaEnabled = false;
+
+if (renderRequest != null) {
+	captchaEnabled = CaptchaUtil.isEnabled(renderRequest);
+}
+else {
+	captchaEnabled = CaptchaUtil.isEnabled(request);
+}
 %>
 
-<c:if test="<%= CaptchaUtil.isEnabled(renderRequest) %>">
+<c:if test="<%= captchaEnabled %>">
 	<div>
 		<img src="<%= url %>" />
 	</div>

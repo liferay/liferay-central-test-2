@@ -78,6 +78,8 @@
 			<forward name="/portal/touch_protected.jsp" path="/portal/touch_protected.jsp" />
 		</action>
 
+		<action path="/portal/login_captcha" type="com.liferay.portal.captcha.CaptchaPortalAction" />
+
 		<action path="/portal/logout" type="com.liferay.portal.action.LogoutAction" />
 
 		<action path="/portal/open_id_request" type="com.liferay.portal.action.OpenIdRequestAction">
@@ -794,7 +796,7 @@
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 		</action>
 
-		<action path="/message_boards/captcha" type="com.liferay.portal.captcha.CaptchaAction" />
+		<action path="/message_boards/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
 
 		<action path="/message_boards/edit" type="com.liferay.portlet.messageboards.action.EditPreferencesAction">
 			<forward name="portlet.message_boards.edit" path="portlet.message_boards.edit" />
@@ -855,7 +857,7 @@
 
 		<!-- My Account -->
 
-		<action path="/my_account/captcha" type="com.liferay.portal.captcha.CaptchaAction" />
+		<action path="/my_account/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
 
 		<action path="/my_account/create_account" type="com.liferay.portlet.myaccount.action.AddUserAction">
 			<forward name="portlet.my_account.create_account" path="portlet.my_account.create_account" />
@@ -1289,7 +1291,7 @@
 
 		<!-- Web Form -->
 
-		<action path="/web_form/captcha" type="com.liferay.portal.captcha.CaptchaAction" />
+		<action path="/web_form/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
 
 		<action path="/web_form/view" type="com.liferay.portlet.webform.action.ViewAction">
 			<forward name="portlet.web_form.view" path="portlet.web_form.view" />

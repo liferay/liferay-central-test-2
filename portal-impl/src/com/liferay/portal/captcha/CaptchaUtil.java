@@ -24,11 +24,15 @@ package com.liferay.portal.captcha;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,6 +44,56 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class CaptchaUtil {
+
+	public static void check(HttpServletRequest req)
+		throws CaptchaTextException {
+
+		if (isEnabled(req)) {
+			HttpSession ses = req.getSession();
+
+			String captchaText = (String)ses.getAttribute(WebKeys.CAPTCHA_TEXT);
+
+			// Captcha should never be null, but on the rare occasion it is,
+			// just let people register.
+
+			if (captchaText != null) {
+				if (!captchaText.equals(
+						ParamUtil.getString(req, "captchaText"))) {
+
+					throw new CaptchaTextException();
+				}
+				else {
+					if (_log.isDebugEnabled()) {
+						_log.debug("Captcha text is valid");
+					}
+
+					int captchaMaxChallenges = GetterUtil.getInteger(
+						PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
+
+					if ((captchaMaxChallenges > 0) &&
+						(Validator.isNotNull(req.getRemoteUser()))) {
+
+						Integer count = (Integer)ses.getAttribute(
+							WebKeys.CAPTCHA_COUNT);
+
+						if (count == null) {
+							count = new Integer(1);
+						}
+						else {
+							count = new Integer(count.intValue() + 1);
+						}
+
+						ses.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+					}
+				}
+			}
+			else {
+				if (_log.isErrorEnabled()) {
+					_log.error("Captcha text is null");
+				}
+			}
+		}
+	}
 
 	public static void check(PortletRequest req) throws CaptchaTextException {
 		if (isEnabled(req)) {
@@ -64,7 +118,9 @@ public class CaptchaUtil {
 					int captchaMaxChallenges = GetterUtil.getInteger(
 						PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
 
-					if (captchaMaxChallenges > 0) {
+					if ((captchaMaxChallenges > 0) &&
+						(Validator.isNotNull(req.getRemoteUser()))) {
+
 						Integer count = (Integer)ses.getAttribute(
 							WebKeys.CAPTCHA_COUNT);
 
@@ -84,6 +140,30 @@ public class CaptchaUtil {
 					_log.error("Captcha text is null");
 				}
 			}
+		}
+	}
+
+	public static boolean isEnabled(HttpServletRequest req) {
+		int captchaMaxChallenges = GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
+
+		if (captchaMaxChallenges > 0) {
+			HttpSession ses = req.getSession();
+
+			Integer count = (Integer)ses.getAttribute(WebKeys.CAPTCHA_COUNT);
+
+			if ((count != null) && (captchaMaxChallenges <= count.intValue())) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		else if (captchaMaxChallenges < 0) {
+			return false;
+		}
+		else {
+			return true;
 		}
 	}
 
