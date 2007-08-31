@@ -115,14 +115,12 @@
 				}
 			}
 			else if (userCommunity) {
-				long publicAddPagePlid = community.getDefaultPublicPlid();
-
-				PortletURL publicAddPageURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, publicAddPagePlid, false);
+				PortletURL publicAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid.longValue(), false);
 
 				publicAddPageURL.setWindowState(WindowState.MAXIMIZED);
 				publicAddPageURL.setPortletMode(PortletMode.VIEW);
 
-				publicAddPageURL.setParameter("struts_action", "/layout_management/edit_pages");
+				publicAddPageURL.setParameter("struts_action", "/my_account/edit_pages");
 				publicAddPageURL.setParameter("tabs2", "public");
 				publicAddPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
 
@@ -130,12 +128,12 @@
 
 				long privateAddPagePlid = community.getDefaultPrivatePlid();
 
-				PortletURL privateAddPageURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, privateAddPagePlid, false);
+				PortletURL privateAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid.longValue(), false);
 
 				privateAddPageURL.setWindowState(WindowState.MAXIMIZED);
 				privateAddPageURL.setPortletMode(PortletMode.VIEW);
 
-				privateAddPageURL.setParameter("struts_action", "/layout_management/edit_pages");
+				privateAddPageURL.setParameter("struts_action", "/my_account/edit_pages");
 				privateAddPageURL.setParameter("tabs2", "private");
 				privateAddPageURL.setParameter("groupId", String.valueOf(community.getGroupId()));
 

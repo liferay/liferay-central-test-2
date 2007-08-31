@@ -80,10 +80,12 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 <input name="<portlet:namespace />backURL" type="hidden" value="<%= backURL %>" />
 <input name="<portlet:namespace />p_u_i_d" type="hidden" value='<%= (user2 != null) ? user2.getUserId() : 0 %>' />
 
-<liferay-ui:tabs
-	names="user"
-	backURL="<%= backURL %>"
-/>
+<c:if test="<%= portletName.equals(PortletKeys.DIRECTORY) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+	<liferay-ui:tabs
+		names="user"
+		backURL="<%= backURL %>"
+	/>
+</c:if>
 
 <liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="profile" />
