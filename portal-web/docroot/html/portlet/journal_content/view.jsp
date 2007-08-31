@@ -143,7 +143,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 			</div>
 		</c:if>
 
-		<c:if test="<%= articleDisplay != null %>">
+		<c:if test="<%= (articleDisplay != null) && (enableRatings || enableComments) %>">
 			<div>
 				<c:if test="<%= enableRatings %>">
 					<br />
