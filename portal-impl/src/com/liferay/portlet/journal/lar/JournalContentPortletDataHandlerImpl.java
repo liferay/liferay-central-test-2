@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.lar;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
@@ -336,10 +337,19 @@ public class JournalContentPortletDataHandlerImpl
 
 		article.setGroupId(context.getGroupId());
 
-		if (JournalArticleUtil.fetchByPrimaryKey(
-				article.getPrimaryKey()) == null) {
+        JournalArticle oldArticle = null;
 
+        try {
+            oldArticle =
+				JournalArticleLocalServiceUtil.getLatestArticle(
+					context.getGroupId(), article.getArticleId());
+        }
+        catch (NoSuchArticleException nsae) {
+        }
+
+        if (oldArticle == null) {
 			article.setNew(true);
+            article.setId(CounterLocalServiceUtil.increment());
 
 			long authorId = creationStrategy.getAuthorUserId(
 				context.getCompanyId(), context.getGroupId(), article);
@@ -407,10 +417,11 @@ public class JournalContentPortletDataHandlerImpl
 
 			structure.setGroupId(context.getGroupId());
 
-			if (JournalStructureUtil.fetchByPrimaryKey(
-					structure.getPrimaryKey()) == null) {
+            if (JournalStructureUtil.fetchByG_S(
+					context.getGroupId(), structure.getStructureId()) == null) {
 
 				structure.setNew(true);
+                structure.setId(CounterLocalServiceUtil.increment());
 
 				long authorId = creationStrategy.getAuthorUserId(
 					context.getCompanyId(), context.getGroupId(), structure);
@@ -459,10 +470,11 @@ public class JournalContentPortletDataHandlerImpl
 
 			template.setGroupId(context.getGroupId());
 
-			if (JournalTemplateUtil.fetchByPrimaryKey(
-					template.getPrimaryKey()) == null) {
+            if (JournalTemplateUtil.fetchByG_T(
+					context.getGroupId(), template.getTemplateId()) == null) {
 
 				template.setNew(true);
+                template.setId(CounterLocalServiceUtil.increment());
 
 				long authorId = creationStrategy.getAuthorUserId(
 					context.getCompanyId(), context.getGroupId(), template);
