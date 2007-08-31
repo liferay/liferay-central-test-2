@@ -991,6 +991,10 @@ public class PropsUtil {
 
 	public static final String MESSAGE_BOARDS_USER_NAME_ATTRIBUTE = "message.boards.user.name.attribute";
 
+	// Portlet CSS Portlet
+
+	public static final String PORTLET_CSS_ENABLED = "portlet.css.enabled";
+
 	// Shopping Portlet
 
 	public static final String SHOPPING_CART_MIN_QTY_MULTIPLE = "shopping.cart.min.qty.multiple";
@@ -1032,6 +1036,10 @@ public class PropsUtil {
 	public static final String SC_IMAGE_THUMBNAIL_MAX_HEIGHT = "sc.image.thumbnail.max.height";
 
 	public static final String SC_IMAGE_THUMBNAIL_MAX_WIDTH = "sc.image.thumbnail.max.width";
+
+	// Tags Compiler Portlet
+
+	public static final String TAGS_COMPILER_ENABLED = "tags.compiler.enabled";
 
 	// Tags Portlet
 

@@ -228,7 +228,10 @@ if ((portletParallelRender != null) && (portletParallelRender.booleanValue() == 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION)) {
 		showConfigurationIcon = true;
-		showPortletCssIcon = true;
+
+		if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTLET_CSS_ENABLED))) {
+			showPortletCssIcon = true;
+		}
 	}
 }
 

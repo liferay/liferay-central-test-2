@@ -102,13 +102,13 @@
 
 		<action path="/portal/terms_of_use" forward="portal.terms_of_use" />
 
-		<action path="/portal/test" type="com.liferay.portal.action.TestAction">
+		<!--<action path="/portal/test" type="com.liferay.portal.action.TestAction">
 			<forward name="portal.test" path="portal.test" />
 		</action>
 
 		<action path="/portal/test_redirect" type="com.liferay.portal.action.TestRedirectAction">
 			<forward name="portal.test_redirect" path="/c/portal/test" redirect="true" />
-		</action>
+		</action>-->
 
 		<action path="/portal/touch_protected" forward="/portal/touch_protected.jsp" />
 
