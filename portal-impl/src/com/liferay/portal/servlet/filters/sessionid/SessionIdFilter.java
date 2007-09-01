@@ -42,6 +42,10 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <a href="SessionIdFilter.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * http://forum.java.sun.com/thread.jspa?threadID=197150.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  *
  */
