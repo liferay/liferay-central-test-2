@@ -33,6 +33,7 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -73,9 +74,17 @@ public class UpdateLayoutAction extends Action {
 			WebKeys.THEME_DISPLAY);
 
 		long userId = themeDisplay.getUserId();
+
 		Layout layout = themeDisplay.getLayout();
+
+		// Get the original layout (not the clone) to ensure that you don't add
+		// a portlet
+
+		layout = LayoutLocalServiceUtil.getLayout(layout.getPlid());
+
 		LayoutTypePortlet layoutTypePortlet =
-			themeDisplay.getLayoutTypePortlet();
+			(LayoutTypePortlet)layout.getLayoutType();
+
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
