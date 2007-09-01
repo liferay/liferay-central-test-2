@@ -568,7 +568,21 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String portalURL = PortalUtil.getPortalURL(req);
+		boolean requiresHttps = GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS));
+
+		Boolean httpsInitial = (Boolean)req.getAttribute(WebKeys.HTTPS_INITIAL);
+
+		String portalURL = null;
+
+		if ((requiresHttps) && (httpsInitial != null) &&
+			(!httpsInitial.booleanValue())) {
+
+			portalURL = PortalUtil.getPortalURL(req, false);
+		}
+		else {
+			portalURL = PortalUtil.getPortalURL(req);
+		}
 
 		StringMaker defaultPathSM = new StringMaker();
 

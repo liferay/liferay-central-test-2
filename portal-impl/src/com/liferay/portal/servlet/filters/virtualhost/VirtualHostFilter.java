@@ -107,6 +107,14 @@ public class VirtualHostFilter implements Filter {
 
 		PortalUtil.getCurrentURL(httpReq);
 
+		Boolean httpsInitial =
+			(Boolean)httpReq.getAttribute(WebKeys.HTTPS_INITIAL);
+
+		if (httpsInitial == null) {
+			httpReq.setAttribute(
+				WebKeys.HTTPS_INITIAL, new Boolean(httpReq.isSecure()));
+		}
+
 		if (!USE_VIRTUAL_HOST_FILTER) {
 			chain.doFilter(req, res);
 

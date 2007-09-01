@@ -185,6 +185,8 @@ public class PropsUtil {
 
 	public static final String COMPANY_SECURITY_AUTH_TYPE = "company.security.auth.type";
 
+	public static final String COMPANY_SECURITY_AUTH_REQUIRES_HTTPS = "company.security.auth.requires.https";
+
 	public static final String COMPANY_SECURITY_AUTO_LOGIN = "company.security.auto.login";
 
 	public static final String COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE = "company.security.auto.login.max.age";

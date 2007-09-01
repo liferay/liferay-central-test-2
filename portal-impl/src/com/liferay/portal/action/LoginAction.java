@@ -274,6 +274,22 @@ public class LoginAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
+		boolean requiresHttps = GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS));
+
+		if (requiresHttps && !req.isSecure()) {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+			String signURL =
+				PortalUtil.getPortalURL(req, true) +
+					themeDisplay.getURLSignIn();
+
+			res.sendRedirect(signURL);
+
+			return null;
+		}
+
 		HttpSession ses = req.getSession();
 
 		ThemeDisplay themeDisplay =

@@ -40,12 +40,20 @@
 	<c:otherwise>
 
 		<%
+		boolean requiresHttps = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS));
+
+		boolean secure = request.isSecure();
+
+		if (requiresHttps && !secure) {
+			secure = true;
+		}
+
 		String login = LoginAction.getLogin(request, "login", company);
 		String password = StringPool.BLANK;
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 		%>
 
-		<form action="<portlet:actionURL><portlet:param name="struts_action" value="/login/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+		<form action="<portlet:actionURL secure="<%= secure %>"><portlet:param name="struts_action" value="/login/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 		<input name="save_last_path" type="hidden" value="0" />
 		<input name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>" />
 

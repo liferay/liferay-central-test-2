@@ -368,7 +368,7 @@ public class PortalUtil {
 			}
 
 			if (Validator.isNull(currentURL)) {
-				currentURL = PortalUtil.getPathMain();
+				currentURL = getPathMain();
 			}
 
 			req.setAttribute(WebKeys.CURRENT_URL, currentURL);
@@ -647,7 +647,7 @@ public class PortalUtil {
 		LayoutSet layoutSet = layout.getLayoutSet();
 
 		if (Validator.isNotNull(layoutSet.getVirtualHost())) {
-			String portalURL = PortalUtil.getPortalURL(
+			String portalURL = getPortalURL(
 				layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
 				themeDisplay.isSecure());
 
@@ -801,15 +801,17 @@ public class PortalUtil {
 		int serverHttpPort = GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.WEB_SERVER_HTTP_PORT), -1);
 
-		if (serverHttpPort == -1) {
-			if (!secure && (serverPort != Http.HTTP_PORT)) {
-				sm.append(StringPool.COLON);
-				sm.append(serverPort);
+		if (!secure) {
+			if (serverHttpPort == -1) {
+				if (serverPort != Http.HTTP_PORT) {
+					sm.append(StringPool.COLON);
+					sm.append(serverPort);
+				}
 			}
-		}
-		else {
-			if (!secure && (serverPort != serverHttpPort)) {
-				if (serverHttpPort != Http.HTTP_PORT) {
+			else {
+				if ((serverPort != serverHttpPort) ||
+					(serverHttpPort != Http.HTTP_PORT)) {
+
 					sm.append(StringPool.COLON);
 					sm.append(serverHttpPort);
 				}
@@ -819,15 +821,17 @@ public class PortalUtil {
 		int serverHttpsPort = GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.WEB_SERVER_HTTPS_PORT), -1);
 
-		if (serverHttpsPort == -1) {
-			if (secure && (serverPort != Http.HTTPS_PORT)) {
-				sm.append(StringPool.COLON);
-				sm.append(serverPort);
+		if (secure) {
+			if (serverHttpsPort == -1) {
+				if (serverPort != Http.HTTPS_PORT) {
+					sm.append(StringPool.COLON);
+					sm.append(serverPort);
+				}
 			}
-		}
-		else {
-			if (secure && (serverPort != serverHttpsPort)) {
-				if (serverHttpsPort != Http.HTTPS_PORT) {
+			else {
+				if ((serverPort != serverHttpsPort) ||
+					(serverHttpsPort != Http.HTTPS_PORT)) {
+
 					sm.append(StringPool.COLON);
 					sm.append(serverHttpsPort);
 				}
