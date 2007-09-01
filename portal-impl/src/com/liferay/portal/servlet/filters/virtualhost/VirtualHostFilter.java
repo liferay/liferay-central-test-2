@@ -24,7 +24,6 @@ package com.liferay.portal.servlet.filters.virtualhost;
 
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -114,8 +113,7 @@ public class VirtualHostFilter implements Filter {
 		Boolean httpsInitial = (Boolean)ses.getAttribute(WebKeys.HTTPS_INITIAL);
 
 		if (httpsInitial == null) {
-			httpsInitial = new Boolean(ParamUtil.getBoolean(
-				httpReq, "httpsInitial", httpReq.isSecure()));
+			httpsInitial = new Boolean(httpReq.isSecure());
 
 			ses.setAttribute(WebKeys.HTTPS_INITIAL, httpsInitial);
 

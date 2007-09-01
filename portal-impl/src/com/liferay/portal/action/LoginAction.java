@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
@@ -174,12 +175,19 @@ public class LoginAction extends Action {
 
 				// Invalidate the previous session to prevent phishing
 
+				Boolean httpsInitial = (Boolean)ses.getAttribute(
+					WebKeys.HTTPS_INITIAL);
+
 				LastPath lastPath = (LastPath)ses.getAttribute(
 					WebKeys.LAST_PATH);
 
 				ses.invalidate();
 
 				ses = req.getSession(true);
+
+				if (httpsInitial != null) {
+					ses.setAttribute(WebKeys.HTTPS_INITIAL, httpsInitial);
+				}
 
 				if (lastPath != null) {
 					ses.setAttribute(WebKeys.LAST_PATH, lastPath);
@@ -281,11 +289,12 @@ public class LoginAction extends Action {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			String signURL =
-				PortalUtil.getPortalURL(req, true) +
-					themeDisplay.getURLSignIn();
+			StringMaker sm = new StringMaker();
 
-			res.sendRedirect(signURL);
+			sm.append(PortalUtil.getPortalURL(req, true));
+			sm.append(themeDisplay.getURLSignIn());
+
+			res.sendRedirect(sm.toString());
 
 			return null;
 		}
