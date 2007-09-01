@@ -42,9 +42,11 @@ import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
@@ -62,6 +64,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -152,8 +155,25 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 					cacheResponse.getData(), cacheResponse.getContentType(),
 					cacheResponse.getHeaders());
 
+				LastPath lastPath = (LastPath)httpReq.getAttribute(
+					WebKeys.LAST_PATH);
+
+				if (lastPath != null) {
+					data.setAttribute(WebKeys.LAST_PATH, lastPath);
+				}
+
 				if (data.getData().length > 0) {
 					LayoutCacheUtil.putCacheResponseData(companyId, key, data);
+				}
+			}
+			else {
+				LastPath lastPath = (LastPath)data.getAttribute(
+					WebKeys.LAST_PATH);
+
+				if (lastPath != null) {
+					HttpSession ses = httpReq.getSession();
+
+					ses.setAttribute(WebKeys.LAST_PATH, lastPath);
 				}
 			}
 

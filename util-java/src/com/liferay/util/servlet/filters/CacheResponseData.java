@@ -22,6 +22,8 @@
 
 package com.liferay.util.servlet.filters;
 
+import com.liferay.util.CollectionFactory;
+
 import java.io.Serializable;
 
 import java.util.Map;
@@ -54,8 +56,17 @@ public class CacheResponseData implements Serializable {
 		return _headers;
 	}
 
+	public Object getAttribute(String name) {
+		return _attributes.get(name);
+	}
+
+	public void setAttribute(String name, Object obj) {
+		_attributes.put(name, obj);
+	}
+
 	private byte[] _data;
 	private String _contentType;
 	private Map _headers;
+	private Map _attributes = CollectionFactory.getHashMap();
 
 }
