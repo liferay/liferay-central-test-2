@@ -48,6 +48,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -111,7 +112,9 @@ public class VirtualHostFilter implements Filter {
 			(Boolean)httpReq.getAttribute(WebKeys.HTTPS_INITIAL);
 
 		if (httpsInitial == null) {
-			httpReq.setAttribute(
+			HttpSession ses = httpReq.getSession();
+
+			ses.setAttribute(
 				WebKeys.HTTPS_INITIAL, new Boolean(httpReq.isSecure()));
 		}
 

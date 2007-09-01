@@ -571,7 +571,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		boolean requiresHttps = GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS));
 
-		Boolean httpsInitial = (Boolean)req.getAttribute(WebKeys.HTTPS_INITIAL);
+		Boolean httpsInitial = (Boolean)ses.getAttribute(WebKeys.HTTPS_INITIAL);
 
 		String portalURL = null;
 

@@ -164,7 +164,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 					</td>
 				</tr>
 
-				<c:if test="<%= company.isAutoLogin() && !request.isSecure() && !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_DISABLED)) %>">
+				<c:if test="<%= company.isAutoLogin() && !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_DISABLED)) %>">
 					<tr>
 						<td>
 							<span style="font-size: xx-small;">
