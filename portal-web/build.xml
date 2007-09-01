@@ -10,6 +10,7 @@
 	<target name="clean" depends="build-common-web.clean">
 		<delete dir="classes" />
 		<delete dir="docroot/dtd" />
+		<delete dir="docroot/html/js/editor/codepress" />
 		<delete dir="docroot/html/js/editor/fckeditor" />
 		<delete dir="docroot/html/skin/color" />
 		<delete dir="docroot/html/themes/classic/color_schemes" />
