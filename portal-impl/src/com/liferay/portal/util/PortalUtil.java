@@ -803,7 +803,9 @@ public class PortalUtil {
 
 		if (!secure) {
 			if (serverHttpPort == -1) {
-				if (serverPort != Http.HTTP_PORT) {
+				if ((serverPort != Http.HTTP_PORT) &&
+					(serverPort != Http.HTTPS_PORT)) {
+
 					sm.append(StringPool.COLON);
 					sm.append(serverPort);
 				}
@@ -823,7 +825,9 @@ public class PortalUtil {
 
 		if (secure) {
 			if (serverHttpsPort == -1) {
-				if (serverPort != Http.HTTPS_PORT) {
+				if ((serverPort != Http.HTTP_PORT) &&
+					(serverPort != Http.HTTPS_PORT)) {
+
 					sm.append(StringPool.COLON);
 					sm.append(serverPort);
 				}
