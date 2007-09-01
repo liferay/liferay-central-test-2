@@ -106,7 +106,7 @@
 
 ## ---------- Page ---------- ##
 
-#set ($the_title = $languageUtil.get($company_id, $locale, $tilesTitle))
+#set ($the_title = "")
 #set ($selectable = $theme_display.isTilesSelectable())
 #set ($is_maximized = $layoutTypePortlet.hasStateMax())
 #set ($is_freeform = $themeDisplay.isFreeformLayout())
@@ -148,6 +148,10 @@
 
 #if ($pageSubtitle)
 	#set ($the_title = $the_title + " - " + $pageSubtitle)
+#end
+
+#if ($tilesTitle)
+	#set ($the_title = $languageUtil.get($company_id, $locale, $tilesTitle))
 #end
 
 #if ($layouts)
