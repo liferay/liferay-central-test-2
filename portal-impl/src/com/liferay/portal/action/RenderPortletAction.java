@@ -23,10 +23,14 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+
+import javax.portlet.WindowState;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -55,6 +59,8 @@ public class RenderPortletAction extends Action {
 		String ajaxId = req.getParameter("ajax_id");
 
 		long companyId = PortalUtil.getCompanyId(req);
+		User user = PortalUtil.getUser(req);
+		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 		String portletId = ParamUtil.getString(req, "p_p_id");
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
@@ -78,6 +84,12 @@ public class RenderPortletAction extends Action {
 		if (ajaxId != null) {
 			res.setHeader("Ajax-ID", ajaxId);
 		}
+
+		WindowState windowState = new WindowState(
+			ParamUtil.getString(req, "p_p_state"));
+
+		PortalUtil.updateWindowState(
+			portletId, user, layout, windowState, req);
 
 		PortalUtil.renderPortlet(
 			null, ctx, req, res, portlet, queryString, columnId,

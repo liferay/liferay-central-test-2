@@ -73,9 +73,11 @@ public class UpdateLayoutAction extends Action {
 			WebKeys.THEME_DISPLAY);
 
 		long userId = themeDisplay.getUserId();
+
 		Layout layout = themeDisplay.getLayout();
 		LayoutTypePortlet layoutTypePortlet =
 			themeDisplay.getLayoutTypePortlet();
+
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
@@ -152,6 +154,13 @@ public class UpdateLayoutAction extends Action {
 		}
 
 		if (updateLayout) {
+			if (layout.isShared()) {
+
+				// LEP-3648
+
+				layoutTypePortlet.resetStates();
+			}
+
 			LayoutServiceUtil.updateLayout(
 				layout.getGroupId(), layout.isPrivateLayout(),
 				layout.getLayoutId(), layout.getTypeSettings());

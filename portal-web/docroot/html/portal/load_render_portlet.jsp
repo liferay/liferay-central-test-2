@@ -109,9 +109,11 @@ String currentURL = PortalUtil.getCurrentURL(request);
 				addPortletHTML("<%= url.toString() %>", jQuery("#p_load<%= portletDisplay.getNamespace() %>")[0]);
 			}
 
-			jQuery(window).load(function () {
-				addPortletHTML("<%= url.toString() %>", jQuery("#p_load<%= portletDisplay.getNamespace() %>")[0]);
-			});
+			jQuery(window).load(
+				function () {
+					addPortletHTML("<%= url.toString() %>", jQuery("#p_load<%= portletDisplay.getNamespace() %>")[0]);
+				}
+			);
 		</script>
 	</c:otherwise>
 </c:choose>
