@@ -63,7 +63,7 @@ public class RememberMeAutoLogin implements AutoLogin {
 
 				KeyValuePair kvp = null;
 
-				if (company.isAutoLogin() && !req.isSecure()) {
+				if (company.isAutoLogin()) {
 					kvp = UserLocalServiceUtil.decryptUserId(
 						company.getCompanyId(), autoUserId, autoPassword);
 
