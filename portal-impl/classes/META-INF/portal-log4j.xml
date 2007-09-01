@@ -252,6 +252,14 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.servlet.filters.sessionid.SessionIdFilter">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.servlet.filters.sessionid.SessionIdServletRequest">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.servlet.filters.velocity.VelocityFilter">
 		<priority value="ERROR" />
 	</category>
