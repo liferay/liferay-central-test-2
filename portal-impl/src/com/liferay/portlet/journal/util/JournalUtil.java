@@ -315,14 +315,14 @@ public class JournalUtil {
 		else if (orderByCol.equals("display-date")) {
 			orderByComparator = new ArticleDisplayDateComparator(orderByAsc);
 		}
-		else if (orderByCol.equals("review-date")) {
-			orderByComparator = new ArticleReviewDateComparator(orderByAsc);
-		}
 		else if (orderByCol.equals("id")) {
 			orderByComparator = new ArticleIDComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("modified-date")) {
 			orderByComparator = new ArticleModifiedDateComparator(orderByAsc);
+		}
+		else if (orderByCol.equals("review-date")) {
+			orderByComparator = new ArticleReviewDateComparator(orderByAsc);
 		}
 		else if (orderByCol.equals("title")) {
 			orderByComparator = new ArticleTitleComparator(orderByAsc);
