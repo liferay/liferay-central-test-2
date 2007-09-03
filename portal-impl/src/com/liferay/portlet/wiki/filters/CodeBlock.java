@@ -25,14 +25,15 @@ package com.liferay.portlet.wiki.filters;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.stringtree.factory.AbstractStringFetcher;
-import org.stringtree.regex.Matcher;
-import org.stringtree.regex.Pattern;
 
 /**
  * <a href="CodeBlock.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  *
  */
 public class CodeBlock extends AbstractStringFetcher {
@@ -42,10 +43,10 @@ public class CodeBlock extends AbstractStringFetcher {
 
 		Matcher matcher = _pattern.matcher(content);
 
-		if (matcher.find() && (matcher.groupCount() >= 4)) {
+		if (matcher.matches()) {
 			sm.append("<div class=\"wiki-code\">");
 
-			String[] lines = matcher.group(2).split("\n");
+			String[] lines = matcher.group(1).split("\\n");
 
 			for (int i = 0; i < lines.length; i++) {
 				if (i != 0) {
@@ -99,6 +100,7 @@ public class CodeBlock extends AbstractStringFetcher {
 	}
 
 	private static Pattern _pattern = Pattern.compile(
-		"(\\[code\\])((.|\n)*?)(\\[/code\\])");
+		"\\[code\\]((.|\\n)*?)\\[/code\\]", 
+		Pattern.MULTILINE | Pattern.UNIX_LINES);
 
 }
