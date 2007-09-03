@@ -130,6 +130,7 @@ try {
 	headerNames.add("tags");
 	headerNames.add("installed-version");
 	headerNames.add("available-version");
+	headerNames.add("modified-date");
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.get(pageContext, "no-" + pluginType + "-plugins-were-found"));
 
@@ -157,6 +158,7 @@ try {
 		String pluginPackageGroupId = doc.get("groupId");
 		String pluginPackageArtifactId = doc.get("artifactId");
 		String pluginPackageAvailableVersion = doc.get("version");
+		String pluginPackageModifiedDate = doc.get("modified-date");
 		String pluginPackageShortDescription = doc.get("shortDescription");
 		String pluginPackageChangeLog = doc.get("changeLog");
 		String pluginPackageRepositoryURL = doc.get("repositoryURL");
@@ -254,6 +256,10 @@ try {
 		sm.append("')\" />");
 
 		row.addText(sm.toString());
+
+		// Modified date
+
+		row.addText(dateFormatDateTime.format(DateTools.stringToDate(pluginPackageModifiedDate)));
 
 		// Add result row
 

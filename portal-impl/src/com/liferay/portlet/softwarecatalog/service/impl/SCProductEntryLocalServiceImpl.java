@@ -498,6 +498,8 @@ public class SCProductEntryLocalServiceImpl
 
 		// Product entry
 
+		Date now = new Date();
+
 		validate(
 			name, type, shortDescription, pageURL, author, licenseIds,
 			thumbnails, fullImages);
@@ -505,7 +507,7 @@ public class SCProductEntryLocalServiceImpl
 		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
 			productEntryId);
 
-		productEntry.setModifiedDate(new Date());
+		productEntry.setModifiedDate(now);
 		productEntry.setName(name);
 		productEntry.setType(type);
 		productEntry.setShortDescription(shortDescription);
@@ -529,6 +531,20 @@ public class SCProductEntryLocalServiceImpl
 		}
 		else {
 			saveProductScreenshots(productEntry, thumbnails, fullImages);
+		}
+
+		// Latest product version
+
+		List productVersions = SCProductVersionUtil.findByProductEntryId(
+			productEntryId, 0, 1);
+
+		if (productVersions.size() > 0) {
+			SCProductVersion productVersion =
+				(SCProductVersion)productVersions.get(0);
+
+			productVersion.setModifiedDate(now);
+
+			SCProductVersionUtil.update(productVersion);
 		}
 
 		// Lucene
