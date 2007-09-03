@@ -20,32 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.softwarecatalog;
+package com.liferay.portal.upgrade.v4_3_2;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="ProductEntryImagesException.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
-public class ProductEntryImagesException extends PortalException {
+public class UpgradeSchema extends UpgradeProcess {
 
-	public ProductEntryImagesException() {
-		super();
+	public void upgrade() throws UpgradeException {
+		_log.info("Upgrading");
+
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	public ProductEntryImagesException(String msg) {
-		super(msg);
+	protected void doUpgrade() throws Exception {
+		if (!_alreadyUpgraded) {
+			_alreadyUpgraded = true;
+
+			runSQLTemplate("update-4.3.1-4.3.2.sql", false);
+		}
 	}
 
-	public ProductEntryImagesException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+	private static Log _log = LogFactory.getLog(UpgradeSchema.class);
 
-	public ProductEntryImagesException(Throwable cause) {
-		super(cause);
-	}
+	private boolean _alreadyUpgraded;
 
 }

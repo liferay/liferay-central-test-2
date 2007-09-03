@@ -27,6 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -34,22 +35,28 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
+import com.liferay.portlet.softwarecatalog.ProductEntryAuthorException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
 import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
 import com.liferay.portlet.softwarecatalog.ProductEntryPageURLException;
+import com.liferay.portlet.softwarecatalog.ProductEntryScreenshotsException;
 import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
 import com.liferay.portlet.softwarecatalog.ProductEntryTypeException;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
+import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
+import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryLocalServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
 import com.liferay.portlet.softwarecatalog.util.Indexer;
 import com.liferay.util.lucene.HitsImpl;
@@ -89,34 +96,38 @@ public class SCProductEntryLocalServiceImpl
 	public SCProductEntry addProductEntry(
 			long userId, long plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
-			String repoGroupId, String repoArtifactId, long[] licenseIds,
+			String author, String repoGroupId, String repoArtifactId,
+			long[] licenseIds, List thumbnails, List fullImages,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addProductEntry(
 			userId, plid, name, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, licenseIds,
-			new Boolean(addCommunityPermissions),
+			pageURL, author, repoGroupId, repoArtifactId, licenseIds,
+			thumbnails, fullImages, new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
 
 	public SCProductEntry addProductEntry(
 			long userId, long plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
-			String repoGroupId, String repoArtifactId, long[] licenseIds,
+			String author, String repoGroupId, String repoArtifactId,
+			long[] licenseIds, List thumbnails, List fullImages,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addProductEntry(
 			userId, plid, name, type, shortDescription, longDescription,
-			pageURL, repoGroupId, repoArtifactId, licenseIds, null, null,
-			communityPermissions, guestPermissions);
+			pageURL, author, repoGroupId, repoArtifactId, licenseIds,
+			thumbnails, fullImages, null, null, communityPermissions,
+			guestPermissions);
 	}
 
 	public SCProductEntry addProductEntry(
 			long userId, long plid, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
-			String repoGroupId, String repoArtifactId, long[] licenseIds,
+			String author, String repoGroupId, String repoArtifactId,
+			long[] licenseIds, List thumbnails, List fullImages,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -127,7 +138,9 @@ public class SCProductEntryLocalServiceImpl
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
-		validate(name, type, shortDescription, pageURL, licenseIds);
+		validate(
+			name, type, shortDescription, pageURL, author, licenseIds,
+			thumbnails, fullImages);
 
 		long productEntryId = CounterLocalServiceUtil.increment();
 
@@ -144,6 +157,7 @@ public class SCProductEntryLocalServiceImpl
 		productEntry.setShortDescription(shortDescription);
 		productEntry.setLongDescription(longDescription);
 		productEntry.setPageURL(pageURL);
+		productEntry.setAuthor(author);
 		productEntry.setRepoGroupId(repoGroupId);
 		productEntry.setRepoArtifactId(repoArtifactId);
 
@@ -166,6 +180,10 @@ public class SCProductEntryLocalServiceImpl
 		// Licenses
 
 		SCProductEntryUtil.setSCLicenses(productEntryId, licenseIds);
+
+		// Product screenshots
+
+		saveProductScreenshots(productEntry, thumbnails, fullImages);
 
 		// Lucene
 
@@ -292,10 +310,25 @@ public class SCProductEntryLocalServiceImpl
 		return SCProductEntryUtil.findByGroupId(groupId, begin, end);
 	}
 
+	public List getProductEntries(
+			long groupId, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return SCProductEntryUtil.findByGroupId(groupId, begin, end, obc);
+	}
+
 	public List getProductEntries(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		return SCProductEntryUtil.findByG_U(groupId, userId, begin, end);
+	}
+
+	public List getProductEntries(
+			long groupId, long userId, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return SCProductEntryUtil.findByG_U(groupId, userId, begin, end, obc);
 	}
 
 	public int getProductEntriesCount(long groupId)
@@ -458,12 +491,15 @@ public class SCProductEntryLocalServiceImpl
 	public SCProductEntry updateProductEntry(
 			long productEntryId, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
-			String repoGroupId, String repoArtifactId, long[] licenseIds)
+			String author, String repoGroupId, String repoArtifactId,
+			long[] licenseIds, List thumbnails, List fullImages)
 		throws PortalException, SystemException {
 
 		// Product entry
 
-		validate(name, type, shortDescription, pageURL, licenseIds);
+		validate(
+			name, type, shortDescription, pageURL, author, licenseIds,
+			thumbnails, fullImages);
 
 		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
 			productEntryId);
@@ -474,6 +510,7 @@ public class SCProductEntryLocalServiceImpl
 		productEntry.setShortDescription(shortDescription);
 		productEntry.setLongDescription(longDescription);
 		productEntry.setPageURL(pageURL);
+		productEntry.setAuthor(author);
 		productEntry.setRepoGroupId(repoGroupId);
 		productEntry.setRepoArtifactId(repoArtifactId);
 
@@ -482,6 +519,16 @@ public class SCProductEntryLocalServiceImpl
 		// Licenses
 
 		SCProductEntryUtil.setSCLicenses(productEntryId, licenseIds);
+
+		// Product screenshots
+
+		if (thumbnails.size() == 0) {
+			SCProductScreenshotLocalServiceUtil.deleteProductScreenshots(
+				productEntryId);
+		}
+		else {
+			saveProductScreenshots(productEntry, thumbnails, fullImages);
+		}
 
 		// Lucene
 
@@ -512,6 +559,8 @@ public class SCProductEntryLocalServiceImpl
 
 		DocUtil.add(el, "module-id", moduleId);
 
+		DocUtil.add(el, "release-date", productVersion.getModifiedDate());
+
 		Element typesEl = el.addElement("types");
 
 		DocUtil.add(typesEl, "type", productEntry.getType());
@@ -533,11 +582,28 @@ public class SCProductEntryLocalServiceImpl
 				el, "download-url", productVersion.getDirectDownloadURL());
 		}
 
-		DocUtil.add(el, "author", productEntry.getUserName());
+		DocUtil.add(el, "author", productEntry.getAuthor());
+
+		Element screenshotsEl = el.addElement("screenshots");
+
+		Iterator itr = productEntry.getScreenshots().iterator();
+
+		while (itr.hasNext()) {
+			SCProductScreenshot screenshot = (SCProductScreenshot)itr.next();
+
+			Element screenshotEl = screenshotsEl.addElement("screenshot");
+
+			screenshotEl.addAttribute(
+				"thumbnail-url",
+				baseImageURL + "?img_id=" + screenshot.getThumbnailId());
+			screenshotEl.addAttribute(
+				"large-image-url",
+				baseImageURL + "?img_id=" + screenshot.getFullImageId());
+		}
 
 		Element licensesEl = el.addElement("licenses");
 
-		Iterator itr = productEntry.getLicenses().iterator();
+		itr = productEntry.getLicenses().iterator();
 
 		while (itr.hasNext()) {
 			SCLicense license = (SCLicense)itr.next();
@@ -582,9 +648,65 @@ public class SCProductEntryLocalServiceImpl
 		}
 	}
 
+	protected void saveProductScreenshots(
+			SCProductEntry productEntry, List thumbnails, List fullImages)
+		throws SystemException {
+
+		long productEntryId = productEntry.getProductEntryId();
+
+		List productScreenshots =
+			SCProductScreenshotUtil.findByProductEntryId(productEntryId);
+
+		if (thumbnails.size() < productScreenshots.size()) {
+			for (int i = thumbnails.size(); i < productScreenshots.size();
+					i++) {
+
+				SCProductScreenshot productScreenshot =
+					(SCProductScreenshot)productScreenshots.get(i);
+
+				SCProductScreenshotLocalServiceUtil.deleteProductScreenshot(
+					productScreenshot);
+			}
+		}
+
+		for (int i = 0; i < thumbnails.size(); i++) {
+			int priority = i;
+
+			byte[] thumbnail = (byte[])thumbnails.get(i);
+			byte[] fullImage = (byte[])fullImages.get(i);
+
+			SCProductScreenshot productScreenshot =
+				SCProductScreenshotUtil.fetchByP_P(productEntryId, priority);
+
+			if (productScreenshot == null) {
+				long productScreenshotId = CounterLocalServiceUtil.increment();
+
+				long thumbnailId = CounterLocalServiceUtil.increment();
+				long fullImageId = CounterLocalServiceUtil.increment();
+
+				productScreenshot = SCProductScreenshotUtil.create(
+					productScreenshotId);
+
+				productScreenshot.setCompanyId(productEntry.getCompanyId());
+				productScreenshot.setGroupId(productEntry.getGroupId());
+				productScreenshot.setProductEntryId(productEntryId);
+				productScreenshot.setThumbnailId(thumbnailId);
+				productScreenshot.setFullImageId(fullImageId);
+				productScreenshot.setPriority(priority);
+
+				SCProductScreenshotUtil.update(productScreenshot);
+			}
+
+			ImageLocalUtil.updateImage(
+				productScreenshot.getThumbnailId(), thumbnail);
+			ImageLocalUtil.updateImage(
+				productScreenshot.getFullImageId(), fullImage);
+		}
+	}
+
 	protected void validate(
 			String name, String type, String shortDescription, String pageURL,
-			long[] licenseIds)
+			String author, long[] licenseIds, List thumbnails, List fullImages)
 		throws PortalException {
 
 		if (Validator.isNull(name)) {
@@ -611,8 +733,33 @@ public class SCProductEntryLocalServiceImpl
 			}
 		}
 
+		if (Validator.isNull(author)) {
+			throw new ProductEntryAuthorException();
+		}
+
 		if (licenseIds.length == 0) {
 			throw new ProductEntryLicenseException();
+		}
+
+		if (thumbnails.size() != fullImages.size()) {
+			throw new ProductEntryScreenshotsException();
+		}
+		else {
+			Iterator itr = thumbnails.iterator();
+
+			while (itr.hasNext()) {
+				if (itr.next() == null) {
+					throw new ProductEntryScreenshotsException();
+				}
+			}
+
+			itr = fullImages.iterator();
+
+			while (itr.hasNext()) {
+				if (itr.next() == null) {
+					throw new ProductEntryScreenshotsException();
+				}
+			}
 		}
 	}
 

@@ -28,7 +28,7 @@
 
 // URL
 
-PortletURL portletURL = (PortletURL)request.getAttribute("liferay-ui:tabs:portletURL");
+PortletURLImpl portletURL = (PortletURLImpl)request.getAttribute("liferay-ui:tabs:portletURL");
 
 String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:tabs:url"));
 String anchor = StringPool.BLANK;
@@ -81,6 +81,15 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 %>
 
 <c:if test="<%= names.length > 0 %>">
+
+	<%
+	String oldPortletURLValue = null;
+
+	if (portletURL != null) {
+		oldPortletURLValue = portletURL.getParameter(param);
+	}
+	%>
+
 	<input name="<%= namespace %><%= param %>TabsScroll" type="hidden" />
 
 	<ul class="tabs">
@@ -156,4 +165,11 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 			</li>
 		</c:if>
 	</ul>
+
+	<%
+	if (portletURL != null) {
+		portletURL.setParameter(param, oldPortletURLValue);
+	}
+	%>
+
 </c:if>

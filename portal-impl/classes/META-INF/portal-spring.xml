@@ -3744,6 +3744,41 @@
 			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.professional" class="com.liferay.portlet.softwarecatalog.service.impl.SCProductScreenshotLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistenceImpl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistenceImpl" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistenceImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.professional" class="com.liferay.portlet.softwarecatalog.service.impl.SCProductVersionLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

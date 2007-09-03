@@ -31,16 +31,17 @@
 <%@ page import="com.liferay.portlet.softwarecatalog.action.ActionUtil" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.FrameworkVersionNameException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.LicenseNameException" %>
+<%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryAuthorException" %>
+<%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryLicenseException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryNameException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryPageURLException" %>
-<%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryTypeException" %>
+<%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryScreenshotsException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException" %>
-<%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryLicenseException" %>
-<%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryImagesException" %>
-<%@ page import="com.liferay.portlet.softwarecatalog.ProductVersionNameException" %>
+<%@ page import="com.liferay.portlet.softwarecatalog.ProductEntryTypeException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.ProductVersionChangeLogException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.ProductVersionDownloadURLException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.ProductVersionFrameworkVersionException" %>
+<%@ page import="com.liferay.portlet.softwarecatalog.ProductVersionNameException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.NoSuchLicenseException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.NoSuchProductEntryException" %>
@@ -48,6 +49,7 @@
 <%@ page import="com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.model.SCLicense" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.model.SCProductEntry" %>
+<%@ page import="com.liferay.portlet.softwarecatalog.model.SCProductScreenshot" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.model.SCProductVersion" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil" %>
@@ -55,13 +57,16 @@
 <%@ page import="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil" %>
+<%@ page import="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.service.permission.SCFrameworkVersionPermission" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.service.permission.SCLicensePermission" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPermission" %>
+<%@ page import="com.liferay.portlet.softwarecatalog.util.SCUtil" %>
 
 <%
-DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
+PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
+
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

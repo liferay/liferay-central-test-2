@@ -99,6 +99,10 @@ public interface SCProductEntryModel extends BaseModel {
 
 	public void setPageURL(String pageURL);
 
+	public String getAuthor();
+
+	public void setAuthor(String author);
+
 	public String getRepoGroupId();
 
 	public void setRepoGroupId(String repoGroupId);

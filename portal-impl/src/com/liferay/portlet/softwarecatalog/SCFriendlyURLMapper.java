@@ -66,7 +66,6 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		if (action.equals("/software_catalog/view")) {
 			friendlyURL = "/software_catalog/" + tabs1;
-
 		}
 		else if (action.equals("/software_catalog/view_product_entry")) {
 			String productEntryId = url.getParameter("productEntryId");

@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil;
+import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil;
 
 import java.util.List;
@@ -58,6 +59,11 @@ public class SCProductEntryImpl
 
 	public List getLicenses() throws PortalException, SystemException {
 		return SCLicenseLocalServiceUtil.getProductEntryLicenses(
+			getProductEntryId());
+	}
+
+	public List getScreenshots() throws PortalException, SystemException {
+		return SCProductScreenshotLocalServiceUtil.getProductScreenshots(
 			getProductEntryId());
 	}
 

@@ -75,9 +75,10 @@ public class SCProductEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
-		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String author, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds,
+		java.util.List thumbnails, java.util.List fullImages,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -112,32 +113,50 @@ public class SCProductEntryServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = repoGroupId;
+			Object paramObj6 = author;
 
-			if (repoGroupId == null) {
+			if (author == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = repoArtifactId;
+			Object paramObj7 = repoGroupId;
 
-			if (repoArtifactId == null) {
+			if (repoGroupId == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = licenseIds;
+			Object paramObj8 = repoArtifactId;
 
-			if (licenseIds == null) {
-				paramObj8 = new NullWrapper("[J");
+			if (repoArtifactId == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = new BooleanWrapper(addCommunityPermissions);
-			Object paramObj10 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj9 = licenseIds;
+
+			if (licenseIds == null) {
+				paramObj9 = new NullWrapper("[J");
+			}
+
+			Object paramObj10 = thumbnails;
+
+			if (thumbnails == null) {
+				paramObj10 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj11 = fullImages;
+
+			if (fullImages == null) {
+				paramObj11 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj12 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj13 = new BooleanWrapper(addGuestPermissions);
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
 					"addProductEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
+						paramObj10, paramObj11, paramObj12, paramObj13
 					});
 			Object returnObj = null;
 
@@ -168,8 +187,10 @@ public class SCProductEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
 		java.lang.String type, java.lang.String shortDescription,
 		java.lang.String longDescription, java.lang.String pageURL,
-		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, java.lang.String[] communityPermissions,
+		java.lang.String author, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds,
+		java.util.List thumbnails, java.util.List fullImages,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -205,34 +226,52 @@ public class SCProductEntryServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = repoGroupId;
+			Object paramObj6 = author;
 
-			if (repoGroupId == null) {
+			if (author == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = repoArtifactId;
+			Object paramObj7 = repoGroupId;
 
-			if (repoArtifactId == null) {
+			if (repoGroupId == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = licenseIds;
+			Object paramObj8 = repoArtifactId;
+
+			if (repoArtifactId == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = licenseIds;
 
 			if (licenseIds == null) {
-				paramObj8 = new NullWrapper("[J");
+				paramObj9 = new NullWrapper("[J");
 			}
 
-			Object paramObj9 = communityPermissions;
+			Object paramObj10 = thumbnails;
+
+			if (thumbnails == null) {
+				paramObj10 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj11 = fullImages;
+
+			if (fullImages == null) {
+				paramObj11 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj12 = communityPermissions;
 
 			if (communityPermissions == null) {
-				paramObj9 = new NullWrapper("[Ljava.lang.String;");
+				paramObj12 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj10 = guestPermissions;
+			Object paramObj13 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj10 = new NullWrapper("[Ljava.lang.String;");
+				paramObj13 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
@@ -240,7 +279,7 @@ public class SCProductEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
+						paramObj10, paramObj11, paramObj12, paramObj13
 					});
 			Object returnObj = null;
 
@@ -334,8 +373,9 @@ public class SCProductEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long productEntryId,
 		java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL, java.lang.String repoGroupId,
-		java.lang.String repoArtifactId, long[] licenseIds)
+		java.lang.String pageURL, java.lang.String author,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, java.util.List thumbnails, java.util.List fullImages)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -370,29 +410,48 @@ public class SCProductEntryServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = repoGroupId;
+			Object paramObj6 = author;
 
-			if (repoGroupId == null) {
+			if (author == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = repoArtifactId;
+			Object paramObj7 = repoGroupId;
 
-			if (repoArtifactId == null) {
+			if (repoGroupId == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = licenseIds;
+			Object paramObj8 = repoArtifactId;
+
+			if (repoArtifactId == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = licenseIds;
 
 			if (licenseIds == null) {
-				paramObj8 = new NullWrapper("[J");
+				paramObj9 = new NullWrapper("[J");
+			}
+
+			Object paramObj10 = thumbnails;
+
+			if (thumbnails == null) {
+				paramObj10 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj11 = fullImages;
+
+			if (fullImages == null) {
+				paramObj11 = new NullWrapper("java.util.List");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
 					"updateProductEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11
 					});
 			Object returnObj = null;
 

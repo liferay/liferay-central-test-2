@@ -217,6 +217,9 @@ create index IX_5D25244F on SCProductEntry (companyId);
 create index IX_72F87291 on SCProductEntry (groupId);
 create index IX_98E6A9CB on SCProductEntry (groupId, userId);
 
+create index IX_467956FD on SCProductScreenshot (productEntryId);
+create index IX_DA913A55 on SCProductScreenshot (productEntryId, priority);
+
 create index IX_8377A211 on SCProductVersion (productEntryId);
 
 create index IX_C28B41DC on ShoppingCart (groupId);

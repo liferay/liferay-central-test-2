@@ -51,9 +51,23 @@ else {
 		licenseIds.add(new Long(licenses[i]));
 	}
 }
+
+List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreenshots(productEntryId);
+
+int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", productScreenshots.size());
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />addScreenShot() {
+		document.<portlet:namespace />fm.<portlet:namespace />screenshotsCount.value = "<%= screenshotsCount + 1 %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />removeScreenShot() {
+		document.<portlet:namespace />fm.<portlet:namespace />screenshotsCount.value = "<%= screenshotsCount - 1 %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	function <portlet:namespace />saveProductEntry() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= productEntry == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
@@ -64,19 +78,20 @@ else {
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />productEntryId" type="hidden" value="<%= productEntryId %>" />
+<input name="<portlet:namespace />screenshotsCount" type="hidden" value="<%= screenshotsCount %>" />
 
 <liferay-ui:tabs
 	names="product"
 	backURL="<%= redirect %>"
 />
 
-<liferay-ui:error exception="<%= ProductEntryNameException.class %>" message="please-enter-a-valid-name" />
-<liferay-ui:error exception="<%= ProductEntryTypeException.class %>" message="please-select-a-valid-type" />
-<liferay-ui:error exception="<%= ProductEntryShortDescriptionException.class %>" message="please-enter-a-valid-short-description" />
+<liferay-ui:error exception="<%= ProductEntryAuthorException.class %>" message="please-enter-a-valid-author" />
 <liferay-ui:error exception="<%= ProductEntryLicenseException.class %>" message="please-select-at-least-one-license" />
+<liferay-ui:error exception="<%= ProductEntryNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= ProductEntryPageURLException.class %>" message="please-enter-a-valid-page-url" />
-<liferay-ui:error exception="<%= ProductEntryImagesException.class %>" message="please-enter-a-valid-main-screenshot" />
-<liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+<liferay-ui:error exception="<%= ProductEntryScreenshotsException.class %>" message="screenshots-must-contain-a-valid-thumbnail-and-a-valid-full-image" />
+<liferay-ui:error exception="<%= ProductEntryShortDescriptionException.class %>" message="please-enter-a-valid-short-description" />
+<liferay-ui:error exception="<%= ProductEntryTypeException.class %>" message="please-select-a-valid-type" />
 
 <table class="liferay-table">
 <tr>
@@ -144,6 +159,14 @@ else {
 </tr>
 <tr>
 	<td>
+		<liferay-ui:message key="author" />
+	</td>
+	<td>
+		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="author" />
+	</td>
+</tr>
+<tr>
+	<td>
 		<liferay-ui:message key="page-url" />
 	</td>
 	<td>
@@ -189,6 +212,12 @@ else {
 
 <br />
 
+<input type="submit" value="<liferay-ui:message key="save" />" />
+
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+
+<br /><br />
+
 <liferay-ui:tabs names="plugin-repository" />
 
 <table class="liferay-table">
@@ -212,9 +241,71 @@ else {
 
 <br />
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+<liferay-ui:tabs names="screenshots" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<table class="liferay-table">
+
+<%
+for (int i = 0; i < screenshotsCount; i++) {
+	SCProductScreenshot productScreenshot = null;
+
+	if (i < productScreenshots.size()) {
+		productScreenshot = (SCProductScreenshot)productScreenshots.get(i);
+	}
+%>
+
+	<tr>
+		<td>
+			<liferay-ui:message key="thumbnail" />
+		</td>
+		<td>
+			<input class="liferay-input-text" name="<portlet:namespace />thumbnail<%= i %>" type="file" />
+		</td>
+
+		<c:if test="<%= productScreenshot != null %>">
+			<td rowspan="3" valign="top">
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getThumbnailId() %>" target="_blank"><liferay-ui:message key="see-thumbnail" /></a>
+					</td>
+					<td>
+						<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getFullImageId() %>" target="_blank"><liferay-ui:message key="see-full-image" /></a>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<liferay-ui:message key="use-existing-images" /> <liferay-ui:input-checkbox param='<%= "preserveScreenshot" + i %>' defaultValue="<%= true %>" />
+					</td>
+				</tr>
+				</table>
+			</td>
+		</c:if>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="full-image" />
+		</td>
+		<td>
+			<input class="liferay-input-text" name="<portlet:namespace />fullImage<%= i %>" type="file" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+
+<%
+}
+%>
+</table>
+
+<input type="button" value="<liferay-ui:message key="add-screenshot" />" onClick="<portlet:namespace />addScreenShot();" />
+
+<c:if test="<%= screenshotsCount > 0 %>">
+	<input type="button" value="<liferay-ui:message key="remove-screenshot" />" onClick="<portlet:namespace />removeScreenShot();" />
+</c:if>
 
 </form>
 

@@ -231,7 +231,7 @@ List screenshots = pluginPackage.getScreenshots();
 				Screenshot screenshot = (Screenshot)itr.next();
 			%>
 
-				<a href="<%= screenshot.getLargeImageURL() %>"><img src="<%= screenshot.getThumbnailURL() %>" /></a>
+				<a href="<%= screenshot.getLargeImageURL() %>" target="_blank"><img src="<%= screenshot.getThumbnailURL() %>" /></a>
 
 			<%
 			}

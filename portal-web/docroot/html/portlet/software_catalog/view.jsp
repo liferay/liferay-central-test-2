@@ -64,15 +64,39 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("products") || tabs1.equals("my-products") %>'>
 
 		<%
+		String orderByCol = ParamUtil.getString(request, "orderByCol");
+		String orderByType = ParamUtil.getString(request, "orderByType");
+
+		if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
+			prefs.setValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-col", orderByCol);
+			prefs.setValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", orderByType);
+		}
+		else {
+			orderByCol = prefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-col", "modified-date");
+			orderByType = prefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", "desc");
+		}
+
+		OrderByComparator orderByComparator = SCUtil.getProductEntryOrderByComparator(orderByCol, orderByType);
+
 		List headerNames = new ArrayList();
 
 		headerNames.add("name");
 		headerNames.add("type");
 		headerNames.add("licenses");
-		headerNames.add("modified-date");
+		headerNames.add("release-date");
 		headerNames.add(StringPool.BLANK);
 
+		Map orderableHeaders = CollectionFactory.getHashMap();
+
+		orderableHeaders.put("name", "name");
+		orderableHeaders.put("type", "type");
+		orderableHeaders.put("release-date", "modified-date");
+
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+
+		searchContainer.setOrderableHeaders(orderableHeaders);
+		searchContainer.setOrderByCol(orderByCol);
+		searchContainer.setOrderByType(orderByType);
 
 		int total = 0;
 
@@ -88,10 +112,10 @@ portletURL.setParameter("tabs1", tabs1);
 		List results = null;
 
 		if (tabs1.equals("products")) {
-			results = SCProductEntryLocalServiceUtil.getProductEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
+			results = SCProductEntryLocalServiceUtil.getProductEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
 		}
 		else {
-			results = SCProductEntryLocalServiceUtil.getProductEntries(portletGroupId.longValue(), user.getUserId(), searchContainer.getStart(), searchContainer.getEnd());
+			results = SCProductEntryLocalServiceUtil.getProductEntries(portletGroupId.longValue(), user.getUserId(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
 		}
 
 		searchContainer.setResults(results);

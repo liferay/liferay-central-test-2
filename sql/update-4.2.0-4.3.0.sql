@@ -293,8 +293,19 @@ create table SCProductEntry (
 	shortDescription STRING null,
 	longDescription STRING null,
 	pageURL VARCHAR(1024) null,
+	author VARCHAR(75) null,
 	repoGroupId VARCHAR(75) null,
 	repoArtifactId VARCHAR(75) null
+);
+
+create table SCProductScreenshot (
+	productScreenshotId LONG not null primary key,
+	companyId LONG,
+	groupId LONG,
+	productEntryId LONG,
+	thumbnailId LONG,
+	fullImageId LONG,
+	priority INTEGER
 );
 
 create table SCProductVersion (

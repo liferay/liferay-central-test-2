@@ -152,15 +152,15 @@ try {
 	for (int i = 0; i < results.size(); i++) {
 		Document doc = (Document)results.get(i);
 
+		String pluginPackageName = doc.get(LuceneFields.TITLE);
 		String pluginPackageModuleId = doc.get("moduleId");
 		String pluginPackageGroupId = doc.get("groupId");
 		String pluginPackageArtifactId = doc.get("artifactId");
-		String pluginPackageName = doc.get(LuceneFields.TITLE);
 		String pluginPackageAvailableVersion = doc.get("version");
-		String pluginPackageTags = doc.get("tags");
 		String pluginPackageShortDescription = doc.get("shortDescription");
 		String pluginPackageChangeLog = doc.get("changeLog");
 		String pluginPackageRepositoryURL = doc.get("repositoryURL");
+		String pluginPackageTags = doc.get("tags");
 
 		PluginPackage installedPluginPackage = PluginPackageUtil.getLatestInstalledPluginPackage(pluginPackageGroupId, pluginPackageArtifactId);
 

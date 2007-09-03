@@ -1206,8 +1206,18 @@
 		<field name="pageURL" type="String">
 			<hint-collection name="URL" />
 		</field>
+		<field name="author" type="String" />
 		<field name="repoGroupId" type="String" />
 		<field name="repoArtifactId" type="String" />
+	</model>
+	<model name="com.liferay.portlet.softwarecatalog.model.SCProductScreenshot">
+		<field name="productScreenshotId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="productEntryId" type="long" />
+		<field name="thumbnailId" type="long" />
+		<field name="fullImageId" type="long" />
+		<field name="priority" type="int" />
 	</model>
 	<model name="com.liferay.portlet.softwarecatalog.model.SCProductVersion">
 		<field name="productVersionId" type="long" />

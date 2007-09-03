@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/software_catalog/init.jsp" %>
 
 <%
-String tabs2 = ParamUtil.getString(request, "tabs2", "comments");
+String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
@@ -103,18 +103,22 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 
 	</td>
 </tr>
-
-<c:if test="<%= Validator.isNotNull(productEntry.getPageURL()) %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="page-url" />:
-		</td>
-		<td>
-			<a href="<%= productEntry.getPageURL() %>"><%= productEntry.getPageURL() %></a>
-		</td>
-	</tr>
-</c:if>
-
+<tr>
+	<td>
+		<liferay-ui:message key="author" />:
+	</td>
+	<td>
+		<%= productEntry.getAuthor() %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="page-url" />:
+	</td>
+	<td>
+		<a href="<%= productEntry.getPageURL() %>"><%= productEntry.getPageURL() %></a>
+	</td>
+</tr>
 <tr>
 	<td>
 		<liferay-ui:message key="short-description" />:
@@ -139,55 +143,79 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 
 <br />
 
-<c:if test="<%= latestProductVersion != null %>">
-	<table class="liferay-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="release-date" />:
-		</td>
-		<td>
-			<%= dateFormatDate.format(latestProductVersion.getModifiedDate()) %>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="change-log" />:
-		</td>
-		<td>
-			<%= latestProductVersion.getChangeLog() %>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="framework-versions" />:
-		</td>
-		<td>
-			<%= _getFrameworkVersions(latestProductVersion.getFrameworkVersions()) %>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="download-links" />:
-		</td>
-		<td>
-			<c:if test="<%= Validator.isNotNull(latestProductVersion.getDownloadPageURL()) %>">
-				<liferay-ui:icon image="download" message="download-page" url="<%= latestProductVersion.getDownloadPageURL() %>" />
-			</c:if>
+<c:choose>
+	<c:when test="<%= latestProductVersion != null %>">
+		<table class="liferay-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="release-date" />:
+			</td>
+			<td>
+				<%= dateFormatDateTime.format(latestProductVersion.getModifiedDate()) %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="change-log" />:
+			</td>
+			<td>
+				<%= latestProductVersion.getChangeLog() %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="framework-versions" />:
+			</td>
+			<td>
+				<%= _getFrameworkVersions(latestProductVersion.getFrameworkVersions()) %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="download-links" />:
+			</td>
+			<td>
+				<c:if test="<%= Validator.isNotNull(latestProductVersion.getDownloadPageURL()) %>">
+					<liferay-ui:icon image="download" message="download-page" url="<%= latestProductVersion.getDownloadPageURL() %>" />
+				</c:if>
 
-			<c:if test="<%= Validator.isNotNull(latestProductVersion.getDirectDownloadURL()) %>">
-				<liferay-ui:icon image="download" message="direct-download" url="<%= latestProductVersion.getDirectDownloadURL() %>" />
-			</c:if>
-		</td>
-	</tr>
-	</table>
+				<c:if test="<%= Validator.isNotNull(latestProductVersion.getDirectDownloadURL()) %>">
+					<liferay-ui:icon image="download" message="direct-download" url="<%= latestProductVersion.getDirectDownloadURL() %>" />
+				</c:if>
+			</td>
+		</tr>
+		</table>
+
+		<br />
+	</c:when>
+	<c:otherwise>
+		<div class="portlet-msg-error">
+			<liferay-ui:message key="this-product-does-not-have-any-released-versions" />
+		</div>
+	</c:otherwise>
+</c:choose>
+
+<%
+List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreenshots(productEntryId);
+%>
+
+<c:if test="<%= productScreenshots.size() > 0 %>">
+	<div>
+
+		<%
+		for (int i = 0; i < productScreenshots.size(); i++) {
+			SCProductScreenshot productScreenshot = (SCProductScreenshot)productScreenshots.get(i);
+		%>
+
+			<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getFullImageId() %>" target="_blank"><img src="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getThumbnailId() %>" /></a>
+
+		<%
+		}
+		%>
+
+	</div>
 
 	<br />
-</c:if>
-
-<c:if test="<%= latestProductVersion == null %>">
-	<div class="portlet-msg-error">
-		<liferay-ui:message key="this-product-does-not-have-any-released-versions" />
-	</div>
 </c:if>
 
 <liferay-ui:ratings
@@ -208,7 +236,7 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 
 <liferay-ui:tabs
 	param="tabs2"
-	names="comments,version-history"
+	names="version-history,comments"
 	portletURL="<%= viewProductEntryURL %>"
 />
 
@@ -281,7 +309,7 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			row.addText(sm.toString());
 
 			row.addText(_getFrameworkVersions(curProductVersion.getFrameworkVersions()));
-			row.addText(dateFormatDate.format(curProductVersion.getModifiedDate()));
+			row.addText(dateFormatDateTime.format(curProductVersion.getModifiedDate()));
 
 			// Action
 

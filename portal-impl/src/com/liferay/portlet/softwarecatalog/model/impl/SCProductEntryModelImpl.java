@@ -70,10 +70,11 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 			{ "shortDescription", new Integer(Types.VARCHAR) },
 			{ "longDescription", new Integer(Types.VARCHAR) },
 			{ "pageURL", new Integer(Types.VARCHAR) },
+			{ "author", new Integer(Types.VARCHAR) },
 			{ "repoGroupId", new Integer(Types.VARCHAR) },
 			{ "repoArtifactId", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table SCProductEntry (productEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,shortDescription STRING null,longDescription STRING null,pageURL VARCHAR(1024) null,repoGroupId VARCHAR(75) null,repoArtifactId VARCHAR(75) null)";
+	public static String TABLE_SQL_CREATE = "create table SCProductEntry (productEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,shortDescription STRING null,longDescription STRING null,pageURL VARCHAR(1024) null,author VARCHAR(75) null,repoGroupId VARCHAR(75) null,repoArtifactId VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table SCProductEntry";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry"),
@@ -95,6 +96,9 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PAGEURL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.pageURL"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_AUTHOR = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.author"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_REPOGROUPID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.repoGroupId"),
@@ -286,6 +290,23 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getAuthor() {
+		return GetterUtil.getString(_author);
+	}
+
+	public void setAuthor(String author) {
+		if (((author == null) && (_author != null)) ||
+				((author != null) && (_author == null)) ||
+				((author != null) && (_author != null) &&
+				!author.equals(_author))) {
+			if (!XSS_ALLOW_AUTHOR) {
+				author = XSSUtil.strip(author);
+			}
+
+			_author = author;
+		}
+	}
+
 	public String getRepoGroupId() {
 		return GetterUtil.getString(_repoGroupId);
 	}
@@ -334,6 +355,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 		clone.setShortDescription(getShortDescription());
 		clone.setLongDescription(getLongDescription());
 		clone.setPageURL(getPageURL());
+		clone.setAuthor(getAuthor());
 		clone.setRepoGroupId(getRepoGroupId());
 		clone.setRepoArtifactId(getRepoArtifactId());
 
@@ -405,6 +427,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 	private String _shortDescription;
 	private String _longDescription;
 	private String _pageURL;
+	private String _author;
 	private String _repoGroupId;
 	private String _repoArtifactId;
 }

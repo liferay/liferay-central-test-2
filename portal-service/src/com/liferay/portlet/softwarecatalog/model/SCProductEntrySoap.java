@@ -60,6 +60,7 @@ public class SCProductEntrySoap implements Serializable {
 		soapModel.setShortDescription(model.getShortDescription());
 		soapModel.setLongDescription(model.getLongDescription());
 		soapModel.setPageURL(model.getPageURL());
+		soapModel.setAuthor(model.getAuthor());
 		soapModel.setRepoGroupId(model.getRepoGroupId());
 		soapModel.setRepoArtifactId(model.getRepoArtifactId());
 
@@ -184,6 +185,14 @@ public class SCProductEntrySoap implements Serializable {
 		_pageURL = pageURL;
 	}
 
+	public String getAuthor() {
+		return _author;
+	}
+
+	public void setAuthor(String author) {
+		_author = author;
+	}
+
 	public String getRepoGroupId() {
 		return _repoGroupId;
 	}
@@ -212,6 +221,7 @@ public class SCProductEntrySoap implements Serializable {
 	private String _shortDescription;
 	private String _longDescription;
 	private String _pageURL;
+	private String _author;
 	private String _repoGroupId;
 	private String _repoArtifactId;
 }

@@ -23,20 +23,38 @@
 package com.liferay.portlet.softwarecatalog.action;
 
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
-import com.liferay.portlet.softwarecatalog.ProductEntryImagesException;
+import com.liferay.portlet.softwarecatalog.ProductEntryAuthorException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
 import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
 import com.liferay.portlet.softwarecatalog.ProductEntryPageURLException;
+import com.liferay.portlet.softwarecatalog.ProductEntryScreenshotsException;
 import com.liferay.portlet.softwarecatalog.ProductEntryShortDescriptionException;
 import com.liferay.portlet.softwarecatalog.ProductEntryTypeException;
+import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil;
+import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil;
+import com.liferay.util.FileUtil;
 import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.UploadPortletRequest;
+
+import java.io.File;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -71,7 +89,9 @@ public class EditProductEntryAction extends PortletAction {
 				deleteProductEntry(req);
 			}
 
-			sendRedirect(req, res);
+			if (Validator.isNotNull(cmd)) {
+				sendRedirect(req, res);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchProductEntryException ||
@@ -81,10 +101,11 @@ public class EditProductEntryAction extends PortletAction {
 
 				setForward(req, "portlet.software_catalog.error");
 			}
-			else if (e instanceof ProductEntryImagesException ||
+			else if (e instanceof ProductEntryAuthorException ||
 					 e instanceof ProductEntryNameException ||
 					 e instanceof ProductEntryLicenseException ||
 					 e instanceof ProductEntryPageURLException ||
+					 e instanceof ProductEntryScreenshotsException ||
 					 e instanceof ProductEntryShortDescriptionException ||
 					 e instanceof ProductEntryTypeException) {
 
@@ -127,7 +148,107 @@ public class EditProductEntryAction extends PortletAction {
 		SCProductEntryServiceUtil.deleteProductEntry(productEntryId);
 	}
 
+	protected List getFullImages(UploadPortletRequest uploadReq)
+		throws Exception {
+
+		return getImages(uploadReq, "fullImage");
+	}
+
+	protected List getImages(UploadPortletRequest uploadReq, String imagePrefix)
+		throws Exception {
+
+		List images = new ArrayList();
+
+		Iterator itr = getSortedParameterNames(
+			uploadReq, imagePrefix).iterator();
+
+		while (itr.hasNext()) {
+			String name = (String)itr.next();
+
+			int priority = GetterUtil.getInteger(
+				name.substring(imagePrefix.length(), name.length()));
+
+			File file = uploadReq.getFile(name);
+			byte[] bytes = FileUtil.getBytes(file);
+
+			boolean preserveScreenshot = ParamUtil.getBoolean(
+				uploadReq, "preserveScreenshot" + priority);
+
+			if (preserveScreenshot) {
+				SCProductScreenshot productScreenshot = getProductScreenshot(
+					uploadReq, priority);
+
+				Image image = null;
+
+				if (imagePrefix.equals("fullImage")) {
+					image = ImageLocalUtil.getImage(
+						productScreenshot.getFullImageId());
+				}
+				else {
+					image = ImageLocalUtil.getImage(
+						productScreenshot.getThumbnailId());
+				}
+
+				bytes = image.getTextObj();
+			}
+
+			if ((bytes != null) && (bytes.length > 0)) {
+				images.add(bytes);
+			}
+			else {
+				throw new ProductEntryScreenshotsException();
+			}
+		}
+
+		return images;
+	}
+
+	protected SCProductScreenshot getProductScreenshot(
+			UploadPortletRequest uploadReq, int priority)
+		throws Exception {
+
+		long productEntryId = ParamUtil.getLong(uploadReq, "productEntryId");
+
+		try {
+			return SCProductScreenshotLocalServiceUtil.getProductScreenshot(
+				productEntryId, priority);
+		}
+		catch (Exception e) {
+			throw new ProductEntryScreenshotsException();
+		}
+	}
+
+	protected List getSortedParameterNames(
+			UploadPortletRequest uploadReq, String imagePrefix)
+		throws Exception {
+
+		List parameterNames = new ArrayList();
+
+		Enumeration enu = uploadReq.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+
+			if (name.startsWith(imagePrefix)) {
+				parameterNames.add(name);
+			}
+		}
+
+		Collections.sort(parameterNames);
+
+		return parameterNames;
+	}
+
+	protected List getThumbnails(UploadPortletRequest uploadReq)
+		throws Exception {
+
+		return getImages(uploadReq, "thumbnail");
+	}
+
 	protected void updateProductEntry(ActionRequest req) throws Exception {
+		UploadPortletRequest uploadReq =
+			PortalUtil.getUploadPortletRequest(req);
+
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
 		long productEntryId = ParamUtil.getLong(req, "productEntryId");
@@ -137,10 +258,14 @@ public class EditProductEntryAction extends PortletAction {
 		String shortDescription = ParamUtil.getString(req, "shortDescription");
 		String longDescription = ParamUtil.getString(req, "longDescription");
 		String pageURL = ParamUtil.getString(req, "pageURL");
+		String author = ParamUtil.getString(req, "author");
 		String repoGroupId = ParamUtil.getString(req, "repoGroupId");
 		String repoArtifactId = ParamUtil.getString(req, "repoArtifactId");
 
 		long[] licenseIds = ParamUtil.getLongValues(req, "licenses");
+
+		List thumbnails = getThumbnails(uploadReq);
+		List fullImages = getFullImages(uploadReq);
 
 		String[] communityPermissions = req.getParameterValues(
 			"communityPermissions");
@@ -153,8 +278,8 @@ public class EditProductEntryAction extends PortletAction {
 
 			SCProductEntryServiceUtil.addProductEntry(
 				layout.getPlid(), name, type, shortDescription, longDescription,
-				pageURL, repoGroupId, repoArtifactId, licenseIds,
-				communityPermissions, guestPermissions);
+				pageURL, author, repoGroupId, repoArtifactId, licenseIds,
+				thumbnails, fullImages, communityPermissions, guestPermissions);
 		}
 		else {
 
@@ -162,7 +287,8 @@ public class EditProductEntryAction extends PortletAction {
 
 			SCProductEntryServiceUtil.updateProductEntry(
 				productEntryId, name, type, shortDescription, longDescription,
-				pageURL, repoGroupId, repoArtifactId, licenseIds);
+				pageURL, author, repoGroupId, repoArtifactId, licenseIds,
+				thumbnails, fullImages);
 		}
 	}
 

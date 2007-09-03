@@ -130,6 +130,15 @@ public class SCProductEntryJSONSerializer {
 			jsonObj.put("pageURL", pageURL.toString());
 		}
 
+		String author = model.getAuthor();
+
+		if (author == null) {
+			jsonObj.put("author", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("author", author.toString());
+		}
+
 		String repoGroupId = model.getRepoGroupId();
 
 		if (repoGroupId == null) {

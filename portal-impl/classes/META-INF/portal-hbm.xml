@@ -1197,8 +1197,21 @@
 		<property name="shortDescription" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="longDescription" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="pageURL" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="author" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="repoGroupId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="repoArtifactId" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl" table="SCProductScreenshot">
+		<cache usage="read-write" />
+		<id name="productScreenshotId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="productEntryId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="thumbnailId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="fullImageId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="priority" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl" table="SCProductVersion">
 		<cache usage="read-write" />

@@ -105,16 +105,15 @@ versions of the screenshot
 <!ELEMENT screenshot (thumbnail-url, large-image-url)>
 
 <!--
-The thumbnail-url element contains the URL of a screenshot of the plugin. It is
-recommended that the width of the images is 120 pixels and that the height is in
-the same size range.
+The thumbnail-url element contains the URL of a thumbnail screenshot of the
+plugin. It is recommended that the width of the images is 120 pixels and that
+the height is in the same size range.
 -->
 <!ELEMENT thumbnail-url (#PCDATA)>
 
 <!--
-The large-image-url element contains the URL of a screenshot of the plugin. It
-is recommended that the width of the images is 120 pixels and that the height is
-in the same size range.
+The large-image-url element contains the URL of a large image screenshot of the
+plugin.
 -->
 <!ELEMENT large-image-url (#PCDATA)>
 
