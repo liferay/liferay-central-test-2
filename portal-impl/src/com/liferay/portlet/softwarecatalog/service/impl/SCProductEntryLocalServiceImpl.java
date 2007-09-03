@@ -593,11 +593,11 @@ public class SCProductEntryLocalServiceImpl
 
 			Element screenshotEl = screenshotsEl.addElement("screenshot");
 
-			screenshotEl.addAttribute(
-				"thumbnail-url",
+			DocUtil.add(
+				screenshotEl, "thumbnail-url",
 				baseImageURL + "?img_id=" + screenshot.getThumbnailId());
-			screenshotEl.addAttribute(
-				"large-image-url",
+			DocUtil.add(
+				screenshotEl, "large-image-url",
 				baseImageURL + "?img_id=" + screenshot.getFullImageId());
 		}
 
