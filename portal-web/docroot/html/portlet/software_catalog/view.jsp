@@ -192,7 +192,17 @@ portletURL.setParameter("tabs1", tabs1);
 		boolean showAddProductEntryButton = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
 		%>
 
-		<c:if test="<%= showAddProductEntryButton || (results.size() > 0) %>">
+		<c:if test="<%= showAddProductEntryButton %>">
+			<div>
+				<input type="button" value="<liferay-ui:message key="add-product" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+			</div>
+
+			<c:if test="<%= results.size() > 0 %>">
+				<br />
+			</c:if>
+		</c:if>
+
+		<%--<c:if test="<%= showAddProductEntryButton || (results.size() > 0) %>">
 			<div>
 				<c:if test='<%= (results.size() > 0) && tabs1.equals("products") %>'>
 					<label for="<portlet:namespace />keyword"><liferay-ui:message key="search" /></label>
@@ -218,7 +228,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<c:if test="<%= results.size() > 0 %>">
 				<br />
 			</c:if>
-		</c:if>
+		</c:if>--%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 

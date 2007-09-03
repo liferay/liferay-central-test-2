@@ -123,6 +123,18 @@ try {
 	<div class="separator"><!-- --></div>
 
 	<%
+	String orderByCol = ParamUtil.getString(request, "orderByCol");
+	String orderByType = ParamUtil.getString(request, "orderByType");
+
+	if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
+		prefs.setValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-col", orderByCol);
+		prefs.setValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-type", orderByType);
+	}
+	else {
+		orderByCol = prefs.getValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-col", "modified-date");
+		orderByType = prefs.getValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-type", "desc");
+	}
+
 	List headerNames = new ArrayList();
 
 	headerNames.add(pluginType + "-plugin");
@@ -132,14 +144,35 @@ try {
 	headerNames.add("available-version");
 	headerNames.add("modified-date");
 
+	Map orderableHeaders = CollectionFactory.getHashMap();
+
+	orderableHeaders.put(pluginType + "-plugin", LuceneFields.TITLE);
+	orderableHeaders.put("modified-date", "modified-date");
+
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.get(pageContext, "no-" + pluginType + "-plugins-were-found"));
+
+	searchContainer.setOrderableHeaders(orderableHeaders);
+	searchContainer.setOrderByCol(orderByCol);
+	searchContainer.setOrderByType(orderByType);
 
 	List hits = PluginPackageUtil.search(keywords, pluginType, tag, license, repositoryURL, installStatus).toList();
 
-	DocumentComparator docComparator = new DocumentComparator();
+	DocumentComparator docComparator = null;
 
-	docComparator.addOrderBy(LuceneFields.TITLE);
-	docComparator.addOrderBy("version");
+	if (orderByType.equals("desc")) {
+		docComparator = new DocumentComparator(false, false);
+	}
+	else {
+		docComparator = new DocumentComparator();
+	}
+
+	if (orderByCol.equals("modified-date")) {
+		docComparator.addOrderBy("modified-date");
+	}
+	else {
+		docComparator.addOrderBy(LuceneFields.TITLE);
+		docComparator.addOrderBy("version");
+	}
 
 	Collections.sort(hits, docComparator);
 

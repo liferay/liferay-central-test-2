@@ -273,6 +273,11 @@ public class SCProductEntryLocalServiceImpl
 				"Deleting index " + productEntry.getProductEntryId(), ioe);
 		}
 
+		// Product screenshots
+
+		SCProductScreenshotLocalServiceUtil.deleteProductScreenshots(
+			productEntry.getProductEntryId());
+
 		// Product versions
 
 		SCProductVersionLocalServiceUtil.deleteProductVersions(
