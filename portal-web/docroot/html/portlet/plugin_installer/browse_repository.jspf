@@ -162,6 +162,7 @@ try {
 		String pluginPackageRepositoryURL = doc.get("repositoryURL");
 		String pluginPackageTags = doc.get("tags");
 
+		PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(pluginPackageModuleId, pluginPackageRepositoryURL);
 		PluginPackage installedPluginPackage = PluginPackageUtil.getLatestInstalledPluginPackage(pluginPackageGroupId, pluginPackageArtifactId);
 
 		ResultRow row = new ResultRow(doc, pluginPackageModuleId, i);
@@ -177,13 +178,26 @@ try {
 		rowURL.setParameter("moduleId", pluginPackageModuleId);
 		rowURL.setParameter("repositoryURL", pluginPackageRepositoryURL);
 
-		// Name and short description
+		// Name, screenshots, and short description
 
 		StringMaker sm = new StringMaker();
 
 		sm.append("<a href='");
 		sm.append(rowURL.toString());
 		sm.append("'>");
+
+		if (tabs2.equals("layout-templates") || tabs2.equals("themes")) {
+			List screenshots = pluginPackage.getScreenshots();
+
+			if (screenshots.size() > 0) {
+				Screenshot screenshot = (Screenshot)screenshots.get(0);
+
+				sm.append("<img align=\"left\" src=\"");
+				sm.append(screenshot.getThumbnailURL());
+				sm.append("\" style=\"margin-right: 10px\"/>");
+			}
+		}
+
 		sm.append("<b>");
 		sm.append(pluginPackageName);
 		sm.append("</b> ");

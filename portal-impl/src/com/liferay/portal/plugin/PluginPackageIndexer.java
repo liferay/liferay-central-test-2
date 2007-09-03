@@ -36,6 +36,7 @@ import com.liferay.util.License;
 
 import java.io.IOException;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -54,7 +55,6 @@ import org.apache.lucene.store.Directory;
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
- * @author Harry Mark
  *
  */
 public class PluginPackageIndexer implements Indexer {
@@ -62,7 +62,7 @@ public class PluginPackageIndexer implements Indexer {
 	public static final String PORTLET_ID = "PluginPackageIndexer";
 
 	public static void addPluginPackage(
-			String moduleId, String name, String version,
+			String moduleId, String name, String version, Date modifiedDate,
 			String author, List types, List tags, List licenses,
 			List liferayVersions, String shortDescription,
 			String longDescription, String changeLog, String pageURL,
@@ -97,8 +97,8 @@ public class PluginPackageIndexer implements Indexer {
 		doc.add(LuceneFields.getKeyword("groupId", moduleIdObj.getGroupId()));
 		doc.add(
 			LuceneFields.getKeyword("artifactId", moduleIdObj.getArtifactId()));
-		doc.add(LuceneFields.getKeyword("moduleId", moduleId));
 		doc.add(LuceneFields.getKeyword("version", version));
+		doc.add(LuceneFields.getDate("modified-date", modifiedDate));
 		doc.add(LuceneFields.getKeyword("shortDescription", shortDescription));
 		doc.add(LuceneFields.getKeyword("changeLog", changeLog));
 		doc.add(LuceneFields.getKeyword("repositoryURL", repositoryURL));
@@ -228,7 +228,7 @@ public class PluginPackageIndexer implements Indexer {
 	}
 
 	public static void updatePluginPackage(
-			String moduleId, String name, String version,
+			String moduleId, String name, String version, Date modifiedDate,
 			String author, List types, List tags, List licenses,
 			List liferayVersions, String shortDescription,
 			String longDescription, String changeLog, String pageURL,
@@ -242,9 +242,9 @@ public class PluginPackageIndexer implements Indexer {
 		}
 
 		addPluginPackage(
-			moduleId, name, version, author, types, tags, licenses,
-			liferayVersions, shortDescription, longDescription, changeLog,
-			pageURL, repositoryURL, status, installedVersion);
+			moduleId, name, version, modifiedDate, author, types, tags,
+			licenses, liferayVersions, shortDescription, longDescription,
+			changeLog, pageURL, repositoryURL, status, installedVersion);
 	}
 
 	public DocumentSummary getDocumentSummary(

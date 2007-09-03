@@ -59,6 +59,7 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUti
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
 import com.liferay.portlet.softwarecatalog.util.Indexer;
+import com.liferay.util.Time;
 import com.liferay.util.lucene.HitsImpl;
 import com.liferay.util.xml.DocUtil;
 
@@ -559,7 +560,9 @@ public class SCProductEntryLocalServiceImpl
 
 		DocUtil.add(el, "module-id", moduleId);
 
-		DocUtil.add(el, "release-date", productVersion.getModifiedDate());
+		DocUtil.add(
+			el, "modified-date",
+			Time.getRFC822(productVersion.getModifiedDate()));
 
 		Element typesEl = el.addElement("types");
 

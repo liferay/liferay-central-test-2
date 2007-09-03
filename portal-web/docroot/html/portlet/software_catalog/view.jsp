@@ -83,14 +83,14 @@ portletURL.setParameter("tabs1", tabs1);
 		headerNames.add("name");
 		headerNames.add("type");
 		headerNames.add("licenses");
-		headerNames.add("release-date");
+		headerNames.add("modified-date");
 		headerNames.add(StringPool.BLANK);
 
 		Map orderableHeaders = CollectionFactory.getHashMap();
 
 		orderableHeaders.put("name", "name");
 		orderableHeaders.put("type", "type");
-		orderableHeaders.put("release-date", "modified-date");
+		orderableHeaders.put("modified-date", "modified-date");
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 

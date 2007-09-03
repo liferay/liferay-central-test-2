@@ -216,13 +216,6 @@ List screenshots = pluginPackage.getScreenshots();
 	<tr>
 		<td colspan="2">
 			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="screenshots" />:
-		</td>
-		<td>
 
 			<%
 			itr = screenshots.iterator();

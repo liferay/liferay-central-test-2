@@ -42,6 +42,7 @@ import com.liferay.util.Html;
 import com.liferay.util.Http;
 import com.liferay.util.License;
 import com.liferay.util.Screenshot;
+import com.liferay.util.Time;
 import com.liferay.util.Version;
 import com.liferay.util.XSSUtil;
 import com.liferay.util.lucene.HitsImpl;
@@ -50,6 +51,9 @@ import com.liferay.util.xml.XMLSafeReader;
 import java.io.IOException;
 
 import java.net.MalformedURLException;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,6 +86,7 @@ import org.dom4j.io.SAXReader;
  * <a href="PluginPackageUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
 public class PluginPackageUtil {
@@ -391,6 +396,8 @@ public class PluginPackageUtil {
 		pluginPackage.setRecommendedDeploymentContext(
 			_readText(
 				pluginPackageEl.elementText("recommended-deployment-context")));
+		pluginPackage.setModifiedDate(
+			_readDate(pluginPackageEl.elementText("modified-date")));
 		pluginPackage.setAuthor(
 			_readText(pluginPackageEl.elementText("author")));
 		pluginPackage.setTypes(types);
@@ -670,9 +677,10 @@ public class PluginPackageUtil {
 		try {
 			PluginPackageIndexer.updatePluginPackage(
 				pluginPackage.getModuleId(), pluginPackage.getName(),
-				pluginPackage.getVersion(), pluginPackage.getAuthor(),
-				pluginPackage.getTypes(), pluginPackage.getTags(),
-				pluginPackage.getLicenses(), pluginPackage.getLiferayVersions(),
+				pluginPackage.getVersion(), pluginPackage.getModifiedDate(),
+				pluginPackage.getAuthor(), pluginPackage.getTypes(),
+				pluginPackage.getTags(), pluginPackage.getLicenses(),
+				pluginPackage.getLiferayVersions(),
 				pluginPackage.getShortDescription(),
 				pluginPackage.getLongDescription(),
 				pluginPackage.getChangeLog(), pluginPackage.getPageURL(),
@@ -823,6 +831,23 @@ public class PluginPackageUtil {
 		}
 
 		return pluginPackageRepository;
+	}
+
+	private static Date _readDate(String text) {
+		if (Validator.isNotNull(text)) {
+			DateFormat dateFormat = new SimpleDateFormat(Time.RFC822_FORMAT);
+
+			try {
+				return dateFormat.parse(text);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Unable to parse date " + text);
+				}
+			}
+		}
+
+		return new Date();
 	}
 
 	private static String _readHtml(String text) {

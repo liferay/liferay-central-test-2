@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -109,6 +110,14 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 		String recommendedDeploymentContext) {
 
 		_recommendedDeploymentContext = recommendedDeploymentContext;
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getAuthor() {
@@ -308,6 +317,7 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 	private ModuleId _moduleId;
 	private String _recommendedDeploymentContext;
 	private String _name;
+	private Date _modifiedDate;
 	private String _author;
 	private List _types = new ArrayList();
 	private List _tags = new ArrayList();

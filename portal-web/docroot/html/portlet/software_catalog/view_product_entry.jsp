@@ -148,7 +148,7 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="release-date" />:
+				<liferay-ui:message key="modified-date" />:
 			</td>
 			<td>
 				<%= dateFormatDateTime.format(latestProductVersion.getModifiedDate()) %>
@@ -269,7 +269,7 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 
 		headerNames.add("version");
 		headerNames.add("supported-framework-versions");
-		headerNames.add("release-date");
+		headerNames.add("modified-date");
 		headerNames.add(StringPool.BLANK);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, viewProductVersionURL, headerNames, null);
