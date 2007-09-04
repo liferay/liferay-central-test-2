@@ -562,8 +562,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long companyId, String emailAddress)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getUserByEmailAddress(
-			companyId, emailAddress);
+		User user = getUserByEmailAddress(companyId, emailAddress);
 
 		checkLoginFailure(user);
 	}
@@ -579,8 +578,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void checkLoginFailureByScreenName(long companyId, String screenName)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getUserByScreenName(
-			companyId, screenName);
+		User user = getUserByScreenName(companyId, screenName);
 
 		checkLoginFailure(user);
 	}
@@ -1307,8 +1305,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long companyId, String emailAddress, boolean lockout)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getUserByEmailAddress(
-			companyId, emailAddress);
+		User user = getUserByEmailAddress(companyId, emailAddress);
 
 		return updateLockout(user, lockout);
 	}
@@ -1325,8 +1322,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long companyId, String screenName, boolean lockout)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getUserByScreenName(
-			companyId, screenName);
+		User user = getUserByScreenName(companyId, screenName);
 
 		return updateLockout(user, lockout);
 	}
@@ -1423,10 +1419,29 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
+	public User updatePasswordManually(
+			long userId, String password, boolean passwordEncrypted,
+			boolean passwordReset, Date passwordModifiedDate)
+		throws PortalException, SystemException {
+
+		// This method should only be used to manually massage data
+
+		User user = UserUtil.findByPrimaryKey(userId);
+
+		user.setPassword(password);
+		user.setPasswordEncrypted(passwordEncrypted);
+		user.setPasswordReset(passwordReset);
+		user.setPasswordModifiedDate(passwordModifiedDate);
+
+		UserUtil.update(user);
+
+		return user;
+	}
+
 	public void updatePasswordReset(long userId, boolean passwordReset)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getUserById(userId);
+		User user = getUserById(userId);
 
 		user.setPasswordReset(passwordReset);
 

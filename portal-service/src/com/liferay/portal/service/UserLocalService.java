@@ -359,6 +359,12 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.User updatePasswordManually(long userId,
+		java.lang.String password, boolean passwordEncrypted,
+		boolean passwordReset, java.util.Date passwordModifiedDate)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void updatePasswordReset(long userId, boolean passwordReset)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

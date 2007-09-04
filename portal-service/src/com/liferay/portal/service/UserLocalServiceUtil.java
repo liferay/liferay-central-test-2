@@ -626,6 +626,17 @@ public class UserLocalServiceUtil {
 			passwordReset, silentUpdate);
 	}
 
+	public static com.liferay.portal.model.User updatePasswordManually(
+		long userId, java.lang.String password, boolean passwordEncrypted,
+		boolean passwordReset, java.util.Date passwordModifiedDate)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.updatePasswordManually(userId, password,
+			passwordEncrypted, passwordReset, passwordModifiedDate);
+	}
+
 	public static void updatePasswordReset(long userId, boolean passwordReset)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
