@@ -232,10 +232,10 @@ if (fileEntry == null) {
 <c:if test="<%= (fileEntry != null) && ((isLocked.booleanValue() && hasLock.booleanValue()) || !isLocked.booleanValue()) %>">
 	<c:choose>
 		<c:when test="<%= !hasLock.booleanValue() %>">
-			<input type="button" value="<liferay-ui:message key="lock" />" onClick="parent.location = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>';" />
+			<input type="button" value="<liferay-ui:message key="lock" />" onClick="parent.<portlet:namespace />lock();" />
 		</c:when>
 		<c:otherwise>
-			<input type="button" value="<liferay-ui:message key="unlock" />" onClick="parent.location = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>';" />
+			<input type="button" value="<liferay-ui:message key="unlock" />" onClick="parent.<portlet:namespace />unlock();" />
 		</c:otherwise>
 	</c:choose>
 </c:if>

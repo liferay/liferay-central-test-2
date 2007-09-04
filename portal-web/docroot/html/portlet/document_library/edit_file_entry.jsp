@@ -65,6 +65,16 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("name", name);
 %>
 
+<script type="text/javascript">
+	function <portlet:namespace />lock() {
+		self.location = "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>";
+	}
+
+	function <portlet:namespace />unlock() {
+		self.location = "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>";
+	}
+</script>
+
 <c:if test="<%= isLocked.booleanValue() %>">
 	<c:choose>
 		<c:when test="<%= hasLock.booleanValue() %>">
@@ -83,8 +93,6 @@ portletURL.setParameter("name", name);
 			</span>
 		</c:otherwise>
 	</c:choose>
-
-	<br /><br />
 </c:if>
 
 <liferay-ui:tabs
