@@ -316,6 +316,10 @@ public class LayoutTypePortletImpl
 				portletId = portletId + getFullInstanceSeparator();
 			}
 
+			if (hasPortletId(portletId)) {
+				return null;
+			}
+
 			if (columnId == null) {
 				LayoutTemplate layoutTemplate = getLayoutTemplate();
 
