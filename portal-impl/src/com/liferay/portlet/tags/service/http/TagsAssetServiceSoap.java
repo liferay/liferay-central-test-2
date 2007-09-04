@@ -101,5 +101,19 @@ public class TagsAssetServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAssetSoap[] getCompanyAssets(
+		long companyId, int begin, int end) throws RemoteException {
+		try {
+			java.util.List returnValue = TagsAssetServiceUtil.getCompanyAssets(companyId,
+					begin, end);
+
+			return com.liferay.portlet.tags.model.TagsAssetSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(TagsAssetServiceSoap.class);
 }

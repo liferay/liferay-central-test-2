@@ -64,4 +64,12 @@ public class TagsAssetServiceUtil {
 
 		return tagsAssetService.getAsset(assetId);
 	}
+
+	public static java.util.List getCompanyAssets(long companyId, int begin,
+		int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
+
+		return tagsAssetService.getCompanyAssets(companyId, begin, end);
+	}
 }

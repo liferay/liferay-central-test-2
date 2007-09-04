@@ -29,6 +29,8 @@ import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetService;
 
+import java.util.List;
+
 /**
  * <a href="TagsAssetServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -48,6 +50,13 @@ public class TagsAssetServiceImpl
 		throws PortalException, SystemException {
 
 		return TagsAssetLocalServiceUtil.getAsset(assetId);
+	}
+
+	public List getCompanyAssets(long companyId, int begin, int end)
+		throws SystemException {
+
+		return TagsAssetLocalServiceUtil.getCompanyAssets(
+			companyId, begin, end);
 	}
 
 }

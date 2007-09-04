@@ -210,6 +210,185 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List findByCompanyId(long companyId) throws SystemException {
+		String finderClassName = TagsAsset.class.getName();
+		String finderMethodName = "findByCompanyId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.tags.model.TagsAsset WHERE ");
+				query.append("companyId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public List findByCompanyId(long companyId, int begin, int end)
+		throws SystemException {
+		return findByCompanyId(companyId, begin, end, null);
+	}
+
+	public List findByCompanyId(long companyId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		String finderClassName = TagsAsset.class.getName();
+		String finderMethodName = "findByCompanyId";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.tags.model.TagsAsset WHERE ");
+				query.append("companyId = ?");
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public TagsAsset findByCompanyId_First(long companyId, OrderByComparator obc)
+		throws NoSuchAssetException, SystemException {
+		List list = findByCompanyId(companyId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No TagsAsset exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchAssetException(msg.toString());
+		}
+		else {
+			return (TagsAsset)list.get(0);
+		}
+	}
+
+	public TagsAsset findByCompanyId_Last(long companyId, OrderByComparator obc)
+		throws NoSuchAssetException, SystemException {
+		int count = countByCompanyId(companyId);
+		List list = findByCompanyId(companyId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No TagsAsset exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchAssetException(msg.toString());
+		}
+		else {
+			return (TagsAsset)list.get(0);
+		}
+	}
+
+	public TagsAsset[] findByCompanyId_PrevAndNext(long assetId,
+		long companyId, OrderByComparator obc)
+		throws NoSuchAssetException, SystemException {
+		TagsAsset tagsAsset = findByPrimaryKey(assetId);
+		int count = countByCompanyId(companyId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portlet.tags.model.TagsAsset WHERE ");
+			query.append("companyId = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setLong(queryPos++, companyId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					tagsAsset);
+			TagsAsset[] array = new TagsAssetImpl[3];
+			array[0] = (TagsAsset)objArray[0];
+			array[1] = (TagsAsset)objArray[1];
+			array[2] = (TagsAsset)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public TagsAsset findByC_C(long classNameId, long classPK)
 		throws NoSuchAssetException, SystemException {
 		TagsAsset tagsAsset = fetchByC_C(classNameId, classPK);
@@ -396,6 +575,15 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByCompanyId(long companyId) throws SystemException {
+		Iterator itr = findByCompanyId(companyId).iterator();
+
+		while (itr.hasNext()) {
+			TagsAsset tagsAsset = (TagsAsset)itr.next();
+			remove(tagsAsset);
+		}
+	}
+
 	public void removeByC_C(long classNameId, long classPK)
 		throws NoSuchAssetException, SystemException {
 		TagsAsset tagsAsset = findByC_C(classNameId, classPK);
@@ -407,6 +595,59 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			remove((TagsAsset)itr.next());
+		}
+	}
+
+	public int countByCompanyId(long companyId) throws SystemException {
+		String finderClassName = TagsAsset.class.getName();
+		String finderMethodName = "countByCompanyId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.tags.model.TagsAsset WHERE ");
+				query.append("companyId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, companyId);
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

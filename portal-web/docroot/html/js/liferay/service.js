@@ -2075,6 +2075,13 @@ Liferay.Service.Tags.TagsAsset = {
 		params.serviceMethodName = "getAsset";
 
 		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCompanyAssets: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCompanyAssets";
+
+		return Liferay.Service.ajax(params, callback);
 	}
 };
 

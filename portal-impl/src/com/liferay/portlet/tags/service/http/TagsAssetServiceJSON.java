@@ -24,6 +24,7 @@ package com.liferay.portlet.tags.service.http;
 
 import com.liferay.portlet.tags.service.TagsAssetServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -80,5 +81,13 @@ public class TagsAssetServiceJSON {
 		com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.getAsset(assetId);
 
 		return TagsAssetJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONArray getCompanyAssets(long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		java.util.List returnValue = TagsAssetServiceUtil.getCompanyAssets(companyId,
+				begin, end);
+
+		return TagsAssetJSONSerializer.toJSONArray(returnValue);
 	}
 }

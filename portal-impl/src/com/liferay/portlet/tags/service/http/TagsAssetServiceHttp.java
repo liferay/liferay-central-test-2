@@ -24,6 +24,7 @@ package com.liferay.portlet.tags.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -124,6 +125,37 @@ public class TagsAssetServiceHttp {
 			}
 
 			return (com.liferay.portlet.tags.model.TagsAsset)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static java.util.List getCompanyAssets(HttpPrincipal httpPrincipal,
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+			Object paramObj1 = new IntegerWrapper(begin);
+			Object paramObj2 = new IntegerWrapper(end);
+			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
+					"getCompanyAssets",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

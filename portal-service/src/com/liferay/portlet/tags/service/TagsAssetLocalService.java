@@ -95,6 +95,9 @@ public interface TagsAssetLocalService {
 		java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getCompanyAssets(long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
 		java.lang.String className, long classPK, java.lang.String[] entryNames)
 		throws com.liferay.portal.SystemException, 

@@ -148,6 +148,45 @@ public class TagsAssetUtil {
 		return getPersistence().fetchByPrimaryKey(assetId);
 	}
 
+	public static java.util.List findByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId);
+	}
+
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, begin, end);
+	}
+
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAsset findByCompanyId_First(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchAssetException {
+		return getPersistence().findByCompanyId_First(companyId, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAsset findByCompanyId_Last(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchAssetException {
+		return getPersistence().findByCompanyId_Last(companyId, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAsset[] findByCompanyId_PrevAndNext(
+		long assetId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchAssetException {
+		return getPersistence().findByCompanyId_PrevAndNext(assetId, companyId,
+			obc);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAsset findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
@@ -190,6 +229,11 @@ public class TagsAssetUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByCompanyId(companyId);
+	}
+
 	public static void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.tags.NoSuchAssetException {
@@ -198,6 +242,11 @@ public class TagsAssetUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByCompanyId(companyId);
 	}
 
 	public static int countByC_C(long classNameId, long classPK)

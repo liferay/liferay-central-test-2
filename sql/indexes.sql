@@ -249,6 +249,7 @@ create index IX_2E1A92D4 on Subscription (companyId, userId, classNameId, classP
 create index IX_54243AFD on Subscription (userId);
 
 create index IX_1AB6D6D2 on TagsAsset (classNameId, classPK);
+create index IX_AB3D8BCB on TagsAsset (companyId);
 
 create index IX_10563688 on TagsEntry (companyId, name);
 

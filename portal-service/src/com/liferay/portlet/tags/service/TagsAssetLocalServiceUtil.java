@@ -142,6 +142,13 @@ public class TagsAssetLocalServiceUtil {
 			andOperator, publishDate, expirationDate);
 	}
 
+	public static java.util.List getCompanyAssets(long companyId, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getCompanyAssets(companyId, begin, end);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
 		long userId, java.lang.String className, long classPK,
 		java.lang.String[] entryNames)
