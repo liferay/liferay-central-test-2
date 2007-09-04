@@ -218,6 +218,11 @@ public class FileUtil {
 		return file.exists();
 	}
 
+	public static String getAbsolutePath(File file) {
+		return StringUtil.replace(
+			file.getAbsolutePath(), StringPool.BACK_SLASH, StringPool.SLASH);
+	}
+
 	public static byte[] getBytes(File file) throws IOException {
 		if ((file == null) || !file.exists()) {
 			return null;
@@ -274,11 +279,6 @@ public class FileUtil {
 		out.close();
 
 		return out.toByteArray();
-	}
-
-	public static String getAbsolutePath(File file) {
-		return StringUtil.replace(
-			file.getAbsolutePath(), StringPool.BACK_SLASH, StringPool.SLASH);
 	}
 
 	public static String getExtension(String fileName) {

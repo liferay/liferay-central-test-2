@@ -807,6 +807,8 @@ public class PropsUtil {
 
 	public static final String DL_HOOK_IMPL = "dl.hook.impl";
 
+	public static final String DL_HOOK_FILE_SYSTEM_ROOT_DIR = "dl.hook.file.system.root.dir";
+
     public static final String DL_HOOK_S3_ACCESS_KEY = "dl.hook.s3.access.key";
 
 	public static final String DL_HOOK_S3_SECRET_KEY = "dl.hook.s3.secret.key";
@@ -816,8 +818,6 @@ public class PropsUtil {
 	public static final String DL_FILE_MAX_SIZE = "dl.file.max.size";
 
 	public static final String DL_FILE_EXTENSIONS = "dl.file.extensions";
-
-	public static final String DL_VERSION_CACHE_DIRECTORY_VIEWS = "dl.version.cache.directory.views";
 
 	public static final String DL_LAYOUTS_SYNC_ENABLED = "dl.layouts.sync.enabled";
 

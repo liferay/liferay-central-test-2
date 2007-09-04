@@ -229,11 +229,12 @@ public class S3Hook extends BaseHook {
 		throws PortalException, SystemException {
 
 		try {
-			double version = getHeadVersionNumber(
+			double versionNumber = getHeadVersionNumber(
 				companyId, repositoryId, fileName);
 
 			S3Object objectDetails = _s3Service.getObjectDetails(
-				_s3Bucket, getKey(companyId, repositoryId, fileName, version));
+				_s3Bucket,
+				getKey(companyId, repositoryId, fileName, versionNumber));
 
 			return objectDetails.getContentLength();
 		}
@@ -292,7 +293,7 @@ public class S3Hook extends BaseHook {
 			while (itr.hasNext()) {
 				String fileName = (String)itr.next();
 
-				Indexer.addFile(
+				IndexerImpl.addFile(
 					companyId, portletId, groupId, repositoryId, fileName);
 			}
 		}
@@ -302,16 +303,6 @@ public class S3Hook extends BaseHook {
 		catch (S3ServiceException s3se) {
 			throw new SearchException(s3se);
 		}
-	}
-
-	protected Object getFileName(String key) {
-		int x = key.indexOf(StringPool.SLASH);
-
-		x = key.indexOf(StringPool.SLASH, x + 1);
-
-		int y = key.lastIndexOf(StringPool.SLASH);
-
-		return key.substring(x + 1, y);
 	}
 
 	public void updateFile(
@@ -417,6 +408,16 @@ public class S3Hook extends BaseHook {
 		else {
 			return new AWSCredentials(_ACCESS_KEY, _SECRET_KEY);
 		}
+	}
+
+	protected Object getFileName(String key) {
+		int x = key.indexOf(StringPool.SLASH);
+
+		x = key.indexOf(StringPool.SLASH, x + 1);
+
+		int y = key.lastIndexOf(StringPool.SLASH);
+
+		return key.substring(x + 1, y);
 	}
 
 	protected double getHeadVersionNumber(
