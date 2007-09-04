@@ -87,6 +87,9 @@ public class FileSystemHook extends BaseHook {
 			}
 
 			FileUtil.write(fileNameVersionFile, is);
+
+			Indexer.addFile(
+				companyId, portletId, groupId, repositoryId, fileName);
 		}
 		catch (IOException ioe) {
 			throw new SystemException();
