@@ -168,4 +168,13 @@ public class MBThreadLocalServiceUtil {
 
 		return mbThreadLocalService.hasReadThread(userId, threadId);
 	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread updateThread(
+		long threadId, int viewCount)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.updateThread(threadId, viewCount);
+	}
 }

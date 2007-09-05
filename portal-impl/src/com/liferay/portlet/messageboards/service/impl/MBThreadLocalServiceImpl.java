@@ -249,6 +249,18 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 	}
 
+	public MBThread updateThread(long threadId, int viewCount)
+		throws PortalException, SystemException {
+
+		MBThread thread = MBThreadUtil.findByPrimaryKey(threadId);
+
+		thread.setViewCount(viewCount);
+
+		MBThreadUtil.update(thread);
+
+		return thread;
+	}
+
 	private static Log _log = LogFactory.getLog(MBThreadLocalServiceImpl.class);
 
 }
