@@ -23967,7 +23967,7 @@ Liferay.TagsSelector = new Class({
 					curTags = curTags.sort();
 					textInput.val('');
 
-					instance._update(instance);
+					instance._update();
 				}
 		);
 
@@ -23988,11 +23988,13 @@ Liferay.TagsSelector = new Class({
 		if (params.curTags != '') {
 			instance._curTags = params.curTags.split(',');
 
-			instance._update(instance);
+			instance._update();
 		}
 	},
 
-	deleteTag: function(instance, id) {
+	deleteTag: function(id) {
+		var instance = this;
+
 		var params = instance.params;
 		var curTags = instance._curTags;
 
@@ -24004,7 +24006,7 @@ Liferay.TagsSelector = new Class({
 			jQuery('input[@type=checkbox][@value$=' + value + ']', instance.selectTagPopup).attr('checked', false);
 		}
 
-		instance._update(instance);
+		instance._update();
 	},
 
 	_getTags: function(data) {
@@ -24076,7 +24078,7 @@ Liferay.TagsSelector = new Class({
 					}
 				);
 
-				instance._update(instance);
+				instance._update();
 				Liferay.Popup.close(instance.selectTagPopup);
 				instance._popupVisible = false;
 			}
@@ -24110,12 +24112,16 @@ Liferay.TagsSelector = new Class({
 		}
 	},
 
-	_update: function(instance) {
-		instance._updateHiddenInput(instance);
-		instance._updateSummarySpan(instance);
+	_update: function() {
+		var instance = this;
+		
+		instance._updateHiddenInput();
+		instance._updateSummarySpan();
 	},
 
-	_updateHiddenInput: function(instance) {
+	_updateHiddenInput: function() {
+		var instance = this;
+
 		var params = instance.params;
 		var curTags = instance._curTags;
 
@@ -24124,7 +24130,9 @@ Liferay.TagsSelector = new Class({
 		hiddenInput.val(curTags.join(','));
 	},
 
-	_updateSummarySpan: function(instance) {
+	_updateSummarySpan: function() {
+		var instance = this;
+		
 		var params = instance.params;
 		var curTags = instance._curTags;
 
@@ -24134,7 +24142,7 @@ Liferay.TagsSelector = new Class({
 			function(i, curTag) {
 				html += '<span id="' + params.instanceVar + 'CurTags' + i + '">';
 				html += curTag + ' ';
-				html += '[<a href="javascript: ' + params.instanceVar + '.deleteTag(' + params.instanceVar + ', ' + i + ');">x</a>]';
+				html += '[<a href="javascript: ' + params.instanceVar + '.deleteTag(' + i + ');">x</a>]';
 
 				if ((i + 1) < curTags.length) {
 					html += ', ';
