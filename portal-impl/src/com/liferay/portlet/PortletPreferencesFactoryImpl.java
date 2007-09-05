@@ -29,14 +29,18 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -179,6 +183,9 @@ public class PortletPreferencesFactoryImpl
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletId);
 
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
 		long ownerId = 0;
 		int ownerType = 0;
 		long plid = 0;
@@ -194,8 +201,11 @@ public class PortletPreferencesFactoryImpl
 		}
 
 		if (modeEditGuest) {
-			if (!layout.isPrivateLayout() &&
-				themeDisplay.isShowAddContentIcon()) {
+
+			boolean hasUpdateLayoutPermission =
+				LayoutPermissionUtil.contains(
+					permissionChecker, layout, ActionKeys.UPDATE);
+			if (!layout.isPrivateLayout() && hasUpdateLayoutPermission) {
 
 			}
 			else {
