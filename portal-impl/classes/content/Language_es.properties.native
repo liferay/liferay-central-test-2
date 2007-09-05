@@ -2256,6 +2256,7 @@ select-folder=Seleccionar carpeta
 select-option=Seleccionar opción
 select-portlet=Seleccionar portlet
 select-recipients=Seleccionar destinatarios
+select-tags=Seleccione Las Etiquetas
 select-the-action-that-this-role-can-perform-on-the-x-portlet=Select the action that this role can perform on the <i>{0}</i> portlet.
 select-the-action-that-this-role-can-perform-on-the-x-resource=Select the action that this role can perform on the <i>{0}</i> resource.
 select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-portlet=Seleccione las comunidades en las que este rol puede llevar acabo sobre la acción <i>{0}</i> sobre el portlet {1}.

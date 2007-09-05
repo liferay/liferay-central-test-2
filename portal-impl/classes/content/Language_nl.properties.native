@@ -2256,6 +2256,7 @@ select-folder=Selecteer Map
 select-option=Selecteer Optie
 select-portlet=Selecteer Portlet
 select-recipients=Selecteer Ontvangers
+select-tags=Selecteer Markeringen
 select-the-action-that-this-role-can-perform-on-the-x-portlet=Select the action that this role can perform on the <i>{0}</i> portlet.
 select-the-action-that-this-role-can-perform-on-the-x-resource=Select the action that this role can perform on the <i>{0}</i> resource.
 select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-portlet=Select the communities where this role can perform the <i>{0}</i> action on the {1} portlet.

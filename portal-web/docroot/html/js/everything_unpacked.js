@@ -23922,6 +23922,10 @@ Liferay.TagsSelector = new Class({
 			}
 		);
 
+		instance._popupVisible = false;
+		
+		instance._setupSelectTags();
+
         var addTagButton = jQuery('#' + params.addTagButton);
 
         addTagButton.click(
@@ -23929,14 +23933,19 @@ Liferay.TagsSelector = new Class({
 				    var curTags = instance._curTags;
                     var newTags = textInput.val().split(",");
 
-                    jQuery.each(newTags, function (i, n) {
-                        n = jQuery.trim(n);
-                        if (curTags.indexOf(n) == -1) {
-                            if ( n != "") {
-                                curTags.push(n);
-                            }                           
-                        }
-                    });
+                    jQuery.each(newTags, 
+						function (i, n) {
+							n = jQuery.trim(n);
+							if (curTags.indexOf(n) == -1) {
+								if ( n != "") {
+									curTags.push(n);
+									if (instance._popupVisible) {
+										jQuery('input[@type=checkbox][@value$=' + n + ']', instance.selectTagPopup).attr('checked', true);
+									}
+								}                           
+							}
+                    	}
+					);
 
                     curTags = curTags.sort();
                     textInput.val('');
@@ -23972,12 +23981,20 @@ Liferay.TagsSelector = new Class({
 
 		jQuery('#' + params.instanceVar + 'CurTags' + id).remove();
 
-		curTags.splice(id, 1);
+		var value = curTags.splice(id, 1);
+		
+		if (instance._popupVisible) {
+			jQuery('input[@type=checkbox][@value$=' + value + ']', instance.selectTagPopup).attr('checked', false);
+		}
 
 		instance._update(instance);
 	},
 
 	_getTags: function(data) {
+		var beginning = data.start || 0;
+		var end = data.end || 20;
+		data.value = data.value || '';
+
 		return Liferay.Service.Tags.TagsEntry.searchAutocomplete(
 			{
 				companyId: themeDisplay.getCompanyId(),
@@ -23987,6 +24004,84 @@ Liferay.TagsSelector = new Class({
 				end: 20
 			}
 		);
+	},
+
+	_setupSelectTags: function() {
+		var instance = this;
+		
+		var params = instance.params;
+		var ns = params.instanceVar;
+		
+		var input = jQuery('#' + ns + 'selectTag');
+
+		input.click(
+			function() {
+				instance._showSelectPopup();
+			}
+		);
+	},
+	
+	_showSelectPopup: function() {
+		var instance = this;
+		
+		var params = instance.params;
+		var ns = params.instanceVar;
+		var mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
+		var container = jQuery('<div class="lfr-tag-container"></div>');
+		
+		var tags = instance._getTags({end: 1000});
+		jQuery.each(tags, 
+			function(i, n) {
+				var checked = (instance._curTags.indexOf(this.value) > -1) ? ' checked="checked"' : '';
+				var label = '<label title="' + this.text + '">'
+							+ '<input' + checked + ' type="checkbox" name="' + ns + 'input' + i + '" id="' + ns + 'input' + i + '" value="' + this.value + '" />'
+							+ '<a class="lfr-label-text" href="javascript: ;">' + this.text + '</a>'
+							+ '</label>';
+				container.append(label);
+			}
+		);
+
+		var saveBtn = jQuery('<input class="submit lfr-save-button" id="' + ns + 'saveButton" type="submit" value="' + Liferay.Language.get('save') + '" />');
+		
+		saveBtn.click(
+			function() {
+				instance._curTags = [];
+				container.find('input:checked').each(
+					function(){
+						instance._curTags.push(this.value);
+					}
+				);
+				instance._update(instance);
+				Liferay.Popup.close(instance.selectTagPopup);
+				instance._popupVisible = false;
+			}
+		);
+		
+		mainContainer.append(container).append(saveBtn);
+		
+		var popup = Liferay.Popup(
+			{
+				modal: false,
+				height: 300,
+				width: 400,
+				message: mainContainer[0],
+				onClose: function() {
+					instance._popupVisible = false;
+				}
+			}
+		);
+		
+		instance.selectTagPopup = popup;
+		instance._popupVisible = true;
+		if (Liferay.Browser.is_ie) {
+			jQuery('.lfr-label-text', popup).click(
+				function() {
+					var input = jQuery(this.previousSibling);
+					var checkedState = !input.is(':checked');
+					input.attr('checked', checkedState);
+				}
+			);
+		}
 	},
 
 	_update: function(instance) {

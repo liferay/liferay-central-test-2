@@ -2256,6 +2256,7 @@ select-folder=Ordner ausw�hlen
 select-option=Option ausw�hlen
 select-portlet=Portlet ausw�hlen
 select-recipients=Empf�nger ausw�hlen
+select-tags=Wählen Sie Umbauten Vor
 select-the-action-that-this-role-can-perform-on-the-x-portlet=Aktion ausw�hlen, die mit dieser Rolle im Portlet <i>{0}</i> ausgef�hrt werden darf.
 select-the-action-that-this-role-can-perform-on-the-x-resource=Aktion ausw�hlen, die mit dieser Rolle auf Ressource <i>{0}</i> ausgef�hrt werden darf.
 select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-portlet=Gemeinschaften ausw�hlen, in der diese Rolle die Aktion <i>{0}</i> im Portlet {1} ausf�hren darf.

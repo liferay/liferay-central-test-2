@@ -2255,6 +2255,7 @@ select-folder=폴더를 선정하십시요
 select-option=선택권을 선정하십시요
 select-portlet=Portlet을 선정하십시요
 select-recipients=수령인을 선정하십시요
+select-tags=꼬리표를 선정하십시요
 select-the-action-that-this-role-can-perform-on-the-x-portlet=Select the action that this role can perform on the <i>{0}</i> portlet.
 select-the-action-that-this-role-can-perform-on-the-x-resource=Select the action that this role can perform on the <i>{0}</i> resource.
 select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-portlet=Select the communities where this role can perform the <i>{0}</i> action on the {1} portlet.

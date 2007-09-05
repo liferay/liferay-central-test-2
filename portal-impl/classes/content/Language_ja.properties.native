@@ -2252,6 +2252,7 @@ select-folder=ホールダーを選びなさい
 select-option=選択を選びなさい
 select-portlet=Portlet を選びなさい
 select-recipients=受け手を選びなさい
+select-tags=札を選びなさい
 select-the-action-that-this-role-can-perform-on-the-x-portlet=Select the action that this role can perform on the <i>{0}</i> portlet.
 select-the-action-that-this-role-can-perform-on-the-x-resource=Select the action that this role can perform on the <i>{0}</i> resource.
 select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-portlet=Select the communities where this role can perform the <i>{0}</i> action on the {1} portlet.

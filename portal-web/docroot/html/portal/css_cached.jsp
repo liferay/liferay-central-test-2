@@ -488,6 +488,39 @@ ul.gamma .tree-item-hover {
 
 /* ---------- Portal ---------- */
 
+/* ---------- Tag selector styling ---------- */
+.lfr-tag-select-container {
+	position: relative;
+	width: 400px;
+	height: 300px;
+}
+.lfr-tag-container{
+	width: 395px;
+	height: 260px;
+	overflow: auto;
+}
+
+.lfr-tag-container label {
+	display: block;
+	width: 25%;
+	cursor: pointer;
+	float: left;
+	margin-bottom: 5px;
+	white-space: pre;
+	overflow: hidden;
+	margin-right: 5px;
+}
+
+.lfr-tag-container label input {
+	margin-right: 5px;
+}
+
+.lfr-tag-select-container .save-button{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
 /* ---------- Generic styling ---------- */
 
 .popup-alert-notice, .popup-alert-warning {
