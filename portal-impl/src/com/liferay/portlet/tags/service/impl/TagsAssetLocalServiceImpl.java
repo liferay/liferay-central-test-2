@@ -26,11 +26,13 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
+import com.liferay.portlet.tags.model.TagsAssetDisplay;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsAssetLocalServiceBaseImpl;
@@ -41,6 +43,7 @@ import com.liferay.portlet.tags.util.TagsAssetValidator;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -137,22 +140,37 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		}
 	}
 
+	public TagsAssetDisplay[] getCompanyAssetDisplays(
+			long companyId, int begin, int end)
+		throws PortalException, SystemException {
+
+		return getAssetDisplays(getCompanyAssets(companyId, begin, end));
+	}
+
 	public List getCompanyAssets(long companyId, int begin, int end)
 		throws SystemException {
 
 		return TagsAssetUtil.findByCompanyId(companyId, begin, end);
 	}
 
+	public int getCompanyAssetsCount(long companyId) throws SystemException {
+		return TagsAssetUtil.countByCompanyId(companyId);
+	}
+
 	public TagsAsset updateAsset(
 			long userId, String className, long classPK, String[] entryNames)
 		throws PortalException, SystemException {
 
-		return updateAsset(userId, className, classPK, entryNames, null, null);
+		return updateAsset(
+			userId, className, classPK, entryNames, null, null, null, null,
+			null, null, null, null, null, 0, 0);
 	}
 
 	public TagsAsset updateAsset(
 			long userId, String className, long classPK, String[] entryNames,
-			Date publishDate, Date expirationDate)
+			Date startDate, Date endDate, Date publishDate, Date expirationDate,
+			String mimeType, String title, String description, String summary,
+			String url, int height, int width)
 		throws PortalException, SystemException {
 
 		// Asset
@@ -181,8 +199,17 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		}
 
 		asset.setModifiedDate(now);
+		asset.setStartDate(startDate);
+		asset.setEndDate(endDate);
 		asset.setPublishDate(publishDate);
 		asset.setExpirationDate(expirationDate);
+		asset.setMimeType(mimeType);
+		asset.setTitle(title);
+		asset.setDescription(description);
+		asset.setSummary(summary);
+		asset.setUrl(url);
+		asset.setHeight(height);
+		asset.setWidth(width);
 
 		TagsAssetUtil.update(asset);
 
@@ -220,6 +247,63 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			PropsUtil.get(PropsUtil.TAGS_ASSET_VALIDATOR));
 
 		validator.validate(className, entryNames);
+	}
+
+	protected TagsAssetDisplay[] getAssetDisplays(List assets)
+		throws PortalException, SystemException {
+
+		TagsAssetDisplay[] assetDisplays = new TagsAssetDisplay[assets.size()];
+
+		for (int i = 0; i < assets.size(); i++) {
+			TagsAsset asset = (TagsAsset)assets.get(i);
+
+			String className = PortalUtil.getClassName(asset.getClassNameId());
+
+			StringMaker sm = new StringMaker();
+
+			Iterator itr = TagsAssetUtil.getTagsEntries(
+				asset.getAssetId()).iterator();
+
+			while (itr.hasNext()) {
+				TagsEntry entry = (TagsEntry)itr.next();
+
+				sm.append(entry.getName());
+
+				if (itr.hasNext()) {
+					sm.append(", ");
+				}
+			}
+
+			String tagsEntries = sm.toString();
+
+			TagsAssetDisplay assetDisplay = new TagsAssetDisplay();
+
+			assetDisplay.setAssetId(asset.getAssetId());
+			assetDisplay.setCompanyId(asset.getCompanyId());
+			assetDisplay.setUserId(asset.getUserId());
+			assetDisplay.setUserName(asset.getUserName());
+			assetDisplay.setCreateDate(asset.getCreateDate());
+			assetDisplay.setModifiedDate(asset.getModifiedDate());
+			assetDisplay.setClassNameId(asset.getClassNameId());
+			assetDisplay.setClassName(className);
+			assetDisplay.setClassPK(asset.getClassPK());
+			assetDisplay.setStartDate(asset.getStartDate());
+			assetDisplay.setEndDate(asset.getEndDate());
+			assetDisplay.setPublishDate(asset.getPublishDate());
+			assetDisplay.setExpirationDate(asset.getExpirationDate());
+			assetDisplay.setMimeType(asset.getMimeType());
+			assetDisplay.setTitle(asset.getTitle());
+			assetDisplay.setDescription(asset.getDescription());
+			assetDisplay.setSummary(asset.getSummary());
+			assetDisplay.setUrl(asset.getUrl());
+			assetDisplay.setHeight(asset.getHeight());
+			assetDisplay.setWidth(asset.getWidth());
+			assetDisplay.setTagsEntries(tagsEntries);
+
+			assetDisplays[i] = assetDisplay;
+		}
+
+		return assetDisplays;
 	}
 
 }

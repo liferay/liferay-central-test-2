@@ -83,11 +83,28 @@ public class TagsAssetServiceJSON {
 		return TagsAssetJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portlet.tags.model.TagsAssetDisplay[] returnValue = TagsAssetServiceUtil.getCompanyAssetDisplays(companyId,
+				begin, end);
+
+		return returnValue;
+	}
+
 	public static JSONArray getCompanyAssets(long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		java.util.List returnValue = TagsAssetServiceUtil.getCompanyAssets(companyId,
 				begin, end);
 
 		return TagsAssetJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static int getCompanyAssetsCount(long companyId)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		int returnValue = TagsAssetServiceUtil.getCompanyAssetsCount(companyId);
+
+		return returnValue;
 	}
 }

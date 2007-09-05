@@ -26,6 +26,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
@@ -464,11 +465,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Tags
 
-		if (tagsEntries != null) {
-			TagsAssetLocalServiceUtil.updateAsset(
-				userId, WikiPage.class.getName(), page.getResourcePrimKey(),
-				tagsEntries);
-		}
+		updateAsset(page, tagsEntries);
 
 		// Lucene
 
@@ -481,6 +478,16 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		return page;
+	}
+
+	protected void updateAsset(WikiPage page, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			page.getUserId(), WikiPage.class.getName(),
+			page.getResourcePrimKey(), tagsEntries, null, null, null, null,
+			ContentTypes.TEXT_HTML, page.getTitle(), page.getTitle(),
+			page.getTitle(), null, 0, 0);
 	}
 
 	protected void validate(String title) throws PortalException {

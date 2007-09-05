@@ -37,6 +37,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -268,9 +269,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// Tags
 
-		TagsAssetLocalServiceUtil.updateAsset(
-			userId, DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-			tagsEntries);
+		updateAsset(fileEntry, tagsEntries);
 
 		// Folder
 
@@ -730,9 +729,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// Tags
 
-		TagsAssetLocalServiceUtil.updateAsset(
-			userId, DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-			tagsEntries);
+		updateAsset(fileEntry, tagsEntries);
 
 		// File version
 
@@ -832,6 +829,18 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		return name;
+	}
+
+	protected void updateAsset(DLFileEntry fileEntry, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		String mimeType = MimeTypesUtil.getContentType(fileEntry.getName());
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			fileEntry.getUserId(), DLFileEntry.class.getName(),
+			fileEntry.getFileEntryId(), tagsEntries, null, null, null, null,
+			mimeType, fileEntry.getTitle(), fileEntry.getDescription(),
+			fileEntry.getDescription(), null, 0, 0);
 	}
 
 	private static Log _log =

@@ -107,6 +107,14 @@ public interface TagsAssetModel extends BaseModel {
 
 	public void setTitle(String title);
 
+	public String getDescription();
+
+	public void setDescription(String description);
+
+	public String getSummary();
+
+	public void setSummary(String summary);
+
 	public String getUrl();
 
 	public void setUrl(String url);

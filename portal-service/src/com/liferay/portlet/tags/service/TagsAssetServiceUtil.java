@@ -65,11 +65,27 @@ public class TagsAssetServiceUtil {
 		return tagsAssetService.getAsset(assetId);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
+
+		return tagsAssetService.getCompanyAssetDisplays(companyId, begin, end);
+	}
+
 	public static java.util.List getCompanyAssets(long companyId, int begin,
 		int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
 
 		return tagsAssetService.getCompanyAssets(companyId, begin, end);
+	}
+
+	public static int getCompanyAssetsCount(long companyId)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
+
+		return tagsAssetService.getCompanyAssetsCount(companyId);
 	}
 }

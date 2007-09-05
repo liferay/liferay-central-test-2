@@ -27,6 +27,8 @@
 		<column name="expirationDate" type="Date" />
 		<column name="mimeType" type="String" />
 		<column name="title" type="String" />
+		<column name="description" type="String" />
+		<column name="summary" type="String" />
 		<column name="url" type="String" />
 		<column name="height" type="int" />
 		<column name="width" type="int" />

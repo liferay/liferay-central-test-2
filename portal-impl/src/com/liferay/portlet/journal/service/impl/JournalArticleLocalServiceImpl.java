@@ -28,6 +28,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -292,10 +293,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Tags
 
-		TagsAssetLocalServiceUtil.updateAsset(
-			userId, JournalArticle.class.getName(),
-			article.getResourcePrimKey(), tagsEntries,article.getDisplayDate(),
-			article.getExpirationDate());
+		updateAsset(article, tagsEntries);
 
 		// Email
 
@@ -1345,10 +1343,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Tags
 
-		TagsAssetLocalServiceUtil.updateAsset(
-			userId, JournalArticle.class.getName(),
-			article.getResourcePrimKey(), tagsEntries, article.getDisplayDate(),
-			article.getExpirationDate());
+		updateAsset(article, tagsEntries);
 
 		// Email
 
@@ -1729,6 +1724,17 @@ public class JournalArticleLocalServiceImpl
 		catch (PortalException pe) {
 			throw pe;
 		}
+	}
+
+	protected void updateAsset(JournalArticle article, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			article.getUserId(), JournalArticle.class.getName(),
+			article.getResourcePrimKey(), tagsEntries, null, null,
+			article.getDisplayDate(), article.getExpirationDate(),
+			ContentTypes.TEXT_HTML, article.getTitle(),
+			article.getDescription(), article.getDescription(), null, 0, 0);
 	}
 
 	protected void validate(

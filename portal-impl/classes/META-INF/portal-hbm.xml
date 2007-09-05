@@ -1248,6 +1248,8 @@
 		<property name="expirationDate" />
 		<property name="mimeType" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="summary" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="url" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="height" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="width" type="com.liferay.util.dao.hibernate.IntegerType" />

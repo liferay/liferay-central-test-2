@@ -141,6 +141,24 @@ public class TagsAssetJSONSerializer {
 			jsonObj.put("title", title.toString());
 		}
 
+		String description = model.getDescription();
+
+		if (description == null) {
+			jsonObj.put("description", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("description", description.toString());
+		}
+
+		String summary = model.getSummary();
+
+		if (summary == null) {
+			jsonObj.put("summary", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("summary", summary.toString());
+		}
+
 		String url = model.getUrl();
 
 		if (url == null) {

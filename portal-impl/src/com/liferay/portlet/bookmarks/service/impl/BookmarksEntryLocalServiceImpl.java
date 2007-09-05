@@ -25,6 +25,7 @@ package com.liferay.portlet.bookmarks.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -131,9 +132,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Tags
 
-		TagsAssetLocalServiceUtil.updateAsset(
-			userId, BookmarksEntry.class.getName(), entry.getEntryId(),
-			tagsEntries);
+		updateAsset(entry, tagsEntries);
 
 		return entry;
 	}
@@ -325,9 +324,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Tags
 
-		TagsAssetLocalServiceUtil.updateAsset(
-			entry.getUserId(), BookmarksEntry.class.getName(),
-			entry.getEntryId(), tagsEntries);
+		updateAsset(entry, tagsEntries);
 
 		return entry;
 	}
@@ -350,6 +347,16 @@ public class BookmarksEntryLocalServiceImpl
 		}
 
 		return BookmarksFolderUtil.findByPrimaryKey(folderId);
+	}
+
+	protected void updateAsset(BookmarksEntry entry, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			entry.getUserId(), BookmarksEntry.class.getName(),
+			entry.getEntryId(), tagsEntries, null, null, null, null,
+			ContentTypes.TEXT_PLAIN, entry.getName(), entry.getComments(),
+			entry.getComments(), entry.getUrl(), 0, 0);
 	}
 
 	protected void validate(String url) throws PortalException {

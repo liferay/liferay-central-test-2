@@ -26,6 +26,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
@@ -159,9 +160,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Tags
 
-		TagsAssetLocalServiceUtil.updateAsset(
-			userId, BlogsEntry.class.getName(), entry.getEntryId(),
-			tagsEntries);
+		updateAsset(entry, tagsEntries);
 
 		// Lucene
 
@@ -432,9 +431,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Tags
 
-		TagsAssetLocalServiceUtil.updateAsset(
-			userId, BlogsEntry.class.getName(), entry.getEntryId(),
-			tagsEntries);
+		updateAsset(entry, tagsEntries);
 
 		// Lucene
 
@@ -471,6 +468,16 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 
 		return categoryId;
+	}
+
+	protected void updateAsset(BlogsEntry entry, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			entry.getUserId(), BlogsEntry.class.getName(),
+			entry.getEntryId(), tagsEntries, null, null, null, null,
+			ContentTypes.TEXT_HTML, entry.getTitle(), entry.getTitle(),
+			entry.getTitle(), null, 0, 0);
 	}
 
 	protected void validate(String title, String content)

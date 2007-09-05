@@ -95,7 +95,15 @@ public interface TagsAssetLocalService {
 		java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getCompanyAssets(long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int getCompanyAssetsCount(long companyId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
@@ -105,8 +113,11 @@ public interface TagsAssetLocalService {
 
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
 		java.lang.String className, long classPK,
-		java.lang.String[] entryNames, java.util.Date publishDate,
-		java.util.Date expirationDate)
+		java.lang.String[] entryNames, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url, int height, int width)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

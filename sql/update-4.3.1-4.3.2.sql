@@ -9,3 +9,6 @@ create table SCProductScreenshot (
 	fullImageId LONG,
 	priority INTEGER
 );
+
+alter table TagsAsset add description STRING null;
+alter table TagsAsset add summary STRING null;

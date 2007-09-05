@@ -25,7 +25,9 @@ package com.liferay.portal.action;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.struts.JSONAction;
+import com.liferay.portlet.tags.model.TagsAssetDisplay;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.JSONUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -115,11 +117,15 @@ public class JSONServiceAction extends JSONAction {
 						return jsonObj.toString();
 					}
 					else {
-						_log.error(
-							"Unsupported return type for class " + classObj +
-								" and method " + methodName);
+						String returnValue = getReturnValue(returnObj);
 
-						return null;
+						if (returnValue == null) {
+							_log.error(
+								"Unsupported return type for class " +
+									classObj + " and method " + methodName);
+						}
+
+						return returnValue;
 					}
 				}
 				else {
@@ -244,6 +250,68 @@ public class JSONServiceAction extends JSONAction {
 
 			return null;
 		}
+	}
+
+	protected String getReturnValue(Object returnObj) throws Exception {
+		if (returnObj instanceof TagsAssetDisplay) {
+			return getReturnValue((TagsAssetDisplay)returnObj);
+		}
+		else if (returnObj instanceof TagsAssetDisplay[]) {
+			return getReturnValue((TagsAssetDisplay[])returnObj);
+		}
+
+		return null;
+	}
+
+	protected String getReturnValue(TagsAssetDisplay assetDisplay)
+		throws Exception {
+
+		JSONObject jsonObj = toJSONObject(assetDisplay);
+
+		return jsonObj.toString();
+	}
+
+	protected String getReturnValue(TagsAssetDisplay[] assetDisplays)
+		throws Exception {
+
+		JSONArray jsonArray = new JSONArray();
+
+		for (int i = 0; i < assetDisplays.length; i++) {
+			TagsAssetDisplay assetDisplay = assetDisplays[i];
+
+			jsonArray.put(toJSONObject(assetDisplay));
+		}
+
+		return jsonArray.toString();
+	}
+
+	public static JSONObject toJSONObject(TagsAssetDisplay assetDisplay) {
+		JSONObject jsonObj = new JSONObject();
+
+		JSONUtil.put(jsonObj, "assetId", assetDisplay.getAssetId());
+		JSONUtil.put(jsonObj, "companyId", assetDisplay.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", assetDisplay.getUserId());
+		JSONUtil.put(jsonObj, "userName", assetDisplay.getUserName());
+		JSONUtil.put(jsonObj, "createDate", assetDisplay.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", assetDisplay.getModifiedDate());
+		JSONUtil.put(jsonObj, "classNameId", assetDisplay.getClassNameId());
+		JSONUtil.put(jsonObj, "className", assetDisplay.getClassName());
+		JSONUtil.put(jsonObj, "classPK", assetDisplay.getClassPK());
+		JSONUtil.put(jsonObj, "startDate", assetDisplay.getStartDate());
+		JSONUtil.put(jsonObj, "endDate", assetDisplay.getEndDate());
+		JSONUtil.put(jsonObj, "publishDate", assetDisplay.getPublishDate());
+		JSONUtil.put(
+			jsonObj, "expirationDate", assetDisplay.getExpirationDate());
+		JSONUtil.put(jsonObj, "mimeType", assetDisplay.getMimeType());
+		JSONUtil.put(jsonObj, "title", assetDisplay.getTitle());
+		JSONUtil.put(jsonObj, "description", assetDisplay.getDescription());
+		JSONUtil.put(jsonObj, "summary", assetDisplay.getSummary());
+		JSONUtil.put(jsonObj, "url", assetDisplay.getUrl());
+		JSONUtil.put(jsonObj, "height", assetDisplay.getHeight());
+		JSONUtil.put(jsonObj, "width", assetDisplay.getWidth());
+		JSONUtil.put(jsonObj, "tagsEntries", assetDisplay.getTagsEntries());
+
+		return jsonObj;
 	}
 
 	private static Log _log = LogFactory.getLog(JSONServiceAction.class);

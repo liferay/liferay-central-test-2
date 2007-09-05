@@ -1055,6 +1055,8 @@ create table TagsAsset (
 	expirationDate DATE null,
 	mimeType VARCHAR(75) null,
 	title VARCHAR(75) null,
+	description STRING null,
+	summary STRING null,
 	url VARCHAR(75) null,
 	height INTEGER,
 	width INTEGER

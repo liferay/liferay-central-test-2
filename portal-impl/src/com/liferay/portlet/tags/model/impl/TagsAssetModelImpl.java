@@ -71,11 +71,13 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
 			{ "mimeType", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
+			{ "summary", new Integer(Types.VARCHAR) },
 			{ "url", new Integer(Types.VARCHAR) },
 			{ "height", new Integer(Types.INTEGER) },
 			{ "width", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(75) null,url VARCHAR(75) null,height INTEGER,width INTEGER)";
+	public static String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(75) null,description STRING null,summary STRING null,url VARCHAR(75) null,height INTEGER,width INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table TagsAsset";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.tags.model.TagsAsset"), XSS_ALLOW);
@@ -87,6 +89,12 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.title"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.description"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_SUMMARY = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.summary"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_URL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.url"),
@@ -287,6 +295,40 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getDescription() {
+		return GetterUtil.getString(_description);
+	}
+
+	public void setDescription(String description) {
+		if (((description == null) && (_description != null)) ||
+				((description != null) && (_description == null)) ||
+				((description != null) && (_description != null) &&
+				!description.equals(_description))) {
+			if (!XSS_ALLOW_DESCRIPTION) {
+				description = XSSUtil.strip(description);
+			}
+
+			_description = description;
+		}
+	}
+
+	public String getSummary() {
+		return GetterUtil.getString(_summary);
+	}
+
+	public void setSummary(String summary) {
+		if (((summary == null) && (_summary != null)) ||
+				((summary != null) && (_summary == null)) ||
+				((summary != null) && (_summary != null) &&
+				!summary.equals(_summary))) {
+			if (!XSS_ALLOW_SUMMARY) {
+				summary = XSSUtil.strip(summary);
+			}
+
+			_summary = summary;
+		}
+	}
+
 	public String getUrl() {
 		return GetterUtil.getString(_url);
 	}
@@ -339,6 +381,8 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		clone.setExpirationDate(getExpirationDate());
 		clone.setMimeType(getMimeType());
 		clone.setTitle(getTitle());
+		clone.setDescription(getDescription());
+		clone.setSummary(getSummary());
 		clone.setUrl(getUrl());
 		clone.setHeight(getHeight());
 		clone.setWidth(getWidth());
@@ -407,6 +451,8 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 	private Date _expirationDate;
 	private String _mimeType;
 	private String _title;
+	private String _description;
+	private String _summary;
 	private String _url;
 	private int _height;
 	private int _width;

@@ -142,11 +142,28 @@ public class TagsAssetLocalServiceUtil {
 			andOperator, publishDate, expirationDate);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getCompanyAssetDisplays(companyId, begin,
+			end);
+	}
+
 	public static java.util.List getCompanyAssets(long companyId, int begin,
 		int end) throws com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 
 		return tagsAssetLocalService.getCompanyAssets(companyId, begin, end);
+	}
+
+	public static int getCompanyAssetsCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getCompanyAssetsCount(companyId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
@@ -162,14 +179,18 @@ public class TagsAssetLocalServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
 		long userId, java.lang.String className, long classPK,
-		java.lang.String[] entryNames, java.util.Date publishDate,
-		java.util.Date expirationDate)
+		java.lang.String[] entryNames, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url, int height, int width)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 
 		return tagsAssetLocalService.updateAsset(userId, className, classPK,
-			entryNames, publishDate, expirationDate);
+			entryNames, startDate, endDate, publishDate, expirationDate,
+			mimeType, title, description, summary, url, height, width);
 	}
 
 	public static void validate(java.lang.String className,

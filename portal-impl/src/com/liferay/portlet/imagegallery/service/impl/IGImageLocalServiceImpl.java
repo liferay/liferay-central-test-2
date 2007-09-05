@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Image;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -146,9 +147,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Tags
 
-			TagsAssetLocalServiceUtil.updateAsset(
-				userId, IGImage.class.getName(), image.getImageId(),
-				tagsEntries);
+			updateAsset(image, tagsEntries);
 
 			return image;
 		}
@@ -353,9 +352,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Tags
 
-			TagsAssetLocalServiceUtil.updateAsset(
-				image.getUserId(), IGImage.class.getName(), image.getImageId(),
-				tagsEntries);
+			updateAsset(image, tagsEntries);
 
 			return image;
 		}
@@ -424,6 +421,19 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
+	}
+
+	protected void updateAsset(IGImage image, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		Image largeImage = ImageLocalUtil.getImage(image.getLargeImageId());
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			image.getUserId(), IGImage.class.getName(), image.getImageId(),
+			tagsEntries, null, null, null, null, largeImage.getType(),
+			image.getDescription(), image.getDescription(),
+			image.getDescription(), null, largeImage.getHeight(),
+			largeImage.getWidth());
 	}
 
 	protected void validate(File file, byte[] bytes)

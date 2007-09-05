@@ -28,6 +28,7 @@ import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -393,11 +394,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Tags
 
-		if (tagsEntries != null) {
-			TagsAssetLocalServiceUtil.updateAsset(
-				userId, MBMessage.class.getName(), message.getMessageId(),
-				tagsEntries);
-		}
+		updateAsset(message, tagsEntries);
 
 		logAddMessage(messageId, stopWatch, 9);
 
@@ -990,11 +987,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Tags
 
-		if (tagsEntries != null) {
-			TagsAssetLocalServiceUtil.updateAsset(
-				message.getUserId(), MBMessage.class.getName(),
-				message.getMessageId(), tagsEntries);
-		}
+		updateAsset(message, tagsEntries);
 
 		// Lucene
 
@@ -1285,6 +1278,20 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
+	}
+
+	protected void updateAsset(MBMessage message, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		if (tagsEntries == null) {
+			return;
+		}
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			message.getUserId(), MBMessage.class.getName(),
+			message.getMessageId(), tagsEntries, null, null, null, null,
+			ContentTypes.TEXT_HTML, message.getSubject(), message.getSubject(),
+			message.getSubject(), null, 0, 0);
 	}
 
 	protected void validate(String subject, String body)

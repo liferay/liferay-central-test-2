@@ -24,74 +24,15 @@ package com.liferay.portlet.tags.model;
 
 import java.io.Serializable;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
- * <a href="TagsAssetSoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by <code>com.liferay.portlet.tags.service.http.TagsAssetServiceSoap</code>.
- * </p>
+ * <a href="TagsAssetDisplay.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.http.TagsAssetServiceSoap
- *
  */
-public class TagsAssetSoap implements Serializable {
-	public static TagsAssetSoap toSoapModel(TagsAsset model) {
-		TagsAssetSoap soapModel = new TagsAssetSoap();
-		soapModel.setAssetId(model.getAssetId());
-		soapModel.setCompanyId(model.getCompanyId());
-		soapModel.setUserId(model.getUserId());
-		soapModel.setUserName(model.getUserName());
-		soapModel.setCreateDate(model.getCreateDate());
-		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setClassNameId(model.getClassNameId());
-		soapModel.setClassPK(model.getClassPK());
-		soapModel.setStartDate(model.getStartDate());
-		soapModel.setEndDate(model.getEndDate());
-		soapModel.setPublishDate(model.getPublishDate());
-		soapModel.setExpirationDate(model.getExpirationDate());
-		soapModel.setMimeType(model.getMimeType());
-		soapModel.setTitle(model.getTitle());
-		soapModel.setDescription(model.getDescription());
-		soapModel.setSummary(model.getSummary());
-		soapModel.setUrl(model.getUrl());
-		soapModel.setHeight(model.getHeight());
-		soapModel.setWidth(model.getWidth());
-
-		return soapModel;
-	}
-
-	public static TagsAssetSoap[] toSoapModels(List models) {
-		List soapModels = new ArrayList(models.size());
-
-		for (int i = 0; i < models.size(); i++) {
-			TagsAsset model = (TagsAsset)models.get(i);
-			soapModels.add(toSoapModel(model));
-		}
-
-		return (TagsAssetSoap[])soapModels.toArray(new TagsAssetSoap[0]);
-	}
-
-	public TagsAssetSoap() {
-	}
-
-	public long getPrimaryKey() {
-		return _assetId;
-	}
-
-	public void setPrimaryKey(long pk) {
-		setAssetId(pk);
-	}
+public class TagsAssetDisplay implements Serializable {
 
 	public long getAssetId() {
 		return _assetId;
@@ -147,6 +88,14 @@ public class TagsAssetSoap implements Serializable {
 
 	public void setClassNameId(long classNameId) {
 		_classNameId = classNameId;
+	}
+
+	public String getClassName() {
+		return _className;
+	}
+
+	public void setClassName(String className) {
+		_className = className;
 	}
 
 	public long getClassPK() {
@@ -245,6 +194,14 @@ public class TagsAssetSoap implements Serializable {
 		_width = width;
 	}
 
+	public String getTagsEntries() {
+		return _tagsEntries;
+	}
+
+	public void setTagsEntries(String tagsEntries) {
+		_tagsEntries = tagsEntries;
+	}
+
 	private long _assetId;
 	private long _companyId;
 	private long _userId;
@@ -252,6 +209,7 @@ public class TagsAssetSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
+	private String _className;
 	private long _classPK;
 	private Date _startDate;
 	private Date _endDate;
@@ -264,4 +222,6 @@ public class TagsAssetSoap implements Serializable {
 	private String _url;
 	private int _height;
 	private int _width;
+	private String _tagsEntries;
+
 }
