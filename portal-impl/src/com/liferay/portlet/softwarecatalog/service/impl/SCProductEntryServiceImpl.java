@@ -46,11 +46,11 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 	implements SCProductEntryService {
 
 	public SCProductEntry addProductEntry(
-			long plid, String name, String type, String shortDescription,
-			String longDescription, String pageURL, String author,
-			String repoGroupId, String repoArtifactId, long[] licenseIds,
-			List thumbnails, List fullImages, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			long plid, String name, String type, String tags,
+			String shortDescription, String longDescription, String pageURL,
+			String author, String repoGroupId, String repoArtifactId,
+			long[] licenseIds, List thumbnails, List fullImages,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -58,18 +58,18 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 			ActionKeys.ADD_PRODUCT_ENTRY);
 
 		return SCProductEntryLocalServiceUtil.addProductEntry(
-			getUserId(), plid, name, type, shortDescription, longDescription,
-			pageURL, author, repoGroupId, repoArtifactId, licenseIds,
-			thumbnails, fullImages, addCommunityPermissions,
+			getUserId(), plid, name, type, tags, shortDescription,
+			longDescription, pageURL, author, repoGroupId, repoArtifactId,
+			licenseIds, thumbnails, fullImages, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public SCProductEntry addProductEntry(
-			long plid, String name, String type, String shortDescription,
-			String longDescription, String pageURL, String author,
-			String repoGroupId, String repoArtifactId, long[] licenseIds,
-			List thumbnails, List fullImages, String[] communityPermissions,
-			String[] guestPermissions)
+			long plid, String name, String type, String tags,
+			String shortDescription, String longDescription, String pageURL,
+			String author, String repoGroupId, String repoArtifactId,
+			long[] licenseIds, List thumbnails, List fullImages,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -77,9 +77,10 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 			ActionKeys.ADD_PRODUCT_ENTRY);
 
 		return SCProductEntryLocalServiceUtil.addProductEntry(
-			getUserId(), plid, name, type, shortDescription, longDescription,
-			pageURL, author, repoGroupId, repoArtifactId, licenseIds,
-			thumbnails, fullImages, communityPermissions, guestPermissions);
+			getUserId(), plid, name, type, tags, shortDescription,
+			longDescription, pageURL, author, repoGroupId, repoArtifactId,
+			licenseIds, thumbnails, fullImages, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteProductEntry(long productEntryId)
@@ -101,7 +102,7 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 	}
 
 	public SCProductEntry updateProductEntry(
-			long productEntryId, String name, String type,
+			long productEntryId, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
 			long[] licenseIds, List thumbnails, List fullImages)
@@ -111,7 +112,7 @@ public class SCProductEntryServiceImpl extends PrincipalBean
 			getPermissionChecker(), productEntryId, ActionKeys.UPDATE);
 
 		return SCProductEntryLocalServiceUtil.updateProductEntry(
-			productEntryId, name, type, shortDescription, longDescription,
+			productEntryId, name, type, tags, shortDescription, longDescription,
 			pageURL, author, repoGroupId, repoArtifactId, licenseIds,
 			thumbnails, fullImages);
 	}

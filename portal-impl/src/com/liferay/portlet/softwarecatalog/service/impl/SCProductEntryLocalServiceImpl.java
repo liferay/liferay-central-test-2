@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -95,7 +96,7 @@ public class SCProductEntryLocalServiceImpl
 	extends SCProductEntryLocalServiceBaseImpl {
 
 	public SCProductEntry addProductEntry(
-			long userId, long plid, String name, String type,
+			long userId, long plid, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
 			long[] licenseIds, List thumbnails, List fullImages,
@@ -103,14 +104,14 @@ public class SCProductEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addProductEntry(
-			userId, plid, name, type, shortDescription, longDescription,
+			userId, plid, name, type, tags, shortDescription, longDescription,
 			pageURL, author, repoGroupId, repoArtifactId, licenseIds,
 			thumbnails, fullImages, new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
 
 	public SCProductEntry addProductEntry(
-			long userId, long plid, String name, String type,
+			long userId, long plid, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
 			long[] licenseIds, List thumbnails, List fullImages,
@@ -118,14 +119,14 @@ public class SCProductEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addProductEntry(
-			userId, plid, name, type, shortDescription, longDescription,
+			userId, plid, name, type, tags, shortDescription, longDescription,
 			pageURL, author, repoGroupId, repoArtifactId, licenseIds,
 			thumbnails, fullImages, null, null, communityPermissions,
 			guestPermissions);
 	}
 
 	public SCProductEntry addProductEntry(
-			long userId, long plid, String name, String type,
+			long userId, long plid, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
 			long[] licenseIds, List thumbnails, List fullImages,
@@ -155,6 +156,7 @@ public class SCProductEntryLocalServiceImpl
 		productEntry.setModifiedDate(now);
 		productEntry.setName(name);
 		productEntry.setType(type);
+		productEntry.setTags(tags);
 		productEntry.setShortDescription(shortDescription);
 		productEntry.setLongDescription(longDescription);
 		productEntry.setPageURL(pageURL);
@@ -495,7 +497,7 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public SCProductEntry updateProductEntry(
-			long productEntryId, String name, String type,
+			long productEntryId, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
 			long[] licenseIds, List thumbnails, List fullImages)
@@ -515,6 +517,7 @@ public class SCProductEntryLocalServiceImpl
 		productEntry.setModifiedDate(now);
 		productEntry.setName(name);
 		productEntry.setType(type);
+		productEntry.setTags(tags);
 		productEntry.setShortDescription(shortDescription);
 		productEntry.setLongDescription(longDescription);
 		productEntry.setPageURL(pageURL);
@@ -588,6 +591,14 @@ public class SCProductEntryLocalServiceImpl
 		Element typesEl = el.addElement("types");
 
 		DocUtil.add(typesEl, "type", productEntry.getType());
+
+		Element tagsEl = el.addElement("tags");
+
+		String[] tags = StringUtil.split(productEntry.getTags());
+
+		for (int i = 0; i < tags.length; i++) {
+			DocUtil.add(tagsEl, "tag", tags[i]);
+		}
 
 		DocUtil.add(
 			el, "short-description", productEntry.getShortDescription());

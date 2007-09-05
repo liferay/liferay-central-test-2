@@ -87,6 +87,10 @@ public interface SCProductEntryModel extends BaseModel {
 
 	public void setType(String type);
 
+	public String getTags();
+
+	public void setTags(String tags);
+
 	public String getShortDescription();
 
 	public void setShortDescription(String shortDescription);

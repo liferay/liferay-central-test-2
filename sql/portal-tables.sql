@@ -823,6 +823,7 @@ create table SCProductEntry (
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
 	type_ VARCHAR(75) null,
+	tags VARCHAR(300) null,
 	shortDescription STRING null,
 	longDescription STRING null,
 	pageURL VARCHAR(1024) null,

@@ -1194,6 +1194,7 @@
 		<property name="modifiedDate" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="tags" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="shortDescription" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="longDescription" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="pageURL" type="com.liferay.util.dao.hibernate.StringType" />

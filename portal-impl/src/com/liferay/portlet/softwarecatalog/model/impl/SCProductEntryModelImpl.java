@@ -67,6 +67,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "type_", new Integer(Types.VARCHAR) },
+			{ "tags", new Integer(Types.VARCHAR) },
 			{ "shortDescription", new Integer(Types.VARCHAR) },
 			{ "longDescription", new Integer(Types.VARCHAR) },
 			{ "pageURL", new Integer(Types.VARCHAR) },
@@ -74,7 +75,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 			{ "repoGroupId", new Integer(Types.VARCHAR) },
 			{ "repoArtifactId", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table SCProductEntry (productEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,shortDescription STRING null,longDescription STRING null,pageURL VARCHAR(1024) null,author VARCHAR(75) null,repoGroupId VARCHAR(75) null,repoArtifactId VARCHAR(75) null)";
+	public static String TABLE_SQL_CREATE = "create table SCProductEntry (productEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,tags VARCHAR(300) null,shortDescription STRING null,longDescription STRING null,pageURL VARCHAR(1024) null,author VARCHAR(75) null,repoGroupId VARCHAR(75) null,repoArtifactId VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table SCProductEntry";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry"),
@@ -87,6 +88,9 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.type"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_TAGS = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.tags"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_SHORTDESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.shortDescription"),
@@ -239,6 +243,22 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getTags() {
+		return GetterUtil.getString(_tags);
+	}
+
+	public void setTags(String tags) {
+		if (((tags == null) && (_tags != null)) ||
+				((tags != null) && (_tags == null)) ||
+				((tags != null) && (_tags != null) && !tags.equals(_tags))) {
+			if (!XSS_ALLOW_TAGS) {
+				tags = XSSUtil.strip(tags);
+			}
+
+			_tags = tags;
+		}
+	}
+
 	public String getShortDescription() {
 		return GetterUtil.getString(_shortDescription);
 	}
@@ -352,6 +372,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 		clone.setModifiedDate(getModifiedDate());
 		clone.setName(getName());
 		clone.setType(getType());
+		clone.setTags(getTags());
 		clone.setShortDescription(getShortDescription());
 		clone.setLongDescription(getLongDescription());
 		clone.setPageURL(getPageURL());
@@ -424,6 +445,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 	private Date _modifiedDate;
 	private String _name;
 	private String _type;
+	private String _tags;
 	private String _shortDescription;
 	private String _longDescription;
 	private String _pageURL;

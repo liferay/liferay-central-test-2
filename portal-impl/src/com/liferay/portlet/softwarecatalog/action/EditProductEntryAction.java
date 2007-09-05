@@ -255,6 +255,7 @@ public class EditProductEntryAction extends PortletAction {
 
 		String name = ParamUtil.getString(req, "name");
 		String type = ParamUtil.getString(req, "type");
+		String tags = ParamUtil.getString(req, "tags");
 		String shortDescription = ParamUtil.getString(req, "shortDescription");
 		String longDescription = ParamUtil.getString(req, "longDescription");
 		String pageURL = ParamUtil.getString(req, "pageURL");
@@ -277,18 +278,19 @@ public class EditProductEntryAction extends PortletAction {
 			// Add product entry
 
 			SCProductEntryServiceUtil.addProductEntry(
-				layout.getPlid(), name, type, shortDescription, longDescription,
-				pageURL, author, repoGroupId, repoArtifactId, licenseIds,
-				thumbnails, fullImages, communityPermissions, guestPermissions);
+				layout.getPlid(), name, type, tags, shortDescription,
+				longDescription, pageURL, author, repoGroupId, repoArtifactId,
+				licenseIds, thumbnails, fullImages, communityPermissions,
+				guestPermissions);
 		}
 		else {
 
 			// Update product entry
 
 			SCProductEntryServiceUtil.updateProductEntry(
-				productEntryId, name, type, shortDescription, longDescription,
-				pageURL, author, repoGroupId, repoArtifactId, licenseIds,
-				thumbnails, fullImages);
+				productEntryId, name, type, tags, shortDescription,
+				longDescription, pageURL, author, repoGroupId, repoArtifactId,
+				licenseIds, thumbnails, fullImages);
 		}
 	}
 

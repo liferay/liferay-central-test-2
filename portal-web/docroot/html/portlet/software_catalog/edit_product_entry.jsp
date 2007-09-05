@@ -175,6 +175,14 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 </tr>
 <tr>
 	<td>
+		<liferay-ui:message key="tags" />
+	</td>
+	<td>
+		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="tags" /> (<liferay-ui:message key="comma-delimited-list" />)
+	</td>
+</tr>
+<tr>
+	<td>
 		<liferay-ui:message key="short-description" />
 	</td>
 	<td>

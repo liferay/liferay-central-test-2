@@ -1,3 +1,4 @@
+alter table SCProductEntry add tags VARCHAR(300) null;
 alter table SCProductEntry add author VARCHAR(75) null;
 
 create table SCProductScreenshot (

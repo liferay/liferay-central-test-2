@@ -103,6 +103,15 @@ public class SCProductEntryJSONSerializer {
 			jsonObj.put("type", type.toString());
 		}
 
+		String tags = model.getTags();
+
+		if (tags == null) {
+			jsonObj.put("tags", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("tags", tags.toString());
+		}
+
 		String shortDescription = model.getShortDescription();
 
 		if (shortDescription == null) {

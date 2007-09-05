@@ -57,6 +57,7 @@ public class SCProductEntrySoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setName(model.getName());
 		soapModel.setType(model.getType());
+		soapModel.setTags(model.getTags());
 		soapModel.setShortDescription(model.getShortDescription());
 		soapModel.setLongDescription(model.getLongDescription());
 		soapModel.setPageURL(model.getPageURL());
@@ -161,6 +162,14 @@ public class SCProductEntrySoap implements Serializable {
 		_type = type;
 	}
 
+	public String getTags() {
+		return _tags;
+	}
+
+	public void setTags(String tags) {
+		_tags = tags;
+	}
+
 	public String getShortDescription() {
 		return _shortDescription;
 	}
@@ -218,6 +227,7 @@ public class SCProductEntrySoap implements Serializable {
 	private Date _modifiedDate;
 	private String _name;
 	private String _type;
+	private String _tags;
 	private String _shortDescription;
 	private String _longDescription;
 	private String _pageURL;

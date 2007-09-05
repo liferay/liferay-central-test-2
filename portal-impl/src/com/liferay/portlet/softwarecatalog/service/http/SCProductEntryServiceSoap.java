@@ -80,16 +80,17 @@ import java.rmi.RemoteException;
 public class SCProductEntryServiceSoap {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap addProductEntry(
 		long plid, java.lang.String name, java.lang.String type,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL, java.lang.String author,
-		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, java.util.List thumbnails,
-		java.util.List fullImages, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		java.lang.String tags, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String author, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds,
+		java.util.List thumbnails, java.util.List fullImages,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue =
 				SCProductEntryServiceUtil.addProductEntry(plid, name, type,
-					shortDescription, longDescription, pageURL, author,
+					tags, shortDescription, longDescription, pageURL, author,
 					repoGroupId, repoArtifactId, licenseIds, thumbnails,
 					fullImages, addCommunityPermissions, addGuestPermissions);
 
@@ -103,16 +104,17 @@ public class SCProductEntryServiceSoap {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap addProductEntry(
 		long plid, java.lang.String name, java.lang.String type,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL, java.lang.String author,
-		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, java.util.List thumbnails,
-		java.util.List fullImages, java.lang.String[] communityPermissions,
+		java.lang.String tags, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String author, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds,
+		java.util.List thumbnails, java.util.List fullImages,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue =
 				SCProductEntryServiceUtil.addProductEntry(plid, name, type,
-					shortDescription, longDescription, pageURL, author,
+					tags, shortDescription, longDescription, pageURL, author,
 					repoGroupId, repoArtifactId, licenseIds, thumbnails,
 					fullImages, communityPermissions, guestPermissions);
 
@@ -151,16 +153,17 @@ public class SCProductEntryServiceSoap {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap updateProductEntry(
 		long productEntryId, java.lang.String name, java.lang.String type,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL, java.lang.String author,
-		java.lang.String repoGroupId, java.lang.String repoArtifactId,
-		long[] licenseIds, java.util.List thumbnails, java.util.List fullImages)
+		java.lang.String tags, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String author, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds,
+		java.util.List thumbnails, java.util.List fullImages)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.softwarecatalog.model.SCProductEntry returnValue =
 				SCProductEntryServiceUtil.updateProductEntry(productEntryId,
-					name, type, shortDescription, longDescription, pageURL,
-					author, repoGroupId, repoArtifactId, licenseIds,
+					name, type, tags, shortDescription, longDescription,
+					pageURL, author, repoGroupId, repoArtifactId, licenseIds,
 					thumbnails, fullImages);
 
 			return com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap.toSoapModel(returnValue);
