@@ -25,6 +25,7 @@
 <%
 String keywords = ParamUtil.getString(request, "keywords");
 String tag = ParamUtil.getString(request, "tag");
+String searchRepositoryURL = ParamUtil.getString(request, "searchRepositoryURL");
 String license = ParamUtil.getString(request, "license");
 String installStatus = ParamUtil.getString(request, "installStatus", PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED);
 %>
@@ -79,7 +80,7 @@ try {
 			</select>
 		</td>
 		<td>
-			<select name="<portlet:namespace/>repositoryURL">
+			<select name="<portlet:namespace/>searchRepositoryURL">
 				<option value=""><liferay-ui:message key="all" /></option>
 
 				<%
@@ -89,7 +90,7 @@ try {
 					String curRepositoryURL = repositoryURLs[i];
 				%>
 
-					<option <%= (repositoryURL.equals(curRepositoryURL)) ? "selected" : "" %> value="<%= curRepositoryURL %>"><%= curRepositoryURL %></option>
+					<option <%= (searchRepositoryURL.equals(curRepositoryURL)) ? "selected" : "" %> value="<%= curRepositoryURL %>"><%= curRepositoryURL %></option>
 
 				<%
 				}
@@ -155,7 +156,7 @@ try {
 	searchContainer.setOrderByCol(orderByCol);
 	searchContainer.setOrderByType(orderByType);
 
-	List hits = PluginPackageUtil.search(keywords, pluginType, tag, license, repositoryURL, installStatus).toList();
+	List hits = PluginPackageUtil.search(keywords, pluginType, tag, license, searchRepositoryURL, installStatus).toList();
 
 	DocumentComparator docComparator = null;
 
