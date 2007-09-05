@@ -119,6 +119,18 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		<a href="<%= productEntry.getPageURL() %>"><%= productEntry.getPageURL() %></a>
 	</td>
 </tr>
+
+<c:if test="<%= Validator.isNotNull(productEntry.getTags()) %>">
+	<tr>
+		<td>
+			<liferay-ui:message key="tags" />:
+		</td>
+		<td>
+			<%= productEntry.getTags() %>
+		</td>
+	</tr>
+</c:if>
+
 <tr>
 	<td>
 		<liferay-ui:message key="short-description" />:
