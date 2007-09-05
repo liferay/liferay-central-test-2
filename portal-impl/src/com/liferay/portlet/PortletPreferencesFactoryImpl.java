@@ -25,12 +25,12 @@ package com.liferay.portlet;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -179,12 +179,11 @@ public class PortletPreferencesFactoryImpl
 		Layout layout = themeDisplay.getLayout();
 		LayoutTypePortlet layoutTypePortlet =
 			themeDisplay.getLayoutTypePortlet();
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletId);
-
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
 
 		long ownerId = 0;
 		int ownerType = 0;
@@ -201,12 +200,10 @@ public class PortletPreferencesFactoryImpl
 		}
 
 		if (modeEditGuest) {
+			boolean hasUpdateLayoutPermission = LayoutPermissionUtil.contains(
+				permissionChecker, layout, ActionKeys.UPDATE);
 
-			boolean hasUpdateLayoutPermission =
-				LayoutPermissionUtil.contains(
-					permissionChecker, layout, ActionKeys.UPDATE);
 			if (!layout.isPrivateLayout() && hasUpdateLayoutPermission) {
-
 			}
 			else {
 
