@@ -24,9 +24,9 @@ package com.liferay.portal.upgrade.util;
 
 import com.liferay.portal.upgrade.StagnantRowException;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -40,11 +40,11 @@ import java.util.Set;
 public class MemoryValueMapper implements ValueMapper {
 
 	public MemoryValueMapper() {
-		this(new HashSet());
+		this(new LinkedHashSet());
 	}
 
 	public MemoryValueMapper(Set exceptions) {
-		_map = new HashMap();
+		_map = new LinkedHashMap();
 		_exceptions = exceptions;
 	}
 

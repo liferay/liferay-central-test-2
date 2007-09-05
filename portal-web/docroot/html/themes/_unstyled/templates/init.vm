@@ -150,7 +150,7 @@
 	#set ($the_title = $the_title + " - " + $pageSubtitle)
 #end
 
-#if ($tilesTitle)
+#if ($tilesTitle != "")
 	#set ($the_title = $languageUtil.get($company_id, $locale, $tilesTitle))
 #end
 
