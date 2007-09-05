@@ -389,8 +389,7 @@ public class PluginPackageUtil {
 		List liferayVersions = _readList(
 			pluginPackageEl.element("liferay-versions"), "liferay-version");
 
-		List types = _readList(
-			pluginPackageEl.element("types"), "type");
+		List types = _readList(pluginPackageEl.element("types"), "type");
 
 		pluginPackage.setName(_readText(name));
 		pluginPackage.setRecommendedDeploymentContext(
@@ -894,7 +893,9 @@ public class PluginPackageUtil {
 			while (itr.hasNext()) {
 				Element element = (Element)itr.next();
 
-				result.add(element.getText());
+				String text = element.getText().trim().toLowerCase();
+
+				result.add(text);
 			}
 		}
 

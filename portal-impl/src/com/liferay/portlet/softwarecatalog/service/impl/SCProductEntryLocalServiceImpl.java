@@ -138,6 +138,7 @@ public class SCProductEntryLocalServiceImpl
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
+		tags = getTags(tags);
 		Date now = new Date();
 
 		validate(
@@ -505,6 +506,7 @@ public class SCProductEntryLocalServiceImpl
 
 		// Product entry
 
+		tags = getTags(tags);
 		Date now = new Date();
 
 		validate(
@@ -569,6 +571,12 @@ public class SCProductEntryLocalServiceImpl
 		}
 
 		return productEntry;
+	}
+
+	protected String getTags(String tags) {
+		tags = tags.trim().toLowerCase();
+
+		return StringUtil.merge(StringUtil.split(tags), ", ");
 	}
 
 	protected void populatePluginPackageElement(
