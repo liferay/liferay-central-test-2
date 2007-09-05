@@ -56,7 +56,9 @@ if (curTagsParam != null) {
 		<input id="<%= randomNamespace %>tags" size="30" type="text" />
 
 		<input id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
+
 		<liferay-ui:message key="or" />
+
 		<input id="<%= randomNamespace %>selectTag" type="button" value="<liferay-ui:message key="select-tags" />" />
 	</td>
 	<td>
