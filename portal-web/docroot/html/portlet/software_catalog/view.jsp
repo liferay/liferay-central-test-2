@@ -82,6 +82,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		headerNames.add("name");
 		headerNames.add("type");
+		headerNames.add("tags");
 		headerNames.add("licenses");
 		headerNames.add("modified-date");
 		headerNames.add(StringPool.BLANK);
@@ -157,6 +158,10 @@ portletURL.setParameter("tabs1", tabs1);
 			// Type
 
 			row.addText(LanguageUtil.get(pageContext, productEntry.getType()), rowURL);
+
+			// Tags
+
+			row.addText(LanguageUtil.get(pageContext, productEntry.getTags()), rowURL);
 
 			// Licenses
 
