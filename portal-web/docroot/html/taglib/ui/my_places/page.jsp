@@ -139,64 +139,98 @@
 
 				privateAddPageHREF = privateAddPageURL.toString();
 			}
+
+			boolean showPublicPlace = true;
+
+			if (publicLayoutsPageCount == 0) {
+				if (organizationCommunity) {
+					showPublicPlace = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS));
+				}
+				else if (regularCommunity) {
+					showPublicPlace = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS));
+				}
+				else if (userCommunity) {
+					showPublicPlace = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS));
+				}
+			}
+
+			boolean showPrivatePlace = true;
+
+			if (privateLayoutsPageCount == 0) {
+				if (organizationCommunity) {
+					showPrivatePlace = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS));
+				}
+				else if (regularCommunity) {
+					showPrivatePlace = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS));
+				}
+				else if (userCommunity) {
+					showPrivatePlace = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS));
+				}
+			}
 		%>
 
-			<li>
-				<h3>
-					<c:choose>
-						<c:when test="<%= organizationCommunity %>">
-							<%= organization.getName() %>
-						</c:when>
-						<c:when test="<%= userCommunity %>">
-							<liferay-ui:message key="my-community" />
-						</c:when>
-						<c:otherwise>
-							<%= community.getName() %>
-						</c:otherwise>
-					</c:choose>
-				</h3>
+			<c:if test="<%= showPublicPlace || showPrivatePlace %>">
+				<li>
+					<h3>
+						<c:choose>
+							<c:when test="<%= organizationCommunity %>">
+								<%= organization.getName() %>
+							</c:when>
+							<c:when test="<%= userCommunity %>">
+								<liferay-ui:message key="my-community" />
+							</c:when>
+							<c:otherwise>
+								<%= community.getName() %>
+							</c:otherwise>
+						</c:choose>
+					</h3>
 
-				<ul>
+					<ul>
 
-					<%
-					portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
-					portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
+						<%
+						portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+						portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
-					boolean selectedPlace = false;
+						boolean selectedPlace = false;
 
-					if (layout != null) {
-						selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
-					}
-					%>
+						if (layout != null) {
+							selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
+						}
+						%>
 
-					<li class="public <%= selectedPlace ? "current" : "" %>">
-						<a href='<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="public-pages" /> <span class="page-count">(<%= publicLayoutsPageCount %>)</span></a>
+						<c:if test="<%= showPublicPlace %>">
+							<li class="public <%= selectedPlace ? "current" : "" %>">
+								<a href='<%= publicLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="public-pages" /> <span class="page-count">(<%= publicLayoutsPageCount %>)</span></a>
 
-						<c:if test="<%= publicAddPageHREF != null %>">
-							<a class="add-page" href="<%= publicAddPageHREF %>"><liferay-ui:message key="page-settings" /></a>
+								<c:if test="<%= publicAddPageHREF != null %>">
+									<a class="add-page" href="<%= publicAddPageHREF %>"><liferay-ui:message key="page-settings" /></a>
+								</c:if>
+							</li>
 						</c:if>
-					</li>
 
-					<%
-					portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
-					portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
+						<%
+						portletURL.setParameter("groupId", String.valueOf(community.getGroupId()));
+						portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
 
-					selectedPlace = false;
+						selectedPlace = false;
 
-					if (layout != null) {
-						selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
-					}
-					%>
+						if (layout != null) {
+							selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
+						}
+						%>
 
-					<li class="private <%= selectedPlace ? "current" : "" %>">
-						<a href='<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="private-pages" /> <span class="page-count">(<%= privateLayoutsPageCount %>)</span></a>
+						<c:if test="<%= showPrivatePlace %>">
+							<li class="private <%= selectedPlace ? "current" : "" %>">
+								<a href='<%= privateLayoutsPageCount > 0 ? portletURL.toString() : "javascript: ;" %>'><liferay-ui:message key="private-pages" /> <span class="page-count">(<%= privateLayoutsPageCount %>)</span></a>
 
-						<c:if test="<%= privateAddPageHREF != null %>">
-							<a class="add-page" href="<%= privateAddPageHREF %>"><liferay-ui:message key="page-settings" /></a>
+								<c:if test="<%= privateAddPageHREF != null %>">
+									<a class="add-page" href="<%= privateAddPageHREF %>"><liferay-ui:message key="page-settings" /></a>
+								</c:if>
+							</li>
 						</c:if>
-					</li>
-				</ul>
-			</li>
+					</ul>
+				</li>
+			</c:if>
 
 		<%
 		}
