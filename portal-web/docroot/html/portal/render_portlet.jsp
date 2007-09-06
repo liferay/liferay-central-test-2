@@ -209,6 +209,7 @@ if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 boolean showCloseIcon = true;
 boolean showConfigurationIcon = false;
 boolean showEditIcon = false;
+boolean showEditDefaultsIcon = false;
 boolean showEditGuestIcon = false;
 boolean showHelpIcon = portlet.hasPortletMode(responseContentType, PortletMode.HELP);
 boolean showMaxIcon = true;
@@ -241,9 +242,15 @@ if (portlet.hasPortletMode(responseContentType, PortletMode.EDIT)) {
 	}
 }
 
+if (portlet.hasPortletMode(responseContentType, LiferayPortletMode.EDIT_DEFAULTS)) {
+	if (showEditIcon && !layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon()) {
+		showEditDefaultsIcon = true;
+	}
+}
+
 if (portlet.hasPortletMode(responseContentType, LiferayPortletMode.EDIT_GUEST)) {
 	if (showEditIcon && !layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon()) {
-		showEditGuestIcon = true;
+		//showEditGuestIcon = true;
 	}
 }
 
@@ -287,6 +294,7 @@ if (denyAccess) {
 	showCloseIcon = false;
 	showConfigurationIcon = false;
 	showEditIcon = false;
+	showEditDefaultsIcon = false;
 	showEditGuestIcon = false;
 	showHelpIcon = false;
 	showMaxIcon = false;
@@ -329,6 +337,7 @@ portletDisplay.setModePrint(modePrint);
 portletDisplay.setShowCloseIcon(showCloseIcon);
 portletDisplay.setShowConfigurationIcon(showConfigurationIcon);
 portletDisplay.setShowEditIcon(showEditIcon);
+portletDisplay.setShowEditDefaultsIcon(showEditDefaultsIcon);
 portletDisplay.setShowEditGuestIcon(showEditGuestIcon);
 portletDisplay.setShowHelpIcon(showHelpIcon);
 portletDisplay.setShowMaxIcon(showMaxIcon);
@@ -400,6 +409,27 @@ else {
 }
 
 portletDisplay.setURLEdit(urlEdit.toString());
+
+// URL edit defaults
+
+PortletURLImpl urlEditDefaults = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), false);
+
+if (portletDisplay.isModeEditDefaults()) {
+	urlEditDefaults.setWindowState(WindowState.NORMAL);
+	urlEditDefaults.setPortletMode(PortletMode.VIEW);
+}
+else {
+	if (portlet.isMaximizeEdit()) {
+		urlEditDefaults.setWindowState(WindowState.MAXIMIZED);
+	}
+	else {
+		urlEditDefaults.setWindowState(WindowState.NORMAL);
+	}
+
+	urlEditDefaults.setPortletMode(LiferayPortletMode.EDIT_DEFAULTS);
+}
+
+portletDisplay.setURLEditDefaults(urlEditDefaults.toString());
 
 // URL edit guest
 
@@ -525,6 +555,12 @@ String urlBack = null;
 
 if (portletDisplay.isModeEdit()) {
 	urlBack = urlEdit.toString();
+}
+else if (portletDisplay.isModeEditDefaults()) {
+	urlBack = urlEditDefaults.toString();
+}
+else if (portletDisplay.isModeEditGuest()) {
+	urlBack = urlEditGuest.toString();
 }
 else if (portletDisplay.isModeHelp()) {
 	urlBack = urlHelp.toString();
