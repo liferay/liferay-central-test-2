@@ -175,7 +175,13 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	display: block;
 	font-size: 1.2em;
 	margin-bottom: 0;
+	min-height: 16px;
+	min-width: 90px;
 	padding: 0.5em 0.5em 0.5em 2em;
+}
+
+.js.ie6 .lfr-dock.interactive-mode h2 span {
+	height: 16px;
 }
 
 .js .lfr-dock.expanded .lfr-dock-list-container {
