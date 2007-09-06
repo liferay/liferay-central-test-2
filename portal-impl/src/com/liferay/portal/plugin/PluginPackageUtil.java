@@ -72,9 +72,12 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Searcher;
+import org.apache.lucene.search.TermQuery;
 
 import org.dom4j.Attribute;
 import org.dom4j.Document;
@@ -552,8 +555,10 @@ public class PluginPackageUtil {
 			if (Validator.isNotNull(repositoryURL)) {
 				BooleanQuery searchQuery = new BooleanQuery();
 
-				LuceneUtil.addExactTerm(
-					searchQuery, "repositoryURL", repositoryURL);
+				Query query =
+					new TermQuery(new Term("repositoryURL", repositoryURL));
+
+				searchQuery.add(query, BooleanClause.Occur.SHOULD);
 
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
