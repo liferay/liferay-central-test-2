@@ -25,21 +25,24 @@
 <%@ include file="/html/portlet/rss/init.jsp" %>
 
 <script type="text/javascript">
-	AddRssRow = function (table) {
+	<portlet:namespace />addRssRow = function (table) {
 		table.insertRow(table.rows.length);
+
 		var row = table.rows[table.rows.length - 1];
+
 		row.insertCell(0);
 		row.insertCell(1);
 		row.insertCell(2);
 
 		row.cells[0].innerHTML = "<input name=\"<portlet:namespace />title\" />";
 		row.cells[1].innerHTML = "<input name=\"<portlet:namespace />url\" style=\"width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;\" />";
-		row.cells[2].innerHTML = "<a href=\"javascript:void(0)\" onclick=\"Element.remove(this.parentNode.parentNode)\"><img src=\"<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png\" /></a>";
+		row.cells[2].innerHTML = "<a href=\"javascript: ;\" onclick=\"Element.remove(this.parentNode.parentNode);\"><img src=\"<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png\" /></a>";
+
 		table.appendChild(row);
 	}
 </script>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/rss/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 <liferay-ui:error exception="<%= ValidatorException.class %>">
@@ -65,7 +68,7 @@
 
 </liferay-ui:error>
 
-<table cellpadding="2" cellspacing="0" border="0" style="margin: 15px 0 15px 0;">
+<table class="liferay-table">
 <tr>
 	<td>
 		<liferay-ui:message key="title" />
@@ -74,7 +77,7 @@
 		<liferay-ui:message key="url" />
 	</td>
 	<td>
-		<a href="javascript: void(0);" onclick="AddRssRow(this.parentNode.parentNode.parentNode)"><img src="<%= themeDisplay.getPathThemeImages() %>/common/add_location.png" /></a>
+		<a href="javascript: ;" onclick="<portlet:namespace />addRssRow(this.parentNode.parentNode.parentNode);"><img src="<%= themeDisplay.getPathThemeImages() %>/common/add_location.png" /></a>
 	</td>
 </tr>
 
@@ -95,7 +98,7 @@ for (int i = 0; i < urls.length; i++) {
 			<input class="liferay-input-text" name="<portlet:namespace />url" value="<%= urls[i] %>" />
 		</td>
 		<td>
-			<a href="javascript: void(0);" onclick="Element.remove(this.parentNode.parentNode);"><img src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></a>
+			<a href="javascript: ;" onclick="Element.remove(this.parentNode.parentNode);"><img src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></a>
 		</td>
 	</tr>
 
@@ -104,6 +107,8 @@ for (int i = 0; i < urls.length; i++) {
 %>
 
 </table>
+
+<br />
 
 <table class="liferay-table">
 <tr>

@@ -33,6 +33,12 @@
 <%
 PortletPreferences prefs = renderRequest.getPreferences();
 
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
+}
+
 String[] urls = prefs.getValues("urls", new String[0]);
 String[] titles = prefs.getValues("titles", new String[0]);
 int entriesPerFeed = GetterUtil.getInteger(prefs.getValue("items-per-channel", StringPool.BLANK));

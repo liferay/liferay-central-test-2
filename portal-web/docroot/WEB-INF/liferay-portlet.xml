@@ -410,10 +410,9 @@
 		<portlet-name>39</portlet-name>
 		<icon>/html/portlet/rss/icon.png</icon>
 		<struts-path>rss</struts-path>
-		<preferences-owned-by-group>false</preferences-owned-by-group>
+		<configuration-action-class>com.liferay.portlet.rss.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
-		<maximize-edit>true</maximize-edit>
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>

@@ -22,11 +22,16 @@
 
 package com.liferay.portlet.rss.action;
 
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
+
+import java.util.Arrays;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -36,64 +41,61 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ValidatorException;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
 /**
- * <a href="EditPreferencesAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditPreferencesAction extends PortletAction {
+public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			PortletConfig config, ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
-
-		if (!cmd.equals(Constants.UPDATE)) {
-			return;
-		}
-
-		PortletPreferences prefs = req.getPreferences();
-
-		String[] urls = req.getParameterValues("url");
-		String[] titles = req.getParameterValues("title");
-		int entriesPerFeed = ParamUtil.getInteger(req, "entriesPerFeed", 4);
-
-		if (urls != null && titles != null) {
-			prefs.setValues("urls", urls);
-			prefs.setValues("titles", titles);
-		}
-		else {
-			prefs.setValues("urls", new String[0]);
-			prefs.setValues("titles", new String[0]);
-		}
-
-		prefs.setValue("items-per-channel", String.valueOf(entriesPerFeed));
-
 		try {
+			String cmd = ParamUtil.getString(req, Constants.CMD);
+
+			if (!cmd.equals(Constants.UPDATE)) {
+				return;
+			}
+
+			String[] urls = req.getParameterValues("url");
+			String[] titles = req.getParameterValues("title");
+			int entriesPerFeed = ParamUtil.getInteger(req, "entriesPerFeed", 4);
+
+			String portletResource = ParamUtil.getString(
+				req, "portletResource");
+
+			PortletPreferences prefs =
+				PortletPreferencesFactoryUtil.getPortletSetup(
+					req, portletResource, true, true);
+
+			if (urls != null && titles != null) {
+				prefs.setValues("urls", urls);
+				prefs.setValues("titles", titles);
+			}
+			else {
+				prefs.setValues("urls", new String[0]);
+				prefs.setValues("titles", new String[0]);
+			}
+
+			prefs.setValue("items-per-channel", String.valueOf(entriesPerFeed));
+
 			prefs.store();
+
+			SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 		}
 		catch (ValidatorException ve) {
 			SessionErrors.add(req, ValidatorException.class.getName(), ve);
-
-			return;
 		}
-
-		SessionMessages.add(req, config.getPortletName() + ".doEdit");
 	}
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+	public String render(
+			PortletConfig config, RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward("portlet.rss.edit");
+		return "/html/portlet/rss/configuration.jsp";
 	}
 
 }

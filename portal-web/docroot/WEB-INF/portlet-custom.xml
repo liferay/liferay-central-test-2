@@ -914,22 +914,12 @@
 		<display-name>RSS</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
-			<name>edit-action</name>
-			<value>/rss/edit</value>
-		</init-param>
-		<init-param>
-			<name>edit-guest-action</name>
-			<value>/rss/edit</value>
-		</init-param>
-		<init-param>
 			<name>view-action</name>
 			<value>/rss/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
-			<portlet-mode>edit</portlet-mode>
-			<portlet-mode>edit_guest</portlet-mode>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
