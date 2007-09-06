@@ -569,7 +569,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void checkLoginFailureById(long userId)
 		throws PortalException, SystemException {
 
-		User user = this.getUserById(userId);
+		User user = getUserById(userId);
 
 		checkLoginFailure(user);
 	}
@@ -1255,6 +1255,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
+	public User updateCreateDate(long userId, Date createDate)
+		throws PortalException, SystemException {
+
+		User user = UserUtil.findByPrimaryKey(userId);
+
+		user.setCreateDate(createDate);
+
+		UserUtil.update(user);
+
+		return user;
+	}
+
 	public User updateLastLogin(long userId, String loginIP)
 		throws PortalException, SystemException {
 
@@ -1312,7 +1324,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public User updateLockoutById(long userId, boolean lockout)
 		throws PortalException, SystemException {
 
-		User user = this.getUserById(userId);
+		User user = getUserById(userId);
 
 		return updateLockout(user, lockout);
 	}

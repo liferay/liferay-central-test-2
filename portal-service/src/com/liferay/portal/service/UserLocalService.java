@@ -317,6 +317,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.User updateCreateDate(long userId,
+		java.util.Date createDate)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.User updateLastLogin(long userId,
 		java.lang.String loginIP)
 		throws com.liferay.portal.SystemException, 

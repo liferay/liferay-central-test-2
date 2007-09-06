@@ -549,6 +549,15 @@ public class UserLocalServiceUtil {
 			agreedToTermsOfUse);
 	}
 
+	public static com.liferay.portal.model.User updateCreateDate(long userId,
+		java.util.Date createDate)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.updateCreateDate(userId, createDate);
+	}
+
 	public static com.liferay.portal.model.User updateLastLogin(long userId,
 		java.lang.String loginIP)
 		throws com.liferay.portal.PortalException, 
