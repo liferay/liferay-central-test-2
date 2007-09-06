@@ -70,6 +70,7 @@
 			<action-key>DELETE</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>UPDATE</action-key>
+			<action-key>VIEW</action-key>
 		</supports>
 		<community-defaults>
 			<action-key>VIEW</action-key>
