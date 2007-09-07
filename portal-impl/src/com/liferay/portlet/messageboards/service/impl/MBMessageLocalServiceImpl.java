@@ -57,6 +57,7 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
+import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBTreeWalker;
 import com.liferay.portlet.messageboards.model.impl.MBMessageDisplayImpl;
@@ -73,6 +74,7 @@ import com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.MBUtil;
@@ -1042,6 +1044,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		category.setLastPostDate(modifiedDate);
 
 		MBCategoryUtil.update(category);
+
+		// Statistics
+
+		MBStatsUser statsUser = MBStatsUserUtil.fetchByG_U(
+			category.getGroupId(), message.getUserId());
+
+		if (statsUser != null) {
+			statsUser.setLastPostDate(modifiedDate);
+
+			MBStatsUserUtil.update(statsUser);
+		}
 
 		return message;
 	}

@@ -29,6 +29,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.hibernate.Query;
 import org.hibernate.ScrollableResults;
 import org.hibernate.dialect.Dialect;
@@ -124,12 +127,20 @@ public class QueryUtil {
 				Object obj = sr.get(0);
 
 				if (obj == null) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Object is null");
+					}
+
 					break;
 				}
 
 				Comparable curComparable = (Comparable)obj;
 
 				int value = obc.compare(comparable, curComparable);
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Comparison result is " + value);
+				}
 
 				if (value == 0) {
 					if (!comparable.equals(curComparable)) {
@@ -152,19 +163,35 @@ public class QueryUtil {
 				}
 
 				if (count == 1) {
+					if (_log.isDebugEnabled()) {
+						_log.debug("Scroll count is 1");
+					}
+
 					break;
 				}
 
 				count = (int)Math.ceil(count / 2.0);
 
+				int scrollPos = count;
+
 				if (value < 0) {
-					if (!sr.scroll(count * -1)) {
-						break;
-					}
+					scrollPos = scrollPos  * -1;
 				}
-				else {
-					if (!sr.scroll(count)) {
-						break;
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Scroll " + scrollPos);
+				}
+
+				if (!sr.scroll(scrollPos)) {
+					if (value < 0) {
+						if (!sr.scroll(1)) {
+							break;
+						}
+					}
+					else {
+						if (!sr.scroll(-1)) {
+							break;
+						}
 					}
 				}
 			}
@@ -172,5 +199,7 @@ public class QueryUtil {
 
 		return array;
 	}
+
+	private static Log _log = LogFactory.getLog(QueryUtil.class);
 
 }

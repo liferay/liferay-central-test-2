@@ -468,6 +468,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.util.dao.hibernate.QueryUtil">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.util.mail">
 		<priority value="WARN" />
 	</category>
