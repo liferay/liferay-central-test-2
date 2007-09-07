@@ -34,7 +34,7 @@ public class ScreenNameValidator {
 
 	public boolean validate(long companyId, String screenName) {
 		if (Validator.isNull(screenName) ||
-			Validator.isNumber(screenName) ||
+			//Validator.isNumber(screenName) ||
 			Validator.isEmailAddress(screenName) ||
 			(screenName.equalsIgnoreCase("cyrus")) ||
 			(screenName.equalsIgnoreCase("postfix")) ||
