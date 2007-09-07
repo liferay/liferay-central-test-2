@@ -48,15 +48,15 @@ public class CustomSQLUtil {
 		return _instance._portalCustomSQLUtil.isVendorInformix();
 	}
 
-	public static boolean isVendorMySQL(){
+	public static boolean isVendorMySQL() {
 		return _instance._portalCustomSQLUtil.isVendorMySQL();
 	}
 
-	public static boolean isVendorOracle(){
+	public static boolean isVendorOracle() {
 		return _instance._portalCustomSQLUtil.isVendorOracle();
 	}
 
-	public static boolean isVendorSybase(){
+	public static boolean isVendorSybase() {
 		return _instance._portalCustomSQLUtil.isVendorSybase();
 	}
 

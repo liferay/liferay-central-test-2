@@ -59,6 +59,7 @@ public class InformixUtil extends DBUtil {
 
 	protected void buildCreateFile(String databaseName, boolean minimal)
 		throws IOException {
+
 		String minimalSuffix = getMinimalSuffix(minimal);
 
 		File file = new File(
@@ -107,7 +108,8 @@ public class InformixUtil extends DBUtil {
 
 		String line = null;
 
-		boolean isCreateTableBlock = false;
+		boolean createTable = false;
+
 		while ((line = br.readLine()) != null) {
 			if (line.startsWith(ALTER_COLUMN_TYPE)) {
 				String[] template = buildColumnTypeTokens(line);
@@ -124,33 +126,43 @@ public class InformixUtil extends DBUtil {
 					REWORD_TEMPLATE, template);
 			}
 			else if (line.indexOf("typeSettings text") > 0) {
-				line = StringUtil.replace(line, "typeSettings text", "typeSettings lvarchar(4096)");
+				line = StringUtil.replace(
+					line, "typeSettings text", "typeSettings lvarchar(4096)");
 			}
 			else if (line.indexOf("varchar(300)") > 0) {
-				line = StringUtil.replace(line, "varchar(300)", "lvarchar(300)");
+				line = StringUtil.replace(
+					line, "varchar(300)", "lvarchar(300)");
 			}
 			else if (line.indexOf("varchar(500)") > 0) {
-				line = StringUtil.replace(line, "varchar(500)", "lvarchar(500)");
+				line = StringUtil.replace(
+					line, "varchar(500)", "lvarchar(500)");
 			}
 			else if (line.indexOf("varchar(1000)") > 0) {
-				line = StringUtil.replace(line, "varchar(1000)", "lvarchar(1000)");
+				line = StringUtil.replace(
+					line, "varchar(1000)", "lvarchar(1000)");
 			}
 			else if (line.indexOf("varchar(1024)") > 0) {
-				line = StringUtil.replace(line, "varchar(1024)", "lvarchar(1024)");
+				line = StringUtil.replace(
+					line, "varchar(1024)", "lvarchar(1024)");
 			}
 			else if (line.indexOf("1970-01-01") > 0) {
-				line = StringUtil.replace(line, "1970-01-01", "1970-01-01 00:00:00.0");
+				line = StringUtil.replace(
+					line, "1970-01-01", "1970-01-01 00:00:00.0");
 			}
 			else if (line.indexOf("create table") >= 0) {
-				isCreateTableBlock = true;
+				createTable = true;
 			}
-			else if ((line.indexOf(");") >= 0) && isCreateTableBlock) {
-				line = StringUtil.replace(line, ");", ")\nextent size 16 next size 16\nlock mode row;");
-				isCreateTableBlock = false;
+			else if ((line.indexOf(");") >= 0) && createTable) {
+				line = StringUtil.replace(
+					line, ");",
+					")\nextent size 16 next size 16\nlock mode row;");
+
+				createTable = false;
 			}
 			else if (line.indexOf("commit;") >= 0) {
 				line = StringPool.BLANK;
 			}
+
 			sm.append(line);
 			sm.append("\n");
 		}

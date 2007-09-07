@@ -71,8 +71,8 @@ public abstract class CustomSQLUtil {
 
 	public static final String INFORMIX_FUNCTION_IS_NULL = "lportal.isnull(?)";
 
-	public static final String INFORMIX_FUNCTION_IS_NOT_NULL = "NOT " +
-		INFORMIX_FUNCTION_IS_NULL;
+	public static final String INFORMIX_FUNCTION_IS_NOT_NULL =
+		"NOT " + INFORMIX_FUNCTION_IS_NULL;
 
 	public static final String MYSQL = "MySQL";
 

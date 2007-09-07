@@ -113,6 +113,12 @@ public abstract class DBUtil {
 				_dbUtil = DB2Util.getInstance();
 			}
 		}
+		else if (dialect instanceof HSQLDialect) {
+			_dbUtil = HypersonicUtil.getInstance();
+		}
+		else if (dialect instanceof InformixDialect) {
+			_dbUtil = InformixUtil.getInstance();
+		}
 		else if (dialect instanceof InterbaseDialect) {
 			if (dialect instanceof FirebirdDialect) {
 				_dbUtil = FirebirdUtil.getInstance();
@@ -123,12 +129,6 @@ public abstract class DBUtil {
 		}
 		else if (dialect instanceof JDataStoreDialect) {
 			_dbUtil = JDataStoreUtil.getInstance();
-		}
-		else if (dialect instanceof HSQLDialect) {
-			_dbUtil = HypersonicUtil.getInstance();
-		}
-		else if (dialect instanceof InformixDialect) {
-			_dbUtil = InformixUtil.getInstance();
 		}
 		else if (dialect instanceof MySQLDialect) {
 			_dbUtil = MySQLUtil.getInstance();
