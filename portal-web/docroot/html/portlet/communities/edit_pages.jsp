@@ -547,7 +547,11 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 				</c:if>
 			</liferay-ui:error>
 
-			<liferay-ui:error exception="<%= LayoutSetVirtualHostException.class %>" message="please-enter-a-unique-virtual-host" />
+			<liferay-ui:error exception="<%= LayoutSetVirtualHostException.class %>">
+				<liferay-ui:message key="please-enter-a-unique-virtual-host" />
+
+				<liferay-ui:message key="virtual-hosts-must-be-valid-domain-names" />
+			</liferay-ui:error>
 
 			<liferay-ui:error exception="<%= LayoutTypeException.class %>">
 
