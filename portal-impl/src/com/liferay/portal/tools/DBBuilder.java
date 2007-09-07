@@ -68,6 +68,7 @@ public class DBBuilder {
 		_getDBUtil(DBUtil.DB_TYPE_DB2).buildCreateFile(_databaseName);
 		_getDBUtil(DBUtil.DB_TYPE_DERBY).buildCreateFile(_databaseName);
 		_getDBUtil(DBUtil.DB_TYPE_FIREBIRD).buildCreateFile(_databaseName);
+		_getDBUtil(DBUtil.DB_TYPE_INFORMIX).buildCreateFile(_databaseName);
 		_getDBUtil(DBUtil.DB_TYPE_MYSQL).buildCreateFile(_databaseName);
 		_getDBUtil(DBUtil.DB_TYPE_ORACLE).buildCreateFile(_databaseName);
 		_getDBUtil(DBUtil.DB_TYPE_POSTGRESQL).buildCreateFile(_databaseName);
@@ -84,6 +85,7 @@ public class DBBuilder {
 		_getDBUtil(DBUtil.DB_TYPE_DERBY).buildSQLFile(fileName);
 		_getDBUtil(DBUtil.DB_TYPE_FIREBIRD).buildSQLFile(fileName);
 		_getDBUtil(DBUtil.DB_TYPE_HYPERSONIC).buildSQLFile(fileName);
+		_getDBUtil(DBUtil.DB_TYPE_INFORMIX).buildSQLFile(fileName);
 		_getDBUtil(DBUtil.DB_TYPE_INTERBASE).buildSQLFile(fileName);
 		_getDBUtil(DBUtil.DB_TYPE_JDATASTORE).buildSQLFile(fileName);
 		_getDBUtil(DBUtil.DB_TYPE_MYSQL).buildSQLFile(fileName);

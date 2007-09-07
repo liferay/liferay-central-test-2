@@ -40,8 +40,12 @@ public class CustomSQLUtil {
 		return _instance._portalCustomSQLUtil.get(id);
 	}
 
-	public static boolean isVendorDB2(){
+	public static boolean isVendorDB2() {
 		return _instance._portalCustomSQLUtil.isVendorDB2();
+	}
+
+	public static boolean isVendorInformix() {
+		return _instance._portalCustomSQLUtil.isVendorInformix();
 	}
 
 	public static boolean isVendorMySQL(){

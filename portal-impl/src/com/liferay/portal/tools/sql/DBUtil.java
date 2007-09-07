@@ -53,6 +53,7 @@ import org.hibernate.dialect.DerbyDialect;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.FirebirdDialect;
 import org.hibernate.dialect.HSQLDialect;
+import org.hibernate.dialect.InformixDialect;
 import org.hibernate.dialect.InterbaseDialect;
 import org.hibernate.dialect.JDataStoreDialect;
 import org.hibernate.dialect.MySQLDialect;
@@ -77,23 +78,25 @@ public abstract class DBUtil {
 
 	public static final int DB_TYPE_FIREBIRD = 3;
 
-	public static final int DB_TYPE_INTERBASE = 4;
+	public static final int DB_TYPE_HYPERSONIC = 4;
 
-	public static final int DB_TYPE_JDATASTORE = 5;
+	public static final int DB_TYPE_INFORMIX = 5;
 
-	public static final int DB_TYPE_HYPERSONIC = 6;
+	public static final int DB_TYPE_INTERBASE = 6;
 
-	public static final int DB_TYPE_MYSQL = 7;
+	public static final int DB_TYPE_JDATASTORE = 7;
 
-	public static final int DB_TYPE_ORACLE = 8;
+	public static final int DB_TYPE_MYSQL = 8;
 
-	public static final int DB_TYPE_POSTGRESQL = 9;
+	public static final int DB_TYPE_ORACLE = 9;
 
-	public static final int DB_TYPE_SAP = 10;
+	public static final int DB_TYPE_POSTGRESQL = 10;
 
-	public static final int DB_TYPE_SQLSERVER = 11;
+	public static final int DB_TYPE_SAP = 11;
 
-	public static final int DB_TYPE_SYBASE = 12;
+	public static final int DB_TYPE_SQLSERVER = 12;
+
+	public static final int DB_TYPE_SYBASE = 13;
 
 	public static DBUtil getInstance() {
 		if (_dbUtil != null) {
@@ -123,6 +126,9 @@ public abstract class DBUtil {
 		}
 		else if (dialect instanceof HSQLDialect) {
 			_dbUtil = HypersonicUtil.getInstance();
+		}
+		else if (dialect instanceof InformixDialect) {
+			_dbUtil = InformixUtil.getInstance();
 		}
 		else if (dialect instanceof MySQLDialect) {
 			_dbUtil = MySQLUtil.getInstance();
@@ -162,14 +168,17 @@ public abstract class DBUtil {
 		else if (dbType == DB_TYPE_FIREBIRD) {
 			dbUtil = FirebirdUtil.getInstance();
 		}
+		else if (dbType == DB_TYPE_HYPERSONIC) {
+			dbUtil = HypersonicUtil.getInstance();
+		}
+		else if (dbType == DB_TYPE_INFORMIX) {
+			dbUtil = InformixUtil.getInstance();
+		}
 		else if (dbType == DB_TYPE_INTERBASE) {
 			dbUtil = InterBaseUtil.getInstance();
 		}
 		else if (dbType == DB_TYPE_JDATASTORE) {
 			dbUtil = JDataStoreUtil.getInstance();
-		}
-		else if (dbType == DB_TYPE_HYPERSONIC) {
-			dbUtil = HypersonicUtil.getInstance();
 		}
 		else if (dbType == DB_TYPE_MYSQL) {
 			dbUtil = MySQLUtil.getInstance();
