@@ -112,10 +112,10 @@ public class CompanyServiceJSON {
 
 	public static void updateSecurity(long companyId,
 		java.lang.String authType, boolean autoLogin, boolean sendPassword,
-		boolean strangers, boolean communityLogo)
+		boolean strangers, boolean strangersWithMx, boolean communityLogo)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		CompanyServiceUtil.updateSecurity(companyId, authType, autoLogin,
-			sendPassword, strangers, communityLogo);
+			sendPassword, strangers, strangersWithMx, communityLogo);
 	}
 }

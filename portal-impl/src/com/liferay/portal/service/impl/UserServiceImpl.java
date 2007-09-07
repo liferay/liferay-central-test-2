@@ -24,6 +24,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserException;
+import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Company;
@@ -122,6 +123,14 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			creatorUserId = getUserId();
 		}
 		catch (PrincipalException pe) {
+		}
+
+		if (creatorUserId == 0) {
+			if (!company.isStrangersWithMx() &&
+				company.hasCompanyMx(emailAddress)) {
+
+				throw new ReservedUserEmailAddressException();
+			}
 		}
 
 		return UserLocalServiceUtil.addUser(

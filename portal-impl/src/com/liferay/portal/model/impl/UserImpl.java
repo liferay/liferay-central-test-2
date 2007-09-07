@@ -24,7 +24,6 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
@@ -40,8 +39,6 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.LocaleUtil;
 
 import java.util.Date;
@@ -90,22 +87,11 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public boolean hasCompanyMx(String emailAddress) {
-		String mx = emailAddress.substring(
-			emailAddress.indexOf(StringPool.AT) + 1, emailAddress.length());
-
-		if (mx.equals(getCompanyMx())) {
-			return true;
-		}
-
 		try {
-			String[] mailHostNames = PrefsPropsUtil.getStringArray(
-				getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES);
+			Company company = CompanyLocalServiceUtil.getCompanyById(
+				getCompanyId());
 
-			for (int i = 0; i < mailHostNames.length; i++) {
-				if (mx.equalsIgnoreCase(mailHostNames[i])) {
-					return true;
-				}
-			}
+			return company.hasCompanyMx(emailAddress);
 		}
 		catch (Exception e) {
 			_log.error(e);

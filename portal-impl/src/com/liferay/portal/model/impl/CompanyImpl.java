@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
@@ -165,9 +166,46 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS);
 	}
 
+	public boolean isStrangersWithMx() throws PortalException, SystemException {
+		return PrefsPropsUtil.getBoolean(
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS_WITH_MX);
+	}
+
 	public boolean isCommunityLogo() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
 			getCompanyId(), PropsUtil.COMPANY_SECURITY_COMMUNITY_LOGO);
+	}
+
+	public boolean hasCompanyMx(String emailAddress) {
+		emailAddress = emailAddress.trim().toLowerCase();
+
+		int pos = emailAddress.indexOf(StringPool.AT);
+
+		if (pos == -1) {
+			return false;
+		}
+
+		String mx = emailAddress.substring(pos + 1, emailAddress.length());
+
+		if (mx.equals(getMx())) {
+			return true;
+		}
+
+		try {
+			String[] mailHostNames = PrefsPropsUtil.getStringArray(
+				getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES);
+
+			for (int i = 0; i < mailHostNames.length; i++) {
+				if (mx.equalsIgnoreCase(mailHostNames[i])) {
+					return true;
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return false;
 	}
 
 	public int compareTo(Object obj) {

@@ -190,7 +190,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				CompanyUtil.update(company);
 
 				updateSecurity(
-					companyId, CompanyImpl.AUTH_TYPE_EA, true, true, true,
+					companyId, CompanyImpl.AUTH_TYPE_EA, true, true, true, true,
 					true);
 
 				PortletPreferences prefs =
@@ -600,7 +600,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 	public void updateSecurity(
 			long companyId, String authType, boolean autoLogin,
-			boolean sendPassword, boolean strangers, boolean communityLogo)
+			boolean sendPassword, boolean strangers, boolean strangersWithMx,
+			boolean communityLogo)
 		throws PortalException, SystemException {
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences(companyId);
@@ -609,16 +610,19 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			prefs.setValue(PropsUtil.COMPANY_SECURITY_AUTH_TYPE, authType);
 			prefs.setValue(
 				PropsUtil.COMPANY_SECURITY_AUTO_LOGIN,
-				Boolean.toString(autoLogin));
+				String.valueOf(autoLogin));
 			prefs.setValue(
 				PropsUtil.COMPANY_SECURITY_SEND_PASSWORD,
-				Boolean.toString(sendPassword));
+				String.valueOf(sendPassword));
 			prefs.setValue(
 				PropsUtil.COMPANY_SECURITY_STRANGERS,
-				Boolean.toString(strangers));
+				String.valueOf(strangers));
+			prefs.setValue(
+				PropsUtil.COMPANY_SECURITY_STRANGERS_WITH_MX,
+				String.valueOf(strangersWithMx));
 			prefs.setValue(
 				PropsUtil.COMPANY_SECURITY_COMMUNITY_LOGO,
-				Boolean.toString(communityLogo));
+				String.valueOf(communityLogo));
 
 			prefs.store();
 		}

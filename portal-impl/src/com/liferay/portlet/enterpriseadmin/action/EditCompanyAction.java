@@ -121,7 +121,7 @@ public class EditCompanyAction extends PortletAction {
 		CompanyServiceUtil.updateSecurity(
 			company.getCompanyId(), company.getAuthType(),
 			company.isAutoLogin(), company.isSendPassword(),
-			company.isStrangers(), communityLogo);
+			company.isStrangers(), company.isStrangersWithMx(), communityLogo);
 	}
 
 }

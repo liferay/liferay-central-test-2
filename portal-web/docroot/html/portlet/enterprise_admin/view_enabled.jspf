@@ -1291,6 +1291,14 @@ String portletURLString = portletURL.toString();
 								<liferay-ui:input-checkbox param="strangers" defaultValue="<%= company.isStrangers() %>" />
 							</td>
 						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="allow-strangers-to-create-accounts-with-a-company-email-address" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="strangersWithMx" defaultValue="<%= company.isStrangersWithMx() %>" />
+							</td>
+						</tr>
 						</table>
 
 						<br />

@@ -86,9 +86,15 @@ public interface Company extends CompanyModel {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean isStrangersWithMx()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public boolean isCommunityLogo()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public boolean hasCompanyMx(java.lang.String emailAddress);
 
 	public int compareTo(java.lang.Object obj);
 }
