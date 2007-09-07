@@ -47,6 +47,7 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.Http;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
@@ -208,6 +209,8 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 
 		// Url
 
+		sm.append(Http.getProtocol(req));
+		sm.append("://");
 		sm.append(req.getServletPath());
 		sm.append(req.getPathInfo());
 		sm.append(StringPool.QUESTION);
