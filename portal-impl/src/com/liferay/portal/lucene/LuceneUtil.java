@@ -38,6 +38,8 @@ import com.liferay.util.lucene.KeywordsUtil;
 import java.io.IOException;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 import java.util.Map;
@@ -65,7 +67,10 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.store.jdbc.JdbcDirectory;
+import org.apache.lucene.store.jdbc.JdbcStoreException;
 import org.apache.lucene.store.jdbc.dialect.Dialect;
+import org.apache.lucene.store.jdbc.lock.JdbcLock;
+import org.apache.lucene.store.jdbc.support.JdbcTemplate;
 
 /**
  * <a href="LuceneUtil.java.html"><b><i>View Source</i></b></a>
@@ -471,13 +476,48 @@ public class LuceneUtil {
 							"whether a table exists");
 				}
 
+				// LEP-2181
+
+				Connection con = null;
+				ResultSet rs = null;
+
 				try {
-					jdbcDir.create();
+					con = HibernateUtil.getConnection();
+
+					// Check if table exists
+
+					DatabaseMetaData metaData = con.getMetaData();
+
+					rs = metaData.getTables(null, null, tableName, null);
+
+					if (!rs.next()) {
+						JdbcTemplate jdbcTemplate = jdbcDir.getJdbcTemplate();
+
+						jdbcTemplate.executeUpdate(
+							jdbcDir.getTable().sqlCreate());
+
+						Class lockClass = jdbcDir.getSettings().getLockClass();
+
+						JdbcLock jdbcLock = null;
+
+						try {
+							jdbcLock = (JdbcLock)lockClass.newInstance();
+						}
+						catch (Exception e) {
+							throw new JdbcStoreException(
+								"Failed to create lock class " + lockClass);
+						}
+
+						jdbcLock.initializeDatabase(jdbcDir);
+					}
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
 						_log.warn("Could not create " + tableName);
 					}
+				}
+				finally {
+					DataAccess.cleanUp(con, null, rs);
 				}
 			}
 		}
