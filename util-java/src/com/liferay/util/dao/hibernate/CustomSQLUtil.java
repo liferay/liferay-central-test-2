@@ -67,6 +67,13 @@ public abstract class CustomSQLUtil {
 
 	public static final String HYPERSONIC = "HSQL";
 
+	public static final String INFORMIX = "Informix";
+
+	public static final String INFORMIX_FUNCTION_IS_NULL = "lportal.isnull(?)";
+
+	public static final String INFORMIX_FUNCTION_IS_NOT_NULL = "NOT " +
+		INFORMIX_FUNCTION_IS_NULL;
+
 	public static final String MYSQL = "MySQL";
 
 	public static final String MYSQL_FUNCTION_IS_NULL = "IFNULL(?, '1') = '1'";
@@ -122,6 +129,16 @@ public abstract class CustomSQLUtil {
 
 					if (_log.isDebugEnabled()) {
 						_log.debug("Detected DB2 with database name " + dbName);
+					}
+				}
+				else if (dbName.startsWith(INFORMIX)) {
+					_vendorInformix = true;
+					_functionIsNull = INFORMIX_FUNCTION_IS_NULL;
+					_functionIsNotNull = INFORMIX_FUNCTION_IS_NOT_NULL;
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Detected Informix with database name " + dbName);
 					}
 				}
 				else if (dbName.startsWith(MYSQL)) {
@@ -194,6 +211,15 @@ public abstract class CustomSQLUtil {
 	 */
 	public boolean isVendorDB2() {
 		return _vendorDB2;
+	}
+
+	/**
+	 * Returns true if Hibernate is connecting to an Informix database.
+	 *
+	 * @return		true if Hibernate is connecting to an Informix database
+	 */
+	public boolean isVendorInformix() {
+		return _vendorInformix;
 	}
 
 	/**
@@ -450,6 +476,7 @@ public abstract class CustomSQLUtil {
 	private static Log _log = LogFactory.getLog(CustomSQLUtil.class);
 
 	private boolean _vendorDB2;
+	private boolean _vendorInformix;
 	private boolean _vendorMySQL;
 	private boolean _vendorOracle;
 	private boolean _vendorSybase;
