@@ -247,6 +247,7 @@
 
 	<target name="war" depends="compile">
 		<antcall target="build-codepress" />
+		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
 
 		<war
@@ -259,6 +260,7 @@
 
 	<target name="deploy">
 		<antcall target="build-codepress" />
+		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
 
 		<copy todir="docroot/WEB-INF/lib" file="${project.dir}/portal-client/portal-client.jar" />
@@ -376,6 +378,7 @@
 				<copy todir="${app.server.portal.dir}">
 					<fileset dir="docroot">
 						<include name="**/*.css" />
+						<include name="**/*.dtd" />
 						<include name="**/*.gif" />
 						<include name="**/*.jar" />
 						<include name="**/*.jpg" />
