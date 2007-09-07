@@ -2841,6 +2841,7 @@ view-users=Toon gebruikers
 view=Toon
 views=Vertoningen
 virtual-host=Virtual Host
+virtual-hosts-must-be-valid-domain-names=De virtuele gastheren moeten geldige domeinnamen zijn.
 visited-link=Bezochte links
 visits=Bezoeken
 vnc=VNC

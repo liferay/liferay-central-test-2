@@ -2841,6 +2841,7 @@ view-users=看法用戶
 view=檢視
 views=看法
 virtual-host=真正主人
+virtual-hosts-must-be-valid-domain-names=真正主人必須是合法的域名。
 visited-link=被參觀的鏈接
 visits=參觀
 vnc=VNC

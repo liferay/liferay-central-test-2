@@ -2839,6 +2839,7 @@ view-users=Χρήστες άποψης
 view=Προβολή
 views=Απόψεις
 virtual-host=Εικονικός οικοδεσπότης
+virtual-hosts-must-be-valid-domain-names=Οι εικονικοί οικοδεσπότες πρέπει να είναι έγκυρα ονόματα περιοχών.
 visited-link=Επισκεμμένη σύνδεση
 visits=Επισκέψεις
 vnc=VNC

@@ -2839,6 +2839,7 @@ view-users=전망 사용자
 view=전망
 views=전망
 virtual-host=사실상 주인
+virtual-hosts-must-be-valid-domain-names=사실상 주인은 유효한 도메인 이름 이어야 한다.
 visited-link=방문된 연결
 visits=방문
 vnc=VNC

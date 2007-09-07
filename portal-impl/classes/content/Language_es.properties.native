@@ -2841,6 +2841,7 @@ view-users=Ver usuarios
 view=Ver
 views=Accesos
 virtual-host=Servidor virtual
+virtual-hosts-must-be-valid-domain-names=Los anfitriones virtuales deben ser nombres válidos del dominio.
 visited-link=Enlace visitado
 visits=Visitas
 vnc=VNC

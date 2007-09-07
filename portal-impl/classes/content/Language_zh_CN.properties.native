@@ -2840,6 +2840,7 @@ view-users=查看用户
 view=查看
 views=看法
 virtual-host=真正主人
+virtual-hosts-must-be-valid-domain-names=真正主人必须是合法的域名。
 visited-link=访问过的链接
 visits=访问
 vnc=VNC

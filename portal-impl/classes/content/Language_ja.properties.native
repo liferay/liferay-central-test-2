@@ -2836,6 +2836,7 @@ view-users=眺めのユーザー
 view=眺め
 views=眺め
 virtual-host=事実上のホスト
+virtual-hosts-must-be-valid-domain-names=事実上のホストは有効なドメイン・ネームでなければならない。
 visited-link=訪問されたリンク
 visits=訪問
 vnc=VNC

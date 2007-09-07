@@ -2841,6 +2841,7 @@ view-users=Utilisateurs De Vue
 view=Vue
 views=Vues
 virtual-host=Centre serveur Virtuel
+virtual-hosts-must-be-valid-domain-names=Les centres serveurs virtuels doivent être des noms valides de domaine.
 visited-link=Lien Visité
 visits=Visites
 vnc=VNC

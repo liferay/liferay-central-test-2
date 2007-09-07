@@ -2841,6 +2841,7 @@ view-users=Usuários Da Vista
 view=Vista
 views=Vistas
 virtual-host=Anfitrião Virtual
+virtual-hosts-must-be-valid-domain-names=Os anfitriões virtuais devem ser nomes válidos do domínio.
 visited-link=Ligação Visitada
 visits=Visitas
 vnc=VNC

@@ -45,6 +45,7 @@ import com.liferay.portal.service.persistence.LayoutSetUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.Http;
 
 import java.io.File;
 
@@ -214,6 +215,12 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		virtualHost = virtualHost.trim().toLowerCase();
+
+		if (virtualHost.startsWith(Http.HTTP_WITH_SLASH) ||
+			virtualHost.startsWith(Http.HTTPS_WITH_SLASH)) {
+
+			throw new LayoutSetVirtualHostException();
+		}
 
 		LayoutSet layoutSet = LayoutSetUtil.findByG_P(groupId, privateLayout);
 
