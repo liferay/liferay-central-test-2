@@ -107,31 +107,33 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 		}
 		catch (NoSuchArticleException nsae) {
 		}
+
+		boolean showEditArticleIcon = (article != null) && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE);
+		boolean showSelectArticleIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.CONFIGURATION);
+		boolean showAddArticleIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE);
 		%>
 
-		<c:if test="<%= themeDisplay.isSignedIn() %>">
+		<c:if test="<%= themeDisplay.isSignedIn() && (showEditArticleIcon || showSelectArticleIcon || showAddArticleIcon) %>">
 			<div>
 				<br />
 
-				<c:if test="<%= article != null %>">
-					<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE) %>">
-						<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
-							<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
-							<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
-							<liferay-portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
-							<liferay-portlet:param name="articleId" value="<%= article.getArticleId() %>" />
-							<liferay-portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
-						</liferay-portlet:renderURL>
+				<c:if test="<%= showEditArticleIcon %>">
+					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
+						<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
+						<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
+						<liferay-portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+						<liferay-portlet:param name="articleId" value="<%= article.getArticleId() %>" />
+						<liferay-portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
+					</liferay-portlet:renderURL>
 
-						<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
-					</c:if>
+					<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
 				</c:if>
 
-				<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
+				<c:if test="<%= showSelectArticleIcon %>">
 					<liferay-ui:icon image="configuration" message="select-article" url="<%= portletDisplay.getURLConfiguration() %>" />
 				</c:if>
 
-				<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
+				<c:if test="<%= showAddArticleIcon %>">
 					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL" portletName="<%= PortletKeys.JOURNAL %>">
 						<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
 						<liferay-portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />

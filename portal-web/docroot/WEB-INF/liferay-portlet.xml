@@ -878,7 +878,6 @@
 		<portlet-name>98</portlet-name>
 		<icon>/html/portlet/software_catalog/icon.png</icon>
 		<struts-path>software_catalog</struts-path>
-		<configuration-action-class>com.liferay.portlet.softwarecatalog.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.softwarecatalog.util.Indexer</indexer-class>
 		<friendly-url-mapper-class>com.liferay.portlet.softwarecatalog.SCFriendlyURLMapper</friendly-url-mapper-class>
 		<use-default-template>false</use-default-template>
