@@ -60,6 +60,8 @@ public class MBMessageFlagLocalServiceImpl
 
 					messageFlag = MBMessageFlagUtil.create(messageFlagId);
 
+					messageFlag.setUserId(userId);
+					messageFlag.setMessageId(message.getMessageId());
 					messageFlag.setFlag(MBMessageFlagImpl.READ_FLAG);
 
 					MBMessageFlagUtil.update(messageFlag);
