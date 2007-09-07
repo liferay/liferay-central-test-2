@@ -417,6 +417,7 @@ allow-community-administrators-to-use-their-own-logo=コミュニティ管理者
 allow-dictionary-words-help=これが点検されれば、共通辞書の単語はユーザーのパスワードで許可される。
 allow-dictionary-words=辞書の単語を許可しなさい
 allow-simple-articles=簡単な記事を許可しなさい
+allow-strangers-to-create-accounts-with-a-company-email-address=他人を会社のEメールアドレスと記述を作成することを許可しなさいか。
 allow-strangers-to-create-accounts=他人を記述を作成することを許可しなさいか.
 allow-users-to-automatically-login=自動ログオンへユーザーを許可しなさいか.
 allow-users-to-request-forgotten-passwords=ユーザーを忘れられていたパスワードを要求することを許可しなさいか。

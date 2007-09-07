@@ -417,6 +417,7 @@ allow-community-administrators-to-use-their-own-logo=Επιτρέψτε στου
 allow-dictionary-words-help=Εάν αυτό ελέγχεται, κατόπιν οι κοινές λέξεις λεξικών επιτρέπονται στους κωδικούς πρόσβασης του χρήστη.
 allow-dictionary-words=Επιτρέψτε τις λέξεις λεξικών
 allow-simple-articles=Επιτρέψτε τα απλά άρθρα
+allow-strangers-to-create-accounts-with-a-company-email-address=Επιτρέψτε στους ξένους για να δημιουργήσετε τους απολογισμούς με μια διεύθυνση ηλεκτρονικού ταχυδρομείου επιχείρησης;
 allow-strangers-to-create-accounts=Επιτρέπεται σε ξένους να δημιουργήσουν λογαριασμούς;
 allow-users-to-automatically-login=Επιτρέπεται σε χρήστες να συνδεθούν στο σύστημα αυτόματα;
 allow-users-to-request-forgotten-passwords=Επιτρέψτε στους χρήστες για να ζητήσετε τους ξεχασμένους κωδικούς πρόσβασης;

@@ -417,6 +417,7 @@ allow-community-administrators-to-use-their-own-logo=Gemeinschafts-Administrator
 allow-dictionary-words-help=Wenn dies ausgew�hlt ist, werden W�rterbucheintr�ge erlaubt.
 allow-dictionary-words=W�rterbucheintr�ge erlauben
 allow-simple-articles=Einfache Artikel Zulassen
+allow-strangers-to-create-accounts-with-a-company-email-address=Erlauben Sie Fremden, Konten mit einem Firmaemail address zu verursachen?
 allow-strangers-to-create-accounts=Fremden das Erstellen von Konten erlauben?
 allow-users-to-automatically-login=Nutzern das automatische Login erlauben?
 allow-users-to-request-forgotten-passwords=Erlauben Sie Benutzern, um vergessene Kennw�rter zu bitten?

@@ -417,6 +417,7 @@ allow-community-administrators-to-use-their-own-logo=Permita que os administrado
 allow-dictionary-words-help=Se isto for verificado, a seguir as palavras comuns do dicionário estão permitidas nas senhas do usuário.
 allow-dictionary-words=Permita Palavras Do Dicionário
 allow-simple-articles=Permita Artigos Simples
+allow-strangers-to-create-accounts-with-a-company-email-address=_ permit desconhecido cri explic com um companhia email address? _
 allow-strangers-to-create-accounts=Permita que os desconhecido críem clientes?
 allow-users-to-automatically-login=Permita usuários automaticamente ao�  �cio de uma sessão?
 allow-users-to-request-forgotten-passwords=Permita que os usuários peçam senhas esquecidas?

@@ -417,6 +417,7 @@ allow-community-administrators-to-use-their-own-logo=允許社區管理員使用
 allow-dictionary-words-help=如果這被檢查, 那麼共同的字典詞被允許在用戶的密碼。
 allow-dictionary-words=允許字典詞
 allow-simple-articles=允許簡單的文章
+allow-strangers-to-create-accounts-with-a-company-email-address=允許陌生人創造帳戶以公司電子郵件?
 allow-strangers-to-create-accounts=允許陌生人開新帳號?
 allow-users-to-automatically-login=允許用戶自動地登錄?
 allow-users-to-request-forgotten-passwords=允許用戶請求被忘記的密碼?

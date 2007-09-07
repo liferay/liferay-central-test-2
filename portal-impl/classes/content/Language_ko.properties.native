@@ -417,6 +417,7 @@ allow-community-administrators-to-use-their-own-logo=지역 사회 행정관을 
 allow-dictionary-words-help=이것이 검사되면, 그때 일반적인 사전 낱말은 사용자 암호안에 허용한다.
 allow-dictionary-words=사전 낱말을 허용하십시요
 allow-simple-articles=간단한 기사를 허용하십시요
+allow-strangers-to-create-accounts-with-a-company-email-address=낯선 사람을 회사 전자 우편 주소에 계정을 창조하는 허용하십시요?
 allow-strangers-to-create-accounts=낯선 사람을 계정을 창조하는 허용하십시요?
 allow-users-to-automatically-login=자동적으로 로그온에게 사용자를 허용하십시요?
 allow-users-to-request-forgotten-passwords=사용자를 잊은 암호를 요구하는 허용하십시요?

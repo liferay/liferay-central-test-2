@@ -417,6 +417,7 @@ allow-community-administrators-to-use-their-own-logo=Permettez aux administrateu
 allow-dictionary-words-help=Si ceci est vérifié, alors on permet des mots communs de dictionnaire dans les mots de passe de l'utilisateur.
 allow-dictionary-words=Permettez Les Mots De Dictionnaire
 allow-simple-articles=Permettez les articles simples
+allow-strangers-to-create-accounts-with-a-company-email-address=Permettez aux étrangers de créer des comptes avec un email address de compagnie ?
 allow-strangers-to-create-accounts=Permettre aux internautes de créer des comptes ?
 allow-users-to-automatically-login=Permettre aux utilisateurs l'authentification automatique ?
 allow-users-to-request-forgotten-passwords=Permettez aux utilisateurs de demander des mots de passe oubliés ?
