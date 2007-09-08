@@ -265,5 +265,19 @@ public class GroupServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.GroupSoap updateGroup(long groupId,
+		java.lang.String typeSettings) throws RemoteException {
+		try {
+			com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
+					typeSettings);
+
+			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(GroupServiceSoap.class);
 }

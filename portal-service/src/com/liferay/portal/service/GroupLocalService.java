@@ -168,4 +168,9 @@ public interface GroupLocalService {
 		java.lang.String type, java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.Group updateGroup(long groupId,
+		java.lang.String typeSettings)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

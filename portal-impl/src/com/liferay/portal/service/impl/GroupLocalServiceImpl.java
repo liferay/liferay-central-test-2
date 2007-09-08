@@ -525,6 +525,18 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return group;
 	}
 
+	public Group updateGroup(long groupId, String typeSettings)
+		throws PortalException, SystemException {
+
+		Group group = GroupUtil.findByPrimaryKey(groupId);
+
+		group.setTypeSettings(typeSettings);
+
+		GroupUtil.update(group);
+
+		return group;
+	}
+
 	protected void addDefaultLayouts(Group group)
 		throws PortalException, SystemException {
 

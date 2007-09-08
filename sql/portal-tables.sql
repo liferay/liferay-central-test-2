@@ -275,6 +275,7 @@ create table Group_ (
 	name VARCHAR(75) null,
 	description STRING null,
 	type_ VARCHAR(75) null,
+	typeSettings STRING null,
 	friendlyURL VARCHAR(100) null,
 	active_ BOOLEAN
 );

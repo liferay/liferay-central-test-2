@@ -57,6 +57,7 @@ public class GroupSoap implements Serializable {
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setType(model.getType());
+		soapModel.setTypeSettings(model.getTypeSettings());
 		soapModel.setFriendlyURL(model.getFriendlyURL());
 		soapModel.setActive(model.getActive());
 
@@ -165,6 +166,14 @@ public class GroupSoap implements Serializable {
 		_type = type;
 	}
 
+	public String getTypeSettings() {
+		return _typeSettings;
+	}
+
+	public void setTypeSettings(String typeSettings) {
+		_typeSettings = typeSettings;
+	}
+
 	public String getFriendlyURL() {
 		return _friendlyURL;
 	}
@@ -195,6 +204,7 @@ public class GroupSoap implements Serializable {
 	private String _name;
 	private String _description;
 	private String _type;
+	private String _typeSettings;
 	private String _friendlyURL;
 	private boolean _active;
 }

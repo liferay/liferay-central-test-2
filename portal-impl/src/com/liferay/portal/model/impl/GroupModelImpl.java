@@ -64,10 +64,11 @@ public class GroupModelImpl extends BaseModelImpl {
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "type_", new Integer(Types.VARCHAR) },
+			{ "typeSettings", new Integer(Types.VARCHAR) },
 			{ "friendlyURL", new Integer(Types.VARCHAR) },
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ VARCHAR(75) null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";
+	public static String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ VARCHAR(75) null,typeSettings STRING null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Group_";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group"), XSS_ALLOW);
@@ -79,6 +80,9 @@ public class GroupModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group.type"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_TYPESETTINGS = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Group.typeSettings"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_FRIENDLYURL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group.friendlyURL"),
@@ -220,6 +224,23 @@ public class GroupModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getTypeSettings() {
+		return GetterUtil.getString(_typeSettings);
+	}
+
+	public void setTypeSettings(String typeSettings) {
+		if (((typeSettings == null) && (_typeSettings != null)) ||
+				((typeSettings != null) && (_typeSettings == null)) ||
+				((typeSettings != null) && (_typeSettings != null) &&
+				!typeSettings.equals(_typeSettings))) {
+			if (!XSS_ALLOW_TYPESETTINGS) {
+				typeSettings = XSSUtil.strip(typeSettings);
+			}
+
+			_typeSettings = typeSettings;
+		}
+	}
+
 	public String getFriendlyURL() {
 		return GetterUtil.getString(_friendlyURL);
 	}
@@ -263,6 +284,7 @@ public class GroupModelImpl extends BaseModelImpl {
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setType(getType());
+		clone.setTypeSettings(getTypeSettings());
 		clone.setFriendlyURL(getFriendlyURL());
 		clone.setActive(getActive());
 
@@ -323,6 +345,7 @@ public class GroupModelImpl extends BaseModelImpl {
 	private String _name;
 	private String _description;
 	private String _type;
+	private String _typeSettings;
 	private String _friendlyURL;
 	private boolean _active;
 }

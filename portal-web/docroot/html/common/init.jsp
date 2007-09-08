@@ -94,6 +94,7 @@
 <%@ page import="com.liferay.portal.kernel.util.OrderedProperties" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.PrefsParamUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.PropertiesParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.PropertiesUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Randomizer" %>
 <%@ page import="com.liferay.portal.kernel.util.ServerDetector" %>

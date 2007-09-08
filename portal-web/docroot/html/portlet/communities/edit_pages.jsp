@@ -114,7 +114,7 @@ if (selLayout != null) {
 	if (!PortalUtil.isLayoutParentable(selLayout) && tabs3.equals("children")) {
 		tabs3 = "page";
 	}
-	else if (tabs3.equals("logo") || tabs3.equals("export-import") || (tabs3.equals("virtual-host")) || (tabs3.equals("sitemap"))) {
+	else if (tabs3.equals("logo") || tabs3.equals("export-import") || (tabs3.equals("virtual-host")) || (tabs3.equals("sitemap")) || (tabs3.equals("monitoring"))) {
 		tabs3 = "page";
 	}
 }
@@ -221,6 +221,9 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 		document.<portlet:namespace />fm.encoding = "multipart/form-data";
 
 		<c:choose>
+			<c:when test='<%= tabs3.equals("monitoring") %>'>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "monitoring";
+			</c:when>
 			<c:when test='<%= tabs3.equals("virtual-host") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "virtual_host";
 			</c:when>
@@ -475,6 +478,8 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 						if (!privateLayout) {
 							tabs3Names += ",sitemap";
 						}
+
+						tabs3Names += ",monitoring";
 					}
 				}
 			}
@@ -1420,7 +1425,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 						<td>
 							<liferay-ui:message key="public-virtual-host" />
 						</td>
-						<td nowrap>
+						<td>
 
 							<%
 							LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, false);
@@ -1435,7 +1440,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 						<td>
 							<liferay-ui:message key="private-virtual-host" />
 						</td>
-						<td nowrap>
+						<td>
 
 							<%
 							LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, true);
@@ -1462,7 +1467,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							<td>
 								<liferay-ui:message key="friendly-url" />
 							</td>
-							<td nowrap>
+							<td>
 
 								<%
 								String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
@@ -1504,6 +1509,40 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 						<li><a href="http://www.google.com/webmasters/sitemaps/ping?sitemap=<%= sitemapUrl %>" target="_blank">Google</a>
 						<li><a href="https://siteexplorer.search.yahoo.com/submit/ping?sitemap=<%= sitemapUrl %>" target="_blank">Yahoo!</a> (<liferay-ui:message key="requires-login" />)
 					</ul>
+				</c:when>
+				<c:when test='<%= tabs3.equals("monitoring") %>'>
+					<liferay-ui:message key="set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages" />
+
+					<br /><br />
+
+					<table class="liferay-table">
+					<tr>
+						<td>
+							<liferay-ui:message key="google-analytics-id" />
+						</td>
+						<td>
+
+							<%
+							Properties groupTypeSettings = null;
+							
+							if (group != null) {
+								groupTypeSettings = group.getTypeSettingsProperties();
+							}
+							else {
+								groupTypeSettings = new Properties();
+							}
+
+							String googleAnalyticsId = PropertiesParamUtil.getString(groupTypeSettings, request, "googleAnalyticsId");
+							%>
+
+							<input name="<portlet:namespace />googleAnalyticsId" size="30" type="text" value="<%= googleAnalyticsId %>" />
+						</td>
+					</tr>
+					</table>
+
+					<br />
+
+					<input type="submit" value="<liferay-ui:message key="save" />" />
 				</c:when>
 			</c:choose>
 		</td>

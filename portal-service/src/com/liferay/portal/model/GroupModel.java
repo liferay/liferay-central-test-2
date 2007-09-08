@@ -89,6 +89,10 @@ public interface GroupModel extends BaseModel {
 
 	public void setType(String type);
 
+	public String getTypeSettings();
+
+	public void setTypeSettings(String typeSettings);
+
 	public String getFriendlyURL();
 
 	public void setFriendlyURL(String friendlyURL);

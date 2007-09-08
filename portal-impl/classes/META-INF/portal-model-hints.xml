@@ -156,6 +156,9 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="type" type="String" />
+		<field name="typeSettings" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="friendlyURL" type="String">
 			<hint name="max-length">100</hint>
 		</field>

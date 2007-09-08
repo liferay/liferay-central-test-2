@@ -184,4 +184,14 @@ public class GroupServiceJSON {
 
 		return GroupJSONSerializer.toJSONObject(returnValue);
 	}
+
+	public static JSONObject updateGroup(long groupId,
+		java.lang.String typeSettings)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
+				typeSettings);
+
+		return GroupJSONSerializer.toJSONObject(returnValue);
+	}
 }

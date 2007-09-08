@@ -86,6 +86,15 @@ public class GroupJSONSerializer {
 			jsonObj.put("type", type.toString());
 		}
 
+		String typeSettings = model.getTypeSettings();
+
+		if (typeSettings == null) {
+			jsonObj.put("typeSettings", StringPool.BLANK);
+		}
+		else {
+			jsonObj.put("typeSettings", typeSettings.toString());
+		}
+
 		String friendlyURL = model.getFriendlyURL();
 
 		if (friendlyURL == null) {

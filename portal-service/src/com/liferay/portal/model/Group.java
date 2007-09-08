@@ -62,6 +62,15 @@ public interface Group extends GroupModel {
 
 	public boolean isStagingGroup();
 
+	public java.lang.String getTypeSettings();
+
+	public void setTypeSettings(java.lang.String typeSettings);
+
+	public java.util.Properties getTypeSettingsProperties();
+
+	public void setTypeSettingsProperties(
+		java.util.Properties typeSettingsProperties);
+
 	public java.lang.String getPathFriendlyURL(boolean privateLayout,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay);
 

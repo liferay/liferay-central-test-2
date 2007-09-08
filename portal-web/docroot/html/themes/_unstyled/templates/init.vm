@@ -177,7 +177,7 @@
 	#set ($dir_include = "/html")
 #end
 
-#set ($bottom_ext_include = "$dir_include/common/themes/bottom-ext.jsp")
+#set ($bottom_ext_include = "$dir_include/common/themes/bottom.jsp")
 #set ($content_include = "$dir_include$tilesContent")
 #set ($session_timeout_include = "$dir_include/common/themes/session_timeout.jsp")
 #set ($sound_alerts_include = "$dir_include/common/themes/sound_alerts.jsp")

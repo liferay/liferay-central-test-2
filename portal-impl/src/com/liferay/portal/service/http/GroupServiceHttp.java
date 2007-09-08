@@ -674,5 +674,44 @@ public class GroupServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.model.Group updateGroup(
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String typeSettings)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = typeSettings;
+
+			if (typeSettings == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
+					"updateGroup", new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Group)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(GroupServiceHttp.class);
 }

@@ -168,4 +168,13 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 			groupId, name, description, type, friendlyURL, active);
 	}
 
+	public Group updateGroup(long groupId, String typeSettings)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+
+		return GroupLocalServiceUtil.updateGroup(groupId, typeSettings);
+	}
+
 }

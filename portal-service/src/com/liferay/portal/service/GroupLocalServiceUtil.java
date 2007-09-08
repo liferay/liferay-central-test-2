@@ -275,4 +275,13 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.updateGroup(groupId, name, description, type,
 			friendlyURL, active);
 	}
+
+	public static com.liferay.portal.model.Group updateGroup(long groupId,
+		java.lang.String typeSettings)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.updateGroup(groupId, typeSettings);
+	}
 }

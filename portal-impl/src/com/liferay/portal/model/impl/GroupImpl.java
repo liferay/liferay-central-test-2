@@ -24,6 +24,8 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.NullSafeProperties;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -38,7 +40,10 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.GroupNames;
 import com.liferay.portal.util.PortalUtil;
 
+import java.io.IOException;
+
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -179,6 +184,43 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		}
 	}
 
+	public String getTypeSettings() {
+		if (_typeSettingsProperties == null) {
+			return super.getTypeSettings();
+		}
+		else {
+			return PropertiesUtil.toString(_typeSettingsProperties);
+		}
+	}
+
+	public void setTypeSettings(String typeSettings) {
+		_typeSettingsProperties = null;
+
+		super.setTypeSettings(typeSettings);
+	}
+
+	public Properties getTypeSettingsProperties() {
+		if (_typeSettingsProperties == null) {
+			_typeSettingsProperties = new NullSafeProperties();
+
+			try {
+				PropertiesUtil.load(
+					_typeSettingsProperties, super.getTypeSettings());
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
+
+		return _typeSettingsProperties;
+	}
+
+	public void setTypeSettingsProperties(Properties typeSettingsProperties) {
+		_typeSettingsProperties = typeSettingsProperties;
+
+		super.setTypeSettings(PropertiesUtil.toString(_typeSettingsProperties));
+	}
+
 	public String getPathFriendlyURL(
 		boolean privateLayout, ThemeDisplay themeDisplay) {
 
@@ -289,5 +331,6 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 	private Group _stagingGroup;
 	private Group _liveGroup;
+	private Properties _typeSettingsProperties = null;
 
 }

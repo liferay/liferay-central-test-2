@@ -168,4 +168,13 @@ public class GroupServiceUtil {
 		return groupService.updateGroup(groupId, name, description, type,
 			friendlyURL, active);
 	}
+
+	public static com.liferay.portal.model.Group updateGroup(long groupId,
+		java.lang.String typeSettings)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		GroupService groupService = GroupServiceFactory.getService();
+
+		return groupService.updateGroup(groupId, typeSettings);
+	}
 }

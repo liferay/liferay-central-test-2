@@ -141,6 +141,9 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("look_and_feel")) {
 				updateLookAndFeel(req);
 			}
+			else if (cmd.equals("monitoring")) {
+				updateMonitoring(req);
+			}
 			else if (cmd.equals("publish_to_live")) {
 				publishToLive(req);
 			}
@@ -641,6 +644,21 @@ public class EditPagesAction extends PortletAction {
 				groupId, privateLayout, layoutId, themeId, colorSchemeId, css,
 				wapTheme);
 		}
+	}
+
+	protected void updateMonitoring(ActionRequest req) throws Exception {
+		long groupId = ParamUtil.getLong(req, "groupId");
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		String googleAnalyticsId = ParamUtil.getString(
+			req, "googleAnalyticsId");
+
+		Properties props = group.getTypeSettingsProperties();
+
+		props.setProperty("googleAnalyticsId", googleAnalyticsId);
+
+		GroupServiceUtil.updateGroup(groupId, group.getTypeSettings());
 	}
 
 	protected void updateStagingState(ActionRequest req) throws Exception {
