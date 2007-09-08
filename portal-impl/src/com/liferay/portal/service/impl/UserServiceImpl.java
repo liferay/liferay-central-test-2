@@ -365,6 +365,25 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 
 		checkPermission(userId, organizationId, locationId, ActionKeys.UPDATE);
 
+		long curUserId = getUserId();
+
+		if (curUserId == userId) {
+			emailAddress = emailAddress.trim().toLowerCase();
+
+			User user = UserUtil.findByPrimaryKey(userId);
+
+			if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
+				if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
+					Company company = CompanyUtil.findByPrimaryKey(
+						user.getCompanyId());
+
+					if (!company.isStrangersWithMx()) {
+						throw new ReservedUserEmailAddressException();
+					}
+				}
+			}
+		}
+
 		return UserLocalServiceUtil.updateUser(
 			userId, password, screenName, emailAddress, languageId, timeZoneId,
 			greeting, comments, firstName, middleName, lastName, prefixId,
