@@ -184,7 +184,7 @@ if (rowChecker != null) {
 			SearchEntry entry = (SearchEntry)entries.get(j);
 		%>
 
-			<td class="col-<%= j + 1 %><%= row.isBold() ? " lfr-highlighted" : "" %>" align="<%= entry.getAlign() %>" valign="<%= entry.getValign() %>">
+			<td class="col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %>" align="<%= entry.getAlign() %>" valign="<%= entry.getValign() %>">
 
 				<%
 				entry.print(pageContext);

@@ -636,7 +636,7 @@ ul.gamma .tree-item-hover {
 	padding: 4px;
 }
 
-.lfr-highlighted {
+.taglib-search-iterator-highlighted {
 	font-weight: bold;
 }
 
