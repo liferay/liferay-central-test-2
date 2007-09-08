@@ -102,10 +102,11 @@ public class TagsAssetServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
-		long companyId, int begin, int end) throws RemoteException {
+		long companyId, int begin, int end, java.lang.String languageId)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.tags.model.TagsAssetDisplay[] returnValue = TagsAssetServiceUtil.getCompanyAssetDisplays(companyId,
-					begin, end);
+					begin, end, languageId);
 
 			return returnValue;
 		}
@@ -135,6 +136,28 @@ public class TagsAssetServiceSoap {
 			int returnValue = TagsAssetServiceUtil.getCompanyAssetsCount(companyId);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAssetSoap updateAsset(
+		java.lang.String className, long classPK,
+		java.lang.String[] entryNames, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url, int height, int width)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.updateAsset(className,
+					classPK, entryNames, startDate, endDate, publishDate,
+					expirationDate, mimeType, title, description, summary, url,
+					height, width);
+
+			return com.liferay.portlet.tags.model.TagsAssetSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

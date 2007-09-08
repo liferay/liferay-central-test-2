@@ -88,6 +88,7 @@ import com.liferay.util.Encryptor;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
 import com.liferay.util.JS;
+import com.liferay.util.LocaleUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.StringServletResponse;
 import com.liferay.util.servlet.UploadPortletRequest;
@@ -251,6 +252,34 @@ public class PortalUtil {
 			throw new RuntimeException(
 				"Unable to get class name from value " + value);
 		}
+	}
+
+	public static String getClassNamePortletId(String className) {
+		String portletId = StringPool.BLANK;
+
+		if (className.startsWith("com.liferay.portlet.blogs")) {
+			portletId = PortletKeys.BLOGS;
+		}
+		else if (className.startsWith("com.liferay.portlet.bookmarks")) {
+			portletId = PortletKeys.BOOKMARKS;
+		}
+		else if (className.startsWith("com.liferay.portlet.documentlibrary")) {
+			portletId = PortletKeys.DOCUMENT_LIBRARY;
+		}
+		else if (className.startsWith("com.liferay.portlet.imagegallery")) {
+			portletId = PortletKeys.IMAGE_GALLERY;
+		}
+		else if (className.startsWith("com.liferay.portlet.journal")) {
+			portletId = PortletKeys.JOURNAL;
+		}
+		else if (className.startsWith("com.liferay.portlet.messageboards")) {
+			portletId = PortletKeys.MESSAGE_BOARDS;
+		}
+		else if (className.startsWith("com.liferay.portlet.wiki")) {
+			portletId = PortletKeys.WIKI;
+		}
+
+		return portletId;
 	}
 
 	public static Company getCompany(HttpServletRequest req)
@@ -997,6 +1026,20 @@ public class PortalUtil {
 		else {
 			return PORTLET_XML_FILE_NAME_STANDARD;
 		}
+	}
+
+	public static String getPortletTitle(
+		String portletId, long companyId, String languageId) {
+
+		Locale locale = LocaleUtil.fromLanguageId(languageId);
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(JavaConstants.JAVAX_PORTLET_TITLE);
+		sm.append(StringPool.PERIOD);
+		sm.append(portletId);
+
+		return LanguageUtil.get(companyId, locale, sm.toString());
 	}
 
 	public static String getPortletTitle(String portletId, User user) {

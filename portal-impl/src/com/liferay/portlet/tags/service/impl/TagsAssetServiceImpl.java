@@ -30,6 +30,7 @@ import com.liferay.portlet.tags.model.TagsAssetDisplay;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,11 +55,11 @@ public class TagsAssetServiceImpl
 	}
 
 	public TagsAssetDisplay[] getCompanyAssetDisplays(
-			long companyId, int begin, int end)
+			long companyId, int begin, int end, String languageId)
 		throws PortalException, SystemException {
 
 		return TagsAssetLocalServiceUtil.getCompanyAssetDisplays(
-			companyId, begin, end);
+			companyId, begin, end, languageId);
 	}
 
 	public List getCompanyAssets(long companyId, int begin, int end)
@@ -70,6 +71,19 @@ public class TagsAssetServiceImpl
 
 	public int getCompanyAssetsCount(long companyId) throws SystemException {
 		return TagsAssetLocalServiceUtil.getCompanyAssetsCount(companyId);
+	}
+
+	public TagsAsset updateAsset(
+			String className, long classPK, String[] entryNames, Date startDate,
+			Date endDate, Date publishDate, Date expirationDate,
+			String mimeType, String title, String description, String summary,
+			String url, int height, int width)
+		throws PortalException, SystemException {
+
+		return TagsAssetLocalServiceUtil.updateAsset(
+			getUserId(), className, classPK, entryNames, startDate, endDate,
+			publishDate, expirationDate, mimeType, title, description, summary,
+			url, height, width);
 	}
 
 }

@@ -66,12 +66,13 @@ public class TagsAssetServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
-		long companyId, int begin, int end)
+		long companyId, int begin, int end, java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
 
-		return tagsAssetService.getCompanyAssetDisplays(companyId, begin, end);
+		return tagsAssetService.getCompanyAssetDisplays(companyId, begin, end,
+			languageId);
 	}
 
 	public static java.util.List getCompanyAssets(long companyId, int begin,
@@ -87,5 +88,21 @@ public class TagsAssetServiceUtil {
 		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
 
 		return tagsAssetService.getCompanyAssetsCount(companyId);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
+		java.lang.String className, long classPK,
+		java.lang.String[] entryNames, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url, int height, int width)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
+
+		return tagsAssetService.updateAsset(className, classPK, entryNames,
+			startDate, endDate, publishDate, expirationDate, mimeType, title,
+			description, summary, url, height, width);
 	}
 }

@@ -202,13 +202,13 @@ public class HibernateUtil {
 
 	public static SystemException processException(Exception e) {
 		if (e instanceof HibernateException) {
-			_log.error("Caught HibernateException. " + e.getMessage());
+			_log.error("Caught HibernateException");
 		}
 		else {
-			_log.error(
-				"Caught unexpected Exception " + e.getClass().getName() +
-					". " + e.getMessage());
+			_log.error("Caught unexpected exception " + e.getClass().getName());
 		}
+
+		_log.error(e, e);
 
 		return new SystemException(e);
 	}

@@ -59,6 +59,10 @@ public class PortalUtil_IW {
 		return PortalUtil.getClassNameId(value);
 	}
 
+	public java.lang.String getClassNamePortletId(java.lang.String className) {
+		return PortalUtil.getClassNamePortletId(className);
+	}
+
 	public com.liferay.portal.model.Company getCompany(
 		javax.servlet.http.HttpServletRequest req)
 		throws com.liferay.portal.SystemException, 
@@ -336,6 +340,11 @@ public class PortalUtil_IW {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		return PortalUtil.getPortletXmlFileName();
+	}
+
+	public java.lang.String getPortletTitle(java.lang.String portletId,
+		long companyId, java.lang.String languageId) {
+		return PortalUtil.getPortletTitle(portletId, companyId, languageId);
 	}
 
 	public java.lang.String getPortletTitle(java.lang.String portletId,

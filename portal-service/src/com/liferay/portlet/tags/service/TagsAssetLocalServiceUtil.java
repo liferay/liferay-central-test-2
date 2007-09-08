@@ -143,13 +143,13 @@ public class TagsAssetLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
-		long companyId, int begin, int end)
+		long companyId, int begin, int end, java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 
 		return tagsAssetLocalService.getCompanyAssetDisplays(companyId, begin,
-			end);
+			end, languageId);
 	}
 
 	public static java.util.List getCompanyAssets(long companyId, int begin,

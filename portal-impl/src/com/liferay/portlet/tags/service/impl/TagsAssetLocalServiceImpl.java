@@ -141,10 +141,11 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	}
 
 	public TagsAssetDisplay[] getCompanyAssetDisplays(
-			long companyId, int begin, int end)
+			long companyId, int begin, int end, String languageId)
 		throws PortalException, SystemException {
 
-		return getAssetDisplays(getCompanyAssets(companyId, begin, end));
+		return getAssetDisplays(
+			getCompanyAssets(companyId, begin, end), languageId);
 	}
 
 	public List getCompanyAssets(long companyId, int begin, int end)
@@ -249,7 +250,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		validator.validate(className, entryNames);
 	}
 
-	protected TagsAssetDisplay[] getAssetDisplays(List assets)
+	protected TagsAssetDisplay[] getAssetDisplays(
+			List assets, String languageId)
 		throws PortalException, SystemException {
 
 		TagsAssetDisplay[] assetDisplays = new TagsAssetDisplay[assets.size()];
@@ -258,6 +260,9 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			TagsAsset asset = (TagsAsset)assets.get(i);
 
 			String className = PortalUtil.getClassName(asset.getClassNameId());
+			String portletId = PortalUtil.getClassNamePortletId(className);
+			String portletTitle = PortalUtil.getPortletTitle(
+				portletId, asset.getCompanyId(), languageId);
 
 			StringMaker sm = new StringMaker();
 
@@ -287,6 +292,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			assetDisplay.setClassNameId(asset.getClassNameId());
 			assetDisplay.setClassName(className);
 			assetDisplay.setClassPK(asset.getClassPK());
+			assetDisplay.setPortletId(portletId);
+			assetDisplay.setPortletTitle(portletTitle);
 			assetDisplay.setStartDate(asset.getStartDate());
 			assetDisplay.setEndDate(asset.getEndDate());
 			assetDisplay.setPublishDate(asset.getPublishDate());

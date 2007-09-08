@@ -84,11 +84,11 @@ public class TagsAssetServiceJSON {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
-		long companyId, int begin, int end)
+		long companyId, int begin, int end, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.tags.model.TagsAssetDisplay[] returnValue = TagsAssetServiceUtil.getCompanyAssetDisplays(companyId,
-				begin, end);
+				begin, end, languageId);
 
 		return returnValue;
 	}
@@ -106,5 +106,21 @@ public class TagsAssetServiceJSON {
 		int returnValue = TagsAssetServiceUtil.getCompanyAssetsCount(companyId);
 
 		return returnValue;
+	}
+
+	public static JSONObject updateAsset(java.lang.String className,
+		long classPK, java.lang.String[] entryNames, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url, int height, int width)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.updateAsset(className,
+				classPK, entryNames, startDate, endDate, publishDate,
+				expirationDate, mimeType, title, description, summary, url,
+				height, width);
+
+		return TagsAssetJSONSerializer.toJSONObject(returnValue);
 	}
 }

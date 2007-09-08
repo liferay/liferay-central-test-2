@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -133,16 +134,23 @@ public class TagsAssetServiceHttp {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
-		HttpPrincipal httpPrincipal, long companyId, int begin, int end)
+		HttpPrincipal httpPrincipal, long companyId, int begin, int end,
+		java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 			Object paramObj1 = new IntegerWrapper(begin);
 			Object paramObj2 = new IntegerWrapper(end);
+			Object paramObj3 = languageId;
+
+			if (languageId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
 					"getCompanyAssetDisplays",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 
 			try {
@@ -219,6 +227,117 @@ public class TagsAssetServiceHttp {
 			}
 
 			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
+		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
+		java.lang.String[] entryNames, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url, int height, int width)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new LongWrapper(classPK);
+			Object paramObj2 = entryNames;
+
+			if (entryNames == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj3 = startDate;
+
+			if (startDate == null) {
+				paramObj3 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj4 = endDate;
+
+			if (endDate == null) {
+				paramObj4 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj5 = publishDate;
+
+			if (publishDate == null) {
+				paramObj5 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj6 = expirationDate;
+
+			if (expirationDate == null) {
+				paramObj6 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj7 = mimeType;
+
+			if (mimeType == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = title;
+
+			if (title == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = description;
+
+			if (description == null) {
+				paramObj9 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj10 = summary;
+
+			if (summary == null) {
+				paramObj10 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj11 = url;
+
+			if (url == null) {
+				paramObj11 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj12 = new IntegerWrapper(height);
+			Object paramObj13 = new IntegerWrapper(width);
+			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
+					"updateAsset",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.tags.model.TagsAsset)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

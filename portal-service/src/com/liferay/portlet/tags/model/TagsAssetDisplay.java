@@ -106,6 +106,22 @@ public class TagsAssetDisplay implements Serializable {
 		_classPK = classPK;
 	}
 
+	public String getPortletId() {
+		return _portletId;
+	}
+
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
+	}
+
+	public String getPortletTitle() {
+		return _portletTitle;
+	}
+
+	public void setPortletTitle(String portletTitle) {
+		_portletTitle = portletTitle;
+	}
+
 	public Date getStartDate() {
 		return _startDate;
 	}
@@ -211,6 +227,8 @@ public class TagsAssetDisplay implements Serializable {
 	private long _classNameId;
 	private String _className;
 	private long _classPK;
+	private String _portletId;
+	private String _portletTitle;
 	private Date _startDate;
 	private Date _endDate;
 	private Date _publishDate;

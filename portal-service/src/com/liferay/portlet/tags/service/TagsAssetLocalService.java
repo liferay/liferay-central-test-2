@@ -96,7 +96,7 @@ public interface TagsAssetLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
-		long companyId, int begin, int end)
+		long companyId, int begin, int end, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

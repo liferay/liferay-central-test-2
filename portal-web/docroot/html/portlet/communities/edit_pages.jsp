@@ -1524,7 +1524,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 							<%
 							Properties groupTypeSettings = null;
-							
+
 							if (group != null) {
 								groupTypeSettings = group.getTypeSettingsProperties();
 							}
