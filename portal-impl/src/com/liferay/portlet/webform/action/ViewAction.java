@@ -84,7 +84,7 @@ public class ViewAction extends PortletAction {
 		String successURL = GetterUtil.getString(
 			prefs.getValue("successURL", StringPool.BLANK));
 		boolean sendAsEmail = GetterUtil.getBoolean(
-			prefs.getValue("sendAsEmail", StringPool.BLANK));
+			prefs.getValue("sendAsEmail", StringPool.BLANK), true);
 		boolean saveToFile = GetterUtil.getBoolean(
 			prefs.getValue("saveToFile", StringPool.BLANK));
 		String fileName = GetterUtil.getString(
