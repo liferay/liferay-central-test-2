@@ -2863,6 +2863,16 @@ warning-your-session-has-expired=Προειδοποίηση! Λόγω στην �
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 web-id=Ταυτότητα Ιστού
 webdav-url=WebDAV URL
+
+
+handling-of-form-data=Χειρισμός των στοιχείων μορφής
+path-and-file-name=Όνομα πορειών και αρχείων
+please-enter-a-valid-path-and-file-name=Παρακαλώ εισάγετε ένα έγκυρο όνομα πορειών και αρχείων.
+please-enter-an-email-address=Παρακαλώ εισάγετε μια διεύθυνση ηλεκτρονικού ταχυδρομείου.
+please-select-an-action-for-the-handling-of-form-data=Παρακαλώ επιλέξτε μια δράση για το χειρισμό των στοιχείων μορφής.
+redirect-url-on-success=Επαναπροσανατολίστε URL στην επιτυχία
+save-to-file=Εκτός από στο αρχείο
+send-as-email=Στείλετε ως ηλεκτρονικό ταχυδρομείο
 website=Δικτυακός Τόπος
 websites=Ιστοχώροι
 wedding=Γάμος

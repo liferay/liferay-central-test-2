@@ -2865,6 +2865,16 @@ warning-your-session-has-expired=Avvertimento!  dovuto inactivity, la vostra ses
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 web-id=Web ID
 webdav-url=URL di WebDAV
+
+
+handling-of-form-data=Manipolazione dei dati della forma
+path-and-file-name=_ percorso e nome di archivio
+please-enter-a-valid-path-and-file-name=Entri prego in un percorso valido e nel nome di archivio.
+please-enter-an-email-address=Entri prego in un email address.
+please-select-an-action-for-the-handling-of-form-data=Selezioni prego un'azione per la manipolazione dei dati della forma.
+redirect-url-on-success=Riorienti il URL su successo
+save-to-file=Risparmi alla lima
+send-as-email=Trasmetta come email
 website=Sito Internet
 websites=Siti Internet
 wedding=Nozze

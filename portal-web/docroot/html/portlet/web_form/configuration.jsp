@@ -29,15 +29,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String title = PrefsParamUtil.getString(prefs, request, "title");
 String description = PrefsParamUtil.getString(prefs, request, "description");
-boolean requireCaptcha = PrefsParamUtil.getBoolean(prefs, request, "require-captcha");
+boolean requireCaptcha = PrefsParamUtil.getBoolean(prefs, request, "requireCaptcha");
+String successURL = PrefsParamUtil.getString(prefs, request, "successURL");
+boolean sendAsEmail = PrefsParamUtil.getBoolean(prefs, request, "sendAsEmail");
 String subject = PrefsParamUtil.getString(prefs, request, "subject");
 String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
-
-String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 boolean saveToFile = PrefsParamUtil.getBoolean(prefs, request, "saveToFile");
-boolean sendAsEmail = PrefsParamUtil.getBoolean(prefs, request, "sendAsEmail");
-String thanksURL = PrefsParamUtil.getString(prefs, request, "thanksURL");
-
+String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" class="uni-form" method="post" name="<portlet:namespace />fm">
@@ -66,53 +64,51 @@ String thanksURL = PrefsParamUtil.getString(prefs, request, "thanksURL");
 	</div>
 
 	<div class="ctrl-holder">
-		<label for="<portlet:namespace />thanksURL"><liferay-ui:message key="webform-thanksURL" /></label>
+		<label for="<portlet:namespace />successURL"><liferay-ui:message key="redirect-url-on-success" /></label>
 
-		<input class="liferay-input-text" id="<portlet:namespace />thanksURL" name="<portlet:namespace />thanksURL" type="text" value="<%= thanksURL %>" />
+		<input class="liferay-input-text" id="<portlet:namespace />successURL" name="<portlet:namespace />successURL" type="text" value="<%= successURL %>" />
 	</div>
 </fieldset>
 
 <fieldset class="block-labels">
-<!--	<legend><liferay-ui:message key="email-to" /></legend>
--->
-	<legend><liferay-ui:message key="webform-handle-form-data" /></legend>
+	<legend><liferay-ui:message key="handling-of-form-data" /></legend>
 
 	<fieldset class="block-labels">
 		<legend><liferay-ui:message key="email" /></legend>
-	
+
 		<liferay-ui:error key="subjectRequired" message="please-enter-a-subject" />
-		<liferay-ui:error key="emailAddressRequired" message="please-enter-an-email-address" />
+		<liferay-ui:error key="handlingRequired" message="please-select-an-action-for-the-handling-of-form-data" />
 		<liferay-ui:error key="emailAddressInvalid" message="please-enter-a-valid-email-address" />
-		<liferay-ui:error key="fileNameInvalid" message="webform-please-enter-a-valid-path-and-filename" />
-		<liferay-ui:error key="emailOrFileRequired" message="webform-select-sendasemail-or-savetofile" />	
+		<liferay-ui:error key="emailAddressRequired" message="please-enter-an-email-address" />
+		<liferay-ui:error key="fileNameInvalid" message="please-enter-a-valid-path-and-filename" />
 
 		<div class="ctrl-holder">
-			<label><liferay-ui:message key="webform-send-as-email" /> <liferay-ui:input-checkbox param="sendAsEmail" defaultValue="<%= sendAsEmail %>" /></label>
+			<label><liferay-ui:message key="send-as-email" /> <liferay-ui:input-checkbox param="sendAsEmail" defaultValue="<%= sendAsEmail %>" /></label>
 		</div>
-	
+
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />subject"><liferay-ui:message key="subject" /></label>
-	
+
 			<input class="liferay-input-text" id="<portlet:namespace />subject" name="<portlet:namespace />subject" type="text" value="<%= subject %>" />
 		</div>
-	
+
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />emailAddress"><liferay-ui:message key="email-address" /></label>
-	
+
 			<input class="liferay-input-text" id="<portlet:namespace />emailAddress" name="<portlet:namespace />emailAddress" type="text" value="<%= emailAddress %>" />
 		</div>
 	</fieldset>
-	
+
 	<fieldset class="block-labels">
-		<legend><liferay-ui:message key="webform-file" /></legend>
+		<legend><liferay-ui:message key="file" /></legend>
 
 		<div class="ctrl-holder">
-			<label><liferay-ui:message key="webform-save-to-file" /> <liferay-ui:input-checkbox param="saveToFile" defaultValue="<%= saveToFile %>" /></label>
+			<label><liferay-ui:message key="save-to-file" /> <liferay-ui:input-checkbox param="saveToFile" defaultValue="<%= saveToFile %>" /></label>
 		</div>
-	
+
 		<div class="ctrl-holder">
-			<label for="<portlet:namespace />filename"><liferay-ui:message key="webform-filename" /></label>
-	
+			<label for="<portlet:namespace />filename"><liferay-ui:message key="path-and-file-name" /></label>
+
 			<input class="liferay-input-text" id="<portlet:namespace />filename" name="<portlet:namespace />fileName" type="text" value="<%= fileName %>" />
 		</div>
 	</fieldset>

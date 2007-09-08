@@ -2860,6 +2860,16 @@ warning-your-session-has-expired=警告! 不活動のために、あなたの会
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 web-id=網ID
 webdav-url=WebDAV のURL
+
+
+handling-of-form-data=形態データの処理
+path-and-file-name=道及びファイル名
+please-enter-a-valid-path-and-file-name=有効な道およびファイル名を入れなさい。
+please-enter-an-email-address=Eメールアドレスを書き入れなさい。
+please-select-an-action-for-the-handling-of-form-data=形態データの処理に行為を選びなさい。
+redirect-url-on-success=成功のURL の方向を変えなさい
+save-to-file=ファイルにを除けば
+send-as-email=電子メールとして送りなさい
 website=Website
 websites=ウェブサイト
 wedding=結婚式

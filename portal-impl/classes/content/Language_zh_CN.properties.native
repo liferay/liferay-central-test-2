@@ -2865,6 +2865,16 @@ warning-your-session-has-expired=警告! 由于不活泼, 您的会议到期了�
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 web-id=网身份证
 webdav-url=WebDAV URL
+
+
+handling-of-form-data=处理形式数据
+path-and-file-name=_ 道路和文件名
+please-enter-a-valid-path-and-file-name=请进入一个合法的道路和文件名。
+please-enter-an-email-address=请输入电子邮件。
+please-select-an-action-for-the-handling-of-form-data=请选择一次行动为处理形式数据。
+redirect-url-on-success=改URL 方向在成功
+save-to-file=之外对文件
+send-as-email=送作为电子邮件
 website=网站
 websites=网站
 wedding=婚礼

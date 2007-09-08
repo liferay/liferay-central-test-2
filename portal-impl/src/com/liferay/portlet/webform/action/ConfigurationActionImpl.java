@@ -22,6 +22,14 @@
 
 package com.liferay.portlet.webform.action;
 
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
+import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.SessionMessages;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
@@ -31,14 +39,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
-import com.liferay.portal.kernel.portlet.ConfigurationAction;
-import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.util.servlet.SessionErrors;
-import com.liferay.util.servlet.SessionMessages;
 
 /**
  * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
@@ -50,7 +50,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
 			PortletConfig config, ActionRequest req, ActionResponse res)
-			throws Exception {
+		throws Exception {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
@@ -61,20 +61,18 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String title = ParamUtil.getString(req, "title");
 		String description = ParamUtil.getString(req, "description");
 		boolean requireCaptcha = ParamUtil.getBoolean(req, "requireCaptcha");
+		String successURL = ParamUtil.getString(req, "successURL");
+		boolean sendAsEmail = ParamUtil.getBoolean(req, "sendAsEmail");
 		String subject = ParamUtil.getString(req, "subject");
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
-
-		String fileName = ParamUtil.getString(req, "fileName");
 		boolean saveToFile = ParamUtil.getBoolean(req, "saveToFile");
-		boolean sendAsEmail = ParamUtil.getBoolean(req, "sendAsEmail");
-		String thanksURL = ParamUtil.getString(req, "thanksURL");
+		String fileName = ParamUtil.getString(req, "fileName");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, portletResource, true, true);
-
 
 		if (Validator.isNull(title)) {
 			SessionErrors.add(req, "titleRequired");
@@ -85,7 +83,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 
 		if (!sendAsEmail && !saveToFile){
-			SessionErrors.add(req, "emailOrFileRequired");
+			SessionErrors.add(req, "handlingRequired");
 		}
 
 		if (sendAsEmail) {
@@ -98,13 +96,18 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 
 		if (saveToFile) {
-			// check if webserver can create a file as specified
+
+			// Check if server can create a file as specified
+
 			try {
 				FileOutputStream fos = new FileOutputStream(fileName, true);
+
 				fos.close();
-			} catch (SecurityException e) {
+			}
+			catch (SecurityException es) {
 				SessionErrors.add(req, "fileNameInvalid");
-			} catch (FileNotFoundException e) {
+			}
+			catch (FileNotFoundException fnfe) {
 				SessionErrors.add(req, "fileNameInvalid");
 			}
 		}
@@ -115,13 +118,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		prefs.setValue("title", title);
 		prefs.setValue("description", description);
-		prefs.setValue("require-captcha", String.valueOf(requireCaptcha));
+		prefs.setValue("requireCaptcha", String.valueOf(requireCaptcha));
+		prefs.setValue("successURL", successURL);
+		prefs.setValue("sendAsEmail", String.valueOf(sendAsEmail));
 		prefs.setValue("subject", subject);
 		prefs.setValue("emailAddress", emailAddress);
-		prefs.setValue("sendAsEmail", String.valueOf(sendAsEmail));
 		prefs.setValue("saveToFile", String.valueOf(saveToFile));
 		prefs.setValue("fileName", fileName);
-		prefs.setValue("thanksURL", thanksURL);
 
 		int i = 1;
 

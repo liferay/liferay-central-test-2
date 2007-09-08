@@ -2863,6 +2863,16 @@ warning-your-session-has-expired=경고! 비활동에 만기가 되는, 너의 �
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 web-id=웹 식별
 webdav-url=WebDAVURL
+
+
+handling-of-form-data=모양 자료의 취급
+path-and-file-name=경로와 파일 이름
+please-enter-a-valid-path-and-file-name=유효한 경로 및 파일 이름에 들어가십시요.
+please-enter-an-email-address=전자 우편 주소에 들어가십시요.
+please-select-an-action-for-the-handling-of-form-data=모양 자료의 취급을 위해 활동을 선정하십시요.
+redirect-url-on-success=성공에URL을 방향을 고치십시요
+save-to-file=파일에를 제외하고
+send-as-email=전자 우편으로 보내십시요
 website=Website
 websites=웹사이트
 wedding=결혼식

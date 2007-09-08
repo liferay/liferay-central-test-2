@@ -2865,6 +2865,16 @@ warning-your-session-has-expired=警告! 由於不活潑, 您的會議到期了�
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 web-id=網身份證
 webdav-url=WebDAV URL
+
+
+handling-of-form-data=_ handling 形式資料
+path-and-file-name=道路和文件名
+please-enter-a-valid-path-and-file-name=請進入一個合法的道路和文件名。
+please-enter-an-email-address=請輸入電子郵件。
+please-select-an-action-for-the-handling-of-form-data=請選擇一次行動為處理形式資料。
+redirect-url-on-success=改URL 方向在成功
+save-to-file=之外對文件
+send-as-email=送作為電子郵件
 website=網站
 websites=網站
 wedding=婚禮

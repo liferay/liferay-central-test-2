@@ -2498,6 +2498,8 @@ warning-due-to-inactivity-your-session-has-expired=تحذيـر! نظرا لخم
 warning-due-to-inactivity-your-session-will-expire=تحذيـر! نظرا لخمولك، سيتم إنهاء جلستك خلال {0} دقيقة في {1} {2}. هل تريد تمديد جلستك لـ {3} دقيقة أخرى؟
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 webdav-url=الرابط التشعبي للـWebDAV
+
+
 website=موقع إلكتروني
 websites=مواقع إلكترونية
 wedding=زواج

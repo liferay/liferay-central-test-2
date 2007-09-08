@@ -2865,6 +2865,16 @@ warning-your-session-has-expired=Waarschuwing!  Wegens inactiviteit, is uw zitti
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 web-id=Identiteitskaart van het Web
 webdav-url=WebDAV URL
+
+
+handling-of-form-data=Behandeling van de Gegevens van de Vorm
+path-and-file-name=De Naam van de weg en van het Dossier
+please-enter-a-valid-path-and-file-name=Gelieve te gaan een geldige weg en dossiernaam in.
+please-enter-an-email-address=Gelieve te gaan een e-mailadres in.
+please-select-an-action-for-the-handling-of-form-data=Gelieve te selecteren een actie voor de behandeling van vormgegevens.
+redirect-url-on-success=Richt URL op Succes opnieuw
+save-to-file=Sparen aan Dossier
+send-as-email=Verzend als E-mail
 website=Website
 websites=Websites
 wedding=Huwelijk

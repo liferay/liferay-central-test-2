@@ -27,7 +27,7 @@
 <%
 String title = prefs.getValue("title", StringPool.BLANK);
 String description = prefs.getValue("description", StringPool.BLANK);
-boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("require-captcha", StringPool.BLANK));
+boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", StringPool.BLANK));
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" method="post">

@@ -2865,6 +2865,16 @@ warning-your-session-has-expired=Aviso!  devido ao inactivity, sua sessão expir
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 web-id=Correia fotorreceptora Id
 webdav-url=URL De WebDAV
+
+
+handling-of-form-data=Manipulação de dados do formulário
+path-and-file-name=Nome do trajeto e da lima
+please-enter-a-valid-path-and-file-name=Entre por favor em um trajeto válido e arquive o nome.
+please-enter-an-email-address=Incorpore por favor um email address.
+please-select-an-action-for-the-handling-of-form-data=_ por favor selecion um ação para handling formulário dados. _
+redirect-url-on-success=Dirija de novo o URL no sucesso
+save-to-file=Excepto à lima
+send-as-email=Emita como o email
 website=Web site
 websites=Web site
 wedding=Casamento
