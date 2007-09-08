@@ -695,10 +695,11 @@ ul.gamma .tree-item-hover {
 }
 
 /* ---------- RSS ---------- */
+
 .portlet-rss-header {
-	cursor: default; 
-	font-weight: bold; 
-	padding: 2px 5px 2px 5px; 
+	cursor: default;
+	font-weight: bold;
+	padding: 2px 5px 2px 5px;
 	margin-top: 2px;
 }
 
