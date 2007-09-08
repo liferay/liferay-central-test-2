@@ -104,7 +104,8 @@ public interface MBThreadLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasReadThread(long userId, long threadId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBThread updateThread(
 		long threadId, int viewCount)

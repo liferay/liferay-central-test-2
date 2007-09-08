@@ -26,9 +26,11 @@ import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
@@ -229,12 +231,11 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	}
 
 	public boolean hasReadThread(long userId, long threadId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		if (userId <= 0) {
+		User user = UserLocalServiceUtil.getUserById(userId);
 
-			// Unauthenticated users do not have a record of read messages
-
+		if (user.isDefaultUser()) {
 			return true;
 		}
 
