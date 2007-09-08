@@ -73,8 +73,6 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
 
-<br /><br />
-
 <table class="liferay-table">
 <tr>
 	<td>
@@ -92,18 +90,20 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <br />
 
-<c:choose>
-	<c:when test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
-		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
+<div>
+	<c:choose>
+		<c:when test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
+			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
 
-		<input name="<portlet:namespace />content" type="hidden" value="" />
-	</c:when>
-	<c:otherwise>
-		<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="content" />
-	</c:otherwise>
-</c:choose>
+			<input name="<portlet:namespace />content" type="hidden" value="" />
+		</c:when>
+		<c:otherwise>
+			<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="content" />
+		</c:otherwise>
+	</c:choose>
+</div>
 
-<br /><br />
+<br />
 
 <table class="liferay-table">
 <tr>
