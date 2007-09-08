@@ -205,6 +205,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/jargs.jar</file-name>
+		<version>1.0</version>
+		<project-name>JArgs</project-name>
+		<project-url>http://jargs.sourceforge.net</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/jms.jar</file-name>
 		<version>1.1</version>
 		<project-name>Java Message Services (JMS)</project-name>
@@ -468,6 +479,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/rhino.jar</file-name>
+		<version>1.6R7</version>
+		<project-name>Rhino</project-name>
+		<project-url>http://www.mozilla.org/rhino</project-url>
+		<licenses>
+			<license>
+				<license-name>MPL 1.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/sap.jar</file-name>
 		<version></version>
 		<project-name>SAP DB / MaxDB</project-name>
@@ -529,6 +551,17 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>development/yuicompressor.jar</file-name>
+		<version>2.1.2</version>
+		<project-name>YUI Compressor</project-name>
+		<project-url>http://developer.yahoo.com/yui/compressor</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>

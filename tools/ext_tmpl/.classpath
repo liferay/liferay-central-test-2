@@ -10,6 +10,7 @@
 	<classpathentry kind="lib" path="lib/development/j2h.jar"/>
 	<classpathentry kind="lib" path="lib/development/jaas.jar"/>
 	<classpathentry kind="lib" path="lib/development/jalopy.jar"/>
+	<classpathentry kind="lib" path="lib/development/jargs.jar"/>
 	<classpathentry kind="lib" path="lib/development/jms.jar"/>
 	<classpathentry kind="lib" path="lib/development/jndi.jar"/>
 	<classpathentry kind="lib" path="lib/development/jnet.jar"/>
@@ -25,9 +26,13 @@
 	<classpathentry kind="lib" path="lib/development/netscape.jar"/>
 	<classpathentry kind="lib" path="lib/development/qdox.jar"/>
 	<classpathentry kind="lib" path="lib/development/quercus.jar"/>
+	<classpathentry kind="lib" path="lib/development/resin-util.jar"/>
+	<classpathentry kind="lib" path="lib/development/rhino.jar"/>
 	<classpathentry kind="lib" path="lib/development/saxpath.jar"/>
 	<classpathentry kind="lib" path="lib/development/servlet.jar"/>
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
+	<classpathentry kind="lib" path="lib/development/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="lib/development/yuicompressor.jar"/>
 	<classpathentry kind="lib" path="lib/development/zql.jar"/>
 	<classpathentry kind="lib" path="lib/global/portal-kernel.jar"/>
 	<classpathentry kind="lib" path="lib/global/portal-service.jar"/>

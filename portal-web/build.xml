@@ -585,15 +585,23 @@
 	</target>
 
 	<target name="build-javascript-cmd">
+		<java
+			classname="com.yahoo.platform.yui.compressor.YUICompressor"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<arg line="--type js -o ${js.to.file} ${js.from.file}" />
+		</java>
 
 		<!--
 		http://dean.edwards.name/download/#packer
 		http://homepages.nildram.co.uk/~9jack9/download/packer.wsh.zip
 		-->
 
-		<exec executable="cmd">
+		<!--<exec executable="cmd">
 			<arg line="/c CScript /nologo ${project.dir}/tools/pack.wsf ${js.from.file} > ${js.to.file}" />
-		</exec>
+		</exec>-->
 	</target>
 
 	<target name="build-javascript-portlet-cmd">
