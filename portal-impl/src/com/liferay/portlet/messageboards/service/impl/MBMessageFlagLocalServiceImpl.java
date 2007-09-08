@@ -23,7 +23,10 @@
 package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
@@ -44,28 +47,32 @@ public class MBMessageFlagLocalServiceImpl
 	extends MBMessageFlagLocalServiceBaseImpl {
 
 	public void addReadFlags(long userId, List messages)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		if (userId > 0) {
-			Iterator itr = messages.iterator();
+		User user = UserLocalServiceUtil.getUserById(userId);
 
-			while (itr.hasNext()) {
-				MBMessage message = (MBMessage)itr.next();
+		if (user.isDefaultUser()) {
+			return;
+		}
 
-				MBMessageFlag messageFlag = MBMessageFlagUtil.fetchByU_M(
-					userId, message.getMessageId());
+		Iterator itr = messages.iterator();
 
-				if (messageFlag == null) {
-					long messageFlagId = CounterLocalServiceUtil.increment();
+		while (itr.hasNext()) {
+			MBMessage message = (MBMessage)itr.next();
 
-					messageFlag = MBMessageFlagUtil.create(messageFlagId);
+			MBMessageFlag messageFlag = MBMessageFlagUtil.fetchByU_M(
+				userId, message.getMessageId());
 
-					messageFlag.setUserId(userId);
-					messageFlag.setMessageId(message.getMessageId());
-					messageFlag.setFlag(MBMessageFlagImpl.READ_FLAG);
+			if (messageFlag == null) {
+				long messageFlagId = CounterLocalServiceUtil.increment();
 
-					MBMessageFlagUtil.update(messageFlag);
-				}
+				messageFlag = MBMessageFlagUtil.create(messageFlagId);
+
+				messageFlag.setUserId(userId);
+				messageFlag.setMessageId(message.getMessageId());
+				messageFlag.setFlag(MBMessageFlagImpl.READ_FLAG);
+
+				MBMessageFlagUtil.update(messageFlag);
 			}
 		}
 	}
@@ -75,12 +82,11 @@ public class MBMessageFlagLocalServiceImpl
 	}
 
 	public boolean hasReadFlag(long userId, long messageId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		if (userId > 0) {
+		User user = UserLocalServiceUtil.getUserById(userId);
 
-			// Unauthenticated users do not have a record of read messages
-
+		if (user.isDefaultUser()) {
 			return true;
 		}
 
