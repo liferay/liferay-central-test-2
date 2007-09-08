@@ -24,6 +24,8 @@ package com.liferay.portlet.polls.service.http;
 
 import com.liferay.portlet.polls.model.PollsQuestion;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

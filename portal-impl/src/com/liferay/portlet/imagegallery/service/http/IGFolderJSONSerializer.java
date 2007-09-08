@@ -24,6 +24,8 @@ package com.liferay.portlet.imagegallery.service.http;
 
 import com.liferay.portlet.imagegallery.model.IGFolder;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

@@ -24,6 +24,8 @@ package com.liferay.portlet.ratings.service.http;
 
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

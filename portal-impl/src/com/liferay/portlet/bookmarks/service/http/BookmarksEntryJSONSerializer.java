@@ -24,6 +24,8 @@ package com.liferay.portlet.bookmarks.service.http;
 
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

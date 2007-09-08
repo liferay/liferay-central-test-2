@@ -24,6 +24,8 @@ package com.liferay.portlet.journal.service.http;
 
 import com.liferay.portlet.journal.model.JournalTemplate;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

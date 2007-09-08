@@ -24,6 +24,8 @@ package com.liferay.portlet.shopping.service.http;
 
 import com.liferay.portlet.shopping.model.ShoppingItem;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

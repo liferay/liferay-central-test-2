@@ -24,6 +24,8 @@ package com.liferay.portlet.messageboards.service.http;
 
 import com.liferay.portlet.messageboards.model.MBMessage;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

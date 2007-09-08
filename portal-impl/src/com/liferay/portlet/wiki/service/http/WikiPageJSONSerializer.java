@@ -24,6 +24,8 @@ package com.liferay.portlet.wiki.service.http;
 
 import com.liferay.portlet.wiki.model.WikiPage;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

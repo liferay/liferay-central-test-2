@@ -24,6 +24,8 @@ package com.liferay.portlet.blogs.service.http;
 
 import com.liferay.portlet.blogs.model.BlogsCategory;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

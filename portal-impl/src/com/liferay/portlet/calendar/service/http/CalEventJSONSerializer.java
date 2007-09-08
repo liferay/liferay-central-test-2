@@ -24,6 +24,8 @@ package com.liferay.portlet.calendar.service.http;
 
 import com.liferay.portlet.calendar.model.CalEvent;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

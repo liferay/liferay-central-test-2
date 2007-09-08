@@ -24,6 +24,8 @@ package com.liferay.portlet.softwarecatalog.service.http;
 
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

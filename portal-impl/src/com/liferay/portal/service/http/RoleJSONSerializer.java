@@ -24,6 +24,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.model.Role;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

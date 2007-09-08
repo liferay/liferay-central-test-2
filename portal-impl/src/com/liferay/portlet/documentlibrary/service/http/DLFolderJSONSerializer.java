@@ -24,6 +24,8 @@ package com.liferay.portlet.documentlibrary.service.http;
 
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

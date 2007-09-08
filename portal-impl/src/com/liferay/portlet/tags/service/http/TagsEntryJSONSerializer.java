@@ -24,6 +24,8 @@ package com.liferay.portlet.tags.service.http;
 
 import com.liferay.portlet.tags.model.TagsEntry;
 
+import com.liferay.util.JSONUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

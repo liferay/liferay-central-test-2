@@ -5469,7 +5469,7 @@ public class ServiceBuilder {
 		// Imports
 
 		sm.append("import " + _packagePath + ".model." + entity.getName() + ";");
-		sm.append("import com.liferay.portal.kernel.util.StringPool;");
+		sm.append("import com.liferay.util.JSONUtil;");
 		sm.append("import java.util.Date;");
 		sm.append("import java.util.List;");
 		sm.append("import org.json.JSONArray;");
