@@ -33,7 +33,7 @@ if (!layoutMaximized) {
 	String content = LayoutTemplateLocalUtil.getWapContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, content) %>
 
 <%
 }
@@ -48,7 +48,7 @@ else {
 	}
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, StringUtil.split(layoutTypePortlet.getStateMax())[0], content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, StringUtil.split(layoutTypePortlet.getStateMax())[0], content) %>
 
 <%
 }

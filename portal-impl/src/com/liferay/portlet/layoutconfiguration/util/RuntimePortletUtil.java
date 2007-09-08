@@ -23,6 +23,8 @@
 package com.liferay.portlet.layoutconfiguration.util;
 
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -37,6 +39,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
+import com.liferay.util.servlet.StringServletResponse;
 
 import java.io.StringWriter;
 
@@ -50,6 +53,7 @@ import javax.portlet.RenderResponse;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -179,15 +183,15 @@ public class RuntimePortletUtil {
 
 	public static String processTemplate(
 			ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
-			String content)
+			PageContext pageContext, String content)
 		throws Exception {
 
-		return processTemplate(ctx, req, res, null, content);
+		return processTemplate(ctx, req, res, pageContext, null, content);
 	}
 
 	public static String processTemplate(
 			ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
-			String portletId, String content)
+			PageContext pageContext, String portletId, String content)
 		throws Exception {
 
 		if (Validator.isNull(content)) {
@@ -201,7 +205,23 @@ public class RuntimePortletUtil {
 
 		vc.put("processor", processor);
 
+		// Velocity variables
+
 		VelocityVariables.insertVariables(vc, req);
+
+		// liferay:include tag library
+
+		StringServletResponse stringServletResponse =
+			new StringServletResponse(res);
+
+		MethodWrapper methodWrapper = new MethodWrapper(
+			"com.liferay.taglib.util.VelocityTaglib", "init",
+			new Object[] {ctx, req, stringServletResponse, pageContext});
+
+		Object velocityTaglib = MethodInvoker.invoke(methodWrapper);
+
+		vc.put("taglibLiferay", velocityTaglib);
+		vc.put("theme", velocityTaglib);
 
 		StringWriter sw = new StringWriter();
 

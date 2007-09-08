@@ -68,13 +68,26 @@ import javax.servlet.jsp.PageContext;
  */
 public class VelocityTaglib {
 
-	public VelocityTaglib(ServletContext ctx, HttpServletRequest req,
-						  StringServletResponse res, PageContext pageContext) {
+	public VelocityTaglib() {
+	}
+
+	public VelocityTaglib(
+		ServletContext ctx, HttpServletRequest req, StringServletResponse res,
+		PageContext pageContext) {
+
+		init(ctx, req, res, pageContext);
+	}
+
+	public VelocityTaglib init(
+		ServletContext ctx, HttpServletRequest req, StringServletResponse res,
+		PageContext pageContext) {
 
 		_ctx = ctx;
 		_req = req;
 		_res = res;
 		_pageContext = pageContext;
+
+		return this;
 	}
 
 	public String actionURL(
