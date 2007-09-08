@@ -22,13 +22,8 @@
 
 package com.liferay.portlet.webform.action;
 
-import com.liferay.portal.kernel.portlet.ConfigurationAction;
-import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.util.servlet.SessionErrors;
-import com.liferay.util.servlet.SessionMessages;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -36,6 +31,14 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
+import com.liferay.portal.kernel.portlet.ConfigurationAction;
+import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.SessionMessages;
 
 /**
  * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
@@ -47,7 +50,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
 			PortletConfig config, ActionRequest req, ActionResponse res)
-		throws Exception {
+			throws Exception {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
@@ -61,11 +64,17 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String subject = ParamUtil.getString(req, "subject");
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
 
+		String fileName = ParamUtil.getString(req, "fileName");
+		boolean saveToFile = ParamUtil.getBoolean(req, "saveToFile");
+		boolean sendAsEmail = ParamUtil.getBoolean(req, "sendAsEmail");
+		String thanksURL = ParamUtil.getString(req, "thanksURL");
+
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, portletResource, true, true);
+
 
 		if (Validator.isNull(title)) {
 			SessionErrors.add(req, "titleRequired");
@@ -75,11 +84,29 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(req, "subjectRequired");
 		}
 
-		if (Validator.isNull(emailAddress)) {
-			SessionErrors.add(req, "emailAddressRequired");
+		if (!sendAsEmail && !saveToFile){
+			SessionErrors.add(req, "emailOrFileRequired");
 		}
-		else if (!Validator.isEmailAddress(emailAddress)) {
-			SessionErrors.add(req, "emailAddressInvalid");
+
+		if (sendAsEmail) {
+			if (Validator.isNull(emailAddress)) {
+				SessionErrors.add(req, "emailAddressRequired");
+			}
+			else if (!Validator.isEmailAddress(emailAddress)) {
+				SessionErrors.add(req, "emailAddressInvalid");
+			}
+		}
+
+		if (saveToFile) {
+			// check if webserver can create a file as specified
+			try {
+				FileOutputStream fos = new FileOutputStream(fileName, true);
+				fos.close();
+			} catch (SecurityException e) {
+				SessionErrors.add(req, "fileNameInvalid");
+			} catch (FileNotFoundException e) {
+				SessionErrors.add(req, "fileNameInvalid");
+			}
 		}
 
 		if (!SessionErrors.isEmpty(req)) {
@@ -91,6 +118,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("require-captcha", String.valueOf(requireCaptcha));
 		prefs.setValue("subject", subject);
 		prefs.setValue("emailAddress", emailAddress);
+		prefs.setValue("sendAsEmail", String.valueOf(sendAsEmail));
+		prefs.setValue("saveToFile", String.valueOf(saveToFile));
+		prefs.setValue("fileName", fileName);
+		prefs.setValue("thanksURL", thanksURL);
 
 		int i = 1;
 

@@ -22,6 +22,25 @@
 
 package com.liferay.portlet.webform.action;
 
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.mail.internet.InternetAddress;
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
@@ -35,25 +54,6 @@ import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.mail.internet.InternetAddress;
-
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
@@ -78,7 +78,19 @@ public class ViewAction extends PortletAction {
 				req, portletId, true, true);
 
 		boolean requireCaptcha = GetterUtil.getBoolean(
-			prefs.getValue("require-captcha", StringPool.BLANK));
+				prefs.getValue("require-captcha", StringPool.BLANK));
+
+		boolean sendAsEmail = GetterUtil.getBoolean(
+				prefs.getValue("sendAsEmail", StringPool.BLANK));
+
+		boolean saveToFile = GetterUtil.getBoolean(
+				prefs.getValue("saveToFile", StringPool.BLANK));
+
+		String fileName = GetterUtil.getString(
+				prefs.getValue("fileName", StringPool.BLANK));
+
+		String thanksURL = GetterUtil.getString(
+				prefs.getValue("thanksURL", StringPool.BLANK));
 
 		if (requireCaptcha) {
 			try {
@@ -96,16 +108,33 @@ public class ViewAction extends PortletAction {
 		}
 
 		if (validate(fieldValues, prefs)) {
-			if (!sendEmail(fieldValues, prefs)) {
+
+			boolean emailSent = false;
+			boolean fileSaved = false;
+
+			if (sendAsEmail) {
+				emailSent = sendEmail(fieldValues, prefs);
+			}
+
+			if (saveToFile) {
+				fileSaved = saveFile(fieldValues, prefs, fileName);
+			}
+
+			if ((sendAsEmail == emailSent) && (saveToFile == fileSaved)) {
+				SessionMessages.add(req, "emailSent");
+			} else {
 				SessionErrors.add(req, "emailNotSent");
 			}
-			else {
-				SessionMessages.add(req, "emailSent");
-			}
+
 		}
 		else {
 			SessionErrors.add(req, "allFieldsRequired");
 		}
+
+		if (SessionErrors.isEmpty(req) && Validator.isNotNull(thanksURL)) {
+	        res.sendRedirect(res.encodeURL(thanksURL));
+		}
+
 	}
 
 	public ActionForward render(
@@ -187,6 +216,42 @@ public class ViewAction extends PortletAction {
 
 		return true;
 	}
+
+	protected boolean saveFile (List fieldValues, PortletPreferences prefs, String fileName) {
+
+		// Standard Excel CSV format: Use ; as a delimiter, quote each entry with double quotes,
+		// and escape double quotes in values a two double quotes.
+
+		StringMaker sm = new StringMaker();
+
+		Iterator itr = fieldValues.iterator();
+
+		for (int i = 1; itr.hasNext(); i++) {
+			String fieldValue = (String)itr.next();
+			String fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
+
+			if (Validator.isNotNull(fieldLabel)) {
+				sm.append("\"");
+				sm.append(fieldValue.replace( "\"", "\"\"" ));
+				sm.append("\";");
+			}
+		}
+
+		String s = (sm.substring(0, sm.length() - 1)) + "\n";
+
+		try {
+
+			FileWriter fw = new FileWriter(fileName, true);
+			fw.write(s);
+			fw.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 
 	private static Log _log = LogFactory.getLog(ViewAction.class);
 

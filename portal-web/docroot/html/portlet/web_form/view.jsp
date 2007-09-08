@@ -37,10 +37,12 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("require-captcha",
 <p class="liferay-web-form-descr"><%= description %></p>
 
 <liferay-ui:success key="emailSent" message="the-email-was-sent-successfuly" />
+<liferay-ui:success key="saveToFileSuccees" message="the-file-was-saved-successfully" />
 
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error key="allFieldsRequired" message="please-complete-all-fields" />
 <liferay-ui:error key="emailNotSent" message="the-email-could-not-be-sent" />
+<liferay-ui:error key="saveToFileFailure" message="the-file-could-not-be-saved" />
 
 <%
 int i = 1;
