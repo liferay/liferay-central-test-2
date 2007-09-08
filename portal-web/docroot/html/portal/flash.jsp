@@ -37,7 +37,7 @@ String movie = ParamUtil.getString(request, "movie");
 <head>
 	<title><%= title %></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<script src="<%=themeDisplay.getPathJavaScript()%>/misc/swfobject.js" type="text/javascript"></script>
+	<script src="<%= themeDisplay.getPathJavaScript() %>/misc/swfobject.js" type="text/javascript"></script>
 </head>
 
 <body leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" topmargin="0">
@@ -46,9 +46,11 @@ String movie = ParamUtil.getString(request, "movie");
 
 <c:if test="<%= Validator.isNotNull(movie) %>">
 	<div id="flashMovie"></div>
+
 	<script type="text/javascript">
-	   var so = new SWFObject("<%= movie %>", "flashMovie", "<%= width %>", "<%= height %>", "6", "#ffffff");
-	   so.write("flashMovie");
+		var so = new SWFObject("<%= movie %>", "flashMovie", "<%= width %>", "<%= height %>", "6", "#FFFFFF");
+
+		so.write("flashMovie");
 	</script>
 </c:if>
 
