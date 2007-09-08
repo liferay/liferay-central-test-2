@@ -37,6 +37,7 @@ String movie = ParamUtil.getString(request, "movie");
 <head>
 	<title><%= title %></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script src="<%=themeDisplay.getPathJavaScript()%>/misc/swfobject.js" type="text/javascript"></script>
 </head>
 
 <body leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" topmargin="0">
@@ -44,13 +45,11 @@ String movie = ParamUtil.getString(request, "movie");
 <center>
 
 <c:if test="<%= Validator.isNotNull(movie) %>">
-	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" height="<%= height %>" width="<%= width %>">
-		<param name="loop" value="0">
-		<param name="menu" value="false">
-		<param name="movie" value="<%= movie %>">
-		<param name="quality" value="high">
-		<embed height="<%= height %>" loop="0" menu="false" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="<%= movie %>" type="application/x-shockwave-flash" width="<%= width %>"></embed>
-	</object>
+	<div id="flashMovie"></div>
+	<script type="text/javascript">
+	   var so = new SWFObject("<%= movie %>", "flashMovie", "<%= width %>", "<%= height %>", "6", "#ffffff");
+	   so.write("flashMovie");
+	</script>
 </c:if>
 
 </center>
