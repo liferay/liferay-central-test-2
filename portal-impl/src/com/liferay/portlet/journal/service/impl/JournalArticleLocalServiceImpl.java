@@ -696,8 +696,12 @@ public class JournalArticleLocalServiceImpl
 		JournalArticleDisplay articleDisplay = getArticleDisplay(
 			groupId, articleId, version, templateId, languageId, themeDisplay);
 
-		if( Validator.isNull(articleDisplay)) return null;
-		else return articleDisplay.getContent();
+		if (articleDisplay == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return articleDisplay.getContent();
+		}
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
