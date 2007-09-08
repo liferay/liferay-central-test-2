@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 
 import org.json.JSONArray;
@@ -51,46 +50,13 @@ import java.util.List;
 public class CompanyJSONSerializer {
 	public static JSONObject toJSONObject(Company model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("accountId", model.getAccountId());
-
-		String webId = model.getWebId();
-
-		if (webId == null) {
-			jsonObj.put("webId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("webId", webId.toString());
-		}
-
-		String key = model.getKey();
-
-		if (key == null) {
-			jsonObj.put("key", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("key", key.toString());
-		}
-
-		String virtualHost = model.getVirtualHost();
-
-		if (virtualHost == null) {
-			jsonObj.put("virtualHost", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("virtualHost", virtualHost.toString());
-		}
-
-		String mx = model.getMx();
-
-		if (mx == null) {
-			jsonObj.put("mx", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("mx", mx.toString());
-		}
-
-		jsonObj.put("logoId", model.getLogoId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "accountId", model.getAccountId());
+		JSONUtil.put(jsonObj, "webId", model.getWebId());
+		JSONUtil.put(jsonObj, "key", model.getKey());
+		JSONUtil.put(jsonObj, "virtualHost", model.getVirtualHost());
+		JSONUtil.put(jsonObj, "mx", model.getMx());
+		JSONUtil.put(jsonObj, "logoId", model.getLogoId());
 
 		return jsonObj;
 	}

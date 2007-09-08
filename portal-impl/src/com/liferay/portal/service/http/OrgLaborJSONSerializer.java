@@ -50,23 +50,23 @@ import java.util.List;
 public class OrgLaborJSONSerializer {
 	public static JSONObject toJSONObject(OrgLabor model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("orgLaborId", model.getOrgLaborId());
-		jsonObj.put("organizationId", model.getOrganizationId());
-		jsonObj.put("typeId", model.getTypeId());
-		jsonObj.put("sunOpen", model.getSunOpen());
-		jsonObj.put("sunClose", model.getSunClose());
-		jsonObj.put("monOpen", model.getMonOpen());
-		jsonObj.put("monClose", model.getMonClose());
-		jsonObj.put("tueOpen", model.getTueOpen());
-		jsonObj.put("tueClose", model.getTueClose());
-		jsonObj.put("wedOpen", model.getWedOpen());
-		jsonObj.put("wedClose", model.getWedClose());
-		jsonObj.put("thuOpen", model.getThuOpen());
-		jsonObj.put("thuClose", model.getThuClose());
-		jsonObj.put("friOpen", model.getFriOpen());
-		jsonObj.put("friClose", model.getFriClose());
-		jsonObj.put("satOpen", model.getSatOpen());
-		jsonObj.put("satClose", model.getSatClose());
+		JSONUtil.put(jsonObj, "orgLaborId", model.getOrgLaborId());
+		JSONUtil.put(jsonObj, "organizationId", model.getOrganizationId());
+		JSONUtil.put(jsonObj, "typeId", model.getTypeId());
+		JSONUtil.put(jsonObj, "sunOpen", model.getSunOpen());
+		JSONUtil.put(jsonObj, "sunClose", model.getSunClose());
+		JSONUtil.put(jsonObj, "monOpen", model.getMonOpen());
+		JSONUtil.put(jsonObj, "monClose", model.getMonClose());
+		JSONUtil.put(jsonObj, "tueOpen", model.getTueOpen());
+		JSONUtil.put(jsonObj, "tueClose", model.getTueClose());
+		JSONUtil.put(jsonObj, "wedOpen", model.getWedOpen());
+		JSONUtil.put(jsonObj, "wedClose", model.getWedClose());
+		JSONUtil.put(jsonObj, "thuOpen", model.getThuOpen());
+		JSONUtil.put(jsonObj, "thuClose", model.getThuClose());
+		JSONUtil.put(jsonObj, "friOpen", model.getFriOpen());
+		JSONUtil.put(jsonObj, "friClose", model.getFriClose());
+		JSONUtil.put(jsonObj, "satOpen", model.getSatOpen());
+		JSONUtil.put(jsonObj, "satClose", model.getSatClose());
 
 		return jsonObj;
 	}

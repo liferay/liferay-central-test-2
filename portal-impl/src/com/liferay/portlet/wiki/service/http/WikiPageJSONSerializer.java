@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.wiki.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.wiki.model.WikiPage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,61 +50,18 @@ import java.util.List;
 public class WikiPageJSONSerializer {
 	public static JSONObject toJSONObject(WikiPage model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("pageId", model.getPageId());
-		jsonObj.put("resourcePrimKey", model.getResourcePrimKey());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		jsonObj.put("nodeId", model.getNodeId());
-
-		String title = model.getTitle();
-
-		if (title == null) {
-			jsonObj.put("title", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("title", title.toString());
-		}
-
-		jsonObj.put("version", model.getVersion());
-
-		String content = model.getContent();
-
-		if (content == null) {
-			jsonObj.put("content", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("content", content.toString());
-		}
-
-		String format = model.getFormat();
-
-		if (format == null) {
-			jsonObj.put("format", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("format", format.toString());
-		}
-
-		jsonObj.put("head", model.isHead());
+		JSONUtil.put(jsonObj, "pageId", model.getPageId());
+		JSONUtil.put(jsonObj, "resourcePrimKey", model.getResourcePrimKey());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "nodeId", model.getNodeId());
+		JSONUtil.put(jsonObj, "title", model.getTitle());
+		JSONUtil.put(jsonObj, "version", model.getVersion());
+		JSONUtil.put(jsonObj, "content", model.getContent());
+		JSONUtil.put(jsonObj, "format", model.getFormat());
+		JSONUtil.put(jsonObj, "head", model.getHead());
 
 		return jsonObj;
 	}

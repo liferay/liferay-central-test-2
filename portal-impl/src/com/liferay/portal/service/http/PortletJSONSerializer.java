@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 
 import org.json.JSONArray;
@@ -51,28 +50,11 @@ import java.util.List;
 public class PortletJSONSerializer {
 	public static JSONObject toJSONObject(Portlet model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("id", model.getId());
-		jsonObj.put("companyId", model.getCompanyId());
-
-		String portletId = model.getPortletId();
-
-		if (portletId == null) {
-			jsonObj.put("portletId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("portletId", portletId.toString());
-		}
-
-		String roles = model.getRoles();
-
-		if (roles == null) {
-			jsonObj.put("roles", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("roles", roles.toString());
-		}
-
-		jsonObj.put("active", model.isActive());
+		JSONUtil.put(jsonObj, "id", model.getId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "portletId", model.getPortletId());
+		JSONUtil.put(jsonObj, "roles", model.getRoles());
+		JSONUtil.put(jsonObj, "active", model.getActive());
 
 		return jsonObj;
 	}

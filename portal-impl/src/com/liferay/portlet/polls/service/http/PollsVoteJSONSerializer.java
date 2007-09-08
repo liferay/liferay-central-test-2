@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.polls.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.polls.model.PollsVote;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,19 +50,11 @@ import java.util.List;
 public class PollsVoteJSONSerializer {
 	public static JSONObject toJSONObject(PollsVote model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("voteId", model.getVoteId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("questionId", model.getQuestionId());
-		jsonObj.put("choiceId", model.getChoiceId());
-
-		Date voteDate = model.getVoteDate();
-
-		if (voteDate == null) {
-			jsonObj.put("voteDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("voteDate", voteDate.toString());
-		}
+		JSONUtil.put(jsonObj, "voteId", model.getVoteId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "questionId", model.getQuestionId());
+		JSONUtil.put(jsonObj, "choiceId", model.getChoiceId());
+		JSONUtil.put(jsonObj, "voteDate", model.getVoteDate());
 
 		return jsonObj;
 	}

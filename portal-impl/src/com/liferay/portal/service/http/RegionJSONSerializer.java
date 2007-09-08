@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Region;
 
 import org.json.JSONArray;
@@ -51,28 +50,11 @@ import java.util.List;
 public class RegionJSONSerializer {
 	public static JSONObject toJSONObject(Region model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("regionId", model.getRegionId());
-		jsonObj.put("countryId", model.getCountryId());
-
-		String regionCode = model.getRegionCode();
-
-		if (regionCode == null) {
-			jsonObj.put("regionCode", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("regionCode", regionCode.toString());
-		}
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		jsonObj.put("active", model.isActive());
+		JSONUtil.put(jsonObj, "regionId", model.getRegionId());
+		JSONUtil.put(jsonObj, "countryId", model.getCountryId());
+		JSONUtil.put(jsonObj, "regionCode", model.getRegionCode());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "active", model.getActive());
 
 		return jsonObj;
 	}

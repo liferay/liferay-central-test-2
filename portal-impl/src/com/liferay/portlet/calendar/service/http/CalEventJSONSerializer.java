@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.calendar.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.calendar.model.CalEvent;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,110 +50,27 @@ import java.util.List;
 public class CalEventJSONSerializer {
 	public static JSONObject toJSONObject(CalEvent model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("eventId", model.getEventId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		String title = model.getTitle();
-
-		if (title == null) {
-			jsonObj.put("title", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("title", title.toString());
-		}
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
-
-		Date startDate = model.getStartDate();
-
-		if (startDate == null) {
-			jsonObj.put("startDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("startDate", startDate.toString());
-		}
-
-		Date endDate = model.getEndDate();
-
-		if (endDate == null) {
-			jsonObj.put("endDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("endDate", endDate.toString());
-		}
-
-		jsonObj.put("durationHour", model.getDurationHour());
-		jsonObj.put("durationMinute", model.getDurationMinute());
-		jsonObj.put("allDay", model.isAllDay());
-		jsonObj.put("timeZoneSensitive", model.isTimeZoneSensitive());
-
-		String type = model.getType();
-
-		if (type == null) {
-			jsonObj.put("type", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("type", type.toString());
-		}
-
-		jsonObj.put("repeating", model.isRepeating());
-
-		String recurrence = model.getRecurrence();
-
-		if (recurrence == null) {
-			jsonObj.put("recurrence", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("recurrence", recurrence.toString());
-		}
-
-		String remindBy = model.getRemindBy();
-
-		if (remindBy == null) {
-			jsonObj.put("remindBy", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("remindBy", remindBy.toString());
-		}
-
-		jsonObj.put("firstReminder", model.getFirstReminder());
-		jsonObj.put("secondReminder", model.getSecondReminder());
+		JSONUtil.put(jsonObj, "eventId", model.getEventId());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "title", model.getTitle());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
+		JSONUtil.put(jsonObj, "startDate", model.getStartDate());
+		JSONUtil.put(jsonObj, "endDate", model.getEndDate());
+		JSONUtil.put(jsonObj, "durationHour", model.getDurationHour());
+		JSONUtil.put(jsonObj, "durationMinute", model.getDurationMinute());
+		JSONUtil.put(jsonObj, "allDay", model.getAllDay());
+		JSONUtil.put(jsonObj, "timeZoneSensitive", model.getTimeZoneSensitive());
+		JSONUtil.put(jsonObj, "type", model.getType());
+		JSONUtil.put(jsonObj, "repeating", model.getRepeating());
+		JSONUtil.put(jsonObj, "recurrence", model.getRecurrence());
+		JSONUtil.put(jsonObj, "remindBy", model.getRemindBy());
+		JSONUtil.put(jsonObj, "firstReminder", model.getFirstReminder());
+		JSONUtil.put(jsonObj, "secondReminder", model.getSecondReminder());
 
 		return jsonObj;
 	}

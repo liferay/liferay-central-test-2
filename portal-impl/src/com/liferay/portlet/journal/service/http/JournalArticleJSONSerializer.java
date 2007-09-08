@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.journal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.journal.model.JournalArticle;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,153 +50,31 @@ import java.util.List;
 public class JournalArticleJSONSerializer {
 	public static JSONObject toJSONObject(JournalArticle model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("id", model.getId());
-		jsonObj.put("resourcePrimKey", model.getResourcePrimKey());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		String articleId = model.getArticleId();
-
-		if (articleId == null) {
-			jsonObj.put("articleId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("articleId", articleId.toString());
-		}
-
-		jsonObj.put("version", model.getVersion());
-
-		String title = model.getTitle();
-
-		if (title == null) {
-			jsonObj.put("title", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("title", title.toString());
-		}
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
-
-		String content = model.getContent();
-
-		if (content == null) {
-			jsonObj.put("content", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("content", content.toString());
-		}
-
-		String type = model.getType();
-
-		if (type == null) {
-			jsonObj.put("type", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("type", type.toString());
-		}
-
-		String structureId = model.getStructureId();
-
-		if (structureId == null) {
-			jsonObj.put("structureId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("structureId", structureId.toString());
-		}
-
-		String templateId = model.getTemplateId();
-
-		if (templateId == null) {
-			jsonObj.put("templateId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("templateId", templateId.toString());
-		}
-
-		Date displayDate = model.getDisplayDate();
-
-		if (displayDate == null) {
-			jsonObj.put("displayDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("displayDate", displayDate.toString());
-		}
-
-		jsonObj.put("approved", model.isApproved());
-		jsonObj.put("approvedByUserId", model.getApprovedByUserId());
-
-		String approvedByUserName = model.getApprovedByUserName();
-
-		if (approvedByUserName == null) {
-			jsonObj.put("approvedByUserName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("approvedByUserName", approvedByUserName.toString());
-		}
-
-		Date approvedDate = model.getApprovedDate();
-
-		if (approvedDate == null) {
-			jsonObj.put("approvedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("approvedDate", approvedDate.toString());
-		}
-
-		jsonObj.put("expired", model.isExpired());
-
-		Date expirationDate = model.getExpirationDate();
-
-		if (expirationDate == null) {
-			jsonObj.put("expirationDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("expirationDate", expirationDate.toString());
-		}
-
-		Date reviewDate = model.getReviewDate();
-
-		if (reviewDate == null) {
-			jsonObj.put("reviewDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("reviewDate", reviewDate.toString());
-		}
+		JSONUtil.put(jsonObj, "id", model.getId());
+		JSONUtil.put(jsonObj, "resourcePrimKey", model.getResourcePrimKey());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "articleId", model.getArticleId());
+		JSONUtil.put(jsonObj, "version", model.getVersion());
+		JSONUtil.put(jsonObj, "title", model.getTitle());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
+		JSONUtil.put(jsonObj, "content", model.getContent());
+		JSONUtil.put(jsonObj, "type", model.getType());
+		JSONUtil.put(jsonObj, "structureId", model.getStructureId());
+		JSONUtil.put(jsonObj, "templateId", model.getTemplateId());
+		JSONUtil.put(jsonObj, "displayDate", model.getDisplayDate());
+		JSONUtil.put(jsonObj, "approved", model.getApproved());
+		JSONUtil.put(jsonObj, "approvedByUserId", model.getApprovedByUserId());
+		JSONUtil.put(jsonObj, "approvedByUserName",
+			model.getApprovedByUserName());
+		JSONUtil.put(jsonObj, "approvedDate", model.getApprovedDate());
+		JSONUtil.put(jsonObj, "expired", model.getExpired());
+		JSONUtil.put(jsonObj, "expirationDate", model.getExpirationDate());
+		JSONUtil.put(jsonObj, "reviewDate", model.getReviewDate());
 
 		return jsonObj;
 	}

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutSet;
 
 import org.json.JSONArray;
@@ -51,68 +50,19 @@ import java.util.List;
 public class LayoutSetJSONSerializer {
 	public static JSONObject toJSONObject(LayoutSet model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("layoutSetId", model.getLayoutSetId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("privateLayout", model.isPrivateLayout());
-		jsonObj.put("logo", model.isLogo());
-		jsonObj.put("logoId", model.getLogoId());
-
-		String themeId = model.getThemeId();
-
-		if (themeId == null) {
-			jsonObj.put("themeId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("themeId", themeId.toString());
-		}
-
-		String colorSchemeId = model.getColorSchemeId();
-
-		if (colorSchemeId == null) {
-			jsonObj.put("colorSchemeId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("colorSchemeId", colorSchemeId.toString());
-		}
-
-		String wapThemeId = model.getWapThemeId();
-
-		if (wapThemeId == null) {
-			jsonObj.put("wapThemeId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("wapThemeId", wapThemeId.toString());
-		}
-
-		String wapColorSchemeId = model.getWapColorSchemeId();
-
-		if (wapColorSchemeId == null) {
-			jsonObj.put("wapColorSchemeId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("wapColorSchemeId", wapColorSchemeId.toString());
-		}
-
-		String css = model.getCss();
-
-		if (css == null) {
-			jsonObj.put("css", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("css", css.toString());
-		}
-
-		jsonObj.put("pageCount", model.getPageCount());
-
-		String virtualHost = model.getVirtualHost();
-
-		if (virtualHost == null) {
-			jsonObj.put("virtualHost", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("virtualHost", virtualHost.toString());
-		}
+		JSONUtil.put(jsonObj, "layoutSetId", model.getLayoutSetId());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "privateLayout", model.getPrivateLayout());
+		JSONUtil.put(jsonObj, "logo", model.getLogo());
+		JSONUtil.put(jsonObj, "logoId", model.getLogoId());
+		JSONUtil.put(jsonObj, "themeId", model.getThemeId());
+		JSONUtil.put(jsonObj, "colorSchemeId", model.getColorSchemeId());
+		JSONUtil.put(jsonObj, "wapThemeId", model.getWapThemeId());
+		JSONUtil.put(jsonObj, "wapColorSchemeId", model.getWapColorSchemeId());
+		JSONUtil.put(jsonObj, "css", model.getCss());
+		JSONUtil.put(jsonObj, "pageCount", model.getPageCount());
+		JSONUtil.put(jsonObj, "virtualHost", model.getVirtualHost());
 
 		return jsonObj;
 	}

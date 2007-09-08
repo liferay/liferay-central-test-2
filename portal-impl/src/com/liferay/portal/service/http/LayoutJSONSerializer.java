@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 
 import org.json.JSONArray;
@@ -51,119 +50,28 @@ import java.util.List;
 public class LayoutJSONSerializer {
 	public static JSONObject toJSONObject(Layout model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("plid", model.getPlid());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("privateLayout", model.isPrivateLayout());
-		jsonObj.put("layoutId", model.getLayoutId());
-		jsonObj.put("parentLayoutId", model.getParentLayoutId());
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String title = model.getTitle();
-
-		if (title == null) {
-			jsonObj.put("title", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("title", title.toString());
-		}
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
-
-		String type = model.getType();
-
-		if (type == null) {
-			jsonObj.put("type", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("type", type.toString());
-		}
-
-		String typeSettings = model.getTypeSettings();
-
-		if (typeSettings == null) {
-			jsonObj.put("typeSettings", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("typeSettings", typeSettings.toString());
-		}
-
-		jsonObj.put("hidden", model.isHidden());
-
-		String friendlyURL = model.getFriendlyURL();
-
-		if (friendlyURL == null) {
-			jsonObj.put("friendlyURL", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("friendlyURL", friendlyURL.toString());
-		}
-
-		jsonObj.put("iconImage", model.isIconImage());
-		jsonObj.put("iconImageId", model.getIconImageId());
-
-		String themeId = model.getThemeId();
-
-		if (themeId == null) {
-			jsonObj.put("themeId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("themeId", themeId.toString());
-		}
-
-		String colorSchemeId = model.getColorSchemeId();
-
-		if (colorSchemeId == null) {
-			jsonObj.put("colorSchemeId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("colorSchemeId", colorSchemeId.toString());
-		}
-
-		String wapThemeId = model.getWapThemeId();
-
-		if (wapThemeId == null) {
-			jsonObj.put("wapThemeId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("wapThemeId", wapThemeId.toString());
-		}
-
-		String wapColorSchemeId = model.getWapColorSchemeId();
-
-		if (wapColorSchemeId == null) {
-			jsonObj.put("wapColorSchemeId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("wapColorSchemeId", wapColorSchemeId.toString());
-		}
-
-		String css = model.getCss();
-
-		if (css == null) {
-			jsonObj.put("css", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("css", css.toString());
-		}
-
-		jsonObj.put("priority", model.getPriority());
-		jsonObj.put("dlFolderId", model.getDlFolderId());
+		JSONUtil.put(jsonObj, "plid", model.getPlid());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "privateLayout", model.getPrivateLayout());
+		JSONUtil.put(jsonObj, "layoutId", model.getLayoutId());
+		JSONUtil.put(jsonObj, "parentLayoutId", model.getParentLayoutId());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "title", model.getTitle());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
+		JSONUtil.put(jsonObj, "type", model.getType());
+		JSONUtil.put(jsonObj, "typeSettings", model.getTypeSettings());
+		JSONUtil.put(jsonObj, "hidden", model.getHidden());
+		JSONUtil.put(jsonObj, "friendlyURL", model.getFriendlyURL());
+		JSONUtil.put(jsonObj, "iconImage", model.getIconImage());
+		JSONUtil.put(jsonObj, "iconImageId", model.getIconImageId());
+		JSONUtil.put(jsonObj, "themeId", model.getThemeId());
+		JSONUtil.put(jsonObj, "colorSchemeId", model.getColorSchemeId());
+		JSONUtil.put(jsonObj, "wapThemeId", model.getWapThemeId());
+		JSONUtil.put(jsonObj, "wapColorSchemeId", model.getWapColorSchemeId());
+		JSONUtil.put(jsonObj, "css", model.getCss());
+		JSONUtil.put(jsonObj, "priority", model.getPriority());
+		JSONUtil.put(jsonObj, "dlFolderId", model.getDlFolderId());
 
 		return jsonObj;
 	}

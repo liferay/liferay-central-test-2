@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ClassName;
 
 import org.json.JSONArray;
@@ -51,16 +50,8 @@ import java.util.List;
 public class ClassNameJSONSerializer {
 	public static JSONObject toJSONObject(ClassName model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("classNameId", model.getClassNameId());
-
-		String value = model.getValue();
-
-		if (value == null) {
-			jsonObj.put("value", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("value", value.toString());
-		}
+		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
+		JSONUtil.put(jsonObj, "value", model.getValue());
 
 		return jsonObj;
 	}

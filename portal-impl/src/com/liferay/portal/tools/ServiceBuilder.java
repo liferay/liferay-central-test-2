@@ -196,6 +196,7 @@ public class ServiceBuilder {
 			"com.liferay.portal.spring.hibernate.FinderCache",
 			"com.liferay.portal.spring.hibernate.HibernateUtil",
 			"com.liferay.portal.util.PropsUtil",
+			"com.liferay.util.JSONUtil",
 			"com.liferay.util.XSSUtil",
 			"com.liferay.util.dao.hibernate.QueryPos",
 			"com.liferay.util.dao.hibernate.QueryUtil",
@@ -5488,23 +5489,7 @@ public class ServiceBuilder {
 
 			String colType = col.getType();
 
-			if (col.isPrimitiveType()) {
-				if (colType.equals("boolean")) {
-					sm.append("jsonObj.put(\"" + col.getName() + "\", model.is" + col.getMethodName() + "());");
-				}
-				else {
-					sm.append("jsonObj.put(\"" + col.getName() + "\", model.get" + col.getMethodName() + "());");
-				}
-			}
-			else {
-				sm.append(colType + " " + col.getName() + " = model.get" + col.getMethodName() + "();");
-				sm.append("if (" + col.getName() + " == null) {");
-				sm.append("jsonObj.put(\"" + col.getName() + "\", StringPool.BLANK);");
-				sm.append("}");
-				sm.append("else {");
-				sm.append("jsonObj.put(\"" + col.getName() + "\", " + col.getName() + ".toString());");
-				sm.append("}");
-			}
+			sm.append("JSONUtil.put(jsonObj, \"" + col.getName() + "\", model.get" + col.getMethodName() + "());");
 		}
 
 		sm.append("return jsonObj;");

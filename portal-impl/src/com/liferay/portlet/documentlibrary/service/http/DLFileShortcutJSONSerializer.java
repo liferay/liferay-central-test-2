@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.documentlibrary.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,48 +50,15 @@ import java.util.List;
 public class DLFileShortcutJSONSerializer {
 	public static JSONObject toJSONObject(DLFileShortcut model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("fileShortcutId", model.getFileShortcutId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("folderId", model.getFolderId());
-		jsonObj.put("toFolderId", model.getToFolderId());
-
-		String toName = model.getToName();
-
-		if (toName == null) {
-			jsonObj.put("toName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("toName", toName.toString());
-		}
+		JSONUtil.put(jsonObj, "fileShortcutId", model.getFileShortcutId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "folderId", model.getFolderId());
+		JSONUtil.put(jsonObj, "toFolderId", model.getToFolderId());
+		JSONUtil.put(jsonObj, "toName", model.getToName());
 
 		return jsonObj;
 	}

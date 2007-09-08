@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 
 import org.json.JSONArray;
@@ -52,29 +50,12 @@ import java.util.List;
 public class SCLicenseJSONSerializer {
 	public static JSONObject toJSONObject(SCLicense model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("licenseId", model.getLicenseId());
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String url = model.getUrl();
-
-		if (url == null) {
-			jsonObj.put("url", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("url", url.toString());
-		}
-
-		jsonObj.put("openSource", model.isOpenSource());
-		jsonObj.put("active", model.isActive());
-		jsonObj.put("recommended", model.isRecommended());
+		JSONUtil.put(jsonObj, "licenseId", model.getLicenseId());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "url", model.getUrl());
+		JSONUtil.put(jsonObj, "openSource", model.getOpenSource());
+		JSONUtil.put(jsonObj, "active", model.getActive());
+		JSONUtil.put(jsonObj, "recommended", model.getRecommended());
 
 		return jsonObj;
 	}

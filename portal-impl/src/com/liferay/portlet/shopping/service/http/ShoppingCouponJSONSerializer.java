@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.shopping.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,114 +50,24 @@ import java.util.List;
 public class ShoppingCouponJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingCoupon model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("couponId", model.getCouponId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		String code = model.getCode();
-
-		if (code == null) {
-			jsonObj.put("code", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("code", code.toString());
-		}
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
-
-		Date startDate = model.getStartDate();
-
-		if (startDate == null) {
-			jsonObj.put("startDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("startDate", startDate.toString());
-		}
-
-		Date endDate = model.getEndDate();
-
-		if (endDate == null) {
-			jsonObj.put("endDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("endDate", endDate.toString());
-		}
-
-		jsonObj.put("active", model.isActive());
-
-		String limitCategories = model.getLimitCategories();
-
-		if (limitCategories == null) {
-			jsonObj.put("limitCategories", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("limitCategories", limitCategories.toString());
-		}
-
-		String limitSkus = model.getLimitSkus();
-
-		if (limitSkus == null) {
-			jsonObj.put("limitSkus", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("limitSkus", limitSkus.toString());
-		}
-
-		jsonObj.put("minOrder", model.getMinOrder());
-		jsonObj.put("discount", model.getDiscount());
-
-		String discountType = model.getDiscountType();
-
-		if (discountType == null) {
-			jsonObj.put("discountType", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("discountType", discountType.toString());
-		}
+		JSONUtil.put(jsonObj, "couponId", model.getCouponId());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "code", model.getCode());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
+		JSONUtil.put(jsonObj, "startDate", model.getStartDate());
+		JSONUtil.put(jsonObj, "endDate", model.getEndDate());
+		JSONUtil.put(jsonObj, "active", model.getActive());
+		JSONUtil.put(jsonObj, "limitCategories", model.getLimitCategories());
+		JSONUtil.put(jsonObj, "limitSkus", model.getLimitSkus());
+		JSONUtil.put(jsonObj, "minOrder", model.getMinOrder());
+		JSONUtil.put(jsonObj, "discount", model.getDiscount());
+		JSONUtil.put(jsonObj, "discountType", model.getDiscountType());
 
 		return jsonObj;
 	}

@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.messageboards.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.messageboards.model.MBBan;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,39 +50,14 @@ import java.util.List;
 public class MBBanJSONSerializer {
 	public static JSONObject toJSONObject(MBBan model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("banId", model.getBanId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("banUserId", model.getBanUserId());
+		JSONUtil.put(jsonObj, "banId", model.getBanId());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "banUserId", model.getBanUserId());
 
 		return jsonObj;
 	}

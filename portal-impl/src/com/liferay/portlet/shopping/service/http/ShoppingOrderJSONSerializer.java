@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.shopping.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,344 +50,59 @@ import java.util.List;
 public class ShoppingOrderJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingOrder model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("orderId", model.getOrderId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		String number = model.getNumber();
-
-		if (number == null) {
-			jsonObj.put("number", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("number", number.toString());
-		}
-
-		jsonObj.put("tax", model.getTax());
-		jsonObj.put("shipping", model.getShipping());
-
-		String altShipping = model.getAltShipping();
-
-		if (altShipping == null) {
-			jsonObj.put("altShipping", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("altShipping", altShipping.toString());
-		}
-
-		jsonObj.put("requiresShipping", model.isRequiresShipping());
-		jsonObj.put("insure", model.isInsure());
-		jsonObj.put("insurance", model.getInsurance());
-
-		String couponCodes = model.getCouponCodes();
-
-		if (couponCodes == null) {
-			jsonObj.put("couponCodes", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("couponCodes", couponCodes.toString());
-		}
-
-		jsonObj.put("couponDiscount", model.getCouponDiscount());
-
-		String billingFirstName = model.getBillingFirstName();
-
-		if (billingFirstName == null) {
-			jsonObj.put("billingFirstName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("billingFirstName", billingFirstName.toString());
-		}
-
-		String billingLastName = model.getBillingLastName();
-
-		if (billingLastName == null) {
-			jsonObj.put("billingLastName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("billingLastName", billingLastName.toString());
-		}
-
-		String billingEmailAddress = model.getBillingEmailAddress();
-
-		if (billingEmailAddress == null) {
-			jsonObj.put("billingEmailAddress", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("billingEmailAddress", billingEmailAddress.toString());
-		}
-
-		String billingCompany = model.getBillingCompany();
-
-		if (billingCompany == null) {
-			jsonObj.put("billingCompany", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("billingCompany", billingCompany.toString());
-		}
-
-		String billingStreet = model.getBillingStreet();
-
-		if (billingStreet == null) {
-			jsonObj.put("billingStreet", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("billingStreet", billingStreet.toString());
-		}
-
-		String billingCity = model.getBillingCity();
-
-		if (billingCity == null) {
-			jsonObj.put("billingCity", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("billingCity", billingCity.toString());
-		}
-
-		String billingState = model.getBillingState();
-
-		if (billingState == null) {
-			jsonObj.put("billingState", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("billingState", billingState.toString());
-		}
-
-		String billingZip = model.getBillingZip();
-
-		if (billingZip == null) {
-			jsonObj.put("billingZip", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("billingZip", billingZip.toString());
-		}
-
-		String billingCountry = model.getBillingCountry();
-
-		if (billingCountry == null) {
-			jsonObj.put("billingCountry", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("billingCountry", billingCountry.toString());
-		}
-
-		String billingPhone = model.getBillingPhone();
-
-		if (billingPhone == null) {
-			jsonObj.put("billingPhone", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("billingPhone", billingPhone.toString());
-		}
-
-		jsonObj.put("shipToBilling", model.isShipToBilling());
-
-		String shippingFirstName = model.getShippingFirstName();
-
-		if (shippingFirstName == null) {
-			jsonObj.put("shippingFirstName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("shippingFirstName", shippingFirstName.toString());
-		}
-
-		String shippingLastName = model.getShippingLastName();
-
-		if (shippingLastName == null) {
-			jsonObj.put("shippingLastName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("shippingLastName", shippingLastName.toString());
-		}
-
-		String shippingEmailAddress = model.getShippingEmailAddress();
-
-		if (shippingEmailAddress == null) {
-			jsonObj.put("shippingEmailAddress", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("shippingEmailAddress", shippingEmailAddress.toString());
-		}
-
-		String shippingCompany = model.getShippingCompany();
-
-		if (shippingCompany == null) {
-			jsonObj.put("shippingCompany", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("shippingCompany", shippingCompany.toString());
-		}
-
-		String shippingStreet = model.getShippingStreet();
-
-		if (shippingStreet == null) {
-			jsonObj.put("shippingStreet", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("shippingStreet", shippingStreet.toString());
-		}
-
-		String shippingCity = model.getShippingCity();
-
-		if (shippingCity == null) {
-			jsonObj.put("shippingCity", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("shippingCity", shippingCity.toString());
-		}
-
-		String shippingState = model.getShippingState();
-
-		if (shippingState == null) {
-			jsonObj.put("shippingState", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("shippingState", shippingState.toString());
-		}
-
-		String shippingZip = model.getShippingZip();
-
-		if (shippingZip == null) {
-			jsonObj.put("shippingZip", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("shippingZip", shippingZip.toString());
-		}
-
-		String shippingCountry = model.getShippingCountry();
-
-		if (shippingCountry == null) {
-			jsonObj.put("shippingCountry", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("shippingCountry", shippingCountry.toString());
-		}
-
-		String shippingPhone = model.getShippingPhone();
-
-		if (shippingPhone == null) {
-			jsonObj.put("shippingPhone", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("shippingPhone", shippingPhone.toString());
-		}
-
-		String ccName = model.getCcName();
-
-		if (ccName == null) {
-			jsonObj.put("ccName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("ccName", ccName.toString());
-		}
-
-		String ccType = model.getCcType();
-
-		if (ccType == null) {
-			jsonObj.put("ccType", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("ccType", ccType.toString());
-		}
-
-		String ccNumber = model.getCcNumber();
-
-		if (ccNumber == null) {
-			jsonObj.put("ccNumber", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("ccNumber", ccNumber.toString());
-		}
-
-		jsonObj.put("ccExpMonth", model.getCcExpMonth());
-		jsonObj.put("ccExpYear", model.getCcExpYear());
-
-		String ccVerNumber = model.getCcVerNumber();
-
-		if (ccVerNumber == null) {
-			jsonObj.put("ccVerNumber", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("ccVerNumber", ccVerNumber.toString());
-		}
-
-		String comments = model.getComments();
-
-		if (comments == null) {
-			jsonObj.put("comments", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("comments", comments.toString());
-		}
-
-		String ppTxnId = model.getPpTxnId();
-
-		if (ppTxnId == null) {
-			jsonObj.put("ppTxnId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("ppTxnId", ppTxnId.toString());
-		}
-
-		String ppPaymentStatus = model.getPpPaymentStatus();
-
-		if (ppPaymentStatus == null) {
-			jsonObj.put("ppPaymentStatus", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("ppPaymentStatus", ppPaymentStatus.toString());
-		}
-
-		jsonObj.put("ppPaymentGross", model.getPpPaymentGross());
-
-		String ppReceiverEmail = model.getPpReceiverEmail();
-
-		if (ppReceiverEmail == null) {
-			jsonObj.put("ppReceiverEmail", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("ppReceiverEmail", ppReceiverEmail.toString());
-		}
-
-		String ppPayerEmail = model.getPpPayerEmail();
-
-		if (ppPayerEmail == null) {
-			jsonObj.put("ppPayerEmail", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("ppPayerEmail", ppPayerEmail.toString());
-		}
-
-		jsonObj.put("sendOrderEmail", model.isSendOrderEmail());
-		jsonObj.put("sendShippingEmail", model.isSendShippingEmail());
+		JSONUtil.put(jsonObj, "orderId", model.getOrderId());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "number", model.getNumber());
+		JSONUtil.put(jsonObj, "tax", model.getTax());
+		JSONUtil.put(jsonObj, "shipping", model.getShipping());
+		JSONUtil.put(jsonObj, "altShipping", model.getAltShipping());
+		JSONUtil.put(jsonObj, "requiresShipping", model.getRequiresShipping());
+		JSONUtil.put(jsonObj, "insure", model.getInsure());
+		JSONUtil.put(jsonObj, "insurance", model.getInsurance());
+		JSONUtil.put(jsonObj, "couponCodes", model.getCouponCodes());
+		JSONUtil.put(jsonObj, "couponDiscount", model.getCouponDiscount());
+		JSONUtil.put(jsonObj, "billingFirstName", model.getBillingFirstName());
+		JSONUtil.put(jsonObj, "billingLastName", model.getBillingLastName());
+		JSONUtil.put(jsonObj, "billingEmailAddress",
+			model.getBillingEmailAddress());
+		JSONUtil.put(jsonObj, "billingCompany", model.getBillingCompany());
+		JSONUtil.put(jsonObj, "billingStreet", model.getBillingStreet());
+		JSONUtil.put(jsonObj, "billingCity", model.getBillingCity());
+		JSONUtil.put(jsonObj, "billingState", model.getBillingState());
+		JSONUtil.put(jsonObj, "billingZip", model.getBillingZip());
+		JSONUtil.put(jsonObj, "billingCountry", model.getBillingCountry());
+		JSONUtil.put(jsonObj, "billingPhone", model.getBillingPhone());
+		JSONUtil.put(jsonObj, "shipToBilling", model.getShipToBilling());
+		JSONUtil.put(jsonObj, "shippingFirstName", model.getShippingFirstName());
+		JSONUtil.put(jsonObj, "shippingLastName", model.getShippingLastName());
+		JSONUtil.put(jsonObj, "shippingEmailAddress",
+			model.getShippingEmailAddress());
+		JSONUtil.put(jsonObj, "shippingCompany", model.getShippingCompany());
+		JSONUtil.put(jsonObj, "shippingStreet", model.getShippingStreet());
+		JSONUtil.put(jsonObj, "shippingCity", model.getShippingCity());
+		JSONUtil.put(jsonObj, "shippingState", model.getShippingState());
+		JSONUtil.put(jsonObj, "shippingZip", model.getShippingZip());
+		JSONUtil.put(jsonObj, "shippingCountry", model.getShippingCountry());
+		JSONUtil.put(jsonObj, "shippingPhone", model.getShippingPhone());
+		JSONUtil.put(jsonObj, "ccName", model.getCcName());
+		JSONUtil.put(jsonObj, "ccType", model.getCcType());
+		JSONUtil.put(jsonObj, "ccNumber", model.getCcNumber());
+		JSONUtil.put(jsonObj, "ccExpMonth", model.getCcExpMonth());
+		JSONUtil.put(jsonObj, "ccExpYear", model.getCcExpYear());
+		JSONUtil.put(jsonObj, "ccVerNumber", model.getCcVerNumber());
+		JSONUtil.put(jsonObj, "comments", model.getComments());
+		JSONUtil.put(jsonObj, "ppTxnId", model.getPpTxnId());
+		JSONUtil.put(jsonObj, "ppPaymentStatus", model.getPpPaymentStatus());
+		JSONUtil.put(jsonObj, "ppPaymentGross", model.getPpPaymentGross());
+		JSONUtil.put(jsonObj, "ppReceiverEmail", model.getPpReceiverEmail());
+		JSONUtil.put(jsonObj, "ppPayerEmail", model.getPpPayerEmail());
+		JSONUtil.put(jsonObj, "sendOrderEmail", model.getSendOrderEmail());
+		JSONUtil.put(jsonObj, "sendShippingEmail", model.getSendShippingEmail());
 
 		return jsonObj;
 	}

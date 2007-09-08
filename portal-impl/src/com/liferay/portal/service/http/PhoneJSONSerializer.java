@@ -22,13 +22,11 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Phone;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,60 +50,18 @@ import java.util.List;
 public class PhoneJSONSerializer {
 	public static JSONObject toJSONObject(Phone model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("phoneId", model.getPhoneId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-
-		String number = model.getNumber();
-
-		if (number == null) {
-			jsonObj.put("number", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("number", number.toString());
-		}
-
-		String extension = model.getExtension();
-
-		if (extension == null) {
-			jsonObj.put("extension", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("extension", extension.toString());
-		}
-
-		jsonObj.put("typeId", model.getTypeId());
-		jsonObj.put("primary", model.isPrimary());
+		JSONUtil.put(jsonObj, "phoneId", model.getPhoneId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
+		JSONUtil.put(jsonObj, "classPK", model.getClassPK());
+		JSONUtil.put(jsonObj, "number", model.getNumber());
+		JSONUtil.put(jsonObj, "extension", model.getExtension());
+		JSONUtil.put(jsonObj, "typeId", model.getTypeId());
+		JSONUtil.put(jsonObj, "primary", model.getPrimary());
 
 		return jsonObj;
 	}

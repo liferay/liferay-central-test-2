@@ -50,9 +50,9 @@ import java.util.List;
 public class UserGroupRoleJSONSerializer {
 	public static JSONObject toJSONObject(UserGroupRole model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("roleId", model.getRoleId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
+		JSONUtil.put(jsonObj, "roleId", model.getRoleId());
 
 		return jsonObj;
 	}

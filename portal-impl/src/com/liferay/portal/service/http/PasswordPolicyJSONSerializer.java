@@ -22,13 +22,11 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PasswordPolicy;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,74 +50,33 @@ import java.util.List;
 public class PasswordPolicyJSONSerializer {
 	public static JSONObject toJSONObject(PasswordPolicy model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("passwordPolicyId", model.getPasswordPolicyId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("defaultPolicy", model.isDefaultPolicy());
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
-
-		jsonObj.put("changeable", model.isChangeable());
-		jsonObj.put("changeRequired", model.isChangeRequired());
-		jsonObj.put("minAge", model.getMinAge());
-		jsonObj.put("checkSyntax", model.isCheckSyntax());
-		jsonObj.put("allowDictionaryWords", model.isAllowDictionaryWords());
-		jsonObj.put("minLength", model.getMinLength());
-		jsonObj.put("history", model.isHistory());
-		jsonObj.put("historyCount", model.getHistoryCount());
-		jsonObj.put("expireable", model.isExpireable());
-		jsonObj.put("maxAge", model.getMaxAge());
-		jsonObj.put("warningTime", model.getWarningTime());
-		jsonObj.put("graceLimit", model.getGraceLimit());
-		jsonObj.put("lockout", model.isLockout());
-		jsonObj.put("maxFailure", model.getMaxFailure());
-		jsonObj.put("lockoutDuration", model.getLockoutDuration());
-		jsonObj.put("requireUnlock", model.isRequireUnlock());
-		jsonObj.put("resetFailureCount", model.getResetFailureCount());
+		JSONUtil.put(jsonObj, "passwordPolicyId", model.getPasswordPolicyId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "defaultPolicy", model.getDefaultPolicy());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
+		JSONUtil.put(jsonObj, "changeable", model.getChangeable());
+		JSONUtil.put(jsonObj, "changeRequired", model.getChangeRequired());
+		JSONUtil.put(jsonObj, "minAge", model.getMinAge());
+		JSONUtil.put(jsonObj, "checkSyntax", model.getCheckSyntax());
+		JSONUtil.put(jsonObj, "allowDictionaryWords",
+			model.getAllowDictionaryWords());
+		JSONUtil.put(jsonObj, "minLength", model.getMinLength());
+		JSONUtil.put(jsonObj, "history", model.getHistory());
+		JSONUtil.put(jsonObj, "historyCount", model.getHistoryCount());
+		JSONUtil.put(jsonObj, "expireable", model.getExpireable());
+		JSONUtil.put(jsonObj, "maxAge", model.getMaxAge());
+		JSONUtil.put(jsonObj, "warningTime", model.getWarningTime());
+		JSONUtil.put(jsonObj, "graceLimit", model.getGraceLimit());
+		JSONUtil.put(jsonObj, "lockout", model.getLockout());
+		JSONUtil.put(jsonObj, "maxFailure", model.getMaxFailure());
+		JSONUtil.put(jsonObj, "lockoutDuration", model.getLockoutDuration());
+		JSONUtil.put(jsonObj, "requireUnlock", model.getRequireUnlock());
+		JSONUtil.put(jsonObj, "resetFailureCount", model.getResetFailureCount());
 
 		return jsonObj;
 	}

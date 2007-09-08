@@ -22,13 +22,11 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Account;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,119 +50,22 @@ import java.util.List;
 public class AccountJSONSerializer {
 	public static JSONObject toJSONObject(Account model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("accountId", model.getAccountId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("parentAccountId", model.getParentAccountId());
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String legalName = model.getLegalName();
-
-		if (legalName == null) {
-			jsonObj.put("legalName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("legalName", legalName.toString());
-		}
-
-		String legalId = model.getLegalId();
-
-		if (legalId == null) {
-			jsonObj.put("legalId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("legalId", legalId.toString());
-		}
-
-		String legalType = model.getLegalType();
-
-		if (legalType == null) {
-			jsonObj.put("legalType", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("legalType", legalType.toString());
-		}
-
-		String sicCode = model.getSicCode();
-
-		if (sicCode == null) {
-			jsonObj.put("sicCode", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("sicCode", sicCode.toString());
-		}
-
-		String tickerSymbol = model.getTickerSymbol();
-
-		if (tickerSymbol == null) {
-			jsonObj.put("tickerSymbol", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("tickerSymbol", tickerSymbol.toString());
-		}
-
-		String industry = model.getIndustry();
-
-		if (industry == null) {
-			jsonObj.put("industry", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("industry", industry.toString());
-		}
-
-		String type = model.getType();
-
-		if (type == null) {
-			jsonObj.put("type", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("type", type.toString());
-		}
-
-		String size = model.getSize();
-
-		if (size == null) {
-			jsonObj.put("size", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("size", size.toString());
-		}
+		JSONUtil.put(jsonObj, "accountId", model.getAccountId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "parentAccountId", model.getParentAccountId());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "legalName", model.getLegalName());
+		JSONUtil.put(jsonObj, "legalId", model.getLegalId());
+		JSONUtil.put(jsonObj, "legalType", model.getLegalType());
+		JSONUtil.put(jsonObj, "sicCode", model.getSicCode());
+		JSONUtil.put(jsonObj, "tickerSymbol", model.getTickerSymbol());
+		JSONUtil.put(jsonObj, "industry", model.getIndustry());
+		JSONUtil.put(jsonObj, "type", model.getType());
+		JSONUtil.put(jsonObj, "size", model.getSize());
 
 		return jsonObj;
 	}

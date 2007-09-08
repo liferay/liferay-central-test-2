@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.tags.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.tags.model.TagsAsset;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,123 +50,25 @@ import java.util.List;
 public class TagsAssetJSONSerializer {
 	public static JSONObject toJSONObject(TagsAsset model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("assetId", model.getAssetId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-
-		Date startDate = model.getStartDate();
-
-		if (startDate == null) {
-			jsonObj.put("startDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("startDate", startDate.toString());
-		}
-
-		Date endDate = model.getEndDate();
-
-		if (endDate == null) {
-			jsonObj.put("endDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("endDate", endDate.toString());
-		}
-
-		Date publishDate = model.getPublishDate();
-
-		if (publishDate == null) {
-			jsonObj.put("publishDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("publishDate", publishDate.toString());
-		}
-
-		Date expirationDate = model.getExpirationDate();
-
-		if (expirationDate == null) {
-			jsonObj.put("expirationDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("expirationDate", expirationDate.toString());
-		}
-
-		String mimeType = model.getMimeType();
-
-		if (mimeType == null) {
-			jsonObj.put("mimeType", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("mimeType", mimeType.toString());
-		}
-
-		String title = model.getTitle();
-
-		if (title == null) {
-			jsonObj.put("title", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("title", title.toString());
-		}
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
-
-		String summary = model.getSummary();
-
-		if (summary == null) {
-			jsonObj.put("summary", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("summary", summary.toString());
-		}
-
-		String url = model.getUrl();
-
-		if (url == null) {
-			jsonObj.put("url", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("url", url.toString());
-		}
-
-		jsonObj.put("height", model.getHeight());
-		jsonObj.put("width", model.getWidth());
+		JSONUtil.put(jsonObj, "assetId", model.getAssetId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
+		JSONUtil.put(jsonObj, "classPK", model.getClassPK());
+		JSONUtil.put(jsonObj, "startDate", model.getStartDate());
+		JSONUtil.put(jsonObj, "endDate", model.getEndDate());
+		JSONUtil.put(jsonObj, "publishDate", model.getPublishDate());
+		JSONUtil.put(jsonObj, "expirationDate", model.getExpirationDate());
+		JSONUtil.put(jsonObj, "mimeType", model.getMimeType());
+		JSONUtil.put(jsonObj, "title", model.getTitle());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
+		JSONUtil.put(jsonObj, "summary", model.getSummary());
+		JSONUtil.put(jsonObj, "url", model.getUrl());
+		JSONUtil.put(jsonObj, "height", model.getHeight());
+		JSONUtil.put(jsonObj, "width", model.getWidth());
 
 		return jsonObj;
 	}

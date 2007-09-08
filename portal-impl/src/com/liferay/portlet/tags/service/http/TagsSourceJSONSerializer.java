@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.tags.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.tags.model.TagsSource;
 
 import org.json.JSONArray;
@@ -52,26 +50,10 @@ import java.util.List;
 public class TagsSourceJSONSerializer {
 	public static JSONObject toJSONObject(TagsSource model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("sourceId", model.getSourceId());
-		jsonObj.put("parentSourceId", model.getParentSourceId());
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String acronym = model.getAcronym();
-
-		if (acronym == null) {
-			jsonObj.put("acronym", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("acronym", acronym.toString());
-		}
+		JSONUtil.put(jsonObj, "sourceId", model.getSourceId());
+		JSONUtil.put(jsonObj, "parentSourceId", model.getParentSourceId());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "acronym", model.getAcronym());
 
 		return jsonObj;
 	}

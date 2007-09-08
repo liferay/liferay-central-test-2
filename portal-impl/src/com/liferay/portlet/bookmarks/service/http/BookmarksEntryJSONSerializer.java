@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.bookmarks.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,59 +50,17 @@ import java.util.List;
 public class BookmarksEntryJSONSerializer {
 	public static JSONObject toJSONObject(BookmarksEntry model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("entryId", model.getEntryId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("folderId", model.getFolderId());
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String url = model.getUrl();
-
-		if (url == null) {
-			jsonObj.put("url", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("url", url.toString());
-		}
-
-		String comments = model.getComments();
-
-		if (comments == null) {
-			jsonObj.put("comments", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("comments", comments.toString());
-		}
-
-		jsonObj.put("visits", model.getVisits());
-		jsonObj.put("priority", model.getPriority());
+		JSONUtil.put(jsonObj, "entryId", model.getEntryId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "folderId", model.getFolderId());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "url", model.getUrl());
+		JSONUtil.put(jsonObj, "comments", model.getComments());
+		JSONUtil.put(jsonObj, "visits", model.getVisits());
+		JSONUtil.put(jsonObj, "priority", model.getPriority());
 
 		return jsonObj;
 	}

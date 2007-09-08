@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.polls.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.polls.model.PollsQuestion;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,73 +50,17 @@ import java.util.List;
 public class PollsQuestionJSONSerializer {
 	public static JSONObject toJSONObject(PollsQuestion model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("questionId", model.getQuestionId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		String title = model.getTitle();
-
-		if (title == null) {
-			jsonObj.put("title", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("title", title.toString());
-		}
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
-
-		Date expirationDate = model.getExpirationDate();
-
-		if (expirationDate == null) {
-			jsonObj.put("expirationDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("expirationDate", expirationDate.toString());
-		}
-
-		Date lastVoteDate = model.getLastVoteDate();
-
-		if (lastVoteDate == null) {
-			jsonObj.put("lastVoteDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("lastVoteDate", lastVoteDate.toString());
-		}
+		JSONUtil.put(jsonObj, "questionId", model.getQuestionId());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "title", model.getTitle());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
+		JSONUtil.put(jsonObj, "expirationDate", model.getExpirationDate());
+		JSONUtil.put(jsonObj, "lastVoteDate", model.getLastVoteDate());
 
 		return jsonObj;
 	}

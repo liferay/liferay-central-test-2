@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserGroup;
 
 import org.json.JSONArray;
@@ -51,27 +50,11 @@ import java.util.List;
 public class UserGroupJSONSerializer {
 	public static JSONObject toJSONObject(UserGroup model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("userGroupId", model.getUserGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("parentUserGroupId", model.getParentUserGroupId());
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
+		JSONUtil.put(jsonObj, "userGroupId", model.getUserGroupId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "parentUserGroupId", model.getParentUserGroupId());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
 
 		return jsonObj;
 	}

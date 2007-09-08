@@ -22,13 +22,11 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,168 +50,38 @@ import java.util.List;
 public class UserJSONSerializer {
 	public static JSONObject toJSONObject(User model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("companyId", model.getCompanyId());
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("defaultUser", model.isDefaultUser());
-		jsonObj.put("contactId", model.getContactId());
-
-		String password = model.getPassword();
-
-		if (password == null) {
-			jsonObj.put("password", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("password", password.toString());
-		}
-
-		jsonObj.put("passwordEncrypted", model.isPasswordEncrypted());
-		jsonObj.put("passwordReset", model.isPasswordReset());
-
-		Date passwordModifiedDate = model.getPasswordModifiedDate();
-
-		if (passwordModifiedDate == null) {
-			jsonObj.put("passwordModifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("passwordModifiedDate", passwordModifiedDate.toString());
-		}
-
-		jsonObj.put("graceLoginCount", model.getGraceLoginCount());
-
-		String screenName = model.getScreenName();
-
-		if (screenName == null) {
-			jsonObj.put("screenName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("screenName", screenName.toString());
-		}
-
-		String emailAddress = model.getEmailAddress();
-
-		if (emailAddress == null) {
-			jsonObj.put("emailAddress", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("emailAddress", emailAddress.toString());
-		}
-
-		jsonObj.put("portraitId", model.getPortraitId());
-
-		String languageId = model.getLanguageId();
-
-		if (languageId == null) {
-			jsonObj.put("languageId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("languageId", languageId.toString());
-		}
-
-		String timeZoneId = model.getTimeZoneId();
-
-		if (timeZoneId == null) {
-			jsonObj.put("timeZoneId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("timeZoneId", timeZoneId.toString());
-		}
-
-		String greeting = model.getGreeting();
-
-		if (greeting == null) {
-			jsonObj.put("greeting", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("greeting", greeting.toString());
-		}
-
-		String comments = model.getComments();
-
-		if (comments == null) {
-			jsonObj.put("comments", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("comments", comments.toString());
-		}
-
-		Date loginDate = model.getLoginDate();
-
-		if (loginDate == null) {
-			jsonObj.put("loginDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("loginDate", loginDate.toString());
-		}
-
-		String loginIP = model.getLoginIP();
-
-		if (loginIP == null) {
-			jsonObj.put("loginIP", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("loginIP", loginIP.toString());
-		}
-
-		Date lastLoginDate = model.getLastLoginDate();
-
-		if (lastLoginDate == null) {
-			jsonObj.put("lastLoginDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("lastLoginDate", lastLoginDate.toString());
-		}
-
-		String lastLoginIP = model.getLastLoginIP();
-
-		if (lastLoginIP == null) {
-			jsonObj.put("lastLoginIP", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("lastLoginIP", lastLoginIP.toString());
-		}
-
-		Date lastFailedLoginDate = model.getLastFailedLoginDate();
-
-		if (lastFailedLoginDate == null) {
-			jsonObj.put("lastFailedLoginDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("lastFailedLoginDate", lastFailedLoginDate.toString());
-		}
-
-		jsonObj.put("failedLoginAttempts", model.getFailedLoginAttempts());
-		jsonObj.put("lockout", model.isLockout());
-
-		Date lockoutDate = model.getLockoutDate();
-
-		if (lockoutDate == null) {
-			jsonObj.put("lockoutDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("lockoutDate", lockoutDate.toString());
-		}
-
-		jsonObj.put("agreedToTermsOfUse", model.isAgreedToTermsOfUse());
-		jsonObj.put("active", model.isActive());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "defaultUser", model.getDefaultUser());
+		JSONUtil.put(jsonObj, "contactId", model.getContactId());
+		JSONUtil.put(jsonObj, "password", model.getPassword());
+		JSONUtil.put(jsonObj, "passwordEncrypted", model.getPasswordEncrypted());
+		JSONUtil.put(jsonObj, "passwordReset", model.getPasswordReset());
+		JSONUtil.put(jsonObj, "passwordModifiedDate",
+			model.getPasswordModifiedDate());
+		JSONUtil.put(jsonObj, "graceLoginCount", model.getGraceLoginCount());
+		JSONUtil.put(jsonObj, "screenName", model.getScreenName());
+		JSONUtil.put(jsonObj, "emailAddress", model.getEmailAddress());
+		JSONUtil.put(jsonObj, "portraitId", model.getPortraitId());
+		JSONUtil.put(jsonObj, "languageId", model.getLanguageId());
+		JSONUtil.put(jsonObj, "timeZoneId", model.getTimeZoneId());
+		JSONUtil.put(jsonObj, "greeting", model.getGreeting());
+		JSONUtil.put(jsonObj, "comments", model.getComments());
+		JSONUtil.put(jsonObj, "loginDate", model.getLoginDate());
+		JSONUtil.put(jsonObj, "loginIP", model.getLoginIP());
+		JSONUtil.put(jsonObj, "lastLoginDate", model.getLastLoginDate());
+		JSONUtil.put(jsonObj, "lastLoginIP", model.getLastLoginIP());
+		JSONUtil.put(jsonObj, "lastFailedLoginDate",
+			model.getLastFailedLoginDate());
+		JSONUtil.put(jsonObj, "failedLoginAttempts",
+			model.getFailedLoginAttempts());
+		JSONUtil.put(jsonObj, "lockout", model.getLockout());
+		JSONUtil.put(jsonObj, "lockoutDate", model.getLockoutDate());
+		JSONUtil.put(jsonObj, "agreedToTermsOfUse",
+			model.getAgreedToTermsOfUse());
+		JSONUtil.put(jsonObj, "active", model.getActive());
 
 		return jsonObj;
 	}

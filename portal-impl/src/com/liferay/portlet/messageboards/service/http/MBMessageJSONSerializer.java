@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.messageboards.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.messageboards.model.MBMessage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,61 +50,19 @@ import java.util.List;
 public class MBMessageJSONSerializer {
 	public static JSONObject toJSONObject(MBMessage model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("messageId", model.getMessageId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("categoryId", model.getCategoryId());
-		jsonObj.put("threadId", model.getThreadId());
-		jsonObj.put("parentMessageId", model.getParentMessageId());
-
-		String subject = model.getSubject();
-
-		if (subject == null) {
-			jsonObj.put("subject", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("subject", subject.toString());
-		}
-
-		String body = model.getBody();
-
-		if (body == null) {
-			jsonObj.put("body", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("body", body.toString());
-		}
-
-		jsonObj.put("attachments", model.isAttachments());
-		jsonObj.put("anonymous", model.isAnonymous());
+		JSONUtil.put(jsonObj, "messageId", model.getMessageId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "categoryId", model.getCategoryId());
+		JSONUtil.put(jsonObj, "threadId", model.getThreadId());
+		JSONUtil.put(jsonObj, "parentMessageId", model.getParentMessageId());
+		JSONUtil.put(jsonObj, "subject", model.getSubject());
+		JSONUtil.put(jsonObj, "body", model.getBody());
+		JSONUtil.put(jsonObj, "attachments", model.getAttachments());
+		JSONUtil.put(jsonObj, "anonymous", model.getAnonymous());
 
 		return jsonObj;
 	}

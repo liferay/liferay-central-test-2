@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.imagegallery.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.imagegallery.model.IGImage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,41 +50,15 @@ import java.util.List;
 public class IGImageJSONSerializer {
 	public static JSONObject toJSONObject(IGImage model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("imageId", model.getImageId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("folderId", model.getFolderId());
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
-
-		jsonObj.put("smallImageId", model.getSmallImageId());
-		jsonObj.put("largeImageId", model.getLargeImageId());
+		JSONUtil.put(jsonObj, "imageId", model.getImageId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "folderId", model.getFolderId());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
+		JSONUtil.put(jsonObj, "smallImageId", model.getSmallImageId());
+		JSONUtil.put(jsonObj, "largeImageId", model.getLargeImageId());
 
 		return jsonObj;
 	}

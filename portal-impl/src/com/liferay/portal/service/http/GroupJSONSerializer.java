@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 
 import org.json.JSONArray;
@@ -51,60 +50,19 @@ import java.util.List;
 public class GroupJSONSerializer {
 	public static JSONObject toJSONObject(Group model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("creatorUserId", model.getCreatorUserId());
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-		jsonObj.put("parentGroupId", model.getParentGroupId());
-		jsonObj.put("liveGroupId", model.getLiveGroupId());
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
-
-		String type = model.getType();
-
-		if (type == null) {
-			jsonObj.put("type", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("type", type.toString());
-		}
-
-		String typeSettings = model.getTypeSettings();
-
-		if (typeSettings == null) {
-			jsonObj.put("typeSettings", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("typeSettings", typeSettings.toString());
-		}
-
-		String friendlyURL = model.getFriendlyURL();
-
-		if (friendlyURL == null) {
-			jsonObj.put("friendlyURL", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("friendlyURL", friendlyURL.toString());
-		}
-
-		jsonObj.put("active", model.isActive());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "creatorUserId", model.getCreatorUserId());
+		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
+		JSONUtil.put(jsonObj, "classPK", model.getClassPK());
+		JSONUtil.put(jsonObj, "parentGroupId", model.getParentGroupId());
+		JSONUtil.put(jsonObj, "liveGroupId", model.getLiveGroupId());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
+		JSONUtil.put(jsonObj, "type", model.getType());
+		JSONUtil.put(jsonObj, "typeSettings", model.getTypeSettings());
+		JSONUtil.put(jsonObj, "friendlyURL", model.getFriendlyURL());
+		JSONUtil.put(jsonObj, "active", model.getActive());
 
 		return jsonObj;
 	}

@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.documentlibrary.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,89 +50,22 @@ import java.util.List;
 public class DLFileEntryJSONSerializer {
 	public static JSONObject toJSONObject(DLFileEntry model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("fileEntryId", model.getFileEntryId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		jsonObj.put("versionUserId", model.getVersionUserId());
-
-		String versionUserName = model.getVersionUserName();
-
-		if (versionUserName == null) {
-			jsonObj.put("versionUserName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("versionUserName", versionUserName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("folderId", model.getFolderId());
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String title = model.getTitle();
-
-		if (title == null) {
-			jsonObj.put("title", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("title", title.toString());
-		}
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
-
-		jsonObj.put("version", model.getVersion());
-		jsonObj.put("size", model.getSize());
-		jsonObj.put("readCount", model.getReadCount());
-
-		String extraSettings = model.getExtraSettings();
-
-		if (extraSettings == null) {
-			jsonObj.put("extraSettings", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("extraSettings", extraSettings.toString());
-		}
+		JSONUtil.put(jsonObj, "fileEntryId", model.getFileEntryId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "versionUserId", model.getVersionUserId());
+		JSONUtil.put(jsonObj, "versionUserName", model.getVersionUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "folderId", model.getFolderId());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "title", model.getTitle());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
+		JSONUtil.put(jsonObj, "version", model.getVersion());
+		JSONUtil.put(jsonObj, "size", model.getSize());
+		JSONUtil.put(jsonObj, "readCount", model.getReadCount());
+		JSONUtil.put(jsonObj, "extraSettings", model.getExtraSettings());
 
 		return jsonObj;
 	}

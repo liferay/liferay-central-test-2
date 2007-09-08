@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.blogs.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.blogs.model.BlogsEntry;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,66 +50,17 @@ import java.util.List;
 public class BlogsEntryJSONSerializer {
 	public static JSONObject toJSONObject(BlogsEntry model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("entryId", model.getEntryId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("categoryId", model.getCategoryId());
-
-		String title = model.getTitle();
-
-		if (title == null) {
-			jsonObj.put("title", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("title", title.toString());
-		}
-
-		String content = model.getContent();
-
-		if (content == null) {
-			jsonObj.put("content", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("content", content.toString());
-		}
-
-		Date displayDate = model.getDisplayDate();
-
-		if (displayDate == null) {
-			jsonObj.put("displayDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("displayDate", displayDate.toString());
-		}
+		JSONUtil.put(jsonObj, "entryId", model.getEntryId());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "categoryId", model.getCategoryId());
+		JSONUtil.put(jsonObj, "title", model.getTitle());
+		JSONUtil.put(jsonObj, "content", model.getContent());
+		JSONUtil.put(jsonObj, "displayDate", model.getDisplayDate());
 
 		return jsonObj;
 	}

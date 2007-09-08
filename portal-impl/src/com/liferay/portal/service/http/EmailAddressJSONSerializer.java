@@ -22,13 +22,11 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.EmailAddress;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,51 +50,17 @@ import java.util.List;
 public class EmailAddressJSONSerializer {
 	public static JSONObject toJSONObject(EmailAddress model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("emailAddressId", model.getEmailAddressId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-
-		String address = model.getAddress();
-
-		if (address == null) {
-			jsonObj.put("address", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("address", address.toString());
-		}
-
-		jsonObj.put("typeId", model.getTypeId());
-		jsonObj.put("primary", model.isPrimary());
+		JSONUtil.put(jsonObj, "emailAddressId", model.getEmailAddressId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
+		JSONUtil.put(jsonObj, "classPK", model.getClassPK());
+		JSONUtil.put(jsonObj, "address", model.getAddress());
+		JSONUtil.put(jsonObj, "typeId", model.getTypeId());
+		JSONUtil.put(jsonObj, "primary", model.getPrimary());
 
 		return jsonObj;
 	}

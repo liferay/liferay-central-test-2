@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.softwarecatalog.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,58 +50,18 @@ import java.util.List;
 public class SCFrameworkVersionJSONSerializer {
 	public static JSONObject toJSONObject(SCFrameworkVersion model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("frameworkVersionId", model.getFrameworkVersionId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String url = model.getUrl();
-
-		if (url == null) {
-			jsonObj.put("url", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("url", url.toString());
-		}
-
-		jsonObj.put("active", model.isActive());
-		jsonObj.put("priority", model.getPriority());
+		JSONUtil.put(jsonObj, "frameworkVersionId",
+			model.getFrameworkVersionId());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "url", model.getUrl());
+		JSONUtil.put(jsonObj, "active", model.getActive());
+		JSONUtil.put(jsonObj, "priority", model.getPriority());
 
 		return jsonObj;
 	}

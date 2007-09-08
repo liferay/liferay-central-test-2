@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Organization;
 
 import org.json.JSONArray;
@@ -51,33 +50,17 @@ import java.util.List;
 public class OrganizationJSONSerializer {
 	public static JSONObject toJSONObject(Organization model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("organizationId", model.getOrganizationId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("parentOrganizationId", model.getParentOrganizationId());
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		jsonObj.put("location", model.isLocation());
-		jsonObj.put("recursable", model.isRecursable());
-		jsonObj.put("regionId", model.getRegionId());
-		jsonObj.put("countryId", model.getCountryId());
-		jsonObj.put("statusId", model.getStatusId());
-
-		String comments = model.getComments();
-
-		if (comments == null) {
-			jsonObj.put("comments", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("comments", comments.toString());
-		}
+		JSONUtil.put(jsonObj, "organizationId", model.getOrganizationId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "parentOrganizationId",
+			model.getParentOrganizationId());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "location", model.getLocation());
+		JSONUtil.put(jsonObj, "recursable", model.getRecursable());
+		JSONUtil.put(jsonObj, "regionId", model.getRegionId());
+		JSONUtil.put(jsonObj, "countryId", model.getCountryId());
+		JSONUtil.put(jsonObj, "statusId", model.getStatusId());
+		JSONUtil.put(jsonObj, "comments", model.getComments());
 
 		return jsonObj;
 	}

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Permission;
 
 import org.json.JSONArray;
@@ -51,19 +50,10 @@ import java.util.List;
 public class PermissionJSONSerializer {
 	public static JSONObject toJSONObject(Permission model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("permissionId", model.getPermissionId());
-		jsonObj.put("companyId", model.getCompanyId());
-
-		String actionId = model.getActionId();
-
-		if (actionId == null) {
-			jsonObj.put("actionId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("actionId", actionId.toString());
-		}
-
-		jsonObj.put("resourceId", model.getResourceId());
+		JSONUtil.put(jsonObj, "permissionId", model.getPermissionId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "actionId", model.getActionId());
+		JSONUtil.put(jsonObj, "resourceId", model.getResourceId());
 
 		return jsonObj;
 	}

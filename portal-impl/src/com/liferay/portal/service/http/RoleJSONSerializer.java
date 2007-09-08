@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Role;
 
 import org.json.JSONArray;
@@ -51,30 +50,13 @@ import java.util.List;
 public class RoleJSONSerializer {
 	public static JSONObject toJSONObject(Role model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("roleId", model.getRoleId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
-
-		jsonObj.put("type", model.getType());
+		JSONUtil.put(jsonObj, "roleId", model.getRoleId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
+		JSONUtil.put(jsonObj, "classPK", model.getClassPK());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
+		JSONUtil.put(jsonObj, "type", model.getType());
 
 		return jsonObj;
 	}

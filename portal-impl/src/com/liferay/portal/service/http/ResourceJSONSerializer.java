@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Resource;
 
 import org.json.JSONArray;
@@ -51,17 +50,9 @@ import java.util.List;
 public class ResourceJSONSerializer {
 	public static JSONObject toJSONObject(Resource model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("resourceId", model.getResourceId());
-		jsonObj.put("codeId", model.getCodeId());
-
-		String primKey = model.getPrimKey();
-
-		if (primKey == null) {
-			jsonObj.put("primKey", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("primKey", primKey.toString());
-		}
+		JSONUtil.put(jsonObj, "resourceId", model.getResourceId());
+		JSONUtil.put(jsonObj, "codeId", model.getCodeId());
+		JSONUtil.put(jsonObj, "primKey", model.getPrimKey());
 
 		return jsonObj;
 	}

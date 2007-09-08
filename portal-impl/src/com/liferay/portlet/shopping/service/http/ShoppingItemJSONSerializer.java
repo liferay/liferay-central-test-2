@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.shopping.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import com.liferay.portlet.shopping.model.ShoppingItem;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,132 +50,40 @@ import java.util.List;
 public class ShoppingItemJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingItem model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("itemId", model.getItemId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("categoryId", model.getCategoryId());
-
-		String sku = model.getSku();
-
-		if (sku == null) {
-			jsonObj.put("sku", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("sku", sku.toString());
-		}
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String description = model.getDescription();
-
-		if (description == null) {
-			jsonObj.put("description", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("description", description.toString());
-		}
-
-		String properties = model.getProperties();
-
-		if (properties == null) {
-			jsonObj.put("properties", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("properties", properties.toString());
-		}
-
-		jsonObj.put("fields", model.isFields());
-
-		String fieldsQuantities = model.getFieldsQuantities();
-
-		if (fieldsQuantities == null) {
-			jsonObj.put("fieldsQuantities", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("fieldsQuantities", fieldsQuantities.toString());
-		}
-
-		jsonObj.put("minQuantity", model.getMinQuantity());
-		jsonObj.put("maxQuantity", model.getMaxQuantity());
-		jsonObj.put("price", model.getPrice());
-		jsonObj.put("discount", model.getDiscount());
-		jsonObj.put("taxable", model.isTaxable());
-		jsonObj.put("shipping", model.getShipping());
-		jsonObj.put("useShippingFormula", model.isUseShippingFormula());
-		jsonObj.put("requiresShipping", model.isRequiresShipping());
-		jsonObj.put("stockQuantity", model.getStockQuantity());
-		jsonObj.put("featured", model.isFeatured());
-		jsonObj.put("sale", model.isSale());
-		jsonObj.put("smallImage", model.isSmallImage());
-		jsonObj.put("smallImageId", model.getSmallImageId());
-
-		String smallImageURL = model.getSmallImageURL();
-
-		if (smallImageURL == null) {
-			jsonObj.put("smallImageURL", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("smallImageURL", smallImageURL.toString());
-		}
-
-		jsonObj.put("mediumImage", model.isMediumImage());
-		jsonObj.put("mediumImageId", model.getMediumImageId());
-
-		String mediumImageURL = model.getMediumImageURL();
-
-		if (mediumImageURL == null) {
-			jsonObj.put("mediumImageURL", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("mediumImageURL", mediumImageURL.toString());
-		}
-
-		jsonObj.put("largeImage", model.isLargeImage());
-		jsonObj.put("largeImageId", model.getLargeImageId());
-
-		String largeImageURL = model.getLargeImageURL();
-
-		if (largeImageURL == null) {
-			jsonObj.put("largeImageURL", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("largeImageURL", largeImageURL.toString());
-		}
+		JSONUtil.put(jsonObj, "itemId", model.getItemId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "categoryId", model.getCategoryId());
+		JSONUtil.put(jsonObj, "sku", model.getSku());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "description", model.getDescription());
+		JSONUtil.put(jsonObj, "properties", model.getProperties());
+		JSONUtil.put(jsonObj, "fields", model.getFields());
+		JSONUtil.put(jsonObj, "fieldsQuantities", model.getFieldsQuantities());
+		JSONUtil.put(jsonObj, "minQuantity", model.getMinQuantity());
+		JSONUtil.put(jsonObj, "maxQuantity", model.getMaxQuantity());
+		JSONUtil.put(jsonObj, "price", model.getPrice());
+		JSONUtil.put(jsonObj, "discount", model.getDiscount());
+		JSONUtil.put(jsonObj, "taxable", model.getTaxable());
+		JSONUtil.put(jsonObj, "shipping", model.getShipping());
+		JSONUtil.put(jsonObj, "useShippingFormula",
+			model.getUseShippingFormula());
+		JSONUtil.put(jsonObj, "requiresShipping", model.getRequiresShipping());
+		JSONUtil.put(jsonObj, "stockQuantity", model.getStockQuantity());
+		JSONUtil.put(jsonObj, "featured", model.getFeatured());
+		JSONUtil.put(jsonObj, "sale", model.getSale());
+		JSONUtil.put(jsonObj, "smallImage", model.getSmallImage());
+		JSONUtil.put(jsonObj, "smallImageId", model.getSmallImageId());
+		JSONUtil.put(jsonObj, "smallImageURL", model.getSmallImageURL());
+		JSONUtil.put(jsonObj, "mediumImage", model.getMediumImage());
+		JSONUtil.put(jsonObj, "mediumImageId", model.getMediumImageId());
+		JSONUtil.put(jsonObj, "mediumImageURL", model.getMediumImageURL());
+		JSONUtil.put(jsonObj, "largeImage", model.getLargeImage());
+		JSONUtil.put(jsonObj, "largeImageId", model.getLargeImageId());
+		JSONUtil.put(jsonObj, "largeImageURL", model.getLargeImageURL());
 
 		return jsonObj;
 	}

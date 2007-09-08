@@ -22,13 +22,11 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Contact;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,187 +50,33 @@ import java.util.List;
 public class ContactJSONSerializer {
 	public static JSONObject toJSONObject(Contact model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("contactId", model.getContactId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-
-		String userName = model.getUserName();
-
-		if (userName == null) {
-			jsonObj.put("userName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("userName", userName.toString());
-		}
-
-		Date createDate = model.getCreateDate();
-
-		if (createDate == null) {
-			jsonObj.put("createDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("createDate", createDate.toString());
-		}
-
-		Date modifiedDate = model.getModifiedDate();
-
-		if (modifiedDate == null) {
-			jsonObj.put("modifiedDate", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("modifiedDate", modifiedDate.toString());
-		}
-
-		jsonObj.put("accountId", model.getAccountId());
-		jsonObj.put("parentContactId", model.getParentContactId());
-
-		String firstName = model.getFirstName();
-
-		if (firstName == null) {
-			jsonObj.put("firstName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("firstName", firstName.toString());
-		}
-
-		String middleName = model.getMiddleName();
-
-		if (middleName == null) {
-			jsonObj.put("middleName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("middleName", middleName.toString());
-		}
-
-		String lastName = model.getLastName();
-
-		if (lastName == null) {
-			jsonObj.put("lastName", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("lastName", lastName.toString());
-		}
-
-		jsonObj.put("prefixId", model.getPrefixId());
-		jsonObj.put("suffixId", model.getSuffixId());
-		jsonObj.put("male", model.isMale());
-
-		Date birthday = model.getBirthday();
-
-		if (birthday == null) {
-			jsonObj.put("birthday", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("birthday", birthday.toString());
-		}
-
-		String smsSn = model.getSmsSn();
-
-		if (smsSn == null) {
-			jsonObj.put("smsSn", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("smsSn", smsSn.toString());
-		}
-
-		String aimSn = model.getAimSn();
-
-		if (aimSn == null) {
-			jsonObj.put("aimSn", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("aimSn", aimSn.toString());
-		}
-
-		String icqSn = model.getIcqSn();
-
-		if (icqSn == null) {
-			jsonObj.put("icqSn", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("icqSn", icqSn.toString());
-		}
-
-		String jabberSn = model.getJabberSn();
-
-		if (jabberSn == null) {
-			jsonObj.put("jabberSn", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("jabberSn", jabberSn.toString());
-		}
-
-		String msnSn = model.getMsnSn();
-
-		if (msnSn == null) {
-			jsonObj.put("msnSn", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("msnSn", msnSn.toString());
-		}
-
-		String skypeSn = model.getSkypeSn();
-
-		if (skypeSn == null) {
-			jsonObj.put("skypeSn", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("skypeSn", skypeSn.toString());
-		}
-
-		String ymSn = model.getYmSn();
-
-		if (ymSn == null) {
-			jsonObj.put("ymSn", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("ymSn", ymSn.toString());
-		}
-
-		String employeeStatusId = model.getEmployeeStatusId();
-
-		if (employeeStatusId == null) {
-			jsonObj.put("employeeStatusId", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("employeeStatusId", employeeStatusId.toString());
-		}
-
-		String employeeNumber = model.getEmployeeNumber();
-
-		if (employeeNumber == null) {
-			jsonObj.put("employeeNumber", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("employeeNumber", employeeNumber.toString());
-		}
-
-		String jobTitle = model.getJobTitle();
-
-		if (jobTitle == null) {
-			jsonObj.put("jobTitle", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("jobTitle", jobTitle.toString());
-		}
-
-		String jobClass = model.getJobClass();
-
-		if (jobClass == null) {
-			jsonObj.put("jobClass", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("jobClass", jobClass.toString());
-		}
-
-		String hoursOfOperation = model.getHoursOfOperation();
-
-		if (hoursOfOperation == null) {
-			jsonObj.put("hoursOfOperation", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("hoursOfOperation", hoursOfOperation.toString());
-		}
+		JSONUtil.put(jsonObj, "contactId", model.getContactId());
+		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
+		JSONUtil.put(jsonObj, "userId", model.getUserId());
+		JSONUtil.put(jsonObj, "userName", model.getUserName());
+		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
+		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
+		JSONUtil.put(jsonObj, "accountId", model.getAccountId());
+		JSONUtil.put(jsonObj, "parentContactId", model.getParentContactId());
+		JSONUtil.put(jsonObj, "firstName", model.getFirstName());
+		JSONUtil.put(jsonObj, "middleName", model.getMiddleName());
+		JSONUtil.put(jsonObj, "lastName", model.getLastName());
+		JSONUtil.put(jsonObj, "prefixId", model.getPrefixId());
+		JSONUtil.put(jsonObj, "suffixId", model.getSuffixId());
+		JSONUtil.put(jsonObj, "male", model.getMale());
+		JSONUtil.put(jsonObj, "birthday", model.getBirthday());
+		JSONUtil.put(jsonObj, "smsSn", model.getSmsSn());
+		JSONUtil.put(jsonObj, "aimSn", model.getAimSn());
+		JSONUtil.put(jsonObj, "icqSn", model.getIcqSn());
+		JSONUtil.put(jsonObj, "jabberSn", model.getJabberSn());
+		JSONUtil.put(jsonObj, "msnSn", model.getMsnSn());
+		JSONUtil.put(jsonObj, "skypeSn", model.getSkypeSn());
+		JSONUtil.put(jsonObj, "ymSn", model.getYmSn());
+		JSONUtil.put(jsonObj, "employeeStatusId", model.getEmployeeStatusId());
+		JSONUtil.put(jsonObj, "employeeNumber", model.getEmployeeNumber());
+		JSONUtil.put(jsonObj, "jobTitle", model.getJobTitle());
+		JSONUtil.put(jsonObj, "jobClass", model.getJobClass());
+		JSONUtil.put(jsonObj, "hoursOfOperation", model.getHoursOfOperation());
 
 		return jsonObj;
 	}

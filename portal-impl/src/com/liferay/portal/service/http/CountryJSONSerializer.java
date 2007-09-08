@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Country;
 
 import org.json.JSONArray;
@@ -51,54 +50,13 @@ import java.util.List;
 public class CountryJSONSerializer {
 	public static JSONObject toJSONObject(Country model) {
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("countryId", model.getCountryId());
-
-		String name = model.getName();
-
-		if (name == null) {
-			jsonObj.put("name", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("name", name.toString());
-		}
-
-		String a2 = model.getA2();
-
-		if (a2 == null) {
-			jsonObj.put("a2", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("a2", a2.toString());
-		}
-
-		String a3 = model.getA3();
-
-		if (a3 == null) {
-			jsonObj.put("a3", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("a3", a3.toString());
-		}
-
-		String number = model.getNumber();
-
-		if (number == null) {
-			jsonObj.put("number", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("number", number.toString());
-		}
-
-		String idd = model.getIdd();
-
-		if (idd == null) {
-			jsonObj.put("idd", StringPool.BLANK);
-		}
-		else {
-			jsonObj.put("idd", idd.toString());
-		}
-
-		jsonObj.put("active", model.isActive());
+		JSONUtil.put(jsonObj, "countryId", model.getCountryId());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "a2", model.getA2());
+		JSONUtil.put(jsonObj, "a3", model.getA3());
+		JSONUtil.put(jsonObj, "number", model.getNumber());
+		JSONUtil.put(jsonObj, "idd", model.getIdd());
+		JSONUtil.put(jsonObj, "active", model.getActive());
 
 		return jsonObj;
 	}
