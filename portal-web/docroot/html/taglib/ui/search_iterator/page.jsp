@@ -173,7 +173,7 @@ if (rowChecker != null) {
 		}
 	%>
 
-		<tr class="<%= className %>" style="font-weight: <%= row.isBold() ? "bold" : "normal" %>;"
+		<tr class="<%= className %>"
 			<c:if test="<%= searchContainer.isHover() %>">
 				onmouseover="this.className = '<%= classHoverName %>';" onmouseout="this.className = '<%= className %>';"
 			</c:if>
@@ -184,7 +184,7 @@ if (rowChecker != null) {
 			SearchEntry entry = (SearchEntry)entries.get(j);
 		%>
 
-			<td class="col-<%= j + 1 %>" align="<%= entry.getAlign() %>" valign="<%= entry.getValign() %>">
+			<td class="col-<%= j + 1 %><%= row.isBold() ? " lfr-highlighted" : "" %>" align="<%= entry.getAlign() %>" valign="<%= entry.getValign() %>">
 
 				<%
 				entry.print(pageContext);

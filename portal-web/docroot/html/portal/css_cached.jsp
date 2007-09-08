@@ -636,6 +636,10 @@ ul.gamma .tree-item-hover {
 	padding: 4px;
 }
 
+.lfr-highlighted {
+	font-weight: bold;
+}
+
 /* ---------- Specific portlet styles ---------- */
 
 /* ---------- Quick note ---------- */
