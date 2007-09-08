@@ -24,6 +24,8 @@ package com.liferay.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.util.Date;
+
 import org.json.JSONObject;
 
 /**
@@ -48,6 +50,15 @@ public class JSONUtil {
 
 	public static void put(JSONObject jsonObj, String key, short value) {
 		jsonObj.put(key, value);
+	}
+
+	public static void put(JSONObject jsonObj, String key, Date value) {
+		if (value == null) {
+			jsonObj.put(key, StringPool.BLANK);
+		}
+		else {
+			jsonObj.put(key, String.valueOf(value.getTime()));
+		}
 	}
 
 	public static void put(JSONObject jsonObj, String key, Object value) {
