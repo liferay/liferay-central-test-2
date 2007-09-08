@@ -22,26 +22,28 @@
  */
 %>
 
-<c:if test="<%= portletName.equals(PortletKeys.WIKI) %>">
-	<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/view" /></portlet:renderURL>">
-	<liferay-ui:message key="nodes" />
-	</a>
-</c:if>
-
-<c:if test="<%= node != null %>">
+<div class="breadcrumbs">
 	<c:if test="<%= portletName.equals(PortletKeys.WIKI) %>">
-		&raquo;
+		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/view" /></portlet:renderURL>">
+		<liferay-ui:message key="nodes" />
+		</a>
 	</c:if>
 
-	<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/view_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" /></portlet:renderURL>">
-	<%= node.getName() %>
-	</a>
-</c:if>
+	<c:if test="<%= node != null %>">
+		<c:if test="<%= portletName.equals(PortletKeys.WIKI) %>">
+			&raquo;
+		</c:if>
 
-<c:if test="<%= wikiPage != null %>">
-	&raquo;
+		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/view_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" /></portlet:renderURL>">
+		<%= node.getName() %>
+		</a>
+	</c:if>
 
-	<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/view_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /></portlet:renderURL>">
-	<%= wikiPage.getTitle() %>
-	</a>
-</c:if>
+	<c:if test="<%= wikiPage != null %>">
+		&raquo;
+
+		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/view_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /></portlet:renderURL>">
+		<%= wikiPage.getTitle() %>
+		</a>
+	</c:if>
+</div>

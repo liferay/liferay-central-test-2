@@ -38,13 +38,11 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 <%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
 
-<br />
-
 <input name="<portlet:namespace />keywords" size="30" type="text" />
 
 <input type="submit" value="<liferay-ui:message key="search" />" />
 
-<br />
+<br /><br />
 
 <%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 
