@@ -36,6 +36,10 @@ import org.json.JSONObject;
  */
 public class JSONUtil {
 
+	public static void put(JSONObject jsonObj, String key, boolean value) {
+		jsonObj.put(key, value);
+	}
+
 	public static void put(JSONObject jsonObj, String key, double value) {
 		jsonObj.put(key, value);
 	}
