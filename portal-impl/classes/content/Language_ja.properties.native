@@ -2129,6 +2129,7 @@ repository-fields=貯蔵場所は守備につく
 repository=貯蔵場所
 request-timeout=要求タイムアウト
 require-captcha=CAPTCHA を要求しなさい
+require-strangers-to-verify-their-email-address=他人が彼らのEメールアドレスを確認するように要求しなさいか。
 require-unlock-help=閉鎖は管理者が手動でユーザ・アカウントの鍵を開けるように要求すればチェック・ボックス。
 require-unlock=鍵が開く要求しなさい
 required-roles=要求された役割

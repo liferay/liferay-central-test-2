@@ -2131,6 +2131,7 @@ repository-fields=Τομείς αποθηκών
 repository=Χώρος φύλαξης
 request-timeout=Χρόνος Λήξης Αιτήματος
 require-captcha=Απαιτήστε CAPTCHA
+require-strangers-to-verify-their-email-address=Απαιτήστε τους ξένους για να ελέγξετε τη διεύθυνση ηλεκτρονικού ταχυδρομείου τους;
 require-unlock-help=Παράθυρο ελέγχου εάν η ανταπεργία απαιτεί έναν διοικητή για να ξεκλειδώσει με το χέρι τον απολογισμό χρηστών.
 require-unlock=Απαιτήστε ξεκλειδώνει
 required-roles=Απαιτούμενοι Ρόλοι

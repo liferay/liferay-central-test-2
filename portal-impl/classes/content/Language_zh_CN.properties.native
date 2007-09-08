@@ -2133,6 +2133,7 @@ repository-fields=贮藏库领域
 repository=贮藏库
 request-timeout=请求超时时间
 require-captcha=要求CAPTCHA
+require-strangers-to-verify-their-email-address=_ 要求陌生人对核实他们电子邮件? _
 require-unlock-help=复选框如果停工要求一名管理员手工打开用户帐号。
 require-unlock=要求开锁
 required-roles=必需的角色

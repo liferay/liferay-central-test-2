@@ -2133,6 +2133,7 @@ repository-fields=Gisements De Dépôt
 repository=Dépôt
 request-timeout=délai maximum de la requête
 require-captcha=Exigez CAPTCHA
+require-strangers-to-verify-their-email-address=Exigez des étrangers de vérifier leur email address ?
 require-unlock-help=Boîte de contrôle si le verrouillage exige d'un administrateur d'ouvrir manuellement le compte d'utilisateur.
 require-unlock=Exigez Ouvrent
 required-roles=Rôles requis

@@ -1268,6 +1268,11 @@ String portletURLString = portletURL.toString();
 							</td>
 						</tr>
 						<tr>
+							<td colspan="2">
+								<br />
+							</td>
+						</tr>
+						<tr>
 							<td>
 								<liferay-ui:message key="allow-users-to-automatically-login" />
 							</td>
@@ -1284,6 +1289,11 @@ String portletURLString = portletURL.toString();
 							</td>
 						</tr>
 						<tr>
+							<td colspan="2">
+								<br />
+							</td>
+						</tr>
+						<tr>
 							<td>
 								<liferay-ui:message key="allow-strangers-to-create-accounts" />
 							</td>
@@ -1297,6 +1307,14 @@ String portletURLString = portletURL.toString();
 							</td>
 							<td>
 								<liferay-ui:input-checkbox param="strangersWithMx" defaultValue="<%= company.isStrangersWithMx() %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="require-strangers-to-verify-their-email-address" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="strangersVerify" defaultValue="<%= company.isStrangersVerify() %>" />
 							</td>
 						</tr>
 						</table>

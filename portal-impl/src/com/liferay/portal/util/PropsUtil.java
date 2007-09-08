@@ -197,6 +197,8 @@ public class PropsUtil {
 
 	public static final String COMPANY_SECURITY_STRANGERS_WITH_MX = "company.security.strangers.with.mx";
 
+	public static final String COMPANY_SECURITY_STRANGERS_VERIFY = "company.security.strangers.verify";
+
 	public static final String COMPANY_SECURITY_COMMUNITY_LOGO = "company.security.community.logo";
 
 	// Users

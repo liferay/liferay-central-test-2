@@ -2132,6 +2132,7 @@ repository-fields=창고는 수비를 맡는다
 repository=창고
 request-timeout=요구 Timeout
 require-captcha=CAPTCHA을 요구하십시요
+require-strangers-to-verify-their-email-address=낯선 사람이 그들의 전자 우편 주소를 확인할것을 요구하십시요?
 require-unlock-help=차단이 행정관이 손으로 하 사용자 계정을 자물쇠로 열l것을 요구하면 체크 박스.
 require-unlock=자물쇠로 열n다 요구하십시요
 required-roles=요구된 역할

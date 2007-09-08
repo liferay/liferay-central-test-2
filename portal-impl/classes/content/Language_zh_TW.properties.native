@@ -2133,6 +2133,7 @@ repository-fields=貯藏庫領域
 repository=貯藏庫
 request-timeout=請求暫停
 require-captcha=要求CAPTCHA
+require-strangers-to-verify-their-email-address=要求陌生人核實他們的電子郵件?
 require-unlock-help=複選框如果停工要求一名管理員手工打開用戶帳號。
 require-unlock=要求開鎖
 required-roles=必需的角色

@@ -2133,6 +2133,7 @@ repository-fields=De Gebieden van de bewaarplaats
 repository=Bewaarplaats
 request-timeout=Antwoord blijft uit
 require-captcha=Vereis CAPTCHA
+require-strangers-to-verify-their-email-address=Vereis vreemdelingen om hun e-mailadres te verifiëren?
 require-unlock-help=De doos van de controle als de uitsluiting een beheerder vereist om de gebruikersrekening manueel te openen.
 require-unlock=Vereis openen
 required-roles=Vereiste Rollen

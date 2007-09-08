@@ -2133,6 +2133,7 @@ repository-fields=Campos Do Repositório
 repository=Repositório
 request-timeout=Intervalo de parada Do Pedido
 require-captcha=Reque CAPTCHA
+require-strangers-to-verify-their-email-address=Reque desconhecido verificar seu email address?
 require-unlock-help=Caixa de verificação se o fechamento requerer um administrador destravar manualmente o cliente do usuário.
 require-unlock=Reque Destravam
 required-roles=Papéis Requeridos

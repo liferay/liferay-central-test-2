@@ -376,10 +376,12 @@ public class EditSettingsAction extends PortletAction {
 		boolean sendPassword = ParamUtil.getBoolean(req, "sendPassword");
 		boolean strangers = ParamUtil.getBoolean(req, "strangers");
 		boolean strangersWithMx = ParamUtil.getBoolean(req, "strangersWithMx");
+		boolean strangersVerify = ParamUtil.getBoolean(req, "strangersVerify");
 
 		CompanyServiceUtil.updateSecurity(
 			company.getCompanyId(), authType, autoLogin, sendPassword,
-			strangers, strangersWithMx, company.isCommunityLogo());
+			strangers, strangersWithMx, strangersVerify,
+			company.isCommunityLogo());
 	}
 
 	private static Log _log = LogFactory.getLog(EditSettingsAction.class);

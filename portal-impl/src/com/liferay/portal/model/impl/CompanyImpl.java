@@ -171,6 +171,11 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS_WITH_MX);
 	}
 
+	public boolean isStrangersVerify() throws PortalException, SystemException {
+		return PrefsPropsUtil.getBoolean(
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS_VERIFY);
+	}
+
 	public boolean isCommunityLogo() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
 			getCompanyId(), PropsUtil.COMPANY_SECURITY_COMMUNITY_LOGO);

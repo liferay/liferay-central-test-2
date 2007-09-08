@@ -84,7 +84,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 						<span class="portlet-msg-success">
 
 						<c:choose>
-							<c:when test="<%= Validator.isNull(password) %>">
+							<c:when test="<%= company.isStrangersVerify() || Validator.isNull(password) %>">
 								<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", emailAddress) %>
 							</c:when>
 							<c:otherwise>

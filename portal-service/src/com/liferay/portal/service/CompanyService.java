@@ -79,7 +79,7 @@ public interface CompanyService {
 
 	public void updateSecurity(long companyId, java.lang.String authType,
 		boolean autoLogin, boolean sendPassword, boolean strangers,
-		boolean strangersWithMx, boolean communityLogo)
+		boolean strangersWithMx, boolean strangersVerify, boolean communityLogo)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

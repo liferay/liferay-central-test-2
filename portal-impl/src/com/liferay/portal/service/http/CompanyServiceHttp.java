@@ -360,7 +360,7 @@ public class CompanyServiceHttp {
 	public static void updateSecurity(HttpPrincipal httpPrincipal,
 		long companyId, java.lang.String authType, boolean autoLogin,
 		boolean sendPassword, boolean strangers, boolean strangersWithMx,
-		boolean communityLogo)
+		boolean strangersVerify, boolean communityLogo)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -375,12 +375,13 @@ public class CompanyServiceHttp {
 			Object paramObj3 = new BooleanWrapper(sendPassword);
 			Object paramObj4 = new BooleanWrapper(strangers);
 			Object paramObj5 = new BooleanWrapper(strangersWithMx);
-			Object paramObj6 = new BooleanWrapper(communityLogo);
+			Object paramObj6 = new BooleanWrapper(strangersVerify);
+			Object paramObj7 = new BooleanWrapper(communityLogo);
 			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
 					"updateSecurity",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			try {

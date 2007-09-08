@@ -2133,6 +2133,7 @@ repository-fields=Behälter Fängt auf
 repository=Ablage
 request-timeout=Request timeout
 require-captcha=CAPTCHA erlauben
+require-strangers-to-verify-their-email-address=Erfordern Sie Fremde, ihr email address zu überprüfen?
 require-unlock-help=Entriegelung eines Benutzerkontos nur durch Administrator.
 require-unlock=Entriegelung erforderlich
 required-roles=Erforderliche Rollen

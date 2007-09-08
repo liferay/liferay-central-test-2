@@ -90,6 +90,10 @@ public interface Company extends CompanyModel {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean isStrangersVerify()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public boolean isCommunityLogo()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
