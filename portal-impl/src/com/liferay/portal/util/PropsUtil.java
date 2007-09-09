@@ -127,6 +127,8 @@ public class PropsUtil {
 
 	// Theme
 
+	public static final String THEME_CSS_FAST_LOAD = "theme.css.fast.load";
+
 	public static final String THEME_VIRTUAL_PATH = "theme.virtual.path";
 
 	public static final String THEME_LOADER_STORAGE_PATH = "theme.loader.storage.path";

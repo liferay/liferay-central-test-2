@@ -640,6 +640,24 @@
 						</copy>
 					</then>
 				</if>
+
+				<java
+					classname="com.liferay.portal.tools.CSSBuilder"
+					classpathref="project.classpath"
+					fork="true"
+					newenvironment="true"
+				>
+					<arg line="@{module.name}/css @{module.name}/css/everything_unpacked.css" />
+				</java>
+
+				<java
+					classname="com.yahoo.platform.yui.compressor.YUICompressor"
+					classpathref="project.classpath"
+					fork="true"
+					newenvironment="true"
+				>
+					<arg line="--type css -o @{module.name}/css/everything.css @{module.name}/css/everything_unpacked.css" />
+				</java>
 			</sequential>
 		</for>
 	</target>

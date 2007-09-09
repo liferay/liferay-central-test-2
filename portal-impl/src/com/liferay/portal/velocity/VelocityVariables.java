@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.DateUtil_IW;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.GetterUtil_IW;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.ParamUtil_IW;
 import com.liferay.portal.kernel.util.Randomizer_IW;
 import com.liferay.portal.kernel.util.StaticFieldGetter;
 import com.liferay.portal.kernel.util.StringUtil_IW;
@@ -115,6 +116,10 @@ public class VelocityVariables {
 
 		vc.put("languageUtil", LanguageUtil.getLanguage());
 		vc.put("unicodeLanguageUtil", UnicodeLanguageUtil.getUnicodeLanguage());
+
+		// Param util
+
+		vc.put("paramUtil", ParamUtil_IW.getInstance());
 
 		// Portal util
 
