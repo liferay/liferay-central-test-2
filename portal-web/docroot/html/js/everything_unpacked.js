@@ -18398,6 +18398,13 @@ Liferay.Service.DL.DLFolder = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	reIndexSearch: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "reIndexSearch";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updateFolder: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateFolder";

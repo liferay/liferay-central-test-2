@@ -89,6 +89,13 @@ public class DLFolderServiceUtil {
 		return dlFolderService.getFolder(folderId);
 	}
 
+	public static void reIndexSearch(long companyId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
+		dlFolderService.reIndexSearch(companyId);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description)

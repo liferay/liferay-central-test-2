@@ -135,6 +135,16 @@ public class DLFolderServiceSoap {
 		}
 	}
 
+	public static void reIndexSearch(long companyId) throws RemoteException {
+		try {
+			DLFolderServiceUtil.reIndexSearch(companyId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description) throws RemoteException {

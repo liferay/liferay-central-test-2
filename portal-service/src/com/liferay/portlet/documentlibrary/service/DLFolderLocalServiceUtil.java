@@ -236,6 +236,12 @@ public class DLFolderLocalServiceUtil {
 		dlFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
 	}
 
+	public static void reIndex(java.lang.String[] ids)
+		throws com.liferay.portal.SystemException {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.reIndex(ids);
+	}
+
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long[] folderIds, java.lang.String keywords)
 		throws com.liferay.portal.PortalException, 

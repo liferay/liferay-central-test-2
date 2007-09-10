@@ -24,6 +24,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
+import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -336,6 +337,35 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 			getSubfolderIds(
 				folderIds, folder.getGroupId(), folder.getFolderId());
+		}
+	}
+
+	public void reIndex(String[] ids) throws SystemException {
+		try {
+			long companyId = GetterUtil.getLong(ids[0]);
+
+			List folders = getFolders(companyId);
+
+			for (int i = 0; i < folders.size(); i++) {
+				DLFolder folder = (DLFolder)folders.get(i);
+
+				String portletId = PortletKeys.DOCUMENT_LIBRARY;
+				long groupId = folder.getGroupId();
+				long folderId = folder.getFolderId();
+
+				String[] newIds = {
+					String.valueOf(companyId), portletId,
+					String.valueOf(groupId), String.valueOf(folderId)
+				};
+
+				DLServiceUtil.reIndex(newIds);
+			}
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 

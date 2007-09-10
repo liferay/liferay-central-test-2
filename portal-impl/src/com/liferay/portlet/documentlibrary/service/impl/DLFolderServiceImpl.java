@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
@@ -84,6 +85,18 @@ public class DLFolderServiceImpl
 			getPermissionChecker(), folderId, ActionKeys.VIEW);
 
 		return DLFolderLocalServiceUtil.getFolder(folderId);
+	}
+
+	public void reIndexSearch(long companyId)
+		throws PortalException, SystemException {
+
+		if (!getPermissionChecker().isOmniadmin()) {
+			throw new PrincipalException();
+		}
+
+		String[] ids = new String[] {String.valueOf(companyId)};
+
+		DLFolderLocalServiceUtil.reIndex(ids);
 	}
 
 	public DLFolder updateFolder(

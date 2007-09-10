@@ -107,6 +107,12 @@ public class DLFolderServiceJSON {
 		return DLFolderJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static void reIndexSearch(long companyId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		DLFolderServiceUtil.reIndexSearch(companyId);
+	}
+
 	public static JSONObject updateFolder(long folderId, long parentFolderId,
 		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.SystemException, 
