@@ -55,14 +55,23 @@ if (Validator.isNull(imageInputId)) {
 else {
 	imageInputId = namespace + imageInputId;
 }
+
+themeDisplay.setIncludeCalendarJs(true);
 %>
 
 <script type="text/javascript">
-	var <%= randomNamespace %>jsCalendarObj = new Calendar(false, null, <%= randomNamespace %>jsOnSelect, <%= randomNamespace %>jsOnClose);
-	<%= randomNamespace %>jsCalendarObj.weekNumbers = false;
-	<%= randomNamespace %>jsCalendarObj.firstDayOfWeek = <%= firstDayOfWeek %>;
-	<%= randomNamespace %>jsCalendarObj.setTtDateFormat = "%A, %B %e, %Y";
-	<%= randomNamespace %>jsCalendarObj.setRange(<%= yearRangeStart %>, <%= yearRangeEnd %>);
+	var <%= randomNamespace %>jsCalendarObj = null;
+
+	jQuery(document).ready(
+		function() {
+			<%= randomNamespace %>jsCalendarObj = new Calendar(false, null, <%= randomNamespace %>jsOnSelect, <%= randomNamespace %>jsOnClose);
+
+			<%= randomNamespace %>jsCalendarObj.weekNumbers = false;
+			<%= randomNamespace %>jsCalendarObj.firstDayOfWeek = <%= firstDayOfWeek %>;
+			<%= randomNamespace %>jsCalendarObj.setTtDateFormat = "%A, %B %e, %Y";
+			<%= randomNamespace %>jsCalendarObj.setRange(<%= yearRangeStart %>, <%= yearRangeEnd %>);
+		}
+	);
 
 	function <%= randomNamespace %>jsOnClick(id) {
 		<%= randomNamespace %>jsCalendarObj.create();

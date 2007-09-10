@@ -810,6 +810,10 @@ else {
 </c:if>
 
 <%
+if (showPortletCssIcon) {
+	themeDisplay.setIncludePortletCssJs(true);
+}
+
 SessionMessages.clear(renderRequestImpl);
 SessionErrors.clear(renderRequestImpl);
 

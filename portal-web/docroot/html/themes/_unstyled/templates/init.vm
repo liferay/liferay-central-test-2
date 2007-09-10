@@ -20,7 +20,7 @@
 #set ($full_templates_path = $fullTemplatesPath)
 
 #if ($paramUtil.getBoolean($request, "css_fast_load", $getterUtil.getBoolean($propsUtil.get("theme.css.fast.load"))))
-	#set ($css_main_file = "$css_folder/everything.css?companyId=$theme_display.getCompanyId()&languageId=$languageUtil.getLanguageId($locale)&themeId=$theme_display.getThemeId()&colorSchemeId=$theme_display.getColorSchemeId()")
+	#set ($css_main_file = "$css_folder/everything_packed.css?companyId=$theme_display.getCompanyId()&languageId=$languageUtil.getLanguageId($locale)&themeId=$theme_display.getThemeId()&colorSchemeId=$theme_display.getColorSchemeId()")
 #else
 	#set ($css_main_file = "$css_folder/main.css?companyId=$theme_display.getCompanyId()&languageId=$languageUtil.getLanguageId($locale)&themeId=$theme_display.getThemeId()&colorSchemeId=$theme_display.getColorSchemeId()")
 #end

@@ -830,11 +830,6 @@ function submitForm(form, action, singleSubmit) {
 
 		form.submit();
 	}
-	else {
-		if (Liferay.Util.submitFormAlert != null) {
-			submitFormAlert(Liferay.Util.submitCountdown);
-		}
-	}
 }
 
 var Viewport = {

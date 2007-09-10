@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 4.3.1//EN" "http://www.liferay.com/dtd/liferay-portlet-app_4_3_1.dtd">
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 4.3.2//EN" "http://www.liferay.com/dtd/liferay-portlet-app_4_3_2.dtd">
 
 <liferay-portlet-app>
 	<portlet>
@@ -14,7 +14,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
-		<header-javascript>/html/portlet/mail/packed.js</header-javascript>
+		<header-portlet-javascript>/html/portlet/mail/packed.js</header-portlet-javascript>
 	</portlet>
 	<portlet>
 		<portlet-name>2</portlet-name>
@@ -896,7 +896,8 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
 		<ajaxable>false</ajaxable>
-		<header-javascript>/html/portlet/tags_admin/packed.js</header-javascript>
+		<header-portal-javascript>/html/js/liferay/service_packed.js</header-portal-javascript>
+		<header-portlet-javascript>/html/portlet/tags_admin/packed.js</header-portlet-javascript>
 	</portlet>
 	<portlet>
 		<portlet-name>100</portlet-name>

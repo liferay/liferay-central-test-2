@@ -436,7 +436,7 @@
 			<arg value="classes/META-INF/portal-spring.xml" />
 			<arg value="com.liferay.portal.kernel.bean.BeanLocatorUtil" />
 			<arg value="${project.dir}/portal-service/src" />
-			<arg value="${project.dir}/portal-web/docroot/html/js/liferay/service.js" />
+			<arg value="${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />

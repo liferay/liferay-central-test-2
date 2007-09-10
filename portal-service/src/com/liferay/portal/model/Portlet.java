@@ -244,13 +244,39 @@ public interface Portlet extends PortletModel {
 
 	public void setAjaxable(boolean ajaxable);
 
-	public java.util.List getHeaderCss();
+	public java.util.List getHeaderPortalCss();
 
-	public void setHeaderCss(java.util.List headerCss);
+	public void setHeaderPortalCss(java.util.List headerPortalCss);
 
-	public java.util.List getHeaderJavaScript();
+	public java.util.List getHeaderPortletCss();
 
-	public void setHeaderJavaScript(java.util.List headerJavaScript);
+	public void setHeaderPortletCss(java.util.List headerPortletCss);
+
+	public java.util.List getHeaderPortalJavaScript();
+
+	public void setHeaderPortalJavaScript(java.util.List headerPortalJavaScript);
+
+	public java.util.List getHeaderPortletJavaScript();
+
+	public void setHeaderPortletJavaScript(
+		java.util.List headerPortletJavaScript);
+
+	public java.util.List getFooterPortalCss();
+
+	public void setFooterPortalCss(java.util.List footerPortalCss);
+
+	public java.util.List getFooterPortletCss();
+
+	public void setFooterPortletCss(java.util.List footerPortletCss);
+
+	public java.util.List getFooterPortalJavaScript();
+
+	public void setFooterPortalJavaScript(java.util.List footerPortalJavaScript);
+
+	public java.util.List getFooterPortletJavaScript();
+
+	public void setFooterPortletJavaScript(
+		java.util.List footerPortletJavaScript);
 
 	public boolean getAddDefaultResource();
 

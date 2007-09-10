@@ -1004,24 +1004,103 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					portlet.elementText("ajaxable"),
 					portletModel.isAjaxable()));
 
-				List headerCssList = portletModel.getHeaderCss();
+				List headerPortalCssList = portletModel.getHeaderPortalCss();
 
-				Iterator itr2 = portlet.elements("header-css").iterator();
+				Iterator itr2 = portlet.elements(
+					"header-portal-css").iterator();
 
 				while (itr2.hasNext()) {
-					Element headerCssEl = (Element)itr2.next();
+					Element headerPortalCssEl = (Element)itr2.next();
 
-					headerCssList.add(headerCssEl.getText());
+					headerPortalCssList.add(headerPortalCssEl.getText());
 				}
 
-				List headerJavaScriptList = portletModel.getHeaderJavaScript();
+				List headerPortletCssList = portletModel.getHeaderPortletCss();
 
-				itr2 = portlet.elements("header-javascript").iterator();
+				List list = new ArrayList();
+
+				list.addAll(portlet.elements("header-css"));
+				list.addAll(portlet.elements("header-portlet-css"));
+
+				itr2 = list.iterator();
 
 				while (itr2.hasNext()) {
-					Element headerJavaScriptEl = (Element)itr2.next();
+					Element headerPortletCssEl = (Element)itr2.next();
 
-					headerJavaScriptList.add(headerJavaScriptEl.getText());
+					headerPortletCssList.add(headerPortletCssEl.getText());
+				}
+
+				List headerPortalJavaScriptList =
+					portletModel.getHeaderPortalJavaScript();
+
+				itr2 = portlet.elements("header-portal-javascript").iterator();
+
+				while (itr2.hasNext()) {
+					Element headerPortalJavaScriptEl = (Element)itr2.next();
+
+					headerPortalJavaScriptList.add(
+						headerPortalJavaScriptEl.getText());
+				}
+
+				List headerPortletJavaScriptList =
+					portletModel.getHeaderPortletJavaScript();
+
+				list.clear();
+
+				list.addAll(portlet.elements("header-javascript"));
+				list.addAll(portlet.elements("header-portlet-javascript"));
+
+				itr2 = list.iterator();
+
+				while (itr2.hasNext()) {
+					Element headerPortletJavaScriptEl = (Element)itr2.next();
+
+					headerPortletJavaScriptList.add(
+						headerPortletJavaScriptEl.getText());
+				}
+
+				List footerPortalCssList = portletModel.getFooterPortalCss();
+
+				itr2 = portlet.elements("footer-portal-css").iterator();
+
+				while (itr2.hasNext()) {
+					Element footerPortalCssEl = (Element)itr2.next();
+
+					footerPortalCssList.add(footerPortalCssEl.getText());
+				}
+
+				List footerPortletCssList = portletModel.getFooterPortletCss();
+
+				itr2 = portlet.elements("footer-portlet-css").iterator();
+
+				while (itr2.hasNext()) {
+					Element footerPortletCssEl = (Element)itr2.next();
+
+					footerPortletCssList.add(footerPortletCssEl.getText());
+				}
+
+				List footerPortalJavaScriptList =
+					portletModel.getFooterPortalJavaScript();
+
+				itr2 = portlet.elements("footer-portal-javascript").iterator();
+
+				while (itr2.hasNext()) {
+					Element footerPortalJavaScriptEl = (Element)itr2.next();
+
+					footerPortalJavaScriptList.add(
+						footerPortalJavaScriptEl.getText());
+				}
+
+				List footerPortletJavaScriptList =
+					portletModel.getFooterPortletJavaScript();
+
+				itr2 = portlet.elements("footer-portlet-javascript").iterator();
+
+				while (itr2.hasNext()) {
+					Element footerPortletJavaScriptEl = (Element)itr2.next();
+
+					footerPortletJavaScriptList.add(
+						footerPortletJavaScriptEl.getText());
 				}
 
 				portletModel.setAddDefaultResource(GetterUtil.getBoolean(

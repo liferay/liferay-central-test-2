@@ -146,8 +146,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setPortletId(portletId);
 		setStrutsPath(portletId);
 		setActive(true);
-		_headerCss = new ArrayList();
-		_headerJavaScript = new ArrayList();
+		_headerPortalCss = new ArrayList();
+		_headerPortletCss = new ArrayList();
+		_headerPortalJavaScript = new ArrayList();
+		_headerPortletJavaScript = new ArrayList();
+		_footerPortalCss = new ArrayList();
+		_footerPortletCss = new ArrayList();
+		_footerPortalJavaScript = new ArrayList();
+		_footerPortletJavaScript = new ArrayList();
 		_unlinkedRoles = new HashSet();
 		_roleMappers = new LinkedHashMap();
 		_initParams = new HashMap();
@@ -176,8 +182,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		boolean restoreCurrentView, boolean maximizeEdit, boolean maximizeHelp,
 		boolean popUpPrint, boolean layoutCacheable, boolean instanceable,
 		boolean privateRequestAttributes, boolean privateSessionAttributes,
-		int renderWeight, boolean ajaxable, List headerCss,
-		List headerJavaScript, boolean addDefaultResource, String roles,
+		int renderWeight, boolean ajaxable, List headerPortalCss,
+		List headerPortletCss, List headerPortalJavaScript,
+		List headerPortletJavaScript, List footerPortalCss,
+		List footerPortletCss, List footerPortalJavaScript,
+		List footerPortletJavaScript, boolean addDefaultResource, String roles,
 		Set unlinkedRoles, Map roleMappers, boolean system, boolean active,
 		boolean include, Map initParams, Integer expCache, Map portletModes,
 		Set supportedLocales, String resourceBundle, PortletInfo portletInfo,
@@ -221,8 +230,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_privateSessionAttributes = privateSessionAttributes;
 		_renderWeight = renderWeight;
 		_ajaxable = ajaxable;
-		_headerCss = headerCss;
-		_headerJavaScript = headerJavaScript;
+		_headerPortalCss = headerPortalCss;
+		_headerPortletCss = headerPortletCss;
+		_headerPortalJavaScript = headerPortalJavaScript;
+		_headerPortletJavaScript = headerPortletJavaScript;
+		_footerPortalCss = footerPortalCss;
+		_footerPortletCss = footerPortletCss;
+		_footerPortalJavaScript = footerPortalJavaScript;
+		_footerPortletJavaScript = footerPortletJavaScript;
 		_addDefaultResource = addDefaultResource;
 		setRoles(roles);
 		_unlinkedRoles = unlinkedRoles;
@@ -1253,47 +1268,185 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets a list of css files that are referenced from the portal layout's
-	 * header.
+	 * Gets a list of CSS files that will be referenced from the page's header
+	 * relative to the portal's context path.
 	 *
-	 * @return		a list of css files that are referenced from the portal
-	 *				layout's header
+	 * @return		a list of CSS files that will be referenced from the page's
+	 *				header relative to the portal's context path
 	 */
-	public List getHeaderCss() {
-		return _headerCss;
+	public List getHeaderPortalCss() {
+		return _headerPortalCss;
 	}
 
 	/**
-	 * Sets a list of css files that are referenced from the portal layout's
-	 * header.
+	 * Sets a list of CSS files that will be referenced from the page's header
+	 * relative to the portal's context path.
 	 *
-	 * @param		headerCss a list of css files that are referenced from the
-	 *				portal layout's header
+	 * @param		headerPortalCss a list of CSS files that will be referenced
+	 *				from the page's header relative to the portal's context path
 	 */
-	public void setHeaderCss(List headerCss) {
-		_headerCss = headerCss;
+	public void setHeaderPortalCss(List headerPortalCss) {
+		_headerPortalCss = headerPortalCss;
 	}
 
 	/**
-	 * Gets a list of JavaScript files that are referenced from the portal
-	 * layout's header.
+	 * Gets a list of CSS files that will be referenced from the page's header
+	 * relative to the portlet's context path.
 	 *
-	 * @return		a list of JavaScript files that are referenced from the
-	 *				portal layout's header
+	 * @return		a list of CSS files that will be referenced from the page's
+	 *				header relative to the portlet's context path
 	 */
-	public List getHeaderJavaScript() {
-		return _headerJavaScript;
+	public List getHeaderPortletCss() {
+		return _headerPortletCss;
 	}
 
 	/**
-	 * Sets a list of JavaScript files that are referenced from the portal
-	 * layout's header.
+	 * Sets a list of CSS files that will be referenced from the page's header
+	 * relative to the portlet's context path.
 	 *
-	 * @param		headerJavaScript a list of JavaScript files that are
-	 *				referenced from the portal layout's header
+	 * @param		headerPortletCss a list of CSS files that will be referenced
+	 *				from the page's header relative to the portlet's context
+	 *				path
 	 */
-	public void setHeaderJavaScript(List headerJavaScript) {
-		_headerJavaScript = headerJavaScript;
+	public void setHeaderPortletCss(List headerPortletCss) {
+		_headerPortletCss = headerPortletCss;
+	}
+
+	/**
+	 * Gets a list of JavaScript files that will be referenced from the page's
+	 * header relative to the portal's context path.
+	 *
+	 * @return		a list of JavaScript files that will be referenced from the
+	 *				page's header relative to the portal's context path
+	 */
+	public List getHeaderPortalJavaScript() {
+		return _headerPortalJavaScript;
+	}
+
+	/**
+	 * Sets a list of JavaScript files that will be referenced from the page's
+	 * header relative to the portal's context path.
+	 *
+	 * @param		headerPortalJavaScript a list of JavaScript files that will
+	 *				be referenced from the page's header relative to the
+	 *				portal's context path
+	 */
+	public void setHeaderPortalJavaScript(List headerPortalJavaScript) {
+		_headerPortalJavaScript = headerPortalJavaScript;
+	}
+
+	/**
+	 * Gets a list of JavaScript files that will be referenced from the page's
+	 * header relative to the portlet's context path.
+	 *
+	 * @return		a list of JavaScript files that will be referenced from the
+	 *				page's header relative to the portlet's context path
+	 */
+	public List getHeaderPortletJavaScript() {
+		return _headerPortletJavaScript;
+	}
+
+	/**
+	 * Sets a list of JavaScript files that will be referenced from the page's
+	 * header relative to the portlet's context path.
+	 *
+	 * @param		headerPortletJavaScript a list of JavaScript files that will
+	 *				be referenced from the page's header relative to the
+	 *				portlet's context path
+	 */
+	public void setHeaderPortletJavaScript(List headerPortletJavaScript) {
+		_headerPortletJavaScript = headerPortletJavaScript;
+	}
+
+	/**
+	 * Gets a list of CSS files that will be referenced from the page's footer
+	 * relative to the portal's context path.
+	 *
+	 * @return		a list of CSS files that will be referenced from the page's
+	 *				footer relative to the portal's context path
+	 */
+	public List getFooterPortalCss() {
+		return _footerPortalCss;
+	}
+
+	/**
+	 * Sets a list of CSS files that will be referenced from the page's footer
+	 * relative to the portal's context path.
+	 *
+	 * @param		footerPortalCss a list of CSS files that will be referenced
+	 *				from the page's footer relative to the portal's context path
+	 */
+	public void setFooterPortalCss(List footerPortalCss) {
+		_footerPortalCss = footerPortalCss;
+	}
+
+	/**
+	 * Gets a list of CSS files that will be referenced from the page's footer
+	 * relative to the portlet's context path.
+	 *
+	 * @return		a list of CSS files that will be referenced from the page's
+	 *				footer relative to the portlet's context path
+	 */
+	public List getFooterPortletCss() {
+		return _footerPortletCss;
+	}
+
+	/**
+	 * Sets a list of CSS files that will be referenced from the page's footer
+	 * relative to the portlet's context path.
+	 *
+	 * @param		footerPortletCss a list of CSS files that will be referenced
+	 *				from the page's footer relative to the portlet's context
+	 *				path
+	 */
+	public void setFooterPortletCss(List footerPortletCss) {
+		_footerPortletCss = footerPortletCss;
+	}
+
+	/**
+	 * Gets a list of JavaScript files that will be referenced from the page's
+	 * footer relative to the portal's context path.
+	 *
+	 * @return		a list of JavaScript files that will be referenced from the
+	 *				page's footer relative to the portal's context path
+	 */
+	public List getFooterPortalJavaScript() {
+		return _footerPortalJavaScript;
+	}
+
+	/**
+	 * Sets a list of JavaScript files that will be referenced from the page's
+	 * footer relative to the portal's context path.
+	 *
+	 * @param		footerPortalJavaScript a list of JavaScript files that will
+	 *				be referenced from the page's footer relative to the
+	 *				portal's context path
+	 */
+	public void setFooterPortalJavaScript(List footerPortalJavaScript) {
+		_footerPortalJavaScript = footerPortalJavaScript;
+	}
+
+	/**
+	 * Gets a list of JavaScript files that will be referenced from the page's
+	 * footer relative to the portlet's context path.
+	 *
+	 * @return		a list of JavaScript files that will be referenced from the
+	 *				page's footer relative to the portlet's context path
+	 */
+	public List getFooterPortletJavaScript() {
+		return _footerPortletJavaScript;
+	}
+
+	/**
+	 * Sets a list of JavaScript files that will be referenced from the page's
+	 * footer relative to the portlet's context path.
+	 *
+	 * @param		footerPortletJavaScript a list of JavaScript files that will
+	 *				be referenced from the page's footer relative to the
+	 *				portlet's context path
+	 */
+	public void setFooterPortletJavaScript(List footerPortletJavaScript) {
+		_footerPortletJavaScript = footerPortletJavaScript;
 	}
 
 	/**
@@ -1997,8 +2150,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
 			isPopUpPrint(), isLayoutCacheable(), isInstanceable(),
 			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
-			getRenderWeight(), isAjaxable(), getHeaderCss(),
-			getHeaderJavaScript(), isAddDefaultResource(), getRoles(),
+			getRenderWeight(), isAjaxable(), getHeaderPortalCss(),
+			getHeaderPortletCss(), getHeaderPortalJavaScript(),
+			getHeaderPortletJavaScript(), getFooterPortalCss(),
+			getFooterPortletCss(), getFooterPortalJavaScript(),
+			getFooterPortletJavaScript(), isAddDefaultResource(), getRoles(),
 			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
 			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
@@ -2222,15 +2378,52 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private boolean _ajaxable = true;
 
 	/**
-	 * A list of css files that are referenced from the portal layout's header.
+	 * A list of CSS files that will be referenced from the page's header
+	 * relative to the portal's context path.
 	 */
-	private List _headerCss;
+	private List _headerPortalCss;
 
 	/**
-	 * A list of JavaScript files that are referenced from the portal layout's
-	 * header.
+	 * A list of CSS files that will be referenced from the page's header
+	 * relative to the portlet's context path.
 	 */
-	private List _headerJavaScript;
+	private List _headerPortletCss;
+
+	/**
+	 * A list of JavaScript files that will be referenced from the page's header
+	 * relative to the portal's context path.
+	 */
+	private List _headerPortalJavaScript;
+
+	/**
+	 * A list of JavaScript files that will be referenced from the page's header
+	 * relative to the portlet's context path.
+	 */
+	private List _headerPortletJavaScript;
+
+	/**
+	 * A list of CSS files that will be referenced from the page's footer
+	 * relative to the portal's context path.
+	 */
+	private List _footerPortalCss;
+
+	/**
+	 * A list of CSS files that will be referenced from the page's footer
+	 * relative to the portlet's context path.
+	 */
+	private List _footerPortletCss;
+
+	/**
+	 * A list of JavaScript files that will be referenced from the page's footer
+	 * relative to the portal's context path.
+	 */
+	private List _footerPortalJavaScript;
+
+	/**
+	 * A list of JavaScript files that will be referenced from the page's footer
+	 * relative to the portlet's context path.
+	 */
+	private List _footerPortletJavaScript;
 
 	/**
 	 * True if default resources for the portlet are added to a page.

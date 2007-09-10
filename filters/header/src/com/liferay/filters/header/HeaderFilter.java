@@ -75,7 +75,7 @@ public class HeaderFilter implements Filter {
 
 				Calendar cal = new GregorianCalendar();
 
-				cal.roll(Calendar.SECOND, seconds);
+				cal.add(Calendar.SECOND, seconds);
 
 				DateFormat dateFormat = new SimpleDateFormat(
 					_DATE_FORMAT, Locale.US);

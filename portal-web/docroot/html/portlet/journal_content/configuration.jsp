@@ -187,7 +187,7 @@ type = ParamUtil.getString(request, "type", type);
 	<div class="separator"><!-- --></div>
 </c:if>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm2">
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
 
@@ -269,9 +269,3 @@ for (int i = 0; i < results.size(); i++) {
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 </form>
-
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />searchArticleId);
-	</script>
-</c:if>

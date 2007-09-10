@@ -669,6 +669,22 @@ public class ThemeDisplay implements Serializable {
 		_tilesSelectable = tilesSelectable;
 	}
 
+	public boolean isIncludeCalendarJs() {
+		return _includeCalendarJs;
+	}
+
+	public void setIncludeCalendarJs(boolean includeCalendarJs) {
+		_includeCalendarJs = includeCalendarJs;
+	}
+
+	public boolean isIncludePortletCssJs() {
+		return _includePortletCssJs;
+	}
+
+	public void setIncludePortletCssJs(boolean includePortletCssJs) {
+		_includePortletCssJs = includePortletCssJs;
+	}
+
 	public PortletDisplay getPortletDisplay() {
 		return _portletDisplay;
 	}
@@ -748,6 +764,8 @@ public class ThemeDisplay implements Serializable {
 		_tilesTitle = StringPool.BLANK;
 		_tilesContent = StringPool.BLANK;
 		_tilesSelectable = false;
+		_includeCalendarJs = false;
+		_includePortletCssJs = false;
 		_portletDisplay.recycle();
 	}
 
@@ -821,6 +839,8 @@ public class ThemeDisplay implements Serializable {
 	private String _tilesTitle = StringPool.BLANK;
 	private String _tilesContent = StringPool.BLANK;
 	private boolean _tilesSelectable;
+	private boolean _includeCalendarJs;
+	private boolean _includePortletCssJs;
 	private PortletDisplay _portletDisplay = new PortletDisplay();
 
 }

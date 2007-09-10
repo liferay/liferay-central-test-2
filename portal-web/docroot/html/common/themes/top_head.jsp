@@ -34,7 +34,6 @@
 <link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/liferay.ico" />
 
 <link href="<%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" type="text/css" rel="stylesheet" />
-<link href="<%= themeDisplay.getPathJavaScript() %>/calendar/skins/aqua/theme.css" rel="stylesheet" type="text/css" />
 
 <%
 List portlets = null;
@@ -47,30 +46,48 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 <c:if test="<%= portlets != null %>">
 
 	<%
-	Set headerCssPortlets = CollectionFactory.getHashSet();
-	Set headerCssPaths = CollectionFactory.getHashSet();
+	Set headerPortalCssPaths = CollectionFactory.getHashSet();
 
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
 
-		if (!headerCssPortlets.contains(portlet.getRootPortletId())) {
-			headerCssPortlets.add(portlet.getRootPortletId());
+		List headerPortalCssList = portlet.getHeaderPortalCss();
 
-			List headerCssList = portlet.getHeaderCss();
+		for (int j = 0; j < headerPortalCssList.size(); j++) {
+			String headerPortalCss = (String)headerPortalCssList.get(j);
 
-			for (int j = 0; j < headerCssList.size(); j++) {
-				String headerCss = (String)headerCssList.get(j);
+			String headerPortalCssPath = request.getContextPath() + headerPortalCss;
 
-				String headerCssPath = portlet.getContextPath() + headerCss;
-
-				if (!headerCssPaths.contains(headerCssPath)) {
-					headerCssPaths.add(headerCssPath);
+			if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
+				headerPortalCssPaths.add(headerPortalCssPath);
 	%>
 
-					<link href="<%= headerCssPath %>" rel="stylesheet" type="text/css" />
+				<link href="<%= headerPortalCssPath %>" rel="stylesheet" type="text/css" />
 
 	<%
-				}
+			}
+		}
+	}
+
+	Set headerPortletCssPaths = CollectionFactory.getHashSet();
+
+	for (int i = 0; i < portlets.size(); i++) {
+		Portlet portlet = (Portlet)portlets.get(i);
+
+		List headerPortletCssList = portlet.getHeaderPortletCss();
+
+		for (int j = 0; j < headerPortletCssList.size(); j++) {
+			String headerPortletCss = (String)headerPortletCssList.get(j);
+
+			String headerPortletCssPath = portlet.getContextPath() + headerPortletCss;
+
+			if (!headerPortletCssPaths.contains(headerPortletCssPath)) {
+				headerPortletCssPaths.add(headerPortletCssPath);
+	%>
+
+				<link href="<%= headerPortletCssPath %>" rel="stylesheet" type="text/css" />
+
+	<%
 			}
 		}
 	}
@@ -125,30 +142,48 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 <c:if test="<%= portlets != null %>">
 
 	<%
-	Set headerJavaScriptPortlets = CollectionFactory.getHashSet();
-	Set headerJavaScriptPaths = CollectionFactory.getHashSet();
+	Set headerPortalJavaScriptPaths = CollectionFactory.getHashSet();
 
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
 
-		if (!headerJavaScriptPortlets.contains(portlet.getRootPortletId())) {
-			headerJavaScriptPortlets.add(portlet.getRootPortletId());
+		List headerPortalJavaScriptList = portlet.getHeaderPortalJavaScript();
 
-			List headerJavaScriptList = portlet.getHeaderJavaScript();
+		for (int j = 0; j < headerPortalJavaScriptList.size(); j++) {
+			String headerPortalJavaScript = (String)headerPortalJavaScriptList.get(j);
 
-			for (int j = 0; j < headerJavaScriptList.size(); j++) {
-				String headerJavaScript = (String)headerJavaScriptList.get(j);
+			String headerPortalJavaScriptPath = request.getContextPath() + headerPortalJavaScript;
 
-				String headerJavaScriptPath = portlet.getContextPath() + headerJavaScript;
-
-				if (!headerJavaScriptPaths.contains(headerJavaScriptPath)) {
-					headerJavaScriptPaths.add(headerJavaScriptPath);
+			if (!headerPortalJavaScriptPaths.contains(headerPortalJavaScriptPath)) {
+				headerPortalJavaScriptPaths.add(headerPortalJavaScriptPath);
 	%>
 
-					<script src="<%= headerJavaScriptPath %>" type="text/javascript"></script>
+				<script src="<%= headerPortalJavaScriptPath %>" type="text/javascript"></script>
 
 	<%
-				}
+			}
+		}
+	}
+
+	Set headerPortletJavaScriptPaths = CollectionFactory.getHashSet();
+
+	for (int i = 0; i < portlets.size(); i++) {
+		Portlet portlet = (Portlet)portlets.get(i);
+
+		List headerPortletJavaScriptList = portlet.getHeaderPortletJavaScript();
+
+		for (int j = 0; j < headerPortletJavaScriptList.size(); j++) {
+			String headerPortletJavaScript = (String)headerPortletJavaScriptList.get(j);
+
+			String headerPortletJavaScriptPath = portlet.getContextPath() + headerPortletJavaScript;
+
+			if (!headerPortletJavaScriptPaths.contains(headerPortletJavaScriptPath)) {
+				headerPortletJavaScriptPaths.add(headerPortletJavaScriptPath);
+	%>
+
+				<script src="<%= headerPortletJavaScriptPath %>" type="text/javascript"></script>
+
+	<%
 			}
 		}
 	}

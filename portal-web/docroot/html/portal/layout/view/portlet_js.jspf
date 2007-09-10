@@ -124,12 +124,12 @@ function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
 function getRefreshPortletList() {
 
 	<%
-	List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
+	List allPortlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
 
 	List nonAjaxPortlets = new ArrayList();
 
-	for (int i = 0; i < portlets.size(); i++) {
-		Portlet portlet = (Portlet)portlets.get(i);
+	for (int i = 0; i < allPortlets.size(); i++) {
+		Portlet portlet = (Portlet)allPortlets.get(i);
 
 		if (!portlet.isAjaxable()) {
 			nonAjaxPortlets.add(portlet.getPortletId());

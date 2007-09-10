@@ -354,13 +354,14 @@ never be displayed via Ajax.
 <!ELEMENT ajaxable (#PCDATA)>
 
 <!--
-Set the relative path of CSS that is referenced from the portal layout's header.
+Set the path of CSS that will be referenced in the page's header relative to the
+portlet's context path.
 -->
 <!ELEMENT header-css (#PCDATA)>
 
 <!--
-Set the relative path of JavaScript that is referenced from the portal layout's
-header.
+Set the path of JavaScript that will be referenced in the page's header relative
+to the portlet's context path.
 -->
 <!ELEMENT header-javascript (#PCDATA)>
 

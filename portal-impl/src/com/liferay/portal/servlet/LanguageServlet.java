@@ -23,21 +23,17 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.Time;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 
 import java.util.Locale;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -53,13 +49,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class LanguageServlet extends HttpServlet {
-
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-
-		_lastModified = (ReleaseInfo.getBuildDate().getTime() / 1000) * 1000;
-		_maxAge = "max-age=" + (Time.HOUR / 1000);
-	}
 
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
@@ -117,39 +106,13 @@ public class LanguageServlet extends HttpServlet {
 			}
 		}
 
-		long lastModified = getLastModified();
-
-		if (lastModified > 0) {
-			long ifModifiedSince =
-				req.getDateHeader(HttpHeaders.IF_MODIFIED_SINCE);
-
-			if ((ifModifiedSince > 0) && (ifModifiedSince == lastModified)) {
-				res.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-
-				return;
-			}
-		}
-
-		res.addHeader(HttpHeaders.CACHE_CONTROL, _maxAge);
-
-		if (lastModified > 0) {
-			res.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);
-		}
-
 		res.setContentType(_CONTENT_TYPE);
 
 		ServletResponseUtil.write(res, value.getBytes("UTF-8"));
 	}
 
-	protected long getLastModified() {
-		return _lastModified;
-	}
-
 	private static final String _CONTENT_TYPE = "text/plain; charset=UTF-8";
 
 	private static Log _log = LogFactory.getLog(LanguageServlet.class);
-
-	private long _lastModified;
-	private String _maxAge;
 
 }

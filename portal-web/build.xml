@@ -572,7 +572,17 @@
 
 		<antcall target="build-javascript-cmd">
 			<param name="js.from.file" value="docroot/html/js/everything_unpacked.js" />
-			<param name="js.to.file" value="docroot/html/js/everything.js" />
+			<param name="js.to.file" value="docroot/html/js/everything_packed.js" />
+		</antcall>
+
+		<antcall target="build-javascript-cmd">
+			<param name="js.from.file" value="docroot/html/js/liferay/service_unpacked.js" />
+			<param name="js.to.file" value="docroot/html/js/liferay/service_packed.js" />
+		</antcall>
+
+		<antcall target="build-javascript-cmd">
+			<param name="js.from.file" value="docroot/html/js/liferay/portlet_css_unpacked.js" />
+			<param name="js.to.file" value="docroot/html/js/liferay/portlet_css_packed.js" />
 		</antcall>
 
 		<antcall target="build-javascript-portlet-cmd">
@@ -656,7 +666,7 @@
 					fork="true"
 					newenvironment="true"
 				>
-					<arg line="--type css -o @{module.name}/css/everything.css @{module.name}/css/everything_unpacked.css" />
+					<arg line="--type css -o @{module.name}/css/everything_packed.css @{module.name}/css/everything_unpacked.css" />
 				</java>
 			</sequential>
 		</for>
