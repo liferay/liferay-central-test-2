@@ -2060,8 +2060,6 @@ voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because thi
 warning-due-to-inactivity-your-session-has-expired=Atenció! Degut a la inactivitat, la seva sessió ha expirat.
 warning-due-to-inactivity-your-session-will-expire=Atenció! Degut a la inactivitat, la sessió expirarà en {0} minuts el {1} {2}. desitja extendre-la{3} minuts més?
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
-
-
 website=Lloc web
 websites=Llocs web
 wedding=Boda
