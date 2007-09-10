@@ -174,7 +174,7 @@ User user2 = company.getDefaultUser();
 		</table>
 	</td>
 	<td align="center" valign="top">
-		<img src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= company.getLogoId() %>" /><br />
+		<img src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= company.getLogoId() %>&t=<%= ImageServletToken.getToken(company.getLogoId()) %>" /><br />
 
 		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" style="font-size: xx-small;"><liferay-ui:message key="change" /></a><br />
 	</td>

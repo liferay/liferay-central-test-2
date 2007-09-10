@@ -219,7 +219,7 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 			SCProductScreenshot productScreenshot = (SCProductScreenshot)productScreenshots.get(i);
 		%>
 
-			<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getFullImageId() %>" target="_blank"><img src="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getThumbnailId() %>" /></a>
+			<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getFullImageId() %>&t=<%= ImageServletToken.getToken(productScreenshot.getFullImageId()) %>" target="_blank"><img src="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getThumbnailId() %>&t=<%= ImageServletToken.getToken(productScreenshot.getThumbnailId()) %>" /></a>
 
 		<%
 		}

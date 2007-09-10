@@ -101,7 +101,11 @@ public class ThemeDeployer extends BaseDeployer {
 		sm.append("</init-param>");
 		sm.append("<init-param>");
 		sm.append("<param-name>Cache-Control</param-name>");
-		sm.append("<param-value>max-age=3660, public</param-value>");
+		sm.append("<param-value>max-age=172801, public</param-value>");
+		sm.append("</init-param>");
+		sm.append("<init-param>");
+		sm.append("<param-name>Expires</param-name>");
+		sm.append("<param-value>172801</param-value>");
 		sm.append("</init-param>");
 		sm.append("</filter>");
 
@@ -128,6 +132,30 @@ public class ThemeDeployer extends BaseDeployer {
 		sm.append("<filter-mapping>");
 		sm.append("<filter-name>Header Filter</filter-name>");
 		sm.append("<url-pattern>*.png</url-pattern>");
+		sm.append("</filter-mapping>");
+
+		// CompressionFilter
+
+		sm.append("<filter>");
+		sm.append("<filter-name>Compression Filter</filter-name>");
+		sm.append("<filter-class>");
+		sm.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
+		sm.append("</filter-class>");
+		sm.append("<init-param>");
+		sm.append("<param-name>filter-class</param-name>");
+		sm.append("<param-value>");
+		sm.append("com.liferay.filters.compression.CompressionFilter");
+		sm.append("</param-value>");
+		sm.append("</init-param>");
+		sm.append("</filter>");
+
+		sm.append("<filter-mapping>");
+		sm.append("<filter-name>Compression Filter</filter-name>");
+		sm.append("<url-pattern>*.css</url-pattern>");
+		sm.append("</filter-mapping>");
+		sm.append("<filter-mapping>");
+		sm.append("<filter-name>Compression Filter</filter-name>");
+		sm.append("<url-pattern>*.js</url-pattern>");
 		sm.append("</filter-mapping>");
 
 		// VelocityFilter

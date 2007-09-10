@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
+import com.liferay.portal.servlet.ImageServletToken;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 
@@ -139,9 +140,9 @@ public class ImageLocalUtil {
 		throws SystemException {
 
 		try {
-			Image image = ImageLocalUtil.getImage(bytes);
+			Image image = getImage(bytes);
 
-			return ImageLocalUtil.updateImage(
+			return updateImage(
 				imageId, image.getTextObj(), image.getType(), image.getHeight(),
 				image.getWidth(), image.getSize());
 		}
@@ -154,9 +155,9 @@ public class ImageLocalUtil {
 		throws SystemException {
 
 		try {
-			Image image = ImageLocalUtil.getImage(file);
+			Image image = getImage(file);
 
-			return ImageLocalUtil.updateImage(
+			return updateImage(
 				imageId, image.getTextObj(), image.getType(), image.getHeight(),
 				image.getWidth(), image.getSize());
 		}
@@ -169,9 +170,9 @@ public class ImageLocalUtil {
 		throws SystemException {
 
 		try {
-			Image image = ImageLocalUtil.getImage(is);
+			Image image = getImage(is);
 
-			return ImageLocalUtil.updateImage(
+			return updateImage(
 				imageId, image.getTextObj(), image.getType(), image.getHeight(),
 				image.getWidth(), image.getSize());
 		}
@@ -185,8 +186,12 @@ public class ImageLocalUtil {
 			int size)
 		throws SystemException {
 
-		return ImageLocalServiceUtil.updateImage(
+		Image image = ImageLocalServiceUtil.updateImage(
 			imageId, bytes, type, height, width, size);
+
+		ImageServletToken.resetToken(imageId);
+
+		return image;
 	}
 
 	private ImageLocalUtil() {

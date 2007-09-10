@@ -43,7 +43,7 @@
 							String rank = MBUtil.getUserRank(portletSetup, LocaleUtil.toLanguageId(locale), posts);
 						%>
 
-							<img class="message-board-user-icon" src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getPortraitId() %>" /><br />
+							<img class="message-board-user-icon" src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getPortraitId() %>&t=<%= ImageServletToken.getToken(user2.getPortraitId()) %>" /><br />
 
 							<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
 								<div>

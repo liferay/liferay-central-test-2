@@ -22,9 +22,19 @@
 
 package com.liferay.filters.header;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
+
 import java.io.IOException;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import java.util.Calendar;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -44,6 +54,7 @@ public class HeaderFilter implements Filter {
 
 	public void init(FilterConfig config) {
 		_config = config;
+		_timeZone = TimeZone.getTimeZone(_TIME_ZONE);
 	}
 
 	public void doFilter(
@@ -59,6 +70,21 @@ public class HeaderFilter implements Filter {
 
 			String value = _config.getInitParameter(name);
 
+			if (name.equals(_EXPIRES) && Validator.isNumber(value)) {
+				int seconds = GetterUtil.getInteger(value);
+
+				Calendar cal = new GregorianCalendar();
+
+				cal.roll(Calendar.SECOND, seconds);
+
+				DateFormat dateFormat = new SimpleDateFormat(
+					_DATE_FORMAT, Locale.US);
+
+				dateFormat.setTimeZone(_timeZone);
+
+				value = dateFormat.format(cal.getTime());
+			}
+
 			httpRes.addHeader(name, value);
 		}
 
@@ -68,6 +94,13 @@ public class HeaderFilter implements Filter {
 	public void destroy() {
 	}
 
+	private static final String _DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
+
+	private static final String _EXPIRES = "Expires";
+
+	private static final String _TIME_ZONE = "GMT";
+
 	private FilterConfig _config;
+	private TimeZone _timeZone;
 
 }

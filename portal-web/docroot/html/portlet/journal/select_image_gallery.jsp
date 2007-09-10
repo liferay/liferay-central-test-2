@@ -167,6 +167,8 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append("selectImageGallery('");
 		sm.append("@image_path@/image_gallery?img_id=");
 		sm.append(image.getLargeImageId());
+		sm.append("&t=");
+		sm.append(ImageServletToken.getToken(image.getLargeImageId()));
 		sm.append("'); window.close();");
 
 		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sm.toString());

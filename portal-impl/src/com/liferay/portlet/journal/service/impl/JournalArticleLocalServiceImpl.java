@@ -46,6 +46,7 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.servlet.ImageServletToken;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -1495,7 +1496,9 @@ public class JournalArticleLocalServiceImpl
 				JournalArticleImageLocalServiceUtil.getArticleImageId(
 					groupId, articleId, oldVersion, elName, elLanguage);
 
-			String elContent = "/image/journal/article?img_id=" + imageId;
+			String elContent =
+				"/image/journal/article?img_id=" + imageId + "&t=" +
+					ImageServletToken.getToken(imageId);
 
 			if (dynamicContent.getText().equals("delete")) {
 				dynamicContent.setText(StringPool.BLANK);

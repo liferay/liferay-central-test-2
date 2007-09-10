@@ -275,10 +275,10 @@ for (int i = 0; i < screenshotsCount; i++) {
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getThumbnailId() %>" target="_blank"><liferay-ui:message key="see-thumbnail" /></a>
+						<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getThumbnailId() %>&t=<%= ImageServletToken.getToken(productScreenshot.getThumbnailId()) %>" target="_blank"><liferay-ui:message key="see-thumbnail" /></a>
 					</td>
 					<td>
-						<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getFullImageId() %>" target="_blank"><liferay-ui:message key="see-full-image" /></a>
+						<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getFullImageId() %>&t=<%= ImageServletToken.getToken(productScreenshot.getFullImageId()) %>" target="_blank"><liferay-ui:message key="see-full-image" /></a>
 					</td>
 				</tr>
 				<tr>

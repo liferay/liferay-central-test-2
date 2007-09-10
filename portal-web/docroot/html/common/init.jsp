@@ -115,6 +115,7 @@
 <%@ page import="com.liferay.portal.service.impl.LayoutTemplateLocalUtil" %>
 <%@ page import="com.liferay.portal.service.permission.LayoutPermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.PortletPermissionUtil" %>
+<%@ page import="com.liferay.portal.servlet.ImageServletToken" %>
 <%@ page import="com.liferay.portal.struts.StrutsUtil" %>
 <%@ page import="com.liferay.portal.theme.PortletDisplay" %>
 <%@ page import="com.liferay.portal.theme.ThemeDisplay" %>

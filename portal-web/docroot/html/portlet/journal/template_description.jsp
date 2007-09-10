@@ -36,7 +36,7 @@ String rowHREF = (String)row.getParameter("rowHREF");
 
 <c:choose>
 	<c:when test="<%= template.isSmallImage() %>">
-		<img border="0" src="<%= Validator.isNotNull(template.getSmallImageURL()) ? template.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + template.getSmallImageId() %>" />
+		<img border="0" src="<%= Validator.isNotNull(template.getSmallImageURL()) ? template.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + template.getSmallImageId() + "&t=" + ImageServletToken.getToken(template.getSmallImageId()) %>" />
 	</c:when>
 	<c:otherwise>
 		<%= template.getName() %><br />

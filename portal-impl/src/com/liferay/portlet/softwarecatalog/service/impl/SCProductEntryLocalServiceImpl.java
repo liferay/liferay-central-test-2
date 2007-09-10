@@ -38,6 +38,7 @@ import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.servlet.ImageServletToken;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
@@ -634,14 +635,19 @@ public class SCProductEntryLocalServiceImpl
 		while (itr.hasNext()) {
 			SCProductScreenshot screenshot = (SCProductScreenshot)itr.next();
 
+			long thumbnailId = screenshot.getThumbnailId();
+			long fullImageId = screenshot.getFullImageId();
+
 			Element screenshotEl = screenshotsEl.addElement("screenshot");
 
 			DocUtil.add(
 				screenshotEl, "thumbnail-url",
-				baseImageURL + "?img_id=" + screenshot.getThumbnailId());
+				baseImageURL + "?img_id=" + thumbnailId + "&t=" +
+					ImageServletToken.getToken(thumbnailId));
 			DocUtil.add(
 				screenshotEl, "large-image-url",
-				baseImageURL + "?img_id=" + screenshot.getFullImageId());
+				baseImageURL + "?img_id=" + fullImageId + "&t=" +
+					ImageServletToken.getToken(fullImageId));
 		}
 
 		Element licensesEl = el.addElement("licenses");

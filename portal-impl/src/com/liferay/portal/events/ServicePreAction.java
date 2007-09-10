@@ -65,6 +65,7 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
+import com.liferay.portal.servlet.ImageServletToken;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -520,7 +521,8 @@ public class ServicePreAction extends Action {
 		// Company logo
 
 		String companyLogo =
-			imagePath + "/company_logo?img_id=" + company.getLogoId();
+			imagePath + "/company_logo?img_id=" + company.getLogoId() + "&t=" +
+				ImageServletToken.getToken(company.getLogoId());
 
 		Image companyLogoImage = ImageLocalUtil.getCompanyLogo(
 			company.getLogoId());
@@ -701,7 +703,8 @@ public class ServicePreAction extends Action {
 					long logoId = layoutSet.getLogoId();
 
 					layoutSetLogo =
-						imagePath + "/layout_set_logo?img_id=" + logoId;
+						imagePath + "/layout_set_logo?img_id=" + logoId +
+							"&t=" + ImageServletToken.getToken(logoId);
 
 					Image layoutSetLogoImage = ImageLocalUtil.getCompanyLogo(
 						logoId);

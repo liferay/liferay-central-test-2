@@ -210,6 +210,8 @@ for (int i = 0; itr.hasNext(); i++) {
 			sm.append(themeDisplay.getPathImage());
 			sm.append("/shopping/item?img_id=");
 			sm.append(item.getSmallImageId());
+			sm.append("&t=");
+			sm.append(ImageServletToken.getToken(item.getSmallImageId()));
 		}
 
 		sm.append("\">");

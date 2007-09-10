@@ -1155,7 +1155,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					<br /><br />
 
 					<c:if test="<%= layoutSet.isLogo() %>">
-						<img src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= layoutSet.getLogoId() %>" />
+						<img src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= layoutSet.getLogoId() %>&t=<%= ImageServletToken.getToken(layoutSet.getLogoId()) %>" />
 
 						<br /><br />
 					</c:if>

@@ -30,6 +30,7 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
+import com.liferay.portal.servlet.ImageServletToken;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
@@ -138,8 +139,10 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			for (int i = 0; i < images.size(); i++) {
 				IGImage image = (IGImage)images.get(i);
 
+				long largeImageId = image.getLargeImageId();
+
 				Image portalImage = ImageLocalUtil.getImageOrDefault(
-					image.getLargeImageId());
+					largeImageId);
 
 				Element fileEl = doc.createElement("File");
 
@@ -150,7 +153,8 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 				fileEl.setAttribute("size", getSize(portalImage.getSize()));
 				fileEl.setAttribute(
 					"url",
-					"/image/image_gallery?img_id=" + image.getLargeImageId());
+					"/image/image_gallery?img_id=" + largeImageId + "&t=" +
+						ImageServletToken.getToken(largeImageId));
 			}
 		}
 	}

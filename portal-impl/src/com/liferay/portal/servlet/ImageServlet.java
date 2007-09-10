@@ -67,7 +67,7 @@ public class ImageServlet extends HttpServlet {
 			}
 		}
 
-		res.addHeader(HttpHeaders.CACHE_CONTROL, "max-age=0");
+		//res.addHeader(HttpHeaders.CACHE_CONTROL, "max-age=0");
 
 		if (lastModified > 0) {
 			res.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);

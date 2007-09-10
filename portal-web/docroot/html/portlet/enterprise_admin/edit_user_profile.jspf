@@ -372,7 +372,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 
 	<c:if test="<%= user2 != null %>">
 		<td align="center" valign="top">
-			<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getPortraitId() %>" /><br />
+			<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getPortraitId() %>&t=<%= ImageServletToken.getToken(user2.getPortraitId()) %>" /><br />
 
 			<c:if test="<%= editable %>">
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" /></portlet:renderURL>" style="font-size: xx-small;"><liferay-ui:message key="change" /></a>
