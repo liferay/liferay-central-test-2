@@ -36,11 +36,14 @@ import org.springframework.context.ApplicationContext;
 public class SpringUtil {
 
 	public static ApplicationContext getContext() {
+		if (_ctx == null) {
+			_ctx = new LazyClassPathApplicationContext(
+				PropsUtil.getArray(PropsUtil.SPRING_CONFIGS));
+		}
+
 		return _ctx;
 	}
 
-	private static ApplicationContext _ctx =
-		new LazyClassPathApplicationContext(
-			PropsUtil.getArray(PropsUtil.SPRING_CONFIGS));
+	private static ApplicationContext _ctx = null;
 
 }
