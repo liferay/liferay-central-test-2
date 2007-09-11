@@ -230,7 +230,7 @@ else {
 
 	messages.addAll(treeWalker.getMessages());
 
-	Collections.sort(messages, new MessageCreateDateComparator(true));
+	Collections.sort(messages, new MessageCreateDateComparator(true, false));
 	%>
 
 	<div class="message-board-message-scroll" id="<portlet:namespace />messageScroll0"></div>

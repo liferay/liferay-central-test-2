@@ -347,9 +347,11 @@ public class MBMessageServiceImpl
 
 		List messages = new ArrayList();
 
+		MessageCreateDateComparator comparator =
+			new MessageCreateDateComparator(false, false);
+
 		Iterator itr = MBMessageLocalServiceUtil.getCategoryMessages(
-			categoryId, 0, _MAX_END,
-			new MessageCreateDateComparator(false)).iterator();
+			categoryId, 0, _MAX_END, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
 			MBMessage message = (MBMessage)itr.next();
@@ -376,9 +378,11 @@ public class MBMessageServiceImpl
 
 		List messages = new ArrayList();
 
+		MessageCreateDateComparator comparator =
+			new MessageCreateDateComparator(false, true);
+
 		Iterator itr = MBMessageLocalServiceUtil.getGroupMessages(
-			groupId, 0, _MAX_END,
-			new MessageCreateDateComparator(false)).iterator();
+			groupId, 0, _MAX_END, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
 			MBMessage message = (MBMessage)itr.next();
@@ -430,8 +434,11 @@ public class MBMessageServiceImpl
 
 		List messages = new ArrayList();
 
+		MessageCreateDateComparator comparator =
+			new MessageCreateDateComparator(false, true);
+
 		Iterator itr = MBMessageLocalServiceUtil.getThreadMessages(
-			threadId, new MessageCreateDateComparator(false)).iterator();
+			threadId, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
 			MBMessage message = (MBMessage)itr.next();

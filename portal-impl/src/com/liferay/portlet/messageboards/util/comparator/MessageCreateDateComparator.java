@@ -34,16 +34,17 @@ import com.liferay.portlet.messageboards.model.MBMessage;
  */
 public class MessageCreateDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "MBMessage.createDate ASC";
+	public static String ORDER_BY_ASC_1 = "createDate ASC";
 
-	public static String ORDER_BY_DESC = "MBMessage.createDate DESC";
+	public static String ORDER_BY_DESC_1 = "createDate DESC";
 
-	public MessageCreateDateComparator() {
-		this(false);
-	}
+	public static String ORDER_BY_ASC_2 = "MBMessage.createDate ASC";
 
-	public MessageCreateDateComparator(boolean asc) {
+	public static String ORDER_BY_DESC_2 = "MBMessage.createDate DESC";
+
+	public MessageCreateDateComparator(boolean asc, boolean useTableNames) {
 		_asc = asc;
+		_useTableNames = useTableNames;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -63,13 +64,24 @@ public class MessageCreateDateComparator extends OrderByComparator {
 
 	public String getOrderBy() {
 		if (_asc) {
-			return ORDER_BY_ASC;
+			if (_useTableNames) {
+				return ORDER_BY_ASC_2;
+			}
+			else {
+				return ORDER_BY_ASC_1;
+			}
 		}
 		else {
-			return ORDER_BY_DESC;
+			if (_useTableNames) {
+				return ORDER_BY_DESC_2;
+			}
+			else {
+				return ORDER_BY_DESC_1;
+			}
 		}
 	}
 
 	private boolean _asc;
+	private boolean _useTableNames;
 
 }

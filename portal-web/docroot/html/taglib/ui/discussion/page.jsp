@@ -174,7 +174,7 @@ List messages = treeWalker.getMessages();
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 
 	<%
-	Collections.sort(messages, new MessageCreateDateComparator(true));
+	Collections.sort(messages, new MessageCreateDateComparator(true, false));
 
 	for (i = 1; i < messages.size(); i++) {
 		message = (MBMessage)messages.get(i);
