@@ -325,6 +325,14 @@ public class MBMessageLocalServiceUtil {
 		return mbMessageLocalService.getGroupMessages(groupId, begin, end);
 	}
 
+	public static java.util.List getGroupMessages(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getGroupMessages(groupId, begin, end, obc);
+	}
+
 	public static int getGroupMessagesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();

@@ -207,6 +207,10 @@ public interface MBMessageLocalService {
 	public java.util.List getGroupMessages(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getGroupMessages(long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public int getGroupMessagesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 

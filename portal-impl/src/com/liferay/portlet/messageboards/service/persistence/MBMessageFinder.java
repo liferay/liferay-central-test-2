@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
@@ -139,12 +140,21 @@ public class MBMessageFinder {
 	public static List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 
+		return findByGroupId(groupId, begin, end, null);
+	}
+
+	public static List findByGroupId(
+			long groupId, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
+
+			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

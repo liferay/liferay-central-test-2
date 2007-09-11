@@ -164,7 +164,8 @@
 								</li>
 							</c:if>
 							<li>
-							<%
+
+								<%
 								String topHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView('0');";
 								%>
 

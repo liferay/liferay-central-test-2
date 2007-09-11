@@ -391,6 +391,14 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-posts") || tabs1.equals("my-subscriptions") || tabs1.equals("recent-posts") %>'>
 
+		<c:if test='<%= tabs1.equals("recent-posts") %>'>
+			<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue() %>' target="_blank" />
+
+			<liferay-ui:message key="recent-posts-rss" />
+
+			<br /><br />
+		</c:if>
+
 		<%
 		long groupThreadsUserId = 0;
 

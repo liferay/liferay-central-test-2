@@ -33,6 +33,8 @@ MBMessage message = messageDisplay.getMessage();
 
 MBCategory category = messageDisplay.getCategory();
 
+MBThread thread = messageDisplay.getThread();
+
 MBMessage previousMessage = messageDisplay.getPreviousMessage();
 MBMessage nextMessage = messageDisplay.getNextMessage();
 
@@ -67,6 +69,14 @@ else {
 	function <portlet:namespace />scrollIntoView(messageId) {
 		document.getElementById("<portlet:namespace />messageScroll" + messageId).scrollIntoView(true);
 	}
+
+	<c:if test="<%= thread.getRootMessageId() != message.getMessageId() %>">
+		jQuery(document).ready(
+			function() {
+				<portlet:namespace />scrollIntoView(<%= message.getMessageId() %>);
+			}
+		);
+	</c:if>
 </script>
 
 <form>

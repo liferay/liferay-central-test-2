@@ -896,6 +896,71 @@ public class MBMessageServiceHttp {
 		}
 	}
 
+	public static java.lang.String getGroupMessagesRSS(
+		HttpPrincipal httpPrincipal, long groupId, int max,
+		java.lang.String type, double version, java.lang.String feedURL,
+		java.lang.String entryURL, javax.portlet.PortletPreferences prefs)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new IntegerWrapper(max);
+			Object paramObj2 = type;
+
+			if (type == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new DoubleWrapper(version);
+			Object paramObj4 = feedURL;
+
+			if (feedURL == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = entryURL;
+
+			if (entryURL == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = prefs;
+
+			if (prefs == null) {
+				paramObj6 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"getGroupMessagesRSS",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.lang.String)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		HttpPrincipal httpPrincipal, long messageId)
 		throws com.liferay.portal.SystemException, 

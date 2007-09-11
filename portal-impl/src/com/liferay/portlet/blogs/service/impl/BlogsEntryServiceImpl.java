@@ -154,18 +154,18 @@ public class BlogsEntryServiceImpl
 	public List getGroupEntries(long groupId, int max)
 		throws PortalException, SystemException {
 
-		List entries = BlogsEntryLocalServiceUtil.getGroupEntries(
-			groupId, 0, max);
+		List entries = new ArrayList();
 
-		Iterator itr = entries.iterator();
+		Iterator itr = BlogsEntryLocalServiceUtil.getGroupEntries(
+			groupId, 0, _MAX_END).iterator();
 
-		while (itr.hasNext()) {
+		while (itr.hasNext() && (entries.size() < max)) {
 			BlogsEntry entry = (BlogsEntry)itr.next();
 
-			if (!BlogsEntryPermission.contains(
+			if (BlogsEntryPermission.contains(
 					getPermissionChecker(), entry, ActionKeys.VIEW)) {
 
-				itr.remove();
+				entries.add(entry);
 			}
 		}
 
@@ -262,5 +262,7 @@ public class BlogsEntryServiceImpl
 			throw new SystemException(ioe);
 		}
 	}
+
+	private static final int _MAX_END = 200;
 
 }

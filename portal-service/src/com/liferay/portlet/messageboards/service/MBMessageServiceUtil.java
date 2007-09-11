@@ -206,6 +206,17 @@ public class MBMessageServiceUtil {
 			version, feedURL, entryURL, prefs);
 	}
 
+	public static java.lang.String getGroupMessagesRSS(long groupId, int max,
+		java.lang.String type, double version, java.lang.String feedURL,
+		java.lang.String entryURL, javax.portlet.PortletPreferences prefs)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+		return mbMessageService.getGroupMessagesRSS(groupId, max, type,
+			version, feedURL, entryURL, prefs);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		long messageId)
 		throws com.liferay.portal.PortalException, 

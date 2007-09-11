@@ -84,6 +84,7 @@ public class RSSAction extends Action {
 				req, PortletKeys.MESSAGE_BOARDS, false, true);
 
 		String plid = ParamUtil.getString(req, "p_l_id");
+		long groupId = ParamUtil.getLong(req, "groupId");
 		long categoryId = ParamUtil.getLong(req, "categoryId");
 		long threadId = ParamUtil.getLong(req, "threadId");
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
@@ -97,7 +98,7 @@ public class RSSAction extends Action {
 
 		String rss = StringPool.BLANK;
 
-		if ((categoryId > 0)) {
+		if (categoryId > 0) {
 			String feedURL =
 				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
 					"/message_boards/find_category?p_l_id=" + plid +
@@ -114,7 +115,7 @@ public class RSSAction extends Action {
 				}
 			}
 		}
-		else {
+		else if (threadId > 0) {
 			String feedURL =
 				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
 					"/message_boards/find_thread?p_l_id=" + plid +
@@ -122,6 +123,15 @@ public class RSSAction extends Action {
 
 			rss = MBMessageServiceUtil.getThreadMessagesRSS(
 				threadId, SearchContainer.DEFAULT_DELTA, type, version,
+				feedURL, entryURL, prefs);
+		}
+		else {
+			String feedURL =
+				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+					"/message_boards/find_recent_posts?p_l_id=" + plid;
+
+			rss = MBMessageServiceUtil.getGroupMessagesRSS(
+				groupId, SearchContainer.DEFAULT_DELTA, type, version,
 				feedURL, entryURL, prefs);
 		}
 

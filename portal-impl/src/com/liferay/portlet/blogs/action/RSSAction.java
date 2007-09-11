@@ -90,7 +90,7 @@ public class RSSAction extends Action {
 
 		String rss = StringPool.BLANK;
 
-		if ((categoryId > 0)) {
+		if (categoryId > 0) {
 			String feedURL =
 				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
 					"/blogs/find_category?p_l_id=" + plid + "&categoryId=" +

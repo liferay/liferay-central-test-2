@@ -345,19 +345,56 @@ public class MBMessageServiceImpl
 		String name = category.getName();
 		String description = category.getDescription();
 
-		List messages = MBMessageLocalServiceUtil.getCategoryMessages(
-			categoryId, 0, max, new MessageCreateDateComparator(false));
+		List messages = new ArrayList();
 
-		Iterator itr = messages.iterator();
+		Iterator itr = MBMessageLocalServiceUtil.getCategoryMessages(
+			categoryId, 0, _MAX_END,
+			new MessageCreateDateComparator(false)).iterator();
 
-		while (itr.hasNext()) {
+		while (itr.hasNext() && (messages.size() < max)) {
 			MBMessage message = (MBMessage)itr.next();
 
-			if (!MBMessagePermission.contains(
+			if (MBMessagePermission.contains(
 					getPermissionChecker(), message, ActionKeys.VIEW)) {
 
-				itr.remove();
+				messages.add(message);
 			}
+		}
+
+		return exportToRSS(
+			name, description, type, version, feedURL, entryURL, messages,
+			prefs);
+	}
+
+	public String getGroupMessagesRSS(
+			long groupId, int max, String type, double version,
+			String feedURL, String entryURL, PortletPreferences prefs)
+		throws PortalException, SystemException {
+
+		String name = StringPool.BLANK;
+		String description = StringPool.BLANK;
+
+		List messages = new ArrayList();
+
+		Iterator itr = MBMessageLocalServiceUtil.getGroupMessages(
+			groupId, 0, _MAX_END,
+			new MessageCreateDateComparator(false)).iterator();
+
+		while (itr.hasNext() && (messages.size() < max)) {
+			MBMessage message = (MBMessage)itr.next();
+
+			if (MBMessagePermission.contains(
+					getPermissionChecker(), message, ActionKeys.VIEW)) {
+
+				messages.add(message);
+			}
+		}
+
+		if (messages.size() > 0) {
+			MBMessage message = (MBMessage)messages.get(messages.size() - 1);
+
+			name = message.getSubject();
+			description = message.getSubject();
 		}
 
 		return exportToRSS(
@@ -575,5 +612,7 @@ public class MBMessageServiceImpl
 			throw new SystemException(ioe);
 		}
 	}
+
+	private static final int _MAX_END = 200;
 
 }
