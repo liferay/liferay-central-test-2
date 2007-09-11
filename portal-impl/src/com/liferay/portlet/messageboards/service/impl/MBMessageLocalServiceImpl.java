@@ -1197,15 +1197,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String subjectPrefix = null;
 			String body = null;
 			String signature = null;
-			String inReplyTo = null;
 
 			if (update) {
 				subjectPrefix = MBUtil.getEmailMessageUpdatedSubjectPrefix(
 					prefs);
 				body = MBUtil.getEmailMessageUpdatedBody(prefs);
 				signature = MBUtil.getEmailMessageUpdatedSignature(prefs);
-				inReplyTo = MBUtil.getMailId(
-					message.getParentMessageId(), company.getMx());
 			}
 			else {
 				subjectPrefix = MBUtil.getEmailMessageAddedSubjectPrefix(prefs);
@@ -1284,6 +1281,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			if (subject.indexOf(subjectPrefix) == -1) {
 				subject = subjectPrefix + subject;
 			}
+
+			String inReplyTo = MBUtil.getMailId(
+				message.getParentMessageId(), company.getMx());
 
 			MBMessageProducer.produce(
 				new String[] {
