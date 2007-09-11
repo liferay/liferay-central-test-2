@@ -24,6 +24,7 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -177,24 +178,48 @@ public class FriendlyURLServlet extends HttpServlet {
 		}
 
 		if (group == null) {
-			try {
-				String screenName = friendlyURL.substring(1);
+			String screenName = friendlyURL.substring(1);
 
-				if (_user || !Validator.isNumber(screenName)) {
+			if (_user || !Validator.isNumber(screenName)) {
+				try {
 					User user = UserLocalServiceUtil.getUserByScreenName(
 						companyId, screenName);
 
 					group = user.getGroup();
 				}
-				else {
-					long groupId = GetterUtil.getLong(screenName);
-
-					group = GroupLocalServiceUtil.getGroup(groupId);
+				catch (NoSuchUserException nsue) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"No user exists with friendly URL " + screenName);
+					}
 				}
 			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e);
+			else {
+				long groupId = GetterUtil.getLong(screenName);
+
+				try {
+					group = GroupLocalServiceUtil.getGroup(groupId);
+				}
+				catch (NoSuchGroupException nsge) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"No group exists with friendly URL " + groupId +
+								". Try fetching by screen name instead.");
+					}
+
+					try {
+						User user = UserLocalServiceUtil.getUserByScreenName(
+							companyId, screenName);
+
+						group = user.getGroup();
+					}
+					catch (NoSuchUserException nsue) {
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"No user or group exists with friendly URL " +
+									groupId);
+						}
+					}
 				}
 			}
 		}
