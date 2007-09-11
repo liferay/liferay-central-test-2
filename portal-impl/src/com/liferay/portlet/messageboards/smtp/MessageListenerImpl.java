@@ -150,6 +150,10 @@ public class MessageListenerImpl implements MessageListener {
 				}
 			}
 
+			if (_log.isDebugEnabled()) {
+				_log.debug("Previous message " + prevMessage);
+			}
+
 			MBMailMessage collector = new MBMailMessage();
 
 			_collectPartContent(message, collector);
