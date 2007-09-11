@@ -56,6 +56,7 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.FiniteUniqueStack;
 import com.liferay.util.Http;
 import com.liferay.util.LocaleUtil;
+import com.liferay.util.Time;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
@@ -63,6 +64,7 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -129,6 +131,18 @@ public class JournalUtil {
 	}
 
 	public static void addReservedEl(
+		Element root, Map tokens, String name, double value) {
+
+		addReservedEl(root, tokens, name, String.valueOf(value));
+	}
+
+	public static void addReservedEl(
+		Element root, Map tokens, String name, Date value) {
+
+		addReservedEl(root, tokens, name, Time.getRFC822(value));
+	}
+
+	public static void addReservedEl(
 		Element root, Map tokens, String name, String value) {
 
 		// XML
@@ -169,7 +183,7 @@ public class JournalUtil {
 
 		JournalUtil.addReservedEl(
 			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_VERSION,
-			Double.toString(article.getVersion()));
+			article.getVersion());
 
 		JournalUtil.addReservedEl(
 			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_TITLE,
@@ -185,18 +199,18 @@ public class JournalUtil {
 
 		JournalUtil.addReservedEl(
 			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_CREATE_DATE,
-			article.getCreateDate().toString());
+			article.getCreateDate());
 
 		JournalUtil.addReservedEl(
 			root, tokens,
 			JournalStructureImpl.RESERVED_ARTICLE_MODIFIED_DATE,
-			article.getModifiedDate().toString());
+			article.getModifiedDate());
 
 		if (article.getDisplayDate() != null) {
 			JournalUtil.addReservedEl(
 				root, tokens,
 				JournalStructureImpl.RESERVED_ARTICLE_DISPLAY_DATE,
-				article.getDisplayDate().toString());
+				article.getDisplayDate());
 		}
 
 		JournalUtil.addReservedEl(
