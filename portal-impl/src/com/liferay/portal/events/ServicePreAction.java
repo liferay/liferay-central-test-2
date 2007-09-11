@@ -997,9 +997,19 @@ public class ServicePreAction extends Action {
 
 		// Parallel render
 
+		boolean parallelRenderEnable = true;
+
+		if (layout != null) {
+			if (layoutTypePortlet.getPortletIds().size() == 1) {
+				parallelRenderEnable = false;
+			}
+		}
+
+		Boolean parallelRenderEnableObj = new Boolean(
+			ParamUtil.getBoolean(req, "p_p_parallel", parallelRenderEnable));
+
 		req.setAttribute(
-			WebKeys.PORTLET_PARALLEL_RENDER,
-			new Boolean(ParamUtil.getBoolean(req, "p_p_parallel", true)));
+			WebKeys.PORTLET_PARALLEL_RENDER, parallelRenderEnableObj);
 
 		// Fix state
 
