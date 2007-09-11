@@ -44,9 +44,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public ResourcePrimKeyUpgradeColumnImpl(
+    public ResourcePrimKeyUpgradeColumnImpl(
 		UpgradeColumn nameColumn, ResourceCodeIdUpgradeColumnImpl codeIdColumn,
-		ValueMapper groupIdMapper, Map classPKContainers) {
+		ValueMapper groupIdMapper, Map classPKContainers, ValueMapper layoutPlidMapper) {
 
 		super("primKey");
 
@@ -54,6 +54,7 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		_codeIdColumn = codeIdColumn;
 		_groupIdMapper = groupIdMapper;
 		_classPKContainers = classPKContainers;
+        _layoutPlidMapper = layoutPlidMapper;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
@@ -74,7 +75,11 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			if (name.startsWith("com.liferay.")) {
 				primKey = getPrimKey(name, primKey);
 			}
-
+            else if ( primKey.indexOf("_LAYOUT_") > 0 &&
+                      (primKey.startsWith("PUB.") || primKey.startsWith("PRI.")) ) {
+                primKey = getLayoutPrimKey(primKey);
+            }
+            
 			return primKey;
 		}
 		else {
@@ -82,7 +87,26 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		}
 	}
 
-	protected String getPrimKey(String name, String primKey) throws Exception {
+    
+	private String getLayoutPrimKey(String oldPrimKey) throws Exception {
+
+        int endOfOwnerId = oldPrimKey.indexOf('.', 4);
+        String oldOwnerId = oldPrimKey.substring(0, endOfOwnerId);
+        
+        int startOfLayoutMarker = oldPrimKey.indexOf("_LAYOUT_");
+        String layoutId = oldPrimKey.substring(endOfOwnerId+1, startOfLayoutMarker);
+        
+        String oldPlidValue =
+            "{layoutId=" + layoutId + ", ownerId=" + oldOwnerId + "}";
+        
+        Object newPlid = _layoutPlidMapper.getNewValue(oldPlidValue);
+        
+        String newPrimKey = newPlid.toString() + oldPrimKey.substring(startOfLayoutMarker);
+        
+        return newPrimKey;
+    }
+
+    protected String getPrimKey(String name, String primKey) throws Exception {
 		Long classNameId = new Long(PortalUtil.getClassNameId(name));
 
 		ClassPKContainer classPKContainer =
@@ -117,6 +141,7 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	private UpgradeColumn _nameColumn;
 	private ResourceCodeIdUpgradeColumnImpl _codeIdColumn;
 	private ValueMapper _groupIdMapper;
+    private ValueMapper _layoutPlidMapper;
 	private Map _classPKContainers;
 
 }

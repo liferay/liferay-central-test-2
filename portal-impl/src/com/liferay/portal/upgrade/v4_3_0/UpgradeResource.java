@@ -319,7 +319,7 @@ public class UpgradeResource extends UpgradeProcess {
 
 		UpgradeColumn primKeyColumn = new ResourcePrimKeyUpgradeColumnImpl(
 			nameColumn, codeIdColumn, AvailableMappersUtil.getGroupIdMapper(),
-			getClassPKContainers());
+			getClassPKContainers(), AvailableMappersUtil.getLayoutPlidMapper());
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			ResourceImpl.TABLE_NAME, resourceColumns, companyIdColumn,
