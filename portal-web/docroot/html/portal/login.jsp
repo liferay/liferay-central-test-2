@@ -59,6 +59,101 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 	refresh="<%= false %>"
 >
 	<liferay-ui:section>
+		<c:if test="<%= sectionSelected.booleanValue() %>">
+			<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>
+
+				<%
+				String emailAddress = (String)SessionMessages.get(request, "user_added");
+				String password = (String)SessionMessages.get(request, "user_added_password");
+				%>
+
+				<span class="portlet-msg-success">
+
+				<c:choose>
+					<c:when test="<%= company.isStrangersVerify() || Validator.isNull(password) %>">
+						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", emailAddress) %>
+					</c:when>
+					<c:otherwise>
+						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {password, emailAddress}) %>
+					</c:otherwise>
+				</c:choose>
+
+				</span>
+			</c:if>
+
+			<c:if test="<%= SessionErrors.contains(request, AuthException.class.getName()) %>">
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="authentication-failed" />
+				</span>
+			</c:if>
+
+			<c:if test="<%= SessionErrors.contains(request, CookieNotSupportedException.class.getName()) %>">
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="authentication-failed-please-enable-browser-cookies" />
+				</span>
+			</c:if>
+
+			<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="please-enter-a-valid-login" />
+				</span>
+			</c:if>
+
+			<c:if test='<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>'>
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="please-enter-a-valid-login" />
+				</span>
+			</c:if>
+
+			<c:if test='<%= SessionErrors.contains(request, UserLockoutException.class.getName()) %>'>
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="this-account-has-been-locked" />
+				</span>
+			</c:if>
+
+			<c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="please-enter-a-valid-password" />
+				</span>
+			</c:if>
+
+			<c:if test="<%= SessionErrors.contains(request, UserScreenNameException.class.getName()) %>">
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="please-enter-a-valid-screen-name" />
+				</span>
+			</c:if>
+		</c:if>
+
+		<c:if test="<%= SessionErrors.contains(request, AssociationException.class.getName()) %>">
+			<span class="portlet-msg-error">
+			<liferay-ui:message key="an-error-occurred-while-establishing-an-association-with-the-open-id-provider" />
+			</span>
+		</c:if>
+
+		<c:if test="<%= SessionErrors.contains(request, ConsumerException.class.getName()) %>">
+			<span class="portlet-msg-error">
+			<liferay-ui:message key="an-error-occurred-while-initializing-the-open-id-consumer" />
+			</span>
+		</c:if>
+
+		<c:if test="<%= SessionErrors.contains(request, DiscoveryException.class.getName()) %>">
+			<span class="portlet-msg-error">
+			<liferay-ui:message key="an-error-occurred-while-discovering-the-open-id-provider" />
+			</span>
+		</c:if>
+
+		<c:if test="<%= SessionErrors.contains(request, MessageException.class.getName()) %>">
+			<span class="portlet-msg-error">
+			<liferay-ui:message key="an-error-occurred-while-communicating-with-the-open-id-provider" />
+			</span>
+		</c:if>
+
+		<c:if test='<%= SessionErrors.contains(request, "missingOpenIdUserInformation") %>'>
+			<span class="portlet-msg-error">
+			<liferay-ui:message key="the-openid-provider-did-not-send-the-required-attributes" />
+			</span>
+		</c:if>
+
 		<table class="liferay-table">
 		<tr>
 			<td>
@@ -72,71 +167,6 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<input name="<%= Constants.CMD %>" type="hidden" value="already-registered" />
 				<input name="<%= sectionParam %>" type="hidden" value="already-registered" />
 				<input name="redirect" type="hidden" value="<%= redirect %>" />
-
-				<c:if test="<%= sectionSelected.booleanValue() %>">
-					<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>
-
-						<%
-						String emailAddress = (String)SessionMessages.get(request, "user_added");
-						String password = (String)SessionMessages.get(request, "user_added_password");
-						%>
-
-						<span class="portlet-msg-success">
-
-						<c:choose>
-							<c:when test="<%= company.isStrangersVerify() || Validator.isNull(password) %>">
-								<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", emailAddress) %>
-							</c:when>
-							<c:otherwise>
-								<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {password, emailAddress}) %>
-							</c:otherwise>
-						</c:choose>
-
-						</span>
-					</c:if>
-
-					<c:if test="<%= SessionErrors.contains(request, AuthException.class.getName()) %>">
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="authentication-failed" />
-						</span>
-					</c:if>
-
-					<c:if test="<%= SessionErrors.contains(request, CookieNotSupportedException.class.getName()) %>">
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="authentication-failed-please-enable-browser-cookies" />
-						</span>
-					</c:if>
-
-					<c:if test="<%= SessionErrors.contains(request, NoSuchUserException.class.getName()) %>">
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="please-enter-a-valid-login" />
-						</span>
-					</c:if>
-
-					<c:if test='<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>'>
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="please-enter-a-valid-login" />
-						</span>
-					</c:if>
-
-					<c:if test='<%= SessionErrors.contains(request, UserLockoutException.class.getName()) %>'>
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="this-account-has-been-locked" />
-						</span>
-					</c:if>
-
-					<c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="please-enter-a-valid-password" />
-						</span>
-					</c:if>
-
-					<c:if test="<%= SessionErrors.contains(request, UserScreenNameException.class.getName()) %>">
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="please-enter-a-valid-screen-name" />
-						</span>
-					</c:if>
-				</c:if>
 
 				<%
 				String login = LoginAction.getLogin(request, "login", company);
@@ -201,36 +231,6 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 					<br /><br />
 
 					<form action="<%= themeDisplay.getPathMain() %>/portal/open_id_request" method="post" name="fm2">
-
-					<c:if test="<%= SessionErrors.contains(request, AssociationException.class.getName()) %>">
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="an-error-occurred-while-establishing-an-association-with-the-open-id-provider" />
-						</span>
-					</c:if>
-
-					<c:if test="<%= SessionErrors.contains(request, ConsumerException.class.getName()) %>">
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="an-error-occurred-while-initializing-the-open-id-consumer" />
-						</span>
-					</c:if>
-
-					<c:if test="<%= SessionErrors.contains(request, DiscoveryException.class.getName()) %>">
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="an-error-occurred-while-discovering-the-open-id-provider" />
-						</span>
-					</c:if>
-
-					<c:if test="<%= SessionErrors.contains(request, MessageException.class.getName()) %>">
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="an-error-occurred-while-communicating-with-the-open-id-provider" />
-						</span>
-					</c:if>
-
-					<c:if test='<%= SessionErrors.contains(request, "missingOpenIdUserInformation") %>'>
-						<span class="portlet-msg-error">
-						<liferay-ui:message key="the-openid-provider-did-not-send-the-required-attributes" />
-						</span>
-					</c:if>
 
 					<table class="liferay-table">
 					<tr>
