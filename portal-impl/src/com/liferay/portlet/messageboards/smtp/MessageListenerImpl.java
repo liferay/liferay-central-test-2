@@ -124,7 +124,17 @@ public class MessageListenerImpl implements MessageListener {
 			MBMessage prevMessage = null;
 
 			if ((inReplyToHeaders != null) && (inReplyToHeaders.length > 0)) {
-				long prevMessageId = MBUtil.getMessageId(inReplyToHeaders[0]);
+				String inReplyTo = inReplyToHeaders[0];
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("In-Reply-To " + inReplyTo);
+				}
+
+				long prevMessageId = MBUtil.getMessageId(inReplyTo);
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Previous message id " + prevMessageId);
+				}
 
 				try {
 					if (prevMessageId > 0) {
