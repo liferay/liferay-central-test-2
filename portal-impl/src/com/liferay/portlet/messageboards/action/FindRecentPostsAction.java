@@ -79,6 +79,6 @@ public class FindRecentPostsAction extends Action {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(FindRecentPosts.class);
+	private static Log _log = LogFactory.getLog(FindRecentPostsAction.class);
 
 }
