@@ -81,6 +81,7 @@ portletURL.setParameter("tabs1", tabs1);
 		List headerNames = new ArrayList();
 
 		headerNames.add("name");
+		headerNames.add("version");
 		headerNames.add("type");
 		headerNames.add("tags");
 		headerNames.add("licenses");
@@ -128,6 +129,8 @@ portletURL.setParameter("tabs1", tabs1);
 
 			String productEntryId = String.valueOf(productEntry.getProductEntryId());
 
+			SCProductVersion latestProductVersion = productEntry.getLatestVersion();
+
 			ResultRow row = new ResultRow(productEntry, productEntryId, i);
 
 			PortletURL rowURL = renderResponse.createRenderURL();
@@ -154,6 +157,15 @@ portletURL.setParameter("tabs1", tabs1);
 			}
 
 			row.addText(sm.toString(), rowURL);
+
+			// Version
+
+			if (latestProductVersion != null) {
+				row.addText(latestProductVersion.getVersion(), rowURL);
+			}
+			else {
+				row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
+			}
 
 			// Type
 
