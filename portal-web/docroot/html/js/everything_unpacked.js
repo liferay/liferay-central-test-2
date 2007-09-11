@@ -17846,6 +17846,10 @@ Liferay.Dock = {
 				}
 			);
 
+			if (Liferay.Browser.is_ie && Liferay.Browser.version() <= 6) {
+				myPlaces.find('>ul').css('zoom', 1);
+			}
+
 			var dockParent = dock.parent();
 
 			dockParent.css(
@@ -17929,6 +17933,10 @@ Liferay.Dock = {
 		var myPlacesList = myPlaces.find('> ul');
 
 		myPlacesList.toggleClass('show-my-places');
+		
+		if (Liferay.Browser.is_ie && Liferay.Browser.version() <= 6) {
+			myPlacesList.find('li ul li').css('position', 'relative');
+		}
 	}
 };
 Liferay.DynamicSelect = new Class({
