@@ -1283,7 +1283,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 
 			String inReplyTo = MBUtil.getMailId(
-				message.getParentMessageId(), company.getMx());
+				message.getMessageId(), company.getMx());
 
 			MBMessageProducer.produce(
 				new String[] {
