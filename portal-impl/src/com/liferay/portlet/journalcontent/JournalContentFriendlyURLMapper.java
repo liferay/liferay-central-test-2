@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
 
 import java.util.Map;
@@ -105,8 +106,21 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		String namespace =
 			StringPool.UNDERLINE + portletId + StringPool.UNDERLINE;
 
-		params.put("p_p_id", portletId);
-		params.put("p_p_state", "normal");
+		if (Validator.equals(portletId, _PORTLET_ID)) {
+			portletId = _PORTLET_DEFAULT_INSTANCE;
+
+			namespace = StringPool.UNDERLINE + portletId + StringPool.UNDERLINE;
+
+			params.put("p_p_id", portletId);
+			params.put("p_p_state", "maximized");
+		}
+		else {
+			params.put("p_p_id", portletId);
+			params.put("p_p_state", "normal");
+		}
+
+		params.put("p_p_mode", "view");
+		params.put("p_p_action", "0");
 
 		String groupId = friendlyURLPath.substring(x + 1, y);
 
@@ -135,5 +149,10 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	private static final String _MAPPING = "journal_content";
+
+	private static final String _PORTLET_ID = PortletKeys.JOURNAL_CONTENT;
+
+	private static final String _PORTLET_DEFAULT_INSTANCE =
+		PortletKeys.JOURNAL_CONTENT + "_INSTANCE_0000";
 
 }
