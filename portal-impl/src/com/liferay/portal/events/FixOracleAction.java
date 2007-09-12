@@ -77,11 +77,11 @@ public class FixOracleAction extends SimpleAction {
 			checkNewLine = true;
 
 			articles = JournalArticleLocalServiceUtil.getArticles(
-				ExportAction.DEFAULT_CMS_GROUP_ID);
+				ExportAction.DEFAULT_GROUP_ID);
 		}
 		else {
 			articles = JournalArticleLocalServiceUtil.getArticles(
-				ExportAction.DEFAULT_CMS_GROUP_ID, 0, NUM_OF_ARTICLES);
+				ExportAction.DEFAULT_GROUP_ID, 0, NUM_OF_ARTICLES);
 		}
 
 		for (int i = 0; i < articles.size(); i++) {
@@ -91,7 +91,7 @@ public class FixOracleAction extends SimpleAction {
 
 			if ((content != null) && (content.indexOf("\\n") != -1)) {
 				articles = JournalArticleLocalServiceUtil.getArticles(
-					ExportAction.DEFAULT_CMS_GROUP_ID);
+					ExportAction.DEFAULT_GROUP_ID);
 
 				for (int j = 0; j < articles.size(); j++) {
 					article = (JournalArticle)articles.get(j);
@@ -123,7 +123,7 @@ public class FixOracleAction extends SimpleAction {
 		}
 
 		List structures = JournalStructureLocalServiceUtil.getStructures(
-			ExportAction.DEFAULT_CMS_GROUP_ID, 0, 1);
+			ExportAction.DEFAULT_GROUP_ID, 0, 1);
 
 		if (structures.size() == 1) {
 			JournalStructure structure = (JournalStructure)structures.get(0);
@@ -132,7 +132,7 @@ public class FixOracleAction extends SimpleAction {
 
 			if ((xsd != null) && (xsd.indexOf("\\n") != -1)) {
 				structures = JournalStructureLocalServiceUtil.getStructures(
-					ExportAction.DEFAULT_CMS_GROUP_ID);
+					ExportAction.DEFAULT_GROUP_ID);
 
 				for (int i = 0; i < structures.size(); i++) {
 					structure = (JournalStructure)structures.get(i);
@@ -144,7 +144,7 @@ public class FixOracleAction extends SimpleAction {
 		}
 
 		List templates = JournalTemplateLocalServiceUtil.getTemplates(
-			ExportAction.DEFAULT_CMS_GROUP_ID, 0, 1);
+			ExportAction.DEFAULT_GROUP_ID, 0, 1);
 
 		if (templates.size() == 1) {
 			JournalTemplate template = (JournalTemplate)templates.get(0);
@@ -153,7 +153,7 @@ public class FixOracleAction extends SimpleAction {
 
 			if ((xsl != null) && (xsl.indexOf("\\n") != -1)) {
 				templates = JournalTemplateLocalServiceUtil.getTemplates(
-					ExportAction.DEFAULT_CMS_GROUP_ID);
+					ExportAction.DEFAULT_GROUP_ID);
 
 				for (int i = 0; i < templates.size(); i++) {
 					template = (JournalTemplate)templates.get(i);
