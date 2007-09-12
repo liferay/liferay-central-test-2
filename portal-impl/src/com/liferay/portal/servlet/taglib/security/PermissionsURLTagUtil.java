@@ -28,10 +28,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.PortletURLUtil;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -75,8 +75,7 @@ public class PermissionsURLTagUtil extends TagSupport {
 				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 			if (Validator.isNull(redirect)) {
-				redirect = PortletURLUtil.getCurrent(
-					renderRequest, renderResponse).toString();
+				redirect = PortalUtil.getCurrentURL(req);
 			}
 
 			PortletURL portletURL = new PortletURLImpl(
@@ -93,6 +92,7 @@ public class PermissionsURLTagUtil extends TagSupport {
 			portletURL.setParameter(
 				"struts_action", "/portlet_configuration/edit_permissions");
 			portletURL.setParameter("redirect", redirect);
+			portletURL.setParameter("backURL", redirect);
 			portletURL.setParameter("portletResource", portletDisplay.getId());
 			portletURL.setParameter("modelResource", modelResource);
 			portletURL.setParameter(

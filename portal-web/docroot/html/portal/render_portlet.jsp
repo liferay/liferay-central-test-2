@@ -382,10 +382,10 @@ else {
 	urlConfiguration.setParameter("struts_action", "/portlet_configuration/edit_permissions");
 }
 
-urlConfiguration.setParameter("portletResource", portletDisplay.getId());
-urlConfiguration.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(plid.longValue(), portlet.getPortletId()));
 urlConfiguration.setParameter("redirect", currentURL);
 urlConfiguration.setParameter("backURL", currentURL);
+urlConfiguration.setParameter("portletResource", portletDisplay.getId());
+urlConfiguration.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(plid.longValue(), portlet.getPortletId()));
 
 portletDisplay.setURLConfiguration("javascript: self.location = '" + HttpUtil.encodeURL(urlConfiguration.toString()) + "&" + PortalUtil.getPortletNamespace(PortletKeys.PORTLET_CONFIGURATION) + "previewWidth=' + document.getElementById('p_p_id" + portletDisplay.getNamespace() + "').offsetWidth;");
 
