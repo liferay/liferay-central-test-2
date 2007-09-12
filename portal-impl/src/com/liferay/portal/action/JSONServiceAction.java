@@ -32,6 +32,7 @@ import com.liferay.util.JSONUtil;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -177,6 +178,9 @@ public class JSONServiceAction extends JSONAction {
 				 parameterTypeName.equals(Short.class.getName())) {
 
 			return new Short(ParamUtil.getShort(req, parameter));
+		}
+		else if (parameterTypeName.equals(Date.class.getName())) {
+			return new Date(ParamUtil.getLong(req, parameter));
 		}
 		else if (parameterTypeName.equals(String.class.getName())) {
 			return ParamUtil.getString(req, parameter);
