@@ -115,6 +115,8 @@ public class TagsAssetFinder {
 				sm.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
+			sm.append("[$DATES$]");
+
 			String sql = sm.toString();
 
 			sql = _getDates(sql, publishDate, expirationDate);
