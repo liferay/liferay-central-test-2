@@ -113,6 +113,12 @@ public class JournalArticleImageLocalServiceImpl
 		}
 	}
 
+	public JournalArticleImage getArticleImage(long articleImageId)
+		throws PortalException, SystemException {
+
+		return JournalArticleImageUtil.findByPrimaryKey(articleImageId);
+	}
+
 	public long getArticleImageId(
 			long groupId, String articleId, double version, String elName,
 			String languageId)

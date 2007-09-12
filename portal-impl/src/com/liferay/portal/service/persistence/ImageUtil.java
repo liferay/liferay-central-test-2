@@ -146,6 +146,44 @@ public class ImageUtil {
 		return getPersistence().fetchByPrimaryKey(imageId);
 	}
 
+	public static java.util.List findBySize(int size)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findBySize(size);
+	}
+
+	public static java.util.List findBySize(int size, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findBySize(size, begin, end);
+	}
+
+	public static java.util.List findBySize(int size, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findBySize(size, begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.Image findBySize_First(int size,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchImageException {
+		return getPersistence().findBySize_First(size, obc);
+	}
+
+	public static com.liferay.portal.model.Image findBySize_Last(int size,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchImageException {
+		return getPersistence().findBySize_Last(size, obc);
+	}
+
+	public static com.liferay.portal.model.Image[] findBySize_PrevAndNext(
+		long imageId, int size,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchImageException {
+		return getPersistence().findBySize_PrevAndNext(imageId, size, obc);
+	}
+
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -175,8 +213,18 @@ public class ImageUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeBySize(int size)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeBySize(size);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countBySize(int size)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countBySize(size);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

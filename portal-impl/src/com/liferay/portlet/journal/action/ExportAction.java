@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.action;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPortletPreferencesException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -39,6 +40,7 @@ import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.upgrade.util.IdReplacer;
@@ -52,6 +54,7 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
+import com.liferay.portlet.journal.NoSuchArticleImageException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.model.JournalArticleResource;
@@ -74,6 +77,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -96,9 +100,7 @@ public class ExportAction extends Action {
 
 	public static final String COMPANY_ID = "liferay.com";
 
-	public static final long DEFAULT_SITE_GROUP_ID = 14;
-
-	public static final long DEFAULT_CMS_GROUP_ID = 14;
+	public static final long DEFAULT_GROUP_ID = 14;
 
 	public static final long DEFAULT_USER_ID = 2;
 
@@ -117,11 +119,8 @@ public class ExportAction extends Action {
 				themeDisplay.getPermissionChecker();
 
 			if (permissionChecker.isOmniadmin()) {
-				long siteGroupId = ParamUtil.getLong(
-					req, "siteGroupId", DEFAULT_SITE_GROUP_ID);
-
-				long cmsGroupId = ParamUtil.getLong(
-					req, "cmsGroupId", DEFAULT_CMS_GROUP_ID);
+				long groupId = ParamUtil.getLong(
+					req, "groupId", DEFAULT_GROUP_ID);
 
 				_primaryKeys.clear();
 				_primaryKeyCount = 1500;
@@ -130,11 +129,10 @@ public class ExportAction extends Action {
 
 				List journalContentSearches = new ArrayList();
 
-				insertDataImage(zipWriter);
-				insertDataCMSLayout(
-					siteGroupId, zipWriter, journalContentSearches);
+				insertDataImage(groupId, zipWriter);
+				insertDataCMSLayout(groupId, zipWriter, journalContentSearches);
 				insertDataCMSContent(
-					cmsGroupId, zipWriter, journalContentSearches);
+					groupId, zipWriter, journalContentSearches);
 
 				String fileName = "journal.zip";
 
@@ -262,15 +260,14 @@ public class ExportAction extends Action {
 	}
 
 	protected void insertDataCMSContent(
-			long cmsGroupId, ZipWriter zipWriter, List journalContentSearches)
+			long groupId, ZipWriter zipWriter, List journalContentSearches)
 		throws Exception {
 
 		StringMaker sm = new StringMaker();
 
 		List igImages = new ArrayList();
 
-		Iterator itr = IGFolderLocalServiceUtil.getFolders(
-			cmsGroupId).iterator();
+		Iterator itr = IGFolderLocalServiceUtil.getFolders(groupId).iterator();
 
 		while (itr.hasNext()) {
 			IGFolder folder = (IGFolder)itr.next();
@@ -324,8 +321,7 @@ public class ExportAction extends Action {
 
 		sm.append("\n");
 
-		itr = JournalArticleLocalServiceUtil.getArticles(
-			cmsGroupId).iterator();
+		itr = JournalArticleLocalServiceUtil.getArticles(groupId).iterator();
 
 		while (itr.hasNext()) {
 			JournalArticle article = (JournalArticle)itr.next();
@@ -376,7 +372,7 @@ public class ExportAction extends Action {
 		sm.append("\n");
 
 		itr = JournalArticleImageLocalServiceUtil.getArticleImages(
-			cmsGroupId).iterator();
+			groupId).iterator();
 
 		while (itr.hasNext()) {
 			JournalArticleImage articleImage = (JournalArticleImage)itr.next();
@@ -399,7 +395,7 @@ public class ExportAction extends Action {
 		sm.append("\n");
 
 		itr = JournalArticleResourceLocalServiceUtil.getArticleResources(
-			cmsGroupId).iterator();
+			groupId).iterator();
 
 		while (itr.hasNext()) {
 			JournalArticleResource articleResource =
@@ -441,7 +437,7 @@ public class ExportAction extends Action {
 		sm.append("\n");
 
 		itr = JournalStructureLocalServiceUtil.getStructures(
-			cmsGroupId).iterator();
+			groupId).iterator();
 
 		while (itr.hasNext()) {
 			JournalStructure structure = (JournalStructure)itr.next();
@@ -470,8 +466,7 @@ public class ExportAction extends Action {
 
 		sm.append("\n");
 
-		itr = JournalTemplateLocalServiceUtil.getTemplates(
-			cmsGroupId).iterator();
+		itr = JournalTemplateLocalServiceUtil.getTemplates(groupId).iterator();
 
 		while (itr.hasNext()) {
 			JournalTemplate template = (JournalTemplate)itr.next();
@@ -510,20 +505,19 @@ public class ExportAction extends Action {
 	}
 
 	protected void insertDataCMSLayout(
-			long siteGroupId, ZipWriter zipWriter,
-			List journalContentSearches)
+			long groupId, ZipWriter zipWriter, List journalContentSearches)
 		throws Exception {
 
 		StringMaker sm = new StringMaker();
 
-		List layouts = LayoutLocalServiceUtil.getLayouts(siteGroupId, false);
+		List layouts = LayoutLocalServiceUtil.getLayouts(groupId, false);
 
 		sm.append("update LayoutSet ");
 		sm.append("set themeId = 'liferaynoir_WAR_liferaynoirtheme', ");
 		sm.append("pageCount = ");
 		sm.append(layouts.size());
 		sm.append(" where groupId = ");
-		sm.append(siteGroupId);
+		sm.append(groupId);
 		sm.append(" and privateLayout = FALSE;\n\n");
 
 		Collections.sort(layouts, new LayoutComparator(true));
@@ -532,6 +526,25 @@ public class ExportAction extends Action {
 
 		while (itr.hasNext()) {
 			Layout layout = (Layout)itr.next();
+
+			getNewPrimaryKey(layout.getPlid());
+		}
+
+		itr = layouts.iterator();
+
+		while (itr.hasNext()) {
+			Layout layout = (Layout)itr.next();
+
+			Properties props = layout.getTypeSettingsProperties();
+
+			long linkToPlid = GetterUtil.getLong(
+				props.getProperty("linkToPlid"));
+
+			if (linkToPlid > 0) {
+				long newLinkToPlid = getNewPrimaryKey(linkToPlid);
+
+				props.setProperty("linkToPlid", String.valueOf(newLinkToPlid));
+			}
 
 			sm.append("insert into Layout (");
 			sm.append("plid, groupId, companyId, privateLayout, layoutId, ");
@@ -667,13 +680,36 @@ public class ExportAction extends Action {
 		zipWriter.addEntry("portal-data-cms-layout.sql", sm);
 	}
 
-	protected void insertDataImage(ZipWriter zipWriter) throws Exception {
+	protected void insertDataImage(
+			long groupId, ZipWriter zipWriter)
+		throws Exception {
+
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = ImageLocalServiceUtil.getImages().iterator();
+		Iterator itr = ImageLocalServiceUtil.getImagesBySize(70000).iterator();
 
 		while (itr.hasNext()) {
 			Image image = (Image)itr.next();
+
+			try {
+				UserLocalServiceUtil.getUserByPortraitId(image.getImageId());
+
+				continue;
+			}
+			catch (NoSuchUserException nsue) {
+			}
+
+			try {
+				JournalArticleImage articleImage =
+					JournalArticleImageLocalServiceUtil.getArticleImage(
+						image.getImageId());
+
+				if (articleImage.getGroupId() != groupId) {
+					continue;
+				}
+			}
+			catch (NoSuchArticleImageException nsaie) {
+			}
 
 			sm.append("insert into Image (");
 			sm.append("imageId, modifiedDate, text_, type_, height, width, ");

@@ -349,6 +349,15 @@ public class UserLocalServiceUtil {
 		return userLocalService.getUserById(companyId, userId);
 	}
 
+	public static com.liferay.portal.model.User getUserByPortraitId(
+		long portraitId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getUserByPortraitId(portraitId);
+	}
+
 	public static com.liferay.portal.model.User getUserByScreenName(
 		long companyId, java.lang.String screenName)
 		throws com.liferay.portal.PortalException, 

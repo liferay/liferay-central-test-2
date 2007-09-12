@@ -341,6 +341,12 @@
 		<order by="asc">
 			<order-column name="imageId" />
 		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Size" return-type="Collection">
+			<finder-column name="size" comparator="&lt;" />
+		</finder>
 	</entity>
 	<entity name="Layout" local-service="true" remote-service="true">
 
@@ -1101,6 +1107,9 @@
 		</finder>
 		<finder name="ContactId" return-type="User">
 			<finder-column name="contactId" />
+		</finder>
+		<finder name="PortraitId" return-type="User">
+			<finder-column name="portraitId" />
 		</finder>
 		<finder name="C_U" return-type="User">
 			<finder-column name="companyId" />

@@ -66,6 +66,8 @@ create index IX_1A605E9F on IGFolder (groupId, parentFolderId);
 
 create index IX_4438CA80 on IGImage (folderId);
 
+create index IX_6A925A4D on Image (size_);
+
 create index IX_DFF98523 on JournalArticle (companyId);
 create index IX_9356F865 on JournalArticle (groupId);
 create index IX_68C0F69C on JournalArticle (groupId, articleId);
@@ -284,6 +286,7 @@ create index IX_765A87C6 on User_ (companyId, password_);
 create index IX_C5806019 on User_ (companyId, screenName);
 create index IX_9782AD88 on User_ (companyId, userId);
 create index IX_5ADBE171 on User_ (contactId);
+create index IX_A18034A4 on User_ (portraitId);
 
 create index LIFERAY_003 on Users_Permissions (permissionId);
 

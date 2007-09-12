@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
@@ -180,6 +181,192 @@ public class ImagePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List findBySize(int size) throws SystemException {
+		String finderClassName = Image.class.getName();
+		String finderMethodName = "findBySize";
+		String[] finderParams = new String[] { Integer.class.getName() };
+		Object[] finderArgs = new Object[] { new Integer(size) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Image WHERE ");
+				query.append("size_ < ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("imageId ASC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setInteger(queryPos++, size);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public List findBySize(int size, int begin, int end)
+		throws SystemException {
+		return findBySize(size, begin, end, null);
+	}
+
+	public List findBySize(int size, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+		String finderClassName = Image.class.getName();
+		String finderMethodName = "findBySize";
+		String[] finderParams = new String[] {
+				Integer.class.getName(), "java.lang.Integer",
+				"java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Integer(size), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.Image WHERE ");
+				query.append("size_ < ?");
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+				else {
+					query.append("ORDER BY ");
+					query.append("imageId ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setInteger(queryPos++, size);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public Image findBySize_First(int size, OrderByComparator obc)
+		throws NoSuchImageException, SystemException {
+		List list = findBySize(size, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No Image exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("size=");
+			msg.append(size);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchImageException(msg.toString());
+		}
+		else {
+			return (Image)list.get(0);
+		}
+	}
+
+	public Image findBySize_Last(int size, OrderByComparator obc)
+		throws NoSuchImageException, SystemException {
+		int count = countBySize(size);
+		List list = findBySize(size, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No Image exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("size=");
+			msg.append(size);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchImageException(msg.toString());
+		}
+		else {
+			return (Image)list.get(0);
+		}
+	}
+
+	public Image[] findBySize_PrevAndNext(long imageId, int size,
+		OrderByComparator obc) throws NoSuchImageException, SystemException {
+		Image image = findByPrimaryKey(imageId);
+		int count = countBySize(size);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.Image WHERE ");
+			query.append("size_ < ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("imageId ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setInteger(queryPos++, size);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, image);
+			Image[] array = new ImageImpl[3];
+			array[0] = (Image)objArray[0];
+			array[1] = (Image)objArray[1];
+			array[2] = (Image)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		Session session = null;
@@ -283,11 +470,72 @@ public class ImagePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeBySize(int size) throws SystemException {
+		Iterator itr = findBySize(size).iterator();
+
+		while (itr.hasNext()) {
+			Image image = (Image)itr.next();
+			remove(image);
+		}
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
 		while (itr.hasNext()) {
 			remove((Image)itr.next());
+		}
+	}
+
+	public int countBySize(int size) throws SystemException {
+		String finderClassName = Image.class.getName();
+		String finderMethodName = "countBySize";
+		String[] finderParams = new String[] { Integer.class.getName() };
+		Object[] finderArgs = new Object[] { new Integer(size) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Image WHERE ");
+				query.append("size_ < ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setInteger(queryPos++, size);
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

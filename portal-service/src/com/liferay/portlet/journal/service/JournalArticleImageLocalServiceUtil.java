@@ -96,6 +96,15 @@ public class JournalArticleImageLocalServiceUtil {
 		journalArticleImageLocalService.deleteImages(groupId, articleId, version);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticleImage getArticleImage(
+		long articleImageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		return journalArticleImageLocalService.getArticleImage(articleImageId);
+	}
+
 	public static long getArticleImageId(long groupId,
 		java.lang.String articleId, double version, java.lang.String elName,
 		java.lang.String languageId) throws com.liferay.portal.SystemException {

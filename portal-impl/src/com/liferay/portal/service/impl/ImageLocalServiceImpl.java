@@ -64,6 +64,10 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		return ImageUtil.findAll(begin, end);
 	}
 
+	public List getImagesBySize(int size) throws SystemException {
+		return ImageUtil.findBySize(size);
+	}
+
 	public Image updateImage(
 			long imageId, byte[] bytes, String type, int height, int width,
 			int size)

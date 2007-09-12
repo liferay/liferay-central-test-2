@@ -196,6 +196,18 @@ public class UserUtil {
 		return getPersistence().fetchByContactId(contactId);
 	}
 
+	public static com.liferay.portal.model.User findByPortraitId(
+		long portraitId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserException {
+		return getPersistence().findByPortraitId(portraitId);
+	}
+
+	public static com.liferay.portal.model.User fetchByPortraitId(
+		long portraitId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPortraitId(portraitId);
+	}
+
 	public static com.liferay.portal.model.User findByC_U(long companyId,
 		long userId)
 		throws com.liferay.portal.SystemException, 
@@ -328,6 +340,12 @@ public class UserUtil {
 		getPersistence().removeByContactId(contactId);
 	}
 
+	public static void removeByPortraitId(long portraitId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserException {
+		getPersistence().removeByPortraitId(portraitId);
+	}
+
 	public static void removeByC_U(long companyId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserException {
@@ -370,6 +388,11 @@ public class UserUtil {
 	public static int countByContactId(long contactId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByContactId(contactId);
+	}
+
+	public static int countByPortraitId(long portraitId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByPortraitId(portraitId);
 	}
 
 	public static int countByC_U(long companyId, long userId)

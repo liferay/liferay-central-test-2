@@ -93,6 +93,13 @@ public class ImageLocalServiceUtil {
 		return imageLocalService.getImages(begin, end);
 	}
 
+	public static java.util.List getImagesBySize(int size)
+		throws com.liferay.portal.SystemException {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		return imageLocalService.getImagesBySize(size);
+	}
+
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		byte[] bytes, java.lang.String type, int height, int width, int size)
 		throws com.liferay.portal.SystemException {

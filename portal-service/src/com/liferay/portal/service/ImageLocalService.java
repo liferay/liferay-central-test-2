@@ -69,6 +69,9 @@ public interface ImageLocalService {
 	public java.util.List getImages(int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getImagesBySize(int size)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Image updateImage(long imageId,
 		byte[] bytes, java.lang.String type, int height, int width, int size)
 		throws com.liferay.portal.SystemException;

@@ -498,6 +498,81 @@ public class UserPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public User findByPortraitId(long portraitId)
+		throws NoSuchUserException, SystemException {
+		User user = fetchByPortraitId(portraitId);
+
+		if (user == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No User exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("portraitId=");
+			msg.append(portraitId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchUserException(msg.toString());
+		}
+
+		return user;
+	}
+
+	public User fetchByPortraitId(long portraitId) throws SystemException {
+		String finderClassName = User.class.getName();
+		String finderMethodName = "fetchByPortraitId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(portraitId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("FROM com.liferay.portal.model.User WHERE ");
+				query.append("portraitId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, portraitId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (User)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (User)list.get(0);
+			}
+		}
+	}
+
 	public User findByC_U(long companyId, long userId)
 		throws NoSuchUserException, SystemException {
 		User user = fetchByC_U(companyId, userId);
@@ -1195,6 +1270,12 @@ public class UserPersistenceImpl extends BasePersistence
 		remove(user);
 	}
 
+	public void removeByPortraitId(long portraitId)
+		throws NoSuchUserException, SystemException {
+		User user = findByPortraitId(portraitId);
+		remove(user);
+	}
+
 	public void removeByC_U(long companyId, long userId)
 		throws NoSuchUserException, SystemException {
 		User user = findByC_U(companyId, userId);
@@ -1312,6 +1393,58 @@ public class UserPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 				int queryPos = 0;
 				q.setLong(queryPos++, contactId);
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByPortraitId(long portraitId) throws SystemException {
+		String finderClassName = User.class.getName();
+		String finderMethodName = "countByPortraitId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(portraitId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.User WHERE ");
+				query.append("portraitId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, portraitId);
 
 				Long count = null;
 				Iterator itr = q.list().iterator();

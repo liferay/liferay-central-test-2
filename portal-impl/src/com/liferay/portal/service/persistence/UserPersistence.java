@@ -87,6 +87,13 @@ public interface UserPersistence {
 	public com.liferay.portal.model.User fetchByContactId(long contactId)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.User findByPortraitId(long portraitId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserException;
+
+	public com.liferay.portal.model.User fetchByPortraitId(long portraitId)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.User findByC_U(long companyId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserException;
@@ -171,6 +178,10 @@ public interface UserPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserException;
 
+	public void removeByPortraitId(long portraitId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserException;
+
 	public void removeByC_U(long companyId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserException;
@@ -196,6 +207,9 @@ public interface UserPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByContactId(long contactId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByPortraitId(long portraitId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_U(long companyId, long userId)

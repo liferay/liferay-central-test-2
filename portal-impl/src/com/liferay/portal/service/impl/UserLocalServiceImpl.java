@@ -896,6 +896,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return UserUtil.findByC_U(companyId, userId);
 	}
 
+	public User getUserByPortraitId(long portraitId)
+		throws PortalException, SystemException {
+
+		return UserUtil.findByPortraitId(portraitId);
+	}
+
 	public User getUserByScreenName(long companyId, String screenName)
 		throws PortalException, SystemException {
 

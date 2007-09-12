@@ -54,6 +54,32 @@ public interface ImagePersistence {
 	public com.liferay.portal.model.Image fetchByPrimaryKey(long imageId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List findBySize(int size)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findBySize(int size, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findBySize(int size, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Image findBySize_First(int size,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchImageException;
+
+	public com.liferay.portal.model.Image findBySize_Last(int size,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchImageException;
+
+	public com.liferay.portal.model.Image[] findBySize_PrevAndNext(
+		long imageId, int size,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchImageException;
+
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -71,7 +97,12 @@ public interface ImagePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeBySize(int size)
+		throws com.liferay.portal.SystemException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countBySize(int size) throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
 }
