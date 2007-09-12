@@ -127,6 +127,13 @@ public interface BlogsEntryLocalService {
 	public int getCategoriesEntriesCount(java.util.List categoryIds)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getCompanyEntries(long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public int getCompanyEntriesCount(long companyId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getEntries(long categoryId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 

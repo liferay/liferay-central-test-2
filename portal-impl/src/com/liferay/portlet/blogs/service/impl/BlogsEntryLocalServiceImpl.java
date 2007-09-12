@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -275,6 +276,17 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		return BlogsEntryFinder.countByCategoryIds(categoryIds);
+	}
+
+	public List getCompanyEntries(
+			long companyId, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return BlogsEntryUtil.findByCompanyId(companyId, begin, end, obc);
+	}
+
+	public int getCompanyEntriesCount(long companyId) throws SystemException {
+		return BlogsEntryUtil.countByCompanyId(companyId);
 	}
 
 	public List getEntries(long categoryId, int begin, int end)

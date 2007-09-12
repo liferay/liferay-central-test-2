@@ -187,6 +187,22 @@ public class BlogsEntryLocalServiceUtil {
 		return blogsEntryLocalService.getCategoriesEntriesCount(categoryIds);
 	}
 
+	public static java.util.List getCompanyEntries(long companyId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getCompanyEntries(companyId, begin, end,
+			obc);
+	}
+
+	public static int getCompanyEntriesCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getCompanyEntriesCount(companyId);
+	}
+
 	public static java.util.List getEntries(long categoryId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
