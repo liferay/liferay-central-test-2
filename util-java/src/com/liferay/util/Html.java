@@ -139,68 +139,11 @@ public class Html {
 	}
 
 	public static String stripBetween(String text, String tag) {
-		StringMaker sm = new StringMaker();
-
-		String tagBegin = "<" + tag;
-		String tagEnd = "</" + tag + ">";
-
-		int x = 0;
-		int y = text.indexOf(tagBegin);
-
-		while (y != -1) {
-			sm.append(text.substring(x, y));
-
-			x = text.indexOf(tagEnd, y) + tagEnd.length();
-			y = text.indexOf(tagBegin, x);
-		}
-
-		if (y == -1) {
-			sm.append(text.substring(x, text.length()));
-		}
-
-		return sm.toString();
+		return StringUtil.stripBetween(text, "<" + tag, "</" + tag + ">");
 	}
 
 	public static String stripComments(String text) {
-		if (text == null) {
-			return null;
-		}
-
-		StringMaker sm = new StringMaker(text.length());
-
-		int x = 0;
-		int y = text.indexOf("<!--");
-
-		while (y != -1) {
-			sm.append(text.substring(x, y));
-
-			x = text.indexOf("-->", y) + 3;
-			y = text.indexOf("<!--", x);
-		}
-
-		if (y == -1) {
-			sm.append(text.substring(x, text.length()));
-		}
-
-		return sm.toString();
-
-		/*
-		int x = text.indexOf("<!--");
-		int y = text.indexOf("-->");
-
-		if (x != -1 && y != -1) {
-			return stripComments(
-				text.substring(0, x) + text.substring(y + 3, text.length()));
-		}
-		*/
-
-		/*
-		Perl5Util util = new Perl5Util();
-
-		text = util.substitute("s/<!--.*-->//g", text);
-		*/
-
-		//return text;
+		return StringUtil.stripBetween(text, "<!--", "-->");
 	}
 
 	public static String stripHtml(String text) {

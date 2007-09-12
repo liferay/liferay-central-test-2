@@ -864,6 +864,30 @@ public class StringUtil {
 		}
 	}
 
+	public static String stripBetween(String text, String begin, String end) {
+		if (text == null) {
+			return null;
+		}
+
+		StringMaker sm = new StringMaker();
+
+		int x = 0;
+		int y = text.indexOf(begin);
+
+		while (y != -1) {
+			sm.append(text.substring(x, y));
+
+			x = text.indexOf(end, y) + end.length();
+			y = text.indexOf(begin, x);
+		}
+
+		if (y == -1) {
+			sm.append(text.substring(x, text.length()));
+		}
+
+		return sm.toString();
+	}
+
 	public static String trim(String s) {
 		return trim(s, null);
 	}
