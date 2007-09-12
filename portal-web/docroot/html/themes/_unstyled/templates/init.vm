@@ -58,6 +58,8 @@
 
 #set ($group_id = $theme_display.getPortletGroupId())
 
+#set ($theme_settings = $themeDisplay.getTheme().getSettings())
+
 ## ---------- URLs ---------- ##
 
 #set ($show_add_content = $theme_display.isShowAddContentIcon())
