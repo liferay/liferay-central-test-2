@@ -54,6 +54,7 @@ import javax.mail.Part;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -104,13 +105,22 @@ public class MessageListenerImpl implements MessageListener {
 		throws MessageListenerException {
 
 		try {
+			StopWatch stopWatch = null;
+
+			if (_log.isDebugEnabled()) {
+				stopWatch = new StopWatch();
+
+				stopWatch.start();
+
+				_log.debug(
+					"Deliver message from " + from + " to " + recipient);
+			}
+
 			Company company = _getCompany(recipient);
 			long categoryId = _getCategoryId(recipient);
 
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Deliver message from " + from + " to category " +
-						categoryId);
+				_log.debug("Category id " + categoryId);
 			}
 
 			User user = UserLocalServiceUtil.getUserByEmailAddress(
@@ -171,6 +181,11 @@ public class MessageListenerImpl implements MessageListener {
 					prevMessage.getMessageId(), message.getSubject(),
 					collector.getBody(), collector.getFiles(), false, 0.0, null,
 					true, true);
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Delivering message takes " + stopWatch.getTime() + " ms");
 			}
 		}
 		catch (PrincipalException pe) {
