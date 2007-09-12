@@ -308,6 +308,7 @@ public class MailEngine {
 
 			if (inReplyTo!= null) {
 				msg.setHeader("In-Reply-To", inReplyTo);
+				msg.setHeader("References", inReplyTo);
 			}
 
 			_send(session, msg);

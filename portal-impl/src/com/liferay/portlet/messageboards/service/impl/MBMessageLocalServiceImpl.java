@@ -1282,8 +1282,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				subject = subjectPrefix + subject;
 			}
 
-			String inReplyTo = MBUtil.getMailId(
-				message.getMessageId(), company.getMx());
+			String inReplyTo = null;
+
+			if (message.getParentMessageId() !=
+					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
+				inReplyTo = MBUtil.getMailId(
+					message.getParentMessageId(), company.getMx());
+			}
 
 			MBMessageProducer.produce(
 				new String[] {

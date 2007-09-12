@@ -129,27 +129,42 @@ public class MessageListenerImpl implements MessageListener {
 			MimeMessage message = new MimeMessage(
 				MailEngine.getSession(), data);
 
-			String[] inReplyToHeaders = message.getHeader("In-Reply-To");
+			// To discover the parent we check the References header as
+			// explained in http://cr.yp.to/immhf/thread.html But some MUA
+			// such as Yahoo Mail use In-Reply-To so we check that second
 
-			MBMessage prevMessage = null;
+			String parent = null;
 
-			if ((inReplyToHeaders != null) && (inReplyToHeaders.length > 0)) {
-				String inReplyTo = inReplyToHeaders[0];
+			String[] references = message.getHeader("References");
+
+			if ((references != null) && (references.length > 0)) {
+				parent = references[0].substring(
+					references[0].lastIndexOf("<"));
+			}
+
+			if (parent == null) {
+				String[] inReplyToHeaders = message.getHeader("In-Reply-To");
+				parent = inReplyToHeaders[0];
+			}
+
+			MBMessage parentMessage = null;
+
+			if (parent != null) {
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("In-Reply-To " + inReplyTo);
+					_log.debug("Parent " + parent);
 				}
 
-				long prevMessageId = MBUtil.getMessageId(inReplyTo);
+				long parentMessageId = MBUtil.getMessageId(parent);
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Previous message id " + prevMessageId);
+					_log.debug("Previous message id " + parentMessageId);
 				}
 
 				try {
-					if (prevMessageId > 0) {
-						prevMessage = MBMessageLocalServiceUtil.getMessage(
-							prevMessageId);
+					if (parentMessageId > 0) {
+						parentMessage = MBMessageLocalServiceUtil.getMessage(
+							parentMessageId);
 					}
 				}
 				catch (NoSuchMessageException nsme) {
@@ -161,7 +176,7 @@ public class MessageListenerImpl implements MessageListener {
 			}
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Previous message " + prevMessage);
+				_log.debug("Previous message " + parentMessage);
 			}
 
 			MBMailMessage collector = new MBMailMessage();
@@ -170,15 +185,15 @@ public class MessageListenerImpl implements MessageListener {
 
 			PrincipalBean.setThreadValues(user);
 
-			if (prevMessage == null) {
+			if (parentMessage == null) {
 				MBMessageServiceUtil.addMessage(
 					categoryId, message.getSubject(), collector.getBody(),
 					collector.getFiles(), false, 0.0, null, true, true);
 			}
 			else {
 				MBMessageServiceUtil.addMessage(
-					categoryId, prevMessage.getThreadId(),
-					prevMessage.getMessageId(), message.getSubject(),
+					categoryId, parentMessage.getThreadId(),
+					parentMessage.getMessageId(), message.getSubject(),
 					collector.getBody(), collector.getFiles(), false, 0.0, null,
 					true, true);
 			}

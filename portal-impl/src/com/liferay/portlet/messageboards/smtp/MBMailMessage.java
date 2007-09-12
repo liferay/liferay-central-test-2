@@ -63,7 +63,7 @@ public class MBMailMessage {
 
 	public String getBody() {
 		if (Validator.isNotNull(_plainBody)) {
-			return "<PRE>" + GetterUtil.getString(_plainBody) + "</PRE>";
+			return GetterUtil.getString(_plainBody);
 		}
 		else if (Validator.isNotNull(_htmlBody)) {
 			return Html.stripHtml(_htmlBody);
