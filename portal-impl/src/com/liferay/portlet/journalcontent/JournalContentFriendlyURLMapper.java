@@ -150,9 +150,9 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 
 	private static final String _MAPPING = "journal_content";
 
-	private static final String _PORTLET_ID = PortletKeys.JOURNAL_CONTENT;
-
 	private static final String _PORTLET_DEFAULT_INSTANCE =
 		PortletKeys.JOURNAL_CONTENT + "_INSTANCE_0000";
+
+	private static final String _PORTLET_ID = PortletKeys.JOURNAL_CONTENT;
 
 }
