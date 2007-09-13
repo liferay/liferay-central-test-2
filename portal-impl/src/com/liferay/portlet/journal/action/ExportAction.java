@@ -332,13 +332,14 @@ public class ExportAction extends Action {
 					article.getVersion())) {
 
 				sm.append("insert into JournalArticle (");
-				sm.append("id_, groupId, companyId, userId, userName, ");
+				sm.append("id_, resourcePrimKey, groupId, companyId, userId, userName, ");
 				sm.append("createDate, modifiedDate, articleId, version, ");
 				sm.append("title, description, content, type_, structureId, ");
 				sm.append("templateId, displayDate, approved, ");
 				sm.append("approvedByUserId, approvedByUserName, expired");
 				sm.append(") values (");
 				addPKColumn(sm, article.getId());
+				addPKColumn(sm, article.getResourcePrimKey());
 				addColumn(sm, article.getGroupId());
 				addColumn(sm, article.getCompanyId());
 				//addColumn(sm, article.getUserId());
@@ -361,9 +362,10 @@ public class ExportAction extends Action {
 				//addColumn(sm, article.getApprovedByUserName());
 				addColumn(sm, DEFAULT_USER_ID);
 				addColumn(sm, DEFAULT_USER_NAME);
+				//addColumn(sm, article.getApprovedDate(), false);
 				addColumn(sm, article.getExpired());
-				//addColumn(sm, article.getExpirationDate());
-				//addColumn(sm, article.getReviewDate());
+				//addColumn(sm, article.getExpirationDate(), false);
+				//addColumn(sm, article.getReviewDate(), false);
 				removeTrailingComma(sm);
 				sm.append(");\n");
 			}

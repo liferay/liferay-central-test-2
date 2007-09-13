@@ -57,7 +57,10 @@ import org.hibernate.dialect.InformixDialect;
 import org.hibernate.dialect.InterbaseDialect;
 import org.hibernate.dialect.JDataStoreDialect;
 import org.hibernate.dialect.MySQLDialect;
+import org.hibernate.dialect.Oracle10gDialect;
+import org.hibernate.dialect.Oracle8iDialect;
 import org.hibernate.dialect.Oracle9Dialect;
+import org.hibernate.dialect.Oracle9iDialect;
 import org.hibernate.dialect.OracleDialect;
 import org.hibernate.dialect.PostgreSQLDialect;
 import org.hibernate.dialect.SAPDBDialect;
@@ -134,7 +137,10 @@ public abstract class DBUtil {
 			_dbUtil = MySQLUtil.getInstance();
 		}
 		else if (dialect instanceof OracleDialect ||
-				 dialect instanceof Oracle9Dialect) {
+				 dialect instanceof Oracle8iDialect ||
+				 dialect instanceof Oracle9Dialect ||
+				 dialect instanceof Oracle9iDialect ||
+				 dialect instanceof Oracle10gDialect) {
 
 			_dbUtil = OracleUtil.getInstance();
 		}
