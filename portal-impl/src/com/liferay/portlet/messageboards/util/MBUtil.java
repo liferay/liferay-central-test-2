@@ -332,9 +332,9 @@ public class MBUtil {
 		}
 	}
 
-	public static String getMailId(long messageId, String mx) {
-		return StringPool.LESS_THAN + messageId + StringPool.PERIOD +
-			SMTP_PORTLET_PREFIX + StringPool.AT +
+	public static String getMailId(String mx, long categoryId, long messageId) {
+		return StringPool.LESS_THAN + SMTP_PORTLET_PREFIX + categoryId +
+			StringPool.PERIOD + messageId + StringPool.AT +
 				PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) +
 					StringPool.PERIOD + mx + StringPool.GREATER_THAN;
 	}
@@ -347,14 +347,19 @@ public class MBUtil {
 
 	public static long getMessageId(String mailId) {
 		int x = mailId.indexOf(StringPool.LESS_THAN) + 1;
-		int y = mailId.indexOf(StringPool.PERIOD);
+		int y = mailId.indexOf(StringPool.AT);
+
+		long messageId = 0;
 
 		if ((x > 0 ) && (y != -1)) {
-			return GetterUtil.getLong(mailId.substring(x, y));
+			String right = mailId.substring(x, y);
+			int z = right.indexOf(StringPool.PERIOD);
+			if (z != -1) {
+				messageId = GetterUtil.getLong(right.substring(z));
+			}
 		}
-		else {
-			return 0;
-		}
+
+		return messageId;
 	}
 
 	public static String getRanksKey(String languageId) {

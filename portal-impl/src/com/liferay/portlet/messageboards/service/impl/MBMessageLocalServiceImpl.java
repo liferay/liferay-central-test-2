@@ -1158,7 +1158,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			String replyToAddress = mailingListAddress;
 			String messageId = MBUtil.getMailId(
-				message.getMessageId(), company.getMx());
+				company.getMx(), message.getCategoryId(),
+				message.getMessageId());
 
 			fromName = StringUtil.replace(
 				fromName,
@@ -1287,7 +1288,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			if (message.getParentMessageId() !=
 					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
 				inReplyTo = MBUtil.getMailId(
-					message.getParentMessageId(), company.getMx());
+					company.getMx(), message.getCategoryId(),
+					message.getParentMessageId());
 			}
 
 			MBMessageProducer.produce(
