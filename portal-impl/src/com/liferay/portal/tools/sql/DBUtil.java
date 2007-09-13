@@ -624,11 +624,10 @@ public abstract class DBUtil {
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			if (!line.startsWith("insert into Image") &&
-				!line.startsWith("insert into JournalArticle") &&
-				!line.startsWith("insert into JournalStructure") &&
-				!line.startsWith("insert into JournalTemplate") &&
-				!line.startsWith("insert into ShoppingItem")) {
+			if (!line.startsWith("insert into Image (") &&
+				!line.startsWith("insert into JournalArticle (") &&
+				!line.startsWith("insert into JournalStructure (") &&
+				!line.startsWith("insert into JournalTemplate (")) {
 
 				sm.append(line);
 				sm.append("\n");
