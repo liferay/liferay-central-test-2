@@ -33,6 +33,8 @@ long imageId = BeanParamUtil.getLong(image, request, "imageId");
 
 long folderId = BeanParamUtil.getLong(image, request, "folderId");
 
+String tagsEntries = ParamUtil.getString(renderRequest, "tagsEntries");
+
 Image largeImage = null;
 
 if (image != null) {
@@ -120,7 +122,9 @@ String uploadProgressId = "igImageUploadProgress";
 	<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
 	<portlet:param name="imageId" value="<%= String.valueOf(imageId) %>" />
 	<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-	<portlet:param name="tagsEntries" value='<%= ParamUtil.getString(renderRequest, "tagsEntries") %>' />
+	<c:if test="<%= Validator.isNotNull(tagsEntries) %>">
+		<portlet:param name="tagsEntries" value='<%= tagsEntries %>' />
+	</c:if>
 </portlet:renderURL>
 
 <liferay-ui:upload-progress

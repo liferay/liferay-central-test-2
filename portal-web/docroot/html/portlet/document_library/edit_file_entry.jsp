@@ -36,6 +36,8 @@ DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRA
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
 
+String tagsEntries = ParamUtil.getString(renderRequest, "tagsEntries");
+
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
@@ -209,7 +211,9 @@ portletURL.setParameter("name", name);
 		<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
 		<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		<portlet:param name="name" value="<%= name %>" />
-		<portlet:param name="tagsEntries" value='<%= ParamUtil.getString(renderRequest, "tagsEntries") %>' />
+		<c:if test="<%= Validator.isNotNull(tagsEntries) %>">
+			<portlet:param name="tagsEntries" value='<%= tagsEntries %>' />
+		</c:if>
 	</portlet:renderURL>
 
 	<liferay-ui:upload-progress
