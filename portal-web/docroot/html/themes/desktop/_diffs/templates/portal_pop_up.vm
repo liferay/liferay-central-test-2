@@ -41,6 +41,8 @@
 
 $theme.include($content_include)
 
+$theme.include($bottom_ext_include)
+
 </body>
 
 </html>

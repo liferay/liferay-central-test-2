@@ -211,8 +211,9 @@ portletURL.setParameter("name", name);
 		<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
 		<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		<portlet:param name="name" value="<%= name %>" />
+
 		<c:if test="<%= Validator.isNotNull(tagsEntries) %>">
-			<portlet:param name="tagsEntries" value='<%= tagsEntries %>' />
+			<portlet:param name="tagsEntries" value="<%= tagsEntries %>" />
 		</c:if>
 	</portlet:renderURL>
 

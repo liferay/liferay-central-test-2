@@ -36,15 +36,15 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -1134,6 +1134,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			Company company = CompanyUtil.findByPrimaryKey(
 				message.getCompanyId());
 
+			Group group = GroupLocalServiceUtil.getGroup(category.getGroupId());
+
 			User user = UserUtil.findByPrimaryKey(message.getUserId());
 
 			List categoryIds = new ArrayList();
@@ -1163,14 +1165,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				company.getMx(), message.getCategoryId(),
 				message.getMessageId());
 
-			Group group = GroupLocalServiceUtil.getGroup(category.getGroupId());
-
 			fromName = StringUtil.replace(
 				fromName,
 				new String[] {
 					"[$COMPANY_ID$]",
-					"[$COMPANY_NAME$]",
 					"[$COMPANY_MX$]",
+					"[$COMPANY_NAME$]",
 					"[$COMMUNITY_NAME$]",
 					"[$MAILING_LIST_ADDRESS$]",
 					"[$MESSAGE_USER_ADDRESS$]",
@@ -1179,8 +1179,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				},
 				new String[] {
 					String.valueOf(company.getCompanyId()),
-					company.getName(),
 					company.getMx(),
+					company.getName(),
 					group.getName(),
 					mailingListAddress,
 					user.getEmailAddress(),
@@ -1192,8 +1192,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				fromAddress,
 				new String[] {
 					"[$COMPANY_ID$]",
-					"[$COMPANY_NAME$]",
 					"[$COMPANY_MX$]",
+					"[$COMPANY_NAME$]",
 					"[$COMMUNITY_NAME$]",
 					"[$MAILING_LIST_ADDRESS$]",
 					"[$MESSAGE_USER_ADDRESS$]",
@@ -1202,8 +1202,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				},
 				new String[] {
 					String.valueOf(company.getCompanyId()),
-					company.getName(),
 					company.getMx(),
+					company.getName(),
 					group.getName(),
 					mailingListAddress,
 					user.getEmailAddress(),
@@ -1236,6 +1236,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				new String[] {
 					"[$CATEGORY_NAME$]",
 					"[$COMPANY_ID$]",
+					"[$COMPANY_MX$]",
+					"[$COMPANY_NAME$]",
+					"[$COMMUNITY_NAME$]",
 					"[$FROM_ADDRESS$]",
 					"[$FROM_NAME$]",
   					"[$MAILING_LIST_ADDRESS$]",
@@ -1250,6 +1253,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				new String[] {
 					category.getName(),
 					String.valueOf(company.getCompanyId()),
+					company.getMx(),
+					company.getName(),
+					group.getName(),
 					fromAddress,
 					fromName,
 					mailingListAddress,
@@ -1267,6 +1273,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				new String[] {
 					"[$CATEGORY_NAME$]",
 					"[$COMPANY_ID$]",
+					"[$COMPANY_MX$]",
+					"[$COMPANY_NAME$]",
+					"[$COMMUNITY_NAME$]",
 					"[$FROM_ADDRESS$]",
 					"[$FROM_NAME$]",
   					"[$MAILING_LIST_ADDRESS$]",
@@ -1281,6 +1290,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				new String[] {
 					category.getName(),
 					String.valueOf(company.getCompanyId()),
+					company.getMx(),
+					company.getName(),
+					group.getName(),
 					fromAddress,
 					fromName,
 					mailingListAddress,
@@ -1303,6 +1315,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			if (message.getParentMessageId() !=
 					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
+
 				inReplyTo = MBUtil.getMailId(
 					company.getMx(), message.getCategoryId(),
 					message.getParentMessageId());

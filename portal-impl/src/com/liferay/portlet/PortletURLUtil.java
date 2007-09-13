@@ -25,9 +25,11 @@ package com.liferay.portlet;
 import java.util.Enumeration;
 
 import javax.portlet.PortletException;
+import javax.portlet.PortletMode;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 /**
  * <a href="PortletURLUtil.java.html"><b><i>View Source</i></b></a>
@@ -87,21 +89,32 @@ public class PortletURLUtil {
 			PortletURLImpl portletURLImpl, boolean action, RenderResponse res)
 		throws PortletException {
 
-		PortletURL newURL = null;
+		PortletURLImpl newURLImpl = null;
 
 		if (action) {
-			newURL = res.createActionURL();
+			newURLImpl = (PortletURLImpl)res.createActionURL();
 		}
 		else {
-			newURL = res.createRenderURL();
+			newURLImpl = (PortletURLImpl)res.createRenderURL();
 		}
 
-		newURL.setWindowState(portletURLImpl.getWindowState());
-		newURL.setPortletMode(portletURLImpl.getPortletMode());
+		newURLImpl.setPortletName(portletURLImpl.getPortletName());
 
-		newURL.setParameters(portletURLImpl.getParameterMap());
+		WindowState windowState = portletURLImpl.getWindowState();
 
-		return newURL;
+		if (windowState != null) {
+			newURLImpl.setWindowState(windowState);
+		}
+
+		PortletMode portletMode = portletURLImpl.getPortletMode();
+
+		if (portletMode != null) {
+			newURLImpl.setPortletMode(portletMode);
+		}
+
+		newURLImpl.setParameters(portletURLImpl.getParameterMap());
+
+		return newURLImpl;
 	}
 
 	private static final int _CURRENT_URL_PARAMETER_THRESHOLD = 32768;

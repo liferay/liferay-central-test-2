@@ -26,7 +26,6 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -40,10 +39,10 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 import com.liferay.portlet.tags.util.TagsAssetValidator;
+import com.liferay.util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -158,11 +157,6 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		return TagsAssetUtil.countByCompanyId(companyId);
 	}
 
-	public List getTagsEntries(long assetId)
-		throws PortalException, SystemException {
-		return TagsAssetUtil.getTagsEntries(assetId);
-	}
-
 	public TagsAsset updateAsset(
 			long userId, String className, long classPK, String[] entryNames)
 		throws PortalException, SystemException {
@@ -269,22 +263,11 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			String portletTitle = PortalUtil.getPortletTitle(
 				portletId, asset.getCompanyId(), languageId);
 
-			StringMaker sm = new StringMaker();
+			List tagsEntriesList = TagsAssetUtil.getTagsEntries(
+				asset.getAssetId());
 
-			Iterator itr = TagsAssetUtil.getTagsEntries(
-				asset.getAssetId()).iterator();
-
-			while (itr.hasNext()) {
-				TagsEntry entry = (TagsEntry)itr.next();
-
-				sm.append(entry.getName());
-
-				if (itr.hasNext()) {
-					sm.append(", ");
-				}
-			}
-
-			String tagsEntries = sm.toString();
+			String tagsEntries = ListUtil.toString(
+				tagsEntriesList, "name", ", ");
 
 			TagsAssetDisplay assetDisplay = new TagsAssetDisplay();
 

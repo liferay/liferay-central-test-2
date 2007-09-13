@@ -13,7 +13,7 @@
 		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 		%>
 
-		<a href="<%= entry.getUrl() %>"><%= entry.getName() %></a>
+		<a href="<%= themeDisplay.getPathMain() %>/bookmarks/open_entry?entryId=<%= entry.getEntryId() %>" target="_blank"><%= entry.getName() %></a>
 
 		<p class="journal-content-field-comments"><%= entry.getComments() %></p>
 	</c:when>
@@ -66,7 +66,6 @@
 					</div>
 				</c:if>
 			</c:if>
-
 		</c:if>
 	</c:when>
 	<c:when test="<%= className.equals(WikiPage.class.getName()) %>">

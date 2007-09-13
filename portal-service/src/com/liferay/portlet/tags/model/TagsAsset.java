@@ -22,9 +22,6 @@
 
 package com.liferay.portlet.tags.model;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.PortalException;
-
 /**
  * <a href="TagsAsset.java.html"><b><i>View Source</i></b></a>
  *
@@ -51,5 +48,7 @@ import com.liferay.portal.PortalException;
  *
  */
 public interface TagsAsset extends TagsAssetModel {
-	public java.lang.String getTagsEntries() throws SystemException, PortalException;
+	public java.util.List getEntries()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

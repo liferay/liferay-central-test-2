@@ -46,5 +46,10 @@ try {
 <%
 }
 catch (Exception e) {
+	_log.error(e.getMessage());
 }
+%>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.tagged_content.view_content.jsp");
 %>

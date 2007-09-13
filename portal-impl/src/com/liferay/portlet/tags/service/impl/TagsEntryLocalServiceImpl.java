@@ -151,6 +151,12 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 	}
 
+	public List getAssetEntries(long assetId)
+		throws PortalException, SystemException {
+
+		return TagsAssetUtil.getTagsEntries(assetId);
+	}
+
 	public List getEntries() throws SystemException {
 		return TagsEntryUtil.findAll();
 	}

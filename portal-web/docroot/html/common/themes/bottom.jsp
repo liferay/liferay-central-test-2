@@ -156,7 +156,7 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 
 			String footerPortalCssPath = request.getContextPath() + footerPortalCss;
 
-			if (!footerPortalCssPaths.contains(footerPortalCssPath)) {
+			if (!footerPortalCssPaths.contains(footerPortalCssPath) && !themeDisplay.isIncludedJs(footerPortalCssPath)) {
 				footerPortalCssPaths.add(footerPortalCssPath);
 	%>
 

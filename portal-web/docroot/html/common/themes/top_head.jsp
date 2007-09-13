@@ -154,7 +154,7 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 
 			String headerPortalJavaScriptPath = request.getContextPath() + headerPortalJavaScript;
 
-			if (!headerPortalJavaScriptPaths.contains(headerPortalJavaScriptPath)) {
+			if (!headerPortalJavaScriptPaths.contains(headerPortalJavaScriptPath) && !themeDisplay.isIncludedJs(headerPortalJavaScriptPath)) {
 				headerPortalJavaScriptPaths.add(headerPortalJavaScriptPath);
 	%>
 

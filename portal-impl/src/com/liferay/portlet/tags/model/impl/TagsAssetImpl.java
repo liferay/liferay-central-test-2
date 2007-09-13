@@ -24,12 +24,9 @@ package com.liferay.portlet.tags.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portlet.tags.model.TagsAsset;
-import com.liferay.portlet.tags.model.TagsEntry;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -43,24 +40,8 @@ public class TagsAssetImpl extends TagsAssetModelImpl implements TagsAsset {
 	public TagsAssetImpl() {
 	}
 
-	public String getTagsEntries() throws SystemException, PortalException {
-		List entries = TagsAssetLocalServiceUtil.getTagsEntries(getAssetId());
-
-		Iterator itr = entries.iterator();
-
-		StringMaker sm = new StringMaker();
-
-		while (itr.hasNext()) {
-			TagsEntry entry = (TagsEntry)itr.next();
-
-			sm.append(entry.getName());
-
-			if (itr.hasNext()) {
-				sm.append(", ");
-			}
-		}
-
-		return sm.toString();
+	public List getEntries() throws PortalException, SystemException {
+		return TagsEntryLocalServiceUtil.getAssetEntries(getAssetId());
 	}
 
 }

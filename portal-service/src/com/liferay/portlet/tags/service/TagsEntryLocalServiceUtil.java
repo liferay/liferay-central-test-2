@@ -106,6 +106,14 @@ public class TagsEntryLocalServiceUtil {
 		return tagsEntryLocalService.hasEntry(companyId, name);
 	}
 
+	public static java.util.List getAssetEntries(long assetId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.getAssetEntries(assetId);
+	}
+
 	public static java.util.List getEntries()
 		throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();

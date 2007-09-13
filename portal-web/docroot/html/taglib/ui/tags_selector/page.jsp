@@ -46,6 +46,8 @@ String curTagsParam = request.getParameter(hiddenInput);
 if (curTagsParam != null) {
 	curTags = curTagsParam;
 }
+
+themeDisplay.setIncludeServiceJs(true);
 %>
 
 <input id="<%= namespace %><%= hiddenInput %>" type="hidden" />

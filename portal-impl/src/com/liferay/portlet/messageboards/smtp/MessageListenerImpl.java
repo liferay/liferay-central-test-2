@@ -129,33 +129,34 @@ public class MessageListenerImpl implements MessageListener {
 			MimeMessage message = new MimeMessage(
 				MailEngine.getSession(), data);
 
-			// To discover the parent we check the References header as
-			// explained in http://cr.yp.to/immhf/thread.html But some MUA
-			// such as Yahoo Mail use In-Reply-To so we check that second
+			// To discover the parent, check the "References" header as
+			// explained in http://cr.yp.to/immhf/thread.html. Some mail clients
+			// such as Yahoo! Mail use the "In-Reply-To" header, so we check
+			// that as well.
 
-			String parent = null;
+			String parentHeader = null;
 
 			String[] references = message.getHeader("References");
 
 			if ((references != null) && (references.length > 0)) {
-				parent = references[0].substring(
+				parentHeader = references[0].substring(
 					references[0].lastIndexOf("<"));
 			}
 
-			if (parent == null) {
+			if (parentHeader == null) {
 				String[] inReplyToHeaders = message.getHeader("In-Reply-To");
-				parent = inReplyToHeaders[0];
+
+				parentHeader = inReplyToHeaders[0];
 			}
 
 			MBMessage parentMessage = null;
 
-			if (parent != null) {
-
+			if (parentHeader != null) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Parent " + parent);
+					_log.debug("Parent header " + parentHeader);
 				}
 
-				long parentMessageId = MBUtil.getMessageId(parent);
+				long parentMessageId = MBUtil.getMessageId(parentHeader);
 
 				if (_log.isDebugEnabled()) {
 					_log.debug("Previous message id " + parentMessageId);

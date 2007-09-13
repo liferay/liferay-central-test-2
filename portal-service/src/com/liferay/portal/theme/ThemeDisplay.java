@@ -685,6 +685,37 @@ public class ThemeDisplay implements Serializable {
 		_includePortletCssJs = includePortletCssJs;
 	}
 
+	public boolean isIncludeServiceJs() {
+		return _includeServiceJs;
+	}
+
+	public void setIncludeServiceJs(boolean includeServiceJs) {
+		_includeServiceJs = includeServiceJs;
+	}
+
+	public boolean isIncludedJs(String js) {
+		String path = getPathJavaScript();
+
+		if (isIncludeCalendarJs() &&
+			js.equals(path + "/calendar/calendar_stripped.js")) {
+
+			return true;
+		}
+		else if (isIncludePortletCssJs() &&
+				 js.equals(path + "/liferay/portlet_css_packed.js")) {
+
+			return true;
+		}
+		else if (isIncludeServiceJs() &&
+				 js.equals(path + "/liferay/service_packed.js")) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public PortletDisplay getPortletDisplay() {
 		return _portletDisplay;
 	}
@@ -766,6 +797,7 @@ public class ThemeDisplay implements Serializable {
 		_tilesSelectable = false;
 		_includeCalendarJs = false;
 		_includePortletCssJs = false;
+		_includeServiceJs = false;
 		_portletDisplay.recycle();
 	}
 
@@ -841,6 +873,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _tilesSelectable;
 	private boolean _includeCalendarJs;
 	private boolean _includePortletCssJs;
+	private boolean _includeServiceJs;
 	private PortletDisplay _portletDisplay = new PortletDisplay();
 
 }

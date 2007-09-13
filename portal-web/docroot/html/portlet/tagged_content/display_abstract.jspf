@@ -73,7 +73,6 @@ else if (className.equals(JournalArticle.class.getName())) {
 	viewURL = articleURL.toString();
 
 	viewURLMessage = "read-more";
-
 }
 
 // URLs set through the asset override automatically generated URLs

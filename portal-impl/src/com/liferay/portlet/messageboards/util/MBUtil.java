@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.util;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -333,16 +334,33 @@ public class MBUtil {
 	}
 
 	public static String getMailId(String mx, long categoryId, long messageId) {
-		return StringPool.LESS_THAN + SMTP_PORTLET_PREFIX + categoryId +
-			StringPool.PERIOD + messageId + StringPool.AT +
-				PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) +
-					StringPool.PERIOD + mx + StringPool.GREATER_THAN;
+		StringMaker sm = new StringMaker();
+
+		sm.append(StringPool.LESS_THAN);
+		sm.append(SMTP_PORTLET_PREFIX);
+		sm.append(categoryId);
+		sm.append(StringPool.PERIOD);
+		sm.append(messageId);
+		sm.append(StringPool.AT);
+		sm.append(PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN));
+		sm.append(StringPool.PERIOD);
+		sm.append(mx);
+		sm.append(StringPool.GREATER_THAN);
+
+		return sm.toString();
 	}
 
 	public static String getMailingListAddress(long categoryId, String mx) {
-		return SMTP_PORTLET_PREFIX + categoryId + StringPool.AT +
-			PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + StringPool.PERIOD +
-				mx;
+		StringMaker sm = new StringMaker();
+
+		sm.append(SMTP_PORTLET_PREFIX);
+		sm.append(categoryId);
+		sm.append(StringPool.AT);
+		sm.append(PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN));
+		sm.append(StringPool.PERIOD);
+		sm.append(mx);
+
+		return sm.toString();
 	}
 
 	public static long getMessageId(String mailId) {
@@ -352,10 +370,12 @@ public class MBUtil {
 		long messageId = 0;
 
 		if ((x > 0 ) && (y != -1)) {
-			String right = mailId.substring(x, y);
-			int z = right.indexOf(StringPool.PERIOD);
+			String temp = mailId.substring(x, y);
+
+			int z = temp.indexOf(StringPool.PERIOD);
+
 			if (z != -1) {
-				messageId = GetterUtil.getLong(right.substring(z));
+				messageId = GetterUtil.getLong(temp.substring(z));
 			}
 		}
 

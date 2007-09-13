@@ -21,71 +21,87 @@
  * SOFTWARE.
  */
 %>
+
 <%
-boolean showEditIcon = false;
 boolean showAddIcon = false;
+boolean showEditIcon = false;
 
-String entryIdValue = null;
-String entryIdParam = "entryId";
-String entryPortletName = null;
-String strutsAction = null;
-String addIconMsg = "add-entry";
-String editIconMsg = "edit-entry";
+String addIconMsg = null;
+String editIconMsg = null;
 
-String folderId = null;
-String groupId = null;
-String version = null;
-String nodeId = null;
-String title = null;
+PortletURL addURL = null;
+PortletURL editURL = null;
 
 if (className.equals(BlogsEntry.class.getName())) {
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
-	showEditIcon = BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE);
 	showAddIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY);
+	showEditIcon = BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE);
 
-	entryIdValue = String.valueOf(entry.getEntryId());
-	strutsAction = "/blogs/edit_entry";
-	entryPortletName = PortletKeys.BLOGS;
+	addIconMsg = "add-blog";
+	editIconMsg = "edit-blog";
+
+	addURL = new PortletURLImpl(request, PortletKeys.BLOGS, plid.longValue(), false);
+
+	addURL.setParameter("struts_action", "/blogs/edit_entry");
+
+	editURL = PortletURLUtil.clone(addURL, renderResponse);
+
+	editURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 }
 else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 
-	entryIdValue = String.valueOf(entry.getEntryId());
-	showEditIcon = BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE);
 	showAddIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BOOKMARKS, ActionKeys.ADD_ENTRY);
+	showEditIcon = BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE);
 
-	entryIdValue = String.valueOf(entry.getEntryId());
-	strutsAction = "/bookmarks/edit_entry";
-	entryPortletName = PortletKeys.BOOKMARKS;
+	addIconMsg = "add-bookmark";
+	editIconMsg = "edit-bookmark";
 
-	folderId = String.valueOf(entry.getFolderId());
+	addURL = new PortletURLImpl(request, PortletKeys.BOOKMARKS, plid.longValue(), false);
+
+	addURL.setParameter("struts_action", "/bookmarks/edit_entry");
+	addURL.setParameter("folderId", String.valueOf(entry.getFolderId()));
+
+	editURL = PortletURLUtil.clone(addURL, renderResponse);
+
+	editURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 }
 else if (className.equals(DLFileEntry.class.getName())) {
-	DLFileEntry entry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
+	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
 
-	showEditIcon = DLFileEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE);
 	showAddIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.DOCUMENT_LIBRARY, ActionKeys.ADD_ENTRY);
+	showEditIcon = DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE);
 
-	entryIdValue = entry.getName();
-	entryIdParam = "name";
-	strutsAction = "/document_library/edit_file_entry";
-	entryPortletName = PortletKeys.DOCUMENT_LIBRARY;
+	addIconMsg = "add-document";
+	editIconMsg = "edit-document";
 
-	folderId = String.valueOf(entry.getFolderId());
+	addURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, plid.longValue(), false);
+
+	addURL.setParameter("struts_action", "/document_library/edit_file_entry");
+	addURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
+
+	editURL = PortletURLUtil.clone(addURL, renderResponse);
+
+	editURL.setParameter("name", fileEntry.getName());
 }
 else if (className.equals(IGImage.class.getName())) {
 	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
 
-	showEditIcon = IGImagePermission.contains(permissionChecker, image, ActionKeys.UPDATE);
 	showAddIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.IMAGE_GALLERY, ActionKeys.ADD_IMAGE);
+	showEditIcon = IGImagePermission.contains(permissionChecker, image, ActionKeys.UPDATE);
 
-	entryIdValue = String.valueOf(image.getImageId());
-	entryIdParam = "imageId";
-	strutsAction = "/image_gallery/edit_image";
-	entryPortletName = PortletKeys.IMAGE_GALLERY;
+	addIconMsg = "add-image";
+	editIconMsg = "edit-image";
 
-	folderId = String.valueOf(image.getFolderId());
+	addURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid.longValue(), false);
+
+	addURL.setParameter("struts_action", "/image_gallery/edit_image");
+	addURL.setParameter("folderId", String.valueOf(image.getFolderId()));
+
+	editURL = PortletURLUtil.clone(addURL, renderResponse);
+
+	editURL.setParameter("folderId", String.valueOf(image.getImageId()));
 }
 else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
@@ -95,16 +111,21 @@ else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
 
 	if (articleDisplay != null) {
-		showEditIcon = JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE);
 		showAddIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE);
+		showEditIcon = JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE);
 
-		entryIdValue = String.valueOf(articleDisplay.getArticleId());
-		entryIdParam = "articleId";
-		strutsAction = "/journal/edit_article";
-		entryPortletName = PortletKeys.JOURNAL;
+		addIconMsg = "add-article";
+		editIconMsg = "edit-article";
 
-		groupId = String.valueOf(articleDisplay.getGroupId());
-		version = String.valueOf(articleDisplay.getVersion());
+		addURL = new PortletURLImpl(request, PortletKeys.JOURNAL, plid.longValue(), false);
+
+		addURL.setParameter("struts_action", "/journal/edit_article");
+		addURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
+
+		editURL = PortletURLUtil.clone(addURL, renderResponse);
+
+		editURL.setParameter("articleId", articleDisplay.getArticleId());
+		editURL.setParameter("version", String.valueOf(articleDisplay.getVersion()));
 	}
 }
 else if (className.equals(WikiPage.class.getName())) {
@@ -114,63 +135,44 @@ else if (className.equals(WikiPage.class.getName())) {
 
 	WikiNode node = wikiPage.getNode();
 
+	showAddIcon = false;
 	showEditIcon = WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE);
-	showAddIcon = false; // Not supported by wiki portlet
 
-	entryIdValue = String.valueOf(wikiPage.getPageId());
-	entryIdParam = "pageId";
-	strutsAction = "/wiki/edit_page";
-	entryPortletName = PortletKeys.WIKI;
 	editIconMsg = "edit-page";
-	addIconMsg = "add-page";
 
-	nodeId = String.valueOf(wikiPage.getNodeId());
-	title = wikiPage.getTitle();
+	editURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), false);
+
+	editURL.setParameter("struts_action", "/wiki/edit_page");
+	editURL.setParameter("nodeId", String.valueOf(wikiPage.getNodeId()));
+	editURL.setParameter("title", wikiPage.getTitle());
 }
 
+if (addURL != null) {
+	addURL.setWindowState(WindowState.MAXIMIZED);
+	addURL.setPortletMode(PortletMode.VIEW);
+
+	addURL.setParameter("redirect", currentURL);
+	addURL.setParameter("tagsEntries", ListUtil.toString(asset.getEntries(), "name", ", "));
+}
+
+if (editURL != null) {
+	editURL.setWindowState(WindowState.MAXIMIZED);
+	editURL.setPortletMode(PortletMode.VIEW);
+
+	editURL.setParameter("redirect", currentURL);
+}
 %>
+
 <c:if test="<%= showEditIcon || showAddIcon %>">
 	<div>
 		<br />
 
 		<c:if test="<%= showEditIcon %>">
-			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= entryPortletName %>">
-				<liferay-portlet:param name="struts_action" value="<%= strutsAction %>" />
-				<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
-				<liferay-portlet:param name="<%= entryIdParam %>" value="<%= String.valueOf(entryIdValue) %>" />
-				<c:if test="<%= (groupId != null) %>">
-					<liferay-portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-				</c:if>
-				<c:if test="<%= (folderId != null) %>">
-					<liferay-portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-				</c:if>
-				<c:if test="<%= (version != null) %>">
-					<liferay-portlet:param name="version" value="<%= version %>" />
-				</c:if>
-				<c:if test="<%= (nodeId != null) %>">
-					<liferay-portlet:param name="nodeId" value="<%= nodeId %>" />
-				</c:if>
-				<c:if test="<%= (title != null) %>">
-					<liferay-portlet:param name="title" value="<%= title %>" />
-				</c:if>
-			</liferay-portlet:renderURL>
-
-			<liferay-ui:icon image="edit" message="<%= editIconMsg %>" url="<%= editURL %>" />
+			<liferay-ui:icon image="edit" message="<%= editIconMsg %>" url="<%= editURL.toString() %>" />
 		</c:if>
 
 		<c:if test="<%= showAddIcon %>">
-			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addURL" portletName="<%= entryPortletName %>">
-				<liferay-portlet:param name="struts_action" value="<%= strutsAction %>" />
-				<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
-				<c:if test="<%= (folderId != null) %>">
-					<liferay-portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-				</c:if>
-				<liferay-portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />
-				<liferay-portlet:param name="tagsEntries" value="<%= asset.getTagsEntries() %>" />
-			</liferay-portlet:renderURL>
-
-			<liferay-ui:icon image="add_article" message="<%= addIconMsg %>" url="<%= addURL %>" />
+			<liferay-ui:icon image="add_article" message="<%= addIconMsg %>" url="<%= addURL.toString() %>" />
 		</c:if>
-
 	</div>
 </c:if>

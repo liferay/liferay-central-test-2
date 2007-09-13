@@ -79,6 +79,10 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getAssetEntries(long assetId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getEntries()
 		throws com.liferay.portal.SystemException;
 
