@@ -1494,7 +1494,7 @@ public class JournalArticleLocalServiceImpl
 
 			long oldImageId = 0;
 
-			if (oldVersion > 0) {
+			if (oldVersion >= 1) {
 				oldImageId =
 					JournalArticleImageLocalServiceUtil.getArticleImageId(
 						groupId, articleId, oldVersion, elName, elLanguage);
