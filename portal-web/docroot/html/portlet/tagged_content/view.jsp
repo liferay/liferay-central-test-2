@@ -154,6 +154,7 @@ for (int i = 0; i < results.size(); i++) {
 					<%= displayStyle %> is not a display type.
 				</c:otherwise>
 			</c:choose>
+			<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
 		</div>
 
 <%

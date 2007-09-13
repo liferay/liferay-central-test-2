@@ -209,6 +209,7 @@ portletURL.setParameter("name", name);
 		<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
 		<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		<portlet:param name="name" value="<%= name %>" />
+		<portlet:param name="tagsEntries" value='<%= ParamUtil.getString(renderRequest, "tagsEntries") %>' />
 	</portlet:renderURL>
 
 	<liferay-ui:upload-progress

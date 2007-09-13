@@ -120,6 +120,7 @@ String uploadProgressId = "igImageUploadProgress";
 	<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
 	<portlet:param name="imageId" value="<%= String.valueOf(imageId) %>" />
 	<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+	<portlet:param name="tagsEntries" value='<%= ParamUtil.getString(renderRequest, "tagsEntries") %>' />
 </portlet:renderURL>
 
 <liferay-ui:upload-progress

@@ -158,6 +158,11 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		return TagsAssetUtil.countByCompanyId(companyId);
 	}
 
+	public List getTagsEntries(long assetId)
+		throws PortalException, SystemException {
+		return TagsAssetUtil.getTagsEntries(assetId);
+	}
+
 	public TagsAsset updateAsset(
 			long userId, String className, long classPK, String[] entryNames)
 		throws PortalException, SystemException {

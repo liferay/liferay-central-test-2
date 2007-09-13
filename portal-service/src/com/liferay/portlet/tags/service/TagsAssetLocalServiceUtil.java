@@ -166,6 +166,14 @@ public class TagsAssetLocalServiceUtil {
 		return tagsAssetLocalService.getCompanyAssetsCount(companyId);
 	}
 
+	public static java.util.List getTagsEntries(long assetId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getTagsEntries(assetId);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
 		long userId, java.lang.String className, long classPK,
 		java.lang.String[] entryNames)

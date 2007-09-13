@@ -26,13 +26,17 @@
 
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" %>
 <%@ page import="com.liferay.portlet.bookmarks.model.BookmarksEntry" %>
 <%@ page import="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
+<%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.imagegallery.service.permission.IGImagePermission" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleResource" %>
@@ -48,6 +52,7 @@
 <%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.wiki.service.permission.WikiPagePermission" %>
 <%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
 
 <%

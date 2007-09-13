@@ -3,7 +3,6 @@ String title = asset.getTitle();
 String summary = StringPool.BLANK;
 String viewURL = null;
 String viewURLMessage = StringPool.BLANK;
-String editURL = StringPool.BLANK;
 
 if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
@@ -75,19 +74,6 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 	viewURLMessage = "read-more";
 
-	if (JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE)) {
-		PortletURLImpl editArticleURL = new PortletURLImpl(request, PortletKeys.JOURNAL, plid.longValue(), false);
-
-		editArticleURL.setWindowState(WindowState.MAXIMIZED);
-
-		editArticleURL.setParameter("struts_action", "/journal/edit_article");
-		editArticleURL.setParameter("redirect", currentURL);
-		editArticleURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
-		editArticleURL.setParameter("articleId", articleDisplay.getArticleId());
-		editArticleURL.setParameter("version", String.valueOf(articleDisplay.getVersion()));
-
-		editURL = editArticleURL.toString();
-	}
 }
 
 // URLs set through the asset override automatically generated URLs
@@ -117,9 +103,3 @@ if (Validator.isNotNull(asset.getUrl())) {
 		</div>
 	</c:if>
 </div>
-
-<c:choose>
-	<c:when test="<%= Validator.isNotNull(editURL) %>">
-		<liferay-ui:icon image="edit" message="edit" url="<%= editURL %>" />
-	</c:when>
-</c:choose>
