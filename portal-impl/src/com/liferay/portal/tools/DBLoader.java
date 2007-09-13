@@ -173,13 +173,14 @@ public class DBLoader {
 			new StringReader(FileUtil.read(fileName)));
 
 		String line = null;
+		String sql = null;
 
 		while ((line = br.readLine()) != null) {
 			if (!line.startsWith("--")) {
 				sm.append(line);
 
 				if (line.endsWith(";")) {
-					String sql = sm.toString();
+					sql = sm.toString();
 
 					sql =
 						StringUtil.replace(
@@ -250,7 +251,9 @@ public class DBLoader {
 						}
 					}
 					catch (Exception e) {
-						System.out.println(e.getMessage());
+						System.out.println(sql);
+
+						e.printStackTrace();
 					}
 				}
 			}

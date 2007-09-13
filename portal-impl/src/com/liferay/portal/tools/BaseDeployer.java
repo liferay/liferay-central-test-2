@@ -747,14 +747,13 @@ public class BaseDeployer {
 		if (!artifactIdText.equals(displayName)) {
 			artifactIdEl.setText(displayName);
 
-			String content = XMLFormatter.toString(root);
+			String content = XMLFormatter.toString(doc);
 
 			FileUtil.write(geronimoWebXml, content);
 
 			if (_log.isInfoEnabled()) {
 				_log.info("Modifying Geronimo " + geronimoWebXml);
 			}
-
 		}
 	}
 

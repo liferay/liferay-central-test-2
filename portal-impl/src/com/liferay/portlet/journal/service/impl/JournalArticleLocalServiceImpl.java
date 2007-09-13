@@ -1492,9 +1492,13 @@ public class JournalArticleLocalServiceImpl
 
 			double oldVersion = MathUtil.format(version - 0.1, 1, 1);
 
-			long oldImageId =
-				JournalArticleImageLocalServiceUtil.getArticleImageId(
-					groupId, articleId, oldVersion, elName, elLanguage);
+			long oldImageId = 0;
+
+			if (oldVersion > 0) {
+				oldImageId =
+					JournalArticleImageLocalServiceUtil.getArticleImageId(
+						groupId, articleId, oldVersion, elName, elLanguage);
+			}
 
 			String elContent =
 				"/image/journal/article?img_id=" + imageId + "&t=" +
@@ -1535,7 +1539,11 @@ public class JournalArticleLocalServiceImpl
 			if ((version > JournalArticleImpl.DEFAULT_VERSION) &&
 				(incrementVersion)) {
 
-				Image oldImage = ImageLocalUtil.getImage(oldImageId);
+				Image oldImage = null;
+
+				if (oldImageId > 0) {
+					oldImage = ImageLocalUtil.getImage(oldImageId);
+				}
 
 				if (oldImage != null) {
 					dynamicContent.setText(elContent);
