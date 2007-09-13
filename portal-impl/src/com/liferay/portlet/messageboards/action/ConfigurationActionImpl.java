@@ -128,8 +128,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		if (Validator.isNull(emailFromName)) {
 			SessionErrors.add(req, "emailFromName");
 		}
-		else if (!Validator.isEmailAddress(emailFromAddress) ||
-				 Validator.isVariableTerm(emailFromAddress)) {
+		else if (!Validator.isEmailAddress(emailFromAddress) &&
+				 !Validator.isVariableTerm(emailFromAddress)) {
 
 			SessionErrors.add(req, "emailFromAddress");
 		}

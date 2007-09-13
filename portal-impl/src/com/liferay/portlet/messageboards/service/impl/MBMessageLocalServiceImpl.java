@@ -38,11 +38,13 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -1161,10 +1163,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				company.getMx(), message.getCategoryId(),
 				message.getMessageId());
 
+			Group group = GroupLocalServiceUtil.getGroup(category.getGroupId());
+
 			fromName = StringUtil.replace(
 				fromName,
 				new String[] {
 					"[$COMPANY_ID$]",
+					"[$COMPANY_NAME$]",
+					"[$COMPANY_MX$]",
+					"[$COMMUNITY_NAME$]",
 					"[$MAILING_LIST_ADDRESS$]",
 					"[$MESSAGE_USER_ADDRESS$]",
 					"[$MESSAGE_USER_NAME$]",
@@ -1172,6 +1179,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				},
 				new String[] {
 					String.valueOf(company.getCompanyId()),
+					company.getName(),
+					company.getMx(),
+					group.getName(),
 					mailingListAddress,
 					user.getEmailAddress(),
 					user.getFullName(),
@@ -1182,6 +1192,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				fromAddress,
 				new String[] {
 					"[$COMPANY_ID$]",
+					"[$COMPANY_NAME$]",
+					"[$COMPANY_MX$]",
+					"[$COMMUNITY_NAME$]",
 					"[$MAILING_LIST_ADDRESS$]",
 					"[$MESSAGE_USER_ADDRESS$]",
 					"[$MESSAGE_USER_NAME$]",
@@ -1189,6 +1202,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				},
 				new String[] {
 					String.valueOf(company.getCompanyId()),
+					company.getName(),
+					company.getMx(),
+					group.getName(),
 					mailingListAddress,
 					user.getEmailAddress(),
 					user.getFullName(),

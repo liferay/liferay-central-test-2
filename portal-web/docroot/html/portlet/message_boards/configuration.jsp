@@ -135,6 +135,30 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
+				<b>[$COMPANY_NAME$]</b>
+			</td>
+			<td>
+				<liferay-ui:message key="the-company-name-associated-with-the-message-board" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>[$COMPANY_MX$]</b>
+			</td>
+			<td>
+				<liferay-ui:message key="the-company-mx-associated-with-the-message-board" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>[$COMMUNITY_NAME$]</b>
+			</td>
+			<td>
+				<liferay-ui:message key="the-community-name-where-the-message-board-is-published" />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<b>[$MAILING_LIST_ADDRESS$]</b>
 			</td>
 			<td>
