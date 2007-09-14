@@ -79,7 +79,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		if (hasEntry(user.getCompanyId(), name)) {
 			throw new DuplicateEntryException(
-				"A tag with the name '" + name + "' already exists");
+				"A tag entry with the name " + name + " already exists");
 		}
 
 		long entryId = CounterLocalServiceUtil.increment();

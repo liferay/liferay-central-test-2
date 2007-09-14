@@ -220,8 +220,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		for (int i = 0; i < entryNames.length; i++) {
 			String name = entryNames[i].trim().toLowerCase();
 
-			TagsEntry entry =
-				TagsEntryUtil.fetchByC_N(user.getCompanyId(), name);
+			TagsEntry entry = TagsEntryUtil.fetchByC_N(
+				user.getCompanyId(), name);
 
             if (entry == null) {
                 String defaultProperties = "0:category:no category";

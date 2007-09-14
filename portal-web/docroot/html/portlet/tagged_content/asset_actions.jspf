@@ -152,7 +152,7 @@ if (addURL != null) {
 	addURL.setPortletMode(PortletMode.VIEW);
 
 	addURL.setParameter("redirect", currentURL);
-	addURL.setParameter("tagsEntries", ListUtil.toString(asset.getEntries(), "name", ","));
+	addURL.setParameter("tagsEntries", ListUtil.toString(asset.getEntries(), "name"));
 }
 
 if (editURL != null) {
