@@ -67,6 +67,24 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 <script type="text/javascript">
 	function <portlet:namespace />saveUser(cmd) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+
+		var redirect = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>";
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />tabs2) {
+			redirect += "&<portlet:namespace />tabs2=" + document.<portlet:namespace />fm.<portlet:namespace />tabs2.value;
+		}
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />tabs3) {
+			redirect += "&<portlet:namespace />tabs3=" + document.<portlet:namespace />fm.<portlet:namespace />tabs3.value;
+		}
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />tabs4) {
+			redirect += "&<portlet:namespace />tabs4=" + document.<portlet:namespace />fm.<portlet:namespace />tabs4.value;
+		}
+
+		redirect += "&<portlet:namespace />backURL=<%= HttpUtil.encodeURL(backURL) %>&<portlet:namespace />p_u_i_d=";
+
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:actionURL>");
 	}
 </script>
@@ -76,7 +94,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
 <input name="<portlet:namespace />tabs4" type="hidden" value="<%= tabs4 %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>&<portlet:namespace />tabs2=" + document.<portlet:namespace />fm.<portlet:namespace />tabs2.value + "&<portlet:namespace />tabs3=" + document.<portlet:namespace />fm.<portlet:namespace />tabs3.value + "&<portlet:namespace />tabs4=" + document.<portlet:namespace />fm.<portlet:namespace />tabs4.value + "&<portlet:namespace />backURL=<%= HttpUtil.encodeURL(backURL) %>&<portlet:namespace />p_u_i_d=" />
+<input name="<portlet:namespace />redirect" type="hidden" value="" />
 <input name="<portlet:namespace />backURL" type="hidden" value="<%= backURL %>" />
 <input name="<portlet:namespace />p_u_i_d" type="hidden" value='<%= (user2 != null) ? user2.getUserId() : 0 %>' />
 

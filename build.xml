@@ -653,6 +653,37 @@
 		<antcall target="print-current-time" />
 	</target>
 
+	<target name="deploy-default-theme">
+		<delete dir="${deployer.dest.dir}/liferay-noir-theme" />
+		<delete dir="${deployer.dest.dir}/liferay-noir-theme.war" />
+
+		<java
+			classname="com.liferay.portal.tools.ThemeDeployer"
+			classpathref="project.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+
+			<!-- Required Arguments -->
+
+			<jvmarg value="-Ddeployer.base.dir=${lp.plugins.dir}/dist" />
+			<jvmarg value="-Ddeployer.dest.dir=${deployer.dest.dir}" />
+			<jvmarg value="-Ddeployer.app.server.type=${deployer.app.server.type}" />
+			<jvmarg value="-Ddeployer.theme.taglib.dtd=util-taglib/classes/META-INF/liferay-theme.tld" />
+			<jvmarg value="-Ddeployer.util.taglib.dtd=util-taglib/classes/META-INF/liferay-util.tld" />
+			<jvmarg value="-Ddeployer.unpack.war=true" />
+
+			<!-- Optional Arguments -->
+
+			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
+
+			<!-- Dependent Libraries -->
+
+			<arg value="util-java/util-java.jar" />
+			<arg value="util-taglib/util-taglib.jar" />
+		</java>
+	</target>
+
 	<target name="deploy-properties">
 		<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
 			<fileset dir="portal-impl/classes">
@@ -811,36 +842,36 @@
 		<delete file="${lp.ext.dir}/lib/portal/util-jsf.jar" failonerror="false" />
 
 		<copy todir="${lp.ext.dir}/lib/development" preservelastmodified="true">
-			<fileset dir="${project.dir}/support-tomcat" includes="support-tomcat.jar" />
+			<fileset dir="support-tomcat" includes="support-tomcat.jar" />
 		</copy>
 
 		<copy todir="${lp.ext.dir}/lib/global" preservelastmodified="true">
-			<fileset dir="${project.dir}/portal-kernel" includes="portal-kernel.jar" />
-			<fileset dir="${project.dir}/portal-service" includes="portal-service.jar" />
+			<fileset dir="portal-kernel" includes="portal-kernel.jar" />
+			<fileset dir="portal-service" includes="portal-service.jar" />
 		</copy>
 
 		<delete file="${lp.ext.dir}/lib/global/portal-shared.jar" failonerror="false" />
 
 		<copy todir="${lp.ext.dir}/lib/portal" preservelastmodified="true">
-			<fileset dir="${project.dir}/filters/compression" includes="compression-filter.jar" />
-			<fileset dir="${project.dir}/filters/doubleclick" includes="doubleclick-filter.jar" />
-			<fileset dir="${project.dir}/filters/header" includes="header-filter.jar" />
-			<fileset dir="${project.dir}/filters/secure" includes="secure-filter.jar" />
-			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
-			<fileset dir="${project.dir}/util-bridges" includes="util-bridges.jar" />
-			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
-			<fileset dir="${project.dir}/util-taglib" includes="util-taglib.jar" />
-			<fileset dir="${project.dir}/util-wsrp" includes="util-wsrp.jar" />
+			<fileset dir="filters/compression" includes="compression-filter.jar" />
+			<fileset dir="filters/doubleclick" includes="doubleclick-filter.jar" />
+			<fileset dir="filters/header" includes="header-filter.jar" />
+			<fileset dir="filters/secure" includes="secure-filter.jar" />
+			<fileset dir="filters/strip" includes="strip-filter.jar" />
+			<fileset dir="util-bridges" includes="util-bridges.jar" />
+			<fileset dir="util-java" includes="util-java.jar" />
+			<fileset dir="util-taglib" includes="util-taglib.jar" />
+			<fileset dir="util-wsrp" includes="util-wsrp.jar" />
 		</copy>
 
 		<copy todir="${lp.ext.dir}/modules" preservelastmodified="true">
-			<fileset dir="${project.dir}/counter-impl" includes="counter-impl.jar" />
-			<fileset dir="${project.dir}/documentlibrary-impl" includes="documentlibrary-impl.jar" />
-			<fileset dir="${project.dir}/lock-impl" includes="lock-impl.jar" />
-			<fileset dir="${project.dir}/mail-impl" includes="mail-impl.jar" />
-			<fileset dir="${project.dir}/portal-impl" includes="portal-impl.jar" />
-			<fileset dir="${project.dir}/portal-web" includes="portal-web.war" />
-			<fileset dir="${project.dir}/tunnel-web" includes="tunnel-web.war" />
+			<fileset dir="counter-impl" includes="counter-impl.jar" />
+			<fileset dir="documentlibrary-impl" includes="documentlibrary-impl.jar" />
+			<fileset dir="lock-impl" includes="lock-impl.jar" />
+			<fileset dir="mail-impl" includes="mail-impl.jar" />
+			<fileset dir="portal-impl" includes="portal-impl.jar" />
+			<fileset dir="portal-web" includes="portal-web.war" />
+			<fileset dir="tunnel-web" includes="tunnel-web.war" />
 		</copy>
 
 		<mkdir dir="${lp.ext.dir}/servers/geronimo-jetty" />
@@ -914,6 +945,11 @@
 		<echo file="app.server.${env.COMPUTERNAME}.properties">app.server.type=geronimo-tomcat</echo>
 
 		<antcall target="deploy" inheritAll="false" />
+
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.geronimo-tomcat.deploy.dir}" />
+			<param name="deployer.app.server.type" value="geronimo-tomcat" />
+		</antcall>
 
 		<delete file="app.server.${env.COMPUTERNAME}.properties" />
 
@@ -1202,6 +1238,11 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	<target name="zip-jboss">
 		<delete file="dist/liferay-portal-jboss-jetty-4.0-${lp.version.file.name}.zip" failonerror="false" />
 
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.jboss-jetty.deploy.dir}" />
+			<param name="deployer.app.server.type" value="jboss-jetty" />
+		</antcall>
+
 		<zip
 			basedir="${app.server.jboss-jetty.dir}"
 			destfile="dist/liferay-portal-jboss-jetty-4.0-${lp.version.file.name}.zip"
@@ -1209,12 +1250,22 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 
 		<delete file="dist/liferay-portal-jboss-tomcat-4.0-${lp.version.file.name}.zip" failonerror="false" />
 
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.jboss-tomcat.deploy.dir}" />
+			<param name="deployer.app.server.type" value="jboss-tomcat" />
+		</antcall>
+
 		<zip
 			basedir="${app.server.jboss-tomcat.dir}"
 			destfile="dist/liferay-portal-jboss-tomcat-4.0-${lp.version.file.name}.zip"
 		/>
 
 		<delete file="dist/liferay-portal-jboss-tomcat-4.2-${lp.version.file.name}.zip" failonerror="false" />
+
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.parent.dir}/jboss-tomcat-4.2.0/server/default/deploy" />
+			<param name="deployer.app.server.type" value="jboss-tomcat" />
+		</antcall>
 
 		<zip
 			basedir="${app.server.parent.dir}/jboss-tomcat-4.2.0"
@@ -1225,6 +1276,11 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	<target name="zip-jetty">
 		<delete file="dist/liferay-portal-jetty-${lp.version.file.name}.zip" failonerror="false" />
 
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.jetty.deploy.dir}" />
+			<param name="deployer.app.server.type" value="jetty" />
+		</antcall>
+
 		<zip
 			basedir="${app.server.jetty.dir}"
 			destfile="dist/liferay-portal-jetty-${lp.version.file.name}.zip"
@@ -1234,12 +1290,22 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	<target name="zip-jonas">
 		<delete file="dist/liferay-portal-jonas-jetty-${lp.version.file.name}.zip" failonerror="false" />
 
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.jonas-jetty.deploy.dir}" />
+			<param name="deployer.app.server.type" value="jonas-jetty" />
+		</antcall>
+
 		<zip
 			basedir="${app.server.jonas-jetty.dir}"
 			destfile="dist/liferay-portal-jonas-jetty-${lp.version.file.name}.zip"
 		/>
 
 		<delete file="dist/liferay-portal-jonas-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.jonas-tomcat.deploy.dir}" />
+			<param name="deployer.app.server.type" value="jonas-tomcat" />
+		</antcall>
 
 		<zip
 			basedir="${app.server.jonas-tomcat.dir}"
@@ -1372,6 +1438,11 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	<target name="zip-resin">
 		<delete file="dist/liferay-portal-resin-${lp.version.file.name}.zip" failonerror="false" />
 
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.resin.deploy.dir}" />
+			<param name="deployer.app.server.type" value="resin" />
+		</antcall>
+
 		<zip
 			basedir="${app.server.resin.dir}"
 			destfile="dist/liferay-portal-resin-${lp.version.file.name}.zip"
@@ -1406,6 +1477,11 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	<target name="zip-tomcat-5.5">
 		<delete file="dist/liferay-portal-tomcat-5.5-${lp.version.file.name}.zip" failonerror="false" />
 
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.tomcat.deploy.dir}" />
+			<param name="deployer.app.server.type" value="tomcat" />
+		</antcall>
+
 		<zip
 			basedir="${app.server.tomcat.dir}"
 			destfile="dist/liferay-portal-tomcat-5.5-${lp.version.file.name}.zip"
@@ -1422,6 +1498,11 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 
 	<target name="zip-tomcat-6.0">
 		<delete file="dist/liferay-portal-tomcat-6.0-${lp.version.file.name}.zip" failonerror="false" />
+
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.13/webapps" />
+			<param name="deployer.app.server.type" value="tomcat" />
+		</antcall>
 
 		<zip
 			basedir="${app.server.parent.dir}/tomcat-6.0.13"
@@ -1484,7 +1565,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 
 		<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
 
-		<copy file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" todir="dist" />
+		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" todir="dist" />
 	</target>
 
 	<target name="dist-jdk5">

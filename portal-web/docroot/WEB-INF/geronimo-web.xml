@@ -5,7 +5,7 @@
 		<moduleId>
 			<groupId>liferay</groupId>
 			<artifactId>liferay-portal-tomcat</artifactId>
-			<version>4.3.1</version>
+			<version>4.3.2</version>
 			<type>car</type>
 		</moduleId>
 		<dependencies>

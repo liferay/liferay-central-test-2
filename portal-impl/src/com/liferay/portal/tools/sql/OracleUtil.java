@@ -61,7 +61,6 @@ public class OracleUtil extends DBUtil {
 		StringMaker journalArticleSM = new StringMaker();
 		StringMaker journalStructureSM = new StringMaker();
 		StringMaker journalTemplateSM = new StringMaker();
-		StringMaker shoppingItemSM = new StringMaker();
 
 		String line = null;
 
@@ -69,17 +68,14 @@ public class OracleUtil extends DBUtil {
 			if (line.startsWith("insert into Image")) {
 				_convertToOracleCSV(line, imageSM);
 			}
-			else if (line.startsWith("insert into JournalArticle")) {
+			else if (line.startsWith("insert into JournalArticle (")) {
 				_convertToOracleCSV(line, journalArticleSM);
 			}
-			else if (line.startsWith("insert into JournalStructure")) {
+			else if (line.startsWith("insert into JournalStructure (")) {
 				_convertToOracleCSV(line, journalStructureSM);
 			}
-			else if (line.startsWith("insert into JournalTemplate")) {
+			else if (line.startsWith("insert into JournalTemplate (")) {
 				_convertToOracleCSV(line, journalTemplateSM);
-			}
-			else if (line.startsWith("insert into ShoppingItem")) {
-				_convertToOracleCSV(line, shoppingItemSM);
 			}
 		}
 
@@ -110,13 +106,6 @@ public class OracleUtil extends DBUtil {
 				"../sql/" + fileName + "/" + fileName +
 					"-oracle-journaltemplate.csv",
 				journalTemplateSM.toString());
-		}
-
-		if (shoppingItemSM.length() > 0) {
-			FileUtil.write(
-				"../sql/" + fileName + "/" + fileName +
-					"-oracle-shoppingitem.csv",
-				shoppingItemSM.toString());
 		}
 
 		oracle = _postBuildSQL(oracle);
