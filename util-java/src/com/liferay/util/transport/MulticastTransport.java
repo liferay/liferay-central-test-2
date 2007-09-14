@@ -45,53 +45,59 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MulticastTransport extends Thread implements Transport {
 
-	public MulticastTransport(DatagramHandler handler,
-                              String host, int port) {
+	public MulticastTransport(DatagramHandler handler, String host, int port) {
         super("MulticastListener-" + host + port);
-        setDaemon(true);
+
+		setDaemon(true);
         _handler = handler;
         _host = host;
         _port = port;
     }
 
-    public synchronized void connect()
-        throws IOException {
+    public synchronized void connect() throws IOException {
         if (_socket == null) {
             _socket = new MulticastSocket(_port);
         }
         else if (_socket.isConnected() && _socket.isBound()) {
             return;
         }
-        _address = InetAddress.getByName(_host);
-        _socket.joinGroup(_address);
-        _connected = true;
-        start();
+
+		_address = InetAddress.getByName(_host);
+
+		_socket.joinGroup(_address);
+
+		_connected = true;
+
+		start();
     }
 
     public synchronized void disconnect() {
-        //interrupt all processing...
-        if (_address != null) {
+
+		// Interrupt all processing
+
+		if (_address != null) {
             try {
                 _socket.leaveGroup(_address);
                 _address = null;
             }
             catch (IOException e) {
-                if (_log.isErrorEnabled()) {
-                    _log.error("Unable to leave group", e);
-                }
+                _log.error("Unable to leave group", e);
             }
         }
-        _connected = false;
-        this.interrupt();
-        _socket.close();
+
+		_connected = false;
+
+		interrupt();
+
+		_socket.close();
     }
 
-    public synchronized void sendMessage(String mesg)
-        throws IOException {
-        _outboundPacket.setData(mesg.getBytes());
+    public synchronized void sendMessage(String msg) throws IOException {
+        _outboundPacket.setData(msg.getBytes());
         _outboundPacket.setAddress(_address);
         _outboundPacket.setPort(_port);
-        _socket.send(_outboundPacket);
+
+		_socket.send(_outboundPacket);
     }
 
     public boolean isConnected() {
@@ -106,22 +112,26 @@ public class MulticastTransport extends Thread implements Transport {
             }
         }
         catch (IOException e) {
-            if (_log.isErrorEnabled()) {
-                _log.error("Unable to process ", e);
-            }
-            _socket.disconnect();
-            _connected = false;
-            _handler.errorReceived(e);
-        }
+            _log.error("Unable to process ", e);
 
+			_socket.disconnect();
+
+			_connected = false;
+
+			_handler.errorReceived(e);
+        }
     }
 
     private static final Log _log = LogFactory.getLog(MulticastTransport.class);
-    private final byte[] _inboundBuffer = new byte[4096];
-    private final DatagramPacket _inboundPacket =
+
+	private final byte[] _inboundBuffer = new byte[4096];
+
+	private final DatagramPacket _inboundPacket =
         new DatagramPacket(_inboundBuffer, _inboundBuffer.length);
-    private final byte[] _outboundBuffer = new byte[4096];
-    private final DatagramPacket _outboundPacket =
+
+	private final byte[] _outboundBuffer = new byte[4096];
+
+	private final DatagramPacket _outboundPacket =
         new DatagramPacket(_outboundBuffer, _outboundBuffer.length);
 
     private final String _host;
