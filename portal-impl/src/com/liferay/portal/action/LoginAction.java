@@ -74,6 +74,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -181,7 +183,17 @@ public class LoginAction extends Action {
 				LastPath lastPath = (LastPath)ses.getAttribute(
 					WebKeys.LAST_PATH);
 
-				ses.invalidate();
+				try {
+					ses.invalidate();
+				}
+				catch (IllegalStateException ise) {
+
+					// This only happens in Geronimo
+
+					if (_log.isWarnEnabled()) {
+						_log.warn(ise.getMessage());
+					}
+				}
 
 				ses = req.getSession(true);
 
@@ -441,5 +453,7 @@ public class LoginAction extends Action {
 
 		SessionMessages.add(req, "request_processed", emailAddress);
 	}
+
+	private static Log _log = LogFactory.getLog(LoginAction.class);
 
 }
