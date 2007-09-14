@@ -156,7 +156,7 @@ public class DBLoader {
 			"jdbc:derby:" + _databaseName + ";create=true", "", "");
 
 		if (Validator.isNull(_fileName)) {
-			_loadDerby(con, "../sql/portal/portal-db2.sql");
+			_loadDerby(con, "../sql/portal/portal-derby.sql");
 			_loadDerby(con, "../sql/indexes.sql");
 		}
 		else {
@@ -173,14 +173,13 @@ public class DBLoader {
 			new StringReader(FileUtil.read(fileName)));
 
 		String line = null;
-		String sql = null;
 
 		while ((line = br.readLine()) != null) {
 			if (!line.startsWith("--")) {
 				sm.append(line);
 
 				if (line.endsWith(";")) {
-					sql = sm.toString();
+					String sql = sm.toString();
 
 					sql =
 						StringUtil.replace(
@@ -204,56 +203,78 @@ public class DBLoader {
 
 					sm = new StringMaker();
 
-					try {
-						if (sql.startsWith("commit")) {
+					if (sql.startsWith("commit")) {
+						continue;
+					}
+
+					PreparedStatement ps = null;
+
+					if (sql.startsWith("insert into Image (") ||
+						sql.startsWith("insert into JournalArticle (") ||
+						sql.startsWith("insert into JournalStructure (") ||
+						sql.startsWith("insert into JournalTemplate (") ||
+						sql.startsWith("insert into Layout (") ||
+						sql.startsWith("insert into PortletPreferences (")) {
+
+						// Derby isn't able to process long inserts. Zql parses
+						// the SQL statement so that we can manually set the
+						// insert statement. Zql also isn't able to properly
+						// parse certain unicode characters.
+
+						sql = StringUtil.replace(
+							sql,
+							new String[] {
+								"\u0161",
+								"\u017e",
+								"\u2013",
+								"\u2014",
+								"\u2015",
+								"\u2019",
+								"\u2022",
+								"\u201c",
+								"\u2122"
+							},
+							new String[] {
+								StringPool.BLANK,
+								StringPool.BLANK,
+								StringPool.BLANK,
+								StringPool.BLANK,
+								StringPool.BLANK,
+								StringPool.BLANK,
+								StringPool.BLANK,
+								StringPool.BLANK,
+								StringPool.BLANK
+							});
+
+						try {
+							ps = _getStatementDerby(con, sql);
 						}
-						else if (sql.startsWith("insert into Image") ||
-								 sql.startsWith("insert into JournalArticle")) {
+						catch (Exception e) {
+							System.out.println("Unable to parse " + sql);
 
-							// Derby isn't able to process long inserts. Zql
-							// parses the SQL statement so that we can manually
-							// set the insert statement. Zql also isn't able to
-							// properly parse certain unicode characters.
+							e.printStackTrace();
 
-							sql = StringUtil.replace(
-								sql,
-								new String[] {
-									"\u0161",
-									"\u017e",
-									"\u2013",
-									"\u2014",
-									"\u2019",
-									"\u2022",
-									"\u201c"
-								},
-								new String[] {
-									StringPool.BLANK,
-									StringPool.BLANK,
-									StringPool.BLANK,
-									StringPool.BLANK,
-									StringPool.BLANK,
-									StringPool.BLANK,
-									StringPool.BLANK
-								});
-
-							PreparedStatement ps = _getStatementDerby(con, sql);
-
-							ps.executeUpdate();
-
-							ps.close();
-						}
-						else {
-							PreparedStatement ps = con.prepareStatement(sql);
-
-							ps.executeUpdate();
-
-							ps.close();
+							throw e;
 						}
 					}
+					else {
+						ps = con.prepareStatement(sql);
+					}
+
+					try {
+						ps.executeUpdate();
+					}
 					catch (Exception e) {
-						System.out.println(sql);
+						System.out.println("Unable to execute " + sql);
 
 						e.printStackTrace();
+
+						throw e;
+					}
+					finally {
+						if (ps != null) {
+							ps.close();
+						}
 					}
 				}
 			}
