@@ -101,14 +101,18 @@
 		</select>
 	</td>
 </tr>
-<tr>
-	<td>
-		<liferay-ui:message key="unpack-war" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="unpackWar" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_UNPACK_WAR) %>" />
-	</td>
-</tr>
+
+<c:if test="<%= !ServerDetector.isGlassfish() && !ServerDetector.isPramati() %>">
+	<tr>
+		<td>
+			<liferay-ui:message key="unpack-war" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="unpackWar" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_UNPACK_WAR) %>" />
+		</td>
+	</tr>
+</c:if>
+
 <tr>
 	<td>
 		<liferay-ui:message key="custom-portlet-xml" />

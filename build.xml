@@ -968,6 +968,11 @@
 		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.glassfish.deploy.dir}" />
+			<param name="deployer.app.server.type" value="glassfish" />
+		</antcall>
+
 		<parallel>
 			<exec dir="${app.server.glassfish.bin.dir}" executable="asadmin.bat" resolveexecutable="true">
 				<arg value="start-domain" />
@@ -1040,6 +1045,11 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.0
 		<echo file="app.server.${env.COMPUTERNAME}.properties">app.server.type=pramati</echo>
 
 		<antcall target="deploy" inheritAll="false" />
+
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.pramati.deploy.dir}" />
+			<param name="deployer.app.server.type" value="pramati" />
+		</antcall>
 
 		<delete file="app.server.${env.COMPUTERNAME}.properties" />
 

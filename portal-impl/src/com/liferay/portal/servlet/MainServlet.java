@@ -290,6 +290,10 @@ public class MainServlet extends ActionServlet {
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Process service request");
+		}
+
 		if (ShutdownUtil.isShutdown()) {
 			res.setContentType(ContentTypes.TEXT_HTML_UTF8);
 

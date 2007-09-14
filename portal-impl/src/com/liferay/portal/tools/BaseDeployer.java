@@ -113,6 +113,12 @@ public class BaseDeployer {
 		this.wars = wars;
 		this.jars = jars;
 
+		if (appServerType.startsWith("glassfish") ||
+			appServerType.equals("pramati")) {
+
+			unpackWar = false;
+		}
+
 		checkArguments();
 
 		try {
