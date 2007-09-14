@@ -509,7 +509,8 @@ public class ServicePreAction extends Action {
 
 		// CDN host
 
-		String cdnHost = PortalUtil.getCDNHost();
+		String cdnHost = ParamUtil.getString(
+			req, "cdn_host", PortalUtil.getCDNHost());
 
 		// Paths
 
