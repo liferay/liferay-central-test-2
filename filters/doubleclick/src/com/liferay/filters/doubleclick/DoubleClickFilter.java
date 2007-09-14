@@ -51,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DoubleClickFilter implements Filter {
 
-	public static final boolean USE_DOUBLE_CLICK_FILTER = GetterUtil.getBoolean(
+	public static final boolean USE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(DoubleClickFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
@@ -65,7 +65,7 @@ public class DoubleClickFilter implements Filter {
 		throws IOException, ServletException {
 
 		if (_log.isDebugEnabled()) {
-			if (USE_DOUBLE_CLICK_FILTER) {
+			if (USE_FILTER) {
 				_log.debug("Double click prevention is enabled");
 			}
 			else {
@@ -73,7 +73,7 @@ public class DoubleClickFilter implements Filter {
 			}
 		}
 
-		if (USE_DOUBLE_CLICK_FILTER) {
+		if (USE_FILTER) {
 			HttpServletRequest httpReq = (HttpServletRequest)req;
 			HttpServletResponse httpRes = (HttpServletResponse)res;
 

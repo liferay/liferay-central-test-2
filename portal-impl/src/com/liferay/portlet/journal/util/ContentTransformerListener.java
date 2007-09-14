@@ -150,7 +150,7 @@ public class ContentTransformerListener extends TransformerListener {
 				else if ((text != null) &&
 						 (text.startsWith("/image/journal/article?img_id"))) {
 
-					dynamicContent.setText("@root_path@" + text);
+					dynamicContent.setText("@cdn_host@@root_path@" + text);
 				}
 			}
 

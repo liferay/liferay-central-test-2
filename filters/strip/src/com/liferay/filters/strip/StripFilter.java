@@ -51,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class StripFilter implements Filter {
 
-	public static final boolean USE_STRIP_FILTER = GetterUtil.getBoolean(
+	public static final boolean USE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(StripFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
@@ -65,7 +65,7 @@ public class StripFilter implements Filter {
 		throws IOException, ServletException {
 
 		if (_log.isDebugEnabled()) {
-			if (USE_STRIP_FILTER) {
+			if (USE_FILTER) {
 				_log.debug("Strip is enabled");
 			}
 			else {
@@ -78,7 +78,7 @@ public class StripFilter implements Filter {
 
 		String completeURL = Http.getCompleteURL(httpReq);
 
-		if (USE_STRIP_FILTER && isStrip(httpReq) && !isInclude(httpReq) &&
+		if (USE_FILTER && isStrip(httpReq) && !isInclude(httpReq) &&
 			!isAlreadyFiltered(httpReq)) {
 
 			if (_log.isDebugEnabled()) {

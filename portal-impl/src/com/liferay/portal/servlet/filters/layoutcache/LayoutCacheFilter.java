@@ -79,7 +79,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LayoutCacheFilter implements Filter, PortalInitable {
 
-	public static final boolean USE_LAYOUT_CACHE_FILTER = GetterUtil.getBoolean(
+	public static final boolean USE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(LayoutCacheFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
@@ -108,7 +108,7 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 		throws IOException, ServletException {
 
 		if (_log.isDebugEnabled()) {
-			if (USE_LAYOUT_CACHE_FILTER) {
+			if (USE_FILTER) {
 				_log.debug("Layout cache is enabled");
 			}
 			else {
@@ -119,9 +119,9 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 		HttpServletRequest httpReq = (HttpServletRequest)req;
 		HttpServletResponse httpRes = (HttpServletResponse)res;
 
-		if (USE_LAYOUT_CACHE_FILTER && !isPortletRequest(httpReq) &&
-			isLayout(httpReq) && !isSignedIn(httpReq) &&
-			!isInclude(httpReq) && !isAlreadyFiltered(httpReq)) {
+		if (USE_FILTER && !isPortletRequest(httpReq) && isLayout(httpReq) &&
+			!isSignedIn(httpReq) && !isInclude(httpReq) &&
+			!isAlreadyFiltered(httpReq)) {
 
 			httpReq.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
 

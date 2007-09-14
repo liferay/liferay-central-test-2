@@ -51,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SessionIdFilter implements Filter {
 
-	public static final boolean USE_SESSION_ID_FILTER = GetterUtil.getBoolean(
+	public static final boolean USE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(SessionIdFilter.class.getName()), true);
 
 	public void init(FilterConfig config) throws ServletException {
@@ -62,7 +62,7 @@ public class SessionIdFilter implements Filter {
 		throws IOException, ServletException {
 
 		if (_log.isDebugEnabled()) {
-			if (USE_SESSION_ID_FILTER) {
+			if (USE_FILTER) {
 				_log.debug(
 					"Session id sharing between http and https is enabled");
 			}
@@ -72,7 +72,7 @@ public class SessionIdFilter implements Filter {
 			}
 		}
 
-		if (USE_SESSION_ID_FILTER) {
+		if (USE_FILTER) {
 			HttpServletRequest httpReq = (HttpServletRequest)req;
 			HttpServletResponse httpRes = (HttpServletResponse)res;
 

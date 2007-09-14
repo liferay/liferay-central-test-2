@@ -52,7 +52,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CompressionFilter implements Filter {
 
-	static boolean useCompressionFilter = GetterUtil.getBoolean(
+	static boolean useFilter = GetterUtil.getBoolean(
 		SystemProperties.get(CompressionFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
@@ -63,15 +63,15 @@ public class CompressionFilter implements Filter {
 		// The compression filter will work on JBoss, Jetty, JOnAS, OC4J, Orion,
 		// and Tomcat, but may break on other servers
 
-		if (useCompressionFilter) {
+		if (useFilter) {
 			if (ServerDetector.isJBoss() || ServerDetector.isJetty() ||
 				ServerDetector.isJOnAS() || ServerDetector.isOC4J() ||
 				ServerDetector.isOrion() || ServerDetector.isTomcat()) {
 
-				useCompressionFilter = true;
+				useFilter = true;
 			}
 			else {
-				useCompressionFilter = false;
+				useFilter = false;
 			}
 		}
 	}
@@ -84,7 +84,7 @@ public class CompressionFilter implements Filter {
 		throws IOException, ServletException {
 
 		if (_log.isDebugEnabled()) {
-			if (useCompressionFilter) {
+			if (useFilter) {
 				_log.debug("Compression is enabled");
 			}
 			else {
@@ -97,8 +97,8 @@ public class CompressionFilter implements Filter {
 
 		String completeURL = Http.getCompleteURL(httpReq);
 
-		if (useCompressionFilter && isCompress(httpReq) &&
-			!isInclude(httpReq) && BrowserSniffer.acceptsGzip(httpReq) &&
+		if (useFilter && isCompress(httpReq) && !isInclude(httpReq) &&
+			BrowserSniffer.acceptsGzip(httpReq) &&
 			!isAlreadyFiltered(httpReq)) {
 
 			if (_log.isDebugEnabled()) {
