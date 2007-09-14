@@ -361,7 +361,7 @@ else {
 	portletIcon = portlet.getContextPath() + portlet.getIcon();
 }
 
-portletDisplay.setURLPortlet(portletIcon);
+portletDisplay.setURLPortlet(themeDisplay.getCDNHost() + portletIcon);
 
 // URL close
 
