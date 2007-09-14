@@ -182,6 +182,9 @@ public class AddUserAction extends PortletAction {
 		if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
 			redirect += user.getUserId();
 		}
+		else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_SN)) {
+			redirect += user.getScreenName();
+		}
 		else {
 			redirect += user.getEmailAddress();
 		}
