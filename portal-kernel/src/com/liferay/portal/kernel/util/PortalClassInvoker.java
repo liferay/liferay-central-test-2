@@ -65,6 +65,40 @@ public class PortalClassInvoker {
 	}
 
 	public static Object invoke(
+		String className, String methodName, boolean newInstance)
+		throws Exception {
+
+		return invoke(className, methodName, new Object[] {}, newInstance);
+	}
+
+	public static Object invoke(
+			String className, String methodName, Object arg,
+			boolean newInstance)
+		throws Exception {
+
+		return invoke(className, methodName, new Object[] {arg}, newInstance);
+	}
+
+	public static Object invoke(
+			String className, String methodName, Object arg1, Object arg2,
+			boolean newInstance)
+		throws Exception {
+
+		return invoke(
+			className, methodName, new Object[] {arg1, arg2}, newInstance);
+	}
+
+	public static Object invoke(
+			String className, String methodName, Object arg1, Object arg2,
+			Object arg3, boolean newInstance)
+		throws Exception {
+
+		return invoke(
+			className, methodName, new Object[] {arg1, arg2, arg3},
+			newInstance);
+	}
+
+	public static Object invoke(
 			String className, String methodName, Object[] args,
 			boolean newInstance)
 		throws Exception {
@@ -79,7 +113,7 @@ public class PortalClassInvoker {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				className, methodName, args);
 
-			return MethodInvoker.invoke(methodWrapper);
+			return MethodInvoker.invoke(methodWrapper, newInstance);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);
