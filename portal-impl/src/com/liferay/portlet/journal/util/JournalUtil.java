@@ -659,6 +659,7 @@ public class JournalUtil {
 			return tokens;
 		}
 
+		tokens.put("cdn_host", themeDisplay.getCDNHost());
 		tokens.put("company_id", String.valueOf(themeDisplay.getCompanyId()));
 		tokens.put("group_id", String.valueOf(groupId));
 		tokens.put("cms_url", themeDisplay.getPathContext() + "/cms/servlet");

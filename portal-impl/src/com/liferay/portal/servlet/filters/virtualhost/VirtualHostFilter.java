@@ -70,7 +70,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class VirtualHostFilter implements Filter {
 
-	public static final boolean USE_VIRTUAL_HOST_FILTER = GetterUtil.getBoolean(
+	public static final boolean USE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(VirtualHostFilter.class.getName()), true);
 
 	public void init(FilterConfig config) throws ServletException {
@@ -82,7 +82,7 @@ public class VirtualHostFilter implements Filter {
 		throws IOException, ServletException {
 
 		if (_log.isDebugEnabled()) {
-			if (USE_VIRTUAL_HOST_FILTER) {
+			if (USE_FILTER) {
 				_log.debug("Virtual host is enabled");
 			}
 			else {
@@ -117,7 +117,7 @@ public class VirtualHostFilter implements Filter {
 			}
 		}
 
-		if (!USE_VIRTUAL_HOST_FILTER) {
+		if (!USE_FILTER) {
 			chain.doFilter(req, res);
 
 			return;

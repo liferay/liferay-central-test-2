@@ -555,6 +555,8 @@ public class ThemeLocalUtil {
 
 			themeModel.setLoadFromServletContext(loadFromServletContext);
 
+			themeModel.setTimestamp(System.currentTimeMillis());
+
 			String name = GetterUtil.getString(
 				theme.attributeValue("name"), themeModel.getName());
 

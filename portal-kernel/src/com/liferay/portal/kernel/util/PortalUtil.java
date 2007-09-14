@@ -42,11 +42,23 @@ import javax.servlet.http.HttpSession;
  */
 public class PortalUtil {
 
+	public static String getCDNHost() throws Exception {
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETCDNHOST, false);
+
+		if (returnObj != null) {
+			return (String)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
 	public static HttpServletRequest getHttpServletRequest(PortletRequest req)
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GETHTTPSERVLETREQUEST, req);
+			_CLASS, _METHOD_GETHTTPSERVLETREQUEST, req, false);
 
 		if (returnObj != null) {
 			return (HttpServletRequest)returnObj;
@@ -60,8 +72,8 @@ public class PortalUtil {
 			PortletResponse res)
 		throws Exception {
 
-		Object returnObj = PortalClassInvoker.invoke(_CLASS,
-			_METHOD_GETHTTPSERVLETRESPONSE, res);
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETHTTPSERVLETRESPONSE, res, false);
 
 		if (returnObj != null) {
 			return (HttpServletResponse)returnObj;
@@ -75,7 +87,7 @@ public class PortalUtil {
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GETPORTLETNAMESPACE, portletName);
+			_CLASS, _METHOD_GETPORTLETNAMESPACE, portletName, false);
 
 		if (returnObj != null) {
 			return (String)returnObj;
@@ -89,7 +101,7 @@ public class PortalUtil {
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GETUSERPASSWORD, ses);
+			_CLASS, _METHOD_GETUSERPASSWORD, ses, false);
 
 		if (returnObj != null) {
 			return (String)returnObj;
@@ -103,7 +115,7 @@ public class PortalUtil {
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GETUSERPASSWORD, req);
+			_CLASS, _METHOD_GETUSERPASSWORD, req, false);
 
 		if (returnObj != null) {
 			return (String)returnObj;
@@ -117,7 +129,7 @@ public class PortalUtil {
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GETUSERPASSWORD, req);
+			_CLASS, _METHOD_GETUSERPASSWORD, req, false);
 
 		if (returnObj != null) {
 			return (String)returnObj;
@@ -131,7 +143,7 @@ public class PortalUtil {
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GETUSERPASSWORD, req);
+			_CLASS, _METHOD_GETUSERPASSWORD, req, false);
 
 		if (returnObj != null) {
 			return (String)returnObj;
@@ -146,16 +158,19 @@ public class PortalUtil {
 		throws Exception {
 
 		PortalClassInvoker.invoke(
-			_CLASS, _METHOD_SETPAGESUBTITLE, subtitle, req);
+			_CLASS, _METHOD_SETPAGESUBTITLE, subtitle, req, false);
 	}
 
 	public static void setPageTitle(String title, HttpServletRequest req)
 		throws Exception {
 
-		PortalClassInvoker.invoke(_CLASS, _METHOD_SETPAGETITLE, title, req);
+		PortalClassInvoker.invoke(
+			_CLASS, _METHOD_SETPAGETITLE, title, req, false);
 	}
 
 	private static final String _CLASS = "com.liferay.portal.util.PortalUtil";
+
+	private static final String _METHOD_GETCDNHOST = "getCDNHost";
 
 	private static final String _METHOD_GETHTTPSERVLETREQUEST =
 		"getHttpServletRequest";

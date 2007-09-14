@@ -303,13 +303,17 @@ public class ThemeDisplay implements Serializable {
 				themeContextPath = theme.getContextPath();
 			}
 
-			setPathColorSchemeImages(
-				themeContextPath + colorScheme.getColorSchemeImagesPath());
+			String cdnHost = getCDNHost();
 
-			setPathThemeCss(themeContextPath + theme.getCssPath());
-			setPathThemeImages(themeContextPath + theme.getImagesPath());
+			setPathColorSchemeImages(
+				cdnHost + themeContextPath +
+					colorScheme.getColorSchemeImagesPath());
+
+			setPathThemeCss(cdnHost + themeContextPath + theme.getCssPath());
+			setPathThemeImages(
+				cdnHost + themeContextPath + theme.getImagesPath());
 			setPathThemeJavaScript(
-				themeContextPath + theme.getJavaScriptPath());
+				cdnHost + themeContextPath + theme.getJavaScriptPath());
 			setPathThemeRoot(themeContextPath + theme.getRootPath());
 		}
 	}
@@ -360,6 +364,14 @@ public class ThemeDisplay implements Serializable {
 
 	public void setStatePopUp(boolean statePopUp) {
 		_statePopUp = statePopUp;
+	}
+
+	public String getCDNHost() {
+		return _cdnHost;
+	}
+
+	public void setCDNHost(String cdnHost) {
+		_cdnHost = cdnHost;
 	}
 
 	public String getPathApplet() {
@@ -758,6 +770,7 @@ public class ThemeDisplay implements Serializable {
 		_stateExclusive = false;
 		_stateMaximized = false;
 		_statePopUp = false;
+		_cdnHost = StringPool.BLANK;
 		_pathApplet = StringPool.BLANK;
 		_pathCms = StringPool.BLANK;
 		_pathColorSchemeImages = StringPool.BLANK;
@@ -834,6 +847,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _stateExclusive;
 	private boolean _stateMaximized;
 	private boolean _statePopUp;
+	private String _cdnHost = StringPool.BLANK;
 	private String _pathApplet = StringPool.BLANK;
 	private String _pathCms = StringPool.BLANK;
 	private String _pathColorSchemeImages = StringPool.BLANK;

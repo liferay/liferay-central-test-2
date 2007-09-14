@@ -507,6 +507,10 @@ public class ServicePreAction extends Action {
 
 		long companyId = company.getCompanyId();
 
+		// CDN host
+
+		String cdnHost = PortalUtil.getCDNHost();
+
 		// Paths
 
 		String contextPath = PortalUtil.getPathContext();
@@ -834,6 +838,11 @@ public class ServicePreAction extends Action {
 
 		ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
 
+		// Set the CDN host first because other methods (setLookAndFeel) depend
+		// on it being set
+
+		themeDisplay.setCDNHost(cdnHost);
+
 		themeDisplay.setCompany(company);
 		themeDisplay.setCompanyLogo(companyLogo);
 		themeDisplay.setCompanyLogoHeight(companyLogoHeight);
@@ -870,7 +879,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setPathFriendlyURLPrivateUser(friendlyURLPrivateUserPath);
 		themeDisplay.setPathFriendlyURLPublic(friendlyURLPublicPath);
 		themeDisplay.setPathImage(imagePath);
-		themeDisplay.setPathJavaScript(contextPath + "/html/js");
+		themeDisplay.setPathJavaScript(cdnHost + contextPath + "/html/js");
 		themeDisplay.setPathMain(mainPath);
 		themeDisplay.setPathSound(contextPath + "/html/sound");
 

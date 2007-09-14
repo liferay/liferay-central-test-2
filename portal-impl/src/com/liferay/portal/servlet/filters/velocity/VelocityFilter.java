@@ -72,7 +72,7 @@ import org.apache.velocity.app.Velocity;
  */
 public class VelocityFilter implements Filter {
 
-	public static final boolean USE_VELOCITY_FILTER = GetterUtil.getBoolean(
+	public static final boolean USE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(VelocityFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
@@ -89,7 +89,7 @@ public class VelocityFilter implements Filter {
 		throws IOException, ServletException {
 
 		if (_log.isDebugEnabled()) {
-			if (USE_VELOCITY_FILTER) {
+			if (USE_FILTER) {
 				_log.debug("Velocity is enabled");
 			}
 			else {
@@ -102,7 +102,7 @@ public class VelocityFilter implements Filter {
 
 		String completeURL = Http.getCompleteURL(httpReq);
 
-		if (USE_VELOCITY_FILTER && isMatchingURL(completeURL)) {
+		if (USE_FILTER && isMatchingURL(completeURL)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Processing " + completeURL);
 			}

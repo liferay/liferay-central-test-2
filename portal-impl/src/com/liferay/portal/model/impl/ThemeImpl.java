@@ -111,6 +111,14 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return isAvailable(getThemeGroupLimit(), groupId);
 	}
 
+	public long getTimestamp() {
+		return _timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		_timestamp = timestamp;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -400,6 +408,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private String _themeId;
 	private ThemeCompanyLimit _themeCompanyLimit;
 	private ThemeGroupLimit _themeGroupLimit;
+	private long _timestamp;
 	private String _name;
 	private String _rootPath = "/";
 	private String _templatesPath = "${root-path}/templates";

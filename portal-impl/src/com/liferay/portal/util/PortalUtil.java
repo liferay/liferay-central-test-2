@@ -225,6 +225,10 @@ public class PortalUtil {
 		}
 	}
 
+	public static String getCDNHost() {
+		return _instance._getCDNHost();
+	}
+
 	public static String getClassName(long classNameId) {
 		try {
 			ClassName className = ClassNameServiceUtil.getClassName(
@@ -1852,6 +1856,10 @@ public class PortalUtil {
 
 	private PortalUtil() {
 
+		// CDN host
+
+		_cdnHost = PropsUtil.get(PropsUtil.CDN_HOST);
+
 		// Paths
 
 		_pathContext = PropsUtil.get(PropsUtil.PORTAL_CTX);
@@ -1866,7 +1874,7 @@ public class PortalUtil {
 			PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
 		_pathFriendlyURLPublic = _pathContext + PropsUtil.get(
 			PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
-		_pathImage = _pathContext + PATH_IMAGE;
+		_pathImage = _cdnHost + _pathContext + PATH_IMAGE;
 		_pathMain = _pathContext + PATH_MAIN;
 
 		// Groups
@@ -1890,7 +1898,7 @@ public class PortalUtil {
 
 		Arrays.sort(_sortedSystemGroups, new StringComparator());
 
-		// Regular Roles
+		// Regular roles
 
 		String customSystemRoles[] = PropsUtil.getArray(PropsUtil.SYSTEM_ROLES);
 
@@ -1909,7 +1917,7 @@ public class PortalUtil {
 
 		Arrays.sort(_sortedSystemRoles, new StringComparator());
 
-		// Community Roles
+		// Community roles
 
 		String customSystemCommunityRoles[] =
 				PropsUtil.getArray(PropsUtil.SYSTEM_COMMUNITY_ROLES);
@@ -1948,6 +1956,10 @@ public class PortalUtil {
 		_reservedParams.add("p_p_col_pos");
 		_reservedParams.add("p_p_col_count");
 		_reservedParams.add("p_p_static");
+	}
+
+	private String _getCDNHost() {
+		return _cdnHost;
 	}
 
 	private static String _getCurrentURL(HttpServletRequest req) {
@@ -2101,6 +2113,7 @@ public class PortalUtil {
 
 	private static PortalUtil _instance = new PortalUtil();
 
+	private String _cdnHost;
 	private String _pathContext;
 	private String _pathFriendlyURLPrivateGroup;
 	private String _pathFriendlyURLPrivateUser;

@@ -3,6 +3,9 @@
 #set ($theme_display = $themeDisplay)
 #set ($portlet_display = $portletDisplay)
 
+#set ($theme_timestamp = $themeDisplay.getTheme().getTimestamp())
+#set ($theme_settings = $themeDisplay.getTheme().getSettings())
+
 #set ($css_class = $theme_display.getColorScheme().getCssClass())
 
 #if ($layout)
@@ -20,12 +23,12 @@
 #set ($full_templates_path = $fullTemplatesPath)
 
 #if ($paramUtil.getBoolean($request, "css_fast_load", $getterUtil.getBoolean($propsUtil.get("theme.css.fast.load"))))
-	#set ($css_main_file = "$css_folder/everything_packed.css?companyId=$theme_display.getCompanyId()&languageId=$languageUtil.getLanguageId($locale)&themeId=$theme_display.getThemeId()&colorSchemeId=$theme_display.getColorSchemeId()")
+	#set ($css_main_file = "$css_folder/everything_packed.css?companyId=$theme_display.getCompanyId()&languageId=$languageUtil.getLanguageId($locale)&themeId=$theme_display.getThemeId()&colorSchemeId=$theme_display.getColorSchemeId()&t=$theme_timestamp")
 #else
-	#set ($css_main_file = "$css_folder/main.css?companyId=$theme_display.getCompanyId()&languageId=$languageUtil.getLanguageId($locale)&themeId=$theme_display.getThemeId()&colorSchemeId=$theme_display.getColorSchemeId()")
+	#set ($css_main_file = "$css_folder/main.css?companyId=$theme_display.getCompanyId()&languageId=$languageUtil.getLanguageId($locale)&themeId=$theme_display.getThemeId()&colorSchemeId=$theme_display.getColorSchemeId()&t=$theme_timestamp")
 #end
 
-#set ($js_main_file = "$javascript_folder/javascript.js")
+#set ($js_main_file = "$javascript_folder/javascript.js?t=$theme_timestamp")
 
 #set ($company_id = $company.getCompanyId())
 #set ($company_name = $company.getName())
@@ -57,8 +60,6 @@
 #set ($is_signed_in = $theme_display.isSignedIn())
 
 #set ($group_id = $theme_display.getPortletGroupId())
-
-#set ($theme_settings = $themeDisplay.getTheme().getSettings())
 
 ## ---------- URLs ---------- ##
 

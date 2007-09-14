@@ -34,7 +34,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 public class PropsUtil {
 
 	public static String get(String key) throws Exception {
-		Object returnObj = PortalClassInvoker.invoke(_CLASS, _METHOD_GET, key);
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GET, key, false);
 
 		if (returnObj != null) {
 			return (String)returnObj;

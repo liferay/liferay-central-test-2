@@ -53,6 +53,10 @@ public interface Theme extends Comparable, Plugin, Serializable {
 
 	public boolean isGroupAvailable(long groupId);
 
+	public long getTimestamp();
+
+	public void setTimestamp(long timestamp);
+
 	public String getName();
 
 	public void setName(String name);

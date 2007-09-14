@@ -673,6 +673,10 @@ public class PropsUtil {
 
 	public static final String COMM_LINK_PROPERTIES = "comm.link.properties";
 
+	// Content Delivery Network
+
+	public static final String CDN_HOST = "cdn.host";
+
 	// Counter
 
 	public static final String COUNTER_INCREMENT = "counter.increment";
