@@ -27,6 +27,17 @@
 <%
 String langType = ParamUtil.getString(request, "langType");
 
+String editorType = ParamUtil.getString(request, "editorType");
+
+if (Validator.isNotNull(editorType)) {
+	prefs.setValue(PortletKeys.JOURNAL, "editor-type", editorType);
+}
+else {
+	editorType = prefs.getValue(PortletKeys.JOURNAL, "editor-type", "html");
+}
+
+boolean useEditorCodepress = editorType.equals("codepress");
+
 String defaultContent = null;
 
 if (langType.equals(JournalTemplateImpl.LANG_TYPE_XSL)) {
@@ -51,8 +62,28 @@ else {
 		return content;
 	}
 
+	function <portlet:namespace />updateEditorType() {
+
+		<%
+		String newEditorType = "codepress";
+
+		if (useEditorCodepress) {
+			newEditorType = "html";
+		}
+		%>
+
+		self.location = "<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>";
+	}
+
 	function <portlet:namespace />updateTemplateXsl() {
-		opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = encodeURIComponent(<portlet:namespace />xslContent.getCode());
+		<c:choose>
+			<c:when test="<%= useEditorCodepress %>">
+				opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = encodeURIComponent(<portlet:namespace />xslContent.getCode());
+			</c:when>
+			<c:otherwise>
+				opener.document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />xslContent.value);
+			</c:otherwise>
+		</c:choose>
 
 		self.close();
 	}
@@ -60,13 +91,38 @@ else {
 
 <form method="post" name="<portlet:namespace />fm">
 
-<textarea class="codepress html" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off"></textarea>
+<table class="liferay-table">
+<tr>
+	<td>
+		<b><liferay-ui:message key="editor-type" /></b>
+	</td>
+	<td>
+		<select name="<portlet:namespace />editorType" onChange="<portlet:namespace />updateEditorType();">
+			<option value="1"><liferay-ui:message key="plain" /></option>
+			<option <%= useEditorCodepress ? "selected" : "" %> value="0"><liferay-ui:message key="rich" /></option>
+		</select>
+	</td>
+</tr>
+</table>
+
+<br />
+
+<c:choose>
+	<c:when test="<%= useEditorCodepress %>">
+		<textarea class="codepress html" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off"></textarea>
+	</c:when>
+	<c:otherwise>
+		<textarea class="liferay-textarea" id="<portlet:namespace />xslContent" name="<portlet:namespace />xslContent" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
+	</c:otherwise>
+</c:choose>
 
 <br /><br />
 
 <input type="button" value="<liferay-ui:message key="update" />" onClick="<portlet:namespace />updateTemplateXsl();" />
 
-<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xslContent);" />
+<c:if test="<%= !useEditorCodepress %>">
+	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xslContent);" />
+</c:if>
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.close();" />
 
@@ -82,4 +138,6 @@ else {
 	);
 </script>
 
-<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
+<c:if test="<%= useEditorCodepress %>">
+	<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
+</c:if>

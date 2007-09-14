@@ -24,14 +24,48 @@
 
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
+<%
+String editorType = ParamUtil.getString(request, "editorType");
+
+if (Validator.isNotNull(editorType)) {
+	prefs.setValue(PortletKeys.JOURNAL, "editor-type", editorType);
+}
+else {
+	editorType = prefs.getValue(PortletKeys.JOURNAL, "editor-type", "html");
+}
+
+boolean useEditorCodepress = editorType.equals("codepress");
+%>
+
 <script type="text/javascript">
 	function getEditorContent() {
 		return opener.<portlet:namespace />getXsd();
 	}
 
+	function <portlet:namespace />updateEditorType() {
+
+		<%
+		String newEditorType = "codepress";
+
+		if (useEditorCodepress) {
+			newEditorType = "html";
+		}
+		%>
+
+		self.location = "<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>";
+	}
+
 	function <portlet:namespace />updateStructureXsd() {
 		opener.document.<portlet:namespace />fm.scroll.value = "<portlet:namespace />xsd";
-		opener.document.<portlet:namespace />fm.<portlet:namespace />xsd.value = <portlet:namespace />xsdContent.getCode();
+
+		<c:choose>
+			<c:when test="<%= useEditorCodepress %>">
+				opener.document.<portlet:namespace />fm.<portlet:namespace />xsd.value = <portlet:namespace />xsdContent.getCode();
+			</c:when>
+			<c:otherwise>
+				opener.document.<portlet:namespace />fm.<portlet:namespace />xsd.value = document.<portlet:namespace />fm.<portlet:namespace />xsdContent.value;
+			</c:otherwise>
+		</c:choose>
 
 		submitForm(opener.document.<portlet:namespace />fm);
 
@@ -41,13 +75,38 @@
 
 <form method="post" name="<portlet:namespace />fm">
 
-<textarea class="codepress html" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" wrap="off"></textarea>
+<table class="liferay-table">
+<tr>
+	<td>
+		<b><liferay-ui:message key="editor-type" /></b>
+	</td>
+	<td>
+		<select name="<portlet:namespace />editorType" onChange="<portlet:namespace />updateEditorType();">
+			<option value="1"><liferay-ui:message key="plain" /></option>
+			<option <%= useEditorCodepress ? "selected" : "" %> value="0"><liferay-ui:message key="rich" /></option>
+		</select>
+	</td>
+</tr>
+</table>
+
+<br />
+
+<c:choose>
+	<c:when test="<%= useEditorCodepress %>">
+		<textarea class="codepress html" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" wrap="off"></textarea>
+	</c:when>
+	<c:otherwise>
+		<textarea class="liferay-textarea" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" wrap="off" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();"></textarea>
+	</c:otherwise>
+</c:choose>
 
 <br /><br />
 
 <input type="button" value="<liferay-ui:message key="update" />" onClick="<portlet:namespace />updateStructureXsd();" />
 
-<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xsdContent);" />
+<c:if test="<%= !useEditorCodepress %>">
+	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xsdContent);" />
+</c:if>
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.close();" />
 
@@ -63,4 +122,6 @@
 	);
 </script>
 
-<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
+<c:if test="<%= useEditorCodepress %>">
+	<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
+</c:if>
