@@ -183,7 +183,7 @@ public class LDAPAuth implements Authenticator {
 				_log.debug("Failed to bind to the LDAP server");
 			}
 
-			return SUCCESS;
+			return FAILURE;
 		}
 
 		String filter = PrefsPropsUtil.getString(
