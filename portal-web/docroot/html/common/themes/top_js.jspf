@@ -282,7 +282,7 @@
 						id: 'fieldName',
 						name: 'fieldData',
 						submit: Liferay.Language.get('ok'),
-						type: 'textarea',
+						type: 'text',
 						width: '100%'
 					}
 				);
