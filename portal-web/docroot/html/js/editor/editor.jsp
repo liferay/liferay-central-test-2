@@ -29,7 +29,7 @@
 <%@ page import="com.liferay.portal.util.PropsUtil" %>
 
 <%
-String editorImpl = ParamUtil.get(request, "editorImpl", PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY));
+String editorImpl = ParamUtil.getString(request, "editorImpl", PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY));
 
 if (BrowserSniffer.is_safari(request)) {
 	if (editorImpl.indexOf("simple") == -1) {

@@ -43,11 +43,11 @@ String width = GetterUtil.getString((String)request.getAttribute("liferay-ui:inp
 
 StringMaker sm = new StringMaker();
 
-sm.append(themeDisplay.getPathJavaScript());
-sm.append("/editor/editor.jsp?p_l_id=");
+sm.append(themeDisplay.getPathContext());
+sm.append("/html/js/editor/editor.jsp?p_l_id=");
 sm.append(plid);
 sm.append("&p_main_path=");
-sm.append(themeDisplay.getPathMain());
+sm.append(HttpUtil.encodeURL(themeDisplay.getPathMain()));
 sm.append("&doAsUserId=");
 sm.append(themeDisplay.getDoAsUserId());
 sm.append("&editorImpl=");
