@@ -99,6 +99,12 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				</span>
 			</c:if>
 
+			<c:if test="<%= SessionErrors.contains(request, PasswordExpiredException.class.getName()) %>">
+				<span class="portlet-msg-error">
+				<liferay-ui:message key="your-password-has-expired" />
+				</span>
+			</c:if>
+
 			<c:if test='<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>'>
 				<span class="portlet-msg-error">
 				<liferay-ui:message key="please-enter-a-valid-login" />

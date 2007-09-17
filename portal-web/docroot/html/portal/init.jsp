@@ -33,6 +33,7 @@
 <%@ page import="com.liferay.portal.LayoutTypeException" %>
 <%@ page import="com.liferay.portal.NoSuchResourceException" %>
 <%@ page import="com.liferay.portal.NoSuchUserException" %>
+<%@ page import="com.liferay.portal.PasswordExpiredException" %>
 <%@ page import="com.liferay.portal.PortletActiveException" %>
 <%@ page import="com.liferay.portal.RequiredLayoutException" %>
 <%@ page import="com.liferay.portal.RequiredRoleException" %>
