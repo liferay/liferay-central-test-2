@@ -73,7 +73,7 @@ if (fileEntry != null) {
 		if (document.<portlet:namespace />fm.<portlet:namespace />folderId.value <= 0) {
 			document.<portlet:namespace />fm.<portlet:namespace />folderId.value = folderId;
 		}
-		
+
 		var nameEl = document.getElementById("<portlet:namespace />folderName");
 
 		nameEl.href = "javascript: parent.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId + "'; void('');";
