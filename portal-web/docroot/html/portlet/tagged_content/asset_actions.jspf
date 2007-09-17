@@ -101,7 +101,7 @@ else if (className.equals(IGImage.class.getName())) {
 
 	editURL = PortletURLUtil.clone(addURL, renderResponse);
 
-	editURL.setParameter("folderId", String.valueOf(image.getImageId()));
+	editURL.setParameter("imageId", String.valueOf(image.getImageId()));
 }
 else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
