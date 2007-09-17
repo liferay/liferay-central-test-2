@@ -77,10 +77,9 @@ public class EditEntryAction extends PortletAction {
 
 				setForward(req, "portlet.bookmarks.error");
 			}
-			else if (e instanceof EntryURLException) {
-				SessionErrors.add(req, e.getClass().getName());
-			}
-			else if (e instanceof NoSuchFolderException) {
+			else if (e instanceof EntryURLException ||
+					 e instanceof NoSuchFolderException) {
+
 				SessionErrors.add(req, e.getClass().getName());
 			}
 			else if (e instanceof TagsEntryException) {

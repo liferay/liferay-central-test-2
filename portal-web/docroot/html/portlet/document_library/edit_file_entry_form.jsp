@@ -68,11 +68,11 @@ if (fileEntry != null) {
 	}
 
 	function <portlet:namespace />selectFolder(folderId, folderName) {
-		document.<portlet:namespace />fm.<portlet:namespace />newFolderId.value = folderId;
-
 		if (document.<portlet:namespace />fm.<portlet:namespace />folderId.value <= 0) {
 			document.<portlet:namespace />fm.<portlet:namespace />folderId.value = folderId;
 		}
+
+		document.<portlet:namespace />fm.<portlet:namespace />newFolderId.value = folderId;
 
 		var nameEl = document.getElementById("<portlet:namespace />folderName");
 
@@ -130,18 +130,18 @@ String fileMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUti
 		<td>
 
 			<%
-			String folderIdStr = StringPool.BLANK;
 			String folderName = StringPool.BLANK;
 
 			if (folderId > 0) {
 				DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
-				folderIdStr = String.valueOf(folder.getFolderId());
+
+				folderId = folder.getFolderId();
 				folderName = folder.getName();
 			}
 
 			%>
 
-			<a href="javascript: parent.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /><portlet:param name="folderId" value="<%= folderIdStr %>" /></portlet:renderURL>'; void('');" id="<portlet:namespace />folderName">
+			<a href="javascript: parent.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>'; void('');" id="<portlet:namespace />folderName">
 			<%= folderName %></a>
 
 			<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />

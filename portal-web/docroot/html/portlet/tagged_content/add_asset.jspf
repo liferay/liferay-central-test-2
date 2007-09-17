@@ -25,103 +25,109 @@
 <%
 PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, entries, currentURL);
 %>
-<script language="JavaScript">
-	function <portlet:namespace/>submit() {
-		var url = document.<portlet:namespace />fm.<portlet:namespace />assetURL.value;
-		if (url != '') {
-			location.href = url;
-		}
-	}
-</script>
 
 <c:if test="<%= urls.length > 0 %>">
-	<div style="float: right">
-		<form name="<portlet:namespace/>fm" onchange="<portlet:namespace/>submit()">
-			<select name="<portlet:namespace/>assetURL">
-				<option value=""><liferay-ui:message key="add"/>...</option>
-				<%
-				for (int i = 0; i < ASSET_TYPES.length; i++) {
-					PortletURL url = getAddURL(ASSET_TYPES[i], permissionChecker, request, themeDisplay, entries, currentURL);
-					if (url != null) {
-				%>
+	<script language="JavaScript">
+		function <portlet:namespace/>addAsset() {
+			var url = document.<portlet:namespace />fm.<portlet:namespace />assetURL.value;
 
-					<option value="<%= url.toString() %>"><liferay-ui:message key="<%= "model.resource." + ASSET_TYPES[i] %>"/></option>
+			if (url != '') {
+				location.href = url;
+			}
+		}
+	</script>
 
-				<%
-					}
-				}
-				%>
-			</select>
-		</form>
-	</div>
+	<form name="<portlet:namespace/>fm">
+
+	<select name="<portlet:namespace/>assetURL" onchange="<portlet:namespace/>addAsset();">
+		<option value=""><liferay-ui:message key="add"/>...</option>
+
+		<%
+		for (int i = 0; i < ASSET_TYPES.length; i++) {
+			PortletURL url = getAddURL(ASSET_TYPES[i], permissionChecker, request, themeDisplay, entries, currentURL);
+
+			if (url != null) {
+		%>
+
+				<option value="<%= url.toString() %>"><liferay-ui:message key='<%= "model.resource." + ASSET_TYPES[i] %>' /></option>
+
+		<%
+			}
+		}
+		%>
+
+	</select>
+
+	</form>
 </c:if>
 
 <%!
-	public final String[] ASSET_TYPES = {BlogsEntry.class.getName(), BookmarksEntry.class.getName(), DLFileEntry.class.getName(), IGImage.class.getName(), JournalArticle.class.getName(), WikiPage.class.getName()};
+public final String[] ASSET_TYPES = {BlogsEntry.class.getName(), BookmarksEntry.class.getName(), DLFileEntry.class.getName(), IGImage.class.getName(), JournalArticle.class.getName(), WikiPage.class.getName()};
 
-	public PortletURL[] getAddURLs(PermissionChecker permissionChecker, HttpServletRequest request, ThemeDisplay themeDisplay, String[] entries, String currentURL) throws Exception {
-		List urls = new ArrayList();
-		for (int i = 0; i < ASSET_TYPES.length; i++) {
-			PortletURL url = getAddURL(ASSET_TYPES[i], permissionChecker, request, themeDisplay, entries, currentURL);
-			if (url != null) {
-				urls.add(url);
-			}
+public PortletURL getAddURL(String assetType, PermissionChecker permissionChecker, HttpServletRequest request, ThemeDisplay themeDisplay, String[] entries, String currentURL) throws Exception {
+	PortletURL addURL = null;
+
+	if (assetType.equals(BlogsEntry.class.getName())) {
+		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
+			addURL = new PortletURLImpl(request, PortletKeys.BLOGS, themeDisplay.getPlid(), false);
+
+			addURL.setParameter("struts_action", "/blogs/edit_entry");
 		}
+	}
+	else if (assetType.equals(BookmarksEntry.class.getName())) {
+		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.BOOKMARKS, ActionKeys.ADD_ENTRY)) {
+			addURL = new PortletURLImpl(request, PortletKeys.BOOKMARKS, themeDisplay.getPlid(), false);
 
-		return (PortletURL[]) urls.toArray(new PortletURL[0]);
+			addURL.setParameter("struts_action", "/bookmarks/edit_entry");
+		}
+	}
+	else if (assetType.equals(DLFileEntry.class.getName())) {
+		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.DOCUMENT_LIBRARY, ActionKeys.ADD_ENTRY)) {
+			addURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, themeDisplay.getPlid(), false);
+
+			addURL.setParameter("struts_action", "/document_library/edit_file_entry");
+		}
+	}
+	else if (assetType.equals(IGImage.class.getName())) {
+		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.IMAGE_GALLERY, ActionKeys.ADD_IMAGE)) {
+			addURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, themeDisplay.getPlid(), false);
+
+			addURL.setParameter("struts_action", "/image_gallery/edit_image");
+		}
+	}
+	else if (assetType.equals(JournalArticle.class.getName())) {
+		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE)) {
+			addURL = new PortletURLImpl(request, PortletKeys.JOURNAL, themeDisplay.getPlid(), false);
+
+			addURL.setParameter("struts_action", "/journal/edit_article");
+			addURL.setParameter("groupId", String.valueOf(themeDisplay.getLayout().getGroupId()));
+		}
+	}
+	else if (assetType.equals(WikiPage.class.getName())) {
 	}
 
-	public PortletURL getAddURL(String assetType, PermissionChecker permissionChecker, HttpServletRequest request, ThemeDisplay themeDisplay, String[] entries, String currentURL) throws Exception {
-		PortletURL addURL = null;
+	if (addURL != null) {
+		addURL.setWindowState(WindowState.MAXIMIZED);
+		addURL.setPortletMode(PortletMode.VIEW);
 
-		if (assetType.equals(BlogsEntry.class.getName())) {
-			if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
-				addURL = new PortletURLImpl(request, PortletKeys.BLOGS, themeDisplay.getPlid(), false);
-
-				addURL.setParameter("struts_action", "/blogs/edit_entry");
-			}
-		}
-		else if (assetType.equals(BookmarksEntry.class.getName())) {
-			if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.BOOKMARKS, ActionKeys.ADD_ENTRY)) {
-				addURL = new PortletURLImpl(request, PortletKeys.BOOKMARKS, themeDisplay.getPlid(), false);
-
-				addURL.setParameter("struts_action", "/bookmarks/edit_entry");
-			}
-		}
-		else if (assetType.equals(DLFileEntry.class.getName())) {
-			if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.DOCUMENT_LIBRARY, ActionKeys.ADD_ENTRY)) {
-				addURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, themeDisplay.getPlid(), false);
-
-				addURL.setParameter("struts_action", "/document_library/edit_file_entry");
-			}
-		}
-		else if (assetType.equals(IGImage.class.getName())) {
-			if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.IMAGE_GALLERY, ActionKeys.ADD_IMAGE)) {
-				addURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, themeDisplay.getPlid(), false);
-
-				addURL.setParameter("struts_action", "/image_gallery/edit_image");
-			}
-		}
-		else if (assetType.equals(JournalArticle.class.getName())) {
-			if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE)) {
-				addURL = new PortletURLImpl(request, PortletKeys.JOURNAL, themeDisplay.getPlid(), false);
-
-				addURL.setParameter("struts_action", "/journal/edit_article");
-				addURL.setParameter("groupId", Long.toString(themeDisplay.getLayout().getGroupId()));
-			}
-		}
-		else if (assetType.equals(WikiPage.class.getName())) {
-		}
-
-		if (addURL != null) {
-			addURL.setWindowState(WindowState.MAXIMIZED);
-			addURL.setPortletMode(PortletMode.VIEW);
-
-			addURL.setParameter("redirect", currentURL);
-			addURL.setParameter("tagsEntries", StringUtil.merge(entries));
-		}
-
-		return addURL;
+		addURL.setParameter("redirect", currentURL);
+		addURL.setParameter("tagsEntries", StringUtil.merge(entries));
 	}
 
+	return addURL;
+}
+
+public PortletURL[] getAddURLs(PermissionChecker permissionChecker, HttpServletRequest request, ThemeDisplay themeDisplay, String[] entries, String currentURL) throws Exception {
+	List urls = new ArrayList();
+
+	for (int i = 0; i < ASSET_TYPES.length; i++) {
+		PortletURL url = getAddURL(ASSET_TYPES[i], permissionChecker, request, themeDisplay, entries, currentURL);
+
+		if (url != null) {
+			urls.add(url);
+		}
+	}
+
+	return (PortletURL[])urls.toArray(new PortletURL[0]);
+}
 %>

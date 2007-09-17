@@ -117,10 +117,7 @@ if (showQueryLogic) {
 
 <%
 }
-%>
 
-<br clear="all"/>
-<%
 // Display content
 
 PortletURL portletURL = renderResponse.createRenderURL();

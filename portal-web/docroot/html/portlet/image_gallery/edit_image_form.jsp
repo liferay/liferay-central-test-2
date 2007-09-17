@@ -77,7 +77,6 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
-
 <liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
 <liferay-ui:tags-error />
@@ -102,17 +101,17 @@ String imageMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUt
 		<td>
 
 			<%
-			String folderIdStr = StringPool.BLANK;
 			String folderName = StringPool.BLANK;
 
 			if (folderId > 0) {
 				IGFolder folder = IGFolderLocalServiceUtil.getFolder(folderId);
-				folderIdStr = String.valueOf(folder.getFolderId());
+
+				folderId = folder.getFolderId();
 				folderName = folder.getName();
 			}
 			%>
 
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /><portlet:param name="folderId" value="<%= folderIdStr %>" /></portlet:renderURL>" id="<portlet:namespace />folderName">
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>" id="<portlet:namespace />folderName">
 			<%= folderName %></a>
 
 			<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
