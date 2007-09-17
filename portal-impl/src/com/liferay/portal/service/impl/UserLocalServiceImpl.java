@@ -1419,10 +1419,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String errorMessage = mle.getCause().getMessage();
 
 			if (PortalLDAPUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
-
 				if (errorMessage != null) {
 					if (errorMessage.indexOf(
-						PrefsPropsUtil.getString(user.getCompanyId(), 
+						PrefsPropsUtil.getString(user.getCompanyId(),
 							PropsUtil.LDAP_ERROR_PASSWORD_HISTORY)) != -1) {
 
 						throw new UserPasswordException(
