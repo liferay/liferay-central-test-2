@@ -92,7 +92,7 @@ String imageMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUt
 
 <table class="liferay-table">
 
-<c:if test="<%= image != null %>">
+<c:if test="<%= ((image != null) || (folderId <= 0)) %>">
 	<tr>
 		<td>
 			<liferay-ui:message key="folder" />
@@ -100,11 +100,18 @@ String imageMaxSize = String.valueOf(GetterUtil.getInteger(PropsUtil.get(PropsUt
 		<td>
 
 			<%
-			IGFolder folder = IGFolderLocalServiceUtil.getFolder(folderId);
+			String folderIdStr = StringPool.BLANK;
+			String folderName = StringPool.BLANK;
+
+			if (folderId > 0) {
+				IGFolder folder = IGFolderLocalServiceUtil.getFolder(folderId);
+				folderIdStr = String.valueOf(folder.getFolderId());
+				folderName = folder.getName();
+			}
 			%>
 
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>" id="<portlet:namespace />folderName">
-			<%= folder.getName() %></a>
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /><portlet:param name="folderId" value="<%= folderIdStr %>" /></portlet:renderURL>" id="<portlet:namespace />folderName">
+			<%= folderName %></a>
 
 			<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
 		</td>

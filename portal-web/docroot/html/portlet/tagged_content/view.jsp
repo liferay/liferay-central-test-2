@@ -64,7 +64,11 @@ if (themeDisplay.isSignedIn()) {
 }
 
 entries = ArrayUtil.distinct(entries, new StringComparator());
+%>
 
+<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
+
+<%
 if (showQueryLogic) {
 	StringMaker tagsText = new StringMaker();
 
@@ -113,7 +117,10 @@ if (showQueryLogic) {
 
 <%
 }
+%>
 
+<br clear="all"/>
+<%
 // Display content
 
 PortletURL portletURL = renderResponse.createRenderURL();
