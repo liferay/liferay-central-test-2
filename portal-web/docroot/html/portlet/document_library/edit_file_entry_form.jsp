@@ -100,6 +100,8 @@ if (fileEntry != null) {
 	<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(fileExtensions, ", ") %>.
 </liferay-ui:error>
 
+<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
+
 <liferay-ui:error exception="<%= SourceFileNameException.class %>">
 	<liferay-ui:message key="document-extensions-does-not-match" />
 </liferay-ui:error>

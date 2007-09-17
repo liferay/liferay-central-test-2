@@ -77,8 +77,7 @@ public class EditImageAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchFolderException ||
-				e instanceof NoSuchImageException ||
+			if (e instanceof NoSuchImageException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -86,7 +85,8 @@ public class EditImageAction extends PortletAction {
 				setForward(req, "portlet.image_gallery.error");
 			}
 			else if (e instanceof ImageNameException ||
-					 e instanceof ImageSizeException) {
+					 e instanceof ImageSizeException ||
+					 e instanceof NoSuchFolderException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 			}

@@ -97,7 +97,6 @@ public class EditFileEntryAction extends PortletAction {
 		catch (Exception e) {
 			if (e instanceof DuplicateLockException ||
 				e instanceof NoSuchFileEntryException ||
-				e instanceof NoSuchFolderException ||
 				e instanceof PrincipalException) {
 
 				if (e instanceof DuplicateLockException) {
@@ -115,6 +114,7 @@ public class EditFileEntryAction extends PortletAction {
 			else if (e instanceof DuplicateFileException ||
 					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
+					 e instanceof NoSuchFolderException ||
 					 e instanceof SourceFileNameException) {
 
 				SessionErrors.add(req, e.getClass().getName());
