@@ -1416,17 +1416,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			UserUtil.update(user);
 		}
 		catch (ModelListenerException mle) {
-			String errorMessage = mle.getCause().getMessage();
+			String msg = GetterUtil.getString(mle.getCause().getMessage());
 
 			if (PortalLDAPUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
-				if (errorMessage != null) {
-					if (errorMessage.indexOf(
-						PrefsPropsUtil.getString(user.getCompanyId(),
-							PropsUtil.LDAP_ERROR_PASSWORD_HISTORY)) != -1) {
+				String passwordHistory = PrefsPropsUtil.getString(
+					user.getCompanyId(), PropsUtil.LDAP_ERROR_PASSWORD_HISTORY);
 
-						throw new UserPasswordException(
-							UserPasswordException.PASSWORD_ALREADY_USED);
-					}
+				if (msg.indexOf(passwordHistory) != -1) {
+					throw new UserPasswordException(
+						UserPasswordException.PASSWORD_ALREADY_USED);
 				}
 			}
 
