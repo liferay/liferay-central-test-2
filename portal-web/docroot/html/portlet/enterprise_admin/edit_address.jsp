@@ -220,4 +220,6 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 			}
 		]
 	);
+
+	<% themeDisplay.setIncludeServiceJs(true); %>
 </script>

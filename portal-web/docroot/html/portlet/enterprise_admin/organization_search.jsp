@@ -171,4 +171,6 @@ if (displayTerms.getParentOrganizationId() > 0) {
 			}
 		]
 	);
+
+	<% themeDisplay.setIncludeServiceJs(true); %>
 </script>
