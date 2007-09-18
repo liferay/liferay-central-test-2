@@ -1354,6 +1354,9 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="zip-portal-war">
+
+		<!-- Servlet 2.4 WAR -->
+
 		<delete file="dist/liferay-portal-${lp.version.file.name}.war" failonerror="false" />
 
 		<zip
@@ -1361,15 +1364,39 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			destfile="dist/liferay-portal-${lp.version.file.name}.war"
 		/>
 
-		<copy
-			file="dist/liferay-portal-${lp.version.file.name}.war"
-			tofile="dist/liferay-portal-${lp.version.file.name}-with-dependencies.war"
-			overwrite="yes"
-		/>
+		<!-- Servlet 2.3 WAR -->
 
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
+
+		<java
+			classname="com.liferay.portal.tools.WebXML23Converter"
+			classpathref="project.classpath"
+			fork="true"
+			maxmemory="128m"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
+			<arg value="${app.server.portal.dir}/WEB-INF/web.xml" />
+			<arg value="${tstamp.value}/WEB-INF/web.xml" />
+		</java>
+
+		<delete file="dist/liferay-portal-${lp.version.file.name}-servlet23.war" failonerror="false" />
+
+		<copy
+			file="dist/liferay-portal-${lp.version.file.name}.war"
+			tofile="dist/liferay-portal-${lp.version.file.name}-servlet23.war"
+			overwrite="yes"
+		/>
+
+		<zip
+			basedir="${tstamp.value}"
+			destfile="dist/liferay-portal-${lp.version.file.name}-servlet23.war"
+			update="yes"
+		/>
+
+		<!-- Servlet 2.3 WAR with dependencies -->
 
 		<copy todir="${tstamp.value}/WEB-INF/lib">
 			<fileset
@@ -1377,6 +1404,32 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 				includes="portal-kernel.jar,portal-service.jar,portlet.jar"
 			/>
 		</copy>
+
+		<delete file="dist/liferay-portal-${lp.version.file.name}-servlet23-with-dependencies.war" failonerror="false" />
+
+		<copy
+			file="dist/liferay-portal-${lp.version.file.name}-servlet23.war"
+			tofile="dist/liferay-portal-${lp.version.file.name}-servlet23-with-dependencies.war"
+			overwrite="yes"
+		/>
+
+		<zip
+			basedir="${tstamp.value}"
+			destfile="dist/liferay-portal-${lp.version.file.name}-servlet23-with-dependencies.war"
+			update="yes"
+		/>
+
+		<!-- Servlet 2.4 WAR with dependencies -->
+
+		<delete file="${tstamp.value}/WEB-INF/web.xml" />
+
+		<delete file="dist/liferay-portal-${lp.version.file.name}-with-dependencies.war" failonerror="false" />
+
+		<copy
+			file="dist/liferay-portal-${lp.version.file.name}.war"
+			tofile="dist/liferay-portal-${lp.version.file.name}-with-dependencies.war"
+			overwrite="yes"
+		/>
 
 		<zip
 			basedir="${tstamp.value}"
