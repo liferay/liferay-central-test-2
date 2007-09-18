@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+themeDisplay.setIncludeServiceJs(true);
+
 String redirect = ParamUtil.getString(request, "redirect");
 
 Address address = (Address)request.getAttribute(WebKeys.ADDRESS);
@@ -220,6 +222,4 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 			}
 		]
 	);
-
-	<% themeDisplay.setIncludeServiceJs(true); %>
 </script>

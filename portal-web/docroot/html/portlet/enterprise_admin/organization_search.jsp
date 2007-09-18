@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+themeDisplay.setIncludeServiceJs(true);
+
 OrganizationSearch searchContainer = (OrganizationSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
 OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContainer.getDisplayTerms();
@@ -171,6 +173,4 @@ if (displayTerms.getParentOrganizationId() > 0) {
 			}
 		]
 	);
-
-	<% themeDisplay.setIncludeServiceJs(true); %>
 </script>

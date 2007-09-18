@@ -27,6 +27,8 @@
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
 
 <%
+themeDisplay.setIncludeServiceJs(true);
+
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 
 String className = (String)request.getAttribute("liferay-ui:tags_selector:className");
@@ -46,8 +48,6 @@ String curTagsParam = request.getParameter(hiddenInput);
 if (curTagsParam != null) {
 	curTags = curTagsParam;
 }
-
-themeDisplay.setIncludeServiceJs(true);
 %>
 
 <input id="<%= namespace %><%= hiddenInput %>" type="hidden" />

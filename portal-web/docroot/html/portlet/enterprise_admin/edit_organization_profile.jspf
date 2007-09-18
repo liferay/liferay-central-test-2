@@ -23,6 +23,8 @@
 %>
 
 <%
+themeDisplay.setIncludeServiceJs(true);
+
 if (parentOrganizationId <= 0) {
 	parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 
@@ -222,6 +224,4 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 			}
 		]
 	);
-
-	<% themeDisplay.setIncludeServiceJs(true); %>
 </script>
