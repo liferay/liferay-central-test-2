@@ -767,6 +767,16 @@
 				</replace>
 			</then>
 		</if>
+
+		<if>
+			<equals arg1="${app.server.type}" arg2="weblogic" />
+			<then>
+				<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
+					<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+					<replacevalue>auto.deploy.dest.dir=autodeploy</replacevalue>
+				</replace>
+			</then>
+		</if>
 	</target>
 
 	<target name="build-eclipse">

@@ -114,7 +114,8 @@ public class BaseDeployer {
 		this.jars = jars;
 
 		if (appServerType.startsWith("glassfish") ||
-			appServerType.equals("pramati")) {
+			appServerType.equals("pramati") ||
+			appServerType.equals("weblogic")) {
 
 			unpackWar = false;
 		}
