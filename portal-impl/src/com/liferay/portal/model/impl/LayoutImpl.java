@@ -27,6 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -53,7 +54,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.Http;
-import com.liferay.util.LocaleUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
@@ -661,7 +661,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 		try {
 			String defaultLanguageId =
-				LocaleUtil.toLanguageId(Locale.getDefault());
+				LocaleUtil.toLanguageId(LocaleUtil.getDefault());
 
 			SAXReader reader = new SAXReader();
 
@@ -705,7 +705,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 		String localeLanguageId = LocaleUtil.toLanguageId(locale);
 
-		String defaultLanguageId = LocaleUtil.toLanguageId(Locale.getDefault());
+		String defaultLanguageId = LocaleUtil.toLanguageId(
+			LocaleUtil.getDefault());
 
 		SAXReader reader = new SAXReader();
 

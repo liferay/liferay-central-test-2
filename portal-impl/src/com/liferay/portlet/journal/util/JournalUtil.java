@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -55,7 +56,6 @@ import com.liferay.portlet.journal.util.comparator.ArticleTitleComparator;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FiniteUniqueStack;
 import com.liferay.util.Http;
-import com.liferay.util.LocaleUtil;
 import com.liferay.util.Time;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -67,7 +67,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Stack;
 
@@ -717,7 +716,7 @@ public class JournalUtil {
 
 			_mergeLocaleContent(
 				path, curContentDoc, newContentDoc, xsdRoot,
-				LocaleUtil.toLanguageId(Locale.getDefault()));
+				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 
 			curContent = formatXML(curContentDoc);
 		}

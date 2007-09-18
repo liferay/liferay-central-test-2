@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.smtp.MessageListener;
+import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.util.Locale;
 import java.util.Map;
@@ -121,7 +122,7 @@ public class PortletContextWrapper {
 
 		if (resourceBundle == null) {
 			resourceBundle = (ResourceBundle)_resourceBundles.get(
-				Locale.getDefault().getLanguage());
+				LocaleUtil.getDefault().getLanguage());
 		}
 
 		return resourceBundle;

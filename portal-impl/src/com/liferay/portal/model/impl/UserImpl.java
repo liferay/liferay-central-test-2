@@ -24,6 +24,8 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
@@ -39,7 +41,6 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.util.LocaleUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -165,7 +166,7 @@ public class UserImpl extends UserModelImpl implements User {
 
 	public void setTimeZoneId(String timeZoneId) {
 		if (Validator.isNull(timeZoneId)) {
-			timeZoneId = TimeZone.getDefault().getID();
+			timeZoneId = TimeZoneUtil.getDefault().getID();
 		}
 
 		_timeZone = TimeZone.getTimeZone(timeZoneId);

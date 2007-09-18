@@ -22,14 +22,13 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.util.LocaleUtil;
 
 import java.io.StringReader;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -93,8 +92,8 @@ public class LocaleTransformerListener extends TransformerListener {
 
 			Element root = doc.getRootElement();
 
-			String defaultLanguageId =
-				LocaleUtil.toLanguageId(Locale.getDefault());
+			String defaultLanguageId = LocaleUtil.toLanguageId(
+				LocaleUtil.getDefault());
 
 			String[] availableLocales = StringUtil.split(
 				root.attributeValue("available-locales", defaultLanguageId));

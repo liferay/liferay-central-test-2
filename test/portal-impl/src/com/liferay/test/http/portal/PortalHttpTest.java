@@ -22,6 +22,7 @@
 
 package com.liferay.test.http.portal;
 
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.http.PortalServiceHttp;
 import com.liferay.portal.service.http.UserServiceHttp;
@@ -49,7 +50,7 @@ public class PortalHttpTest extends BaseHttpTest {
 			boolean autoScreenName = true;
 			String screenName = "";
 			String emailAddress = "UserServiceHttpTest@liferay.com";
-			Locale locale = Locale.getDefault();
+			Locale locale = LocaleUtil.getDefault();
 			String firstName = "UserServiceHttpTest";
 			String middleName = "";
 			String lastName = "UserServiceHttpTest";

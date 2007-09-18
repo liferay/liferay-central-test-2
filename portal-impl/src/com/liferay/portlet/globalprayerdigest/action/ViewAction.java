@@ -23,6 +23,7 @@
 package com.liferay.portlet.globalprayerdigest.action;
 
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 
@@ -46,7 +47,7 @@ public class ViewAction extends com.liferay.portlet.iframe.action.ViewAction {
 	protected String getSrc(RenderRequest req, RenderResponse res) {
 		String src = super.getSrc(req, res);
 
-		TimeZone timeZone = TimeZone.getDefault();
+		TimeZone timeZone = TimeZoneUtil.getDefault();
 
 		try {
 			User user = PortalUtil.getUser(req);

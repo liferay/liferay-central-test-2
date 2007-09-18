@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.util.TimeZone;
@@ -87,7 +88,7 @@ public class InputTimeZoneTag extends IncludeTag {
 		"/html/taglib/ui/input_time_zone/page.jsp";
 
 	private String _name;
-	private String _value = TimeZone.getDefault().getID();
+	private String _value = TimeZoneUtil.getDefault().getID();
 	private boolean _nullable;
 	private boolean _daylight;
 	private int _displayStyle = TimeZone.SHORT;

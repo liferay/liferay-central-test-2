@@ -22,6 +22,7 @@
 
 package com.liferay.portal.jbi;
 
+import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.util.Http;
@@ -31,7 +32,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TimeZone;
 
 /**
  * <a href="JBIRequestURL.java.html"><b><i>View Source</i></b></a>
@@ -56,7 +56,7 @@ public abstract class JBIRequestURL {
 		}
 		else {
 			_params.put("userId", "0");
-			_params.put("timeZoneId", TimeZone.getDefault().getID());
+			_params.put("timeZoneId", TimeZoneUtil.getDefault().getID());
 		}
 	}
 

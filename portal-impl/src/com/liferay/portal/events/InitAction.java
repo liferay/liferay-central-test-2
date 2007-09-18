@@ -28,10 +28,11 @@ import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaProps;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.log.CommonsLogFactoryImpl;
 import com.liferay.portal.security.jaas.PortalConfiguration;
 import com.liferay.portal.struts.ActionException;
@@ -49,9 +50,7 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.Set;
-import java.util.TimeZone;
 
 import javax.security.auth.login.Configuration;
 
@@ -78,24 +77,21 @@ public class InitAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {
 
-		// Set default locale
+		// Set the default locale used by Liferay. This locale is no longer set
+		// at the VM level. See LEP-2584.
 
 		String userLanguage = SystemProperties.get("user.language");
 		String userCountry = SystemProperties.get("user.country");
 		String userVariant = SystemProperties.get("user.variant");
 
-		if (Validator.isNull(userVariant)) {
-			Locale.setDefault(new Locale(userLanguage, userCountry));
-		}
-		else {
-			Locale.setDefault(
-				new Locale(userLanguage, userCountry, userVariant));
-		}
+		LocaleUtil.setDefault(userLanguage, userCountry, userVariant);
 
-		// Set default time zone
+		// Set the default time zone used by Liferay. This time zone is no
+		// longer set at the VM level. See LEP-2584.
 
-		TimeZone.setDefault(
-			TimeZone.getTimeZone(SystemProperties.get("user.timezone")));
+		String userTimeZone = SystemProperties.get("user.timezone");
+
+		TimeZoneUtil.setDefault(userTimeZone);
 
 		// Shared class loader
 

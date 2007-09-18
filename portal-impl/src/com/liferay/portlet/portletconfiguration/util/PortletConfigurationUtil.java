@@ -23,11 +23,9 @@
 package com.liferay.portlet.portletconfiguration.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.LocaleUtil;
-
-import java.util.Locale;
 
 import javax.portlet.PortletPreferences;
 
@@ -52,7 +50,8 @@ public class PortletConfigurationUtil {
 			return StringPool.BLANK;
 		}
 
-		String defaultLanguageId = LocaleUtil.toLanguageId(Locale.getDefault());
+		String defaultLanguageId = LocaleUtil.toLanguageId(
+			LocaleUtil.getDefault());
 
 		String defaultPortletTitle = portletSetup.getValue(
 			"portlet-setup-title-" + defaultLanguageId, StringPool.BLANK);

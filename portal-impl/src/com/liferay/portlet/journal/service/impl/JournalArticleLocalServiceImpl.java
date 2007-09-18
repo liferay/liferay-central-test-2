@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -82,7 +83,6 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
-import com.liferay.util.LocaleUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.lucene.HitsImpl;
 
@@ -95,7 +95,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -1513,7 +1512,7 @@ public class JournalArticleLocalServiceImpl
 
 				if (!Validator.isNotNull(elLanguage)) {
 					defaultElLanguage =
-						"_" + LocaleUtil.toLanguageId(Locale.getDefault());
+						"_" + LocaleUtil.toLanguageId(LocaleUtil.getDefault());
 				}
 
 				long defaultImageId =
@@ -1570,7 +1569,7 @@ public class JournalArticleLocalServiceImpl
 
 			if (!Validator.isNotNull(elLanguage)) {
 				defaultElLanguage =
-					"_" + LocaleUtil.toLanguageId(Locale.getDefault());
+					"_" + LocaleUtil.toLanguageId(LocaleUtil.getDefault());
 			}
 
 			long defaultImageId =

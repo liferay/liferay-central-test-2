@@ -22,90 +22,35 @@
 
 package com.liferay.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-
 import java.util.Locale;
-import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LocaleUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated this class has been repackaged at
+ * <code>com.liferay.portal.kernel.util</code>.
+ *
  */
 public class LocaleUtil {
 
 	public static Locale fromLanguageId(String languageId) {
-		Locale locale = null;
-
-		try {
-			locale = (Locale)_locales.get(languageId);
-
-			if (locale == null) {
-				int pos = languageId.indexOf(StringPool.UNDERLINE);
-
-				String languageCode = languageId.substring(0, pos);
-				String countryCode = languageId.substring(
-					pos + 1, languageId.length());
-
-				locale = new Locale(languageCode, countryCode);
-
-				_locales.put(languageId, locale);
-			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(languageId + " is not a valid language id");
-			}
-		}
-
-		if (locale == null) {
-			locale = Locale.getDefault();
-		}
-
-		return locale;
+		return com.liferay.portal.kernel.util.LocaleUtil.fromLanguageId(
+			languageId);
 	}
 
 	public static Locale[] fromLanguageIds(String[] languageIds) {
-		Locale[] locales = new Locale[languageIds.length];
-
-		for (int i = 0; i < languageIds.length; i++) {
-			locales[i] = fromLanguageId(languageIds[i]);
-		}
-
-		return locales;
+		return com.liferay.portal.kernel.util.LocaleUtil.fromLanguageIds(
+			languageIds);
 	}
 
 	public static String toLanguageId(Locale locale) {
-		if (locale == null) {
-			locale = Locale.getDefault();
-		}
-
-		StringMaker sm = new StringMaker();
-
-		sm.append(locale.getLanguage());
-		sm.append(StringPool.UNDERLINE);
-		sm.append(locale.getCountry());
-
-		return sm.toString();
+		return com.liferay.portal.kernel.util.LocaleUtil.toLanguageId(locale);
 	}
 
 	public static String[] toLanguageIds(Locale[] locales) {
-		String[] languageIds = new String[locales.length];
-
-		for (int i = 0; i < locales.length; i++) {
-			languageIds[i] = toLanguageId(locales[i]);
-		}
-
-		return languageIds;
+		return com.liferay.portal.kernel.util.LocaleUtil.toLanguageIds(locales);
 	}
-
-	private static Log _log = LogFactory.getLog(LocaleUtil.class);
-
-	private static Map _locales = CollectionFactory.getHashMap();
 
 }

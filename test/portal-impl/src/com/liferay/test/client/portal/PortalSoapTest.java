@@ -28,12 +28,12 @@ import com.liferay.client.portal.service.http.PortalServiceSoapServiceLocator;
 import com.liferay.client.portal.service.http.UserServiceSoap;
 import com.liferay.client.portal.service.http.UserServiceSoapServiceLocator;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.test.TestConstants;
 import com.liferay.test.TestProps;
 import com.liferay.test.client.BaseSoapTest;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 /**
  * <a href="PortalSoapTest.java.html"><b><i>View Source</i></b></a>
@@ -110,7 +110,7 @@ public class PortalSoapTest extends BaseSoapTest {
 		boolean autoScreenName = true;
 		String screenName = "";
 		String emailAddress = "PortalSoapTest" + seed + "@liferay.com";
-		String locale = Locale.getDefault().toString();
+		String locale = LocaleUtil.getDefault().toString();
 		String firstName = "PortalSoapTest";
 		String middleName = "";
 		String lastName = "PortalSoapTest";

@@ -36,8 +36,10 @@ import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
@@ -190,8 +192,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			timeZone = user.getTimeZone();
 		}
 		else {
-			locale = Locale.getDefault();
-			timeZone = TimeZone.getDefault();
+			locale = LocaleUtil.getDefault();
+			timeZone = TimeZoneUtil.getDefault();
 		}
 
 		Calendar startDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
@@ -627,8 +629,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			timeZone = user.getTimeZone();
 		}
 		else {
-			locale = Locale.getDefault();
-			timeZone = TimeZone.getDefault();
+			locale = LocaleUtil.getDefault();
+			timeZone = TimeZoneUtil.getDefault();
 		}
 
 		Calendar startDate = CalendarFactoryUtil.getCalendar(timeZone, locale);

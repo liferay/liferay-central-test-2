@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -422,7 +423,7 @@ public class RenderRequestImpl implements RenderRequest {
 		}
 
 		if (locale == null) {
-			locale = Locale.getDefault();
+			locale = LocaleUtil.getDefault();
 		}
 
 		return locale;

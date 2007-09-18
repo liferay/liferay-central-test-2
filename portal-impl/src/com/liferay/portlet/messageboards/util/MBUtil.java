@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.util;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -40,13 +41,11 @@ import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.util.Http;
-import com.liferay.util.LocaleUtil;
 
 import java.io.IOException;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
@@ -385,7 +384,8 @@ public class MBUtil {
 	public static String getRanksKey(String languageId) {
 		String ranksKey = "ranks";
 
-		String defaultLanguageId = LocaleUtil.toLanguageId(Locale.getDefault());
+		String defaultLanguageId = LocaleUtil.toLanguageId(
+			LocaleUtil.getDefault());
 
 		if (!languageId.equals(defaultLanguageId)) {
 			ranksKey += "_" + languageId;

@@ -22,6 +22,7 @@
 
 package com.liferay.test.spring.remoting.portal;
 
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserService;
 import com.liferay.test.TestCase;
@@ -51,7 +52,7 @@ public class PortalHttpTest extends TestCase {
 		boolean autoScreenName = true;
 		String screenName = "UserServiceSpringRemotingTest";
 		String emailAddress = "UserServiceSpringRemotingTest@liferay.com";
-		Locale locale = Locale.getDefault();
+		Locale locale = LocaleUtil.getDefault();
 		String firstName = "UserServiceSpringRemotingTest";
 		String middleName = "";
 		String lastName = "UserServiceSpringRemotingTest";

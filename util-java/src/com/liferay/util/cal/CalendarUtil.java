@@ -23,7 +23,9 @@
 package com.liferay.util.cal;
 
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.CollectionFactory;
 
@@ -373,7 +375,7 @@ public class CalendarUtil {
 
 	public static boolean isFuture(int month, int year) {
 		return isFuture(
-			month, year, TimeZone.getDefault(), Locale.getDefault());
+			month, year, TimeZoneUtil.getDefault(), LocaleUtil.getDefault());
 	}
 
 	public static boolean isFuture(int month, int year, TimeZone timeZone,
@@ -393,7 +395,8 @@ public class CalendarUtil {
 
 	public static boolean isFuture(int month, int day, int year) {
 		return isFuture(
-			month, day, year, TimeZone.getDefault(), Locale.getDefault());
+			month, day, year, TimeZoneUtil.getDefault(),
+			LocaleUtil.getDefault());
 	}
 
 	public static boolean isFuture(int month, int day, int year,
@@ -414,8 +417,8 @@ public class CalendarUtil {
 								   int minute, int amPm) {
 
 		return isFuture(
-			month, day, year, hour, minute, amPm, TimeZone.getDefault(),
-			Locale.getDefault());
+			month, day, year, hour, minute, amPm, TimeZoneUtil.getDefault(),
+			LocaleUtil.getDefault());
 	}
 
 	public static boolean isFuture(int month, int day, int year,

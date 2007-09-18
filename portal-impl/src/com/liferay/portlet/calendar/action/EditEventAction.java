@@ -27,7 +27,9 @@ import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -183,8 +185,8 @@ public class EditEventAction extends PortletAction {
 			timeZone = user.getTimeZone();
 		}
 		else {
-			locale = Locale.getDefault();
-			timeZone = TimeZone.getDefault();
+			locale = LocaleUtil.getDefault();
+			timeZone = TimeZoneUtil.getDefault();
 		}
 
 		Calendar startDate = CalendarFactoryUtil.getCalendar(timeZone, locale);

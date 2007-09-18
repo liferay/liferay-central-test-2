@@ -23,8 +23,8 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.taglib.util.IncludeTag;
-import com.liferay.util.LocaleUtil;
 import com.liferay.util.servlet.StringServletResponse;
 
 import java.io.IOException;
