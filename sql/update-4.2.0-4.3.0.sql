@@ -1,3 +1,35 @@
+delete from Groups_Orgs where groupId not in (select groupId from Group_);
+delete from Groups_Orgs where organizationId not in (select organizationId from Organization_);
+
+delete from Groups_Permissions where groupId not in (select groupId from Group_);
+delete from Groups_Permissions where permissionId not in (select permissionId from Permission_);
+
+delete from Groups_Roles where groupId not in (select groupId from Group_);
+delete from Groups_Roles where roleId not in (select roleId from Role_);
+
+delete from Groups_UserGroups where groupId not in (select groupId from Group_);
+delete from Groups_UserGroups where userGroupId not in (select userGroupId from UserGroup);
+
+delete from Roles_Permissions where roleId not in (select roleId from Role_);
+delete from Roles_Permissions where permissionId not in (select permissionId from Permission_);
+
+delete from Users_Groups where userId not in (select userId from User_);
+delete from Users_Groups where groupId not in (select groupId from Group_);
+
+delete from Users_Orgs where userId not in (select userId from User_);
+delete from Users_Orgs where organizationId not in (select organizationId from Organization_);
+
+delete from Users_Permissions where userId not in (select userId from User_);
+delete from Users_Permissions where permissionId not in (select permissionId from Permission_);
+
+delete from Users_Roles where userId not in (select userId from User_);
+delete from Users_Roles where roleId not in (select roleId from Role_);
+
+delete from Users_UserGroups where userId not in (select userId from User_);
+delete from Users_UserGroups where userGroupId not in (select userGroupId from UserGroup);
+
+COMMIT_TRANSACTION;
+
 update Account_ set parentAccountId = '0';
 update Account_ set legalName = 'Liferay, Inc.' where legalName = 'Liferay, LLC';
 
@@ -20,6 +52,10 @@ COMMIT_TRANSACTION;
 update Company set webId = companyId;
 
 update Contact_ set parentContactId = '0';
+update Contact_ set prefixId = '0' where prefixId is null;
+update Contact_ set prefixId = '0' where prefixId = '';
+update Contact_ set suffixId = '0' where suffixId is null;
+update Contact_ set suffixId = '0' where suffixId = '';
 
 update Country set countryId = '51' where countryId = '51`';
 
