@@ -290,7 +290,7 @@
 	<target name="build-lang-native2ascii">
 		<delete file="${lang.dir}/${lang.file}_${lang.code}.properties" failonerror="false" />
 
-		<exec dir="${lang.dir}" executable="cmd.exe" os="Windows 95,Windows 98,Windows NT,Windows 2000,Windows XP">
+		<exec dir="${lang.dir}" executable="cmd.exe" os="Windows 95,Windows 98,Windows NT,Windows 2000,Windows 2003,Windows XP,Windows Vista">
 			<arg line="/c '${env.JAVA_HOME}'/bin/native2ascii -encoding UTF-8 ${lang.file}_${lang.code}.properties.native ${lang.file}_${lang.code}.properties" />
 		</exec>
 
