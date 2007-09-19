@@ -1292,6 +1292,7 @@ id=編號
 if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order=如果折扣別為 <i>免費寄送</i>, 則運費會自動從訂單中扣除. 如果折扣別為 <i>免稅</i>, 則營業稅會自動從訂單中扣除.
 if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay=如果用戶是合法的並且用戶存在在LDAP 伺服器但不是在Liferay, 用戶將同步從LDAP 伺服器對Liferay 。下面是映射Liferay 屬性和對名字被使用居住於Liferay 領域從LDAP 。
 if-you-are-not-x-logout-and-try-again=如果您不是 {0}, 登出並請再試一次.
+ignore-all-updates=忽略所有更新
 ignore=忽略
 image-names-must-end-with-one-of-the-following-extensions=圖像名字必須以以下副檔名的當中一個結束:
 image-position-from-the-left=圖像位置從左邊

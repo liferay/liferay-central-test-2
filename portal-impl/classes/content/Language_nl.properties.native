@@ -1292,6 +1292,7 @@ id=ID
 if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order=Wanneer het kortingstype <i>Gratis verzendkosten</i> is, dan zullen de verzendkosten worden afgetroken van de order. Wanneer het kortingstype <i>Tax Free</i> is, dan wordt de BTW afgetrokken van de order.
 if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay=Als de gebruiker geldig is en de gebruiker in de LDAP-server maar niet in Liferay bestaat, zal de gebruiker van de LDAP-server met de Liferay worden gesynchroniseerd. Hieronder de koppeling van Liferayattributen met de paarnamen die worden gebruikt om het veld Liferay met LDAP waarden te vullen.
 if-you-are-not-x-logout-and-try-again=Indien u niet {0} bent, a.u.b. afmelden en opnieuw proberen.
+ignore-all-updates=Negeer Alle Updates
 ignore=Negeer
 image-names-must-end-with-one-of-the-following-extensions=Afbeeldingsnamen moeten met ��n van de volgende extensies be�indigd worden:
 image-position-from-the-left=De Positie van het beeld van de Linkerzijde

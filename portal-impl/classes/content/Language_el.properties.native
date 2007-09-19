@@ -1291,6 +1291,7 @@ id=Ταυτότητα
 if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order=Άν ο τύπος έκπτωσης είναι <i>Δωρεάν Αποστολή</i>, τότε τα έξοδα αποστολής αφαιρούνται από την παραγγελία. Άν ο τύπος έκπτωσης είναι <i>Ελεύθερο Φόρου</i>, τότε η χρέωση φόρου αφαιρείται από την παραγγελία.
 if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay=Εάν ο χρήστης ισχύσει και ο χρήστης υπάρχει στον κεντρικό υπολογιστή LDAP αλλά όχι σε Liferay, ο χρήστης θα συγχρονιστεί από τον κεντρικό υπολογιστή LDAP σε Liferay. Κατωτέρω είναι μια χαρτογράφηση των ιδιοτήτων Liferay και το όνομα ζευγαριού που χρησιμοποιείται για να εποικήσει τον τομέα Liferay από LDAP.
 if-you-are-not-x-logout-and-try-again=Εαν δεν είστε ο/η {0}, αποσυνδεθείτε (logout) και ξανασυνδεθείτε (login).
+ignore-all-updates=Αγνοήστε όλες τις αναπροσαρμογές
 ignore=Αγνοήστε
 image-names-must-end-with-one-of-the-following-extensions=Τα ονόματα εικόνας πρέπει να τελειώσουν με μια από τις ακόλουθες καταλήξεις:
 image-position-from-the-left=Θέση εικόνας από το αριστερό

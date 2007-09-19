@@ -1292,6 +1292,7 @@ id=Identification
 if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order=If the discount type is <i>Free Shipping</i>, then shipping charges are subtracted from the order. If the discount type is <i>Tax Free</i>, then tax charges are subtracted from the order.
 if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay=Si l'utilisateur est valide et l'utilisateur existe dans le serveur de LDAP mais pas dans Liferay, l'utilisateur sera synchronisé du serveur de LDAP à Liferay. Au-dessous de est tracer des attributs de Liferay et du nom de paire employé pour peupler le champ de Liferay de LDAP.
 if-you-are-not-x-logout-and-try-again=Si vous n'êtes pas {0}, fermez la session et essayez à nouveau.
+ignore-all-updates=Ignorez Toutes les Mises à jour
 ignore=Ignorez
 image-names-must-end-with-one-of-the-following-extensions=Les noms d'image doivent finir avec l'une des extensions suivantes :
 image-position-from-the-left=Position d'image de la gauche
