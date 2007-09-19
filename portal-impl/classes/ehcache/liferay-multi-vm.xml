@@ -29,7 +29,8 @@
         timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+            properties="replicateUpdatesViaCopy=false" propertySeparator="," />
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</defaultCache>
 	<cache
@@ -39,7 +40,8 @@
 		timeToLiveSeconds="300"
 		overflowToDisk="true"
 	>
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+            properties="replicateUpdatesViaCopy=false" propertySeparator="," />
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache
@@ -49,7 +51,8 @@
         timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+            properties="replicateUpdatesViaCopy=false" propertySeparator="," />
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache
@@ -59,7 +62,8 @@
         timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+            properties="replicateUpdatesViaCopy=false" propertySeparator="," />
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache
@@ -69,7 +73,8 @@
         timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+            properties="replicateUpdatesViaCopy=false" propertySeparator="," />
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache
@@ -79,7 +84,8 @@
 		timeToLiveSeconds="3600"
 		overflowToDisk="true"
 	>
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+            properties="replicateUpdatesViaCopy=false" propertySeparator="," />
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache
@@ -89,7 +95,8 @@
 		timeToLiveSeconds="3600"
 		overflowToDisk="true"
 	>
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+            properties="replicateUpdatesViaCopy=false" propertySeparator="," />
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache
@@ -99,7 +106,8 @@
         timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+            properties="replicateUpdatesViaCopy=false" propertySeparator="," />
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 	<cache
@@ -109,7 +117,8 @@
         timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+            properties="replicateUpdatesViaCopy=false" propertySeparator="," />
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 </ehcache>
