@@ -73,6 +73,16 @@ public class JournalContentSearchLocalServiceUtil {
 		journalContentSearchLocalService.checkContentSearches(companyId);
 	}
 
+	public static void deleteArticleContentSearch(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String portletId,
+		java.lang.String articleId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+		journalContentSearchLocalService.deleteArticleContentSearch(groupId,
+			privateLayout, layoutId, portletId, articleId);
+	}
+
 	public static void deleteArticleContentSearches(long groupId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();

@@ -79,6 +79,11 @@ public interface PortletPreferencesFactory {
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
+			Layout layout, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup, String defaultPreferences)
+		throws PortalException, SystemException;
+
+	public PortletPreferences getPortletSetup(
 			ActionRequest req, String portletId, boolean uniquePerLayout,
 			boolean uniquePerGroup)
 		throws PortalException, SystemException;

@@ -124,6 +124,15 @@ public class JournalContentSearchLocalServiceImpl
 		}
 	}
 
+	public void deleteArticleContentSearch(
+			long groupId, boolean privateLayout, long layoutId,
+			String portletId, String articleId)
+		throws PortalException, SystemException {
+
+		JournalContentSearchUtil.removeByG_P_L_P_A(
+			groupId, privateLayout, layoutId, portletId, articleId);
+	}
+
 	public void deleteArticleContentSearches(long groupId, String articleId)
 		throws SystemException {
 

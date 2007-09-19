@@ -948,6 +948,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setPortletDataHandlerClass(GetterUtil.getString(
 					portlet.elementText("portlet-data-handler-class"),
 					portletModel.getPortletDataHandlerClass()));
+				portletModel.setPortletLayoutListenerClass(GetterUtil.getString(
+					portlet.elementText("portlet-layout-listener-class"),
+					portletModel.getPortletLayoutListenerClass()));
 				portletModel.setSmtpMessageListenerClass(GetterUtil.getString(
 					portlet.elementText("smtp-message-listener-class"),
 					portletModel.getSmtpMessageListenerClass()));

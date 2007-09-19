@@ -25,6 +25,7 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
+import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.smtp.MessageListener;
@@ -54,6 +55,7 @@ public class PortletContextWrapper {
 		Indexer indexerInstance, Scheduler schedulerInstance,
 		URLEncoder urlEncoderInstance,
 		PortletDataHandler portletDataHandlerInstance,
+		PortletLayoutListener portletLayoutListenerInstance,
 		MessageListener smtpMessageListenerInstance,
 		PreferencesValidator prefsValidatorInstance, Map resourceBundles,
 		Map customUserAttributes) {
@@ -66,6 +68,7 @@ public class PortletContextWrapper {
 		_schedulerInstance = schedulerInstance;
 		_urlEncoderInstance = urlEncoderInstance;
 		_portletDataHandlerInstance = portletDataHandlerInstance;
+		_portletLayoutListenerInstance = portletLayoutListenerInstance;
 		_smtpMessageListenerInstance = smtpMessageListenerInstance;
 		_prefsValidatorInstance = prefsValidatorInstance;
 		_resourceBundles = resourceBundles;
@@ -108,6 +111,10 @@ public class PortletContextWrapper {
 		return _portletDataHandlerInstance;
 	}
 
+	public PortletLayoutListener getPortletLayoutListenerInstance() {
+		return _portletLayoutListenerInstance;
+	}
+
 	public MessageListener getSmtpMessageListenerInstance() {
 		return _smtpMessageListenerInstance;
 	}
@@ -140,6 +147,7 @@ public class PortletContextWrapper {
 	private Scheduler _schedulerInstance;
 	private URLEncoder _urlEncoderInstance;
 	private PortletDataHandler _portletDataHandlerInstance;
+	private PortletLayoutListener _portletLayoutListenerInstance;
 	private MessageListener _smtpMessageListenerInstance;
 	private PreferencesValidator _prefsValidatorInstance;
 	private Map _resourceBundles;

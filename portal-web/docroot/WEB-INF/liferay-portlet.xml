@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 4.3.2//EN" "http://www.liferay.com/dtd/liferay-portlet-app_4_3_2.dtd">
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 4.3.3//EN" "http://www.liferay.com/dtd/liferay-portlet-app_4_3_3.dtd">
 
 <liferay-portlet-app>
 	<portlet>
@@ -569,6 +569,7 @@
 		<configuration-action-class>com.liferay.portlet.journalcontent.action.ConfigurationActionImpl</configuration-action-class>
 		<friendly-url-mapper-class>com.liferay.portlet.journalcontent.JournalContentFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl</portlet-data-handler-class>
+		<portlet-layout-listener-class>com.liferay.portlet.journalcontent.JournalContentPortletLayoutListener</portlet-layout-listener-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>

@@ -292,6 +292,16 @@ public class PortletPreferencesFactoryImpl
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
+		return getPortletSetup(
+			layout, portletId, uniquePerLayout, uniquePerGroup,
+			defaultPreferences);
+	}
+
+	public PortletPreferences getPortletSetup(
+			Layout layout, String portletId, boolean uniquePerLayout,
+			boolean uniquePerGroup, String defaultPreferences)
+		throws PortalException, SystemException {
+
 		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
 		long plid = layout.getPlid();

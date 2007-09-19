@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
+import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
@@ -199,6 +200,17 @@ public class PortletHotDeployListener implements HotDeployListener {
 							portlet.getPortletDataHandlerClass()).newInstance();
 				}
 
+				PortletLayoutListener portletLayoutListenerInstance = null;
+
+				if (Validator.isNotNull(
+						portlet.getPortletLayoutListenerClass())) {
+
+					portletLayoutListenerInstance =
+						(PortletLayoutListener)portletClassLoader.loadClass(
+							portlet.getPortletLayoutListenerClass()).
+								newInstance();
+				}
+
 				MessageListener smtpMessageListenerInstance = null;
 
 				if (Validator.isNotNull(
@@ -283,9 +295,9 @@ public class PortletHotDeployListener implements HotDeployListener {
 					portlet.getPortletId(), ctx, portletInstance,
 					configurationActionInstance, indexerInstance,
 					schedulerInstance, urlEncoderInstance,
-					portletDataHandlerInstance, smtpMessageListenerInstance,
-					prefsValidatorInstance, resourceBundles,
-					customUserAttributes);
+					portletDataHandlerInstance, portletLayoutListenerInstance,
+					smtpMessageListenerInstance, prefsValidatorInstance,
+					resourceBundles, customUserAttributes);
 
 				PortletContextPool.put(portlet.getPortletId(), pcw);
 			}

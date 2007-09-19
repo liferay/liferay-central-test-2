@@ -436,6 +436,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portlet.journalcontent.JournalContentPortletLayoutListener">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portlet.mail">
 		<priority value="WARN" />
 	</category>

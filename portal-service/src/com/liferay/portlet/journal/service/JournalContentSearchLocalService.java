@@ -61,6 +61,11 @@ public interface JournalContentSearchLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void deleteArticleContentSearch(long groupId, boolean privateLayout,
+		long layoutId, java.lang.String portletId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void deleteArticleContentSearches(long groupId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException;
 

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -174,13 +175,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String indexerClass, String openSearchClass, String schedulerClass,
 		String portletURLClass, String friendlyURLMapperClass,
 		String urlEncoderClass, String portletDataHandlerClass,
-		String smtpMessageListenerClass, String defaultPreferences,
-		String prefsValidator, boolean prefsCompanyWide,
-		boolean prefsUniquePerLayout, boolean prefsOwnedByGroup,
-		boolean useDefaultTemplate, boolean showPortletAccessDenied,
-		boolean showPortletInactive, boolean actionURLRedirect,
-		boolean restoreCurrentView, boolean maximizeEdit, boolean maximizeHelp,
-		boolean popUpPrint, boolean layoutCacheable, boolean instanceable,
+		String portletLayoutListenerClass, String smtpMessageListenerClass,
+		String defaultPreferences, String prefsValidator,
+		boolean prefsCompanyWide, boolean prefsUniquePerLayout,
+		boolean prefsOwnedByGroup, boolean useDefaultTemplate,
+		boolean showPortletAccessDenied, boolean showPortletInactive,
+		boolean actionURLRedirect, boolean restoreCurrentView,
+		boolean maximizeEdit, boolean maximizeHelp, boolean popUpPrint,
+		boolean layoutCacheable, boolean instanceable,
 		boolean privateRequestAttributes, boolean privateSessionAttributes,
 		int renderWeight, boolean ajaxable, List headerPortalCss,
 		List headerPortletCss, List headerPortalJavaScript,
@@ -210,6 +212,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_friendlyURLMapperClass = friendlyURLMapperClass;
 		_urlEncoderClass = urlEncoderClass;
 		_portletDataHandlerClass = portletDataHandlerClass;
+		_portletLayoutListenerClass = portletLayoutListenerClass;
 		_smtpMessageListenerClass = smtpMessageListenerClass;
 		_defaultPreferences = defaultPreferences;
 		_prefsValidator = prefsValidator;
@@ -655,6 +658,41 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Gets the portlet layout listener of the portlet.
+	 *
+	 * @return		the name of the portlet layout listener class of the portlet
+	 */
+	public PortletLayoutListener getPortletLayoutListener() {
+		if (Validator.isNull(getPortletLayoutListenerClass())) {
+			return null;
+		}
+
+		return (PortletLayoutListener)InstancePool.get(
+			getPortletLayoutListenerClass());
+	}
+
+	/**
+	 * Gets the name of the portlet layout listener class of the portlet.
+	 *
+	 * @return		the name of the portlet layout listener class of the portlet
+	 */
+	public String getPortletLayoutListenerClass() {
+		return _portletLayoutListenerClass;
+	}
+
+	/**
+	 * Sets the name of the portlet layout listener class of the portlet.
+	 *
+	 * @param		portletLayoutListenerClass the name of the portlet layout
+	 *				listener class of the portlet
+	 */
+	public void setPortletLayoutListenerClass(
+		String portletLayoutListenerClass) {
+
+		_portletLayoutListenerClass = portletLayoutListenerClass;
 	}
 
 	/**
@@ -2142,21 +2180,22 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getIndexerClass(), getOpenSearchClass(), getSchedulerClass(),
 			getPortletURLClass(), getFriendlyURLMapperClass(),
 			getURLEncoderClass(), getPortletDataHandlerClass(),
-			getSmtpMessageListenerClass(), getDefaultPreferences(),
-			getPreferencesValidator(), isPreferencesCompanyWide(),
-			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
-			isUseDefaultTemplate(), isShowPortletAccessDenied(),
-			isShowPortletInactive(), isActionURLRedirect(),
-			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
-			isPopUpPrint(), isLayoutCacheable(), isInstanceable(),
-			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
-			getRenderWeight(), isAjaxable(), getHeaderPortalCss(),
-			getHeaderPortletCss(), getHeaderPortalJavaScript(),
-			getHeaderPortletJavaScript(), getFooterPortalCss(),
-			getFooterPortletCss(), getFooterPortalJavaScript(),
-			getFooterPortletJavaScript(), isAddDefaultResource(), getRoles(),
-			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
-			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
+			getPortletLayoutListenerClass(), getSmtpMessageListenerClass(),
+			getDefaultPreferences(), getPreferencesValidator(),
+			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
+			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
+			isShowPortletAccessDenied(), isShowPortletInactive(),
+			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
+			isMaximizeHelp(), isPopUpPrint(), isLayoutCacheable(),
+			isInstanceable(), isPrivateRequestAttributes(),
+			isPrivateSessionAttributes(), getRenderWeight(), isAjaxable(),
+			getHeaderPortalCss(), getHeaderPortletCss(),
+			getHeaderPortalJavaScript(), getHeaderPortletJavaScript(),
+			getFooterPortalCss(), getFooterPortletCss(),
+			getFooterPortalJavaScript(), getFooterPortletJavaScript(),
+			isAddDefaultResource(), getRoles(), getUnlinkedRoles(),
+			getRoleMappers(), isSystem(), isActive(), isInclude(),
+			getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
 			getUserAttributes(), getCustomUserAttributes(),
 			getServletContextName(), getServletURLPatterns());
@@ -2268,6 +2307,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the portlet data handler class of the portlet.
 	 */
 	private String _portletDataHandlerClass;
+
+ 	/**
+	 * The name of the portlet data layout listener class of the portlet.
+	 */
+	private String _portletLayoutListenerClass;
 
  	/**
 	 * The name of the SMTP message listener class of the portlet.

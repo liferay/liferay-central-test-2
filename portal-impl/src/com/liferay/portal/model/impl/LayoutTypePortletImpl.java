@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.germinus.easyconf.Filter;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -291,11 +292,13 @@ public class LayoutTypePortletImpl
 		long userId, String portletId, String columnId, int columnPos,
 		boolean checkPermission) {
 
+		Layout layout = getLayout();
+
 		Portlet portlet = null;
 
 		try {
 			portlet = PortletLocalServiceUtil.getPortletById(
-				getLayout().getCompanyId(), portletId);
+				layout.getCompanyId(), portletId);
 
 			if (checkPermission && !portlet.hasAddPortletPermission(userId)) {
 				return null;
@@ -349,6 +352,19 @@ public class LayoutTypePortletImpl
 				}
 
 				getTypeSettingsProperties().setProperty(columnId, columnValue);
+			}
+
+			try {
+				PortletLayoutListener portletLayoutListener =
+					(PortletLayoutListener)portlet.getPortletLayoutListener();
+
+				if (_enablePortletLayoutListener) {
+					portletLayoutListener.onAddToLayout(
+						portletId, layout.getPlid());
+				}
+			}
+			catch (Exception e) {
+				_log.error("Unable to fire portlet layout listener event", e);
 			}
 
 			return portletId;
@@ -442,8 +458,33 @@ public class LayoutTypePortletImpl
 	public void movePortletId(
 		long userId, String portletId, String columnId, int columnPos) {
 
-		removePortletId(portletId, false);
-		addPortletId(userId, portletId, columnId, columnPos);
+		_enablePortletLayoutListener = false;
+
+		try {
+			removePortletId(portletId, false);
+			addPortletId(userId, portletId, columnId, columnPos);
+		}
+		finally {
+			_enablePortletLayoutListener = true;
+		}
+
+		Layout layout = getLayout();
+
+		try {
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				layout.getCompanyId(), portletId);
+
+			if (portlet != null) {
+				PortletLayoutListener portletLayoutListener =
+					(PortletLayoutListener)portlet.getPortletLayoutListener();
+
+				portletLayoutListener.onMoveInLayout(
+					portletId, layout.getPlid());
+			}
+		}
+		catch (Exception e) {
+			_log.error("Unable to fire portlet layout listener event", e);
+		}
 	}
 
 	public void removePortletId(String portletId) {
@@ -469,6 +510,26 @@ public class LayoutTypePortletImpl
 		if (modeAndState) {
 			removeStatesPortletId(portletId);
 			removeModesPortletId(portletId);
+		}
+
+		Layout layout = getLayout();
+
+		try {
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				layout.getCompanyId(), portletId);
+
+			if (portlet != null) {
+				PortletLayoutListener portletLayoutListener =
+					(PortletLayoutListener)portlet.getPortletLayoutListener();
+
+				if (_enablePortletLayoutListener) {
+					portletLayoutListener.onRemoveFromLayout(
+						portletId, layout.getPlid());
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error("Unable to fire portlet layout listener event", e);
 		}
 	}
 
@@ -972,5 +1033,7 @@ public class LayoutTypePortletImpl
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutTypePortletImpl.class);
+
+	private boolean _enablePortletLayoutListener = true;
 
 }

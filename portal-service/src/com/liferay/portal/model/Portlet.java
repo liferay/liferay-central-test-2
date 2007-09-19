@@ -129,6 +129,13 @@ public interface Portlet extends PortletModel {
 
 	public com.liferay.portal.kernel.lar.PortletDataHandler getPortletDataHandlerInstance();
 
+	public com.liferay.portal.kernel.portlet.PortletLayoutListener getPortletLayoutListener();
+
+	public java.lang.String getPortletLayoutListenerClass();
+
+	public void setPortletLayoutListenerClass(
+		java.lang.String portletLayoutListenerClass);
+
 	public java.lang.String getSmtpMessageListenerClass();
 
 	public void setSmtpMessageListenerClass(
