@@ -26,10 +26,11 @@
         timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+                properties="replicateUpdatesViaCopy=false" propertySeparator="," />
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</defaultCache>
-	
+
 	<!--
 	The cache name is the same as the class name specified in your Hibernate
 	mapping file.
@@ -42,7 +43,8 @@
         timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
-		<!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+                properties="replicateUpdatesViaCopy=false" propertySeparator="," />
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 </ehcache>
