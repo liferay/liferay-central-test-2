@@ -112,7 +112,16 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		String portalURL = PortalUtil.getPortalURL(
 			host, req.getServerPort(), req.isSecure());
 
-		return portalURL + PortalUtil.getPathImage() + "/software_catalog";
+		String pathImage = PortalUtil.getPathImage();
+
+		if (pathImage.startsWith(Http.HTTP_WITH_SLASH) ||
+			pathImage.startsWith(Http.HTTPS_WITH_SLASH)) {
+
+			return pathImage + "/software_catalog";
+		}
+		else {
+			return portalURL + pathImage + "/software_catalog";
+		}
 	}
 
 	protected long getGroupId(HttpServletRequest req)
