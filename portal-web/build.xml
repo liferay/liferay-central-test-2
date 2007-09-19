@@ -21,6 +21,10 @@
 			<fileset dir="docroot" includes="**/Thumbs.db" />
 		</delete>
 
+		<delete>
+			<fileset dir="docroot/WEB-INF/tld" includes="liferay*.tld" />
+		</delete>
+
 		<antcall target="clean-themes" />
 	</target>
 
