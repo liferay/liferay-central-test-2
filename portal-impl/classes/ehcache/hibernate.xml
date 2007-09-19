@@ -26,8 +26,11 @@
         timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
-        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-                properties="replicateUpdatesViaCopy=false" propertySeparator="," />
+        <!--<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</defaultCache>
 
@@ -43,8 +46,11 @@
         timeToIdleSeconds="600"
 		overflowToDisk="true"
 	>
-        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-                properties="replicateUpdatesViaCopy=false" propertySeparator="," />
+        <!--<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
 	</cache>
 </ehcache>
