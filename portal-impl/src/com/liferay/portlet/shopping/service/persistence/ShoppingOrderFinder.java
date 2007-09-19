@@ -95,7 +95,6 @@ public class ShoppingOrderFinder {
 
 			if (userId > 0) {
 				qPos.add(userId);
-				qPos.add(userId);
 			}
 
 			qPos.add(number);
@@ -176,7 +175,6 @@ public class ShoppingOrderFinder {
 			qPos.add(companyId);
 
 			if (userId > 0) {
-				qPos.add(userId);
 				qPos.add(userId);
 			}
 
