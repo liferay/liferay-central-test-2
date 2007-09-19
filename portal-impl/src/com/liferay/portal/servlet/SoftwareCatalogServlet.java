@@ -37,6 +37,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
+import com.liferay.util.Http;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
