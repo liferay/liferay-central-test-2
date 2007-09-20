@@ -358,7 +358,9 @@ public class LayoutTypePortletImpl
 				PortletLayoutListener portletLayoutListener =
 					(PortletLayoutListener)portlet.getPortletLayoutListener();
 
-				if (_enablePortletLayoutListener) {
+				if (_enablePortletLayoutListener &&
+					(portletLayoutListener != null)) {
+
 					portletLayoutListener.onAddToLayout(
 						portletId, layout.getPlid());
 				}
@@ -478,8 +480,10 @@ public class LayoutTypePortletImpl
 				PortletLayoutListener portletLayoutListener =
 					(PortletLayoutListener)portlet.getPortletLayoutListener();
 
-				portletLayoutListener.onMoveInLayout(
-					portletId, layout.getPlid());
+				if (portletLayoutListener != null) {
+					portletLayoutListener.onMoveInLayout(
+						portletId, layout.getPlid());
+				}
 			}
 		}
 		catch (Exception e) {
@@ -522,7 +526,9 @@ public class LayoutTypePortletImpl
 				PortletLayoutListener portletLayoutListener =
 					(PortletLayoutListener)portlet.getPortletLayoutListener();
 
-				if (_enablePortletLayoutListener) {
+				if (_enablePortletLayoutListener &&
+					(portletLayoutListener != null)) {
+
 					portletLayoutListener.onRemoveFromLayout(
 						portletId, layout.getPlid());
 				}
