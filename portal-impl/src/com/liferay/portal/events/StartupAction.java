@@ -68,10 +68,6 @@ public class StartupAction extends SimpleAction {
 				e.printStackTrace();
 			}
 
-			// Lucene
-
-			LuceneUtil.checkLuceneDir(CompanyImpl.SYSTEM);
-
 			// Add shutdown hook
 
 			Runtime.getRuntime().addShutdownHook(
@@ -211,6 +207,10 @@ public class StartupAction extends SimpleAction {
 			// Update release
 
 			ReleaseLocalServiceUtil.updateRelease(verified);
+
+			// Lucene
+
+			LuceneUtil.checkLuceneDir(CompanyImpl.SYSTEM);
 		}
 		catch (Exception e) {
 			throw new ActionException(e);
