@@ -69,7 +69,7 @@ public class WebsiteModelImpl extends BaseModelImpl {
 			{ "typeId", new Integer(Types.INTEGER) },
 			{ "primary_", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table Website (websiteId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,url VARCHAR(75) null,typeId INTEGER,primary_ BOOLEAN)";
+	public static String TABLE_SQL_CREATE = "create table Website (websiteId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,url STRING null,typeId INTEGER,primary_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Website";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Website"), XSS_ALLOW);

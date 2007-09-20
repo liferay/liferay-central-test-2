@@ -71,7 +71,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 			{ "directDownloadURL", new Integer(Types.VARCHAR) },
 			{ "repoStoreArtifact", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table SCProductVersion (productVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productEntryId LONG,version VARCHAR(75) null,changeLog STRING null,downloadPageURL VARCHAR(1024) null,directDownloadURL VARCHAR(1024) null,repoStoreArtifact BOOLEAN)";
+	public static String TABLE_SQL_CREATE = "create table SCProductVersion (productVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productEntryId LONG,version VARCHAR(75) null,changeLog STRING null,downloadPageURL STRING null,directDownloadURL STRING null,repoStoreArtifact BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table SCProductVersion";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductVersion"),

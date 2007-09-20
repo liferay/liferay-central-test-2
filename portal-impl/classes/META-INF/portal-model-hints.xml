@@ -5,7 +5,7 @@
 		<hint name="max-length">2000000</hint>
 	</hint-collection>
 	<hint-collection name="URL">
-		<hint name="max-length">1024</hint>
+		<hint name="max-length">4000</hint>
 	</hint-collection>
 	<hint-collection name="TEXTAREA">
 		<hint name="display-height">105</hint>
@@ -525,7 +525,9 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
-		<field name="url" type="String" />
+		<field name="url" type="String">
+			<hint-collection name="URL" />
+		</field>
 		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
 	</model>
@@ -570,7 +572,7 @@
 			<hint name="max-length">300</hint>
 		</field>
 		<field name="url" type="String">
-			<hint name="max-length">4000</hint>
+			<hint-collection name="URL" />
 		</field>
 		<field name="comments" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -1269,7 +1271,9 @@
 		<field name="summary" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
-		<field name="url" type="String" />
+		<field name="url" type="String">
+			<hint-collection name="URL" />
+		</field>
 		<field name="height" type="int" />
 		<field name="width" type="int" />
 	</model>

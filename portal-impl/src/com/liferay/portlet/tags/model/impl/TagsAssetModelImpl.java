@@ -77,7 +77,7 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 			{ "height", new Integer(Types.INTEGER) },
 			{ "width", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(75) null,description STRING null,summary STRING null,url VARCHAR(75) null,height INTEGER,width INTEGER)";
+	public static String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(75) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table TagsAsset";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.tags.model.TagsAsset"), XSS_ALLOW);
