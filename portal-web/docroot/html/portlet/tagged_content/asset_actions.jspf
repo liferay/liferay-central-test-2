@@ -129,6 +129,7 @@ if (editURL != null) {
 <c:if test="<%= showEditIcon %>">
 	<div>
 		<br />
+
 		<liferay-ui:icon image="edit" message="<%= editIconMsg %>" url="<%= editURL.toString() %>" />
 	</div>
 </c:if>
