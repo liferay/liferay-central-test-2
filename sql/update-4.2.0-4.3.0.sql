@@ -72,6 +72,7 @@ alter_column_name EmailAddress className classNameId VARCHAR(75) null;
 alter table Group_ add creatorUserId VARCHAR(75) null;
 alter_column_name Group_ className classNameId VARCHAR(75) null;
 alter table Group_ add liveGroupId LONG;
+alter table Group_ add typeSettings STRING null;
 alter table Group_ add active_ BOOLEAN;
 
 COMMIT_TRANSACTION;
