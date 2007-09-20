@@ -496,12 +496,14 @@ Liferay.Util = {
 						try {
 							if (!el.is('iframe')) {
 								el = eval(elString);
+
 								if (!el.jquery) {
 									el = jQuery(el);
 								}
 							}
 						}
-						catch (e) {}
+						catch (e) {
+						}
 					}
 
 					el.css(
