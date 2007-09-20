@@ -23,84 +23,61 @@
 %>
 
 <%
-boolean showAddIcon = false;
 boolean showEditIcon = false;
 
-String addIconMsg = null;
 String editIconMsg = null;
 
-PortletURL addURL = null;
 PortletURL editURL = null;
 
 if (className.equals(BlogsEntry.class.getName())) {
 	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
-	showAddIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY);
 	showEditIcon = BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE);
 
-	addIconMsg = "add-blog";
 	editIconMsg = "edit-blog";
 
-	addURL = new PortletURLImpl(request, PortletKeys.BLOGS, plid.longValue(), false);
+	editURL = new PortletURLImpl(request, PortletKeys.BLOGS, plid.longValue(), false);
 
-	addURL.setParameter("struts_action", "/blogs/edit_entry");
-
-	editURL = PortletURLUtil.clone(addURL, renderResponse);
-
+	editURL.setParameter("struts_action", "/blogs/edit_entry");
 	editURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 }
 else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 
-	showAddIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BOOKMARKS, ActionKeys.ADD_ENTRY);
 	showEditIcon = BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE);
 
-	addIconMsg = "add-bookmark";
 	editIconMsg = "edit-bookmark";
 
-	addURL = new PortletURLImpl(request, PortletKeys.BOOKMARKS, plid.longValue(), false);
+	editURL = new PortletURLImpl(request, PortletKeys.BOOKMARKS, plid.longValue(), false);
 
-	addURL.setParameter("struts_action", "/bookmarks/edit_entry");
-	addURL.setParameter("folderId", String.valueOf(entry.getFolderId()));
-
-	editURL = PortletURLUtil.clone(addURL, renderResponse);
-
+	editURL.setParameter("struts_action", "/bookmarks/edit_entry");
+	editURL.setParameter("folderId", String.valueOf(entry.getFolderId()));
 	editURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 }
 else if (className.equals(DLFileEntry.class.getName())) {
 	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
 
-	showAddIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.DOCUMENT_LIBRARY, ActionKeys.ADD_ENTRY);
 	showEditIcon = DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE);
 
-	addIconMsg = "add-document";
 	editIconMsg = "edit-document";
 
-	addURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, plid.longValue(), false);
+	editURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, plid.longValue(), false);
 
-	addURL.setParameter("struts_action", "/document_library/edit_file_entry");
-	addURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
-
-	editURL = PortletURLUtil.clone(addURL, renderResponse);
-
+	editURL.setParameter("struts_action", "/document_library/edit_file_entry");
+	editURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
 	editURL.setParameter("name", fileEntry.getName());
 }
 else if (className.equals(IGImage.class.getName())) {
 	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
 
-	showAddIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.IMAGE_GALLERY, ActionKeys.ADD_IMAGE);
 	showEditIcon = IGImagePermission.contains(permissionChecker, image, ActionKeys.UPDATE);
 
-	addIconMsg = "add-image";
 	editIconMsg = "edit-image";
 
-	addURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid.longValue(), false);
+	editURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid.longValue(), false);
 
-	addURL.setParameter("struts_action", "/image_gallery/edit_image");
-	addURL.setParameter("folderId", String.valueOf(image.getFolderId()));
-
-	editURL = PortletURLUtil.clone(addURL, renderResponse);
-
+	editURL.setParameter("struts_action", "/image_gallery/edit_image");
+	editURL.setParameter("folderId", String.valueOf(image.getFolderId()));
 	editURL.setParameter("imageId", String.valueOf(image.getImageId()));
 }
 else if (className.equals(JournalArticle.class.getName())) {
@@ -111,19 +88,14 @@ else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
 
 	if (articleDisplay != null) {
-		showAddIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE);
 		showEditIcon = JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE);
 
-		addIconMsg = "add-article";
 		editIconMsg = "edit-article";
 
-		addURL = new PortletURLImpl(request, PortletKeys.JOURNAL, plid.longValue(), false);
+		editURL = new PortletURLImpl(request, PortletKeys.JOURNAL, plid.longValue(), false);
 
-		addURL.setParameter("struts_action", "/journal/edit_article");
-		addURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
-
-		editURL = PortletURLUtil.clone(addURL, renderResponse);
-
+		editURL.setParameter("struts_action", "/journal/edit_article");
+		editURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
 		editURL.setParameter("articleId", articleDisplay.getArticleId());
 		editURL.setParameter("version", String.valueOf(articleDisplay.getVersion()));
 	}
@@ -135,7 +107,6 @@ else if (className.equals(WikiPage.class.getName())) {
 
 	WikiNode node = wikiPage.getNode();
 
-	showAddIcon = false;
 	showEditIcon = WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE);
 
 	editIconMsg = "edit-page";
@@ -147,14 +118,6 @@ else if (className.equals(WikiPage.class.getName())) {
 	editURL.setParameter("title", wikiPage.getTitle());
 }
 
-if (addURL != null) {
-	addURL.setWindowState(WindowState.MAXIMIZED);
-	addURL.setPortletMode(PortletMode.VIEW);
-
-	addURL.setParameter("redirect", currentURL);
-	addURL.setParameter("tagsEntries", ListUtil.toString(asset.getEntries(), "name"));
-}
-
 if (editURL != null) {
 	editURL.setWindowState(WindowState.MAXIMIZED);
 	editURL.setPortletMode(PortletMode.VIEW);
@@ -163,16 +126,9 @@ if (editURL != null) {
 }
 %>
 
-<c:if test="<%= showEditIcon || showAddIcon %>">
+<c:if test="<%= showEditIcon %>">
 	<div>
 		<br />
-
-		<c:if test="<%= showEditIcon %>">
-			<liferay-ui:icon image="edit" message="<%= editIconMsg %>" url="<%= editURL.toString() %>" />
-		</c:if>
-
-		<c:if test="<%= showAddIcon %>">
-			<liferay-ui:icon image="add_article" message="<%= addIconMsg %>" url="<%= addURL.toString() %>" />
-		</c:if>
+		<liferay-ui:icon image="edit" message="<%= editIconMsg %>" url="<%= editURL.toString() %>" />
 	</div>
 </c:if>

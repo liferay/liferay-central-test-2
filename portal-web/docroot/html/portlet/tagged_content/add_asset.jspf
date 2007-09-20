@@ -40,7 +40,7 @@ PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, entries
 	<form name="<portlet:namespace/>fm">
 
 	<select name="<portlet:namespace/>assetURL" onchange="<portlet:namespace/>addAsset();">
-		<option value=""><liferay-ui:message key="add"/>...</option>
+		<option value=""><liferay-ui:message key="add-asset"/>...</option>
 
 		<%
 		for (int i = 0; i < ASSET_TYPES.length; i++) {
