@@ -69,6 +69,7 @@ import com.liferay.portlet.messageboards.model.impl.MBTreeWalkerImpl;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.jms.MBMessageProducer;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
@@ -510,11 +511,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			List messages = MBMessageUtil.findByT_P(
 				discussion.getThreadId(),
-				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
+				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID, 0, 1);
 
-			MBMessage message = (MBMessage)messages.get(0);
+			if (messages.size() > 0) {
+				MBMessage message = (MBMessage)messages.get(0);
 
-			deleteMessage(message.getMessageId());
+				MBThreadLocalServiceUtil.deleteThread(message.getThreadId());
+			}
 
 			MBDiscussionUtil.remove(discussion.getDiscussionId());
 		}
@@ -606,7 +609,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					message.getThreadId(), message.getMessageId());
 
 				if (childrenMessages.size() > 1) {
-					throw new RequiredMessageException();
+					throw new RequiredMessageException(
+						String.valueOf(message.getMessageId()));
 				}
 				else if (childrenMessages.size() == 1) {
 					MBMessage childMessage = (MBMessage)childrenMessages.get(0);
