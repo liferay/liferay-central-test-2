@@ -117,7 +117,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 		function() {
 			document.<portlet:namespace />fm.<portlet:namespace />xsdContent.value = getEditorContent();
 
-			Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent');
+			Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent', <%= useEditorCodepress %>);
 		}
 	);
 </script>

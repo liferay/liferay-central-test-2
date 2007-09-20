@@ -133,7 +133,7 @@ else {
 		function() {
 			document.<portlet:namespace />fm.<portlet:namespace />xslContent.value = getEditorContent();
 
-			Liferay.Util.resizeTextarea('<portlet:namespace />xslContent');
+			Liferay.Util.resizeTextarea('<portlet:namespace />xslContent', <%= useEditorCodepress %>);
 		}
 	);
 </script>

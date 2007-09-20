@@ -478,7 +478,7 @@ Liferay.Util = {
 		}
 	},
 
-	resizeTextarea: function(elString) {
+	resizeTextarea: function(elString, usingRichEditor) {
 		var init = function() {
 			var el = jQuery('#' + elString);
 
@@ -491,6 +491,18 @@ Liferay.Util = {
 
 				var resize = function() {
 					var pageBodyHeight = pageBody.height();
+
+					if (usingRichEditor) {
+						try {
+							if (!el.is('iframe')) {
+								el = eval(elString);
+								if (!el.jquery) {
+									el = jQuery(el);
+								}
+							}
+						}
+						catch (e) {}
+					}
 
 					el.css(
 						{
