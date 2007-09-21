@@ -24,6 +24,8 @@ package com.liferay.portal.servlet.filters.virtualhost;
 
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -39,6 +41,8 @@ import com.liferay.util.SystemProperties;
 
 import java.io.IOException;
 
+import java.lang.reflect.Method;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -48,6 +52,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -73,6 +78,9 @@ public class VirtualHostFilter implements Filter {
 	public static final boolean USE_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(VirtualHostFilter.class.getName()), true);
 
+	public static final String ENCODING = GetterUtil.getString(
+		SystemProperties.get("file.encoding"), "UTF-8");
+
 	public void init(FilterConfig config) throws ServletException {
 		_ctx = config.getServletContext();
 	}
@@ -91,6 +99,24 @@ public class VirtualHostFilter implements Filter {
 		}
 
 		HttpServletRequest httpReq = (HttpServletRequest)req;
+		HttpServletResponse httpRes = (HttpServletResponse)res;
+
+		httpReq.setCharacterEncoding(ENCODING);
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				HttpServletResponse.class.getName(), "setCharacterEncoding",
+				new Class[] {String.class});
+
+			Method method = MethodCache.get(methodKey);
+
+			method.invoke(httpRes, new String[] {ENCODING});
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("This method is only available in Servlet 2.4");
+			}
+		}
 
 		// Company id needs to always be called here so that it's properly set
 		// in subsequent calls
