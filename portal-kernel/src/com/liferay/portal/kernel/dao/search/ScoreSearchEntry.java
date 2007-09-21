@@ -25,45 +25,33 @@ package com.liferay.portal.kernel.dao.search;
 import javax.servlet.jsp.PageContext;
 
 /**
- * <a href="SearchEntry.java.html"><b><i>View Source</i></b></a>
+ * <a href="ScoreSearchEntry.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class SearchEntry implements Cloneable {
+public class ScoreSearchEntry extends SearchEntry {
 
-	public static final String DEFAULT_ALIGN = "left";
-
-	public static final String DEFAULT_VALIGN = "middle";
-
-	public SearchEntry() {
-		this(DEFAULT_ALIGN, DEFAULT_VALIGN);
+	public ScoreSearchEntry(float score) {
+		_score = score;
 	}
 
-	public SearchEntry(String align, String valign) {
-		_align = align;
-		_valign = valign;
+	public float getScore() {
+		return _score;
 	}
 
-	public String getAlign() {
-		return _align;
+	public void setScore(float score) {
+		_score = score;
 	}
 
-	public void setAlign(String align) {
-		_align = align;
+	public void print(PageContext pageContext) throws Exception {
+		pageContext.include("/html/taglib/ui/search_iterator/score.jsp");
 	}
 
-	public String getValign() {
-		return _valign;
+	public Object clone() {
+		return new ScoreSearchEntry(getScore());
 	}
 
-	public void setValign(String valign) {
-		_valign = valign;
-	}
-
-	public abstract void print(PageContext pageContext) throws Exception;
-
-	private String _align;
-	private String _valign;
+	private float _score;
 
 }

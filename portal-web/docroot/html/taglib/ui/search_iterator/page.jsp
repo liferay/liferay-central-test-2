@@ -182,6 +182,8 @@ if (rowChecker != null) {
 		<%
 		for (int j = 0; j < entries.size(); j++) {
 			SearchEntry entry = (SearchEntry)entries.get(j);
+
+			request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY, entry);
 		%>
 
 			<td class="col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %>" align="<%= entry.getAlign() %>" valign="<%= entry.getValign() %>">

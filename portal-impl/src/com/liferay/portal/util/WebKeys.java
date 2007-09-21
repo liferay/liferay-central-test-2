@@ -58,7 +58,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String COLOR_SCHEME = "COLOR_SCHEME";
 
 	public static final String COMIC_ENTRY = "COMIC_ENTRY";
-	
+
 	public static final String COMPANY = "COMPANY";
 
 	public static final String COMPANY_ID = "COMPANY_ID";
@@ -66,7 +66,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String CONFIGURATION_ACTION_PATH = "CONFIGURATION_ACTION_PATH";
 
 	public static final String CTX = "CTX";
-	
+
 	public static final String CURRENT_URL = "CURRENT_URL";
 
 	public static final String DOCUMENT_LIBRARY_FILE_ENTRY = "DOCUMENT_LIBRARY_FILE_ENTRY";
@@ -108,7 +108,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String LIVE_USERS = "LIVE_USERS";
 
 	public static final String JABBER_XMPP_SESSION = "JABBER_XMPP_SESSION";
-	
+
 	public static final String JOURNAL_ARTICLE = "JOURNAL_ARTICLE";
 
 	public static final String JOURNAL_ARTICLE_CONTENT = "JOURNAL_ARTICLE_CONTENT";
@@ -253,6 +253,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String SEARCH_CONTAINER_RESULT_ROW = "SEARCH_CONTAINER_RESULT_ROW";
 
+	public static final String SEARCH_CONTAINER_RESULT_ROW_ENTRY = "SEARCH_CONTAINER_RESULT_ROW_ENTRY";
+
 	public static final String SEARCH_SEARCH_RESULTS = "SEARCH_SEARCH_RESULTS";
 
 	public static final String SEL_COMPANY = "SEL_COMPANY";
@@ -296,7 +298,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String USER = "USER";
 
 	public static final String USER_GROUP = "USER_GROUP";
-	
+
 	public static final String USER_ID = "USER_ID";
 
 	public static final String USER_PASSWORD = "USER_PASSWORD";

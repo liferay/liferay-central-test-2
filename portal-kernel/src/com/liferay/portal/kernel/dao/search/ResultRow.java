@@ -280,6 +280,16 @@ public class ResultRow {
 		_entries.add(index, new JSPSearchEntry(align, valign, path));
 	}
 
+	// Score
+
+	public void addScore(float score) {
+		addScore(_entries.size(), score);
+	}
+
+	public void addScore(int index, float score) {
+		_entries.add(index, new ScoreSearchEntry(score));
+	}
+
 	private Object _obj;
 	private String _primaryKey;
 	private int _pos;
