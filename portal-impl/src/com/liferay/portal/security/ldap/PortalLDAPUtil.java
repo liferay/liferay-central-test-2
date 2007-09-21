@@ -45,6 +45,7 @@ import com.liferay.util.ldap.LDAPUtil;
 import com.liferay.util.ldap.Modifications;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -671,11 +672,28 @@ public class PortalLDAPUtil {
 			user = UserLocalServiceUtil.getUserByEmailAddress(
 				companyId, emailAddress);
 
+			Contact contact = user.getContact();
+			Date birthday = contact.getBirthday();
+
+			// User exists so update user information
+
 			if (updatePassword) {
 				user = UserLocalServiceUtil.updatePassword(
 					user.getUserId(), password, password, passwordReset,
 					true);
 			}
+
+			user = UserLocalServiceUtil.updateUser(
+				user.getUserId(), password, screenName, emailAddress,
+				user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
+				user.getComments(), firstName, middleName, lastName,
+				contact.getPrefixId(), contact.getSuffixId(), contact.getMale(),
+				birthday.getMonth(), birthday.getDay(), birthday.getYear(),
+				contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
+				contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
+				contact.getYmSn(), jobTitle,
+				user.getOrganization().getOrganizationId(),
+				user.getLocation().getOrganizationId());
 		}
 		catch (NoSuchUserException nsue) {
 
