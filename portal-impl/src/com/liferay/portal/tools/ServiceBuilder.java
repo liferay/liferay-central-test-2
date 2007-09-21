@@ -653,13 +653,25 @@ public class ServiceBuilder {
 						finderDBIndex));
 				}
 
+				List txRequiredList = new ArrayList();
+
+				itr2 = entityEl.elements("tx-required").iterator();
+
+				while (itr2.hasNext()) {
+					Element txRequiredEl = (Element)itr2.next();
+
+					String txRequired = txRequiredEl.getText();
+
+					txRequiredList.add(txRequired);
+				}
+
 				_ejbList.add(
 					new Entity(
 						_packagePath, _portletName, _portletShortName, ejbName,
 						table, localService, remoteService, persistenceClass,
 						dataSource, sessionFactory, txManager, pkList,
 						regularColList, collectionList, columnList, order,
-						finderList));
+						finderList, txRequiredList));
 			}
 
 			List exceptionList = new ArrayList();
@@ -5882,6 +5894,8 @@ public class ServiceBuilder {
 	}
 
 	private void _createSpringXMLSession(Entity entity, StringMaker sm, int sessionType) {
+		List txRequiredList = entity.getTxRequiredList();
+
 		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" class=\"" + _packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl\" lazy-init=\"true\" />\n");
 
 		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.transaction\" class=\"org.springframework.transaction.interceptor.TransactionProxyFactoryBean\" lazy-init=\"true\">\n");
@@ -5893,8 +5907,18 @@ public class ServiceBuilder {
 		sm.append("\t\t</property>\n");
 		sm.append("\t\t<property name=\"transactionAttributes\">\n");
 		sm.append("\t\t\t<props>\n");
+
+		for (int i = 0; i < txRequiredList.size(); i++) {
+			String txRequired = (String)txRequiredList.get(i);
+
+			sm.append("\t\t\t\t<prop key=\"" + txRequired + "\">PROPAGATION_REQUIRED</prop>\n");
+		}
+
 		sm.append("\t\t\t\t<prop key=\"add*\">PROPAGATION_REQUIRED</prop>\n");
+		sm.append("\t\t\t\t<prop key=\"check*\">PROPAGATION_REQUIRED</prop>\n");
+		sm.append("\t\t\t\t<prop key=\"clear*\">PROPAGATION_REQUIRED</prop>\n");
 		sm.append("\t\t\t\t<prop key=\"delete*\">PROPAGATION_REQUIRED</prop>\n");
+		sm.append("\t\t\t\t<prop key=\"set*\">PROPAGATION_REQUIRED</prop>\n");
 		sm.append("\t\t\t\t<prop key=\"update*\">PROPAGATION_REQUIRED</prop>\n");
 		sm.append("\t\t\t\t<prop key=\"*\">PROPAGATION_SUPPORTS,readOnly</prop>\n");
 		//sm.append("\t\t\t\t<prop key=\"*\">PROPAGATION_REQUIRED</prop>\n");
