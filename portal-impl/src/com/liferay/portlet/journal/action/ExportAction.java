@@ -336,7 +336,8 @@ public class ExportAction extends Action {
 				sm.append("createDate, modifiedDate, articleId, version, ");
 				sm.append("title, description, content, type_, structureId, ");
 				sm.append("templateId, displayDate, approved, ");
-				sm.append("approvedByUserId, approvedByUserName, expired");
+				sm.append("approvedByUserId, approvedByUserName, expired, ");
+				sm.append("indexable");
 				sm.append(") values (");
 				addPKColumn(sm, article.getId());
 				addPKColumn(sm, article.getResourcePrimKey());
@@ -366,6 +367,7 @@ public class ExportAction extends Action {
 				addColumn(sm, article.getExpired());
 				//addColumn(sm, article.getExpirationDate(), false);
 				//addColumn(sm, article.getReviewDate(), false);
+				addColumn(sm, article.getIndexable());
 				removeTrailingComma(sm);
 				sm.append(");\n");
 			}

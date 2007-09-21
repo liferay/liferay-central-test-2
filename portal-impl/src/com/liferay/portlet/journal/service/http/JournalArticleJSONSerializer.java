@@ -77,6 +77,7 @@ public class JournalArticleJSONSerializer {
 		JSONUtil.put(jsonObj, "expired", model.getExpired());
 		JSONUtil.put(jsonObj, "expirationDate", model.getExpirationDate());
 		JSONUtil.put(jsonObj, "reviewDate", model.getReviewDate());
+		JSONUtil.put(jsonObj, "indexable", model.getIndexable());
 
 		return jsonObj;
 	}

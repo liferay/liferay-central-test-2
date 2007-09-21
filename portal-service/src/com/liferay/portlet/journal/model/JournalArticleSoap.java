@@ -72,6 +72,7 @@ public class JournalArticleSoap implements Serializable {
 		soapModel.setExpired(model.getExpired());
 		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setReviewDate(model.getReviewDate());
+		soapModel.setIndexable(model.getIndexable());
 
 		return soapModel;
 	}
@@ -298,6 +299,18 @@ public class JournalArticleSoap implements Serializable {
 		_reviewDate = reviewDate;
 	}
 
+	public boolean getIndexable() {
+		return _indexable;
+	}
+
+	public boolean isIndexable() {
+		return _indexable;
+	}
+
+	public void setIndexable(boolean indexable) {
+		_indexable = indexable;
+	}
+
 	private long _id;
 	private long _resourcePrimKey;
 	private long _groupId;
@@ -322,4 +335,5 @@ public class JournalArticleSoap implements Serializable {
 	private boolean _expired;
 	private Date _expirationDate;
 	private Date _reviewDate;
+	private boolean _indexable;
 }

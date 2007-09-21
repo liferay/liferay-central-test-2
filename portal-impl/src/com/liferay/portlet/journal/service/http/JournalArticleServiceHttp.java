@@ -84,7 +84,7 @@ public class JournalArticleServiceHttp {
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
-		java.util.Map images, java.lang.String articleURL,
+		boolean indexable, java.util.Map images, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -151,32 +151,33 @@ public class JournalArticleServiceHttp {
 			Object paramObj23 = new IntegerWrapper(reviewDateHour);
 			Object paramObj24 = new IntegerWrapper(reviewDateMinute);
 			Object paramObj25 = new BooleanWrapper(neverReview);
-			Object paramObj26 = images;
+			Object paramObj26 = new BooleanWrapper(indexable);
+			Object paramObj27 = images;
 
 			if (images == null) {
-				paramObj26 = new NullWrapper("java.util.Map");
+				paramObj27 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj27 = articleURL;
+			Object paramObj28 = articleURL;
 
 			if (articleURL == null) {
-				paramObj27 = new NullWrapper("java.lang.String");
+				paramObj28 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj28 = prefs;
+			Object paramObj29 = prefs;
 
 			if (prefs == null) {
-				paramObj28 = new NullWrapper("javax.portlet.PortletPreferences");
+				paramObj29 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
-			Object paramObj29 = tagsEntries;
+			Object paramObj30 = tagsEntries;
 
 			if (tagsEntries == null) {
-				paramObj29 = new NullWrapper("[Ljava.lang.String;");
+				paramObj30 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj30 = new BooleanWrapper(addCommunityPermissions);
-			Object paramObj31 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj31 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj32 = new BooleanWrapper(addGuestPermissions);
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
 					"addArticle",
 					new Object[] {
@@ -187,7 +188,7 @@ public class JournalArticleServiceHttp {
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
-						paramObj30, paramObj31
+						paramObj30, paramObj31, paramObj32
 					});
 			Object returnObj = null;
 
@@ -225,7 +226,7 @@ public class JournalArticleServiceHttp {
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
-		java.util.Map images, java.lang.String articleURL,
+		boolean indexable, java.util.Map images, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -293,40 +294,41 @@ public class JournalArticleServiceHttp {
 			Object paramObj23 = new IntegerWrapper(reviewDateHour);
 			Object paramObj24 = new IntegerWrapper(reviewDateMinute);
 			Object paramObj25 = new BooleanWrapper(neverReview);
-			Object paramObj26 = images;
+			Object paramObj26 = new BooleanWrapper(indexable);
+			Object paramObj27 = images;
 
 			if (images == null) {
-				paramObj26 = new NullWrapper("java.util.Map");
+				paramObj27 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj27 = articleURL;
+			Object paramObj28 = articleURL;
 
 			if (articleURL == null) {
-				paramObj27 = new NullWrapper("java.lang.String");
+				paramObj28 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj28 = prefs;
+			Object paramObj29 = prefs;
 
 			if (prefs == null) {
-				paramObj28 = new NullWrapper("javax.portlet.PortletPreferences");
+				paramObj29 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
-			Object paramObj29 = tagsEntries;
+			Object paramObj30 = tagsEntries;
 
 			if (tagsEntries == null) {
-				paramObj29 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj30 = communityPermissions;
-
-			if (communityPermissions == null) {
 				paramObj30 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj31 = guestPermissions;
+			Object paramObj31 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj31 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj32 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj31 = new NullWrapper("[Ljava.lang.String;");
+				paramObj32 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
@@ -339,7 +341,7 @@ public class JournalArticleServiceHttp {
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
-						paramObj30, paramObj31
+						paramObj30, paramObj31, paramObj32
 					});
 			Object returnObj = null;
 
@@ -781,7 +783,7 @@ public class JournalArticleServiceHttp {
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
-		java.util.Map images, java.lang.String articleURL,
+		boolean indexable, java.util.Map images, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -848,28 +850,29 @@ public class JournalArticleServiceHttp {
 			Object paramObj24 = new IntegerWrapper(reviewDateHour);
 			Object paramObj25 = new IntegerWrapper(reviewDateMinute);
 			Object paramObj26 = new BooleanWrapper(neverReview);
-			Object paramObj27 = images;
+			Object paramObj27 = new BooleanWrapper(indexable);
+			Object paramObj28 = images;
 
 			if (images == null) {
-				paramObj27 = new NullWrapper("java.util.Map");
+				paramObj28 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj28 = articleURL;
+			Object paramObj29 = articleURL;
 
 			if (articleURL == null) {
-				paramObj28 = new NullWrapper("java.lang.String");
+				paramObj29 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj29 = prefs;
+			Object paramObj30 = prefs;
 
 			if (prefs == null) {
-				paramObj29 = new NullWrapper("javax.portlet.PortletPreferences");
+				paramObj30 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
-			Object paramObj30 = tagsEntries;
+			Object paramObj31 = tagsEntries;
 
 			if (tagsEntries == null) {
-				paramObj30 = new NullWrapper("[Ljava.lang.String;");
+				paramObj31 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
@@ -882,7 +885,7 @@ public class JournalArticleServiceHttp {
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
-						paramObj30
+						paramObj30, paramObj31
 					});
 			Object returnObj = null;
 

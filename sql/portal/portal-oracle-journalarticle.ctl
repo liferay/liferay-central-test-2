@@ -22,4 +22,5 @@ fields terminated by "," optionally enclosed by '\''
  approved,
  approvedByUserId,
  approvedByUserName,
- expired)
+ expired,
+ indexable)

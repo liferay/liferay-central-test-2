@@ -749,6 +749,7 @@
 		<property name="expired" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="expirationDate" />
 		<property name="reviewDate" />
+		<property name="indexable" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalArticleImageImpl" table="JournalArticleImage">
 		<cache usage="read-write" />

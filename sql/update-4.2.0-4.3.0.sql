@@ -92,10 +92,12 @@ delete from Image where type_ = 'na';
 
 alter table JournalArticle add id_ VARCHAR(75) null;
 alter table JournalArticle add resourcePrimKey LONG;
+alter table JournalArticle add indexable BOOLEAN;
 
 COMMIT_TRANSACTION;
 
 update JournalArticle set id_ = articleId;
+update JournalArticle set indexable = TRUE;
 
 create table JournalArticleImage (
 	articleImageId LONG not null primary key,

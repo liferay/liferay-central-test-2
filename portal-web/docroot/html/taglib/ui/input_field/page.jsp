@@ -49,6 +49,11 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			if (defaultValue != null) {
 				defaultBoolean = ((Boolean)defaultValue).booleanValue();
 			}
+			else {
+				if (hints != null) {
+					defaultBoolean = GetterUtil.getBoolean((String)hints.get("default-value"));
+				}
+			}
 
 			boolean value = BeanParamUtil.getBoolean(bean, request, field, defaultBoolean);
 			%>

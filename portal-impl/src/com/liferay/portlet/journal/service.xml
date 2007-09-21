@@ -43,6 +43,7 @@
 		<column name="expired" type="boolean" />
 		<column name="expirationDate" type="Date" />
 		<column name="reviewDate" type="Date" />
+		<column name="indexable" type="boolean" />
 
 		<!-- Order -->
 

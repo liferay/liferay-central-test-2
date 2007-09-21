@@ -80,9 +80,10 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			{ "approvedDate", new Integer(Types.TIMESTAMP) },
 			{ "expired", new Integer(Types.BOOLEAN) },
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
-			{ "reviewDate", new Integer(Types.TIMESTAMP) }
+			{ "reviewDate", new Integer(Types.TIMESTAMP) },
+			{ "indexable", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table JournalArticle (id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title VARCHAR(100) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,approved BOOLEAN,approvedByUserId LONG,approvedByUserName VARCHAR(75) null,approvedDate DATE null,expired BOOLEAN,expirationDate DATE null,reviewDate DATE null)";
+	public static String TABLE_SQL_CREATE = "create table JournalArticle (id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title VARCHAR(100) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,approved BOOLEAN,approvedByUserId LONG,approvedByUserName VARCHAR(75) null,approvedDate DATE null,expired BOOLEAN,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table JournalArticle";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle"),
@@ -459,6 +460,20 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public boolean getIndexable() {
+		return _indexable;
+	}
+
+	public boolean isIndexable() {
+		return _indexable;
+	}
+
+	public void setIndexable(boolean indexable) {
+		if (indexable != _indexable) {
+			_indexable = indexable;
+		}
+	}
+
 	public Object clone() {
 		JournalArticleImpl clone = new JournalArticleImpl();
 		clone.setId(getId());
@@ -485,6 +500,7 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		clone.setExpired(getExpired());
 		clone.setExpirationDate(getExpirationDate());
 		clone.setReviewDate(getReviewDate());
+		clone.setIndexable(getIndexable());
 
 		return clone;
 	}
@@ -573,4 +589,5 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	private boolean _expired;
 	private Date _expirationDate;
 	private Date _reviewDate;
+	private boolean _indexable;
 }

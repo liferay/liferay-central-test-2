@@ -674,6 +674,14 @@ String[] availableLocales = null;
 			</td>
 		</tr>
 		<tr>
+			<td>
+				<liferay-ui:message key="searchable" />
+			</td>
+			<td>
+				<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="indexable" />
+			</td>
+		</tr>
+		<tr>
 			<td colspan="2">
 				<br />
 			</td>

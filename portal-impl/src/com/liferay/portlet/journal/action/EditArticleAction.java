@@ -335,6 +335,8 @@ public class EditArticleAction extends PortletAction {
 			reviewDateHour += 12;
 		}
 
+		boolean indexable = ParamUtil.getBoolean(req, "indexable");
+
 		Map images = getImages(PortalUtil.getUploadPortletRequest(req));
 
 		String articleURL = ParamUtil.getString(req, "articleURL");
@@ -362,8 +364,8 @@ public class EditArticleAction extends PortletAction {
 				displayDateMinute, expirationDateMonth, expirationDateDay,
 				expirationDateYear, expirationDateHour, expirationDateMinute,
 				neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
-				reviewDateHour, reviewDateMinute, neverReview, images,
-				articleURL, req.getPreferences(), tagsEntries,
+				reviewDateHour, reviewDateMinute, neverReview, indexable,
+				images, articleURL, req.getPreferences(), tagsEntries,
 				communityPermissions, guestPermissions);
 		}
 		else {
@@ -397,8 +399,8 @@ public class EditArticleAction extends PortletAction {
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, reviewDateMonth,
 				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
-				neverReview, images, articleURL, req.getPreferences(),
-				tagsEntries);
+				neverReview, indexable, images, articleURL,
+				req.getPreferences(), tagsEntries);
 		}
 
 		if (approve) {

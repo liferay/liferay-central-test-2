@@ -59,8 +59,8 @@ public class JournalArticleServiceImpl
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
 			int reviewDateDay, int reviewDateYear, int reviewDateHour,
-			int reviewDateMinute, boolean neverReview, Map images,
-			String articleURL, PortletPreferences prefs,
+			int reviewDateMinute, boolean neverReview, boolean indexable,
+			Map images, String articleURL, PortletPreferences prefs,
 			String[] tagsEntries, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -76,7 +76,7 @@ public class JournalArticleServiceImpl
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, images, articleURL, prefs,
+			reviewDateMinute, neverReview, indexable, images, articleURL, prefs,
 			tagsEntries, addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -89,9 +89,10 @@ public class JournalArticleServiceImpl
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
 			int reviewDateDay, int reviewDateYear, int reviewDateHour,
-			int reviewDateMinute, boolean neverReview, Map images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions)
+			int reviewDateMinute, boolean neverReview, boolean indexable,
+			Map images, String articleURL, PortletPreferences prefs,
+			String[] tagsEntries, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -105,7 +106,7 @@ public class JournalArticleServiceImpl
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, images, articleURL, prefs,
+			reviewDateMinute, neverReview, indexable, images, articleURL, prefs,
 			tagsEntries, communityPermissions, guestPermissions);
 	}
 
@@ -218,8 +219,8 @@ public class JournalArticleServiceImpl
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, Map images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries)
+			boolean neverReview, boolean indexable, Map images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
@@ -232,8 +233,8 @@ public class JournalArticleServiceImpl
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
-			reviewDateHour, reviewDateMinute, neverReview, images, articleURL,
-			prefs, tagsEntries);
+			reviewDateHour, reviewDateMinute, neverReview, indexable, images,
+			articleURL, prefs, tagsEntries);
 	}
 
 	public JournalArticle updateContent(

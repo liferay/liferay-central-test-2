@@ -362,7 +362,8 @@ create table JournalArticle (
 	approvedDate DATE null,
 	expired BOOLEAN,
 	expirationDate DATE null,
-	reviewDate DATE null
+	reviewDate DATE null,
+	indexable BOOLEAN
 );
 
 create table JournalArticleImage (

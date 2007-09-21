@@ -150,4 +150,10 @@ public interface JournalArticleModel extends BaseModel {
 	public Date getReviewDate();
 
 	public void setReviewDate(Date reviewDate);
+
+	public boolean getIndexable();
+
+	public boolean isIndexable();
+
+	public void setIndexable(boolean indexable);
 }

@@ -138,8 +138,8 @@ public class JournalArticleLocalServiceImpl
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, Map images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries,
+			boolean neverReview, boolean indexable, Map images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -150,7 +150,7 @@ public class JournalArticleLocalServiceImpl
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, images, articleURL, prefs,
+			reviewDateMinute, neverReview, indexable, images, articleURL, prefs,
 			tagsEntries, new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
@@ -165,8 +165,8 @@ public class JournalArticleLocalServiceImpl
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, Map images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries,
+			boolean neverReview, boolean indexable, Map images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -177,7 +177,7 @@ public class JournalArticleLocalServiceImpl
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, images, articleURL, prefs,
+			reviewDateMinute, neverReview, indexable, images, articleURL, prefs,
 			tagsEntries, null, null, communityPermissions, guestPermissions);
 	}
 
@@ -191,8 +191,8 @@ public class JournalArticleLocalServiceImpl
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, Map images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries,
+			boolean neverReview, boolean indexable, Map images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -274,6 +274,7 @@ public class JournalArticleLocalServiceImpl
 
 		article.setExpirationDate(expirationDate);
 		article.setReviewDate(reviewDate);
+		article.setIndexable(indexable);
 
 		JournalArticleUtil.update(article);
 
@@ -375,12 +376,14 @@ public class JournalArticleLocalServiceImpl
 		// Lucene
 
 		try {
-			Indexer.updateArticle(
-				article.getCompanyId(), article.getGroupId(),
-				article.getArticleId(), article.getVersion(),
-				article.getTitle(), article.getDescription(),
-				article.getContent(), article.getType(),
-				article.getDisplayDate());
+			if (article.isIndexable()) {
+				Indexer.updateArticle(
+					article.getCompanyId(), article.getGroupId(),
+					article.getArticleId(), article.getVersion(),
+					article.getTitle(), article.getDescription(),
+					article.getContent(), article.getType(),
+					article.getDisplayDate());
+			}
 		}
 		catch (IOException ioe) {
 			_log.error("Indexing " + article.getId(), ioe);
@@ -1048,7 +1051,7 @@ public class JournalArticleLocalServiceImpl
 				String type = article.getType();
 				Date displayDate = article.getDisplayDate();
 
-				if (article.isApproved()) {
+				if (article.isApproved() && article.isIndexable()) {
 					try {
 						Indexer.addArticle(
 							companyId, groupId, articleId, version, title,
@@ -1254,8 +1257,8 @@ public class JournalArticleLocalServiceImpl
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, Map images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries)
+			boolean neverReview, boolean indexable, Map images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		// Article
@@ -1343,6 +1346,7 @@ public class JournalArticleLocalServiceImpl
 
 		article.setExpirationDate(expirationDate);
 		article.setReviewDate(reviewDate);
+		article.setIndexable(indexable);
 
 		JournalArticleUtil.update(article);
 
@@ -1359,7 +1363,7 @@ public class JournalArticleLocalServiceImpl
 		// Lucene
 
 		try {
-			if (article.isApproved()) {
+			if (article.isApproved() && article.isIndexable()) {
 				Indexer.updateArticle(
 					article.getCompanyId(), article.getGroupId(),
 					article.getArticleId(), article.getVersion(),
