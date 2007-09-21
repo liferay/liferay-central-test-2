@@ -754,7 +754,7 @@
 		<file-name>portal/commons-beanutils.jar</file-name>
 		<version>1.7.0</version>
 		<project-name>Commons Beanutils</project-name>
-		<project-url>http://jakarta.apache.org/commons/beanutils</project-url>
+		<project-url>http://commons.apache.org/beanutils</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -765,7 +765,7 @@
 		<file-name>portal/commons-codec.jar</file-name>
 		<version>1.3</version>
 		<project-name>Commons Codec</project-name>
-		<project-url>http://jakarta.apache.org/commons/codec</project-url>
+		<project-url>http://commons.apache.org/codec</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -776,7 +776,7 @@
 		<file-name>portal/commons-collections.jar</file-name>
 		<version>3.2</version>
 		<project-name>Commons Collections</project-name>
-		<project-url>http://jakarta.apache.org/commons/collections</project-url>
+		<project-url>http://commons.apache.org/collections</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -787,7 +787,7 @@
 		<file-name>portal/commons-configuration.jar</file-name>
 		<version>1.3</version>
 		<project-name>Commons Configuration</project-name>
-		<project-url>http://jakarta.apache.org/commons/configuration</project-url>
+		<project-url>http://commons.apache.org/configuration</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -798,7 +798,7 @@
 		<file-name>portal/commons-dbcp.jar</file-name>
 		<version>1.2.1</version>
 		<project-name>Commons DBCP</project-name>
-		<project-url>http://jakarta.apache.org/commons/dbcp</project-url>
+		<project-url>http://commons.apache.org/dbcp</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -809,7 +809,7 @@
 		<file-name>portal/commons-digester.jar</file-name>
 		<version>1.7</version>
 		<project-name>Commons Digester</project-name>
-		<project-url>http://jakarta.apache.org/commons/digester</project-url>
+		<project-url>http://commons.apache.org/digester</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -820,7 +820,7 @@
 		<file-name>portal/commons-discovery.jar</file-name>
 		<version>0.4</version>
 		<project-name>Commons Discovery.jar</project-name>
-		<project-url>http://jakarta.apache.org/commons/discovery</project-url>
+		<project-url>http://commons.apache.org/discovery</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -832,7 +832,7 @@
 		<file-name>portal/commons-email.jar</file-name>
 		<version>1.0</version>
 		<project-name>Commons Email.jar</project-name>
-		<project-url>http://jakarta.apache.org/commons/email</project-url>
+		<project-url>http://commons.apache.org/email</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -843,7 +843,7 @@
 		<file-name>portal/commons-fileupload.jar</file-name>
 		<version>1.2</version>
 		<project-name>Commons FileUpload</project-name>
-		<project-url>http://jakarta.apache.org/commons/fileupload</project-url>
+		<project-url>http://commons.apache.org/fileupload</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -855,7 +855,7 @@
 		<file-name>portal/commons-httpclient.jar</file-name>
 		<version>3.0.1</version>
 		<project-name>Commons HttpClient</project-name>
-		<project-url>http://jakarta.apache.org/commons/httpclient</project-url>
+		<project-url>http://commons.apache.org/httpclient</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -866,7 +866,7 @@
 		<file-name>portal/commons-id.jar</file-name>
 		<version>0.1</version>
 		<project-name>Commons Id</project-name>
-		<project-url>http://jakarta.apache.org/commons/sandbox/id</project-url>
+		<project-url>http://commons.apache.org/sandbox/id</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -878,7 +878,7 @@
 		<file-name>portal/commons-io.jar</file-name>
 		<version>1.3.1</version>
 		<project-name>Commons IO</project-name>
-		<project-url>http://jakarta.apache.org/commons/io</project-url>
+		<project-url>http://commons.apache.org/io</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -890,7 +890,7 @@
 		<file-name>portal/commons-lang.jar</file-name>
 		<version>2.3</version>
 		<project-name>Commons Lang</project-name>
-		<project-url>http://jakarta.apache.org/commons/lang</project-url>
+		<project-url>http://commons.apache.org/lang</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -902,7 +902,18 @@
 		<file-name>portal/commons-logging.jar</file-name>
 		<version>1.1</version>
 		<project-name>Commons Logging</project-name>
-		<project-url>http://jakarta.apache.org/commons/lang</project-url>
+		<project-url>http://commons.apache.org/lang</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/commons-math.jar</file-name>
+		<version>1.1</version>
+		<project-name>Commons Math</project-name>
+		<project-url>http://commons.apache.org/math</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -913,7 +924,7 @@
 		<file-name>portal/commons-pool.jar</file-name>
 		<version>1.3</version>
 		<project-name>Commons Pool</project-name>
-		<project-url>http://jakarta.apache.org/commons/pool</project-url>
+		<project-url>http://commons.apache.org/pool</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -924,7 +935,7 @@
 		<file-name>portal/commons-validator.jar</file-name>
 		<version>1.3.1</version>
 		<project-name>Commons Validator</project-name>
-		<project-url>http://jakarta.apache.org/commons/validator</project-url>
+		<project-url>http://commons.apache.org/validator</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
