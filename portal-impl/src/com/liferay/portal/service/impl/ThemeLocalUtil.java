@@ -660,15 +660,15 @@ public class ThemeLocalUtil {
 
 				if (standardEl != null) {
 					LayoutTemplateLocalUtil.readLayoutTemplate(
-						null, ctx, null, standardEl, true, themeId,
-						pluginPackage);
+						servletContextName, ctx, null, standardEl, true,
+						themeId, pluginPackage);
 				}
 
 				Element customEl = layoutTemplatesEl.element("custom");
 
 				if (customEl != null) {
 					LayoutTemplateLocalUtil.readLayoutTemplate(
-						null, ctx, null, customEl, false, themeId,
+						servletContextName, ctx, null, customEl, false, themeId,
 						pluginPackage);
 				}
 			}

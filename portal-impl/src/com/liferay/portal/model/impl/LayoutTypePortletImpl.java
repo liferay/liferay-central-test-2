@@ -154,9 +154,18 @@ public class LayoutTypePortletImpl
 			return;
 		}
 
+		String themeId = null;
+
+		try {
+			themeId = getLayout().getTheme().getThemeId();
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
 		LayoutTemplate oldLayoutTemplate =
 			LayoutTemplateLocalUtil.getLayoutTemplate(
-				oldLayoutTemplateId, false, null);
+				oldLayoutTemplateId, false, themeId);
 
 		if (oldLayoutTemplate == null) {
 			return;
@@ -164,7 +173,7 @@ public class LayoutTypePortletImpl
 
 		LayoutTemplate newLayoutTemplate =
 			LayoutTemplateLocalUtil.getLayoutTemplate(
-				newLayoutTemplateId, false, null);
+				newLayoutTemplateId, false, themeId);
 
 		List oldColumns = oldLayoutTemplate.getColumns();
 		List newColumns = newLayoutTemplate.getColumns();

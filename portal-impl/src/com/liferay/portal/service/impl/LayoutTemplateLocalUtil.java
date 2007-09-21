@@ -22,13 +22,11 @@
 
 package com.liferay.portal.service.impl;
 
-import EDU.oswego.cs.dl.util.concurrent.SyncMap;
-import EDU.oswego.cs.dl.util.concurrent.WriterPreferenceReadWriteLock;
-
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.PluginSetting;
@@ -37,7 +35,6 @@ import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.layoutconfiguration.util.velocity.InitColumnProcessor;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 import com.liferay.util.ListUtil;
 
@@ -80,28 +77,42 @@ public class LayoutTemplateLocalUtil {
 			String layoutTemplateId, boolean standard, String themeId)
 		throws SystemException {
 
-		LayoutTemplate layoutTemplate =
-			getLayoutTemplate(layoutTemplateId, standard, themeId);
+		LayoutTemplate layoutTemplate = getLayoutTemplate(
+			layoutTemplateId, standard, themeId);
 
 		if (layoutTemplate == null) {
-			_log.error(
-				"Layout template " + layoutTemplateId + " does not exist");
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Layout template " + layoutTemplateId + " does not exist");
+			}
 
-			return null;
+			String defaultUserLayoutTemplateId = PropsUtil.get(
+				PropsUtil.DEFAULT_USER_LAYOUT_TEMPLATE_ID);
+
+			layoutTemplate = getLayoutTemplate(
+				defaultUserLayoutTemplateId, standard, themeId);
+
+			if (layoutTemplate == null) {
+				_log.error(
+					"Layout template " + layoutTemplateId +
+						" and default user layout template " +
+							defaultUserLayoutTemplateId + " does not exist");
+
+				return StringPool.BLANK;
+			}
+		}
+
+		if (GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED))) {
+
+			return layoutTemplate.getContent();
 		}
 		else {
-			if (GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED))) {
-
-				return layoutTemplate.getContent();
+			try {
+				return layoutTemplate.getUncachedContent();
 			}
-			else {
-				try {
-					return layoutTemplate.getUncachedContent();
-				}
-				catch (IOException ioe) {
-					throw new SystemException(ioe);
-				}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
 			}
 		}
 	}
@@ -153,8 +164,8 @@ public class LayoutTemplateLocalUtil {
 	}
 
 	public static List getLayoutTemplates() {
-		List customLayoutTemplates =
-			new ArrayList(_portalCustom.size() + _warCustom.size());
+		List customLayoutTemplates = new ArrayList(
+			_portalCustom.size() + _warCustom.size());
 
 		customLayoutTemplates.addAll(
 			ListUtil.fromCollection(_portalCustom.values()));
@@ -165,32 +176,104 @@ public class LayoutTemplateLocalUtil {
 		return customLayoutTemplates;
 	}
 
+	public static List getLayoutTemplates(String themeId) {
+		Map _themesCustom = _getThemesCustom(themeId);
+
+		List customLayoutTemplates = new ArrayList(
+			_portalCustom.size() + _warCustom.size() + _themesCustom.size());
+
+		Iterator itr = _portalCustom.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String layoutTemplateId = (String)entry.getKey();
+			LayoutTemplate layoutTemplate = (LayoutTemplate)entry.getValue();
+
+			if (_themesCustom.containsKey(layoutTemplateId)) {
+				customLayoutTemplates.add(_themesCustom.get(layoutTemplateId));
+			}
+			else if (_warCustom.containsKey(layoutTemplateId)) {
+				customLayoutTemplates.add(_warCustom.get(layoutTemplateId));
+			}
+			else {
+				customLayoutTemplates.add(layoutTemplate);
+			}
+		}
+
+		itr = _warCustom.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String layoutTemplateId = (String)entry.getKey();
+			LayoutTemplate layoutTemplate = (LayoutTemplate)entry.getValue();
+
+			if (!_portalCustom.containsKey(layoutTemplateId) &&
+				!_themesCustom.containsKey(layoutTemplateId)) {
+
+				customLayoutTemplates.add(_warCustom.get(layoutTemplateId));
+			}
+		}
+
+		itr = _themesCustom.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String layoutTemplateId = (String)entry.getKey();
+			LayoutTemplate layoutTemplate = (LayoutTemplate)entry.getValue();
+
+			if (!_portalCustom.containsKey(layoutTemplateId) &&
+				!_warCustom.containsKey(layoutTemplateId)) {
+
+				customLayoutTemplates.add(_themesCustom.get(layoutTemplateId));
+			}
+		}
+
+		return customLayoutTemplates;
+	}
+
 	public static String getWapContent(
 			String layoutTemplateId, boolean standard, String themeId)
 		throws SystemException {
 
-		LayoutTemplate layoutTemplate =
-			getLayoutTemplate(layoutTemplateId, standard, themeId);
+		LayoutTemplate layoutTemplate = getLayoutTemplate(
+			layoutTemplateId, standard, themeId);
 
 		if (layoutTemplate == null) {
-			_log.error(
-				"Layout template " + layoutTemplateId + " does not exist");
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Layout template " + layoutTemplateId + " does not exist");
+			}
 
-			return null;
+			String defaultUserLayoutTemplateId = PropsUtil.get(
+				PropsUtil.DEFAULT_USER_LAYOUT_TEMPLATE_ID);
+
+			layoutTemplate = getLayoutTemplate(
+				defaultUserLayoutTemplateId, standard, themeId);
+
+			if (layoutTemplate == null) {
+				_log.error(
+					"Layout template " + layoutTemplateId +
+						" and default user layout template " +
+							defaultUserLayoutTemplateId + " does not exist");
+
+				return StringPool.BLANK;
+			}
+		}
+
+		if (GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED))) {
+
+			return layoutTemplate.getWapContent();
 		}
 		else {
-			if (GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED))) {
-
-				return layoutTemplate.getWapContent();
+			try {
+				return layoutTemplate.getUncachedWapContent();
 			}
-			else {
-				try {
-					return layoutTemplate.getUncachedWapContent();
-				}
-				catch (IOException ioe) {
-					throw new SystemException(ioe);
-				}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
 			}
 		}
 	}
@@ -457,7 +540,7 @@ public class LayoutTemplateLocalUtil {
 		Map layoutTemplates = (Map)_themes.get(key);
 
 		if (layoutTemplates == null) {
-			layoutTemplates = CollectionFactory.getSyncHashMap();
+			layoutTemplates = new LinkedHashMap();
 
 			_themes.put(key, layoutTemplates);
 		}
@@ -471,7 +554,7 @@ public class LayoutTemplateLocalUtil {
 		Map layoutTemplates = (Map)_themes.get(key);
 
 		if (layoutTemplates == null) {
-			layoutTemplates = CollectionFactory.getSyncHashMap();
+			layoutTemplates = new LinkedHashMap();
 
 			_themes.put(key, layoutTemplates);
 		}
@@ -485,14 +568,12 @@ public class LayoutTemplateLocalUtil {
 
 	private static Log _log = LogFactory.getLog(LayoutTemplateLocalUtil.class);
 
-	private static Map _portalStandard = CollectionFactory.getSyncHashMap();
-	private static Map _portalCustom = new SyncMap(
-		new LinkedHashMap(), new WriterPreferenceReadWriteLock());
+	private static Map _portalStandard = new LinkedHashMap();
+	private static Map _portalCustom = new LinkedHashMap();
 
-	private static Map _warStandard = CollectionFactory.getSyncHashMap();
-	private static Map _warCustom = new SyncMap(
-		new LinkedHashMap(), new WriterPreferenceReadWriteLock());
+	private static Map _warStandard = new LinkedHashMap();
+	private static Map _warCustom = new LinkedHashMap();
 
-	private static Map _themes = CollectionFactory.getSyncHashMap();
+	private static Map _themes = new LinkedHashMap();
 
 }

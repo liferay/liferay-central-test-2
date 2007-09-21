@@ -36,7 +36,7 @@
 	<%
 	int CELLS_PER_ROW = 4;
 
-	List layoutTemplates = LayoutTemplateLocalUtil.getLayoutTemplates();
+	List layoutTemplates = LayoutTemplateLocalUtil.getLayoutTemplates(theme.getThemeId());
 
 	layoutTemplates = PluginUtil.restrictPlugins(layoutTemplates, user);
 
