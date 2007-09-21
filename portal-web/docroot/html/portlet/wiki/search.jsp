@@ -113,7 +113,7 @@ try {
 
 		// Score
 
-		row.addText(String.valueOf(results.score(i)), rowURL);
+		row.addScore(results.score(i));
 
 		// Add result row
 
