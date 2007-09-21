@@ -3,6 +3,10 @@
 <instance-wrappers>
 	<instance-wrapper
 		parent-dir="../portal-impl/src"
+		src-file="com/liferay/portal/servlet/ImageServletToken.java"
+	/>
+	<instance-wrapper
+		parent-dir="../portal-impl/src"
 		src-file="com/liferay/portal/util/DateFormats.java"
 	/>
 	<instance-wrapper

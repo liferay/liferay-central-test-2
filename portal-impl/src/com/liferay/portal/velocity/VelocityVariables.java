@@ -50,6 +50,7 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
+import com.liferay.portal.servlet.ImageServletToken_IW;
 import com.liferay.portal.theme.NavItem;
 import com.liferay.portal.theme.RequestVars;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -111,6 +112,10 @@ public class VelocityVariables {
 		// Http util
 
 		vc.put("httpUtil", HttpUtil_IW.getInstance());
+
+		// ImageServletToken
+
+		vc.put("imageToken", ImageServletToken_IW.getInstance());
 
 		// Language util
 

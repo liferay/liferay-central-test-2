@@ -47,6 +47,10 @@ public class PortalUtil_IW {
 		return PortalUtil.createSecureProxyURL(url, secure);
 	}
 
+	public java.lang.String getCDNHost() {
+		return PortalUtil.getCDNHost();
+	}
+
 	public java.lang.String getClassName(long classNameId) {
 		return PortalUtil.getClassName(classNameId);
 	}
