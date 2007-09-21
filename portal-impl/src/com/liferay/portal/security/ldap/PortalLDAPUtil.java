@@ -673,6 +673,7 @@ public class PortalLDAPUtil {
 				companyId, emailAddress);
 
 			Contact contact = user.getContact();
+
 			Date birthday = contact.getBirthday();
 
 			// User exists so update user information
