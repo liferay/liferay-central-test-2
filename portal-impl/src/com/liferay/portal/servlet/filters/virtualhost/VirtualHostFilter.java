@@ -23,9 +23,8 @@
 package com.liferay.portal.servlet.filters.virtualhost;
 
 import com.liferay.portal.LayoutFriendlyURLException;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.MethodCache;
-import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -40,8 +39,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.SystemProperties;
 
 import java.io.IOException;
-
-import java.lang.reflect.Method;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -102,21 +99,7 @@ public class VirtualHostFilter implements Filter {
 		HttpServletResponse httpRes = (HttpServletResponse)res;
 
 		httpReq.setCharacterEncoding(ENCODING);
-
-		try {
-			MethodKey methodKey = new MethodKey(
-				HttpServletResponse.class.getName(), "setCharacterEncoding",
-				new Class[] {String.class});
-
-			Method method = MethodCache.get(methodKey);
-
-			method.invoke(httpRes, new String[] {ENCODING});
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("This method is only available in Servlet 2.4");
-			}
-		}
+		httpRes.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
 		// Company id needs to always be called here so that it's properly set
 		// in subsequent calls
