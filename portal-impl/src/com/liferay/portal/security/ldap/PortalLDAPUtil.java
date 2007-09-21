@@ -29,6 +29,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -45,7 +46,6 @@ import com.liferay.util.ldap.LDAPUtil;
 import com.liferay.util.ldap.Modifications;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -674,7 +674,13 @@ public class PortalLDAPUtil {
 
 			Contact contact = user.getContact();
 
-			Date birthday = contact.getBirthday();
+			Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
+
+			birthdayCal.setTime(contact.getBirthday());
+
+			birthdayMonth = birthdayCal.get(Calendar.MONTH);
+			birthdayDay = birthdayCal.get(Calendar.DATE);
+			birthdayYear = birthdayCal.get(Calendar.YEAR);
 
 			// User exists so update user information
 
@@ -689,11 +695,10 @@ public class PortalLDAPUtil {
 				user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
 				user.getComments(), firstName, middleName, lastName,
 				contact.getPrefixId(), contact.getSuffixId(), contact.getMale(),
-				birthday.getMonth(), birthday.getDay(), birthday.getYear(),
-				contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
-				contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
-				contact.getYmSn(), jobTitle,
-				user.getOrganization().getOrganizationId(),
+				birthdayMonth, birthdayDay, birthdayYear, contact.getSmsSn(),
+				contact.getAimSn(), contact.getIcqSn(), contact.getJabberSn(),
+				contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn(),
+				jobTitle, user.getOrganization().getOrganizationId(),
 				user.getLocation().getOrganizationId());
 		}
 		catch (NoSuchUserException nsue) {

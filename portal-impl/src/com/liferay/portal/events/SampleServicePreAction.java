@@ -29,9 +29,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="SampleServicePreAction.java.html"><b><i>View Source</i></b></a>
  *
@@ -56,7 +53,5 @@ public class SampleServicePreAction extends Action {
 
 		ses.setAttribute("TEST_SHARED_HELLO", "world");
 	}
-
-	private static Log _log = LogFactory.getLog(SampleServicePreAction.class);
 
 }

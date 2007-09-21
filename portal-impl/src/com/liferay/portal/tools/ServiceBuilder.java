@@ -5499,8 +5499,6 @@ public class ServiceBuilder {
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = (EntityColumn)regularColList.get(i);
 
-			String colType = col.getType();
-
 			sm.append("JSONUtil.put(jsonObj, \"" + col.getName() + "\", model.get" + col.getMethodName() + "());");
 		}
 

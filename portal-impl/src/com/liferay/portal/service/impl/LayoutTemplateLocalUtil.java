@@ -207,7 +207,6 @@ public class LayoutTemplateLocalUtil {
 			Map.Entry entry = (Map.Entry)itr.next();
 
 			String layoutTemplateId = (String)entry.getKey();
-			LayoutTemplate layoutTemplate = (LayoutTemplate)entry.getValue();
 
 			if (!_portalCustom.containsKey(layoutTemplateId) &&
 				!_themesCustom.containsKey(layoutTemplateId)) {
@@ -222,7 +221,6 @@ public class LayoutTemplateLocalUtil {
 			Map.Entry entry = (Map.Entry)itr.next();
 
 			String layoutTemplateId = (String)entry.getKey();
-			LayoutTemplate layoutTemplate = (LayoutTemplate)entry.getValue();
 
 			if (!_portalCustom.containsKey(layoutTemplateId) &&
 				!_warCustom.containsKey(layoutTemplateId)) {

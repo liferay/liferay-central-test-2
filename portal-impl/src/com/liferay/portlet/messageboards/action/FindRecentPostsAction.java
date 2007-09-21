@@ -35,8 +35,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -57,7 +55,6 @@ public class FindRecentPostsAction extends Action {
 
 		try {
 			long plid = ParamUtil.getLong(req, "p_l_id");
-			long messageId = ParamUtil.getLong(req, "messageId");
 
 			PortletURL portletURL = new PortletURLImpl(
 				req, PortletKeys.MESSAGE_BOARDS, plid, false);
@@ -78,7 +75,5 @@ public class FindRecentPostsAction extends Action {
 			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(FindRecentPostsAction.class);
 
 }

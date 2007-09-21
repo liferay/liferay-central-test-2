@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 /**
  * <a href="PropsUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -48,7 +45,5 @@ public class PropsUtil {
 	private static final String _CLASS = "com.liferay.portal.util.PropsUtil";
 
 	private static final String _METHOD_GET = "get";
-
-	private static Log _log = LogFactoryUtil.getLog(PropsUtil.class);
 
 }

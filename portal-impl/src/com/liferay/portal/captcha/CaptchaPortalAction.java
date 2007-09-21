@@ -37,8 +37,6 @@ import javax.servlet.jsp.PageContext;
 import nl.captcha.servlet.CaptchaProducer;
 import nl.captcha.util.Helper;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -82,8 +80,6 @@ public class CaptchaPortalAction extends Action {
 			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(CaptchaPortalAction.class);
 
 	private CaptchaProducer _producer;
 

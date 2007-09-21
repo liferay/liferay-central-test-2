@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -186,7 +183,5 @@ public class PortalUtil {
 	private static final String _METHOD_SETPAGESUBTITLE = "setPageSubtitle";
 
 	private static final String _METHOD_SETPAGETITLE = "setPageTitle";
-
-	private static Log _log = LogFactoryUtil.getLog(PortalUtil.class);
 
 }

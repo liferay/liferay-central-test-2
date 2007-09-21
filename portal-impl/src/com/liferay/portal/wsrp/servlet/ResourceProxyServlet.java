@@ -22,8 +22,6 @@
 
 package com.liferay.portal.wsrp.servlet;
 
-import com.liferay.util.SystemProperties;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -53,8 +51,6 @@ public class ResourceProxyServlet extends HttpServlet {
 
 		if (targetUrl != null) {
 			try {
-				String encoding = SystemProperties.get("file.encoding");
-
 				targetUrl = ObjectDeserializer.deserializeString(Base64.decode(targetUrl));
 				URL url = new URL(targetUrl);
 				URLConnection con = url.openConnection();
