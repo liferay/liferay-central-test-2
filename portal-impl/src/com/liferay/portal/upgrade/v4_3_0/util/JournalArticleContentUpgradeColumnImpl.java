@@ -31,8 +31,10 @@ import com.liferay.portal.upgrade.util.BaseUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.IdReplacer;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
+import com.liferay.portal.upgrade.util.ValueMapperFactory;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
+import com.liferay.util.PKParser;
 
 import java.io.StringReader;
 
@@ -216,10 +218,33 @@ public class JournalArticleContentUpgradeColumnImpl
 			"_20_struts_action=%2Fdocument_library%2Fget_file&_20_folderId=",
 			dlFolderIdMapper);
 
+		ValueMapper imageIdMapper = AvailableMappersUtil.getImageIdMapper();
+
+		ValueMapper newImageIdMapper = ValueMapperFactory.getValueMapper();
+
 		ValueMapper igImageIdMapper = AvailableMappersUtil.getIGImageIdMapper();
 
+		Iterator itr = igImageIdMapper.iterator();
+
+		while (itr.hasNext()) {
+			String oldValue = (String)itr.next();
+
+			PKParser oldValuePKParser = new PKParser(oldValue);
+
+			String companyId = oldValuePKParser.getString("companyId");
+			String oldIGImageId = oldValuePKParser.getString("imageId");
+
+			String oldImageId =
+				companyId + ".image_gallery." + oldIGImageId + ".large";
+
+			Long newImageId = (Long)imageIdMapper.getNewValue(oldImageId);
+
+			newImageIdMapper.mapValue(
+				new Long(GetterUtil.getLong(oldIGImageId)), newImageId);
+		}
+
 		content = IdReplacer.replaceLongIds(
-			content, "/image_gallery?img_id=", igImageIdMapper);
+			content, "/image_gallery?img_id=", newImageIdMapper);
 
 		return content;
 	}
