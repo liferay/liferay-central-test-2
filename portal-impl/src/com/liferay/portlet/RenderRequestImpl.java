@@ -353,6 +353,8 @@ public class RenderRequestImpl implements RenderRequest {
 				names.add(name);
 			}
 		}
+		// LEP-3845
+		names.add(RenderRequest.USER_INFO);
 
 		return Collections.enumeration(names);
 	}
