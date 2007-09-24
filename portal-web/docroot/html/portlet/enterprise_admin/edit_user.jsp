@@ -112,7 +112,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 <%@ include file="/html/portlet/enterprise_admin/edit_user_profile.jspf" %>
 
 <c:if test="<%= user2 != null %>">
-	<c:if test="<%= user2.getLockout() %>">
+	<c:if test="<%= (passwordPolicy != null) && user2.getLockout() %>">
 		<liferay-ui:tabs names="lockout" />
 
 		<%@ include file="/html/portlet/enterprise_admin/edit_user_lockout.jspf" %>
