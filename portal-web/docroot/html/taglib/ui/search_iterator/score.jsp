@@ -36,9 +36,16 @@ String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + String
 ScoreSearchEntry entry = (ScoreSearchEntry)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY);
 
 double score = MathUtils.round((entry.getScore() * 10) / 2, 1, BigDecimal.ROUND_UP);
+
+NumberFormat numberFormat = NumberFormat.getInstance();
+
+numberFormat.setMaximumFractionDigits(1);
+numberFormat.setMinimumFractionDigits(0);
+
+String scoreString = numberFormat.format(score);
 %>
 
-<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= score %> Stars')">
+<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= scoreString %> Stars')">
 	<img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 </div>
 
@@ -47,6 +54,6 @@ double score = MathUtils.round((entry.getScore() * 10) / 2, 1, BigDecimal.ROUND_
 		"<%= randomNamespace %>averageRating",
 		{
 			displayOnly: true,
-			rating: <%= score %>
+			rating: <%= scoreString %>
 		});
 </script>
