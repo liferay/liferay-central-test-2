@@ -29,9 +29,9 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
@@ -61,6 +61,65 @@ public class IndexerImpl {
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName)
+		throws IOException {
+
+		try {
+			DLFileEntry fileEntry = null;
+
+			try {
+				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+					repositoryId, fileName);
+			}
+			catch (NoSuchFileEntryException nsfe) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"File " + fileName + " in repository " +
+							repositoryId + " exists in the JCR but does " +
+								"not exist in the database");
+				}
+
+				return;
+			}
+
+			StringMaker sm = new StringMaker();
+
+			sm.append(fileEntry.getTitle());
+			sm.append(StringPool.SPACE);
+			sm.append(fileEntry.getDescription());
+			sm.append(StringPool.SPACE);
+
+			Properties extraSettingsProps =
+				fileEntry.getExtraSettingsProperties();
+
+			Iterator itr =
+				(Iterator)extraSettingsProps.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry entry = (Map.Entry)itr.next();
+
+				String value = GetterUtil.getString(
+					(String)entry.getValue());
+
+				sm.append(value);
+			}
+
+			String properties = sm.toString();
+
+			addFile(
+				companyId, portletId, groupId, repositoryId, fileName,
+				properties);
+		}
+		catch (PortalException pe) {
+			throw new IOException(pe.getMessage());
+		}
+		catch (SystemException se) {
+			throw new IOException(se.getMessage());
+		}
+	}
+
+	public static void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String properties)
 		throws IOException {
 
 		if (_log.isDebugEnabled()) {
@@ -123,73 +182,8 @@ public class IndexerImpl {
 
 		doc.add(LuceneFields.getFile(LuceneFields.CONTENT, is, fileExt));
 
-		if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
-			try {
-				DLFileEntry fileEntry = null;
-
-				for (int i = 0; i < 5; i++) {
-					try {
-						fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-							repositoryId, fileName);
-
-						break;
-					}
-					catch (NoSuchFileEntryException nsfe) {
-
-						// Indexing is spawned off to a queue. Try to get
-						// the file entry object after waiting for 1 second
-						// to fix a possible race condition.
-
-						try {
-							Thread.sleep(1000);
-						}
-						catch (InterruptedException ie) {
-							throw nsfe;
-						}
-					}
-				}
-
-				if (fileEntry == null) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"File " + fileName + " in repository " +
-								repositoryId + " exists in the JCR but does " +
-									"not exist in the database");
-					}
-
-					return;
-				}
-
-				StringMaker sm = new StringMaker();
-
-				sm.append(fileEntry.getTitle());
-				sm.append(StringPool.SPACE);
-				sm.append(fileEntry.getDescription());
-				sm.append(StringPool.SPACE);
-
-				Properties extraSettingsProps =
-					fileEntry.getExtraSettingsProperties();
-
-				Iterator itr =
-					(Iterator)extraSettingsProps.entrySet().iterator();
-
-				while (itr.hasNext()) {
-					Map.Entry entry = (Map.Entry)itr.next();
-
-					String value = GetterUtil.getString(
-						(String)entry.getValue());
-
-					sm.append(value);
-				}
-
-				doc.add(LuceneFields.getText(LuceneFields.PROPERTIES, sm));
-			}
-			catch (PortalException pe) {
-				throw new IOException(pe.getMessage());
-			}
-			catch (SystemException se) {
-				throw new IOException(se.getMessage());
-			}
+		if (Validator.isNotNull(properties)) {
+			doc.add(LuceneFields.getText(LuceneFields.PROPERTIES, properties));
 		}
 
 		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
@@ -238,7 +232,7 @@ public class IndexerImpl {
 
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName)
+			String fileName, String properties)
 		throws IOException {
 
 		try {
@@ -247,7 +241,8 @@ public class IndexerImpl {
 		catch (IOException ioe) {
 		}
 
-		addFile(companyId, portletId, groupId, repositoryId, fileName);
+		addFile(
+			companyId, portletId, groupId, repositoryId, fileName, properties);
 	}
 
 	private static Log _log = LogFactory.getLog(IndexerImpl.class);

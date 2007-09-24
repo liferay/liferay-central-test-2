@@ -48,24 +48,26 @@ public class DLServiceUtil {
 
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, File file)
+			String fileName, String properties, File file)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
 
 		dlService.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, file);
+			companyId, portletId, groupId, repositoryId, fileName, properties,
+			file);
 	}
 
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, byte[] byteArray)
+			String fileName, String properties, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
 
 		dlService.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, byteArray);
+			companyId, portletId, groupId, repositoryId, fileName, properties,
+			byteArray);
 	}
 
 	public static void deleteDirectory(
@@ -147,27 +149,27 @@ public class DLServiceUtil {
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			File file)
+			String properties, File file)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
 
 		dlService.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, file);
+			versionNumber, sourceFileName, properties, file);
 	}
 
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			byte[] byteArray)
+			String properties, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
 
 		dlService.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, byteArray);
+			versionNumber, sourceFileName, properties, byteArray);
 	}
 
 	public static void updateFile(

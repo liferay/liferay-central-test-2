@@ -113,7 +113,7 @@ public class JCRHook extends BaseHook {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, InputStream is)
+			String fileName, String properties, InputStream is)
 		throws PortalException, SystemException {
 
 		Session session = null;
@@ -149,7 +149,8 @@ public class JCRHook extends BaseHook {
 					version.getName(), String.valueOf(DEFAULT_VERSION), false);
 
 				Indexer.addFile(
-					companyId, portletId, groupId, repositoryId, fileName);
+					companyId, portletId, groupId, repositoryId, fileName,
+					properties);
 			}
 		}
 		catch (IOException ioe) {
@@ -556,7 +557,7 @@ public class JCRHook extends BaseHook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			InputStream is)
+			String properties, InputStream is)
 		throws PortalException, SystemException {
 
 		String versionLabel = String.valueOf(versionNumber);
@@ -586,7 +587,8 @@ public class JCRHook extends BaseHook {
 				version.getName(), versionLabel, false);
 
 			Indexer.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName);
+				companyId, portletId, groupId, repositoryId, fileName,
+				properties);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

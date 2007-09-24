@@ -70,6 +70,32 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
+	public static void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String properties)
+		throws IOException {
+
+		try {
+			MethodWrapper methodWrapper = new MethodWrapper(
+				IndexerImpl.class.getName(), "addFile",
+				new Object[] {
+					new LongWrapper(companyId), portletId,
+					new LongWrapper(groupId), new LongWrapper(repositoryId),
+					fileName, properties
+				});
+
+			IndexProducer.produce(methodWrapper);
+		}
+		catch (Exception e) {
+			if (e instanceof IOException) {
+				throw (IOException)e;
+			}
+			else {
+				_log.error(e);
+			}
+		}
+	}
+
 	public static void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName)
@@ -97,7 +123,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName)
+			String fileName, String properties)
 		throws IOException {
 
 		try {
@@ -106,7 +132,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 				new Object[] {
 					new LongWrapper(companyId), portletId,
 					new LongWrapper(groupId), new LongWrapper(repositoryId),
-					fileName
+					fileName, properties
 				});
 
 			IndexProducer.produce(methodWrapper);

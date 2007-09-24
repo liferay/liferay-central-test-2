@@ -109,7 +109,7 @@ try {
 		rowURL.setParameter("name", fileName);
 
 		row.addText(folder.getName(), rowURL);
-		row.addText(fileEntry.getName(), rowURL);
+		row.addText(fileEntry.getTitle(), rowURL);
 
 		// Score
 

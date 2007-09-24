@@ -38,13 +38,14 @@ public class DLLocalServiceUtil {
 
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, InputStream is)
+			String fileName, String properties, InputStream is)
 		throws PortalException, SystemException {
 
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
 
 		dlLocalService.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, is);
+			companyId, portletId, groupId, repositoryId, fileName, properties,
+			is);
 	}
 
 	public static void checkRoot(long companyId) throws SystemException {
@@ -107,14 +108,14 @@ public class DLLocalServiceUtil {
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			InputStream is)
+			String properties, InputStream is)
 		throws PortalException, SystemException {
 
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
 
 		dlLocalService.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, is);
+			versionNumber, sourceFileName, properties, is);
 	}
 
 }

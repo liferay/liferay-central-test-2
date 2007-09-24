@@ -60,4 +60,6 @@ public interface DLFileEntry extends DLFileEntryModel {
 
 	public void setExtraSettingsProperties(
 		java.util.Properties extraSettingsProperties);
+
+	public java.lang.String getLuceneProperties();
 }

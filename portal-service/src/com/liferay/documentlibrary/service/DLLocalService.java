@@ -38,7 +38,7 @@ public interface DLLocalService {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, InputStream is)
+			String fileName, String properties, InputStream is)
 		throws PortalException, SystemException;
 
 	public void checkRoot(long companyId) throws SystemException;
@@ -66,8 +66,8 @@ public interface DLLocalService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, double versionNumber,
-			String sourceFileName, InputStream is)
+			String fileName, double versionNumber, String sourceFileName,
+			String properties, InputStream is)
 	throws PortalException, SystemException;
 
 }

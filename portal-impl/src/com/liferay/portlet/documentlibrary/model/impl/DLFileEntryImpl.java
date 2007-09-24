@@ -22,8 +22,10 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -32,6 +34,8 @@ import com.liferay.util.FileUtil;
 
 import java.io.IOException;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.logging.Log;
@@ -115,6 +119,29 @@ public class DLFileEntryImpl
 
 		super.setExtraSettings(
 			PropertiesUtil.toString(_extraSettingsProperties));
+	}
+
+	public String getLuceneProperties() {
+		StringMaker sm = new StringMaker();
+
+		sm.append(getTitle());
+		sm.append(StringPool.SPACE);
+		sm.append(getDescription());
+		sm.append(StringPool.SPACE);
+
+		Properties extraSettingsProps = getExtraSettingsProperties();
+
+		Iterator itr = (Iterator)extraSettingsProps.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String value = GetterUtil.getString((String)entry.getValue());
+
+			sm.append(value);
+		}
+
+		return sm.toString();
 	}
 
 	private static Log _log = LogFactory.getLog(DLFileEntryImpl.class);

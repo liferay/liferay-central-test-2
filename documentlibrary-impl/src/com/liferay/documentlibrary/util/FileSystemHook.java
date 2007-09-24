@@ -72,7 +72,7 @@ public class FileSystemHook extends BaseHook {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, InputStream is)
+			String fileName, String properties, InputStream is)
 		throws PortalException, SystemException {
 
 		try {
@@ -86,7 +86,8 @@ public class FileSystemHook extends BaseHook {
 			FileUtil.write(fileNameVersionFile, is);
 
 			Indexer.addFile(
-				companyId, portletId, groupId, repositoryId, fileName);
+				companyId, portletId, groupId, repositoryId, properties,
+				fileName);
 		}
 		catch (IOException ioe) {
 			throw new SystemException();
@@ -268,7 +269,7 @@ public class FileSystemHook extends BaseHook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			InputStream is)
+			String properties, InputStream is)
 		throws PortalException, SystemException {
 
 		try {
@@ -282,7 +283,8 @@ public class FileSystemHook extends BaseHook {
 			FileUtil.write(fileNameVersionFile, is);
 
 			Indexer.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName);
+				companyId, portletId, groupId, repositoryId, properties,
+				fileName);
 		}
 		catch (IOException ioe) {
 			throw new SystemException();

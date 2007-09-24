@@ -82,34 +82,38 @@ public class DLServiceImpl implements DLService {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, File file)
+			String fileName, String properties, File file)
 		throws PortalException, SystemException {
 
 		if ((FILE_MAX_SIZE > 0) &&
 			((file == null) || (file.length() > FILE_MAX_SIZE))) {
+
 			throw new FileSizeException(fileName);
 		}
 
 		Hook hook = HookFactory.getInstance();
 
 		hook.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, file);
+			companyId, portletId, groupId, repositoryId, fileName, properties,
+			file);
 	}
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, byte[] byteArray)
+			String fileName, String properties, byte[] byteArray)
 		throws PortalException, SystemException {
 
 		if ((FILE_MAX_SIZE > 0) &&
 			((byteArray == null) || (byteArray.length > FILE_MAX_SIZE))) {
+
 			throw new FileSizeException(fileName);
 		}
 
 		Hook hook = HookFactory.getInstance();
 
 		hook.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, byteArray);
+			companyId, portletId, groupId, repositoryId, fileName, properties,
+			byteArray);
 	}
 
 	public void deleteDirectory(
@@ -192,11 +196,12 @@ public class DLServiceImpl implements DLService {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			File file)
+			String properties, File file)
 		throws PortalException, SystemException {
 
 		if ((FILE_MAX_SIZE > 0) &&
 			((file == null) || (file.length() > FILE_MAX_SIZE))) {
+
 			throw new FileSizeException(fileName);
 		}
 
@@ -204,17 +209,18 @@ public class DLServiceImpl implements DLService {
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, file);
+			versionNumber, sourceFileName, properties, file);
 	}
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			byte[] byteArray)
+			String properties, byte[] byteArray)
 		throws PortalException, SystemException {
 
 		if ((FILE_MAX_SIZE > 0) &&
 			((byteArray == null) || (byteArray.length > FILE_MAX_SIZE))) {
+
 			throw new FileSizeException(fileName);
 		}
 
@@ -222,7 +228,7 @@ public class DLServiceImpl implements DLService {
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, byteArray);
+			versionNumber, sourceFileName, properties, byteArray);
 	}
 
 	public void updateFile(

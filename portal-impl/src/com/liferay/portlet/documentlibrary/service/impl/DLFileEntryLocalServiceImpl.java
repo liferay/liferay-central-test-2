@@ -251,7 +251,8 @@ public class DLFileEntryLocalServiceImpl
 
 		DLLocalServiceUtil.addFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-			folder.getGroupId(), folderId, name, is);
+			folder.getGroupId(), folderId, name,
+			fileEntry.getLuceneProperties(), is);
 
 		// Resources
 
@@ -779,7 +780,7 @@ public class DLFileEntryLocalServiceImpl
 		DLLocalServiceUtil.updateFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			folder.getGroupId(), folderId, name, newVersion, sourceFileName,
-			is);
+			fileEntry.getLuceneProperties(), is);
 
 		// Folder
 

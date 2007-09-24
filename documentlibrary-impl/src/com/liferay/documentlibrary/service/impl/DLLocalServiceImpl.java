@@ -57,7 +57,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, InputStream is)
+			String fileName, String properties, InputStream is)
 		throws PortalException, SystemException {
 
 		if ((fileName.indexOf("\\\\") != -1) ||
@@ -102,7 +102,9 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		Hook hook = HookFactory.getInstance();
 
-		hook.addFile(companyId, portletId, groupId, repositoryId, fileName, is);
+		hook.addFile(
+			companyId, portletId, groupId, repositoryId, fileName, properties,
+			is);
 	}
 
 	public void checkRoot(long companyId) throws SystemException {
@@ -207,7 +209,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			InputStream is)
+			String properties, InputStream is)
 		throws PortalException, SystemException {
 
 		int pos = fileName.lastIndexOf(StringPool.PERIOD);
@@ -241,7 +243,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, is);
+			versionNumber, sourceFileName, properties, is);
 	}
 
 }

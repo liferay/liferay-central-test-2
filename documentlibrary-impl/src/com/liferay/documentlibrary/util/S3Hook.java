@@ -83,7 +83,7 @@ public class S3Hook extends BaseHook {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, InputStream is)
+			String fileName, String properties, InputStream is)
 		throws PortalException, SystemException {
 
 		try {
@@ -96,7 +96,8 @@ public class S3Hook extends BaseHook {
 			_s3Service.putObject(_s3Bucket, s3Object);
 
 			Indexer.addFile(
-				companyId, portletId, groupId, repositoryId, fileName);
+				companyId, portletId, groupId, repositoryId, fileName,
+				properties);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -308,7 +309,7 @@ public class S3Hook extends BaseHook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			InputStream is)
+			String properties, InputStream is)
 		throws PortalException, SystemException {
 
 		try {
@@ -321,7 +322,8 @@ public class S3Hook extends BaseHook {
 			_s3Service.putObject(_s3Bucket, s3Object);
 
 			Indexer.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName);
+				companyId, portletId, groupId, repositoryId, fileName,
+				properties);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

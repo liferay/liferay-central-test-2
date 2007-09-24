@@ -28,6 +28,7 @@ import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
@@ -102,7 +103,7 @@ public class WorkflowDefinitionServiceImpl
 
 			DLServiceUtil.addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				xml.getBytes());
+				StringPool.BLANK, xml.getBytes());
 
 			// Resources
 
