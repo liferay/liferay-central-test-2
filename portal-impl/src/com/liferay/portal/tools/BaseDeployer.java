@@ -332,7 +332,17 @@ public class BaseDeployer {
 			}
 
 			if (!unpackWar || appServerType.equals("websphere")) {
-				WarTask.war(srcFile, deployDir, "WEB-INF/web.xml", webXml);
+				File tempDir = new File(
+					SystemProperties.get(SystemProperties.TMP_DIR) +
+						File.separator + Time.getTimestamp());
+
+				WarTask.war(srcFile, tempDir, "WEB-INF/web.xml", webXml);
+
+				if (!tempDir.renameTo(deployDir)) {
+					WarTask.war(srcFile, deployDir, "WEB-INF/web.xml", webXml);
+				}
+
+				DeleteTask.deleteDirectory(tempDir);
 			}
 			else {
 
