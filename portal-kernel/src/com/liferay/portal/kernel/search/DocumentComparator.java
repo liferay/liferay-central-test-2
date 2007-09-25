@@ -82,11 +82,13 @@ public class DocumentComparator implements Comparator {
 
 			int result = 0;
 
-			if (orderBy.isCaseSensitive()) {
-				result = value1.compareTo(value2);
-			}
-			else {
-				result = value1.compareToIgnoreCase(value2);
+			if ((value1 != null) && (value2 != null)) {
+				if (orderBy.isCaseSensitive()) {
+					result = value1.compareTo(value2);
+				}
+				else {
+					result = value1.compareToIgnoreCase(value2);
+				}
 			}
 
 			if (result != 0) {

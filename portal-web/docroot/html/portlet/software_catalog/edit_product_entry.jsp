@@ -111,7 +111,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 			<option <%= type.equals("portlet") ? "selected" : "" %> value="portlet"><liferay-ui:message key="portlet" /></option>
 			<option <%= type.equals("theme") ? "selected" : "" %> value="theme"><liferay-ui:message key="theme" /></option>
 			<option <%= type.equals("layout") ? "selected" : "" %> value="layout"><liferay-ui:message key="layout" /></option>
-			<option <%= type.equals("extension") ? "selected" : "" %> value="extension"><liferay-ui:message key="extension" /></option>
+			<%--<option <%= type.equals("extension") ? "selected" : "" %> value="extension"><liferay-ui:message key="extension" /></option>--%>
 		</select>
 	</td>
 </tr>

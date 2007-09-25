@@ -519,10 +519,6 @@ public class PluginPackageUtil {
 				contextQuery, LuceneFields.PORTLET_ID,
 				PluginPackageIndexer.PORTLET_ID);
 
-			if (Validator.isNotNull(type)) {
-				LuceneUtil.addRequiredTerm(contextQuery, "type", type);
-			}
-
 			BooleanQuery fullQuery = new BooleanQuery();
 
 			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
@@ -555,8 +551,8 @@ public class PluginPackageUtil {
 			if (Validator.isNotNull(repositoryURL)) {
 				BooleanQuery searchQuery = new BooleanQuery();
 
-				Query query =
-					new TermQuery(new Term("repositoryURL", repositoryURL));
+				Query query = new TermQuery(
+					new Term("repositoryURL", repositoryURL));
 
 				searchQuery.add(query, BooleanClause.Occur.SHOULD);
 

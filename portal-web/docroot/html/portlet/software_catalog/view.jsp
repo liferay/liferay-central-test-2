@@ -41,19 +41,21 @@ if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletK
 	tabs1Names += ",framework-versions";
 }
 
+String keywords = ParamUtil.getString(request, "keywords");
+String type = ParamUtil.getString(request, "type");
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/software_catalog/view");
 portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("keywords", keywords);
+portletURL.setParameter("type", type);
 %>
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/software_catalog/search" /></liferay-portlet:renderURL>
-
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
-<liferay-portlet:renderURLParams varImpl="searchURL" />
+<form action="<%= portletURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURLParams varImpl="portletURL" />
 
 <liferay-ui:tabs
 	names="<%= tabs1Names %>"
@@ -61,7 +63,203 @@ portletURL.setParameter("tabs1", tabs1);
 />
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("products") || tabs1.equals("my-products") %>'>
+	<c:when test='<%= tabs1.equals("products") %>'>
+
+		<%
+		String orderByCol = ParamUtil.getString(request, "orderByCol");
+		String orderByType = ParamUtil.getString(request, "orderByType");
+
+		if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
+			prefs.setValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-col", orderByCol);
+			prefs.setValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", orderByType);
+		}
+		else {
+			orderByCol = prefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-col", "modified-date");
+			orderByType = prefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", "desc");
+		}
+
+		List headerNames = new ArrayList();
+
+		headerNames.add("name");
+		headerNames.add("version");
+		headerNames.add("type");
+		headerNames.add("tags");
+		headerNames.add("licenses");
+		headerNames.add("modified-date");
+		headerNames.add(StringPool.BLANK);
+
+		Map orderableHeaders = CollectionFactory.getHashMap();
+
+		orderableHeaders.put("name", "name");
+		orderableHeaders.put("version", "version");
+		orderableHeaders.put("type", "type");
+		orderableHeaders.put("modified-date", "modified-date");
+
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.get(pageContext, "no-products-were-found"));
+
+		searchContainer.setOrderableHeaders(orderableHeaders);
+		searchContainer.setOrderByCol(orderByCol);
+		searchContainer.setOrderByType(orderByType);
+
+		List hits = SCProductEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), keywords, type).toList();
+
+		DocumentComparator docComparator = null;
+
+		if (orderByType.equals("desc")) {
+			docComparator = new DocumentComparator(false, false);
+		}
+		else {
+			docComparator = new DocumentComparator();
+		}
+
+		if (orderByCol.equals("version-date")) {
+			docComparator.addOrderBy("version");
+			docComparator.addOrderBy("modified-date");
+			docComparator.addOrderBy(LuceneFields.TITLE);
+			docComparator.addOrderBy("type");
+		}
+		else if (orderByCol.equals("modified-date")) {
+			docComparator.addOrderBy("modified-date");
+			docComparator.addOrderBy(LuceneFields.TITLE);
+			docComparator.addOrderBy("version");
+			docComparator.addOrderBy("type");
+		}
+		else if (orderByCol.equals("type")) {
+			docComparator.addOrderBy("type");
+			docComparator.addOrderBy("modified-date");
+			docComparator.addOrderBy(LuceneFields.TITLE);
+			docComparator.addOrderBy("version");
+		}
+		else {
+			docComparator.addOrderBy(LuceneFields.TITLE);
+			docComparator.addOrderBy("version");
+			docComparator.addOrderBy("modified-date");
+			docComparator.addOrderBy("type");
+		}
+
+		Collections.sort(hits, docComparator);
+
+		List results = ListUtil.subList(hits, searchContainer.getStart(), searchContainer.getEnd());
+		int total = hits.size();
+
+		searchContainer.setTotal(total);
+
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			Document doc = (Document)results.get(i);
+
+			long productEntryId = GetterUtil.getLong(doc.get("productEntryId"));
+
+			SCProductEntry productEntry = SCProductEntryLocalServiceUtil.getProductEntry(productEntryId);
+
+			SCProductVersion latestProductVersion = productEntry.getLatestVersion();
+
+			ResultRow row = new ResultRow(productEntry, productEntryId, i);
+
+			PortletURL rowURL = renderResponse.createRenderURL();
+
+			rowURL.setWindowState(WindowState.MAXIMIZED);
+
+			rowURL.setParameter("struts_action", "/software_catalog/view_product_entry");
+			rowURL.setParameter("redirect", currentURL);
+			rowURL.setParameter("productEntryId", String.valueOf(productEntryId));
+
+			// Name and short description
+
+			StringMaker sm = new StringMaker();
+
+			sm.append("<b>");
+			sm.append(productEntry.getName());
+			sm.append("</b>");
+
+			if (Validator.isNotNull(productEntry.getShortDescription())) {
+				sm.append("<br />");
+				sm.append("<span style=\"font-size: xx-small;\">");
+				sm.append(productEntry.getShortDescription());
+				sm.append("</span>");
+			}
+
+			row.addText(sm.toString(), rowURL);
+
+			// Version
+
+			if (latestProductVersion != null) {
+				row.addText(latestProductVersion.getVersion(), rowURL);
+			}
+			else {
+				row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
+			}
+
+			// Type
+
+			row.addText(LanguageUtil.get(pageContext, productEntry.getType()), rowURL);
+
+			// Tags
+
+			row.addText(LanguageUtil.get(pageContext, productEntry.getTags()), rowURL);
+
+			// Licenses
+
+			sm = new StringMaker();
+
+			Iterator itr = productEntry.getLicenses().iterator();
+
+			while (itr.hasNext()) {
+				SCLicense license = (SCLicense) itr.next();
+
+				sm.append(license.getName());
+
+				if (itr.hasNext()) {
+					sm.append(", ");
+				}
+			}
+
+			row.addText(sm.toString(), rowURL);
+
+			// Modified date
+
+			row.addText(dateFormatDateTime.format(productEntry.getModifiedDate()), rowURL);
+
+			// Action
+
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/software_catalog/product_entry_action.jsp");
+
+			// Add result row
+
+			resultRows.add(row);
+		}
+
+		boolean showAddProductEntryButton = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
+		%>
+
+		<div>
+			<label for="<portlet:namespace />keyword"><liferay-ui:message key="search" /></label>
+
+			<input id="<portlet:namespace />keyword" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
+
+			<select name="<portlet:namespace/>type">
+				<option value=""></option>
+				<option <%= type.equals("portlet") ? "selected" : "" %> value="portlet"><liferay-ui:message key="portlet" /></option>
+				<option <%= type.equals("theme") ? "selected" : "" %> value="theme"><liferay-ui:message key="theme" /></option>
+				<option <%= type.equals("layout") ? "selected" : "" %> value="layout"><liferay-ui:message key="layout" /></option>
+				<%--<option <%= type.equals("extension") ? "selected" : "" %> value="extension"><liferay-ui:message key="extension" /></option>--%>
+			</select>
+
+			<input type="submit" value="<liferay-ui:message key="search-products" />" />
+
+			<c:if test="<%= showAddProductEntryButton %>">
+				<input type="button" value="<liferay-ui:message key="add-product" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+			</c:if>
+		</div>
+
+		<br />
+
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	</c:when>
+	<c:when test='<%= tabs1.equals("my-products") %>'>
 
 		<%
 		String orderByCol = ParamUtil.getString(request, "orderByCol");
@@ -125,9 +323,9 @@ portletURL.setParameter("tabs1", tabs1);
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
-			SCProductEntry productEntry = (SCProductEntry) results.get(i);
+			SCProductEntry productEntry = (SCProductEntry)results.get(i);
 
-			String productEntryId = String.valueOf(productEntry.getProductEntryId());
+			long productEntryId = productEntry.getProductEntryId();
 
 			SCProductVersion latestProductVersion = productEntry.getLatestVersion();
 
@@ -139,7 +337,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			rowURL.setParameter("struts_action", "/software_catalog/view_product_entry");
 			rowURL.setParameter("redirect", currentURL);
-			rowURL.setParameter("productEntryId", productEntryId);
+			rowURL.setParameter("productEntryId", String.valueOf(productEntryId));
 
 			// Name and short description
 
@@ -218,34 +416,6 @@ portletURL.setParameter("tabs1", tabs1);
 				<br />
 			</c:if>
 		</c:if>
-
-		<%--<c:if test="<%= showAddProductEntryButton || (results.size() > 0) %>">
-			<div>
-				<c:if test='<%= (results.size() > 0) && tabs1.equals("products") %>'>
-					<label for="<portlet:namespace />keyword"><liferay-ui:message key="search" /></label>
-
-					<input id="<portlet:namespace />keyword" name="<portlet:namespace />keywords" size="30" type="text" />
-
-					<select name="<portlet:namespace/>type">
-						<option value=""></option>
-						<option value="portlet"><liferay-ui:message key="portlet" /></option>
-						<option value="theme"><liferay-ui:message key="theme" /></option>
-						<option value="layout-template"><liferay-ui:message key="layout-template" /></option>
-						<option value="extension"><liferay-ui:message key="extension" /></option>
-					</select>
-
-					<input type="submit" value="<liferay-ui:message key="search-products" />" />
-				</c:if>
-
-				<c:if test="<%= showAddProductEntryButton %>">
-					<input type="button" value="<liferay-ui:message key="add-product" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
-				</c:if>
-			</div>
-
-			<c:if test="<%= results.size() > 0 %>">
-				<br />
-			</c:if>
-		</c:if>--%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 

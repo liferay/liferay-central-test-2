@@ -1141,8 +1141,6 @@
 
 		<action path="/software_catalog/rate_product_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
-		<action path="/software_catalog/search" forward="portlet.software_catalog.search" />
-
 		<action path="/software_catalog/view" forward="portlet.software_catalog.view" />
 
 		<action path="/software_catalog/view_product_entry" type="com.liferay.portlet.softwarecatalog.action.ViewProductEntryAction">

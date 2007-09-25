@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
@@ -195,8 +196,8 @@ public class SCProductEntryLocalServiceImpl
 		try {
 			Indexer.addProductEntry(
 				productEntry.getCompanyId(), groupId, userId,
-				user.getFullName(), productEntryId, name, type,
-				shortDescription, longDescription, pageURL, repoGroupId,
+				user.getFullName(), productEntryId, name, now, StringPool.BLANK,
+				type, shortDescription, longDescription, pageURL, repoGroupId,
 				repoArtifactId);
 		}
 		catch (IOException ioe) {
@@ -425,11 +426,21 @@ public class SCProductEntryLocalServiceImpl
 
 				long productEntryId = productEntry.getProductEntryId();
 
+				String version = StringPool.BLANK;
+
+				SCProductVersion latestProductVersion =
+					productEntry.getLatestVersion();
+
+				if (latestProductVersion != null) {
+					version = latestProductVersion.getVersion();
+				}
+
 				try {
 					Indexer.addProductEntry(
 						companyId, productEntry.getGroupId(),
 						productEntry.getUserId(), productEntry.getUserName(),
 						productEntryId, productEntry.getName(),
+						productEntry.getModifiedDate(), version,
 						productEntry.getType(),
 						productEntry.getShortDescription(),
 						productEntry.getLongDescription(),
@@ -451,7 +462,7 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public Hits search(
-			long companyId, long groupId, String type, String keywords)
+			long companyId, long groupId, String keywords, String type)
 		throws SystemException {
 
 		Searcher searcher = null;
@@ -459,20 +470,12 @@ public class SCProductEntryLocalServiceImpl
 		try {
 			HitsImpl hits = new HitsImpl();
 
-			if (Validator.isNull(type) && Validator.isNull(keywords)) {
-				return hits;
-			}
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
 				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
 			LuceneUtil.addRequiredTerm(
 				contextQuery, LuceneFields.GROUP_ID, groupId);
-
-			if (Validator.isNotNull(type)) {
-				LuceneUtil.addRequiredTerm(contextQuery, "type", type);
-			}
 
 			BooleanQuery fullQuery = new BooleanQuery();
 
@@ -483,6 +486,14 @@ public class SCProductEntryLocalServiceImpl
 
 				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
 				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+
+				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+			}
+
+			if (Validator.isNotNull(type)) {
+				BooleanQuery searchQuery = new BooleanQuery();
+
+				LuceneUtil.addExactTerm(searchQuery, "type", type);
 
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
@@ -546,6 +557,8 @@ public class SCProductEntryLocalServiceImpl
 
 		// Latest product version
 
+		String version = StringPool.BLANK;
+
 		List productVersions = SCProductVersionUtil.findByProductEntryId(
 			productEntryId, 0, 1);
 
@@ -556,6 +569,8 @@ public class SCProductEntryLocalServiceImpl
 			productVersion.setModifiedDate(now);
 
 			SCProductVersionUtil.update(productVersion);
+
+			version = productVersion.getVersion();
 		}
 
 		// Lucene
@@ -564,8 +579,8 @@ public class SCProductEntryLocalServiceImpl
 			Indexer.updateProductEntry(
 				productEntry.getCompanyId(), productEntry.getGroupId(),
 				productEntry.getUserId(), productEntry.getUserName(),
-				productEntryId, name, type, shortDescription, longDescription,
-				pageURL, repoGroupId, repoArtifactId);
+				productEntryId, name, now, version, type, shortDescription,
+				longDescription, pageURL, repoGroupId, repoArtifactId);
 		}
 		catch (IOException ioe) {
 			_log.error("Indexing " + productEntryId, ioe);

@@ -33,6 +33,8 @@ import com.liferay.util.Html;
 
 import java.io.IOException;
 
+import java.util.Date;
+
 import javax.portlet.PortletURL;
 
 import org.apache.lucene.document.Document;
@@ -54,9 +56,9 @@ public class Indexer
 
 	public static void addProductEntry(
 			long companyId, long groupId, long userId, String userName,
-			long productEntryId, String name, String type,
-			String shortDescription, String longDescription, String pageURL,
-			String repoGroupId, String repoArtifactId)
+			long productEntryId, String name, Date modifiedDate, String version,
+			String type, String shortDescription, String longDescription,
+			String pageURL, String repoGroupId, String repoArtifactId)
 		throws IOException {
 
 		shortDescription = Html.stripHtml(shortDescription);
@@ -85,6 +87,8 @@ public class Indexer
 		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
 
 		doc.add(LuceneFields.getKeyword("productEntryId", productEntryId));
+		doc.add(LuceneFields.getDate("modified-date", modifiedDate));
+		doc.add(LuceneFields.getText("version", version));
 		doc.add(LuceneFields.getKeyword("type", type));
 		doc.add(LuceneFields.getKeyword("repoGroupId", repoGroupId));
 		doc.add(LuceneFields.getKeyword("repoArtifactId", repoArtifactId));
@@ -116,9 +120,9 @@ public class Indexer
 
 	public static void updateProductEntry(
 			long companyId, long groupId, long userId, String userName,
-			long productEntryId, String name, String type,
-			String shortDescription, String longDescription, String pageURL,
-			String repoGroupId, String repoArtifactId)
+			long productEntryId, String name, Date modifiedDate, String version,
+			String type, String shortDescription, String longDescription,
+			String pageURL, String repoGroupId, String repoArtifactId)
 		throws IOException {
 
 		try {
@@ -128,9 +132,9 @@ public class Indexer
 		}
 
 		addProductEntry(
-			companyId, groupId, userId, userName, productEntryId, name, type,
-			shortDescription, longDescription, pageURL, repoGroupId,
-			repoArtifactId);
+			companyId, groupId, userId, userName, productEntryId, name,
+			modifiedDate, version, type, shortDescription, longDescription,
+			pageURL, repoGroupId, repoArtifactId);
 	}
 
 	public DocumentSummary getDocumentSummary(

@@ -29,14 +29,14 @@ ResultRow row = (ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT
 
 SCProductEntry productEntry = (SCProductEntry) row.getObject();
 
-String productEntryId = String.valueOf(productEntry.getProductEntryId());
+long productEntryId = productEntry.getProductEntryId();
 %>
 
 <c:if test="<%= SCProductEntryPermission.contains(permissionChecker, productEntry, ActionKeys.UPDATE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/software_catalog/edit_product_entry" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="productEntryId" value="<%= productEntryId %>" />
+		<portlet:param name="productEntryId" value="<%= String.valueOf(productEntryId) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -46,7 +46,7 @@ String productEntryId = String.valueOf(productEntry.getProductEntryId());
 	<liferay-security:permissionsURL
 		modelResource="<%= SCProductEntry.class.getName() %>"
 		modelResourceDescription="<%= productEntry.getName() %>"
-		resourcePrimKey="<%= productEntryId %>"
+		resourcePrimKey="<%= String.valueOf(productEntryId) %>"
 		var="permissionsURL"
 	/>
 
@@ -58,7 +58,7 @@ String productEntryId = String.valueOf(productEntry.getProductEntryId());
 		<portlet:param name="struts_action" value="/software_catalog/edit_product_entry" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="productEntryId" value="<%= productEntryId %>" />
+		<portlet:param name="productEntryId" value="<%= String.valueOf(productEntryId) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />
