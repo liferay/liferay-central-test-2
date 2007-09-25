@@ -151,7 +151,7 @@ type = ParamUtil.getString(request, "type", type);
 			<liferay-ui:message key="disable-caching" />
 		</td>
 		<td>
-			<liferay-ui:input-checkbox param="disableCaching" defaultValue="<%= disableCaching %>" onClick="<%= renderResponse.getNamespace() + "save();" %>" />
+			<liferay-ui:input-checkbox param="disableCaching" defaultValue="<%= disableCaching %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
 		</td>
 	</tr>
 	<tr>
@@ -159,7 +159,7 @@ type = ParamUtil.getString(request, "type", type);
 			<liferay-ui:message key="show-available-locales" />
 		</td>
 		<td>
-			<liferay-ui:input-checkbox param="showAvailableLocales" defaultValue="<%= showAvailableLocales %>" onClick="<%= renderResponse.getNamespace() + "save();" %>" />
+			<liferay-ui:input-checkbox param="showAvailableLocales" defaultValue="<%= showAvailableLocales %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
 		</td>
 	</tr>
 	<tr>
@@ -167,7 +167,7 @@ type = ParamUtil.getString(request, "type", type);
 			<liferay-ui:message key="enable-ratings" />
 		</td>
 		<td>
-			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" onClick="<%= renderResponse.getNamespace() + "save();" %>" />
+			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
 		</td>
 	</tr>
 	<tr>
@@ -175,7 +175,7 @@ type = ParamUtil.getString(request, "type", type);
 			<liferay-ui:message key="enable-comments" />
 		</td>
 		<td>
-			<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick="<%= renderResponse.getNamespace() + "save();" %>" />
+			<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
 		</td>
 	</tr>
 	</table>
