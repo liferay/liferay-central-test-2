@@ -31,7 +31,7 @@
 	>
         <!--<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicateUpdatesViaCopy=false"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
 		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
@@ -45,7 +45,7 @@
 	>
         <!--<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicateUpdatesViaCopy=false"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
 		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
@@ -59,7 +59,7 @@
 	>
         <!--<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicateUpdatesViaCopy=false"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
 		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
@@ -73,7 +73,7 @@
 	>
         <!--<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicateUpdatesViaCopy=false"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
 		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
@@ -87,7 +87,7 @@
 	>
         <!--<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicateUpdatesViaCopy=false"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
 		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
@@ -101,7 +101,7 @@
 	>
         <!--<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicateUpdatesViaCopy=false"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
 		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
@@ -115,7 +115,7 @@
 	>
         <!--<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicateUpdatesViaCopy=false"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
 		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
@@ -129,7 +129,7 @@
 	>
         <!--<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicateUpdatesViaCopy=false"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
 		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
@@ -143,7 +143,7 @@
 	>
         <!--<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicateUpdatesViaCopy=false"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
 		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />-->
