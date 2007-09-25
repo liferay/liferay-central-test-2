@@ -180,12 +180,19 @@ public class BaseDeployer {
 			String fileName, String targetDir, Map filterMap)
 		throws Exception {
 
+		copyDependencyXml(fileName, targetDir, filterMap, false);
+	}
+
+	protected void copyDependencyXml(
+			String fileName, String targetDir, Map filterMap, boolean overwrite)
+		throws Exception {
+
 		File file = new File(DeployUtil.getResourcePath(fileName));
 		File targetFile = new File(targetDir + "/" + fileName);
 
 		if (!targetFile.exists()) {
 			CopyTask.copyFile(
-				file, new File(targetDir), filterMap, false, true);
+				file, new File(targetDir), filterMap, overwrite, true);
 		}
 	}
 

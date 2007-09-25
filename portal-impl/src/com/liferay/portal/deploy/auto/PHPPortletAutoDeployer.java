@@ -35,6 +35,7 @@ import java.util.Map;
  * <a href="PHPPortletAutoDeployer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 
@@ -65,12 +66,12 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 
 		Map filterMap = new HashMap();
 
-		String portletName = pluginPackage.getName();
+		String pluginName = pluginPackage.getName();
 
 		filterMap.put(
 			"portlet_class", "com.liferay.util.bridges.php.PHPPortlet");
-		filterMap.put("portlet_name", portletName);
-		filterMap.put("portlet_title", portletName);
+		filterMap.put("portlet_name", pluginName);
+		filterMap.put("portlet_title", pluginName);
 		filterMap.put("restore_current_view", "false");
 		filterMap.put("friendly_url_mapper_class", "");
 		filterMap.put("init_param_name_0", "view-uri");

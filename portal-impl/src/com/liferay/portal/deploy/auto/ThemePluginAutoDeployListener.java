@@ -23,7 +23,6 @@
 package com.liferay.portal.deploy.auto;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
-import com.liferay.portal.util.PortalUtil;
 
 import java.io.File;
 
@@ -31,16 +30,16 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="PortletAutoDeployListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThemePluginAutoDeployListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Ivica Cardic
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletAutoDeployListener extends BaseAutoDeployListener {
+public class ThemePluginAutoDeployListener extends BaseAutoDeployListener {
 
-	public PortletAutoDeployListener() {
-		_deployer = new PortletAutoDeployer();
+	public ThemePluginAutoDeployListener() {
+		_deployer = new ThemePluginAutoDeployer();
 	}
 
 	public void deploy(File file) throws AutoDeployException {
@@ -48,66 +47,25 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 			_log.debug("Invoking deploy for " + file.getPath());
 		}
 
-		AutoDeployer deployer = null;
-
-		if (isMatchingFile(file, "index.php")) {
-			deployer = getPhpDeployer();
-		}
-		else if (isMatchingFile(
-					file,
-					"WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD)) {
-
-			deployer = _deployer;
-		}
-		else if (!isMatchingFile(
-					file, "WEB-INF/liferay-layout-templates.xml") &&
-				 !isMatchingFile(file, "WEB-INF/liferay-look-and-feel.xml") &&
-				 !isMatchingFile(
-					file, "WEB-INF/liferay-theme-plugin.properties")) {
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Deploying package as a web application");
-			}
-
-			deployer = getWaiDeployer();
-		}
-		else {
+		if (!isMatchingFile(file, "WEB-INF/liferay-theme-plugin.properties")) {
 			return;
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Copying portlets for " + file.getPath());
+			_log.info("Copying theme plugins for " + file.getPath());
 		}
 
-		deployer.autoDeploy(file.getName());
+		_deployer.autoDeploy(file.getName());
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Portlets for " + file.getPath() + " copied successfully");
+				"Theme plugins for " + file.getPath() + " copied successfully");
 		}
-	}
-
-	protected AutoDeployer getPhpDeployer() throws AutoDeployException {
-		if (_phpDeployer == null) {
-			_phpDeployer = new PHPPortletAutoDeployer();
-		}
-
-		return _phpDeployer;
-	}
-
-	protected AutoDeployer getWaiDeployer() throws AutoDeployException {
-		if (_waiDeployer == null) {
-			_waiDeployer = new WAIAutoDeployer();
-		}
-
-		return _waiDeployer;
 	}
 
 	private static Log _log =
-		LogFactory.getLog(PortletAutoDeployListener.class);
+		LogFactory.getLog(ThemePluginAutoDeployListener.class);
 
 	private AutoDeployer _deployer;
-	private PHPPortletAutoDeployer _phpDeployer;
-	private WAIAutoDeployer _waiDeployer;
 
 }
