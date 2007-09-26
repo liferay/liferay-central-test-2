@@ -217,6 +217,11 @@ public class JournalArticleContentUpgradeColumnImpl
 			content,
 			"_20_struts_action=%2Fdocument_library%2Fget_file&_20_folderId=",
 			dlFolderIdMapper);
+		content = IdReplacer.replaceLongIds(
+			content,
+			"_20_struts_action=%2Fdocument_library%2Fget_file&amp;" +
+				"_20_folderId=",
+			dlFolderIdMapper);
 
 		ValueMapper imageIdMapper = AvailableMappersUtil.getImageIdMapper();
 
