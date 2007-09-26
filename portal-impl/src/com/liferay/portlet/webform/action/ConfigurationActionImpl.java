@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
@@ -145,6 +146,21 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			fieldType = ParamUtil.getString(req, "fieldType" + i);
 			fieldOptional = ParamUtil.getBoolean(req, "fieldOptional" + i);
 			fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
+		}
+
+		// Clear previous preferences that are now blank:
+
+		fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
+
+		while (fieldLabel.trim().length() > 0) {
+			prefs.setValue("fieldLabel" + i, StringPool.BLANK);
+			prefs.setValue("fieldType" + i, StringPool.BLANK);
+			prefs.setValue("fieldOptional" + i, StringPool.BLANK);
+			prefs.setValue("fieldOptions" + i, StringPool.BLANK);
+
+			i++;
+
+			fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
 		}
 
 		if (SessionErrors.isEmpty(req)) {
