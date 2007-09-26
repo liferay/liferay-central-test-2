@@ -26,11 +26,11 @@
 <%@ page import="com.liferay.util.HttpUtil" %>
 
 <%
-String plid = ParamUtil.getString(request, "p_l_id");
+long plid = ParamUtil.getLong(request, "p_l_id");
 String mainPath = ParamUtil.getString(request, "p_main_path");
 String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 
-String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&doAsUserId=" + doAsUserId);
+String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId));
 %>
 
 FCKConfig.IncludeLatinEntities	= false ;

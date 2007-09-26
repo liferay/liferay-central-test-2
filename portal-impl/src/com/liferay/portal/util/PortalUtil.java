@@ -1806,6 +1806,39 @@ public class PortalUtil {
 			return 0;
 		}
 
+		long doAsUserId = 0;
+
+		try {
+			Company company = getCompany(req);
+
+			doAsUserId = GetterUtil.getLong(
+				Encryptor.decrypt(company.getKeyObj(), doAsUserIdString));
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to impersonate " + doAsUserIdString +
+						" because the string cannot be decrypted",
+					e);
+			}
+
+			return 0;
+		}
+
+		String path = GetterUtil.getString(req.getPathInfo());
+
+		boolean alwaysAllowDoAsUser = false;
+
+		if (path.equals("/portal/fckeditor")) {
+			alwaysAllowDoAsUser = true;
+		}
+
+		if (alwaysAllowDoAsUser) {
+			req.setAttribute(WebKeys.USER_ID, new Long(doAsUserId));
+
+			return doAsUserId;
+		}
+
 		HttpSession ses = req.getSession();
 
 		Long realUserIdObj = (Long)ses.getAttribute(WebKeys.USER_ID);
@@ -1813,11 +1846,6 @@ public class PortalUtil {
 		if (realUserIdObj == null) {
 			return 0;
 		}
-
-		Company company = getCompany(req);
-
-		long doAsUserId = GetterUtil.getLong(
-			Encryptor.decrypt(company.getKeyObj(), doAsUserIdString));
 
 		User doAsUser = UserLocalServiceUtil.getUserById(doAsUserId);
 

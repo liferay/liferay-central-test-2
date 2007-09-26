@@ -24,6 +24,8 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<%@ page import="com.liferay.util.Encryptor" %>
+
 <%
 String name = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"), namespace + "editor");
 
@@ -49,7 +51,15 @@ sm.append(plid);
 sm.append("&p_main_path=");
 sm.append(HttpUtil.encodeURL(themeDisplay.getPathMain()));
 sm.append("&doAsUserId=");
-sm.append(themeDisplay.getDoAsUserId());
+
+String doAsUserId = themeDisplay.getDoAsUserId();
+
+if (Validator.isNull(doAsUserId)) {
+	doAsUserId = Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId()));
+}
+
+sm.append(HttpUtil.encodeURL(doAsUserId));
+
 sm.append("&editorImpl=");
 sm.append(editorImpl);
 

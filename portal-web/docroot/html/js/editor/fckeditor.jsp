@@ -24,9 +24,10 @@
 
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ page import="com.liferay.util.HttpUtil" %>
 
 <%
-String plid = ParamUtil.getString(request, "p_l_id");
+long plid = ParamUtil.getLong(request, "p_l_id");
 String mainPath = ParamUtil.getString(request, "p_main_path");
 String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METHOD);
@@ -73,7 +74,7 @@ String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
 
 				var fckEditor = new FCKeditor("FCKeditor1");
 
-				fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= mainPath %>&doAsUserId=<%= doAsUserId %>";
+				fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>";
 
 				fckEditor.BasePath = "fckeditor/";
 				fckEditor.Width = "100%";
