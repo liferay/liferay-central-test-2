@@ -456,7 +456,11 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 			<br /><br />
 
 			<%
-			String tabs3Names = "page,children,look-and-feel";
+			String tabs3Names = "page,children";
+			
+			if (permissionChecker.isOmniadmin() || GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LOOK_AND_FEEL_MODIFIABLE))) {
+				tabs3Names += ",look-and-feel";
+			}
 
 			if ((selLayout != null) && !PortalUtil.isLayoutParentable(selLayout)) {
 				tabs3Names = StringUtil.replace(tabs3Names, "children,", StringPool.BLANK);
