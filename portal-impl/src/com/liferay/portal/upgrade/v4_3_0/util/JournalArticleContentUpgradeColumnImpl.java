@@ -79,12 +79,12 @@ public class JournalArticleContentUpgradeColumnImpl
 			content, BaseUpgradeTableImpl.SAFE_CHARS[1],
 			BaseUpgradeTableImpl.SAFE_CHARS[0]);
 
-		if (content.indexOf("\\n") != -1) {
+		/*if (content.indexOf("\\n") != -1) {
 			content = StringUtil.replace(
 				content,
 				new String[] {"\\n", "\\r"},
 				new String[] {"\n", "\r"});
-		}
+		}*/
 
 		String structureId = (String)_structureIdColumn.getOldValue();
 
@@ -92,11 +92,11 @@ public class JournalArticleContentUpgradeColumnImpl
 			content = formatContent(content);
 		}
 
+		content = replaceIds(content);
+
 		content = StringUtil.replace(
 			content, BaseUpgradeTableImpl.SAFE_CHARS[0],
 			BaseUpgradeTableImpl.SAFE_CHARS[1]);
-
-		content = replaceIds(content);
 
 		return content;
 	}

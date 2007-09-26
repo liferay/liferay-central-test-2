@@ -48,10 +48,10 @@ public class JournalTemplateXSLUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	protected String formatXSL(String xsl) throws Exception {
-		if (xsl.indexOf("\\n") != -1) {
+		/*if (xsl.indexOf("\\n") != -1) {
 			xsl = StringUtil.replace(
 				xsl, new String[] {"\\n", "\\r"}, new String[] {"\n", "\r"});
-		}
+		}*/
 
 		String templateId = (String)_templateIdColumn.getOldValue();
 

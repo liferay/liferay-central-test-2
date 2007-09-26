@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0.util;
 
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 /**
@@ -46,10 +45,10 @@ public class JournalStructureXSDUpgradeColumnImpl
 	}
 
 	protected String formatXSL(String xsd) throws Exception {
-		if (xsd.indexOf("\\n") != -1) {
+		/*if (xsd.indexOf("\\n") != -1) {
 			xsd = StringUtil.replace(
 				xsd, new String[] {"\\n", "\\r"}, new String[] {"\n", "\r"});
-		}
+		}*/
 
 		return xsd;
 	}
