@@ -42,30 +42,15 @@ import com.liferay.portal.velocity.LiferayResourceLoader;
 import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;
+import com.liferay.util.log4j.Log4JUtil;
 
 import java.io.File;
-
-import java.net.URL;
-
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 import javax.security.auth.login.Configuration;
 
 import org.apache.commons.collections.ExtendedProperties;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.apache.log4j.helpers.NullEnumeration;
-import org.apache.log4j.xml.DOMConfigurator;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.runtime.RuntimeConstants;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="InitAction.java.html"><b><i>View Source</i></b></a>
@@ -111,9 +96,9 @@ public class InitAction extends SimpleAction {
 
 			ClassLoader classLoader = getClass().getClassLoader();
 
-			configureLog4J(
+			Log4JUtil.configureLog4J(
 				classLoader.getResource("META-INF/portal-log4j.xml"));
-			configureLog4J(
+			Log4JUtil.configureLog4J(
 				classLoader.getResource("META-INF/portal-log4j-ext.xml"));
 		}
 
@@ -226,54 +211,6 @@ public class InitAction extends SimpleAction {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-		}
-	}
-
-	protected void configureLog4J(URL url) {
-		if (url == null) {
-			return;
-		}
-
-		if (Logger.getRootLogger().getAllAppenders() instanceof
-				NullEnumeration) {
-
-			DOMConfigurator.configure(url);
-		}
-		else {
-			Set currentLoggerNames = new HashSet();
-
-			Enumeration enu = LogManager.getCurrentLoggers();
-
-			while (enu.hasMoreElements()) {
-				Logger logger = (Logger)enu.nextElement();
-
-				currentLoggerNames.add(logger.getName());
-			}
-
-			try {
-				SAXReader reader = new SAXReader();
-
-				Document doc = reader.read(url);
-
-				Element root = doc.getRootElement();
-
-				Iterator itr = root.elements("category").iterator();
-
-				while (itr.hasNext()) {
-					Element category = (Element)itr.next();
-
-					String name = category.attributeValue("name");
-					String priority =
-						category.element("priority").attributeValue("value");
-
-					Logger logger = Logger.getLogger(name);
-
-					logger.setLevel(Level.toLevel(priority));
-				}
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 	}
 

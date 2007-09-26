@@ -34,6 +34,7 @@ import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.TextFormatter;
 import com.liferay.util.Time;
+import com.liferay.util.log4j.Log4JUtil;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.JavaClass;
@@ -81,6 +82,13 @@ import org.dom4j.io.SAXReader;
 public class ServiceBuilder {
 
 	public static void main(String[] args) {
+		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+
+		Log4JUtil.configureLog4J(
+			classLoader.getResource("META-INF/portal-log4j.xml"));
+		Log4JUtil.configureLog4J(
+			classLoader.getResource("META-INF/portal-log4j-ext.xml"));
+
 		if (args.length == 7) {
 			new ServiceBuilder(
 				args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
@@ -6530,22 +6538,22 @@ public class ServiceBuilder {
 	}
 
 	private String _getSqlType(String model, String field, String type) {
-		if (type.equals("boolean")) {
+		if (type.equals("boolean") || type.equals("Boolean")) {
 			return "BOOLEAN";
 		}
-		else if (type.equals("double")) {
+		else if (type.equals("double") || type.equals("Double")) {
 			return "DOUBLE";
 		}
-		else if (type.equals("float")) {
+		else if (type.equals("float") || type.equals("Float")) {
 			return "FLOAT";
 		}
-		else if (type.equals("int")) {
+		else if (type.equals("int") || type.equals("Integer")) {
 			return "INTEGER";
 		}
-		else if (type.equals("long")) {
+		else if (type.equals("long") || type.equals("Long")) {
 			return "BIGINT";
 		}
-		else if (type.equals("short")) {
+		else if (type.equals("short") || type.equals("Short")) {
 			return "INTEGER";
 		}
 		else if (type.equals("Date")) {
