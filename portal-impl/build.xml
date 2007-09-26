@@ -26,6 +26,13 @@
 					<fileset dir="${project.dir}/definitions" />
 				</copy>
 
+				<copy todir="${app.server.classes.portal.dir}/com/liferay/portal/deploy/dependencies">
+					<fileset
+						dir="${project.dir}/portal-web/docroot/WEB-INF/tld"
+						includes="*.tld"
+					/>
+				</copy>
+
 				<copy todir="${app.server.classes.portal.dir}/com/liferay/portal/tools/sql/dependencies">
 					<fileset
 						dir="${project.dir}/sql"
@@ -47,6 +54,13 @@
 			<else>
 				<copy todir="classes/com/liferay/portal/definitions">
 					<fileset dir="${project.dir}/definitions" />
+				</copy>
+
+				<copy todir="classes/com/liferay/portal/deploy/dependencies">
+					<fileset
+						dir="${project.dir}/portal-web/docroot/WEB-INF/tld"
+						includes="*.tld"
+					/>
 				</copy>
 
 				<copy todir="classes/com/liferay/portal/tools/sql/dependencies">

@@ -26,11 +26,13 @@ import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.plugin.PluginPackageUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
@@ -53,6 +55,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -216,6 +219,69 @@ public class BaseDeployer {
 		FileUtil.delete(srcFile + "/WEB-INF/lib/util-jsf.jar");
 	}
 
+	protected void copyPortalDependencies(
+			File srcFile, PluginPackage pluginPackage)
+		throws Exception {
+
+		File propsFile = new File(
+			srcFile + "/WEB-INF/liferay-plugin-portal-dependencies.properties");
+
+		if (!propsFile.exists()) {
+			return;
+		}
+
+		String propsString = FileUtil.read(propsFile);
+
+		propsString = StringUtil.replace(
+			propsString,
+			new String[] {"\\\n", "\t", "    "},
+			new String[] {
+				StringPool.BLANK, StringPool.BLANK, StringPool.BLANK
+			});
+
+		Properties props = PropertiesUtil.load(propsString);
+
+		String[] portalJars = StringUtil.split(props.getProperty("jars"));
+
+		for (int i = 0; i < portalJars.length; i++) {
+			String portalJar = portalJars[i].trim();
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Copy portal JAR " + portalJar);
+			}
+
+			try {
+				String portalJarPath = PortalUtil.getPortalLibDir() + portalJar;
+
+				FileUtil.copyFile(
+					portalJarPath, srcFile + "/WEB-INF/lib/" + portalJar, true);
+			}
+			catch (Exception e) {
+				_log.error("Unable to copy portal JAR " + portalJar, e);
+			}
+		}
+
+		String[] portalTlds = StringUtil.split(props.getProperty("tlds"));
+
+		for (int i = 0; i < portalTlds.length; i++) {
+			String portalTld = portalTlds[i].trim();
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Copy portal TLD " + portalTld);
+			}
+
+			try {
+				String portalTldPath = DeployUtil.getResourcePath(portalTld);
+
+				FileUtil.copyFile(
+					portalTldPath, srcFile + "/WEB-INF/tld/" + portalTld, true);
+			}
+			catch (Exception e) {
+				_log.error("Unable to copy portal TLD " + portalTld, e);
+			}
+		}
+	}
+
 	protected void copyTlds(File srcFile, PluginPackage pluginPackage)
 		throws Exception {
 
@@ -238,7 +304,7 @@ public class BaseDeployer {
 	}
 
 	protected void copyXmls(
-		File srcFile, String displayName, PluginPackage pluginPackage)
+			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
 		copyDependencyXml("geronimo-web.xml", srcFile + "/WEB-INF");
@@ -292,6 +358,7 @@ public class BaseDeployer {
 		copyJars(srcFile, pluginPackage);
 		copyTlds(srcFile, pluginPackage);
 		copyXmls(srcFile, displayName, pluginPackage);
+		copyPortalDependencies(srcFile, pluginPackage);
 
 		updateGeronimoWebXml(srcFile, displayName, pluginPackage);
 

@@ -96,6 +96,8 @@ import com.liferay.util.servlet.UploadServletRequest;
 
 import java.io.IOException;
 
+import java.net.URL;
+
 import java.rmi.RemoteException;
 
 import java.util.Arrays;
@@ -789,6 +791,10 @@ public class PortalUtil {
 
 	public static String getPathMain() {
 		return _instance._getPathMain();
+	}
+
+	public static String getPortalLibDir() {
+		return _instance._portalLibDir;
 	}
 
 	public static String getPortalURL(HttpServletRequest req) {
@@ -1856,6 +1862,23 @@ public class PortalUtil {
 
 	private PortalUtil() {
 
+		// Portal lib directory
+
+		ClassLoader classLoader = getClass().getClassLoader();
+
+		URL url = classLoader.getResource(
+			"com/liferay/portal/util/PortalUtil.class");
+
+		String file = url.getFile();
+
+		int pos = file.indexOf("/WEB-INF/");
+
+		_portalLibDir =	file.substring(0, pos) + "/WEB-INF/lib/";
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Portal lib directory " + _portalLibDir);
+		}
+
 		// CDN host
 
 		_cdnHost = PropsUtil.get(PropsUtil.CDN_HOST);
@@ -2113,6 +2136,7 @@ public class PortalUtil {
 
 	private static PortalUtil _instance = new PortalUtil();
 
+	private String _portalLibDir;
 	private String _cdnHost;
 	private String _pathContext;
 	private String _pathFriendlyURLPrivateGroup;
