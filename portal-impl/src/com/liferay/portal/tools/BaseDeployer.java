@@ -61,6 +61,7 @@ import java.util.zip.ZipFile;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.oro.io.GlobFilenameFilter;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -223,6 +224,8 @@ public class BaseDeployer {
 			File srcFile, PluginPackage pluginPackage)
 		throws Exception {
 
+		// liferay-plugin-portal-dependencies.properties
+
 		File propsFile = new File(
 			srcFile + "/WEB-INF/liferay-plugin-portal-dependencies.properties");
 
@@ -240,6 +243,8 @@ public class BaseDeployer {
 			});
 
 		Properties props = PropertiesUtil.load(propsString);
+
+		// jars
 
 		String[] portalJars = StringUtil.split(props.getProperty("jars"));
 
@@ -261,6 +266,8 @@ public class BaseDeployer {
 			}
 		}
 
+		// tlds
+
 		String[] portalTlds = StringUtil.split(props.getProperty("tlds"));
 
 		for (int i = 0; i < portalTlds.length; i++) {
@@ -279,6 +286,34 @@ public class BaseDeployer {
 			catch (Exception e) {
 				_log.error("Unable to copy portal TLD " + portalTld, e);
 			}
+		}
+
+		// commons-logging*.jar
+
+		File pluginLibDir = new File(srcFile + "/WEB-INF/lib/");
+
+		String[] commonsLoggingJars = pluginLibDir.list(
+			new GlobFilenameFilter("commons-logging*.jar"));
+
+		if ((commonsLoggingJars == null) || (commonsLoggingJars.length == 0)) {
+			String portalJarPath =
+				PortalUtil.getPortalLibDir() + "commons-logging.jar";
+
+			FileUtil.copyFile(
+				portalJarPath, srcFile + "/WEB-INF/lib/commons-logging.jar",
+				true);
+		}
+
+		// log4j*.jar
+
+		String[] log4jJars = pluginLibDir.list(
+			new GlobFilenameFilter("log4j*.jar"));
+
+		if ((log4jJars == null) || (log4jJars.length == 0)) {
+			String portalJarPath = PortalUtil.getPortalLibDir() + "log4j.jar";
+
+			FileUtil.copyFile(
+				portalJarPath, srcFile + "/WEB-INF/lib/log4j.jar", true);
 		}
 	}
 
