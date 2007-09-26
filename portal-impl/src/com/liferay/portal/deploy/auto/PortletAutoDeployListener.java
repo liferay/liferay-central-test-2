@@ -79,6 +79,10 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 			_log.info("Copying portlets for " + file.getPath());
 		}
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Using deployer " + deployer.getClass().getName());
+		}
+
 		deployer.autoDeploy(file.getName());
 
 		if (_log.isInfoEnabled()) {

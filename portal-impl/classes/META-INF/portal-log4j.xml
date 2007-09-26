@@ -320,6 +320,18 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.tools.BaseDeployer">
+		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.tools.PortletDeployer">
+		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.tools.ThemeDeployer">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.tools.sql.DBUtil">
 		<priority value="INFO" />
 	</category>
@@ -342,6 +354,10 @@
 
 	<category name="com.liferay.portal.util.PortalInstances">
 		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.util.PortalUtil">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.util.SAXReaderFactory">
