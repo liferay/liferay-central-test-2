@@ -25,8 +25,8 @@ package com.liferay.portlet.webform.action;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
@@ -148,7 +148,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
 		}
 
-		// Clear previous preferences that are now blank:
+		// Clear previous preferences that are now blank
 
 		fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
 
