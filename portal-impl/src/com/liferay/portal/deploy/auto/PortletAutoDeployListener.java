@@ -61,9 +61,7 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 		}
 		else if (!isMatchingFile(
 					file, "WEB-INF/liferay-layout-templates.xml") &&
-				 !isMatchingFile(file, "WEB-INF/liferay-look-and-feel.xml") &&
-				 !isMatchingFile(
-					file, "WEB-INF/liferay-theme-plugin.properties")) {
+				 !isThemePlugin(file)) {
 
 			if (_log.isInfoEnabled()) {
 				_log.info("Deploying package as a web application");

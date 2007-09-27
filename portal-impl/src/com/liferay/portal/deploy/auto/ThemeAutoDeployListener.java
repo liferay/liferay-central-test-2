@@ -47,7 +47,7 @@ public class ThemeAutoDeployListener extends BaseAutoDeployListener {
 			_log.debug("Invoking deploy for " + file.getPath());
 		}
 
-		if (!isMatchingFile(file, "WEB-INF/liferay-look-and-feel.xml")) {
+		if (!isThemePlugin(file)) {
 			return;
 		}
 

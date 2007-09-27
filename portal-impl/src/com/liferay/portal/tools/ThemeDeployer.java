@@ -22,13 +22,19 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.ReleaseInfo;
+import com.liferay.util.TextFormatter;
 
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * <a href="ThemeDeployer.java.html"><b><i>View Source</i></b></a>
@@ -198,6 +204,77 @@ public class ThemeDeployer extends BaseDeployer {
 		sm.append("</listener>");
 
 		return sm.toString();
+	}
+
+	protected void processPluginPackageProperties(
+			File srcFile, String displayName, PluginPackage pluginPackage)
+		throws Exception {
+
+		if (pluginPackage == null) {
+			return;
+		}
+
+		Properties props = getPluginPackageProperties(srcFile);
+
+		if ((props == null) || (props.size() == 0)) {
+			return;
+		}
+
+		String moduleGroupId = pluginPackage.getGroupId();
+		String moduleArtifactId = pluginPackage.getArtifactId();
+		String moduleVersion = pluginPackage.getVersion();
+
+		String pluginName = pluginPackage.getName();
+		String pluginType = (String)pluginPackage.getTypes().get(0);
+		String pluginTypeName = TextFormatter.format(
+			pluginType, TextFormatter.J);
+
+		if (!pluginType.equals("theme")) {
+			return;
+		}
+
+		String tags = getPluginPackageTagsXml(pluginPackage.getTags());
+		String shortDescription = pluginPackage.getShortDescription();
+		String longDescription = pluginPackage.getLongDescription();
+		String changeLog = pluginPackage.getChangeLog();
+		String pageURL = pluginPackage.getPageURL();
+		String author = pluginPackage.getAuthor();
+		String licenses = getPluginPackageLicensesXml(
+			pluginPackage.getLicenses());
+
+		int pos = moduleArtifactId.indexOf("-theme");
+
+		String themeId = moduleArtifactId.substring(0, pos);
+		String themeName = pluginName;
+
+		Map filterMap = new HashMap();
+
+		filterMap.put("liferay_version", ReleaseInfo.getVersion());
+
+		filterMap.put("module_group_id", moduleGroupId);
+		filterMap.put("module_artifact_id", moduleArtifactId);
+		filterMap.put("module_version", moduleVersion);
+
+		filterMap.put("plugin_name", pluginName);
+		filterMap.put("plugin_type", pluginType);
+		filterMap.put("plugin_type_name", pluginTypeName);
+
+		filterMap.put("tags", tags);
+		filterMap.put("short_description", shortDescription);
+		filterMap.put("long_description", longDescription);
+		filterMap.put("change_log", changeLog);
+		filterMap.put("page_url", pageURL);
+		filterMap.put("author", author);
+		filterMap.put("licenses", licenses);
+
+		filterMap.put("theme_id", themeId);
+		filterMap.put("theme_name", themeName);
+
+		copyDependencyXml(
+			"liferay-look-and-feel.xml", srcFile + "/WEB-INF", filterMap, true);
+		copyDependencyXml(
+			"liferay-plugin-package.xml", srcFile + "/WEB-INF", filterMap,
+			true);
 	}
 
 }

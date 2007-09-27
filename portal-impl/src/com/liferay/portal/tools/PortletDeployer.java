@@ -22,14 +22,17 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
+import com.liferay.util.TextFormatter;
 import com.liferay.util.xml.XMLFormatter;
 import com.liferay.util.xml.XMLMerger;
 import com.liferay.util.xml.descriptor.FacesXMLDescriptor;
@@ -37,8 +40,11 @@ import com.liferay.util.xml.descriptor.FacesXMLDescriptor;
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -116,9 +122,9 @@ public class PortletDeployer extends BaseDeployer {
 			srcFile + "/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD);
 		File webXML = new File(srcFile + "/WEB-INF/web.xml");
 
-		extraContent += _getServletContent(portletXML, webXML);
+		extraContent += getServletContent(portletXML, webXML);
 
-		_setupJSF(facesXML, portletXML);
+		setupJSF(facesXML, portletXML);
 
 		if (_sunFacesPortlet) {
 			extraContent +=
@@ -132,44 +138,7 @@ public class PortletDeployer extends BaseDeployer {
 		return extraContent;
 	}
 
-	protected void updateDeployDirectory(File srcFile) throws Exception {
-		try {
-			if (!PrefsPropsUtil.getBoolean(
-					PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
-
-				return;
-			}
-		}
-		catch (Exception e) {
-
-			// This will only happen when running the deploy tool in Ant in the
-			// classical way where the WAR file is actually massaged and
-			// packaged.
-
-			if (!GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML))) {
-
-				return;
-			}
-		}
-
-		File portletXML = new File(
-			srcFile + "/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD);
-
-		if (portletXML.exists()) {
-			File portletCustomXML = new File(
-				srcFile + "/WEB-INF/" +
-					PortalUtil.PORTLET_XML_FILE_NAME_CUSTOM);
-
-			if (portletCustomXML.exists()) {
-				portletCustomXML.delete();
-			}
-
-			portletXML.renameTo(portletCustomXML);
-		}
-	}
-
-	private String _getServletContent(File portletXML, File webXML)
+	protected String getServletContent(File portletXML, File webXML)
 		throws Exception {
 
 		StringMaker sm = new StringMaker();
@@ -373,7 +342,68 @@ public class PortletDeployer extends BaseDeployer {
 		return sm.toString();
 	}
 
-	private void _setupJSF(File facesXML, File portletXML) throws Exception {
+	protected void processPluginPackageProperties(
+			File srcFile, String displayName, PluginPackage pluginPackage)
+		throws Exception {
+
+		if (pluginPackage == null) {
+			return;
+		}
+
+		Properties props = getPluginPackageProperties(srcFile);
+
+		if ((props == null) || (props.size() == 0)) {
+			return;
+		}
+
+		String moduleGroupId = pluginPackage.getGroupId();
+		String moduleArtifactId = pluginPackage.getArtifactId();
+		String moduleVersion = pluginPackage.getVersion();
+
+		String pluginName = pluginPackage.getName();
+		String pluginType = (String)pluginPackage.getTypes().get(0);
+		String pluginTypeName = TextFormatter.format(
+			pluginType, TextFormatter.J);
+
+		if (!pluginType.equals("portlet")) {
+			return;
+		}
+
+		String tags = getPluginPackageTagsXml(pluginPackage.getTags());
+		String shortDescription = pluginPackage.getShortDescription();
+		String longDescription = pluginPackage.getLongDescription();
+		String changeLog = pluginPackage.getChangeLog();
+		String pageURL = pluginPackage.getPageURL();
+		String author = pluginPackage.getAuthor();
+		String licenses = getPluginPackageLicensesXml(
+			pluginPackage.getLicenses());
+
+		Map filterMap = new HashMap();
+
+		filterMap.put("liferay_version", ReleaseInfo.getVersion());
+
+		filterMap.put("module_group_id", moduleGroupId);
+		filterMap.put("module_artifact_id", moduleArtifactId);
+		filterMap.put("module_version", moduleVersion);
+
+		filterMap.put("plugin_name", pluginName);
+		filterMap.put("plugin_type", pluginType);
+		filterMap.put("plugin_type_name", pluginTypeName);
+
+		filterMap.put("tags", tags);
+		filterMap.put("short_description", shortDescription);
+		filterMap.put("long_description", longDescription);
+		filterMap.put("change_log", changeLog);
+		filterMap.put("page_url", pageURL);
+		filterMap.put("author", author);
+		filterMap.put("licenses", licenses);
+
+		copyDependencyXml(
+			"liferay-plugin-package.xml", srcFile + "/WEB-INF", filterMap,
+			true);
+	}
+
+	protected void setupJSF(File facesXML, File portletXML) throws Exception {
 		_myFacesPortlet = false;
 		_sunFacesPortlet = false;
 
@@ -453,6 +483,43 @@ public class PortletDeployer extends BaseDeployer {
 		merger.organizeXML(doc);
 
 		FileUtil.write(facesXML, XMLFormatter.toString(doc), true);
+	}
+
+	protected void updateDeployDirectory(File srcFile) throws Exception {
+		try {
+			if (!PrefsPropsUtil.getBoolean(
+					PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
+
+				return;
+			}
+		}
+		catch (Exception e) {
+
+			// This will only happen when running the deploy tool in Ant in the
+			// classical way where the WAR file is actually massaged and
+			// packaged.
+
+			if (!GetterUtil.getBoolean(PropsUtil.get(
+					PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML))) {
+
+				return;
+			}
+		}
+
+		File portletXML = new File(
+			srcFile + "/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD);
+
+		if (portletXML.exists()) {
+			File portletCustomXML = new File(
+				srcFile + "/WEB-INF/" +
+					PortalUtil.PORTLET_XML_FILE_NAME_CUSTOM);
+
+			if (portletCustomXML.exists()) {
+				portletCustomXML.delete();
+			}
+
+			portletXML.renameTo(portletCustomXML);
+		}
 	}
 
 	private boolean _myFacesPortlet;

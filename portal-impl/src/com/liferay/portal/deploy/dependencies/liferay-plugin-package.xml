@@ -2,13 +2,14 @@
 <!DOCTYPE plugin-package PUBLIC "-//Liferay//DTD Plugin Package 4.3.0//EN" "http://www.liferay.com/dtd/liferay-plugin-package_4_3_0.dtd">
 
 <plugin-package>
-	<name>@theme_name@ Theme</name>
+	<name>@plugin_name@ @plugin_type_name@</name>
 	<module-id>@module_group_id@/@module_artifact_id@/@module_version@/war</module-id>
 	<types>
-		<type>theme</type>
+		<type>@plugin_type@</type>
 	</types>
 	<tags>@tags@</tags>
 	<short-description>@short_description@</short-description>
+	<long-description>@long_description@</long-description>
 	<change-log>@change_log@</change-log>
 	<page-url>@page_url@</page-url>
 	<author>@author@</author>

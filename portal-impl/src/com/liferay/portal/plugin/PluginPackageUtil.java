@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -365,6 +366,103 @@ public class PluginPackageUtil {
 		}
 
 		return _updateAvailable.booleanValue();
+	}
+
+	public static PluginPackage readPluginPackageProps(
+		String displayName, Properties props) {
+
+		int pos = displayName.indexOf("-portlet-");
+
+		String pluginType = "portlet";
+		String pluginTypeName = "Portlet";
+
+		if (pos == -1) {
+			pos = displayName.indexOf("-theme-");
+
+			pluginType = "theme";
+			pluginTypeName = "Theme";
+		}
+
+		if (pos == -1) {
+			return null;
+		}
+
+		String displayPrefix = displayName.substring(0, pos);
+
+		String moduleGroupId = GetterUtil.getString(
+			props.getProperty("module-group-id"));
+		String moduleArtifactId = displayPrefix + "-" + pluginType;
+		String moduleVersion = displayName.substring(
+			pos + pluginType.length() + 2);
+		String moduleId =
+			moduleGroupId + "/" + moduleArtifactId + "/" + moduleVersion +
+				"/war";
+
+		String pluginName = GetterUtil.getString(props.getProperty("name"));
+
+		String deploymentContext = moduleArtifactId;
+
+		String author = GetterUtil.getString(props.getProperty("author"));
+
+		List types = new ArrayList();
+
+		types.add(pluginType);
+
+		List licenses = new ArrayList();
+
+		String[] licensesArray = StringUtil.split(
+			props.getProperty("licenses"));
+
+		for (int i = 0; i < licensesArray.length; i++) {
+			License license = new License();
+
+			license.setName(licensesArray[i].trim());
+			license.setOsiApproved(true);
+
+			licenses.add(license);
+		}
+
+		List liferayVersions = new ArrayList();
+
+		liferayVersions.add(ReleaseInfo.getVersion());
+
+		List tags = new ArrayList();
+
+		String[] tagsArray = StringUtil.split(props.getProperty("tags"));
+
+		for (int i = 0; i < tagsArray.length; i++) {
+			tags.add(tagsArray[i].trim());
+		}
+
+		String shortDescription = GetterUtil.getString(
+			props.getProperty("short-description"));
+		String longDescription = GetterUtil.getString(
+			props.getProperty("long-description"));
+		String changeLog = GetterUtil.getString(
+			props.getProperty("change-log"));
+		String pageURL = GetterUtil.getString(props.getProperty("page-url"));
+		String downloadURL = GetterUtil.getString(
+			props.getProperty("download-url"));
+
+		PluginPackage pluginPackage = new PluginPackageImpl(moduleId);
+
+		pluginPackage.setName(pluginName);
+		pluginPackage.setRecommendedDeploymentContext(deploymentContext);
+		//pluginPackage.setModifiedDate(null);
+		pluginPackage.setAuthor(author);
+		pluginPackage.setTypes(types);
+		pluginPackage.setLicenses(licenses);
+		pluginPackage.setLiferayVersions(liferayVersions);
+		pluginPackage.setTags(tags);
+		pluginPackage.setShortDescription(shortDescription);
+		pluginPackage.setLongDescription(longDescription);
+		pluginPackage.setChangeLog(changeLog);
+		//pluginPackage.setScreenshots(null);
+		pluginPackage.setPageURL(pageURL);
+		pluginPackage.setDownloadURL(downloadURL);
+		//pluginPackage.setDeploymentSettings(null);
+
+		return pluginPackage;
 	}
 
 	public static PluginPackage readPluginPackageXml(String xml)

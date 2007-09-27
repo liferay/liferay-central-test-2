@@ -100,6 +100,21 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 		}
 	}
 
+	public boolean isThemePlugin(File file) throws AutoDeployException {
+		if (isMatchingFile(file, "WEB-INF/liferay-look-and-feel.xml")) {
+			return true;
+		}
+
+		if ((isMatchingFile(
+				file, "WEB-INF/liferay-plugin-package.properties")) &&
+			(file.getName().indexOf("-theme-") != -1)) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 	private static Log _log = LogFactory.getLog(BaseAutoDeployListener.class);
 
 }

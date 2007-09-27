@@ -37,6 +37,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Http;
+import com.liferay.util.License;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;
 import com.liferay.util.ant.CopyTask;
@@ -220,33 +221,17 @@ public class BaseDeployer {
 		FileUtil.delete(srcFile + "/WEB-INF/lib/util-jsf.jar");
 	}
 
-	protected void copyPortalDependencies(
-			File srcFile, PluginPackage pluginPackage)
-		throws Exception {
+	protected void copyPortalDependencies(File srcFile) throws Exception {
+		Properties props = getPluginPackageProperties(srcFile);
 
-		// liferay-plugin-portal-dependencies.properties
-
-		File propsFile = new File(
-			srcFile + "/WEB-INF/liferay-plugin-portal-dependencies.properties");
-
-		if (!propsFile.exists()) {
+		if (props == null) {
 			return;
 		}
 
-		String propsString = FileUtil.read(propsFile);
-
-		propsString = StringUtil.replace(
-			propsString,
-			new String[] {"\\\n", "\t", "    "},
-			new String[] {
-				StringPool.BLANK, StringPool.BLANK, StringPool.BLANK
-			});
-
-		Properties props = PropertiesUtil.load(propsString);
-
 		// jars
 
-		String[] portalJars = StringUtil.split(props.getProperty("jars"));
+		String[] portalJars = StringUtil.split(
+			props.getProperty("portal.dependency.jars"));
 
 		for (int i = 0; i < portalJars.length; i++) {
 			String portalJar = portalJars[i].trim();
@@ -268,7 +253,8 @@ public class BaseDeployer {
 
 		// tlds
 
-		String[] portalTlds = StringUtil.split(props.getProperty("tlds"));
+		String[] portalTlds = StringUtil.split(
+			props.getProperty("portal.dependency.tlds"));
 
 		for (int i = 0; i < portalTlds.length; i++) {
 			String portalTld = portalTlds[i].trim();
@@ -390,10 +376,12 @@ public class BaseDeployer {
 			PluginPackage pluginPackage)
 		throws Exception {
 
+		processPluginPackageProperties(srcFile, displayName, pluginPackage);
+
 		copyJars(srcFile, pluginPackage);
 		copyTlds(srcFile, pluginPackage);
 		copyXmls(srcFile, displayName, pluginPackage);
-		copyPortalDependencies(srcFile, pluginPackage);
+		copyPortalDependencies(srcFile);
 
 		updateGeronimoWebXml(srcFile, displayName, pluginPackage);
 
@@ -779,6 +767,85 @@ public class BaseDeployer {
 		return sm.toString();
 	}
 
+	protected String getPluginPackageLicensesXml(List licenses) {
+		StringMaker sm = new StringMaker();
+
+		for (int i = 0; i < licenses.size(); i++) {
+			License license = (License)licenses.get(i);
+
+			if (i == 0) {
+				sm.append("\r\n");
+			}
+
+			sm.append("\t\t<license osi-approved=\"");
+			sm.append(license.isOsiApproved());
+			sm.append("\">");
+			sm.append(license.getName());
+			sm.append("</license>\r\n");
+
+			if ((i + 1) == licenses.size()) {
+				sm.append("\t");
+			}
+		}
+
+		return sm.toString();
+	}
+
+	protected Properties getPluginPackageProperties(File srcFile)
+		throws Exception {
+
+		File propsFile = new File(
+			srcFile + "/WEB-INF/liferay-plugin-package.properties");
+
+		if (!propsFile.exists()) {
+			return null;
+		}
+
+		String propsString = FileUtil.read(propsFile);
+
+		return getPluginPackageProperties(propsString);
+	}
+
+	protected Properties getPluginPackageProperties(String propsString)
+		throws Exception {
+
+		propsString = StringUtil.replace(
+			propsString,
+			new String[] {"\\\n", "\t", "    "},
+			new String[] {
+				StringPool.BLANK, StringPool.BLANK, StringPool.BLANK
+			});
+
+		return PropertiesUtil.load(propsString);
+	}
+
+	protected String getPluginPackageTagsXml(List tags) {
+		StringMaker sm = new StringMaker();
+
+		for (int i = 0; i < tags.size(); i++) {
+			String tag = (String)tags.get(i);
+
+			if (i == 0) {
+				sm.append("\r\n");
+			}
+
+			sm.append("\t\t<tag>");
+			sm.append(tag);
+			sm.append("</tag>\r\n");
+
+			if ((i + 1) == tags.size()) {
+				sm.append("\t");
+			}
+		}
+
+		return sm.toString();
+	}
+
+	protected void processPluginPackageProperties(
+			File srcFile, String displayName, PluginPackage pluginPackage)
+		throws Exception {
+	}
+
 	protected PluginPackage readPluginPackage(File file) {
 		if (!file.exists()) {
 			return null;
@@ -788,12 +855,25 @@ public class BaseDeployer {
 		ZipFile zipFile = null;
 
 		try {
+			boolean parseProps = false;
+
 			if (file.isDirectory()) {
+				String path = file.getPath();
+
 				File pluginPackageXmlFile = new File(
-					file.getPath() + "/WEB-INF/liferay-plugin-package.xml");
+					path + "/WEB-INF/liferay-plugin-package.xml");
 
 				if (pluginPackageXmlFile.exists()) {
 					is = new FileInputStream(pluginPackageXmlFile);
+				}
+
+				File pluginPackagePropsFile = new File(
+					path + "/WEB-INF/liferay-plugin-package.properties");
+
+				if (pluginPackagePropsFile.exists()) {
+					is = new FileInputStream(pluginPackagePropsFile);
+
+					parseProps = true;
 				}
 			}
 			else {
@@ -805,23 +885,45 @@ public class BaseDeployer {
 				if (zipEntry != null) {
 					is = zipFile.getInputStream(zipEntry);
 				}
+
+				zipEntry = zipFile.getEntry(
+					"WEB-INF/liferay-plugin-package.properties");
+
+				if (zipEntry != null) {
+					is = zipFile.getInputStream(zipEntry);
+
+					parseProps = true;
+				}
 			}
 
 			if (is == null) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						file.getPath() + " does not have " +
-							"WEB-INF/liferay-plugin-package.xml");
+						file.getPath() + " does not have a " +
+							"WEB-INF/liferay-plugin-package.xml or " +
+								"WEB-INF/liferay-plugin-package.properties");
 				}
 
 				return null;
 			}
 
-			String xml = StringUtil.read(is);
+			if (parseProps) {
+				String displayName = getDisplayName(file);
 
-			xml = XMLFormatter.fixProlog(xml);
+				String propsString = StringUtil.read(is);
 
-			return PluginPackageUtil.readPluginPackageXml(xml);
+				Properties props = getPluginPackageProperties(propsString);
+
+				return PluginPackageUtil.readPluginPackageProps(
+					displayName, props);
+			}
+			else {
+				String xml = StringUtil.read(is);
+
+				xml = XMLFormatter.fixProlog(xml);
+
+				return PluginPackageUtil.readPluginPackageXml(xml);
+			}
 		}
 		catch (Exception e) {
 			System.err.println(file.getPath() + ": " + e.toString());
