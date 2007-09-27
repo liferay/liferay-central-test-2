@@ -22,6 +22,7 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -29,6 +30,8 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
+import com.liferay.portlet.tags.NoSuchAssetException;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 
 import java.util.List;
 
@@ -47,14 +50,14 @@ public class VerifyJournal extends VerifyProcess {
 		_log.info("Verifying integrity");
 
 		try {
-			_verifyJournalPermissions();
+			_verifyJournal();
 		}
 		catch (Exception e) {
 			throw new VerifyException(e);
 		}
 	}
 
-	private void _verifyJournalPermissions() throws Exception {
+	private void _verifyJournal() throws Exception {
 
 		// Structures
 
@@ -108,10 +111,25 @@ public class VerifyJournal extends VerifyProcess {
 				article.getCompanyId(), 0, 0,
 				JournalArticle.class.getName(), article.getResourcePrimKey(),
 				false, true, true);
+
+			try {
+				TagsAssetLocalServiceUtil.getAsset(
+						JournalArticle.class.getName(),
+						article.getPrimaryKey());	
+			}
+			catch (NoSuchAssetException nsae) {
+				TagsAssetLocalServiceUtil.updateAsset(
+						article.getUserId(), JournalArticle.class.getName(),
+						article.getResourcePrimKey(), new String[0], null, null,
+						article.getDisplayDate(), article.getExpirationDate(),
+						ContentTypes.TEXT_HTML, article.getTitle(),
+						article.getDescription(), article.getDescription(),
+						null, 0, 0);
+			}
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Permissions verified for Journal articles");
+			_log.debug("Permissions and TagsAssets verified for Journal articles");
 		}
 	}
 
