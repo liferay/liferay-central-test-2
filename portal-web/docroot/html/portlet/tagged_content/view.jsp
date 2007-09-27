@@ -121,63 +121,139 @@ if (showQueryLogic) {
 // Display content
 
 PortletURL portletURL = renderResponse.createRenderURL();
-
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
-
-long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), entries);
-long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
-
-Date now = new Date();
-
-int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, notEntryIds, andOperator, now, now);
-
-searchContainer.setTotal(total);
-
-List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, now, now, searchContainer.getStart(), searchContainer.getEnd());
-
-searchContainer.setResults(results);
-
-for (int i = 0; i < results.size(); i++) {
-	TagsAsset asset = (TagsAsset)results.get(i);
-
-	String className = PortalUtil.getClassName(asset.getClassNameId());
-	long classPK = asset.getClassPK();
-
-	try {
 %>
 
-		<div>
-			<c:choose>
-				<c:when test='<%= displayStyle.equals("full-content") %>'>
-					<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
-				</c:when>
-				<c:when test='<%= displayStyle.equals("abstracts") %>'>
-					<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
-				</c:when>
-				<c:otherwise>
-					<%= displayStyle %> is not a display type.
-				</c:otherwise>
-			</c:choose>
+<c:choose>
+	<c:when test="<%= selectionStyle.equals("dynamic") %>">
+		<%
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
+		
+		long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), entries);
+		long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
+		
+		Date now = new Date();
+		
+		int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, notEntryIds, andOperator, now, now);
+		
+		searchContainer.setTotal(total);
+		
+		List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, now, now, searchContainer.getStart(), searchContainer.getEnd());
+		
+		searchContainer.setResults(results);
+		
+		for (int i = 0; i < results.size(); i++) {
+			TagsAsset asset = (TagsAsset)results.get(i);
+		
+			String className = PortalUtil.getClassName(asset.getClassNameId());
+			long classPK = asset.getClassPK();
+		
+			String title = asset.getTitle();
+			
+			try {
+		%>
+		
+				<div>
+					<c:choose>
+						<c:when test='<%= displayStyle.equals("full-content") %>'>
+							<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
+						</c:when>
+						<c:when test='<%= displayStyle.equals("abstracts") %>'>
+							<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
+						</c:when>
+						<c:otherwise>
+							<%= displayStyle %> is not a display type.
+						</c:otherwise>
+					</c:choose>
+		
+					<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
+				</div>
+		
+		<%
+			}
+			catch (Exception e) {
+				_log.error(e.getMessage());
+			}
+		%>
+		
+			<c:if test="<%= (i + 1) < results.size() %>">
+				<div class="separator"><!-- --></div>
+			</c:if>
+		
+		<%
+		}
+		%>
 
-			<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
-		</div>
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	</c:when>
+	<c:when test="<%= selectionStyle.equals("manual") %>">
+		<%
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
+		
+		int total = manualEntries.length;
+		
+		searchContainer.setTotal(total);
+		
+		List results = ListUtil.fromArray(manualEntries);
+		
+		int end = manualEntries.length < searchContainer.getEnd()?manualEntries.length:searchContainer.getEnd();
+		
+		results = results.subList(searchContainer.getStart(), end);
+		
+		searchContainer.setResults(results);
 
-<%
-	}
-	catch (Exception e) {
-		_log.error(e.getMessage());
-	}
-%>
+		for (int i = 0; i < results.size(); i++) {
+			String assetEntry = (String)results.get(i);
+			
+			SAXReader reader = new SAXReader();
 
-	<c:if test="<%= (i + 1) < results.size() %>">
-		<div class="separator"><!-- --></div>
-	</c:if>
+			Document assetDoc = reader.read(new StringReader(assetEntry));
 
-<%
-}
-%>
+			Element root = assetDoc.getRootElement();
+			
+			String className = root.element("asset-type").getText();
+			long classPK = GetterUtil.getLong(root.element("asset-id").getText());
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+			String title = root.element("asset-title").getText();
+			
+			try {
+		%>
+		
+				<div>
+					<c:choose>
+						<c:when test='<%= displayStyle.equals("full-content") %>'>
+							<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
+						</c:when>
+						<c:when test='<%= displayStyle.equals("abstracts") %>'>
+							<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
+						</c:when>
+						<c:otherwise>
+							<%= displayStyle %> is not a display type.
+						</c:otherwise>
+					</c:choose>
+		
+					<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
+				</div>
+		
+		<%
+			}
+			catch (Exception e) {
+				_log.error(e.getMessage());
+			}
+		%>
+		
+			<c:if test="<%= (i + 1) < results.size() %>">
+				<div class="separator"><!-- --></div>
+			</c:if>
+		
+		<%
+		}
+		%>
+
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	</c:when>
+</c:choose>
+
+
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.tagged_content.view.jsp");

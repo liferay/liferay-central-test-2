@@ -46,7 +46,9 @@
 
 		String languageId = LanguageUtil.getLanguageId(request);
 
-		JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
+		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
+
+		JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay, xmlRequest);
 		%>
 
 		<c:if test="<%= articleDisplay != null %>">

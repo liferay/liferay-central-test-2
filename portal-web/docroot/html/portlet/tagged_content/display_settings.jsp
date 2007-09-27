@@ -22,37 +22,34 @@
  */
 %>
 
-<%@ include file="/html/portlet/tagged_content/init.jsp" %>
-
-<%
-String redirect = ParamUtil.getString(request, "redirect");
-
-long assetId = ParamUtil.getLong(renderRequest, "assetId");
-
-String className = ParamUtil.getString(request, "className");
-long classPK = ParamUtil.getLong(renderRequest, "classPK");
-
-try {
-	//TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(assetId);
-
-	//String className = PortalUtil.getClassName(asset.getClassNameId());
-	//long classPK = asset.getClassPK();
-%>
-
-	<div align="right">
-		&laquo; <a href="<%= redirect %>"><liferay-ui:message key="back" /></a>
-	</div>
-	<div>
-		<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
-	</div>
-
-<%
-}
-catch (Exception e) {
-	_log.error(e.getMessage());
-}
-%>
-
-<%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.tagged_content.view_content.jsp");
-%>
+<table class="liferay-table">
+<tr>
+	<td>
+		<liferay-ui:message key="display-style" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />displayStyle">
+			<option <%= displayStyle.equals("full-content") ? "selected" : "" %> value="full-content"><liferay-ui:message key="full-content" /></option>
+			<option <%= displayStyle.equals("abstracts") ? "selected" : "" %> value="abstracts"><liferay-ui:message key="abstracts" /></option>
+		</select>
+	</td>
+</tr>
+<c:if test="<%= selectionStyle.equals("dynamic") %>">
+	<tr>
+		<td>
+			<liferay-ui:message key="show-query-logic" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="showQueryLogic" defaultValue="<%= showQueryLogic %>" />
+		</td>
+	</tr>
+</c:if>
+<tr>
+	<td>
+		<liferay-ui:message key="show-available-locales" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="showAvailableLocales" defaultValue="<%= showAvailableLocales %>" />
+	</td>
+</tr>
+</table>

@@ -60,6 +60,7 @@
 <%@ page import="com.liferay.portal.captcha.CaptchaTextException" %>
 <%@ page import="com.liferay.portal.kernel.cal.Recurrence" %>
 <%@ page import="com.liferay.portal.kernel.dao.DAOParamUtil" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.DisplayTerms"%>
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.RowChecker" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
@@ -178,6 +179,7 @@
 <%@ page import="com.liferay.util.format.PhoneNumberUtil" %>
 <%@ page import="com.liferay.util.log4j.Levels" %>
 <%@ page import="com.liferay.util.mail.InternetAddressUtil" %>
+<%@ page import="com.liferay.util.portlet.PortletRequestUtil" %>
 <%@ page import="com.liferay.util.servlet.DynamicServletRequest" %>
 <%@ page import="com.liferay.util.servlet.SessionErrors" %>
 <%@ page import="com.liferay.util.servlet.SessionMessages" %>
