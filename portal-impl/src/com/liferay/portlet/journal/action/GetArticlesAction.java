@@ -151,11 +151,14 @@ public class GetArticlesAction extends Action {
 		int begin = 0;
 		int end = ParamUtil.getInteger(req, "delta", 5);
 		String orderBy = ParamUtil.getString(req, "orderBy");
+		String orderByCol = ParamUtil.getString(req, "orderByCol", orderBy);
+		String orderByType = ParamUtil.getString(req, "orderByType");
+		boolean orderByAsc = orderByType.equals("asc");
 
-		OrderByComparator obc = new ArticleModifiedDateComparator(false);
+		OrderByComparator obc = new ArticleModifiedDateComparator(orderByAsc);
 
-		if (orderBy.equals("display-date")) {
-			obc = new ArticleDisplayDateComparator(false);
+		if (orderByCol.equals("display-date")) {
+			obc = new ArticleDisplayDateComparator(orderByAsc);
 		}
 
 		return JournalArticleLocalServiceUtil.search(
