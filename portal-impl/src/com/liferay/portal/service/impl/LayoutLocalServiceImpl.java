@@ -543,11 +543,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return LayoutImpl.DEFAULT_PLID;
 	}
 
-	public Layout getDLFolderLayout(
-			long groupId, boolean privateLayout, long dlFolderId)
+	public Layout getDLFolderLayout(long dlFolderId)
 		throws PortalException, SystemException {
 
-		return LayoutUtil.findByG_P_DLF(groupId, privateLayout, dlFolderId);
+		return LayoutUtil.findByDLF(dlFolderId);
 	}
 
 	public Layout getFriendlyURLLayout(

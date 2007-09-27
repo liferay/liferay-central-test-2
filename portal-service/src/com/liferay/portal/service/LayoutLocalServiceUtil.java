@@ -140,13 +140,12 @@ public class LayoutLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Layout getDLFolderLayout(
-		long groupId, boolean privateLayout, long dlFolderId)
+		long dlFolderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-		return layoutLocalService.getDLFolderLayout(groupId, privateLayout,
-			dlFolderId);
+		return layoutLocalService.getDLFolderLayout(dlFolderId);
 	}
 
 	public static com.liferay.portal.model.Layout getFriendlyURLLayout(

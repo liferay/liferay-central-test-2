@@ -54,6 +54,13 @@ public interface LayoutPersistence {
 	public com.liferay.portal.model.Layout fetchByPrimaryKey(long plid)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Layout findByDLF(long dlFolderId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException;
+
+	public com.liferay.portal.model.Layout fetchByDLF(long dlFolderId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List findByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
@@ -130,15 +137,6 @@ public interface LayoutPersistence {
 		boolean privateLayout, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Layout findByG_P_DLF(long groupId,
-		boolean privateLayout, long dlFolderId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchLayoutException;
-
-	public com.liferay.portal.model.Layout fetchByG_P_DLF(long groupId,
-		boolean privateLayout, long dlFolderId)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -156,6 +154,10 @@ public interface LayoutPersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByDLF(long dlFolderId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException;
+
 	public void removeByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
@@ -171,12 +173,10 @@ public interface LayoutPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutException;
 
-	public void removeByG_P_DLF(long groupId, boolean privateLayout,
-		long dlFolderId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchLayoutException;
-
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByDLF(long dlFolderId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByG_P(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
@@ -189,9 +189,6 @@ public interface LayoutPersistence {
 
 	public int countByG_P_F(long groupId, boolean privateLayout,
 		java.lang.String friendlyURL) throws com.liferay.portal.SystemException;
-
-	public int countByG_P_DLF(long groupId, boolean privateLayout,
-		long dlFolderId) throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
 }

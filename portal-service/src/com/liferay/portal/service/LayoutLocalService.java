@@ -97,8 +97,7 @@ public interface LayoutLocalService {
 	public long getDefaultPlid(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Layout getDLFolderLayout(long groupId,
-		boolean privateLayout, long dlFolderId)
+	public com.liferay.portal.model.Layout getDLFolderLayout(long dlFolderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

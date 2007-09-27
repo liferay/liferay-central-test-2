@@ -179,7 +179,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 				try {
 					dlFolderLayout = LayoutLocalServiceUtil.getDLFolderLayout(
-						groupId, privateLayout, folder.getParentFolderId());
+						folder.getParentFolderId());
 
 					parentLayoutId = dlFolderLayout.getLayoutId();
 				}
@@ -410,7 +410,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			}
 
 			Layout layout = LayoutLocalServiceUtil.getDLFolderLayout(
-				folder.getGroupId(), privateLayout, folder.getFolderId());
+				folder.getFolderId());
 
 			layout.setName(folder.getName());
 

@@ -393,6 +393,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="DLF" return-type="Layout">
+			<finder-column name="dlFolderId" />
+		</finder>
 		<finder name="G_P" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
@@ -411,11 +414,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
 			<finder-column name="friendlyURL" />
-		</finder>
-		<finder name="G_P_DLF" return-type="Layout">
-			<finder-column name="groupId" />
-			<finder-column name="privateLayout" />
-			<finder-column name="dlFolderId" />
 		</finder>
 	</entity>
 	<entity name="LayoutSet" local-service="true" remote-service="true">
