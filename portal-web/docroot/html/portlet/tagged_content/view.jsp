@@ -121,13 +121,13 @@ if (showQueryLogic) {
 // Display content
 
 PortletURL portletURL = renderResponse.createRenderURL();
+
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 %>
 
 <c:choose>
 	<c:when test="<%= selectionStyle.equals("dynamic") %>">
-		<%
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
-		
+		<%		
 		long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), entries);
 		long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
 		
@@ -147,8 +147,6 @@ PortletURL portletURL = renderResponse.createRenderURL();
 			String className = PortalUtil.getClassName(asset.getClassNameId());
 			long classPK = asset.getClassPK();
 		
-			String title = asset.getTitle();
-			
 			try {
 		%>
 		
@@ -182,13 +180,9 @@ PortletURL portletURL = renderResponse.createRenderURL();
 		<%
 		}
 		%>
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test="<%= selectionStyle.equals("manual") %>">
 		<%
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
-		
 		int total = manualEntries.length;
 		
 		searchContainer.setTotal(total);
@@ -210,11 +204,13 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 			Element root = assetDoc.getRootElement();
 			
-			String className = root.element("asset-type").getText();
-			long classPK = GetterUtil.getLong(root.element("asset-id").getText());
+			long assetId = GetterUtil.getLong(root.element("asset-id").getText());
 
-			String title = root.element("asset-title").getText();
+			TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(assetId);
 			
+			String className = PortalUtil.getClassName(asset.getClassNameId());
+			long classPK = asset.getClassPK();
+
 			try {
 		%>
 		
@@ -248,12 +244,10 @@ PortletURL portletURL = renderResponse.createRenderURL();
 		<%
 		}
 		%>
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>
 
-
+<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.tagged_content.view.jsp");

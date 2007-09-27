@@ -1,4 +1,5 @@
 <%
+String title = asset.getTitle();
 String summary = StringPool.BLANK;
 String viewURL = null;
 String viewURLMessage = StringPool.BLANK;
@@ -67,8 +68,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 	articleURL.setParameter("struts_action", "/tagged_content/view_content");
 	articleURL.setParameter("redirect", currentURL);
-	articleURL.setParameter("className", className);
-	articleURL.setParameter("classPK", String.valueOf(classPK));
+	articleURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
 	viewURL = articleURL.toString();
 
@@ -77,9 +77,9 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 // URLs set through the asset override automatically generated URLs
 
-//if (Validator.isNotNull(asset.getUrl())) {
-//	viewURL = asset.getUrl();
-//}
+if (Validator.isNotNull(asset.getUrl())) {
+	viewURL = asset.getUrl();
+}
 %>
 
 <div class="portlet-journal-abstract">

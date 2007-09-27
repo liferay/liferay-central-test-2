@@ -29,14 +29,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 long assetId = ParamUtil.getLong(renderRequest, "assetId");
 
-String className = ParamUtil.getString(request, "className");
-long classPK = ParamUtil.getLong(renderRequest, "classPK");
-
 try {
-	//TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(assetId);
+	TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(assetId);
 
-	//String className = PortalUtil.getClassName(asset.getClassNameId());
-	//long classPK = asset.getClassPK();
+	String className = PortalUtil.getClassName(asset.getClassNameId());
+	long classPK = asset.getClassPK();
 %>
 
 	<div align="right">
