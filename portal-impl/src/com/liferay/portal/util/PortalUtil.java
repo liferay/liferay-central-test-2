@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletRequestWrapper;
 import com.liferay.portal.kernel.portlet.PortletResponseWrapper;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -90,7 +91,6 @@ import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
 import com.liferay.util.JS;
 import com.liferay.util.servlet.DynamicServletRequest;
-import com.liferay.util.servlet.StringServletResponse;
 import com.liferay.util.servlet.UploadPortletRequest;
 import com.liferay.util.servlet.UploadServletRequest;
 

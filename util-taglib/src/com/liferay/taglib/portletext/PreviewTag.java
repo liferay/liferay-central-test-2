@@ -22,8 +22,8 @@
 
 package com.liferay.taglib.portletext;
 
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.taglib.util.IncludeTag;
-import com.liferay.util.servlet.StringServletResponse;
 
 import java.io.IOException;
 

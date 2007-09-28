@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -30,7 +31,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.velocity.VelocityVariables;
-import com.liferay.util.servlet.StringServletResponse;
 
 import java.io.StringWriter;
 

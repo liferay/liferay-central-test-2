@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.theme;
 
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.PortletDisplay;
@@ -29,7 +30,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.taglib.util.ParamAncestorTagImpl;
 import com.liferay.taglib.util.ThemeUtil;
-import com.liferay.util.servlet.StringServletResponse;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;

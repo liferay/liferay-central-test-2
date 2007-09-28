@@ -78,6 +78,7 @@
 <%@ page import="com.liferay.portal.kernel.security.permission.ActionKeys" %>
 <%@ page import="com.liferay.portal.kernel.security.permission.PermissionChecker" %>
 <%@ page import="com.liferay.portal.kernel.servlet.BrowserSniffer" %>
+<%@ page import="com.liferay.portal.kernel.servlet.StringServletResponse" %>
 <%@ page import="com.liferay.portal.kernel.util.ArrayUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.BooleanWrapper" %>
 <%@ page import="com.liferay.portal.kernel.util.CalendarFactoryUtil" %>
@@ -184,7 +185,6 @@
 <%@ page import="com.liferay.util.servlet.SessionErrors" %>
 <%@ page import="com.liferay.util.servlet.SessionMessages" %>
 <%@ page import="com.liferay.util.servlet.SessionParameters" %>
-<%@ page import="com.liferay.util.servlet.StringServletResponse" %>
 <%@ page import="com.liferay.util.servlet.UploadException" %>
 <%@ page import="com.liferay.util.xml.XMLFormatter" %>
 

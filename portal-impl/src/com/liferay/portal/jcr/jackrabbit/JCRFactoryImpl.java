@@ -23,6 +23,7 @@
 package com.liferay.portal.jcr.jackrabbit;
 
 import com.liferay.portal.jcr.JCRFactory;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import javax.jcr.Credentials;
@@ -56,8 +57,9 @@ public class JCRFactoryImpl implements JCRFactory {
 	public static final String CREDENTIALS_USERNAME = PropsUtil.get(
 		PropsUtil.JCR_JACKRABBIT_CREDENTIALS_USERNAME);
 
-	public static final char[] CREDENTIALS_PASSWORD = PropsUtil.get(
-		PropsUtil.JCR_JACKRABBIT_CREDENTIALS_PASSWORD).toCharArray();
+	public static final char[] CREDENTIALS_PASSWORD = GetterUtil.getString(
+		PropsUtil.get(PropsUtil.JCR_JACKRABBIT_CREDENTIALS_PASSWORD)).
+			toCharArray();
 
 	public Session createSession(String workspaceName)
 		throws RepositoryException {

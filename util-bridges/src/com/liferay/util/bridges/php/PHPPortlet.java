@@ -23,7 +23,7 @@
 package com.liferay.util.bridges.php;
 
 import com.liferay.portal.kernel.servlet.PortletServlet;
-import com.liferay.util.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;

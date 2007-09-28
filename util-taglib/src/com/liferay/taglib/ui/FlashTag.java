@@ -22,9 +22,9 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
-import com.liferay.util.servlet.StringServletResponse;
 
 import java.io.IOException;
 
