@@ -101,9 +101,6 @@ configurationActionURL.setParameter("backURL", redirect);
 		<liferay-ui:message key="asset-selection"/> 
 		
 		<select name="<portlet:namespace />selectionStyle" onchange="<portlet:namespace />chooseSelectionStyle();">
-			<c:if test="<%= selectionStyle.equals(StringPool.BLANK) %>">
-				<option value="" selected="selected"><liferay-ui:message key="choose"/>...</option>
-			</c:if>
 			<option value="dynamic"<%= selectionStyle.equals("dynamic")?" selected=\"selected\"":"" %>><liferay-ui:message key="dynamic" /></option>
 			<option value="manual"<%= selectionStyle.equals("manual")?" selected=\"selected\"":"" %>><liferay-ui:message key="manual" /></option>
 		</select>

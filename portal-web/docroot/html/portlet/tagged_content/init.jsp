@@ -94,7 +94,7 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
 }
 
-String selectionStyle = GetterUtil.getString(prefs.getValue("selection-style", StringPool.BLANK));
+String selectionStyle = GetterUtil.getString(prefs.getValue("selection-style", "dynamic"));
 
 // Dynamic Selection prefs
 String[] entries = prefs.getValues("entries", new String[0]);
