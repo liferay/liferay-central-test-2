@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.jndi;
+package com.liferay.util.spring;
 
 import com.liferay.util.JNDIUtil;
 
@@ -32,10 +32,12 @@ import javax.naming.NamingException;
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated this class has been repackaged at
- * <code>com.liferay.util.spring</code>.
- *
  */
 public class JndiObjectFactoryBean
-	extends com.liferay.util.spring.JndiObjectFactoryBean {
+	extends org.springframework.jndi.JndiObjectFactoryBean {
+
+	protected Object lookup() throws NamingException {
+		return JNDIUtil.lookup(new InitialContext(), getJndiName());
+	}
+
 }

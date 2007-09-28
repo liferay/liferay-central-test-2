@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-	<bean id="liferayDataSourceTarget" class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean" lazy-init="true">
+	<bean id="liferayDataSourceTarget" class="com.liferay.util.spring.JndiObjectFactoryBean" lazy-init="true">
 		<property name="jndiName">
 			<value>jdbc/LiferayPool</value>
 		</property>
