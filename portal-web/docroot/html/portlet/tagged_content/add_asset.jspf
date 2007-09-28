@@ -45,20 +45,19 @@ PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, entries
 		<%
 		for (int i = 0; i < ASSET_TYPES.length; i++) {
 			String redirectURL = currentURL;
-			
+
 			if (selectionStyle.equals("manual")) {
 				PortletURL redirectURLObj = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, themeDisplay.getPlid(), false);
-				redirectURLObj.setWindowState(WindowState.MAXIMIZED);
-				redirectURLObj.setPortletMode(PortletMode.VIEW);
+
 				redirectURLObj.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-				redirectURLObj.setParameter("portletResource", portletDisplay.getId());
 				redirectURLObj.setParameter("redirect", currentURL);
 				redirectURLObj.setParameter("backURL", currentURL);
-				redirectURLObj.setParameter("typeSelection", ASSET_TYPES[i]);				
-				
+				redirectURLObj.setParameter("portletResource", portletDisplay.getId());
+				redirectURLObj.setParameter("typeSelection", ASSET_TYPES[i]);
+
 				redirectURL = redirectURLObj.toString();
 			}
-			
+
 			PortletURL url = getAddURL(ASSET_TYPES[i], permissionChecker, request, themeDisplay, entries, redirectURL);
 
 			if (url != null) {
@@ -74,8 +73,6 @@ PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, entries
 	</select>
 
 	</form>
-	
-	<br />
 </c:if>
 
 <%!
@@ -145,5 +142,4 @@ public PortletURL[] getAddURLs(PermissionChecker permissionChecker, HttpServletR
 
 	return (PortletURL[])urls.toArray(new PortletURL[0]);
 }
-
 %>

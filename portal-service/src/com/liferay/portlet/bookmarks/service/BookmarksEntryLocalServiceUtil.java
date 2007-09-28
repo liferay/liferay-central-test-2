@@ -262,4 +262,13 @@ public class BookmarksEntryLocalServiceUtil {
 		return bookmarksEntryLocalService.updateEntry(entryId, folderId, name,
 			url, comments, tagsEntries);
 	}
+
+	public static void updateTagsAsset(
+		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
+		java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+		bookmarksEntryLocalService.updateTagsAsset(entry, tagsEntries);
+	}
 }

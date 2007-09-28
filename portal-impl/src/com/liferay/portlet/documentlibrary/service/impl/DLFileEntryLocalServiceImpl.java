@@ -270,7 +270,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// Tags
 
-		updateAsset(fileEntry, tagsEntries);
+		updateTagsAsset(fileEntry, tagsEntries);
 
 		// Folder
 
@@ -730,7 +730,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// Tags
 
-		updateAsset(fileEntry, tagsEntries);
+		updateTagsAsset(fileEntry, tagsEntries);
 
 		// File version
 
@@ -791,6 +791,18 @@ public class DLFileEntryLocalServiceImpl
 		return fileEntry;
 	}
 
+	public void updateTagsAsset(DLFileEntry fileEntry, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		String mimeType = MimeTypesUtil.getContentType(fileEntry.getName());
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			fileEntry.getUserId(), DLFileEntry.class.getName(),
+			fileEntry.getFileEntryId(), tagsEntries, null, null, null, null,
+			mimeType, fileEntry.getTitle(), fileEntry.getDescription(),
+			fileEntry.getDescription(), null, 0, 0);
+	}
+
 	protected long getFolderId(long companyId, long folderId)
 		throws PortalException, SystemException {
 
@@ -830,18 +842,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		return name;
-	}
-
-	protected void updateAsset(DLFileEntry fileEntry, String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		String mimeType = MimeTypesUtil.getContentType(fileEntry.getName());
-
-		TagsAssetLocalServiceUtil.updateAsset(
-			fileEntry.getUserId(), DLFileEntry.class.getName(),
-			fileEntry.getFileEntryId(), tagsEntries, null, null, null, null,
-			mimeType, fileEntry.getTitle(), fileEntry.getDescription(),
-			fileEntry.getDescription(), null, 0, 0);
 	}
 
 	private static Log _log =

@@ -22,97 +22,85 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.model.Image;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
-import com.liferay.portal.service.impl.ImageLocalUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.dao.hibernate.DynamicQueryInitializerImpl;
 
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Subqueries;
 
 /**
- * <a href="VerifyIG.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyImageGallery.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
  */
-public class VerifyIG extends VerifyProcess {
+public class VerifyImageGallery extends VerifyProcess {
 
 	public void verify() throws VerifyException {
 		_log.info("Verifying integrity");
 
 		try {
-			_verifyIG();
+			verifyImageGallery();
 		}
 		catch (Exception e) {
 			throw new VerifyException(e);
 		}
 	}
 
-	private void _verifyIG() throws Exception {
+	protected void verifyImageGallery() throws Exception {
+		long classNameId = PortalUtil.getClassNameId(IGImage.class.getName());
 
-		long classNameId = 
-			ClassNameLocalServiceUtil.getClassName(
-					IGImage.class.getName()).getClassNameId();
+		DetachedCriteria entriesWithTagsAssets = DetachedCriteria.forClass(
+			TagsAssetImpl.class, "tagsAsset");
 
-		DetachedCriteria existingTagsAssetEntriesIds = 
-			DetachedCriteria.forClass(TagsAssetImpl.class, "ta")
-				.add(Property.forName(
-						"ta.classNameId").eq(new Long(classNameId)))
-				.setProjection(Property.forName("ta.classPK"));
+		entriesWithTagsAssets = entriesWithTagsAssets.add(
+			Property.forName("tagsAsset.classNameId").eq(
+				new Long(classNameId)));
 
-		DetachedCriteria entriesWithMissingTagsAssets = 
-			DetachedCriteria.forClass(IGImageImpl.class, "igi")
-			.add(Restrictions.not(
-					Subqueries.propertyIn(
-							"igi.imageId", existingTagsAssetEntriesIds)));
+		entriesWithTagsAssets = entriesWithTagsAssets.setProjection(
+			Property.forName("tagsAsset.classPK"));
 
-		DynamicQueryInitializer dqi = 
-			new DynamicQueryInitializerImpl(entriesWithMissingTagsAssets);
+		DetachedCriteria entriesWithoutTagsAssets = DetachedCriteria.forClass(
+			IGImageImpl.class, "igImage");
 
-		try {
-			List entries = IGImageLocalServiceUtil.dynamicQuery(dqi);
+		entriesWithoutTagsAssets = entriesWithoutTagsAssets.add(
+			Restrictions.not(
+				Subqueries.propertyIn(
+					"igImage.imageId", entriesWithTagsAssets)));
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Processing " + entries.size() + " entries");
-			}
+		DynamicQueryInitializer dqi = new DynamicQueryInitializerImpl(
+			entriesWithoutTagsAssets);
 
-			for (int i = 0; i < entries.size(); i++) {
-				IGImage image = (IGImage)entries.get(i);
+		List images = IGImageLocalServiceUtil.dynamicQuery(dqi);
 
-				Image largeImage = 
-					ImageLocalUtil.getImage(image.getLargeImageId());
-
-				TagsAssetLocalServiceUtil.updateAsset(
-					image.getUserId(), IGImage.class.getName(),
-					image.getImageId(), new String[0], null, null, null, null, 
-					largeImage.getType(), image.getDescription(),
-					image.getDescription(), image.getDescription(), null, 
-					largeImage.getHeight(), largeImage.getWidth());
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Processing " + images.size() + " images with no tags assets");
 		}
-		catch (SystemException se) {			
-			_log.error(se);
+
+		for (int i = 0; i < images.size(); i++) {
+			IGImage image = (IGImage)images.get(i);
+
+			IGImageLocalServiceUtil.updateTagsAsset(image, new String[0]);
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("TagsAssets verified for IG Image entries");
+			_log.debug("Tags assets verified for images");
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyIG.class);
+	private static Log _log = LogFactory.getLog(VerifyImageGallery.class);
 
 }

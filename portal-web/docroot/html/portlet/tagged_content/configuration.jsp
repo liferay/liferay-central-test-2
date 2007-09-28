@@ -25,63 +25,64 @@
 <%@ include file="/html/portlet/tagged_content/init.jsp" %>
 
 <%
-String typeSelection = ParamUtil.getString(request, "typeSelection", StringPool.BLANK);
-
 String tabs2 = ParamUtil.getString(request, "tabs2");
 
 String redirect = ParamUtil.getString(request, "backURL");
+
 redirect = ParamUtil.getString(request, "redirect");
+
+String typeSelection = ParamUtil.getString(request, "typeSelection", StringPool.BLANK);
 
 PortletURL configurationRenderURL = renderResponse.createRenderURL();
 
 configurationRenderURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-configurationRenderURL.setParameter("portletResource", portletResource);
 configurationRenderURL.setParameter("redirect", redirect);
 configurationRenderURL.setParameter("backURL", redirect);
+configurationRenderURL.setParameter("portletResource", portletResource);
 
 PortletURL configurationActionURL = renderResponse.createActionURL();
 
 configurationActionURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-configurationActionURL.setParameter("portletResource", portletResource);
 configurationActionURL.setParameter("redirect", redirect);
 configurationActionURL.setParameter("backURL", redirect);
+configurationActionURL.setParameter("portletResource", portletResource);
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />chooseSelectionStyle() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'selection-style';
-		
+
 		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />moveSelectionDown(assetOrder) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'move-selection-down';
 		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = assetOrder;
-		
+
 		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />moveSelectionUp(assetOrder) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'move-selection-up';
 		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = assetOrder;
-		
+
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />selectAsset(assetId, assetParentId, assetOrder, assetTitle) {
+	function <portlet:namespace />selectAsset(assetId, assetParentId, assetTitle, assetOrder) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'add-selection';
-		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = assetOrder;
 		document.<portlet:namespace />fm.<portlet:namespace />assetId.value = assetId;
 		document.<portlet:namespace />fm.<portlet:namespace />assetParentId.value = assetParentId;
 		document.<portlet:namespace />fm.<portlet:namespace />assetTitle.value = assetTitle;
-		
+		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = assetOrder;
+
 		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />selectionForType(type) {
 		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = type;
 		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = -1;
-	
+
 		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
 	}
 </script>
@@ -90,25 +91,24 @@ configurationActionURL.setParameter("backURL", redirect);
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
 <input name="<portlet:namespace />typeSelection" type="hidden" value="" />
-
-<input name="<portlet:namespace />assetOrder" type="hidden" value="-1" />
 <input name="<portlet:namespace />assetId" type="hidden" value="" />
 <input name="<portlet:namespace />assetParentId" type="hidden" value="" />
 <input name="<portlet:namespace />assetTitle" type="hidden" value="" />
+<input name="<portlet:namespace />assetOrder" type="hidden" value="-1" />
 
 <c:choose>
 	<c:when test="<%= typeSelection.equals(StringPool.BLANK) %>">
-		<liferay-ui:message key="asset-selection"/> 
-		
+		<liferay-ui:message key="asset-selection" />
+
 		<select name="<portlet:namespace />selectionStyle" onchange="<portlet:namespace />chooseSelectionStyle();">
-			<option value="dynamic"<%= selectionStyle.equals("dynamic")?" selected=\"selected\"":"" %>><liferay-ui:message key="dynamic" /></option>
-			<option value="manual"<%= selectionStyle.equals("manual")?" selected=\"selected\"":"" %>><liferay-ui:message key="manual" /></option>
+			<option <%= selectionStyle.equals("dynamic") ? " selected=\"selected\"" : "" %> value="dynamic"><liferay-ui:message key="dynamic" /></option>
+			<option <%= selectionStyle.equals("manual") ? " selected=\"selected\"" : "" %> value="manual"><liferay-ui:message key="manual" /></option>
 		</select>
-		
+
 		<br /><br />
-		
+
 		<c:choose>
-			<c:when test="<%= selectionStyle.equals("manual") %>">
+			<c:when test='<%= selectionStyle.equals("manual") %>'>
 				<liferay-ui:tabs
 					names="selection,display-settings"
 					formName="fm"
@@ -118,83 +118,84 @@ configurationActionURL.setParameter("backURL", redirect);
 					<liferay-ui:section>
 						<select name="<portlet:namespace/>assetType" onchange="<portlet:namespace />selectionForType(this.options[this.selectedIndex].value);">
 							<option value=""><liferay-ui:message key="select"/>...</option>
+
 							<%
 							for (int i = 0; i < ASSET_TYPES.length; i++) {
-
 								if (!ASSET_TYPES[i].equals(WikiPage.class.getName())) {
 								%>
 
-									<option value="<%= ASSET_TYPES[i] %>"><liferay-ui:message key="<%= "model.resource." + ASSET_TYPES[i] %>"/></option>
-					
-								<%			
+									<option value="<%= ASSET_TYPES[i] %>"><liferay-ui:message key='<%= "model.resource." + ASSET_TYPES[i] %>' /></option>
+
+								<%
 								}
 							}
 							%>
+
 						</select>
-						
+
 						<br /><br />
-		
+
 						<%
 						List headerNames = new ArrayList();
+
 						headerNames.add("type");
 						headerNames.add("title");
 						headerNames.add(StringPool.BLANK);
-						
+
 						SearchContainer searchContainer = new SearchContainer(renderRequest, new DisplayTerms(renderRequest), new DisplayTerms(renderRequest), SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, configurationRenderURL, headerNames, LanguageUtil.get(pageContext, "no-assets-selected"));
-						
+
 						int total = manualEntries.length;
-						
+
 						searchContainer.setTotal(total);
-						
+
 						List results = ListUtil.fromArray(manualEntries);
-						
-						int end = manualEntries.length < searchContainer.getEnd()?manualEntries.length:searchContainer.getEnd();
-						
+
+						int end = (manualEntries.length < searchContainer.getEnd()) ? manualEntries.length : searchContainer.getEnd();
+
 						results = results.subList(searchContainer.getStart(), end);
-						
+
 						searchContainer.setResults(results);
 
 						List resultRows = searchContainer.getResultRows();
 
 						for (int i = 0; i < results.size(); i++) {
 							String assetEntry = (String)results.get(i);
-							
+
 							SAXReader reader = new SAXReader();
 
-							Document assetDoc = reader.read(new StringReader(assetEntry));
+							Document doc = reader.read(new StringReader(assetEntry));
 
-							Element root = assetDoc.getRootElement();
-							
+							Element root = doc.getRootElement();
+
 							int assetOrder = searchContainer.getStart() + i;
-							
-							root.addElement("asset-order").addText(String.valueOf(assetOrder));
-							
+
+							DocUtil.add(root, "asset-order", assetOrder);
+
 							if (assetOrder == (total - 1)) {
-								root.addElement("last").addText(Boolean.TRUE.toString());
+								DocUtil.add(root, "last", true);
 							}
 							else {
-								root.addElement("last").addText(Boolean.FALSE.toString());
+								DocUtil.add(root, "last", false);
 							}
-							
+
 							String assetType = root.element("asset-type").getText();
 							long assetId = GetterUtil.getLong(root.element("asset-id").getText());
 
 							TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(assetId);
-							
-							ResultRow row = new ResultRow(assetDoc, null, assetOrder);
+
+							ResultRow row = new ResultRow(doc, null, assetOrder);
 
 							PortletURL rowURL = renderResponse.createRenderURL();
 
 							rowURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-							rowURL.setParameter("portletResource", portletResource);
 							rowURL.setParameter("redirect", redirect);
 							rowURL.setParameter("backURL", redirect);
+							rowURL.setParameter("portletResource", portletResource);
 							rowURL.setParameter("typeSelection", assetType);
-
-							rowURL.setParameter("assetOrder", String.valueOf(assetOrder));
 							rowURL.setParameter("assetId", String.valueOf(assetId));
+							rowURL.setParameter("assetOrder", String.valueOf(assetOrder));
 
-							// Article id
+							// Type
 
 							row.addText(LanguageUtil.get(pageContext, "model.resource." + assetType), rowURL);
 
@@ -202,9 +203,9 @@ configurationActionURL.setParameter("backURL", redirect);
 
 							if (assetType.equals(IGImage.class.getName())) {
 								IGImage image = IGImageLocalServiceUtil.getImage(asset.getClassPK());
-								
+
 								StringMaker sm = new StringMaker();
-								
+
 								sm.append("<img border=\"1\" src=\"");
 								sm.append(themeDisplay.getPathImage());
 								sm.append("/image_gallery?img_id=");
@@ -215,14 +216,14 @@ configurationActionURL.setParameter("backURL", redirect);
 								sm.append(image.getDescription());
 								sm.append("\" />");
 
-								row.addText(sm.toString(), rowURL);								
+								row.addText(sm.toString(), rowURL);
 							}
 							else {
 								row.addText(asset.getTitle(), rowURL);
 							}
-							
-							// Asset Selection Action
-							
+
+							// Action
+
 							row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/tagged_content/asset_selection_action.jsp");
 
 							// Add result row
@@ -230,11 +231,10 @@ configurationActionURL.setParameter("backURL", redirect);
 							resultRows.add(row);
 						}
 						%>
-		
+
 						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		
+
 						<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-		
 					</liferay-ui:section>
 					<liferay-ui:section>
 						<%@ include file="/html/portlet/tagged_content/display_settings.jsp" %>
@@ -245,7 +245,7 @@ configurationActionURL.setParameter("backURL", redirect);
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 			</c:when>
-			<c:when test="<%= selectionStyle.equals("dynamic") %>">
+			<c:when test='<%= selectionStyle.equals("dynamic") %>'>
 				<liferay-ui:tabs
 					names="query-logic,display-settings"
 					formName="fm"
@@ -254,29 +254,29 @@ configurationActionURL.setParameter("backURL", redirect);
 				>
 					<liferay-ui:section>
 						<liferay-ui:message key="displayed-content-must-contain-the-following-tags" />
-				
+
 						<br /><br />
-				
+
 						<liferay-ui:tags-selector
 							hiddenInput="entries"
 							curTags="<%= StringUtil.merge(entries) %>"
 							focus="<%= false %>"
 						/>
-				
+
 						<br />
-				
+
 						<liferay-ui:message key="displayed-content-must-not-contain-the-following-tags" />
-				
+
 						<br /><br />
-				
+
 						<liferay-ui:tags-selector
 							hiddenInput="notEntries"
 							curTags="<%= StringUtil.merge(notEntries) %>"
 							focus="<%= false %>"
 						/>
-				
+
 						<br />
-				
+
 						<table class="liferay-table">
 						<tr>
 							<td>
@@ -295,17 +295,17 @@ configurationActionURL.setParameter("backURL", redirect);
 						<%@ include file="/html/portlet/tagged_content/display_settings.jsp" %>
 					</liferay-ui:section>
 				</liferay-ui:tabs>
-				
+
 				<br />
-		
+
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 			</c:when>
-		</c:choose>		
+		</c:choose>
 	</c:when>
 	<c:when test="<%= typeSelection.equals(BlogsEntry.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= BlogsEntry.class.getName() %>" />
-		
-		<liferay-ui:message key="select" />: <liferay-ui:message key="<%= "model.resource." + BlogsEntry.class.getName() %>" />
+
+		<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + BlogsEntry.class.getName() %>' />
 
 		<br /><br />
 
@@ -313,35 +313,35 @@ configurationActionURL.setParameter("backURL", redirect);
 	</c:when>
 	<c:when test="<%= typeSelection.equals(BookmarksEntry.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= BookmarksEntry.class.getName() %>" />
-		
-		<liferay-ui:message key="select" />: <liferay-ui:message key="<%= "model.resource." + BookmarksEntry.class.getName() %>" />
+
+		<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + BookmarksEntry.class.getName() %>' />
 
 		<br /><br />
 
-		<%@ include file="/html/portlet/tagged_content/select_bookmark_entry.jspf" %>
+		<%@ include file="/html/portlet/tagged_content/select_bookmarks_entry.jspf" %>
 	</c:when>
 	<c:when test="<%= typeSelection.equals(DLFileEntry.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= DLFileEntry.class.getName() %>" />
-		
-		<liferay-ui:message key="select" />: <liferay-ui:message key="<%= "model.resource." + DLFileEntry.class.getName() %>" />
+
+		<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + DLFileEntry.class.getName() %>' />
 
 		<br /><br />
 
-		<%@ include file="/html/portlet/tagged_content/select_dl_file_entry.jspf" %>
+		<%@ include file="/html/portlet/tagged_content/select_document_library_file_entry.jspf" %>
 	</c:when>
 	<c:when test="<%= typeSelection.equals(IGImage.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= IGImage.class.getName() %>" />
-		
-		<liferay-ui:message key="select" />: <liferay-ui:message key="<%= "model.resource." + IGImage.class.getName() %>" />
+
+		<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + IGImage.class.getName() %>' />
 
 		<br /><br />
 
-		<%@ include file="/html/portlet/tagged_content/select_ig_image_entry.jspf" %>
+		<%@ include file="/html/portlet/tagged_content/select_image_gallery_image_entry.jspf" %>
 	</c:when>
 	<c:when test="<%= typeSelection.equals(JournalArticle.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= JournalArticle.class.getName() %>" />
-		
-		<liferay-ui:message key="select" />: <liferay-ui:message key="<%= "model.resource." + JournalArticle.class.getName() %>" />
+
+		<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + JournalArticle.class.getName() %>' />
 
 		<br /><br />
 
@@ -349,11 +349,11 @@ configurationActionURL.setParameter("backURL", redirect);
 	</c:when>
 	<c:when test="<%= typeSelection.equals(WikiPage.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= WikiPage.class.getName() %>" />
-		
-		<liferay-ui:message key="select" />: <liferay-ui:message key="<%= "model.resource." + WikiPage.class.getName() %>" />
+
+		<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + WikiPage.class.getName() %>' />
 
 		<br /><br />
-		
+
 		<%@ include file="/html/portlet/tagged_content/select_wiki_page.jspf" %>
 	</c:when>
 </c:choose>

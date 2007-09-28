@@ -48,10 +48,11 @@ long[] folderIdsArray = StringUtil.split(folderIds, 0L);
 String keywords = ParamUtil.getString(request, "keywords");
 
 PortletURL portletURL = renderResponse.createRenderURL();
+
 portletURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-portletURL.setParameter("portletResource", portletResource);
-portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("backURL", redirect);
+portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
 portletURL.setParameter("assetParentId", String.valueOf(folderId));
 %>
@@ -68,53 +69,59 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 </c:if>
 
 <div>
-		<label for="<portlet:namespace />keywords"><liferay-ui:message key="search" /></label>
+	<label for="<portlet:namespace />keywords"><liferay-ui:message key="search" /></label>
 
-		<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
+	<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" onkeypress="if (event.keyCode == 13) { submitForm(document.<portlet:namespace />fm, '<%= portletURL.toString() %>'); }" />
 
-		<input type="button" value="<liferay-ui:message key="search-entries" />" onclick="submitForm(document.<portlet:namespace />fm, '<%= portletURL.toString() %>')" />
+	<input type="button" value="<liferay-ui:message key="search-entries" />" onclick="submitForm(document.<portlet:namespace />fm, '<%= portletURL.toString() %>')" />
 </div>
+
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
+	</script>
+</c:if>
 
 <div class="separator"><!-- --></div>
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(keywords) %>">
+
 		<%
 		List headerNames = new ArrayList();
-		
-		headerNames.add("#");
+
 		headerNames.add("folder");
 		headerNames.add("document");
 		headerNames.add("score");
-		
+
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
-		
+
 		Hits hits = null;
-		
+
 		try {
 			hits = DLFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords);
-		
+
 			Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 			int total = hits.getLength();
-		
+
 			searchContainer.setTotal(total);
-		
+
 			List resultRows = searchContainer.getResultRows();
-		
+
 			for (int i = 0; i < results.getLength(); i++) {
 				com.liferay.portal.kernel.search.Document doc = results.doc(i);
-		
+
 				ResultRow row = new ResultRow(doc, i, i);
-		
+
 				long entryFolderId = GetterUtil.getLong(doc.get("repositoryId"));
 				String fileName = doc.get("path");
-		
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(entryFolderId, fileName);		
+
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(entryFolderId, fileName);
 
 				TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-				
+
 				StringMaker sm = new StringMaker();
-				
+
 				sm.append("javascript: ");
 				sm.append(renderResponse.getNamespace());
 				sm.append("selectAsset('");
@@ -122,30 +129,26 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 				sm.append("', '");
 				sm.append(asset.getAssetId());
 				sm.append("', '");
-				sm.append(assetOrder);
-				sm.append("', '");
 				sm.append(asset.getTitle());
+				sm.append("', '");
+				sm.append(assetOrder);
 				sm.append("');");
-		
+
 				String rowHREF = sm.toString();
-		
-				// Position
-		
-				row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
-		
+
 				// Folder and document
-		
+
 				DLFolder entryFolder = DLFolderLocalServiceUtil.getFolder(entryFolderId);
-		
+
 				row.addText(entryFolder.getName(), rowHREF);
 				row.addText(fileEntry.getTitle(), rowHREF);
-		
+
 				// Score
-		
+
 				row.addScore(results.score(i));
-				
+
 				// Add result row
-		
+
 				resultRows.add(row);
 			}
 		}
@@ -159,121 +162,124 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-	
+
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
+		<br />
 	</c:when>
 	<c:otherwise>
+
 		<%
 		List headerNames = new ArrayList();
-		
+
 		headerNames.add("folder");
 		headerNames.add("num-of-folders");
 		headerNames.add("num-of-documents");
-		
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
-		
+
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-folders");
+
 		int total = DLFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), folderId);
-		
+
 		searchContainer.setTotal(total);
-		
+
 		List results = DLFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), folderId, searchContainer.getStart(), searchContainer.getEnd());
-		
+
 		searchContainer.setResults(results);
-		
+
 		List resultRows = searchContainer.getResultRows();
-		
+
 		for (int i = 0; i < results.size(); i++) {
 			DLFolder curFolder = (DLFolder)results.get(i);
-		
+
 			ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
-		
+
 			PortletURL rowURL = renderResponse.createRenderURL();
-			
+
 			rowURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-			rowURL.setParameter("portletResource", portletResource);
-			rowURL.setParameter("backURL", redirect);
 			rowURL.setParameter("redirect", redirect);
+			rowURL.setParameter("backURL", redirect);
+			rowURL.setParameter("portletResource", portletResource);
 			rowURL.setParameter("typeSelection", DLFileEntry.class.getName());
 			rowURL.setParameter("assetParentId", String.valueOf(curFolder.getFolderId()));
-		
+
 			// Name
-		
+
 			StringMaker sm = new StringMaker();
-		
+
 			sm.append("<img align=\"left\" border=\"0\" src=\"");
 			sm.append(themeDisplay.getPathThemeImages());
 			sm.append("/common/folder.png\">");
 			sm.append("<b>");
 			sm.append(curFolder.getName());
 			sm.append("</b>");
-		
+
 			if (Validator.isNotNull(curFolder.getDescription())) {
 				sm.append("<br />");
 				sm.append("<span style=\"font-size: xx-small;\">");
 				sm.append(curFolder.getDescription());
 				sm.append("</span>");
 			}
-		
+
 			row.addText(sm.toString(), rowURL);
-		
+
 			// Statistics
-		
+
 			List subfolderIds = new ArrayList();
-		
+
 			subfolderIds.add(new Long(curFolder.getFolderId()));
-		
+
 			DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId.longValue(), curFolder.getFolderId());
-		
+
 			int foldersCount = subfolderIds.size() - 1;
 			int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(subfolderIds);
-		
+
 			row.addText(String.valueOf(foldersCount), rowURL);
 			row.addText(String.valueOf(fileEntriesCount), rowURL);
-		
+
 			// Add result row
-		
+
 			resultRows.add(row);
 		}
 		%>
-		
+
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		
+
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-		
+
 		<br />
-		
+
 		<c:if test="<%= folder != null %>">
 			<liferay-ui:tabs names="documents" />
-		
+
 			<%
 			headerNames.clear();
-		
+
 			headerNames.add("document");
 			headerNames.add("size");
 			headerNames.add("downloads");
 			headerNames.add("locked");
-		
-			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
-		
+
+			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-documents");
+
 			total = DLFileEntryLocalServiceUtil.getFileEntriesCount(folder.getFolderId());
-		
+
 			searchContainer.setTotal(total);
-		
+
 			results = DLFileEntryLocalServiceUtil.getFileEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
-		
+
 			searchContainer.setResults(results);
-		
+
 			resultRows = searchContainer.getResultRows();
-		
+
 			for (int i = 0; i < results.size(); i++) {
 				DLFileEntry fileEntry = (DLFileEntry)results.get(i);
-		
+
 				ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
-		
+
 				TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-				
+
 				StringMaker sm = new StringMaker();
-				
+
 				sm.append("javascript: ");
 				sm.append(renderResponse.getNamespace());
 				sm.append("selectAsset('");
@@ -281,80 +287,74 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 				sm.append("', '");
 				sm.append(asset.getAssetId());
 				sm.append("', '");
-				sm.append(assetOrder);
-				sm.append("', '");
 				sm.append(asset.getTitle());
+				sm.append("', '");
+				sm.append(assetOrder);
 				sm.append("');");
-		
+
 				String rowHREF = sm.toString();
-		
+
 				// Title and description
-		
+
 				sm = new StringMaker();
-		
+
 				sm.append("<img align=\"left\" border=\"0\" src=\"");
 				sm.append(themeDisplay.getPathThemeImages());
 				sm.append("/document_library/");
 				sm.append(DLUtil.getFileExtension(fileEntry.getName()));
 				sm.append(".png\">");
 				sm.append(fileEntry.getTitle());
-		
+
 				if (Validator.isNotNull(fileEntry.getDescription())) {
 					sm.append("<br />");
 					sm.append("<span style=\"font-size: xx-small;\">");
 					sm.append(fileEntry.getDescription());
 					sm.append("</span>");
 				}
-		
+
 				row.addText(sm.toString(), rowHREF);
-		
+
 				// Statistics
-		
+
 				row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
 				row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
-		
+
 				// Locked
-		
+
 				boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
-		
+
 				row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
-		
+
 				// Add result row
-		
+
 				resultRows.add(row);
 			}
 			%>
-		
+
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		
+
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
+			<br />
 		</c:if>
 	</c:otherwise>
 </c:choose>
-			
-<br />
 
 <%!
-public static String getBreadcrumbs(DLFolder folder, DLFileEntry fileEntry, PageContext pageContext, RenderRequest req, RenderResponse res, String portletResource, String redirect)
-	throws Exception {
-
+public static String getBreadcrumbs(DLFolder folder, DLFileEntry fileEntry, PageContext pageContext, RenderRequest req, RenderResponse res, String portletResource, String redirect) throws Exception {
 	if ((fileEntry != null) && (folder == null)) {
 		folder = fileEntry.getFolder();
 	}
 
 	PortletURL foldersURL = res.createRenderURL();
 
-	WindowState windowState = req.getWindowState();
-
 	foldersURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-	foldersURL.setParameter("portletResource", portletResource);
-	foldersURL.setParameter("backURL", redirect);
 	foldersURL.setParameter("redirect", redirect);
+	foldersURL.setParameter("backURL", redirect);
+	foldersURL.setParameter("portletResource", portletResource);
 	foldersURL.setParameter("typeSelection", DLFileEntry.class.getName());
 
-	String foldersLink =
-		"<a href=\"" + foldersURL.toString() + "\">" +
-			LanguageUtil.get(pageContext, "folders") + "</a>";
+	String foldersLink = "<a href=\"" + foldersURL.toString() + "\">" + LanguageUtil.get(pageContext, "folders") + "</a>";
 
 	if (folder == null) {
 		return foldersLink;
@@ -366,17 +366,14 @@ public static String getBreadcrumbs(DLFolder folder, DLFileEntry fileEntry, Page
 		for (int i = 0;; i++) {
 			PortletURL portletURL = res.createRenderURL();
 
-			portletURL.setWindowState(windowState);
 			portletURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-			portletURL.setParameter("portletResource", portletResource);
-			portletURL.setParameter("backURL", redirect);
 			portletURL.setParameter("redirect", redirect);
+			portletURL.setParameter("backURL", redirect);
+			portletURL.setParameter("portletResource", portletResource);
 			portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
 			portletURL.setParameter("assetParentId", String.valueOf(folder.getFolderId()));
 
-			String folderLink =
-				"<a href=\"" + portletURL.toString() + "\">" +
-					folder.getName() + "</a>";
+			String folderLink = "<a href=\"" + portletURL.toString() + "\">" + folder.getName() + "</a>";
 
 			if (i == 0) {
 				breadcrumbs = folderLink;
@@ -389,8 +386,7 @@ public static String getBreadcrumbs(DLFolder folder, DLFileEntry fileEntry, Page
 				break;
 			}
 
-			folder = DLFolderLocalServiceUtil.getFolder(
-				folder.getParentFolderId());
+			folder = DLFolderLocalServiceUtil.getFolder(folder.getParentFolderId());
 		}
 	}
 
@@ -398,5 +394,4 @@ public static String getBreadcrumbs(DLFolder folder, DLFileEntry fileEntry, Page
 
 	return breadcrumbs;
 }
-
 %>

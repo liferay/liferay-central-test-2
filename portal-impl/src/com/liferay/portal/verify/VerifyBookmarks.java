@@ -22,21 +22,19 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.dao.hibernate.DynamicQueryInitializerImpl;
 
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
@@ -54,57 +52,55 @@ public class VerifyBookmarks extends VerifyProcess {
 		_log.info("Verifying integrity");
 
 		try {
-			_verifyBookmarks();
+			verifyBookmarks();
 		}
 		catch (Exception e) {
 			throw new VerifyException(e);
 		}
 	}
 
-	private void _verifyBookmarks() throws Exception {
+	protected void verifyBookmarks() throws Exception {
+		long classNameId = PortalUtil.getClassNameId(
+			BookmarksEntry.class.getName());
 
-		long classNameId = 
-			ClassNameLocalServiceUtil.getClassName(
-					BookmarksEntry.class.getName()).getClassNameId();
+		DetachedCriteria entriesWithTagsAssets = DetachedCriteria.forClass(
+			TagsAssetImpl.class, "tagsAsset");
 
-		DetachedCriteria existingTagsAssetEntriesIds = 
-			DetachedCriteria.forClass(TagsAssetImpl.class, "ta")
-				.add(Property.forName(
-						"ta.classNameId").eq(new Long(classNameId)))
-				.setProjection(Property.forName("ta.classPK"));
+		entriesWithTagsAssets = entriesWithTagsAssets.add(
+			Property.forName("tagsAsset.classNameId").eq(
+				new Long(classNameId)));
 
-		DetachedCriteria entriesWithMissingTagsAssets = 
-			DetachedCriteria.forClass(BookmarksEntryImpl.class, "bm")
-			.add(Restrictions.not(
-					Subqueries.propertyIn(
-							"bm.entryId", existingTagsAssetEntriesIds)));
+		entriesWithTagsAssets = entriesWithTagsAssets.setProjection(
+			Property.forName("tagsAsset.classPK"));
 
-		DynamicQueryInitializer dqi = 
-			new DynamicQueryInitializerImpl(entriesWithMissingTagsAssets);
+		DetachedCriteria entriesWithoutTagsAssets = DetachedCriteria.forClass(
+			BookmarksEntryImpl.class, "bookmarksEntry");
 
-		try {
-			List entries = BookmarksEntryLocalServiceUtil.dynamicQuery(dqi);
+		entriesWithoutTagsAssets = entriesWithoutTagsAssets.add(
+			Restrictions.not(
+				Subqueries.propertyIn(
+					"bookmarksEntry.entryId", entriesWithTagsAssets)));
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Processing " + entries.size() + " entries");
-			}
+		DynamicQueryInitializer dqi = new DynamicQueryInitializerImpl(
+			entriesWithoutTagsAssets);
 
-			for (int i = 0; i < entries.size(); i++) {
-				BookmarksEntry entry = (BookmarksEntry)entries.get(i);
+		List entries = BookmarksEntryLocalServiceUtil.dynamicQuery(dqi);
 
-				TagsAssetLocalServiceUtil.updateAsset(
-						entry.getUserId(), BookmarksEntry.class.getName(),
-						entry.getEntryId(), new String[0], null, null, null, null,
-						ContentTypes.TEXT_PLAIN, entry.getName(), entry.getComments(),
-						entry.getComments(), entry.getUrl(), 0, 0);
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Processing " + entries.size() +
+					" entries with no tags assets");
 		}
-		catch (SystemException se) {
-			_log.error(se);
+
+		for (int i = 0; i < entries.size(); i++) {
+			BookmarksEntry entry = (BookmarksEntry)entries.get(i);
+
+			BookmarksEntryLocalServiceUtil.updateTagsAsset(
+				entry, new String[0]);
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("TagsAssets verified for Bookmarks entries");
+			_log.debug("Tags assets verified for entries");
 		}
 	}
 

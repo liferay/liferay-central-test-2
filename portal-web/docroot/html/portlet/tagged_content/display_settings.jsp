@@ -34,7 +34,8 @@
 		</select>
 	</td>
 </tr>
-<c:if test="<%= selectionStyle.equals("dynamic") %>">
+
+<c:if test='<%= selectionStyle.equals("dynamic") %>'>
 	<tr>
 		<td>
 			<liferay-ui:message key="show-query-logic" />
@@ -44,6 +45,7 @@
 		</td>
 	</tr>
 </c:if>
+
 <tr>
 	<td>
 		<liferay-ui:message key="show-available-locales" />

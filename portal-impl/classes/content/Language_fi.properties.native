@@ -2788,6 +2788,7 @@ wsrp-your-service-url-or-endpoints-are-unreachable=Palvelun URL tai endpoint ei 
 x-disables-the-minimum-order-requirement={0} kytkee pois minimitilauksen vaatimuksen.
 x-is-a-required-system-role=<b>{0}</b> on pakollinen järjestelmä rooli.
 x-is-expired,-is-not-approved,-does-not-have-any-content,-or-no-longer-exists={0} on vanhentunut, ei ole hyväksytty, ei ole sisältöä tai sitä ei ole olemassa enään.
+x-is-not-a-display-type={0} is not a display type.
 x-users-were-successfully-notified={0} käyttäjää tiedotettiin onnistuneesti.
 xml-feeds=XML lähteet
 xml-url=XML URL

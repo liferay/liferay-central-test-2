@@ -268,4 +268,13 @@ public class BlogsEntryLocalServiceUtil {
 			title, content, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, tagsEntries);
 	}
+
+	public static void updateTagsAsset(
+		com.liferay.portlet.blogs.model.BlogsEntry entry,
+		java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+		blogsEntryLocalService.updateTagsAsset(entry, tagsEntries);
+	}
 }

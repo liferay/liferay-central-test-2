@@ -2124,6 +2124,7 @@ wsrp-your-service-url-or-endpoints-are-unreachable=Your service URL or endpoints
 x-disables-the-minimum-order-requirement={0} باعث حذف حداقل مورد نياز می شود
 x-is-a-required-system-role=<b>{0}</b> is a required system role.
 x-is-expired,-is-not-approved,-does-not-have-any-content,-or-no-longer-exists={0} is expired, is not approved, does not have any content, or no longer exists.
+x-is-not-a-display-type={0} is not a display type.
 x-users-were-successfully-notified={0} users were successfully notified.
 xml-feeds=XML Feeds
 xsd=XML Schema Definition

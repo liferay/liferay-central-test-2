@@ -22,96 +22,88 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
-import com.liferay.portal.util.MimeTypesUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.dao.hibernate.DynamicQueryInitializerImpl;
 
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Subqueries;
 
 /**
- * <a href="VerifyDL.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyDocumentLibrary.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
  */
-public class VerifyDL extends VerifyProcess {
+public class VerifyDocumentLibrary extends VerifyProcess {
 
 	public void verify() throws VerifyException {
 		_log.info("Verifying integrity");
 
 		try {
-			_verifyDL();
+			verifyDocumentLibrary();
 		}
 		catch (Exception e) {
 			throw new VerifyException(e);
 		}
 	}
 
-	private void _verifyDL() throws Exception {
+	protected void verifyDocumentLibrary() throws Exception {
+		long classNameId = PortalUtil.getClassNameId(
+			DLFileEntry.class.getName());
 
-		long classNameId = 
-			ClassNameLocalServiceUtil.getClassName(
-					DLFileEntry.class.getName()).getClassNameId();
+		DetachedCriteria entriesWithTagsAssets = DetachedCriteria.forClass(
+			TagsAssetImpl.class, "tagsAsset");
 
-		DetachedCriteria existingTagsAssetEntriesIds = 
-			DetachedCriteria.forClass(TagsAssetImpl.class, "ta")
-				.add(Property.forName(
-						"ta.classNameId").eq(new Long(classNameId)))
-				.setProjection(Property.forName("ta.classPK"));
+		entriesWithTagsAssets = entriesWithTagsAssets.add(
+			Property.forName("tagsAsset.classNameId").eq(
+				new Long(classNameId)));
 
-		DetachedCriteria entriesWithMissingTagsAssets = 
-			DetachedCriteria.forClass(DLFileEntryImpl.class, "fe")
-			.add(Restrictions.not(
-					Subqueries.propertyIn(
-							"fe.fileEntryId", existingTagsAssetEntriesIds)));
+		entriesWithTagsAssets = entriesWithTagsAssets.setProjection(
+			Property.forName("tagsAsset.classPK"));
 
-		DynamicQueryInitializer dqi = 
-			new DynamicQueryInitializerImpl(entriesWithMissingTagsAssets);
+		DetachedCriteria entriesWithoutTagsAssets = DetachedCriteria.forClass(
+			DLFileEntryImpl.class, "dlFileEntry");
 
-		try {
-			List entries = DLFileEntryLocalServiceUtil.dynamicQuery(dqi);
+		entriesWithoutTagsAssets = entriesWithoutTagsAssets.add(
+			Restrictions.not(
+				Subqueries.propertyIn(
+					"dlFileEntry.fileEntryId", entriesWithTagsAssets)));
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Processing " + entries.size() + " entries");
-			}
+		DynamicQueryInitializer dqi = new DynamicQueryInitializerImpl(
+			entriesWithoutTagsAssets);
 
-			for (int i = 0; i < entries.size(); i++) {
-				DLFileEntry fileEntry = (DLFileEntry)entries.get(i);
+		List fileEntries = DLFileEntryLocalServiceUtil.dynamicQuery(dqi);
 
-				String mimeType = 
-					MimeTypesUtil.getContentType(fileEntry.getName());
-
-				TagsAssetLocalServiceUtil.updateAsset(
-					fileEntry.getUserId(), DLFileEntry.class.getName(),
-					fileEntry.getFileEntryId(), new String[0], null, null, null, 
-					null, mimeType, fileEntry.getTitle(), 
-					fileEntry.getDescription(), fileEntry.getDescription(), 
-					null, 0, 0);
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Processing " + fileEntries.size() +
+					" file entries with no tags assets");
 		}
-		catch (SystemException se) {			
-			_log.error(se);
+
+		for (int i = 0; i < fileEntries.size(); i++) {
+			DLFileEntry fileEntry = (DLFileEntry)fileEntries.get(i);
+
+			DLFileEntryLocalServiceUtil.updateTagsAsset(
+				fileEntry, new String[0]);
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("TagsAssets verified for DL File entries");
+			_log.debug("Tags assets verified for file entries");
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyDL.class);
+	private static Log _log = LogFactory.getLog(VerifyDocumentLibrary.class);
 
 }

@@ -57,7 +57,7 @@ if (curTagsParam != null) {
 	<td>
 		<input id="<%= randomNamespace %>tags" size="30" type="text" />
 
-		<input id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
+		<input disabled id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
 
 		<liferay-ui:message key="or" />
 
@@ -85,6 +85,19 @@ if (curTagsParam != null) {
                     addTagButton: "<%= randomNamespace %>addTag",
 					selectTagButton: '<%= randomNamespace %>selectTag'
                 }
+			);
+
+			jQuery("#<%= randomNamespace %>tags").keyup(
+				function() {
+					var addTagInput = jQuery("#<%= randomNamespace %>addTag");
+
+					if (this.value != "") {
+						addTagInput.attr("disabled", false);
+					}
+					else {
+						addTagInput.attr("disabled", true);
+					}
+				}
 			);
 		}
 	);

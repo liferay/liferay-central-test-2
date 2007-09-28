@@ -30,17 +30,16 @@ ArticleSearch searchContainer = (ArticleSearch)request.getAttribute("liferay-ui:
 ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDisplayTerms();
 
 String redirect = ParamUtil.getString(request, "backURL");
+
 redirect = ParamUtil.getString(request, "redirect");
 
-long groupId = ParamUtil.getLong(request, "groupId");
-
 PortletURL portletURL = renderResponse.createRenderURL();
+
 portletURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-portletURL.setParameter("portletResource", portletResource);
-portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("backURL", redirect);
+portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", JournalArticle.class.getName());
-portletURL.setParameter("groupId", String.valueOf(groupId));
 %>
 
 <liferay-ui:search-toggle
@@ -164,3 +163,10 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 <div>
 	<input type="button" value="<liferay-ui:message key="search-articles" />" onclick="submitForm(document.<portlet:namespace />fm, '<%= portletURL.toString() %>')" />
 </div>
+
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.ARTICLE_ID %>);
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
+	</script>
+</c:if>

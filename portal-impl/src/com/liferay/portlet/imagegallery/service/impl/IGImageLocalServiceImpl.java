@@ -147,7 +147,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Tags
 
-			updateAsset(image, tagsEntries);
+			updateTagsAsset(image, tagsEntries);
 
 			return image;
 		}
@@ -352,13 +352,26 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Tags
 
-			updateAsset(image, tagsEntries);
+			updateTagsAsset(image, tagsEntries);
 
 			return image;
 		}
 		catch (IOException ioe) {
 			throw new ImageSizeException(ioe);
 		}
+	}
+
+	public void updateTagsAsset(IGImage image, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		Image largeImage = ImageLocalUtil.getImage(image.getLargeImageId());
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			image.getUserId(), IGImage.class.getName(), image.getImageId(),
+			tagsEntries, null, null, null, null, largeImage.getType(),
+			image.getDescription(), image.getDescription(),
+			image.getDescription(), null, largeImage.getHeight(),
+			largeImage.getWidth());
 	}
 
 	protected IGFolder getFolder(IGImage image, long folderId)
@@ -421,19 +434,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
-	}
-
-	protected void updateAsset(IGImage image, String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		Image largeImage = ImageLocalUtil.getImage(image.getLargeImageId());
-
-		TagsAssetLocalServiceUtil.updateAsset(
-			image.getUserId(), IGImage.class.getName(), image.getImageId(),
-			tagsEntries, null, null, null, null, largeImage.getType(),
-			image.getDescription(), image.getDescription(),
-			image.getDescription(), null, largeImage.getHeight(),
-			largeImage.getWidth());
 	}
 
 	protected void validate(File file, byte[] bytes)

@@ -126,30 +126,37 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 %>
 
 <c:choose>
-	<c:when test="<%= selectionStyle.equals("dynamic") %>">
-		<%		
+	<c:when test='<%= selectionStyle.equals("dynamic") %>'>
+
+		<%
 		long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), entries);
 		long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
-		
+
 		Date now = new Date();
-		
+
 		int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, notEntryIds, andOperator, now, now);
-		
+
 		searchContainer.setTotal(total);
-		
+
 		List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, now, now, searchContainer.getStart(), searchContainer.getEnd());
-		
+
 		searchContainer.setResults(results);
-		
+		%>
+
+		<c:if test="<%= results.size() > 0 %>">
+			<br />
+		</c:if>
+
+		<%
 		for (int i = 0; i < results.size(); i++) {
 			TagsAsset asset = (TagsAsset)results.get(i);
-		
+
 			String className = PortalUtil.getClassName(asset.getClassNameId());
 			long classPK = asset.getClassPK();
-		
+
 			try {
 		%>
-		
+
 				<div>
 					<c:choose>
 						<c:when test='<%= displayStyle.equals("full-content") %>'>
@@ -159,61 +166,69 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 							<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
 						</c:when>
 						<c:otherwise>
-							<%= displayStyle %> is not a display type.
+							<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
 						</c:otherwise>
 					</c:choose>
-		
+
 					<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
 				</div>
-		
+
 		<%
 			}
 			catch (Exception e) {
 				_log.error(e.getMessage());
 			}
 		%>
-		
+
 			<c:if test="<%= (i + 1) < results.size() %>">
 				<div class="separator"><!-- --></div>
 			</c:if>
-		
+
 		<%
 		}
 		%>
+
 	</c:when>
-	<c:when test="<%= selectionStyle.equals("manual") %>">
+	<c:when test='<%= selectionStyle.equals("manual") %>'>
+
 		<%
 		int total = manualEntries.length;
-		
-		searchContainer.setTotal(total);
-		
-		List results = ListUtil.fromArray(manualEntries);
-		
-		int end = manualEntries.length < searchContainer.getEnd()?manualEntries.length:searchContainer.getEnd();
-		
-		results = results.subList(searchContainer.getStart(), end);
-		
-		searchContainer.setResults(results);
 
+		searchContainer.setTotal(total);
+
+		List results = ListUtil.fromArray(manualEntries);
+
+		int end = (manualEntries.length < searchContainer.getEnd()) ? manualEntries.length : searchContainer.getEnd();
+
+		results = results.subList(searchContainer.getStart(), end);
+
+		searchContainer.setResults(results);
+		%>
+
+		<c:if test="<%= results.size() > 0 %>">
+			<br />
+		</c:if>
+
+		<%
 		for (int i = 0; i < results.size(); i++) {
 			String assetEntry = (String)results.get(i);
-			
+
 			SAXReader reader = new SAXReader();
 
 			Document assetDoc = reader.read(new StringReader(assetEntry));
 
 			Element root = assetDoc.getRootElement();
-			
+
 			long assetId = GetterUtil.getLong(root.element("asset-id").getText());
 
 			TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(assetId);
-			
+
 			String className = PortalUtil.getClassName(asset.getClassNameId());
 			long classPK = asset.getClassPK();
 
 			try {
 		%>
-		
+
 				<div>
 					<c:choose>
 						<c:when test='<%= displayStyle.equals("full-content") %>'>
@@ -223,27 +238,28 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 							<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
 						</c:when>
 						<c:otherwise>
-							<%= displayStyle %> is not a display type.
+							<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
 						</c:otherwise>
 					</c:choose>
-		
+
 					<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
 				</div>
-		
+
 		<%
 			}
 			catch (Exception e) {
 				_log.error(e.getMessage());
 			}
 		%>
-		
+
 			<c:if test="<%= (i + 1) < results.size() %>">
 				<div class="separator"><!-- --></div>
 			</c:if>
-		
+
 		<%
 		}
 		%>
+
 	</c:when>
 </c:choose>
 

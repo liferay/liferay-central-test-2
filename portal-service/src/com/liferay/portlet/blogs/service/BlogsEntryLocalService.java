@@ -164,4 +164,10 @@ public interface BlogsEntryLocalService {
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public void updateTagsAsset(
+		com.liferay.portlet.blogs.model.BlogsEntry entry,
+		java.lang.String[] tagsEntries)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

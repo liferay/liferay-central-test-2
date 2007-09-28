@@ -38,8 +38,8 @@ public class VerifyProcessSuite extends VerifyProcess {
 
 		verify(new VerifyBlogs());
 		verify(new VerifyBookmarks());
-		verify(new VerifyDL());
-		verify(new VerifyIG());
+		verify(new VerifyDocumentLibrary());
+		verify(new VerifyImageGallery());
 		verify(new VerifyJournal());
 	}
 

@@ -294,7 +294,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Tags
 
-		updateAsset(article, tagsEntries);
+		updateTagsAsset(article, tagsEntries);
 
 		// Email
 
@@ -1352,7 +1352,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Tags
 
-		updateAsset(article, tagsEntries);
+		updateTagsAsset(article, tagsEntries);
 
 		// Email
 
@@ -1391,6 +1391,17 @@ public class JournalArticleLocalServiceImpl
 		JournalArticleUtil.update(article);
 
 		return article;
+	}
+
+	public void updateTagsAsset(JournalArticle article, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			article.getUserId(), JournalArticle.class.getName(),
+			article.getResourcePrimKey(), tagsEntries, null, null,
+			article.getDisplayDate(), article.getExpirationDate(),
+			ContentTypes.TEXT_HTML, article.getTitle(),
+			article.getDescription(), article.getDescription(), null, 0, 0);
 	}
 
 	protected String format(
@@ -1743,17 +1754,6 @@ public class JournalArticleLocalServiceImpl
 		catch (PortalException pe) {
 			throw pe;
 		}
-	}
-
-	protected void updateAsset(JournalArticle article, String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		TagsAssetLocalServiceUtil.updateAsset(
-			article.getUserId(), JournalArticle.class.getName(),
-			article.getResourcePrimKey(), tagsEntries, null, null,
-			article.getDisplayDate(), article.getExpirationDate(),
-			ContentTypes.TEXT_HTML, article.getTitle(),
-			article.getDescription(), article.getDescription(), null, 0, 0);
 	}
 
 	protected void validate(

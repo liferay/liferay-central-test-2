@@ -37,10 +37,11 @@ if (folderId > 0) {
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
+
 portletURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-portletURL.setParameter("portletResource", portletResource);
-portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("backURL", redirect);
+portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", BookmarksEntry.class.getName());
 portletURL.setParameter("assetParentId", String.valueOf(folderId));
 %>
@@ -60,7 +61,7 @@ headerNames.add("folder");
 headerNames.add("num-of-folders");
 headerNames.add("num-of-entries");
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-folders");
 
 int total = BookmarksFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), folderId);
 
@@ -80,9 +81,9 @@ for (int i = 0; i < results.size(); i++) {
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	rowURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-	rowURL.setParameter("portletResource", portletResource);
-	rowURL.setParameter("backURL", redirect);
 	rowURL.setParameter("redirect", redirect);
+	rowURL.setParameter("backURL", redirect);
+	rowURL.setParameter("portletResource", portletResource);
 	rowURL.setParameter("typeSelection", BookmarksEntry.class.getName());
 	rowURL.setParameter("assetParentId", String.valueOf(curFolder.getFolderId()));
 
@@ -143,7 +144,7 @@ for (int i = 0; i < results.size(); i++) {
 	headerNames.add("visits");
 	headerNames.add("modified-date");
 
-	searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+	searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-entries");
 
 	total = BookmarksEntryLocalServiceUtil.getEntriesCount(folder.getFolderId());
 
@@ -161,9 +162,9 @@ for (int i = 0; i < results.size(); i++) {
 		ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
 		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BookmarksEntry.class.getName(), entry.getEntryId());
-		
+
 		StringMaker sm = new StringMaker();
-		
+
 		sm.append("javascript: ");
 		sm.append(renderResponse.getNamespace());
 		sm.append("selectAsset('");
@@ -171,9 +172,9 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append("', '");
 		sm.append(asset.getAssetId());
 		sm.append("', '");
-		sm.append(assetOrder);
-		sm.append("', '");
 		sm.append(asset.getTitle());
+		sm.append("', '");
+		sm.append(assetOrder);
 		sm.append("');");
 
 		String rowHREF = sm.toString();
@@ -183,7 +184,6 @@ for (int i = 0; i < results.size(); i++) {
 		// Name
 
 		row.addText(rowTextEntry);
-		//row.addText(rowTextEntry, rowHREF);
 
 		// URL
 
@@ -223,26 +223,20 @@ for (int i = 0; i < results.size(); i++) {
 </c:if>
 
 <%!
-public static String getBreadcrumbs(BookmarksFolder folder, BookmarksEntry entry, PageContext pageContext, RenderRequest req, RenderResponse res, String portletResource, String redirect)
-	throws Exception {
-
+public static String getBreadcrumbs(BookmarksFolder folder, BookmarksEntry entry, PageContext pageContext, RenderRequest req, RenderResponse res, String portletResource, String redirect) throws Exception {
 	if ((entry != null) && (folder == null)) {
 		folder = entry.getFolder();
 	}
 
 	PortletURL foldersURL = res.createRenderURL();
 
-	WindowState windowState = req.getWindowState();
-
 	foldersURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-	foldersURL.setParameter("portletResource", portletResource);
-	foldersURL.setParameter("backURL", redirect);
 	foldersURL.setParameter("redirect", redirect);
+	foldersURL.setParameter("backURL", redirect);
+	foldersURL.setParameter("portletResource", portletResource);
 	foldersURL.setParameter("typeSelection", BookmarksEntry.class.getName());
 
-	String foldersLink =
-		"<a href=\"" + foldersURL.toString() + "\">" +
-			LanguageUtil.get(pageContext, "folders") + "</a>";
+	String foldersLink = "<a href=\"" + foldersURL.toString() + "\">" + LanguageUtil.get(pageContext, "folders") + "</a>";
 
 	if (folder == null) {
 		return foldersLink;
@@ -254,17 +248,14 @@ public static String getBreadcrumbs(BookmarksFolder folder, BookmarksEntry entry
 		for (int i = 0;; i++) {
 			PortletURL portletURL = res.createRenderURL();
 
-			portletURL.setWindowState(windowState);
 			portletURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-			portletURL.setParameter("portletResource", portletResource);
-			portletURL.setParameter("backURL", redirect);
 			portletURL.setParameter("redirect", redirect);
+			portletURL.setParameter("backURL", redirect);
+			portletURL.setParameter("portletResource", portletResource);
 			portletURL.setParameter("typeSelection", BookmarksEntry.class.getName());
 			portletURL.setParameter("assetParentId", String.valueOf(folder.getFolderId()));
 
-			String folderLink =
-				"<a href=\"" + portletURL.toString() + "\">" +
-					folder.getName() + "</a>";
+			String folderLink = "<a href=\"" + portletURL.toString() + "\">" + folder.getName() + "</a>";
 
 			if (i == 0) {
 				breadcrumbs = folderLink;
@@ -277,8 +268,7 @@ public static String getBreadcrumbs(BookmarksFolder folder, BookmarksEntry entry
 				break;
 			}
 
-			folder = BookmarksFolderLocalServiceUtil.getFolder(
-				folder.getParentFolderId());
+			folder = BookmarksFolderLocalServiceUtil.getFolder(folder.getParentFolderId());
 		}
 	}
 

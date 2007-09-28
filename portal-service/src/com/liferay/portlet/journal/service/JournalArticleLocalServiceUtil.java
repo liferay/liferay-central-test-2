@@ -743,4 +743,13 @@ public class JournalArticleLocalServiceUtil {
 		return journalArticleLocalService.updateContent(groupId, articleId,
 			version, content);
 	}
+
+	public static void updateTagsAsset(
+		com.liferay.portlet.journal.model.JournalArticle article,
+		java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+		journalArticleLocalService.updateTagsAsset(article, tagsEntries);
+	}
 }

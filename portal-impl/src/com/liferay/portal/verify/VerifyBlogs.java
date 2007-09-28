@@ -22,21 +22,19 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.dao.hibernate.DynamicQueryInitializerImpl;
 
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
@@ -54,57 +52,54 @@ public class VerifyBlogs extends VerifyProcess {
 		_log.info("Verifying integrity");
 
 		try {
-			_verifyBlogs();
+			verifyBlogs();
 		}
 		catch (Exception e) {
 			throw new VerifyException(e);
 		}
 	}
 
-	private void _verifyBlogs() throws Exception {
+	protected void verifyBlogs() throws Exception {
+		long classNameId = PortalUtil.getClassNameId(
+			BlogsEntry.class.getName());
 
-		long classNameId = 
-			ClassNameLocalServiceUtil.getClassName(
-					BlogsEntry.class.getName()).getClassNameId();
+		DetachedCriteria entriesWithTagsAssets = DetachedCriteria.forClass(
+			TagsAssetImpl.class, "tagsAsset");
 
-		DetachedCriteria existingTagsAssetEntriesIds = 
-			DetachedCriteria.forClass(TagsAssetImpl.class, "ta")
-				.add(Property.forName(
-						"ta.classNameId").eq(new Long(classNameId)))
-				.setProjection(Property.forName("ta.classPK"));
+		entriesWithTagsAssets = entriesWithTagsAssets.add(
+			Property.forName("tagsAsset.classNameId").eq(
+				new Long(classNameId)));
 
-		DetachedCriteria entriesWithMissingTagsAssets = 
-			DetachedCriteria.forClass(BlogsEntryImpl.class, "be")
-			.add(Restrictions.not(
-					Subqueries.propertyIn(
-							"be.entryId", existingTagsAssetEntriesIds)));
+		entriesWithTagsAssets = entriesWithTagsAssets.setProjection(
+			Property.forName("tagsAsset.classPK"));
 
-		DynamicQueryInitializer dqi = 
-			new DynamicQueryInitializerImpl(entriesWithMissingTagsAssets);
+		DetachedCriteria entriesWithoutTagsAssets = DetachedCriteria.forClass(
+			BlogsEntryImpl.class, "blogsEntry");
 
-		try {
-			List entries = BlogsEntryLocalServiceUtil.dynamicQuery(dqi);
+		entriesWithoutTagsAssets = entriesWithoutTagsAssets.add(
+			Restrictions.not(
+				Subqueries.propertyIn(
+					"blogsEntry.entryId", entriesWithTagsAssets)));
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Processing " + entries.size() + " entries");
-			}
+		DynamicQueryInitializer dqi = new DynamicQueryInitializerImpl(
+			entriesWithoutTagsAssets);
 
-			for (int i = 0; i < entries.size(); i++) {
-				BlogsEntry entry = (BlogsEntry)entries.get(i);
+		List entries = BlogsEntryLocalServiceUtil.dynamicQuery(dqi);
 
-				TagsAssetLocalServiceUtil.updateAsset(
-						entry.getUserId(), BlogsEntry.class.getName(),
-						entry.getEntryId(), new String[0], null, null, null, null,
-						ContentTypes.TEXT_HTML, entry.getTitle(), entry.getTitle(),
-						entry.getTitle(), null, 0, 0);
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Processing " + entries.size() +
+					" entries with no tags assets");
 		}
-		catch (SystemException se) {			
-			_log.error(se);
+
+		for (int i = 0; i < entries.size(); i++) {
+			BlogsEntry entry = (BlogsEntry)entries.get(i);
+
+			BlogsEntryLocalServiceUtil.updateTagsAsset(entry, new String[0]);
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("TagsAssets verified for Blogs entries");
+			_log.debug("Tags assets verified for entries");
 		}
 	}
 

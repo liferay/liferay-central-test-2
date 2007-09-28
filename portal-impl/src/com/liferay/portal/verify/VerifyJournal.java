@@ -22,7 +22,6 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -50,14 +49,14 @@ public class VerifyJournal extends VerifyProcess {
 		_log.info("Verifying integrity");
 
 		try {
-			_verifyJournal();
+			verifyJournal();
 		}
 		catch (Exception e) {
 			throw new VerifyException(e);
 		}
 	}
 
-	private void _verifyJournal() throws Exception {
+	protected void verifyJournal() throws Exception {
 
 		// Structures
 
@@ -114,22 +113,17 @@ public class VerifyJournal extends VerifyProcess {
 
 			try {
 				TagsAssetLocalServiceUtil.getAsset(
-						JournalArticle.class.getName(),
-						article.getPrimaryKey());	
+					JournalArticle.class.getName(), article.getPrimaryKey());
 			}
 			catch (NoSuchAssetException nsae) {
-				TagsAssetLocalServiceUtil.updateAsset(
-						article.getUserId(), JournalArticle.class.getName(),
-						article.getResourcePrimKey(), new String[0], null, null,
-						article.getDisplayDate(), article.getExpirationDate(),
-						ContentTypes.TEXT_HTML, article.getTitle(),
-						article.getDescription(), article.getDescription(),
-						null, 0, 0);
+				JournalArticleLocalServiceUtil.updateTagsAsset(
+					article, new String[0]);
 			}
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Permissions and TagsAssets verified for Journal articles");
+			_log.debug(
+				"Permissions and Tags assets verified for Journal articles");
 		}
 	}
 

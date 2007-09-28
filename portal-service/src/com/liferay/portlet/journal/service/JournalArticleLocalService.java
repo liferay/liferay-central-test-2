@@ -432,4 +432,10 @@ public interface JournalArticleLocalService {
 		java.lang.String content)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public void updateTagsAsset(
+		com.liferay.portlet.journal.model.JournalArticle article,
+		java.lang.String[] tagsEntries)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

@@ -132,7 +132,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Tags
 
-		updateAsset(entry, tagsEntries);
+		updateTagsAsset(entry, tagsEntries);
 
 		return entry;
 	}
@@ -324,9 +324,19 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Tags
 
-		updateAsset(entry, tagsEntries);
+		updateTagsAsset(entry, tagsEntries);
 
 		return entry;
+	}
+
+	public void updateTagsAsset(BookmarksEntry entry, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			entry.getUserId(), BookmarksEntry.class.getName(),
+			entry.getEntryId(), tagsEntries, null, null, null, null,
+			ContentTypes.TEXT_PLAIN, entry.getName(), entry.getComments(),
+			entry.getComments(), entry.getUrl(), 0, 0);
 	}
 
 	protected BookmarksFolder getFolder(BookmarksEntry entry, long folderId)
@@ -347,16 +357,6 @@ public class BookmarksEntryLocalServiceImpl
 		}
 
 		return BookmarksFolderUtil.findByPrimaryKey(folderId);
-	}
-
-	protected void updateAsset(BookmarksEntry entry, String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		TagsAssetLocalServiceUtil.updateAsset(
-			entry.getUserId(), BookmarksEntry.class.getName(),
-			entry.getEntryId(), tagsEntries, null, null, null, null,
-			ContentTypes.TEXT_PLAIN, entry.getName(), entry.getComments(),
-			entry.getComments(), entry.getUrl(), 0, 0);
 	}
 
 	protected void validate(String url) throws PortalException {
