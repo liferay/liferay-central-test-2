@@ -22,11 +22,6 @@
 
 package com.liferay.portal.spring.jndi;
 
-import com.liferay.util.JNDIUtil;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
 /**
  * <a href="JndiObjectFactoryBean.java.html"><b><i>View Source</i></b></a>
  *
