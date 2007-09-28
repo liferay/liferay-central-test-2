@@ -22,6 +22,12 @@
 
 package com.liferay.portal.kernel.dao.search;
 
+import com.liferay.portal.kernel.servlet.StringServletResponse;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -33,9 +39,19 @@ import javax.servlet.jsp.PageContext;
 public class JSPSearchEntry extends SearchEntry {
 
 	public JSPSearchEntry(String align, String valign, String path) {
+		this(align, valign, path, null, null, null);
+	}
+
+	public JSPSearchEntry(
+		String align, String valign, String path, ServletContext ctx,
+		HttpServletRequest req, HttpServletResponse res) {
+
 		super(align, valign);
 
 		_path = path;
+		_ctx = ctx;
+		_req = req;
+		_res = res;
 	}
 
 	public String getPath() {
@@ -47,7 +63,19 @@ public class JSPSearchEntry extends SearchEntry {
 	}
 
 	public void print(PageContext pageContext) throws Exception {
-		pageContext.include(_path);
+		if (_ctx != null) {
+			RequestDispatcher rd = _ctx.getRequestDispatcher(_path);
+
+			StringServletResponse stringServletRes =
+				new StringServletResponse(_res);
+
+			rd.include(_req, stringServletRes);
+
+			pageContext.getOut().print(stringServletRes.getString());
+		}
+		else {
+			pageContext.include(_path);
+		}
 	}
 
 	public Object clone() {
@@ -55,5 +83,8 @@ public class JSPSearchEntry extends SearchEntry {
 	}
 
 	private String _path;
+	private ServletContext _ctx;
+	private HttpServletRequest _req;
+	private HttpServletResponse _res;
 
 }

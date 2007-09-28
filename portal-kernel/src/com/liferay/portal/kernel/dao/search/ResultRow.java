@@ -29,6 +29,10 @@ import java.util.Map;
 
 import javax.portlet.PortletURL;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * <a href="ResultRow.java.html"><b><i>View Source</i></b></a>
  *
@@ -278,6 +282,39 @@ public class ResultRow {
 
 	public void addJSP(int index, String align, String valign, String path) {
 		_entries.add(index, new JSPSearchEntry(align, valign, path));
+	}
+
+	// JSP with portlet context
+
+	public void addJSP(
+		String path, ServletContext ctx, HttpServletRequest req,
+		HttpServletResponse res) {
+
+		addJSP(_entries.size(), path, ctx, req, res);
+	}
+
+	public void addJSP(
+		String align, String valign, String path, ServletContext ctx,
+		HttpServletRequest req, HttpServletResponse res) {
+
+		addJSP(_entries.size(), align, valign, path, ctx, req, res);
+	}
+
+	public void addJSP(
+		int index, String path, ServletContext ctx, HttpServletRequest req,
+		HttpServletResponse res) {
+
+		addJSP(
+			index, SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, path,
+			ctx, req, res);
+	}
+
+	public void addJSP(
+		int index, String align, String valign, String path,
+		ServletContext ctx, HttpServletRequest req, HttpServletResponse res) {
+
+		_entries.add(
+			index, new JSPSearchEntry(align, valign, path, ctx, req, res));
 	}
 
 	// Score
