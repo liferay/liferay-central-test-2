@@ -933,7 +933,8 @@ public class PluginPackageUtil {
 
 	private static Date _readDate(String text) {
 		if (Validator.isNotNull(text)) {
-			DateFormat dateFormat = new SimpleDateFormat(Time.RFC822_FORMAT);
+			DateFormat dateFormat = new SimpleDateFormat(
+				Time.RFC822_FORMAT, Locale.US);
 
 			try {
 				return dateFormat.parse(text);
