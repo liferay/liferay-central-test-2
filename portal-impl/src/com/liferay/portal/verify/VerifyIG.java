@@ -109,7 +109,7 @@ public class VerifyIG extends VerifyProcess {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("TagsAssets verified for DL File entries");
+			_log.debug("TagsAssets verified for IG Image entries");
 		}
 	}
 
