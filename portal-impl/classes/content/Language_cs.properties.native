@@ -1203,6 +1203,7 @@ show-maps-and-directions=Zobraz mapy a navigaci
 show-shopping=Zobraz nakupování
 show-special-items=Zobraz speciální položky
 show=Zobraz
+showing-x-x-of-x-results=Showing {0} - {1} of {2} results.
 shutdown-the-server-in-the-specified-number-of-minutes=Zastav server v daný počet minut. Zadej 0 pro cancel zastavení
 shutdown=Zastav
 sign-guestbook=Podepiš guestbook

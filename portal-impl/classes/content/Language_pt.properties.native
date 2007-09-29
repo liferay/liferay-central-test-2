@@ -2380,6 +2380,7 @@ show-subfolders=Mostre Subfolders
 show-user-name-as=Mostre O Nome Do Usuário Como
 show-wiki-borders=Mostre Beiras De Wiki
 show=Mostra
+showing-x-x-of-x-results=Showing {0} - {1} of {2} results.
 shutdown-the-server-in-the-specified-number-of-minutes=Parada programada o usuário no número especificado dos minutos. Entrada 0 para cancelar a parada programada.
 shutdown=Parada programada
 sic-code=Código de SIC

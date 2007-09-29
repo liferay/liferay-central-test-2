@@ -2380,6 +2380,7 @@ show-subfolders=Toon Subfolders
 show-user-name-as=Toon de Naam van de Gebruiker zoals
 show-wiki-borders=Wiki randen tonen
 show=Toon
+showing-x-x-of-x-results=Showing {0} - {1} of {2} results.
 shutdown-the-server-in-the-specified-number-of-minutes=De server uitzetten in het aantal opgegeven minuten. Voer 0 in om uitzetten te annuleren.
 shutdown=uitzetten
 sic-code=Sic Code

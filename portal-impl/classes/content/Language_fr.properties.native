@@ -2380,6 +2380,7 @@ show-subfolders=Montrez Subfolders
 show-user-name-as=Montrez Le Nom D'Utilisateur As
 show-wiki-borders=Montrez Les Frontières De Wiki
 show=Voir
+showing-x-x-of-x-results=Showing {0} - {1} of {2} results.
 shutdown-the-server-in-the-specified-number-of-minutes=Arrêt le serveur dans le nombre indiqué de minutes. Entrée 0 pour décommander l'arrêt.
 shutdown=Arrêt
 sic-code=Code de SIC

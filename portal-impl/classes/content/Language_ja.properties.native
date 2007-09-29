@@ -2376,6 +2376,7 @@ show-subfolders=ショーSubfolders
 show-user-name-as=ショーのユーザ名ように
 show-wiki-borders=ショーのWiki のボーダー
 show=ショー
+showing-x-x-of-x-results=Showing {0} - {1} of {2} results.
 shutdown-the-server-in-the-specified-number-of-minutes=操業停止分の指定数のサーバー。操業停止を取り消す入力0 。
 shutdown=操業停止
 sic-code=SIC コード

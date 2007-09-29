@@ -1723,6 +1723,7 @@ show-special-items-when-browsing-a-category=محصولات ويژه نمايش �
 show-special-items=محصولات ويژه ما
 show-wiki-borders=نمايش مرزهای ويکی
 show=نمايش
+showing-x-x-of-x-results=Showing {0} - {1} of {2} results.
 shutdown-the-server-in-the-specified-number-of-minutes=قطع سرور پس از تعداد دقايق وارد شده. مقدار صفر متضمن قطع نشدن سرور است.
 shutdown=قطع
 sic-code=SIC Code

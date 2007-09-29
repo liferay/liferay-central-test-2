@@ -2380,6 +2380,7 @@ show-subfolders=顯示Subfolders
 show-user-name-as=顯示用戶名
 show-wiki-borders=顯示Wiki 邊框
 show=展示
+showing-x-x-of-x-results=Showing {0} - {1} of {2} results.
 shutdown-the-server-in-the-specified-number-of-minutes=關機伺服器在分鐘的指定的數量。輸入0 取消關機。
 shutdown=關機
 sic-code=SIC 代碼

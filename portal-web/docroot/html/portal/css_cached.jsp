@@ -640,6 +640,13 @@ ul.gamma .tree-item-hover {
 	font-weight: bold;
 }
 
+.taglib-search-results {
+	float: left;
+	font-weight: bold;
+	clear: both;
+	width: auto;
+}
+
 /* ---------- Specific portlet styles ---------- */
 
 /* ---------- Quick note ---------- */

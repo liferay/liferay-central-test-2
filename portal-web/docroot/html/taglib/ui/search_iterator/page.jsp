@@ -29,15 +29,24 @@ SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay
 
 List resultRows = searchContainer.getResultRows();
 List headerNames = searchContainer.getHeaderNames();
+Integer totalRows = searchContainer.getTotal();
+Integer startRow = searchContainer.getStart();
+Integer endRow = searchContainer.getEnd();
 Map orderableHeaders = searchContainer.getOrderableHeaders();
 RowChecker rowChecker = searchContainer.getRowChecker();
 
 if (rowChecker != null) {
 	headerNames.add(0, rowChecker.getAllRowsCheckBox());
 }
+if (endRow > totalRows) {
+	endRow = totalRows;
+} 
 %>
 
 <c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (searchContainer.getEmptyResultsMessage() != null)) %>">
+<div class="taglib-search-results">
+	<%= LanguageUtil.format(pageContext, "showing-x-x-of-x-results", new Object[] {String.valueOf(startRow + 1), String.valueOf(endRow), String.valueOf(totalRows)}) %>
+</div>
 	<table class="taglib-search-iterator">
 	<tr class="portlet-section-header">
 

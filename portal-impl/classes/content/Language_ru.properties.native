@@ -1643,6 +1643,7 @@ show-special-items-when-browsing-a-category=Показывать специал�
 show-special-items=Показать специальный товар
 show-wiki-borders=Показывать обрамление Wiki
 show=Показать
+showing-x-x-of-x-results=Showing {0} - {1} of {2} results.
 shutdown-the-server-in-the-specified-number-of-minutes=Остановка сервера через указанное кол-во минут. Введите 0 чтобы прекратить остановку сервера.
 shutdown=Остановить
 sic-code=SIC Code
