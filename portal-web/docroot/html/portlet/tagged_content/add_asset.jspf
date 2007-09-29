@@ -23,7 +23,7 @@
 %>
 
 <%
-PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, entries, currentURL);
+PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, entries, (PortletURLImpl)currentURLObj);
 %>
 
 <c:if test="<%= urls.length > 0 %>">
@@ -37,28 +37,23 @@ PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, entries
 		}
 	</script>
 
-	<form name="<portlet:namespace/>fm">
-
 	<select name="<portlet:namespace/>assetURL" onchange="<portlet:namespace/>addAsset();">
 		<option value=""><liferay-ui:message key="add-asset"/>...</option>
 
 		<%
 		for (int i = 0; i < ASSET_TYPES.length; i++) {
-			String redirectURL = currentURL;
+			PortletURLImpl redirectURLObj = (PortletURLImpl)currentURLObj;
 
 			if (selectionStyle.equals("manual")) {
-				PortletURL redirectURLObj = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, themeDisplay.getPlid(), false);
+				redirectURLObj = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, themeDisplay.getPlid(), false);
 
 				redirectURLObj.setParameter("struts_action", "/portlet_configuration/edit_configuration");
 				redirectURLObj.setParameter("redirect", currentURL);
 				redirectURLObj.setParameter("backURL", currentURL);
 				redirectURLObj.setParameter("portletResource", portletDisplay.getId());
-				redirectURLObj.setParameter("typeSelection", ASSET_TYPES[i]);
-
-				redirectURL = redirectURLObj.toString();
 			}
 
-			PortletURL url = getAddURL(ASSET_TYPES[i], permissionChecker, request, themeDisplay, entries, redirectURL);
+			PortletURL url = getAddURL(ASSET_TYPES[i], permissionChecker, request, themeDisplay, entries, redirectURLObj);
 
 			if (url != null) {
 		%>
@@ -71,12 +66,10 @@ PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, entries
 		%>
 
 	</select>
-
-	</form>
 </c:if>
 
 <%!
-public PortletURL getAddURL(String assetType, PermissionChecker permissionChecker, HttpServletRequest request, ThemeDisplay themeDisplay, String[] entries, String currentURL) throws Exception {
+public PortletURL getAddURL(String assetType, PermissionChecker permissionChecker, HttpServletRequest request, ThemeDisplay themeDisplay, String[] entries, PortletURLImpl currentURLObj) throws Exception {
 	PortletURL addURL = null;
 
 	if (assetType.equals(BlogsEntry.class.getName())) {
@@ -122,18 +115,26 @@ public PortletURL getAddURL(String assetType, PermissionChecker permissionChecke
 		addURL.setWindowState(WindowState.MAXIMIZED);
 		addURL.setPortletMode(PortletMode.VIEW);
 
-		addURL.setParameter("redirect", currentURL);
-		addURL.setParameter("tagsEntries", StringUtil.merge(entries));
+		addURL.setParameter("redirect", currentURLObj.toString());
+		
+		String referringPortletResource = currentURLObj.getParameter("portletResource");
+		
+		if (Validator.isNotNull(referringPortletResource)) {
+			addURL.setParameter("referringPortletResource", referringPortletResource);
+		}
+		else {
+			addURL.setParameter("tagsEntries", StringUtil.merge(entries));
+		}
 	}
 
 	return addURL;
 }
 
-public PortletURL[] getAddURLs(PermissionChecker permissionChecker, HttpServletRequest request, ThemeDisplay themeDisplay, String[] entries, String currentURL) throws Exception {
+public PortletURL[] getAddURLs(PermissionChecker permissionChecker, HttpServletRequest request, ThemeDisplay themeDisplay, String[] entries, PortletURLImpl currentURLObj) throws Exception {
 	List urls = new ArrayList();
 
 	for (int i = 0; i < ASSET_TYPES.length; i++) {
-		PortletURL url = getAddURL(ASSET_TYPES[i], permissionChecker, request, themeDisplay, entries, currentURL);
+		PortletURL url = getAddURL(ASSET_TYPES[i], permissionChecker, request, themeDisplay, entries, currentURLObj);
 
 		if (url != null) {
 			urls.add(url);

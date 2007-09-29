@@ -50,13 +50,13 @@ import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
+import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.FileUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
-
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -367,6 +367,10 @@ public class EditArticleAction extends PortletAction {
 				reviewDateHour, reviewDateMinute, neverReview, indexable,
 				images, articleURL, req.getPreferences(), tagsEntries,
 				communityPermissions, guestPermissions);
+
+			AssetPublisherUtil.addAndStoreSelection(
+					req, JournalArticle.class.getName(), 
+					article.getPrimaryKey(), -1);
 		}
 		else {
 

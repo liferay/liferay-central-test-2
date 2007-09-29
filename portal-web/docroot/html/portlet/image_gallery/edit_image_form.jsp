@@ -33,6 +33,8 @@ String uploadProgressId = ParamUtil.getString(request, "uploadProgressId");
 
 IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
+
 long imageId = BeanParamUtil.getLong(image, request, "imageId");
 
 long folderId = BeanParamUtil.getLong(image, request, "folderId");
@@ -66,6 +68,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 <input name="<portlet:namespace />uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
 <input name="<portlet:namespace />imageId" type="hidden" value="<%= imageId %>" />
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
+<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 
 <liferay-ui:error exception="<%= ImageNameException.class %>">
 

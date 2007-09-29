@@ -29,6 +29,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
+
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
 long categoryId = BeanParamUtil.getLong(entry, request, "categoryId", BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
@@ -81,6 +83,7 @@ if (entry != null) {
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
+<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 
 <liferay-ui:tabs
 	names="entry"

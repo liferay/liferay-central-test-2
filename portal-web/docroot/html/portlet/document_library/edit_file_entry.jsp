@@ -38,6 +38,8 @@ String name = BeanParamUtil.getString(fileEntry, request, "name");
 
 String tagsEntries = ParamUtil.getString(renderRequest, "tagsEntries");
 
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
+
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
@@ -214,6 +216,9 @@ portletURL.setParameter("name", name);
 
 		<c:if test="<%= Validator.isNotNull(tagsEntries) %>">
 			<portlet:param name="tagsEntries" value="<%= tagsEntries %>" />
+		</c:if>
+		<c:if test="<%= Validator.isNotNull(referringPortletResource) %>">
+			<portlet:param name="referringPortletResource" value="<%= referringPortletResource %>" />
 		</c:if>
 	</portlet:renderURL>
 

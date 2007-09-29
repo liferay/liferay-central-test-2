@@ -41,10 +41,12 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.form.FileEntryForm;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
+import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
@@ -221,10 +223,14 @@ public class EditFileEntryAction extends PortletAction {
 				themeDisplay.getPermissionChecker(), folderId,
 				ActionKeys.ADD_DOCUMENT);
 
-			DLFileEntryLocalServiceUtil.addFileEntry(
+			DLFileEntry entry = DLFileEntryLocalServiceUtil.addFileEntry(
 				themeDisplay.getUserId(), folderId, sourceFileName, title,
 				description, tagsEntries, extraSettings, file,
 				communityPermissions, guestPermissions);
+
+			AssetPublisherUtil.addAndStoreSelection(
+					req, DLFileEntry.class.getName(), entry.getFileEntryId(), 
+					-1);
 		}
 		else {
 

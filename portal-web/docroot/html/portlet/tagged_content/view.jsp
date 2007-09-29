@@ -66,7 +66,14 @@ if (themeDisplay.isSignedIn()) {
 entries = ArrayUtil.distinct(entries, new StringComparator());
 %>
 
-<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
+<form name="<portlet:namespace/>fm">
+	<%
+	String portletId = portletDisplay.getId();
+	%>
+	<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
+</form>
+	
+<br />
 
 <%
 if (showQueryLogic) {

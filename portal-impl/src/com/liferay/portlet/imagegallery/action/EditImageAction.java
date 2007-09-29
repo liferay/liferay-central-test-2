@@ -34,7 +34,9 @@ import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
+import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
+import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
@@ -163,9 +165,12 @@ public class EditImageAction extends PortletAction {
 
 			// Add image
 
-			IGImageServiceUtil.addImage(
+			IGImage image = IGImageServiceUtil.addImage(
 				folderId, description, file, contentType, tagsEntries,
 				communityPermissions, guestPermissions);
+
+			AssetPublisherUtil.addAndStoreSelection(
+					req, IGImage.class.getName(), image.getImageId(), -1);
 		}
 		else {
 

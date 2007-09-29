@@ -29,6 +29,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
+
 long imageId = BeanParamUtil.getLong(image, request, "imageId");
 
 long folderId = BeanParamUtil.getLong(image, request, "folderId");
@@ -125,6 +127,9 @@ String uploadProgressId = "igImageUploadProgress";
 
 	<c:if test="<%= Validator.isNotNull(tagsEntries) %>">
 		<portlet:param name="tagsEntries" value="<%= tagsEntries %>" />
+	</c:if>
+	<c:if test="<%= Validator.isNotNull(referringPortletResource) %>">
+		<portlet:param name="referringPortletResource" value="<%= referringPortletResource %>" />
 	</c:if>
 </portlet:renderURL>
 

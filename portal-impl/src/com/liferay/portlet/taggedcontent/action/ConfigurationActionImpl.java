@@ -23,17 +23,13 @@
 package com.liferay.portlet.taggedcontent.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
-import com.liferay.util.xml.XMLFormatter;
-
-import java.io.IOException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -44,10 +40,6 @@ import javax.portlet.RenderResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentFactory;
-import org.dom4j.Element;
 
 /**
  * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
@@ -70,7 +62,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				req, portletResource, true, true);
 
 		if (cmd.equals("add-selection")) {
-			addSelection(req, prefs);
+			AssetPublisherUtil.addSelection(req, prefs);
 		}
 		else if (cmd.equals("move-selection-down")) {
 			moveSelectionDown(req, prefs);
@@ -108,52 +100,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		throws Exception {
 
 		return "/html/portlet/tagged_content/configuration.jsp";
-	}
-
-	protected void addSelection(ActionRequest req, PortletPreferences prefs)
-		throws Exception {
-
-		String assetType = ParamUtil.getString(req, "assetType");
-		long assetId = ParamUtil.getLong(req, "assetId");
-		int assetOrder = ParamUtil.getInteger(req, "assetOrder");
-
-		String[] manualEntries = prefs.getValues(
-			"manual-entries", new String[0]);
-
-		String assetConfig = assetConfiguration(assetType, assetId);
-
-		if (assetOrder > -1) {
-			manualEntries[assetOrder] = assetConfig;
-		}
-		else {
-			manualEntries = ArrayUtil.append(manualEntries, assetConfig);
-		}
-
-		prefs.setValues("manual-entries", manualEntries);
-	}
-
-	protected String assetConfiguration(String assetType, long assetId) {
-		String xml = null;
-
-		try {
-			DocumentFactory docFactory = DocumentFactory.getInstance();
-
-			Document doc = docFactory.createDocument("UTF-8");
-
-			Element asset = doc.addElement("asset");
-
-			asset.addElement("asset-type").addText(assetType);
-			asset.addElement("asset-id").addText(String.valueOf(assetId));
-
-			xml = XMLFormatter.toString(doc, StringPool.BLANK);
-		}
-		catch (IOException ioe) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(ioe);
-			}
-		}
-
-		return xml;
 	}
 
 	protected void moveSelectionDown(

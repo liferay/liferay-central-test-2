@@ -34,7 +34,9 @@ import com.liferay.portlet.blogs.EntryDisplayDateException;
 import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.NoSuchEntryException;
+import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
+import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -162,11 +164,14 @@ public class EditEntryAction extends PortletAction {
 
 			// Add entry
 
-			BlogsEntryServiceUtil.addEntry(
+			BlogsEntry entry = BlogsEntryServiceUtil.addEntry(
 				layout.getPlid(), categoryId, title, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
 				displayDateMinute, tagsEntries, communityPermissions,
 				guestPermissions);
+
+			AssetPublisherUtil.addAndStoreSelection(
+					req, BlogsEntry.class.getName(), entry.getEntryId(), -1);
 		}
 		else {
 

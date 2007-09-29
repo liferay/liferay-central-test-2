@@ -116,8 +116,13 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					refresh="<%= false %>"
 				>
 					<liferay-ui:section>
+						<%
+						String portletId = portletResource;
+						%>
+                        <%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
+
 						<select name="<portlet:namespace/>assetType" onchange="<portlet:namespace />selectionForType(this.options[this.selectedIndex].value);">
-							<option value=""><liferay-ui:message key="select"/>...</option>
+							<option value=""><liferay-ui:message key="select-asset"/>...</option>
 
 							<%
 							for (int i = 0; i < ASSET_TYPES.length; i++) {
@@ -235,15 +240,19 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 						<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+						<br />
+		
+						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 					</liferay-ui:section>
 					<liferay-ui:section>
 						<%@ include file="/html/portlet/tagged_content/display_settings.jsp" %>
+
+						<br />
+		
+						<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 					</liferay-ui:section>
 				</liferay-ui:tabs>
-
-				<br />
-
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 			</c:when>
 			<c:when test='<%= selectionStyle.equals("dynamic") %>'>
 				<liferay-ui:tabs
@@ -299,6 +308,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 				<br />
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 			</c:when>
 		</c:choose>
 	</c:when>
@@ -357,7 +367,5 @@ configurationActionURL.setParameter("portletResource", portletResource);
 		<%@ include file="/html/portlet/tagged_content/select_wiki_page.jspf" %>
 	</c:when>
 </c:choose>
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>

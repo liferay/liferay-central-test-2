@@ -33,6 +33,8 @@ String uploadProgressId = ParamUtil.getString(request, "uploadProgressId");
 
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
+
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
 
@@ -88,6 +90,7 @@ if (fileEntry != null) {
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 <input name="<portlet:namespace />newFolderId" type="hidden" value="" />
 <input name="<portlet:namespace />name" type="hidden" value="<%= name %>" />
+<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 
 <liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
 

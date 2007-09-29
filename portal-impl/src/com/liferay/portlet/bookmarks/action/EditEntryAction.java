@@ -30,7 +30,9 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
+import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -142,9 +144,13 @@ public class EditEntryAction extends PortletAction {
 
 			// Add entry
 
-			BookmarksEntryServiceUtil.addEntry(
+			BookmarksEntry entry = BookmarksEntryServiceUtil.addEntry(
 				folderId, name, url, comments, tagsEntries,
 				communityPermissions, guestPermissions);
+
+			AssetPublisherUtil.addAndStoreSelection(
+					req, BookmarksEntry.class.getName(), entry.getEntryId(), 
+					-1);
 		}
 		else {
 

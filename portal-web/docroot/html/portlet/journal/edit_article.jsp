@@ -29,6 +29,8 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 String tabs2 = ParamUtil.getString(request, "tabs2");
 
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
+
 String redirect = ParamUtil.getString(request, "redirect");
 
 // Make sure the redirect is correct. This is a workaround for a layout that
@@ -499,6 +501,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <input name="<portlet:namespace />approve" type="hidden" value="" />
 <input name="<portlet:namespace />deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 <input name="<portlet:namespace />expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
+<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 
 <liferay-ui:tabs
 	names="article"
