@@ -95,8 +95,23 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//Liferay//DTD Display 2.0.0//EN",
+			"liferay-display_2_0_0.dtd"
+		),
+
+		new KeyValuePair(
+			"-//Liferay//DTD Display 3.5.0//EN",
+			"liferay-display_3_5_0.dtd"
+		),
+
+		new KeyValuePair(
 			"-//Liferay//DTD Display 4.0.0//EN",
 			"liferay-display_4_0_0.dtd"
+		),
+
+		new KeyValuePair(
+			"-//Liferay//DTD Layout Templates 3.6.0//EN",
+			"liferay-layout-templates_3_6_0.dtd"
 		),
 
 		new KeyValuePair(
@@ -107,6 +122,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		new KeyValuePair(
 			"-//Liferay//DTD Layout Templates 4.3.0//EN",
 			"liferay-layout-templates_4_3_0.dtd"
+		),
+
+		new KeyValuePair(
+			"-//Liferay//DTD Look and Feel 3.5.0//EN",
+			"liferay-look-and-feel_3_5_0.dtd"
 		),
 
 		new KeyValuePair(
@@ -130,6 +150,26 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//Liferay//DTD Portlet Application 3.5.0//EN",
+			"liferay-portlet-app_3_5_0.dtd"
+		),
+
+		new KeyValuePair(
+			"-//Liferay//DTD Portlet Application 4.0.0//EN",
+			"liferay-portlet-app_4_0_0.dtd"
+		),
+
+		new KeyValuePair(
+			"-//Liferay//DTD Portlet Application 4.1.0//EN",
+			"liferay-portlet-app_4_1_0.dtd"
+		),
+
+		new KeyValuePair(
+			"-//Liferay//DTD Portlet Application 4.2.0//EN",
+			"liferay-portlet-app_4_2_0.dtd"
+		),
+
+		new KeyValuePair(
 			"-//Liferay//DTD Portlet Application 4.3.0//EN",
 			"liferay-portlet-app_4_3_0.dtd"
 		),
@@ -147,6 +187,26 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		new KeyValuePair(
 			"-//Liferay//DTD Portlet Application 4.3.3//EN",
 			"liferay-portlet-app_4_3_3.dtd"
+		),
+
+		new KeyValuePair(
+			"-//Liferay//DTD Service Builder 3.5.0//EN",
+			"liferay-service-builder_3_5_0.dtd"
+		),
+
+		new KeyValuePair(
+			"-//Liferay//DTD Service Builder 3.6.1//EN",
+			"liferay-service-builder_3_6_1.dtd"
+		),
+
+		new KeyValuePair(
+			"-//Liferay//DTD Service Builder 4.0.0//EN",
+			"liferay-service-builder_4_0_0.dtd"
+		),
+
+		new KeyValuePair(
+			"-//Liferay//DTD Service Builder 4.2.0//EN",
+			"liferay-service-builder_4_2_0.dtd"
 		),
 
 		new KeyValuePair(
