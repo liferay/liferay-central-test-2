@@ -641,9 +641,10 @@ ul.gamma .tree-item-hover {
 }
 
 .taglib-search-results {
-	float: left;
-	font-weight: bold;
 	clear: both;
+	float: left;
+	font-weight: normal;
+	padding-bottom: 5px;
 	width: auto;
 }
 
