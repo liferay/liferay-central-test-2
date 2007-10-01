@@ -27,9 +27,9 @@
 <%
 SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
 
-Integer start = searchContainer.getStart();
-Integer end = searchContainer.getEnd();
-Integer total = searchContainer.getTotal();
+int start = searchContainer.getStart();
+int end = searchContainer.getEnd();
+int total = searchContainer.getTotal();
 List resultRows = searchContainer.getResultRows();
 List headerNames = searchContainer.getHeaderNames();
 Map orderableHeaders = searchContainer.getOrderableHeaders();
