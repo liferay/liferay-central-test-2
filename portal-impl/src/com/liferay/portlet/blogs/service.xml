@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.3.3//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_3_3.dtd">
 
-<service-builder root-dir=".." package-path="com.liferay.portlet">
+<service-builder package-path="com.liferay.portlet">
 	<portlet name="Blogs" short-name="Blogs" />
 	<entity name="BlogsCategory" local-service="true" remote-service="true">
 

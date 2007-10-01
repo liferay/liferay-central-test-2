@@ -89,21 +89,56 @@ public class ServiceBuilder {
 		Log4JUtil.configureLog4J(
 			classLoader.getResource("META-INF/portal-log4j-ext.xml"));
 
+		ServiceBuilder serviceBuilder = null;
+
 		if (args.length == 7) {
-			new ServiceBuilder(
-				args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+			String fileName = args[0];
+			String hbmFileName = args[1];
+			String modelHintsFileName = args[2];
+			String springFileName = args[3];
+			String beanLocatorUtilClassName = args[4];
+			String apiDir = args[5];
+			String implDir = "src";
+			String jsonFileName = args[6];
+			String sqlDir = "../sql";
+			String sqlFileName = "portal-tables.sql";
+
+			serviceBuilder = new ServiceBuilder(
+				fileName, hbmFileName, modelHintsFileName, springFileName,
+				beanLocatorUtilClassName, apiDir, implDir, jsonFileName, sqlDir,
+				sqlFileName);
 		}
-		else {
+		else if (args.length == 0) {
+			String fileName = System.getProperty("service.input.file");
+			String hbmFileName = System.getProperty("service.hbm.file");
+			String modelHintsFileName = System.getProperty("service.model.hints.file");
+			String springFileName = System.getProperty("service.spring.file");
+			String beanLocatorUtilClassName = System.getProperty("service.bean.locator.class");
+			String apiDir = System.getProperty("service.api.dir");
+			String implDir = System.getProperty("service.impl.dir");
+			String jsonFileName = System.getProperty("service.json.file");
+			String sqlDir = System.getProperty("service.sql.dir");
+			String sqlFileName = System.getProperty("service.sql.file");
+
+			serviceBuilder = new ServiceBuilder(
+				fileName, hbmFileName, modelHintsFileName, springFileName,
+				beanLocatorUtilClassName, apiDir, implDir, jsonFileName, sqlDir,
+				sqlFileName);
+		}
+
+		if (serviceBuilder == null) {
 			System.out.println(
-				"Please pass in the correct number of parameters. Sample " +
-					"parameters are:\n" +
-				"\tservice.xml\n" +
-				"\tclasses/META-INF/portal-hbm.xml\n" +
-				"\tclasses/META-INF/portal-model-hints.xml\n" +
-				"\tclasses/META-INF/portal-spring.xml\n" +
-				"\tcom.liferay.portal.kernel.bean.BeanLocatorUtil\n" +
-				"\t../portal-service/src\n" +
-				"\t../portal-web/docroot/html/js/liferay_services.js");
+				"Please set the system properties. Sample properties are:\n" +
+				"\t-Dservice.input.file=service.xml\n" +
+				"\t-Dservice.hbm.file=classes/META-INF/portal-hbm.xml\n" +
+				"\t-Dservice.model.hints.file=classes/META-INF/portal-model-hints.xml\n" +
+				"\t-Dservice.spring.file=classes/META-INF/portal-spring.xml\n" +
+				"\t-Dservice.bean.locator.class=com.liferay.portal.kernel.bean.BeanLocatorUtil\n" +
+				"\t-Dservice.api.dir=../portal-service/src\n" +
+				"\t-Dservice.impl.dir=src\n" +
+				"\t-Dservice.json.file=../portal-web/docroot/html/js/liferay_services.js\n" +
+				"\t-Dservice.sql.dir=../sql\n" +
+				"\t-Dservice.sql.file=portal-tables.sql");
 		}
 	}
 
@@ -266,6 +301,12 @@ public class ServiceBuilder {
 		catch (FileNotFoundException fnne) {
 		}
 
+		try {
+			Jalopy.setConvention("../../misc/jalopy.xml");
+		}
+		catch (FileNotFoundException fnne) {
+		}
+
 		if (jalopySettings == null) {
 			jalopySettings = new HashMap();
 		}
@@ -401,18 +442,21 @@ public class ServiceBuilder {
 
 	public ServiceBuilder(String fileName, String hbmFileName,
 						  String modelHintsFileName, String springFileName,
-						  String beanLocatorUtilClassName, String serviceDir,
-						  String jsonFileName) {
+						  String beanLocatorUtilClassName, String apiDir,
+						  String implDir, String jsonFileName, String sqlDir,
+						  String sqlFileName) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, modelHintsFileName, springFileName,
-			beanLocatorUtilClassName, serviceDir, jsonFileName, true);
+			beanLocatorUtilClassName, apiDir, implDir, jsonFileName, sqlDir,
+			sqlFileName, true);
 	}
 
 	public ServiceBuilder(String fileName, String hbmFileName,
 						  String modelHintsFileName, String springFileName,
-						  String beanLocatorUtilClassName, String serviceDir,
-						  String jsonFileName, boolean build) {
+						  String beanLocatorUtilClassName, String apiDir,
+						  String implDir, String jsonFileName, String sqlDir,
+						  String sqlFileName, boolean build) {
 
 		try {
 			_badTableNames = ServiceBuilder.getBadTableNames();
@@ -422,15 +466,17 @@ public class ServiceBuilder {
 			_modelHintsFileName = modelHintsFileName;
 			_springFileName = springFileName;
 			_beanLocatorUtilClassName = beanLocatorUtilClassName;
-			_serviceDir = serviceDir;
+			_apiDir = apiDir;
+			_implDir = implDir;
+			_jsonFileName = jsonFileName;
+			_sqlDir = sqlDir;
+			_sqlFileName = sqlFileName;
 
 			SAXReader reader = SAXReaderFactory.getInstance();
 
 			Document doc = reader.read(new File(fileName));
 
 			Element root = doc.getRootElement();
-
-			_portalRoot = root.attributeValue("root-dir");
 
 			String packagePath = root.attributeValue("package-path");
 
@@ -443,20 +489,12 @@ public class ServiceBuilder {
 				TextFormatter.format(_portletName, TextFormatter.B);
 
 			_outputPath =
-				"src/" + StringUtil.replace(packagePath, ".", "/") + "/" +
-					_portletPackageName;
+				_implDir + "/" + StringUtil.replace(packagePath, ".", "/") +
+					"/" + _portletPackageName;
 
-			if (Validator.isNull(_serviceDir)) {
-				_serviceOutputPath = _outputPath;
-			}
-			else {
-				_serviceOutputPath =
-					_serviceDir + "/" +
-						StringUtil.replace(packagePath, ".", "/") + "/" +
-							_portletPackageName;
-			}
-
-			_jsonFileName = jsonFileName;
+			_serviceOutputPath =
+				_apiDir + "/" + StringUtil.replace(packagePath, ".", "/") +
+					"/" + _portletPackageName;
 
 			_packagePath = packagePath + "." + _portletPackageName;
 
@@ -786,7 +824,8 @@ public class ServiceBuilder {
 			String refPackage = name.substring(0, pos);
 			String refPackageDir = StringUtil.replace(refPackage, ".", "/");
 			String refEntity = name.substring(pos + 1, name.length());
-			String refFileName = "src/" + refPackageDir + "/service.xml";
+			String refFileName =
+				_implDir + "/" + refPackageDir + "/service.xml";
 
 			File refFile = new File(refFileName);
 
@@ -808,7 +847,8 @@ public class ServiceBuilder {
 
 			ServiceBuilder serviceBuilder = new ServiceBuilder(
 				refFileName, _hbmFileName, _modelHintsFileName, _springFileName,
-				_beanLocatorUtilClassName, _serviceDir, _jsonFileName, false);
+				_beanLocatorUtilClassName, _apiDir, _implDir, _jsonFileName,
+				_sqlDir, _sqlFileName, false);
 
 			Entity entity = serviceBuilder.getEntity(refEntity);
 
@@ -1057,15 +1097,13 @@ public class ServiceBuilder {
 
 		writeFile(ejbFile, sm.toString());
 
-		if (Validator.isNotNull(_serviceDir)) {
-			ejbFile = new File(_outputPath + "/service/persistence/" + entity.getPKClassName() + ".java");
+		/*ejbFile = new File(_outputPath + "/service/persistence/" + entity.getPKClassName() + ".java");
 
-			if (ejbFile.exists()) {
-				System.out.println("Relocating " + ejbFile);
+		if (ejbFile.exists()) {
+			System.out.println("Relocating " + ejbFile);
 
-				ejbFile.delete();
-			}
-		}
+			ejbFile.delete();
+		}*/
 	}
 
 	private void _createExceptions(List exceptions) throws IOException {
@@ -1134,15 +1172,13 @@ public class ServiceBuilder {
 				FileUtil.write(exceptionFile, sm.toString());
 			}
 
-			if (Validator.isNotNull(_serviceDir)) {
-				exceptionFile = new File(_outputPath + "/" + exception + "Exception.java");
+			/*exceptionFile = new File(_outputPath + "/" + exception + "Exception.java");
 
-				if (exceptionFile.exists()) {
-					System.out.println("Relocating " + exceptionFile);
+			if (exceptionFile.exists()) {
+				System.out.println("Relocating " + exceptionFile);
 
-					exceptionFile.delete();
-				}
-			}
+				exceptionFile.delete();
+			}*/
 		}
 	}
 
@@ -1240,15 +1276,13 @@ public class ServiceBuilder {
 
 		writeFile(modelFile, sm.toString(), jalopySettings);
 
-		if (Validator.isNotNull(_serviceDir)) {
-			modelFile = new File(_outputPath + "/model/" + entity.getName() + ".java");
+		/*modelFile = new File(_outputPath + "/model/" + entity.getName() + ".java");
 
-			if (modelFile.exists()) {
-				System.out.println("Relocating " + modelFile);
+		if (modelFile.exists()) {
+			System.out.println("Relocating " + modelFile);
 
-				modelFile.delete();
-			}
-		}
+			modelFile.delete();
+		}*/
 	}
 
 	private void _createExtendedModelImpl(Entity entity) throws IOException {
@@ -1607,15 +1641,13 @@ public class ServiceBuilder {
 
 		writeFile(modelFile, sm.toString(), jalopySettings);
 
-		if (Validator.isNotNull(_serviceDir)) {
-			modelFile = new File(_outputPath + "/model/" + entity.getName() + "Model.java");
+		/*modelFile = new File(_outputPath + "/model/" + entity.getName() + "Model.java");
 
-			if (modelFile.exists()) {
-				System.out.println("Relocating " + modelFile);
+		if (modelFile.exists()) {
+			System.out.println("Relocating " + modelFile);
 
-				modelFile.delete();
-			}
-		}
+			modelFile.delete();
+		}*/
 	}
 
 	private void _createModelHintsXML() throws IOException {
@@ -4712,6 +4744,10 @@ public class ServiceBuilder {
 				"../ext-web/docroot/WEB-INF/remoting-servlet-ext.xml");
 		}
 
+		if (!outputFile.exists()) {
+			return;
+		}
+
 		String content = FileUtil.read(outputFile);
 		String newContent = content;
 
@@ -4858,13 +4894,13 @@ public class ServiceBuilder {
 
 		writeFile(ejbFile, sm.toString(), jalopySettings);
 
-		ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "Service.java");
+		/*ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "Service.java");
 
 		if (ejbFile.exists()) {
 			System.out.println("Relocating " + ejbFile);
 
 			ejbFile.delete();
-		}
+		}*/
 	}
 
 	private void _createServiceBaseImpl(Entity entity) throws IOException {
@@ -4983,13 +5019,13 @@ public class ServiceBuilder {
 
 		writeFile(ejbFile, sm.toString(), jalopySettings);
 
-		ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.java");
+		/*ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.java");
 
 		if (ejbFile.exists()) {
 			System.out.println("Relocating " + ejbFile);
 
 			ejbFile.delete();
-		}
+		}*/
 	}
 
 	private void _createServiceHttp(Entity entity) throws IOException {
@@ -5828,13 +5864,13 @@ public class ServiceBuilder {
 
 		writeFile(ejbFile, sm.toString(), jalopySettings);
 
-		ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil.java");
+		/*ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil.java");
 
 		if (ejbFile.exists()) {
 			System.out.println("Relocating " + ejbFile);
 
 			ejbFile.delete();
-		}
+		}*/
 	}
 
 	private void _createSpringXML() throws IOException {
@@ -5959,11 +5995,17 @@ public class ServiceBuilder {
 	}
 
 	private void _createSQLIndexes() throws IOException {
-		String sqlPath = _portalRoot + "/sql";
+		if (!FileUtil.exists(_sqlDir)) {
+			return;
+		}
 
 		// indexes.sql
 
-		File sqlFile = new File(sqlPath + "/indexes.sql");
+		File sqlFile = new File(_sqlDir + "/indexes.sql");
+
+		if (!sqlFile.exists()) {
+			FileUtil.write(sqlFile, "");
+		}
 
 		Map indexSQLs = new TreeMap();
 
@@ -5989,7 +6031,11 @@ public class ServiceBuilder {
 
 		// indexes.properties
 
-		File propsFile = new File(sqlPath + "/indexes.properties");
+		File propsFile = new File(_sqlDir + "/indexes.properties");
+
+		if (!propsFile.exists()) {
+			FileUtil.write(propsFile, "");
+		}
 
 		Map indexProps = new TreeMap();
 
@@ -6125,9 +6171,15 @@ public class ServiceBuilder {
 	}
 
 	private void _createSQLSequences() throws IOException {
-		String sqlPath = _portalRoot + "/sql";
+		if (!FileUtil.exists(_sqlDir)) {
+			return;
+		}
 
-		File sqlFile = new File(sqlPath + "/sequences.sql");
+		File sqlFile = new File(_sqlDir + "/sequences.sql");
+
+		if (!sqlFile.exists()) {
+			FileUtil.write(sqlFile, "");
+		}
 
 		Set sequenceSQLs = new TreeSet();
 
@@ -6193,9 +6245,11 @@ public class ServiceBuilder {
 	}
 
 	private void _createSQLTables() throws IOException {
-		String sqlPath = _portalRoot + "/sql";
+		if (!FileUtil.exists(_sqlDir)) {
+			return;
+		}
 
-		File sqlFile = new File(sqlPath + "/portal-tables.sql");
+		File sqlFile = new File(_sqlDir + "/" + _sqlFileName);
 
 		if (!sqlFile.exists()) {
 			FileUtil.write(sqlFile, StringPool.BLANK);
@@ -6208,7 +6262,12 @@ public class ServiceBuilder {
 
 			if (Validator.isNotNull(createTableSQL)) {
 				_createSQLTables(sqlFile, createTableSQL, entity, true);
-				_createSQLTables(new File(sqlPath + "/update-4.2.0-4.3.0.sql"), createTableSQL, entity, false);
+
+				File updateSQLFile = new File(_sqlDir + "/update-4.2.0-4.3.0.sql");
+
+				if (updateSQLFile.exists()) {
+					_createSQLTables(updateSQLFile, createTableSQL, entity, false);
+				}
 			}
 		}
 	}
@@ -6479,7 +6538,7 @@ public class ServiceBuilder {
 	}
 
 	private JavaClass _getJavaClass(String fileName) throws IOException {
-		int pos = fileName.indexOf("src/") + 3;
+		int pos = fileName.indexOf(_implDir + "/") + _implDir.length();
 
 		String srcFile = fileName.substring(pos + 1, fileName.length());
 		String className = StringUtil.replace(
@@ -6706,9 +6765,11 @@ public class ServiceBuilder {
 	private String _modelHintsFileName;
 	private String _springFileName;
 	private String _beanLocatorUtilClassName;
-	private String _serviceDir;
+	private String _apiDir;
+	private String _implDir;
 	private String _jsonFileName;
-	private String _portalRoot;
+	private String _sqlDir;
+	private String _sqlFileName;
 	private String _portletName;
 	private String _portletShortName;
 	private String _portletPackageName;

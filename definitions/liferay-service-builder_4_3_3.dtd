@@ -21,9 +21,7 @@ that file to generate the service.
 <!ELEMENT service-builder (portlet, entity+, exceptions?)>
 
 <!--
-The root-dir value specifies the root directory of the portal source code. If
-you are running the service builder in /portal/portal-impl or /ext/ext-impl,
-then the value is just ".." because the root is /portal or /ext.
+The root-dir value is now deprecated.
 
 The package-path value specifies the package of the generated code. If the value
 is "com.liferay.portlet", then all generated code will fall inside
@@ -33,7 +31,7 @@ specified in the portlet element. For example, if the portlet name is
 "com.liferay.portlet.messageboards".
 -->
 <!ATTLIST service-builder
-	root-dir CDATA #REQUIRED
+	root-dir CDATA #IMPLIED
 	package-path CDATA #REQUIRED
 >
 

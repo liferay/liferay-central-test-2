@@ -11,6 +11,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -21,6 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -81,16 +83,17 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
             throw HibernateUtil.processException(e);
         } finally {
             closeSession(session);
+            FinderCache.clearCache(ReportsEntry.class.getName());
         }
     }
 
-    public com.ext.portlet.reports.model.ReportsEntry update(
+    public ReportsEntry update(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry)
         throws SystemException {
         return update(reportsEntry, false);
     }
 
-    public com.ext.portlet.reports.model.ReportsEntry update(
+    public ReportsEntry update(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry,
         boolean saveOrUpdate) throws SystemException {
         Session session = null;
@@ -114,6 +117,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
             throw HibernateUtil.processException(e);
         } finally {
             closeSession(session);
+            FinderCache.clearCache(ReportsEntry.class.getName());
         }
     }
 
@@ -150,39 +154,52 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     }
 
     public List findByCompanyId(String companyId) throws SystemException {
-        Session session = null;
+        String finderClassName = ReportsEntry.class.getName();
+        String finderMethodName = "findByCompanyId";
+        String[] finderParams = new String[] { String.class.getName() };
+        Object[] finderArgs = new Object[] { companyId };
+        Object result = FinderCache.getResult(finderClassName,
+                finderMethodName, finderParams, finderArgs, getSessionFactory());
 
-        try {
-            session = openSession();
+        if (result == null) {
+            Session session = null;
 
-            StringMaker query = new StringMaker();
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+            try {
+                session = openSession();
 
-            if (companyId == null) {
-                query.append("companyId IS NULL");
-            } else {
-                query.append("companyId = ?");
+                StringMaker query = new StringMaker();
+                query.append(
+                    "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+
+                if (companyId == null) {
+                    query.append("companyId IS NULL");
+                } else {
+                    query.append("companyId = ?");
+                }
+
+                query.append(" ");
+                query.append("ORDER BY ");
+                query.append("name ASC");
+
+                Query q = session.createQuery(query.toString());
+                int queryPos = 0;
+
+                if (companyId != null) {
+                    q.setString(queryPos++, companyId);
+                }
+
+                List list = q.list();
+                FinderCache.putResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, list);
+
+                return list;
+            } catch (Exception e) {
+                throw HibernateUtil.processException(e);
+            } finally {
+                closeSession(session);
             }
-
-            query.append(" ");
-            query.append("ORDER BY ");
-            query.append("name ASC");
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (companyId != null) {
-                q.setString(queryPos++, companyId);
-            }
-
-            return q.list();
-        } catch (Exception e) {
-            throw HibernateUtil.processException(e);
-        } finally {
-            closeSession(session);
+        } else {
+            return (List) result;
         }
     }
 
@@ -193,45 +210,64 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
     public List findByCompanyId(String companyId, int begin, int end,
         OrderByComparator obc) throws SystemException {
-        Session session = null;
+        String finderClassName = ReportsEntry.class.getName();
+        String finderMethodName = "findByCompanyId";
+        String[] finderParams = new String[] {
+                String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+                "com.liferay.portal.kernel.util.OrderByComparator"
+            };
+        Object[] finderArgs = new Object[] {
+                companyId, String.valueOf(begin), String.valueOf(end),
+                String.valueOf(obc)
+            };
+        Object result = FinderCache.getResult(finderClassName,
+                finderMethodName, finderParams, finderArgs, getSessionFactory());
 
-        try {
-            session = openSession();
+        if (result == null) {
+            Session session = null;
 
-            StringMaker query = new StringMaker();
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+            try {
+                session = openSession();
 
-            if (companyId == null) {
-                query.append("companyId IS NULL");
-            } else {
-                query.append("companyId = ?");
+                StringMaker query = new StringMaker();
+                query.append(
+                    "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+
+                if (companyId == null) {
+                    query.append("companyId IS NULL");
+                } else {
+                    query.append("companyId = ?");
+                }
+
+                query.append(" ");
+
+                if (obc != null) {
+                    query.append("ORDER BY ");
+                    query.append(obc.getOrderBy());
+                } else {
+                    query.append("ORDER BY ");
+                    query.append("name ASC");
+                }
+
+                Query q = session.createQuery(query.toString());
+                int queryPos = 0;
+
+                if (companyId != null) {
+                    q.setString(queryPos++, companyId);
+                }
+
+                List list = QueryUtil.list(q, getDialect(), begin, end);
+                FinderCache.putResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, list);
+
+                return list;
+            } catch (Exception e) {
+                throw HibernateUtil.processException(e);
+            } finally {
+                closeSession(session);
             }
-
-            query.append(" ");
-
-            if (obc != null) {
-                query.append("ORDER BY ");
-                query.append(obc.getOrderBy());
-            } else {
-                query.append("ORDER BY ");
-                query.append("name ASC");
-            }
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (companyId != null) {
-                q.setString(queryPos++, companyId);
-            }
-
-            return QueryUtil.list(q, getDialect(), begin, end);
-        } catch (Exception e) {
-            throw HibernateUtil.processException(e);
-        } finally {
-            closeSession(session);
+        } else {
+            return (List) result;
         }
     }
 
@@ -301,8 +337,6 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
             }
 
             Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
             int queryPos = 0;
 
             if (companyId != null) {
@@ -325,39 +359,52 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     }
 
     public List findByUserId(String userId) throws SystemException {
-        Session session = null;
+        String finderClassName = ReportsEntry.class.getName();
+        String finderMethodName = "findByUserId";
+        String[] finderParams = new String[] { String.class.getName() };
+        Object[] finderArgs = new Object[] { userId };
+        Object result = FinderCache.getResult(finderClassName,
+                finderMethodName, finderParams, finderArgs, getSessionFactory());
 
-        try {
-            session = openSession();
+        if (result == null) {
+            Session session = null;
 
-            StringMaker query = new StringMaker();
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+            try {
+                session = openSession();
 
-            if (userId == null) {
-                query.append("userId IS NULL");
-            } else {
-                query.append("userId = ?");
+                StringMaker query = new StringMaker();
+                query.append(
+                    "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+
+                if (userId == null) {
+                    query.append("userId IS NULL");
+                } else {
+                    query.append("userId = ?");
+                }
+
+                query.append(" ");
+                query.append("ORDER BY ");
+                query.append("name ASC");
+
+                Query q = session.createQuery(query.toString());
+                int queryPos = 0;
+
+                if (userId != null) {
+                    q.setString(queryPos++, userId);
+                }
+
+                List list = q.list();
+                FinderCache.putResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, list);
+
+                return list;
+            } catch (Exception e) {
+                throw HibernateUtil.processException(e);
+            } finally {
+                closeSession(session);
             }
-
-            query.append(" ");
-            query.append("ORDER BY ");
-            query.append("name ASC");
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (userId != null) {
-                q.setString(queryPos++, userId);
-            }
-
-            return q.list();
-        } catch (Exception e) {
-            throw HibernateUtil.processException(e);
-        } finally {
-            closeSession(session);
+        } else {
+            return (List) result;
         }
     }
 
@@ -368,45 +415,64 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
     public List findByUserId(String userId, int begin, int end,
         OrderByComparator obc) throws SystemException {
-        Session session = null;
+        String finderClassName = ReportsEntry.class.getName();
+        String finderMethodName = "findByUserId";
+        String[] finderParams = new String[] {
+                String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+                "com.liferay.portal.kernel.util.OrderByComparator"
+            };
+        Object[] finderArgs = new Object[] {
+                userId, String.valueOf(begin), String.valueOf(end),
+                String.valueOf(obc)
+            };
+        Object result = FinderCache.getResult(finderClassName,
+                finderMethodName, finderParams, finderArgs, getSessionFactory());
 
-        try {
-            session = openSession();
+        if (result == null) {
+            Session session = null;
 
-            StringMaker query = new StringMaker();
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+            try {
+                session = openSession();
 
-            if (userId == null) {
-                query.append("userId IS NULL");
-            } else {
-                query.append("userId = ?");
+                StringMaker query = new StringMaker();
+                query.append(
+                    "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+
+                if (userId == null) {
+                    query.append("userId IS NULL");
+                } else {
+                    query.append("userId = ?");
+                }
+
+                query.append(" ");
+
+                if (obc != null) {
+                    query.append("ORDER BY ");
+                    query.append(obc.getOrderBy());
+                } else {
+                    query.append("ORDER BY ");
+                    query.append("name ASC");
+                }
+
+                Query q = session.createQuery(query.toString());
+                int queryPos = 0;
+
+                if (userId != null) {
+                    q.setString(queryPos++, userId);
+                }
+
+                List list = QueryUtil.list(q, getDialect(), begin, end);
+                FinderCache.putResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, list);
+
+                return list;
+            } catch (Exception e) {
+                throw HibernateUtil.processException(e);
+            } finally {
+                closeSession(session);
             }
-
-            query.append(" ");
-
-            if (obc != null) {
-                query.append("ORDER BY ");
-                query.append(obc.getOrderBy());
-            } else {
-                query.append("ORDER BY ");
-                query.append("name ASC");
-            }
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (userId != null) {
-                q.setString(queryPos++, userId);
-            }
-
-            return QueryUtil.list(q, getDialect(), begin, end);
-        } catch (Exception e) {
-            throw HibernateUtil.processException(e);
-        } finally {
-            closeSession(session);
+        } else {
+            return (List) result;
         }
     }
 
@@ -476,8 +542,6 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
             }
 
             Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
             int queryPos = 0;
 
             if (userId != null) {
@@ -544,30 +608,53 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
     public List findAll(int begin, int end, OrderByComparator obc)
         throws SystemException {
-        Session session = null;
+        String finderClassName = ReportsEntry.class.getName();
+        String finderMethodName = "findAll";
+        String[] finderParams = new String[] {
+                "java.lang.Integer", "java.lang.Integer",
+                "com.liferay.portal.kernel.util.OrderByComparator"
+            };
+        Object[] finderArgs = new Object[] {
+                String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+            };
+        Object result = FinderCache.getResult(finderClassName,
+                finderMethodName, finderParams, finderArgs, getSessionFactory());
 
-        try {
-            session = openSession();
+        if (result == null) {
+            Session session = null;
 
-            StringMaker query = new StringMaker();
-            query.append("FROM com.ext.portlet.reports.model.ReportsEntry ");
+            try {
+                session = openSession();
 
-            if (obc != null) {
-                query.append("ORDER BY ");
-                query.append(obc.getOrderBy());
-            } else {
-                query.append("ORDER BY ");
-                query.append("name ASC");
+                StringMaker query = new StringMaker();
+                query.append("FROM com.ext.portlet.reports.model.ReportsEntry ");
+
+                if (obc != null) {
+                    query.append("ORDER BY ");
+                    query.append(obc.getOrderBy());
+                } else {
+                    query.append("ORDER BY ");
+                    query.append("name ASC");
+                }
+
+                Query q = session.createQuery(query.toString());
+                List list = QueryUtil.list(q, getDialect(), begin, end);
+
+                if (obc == null) {
+                    Collections.sort(list);
+                }
+
+                FinderCache.putResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, list);
+
+                return list;
+            } catch (Exception e) {
+                throw HibernateUtil.processException(e);
+            } finally {
+                closeSession(session);
             }
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            return QueryUtil.list(q, getDialect(), begin, end);
-        } catch (Exception e) {
-            throw HibernateUtil.processException(e);
-        } finally {
-            closeSession(session);
+        } else {
+            return (List) result;
         }
     }
 
@@ -598,125 +685,164 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     }
 
     public int countByCompanyId(String companyId) throws SystemException {
-        Session session = null;
+        String finderClassName = ReportsEntry.class.getName();
+        String finderMethodName = "countByCompanyId";
+        String[] finderParams = new String[] { String.class.getName() };
+        Object[] finderArgs = new Object[] { companyId };
+        Object result = FinderCache.getResult(finderClassName,
+                finderMethodName, finderParams, finderArgs, getSessionFactory());
 
-        try {
-            session = openSession();
+        if (result == null) {
+            Session session = null;
 
-            StringMaker query = new StringMaker();
-            query.append("SELECT COUNT(*) ");
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+            try {
+                session = openSession();
 
-            if (companyId == null) {
-                query.append("companyId IS NULL");
-            } else {
-                query.append("companyId = ?");
-            }
+                StringMaker query = new StringMaker();
+                query.append("SELECT COUNT(*) ");
+                query.append(
+                    "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
-            query.append(" ");
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (companyId != null) {
-                q.setString(queryPos++, companyId);
-            }
-
-            Iterator itr = q.list().iterator();
-
-            if (itr.hasNext()) {
-                Long count = (Long) itr.next();
-
-                if (count != null) {
-                    return count.intValue();
+                if (companyId == null) {
+                    query.append("companyId IS NULL");
+                } else {
+                    query.append("companyId = ?");
                 }
-            }
 
-            return 0;
-        } catch (Exception e) {
-            throw HibernateUtil.processException(e);
-        } finally {
-            closeSession(session);
+                query.append(" ");
+
+                Query q = session.createQuery(query.toString());
+                int queryPos = 0;
+
+                if (companyId != null) {
+                    q.setString(queryPos++, companyId);
+                }
+
+                Long count = null;
+                Iterator itr = q.list().iterator();
+
+                if (itr.hasNext()) {
+                    count = (Long) itr.next();
+                }
+
+                if (count == null) {
+                    count = new Long(0);
+                }
+
+                FinderCache.putResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, count);
+
+                return count.intValue();
+            } catch (Exception e) {
+                throw HibernateUtil.processException(e);
+            } finally {
+                closeSession(session);
+            }
+        } else {
+            return ((Long) result).intValue();
         }
     }
 
     public int countByUserId(String userId) throws SystemException {
-        Session session = null;
+        String finderClassName = ReportsEntry.class.getName();
+        String finderMethodName = "countByUserId";
+        String[] finderParams = new String[] { String.class.getName() };
+        Object[] finderArgs = new Object[] { userId };
+        Object result = FinderCache.getResult(finderClassName,
+                finderMethodName, finderParams, finderArgs, getSessionFactory());
 
-        try {
-            session = openSession();
+        if (result == null) {
+            Session session = null;
 
-            StringMaker query = new StringMaker();
-            query.append("SELECT COUNT(*) ");
-            query.append(
-                "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
+            try {
+                session = openSession();
 
-            if (userId == null) {
-                query.append("userId IS NULL");
-            } else {
-                query.append("userId = ?");
-            }
+                StringMaker query = new StringMaker();
+                query.append("SELECT COUNT(*) ");
+                query.append(
+                    "FROM com.ext.portlet.reports.model.ReportsEntry WHERE ");
 
-            query.append(" ");
-
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
-
-            int queryPos = 0;
-
-            if (userId != null) {
-                q.setString(queryPos++, userId);
-            }
-
-            Iterator itr = q.list().iterator();
-
-            if (itr.hasNext()) {
-                Long count = (Long) itr.next();
-
-                if (count != null) {
-                    return count.intValue();
+                if (userId == null) {
+                    query.append("userId IS NULL");
+                } else {
+                    query.append("userId = ?");
                 }
-            }
 
-            return 0;
-        } catch (Exception e) {
-            throw HibernateUtil.processException(e);
-        } finally {
-            closeSession(session);
+                query.append(" ");
+
+                Query q = session.createQuery(query.toString());
+                int queryPos = 0;
+
+                if (userId != null) {
+                    q.setString(queryPos++, userId);
+                }
+
+                Long count = null;
+                Iterator itr = q.list().iterator();
+
+                if (itr.hasNext()) {
+                    count = (Long) itr.next();
+                }
+
+                if (count == null) {
+                    count = new Long(0);
+                }
+
+                FinderCache.putResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, count);
+
+                return count.intValue();
+            } catch (Exception e) {
+                throw HibernateUtil.processException(e);
+            } finally {
+                closeSession(session);
+            }
+        } else {
+            return ((Long) result).intValue();
         }
     }
 
     public int countAll() throws SystemException {
-        Session session = null;
+        String finderClassName = ReportsEntry.class.getName();
+        String finderMethodName = "countAll";
+        String[] finderParams = new String[] {  };
+        Object[] finderArgs = new Object[] {  };
+        Object result = FinderCache.getResult(finderClassName,
+                finderMethodName, finderParams, finderArgs, getSessionFactory());
 
-        try {
-            session = openSession();
+        if (result == null) {
+            Session session = null;
 
-            StringMaker query = new StringMaker();
-            query.append("SELECT COUNT(*) ");
-            query.append("FROM com.ext.portlet.reports.model.ReportsEntry");
+            try {
+                session = openSession();
 
-            Query q = session.createQuery(query.toString());
-            q.setCacheable(true);
+                StringMaker query = new StringMaker();
+                query.append("SELECT COUNT(*) ");
+                query.append("FROM com.ext.portlet.reports.model.ReportsEntry");
 
-            Iterator itr = q.list().iterator();
+                Query q = session.createQuery(query.toString());
+                Long count = null;
+                Iterator itr = q.list().iterator();
 
-            if (itr.hasNext()) {
-                Long count = (Long) itr.next();
-
-                if (count != null) {
-                    return count.intValue();
+                if (itr.hasNext()) {
+                    count = (Long) itr.next();
                 }
-            }
 
-            return 0;
-        } catch (Exception e) {
-            throw HibernateUtil.processException(e);
-        } finally {
-            closeSession(session);
+                if (count == null) {
+                    count = new Long(0);
+                }
+
+                FinderCache.putResult(finderClassName, finderMethodName,
+                    finderParams, finderArgs, count);
+
+                return count.intValue();
+            } catch (Exception e) {
+                throw HibernateUtil.processException(e);
+            } finally {
+                closeSession(session);
+            }
+        } else {
+            return ((Long) result).intValue();
         }
     }
 

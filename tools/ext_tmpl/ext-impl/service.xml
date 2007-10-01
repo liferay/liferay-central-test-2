@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.3.3//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_3_3.dtd">
 
-<service-builder root-dir=".." package-path="com.ext.portlet">
+<service-builder package-path="com.ext.portlet">
 	<portlet name="Reports" short-name="Reports" />
 	<entity name="ReportsEntry" local-service="false" remote-service="true" persistence-class="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence">
 

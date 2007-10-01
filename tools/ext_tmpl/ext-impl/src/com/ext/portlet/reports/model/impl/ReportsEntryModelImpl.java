@@ -1,9 +1,9 @@
 package com.ext.portlet.reports.model.impl;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
 import java.io.Serializable;
@@ -24,6 +24,8 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
             { "modifiedDate", new Integer(Types.TIMESTAMP) },
             { "name", new Integer(Types.VARCHAR) }
         };
+    public static String TABLE_SQL_CREATE = "create table ReportsEntry (entryId VARCHAR(75) not null primary key,companyId VARCHAR(75) null,userId VARCHAR(75) null,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
+    public static String TABLE_SQL_DROP = "drop table ReportsEntry";
     public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
                 "xss.allow.com.ext.portlet.reports.model.ReportsEntry"),
             XSS_ALLOW);
