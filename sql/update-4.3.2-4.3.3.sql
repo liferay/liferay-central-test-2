@@ -1,5 +1,3 @@
-alter table Group_ add typeSettings STRING null;
-
 alter table JournalArticle add indexable BOOLEAN;
 
 COMMIT_TRANSACTION;
