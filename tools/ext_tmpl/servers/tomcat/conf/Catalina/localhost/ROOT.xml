@@ -111,7 +111,7 @@
 		auth="Container"
 		type="javax.sql.DataSource"
 		driverClassName="net.sourceforge.jtds.jdbc.Driver"
-		url="jdbc:jtds:sybase://localhost:2048/lportal"
+		url="jdbc:jtds:sybase://localhost:5000/lportal"
 		username="sa"
 		password=""
 		maxActive="20"
