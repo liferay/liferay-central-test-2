@@ -13,5 +13,4 @@
 	<sql file="custom-sql/shopping.xml" />
 	<sql file="custom-sql/tags.xml" />
 	<sql file="custom-sql/wiki.xml" />
-	<sql file="custom-sql/workflow.xml" />
 </custom-sql>
