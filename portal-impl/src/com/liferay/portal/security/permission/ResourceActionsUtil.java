@@ -27,8 +27,14 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Location;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -64,10 +70,15 @@ import org.dom4j.io.SAXReader;
  *
  */
 public class ResourceActionsUtil {
-
 	public static final String ACTION_NAME_PREFIX = "action.";
 
 	public static final String MODEL_RESOURCE_NAME_PREFIX = "model.resource.";
+
+	public static final String[] PORTAL_MODEL_RESOURCES = {
+		Location.class.getName(), Organization.class.getName(),
+		PasswordPolicy.class.getName(), Role.class.getName(),
+		User.class.getName(), UserGroup.class.getName()
+	};
 
 	public static String getAction(
 		long companyId, Locale locale, String action) {
@@ -248,6 +259,16 @@ public class ResourceActionsUtil {
 		}
 
 		return actions;
+	}
+
+	public static boolean isPortalModelResource(String modelResource) {
+		for (int i = 0; i < PORTAL_MODEL_RESOURCES.length; i++) {
+			String portalModelResource = PORTAL_MODEL_RESOURCES[i];
+			if (portalModelResource.equals(modelResource)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static void read(

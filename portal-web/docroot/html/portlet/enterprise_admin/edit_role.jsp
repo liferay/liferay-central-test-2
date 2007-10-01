@@ -30,6 +30,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
 long roleId = BeanParamUtil.getLong(role, request, "roleId");
+
+int roleType = ParamUtil.getInteger(request, "roleType", -1);
+
 %>
 
 <liferay-ui:tabs
@@ -85,13 +88,20 @@ long roleId = BeanParamUtil.getLong(role, request, "roleId");
 			</td>
 			<td>
 				<c:choose>
-					<c:when test="<%= role == null %>">
+					<c:when test="<%= ((role == null) && (roleType == -1)) %>">
 						<select name="<portlet:namespace/>type">
 							<option value="<%= RoleImpl.TYPE_REGULAR %>"><%=LanguageUtil.get(pageContext, "regular")%></option>
 							<option value="<%= RoleImpl.TYPE_COMMUNITY %>"><%=LanguageUtil.get(pageContext, "community")%></option>
+							<option value="<%= RoleImpl.TYPE_ORGANIZATION %>"><%=LanguageUtil.get(pageContext, "organization")%></option>
+						</select>
+					</c:when>
+					<c:when test="<%= (role == null) %>">
+						<input type="hidden" name="<portlet:namespace/>type" value="<%= String.valueOf(roleType) %>" />
+
+						<%= LanguageUtil.get(pageContext, RoleImpl.getTypeLabel(roleType)) %>
 					</c:when>
 					<c:otherwise>
-						<%= LanguageUtil.get(pageContext, (role.getType() == RoleImpl.TYPE_REGULAR) ? "regular" : "community") %>
+						<%= LanguageUtil.get(pageContext, role.getTypeLabel()) %>
 					</c:otherwise>
 				</c:choose>
 			</td>

@@ -41,8 +41,12 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.comparator.OrganizationNameComparator;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -238,10 +242,17 @@ public class UserImpl extends UserModelImpl implements User {
 		return group;
 	}
 
+	/**
+	 * @deprecated Will return the first regular organization of the list in
+	 * alphabetical order
+	 */
 	public Organization getOrganization() {
 		try {
 			List organizations =
 				OrganizationLocalServiceUtil.getUserOrganizations(getUserId());
+
+			Collections.sort(
+				organizations, new OrganizationNameComparator(true));
 
 			for (int i = 0; i < organizations.size(); i++) {
 				Organization organization = (Organization)organizations.get(i);
@@ -252,12 +263,51 @@ public class UserImpl extends UserModelImpl implements User {
 			}
 		}
 		catch (Exception e) {
-			_log.warn("User does not have belong to an organization");
+			_log.warn(
+				"User " + getUserId() + " does not belong to any organization");
 		}
 
 		return new OrganizationImpl();
 	}
 
+	public List getOrganizations() {
+		try {
+			return OrganizationLocalServiceUtil.getUserOrganizations(
+				getUserId());
+		}
+		catch (Exception e) {
+			_log.warn("User does not belong to any organization");
+		}
+
+		return new ArrayList();
+	}
+
+	public long[] getOrganizationIds() {
+		List organizations = getOrganizations();
+
+		long[] organizationIds = new long[organizations.size()];
+
+		Iterator itr = organizations.iterator();
+
+		for (int i = 0; itr.hasNext(); i++) {
+			Organization organization = (Organization) itr.next();
+
+			organizationIds[i] = organization.getOrganizationId();
+		}
+
+		return organizationIds;
+	}
+
+	public boolean hasOrganization() {
+		if (getOrganizations().size() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/** @deprecated */
 	public Organization getLocation() {
 		try {
 			List organizations =
@@ -276,6 +326,27 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 
 		return new OrganizationImpl();
+	}
+
+	/** @deprecated */
+	public long getLocationId() {
+		Organization location = getLocation();
+
+		if (location == null) {
+			return OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
+		}
+
+		return location.getOrganizationId();
+	}
+
+	/** @deprecated */
+	public boolean hasLocation() {
+		if (getLocation().getOrganizationId() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public int getPrivateLayoutsPageCount() {

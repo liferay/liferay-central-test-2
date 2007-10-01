@@ -423,17 +423,6 @@
 		<render-weight>0</render-weight>
 	</portlet>
 	<portlet>
-		<portlet-name>40</portlet-name>
-		<icon>/html/portlet/enterprise_admin/icon.png</icon>
-		<struts-path>location_admin</struts-path>
-		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
-	</portlet>
-	<portlet>
 		<portlet-name>42</portlet-name>
 		<icon>/html/portlet/pipeline/icon.png</icon>
 		<struts-path>pipeline</struts-path>

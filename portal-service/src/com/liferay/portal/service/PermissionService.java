@@ -92,6 +92,11 @@ public interface PermissionService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public void setRolePermissions(long roleId, long groupId,
+		java.lang.String[] actionIds, long resourceId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public void setUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 

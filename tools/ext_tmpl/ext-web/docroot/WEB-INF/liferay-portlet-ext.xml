@@ -209,11 +209,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>40</portlet-name>
-		<struts-path>location_admin</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>42</portlet-name>
 		<struts-path>pipeline</struts-path>
 		<include>true</include>

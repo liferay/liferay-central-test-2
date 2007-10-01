@@ -47,6 +47,10 @@ public class DAOParamUtil {
 
 	// Servlet Request
 
+	public static int getInteger(ServletRequest req, String param) {
+		return GetterUtil.getInteger(getString(req, param));
+	}
+
 	public static String getISODate(ServletRequest req, String param) {
 		int month = ParamUtil.getInteger(req, param + "Month");
 		int day = ParamUtil.getInteger(req, param + "Day");
@@ -134,6 +138,10 @@ public class DAOParamUtil {
 	}
 
 	// Portlet Request
+
+	public static int getInteger(PortletRequest req, String param) {
+		return GetterUtil.getInteger(getString(req, param));
+	}
 
 	public static String getISODate(PortletRequest req, String param) {
 		int month = ParamUtil.getInteger(req, param + "Month");

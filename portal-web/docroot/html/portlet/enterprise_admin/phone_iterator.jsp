@@ -33,8 +33,7 @@ String className = ParamUtil.getString(request, "className");
 long classNameId = PortalUtil.getClassNameId(className);
 long classPK = ParamUtil.getLong(request, "classPK");
 
-long organizationId = ParamUtil.getLong(request, "organizationId");
-long locationId = ParamUtil.getLong(request, "locationId");
+long[] organizationIdsArray = StringUtil.split(ParamUtil.getString(request, "organizationIds"), 0L);
 
 SearchContainer searchContainer = new SearchContainer();
 
@@ -53,12 +52,10 @@ searchContainer.setHeaderNames(headerNames);
 
 List results = new ArrayList();
 
-if (!className.equals(Organization.class.getName()) && (organizationId > 0)) {
-	results = PhoneServiceUtil.getPhones(Organization.class.getName(), organizationId);
-}
-
-if ((locationId > 0)) {
-	results = PhoneServiceUtil.getPhones(Organization.class.getName(), locationId);
+if (!className.equals(Organization.class.getName()) && (organizationIdsArray.length > 0)) {
+	for (int i = 0; i < organizationIdsArray.length; i++) {
+		results.addAll(PhoneServiceUtil.getPhones(Organization.class.getName(), organizationIdsArray[i]));
+	}
 }
 
 results.addAll(PhoneServiceUtil.getPhones(className, classPK));

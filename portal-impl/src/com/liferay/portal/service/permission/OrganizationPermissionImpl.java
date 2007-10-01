@@ -22,17 +22,23 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
 /**
  * <a href="OrganizationPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
+ * @author Jorge Ferrer
  *
  */
 public class OrganizationPermissionImpl implements OrganizationPermission {
@@ -40,7 +46,7 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 	public void check(
 			PermissionChecker permissionChecker, long organizationId,
 			String actionId)
-		throws PrincipalException {
+		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, organizationId, actionId)) {
 			throw new PrincipalException();
@@ -49,31 +55,89 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 
 	public boolean contains(
 		PermissionChecker permissionChecker, long organizationId,
-		String actionId) {
+		String actionId)
+		throws PortalException, SystemException {
 
 		PermissionCheckerImpl permissionCheckerImpl =
 			(PermissionCheckerImpl)permissionChecker;
 
 		if (permissionChecker.hasPermission(
-				0, Organization.class.getName(), organizationId, actionId)) {
+				0, Organization.class.getName(), organizationId, actionId) ||
+			(!actionId.equals(ActionKeys.PERMISSIONS) &&
+			 hasGroupAdministratePermission(
+				 permissionChecker, organizationId))) {
 
 			return true;
 		}
 		else if (actionId.equals(ActionKeys.VIEW)) {
 			User user = permissionCheckerImpl.getUser();
 
-			Organization organization = user.getOrganization();
+			long[] organizationIds = user.getOrganizationIds();
 
-			if (organizationId == organization.getOrganizationId()) {
-				return true;
+			for (int i = 0; i < organizationIds.length; i++) {
+				if (organizationId == organizationIds[i]) {
+					return true;
+				}
 			}
-			else {
-				return false;
+
+			return false;
+		}
+		else if (actionId.endsWith("_USER")){
+
+			while (organizationId !=
+						OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+				Organization organization =
+					OrganizationLocalServiceUtil.getOrganization(
+						organizationId);
+
+				organizationId = organization.getParentOrganizationId();
+
+				if (permissionChecker.hasPermission(
+						0, Organization.class.getName(), organizationId,
+						actionId) ||
+					(!actionId.equals(ActionKeys.PERMISSIONS) &&
+					 hasGroupAdministratePermission(
+						 permissionChecker, organization))) {
+
+					return true;
+				}
+
 			}
+
+			return false;
 		}
 		else {
 			return false;
 		}
+	}
+
+	protected boolean hasGroupAdministratePermission(
+		PermissionChecker permissionChecker, long organizationId)
+		throws SystemException, PortalException {
+
+		if (organizationId <= 0) {
+			return false;
+		}
+
+		Organization organization =
+			OrganizationLocalServiceUtil.getOrganization(organizationId);
+
+		return hasGroupAdministratePermission(permissionChecker, organization);
+	}
+
+	protected boolean hasGroupAdministratePermission(
+		PermissionChecker permissionChecker, Organization organization) {
+
+		Group group = organization.getGroup();
+
+		if (GroupPermissionUtil.contains(
+				permissionChecker, group.getGroupId(),
+				ActionKeys.ADMINISTRATE)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 }

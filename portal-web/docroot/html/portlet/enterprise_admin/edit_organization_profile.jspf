@@ -33,10 +33,6 @@ if (parentOrganizationId <= 0) {
 	}
 }
 
-if (!organizationsTab && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-	parentOrganizationId = user.getOrganization().getOrganizationId();
-}
-
 String parentOrganizationName = ParamUtil.getString(request, "parentOrganizationName");
 
 if (parentOrganizationId != OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
@@ -49,6 +45,7 @@ if (parentOrganizationId != OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
 	}
 }
 
+int type = BeanParamUtil.getInteger(organization, request, "type");
 long regionId = BeanParamUtil.getLong(organization, request, "regionId");
 long countryId = BeanParamUtil.getLong(organization, request, "countryId");
 int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
@@ -107,23 +104,21 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= String.valueOf(parentOrganizationId) %>" /></portlet:renderURL>" id="<portlet:namespace />parentOrganizationName"><%= parentOrganizationName %></a>
 
 				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
-					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
+					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="type" value="<%= String.valueOf(OrganizationImpl.TYPE_REGULAR) %>" /><portlet:param name="tabs1" value="<%= "organizations" %>" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
 
 					<input <%= (organizationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeOrganizationButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeOrganization();">
 				</c:if>
 			</td>
 		</tr>
 
-		<c:if test="<%= organizationsTab %>">
-			<tr>
-				<td>
-					<liferay-ui:message key="recursable-permissions" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= organization %>" field="recursable" />
-				</td>
-			</tr>
-		</c:if>
+		<tr>
+			<td>
+				<liferay-ui:message key="recursable-permissions" />
+			</td>
+			<td>
+				<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= organization %>" field="recursable" />
+			</td>
+		</tr>
 
 		<tr>
 			<td>
@@ -153,6 +148,24 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 	</td>
 	<td valign="top">
 		<table class="liferay-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="type" />
+			</td>
+			<td>
+				<c:choose>
+					<c:when test="<%= organization == null %>">
+						<select name="<portlet:namespace />type">
+							<option <%= (type == OrganizationImpl.TYPE_REGULAR) ? "selected" : "" %> value="<%= OrganizationImpl.TYPE_REGULAR %>"></option>
+							<option <%= (type == OrganizationImpl.TYPE_LOCATION) ? "selected" : "" %> value="<%= OrganizationImpl.TYPE_LOCATION %>"><%= LanguageUtil.get(pageContext, "location") %></option>
+						</select>
+					</c:when>
+					<c:otherwise>
+						<%= LanguageUtil.get(pageContext, OrganizationImpl.getTypeLabel(type)) %>
+					</c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
 		<tr>
 			<td>
 				<liferay-ui:message key="country" />

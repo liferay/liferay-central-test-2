@@ -30,7 +30,6 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -72,22 +71,12 @@ public class CommonPermissionImpl implements CommonPermission {
 			User user = UserLocalServiceUtil.getUserByContactId(classPK);
 
 			UserPermissionUtil.check(
-				permissionChecker, user.getUserId(),
-				user.getOrganization().getOrganizationId(),
-				user.getLocation().getOrganizationId(), actionId);
+				permissionChecker, user.getUserId(), user.getOrganizationIds(),
+				actionId);
 		}
 		else if (className.equals(Organization.class.getName())) {
-			Organization organization =
-				OrganizationLocalServiceUtil.getOrganization(classPK);
-
-			if (!organization.isLocation()) {
-				OrganizationPermissionUtil.check(
-					permissionChecker, classPK, actionId);
-			}
-			else {
-				LocationPermissionUtil.check(
-					permissionChecker, classPK, actionId);
-			}
+			OrganizationPermissionUtil.check(
+				permissionChecker, classPK, actionId);
 		}
 		else {
 			throw new PrincipalException();

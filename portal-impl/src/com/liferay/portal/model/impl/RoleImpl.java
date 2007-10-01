@@ -53,11 +53,41 @@ public class RoleImpl extends RoleModelImpl implements Role {
 	public static final String[] SYSTEM_COMMUNITY_ROLES =
 		RoleNames.SYSTEM_COMMUNITY_ROLES;
 
+	public static final String ORGANIZATION_ADMINISTRATOR =
+		RoleNames.ORGANIZATION_ADMINISTRATOR;
+
+	public static final String[] SYSTEM_ORGANIZATION_ROLES =
+		RoleNames.SYSTEM_ORGANIZATION_ROLES;
+
 	public static final int TYPE_COMMUNITY = 2;
+
+	public static final String TYPE_COMMUNITY_LABEL = "community";
+
+	public static final int TYPE_ORGANIZATION = 3;
+
+	public static final String TYPE_ORGANIZATION_LABEL = "organization";
 
 	public static final int TYPE_REGULAR = 1;
 
+	public static final String TYPE_REGULAR_LABEL = "regular";
+
+	public static String getTypeLabel(int type) {
+		if (type == TYPE_COMMUNITY) {
+			return TYPE_COMMUNITY_LABEL;
+		}
+		else if (type == TYPE_ORGANIZATION) {
+			return TYPE_ORGANIZATION_LABEL;
+		}
+		else {
+			return TYPE_REGULAR_LABEL;
+		}
+	}
+
 	public RoleImpl() {
+	}
+
+	public String getTypeLabel() {
+		return getTypeLabel(getType());
 	}
 
 }

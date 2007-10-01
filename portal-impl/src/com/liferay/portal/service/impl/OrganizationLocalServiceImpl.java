@@ -71,6 +71,7 @@ import java.util.List;
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class OrganizationLocalServiceImpl
@@ -86,7 +87,7 @@ public class OrganizationLocalServiceImpl
 
 	public Organization addOrganization(
 			long userId, long parentOrganizationId, String name,
-			boolean location, boolean recursable, long regionId, long countryId,
+			int type, boolean recursable, long regionId, long countryId,
 			int statusId)
 		throws PortalException, SystemException {
 
@@ -97,7 +98,7 @@ public class OrganizationLocalServiceImpl
 			user.getCompanyId(), parentOrganizationId);
 
 		validate(
-			user.getCompanyId(), parentOrganizationId, name, location,
+			user.getCompanyId(), parentOrganizationId, name, type,
 			countryId, statusId);
 
 		long organizationId = CounterLocalServiceUtil.increment();
@@ -107,7 +108,14 @@ public class OrganizationLocalServiceImpl
 		organization.setCompanyId(user.getCompanyId());
 		organization.setParentOrganizationId(parentOrganizationId);
 		organization.setName(name);
-		organization.setLocation(location);
+
+		if (type == OrganizationImpl.TYPE_LOCATION) {
+			organization.setLocation(true);
+		}
+		else {
+			organization.setLocation(false);
+		}
+
 		organization.setRecursable(recursable);
 		organization.setRegionId(regionId);
 		organization.setCountryId(countryId);
@@ -260,6 +268,19 @@ public class OrganizationLocalServiceImpl
 		return OrganizationUtil.findByPrimaryKey(organizationId);
 	}
 
+	public List getOrganizations(long[] organizationIds)
+		throws PortalException, SystemException {
+
+		List organizations = new ArrayList();
+
+		for (int i = 0; i < organizationIds.length; i++) {
+			Organization organization = getOrganization(organizationIds[i]);
+			organizations.add(organization);
+		}
+
+		return organizations;
+	}
+
 	public long getOrganizationId(long companyId, String name)
 		throws PortalException, SystemException {
 
@@ -339,22 +360,50 @@ public class OrganizationLocalServiceImpl
 		return false;
 	}
 
+	/** @deprecated */
 	public List search(
 			long companyId, long parentOrganizationId, String keywords,
 			boolean location, Long regionId, Long countryId,
 			LinkedHashMap params, int begin, int end)
 		throws PortalException, SystemException {
 
+		int type = OrganizationImpl.getType(location);
+
 		return search(
-			companyId, parentOrganizationId, keywords, location, regionId,
-			countryId, params, begin, end,
-			new OrganizationNameComparator(true));
+			companyId, parentOrganizationId, keywords, type, regionId,
+			countryId, params, begin, end);
 	}
 
 	public List search(
 			long companyId, long parentOrganizationId, String keywords,
+			int type, Long regionId, Long countryId, LinkedHashMap params,
+			int begin, int end)
+		throws PortalException, SystemException {
+
+		return search(
+			companyId, parentOrganizationId, keywords, type, regionId,
+			countryId, params, begin, end,
+			new OrganizationNameComparator(true));
+	}
+
+	/** @deprecated */
+	public List search(
+			long companyId, long parentOrganizationId, String keywords,
 			boolean location, Long regionId, Long countryId,
 			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		int type = OrganizationImpl.getType(location);
+
+		return search(
+			companyId, parentOrganizationId, keywords, type, regionId,
+			countryId, params, begin, end, obc);
+	}
+
+	public List search(
+			long companyId, long parentOrganizationId, String keywords,
+			int type, Long regionId, Long countryId, LinkedHashMap params,
+			int begin, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		String parentOrganizationComparator = StringPool.EQUAL;
@@ -365,56 +414,13 @@ public class OrganizationLocalServiceImpl
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
 
-		if (location){
-			if (parentOrganizationId ==
-					OrganizationImpl.ANY_PARENT_ORGANIZATION_ID) {
-
-				parentOrganizationId =
-					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
-			}
-
-			// Bottom up recursive calculation of parent organizations and
-			// associated locations
-
-			List organizations = null;
-
-			if (parentOrganizationId ==
-					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
-
-				organizations = OrganizationFinder.findByKeywords(
-					companyId, parentOrganizationId,
-					parentOrganizationComparator, keywords, location, regionId,
-					countryId, params, begin, end, obc);
-			}
-			else {
-				Organization grandParentOrganization =
-					OrganizationUtil.findByPrimaryKey(parentOrganizationId);
-
-				long grandParentOrganizationId =
-					grandParentOrganization.getParentOrganizationId();
-
-				organizations = search(
-					companyId, grandParentOrganizationId, keywords, location,
-					regionId, countryId, params, begin, end, obc);
-
-				organizations.addAll(
-					OrganizationFinder.findByKeywords(
-						companyId, parentOrganizationId,
-						parentOrganizationComparator, keywords, location,
-						regionId, countryId, params, begin, end, obc));
-			}
-
-			return organizations;
-
-		}
-		else {
-			return OrganizationFinder.findByKeywords(
-				companyId, parentOrganizationId, parentOrganizationComparator,
-				keywords, location, regionId, countryId, params, begin, end,
-				obc);
-		}
+		return OrganizationFinder.findByKeywords(
+			companyId, parentOrganizationId, parentOrganizationComparator,
+			keywords, type, regionId, countryId, params, begin, end,
+			obc);
 	}
 
+	/** @deprecated */
 	public List search(
 			long companyId, long parentOrganizationId, String name,
 			boolean location, String street, String city, String zip,
@@ -422,15 +428,44 @@ public class OrganizationLocalServiceImpl
 			boolean andOperator, int begin, int end)
 		throws PortalException, SystemException {
 
+		int type = OrganizationImpl.getType(location);
+
 		return search(
-			companyId, parentOrganizationId, name, location, street, city, zip,
+			companyId, parentOrganizationId, name, type, street, city, zip,
+			regionId, countryId, params, andOperator, begin, end);
+	}
+
+	public List search(
+			long companyId, long parentOrganizationId, String name, int type,
+			String street, String city, String zip,
+			Long regionId, Long countryId, LinkedHashMap params,
+			boolean andOperator, int begin, int end)
+		throws PortalException, SystemException {
+
+		return search(
+			companyId, parentOrganizationId, name, type, street, city, zip,
 			regionId, countryId, params, andOperator, begin, end,
 			new OrganizationNameComparator(true));
 	}
 
+	/** @deprecated */
 	public List search(
 			long companyId, long parentOrganizationId, String name,
 			boolean location, String street, String city, String zip,
+			Long regionId, Long countryId, LinkedHashMap params,
+			boolean andOperator, int begin, int end, OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		int type = OrganizationImpl.getType(location);
+
+		return search(
+			companyId, parentOrganizationId, name, type, street, city, zip,
+			regionId, countryId, params, andOperator, begin, end, obc);
+	}
+
+	public List search(
+			long companyId, long parentOrganizationId, String name, int type,
+			String street, String city, String zip,
 			Long regionId, Long countryId, LinkedHashMap params,
 			boolean andOperator, int begin, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
@@ -443,62 +478,29 @@ public class OrganizationLocalServiceImpl
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
 
-		if (location){
-			if (parentOrganizationId ==
-					OrganizationImpl.ANY_PARENT_ORGANIZATION_ID) {
+		return OrganizationFinder.findByC_PO_N_T_S_C_Z_R_C(
+			companyId, parentOrganizationId, parentOrganizationComparator,
+			name, type, street, city, zip, regionId, countryId, params,
+			andOperator, begin, end, obc);
+	}
 
-				parentOrganizationId =
-					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
-			}
+	/** @deprecated */
+	public int searchCount(
+			long companyId, long parentOrganizationId, String keywords,
+			boolean location, Long regionId, Long countryId,
+			LinkedHashMap params)
+		throws PortalException, SystemException {
 
-			// Bottom up recursive calculation of parent organizations and
-			// associated locations
+		int type = OrganizationImpl.getType(location);
 
-			List organizations = null;
-
-			if (parentOrganizationId ==
-					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
-
-				organizations = OrganizationFinder.findByC_PO_N_L_S_C_Z_R_C(
-					companyId, parentOrganizationId,
-					parentOrganizationComparator, name, location, street, city,
-					zip, regionId, countryId, params, andOperator, begin, end,
-					obc);
-			}
-			else {
-				Organization grandParentOrganization =
-					OrganizationUtil.findByPrimaryKey(parentOrganizationId);
-
-				long grandParentOrganizationId =
-					grandParentOrganization.getParentOrganizationId();
-
-				organizations = search(
-					companyId, grandParentOrganizationId, name, location,
-					street, city, zip, regionId, countryId, params, andOperator,
-					begin, end, obc);
-
-				organizations.addAll(
-					OrganizationFinder.findByC_PO_N_L_S_C_Z_R_C(
-						companyId, parentOrganizationId,
-						parentOrganizationComparator, name, location, street,
-						city, zip, regionId, countryId, params, andOperator,
-						begin, end, obc));
-			}
-
-			return organizations;
-
-		}
-		else {
-			return OrganizationFinder.findByC_PO_N_L_S_C_Z_R_C(
-				companyId, parentOrganizationId, parentOrganizationComparator,
-				name, location, street, city, zip, regionId, countryId, params,
-				andOperator, begin, end, obc);
-		}
+		return searchCount(
+			companyId, parentOrganizationId, keywords, type, regionId,
+			countryId, params);
 	}
 
 	public int searchCount(
 			long companyId, long parentOrganizationId, String keywords,
-			boolean location, Long regionId, Long countryId,
+			int type, Long regionId, Long countryId,
 			LinkedHashMap params)
 		throws PortalException, SystemException {
 
@@ -510,56 +512,29 @@ public class OrganizationLocalServiceImpl
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
 
-		if (location){
-			if (parentOrganizationId ==
-					OrganizationImpl.ANY_PARENT_ORGANIZATION_ID) {
-
-				parentOrganizationId =
-					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
-			}
-
-			// Bottom up recursive calculation of parent organizations and
-			// associated locations
-
-			int count = 0;
-
-			if (parentOrganizationId ==
-				OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
-
-				count = OrganizationFinder.countByKeywords(
-					companyId, parentOrganizationId,
-					parentOrganizationComparator, keywords, location, regionId,
-					countryId, params);
-			}
-			else {
-				Organization grandParentOrganization =
-					OrganizationUtil.findByPrimaryKey(parentOrganizationId);
-
-				long grandParentOrganizationId =
-					grandParentOrganization.getParentOrganizationId();
-
-				count = searchCount(
-					companyId, grandParentOrganizationId, keywords, location,
-					regionId, countryId, params);
-
-				count += OrganizationFinder.countByKeywords(
-					companyId, parentOrganizationId,
-					parentOrganizationComparator, keywords, location, regionId,
-					countryId, params);
-			}
-
-			return count;
-		}
-		else {
-			return OrganizationFinder.countByKeywords(
-				companyId, parentOrganizationId, parentOrganizationComparator,
-				keywords, location, regionId, countryId, params);
-		}
+		return OrganizationFinder.countByKeywords(
+			companyId, parentOrganizationId, parentOrganizationComparator,
+			keywords, type, regionId, countryId, params);
 	}
 
+	/** @deprecated */
 	public int searchCount(
 			long companyId, long parentOrganizationId, String name,
 			boolean location, String street, String city, String zip,
+			Long regionId, Long countryId, LinkedHashMap params,
+			boolean andOperator)
+		throws PortalException, SystemException {
+
+		int type = OrganizationImpl.getType(location);
+
+		return searchCount(
+			companyId, parentOrganizationId, name, type, street, city, zip,
+			regionId, countryId, params, andOperator);
+	}
+
+	public int searchCount(
+			long companyId, long parentOrganizationId, String name, int type,
+			String street, String city, String zip,
 			Long regionId, Long countryId, LinkedHashMap params,
 			boolean andOperator)
 		throws PortalException, SystemException {
@@ -572,53 +547,10 @@ public class OrganizationLocalServiceImpl
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
 
-		if (location){
-			if (parentOrganizationId ==
-					OrganizationImpl.ANY_PARENT_ORGANIZATION_ID) {
-
-				parentOrganizationId =
-					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
-			}
-
-			// Bottom up recursive calculation of parent organizations and
-			// associated locations
-
-			int count = 0;
-
-			if (parentOrganizationId ==
-				OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
-
-				count = OrganizationFinder.countByC_PO_N_L_S_C_Z_R_C(
-					companyId, parentOrganizationId,
-					parentOrganizationComparator, name, location, street, city,
-					zip, regionId, countryId, params, andOperator);
-			}
-			else {
-				Organization grandParentOrganization =
-					OrganizationUtil.findByPrimaryKey(parentOrganizationId);
-
-				long grandParentOrganizationId =
-					grandParentOrganization.getParentOrganizationId();
-
-				count = searchCount(
-					companyId, grandParentOrganizationId, name, location,
-					street, city, zip, regionId, countryId, params,
-					andOperator);
-
-				count += OrganizationFinder.countByC_PO_N_L_S_C_Z_R_C(
-					companyId, parentOrganizationId,
-					parentOrganizationComparator, name, location, street, city,
-					zip, regionId, countryId, params, andOperator);
-			}
-
-			return count;
-		}
-		else {
-			return OrganizationFinder.countByC_PO_N_L_S_C_Z_R_C(
-				companyId, parentOrganizationId, parentOrganizationComparator,
-				name, location, street, city, zip, regionId, countryId, params,
-				andOperator);
-		}
+		return OrganizationFinder.countByC_PO_N_T_S_C_Z_R_C(
+			companyId, parentOrganizationId, parentOrganizationComparator,
+			name, type, street, city, zip, regionId, countryId, params,
+			andOperator);
 	}
 
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
@@ -645,9 +577,23 @@ public class OrganizationLocalServiceImpl
 			passwordPolicyId, Organization.class.getName(), organizationIds);
 	}
 
+	/** @deprecated */
 	public Organization updateOrganization(
 			long companyId, long organizationId, long parentOrganizationId,
 			String name, boolean location, boolean recursable, long regionId,
+			long countryId, int statusId)
+		throws PortalException, SystemException {
+
+		int type = OrganizationImpl.getType(location);
+
+		return updateOrganization(
+			companyId, organizationId, parentOrganizationId, name, type,
+		    recursable, regionId, countryId, statusId);
+	}
+
+	public Organization updateOrganization(
+			long companyId, long organizationId, long parentOrganizationId,
+			String name, int type, boolean recursable, long regionId,
 			long countryId, int statusId)
 		throws PortalException, SystemException {
 
@@ -655,7 +601,7 @@ public class OrganizationLocalServiceImpl
 			companyId, parentOrganizationId);
 
 		validate(
-			companyId, organizationId, parentOrganizationId, name, location,
+			companyId, organizationId, parentOrganizationId, name, type,
 			countryId, statusId);
 
 		Organization organization =
@@ -663,7 +609,14 @@ public class OrganizationLocalServiceImpl
 
 		organization.setParentOrganizationId(parentOrganizationId);
 		organization.setName(name);
-		organization.setLocation(location);
+
+		if (type == OrganizationImpl.TYPE_LOCATION) {
+			organization.setLocation(true);
+		}
+		else {
+			organization.setLocation(false);
+		}
+
 		organization.setRecursable(recursable);
 		organization.setRegionId(regionId);
 		organization.setCountryId(countryId);
@@ -716,30 +669,31 @@ public class OrganizationLocalServiceImpl
 	}
 
 	protected void validate(
-			long companyId, long parentOrganizationId, String name,
-			boolean location, long countryId, int statusId)
+			long companyId, long parentOrganizationId, String name, int type,
+			long countryId, int statusId)
 		throws PortalException, SystemException {
 
 		validate(
-			companyId, 0, parentOrganizationId, name, location, countryId,
+			companyId, 0, parentOrganizationId, name, type, countryId,
 			statusId);
 	}
 
 	protected void validate(
 			long companyId, long organizationId, long parentOrganizationId,
-			String name, boolean location, long countryId, int statusId)
+			String name, int type, long countryId, int statusId)
 		throws PortalException, SystemException {
 
-		if ((location) ||
+		if ((type == OrganizationImpl.TYPE_LOCATION) ||
 			(parentOrganizationId !=
 				OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID)) {
 
 			try {
-				Organization organization =
+				Organization parentOrganization =
 					OrganizationUtil.findByPrimaryKey(parentOrganizationId);
 
-				if ((companyId != organization.getCompanyId()) ||
-					(parentOrganizationId == organizationId)) {
+				if ((companyId != parentOrganization.getCompanyId()) ||
+					(parentOrganizationId == organizationId) ||
+					(parentOrganization.isLocation())) {
 
 					throw new OrganizationParentException();
 				}

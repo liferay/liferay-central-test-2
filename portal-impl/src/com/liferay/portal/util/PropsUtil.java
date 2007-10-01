@@ -223,6 +223,8 @@ public class PropsUtil {
 
 	public static final String SYSTEM_COMMUNITY_ROLES = "system.community.roles";
 
+	public static final String SYSTEM_ORGANIZATION_ROLES = "system.organization.roles";
+
 	public static final String OMNIADMIN_USERS = "omniadmin.users";
 
 	public static final String UNIVERSAL_PERSONALIZATION = "universal.personalization";
@@ -245,7 +247,7 @@ public class PropsUtil {
 
 	public static final String ORGANIZATIONS_LOCATION_REQUIRED = "organizations.location.required";
 
-	public static final String ORGANIZATIONS_LOCATION_ENABLED = "organizations.location.enabled";
+	public static final String ORGANIZATIONS_LOCATION_STRICT_VALIDATION = "organizations.location.strict.validation";
 
 	// Look and Feel
 

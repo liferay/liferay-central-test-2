@@ -177,8 +177,16 @@ public class PasswordPolicyLocalServiceImpl
 		return PasswordPolicyUtil.findByPrimaryKey(passwordPolicyId);
 	}
 
+	/** @deprecated */
 	public PasswordPolicy getPasswordPolicy(
 			long companyId, long organizationId, long locationId)
+		throws PortalException, SystemException {
+		return getPasswordPolicy(
+			companyId, new long[]{organizationId, locationId});
+	}
+
+	public PasswordPolicy getPasswordPolicy(
+			long companyId, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		if (PortalLDAPUtil.isPasswordPolicyEnabled(companyId)) {
@@ -187,28 +195,22 @@ public class PasswordPolicyLocalServiceImpl
 
 		PasswordPolicyRel passwordPolicyRel = null;
 
-		// Check for password policy specifically assigned to this location
+		// Check for password policy specifically assigned to any of the
+		// organizations
 
-		try {
-			passwordPolicyRel =
-				PasswordPolicyRelLocalServiceUtil.getPasswordPolicyRel(
-					Organization.class.getName(), locationId);
+		for (int i = 0; i < organizationIds.length; i++) {
+			long organizationId = organizationIds[i];
 
-			return getPasswordPolicy(passwordPolicyRel.getPasswordPolicyId());
-		}
-		catch (NoSuchPasswordPolicyRelException nsppre) {
-		}
+			try {
+				passwordPolicyRel =
+					PasswordPolicyRelLocalServiceUtil.getPasswordPolicyRel(
+						Organization.class.getName(), organizationId);
 
-		// Check for password policy specifically assigned to this organization
-
-		try {
-			passwordPolicyRel =
-				PasswordPolicyRelLocalServiceUtil.getPasswordPolicyRel(
-					Organization.class.getName(), organizationId);
-
-			return getPasswordPolicy(passwordPolicyRel.getPasswordPolicyId());
-		}
-		catch (NoSuchPasswordPolicyRelException nsppre) {
+				return getPasswordPolicy(
+					passwordPolicyRel.getPasswordPolicyId());
+			}
+			catch (NoSuchPasswordPolicyRelException nsppre) {
+			}
 		}
 
 		// Get default password policy
@@ -239,11 +241,10 @@ public class PasswordPolicyLocalServiceImpl
 		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
 
-		long locationId = user.getLocation().getOrganizationId();
-		long organizationId = user.getOrganization().getOrganizationId();
+		long[] organizationIds = user.getOrganizationIds();
 
 		return getPasswordPolicy(
-			user.getCompanyId(), organizationId, locationId);
+			user.getCompanyId(), organizationIds);
 	}
 
 	public List search(long companyId, String name, int begin, int end)

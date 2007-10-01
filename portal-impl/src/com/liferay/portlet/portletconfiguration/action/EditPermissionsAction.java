@@ -77,6 +77,9 @@ public class EditPermissionsAction extends PortletAction {
 			else if (cmd.equals("organization_permissions")) {
 				updateOrganizationPermissions(req);
 			}
+			else if (cmd.equals("role_permissions")) {
+				updateRolePermissions(req);
+			}
 			else if (cmd.equals("user_group_permissions")) {
 				updateUserGroupPermissions(req);
 			}
@@ -191,6 +194,20 @@ public class EditPermissionsAction extends PortletAction {
 			PermissionServiceUtil.setOrgGroupPermissions(
 				organizationId, layout.getGroupId(), actionIds, resourceId);
 		}
+	}
+
+	protected void updateRolePermissions(ActionRequest req)
+		throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		long resourceId = ParamUtil.getLong(req, "resourceId");
+		long roleId = ParamUtil.getLong(req, "roleIdsPosValue");
+		String[] actionIds = StringUtil.split(
+			ParamUtil.getString(req, "roleIdActionIds"));
+
+		PermissionServiceUtil.setRolePermissions(
+			roleId, themeDisplay.getPortletGroupId(), actionIds, resourceId);
 	}
 
 	protected void updateUserGroupPermissions(ActionRequest req)

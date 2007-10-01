@@ -26,13 +26,13 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.impl.OrganizationImpl;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.OrganizationService;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
-import com.liferay.portal.service.permission.LocationPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
-import com.liferay.portal.service.persistence.OrganizationUtil;
 
 import java.util.List;
 
@@ -40,6 +40,7 @@ import java.util.List;
  * <a href="OrganizationServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class OrganizationServiceImpl extends PrincipalBean
@@ -66,23 +67,38 @@ public class OrganizationServiceImpl extends PrincipalBean
 			passwordPolicyId, organizationIds);
 	}
 
+	/** @deprecated */
 	public Organization addOrganization(
 			long parentOrganizationId, String name, boolean location,
 			boolean recursable, long regionId, long countryId, int statusId)
 		throws PortalException, SystemException {
 
-		if (location) {
-			OrganizationPermissionUtil.check(
+		int type = OrganizationImpl.getType(location);
+
+		return addOrganization(
+			parentOrganizationId, name, type, recursable, regionId, countryId,
+			statusId);
+	}
+
+	public Organization addOrganization(
+			long parentOrganizationId, String name, int type,
+			boolean recursable, long regionId, long countryId, int statusId)
+		throws PortalException, SystemException {
+
+		if (!OrganizationPermissionUtil.contains(
 				getPermissionChecker(), parentOrganizationId,
-				ActionKeys.ADD_LOCATION);
-		}
-		else {
-			PortalPermissionUtil.check(
-				getPermissionChecker(), ActionKeys.ADD_ORGANIZATION);
+				ActionKeys.ADD_LOCATION) &&
+			!PortalPermissionUtil.contains(
+				getPermissionChecker(), ActionKeys.ADD_ORGANIZATION)) {
+
+			throw new PrincipalException(
+				"User " + getPermissionChecker().getUserId() + " does not have "
+					+ "enough permissions to add an organization with parent "
+						+ parentOrganizationId);
 		}
 
 		return OrganizationLocalServiceUtil.addOrganization(
-			getUserId(), parentOrganizationId, name, location, recursable,
+			getUserId(), parentOrganizationId, name, type, recursable,
 			regionId, countryId, statusId);
 	}
 
@@ -145,9 +161,23 @@ public class OrganizationServiceImpl extends PrincipalBean
 			passwordPolicyId, organizationIds);
 	}
 
+	/** @deprecated */
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
 			boolean location, boolean recursable, long regionId, long countryId,
+			int statusId)
+		throws PortalException, SystemException {
+
+		int type = OrganizationImpl.getType(location);
+
+		return updateOrganization(
+			organizationId, parentOrganizationId, name, type, recursable,
+			regionId, countryId, statusId);
+	}
+
+	public Organization updateOrganization(
+			long organizationId, long parentOrganizationId, String name,
+			int type, boolean recursable, long regionId, long countryId,
 			int statusId)
 		throws PortalException, SystemException {
 
@@ -155,7 +185,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 
 		return OrganizationLocalServiceUtil.updateOrganization(
 			getUser().getCompanyId(), organizationId, parentOrganizationId,
-			name, location, recursable, regionId, countryId, statusId);
+			name, type, recursable, regionId, countryId, statusId);
 	}
 
 	public Organization updateOrganization(long organizationId, String comments)
@@ -170,17 +200,8 @@ public class OrganizationServiceImpl extends PrincipalBean
 	protected void checkPermission(long organizationId, String actionId)
 		throws PortalException, SystemException {
 
-		Organization organization =
-			OrganizationUtil.findByPrimaryKey(organizationId);
-
-		if (!organization.isLocation()) {
-			OrganizationPermissionUtil.check(
-				getPermissionChecker(), organizationId, actionId);
-		}
-		else {
-			LocationPermissionUtil.check(
-				getPermissionChecker(), organizationId, actionId);
-		}
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, actionId);
 	}
 
 }

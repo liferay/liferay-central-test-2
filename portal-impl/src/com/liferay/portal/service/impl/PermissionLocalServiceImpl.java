@@ -36,6 +36,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.ResourceImpl;
@@ -214,6 +215,12 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return RoleUtil.getPermissions(roleId);
+	}
+
+	public List getRolePermissions(long roleId, long resourceId)
+		throws SystemException {
+
+		return PermissionFinder.findByR_R(roleId, resourceId);
 	}
 
 	public List getUserPermissions(long userId, long resourceId)
@@ -564,6 +571,24 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			setRolePermission(
 				roleId, companyId, name, scope, primKey, actionId);
 		}
+	}
+
+	public void setRolePermissions(
+			long roleId, String[] actionIds, long resourceId)
+		throws PortalException, SystemException {
+
+		Role role = RoleUtil.findByPrimaryKey(roleId);
+
+		List permissions = PermissionFinder.findByR_R(roleId, resourceId);
+
+		RoleUtil.removePermissions(roleId, permissions);
+
+		permissions = getPermissions(
+			role.getCompanyId(), actionIds, resourceId);
+
+		RoleUtil.addPermissions(roleId, permissions);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void setUserPermissions(

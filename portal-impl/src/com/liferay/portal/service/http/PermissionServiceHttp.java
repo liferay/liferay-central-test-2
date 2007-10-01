@@ -439,6 +439,45 @@ public class PermissionServiceHttp {
 		}
 	}
 
+	public static void setRolePermissions(HttpPrincipal httpPrincipal,
+		long roleId, long groupId, java.lang.String[] actionIds, long resourceId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(roleId);
+			Object paramObj1 = new LongWrapper(groupId);
+			Object paramObj2 = actionIds;
+
+			if (actionIds == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj3 = new LongWrapper(resourceId);
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"setRolePermissions",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static void setUserPermissions(HttpPrincipal httpPrincipal,
 		long userId, long groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 

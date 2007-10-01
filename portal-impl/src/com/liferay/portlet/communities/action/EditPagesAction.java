@@ -58,7 +58,6 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
-import com.liferay.portal.service.permission.LocationPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -247,28 +246,19 @@ public class EditPagesAction extends PortletAction {
 				OrganizationLocalServiceUtil.getOrganization(
 					group.getClassPK());
 
-			if (!organization.isLocation()) {
-				OrganizationPermissionUtil.check(
-					permissionChecker, organization.getOrganizationId(),
-					ActionKeys.UPDATE);
-			}
-			else {
-				LocationPermissionUtil.check(
-					permissionChecker, organization.getOrganizationId(),
-					ActionKeys.UPDATE);
-			}
+			OrganizationPermissionUtil.check(
+				permissionChecker, organization.getOrganizationId(),
+				ActionKeys.UPDATE);
 		}
 		else if (group.isUser()) {
 			long groupUserId = group.getClassPK();
 
 			User groupUser = UserLocalServiceUtil.getUserById(groupUserId);
 
-			long organizationId =
-				groupUser.getOrganization().getOrganizationId();
-			long locationId = groupUser.getLocation().getOrganizationId();
+			long[] organizationIds = groupUser.getOrganizationIds();
 
 			UserPermissionUtil.check(
-				permissionChecker, groupUserId, organizationId, locationId,
+				permissionChecker, groupUserId, organizationIds,
 				ActionKeys.UPDATE);
 
 			if (!groupUser.isLayoutsRequired()) {

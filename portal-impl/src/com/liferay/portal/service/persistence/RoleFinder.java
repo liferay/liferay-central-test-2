@@ -25,7 +25,9 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.RoleImpl;
@@ -38,6 +40,7 @@ import com.liferay.util.dao.hibernate.QueryUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -82,6 +85,9 @@ public class RoleFinder {
 
 	public static String FIND_BY_C_N_S_P =
 		RoleFinder.class.getName() + ".findByC_N_S_P";
+
+	public static String JOIN_BY_ROLES_PERMISSIONS =
+		RoleFinder.class.getName() + ".joinByRolesPermissions";
 
 	public static int countByR_U(long roleId, long userId)
 		throws SystemException {
@@ -161,7 +167,8 @@ public class RoleFinder {
 	}
 
 	public static int countByC_N_D_T(
-			long companyId, String name, String description, Integer type)
+			long companyId, String name, String description, Integer type,
+			LinkedHashMap params)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -178,12 +185,16 @@ public class RoleFinder {
 				sql = StringUtil.replace(sql, "AND (Role_.type_ = ?)", "");
 			}
 
+			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			_setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(name);
@@ -357,7 +368,7 @@ public class RoleFinder {
 
 	public static List findByC_N_D_T(
 			long companyId, String name, String description, Integer type,
-			int begin, int end)
+			LinkedHashMap params, int begin, int end)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -374,12 +385,16 @@ public class RoleFinder {
 				sql = StringUtil.replace(sql, "AND (Role_.type_ = ?)", "");
 			}
 
+			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addEntity("Role_", RoleImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			_setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(name);
@@ -472,6 +487,115 @@ public class RoleFinder {
 	private static void _setGroupIds(QueryPos qPos, long[] groupIds) {
 		for (int i = 0; i < groupIds.length; i++) {
 			qPos.add(groupIds[i]);
+		}
+	}
+
+	private static String _getJoin(LinkedHashMap params) {
+		if (params == null) {
+			return StringPool.BLANK;
+		}
+
+		StringMaker sm = new StringMaker();
+
+		Iterator itr = params.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String key = (String)entry.getKey();
+			Object value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				sm.append(_getJoin(key));
+			}
+		}
+
+		return sm.toString();
+	}
+
+	private static String _getJoin(String key) {
+		String join = StringPool.BLANK;
+
+		if (key.equals("permissionsResourceId")) {
+			join = CustomSQLUtil.get(JOIN_BY_ROLES_PERMISSIONS);
+		}
+
+		if (Validator.isNotNull(join)) {
+			int pos = join.indexOf("WHERE");
+
+			if (pos != -1) {
+				join = join.substring(0, pos);
+			}
+		}
+
+		return join;
+	}
+
+	private static String _getWhere(LinkedHashMap params) {
+		if (params == null) {
+			return StringPool.BLANK;
+		}
+
+		StringMaker sm = new StringMaker();
+
+		Iterator itr = params.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String key = (String)entry.getKey();
+			Object value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				sm.append(_getWhere(key));
+			}
+		}
+
+		return sm.toString();
+	}
+
+	private static String _getWhere(String key) {
+		String join = StringPool.BLANK;
+
+		if (key.equals("permissionsResourceId")) {
+			join = CustomSQLUtil.get(JOIN_BY_ROLES_PERMISSIONS);
+		}
+
+		if (Validator.isNotNull(join)) {
+			int pos = join.indexOf("WHERE");
+
+			if (pos != -1) {
+				join = join.substring(pos + 5, join.length()) + " AND ";
+			}
+		}
+
+		return join;
+	}
+
+	private static void _setJoin(QueryPos qPos, LinkedHashMap params) {
+		if (params != null) {
+			Iterator itr = params.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry entry = (Map.Entry)itr.next();
+
+				Object value = entry.getValue();
+
+				if (value instanceof Long) {
+					Long valueLong = (Long)value;
+
+					if (Validator.isNotNull(valueLong)) {
+						qPos.add(valueLong);
+					}
+				}
+				else if (value instanceof String) {
+					String valueString = (String)value;
+
+					if (Validator.isNotNull(valueString)) {
+						qPos.add(valueString);
+					}
+				}
+			}
 		}
 	}
 

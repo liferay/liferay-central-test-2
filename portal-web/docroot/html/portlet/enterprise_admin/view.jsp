@@ -24,11 +24,4 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<c:choose>
-	<c:when test="<%= portletName.equals(PortletKeys.LOCATION_ADMIN) && !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_ENABLED)) %>">
-		<liferay-util:include page="/html/portal/portlet_inactive.jsp" />
-	</c:when>
-	<c:otherwise>
-		<%@ include file="/html/portlet/enterprise_admin/view_enabled.jspf" %>
-	</c:otherwise>
-</c:choose>
+<%@ include file="/html/portlet/enterprise_admin/view_enabled.jspf" %>

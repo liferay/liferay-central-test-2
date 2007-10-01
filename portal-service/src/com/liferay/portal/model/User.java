@@ -104,7 +104,17 @@ public interface User extends UserModel {
 
 	public com.liferay.portal.model.Organization getOrganization();
 
+	public java.util.List getOrganizations();
+
+	public long[] getOrganizationIds();
+
+	public boolean hasOrganization();
+
 	public com.liferay.portal.model.Organization getLocation();
+
+	public long getLocationId();
+
+	public boolean hasLocation();
 
 	public int getPrivateLayoutsPageCount();
 

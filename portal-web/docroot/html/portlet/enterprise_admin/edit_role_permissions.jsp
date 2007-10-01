@@ -100,7 +100,7 @@ if (portletResource.equals(PortletKeys.PORTAL)) {
 else if (role.getType() == RoleImpl.TYPE_REGULAR) {
 	totalSteps = 4;
 }
-else if (role.getType() == RoleImpl.TYPE_COMMUNITY) {
+else if ((role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION)) {
 	totalSteps = 3;
 }
 
@@ -274,7 +274,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			ResultRow row = new ResultRow(new Object[] {permission, role}, actionId, i);
 
 			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resourceName, ResourceImpl.SCOPE_COMPANY, actionId);
-			boolean hasGroupTemplateScope = (role.getType() == RoleImpl.TYPE_COMMUNITY) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resourceName, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasGroupTemplateScope = ((role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resourceName, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
 			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resourceName, ResourceImpl.SCOPE_GROUP, actionId);
 
 			PortletURL editResourcePermissionsURL = renderResponse.createRenderURL();
@@ -348,7 +348,9 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		<input type="button" value="<liferay-ui:message key="add-portlet-permissions" />" onClick="<portlet:namespace />addPermissions('portlet');" />
 
-		<input type="button" value="<liferay-ui:message key="add-portal-permissions" />" onClick="<portlet:namespace />addPermissions('portal');" />
+		<c:if test="<%= role.getType() == RoleImpl.TYPE_REGULAR%>">
+			<input type="button" value="<liferay-ui:message key="add-portal-permissions" />" onClick="<portlet:namespace />addPermissions('portal');" />
+		</c:if>
 
 		<br /><br />
 
@@ -543,7 +545,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 			String actionId = (String)actions.get(i);
 
 			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.SCOPE_COMPANY, actionId);
-			boolean hasGroupTemplateScope = (role.getType() == RoleImpl.TYPE_COMMUNITY) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasGroupTemplateScope = ((role.getType() == RoleImpl.TYPE_COMMUNITY)  || (role.getType() == RoleImpl.TYPE_ORGANIZATION))  && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
 			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.SCOPE_GROUP, actionId);
 		%>
 
@@ -558,16 +560,24 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 								<option value=""></option>
 									<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_COMPANY %>"><liferay-ui:message key="enterprise" /></option>
 
-									<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
+									<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.ORGANIZATION_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
 										<option <%= (hasGroupScope) ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_GROUP %>"><liferay-ui:message key="communities" /></option>
 									</c:if>
 							</select>
 						</c:when>
-						<c:when test="<%= role.getType() == RoleImpl.TYPE_COMMUNITY %>">
+						<c:when test="<%= (role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION) %>">
+							<%
+							boolean disabled = portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) || portletResource.equals(PortletKeys.ORGANIZATION_ADMIN) || portletResource.equals(PortletKeys.PORTAL);
+
+							if ((role.getType() == RoleImpl.TYPE_ORGANIZATION) && (modelResourceName.equals("Location") || modelResourceName.equals("Organization") || modelResourceName.equals("User") || modelResourceName.equals("Password Policy"))) { // TODO: isOrganizationScoped(modelResource)
+								disabled = false;
+							}
+							%>
 							<liferay-ui:input-checkbox
 								param='<%= "scope" + actionId %>'
 								defaultValue="<%= hasGroupTemplateScope %>"
 								onClick='<%= "document.getElementById('" + renderResponse.getNamespace() + "scope" + actionId + "').value = (this.checked ? '" + ResourceImpl.SCOPE_GROUP + "' : '');" %>'
+								disabled="<%= disabled %>"
 							/>
 
 							<c:if test="<%= hasGroupTemplateScope %>">
@@ -636,18 +646,32 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 				ResultRow row = new ResultRow(curModelResource, curModelResource, i);
 
-				PortletURL rowURL = renderResponse.createRenderURL();
+				boolean selectable = true;
 
-				rowURL.setWindowState(WindowState.MAXIMIZED);
+				if ((role.getType() != RoleImpl.TYPE_REGULAR) && ResourceActionsUtil.isPortalModelResource(curModelResource)) {
+					selectable = false;
+				}
 
-				rowURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
-				rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
-				rowURL.setParameter("portletResource", portletResource);
-				rowURL.setParameter("modelResource", curModelResource);
+				PortletURL rowURL = null;
+				String help = StringPool.BLANK;
+
+				if (selectable) {
+					rowURL = renderResponse.createRenderURL();
+
+					rowURL.setWindowState(WindowState.MAXIMIZED);
+
+					rowURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+					rowURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+					rowURL.setParameter("portletResource", portletResource);
+					rowURL.setParameter("modelResource", curModelResource);
+				}
+				else {
+				    help = "&nbsp;(" + LanguageUtil.get(pageContext, "not-available-for-this-type-of-role") + ")";
+				}
 
 				// Name
 
-				row.addText(ResourceActionsUtil.getModelResource(pageContext, curModelResource), rowURL);
+				row.addText(ResourceActionsUtil.getModelResource(pageContext, curModelResource) + help, rowURL);
 
 				// Add result row
 

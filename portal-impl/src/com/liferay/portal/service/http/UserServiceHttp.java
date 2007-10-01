@@ -329,6 +329,122 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.model.User addUser(
+		HttpPrincipal httpPrincipal, long companyId, boolean autoPassword,
+		java.lang.String password1, java.lang.String password2,
+		boolean autoScreenName, java.lang.String screenName,
+		java.lang.String emailAddress, java.util.Locale locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, long[] organizationIds, boolean sendEmail)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+			Object paramObj1 = new BooleanWrapper(autoPassword);
+			Object paramObj2 = password1;
+
+			if (password1 == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = password2;
+
+			if (password2 == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new BooleanWrapper(autoScreenName);
+			Object paramObj5 = screenName;
+
+			if (screenName == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = emailAddress;
+
+			if (emailAddress == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = locale;
+
+			if (locale == null) {
+				paramObj7 = new NullWrapper("java.util.Locale");
+			}
+
+			Object paramObj8 = firstName;
+
+			if (firstName == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = middleName;
+
+			if (middleName == null) {
+				paramObj9 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj10 = lastName;
+
+			if (lastName == null) {
+				paramObj10 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj11 = new IntegerWrapper(prefixId);
+			Object paramObj12 = new IntegerWrapper(suffixId);
+			Object paramObj13 = new BooleanWrapper(male);
+			Object paramObj14 = new IntegerWrapper(birthdayMonth);
+			Object paramObj15 = new IntegerWrapper(birthdayDay);
+			Object paramObj16 = new IntegerWrapper(birthdayYear);
+			Object paramObj17 = jobTitle;
+
+			if (jobTitle == null) {
+				paramObj17 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj18 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj18 = new NullWrapper("[J");
+			}
+
+			Object paramObj19 = new BooleanWrapper(sendEmail);
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"addUser",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18, paramObj19
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.User)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static void deleteRoleUser(HttpPrincipal httpPrincipal, long roleId,
 		long userId)
 		throws com.liferay.portal.SystemException, 
@@ -1058,6 +1174,42 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static void updateOrganizations(HttpPrincipal httpPrincipal,
+		long userId, long[] organizationIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(userId);
+			Object paramObj1 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"updateOrganizations", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.User updatePassword(
 		HttpPrincipal httpPrincipal, long userId, java.lang.String password1,
 		java.lang.String password2, boolean passwordReset)
@@ -1284,6 +1436,177 @@ public class UserServiceHttp {
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.User)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.model.User updateUser(
+		HttpPrincipal httpPrincipal, long userId, java.lang.String password,
+		java.lang.String screenName, java.lang.String emailAddress,
+		java.lang.String languageId, java.lang.String timeZoneId,
+		java.lang.String greeting, java.lang.String comments,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
+		java.lang.String jabberSn, java.lang.String msnSn,
+		java.lang.String skypeSn, java.lang.String ymSn,
+		java.lang.String jobTitle, long[] organizationIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(userId);
+			Object paramObj1 = password;
+
+			if (password == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = screenName;
+
+			if (screenName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = emailAddress;
+
+			if (emailAddress == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = languageId;
+
+			if (languageId == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = timeZoneId;
+
+			if (timeZoneId == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = greeting;
+
+			if (greeting == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = comments;
+
+			if (comments == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = firstName;
+
+			if (firstName == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = middleName;
+
+			if (middleName == null) {
+				paramObj9 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj10 = lastName;
+
+			if (lastName == null) {
+				paramObj10 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj11 = new IntegerWrapper(prefixId);
+			Object paramObj12 = new IntegerWrapper(suffixId);
+			Object paramObj13 = new BooleanWrapper(male);
+			Object paramObj14 = new IntegerWrapper(birthdayMonth);
+			Object paramObj15 = new IntegerWrapper(birthdayDay);
+			Object paramObj16 = new IntegerWrapper(birthdayYear);
+			Object paramObj17 = smsSn;
+
+			if (smsSn == null) {
+				paramObj17 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj18 = aimSn;
+
+			if (aimSn == null) {
+				paramObj18 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj19 = icqSn;
+
+			if (icqSn == null) {
+				paramObj19 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj20 = jabberSn;
+
+			if (jabberSn == null) {
+				paramObj20 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj21 = msnSn;
+
+			if (msnSn == null) {
+				paramObj21 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj22 = skypeSn;
+
+			if (skypeSn == null) {
+				paramObj22 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj23 = ymSn;
+
+			if (ymSn == null) {
+				paramObj23 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj24 = jobTitle;
+
+			if (jobTitle == null) {
+				paramObj24 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj25 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj25 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"updateUser",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18, paramObj19, paramObj20, paramObj21,
+						paramObj22, paramObj23, paramObj24, paramObj25
 					});
 			Object returnObj = null;
 

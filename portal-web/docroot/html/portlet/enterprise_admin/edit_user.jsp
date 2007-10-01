@@ -36,11 +36,11 @@ User user2 = PortalUtil.getSelectedUser(request);
 
 boolean editable = false;
 
-if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
+if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
 	if ((user2 == null) || user2.isActive()) {
 		editable = true;
 
-		if ((user2 != null) && !UserPermissionUtil.contains(permissionChecker, user2.getUserId(), user2.getOrganization().getOrganizationId(), user2.getLocation().getOrganizationId(), ActionKeys.UPDATE)) {
+		if ((user2 != null) && !UserPermissionUtil.contains(permissionChecker, user2.getUserId(), user2.getOrganizationIds(), ActionKeys.UPDATE)) {
 			editable = false;
 		}
 	}
@@ -98,7 +98,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 <input name="<portlet:namespace />backURL" type="hidden" value="<%= backURL %>" />
 <input name="<portlet:namespace />p_u_i_d" type="hidden" value='<%= (user2 != null) ? user2.getUserId() : 0 %>' />
 
-<c:if test="<%= portletName.equals(PortletKeys.DIRECTORY) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+<c:if test="<%= portletName.equals(PortletKeys.DIRECTORY) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 	<liferay-ui:tabs
 		names="user"
 		backURL="<%= backURL %>"
@@ -121,7 +121,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 	<c:if test="<%= editable %>">
 
 		<%
-		String tabs2Names = "display,password,roles";
+		String tabs2Names = "display,password,regular-roles,community-roles,organization-roles";
 
 		if ((passwordPolicy != null) && !passwordPolicy.isChangeable()) {
 			tabs2Names = "display,roles";
@@ -145,7 +145,13 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 			</c:if>
 
 			<liferay-ui:section>
-				<%@ include file="/html/portlet/enterprise_admin/user_role_iterator.jspf" %>
+				<%@ include file="/html/portlet/enterprise_admin/user_regular_role_iterator.jspf" %>
+			</liferay-ui:section>
+			<liferay-ui:section>
+				<%@ include file="/html/portlet/enterprise_admin/user_community_role_iterator.jspf" %>
+			</liferay-ui:section>
+			<liferay-ui:section>
+				<%@ include file="/html/portlet/enterprise_admin/user_organization_role_iterator.jspf" %>
 			</liferay-ui:section>
 		</liferay-ui:tabs>
 	</c:if>
@@ -170,8 +176,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
 				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
-				<liferay-util:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
-				<liferay-util:param name="locationId" value="<%= String.valueOf(locationId) %>" />
+				<liferay-util:param name="organizationIds" value="<%= StringUtil.merge(organizationIdsArray) %>" />
 			</liferay-util:include>
 		</liferay-ui:section>
 		<liferay-ui:section>
@@ -196,8 +201,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
 				<liferay-util:param name="className" value="<%= Contact.class.getName() %>" />
 				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
-				<liferay-util:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
-				<liferay-util:param name="locationId" value="<%= String.valueOf(locationId) %>" />
+				<liferay-util:param name="organizationIds" value="<%= StringUtil.merge(organizationIdsArray) %>" />
 			</liferay-util:include>
 		</liferay-ui:section>
 		<liferay-ui:section>

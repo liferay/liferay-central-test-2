@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -48,6 +49,7 @@ import org.hibernate.Session;
  * <a href="OrganizationFinder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class OrganizationFinder {
@@ -55,8 +57,14 @@ public class OrganizationFinder {
 	public static String COUNT_BY_C_PO_N_L_S_C_Z_R_C =
 		OrganizationFinder.class.getName() + ".countByC_PO_N_L_S_C_Z_R_C";
 
+	public static String COUNT_BY_C_PO_N_S_C_Z_R_C =
+		OrganizationFinder.class.getName() + ".countByC_PO_N_S_C_Z_R_C";
+
 	public static String FIND_BY_C_PO_N_L_S_C_Z_R_C =
 		OrganizationFinder.class.getName() + ".findByC_PO_N_L_S_C_Z_R_C";
+
+	public static String FIND_BY_C_PO_N_S_C_Z_R_C =
+		OrganizationFinder.class.getName() + ".findByC_PO_N_S_C_Z_R_C";
 
 	public static String JOIN_BY_GROUPS_PERMISSIONS =
 		OrganizationFinder.class.getName() + ".joinByGroupsPermissions";
@@ -77,7 +85,7 @@ public class OrganizationFinder {
 	public static int countByKeywords(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String keywords,
-			boolean location, Long regionId, Long countryId,
+			int type, Long regionId, Long countryId,
 			LinkedHashMap params)
 		throws SystemException {
 
@@ -97,30 +105,30 @@ public class OrganizationFinder {
 			andOperator = true;
 		}
 
-		return countByC_PO_N_L_S_C_Z_R_C(
+		return countByC_PO_N_T_S_C_Z_R_C(
 			companyId, parentOrganizationId, parentOrganizationComparator,
-			names, location, streets, cities, zips, regionId, countryId, params,
+			names, type, streets, cities, zips, regionId, countryId, params,
 			andOperator);
 	}
 
-	public static int countByC_PO_N_L_S_C_Z_R_C(
+	public static int countByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
-			String parentOrganizationComparator, String name, boolean location,
+			String parentOrganizationComparator, String name, int type,
 			String street, String city, String zip, Long regionId,
 			Long countryId, LinkedHashMap params, boolean andOperator)
 		throws SystemException {
 
-		return countByC_PO_N_L_S_C_Z_R_C(
+		return countByC_PO_N_T_S_C_Z_R_C(
 			companyId, parentOrganizationId, parentOrganizationComparator,
-			new String[] {name}, location, new String[] {street},
+			new String[] {name}, type, new String[] {street},
 			new String[] {city}, new String[] {zip}, regionId, countryId,
 			params, andOperator);
 	}
 
-	public static int countByC_PO_N_L_S_C_Z_R_C(
+	public static int countByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
-			boolean location, String[] streets, String[] cities, String[] zips,
+			int type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, LinkedHashMap params,
 			boolean andOperator)
 		throws SystemException {
@@ -139,7 +147,7 @@ public class OrganizationFinder {
 
 				return _countByPermissions(
 					companyId, parentOrganizationId,
-					parentOrganizationComparator, names, location, streets,
+					parentOrganizationComparator, names, type, streets,
 					cities, zips, regionId, countryId, resourceId.longValue(),
 					groupId.longValue(), andOperator);
 			}
@@ -150,7 +158,15 @@ public class OrganizationFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C);
+			String sql = null;
+
+			if (type == OrganizationImpl.TYPE_LOCATION ||
+				type == OrganizationImpl.TYPE_REGULAR) {
+				sql = CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C);
+			}
+			else {
+				sql = CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C);
+			}
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(Organization_.name)", StringPool.LIKE, false,
@@ -196,7 +212,14 @@ public class OrganizationFinder {
 			_setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(parentOrganizationId);
-			qPos.add(location);
+
+			if (type == OrganizationImpl.TYPE_LOCATION) {
+				qPos.add(true);
+			}
+			else if (type == OrganizationImpl.TYPE_REGULAR) {
+				qPos.add(false);
+			}
+
 			qPos.add(names, 2);
 			qPos.add(streets, 6);
 
@@ -236,7 +259,7 @@ public class OrganizationFinder {
 	public static List findByKeywords(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String keywords,
-			boolean location, Long regionId, Long countryId,
+			int type, Long regionId, Long countryId,
 			LinkedHashMap params, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -256,31 +279,31 @@ public class OrganizationFinder {
 			andOperator = true;
 		}
 
-		return findByC_PO_N_L_S_C_Z_R_C(
+		return findByC_PO_N_T_S_C_Z_R_C(
 			companyId, parentOrganizationId, parentOrganizationComparator,
-			names, location, streets, cities, zips, regionId, countryId, params,
+			names, type, streets, cities, zips, regionId, countryId, params,
 			andOperator, begin, end, obc);
 	}
 
-	public static List findByC_PO_N_L_S_C_Z_R_C(
+	public static List findByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
-			String parentOrganizationComparator, String name, boolean location,
+			String parentOrganizationComparator, String name, int type,
 			String street, String city, String zip, Long regionId,
 			Long countryId, LinkedHashMap params, boolean andOperator,
 			int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return findByC_PO_N_L_S_C_Z_R_C(
+		return findByC_PO_N_T_S_C_Z_R_C(
 			companyId, parentOrganizationId, parentOrganizationComparator,
-			new String[] {name}, location, new String[] {street},
+			new String[] {name}, type, new String[] {street},
 			new String[] {city}, new String[] {zip}, regionId, countryId,
 			params, andOperator, begin, end, obc);
 	}
 
-	public static List findByC_PO_N_L_S_C_Z_R_C(
+	public static List findByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
-			boolean location, String[] streets, String[] cities, String[] zips,
+			int type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, LinkedHashMap params,
 			boolean andOperator, int begin, int end, OrderByComparator obc)
 		throws SystemException {
@@ -299,7 +322,7 @@ public class OrganizationFinder {
 
 				return _findByPermissions(
 					companyId, parentOrganizationId,
-					parentOrganizationComparator, names, location, streets,
+					parentOrganizationComparator, names, type, streets,
 					cities, zips, regionId, countryId, resourceId.longValue(),
 					groupId.longValue(), andOperator, begin, end, obc);
 			}
@@ -310,7 +333,15 @@ public class OrganizationFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C);
+			String sql = null;
+
+			if (type == OrganizationImpl.TYPE_LOCATION ||
+				type == OrganizationImpl.TYPE_REGULAR) {
+				sql = CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C);
+			}
+			else {
+				sql = CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C);
+			}
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(Organization_.name)", StringPool.LIKE, false,
@@ -357,7 +388,14 @@ public class OrganizationFinder {
 			_setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(parentOrganizationId);
-			qPos.add(location);
+
+			if (type == OrganizationImpl.TYPE_LOCATION) {
+				qPos.add(true);
+			}
+			else if (type == OrganizationImpl.TYPE_REGULAR) {
+				qPos.add(false);
+			}
+
 			qPos.add(names, 2);
 			qPos.add(streets, 6);
 
@@ -401,7 +439,7 @@ public class OrganizationFinder {
 	private static int _countByPermissions(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
-			boolean location, String[] streets, String[] cities, String[] zips,
+			int type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, long resourceId, long groupId,
 			boolean andOperator)
 		throws SystemException {
@@ -415,7 +453,13 @@ public class OrganizationFinder {
 
 			sm.append("(");
 
-			sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
+			if (type == OrganizationImpl.TYPE_LOCATION ||
+				type == OrganizationImpl.TYPE_REGULAR) {
+				sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
+			}
+			else {
+				sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
+			}
 
 			String sql = sm.toString();
 
@@ -439,7 +483,13 @@ public class OrganizationFinder {
 
 			sm.append(") UNION (");
 
-			sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
+			if (type == OrganizationImpl.TYPE_LOCATION ||
+				type == OrganizationImpl.TYPE_REGULAR) {
+				sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
+			}
+			else {
+				sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
+			}
 
 			sql = sm.toString();
 
@@ -512,7 +562,14 @@ public class OrganizationFinder {
 
 				qPos.add(companyId);
 				qPos.add(parentOrganizationId);
-				qPos.add(location);
+
+				if (type == OrganizationImpl.TYPE_LOCATION) {
+					qPos.add(true);
+				}
+				else if (type == OrganizationImpl.TYPE_REGULAR) {
+					qPos.add(false);
+				}
+
 				qPos.add(names, 2);
 				qPos.add(streets, 6);
 
@@ -555,7 +612,7 @@ public class OrganizationFinder {
 	private static List _findByPermissions(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
-			boolean location, String[] streets, String[] cities, String[] zips,
+			int type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, long resourceId, long groupId,
 			boolean andOperator, int begin, int end, OrderByComparator obc)
 		throws SystemException {
@@ -569,7 +626,13 @@ public class OrganizationFinder {
 
 			sm.append("(");
 
-			sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
+			if (type == OrganizationImpl.TYPE_LOCATION ||
+				type == OrganizationImpl.TYPE_REGULAR) {
+				sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
+			}
+			else {
+				sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
+			}
 
 			String sql = sm.toString();
 
@@ -593,7 +656,13 @@ public class OrganizationFinder {
 
 			sm.append(") UNION (");
 
-			sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
+			if (type == OrganizationImpl.TYPE_LOCATION ||
+				type == OrganizationImpl.TYPE_REGULAR) {
+				sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
+			}
+			else {
+				sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
+			}
 
 			sql = sm.toString();
 
@@ -668,7 +737,14 @@ public class OrganizationFinder {
 
 				qPos.add(companyId);
 				qPos.add(parentOrganizationId);
-				qPos.add(location);
+
+				if (type == OrganizationImpl.TYPE_LOCATION) {
+					qPos.add(true);
+				}
+				else if (type == OrganizationImpl.TYPE_REGULAR) {
+					qPos.add(false);
+				}
+
 				qPos.add(names, 2);
 				qPos.add(streets, 6);
 

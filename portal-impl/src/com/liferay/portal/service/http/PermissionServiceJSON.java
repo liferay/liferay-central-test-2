@@ -137,6 +137,14 @@ public class PermissionServiceJSON {
 			primKey, actionId);
 	}
 
+	public static void setRolePermissions(long roleId, long groupId,
+		java.lang.String[] actionIds, long resourceId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		PermissionServiceUtil.setRolePermissions(roleId, groupId, actionIds,
+			resourceId);
+	}
+
 	public static void setUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 

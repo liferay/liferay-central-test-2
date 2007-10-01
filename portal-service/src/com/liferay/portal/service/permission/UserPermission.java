@@ -33,13 +33,24 @@ import com.liferay.portal.security.auth.PrincipalException;
  */
 public interface UserPermission {
 
+	/** @deprecated */
 	public void check(
 			PermissionChecker permissionChecker, long userId,
 			long organizationId, long locationId, String actionId)
 		throws PrincipalException;
 
+	public void check(
+			PermissionChecker permissionChecker, long userId,
+			long[] organizationIds, String actionId)
+		throws PrincipalException;
+
+	/** @deprecated */
 	public boolean contains(
 		PermissionChecker permissionChecker, long userId, long organizationId,
 		long locationId, String actionId);
+
+	public boolean contains(
+		PermissionChecker permissionChecker, long userId,
+		long[] organizationIds, String actionId);
 
 }

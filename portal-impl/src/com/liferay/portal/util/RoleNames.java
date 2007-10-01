@@ -53,4 +53,11 @@ public class RoleNames {
 		COMMUNITY_ADMINISTRATOR, COMMUNITY_MEMBER, COMMUNITY_OWNER
 	};
 
+	public static final String ORGANIZATION_ADMINISTRATOR =
+		"Organization Administrator";
+
+	public static final String[] SYSTEM_ORGANIZATION_ROLES = {
+		ORGANIZATION_ADMINISTRATOR
+	};
+
 }

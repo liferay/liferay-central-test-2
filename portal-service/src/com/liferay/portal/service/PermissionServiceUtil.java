@@ -124,6 +124,15 @@ public class PermissionServiceUtil {
 			primKey, actionId);
 	}
 
+	public static void setRolePermissions(long roleId, long groupId,
+		java.lang.String[] actionIds, long resourceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PermissionService permissionService = PermissionServiceFactory.getService();
+		permissionService.setRolePermissions(roleId, groupId, actionIds,
+			resourceId);
+	}
+
 	public static void setUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 

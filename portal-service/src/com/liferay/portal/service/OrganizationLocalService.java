@@ -62,7 +62,7 @@ public interface OrganizationLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Organization addOrganization(long userId,
-		long parentOrganizationId, java.lang.String name, boolean location,
+		long parentOrganizationId, java.lang.String name, int type,
 		boolean recursable, long regionId, long countryId, int statusId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -96,6 +96,10 @@ public interface OrganizationLocalService {
 
 	public com.liferay.portal.model.Organization getOrganization(
 		long organizationId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List getOrganizations(long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -137,6 +141,13 @@ public interface OrganizationLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List search(long companyId, long parentOrganizationId,
+		java.lang.String keywords, int type, java.lang.Long regionId,
+		java.lang.Long countryId, java.util.LinkedHashMap params, int begin,
+		int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List search(long companyId, long parentOrganizationId,
 		java.lang.String keywords, boolean location, java.lang.Long regionId,
 		java.lang.Long countryId, java.util.LinkedHashMap params, int begin,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -144,7 +155,22 @@ public interface OrganizationLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List search(long companyId, long parentOrganizationId,
+		java.lang.String keywords, int type, java.lang.Long regionId,
+		java.lang.Long countryId, java.util.LinkedHashMap params, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List search(long companyId, long parentOrganizationId,
 		java.lang.String name, boolean location, java.lang.String street,
+		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
+		java.lang.Long countryId, java.util.LinkedHashMap params,
+		boolean andOperator, int begin, int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List search(long companyId, long parentOrganizationId,
+		java.lang.String name, int type, java.lang.String street,
 		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId, java.util.LinkedHashMap params,
 		boolean andOperator, int begin, int end)
@@ -160,6 +186,15 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List search(long companyId, long parentOrganizationId,
+		java.lang.String name, int type, java.lang.String street,
+		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
+		java.lang.Long countryId, java.util.LinkedHashMap params,
+		boolean andOperator, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public int searchCount(long companyId, long parentOrganizationId,
 		java.lang.String keywords, boolean location, java.lang.Long regionId,
 		java.lang.Long countryId, java.util.LinkedHashMap params)
@@ -167,7 +202,21 @@ public interface OrganizationLocalService {
 			com.liferay.portal.PortalException;
 
 	public int searchCount(long companyId, long parentOrganizationId,
+		java.lang.String keywords, int type, java.lang.Long regionId,
+		java.lang.Long countryId, java.util.LinkedHashMap params)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public int searchCount(long companyId, long parentOrganizationId,
 		java.lang.String name, boolean location, java.lang.String street,
+		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
+		java.lang.Long countryId, java.util.LinkedHashMap params,
+		boolean andOperator)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public int searchCount(long companyId, long parentOrganizationId,
+		java.lang.String name, int type, java.lang.String street,
 		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId, java.util.LinkedHashMap params,
 		boolean andOperator)
@@ -191,6 +240,13 @@ public interface OrganizationLocalService {
 		long companyId, long organizationId, long parentOrganizationId,
 		java.lang.String name, boolean location, boolean recursable,
 		long regionId, long countryId, int statusId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.Organization updateOrganization(
+		long companyId, long organizationId, long parentOrganizationId,
+		java.lang.String name, int type, boolean recursable, long regionId,
+		long countryId, int statusId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

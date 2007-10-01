@@ -128,9 +128,18 @@ public class PermissionServiceImpl
 			roleId, getUser().getCompanyId(), name, scope, primKey, actionId);
 	}
 
+	public void setRolePermissions(
+			long roleId, long groupId, String[] actionIds, long resourceId)
+		throws PortalException, SystemException {
+
+		checkPermission(getPermissionChecker(), groupId, resourceId);
+
+		PermissionLocalServiceUtil.setRolePermissions(
+			roleId, actionIds, resourceId);
+	}
+
 	public void setUserPermissions(
-			long userId, long groupId, String[] actionIds,
-			long resourceId)
+			long userId, long groupId, String[] actionIds,long resourceId)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
@@ -228,9 +237,8 @@ public class PermissionServiceImpl
 			User user = UserLocalServiceUtil.getUserById(userId);
 
 			UserPermissionUtil.check(
-				permissionChecker, userId,
-				user.getOrganization().getOrganizationId(),
-				user.getLocation().getOrganizationId(), ActionKeys.PERMISSIONS);
+				permissionChecker, userId, user.getOrganizationIds(),
+				ActionKeys.PERMISSIONS);
 		}
 		else if ((primKey != null) &&
 				 (primKey.indexOf(PortletImpl.LAYOUT_SEPARATOR) != -1)) {

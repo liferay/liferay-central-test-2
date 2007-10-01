@@ -94,8 +94,7 @@ public class AdminUtil {
 			contact.getLastName(), contact.getPrefixId(), contact.getSuffixId(),
 			contact.isMale(), birthdayMonth, birthdayDay, birthdayYear, smsSn,
 			aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, contact.getJobTitle(),
-			user.getOrganization().getOrganizationId(),
-			user.getLocation().getOrganizationId());
+			user.getOrganizationIds());
 	}
 
 	public static User updateUser(

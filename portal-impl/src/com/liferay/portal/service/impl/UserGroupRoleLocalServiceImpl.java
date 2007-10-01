@@ -25,6 +25,11 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchUserGroupRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.base.UserGroupRoleLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.service.persistence.UserGroupRoleUtil;
@@ -44,6 +49,8 @@ public class UserGroupRoleLocalServiceImpl
 	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws PortalException, SystemException {
 
+		checkGroupResource(groupId);
+
 		for (int i = 0; i < roleIds.length; i++) {
 			long roleId = roleIds[i];
 
@@ -53,10 +60,14 @@ public class UserGroupRoleLocalServiceImpl
 				UserGroupRoleUtil.update(UserGroupRoleUtil.create(pk));
 			}
 		}
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void addUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws PortalException, SystemException {
+
+		checkGroupResource(groupId);
 
 		for (int i = 0; i < userIds.length; i++) {
 			long userId = userIds[i];
@@ -67,6 +78,8 @@ public class UserGroupRoleLocalServiceImpl
 				UserGroupRoleUtil.update(UserGroupRoleUtil.create(pk));
 			}
 		}
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void deleteUserGroupRoles(
@@ -83,6 +96,8 @@ public class UserGroupRoleLocalServiceImpl
 			catch (NoSuchUserGroupRoleException nsugre) {
 			}
 		}
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
@@ -98,6 +113,8 @@ public class UserGroupRoleLocalServiceImpl
 			catch (NoSuchUserGroupRoleException nsugre) {
 			}
 		}
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void deleteUserGroupRoles(long[] userIds, long groupId)
@@ -108,24 +125,32 @@ public class UserGroupRoleLocalServiceImpl
 
 			UserGroupRoleUtil.removeByU_G(userId, groupId);
 		}
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void deleteUserGroupRolesByGroupId(long groupId)
 		throws SystemException {
 
 		UserGroupRoleUtil.removeByGroupId(groupId);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void deleteUserGroupRolesByRoleId(long roleId)
 		throws SystemException {
 
 		UserGroupRoleUtil.removeByRoleId(roleId);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public void deleteUserGroupRolesByUserId(long userId)
 		throws SystemException {
 
 		UserGroupRoleUtil.removeByUserId(userId);
+
+		PermissionCacheUtil.clearCache();
 	}
 
 	public List getUserGroupRoles(long userId, long groupId)
@@ -145,6 +170,19 @@ public class UserGroupRoleLocalServiceImpl
 		else {
 			return false;
 		}
+	}
+
+	protected void checkGroupResource(long groupId)
+		throws PortalException, SystemException {
+
+		// Make sure that the individual resource for the group exists and
+		// otherwise create it
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		ResourceLocalServiceUtil.addResource(
+			group.getCompanyId(), Group.class.getName(),
+			ResourceImpl.SCOPE_INDIVIDUAL, String.valueOf(groupId));
 	}
 
 }

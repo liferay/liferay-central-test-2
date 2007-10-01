@@ -74,6 +74,9 @@ public class PermissionFinder {
 	public static String FIND_BY_G_R =
 		PermissionFinder.class.getName() + ".findByG_R";
 
+	public static String FIND_BY_R_R =
+		PermissionFinder.class.getName() + ".findByR_R";
+
 	public static String FIND_BY_U_R =
 		PermissionFinder.class.getName() + ".findByU_R";
 
@@ -663,6 +666,35 @@ public class PermissionFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
+			qPos.add(resourceId);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByR_R(long roleId, long resourceId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_R_R);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Permission_", PermissionImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(roleId);
 			qPos.add(resourceId);
 
 			return q.list();

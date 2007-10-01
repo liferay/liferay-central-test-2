@@ -48,4 +48,5 @@ package com.liferay.portal.model;
  *
  */
 public interface Role extends RoleModel {
+	public java.lang.String getTypeLabel();
 }

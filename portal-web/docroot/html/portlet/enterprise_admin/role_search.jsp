@@ -30,6 +30,21 @@ RoleSearch searchContainer = (RoleSearch)request.getAttribute("liferay-ui:search
 RoleDisplayTerms displayTerms = (RoleDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
+<script type="text/javascript">
+	function <portlet:namespace/>addRole() {
+		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:renderURL>';
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />rolesRedirect) {
+			url += '&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />rolesRedirect.value);
+		}
+		else {
+			url += '&<portlet:namespace />roleType=<%= RoleImpl.TYPE_ORGANIZATION %>&<portlet:namespace />redirect=' + encodeURIComponent('<%= currentURL%>');
+		}
+
+		self.location = url;
+	}
+</script>
+
 <div>
 	<label for="<portlet:namespace /><%= displayTerms.NAME %>"><liferay-ui:message key="search" /></label>
 
@@ -42,7 +57,7 @@ RoleDisplayTerms displayTerms = (RoleDisplayTerms)searchContainer.getDisplayTerm
 	<input type="submit" value="<liferay-ui:message key="search-roles" />" />
 
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>">
-		<input type="button" value="<liferay-ui:message key="add-role" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:renderURL>&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />rolesRedirect.value);" />
+		<input type="button" value="<liferay-ui:message key="add-role" />" onClick="<portlet:namespace/>addRole()" />
 	</c:if>
 </div>
 

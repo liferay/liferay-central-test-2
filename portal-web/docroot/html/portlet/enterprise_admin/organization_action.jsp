@@ -35,13 +35,8 @@ Organization organization = (Organization)row.getObject();
 
 long organizationId = organization.getOrganizationId();
 
-boolean organizationsTab = !organization.isLocation();
-
 String strutsAction = "/enterprise_admin/edit_organization";
 
-if (!organizationsTab) {
-	strutsAction = "/enterprise_admin/edit_location";
-}
 %>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationURL">
@@ -63,43 +58,11 @@ if (!organizationsTab) {
 	<portlet:param name="groupId" value="<%= String.valueOf(organization.getGroup().getGroupId()) %>" />
 </portlet:renderURL>
 
-<%
-String addUserURLString = null;
-%>
-
-<c:choose>
-	<c:when test="<%= organizationsTab %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserToOrganizationURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-			<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
-			<portlet:param name="organizationName" value="<%= organization.getName() %>" />
-		</portlet:renderURL>
-
-		<%
-		addUserURLString = addUserToOrganizationURL;
-		%>
-
-	</c:when>
-	<c:otherwise>
-
-		<%
-		Organization parentOrganizaton = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
-		%>
-
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserToLocationURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-			<portlet:param name="organizationId" value="<%= String.valueOf(parentOrganizaton.getOrganizationId()) %>" />
-			<portlet:param name="organizationName" value="<%= parentOrganizaton.getName() %>" />
-			<portlet:param name="locationId" value="<%= String.valueOf(organizationId) %>" />
-			<portlet:param name="locationName" value="<%= organization.getName() %>" />
-		</portlet:renderURL>
-
-		<%
-		addUserURLString = addUserToLocationURL;
-		%>
-
-	</c:otherwise>
-</c:choose>
+<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+	<portlet:param name="organizationIds" value="<%= String.valueOf(organizationId) %>" />
+	<portlet:param name="organizationName" value="<%= organization.getName() %>" />
+</portlet:renderURL>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/view" />
@@ -113,141 +76,57 @@ String addUserURLString = null;
 	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
 </portlet:renderURL>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addLocationURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/edit_location" />
+<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addSuborganizationURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
 	<portlet:param name="parentOrganizationName" value="<%= organization.getName() %>" />
 </portlet:renderURL>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewLocationsURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/view" />
-	<portlet:param name="tabs1" value="locations" />
-	<portlet:param name="parentOrganizationId" value="<%= String.valueOf(organizationId) %>" />
-</portlet:renderURL>
+<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 
-<c:choose>
-	<c:when test="<%= portletName.equals(PortletKeys.LOCATION_ADMIN) %>">
-		<c:if test="<%= !organizationsTab && LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
-			<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
-		</c:if>
+	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
+		<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
+	</c:if>
 
-		<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
-			<liferay-security:permissionsURL
-				modelResource="<%= Location.class.getName() %>"
-				modelResourceDescription="<%= organization.getName() %>"
-				resourcePrimKey="<%= String.valueOf(organization.getOrganizationId()) %>"
-				var="editLocationPermissionsURL"
-			/>
+	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
+		<liferay-security:permissionsURL
+			modelResource="<%= Organization.class.getName() %>"
+			modelResourceDescription="<%= organization.getName() %>"
+			resourcePrimKey="<%= String.valueOf(organization.getOrganizationId()) %>"
+			var="editOrganizationPermissionsURL"
+		/>
 
-			<liferay-ui:icon image="permissions" url="<%= editLocationPermissionsURL %>" />
-		</c:if>
+		<liferay-ui:icon image="permissions" url="<%= editOrganizationPermissionsURL %>" />
+	</c:if>
 
-		<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
-			<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURLString %>" />
-		</c:if>
+	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
+		<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
+	</c:if>
 
-		<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
+	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
 
-		<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
-			<liferay-ui:icon-delete url="<%= deleteOrganizationURL %>" />
-		</c:if>
-	</c:when>
-	<c:otherwise>
-		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-			<c:choose>
-				<c:when test="<%= organizationsTab %>">
-					<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
-						<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
-					</c:if>
-				</c:when>
-				<c:otherwise>
-					<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
-						<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
-					</c:if>
-				</c:otherwise>
-			</c:choose>
+		<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURL %>" />
 
-			<c:choose>
-				<c:when test="<%= organizationsTab %>">
-					<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
-						<liferay-security:permissionsURL
-							modelResource="<%= Organization.class.getName() %>"
-							modelResourceDescription="<%= organization.getName() %>"
-							resourcePrimKey="<%= String.valueOf(organization.getOrganizationId()) %>"
-							var="editOrganizationPermissionsURL"
-						/>
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUserRolesURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_org_roles" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(organization.getGroup().getGroupId()) %>" />
+		</portlet:renderURL>
 
-						<liferay-ui:icon image="permissions" url="<%= editOrganizationPermissionsURL %>" />
-					</c:if>
-				</c:when>
-				<c:otherwise>
-					<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.PERMISSIONS) %>">
-						<liferay-security:permissionsURL
-							modelResource="<%= Location.class.getName() %>"
-							modelResourceDescription="<%= organization.getName() %>"
-							resourcePrimKey="<%= String.valueOf(organization.getOrganizationId()) %>"
-							var="editLocationPermissionsURL"
-						/>
+		<liferay-ui:icon image="assign_user_roles" url="<%= assignUserRolesURL %>" />
+	</c:if>
+</c:if>
 
-						<liferay-ui:icon image="permissions" url="<%= editLocationPermissionsURL %>" />
-					</c:if>
-				</c:otherwise>
-			</c:choose>
+<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 
-			<c:choose>
-				<c:when test="<%= organizationsTab %>">
-					<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
-						<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
-					</c:if>
-				</c:when>
-				<c:otherwise>
-					<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
-						<liferay-ui:icon image="pages" message="configure-pages" url="<%= pagesURL %>" />
-					</c:if>
-				</c:otherwise>
-			</c:choose>
+<c:if test="<%= organization.isRegular() %>">
+	<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_LOCATION) %>">
+		<liferay-ui:icon image="add_location" message="add-suborganization" url="<%= addSuborganizationURL %>" />
+	</c:if>
 
-			<c:choose>
-				<c:when test="<%= organizationsTab %>">
-					<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
-						<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURLString %>" />
-					</c:if>
-				</c:when>
-				<c:otherwise>
-					<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
-						<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURLString %>" />
-					</c:if>
-				</c:otherwise>
-			</c:choose>
-		</c:if>
+	<liferay-ui:icon image="view_locations" message="view-suborganizations" url="<%= viewSuborganizationsURL %>" />
+</c:if>
 
-		<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
-
-		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && !organization.isLocation() %>">
-			<liferay-ui:icon image="view" message="view-suborganizations" url="<%= viewSuborganizationsURL %>" />
-		</c:if>
-
-		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-			<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_ENABLED)) && organizationsTab && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_LOCATION) %>">
-				<liferay-ui:icon image="add_location" message="add-location" url="<%= addLocationURL %>" />
-			</c:if>
-		</c:if>
-
-		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_ENABLED)) && organizationsTab %>">
-			<liferay-ui:icon image="view_locations" message="view-locations" url="<%= viewLocationsURL %>" />
-		</c:if>
-
-		<c:choose>
-			<c:when test="<%= organizationsTab %>">
-				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
-					<liferay-ui:icon-delete url="<%= deleteOrganizationURL %>" />
-				</c:if>
-			</c:when>
-			<c:otherwise>
-				<c:if test="<%= LocationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
-					<liferay-ui:icon-delete url="<%= deleteOrganizationURL %>" />
-				</c:if>
-			</c:otherwise>
-		</c:choose>
-	</c:otherwise>
-</c:choose>
+<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
+	<liferay-ui:icon-delete url="<%= deleteOrganizationURL %>" />
+</c:if>

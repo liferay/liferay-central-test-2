@@ -48,6 +48,35 @@ public class OrganizationImpl
 
 	public static final int ANY_PARENT_ORGANIZATION_ID = -1;
 
+	public static final int ANY_TYPE = -1;
+
+	public static final int TYPE_REGULAR = 1;
+
+	public static final String TYPE_REGULAR_LABEL = "regular";
+
+	public static final int TYPE_LOCATION = 2;
+
+	public static final String TYPE_LOCATION_LABEL = "location";
+
+	public static int getType(boolean location) {
+		int type = OrganizationImpl.TYPE_REGULAR;
+
+		if (location) {
+			type = OrganizationImpl.TYPE_LOCATION;
+		}
+
+		return type;
+	}
+
+	public static String getTypeLabel(int type) {
+		if (type == TYPE_LOCATION) {
+			return TYPE_LOCATION_LABEL;
+		}
+		else {
+			return TYPE_REGULAR_LABEL;
+		}
+	}
+
 	public OrganizationImpl() {
 	}
 
@@ -58,6 +87,23 @@ public class OrganizationImpl
 		else {
 			return false;
 		}
+	}
+
+	public boolean isRegular() {
+		return !isLocation();
+	}
+
+	public int getType() {
+		if (isLocation()) {
+			return TYPE_LOCATION;
+		}
+		else {
+			return TYPE_REGULAR;
+		}
+	}
+
+	public String getTypeLabel() {
+		return getTypeLabel(getType());
 	}
 
 	public Group getGroup() {

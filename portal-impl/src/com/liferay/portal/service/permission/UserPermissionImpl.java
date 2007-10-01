@@ -24,7 +24,6 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -34,26 +33,45 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
  * <a href="UserPermissionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
+ * @author Jorge Ferrer
  *
  */
 public class UserPermissionImpl implements UserPermission {
 
+	/** @deprecated */
 	public void check(
 			PermissionChecker permissionChecker, long userId,
 			long organizationId, long locationId, String actionId)
 		throws PrincipalException {
+		check(
+			permissionChecker, userId, new long[] {organizationId, locationId},
+			actionId);
+	}
+
+	public void check(
+			PermissionChecker permissionChecker, long userId,
+			long[] organizationIds, String actionId)
+		throws PrincipalException {
 
 		if (!contains(
-				permissionChecker, userId, organizationId, locationId,
-				actionId)) {
+				permissionChecker, userId, organizationIds, actionId)) {
 
 			throw new PrincipalException();
 		}
 	}
 
+	/** @deprecated */
 	public boolean contains(
 		PermissionChecker permissionChecker, long userId, long organizationId,
 		long locationId, String actionId) {
+		return contains(
+			permissionChecker, userId, new long[] {organizationId, locationId},
+		    actionId);
+	}
+
+	public boolean contains(
+		PermissionChecker permissionChecker, long userId,
+		long[] organizationIds, String actionId) {
 
 		PermissionCheckerImpl permissionCheckerImpl =
 			(PermissionCheckerImpl)permissionChecker;
@@ -72,21 +90,27 @@ public class UserPermissionImpl implements UserPermission {
 
 			return true;
 		}
-		else if ((organizationId > 0) &&
-				 permissionChecker.hasPermission(
-					0, Organization.class.getName(), organizationId,
-					organizationActionId)) {
-
-			return true;
-		}
-		else if ((locationId  > 0) &&
-				 permissionChecker.hasPermission(
-					0, Location.class.getName(), locationId,
-					organizationActionId)) {
-
-			return true;
+		else if ((organizationIds.length > 0) &&
+				 (hasOrganizationPermission(
+					 permissionChecker, organizationIds,
+					 organizationActionId))) {
+				return true;
 		}
 
+		return false;
+	}
+
+	protected boolean hasOrganizationPermission(
+		PermissionChecker permissionChecker, long[] organizationIds,
+		String organizationActionId) {
+
+		for (int i = 0; i < organizationIds.length; i++) {
+			if (permissionChecker.hasPermission(
+					0, Organization.class.getName(), organizationIds[i],
+					organizationActionId)) {
+				return true;
+			}
+		}
 		return false;
 	}
 

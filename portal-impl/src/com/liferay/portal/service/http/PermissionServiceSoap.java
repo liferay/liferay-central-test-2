@@ -184,6 +184,19 @@ public class PermissionServiceSoap {
 		}
 	}
 
+	public static void setRolePermissions(long roleId, long groupId,
+		java.lang.String[] actionIds, long resourceId)
+		throws RemoteException {
+		try {
+			PermissionServiceUtil.setRolePermissions(roleId, groupId,
+				actionIds, resourceId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void setUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws RemoteException {

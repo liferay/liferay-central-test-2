@@ -47,16 +47,13 @@ public class OrganizationSearch extends SearchContainer {
 		headerNames.add("country");
 	}
 
-	public static final String EMPTY_RESULTS_MESSAGE_1 =
+	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-organizations-were-found";
-
-	public static final String EMPTY_RESULTS_MESSAGE_2 =
-		"no-locations-were-found";
 
 	public OrganizationSearch(RenderRequest req, PortletURL iteratorURL) {
 		super(req, new OrganizationDisplayTerms(req),
 			  new OrganizationSearchTerms(req), DEFAULT_CUR_PARAM,
-			  DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE_1);
+			  DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		OrganizationDisplayTerms displayTerms =
 			(OrganizationDisplayTerms)getDisplayTerms();

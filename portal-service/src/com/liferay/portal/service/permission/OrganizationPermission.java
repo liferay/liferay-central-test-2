@@ -22,8 +22,9 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.security.auth.PrincipalException;
 
 /**
  * <a href="OrganizationPermission.java.html"><b><i>View Source</i></b></a>
@@ -36,10 +37,10 @@ public interface OrganizationPermission {
 	public void check(
 			PermissionChecker permissionChecker, long organizationId,
 			String actionId)
-		throws PrincipalException;
+		throws PortalException, SystemException;
 
 	public boolean contains(
 		PermissionChecker permissionChecker, long organizationId,
-		String actionId);
+		String actionId) throws PortalException, SystemException;
 
 }

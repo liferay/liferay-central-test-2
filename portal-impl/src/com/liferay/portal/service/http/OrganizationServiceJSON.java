@@ -95,6 +95,17 @@ public class OrganizationServiceJSON {
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONObject addOrganization(long parentOrganizationId,
+		java.lang.String name, int type, boolean recursable, long regionId,
+		long countryId, int statusId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
+				name, type, recursable, regionId, countryId, statusId);
+
+		return OrganizationJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static void deleteOrganization(long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
@@ -155,6 +166,18 @@ public class OrganizationServiceJSON {
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
 				parentOrganizationId, name, location, recursable, regionId,
+				countryId, statusId);
+
+		return OrganizationJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject updateOrganization(long organizationId,
+		long parentOrganizationId, java.lang.String name, int type,
+		boolean recursable, long regionId, long countryId, int statusId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
+				parentOrganizationId, name, type, recursable, regionId,
 				countryId, statusId);
 
 		return OrganizationJSONSerializer.toJSONObject(returnValue);

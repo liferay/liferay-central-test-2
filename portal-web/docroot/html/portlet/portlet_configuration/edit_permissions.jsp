@@ -139,6 +139,29 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= windowState.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
 	}
 
+	function <portlet:namespace />saveRolePermissions(roleIdsPos, roleIdsPosValue) {
+
+		<%
+		PortletURL saveRolePermissionsRedirectURL = PortletURLUtil.clone(portletURL, false, renderResponse);
+
+		new RoleSearch(renderRequest, saveRolePermissionsRedirectURL);
+		%>
+
+		var roleIds = document.<portlet:namespace />fm.<portlet:namespace />roleIds.value;
+
+		if (roleIdsPos == -1) {
+			roleIds = "";
+			roleIdsPos = 0;
+		}
+
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "role_permissions";
+		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveRolePermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />roleIds=" + roleIds + "&<portlet:namespace />roleIdsPos=" + roleIdsPos;
+		document.<portlet:namespace />fm.<portlet:namespace />roleIds.value = roleIds;
+		document.<portlet:namespace />fm.<portlet:namespace />roleIdsPosValue.value = roleIdsPosValue;
+		document.<portlet:namespace />fm.<portlet:namespace />roleIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= windowState.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
+	}
+
 	function <portlet:namespace />saveUserGroupPermissions(userGroupIdsPos, userGroupIdsPosValue) {
 
 		<%
@@ -190,6 +213,11 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
+	function <portlet:namespace />updateRolePermissions() {
+		document.<portlet:namespace />fm.<portlet:namespace />roleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	function <portlet:namespace />updateUserGroupPermissions() {
 		document.<portlet:namespace />fm.<portlet:namespace />userGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
@@ -230,16 +258,11 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 </c:choose>
 
 <%
-String tabs2Names = "users,organizations";
+String tabs2Names = "users,organizations,user-groups,regular-roles,community-roles,community,guest";
 
-if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_ENABLED))) {
-	tabs2Names += ",locations";
-}
-
-tabs2Names += ",user-groups,community,guest";
-
-if (modelResource.equals(Organization.class.getName()) || modelResource.equals(Location.class.getName()) || modelResource.equals("com.liferay.portal.model.Role") || modelResource.equals("com.liferay.portal.model.User")) {
+if (ResourceActionsUtil.isPortalModelResource(modelResource)) {
 	tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
+	tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
 	tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
 }
 else if (modelResource.equals(Layout.class.getName())) {
@@ -249,12 +272,26 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 	if (group.isUser()) {
 		tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
+		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
+	}
+	else if (group.isOrganization()) {
+		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
 	}
 
 	// Private layouts should not have guest assignments
 
 	if (selLayout.isPrivateLayout()) {
 		tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
+	}
+}
+else {
+	Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+	if (group.isUser()) {
+		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
+	}
+	else if (group.isOrganization()) {
+		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
 	}
 }
 %>
@@ -428,11 +465,9 @@ else if (modelResource.equals(Layout.class.getName())) {
 			</c:otherwise>
 		</c:choose>
 	</c:when>
-	<c:when test='<%= tabs2.equals("organizations") || tabs2.equals("locations") %>'>
+	<c:when test='<%= tabs2.equals("organizations") %>'>
 
 		<%
-		boolean organizationsTab = tabs2.equals("organizations");
-
 		String organizationIds = ParamUtil.getString(request, "organizationIds");
 		long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
 		int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
@@ -488,18 +523,12 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				headerNames.add("name");
 				headerNames.add("parent-organization");
+				headerNames.add("type");
 				headerNames.add("city");
 				headerNames.add("permissions");
-
-				if (!organizationsTab) {
-					headerNames.add("exclusive");
-				}
+				headerNames.add("exclusive");
 
 				searchContainer.setHeaderNames(headerNames);
-
-				if (!organizationsTab) {
-					searchContainer.setEmptyResultsMessage(OrganizationSearch.EMPTY_RESULTS_MESSAGE_2);
-				}
 
 				List resultRows = searchContainer.getResultRows();
 
@@ -528,6 +557,10 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 					row.addText(parentOrganizationName);
 
+					// Type
+
+					row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
+
 					// Address
 
 					Address address = organization.getAddress();
@@ -553,13 +586,11 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 					row.addText(StringUtil.merge(actionsNames, ", "));
 
-					if (!organizationsTab) {
-						if (permissions.size() == 0) {
-							row.addText(StringPool.BLANK);
-						}
-						else {
-							row.addText(LanguageUtil.get(pageContext, (organizationIntersection ? "yes" : "no")));
-						}
+					if (permissions.size() == 0) {
+						row.addText(StringPool.BLANK);
+					}
+					else {
+						row.addText(LanguageUtil.get(pageContext, (organizationIntersection ? "yes" : "no")));
 					}
 
 					// Add result row
@@ -635,28 +666,21 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				<br />
 
-				<c:choose>
-					<c:when test='<%= organizationsTab %>'>
-						<input name="<portlet:namespace />organizationIntersection" type="hidden" value="0" />
-					</c:when>
-					<c:otherwise>
-						<table class="liferay-table">
-						<tr>
-							<td>
-								<liferay-ui:message key="permission-exclusive-to-members-of-current-location-and-community" />
-							</td>
-							<td>
-								<select name="<portlet:namespace />organizationIntersection">
-									<option <%= organizationIntersection ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
-									<option <%= !organizationIntersection ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
-								</select>
-							</td>
-						</tr>
-						</table>
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="assign-permissions-only-to-users-that-are-also-members-of-the-current-community" />
+					</td>
+					<td>
+						<select name="<portlet:namespace />organizationIntersection">
+							<option <%= organizationIntersection ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+							<option <%= !organizationIntersection ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
+						</select>
+					</td>
+				</tr>
+				</table>
 
-						<br />
-					</c:otherwise>
-				</c:choose>
+				<br />
 
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
@@ -829,6 +853,179 @@ else if (modelResource.equals(Layout.class.getName())) {
 					</td>
 					<td align="right">
 						<input type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveUserGroupPermissions(-1, '<%= userGroupIdsArray[userGroupIdsPos] %>');" />
+					</td>
+				</tr>
+				</table>
+			</c:otherwise>
+		</c:choose>
+	</c:when>
+	<c:when test='<%= tabs2.equals("regular-roles") || tabs2.equals("community-roles") || tabs2.equals("organization-roles")%>'>
+
+		<%
+		String roleIds = ParamUtil.getString(request, "roleIds");
+
+		long[] roleIdsArray = StringUtil.split(roleIds, 0L);
+
+		int roleIdsPos = ParamUtil.getInteger(request, "roleIdsPos");
+
+		int type = RoleImpl.TYPE_REGULAR;
+
+		if (tabs2.equals("community-roles")) {
+			type = RoleImpl.TYPE_COMMUNITY;
+		}
+		else if (tabs2.equals("organization-roles")) {
+			type = RoleImpl.TYPE_ORGANIZATION;
+		}
+		%>
+
+		<input name="<portlet:namespace />roleIds" type="hidden" value="<%= roleIds %>" />
+		<input name="<portlet:namespace />roleIdsPos" type="hidden" value="<%= roleIdsPos %>" />
+		<input name="<portlet:namespace />roleIdsPosValue" type="hidden" value="" />
+		<input name="<portlet:namespace />roleIdActionIds" type="hidden" value="" />
+
+		<c:choose>
+			<c:when test="<%= roleIdsArray.length == 0 %>">
+				<liferay-ui:tabs
+					names="current,available"
+					param="tabs3"
+					url="<%= portletURL.toString() %>"
+				/>
+
+				<%
+				RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
+
+				searchContainer.setRowChecker(new RowChecker(renderResponse));
+				%>
+
+				<liferay-ui:search-form
+					page="/html/portlet/enterprise_admin/role_search.jsp"
+					searchContainer="<%= searchContainer %>"
+				/>
+
+				<%
+				RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
+
+				LinkedHashMap roleParams = new LinkedHashMap();
+
+				if (tabs3.equals("current")) {
+					roleParams.put("permissionsResourceId", new Long(resource.getResourceId()));
+				}
+
+				int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), Integer.valueOf(type), roleParams);
+
+				searchContainer.setTotal(total);
+
+				List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), Integer.valueOf(type), roleParams, searchContainer.getStart(), searchContainer.getEnd());
+
+				searchContainer.setResults(results);
+				%>
+
+				<div class="separator"><!-- --></div>
+
+				<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateRolePermissions();" />
+
+				<br /><br />
+
+				<%
+				List headerNames = new ArrayList();
+
+				headerNames.add("name");
+				headerNames.add("permissions");
+
+				searchContainer.setHeaderNames(headerNames);
+
+				List resultRows = searchContainer.getResultRows();
+
+				for (int i = 0; i < results.size(); i++) {
+					Role role = (Role)results.get(i);
+
+					ResultRow row = new ResultRow(role, role.getRoleId(), i);
+
+					// Name
+
+					row.addText(role.getName());
+
+					// Permissions
+
+					List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
+
+					List actions = ResourceActionsUtil.getActions(permissions);
+					List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
+
+					row.addText(StringUtil.merge(actionsNames, ", "));
+
+					// Add result row
+
+					resultRows.add(row);
+				}
+				%>
+
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+			</c:when>
+			<c:otherwise>
+
+				<%
+				Role role = RoleLocalServiceUtil.getRole(roleIdsArray[roleIdsPos]);
+				%>
+
+				<liferay-ui:tabs names="<%= role.getName() %>" />
+
+				<%
+				List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
+
+				List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+				List actions2 = ResourceActionsUtil.getActions(permissions);
+
+				// Left list
+
+				List leftList = new ArrayList();
+
+				for (int i = 0; i < actions2.size(); i++) {
+					String actionId = (String)actions2.get(i);
+
+					leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+				}
+
+				Collections.sort(leftList, new KeyValuePairComparator(false, true));
+
+				// Right list
+
+				List rightList = new ArrayList();
+
+				for (int i = 0; i < actions1.size(); i++) {
+					String actionId = (String)actions1.get(i);
+
+					if (!actions2.contains(actionId)) {
+						rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+					}
+				}
+
+				Collections.sort(rightList, new KeyValuePairComparator(false, true));
+				%>
+
+				<liferay-ui:input-move-boxes
+					formName="fm"
+					leftTitle="current"
+					rightTitle="available"
+					leftBoxName="current_actions"
+					rightBoxName="available_actions"
+					leftList="<%= leftList %>"
+					rightList="<%= rightList %>"
+				/>
+
+				<br />
+
+				<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tr>
+					<td>
+						<input <%= roleIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos - 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
+
+						<input <%= roleIdsPos + 1 < roleIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos + 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
+					</td>
+					<td align="right">
+						<input type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveRolePermissions(-1, '<%= roleIdsArray[roleIdsPos] %>');" />
 					</td>
 				</tr>
 				</table>

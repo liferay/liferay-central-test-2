@@ -68,14 +68,9 @@ UserGroup userGroup = (UserGroup)row.getObject();
 	<portlet:param name="struts_action" value="/enterprise_admin/view" />
 	<portlet:param name="tabs1" value="users" />
 
-	<c:choose>
-		<c:when test="<%= portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 			<portlet:param name="organizationId" value="<%= String.valueOf(user.getOrganization().getOrganizationId()) %>" />
-		</c:when>
-		<c:when test="<%= portletName.equals(PortletKeys.LOCATION_ADMIN) %>">
-			<portlet:param name="organizationId" value="<%= String.valueOf(user.getLocation().getOrganizationId()) %>" />
-		</c:when>
-	</c:choose>
+	</c:if>
 
 	<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 </portlet:renderURL>

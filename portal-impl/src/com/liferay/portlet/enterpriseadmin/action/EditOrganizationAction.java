@@ -137,10 +137,6 @@ public class EditOrganizationAction extends PortletAction {
 			getForward(req, "portlet.enterprise_admin.edit_organization"));
 	}
 
-	protected boolean isLocation() {
-		return _LOCATION;
-	}
-
 	protected void deleteOrganizations(ActionRequest req) throws Exception {
 		long[] deleteOrganizationIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteOrganizationIds"), 0L);
@@ -171,6 +167,7 @@ public class EditOrganizationAction extends PortletAction {
 		String name = ParamUtil.getString(req, "name");
 		boolean recursable = ParamUtil.getBoolean(req, "recursable");
 		int statusId = ParamUtil.getInteger(req, "statusId");
+		int type = ParamUtil.getInteger(req, "type");
 		long regionId = ParamUtil.getLong(req, "regionId");
 		long countryId = ParamUtil.getLong(req, "countryId");
 
@@ -181,7 +178,7 @@ public class EditOrganizationAction extends PortletAction {
 			// Add organization
 
 			organization = OrganizationServiceUtil.addOrganization(
-				parentOrganizationId, name, isLocation(), recursable, regionId,
+				parentOrganizationId, name, type, recursable, regionId,
 				countryId, statusId);
 		}
 		else {
@@ -189,13 +186,11 @@ public class EditOrganizationAction extends PortletAction {
 			// Update organization
 
 			organization = OrganizationServiceUtil.updateOrganization(
-				organizationId, parentOrganizationId, name, isLocation(),
+				organizationId, parentOrganizationId, name, type,
 				recursable, regionId, countryId, statusId);
 		}
 
 		return organization;
 	}
-
-	private static final boolean _LOCATION = false;
 
 }

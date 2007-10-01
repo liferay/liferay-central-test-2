@@ -585,6 +585,13 @@ Liferay.Service.Portal.Permission = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	setRolePermissions: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "setRolePermissions";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	setUserPermissions: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "setUserPermissions";

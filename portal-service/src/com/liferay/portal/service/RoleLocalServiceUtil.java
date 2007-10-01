@@ -204,12 +204,32 @@ public class RoleLocalServiceUtil {
 			begin, end);
 	}
 
+	public static java.util.List search(long companyId, java.lang.String name,
+		java.lang.String description, java.lang.Integer type,
+		java.util.LinkedHashMap params, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		return roleLocalService.search(companyId, name, description, type,
+			params, begin, end);
+	}
+
 	public static int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer type)
 		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.searchCount(companyId, name, description, type);
+	}
+
+	public static int searchCount(long companyId, java.lang.String name,
+		java.lang.String description, java.lang.Integer type,
+		java.util.LinkedHashMap params)
+		throws com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		return roleLocalService.searchCount(companyId, name, description, type,
+			params);
 	}
 
 	public static void setUserRoles(long userId, long[] roleIds)

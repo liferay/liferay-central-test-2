@@ -384,8 +384,8 @@ public class EditUserAction extends PortletAction {
 		int birthdayDay = ParamUtil.getInteger(req, "birthdayDay");
 		int birthdayYear = ParamUtil.getInteger(req, "birthdayYear");
 		String jobTitle = ParamUtil.getString(req, "jobTitle");
-		long organizationId = ParamUtil.getLong(req, "organizationId");
-		long locationId = ParamUtil.getLong(req, "locationId");
+		long[] organizationIds = StringUtil.split(
+			ParamUtil.getString(req, "organizationIds"),  0L);
 		boolean sendEmail = true;
 
 		User user = null;
@@ -400,7 +400,7 @@ public class EditUserAction extends PortletAction {
 				autoScreenName, screenName, emailAddress,
 				themeDisplay.getLocale(), firstName, middleName, lastName,
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, organizationId, locationId, sendEmail);
+				birthdayYear, jobTitle, organizationIds, sendEmail);
 		}
 		else {
 
@@ -422,7 +422,7 @@ public class EditUserAction extends PortletAction {
 				suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 				contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
 				contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
-				contact.getYmSn(), jobTitle, organizationId, locationId);
+				contact.getYmSn(), jobTitle, organizationIds);
 
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;

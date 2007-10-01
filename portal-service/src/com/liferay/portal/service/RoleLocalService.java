@@ -128,8 +128,18 @@ public interface RoleLocalService {
 		java.lang.String description, java.lang.Integer type, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List search(long companyId, java.lang.String name,
+		java.lang.String description, java.lang.Integer type,
+		java.util.LinkedHashMap params, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
 	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer type)
+		throws com.liferay.portal.SystemException;
+
+	public int searchCount(long companyId, java.lang.String name,
+		java.lang.String description, java.lang.Integer type,
+		java.util.LinkedHashMap params)
 		throws com.liferay.portal.SystemException;
 
 	public void setUserRoles(long userId, long[] roleIds)

@@ -34,21 +34,42 @@ import com.liferay.portal.security.auth.PrincipalException;
  */
 public class UserPermissionUtil {
 
+	/** @deprecated */
 	public static void check(
 			PermissionChecker permissionChecker, long userId,
 			long organizationId, long locationId, String actionId)
 		throws PrincipalException {
 
-		getUserPermission().check(
-			permissionChecker, userId, organizationId, locationId, actionId);
+		check(
+			permissionChecker, userId, new long[] {organizationId, locationId},
+			actionId);
 	}
 
+	public static void check(
+			PermissionChecker permissionChecker, long userId,
+			long[] organizationIds, String actionId)
+		throws PrincipalException {
+
+		getUserPermission().check(
+			permissionChecker, userId, organizationIds, actionId);
+	}
+
+	/** @deprecated */
 	public static boolean contains(
 		PermissionChecker permissionChecker, long userId, long organizationId,
 		long locationId, String actionId) {
 
+		return contains(
+			permissionChecker, userId, new long[] {organizationId, locationId},
+			actionId);
+	}
+
+	public static boolean contains(
+		PermissionChecker permissionChecker, long userId,
+		long[] organizationIds, String actionId) {
+
 		return getUserPermission().contains(
-			permissionChecker, userId, organizationId, locationId, actionId);
+			permissionChecker, userId, organizationIds, actionId);
 	}
 
 	public static UserPermission getUserPermission() {

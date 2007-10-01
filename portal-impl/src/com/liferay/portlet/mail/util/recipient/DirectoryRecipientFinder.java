@@ -24,10 +24,10 @@ package com.liferay.portlet.mail.util.recipient;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,9 +56,7 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 		try {
 			User user = UserLocalServiceUtil.getUserById(userId);
 
-			Organization organization = user.getOrganization();
-
-			if (organization.getOrganizationId() > 0) {
+			if (user.hasOrganization()) {
 				return _options;
 			}
 		}
@@ -80,22 +78,36 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 
-			Organization organization = user.getOrganization();
-
 			LinkedHashMap params = null;
 
-			if ((organization.getOrganizationId() > 0) &&
+			List results;
+
+			if ((user.hasOrganization()) &&
 				(Validator.isNull(optionOrganization) ||
 				 optionOrganization.equals("my-organization"))) {
 
 				params = new LinkedHashMap();
 
-				params.put(
-					"usersOrgs", new Long(organization.getOrganizationId()));
-			}
+				long[] organizationIds = user.getOrganizationIds();
 
-			List results = UserLocalServiceUtil.search(
-				user.getCompanyId(), null, Boolean.TRUE, params, 0, 50, null);
+				results = new ArrayList();
+
+				for (int i = 0; i < organizationIds.length; i++) {
+					params.put("usersOrgs", String.valueOf(organizationIds[i]));
+
+					List subresults = UserLocalServiceUtil.search(
+						user.getCompanyId(), null, Boolean.TRUE, params, 0, 50,
+						null);
+
+					results.addAll(subresults);
+				}
+
+			}
+			else {
+				results = UserLocalServiceUtil.search(
+					user.getCompanyId(), null, Boolean.TRUE, params, 0, 50,
+					null);
+			}
 
 			for (int i = 0; i < results.size(); i++) {
 				User recipient = (User)results.get(i);

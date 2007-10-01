@@ -50,6 +50,7 @@
 <%@ page import="com.liferay.portal.OrganizationParentException" %>
 <%@ page import="com.liferay.portal.PasswordPolicyNameException" %>
 <%@ page import="com.liferay.portal.PhoneNumberException" %>
+<%@ page import="com.liferay.portal.PortalException" %>
 <%@ page import="com.liferay.portal.RequiredOrganizationException" %>
 <%@ page import="com.liferay.portal.RequiredRoleException" %>
 <%@ page import="com.liferay.portal.RequiredUserException" %>
@@ -58,6 +59,7 @@
 <%@ page import="com.liferay.portal.ReservedUserIdException" %>
 <%@ page import="com.liferay.portal.ReservedUserScreenNameException" %>
 <%@ page import="com.liferay.portal.RoleNameException" %>
+<%@ page import="com.liferay.portal.SystemException" %>
 <%@ page import="com.liferay.portal.UserEmailAddressException" %>
 <%@ page import="com.liferay.portal.UserGroupNameException" %>
 <%@ page import="com.liferay.portal.UserIdException" %>
@@ -67,12 +69,12 @@
 <%@ page import="com.liferay.portal.UserSmsException" %>
 <%@ page import="com.liferay.portal.WebsiteURLException" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
+<%@ page import="com.liferay.portal.model.impl.OrganizationImpl" %>
 <%@ page import="com.liferay.portal.security.ldap.PortalLDAPUtil" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %>
 <%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
-<%@ page import="com.liferay.portal.service.permission.LocationPermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.PasswordPolicyPermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
@@ -82,6 +84,7 @@
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
 <%@ page import="com.liferay.portal.util.LiveUsers" %>
 <%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %>
+<%@ page import="com.liferay.portal.util.comparator.OrganizationNameComparator" %>
 <%@ page import="com.liferay.portal.util.comparator.UserTrackerModifiedDateComparator" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupDisplayTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupPermissionChecker" %>
@@ -109,6 +112,7 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserUserGroupChecker" %>
+<%@ page import="com.liferay.util.UniqueList" %>
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "users");
@@ -120,4 +124,8 @@ if (!portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
 }
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+
+boolean organizationRequired = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED));
+
+boolean locationRequired = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED));
 %>

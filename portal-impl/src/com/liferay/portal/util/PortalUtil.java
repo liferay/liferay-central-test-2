@@ -1173,6 +1173,10 @@ public class PortalUtil {
 		return _instance._getSystemGroups();
 	}
 
+	public static String[] getSystemOrganizationRoles() {
+		return _instance._getSystemOrganizationRoles();
+	}
+
 	public static String[] getSystemRoles() {
 		return _instance._getSystemRoles();
 	}
@@ -1849,8 +1853,7 @@ public class PortalUtil {
 
 		User doAsUser = UserLocalServiceUtil.getUserById(doAsUserId);
 
-		long organizationId = doAsUser.getOrganization().getOrganizationId();
-		long locationId = doAsUser.getLocation().getOrganizationId();
+		long[] organizationIds = doAsUser.getOrganizationIds();
 
 		User realUser = UserLocalServiceUtil.getUserById(
 			realUserIdObj.longValue());
@@ -1864,7 +1867,7 @@ public class PortalUtil {
 
 			if (doAsUser.isDefaultUser() ||
 				UserPermissionUtil.contains(
-					permissionChecker, doAsUserId, organizationId, locationId,
+					permissionChecker, doAsUserId, organizationIds,
 					ActionKeys.IMPERSONATE)) {
 
 				req.setAttribute(WebKeys.USER_ID, new Long(doAsUserId));
@@ -2001,6 +2004,31 @@ public class PortalUtil {
 
 		Arrays.sort(_sortedSystemCommunityRoles, new StringComparator());
 
+		// Organization Roles
+
+		String customSystemOrganizationRoles[] =
+				PropsUtil.getArray(PropsUtil.SYSTEM_ORGANIZATION_ROLES);
+
+		if ((customSystemOrganizationRoles == null) ||
+				(customSystemOrganizationRoles.length == 0)) {
+
+			_allSystemOrganizationRoles = RoleImpl.SYSTEM_ORGANIZATION_ROLES;
+		}
+		else {
+			_allSystemOrganizationRoles = ArrayUtil.append(
+				RoleImpl.SYSTEM_ORGANIZATION_ROLES,
+				customSystemOrganizationRoles);
+		}
+
+		_sortedSystemOrganizationRoles =
+			new String[_allSystemOrganizationRoles.length];
+
+		System.arraycopy(
+			_allSystemOrganizationRoles, 0, _sortedSystemOrganizationRoles, 0,
+				_allSystemOrganizationRoles.length);
+
+		Arrays.sort(_sortedSystemOrganizationRoles, new StringComparator());
+
 		// Reserved parameter names
 
 		_reservedParams = CollectionFactory.getHashSet();
@@ -2118,6 +2146,10 @@ public class PortalUtil {
 		return _allSystemCommunityRoles;
 	}
 
+	private String[] _getSystemOrganizationRoles() {
+		return _allSystemOrganizationRoles;
+	}
+
 	private String[] _getSystemGroups() {
 		return _allSystemGroups;
 	}
@@ -2164,6 +2196,15 @@ public class PortalUtil {
 			if (pos >= 0) {
 				return true;
 			}
+			else {
+				pos = Arrays.binarySearch(
+					_sortedSystemOrganizationRoles, roleName,
+					new StringComparator());
+
+				if (pos >= 0) {
+					return true;
+				}
+			}
 		}
 
 		return false;
@@ -2183,9 +2224,11 @@ public class PortalUtil {
 	private String _pathMain;
 	private String[] _allSystemCommunityRoles;
 	private String[] _allSystemGroups;
+	private String[] _allSystemOrganizationRoles;
 	private String[] _allSystemRoles;
 	private String[] _sortedSystemCommunityRoles;
 	private String[] _sortedSystemGroups;
+	private String[] _sortedSystemOrganizationRoles;
 	private String[] _sortedSystemRoles;
 	private Set _reservedParams;
 

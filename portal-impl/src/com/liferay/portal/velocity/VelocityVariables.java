@@ -42,7 +42,6 @@ import com.liferay.portal.service.permission.AccountPermissionUtil;
 import com.liferay.portal.service.permission.CommonPermissionUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
-import com.liferay.portal.service.permission.LocationPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
@@ -175,9 +174,6 @@ public class VelocityVariables {
 		vc.put("groupPermission", GroupPermissionUtil.getGroupPermission());
 		vc.put("layoutPermission", LayoutPermissionUtil.getLayoutPermission());
 		vc.put(
-			"locationPermission",
-			LocationPermissionUtil.getLocationPermission());
-		vc.put(
 			"organizationPermission",
 			OrganizationPermissionUtil.getOrganizationPermission());
 		vc.put(
@@ -191,6 +187,12 @@ public class VelocityVariables {
 			"userGroupPermission",
 			UserGroupPermissionUtil.getUserGroupPermission());
 		vc.put("userPermission", UserPermissionUtil.getUserPermission());
+
+		// @deprecated
+		vc.put(
+			"locationPermission",
+			OrganizationPermissionUtil.getOrganizationPermission());
+
 	}
 
 	public static void insertVariables(

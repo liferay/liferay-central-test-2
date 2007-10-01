@@ -37,11 +37,26 @@ Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
 long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
+Organization organization = null;
+
+String groupName = group.getName();
+
+int roleType = RoleImpl.TYPE_COMMUNITY;
+
+String strutsAction = "/communities/edit_user_roles";
+
+if (group.isOrganization()) {
+	organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
+	groupName = organization.getName();
+	roleType = RoleImpl.TYPE_ORGANIZATION;
+	strutsAction = "/enterprise_admin/edit_user_org_roles";
+}
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
-portletURL.setParameter("struts_action", "/communities/edit_user_roles");
+portletURL.setParameter("struts_action", strutsAction);
 //portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
@@ -53,16 +68,23 @@ PortletURL breadcrumbsURL = renderResponse.createRenderURL();
 
 breadcrumbsURL.setWindowState(WindowState.MAXIMIZED);
 
-breadcrumbsURL.setParameter("struts_action", "/communities/view");
+if (group.isOrganization()) {
+	breadcrumbsURL.setParameter("struts_action", "/communities/view");
+	breadcrumbsURL.setParameter("tabs1", "organizations");
+}
+else {
+	breadcrumbsURL.setParameter("struts_action", "/enterprise_admin/view");
+	breadcrumbsURL.setParameter("tabs1", tabs1);
+}
+
 breadcrumbsURL.setParameter("redirect", redirect);
-breadcrumbsURL.setParameter("tabs1", tabs1);
 breadcrumbsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
-String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + LanguageUtil.get(pageContext, "communities") + "</a> &raquo; ";
+String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + LanguageUtil.get(pageContext, (group.isOrganization())?"organizations":"communities") + "</a> &raquo; ";
 
-breadcrumbsURL.setParameter("struts_action", "/communities/edit_user_roles");
+breadcrumbsURL.setParameter("struts_action", strutsAction);
 
-breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + group.getName() + "</a>";
+breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + groupName + "</a>";
 
 if (role != null) {
 	breadcrumbsURL.setParameter("roleId", String.valueOf(roleId));
@@ -77,7 +99,7 @@ if (role != null) {
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_user_roles" /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= strutsAction %>' /></portlet:actionURL>");
 	}
 </script>
 
@@ -88,7 +110,7 @@ if (role != null) {
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />
 
-Assign Community roles to users.
+Assign <%= (group.isOrganization())?"Organization":"Community" %> roles to users.
 
 <br /><br />
 
@@ -126,11 +148,11 @@ Assign Community roles to users.
 			<%
 			RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-			int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_COMMUNITY));
+			int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(roleType));
 
 			searchContainer.setTotal(total);
 
-			List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_COMMUNITY), searchContainer.getStart(), searchContainer.getEnd());
+			List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(roleType), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 			%>
@@ -149,7 +171,7 @@ Assign Community roles to users.
 
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
-				rowURL.setParameter("struts_action", "/communities/edit_user_roles");
+				rowURL.setParameter("struts_action", strutsAction);
 				rowURL.setParameter("redirect", currentURL);
 				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				rowURL.setParameter("roleId", String.valueOf(curRole.getRoleId()));
@@ -160,7 +182,7 @@ Assign Community roles to users.
 
 				// Type
 
-				row.addText(LanguageUtil.get(pageContext, (curRole.getType() == RoleImpl.TYPE_REGULAR) ? "regular" : "community"), rowURL);
+				row.addText(LanguageUtil.get(pageContext, curRole.getTypeLabel()), rowURL);
 
 				// Add result row
 
@@ -178,7 +200,7 @@ Assign Community roles to users.
 		<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
 
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
-			Step 2 of 2: Assign Community roles to users. <i>Current</i> signifies current users associated with the <i><%= role.getName() %></i> role. <i>Available</i> signifies all users associated with the <i><%= group.getName() %></i> community.
+			Step 2 of 2: Assign <%= (group.isOrganization())?"Organization":"Community" %> roles to users. <i>Current</i> signifies current users associated with the <i><%= role.getName() %></i> role. <i>Available</i> signifies all users associated with the <i><%= groupName %></i> <%= (group.isOrganization())?"organization":"community" %>.
 		</div>
 
 		<br />
@@ -213,7 +235,12 @@ Assign Community roles to users.
 
 		LinkedHashMap userParams = new LinkedHashMap();
 
-		userParams.put("usersGroups", new Long(group.getGroupId()));
+		if (group.isOrganization()) {
+			userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
+		}
+		else {
+			userParams.put("usersGroups", new Long(group.getGroupId()));
+		}
 
 		if (tabs1.equals("current")) {
 			userParams.put("userGroupRole", new Long[] {new Long(group.getGroupId()), new Long(roleId)});

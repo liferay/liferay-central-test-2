@@ -50,6 +50,12 @@ package com.liferay.portal.model;
 public interface Organization extends OrganizationModel {
 	public boolean isRoot();
 
+	public boolean isRegular();
+
+	public int getType();
+
+	public java.lang.String getTypeLabel();
+
 	public com.liferay.portal.model.Group getGroup();
 
 	public com.liferay.portal.model.Address getAddress();

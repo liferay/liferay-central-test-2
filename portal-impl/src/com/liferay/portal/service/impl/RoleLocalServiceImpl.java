@@ -49,6 +49,7 @@ import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -157,6 +158,36 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				}
 			}
 		}
+
+		// Organization roles
+
+		String[] systemOrganizationRoles =
+			PortalUtil.getSystemOrganizationRoles();
+
+		for (int i = 0; i < systemOrganizationRoles.length; i++) {
+			try {
+				RoleFinder.findByC_N(companyId, systemOrganizationRoles[i]);
+			}
+			catch (NoSuchRoleException nsre) {
+				Role role = addRole(
+					0, companyId, systemOrganizationRoles[i],
+					RoleImpl.TYPE_ORGANIZATION);
+
+				if (systemOrganizationRoles[i].equals(
+					RoleImpl.ORGANIZATION_ADMINISTRATOR)) {
+					List actions = ResourceActionsUtil.getModelResourceActions(
+						Group.class.getName());
+
+					PermissionLocalServiceUtil.setRolePermissions(
+						role.getRoleId(), role.getCompanyId(),
+						Group.class.getName(),
+						ResourceImpl.SCOPE_GROUP_TEMPLATE,
+						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
+						(String[])actions.toArray(new String[0]));
+				}
+			}
+		}
+
 	}
 
 	public void deleteRole(long roleId)
@@ -176,7 +207,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				ResourceImpl.SCOPE_INDIVIDUAL, role.getRoleId());
 		}
 
-		if (role.getType() == RoleImpl.TYPE_COMMUNITY) {
+		if ((role.getType() == RoleImpl.TYPE_COMMUNITY) ||
+			(role.getType() == RoleImpl.TYPE_ORGANIZATION)) {
 			UserGroupRoleLocalServiceUtil.deleteUserGroupRolesByRoleId(
 				role.getRoleId());
 		}
@@ -308,15 +340,35 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			int begin, int end)
 		throws SystemException {
 
+		return search (
+			companyId, name, description, type, new LinkedHashMap(), begin,
+			end);
+	}
+
+	public List search(
+			long companyId, String name, String description, Integer type,
+			LinkedHashMap params, int begin, int end)
+		throws SystemException {
+
 		return RoleFinder.findByC_N_D_T(
-			companyId, name, description, type, begin, end);
+			companyId, name, description, type, params, begin, end);
 	}
 
 	public int searchCount(
 			long companyId, String name, String description, Integer type)
 		throws SystemException {
 
-		return RoleFinder.countByC_N_D_T(companyId, name, description, type);
+		return searchCount(
+			companyId, name, description, type, new LinkedHashMap());
+	}
+
+	public int searchCount(
+			long companyId, String name, String description, Integer type,
+			LinkedHashMap params)
+		throws SystemException {
+
+		return RoleFinder.countByC_N_D_T(
+			companyId, name, description, type, params);
 	}
 
 	public void setUserRoles(long userId, long[] roleIds)

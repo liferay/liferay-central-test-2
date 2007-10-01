@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
@@ -90,7 +89,7 @@ import org.dom4j.io.SAXReader;
  * <a href="JournalUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class JournalUtil {
@@ -219,8 +218,6 @@ public class JournalUtil {
 		String userName = StringPool.BLANK;
 		String userEmailAddress = StringPool.BLANK;
 		String userComments = StringPool.BLANK;
-		String userOrganizationName = StringPool.BLANK;
-		String userLocationName = StringPool.BLANK;
 		String userJobTitle = StringPool.BLANK;
 
 		User user = null;
@@ -231,18 +228,6 @@ public class JournalUtil {
 			userName = user.getFullName();
 			userEmailAddress = user.getEmailAddress();
 			userComments = user.getComments();
-
-			Organization organization = user.getOrganization();
-
-			if (organization != null) {
-				userOrganizationName = organization.getName();
-			}
-
-			Organization location = user.getLocation();
-
-			if (location != null) {
-				userLocationName = location.getName();
-			}
 
 			Contact contact = user.getContact();
 
@@ -268,16 +253,6 @@ public class JournalUtil {
 			root, tokens,
 			JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_COMMENTS,
 			userComments);
-
-		JournalUtil.addReservedEl(
-			root, tokens,
-			JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_ORGANIZATION,
-			userOrganizationName);
-
-		JournalUtil.addReservedEl(
-			root, tokens,
-			JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_LOCATION,
-			userLocationName);
 
 		JournalUtil.addReservedEl(
 			root, tokens,

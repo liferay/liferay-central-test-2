@@ -31,9 +31,12 @@ import javax.portlet.RenderRequest;
  * <a href="OrganizationDisplayTerms.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class OrganizationDisplayTerms extends DisplayTerms {
+
+	public static final String TYPE = "type";
 
 	public static final String NAME = "name";
 
@@ -52,6 +55,7 @@ public class OrganizationDisplayTerms extends DisplayTerms {
 	public OrganizationDisplayTerms(RenderRequest req) {
 		super(req);
 
+		type = ParamUtil.getInteger(req, TYPE);
 		name = ParamUtil.getString(req, NAME);
 		street = ParamUtil.getString(req, STREET);
 		city = ParamUtil.getString(req, CITY);
@@ -59,6 +63,14 @@ public class OrganizationDisplayTerms extends DisplayTerms {
 		regionId = ParamUtil.getLong(req, REGION_ID);
 		countryId = ParamUtil.getLong(req, COUNTRY_ID);
 		parentOrganizationId = ParamUtil.getLong(req, PARENT_ORGANIZATION_ID);
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 
 	public String getName() {
@@ -89,6 +101,7 @@ public class OrganizationDisplayTerms extends DisplayTerms {
 		return parentOrganizationId;
 	}
 
+	protected int type;
 	protected String name;
 	protected String street;
 	protected String city;

@@ -55,6 +55,7 @@ import java.util.Locale;
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Scott Lee
+ * @author Jorge Ferrer
  *
  */
 public class UserServiceImpl extends PrincipalBean implements UserService {
@@ -101,6 +102,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.addUserGroupUsers(userGroupId, userIds);
 	}
 
+	/** @deprecated */
 	public User addUser(
 			long companyId, boolean autoPassword, String password1,
 			String password2, boolean autoScreenName, String screenName,
@@ -110,11 +112,27 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			String jobTitle, long organizationId, long locationId,
 			boolean sendEmail)
 		throws PortalException, SystemException {
+		return addUser(
+			companyId, autoPassword, password1, password2, autoScreenName,
+			screenName, emailAddress, locale, firstName, middleName, lastName,
+			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+			jobTitle, new long[] {organizationId, locationId},
+			sendEmail);
+	}
+
+	public User addUser(
+			long companyId, boolean autoPassword, String password1,
+			String password2, boolean autoScreenName, String screenName,
+			String emailAddress, Locale locale, String firstName,
+			String middleName, String lastName, int prefixId, int suffixId,
+			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
+			String jobTitle, long[] organizationIds, boolean sendEmail)
+		throws PortalException, SystemException {
 
 		Company company = CompanyUtil.findByPrimaryKey(companyId);
 
 		if (!company.isStrangers()) {
-			checkPermission(0, organizationId, locationId, ActionKeys.ADD_USER);
+			checkPermission(0, organizationIds, ActionKeys.ADD_USER);
 		}
 
 		long creatorUserId = 0;
@@ -137,8 +155,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
-			sendEmail);
+			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
 	}
 
 	public void deleteRoleUser(long roleId, long userId)
@@ -323,6 +340,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return UserLocalServiceUtil.updateLockoutById(userId, lockout);
 	}
 
+	/** @deprecated */
 	public void updateOrganizations(
 			long userId, long organizationId, long locationId)
 		throws PortalException, SystemException {
@@ -331,6 +349,14 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 
 		UserLocalServiceUtil.updateOrganizations(
 			userId, organizationId, locationId);
+	}
+
+	public void updateOrganizations(long userId, long[] organizationIds)
+		throws PortalException, SystemException {
+
+		checkPermission(userId, ActionKeys.UPDATE);
+
+		UserLocalServiceUtil.updateOrganizations(userId, organizationIds);
 	}
 
 	public User updatePassword(
@@ -352,6 +378,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.updatePortrait(userId, bytes);
 	}
 
+	/** @deprecated */
 	public User updateUser(
 			long userId, String password, String screenName,
 			String emailAddress, String languageId, String timeZoneId,
@@ -362,8 +389,26 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			String msnSn, String skypeSn, String ymSn, String jobTitle,
 			long organizationId, long locationId)
 		throws PortalException, SystemException {
+		return updateUser(
+			userId, password, screenName, emailAddress, languageId, timeZoneId,
+			greeting, comments, firstName, middleName, lastName, prefixId,
+			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
+			aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
+			new long[] {organizationId, locationId});
+	}
 
-		checkPermission(userId, organizationId, locationId, ActionKeys.UPDATE);
+	public User updateUser(
+			long userId, String password, String screenName,
+			String emailAddress, String languageId, String timeZoneId,
+			String greeting, String comments, String firstName,
+			String middleName, String lastName, int prefixId, int suffixId,
+			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
+			String smsSn, String aimSn, String icqSn, String jabberSn,
+			String msnSn, String skypeSn, String ymSn, String jobTitle,
+			long[] organizationIds)
+		throws PortalException, SystemException {
+
+		checkPermission(userId, organizationIds, ActionKeys.UPDATE);
 
 		long curUserId = getUserId();
 
@@ -389,7 +434,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			greeting, comments, firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
 			aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
-			organizationId, locationId);
+			organizationIds);
 	}
 
 	protected void checkPermission(long userId, String actionId)
@@ -398,17 +443,15 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		User user = UserUtil.findByPrimaryKey(userId);
 
 		checkPermission(
-			userId, user.getOrganization().getOrganizationId(),
-			user.getLocation().getOrganizationId(), actionId);
+			userId, user.getOrganizationIds(), actionId);
 	}
 
 	protected void checkPermission(
-			long userId, long organizationId, long locationId, String actionId)
+			long userId, long[] organizationIds, String actionId)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
-			getPermissionChecker(), userId, organizationId, locationId,
-			actionId);
+			getPermissionChecker(), userId, organizationIds, actionId);
 	}
 
 	protected void checkUnsetPermission(long groupId, long[] userIds)

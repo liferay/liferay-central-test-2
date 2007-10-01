@@ -50,12 +50,6 @@
 			<ref bean="com.liferay.portal.service.permission.LayoutPermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.permission.LocationPermissionImpl" class="com.liferay.portal.service.permission.LocationPermissionImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.permission.LocationPermissionUtil" class="com.liferay.portal.service.permission.LocationPermissionUtil" lazy-init="true">
-		<property name="locationPermission">
-			<ref bean="com.liferay.portal.service.permission.LocationPermissionImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.service.permission.OrganizationPermissionImpl" class="com.liferay.portal.service.permission.OrganizationPermissionImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.permission.OrganizationPermissionUtil" class="com.liferay.portal.service.permission.OrganizationPermissionUtil" lazy-init="true">
 		<property name="organizationPermission">

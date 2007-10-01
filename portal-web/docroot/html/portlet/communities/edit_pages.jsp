@@ -317,7 +317,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" type="hidden" value="<%= true %>">
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_SELECTED_LAYOUTS %>" type="hidden" value="">
 
-<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
@@ -333,7 +333,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 		<br />
 	</c:if>
 
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr>
 			<td>
@@ -395,7 +395,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("staging") %>'>
-			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || !selGroup.isStagingGroup()) && (pagesCount > 0)  %>">
+			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || !selGroup.isStagingGroup()) && (pagesCount > 0)  %>">
 				<input type="button" value="<liferay-ui:message key="view-pages" />"  onClick="var stagingGroupWindow = window.open('<%= viewPagesURL%>'); void(''); stagingGroupWindow.focus();" />
 			</c:if>
 
@@ -406,7 +406,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 			<br /><br />
 		</c:when>
 		<c:otherwise>
-			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || selGroup.isStagingGroup()) && (pagesCount > 0) %>">
+			<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || selGroup.isStagingGroup()) && (pagesCount > 0) %>">
 				<input type="button" value="<liferay-ui:message key="view-pages" />"  onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();" />
 
 				<br /><br />

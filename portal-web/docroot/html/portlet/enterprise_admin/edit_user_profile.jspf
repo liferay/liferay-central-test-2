@@ -38,104 +38,131 @@ if (contact2 != null) {
 
 boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
-String organizationName = ParamUtil.getString(request, "organizationName");
+boolean locationStrictValidation = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_STRICT_VALIDATION));
 
-long organizationId = ParamUtil.getLong(request, "organizationId");
+String organizationIds = ParamUtil.getString(request, "organizationIds", null);
+long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
 
-if (organizationId <= 0) {
+List organizations = null;
+
+List organizationNames = new ArrayList();
+
+StringMaker organizationsHTML = new StringMaker();
+
+if (organizationIds == null) {
 	if (user2 != null) {
-		Organization organization = user2.getOrganization();
-
-		organizationName = organization.getName();
-		organizationId = organization.getOrganizationId();
+		organizations = user2.getOrganizations();
 	}
 }
 else {
 	try {
-		Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-
-		organizationName = organization.getName();
+		organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIdsArray);
 	}
 	catch (NoSuchOrganizationException nsoe) {
 	}
 }
 
-if (portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-	Organization organization = user.getOrganization();
+if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+	List allowedOrganizations = user.getOrganizations();
 
-	organizationName = organization.getName();
-	organizationId = organization.getOrganizationId();
-}
-
-String locationName = ParamUtil.getString(request, "locationName");
-
-long locationId = ParamUtil.getLong(request, "locationId");
-
-if (locationId <= 0) {
-	if (user2 != null) {
-		Organization location = user2.getLocation();
-
-		locationName = location.getName();
-		locationId = location.getOrganizationId();
+	for (Iterator it = organizations.iterator(); it.hasNext();) {
+		Organization curOrg = (Organization) it.next();
+		if (!allowedOrganizations.contains(curOrg)) {
+			it.remove();
+		}
 	}
-}
-else {
-	try {
-		Organization location = OrganizationLocalServiceUtil.getOrganization(locationId);
 
-		locationName = location.getName();
-	}
-	catch (NoSuchOrganizationException nsoe) {
+	if (organizations.size() == 0) {
+		organizations.add(user.getOrganization());
 	}
 }
 
-if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
-	Organization location = user.getLocation();
+if (organizations != null) {
+	organizationIdsArray = new long[organizations.size()];
 
-	locationName = location.getName();
-	locationId = location.getOrganizationId();
+	Iterator it = organizations.iterator();
+
+	for (int i = 0; it.hasNext(); i++) {
+		Organization org = (Organization) it.next();
+
+		organizationIdsArray[i] = org.getOrganizationId();
+
+		organizationNames.add(org.getName());
+
+		organizationsHTML.append("<span>");
+		organizationsHTML.append(org.getName());
+		if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable) {
+			organizationsHTML.append("&nbsp;[<a href='javascript: ");
+			organizationsHTML.append(renderResponse.getNamespace());
+			organizationsHTML.append("removeOrganization(");
+			organizationsHTML.append(i);
+			organizationsHTML.append(");'>x</a>]");
+		}
+		organizationsHTML.append("</span>");
+
+		if (it.hasNext()) {
+			organizationsHTML.append(",&nbsp;");
+		}
+	}
 }
+
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />removeLocation() {
-		document.<portlet:namespace />fm.<portlet:namespace />locationId.value = "";
 
-		var nameEl = document.getElementById("<portlet:namespace />locationName");
+	function <portlet:namespace />removeOrganization(pos) {
+		var selectedOrganizationIds = document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value.split(",");
+		var selectedOrganizationNames = document.<portlet:namespace />fm.<portlet:namespace />organizationNames.value.split("@@");
 
-		nameEl.href = "#";
-		nameEl.innerHTML = "";
+		selectedOrganizationIds.splice(pos, 1);
+		selectedOrganizationNames.splice(pos, 1);
 
-		document.getElementById("<portlet:namespace />removeLocationButton").disabled = true;
+		<portlet:namespace />updateOrganizations(selectedOrganizationIds, selectedOrganizationNames);
 	}
 
-	function <portlet:namespace />removeOrganization() {
-		document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = "";
-
-		var nameEl = document.getElementById("<portlet:namespace />organizationName");
-
-		nameEl.href = "#";
-		nameEl.innerHTML = "";
-
-		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = true;
+	// Callback method
+	function <portlet:namespace />getSelectedOrganizationIds() {
+		return document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value;
 	}
 
-	function <portlet:namespace />selectLocation(locationId, name) {
-		document.<portlet:namespace />fm.<portlet:namespace />locationId.value = locationId;
-
-		var nameEl = document.getElementById("<portlet:namespace />locationName");
-
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_location" /></portlet:renderURL>&<portlet:namespace />organizationId=" + locationId;
-		nameEl.innerHTML = name + "&nbsp;";
-	}
-
+	// Callback method
 	function <portlet:namespace />selectOrganization(organizationId, name) {
-		document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = organizationId;
+		var selectedOrgsIdsField = document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value;
+		var selectedOrgsIds = [];
+		if (selectedOrgsIdsField != "") {
+			selectedOrgsIds = selectedOrgsIdsField.split(",");
+		}
+		var selectedOrgsNamesField = document.<portlet:namespace />fm.<portlet:namespace />organizationNames.value;
+		var selectedOrgsNames = [];
+		if (selectedOrgsNamesField != "") {
+			selectedOrgsNames = selectedOrgsNamesField.split("@@");
+		}
 
-		var nameEl = document.getElementById("<portlet:namespace />organizationName");
+		selectedOrgsIds.push(organizationId);
+		selectedOrgsNames.push(name);
 
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
-		nameEl.innerHTML = name + "&nbsp;";
+		<portlet:namespace />updateOrganizations(selectedOrgsIds, selectedOrgsNames);
+	}
+
+	function <portlet:namespace />updateOrganizations(selectedOrgsIds, selectedOrgsNames) {
+		document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value = selectedOrgsIds.join(',');
+		document.<portlet:namespace />fm.<portlet:namespace />organizationNames.value = selectedOrgsNames.join('@@');
+
+		var nameEl = document.getElementById("<portlet:namespace />organizationHTML");
+
+		var organizationsHTML = '';
+
+		for (var i=0; i < selectedOrgsIds.length; i++) {
+            var id = selectedOrgsIds[i];
+			var name = selectedOrgsNames[i];
+
+			organizationsHTML += '<span>' + name + '&nbsp;[<a href="javascript: <portlet:namespace />removeOrganization(' + i + ');">x</a>]</span>';
+			if (i < selectedOrgsIds.length) {
+				organizationsHTML +=',&nbsp;'
+			}
+		}
+
+		nameEl.innerHTML = organizationsHTML;
 	}
 </script>
 
@@ -144,7 +171,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 <liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-you-requested-is-already-taken" />
 <liferay-ui:error exception="<%= DuplicateUserIdException.class %>" message="the-user-id-you-requested-is-already-taken" />
 <liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
-<liferay-ui:error exception="<%= NoSuchOrganizationException.class %>" message="please-select-an-organization-and-location" />
+<liferay-ui:error exception="<%= NoSuchOrganizationException.class %>" message="please-select-an-organization" />
 <liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-organization-for-the-selected-location" />
 <liferay-ui:error exception="<%= ReservedUserEmailAddressException.class %>" message="the-email-address-you-requested-is-reserved" />
 <liferay-ui:error exception="<%= ReservedUserIdException.class %>" message="the-user-id-you-requested-is-reserved" />
@@ -317,47 +344,21 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 
 		<tr>
 			<td>
-				<liferay-ui:message key="organization" />
+				<liferay-ui:message key="organizations" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
+				<input name="<portlet:namespace />organizationIds" type="hidden" value="<%= StringUtil.merge(organizationIdsArray) %>" />
+				<input name="<portlet:namespace />organizationNames" type="hidden" value='<%= StringUtil.merge(organizationNames, "@@") %>' />
 
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" /></portlet:renderURL>" id="<portlet:namespace />organizationName">
-				<%= organizationName %>
-				</a>
+				<span id="<portlet:namespace />organizationHTML">
+					<%= organizationsHTML.toString() %>
+				</span>
 
 				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
-					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
-
-					<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED)) %>">
-						<input <%= (organizationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeOrganizationButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeOrganization();">
-					</c:if>
+					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="multi" value="1" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="locationStrictValidation" value="<%= (locationStrictValidation)? "1" : "0" %>" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
 				</c:if>
 			</td>
 		</tr>
-
-		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_ENABLED)) %>">
-			<tr>
-				<td>
-					<liferay-ui:message key="location" />
-				</td>
-				<td>
-					<input name="<portlet:namespace />locationId" type="hidden" value="<%= locationId %>" />
-
-					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_location" /><portlet:param name="organizationId" value="<%= String.valueOf(locationId) %>" /></portlet:renderURL>" id="<portlet:namespace />locationName">
-					<%= locationName %>
-					</a>
-
-					<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && editable %>">
-						<input type="button" value="<liferay-ui:message key="select" />" onClick="var locationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_location" /></portlet:renderURL>&<portlet:namespace />parentOrganizationId=' + document.<portlet:namespace />fm.<portlet:namespace />organizationId.value, 'location', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); locationWindow.focus();" />
-
-						<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED)) %>">
-							<input <%= (locationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeLocationButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeLocation();">
-						</c:if>
-					</c:if>
-				</td>
-			</tr>
-		</c:if>
 
 		<tr>
 			<td>

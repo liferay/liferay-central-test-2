@@ -102,7 +102,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 <br />
 
 <liferay-ui:tabs
-	names="users,organizations,locations,user-groups"
+	names="users,organizations,user-groups"
 	param="tabs1"
 	url="<%= portletURL.toString() %>"
 />
@@ -289,7 +289,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 			</c:otherwise>
 		</c:choose>
 	</c:when>
-	<c:when test='<%= tabs1.equals("organizations") || tabs1.equals("locations") %>'>
+	<c:when test='<%= tabs1.equals("organizations") %>'>
 		<input name="<portlet:namespace />addOrganizationIds" type="hidden" value="" />
 		<input name="<portlet:namespace />removeOrganizationIds" type="hidden" value="" />
 
@@ -311,8 +311,6 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		/>
 
 		<%
-		boolean organizationsTab = tabs1.equals("organizations");
-
 		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
 		long parentOrganizationId = OrganizationImpl.ANY_PARENT_ORGANIZATION_ID;
@@ -337,13 +335,10 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 		headerNames.add("name");
 		headerNames.add("parent-organization");
+		headerNames.add("type");
 		headerNames.add("city");
 
 		searchContainer.setHeaderNames(headerNames);
-
-		if (!organizationsTab) {
-			searchContainer.setEmptyResultsMessage(OrganizationSearch.EMPTY_RESULTS_MESSAGE_2);
-		}
 
 		List resultRows = searchContainer.getResultRows();
 
@@ -371,6 +366,10 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 			}
 
 			row.addText(parentOrganizationName);
+
+			// Type
+
+			row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
 
 			// Address
 

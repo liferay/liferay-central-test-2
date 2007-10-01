@@ -78,6 +78,8 @@ String backURL = (String)request.getAttribute("liferay-ui:tabs:backURL");
 // Refresh
 
 boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tabs:refresh"));
+
+String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:tabs:onClick"));
 %>
 
 <c:if test="<%= names.length > 0 %>">
@@ -131,12 +133,21 @@ boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 					}
 				}
 			}
+
+			String curOnClick = StringPool.BLANK;
+
+			if (Validator.isNotNull(onClick)) {
+				curOnClick = onClick + "('" + curURL + "', '" + values[i] + "'); return false;";
+			}
 		%>
 
 			<li <%= (values.length == 1) || value.equals(values[i]) ? "class=\"current\"" : "" %> id="<%= namespace %><%= param %><%= values[i] %>TabsId">
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(curURL) %>">
-						<a href="<%= curURL %>">
+						<a href="<%= curURL %>"
+							<c:if test="<%= Validator.isNotNull(curOnClick) %>">
+								onClick="<%= curOnClick %>"
+							</c:if>>
 					</c:when>
 					<c:otherwise>
 						<span>

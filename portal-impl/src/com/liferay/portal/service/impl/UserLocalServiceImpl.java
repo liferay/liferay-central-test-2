@@ -32,6 +32,7 @@ import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
@@ -125,6 +126,7 @@ import java.security.NoSuchAlgorithmException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -191,6 +193,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	/** @deprecated */
 	public User addUser(
 			long creatorUserId, long companyId, boolean autoPassword,
 			String password1, String password2, boolean autoScreenName,
@@ -199,6 +202,23 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 			int birthdayYear, String jobTitle, long organizationId,
 			long locationId, boolean sendEmail)
+		throws PortalException, SystemException {
+		return addUser(
+			creatorUserId, companyId, autoPassword, password1, password2,
+			autoScreenName, screenName, emailAddress, locale, firstName,
+			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+			birthdayDay, birthdayYear, jobTitle,
+			new long[]{organizationId, locationId}, sendEmail);
+	}
+
+	public User addUser(
+			long creatorUserId, long companyId, boolean autoPassword,
+			String password1, String password2, boolean autoScreenName,
+			String screenName, String emailAddress, Locale locale,
+			String firstName, String middleName, String lastName, int prefixId,
+			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+			int birthdayYear, String jobTitle, long[] organizationIds,
+			boolean sendEmail)
 		throws PortalException, SystemException {
 
 		// User
@@ -217,10 +237,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		validate(
 			companyId, autoPassword, password1, password2, autoScreenName,
-			screenName, emailAddress, firstName, lastName, organizationId,
-			locationId);
+			screenName, emailAddress, firstName, lastName, organizationIds);
 
-		validateOrganizations(companyId, organizationId, locationId);
+		validateOrganizations(companyId, organizationIds);
 
 		if (autoPassword) {
 			password1 = PwdToolkitUtil.generate();
@@ -332,7 +351,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Organization and location
 
-		updateOrganizations(userId, organizationId, locationId);
+		updateOrganizations(userId, organizationIds);
 
 		// Group
 
@@ -1344,18 +1363,21 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return updateLockout(user, lockout);
 	}
 
+	/** @deprecated */
 	public void updateOrganizations(
 			long userId, long organizationId, long locationId)
+		throws PortalException, SystemException {
+		updateOrganizations(userId, new long[]{organizationId, locationId});
+	}
+
+	public void updateOrganizations(
+			long userId, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		UserUtil.clearOrganizations(userId);
 
-		if (organizationId  > 0) {
-			UserUtil.addOrganization(userId, organizationId);
-		}
-
-		if (locationId  > 0) {
-			UserUtil.addOrganization(userId, locationId);
+		for (int i = 0; i < organizationIds.length; i++) {
+			UserUtil.addOrganization(userId, organizationIds[i]);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -1495,6 +1517,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		ImageLocalUtil.updateImage(portraitId, bytes);
 	}
 
+	/** @deprecated */
 	public User updateUser(
 			long userId, String password, String screenName,
 			String emailAddress, String languageId, String timeZoneId,
@@ -1504,6 +1527,25 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String smsSn, String aimSn, String icqSn, String jabberSn,
 			String msnSn, String skypeSn, String ymSn, String jobTitle,
 			long organizationId, long locationId)
+		throws PortalException, SystemException {
+
+		return updateUser(
+			userId, password, screenName, emailAddress, languageId, timeZoneId,
+			greeting, comments, firstName, middleName, lastName, prefixId,
+			suffixId, male, birthdayMonth,birthdayDay, birthdayYear, smsSn,
+			aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
+			new long[]{organizationId, locationId});
+	}
+
+	public User updateUser(
+			long userId, String password, String screenName,
+			String emailAddress, String languageId, String timeZoneId,
+			String greeting, String comments, String firstName,
+			String middleName, String lastName, int prefixId, int suffixId,
+			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
+			String smsSn, String aimSn, String icqSn, String jabberSn,
+			String msnSn, String skypeSn, String ymSn, String jobTitle,
+			long[] organizationIds)
 		throws PortalException, SystemException {
 
 		// User
@@ -1517,7 +1559,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		User user = UserUtil.findByPrimaryKey(userId);
 		Company company = CompanyUtil.findByPrimaryKey(user.getCompanyId());
 
-		validateOrganizations(user.getCompanyId(), organizationId, locationId);
+		validateOrganizations(user.getCompanyId(), organizationIds);
 
 		user.setModifiedDate(now);
 
@@ -1612,7 +1654,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Organization and location
 
-		updateOrganizations(userId, organizationId, locationId);
+		updateOrganizations(userId, organizationIds);
 
 		// Permission cache
 
@@ -1988,7 +2030,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long companyId, boolean autoPassword, String password1,
 			String password2, boolean autoScreenName, String screenName,
 			String emailAddress, String firstName, String lastName,
-			long organizationId, long locationId)
+			long[] organizationIds)
 		throws PortalException, SystemException {
 
 		if (!autoScreenName) {
@@ -2037,7 +2079,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected void validateOrganizations(
-			long companyId, long organizationId, long locationId)
+			long companyId, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		boolean organizationRequired = GetterUtil.getBoolean(PropsUtil.get(
@@ -2046,30 +2088,69 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		boolean locationRequired = GetterUtil.getBoolean(PropsUtil.get(
 			PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED));
 
+		boolean strictLocationValidation = GetterUtil.getBoolean(PropsUtil.get(
+			PropsUtil.ORGANIZATIONS_LOCATION_STRICT_VALIDATION));
+
 		if (locationRequired) {
 			organizationRequired = true;
 		}
 
-		Organization organization = null;
+		List regularOrganizations = new ArrayList();
 
-		if (organizationRequired || (organizationId  > 0)) {
-			organization = OrganizationUtil.findByPrimaryKey(organizationId);
+		List locations = new ArrayList();
+
+		for (int i = 0; i < organizationIds.length; i++) {
+			long organizationId = organizationIds[i];
+			Organization organization =
+				OrganizationUtil.findByPrimaryKey(organizationId);
+
+			if (organization.isRegular()) {
+				regularOrganizations.add(organization);
+			} else {
+				locations.add(organization);
+			}
 		}
 
-		Organization location = null;
-
-		if (locationRequired || (locationId > 0)) {
-			location = OrganizationUtil.findByPrimaryKey(locationId);
+		if (organizationRequired && (regularOrganizations.size() == 0)) {
+			throw new NoSuchOrganizationException(
+				"The user must have at least one regular organization");
 		}
 
-		if ((organization != null) && (location != null)) {
+		if (locationRequired && (locations.size() == 0)) {
+			throw new NoSuchOrganizationException(
+				"The user must have at least one location");
+		}
 
-			// Location must belong to one of the ancestors of the organization
+		if (strictLocationValidation) {
+			for (Iterator it1 = locations.iterator();
+			     it1.hasNext();) {
+				Organization location = (Organization) it1.next();
 
-			if (!OrganizationLocalServiceUtil.isAncestor(
-					locationId, organizationId)) {
+				// Each location must belong to one of the ancestors of the
+				// regular organizations
 
-				throw new OrganizationParentException();
+				boolean validLocation = false;
+
+				for (Iterator it2 = regularOrganizations.iterator();
+				     it2.hasNext();) {
+
+					Organization organization = (Organization) it2.next();
+
+					if (OrganizationLocalServiceUtil.isAncestor(
+							location.getOrganizationId(),
+							organization.getOrganizationId())) {
+
+						validLocation = true;
+						break;
+					}
+				}
+
+				if (!validLocation) {
+					throw new OrganizationParentException(
+						"Location " + location.getOrganizationId() +
+							" is not valid for the organizations: " +
+							StringUtil.merge(organizationIds));
+				}
 			}
 		}
 	}

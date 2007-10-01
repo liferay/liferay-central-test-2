@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<c:if test="<%= portletName.equals(PortletKeys.DIRECTORY) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+<c:if test="<%= portletName.equals(PortletKeys.DIRECTORY) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 
 	<%
 	PortletURL tabs1URL = renderResponse.createRenderURL();
@@ -33,13 +33,7 @@
 
 	tabs1URL.setParameter("struts_action", "/enterprise_admin/view");
 
-	String tabs1Names = "users,organizations";
-
-	if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_ENABLED))) {
-		tabs1Names += ",locations";
-	}
-
-	tabs1Names += ",user-groups";
+	String tabs1Names = "users,organizations,user-groups";
 
 	String tabs1Values = tabs1Names;
 
@@ -52,14 +46,6 @@
 		}
 
 		tabs1Values = tabs1Names;
-	}
-
-	if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-		tabs1Names = StringUtil.replace(tabs1Names, "organizations", "organization");
-	}
-
-	if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
-		tabs1Names = StringUtil.replace(tabs1Names, "organizations", "organization");
 	}
 
 	String backURL = ParamUtil.getString(request, "backURL");

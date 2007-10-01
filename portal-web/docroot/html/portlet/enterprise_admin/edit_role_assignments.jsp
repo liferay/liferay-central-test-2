@@ -78,7 +78,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 <br /><br />
 
 <liferay-ui:tabs
-	names="users,communities,organizations,locations,user-groups"
+	names="users,communities,organizations,user-groups"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
@@ -109,13 +109,6 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
 		LinkedHashMap userParams = new LinkedHashMap();
-
-		if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-			userParams.put("usersOrgs", new Long(user.getOrganization().getOrganizationId()));
-		}
-		else if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
-			userParams.put("usersOrgs", new Long(user.getLocation().getOrganizationId()));
-		}
 
 		if (tabs3.equals("current")) {
 			userParams.put("usersRoles", new Long(role.getRoleId()));
@@ -235,7 +228,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
-	<c:when test='<%= tabs2.equals("organizations") || tabs2.equals("locations") %>'>
+	<c:when test='<%= tabs2.equals("organizations") %>'>
 		<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
 		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="" />
 
@@ -257,8 +250,6 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		/>
 
 		<%
-		boolean organizationsTab = tabs2.equals("organizations");
-
 		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
 		long parentOrganizationId = OrganizationImpl.ANY_PARENT_ORGANIZATION_ID;
@@ -283,13 +274,10 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 		headerNames.add("name");
 		headerNames.add("parent-organization");
+		headerNames.add("type");
 		headerNames.add("city");
 
 		searchContainer.setHeaderNames(headerNames);
-
-		if (!organizationsTab) {
-			searchContainer.setEmptyResultsMessage(OrganizationSearch.EMPTY_RESULTS_MESSAGE_2);
-		}
 
 		List resultRows = searchContainer.getResultRows();
 
@@ -317,6 +305,10 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 			}
 
 			row.addText(parentOrganizationName);
+
+			// Type
+
+			row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
 
 			// Address
 

@@ -67,6 +67,9 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 	</tr>
 	<tr>
 		<td>
+			<liferay-ui:message key="type" />
+		</td>
+		<td>
 			<liferay-ui:message key="country" />
 		</td>
 		<td>
@@ -75,6 +78,13 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 		<td colspan="2"></td>
 	</tr>
 	<tr>
+		<td>
+			<select name="<portlet:namespace /><%= displayTerms.TYPE %>">
+				<option <%= (displayTerms.getType() == OrganizationImpl.ANY_TYPE) ? "selected" : "" %> value="<%= OrganizationImpl.ANY_TYPE %>"><%= LanguageUtil.get(pageContext, "any") %></option>
+				<option <%= (displayTerms.getType() == OrganizationImpl.TYPE_REGULAR) ? "selected" : "" %> value="<%= OrganizationImpl.TYPE_REGULAR %>"><%= LanguageUtil.get(pageContext, "regular") %></option>
+				<option <%= (displayTerms.getType() == OrganizationImpl.TYPE_LOCATION) ? "selected" : "" %> value="<%= OrganizationImpl.TYPE_LOCATION %>"><%= LanguageUtil.get(pageContext, "location") %></option>
+			</select>
+		</td>
 		<td>
 			<select id="<portlet:namespace /><%= displayTerms.COUNTRY_ID %>" name="<portlet:namespace /><%= displayTerms.COUNTRY_ID %>"></select>
 		</td>
@@ -92,12 +102,10 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 	<input type="submit" value="<liferay-ui:message key='<%= "search-" + tabs1 %>' />" />
 
 	<%
-	boolean organizationsTab = tabs1.equals("organizations");
-
 	boolean showButtons = false;
 
 	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-		if (organizationsTab && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+		if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 		}
 		else {
 			showButtons = true;
@@ -106,8 +114,8 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 	%>
 
 	<c:if test="<%= showButtons %>">
-		<c:if test="<%= (organizationsTab && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) || !organizationsTab %>">
-			<input type="button" value="<liferay-ui:message key='<%= organizationsTab ? "add-organization" : "add-location" %>' />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= "/enterprise_admin/edit_" + (organizationsTab ? "organization" : "location") %>' /></portlet:renderURL>&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value);" />
+		<c:if test="<%= (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) %>">
+			<input type="button" value="<liferay-ui:message key="add-organization" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='/enterprise_admin/edit_organization' /></portlet:renderURL>&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value);" />
 		</c:if>
 	</c:if>
 </div>
@@ -129,7 +137,7 @@ if (displayTerms.getParentOrganizationId() > 0) {
 
 	<br />
 
-	<%= LanguageUtil.get(pageContext, "filter-by-" + (organization.isLocation() ? "location" : "organization")) %>: <%= organization.getName() %><br />
+	<%= LanguageUtil.get(pageContext, "filter-by-organization") %>: <%= organization.getName() %><br />
 </c:if>
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">

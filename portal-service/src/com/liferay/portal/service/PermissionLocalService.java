@@ -99,6 +99,9 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getRolePermissions(long roleId, long resourceId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getUserPermissions(long userId, long resourceId)
 		throws com.liferay.portal.SystemException;
 
@@ -158,6 +161,11 @@ public interface PermissionLocalService {
 	public void setRolePermissions(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
 		java.lang.String[] actionIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void setRolePermissions(long roleId, java.lang.String[] actionIds,
+		long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

@@ -196,6 +196,56 @@ public class OrganizationServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.model.Organization addOrganization(
+		HttpPrincipal httpPrincipal, long parentOrganizationId,
+		java.lang.String name, int type, boolean recursable, long regionId,
+		long countryId, int statusId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(parentOrganizationId);
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new IntegerWrapper(type);
+			Object paramObj3 = new BooleanWrapper(recursable);
+			Object paramObj4 = new LongWrapper(regionId);
+			Object paramObj5 = new LongWrapper(countryId);
+			Object paramObj6 = new IntegerWrapper(statusId);
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"addOrganization",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Organization)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static void deleteOrganization(HttpPrincipal httpPrincipal,
 		long organizationId)
 		throws com.liferay.portal.SystemException, 
@@ -459,6 +509,57 @@ public class OrganizationServiceHttp {
 			}
 
 			Object paramObj3 = new BooleanWrapper(location);
+			Object paramObj4 = new BooleanWrapper(recursable);
+			Object paramObj5 = new LongWrapper(regionId);
+			Object paramObj6 = new LongWrapper(countryId);
+			Object paramObj7 = new IntegerWrapper(statusId);
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"updateOrganization",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Organization)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.model.Organization updateOrganization(
+		HttpPrincipal httpPrincipal, long organizationId,
+		long parentOrganizationId, java.lang.String name, int type,
+		boolean recursable, long regionId, long countryId, int statusId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(organizationId);
+			Object paramObj1 = new LongWrapper(parentOrganizationId);
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new IntegerWrapper(type);
 			Object paramObj4 = new BooleanWrapper(recursable);
 			Object paramObj5 = new LongWrapper(regionId);
 			Object paramObj6 = new LongWrapper(countryId);

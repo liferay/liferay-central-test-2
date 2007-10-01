@@ -26,13 +26,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.OrgLabor;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.OrgLaborLocalServiceUtil;
 import com.liferay.portal.service.OrgLaborService;
-import com.liferay.portal.service.permission.LocationPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.persistence.OrgLaborUtil;
-import com.liferay.portal.service.persistence.OrganizationUtil;
 
 import java.util.List;
 
@@ -108,17 +105,8 @@ public class OrgLaborServiceImpl
 	protected void checkPermission(long organizationId, String actionId)
 		throws PortalException, SystemException {
 
-		Organization organization =
-			OrganizationUtil.findByPrimaryKey(organizationId);
-
-		if (!organization.isLocation()) {
-			OrganizationPermissionUtil.check(
-				getPermissionChecker(), organizationId, actionId);
-		}
-		else {
-			LocationPermissionUtil.check(
-				getPermissionChecker(), organizationId, actionId);
-		}
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, actionId);
 	}
 
 }

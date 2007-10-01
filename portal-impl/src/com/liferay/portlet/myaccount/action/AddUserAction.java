@@ -40,6 +40,7 @@ import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
@@ -154,8 +155,8 @@ public class AddUserAction extends PortletAction {
 		int birthdayDay = ParamUtil.getInteger(req, "birthdayDay");
 		int birthdayYear = ParamUtil.getInteger(req, "birthdayYear");
 		String jobTitle = ParamUtil.getString(req, "jobTitle");
-		long organizationId = ParamUtil.getLong(req, "organizationId");
-		long locationId = ParamUtil.getLong(req, "locationId");
+		long[] organizationIds = StringUtil.split(
+			ParamUtil.getString(req, "organizationIds"),  0L);
 		boolean sendEmail = true;
 
 		CaptchaUtil.check(req);
@@ -164,8 +165,8 @@ public class AddUserAction extends PortletAction {
 			company.getCompanyId(), autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, themeDisplay.getLocale(),
 			firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
-			locationId, sendEmail);
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationIds,
+			sendEmail);
 
 		// Session messages
 

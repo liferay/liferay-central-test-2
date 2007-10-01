@@ -28,7 +28,33 @@
 UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
 UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerms();
+
+String tabs2 = ParamUtil.getString(request, "tabs1", "");
+
+Group group = (Group)request.getAttribute(WebKeys.GROUP);
+
+String organizationId = "";
+
+if ((group != null) && group.isOrganization()) {
+	Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
+	organizationId = String.valueOf(organization.getOrganizationId());
+}
 %>
+
+<script type="text/javascript">
+	function <portlet:namespace/>addUser() {
+		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>';
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />usersRedirect) {
+			url += '&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />usersRedirect.value);
+		}
+		else {
+			url += '&<portlet:namespace />organizationIds=<%= organizationId %>&<portlet:namespace />redirect=' + encodeURIComponent('<%= currentURL%>');
+		}
+
+		self.location = url;
+	}
+</script>
 
 <liferay-ui:search-toggle
 	id="toggle_id_enterprise_admin_user_search"
@@ -106,12 +132,11 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-users" />" />
 
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.LOCATION_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+	<c:if test='<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && (!tabs2.equals("current")) %>'>
 		<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER)) ||
-						(portletName.equals(PortletKeys.LOCATION_ADMIN) && LocationPermissionUtil.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER)) ||
 						(portletName.equals(PortletKeys.ORGANIZATION_ADMIN) && OrganizationPermissionUtil.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER)) %>">
 
-			<input type="button" value="<liferay-ui:message key="add-user" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:renderURL>&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />usersRedirect.value);" />
+			<input type="button" value="<liferay-ui:message key="add-user" />" onClick="<portlet:namespace />addUser()" />
 		</c:if>
 	</c:if>
 </div>

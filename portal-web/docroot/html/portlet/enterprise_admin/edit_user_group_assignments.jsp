@@ -91,17 +91,74 @@ UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
 LinkedHashMap userParams = new LinkedHashMap();
 
+long organizationId = searchTerms.getOrganizationId();
+
+List allowedOrganizations = null;
+
 if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-	userParams.put("usersOrgs", new Long(user.getOrganization().getOrganizationId()));
+	allowedOrganizations = user.getOrganizations();
+
+	long firstUserOrganizationId = user.getOrganization().getOrganizationId();
+
+	if ((organizationId <= 0) || (organizationId == firstUserOrganizationId)) {
+		organizationId = firstUserOrganizationId;
+	}
+	else {
+		try {
+			Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+
+			if (!allowedOrganizations.contains(organization)) {
+				organizationId = firstUserOrganizationId;
+			}
+		}
+		catch (Exception e) {
+			organizationId = firstUserOrganizationId;
+		}
+	}
+
 }
-else if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
-	userParams.put("usersOrgs", new Long(user.getLocation().getOrganizationId()));
+
+Organization organization = null;
+
+if ((organizationId > 0)) {
+	try {
+		organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+	}
+	catch (NoSuchOrganizationException nsoe) {
+	}
+}
+
+if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+	userParams.put("usersOrgs", new Long(organizationId));
 }
 
 if (tabs2.equals("current")) {
 	userParams.put("usersUserGroups", new Long(userGroup.getUserGroupId()));
 }
 %>
+
+
+<c:if test="<%= (organization != null)  %>">
+	<%= LanguageUtil.get(pageContext, "filter-by-organization") %>:
+
+	<c:choose>
+		<c:when test="<%= (allowedOrganizations == null) || (allowedOrganizations.size() == 1) %>">
+			<%= organization.getName() %>
+		</c:when>
+		<c:otherwise>
+			<select name="<portlet:namespace />organizationId" onchange="submitForm(this.form);">
+				<%
+				for (Iterator it = allowedOrganizations.iterator(); it.hasNext();) {
+					Organization org = (Organization) it.next();
+				%>
+					<option <%= (organizationId == org.getOrganizationId()) ? "selected" : "" %> value="<%= org.getOrganizationId() %>"><%= org.getName() %></option>
+				<%
+				}
+				%>
+			</select>
+		</c:otherwise>
+	</c:choose>
+</c:if>
 
 <%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
 

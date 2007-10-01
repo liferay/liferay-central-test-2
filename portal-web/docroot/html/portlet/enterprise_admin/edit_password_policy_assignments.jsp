@@ -78,7 +78,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 <br /><br />
 
 <liferay-ui:tabs
-	names="users,organizations,locations"
+	names="users,organizations"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
@@ -155,7 +155,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
-	<c:when test='<%= tabs2.equals("organizations") || tabs2.equals("locations") %>'>
+	<c:when test='<%= tabs2.equals("organizations") %>'>
 		<input name="<portlet:namespace />addOrganizationIds" type="hidden" value="" />
 		<input name="<portlet:namespace />removeOrganizationIds" type="hidden" value="" />
 
@@ -177,8 +177,6 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		/>
 
 		<%
-		boolean organizationsTab = tabs2.equals("organizations");
-
 		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
 		long parentOrganizationId = OrganizationImpl.ANY_PARENT_ORGANIZATION_ID;
@@ -203,13 +201,10 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 
 		headerNames.add("name");
 		headerNames.add("parent-organization");
+		headerNames.add("type");
 		headerNames.add("city");
 
 		searchContainer.setHeaderNames(headerNames);
-
-		if (!organizationsTab) {
-			searchContainer.setEmptyResultsMessage(OrganizationSearch.EMPTY_RESULTS_MESSAGE_2);
-		}
 
 		List resultRows = searchContainer.getResultRows();
 
@@ -237,6 +232,10 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 			}
 
 			row.addText(parentOrganizationName);
+
+			// Type
+
+			row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
 
 			// Address
 

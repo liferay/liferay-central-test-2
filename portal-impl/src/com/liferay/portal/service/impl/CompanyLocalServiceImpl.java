@@ -357,7 +357,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				OrganizationLocalServiceUtil.addOrganization(
 					user.getUserId(),
 					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID,
-					"Test Organization", false, true,
+					"Test Organization", OrganizationImpl.TYPE_REGULAR, true,
 					RegionImpl.DEFAULT_REGION_ID,
 					CountryImpl.DEFAULT_COUNTRY_ID,
 					ListTypeImpl.ORGANIZATION_STATUS_DEFAULT);
@@ -367,9 +367,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			Organization location =
 				OrganizationLocalServiceUtil.addOrganization(
-					user.getUserId(),
-					organization.getOrganizationId(),
-					"Test Location", true, true, RegionImpl.DEFAULT_REGION_ID,
+					user.getUserId(), organization.getOrganizationId(),
+					"Test Location", OrganizationImpl.TYPE_LOCATION, true,
+					RegionImpl.DEFAULT_REGION_ID,
 					CountryImpl.DEFAULT_COUNTRY_ID,
 					ListTypeImpl.ORGANIZATION_STATUS_DEFAULT);
 

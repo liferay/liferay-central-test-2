@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -19,21 +20,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portlet.enterpriseadmin.action;
+<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-/**
- * <a href="EditLocationAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
-public class EditLocationAction extends EditOrganizationAction {
+<%
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-	protected boolean isLocation() {
-		return _LOCATION;
-	}
+Object[] objArray = (Object[])row.getObject();
 
-	private static final boolean _LOCATION = true;
+User user2 = (User)objArray[0];
+Group group = (Group)objArray[1];
+Role role = (Role)objArray[2];
+String redirect = (String)objArray[3];
+%>
 
-}
+<c:if test="<%= (!portletName.equals(PortletKeys.MY_ACCOUNT)) && (!role.getName().equals(RoleImpl.COMMUNITY_MEMBER)) %>">
+	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+		<portlet:param name="struts_action" value="/enterprise_admin/edit_user_org_roles" />
+		<portlet:param name="<%= Constants.CMD %>" value="user_group_role_users" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
+		<portlet:param name="removeUserIds" value="<%= String.valueOf(user2.getUserId()) %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
+	</portlet:actionURL>
+
+	<liferay-ui:icon image="unlink" message="remove" url="<%= portletURL %>" />
+</c:if>

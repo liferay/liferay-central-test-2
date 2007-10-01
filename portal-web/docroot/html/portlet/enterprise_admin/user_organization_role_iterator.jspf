@@ -28,41 +28,52 @@ SearchContainer searchContainer = new SearchContainer();
 List headerNames = new ArrayList();
 
 headerNames.add("name");
-headerNames.add("type");
+headerNames.add("organization");
 headerNames.add(StringPool.BLANK);
 
 searchContainer.setHeaderNames(headerNames);
+searchContainer.setEmptyResultsMessage("the-user-does-not-have-any-organization-role");
 
-List results = RoleLocalServiceUtil.getUserRoles(user2.getUserId());
+List results = new ArrayList();
+
+List userOrganizations = user2.getOrganizations();
+
 List resultRows = searchContainer.getResultRows();
 
-for (int i = 0; i < results.size(); i++) {
-	Role role = (Role)results.get(i);
+for (int i = 0; i < userOrganizations.size(); i++) {
+	Organization organization = (Organization) userOrganizations.get(i);
+	Group group = organization.getGroup();
 
-	ResultRow row = new ResultRow(new Object[]{user2, role, currentURL + sectionRedirectParams}, role.getRoleId(), i);
+	List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), group.getGroupId());
 
-	// Name
+	for (int j = 0; j < userGroupRoles.size(); j++) {
+		UserGroupRole userGroupRole = (UserGroupRole)userGroupRoles.get(j);
+		Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
 
-	row.addText(role.getName());
+		ResultRow row = new ResultRow(new Object[]{user2, group, role, currentURL + sectionRedirectParams}, role.getRoleId(), j);
 
-	// Type
+		// Name
 
-	row.addText(LanguageUtil.get(pageContext, "regular"));
+		row.addText(role.getName());
 
-	// Action
+		// Organization
 
-	if (editable) {
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/user_role_action.jsp");
+		row.addText(organization.getName());
+
+		// Action
+
+		if (editable) {
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/enterprise_admin/user_group_role_action.jsp");
+		}
+
+		// Add result row
+
+		resultRows.add(row);
+		results.add(userGroupRole);
 	}
-
-	// Add result row
-
-	resultRows.add(row);
 }
 %>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<c:if test="<%= results.size() > 0 %>">
-	<br />
-</c:if>
+<br />

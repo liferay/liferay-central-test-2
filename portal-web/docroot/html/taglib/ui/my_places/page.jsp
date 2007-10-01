@@ -42,16 +42,13 @@
 
 		List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		Group locationGroup = user.getLocation().getGroup();
+		List userOrgs = user.getOrganizations();
 
-		if (locationGroup.getGroupId() > 0) {
-			communities.add(0, locationGroup);
-		}
+		Iterator it = userOrgs.iterator();
 
-		Group organizationGroup = user.getOrganization().getGroup();
-
-		if (organizationGroup.getGroupId() > 0) {
-			communities.add(0, organizationGroup);
+		while (it.hasNext()) {
+			Organization org = (Organization) it.next();
+			communities.add(0, org.getGroup());
 		}
 
 		if (user.isLayoutsRequired()) {
@@ -77,8 +74,7 @@
 			if (organizationCommunity) {
 				organization = OrganizationLocalServiceUtil.getOrganization(community.getClassPK());
 
-				if ((!organization.isLocation() && OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) ||
-					(organization.isLocation() && LocationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE))) {
+				if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) {
 
 					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
 

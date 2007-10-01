@@ -25,7 +25,209 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-boolean organizationsTab = true;
+String strutsAction = ParamUtil.getString(request, "struts_action");
+
+tabs1 = "organizations";
+
+String tabs2 = ParamUtil.getString(request, "tabs2", "regular");
+
+boolean multi = ParamUtil.getBoolean(request, "multi", false);
+
+boolean locationStrictValidation = ParamUtil.getBoolean(request, "locationStrictValidation");
+
+String searchFilter = StringPool.BLANK;
 %>
 
-<%@ include file="/html/portlet/enterprise_admin/select_organization_common.jspf" %>
+<script type="text/javascript">
+	function <portlet:namespace/>setOrgType(url, type) {
+		var tabURL = url;
+
+		if (type == 'locations') {
+			tabURL = url + '&<portlet:namespace/>parentOrganizationIds=' + opener.<portlet:namespace/>getSelectedOrganizationIds();
+		}
+
+		location.href=tabURL;
+	}
+</script>
+
+<form method="post" name="<portlet:namespace />fm">
+
+<liferay-ui:tabs names="organizations" />
+
+<c:choose>
+	<c:when test="<%= locationRequired %>">
+		<liferay-ui:message key="please-select-at-least-one-regular-organization-and-one-location"/>
+		<br/>&nbsp;<br/>
+	</c:when>
+	<c:when test="<%= organizationRequired %>">
+		<liferay-ui:message key="please-select-at-least-one-regular-organization"/>
+		<br/>&nbsp;<br/>
+	</c:when>
+</c:choose>
+
+<c:if test="<%= locationStrictValidation %>">
+	<liferay-ui:tabs param="tabs2" names="regular,locations" url="<%= currentURL %>" onClick='<%= renderResponse.getNamespace() + "setOrgType" %>' />
+</c:if>
+
+<%
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(LiferayWindowState.POP_UP);
+
+portletURL.setParameter("struts_action", strutsAction);
+
+OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
+
+List headerNames = new ArrayList();
+
+headerNames.add("name");
+
+headerNames.add("parent-organization");
+
+headerNames.add("type");
+headerNames.add("city");
+headerNames.add("region");
+headerNames.add("country");
+
+searchContainer.setHeaderNames(headerNames);
+%>
+
+<liferay-ui:search-form
+	page="/html/portlet/enterprise_admin/organization_search.jsp"
+	searchContainer="<%= searchContainer %>"
+/>
+
+<%
+OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
+
+if (locationStrictValidation && tabs2.equals("regular")) {
+	searchTerms.setType(OrganizationImpl.TYPE_REGULAR);
+}
+else if (locationStrictValidation) {
+	searchTerms.setType(OrganizationImpl.TYPE_LOCATION);
+}
+
+int total = 0;
+List results = null;
+
+if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+	total = 1;
+
+	results = new ArrayList();
+
+	results.addAll(user.getOrganizations());
+}
+else if (locationStrictValidation && tabs2.equals("locations")) {
+%>
+
+<%@ include file="/html/portlet/enterprise_admin/location_strict_validation_search_results.jspf"%>
+
+<%
+}
+else {
+	if (searchTerms.isAdvancedSearch()) {
+		total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), OrganizationImpl.ANY_PARENT_ORGANIZATION_ID, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator());
+	}
+	else {
+		total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), OrganizationImpl.ANY_PARENT_ORGANIZATION_ID, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null);
+	}
+
+	if (searchTerms.isAdvancedSearch()) {
+		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationImpl.ANY_PARENT_ORGANIZATION_ID, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new OrganizationNameComparator(true));
+	}
+	else {
+		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationImpl.ANY_PARENT_ORGANIZATION_ID, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchContainer.getStart(), searchContainer.getEnd(), new OrganizationNameComparator(true));
+	}
+}
+
+searchContainer.setTotal(total);
+searchContainer.setResults(results);
+%>
+
+<c:if test="<%= Validator.isNotNull(searchFilter) %>">
+	<br/>
+	<%= searchFilter %>
+</c:if>
+
+<div class="separator"><!-- --></div>
+
+<%
+List resultRows = searchContainer.getResultRows();
+
+for (int i = 0; i < results.size(); i++) {
+	Organization organization = (Organization)results.get(i);
+
+	ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
+
+	StringMaker sm = new StringMaker();
+
+	sm.append("javascript: opener.");
+	sm.append(renderResponse.getNamespace());
+	sm.append("select");
+
+	sm.append("Organization");
+
+	sm.append("('");
+	sm.append(organization.getOrganizationId());
+	sm.append("', '");
+	sm.append(UnicodeFormatter.toString(organization.getName()));
+	sm.append("');");
+	if (!multi) {
+		sm.append("window.close();");
+	}
+
+	String rowHREF = sm.toString();
+
+	// Name
+
+	row.addText(organization.getName(), rowHREF);
+
+	// Parent organization
+
+	String parentOrganizationName = StringPool.BLANK;
+
+	if (organization.getParentOrganizationId() > 0) {
+		try {
+			Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+
+			parentOrganizationName = parentOrganization.getName();
+		}
+		catch (Exception e) {
+		}
+	}
+
+	row.addText(parentOrganizationName);
+
+	// Type
+
+	row.addText(LanguageUtil.get(pageContext, organization.isLocation() ? "location" : "regular"));
+
+	// Address
+
+	Address address = organization.getAddress();
+
+	row.addText(address.getCity(), rowHREF);
+	row.addText(address.getRegion().getName(), rowHREF);
+	row.addText(address.getCountry().getName(), rowHREF);
+
+	// Add result row
+
+	resultRows.add(row);
+}
+%>
+
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
+</form>
+
+<c:if test="<%= multi %>">
+	<div class="separator"><!-- --></div>
+
+	<input type="button" value="<liferay-ui:message key="close" />" onClick="window.close();" />
+</c:if>
+
+<script type="text/javascript">
+	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
+</script>

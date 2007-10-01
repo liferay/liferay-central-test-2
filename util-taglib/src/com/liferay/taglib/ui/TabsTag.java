@@ -105,6 +105,9 @@ public class TabsTag extends ParamAncestorTagImpl {
 			req.setAttribute(
 				"liferay-ui:tabs:refresh", String.valueOf(_refresh));
 
+			req.setAttribute(
+				"liferay-ui:tabs:onClick", String.valueOf(_onClick));
+
 			include(getStartPage());
 
 			return EVAL_BODY_INCLUDE;
@@ -146,6 +149,7 @@ public class TabsTag extends ParamAncestorTagImpl {
 			_url9 = null;
 			_backURL = null;
 			_refresh = true;
+			_onClick = null;
 		}
 	}
 
@@ -259,6 +263,14 @@ public class TabsTag extends ParamAncestorTagImpl {
 		_refresh = refresh;
 	}
 
+	public String getOnClick() {
+		return _onClick;
+	}
+
+	public void setOnClick(String onClick) {
+		_onClick = onClick;
+	}
+
 	public String getSectionName() {
 		if (_names.length > _namesPos) {
 			return _names[_namesPos];
@@ -310,5 +322,6 @@ public class TabsTag extends ParamAncestorTagImpl {
 	private String _url9;
 	private String _backURL;
 	private boolean _refresh = true;
+	private String _onClick;
 
 }
