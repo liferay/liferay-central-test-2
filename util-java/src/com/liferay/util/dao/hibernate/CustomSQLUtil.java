@@ -81,7 +81,9 @@ public abstract class CustomSQLUtil {
 	public static final String MYSQL_FUNCTION_IS_NOT_NULL =
 		"IFNULL(?, '1') = '0'";
 
-	public static final String SYBASE = "Sybase";
+	public static final String SYBASE_1 = "Sybase";
+
+	public static final String SYBASE_2 = "ASE";
 
 	public static final String SYBASE_FUNCTION_IS_NULL = "ISNULL(?, '1') = '1'";
 
@@ -105,9 +107,9 @@ public abstract class CustomSQLUtil {
 				_functionIsNotNull = functionIsNotNull;
 
 				if (_log.isDebugEnabled()) {
-					_log.debug(
+					_log.info(
 						"functionIsNull is manually set to " + functionIsNull);
-					_log.debug(
+					_log.info(
 						"functionIsNotNull is manually set to " +
 							functionIsNotNull);
 				}
@@ -118,8 +120,8 @@ public abstract class CustomSQLUtil {
 				String dbName = GetterUtil.getString(
 					metaData.getDatabaseProductName());
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Database name " + dbName);
+				if (_log.isInfoEnabled()) {
+					_log.info("Database name " + dbName);
 				}
 
 				if (dbName.startsWith(DB2)) {
@@ -127,8 +129,8 @@ public abstract class CustomSQLUtil {
 					_functionIsNull = DB2_FUNCTION_IS_NULL;
 					_functionIsNotNull = DB2_FUNCTION_IS_NOT_NULL;
 
-					if (_log.isDebugEnabled()) {
-						_log.debug("Detected DB2 with database name " + dbName);
+					if (_log.isInfoEnabled()) {
+						_log.info("Detected DB2 with database name " + dbName);
 					}
 				}
 				else if (dbName.startsWith(INFORMIX)) {
@@ -136,8 +138,8 @@ public abstract class CustomSQLUtil {
 					_functionIsNull = INFORMIX_FUNCTION_IS_NULL;
 					_functionIsNotNull = INFORMIX_FUNCTION_IS_NOT_NULL;
 
-					if (_log.isDebugEnabled()) {
-						_log.debug(
+					if (_log.isInfoEnabled()) {
+						_log.info(
 							"Detected Informix with database name " + dbName);
 					}
 				}
@@ -146,32 +148,34 @@ public abstract class CustomSQLUtil {
 					//_functionIsNull = MYSQL_FUNCTION_IS_NULL;
 					//_functionIsNotNull = MYSQL_FUNCTION_IS_NOT_NULL;
 
-					if (_log.isDebugEnabled()) {
-						_log.debug(
+					if (_log.isInfoEnabled()) {
+						_log.info(
 							"Detected MySQL with database name " + dbName);
 					}
 				}
-				else if (dbName.startsWith(SYBASE)) {
+				else if (dbName.startsWith(SYBASE_1) ||
+						 dbName.equals(SYBASE_2)) {
+
 					_vendorSybase = true;
 					_functionIsNull = SYBASE_FUNCTION_IS_NULL;
 					_functionIsNotNull = SYBASE_FUNCTION_IS_NOT_NULL;
 
-					if (_log.isDebugEnabled()) {
-						_log.debug(
+					if (_log.isInfoEnabled()) {
+						_log.info(
 							"Detected Sybase with database name " + dbName);
 					}
 				}
 				else if (dbName.startsWith(ORACLE)) {
 					_vendorOracle = true;
 
-					if (_log.isDebugEnabled()) {
-						_log.debug(
+					if (_log.isInfoEnabled()) {
+						_log.info(
 							"Detected Oracle with database name " + dbName);
 					}
 				}
 				else {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
+					if (_log.isWarnEnabled()) {
+						_log.warn(
 							"Unable to detect database with name " + dbName);
 					}
 				}

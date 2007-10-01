@@ -44,6 +44,7 @@ import org.hibernate.MappingException;
 import org.hibernate.dialect.DB2400Dialect;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.DialectFactory;
+import org.hibernate.dialect.SybaseDialect;
 import org.hibernate.dialect.lock.LockingStrategy;
 import org.hibernate.exception.SQLExceptionConverter;
 import org.hibernate.exception.ViolatedConstraintNameExtracter;
@@ -91,7 +92,13 @@ public class DynamicDialect extends Dialect {
 				}
 			}
 
-			_dialect = DialectFactory.determineDialect(dbName, dbMajorVersion);
+			if (dbName.equals("ASE") && (dbMajorVersion == 15)) {
+				_dialect = new SybaseDialect();
+			}
+			else {
+				_dialect = DialectFactory.determineDialect(
+					dbName, dbMajorVersion);
+			}
 
 			if (_log.isInfoEnabled()) {
 				_log.info("Using dialect " + _dialect.getClass().getName());

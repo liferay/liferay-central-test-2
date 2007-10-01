@@ -492,6 +492,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.util.dao.hibernate.CustomSQLUtil">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.util.dao.hibernate.QueryUtil">
 		<priority value="ERROR" />
 	</category>
