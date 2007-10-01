@@ -1267,7 +1267,9 @@
 		<field name="publishDate" type="Date" />
 		<field name="expirationDate" type="Date" />
 		<field name="mimeType" type="String" />
-		<field name="title" type="String" />
+		<field name="title" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>

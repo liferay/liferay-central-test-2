@@ -1057,7 +1057,7 @@ create table TagsAsset (
 	publishDate DATE null,
 	expirationDate DATE null,
 	mimeType VARCHAR(75) null,
-	title VARCHAR(75) null,
+	title VARCHAR(300) null,
 	description STRING null,
 	summary STRING null,
 	url STRING null,
