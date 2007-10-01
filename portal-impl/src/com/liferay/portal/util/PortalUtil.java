@@ -1899,9 +1899,18 @@ public class PortalUtil {
 
 		String file = url.getFile();
 
-		int pos = file.indexOf("/WEB-INF/");
+		if (_log.isInfoEnabled()) {
+			_log.info("Portal lib url " + file);
+		}
 
-		_portalLibDir =	file.substring(0, pos) + "/WEB-INF/lib/";
+		int pos = file.indexOf("/com/liferay/portal/util/");
+
+		_portalLibDir =	file.substring(0, pos + 1);
+
+		if (_portalLibDir.endsWith("/WEB-INF/classes/")) {
+			_portalLibDir = _portalLibDir.substring(
+				0, _portalLibDir.length() - 8) + "lib/";
+		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Portal lib directory " + _portalLibDir);
