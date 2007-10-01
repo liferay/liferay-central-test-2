@@ -186,6 +186,8 @@ public class ThemeUtil {
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
 			ctx, req, stringServletResponse, pageContext);
 
+		req.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
+
 		vc.put("taglibLiferay", velocityTaglib);
 		vc.put("theme", velocityTaglib);
 

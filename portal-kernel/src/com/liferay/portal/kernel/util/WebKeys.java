@@ -32,4 +32,6 @@ public interface WebKeys {
 
 	public static final String THEME_DISPLAY = "THEME_DISPLAY";
 
+	public static final String VELOCITY_TAGLIB = "VELOCITY_TAGLIB";
+
 }

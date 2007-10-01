@@ -22,12 +22,18 @@
 
 package com.liferay.portal.theme;
 
+import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Method;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="NavItem.java.html"><b><i>View Source</i></b></a>
@@ -123,6 +129,27 @@ public class NavItem implements Serializable {
 			return false;
 		}
 	}
+
+	public String icon() throws Exception {
+		HttpServletRequest req = _vars.getRequest();
+
+		Object velocityTaglib = req.getAttribute(WebKeys.VELOCITY_TAGLIB);
+
+		Method method = MethodCache.get(
+			_VELOCITY_TAGLIB_CLASS, _VELOCITY_TAGLIB_LAYOUT_ICON_METHOD,
+			_VELOCITY_TAGLIB_LAYOUT_ICON_PARAMS);
+
+		return (String)method.invoke(velocityTaglib, new Layout[] {_layout});
+	}
+
+	private static final String _VELOCITY_TAGLIB_CLASS =
+		"com.liferay.taglib.util.VelocityTaglib";
+
+	private static final String _VELOCITY_TAGLIB_LAYOUT_ICON_METHOD =
+		"layoutIcon";
+
+	private static final Class[] _VELOCITY_TAGLIB_LAYOUT_ICON_PARAMS =
+		new Class[] {Layout.class};
 
 	private RequestVars _vars;
 	private Layout _layout;
