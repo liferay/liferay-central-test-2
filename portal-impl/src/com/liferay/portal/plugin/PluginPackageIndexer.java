@@ -45,10 +45,8 @@ import javax.portlet.PortletURL;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.store.Directory;
 
 /**
  * <a href="PluginPackageIndexer.java.html"><b><i>View Source</i></b></a>
@@ -166,40 +164,23 @@ public class PluginPackageIndexer implements Indexer {
 				LuceneFields.getKeyword("installedVersion", installedVersion));
 		}
 
-		synchronized (PluginPackageIndexer.class) {
-			IndexWriter writer = null;
+		IndexWriter writer = null;
 
-			try {
-				writer = _getWriter();
+		try {
+			writer = LuceneUtil.getWriter(CompanyImpl.SYSTEM);
 
-				writer.addDocument(doc);
-			}
-			finally {
-				if (writer != null) {
-					LuceneUtil.write(writer);
-				}
+			writer.addDocument(doc);
+		}
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(CompanyImpl.SYSTEM);
 			}
 		}
 	}
 
-	public static void cleanIndex() throws IOException{
-		synchronized (PluginPackageIndexer.class) {
-			IndexReader reader = null;
-
-			try {
-				reader = LuceneUtil.getReader(CompanyImpl.SYSTEM);
-
-				reader.deleteDocuments(
-					new Term(
-						LuceneFields.PORTLET_ID,
-						PluginPackageIndexer.PORTLET_ID));
-			}
-			finally {
-				if (reader != null) {
-					reader.close();
-				}
-			}
-		}
+	public static void cleanIndex() throws IOException {
+		LuceneUtil.deleteDocuments(
+			CompanyImpl.SYSTEM, new Term(LuceneFields.PORTLET_ID, PORTLET_ID));
 	}
 
 	public static void removePluginPackage(
@@ -208,23 +189,10 @@ public class PluginPackageIndexer implements Indexer {
 
 		String pluginId = repositoryURL + StringPool.SLASH + moduleId;
 
-		synchronized (PluginPackageIndexer.class) {
-			IndexReader reader = null;
-
-			try {
-				reader = LuceneUtil.getReader(CompanyImpl.SYSTEM);
-
-				reader.deleteDocuments(
-					new Term(
-						LuceneFields.UID,
-						LuceneFields.getUID(PORTLET_ID, pluginId)));
-			}
-			finally {
-				if (reader != null) {
-					reader.close();
-				}
-			}
-		}
+		LuceneUtil.deleteDocuments(
+			CompanyImpl.SYSTEM,
+			new Term(
+				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, pluginId)));
 	}
 
 	public static void updatePluginPackage(
@@ -281,37 +249,6 @@ public class PluginPackageIndexer implements Indexer {
 		catch (Exception e) {
 			throw new SearchException(e);
 		}
-	}
-
-	private static IndexWriter _getWriter() {
-		IndexWriter writer = null;
-
-		Directory luceneDir = LuceneUtil.getLuceneDir(CompanyImpl.SYSTEM);
-
-		try {
-			if (luceneDir.fileExists("segments")) {
-				writer = new IndexWriter(
-					luceneDir, LuceneUtil.getAnalyzer(), false);
-			}
-			else {
-				writer = new IndexWriter(
-					luceneDir, LuceneUtil.getAnalyzer(), true);
-			}
-		}
-		catch (IOException ioe) {
-			_log.error(ioe);
-		}
-		finally {
-			if (writer != null) {
-				try {
-					writer.close();
-				}
-				catch (IOException ioe) {
-					_log.error(ioe);
-				}
-			}
-		}
-		return writer;
 	}
 
 	private static Log _log = LogFactory.getLog(PluginPackageIndexer.class);

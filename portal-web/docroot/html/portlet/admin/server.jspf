@@ -53,12 +53,24 @@ numberFormat.setMinimumIntegerDigits(2);
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:tabs
-			names="memory,log-levels,system-properties,portal-properties,shutdown"
+			names="memory,indexes,log-levels,system-properties,portal-properties,shutdown"
 			param="tabs2"
 			url="<%= portletURL.toString() %>"
 		/>
 
 		<c:choose>
+			<c:when test='<%= tabs2.equals("indexes") %>'>
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="reindex-all-search-indexes" />
+					</td>
+					<td>
+						<input type="button" value="<liferay-ui:message key="execute" />" onClick="<portlet:namespace />saveServer('reIndex');" />
+					</td>
+				</tr>
+				</table>
+			</c:when>
 			<c:when test='<%= tabs2.equals("log-levels") %>'>
 
 				<%

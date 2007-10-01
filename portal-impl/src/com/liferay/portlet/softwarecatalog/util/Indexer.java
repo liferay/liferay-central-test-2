@@ -105,7 +105,6 @@ public class Indexer
 				LuceneUtil.write(companyId);
 			}
 		}
-
 	}
 
 	public static void deleteProductEntry(long companyId, long productEntryId)

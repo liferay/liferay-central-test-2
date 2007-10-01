@@ -29,11 +29,13 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
+import com.liferay.portal.lucene.LuceneIndexer;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.ShutdownUtil;
@@ -111,6 +113,9 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("precompile")) {
 			precompile(req, res);
+		}
+		else if (cmd.equals("reIndex")) {
+			reIndex();
 		}
 		else if (cmd.equals("shutdown")) {
 			shutdown(req);
@@ -261,6 +266,23 @@ public class EditServerAction extends PortletAction {
 			}
 			catch (Exception e) {
 				_log.debug(e, e);
+			}
+		}
+	}
+
+	protected void reIndex() throws Exception {
+		long[] companyIds = PortalInstances.getCompanyIds();
+
+		for (int i = 0; i < companyIds.length; i++) {
+			long companyId = companyIds[i];
+
+			try {
+				LuceneIndexer indexer = new LuceneIndexer(companyId);
+
+				indexer.reIndex();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
 	}
