@@ -57,6 +57,7 @@ import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
+
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -369,8 +370,8 @@ public class EditArticleAction extends PortletAction {
 				communityPermissions, guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
-					req, JournalArticle.class.getName(), 
-					article.getPrimaryKey(), -1);
+				req, JournalArticle.class.getName(), article.getPrimaryKey(),
+				-1);
 		}
 		else {
 

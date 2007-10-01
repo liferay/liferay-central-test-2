@@ -29,11 +29,11 @@ String cmd = ParamUtil.getString(request, Constants.CMD);
 
 String redirect = ParamUtil.getString(request, "redirect");
 
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
+
 String uploadProgressId = ParamUtil.getString(request, "uploadProgressId");
 
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
-
-String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
@@ -86,11 +86,11 @@ if (fileEntry != null) {
 <form action="<portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFileEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 <input name="<portlet:namespace />uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 <input name="<portlet:namespace />newFolderId" type="hidden" value="" />
 <input name="<portlet:namespace />name" type="hidden" value="<%= name %>" />
-<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 
 <liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
 

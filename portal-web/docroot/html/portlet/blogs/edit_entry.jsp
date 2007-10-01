@@ -27,9 +27,9 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
-
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
+
+BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
@@ -82,8 +82,8 @@ if (entry != null) {
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
-<input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
 <input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
+<input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
 
 <liferay-ui:tabs
 	names="entry"

@@ -229,8 +229,7 @@ public class EditFileEntryAction extends PortletAction {
 				communityPermissions, guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
-					req, DLFileEntry.class.getName(), entry.getFileEntryId(), 
-					-1);
+				req, DLFileEntry.class.getName(), entry.getFileEntryId(), -1);
 		}
 		else {
 

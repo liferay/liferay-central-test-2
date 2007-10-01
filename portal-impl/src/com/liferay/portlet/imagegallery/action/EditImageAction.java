@@ -170,7 +170,7 @@ public class EditImageAction extends PortletAction {
 				communityPermissions, guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
-					req, IGImage.class.getName(), image.getImageId(), -1);
+				req, IGImage.class.getName(), image.getImageId(), -1);
 		}
 		else {
 

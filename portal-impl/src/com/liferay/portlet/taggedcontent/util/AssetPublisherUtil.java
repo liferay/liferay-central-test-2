@@ -24,6 +24,7 @@ package com.liferay.portlet.taggedcontent.util;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
@@ -35,66 +36,68 @@ import java.io.IOException;
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentFactory;
 import org.dom4j.Element;
 
 /**
- * <a href="ActionUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetPublisherUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
  */
 public class AssetPublisherUtil {
-	
+
 	public static void addAndStoreSelection(
 			ActionRequest req, String className, long classPK, int assetOrder)
 		throws Exception {
 
-		String referringPortletResource = 
+		String referringPortletResource =
 			ParamUtil.getString(req, "referringPortletResource");
-		
+
 		if (Validator.isNull(referringPortletResource)) {
 			return;
 		}
-		
-		TagsAsset asset = 
-			TagsAssetLocalServiceUtil.getAsset(className, classPK);
+
+		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(
+			className, classPK);
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, referringPortletResource, true, true);
 
-		addSelection(className, assetOrder, asset.getAssetId(), prefs);
-		
+		addSelection(className, asset.getAssetId(), assetOrder, prefs);
+
 		prefs.store();
 	}
 
-	public static void addSelection(
-			ActionRequest req, PortletPreferences prefs)
+	public static void addSelection(ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
 		String assetType = ParamUtil.getString(req, "assetType");
-		int assetOrder = ParamUtil.getInteger(req, "assetOrder");
 		long assetId = ParamUtil.getLong(req, "assetId");
+		int assetOrder = ParamUtil.getInteger(req, "assetOrder");
 
-		addSelection(assetType, assetOrder, assetId, prefs);
+		addSelection(assetType, assetId, assetOrder, prefs);
 	}
-	
-	public static void addSelection(
-			String assetType, int assetOrder, long assetId, 
-			PortletPreferences prefs) 
-		throws Exception {
-		
-		String[] manualEntries = prefs.getValues("manual-entries", new String[0]);
 
-		String assetConfig = _assetConfiguration(
-				assetType, assetId);
+	public static void addSelection(
+			String assetType, long assetId, int assetOrder,
+			PortletPreferences prefs)
+		throws Exception {
+
+		String[] manualEntries = prefs.getValues(
+			"manual-entries", new String[0]);
+
+		String assetConfig = _assetConfiguration(assetType, assetId);
 
 		if (assetOrder > -1) {
 			manualEntries[assetOrder] = assetConfig;
 		}
-		else {			
+		else {
 			manualEntries = ArrayUtil.append(manualEntries, assetConfig);
 		}
 
@@ -102,23 +105,29 @@ public class AssetPublisherUtil {
 	}
 
 	private static String _assetConfiguration(String assetType, long assetId) {
-		String assetString = null;
-		
-		try {
-			Document assetDoc = 
-				DocumentFactory.getInstance().createDocument("UTF-8");
+		String xml = null;
 
-			Element asset = assetDoc.addElement("asset");
-			
+		try {
+			DocumentFactory docFactory = DocumentFactory.getInstance();
+
+			Document doc = docFactory.createDocument("UTF-8");
+
+			Element asset = doc.addElement("asset");
+
 			asset.addElement("asset-type").addText(assetType);
 			asset.addElement("asset-id").addText(String.valueOf(assetId));
 
-			assetString = XMLFormatter.toString(assetDoc, "");
+			xml = XMLFormatter.toString(doc, StringPool.BLANK);
 		}
-		catch (IOException de) {
+		catch (IOException ioe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(ioe);
+			}
 		}
-		
-		return assetString;
+
+		return xml;
 	}
+
+	private static Log _log = LogFactory.getLog(AssetPublisherUtil.class);
 
 }

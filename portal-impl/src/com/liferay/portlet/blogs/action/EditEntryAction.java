@@ -171,7 +171,7 @@ public class EditEntryAction extends PortletAction {
 				guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
-					req, BlogsEntry.class.getName(), entry.getEntryId(), -1);
+				req, BlogsEntry.class.getName(), entry.getEntryId(), -1);
 		}
 		else {
 

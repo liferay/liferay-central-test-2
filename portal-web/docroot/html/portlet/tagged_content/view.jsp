@@ -67,12 +67,14 @@ entries = ArrayUtil.distinct(entries, new StringComparator());
 %>
 
 <form name="<portlet:namespace/>fm">
+
 	<%
 	String portletId = portletDisplay.getId();
 	%>
+
 	<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
 </form>
-	
+
 <br />
 
 <%

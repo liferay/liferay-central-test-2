@@ -29,8 +29,6 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 String tabs2 = ParamUtil.getString(request, "tabs2");
 
-String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
-
 String redirect = ParamUtil.getString(request, "redirect");
 
 // Make sure the redirect is correct. This is a workaround for a layout that
@@ -56,6 +54,8 @@ if (originalRedirect.equals(StringPool.BLANK)) {
 else {
 	redirect = originalRedirect;
 }
+
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
@@ -493,6 +493,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= originalRedirect %>" />
+<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
 <input name="<portlet:namespace />articleId" type="hidden" value="<%= articleId %>" />
 <input name="<portlet:namespace />version" type="hidden" value="<%= version %>" />
@@ -501,7 +502,6 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <input name="<portlet:namespace />approve" type="hidden" value="" />
 <input name="<portlet:namespace />deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 <input name="<portlet:namespace />expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
-<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 
 <liferay-ui:tabs
 	names="article"

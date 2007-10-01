@@ -149,8 +149,7 @@ public class EditEntryAction extends PortletAction {
 				communityPermissions, guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
-					req, BookmarksEntry.class.getName(), entry.getEntryId(), 
-					-1);
+				req, BookmarksEntry.class.getName(), entry.getEntryId(), -1);
 		}
 		else {
 

@@ -116,9 +116,9 @@ public PortletURL getAddURL(String assetType, PermissionChecker permissionChecke
 		addURL.setPortletMode(PortletMode.VIEW);
 
 		addURL.setParameter("redirect", currentURLObj.toString());
-		
+
 		String referringPortletResource = currentURLObj.getParameter("portletResource");
-		
+
 		if (Validator.isNotNull(referringPortletResource)) {
 			addURL.setParameter("referringPortletResource", referringPortletResource);
 		}

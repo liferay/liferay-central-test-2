@@ -29,11 +29,11 @@ String cmd = ParamUtil.getString(request, Constants.CMD);
 
 String redirect = ParamUtil.getString(request, "redirect");
 
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
+
 String uploadProgressId = ParamUtil.getString(request, "uploadProgressId");
 
 IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
-
-String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
 long imageId = BeanParamUtil.getLong(image, request, "imageId");
 
@@ -65,10 +65,10 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 <form action="<portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveImage(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 <input name="<portlet:namespace />uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
 <input name="<portlet:namespace />imageId" type="hidden" value="<%= imageId %>" />
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
-<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 
 <liferay-ui:error exception="<%= ImageNameException.class %>">
 

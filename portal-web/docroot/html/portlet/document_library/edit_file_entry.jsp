@@ -31,14 +31,14 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
+
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
 
 String tagsEntries = ParamUtil.getString(renderRequest, "tagsEntries");
-
-String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
@@ -210,15 +210,17 @@ portletURL.setParameter("name", name);
 		<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 		<portlet:param name="tabs2" value="<%= tabs2 %>" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
+
+		<c:if test="<%= Validator.isNotNull(referringPortletResource) %>">
+			<portlet:param name="referringPortletResource" value="<%= referringPortletResource %>" />
+		</c:if>
+
 		<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
 		<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		<portlet:param name="name" value="<%= name %>" />
 
 		<c:if test="<%= Validator.isNotNull(tagsEntries) %>">
 			<portlet:param name="tagsEntries" value="<%= tagsEntries %>" />
-		</c:if>
-		<c:if test="<%= Validator.isNotNull(referringPortletResource) %>">
-			<portlet:param name="referringPortletResource" value="<%= referringPortletResource %>" />
 		</c:if>
 	</portlet:renderURL>
 

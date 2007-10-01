@@ -27,9 +27,9 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
-
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
+
+IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 
 long imageId = BeanParamUtil.getLong(image, request, "imageId");
 
@@ -121,15 +121,17 @@ String uploadProgressId = "igImageUploadProgress";
 <portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="uploadProgressURL">
 	<portlet:param name="struts_action" value="/image_gallery/edit_image" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
+
+	<c:if test="<%= Validator.isNotNull(referringPortletResource) %>">
+		<portlet:param name="referringPortletResource" value="<%= referringPortletResource %>" />
+	</c:if>
+
 	<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
 	<portlet:param name="imageId" value="<%= String.valueOf(imageId) %>" />
 	<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 
 	<c:if test="<%= Validator.isNotNull(tagsEntries) %>">
 		<portlet:param name="tagsEntries" value="<%= tagsEntries %>" />
-	</c:if>
-	<c:if test="<%= Validator.isNotNull(referringPortletResource) %>">
-		<portlet:param name="referringPortletResource" value="<%= referringPortletResource %>" />
 	</c:if>
 </portlet:renderURL>
 
