@@ -80,9 +80,7 @@ public class DynamicDialect extends Dialect {
 					"Determining dialect for " + dbName + " " + dbMajorVersion);
 			}
 
-			if (dbName.startsWith(
-					com.liferay.util.dao.hibernate.CustomSQLUtil.HYPERSONIC)) {
-
+			if (dbName.startsWith("HSQL")) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Liferay is configured to use Hypersonic as its " +

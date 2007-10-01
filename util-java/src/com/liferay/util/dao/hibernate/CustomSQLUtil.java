@@ -57,40 +57,26 @@ import org.dom4j.io.SAXReader;
  */
 public abstract class CustomSQLUtil {
 
-	public static final String DB2 = "DB2";
-
 	public static final String DB2_FUNCTION_IS_NULL =
 		"CAST(? AS VARCHAR(32672)) IS NULL";
 
 	public static final String DB2_FUNCTION_IS_NOT_NULL =
 		"CAST(? AS VARCHAR(32672)) IS NOT NULL";
 
-	public static final String HYPERSONIC = "HSQL";
-
-	public static final String INFORMIX = "Informix";
-
 	public static final String INFORMIX_FUNCTION_IS_NULL = "lportal.isnull(?)";
 
 	public static final String INFORMIX_FUNCTION_IS_NOT_NULL =
 		"NOT " + INFORMIX_FUNCTION_IS_NULL;
-
-	public static final String MYSQL = "MySQL";
 
 	public static final String MYSQL_FUNCTION_IS_NULL = "IFNULL(?, '1') = '1'";
 
 	public static final String MYSQL_FUNCTION_IS_NOT_NULL =
 		"IFNULL(?, '1') = '0'";
 
-	public static final String SYBASE_1 = "Sybase";
-
-	public static final String SYBASE_2 = "ASE";
-
 	public static final String SYBASE_FUNCTION_IS_NULL = "ISNULL(?, '1') = '1'";
 
 	public static final String SYBASE_FUNCTION_IS_NOT_NULL =
 		"ISNULL(?, '1') = '0'";
-
-	public static final String ORACLE = "Oracle";
 
 	public CustomSQLUtil(String functionIsNull, String functionIsNotNull) {
 		this(null, functionIsNull, functionIsNotNull);
@@ -124,7 +110,7 @@ public abstract class CustomSQLUtil {
 					_log.info("Database name " + dbName);
 				}
 
-				if (dbName.startsWith(DB2)) {
+				if (dbName.startsWith("DB2")) {
 					_vendorDB2 = true;
 					_functionIsNull = DB2_FUNCTION_IS_NULL;
 					_functionIsNotNull = DB2_FUNCTION_IS_NOT_NULL;
@@ -133,7 +119,7 @@ public abstract class CustomSQLUtil {
 						_log.info("Detected DB2 with database name " + dbName);
 					}
 				}
-				else if (dbName.startsWith(INFORMIX)) {
+				else if (dbName.startsWith("Informix")) {
 					_vendorInformix = true;
 					_functionIsNull = INFORMIX_FUNCTION_IS_NULL;
 					_functionIsNotNull = INFORMIX_FUNCTION_IS_NOT_NULL;
@@ -143,7 +129,7 @@ public abstract class CustomSQLUtil {
 							"Detected Informix with database name " + dbName);
 					}
 				}
-				else if (dbName.startsWith(MYSQL)) {
+				else if (dbName.startsWith("MySQL")) {
 					_vendorMySQL = true;
 					//_functionIsNull = MYSQL_FUNCTION_IS_NULL;
 					//_functionIsNotNull = MYSQL_FUNCTION_IS_NOT_NULL;
@@ -153,9 +139,7 @@ public abstract class CustomSQLUtil {
 							"Detected MySQL with database name " + dbName);
 					}
 				}
-				else if (dbName.startsWith(SYBASE_1) ||
-						 dbName.equals(SYBASE_2)) {
-
+				else if (dbName.startsWith("Sybase") || dbName.equals("ASE")) {
 					_vendorSybase = true;
 					_functionIsNull = SYBASE_FUNCTION_IS_NULL;
 					_functionIsNotNull = SYBASE_FUNCTION_IS_NOT_NULL;
@@ -165,7 +149,7 @@ public abstract class CustomSQLUtil {
 							"Detected Sybase with database name " + dbName);
 					}
 				}
-				else if (dbName.startsWith(ORACLE)) {
+				else if (dbName.startsWith("Oracle")) {
 					_vendorOracle = true;
 
 					if (_log.isInfoEnabled()) {
@@ -174,8 +158,8 @@ public abstract class CustomSQLUtil {
 					}
 				}
 				else {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
+					if (_log.isDebugEnabled()) {
+						_log.debug(
 							"Unable to detect database with name " + dbName);
 					}
 				}
