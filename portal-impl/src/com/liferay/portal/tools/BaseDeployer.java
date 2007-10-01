@@ -791,6 +791,28 @@ public class BaseDeployer {
 		return sm.toString();
 	}
 
+	protected String getPluginPackageLiferayVersionsXml(List liferayVersions) {
+		StringMaker sm = new StringMaker();
+
+		for (int i = 0; i < liferayVersions.size(); i++) {
+			String liferayVersion = (String)liferayVersions.get(i);
+
+			if (i == 0) {
+				sm.append("\r\n");
+			}
+
+			sm.append("\t\t<liferay-version>");
+			sm.append(liferayVersion);
+			sm.append("</liferay-version>\r\n");
+
+			if ((i + 1) == liferayVersions.size()) {
+				sm.append("\t");
+			}
+		}
+
+		return sm.toString();
+	}
+
 	protected Properties getPluginPackageProperties(File srcFile)
 		throws Exception {
 

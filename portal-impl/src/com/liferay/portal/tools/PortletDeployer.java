@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.TextFormatter;
@@ -377,10 +376,10 @@ public class PortletDeployer extends BaseDeployer {
 		String author = pluginPackage.getAuthor();
 		String licenses = getPluginPackageLicensesXml(
 			pluginPackage.getLicenses());
+		String liferayVersions = getPluginPackageLiferayVersionsXml(
+			pluginPackage.getLiferayVersions());
 
 		Map filterMap = new HashMap();
-
-		filterMap.put("liferay_version", ReleaseInfo.getVersion());
 
 		filterMap.put("module_group_id", moduleGroupId);
 		filterMap.put("module_artifact_id", moduleArtifactId);
@@ -397,6 +396,7 @@ public class PortletDeployer extends BaseDeployer {
 		filterMap.put("page_url", pageURL);
 		filterMap.put("author", author);
 		filterMap.put("licenses", licenses);
+		filterMap.put("liferay_versions", liferayVersions);
 
 		copyDependencyXml(
 			"liferay-plugin-package.xml", srcFile + "/WEB-INF", filterMap,

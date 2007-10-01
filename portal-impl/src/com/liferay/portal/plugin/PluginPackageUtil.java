@@ -425,7 +425,16 @@ public class PluginPackageUtil {
 
 		List liferayVersions = new ArrayList();
 
-		liferayVersions.add(ReleaseInfo.getVersion());
+		String[] liferayVersionsArray = StringUtil.split(
+			props.getProperty("liferay-versions"));
+
+		for (int i = 0; i < liferayVersionsArray.length; i++) {
+			liferayVersions.add(liferayVersionsArray[i].trim());
+		}
+
+		if (liferayVersions.size() == 0) {
+			liferayVersions.add(ReleaseInfo.getVersion() + "+");
+		}
 
 		List tags = new ArrayList();
 

@@ -25,7 +25,6 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.util.TextFormatter;
 
 import java.io.File;
@@ -241,6 +240,8 @@ public class ThemeDeployer extends BaseDeployer {
 		String author = pluginPackage.getAuthor();
 		String licenses = getPluginPackageLicensesXml(
 			pluginPackage.getLicenses());
+		String liferayVersions = getPluginPackageLiferayVersionsXml(
+			pluginPackage.getLiferayVersions());
 
 		int pos = moduleArtifactId.indexOf("-theme");
 
@@ -248,8 +249,6 @@ public class ThemeDeployer extends BaseDeployer {
 		String themeName = pluginName;
 
 		Map filterMap = new HashMap();
-
-		filterMap.put("liferay_version", ReleaseInfo.getVersion());
 
 		filterMap.put("module_group_id", moduleGroupId);
 		filterMap.put("module_artifact_id", moduleArtifactId);
@@ -266,6 +265,7 @@ public class ThemeDeployer extends BaseDeployer {
 		filterMap.put("page_url", pageURL);
 		filterMap.put("author", author);
 		filterMap.put("licenses", licenses);
+		filterMap.put("liferay_versions", liferayVersions);
 
 		filterMap.put("theme_id", themeId);
 		filterMap.put("theme_name", themeName);

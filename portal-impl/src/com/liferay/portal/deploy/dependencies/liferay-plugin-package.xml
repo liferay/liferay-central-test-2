@@ -14,7 +14,5 @@
 	<page-url>@page_url@</page-url>
 	<author>@author@</author>
 	<licenses>@licenses@</licenses>
-	<liferay-versions>
-		<liferay-version>@liferay_version@</liferay-version>
-	</liferay-versions>
+	<liferay-versions>@liferay_versions@</liferay-versions>
 </plugin-package>
