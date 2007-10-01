@@ -20,38 +20,46 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v4_3_3;
 
-import com.liferay.portal.upgrade.v4_3_3.UpgradeSchema;
-import com.liferay.portal.upgrade.v4_3_3.UpgradeSoftwareCatalog;
-import com.liferay.portal.upgrade.v4_3_3.UpgradeTags;
-import com.liferay.portal.upgrade.v4_3_3.UpgradeWebsite;
-import com.liferay.portal.util.ReleaseInfo;
+import com.liferay.portal.model.impl.WebsiteImpl;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeProcess_4_3_3.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeWebsite.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeProcess_4_3_3 extends UpgradeProcess {
-
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_4_3_3_BUILD_NUMBER;
-	}
+public class UpgradeWebsite extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(new UpgradeSchema());
-		upgrade(new UpgradeSoftwareCatalog());
-		upgrade(new UpgradeTags());
-		upgrade(new UpgradeWebsite());
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_3.class);
+	protected void doUpgrade() throws Exception {
+
+		// Website
+
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS);
+
+		upgradeTable.updateTable();
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeWebsite.class);
 
 }
