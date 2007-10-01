@@ -248,6 +248,13 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.getImagesCount(folderId);
 	}
 
+	public static java.util.List getNoAssetImages()
+		throws com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getNoAssetImages();
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long imageId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,

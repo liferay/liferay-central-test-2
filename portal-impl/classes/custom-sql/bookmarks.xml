@@ -53,6 +53,23 @@
 				BookmarksEntry.modifiedDate DESC
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.findByNoAssets">
+		<![CDATA[
+			SELECT
+				{BookmarksEntry.*}
+			FROM
+				BookmarksEntry
+			WHERE
+				(entryId NOT IN(
+					SELECT
+						classPK
+					FROM
+						TagsAsset
+					WHERE
+						classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BOOKMARKS.MODEL.BOOKMARKSENTRY$]
+				))
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.findByG_U">
 		<![CDATA[
 			SELECT

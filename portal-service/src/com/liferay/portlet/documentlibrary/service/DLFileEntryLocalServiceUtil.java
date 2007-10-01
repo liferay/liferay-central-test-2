@@ -379,6 +379,13 @@ public class DLFileEntryLocalServiceUtil {
 		return dlFileEntryLocalService.getGroupFileEntriesCount(groupId, userId);
 	}
 
+	public static java.util.List getNoAssetFileEntries()
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getNoAssetFileEntries();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,

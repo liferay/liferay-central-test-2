@@ -150,6 +150,9 @@ public interface BlogsEntryLocalService {
 	public int getGroupEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getNoAssetEntries()
+		throws com.liferay.portal.SystemException;
+
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 

@@ -22,23 +22,13 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
-import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
-import com.liferay.util.dao.hibernate.DynamicQueryInitializerImpl;
 
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Property;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.Subqueries;
 
 /**
  * <a href="VerifyBookmarks.java.html"><b><i>View Source</i></b></a>
@@ -60,31 +50,7 @@ public class VerifyBookmarks extends VerifyProcess {
 	}
 
 	protected void verifyBookmarks() throws Exception {
-		long classNameId = PortalUtil.getClassNameId(
-			BookmarksEntry.class.getName());
-
-		DetachedCriteria entriesWithTagsAssets = DetachedCriteria.forClass(
-			TagsAssetImpl.class, "tagsAsset");
-
-		entriesWithTagsAssets = entriesWithTagsAssets.add(
-			Property.forName("tagsAsset.classNameId").eq(
-				new Long(classNameId)));
-
-		entriesWithTagsAssets = entriesWithTagsAssets.setProjection(
-			Property.forName("tagsAsset.classPK"));
-
-		DetachedCriteria entriesWithoutTagsAssets = DetachedCriteria.forClass(
-			BookmarksEntryImpl.class, "bookmarksEntry");
-
-		entriesWithoutTagsAssets = entriesWithoutTagsAssets.add(
-			Restrictions.not(
-				Subqueries.propertyIn(
-					"bookmarksEntry.entryId", entriesWithTagsAssets)));
-
-		DynamicQueryInitializer dqi = new DynamicQueryInitializerImpl(
-			entriesWithoutTagsAssets);
-
-		List entries = BookmarksEntryLocalServiceUtil.dynamicQuery(dqi);
+		List entries = BookmarksEntryLocalServiceUtil.getNoAssetEntries();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

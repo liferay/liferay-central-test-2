@@ -22,23 +22,13 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
-import com.liferay.util.dao.hibernate.DynamicQueryInitializerImpl;
 
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Property;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.Subqueries;
 
 /**
  * <a href="VerifyDocumentLibrary.java.html"><b><i>View Source</i></b></a>
@@ -60,31 +50,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 	}
 
 	protected void verifyDocumentLibrary() throws Exception {
-		long classNameId = PortalUtil.getClassNameId(
-			DLFileEntry.class.getName());
-
-		DetachedCriteria entriesWithTagsAssets = DetachedCriteria.forClass(
-			TagsAssetImpl.class, "tagsAsset");
-
-		entriesWithTagsAssets = entriesWithTagsAssets.add(
-			Property.forName("tagsAsset.classNameId").eq(
-				new Long(classNameId)));
-
-		entriesWithTagsAssets = entriesWithTagsAssets.setProjection(
-			Property.forName("tagsAsset.classPK"));
-
-		DetachedCriteria entriesWithoutTagsAssets = DetachedCriteria.forClass(
-			DLFileEntryImpl.class, "dlFileEntry");
-
-		entriesWithoutTagsAssets = entriesWithoutTagsAssets.add(
-			Restrictions.not(
-				Subqueries.propertyIn(
-					"dlFileEntry.fileEntryId", entriesWithTagsAssets)));
-
-		DynamicQueryInitializer dqi = new DynamicQueryInitializerImpl(
-			entriesWithoutTagsAssets);
-
-		List fileEntries = DLFileEntryLocalServiceUtil.dynamicQuery(dqi);
+		List fileEntries = DLFileEntryLocalServiceUtil.getNoAssetFileEntries();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

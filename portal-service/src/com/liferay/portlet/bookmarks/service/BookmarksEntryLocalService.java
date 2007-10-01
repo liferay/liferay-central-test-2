@@ -154,6 +154,9 @@ public interface BookmarksEntryLocalService {
 	public int getGroupEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getNoAssetEntries()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
 		long entryId)
 		throws com.liferay.portal.SystemException, 

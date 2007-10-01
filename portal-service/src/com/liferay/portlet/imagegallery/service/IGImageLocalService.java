@@ -156,6 +156,9 @@ public interface IGImageLocalService {
 	public int getImagesCount(long folderId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getNoAssetImages()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		long imageId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,

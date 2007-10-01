@@ -242,6 +242,13 @@ public class BookmarksEntryLocalServiceUtil {
 		return bookmarksEntryLocalService.getGroupEntriesCount(groupId, userId);
 	}
 
+	public static java.util.List getNoAssetEntries()
+		throws com.liferay.portal.SystemException {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.getNoAssetEntries();
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException, 

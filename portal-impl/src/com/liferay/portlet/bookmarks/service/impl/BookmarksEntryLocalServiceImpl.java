@@ -285,6 +285,10 @@ public class BookmarksEntryLocalServiceImpl
 		}
 	}
 
+	public List getNoAssetEntries() throws SystemException {
+		return BookmarksEntryFinder.findByNoAssets();
+	}
+
 	public BookmarksEntry openEntry(long entryId)
 		throws PortalException, SystemException {
 

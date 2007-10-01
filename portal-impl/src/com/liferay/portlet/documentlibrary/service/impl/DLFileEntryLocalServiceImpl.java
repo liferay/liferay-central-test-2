@@ -568,6 +568,10 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
+	public List getNoAssetFileEntries() throws SystemException {
+		return DLFileEntryFinder.findByNoAssets();
+	}
+
 	public DLFileEntry updateFileEntry(
 			long userId, long folderId, long newFolderId, String name,
 			String sourceFileName, String title, String description,

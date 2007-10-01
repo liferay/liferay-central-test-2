@@ -22,23 +22,13 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
-import com.liferay.util.dao.hibernate.DynamicQueryInitializerImpl;
 
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Property;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.Subqueries;
 
 /**
  * <a href="VerifyBlogs.java.html"><b><i>View Source</i></b></a>
@@ -60,31 +50,7 @@ public class VerifyBlogs extends VerifyProcess {
 	}
 
 	protected void verifyBlogs() throws Exception {
-		long classNameId = PortalUtil.getClassNameId(
-			BlogsEntry.class.getName());
-
-		DetachedCriteria entriesWithTagsAssets = DetachedCriteria.forClass(
-			TagsAssetImpl.class, "tagsAsset");
-
-		entriesWithTagsAssets = entriesWithTagsAssets.add(
-			Property.forName("tagsAsset.classNameId").eq(
-				new Long(classNameId)));
-
-		entriesWithTagsAssets = entriesWithTagsAssets.setProjection(
-			Property.forName("tagsAsset.classPK"));
-
-		DetachedCriteria entriesWithoutTagsAssets = DetachedCriteria.forClass(
-			BlogsEntryImpl.class, "blogsEntry");
-
-		entriesWithoutTagsAssets = entriesWithoutTagsAssets.add(
-			Restrictions.not(
-				Subqueries.propertyIn(
-					"blogsEntry.entryId", entriesWithTagsAssets)));
-
-		DynamicQueryInitializer dqi = new DynamicQueryInitializerImpl(
-			entriesWithoutTagsAssets);
-
-		List entries = BlogsEntryLocalServiceUtil.dynamicQuery(dqi);
+		List entries = BlogsEntryLocalServiceUtil.getNoAssetEntries();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

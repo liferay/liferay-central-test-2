@@ -240,6 +240,13 @@ public class BlogsEntryLocalServiceUtil {
 		return blogsEntryLocalService.getGroupEntriesCount(groupId);
 	}
 
+	public static java.util.List getNoAssetEntries()
+		throws com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getNoAssetEntries();
+	}
+
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();

@@ -227,6 +227,9 @@ public interface DLFileEntryLocalService {
 	public int getGroupFileEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getNoAssetFileEntries()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,

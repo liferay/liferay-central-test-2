@@ -315,6 +315,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return BlogsEntryUtil.countByGroupId(groupId);
 	}
 
+	public List getNoAssetEntries() throws SystemException {
+		return BlogsEntryFinder.findByNoAssets();
+	}
+
 	public void reIndex(String[] ids) throws SystemException {
 		try {
 			long companyId = GetterUtil.getLong(ids[0]);

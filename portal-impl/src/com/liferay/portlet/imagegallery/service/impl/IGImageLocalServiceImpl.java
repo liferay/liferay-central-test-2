@@ -311,6 +311,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return IGImageUtil.countByFolderId(folderId);
 	}
 
+	public List getNoAssetImages() throws SystemException {
+		return IGImageFinder.findByNoAssets();
+	}
+
 	public IGImage updateImage(
 			long imageId, long folderId, String description, File file,
 			String contentType, String[] tagsEntries)
