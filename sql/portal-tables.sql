@@ -1198,7 +1198,7 @@ create table UserTracker (
 create table UserTrackerPath (
 	userTrackerPathId LONG not null primary key,
 	userTrackerId LONG,
-	path STRING null,
+	path_ STRING null,
 	pathDate DATE null
 );
 

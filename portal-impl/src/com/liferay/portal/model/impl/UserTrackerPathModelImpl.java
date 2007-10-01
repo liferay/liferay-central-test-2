@@ -59,10 +59,10 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 	public static Object[][] TABLE_COLUMNS = {
 			{ "userTrackerPathId", new Integer(Types.BIGINT) },
 			{ "userTrackerId", new Integer(Types.BIGINT) },
-			{ "path", new Integer(Types.VARCHAR) },
+			{ "path_", new Integer(Types.VARCHAR) },
 			{ "pathDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static String TABLE_SQL_CREATE = "create table UserTrackerPath (userTrackerPathId LONG not null primary key,userTrackerId LONG,path STRING null,pathDate DATE null)";
+	public static String TABLE_SQL_CREATE = "create table UserTrackerPath (userTrackerPathId LONG not null primary key,userTrackerId LONG,path_ STRING null,pathDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table UserTrackerPath";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTrackerPath"), XSS_ALLOW);

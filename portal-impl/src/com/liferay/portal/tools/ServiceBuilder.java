@@ -165,6 +165,7 @@ public class ServiceBuilder {
 		badCmpFields.add("log");
 		badCmpFields.add("number");
 		badCmpFields.add("password");
+		badCmpFields.add("path");
 		badCmpFields.add("primary");
 		badCmpFields.add("sale");
 		badCmpFields.add("settings");

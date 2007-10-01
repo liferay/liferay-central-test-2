@@ -512,7 +512,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="userTrackerId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="path" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="path" column="path_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="pathDate" />
 	</class>
 	<class name="com.liferay.portal.model.impl.WebsiteImpl" table="Website">

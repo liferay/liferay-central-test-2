@@ -19,3 +19,13 @@ create table SCProductScreenshot (
 
 alter table TagsAsset add description STRING null;
 alter table TagsAsset add summary STRING null;
+
+delete from UserTracker;
+
+drop table UserTrackerPath;
+create table UserTrackerPath (
+	userTrackerPathId LONG not null primary key,
+	userTrackerId LONG,
+	path_ STRING null,
+	pathDate DATE null
+);
