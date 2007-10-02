@@ -22,8 +22,8 @@
 
 package com.liferay.portal.spring.util;
 
-import com.liferay.portal.spring.context.LazyClassPathApplicationContext;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.spring.context.LazyClassPathApplicationContext;
 
 import org.springframework.context.ApplicationContext;
 

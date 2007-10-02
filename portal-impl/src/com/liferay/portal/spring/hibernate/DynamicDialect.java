@@ -124,7 +124,7 @@ public class DynamicDialect extends Dialect {
 		}
 
 		if (_dialect == null) {
-			throw new DynamicDialectException("No dialect found");
+			throw new RuntimeException("No dialect found");
 		}
 
 		// Synchorize default properties

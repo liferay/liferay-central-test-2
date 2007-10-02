@@ -20,17 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.jndi;
+package com.liferay.portal.kernel.jndi;
+
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+
+import javax.mail.Session;
+
+import javax.naming.NamingException;
+
+import javax.sql.DataSource;
 
 /**
- * <a href="JndiObjectFactoryBean.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalJNDIUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated this class has been repackaged at
- * <code>com.liferay.util.spring.jndi</code>.
- *
  */
-public class JndiObjectFactoryBean
-	extends com.liferay.util.spring.jndi.JndiObjectFactoryBean {
+public class PortalJNDIUtil {
+
+	public static DataSource getDataSource() throws NamingException {
+		return getPortalJNDI().getDataSource();
+	}
+
+	public static Session getMailSession() throws NamingException {
+		return getPortalJNDI().getMailSession();
+	}
+
+	public static PortalJNDI getPortalJNDI() {
+		return _getUtil()._portalJNDI;
+	}
+
+	public void setPortalJNDI(PortalJNDI portalJNDI) {
+		_portalJNDI = portalJNDI;
+	}
+
+	private static PortalJNDIUtil _getUtil() {
+		if (_util == null) {
+			_util = (PortalJNDIUtil)BeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = PortalJNDIUtil.class.getName();
+
+	private static PortalJNDIUtil _util;
+
+	private PortalJNDI _portalJNDI;
+
 }

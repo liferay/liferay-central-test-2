@@ -20,59 +20,64 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.hibernate;
-
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.dao.hibernate.CacheWrapper;
-
-import com.opensymphony.oscache.base.CacheEntry;
+package com.liferay.util.dao.hibernate;
 
 import java.util.Properties;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.cache.Cache;
 import org.hibernate.cache.CacheException;
 import org.hibernate.cache.CacheProvider;
-import org.hibernate.cache.Timestamper;
-import org.hibernate.util.StringHelper;
 
 /**
- * <a href="OSCacheProvider.java.html"><b><i>View Source</i></b></a>
+ * <a href="CacheProviderWrapper.java.html"><b><i>View Source</i></b></a>
  *
- * @author Mathias Bogaert
  * @author Brian Wing Shun Chan
  *
  */
-public class OSCacheProvider implements CacheProvider {
+public class CacheProviderWrapper implements CacheProvider {
 
-	public static final String OSCACHE_REFRESH_PERIOD = "refresh.period";
+	public CacheProviderWrapper(String cacheProvider) {
+		try {
+			_cacheProvider = (CacheProvider)Class.forName(
+				cacheProvider).newInstance();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
 
-	public static final String OSCACHE_CRON = "cron";
+	public CacheProviderWrapper(CacheProvider cacheProvider) {
+		_cacheProvider = cacheProvider;
+	}
 
-	public Cache buildCache(String region, Properties properties)
+	public Cache buildCache(String regionName, Properties properties)
 		throws CacheException {
 
-		int refreshPeriod = GetterUtil.getInteger(
-			PropsUtil.get(StringHelper.qualify(region, OSCACHE_REFRESH_PERIOD)),
-			CacheEntry.INDEFINITE_EXPIRY);
-
-		String cron = PropsUtil.get(StringHelper.qualify(region, OSCACHE_CRON));
-
-		return new CacheWrapper(new OSCache(refreshPeriod, cron, region));
+		return new CacheWrapper(
+			_cacheProvider.buildCache(regionName, properties));
 	}
 
 	public boolean isMinimalPutsEnabledByDefault() {
-		return false;
+		return _cacheProvider.isMinimalPutsEnabledByDefault();
 	}
 
 	public long nextTimestamp() {
-		return Timestamper.next();
+		return _cacheProvider.nextTimestamp();
 	}
 
 	public void start(Properties properties) throws CacheException {
+		_cacheProvider.start(properties);
 	}
 
 	public void stop() {
+		_cacheProvider.stop();
 	}
+
+	private static Log _log = LogFactory.getLog(CacheProviderWrapper.class);
+
+	private CacheProvider _cacheProvider;
 
 }

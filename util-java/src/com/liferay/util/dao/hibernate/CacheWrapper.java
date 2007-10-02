@@ -20,132 +20,102 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.hibernate;
+package com.liferay.util.dao.hibernate;
 
-import com.liferay.portal.util.PropsUtil;
-
-import com.opensymphony.oscache.base.CacheEntry;
-import com.opensymphony.oscache.base.NeedsRefreshException;
-import com.opensymphony.oscache.general.GeneralCacheAdministrator;
+import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryItem;
 
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.hibernate.cache.Cache;
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.Timestamper;
 
 /**
- * <a href="OSCache.java.html"><b><i>View Source</i></b></a>
+ * <a href="CacheWrapper.java.html"><b><i>View Source</i></b></a>
  *
- * @author Mathias Bogaert
  * @author Brian Wing Shun Chan
  *
  */
-public class OSCache implements Cache {
+public class CacheWrapper implements Cache, CacheRegistryItem {
 
-	public OSCache(int refreshPeriod, String cron, String region) {
-		_refreshPeriod = refreshPeriod;
-		_cron = cron;
-		_regionName = region;
-		_regionGroups = new String[] {region};
+	public CacheWrapper(Cache cache) {
+		_cache = cache;
+
+		CacheRegistry.register(this);
 	}
 
 	public void clear() throws CacheException {
-		_cache.flushGroup(_regionName);
+		_cache.clear();
 	}
 
 	public void destroy() throws CacheException {
-		synchronized (_cache) {
-			_cache.destroy();
-		}
+		_cache.destroy();
 	}
 
 	public Object get(Object key) throws CacheException {
-		String keyString = _encodeKey(key);
-
-		try {
-			return _cache.getFromCache(keyString, _refreshPeriod, _cron);
-		}
-		catch (NeedsRefreshException nre) {
-			_cache.cancelUpdate(keyString);
-
-			return null;
-		}
-	}
-
-	public long getElementCountOnDisk() {
-		return -1;
+		return _cache.get(key);
 	}
 
 	public long getElementCountInMemory() {
-		return -1;
+		return _cache.getElementCountInMemory();
+	}
+
+	public long getElementCountOnDisk() {
+		return _cache.getElementCountOnDisk();
 	}
 
 	public String getRegionName() {
-		return _regionName;
+		return _cache.getRegionName();
 	}
 
 	public long getSizeInMemory() {
-		return -1;
+		return _cache.getSizeInMemory();
 	}
 
 	public int getTimeout() {
-		return CacheEntry.INDEFINITE_EXPIRY;
+		return _cache.getTimeout();
 	}
 
 	public void lock(Object key) throws CacheException {
+		_cache.lock(key);
 	}
 
 	public long nextTimestamp() {
-		return Timestamper.next();
+		return _cache.nextTimestamp();
 	}
 
 	public void put(Object key, Object value) throws CacheException {
-		_cache.putInCache(_encodeKey(key), value, _regionGroups);
+		if (CacheRegistry.isActive()) {
+			_cache.put(key, value);
+		}
 	}
 
 	public Object read(Object key) throws CacheException {
-		return get(key);
+		return _cache.read(key);
 	}
 
 	public void remove(Object key) throws CacheException {
-		_cache.flushEntry(_encodeKey(key));
+		_cache.remove(key);
 	}
 
 	public Map toMap() {
-		return null;
+		return _cache.toMap();
 	}
 
 	public void unlock(Object key) throws CacheException {
+		_cache.unlock(key);
 	}
 
 	public void update(Object key, Object value) throws CacheException {
-		_cache.flushEntry(_encodeKey(key));
-
-		put(key, value);
-	}
-
-	private String _encodeKey(Object key) {
-		String keyString = String.valueOf(key);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Key " + keyString);
+		if (CacheRegistry.isActive()) {
+			_cache.update(key, value);
 		}
-
-		return keyString;
 	}
 
-	private static Log _log = LogFactory.getLog(OSCache.class);
+	public void invalidate() {
+		_cache.clear();
+	}
 
-	private static GeneralCacheAdministrator _cache =
-		new GeneralCacheAdministrator(PropsUtil.getProperties());
-
-	private int _refreshPeriod;
-	private String _cron;
-	private String _regionName;
-	private String[] _regionGroups;
+	private Cache _cache;
 
 }

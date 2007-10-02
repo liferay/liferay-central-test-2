@@ -20,48 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.hibernate;
+package com.liferay.portal.jndi;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.liferay.portal.kernel.jndi.PortalJNDI;
+import com.liferay.util.JNDIUtil;
 
-import org.hibernate.cache.Cache;
+import javax.mail.Session;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import javax.sql.DataSource;
 
 /**
- * <a href="CacheRegistry.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalJNDIImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CacheRegistry {
+public class PortalJNDIImpl implements PortalJNDI {
 
-	public static boolean isActive() {
-		return _active;
-	}
+	public static final String DATA_SOURCE_JNDI = "jdbc/LiferayPool";
 
-	public static void setActive(boolean active) {
-		_active = active;
+	public static final String MAIL_SESSION_JNDI = "mail/MailSession";
 
-		if (!active) {
-			clear();
-		}
-	}
-
-	public static void clear() {
-		for (int i = 0; i < _registry.size(); i++) {
-			Cache cache = (Cache)_registry.get(i);
-
-			cache.clear();
+	public DataSource getDataSource() throws NamingException {
+		if (_dataSource == null) {
+			_dataSource = (DataSource)JNDIUtil.lookup(
+				new InitialContext(), DATA_SOURCE_JNDI);
 		}
 
-		FinderCache.clearCache();
+		return _dataSource;
 	}
 
-	public static void register(Cache cache) {
-		_registry.add(cache);
+	public Session getMailSession() throws NamingException {
+		if (_mailSession == null) {
+			_mailSession = (Session)JNDIUtil.lookup(
+				new InitialContext(), MAIL_SESSION_JNDI);
+		}
+
+		return _mailSession;
 	}
 
-	private static boolean _active = true;
-	private static List _registry = new ArrayList();
+	private DataSource _dataSource;
+	private Session _mailSession;
 
 }

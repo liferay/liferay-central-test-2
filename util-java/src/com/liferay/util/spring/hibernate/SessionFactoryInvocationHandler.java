@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.hibernate;
+package com.liferay.util.spring.hibernate;
 
 import com.liferay.util.dao.hibernate.LiferayClassicSession;
 
@@ -58,7 +58,7 @@ public class SessionFactoryInvocationHandler implements InvocationHandler {
 		if (method.getName().equals("getCurrentSession")) {
 			try {
 				Session session = (Session)SessionFactoryUtils.doGetSession(
-					(SessionFactory) proxy, false);
+					(SessionFactory)proxy, false);
 
 				return wrapLiferaySession(session);
 			}

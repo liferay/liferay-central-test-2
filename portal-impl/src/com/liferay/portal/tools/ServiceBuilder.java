@@ -96,34 +96,50 @@ public class ServiceBuilder {
 			String hbmFileName = args[1];
 			String modelHintsFileName = args[2];
 			String springFileName = args[3];
-			String beanLocatorUtilClassName = args[4];
+			String springDataSourceFileName = "";
 			String apiDir = args[5];
 			String implDir = "src";
 			String jsonFileName = args[6];
 			String sqlDir = "../sql";
 			String sqlFileName = "portal-tables.sql";
+			String baseModelImplPackage = "com.liferay.portal.model.impl";
+			String basePersistencePackage = "com.liferay.portal.service.persistence";
+			String beanLocatorUtilPackage = "com.liferay.portal.kernel.bean";
+			String propsUtilPackage = "com.liferay.portal.util";
+			String springHibernatePackage = "com.liferay.portal.spring.hibernate";
+			String springUtilPackage = "com.liferay.portal.spring.util";
 
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
-				beanLocatorUtilClassName, apiDir, implDir, jsonFileName, sqlDir,
-				sqlFileName);
+				springDataSourceFileName, apiDir, implDir, jsonFileName, sqlDir,
+				sqlFileName, baseModelImplPackage, basePersistencePackage,
+				beanLocatorUtilPackage, propsUtilPackage,
+				springHibernatePackage, springUtilPackage);
 		}
 		else if (args.length == 0) {
 			String fileName = System.getProperty("service.input.file");
 			String hbmFileName = System.getProperty("service.hbm.file");
 			String modelHintsFileName = System.getProperty("service.model.hints.file");
 			String springFileName = System.getProperty("service.spring.file");
-			String beanLocatorUtilClassName = System.getProperty("service.bean.locator.class");
+			String springDataSourceFileName = System.getProperty("service.spring.data.source.file");
 			String apiDir = System.getProperty("service.api.dir");
 			String implDir = System.getProperty("service.impl.dir");
 			String jsonFileName = System.getProperty("service.json.file");
 			String sqlDir = System.getProperty("service.sql.dir");
 			String sqlFileName = System.getProperty("service.sql.file");
+			String baseModelImplPackage = System.getProperty("service.base.model.impl.package");
+			String basePersistencePackage = System.getProperty("service.base.persistence.package");
+			String beanLocatorUtilPackage = System.getProperty("service.bean.locator.util.package");
+			String propsUtilPackage = System.getProperty("service.props.util.package");
+			String springHibernatePackage = System.getProperty("service.spring.hibernate.package");
+			String springUtilPackage = System.getProperty("service.spring.util.package");
 
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
-				beanLocatorUtilClassName, apiDir, implDir, jsonFileName, sqlDir,
-				sqlFileName);
+				springDataSourceFileName, apiDir, implDir, jsonFileName, sqlDir,
+				sqlFileName, baseModelImplPackage, basePersistencePackage,
+				beanLocatorUtilPackage, propsUtilPackage,
+				springHibernatePackage, springUtilPackage);
 		}
 
 		if (serviceBuilder == null) {
@@ -441,23 +457,30 @@ public class ServiceBuilder {
 		tempFile.deleteOnExit();
 	}
 
-	public ServiceBuilder(String fileName, String hbmFileName,
-						  String modelHintsFileName, String springFileName,
-						  String beanLocatorUtilClassName, String apiDir,
-						  String implDir, String jsonFileName, String sqlDir,
-						  String sqlFileName) {
+	public ServiceBuilder(
+		String fileName, String hbmFileName, String modelHintsFileName,
+		String springFileName, String springDataSourceFileName, String apiDir,
+		String implDir, String jsonFileName, String sqlDir, String sqlFileName,
+		String baseModelImplPackage, String basePersistencePackage,
+		String beanLocatorUtilPackage, String propsUtilPackage,
+		String springHibernatePackage, String springUtilPackage) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, modelHintsFileName, springFileName,
-			beanLocatorUtilClassName, apiDir, implDir, jsonFileName, sqlDir,
-			sqlFileName, true);
+			springDataSourceFileName, apiDir, implDir, jsonFileName, sqlDir,
+			sqlFileName, baseModelImplPackage, basePersistencePackage,
+			beanLocatorUtilPackage, propsUtilPackage, springHibernatePackage,
+			springUtilPackage, true);
 	}
 
-	public ServiceBuilder(String fileName, String hbmFileName,
-						  String modelHintsFileName, String springFileName,
-						  String beanLocatorUtilClassName, String apiDir,
-						  String implDir, String jsonFileName, String sqlDir,
-						  String sqlFileName, boolean build) {
+	public ServiceBuilder(
+		String fileName, String hbmFileName, String modelHintsFileName,
+		String springFileName, String springDataSourceFileName, String apiDir,
+		String implDir, String jsonFileName, String sqlDir, String sqlFileName,
+		String baseModelImplPackage, String basePersistencePackage,
+		String beanLocatorUtilPackage, String propsUtilPackage,
+		String springHibernatePackage, String springUtilPackage,
+		boolean build) {
 
 		try {
 			_badTableNames = ServiceBuilder.getBadTableNames();
@@ -466,12 +489,18 @@ public class ServiceBuilder {
 			_hbmFileName = hbmFileName;
 			_modelHintsFileName = modelHintsFileName;
 			_springFileName = springFileName;
-			_beanLocatorUtilClassName = beanLocatorUtilClassName;
+			_springDataSourceFileName = springDataSourceFileName;
 			_apiDir = apiDir;
 			_implDir = implDir;
 			_jsonFileName = jsonFileName;
 			_sqlDir = sqlDir;
 			_sqlFileName = sqlFileName;
+			_baseModelImplPackage = baseModelImplPackage;
+			_basePersistencePackage = basePersistencePackage;
+			_beanLocatorUtilPackage = beanLocatorUtilPackage;
+			_propsUtilPackage = propsUtilPackage;
+			_springHibernatePackage = springHibernatePackage;
+			_springUtilPackage = springUtilPackage;
 
 			SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -806,6 +835,18 @@ public class ServiceBuilder {
 				_createSQLSequences();
 
 				_createExceptions(exceptionList);
+
+				_createBaseModelImpl();
+				_createBasePersistence();
+				_createBeanLocatorUtil();
+				_createDynamicDialect();
+				_createFinderCache();
+				_createHibernateConfiguration();
+				_createHibernateUtil();
+				_createProps();
+				_createPropsUtil();
+				_createSpringDataSourceXML();
+				_createSpringUtil();
 			}
 		}
 		catch (Exception e) {
@@ -848,8 +889,11 @@ public class ServiceBuilder {
 
 			ServiceBuilder serviceBuilder = new ServiceBuilder(
 				refFileName, _hbmFileName, _modelHintsFileName, _springFileName,
-				_beanLocatorUtilClassName, _apiDir, _implDir, _jsonFileName,
-				_sqlDir, _sqlFileName, false);
+				_springDataSourceFileName, _apiDir, _implDir, _jsonFileName,
+				_sqlDir, _sqlFileName, _baseModelImplPackage,
+				_basePersistencePackage, _beanLocatorUtilPackage,
+				_propsUtilPackage, _springHibernatePackage, _springUtilPackage,
+				false);
 
 			Entity entity = serviceBuilder.getEntity(refEntity);
 
@@ -875,6 +919,143 @@ public class ServiceBuilder {
 		}
 
 		sm.append("} else {");
+	}
+
+	private void _createBaseModelImpl() throws IOException {
+		if (_baseModelImplPackage.equals("com.liferay.portal.model.impl")) {
+			return;
+		}
+
+		// Content
+
+		String content = StringUtil.read(getClass().getClassLoader(), "com/liferay/portal/tools/dependencies/BaseModelImpl.java");
+
+		content = StringUtil.replace(
+			content,
+			new String[] {
+				"package com.liferay.portal.model.impl;",
+				"import com.liferay.portal.util.PropsUtil;"
+			},
+			new String[] {
+				"package " + _baseModelImplPackage + ";",
+				"import " + _propsUtilPackage + ".PropsUtil;"
+			});
+
+		// Write file
+
+		File ejbFile = new File(_implDir + "/" + StringUtil.replace(_baseModelImplPackage, ".", "/") + "/BaseModelImpl.java");
+
+		FileUtil.write(ejbFile, content, true);
+	}
+
+	private void _createBasePersistence() throws IOException {
+		if (_basePersistencePackage.equals("com.liferay.portal.service.persistence")) {
+			return;
+		}
+
+		// Content
+
+		String content = StringUtil.read(getClass().getClassLoader(), "com/liferay/portal/tools/dependencies/BasePersistence.java");
+
+		content = StringUtil.replace(
+			content,
+			new String[] {
+				"package com.liferay.portal.service.persistence;",
+				"import com.liferay.portal.spring.hibernate."
+			},
+			new String[] {
+				"package " + _basePersistencePackage + ";",
+				"import " + _springHibernatePackage + "."
+			});
+
+		// Write file
+
+		File ejbFile = new File(_implDir + "/" + StringUtil.replace(_basePersistencePackage, ".", "/") + "/BasePersistence.java");
+
+		FileUtil.write(ejbFile, content, true);
+	}
+
+	private void _createBeanLocatorUtil() throws IOException {
+		if (_beanLocatorUtilPackage.equals("com.liferay.portal.kernel.bean")) {
+			return;
+		}
+
+		StringMaker sm = new StringMaker();
+
+		// Package
+
+		sm.append("package " + _beanLocatorUtilPackage + ";");
+
+		// Imports
+
+		sm.append("import " + _springUtilPackage + " .SpringUtil;");
+		sm.append("import com.liferay.util.CollectionFactory;");
+		sm.append("import java.util.Set;");
+		sm.append("import org.apache.commons.logging.Log;");
+		sm.append("import org.apache.commons.logging.LogFactory;");
+		sm.append("import org.springframework.context.ApplicationContext;");
+
+		// Class declaration
+
+		sm.append("public class BeanLocatorUtil {");
+
+		// Methods
+
+		sm.append("public static Object locate(String name) {");
+		sm.append("if (_beans.contains(name)) {");
+		sm.append("if (_log.isWarnEnabled()) {");
+		sm.append("_log.warn(\"Cache the reference to \" + name + \" for better performance\");");
+		sm.append("}");
+		sm.append("}");
+		sm.append("ApplicationContext ctx = SpringUtil.getContext();");
+		sm.append("if (_log.isDebugEnabled()) {");
+		sm.append("_log.debug(\"Locating \" + name);");
+		sm.append("}");
+		sm.append("Object obj = ctx.getBean(name);");
+		sm.append("_beans.add(name);");
+		sm.append("return obj;");
+		sm.append("}");
+
+		// Fields
+
+		sm.append("private static Log _log = LogFactory.getLog(BeanLocatorUtil.class);");
+
+		sm.append("private static Set _beans = CollectionFactory.getHashSet();");
+
+		// Class close brace
+
+		sm.append("}");
+
+		// Write file
+
+		File ejbFile = new File(_implDir + "/" + StringUtil.replace(_beanLocatorUtilPackage, ".", "/") + "/BeanLocatorUtil.java");
+
+		writeFile(ejbFile, sm.toString());
+	}
+
+	private void _createDynamicDialect() throws IOException {
+		if (_springHibernatePackage.equals("com.liferay.portal.spring.hibernate")) {
+			return;
+		}
+
+		// Content
+
+		String content = StringUtil.read(getClass().getClassLoader(), "com/liferay/portal/tools/dependencies/DynamicDialect.java");
+
+		content = StringUtil.replace(
+			content,
+			new String[] {
+				"package com.liferay.portal.spring.hibernate;"
+			},
+			new String[] {
+				"package " + _springHibernatePackage + ";"
+			});
+
+		// Write file
+
+		File ejbFile = new File(_implDir + "/" + StringUtil.replace(_springHibernatePackage, ".", "/") + "/DynamicDialect.java");
+
+		FileUtil.write(ejbFile, content, true);
 	}
 
 	private void _createEJBPK(Entity entity) throws IOException {
@@ -1319,6 +1500,33 @@ public class ServiceBuilder {
 		}
 	}
 
+	private void _createFinderCache() throws IOException {
+		if (_springHibernatePackage.equals("com.liferay.portal.spring.hibernate")) {
+			return;
+		}
+
+		// Content
+
+		String content = StringUtil.read(getClass().getClassLoader(), "com/liferay/portal/tools/dependencies/FinderCache.java");
+
+		content = StringUtil.replace(
+			content,
+			new String[] {
+				"package com.liferay.portal.spring.hibernate;",
+				"import com.liferay.portal.util.PropsUtil;"
+			},
+			new String[] {
+				"package " + _springHibernatePackage + ";",
+				"import " + _propsUtilPackage + ".PropsUtil;"
+			});
+
+		// Write file
+
+		File ejbFile = new File(_implDir + "/" + StringUtil.replace(_springHibernatePackage, ".", "/") + "/FinderCache.java");
+
+		FileUtil.write(ejbFile, content, true);
+	}
+
 	private void _createHBM(Entity entity) throws IOException {
 		File ejbFile = new File(_outputPath + "/service/persistence/" + entity.getName() + "HBM.java");
 
@@ -1475,6 +1683,62 @@ public class ServiceBuilder {
 		if (!oldContent.equals(newContent)) {
 			FileUtil.write(xmlFile, newContent);
 		}
+	}
+
+	private void _createHibernateConfiguration() throws IOException {
+		if (_springHibernatePackage.equals("com.liferay.portal.spring.hibernate")) {
+			return;
+		}
+
+		// Content
+
+		String content = StringUtil.read(getClass().getClassLoader(), "com/liferay/portal/tools/dependencies/HibernateConfiguration.java");
+
+		content = StringUtil.replace(
+			content,
+			new String[] {
+				"package com.liferay.portal.spring.hibernate;",
+				"import com.liferay.portal.util.PropsUtil;",
+				"extends TransactionAwareConfiguration"
+			},
+			new String[] {
+				"package " + _springHibernatePackage + ";",
+				"import " + _propsUtilPackage + ".PropsUtil;",
+				"extends org.springframework.orm.hibernate3.LocalSessionFactoryBean"
+			});
+
+		// Write file
+
+		File ejbFile = new File(_implDir + "/" + StringUtil.replace(_springHibernatePackage, ".", "/") + "/HibernateConfiguration.java");
+
+		FileUtil.write(ejbFile, content, true);
+	}
+
+	private void _createHibernateUtil() throws IOException {
+		if (_springHibernatePackage.equals("com.liferay.portal.spring.hibernate")) {
+			return;
+		}
+
+		// Content
+
+		String content = StringUtil.read(getClass().getClassLoader(), "com/liferay/portal/tools/dependencies/HibernateUtil.java");
+
+		content = StringUtil.replace(
+			content,
+			new String[] {
+				"package com.liferay.portal.spring.hibernate;",
+				"import com.liferay.portal.util.PropsUtil;"
+			},
+			new String[] {
+				"package " + _springHibernatePackage + ";",
+				"import " + _propsUtilPackage + ".PropsUtil;"
+			});
+
+		// Write file
+
+		File ejbFile = new File(_implDir + "/" + StringUtil.replace(_springHibernatePackage, ".", "/") + "/HibernateUtil.java");
+
+		FileUtil.write(ejbFile, content, true);
 	}
 
 	private void _createJSONJS() throws IOException {
@@ -1781,10 +2045,10 @@ public class ServiceBuilder {
 			sm.append("import " + _packagePath + ".service.persistence." + entity.getName() + "PK;");
 		}
 
+		sm.append("import " + _baseModelImplPackage + ".BaseModelImpl;");
+		sm.append("import " + _propsUtilPackage + ".PropsUtil;");
 		sm.append("import com.liferay.portal.kernel.util.DateUtil;");
 		sm.append("import com.liferay.portal.kernel.util.GetterUtil;");
-		sm.append("import com.liferay.portal.model.impl.BaseModelImpl;");
-		sm.append("import com.liferay.portal.util.PropsUtil;");
 		sm.append("import com.liferay.util.XSSUtil;");
 		sm.append("import java.io.Serializable;");
 		sm.append("import java.sql.Types;");
@@ -2398,6 +2662,9 @@ public class ServiceBuilder {
 		sm.append("import " + _packagePath + "." + _getNoSuchEntityException(entity) + "Exception;");
 		sm.append("import " + _packagePath + ".model." + entity.getName() + ";");
 		sm.append("import " + _packagePath + ".model.impl." + entity.getName() + "Impl;");
+		sm.append("import " + _basePersistencePackage + ".BasePersistence;");
+		sm.append("import " + _springHibernatePackage + ".FinderCache;");
+		sm.append("import " + _springHibernatePackage + ".HibernateUtil;");
 		sm.append("import com.liferay.portal.PortalException;");
 		sm.append("import com.liferay.portal.SystemException;");
 		sm.append("import com.liferay.portal.kernel.dao.DynamicQuery;");
@@ -2405,9 +2672,6 @@ public class ServiceBuilder {
 		sm.append("import com.liferay.portal.kernel.util.OrderByComparator;");
 		sm.append("import com.liferay.portal.kernel.util.StringMaker;");
 		sm.append("import com.liferay.portal.kernel.util.StringPool;");
-		sm.append("import com.liferay.portal.service.persistence.BasePersistence;");
-		sm.append("import com.liferay.portal.spring.hibernate.FinderCache;");
-		sm.append("import com.liferay.portal.spring.hibernate.HibernateUtil;");
 		sm.append("import com.liferay.util.dao.hibernate.QueryPos;");
 		sm.append("import com.liferay.util.dao.hibernate.QueryUtil;");
 		sm.append("import java.sql.ResultSet;");
@@ -4502,10 +4766,10 @@ public class ServiceBuilder {
 
 		// Imports
 
+		sm.append("import " + _propsUtilPackage + ".PropsUtil;");
 		sm.append("import com.liferay.portal.kernel.util.GetterUtil;");
 		sm.append("import com.liferay.portal.kernel.util.Validator;");
 		sm.append("import com.liferay.portal.model.ModelListener;");
-		sm.append("import com.liferay.portal.util.PropsUtil;");
 		sm.append("import org.apache.commons.logging.Log;");
 		sm.append("import org.apache.commons.logging.LogFactory;");
 
@@ -4650,7 +4914,7 @@ public class ServiceBuilder {
 
 		sm.append("private static " + entity.getName() + "Util _getUtil() {");
 		sm.append("if (_util == null) {");
-		sm.append("_util = (" + entity.getName() + "Util)" + _beanLocatorUtilClassName + ".locate(_UTIL);");
+		sm.append("_util = (" + entity.getName() + "Util)" + _beanLocatorUtilPackage + ".BeanLocatorUtil.locate(_UTIL);");
 		sm.append("}");
 		sm.append("return _util;");
 		sm.append("}");
@@ -4697,6 +4961,107 @@ public class ServiceBuilder {
 
 			ejbFile.delete();
 		}
+	}
+
+	private void _createProps() throws IOException {
+		if (_propsUtilPackage.equals("com.liferay.portal.util")) {
+			return;
+		}
+
+		// Content
+
+		String content = StringUtil.read(getClass().getClassLoader(), "com/liferay/portal/tools/dependencies/portlet-service.properties");
+
+		content = StringUtil.replace(
+			content,
+			new String[] {
+				"com.liferay.portal.spring.hibernate."
+			},
+			new String[] {
+				_springHibernatePackage + "."
+			});
+
+		// Write file
+
+		File ejbFile = new File(_implDir + "/portlet-service.properties");
+
+		FileUtil.write(ejbFile, content, true);
+	}
+
+	private void _createPropsUtil() throws IOException {
+		if (_propsUtilPackage.equals("com.liferay.portal.util")) {
+			return;
+		}
+
+		StringMaker sm = new StringMaker();
+
+		// Package
+
+		sm.append("package " + _propsUtilPackage + ";");
+
+		// Imports
+
+		sm.append("import com.germinus.easyconf.ComponentProperties;");
+		sm.append("import com.liferay.util.ExtPropertiesLoader;");
+		sm.append("import java.util.Properties;");
+
+		// Class declaration
+
+		sm.append("public class PropsUtil {");
+
+		// Fields
+
+		sm.append("public static final String SPRING_CONFIGS = \"spring.configs\";");
+
+		sm.append("public static final String SPRING_HIBERNATE_DATA_SOURCE = \"spring.hibernate.data.source\";");
+
+		sm.append("public static final String SPRING_HIBERNATE_SESSION_FACTORY = \"spring.hibernate.session.factory\";");
+
+		sm.append("public static final String HIBERNATE_CONFIGS = \"hibernate.configs\";");
+
+		sm.append("public static final String VALUE_OBJECT_FINDER_CACHE_ENABLED = \"value.object.finder.cache.enabled\";");
+
+		sm.append("public static final String XSS_ALLOW = \"xss.allow\";");
+
+		// Methods
+
+		sm.append("public static boolean containsKey(String key) {");
+		sm.append("return _getInstance().containsKey(key);");
+		sm.append("}");
+
+		sm.append("public static String get(String key) {");
+		sm.append("return _getInstance().get(key);");
+		sm.append("}");
+
+		sm.append("public static void set(String key, String value) {");
+		sm.append("_getInstance().set(key, value);");
+		sm.append("}");
+
+		sm.append("public static String[] getArray(String key) {");
+		sm.append("return _getInstance().getArray(key);");
+		sm.append("}");
+
+		sm.append("public static Properties getProperties() {");
+		sm.append("return _getInstance().getProperties();");
+		sm.append("}");
+
+		sm.append("public static ComponentProperties getComponentProperties() {");
+		sm.append("return _getInstance().getComponentProperties();");
+		sm.append("}");
+
+		sm.append("private static ExtPropertiesLoader _getInstance() {");
+		sm.append("return ExtPropertiesLoader.getInstance(\"portlet-service\");");
+		sm.append("}");
+
+		// Class close brace
+
+		sm.append("}");
+
+		// Write file
+
+		File ejbFile = new File(_implDir + "/" + StringUtil.replace(_propsUtilPackage, ".", "/") + "/PropsUtil.java");
+
+		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createRemotingXML() throws Exception {
@@ -4968,7 +5333,7 @@ public class ServiceBuilder {
 
 		sm.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getTxImpl() {");
 		sm.append("if (_txImpl == null) {");
-		sm.append("_txImpl = (" + entity.getName() + _getSessionTypeName(sessionType) + "Service)" + _beanLocatorUtilClassName + ".locate(_TX_IMPL);");
+		sm.append("_txImpl = (" + entity.getName() + _getSessionTypeName(sessionType) + "Service)" + _beanLocatorUtilPackage + ".BeanLocatorUtil.locate(_TX_IMPL);");
 		sm.append("}");
 		sm.append("return _txImpl;");
 		sm.append("}");
@@ -4979,7 +5344,7 @@ public class ServiceBuilder {
 
 		sm.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory _getFactory() {");
 		sm.append("if (_factory == null) {");
-		sm.append("_factory = (" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory)" + _beanLocatorUtilClassName + ".locate(_FACTORY);");
+		sm.append("_factory = (" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory)" + _beanLocatorUtilPackage + ".BeanLocatorUtil.locate(_FACTORY);");
 		sm.append("}");
 		sm.append("return _factory;");
 		sm.append("}");
@@ -5874,6 +6239,60 @@ public class ServiceBuilder {
 		}*/
 	}
 
+	private void _createSpringDataSourceXML() throws IOException {
+		if (Validator.isNull(_springDataSourceFileName)) {
+			return;
+		}
+
+		// Content
+
+		String content = StringUtil.read(getClass().getClassLoader(), "META-INF/data-source-spring.xml");
+
+		content = StringUtil.replace(
+			content,
+			new String[] {
+				"com.liferay.portal.spring.hibernate.",
+				"com.liferay.util.spring.jndi.JndiObjectFactoryBean"
+			},
+			new String[] {
+				_springHibernatePackage + ".",
+				"com.liferay.util.spring.jndi.PortalDataSourceFactoryBean"
+			});
+
+		// Write file
+
+		File ejbFile = new File(_springDataSourceFileName);
+
+		FileUtil.write(ejbFile, content, true);
+	}
+
+	private void _createSpringUtil() throws IOException {
+		if (_springHibernatePackage.equals("com.liferay.portal.spring.util")) {
+			return;
+		}
+
+		// Content
+
+		String content = StringUtil.read(getClass().getClassLoader(), "com/liferay/portal/tools/dependencies/SpringUtil.java");
+
+		content = StringUtil.replace(
+			content,
+			new String[] {
+				"package com.liferay.portal.spring.util;",
+				"import com.liferay.portal.util.PropsUtil;"
+			},
+			new String[] {
+				"package " + _springUtilPackage + ";",
+				"import " + _propsUtilPackage + ".PropsUtil;"
+			});
+
+		// Write file
+
+		File ejbFile = new File(_implDir + "/" + StringUtil.replace(_springUtilPackage, ".", "/") + "/SpringUtil.java");
+
+		FileUtil.write(ejbFile, content, true);
+	}
+
 	private void _createSpringXML() throws IOException {
 		StringMaker sm = new StringMaker();
 
@@ -6765,12 +7184,18 @@ public class ServiceBuilder {
 	private String _hbmFileName;
 	private String _modelHintsFileName;
 	private String _springFileName;
-	private String _beanLocatorUtilClassName;
+	private String _springDataSourceFileName;
 	private String _apiDir;
 	private String _implDir;
 	private String _jsonFileName;
 	private String _sqlDir;
 	private String _sqlFileName;
+	private String _baseModelImplPackage;
+	private String _basePersistencePackage;
+	private String _beanLocatorUtilPackage;
+	private String _propsUtilPackage;
+	private String _springHibernatePackage;
+	private String _springUtilPackage;
 	private String _portletName;
 	private String _portletShortName;
 	private String _portletPackageName;

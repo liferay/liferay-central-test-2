@@ -20,17 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.jndi;
+package com.liferay.util.spring.hibernate;
+
+import java.lang.reflect.Proxy;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.engine.SessionFactoryImplementor;
+
+import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 
 /**
- * <a href="JndiObjectFactoryBean.java.html"><b><i>View Source</i></b></a>
+ * <a href="TransactionAwareConfiguration.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated this class has been repackaged at
- * <code>com.liferay.util.spring.jndi</code>.
- *
  */
-public class JndiObjectFactoryBean
-	extends com.liferay.util.spring.jndi.JndiObjectFactoryBean {
+public class TransactionAwareConfiguration extends LocalSessionFactoryBean {
+
+	protected SessionFactory getTransactionAwareSessionFactoryProxy(
+		SessionFactory target) {
+
+		// LEP-2996
+
+		Class sessionFactoryInterface = SessionFactory.class;
+
+		if (target instanceof SessionFactoryImplementor) {
+			sessionFactoryInterface = SessionFactoryImplementor.class;
+		}
+
+		return (SessionFactory)Proxy.newProxyInstance(
+			sessionFactoryInterface.getClassLoader(),
+			new Class[] {sessionFactoryInterface},
+			new SessionFactoryInvocationHandler(target));
+	}
+
 }

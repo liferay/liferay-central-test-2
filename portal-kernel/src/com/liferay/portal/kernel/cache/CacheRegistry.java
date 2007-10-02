@@ -20,17 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.jndi;
+package com.liferay.portal.kernel.cache;
+
+import java.util.List;
+import java.util.Vector;
 
 /**
- * <a href="JndiObjectFactoryBean.java.html"><b><i>View Source</i></b></a>
+ * <a href="CacheRegistry.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated this class has been repackaged at
- * <code>com.liferay.util.spring.jndi</code>.
- *
  */
-public class JndiObjectFactoryBean
-	extends com.liferay.util.spring.jndi.JndiObjectFactoryBean {
+public class CacheRegistry {
+
+	public static boolean isActive() {
+		return _active;
+	}
+
+	public static void setActive(boolean active) {
+		_active = active;
+
+		if (!active) {
+			clear();
+		}
+	}
+
+	public static void clear() {
+		for (int i = 0; i < _registry.size(); i++) {
+			CacheRegistryItem item = (CacheRegistryItem)_registry.get(i);
+
+			item.invalidate();
+		}
+	}
+
+	public static void register(CacheRegistryItem item) {
+		_registry.add(item);
+	}
+
+	private static boolean _active = true;
+	private static List _registry = new Vector();
+
 }

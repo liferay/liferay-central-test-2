@@ -23,7 +23,9 @@
 package com.liferay.portal.events;
 
 import com.liferay.lock.service.LockServiceUtil;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -31,7 +33,6 @@ import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
-import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.tools.sql.DBUtil;
@@ -72,6 +73,22 @@ public class StartupAction extends SimpleAction {
 
 			Runtime.getRuntime().addShutdownHook(
 				new Thread(new ShutdownHook()));
+
+			// JNDI
+
+			try {
+				PortalJNDIUtil.getDataSource();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+
+			try {
+				PortalJNDIUtil.getMailSession();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 
 			// Disable database caching before upgrade
 

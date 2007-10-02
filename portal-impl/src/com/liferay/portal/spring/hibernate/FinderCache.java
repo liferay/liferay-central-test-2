@@ -22,6 +22,9 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.kernel.cache.CacheKVP;
+import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.CacheRegistryItem;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -46,7 +49,7 @@ import org.hibernate.SessionFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class FinderCache {
+public class FinderCache implements CacheRegistryItem {
 
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.VALUE_OBJECT_FINDER_CACHE_ENABLED), true);
@@ -54,22 +57,81 @@ public class FinderCache {
 	public static final String CACHE_NAME = FinderCache.class.getName();
 
 	public static void clearCache() {
-		_cache.removeAll();
+		_instance._clearCache();
 	}
 
 	public static void clearCache(String className) {
-		String groupKey = _encodeGroupKey(className);
-
-		MultiVMPoolUtil.clearGroup(_groups, groupKey, _cache);
+		_instance._clearCache(className);
 	}
 
 	public static Object getResult(
 		String className, String methodName, String[] params, Object[] args) {
 
-		return getResult(className, methodName, params, args, null);
+		return _instance._getResult(className, methodName, params, args);
 	}
 
 	public static Object getResult(
+		String className, String methodName, String[] params, Object[] args,
+		SessionFactory sessionFactory) {
+
+		return _instance._getResult(
+			className, methodName, params, args, sessionFactory);
+	}
+
+	public static Object getResult(
+		String sql, String[] classNames, String methodName, String[] params,
+		Object[] args) {
+
+		return _instance._getResult(sql, classNames, methodName, params, args);
+	}
+
+	public static Object getResult(
+		String sql, String[] classNames, String methodName, String[] params,
+		Object[] args, SessionFactory sessionFactory) {
+
+		return _instance._getResult(
+			sql, classNames, methodName, params, args, sessionFactory);
+	}
+
+	public static void putResult(
+		String className, String methodName, String[] params, Object[] args,
+		Object result) {
+
+		_instance._putResult(className, methodName, params, args, result);
+	}
+
+	public static void putResult(
+		String sql, String[] classNames, String methodName, String[] params,
+		Object[] args, Object result) {
+
+		_instance._putResult(sql, classNames, methodName, params, args, result);
+	}
+
+	public void invalidate() {
+		_clearCache();
+	}
+
+	private FinderCache() {
+		CacheRegistry.register(this);
+	}
+
+	private void _clearCache() {
+		_cache.removeAll();
+	}
+
+	private void _clearCache(String className) {
+		String groupKey = _encodeGroupKey(className);
+
+		MultiVMPoolUtil.clearGroup(_groups, groupKey, _cache);
+	}
+
+	private Object _getResult(
+		String className, String methodName, String[] params, Object[] args) {
+
+		return _getResult(className, methodName, params, args, null);
+	}
+
+	private Object _getResult(
 		String className, String methodName, String[] params, Object[] args,
 		SessionFactory sessionFactory) {
 
@@ -94,14 +156,14 @@ public class FinderCache {
 		}
 	}
 
-	public static Object getResult(
+	private Object _getResult(
 		String sql, String[] classNames, String methodName, String[] params,
 		Object[] args) {
 
-		return getResult(sql, classNames, methodName, params, args, null);
+		return _getResult(sql, classNames, methodName, params, args, null);
 	}
 
-	public static Object getResult(
+	private Object _getResult(
 		String sql, String[] classNames, String methodName, String[] params,
 		Object[] args, SessionFactory sessionFactory) {
 
@@ -126,7 +188,7 @@ public class FinderCache {
 		}
 	}
 
-	public static void putResult(
+	private void _putResult(
 		String className, String methodName, String[] params, Object[] args,
 		Object result) {
 
@@ -152,7 +214,7 @@ public class FinderCache {
 		}
 	}
 
-	public static void putResult(
+	private void _putResult(
 		String sql, String[] classNames, String methodName, String[] params,
 		Object[] args, Object result) {
 
@@ -188,7 +250,7 @@ public class FinderCache {
 		}
 	}
 
-	private static String _encodeGroupKey(String className) {
+	private String _encodeGroupKey(String className) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(CACHE_NAME);
@@ -198,7 +260,7 @@ public class FinderCache {
 		return sm.toString();
 	}
 
-	private static String _encodeKey(
+	private String _encodeKey(
 		String className, String methodName, String[] params, Object[] args) {
 
 		StringMaker sm = new StringMaker();
@@ -229,14 +291,14 @@ public class FinderCache {
 		return sm.toString();
 	}
 
-	private static Object _primaryKeyToResult(
+	private Object _primaryKeyToResult(
 		Session session, Object primaryKey) {
 
-		if (primaryKey instanceof FinderCachePK) {
-			FinderCachePK finderCachePK = (FinderCachePK)primaryKey;
+		if (primaryKey instanceof CacheKVP) {
+			CacheKVP cacheKVP = (CacheKVP)primaryKey;
 
-			Class modelClass = finderCachePK.getModelClass();
-			Serializable primaryKeyObj = finderCachePK.getPrimaryKeyObj();
+			Class modelClass = cacheKVP.getModelClass();
+			Serializable primaryKeyObj = cacheKVP.getPrimaryKeyObj();
 
 			return session.load(modelClass, primaryKeyObj);
 		}
@@ -258,14 +320,14 @@ public class FinderCache {
 		}
 	}
 
-	private static Object _resultToPrimaryKey(Object result) {
+	private Object _resultToPrimaryKey(Object result) {
 		if (result instanceof BaseModel) {
 			BaseModel model = (BaseModel)result;
 
 			Class modelClass = model.getClass();
 			Serializable primaryKeyObj = model.getPrimaryKeyObj();
 
-			return new FinderCachePK(modelClass, primaryKeyObj);
+			return new CacheKVP(modelClass, primaryKeyObj);
 		}
 		else if (result instanceof List) {
 			List list = (ArrayList)result;
@@ -289,8 +351,10 @@ public class FinderCache {
 
 	private static final String _PARAMS_SEPARATOR = "_PARAMS_SEPARATOR_";
 
-	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
+	private static FinderCache _instance = new FinderCache();
 
-	private static Map _groups = CollectionFactory.getSyncHashMap();
+	private PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
+
+	private Map _groups = CollectionFactory.getSyncHashMap();
 
 }

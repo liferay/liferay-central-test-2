@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.spring;
+package com.liferay.util.spring.jndi;
 
 import com.liferay.util.JNDIUtil;
 

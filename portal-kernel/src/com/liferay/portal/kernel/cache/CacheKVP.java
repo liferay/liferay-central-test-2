@@ -20,17 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.jndi;
+package com.liferay.portal.kernel.cache;
+
+import java.io.Serializable;
 
 /**
- * <a href="JndiObjectFactoryBean.java.html"><b><i>View Source</i></b></a>
+ * <a href="CacheKVP.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated this class has been repackaged at
- * <code>com.liferay.util.spring.jndi</code>.
- *
  */
-public class JndiObjectFactoryBean
-	extends com.liferay.util.spring.jndi.JndiObjectFactoryBean {
+public class CacheKVP implements Serializable {
+
+	public CacheKVP(Class modelClass, Serializable primaryKeyObj) {
+		_modelClass = modelClass;
+		_primaryKeyObj = primaryKeyObj;
+	}
+
+	public Class getModelClass() {
+		return _modelClass;
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return _primaryKeyObj;
+	}
+
+	private Class _modelClass;
+	private Serializable _primaryKeyObj;
+
 }

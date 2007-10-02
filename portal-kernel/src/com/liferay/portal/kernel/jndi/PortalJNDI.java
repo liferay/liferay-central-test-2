@@ -20,30 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.hibernate;
+package com.liferay.portal.kernel.jndi;
+
+import javax.mail.Session;
+
+import javax.naming.NamingException;
+
+import javax.sql.DataSource;
 
 /**
- * <a href="DynamicDialectException.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalJNDI.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DynamicDialectException extends RuntimeException {
+public interface PortalJNDI {
 
-	public DynamicDialectException() {
-		super();
-	}
+	public DataSource getDataSource() throws NamingException;
 
-	public DynamicDialectException(String msg) {
-		super(msg);
-	}
-
-	public DynamicDialectException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public DynamicDialectException(Throwable cause) {
-		super(cause);
-	}
+	public Session getMailSession() throws NamingException;
 
 }

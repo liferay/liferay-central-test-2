@@ -22,42 +22,21 @@
 
 package com.liferay.portal.spring.context;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 /**
  * <a href="LazyClassPathApplicationContext.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated this class has been repackaged at
+ * <code>com.liferay.util.spring.context</code>.
+ *
  */
 public class LazyClassPathApplicationContext
-	extends ClassPathXmlApplicationContext {
+	extends com.liferay.util.spring.context.LazyClassPathApplicationContext {
 
 	public LazyClassPathApplicationContext(String[] configLocations) {
 		super(configLocations);
 	}
-
-	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
-		String[] configLocations = getConfigLocations();
-
-		if (configLocations != null) {
-			for (int i = 0; i < configLocations.length; i++) {
-				try {
-					reader.loadBeanDefinitions(configLocations[i]);
-				}
-				catch (Exception e) {
-					_log.warn(e);
-				}
-			}
-		}
-	}
-
-	private static Log _log =
-		LogFactory.getLog(LazyClassPathApplicationContext.class);
 
 }

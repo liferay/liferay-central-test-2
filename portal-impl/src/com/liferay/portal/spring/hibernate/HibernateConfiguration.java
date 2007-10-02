@@ -24,20 +24,15 @@ package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.spring.hibernate.TransactionAwareConfiguration;
 
 import java.io.InputStream;
-
-import java.lang.reflect.Proxy;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
-import org.hibernate.engine.SessionFactoryImplementor;
-
-import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 
 /**
  * <a href="HibernateConfiguration.java.html"><b><i>View Source</i></b></a>
@@ -45,24 +40,7 @@ import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
  * @author Brian Wing Shun Chan
  *
  */
-public class HibernateConfiguration extends LocalSessionFactoryBean {
-
-	protected SessionFactory getTransactionAwareSessionFactoryProxy(
-		SessionFactory target) {
-
-		// LEP-2996
-
-		Class sessionFactoryInterface = SessionFactory.class;
-
-		if (target instanceof SessionFactoryImplementor) {
-			sessionFactoryInterface = SessionFactoryImplementor.class;
-		}
-
-		return (SessionFactory)Proxy.newProxyInstance(
-			sessionFactoryInterface.getClassLoader(),
-			new Class[] {sessionFactoryInterface},
-			new SessionFactoryInvocationHandler(target));
-	}
+public class HibernateConfiguration extends TransactionAwareConfiguration {
 
 	protected Configuration newConfiguration() {
 		Configuration cfg = new Configuration();
@@ -99,10 +77,10 @@ public class HibernateConfiguration extends LocalSessionFactoryBean {
 
 	protected void postProcessConfiguration(Configuration cfg) {
 
-		// Make sure that settings in portal.properties are set. See
-		// the buildSessionFactory implementation in the
-		// LocalSessionFactoryBean class to understand how Spring automates a
-		// lot of configuration for Hibernate.
+		// Make sure that the Hibernate settings from PropsUtil are set. See the
+		// buildSessionFactory implementation in the LocalSessionFactoryBean
+		// class to understand how Spring automates a lot of configuration for
+		// Hibernate.
 
 		String connectionReleaseMode = PropsUtil.get(
 			Environment.RELEASE_CONNECTIONS);

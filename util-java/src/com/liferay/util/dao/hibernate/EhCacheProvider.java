@@ -20,17 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.jndi;
+package com.liferay.util.dao.hibernate;
 
 /**
- * <a href="JndiObjectFactoryBean.java.html"><b><i>View Source</i></b></a>
+ * <a href="EhCacheProvider.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated this class has been repackaged at
- * <code>com.liferay.util.spring.jndi</code>.
- *
  */
-public class JndiObjectFactoryBean
-	extends com.liferay.util.spring.jndi.JndiObjectFactoryBean {
+public class EhCacheProvider extends CacheProviderWrapper {
+
+	public EhCacheProvider() {
+		super("net.sf.ehcache.hibernate.EhCacheProvider");
+	}
+
 }

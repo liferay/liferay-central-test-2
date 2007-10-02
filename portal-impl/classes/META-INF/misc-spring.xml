@@ -14,6 +14,12 @@
 			<ref bean="com.liferay.portal.cache.SingleVMPoolImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.jndi.PortalJNDIImpl" class="com.liferay.portal.jndi.PortalJNDIImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.jndi.PortalJNDIUtil" class="com.liferay.portal.kernel.jndi.PortalJNDIUtil" lazy-init="true">
+		<property name="portalJNDI">
+			<ref bean="com.liferay.portal.jndi.PortalJNDIImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.language.LanguageImpl" class="com.liferay.portal.language.LanguageImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.language.LanguageUtil" class="com.liferay.portal.kernel.language.LanguageUtil" lazy-init="true">
 		<property name="language">

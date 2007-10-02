@@ -22,27 +22,9 @@
 			<then>
 				<delete file="${app.server.lib.portal.dir}/portal-impl.jar" />
 
-				<copy todir="${app.server.classes.portal.dir}/com/liferay/portal/definitions">
-					<fileset dir="${project.dir}/definitions" />
-				</copy>
-
-				<copy todir="${app.server.classes.portal.dir}/com/liferay/portal/deploy/dependencies">
-					<fileset
-						dir="${project.dir}/portal-web/docroot/WEB-INF/tld"
-						includes="*.tld"
-					/>
-				</copy>
-
-				<copy todir="${app.server.classes.portal.dir}/com/liferay/portal/tools/sql/dependencies">
-					<fileset
-						dir="${project.dir}/sql"
-						includes="portal-data-common.sql,portal-data-counter.sql,portal-data-release.sql,portal-data-sample.vm,portal-tables.sql,indexes.sql,sequences.sql,update-*.sql"
-					/>
-				</copy>
-
-				<copy todir="${app.server.classes.portal.dir}">
-					<fileset dir="src" includes="**/dependencies/**,**/service.xml" />
-				</copy>
+				<antcall target="compile-dependencies">
+					<param name="dependencies.classes.dir" value="${app.server.classes.portal.dir}" />
+				</antcall>
 
 				<copy todir="${app.server.classes.portal.dir}">
 					<fileset dir="classes" />
@@ -52,27 +34,9 @@
 				<antcall target="compile-fast" />
 			</then>
 			<else>
-				<copy todir="classes/com/liferay/portal/definitions">
-					<fileset dir="${project.dir}/definitions" />
-				</copy>
-
-				<copy todir="classes/com/liferay/portal/deploy/dependencies">
-					<fileset
-						dir="${project.dir}/portal-web/docroot/WEB-INF/tld"
-						includes="*.tld"
-					/>
-				</copy>
-
-				<copy todir="classes/com/liferay/portal/tools/sql/dependencies">
-					<fileset
-						dir="${project.dir}/sql"
-						includes="portal-data-common.sql,portal-data-counter.sql,portal-data-release.sql,portal-data-sample.vm,portal-tables.sql,indexes.sql,sequences.sql,update-*.sql"
-					/>
-				</copy>
-
-				<copy todir="classes">
-					<fileset dir="src" includes="**/dependencies/**,**/service.xml" />
-				</copy>
+				<antcall target="compile-dependencies">
+					<param name="dependencies.classes.dir" value="classes" />
+				</antcall>
 
 				<antcall target="compile-common" />
 				<antcall target="build-common-java.compile" />
@@ -122,6 +86,49 @@
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>
+	</target>
+
+	<target name="compile-dependencies">
+		<copy todir="${dependencies.classes.dir}/com/liferay/portal/definitions">
+			<fileset dir="${project.dir}/definitions" />
+		</copy>
+
+		<copy todir="${dependencies.classes.dir}/com/liferay/portal/deploy/dependencies">
+			<fileset
+				dir="${project.dir}/portal-web/docroot/WEB-INF/tld"
+				includes="*.tld"
+			/>
+		</copy>
+
+		<copy todir="${dependencies.classes.dir}/com/liferay/portal/tools/dependencies">
+			<fileset
+				dir="src/com/liferay/portal/model/impl"
+				includes="BaseModelImpl.java"
+			/>
+			<fileset
+				dir="src/com/liferay/portal/service/persistence"
+				includes="BasePersistence.java"
+			/>
+			<fileset
+				dir="src/com/liferay/portal/spring/hibernate"
+				includes="DynamicDialect.java,FinderCache.java,HibernateConfiguration.java,HibernateUtil.java"
+			/>
+			<fileset
+				dir="src/com/liferay/portal/spring/util"
+				includes="SpringUtil.java"
+			/>
+		</copy>
+
+		<copy todir="${dependencies.classes.dir}/com/liferay/portal/tools/sql/dependencies">
+			<fileset
+				dir="${project.dir}/sql"
+				includes="portal-data-common.sql,portal-data-counter.sql,portal-data-release.sql,portal-data-sample.vm,portal-tables.sql,indexes.sql,sequences.sql,update-*.sql"
+			/>
+		</copy>
+
+		<copy todir="${dependencies.classes.dir}">
+			<fileset dir="src" includes="**/dependencies/**,**/service.xml" />
+		</copy>
 	</target>
 
 	<target name="compile-fast">
@@ -443,17 +450,31 @@
 			maxmemory="256m"
 			newenvironment="true"
 		>
+			<!--<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
+			<arg value="${service.file}" />
+			<arg value="classes/META-INF/portal-hbm.xml" />
+			<arg value="classes/META-INF/portal-model-hints.xml" />
+			<arg value="classes/META-INF/portal-spring.xml" />
+			<arg value="com.liferay.portal.kernel.bean.BeanLocatorUtil" />
+			<arg value="${project.dir}/portal-service/src" />
+			<arg value="${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js" />-->
+
 			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<jvmarg value="-Dservice.input.file=${service.file}" />
 			<jvmarg value="-Dservice.hbm.file=classes/META-INF/portal-hbm.xml" />
 			<jvmarg value="-Dservice.model.hints.file=classes/META-INF/portal-model-hints.xml" />
 			<jvmarg value="-Dservice.spring.file=classes/META-INF/portal-spring.xml" />
-			<jvmarg value="-Dservice.bean.locator.class=com.liferay.portal.kernel.bean.BeanLocatorUtil" />
 			<jvmarg value="-Dservice.api.dir=${project.dir}/portal-service/src" />
 			<jvmarg value="-Dservice.impl.dir=src" />
 			<jvmarg value="-Dservice.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js" />
 			<jvmarg value="-Dservice.sql.dir=../sql" />
 			<jvmarg value="-Dservice.sql.file=portal-tables.sql" />
+			<jvmarg value="-Dservice.base.model.impl.package=com.liferay.portal.model.impl" />
+			<jvmarg value="-Dservice.base.persistence.package=com.liferay.portal.service.persistence" />
+			<jvmarg value="-Dservice.bean.locator.util.package=com.liferay.portal.kernel.bean" />
+			<jvmarg value="-Dservice.props.util.package=com.liferay.portal.util" />
+			<jvmarg value="-Dservice.spring.hibernate.package=com.liferay.portal.spring.hibernate" />
+			<jvmarg value="-Dservice.spring.util.package=com.liferay.portal.spring.util" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />

@@ -20,17 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.jndi;
+package com.liferay.util.spring.jndi;
+
+import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.config.AbstractFactoryBean;
 
 /**
- * <a href="JndiObjectFactoryBean.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalDataSourceFactoryBean.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated this class has been repackaged at
- * <code>com.liferay.util.spring.jndi</code>.
- *
  */
-public class JndiObjectFactoryBean
-	extends com.liferay.util.spring.jndi.JndiObjectFactoryBean {
+public class PortalDataSourceFactoryBean extends AbstractFactoryBean {
+
+	public Class getObjectType() {
+		return DataSource.class;
+	}
+
+	protected Object createInstance() throws Exception {
+		return PortalJNDIUtil.getDataSource();
+	}
+
 }

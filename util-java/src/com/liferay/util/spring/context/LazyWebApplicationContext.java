@@ -20,32 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.hibernate;
+package com.liferay.util.spring.context;
 
-import java.io.Serializable;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
- * <a href="FinderCachePK.java.html"><b><i>View Source</i></b></a>
+ * <a href="LazyWebApplicationContext.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class FinderCachePK implements Serializable {
+public class LazyWebApplicationContext extends XmlWebApplicationContext {
 
-	public FinderCachePK(Class modelClass, Serializable primaryKeyObj) {
-		_modelClass = modelClass;
-		_primaryKeyObj = primaryKeyObj;
+	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
+		String[] configLocations = getConfigLocations();
+
+		if (configLocations != null) {
+			for (int i = 0; i < configLocations.length; i++) {
+				try {
+					reader.loadBeanDefinitions(configLocations[i]);
+				}
+				catch (Exception e) {
+					_log.warn(e);
+				}
+			}
+		}
 	}
 
-	public Class getModelClass() {
-		return _modelClass;
-	}
-
-	public Serializable getPrimaryKeyObj() {
-		return _primaryKeyObj;
-	}
-
-	private Class _modelClass;
-	private Serializable _primaryKeyObj;
+	private static Log _log =
+		LogFactory.getLog(LazyWebApplicationContext.class);
 
 }
