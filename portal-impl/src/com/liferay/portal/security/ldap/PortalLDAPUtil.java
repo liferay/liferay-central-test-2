@@ -727,11 +727,15 @@ public class PortalLDAPUtil {
 		// Import user groups and membership
 
 		if (importGroupMembership && (user != null)) {
-			Attribute attr = attrs.get(userMappings.getProperty("group"));
-
-			if (attr != null){
-				_importGroupsAndMembershipFromLDAPUser(
-					companyId, ctx, user.getUserId(), attr);
+			String userMappingsGroup = userMappings.getProperty("group");
+			
+			if (userMappingsGroup != null) {
+				Attribute attr = attrs.get(userMappingsGroup);
+	
+				if (attr != null){
+					_importGroupsAndMembershipFromLDAPUser(
+						companyId, ctx, user.getUserId(), attr);
+				}
 			}
 		}
 
