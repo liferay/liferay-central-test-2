@@ -41,6 +41,48 @@ Liferay = function() {
 	return {};
 }();
 
+Liferay.Service = {
+	url: themeDisplay.getPathMain() + "/portal/json_service",
+
+	classNameSuffix: "ServiceJSON",
+
+	ajax: function(params, callback) {
+		params.serviceParameters = Liferay.Service.getParameters(params);
+
+		if (callback) {
+			jQuery.getJSON(Liferay.Service.url, params, callback);
+		}
+		else {
+			var xHR = jQuery.ajax(
+				{
+					url: Liferay.Service.url,
+					data: params,
+					dataType: 'json',
+					async: false
+				}
+			);
+
+			return eval("(" + xHR.responseText + ")");
+		}
+	},
+
+	getParameters: function(params) {
+		var serviceParameters = "";
+
+		for (var key in params) {
+			if ((key != "serviceClassName") && (key != "serviceMethodName")) {
+				serviceParameters += key + ",";
+			}
+		}
+
+		if (Liferay.Util.endsWith(serviceParameters, ",")) {
+			serviceParameters = serviceParameters.substring(0, serviceParameters.length - 1);
+		}
+
+		return serviceParameters;
+	}
+};
+
 jQuery.fn.exactHeight = jQuery.fn.height;
 jQuery.fn.exactWidth = jQuery.fn.width;
 
