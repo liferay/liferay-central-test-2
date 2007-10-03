@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
@@ -47,6 +46,7 @@ import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.ContextReplace;
 import com.liferay.util.ListUtil;
+import com.liferay.util.Version;
 import com.liferay.util.xml.XMLSafeReader;
 
 import java.io.IOException;
@@ -344,20 +344,12 @@ public class ThemeLocalUtil {
 		return themes;
 	}
 
-	private static String _getVersion(String version) {
+	private static Version _getVersion(String version) {
 		if (version.equals("${current-version}")) {
 			version = ReleaseInfo.getVersion();
 		}
 
-		int x = version.indexOf(StringPool.PERIOD);
-		int y = version.indexOf(StringPool.PERIOD, x + 1);
-
-		if ((x == -1) || (y == -1)) {
-			return version;
-		}
-		else {
-			return version.substring(0, y);
-		}
+		return Version.getInstance(version);
 	}
 
 	private static void _readColorSchemes(
@@ -437,7 +429,9 @@ public class ThemeLocalUtil {
 
 		Element root = doc.getRootElement();
 
-		Set compatibleVersions = new HashSet();
+		Version portalVersion = _getVersion(ReleaseInfo.getVersion());
+
+		boolean compatible = false;
 
 		Element compatibilityEl = root.element("compatibility");
 
@@ -447,17 +441,17 @@ public class ThemeLocalUtil {
 			while (itr.hasNext()) {
 				Element versionEl = (Element)itr.next();
 
-				String version = versionEl.getTextTrim();
+				Version version = _getVersion(versionEl.getTextTrim());
 
-				version = _getVersion(version);
+				if (version.includes(portalVersion)) {
+					compatible = true;
 
-				compatibleVersions.add(version);
+					break;
+				}
 			}
 		}
 
-		if (!compatibleVersions.contains(
-				_getVersion(ReleaseInfo.getVersion()))) {
-
+		if (!compatible) {
 			_log.error(
 				"Themes in this WAR are not compatible with " +
 					ReleaseInfo.getServerInfo());

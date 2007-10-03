@@ -24,6 +24,7 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.TextFormatter;
 
@@ -269,6 +270,9 @@ public class ThemeDeployer extends BaseDeployer {
 
 		filterMap.put("theme_id", themeId);
 		filterMap.put("theme_name", themeName);
+		filterMap.put(
+			"theme_versions",
+			StringUtil.replace(liferayVersions, "liferay-version", "version"));
 
 		copyDependencyXml(
 			"liferay-look-and-feel.xml", srcFile + "/WEB-INF", filterMap, true);
