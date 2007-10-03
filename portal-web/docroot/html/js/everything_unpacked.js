@@ -14534,12 +14534,14 @@ Liferay.Util = {
 						try {
 							if (!el.is('iframe')) {
 								el = eval(elString);
+
 								if (!el.jquery) {
 									el = jQuery(el);
 								}
 							}
 						}
-						catch (e) {}
+						catch (e) {
+						}
 					}
 
 					el.css(
@@ -17476,6 +17478,7 @@ Liferay.ColorPicker = new Class({
 			instance._columns = options.columnSelector;
 			instance._dropPosition = options.positionClass;
 			instance._dropArea = options.areaClass;
+			instance._grid = jQuery(options.grid);
 			instance._handle = options.handleSelector;
 			instance._onDrop = options.onComplete;
 			instance._portlets = options.boxSelector;
@@ -17524,7 +17527,7 @@ Liferay.ColorPicker = new Class({
 			var jColumns = instance._cache.columns;
 
 			if (!jColumns) {
-				jQuery(".lfr-column").addClass("dragging");
+				instance._grid.addClass('dragging');
 
 				jColumns = instance._cache.columns = jQuery(instance._columns);
 				instance._cache.columnData = [];
@@ -17761,7 +17764,7 @@ Liferay.ColorPicker = new Class({
 				}
 			}
 
-			jQuery(".lfr-column").removeClass("dragging");
+			instance._grid.removeClass("dragging");
 			instance._clearCache();
 		}
 	});
