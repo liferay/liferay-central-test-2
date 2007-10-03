@@ -100,113 +100,115 @@ else {
 		</c:choose>
 	</div>
 
-	<div class="search-pages">
-		<div class="page-selector">
-			<liferay-ui:message key="page" />
-
-			<select class="pages <%= namespace %>pageIteratorValue">
-
-				<%
-				for (int i = 1; i <= pages; i++) {
-				%>
-
-					<option <%= (i == curValue) ? "selected=\"selected\"" : "" %> value="<%= i %>"><%= i %></option>
-
-				<%
-				}
-				%>
-
-			</select>
-
-			<liferay-ui:message key="of" />
-
-			<%= pages %>
-
-			<input class="page-iterator-submit" type="submit" value="<liferay-ui:message key="submit" />" />
+	<c:if test="<%= total > delta %>">	
+		<div class="search-pages">
+			<div class="page-selector">
+				<liferay-ui:message key="page" />
+	
+				<select class="pages <%= namespace %>pageIteratorValue">
+	
+					<%
+					for (int i = 1; i <= pages; i++) {
+					%>
+	
+						<option <%= (i == curValue) ? "selected=\"selected\"" : "" %> value="<%= i %>"><%= i %></option>
+	
+					<%
+					}
+					%>
+	
+				</select>
+	
+				<liferay-ui:message key="of" />
+	
+				<%= pages %>
+	
+				<input class="page-iterator-submit" type="submit" value="<liferay-ui:message key="submit" />" />
+			</div>
+	
+			<div class="page-links">
+				<c:choose>
+					<c:when test="<%= curValue != 1 %>">
+						<a class="first" href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+					</c:when>
+					<c:otherwise>
+						<span class="first">
+					</c:otherwise>
+				</c:choose>
+	
+				<liferay-ui:message key="first" />
+	
+				<c:choose>
+					<c:when test="<%= curValue != 1 %>">
+						</a>
+					</c:when>
+					<c:otherwise>
+						</span>
+					</c:otherwise>
+				</c:choose>
+	
+				<c:choose>
+					<c:when test="<%= curValue != 1 %>">
+						<a class="previous" href="<%= _getHREF(formName, curParam, curValue - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+					</c:when>
+					<c:otherwise>
+						<span class="previous">
+					</c:otherwise>
+				</c:choose>
+	
+				<liferay-ui:message key="previous" />
+	
+				<c:choose>
+					<c:when test="<%= curValue != 1 %>">
+						</a>
+					</c:when>
+					<c:otherwise>
+						</span>
+					</c:otherwise>
+				</c:choose>
+	
+				<c:choose>
+					<c:when test="<%= curValue != pages %>">
+						<a class="next" href="<%= _getHREF(formName, curParam, curValue + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+					</c:when>
+					<c:otherwise>
+						<span class="next">
+					</c:otherwise>
+				</c:choose>
+	
+				<liferay-ui:message key="next" />
+	
+				<c:choose>
+					<c:when test="<%= curValue != pages %>">
+						</a>
+					</c:when>
+					<c:otherwise>
+						</span>
+					</c:otherwise>
+				</c:choose>
+	
+				<c:choose>
+					<c:when test="<%= curValue != pages %>">
+						<a class="last" href="<%= _getHREF(formName, curParam, pages, jsCall, url, urlAnchor) %>" target="<%= target %>">
+					</c:when>
+					<c:otherwise>
+						<span class="last">
+					</c:otherwise>
+				</c:choose>
+	
+				<liferay-ui:message key="last" />
+	
+				<c:choose>
+					<c:when test="<%= curValue != pages %>">
+						</a>
+					</c:when>
+					<c:otherwise>
+						</span>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		</div>
-
-		<div class="page-links">
-			<c:choose>
-				<c:when test="<%= curValue != 1 %>">
-					<a class="first" href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
-				</c:when>
-				<c:otherwise>
-					<span class="first">
-				</c:otherwise>
-			</c:choose>
-
-			<liferay-ui:message key="first" />
-
-			<c:choose>
-				<c:when test="<%= curValue != 1 %>">
-					</a>
-				</c:when>
-				<c:otherwise>
-					</span>
-				</c:otherwise>
-			</c:choose>
-
-			<c:choose>
-				<c:when test="<%= curValue != 1 %>">
-					<a class="previous" href="<%= _getHREF(formName, curParam, curValue - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
-				</c:when>
-				<c:otherwise>
-					<span class="previous">
-				</c:otherwise>
-			</c:choose>
-
-			<liferay-ui:message key="previous" />
-
-			<c:choose>
-				<c:when test="<%= curValue != 1 %>">
-					</a>
-				</c:when>
-				<c:otherwise>
-					</span>
-				</c:otherwise>
-			</c:choose>
-
-			<c:choose>
-				<c:when test="<%= curValue != pages %>">
-					<a class="next" href="<%= _getHREF(formName, curParam, curValue + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
-				</c:when>
-				<c:otherwise>
-					<span class="next">
-				</c:otherwise>
-			</c:choose>
-
-			<liferay-ui:message key="next" />
-
-			<c:choose>
-				<c:when test="<%= curValue != pages %>">
-					</a>
-				</c:when>
-				<c:otherwise>
-					</span>
-				</c:otherwise>
-			</c:choose>
-
-			<c:choose>
-				<c:when test="<%= curValue != pages %>">
-					<a class="last" href="<%= _getHREF(formName, curParam, pages, jsCall, url, urlAnchor) %>" target="<%= target %>">
-				</c:when>
-				<c:otherwise>
-					<span class="last">
-				</c:otherwise>
-			</c:choose>
-
-			<liferay-ui:message key="last" />
-
-			<c:choose>
-				<c:when test="<%= curValue != pages %>">
-					</a>
-				</c:when>
-				<c:otherwise>
-					</span>
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</div>
+	</c:if>
 </div>
 
 <%!
