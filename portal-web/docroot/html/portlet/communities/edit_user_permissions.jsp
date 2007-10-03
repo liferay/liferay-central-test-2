@@ -278,8 +278,6 @@ Assign permissions to users.
 				%>
 
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 			</c:when>
 			<c:otherwise>
 
@@ -483,8 +481,6 @@ Assign permissions to users.
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:otherwise>
 </c:choose>
 

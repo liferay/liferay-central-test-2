@@ -149,8 +149,6 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
 <c:if test="<%= category != null %>">
 	<br />
 </c:if>
@@ -347,8 +345,6 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 	</c:if>
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 	</form>
 

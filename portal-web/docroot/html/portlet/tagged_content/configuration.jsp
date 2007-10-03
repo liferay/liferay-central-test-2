@@ -241,8 +241,6 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-						<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
 						<br />
 
 						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />

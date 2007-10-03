@@ -152,8 +152,6 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("organizations") %>'>
 		<input name="<portlet:namespace />addOrganizationIds" type="hidden" value="" />
@@ -250,8 +248,6 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>
 

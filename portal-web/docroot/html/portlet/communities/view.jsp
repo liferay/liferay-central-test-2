@@ -266,8 +266,6 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	%>
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 </c:if>
 
 </form>

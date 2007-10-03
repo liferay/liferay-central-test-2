@@ -138,8 +138,6 @@ try {
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
 <%
 }
 catch (Exception e) {

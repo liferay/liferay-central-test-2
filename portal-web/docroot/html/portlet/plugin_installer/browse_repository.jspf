@@ -303,8 +303,6 @@ try {
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
 	<div class="separator"><!-- --></div>
 
 	<div>

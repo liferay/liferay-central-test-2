@@ -196,8 +196,6 @@ List updatablePackageIds = new ArrayList();
 
 					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-					<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
 					<liferay-ui:upload-progress
 						id="<%= uploadProgressId %>"
 						message="downloading"

@@ -121,20 +121,11 @@ try {
 	}
 %>
 
-	<table border="0" cellpadding="0" cellspacing="0" width="100%">
-	<tr>
-		<td>
-			<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
+	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" />
 
-			<input type="submit" value="<liferay-ui:message key="search-pages" />" />
-		</td>
-		<td align="right">
-			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-		</td>
-	</tr>
-	</table>
+	<input type="submit" value="<liferay-ui:message key="search-pages" />" />
 
-	<br />
+	<br /><br />
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 

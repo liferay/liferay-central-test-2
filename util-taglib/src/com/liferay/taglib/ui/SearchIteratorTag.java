@@ -22,6 +22,8 @@
 
 package com.liferay.taglib.ui;
 
+import javax.servlet.ServletRequest;
+
 /**
  * <a href="SearchIteratorTag.java.html"><b><i>View Source</i></b></a>
  *
@@ -30,11 +32,28 @@ package com.liferay.taglib.ui;
  */
 public class SearchIteratorTag extends SearchFormTag {
 
+	public int doStartTag() {
+		super.doStartTag();
+
+		ServletRequest req = pageContext.getRequest();
+
+		req.setAttribute(
+			"liferay-ui:search-iterator:paginate", String.valueOf(_paginate));
+
+		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setPaginate(boolean paginate) {
+		_paginate = paginate;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
 
 	private static final String _PAGE =
 		"/html/taglib/ui/search_iterator/page.jsp";
+
+	private boolean _paginate = true;
 
 }

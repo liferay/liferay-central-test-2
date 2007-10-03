@@ -355,8 +355,6 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		<br /><br />
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test="<%= (groupScopePos >= 0) && (groupScopeActionIdsArray.length > 0) %>">
 		<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
@@ -455,8 +453,6 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 		<br />
 
@@ -741,8 +737,6 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		</div>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:otherwise>
 </c:choose>
 

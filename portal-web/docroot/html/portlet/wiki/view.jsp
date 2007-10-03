@@ -123,8 +123,6 @@ boolean showAddNodeButton = PortletPermissionUtil.contains(permissionChecker, pl
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
 </form>
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">

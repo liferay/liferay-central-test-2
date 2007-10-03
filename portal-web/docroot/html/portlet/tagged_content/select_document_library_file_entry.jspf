@@ -163,8 +163,6 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
 		<br />
 	</c:when>
 	<c:otherwise>
@@ -243,8 +241,6 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 		<br />
 
@@ -332,8 +328,6 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 			%>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 			<br />
 		</c:if>

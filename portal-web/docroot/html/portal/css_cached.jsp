@@ -640,12 +640,84 @@ ul.gamma .tree-item-hover {
 	font-weight: bold;
 }
 
-.taglib-search-results {
-	clear: both;
-	float: left;
-	font-weight: normal;
+.taglib-search-iterator-page-iterator-top {
 	padding-bottom: 5px;
+}
+
+.taglib-search-iterator-page-iterator-bottom {
+	padding-top: 5px;
+}
+
+.taglib-page-iterator {
+	clear: both;
+	height: auto;
+	overflow: auto;
 	width: auto;
+}
+
+.taglib-page-iterator .search-results {
+	float: left;
+}
+
+.taglib-page-iterator .search-pages {
+	float: right;
+}
+
+.js .page-iterator-submit {
+	display: none;
+}
+
+.taglib-page-iterator .search-pages .page-links a, .taglib-page-iterator .search-pages .page-links span {
+	background: url() no-repeat 0 0;
+	border-left: 1px solid #ccc;
+	padding: 2px 15px;
+}
+
+.taglib-page-iterator .search-pages .page-links span {
+	background-position: 0 100%;
+}
+
+.taglib-page-iterator .search-pages .page-links a.first, .taglib-page-iterator .search-pages .page-links span.first {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/paging_first.png);
+	border-left: none;
+}
+
+.taglib-page-iterator .search-pages .page-links a.previous, .taglib-page-iterator .search-pages .page-links span.previous {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/paging_previous.png);
+}
+
+.taglib-page-iterator .search-pages .page-links a.next, .taglib-page-iterator .search-pages .page-links span.next {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/paging_next.png);
+}
+
+.taglib-page-iterator .search-pages .page-links a.last, .taglib-page-iterator .search-pages .page-links span.last {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/paging_last.png);
+}
+
+.taglib-page-iterator .search-pages .page-links a.first, .taglib-page-iterator .search-pages .page-links span.first, .taglib-page-iterator .search-pages .page-links a.previous, .taglib-page-iterator .search-pages .page-links span.previous {
+	padding-right: 5px;
+}
+
+.taglib-page-iterator .search-pages .page-links a.next, .taglib-page-iterator .search-pages .page-links span.next, .taglib-page-iterator .search-pages .page-links a.last, .taglib-page-iterator .search-pages .page-links span.last {
+	background-position: 100% 0;
+	padding-left: 5px;
+}
+
+.taglib-page-iterator .search-pages .page-links span.first, .taglib-page-iterator .search-pages .page-links span.previous {
+	background-position: 0 100%;
+}
+
+.taglib-page-iterator .search-pages .page-links span.next, .taglib-page-iterator .search-pages .page-links span.last {
+	background-position: 100% 100%;
+}
+
+.taglib-page-iterator .search-pages .page-selector, .taglib-page-iterator .search-pages .page-links {
+	float: left;
+}
+
+.taglib-page-iterator .search-pages .page-selector {
+	margin-right: 10px;
+	padding-right: 10px;
 }
 
 /* ---------- Specific portlet styles ---------- */

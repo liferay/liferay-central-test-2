@@ -75,8 +75,6 @@ entries = ArrayUtil.distinct(entries, new StringComparator());
 	<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
 </form>
 
-<br />
-
 <%
 if (showQueryLogic) {
 	StringMaker tagsText = new StringMaker();
@@ -182,18 +180,13 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 					<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
 				</div>
 
+				<div class="separator"><!-- --></div>
+
 		<%
 			}
 			catch (Exception e) {
 				_log.error(e.getMessage());
 			}
-		%>
-
-			<c:if test="<%= (i + 1) < results.size() %>">
-				<div class="separator"><!-- --></div>
-			</c:if>
-
-		<%
 		}
 		%>
 
@@ -254,18 +247,13 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 					<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
 				</div>
 
+				<div class="separator"><!-- --></div>
+
 		<%
 			}
 			catch (Exception e) {
 				_log.error(e.getMessage());
 			}
-		%>
-
-			<c:if test="<%= (i + 1) < results.size() %>">
-				<div class="separator"><!-- --></div>
-			</c:if>
-
-		<%
 		}
 		%>
 

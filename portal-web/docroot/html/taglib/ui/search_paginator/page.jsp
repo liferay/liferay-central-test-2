@@ -29,12 +29,12 @@ SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay
 
 PortletURL iteratorURL = searchContainer.getIteratorURL();
 
-String url = Http.removeParameter(iteratorURL.toString(), namespace + searchContainer.getCurParam());
-%>
+String url = StringPool.BLANK;
 
-<c:if test="<%= searchContainer.getTotal() > searchContainer.getDelta() %>">
-	<br />
-</c:if>
+if (iteratorURL != null) {
+	url = Http.removeParameter(iteratorURL.toString(), namespace + searchContainer.getCurParam());
+}
+%>
 
 <liferay-ui:page-iterator
 	curParam="<%= searchContainer.getCurParam() %>"

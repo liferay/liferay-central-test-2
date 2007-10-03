@@ -395,8 +395,6 @@ else {
 				%>
 
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 			</c:when>
 			<c:otherwise>
 
@@ -600,8 +598,6 @@ else {
 				%>
 
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 			</c:when>
 			<c:otherwise>
 
@@ -788,8 +784,6 @@ else {
 				%>
 
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 			</c:when>
 			<c:otherwise>
 
@@ -961,8 +955,6 @@ else {
 				%>
 
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 			</c:when>
 			<c:otherwise>
 
@@ -1198,8 +1190,6 @@ else {
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>
 

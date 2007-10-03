@@ -42,33 +42,26 @@ public class PageIteratorTag extends TagSupport {
 		try {
 			_pages = (int)Math.ceil((double)_total / _delta);
 
-			if (_pages > 1) {
-				ServletRequest req = pageContext.getRequest();
+			ServletRequest req = pageContext.getRequest();
 
-				req.setAttribute(
-					"liferay-ui:page-iterator:formName", _formName);
-				req.setAttribute(
-					"liferay-ui:page-iterator:curParam", _curParam);
-				req.setAttribute(
-					"liferay-ui:page-iterator:curValue",
-					String.valueOf(_curValue));
-				req.setAttribute(
-					"liferay-ui:page-iterator:delta", String.valueOf(_delta));
-				req.setAttribute("liferay-ui:page-iterator:jsCall", _jsCall);
-				req.setAttribute(
-					"liferay-ui:page-iterator:maxPages",
-					String.valueOf(_maxPages));
-				req.setAttribute("liferay-ui:page-iterator:target", _target);
-				req.setAttribute(
-					"liferay-ui:page-iterator:total", String.valueOf(_total));
-				req.setAttribute("liferay-ui:page-iterator:url", _url);
-				req.setAttribute(
-					"liferay-ui:page-iterator:urlAnchor", _urlAnchor);
-				req.setAttribute(
-					"liferay-ui:page-iterator:pages", String.valueOf(_pages));
+			req.setAttribute("liferay-ui:page-iterator:formName", _formName);
+			req.setAttribute("liferay-ui:page-iterator:curParam", _curParam);
+			req.setAttribute(
+				"liferay-ui:page-iterator:curValue", String.valueOf(_curValue));
+			req.setAttribute(
+				"liferay-ui:page-iterator:delta", String.valueOf(_delta));
+			req.setAttribute("liferay-ui:page-iterator:jsCall", _jsCall);
+			req.setAttribute(
+				"liferay-ui:page-iterator:maxPages", String.valueOf(_maxPages));
+			req.setAttribute("liferay-ui:page-iterator:target", _target);
+			req.setAttribute(
+				"liferay-ui:page-iterator:total", String.valueOf(_total));
+			req.setAttribute("liferay-ui:page-iterator:url", _url);
+			req.setAttribute("liferay-ui:page-iterator:urlAnchor", _urlAnchor);
+			req.setAttribute(
+				"liferay-ui:page-iterator:pages", String.valueOf(_pages));
 
-				PortalIncludeUtil.include(pageContext, getStartPage());
-			}
+			PortalIncludeUtil.include(pageContext, getStartPage());
 
 			return EVAL_BODY_INCLUDE;
 		}

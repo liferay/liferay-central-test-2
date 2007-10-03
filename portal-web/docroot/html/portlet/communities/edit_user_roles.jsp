@@ -191,8 +191,6 @@ Assign <%= (group.isOrganization())?"Organization":"Community" %> roles to users
 			%>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</c:if>
 	</c:when>
 	<c:otherwise>
@@ -284,8 +282,6 @@ Assign <%= (group.isOrganization())?"Organization":"Community" %> roles to users
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:otherwise>
 </c:choose>
 

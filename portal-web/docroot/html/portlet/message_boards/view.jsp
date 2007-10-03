@@ -216,8 +216,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
 		<c:if test="<%= (category != null) && (showAddCategoryButton || (results.size() > 0)) %>">
 			<br />
 		</c:if>
@@ -377,8 +375,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
 			</form>
 
 			<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
@@ -533,8 +529,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("statistics") %>'>
 		<liferay-ui:tabs
@@ -631,8 +625,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				%>
 
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 			</c:when>
 		</c:choose>
 	</c:when>
@@ -694,7 +686,5 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>

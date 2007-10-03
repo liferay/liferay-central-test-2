@@ -114,8 +114,6 @@ for (int i = 0; i < results.size(); i++) {
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
 <c:if test="<%= results.size() > 0 %>">
 	<br />
 </c:if>
@@ -200,8 +198,6 @@ for (int i = 0; i < results.size(); i++) {
 	%>
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 </c:if>
 
 </form>

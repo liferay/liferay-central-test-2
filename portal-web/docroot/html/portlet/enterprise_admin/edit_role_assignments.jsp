@@ -152,8 +152,6 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("communities") %>'>
 		<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
@@ -225,8 +223,6 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("organizations") %>'>
 		<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
@@ -323,8 +319,6 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("user-groups") %>'>
 		<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
@@ -398,8 +392,6 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>
 

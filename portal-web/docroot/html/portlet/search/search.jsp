@@ -210,11 +210,13 @@ for (int i = 0; i < portlets.size(); i++) {
 		<b><%= portletTitle %></b>
 	</div>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 
 	<c:choose>
 		<c:when test="<%= i == 0 %>">
-			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+			<div class="taglib-search-iterator-page-iterator-bottom">
+				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+			</div>
 		</c:when>
 		<c:otherwise>
 			<div style="padding-top: 5px;">

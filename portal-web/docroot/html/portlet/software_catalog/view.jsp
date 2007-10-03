@@ -256,8 +256,6 @@ portletURL.setParameter("type", type);
 		<br />
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-products") %>'>
 
@@ -418,8 +416,6 @@ portletURL.setParameter("type", type);
 		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("framework-versions") %>'>
 
@@ -491,8 +487,6 @@ portletURL.setParameter("type", type);
 		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("licenses") %>'>
 
@@ -582,8 +576,6 @@ portletURL.setParameter("type", type);
 		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>
 

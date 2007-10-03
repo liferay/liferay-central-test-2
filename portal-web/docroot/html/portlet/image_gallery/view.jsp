@@ -174,8 +174,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
 		<c:if test="<%= folder != null %>">
 			<br />
 
@@ -246,8 +244,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</c:if>
 
 		</form>
@@ -309,7 +305,5 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>

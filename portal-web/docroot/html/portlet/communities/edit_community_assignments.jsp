@@ -209,8 +209,6 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				%>
 
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 			</c:when>
 			<c:otherwise>
 				<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= selectedUser.getUserId() %>" />
@@ -283,8 +281,6 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					%>
 
 					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-					<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 				</c:if>
 			</c:otherwise>
 		</c:choose>
@@ -384,8 +380,6 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("user-groups") %>'>
 		<input name="<portlet:namespace />addUserGroupIds" type="hidden" value="" />
@@ -457,8 +451,6 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>
 

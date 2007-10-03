@@ -27,6 +27,8 @@
 <%
 SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
 
+boolean paginate = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:search-iterator:paginate"));
+
 int start = searchContainer.getStart();
 int end = searchContainer.getEnd();
 int total = searchContainer.getTotal();
@@ -45,9 +47,11 @@ if (rowChecker != null) {
 %>
 
 <c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (searchContainer.getEmptyResultsMessage() != null)) %>">
-	<div class="taglib-search-results">
-		<%= LanguageUtil.format(pageContext, "showing-x-x-of-x-results", new Object[] {String.valueOf(start + 1), String.valueOf(end), String.valueOf(total)}) %>
-	</div>
+	<c:if test="<%= paginate %>">
+		<div class="taglib-search-iterator-page-iterator-top">
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+		</div>
+	</c:if>
 
 	<table class="taglib-search-iterator">
 	<tr class="portlet-section-header">
@@ -216,6 +220,12 @@ if (rowChecker != null) {
 	%>
 
 	</table>
+
+	<c:if test="<%= (resultRows.size() > 10) && paginate %>">
+		<div class="taglib-search-iterator-page-iterator-bottom">
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+		</div>
+	</c:if>
 
 	<c:if test="<%= (rowChecker != null) && (resultRows.size() > 0) && Validator.isNotNull(rowChecker.getAllRowsId()) && allRowsIsChecked %>">
 		<script type="text/javascript">

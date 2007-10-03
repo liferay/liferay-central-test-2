@@ -117,8 +117,6 @@ portletURL.setParameter("tabs1", tabs1);
 			%>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("instances") %>'>
@@ -215,8 +213,6 @@ portletURL.setParameter("tabs1", tabs1);
 			%>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("tasks") %>'>
@@ -329,8 +325,6 @@ portletURL.setParameter("tabs1", tabs1);
 			%>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</c:if>
 	</c:when>
 </c:choose>
