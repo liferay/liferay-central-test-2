@@ -148,8 +148,9 @@ public class ExtPropertiesLoader {
 
 		if (companyId > 0) {
 			try {
-				Company company =
-					CompanyLocalServiceUtil.getCompanyById(companyId);
+				Company company = CompanyLocalServiceUtil.getCompanyById(
+					companyId);
+
 				companyWebId = company.getWebId();
 			}
 			catch (Exception e) {
@@ -167,6 +168,7 @@ public class ExtPropertiesLoader {
 
 	private void _printSources(
 		String name, long companyId, String companyWebId) {
+
 		List sources = getComponentProperties().getLoadedSources();
 
 		for (int i = sources.size() - 1; i >= 0; i--) {
