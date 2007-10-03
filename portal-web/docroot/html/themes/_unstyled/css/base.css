@@ -103,6 +103,12 @@ body.staging {
 
 /* ---------- Drag Indicators ---------- */
 
+#content-wrapper #layout-grid.dragging {
+}
+
+#content-wrapper #layout-grid.dragging .lfr-column {
+}
+
 .drag-indicator {
 }
 

@@ -257,6 +257,7 @@
 				else {
 					Liferay.Columns({
 						columnSelector: "div[@id^=layout-column_]",
+						grid: '#layout-grid',
 						handleSelector: ".portlet-title:first, .portlet-title-default:first",
 						boxSelector: ".portlet-boundary" ,
 						positionClass: "drop-position",

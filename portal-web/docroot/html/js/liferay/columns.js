@@ -12,6 +12,7 @@
 			instance._columns = options.columnSelector;
 			instance._dropPosition = options.positionClass;
 			instance._dropArea = options.areaClass;
+			instance._grid = jQuery(options.grid);
 			instance._handle = options.handleSelector;
 			instance._onDrop = options.onComplete;
 			instance._portlets = options.boxSelector;
@@ -60,7 +61,7 @@
 			var jColumns = instance._cache.columns;
 
 			if (!jColumns) {
-				jQuery(".lfr-column").addClass("dragging");
+				instance._grid.addClass('dragging');
 
 				jColumns = instance._cache.columns = jQuery(instance._columns);
 				instance._cache.columnData = [];
@@ -297,7 +298,7 @@
 				}
 			}
 
-			jQuery(".lfr-column").removeClass("dragging");
+			instance._grid.removeClass("dragging");
 			instance._clearCache();
 		}
 	});

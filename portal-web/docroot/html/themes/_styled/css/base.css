@@ -143,6 +143,14 @@ body.staging {
 
 /* ---------- Drag Indicators ---------- */
 
+#content-wrapper #layout-grid.dragging {
+	border-collapse: separate;
+}
+
+#content-wrapper #layout-grid.dragging .lfr-column {
+	border: 3px double #ACBED5;
+}
+
 .drag-indicator {
 	border: 2px dashed #036;
 	cursor: move;
