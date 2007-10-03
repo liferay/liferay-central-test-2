@@ -728,10 +728,10 @@ public class PortalLDAPUtil {
 
 		if (importGroupMembership && (user != null)) {
 			String userMappingsGroup = userMappings.getProperty("group");
-			
+
 			if (userMappingsGroup != null) {
 				Attribute attr = attrs.get(userMappingsGroup);
-	
+
 				if (attr != null){
 					_importGroupsAndMembershipFromLDAPUser(
 						companyId, ctx, user.getUserId(), attr);
