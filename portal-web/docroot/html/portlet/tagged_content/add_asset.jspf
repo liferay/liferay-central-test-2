@@ -50,7 +50,7 @@ PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, entries
 				redirectURLObj.setParameter("struts_action", "/portlet_configuration/edit_configuration");
 				redirectURLObj.setParameter("redirect", currentURL);
 				redirectURLObj.setParameter("backURL", currentURL);
-				redirectURLObj.setParameter("portletResource", portletDisplay.getId());
+				redirectURLObj.setParameter("portletResource", portletId);
 			}
 
 			PortletURL url = getAddURL(ASSET_TYPES[i], permissionChecker, request, themeDisplay, entries, redirectURLObj);
