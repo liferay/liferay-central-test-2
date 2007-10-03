@@ -825,19 +825,6 @@ public class BaseDeployer {
 
 		String propsString = FileUtil.read(propsFile);
 
-		return getPluginPackageProperties(propsString);
-	}
-
-	protected Properties getPluginPackageProperties(String propsString)
-		throws Exception {
-
-		propsString = StringUtil.replace(
-			propsString,
-			new String[] {"\\\n", "\t", "    "},
-			new String[] {
-				StringPool.BLANK, StringPool.BLANK, StringPool.BLANK
-			});
-
 		return PropertiesUtil.load(propsString);
 	}
 
@@ -934,7 +921,7 @@ public class BaseDeployer {
 
 				String propsString = StringUtil.read(is);
 
-				Properties props = getPluginPackageProperties(propsString);
+				Properties props = PropertiesUtil.load(propsString);
 
 				return PluginPackageUtil.readPluginPackageProps(
 					displayName, props);

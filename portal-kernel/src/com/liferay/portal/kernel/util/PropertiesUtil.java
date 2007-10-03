@@ -98,8 +98,13 @@ public class PropertiesUtil {
 	public static void load(Properties p, String s) throws IOException {
 		if (Validator.isNotNull(s)) {
 			s = UnicodeFormatter.toString(s);
+
 			s = StringUtil.replace(s, "\\u003d", "=");
 			s = StringUtil.replace(s, "\\u000a", "\n");
+			s = StringUtil.replace(s, "\\u0021", "!");
+			s = StringUtil.replace(s, "\\u0023", "#");
+			s = StringUtil.replace(s, "\\u0020", " ");
+			s = StringUtil.replace(s, "\\u005c", "\\");
 
 			p.load(new ByteArrayInputStream(s.getBytes()));
 
