@@ -27,6 +27,8 @@ import com.germinus.easyconf.ComponentProperties;
 import com.germinus.easyconf.EasyConf;
 
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 
 import java.util.Enumeration;
 import java.util.List;
@@ -142,22 +144,29 @@ public class ExtPropertiesLoader {
 	}
 
 	private ExtPropertiesLoader(String name, long companyId) {
-		String companyIdString = null;
+		String companyWebId = null;
 
 		if (companyId > 0) {
-			companyIdString = String.valueOf(companyId);
+			try {
+				Company company =
+					CompanyLocalServiceUtil.getCompanyById(companyId);
+				companyWebId = company.getWebId();
+			}
+			catch (Exception e) {
+			}
 		}
 
-		_conf = EasyConf.getConfiguration(companyIdString, name);
+		_conf = EasyConf.getConfiguration(companyWebId, name);
 
-		_printSources(name, companyId);
+		_printSources(name, companyId, companyWebId);
 	}
 
 	private void _printSources(String name) {
-		_printSources(name, 0);
+		_printSources(name, 0, null);
 	}
 
-	private void _printSources(String name, long companyId) {
+	private void _printSources(
+		String name, long companyId, String companyWebId) {
 		List sources = getComponentProperties().getLoadedSources();
 
 		for (int i = sources.size() - 1; i >= 0; i--) {
@@ -166,7 +175,7 @@ public class ExtPropertiesLoader {
 			String info = "Loading " + source;
 
 			if (companyId > 0) {
-				info += " for " + companyId;
+				info += " for " + companyWebId + "(" + companyId + ")";
 			}
 
 			System.out.println(info);
