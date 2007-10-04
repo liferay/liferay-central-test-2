@@ -70,6 +70,18 @@
 			</c:if>
 		</c:if>
 	</c:when>
+	<c:when test="<%= className.equals(MBMessage.class.getName()) %>">
+
+		<%
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
+		%>
+
+		<%= message.getSubject() %>
+
+		<br /><br />
+
+		<%= message.getBody() %>
+	</c:when>
 	<c:when test="<%= className.equals(WikiPage.class.getName()) %>">
 		<div class="wiki-body">
 

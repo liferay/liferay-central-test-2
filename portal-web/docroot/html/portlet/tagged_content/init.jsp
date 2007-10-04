@@ -66,6 +66,8 @@
 <%@ page import="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalArticlePermission" %>
 <%@ page import="com.liferay.portlet.journal.util.JournalUtil" %>
+<%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
+<%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
@@ -121,5 +123,5 @@ DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>
 
 <%!
-public final String[] ASSET_TYPES = {BlogsEntry.class.getName(), BookmarksEntry.class.getName(), DLFileEntry.class.getName(), IGImage.class.getName(), JournalArticle.class.getName(), WikiPage.class.getName()};
+public final String[] ASSET_TYPES = {BlogsEntry.class.getName(), BookmarksEntry.class.getName(), DLFileEntry.class.getName(), IGImage.class.getName(), JournalArticle.class.getName(), MBMessage.class.getName(), WikiPage.class.getName()};
 %>

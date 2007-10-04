@@ -75,6 +75,8 @@ entries = ArrayUtil.distinct(entries, new StringComparator());
 	<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
 </form>
 
+<br />
+
 <%
 if (showQueryLogic) {
 	StringMaker tagsText = new StringMaker();
@@ -148,13 +150,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 		List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
-		%>
 
-		<c:if test="<%= results.size() > 0 %>">
-			<br />
-		</c:if>
-
-		<%
 		for (int i = 0; i < results.size(); i++) {
 			TagsAsset asset = (TagsAsset)results.get(i);
 
@@ -205,13 +201,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 		results = results.subList(searchContainer.getStart(), end);
 
 		searchContainer.setResults(results);
-		%>
 
-		<c:if test="<%= results.size() > 0 %>">
-			<br />
-		</c:if>
-
-		<%
 		for (int i = 0; i < results.size(); i++) {
 			String assetEntry = (String)results.get(i);
 

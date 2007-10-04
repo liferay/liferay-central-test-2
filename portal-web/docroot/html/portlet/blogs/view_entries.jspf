@@ -41,9 +41,7 @@ boolean showAddEntryButton = tabs1.equals("entries") && PortletPermissionUtil.co
 		</c:if>
 	</div>
 
-	<c:if test="<%= results.size() > 0 %>">
-		<br />
-	</c:if>
+	<br />
 </c:if>
 
 <%

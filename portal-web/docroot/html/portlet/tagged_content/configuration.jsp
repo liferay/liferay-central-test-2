@@ -128,7 +128,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 							<%
 							for (int i = 0; i < ASSET_TYPES.length; i++) {
-								if (!ASSET_TYPES[i].equals(WikiPage.class.getName())) {
+								if (!ASSET_TYPES[i].equals(MBMessage.class.getName()) && !ASSET_TYPES[i].equals(WikiPage.class.getName())) {
 								%>
 
 									<option value="<%= ASSET_TYPES[i] %>"><liferay-ui:message key='<%= "model.resource." + ASSET_TYPES[i] %>' /></option>
@@ -359,6 +359,15 @@ configurationActionURL.setParameter("portletResource", portletResource);
 		<br /><br />
 
 		<%@ include file="/html/portlet/tagged_content/select_journal_article.jspf" %>
+	</c:when>
+	<c:when test="<%= typeSelection.equals(MBMessage.class.getName()) %>">
+		<input name="<portlet:namespace />assetType" type="hidden" value="<%= MBMessage.class.getName() %>" />
+
+		<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + MBMessage.class.getName() %>' />
+
+		<br /><br />
+
+		<%@ include file="/html/portlet/tagged_content/select_message_boards_message.jspf" %>
 	</c:when>
 	<c:when test="<%= typeSelection.equals(WikiPage.class.getName()) %>">
 		<input name="<portlet:namespace />assetType" type="hidden" value="<%= WikiPage.class.getName() %>" />
