@@ -12,23 +12,21 @@
 		<portlet id="111" />
 	</category>
 	<category name="category.cms">
-		<category name="category.journal">
-			<portlet id="15" />
-			<portlet id="20" />
-			<portlet id="31" />
-			<portlet id="56" />
-			<portlet id="62" />
-			<portlet id="64" />
-			<portlet id="77" />
-			<portlet id="101" />
-			<portlet id="102" />
-			<portlet id="105" />
-			<portlet id="106" />
-			<portlet id="110" />
-		</category>
+		<portlet id="15" />
+		<portlet id="20" />
+		<portlet id="31" />
+		<portlet id="56" />
+		<portlet id="62" />
+		<portlet id="64" />
 		<portlet id="71" />
 		<portlet id="73" />
+		<portlet id="77" />
 		<portlet id="85" />
+		<portlet id="101" />
+		<portlet id="102" />
+		<portlet id="105" />
+		<portlet id="106" />
+		<portlet id="110" />
 	</category>
 	<category name="category.collaboration">
 		<portlet id="1" />
