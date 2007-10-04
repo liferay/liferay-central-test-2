@@ -22,8 +22,8 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
@@ -84,7 +84,7 @@ public class ServicePostAction extends Action {
 
 			// Clean up the permission checker
 
-			PermissionCheckerImpl permissionChecker =
+			PermissionChecker permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
 			PermissionCheckerFactory.recycle(permissionChecker);

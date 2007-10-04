@@ -25,6 +25,7 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -62,6 +63,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -102,9 +104,11 @@ public class ServiceBuilder {
 			String jsonFileName = args[6];
 			String sqlDir = "../sql";
 			String sqlFileName = "portal-tables.sql";
+			boolean autoNamespaceTables = false;
 			String baseModelImplPackage = "com.liferay.portal.model.impl";
 			String basePersistencePackage = "com.liferay.portal.service.persistence";
 			String beanLocatorUtilPackage = "com.liferay.portal.kernel.bean";
+			String principalBeanPackage = "com.liferay.portal.service.impl";
 			String propsUtilPackage = "com.liferay.portal.util";
 			String springHibernatePackage = "com.liferay.portal.spring.hibernate";
 			String springUtilPackage = "com.liferay.portal.spring.util";
@@ -112,9 +116,10 @@ public class ServiceBuilder {
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
 				springDataSourceFileName, apiDir, implDir, jsonFileName, sqlDir,
-				sqlFileName, baseModelImplPackage, basePersistencePackage,
-				beanLocatorUtilPackage, propsUtilPackage,
-				springHibernatePackage, springUtilPackage);
+				sqlFileName, autoNamespaceTables, baseModelImplPackage,
+				basePersistencePackage, beanLocatorUtilPackage,
+				principalBeanPackage, propsUtilPackage, springHibernatePackage,
+				springUtilPackage);
 		}
 		else if (args.length == 0) {
 			String fileName = System.getProperty("service.input.file");
@@ -127,9 +132,11 @@ public class ServiceBuilder {
 			String jsonFileName = System.getProperty("service.json.file");
 			String sqlDir = System.getProperty("service.sql.dir");
 			String sqlFileName = System.getProperty("service.sql.file");
+			boolean autoNamespaceTables = GetterUtil.getBoolean(System.getProperty("service.auto.namespace.tables"));
 			String baseModelImplPackage = System.getProperty("service.base.model.impl.package");
 			String basePersistencePackage = System.getProperty("service.base.persistence.package");
 			String beanLocatorUtilPackage = System.getProperty("service.bean.locator.util.package");
+			String principalBeanPackage = System.getProperty("service.principal.bean.package");
 			String propsUtilPackage = System.getProperty("service.props.util.package");
 			String springHibernatePackage = System.getProperty("service.spring.hibernate.package");
 			String springUtilPackage = System.getProperty("service.spring.util.package");
@@ -137,24 +144,31 @@ public class ServiceBuilder {
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
 				springDataSourceFileName, apiDir, implDir, jsonFileName, sqlDir,
-				sqlFileName, baseModelImplPackage, basePersistencePackage,
-				beanLocatorUtilPackage, propsUtilPackage,
-				springHibernatePackage, springUtilPackage);
+				sqlFileName, autoNamespaceTables, baseModelImplPackage,
+				basePersistencePackage, beanLocatorUtilPackage,
+				principalBeanPackage, propsUtilPackage, springHibernatePackage,
+				springUtilPackage);
 		}
 
 		if (serviceBuilder == null) {
 			System.out.println(
 				"Please set the system properties. Sample properties are:\n" +
-				"\t-Dservice.input.file=service.xml\n" +
+				"\t-Dservice.input.file=${service.file}\n" +
 				"\t-Dservice.hbm.file=classes/META-INF/portal-hbm.xml\n" +
 				"\t-Dservice.model.hints.file=classes/META-INF/portal-model-hints.xml\n" +
 				"\t-Dservice.spring.file=classes/META-INF/portal-spring.xml\n" +
-				"\t-Dservice.bean.locator.class=com.liferay.portal.kernel.bean.BeanLocatorUtil\n" +
-				"\t-Dservice.api.dir=../portal-service/src\n" +
+				"\t-Dservice.api.dir=${project.dir}/portal-service/src\n" +
 				"\t-Dservice.impl.dir=src\n" +
-				"\t-Dservice.json.file=../portal-web/docroot/html/js/liferay_services.js\n" +
+				"\t-Dservice.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js\n" +
 				"\t-Dservice.sql.dir=../sql\n" +
-				"\t-Dservice.sql.file=portal-tables.sql");
+				"\t-Dservice.sql.file=portal-tables.sql\n" +
+				"\t-Dservice.base.model.impl.package=com.liferay.portal.model.impl\n" +
+				"\t-Dservice.base.persistence.package=com.liferay.portal.service.persistence\n" +
+				"\t-Dservice.bean.locator.util.package=com.liferay.portal.kernel.bean\n" +
+				"\t-Dservice.principal.bean.package=com.liferay.portal.service.impl\n" +
+				"\t-Dservice.props.util.package=com.liferay.portal.util\n" +
+				"\t-Dservice.spring.hibernate.package=com.liferay.portal.spring.hibernate\n" +
+				"\t-Dservice.spring.util.package=com.liferay.portal.spring.util");
 		}
 	}
 
@@ -461,15 +475,17 @@ public class ServiceBuilder {
 		String fileName, String hbmFileName, String modelHintsFileName,
 		String springFileName, String springDataSourceFileName, String apiDir,
 		String implDir, String jsonFileName, String sqlDir, String sqlFileName,
-		String baseModelImplPackage, String basePersistencePackage,
-		String beanLocatorUtilPackage, String propsUtilPackage,
+		boolean autoNamespaceTables, String baseModelImplPackage,
+		String basePersistencePackage, String beanLocatorUtilPackage,
+		String principalBeanPackage, String propsUtilPackage,
 		String springHibernatePackage, String springUtilPackage) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, modelHintsFileName, springFileName,
 			springDataSourceFileName, apiDir, implDir, jsonFileName, sqlDir,
-			sqlFileName, baseModelImplPackage, basePersistencePackage,
-			beanLocatorUtilPackage, propsUtilPackage, springHibernatePackage,
+			sqlFileName, autoNamespaceTables, baseModelImplPackage,
+			basePersistencePackage, beanLocatorUtilPackage,
+			principalBeanPackage, propsUtilPackage, springHibernatePackage,
 			springUtilPackage, true);
 	}
 
@@ -477,8 +493,9 @@ public class ServiceBuilder {
 		String fileName, String hbmFileName, String modelHintsFileName,
 		String springFileName, String springDataSourceFileName, String apiDir,
 		String implDir, String jsonFileName, String sqlDir, String sqlFileName,
-		String baseModelImplPackage, String basePersistencePackage,
-		String beanLocatorUtilPackage, String propsUtilPackage,
+		boolean autoNamespaceTables, String baseModelImplPackage,
+		String basePersistencePackage, String beanLocatorUtilPackage,
+		String principalBeanPackage, String propsUtilPackage,
 		String springHibernatePackage, String springUtilPackage,
 		boolean build) {
 
@@ -495,9 +512,11 @@ public class ServiceBuilder {
 			_jsonFileName = jsonFileName;
 			_sqlDir = sqlDir;
 			_sqlFileName = sqlFileName;
+			_autoNamespaceTables = autoNamespaceTables;
 			_baseModelImplPackage = baseModelImplPackage;
 			_basePersistencePackage = basePersistencePackage;
 			_beanLocatorUtilPackage = beanLocatorUtilPackage;
+			_principalBeanPackage = principalBeanPackage;
 			_propsUtilPackage = propsUtilPackage;
 			_springHibernatePackage = springHibernatePackage;
 			_springUtilPackage = springUtilPackage;
@@ -510,23 +529,34 @@ public class ServiceBuilder {
 
 			String packagePath = root.attributeValue("package-path");
 
-			_portletName = root.element("portlet").attributeValue("name");
-
-			_portletShortName =
-				root.element("portlet").attributeValue("short-name");
-
-			_portletPackageName =
-				TextFormatter.format(_portletName, TextFormatter.B);
-
 			_outputPath =
-				_implDir + "/" + StringUtil.replace(packagePath, ".", "/") +
-					"/" + _portletPackageName;
+				_implDir + "/" + StringUtil.replace(packagePath, ".", "/");
 
 			_serviceOutputPath =
-				_apiDir + "/" + StringUtil.replace(packagePath, ".", "/") +
-					"/" + _portletPackageName;
+				_apiDir + "/" + StringUtil.replace(packagePath, ".", "/");
 
-			_packagePath = packagePath + "." + _portletPackageName;
+			_packagePath = packagePath;
+
+			Element portlet = root.element("portlet");
+			Element namespace = root.element("namespace");
+
+			if (portlet != null) {
+				_portletName = portlet.attributeValue("name");
+
+				_portletShortName = portlet.attributeValue("short-name");
+
+				_portletPackageName =
+					TextFormatter.format(_portletName, TextFormatter.B);
+
+				_outputPath += "/" + _portletPackageName;
+
+				_serviceOutputPath += "/" + _portletPackageName;
+
+				_packagePath += "." + _portletPackageName;
+			}
+			else {
+				_portletShortName = namespace.getText();
+			}
 
 			_ejbList = new ArrayList();
 
@@ -547,6 +577,10 @@ public class ServiceBuilder {
 					if (_badTableNames.contains(ejbName)) {
 						table += "_";
 					}
+				}
+
+				if (_autoNamespaceTables) {
+					table = _portletShortName + "_" + table;
 				}
 
 				boolean localService = GetterUtil.getBoolean(
@@ -812,23 +846,28 @@ public class ServiceBuilder {
 							_createServiceFactory(entity, _REMOTE);
 							_createServiceUtil(entity, _REMOTE);
 
-							_createServiceHttp(entity);
-							_createServiceJSON(entity);
+							if (Validator.isNotNull(_jsonFileName)) {
+								_createServiceHttp(entity);
+								_createServiceJSON(entity);
 
-							if (entity.hasColumns()) {
-								_createServiceJSONSerializer(entity);
+								if (entity.hasColumns()) {
+									_createServiceJSONSerializer(entity);
+								}
+
+								_createServiceSoap(entity);
 							}
-
-							_createServiceSoap(entity);
 						}
 					}
 				}
 
 				_createHBMXML();
-				_createJSONJS();
 				_createModelHintsXML();
-				_createSpringXML();
-				_createRemotingXML();
+
+				if (Validator.isNotNull(_jsonFileName)) {
+					_createJSONJS();
+					_createSpringXML();
+					_createRemotingXML();
+				}
 
 				_createSQLIndexes();
 				_createSQLTables();
@@ -843,6 +882,7 @@ public class ServiceBuilder {
 				_createFinderCache();
 				_createHibernateConfiguration();
 				_createHibernateUtil();
+				_createPrincipalBean();
 				_createProps();
 				_createPropsUtil();
 				_createSpringDataSourceXML();
@@ -890,8 +930,9 @@ public class ServiceBuilder {
 			ServiceBuilder serviceBuilder = new ServiceBuilder(
 				refFileName, _hbmFileName, _modelHintsFileName, _springFileName,
 				_springDataSourceFileName, _apiDir, _implDir, _jsonFileName,
-				_sqlDir, _sqlFileName, _baseModelImplPackage,
-				_basePersistencePackage, _beanLocatorUtilPackage,
+				_sqlDir, _sqlFileName, _autoNamespaceTables,
+				_baseModelImplPackage, _basePersistencePackage,
+				_beanLocatorUtilPackage, _principalBeanPackage,
 				_propsUtilPackage, _springHibernatePackage, _springUtilPackage,
 				false);
 
@@ -4963,6 +5004,31 @@ public class ServiceBuilder {
 		}
 	}
 
+	private void _createPrincipalBean() throws IOException {
+		if (_principalBeanPackage.equals("com.liferay.portal.service.impl")) {
+			return;
+		}
+
+		// Content
+
+		String content = StringUtil.read(getClass().getClassLoader(), "com/liferay/portal/tools/dependencies/PrincipalBean.java");
+
+		content = StringUtil.replace(
+			content,
+			new String[] {
+				"package com.liferay.portal.service.impl;"
+			},
+			new String[] {
+				"package " + _principalBeanPackage + ";"
+			});
+
+		// Write file
+
+		File ejbFile = new File(_implDir + "/" + StringUtil.replace(_principalBeanPackage, ".", "/") + "/PrincipalBean.java");
+
+		FileUtil.write(ejbFile, content, true);
+	}
+
 	private void _createProps() throws IOException {
 		if (_propsUtilPackage.equals("com.liferay.portal.util")) {
 			return;
@@ -4970,22 +5036,36 @@ public class ServiceBuilder {
 
 		// Content
 
+		File propsFile = new File(_implDir + "/portlet-service.properties");
+
+		long buildNumber = 1;
+
+		if (propsFile.exists()) {
+			Properties props = PropertiesUtil.load(FileUtil.read(propsFile));
+
+			buildNumber = GetterUtil.getLong(props.getProperty("build.number")) + 1;
+		}
+
 		String content = StringUtil.read(getClass().getClassLoader(), "com/liferay/portal/tools/dependencies/portlet-service.properties");
 
 		content = StringUtil.replace(
 			content,
 			new String[] {
+				"${build.namespace}",
+				"${build.number}",
+				"${build.date}",
 				"com.liferay.portal.spring.hibernate."
 			},
 			new String[] {
+				_portletShortName,
+				String.valueOf(buildNumber),
+				String.valueOf(System.currentTimeMillis()),
 				_springHibernatePackage + "."
 			});
 
 		// Write file
 
-		File ejbFile = new File(_implDir + "/portlet-service.properties");
-
-		FileUtil.write(ejbFile, content, true);
+		FileUtil.write(propsFile, content, true);
 	}
 
 	private void _createPropsUtil() throws IOException {
@@ -5653,7 +5733,7 @@ public class ServiceBuilder {
 		sm.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
 
 		if (sessionType == _REMOTE) {
-			sm.append("import com.liferay.portal.service.impl.PrincipalBean;");
+			sm.append("import " + _principalBeanPackage + ".PrincipalBean;");
 		}
 		else {
 			sm.append("import " + _packagePath + ".service.base." + entity.getName() + "LocalServiceBaseImpl;");
@@ -6267,7 +6347,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createSpringUtil() throws IOException {
-		if (_springHibernatePackage.equals("com.liferay.portal.spring.util")) {
+		if (_springUtilPackage.equals("com.liferay.portal.spring.util")) {
 			return;
 		}
 
@@ -7190,15 +7270,17 @@ public class ServiceBuilder {
 	private String _jsonFileName;
 	private String _sqlDir;
 	private String _sqlFileName;
+	private boolean _autoNamespaceTables;
 	private String _baseModelImplPackage;
 	private String _basePersistencePackage;
 	private String _beanLocatorUtilPackage;
+	private String _principalBeanPackage;
 	private String _propsUtilPackage;
 	private String _springHibernatePackage;
 	private String _springUtilPackage;
-	private String _portletName;
-	private String _portletShortName;
-	private String _portletPackageName;
+	private String _portletName = StringPool.BLANK;
+	private String _portletShortName = StringPool.BLANK;
+	private String _portletPackageName = StringPool.BLANK;
 	private String _outputPath;
 	private String _serviceOutputPath;
 	private String _packagePath;

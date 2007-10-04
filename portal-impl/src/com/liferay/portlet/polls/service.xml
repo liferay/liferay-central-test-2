@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.3.3//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_3_3.dtd">
 
-<service-builder package-path="com.liferay.portlet">
-	<portlet name="Polls" short-name="Polls" />
+<service-builder package-path="com.liferay.portlet.polls">
+	<namespace>Polls</namespace>
 	<entity name="PollsChoice" local-service="true" remote-service="false">
 
 		<!-- PK fields -->

@@ -31,9 +31,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionCheckerUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -184,7 +184,7 @@ public class MessageListenerImpl implements MessageListener {
 
 			_collectPartContent(message, collector);
 
-			PrincipalBean.setThreadValues(user);
+			PermissionCheckerUtil.setThreadValues(user);
 
 			if (parentMessage == null) {
 				MBMessageServiceUtil.addMessage(

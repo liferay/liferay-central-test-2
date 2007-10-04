@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.3.3//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_3_3.dtd">
 
-<service-builder package-path="com.liferay.portlet">
-	<portlet name="Shopping" short-name="Shopping" />
+<service-builder package-path="com.liferay.portlet.shopping">
+	<namespace>Shopping</namespace>
 	<entity name="ShoppingCart" local-service="true" remote-service="false">
 
 		<!-- PK fields -->

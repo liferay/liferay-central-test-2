@@ -22,36 +22,46 @@
 
 package com.liferay.portal.security.auth;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
- * <a href="PrincipalThreadLocal.java.html"><b><i>View Source</i></b></a>
+ * <a href="CompanyThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PrincipalThreadLocal {
+public class CompanyThreadLocal {
 
-	public static String getName() {
-		String name = (String)_threadLocal.get();
+	public static long getCompanyId() {
+		Long companyIdObj = (Long)_threadLocal.get();
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("getName " + name);
+			_log.debug("getCompanyId " + companyIdObj);
 		}
 
-		return name;
+		if (companyIdObj != null) {
+			return companyIdObj.longValue();
+		}
+		else {
+			return 0;
+		}
 	}
 
-	public static void setName(String name) {
+	public static void setCompanyId(long companyId) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("setName " + name);
+			_log.debug("setCompanyId " + companyId);
 		}
 
-		_threadLocal.set(name);
+		if (companyId > 0) {
+			_threadLocal.set(new Long(companyId));
+		}
+		else {
+			_threadLocal.set(null);
+		}
 	}
 
-	private static Log _log = LogFactory.getLog(PrincipalThreadLocal.class);
+	private static Log _log = LogFactoryUtil.getLog(CompanyThreadLocal.class);
 
 	private static ThreadLocal _threadLocal = new ThreadLocal();
 

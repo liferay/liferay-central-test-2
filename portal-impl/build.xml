@@ -106,6 +106,10 @@
 				includes="BaseModelImpl.java"
 			/>
 			<fileset
+				dir="src/com/liferay/portal/service/impl"
+				includes="PrincipalBean.java"
+			/>
+			<fileset
 				dir="src/com/liferay/portal/service/persistence"
 				includes="BasePersistence.java"
 			/>
@@ -472,6 +476,7 @@
 			<jvmarg value="-Dservice.base.model.impl.package=com.liferay.portal.model.impl" />
 			<jvmarg value="-Dservice.base.persistence.package=com.liferay.portal.service.persistence" />
 			<jvmarg value="-Dservice.bean.locator.util.package=com.liferay.portal.kernel.bean" />
+			<jvmarg value="-Dservice.principal.bean.package=com.liferay.portal.service.impl" />
 			<jvmarg value="-Dservice.props.util.package=com.liferay.portal.util" />
 			<jvmarg value="-Dservice.spring.hibernate.package=com.liferay.portal.spring.hibernate" />
 			<jvmarg value="-Dservice.spring.util.package=com.liferay.portal.spring.util" />

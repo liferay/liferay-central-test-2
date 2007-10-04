@@ -12,47 +12,23 @@ a Service Builder descriptor that is used to generate services available to
 portlets. The Service Builder saves the developer time by generating Spring
 utilities, SOAP utilities, and Hibernate persistence classes to ease the
 development of services.
-
-To run the service generator, go to /portal/portal-impl (or /ext/ext-impl) and
-type "ant build-service". The ant task will check for the existence of a file
-called "service.xml" that must exist in your current directory. It will parse
-that file to generate the service.
 -->
-<!ELEMENT service-builder (portlet, entity+, exceptions?)>
+<!ELEMENT service-builder (namespace, entity+, exceptions?)>
 
 <!--
-The root-dir value is now deprecated.
-
-The package-path value specifies the package of the generated code. If the value
-is "com.liferay.portlet", then all generated code will fall inside
-"com.liferay.portlet" + the shortened portlet name. The portlet name is
-specified in the portlet element. For example, if the portlet name is
-"Message Boards", the generated code will fall under
-"com.liferay.portlet.messageboards".
+The package-path value specifies the package of the generated code.
 -->
 <!ATTLIST service-builder
-	root-dir CDATA #IMPLIED
 	package-path CDATA #REQUIRED
 >
 
 <!--
-The portlet element specifies the portlet that the generated services are
-designed for. Services are not limited to the specified portlet but are only
-grouped by portlet for easier maintenance.
+The namespace element must be a unique namespace for this component. Table names
+will be prepended with this namespace. Generated JSON JavaScript will be scoped
+to this namespace as well (i.e., Liferay.Service.Test.* if the namespace is
+Test).
 -->
-<!ELEMENT portlet (#PCDATA)>
-
-<!--
-The name can be something like "Message Boards". It is used by the Service
-Builder in combination with the package-path attribute.
-
-The short-name can be something like "MB". This is used as a namespace to
-distinguish all the generated objects.
--->
-<!ATTLIST portlet
-	name CDATA #REQUIRED
-	short-name CDATA #REQUIRED
->
+<!ELEMENT namespace (#PCDATA)>
 
 <!--
 An entity usually represents a business facade and a table in the database. If

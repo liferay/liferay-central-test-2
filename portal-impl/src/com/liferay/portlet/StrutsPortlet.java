@@ -82,7 +82,7 @@ public class StrutsPortlet extends LiferayPortlet {
 
 			// Call processAction of com.liferay.portal.struts.PortletAction
 
-			PermissionCheckerImpl permissionChecker =
+			PermissionCheckerImpl permissionChecker = (PermissionCheckerImpl)
 				PermissionThreadLocal.getPermissionChecker();
 
 			try {
@@ -213,7 +213,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		// Process render
 
 		PermissionCheckerImpl permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
+			(PermissionCheckerImpl)PermissionThreadLocal.getPermissionChecker();
 
 		try {
 			permissionChecker.setValues(req);

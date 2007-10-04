@@ -20,49 +20,50 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.security.auth;
+package com.liferay.portal.security.permission;
+
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.util.PropsUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="CompanyThreadLocal.java.html"><b><i>View Source</i></b></a>
+ * <a href="PermissionCheckerUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CompanyThreadLocal {
+public class PermissionCheckerUtil {
 
-	public static long getCompanyId() {
-		Long companyIdObj = (Long)_threadLocal.get();
+	public static void setThreadValues(User user) {
+		long userId = user.getUserId();
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("getCompanyId " + companyIdObj);
+		String name = String.valueOf(userId);
+
+		PrincipalThreadLocal.setName(name);
+
+		try {
+			PermissionCheckerImpl permissionChecker = (PermissionCheckerImpl)
+				PermissionThreadLocal.getPermissionChecker();
+
+			if (permissionChecker == null) {
+				permissionChecker = (PermissionCheckerImpl)Class.forName(
+					PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER)).newInstance();
+
+				boolean checkGuest = true;
+
+				permissionChecker.init(user, checkGuest);
+
+				PermissionThreadLocal.setPermissionChecker(permissionChecker);
+			}
 		}
-
-		if (companyIdObj != null) {
-			return companyIdObj.longValue();
-		}
-		else {
-			return 0;
+		catch (Exception e) {
+			_log.error(e);
 		}
 	}
 
-	public static void setCompanyId(long companyId) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("setCompanyId " + companyId);
-		}
-
-		if (companyId > 0) {
-			_threadLocal.set(new Long(companyId));
-		}
-		else {
-			_threadLocal.set(null);
-		}
-	}
-
-	private static Log _log = LogFactory.getLog(CompanyThreadLocal.class);
-
-	private static ThreadLocal _threadLocal = new ThreadLocal();
+	private static Log _log = LogFactory.getLog(PermissionCheckerUtil.class);
 
 }

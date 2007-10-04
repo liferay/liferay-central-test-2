@@ -22,6 +22,7 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.CachePropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -68,7 +69,7 @@ public class PermissionCheckerFactory {
 		return permissionChecker;
 	}
 
-	public static void recycle(PermissionCheckerImpl permissionChecker)
+	public static void recycle(PermissionChecker permissionChecker)
 		throws Exception {
 
 		if (CachePropsUtil.COMMONS_POOL_ENABLED) {

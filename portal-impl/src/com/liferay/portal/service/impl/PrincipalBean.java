@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -31,11 +31,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.util.PropsUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,33 +57,6 @@ public class PrincipalBean {
 		JRUN_ANONYMOUS, ORACLE_ANONYMOUS, SUN_ANONYMOUS, WEBLOGIC_ANONYMOUS
 	};
 
-	public static void setThreadValues(User user) {
-		long userId = user.getUserId();
-
-		String name = String.valueOf(userId);
-
-		PrincipalThreadLocal.setName(name);
-
-		try {
-			PermissionCheckerImpl permissionChecker =
-				PermissionThreadLocal.getPermissionChecker();
-
-			if (permissionChecker == null) {
-				permissionChecker = (PermissionCheckerImpl)Class.forName(
-					PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER)).newInstance();
-
-				boolean checkGuest = true;
-
-				permissionChecker.init(user, checkGuest);
-
-				PermissionThreadLocal.setPermissionChecker(permissionChecker);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-	}
-
 	public long getGuestOrUserId() throws PrincipalException {
 		try {
 			return getUserId();
@@ -102,10 +72,8 @@ public class PrincipalBean {
 		}
 	}
 
-	public User getUser()
-		throws NoSuchUserException, SystemException, PrincipalException {
-
-		return UserUtil.findByPrimaryKey(getUserId());
+	public User getUser() throws PortalException, SystemException {
+		return UserLocalServiceUtil.getUserById(getUserId());
 	}
 
 	public long getUserId() throws PrincipalException {
@@ -131,7 +99,7 @@ public class PrincipalBean {
 	}
 
 	public PermissionChecker getPermissionChecker() throws PrincipalException {
-		PermissionCheckerImpl permissionChecker =
+		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
 		if (permissionChecker == null) {
