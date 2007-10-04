@@ -144,31 +144,29 @@ public class ExtPropertiesLoader {
 	}
 
 	private ExtPropertiesLoader(String name, long companyId) {
-		String companyWebId = null;
+		String webId = null;
 
 		if (companyId > 0) {
 			try {
 				Company company = CompanyLocalServiceUtil.getCompanyById(
 					companyId);
 
-				companyWebId = company.getWebId();
+				webId = company.getWebId();
 			}
 			catch (Exception e) {
 			}
 		}
 
-		_conf = EasyConf.getConfiguration(companyWebId, name);
+		_conf = EasyConf.getConfiguration(webId, name);
 
-		_printSources(name, companyId, companyWebId);
+		_printSources(name, companyId, webId);
 	}
 
 	private void _printSources(String name) {
 		_printSources(name, 0, null);
 	}
 
-	private void _printSources(
-		String name, long companyId, String companyWebId) {
-
+	private void _printSources(String name, long companyId, String webId) {
 		List sources = getComponentProperties().getLoadedSources();
 
 		for (int i = sources.size() - 1; i >= 0; i--) {
@@ -177,7 +175,8 @@ public class ExtPropertiesLoader {
 			String info = "Loading " + source;
 
 			if (companyId > 0) {
-				info += " for " + companyWebId + "(" + companyId + ")";
+				info +=
+					" for {companyId=" + companyId + ", webId=" + webId + "}";
 			}
 
 			System.out.println(info);
