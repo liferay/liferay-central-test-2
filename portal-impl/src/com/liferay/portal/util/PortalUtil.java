@@ -1914,6 +1914,18 @@ public class PortalUtil {
 			_portalLibDir = _portalLibDir.substring(
 				0, _portalLibDir.length() - 8) + "lib/";
 		}
+		else {
+			pos = _portalLibDir.indexOf("/WEB-INF/lib/");
+
+			if (pos != -1) {
+				_portalLibDir =
+					_portalLibDir.substring(0, pos) + "/WEB-INF/lib/";
+			}
+		}
+
+		if (_portalLibDir.startsWith("file:/")) {
+			_portalLibDir = _portalLibDir.substring(6, _portalLibDir.length());
+		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Portal lib directory " + _portalLibDir);
