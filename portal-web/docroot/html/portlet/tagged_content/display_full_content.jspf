@@ -49,7 +49,7 @@
 		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 			
 		double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
-		System.out.println("version: " + latestApprovedVersion);
+		
 		JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), latestApprovedVersion, null, languageId, themeDisplay, xmlRequest);
 		%>
 
