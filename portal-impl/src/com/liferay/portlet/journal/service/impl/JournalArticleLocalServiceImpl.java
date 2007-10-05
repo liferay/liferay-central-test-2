@@ -369,10 +369,6 @@ public class JournalArticleLocalServiceImpl
 
 		JournalArticleUtil.update(article);
 
-		// Tags
-
-		updateTagsAsset(article, null);
-
 		// Email
 
 		sendEmail(article, articleURL, prefs, "granted");
@@ -1408,17 +1404,6 @@ public class JournalArticleLocalServiceImpl
 
 	public void updateTagsAsset(JournalArticle article, String[] tagsEntries)
 		throws PortalException, SystemException {
-
-		if (!article.isApproved()) {
-			return;
-		}
-
-		double latestVersion = getLatestVersion(
-			article.getGroupId(), article.getArticleId(), Boolean.TRUE);
-
-		if (latestVersion != article.getVersion()) {
-			return;
-		}
 
 		TagsAssetLocalServiceUtil.updateAsset(
 			article.getUserId(), JournalArticle.class.getName(),
