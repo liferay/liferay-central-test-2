@@ -57,6 +57,8 @@ public class UpgradeWebsite extends UpgradeProcess {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS);
 
+		upgradeTable.setCreateSQL(WebsiteImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 	}
 

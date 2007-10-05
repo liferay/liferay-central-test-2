@@ -57,6 +57,8 @@ public class UpgradeTags extends UpgradeProcess {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			TagsAssetImpl.TABLE_NAME, TagsAssetImpl.TABLE_COLUMNS);
 
+		upgradeTable.setCreateSQL(TagsAssetImpl.TABLE_SQL_CREATE);
+
 		upgradeTable.updateTable();
 	}
 
