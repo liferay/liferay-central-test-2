@@ -859,6 +859,14 @@ create table SCProductVersion (
 	repoStoreArtifact BOOLEAN
 );
 
+create table ServiceComponent (
+	serviceComponentId LONG not null primary key,
+	buildNamespace VARCHAR(75) null,
+	buildNumber LONG,
+	buildDate LONG,
+	data_ TEXT null
+);
+
 create table ShoppingCart (
 	cartId LONG not null primary key,
 	groupId LONG,

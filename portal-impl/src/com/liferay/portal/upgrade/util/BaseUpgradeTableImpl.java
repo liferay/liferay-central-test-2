@@ -190,7 +190,7 @@ public abstract class BaseUpgradeTableImpl {
 	}
 
 	public String getSelectSQL() throws Exception {
-		String sql = "SELECT ";
+		/*String sql = "SELECT ";
 
 		for (int i = 0; i < _columns.length; i++) {
 			sql += _columns[i][0];
@@ -203,7 +203,9 @@ public abstract class BaseUpgradeTableImpl {
 			}
 		}
 
-		return sql;
+		return sql;*/
+
+		return "SELECT * FROM " + _tableName;
 	}
 
 	public Object getValue(ResultSet rs, String name, Integer type)

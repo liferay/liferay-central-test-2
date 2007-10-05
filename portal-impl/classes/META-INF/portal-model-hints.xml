@@ -425,6 +425,15 @@
 		</field>
 		<field name="type" type="int" />
 	</model>
+	<model name="com.liferay.portal.model.ServiceComponent">
+		<field name="serviceComponentId" type="long" />
+		<field name="buildNamespace" type="String" />
+		<field name="buildNumber" type="long" />
+		<field name="buildDate" type="long" />
+		<field name="data" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+	</model>
 	<model name="com.liferay.portal.model.Subscription">
 		<field name="subscriptionId" type="long" />
 		<field name="companyId" type="long" />

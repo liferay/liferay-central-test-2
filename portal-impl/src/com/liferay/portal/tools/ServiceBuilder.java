@@ -179,6 +179,7 @@ public class ServiceBuilder {
 		badCmpFields.add("active");
 		badCmpFields.add("alias");
 		badCmpFields.add("code");
+		badCmpFields.add("data");
 		badCmpFields.add("date");
 		badCmpFields.add("end");
 		badCmpFields.add("idd");
@@ -558,6 +559,13 @@ public class ServiceBuilder {
 				_portletShortName = namespace.getText();
 			}
 
+			_portletShortName = _portletShortName.trim();
+
+			if (!Validator.isChar(_portletShortName)) {
+				throw new RuntimeException(
+					"The namespace element must be a valid keyword");
+			}
+
 			_ejbList = new ArrayList();
 
 			List entities = root.elements("entity");
@@ -862,10 +870,10 @@ public class ServiceBuilder {
 
 				_createHBMXML();
 				_createModelHintsXML();
+				_createSpringXML();
 
 				if (Validator.isNotNull(_jsonFileName)) {
 					_createJSONJS();
-					_createSpringXML();
 					_createRemotingXML();
 				}
 

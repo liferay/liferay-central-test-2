@@ -1529,6 +1529,44 @@
 			<ref bean="com.liferay.portal.service.persistence.RolePersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ServiceComponentLocalService.professional" class="com.liferay.portal.service.impl.ServiceComponentLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.ServiceComponentLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ServiceComponentLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="check*">PROPAGATION_REQUIRED</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="set*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ServiceComponentLocalServiceFactory" class="com.liferay.portal.service.ServiceComponentLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ServiceComponentLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ServiceComponentPersistenceImpl" class="com.liferay.portal.service.persistence.ServiceComponentPersistenceImpl" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ServiceComponentUtil" class="com.liferay.portal.service.persistence.ServiceComponentUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.ServiceComponentPersistenceImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.SubscriptionLocalService.professional" class="com.liferay.portal.service.impl.SubscriptionLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.SubscriptionLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

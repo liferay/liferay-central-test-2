@@ -47,6 +47,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.smtp.SMTPServerUtil;
@@ -368,6 +369,10 @@ public class PortletHotDeployListener implements HotDeployListener {
 					servletContextName, portletClassLoader, portletProps);
 			}
 
+			// Service builder properties
+
+			processServiceBuilder(ctx, portletClassLoader);
+
 			// Variables
 
 			_vars.put(
@@ -484,6 +489,39 @@ public class PortletHotDeployListener implements HotDeployListener {
 				servletContextName, portletClassLoader,
 				resourceActionConfigs[i]);
 		}
+	}
+
+	protected void processServiceBuilder(
+			ServletContext ctx, ClassLoader portletClassLoader)
+		throws Exception {
+
+		if (portletClassLoader.getResourceAsStream(
+				"portlet-service.properties") == null) {
+
+			return;
+		}
+
+		Properties serviceBuilderProps = new Properties();
+
+		PropertiesUtil.load(
+			serviceBuilderProps,
+			StringUtil.read(portletClassLoader, "portlet-service.properties"));
+
+		String buildNamespace = GetterUtil.getString(
+			serviceBuilderProps.getProperty("build.namespace"));
+		long buildNumber = GetterUtil.getLong(
+			serviceBuilderProps.getProperty("build.number"));
+		long buildDate = GetterUtil.getLong(
+			serviceBuilderProps.getProperty("build.date"));
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Build namespace " + buildNamespace);
+			_log.debug("Build number " + buildNumber);
+			_log.debug("Build date " + buildDate);
+		}
+
+		ServiceComponentLocalServiceUtil.updateServiceComponent(
+			ctx, portletClassLoader, buildNamespace, buildNumber, buildDate);
 	}
 
 	private static Log _log = LogFactory.getLog(PortletHotDeployListener.class);

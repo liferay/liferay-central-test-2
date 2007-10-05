@@ -418,6 +418,16 @@
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
+	<class name="com.liferay.portal.model.impl.ServiceComponentImpl" table="ServiceComponent">
+		<cache usage="read-write" />
+		<id name="serviceComponentId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="buildNamespace" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="buildNumber" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="buildDate" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="data" column="data_" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
 	<class name="com.liferay.portal.model.impl.SubscriptionImpl" table="Subscription">
 		<cache usage="read-write" />
 		<id name="subscriptionId" type="long">

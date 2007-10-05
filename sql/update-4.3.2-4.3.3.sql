@@ -4,6 +4,14 @@ COMMIT_TRANSACTION;
 
 update JournalArticle set indexable = TRUE;
 
+create table ServiceComponent (
+	serviceComponentId LONG not null primary key,
+	buildNamespace VARCHAR(75) null,
+	buildNumber LONG,
+	buildDate LONG,
+	data_ TEXT null
+);
+
 delete from UserTracker;
 
 drop table UserTrackerPath;

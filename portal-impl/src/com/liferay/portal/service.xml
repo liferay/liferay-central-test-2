@@ -1014,6 +1014,36 @@
 			<finder-column name="classPK" />
 		</finder>
 	</entity>
+	<entity name="ServiceComponent" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="serviceComponentId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="buildNamespace" type="String" />
+		<column name="buildNumber" type="long" />
+		<column name="buildDate" type="long" />
+		<column name="data" type="String" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="buildNamespace" />
+			<order-column name="buildNumber" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="BuildNamespace" return-type="Collection">
+			<finder-column name="buildNamespace" />
+		</finder>
+		<finder name="BNS_BNU" return-type="ServiceComponent">
+			<finder-column name="buildNamespace" />
+			<finder-column name="buildNumber" />
+		</finder>
+	</entity>
 	<entity name="Subscription" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -1381,6 +1411,7 @@
 		<exception>ReservedUserScreenName</exception>
 		<exception>ResourcePrimKey</exception>
 		<exception>RoleName</exception>
+		<exception>OldServiceComponent</exception>
 		<exception>SendPassword</exception>
 		<exception>UserActive</exception>
 		<exception>UserEmailAddress</exception>

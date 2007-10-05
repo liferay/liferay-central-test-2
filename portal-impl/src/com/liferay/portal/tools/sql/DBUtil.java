@@ -226,11 +226,11 @@ public abstract class DBUtil {
 			template);
 	}
 
-	public void runSQL(String template) throws IOException, SQLException {
-		runSQL(new String[] {template});
+	public void runSQL(String sql) throws IOException, SQLException {
+		runSQL(new String[] {sql});
 	}
 
-	public void runSQL(String[] templates)
+	public void runSQL(String[] sqls)
 		throws IOException, SQLException {
 
 		Connection con = null;
@@ -241,8 +241,8 @@ public abstract class DBUtil {
 
 			stmt = con.createStatement();
 
-			for (int i = 0; i < templates.length; i++) {
-				String sql = buildSQL(templates[i]);
+			for (int i = 0; i < sqls.length; i++) {
+				String sql = buildSQL(sqls[i]);
 
 				sql = sql.trim();
 
@@ -291,7 +291,16 @@ public abstract class DBUtil {
 
 		is.close();
 
-		if (path.endsWith(".vm")) {
+		boolean evaluate = path.endsWith(".vm");
+
+		runSQLTemplateString(template, evaluate, failOnError);
+	}
+
+	public void runSQLTemplateString(
+			String template, boolean evaluate, boolean failOnError)
+		throws IOException, SQLException {
+
+		if (evaluate) {
 			try {
 				template = evaluateVM(template);
 			}

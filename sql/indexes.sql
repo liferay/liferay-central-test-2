@@ -224,6 +224,9 @@ create index IX_DA913A55 on SCProductScreenshot (productEntryId, priority);
 
 create index IX_8377A211 on SCProductVersion (productEntryId);
 
+create index IX_7338606F on ServiceComponent (buildNamespace);
+create index IX_4F0315B8 on ServiceComponent (buildNamespace, buildNumber);
+
 create index IX_C28B41DC on ShoppingCart (groupId);
 create index IX_FC46FE16 on ShoppingCart (groupId, userId);
 create index IX_54101CC8 on ShoppingCart (userId);
