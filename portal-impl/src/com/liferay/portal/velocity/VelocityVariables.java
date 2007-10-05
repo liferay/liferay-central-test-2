@@ -55,6 +55,7 @@ import com.liferay.portal.theme.RequestVars;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DateFormats_IW;
 import com.liferay.portal.util.PortalUtil_IW;
+import com.liferay.portal.util.PrefsPropsUtil_IW;
 import com.liferay.portal.util.PropsUtil_IW;
 import com.liferay.portal.util.ServiceLocator;
 import com.liferay.portal.util.SessionClicks_IW;
@@ -129,6 +130,10 @@ public class VelocityVariables {
 
 		vc.put("portalUtil", PortalUtil_IW.getInstance());
 		vc.put("portal", PortalUtil_IW.getInstance());
+
+		// Prefs props util
+
+		vc.put("prefsPropsUtil", PrefsPropsUtil_IW.getInstance());
 
 		// Props util
 
