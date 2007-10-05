@@ -301,6 +301,8 @@ public class JSONServiceAction extends JSONAction {
 		JSONUtil.put(jsonObj, "classNameId", assetDisplay.getClassNameId());
 		JSONUtil.put(jsonObj, "className", assetDisplay.getClassName());
 		JSONUtil.put(jsonObj, "classPK", assetDisplay.getClassPK());
+		JSONUtil.put(jsonObj, "portletId", assetDisplay.getPortletId());
+		JSONUtil.put(jsonObj, "portletTitle", assetDisplay.getPortletTitle());
 		JSONUtil.put(jsonObj, "startDate", assetDisplay.getStartDate());
 		JSONUtil.put(jsonObj, "endDate", assetDisplay.getEndDate());
 		JSONUtil.put(jsonObj, "publishDate", assetDisplay.getPublishDate());

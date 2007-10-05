@@ -23,6 +23,14 @@
 package com.liferay.portlet.tags.util;
 
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.wiki.model.WikiPage;
 
 /**
  * <a href="TagsUtil.java.html"><b><i>View Source</i></b></a>
@@ -31,6 +39,19 @@ import com.liferay.portal.kernel.util.Validator;
  *
  */
 public class TagsUtil {
+
+	public static final String[] ASSET_TYPE_CLASS_NAMES = {
+		BlogsEntry.class.getName(), BookmarksEntry.class.getName(),
+		DLFileEntry.class.getName(), IGImage.class.getName(),
+		JournalArticle.class.getName(), MBMessage.class.getName(),
+		WikiPage.class.getName()
+	};
+
+	public static final String[] ASSET_TYPE_PORTLET_IDS = {
+		PortletKeys.BLOGS, PortletKeys.BOOKMARKS, PortletKeys.DOCUMENT_LIBRARY,
+		PortletKeys.IMAGE_GALLERY, PortletKeys.JOURNAL,
+		PortletKeys.MESSAGE_BOARDS, PortletKeys.WIKI
+	};
 
 	public static boolean isValidWord(String word) {
 		if (Validator.isNull(word)) {

@@ -78,6 +78,9 @@ public interface TagsAssetLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
+		java.lang.String languageId);
+
 	public java.util.List getAssets(long[] entryIds, long[] notEntryIds,
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException;
@@ -105,6 +108,16 @@ public interface TagsAssetLocalService {
 
 	public int getCompanyAssetsCount(long companyId)
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		java.lang.String portletId, java.lang.String keywords)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
+		long companyId, java.lang.String portletId, java.lang.String keywords,
+		java.lang.String languageId, int begin, int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
 		java.lang.String className, long classPK, java.lang.String[] entryNames)

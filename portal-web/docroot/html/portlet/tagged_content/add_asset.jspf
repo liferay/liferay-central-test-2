@@ -41,7 +41,7 @@ PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, entries
 		<option value=""><liferay-ui:message key="add-asset"/>...</option>
 
 		<%
-		for (int i = 0; i < ASSET_TYPES.length; i++) {
+		for (int i = 0; i < TagsUtil.ASSET_TYPE_CLASS_NAMES.length; i++) {
 			PortletURLImpl redirectURLObj = (PortletURLImpl)currentURLObj;
 
 			if (selectionStyle.equals("manual")) {
@@ -53,12 +53,12 @@ PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, entries
 				redirectURLObj.setParameter("portletResource", portletId);
 			}
 
-			PortletURL url = getAddURL(ASSET_TYPES[i], permissionChecker, request, themeDisplay, entries, redirectURLObj);
+			PortletURL url = getAddURL(TagsUtil.ASSET_TYPE_CLASS_NAMES[i], permissionChecker, request, themeDisplay, entries, redirectURLObj);
 
 			if (url != null) {
 		%>
 
-				<option value="<%= url.toString() %>"><liferay-ui:message key='<%= "model.resource." + ASSET_TYPES[i] %>' /></option>
+				<option value="<%= url.toString() %>"><liferay-ui:message key='<%= "model.resource." + TagsUtil.ASSET_TYPE_CLASS_NAMES[i] %>' /></option>
 
 		<%
 			}
@@ -133,8 +133,8 @@ public PortletURL getAddURL(String assetType, PermissionChecker permissionChecke
 public PortletURL[] getAddURLs(PermissionChecker permissionChecker, HttpServletRequest request, ThemeDisplay themeDisplay, String[] entries, PortletURLImpl currentURLObj) throws Exception {
 	List urls = new ArrayList();
 
-	for (int i = 0; i < ASSET_TYPES.length; i++) {
-		PortletURL url = getAddURL(ASSET_TYPES[i], permissionChecker, request, themeDisplay, entries, currentURLObj);
+	for (int i = 0; i < TagsUtil.ASSET_TYPE_CLASS_NAMES.length; i++) {
+		PortletURL url = getAddURL(TagsUtil.ASSET_TYPE_CLASS_NAMES[i], permissionChecker, request, themeDisplay, entries, currentURLObj);
 
 		if (url != null) {
 			urls.add(url);

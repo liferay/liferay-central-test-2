@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
+import com.liferay.portlet.tags.model.TagsAssetType;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetService;
 
@@ -54,6 +55,10 @@ public class TagsAssetServiceImpl
 		return TagsAssetLocalServiceUtil.getAsset(assetId);
 	}
 
+	public TagsAssetType[] getAssetTypes(String languageId) {
+		return TagsAssetLocalServiceUtil.getAssetTypes(languageId);
+	}
+
 	public TagsAssetDisplay[] getCompanyAssetDisplays(
 			long companyId, int begin, int end, String languageId)
 		throws PortalException, SystemException {
@@ -71,6 +76,15 @@ public class TagsAssetServiceImpl
 
 	public int getCompanyAssetsCount(long companyId) throws SystemException {
 		return TagsAssetLocalServiceUtil.getCompanyAssetsCount(companyId);
+	}
+
+	public TagsAssetDisplay[] searchAssetDisplays(
+			long companyId, String portletId, String keywords,
+			String languageId, int begin, int end)
+		throws PortalException, SystemException {
+
+		return TagsAssetLocalServiceUtil.searchAssetDisplays(
+			companyId, portletId, keywords, languageId, begin, end);
 	}
 
 	public TagsAsset updateAsset(

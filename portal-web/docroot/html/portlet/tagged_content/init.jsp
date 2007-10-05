@@ -71,6 +71,7 @@
 <%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.util.TagsUtil" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPageResource" %>
@@ -120,8 +121,4 @@ Arrays.sort(entries);
 String[] manualEntries = prefs.getValues("manual-entries", new String[0]);
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
-%>
-
-<%!
-public final String[] ASSET_TYPES = {BlogsEntry.class.getName(), BookmarksEntry.class.getName(), DLFileEntry.class.getName(), IGImage.class.getName(), JournalArticle.class.getName(), MBMessage.class.getName(), WikiPage.class.getName()};
 %>

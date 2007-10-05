@@ -101,6 +101,19 @@ public class TagsAssetServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
+		java.lang.String languageId) throws RemoteException {
+		try {
+			com.liferay.portlet.tags.model.TagsAssetType[] returnValue = TagsAssetServiceUtil.getAssetTypes(languageId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
 		long companyId, int begin, int end, java.lang.String languageId)
 		throws RemoteException {
@@ -134,6 +147,22 @@ public class TagsAssetServiceSoap {
 		throws RemoteException {
 		try {
 			int returnValue = TagsAssetServiceUtil.getCompanyAssetsCount(companyId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
+		long companyId, java.lang.String portletId, java.lang.String keywords,
+		java.lang.String languageId, int begin, int end)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.tags.model.TagsAssetDisplay[] returnValue = TagsAssetServiceUtil.searchAssetDisplays(companyId,
+					portletId, keywords, languageId, begin, end);
 
 			return returnValue;
 		}

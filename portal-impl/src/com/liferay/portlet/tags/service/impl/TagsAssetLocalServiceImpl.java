@@ -25,13 +25,28 @@ package com.liferay.portlet.tags.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.lucene.LuceneFields;
+import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
+import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
+import com.liferay.portlet.tags.model.TagsAssetType;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsAssetLocalServiceBaseImpl;
@@ -39,11 +54,23 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 import com.liferay.portlet.tags.util.TagsAssetValidator;
+import com.liferay.portlet.tags.util.TagsUtil;
+import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 import com.liferay.util.ListUtil;
+import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.index.Term;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.Searcher;
+import org.apache.lucene.search.TermQuery;
 
 /**
  * <a href="TagsAssetLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -91,6 +118,18 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return TagsAssetUtil.findByC_C(classNameId, classPK);
+	}
+
+	public TagsAssetType[] getAssetTypes(String languageId) {
+		TagsAssetType[] assetTypes =
+			new TagsAssetType[TagsUtil.ASSET_TYPE_CLASS_NAMES.length];
+
+		for (int i = 0; i < TagsUtil.ASSET_TYPE_CLASS_NAMES.length; i++) {
+			assetTypes[i] = getAssetType(
+				TagsUtil.ASSET_TYPE_CLASS_NAMES[i], languageId);
+		}
+
+		return assetTypes;
 	}
 
 	public List getAssets(
@@ -155,6 +194,94 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 	public int getCompanyAssetsCount(long companyId) throws SystemException {
 		return TagsAssetUtil.countByCompanyId(companyId);
+	}
+
+	public Hits search(long companyId, String portletId, String keywords)
+		throws SystemException {
+
+		Searcher searcher = null;
+
+		try {
+			HitsImpl hits = new HitsImpl();
+
+			if (Validator.isNull(keywords)) {
+				return hits;
+			}
+
+			BooleanQuery contextQuery = new BooleanQuery();
+
+			if (Validator.isNotNull(portletId)) {
+				LuceneUtil.addRequiredTerm(
+					contextQuery, LuceneFields.PORTLET_ID, portletId);
+			}
+			else {
+				BooleanQuery portletIdsQuery = new BooleanQuery();
+
+				for (int i = 0; i < TagsUtil.ASSET_TYPE_PORTLET_IDS.length;
+						i++) {
+
+					Term term = new Term(
+						LuceneFields.PORTLET_ID,
+						TagsUtil.ASSET_TYPE_PORTLET_IDS[i]);
+					TermQuery termQuery = new TermQuery(term);
+
+					portletIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
+				}
+
+				contextQuery.add(portletIdsQuery, BooleanClause.Occur.MUST);
+			}
+
+			BooleanQuery searchQuery = new BooleanQuery();
+
+			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+
+			BooleanQuery fullQuery = new BooleanQuery();
+
+			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+
+			searcher = LuceneUtil.getSearcher(companyId);
+
+			hits.recordHits(searcher.search(fullQuery), searcher);
+
+			return hits;
+		}
+		catch (Exception e) {
+			return LuceneUtil.closeSearcher(searcher, keywords, e);
+		}
+	}
+
+	public TagsAssetDisplay[] searchAssetDisplays(
+			long companyId, String portletId, String keywords,
+			String languageId, int begin, int end)
+		throws PortalException, SystemException {
+
+		List assets = new ArrayList();
+
+		Hits hits = search(companyId, portletId, keywords);
+
+		hits = hits.subset(begin, end);
+
+		List hitsList = hits.toList();
+
+		for (int i = 0; i < hitsList.size(); i++) {
+			Document doc = (Document)hitsList.get(i);
+
+			try {
+				TagsAsset asset = getAsset(doc);
+
+				if (asset != null) {
+					assets.add(asset);
+				}
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e);
+				}
+			}
+		}
+
+		return getAssetDisplays(assets, languageId);
 	}
 
 	public TagsAsset updateAsset(
@@ -256,6 +383,80 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		validator.validate(className, entryNames);
 	}
 
+	protected TagsAsset getAsset(Document doc)
+		throws PortalException, SystemException {
+
+		String portletId = GetterUtil.getString(doc.get(LuceneFields.PORTLET_ID));
+
+		if (portletId.equals(PortletKeys.BLOGS)) {
+			long entryId = GetterUtil.getLong(doc.get("entryId"));
+
+			long classNameId = PortalUtil.getClassNameId(
+				BlogsEntry.class.getName());
+			long classPK = entryId;
+
+			return TagsAssetUtil.findByC_C(classNameId, classPK);
+		}
+		else if (portletId.equals(PortletKeys.BOOKMARKS)) {
+		}
+		else if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+			long folderId = GetterUtil.getLong(doc.get("repositoryId"));
+			String name = doc.get("path");
+
+			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+				folderId, name);
+
+			long classNameId = PortalUtil.getClassNameId(
+				DLFileEntry.class.getName());
+			long classPK = fileEntry.getFileEntryId();
+
+			return TagsAssetUtil.findByC_C(classNameId, classPK);
+		}
+		else if (portletId.equals(PortletKeys.IMAGE_GALLERY)) {
+		}
+		else if (portletId.equals(PortletKeys.JOURNAL)) {
+			long groupId = GetterUtil.getLong(
+				doc.get(LuceneFields.GROUP_ID));
+			String articleId = doc.get("articleId");
+			double version = GetterUtil.getDouble(doc.get("version"));
+
+			long articleResourcePrimKey =
+				JournalArticleResourceLocalServiceUtil.
+					getArticleResourcePrimKey(groupId, articleId);
+
+			long classNameId = PortalUtil.getClassNameId(
+				JournalArticle.class.getName());
+			long classPK = articleResourcePrimKey;
+
+			return TagsAssetUtil.findByC_C(classNameId, classPK);
+		}
+		else if (portletId.equals(PortletKeys.MESSAGE_BOARDS)) {
+			long messageId = GetterUtil.getLong(doc.get("messageId"));
+
+			long classNameId = PortalUtil.getClassNameId(
+				MBMessage.class.getName());
+			long classPK = messageId;
+
+			return TagsAssetUtil.findByC_C(classNameId, classPK);
+		}
+		else if (portletId.equals(PortletKeys.WIKI)) {
+			long nodeId = GetterUtil.getLong(doc.get("nodeId"));
+			String title = doc.get(LuceneFields.TITLE);
+
+			long pageResourcePrimKey =
+				WikiPageResourceLocalServiceUtil.getPageResourcePrimKey(
+					nodeId, title);
+
+			long classNameId = PortalUtil.getClassNameId(
+				WikiPage.class.getName());
+			long classPK = pageResourcePrimKey;
+
+			return TagsAssetUtil.findByC_C(classNameId, classPK);
+		}
+
+		return null;
+	}
+
 	protected TagsAssetDisplay[] getAssetDisplays(
 			List assets, String languageId)
 		throws PortalException, SystemException {
@@ -307,5 +508,27 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		return assetDisplays;
 	}
+
+	protected TagsAssetType getAssetType(String className, String languageId) {
+		long companyId = PortalInstances.getDefaultCompanyId();
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		String portletId = PortalUtil.getClassNamePortletId(className);
+		String portletTitle = PortalUtil.getPortletTitle(
+			portletId, companyId, languageId);
+
+		TagsAssetType assetType = new TagsAssetType();
+
+		assetType.setClassNameId(classNameId);
+		assetType.setClassName(className);
+		assetType.setPortletId(portletId);
+		assetType.setPortletTitle(portletTitle);
+
+		return assetType;
+	}
+
+	private static Log _log =
+		LogFactory.getLog(TagsAssetLocalServiceImpl.class);
 
 }

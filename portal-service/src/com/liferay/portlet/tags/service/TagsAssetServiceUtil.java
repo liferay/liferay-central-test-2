@@ -65,6 +65,13 @@ public class TagsAssetServiceUtil {
 		return tagsAssetService.getAsset(assetId);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
+		java.lang.String languageId) throws java.rmi.RemoteException {
+		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
+
+		return tagsAssetService.getAssetTypes(languageId);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
 		long companyId, int begin, int end, java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
@@ -88,6 +95,17 @@ public class TagsAssetServiceUtil {
 		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
 
 		return tagsAssetService.getCompanyAssetsCount(companyId);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
+		long companyId, java.lang.String portletId, java.lang.String keywords,
+		java.lang.String languageId, int begin, int end)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
+
+		return tagsAssetService.searchAssetDisplays(companyId, portletId,
+			keywords, languageId, begin, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(

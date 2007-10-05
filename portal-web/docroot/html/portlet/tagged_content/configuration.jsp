@@ -127,11 +127,11 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							<option value=""><liferay-ui:message key="select-asset"/>...</option>
 
 							<%
-							for (int i = 0; i < ASSET_TYPES.length; i++) {
-								if (!ASSET_TYPES[i].equals(MBMessage.class.getName()) && !ASSET_TYPES[i].equals(WikiPage.class.getName())) {
+							for (int i = 0; i < TagsUtil.ASSET_TYPE_CLASS_NAMES.length; i++) {
+								if (!TagsUtil.ASSET_TYPE_CLASS_NAMES[i].equals(MBMessage.class.getName()) && !TagsUtil.ASSET_TYPE_CLASS_NAMES[i].equals(WikiPage.class.getName())) {
 								%>
 
-									<option value="<%= ASSET_TYPES[i] %>"><liferay-ui:message key='<%= "model.resource." + ASSET_TYPES[i] %>' /></option>
+									<option value="<%= TagsUtil.ASSET_TYPE_CLASS_NAMES[i] %>"><liferay-ui:message key='<%= "model.resource." + TagsUtil.ASSET_TYPE_CLASS_NAMES[i] %>' /></option>
 
 								<%
 								}

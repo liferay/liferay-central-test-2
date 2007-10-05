@@ -133,6 +133,39 @@ public class TagsAssetServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
+		HttpPrincipal httpPrincipal, java.lang.String languageId)
+		throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = languageId;
+
+			if (languageId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
+					"getAssetTypes", new Object[] { paramObj0 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.tags.model.TagsAssetType[])returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
 		HttpPrincipal httpPrincipal, long companyId, int begin, int end,
 		java.lang.String languageId)
@@ -227,6 +260,65 @@ public class TagsAssetServiceHttp {
 			}
 
 			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
+		HttpPrincipal httpPrincipal, long companyId,
+		java.lang.String portletId, java.lang.String keywords,
+		java.lang.String languageId, int begin, int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+			Object paramObj1 = portletId;
+
+			if (portletId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = keywords;
+
+			if (keywords == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = languageId;
+
+			if (languageId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new IntegerWrapper(begin);
+			Object paramObj5 = new IntegerWrapper(end);
+			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
+					"searchAssetDisplays",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.tags.model.TagsAssetDisplay[])returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

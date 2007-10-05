@@ -105,6 +105,13 @@ public class TagsAssetLocalServiceUtil {
 		return tagsAssetLocalService.getAsset(className, classPK);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
+		java.lang.String languageId) {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getAssetTypes(languageId);
+	}
+
 	public static java.util.List getAssets(long[] entryIds, long[] notEntryIds,
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
@@ -164,6 +171,25 @@ public class TagsAssetLocalServiceUtil {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 
 		return tagsAssetLocalService.getCompanyAssetsCount(companyId);
+	}
+
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		java.lang.String portletId, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.search(companyId, portletId, keywords);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
+		long companyId, java.lang.String portletId, java.lang.String keywords,
+		java.lang.String languageId, int begin, int end)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.searchAssetDisplays(companyId, portletId,
+			keywords, languageId, begin, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(

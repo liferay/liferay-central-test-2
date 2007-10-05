@@ -20,31 +20,53 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.json;
+package com.liferay.portlet.tags.model;
+
+import java.io.Serializable;
 
 /**
- * <a href="JSONArrayWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsAssetType.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JSONArrayWrapper {
+public class TagsAssetType implements Serializable {
 
-	public JSONArrayWrapper() {
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public JSONArrayWrapper(Object value) {
-		_value = value;
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
 	}
 
-	public Object getValue() {
-		return _value;
+	public String getClassName() {
+		return _className;
 	}
 
-	public void setValue(Object value) {
-		_value = value;
+	public void setClassName(String className) {
+		_className = className;
 	}
 
-	private Object _value;
+	public String getPortletId() {
+		return _portletId;
+	}
+
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
+	}
+
+	public String getPortletTitle() {
+		return _portletTitle;
+	}
+
+	public void setPortletTitle(String portletTitle) {
+		_portletTitle = portletTitle;
+	}
+
+	private long _classNameId;
+	private String _className;
+	private String _portletId;
+	private String _portletTitle;
 
 }
