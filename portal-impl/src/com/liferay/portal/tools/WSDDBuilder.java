@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
-import com.liferay.util.TextFormatter;
 import com.liferay.util.ant.Java2WsddTask;
 
 import java.io.File;
@@ -68,16 +67,21 @@ public class WSDDBuilder {
 
 			String packagePath = root.attributeValue("package-path");
 
-			_portletName = root.element("portlet").attributeValue("name");
+			Element portlet = root.element("portlet");
+			Element namespace = root.element("namespace");
 
-			_portletPackageName =
-				TextFormatter.format(_portletName, TextFormatter.B);
+			if (portlet != null) {
+				_portletShortName = portlet.attributeValue("short-name");
+			}
+			else {
+				_portletShortName = namespace.getText();
+			}
 
 			_outputPath =
-				"src/" + StringUtil.replace(packagePath, ".", "/") + "/" +
-					_portletPackageName + "/service/http";
+				"src/" + StringUtil.replace(packagePath, ".", "/") +
+					"/service/http";
 
-			_packagePath = packagePath + "." + _portletPackageName;
+			_packagePath = packagePath;
 
 			List entities = root.elements("entity");
 
@@ -109,9 +113,9 @@ public class WSDDBuilder {
 		String className =
 			_packagePath + ".service.http." + entityName + "ServiceSoap";
 
-		String serviceName = StringUtil.replace(_portletName, " ", "_");
+		String serviceName = StringUtil.replace(_portletShortName, " ", "_");
 
-		if (!_portletName.equals("Portal")) {
+		if (!_portletShortName.equals("Portal")) {
 			serviceName = "Portlet_" + serviceName;
 		}
 
@@ -129,8 +133,7 @@ public class WSDDBuilder {
 	}
 
 	private String _serverConfigFileName;
-	private String _portletName;
-	private String _portletPackageName;
+	private String _portletShortName;
 	private String _outputPath;
 	private String _packagePath;
 
