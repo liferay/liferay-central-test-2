@@ -16830,10 +16830,14 @@ Liferay.Portlet = {
 			this.processAll(id);
 		}
 		else if (status == 0) {
+
 			// Already processed. Do nothing.
+
 		}
 		else {
+
 			// New portlet. Process and mark.
+
 			this.processPortlet(id);
 		}
 
@@ -16919,9 +16923,20 @@ Liferay.Portlet = {
 			else {
 				jQuery(neighbor).after(portlet);
 			}
+
+			if (portlet && portlet.originalColumn) {
+				var oColumn = jQuery(portlet.originalColumn);
+				var portlets = oColumn.find('.portlet-boundary:first');
+
+				if (portlets.length == 0) {
+					oColumn.addClass('empty');
+				}
+
+				oColumn = portlet.originalColumn = null;
+			}
 		}
 		else if (container) {
-			jQuery(container).append(portlet);
+			jQuery(container).append(portlet).removeClass('empty');
 		}
 
 		this.savePosition(portlet);
@@ -17549,6 +17564,7 @@ Liferay.ColorPicker = new Class({
 				handle: jPortlet.find(instance._handle)[0],
 				onMove: function(s){instance._onMove(s)},
 				onComplete: function(s){instance._onComplete(s);},
+				onStart: function(s) {instance._onStart(s);},
 				threshold: 2,
 				scroll: true
 			});
@@ -17808,10 +17824,15 @@ Liferay.ColorPicker = new Class({
 
 			instance._grid.removeClass("dragging");
 			instance._clearCache();
-		}
+		},
+
+		_onStart: function(settings) {
+			var instance = this;
+
+			settings.container.originalColumn = settings.container.parentNode;
+		},
 	});
 })(Liferay);
-
 Liferay.Dock = {
 	init: function() {
 		var instance = this;

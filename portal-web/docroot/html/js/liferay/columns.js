@@ -305,6 +305,7 @@
 
 		_onStart: function(settings) {
 			var instance = this;
+
 			settings.container.originalColumn = settings.container.parentNode;
 		},
 	});

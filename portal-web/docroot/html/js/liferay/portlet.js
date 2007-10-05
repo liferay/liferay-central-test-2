@@ -24,10 +24,14 @@ Liferay.Portlet = {
 			this.processAll(id);
 		}
 		else if (status == 0) {
+
 			// Already processed. Do nothing.
+
 		}
 		else {
+
 			// New portlet. Process and mark.
+
 			this.processPortlet(id);
 		}
 
@@ -117,9 +121,11 @@ Liferay.Portlet = {
 			if (portlet && portlet.originalColumn) {
 				var oColumn = jQuery(portlet.originalColumn);
 				var portlets = oColumn.find('.portlet-boundary:first');
+
 				if (portlets.length == 0) {
 					oColumn.addClass('empty');
 				}
+
 				oColumn = portlet.originalColumn = null;
 			}
 		}

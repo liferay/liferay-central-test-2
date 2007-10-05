@@ -99,7 +99,9 @@ public class PortletColumnLogic extends RuntimeLogic {
 			_themeDisplay.getLayoutTypePortlet();
 
 		String columnId = (String)attributes.get("id");
+
 		List portlets = layoutTypePortlet.getAllPortlets(columnId);
+
 		String columnCssClass = "lfr-portlet-column";
 
 		if (portlets.size() == 0) {
