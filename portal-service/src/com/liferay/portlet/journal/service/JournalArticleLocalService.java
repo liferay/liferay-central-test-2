@@ -303,6 +303,11 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public double getLatestVersion(long groupId, java.lang.String articleId,
+		java.lang.Boolean approved)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getStructureArticles(long groupId,
 		java.lang.String structureId) throws com.liferay.portal.SystemException;
 

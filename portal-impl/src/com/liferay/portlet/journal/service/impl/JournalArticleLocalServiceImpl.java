@@ -373,6 +373,10 @@ public class JournalArticleLocalServiceImpl
 
 		sendEmail(article, articleURL, prefs, "granted");
 
+		// Tags
+
+		updateTagsAsset(article, null);
+
 		// Lucene
 
 		try {
@@ -757,7 +761,7 @@ public class JournalArticleLocalServiceImpl
 		JournalArticle article = getDisplayArticle(groupId, articleId);
 
 		return getArticleDisplay(
-			groupId, articleId, article.getVersion(), templateId, languageId,
+			groupId, articleId, version, templateId, languageId,
 			themeDisplay, null);
 	}
 
@@ -961,6 +965,15 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		JournalArticle article = getLatestArticle(groupId, articleId);
+
+		return article.getVersion();
+	}
+
+	public double getLatestVersion(
+		long groupId, String articleId, Boolean approved)
+		throws PortalException, SystemException {
+
+		JournalArticle article = getLatestArticle(groupId, articleId, approved);
 
 		return article.getVersion();
 	}
@@ -1395,6 +1408,17 @@ public class JournalArticleLocalServiceImpl
 
 	public void updateTagsAsset(JournalArticle article, String[] tagsEntries)
 		throws PortalException, SystemException {
+
+		if (!article.isApproved()) {
+			return;
+		}
+
+		double latestVersion = getLatestVersion(
+			article.getGroupId(), article.getArticleId(), Boolean.TRUE);
+
+		if (latestVersion != article.getVersion()) {
+			return;
+		}
 
 		TagsAssetLocalServiceUtil.updateAsset(
 			article.getUserId(), JournalArticle.class.getName(),

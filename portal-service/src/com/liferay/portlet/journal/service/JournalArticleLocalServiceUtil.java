@@ -500,6 +500,16 @@ public class JournalArticleLocalServiceUtil {
 		return journalArticleLocalService.getLatestVersion(groupId, articleId);
 	}
 
+	public static double getLatestVersion(long groupId,
+		java.lang.String articleId, java.lang.Boolean approved)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.getLatestVersion(groupId, articleId,
+			approved);
+	}
+
 	public static java.util.List getStructureArticles(long groupId,
 		java.lang.String structureId) throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();

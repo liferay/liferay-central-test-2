@@ -47,8 +47,10 @@
 		String languageId = LanguageUtil.getLanguageId(request);
 
 		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
-
-		JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay, xmlRequest);
+			
+		double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
+		System.out.println("version: " + latestApprovedVersion);
+		JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), latestApprovedVersion, null, languageId, themeDisplay, xmlRequest);
 		%>
 
 		<c:if test="<%= articleDisplay != null %>">
