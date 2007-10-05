@@ -177,6 +177,11 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
+
+		if (entryNames == null) {
+			entryNames = new String[0];
+		}
+
 		Date now = new Date();
 
 		validate(className, entryNames);
@@ -215,32 +220,30 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		// Entries
 
-		if (entryNames != null) {
-			List entries = new ArrayList(entryNames.length);
+		List entries = new ArrayList(entryNames.length);
 
-			for (int i = 0; i < entryNames.length; i++) {
-				String name = entryNames[i].trim().toLowerCase();
+		for (int i = 0; i < entryNames.length; i++) {
+			String name = entryNames[i].trim().toLowerCase();
 
-				TagsEntry entry = TagsEntryUtil.fetchByC_N(
-					user.getCompanyId(), name);
+			TagsEntry entry = TagsEntryUtil.fetchByC_N(
+				user.getCompanyId(), name);
 
-				if (entry == null) {
-					String defaultProperties = "0:category:no category";
+			if (entry == null) {
+				String defaultProperties = "0:category:no category";
 
-					TagsEntry newTagsEntry = TagsEntryLocalServiceUtil.addEntry(
-						user.getUserId(), entryNames[i],
-						new String[] {defaultProperties});
+				TagsEntry newTagsEntry = TagsEntryLocalServiceUtil.addEntry(
+					user.getUserId(), entryNames[i],
+					new String[] {defaultProperties});
 
-					entries.add(newTagsEntry);
-				}
-				else {
-					entries.add(entry);
-				}
+				entries.add(newTagsEntry);
 			}
-
-			TagsAssetUtil.setTagsEntries(asset.getAssetId(), entries);
+			else {
+				entries.add(entry);
+			}
 		}
-		
+
+		TagsAssetUtil.setTagsEntries(asset.getAssetId(), entries);
+
 		return asset;
 	}
 

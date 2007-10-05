@@ -369,13 +369,13 @@ public class JournalArticleLocalServiceImpl
 
 		JournalArticleUtil.update(article);
 
-		// Email
-
-		sendEmail(article, articleURL, prefs, "granted");
-
 		// Tags
 
 		updateTagsAsset(article, null);
+
+		// Email
+
+		sendEmail(article, articleURL, prefs, "granted");
 
 		// Lucene
 
@@ -761,8 +761,8 @@ public class JournalArticleLocalServiceImpl
 		JournalArticle article = getDisplayArticle(groupId, articleId);
 
 		return getArticleDisplay(
-			groupId, articleId, version, templateId, languageId,
-			themeDisplay, null);
+			groupId, articleId, version, templateId, languageId, themeDisplay,
+			null);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
@@ -970,7 +970,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public double getLatestVersion(
-		long groupId, String articleId, Boolean approved)
+			long groupId, String articleId, Boolean approved)
 		throws PortalException, SystemException {
 
 		JournalArticle article = getLatestArticle(groupId, articleId, approved);

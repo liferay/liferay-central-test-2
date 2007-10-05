@@ -47,9 +47,9 @@
 		String languageId = LanguageUtil.getLanguageId(request);
 
 		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
-			
+
 		double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
-		
+
 		JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), latestApprovedVersion, null, languageId, themeDisplay, xmlRequest);
 		%>
 
