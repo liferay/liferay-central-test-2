@@ -113,9 +113,18 @@ Liferay.Portlet = {
 			else {
 				jQuery(neighbor).after(portlet);
 			}
+
+			if (portlet && portlet.originalColumn) {
+				var oColumn = jQuery(portlet.originalColumn);
+				var portlets = oColumn.find('.portlet-boundary:first');
+				if (portlets.length == 0) {
+					oColumn.addClass('empty');
+				}
+				oColumn = portlet.originalColumn = null;
+			}
 		}
 		else if (container) {
-			jQuery(container).append(portlet);
+			jQuery(container).append(portlet).removeClass('empty');
 		}
 
 		this.savePosition(portlet);

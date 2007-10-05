@@ -95,16 +95,22 @@ public class PortletColumnLogic extends RuntimeLogic {
 	public void processContent(StringMaker sm, Map attributes)
 		throws Exception {
 
-		String columnId = (String)attributes.get("id");
-
-		sm.append("<div id=\"layout-column_");
-		sm.append(columnId);
-		sm.append("\">");
-
 		LayoutTypePortlet layoutTypePortlet =
 			_themeDisplay.getLayoutTypePortlet();
 
+		String columnId = (String)attributes.get("id");
 		List portlets = layoutTypePortlet.getAllPortlets(columnId);
+		String columnCssClass = "lfr-portlet-column";
+
+		if (portlets.size() == 0) {
+			columnCssClass += " empty";
+		}
+
+		sm.append("<div class=\"");
+		sm.append(columnCssClass);
+		sm.append("\" id=\"layout-column_");
+		sm.append(columnId);
+		sm.append("\">");
 
 		for (int i = 0; i < portlets.size(); i++) {
 			Portlet portlet = (Portlet)portlets.get(i);

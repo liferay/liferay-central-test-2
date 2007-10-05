@@ -41,6 +41,7 @@
 				handle: jPortlet.find(instance._handle)[0],
 				onMove: function(s){instance._onMove(s)},
 				onComplete: function(s){instance._onComplete(s);},
+				onStart: function(s) {instance._onStart(s);},
 				threshold: 2,
 				scroll: true
 			});
@@ -300,6 +301,11 @@
 
 			instance._grid.removeClass("dragging");
 			instance._clearCache();
-		}
+		},
+
+		_onStart: function(settings) {
+			var instance = this;
+			settings.container.originalColumn = settings.container.parentNode;
+		},
 	});
 })(Liferay);

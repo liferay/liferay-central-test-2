@@ -10,7 +10,7 @@
 
 /* ---------- Column widths ---------- */
 
-.lfr-column.dragging {
+#layout-grid.dragging .lfr-column {
 }
 
 .lfr-column.ten {
