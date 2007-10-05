@@ -61,7 +61,12 @@ public class JSONUtil {
 			jsonObj.put(key, StringPool.BLANK);
 		}
 		else {
-			jsonObj.put(key, String.valueOf(value.getTime()));
+
+			// Unix timestamp
+
+			long time = value.getTime() / Time.SECOND;
+
+			put(jsonObj, key, time);
 		}
 	}
 
