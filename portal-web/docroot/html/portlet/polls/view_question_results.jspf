@@ -82,7 +82,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 				<c:if test="<%= votesPercentWidth > 0 %>">
 					<td></td>
 					<td>
-						<table border="0" cellpadding="0" cellspacing="0">
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
 						<tr>
 							<td class="alpha"><img border="0" height="5" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="<%= votesPercentWidth %>" /></td>
 							<td class="beta"><img border="0" height="5" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" vspace="0" width="<%= votesPixelWidth - votesPercentWidth %>" /></td>
