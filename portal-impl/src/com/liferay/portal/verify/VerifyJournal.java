@@ -113,7 +113,8 @@ public class VerifyJournal extends VerifyProcess {
 
 			try {
 				TagsAssetLocalServiceUtil.getAsset(
-					JournalArticle.class.getName(), article.getPrimaryKey());
+					JournalArticle.class.getName(),
+					article.getResourcePrimKey());
 			}
 			catch (NoSuchAssetException nsae) {
 				JournalArticleLocalServiceUtil.updateTagsAsset(
