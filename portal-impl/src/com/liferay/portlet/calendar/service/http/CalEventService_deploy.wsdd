@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
-	<service name="Portlet_Calendar_CalEventService" provider="java:RPC" style="rpc" use="encoded">
+	<service name="Portlet_Cal_CalEventService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.calendar.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="CalEventServiceSoapService"/>
 		<parameter name="schemaUnqualified" value="urn:http.service.calendar.portlet.liferay.com,http://cal.kernel.portal.liferay.com,http://model.calendar.portlet.liferay.com"/>
-		<parameter name="wsdlServicePort" value="Portlet_Calendar_CalEventService"/>
+		<parameter name="wsdlServicePort" value="Portlet_Cal_CalEventService"/>
 		<parameter name="className" value="com.liferay.portlet.calendar.service.http.CalEventServiceSoap"/>
 		<parameter name="wsdlPortType" value="CalEventServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>

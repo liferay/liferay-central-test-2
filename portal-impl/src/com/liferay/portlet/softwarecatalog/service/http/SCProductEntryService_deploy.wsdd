@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
-	<service name="Portlet_Software_Catalog_SCProductEntryService" provider="java:RPC" style="rpc" use="encoded">
+	<service name="Portlet_SC_SCProductEntryService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.softwarecatalog.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="SCProductEntryServiceSoapService"/>
 		<parameter name="schemaUnqualified" value="urn:http.service.softwarecatalog.portlet.liferay.com,http://model.softwarecatalog.portlet.liferay.com,http://xml.apache.org/xml-soap"/>
-		<parameter name="wsdlServicePort" value="Portlet_Software_Catalog_SCProductEntryService"/>
+		<parameter name="wsdlServicePort" value="Portlet_SC_SCProductEntryService"/>
 		<parameter name="className" value="com.liferay.portlet.softwarecatalog.service.http.SCProductEntryServiceSoap"/>
 		<parameter name="wsdlPortType" value="SCProductEntryServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>

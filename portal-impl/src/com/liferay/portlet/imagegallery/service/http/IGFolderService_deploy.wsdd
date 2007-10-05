@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
-	<service name="Portlet_Image_Gallery_IGFolderService" provider="java:RPC" style="rpc" use="encoded">
+	<service name="Portlet_IG_IGFolderService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.imagegallery.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="IGFolderServiceSoapService"/>
 		<parameter name="schemaUnqualified" value="http://model.imagegallery.portlet.liferay.com,urn:http.service.imagegallery.portlet.liferay.com"/>
-		<parameter name="wsdlServicePort" value="Portlet_Image_Gallery_IGFolderService"/>
+		<parameter name="wsdlServicePort" value="Portlet_IG_IGFolderService"/>
 		<parameter name="className" value="com.liferay.portlet.imagegallery.service.http.IGFolderServiceSoap"/>
 		<parameter name="wsdlPortType" value="IGFolderServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
