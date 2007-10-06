@@ -204,10 +204,6 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		try {
 			HitsImpl hits = new HitsImpl();
 
-			if (Validator.isNull(keywords)) {
-				return hits;
-			}
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			if (Validator.isNotNull(portletId)) {
