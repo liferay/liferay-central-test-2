@@ -17562,8 +17562,8 @@ Liferay.ColorPicker = new Class({
 				clone: true,
 				dragClass: "drag-indicator",
 				handle: jPortlet.find(instance._handle)[0],
-				onMove: function(s){instance._onMove(s)},
-				onComplete: function(s){instance._onComplete(s);},
+				onMove: function(s) {instance._onMove(s)},
+				onComplete: function(s) {instance._onComplete(s);},
 				onStart: function(s) {instance._onStart(s);},
 				threshold: 2,
 				scroll: true
@@ -17830,7 +17830,7 @@ Liferay.ColorPicker = new Class({
 			var instance = this;
 
 			settings.container.originalColumn = settings.container.parentNode;
-		},
+		}
 	});
 })(Liferay);
 Liferay.Dock = {
