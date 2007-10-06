@@ -85,7 +85,16 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 	String languageId = LanguageUtil.getLanguageId(request);
 
-	JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
+	JournalArticleDisplay articleDisplay = null;
+
+	try {
+		double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
+
+		articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
+	}
+	catch(NoSuchArticleException e) {
+		// No version has been approved yet, the article should not be rendered
+	}
 
 	if (articleDisplay != null) {
 		showEditIcon = JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE);

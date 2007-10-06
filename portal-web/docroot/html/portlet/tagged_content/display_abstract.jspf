@@ -75,23 +75,37 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 	String languageId = LanguageUtil.getLanguageId(request);
 
-	JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
+	JournalArticleDisplay articleDisplay = null;
 
-	if (Validator.isNull(title)) {
-		title = articleDisplay.getTitle();
+	try {
+		double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
+
+		articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
+	}
+	catch(NoSuchArticleException e) {
+		// No version has been approved yet, the article should not be rendered
 	}
 
-	summary = articleDisplay.getDescription();
+	if (articleDisplay != null) {
+		if (Validator.isNull(title)) {
+			title = articleDisplay.getTitle();
+		}
 
-	PortletURL articleURL = renderResponse.createRenderURL();
+		summary = articleDisplay.getDescription();
 
-	articleURL.setParameter("struts_action", "/tagged_content/view_content");
-	articleURL.setParameter("redirect", currentURL);
-	articleURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
+		PortletURL articleURL = renderResponse.createRenderURL();
 
-	viewURL = articleURL.toString();
+		articleURL.setParameter("struts_action", "/tagged_content/view_content");
+		articleURL.setParameter("redirect", currentURL);
+		articleURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 
-	viewURLMessage = "read-more";
+		viewURL = articleURL.toString();
+
+		viewURLMessage = "read-more";
+	}
+	else {
+		show = false;
+	}
 }
 
 // URLs set through the asset override automatically generated URLs
@@ -101,23 +115,25 @@ if (Validator.isNotNull(asset.getUrl())) {
 }
 %>
 
-<div class="portlet-journal-abstract">
-	<c:choose>
-		<c:when test="<%= Validator.isNotNull(viewURL) %>">
-			<h3><a href="<%= viewURL %>"><%= title %></a></h3>
-		</c:when>
-		<c:otherwise>
-			<h3><%= title %></h3>
-		</c:otherwise>
-	</c:choose>
+<c:if test="<%= show %>">
+	<div class="portlet-journal-abstract">
+		<c:choose>
+			<c:when test="<%= Validator.isNotNull(viewURL) %>">
+				<h3><a href="<%= viewURL %>"><%= title %></a></h3>
+			</c:when>
+			<c:otherwise>
+				<h3><%= title %></h3>
+			</c:otherwise>
+		</c:choose>
 
-	<p class="portlet-journal-summary">
-		<%= summary %>
-	</p>
+		<p class="portlet-journal-summary">
+			<%= summary %>
+		</p>
 
-	<c:if test="<%= Validator.isNotNull(viewURL) %>">
-		<div class="portlet-journal-more">
-			<a href="<%= viewURL %>"><liferay-ui:message key="<%= viewURLMessage %>" /></a>
-		</div>
-	</c:if>
-</div>
+		<c:if test="<%= Validator.isNotNull(viewURL) %>">
+			<div class="portlet-journal-more">
+				<a href="<%= viewURL %>"><liferay-ui:message key="<%= viewURLMessage %>" /></a>
+			</div>
+		</c:if>
+	</div>
+</c:if>

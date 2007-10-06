@@ -157,6 +157,8 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 			String className = PortalUtil.getClassName(asset.getClassNameId());
 			long classPK = asset.getClassPK();
 
+			boolean show = true;
+
 			try {
 		%>
 
@@ -176,7 +178,9 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 					<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
 				</div>
 
+			<c:if test="<%= show %>">
 				<div class="separator"><!-- --></div>
+			</c:if>
 
 		<%
 			}
@@ -218,6 +222,8 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 			String className = PortalUtil.getClassName(asset.getClassNameId());
 			long classPK = asset.getClassPK();
 
+			boolean show = true;
+
 			try {
 		%>
 
@@ -237,7 +243,9 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 					<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
 				</div>
 
-				<div class="separator"><!-- --></div>
+				<c:if test="<%= show %>">
+					<div class="separator"><!-- --></div>
+				</c:if>
 
 		<%
 			}

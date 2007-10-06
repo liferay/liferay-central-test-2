@@ -579,6 +579,16 @@ public class JournalArticleLocalServiceUtil {
 			version);
 	}
 
+	public static boolean isLatestVersion(long groupId,
+		java.lang.String articleId, double version, java.lang.Boolean active)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.isLatestVersion(groupId, articleId,
+			version, active);
+	}
+
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();

@@ -48,9 +48,20 @@
 
 		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
-		double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
 
-		JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), latestApprovedVersion, null, languageId, themeDisplay, xmlRequest);
+		JournalArticleDisplay articleDisplay = null;
+
+		try {
+			double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
+
+			articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), latestApprovedVersion, null, languageId, themeDisplay, xmlRequest);
+		}
+		catch(NoSuchArticleException e) {
+			// No version has been approved yet, the article should not be rendered
+			show = false;
+		}
+
+
 		%>
 
 		<c:if test="<%= articleDisplay != null %>">

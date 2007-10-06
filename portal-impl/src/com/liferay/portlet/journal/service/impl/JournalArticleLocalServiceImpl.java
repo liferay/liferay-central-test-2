@@ -1041,6 +1041,18 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	public boolean isLatestVersion(
+			long groupId, String articleId, double version, Boolean active)
+		throws PortalException, SystemException {
+
+		if (getLatestVersion(groupId, articleId, active) == version) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public void reIndex(String[] ids) throws SystemException {
 		try {
 			long companyId = GetterUtil.getLong(ids[0]);
@@ -1405,12 +1417,28 @@ public class JournalArticleLocalServiceImpl
 	public void updateTagsAsset(JournalArticle article, String[] tagsEntries)
 		throws PortalException, SystemException {
 
-		TagsAssetLocalServiceUtil.updateAsset(
-			article.getUserId(), JournalArticle.class.getName(),
-			article.getResourcePrimKey(), tagsEntries, null, null,
-			article.getDisplayDate(), article.getExpirationDate(),
-			ContentTypes.TEXT_HTML, article.getTitle(),
-			article.getDescription(), article.getDescription(), null, 0, 0);
+		boolean updateAsset = true;
+
+		if (article.getVersion() == 1) {
+		}
+		else if (!article.isApproved()) {
+			updateAsset = false;
+		}
+		else if (!isLatestVersion(
+					article.getGroupId(), article.getArticleId(),
+					article.getVersion(), Boolean.TRUE)) {
+
+				updateAsset = false;
+		}
+
+		if (updateAsset) {
+			TagsAssetLocalServiceUtil.updateAsset(
+				article.getUserId(), JournalArticle.class.getName(),
+				article.getResourcePrimKey(), tagsEntries, null, null,
+				article.getDisplayDate(), article.getExpirationDate(),
+				ContentTypes.TEXT_HTML, article.getTitle(),
+				article.getDescription(), article.getDescription(), null, 0, 0);
+		}
 	}
 
 	protected String format(

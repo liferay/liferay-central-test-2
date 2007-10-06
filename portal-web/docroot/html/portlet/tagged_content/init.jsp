@@ -54,6 +54,7 @@
 <%@ page import="com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.permission.IGImagePermission" %>
+<%@ page import="com.liferay.portlet.journal.NoSuchArticleException" %>
 <%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>

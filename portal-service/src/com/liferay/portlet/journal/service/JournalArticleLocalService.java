@@ -338,6 +338,11 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean isLatestVersion(long groupId, java.lang.String articleId,
+		double version, java.lang.Boolean active)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 
