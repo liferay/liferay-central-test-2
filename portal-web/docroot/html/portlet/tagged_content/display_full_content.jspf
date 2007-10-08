@@ -48,7 +48,6 @@
 
 		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
-
 		JournalArticleDisplay articleDisplay = null;
 
 		try {
@@ -56,12 +55,12 @@
 
 			articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), latestApprovedVersion, null, languageId, themeDisplay, xmlRequest);
 		}
-		catch(NoSuchArticleException e) {
+		catch (NoSuchArticleException nsae) {
+
 			// No version has been approved yet, the article should not be rendered
+
 			show = false;
 		}
-
-
 		%>
 
 		<c:if test="<%= articleDisplay != null %>">

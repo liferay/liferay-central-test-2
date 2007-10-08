@@ -178,9 +178,9 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 					<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
 				</div>
 
-			<c:if test="<%= show %>">
-				<div class="separator"><!-- --></div>
-			</c:if>
+				<c:if test="<%= show %>">
+					<div class="separator"><!-- --></div>
+				</c:if>
 
 		<%
 			}

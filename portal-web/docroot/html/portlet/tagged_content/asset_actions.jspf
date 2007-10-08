@@ -92,8 +92,10 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 		articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
 	}
-	catch(NoSuchArticleException e) {
+	catch (NoSuchArticleException nsae) {
+
 		// No version has been approved yet, the article should not be rendered
+
 	}
 
 	if (articleDisplay != null) {
