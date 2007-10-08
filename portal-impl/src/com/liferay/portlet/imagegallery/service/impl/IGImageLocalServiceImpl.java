@@ -370,6 +370,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		Image largeImage = ImageLocalUtil.getImage(image.getLargeImageId());
 
+		if (largeImage == null) {
+			return;
+		}
+
 		TagsAssetLocalServiceUtil.updateAsset(
 			image.getUserId(), IGImage.class.getName(), image.getImageId(),
 			tagsEntries, null, null, null, null, largeImage.getType(),
