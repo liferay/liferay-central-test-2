@@ -101,6 +101,9 @@ public class EditSettingsAction extends PortletAction {
 		else if (cmd.equals("updateMailHostNames")) {
 			updateMailHostNames(req, prefs);
 		}
+		else if (cmd.equals("updateNtlm")) {
+			updateNtlm(req, companyId, prefs);
+		}
 		else if (cmd.equals("updateOpenId")) {
 			updateOpenId(req, prefs);
 		}
@@ -245,7 +248,6 @@ public class EditSettingsAction extends PortletAction {
 
 		boolean enabled = ParamUtil.getBoolean(req, "enabled");
 		boolean required = ParamUtil.getBoolean(req, "required");
-		boolean ntlmEnabled = ParamUtil.getBoolean(req, "ntlmEnabled");
 		String baseProviderURL = ParamUtil.getString(req, "baseProviderURL");
 		String baseDN = ParamUtil.getString(req, "baseDN");
 		String principal = ParamUtil.getString(req, "principal");
@@ -300,8 +302,6 @@ public class EditSettingsAction extends PortletAction {
 
 		prefs.setValue(PropsUtil.LDAP_AUTH_ENABLED, String.valueOf(enabled));
 		prefs.setValue(PropsUtil.LDAP_AUTH_REQUIRED, String.valueOf(required));
-		prefs.setValue(
-			PropsUtil.NTLM_AUTH_ENABLED, String.valueOf(ntlmEnabled));
 		prefs.setValue(PropsUtil.LDAP_BASE_PROVIDER_URL, baseProviderURL);
 		prefs.setValue(PropsUtil.LDAP_BASE_DN, baseDN);
 		prefs.setValue(PropsUtil.LDAP_SECURITY_PRINCIPAL, principal);
@@ -341,6 +341,24 @@ public class EditSettingsAction extends PortletAction {
 		String mailHostNames = ParamUtil.getString(req, "mailHostNames");
 
 		prefs.setValue(PropsUtil.ADMIN_MAIL_HOST_NAMES, mailHostNames);
+	}
+
+	protected void updateNtlm(
+			ActionRequest req, long companyId, PortletPreferences prefs)
+		throws Exception {
+
+		boolean enabled = ParamUtil.getBoolean(req, "enabled");
+		String domain = ParamUtil.getString(req, "domain");
+		String domainController = ParamUtil.getString(req, "domainController");
+
+		prefs.setValue(
+			PropsUtil.NTLM_AUTH_ENABLED, String.valueOf(enabled));
+		prefs.setValue(PropsUtil.NTLM_DOMAIN, domain);
+		prefs.setValue(PropsUtil.NTLM_DOMAIN_CONTROLLER, domainController);
+
+		prefs.store();
+
+		CASFilter.reload(companyId);
 	}
 
 	protected void updateOpenId(ActionRequest req, PortletPreferences prefs)

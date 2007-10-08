@@ -31,9 +31,9 @@ import com.liferay.util.ExtPropertiesLoader;
 
 /**
  * <a href="PropsUtil.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * @author Brian Wing Shun Chan
- * 
+ *
  */
 public class PropsUtil {
 
@@ -396,6 +396,10 @@ public class PropsUtil {
 	// NTLM
 
 	public static final String NTLM_AUTH_ENABLED = "ntlm.auth.enabled";
+
+	public static final String NTLM_DOMAIN_CONTROLLER = "ntlm.auth.domain.controller";
+
+	public static final String NTLM_DOMAIN = "ntlm.auth.domain";
 
 	// OpenID
 

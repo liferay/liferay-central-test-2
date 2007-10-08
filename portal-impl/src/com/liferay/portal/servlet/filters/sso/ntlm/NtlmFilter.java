@@ -88,28 +88,22 @@ public class NtlmFilter extends NtlmHttpFilter {
 						== null)) {
 
 					String domainController = PrefsPropsUtil.getString(
-						companyId, PropsUtil.LDAP_BASE_PROVIDER_URL);
+						companyId, PropsUtil.NTLM_DOMAIN_CONTROLLER);
 
-					// Remove leading ldap://
-
-					domainController = domainController.substring(
-						7, domainController.length());
-
-					// Remove port
-
-					int pos = domainController.lastIndexOf(StringPool.COLON);
-
-					if (pos != -1) {
-						domainController = domainController.substring(0, pos);
-					}
+					String domain = PrefsPropsUtil.getString(
+						companyId, PropsUtil.NTLM_DOMAIN);
 
 					_config.addInitParameter(
 						"jcifs.http.domainController", domainController);
+
+					_config.addInitParameter(
+						"jcifs.smb.client.domain", domain);
 
 					super.init(_config);
 
 					if (_log.isDebugEnabled()) {
 						_log.debug("Host " + domainController);
+						_log.debug("Domain " + domain);
 					}
 				}
 

@@ -816,7 +816,7 @@ String portletURLString = portletURL.toString();
 		<c:choose>
 			<c:when test='<%= tabs2.equals("authentication") %>'>
 				<liferay-ui:tabs
-					names="general,ldap,cas,open-id"
+					names="general,ldap,ntlm,cas,open-id"
 					param="tabs3"
 					url="<%= portletURLString %>"
 				/>
@@ -846,14 +846,6 @@ String portletURLString = portletURL.toString();
 									</td>
 									<td>
 										<liferay-ui:input-checkbox param="required" defaultValue='<%= ParamUtil.getBoolean(request, "required", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_AUTH_REQUIRED)) %>' />
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<liferay-ui:message key="ntlm-enabled" />
-									</td>
-									<td>
-										<liferay-ui:input-checkbox param="ntlmEnabled" defaultValue='<%= ParamUtil.getBoolean(request, "ntlmEnabled", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.NTLM_AUTH_ENABLED)) %>' />
 									</td>
 								</tr>
 								</table>
@@ -1089,6 +1081,38 @@ String portletURLString = portletURL.toString();
 						<br />
 
 						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateLdap');" />
+					</c:when>
+					<c:when test='<%= tabs3.equals("ntlm") %>'>
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<liferay-ui:message key="enabled" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.NTLM_AUTH_ENABLED) %>' />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="domain-controller" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />domain" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.NTLM_DOMAIN) %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="domain" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />domainController" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.NTLM_DOMAIN_CONTROLLER) %>" />
+							</td>
+						</tr>
+						</table>
+
+						<br />
+
+						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateNtlm');" />
 					</c:when>
 					<c:when test='<%= tabs3.equals("cas") %>'>
 						<table class="liferay-table">
