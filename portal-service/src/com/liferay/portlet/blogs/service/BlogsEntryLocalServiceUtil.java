@@ -276,12 +276,12 @@ public class BlogsEntryLocalServiceUtil {
 			displayDateHour, displayDateMinute, tagsEntries);
 	}
 
-	public static void updateTagsAsset(
+	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
-		blogsEntryLocalService.updateTagsAsset(entry, tagsEntries);
+		blogsEntryLocalService.updateTagsAsset(userId, entry, tagsEntries);
 	}
 }

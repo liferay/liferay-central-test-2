@@ -443,7 +443,7 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updateTagsAsset(
+	public void updateTagsAsset(long userId,
 		com.liferay.portlet.journal.model.JournalArticle article,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 

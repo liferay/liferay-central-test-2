@@ -295,7 +295,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Tags
 
-		updateTagsAsset(article, tagsEntries);
+		updateTagsAsset(userId, article, tagsEntries);
 
 		// Email
 
@@ -1382,7 +1382,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Tags
 
-		updateTagsAsset(article, tagsEntries);
+		updateTagsAsset(userId, article, tagsEntries);
 
 		// Email
 
@@ -1423,7 +1423,8 @@ public class JournalArticleLocalServiceImpl
 		return article;
 	}
 
-	public void updateTagsAsset(JournalArticle article, String[] tagsEntries)
+	public void updateTagsAsset(
+			long userId, JournalArticle article, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		boolean updateAsset = true;
@@ -1442,7 +1443,7 @@ public class JournalArticleLocalServiceImpl
 
 		if (updateAsset) {
 			TagsAssetLocalServiceUtil.updateAsset(
-				article.getUserId(), JournalArticle.class.getName(),
+				userId, JournalArticle.class.getName(),
 				article.getResourcePrimKey(), tagsEntries, null, null,
 				article.getDisplayDate(), article.getExpirationDate(),
 				ContentTypes.TEXT_HTML, article.getTitle(),

@@ -98,7 +98,8 @@ public class IGImageServiceImpl
 			getPermissionChecker(), imageId, ActionKeys.UPDATE);
 
 		return IGImageLocalServiceUtil.updateImage(
-			imageId, folderId, description, file, contentType, tagsEntries);
+			getUserId(), imageId, folderId, description, file, contentType,
+			tagsEntries);
 	}
 
 }

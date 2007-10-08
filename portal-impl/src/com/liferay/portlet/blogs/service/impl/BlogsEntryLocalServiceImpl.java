@@ -161,7 +161,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Tags
 
-		updateTagsAsset(entry, tagsEntries);
+		updateTagsAsset(userId, entry, tagsEntries);
 
 		// Lucene
 
@@ -447,7 +447,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Tags
 
-		updateTagsAsset(entry, tagsEntries);
+		updateTagsAsset(userId, entry, tagsEntries);
 
 		// Lucene
 
@@ -463,14 +463,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
-	public void updateTagsAsset(BlogsEntry entry, String[] tagsEntries)
+	public void updateTagsAsset(
+			long userId, BlogsEntry entry, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			entry.getUserId(), BlogsEntry.class.getName(),
-			entry.getEntryId(), tagsEntries, null, null, null, null,
-			ContentTypes.TEXT_HTML, entry.getTitle(), entry.getTitle(),
-			entry.getTitle(), null, 0, 0);
+			userId, BlogsEntry.class.getName(), entry.getEntryId(), tagsEntries,
+			null, null, null, null, ContentTypes.TEXT_HTML, entry.getTitle(),
+			entry.getTitle(), entry.getTitle(), null, 0, 0);
 	}
 
 	protected long getCategoryId(long companyId, long categoryId)

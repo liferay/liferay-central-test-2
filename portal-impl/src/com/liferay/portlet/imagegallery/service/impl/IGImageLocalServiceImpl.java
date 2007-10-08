@@ -147,7 +147,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Tags
 
-			updateTagsAsset(image, tagsEntries);
+			updateTagsAsset(userId, image, tagsEntries);
 
 			return image;
 		}
@@ -316,8 +316,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage updateImage(
-			long imageId, long folderId, String description, File file,
-			String contentType, String[] tagsEntries)
+			long userId, long imageId, long folderId, String description,
+			File file, String contentType, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		try {
@@ -356,7 +356,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Tags
 
-			updateTagsAsset(image, tagsEntries);
+			updateTagsAsset(userId, image, tagsEntries);
 
 			return image;
 		}
@@ -365,7 +365,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 	}
 
-	public void updateTagsAsset(IGImage image, String[] tagsEntries)
+	public void updateTagsAsset(
+			long userId, IGImage image, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		Image largeImage = ImageLocalUtil.getImage(image.getLargeImageId());
@@ -375,8 +376,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			image.getUserId(), IGImage.class.getName(), image.getImageId(),
-			tagsEntries, null, null, null, null, largeImage.getType(),
+			userId, IGImage.class.getName(), image.getImageId(), tagsEntries,
+			null, null, null, null, largeImage.getType(),
 			image.getDescription(), image.getDescription(),
 			image.getDescription(), null, largeImage.getHeight(),
 			largeImage.getWidth());

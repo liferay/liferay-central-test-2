@@ -160,13 +160,13 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		long imageId, long folderId, java.lang.String description,
+		long userId, long imageId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updateTagsAsset(
+	public void updateTagsAsset(long userId,
 		com.liferay.portlet.imagegallery.model.IGImage image,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 

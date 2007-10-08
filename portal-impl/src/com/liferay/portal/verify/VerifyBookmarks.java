@@ -61,8 +61,18 @@ public class VerifyBookmarks extends VerifyProcess {
 		for (int i = 0; i < entries.size(); i++) {
 			BookmarksEntry entry = (BookmarksEntry)entries.get(i);
 
-			BookmarksEntryLocalServiceUtil.updateTagsAsset(
-				entry, new String[0]);
+			try {
+				BookmarksEntryLocalServiceUtil.updateTagsAsset(
+					entry.getUserId(), entry, new String[0]);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to update tags asset for entry " +
+							entry.getEntryId(),
+						e);
+				}
+			}
 		}
 
 		if (_log.isDebugEnabled()) {

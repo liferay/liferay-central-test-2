@@ -117,8 +117,18 @@ public class VerifyJournal extends VerifyProcess {
 					article.getResourcePrimKey());
 			}
 			catch (NoSuchAssetException nsae) {
-				JournalArticleLocalServiceUtil.updateTagsAsset(
-					article, new String[0]);
+				try {
+					JournalArticleLocalServiceUtil.updateTagsAsset(
+						article.getUserId(), article, new String[0]);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to update tags asset for article " +
+								article.getId(),
+							e);
+					}
+				}
 			}
 		}
 

@@ -764,12 +764,12 @@ public class JournalArticleLocalServiceUtil {
 			version, content);
 	}
 
-	public static void updateTagsAsset(
+	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.journal.model.JournalArticle article,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
-		journalArticleLocalService.updateTagsAsset(article, tagsEntries);
+		journalArticleLocalService.updateTagsAsset(userId, article, tagsEntries);
 	}
 }

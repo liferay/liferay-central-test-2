@@ -61,8 +61,18 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		for (int i = 0; i < fileEntries.size(); i++) {
 			DLFileEntry fileEntry = (DLFileEntry)fileEntries.get(i);
 
-			DLFileEntryLocalServiceUtil.updateTagsAsset(
-				fileEntry, new String[0]);
+			try {
+				DLFileEntryLocalServiceUtil.updateTagsAsset(
+					fileEntry.getUserId(), fileEntry, new String[0]);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to update tags asset for file entry " +
+							fileEntry.getFileEntryId(),
+						e);
+				}
+			}
 		}
 
 		if (_log.isDebugEnabled()) {

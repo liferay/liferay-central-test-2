@@ -163,13 +163,13 @@ public interface BookmarksEntryLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
-		long entryId, long folderId, java.lang.String name,
+		long userId, long entryId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updateTagsAsset(
+	public void updateTagsAsset(long userId,
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 

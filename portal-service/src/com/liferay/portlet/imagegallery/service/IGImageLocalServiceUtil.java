@@ -256,23 +256,23 @@ public class IGImageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		long imageId, long folderId, java.lang.String description,
+		long userId, long imageId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
-		return igImageLocalService.updateImage(imageId, folderId, description,
-			file, contentType, tagsEntries);
+		return igImageLocalService.updateImage(userId, imageId, folderId,
+			description, file, contentType, tagsEntries);
 	}
 
-	public static void updateTagsAsset(
+	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.imagegallery.model.IGImage image,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
-		igImageLocalService.updateTagsAsset(image, tagsEntries);
+		igImageLocalService.updateTagsAsset(userId, image, tagsEntries);
 	}
 }

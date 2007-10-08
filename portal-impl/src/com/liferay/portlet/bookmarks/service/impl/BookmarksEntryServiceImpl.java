@@ -105,7 +105,7 @@ public class BookmarksEntryServiceImpl
 			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
 		return BookmarksEntryLocalServiceUtil.updateEntry(
-			entryId, folderId, name, url, comments, tagsEntries);
+			getUserId(), entryId, folderId, name, url, comments, tagsEntries);
 	}
 
 }

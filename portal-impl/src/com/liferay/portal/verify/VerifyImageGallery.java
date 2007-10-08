@@ -60,7 +60,18 @@ public class VerifyImageGallery extends VerifyProcess {
 		for (int i = 0; i < images.size(); i++) {
 			IGImage image = (IGImage)images.get(i);
 
-			IGImageLocalServiceUtil.updateTagsAsset(image, new String[0]);
+			try {
+				IGImageLocalServiceUtil.updateTagsAsset(
+					image.getUserId(), image, new String[0]);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to update tags asset for image " +
+							image.getImageId(),
+						e);
+				}
+			}
 		}
 
 		if (_log.isDebugEnabled()) {

@@ -428,12 +428,12 @@ public class DLFileEntryLocalServiceUtil {
 			extraSettings, is, size);
 	}
 
-	public static void updateTagsAsset(
+	public static void updateTagsAsset(long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
-		dlFileEntryLocalService.updateTagsAsset(fileEntry, tagsEntries);
+		dlFileEntryLocalService.updateTagsAsset(userId, fileEntry, tagsEntries);
 	}
 }
