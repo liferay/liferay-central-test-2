@@ -24,6 +24,7 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
@@ -31,6 +32,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.servlet.ImageServletToken;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
@@ -151,10 +153,18 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 				fileEl.setAttribute("name", String.valueOf(image.getImageId()));
 				fileEl.setAttribute("desc", image.getDescription());
 				fileEl.setAttribute("size", getSize(portalImage.getSize()));
-				fileEl.setAttribute(
-					"url",
-					"/image/image_gallery?img_id=" + largeImageId + "&t=" +
-						ImageServletToken.getToken(largeImageId));
+
+				StringMaker url = new StringMaker();
+
+				ThemeDisplay themeDisplay = arg.getThemeDisplay();
+
+				url.append(themeDisplay.getPathContext());
+				url.append("/image/image_gallery?img_id=");
+				url.append(largeImageId);
+				url.append("&t=");
+				url.append(ImageServletToken.getToken(largeImageId));
+
+				fileEl.setAttribute("url", url.toString());
 			}
 		}
 	}
