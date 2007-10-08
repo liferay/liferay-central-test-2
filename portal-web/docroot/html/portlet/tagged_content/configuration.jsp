@@ -256,7 +256,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					</liferay-ui:section>
 				</liferay-ui:tabs>
 			</c:when>
-			<c:when test='<%= selectionStyle.equals("dynamic")%>'>
+			<c:when test='<%= selectionStyle.equals("dynamic") %>'>
 				<liferay-ui:tabs
 					names="query-logic,display-settings"
 					formName="fm"
@@ -264,20 +264,24 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					refresh="<%= false %>"
 				>
 					<liferay-ui:section>
+						<liferay-ui:message key="select-by-tags-category" />
 
-						<liferay-ui:message key="select-and-group-by-tags-within-category" />
 						<select name="<portlet:namespace />category">
 							<option value=""></option>
+
 							<%
 							List categories = TagsPropertyLocalServiceUtil.getPropertyValues(company.getCompanyId(), "category");
 
 							for (int i = 0; i < categories.size(); i++) {
 								TagsProperty property = (TagsProperty) categories.get(i);
 							%>
+
 								<option <%= category.equals(property.getValue()) ? "selected" : "" %> value="<%= property.getValue() %>"><%= property.getValue() %></option>
+
 							<%
 							}
 							%>
+
 						</select>
 
 						<br /><br />

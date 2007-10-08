@@ -236,7 +236,7 @@ public class SearchContainer {
 	private int _end;
 	private int _resultEnd;
 	private int _total;
-	private List _results;
+	private List _results = new ArrayList();
 	private List _resultRows = new ArrayList();
 	private PortletURL _iteratorURL;
 	private List _headerNames;

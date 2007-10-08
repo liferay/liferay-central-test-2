@@ -19960,8 +19960,8 @@ Liferay.TagsSelector = new Class({
 				companyId: themeDisplay.getCompanyId(),
 				name: "%" + data.value + "%",
 				properties: "",
-				begin: 0,
-				end: 20
+				begin: beginning,
+				end: end
 			}
 		);
 	},
@@ -19989,18 +19989,46 @@ Liferay.TagsSelector = new Class({
 		var mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
 		var container = jQuery('<div class="lfr-tag-container"></div>');
 
-		var tags = instance._getTags({end: 1000});
+		var categories = Liferay.Service.Tags.TagsProperty.getPropertyValues(
+			{
+				companyId: themeDisplay.getCompanyId(),
+				key: "category"
+			}
+		);
 
 		jQuery.each(
-			tags,
-			function(i, n) {
-				var checked = (instance._curTags.indexOf(this.value) > -1) ? ' checked="checked"' : '';
+			categories,
+			function(i, category) {
+				var tags = Liferay.Service.Tags.TagsEntry.search(
+					{
+						companyId: themeDisplay.getCompanyId(),
+						name: '%',
+						properties: 'category:' + category.value
+					}
+				);
 
-				var label =
-					'<label title="' + this.text + '">' +
-						'<input' + checked + ' type="checkbox" name="' + ns + 'input' + i + '" id="' + ns + 'input' + i + '" value="' + this.value + '" />' +
-						'<a class="lfr-label-text" href="javascript: ;">' + this.text + '</a>' +
-					'</label>';
+				var label = '';
+
+				jQuery.each(
+					tags,
+					function(j, tag) {
+						if (j == 0) {
+							if (i > 0) {
+								label += '</fieldset>';
+							}
+							label += '<fieldset><legend>' + category.value + '</legend>';
+						}
+
+						var checked = (instance._curTags.indexOf(tag.name) > -1) ? ' checked="checked"' : '';
+
+						label +=
+							'<label title="' + tag.name + '">' +
+								'<input' + checked + ' type="checkbox" name="' + ns + 'input' + j + '" id="' + ns + 'input' + j + '" value="' + tag.name + '" />' +
+								'<a class="lfr-label-text" href="javascript: ;">' + tag.name + '</a>' +
+							'</label>';
+
+					}
+				);
 
 				container.append(label);
 			}
@@ -20011,7 +20039,7 @@ Liferay.TagsSelector = new Class({
 		saveBtn.click(
 			function() {
 				instance._curTags = [];
-				
+
 				container.find('input:checked').each(
 					function(){
 						instance._curTags.push(this.value);
@@ -20054,7 +20082,7 @@ Liferay.TagsSelector = new Class({
 
 	_update: function() {
 		var instance = this;
-		
+
 		instance._updateHiddenInput();
 		instance._updateSummarySpan();
 	},
@@ -20072,7 +20100,7 @@ Liferay.TagsSelector = new Class({
 
 	_updateSummarySpan: function() {
 		var instance = this;
-		
+
 		var params = instance.params;
 		var curTags = instance._curTags;
 

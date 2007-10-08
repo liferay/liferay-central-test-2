@@ -4,7 +4,7 @@ String[] properties = new String[] {"category:" + category };
 List categoryEntries = TagsEntryLocalServiceUtil.search(company.getCompanyId(), null, properties);
 
 int total = 0;
-	
+
 for (int i = 0; i < categoryEntries.size(); i++) {
 	TagsEntry categoryEntry = (TagsEntry)categoryEntries.get(i);
 

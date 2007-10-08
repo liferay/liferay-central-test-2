@@ -93,6 +93,7 @@ if (Validator.isNotNull(asset.getUrl())) {
 	viewURL = asset.getUrl();
 }
 %>
+
 <c:if test="<%= assetIndex == 0 %>">
 	<ul>
 </c:if>
@@ -100,6 +101,7 @@ if (Validator.isNotNull(asset.getUrl())) {
 <c:if test="<%= show %>">
 	<li>
 		<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
+
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(viewURL) %>">
 				<a href="<%= viewURL %>"><%= title %></a>
