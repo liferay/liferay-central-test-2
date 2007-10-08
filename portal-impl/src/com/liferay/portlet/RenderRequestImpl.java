@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.portlet.LiferayRenderRequest;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -80,7 +81,7 @@ import org.apache.struts.Globals;
  * @author Sergey Ponomarev
  *
  */
-public class RenderRequestImpl implements RenderRequest {
+public class RenderRequestImpl implements LiferayRenderRequest {
 
 	public WindowState getWindowState() {
 		return _windowState;

@@ -35,7 +35,7 @@ import javax.portlet.RenderResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.liferay.portlet.RenderRequestImpl;
+import com.liferay.portal.kernel.portlet.LiferayRenderRequest;
 
 /**
  * <a href="JSPPortlet.java.html"><b><i>View Source</i></b></a>
@@ -108,7 +108,7 @@ public class JSPPortlet extends GenericPortlet {
 		}
 
 		if (clearRequestParameters) {
-			((RenderRequestImpl)req).getRenderParameters().clear();
+			((LiferayRenderRequest)req).getRenderParameters().clear();
 		}
 	}
 
