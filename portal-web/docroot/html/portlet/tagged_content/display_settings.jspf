@@ -31,6 +31,7 @@
 		<select name="<portlet:namespace />displayStyle">
 			<option <%= displayStyle.equals("full-content") ? "selected" : "" %> value="full-content"><liferay-ui:message key="full-content" /></option>
 			<option <%= displayStyle.equals("abstracts") ? "selected" : "" %> value="abstracts"><liferay-ui:message key="abstracts" /></option>
+			<option <%= displayStyle.equals("title-list") ? "selected" : "" %> value="title-list"><liferay-ui:message key="title-list" /></option>
 		</select>
 	</td>
 </tr>

@@ -1,0 +1,64 @@
+
+<%
+int total = manualEntries.length;
+
+searchContainer.setTotal(total);
+
+List results = ListUtil.fromArray(manualEntries);
+
+int end = (manualEntries.length < searchContainer.getEnd()) ? manualEntries.length : searchContainer.getEnd();
+
+results = results.subList(searchContainer.getStart(), end);
+
+searchContainer.setResults(results);
+
+for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
+	String assetEntry = (String)results.get(assetIndex);
+
+	SAXReader reader = new SAXReader();
+
+	Document assetDoc = reader.read(new StringReader(assetEntry));
+
+	Element root = assetDoc.getRootElement();
+
+	long assetId = GetterUtil.getLong(root.element("asset-id").getText());
+
+	TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(assetId);
+
+	String className = PortalUtil.getClassName(asset.getClassNameId());
+	long classPK = asset.getClassPK();
+
+	boolean show = true;
+
+	String title = asset.getTitle();
+	String summary = StringPool.BLANK;
+	String viewURL = null;
+	String viewURLMessage = StringPool.BLANK;
+	String editURL = StringPool.BLANK;
+
+	try {
+%>
+
+		<c:choose>
+			<c:when test='<%= displayStyle.equals("full-content") %>'>
+				<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
+			</c:when>
+			<c:when test='<%= displayStyle.equals("abstracts") %>'>
+				<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
+			</c:when>
+			<c:when test='<%= displayStyle.equals("title-list") %>'>
+				<%@ include file="/html/portlet/tagged_content/display_title_list.jspf" %>
+			</c:when>
+			<c:otherwise>
+				<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
+			</c:otherwise>
+		</c:choose>
+
+<%
+	}
+	catch (Exception e) {
+		_log.error(e.getMessage());
+	}
+
+}
+%>

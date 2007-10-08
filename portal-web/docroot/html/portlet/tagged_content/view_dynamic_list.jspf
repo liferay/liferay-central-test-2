@@ -1,0 +1,55 @@
+<%
+long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), entries);
+long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
+
+Date now = new Date();
+
+int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, notEntryIds, andOperator, now, now);
+
+searchContainer.setTotal(total);
+
+List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, now, now, searchContainer.getStart(), searchContainer.getEnd());
+
+searchContainer.setResults(results);
+
+for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
+	TagsAsset asset = (TagsAsset)results.get(assetIndex);
+
+	String className = PortalUtil.getClassName(asset.getClassNameId());
+	long classPK = asset.getClassPK();
+
+	boolean show = true;
+
+	String title = asset.getTitle();
+	String summary = StringPool.BLANK;
+	String viewURL = null;
+	String viewURLMessage = StringPool.BLANK;
+	String editURL = StringPool.BLANK;
+
+	try {
+%>
+		<c:choose>
+			<c:when test='<%= displayStyle.equals("full-content") %>'>
+				<div>
+					<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
+				</div>
+			</c:when>
+			<c:when test='<%= displayStyle.equals("abstracts") %>'>
+				<div>
+					<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
+				</div>
+			</c:when>
+			<c:when test='<%= displayStyle.equals("title-list") %>'>
+				<%@ include file="/html/portlet/tagged_content/display_title_list.jspf" %>
+			</c:when>
+			<c:otherwise>
+				<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
+			</c:otherwise>
+		</c:choose>
+<%
+	}
+	catch (Exception e) {
+		_log.error(e.getMessage());
+	}
+}
+%>

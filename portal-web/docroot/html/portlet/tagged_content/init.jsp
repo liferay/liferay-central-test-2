@@ -69,9 +69,14 @@
 <%@ page import="com.liferay.portlet.journal.util.JournalUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.NoSuchEntryException" %>
+<%@ page import="com.liferay.portlet.tags.NoSuchPropertyException" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsProperty" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.util.TagsUtil" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
@@ -104,11 +109,13 @@ if (Validator.isNull(selectionStyle)) {
 	selectionStyle = "dynamic";
 }
 
+String category = GetterUtil.getString(prefs.getValue("category", "none"));
+
 String[] entries = prefs.getValues("entries", new String[0]);
 String[] notEntries = prefs.getValues("not-entries", new String[0]);
 boolean andOperator = GetterUtil.getBoolean(prefs.getValue("and-operator", null), false);
 
-String displayStyle = prefs.getValue("display-style", null);
+String displayStyle = GetterUtil.getString(prefs.getValue("display-style", "full-content"));
 
 if (Validator.isNull(displayStyle)) {
 	displayStyle = "full-content";

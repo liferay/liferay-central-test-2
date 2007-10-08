@@ -1,0 +1,87 @@
+<%
+String[] properties = new String[] {"category:" + category };
+
+List categoryEntries = TagsEntryLocalServiceUtil.search(company.getCompanyId(), null, properties);
+
+int total = 0;
+	
+for (int i = 0; i < categoryEntries.size(); i++) {
+	TagsEntry categoryEntry = (TagsEntry)categoryEntries.get(i);
+
+	String tagLabel = null;
+
+	try {
+		TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(categoryEntry.getEntryId(), "description");
+
+		tagLabel = property.getValue();
+	}
+	catch (NoSuchPropertyException nspee) {
+		tagLabel = StringUtil.upperCaseFirstLetter(categoryEntry.getName());
+	}
+
+	String[] allEntries = ArrayUtil.append(entries, new String[]{categoryEntry.getName()});
+
+	long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), allEntries);
+	long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
+
+	List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, searchContainer.getStart(), searchContainer.getEnd());
+
+	searchContainer.setResults(results);
+	searchContainer.setTotal(results.size());
+
+	if (results.size() > 0) {
+%>
+
+		<h3 class="journal-content-tag-label"><%= tagLabel %></h3>
+
+		<div class="journal-content-tag-entries">
+		<%
+		for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
+
+			TagsAsset asset = (TagsAsset)results.get(assetIndex);
+
+			String className = PortalUtil.getClassName(asset.getClassNameId());
+			long classPK = asset.getClassPK();
+
+			boolean show = true;
+
+			String title = asset.getTitle();
+			String summary = StringPool.BLANK;
+			String viewURL = null;
+			String viewURLMessage = StringPool.BLANK;
+			String editURL = StringPool.BLANK;
+
+			try {
+		%>
+
+				<c:choose>
+					<c:when test='<%= displayStyle.equals("full-content") %>'>
+						<div>
+							<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
+						</div>
+					</c:when>
+					<c:when test='<%= displayStyle.equals("abstracts") %>'>
+						<div>
+							<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
+						</div>
+					</c:when>
+					<c:when test='<%= displayStyle.equals("title-list") %>'>
+						<%@ include file="/html/portlet/tagged_content/display_title_list.jspf" %>
+					</c:when>
+					<c:otherwise>
+						<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
+					</c:otherwise>
+				</c:choose>
+
+		<%
+			}
+			catch (Exception e) {
+				_log.error(e.getMessage());
+			}
+		}
+	    %>
+		</div>
+<%
+	}
+}
+%>

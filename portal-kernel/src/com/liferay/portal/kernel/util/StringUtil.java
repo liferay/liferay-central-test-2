@@ -1047,6 +1047,16 @@ public class StringUtil {
 		}
 	}
 
+	public static String upperCaseFirstLetter(String s) {
+		char[] chars = s.toCharArray();
+
+		if (chars[0] >= 97 && chars[0] <= 122) {
+			chars[0] = (char) ((int) chars[0] - 32);
+		}
+
+		return new String(chars);
+	}
+
 	public static String wrap(String text) {
 		return wrap(text, 80, "\n");
 	}

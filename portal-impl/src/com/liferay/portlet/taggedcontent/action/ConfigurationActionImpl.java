@@ -189,6 +189,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ParamUtil.getString(req, "notEntries"));
 		boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
 
+		String category = ParamUtil.getString(req, "category");
+
 		String displayStyle = ParamUtil.getString(req, "displayStyle");
 		boolean showQueryLogic = ParamUtil.getBoolean(req, "showQueryLogic");
 		boolean showAvailableLocales = ParamUtil.getBoolean(
@@ -197,6 +199,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValues("entries", entries);
 		prefs.setValues("not-entries", notEntries);
 		prefs.setValue("and-operator", String.valueOf(andOperator));
+
+		prefs.setValue("category", category);
 
 		prefs.setValue("display-style", displayStyle);
 		prefs.setValue("show-query-logic", String.valueOf(showQueryLogic));
