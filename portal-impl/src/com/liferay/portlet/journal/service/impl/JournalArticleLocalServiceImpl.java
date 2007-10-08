@@ -61,6 +61,7 @@ import com.liferay.portlet.journal.ArticleTitleException;
 import com.liferay.portlet.journal.ArticleTypeException;
 import com.liferay.portlet.journal.DuplicateArticleIdException;
 import com.liferay.portlet.journal.NoSuchArticleException;
+import com.liferay.portlet.journal.NoSuchArticleResourceException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.job.CheckArticleJob;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -580,8 +581,16 @@ public class JournalArticleLocalServiceImpl
 
 		// Resource
 
-		JournalArticleResourceLocalServiceUtil.deleteArticleResource(
-			article.getGroupId(), article.getArticleId());
+		if (JournalArticleUtil.countByG_A(
+				article.getGroupId(), article.getArticleId()) == 1) {
+
+			try {
+				JournalArticleResourceLocalServiceUtil.deleteArticleResource(
+					article.getGroupId(), article.getArticleId());
+			}
+			catch (NoSuchArticleResourceException nsare) {
+			}
+		}
 
 		// Article
 
