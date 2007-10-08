@@ -25,9 +25,9 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ListUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -99,7 +99,8 @@ public class SourceFormatter {
 					"**\\portal-service\\**\\liferay\\counter\\**.java",
 					"**\\portal-service\\**\\liferay\\documentlibrary\\**.java",
 					"**\\portal-service\\**\\liferay\\lock\\**.java",
-					"**\\portal-service\\**\\liferay\\mail\\**.java"
+					"**\\portal-service\\**\\liferay\\mail\\**.java",
+					"**\\util-bridges\\**\\*.java"
 				});
 			ds.setExcludes(
 				new String[] {
