@@ -35,53 +35,55 @@ for (int i = 0; i < categoryEntries.size(); i++) {
 		<h2 class="journal-content-tag-label"><%= tagLabel %></h2>
 
 		<div class="journal-content-tag-entries">
-		<%
-		for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 
-			TagsAsset asset = (TagsAsset)results.get(assetIndex);
+			<%
+			for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 
-			String className = PortalUtil.getClassName(asset.getClassNameId());
-			long classPK = asset.getClassPK();
+				TagsAsset asset = (TagsAsset)results.get(assetIndex);
 
-			boolean show = true;
+				String className = PortalUtil.getClassName(asset.getClassNameId());
+				long classPK = asset.getClassPK();
 
-			String title = asset.getTitle();
-			String summary = StringPool.BLANK;
-			String viewURL = null;
-			String viewURLMessage = StringPool.BLANK;
-			String editURL = StringPool.BLANK;
+				boolean show = true;
 
-			try {
-		%>
+				String title = asset.getTitle();
+				String summary = StringPool.BLANK;
+				String viewURL = null;
+				String viewURLMessage = StringPool.BLANK;
+				String editURL = StringPool.BLANK;
 
-				<c:choose>
-					<c:when test='<%= displayStyle.equals("full-content") %>'>
-						<div>
-							<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
-						</div>
-					</c:when>
-					<c:when test='<%= displayStyle.equals("abstracts") %>'>
-						<div>
-							<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
-						</div>
-					</c:when>
-					<c:when test='<%= displayStyle.equals("title-list") %>'>
-						<%@ include file="/html/portlet/tagged_content/display_title_list.jspf" %>
-					</c:when>
-					<c:otherwise>
-						<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
-					</c:otherwise>
-				</c:choose>
+				try {
+			%>
 
-		<%
+					<c:choose>
+						<c:when test='<%= displayStyle.equals("full-content") %>'>
+							<div>
+								<%@ include file="/html/portlet/tagged_content/display_full_content.jspf" %>
+							</div>
+						</c:when>
+						<c:when test='<%= displayStyle.equals("abstracts") %>'>
+							<div>
+								<%@ include file="/html/portlet/tagged_content/display_abstract.jspf" %>
+							</div>
+						</c:when>
+						<c:when test='<%= displayStyle.equals("title-list") %>'>
+							<%@ include file="/html/portlet/tagged_content/display_title_list.jspf" %>
+						</c:when>
+						<c:otherwise>
+							<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
+						</c:otherwise>
+					</c:choose>
+
+			<%
+				}
+				catch (Exception e) {
+					_log.error(e.getMessage());
+				}
 			}
-			catch (Exception e) {
-				_log.error(e.getMessage());
-			}
-		}
-	    %>
+			%>
+
 		</div>
-		<br>
+
 <%
 	}
 }

@@ -140,5 +140,7 @@ if (Validator.isNotNull(asset.getUrl())) {
 		<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
 	</div>
 
-	<div class="separator"><!-- --></div>
+	<c:if test="<%= (assetIndex + 1) < results.size() %>">
+		<div class="separator"><!-- --></div>
+	</c:if>
 </c:if>
