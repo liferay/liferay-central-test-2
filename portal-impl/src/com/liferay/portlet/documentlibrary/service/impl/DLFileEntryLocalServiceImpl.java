@@ -357,8 +357,10 @@ public class DLFileEntryLocalServiceImpl
 					fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 					fileEntry.getFolderId(), fileEntry.getName(), version);
 			}
-			catch (RemoteException re) {
-				throw new SystemException(re);
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
+				}
 			}
 
 			DLFileVersionUtil.removeByF_N_V(folderId, name, version);
@@ -378,13 +380,10 @@ public class DLFileEntryLocalServiceImpl
 				fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				fileEntry.getFolderId(), fileEntry.getName());
 		}
-		catch (NoSuchFileException nsfe) {
+		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(nsfe);
+				_log.warn(e, e);
 			}
-		}
-		catch (RemoteException re) {
-			throw new SystemException(re);
 		}
 
 		// File ranks
