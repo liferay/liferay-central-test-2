@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
+import com.liferay.portlet.tags.model.TagsAssetType;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.JSONUtil;
 
@@ -263,6 +264,12 @@ public class JSONServiceAction extends JSONAction {
 		else if (returnObj instanceof TagsAssetDisplay[]) {
 			return getReturnValue((TagsAssetDisplay[])returnObj);
 		}
+		else if (returnObj instanceof TagsAssetType) {
+			return getReturnValue((TagsAssetType)returnObj);
+		}
+		else if (returnObj instanceof TagsAssetType[]) {
+			return getReturnValue((TagsAssetType[])returnObj);
+		}
 
 		return null;
 	}
@@ -284,6 +291,28 @@ public class JSONServiceAction extends JSONAction {
 			TagsAssetDisplay assetDisplay = assetDisplays[i];
 
 			jsonArray.put(toJSONObject(assetDisplay));
+		}
+
+		return jsonArray.toString();
+	}
+
+	protected String getReturnValue(TagsAssetType assetType)
+		throws Exception {
+
+		JSONObject jsonObj = toJSONObject(assetType);
+
+		return jsonObj.toString();
+	}
+
+	protected String getReturnValue(TagsAssetType[] assetTypes)
+		throws Exception {
+
+		JSONArray jsonArray = new JSONArray();
+
+		for (int i = 0; i < assetTypes.length; i++) {
+			TagsAssetType assetType = assetTypes[i];
+
+			jsonArray.put(toJSONObject(assetType));
 		}
 
 		return jsonArray.toString();
@@ -316,6 +345,17 @@ public class JSONServiceAction extends JSONAction {
 		JSONUtil.put(jsonObj, "height", assetDisplay.getHeight());
 		JSONUtil.put(jsonObj, "width", assetDisplay.getWidth());
 		JSONUtil.put(jsonObj, "tagsEntries", assetDisplay.getTagsEntries());
+
+		return jsonObj;
+	}
+
+	public static JSONObject toJSONObject(TagsAssetType assetType) {
+		JSONObject jsonObj = new JSONObject();
+
+		JSONUtil.put(jsonObj, "classNameId", assetType.getClassNameId());
+		JSONUtil.put(jsonObj, "className", assetType.getClassName());
+		JSONUtil.put(jsonObj, "portletId", assetType.getPortletId());
+		JSONUtil.put(jsonObj, "portletTitle", assetType.getPortletTitle());
 
 		return jsonObj;
 	}
