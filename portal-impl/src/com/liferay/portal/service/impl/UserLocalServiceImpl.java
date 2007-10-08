@@ -1297,9 +1297,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 
+		Date lastLoginDate = user.getLoginDate();
+
+		if (lastLoginDate == null) {
+			lastLoginDate = new Date();
+		}
+
 		user.setLoginDate(new Date());
 		user.setLoginIP(loginIP);
-		user.setLastLoginDate(user.getLoginDate());
+		user.setLastLoginDate(lastLoginDate);
 		user.setLastLoginIP(user.getLoginIP());
 		user.setLastFailedLoginDate(null);
 		user.setFailedLoginAttempts(0);
