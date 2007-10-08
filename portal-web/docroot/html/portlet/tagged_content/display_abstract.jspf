@@ -116,10 +116,10 @@ if (Validator.isNotNull(asset.getUrl())) {
 	<div class="portlet-journal-abstract">
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(viewURL) %>">
-				<h3><a href="<%= viewURL %>"><%= title %></a></h3>
+				<h3 class="journal-content-title"><a href="<%= viewURL %>"><%= title %></a></h3>
 			</c:when>
 			<c:otherwise>
-				<h3><%= title %></h3>
+				<h3 class="journal-content-title"><%= title %></h3>
 			</c:otherwise>
 		</c:choose>
 

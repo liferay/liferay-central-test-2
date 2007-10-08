@@ -267,7 +267,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<liferay-ui:message key="select-by-tags-category" />
 
 						<select name="<portlet:namespace />category">
-							<option value=""></option>
+							<option value=""><liferay-ui:message key="none"/></option>
 
 							<%
 							List categories = TagsPropertyLocalServiceUtil.getPropertyValues(company.getCompanyId(), "category");

@@ -5,6 +5,8 @@
 		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 		%>
 
+		<h3 class="journal-content-title"><%= title %></h3>
+
 		<%= entry.getContent() %>
 	</c:when>
 	<c:when test="<%= className.equals(BookmarksEntry.class.getName()) %>">
@@ -12,6 +14,8 @@
 		<%
 		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 		%>
+
+		<h3 class="journal-content-title"><%= title %></h3>
 
 		<a href="<%= themeDisplay.getPathMain() %>/bookmarks/open_entry?entryId=<%= entry.getEntryId() %>" target="_blank"><%= entry.getName() %></a>
 
@@ -22,6 +26,8 @@
 		<%
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
 		%>
+
+		<h3 class="journal-content-title"><%= title %></h3>
 
 		<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= fileEntry.getFolderId() %>&name=<%= HttpUtil.encodeURL(fileEntry.getName()) %>">
 		<img align="left" border="0" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileEntry.getName()) %>.png" /><%= fileEntry.getTitle() %>
@@ -34,6 +40,8 @@
 		<%
 		IGImage image = IGImageLocalServiceUtil.getImage(classPK);
 		%>
+
+		<h3 class="journal-content-title"><%= title %></h3>
 
 		<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>&t=<%= ImageServletToken.getToken(image.getLargeImageId()) %>" />
 
@@ -64,6 +72,8 @@
 		%>
 
 		<c:if test="<%= articleDisplay != null %>">
+			<h3 class="journal-content-title"><%= title %></h3>
+
 			<%= articleDisplay.getContent() %>
 
 			<c:if test="<%= showAvailableLocales %>">
@@ -88,13 +98,15 @@
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 		%>
 
-		<%= message.getSubject() %>
+		<h3 class="journal-content-title"><%= message.getSubject() %></h3>
 
 		<br /><br />
 
 		<%= message.getBody() %>
 	</c:when>
 	<c:when test="<%= className.equals(WikiPage.class.getName()) %>">
+		<h3 class="journal-content-title"><%= title %></h3>
+
 		<div class="wiki-body">
 
 			<%

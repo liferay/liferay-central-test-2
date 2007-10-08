@@ -146,7 +146,9 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 	</c:when>
 </c:choose>
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+<c:if test="<%= searchContainer.getTotal() > searchContainer.getResults().size() %>">
+	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+</c:if>
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.tagged_content.view.jsp");
