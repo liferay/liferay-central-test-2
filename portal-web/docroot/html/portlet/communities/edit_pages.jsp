@@ -474,11 +474,9 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 						tabs3Names += ",logo";
 					}
 
-					tabs3Names += ",export-import";
+					tabs3Names += ",export-import,virtual-host";
 
 					if (!tabs1.equals("staging")) {
-						tabs3Names += ",virtual-host";
-
 						if (!privateLayout) {
 							tabs3Names += ",sitemap";
 						}
