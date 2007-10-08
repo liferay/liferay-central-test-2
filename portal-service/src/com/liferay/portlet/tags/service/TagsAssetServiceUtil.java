@@ -108,6 +108,16 @@ public class TagsAssetServiceUtil {
 			keywords, languageId, begin, end);
 	}
 
+	public static int searchAssetDisplaysCount(long companyId,
+		java.lang.String portletId, java.lang.String keywords,
+		java.lang.String languageId)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
+
+		return tagsAssetService.searchAssetDisplaysCount(companyId, portletId,
+			keywords, languageId);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
 		java.lang.String className, long classPK,
 		java.lang.String[] entryNames, java.util.Date startDate,

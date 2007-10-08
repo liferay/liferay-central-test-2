@@ -326,6 +326,53 @@ public class TagsAssetServiceHttp {
 		}
 	}
 
+	public static int searchAssetDisplaysCount(HttpPrincipal httpPrincipal,
+		long companyId, java.lang.String portletId, java.lang.String keywords,
+		java.lang.String languageId) throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+			Object paramObj1 = portletId;
+
+			if (portletId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = keywords;
+
+			if (keywords == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = languageId;
+
+			if (languageId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
+					"searchAssetDisplaysCount",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
 		java.lang.String[] entryNames, java.util.Date startDate,

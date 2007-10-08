@@ -282,6 +282,16 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		return getAssetDisplays(assets, languageId);
 	}
 
+	public int searchAssetDisplaysCount(
+			long companyId, String portletId, String keywords,
+			String languageId)
+		throws SystemException {
+
+		Hits hits = search(companyId, portletId, keywords);
+
+		return hits.getLength();
+	}
+
 	public TagsAsset updateAsset(
 			long userId, String className, long classPK, String[] entryNames)
 		throws PortalException, SystemException {

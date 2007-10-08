@@ -87,6 +87,15 @@ public class TagsAssetServiceImpl
 			companyId, portletId, keywords, languageId, begin, end);
 	}
 
+	public int searchAssetDisplaysCount(
+			long companyId, String portletId, String keywords,
+			String languageId)
+		throws SystemException {
+
+		return TagsAssetLocalServiceUtil.searchAssetDisplaysCount(
+			companyId, portletId, keywords, languageId);
+	}
+
 	public TagsAsset updateAsset(
 			String className, long classPK, String[] entryNames, Date startDate,
 			Date endDate, Date publishDate, Date expirationDate,

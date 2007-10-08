@@ -77,6 +77,11 @@ public interface TagsAssetService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public int searchAssetDisplaysCount(long companyId,
+		java.lang.String portletId, java.lang.String keywords,
+		java.lang.String languageId)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public com.liferay.portlet.tags.model.TagsAsset updateAsset(
 		java.lang.String className, long classPK,
 		java.lang.String[] entryNames, java.util.Date startDate,

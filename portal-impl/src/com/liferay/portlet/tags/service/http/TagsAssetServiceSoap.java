@@ -172,6 +172,21 @@ public class TagsAssetServiceSoap {
 		}
 	}
 
+	public static int searchAssetDisplaysCount(long companyId,
+		java.lang.String portletId, java.lang.String keywords,
+		java.lang.String languageId) throws RemoteException {
+		try {
+			int returnValue = TagsAssetServiceUtil.searchAssetDisplaysCount(companyId,
+					portletId, keywords, languageId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAssetSoap updateAsset(
 		java.lang.String className, long classPK,
 		java.lang.String[] entryNames, java.util.Date startDate,

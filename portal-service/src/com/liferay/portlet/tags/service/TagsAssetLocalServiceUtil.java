@@ -192,6 +192,15 @@ public class TagsAssetLocalServiceUtil {
 			keywords, languageId, begin, end);
 	}
 
+	public static int searchAssetDisplaysCount(long companyId,
+		java.lang.String portletId, java.lang.String keywords,
+		java.lang.String languageId) throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.searchAssetDisplaysCount(companyId,
+			portletId, keywords, languageId);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
 		long userId, java.lang.String className, long classPK,
 		java.lang.String[] entryNames)

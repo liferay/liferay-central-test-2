@@ -126,6 +126,16 @@ public class TagsAssetServiceJSON {
 		return returnValue;
 	}
 
+	public static int searchAssetDisplaysCount(long companyId,
+		java.lang.String portletId, java.lang.String keywords,
+		java.lang.String languageId)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		int returnValue = TagsAssetServiceUtil.searchAssetDisplaysCount(companyId,
+				portletId, keywords, languageId);
+
+		return returnValue;
+	}
+
 	public static JSONObject updateAsset(java.lang.String className,
 		long classPK, java.lang.String[] entryNames, java.util.Date startDate,
 		java.util.Date endDate, java.util.Date publishDate,
