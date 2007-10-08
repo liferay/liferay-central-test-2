@@ -26,6 +26,7 @@ import java.io.IOException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import com.liferay.portal.kernel.util.GetterUtil;
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequestDispatcher;
@@ -34,6 +35,7 @@ import javax.portlet.RenderResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.RenderRequestImpl;
 
 /**
  * <a href="JSPPortlet.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +49,9 @@ public class JSPPortlet extends GenericPortlet {
 		editJSP = getInitParameter("edit-jsp");
 		helpJSP = getInitParameter("help-jsp");
 		viewJSP = getInitParameter("view-jsp");
+
+		clearRequestParameters = GetterUtil.getBoolean(
+			getInitParameter("clear-request-parameters"));
 	}
 
 	public void doDispatch(RenderRequest req, RenderResponse res)
@@ -101,11 +106,16 @@ public class JSPPortlet extends GenericPortlet {
 		else {
 			prd.include(req, res);
 		}
+
+		if (clearRequestParameters) {
+			((RenderRequestImpl)req).getRenderParameters().clear();
+		}
 	}
 
 	protected String editJSP;
 	protected String helpJSP;
 	protected String viewJSP;
+	protected boolean clearRequestParameters;
 
 	private static Log _log = LogFactory.getLog(JSPPortlet.class);
 
