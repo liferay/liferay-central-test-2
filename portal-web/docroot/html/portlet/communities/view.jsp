@@ -38,7 +38,7 @@ portletURL.setParameter("tabs1", tabs1);
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
 
 <liferay-ui:tabs
-	names="communities-owned,communities-joined,communities-open"
+	names="communities-owned,communities-joined,communities-open,all-communities"
 	url="<%= portletURL.toString() %>"
 />
 
