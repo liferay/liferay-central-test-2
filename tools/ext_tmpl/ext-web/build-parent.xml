@@ -6,6 +6,7 @@
 	<property name="war.file" value="${ant.project.name}" />
 
 	<target name="clean">
+		<delete file="${war.file}.war" failonerror="false" />
 		<delete dir="classes" />
 		<delete dir="tmp" />
 	</target>
