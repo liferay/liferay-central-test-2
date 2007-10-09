@@ -368,13 +368,16 @@ public class BaseDeployer {
 			PluginPackage pluginPackage)
 		throws Exception {
 
-		deployDirectory(srcFile, null, displayName, override, pluginPackage);
+		deployDirectory(
+			srcFile, null, null, displayName, override, pluginPackage);
 	}
 
 	protected void deployDirectory(
-			File srcFile, File deployDir, String displayName, boolean overwrite,
-			PluginPackage pluginPackage)
+			File srcFile, File mergeDir, File deployDir, String displayName,
+			boolean overwrite, PluginPackage pluginPackage)
 		throws Exception {
+
+		mergeDirectory(mergeDir, srcFile);
 
 		processPluginPackageProperties(srcFile, displayName, pluginPackage);
 
@@ -573,15 +576,19 @@ public class BaseDeployer {
 				}
 			}
 
+			File mergeDirFile = new File(
+				srcFile.getParent() + "/merge/" + srcFile.getName());
+
 			if (srcFile.isDirectory()) {
+
 				deployDirectory(
-					srcFile, deployDirFile, displayName, overwrite,
-					pluginPackage);
+					srcFile, mergeDirFile, deployDirFile, displayName,
+					overwrite, pluginPackage);
 			}
 			else {
 				boolean deployed = deployFile(
-					srcFile, deployDirFile, displayName, overwrite,
-					pluginPackage);
+					srcFile, mergeDirFile, deployDirFile, displayName,
+					overwrite, pluginPackage);
 
 				if (!deployed) {
 					String context = preliminaryContext;
@@ -605,8 +612,8 @@ public class BaseDeployer {
 	}
 
 	protected boolean deployFile(
-			File srcFile, File deployDir, String displayName, boolean overwrite,
-			PluginPackage pluginPackage)
+			File srcFile, File mergeDir, File deployDir, String displayName,
+			boolean overwrite, PluginPackage pluginPackage)
 		throws Exception {
 
 		if (!overwrite && UpToDateTask.isUpToDate(srcFile, deployDir)) {
@@ -629,7 +636,8 @@ public class BaseDeployer {
 		ExpandTask.expand(srcFile, tempDir);
 
 		deployDirectory(
-			tempDir, deployDir, displayName, overwrite, pluginPackage);
+			tempDir, mergeDir, deployDir, displayName, overwrite,
+			pluginPackage);
 
 		DeleteTask.deleteDirectory(tempDir);
 
@@ -850,6 +858,14 @@ public class BaseDeployer {
 		return sm.toString();
 	}
 
+	protected void mergeDirectory(File mergeDir, File targetDir) {
+		if ((mergeDir == null) || (!mergeDir.exists())) {
+			return;
+		}
+
+		CopyTask.copyDirectory(mergeDir, targetDir, null, null, true, false);
+	}
+
 	protected void processPluginPackageProperties(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
@@ -870,38 +886,78 @@ public class BaseDeployer {
 				String path = file.getPath();
 
 				File pluginPackageXmlFile = new File(
-					path + "/WEB-INF/liferay-plugin-package.xml");
+					file.getParent() + "/merge/" + file.getName() +
+						"/WEB-INF/liferay-plugin-package.xml");
 
 				if (pluginPackageXmlFile.exists()) {
 					is = new FileInputStream(pluginPackageXmlFile);
 				}
+				else {
+					pluginPackageXmlFile = new File(
+						path + "/WEB-INF/liferay-plugin-package.xml");
+
+					if (pluginPackageXmlFile.exists()) {
+						is = new FileInputStream(pluginPackageXmlFile);
+					}
+				}
 
 				File pluginPackagePropsFile = new File(
-					path + "/WEB-INF/liferay-plugin-package.properties");
+					file.getParent() + "/merge/" + file.getName() +
+						"/WEB-INF/liferay-plugin-package.properties");
 
 				if (pluginPackagePropsFile.exists()) {
 					is = new FileInputStream(pluginPackagePropsFile);
 
 					parseProps = true;
 				}
+				else {
+					pluginPackagePropsFile = new File(
+						path + "/WEB-INF/liferay-plugin-package.properties");
+
+					if (pluginPackagePropsFile.exists()) {
+						is = new FileInputStream(pluginPackagePropsFile);
+
+						parseProps = true;
+					}
+				}
 			}
 			else {
 				zipFile = new ZipFile(file);
 
-				ZipEntry zipEntry = zipFile.getEntry(
-					"WEB-INF/liferay-plugin-package.xml");
+				File pluginPackageXmlFile = new File(
+					file.getParent() + "/merge/" + file.getName() +
+						"/WEB-INF/liferay-plugin-package.xml");
 
-				if (zipEntry != null) {
-					is = zipFile.getInputStream(zipEntry);
+				if (pluginPackageXmlFile.exists()) {
+					is = new FileInputStream(pluginPackageXmlFile);
+				}
+				else {
+					ZipEntry zipEntry = zipFile.getEntry(
+						"WEB-INF/liferay-plugin-package.xml");
+
+					if (zipEntry != null) {
+						is = zipFile.getInputStream(zipEntry);
+					}
 				}
 
-				zipEntry = zipFile.getEntry(
-					"WEB-INF/liferay-plugin-package.properties");
+				File pluginPackagePropsFile = new File(
+					file.getParent() + "/merge/" + file.getName() +
+						"/WEB-INF/liferay-plugin-package.properties");
 
-				if (zipEntry != null) {
-					is = zipFile.getInputStream(zipEntry);
+				if (pluginPackagePropsFile.exists()) {
+					is = new FileInputStream(pluginPackagePropsFile);
 
 					parseProps = true;
+				}
+				else {
+					ZipEntry zipEntry = zipFile.getEntry(
+						"WEB-INF/liferay-plugin-package.properties");
+
+					if (zipEntry != null) {
+						is = zipFile.getInputStream(zipEntry);
+
+						parseProps = true;
+					}
 				}
 			}
 
