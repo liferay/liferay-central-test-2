@@ -37,6 +37,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +75,9 @@ public class JournalVmUtil {
 
 			Document doc = reader.read(new StringReader(xml));
 
-			List nodes = _extractDynamicContents(doc.getRootElement());
+			Element root = doc.getRootElement();
+
+			List nodes = _extractDynamicContents(root);
 
 			Iterator itr = nodes.iterator();
 
@@ -83,6 +86,9 @@ public class JournalVmUtil {
 
 				context.put(node.getName(), node);
 			}
+
+			context.put(
+				"request", _insertRequestVariables(root.element("request")));
 
 			long companyId = GetterUtil.getLong(
 				(String)tokens.get("company_id"));
@@ -101,7 +107,7 @@ public class JournalVmUtil {
 
 			VelocityVariables.insertHelperUtilities(context);
 
-			script = _injectEditAndPlace(xml, script);
+			script = _injectEditInPlace(xml, script);
 
 			load = Velocity.evaluate(
 				context, output, JournalVmUtil.class.getName(), script);
@@ -186,7 +192,7 @@ public class JournalVmUtil {
 		return nodes;
 	}
 
-	private static String _injectEditAndPlace(String xml, String script)
+	private static String _injectEditInPlace(String xml, String script)
 		throws DocumentException {
 
 		SAXReader reader = new SAXReader();
@@ -211,6 +217,31 @@ public class JournalVmUtil {
 		}
 
 		return script;
+	}
+
+	private static Map _insertRequestVariables(Element parent) {
+		Map map = new HashMap();
+
+		if (parent == null) {
+			return map;
+		}
+
+		Iterator itr = parent.elements().iterator();
+
+		while (itr.hasNext()) {
+			Element el = (Element)itr.next();
+
+			String name = el.getName();
+
+			if (el.elements().size() > 0) {
+				map.put(name, _insertRequestVariables(el));
+			}
+			else {
+				map.put(name, el.getText());
+			}
+		}
+
+		return map;
 	}
 
 	private static String _wrapField(
