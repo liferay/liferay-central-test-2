@@ -357,8 +357,6 @@ public class EditSettingsAction extends PortletAction {
 		prefs.setValue(PropsUtil.NTLM_DOMAIN_CONTROLLER, domainController);
 
 		prefs.store();
-
-		CASFilter.reload(companyId);
 	}
 
 	protected void updateOpenId(ActionRequest req, PortletPreferences prefs)
