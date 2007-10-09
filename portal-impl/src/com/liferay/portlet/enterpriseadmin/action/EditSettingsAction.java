@@ -348,13 +348,13 @@ public class EditSettingsAction extends PortletAction {
 		throws Exception {
 
 		boolean enabled = ParamUtil.getBoolean(req, "enabled");
-		String domain = ParamUtil.getString(req, "domain");
 		String domainController = ParamUtil.getString(req, "domainController");
+		String domain = ParamUtil.getString(req, "domain");
 
 		prefs.setValue(
 			PropsUtil.NTLM_AUTH_ENABLED, String.valueOf(enabled));
-		prefs.setValue(PropsUtil.NTLM_DOMAIN, domain);
 		prefs.setValue(PropsUtil.NTLM_DOMAIN_CONTROLLER, domainController);
+		prefs.setValue(PropsUtil.NTLM_DOMAIN, domain);
 
 		prefs.store();
 	}
