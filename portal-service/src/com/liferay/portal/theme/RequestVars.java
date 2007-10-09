@@ -33,10 +33,11 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestVars {
 
 	public RequestVars(HttpServletRequest req, ThemeDisplay themeDisplay,
-					   long ancestorLayoutId) {
+					   long ancestorPlid, long ancestorLayoutId) {
 
 		_req = req;
 		_themeDisplay = themeDisplay;
+		_ancestorPlid = ancestorPlid;
 		_ancestorLayoutId = ancestorLayoutId;
 	}
 
@@ -48,12 +49,17 @@ public class RequestVars {
 		return _themeDisplay;
 	}
 
+	public long getAncestorPlid() {
+		return _ancestorPlid;
+	}
+
 	public long getAncestorLayoutId() {
 		return _ancestorLayoutId;
 	}
 
 	private HttpServletRequest _req;
 	private ThemeDisplay _themeDisplay;
+	private long _ancestorPlid;
 	private long _ancestorLayoutId;
 
 }

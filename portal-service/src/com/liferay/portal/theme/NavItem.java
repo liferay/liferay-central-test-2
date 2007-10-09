@@ -77,7 +77,7 @@ public class NavItem implements Serializable {
 
 		return _layout.isSelected(
 			themeDisplay.isTilesSelectable(), themeDisplay.getLayout(),
-			_vars.getAncestorLayoutId());
+			_vars.getAncestorPlid());
 	}
 
 	public String getName() {

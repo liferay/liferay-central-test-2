@@ -30,6 +30,10 @@ package com.liferay.portal.kernel.util;
  */
 public interface WebKeys {
 
+	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS = "LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS";
+
+	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_RECENT = "LIFERAY_SHARED_VISITED_GROUP_ID_RECENT";
+
 	public static final String THEME_DISPLAY = "THEME_DISPLAY";
 
 	public static final String VELOCITY_TAGLIB = "VELOCITY_TAGLIB";

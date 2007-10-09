@@ -374,8 +374,8 @@ public class ServicePreAction extends Action {
 	}
 
 	protected Object[] getViewableLayouts(
-			Layout layout, List layouts, PermissionChecker permissionChecker,
-			HttpServletRequest req)
+			HttpServletRequest req, User user,
+			PermissionChecker permissionChecker, Layout layout, List layouts)
 		throws PortalException, SystemException {
 
 		if ((layouts != null) && (layouts.size() > 0)) {
@@ -492,6 +492,114 @@ public class ServicePreAction extends Action {
 		}
 
 		return false;
+	}
+
+	protected List mergeAdditionalLayouts(
+			User user, Layout layout, List layouts, HttpServletRequest req)
+		throws PortalException, SystemException {
+
+		if ((layout == null) || layout.isPrivateLayout()) {
+			return layouts;
+		}
+
+		long layoutGroupId = layout.getGroupId();
+
+		Group guestGroup = GroupLocalServiceUtil.getGroup(
+			user.getCompanyId(), GroupImpl.GUEST);
+
+		if (layoutGroupId != guestGroup.getGroupId()) {
+			Group layoutGroup = GroupLocalServiceUtil.getGroup(layoutGroupId);
+
+			Properties props = layoutGroup.getTypeSettingsProperties();
+
+			boolean mergeGuestPublicPages = GetterUtil.getBoolean(
+				props.getProperty("mergeGuestPublicPages"));
+
+			if (!mergeGuestPublicPages) {
+				return layouts;
+			}
+
+			List guestLayouts = LayoutLocalServiceUtil.getLayouts(
+				guestGroup.getGroupId(), false,
+				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+
+			layouts.addAll(0, guestLayouts);
+		}
+		else {
+			HttpSession ses = req.getSession();
+
+			Long previousGroupId = (Long)ses.getAttribute(
+				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS);
+
+			if ((previousGroupId != null) &&
+				(previousGroupId.longValue() != layoutGroupId)) {
+
+				Group previousGroup = GroupLocalServiceUtil.getGroup(
+					previousGroupId.longValue());
+
+				Properties props = previousGroup.getTypeSettingsProperties();
+
+				boolean mergeGuestPublicPages = GetterUtil.getBoolean(
+					props.getProperty("mergeGuestPublicPages"));
+
+				if (!mergeGuestPublicPages) {
+					return layouts;
+				}
+
+				List previousLayouts = LayoutLocalServiceUtil.getLayouts(
+					previousGroupId.longValue(), false,
+					LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+
+				layouts.addAll(previousLayouts);
+			}
+		}
+
+		return layouts;
+	}
+
+	protected void rememberVisitedGroupIds(
+		long currentGroupId, HttpServletRequest req) {
+
+		String requestURI = GetterUtil.getString(req.getRequestURI());
+
+		if (!requestURI.endsWith(_PATH_PORTAL_LAYOUT)) {
+			return;
+		}
+
+		HttpSession ses = req.getSession();
+
+		Long recentGroupId = (Long)ses.getAttribute(
+			WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_RECENT);
+
+		Long previousGroupId = (Long)ses.getAttribute(
+			WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS);
+
+		if (recentGroupId == null) {
+			recentGroupId = new Long(currentGroupId);
+
+			ses.setAttribute(
+				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_RECENT,
+				recentGroupId);
+		}
+		else if (recentGroupId.longValue() != currentGroupId) {
+			previousGroupId = new Long(recentGroupId.longValue());
+
+			recentGroupId = new Long(currentGroupId);
+
+			ses.setAttribute(
+				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_RECENT,
+				recentGroupId);
+
+			ses.setAttribute(
+				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS,
+				previousGroupId);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Current group id " + currentGroupId);
+			_log.debug("Recent group id " + recentGroupId);
+			_log.debug("Previous group id " + previousGroupId);
+		}
 	}
 
 	protected void servicePre(HttpServletRequest req, HttpServletResponse res)
@@ -691,12 +799,18 @@ public class ServicePreAction extends Action {
 		}
 
 		Object[] viewableLayouts = getViewableLayouts(
-			layout, layouts, permissionChecker, req);
+			req, user, permissionChecker, layout, layouts);
 
 		String layoutSetLogo = null;
 
 		layout = (Layout)viewableLayouts[0];
 		layouts = (List)viewableLayouts[1];
+
+		long portletGroupId = PortalUtil.getPortletGroupId(layout);
+
+		rememberVisitedGroupIds(portletGroupId, req);
+
+		layouts = mergeAdditionalLayouts(user, layout, layouts, req);
 
 		if (layout != null) {
 			if (company.isCommunityLogo()) {
@@ -791,8 +905,6 @@ public class ServicePreAction extends Action {
 				permissionChecker.setCheckGuest(false);
 			}
 		}
-
-		long portletGroupId = PortalUtil.getPortletGroupId(layout);
 
 		// Theme and color scheme
 
@@ -1023,6 +1135,8 @@ public class ServicePreAction extends Action {
 
 		fixState(req, themeDisplay);
 	}
+
+	private static final String _PATH_PORTAL_LAYOUT = "/portal/layout";
 
 	private static Log _log = LogFactory.getLog(ServicePreAction.class);
 

@@ -140,6 +140,9 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("look_and_feel")) {
 				updateLookAndFeel(req);
 			}
+			else if (cmd.equals("merge_pages")) {
+				updateMergePages(req);
+			}
 			else if (cmd.equals("monitoring")) {
 				updateMonitoring(req);
 			}
@@ -634,6 +637,22 @@ public class EditPagesAction extends PortletAction {
 				groupId, privateLayout, layoutId, themeId, colorSchemeId, css,
 				wapTheme);
 		}
+	}
+
+	protected void updateMergePages(ActionRequest req) throws Exception {
+		long groupId = ParamUtil.getLong(req, "groupId");
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		boolean mergeGuestPublicPages = ParamUtil.getBoolean(
+			req, "mergeGuestPublicPages");
+
+		Properties props = group.getTypeSettingsProperties();
+
+		props.setProperty(
+			"mergeGuestPublicPages", String.valueOf(mergeGuestPublicPages));
+
+		GroupServiceUtil.updateGroup(groupId, group.getTypeSettings());
 	}
 
 	protected void updateMonitoring(ActionRequest req) throws Exception {

@@ -193,6 +193,33 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
+	public long getAncestorPlid() {
+		long ancestorPlid = 0;
+
+		try {
+			Layout ancestorLayout = this;
+
+			while (true) {
+				if (!ancestorLayout.isRootLayout()) {
+					ancestorLayout = LayoutLocalServiceUtil.getLayout(
+						ancestorLayout.getGroupId(),
+						ancestorLayout.isPrivateLayout(),
+						ancestorLayout.getParentLayoutId());
+				}
+				else {
+					ancestorPlid = ancestorLayout.getPlid();
+
+					break;
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return ancestorPlid;
+	}
+
 	public long getAncestorLayoutId() {
 		long ancestorLayoutId = 0;
 
@@ -528,14 +555,12 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public boolean isSelected(
-		boolean selectable, Layout layout, long ancestorLayoutId) {
+		boolean selectable, Layout layout, long ancestorPlid) {
 
 		if (selectable) {
-			long layoutId = getLayoutId();
+			long plid = getPlid();
 
-			if ((layoutId == layout.getLayoutId()) ||
-				(layoutId == ancestorLayoutId)) {
-
+			if ((plid == layout.getPlid()) || (plid == ancestorPlid)) {
 				return true;
 			}
 		}

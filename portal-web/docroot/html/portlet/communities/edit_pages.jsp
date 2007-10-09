@@ -25,11 +25,10 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "");
+String tabs1 = ParamUtil.getString(request, "tabs1");
 String tabs2 = ParamUtil.getString(request, "tabs2", "public");
 String tabs3 = ParamUtil.getString(request, "tabs3", "page");
-String tabs4 = ParamUtil.getString(request, "tabs4", "regular-browsers");
-String tabs5 = ParamUtil.getString(request, "tabs5", "export");
+String tabs4 = ParamUtil.getString(request, "tabs4");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
@@ -100,6 +99,15 @@ else {
 	}
 }
 
+Properties groupTypeSettings = null;
+
+if (group != null) {
+	groupTypeSettings = group.getTypeSettingsProperties();
+}
+else {
+	groupTypeSettings = new Properties();
+}
+
 Layout selLayout = null;
 
 try {
@@ -125,6 +133,18 @@ if (selLayout == null) {
 	}
 	else if (tabs3.equals("sitemap") && privateLayout) {
 		tabs3 = "children";
+	}
+}
+
+if (Validator.isNull(tabs4)) {
+	if (tabs3.equals("children")) {
+		tabs4 = "new-page";
+	}
+	else if (tabs3.equals("look-and-feel")) {
+		tabs4 = "regular-browsers";
+	}
+	else if (tabs3.equals("export-import")) {
+		tabs4 = "export";
 	}
 }
 
@@ -170,8 +190,7 @@ portletURL.setParameter("struts_action", "/communities/edit_pages");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
-portletURL.setParameter("tabs4", tabs4);
-portletURL.setParameter("tabs5", tabs5);
+//portletURL.setParameter("tabs4", tabs4);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 
@@ -226,6 +245,9 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 			</c:when>
 			<c:when test='<%= tabs3.equals("virtual-host") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "virtual_host";
+			</c:when>
+			<c:when test='<%= tabs4.equals("merge-pages") %>'>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "merge_pages";
 			</c:when>
 			<c:otherwise>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= tabs3.equals("children") ? Constants.ADD : Constants.UPDATE %>';
@@ -304,9 +326,8 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
 <input name="<portlet:namespace />tabs4" type="hidden" value="<%= tabs4 %>">
-<input name="<portlet:namespace />tabs5" type="hidden" value="<%= tabs5 %>">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= selPlid %>">
+<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />tabs4=<%= tabs4 %>&<portlet:namespace />selPlid=<%= selPlid %>">
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
 <input name="<portlet:namespace />liveGroupId" type="hidden" value="<%= liveGroupId %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
@@ -485,6 +506,10 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					}
 				}
 			}
+
+			PortletURL tabs3PortletURL = PortletURLUtil.clone(portletURL, renderResponse);
+
+			tabs3PortletURL.setParameter("tabs4", "");
 			%>
 
 			<liferay-ui:tabs
@@ -811,84 +836,6 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					</script>
 				</c:when>
 				<c:when test='<%= tabs3.equals("children") %>'>
-					<input name="<portlet:namespace />parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>" />
-					<input name="<portlet:namespace />layoutIds" type="hidden" value="" />
-
-					<%
-					String name = ParamUtil.getString(request, "name");
-					String type = ParamUtil.getString(request, "type");
-					boolean hidden = ParamUtil.getBoolean(request, "hidden");
-					%>
-
-					<liferay-ui:message key="add-child-pages" />
-
-					<br /><br />
-
-					<table class="liferay-table">
-					<tr>
-						<td>
-							<liferay-ui:message key="name" />
-						</td>
-						<td>
-							<input name="<portlet:namespace />name" size="30" type="text" value="<%= name %>" />
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<br />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<liferay-ui:message key="type" />
-						</td>
-						<td>
-							<select name="<portlet:namespace />type">
-
-								<%
-								for (int i = 0; i < LayoutImpl.TYPES.length; i++) {
-								%>
-
-									<option <%= type.equals(LayoutImpl.TYPES[i]) ? "selected" : "" %> value="<%= LayoutImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, "layout.types." + LayoutImpl.TYPES[i]) %></option>
-
-								<%
-								}
-								%>
-
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<liferay-ui:message key="hidden" />
-						</td>
-						<td>
-							<liferay-ui:input-checkbox param="hidden" defaultValue="<%= hidden %>" />
-						</td>
-					</tr>
-
-					<c:if test="<%= (selLayout != null) && selLayout.getType().equals(LayoutImpl.TYPE_PORTLET) %>">
-						<tr>
-							<td>
-								<liferay-ui:message key="inherit" />
-							</td>
-							<td>
-								<liferay-ui:input-checkbox param="inheritFromParentLayoutId" defaultValue="false" />
-							</td>
-						</tr>
-					</c:if>
-
-					</table>
-
-					<br />
-
-					<input type="submit" value="<liferay-ui:message key="add-page" />" /><br />
-
-					<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-						<script type="text/javascript">
-							Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-						</script>
-					</c:if>
 
 					<%
 					List selLayoutChildren = null;
@@ -899,64 +846,187 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					else {
 						selLayoutChildren = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 					}
+
+					String tabs4Names = "new-page";
+
+					if ((selLayoutChildren != null) && (selLayoutChildren.size() > 0)) {
+						tabs4Names += ",display-order";
+					}
+
+					Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupImpl.GUEST);
+
+					if ((selLayout == null) && !privateLayout && (liveGroup.getGroupId() != guestGroup.getGroupId())) {
+						tabs4Names += ",merge-pages";
+					}
 					%>
 
-					<c:if test="<%= (selLayoutChildren != null) && (selLayoutChildren.size() > 0) %>">
-						<div class="separator"><!-- --></div>
+					<liferay-ui:tabs
+						names="<%= tabs4Names %>"
+						param="tabs4"
+						url="<%= portletURL.toString() %>"
+					/>
 
-						<liferay-ui:error exception="<%= RequiredLayoutException.class %>">
+					<c:choose>
+						<c:when test='<%= tabs4.equals("new-page") %>'>
+							<input name="<portlet:namespace />parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>" />
+							<input name="<portlet:namespace />layoutIds" type="hidden" value="" />
 
 							<%
-							RequiredLayoutException rle = (RequiredLayoutException)errorException;
+							String name = ParamUtil.getString(request, "name");
+							String type = ParamUtil.getString(request, "type");
+							boolean hidden = ParamUtil.getBoolean(request, "hidden");
 							%>
 
-							<c:if test="<%= rle.getType() == RequiredLayoutException.AT_LEAST_ONE %>">
-								<liferay-ui:message key="you-must-have-at-least-one-page" />
+							<liferay-ui:message key="add-child-pages" />
+
+							<br /><br />
+
+							<table class="liferay-table">
+							<tr>
+								<td>
+									<liferay-ui:message key="name" />
+								</td>
+								<td>
+									<input name="<portlet:namespace />name" size="30" type="text" value="<%= name %>" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<br />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<liferay-ui:message key="type" />
+								</td>
+								<td>
+									<select name="<portlet:namespace />type">
+
+										<%
+										for (int i = 0; i < LayoutImpl.TYPES.length; i++) {
+										%>
+
+											<option <%= type.equals(LayoutImpl.TYPES[i]) ? "selected" : "" %> value="<%= LayoutImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, "layout.types." + LayoutImpl.TYPES[i]) %></option>
+
+										<%
+										}
+										%>
+
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<liferay-ui:message key="hidden" />
+								</td>
+								<td>
+									<liferay-ui:input-checkbox param="hidden" defaultValue="<%= hidden %>" />
+								</td>
+							</tr>
+
+							<c:if test="<%= (selLayout != null) && selLayout.getType().equals(LayoutImpl.TYPE_PORTLET) %>">
+								<tr>
+									<td>
+										<liferay-ui:message key="inherit" />
+									</td>
+									<td>
+										<liferay-ui:input-checkbox param="inheritFromParentLayoutId" defaultValue="false" />
+									</td>
+								</tr>
 							</c:if>
 
-							<c:if test="<%= rle.getType() == RequiredLayoutException.FIRST_LAYOUT_TYPE %>">
-								<liferay-ui:message key="your-first-page-must-be-a-portlet-page" />
+							</table>
+
+							<br />
+
+							<input type="submit" value="<liferay-ui:message key="add-page" />" /><br />
+
+							<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+								<script type="text/javascript">
+									Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
+								</script>
 							</c:if>
-
-							<c:if test="<%= rle.getType() == RequiredLayoutException.FIRST_LAYOUT_HIDDEN %>">
-								<liferay-ui:message key="your-first-page-must-not-be-hidden" />
-							</c:if>
-						</liferay-ui:error>
-
-						<liferay-ui:message key="set-the-display-order-of-child-pages" />
-
-						<br /><br />
-
-						<table class="liferay-table">
-						<tr>
-							<td>
-								<select name="<portlet:namespace />layoutIdsBox" size="7">
+						</c:when>
+						<c:when test='<%= tabs4.equals("display-order") %>'>
+							<liferay-ui:error exception="<%= RequiredLayoutException.class %>">
 
 								<%
-								for (int i = 0; i < selLayoutChildren.size(); i++) {
-									Layout selLayoutChild = (Layout)selLayoutChildren.get(i);
+								RequiredLayoutException rle = (RequiredLayoutException)errorException;
 								%>
 
-									<option value="<%= selLayoutChild.getLayoutId() %>"><%= selLayoutChild.getName(locale) %></option>
+								<c:if test="<%= rle.getType() == RequiredLayoutException.AT_LEAST_ONE %>">
+									<liferay-ui:message key="you-must-have-at-least-one-page" />
+								</c:if>
 
-								<%
-								}
-								%>
+								<c:if test="<%= rle.getType() == RequiredLayoutException.FIRST_LAYOUT_TYPE %>">
+									<liferay-ui:message key="your-first-page-must-be-a-portlet-page" />
+								</c:if>
 
-								</select>
-							</td>
-							<td valign="top">
-								<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
-								<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a><br />
-								<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" vspace="2" width="16" /></a><br />
-							</td>
-						</tr>
-						</table>
+								<c:if test="<%= rle.getType() == RequiredLayoutException.FIRST_LAYOUT_HIDDEN %>">
+									<liferay-ui:message key="your-first-page-must-not-be-hidden" />
+								</c:if>
+							</liferay-ui:error>
 
-						<br />
+							<liferay-ui:message key="set-the-display-order-of-child-pages" />
 
-						<input type="button" value="<liferay-ui:message key="update-display-order" />" onClick="<portlet:namespace />updateDisplayOrder();" />
-					</c:if>
+							<br /><br />
+
+							<table class="liferay-table">
+							<tr>
+								<td>
+									<select name="<portlet:namespace />layoutIdsBox" size="7">
+
+									<%
+									for (int i = 0; i < selLayoutChildren.size(); i++) {
+										Layout selLayoutChild = (Layout)selLayoutChildren.get(i);
+									%>
+
+										<option value="<%= selLayoutChild.getLayoutId() %>"><%= selLayoutChild.getName(locale) %></option>
+
+									<%
+									}
+									%>
+
+									</select>
+								</td>
+								<td valign="top">
+									<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
+									<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a><br />
+									<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" vspace="2" width="16" /></a><br />
+								</td>
+							</tr>
+							</table>
+
+							<br />
+
+							<input type="button" value="<liferay-ui:message key="update-display-order" />" onClick="<portlet:namespace />updateDisplayOrder();" />
+						</c:when>
+						<c:when test='<%= tabs4.equals("merge-pages") %>'>
+
+							<%
+							boolean mergeGuestPublicPages = PropertiesParamUtil.getBoolean(groupTypeSettings, request, "mergeGuestPublicPages");
+							%>
+
+							<liferay-ui:message key="you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-guest-community" />
+
+							<br /><br />
+
+							<table class="liferay-table">
+							<tr>
+								<td>
+									<liferay-ui:message key="merge-guest-public-pages" />
+								</td>
+								<td>
+									<liferay-ui:input-checkbox param="mergeGuestPublicPages" defaultValue="<%= mergeGuestPublicPages %>" />
+								</td>
+							</tr>
+							</table>
+
+							<br />
+
+							<input type="submit" value="<liferay-ui:message key="save" />" />
+						</c:when>
+					</c:choose>
 				</c:when>
 				<c:when test='<%= tabs3.equals("look-and-feel") %>'>
 					<liferay-ui:tabs
@@ -1220,21 +1290,21 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 					Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 
-					String tabs5Names = "export,import";
+					String tabs4Names = "export,import";
 
 					if ((layout.getGroupId() == groupId) && (layout.isPrivateLayout() == privateLayout)) {
-						tabs5Names = "export";
+						tabs4Names = "export";
 					}
 					%>
 
 					<liferay-ui:tabs
-						names="<%= tabs5Names %>"
-						param="tabs5"
+						names="<%= tabs4Names %>"
+						param="tabs4"
 						url="<%= portletURL.toString() %>"
 					/>
 
 					<c:choose>
-						<c:when test='<%= tabs5.equals("export") %>'>
+						<c:when test='<%= tabs4.equals("export") %>'>
 							<liferay-ui:message key="export-the-current-pages-to-the-given-lar-file-name" />
 
 							<br /><br />
@@ -1314,7 +1384,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 							<input type="button" value='<liferay-ui:message key="export" />'  onClick="<portlet:namespace />exportPages();" />
 						</c:when>
-						<c:when test='<%= tabs5.equals("import") %>'>
+						<c:when test='<%= tabs4.equals("import") %>'>
 							<c:if test="<%= (layout.getGroupId() != groupId) || (layout.isPrivateLayout() != privateLayout) %>">
 								<liferay-ui:message key="import-a-lar-file-to-overwrite-the-current-pages" />
 
@@ -1525,15 +1595,6 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 						<td>
 
 							<%
-							Properties groupTypeSettings = null;
-
-							if (group != null) {
-								groupTypeSettings = group.getTypeSettingsProperties();
-							}
-							else {
-								groupTypeSettings = new Properties();
-							}
-
 							String googleAnalyticsId = PropertiesParamUtil.getString(groupTypeSettings, request, "googleAnalyticsId");
 							%>
 

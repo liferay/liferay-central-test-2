@@ -270,7 +270,8 @@ public class VelocityVariables {
 
 			if (layout != null) {
 				RequestVars requestVars = new RequestVars(
-					req, themeDisplay, layout.getAncestorLayoutId());
+					req, themeDisplay, layout.getAncestorPlid(),
+					layout.getAncestorLayoutId());
 
 				List navItems = NavItem.fromLayouts(requestVars, layouts);
 

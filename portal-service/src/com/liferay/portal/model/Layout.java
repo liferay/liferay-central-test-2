@@ -52,6 +52,8 @@ public interface Layout extends LayoutModel {
 
 	public boolean isShared();
 
+	public long getAncestorPlid();
+
 	public long getAncestorLayoutId();
 
 	public java.util.List getAncestors()
@@ -150,5 +152,5 @@ public interface Layout extends LayoutModel {
 	public java.lang.String getTarget();
 
 	public boolean isSelected(boolean selectable,
-		com.liferay.portal.model.Layout layout, long ancestorLayoutId);
+		com.liferay.portal.model.Layout layout, long ancestorPlid);
 }
