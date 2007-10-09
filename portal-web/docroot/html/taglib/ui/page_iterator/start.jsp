@@ -56,6 +56,8 @@ else {
 		resultRowsSize = delta;
 	}
 }
+
+NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
 
 <script type="text/javascript">
@@ -85,15 +87,15 @@ else {
 	<div class="search-results">
 		<c:choose>
 			<c:when test="<%= total > resultRowsSize %>">
-				<%= LanguageUtil.format(pageContext, "showing-x-x-of-x-results", new Object[] {String.valueOf(start + 1), String.valueOf(end), String.valueOf(total)}) %>
+				<%= LanguageUtil.format(pageContext, "showing-x-x-of-x-results", new Object[] {numberFormat.format(start + 1), numberFormat.format(end), numberFormat.format(total)}) %>
 			</c:when>
 			<c:otherwise>
 				<c:choose>
 					<c:when test="<%= total != 1 %>">
-						<%= LanguageUtil.format(pageContext, "showing-x-results", String.valueOf(total)) %>
+						<%= LanguageUtil.format(pageContext, "showing-x-results", numberFormat.format(total)) %>
 					</c:when>
 					<c:otherwise>
-						<%= LanguageUtil.format(pageContext, "showing-x-result", String.valueOf(total)) %>
+						<%= LanguageUtil.format(pageContext, "showing-x-result", numberFormat.format(total)) %>
 					</c:otherwise>
 				</c:choose>
 			</c:otherwise>
@@ -108,7 +110,20 @@ else {
 				<select class="pages <%= namespace %>pageIteratorValue">
 
 					<%
-					for (int i = 1; i <= pages; i++) {
+					int pagesIteratorMax = maxPages;
+					int pagesIteratorBegin = 1;
+					int pagesIteratorEnd = pages;
+
+					if (pages > pagesIteratorMax) {
+						pagesIteratorBegin = curValue - pagesIteratorMax;
+						pagesIteratorEnd = curValue + pagesIteratorMax;
+
+						if (pagesIteratorBegin < 1) {
+							pagesIteratorBegin = 1;
+						}
+					}
+
+					for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
 					%>
 
 						<option <%= (i == curValue) ? "selected=\"selected\"" : "" %> value="<%= i %>"><%= i %></option>
@@ -121,7 +136,7 @@ else {
 
 				<liferay-ui:message key="of" />
 
-				<%= pages %>
+				<%= numberFormat.format(pages) %>
 
 				<input class="page-iterator-submit" type="submit" value="<liferay-ui:message key="submit" />" />
 			</div>
