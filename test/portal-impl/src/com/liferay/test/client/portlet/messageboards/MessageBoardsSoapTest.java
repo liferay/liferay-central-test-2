@@ -85,9 +85,8 @@ public class MessageBoardsSoapTest extends BaseSoapTest {
 		MBCategoryServiceSoapServiceLocator locator =
 			new MBCategoryServiceSoapServiceLocator();
 
-		MBCategoryServiceSoap service =
-			locator.getPortlet_MB_MBCategoryService(
-				getURL("Portlet_MB_MBCategoryService"));
+		MBCategoryServiceSoap service = locator.getPortlet_MB_MBCategoryService(
+			getURL("Portlet_MB_MBCategoryService"));
 
 		return service;
 	}
@@ -96,9 +95,8 @@ public class MessageBoardsSoapTest extends BaseSoapTest {
 		MBMessageServiceSoapServiceLocator locator =
 			new MBMessageServiceSoapServiceLocator();
 
-		MBMessageServiceSoap service =
-			locator.getPortlet_MB_MBMessageService(
-				getURL("Portlet_MB_MBMessageService"));
+		MBMessageServiceSoap service = locator.getPortlet_MB_MBMessageService(
+			getURL("Portlet_MB_MBMessageService"));
 
 		return service;
 	}
