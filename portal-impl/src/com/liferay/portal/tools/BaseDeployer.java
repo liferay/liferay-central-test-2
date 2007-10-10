@@ -580,7 +580,6 @@ public class BaseDeployer {
 				srcFile.getParent() + "/merge/" + srcFile.getName());
 
 			if (srcFile.isDirectory()) {
-
 				deployDirectory(
 					srcFile, mergeDirFile, deployDirFile, displayName,
 					overwrite, pluginPackage);
