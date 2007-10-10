@@ -139,7 +139,7 @@
 		var refreshPortletList = getRefreshPortletList();
 
 		if (refreshPortletList["_" + portletId]) {
-			self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&referer=<%= HttpUtil.encodeURL(currentURL) %>&refresh=1";
+			self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&amp;p_p_id=" + portletId + "&amp;doAsUserId=" + doAsUserId + "&amp;<%= Constants.CMD %>=<%= Constants.ADD %>&amp;referer=<%= HttpUtil.encodeURL(currentURL) %>&amp;refresh=1";
 		}
 		else {
 			var loadingDiv = document.createElement("div");
@@ -153,7 +153,7 @@
 
 			container.appendChild(loadingDiv);
 
-			var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&currentURL=<%= HttpUtil.encodeURL(currentURL) %>";
+			var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&amp;p_p_id=" + portletId + "&amp;doAsUserId=" + doAsUserId + "&amp;<%= Constants.CMD %>=<%= Constants.ADD %>&amp;currentURL=<%= HttpUtil.encodeURL(currentURL) %>";
 
 			addPortletHTML(queryString, loadingDiv);
 		}
@@ -167,7 +167,7 @@
 				title: "<%= UnicodeLanguageUtil.get(pageContext, "layout") %>"
 			});
 
-		url = "<%= themeDisplay.getPathMain() %>/layout_configuration/templates?p_l_id=<%= plid %>&doAsUserId=<%= themeDisplay.getDoAsUserId() %>";
+		url = "<%= themeDisplay.getPathMain() %>/layout_configuration/templates?p_l_id=<%= plid %>&amp;doAsUserId=<%= themeDisplay.getDoAsUserId() %>";
 
 		AjaxUtil.update(url, message, {onComplete: function(){Liferay.Popup.center()}});
 	}
@@ -256,8 +256,7 @@
 				}
 				else {
 					Liferay.Columns({
-						columnSelector: "div.lfr-portlet-column",
-						grid: '#layout-grid',
+						columnSelector: "div[@id^=layout-column_]",
 						handleSelector: ".portlet-title:first, .portlet-title-default:first",
 						boxSelector: ".portlet-boundary" ,
 						positionClass: "drop-position",
