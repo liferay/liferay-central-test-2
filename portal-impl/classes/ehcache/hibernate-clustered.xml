@@ -1,11 +1,6 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
 	<diskStore path="user.home/liferay/ehcache/hibernate" />
 	<cacheManagerEventListenerFactory class="" properties="" />
-
-	<!--
-	Uncomment the following in a clustered configuration.
-	-->
-
 	<cacheManagerPeerProviderFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
 		properties="peerDiscovery=automatic,multicastGroupAddress=230.0.0.1,multicastGroupPort=4446,timeToLive=1"
@@ -36,18 +31,18 @@
 
 	<!--
     Tracks the timestamps of the most recent updates to particular tables. It is
-    important that the cache timeout of the underlying cache implementation be 
-    set to a higher value than the timeouts of any of the query caches. In fact, 
-    it is recommend that the the underlying cache not be configured for expiry 
+    important that the cache timeout of the underlying cache implementation be
+    set to a higher value than the timeouts of any of the query caches. In fact,
+    it is recommend that the the underlying cache not be configured for expiry
     at all.
     -->
-    
+
 	<cache
 		name="org.hibernate.cache.UpdateTimestampsCache"
 		maxElementsInMemory="5000"
 		eternal="true"
 		overflowToDisk="true"
-	>	
+	>
         <cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />

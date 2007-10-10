@@ -1,7 +1,7 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
 
 	<!--
-	Caches in this file are designed to be clustered.
+	Caches in this file can be clustered and are configured to be clustered.
 	-->
 
 	<diskStore path="user.home/liferay/ehcache/liferay-multi-vm" />
@@ -14,7 +14,6 @@
 	<cacheManagerPeerListenerFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
 	/>
-
 	<defaultCache
 		maxElementsInMemory="10000"
 		eternal="false"
