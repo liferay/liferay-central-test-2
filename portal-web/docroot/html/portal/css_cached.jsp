@@ -355,7 +355,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 #portlet-set-properties fieldset {
-	margin-bototm: 1em;
+	margin-bottom: 1em;
 }
 
 #portlet-set-properties fieldset fieldset {
