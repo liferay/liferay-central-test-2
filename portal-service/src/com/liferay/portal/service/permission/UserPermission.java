@@ -33,7 +33,9 @@ import com.liferay.portal.security.auth.PrincipalException;
  */
 public interface UserPermission {
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public void check(
 			PermissionChecker permissionChecker, long userId,
 			long organizationId, long locationId, String actionId)
@@ -44,7 +46,9 @@ public interface UserPermission {
 			long[] organizationIds, String actionId)
 		throws PrincipalException;
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public boolean contains(
 		PermissionChecker permissionChecker, long userId, long organizationId,
 		long locationId, String actionId);

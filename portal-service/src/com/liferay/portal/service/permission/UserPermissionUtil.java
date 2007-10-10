@@ -34,7 +34,9 @@ import com.liferay.portal.security.auth.PrincipalException;
  */
 public class UserPermissionUtil {
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public static void check(
 			PermissionChecker permissionChecker, long userId,
 			long organizationId, long locationId, String actionId)
@@ -54,7 +56,9 @@ public class UserPermissionUtil {
 			permissionChecker, userId, organizationIds, actionId);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public static boolean contains(
 		PermissionChecker permissionChecker, long userId, long organizationId,
 		long locationId, String actionId) {

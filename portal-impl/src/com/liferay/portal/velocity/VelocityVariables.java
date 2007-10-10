@@ -193,11 +193,11 @@ public class VelocityVariables {
 			UserGroupPermissionUtil.getUserGroupPermission());
 		vc.put("userPermission", UserPermissionUtil.getUserPermission());
 
-		// @deprecated
+		// Deprecated permissions
+
 		vc.put(
 			"locationPermission",
 			OrganizationPermissionUtil.getOrganizationPermission());
-
 	}
 
 	public static void insertVariables(

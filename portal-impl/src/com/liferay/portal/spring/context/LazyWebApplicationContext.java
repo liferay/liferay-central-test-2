@@ -27,7 +27,7 @@ package com.liferay.portal.spring.context;
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated this class has been repackaged at
+ * @deprecated This class has been repackaged at
  * <code>com.liferay.util.spring.context</code>.
  *
  */

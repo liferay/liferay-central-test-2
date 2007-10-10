@@ -67,7 +67,9 @@ public class OrganizationServiceImpl extends PrincipalBean
 			passwordPolicyId, organizationIds);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public Organization addOrganization(
 			long parentOrganizationId, String name, boolean location,
 			boolean recursable, long regionId, long countryId, int statusId)
@@ -161,7 +163,9 @@ public class OrganizationServiceImpl extends PrincipalBean
 			passwordPolicyId, organizationIds);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
 			boolean location, boolean recursable, long regionId, long countryId,

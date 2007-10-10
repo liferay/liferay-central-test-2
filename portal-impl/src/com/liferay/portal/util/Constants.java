@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated this class has been repackaged at
+ * @deprecated This class has been repackaged at
  * <code>com.liferay.portal.kernel.util</code>.
  *
  */

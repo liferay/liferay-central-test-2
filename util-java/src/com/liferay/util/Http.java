@@ -169,7 +169,7 @@ public class Http {
 	}
 
 	/**
-	 * @deprecated this method has been moved to
+	 * @deprecated This method has been moved to
 	 * <code>com.liferay.util.HttpUtil</code>.
 	 */
 	public static String decodeURL(String url) {
@@ -177,7 +177,7 @@ public class Http {
 	}
 
 	/**
-	 * @deprecated this method has been moved to
+	 * @deprecated This method has been moved to
 	 * <code>com.liferay.util.HttpUtil</code>.
 	 */
 	public static String encodeURL(String url) {
@@ -259,7 +259,7 @@ public class Http {
 	}
 
 	/**
-	 * @deprecated this method has been moved to
+	 * @deprecated This method has been moved to
 	 * <code>com.liferay.util.HttpUtil</code>.
 	 */
 	public static Map getParameterMap(String queryString) {
@@ -329,7 +329,7 @@ public class Http {
 	}
 
 	/**
-	 * @deprecated this method has been moved to
+	 * @deprecated This method has been moved to
 	 * <code>com.liferay.util.HttpUtil</code>.
 	 */
 	public static String parameterMapToString(Map parameterMap) {
@@ -337,7 +337,7 @@ public class Http {
 	}
 
 	/**
-	 * @deprecated this method has been moved to
+	 * @deprecated This method has been moved to
 	 * <code>com.liferay.util.HttpUtil</code>.
 	 */
 	public static String parameterMapToString(

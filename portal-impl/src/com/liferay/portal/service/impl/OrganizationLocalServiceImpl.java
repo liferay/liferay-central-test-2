@@ -360,7 +360,9 @@ public class OrganizationLocalServiceImpl
 		return false;
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public List search(
 			long companyId, long parentOrganizationId, String keywords,
 			boolean location, Long regionId, Long countryId,
@@ -386,7 +388,9 @@ public class OrganizationLocalServiceImpl
 			new OrganizationNameComparator(true));
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public List search(
 			long companyId, long parentOrganizationId, String keywords,
 			boolean location, Long regionId, Long countryId,
@@ -420,7 +424,9 @@ public class OrganizationLocalServiceImpl
 			obc);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public List search(
 			long companyId, long parentOrganizationId, String name,
 			boolean location, String street, String city, String zip,
@@ -448,7 +454,9 @@ public class OrganizationLocalServiceImpl
 			new OrganizationNameComparator(true));
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public List search(
 			long companyId, long parentOrganizationId, String name,
 			boolean location, String street, String city, String zip,
@@ -484,7 +492,9 @@ public class OrganizationLocalServiceImpl
 			andOperator, begin, end, obc);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public int searchCount(
 			long companyId, long parentOrganizationId, String keywords,
 			boolean location, Long regionId, Long countryId,
@@ -517,7 +527,9 @@ public class OrganizationLocalServiceImpl
 			keywords, type, regionId, countryId, params);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public int searchCount(
 			long companyId, long parentOrganizationId, String name,
 			boolean location, String street, String city, String zip,
@@ -577,7 +589,9 @@ public class OrganizationLocalServiceImpl
 			passwordPolicyId, Organization.class.getName(), organizationIds);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public Organization updateOrganization(
 			long companyId, long organizationId, long parentOrganizationId,
 			String name, boolean location, boolean recursable, long regionId,

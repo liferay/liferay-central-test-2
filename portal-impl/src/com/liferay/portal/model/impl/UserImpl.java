@@ -244,7 +244,7 @@ public class UserImpl extends UserModelImpl implements User {
 
 	/**
 	 * @deprecated Will return the first regular organization of the list in
-	 * alphabetical order
+	 * alphabetical order.
 	 */
 	public Organization getOrganization() {
 		try {
@@ -307,7 +307,9 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public Organization getLocation() {
 		try {
 			List organizations =
@@ -328,7 +330,9 @@ public class UserImpl extends UserModelImpl implements User {
 		return new OrganizationImpl();
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public long getLocationId() {
 		Organization location = getLocation();
 
@@ -339,7 +343,9 @@ public class UserImpl extends UserModelImpl implements User {
 		return location.getOrganizationId();
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public boolean hasLocation() {
 		if (getLocation().getOrganizationId() > 0) {
 			return true;

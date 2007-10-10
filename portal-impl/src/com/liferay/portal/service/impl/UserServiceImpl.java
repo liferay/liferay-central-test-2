@@ -102,7 +102,9 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.addUserGroupUsers(userGroupId, userIds);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public User addUser(
 			long companyId, boolean autoPassword, String password1,
 			String password2, boolean autoScreenName, String screenName,
@@ -340,7 +342,9 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return UserLocalServiceUtil.updateLockoutById(userId, lockout);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public void updateOrganizations(
 			long userId, long organizationId, long locationId)
 		throws PortalException, SystemException {
@@ -378,7 +382,9 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.updatePortrait(userId, bytes);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public User updateUser(
 			long userId, String password, String screenName,
 			String emailAddress, String languageId, String timeZoneId,

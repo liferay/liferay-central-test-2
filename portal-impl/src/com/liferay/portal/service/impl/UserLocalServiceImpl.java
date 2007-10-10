@@ -193,7 +193,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public User addUser(
 			long creatorUserId, long companyId, boolean autoPassword,
 			String password1, String password2, boolean autoScreenName,
@@ -1369,7 +1371,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return updateLockout(user, lockout);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public void updateOrganizations(
 			long userId, long organizationId, long locationId)
 		throws PortalException, SystemException {
@@ -1523,7 +1527,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		ImageLocalUtil.updateImage(portraitId, bytes);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public User updateUser(
 			long userId, String password, String screenName,
 			String emailAddress, String languageId, String timeZoneId,

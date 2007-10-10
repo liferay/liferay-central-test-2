@@ -41,7 +41,7 @@ import java.util.Calendar;
  *
  * @author Jonathan Lennox
  *
- * @deprecated this class has been repackaged at
+ * @deprecated This class has been repackaged at
  * <code>com.liferay.portal.kernel.cal</code>.
  *
  */
