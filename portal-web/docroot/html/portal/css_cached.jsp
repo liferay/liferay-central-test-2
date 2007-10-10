@@ -82,7 +82,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-color-indic {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/color_picker/select.gif);
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/color_picker/select.png);
 	height: 11px;
 	position: absolute;
 	width: 11px;
@@ -98,7 +98,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 .lfr-hue-indic {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/color_picker/color_indic.gif);
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/color_picker/color_indic.png);
 	height: 7px;
 	position: absolute;
 	width: 18px;
@@ -544,13 +544,13 @@ ul.gamma .tree-item-hover {
 
 .popup-alert-notice {
 	background-color: #ffc;
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/messages/alert.gif);
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/messages/alert.png);
 	border-bottom-color: #fc0;
 }
 
 .popup-alert-warning {
 	background-color: #fcc;
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/messages/error.gif);
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/messages/error.png);
 	border-bottom-color: #f00;
 	font-weight: bold;
 }
@@ -802,7 +802,7 @@ ul.gamma .tree-item-hover {
 /* ----------- OpenID ---------- */
 
 input[type="text"].openid_login {
-   background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.gif) no-repeat;
+   background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.png) no-repeat;
    background-color: #fff;
    background-position: 0 50%;
    color: #000;
@@ -810,7 +810,7 @@ input[type="text"].openid_login {
 }
 
 .ie6 input.text.openid_login {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.gif) no-repeat;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.png) no-repeat;
 	background-color: #fff;
 	background-position: 0 50%;
 	color: #000;
