@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
@@ -63,6 +64,14 @@ public class TagsAssetFinder {
 
 	public static String FIND_BY_OR_ENTRY_IDS =
 		TagsAssetFinder.class.getName() + ".findByOrEntryIds";
+
+	public static String[] ORDER_BY_COLUMNS = new String[]{
+		"title", "createDate", "modifiedDate", "publishDate", "expirationDate"
+	};
+
+	public static String[] ORDER_BY_TYPE = new String[]{
+		"ASC", "DESC"
+	};
 
 	public static int countByAndEntryIds(
 			long[] entryIds, long[] notEntryIds, Date publishDate,
@@ -228,13 +237,19 @@ public class TagsAssetFinder {
 	}
 
 	public static List findByAndEntryIds(
-			long[] entryIds, long[] notEntryIds, Date publishDate,
-			Date expirationDate, int begin, int end)
+			long[] entryIds, long[] notEntryIds, String orderByCol1,
+			String orderByCol2, String orderByType1, String orderByType2,
+			Date publishDate, Date expirationDate, int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
 			return new ArrayList();
 		}
+
+		orderByCol1 = _checkOrderByCol(orderByCol1);
+		orderByCol2 = _checkOrderByCol(orderByCol2);
+		orderByType1 = _checkOrderByType(orderByType1);
+		orderByType2 = _checkOrderByType(orderByType2);
 
 		Session session = null;
 
@@ -278,7 +293,23 @@ public class TagsAssetFinder {
 				sm.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
-			sm.append("[$DATES$] ORDER BY TagsAsset.modifiedDate DESC");
+			sm.append("[$DATES$]");
+
+			sm.append(" ORDER BY TagsAsset.");
+			sm.append(orderByCol1);
+
+			sm.append(StringPool.SPACE);
+			sm.append(orderByType1);
+
+			if (Validator.isNotNull(orderByCol2) &&
+					!orderByCol1.equals(orderByCol2)) {
+				sm.append(", TagsAsset.");
+				sm.append(orderByCol2);
+
+				sm.append(StringPool.SPACE);
+				sm.append(orderByType2);
+
+			}
 
 			String sql = sm.toString();
 
@@ -309,18 +340,24 @@ public class TagsAssetFinder {
 		throws SystemException {
 
 		return findByOrEntryIds(
-			entryIds, notEntryIds, publishDate, expirationDate,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			entryIds, notEntryIds, null, null, null, null, publishDate,
+			expirationDate, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public static List findByOrEntryIds(
-			long[] entryIds, long[] notEntryIds, Date publishDate,
-			Date expirationDate, int begin, int end)
+			long[] entryIds, long[] notEntryIds, String orderByCol1,
+			String orderByCol2, String orderByType1, String orderByType2,
+			Date publishDate, Date expirationDate, int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
 			return new ArrayList();
 		}
+
+		orderByCol1 = _checkOrderByCol(orderByCol1);
+		orderByCol2 = _checkOrderByCol(orderByCol2);
+		orderByType1 = _checkOrderByType(orderByType1);
+		orderByType2 = _checkOrderByType(orderByType2);
 
 		Session session = null;
 
@@ -359,6 +396,24 @@ public class TagsAssetFinder {
 
 			sql = _getDates(sql, publishDate, expirationDate);
 
+			StringMaker sm = new StringMaker();
+			sm.append(" ORDER BY TagsAsset.");
+			sm.append(orderByCol1);
+
+			sm.append(StringPool.SPACE);
+			sm.append(orderByType1);
+
+			if (Validator.isNotNull(orderByCol2) &&
+					!orderByCol1.equals(orderByCol2)) {
+				sm.append(", TagsAsset.");
+				sm.append(orderByCol2);
+
+				sm.append(StringPool.SPACE);
+				sm.append(orderByType2);
+			}
+
+			sql += sm.toString();
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addEntity("TagsAsset", TagsAssetImpl.class);
@@ -377,6 +432,34 @@ public class TagsAssetFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
+	}
+
+	private static String _checkOrderByCol(String orderByCol) {
+		if (orderByCol == null) {
+			return "modifiedDate";
+		}
+
+		for (int i = 0; i < ORDER_BY_COLUMNS.length; i++) {
+			if (orderByCol.equals(ORDER_BY_COLUMNS[i])) {
+				return orderByCol;
+			}
+		}
+
+		return "modifiedDate";
+	}
+
+	protected static String _checkOrderByType(String orderByType) {
+		if (orderByType == null) {
+			return "DESC";
+		}
+
+		for (int i = 0; i < ORDER_BY_TYPE.length; i++) {
+			if (orderByType.equals(ORDER_BY_TYPE[i])) {
+				return orderByType;
+			}
+		}
+
+		return "DESC";
 	}
 
 	private static String _getDates(

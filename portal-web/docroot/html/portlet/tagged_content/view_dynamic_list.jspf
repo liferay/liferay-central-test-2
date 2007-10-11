@@ -8,7 +8,7 @@ int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, notEntryIds, andO
 
 searchContainer.setTotal(total);
 
-List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, now, now, searchContainer.getStart(), searchContainer.getEnd());
+List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 

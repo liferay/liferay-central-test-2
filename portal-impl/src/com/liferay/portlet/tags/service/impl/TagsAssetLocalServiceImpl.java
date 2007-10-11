@@ -150,11 +150,32 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		if (andOperator) {
 			return TagsAssetFinder.findByAndEntryIds(
-				entryIds, notEntryIds, publishDate, expirationDate, begin, end);
+				entryIds, notEntryIds, null, null, null, null, publishDate,
+				expirationDate, begin, end);
 		}
 		else {
 			return TagsAssetFinder.findByOrEntryIds(
-				entryIds, notEntryIds, publishDate, expirationDate, begin, end);
+				entryIds, notEntryIds, null, null, null, null, publishDate,
+				expirationDate, begin, end);
+		}
+	}
+
+	public List getAssets(
+			long[] entryIds, long[] notEntryIds, boolean andOperator,
+			String orderByCol1, String orderByCol2, String orderByType1,
+			String orderByType2, Date publishDate, Date expirationDate,
+			int begin, int end)
+		throws SystemException {
+
+		if (andOperator) {
+			return TagsAssetFinder.findByAndEntryIds(
+				entryIds, notEntryIds, orderByCol1, orderByCol2, orderByType1,
+			    orderByType2, publishDate, expirationDate, begin, end);
+		}
+		else {
+			return TagsAssetFinder.findByOrEntryIds(
+				entryIds, notEntryIds, orderByCol1, orderByCol2, orderByType1,
+				orderByType2, publishDate, expirationDate, begin, end);
 		}
 	}
 
@@ -395,7 +416,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	protected TagsAsset getAsset(Document doc)
 		throws PortalException, SystemException {
 
-		String portletId = GetterUtil.getString(doc.get(LuceneFields.PORTLET_ID));
+		String portletId = GetterUtil.getString(
+			doc.get(LuceneFields.PORTLET_ID));
 
 		if (portletId.equals(PortletKeys.BLOGS)) {
 			long entryId = GetterUtil.getLong(doc.get("entryId"));

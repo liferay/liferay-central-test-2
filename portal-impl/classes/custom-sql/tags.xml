@@ -51,8 +51,6 @@
 					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId)
 			WHERE
 				([$ENTRY_ID$]) [$NOT_ENTRY_ID$] [$DATES$]
-			ORDER BY
-				TagsAsset.modifiedDate DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByC_N_P">

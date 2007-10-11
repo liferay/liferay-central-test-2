@@ -131,6 +131,19 @@ public class TagsAssetLocalServiceUtil {
 			andOperator, publishDate, expirationDate, begin, end);
 	}
 
+	public static java.util.List getAssets(long[] entryIds, long[] notEntryIds,
+		boolean andOperator, java.lang.String orderByCol1,
+		java.lang.String orderByCol2, java.lang.String orderByType1,
+		java.lang.String orderByType2, java.util.Date publishDate,
+		java.util.Date expirationDate, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getAssets(entryIds, notEntryIds,
+			andOperator, orderByCol1, orderByCol2, orderByType1, orderByType2,
+			publishDate, expirationDate, begin, end);
+	}
+
 	public static int getAssetsCount(long[] entryIds, long[] notEntryIds,
 		boolean andOperator) throws com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();

@@ -39,19 +39,19 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 <liferay-ui:tabs names="articles" backURL="<%= configurationRenderURL.toString() %>" />
 
 <%
-String orderByCol = ParamUtil.getString(request, "orderByCol");
-String orderByType = ParamUtil.getString(request, "orderByType");
+String articlesOrderByCol = ParamUtil.getString(request, "orderByCol");
+String articlesOrderByType = ParamUtil.getString(request, "orderByType");
 
-if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-	portalPrefs.setValue(PortletKeys.JOURNAL, "articles-order-by-col", orderByCol);
-	portalPrefs.setValue(PortletKeys.JOURNAL, "articles-order-by-type", orderByType);
+if (Validator.isNotNull(articlesOrderByCol) && Validator.isNotNull(articlesOrderByType)) {
+	portalPrefs.setValue(PortletKeys.JOURNAL, "articles-order-by-col", articlesOrderByCol);
+	portalPrefs.setValue(PortletKeys.JOURNAL, "articles-order-by-type", articlesOrderByType);
 }
 else {
-	orderByCol = portalPrefs.getValue(PortletKeys.JOURNAL, "articles-order-by-col", "id");
-	orderByType = portalPrefs.getValue(PortletKeys.JOURNAL, "articles-order-by-type", "asc");
+	articlesOrderByCol = portalPrefs.getValue(PortletKeys.JOURNAL, "articles-order-by-col", "id");
+	articlesOrderByType = portalPrefs.getValue(PortletKeys.JOURNAL, "articles-order-by-type", "asc");
 }
 
-OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(orderByCol, orderByType);
+OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(articlesOrderByCol, articlesOrderByType);
 
 ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);
 

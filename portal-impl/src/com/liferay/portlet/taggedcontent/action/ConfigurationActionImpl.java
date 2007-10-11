@@ -191,6 +191,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		String category = ParamUtil.getString(req, "category");
 		String displayStyle = ParamUtil.getString(req, "displayStyle");
+		String orderByColumn1 = ParamUtil.getString(req, "orderByColumn1");
+		String orderByColumn2 = ParamUtil.getString(req, "orderByColumn2");
+		String orderByType1 = ParamUtil.getString(req, "orderByType1");
+		String orderByType2 = ParamUtil.getString(req, "orderByType2");
 		boolean showQueryLogic = ParamUtil.getBoolean(req, "showQueryLogic");
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			req, "showAvailableLocales");
@@ -201,6 +205,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		prefs.setValue("category", category);
 		prefs.setValue("display-style", displayStyle);
+		prefs.setValue("order-by-column-1", orderByColumn1);
+		prefs.setValue("order-by-column-2", orderByColumn2);
+		prefs.setValue("order-by-type-1", orderByType1);
+		prefs.setValue("order-by-type-2", orderByType2);
 		prefs.setValue("show-query-logic", String.valueOf(showQueryLogic));
 		prefs.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
