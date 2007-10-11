@@ -29,26 +29,26 @@ function AjaxRequest(url, options) {
 	}
 
 	var returnFunction = function() {
-			if (xmlHttpReq.readyState == 4) {
-				try {
-					if (xmlHttpReq.status == 200) {
-						if (opts.update) {
-							var el = jQuery.getOne(opts.update);
-							el.innerHTML = xmlHttpReq.responseText;
-							executeLoadedScript(el);
-						}
-
-						if (opts.onComplete) {
-							opts.onComplete(xmlHttpReq, opts.returnArgs);
-						}
-
-						AjaxUtil.remove(opts.ajaxId);
+		if (xmlHttpReq.readyState == 4) {
+			try {
+				if (xmlHttpReq.status == 200) {
+					if (opts.update) {
+						var el = jQuery.getOne(opts.update);
+						el.innerHTML = xmlHttpReq.responseText;
+						executeLoadedScript(el);
 					}
-				}
-				catch(e) {
+
+					if (opts.onComplete) {
+						opts.onComplete(xmlHttpReq, opts.returnArgs);
+					}
+
+					AjaxUtil.remove(opts.ajaxId);
 				}
 			}
-		};
+			catch(e) {
+			}
+		}
+	};
 
 	var send = function(url) {
 		var urlArray = url.split("?");
@@ -137,6 +137,7 @@ var AjaxUtil = {
 		if (url.indexOf("?") == -1) {
 			url = url + "?" + params;
 		}
+
 		if (url.lastIndexOf("?") == url.length - 1) {
 			url = url + params;
 		}
@@ -153,7 +154,9 @@ var AjaxUtil = {
 
 	update : function(url, id, options) {
 		var opts = options || {};
+
 		opts.update = id;
+
 		AjaxUtil.request(url, opts);
 	},
 
@@ -188,11 +191,13 @@ var ReverseAjax = {
 	},
 
 	request: function() {
-		AjaxUtil.request(themeDisplay.getPathMain() + "/portal/reverse_ajax",
+		AjaxUtil.request(
+			themeDisplay.getPathMain() + "/portal/reverse_ajax",
 			{
 				onComplete: ReverseAjax.response,
 				reverseAjax: true
-			});
+			}
+		);
 	},
 
 	response: function(xmlHttpRequest) {
@@ -252,10 +257,13 @@ function executeLoadedScript(el) {
  * NOTE: loadPage() has been depricated.  Use AjaxUtil.request() instead
  */
 function loadPage(path, queryString, returnFunction, returnArgs) {
-	AjaxUtil.request(path + "?" + queryString, {
+	AjaxUtil.request(
+		path + "?" + queryString,
+		{
 			onComplete: returnFunction,
 			returnArgs: returnArgs
-		});
+		}
+	);
 }
 
 function printJSON(data) {
@@ -266,4 +274,4 @@ function printJSON(data) {
 			target.innerHTML = data.toString();
 		}
 	}
-} 
+}
