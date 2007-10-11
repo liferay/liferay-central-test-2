@@ -48,6 +48,7 @@
 				<option <%= orderByColumn1.equals("modifiedDate") ? "selected" : "" %> value="modifiedDate"><liferay-ui:message key="modified-date" /></option>
 				<option <%= orderByColumn1.equals("publishDate") ? "selected" : "" %> value="publishDate"><liferay-ui:message key="publish-date" /></option>
 				<option <%= orderByColumn1.equals("expirationDate") ? "selected" : "" %> value="expirationDate"><liferay-ui:message key="expiration-date" /></option>
+				<option <%= orderByColumn1.equals("priority") ? "selected" : "" %> value="priority"><liferay-ui:message key="priority" /></option>
 			</select>
 			<select name="<portlet:namespace />orderByType1">
 				<option <%= orderByType1.equals("ASC") ? "selected" : "" %> value="ASC"><liferay-ui:message key="ascending" /></option>
@@ -66,6 +67,7 @@
 				<option <%= orderByColumn2.equals("modifiedDate") ? "selected" : "" %> value="modifiedDate"><liferay-ui:message key="modified-date" /></option>
 				<option <%= orderByColumn2.equals("publishDate") ? "selected" : "" %> value="publishDate"><liferay-ui:message key="publish-date" /></option>
 				<option <%= orderByColumn2.equals("expirationDate") ? "selected" : "" %> value="expirationDate"><liferay-ui:message key="expiration-date" /></option>
+				<option <%= orderByColumn2.equals("priority") ? "selected" : "" %> value="priority"><liferay-ui:message key="priority" /></option>
 			</select>
 			<select name="<portlet:namespace />orderByType2">
 				<option <%= orderByType2.equals("ASC") ? "selected" : "" %> value="ASC"><liferay-ui:message key="ascending" /></option>

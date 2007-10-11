@@ -66,7 +66,8 @@ public class TagsAssetFinder {
 		TagsAssetFinder.class.getName() + ".findByOrEntryIds";
 
 	public static String[] ORDER_BY_COLUMNS = new String[]{
-		"title", "createDate", "modifiedDate", "publishDate", "expirationDate"
+		"title", "createDate", "modifiedDate", "publishDate", "expirationDate",
+		"priority"
 	};
 
 	public static String[] ORDER_BY_TYPE = new String[]{

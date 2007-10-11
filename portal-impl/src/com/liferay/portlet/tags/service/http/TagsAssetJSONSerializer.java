@@ -71,6 +71,7 @@ public class TagsAssetJSONSerializer {
 		JSONUtil.put(jsonObj, "url", model.getUrl());
 		JSONUtil.put(jsonObj, "height", model.getHeight());
 		JSONUtil.put(jsonObj, "width", model.getWidth());
+		JSONUtil.put(jsonObj, "priority", model.getPriority());
 
 		return jsonObj;
 	}

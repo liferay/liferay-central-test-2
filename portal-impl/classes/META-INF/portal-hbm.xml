@@ -1266,6 +1266,7 @@
 		<property name="url" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="height" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="width" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="priority" type="com.liferay.util.dao.hibernate.DoubleType" />
 	</class>
 	<class name="com.liferay.portlet.tags.model.impl.TagsEntryImpl" table="TagsEntry">
 		<cache usage="read-write" />

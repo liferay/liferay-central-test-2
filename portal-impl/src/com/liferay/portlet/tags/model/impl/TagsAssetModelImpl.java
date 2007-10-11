@@ -75,9 +75,10 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 			{ "summary", new Integer(Types.VARCHAR) },
 			{ "url", new Integer(Types.VARCHAR) },
 			{ "height", new Integer(Types.INTEGER) },
-			{ "width", new Integer(Types.INTEGER) }
+			{ "width", new Integer(Types.INTEGER) },
+			{ "priority", new Integer(Types.DOUBLE) }
 		};
-	public static String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(300) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER)";
+	public static String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(300) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE)";
 	public static String TABLE_SQL_DROP = "drop table TagsAsset";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.tags.model.TagsAsset"), XSS_ALLOW);
@@ -365,6 +366,16 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public double getPriority() {
+		return _priority;
+	}
+
+	public void setPriority(double priority) {
+		if (priority != _priority) {
+			_priority = priority;
+		}
+	}
+
 	public Object clone() {
 		TagsAssetImpl clone = new TagsAssetImpl();
 		clone.setAssetId(getAssetId());
@@ -386,6 +397,7 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		clone.setUrl(getUrl());
 		clone.setHeight(getHeight());
 		clone.setWidth(getWidth());
+		clone.setPriority(getPriority());
 
 		return clone;
 	}
@@ -456,4 +468,5 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 	private String _url;
 	private int _height;
 	private int _width;
+	private double _priority;
 }

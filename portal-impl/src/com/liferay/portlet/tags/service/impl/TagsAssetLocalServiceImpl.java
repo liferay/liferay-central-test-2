@@ -358,6 +358,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			asset.setClassPK(classPK);
 			asset.setPublishDate(publishDate);
 			asset.setExpirationDate(expirationDate);
+			asset.setPriority(0);
 		}
 
 		asset.setModifiedDate(now);

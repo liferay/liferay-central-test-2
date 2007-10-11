@@ -1070,7 +1070,8 @@ create table TagsAsset (
 	summary STRING null,
 	url STRING null,
 	height INTEGER,
-	width INTEGER
+	width INTEGER,
+	priority DOUBLE
 );
 
 create table TagsAssets_TagsEntries (

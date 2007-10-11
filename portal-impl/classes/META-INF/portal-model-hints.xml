@@ -1290,6 +1290,7 @@
 		</field>
 		<field name="height" type="int" />
 		<field name="width" type="int" />
+		<field name="priority" type="double" />
 	</model>
 	<model name="com.liferay.portlet.tags.model.TagsEntry">
 		<field name="entryId" type="long" />
