@@ -46,6 +46,10 @@ html, body {
 	height: 100%;
 }
 
+body.portal-popup {
+	padding: 10px;
+}
+
 table {
 	clear: both;
 }

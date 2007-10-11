@@ -32,6 +32,9 @@ body {
 html, body {
 }
 
+body.portal-popup {
+}
+
 /* ---------- Links ---------- */
 
 a {
