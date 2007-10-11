@@ -138,7 +138,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 				<%= numberFormat.format(pages) %>
 
-				<input class="page-iterator-submit" type="submit" value="<liferay-ui:message key="submit" />" />
+				<%--<input class="page-iterator-submit" type="submit" value="<liferay-ui:message key="submit" />" />--%>
 			</div>
 
 			<div class="page-links">

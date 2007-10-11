@@ -663,9 +663,9 @@ ul.gamma .tree-item-hover {
 	float: right;
 }
 
-.js .page-iterator-submit {
+<%--.js .page-iterator-submit {
 	display: none;
-}
+}--%>
 
 .taglib-page-iterator .search-pages .page-links a, .taglib-page-iterator .search-pages .page-links span {
 	background: url() no-repeat 0 0;
