@@ -273,6 +273,10 @@ Distributed under http://creativecommons.org/licenses/by-sa/2.5/
 	background: #FFFCDF;
 }
 
+.uni-form .ctrl-holder.inline-label label {
+	display: inline;
+}
+
 /* .inline-labels */
 .uni-form .inline-labels label,  .uni-form .inline-labels .label {
 	width: 45%;

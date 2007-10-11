@@ -494,6 +494,42 @@ ul.gamma .tree-item-hover {
 
 /* ---------- Portal ---------- */
 
+/* ---------- Portal login ---------- */
+
+.lfr-portal-login {
+}
+
+.lfr-portal-login:after{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.ie .lfr-portal-login {
+	height: 1%;
+}
+
+.lfr-portal-login form {
+	float: left;
+	width: 300px;
+	margin-right: 10px;
+}
+
+.lfr-portal-login fieldset {
+	padding-top: 0;
+}
+
+.lfr-portal-login .liferay-input-text {
+	width: 150px;
+}
+
+.lfr-portal-login .uni-form legend {
+	padding-top: 0;
+}
+
+
 /* ---------- Tag selector styling ---------- */
 .lfr-tag-select-container {
 	position: relative;
