@@ -23,9 +23,9 @@
 #set ($full_templates_path = $fullTemplatesPath)
 
 #if ($paramUtil.getBoolean($request, "css_fast_load", $getterUtil.getBoolean($propsUtil.get("theme.css.fast.load"))))
-	#set ($css_main_file = "$css_folder/everything_packed.css?companyId=$theme_display.getCompanyId()&languageId=$languageUtil.getLanguageId($locale)&themeId=$theme_display.getThemeId()&colorSchemeId=$theme_display.getColorSchemeId()&t=$theme_timestamp")
+	#set ($css_main_file = "$css_folder/everything_packed.css?companyId=$theme_display.getCompanyId()&amp;languageId=$languageUtil.getLanguageId($locale)&amp;themeId=$theme_display.getThemeId()&amp;colorSchemeId=$theme_display.getColorSchemeId()&amp;t=$theme_timestamp")
 #else
-	#set ($css_main_file = "$css_folder/main.css?companyId=$theme_display.getCompanyId()&languageId=$languageUtil.getLanguageId($locale)&themeId=$theme_display.getThemeId()&colorSchemeId=$theme_display.getColorSchemeId()&t=$theme_timestamp")
+	#set ($css_main_file = "$css_folder/main.css?companyId=$theme_display.getCompanyId()&amp;languageId=$languageUtil.getLanguageId($locale)&amp;themeId=$theme_display.getThemeId()&amp;colorSchemeId=$theme_display.getColorSchemeId()&amp;t=$theme_timestamp")
 #end
 
 #set ($js_main_file = "$javascript_folder/javascript.js?t=$theme_timestamp")
