@@ -108,6 +108,17 @@ Liferay.TagsSelector = new Class({
 
 			instance._update();
 		}
+
+		Liferay.Util.actsAsAspect(window);
+		window.before(
+			'submitForm', 
+			function() {
+				var val = jQuery.trim(textInput.val());
+				if (val.length) {
+					addTagButton.trigger('click');
+				}
+			}
+		);
 	},
 
 	deleteTag: function(id) {
