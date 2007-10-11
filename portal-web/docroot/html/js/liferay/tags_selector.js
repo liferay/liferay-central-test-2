@@ -110,10 +110,12 @@ Liferay.TagsSelector = new Class({
 		}
 
 		Liferay.Util.actsAsAspect(window);
+
 		window.before(
-			'submitForm', 
+			'submitForm',
 			function() {
 				var val = jQuery.trim(textInput.val());
+
 				if (val.length) {
 					addTagButton.trigger('click');
 				}
