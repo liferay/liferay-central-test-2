@@ -18,13 +18,13 @@ for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 	String className = PortalUtil.getClassName(asset.getClassNameId());
 	long classPK = asset.getClassPK();
 
-	boolean show = true;
-
 	String title = asset.getTitle();
 	String summary = StringPool.BLANK;
 	String viewURL = null;
 	String viewURLMessage = StringPool.BLANK;
 	String editURL = StringPool.BLANK;
+
+	boolean show = true;
 
 	try {
 %>

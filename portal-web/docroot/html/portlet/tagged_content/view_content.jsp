@@ -29,11 +29,19 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 long assetId = ParamUtil.getLong(renderRequest, "assetId");
 
+List results = new ArrayList();
+
+int assetIndex = 0;
+
 try {
 	TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(assetId);
 
 	String className = PortalUtil.getClassName(asset.getClassNameId());
 	long classPK = asset.getClassPK();
+
+	String title = asset.getTitle();
+
+	boolean show = true;
 %>
 
 	<div align="right">
