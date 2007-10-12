@@ -124,7 +124,6 @@ String orderByColumn1 = GetterUtil.getString(prefs.getValue("order-by-column-1",
 String orderByColumn2 = GetterUtil.getString(prefs.getValue("order-by-column-2", "title"));
 String orderByType1 = GetterUtil.getString(prefs.getValue("order-by-type-1", "desc"));
 String orderByType2 = GetterUtil.getString(prefs.getValue("order-by-type-2", "asc"));
-
 boolean showQueryLogic = GetterUtil.getBoolean(prefs.getValue("show-query-logic", StringPool.BLANK));
 boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));
 

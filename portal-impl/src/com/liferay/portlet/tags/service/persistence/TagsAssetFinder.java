@@ -65,12 +65,12 @@ public class TagsAssetFinder {
 	public static String FIND_BY_OR_ENTRY_IDS =
 		TagsAssetFinder.class.getName() + ".findByOrEntryIds";
 
-	public static String[] ORDER_BY_COLUMNS = new String[]{
+	public static String[] ORDER_BY_COLUMNS = new String[] {
 		"title", "createDate", "modifiedDate", "publishDate", "expirationDate",
 		"priority"
 	};
 
-	public static String[] ORDER_BY_TYPE = new String[]{
+	public static String[] ORDER_BY_TYPE = new String[] {
 		"ASC", "DESC"
 	};
 
@@ -298,18 +298,16 @@ public class TagsAssetFinder {
 
 			sm.append(" ORDER BY TagsAsset.");
 			sm.append(orderByCol1);
-
 			sm.append(StringPool.SPACE);
 			sm.append(orderByType1);
 
 			if (Validator.isNotNull(orderByCol2) &&
-					!orderByCol1.equals(orderByCol2)) {
+				!orderByCol1.equals(orderByCol2)) {
+
 				sm.append(", TagsAsset.");
 				sm.append(orderByCol2);
-
 				sm.append(StringPool.SPACE);
 				sm.append(orderByType2);
-
 			}
 
 			String sql = sm.toString();
@@ -398,17 +396,17 @@ public class TagsAssetFinder {
 			sql = _getDates(sql, publishDate, expirationDate);
 
 			StringMaker sm = new StringMaker();
+
 			sm.append(" ORDER BY TagsAsset.");
 			sm.append(orderByCol1);
-
 			sm.append(StringPool.SPACE);
 			sm.append(orderByType1);
 
 			if (Validator.isNotNull(orderByCol2) &&
-					!orderByCol1.equals(orderByCol2)) {
+				!orderByCol1.equals(orderByCol2)) {
+
 				sm.append(", TagsAsset.");
 				sm.append(orderByCol2);
-
 				sm.append(StringPool.SPACE);
 				sm.append(orderByType2);
 			}
