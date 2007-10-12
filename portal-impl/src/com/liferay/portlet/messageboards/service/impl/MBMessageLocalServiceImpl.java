@@ -703,6 +703,25 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return MBMessageFinder.countByCategoryIds(categoryIds);
 	}
 
+	public List getCompanyMessages(long companyId, int begin, int end)
+		throws SystemException {
+
+		return MBMessageUtil.findByCompanyId(companyId, begin, end);
+	}
+
+	public List getCompanyMessages(
+			long companyId, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return MBMessageUtil.findByCompanyId(companyId, begin, end, obc);
+	}
+
+	public int getCompanyMessagesCount(long companyId)
+		throws SystemException {
+
+		return MBMessageUtil.countByCompanyId(companyId);
+	}
+
 	public MBMessageDisplay getDiscussionMessageDisplay(
 			long userId, String className, long classPK)
 		throws PortalException, SystemException {

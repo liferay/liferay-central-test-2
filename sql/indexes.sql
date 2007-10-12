@@ -124,6 +124,7 @@ create index IX_33A4DE38 on MBDiscussion (classNameId, classPK);
 
 create index IX_3C865EE5 on MBMessage (categoryId);
 create index IX_138C7F1E on MBMessage (categoryId, threadId);
+create index IX_B1432D30 on MBMessage (companyId);
 create index IX_75B95071 on MBMessage (threadId);
 create index IX_A7038CD7 on MBMessage (threadId, parentMessageId);
 

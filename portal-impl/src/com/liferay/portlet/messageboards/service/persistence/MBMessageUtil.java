@@ -150,6 +150,45 @@ public class MBMessageUtil {
 		return getPersistence().fetchByPrimaryKey(messageId);
 	}
 
+	public static java.util.List findByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId);
+	}
+
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, begin, end);
+	}
+
+	public static java.util.List findByCompanyId(long companyId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage findByCompanyId_First(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence().findByCompanyId_First(companyId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage findByCompanyId_Last(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence().findByCompanyId_Last(companyId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage[] findByCompanyId_PrevAndNext(
+		long messageId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence().findByCompanyId_PrevAndNext(messageId,
+			companyId, obc);
+	}
+
 	public static java.util.List findByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCategoryId(categoryId);
@@ -340,6 +379,11 @@ public class MBMessageUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByCompanyId(companyId);
+	}
+
 	public static void removeByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByCategoryId(categoryId);
@@ -362,6 +406,11 @@ public class MBMessageUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByCompanyId(companyId);
 	}
 
 	public static int countByCategoryId(long categoryId)

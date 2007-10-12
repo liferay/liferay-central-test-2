@@ -28,7 +28,9 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
@@ -352,6 +354,39 @@ public class MBMessageServiceImpl
 
 		Iterator itr = MBMessageLocalServiceUtil.getCategoryMessages(
 			categoryId, 0, _MAX_END, comparator).iterator();
+
+		while (itr.hasNext() && (messages.size() < max)) {
+			MBMessage message = (MBMessage)itr.next();
+
+			if (MBMessagePermission.contains(
+					getPermissionChecker(), message, ActionKeys.VIEW)) {
+
+				messages.add(message);
+			}
+		}
+
+		return exportToRSS(
+			name, description, type, version, feedURL, entryURL, messages,
+			prefs);
+	}
+
+	public String getCompanyMessagesRSS(
+			long companyId, int max, String type, double version,
+			String feedURL, String entryURL, PortletPreferences prefs)
+		throws PortalException, SystemException {
+
+		Company company = CompanyUtil.findByPrimaryKey(companyId);
+
+		String name = company.getName();
+		String description = company.getName();
+
+		List messages = new ArrayList();
+
+		MessageCreateDateComparator comparator =
+			new MessageCreateDateComparator(false, false);
+
+		Iterator itr = MBMessageLocalServiceUtil.getCompanyMessages(
+			companyId, 0, _MAX_END, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
 			MBMessage message = (MBMessage)itr.next();

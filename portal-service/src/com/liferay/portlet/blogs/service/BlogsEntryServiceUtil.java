@@ -100,6 +100,25 @@ public class BlogsEntryServiceUtil {
 			version, feedURL, entryURL);
 	}
 
+	public static java.util.List getCompanyEntries(long companyId, int max)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
+
+		return blogsEntryService.getCompanyEntries(companyId, max);
+	}
+
+	public static java.lang.String getCompanyEntriesRSS(long companyId,
+		int max, java.lang.String type, double version,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
+
+		return blogsEntryService.getCompanyEntriesRSS(companyId, max, type,
+			version, feedURL, entryURL);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException, 

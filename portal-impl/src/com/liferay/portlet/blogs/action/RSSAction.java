@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.action;
 
+import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -77,41 +78,36 @@ public class RSSAction extends Action {
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		String plid = ParamUtil.getString(req, "p_l_id");
+		long companyId = ParamUtil.getLong(req, "companyId");
 		long groupId = ParamUtil.getLong(req, "groupId");
 		long categoryId = ParamUtil.getLong(req, "categoryId");
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
 			req, "version", RSSUtil.DEFAULT_VERSION);
 
-		String entryURL =
+		String feedURL =
 			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
-				"/blogs/find_entry?p_l_id=" + plid + "&categoryId=" +
-					categoryId;
+				"/blogs/find_entry?p_l_id=" + plid;
+
+		String entryURL = feedURL;
 
 		String rss = StringPool.BLANK;
 
-		if (categoryId > 0) {
-			String feedURL =
-				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
-					"/blogs/find_category?p_l_id=" + plid + "&categoryId=" +
-						categoryId;
+		if (companyId > 0) {
+			feedURL = StringPool.BLANK;
 
 			try {
-				rss = BlogsEntryServiceUtil.getCategoryBlogsRSS(
-					categoryId, SearchContainer.DEFAULT_DELTA, type, version,
+				rss = BlogsEntryServiceUtil.getCompanyEntriesRSS(
+					companyId, SearchContainer.DEFAULT_DELTA, type, version,
 					feedURL, entryURL);
 			}
-			catch (NoSuchCategoryException nsce) {
+			catch (NoSuchCompanyException nsce) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(nsce);
 				}
 			}
 		}
-		else {
-			String feedURL =
-				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
-					"/blogs/find_entry?p_l_id=" + plid;
-
+		else if (groupId > 0) {
 			try {
 				rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
 					groupId, SearchContainer.DEFAULT_DELTA, type, version,
@@ -120,6 +116,18 @@ public class RSSAction extends Action {
 			catch (NoSuchGroupException nsge) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(nsge);
+				}
+			}
+		}
+		else if (categoryId > 0) {
+			try {
+				rss = BlogsEntryServiceUtil.getCategoryBlogsRSS(
+					categoryId, SearchContainer.DEFAULT_DELTA, type, version,
+					feedURL, entryURL);
+			}
+			catch (NoSuchCategoryException nsce) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsce);
 				}
 			}
 		}

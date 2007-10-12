@@ -1138,6 +1138,20 @@ Liferay.Service.Blogs.BlogsEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getCompanyEntries: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCompanyEntries";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCompanyEntriesRSS: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCompanyEntriesRSS";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getEntry";

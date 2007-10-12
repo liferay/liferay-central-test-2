@@ -138,6 +138,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
 		<finder name="CategoryId" return-type="Collection">
 			<finder-column name="categoryId" />
 		</finder>

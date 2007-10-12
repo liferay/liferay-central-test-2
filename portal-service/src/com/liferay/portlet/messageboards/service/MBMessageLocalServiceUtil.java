@@ -308,6 +308,29 @@ public class MBMessageLocalServiceUtil {
 		return mbMessageLocalService.getCategoriesMessagesCount(categoryIds);
 	}
 
+	public static java.util.List getCompanyMessages(long companyId, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getCompanyMessages(companyId, begin, end);
+	}
+
+	public static java.util.List getCompanyMessages(long companyId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getCompanyMessages(companyId, begin, end,
+			obc);
+	}
+
+	public static int getCompanyMessagesCount(long companyId)
+		throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getCompanyMessagesCount(companyId);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 

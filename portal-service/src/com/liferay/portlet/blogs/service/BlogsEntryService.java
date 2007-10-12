@@ -78,6 +78,16 @@ public interface BlogsEntryService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public java.util.List getCompanyEntries(long companyId, int max)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public java.lang.String getCompanyEntriesRSS(long companyId, int max,
+		java.lang.String type, double version, java.lang.String feedURL,
+		java.lang.String entryURL)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public com.liferay.portlet.blogs.model.BlogsEntry getEntry(long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

@@ -278,6 +278,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return BlogsEntryFinder.countByCategoryIds(categoryIds);
 	}
 
+	public List getCompanyEntries(long companyId, int begin, int end)
+		throws SystemException {
+
+		return BlogsEntryUtil.findByCompanyId(companyId, begin, end);
+	}
+
 	public List getCompanyEntries(
 			long companyId, int begin, int end, OrderByComparator obc)
 		throws SystemException {

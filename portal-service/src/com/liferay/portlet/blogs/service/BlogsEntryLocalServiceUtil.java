@@ -188,6 +188,13 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static java.util.List getCompanyEntries(long companyId, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getCompanyEntries(companyId, begin, end);
+	}
+
+	public static java.util.List getCompanyEntries(long companyId, int begin,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
