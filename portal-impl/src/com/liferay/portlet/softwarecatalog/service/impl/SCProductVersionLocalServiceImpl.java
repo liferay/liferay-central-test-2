@@ -37,10 +37,16 @@ import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductVersionLocalServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
+import com.liferay.portlet.softwarecatalog.util.Indexer;
+
+import java.io.IOException;
 
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SCProductVersionLocalServiceImpl.java.html"><b><i>View Source</i>
@@ -128,6 +134,23 @@ public class SCProductVersionLocalServiceImpl
 
 		SCProductVersionUtil.setSCFrameworkVersions(
 			productVersionId, frameworkVersionIds);
+
+		// Lucene
+
+		try {
+			Indexer.updateProductEntry(
+				productEntry.getCompanyId(), productEntry.getGroupId(),
+				productEntry.getUserId(), productEntry.getUserName(),
+				productEntry.getProductEntryId(), productEntry.getName(), now,
+				productVersion.getVersion(), productEntry.getType(),
+				productEntry.getShortDescription(),
+				productEntry.getLongDescription(), productEntry.getPageURL(),
+				productEntry.getRepoGroupId(),
+				productEntry.getRepoArtifactId());
+		}
+		catch (IOException ioe) {
+			_log.error("Indexing " + productEntry.getProductEntryId(), ioe);
+		}
 
 		return productVersion;
 	}
@@ -219,6 +242,23 @@ public class SCProductVersionLocalServiceImpl
 		SCProductVersionUtil.setSCFrameworkVersions(
 			productVersionId, frameworkVersionIds);
 
+		// Lucene
+
+		try {
+			Indexer.updateProductEntry(
+				productEntry.getCompanyId(), productEntry.getGroupId(),
+				productEntry.getUserId(), productEntry.getUserName(),
+				productEntry.getProductEntryId(), productEntry.getName(), now,
+				productVersion.getVersion(), productEntry.getType(),
+				productEntry.getShortDescription(),
+				productEntry.getLongDescription(), productEntry.getPageURL(),
+				productEntry.getRepoGroupId(),
+				productEntry.getRepoArtifactId());
+		}
+		catch (IOException ioe) {
+			_log.error("Indexing " + productEntry.getProductEntryId(), ioe);
+		}
+
 		return productVersion;
 	}
 
@@ -242,5 +282,8 @@ public class SCProductVersionLocalServiceImpl
 			throw new ProductVersionFrameworkVersionException();
 		}
 	}
+
+	private static Log _log =
+		LogFactory.getLog(SCProductVersionLocalServiceImpl.class);
 
 }

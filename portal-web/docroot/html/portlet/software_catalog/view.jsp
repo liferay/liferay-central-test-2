@@ -112,7 +112,7 @@ portletURL.setParameter("type", type);
 			docComparator = new DocumentComparator();
 		}
 
-		if (orderByCol.equals("version-date")) {
+		if (orderByCol.equals("version")) {
 			docComparator.addOrderBy("version");
 			docComparator.addOrderBy("modified-date");
 			docComparator.addOrderBy(LuceneFields.TITLE);
