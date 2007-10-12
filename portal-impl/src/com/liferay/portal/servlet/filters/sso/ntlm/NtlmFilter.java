@@ -179,7 +179,7 @@ public class NtlmFilter extends NtlmHttpFilter {
 	}
 
 	public NtlmPasswordAuthentication negotiate(
-			HttpServletRequest req, HttpServletResponse resp,
+			HttpServletRequest req, HttpServletResponse res,
 			boolean skipAuthentication)
 		throws IOException, ServletException {
 
@@ -208,7 +208,7 @@ public class NtlmFilter extends NtlmHttpFilter {
 
 			byte[] challenge = SmbSession.getChallenge(uniAddress);
 
-			ntlm = NtlmSsp.authenticate(req, resp, challenge);
+			ntlm = NtlmSsp.authenticate(req, res, challenge);
 
 			ses.setAttribute("NtlmHttpAuth", ntlm);
 		}
@@ -219,11 +219,11 @@ public class NtlmFilter extends NtlmHttpFilter {
 			}
 
 			if (ntlm == null) {
-				resp.setHeader("WWW-Authenticate", "NTLM");
-				resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				resp.setContentLength(0);
+				res.setHeader("WWW-Authenticate", "NTLM");
+				res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+				res.setContentLength(0);
 
-				resp.flushBuffer();
+				res.flushBuffer();
 
 				return null;
 			}
