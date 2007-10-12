@@ -187,9 +187,6 @@ public class NtlmFilter extends NtlmHttpFilter {
 
 		HttpSession ses = req.getSession(false);
 
-		String domainController = Config.getProperty(
-			"jcifs.http.domainController");
-
 		String authorizationHeader = req.getHeader("Authorization");
 
 		if (_log.isDebugEnabled()) {
@@ -198,6 +195,9 @@ public class NtlmFilter extends NtlmHttpFilter {
 
 		if ((authorizationHeader != null) && (
 			(authorizationHeader.startsWith("NTLM ")))) {
+
+			String domainController = Config.getProperty(
+				"jcifs.http.domainController");
 
 			UniAddress uniAddress = UniAddress.getByName(
 				domainController, true);
