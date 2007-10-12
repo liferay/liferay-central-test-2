@@ -279,7 +279,7 @@ public class BlogsEntryServiceImpl
 			link += "entryId=" + entry.getEntryId();
 
 			String firstLine = StringUtil.shorten(
-				Html.stripHtml(entry.getContent()), 80, StringPool.BLANK);
+				Html.stripHtml(entry.getContent()), 200, StringPool.BLANK);
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
