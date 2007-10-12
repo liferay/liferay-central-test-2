@@ -87,7 +87,7 @@ public class RSSAction extends Action {
 
 		String feedURL =
 			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
-				"/blogs/find_entry?p_l_id=" + plid;
+				"/blogs/find_entry?";
 
 		String entryURL = feedURL;
 
@@ -108,6 +108,10 @@ public class RSSAction extends Action {
 			}
 		}
 		else if (groupId > 0) {
+			feedURL += "p_l_id=" + plid;
+
+			entryURL = feedURL;
+
 			try {
 				rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
 					groupId, SearchContainer.DEFAULT_DELTA, type, version,
@@ -120,6 +124,10 @@ public class RSSAction extends Action {
 			}
 		}
 		else if (categoryId > 0) {
+			feedURL += "p_l_id=" + plid;
+
+			entryURL = feedURL;
+
 			try {
 				rss = BlogsEntryServiceUtil.getCategoryBlogsRSS(
 					categoryId, SearchContainer.DEFAULT_DELTA, type, version,

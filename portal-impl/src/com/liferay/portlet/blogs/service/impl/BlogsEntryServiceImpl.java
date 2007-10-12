@@ -270,6 +270,14 @@ public class BlogsEntryServiceImpl
 		while (itr.hasNext()) {
 			BlogsEntry entry = (BlogsEntry)itr.next();
 
+			String link = entryURL;
+
+			if (!link.endsWith("?")) {
+				link += "&";
+			}
+
+			link += "entryId=" + entry.getEntryId();
+
 			String firstLine = StringUtil.shorten(
 				Html.stripHtml(entry.getContent()), 80, StringPool.BLANK);
 
@@ -277,7 +285,7 @@ public class BlogsEntryServiceImpl
 
 			syndEntry.setAuthor(entry.getUserName());
 			syndEntry.setTitle(entry.getTitle());
-			syndEntry.setLink(entryURL + "&entryId=" + entry.getEntryId());
+			syndEntry.setLink(link);
 			syndEntry.setPublishedDate(entry.getCreateDate());
 
 			SyndContent syndContent = new SyndContentImpl();

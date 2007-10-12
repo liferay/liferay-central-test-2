@@ -22,10 +22,19 @@
 
 package com.liferay.portlet.blogs.action;
 
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+
+import java.util.List;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletURL;
@@ -35,6 +44,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -57,17 +68,22 @@ public class FindEntryAction extends Action {
 			long plid = ParamUtil.getLong(req, "p_l_id");
 			long entryId = ParamUtil.getLong(req, "entryId");
 
+			try {
+				plid = getPlid(plid, entryId);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e);
+				}
+			}
+
 			PortletURL portletURL = new PortletURLImpl(
 				req, PortletKeys.BLOGS, plid, false);
 
 			portletURL.setWindowState(WindowState.MAXIMIZED);
 			portletURL.setPortletMode(PortletMode.VIEW);
-
-			if (entryId > 0) {
-				portletURL.setParameter(
-					"struts_action", "/blogs/view_entry");
-				portletURL.setParameter("entryId", String.valueOf(entryId));
-			}
+			portletURL.setParameter("struts_action", "/blogs/view_entry");
+			portletURL.setParameter("entryId", String.valueOf(entryId));
 
 			res.sendRedirect(portletURL.toString());
 
@@ -79,5 +95,51 @@ public class FindEntryAction extends Action {
 			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
+
+	protected long getPlid(long plid, long entryId) throws Exception {
+		if (plid != 0) {
+			try {
+				LayoutLocalServiceUtil.getLayout(plid);
+
+				return plid;
+			}
+			catch (NoSuchLayoutException nsle) {
+			}
+		}
+
+		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
+
+		long groupId = entry.getGroupId();
+		boolean privateLayout = false;
+		long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
+
+		List layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, parentLayoutId);
+
+		for (int i = 0; i < layouts.size(); i++) {
+			Layout layout = (Layout)layouts.get(i);
+
+			if (!layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+				continue;
+			}
+
+			if (i == 0) {
+				plid = layout.getPlid();
+			}
+
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			if (layoutTypePortlet.hasPortletId(PortletKeys.BLOGS)) {
+				plid = layout.getPlid();
+
+				break;
+			}
+		}
+
+		return plid;
+	}
+
+	private static Log _log = LogFactory.getLog(FindEntryAction.class);
 
 }
