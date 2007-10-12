@@ -190,7 +190,7 @@ public class LuceneUtil {
 		// IndexWriter throws an exception
 
 		try {
-			if (luceneDir.fileExists("segments")) {
+			if (luceneDir.fileExists("segments.gen")) {
 				writer = new IndexWriter(
 					luceneDir, LuceneUtil.getAnalyzer(), false);
 			}
