@@ -39,11 +39,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jcifs.Config;
 import jcifs.UniAddress;
 
 import jcifs.http.NtlmHttpFilter;
+import jcifs.http.NtlmSsp;
 
 import jcifs.ntlmssp.Type1Message;
 import jcifs.ntlmssp.Type2Message;
@@ -174,6 +176,64 @@ public class NtlmFilter extends NtlmHttpFilter {
 		}
 
 		chain.doFilter(req, res);
+	}
+
+	public NtlmPasswordAuthentication negotiate(
+			HttpServletRequest req, HttpServletResponse resp,
+			boolean skipAuthentication)
+		throws IOException, ServletException {
+
+		NtlmPasswordAuthentication ntlm = null;
+
+		HttpSession ses = req.getSession(false);
+
+		String domainController = Config.getProperty(
+			"jcifs.http.domainController");
+
+		String authorizationHeader = req.getHeader("Authorization");
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Authorization header " + authorizationHeader);
+		}
+
+		if ((authorizationHeader != null) && (
+			(authorizationHeader.startsWith("NTLM ")))) {
+
+			UniAddress uniAddress = UniAddress.getByName(
+				domainController, true);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Address " + uniAddress);
+			}
+
+			byte[] challenge = SmbSession.getChallenge(uniAddress);
+
+			ntlm = NtlmSsp.authenticate(req, resp, challenge);
+
+			ses.setAttribute("NtlmHttpAuth", ntlm);
+		}
+		else {
+			if (ses != null) {
+				ntlm = (NtlmPasswordAuthentication)ses.getAttribute(
+					"NtlmHttpAuth");
+			}
+
+			if (ntlm == null) {
+				resp.setHeader("WWW-Authenticate", "NTLM");
+				resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+				resp.setContentLength(0);
+
+				resp.flushBuffer();
+
+				return null;
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Password authentication " + ntlm);
+		}
+
+		return ntlm;
 	}
 
 	private static Log _log = LogFactory.getLog(NtlmFilter.class);
