@@ -78,11 +78,9 @@ Role role = (Role)row.getObject();
 	<portlet:param name="struts_action" value="/enterprise_admin/view" />
 	<portlet:param name="tabs1" value="users" />
 
-	<c:choose>
-		<c:when test="<%= portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-			<portlet:param name="organizationId" value="<%= String.valueOf(user.getOrganization().getOrganizationId()) %>" />
-		</c:when>
-	</c:choose>
+	<c:if test="<%= portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+		<portlet:param name="organizationId" value="<%= String.valueOf(user.getOrganization().getOrganizationId()) %>" />
+	</c:if>
 
 	<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 </portlet:renderURL>

@@ -142,7 +142,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	function <portlet:namespace />saveRolePermissions(roleIdsPos, roleIdsPosValue) {
 
 		<%
-		PortletURL saveRolePermissionsRedirectURL = PortletURLUtil.clone(portletURL, false, renderResponse);
+		PortletURL saveRolePermissionsRedirectURL = PortletURLUtil.clone(portletURL, renderResponse);
 
 		new RoleSearch(renderRequest, saveRolePermissionsRedirectURL);
 		%>
@@ -242,16 +242,9 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		</liferay-util:include>
 	</c:when>
 	<c:otherwise>
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td>
-				<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= redirect %>"><%= selResourceDescription %></a>
-			</td>
-			<td align="right">
-				&laquo; <a href="<%= redirect %>"><liferay-ui:message key="back" /></a>
-			</td>
-		</tr>
-		</table>
+		<div>
+			<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= redirect %>"><%= selResourceDescription %></a>
+		</div>
 
 		<br />
 	</c:otherwise>
@@ -296,11 +289,24 @@ else {
 }
 %>
 
-<liferay-ui:tabs
-	names="<%= tabs2Names %>"
-	param="tabs2"
-	url="<%= portletURL.toString() %>"
-/>
+<c:choose>
+	<c:when test="<%= Validator.isNull(modelResource) %>">
+		<liferay-ui:tabs
+			names="<%= tabs2Names %>"
+			param="tabs2"
+			url="<%= portletURL.toString() %>"
+		/>
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:tabs
+			names="<%= tabs2Names %>"
+			param="tabs2"
+			url="<%= portletURL.toString() %>"
+			backURL="<%= redirect %>"
+		/>
+	</c:otherwise>
+</c:choose>
+
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("users") %>'>
@@ -905,11 +911,11 @@ else {
 					roleParams.put("permissionsResourceId", new Long(resource.getResourceId()));
 				}
 
-				int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), Integer.valueOf(type), roleParams);
+				int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(type), roleParams);
 
 				searchContainer.setTotal(total);
 
-				List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), Integer.valueOf(type), roleParams, searchContainer.getStart(), searchContainer.getEnd());
+				List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(type), roleParams, searchContainer.getStart(), searchContainer.getEnd());
 
 				searchContainer.setResults(results);
 				%>

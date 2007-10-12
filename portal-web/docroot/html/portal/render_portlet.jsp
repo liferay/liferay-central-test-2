@@ -73,7 +73,6 @@ catch (NoSuchResourceException nsre) {
 				Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
 
 				if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) {
-
 					addDefaultResource = true;
 				}
 			}

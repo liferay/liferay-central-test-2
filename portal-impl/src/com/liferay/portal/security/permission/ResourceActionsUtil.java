@@ -70,9 +70,15 @@ import org.dom4j.io.SAXReader;
  *
  */
 public class ResourceActionsUtil {
+
 	public static final String ACTION_NAME_PREFIX = "action.";
 
 	public static final String MODEL_RESOURCE_NAME_PREFIX = "model.resource.";
+
+	public static final String[] ORGANIZATION_MODEL_RESOURCES = {
+		Location.class.getName(), Organization.class.getName(),
+		PasswordPolicy.class.getName(), User.class.getName()
+	};
 
 	public static final String[] PORTAL_MODEL_RESOURCES = {
 		Location.class.getName(), Organization.class.getName(),
@@ -261,14 +267,12 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
+	public static boolean isOrganizationModelResource(String modelResource) {
+		return _instance._isOrganizationModelResource(modelResource);
+	}
+
 	public static boolean isPortalModelResource(String modelResource) {
-		for (int i = 0; i < PORTAL_MODEL_RESOURCES.length; i++) {
-			String portalModelResource = PORTAL_MODEL_RESOURCES[i];
-			if (portalModelResource.equals(modelResource)) {
-				return true;
-			}
-		}
-		return false;
+		return _instance._isPortalModelResource(modelResource);
 	}
 
 	public static void read(
@@ -279,6 +283,18 @@ public class ResourceActionsUtil {
 	}
 
 	private ResourceActionsUtil() {
+		_organizationModelResources = CollectionFactory.getHashSet();
+
+		for (int i = 0; i < ORGANIZATION_MODEL_RESOURCES.length; i++) {
+			_organizationModelResources.add(ORGANIZATION_MODEL_RESOURCES[i]);
+		}
+
+		_portalModelResources = CollectionFactory.getHashSet();
+
+		for (int i = 0; i < PORTAL_MODEL_RESOURCES.length; i++) {
+			_portalModelResources.add(PORTAL_MODEL_RESOURCES[i]);
+		}
+
 		_portletModelResources = CollectionFactory.getHashMap();
 		_portletResourceActions = CollectionFactory.getHashMap();
 		_portletResourceCommunityDefaultActions =
@@ -492,6 +508,24 @@ public class ResourceActionsUtil {
 		name = PortletImpl.getRootPortletId(name);
 
 		return _getActions(_portletResourceGuestUnsupportedActions, name);
+	}
+
+	private boolean _isOrganizationModelResource(String modelResource) {
+		if (_organizationModelResources.contains(modelResource)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	private boolean _isPortalModelResource(String modelResource) {
+		if (_portalModelResources.contains(modelResource)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private void _read(
@@ -763,6 +797,8 @@ public class ResourceActionsUtil {
 
 	private static ResourceActionsUtil _instance = new ResourceActionsUtil();
 
+	private Set _organizationModelResources;
+	private Set _portalModelResources;
 	private Map _portletModelResources;
 	private Map _portletResourceActions;
 	private Map _portletResourceCommunityDefaultActions;

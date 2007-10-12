@@ -205,12 +205,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			int birthdayYear, String jobTitle, long organizationId,
 			long locationId, boolean sendEmail)
 		throws PortalException, SystemException {
+
 		return addUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
 			birthdayDay, birthdayYear, jobTitle,
-			new long[]{organizationId, locationId}, sendEmail);
+			new long[] {organizationId, locationId}, sendEmail);
 	}
 
 	public User addUser(
@@ -1377,7 +1378,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void updateOrganizations(
 			long userId, long organizationId, long locationId)
 		throws PortalException, SystemException {
-		updateOrganizations(userId, new long[]{organizationId, locationId});
+
+		updateOrganizations(userId, new long[] {organizationId, locationId});
 	}
 
 	public void updateOrganizations(
@@ -1546,7 +1548,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			greeting, comments, firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth,birthdayDay, birthdayYear, smsSn,
 			aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
-			new long[]{organizationId, locationId});
+			new long[] {organizationId, locationId});
 	}
 
 	public User updateUser(
@@ -2113,46 +2115,50 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		for (int i = 0; i < organizationIds.length; i++) {
 			long organizationId = organizationIds[i];
+
 			Organization organization =
 				OrganizationUtil.findByPrimaryKey(organizationId);
 
 			if (organization.isRegular()) {
 				regularOrganizations.add(organization);
-			} else {
+			}
+			else {
 				locations.add(organization);
 			}
 		}
 
 		if (organizationRequired && (regularOrganizations.size() == 0)) {
 			throw new NoSuchOrganizationException(
-				"The user must have at least one regular organization");
+				"User must have at least one regular organization");
 		}
 
 		if (locationRequired && (locations.size() == 0)) {
 			throw new NoSuchOrganizationException(
-				"The user must have at least one location");
+				"User must have at least one location");
 		}
 
 		if (strictLocationValidation) {
-			for (Iterator it1 = locations.iterator();
-			     it1.hasNext();) {
-				Organization location = (Organization) it1.next();
+			Iterator itr1 = locations.iterator();
+
+			while (itr1.hasNext()) {
+				Organization location = (Organization)itr1.next();
 
 				// Each location must belong to one of the ancestors of the
 				// regular organizations
 
 				boolean validLocation = false;
 
-				for (Iterator it2 = regularOrganizations.iterator();
-				     it2.hasNext();) {
+				Iterator itr2 = regularOrganizations.iterator();
 
-					Organization organization = (Organization) it2.next();
+				while (itr2.hasNext()) {
+					Organization organization = (Organization)itr2.next();
 
 					if (OrganizationLocalServiceUtil.isAncestor(
 							location.getOrganizationId(),
 							organization.getOrganizationId())) {
 
 						validLocation = true;
+
 						break;
 					}
 				}
@@ -2161,7 +2167,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					throw new OrganizationParentException(
 						"Location " + location.getOrganizationId() +
 							" is not valid for the organizations: " +
-							StringUtil.merge(organizationIds));
+								StringUtil.merge(organizationIds));
 				}
 			}
 		}

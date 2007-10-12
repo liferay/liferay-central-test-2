@@ -33,31 +33,30 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
+String groupName = group.getName();
+
 Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
 long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
-Organization organization = null;
-
-String groupName = group.getName();
-
 int roleType = RoleImpl.TYPE_COMMUNITY;
 
-String strutsAction = "/communities/edit_user_roles";
+Organization organization = null;
 
 if (group.isOrganization()) {
 	organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
+
 	groupName = organization.getName();
+
 	roleType = RoleImpl.TYPE_ORGANIZATION;
-	strutsAction = "/enterprise_admin/edit_user_org_roles";
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
-portletURL.setParameter("struts_action", strutsAction);
-//portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("struts_action", "/communities/edit_user_roles");
+portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 portletURL.setParameter("roleId", String.valueOf(roleId));
@@ -66,23 +65,12 @@ portletURL.setParameter("roleId", String.valueOf(roleId));
 
 PortletURL breadcrumbsURL = renderResponse.createRenderURL();
 
-breadcrumbsURL.setWindowState(WindowState.MAXIMIZED);
-
-if (group.isOrganization()) {
-	breadcrumbsURL.setParameter("struts_action", "/communities/view");
-	breadcrumbsURL.setParameter("tabs1", "organizations");
-}
-else {
-	breadcrumbsURL.setParameter("struts_action", "/enterprise_admin/view");
-	breadcrumbsURL.setParameter("tabs1", tabs1);
-}
-
+breadcrumbsURL.setParameter("struts_action", "/communities/edit_user_roles");
+breadcrumbsURL.setParameter("tabs1", tabs1);
 breadcrumbsURL.setParameter("redirect", redirect);
 breadcrumbsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
-String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + LanguageUtil.get(pageContext, (group.isOrganization())?"organizations":"communities") + "</a> &raquo; ";
-
-breadcrumbsURL.setParameter("struts_action", strutsAction);
+String breadcrumbs = "<a href=\"" + redirect + "\">" + LanguageUtil.get(pageContext, group.isOrganization() ? "organizations" : "communities") + "</a> &raquo; ";
 
 breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + groupName + "</a>";
 
@@ -99,7 +87,7 @@ if (role != null) {
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='<%= strutsAction %>' /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_user_roles" /></portlet:actionURL>");
 	}
 </script>
 
@@ -110,7 +98,7 @@ if (role != null) {
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />
 
-Assign <%= (group.isOrganization())?"Organization":"Community" %> roles to users.
+<%= LanguageUtil.get(pageContext, "assign-" + (group.isOrganization() ? "organization" : "community") + "-roles-to-users") %>
 
 <br /><br />
 
@@ -171,8 +159,8 @@ Assign <%= (group.isOrganization())?"Organization":"Community" %> roles to users
 
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
-				rowURL.setParameter("struts_action", strutsAction);
-				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("struts_action", "/communities/edit_user_roles");
+				rowURL.setParameter("redirect", redirect);
 				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				rowURL.setParameter("roleId", String.valueOf(curRole.getRoleId()));
 
@@ -198,7 +186,9 @@ Assign <%= (group.isOrganization())?"Organization":"Community" %> roles to users
 		<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
 
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
-			Step 2 of 2: Assign <%= (group.isOrganization())?"Organization":"Community" %> roles to users. <i>Current</i> signifies current users associated with the <i><%= role.getName() %></i> role. <i>Available</i> signifies all users associated with the <i><%= groupName %></i> <%= (group.isOrganization())?"organization":"community" %>.
+			Step 2 of 2: <%= LanguageUtil.get(pageContext, "assign-" + (group.isOrganization() ? "organization" : "community") + "-roles-to-users") %>
+
+			<i>Current</i> signifies current users associated with the <i><%= role.getName() %></i> role. <i>Available</i> signifies all users associated with the <i><%= groupName %></i> <%= (group.isOrganization()) ? "organization" : "community" %>.
 		</div>
 
 		<br />

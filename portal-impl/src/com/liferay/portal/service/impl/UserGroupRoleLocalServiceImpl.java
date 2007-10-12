@@ -175,8 +175,7 @@ public class UserGroupRoleLocalServiceImpl
 	protected void checkGroupResource(long groupId)
 		throws PortalException, SystemException {
 
-		// Make sure that the individual resource for the group exists and
-		// otherwise create it
+		// Make sure that the individual resource for the group exists
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 

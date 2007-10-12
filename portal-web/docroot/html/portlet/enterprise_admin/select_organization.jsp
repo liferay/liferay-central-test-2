@@ -25,13 +25,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String strutsAction = ParamUtil.getString(request, "struts_action");
-
 tabs1 = "organizations";
-
 String tabs2 = ParamUtil.getString(request, "tabs2", "regular");
-
-boolean multi = ParamUtil.getBoolean(request, "multi", false);
 
 boolean locationStrictValidation = ParamUtil.getBoolean(request, "locationStrictValidation");
 
@@ -40,13 +35,11 @@ String searchFilter = StringPool.BLANK;
 
 <script type="text/javascript">
 	function <portlet:namespace/>setOrgType(url, type) {
-		var tabURL = url;
-
 		if (type == 'locations') {
-			tabURL = url + '&<portlet:namespace/>parentOrganizationIds=' + opener.<portlet:namespace/>getSelectedOrganizationIds();
+			url += '&<portlet:namespace/>parentOrganizationIds=' + opener.<portlet:namespace/>getSelectedOrganizationIds();
 		}
 
-		location.href=tabURL;
+		location.href = url;
 	}
 </script>
 
@@ -55,13 +48,15 @@ String searchFilter = StringPool.BLANK;
 <liferay-ui:tabs names="organizations" />
 
 <c:choose>
-	<c:when test="<%= locationRequired %>">
-		<liferay-ui:message key="please-select-at-least-one-regular-organization-and-one-location"/>
-		<br/>&nbsp;<br/>
+	<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_REQUIRED)) %>">
+		<liferay-ui:message key="please-select-at-least-one-regular-organization-and-one-location" />
+
+		<br /><br />
 	</c:when>
-	<c:when test="<%= organizationRequired %>">
-		<liferay-ui:message key="please-select-at-least-one-regular-organization"/>
-		<br/>&nbsp;<br/>
+	<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_PARENT_ORGANIZATION_REQUIRED)) %>">
+		<liferay-ui:message key="please-select-at-least-one-regular-organization" />
+
+		<br /><br />
 	</c:when>
 </c:choose>
 
@@ -74,7 +69,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-portletURL.setParameter("struts_action", strutsAction);
+portletURL.setParameter("struts_action", "/enterprise_admin/select_organization");
 
 OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
 
@@ -120,7 +115,7 @@ if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 else if (locationStrictValidation && tabs2.equals("locations")) {
 %>
 
-<%@ include file="/html/portlet/enterprise_admin/location_strict_validation_search_results.jspf"%>
+	<%@ include file="/html/portlet/enterprise_admin/location_strict_validation_search_results.jspf" %>
 
 <%
 }
@@ -145,7 +140,8 @@ searchContainer.setResults(results);
 %>
 
 <c:if test="<%= Validator.isNotNull(searchFilter) %>">
-	<br/>
+	<br />
+
 	<%= searchFilter %>
 </c:if>
 
@@ -163,18 +159,12 @@ for (int i = 0; i < results.size(); i++) {
 
 	sm.append("javascript: opener.");
 	sm.append(renderResponse.getNamespace());
-	sm.append("select");
-
-	sm.append("Organization");
-
-	sm.append("('");
+	sm.append("selectOrganization('");
 	sm.append(organization.getOrganizationId());
 	sm.append("', '");
 	sm.append(UnicodeFormatter.toString(organization.getName()));
 	sm.append("');");
-	if (!multi) {
-		sm.append("window.close();");
-	}
+	sm.append("window.close();");
 
 	String rowHREF = sm.toString();
 
@@ -200,7 +190,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Type
 
-	row.addText(LanguageUtil.get(pageContext, organization.isLocation() ? "location" : "regular"));
+	row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
 
 	// Address
 
@@ -219,12 +209,6 @@ for (int i = 0; i < results.size(); i++) {
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 </form>
-
-<c:if test="<%= multi %>">
-	<div class="separator"><!-- --></div>
-
-	<input type="button" value="<liferay-ui:message key="close" />" onClick="window.close();" />
-</c:if>
 
 <script type="text/javascript">
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);

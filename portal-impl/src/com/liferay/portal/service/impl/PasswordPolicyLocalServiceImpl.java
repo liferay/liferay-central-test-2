@@ -185,7 +185,7 @@ public class PasswordPolicyLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return getPasswordPolicy(
-			companyId, new long[]{organizationId, locationId});
+			companyId, new long[] {organizationId, locationId});
 	}
 
 	public PasswordPolicy getPasswordPolicy(
@@ -246,8 +246,7 @@ public class PasswordPolicyLocalServiceImpl
 
 		long[] organizationIds = user.getOrganizationIds();
 
-		return getPasswordPolicy(
-			user.getCompanyId(), organizationIds);
+		return getPasswordPolicy(user.getCompanyId(), organizationIds);
 	}
 
 	public List search(long companyId, String name, int begin, int end)

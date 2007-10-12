@@ -362,6 +362,15 @@
 				(Groups_Roles.roleId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrganizationsUsers">
+		<![CDATA[
+			INNER JOIN
+				Users_Orgs ON
+					(Users_Orgs.organizationId = Organization_.organizationId)
+			WHERE
+				(Users_Orgs.userId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.joinByOrgGroupPermission">
 			INNER JOIN
 				OrgGroupPermission ON

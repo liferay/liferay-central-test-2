@@ -131,7 +131,7 @@ List updatablePackageIds = new ArrayList();
 								pluginPackageStatus = "unknown";
 							}
 
-							ResultRow row = new ResultRow(new Object[]{pluginPackage, availablePluginPackage, pluginPackageStatus, uploadProgressId, currentURL}, pluginPackageModuleId, i);
+							ResultRow row = new ResultRow(new Object[] {pluginPackage, availablePluginPackage, pluginPackageStatus, uploadProgressId, currentURL}, pluginPackageModuleId, i);
 
 							row.setClassName("status-" + pluginPackageStatus);
 

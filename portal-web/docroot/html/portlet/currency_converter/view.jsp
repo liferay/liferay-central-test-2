@@ -104,7 +104,7 @@ decimalFormat.setMinimumFractionDigits(2);
 			%>
 
 				<td valign="top">
-					<%= LanguageUtil.get(pageContext, "currency." + symbol) %><br />
+					<liferay-ui:message key='<%= "currency." + symbol %>' /><br />
 					(<%= symbol %>)
 				</td>
 

@@ -80,9 +80,9 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 	<tr>
 		<td>
 			<select name="<portlet:namespace /><%= displayTerms.TYPE %>">
-				<option <%= (displayTerms.getType() == OrganizationImpl.ANY_TYPE) ? "selected" : "" %> value="<%= OrganizationImpl.ANY_TYPE %>"><%= LanguageUtil.get(pageContext, "any") %></option>
-				<option <%= (displayTerms.getType() == OrganizationImpl.TYPE_REGULAR) ? "selected" : "" %> value="<%= OrganizationImpl.TYPE_REGULAR %>"><%= LanguageUtil.get(pageContext, "regular") %></option>
-				<option <%= (displayTerms.getType() == OrganizationImpl.TYPE_LOCATION) ? "selected" : "" %> value="<%= OrganizationImpl.TYPE_LOCATION %>"><%= LanguageUtil.get(pageContext, "location") %></option>
+				<option <%= (displayTerms.getType() == OrganizationImpl.ANY_TYPE) ? "selected" : "" %> value="<%= OrganizationImpl.ANY_TYPE %>"><liferay-ui:message key="any" /></option>
+				<option <%= (displayTerms.getType() == OrganizationImpl.TYPE_REGULAR) ? "selected" : "" %> value="<%= OrganizationImpl.TYPE_REGULAR %>"><liferay-ui:message key="regular" /></option>
+				<option <%= (displayTerms.getType() == OrganizationImpl.TYPE_LOCATION) ? "selected" : "" %> value="<%= OrganizationImpl.TYPE_LOCATION %>"><liferay-ui:message key="location" /></option>
 			</select>
 		</td>
 		<td>
@@ -104,17 +104,13 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 	<%
 	boolean showButtons = false;
 
-	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-		if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-		}
-		else {
-			showButtons = true;
-		}
+	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && !renderRequest.getWindowState().equals(LiferayWindowState.POP_UP)) {
+		showButtons = true;
 	}
 	%>
 
 	<c:if test="<%= showButtons %>">
-		<c:if test="<%= (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) %>">
+		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) %>">
 			<input type="button" value="<liferay-ui:message key="add-organization" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='/enterprise_admin/edit_organization' /></portlet:renderURL>&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value);" />
 		</c:if>
 	</c:if>
@@ -137,7 +133,7 @@ if (displayTerms.getParentOrganizationId() > 0) {
 
 	<br />
 
-	<%= LanguageUtil.get(pageContext, "filter-by-organization") %>: <%= organization.getName() %><br />
+	<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
 </c:if>
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">

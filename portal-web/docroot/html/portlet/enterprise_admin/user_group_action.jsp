@@ -69,7 +69,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 	<portlet:param name="tabs1" value="users" />
 
 	<c:if test="<%= portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-			<portlet:param name="organizationId" value="<%= String.valueOf(user.getOrganization().getOrganizationId()) %>" />
+		<portlet:param name="organizationId" value="<%= String.valueOf(user.getOrganization().getOrganizationId()) %>" />
 	</c:if>
 
 	<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />

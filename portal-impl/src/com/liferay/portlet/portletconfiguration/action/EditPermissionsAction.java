@@ -198,6 +198,7 @@ public class EditPermissionsAction extends PortletAction {
 
 	protected void updateRolePermissions(ActionRequest req)
 		throws Exception {
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 

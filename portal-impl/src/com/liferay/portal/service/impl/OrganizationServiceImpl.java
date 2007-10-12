@@ -94,9 +94,8 @@ public class OrganizationServiceImpl extends PrincipalBean
 				getPermissionChecker(), ActionKeys.ADD_ORGANIZATION)) {
 
 			throw new PrincipalException(
-				"User " + getPermissionChecker().getUserId() + " does not have "
-					+ "enough permissions to add an organization with parent "
-						+ parentOrganizationId);
+				"User " + getUserId() + " does not have permissions to add " +
+					"an organization with parent " + parentOrganizationId);
 		}
 
 		return OrganizationLocalServiceUtil.addOrganization(

@@ -115,7 +115,6 @@ if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 			organizationId = firstUserOrganizationId;
 		}
 	}
-
 }
 
 Organization organization = null;
@@ -137,9 +136,10 @@ if (tabs2.equals("current")) {
 }
 %>
 
-
 <c:if test="<%= (organization != null)  %>">
-	<%= LanguageUtil.get(pageContext, "filter-by-organization") %>:
+	<br />
+
+	<liferay-ui:message key="filter-by-organization" />:
 
 	<c:choose>
 		<c:when test="<%= (allowedOrganizations == null) || (allowedOrganizations.size() == 1) %>">
@@ -147,14 +147,20 @@ if (tabs2.equals("current")) {
 		</c:when>
 		<c:otherwise>
 			<select name="<portlet:namespace />organizationId" onchange="submitForm(this.form);">
+
 				<%
-				for (Iterator it = allowedOrganizations.iterator(); it.hasNext();) {
-					Organization org = (Organization) it.next();
+				Iterator itr = allowedOrganizations.iterator();
+
+				while (itr.hasNext()) {
+					Organization curOrg = (Organization)itr.next();
 				%>
-					<option <%= (organizationId == org.getOrganizationId()) ? "selected" : "" %> value="<%= org.getOrganizationId() %>"><%= org.getName() %></option>
+
+					<option <%= (organizationId == curOrg.getOrganizationId()) ? "selected" : "" %> value="<%= curOrg.getOrganizationId() %>"><%= curOrg.getName() %></option>
+
 				<%
 				}
 				%>
+
 			</select>
 		</c:otherwise>
 	</c:choose>

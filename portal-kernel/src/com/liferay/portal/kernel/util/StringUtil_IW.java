@@ -105,6 +105,38 @@ public class StringUtil_IW {
 		return StringUtil.lowerCase(s);
 	}
 
+	public java.lang.String merge(boolean[] array) {
+		return StringUtil.merge(array);
+	}
+
+	public java.lang.String merge(boolean[] array, java.lang.String delimiter) {
+		return StringUtil.merge(array, delimiter);
+	}
+
+	public java.lang.String merge(int[] array) {
+		return StringUtil.merge(array);
+	}
+
+	public java.lang.String merge(int[] array, java.lang.String delimiter) {
+		return StringUtil.merge(array, delimiter);
+	}
+
+	public java.lang.String merge(long[] array) {
+		return StringUtil.merge(array);
+	}
+
+	public java.lang.String merge(long[] array, java.lang.String delimiter) {
+		return StringUtil.merge(array, delimiter);
+	}
+
+	public java.lang.String merge(short[] array) {
+		return StringUtil.merge(array);
+	}
+
+	public java.lang.String merge(short[] array, java.lang.String delimiter) {
+		return StringUtil.merge(array, delimiter);
+	}
+
 	public java.lang.String merge(java.util.List list) {
 		return StringUtil.merge(list);
 	}
@@ -310,6 +342,10 @@ public class StringUtil_IW {
 
 	public java.lang.String upperCase(java.lang.String s) {
 		return StringUtil.upperCase(s);
+	}
+
+	public java.lang.String upperCaseFirstLetter(java.lang.String s) {
+		return StringUtil.upperCaseFirstLetter(s);
 	}
 
 	public java.lang.String wrap(java.lang.String text) {

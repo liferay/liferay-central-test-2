@@ -44,11 +44,12 @@
 
 		List userOrgs = user.getOrganizations();
 
-		Iterator it = userOrgs.iterator();
+		Iterator itr = userOrgs.iterator();
 
-		while (it.hasNext()) {
-			Organization org = (Organization) it.next();
-			communities.add(0, org.getGroup());
+		while (itr.hasNext()) {
+			Organization organization = (Organization)itr.next();
+
+			communities.add(0, organization.getGroup());
 		}
 
 		if (user.isLayoutsRequired()) {
@@ -75,7 +76,6 @@
 				organization = OrganizationLocalServiceUtil.getOrganization(community.getClassPK());
 
 				if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) {
-
 					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
 
 					addPageURL.setWindowState(WindowState.NORMAL);

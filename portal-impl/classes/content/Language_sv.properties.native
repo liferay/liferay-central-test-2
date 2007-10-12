@@ -1135,6 +1135,7 @@ file-upload=Ladda upp fil
 file=Fil
 fill-out-the-following-form-to-get-driving-directions-to=Fyll i formeln för att få vägbeskrivning till
 filter-by-location=Filtrera enligt plats
+filter-by-locations-valid-for=Filter by locations valid for: {0}.
 filter-by-organization=Filtrera enligt organisation
 filter-by-role=Filtrera enligt rollen
 filter-by-structure=Filtrera enligt struktur

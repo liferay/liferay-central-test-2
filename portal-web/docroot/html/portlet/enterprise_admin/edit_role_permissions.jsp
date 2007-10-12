@@ -482,7 +482,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 					<%= LanguageUtil.format(pageContext, "select-the-scope-of-the-action-that-this-role-can-perform-on-the-x", portletResourceName) %>
 
 					<c:if test="<%= actions.size() > 0 %>">
-						<%= LanguageUtil.get(pageContext, "you-can-choose-more-than-one") %>
+						<liferay-ui:message key="you-can-choose-more-than-one" />
 					</c:if>
 				</c:when>
 				<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
@@ -498,7 +498,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 					</c:choose>
 
 					<c:if test="<%= actions.size() > 0 %>">
-						<%= LanguageUtil.get(pageContext, "you-can-choose-more-than-one") %>
+						<liferay-ui:message key="you-can-choose-more-than-one" />
 					</c:if>
 				</c:when>
 				<c:otherwise>
@@ -514,7 +514,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 					</c:choose>
 
 					<c:if test="<%= actions.size() > 0 %>">
-						<%= LanguageUtil.get(pageContext, "you-can-choose-more-than-one") %>
+						<liferay-ui:message key="you-can-choose-more-than-one" />
 					</c:if>
 				</c:otherwise>
 			</c:choose>
@@ -562,13 +562,15 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 							</select>
 						</c:when>
 						<c:when test="<%= (role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION) %>">
+
 							<%
 							boolean disabled = portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) || portletResource.equals(PortletKeys.ORGANIZATION_ADMIN) || portletResource.equals(PortletKeys.PORTAL);
 
-							if ((role.getType() == RoleImpl.TYPE_ORGANIZATION) && (modelResourceName.equals("Location") || modelResourceName.equals("Organization") || modelResourceName.equals("User") || modelResourceName.equals("Password Policy"))) { // TODO: isOrganizationScoped(modelResource)
+							if ((role.getType() == RoleImpl.TYPE_ORGANIZATION) && ResourceActionsUtil.isOrganizationModelResource(modelResourceName)) {
 								disabled = false;
 							}
 							%>
+
 							<liferay-ui:input-checkbox
 								param='<%= "scope" + actionId %>'
 								defaultValue="<%= hasGroupTemplateScope %>"
@@ -600,7 +602,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
 			<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"2", String.valueOf(totalSteps)}) %>
 
-			<%= LanguageUtil.get(pageContext, "choose-a-resource-or-proceed-to-the-next-step") %>
+			<liferay-ui:message key="choose-a-resource-or-proceed-to-the-next-step" />
 		</div>
 
 		<br />
@@ -648,8 +650,9 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 					selectable = false;
 				}
 
-				PortletURL rowURL = null;
 				String help = StringPool.BLANK;
+
+				PortletURL rowURL = null;
 
 				if (selectable) {
 					rowURL = renderResponse.createRenderURL();
@@ -727,7 +730,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
 			<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"1", String.valueOf(totalSteps)}) %>
 
-			<%= LanguageUtil.get(pageContext, "choose-a-portlet") %>
+			<liferay-ui:message key="choose-a-portlet" />
 		</div>
 
 		<br />

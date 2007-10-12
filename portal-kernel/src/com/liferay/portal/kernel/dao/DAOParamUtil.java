@@ -47,6 +47,10 @@ public class DAOParamUtil {
 
 	// Servlet Request
 
+	public static boolean getBoolean(ServletRequest req, String param) {
+		return GetterUtil.getBoolean(getString(req, param));
+	}
+
 	public static int getInteger(ServletRequest req, String param) {
 		return GetterUtil.getInteger(getString(req, param));
 	}
@@ -126,6 +130,10 @@ public class DAOParamUtil {
 		return GetterUtil.getLong(getString(req, param));
 	}
 
+	public static short getShort(ServletRequest req, String param) {
+		return GetterUtil.getShort(getString(req, param));
+	}
+
 	public static String getString(ServletRequest req, String param) {
 		String value = ParamUtil.getString(req, param);
 
@@ -138,6 +146,10 @@ public class DAOParamUtil {
 	}
 
 	// Portlet Request
+
+	public static boolean getBoolean(PortletRequest req, String param) {
+		return GetterUtil.getBoolean(getString(req, param));
+	}
 
 	public static int getInteger(PortletRequest req, String param) {
 		return GetterUtil.getInteger(getString(req, param));
@@ -216,6 +228,10 @@ public class DAOParamUtil {
 
 	public static long getLong(PortletRequest req, String param) {
 		return GetterUtil.getLong(getString(req, param));
+	}
+
+	public static short getShort(PortletRequest req, String param) {
+		return GetterUtil.getShort(getString(req, param));
 	}
 
 	public static String getString(PortletRequest req, String param) {

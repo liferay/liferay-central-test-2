@@ -1995,10 +1995,10 @@ public class PortalUtil {
 		// Community roles
 
 		String customSystemCommunityRoles[] =
-				PropsUtil.getArray(PropsUtil.SYSTEM_COMMUNITY_ROLES);
+			PropsUtil.getArray(PropsUtil.SYSTEM_COMMUNITY_ROLES);
 
 		if ((customSystemCommunityRoles == null) ||
-				(customSystemCommunityRoles.length == 0)) {
+			(customSystemCommunityRoles.length == 0)) {
 
 			_allSystemCommunityRoles = RoleImpl.SYSTEM_COMMUNITY_ROLES;
 		}
@@ -2019,10 +2019,10 @@ public class PortalUtil {
 		// Organization Roles
 
 		String customSystemOrganizationRoles[] =
-				PropsUtil.getArray(PropsUtil.SYSTEM_ORGANIZATION_ROLES);
+			PropsUtil.getArray(PropsUtil.SYSTEM_ORGANIZATION_ROLES);
 
 		if ((customSystemOrganizationRoles == null) ||
-				(customSystemOrganizationRoles.length == 0)) {
+			(customSystemOrganizationRoles.length == 0)) {
 
 			_allSystemOrganizationRoles = RoleImpl.SYSTEM_ORGANIZATION_ROLES;
 		}

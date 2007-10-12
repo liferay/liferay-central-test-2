@@ -31,8 +31,7 @@ Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
 long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
-int roleType = ParamUtil.getInteger(request, "roleType", -1);
-
+int roleType = ParamUtil.getInteger(request, "roleType");
 %>
 
 <liferay-ui:tabs
@@ -88,11 +87,11 @@ int roleType = ParamUtil.getInteger(request, "roleType", -1);
 			</td>
 			<td>
 				<c:choose>
-					<c:when test="<%= ((role == null) && (roleType == -1)) %>">
+					<c:when test="<%= ((role == null) && (roleType == 0)) %>">
 						<select name="<portlet:namespace/>type">
-							<option value="<%= RoleImpl.TYPE_REGULAR %>"><%=LanguageUtil.get(pageContext, "regular")%></option>
-							<option value="<%= RoleImpl.TYPE_COMMUNITY %>"><%=LanguageUtil.get(pageContext, "community")%></option>
-							<option value="<%= RoleImpl.TYPE_ORGANIZATION %>"><%=LanguageUtil.get(pageContext, "organization")%></option>
+							<option value="<%= RoleImpl.TYPE_REGULAR %>"><liferay-ui:message key="regular" /></option>
+							<option value="<%= RoleImpl.TYPE_COMMUNITY %>"><liferay-ui:message key="community" /></option>
+							<option value="<%= RoleImpl.TYPE_ORGANIZATION %>"><liferay-ui:message key="organization" /></option>
 						</select>
 					</c:when>
 					<c:when test="<%= (role == null) %>">

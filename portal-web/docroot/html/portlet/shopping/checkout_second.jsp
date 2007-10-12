@@ -280,7 +280,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			<liferay-ui:message key="type" />:
 		</td>
 		<td>
-			<%= LanguageUtil.get(pageContext, "cc_" + order.getCcType()) %>
+			<liferay-ui:message key='<%= "cc_" + order.getCcType() %>' />
 		</td>
 	</tr>
 	<tr>

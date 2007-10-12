@@ -263,8 +263,10 @@ public class UserImpl extends UserModelImpl implements User {
 			}
 		}
 		catch (Exception e) {
-			_log.warn(
-				"User " + getUserId() + " does not belong to any organization");
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to get an organization for user " + getUserId());
+			}
 		}
 
 		return new OrganizationImpl();
@@ -276,7 +278,10 @@ public class UserImpl extends UserModelImpl implements User {
 				getUserId());
 		}
 		catch (Exception e) {
-			_log.warn("User does not belong to any organization");
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to get organizations for user " + getUserId());
+			}
 		}
 
 		return new ArrayList();
@@ -290,7 +295,7 @@ public class UserImpl extends UserModelImpl implements User {
 		Iterator itr = organizations.iterator();
 
 		for (int i = 0; itr.hasNext(); i++) {
-			Organization organization = (Organization) itr.next();
+			Organization organization = (Organization)itr.next();
 
 			organizationIds[i] = organization.getOrganizationId();
 		}
@@ -324,7 +329,9 @@ public class UserImpl extends UserModelImpl implements User {
 			}
 		}
 		catch (Exception e) {
-			_log.warn("User does not have belong to a location");
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to get a location for user " + getUserId());
+			}
 		}
 
 		return new OrganizationImpl();

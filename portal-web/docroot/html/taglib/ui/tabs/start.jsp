@@ -79,6 +79,8 @@ String backURL = (String)request.getAttribute("liferay-ui:tabs:backURL");
 
 boolean refresh = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tabs:refresh"));
 
+// onClick
+
 String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:tabs:onClick"));
 %>
 
@@ -147,7 +149,8 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 						<a href="<%= curURL %>"
 							<c:if test="<%= Validator.isNotNull(curOnClick) %>">
 								onClick="<%= curOnClick %>"
-							</c:if>>
+							</c:if>
+						>
 					</c:when>
 					<c:otherwise>
 						<span>

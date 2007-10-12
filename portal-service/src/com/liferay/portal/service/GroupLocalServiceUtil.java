@@ -196,20 +196,20 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getUserGroupGroup(companyId, userGroupId);
 	}
 
+	public static java.util.List getUserGroups(long userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getUserGroups(userId);
+	}
+
 	public static java.util.List getUserGroupsGroups(java.util.List userGroups)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.getUserGroupsGroups(userGroups);
-	}
-
-	public static java.util.List getUserGroups(long userId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchUserException {
-		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-
-		return groupLocalService.getUserGroups(userId);
 	}
 
 	public static boolean hasRoleGroup(long roleId, long groupId)

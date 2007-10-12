@@ -23,6 +23,8 @@
 %>
 
 <%
+List groups = GroupLocalServiceUtil.getUserGroups(user2.getUserId());
+
 SearchContainer searchContainer = new SearchContainer();
 
 List headerNames = new ArrayList();
@@ -32,16 +34,13 @@ headerNames.add("community");
 headerNames.add(StringPool.BLANK);
 
 searchContainer.setHeaderNames(headerNames);
-searchContainer.setEmptyResultsMessage("the-user-does-not-have-any-community-role");
 
 List results = new ArrayList();
-
-List groups = GroupLocalServiceUtil.getUserGroups(user2.getUserId());
-
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < groups.size(); i++) {
-	Group group = (Group) groups.get(i);
+	Group group = (Group)groups.get(i);
+
 	List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), group.getGroupId());
 
 	for (int j = 0; j < userGroupRoles.size(); j++) {
@@ -49,7 +48,7 @@ for (int i = 0; i < groups.size(); i++) {
 
 		Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
 
-		ResultRow row = new ResultRow(new Object[]{user2, group, role, currentURL + sectionRedirectParams}, role.getRoleId(), j);
+		ResultRow row = new ResultRow(new Object[] {user2, group, role, currentURL + sectionRedirectParams}, role.getRoleId(), j);
 
 		// Name
 
@@ -73,6 +72,6 @@ for (int i = 0; i < groups.size(); i++) {
 }
 %>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 
 <br />

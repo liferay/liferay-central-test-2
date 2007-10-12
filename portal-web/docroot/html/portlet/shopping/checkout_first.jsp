@@ -467,7 +467,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 				for (int i = 0; i < ccTypes.length; i++) {
 				%>
 
-					<option <%= ccTypes[i].equals(ccType) ? "selected" : "" %> value="<%= ccTypes[i] %>"><%= LanguageUtil.get(pageContext, "cc_" + ccTypes[i]) %></option>
+					<option <%= ccTypes[i].equals(ccType) ? "selected" : "" %> value="<%= ccTypes[i] %>"><liferay-ui:message key='<%= "cc_" + ccTypes[i] %>' /></option>
 
 				<%
 				}

@@ -88,16 +88,9 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td>
-		<liferay-ui:message key="edit-assignments-for-community" />: <%= group.getName() %>
-	</td>
-	<td align="right">
-		&laquo; <a href="<%= redirect %>"><liferay-ui:message key="back" /></a>
-	</td>
-</tr>
-</table>
+<div>
+	<liferay-ui:message key="edit-assignments-for-community" />: <%= group.getName() %>
+</div>
 
 <br />
 
@@ -105,6 +98,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 	names="users,organizations,user-groups"
 	param="tabs1"
 	url="<%= portletURL.toString() %>"
+	backURL="<%= redirect %>"
 />
 
 <c:choose>
@@ -215,7 +209,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				<input name="<portlet:namespace />addRoleIds" type="hidden" value="" />
 				<input name="<portlet:namespace />removeRoleIds" type="hidden" value="" />
 
-				<%= LanguageUtil.get(pageContext, "edit-community-roles-for-user")%>: <%= selectedUser.getFullName() %>
+				<liferay-ui:message key="edit-community-roles-for-user" />: <%= selectedUser.getFullName() %>
 
 				<br /><br />
 

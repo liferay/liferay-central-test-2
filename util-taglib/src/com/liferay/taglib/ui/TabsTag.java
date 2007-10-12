@@ -104,7 +104,6 @@ public class TabsTag extends ParamAncestorTagImpl {
 			req.setAttribute("liferay-ui:tabs:backURL", _backURL);
 			req.setAttribute(
 				"liferay-ui:tabs:refresh", String.valueOf(_refresh));
-
 			req.setAttribute(
 				"liferay-ui:tabs:onClick", String.valueOf(_onClick));
 

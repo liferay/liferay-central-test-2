@@ -33,9 +33,12 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/communities/view");
 portletURL.setParameter("tabs1", tabs1);
+
+pageContext.setAttribute("portletURL", portletURL);
 %>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
+<form action="<%= portletURL.toString() %>" method="get" name="<portlet:namespace />fm">
+<liferay-portlet:renderURLParams varImpl="portletURL" />
 
 <liferay-ui:tabs
 	names="communities-owned,communities-joined,communities-open,all-communities"

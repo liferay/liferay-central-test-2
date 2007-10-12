@@ -128,13 +128,13 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getUserGroupsGroups(java.util.List userGroups)
+	public java.util.List getUserGroups(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getUserGroups(long userId)
+	public java.util.List getUserGroupsGroups(java.util.List userGroups)
 		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchUserException;
+			com.liferay.portal.PortalException;
 
 	public boolean hasRoleGroup(long roleId, long groupId)
 		throws com.liferay.portal.SystemException, 

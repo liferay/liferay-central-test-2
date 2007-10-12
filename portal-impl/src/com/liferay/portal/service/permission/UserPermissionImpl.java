@@ -45,6 +45,7 @@ public class UserPermissionImpl implements UserPermission {
 			PermissionChecker permissionChecker, long userId,
 			long organizationId, long locationId, String actionId)
 		throws PrincipalException {
+
 		check(
 			permissionChecker, userId, new long[] {organizationId, locationId},
 			actionId);
@@ -68,6 +69,7 @@ public class UserPermissionImpl implements UserPermission {
 	public boolean contains(
 		PermissionChecker permissionChecker, long userId, long organizationId,
 		long locationId, String actionId) {
+
 		return contains(
 			permissionChecker, userId, new long[] {organizationId, locationId},
 		    actionId);
@@ -98,6 +100,7 @@ public class UserPermissionImpl implements UserPermission {
 				 (hasOrganizationPermission(
 					 permissionChecker, organizationIds,
 					 organizationActionId))) {
+
 				return true;
 		}
 
@@ -112,9 +115,11 @@ public class UserPermissionImpl implements UserPermission {
 			if (permissionChecker.hasPermission(
 					0, Organization.class.getName(), organizationIds[i],
 					organizationActionId)) {
+
 				return true;
 			}
 		}
+
 		return false;
 	}
 

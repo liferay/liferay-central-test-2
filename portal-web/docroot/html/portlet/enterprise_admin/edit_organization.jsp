@@ -27,6 +27,142 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
+
+Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
+
+long organizationId = BeanParamUtil.getLong(organization, request, "organizationId");
+
+long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId");
+
+if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+	List allowedOrganizations = user.getOrganizations();
+
+	if (organizationId == OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+		organizationId = user.getOrganization().getOrganizationId();
+
+		if (parentOrganizationId != OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+			try {
+				Organization curParentOrg = OrganizationLocalServiceUtil.getOrganization(parentOrganizationId);
+
+				if (!allowedOrganizations.contains(curParentOrg)) {
+					parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
+				}
+			}
+			catch (NoSuchOrganizationException nsoe) {
+				parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
+			}
+		}
+	}
+	else {
+		try {
+			Organization curOrg = OrganizationLocalServiceUtil.getOrganization(organizationId);
+
+			if (!allowedOrganizations.contains(curOrg)) {
+				organizationId = user.getOrganization().getOrganizationId();
+			}
+		}
+		catch (NoSuchOrganizationException nsoe) {
+			organizationId = user.getOrganization().getOrganizationId();
+		}
+	}
+}
+
+boolean editable = false;
+
+if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+	editable = true;
+
+	if (!OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
+		editable = false;
+	}
+
+	if ((organizationId <= 0) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION)) {
+		editable = true;
+	}
+}
 %>
 
-<%@ include file="/html/portlet/enterprise_admin/edit_organization_common.jspf" %>
+<script type="text/javascript">
+	function <portlet:namespace />saveOrganization(cmd) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+		submitForm(document.<portlet:namespace />fm);
+	}
+</script>
+
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization('<%= organization == null ? Constants.ADD : Constants.UPDATE %>'); return false;">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= backURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" />
+<input name="<portlet:namespace />backURL" type="hidden" value="<%= backURL %>" />
+<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
+
+<liferay-ui:tabs
+	names="organization"
+	backURL="<%= backURL %>"
+/>
+
+<liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
+	<liferay-util:param name="tabs1" value="profile" />
+</liferay-util:include>
+
+<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+	<liferay-ui:tabs names="organization" />
+</c:if>
+
+<%@ include file="/html/portlet/enterprise_admin/edit_organization_profile.jspf" %>
+
+<c:if test="<%= organization != null %>">
+	<liferay-ui:tabs
+		names="email-addresses,addresses,websites,phone-numbers"
+		param="tabs2"
+		refresh="<%= false %>"
+	>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/email_address_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+				<liferay-util:param name="className" value="<%= Organization.class.getName() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(organizationId) %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/address_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+				<liferay-util:param name="className" value="<%= Organization.class.getName() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(organizationId) %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/website_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+				<liferay-util:param name="className" value="<%= Organization.class.getName() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(organizationId) %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/phone_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+				<liferay-util:param name="className" value="<%= Organization.class.getName() %>" />
+				<liferay-util:param name="classPK" value="<%= String.valueOf(organizationId) %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+	</liferay-ui:tabs>
+
+	<liferay-ui:tabs
+		names="services"
+		param="tabs3"
+	>
+		<liferay-ui:section>
+			<liferay-util:include page="/html/portlet/enterprise_admin/org_labor_iterator.jsp">
+				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="redirect" value="<%= currentURL + sectionRedirectParams %>" />
+			</liferay-util:include>
+		</liferay-ui:section>
+	</liferay-ui:tabs>
+
+	<%@ include file="/html/portlet/enterprise_admin/edit_organization_comments.jspf" %>
+</c:if>
+
+</form>

@@ -174,7 +174,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 					RoleImpl.TYPE_ORGANIZATION);
 
 				if (systemOrganizationRoles[i].equals(
-					RoleImpl.ORGANIZATION_ADMINISTRATOR)) {
+						RoleImpl.ORGANIZATION_ADMINISTRATOR)) {
+
 					List actions = ResourceActionsUtil.getModelResourceActions(
 						Group.class.getName());
 
@@ -187,7 +188,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				}
 			}
 		}
-
 	}
 
 	public void deleteRole(long roleId)
@@ -209,6 +209,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		if ((role.getType() == RoleImpl.TYPE_COMMUNITY) ||
 			(role.getType() == RoleImpl.TYPE_ORGANIZATION)) {
+
 			UserGroupRoleLocalServiceUtil.deleteUserGroupRolesByRoleId(
 				role.getRoleId());
 		}

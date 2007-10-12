@@ -144,20 +144,20 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.getOrganization(organizationId);
 	}
 
-	public static java.util.List getOrganizations(long[] organizationIds)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getOrganizations(organizationIds);
-	}
-
 	public static long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.getOrganizationId(companyId, name);
+	}
+
+	public static java.util.List getOrganizations(long[] organizationIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getOrganizations(organizationIds);
 	}
 
 	public static java.util.List getRecursableAncestorOrganizations(

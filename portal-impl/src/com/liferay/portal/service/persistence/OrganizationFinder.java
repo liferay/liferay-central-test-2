@@ -54,23 +54,20 @@ import org.hibernate.Session;
  */
 public class OrganizationFinder {
 
-	public static String COUNT_BY_C_PO_N_L_S_C_Z_R_C =
-		OrganizationFinder.class.getName() + ".countByC_PO_N_L_S_C_Z_R_C";
-
 	public static String COUNT_BY_C_PO_N_S_C_Z_R_C =
 		OrganizationFinder.class.getName() + ".countByC_PO_N_S_C_Z_R_C";
 
-	public static String FIND_BY_C_PO_N_L_S_C_Z_R_C =
-		OrganizationFinder.class.getName() + ".findByC_PO_N_L_S_C_Z_R_C";
+	public static String COUNT_BY_C_PO_N_L_S_C_Z_R_C =
+		OrganizationFinder.class.getName() + ".countByC_PO_N_L_S_C_Z_R_C";
 
 	public static String FIND_BY_C_PO_N_S_C_Z_R_C =
 		OrganizationFinder.class.getName() + ".findByC_PO_N_S_C_Z_R_C";
 
+	public static String FIND_BY_C_PO_N_L_S_C_Z_R_C =
+		OrganizationFinder.class.getName() + ".findByC_PO_N_L_S_C_Z_R_C";
+
 	public static String JOIN_BY_GROUPS_PERMISSIONS =
 		OrganizationFinder.class.getName() + ".joinByGroupsPermissions";
-
-	public static String JOIN_BY_ORG_GROUP_PERMISSION =
-		OrganizationFinder.class.getName() + ".joinByOrgGroupPermission";
 
 	public static String JOIN_BY_ORGANIZATIONS_GROUPS =
 		OrganizationFinder.class.getName() + ".joinByOrganizationsGroups";
@@ -81,6 +78,12 @@ public class OrganizationFinder {
 
 	public static String JOIN_BY_ORGANIZATIONS_ROLES =
 		OrganizationFinder.class.getName() + ".joinByOrganizationsRoles";
+
+	public static String JOIN_BY_ORGANIZATIONS_USERS =
+		OrganizationFinder.class.getName() + ".joinByOrganizationsUsers";
+
+	public static String JOIN_BY_ORG_GROUP_PERMISSION =
+		OrganizationFinder.class.getName() + ".joinByOrgGroupPermission";
 
 	public static int countByKeywords(
 			long companyId, long parentOrganizationId,
@@ -162,6 +165,7 @@ public class OrganizationFinder {
 
 			if (type == OrganizationImpl.TYPE_LOCATION ||
 				type == OrganizationImpl.TYPE_REGULAR) {
+
 				sql = CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C);
 			}
 			else {
@@ -337,6 +341,7 @@ public class OrganizationFinder {
 
 			if (type == OrganizationImpl.TYPE_LOCATION ||
 				type == OrganizationImpl.TYPE_REGULAR) {
+
 				sql = CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C);
 			}
 			else {
@@ -455,6 +460,7 @@ public class OrganizationFinder {
 
 			if (type == OrganizationImpl.TYPE_LOCATION ||
 				type == OrganizationImpl.TYPE_REGULAR) {
+
 				sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
 			}
 			else {
@@ -485,6 +491,7 @@ public class OrganizationFinder {
 
 			if (type == OrganizationImpl.TYPE_LOCATION ||
 				type == OrganizationImpl.TYPE_REGULAR) {
+
 				sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
 			}
 			else {
@@ -628,6 +635,7 @@ public class OrganizationFinder {
 
 			if (type == OrganizationImpl.TYPE_LOCATION ||
 				type == OrganizationImpl.TYPE_REGULAR) {
+
 				sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
 			}
 			else {
@@ -658,6 +666,7 @@ public class OrganizationFinder {
 
 			if (type == OrganizationImpl.TYPE_LOCATION ||
 				type == OrganizationImpl.TYPE_REGULAR) {
+
 				sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
 			}
 			else {
@@ -824,6 +833,9 @@ public class OrganizationFinder {
 		else if (key.equals("organizationsRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_ROLES);
 		}
+		else if (key.equals("organizationsUsers")) {
+			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USERS);
+		}
 		else if (key.equals("orgGroupPermission")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORG_GROUP_PERMISSION);
 		}
@@ -876,6 +888,9 @@ public class OrganizationFinder {
 		}
 		else if (key.equals("organizationsRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_ROLES);
+		}
+		else if (key.equals("organizationsUsers")) {
+			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_USERS);
 		}
 		else if (key.equals("orgGroupPermission")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORG_GROUP_PERMISSION);

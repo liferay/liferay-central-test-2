@@ -99,11 +99,11 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getOrganizations(long[] organizationIds)
+	public long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public long getOrganizationId(long companyId, java.lang.String name)
+	public java.util.List getOrganizations(long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

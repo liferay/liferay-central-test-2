@@ -1024,6 +1024,7 @@ file-upload=تحميل الملف
 file=ملف
 fill-out-the-following-form-to-get-driving-directions-to=عبء النموذج التالي للحصول على إتجاهات القيادة إلى
 filter-by-location=إفرز بناء على الموقع
+filter-by-locations-valid-for=Filter by locations valid for: {0}.
 filter-by-organization=إفرز بناء على المنظمة
 filter-by-structure=إفرز بناء على الهيكل
 filter-by-template=إفرز بناء على القالب

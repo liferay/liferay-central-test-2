@@ -80,7 +80,7 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 
 			LinkedHashMap params = null;
 
-			List results;
+			List results = null;
 
 			if ((user.hasOrganization()) &&
 				(Validator.isNull(optionOrganization) ||
@@ -101,7 +101,6 @@ public class DirectoryRecipientFinder implements RecipientFinder {
 
 					results.addAll(subresults);
 				}
-
 			}
 			else {
 				results = UserLocalServiceUtil.search(

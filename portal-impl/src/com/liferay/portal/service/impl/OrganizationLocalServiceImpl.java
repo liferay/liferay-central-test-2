@@ -98,8 +98,8 @@ public class OrganizationLocalServiceImpl
 			user.getCompanyId(), parentOrganizationId);
 
 		validate(
-			user.getCompanyId(), parentOrganizationId, name, type,
-			countryId, statusId);
+			user.getCompanyId(), parentOrganizationId, name, type, countryId,
+			statusId);
 
 		long organizationId = CounterLocalServiceUtil.increment();
 
@@ -268,19 +268,6 @@ public class OrganizationLocalServiceImpl
 		return OrganizationUtil.findByPrimaryKey(organizationId);
 	}
 
-	public List getOrganizations(long[] organizationIds)
-		throws PortalException, SystemException {
-
-		List organizations = new ArrayList();
-
-		for (int i = 0; i < organizationIds.length; i++) {
-			Organization organization = getOrganization(organizationIds[i]);
-			organizations.add(organization);
-		}
-
-		return organizations;
-	}
-
 	public long getOrganizationId(long companyId, String name)
 		throws PortalException, SystemException {
 
@@ -293,6 +280,20 @@ public class OrganizationLocalServiceImpl
 		catch (NoSuchOrganizationException nsoge) {
 			return 0;
 		}
+	}
+
+	public List getOrganizations(long[] organizationIds)
+		throws PortalException, SystemException {
+
+		List organizations = new ArrayList();
+
+		for (int i = 0; i < organizationIds.length; i++) {
+			Organization organization = getOrganization(organizationIds[i]);
+
+			organizations.add(organization);
+		}
+
+		return organizations;
 	}
 
 	public List getRecursableAncestorOrganizations(long organizationId)

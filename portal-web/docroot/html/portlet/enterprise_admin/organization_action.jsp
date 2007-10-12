@@ -34,19 +34,16 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 Organization organization = (Organization)row.getObject();
 
 long organizationId = organization.getOrganizationId();
-
-String strutsAction = "/enterprise_admin/edit_organization";
-
 %>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationURL">
-	<portlet:param name="struts_action" value="<%= strutsAction %>" />
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 	<portlet:param name="organizationId" value="<%= String.valueOf(organizationId) %>" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:renderURL>
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteOrganizationURL">
-	<portlet:param name="struts_action" value="<%= strutsAction %>" />
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	<portlet:param name="deleteOrganizationIds" value="<%= String.valueOf(organizationId) %>" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
@@ -83,7 +80,6 @@ String strutsAction = "/enterprise_admin/edit_organization";
 </portlet:renderURL>
 
 <c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
 		<liferay-ui:icon image="edit" url="<%= editOrganizationURL %>" />
 	</c:if>
@@ -104,11 +100,10 @@ String strutsAction = "/enterprise_admin/edit_organization";
 	</c:if>
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
-
 		<liferay-ui:icon image="add_user" message="add-user" url="<%= addUserURL %>" />
 
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUserRolesURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_org_roles" />
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_roles" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(organization.getGroup().getGroupId()) %>" />
 		</portlet:renderURL>

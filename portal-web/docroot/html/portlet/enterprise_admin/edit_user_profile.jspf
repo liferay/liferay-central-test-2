@@ -38,16 +38,10 @@ if (contact2 != null) {
 
 boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
-boolean locationStrictValidation = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_STRICT_VALIDATION));
-
 String organizationIds = ParamUtil.getString(request, "organizationIds", null);
 long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
 
-List organizations = null;
-
-List organizationNames = new ArrayList();
-
-StringMaker organizationsHTML = new StringMaker();
+List organizations = new ArrayList();
 
 if (organizationIds == null) {
 	if (user2 != null) {
@@ -65,10 +59,13 @@ else {
 if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 	List allowedOrganizations = user.getOrganizations();
 
-	for (Iterator it = organizations.iterator(); it.hasNext();) {
-		Organization curOrg = (Organization) it.next();
+	Iterator itr = organizations.iterator();
+
+	while (itr.hasNext()) {
+		Organization curOrg = (Organization)itr.next();
+
 		if (!allowedOrganizations.contains(curOrg)) {
-			it.remove();
+			itr.remove();
 		}
 	}
 
@@ -77,20 +74,25 @@ if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 	}
 }
 
+List organizationNames = new ArrayList();
+
+StringMaker organizationsHTML = new StringMaker();
+
 if (organizations != null) {
 	organizationIdsArray = new long[organizations.size()];
 
-	Iterator it = organizations.iterator();
+	Iterator itr = organizations.iterator();
 
-	for (int i = 0; it.hasNext(); i++) {
-		Organization org = (Organization) it.next();
+	for (int i = 0; itr.hasNext(); i++) {
+		Organization curOrg = (Organization)itr.next();
 
-		organizationIdsArray[i] = org.getOrganizationId();
+		organizationIdsArray[i] = curOrg.getOrganizationId();
 
-		organizationNames.add(org.getName());
+		organizationNames.add(curOrg.getName());
 
 		organizationsHTML.append("<span>");
-		organizationsHTML.append(org.getName());
+		organizationsHTML.append(curOrg.getName());
+
 		if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable) {
 			organizationsHTML.append("&nbsp;[<a href='javascript: ");
 			organizationsHTML.append(renderResponse.getNamespace());
@@ -98,17 +100,20 @@ if (organizations != null) {
 			organizationsHTML.append(i);
 			organizationsHTML.append(");'>x</a>]");
 		}
+
 		organizationsHTML.append("</span>");
 
-		if (it.hasNext()) {
+		if (itr.hasNext()) {
 			organizationsHTML.append(",&nbsp;");
 		}
 	}
 }
-
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />getSelectedOrganizationIds() {
+		return document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value;
+	}
 
 	function <portlet:namespace />removeOrganization(pos) {
 		var selectedOrganizationIds = document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value.split(",");
@@ -120,20 +125,17 @@ if (organizations != null) {
 		<portlet:namespace />updateOrganizations(selectedOrganizationIds, selectedOrganizationNames);
 	}
 
-	// Callback method
-	function <portlet:namespace />getSelectedOrganizationIds() {
-		return document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value;
-	}
-
-	// Callback method
 	function <portlet:namespace />selectOrganization(organizationId, name) {
 		var selectedOrgsIdsField = document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value;
 		var selectedOrgsIds = [];
+
 		if (selectedOrgsIdsField != "") {
 			selectedOrgsIds = selectedOrgsIdsField.split(",");
 		}
+
 		var selectedOrgsNamesField = document.<portlet:namespace />fm.<portlet:namespace />organizationNames.value;
 		var selectedOrgsNames = [];
+
 		if (selectedOrgsNamesField != "") {
 			selectedOrgsNames = selectedOrgsNamesField.split("@@");
 		}
@@ -152,13 +154,14 @@ if (organizations != null) {
 
 		var organizationsHTML = '';
 
-		for (var i=0; i < selectedOrgsIds.length; i++) {
+		for (var i = 0; i < selectedOrgsIds.length; i++) {
             var id = selectedOrgsIds[i];
 			var name = selectedOrgsNames[i];
 
 			organizationsHTML += '<span>' + name + '&nbsp;[<a href="javascript: <portlet:namespace />removeOrganization(' + i + ');">x</a>]</span>';
+
 			if (i < selectedOrgsIds.length) {
-				organizationsHTML +=',&nbsp;'
+				organizationsHTML += ',&nbsp;'
 			}
 		}
 
@@ -355,7 +358,7 @@ if (organizations != null) {
 				</span>
 
 				<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && editable %>">
-					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="multi" value="1" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="locationStrictValidation" value="<%= (locationStrictValidation)? "1" : "0" %>" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
+					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="locationStrictValidation" value="<%= String.valueOf(GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ORGANIZATIONS_LOCATION_STRICT_VALIDATION))) %>" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
 				</c:if>
 			</td>
 		</tr>

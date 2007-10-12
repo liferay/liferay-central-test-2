@@ -29,7 +29,6 @@ import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.NoSuchRoleException;
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
@@ -171,14 +170,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				group.getGroupId(), new long[] {userId});
 		}
 		else if (className.equals(Organization.class.getName()) &&
-					!user.isDefaultUser()) {
+				 !user.isDefaultUser()) {
 
 			// Resources
 
 			ResourceLocalServiceUtil.addResources(
 				group.getCompanyId(), 0, 0, Group.class.getName(),
 				group.getGroupId(), false, false, false);
-
 		}
 
 		return group;
@@ -328,9 +326,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			ResourceLocalServiceUtil.deleteResource(resource);
 		}
 
+		String className = PortalUtil.getClassName(group.getClassNameId());
+
 		if (((group.getClassNameId() <= 0) && (group.getClassPK() <= 0)) ||
-			(PortalUtil.getClassName(group.getClassNameId()).equals(
-				Organization.class.getName()))) {
+			(className.equals(Organization.class.getName()))) {
 
 			ResourceLocalServiceUtil.deleteResource(
 				group.getCompanyId(), Group.class.getName(),
@@ -422,6 +421,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return GroupUtil.findByC_C_C(companyId, classNameId, userGroupId);
 	}
 
+	public List getUserGroups(long userId)
+		throws PortalException, SystemException {
+
+		return UserUtil.getGroups(userId);
+	}
+
 	public List getUserGroupsGroups(List userGroups)
 		throws PortalException, SystemException {
 
@@ -436,11 +441,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return userGroupGroups;
-	}
-
-	public List getUserGroups(long userId)
-		throws SystemException, NoSuchUserException {
-		return UserUtil.getGroups(userId);
 	}
 
 	public boolean hasRoleGroup(long roleId, long groupId)

@@ -175,6 +175,7 @@
 <%@ page import="com.liferay.util.StateUtil" %>
 <%@ page import="com.liferay.util.TextFormatter" %>
 <%@ page import="com.liferay.util.Time" %>
+<%@ page import="com.liferay.util.UniqueList" %>
 <%@ page import="com.liferay.util.cal.CalendarUtil" %>
 <%@ page import="com.liferay.util.dao.hibernate.QueryUtil" %>
 <%@ page import="com.liferay.util.format.PhoneNumberUtil" %>

@@ -313,20 +313,33 @@ public class StringUtil {
 		}
 	}
 
-	public static String merge(List list) {
-		return merge(list, StringPool.COMMA);
-	}
-
-	public static String merge(List list, String delimiter) {
-		return merge((Object[])list.toArray(
-			new Object[list.size()]), delimiter);
-	}
-
-	public static String merge(Object[] array) {
+	public static String merge(boolean[] array) {
 		return merge(array, StringPool.COMMA);
 	}
 
-	public static String merge(Object[] array, String delimiter) {
+	public static String merge(boolean[] array, String delimiter) {
+		if (array == null) {
+			return null;
+		}
+
+		StringMaker sm = new StringMaker();
+
+		for (int i = 0; i < array.length; i++) {
+			sm.append(String.valueOf(array[i]).trim());
+
+			if ((i + 1) != array.length) {
+				sm.append(delimiter);
+			}
+		}
+
+		return sm.toString();
+	}
+
+	public static String merge(int[] array) {
+		return merge(array, StringPool.COMMA);
+	}
+
+	public static String merge(int[] array, String delimiter) {
 		if (array == null) {
 			return null;
 		}
@@ -349,6 +362,59 @@ public class StringUtil {
 	}
 
 	public static String merge(long[] array, String delimiter) {
+		if (array == null) {
+			return null;
+		}
+
+		StringMaker sm = new StringMaker();
+
+		for (int i = 0; i < array.length; i++) {
+			sm.append(String.valueOf(array[i]).trim());
+
+			if ((i + 1) != array.length) {
+				sm.append(delimiter);
+			}
+		}
+
+		return sm.toString();
+	}
+
+	public static String merge(short[] array) {
+		return merge(array, StringPool.COMMA);
+	}
+
+	public static String merge(short[] array, String delimiter) {
+		if (array == null) {
+			return null;
+		}
+
+		StringMaker sm = new StringMaker();
+
+		for (int i = 0; i < array.length; i++) {
+			sm.append(String.valueOf(array[i]).trim());
+
+			if ((i + 1) != array.length) {
+				sm.append(delimiter);
+			}
+		}
+
+		return sm.toString();
+	}
+
+	public static String merge(List list) {
+		return merge(list, StringPool.COMMA);
+	}
+
+	public static String merge(List list, String delimiter) {
+		return merge((Object[])list.toArray(
+			new Object[list.size()]), delimiter);
+	}
+
+	public static String merge(Object[] array) {
+		return merge(array, StringPool.COMMA);
+	}
+
+	public static String merge(Object[] array, String delimiter) {
 		if (array == null) {
 			return null;
 		}

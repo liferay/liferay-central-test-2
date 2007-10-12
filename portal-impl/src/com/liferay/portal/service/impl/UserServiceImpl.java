@@ -114,6 +114,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			String jobTitle, long organizationId, long locationId,
 			boolean sendEmail)
 		throws PortalException, SystemException {
+
 		return addUser(
 			companyId, autoPassword, password1, password2, autoScreenName,
 			screenName, emailAddress, locale, firstName, middleName, lastName,
@@ -395,6 +396,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			String msnSn, String skypeSn, String ymSn, String jobTitle,
 			long organizationId, long locationId)
 		throws PortalException, SystemException {
+
 		return updateUser(
 			userId, password, screenName, emailAddress, languageId, timeZoneId,
 			greeting, comments, firstName, middleName, lastName, prefixId,
@@ -448,8 +450,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 
-		checkPermission(
-			userId, user.getOrganizationIds(), actionId);
+		checkPermission(userId, user.getOrganizationIds(), actionId);
 	}
 
 	protected void checkPermission(

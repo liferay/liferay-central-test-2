@@ -54,8 +54,8 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 	}
 
 	public boolean contains(
-		PermissionChecker permissionChecker, long organizationId,
-		String actionId)
+			PermissionChecker permissionChecker, long organizationId,
+			String actionId)
 		throws PortalException, SystemException {
 
 		PermissionCheckerImpl permissionCheckerImpl =
@@ -83,9 +83,9 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 			return false;
 		}
 		else if (actionId.endsWith("_USER")){
-
 			while (organizationId !=
 						OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+
 				Organization organization =
 					OrganizationLocalServiceUtil.getOrganization(
 						organizationId);
@@ -101,7 +101,6 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 
 					return true;
 				}
-
 			}
 
 			return false;
@@ -112,7 +111,7 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 	}
 
 	protected boolean hasGroupAdministratePermission(
-		PermissionChecker permissionChecker, long organizationId)
+			PermissionChecker permissionChecker, long organizationId)
 		throws SystemException, PortalException {
 
 		if (organizationId <= 0) {
@@ -136,8 +135,9 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 
 			return true;
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 }

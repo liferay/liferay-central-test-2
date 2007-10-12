@@ -340,38 +340,24 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td>
-				<liferay-ui:message key="edit-pages-for-community" />: <%= liveGroup.getName() %>
-			</td>
-			<td align="right">
-				&laquo; <a href="<%= redirect %>"><liferay-ui:message key="back" /></a>
-			</td>
-		</tr>
-		</table>
+		<div>
+			<liferay-ui:message key="edit-pages-for-community" />: <%= liveGroup.getName() %>
+		</div>
 
 		<br />
 	</c:if>
 
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td>
-				<c:choose>
-					<c:when test="<%= liveGroup.isOrganization() %>">
-						<liferay-ui:message key='<%= "edit-pages-for-" + (organization.isRoot() ? "organization" : "location" ) %>' />: <%= organization.getName() %>
-					</c:when>
-					<c:when test="<%= liveGroup.isUser() %>">
-						<liferay-ui:message key="edit-pages-for-user" />: <%= user2.getFullName() %>
-					</c:when>
-				</c:choose>
-			</td>
-			<td align="right">
-				&laquo; <a href="<%= redirect %>"><liferay-ui:message key="back" /></a>
-			</td>
-		</tr>
-		</table>
+		<div>
+			<c:choose>
+				<c:when test="<%= liveGroup.isOrganization() %>">
+					<liferay-ui:message key='<%= "edit-pages-for-" + (organization.isRoot() ? "organization" : "location" ) %>' />: <%= organization.getName() %>
+				</c:when>
+				<c:when test="<%= liveGroup.isUser() %>">
+					<liferay-ui:message key="edit-pages-for-user" />: <%= user2.getFullName() %>
+				</c:when>
+			</c:choose>
+		</div>
 
 		<br />
 	</c:if>
@@ -388,6 +374,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 			param="tabs1"
 			value="<%= tabs1 %>"
 			url="<%= currentURL %>"
+			backURL="<%= redirect %>"
 		/>
 	</c:if>
 </c:if>

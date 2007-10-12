@@ -212,7 +212,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 <br /><br />
 
-<%= LanguageUtil.get(pageContext, "if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order") %>
+<liferay-ui:message key="if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order" />
 
 <br /><br />
 

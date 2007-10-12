@@ -45,22 +45,22 @@ else if (organizations.size() == 0) {
 	searchContainer.setEmptyResultsMessage("none-of-the-regular-organizations-of-the-user-have-valid-associated-locations");
 }
 else {
-	//out.println(LanguageUtil.format("showing-locations-valid-for-x", ListUtil.toString(organizations, "name", ", "));
-	searchFilter = "Filter by locations valid for: " + ListUtil.toString(organizations, "name", ", ");
+	searchFilter = LanguageUtil.format(pageContext, "filter-by-locations-valid-for", ListUtil.toString(organizations, "name", ", "));
 }
 
 total = 0;
 results = new UniqueList();
 
-for (Iterator iterator = organizations.iterator(); iterator.hasNext();) {
-	Organization organization = (Organization) iterator.next();
+Iterator itr = organizations.iterator();
+
+while (itr.hasNext()) {
+	Organization organization = (Organization)itr.next();
 
 	if (organization.isLocation()) {
 		continue;
 	}
 
-	results.addAll(searchBottomUpRecursiveOrganizations(company.getCompanyId(), organization, searchTerms, searchContainer));
-
+	results.addAll(searchBottomUpRecursiveOrganizations(company.getCompanyId(), organization, searchContainer, searchTerms));
 }
 
 total = results.size();
@@ -68,17 +68,15 @@ results = results.subList(searchContainer.getStart(), Math.min(results.size(), s
 %>
 
 <%!
-public List searchBottomUpRecursiveOrganizations(
-	long companyId, Organization organization, OrganizationSearchTerms searchTerms, SearchContainer searchContainer)
-	throws PortalException, SystemException {
+public List searchBottomUpRecursiveOrganizations(long companyId, Organization organization, SearchContainer searchContainer, OrganizationSearchTerms searchTerms) throws Exception {
 
-	// Bottom up recursive calculation of parent organizations and
-	// associated locations
+	// Bottom up recursive calculation of parent organizations and associated
+	// locations
 
 	List organizations = null;
 
 	if (searchTerms.isAdvancedSearch()) {
-		organizations = OrganizationLocalServiceUtil.search(companyId, organization.getOrganizationId(), searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), 0, 10000, new OrganizationNameComparator(true));
+		organizations = OrganizationLocalServiceUtil.search(companyId, organization.getOrganizationId(), searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), 0, QueryUtil.ALL_POS, new OrganizationNameComparator(true));
 	}
 	else {
 		organizations = OrganizationLocalServiceUtil.search(companyId, organization.getOrganizationId(), searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchContainer.getStart(), searchContainer.getEnd(), new OrganizationNameComparator(true));
@@ -89,7 +87,7 @@ public List searchBottomUpRecursiveOrganizations(
 	if (parentOrganizationId != OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
 		Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(parentOrganizationId);
 
-		organizations.addAll(searchBottomUpRecursiveOrganizations(companyId, parentOrganization, searchTerms, searchContainer));
+		organizations.addAll(searchBottomUpRecursiveOrganizations(companyId, parentOrganization, searchContainer, searchTerms));
 	}
 
 	return organizations;

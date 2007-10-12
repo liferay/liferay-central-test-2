@@ -106,7 +106,7 @@ breadcrumbsURL.setParameter("redirect", redirect);
 breadcrumbsURL.setParameter("tabs2", tabs2);
 breadcrumbsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
-String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + LanguageUtil.get(pageContext, "communities") + "</a> &raquo; ";
+String breadcrumbs = "<a href=\"" + redirect + "\">" + LanguageUtil.get(pageContext, "communities") + "</a> &raquo; ";
 
 breadcrumbsURL.setParameter("struts_action", "/communities/edit_user_permissions");
 

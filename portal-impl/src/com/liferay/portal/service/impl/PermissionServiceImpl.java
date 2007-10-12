@@ -139,7 +139,7 @@ public class PermissionServiceImpl
 	}
 
 	public void setUserPermissions(
-			long userId, long groupId, String[] actionIds,long resourceId)
+			long userId, long groupId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
