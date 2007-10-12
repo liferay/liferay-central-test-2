@@ -99,82 +99,88 @@
 	</span>
 </c:if>
 
-
 <div class="lfr-portal-login">
-<form action="<%= themeDisplay.getPathMain() %>/portal/login" class="uni-form" method="post" name="fm1">
-<input name="<%= Constants.CMD %>" type="hidden" value="already-registered" />
-<input name="<%= sectionParam %>" type="hidden" value="already-registered" />
-<input name="redirect" type="hidden" value="<%= redirect %>" />
+	<form action="<%= themeDisplay.getPathMain() %>/portal/login" class="uni-form" method="post" name="fm1">
+	<input name="<%= Constants.CMD %>" type="hidden" value="already-registered" />
+	<input name="<%= sectionParam %>" type="hidden" value="already-registered" />
+	<input name="redirect" type="hidden" value="<%= redirect %>" />
 
-<%
-String login = LoginAction.getLogin(request, "login", company);
-String password = StringPool.BLANK;
-boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
-%>
+	<%
+	String login = LoginAction.getLogin(request, "login", company);
+	String password = StringPool.BLANK;
+	boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
+	%>
 
-<input id="rememberMe" name="rememberMe" type="hidden" value="<%= rememberMe %>" />
+	<input id="rememberMe" name="rememberMe" type="hidden" value="<%= rememberMe %>" />
 
-<fieldset class="block-labels">
-	<c:choose>
-		<c:when test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
-			<legend><liferay-ui:message key="sign-in-with-a-regular-account" /></legend>
-		</c:when>
-		<c:otherwise>
-			<legend><liferay-ui:message key="sign-in" /></legend>
-		</c:otherwise>
-	</c:choose>
+	<fieldset class="block-labels">
+		<c:choose>
+			<c:when test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
+				<legend><liferay-ui:message key="sign-in-with-a-regular-account" /></legend>
+			</c:when>
+			<c:otherwise>
+				<legend><liferay-ui:message key="sign-in" /></legend>
+			</c:otherwise>
+		</c:choose>
 
-	<div class="ctrl-holder">
-		<label for="login"><liferay-ui:message key="login" /></label>
-		<input class="liferay-input-text" id="login" name="login" type="text" value="<%= login %>" />
-	</div>
-	<div class="ctrl-holder">
-		<label for='<%= SessionParameters.get(request, "password") %>'><liferay-ui:message key="password" /></label>
-		<input class="liferay-input-text" id="<%= SessionParameters.get(request, "password") %>" name="<%= SessionParameters.get(request, "password") %>" type="password" value="<%= password %>" />
-	</div>
-
-	<c:if test="<%= company.isAutoLogin() && !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_DISABLED)) %>">
-		<div class="ctrl-holder inline-label">
-			<label for="rememberMeCheckbox"><liferay-ui:message key="remember-me" /></label>
-			<input <%= rememberMe ? "checked=\"checked\"" : "" %> id="rememberMeCheckbox" type="checkbox" />
+		<div class="ctrl-holder">
+			<label for="login"><liferay-ui:message key="login" /></label>
+			<input class="liferay-input-text" id="login" name="login" type="text" value="<%= login %>" />
 		</div>
-	</c:if>
 
-	<div class="button-holder">
-		<input type="submit" value="<liferay-ui:message key="sign-in" />" />
-	</div>
-</fieldset>
-</form>
+		<div class="ctrl-holder">
+			<label for='<%= SessionParameters.get(request, "password") %>'><liferay-ui:message key="password" /></label>
+			<input class="liferay-input-text" id="<%= SessionParameters.get(request, "password") %>" name="<%= SessionParameters.get(request, "password") %>" type="password" value="<%= password %>" />
+		</div>
+
+		<c:if test="<%= company.isAutoLogin() && !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_DISABLED)) %>">
+			<div class="ctrl-holder inline-label">
+				<label for="rememberMeCheckbox"><liferay-ui:message key="remember-me" /></label>
+				<input <%= rememberMe ? "checked=\"checked\"" : "" %> id="rememberMeCheckbox" type="checkbox" />
+			</div>
+		</c:if>
+
+		<div class="button-holder">
+			<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+		</div>
+	</fieldset>
+
+	</form>
+
+	<c:if test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
+		<form action="<%= themeDisplay.getPathMain() %>/portal/open_id_request" class="uni-form" method="post" name="fm2">
+
+		<fieldset class="block-labels">
+			<legend><liferay-ui:message key="sign-in-with-an-open-id-provider" /></legend>
+
+			<div class="ctrl-holder">
+				<label for="openId"><liferay-ui:message key="open-id" /></label>
+				<input class="openid_login" id="openId" name="openId" style="width: 150px;" type="text" />
+			</div>
+
+			<div class="button-holder">
+				<input type="submit" value="<liferay-ui:message key="sign-in" />" />
+			</div>
+		</fieldset>
+
+		</form>
+	</c:if>
+</div>
+
 <script type="text/javascript">
 	jQuery(
 		function() {
 			jQuery('#rememberMeCheckbox').click(
 				function() {
 					var checked = 'off';
+
 					if (this.checked) {
 						checked = 'on';
 					}
+
 					jQuery('#rememberMe').val(checked);
 				}
 			);
 		}
 	);
 </script>
-<c:if test="<%= OpenIdUtil.isEnabled(company.getCompanyId()) %>">
-
-<form action="<%= themeDisplay.getPathMain() %>/portal/open_id_request" class="uni-form" method="post" name="fm2">
-<fieldset class="block-labels">
-	<legend><liferay-ui:message key="sign-in-with-an-open-id-provider" /></legend>
-
-	<div class="ctrl-holder">
-		<label for="openId"><liferay-ui:message key="open-id" /></label>
-		<input class="openid_login" id="openId" name="openId" style="width: 150px;" type="text" />
-	</div>
-	<div class="button-holder">
-		<input type="submit" value="<liferay-ui:message key="sign-in" />" />
-	</div>
-</fieldset>
-</form>
-
-</c:if>
-</div>

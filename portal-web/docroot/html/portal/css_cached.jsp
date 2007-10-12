@@ -38,15 +38,15 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	margin-bottom: 8px;
 }
 
-.portal-add-content img{
+.portal-add-content img {
 	vertical-align: middle;
 }
 
-.portal-add-content table td{
+.portal-add-content table td {
 	padding: 0 5px;
 }
 
-.portal-add-content table td{
+.portal-add-content table td {
 	padding: 0 5px;
 }
 
@@ -62,8 +62,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 .lfr-color-picker {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/color_picker/picker_container_bg.png);
-	font-family: Arial,Helvetica,sans-serif;
-	font-size: 11px;
+	font: 11px Arial,Helvetica,sans-serif;
 	height: 192px;
 	position: relative;
 	width: 305px;
@@ -314,6 +313,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	top: 3px;
 	width: 16px;
 }
+
 .js .interactive-mode .my-places .show-my-places ul li.public a.add-page:hover, .js .interactive-mode .my-places .show-my-places ul li.private a.add-page:hover {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/dock/page_settings.png) no-repeat;
 	padding: 0;
@@ -367,8 +367,8 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 #portlet-set-properties .uni-form .text-input {
-	width: 80px;
 	margin-right: 5px;
+	width: 80px;
 }
 
 #portlet-set-properties .uni-form fieldset.col {
@@ -404,15 +404,18 @@ response.setContentType(ContentTypes.TEXT_CSS);
 }
 
 #portlet-set-properties .uni-form #custom-css {
-	width: 400px;
 	height: 300px;
+	width: 400px;
 }
+
 #portlet-set-properties .form-hint {
 	float: none;
 }
+
 #portlet-set-properties .lfr-bg-image-properties {
 	display: none;
 }
+
 #portlet-set-properties #border-note {
 	display: none;
 	margin-top: 10px;
@@ -499,12 +502,12 @@ ul.gamma .tree-item-hover {
 .lfr-portal-login {
 }
 
-.lfr-portal-login:after{
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
+.lfr-portal-login:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
 }
 
 .ie .lfr-portal-login {
@@ -513,8 +516,8 @@ ul.gamma .tree-item-hover {
 
 .lfr-portal-login form {
 	float: left;
-	width: 300px;
 	margin-right: 10px;
+	width: 300px;
 }
 
 .lfr-portal-login fieldset {
@@ -529,38 +532,39 @@ ul.gamma .tree-item-hover {
 	padding-top: 0;
 }
 
-
 /* ---------- Tag selector styling ---------- */
+
 .lfr-tag-select-container {
+	height: 300px;
 	position: relative;
 	width: 400px;
-	height: 300px;
 }
-.lfr-tag-container{
-	width: 395px;
+
+.lfr-tag-container {
 	height: 260px;
 	overflow: auto;
+	width: 395px;
 }
 
 .lfr-tag-container label {
-	display: block;
-	width: 25%;
 	cursor: pointer;
+	display: block;
 	float: left;
 	margin-bottom: 5px;
-	white-space: pre;
-	overflow: hidden;
 	margin-right: 5px;
+	overflow: hidden;
+	white-space: pre;
+	width: 25%;
 }
 
 .lfr-tag-container label input {
 	margin-right: 5px;
 }
 
-.lfr-tag-select-container .save-button{
-	position: absolute;
+.lfr-tag-select-container .save-button {
 	bottom: 0;
 	left: 0;
+	position: absolute;
 }
 
 /* ---------- Generic styling ---------- */
@@ -593,8 +597,8 @@ ul.gamma .tree-item-hover {
 
 .ie6 .popup-alert-notice, .ie6 .popup-alert-warning {
 	bottom: auto;
-  	left: expression( ( LFR_IGNORE_ME2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) + 'px' );
-  	position: absolute;
+	left: expression( ( LFR_IGNORE_ME2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) + 'px' );
+	position: absolute;
 	right: auto;
 	top: expression( ( LFR_IGNORE_ME = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) + 'px' );
 }
@@ -699,11 +703,7 @@ ul.gamma .tree-item-hover {
 	float: right;
 }
 
-<%--.js .page-iterator-submit {
-	display: none;
-}--%>
-
-.taglib-page-iterator .search-pages .page-links a, .taglib-page-iterator .search-pages .page-links span {
+    .taglib-page-iterator .search-pages .page-links a, .taglib-page-iterator .search-pages .page-links span {
 	background: url() no-repeat 0 0;
 	border-left: 1px solid #ccc;
 	padding: 2px 15px;
@@ -815,8 +815,8 @@ ul.gamma .tree-item-hover {
 .portlet-rss-header {
 	cursor: default;
 	font-weight: bold;
-	padding: 2px 5px 2px 5px;
 	margin-top: 2px;
+	padding: 2px 5px;
 }
 
 /* ---------- jQuery plugins ---------- */
@@ -838,11 +838,11 @@ ul.gamma .tree-item-hover {
 /* ----------- OpenID ---------- */
 
 input[type="text"].openid_login {
-   background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.png) no-repeat;
-   background-color: #fff;
-   background-position: 0 50%;
-   color: #000;
-   padding-left: 18px;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/common/openid.png) no-repeat;
+	background-color: #fff;
+	background-position: 0 50%;
+	color: #000;
+	padding-left: 18px;
 }
 
 .ie6 input.text.openid_login {
