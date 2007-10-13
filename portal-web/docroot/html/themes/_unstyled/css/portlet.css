@@ -233,3 +233,34 @@
 
 .restricted .col-1 {
 }
+
+/* ---------- Miscellaneous component styles ---------- */
+
+/* ---------- Actions button ---------- */
+
+.lfr-actions {
+}
+
+.lfr-actions ul {
+}
+
+.lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
+}
+
+.lfr-actions .lfr-trigger {
+}
+
+.lfr-actions.visible .lfr-trigger {
+}
+
+.lfr-actions.visible .lfr-trigger strong {
+}
+
+.lfr-actions .lfr-trigger strong span {
+}
+
+.lfr-actions .lfr-trigger li {
+}
+
+.lfr-actions .lfr-trigger li.last {
+}

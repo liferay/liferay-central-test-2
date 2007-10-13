@@ -659,6 +659,92 @@ ul.gamma .tree-item-hover {
 	margin: 15px auto;
 }
 
+/* ---------- Taglib action bar ---------- */
+
+.lfr-actions {
+	float: right;
+	text-align: left;
+}
+
+.lfr-actions.visible {
+	position: relative;
+}
+
+.lfr-actions ul {
+	display: none;
+	bottom: 0%;
+	position: absolute;
+	right: 100%;
+	z-index: 99999;
+}
+
+.lfr-actions.visible ul {
+	display: block;
+}
+
+.lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/common/button_bg.png) no-repeat;
+}
+
+.lfr-actions .lfr-trigger {
+	background-position: 100% -42px;
+	cursor: pointer;
+	padding-right: 3px;
+}
+
+.ie6 .lfr-actions {
+	height: 15px;
+}
+
+.lfr-actions .lfr-trigger strong {
+	display: block;
+	padding: 2px 0 3px;
+	text-align: center;
+}
+
+.ie6 .lfr-actions .lfr-trigger strong {
+	display: inline-block;
+}
+
+.lfr-actions.visible .lfr-trigger {
+	background-position: 100% 100%;
+}
+
+.lfr-actions.visible .lfr-trigger strong {
+	background-position: 0 -21px;
+}
+
+.lfr-actions .lfr-trigger strong span {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/common/action.png) no-repeat 5px 50%;
+	padding: 2px 10px 2px 25px;
+	white-space: nowrap;
+}
+
+.lfr-actions .lfr-trigger li {
+	background: #fff;
+	border-bottom: 1px solid #99b6db;
+	padding: 5px;
+}
+
+.lfr-actions .lfr-trigger li.last {
+	border-bottom: none;
+}
+
+.lfr-actions .lfr-trigger li a {
+	display: block;
+	position: relative;
+	padding-left: 20px;
+}
+
+.lfr-actions .lfr-trigger li a img {
+	position: absolute;
+	left: 0;
+}
+
+.ie6 .lfr-actions .lfr-trigger li a img {
+	left: -20px;
+}
+
 /* ---------- Taglib discussion thread ---------- */
 
 .taglib-discussion td img {
@@ -703,7 +789,7 @@ ul.gamma .tree-item-hover {
 	float: right;
 }
 
-    .taglib-page-iterator .search-pages .page-links a, .taglib-page-iterator .search-pages .page-links span {
+.taglib-page-iterator .search-pages .page-links a, .taglib-page-iterator .search-pages .page-links span {
 	background: url() no-repeat 0 0;
 	border-left: 1px solid #ccc;
 	padding: 2px 15px;

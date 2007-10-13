@@ -330,3 +330,46 @@
 	background-repeat: no-repeat;
 	padding-left: 2.8em;
 }
+
+/* ---------- Miscellaneous component styles ---------- */
+
+/* ---------- Actions button ---------- */
+
+.lfr-actions {
+}
+
+.lfr-actions ul {
+	background: #c9ddf6;
+	border: 3px double #99b6db;
+	border-left-color: #9ebae1;
+	border-top-color: #9ebae1;
+}
+
+.lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
+	background: url(../images/common/button_bg.png) no-repeat;
+}
+
+.lfr-actions .lfr-trigger {
+	background-position: 100% -42px;
+}
+
+.lfr-actions.visible .lfr-trigger {
+	background-position: 100% 100%;
+}
+
+.lfr-actions.visible .lfr-trigger strong {
+	background-position: 0 -21px;
+}
+
+.lfr-actions .lfr-trigger strong span {
+	background: url(../images/common/action.png) no-repeat 5px 50%;
+}
+
+.lfr-actions .lfr-trigger li {
+	border-bottom: 1px solid #99b6db;
+	background: #fff;
+}
+
+.lfr-actions .lfr-trigger li.last {
+	border-bottom: none;
+}

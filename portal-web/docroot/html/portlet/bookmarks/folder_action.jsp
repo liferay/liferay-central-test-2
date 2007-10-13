@@ -29,7 +29,7 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 BookmarksFolder folder = (BookmarksFolder)row.getObject();
 %>
-
+<liferay-ui:icon-menu>
 <c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/bookmarks/edit_folder" />
@@ -61,3 +61,4 @@ BookmarksFolder folder = (BookmarksFolder)row.getObject();
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />
 </c:if>
+</liferay-ui:icon-menu>
