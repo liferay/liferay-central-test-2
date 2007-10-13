@@ -121,6 +121,10 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 						if (pagesIteratorBegin < 1) {
 							pagesIteratorBegin = 1;
 						}
+
+						if (pagesIteratorEnd > pages) {
+							pagesIteratorEnd = pages;
+						}
 					}
 
 					for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
