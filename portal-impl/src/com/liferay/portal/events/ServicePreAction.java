@@ -23,6 +23,7 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.LayoutPermissionException;
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -534,8 +535,19 @@ public class ServicePreAction extends Action {
 			if ((previousGroupId != null) &&
 				(previousGroupId.longValue() != layoutGroupId)) {
 
-				Group previousGroup = GroupLocalServiceUtil.getGroup(
-					previousGroupId.longValue());
+				Group previousGroup = null;
+
+				try {
+					previousGroup = GroupLocalServiceUtil.getGroup(
+						previousGroupId.longValue());
+				}
+				catch (NoSuchGroupException nsge) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(nsge);
+					}
+
+					return layouts;
+				}
 
 				Properties props = previousGroup.getTypeSettingsProperties();
 
