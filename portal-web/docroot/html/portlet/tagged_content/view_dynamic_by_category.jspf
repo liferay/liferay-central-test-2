@@ -19,7 +19,7 @@ for (int i = 0; i < categoryEntries.size(); i++) {
 		tagLabel = StringUtil.upperCaseFirstLetter(categoryEntry.getName());
 	}
 
-	String[] allEntries = ArrayUtil.append(entries, new String[]{categoryEntry.getName()});
+	String[] allEntries = ArrayUtil.append(entries, new String[] {categoryEntry.getName()});
 
 	long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), allEntries);
 	long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
