@@ -59,7 +59,7 @@ public class FindRecentPostsAction extends Action {
 			PortletURL portletURL = new PortletURLImpl(
 				req, PortletKeys.MESSAGE_BOARDS, plid, false);
 
-			portletURL.setWindowState(WindowState.MAXIMIZED);
+			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
 
 			portletURL.setParameter("struts_action", "/message_boards/view");

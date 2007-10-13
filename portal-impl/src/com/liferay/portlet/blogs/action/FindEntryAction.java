@@ -80,7 +80,7 @@ public class FindEntryAction extends Action {
 			PortletURL portletURL = new PortletURLImpl(
 				req, PortletKeys.BLOGS, plid, false);
 
-			portletURL.setWindowState(WindowState.MAXIMIZED);
+			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
 			portletURL.setParameter("struts_action", "/blogs/view_entry");
 			portletURL.setParameter("entryId", String.valueOf(entryId));
