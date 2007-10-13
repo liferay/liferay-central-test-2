@@ -332,6 +332,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>label</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>toolTip</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -379,6 +384,21 @@
 		<attribute>
 			<name>message</name>
 			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>icon-menu</name>
+		<tag-class>com.liferay.taglib.ui.IconMenuTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>startPage</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>endPage</name>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>

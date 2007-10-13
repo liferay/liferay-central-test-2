@@ -22,36 +22,6 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
-
-<%
-boolean iconMenuTag = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon-menu"));
-
-String image = (String)request.getAttribute("liferay-ui:icon:image");
-
-String message = (String)request.getAttribute("liferay-ui:icon:message");
-
-if (message == null) {
-	message = StringUtil.replace(image, StringPool.UNDERLINE, StringPool.DASH);
-}
-
-String src = (String)request.getAttribute("liferay-ui:icon:src");
-
-if (Validator.isNull(src)) {
-	src = themeDisplay.getPathThemeImages() + "/common/" + image + ".png";
-}
-
-String url = (String)request.getAttribute("liferay-ui:icon:url");
-String target = (String)request.getAttribute("liferay-ui:icon:target");
-boolean label = iconMenuTag || GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:label"));
-boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:toolTip"));
-
-String details = null;
-
-if (toolTip) {
-	details = "onmousemove=\"ToolTip.show(event, this, '" + UnicodeLanguageUtil.get(pageContext, message) + "')\"";
-}
-else {
-	details = "title=\"" + LanguageUtil.get(pageContext, message) + "\"";
-}
-%>
+		</ul>
+	</li>
+</ul>

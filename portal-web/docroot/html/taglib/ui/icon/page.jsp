@@ -24,4 +24,4 @@
 
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
-<a href="<%= url %>" target="<%= target %>"><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /></a>
+<c:if test="<%= iconMenuTag %>"><li></c:if><a href="<%= url %>" target="<%= target %>"><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /><c:if test="<%= label %>"> <liferay-ui:message key="<%= message %>" /></c:if></a><c:if test="<%= iconMenuTag %>"></li></c:if>
