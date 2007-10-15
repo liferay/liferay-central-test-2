@@ -684,6 +684,7 @@ ul.gamma .tree-item-hover {
 
 .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/common/button_bg.png) no-repeat;
+	font-weight: normal;
 }
 
 .lfr-actions .lfr-trigger {
@@ -732,6 +733,7 @@ ul.gamma .tree-item-hover {
 
 .lfr-actions .lfr-trigger li a {
 	display: block;
+	font-weight: normal;
 	position: relative;
 	padding-left: 20px;
 }

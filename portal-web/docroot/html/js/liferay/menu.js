@@ -10,6 +10,7 @@ Liferay.Menu = new Class({
 			instance._run();
 		}
 	},
+
 	_run: function() {
 		var instance = this;
 
@@ -18,10 +19,12 @@ Liferay.Menu = new Class({
 		instance._trigger.hover(
 			function() {
 				var trigger = jQuery(this);
+
 				trigger.parent().addClass('visible');
 			},
 			function() {
 				var trigger = jQuery(this);
+
 				trigger.parent().removeClass('visible');
 			}
 		);
