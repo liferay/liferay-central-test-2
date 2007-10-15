@@ -339,10 +339,10 @@
 }
 
 .lfr-actions ul {
-	background: #c9ddf6;
-	border: 3px double #99b6db;
-	border-left-color: #9ebae1;
-	border-top-color: #9ebae1;
+	background: #C9DDF6;
+	border: 3px double #99B6DB;
+	border-left-color: #9EBAE1;
+	border-top-color: #9EBAE1;
 }
 
 .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
@@ -366,8 +366,8 @@
 }
 
 .lfr-actions .lfr-trigger li {
-	border-bottom: 1px solid #99b6db;
 	background: #fff;
+	border-bottom: 1px solid #99B6DB;
 }
 
 .lfr-actions .lfr-trigger li.last {
