@@ -18463,20 +18463,25 @@ Liferay.Menu = new Class({
 	_run: function() {
 		var instance = this;
 
-		instance._trigger.find('ul:first li:last-child').addClass('last');
+		var lastLi = instance._trigger.find('ul:first li:last-child');
 
-		instance._trigger.hover(
-			function() {
-				var trigger = jQuery(this);
+		if (lastLi.length) {
+			lastLi.addClass('last');
 
-				trigger.parent().addClass('visible');
-			},
-			function() {
-				var trigger = jQuery(this);
-
-				trigger.parent().removeClass('visible');
-			}
-		);
+			instance._trigger.hover(
+				function() {
+					var trigger = jQuery(this);
+					trigger.parent().addClass('visible');
+				},
+				function() {
+					var trigger = jQuery(this);
+					trigger.parent().removeClass('visible');
+				}
+			);
+		}
+		else {
+			instance._button.hide();
+		}
 	}
 });
 var Messaging = {

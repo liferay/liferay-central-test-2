@@ -13,11 +13,12 @@ Liferay.Menu = new Class({
 
 	_run: function() {
 		var instance = this;
-		
+
 		var lastLi = instance._trigger.find('ul:first li:last-child');
+
 		if (lastLi.length) {
 			lastLi.addClass('last');
-	
+
 			instance._trigger.hover(
 				function() {
 					var trigger = jQuery(this);
@@ -28,7 +29,8 @@ Liferay.Menu = new Class({
 					trigger.parent().removeClass('visible');
 				}
 			);
-		} else {
+		}
+		else {
 			instance._button.hide();
 		}
 	}
