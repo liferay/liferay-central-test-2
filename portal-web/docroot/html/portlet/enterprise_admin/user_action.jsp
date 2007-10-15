@@ -24,25 +24,25 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<liferay-ui:icon-menu>
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 
-		<%
-		UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search:searchContainer");
+	<%
+	UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
-		String redirect = searchContainer.getIteratorURL().toString();
+	String redirect = searchContainer.getIteratorURL().toString();
 
-		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-		ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+	ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-		User user2 = (User)row.getObject();
+	User user2 = (User)row.getObject();
 
-		long userId = user2.getUserId();
+	long userId = user2.getUserId();
 
-		long[] organizationIdsArray = user2.getOrganizationIds();
-		%>
+	long[] organizationIdsArray = user2.getOrganizationIds();
+	%>
 
+	<liferay-ui:icon-menu>
 		<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, organizationIdsArray, ActionKeys.UPDATE) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editUserURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
@@ -113,5 +113,5 @@
 				</c:choose>
 			</c:if>
 		</c:if>
-	</c:if>
-</liferay-ui:icon-menu>
+	</liferay-ui:icon-menu>
+</c:if>
