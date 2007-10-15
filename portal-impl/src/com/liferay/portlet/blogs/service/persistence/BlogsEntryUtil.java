@@ -266,6 +266,88 @@ public class BlogsEntryUtil {
 			categoryId, obc);
 	}
 
+	public static java.util.List findByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_U(groupId, userId);
+	}
+
+	public static java.util.List findByG_U(long groupId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_U(groupId, userId, begin, end);
+	}
+
+	public static java.util.List findByG_U(long groupId, long userId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_U(groupId, userId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsEntry findByG_U_First(
+		long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence().findByG_U_First(groupId, userId, obc);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsEntry findByG_U_Last(
+		long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence().findByG_U_Last(groupId, userId, obc);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsEntry[] findByG_U_PrevAndNext(
+		long entryId, long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence().findByG_U_PrevAndNext(entryId, groupId, userId,
+			obc);
+	}
+
+	public static java.util.List findByC_U(long companyId, long userId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_U(companyId, userId);
+	}
+
+	public static java.util.List findByC_U(long companyId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_U(companyId, userId, begin, end);
+	}
+
+	public static java.util.List findByC_U(long companyId, long userId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_U(companyId, userId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsEntry findByC_U_First(
+		long companyId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence().findByC_U_First(companyId, userId, obc);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsEntry findByC_U_Last(
+		long companyId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence().findByC_U_Last(companyId, userId, obc);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsEntry[] findByC_U_PrevAndNext(
+		long entryId, long companyId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence().findByC_U_PrevAndNext(entryId, companyId,
+			userId, obc);
+	}
+
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -310,6 +392,16 @@ public class BlogsEntryUtil {
 		getPersistence().removeByCategoryId(categoryId);
 	}
 
+	public static void removeByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByG_U(groupId, userId);
+	}
+
+	public static void removeByC_U(long companyId, long userId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByC_U(companyId, userId);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -327,6 +419,16 @@ public class BlogsEntryUtil {
 	public static int countByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCategoryId(categoryId);
+	}
+
+	public static int countByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_U(groupId, userId);
+	}
+
+	public static int countByC_U(long companyId, long userId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_U(companyId, userId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

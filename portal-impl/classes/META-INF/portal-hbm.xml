@@ -571,6 +571,17 @@
 		<property name="content" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="displayDate" />
 	</class>
+	<class name="com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl" table="BlogsStatsUser">
+		<cache usage="read-write" />
+		<id name="statsUserId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="entryCount" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="lastPostDate" />
+	</class>
 	<class name="com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl" table="BookmarksEntry">
 		<cache usage="read-write" />
 		<id name="entryId" type="long">

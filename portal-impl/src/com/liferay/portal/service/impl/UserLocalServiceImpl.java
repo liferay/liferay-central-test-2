@@ -108,6 +108,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
@@ -751,6 +752,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// External user ids
 
 		UserIdMapperLocalServiceUtil.deleteUserIdMappers(userId);
+
+		// Blogs
+
+		BlogsStatsUserLocalServiceUtil.deleteStatsUserByUserId(userId);
 
 		// Document library
 

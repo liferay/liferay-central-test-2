@@ -483,6 +483,11 @@
 		<struts-path>portlet_css</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>114</portlet-name>
+		<struts-path>recent_bloggers</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

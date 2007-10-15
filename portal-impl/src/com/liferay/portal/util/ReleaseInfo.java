@@ -66,6 +66,8 @@ public class ReleaseInfo {
 
 	public static int RELEASE_4_3_3_BUILD_NUMBER = 4303;
 
+	public static int RELEASE_4_3_4_BUILD_NUMBER = 4304;
+
 	public static final String getVersion() {
 		return version;
 	}

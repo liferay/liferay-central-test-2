@@ -9,7 +9,15 @@ create index IX_C49DD10C on BlogsCategory (parentCategoryId);
 
 create index IX_B0608DF4 on BlogsEntry (categoryId);
 create index IX_72EF6041 on BlogsEntry (companyId);
+create index IX_8CACE77B on BlogsEntry (companyId, userId);
 create index IX_81A50303 on BlogsEntry (groupId);
+create index IX_C07CA83D on BlogsEntry (groupId, userId);
+
+create index IX_90CDA39A on BlogsStatsUser (companyId, entryCount);
+create index IX_43840EEB on BlogsStatsUser (groupId);
+create index IX_28C78D5C on BlogsStatsUser (groupId, entryCount);
+create index IX_82254C25 on BlogsStatsUser (groupId, userId);
+create index IX_BB51F1D9 on BlogsStatsUser (userId);
 
 create index IX_443BDC38 on BookmarksEntry (folderId);
 

@@ -27,218 +27,37 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
-BlogsCategory category = (BlogsCategory)request.getAttribute(WebKeys.BLOGS_CATEGORY);
-
-long categoryId = BeanParamUtil.getLong(category, request, "categoryId", BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/blogs/view");
 portletURL.setParameter("tabs1", tabs1);
-portletURL.setParameter("categoryId", String.valueOf(categoryId));
 %>
 
-<%--<liferay-ui:tabs
-	names="entries,categories"
-	url="<%= portletURL.toString() %>"
-/>--%>
+<liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/blogs/search" /></liferay-portlet:renderURL>
 
-<liferay-ui:tabs
-	names="entries"
-	url="<%= portletURL.toString() %>"
-/>
+<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURLParams varImpl="searchURL" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(layout.getGroupId()) %>" />
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/blogs/search" /></liferay-portlet:renderURL>
+<%
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, null, null);
 
-<c:choose>
-	<c:when test='<%= tabs1.equals("entries") %>'>
-		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-		<liferay-portlet:renderURLParams varImpl="searchURL" />
-		<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
-		<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(layout.getGroupId()) %>" />
+int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue());
 
-		<%
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, null, null);
+searchContainer.setTotal(total);
 
-		int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue());
+List results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
 
-		searchContainer.setTotal(total);
+searchContainer.setResults(results);
+%>
 
-		List results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
+<%@ include file="/html/portlet/blogs/view_entries.jspf" %>
 
-		searchContainer.setResults(results);
-		%>
+</form>
 
-		<%@ include file="/html/portlet/blogs/view_entries.jspf" %>
-
-		</form>
-
-		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-			<script type="text/javascript">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-			</script>
-		</c:if>
-	</c:when>
-	<c:when test='<%= tabs1.equals("categories") %>'>
-
-		<%
-		List categoryIds = new ArrayList();
-
-		BlogsCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, categoryId);
-		%>
-
-		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-		<liferay-portlet:renderURLParams varImpl="searchURL" />
-		<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
-		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
-		<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= StringUtil.merge(categoryIds) %>" />
-
-		<c:if test="<%= category != null %>">
-			<div class="breadcrumbs">
-				<%= BlogsUtil.getBreadcrumbs(category, pageContext, renderRequest, renderResponse) %>
-			</div>
-		</c:if>
-
-		<%
-		List headerNames = new ArrayList();
-
-		headerNames.add("category");
-		headerNames.add("num-of-categories");
-		headerNames.add("num-of-entries");
-		headerNames.add(StringPool.BLANK);
-
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
-
-		int total = BlogsCategoryLocalServiceUtil.getCategoriesCount(categoryId);
-
-		searchContainer.setTotal(total);
-
-		List results = BlogsCategoryLocalServiceUtil.getCategories(categoryId, searchContainer.getStart(), searchContainer.getEnd());
-
-		searchContainer.setResults(results);
-
-		List resultRows = searchContainer.getResultRows();
-
-		for (int i = 0; i < results.size(); i++) {
-			BlogsCategory curCategory = (BlogsCategory)results.get(i);
-
-			ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
-
-			PortletURL rowURL = renderResponse.createRenderURL();
-
-			rowURL.setWindowState(WindowState.MAXIMIZED);
-
-			rowURL.setParameter("struts_action", "/blogs/view");
-			rowURL.setParameter("tabs1", "categories");
-			rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
-
-			// Name and description
-
-			StringMaker sm = new StringMaker();
-
-			sm.append(curCategory.getName());
-
-			if (Validator.isNotNull(curCategory.getDescription())) {
-				sm.append("<br />");
-				sm.append("<span style=\"font-size: xx-small;\">");
-				sm.append(curCategory.getDescription());
-				sm.append("</span>");
-			}
-
-			row.addText(sm.toString(), rowURL);
-
-			// Statistics
-
-			List subcategoryIds = new ArrayList();
-
-			subcategoryIds.add(new Long(curCategory.getCategoryId()));
-
-			BlogsCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, curCategory.getCategoryId());
-
-			int categoriesCount = subcategoryIds.size() - 1;
-			int entriesCount = BlogsEntryLocalServiceUtil.getCategoriesEntriesCount(subcategoryIds);
-
-			row.addText(String.valueOf(categoriesCount), rowURL);
-			row.addText(String.valueOf(entriesCount), rowURL);
-
-			// Action
-
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/blogs/category_action.jsp");
-
-			// Add result row
-
-			resultRows.add(row);
-		}
-
-		boolean showAddCategoryButton = BlogsCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.ADD_CATEGORY);
-		%>
-
-		<c:if test="<%= showAddCategoryButton || (results.size() > 0) %>">
-			<div>
-				<c:if test="<%= results.size() > 0 %>">
-					<input name="<portlet:namespace />keywords" size="30" type="text" />
-
-					<input type="submit" value="<liferay-ui:message key="search-categories" />" />
-				</c:if>
-
-				<c:if test="<%= showAddCategoryButton %>">
-					<input type="button" value="<liferay-ui:message key="add-category" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
-				</c:if>
-			</div>
-
-			<c:if test="<%= results.size() > 0 %>">
-				<br />
-			</c:if>
-		</c:if>
-
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		</form>
-
-		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-			<script type="text/javascript">
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-			</script>
-		</c:if>
-
-		<c:if test="<%= category != null %>">
-			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
-			<liferay-portlet:renderURLParams varImpl="searchURL" />
-			<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
-			<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
-			<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryId %>" />
-
-			<%
-			searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, null, null);
-
-			total = BlogsEntryLocalServiceUtil.getEntriesCount(categoryId);
-
-			searchContainer.setTotal(total);
-
-			results = BlogsEntryLocalServiceUtil.getEntries(categoryId, searchContainer.getStart(), searchContainer.getEnd());
-
-			searchContainer.setResults(results);
-			%>
-
-			<c:if test="<%= results.size() > 0 %>">
-				<br />
-
-				<liferay-ui:tabs
-					names="entries"
-					param="tabs2"
-				/>
-
-				<%@ include file="/html/portlet/blogs/view_entries.jspf" %>
-			</c:if>
-
-			</form>
-
-			<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-				<script type="text/javascript">
-					Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
-					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-				</script>
-			</c:if>
-		</c:if>
-	</c:when>
-</c:choose>
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
+	</script>
+</c:if>

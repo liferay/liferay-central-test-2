@@ -27,7 +27,12 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-BlogsCategory category = null;
+if (Validator.isNull(redirect)) {
+	PortletURL redirectURL = renderResponse.createRenderURL();
+
+	redirect = redirectURL.toString();
+}
+
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");

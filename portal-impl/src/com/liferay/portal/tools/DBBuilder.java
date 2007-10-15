@@ -58,7 +58,8 @@ public class DBBuilder {
 			_buildSQLFile("update-4.3.0-4.3.1");
 			_buildSQLFile("update-4.3.1-4.3.2");
 			_buildSQLFile("update-4.3.2-4.3.3");
-			_buildSQLFile("update-4.3.3-4.4.0");
+			_buildSQLFile("update-4.3.3-4.3.4");
+			_buildSQLFile("update-4.3.4-4.4.0");
 			_buildCreateFile();
 		}
 		catch (Exception e) {

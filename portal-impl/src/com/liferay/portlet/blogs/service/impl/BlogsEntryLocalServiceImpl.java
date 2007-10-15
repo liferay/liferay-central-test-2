@@ -43,11 +43,14 @@ import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
 import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
@@ -158,6 +161,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		else {
 			addEntryResources(entry, communityPermissions, guestPermissions);
 		}
+
+		// Statistics
+
+		BlogsStatsUserLocalServiceUtil.updateStatsUser(
+			entry.getGroupId(), userId, now);
 
 		// Tags
 
@@ -321,6 +329,19 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return BlogsEntryUtil.countByGroupId(groupId);
 	}
 
+	public List getGroupUserEntries(
+			long groupId, long userId, int begin, int end)
+		throws SystemException {
+
+		return BlogsEntryUtil.findByG_U(groupId, userId, begin, end);
+	}
+
+	public int getGroupUserEntriesCount(long groupId, long userId)
+		throws SystemException {
+
+		return BlogsEntryUtil.countByG_U(groupId, userId);
+	}
+
 	public List getNoAssetEntries() throws SystemException {
 		return BlogsEntryFinder.findByNoAssets();
 	}
@@ -433,6 +454,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		categoryId = getCategoryId(user.getCompanyId(), categoryId);
+		Date now = new Date();
 
 		Date displayDate = PortalUtil.getDate(
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
@@ -443,13 +465,24 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		BlogsEntry entry = BlogsEntryUtil.findByPrimaryKey(entryId);
 
-		entry.setModifiedDate(new Date());
+		entry.setModifiedDate(now);
 		entry.setCategoryId(categoryId);
 		entry.setTitle(title);
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 
 		BlogsEntryUtil.update(entry);
+
+		// Statistics
+
+		BlogsStatsUser statsUser = BlogsStatsUserUtil.fetchByG_U(
+			entry.getGroupId(), entry.getUserId());
+
+		if (statsUser != null) {
+			statsUser.setLastPostDate(now);
+
+			BlogsStatsUserUtil.update(statsUser);
+		}
 
 		// Tags
 

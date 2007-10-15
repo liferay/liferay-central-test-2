@@ -77,6 +77,61 @@
 		<finder name="CategoryId" return-type="Collection">
 			<finder-column name="categoryId" />
 		</finder>
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+		</finder>
+		<finder name="C_U" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="userId" />
+		</finder>
+	</entity>
+	<entity name="BlogsStatsUser" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="statsUserId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="entryCount" type="int" />
+		<column name="lastPostDate" type="Date" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="entryCount" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="G_U" return-type="BlogsStatsUser">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+		</finder>
+		<finder name="G_E" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="entryCount" comparator="!=" />
+		</finder>
+		<finder name="C_E" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="entryCount" comparator="!=" />
+		</finder>
 	</entity>
 	<exceptions>
 		<exception>CategoryName</exception>

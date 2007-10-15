@@ -247,6 +247,21 @@ public class BlogsEntryLocalServiceUtil {
 		return blogsEntryLocalService.getGroupEntriesCount(groupId);
 	}
 
+	public static java.util.List getGroupUserEntries(long groupId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getGroupUserEntries(groupId, userId,
+			begin, end);
+	}
+
+	public static int getGroupUserEntriesCount(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getGroupUserEntriesCount(groupId, userId);
+	}
+
 	public static java.util.List getNoAssetEntries()
 		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();

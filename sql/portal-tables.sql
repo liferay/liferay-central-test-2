@@ -64,6 +64,15 @@ create table BlogsEntry (
 	displayDate DATE null
 );
 
+create table BlogsStatsUser (
+	statsUserId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	entryCount INTEGER,
+	lastPostDate DATE null
+);
+
 create table BookmarksEntry (
 	entryId LONG not null primary key,
 	companyId LONG,

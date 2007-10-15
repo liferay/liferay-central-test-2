@@ -65,6 +65,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
@@ -276,6 +277,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Blogs
 
 		BlogsEntryLocalServiceUtil.deleteEntries(groupId);
+		BlogsStatsUserLocalServiceUtil.deleteStatsUserByGroupId(groupId);
 
 		// Bookmarks
 

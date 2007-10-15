@@ -6771,7 +6771,7 @@ public class ServiceBuilder {
 			if (Validator.isNotNull(createTableSQL)) {
 				_createSQLTables(sqlFile, createTableSQL, entity, true);
 
-				File updateSQLFile = new File(_sqlDir + "/update-4.3.3-4.4.0.sql");
+				File updateSQLFile = new File(_sqlDir + "/update-4.3.4-4.4.0.sql");
 
 				if (updateSQLFile.exists()) {
 					_createSQLTables(updateSQLFile, createTableSQL, entity, false);

@@ -1392,7 +1392,7 @@
 		<init-param>
 			<name>editStylesheet</name>
 			<value>classpath:/org/portletbridge/xsl/pages/edit.xsl</value>
-		</init-param>				
+		</init-param>
 		<init-param>
 			<name>helpStylesheet</name>
 			<value>classpath:/org/portletbridge/xsl/pages/help.xsl</value>
@@ -1538,7 +1538,7 @@
 			<preference>
 				<name>wsrp-service-url</name>
 				<value>http://portalstandards.oracle.com:80/portletapp/portlets</value>
-			</preference>			
+			</preference>
 			<preference>
 				<name>markup-endpoint</name>
 				<value>WSRPBaseService</value>
@@ -1566,7 +1566,7 @@
 			<preference>
 				<name>wsrp-service-url</name>
 				<value>http://localhost/c/wsrp</value>
-			</preference>			
+			</preference>
 			<preference>
 				<name>markup-endpoint</name>
 				<value>WSRPBaseService</value>
@@ -1683,7 +1683,7 @@
 	<portlet>
 		<portlet-name>79</portlet-name>
 		<display-name>Enterprise Admin</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>		
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
 			<value>/enterprise_admin/view</value>
@@ -1700,7 +1700,7 @@
 	<portlet>
 		<portlet-name>80</portlet-name>
 		<display-name>Organization Admin</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>		
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
 			<value>/organization_admin/view</value>
@@ -1717,7 +1717,7 @@
 	<portlet>
 		<portlet-name>81</portlet-name>
 		<display-name>Countdown</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>		
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>edit-action</name>
 			<value>/countdown/edit</value>
@@ -1944,7 +1944,7 @@
 	<portlet>
 		<portlet-name>99</portlet-name>
 		<display-name>Tags Admin</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>		
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
 			<value>/tags_admin/view</value>
@@ -1961,7 +1961,7 @@
 	<portlet>
 		<portlet-name>100</portlet-name>
 		<display-name>Invitation</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>		
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
 			<value>/invitation/view</value>
@@ -2301,6 +2301,29 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+	</portlet>
+	<portlet>
+		<portlet-name>114</portlet-name>
+		<display-name>Recent Bloggers</display-name>
+		<portlet-class>com.liferay.portlet.JSPPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/portlet/recent_bloggers/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
 	</portlet>
 	<custom-window-state>
 		<window-state>exclusive</window-state>

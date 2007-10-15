@@ -37,7 +37,7 @@ boolean showAddEntryButton = tabs1.equals("entries") && PortletPermissionUtil.co
 		</c:if>
 
 		<c:if test="<%= showAddEntryButton %>">
-			<input type="button" value="<liferay-ui:message key="add-entry" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+			<input type="button" value="<liferay-ui:message key="add-entry" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 		</c:if>
 	</div>
 

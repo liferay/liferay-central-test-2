@@ -27,23 +27,16 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-long breadcrumbsCategoryId = ParamUtil.getLong(request, "breadcrumbsCategoryId");
-
 long groupId = ParamUtil.getLong(request, "groupId");
-long userId = 0;
-String categoryIds = ParamUtil.getString(request, "categoryIds");
-long[] categoryIdsArray = StringUtil.split(categoryIds, 0L);
 
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/blogs/search" /></liferay-portlet:renderURL>
+<liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/blogs/search" /></liferay-portlet:renderURL>
 
 <form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <liferay-portlet:renderURLParams varImpl="searchURL" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
-<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
-<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryIds %>" />
 
 <liferay-ui:tabs
 	names="search"
@@ -53,17 +46,12 @@ String keywords = ParamUtil.getString(request, "keywords");
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
 portletURL.setParameter("struts_action", "/blogs/search");
-portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
-portletURL.setParameter("categoryIds", categoryIds);
 portletURL.setParameter("keywords", keywords);
 
 List headerNames = new ArrayList();
 
 headerNames.add("#");
-headerNames.add("category");
 headerNames.add("entry");
 headerNames.add("score");
 
@@ -72,7 +60,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 Hits hits = null;
 
 try {
-	hits = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), groupId, userId, categoryIdsArray, keywords);
+	hits = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), groupId, 0, null, keywords);
 
 	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 	int total = hits.getLength();
@@ -90,34 +78,18 @@ try {
 
 		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-		// Category and entry
+		// Entry
 
-		long categoryId = GetterUtil.getLong(doc.get("categoryId"), BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 		long entryId = GetterUtil.getLong(doc.get("entryId"));
-
-		String categoryName = LanguageUtil.get(pageContext, "not-available");
-
-		try {
-			if (categoryId != BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
-				BlogsCategory category = BlogsCategoryLocalServiceUtil.getCategory(categoryId);
-
-				categoryName = category.getName();
-			}
-		}
-		catch (NoSuchCategoryException nsce) {
-		}
 
 		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
-		rowURL.setWindowState(WindowState.MAXIMIZED);
-
 		rowURL.setParameter("struts_action", "/blogs/view_entry");
 		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("entryId", String.valueOf(entryId));
 
-		row.addText(categoryName, rowURL);
 		row.addText(entry.getTitle(), rowURL);
 
 		// Score

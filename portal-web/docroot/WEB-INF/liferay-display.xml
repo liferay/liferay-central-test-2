@@ -36,6 +36,7 @@
 		<portlet id="33" />
 		<portlet id="36" />
 		<portlet id="52" />
+		<portlet id="114" />
 	</category>
 	<category name="category.community">
 		<portlet id="11" />

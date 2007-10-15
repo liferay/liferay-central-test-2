@@ -84,6 +84,13 @@ public class DLFileRankLocalServiceUtil {
 		return dlFileRankLocalService.getFileRanks(groupId, userId);
 	}
 
+	public static java.util.List getFileRanks(long groupId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.getFileRanks(groupId, userId, begin, end);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
 		long groupId, long companyId, long userId, long folderId,
 		java.lang.String name)

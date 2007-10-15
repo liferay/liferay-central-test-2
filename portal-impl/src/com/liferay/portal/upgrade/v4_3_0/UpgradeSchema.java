@@ -63,6 +63,21 @@ public class UpgradeSchema extends UpgradeProcess {
 			com.liferay.portal.upgrade.v4_3_1.UpgradeSchema.class.getName());
 
 		upgradeProcess.upgrade();
+
+		upgradeProcess = (UpgradeProcess)InstancePool.get(
+			com.liferay.portal.upgrade.v4_3_2.UpgradeSchema.class.getName());
+
+		upgradeProcess.upgrade();
+
+		upgradeProcess = (UpgradeProcess)InstancePool.get(
+			com.liferay.portal.upgrade.v4_3_3.UpgradeSchema.class.getName());
+
+		upgradeProcess.upgrade();
+
+		upgradeProcess = (UpgradeProcess)InstancePool.get(
+			com.liferay.portal.upgrade.v4_3_4.UpgradeSchema.class.getName());
+
+		upgradeProcess.upgrade();
 	}
 
 	private static final String[] _OLD_TABLES = new String[] {

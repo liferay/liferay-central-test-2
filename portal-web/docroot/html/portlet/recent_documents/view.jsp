@@ -25,18 +25,18 @@
 <%@ include file="/html/portlet/recent_documents/init.jsp" %>
 
 <%
-List fileRanks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId.longValue(), user.getUserId());
+List fileRanks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId.longValue(), user.getUserId(), 0, SearchContainer.DEFAULT_DELTA);
 %>
 
 <c:choose>
-	<c:when test="<%= (fileRanks == null) || (fileRanks.size() == 0) %>">
+	<c:when test="<%= fileRanks.size() == 0 %>">
 		<liferay-ui:message key="there-are-no-recent-documents" />
 	</c:when>
 	<c:otherwise>
-		<table border="0" cellpadding="0" cellspacing="0">
+		<table class="liferay-table">
 
 		<%
-		for (int i = 0; i < fileRanks.size() && i < 5; i++) {
+		for (int i = 0; i < fileRanks.size(); i++) {
 			DLFileRank fileRank = (DLFileRank)fileRanks.get(i);
 
 			try {
@@ -52,7 +52,9 @@ List fileRanks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId.longValu
 		%>
 
 				<tr>
-					<td><a href="<%= rowURL.toString() %>"><img align="left" border="0" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileRank.getName()) %>.png" /><%= fileEntry.getTitle() %></a></td>
+					<td>
+						<a href="<%= rowURL.toString() %>"><img align="left" border="0" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileRank.getName()) %>.png" /><%= fileEntry.getTitle() %></a>
+					</td>
 				</tr>
 
 		<%

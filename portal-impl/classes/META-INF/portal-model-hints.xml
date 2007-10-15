@@ -570,6 +570,14 @@
 		</field>
 		<field name="displayDate" type="Date" />
 	</model>
+	<model name="com.liferay.portlet.blogs.model.BlogsStatsUser">
+		<field name="statsUserId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="entryCount" type="int" />
+		<field name="lastPostDate" type="Date" />
+	</model>
 	<model name="com.liferay.portlet.bookmarks.model.BookmarksEntry">
 		<field name="entryId" type="long" />
 		<field name="companyId" type="long" />

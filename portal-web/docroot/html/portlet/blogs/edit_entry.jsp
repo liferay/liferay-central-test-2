@@ -33,20 +33,6 @@ BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
-long categoryId = BeanParamUtil.getLong(entry, request, "categoryId", BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
-
-String categoryName = StringPool.BLANK;
-
-if (categoryId > 0) {
-	try {
-		BlogsCategory category = BlogsCategoryLocalServiceUtil.getCategory(categoryId);
-
-		categoryName = category.getName();
-	}
-	catch (NoSuchCategoryException nsce) {
-	}
-}
-
 String content = BeanParamUtil.getString(entry, request, "content");
 
 Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
@@ -68,18 +54,9 @@ if (entry != null) {
 		document.<portlet:namespace />fm.<portlet:namespace />content.value = parent.<portlet:namespace />editor.getHTML();
 		submitForm(document.<portlet:namespace />fm);
 	}
-
-	function <portlet:namespace />selectCategory(categoryId, categoryName) {
-		document.<portlet:namespace />fm.<portlet:namespace />categoryId.value = categoryId;
-
-		var nameEl = document.getElementById("<portlet:namespace />categoryName");
-
-		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/view" /><portlet:param name="tabs1" value="categories" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
-		nameEl.innerHTML = categoryName + "&nbsp;";
-	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
@@ -103,25 +80,6 @@ if (entry != null) {
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="title" />
 	</td>
 </tr>
-<%--<tr>
-	<td>
-		<liferay-ui:message key="category" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
-
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/view" /><portlet:param name="tabs1" value="categories" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
-		<%= categoryName %>
-		</a>
-
-		<input type="button" value="<liferay-ui:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/blogs/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>--%>
 <tr>
 	<td>
 		<liferay-ui:message key="display-date" />

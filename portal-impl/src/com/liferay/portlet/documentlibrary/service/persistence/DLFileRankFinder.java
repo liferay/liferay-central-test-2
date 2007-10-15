@@ -27,6 +27,7 @@ import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.Iterator;
 import java.util.List;
@@ -91,6 +92,12 @@ public class DLFileRankFinder {
 	public static List findByG_U(long groupId, long userId)
 		throws SystemException {
 
+		return findByG_U(groupId, userId, 0, QueryUtil.ALL_POS);
+	}
+
+	public static List findByG_U(long groupId, long userId, int begin, int end)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
@@ -107,7 +114,7 @@ public class DLFileRankFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return q.list();
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

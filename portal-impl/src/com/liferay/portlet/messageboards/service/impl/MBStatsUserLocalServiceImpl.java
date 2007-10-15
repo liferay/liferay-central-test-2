@@ -25,7 +25,6 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.service.base.MBStatsUserLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
@@ -84,23 +83,7 @@ public class MBStatsUserLocalServiceImpl
 	public void updateStatsUser(long groupId, long userId)
 		throws PortalException, SystemException {
 
-		update(groupId, userId);
-		update(GroupImpl.DEFAULT_PARENT_GROUP_ID, userId);
-	}
-
-	protected void update(long groupId, long userId)
-		throws PortalException, SystemException {
-
-		MBStatsUser statsUser = MBStatsUserUtil.fetchByG_U(groupId, userId);
-
-		if (statsUser == null) {
-			long statsUserId = CounterLocalServiceUtil.increment();
-
-			statsUser = MBStatsUserUtil.create(statsUserId);
-
-			statsUser.setGroupId(groupId);
-			statsUser.setUserId(userId);
-		}
+		MBStatsUser statsUser = getStatsUser(groupId, userId);
 
 		statsUser.setMessageCount(statsUser.getMessageCount() + 1);
 		statsUser.setLastPostDate(new Date());
