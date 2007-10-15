@@ -32,34 +32,36 @@ SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) row.getObject();
 String frameworkVersionId =	String.valueOf(frameworkVersion.getFrameworkVersionId());
 %>
 
-<c:if test="<%= SCFrameworkVersionPermission.contains(permissionChecker, frameworkVersion, ActionKeys.UPDATE) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-		<portlet:param name="struts_action" value="/software_catalog/edit_framework_version" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="frameworkVersionId" value="<%= frameworkVersionId %>" />
-	</portlet:renderURL>
+<liferay-ui:icon-menu>
+	<c:if test="<%= SCFrameworkVersionPermission.contains(permissionChecker, frameworkVersion, ActionKeys.UPDATE) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+			<portlet:param name="struts_action" value="/software_catalog/edit_framework_version" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="frameworkVersionId" value="<%= frameworkVersionId %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= editURL %>" />
-</c:if>
+		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+	</c:if>
 
-<c:if test="<%= SCFrameworkVersionPermission.contains(permissionChecker, frameworkVersion, ActionKeys.PERMISSIONS) %>">
-	<liferay-security:permissionsURL
-		modelResource="<%= SCFrameworkVersion.class.getName() %>"
-		modelResourceDescription="<%= frameworkVersion.getName() %>"
-		resourcePrimKey="<%= frameworkVersionId %>"
-		var="permissionsURL"
-	/>
+	<c:if test="<%= SCFrameworkVersionPermission.contains(permissionChecker, frameworkVersion, ActionKeys.PERMISSIONS) %>">
+		<liferay-security:permissionsURL
+			modelResource="<%= SCFrameworkVersion.class.getName() %>"
+			modelResourceDescription="<%= frameworkVersion.getName() %>"
+			resourcePrimKey="<%= frameworkVersionId %>"
+			var="permissionsURL"
+		/>
 
-	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
-</c:if>
+		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+	</c:if>
 
-<c:if test="<%= SCFrameworkVersionPermission.contains(permissionChecker, frameworkVersion, ActionKeys.DELETE) %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-		<portlet:param name="struts_action" value="/software_catalog/edit_framework_version" />
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="frameworkVersionId" value="<%= frameworkVersionId %>" />
-	</portlet:actionURL>
+	<c:if test="<%= SCFrameworkVersionPermission.contains(permissionChecker, frameworkVersion, ActionKeys.DELETE) %>">
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+			<portlet:param name="struts_action" value="/software_catalog/edit_framework_version" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="frameworkVersionId" value="<%= frameworkVersionId %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete url="<%= deleteURL %>" />
-</c:if>
+		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+	</c:if>
+</liferay-ui:icon-menu>

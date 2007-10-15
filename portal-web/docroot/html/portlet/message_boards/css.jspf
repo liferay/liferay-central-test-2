@@ -61,6 +61,7 @@
 	}
 
 	.message-board-message-container {
+		border: 1px solid #ccc;
 		margin: 5px 0 0 0;
 	}
 
@@ -74,7 +75,7 @@
 	}
 
 	.message-board-message-container td {
-		border: 1px solid #ccc;
+		border: none;
 	}
 
 	.message-board-thread-top {
@@ -87,7 +88,7 @@
 		text-align: right;
 	}
 
-	.message-board-user-info {
+	td.message-board-user-info {
 		border-right: 1px solid #ccc;
 	}
 
@@ -143,10 +144,6 @@
 
 	.message-board-tree {
 		vertical-align: middle;
-	}
-
-	.message-board-message-action {
-		white-space: nowrap;
 	}
 
 	.message-board-message-scroll {

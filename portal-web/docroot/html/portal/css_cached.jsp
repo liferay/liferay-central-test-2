@@ -736,6 +736,7 @@ ul.gamma .tree-item-hover {
 	font-weight: normal;
 	position: relative;
 	padding-left: 20px;
+	text-decoration: none;
 }
 
 .lfr-actions .lfr-trigger li a img {

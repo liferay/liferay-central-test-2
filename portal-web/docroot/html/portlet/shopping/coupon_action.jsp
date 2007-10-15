@@ -30,19 +30,21 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 ShoppingCoupon coupon = (ShoppingCoupon)row.getObject();
 %>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-	<portlet:param name="struts_action" value="/shopping/edit_coupon" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="couponId" value="<%= String.valueOf(coupon.getCouponId()) %>" />
-</portlet:renderURL>
+<liferay-ui:icon-menu>
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:param name="struts_action" value="/shopping/edit_coupon" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="couponId" value="<%= String.valueOf(coupon.getCouponId()) %>" />
+	</portlet:renderURL>
 
-<liferay-ui:icon image="edit" url="<%= editURL %>" />
+	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-	<portlet:param name="struts_action" value="/shopping/edit_coupon" />
-	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="deleteCouponIds" value="<%= String.valueOf(coupon.getCouponId()) %>" />
-</portlet:actionURL>
+	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:param name="struts_action" value="/shopping/edit_coupon" />
+		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="deleteCouponIds" value="<%= String.valueOf(coupon.getCouponId()) %>" />
+	</portlet:actionURL>
 
-<liferay-ui:icon-delete url="<%= deleteURL %>" />
+	<liferay-ui:icon-delete url="<%= deleteURL %>" />
+</liferay-ui:icon-menu>

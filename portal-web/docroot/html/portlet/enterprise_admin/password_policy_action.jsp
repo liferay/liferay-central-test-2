@@ -34,43 +34,45 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 PasswordPolicy passwordPolicy = (PasswordPolicy)row.getObject();
 %>
 
-<c:if test="<%= PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.UPDATE) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL ">
-		<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
-	</portlet:renderURL>
+<liferay-ui:icon-menu>
+	<c:if test="<%= PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.UPDATE) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL ">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= editURL %>" />
-</c:if>
+		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+	</c:if>
 
-<c:if test="<%= PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.PERMISSIONS) %>">
-	<liferay-security:permissionsURL
-		modelResource="<%= PasswordPolicy.class.getName() %>"
-		modelResourceDescription="<%= passwordPolicy.getName() %>"
-		resourcePrimKey="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>"
-		var="permissionsURL"
-	/>
+	<c:if test="<%= PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.PERMISSIONS) %>">
+		<liferay-security:permissionsURL
+			modelResource="<%= PasswordPolicy.class.getName() %>"
+			modelResourceDescription="<%= passwordPolicy.getName() %>"
+			resourcePrimKey="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>"
+			var="permissionsURL"
+		/>
 
-	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
-</c:if>
+		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+	</c:if>
 
-<c:if test="<%= true %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy_assignments" />
-		<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
-	</portlet:renderURL>
+	<c:if test="<%= true %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy_assignments" />
+			<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
-</c:if>
+		<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
+	</c:if>
 
-<c:if test="<%= !passwordPolicy.getDefaultPolicy() && PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.DELETE) %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
-	</portlet:actionURL>
+	<c:if test="<%= !passwordPolicy.getDefaultPolicy() && PasswordPolicyPermissionUtil.contains(permissionChecker, passwordPolicy.getPasswordPolicyId(), ActionKeys.DELETE) %>">
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="passwordPolicyId" value="<%= String.valueOf(passwordPolicy.getPasswordPolicyId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete url="<%= deleteURL %>" />
-</c:if>
+		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+	</c:if>
+</liferay-ui:icon-menu>

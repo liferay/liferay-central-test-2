@@ -144,9 +144,7 @@
 										<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 									</portlet:renderURL>
 
-									<liferay-ui:icon image="reply" url="<%= replyURL %>" />
-
-									<a href="<%= replyURL.toString() %>"><liferay-ui:message key="reply" /></a>
+									<liferay-ui:icon image="reply" url="<%= replyURL %>" label="<%= true %>" />
 								</li>
 								<li>
 									<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="quoteURL">
@@ -158,9 +156,7 @@
 										<portlet:param name="quote" value="true" />
 									</portlet:renderURL>
 
-									<liferay-ui:icon image="quote" url="<%= quoteURL %>" />
-
-									<a href="<%= quoteURL.toString() %>"><liferay-ui:message key="reply-with-quote" /></a>
+									<liferay-ui:icon image="quote" message="reply-with-quote" url="<%= quoteURL %>" label="<%= true %>" />
 								</li>
 							</c:if>
 							<li>
@@ -169,14 +165,13 @@
 								String topHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView('0');";
 								%>
 
-								<liferay-ui:icon image="top" url="<%= topHREF %>" />
-
-								<a href="<%= topHREF %>"><liferay-ui:message key="top" /></a>
+								<liferay-ui:icon image="top" url="<%= topHREF %>" label="<%= true %>" />
 							</li>
 						</ul>
 				</c:if>
 				<div class="message-board-clear"></div>
 			</div>
+
 			<div class="message-board-thread-body">
 
 				<%
@@ -387,48 +382,50 @@
 
 	<c:if test="<%= editable %>">
 		<tr>
-			<td class="message-board-thread-bottom" valign="bottom" width="90%">
-				<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
-					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-						<portlet:param name="struts_action" value="/message_boards/edit_message" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
-					</portlet:renderURL>
+			<td class="message-board-thread-bottom" valign="bottom">
+				<liferay-ui:icon-menu>
+					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
+						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+							<portlet:param name="struts_action" value="/message_boards/edit_message" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
+						</portlet:renderURL>
 
-					<liferay-ui:icon image="edit" url="<%= editURL %>" />
-				</c:if>
+						<liferay-ui:icon image="edit" url="<%= editURL %>" />
+					</c:if>
 
-				<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">
-					<liferay-security:permissionsURL
-						modelResource="<%= MBMessage.class.getName() %>"
-						modelResourceDescription="<%= message.getSubject() %>"
-						resourcePrimKey="<%= String.valueOf(message.getMessageId()) %>"
-						var="permissionsURL"
-					/>
+					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">
+						<liferay-security:permissionsURL
+							modelResource="<%= MBMessage.class.getName() %>"
+							modelResourceDescription="<%= message.getSubject() %>"
+							resourcePrimKey="<%= String.valueOf(message.getMessageId()) %>"
+							var="permissionsURL"
+						/>
 
-					<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
-				</c:if>
+						<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+					</c:if>
 
-				<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) %>">
+					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) %>">
 
-					<%
-					PortletURL categoryURL = renderResponse.createRenderURL();
+						<%
+						PortletURL categoryURL = renderResponse.createRenderURL();
 
-					categoryURL.setWindowState(WindowState.MAXIMIZED);
+						categoryURL.setWindowState(WindowState.MAXIMIZED);
 
-					categoryURL.setParameter("struts_action", "/message_boards/view");
-					categoryURL.setParameter("categoryId", String.valueOf(message.getCategoryId()));
-					%>
+						categoryURL.setParameter("struts_action", "/message_boards/view");
+						categoryURL.setParameter("categoryId", String.valueOf(message.getCategoryId()));
+						%>
 
-					<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-						<portlet:param name="struts_action" value="/message_boards/edit_message" />
-						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-						<portlet:param name="redirect" value="<%= categoryURL.toString() %>" />
-						<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
-					</portlet:actionURL>
+						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+							<portlet:param name="struts_action" value="/message_boards/edit_message" />
+							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+							<portlet:param name="redirect" value="<%= categoryURL.toString() %>" />
+							<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
+						</portlet:actionURL>
 
-					<liferay-ui:icon-delete url="<%= deleteURL %>" />
-				</c:if>
+						<liferay-ui:icon-delete url="<%= deleteURL %>" />
+					</c:if>
+				</liferay-ui:icon-menu>
 			</td>
 		</tr>
 	</c:if>

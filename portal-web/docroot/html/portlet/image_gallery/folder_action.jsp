@@ -30,34 +30,36 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 IGFolder folder = (IGFolder)row.getObject();
 %>
 
-<c:if test="<%= IGFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-		<portlet:param name="struts_action" value="/image_gallery/edit_folder" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
-	</portlet:renderURL>
+<liferay-ui:icon-menu>
+	<c:if test="<%= IGFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+			<portlet:param name="struts_action" value="/image_gallery/edit_folder" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= editURL %>" />
-</c:if>
+		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+	</c:if>
 
-<c:if test="<%= IGFolderPermission.contains(permissionChecker, folder, ActionKeys.PERMISSIONS) %>">
-	<liferay-security:permissionsURL
-		modelResource="<%= IGFolder.class.getName() %>"
-		modelResourceDescription="<%= folder.getName() %>"
-		resourcePrimKey="<%= String.valueOf(folder.getFolderId()) %>"
-		var="permissionsURL"
-	/>
+	<c:if test="<%= IGFolderPermission.contains(permissionChecker, folder, ActionKeys.PERMISSIONS) %>">
+		<liferay-security:permissionsURL
+			modelResource="<%= IGFolder.class.getName() %>"
+			modelResourceDescription="<%= folder.getName() %>"
+			resourcePrimKey="<%= String.valueOf(folder.getFolderId()) %>"
+			var="permissionsURL"
+		/>
 
-	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
-</c:if>
+		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+	</c:if>
 
-<c:if test="<%= IGFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-		<portlet:param name="struts_action" value="/image_gallery/edit_folder" />
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
-	</portlet:actionURL>
+	<c:if test="<%= IGFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) %>">
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+			<portlet:param name="struts_action" value="/image_gallery/edit_folder" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete url="<%= deleteURL %>" />
-</c:if>
+		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+	</c:if>
+</liferay-ui:icon-menu>

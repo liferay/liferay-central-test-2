@@ -30,20 +30,22 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 WikiPage wikiPage = (WikiPage)row.getObject();
 %>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pageURL">
-	<portlet:param name="struts_action" value="/wiki/view_page" />
-	<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
-	<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
-</portlet:renderURL>
-
-<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="revertURL">
-		<portlet:param name="struts_action" value="/wiki/edit_page" />
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.REVERT %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
+<liferay-ui:icon-menu>
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pageURL">
+		<portlet:param name="struts_action" value="/wiki/view_page" />
 		<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
 		<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
-	</portlet:actionURL>
+	</portlet:renderURL>
 
-	<input type="button" value="<liferay-ui:message key="revert" />" onClick="self.location = '<%= revertURL %>'" />
-</c:if>
+	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="revertURL">
+			<portlet:param name="struts_action" value="/wiki/edit_page" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.REVERT %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
+			<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
+		</portlet:actionURL>
+
+		<input type="button" value="<liferay-ui:message key="revert" />" onClick="self.location = '<%= revertURL %>'" />
+	</c:if>
+</liferay-ui:icon-menu>

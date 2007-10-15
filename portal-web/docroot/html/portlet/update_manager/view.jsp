@@ -170,15 +170,18 @@ List updatablePackageIds = new ArrayList();
 
 								sm = new StringMaker();
 
+								sm.append("<a href=\"");
+								sm.append(rowURL.toString());
+								sm.append("\">");
 								sm.append(availablePluginPackage.getVersion());
-								sm.append("&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
+								sm.append("</a>&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
 								sm.append(themeDisplay.getPathThemeImages());
 								sm.append("/document_library/page.png");
 								sm.append("' onmousemove=\"ToolTip.show(event, this, '");
 								sm.append(availablePluginPackage.getChangeLog());
 								sm.append("')\" />");
 
-								row.addText(sm.toString(), rowURL);
+								row.addText(sm.toString());
 							}
 							else {
 								row.addText(StringPool.DASH);

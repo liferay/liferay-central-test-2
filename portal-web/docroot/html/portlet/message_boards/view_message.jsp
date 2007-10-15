@@ -174,9 +174,7 @@ else {
 						<portlet:param name="categoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="post" message="post-new-thread" url="<%= addMessageURL %>" />
-
-					<a href="<%= addMessageURL.toString() %>"><liferay-ui:message key="post-new-thread" /></a>
+					<liferay-ui:icon image="post" message="post-new-thread" url="<%= addMessageURL %>" label="<%= true %>" />
 				</td>
 			</c:if>
 
@@ -191,9 +189,7 @@ else {
 								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 							</portlet:actionURL>
 
-							<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
-
-							<a href="<%= unsubscribeURL.toString() %>"><liferay-ui:message key="unsubscribe" /></a>
+							<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
 						</c:when>
 						<c:otherwise>
 							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
@@ -203,9 +199,7 @@ else {
 								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
 							</portlet:actionURL>
 
-							<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" />
-
-							<a href="<%= subscribeURL.toString() %>"><liferay-ui:message key="subscribe" /></a>
+							<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
 						</c:otherwise>
 					</c:choose>
 				</td>

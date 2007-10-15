@@ -30,17 +30,19 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 MBBan ban = (MBBan)row.getObject();
 %>
 
-<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER) %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
-		<portlet:param name="struts_action" value="/message_boards/ban_user" />
-		<portlet:param name="<%= Constants.CMD %>" value="unban" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="banUserId" value="<%= String.valueOf(ban.getBanUserId()) %>" />
-	</portlet:actionURL>
+<liferay-ui:icon-menu>
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER) %>">
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
+			<portlet:param name="struts_action" value="/message_boards/ban_user" />
+			<portlet:param name="<%= Constants.CMD %>" value="unban" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="banUserId" value="<%= String.valueOf(ban.getBanUserId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon
-		image="../message_boards/unban_user"
-		message="unban-this-user"
-		url="<%= unbanUserURL %>"
-	/>
-</c:if>
+		<liferay-ui:icon
+			image="../message_boards/unban_user"
+			message="unban-this-user"
+			url="<%= unbanUserURL %>"
+		/>
+	</c:if>
+</liferay-ui:icon-menu>

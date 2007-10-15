@@ -46,12 +46,14 @@ String target = (String)request.getAttribute("liferay-ui:icon:target");
 boolean label = iconMenuTag || GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:label"));
 boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:toolTip"));
 
-String details = null;
+String details = StringPool.BLANK;
 
-if (toolTip) {
-	details = "onmousemove=\"ToolTip.show(event, this, '" + UnicodeLanguageUtil.get(pageContext, message) + "')\"";
-}
-else {
-	details = "title=\"" + LanguageUtil.get(pageContext, message) + "\"";
+if (!label) {
+	if (toolTip) {
+		details = "onmousemove=\"ToolTip.show(event, this, '" + UnicodeLanguageUtil.get(pageContext, message) + "')\"";
+	}
+	else {
+		details = "title=\"" + LanguageUtil.get(pageContext, message) + "\"";
+	}
 }
 %>

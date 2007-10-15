@@ -24,4 +24,11 @@
 
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
-<c:if test="<%= iconMenuTag %>"><li></c:if><a href="<%= url %>" target="<%= target %>"><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /><c:if test="<%= label %>"> <liferay-ui:message key="<%= message %>" /></c:if></a><c:if test="<%= iconMenuTag %>"></li></c:if>
+<c:choose>
+	<c:when test="<%= iconMenuTag %>">
+		<li><nobr><a href="<%= url %>" target="<%= target %>"><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /></a></nobr></li>
+	</c:when>
+	<c:otherwise>
+		<a href="<%= url %>" target="<%= target %>"><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /></a><c:if test="<%= label %>"> <a href="<%= url %>" target="<%= target %>"><liferay-ui:message key="<%= message %>" /></a></c:if>
+	</c:otherwise>
+</c:choose>

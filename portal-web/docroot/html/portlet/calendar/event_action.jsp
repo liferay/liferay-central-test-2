@@ -30,44 +30,46 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 CalEvent event = (CalEvent)row.getObject();
 %>
 
-<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.UPDATE) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-		<portlet:param name="struts_action" value="/calendar/edit_event" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
-	</portlet:renderURL>
+<liferay-ui:icon-menu>
+	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.UPDATE) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+			<portlet:param name="struts_action" value="/calendar/edit_event" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
+		</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= editURL %>" />
-</c:if>
+		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+	</c:if>
 
-<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.VIEW) %>">
-	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportURL">
-		<portlet:param name="struts_action" value="/calendar/export_events" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
-	</portlet:actionURL>
+	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.VIEW) %>">
+		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportURL">
+			<portlet:param name="struts_action" value="/calendar/export_events" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon image="export" url='<%= exportURL %>'/>
-</c:if>
+		<liferay-ui:icon image="export" url='<%= exportURL %>'/>
+	</c:if>
 
-<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.PERMISSIONS) %>">
-	<liferay-security:permissionsURL
-		modelResource="<%= CalEvent.class.getName() %>"
-		modelResourceDescription="<%= event.getTitle() %>"
-		resourcePrimKey="<%= String.valueOf(event.getEventId()) %>"
-		var="permissionsURL"
-	/>
+	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.PERMISSIONS) %>">
+		<liferay-security:permissionsURL
+			modelResource="<%= CalEvent.class.getName() %>"
+			modelResourceDescription="<%= event.getTitle() %>"
+			resourcePrimKey="<%= String.valueOf(event.getEventId()) %>"
+			var="permissionsURL"
+		/>
 
-	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
-</c:if>
+		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+	</c:if>
 
-<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.DELETE) %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-		<portlet:param name="struts_action" value="/calendar/edit_event" />
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
-	</portlet:actionURL>
+	<c:if test="<%= CalEventPermission.contains(permissionChecker, event, ActionKeys.DELETE) %>">
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+			<portlet:param name="struts_action" value="/calendar/edit_event" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon-delete url="<%= deleteURL %>" />
-</c:if>
+		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+	</c:if>
+</liferay-ui:icon-menu>

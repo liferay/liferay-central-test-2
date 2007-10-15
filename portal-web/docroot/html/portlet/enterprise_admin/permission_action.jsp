@@ -33,12 +33,14 @@ Permission permission = (Permission)objArray[0];
 Role role = (Role)objArray[1];
 %>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deletePermissionURL">
-	<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
-	<portlet:param name="<%= Constants.CMD %>" value="delete_permission" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
-	<portlet:param name="permissionId" value="<%= String.valueOf(permission.getPermissionId()) %>" />
-</portlet:actionURL>
+<liferay-ui:icon-menu>
+	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deletePermissionURL">
+		<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
+		<portlet:param name="<%= Constants.CMD %>" value="delete_permission" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
+		<portlet:param name="permissionId" value="<%= String.valueOf(permission.getPermissionId()) %>" />
+	</portlet:actionURL>
 
-<liferay-ui:icon image="delete" url="<%= deletePermissionURL %>" />
+	<liferay-ui:icon image="delete" url="<%= deletePermissionURL %>" />
+</liferay-ui:icon-menu>

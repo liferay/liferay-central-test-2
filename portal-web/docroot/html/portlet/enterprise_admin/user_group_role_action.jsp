@@ -35,15 +35,17 @@ Role role = (Role)objArray[2];
 String redirect = (String)objArray[3];
 %>
 
-<c:if test="<%= (!portletName.equals(PortletKeys.MY_ACCOUNT)) && (!role.getName().equals(RoleImpl.COMMUNITY_MEMBER)) %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/edit_user_roles" />
-		<portlet:param name="<%= Constants.CMD %>" value="user_group_role_users" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="removeUserIds" value="<%= String.valueOf(user2.getUserId()) %>" />
-		<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
-	</portlet:actionURL>
+<liferay-ui:icon-menu>
+	<c:if test="<%= (!portletName.equals(PortletKeys.MY_ACCOUNT)) && (!role.getName().equals(RoleImpl.COMMUNITY_MEMBER)) %>">
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_roles" />
+			<portlet:param name="<%= Constants.CMD %>" value="user_group_role_users" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="removeUserIds" value="<%= String.valueOf(user2.getUserId()) %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+			<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
+		</portlet:actionURL>
 
-	<liferay-ui:icon image="unlink" message="remove" url="<%= portletURL %>" />
-</c:if>
+		<liferay-ui:icon image="unlink" message="remove" url="<%= portletURL %>" />
+	</c:if>
+</liferay-ui:icon-menu>

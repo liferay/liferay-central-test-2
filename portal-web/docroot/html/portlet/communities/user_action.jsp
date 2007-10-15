@@ -35,13 +35,15 @@ User user2 = (User)objArray[0];
 Group group = (Group)objArray[1];
 %>
 
-<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.DELEGATE) %>">
-    <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
-        <portlet:param name="struts_action" value="/communities/edit_community_assignments" />
-        <portlet:param name="redirect" value="<%= currentURL %>" />
-        <portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
-        <portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-    </portlet:renderURL>
+<liferay-ui:icon-menu>
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.DELEGATE) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
+			<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+		</portlet:renderURL>
 
-    <liferay-ui:icon image="assign_user_roles" url="<%= assignURL %>" />
-</c:if>
+		<liferay-ui:icon image="assign_user_roles" url="<%= assignURL %>" />
+	</c:if>
+</liferay-ui:icon-menu>
