@@ -287,12 +287,6 @@
 						}
 					);
 
-					new Liferay.Menu(
-						{
-							trigger: '.lfr-trigger',
-							button: '.lfr-actions'
-						}
-					);
 					<%--/*jQuery(".journal-content-eip-text").leditable(
 						"<%= themeDisplay.getPathMain() %>/journal_content/update_article_field",
 						{
@@ -337,6 +331,13 @@
 
 		jQuery(document).ready(
 			function() {
+				new Liferay.Menu(
+					{
+						trigger: '.lfr-trigger',
+						button: '.lfr-actions'
+					}
+				);
+
 				Liferay.Dock.init();
 			}
 		);
