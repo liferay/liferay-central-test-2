@@ -699,6 +699,7 @@ ul.gamma .tree-item-hover {
 
 .lfr-actions .lfr-trigger strong {
 	display: block;
+	min-width: 70px;
 	padding: 2px 0 3px;
 	text-align: center;
 }
@@ -717,7 +718,7 @@ ul.gamma .tree-item-hover {
 
 .lfr-actions .lfr-trigger strong span {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/common/action.png) no-repeat 5px 50%;
-	padding: 2px 10px 2px 25px;
+	padding: 2px 10px 2px 35px;
 }
 
 .lfr-actions .lfr-trigger li {
