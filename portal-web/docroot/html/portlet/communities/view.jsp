@@ -26,7 +26,6 @@
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "communities-owned");
-String tabs2 = ParamUtil.getString(request, "tabs2", "open");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -47,14 +46,6 @@ pageContext.setAttribute("portletURL", portletURL);
 	names="communities-owned,communities-joined,available-communities,all-communities"
 	url="<%= portletURL.toString() %>"
 />
-
-<c:if test='<%= tabs1.equals("available-communities") %>'>
-	<liferay-ui:tabs
-		param="tabs2"
-		names="open,restricted"
-		url="<%= portletURL.toString() %>"
-	/>
-</c:if>
 
 <%
 GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
@@ -87,12 +78,13 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		groupParams.put("usersGroups", new Long(user.getUserId()));
 		groupParams.put("active", Boolean.TRUE);
 	}
-	else if (tabs1.equals("available-communities") && tabs2.equals("open")) {
-		groupParams.put("type", GroupImpl.TYPE_COMMUNITY_OPEN);
-		groupParams.put("active", Boolean.TRUE);
-	}
-	else if (tabs1.equals("available-communities") && tabs2.equals("restricted")) {
-		groupParams.put("type", GroupImpl.TYPE_COMMUNITY_RESTRICTED);
+	else if (tabs1.equals("available-communities")) {
+		List types = new ArrayList();
+
+		types.add(GroupImpl.TYPE_COMMUNITY_OPEN);
+		types.add(GroupImpl.TYPE_COMMUNITY_RESTRICTED);
+
+		groupParams.put("types", types);
 		groupParams.put("active", Boolean.TRUE);
 	}
 
@@ -128,6 +120,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	List headerNames = new ArrayList();
 
 	headerNames.add("name");
+	headerNames.add("type");
 	headerNames.add("members");
 	headerNames.add("online-now");
 
@@ -251,6 +244,20 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		}
 
 		row.addText(sm.toString());
+
+		// Type
+
+		String type = GetterUtil.getString(group.getType());
+
+		if (type.equals(GroupImpl.TYPE_COMMUNITY_OPEN)) {
+			row.addText(LanguageUtil.get(pageContext, "open"));
+		}
+		else if (type.equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED)) {
+			row.addText(LanguageUtil.get(pageContext, "restricted"));
+		}
+		else {
+			row.addText(LanguageUtil.get(pageContext, "private"));
+		}
 
 		// Members
 

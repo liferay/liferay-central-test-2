@@ -613,14 +613,14 @@ public class GroupFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(_getWhere(key));
+				sm.append(_getWhere(key, value));
 			}
 		}
 
 		return sm.toString();
 	}
 
-	private static String _getWhere(String key) {
+	private static String _getWhere(String key, Object value) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("active")) {
@@ -649,6 +649,25 @@ public class GroupFinder {
 		}
 		else if (key.equals("type")) {
 			join = CustomSQLUtil.get(JOIN_BY_TYPE);
+		}
+		else if (key.equals("types")) {
+			List types = (List)value;
+
+			StringMaker sm = new StringMaker();
+
+			sm.append("WHERE (");
+
+			for (int i = 0; i < types.size(); i++) {
+				sm.append("(Group_.type_ = ?) ");
+
+				if ((i + 1) < types.size()) {
+					sm.append("OR ");
+				}
+			}
+
+			sm.append(")");
+
+			join = sm.toString();
 		}
 		else if (key.equals("userGroupRole")) {
 			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);
@@ -710,6 +729,15 @@ public class GroupFinder {
 
 							qPos.add(valueString);
 						}
+					}
+				}
+				else if (key.equals("types")) {
+					List values = (List)entry.getValue();
+
+					for (int i = 0; i < values.size(); i++) {
+						String value = (String)values.get(i);
+
+						qPos.add(value);
 					}
 				}
 				else if (key.equals("userGroupRole")) {
