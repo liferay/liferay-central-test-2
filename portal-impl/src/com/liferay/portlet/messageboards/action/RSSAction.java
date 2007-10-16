@@ -88,6 +88,8 @@ public class RSSAction extends Action {
 		long groupId = ParamUtil.getLong(req, "groupId");
 		long categoryId = ParamUtil.getLong(req, "categoryId");
 		long threadId = ParamUtil.getLong(req, "threadId");
+		int max = ParamUtil.getInteger(
+			req, "max", SearchContainer.DEFAULT_DELTA);
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
 			req, "version", RSSUtil.DEFAULT_VERSION);
@@ -102,8 +104,7 @@ public class RSSAction extends Action {
 			String feedURL = StringPool.BLANK;
 
 			rss = MBMessageServiceUtil.getCompanyMessagesRSS(
-				companyId, SearchContainer.DEFAULT_DELTA, type, version,
-				feedURL, entryURL, prefs);
+				companyId, max, type, version, feedURL, entryURL, prefs);
 		}
 		else if (groupId > 0) {
 			String feedURL =
@@ -111,8 +112,7 @@ public class RSSAction extends Action {
 					"/message_boards/find_recent_posts?p_l_id=" + plid;
 
 			rss = MBMessageServiceUtil.getGroupMessagesRSS(
-				groupId, SearchContainer.DEFAULT_DELTA, type, version,
-				feedURL, entryURL, prefs);
+				groupId, max, type, version, feedURL, entryURL, prefs);
 		}
 		else if (categoryId > 0) {
 			String feedURL =
@@ -122,8 +122,7 @@ public class RSSAction extends Action {
 
 			try {
 				rss = MBMessageServiceUtil.getCategoryMessagesRSS(
-					categoryId, SearchContainer.DEFAULT_DELTA, type, version,
-					feedURL, entryURL, prefs);
+					categoryId, max, type, version, feedURL, entryURL, prefs);
 			}
 			catch (NoSuchCategoryException nsce) {
 				if (_log.isWarnEnabled()) {
@@ -138,8 +137,7 @@ public class RSSAction extends Action {
 						"&threadId=" + threadId;
 
 			rss = MBMessageServiceUtil.getThreadMessagesRSS(
-				threadId, SearchContainer.DEFAULT_DELTA, type, version,
-				feedURL, entryURL, prefs);
+				threadId, max, type, version, feedURL, entryURL, prefs);
 		}
 
 		return rss.getBytes();

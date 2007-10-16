@@ -81,6 +81,8 @@ public class RSSAction extends Action {
 		long companyId = ParamUtil.getLong(req, "companyId");
 		long groupId = ParamUtil.getLong(req, "groupId");
 		long categoryId = ParamUtil.getLong(req, "categoryId");
+		int max = ParamUtil.getInteger(
+			req, "max", SearchContainer.DEFAULT_DELTA);
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
 			req, "version", RSSUtil.DEFAULT_VERSION);
@@ -98,8 +100,7 @@ public class RSSAction extends Action {
 
 			try {
 				rss = BlogsEntryServiceUtil.getCompanyEntriesRSS(
-					companyId, SearchContainer.DEFAULT_DELTA, type, version,
-					feedURL, entryURL);
+					companyId, max, type, version, feedURL, entryURL);
 			}
 			catch (NoSuchCompanyException nsce) {
 				if (_log.isWarnEnabled()) {
@@ -114,8 +115,7 @@ public class RSSAction extends Action {
 
 			try {
 				rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
-					groupId, SearchContainer.DEFAULT_DELTA, type, version,
-					feedURL, entryURL);
+					groupId, max, type, version, feedURL, entryURL);
 			}
 			catch (NoSuchGroupException nsge) {
 				if (_log.isWarnEnabled()) {
@@ -130,8 +130,7 @@ public class RSSAction extends Action {
 
 			try {
 				rss = BlogsEntryServiceUtil.getCategoryBlogsRSS(
-					categoryId, SearchContainer.DEFAULT_DELTA, type, version,
-					feedURL, entryURL);
+					categoryId, max, type, version, feedURL, entryURL);
 			}
 			catch (NoSuchCategoryException nsce) {
 				if (_log.isWarnEnabled()) {
