@@ -210,6 +210,18 @@ public class PluginSettingLocalServiceUtil {
 		pluginSettingLocalService.setListTypePersistence(listTypePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.MembershipRequestPersistence getMembershipRequestPersistence() {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.getMembershipRequestPersistence();
+	}
+
+	public static void setMembershipRequestPersistence(
+		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+		pluginSettingLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.OrganizationPersistence getOrganizationPersistence() {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
 

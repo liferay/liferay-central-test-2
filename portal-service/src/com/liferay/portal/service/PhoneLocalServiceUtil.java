@@ -209,6 +209,18 @@ public class PhoneLocalServiceUtil {
 		phoneLocalService.setListTypePersistence(listTypePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.MembershipRequestPersistence getMembershipRequestPersistence() {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
+		return phoneLocalService.getMembershipRequestPersistence();
+	}
+
+	public static void setMembershipRequestPersistence(
+		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+		phoneLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.OrganizationPersistence getOrganizationPersistence() {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 

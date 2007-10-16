@@ -209,6 +209,18 @@ public class UserTrackerLocalServiceUtil {
 		userTrackerLocalService.setListTypePersistence(listTypePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.MembershipRequestPersistence getMembershipRequestPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getMembershipRequestPersistence();
+	}
+
+	public static void setMembershipRequestPersistence(
+		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.OrganizationPersistence getOrganizationPersistence() {
 		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 

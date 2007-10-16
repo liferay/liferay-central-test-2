@@ -48,6 +48,8 @@ import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.LayoutSetLocalService;
 import com.liferay.portal.service.LayoutSetService;
 import com.liferay.portal.service.ListTypeService;
+import com.liferay.portal.service.MembershipRequestLocalService;
+import com.liferay.portal.service.MembershipRequestService;
 import com.liferay.portal.service.OrgLaborLocalService;
 import com.liferay.portal.service.OrgLaborService;
 import com.liferay.portal.service.OrganizationLocalService;
@@ -98,6 +100,7 @@ import com.liferay.portal.service.persistence.ImagePersistence;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 import com.liferay.portal.service.persistence.ListTypePersistence;
+import com.liferay.portal.service.persistence.MembershipRequestPersistence;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPersistence;
 import com.liferay.portal.service.persistence.OrgGroupRolePersistence;
 import com.liferay.portal.service.persistence.OrgLaborPersistence;
@@ -415,6 +418,33 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 
 	public void setListTypePersistence(ListTypePersistence listTypePersistence) {
 		this.listTypePersistence = listTypePersistence;
+	}
+
+	public MembershipRequestLocalService getMembershipRequestLocalService() {
+		return membershipRequestLocalService;
+	}
+
+	public void setMembershipRequestLocalService(
+		MembershipRequestLocalService membershipRequestLocalService) {
+		this.membershipRequestLocalService = membershipRequestLocalService;
+	}
+
+	public MembershipRequestService getMembershipRequestService() {
+		return membershipRequestService;
+	}
+
+	public void setMembershipRequestService(
+		MembershipRequestService membershipRequestService) {
+		this.membershipRequestService = membershipRequestService;
+	}
+
+	public MembershipRequestPersistence getMembershipRequestPersistence() {
+		return membershipRequestPersistence;
+	}
+
+	public void setMembershipRequestPersistence(
+		MembershipRequestPersistence membershipRequestPersistence) {
+		this.membershipRequestPersistence = membershipRequestPersistence;
 	}
 
 	public OrganizationLocalService getOrganizationLocalService() {
@@ -1006,6 +1036,9 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 	protected LayoutSetPersistence layoutSetPersistence;
 	protected ListTypeService listTypeService;
 	protected ListTypePersistence listTypePersistence;
+	protected MembershipRequestLocalService membershipRequestLocalService;
+	protected MembershipRequestService membershipRequestService;
+	protected MembershipRequestPersistence membershipRequestPersistence;
 	protected OrganizationLocalService organizationLocalService;
 	protected OrganizationService organizationService;
 	protected OrganizationPersistence organizationPersistence;

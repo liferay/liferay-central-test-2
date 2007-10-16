@@ -209,6 +209,18 @@ public class AccountLocalServiceUtil {
 		accountLocalService.setListTypePersistence(listTypePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.MembershipRequestPersistence getMembershipRequestPersistence() {
+		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
+
+		return accountLocalService.getMembershipRequestPersistence();
+	}
+
+	public static void setMembershipRequestPersistence(
+		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
+		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
+		accountLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.OrganizationPersistence getOrganizationPersistence() {
 		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
 

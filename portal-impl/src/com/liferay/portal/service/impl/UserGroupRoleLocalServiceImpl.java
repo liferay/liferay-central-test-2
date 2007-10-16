@@ -159,6 +159,12 @@ public class UserGroupRoleLocalServiceImpl
 		return UserGroupRoleUtil.findByU_G(userId, groupId);
 	}
 
+	public List getUserGroupRolesByGroupAndRole(long groupId, long roleId)
+		throws PortalException, SystemException {
+
+		return UserGroupRoleUtil.findByG_R(groupId, roleId);
+	}
+
 	public boolean hasUserGroupRole(long userId, long groupId, long roleId)
 		throws PortalException, SystemException {
 

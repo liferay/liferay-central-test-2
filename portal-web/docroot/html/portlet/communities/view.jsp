@@ -26,6 +26,7 @@
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "communities-owned");
+String tabs2 = ParamUtil.getString(request, "tabs2", "open");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -37,13 +38,23 @@ portletURL.setParameter("tabs1", tabs1);
 pageContext.setAttribute("portletURL", portletURL);
 %>
 
+<liferay-ui:success key="membership_request_sent" message="your-request-was-sent-you-will-receive-a-reply-by-email" />
+
 <form action="<%= portletURL.toString() %>" method="get" name="<portlet:namespace />fm">
 <liferay-portlet:renderURLParams varImpl="portletURL" />
 
 <liferay-ui:tabs
-	names="communities-owned,communities-joined,communities-open,all-communities"
+	names="communities-owned,communities-joined,communities-available,all-communities"
 	url="<%= portletURL.toString() %>"
 />
+
+<c:if test='<%= tabs1.equals("communities-available") %>'>
+	<liferay-ui:tabs
+		param="tabs2"
+		names="open,restricted"
+		url="<%= portletURL.toString() %>"
+	/>
+</c:if>
 
 <%
 GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
@@ -76,8 +87,12 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		groupParams.put("usersGroups", new Long(user.getUserId()));
 		groupParams.put("active", Boolean.TRUE);
 	}
-	else if (tabs1.equals("communities-open")) {
+	else if (tabs1.equals("communities-available") && tabs2.equals("open")) {
 		groupParams.put("type", GroupImpl.TYPE_COMMUNITY_OPEN);
+		groupParams.put("active", Boolean.TRUE);
+	}
+	else if (tabs1.equals("communities-available") && tabs2.equals("restricted")) {
+		groupParams.put("type", GroupImpl.TYPE_COMMUNITY_RESTRICTED);
 		groupParams.put("active", Boolean.TRUE);
 	}
 
@@ -118,6 +133,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 	if (tabs1.equals("communities-owned")) {
 		headerNames.add("active");
+		headerNames.add("pending-requests");
 	}
 
 	headerNames.add(StringPool.BLANK);
@@ -256,6 +272,19 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 		if (tabs1.equals("communities-owned")) {
 			row.addText(LanguageUtil.get(pageContext, (group.isActive() ? "yes" : "no")));
+		}
+
+		// Restricted number of petitions
+
+		if (tabs1.equals("communities-owned")) {
+			int pendingRequests = MembershipRequestLocalServiceUtil.count(group.getGroupId(), MembershipRequestImpl.STATUS_PENDING);
+
+			if (group.getType().equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED)) {
+				row.addText(Integer.toString(pendingRequests));
+			}
+			else {
+				row.addText(StringPool.BLANK);
+			}
 		}
 
 		// Action

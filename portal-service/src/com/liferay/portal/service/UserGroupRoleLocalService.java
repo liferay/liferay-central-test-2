@@ -117,6 +117,11 @@ public interface UserGroupRoleLocalService {
 	public void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence);
 
+	public com.liferay.portal.service.persistence.MembershipRequestPersistence getMembershipRequestPersistence();
+
+	public void setMembershipRequestPersistence(
+		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence);
+
 	public com.liferay.portal.service.persistence.OrganizationPersistence getOrganizationPersistence();
 
 	public void setOrganizationPersistence(
@@ -276,6 +281,11 @@ public interface UserGroupRoleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getUserGroupRoles(long userId, long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.util.List getUserGroupRolesByGroupAndRole(long groupId,
+		long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

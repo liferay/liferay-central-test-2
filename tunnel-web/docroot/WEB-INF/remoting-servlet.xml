@@ -134,6 +134,18 @@
 		<property name="service" ref="com.liferay.portal.service.ListTypeService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portal.service.ListTypeService" />
 	</bean>
+	<bean name="/com_liferay_portal_service_spring_MembershipRequestService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.MembershipRequestService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.MembershipRequestService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_MembershipRequestService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.MembershipRequestService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.MembershipRequestService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_MembershipRequestService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.MembershipRequestService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.MembershipRequestService" />
+	</bean>
 	<bean name="/com_liferay_portal_service_spring_OrganizationService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.OrganizationService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portal.service.OrganizationService" />

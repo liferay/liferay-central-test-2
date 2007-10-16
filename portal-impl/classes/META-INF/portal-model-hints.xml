@@ -231,6 +231,22 @@
 		<field name="name" type="String" />
 		<field name="type" type="String" />
 	</model>
+	<model name="com.liferay.portal.model.MembershipRequest">
+		<field name="membershipRequestId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="groupId" type="long" />
+		<field name="comments" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="replyComments" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="replyDate" type="Date" />
+		<field name="replierUserId" type="long" />
+		<field name="statusId" type="int" />
+	</model>
 	<model name="com.liferay.portal.model.Organization">
 		<field name="organizationId" type="long" />
 		<field name="companyId" type="long" />

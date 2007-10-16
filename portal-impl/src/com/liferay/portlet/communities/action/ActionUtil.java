@@ -24,7 +24,9 @@ package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
@@ -64,6 +66,37 @@ public class ActionUtil
 		}
 
 		req.setAttribute(WebKeys.GROUP, group);
+	}
+
+	public static void getMembershipRequest(ActionRequest req)
+		throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getMembershipRequest(httpReq);
+	}
+
+	public static void getMembershipRequest(RenderRequest req)
+		throws Exception {
+
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getMembershipRequest(httpReq);
+	}
+
+	public static void getMembershipRequest(HttpServletRequest req)
+		throws Exception {
+
+		long membershipRequestId =
+			ParamUtil.getLong(req, "membershipRequestId");
+
+		MembershipRequest membershipRequest = null;
+
+		if (membershipRequestId > 0) {
+			membershipRequest = MembershipRequestLocalServiceUtil.
+				getMembershipRequest(membershipRequestId);
+		}
+
+		req.setAttribute(WebKeys.MEMBERSHIP_REQUEST, membershipRequest);
 	}
 
 }

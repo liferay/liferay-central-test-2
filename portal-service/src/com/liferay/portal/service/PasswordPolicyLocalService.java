@@ -117,6 +117,11 @@ public interface PasswordPolicyLocalService {
 	public void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence);
 
+	public com.liferay.portal.service.persistence.MembershipRequestPersistence getMembershipRequestPersistence();
+
+	public void setMembershipRequestPersistence(
+		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence);
+
 	public com.liferay.portal.service.persistence.OrganizationPersistence getOrganizationPersistence();
 
 	public void setOrganizationPersistence(

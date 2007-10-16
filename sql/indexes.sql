@@ -147,6 +147,11 @@ create index IX_847F92B5 on MBStatsUser (userId);
 
 create index IX_CB854772 on MBThread (categoryId);
 
+create index IX_8A1CC4B on MembershipRequest (groupId);
+create index IX_C28C72EC on MembershipRequest (groupId, statusId);
+create index IX_18410BCA on MembershipRequest (statusId, groupId);
+create index IX_66D70879 on MembershipRequest (userId);
+
 create index IX_A425F71A on OrgGroupPermission (groupId);
 create index IX_6C53DA4E on OrgGroupPermission (permissionId);
 
@@ -277,6 +282,7 @@ create index IX_23EAD0D on UserGroup (companyId, name);
 create index IX_69771487 on UserGroup (companyId, parentUserGroupId);
 
 create index IX_1B988D7A on UserGroupRole (groupId);
+create index IX_871412DF on UserGroupRole (groupId, roleId);
 create index IX_887A2C95 on UserGroupRole (roleId);
 create index IX_887BE56A on UserGroupRole (userId);
 create index IX_4D040680 on UserGroupRole (userId, groupId);

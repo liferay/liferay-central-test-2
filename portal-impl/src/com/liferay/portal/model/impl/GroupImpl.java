@@ -68,6 +68,9 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 	public static final String TYPE_COMMUNITY_CLOSED = "COMMUNITY_CLOSED";
 
+	public static final String TYPE_COMMUNITY_RESTRICTED =
+		"COMMUNITY_RESTRICTED";
+
 	public GroupImpl() {
 	}
 

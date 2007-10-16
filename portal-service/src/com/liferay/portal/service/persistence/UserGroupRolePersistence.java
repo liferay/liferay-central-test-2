@@ -163,6 +163,34 @@ public interface UserGroupRolePersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
+	public java.util.List findByG_R(long groupId, long roleId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByG_R(long groupId, long roleId, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByG_R(long groupId, long roleId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.UserGroupRole findByG_R_First(
+		long groupId, long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupRoleException;
+
+	public com.liferay.portal.model.UserGroupRole findByG_R_Last(long groupId,
+		long roleId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupRoleException;
+
+	public com.liferay.portal.model.UserGroupRole[] findByG_R_PrevAndNext(
+		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
+		long groupId, long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupRoleException;
+
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -192,6 +220,9 @@ public interface UserGroupRolePersistence {
 	public void removeByRoleId(long roleId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByG_R(long groupId, long roleId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByU_G(long userId, long groupId)
@@ -204,6 +235,9 @@ public interface UserGroupRolePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByRoleId(long roleId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByG_R(long groupId, long roleId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

@@ -346,6 +346,38 @@ Liferay.Service.Portal.ListType = {
 	}
 };
 
+Liferay.Service.Portal.MembershipRequest = {
+	serviceClassName: Liferay.Service.Portal.servicePackage + "MembershipRequest" + Liferay.Service.classNameSuffix,
+
+	addMembershipRequest: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addMembershipRequest";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteByGroupIdAndStatus: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteByGroupIdAndStatus";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getMembershipRequest: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getMembershipRequest";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateStatus: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateStatus";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.Portal.Organization = {
 	serviceClassName: Liferay.Service.Portal.servicePackage + "Organization" + Liferay.Service.classNameSuffix,
 

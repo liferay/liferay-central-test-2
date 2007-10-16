@@ -261,7 +261,19 @@
 	<definition name="portlet.communities.view" extends="portlet.communities">
 		<put name="portlet_content" value="/portlet/communities/view.jsp" />
 	</definition>
-
+	
+	<definition name="portlet.communities.view_membership_requests" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/view_membership_requests.jsp" />
+	</definition>
+	
+	<definition name="portlet.communities.post_membership_request" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/post_membership_request.jsp" />
+	</definition>
+	
+	<definition name="portlet.communities.reply_membership_request" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/reply_membership_request.jsp" />
+	</definition>
+	
 	<!-- Countdown -->
 
 	<definition name="portlet.countdown" extends="portlet" />

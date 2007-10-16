@@ -278,6 +278,21 @@
 		<action path="/communities/page" type="com.liferay.portlet.myplaces.action.ViewAction" />
 
 		<action path="/communities/view" forward="portlet.communities.view" />
+		
+		<action path="/communities/view_membership_requests" type="com.liferay.portlet.communities.action.ViewMembershipRequestsAction">
+			<forward name="portlet.communities.view_membership_requests" path="portlet.communities.view_membership_requests" />
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/communities/post_membership_request" type="com.liferay.portlet.communities.action.PostMembershipRequestAction">
+			<forward name="portlet.communities.post_membership_request" path="portlet.communities.post_membership_request" />
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/communities/reply_membership_request" type="com.liferay.portlet.communities.action.ReplyMembershipRequestAction">
+			<forward name="portlet.communities.reply_membership_request" path="portlet.communities.reply_membership_request" />
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
 
 		<!-- Countdown -->
 

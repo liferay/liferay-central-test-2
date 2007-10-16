@@ -163,6 +163,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String MAIL_STORE = "MAIL_STORE";
 
+	public static final String MEMBERSHIP_REQUEST = "MEMBERSHIP_REQUEST";
+
 	public static final String MESSAGE_BOARDS_CATEGORY = "MESSAGE_BOARDS_CATEGORY";
 
 	public static final String MESSAGE_BOARDS_MESSAGE = "MESSAGE_BOARDS_MESSAGE";

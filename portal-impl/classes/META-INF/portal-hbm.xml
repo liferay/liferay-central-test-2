@@ -208,6 +208,21 @@
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
+	<class name="com.liferay.portal.model.impl.MembershipRequestImpl" table="MembershipRequest">
+		<cache usage="read-write" />
+		<id name="membershipRequestId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="createDate" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="comments" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="replyComments" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="replyDate" />
+		<property name="replierUserId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="statusId" type="com.liferay.util.dao.hibernate.IntegerType" />
+	</class>
 	<class name="com.liferay.portal.model.impl.OrganizationImpl" table="Organization_">
 		<cache usage="read-write" />
 		<id name="organizationId" type="long">

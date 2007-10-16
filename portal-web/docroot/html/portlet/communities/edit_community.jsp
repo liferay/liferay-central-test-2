@@ -76,10 +76,14 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="open" />
+		<liferay-ui:message key="type" />
 	</td>
 	<td>
-		<input <%= type.equals(GroupImpl.TYPE_COMMUNITY_OPEN) ? "checked" : "" %> name="<portlet:namespace />type" value="<%= GroupImpl.TYPE_COMMUNITY_OPEN %>" type="checkbox">
+		<select name="<portlet:namespace />type">
+			<option <%= (type.equals(GroupImpl.TYPE_COMMUNITY_CLOSED)) ? "selected" : "" %> value="<%= GroupImpl.TYPE_COMMUNITY_CLOSED %>"><%= LanguageUtil.get(pageContext, "private") %></option>
+			<option <%= (type.equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED)) ? "selected" : "" %> value="<%= GroupImpl.TYPE_COMMUNITY_RESTRICTED %>"><%= LanguageUtil.get(pageContext, "restricted") %></option>
+			<option <%= (type.equals(GroupImpl.TYPE_COMMUNITY_OPEN)) ? "selected" : "" %> value="<%= GroupImpl.TYPE_COMMUNITY_OPEN %>"><%= LanguageUtil.get(pageContext, "open") %></option>
+		</select>
 	</td>
 </tr>
 <tr>

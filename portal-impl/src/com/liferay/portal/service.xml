@@ -507,6 +507,46 @@
 			<finder-column name="type" />
 		</finder>
 	</entity>
+	<entity name="MembershipRequest" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="membershipRequestId" type="long" primary="true"/>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long"/>
+		<column name="createDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="groupId" type="long"/>
+		<column name="comments" type="String"/>
+		<column name="replyComments" type="String"/>
+		<column name="replyDate" type="Date" />
+		<column name="replierUserId" type="long"/>
+		<column name="statusId" type="int"/>
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="groupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="userId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="G_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="statusId" />
+		</finder>
+	</entity>
 	<entity name="Organization" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -1315,6 +1355,10 @@
 		<finder name="RoleId" return-type="Collection">
 			<finder-column name="roleId" />
 		</finder>
+		<finder name="G_R" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="roleId" />
+		</finder>
 	</entity>
 	<entity name="UserIdMapper" local-service="true" remote-service="false">
 
@@ -1489,6 +1533,7 @@
 		<exception>LayoutPermission</exception>
 		<exception>LayoutSetVirtualHost</exception>
 		<exception>LayoutType</exception>
+		<exception>MembershipRequestComments</exception>
 		<exception>OrganizationId</exception>
 		<exception>OrganizationName</exception>
 		<exception>OrganizationParent</exception>

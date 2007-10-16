@@ -96,6 +96,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -409,6 +418,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -734,6 +752,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -1053,6 +1080,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -1384,6 +1420,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -1703,6 +1748,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -2034,6 +2088,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -2353,6 +2416,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -2684,6 +2756,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -2997,6 +3078,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -3325,6 +3415,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -3649,6 +3748,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -3968,6 +4076,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -4299,6 +4416,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -4618,6 +4744,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -4952,6 +5087,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -5276,6 +5420,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -5595,6 +5748,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -5926,6 +6088,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -6245,6 +6416,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -6579,6 +6759,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -6809,6 +6998,662 @@
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.MembershipRequestLocalService.professional" class="com.liferay.portal.service.impl.MembershipRequestLocalServiceImpl" lazy-init="true">
+		<property name="accountLocalService">
+			<ref bean="com.liferay.portal.service.AccountLocalService.professional" />
+		</property>
+		<property name="accountService">
+			<ref bean="com.liferay.portal.service.AccountService.professional" />
+		</property>
+		<property name="accountPersistence">
+			<ref bean="com.liferay.portal.service.persistence.AccountPersistenceImpl" />
+		</property>
+		<property name="addressLocalService">
+			<ref bean="com.liferay.portal.service.AddressLocalService.professional" />
+		</property>
+		<property name="addressService">
+			<ref bean="com.liferay.portal.service.AddressService.professional" />
+		</property>
+		<property name="addressPersistence">
+			<ref bean="com.liferay.portal.service.persistence.AddressPersistenceImpl" />
+		</property>
+		<property name="classNameLocalService">
+			<ref bean="com.liferay.portal.service.ClassNameLocalService.professional" />
+		</property>
+		<property name="classNameService">
+			<ref bean="com.liferay.portal.service.ClassNameService.professional" />
+		</property>
+		<property name="classNamePersistence">
+			<ref bean="com.liferay.portal.service.persistence.ClassNamePersistenceImpl" />
+		</property>
+		<property name="companyLocalService">
+			<ref bean="com.liferay.portal.service.CompanyLocalService.professional" />
+		</property>
+		<property name="companyService">
+			<ref bean="com.liferay.portal.service.CompanyService.professional" />
+		</property>
+		<property name="companyPersistence">
+			<ref bean="com.liferay.portal.service.persistence.CompanyPersistenceImpl" />
+		</property>
+		<property name="contactLocalService">
+			<ref bean="com.liferay.portal.service.ContactLocalService.professional" />
+		</property>
+		<property name="contactService">
+			<ref bean="com.liferay.portal.service.ContactService.professional" />
+		</property>
+		<property name="contactPersistence">
+			<ref bean="com.liferay.portal.service.persistence.ContactPersistenceImpl" />
+		</property>
+		<property name="countryService">
+			<ref bean="com.liferay.portal.service.CountryService.professional" />
+		</property>
+		<property name="countryPersistence">
+			<ref bean="com.liferay.portal.service.persistence.CountryPersistenceImpl" />
+		</property>
+		<property name="emailAddressLocalService">
+			<ref bean="com.liferay.portal.service.EmailAddressLocalService.professional" />
+		</property>
+		<property name="emailAddressService">
+			<ref bean="com.liferay.portal.service.EmailAddressService.professional" />
+		</property>
+		<property name="emailAddressPersistence">
+			<ref bean="com.liferay.portal.service.persistence.EmailAddressPersistenceImpl" />
+		</property>
+		<property name="groupLocalService">
+			<ref bean="com.liferay.portal.service.GroupLocalService.professional" />
+		</property>
+		<property name="groupService">
+			<ref bean="com.liferay.portal.service.GroupService.professional" />
+		</property>
+		<property name="groupPersistence">
+			<ref bean="com.liferay.portal.service.persistence.GroupPersistenceImpl" />
+		</property>
+		<property name="imageLocalService">
+			<ref bean="com.liferay.portal.service.ImageLocalService.professional" />
+		</property>
+		<property name="imagePersistence">
+			<ref bean="com.liferay.portal.service.persistence.ImagePersistenceImpl" />
+		</property>
+		<property name="layoutLocalService">
+			<ref bean="com.liferay.portal.service.LayoutLocalService.professional" />
+		</property>
+		<property name="layoutService">
+			<ref bean="com.liferay.portal.service.LayoutService.professional" />
+		</property>
+		<property name="layoutPersistence">
+			<ref bean="com.liferay.portal.service.persistence.LayoutPersistenceImpl" />
+		</property>
+		<property name="layoutSetLocalService">
+			<ref bean="com.liferay.portal.service.LayoutSetLocalService.professional" />
+		</property>
+		<property name="layoutSetService">
+			<ref bean="com.liferay.portal.service.LayoutSetService.professional" />
+		</property>
+		<property name="layoutSetPersistence">
+			<ref bean="com.liferay.portal.service.persistence.LayoutSetPersistenceImpl" />
+		</property>
+		<property name="listTypeService">
+			<ref bean="com.liferay.portal.service.ListTypeService.professional" />
+		</property>
+		<property name="listTypePersistence">
+			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
+		<property name="organizationLocalService">
+			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
+		</property>
+		<property name="organizationService">
+			<ref bean="com.liferay.portal.service.OrganizationService.professional" />
+		</property>
+		<property name="organizationPersistence">
+			<ref bean="com.liferay.portal.service.persistence.OrganizationPersistenceImpl" />
+		</property>
+		<property name="orgGroupPermissionPersistence">
+			<ref bean="com.liferay.portal.service.persistence.OrgGroupPermissionPersistenceImpl" />
+		</property>
+		<property name="orgGroupRolePersistence">
+			<ref bean="com.liferay.portal.service.persistence.OrgGroupRolePersistenceImpl" />
+		</property>
+		<property name="orgLaborLocalService">
+			<ref bean="com.liferay.portal.service.OrgLaborLocalService.professional" />
+		</property>
+		<property name="orgLaborService">
+			<ref bean="com.liferay.portal.service.OrgLaborService.professional" />
+		</property>
+		<property name="orgLaborPersistence">
+			<ref bean="com.liferay.portal.service.persistence.OrgLaborPersistenceImpl" />
+		</property>
+		<property name="passwordPolicyLocalService">
+			<ref bean="com.liferay.portal.service.PasswordPolicyLocalService.professional" />
+		</property>
+		<property name="passwordPolicyService">
+			<ref bean="com.liferay.portal.service.PasswordPolicyService.professional" />
+		</property>
+		<property name="passwordPolicyPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyPersistenceImpl" />
+		</property>
+		<property name="passwordPolicyRelLocalService">
+			<ref bean="com.liferay.portal.service.PasswordPolicyRelLocalService.professional" />
+		</property>
+		<property name="passwordPolicyRelPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyRelPersistenceImpl" />
+		</property>
+		<property name="passwordTrackerLocalService">
+			<ref bean="com.liferay.portal.service.PasswordTrackerLocalService.professional" />
+		</property>
+		<property name="passwordTrackerPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PasswordTrackerPersistenceImpl" />
+		</property>
+		<property name="permissionLocalService">
+			<ref bean="com.liferay.portal.service.PermissionLocalService.professional" />
+		</property>
+		<property name="permissionService">
+			<ref bean="com.liferay.portal.service.PermissionService.professional" />
+		</property>
+		<property name="permissionPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PermissionPersistenceImpl" />
+		</property>
+		<property name="phoneLocalService">
+			<ref bean="com.liferay.portal.service.PhoneLocalService.professional" />
+		</property>
+		<property name="phoneService">
+			<ref bean="com.liferay.portal.service.PhoneService.professional" />
+		</property>
+		<property name="phonePersistence">
+			<ref bean="com.liferay.portal.service.persistence.PhonePersistenceImpl" />
+		</property>
+		<property name="portalService">
+			<ref bean="com.liferay.portal.service.PortalService.professional" />
+		</property>
+		<property name="pluginSettingLocalService">
+			<ref bean="com.liferay.portal.service.PluginSettingLocalService.professional" />
+		</property>
+		<property name="pluginSettingService">
+			<ref bean="com.liferay.portal.service.PluginSettingService.professional" />
+		</property>
+		<property name="pluginSettingPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PluginSettingPersistenceImpl" />
+		</property>
+		<property name="portletLocalService">
+			<ref bean="com.liferay.portal.service.PortletLocalService.professional" />
+		</property>
+		<property name="portletService">
+			<ref bean="com.liferay.portal.service.PortletService.professional" />
+		</property>
+		<property name="portletPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PortletPersistenceImpl" />
+		</property>
+		<property name="portletPreferencesLocalService">
+			<ref bean="com.liferay.portal.service.PortletPreferencesLocalService.professional" />
+		</property>
+		<property name="portletPreferencesPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PortletPreferencesPersistenceImpl" />
+		</property>
+		<property name="regionService">
+			<ref bean="com.liferay.portal.service.RegionService.professional" />
+		</property>
+		<property name="regionPersistence">
+			<ref bean="com.liferay.portal.service.persistence.RegionPersistenceImpl" />
+		</property>
+		<property name="releaseLocalService">
+			<ref bean="com.liferay.portal.service.ReleaseLocalService.professional" />
+		</property>
+		<property name="releasePersistence">
+			<ref bean="com.liferay.portal.service.persistence.ReleasePersistenceImpl" />
+		</property>
+		<property name="resourceLocalService">
+			<ref bean="com.liferay.portal.service.ResourceLocalService.professional" />
+		</property>
+		<property name="resourceService">
+			<ref bean="com.liferay.portal.service.ResourceService.professional" />
+		</property>
+		<property name="resourcePersistence">
+			<ref bean="com.liferay.portal.service.persistence.ResourcePersistenceImpl" />
+		</property>
+		<property name="resourceCodeLocalService">
+			<ref bean="com.liferay.portal.service.ResourceCodeLocalService.professional" />
+		</property>
+		<property name="resourceCodePersistence">
+			<ref bean="com.liferay.portal.service.persistence.ResourceCodePersistenceImpl" />
+		</property>
+		<property name="roleLocalService">
+			<ref bean="com.liferay.portal.service.RoleLocalService.professional" />
+		</property>
+		<property name="roleService">
+			<ref bean="com.liferay.portal.service.RoleService.professional" />
+		</property>
+		<property name="rolePersistence">
+			<ref bean="com.liferay.portal.service.persistence.RolePersistenceImpl" />
+		</property>
+		<property name="serviceComponentLocalService">
+			<ref bean="com.liferay.portal.service.ServiceComponentLocalService.professional" />
+		</property>
+		<property name="serviceComponentPersistence">
+			<ref bean="com.liferay.portal.service.persistence.ServiceComponentPersistenceImpl" />
+		</property>
+		<property name="subscriptionLocalService">
+			<ref bean="com.liferay.portal.service.SubscriptionLocalService.professional" />
+		</property>
+		<property name="subscriptionPersistence">
+			<ref bean="com.liferay.portal.service.persistence.SubscriptionPersistenceImpl" />
+		</property>
+		<property name="userLocalService">
+			<ref bean="com.liferay.portal.service.UserLocalService.professional" />
+		</property>
+		<property name="userService">
+			<ref bean="com.liferay.portal.service.UserService.professional" />
+		</property>
+		<property name="userPersistence">
+			<ref bean="com.liferay.portal.service.persistence.UserPersistenceImpl" />
+		</property>
+		<property name="userGroupLocalService">
+			<ref bean="com.liferay.portal.service.UserGroupLocalService.professional" />
+		</property>
+		<property name="userGroupService">
+			<ref bean="com.liferay.portal.service.UserGroupService.professional" />
+		</property>
+		<property name="userGroupPersistence">
+			<ref bean="com.liferay.portal.service.persistence.UserGroupPersistenceImpl" />
+		</property>
+		<property name="userGroupRoleLocalService">
+			<ref bean="com.liferay.portal.service.UserGroupRoleLocalService.professional" />
+		</property>
+		<property name="userGroupRoleService">
+			<ref bean="com.liferay.portal.service.UserGroupRoleService.professional" />
+		</property>
+		<property name="userGroupRolePersistence">
+			<ref bean="com.liferay.portal.service.persistence.UserGroupRolePersistenceImpl" />
+		</property>
+		<property name="userIdMapperLocalService">
+			<ref bean="com.liferay.portal.service.UserIdMapperLocalService.professional" />
+		</property>
+		<property name="userIdMapperPersistence">
+			<ref bean="com.liferay.portal.service.persistence.UserIdMapperPersistenceImpl" />
+		</property>
+		<property name="userTrackerLocalService">
+			<ref bean="com.liferay.portal.service.UserTrackerLocalService.professional" />
+		</property>
+		<property name="userTrackerPersistence">
+			<ref bean="com.liferay.portal.service.persistence.UserTrackerPersistenceImpl" />
+		</property>
+		<property name="userTrackerPathLocalService">
+			<ref bean="com.liferay.portal.service.UserTrackerPathLocalService.professional" />
+		</property>
+		<property name="userTrackerPathPersistence">
+			<ref bean="com.liferay.portal.service.persistence.UserTrackerPathPersistenceImpl" />
+		</property>
+		<property name="websiteLocalService">
+			<ref bean="com.liferay.portal.service.WebsiteLocalService.professional" />
+		</property>
+		<property name="websiteService">
+			<ref bean="com.liferay.portal.service.WebsiteService.professional" />
+		</property>
+		<property name="websitePersistence">
+			<ref bean="com.liferay.portal.service.persistence.WebsitePersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.MembershipRequestLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="check*">PROPAGATION_REQUIRED</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="set*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.MembershipRequestLocalServiceFactory" class="com.liferay.portal.service.MembershipRequestLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.MembershipRequestService.professional" class="com.liferay.portal.service.impl.MembershipRequestServiceImpl" lazy-init="true">
+		<property name="accountLocalService">
+			<ref bean="com.liferay.portal.service.AccountLocalService.professional" />
+		</property>
+		<property name="accountService">
+			<ref bean="com.liferay.portal.service.AccountService.professional" />
+		</property>
+		<property name="accountPersistence">
+			<ref bean="com.liferay.portal.service.persistence.AccountPersistenceImpl" />
+		</property>
+		<property name="addressLocalService">
+			<ref bean="com.liferay.portal.service.AddressLocalService.professional" />
+		</property>
+		<property name="addressService">
+			<ref bean="com.liferay.portal.service.AddressService.professional" />
+		</property>
+		<property name="addressPersistence">
+			<ref bean="com.liferay.portal.service.persistence.AddressPersistenceImpl" />
+		</property>
+		<property name="classNameLocalService">
+			<ref bean="com.liferay.portal.service.ClassNameLocalService.professional" />
+		</property>
+		<property name="classNameService">
+			<ref bean="com.liferay.portal.service.ClassNameService.professional" />
+		</property>
+		<property name="classNamePersistence">
+			<ref bean="com.liferay.portal.service.persistence.ClassNamePersistenceImpl" />
+		</property>
+		<property name="companyLocalService">
+			<ref bean="com.liferay.portal.service.CompanyLocalService.professional" />
+		</property>
+		<property name="companyService">
+			<ref bean="com.liferay.portal.service.CompanyService.professional" />
+		</property>
+		<property name="companyPersistence">
+			<ref bean="com.liferay.portal.service.persistence.CompanyPersistenceImpl" />
+		</property>
+		<property name="contactLocalService">
+			<ref bean="com.liferay.portal.service.ContactLocalService.professional" />
+		</property>
+		<property name="contactService">
+			<ref bean="com.liferay.portal.service.ContactService.professional" />
+		</property>
+		<property name="contactPersistence">
+			<ref bean="com.liferay.portal.service.persistence.ContactPersistenceImpl" />
+		</property>
+		<property name="countryService">
+			<ref bean="com.liferay.portal.service.CountryService.professional" />
+		</property>
+		<property name="countryPersistence">
+			<ref bean="com.liferay.portal.service.persistence.CountryPersistenceImpl" />
+		</property>
+		<property name="emailAddressLocalService">
+			<ref bean="com.liferay.portal.service.EmailAddressLocalService.professional" />
+		</property>
+		<property name="emailAddressService">
+			<ref bean="com.liferay.portal.service.EmailAddressService.professional" />
+		</property>
+		<property name="emailAddressPersistence">
+			<ref bean="com.liferay.portal.service.persistence.EmailAddressPersistenceImpl" />
+		</property>
+		<property name="groupLocalService">
+			<ref bean="com.liferay.portal.service.GroupLocalService.professional" />
+		</property>
+		<property name="groupService">
+			<ref bean="com.liferay.portal.service.GroupService.professional" />
+		</property>
+		<property name="groupPersistence">
+			<ref bean="com.liferay.portal.service.persistence.GroupPersistenceImpl" />
+		</property>
+		<property name="imageLocalService">
+			<ref bean="com.liferay.portal.service.ImageLocalService.professional" />
+		</property>
+		<property name="imagePersistence">
+			<ref bean="com.liferay.portal.service.persistence.ImagePersistenceImpl" />
+		</property>
+		<property name="layoutLocalService">
+			<ref bean="com.liferay.portal.service.LayoutLocalService.professional" />
+		</property>
+		<property name="layoutService">
+			<ref bean="com.liferay.portal.service.LayoutService.professional" />
+		</property>
+		<property name="layoutPersistence">
+			<ref bean="com.liferay.portal.service.persistence.LayoutPersistenceImpl" />
+		</property>
+		<property name="layoutSetLocalService">
+			<ref bean="com.liferay.portal.service.LayoutSetLocalService.professional" />
+		</property>
+		<property name="layoutSetService">
+			<ref bean="com.liferay.portal.service.LayoutSetService.professional" />
+		</property>
+		<property name="layoutSetPersistence">
+			<ref bean="com.liferay.portal.service.persistence.LayoutSetPersistenceImpl" />
+		</property>
+		<property name="listTypeService">
+			<ref bean="com.liferay.portal.service.ListTypeService.professional" />
+		</property>
+		<property name="listTypePersistence">
+			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
+		<property name="organizationLocalService">
+			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
+		</property>
+		<property name="organizationService">
+			<ref bean="com.liferay.portal.service.OrganizationService.professional" />
+		</property>
+		<property name="organizationPersistence">
+			<ref bean="com.liferay.portal.service.persistence.OrganizationPersistenceImpl" />
+		</property>
+		<property name="orgGroupPermissionPersistence">
+			<ref bean="com.liferay.portal.service.persistence.OrgGroupPermissionPersistenceImpl" />
+		</property>
+		<property name="orgGroupRolePersistence">
+			<ref bean="com.liferay.portal.service.persistence.OrgGroupRolePersistenceImpl" />
+		</property>
+		<property name="orgLaborLocalService">
+			<ref bean="com.liferay.portal.service.OrgLaborLocalService.professional" />
+		</property>
+		<property name="orgLaborService">
+			<ref bean="com.liferay.portal.service.OrgLaborService.professional" />
+		</property>
+		<property name="orgLaborPersistence">
+			<ref bean="com.liferay.portal.service.persistence.OrgLaborPersistenceImpl" />
+		</property>
+		<property name="passwordPolicyLocalService">
+			<ref bean="com.liferay.portal.service.PasswordPolicyLocalService.professional" />
+		</property>
+		<property name="passwordPolicyService">
+			<ref bean="com.liferay.portal.service.PasswordPolicyService.professional" />
+		</property>
+		<property name="passwordPolicyPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyPersistenceImpl" />
+		</property>
+		<property name="passwordPolicyRelLocalService">
+			<ref bean="com.liferay.portal.service.PasswordPolicyRelLocalService.professional" />
+		</property>
+		<property name="passwordPolicyRelPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyRelPersistenceImpl" />
+		</property>
+		<property name="passwordTrackerLocalService">
+			<ref bean="com.liferay.portal.service.PasswordTrackerLocalService.professional" />
+		</property>
+		<property name="passwordTrackerPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PasswordTrackerPersistenceImpl" />
+		</property>
+		<property name="permissionLocalService">
+			<ref bean="com.liferay.portal.service.PermissionLocalService.professional" />
+		</property>
+		<property name="permissionService">
+			<ref bean="com.liferay.portal.service.PermissionService.professional" />
+		</property>
+		<property name="permissionPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PermissionPersistenceImpl" />
+		</property>
+		<property name="phoneLocalService">
+			<ref bean="com.liferay.portal.service.PhoneLocalService.professional" />
+		</property>
+		<property name="phoneService">
+			<ref bean="com.liferay.portal.service.PhoneService.professional" />
+		</property>
+		<property name="phonePersistence">
+			<ref bean="com.liferay.portal.service.persistence.PhonePersistenceImpl" />
+		</property>
+		<property name="portalService">
+			<ref bean="com.liferay.portal.service.PortalService.professional" />
+		</property>
+		<property name="pluginSettingLocalService">
+			<ref bean="com.liferay.portal.service.PluginSettingLocalService.professional" />
+		</property>
+		<property name="pluginSettingService">
+			<ref bean="com.liferay.portal.service.PluginSettingService.professional" />
+		</property>
+		<property name="pluginSettingPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PluginSettingPersistenceImpl" />
+		</property>
+		<property name="portletLocalService">
+			<ref bean="com.liferay.portal.service.PortletLocalService.professional" />
+		</property>
+		<property name="portletService">
+			<ref bean="com.liferay.portal.service.PortletService.professional" />
+		</property>
+		<property name="portletPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PortletPersistenceImpl" />
+		</property>
+		<property name="portletPreferencesLocalService">
+			<ref bean="com.liferay.portal.service.PortletPreferencesLocalService.professional" />
+		</property>
+		<property name="portletPreferencesPersistence">
+			<ref bean="com.liferay.portal.service.persistence.PortletPreferencesPersistenceImpl" />
+		</property>
+		<property name="regionService">
+			<ref bean="com.liferay.portal.service.RegionService.professional" />
+		</property>
+		<property name="regionPersistence">
+			<ref bean="com.liferay.portal.service.persistence.RegionPersistenceImpl" />
+		</property>
+		<property name="releaseLocalService">
+			<ref bean="com.liferay.portal.service.ReleaseLocalService.professional" />
+		</property>
+		<property name="releasePersistence">
+			<ref bean="com.liferay.portal.service.persistence.ReleasePersistenceImpl" />
+		</property>
+		<property name="resourceLocalService">
+			<ref bean="com.liferay.portal.service.ResourceLocalService.professional" />
+		</property>
+		<property name="resourceService">
+			<ref bean="com.liferay.portal.service.ResourceService.professional" />
+		</property>
+		<property name="resourcePersistence">
+			<ref bean="com.liferay.portal.service.persistence.ResourcePersistenceImpl" />
+		</property>
+		<property name="resourceCodeLocalService">
+			<ref bean="com.liferay.portal.service.ResourceCodeLocalService.professional" />
+		</property>
+		<property name="resourceCodePersistence">
+			<ref bean="com.liferay.portal.service.persistence.ResourceCodePersistenceImpl" />
+		</property>
+		<property name="roleLocalService">
+			<ref bean="com.liferay.portal.service.RoleLocalService.professional" />
+		</property>
+		<property name="roleService">
+			<ref bean="com.liferay.portal.service.RoleService.professional" />
+		</property>
+		<property name="rolePersistence">
+			<ref bean="com.liferay.portal.service.persistence.RolePersistenceImpl" />
+		</property>
+		<property name="serviceComponentLocalService">
+			<ref bean="com.liferay.portal.service.ServiceComponentLocalService.professional" />
+		</property>
+		<property name="serviceComponentPersistence">
+			<ref bean="com.liferay.portal.service.persistence.ServiceComponentPersistenceImpl" />
+		</property>
+		<property name="subscriptionLocalService">
+			<ref bean="com.liferay.portal.service.SubscriptionLocalService.professional" />
+		</property>
+		<property name="subscriptionPersistence">
+			<ref bean="com.liferay.portal.service.persistence.SubscriptionPersistenceImpl" />
+		</property>
+		<property name="userLocalService">
+			<ref bean="com.liferay.portal.service.UserLocalService.professional" />
+		</property>
+		<property name="userService">
+			<ref bean="com.liferay.portal.service.UserService.professional" />
+		</property>
+		<property name="userPersistence">
+			<ref bean="com.liferay.portal.service.persistence.UserPersistenceImpl" />
+		</property>
+		<property name="userGroupLocalService">
+			<ref bean="com.liferay.portal.service.UserGroupLocalService.professional" />
+		</property>
+		<property name="userGroupService">
+			<ref bean="com.liferay.portal.service.UserGroupService.professional" />
+		</property>
+		<property name="userGroupPersistence">
+			<ref bean="com.liferay.portal.service.persistence.UserGroupPersistenceImpl" />
+		</property>
+		<property name="userGroupRoleLocalService">
+			<ref bean="com.liferay.portal.service.UserGroupRoleLocalService.professional" />
+		</property>
+		<property name="userGroupRoleService">
+			<ref bean="com.liferay.portal.service.UserGroupRoleService.professional" />
+		</property>
+		<property name="userGroupRolePersistence">
+			<ref bean="com.liferay.portal.service.persistence.UserGroupRolePersistenceImpl" />
+		</property>
+		<property name="userIdMapperLocalService">
+			<ref bean="com.liferay.portal.service.UserIdMapperLocalService.professional" />
+		</property>
+		<property name="userIdMapperPersistence">
+			<ref bean="com.liferay.portal.service.persistence.UserIdMapperPersistenceImpl" />
+		</property>
+		<property name="userTrackerLocalService">
+			<ref bean="com.liferay.portal.service.UserTrackerLocalService.professional" />
+		</property>
+		<property name="userTrackerPersistence">
+			<ref bean="com.liferay.portal.service.persistence.UserTrackerPersistenceImpl" />
+		</property>
+		<property name="userTrackerPathLocalService">
+			<ref bean="com.liferay.portal.service.UserTrackerPathLocalService.professional" />
+		</property>
+		<property name="userTrackerPathPersistence">
+			<ref bean="com.liferay.portal.service.persistence.UserTrackerPathPersistenceImpl" />
+		</property>
+		<property name="websiteLocalService">
+			<ref bean="com.liferay.portal.service.WebsiteLocalService.professional" />
+		</property>
+		<property name="websiteService">
+			<ref bean="com.liferay.portal.service.WebsiteService.professional" />
+		</property>
+		<property name="websitePersistence">
+			<ref bean="com.liferay.portal.service.persistence.WebsitePersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.MembershipRequestService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="check*">PROPAGATION_REQUIRED</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="set*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.MembershipRequestServiceFactory" class="com.liferay.portal.service.MembershipRequestServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" class="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.MembershipRequestUtil" class="com.liferay.portal.service.persistence.MembershipRequestUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.OrganizationLocalService.professional" class="com.liferay.portal.service.impl.OrganizationLocalServiceImpl" lazy-init="true">
 		<property name="accountLocalService">
 			<ref bean="com.liferay.portal.service.AccountLocalService.professional" />
@@ -6908,6 +7753,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationPersistence">
 			<ref bean="com.liferay.portal.service.persistence.OrganizationPersistenceImpl" />
@@ -7225,6 +8079,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -7585,6 +8448,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -7901,6 +8773,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -8235,6 +9116,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -8551,6 +9441,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -8885,6 +9784,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -9217,6 +10125,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -9551,6 +10468,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -9861,6 +10787,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -10189,6 +11124,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -10505,6 +11449,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -10839,6 +11792,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -11152,6 +12114,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -11469,6 +12440,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -11803,6 +12783,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -12119,6 +13108,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -12453,6 +13451,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -12786,6 +13793,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -13112,6 +14128,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -13440,6 +14465,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -13756,6 +14790,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -14090,6 +15133,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -14417,6 +15469,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -14733,6 +15794,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -15067,6 +16137,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -15399,6 +16478,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -15733,6 +16821,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -16050,6 +17147,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -16385,6 +17491,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -16701,6 +17816,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -17035,6 +18159,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -17345,6 +18478,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -17672,6 +18814,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
@@ -18006,6 +19157,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -18339,6 +19499,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -18666,6 +19835,15 @@
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
 		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
+		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />
 		</property>
@@ -18982,6 +20160,15 @@
 		</property>
 		<property name="listTypePersistence">
 			<ref bean="com.liferay.portal.service.persistence.ListTypePersistenceImpl" />
+		</property>
+		<property name="membershipRequestLocalService">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.professional" />
+		</property>
+		<property name="membershipRequestService">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.professional" />
+		</property>
+		<property name="membershipRequestPersistence">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" />
 		</property>
 		<property name="organizationLocalService">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.professional" />

@@ -91,11 +91,21 @@ String tabs1 = (String)objArray[1];
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
+
+		<c:if test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewMembershipRequestsURL">
+				<portlet:param name="struts_action" value="/communities/view_membership_requests" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+			</portlet:renderURL>
+
+			<liferay-ui:icon image="manage_task" message="view-membership-requests" url="<%= viewMembershipRequestsURL %>" />
+		</c:if>
 	</c:if>
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("communities-owned") || tabs1.equals("communities-joined") %>'>
-			<c:if test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN) %>">
+			<c:if test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN) || group.getType().equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED)%>">
 				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="leaveURL">
 					<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 					<portlet:param name="<%= Constants.CMD %>" value="group_users" />
@@ -108,17 +118,45 @@ String tabs1 = (String)objArray[1];
 			</c:if>
 		</c:when>
 		<c:otherwise>
-			<c:if test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN) %>">
-				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="joinURL">
-					<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
-					<portlet:param name="<%= Constants.CMD %>" value="group_users" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-					<portlet:param name="addUserIds" value="<%= String.valueOf(user.getUserId()) %>" />
-				</portlet:actionURL>
+			<c:choose>
+				<c:when test="<%= !GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId()) %>">
+					<c:choose>
+						<c:when test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN) %>">
+							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="joinURL">
+								<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
+								<portlet:param name="<%= Constants.CMD %>" value="group_users" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+								<portlet:param name="addUserIds" value="<%= String.valueOf(user.getUserId()) %>" />
+							</portlet:actionURL>
 
-				<liferay-ui:icon image="join" url="<%= joinURL %>" />
-			</c:if>
+							<liferay-ui:icon image="join" url="<%= joinURL %>" />
+						</c:when>
+						<c:when test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED) %>">
+							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="membershipRequestURL">
+								<portlet:param name="struts_action" value="/communities/post_membership_request" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+							</portlet:renderURL>
+
+							<liferay-ui:icon image="post" message="post-membership-request" url="<%= membershipRequestURL %>" />
+						</c:when>
+					</c:choose>
+				</c:when>
+				<c:otherwise>
+					<c:if test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN) || group.getType().equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED)%>">
+						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="leaveURL">
+							<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
+							<portlet:param name="<%= Constants.CMD %>" value="group_users" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+							<portlet:param name="removeUserIds" value="<%= String.valueOf(user.getUserId()) %>" />
+						</portlet:actionURL>
+
+						<liferay-ui:icon image="leave" url="<%= leaveURL %>" />
+					</c:if>					
+				</c:otherwise>
+			</c:choose>
 		</c:otherwise>
 	</c:choose>
 

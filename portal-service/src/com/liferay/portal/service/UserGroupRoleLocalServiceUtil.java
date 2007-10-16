@@ -210,6 +210,18 @@ public class UserGroupRoleLocalServiceUtil {
 		userGroupRoleLocalService.setListTypePersistence(listTypePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.MembershipRequestPersistence getMembershipRequestPersistence() {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		return userGroupRoleLocalService.getMembershipRequestPersistence();
+	}
+
+	public static void setMembershipRequestPersistence(
+		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+		userGroupRoleLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.OrganizationPersistence getOrganizationPersistence() {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
 
@@ -584,6 +596,16 @@ public class UserGroupRoleLocalServiceUtil {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
 
 		return userGroupRoleLocalService.getUserGroupRoles(userId, groupId);
+	}
+
+	public static java.util.List getUserGroupRolesByGroupAndRole(long groupId,
+		long roleId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		return userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(groupId,
+			roleId);
 	}
 
 	public static boolean hasUserGroupRole(long userId, long groupId,
