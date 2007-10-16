@@ -818,13 +818,13 @@ public class PropsUtil {
 	public static final String CALENDAR_EMAIL_EVENT_REMINDER_SUBJECT = "calendar.email.event.reminder.subject";
 
 	public static final String CALENDAR_EMAIL_EVENT_REMINDER_BODY = "calendar.email.event.reminder.body";
-	
+
 	// Communities Portlet
-	
+
 	public static final String COMMUNITIES_EMAIL_FROM_NAME = "communities.email.from.name";
 
 	public static final String COMMUNITIES_EMAIL_FROM_ADDRESS = "communities.email.from.address";
-	
+
 	public static final String COMMUNITIES_EMAIL_MEMBERSHIP_REPLY_SUBJECT = "communities.email.membership.reply.subject";
 
 	public static final String COMMUNITIES_EMAIL_MEMBERSHIP_REPLY_BODY = "communities.email.membership.reply.body";
@@ -832,7 +832,7 @@ public class PropsUtil {
 	public static final String COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT = "communities.email.membership.request.subject";
 
 	public static final String COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_BODY = "communities.email.membership.request.body";
-	
+
 	// Document Library Portlet
 
 	public static final String DL_HOOK_IMPL = "dl.hook.impl";

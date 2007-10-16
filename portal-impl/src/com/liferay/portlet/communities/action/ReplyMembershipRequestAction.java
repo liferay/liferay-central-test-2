@@ -22,30 +22,31 @@
 
 package com.liferay.portlet.communities.action;
 
-import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.MembershipRequestCommentsException;
-import com.liferay.portal.util.LiveUsers;
+import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.impl.MembershipRequestImpl;
-import com.liferay.portal.service.MembershipRequestServiceUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.MembershipRequestServiceUtil;
+import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.LiveUsers;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
 
-import javax.portlet.PortletConfig;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
 /**
- * <a href="ViewMembershipRequestsAction.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="ReplyMembershipRequestAction.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Jorge Ferrer
  *
@@ -57,10 +58,10 @@ public class ReplyMembershipRequestAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-
 		try {
-			long membershipRequestId =
-				ParamUtil.getLong(req, "membershipRequestId");
+			long membershipRequestId = ParamUtil.getLong(
+				req, "membershipRequestId");
+
 			int statusId = ParamUtil.getInteger(req, "statusId");
 			String replyComments = ParamUtil.getString(req, "replyComments");
 
@@ -69,11 +70,11 @@ public class ReplyMembershipRequestAction extends PortletAction {
 					membershipRequestId);
 
 			MembershipRequestServiceUtil.updateStatus(
-			membershipRequestId, replyComments, statusId);
+				membershipRequestId, replyComments, statusId);
 
 			if (statusId == MembershipRequestImpl.STATUS_APPROVED) {
 				LiveUsers.joinGroup(
-					new long[]{membershipRequest.getUserId()},
+					new long[] {membershipRequest.getUserId()},
 					membershipRequest.getGroupId());
 			}
 

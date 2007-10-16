@@ -60,7 +60,7 @@
 <%@ page import="com.liferay.portal.captcha.CaptchaTextException" %>
 <%@ page import="com.liferay.portal.kernel.cal.Recurrence" %>
 <%@ page import="com.liferay.portal.kernel.dao.DAOParamUtil" %>
-<%@ page import="com.liferay.portal.kernel.dao.search.DisplayTerms"%>
+<%@ page import="com.liferay.portal.kernel.dao.search.DisplayTerms" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.RowChecker" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>

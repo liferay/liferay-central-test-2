@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.service.base.AccountLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.AccountUtil;
 
 /**
  * <a href="AccountLocalServiceImpl.java.html"><b><i>View Source</i></b></a>

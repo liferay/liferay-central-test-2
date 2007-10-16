@@ -22,21 +22,11 @@
 
 package com.liferay.portlet.communities.action;
 
-import com.liferay.portal.MembershipRequestCommentsException;
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.MembershipRequest;
-import com.liferay.portal.model.impl.MembershipRequestImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.MembershipRequestServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.LiveUsers;
 import com.liferay.util.servlet.SessionErrors;
-import com.liferay.util.servlet.SessionMessages;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -46,8 +36,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="ViewMembershipRequestsAction.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="ViewMembershipRequestsAction.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Jorge Ferrer
  *

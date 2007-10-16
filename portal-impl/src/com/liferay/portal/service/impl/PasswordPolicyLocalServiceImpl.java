@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicatePasswordPolicyException;
 import com.liferay.portal.NoSuchPasswordPolicyException;
 import com.liferay.portal.NoSuchPasswordPolicyRelException;
@@ -45,7 +44,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.PasswordPolicyLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PasswordPolicyFinder;
 import com.liferay.portal.service.persistence.PasswordPolicyUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.Date;

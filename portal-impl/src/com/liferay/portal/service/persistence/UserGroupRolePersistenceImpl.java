@@ -190,206 +190,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByU_G(long userId, long groupId) throws SystemException {
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findByU_G";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
-		Object[] finderArgs = new Object[] { new Long(userId), new Long(groupId) };
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
-				query.append("userId = ?");
-				query.append(" AND ");
-				query.append("groupId = ?");
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-				int queryPos = 0;
-				q.setLong(queryPos++, userId);
-				q.setLong(queryPos++, groupId);
-
-				List list = q.list();
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List)result;
-		}
-	}
-
-	public List findByU_G(long userId, long groupId, int begin, int end)
-		throws SystemException {
-		return findByU_G(userId, groupId, begin, end, null);
-	}
-
-	public List findByU_G(long userId, long groupId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "findByU_G";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), "java.lang.Integer",
-				"java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(groupId), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
-			};
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
-				query.append("userId = ?");
-				query.append(" AND ");
-				query.append("groupId = ?");
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
-				}
-
-				Query q = session.createQuery(query.toString());
-				int queryPos = 0;
-				q.setLong(queryPos++, userId);
-				q.setLong(queryPos++, groupId);
-
-				List list = QueryUtil.list(q, getDialect(), begin, end);
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List)result;
-		}
-	}
-
-	public UserGroupRole findByU_G_First(long userId, long groupId,
-		OrderByComparator obc)
-		throws NoSuchUserGroupRoleException, SystemException {
-		List list = findByU_G(userId, groupId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No UserGroupRole exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
-			msg.append(", ");
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchUserGroupRoleException(msg.toString());
-		}
-		else {
-			return (UserGroupRole)list.get(0);
-		}
-	}
-
-	public UserGroupRole findByU_G_Last(long userId, long groupId,
-		OrderByComparator obc)
-		throws NoSuchUserGroupRoleException, SystemException {
-		int count = countByU_G(userId, groupId);
-		List list = findByU_G(userId, groupId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No UserGroupRole exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("userId=");
-			msg.append(userId);
-			msg.append(", ");
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchUserGroupRoleException(msg.toString());
-		}
-		else {
-			return (UserGroupRole)list.get(0);
-		}
-	}
-
-	public UserGroupRole[] findByU_G_PrevAndNext(
-		UserGroupRolePK userGroupRolePK, long userId, long groupId,
-		OrderByComparator obc)
-		throws NoSuchUserGroupRoleException, SystemException {
-		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
-		int count = countByU_G(userId, groupId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
-			query.append("userId = ?");
-			query.append(" AND ");
-			query.append("groupId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, userId);
-			q.setLong(queryPos++, groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userGroupRole);
-			UserGroupRole[] array = new UserGroupRoleImpl[3];
-			array[0] = (UserGroupRole)objArray[0];
-			array[1] = (UserGroupRole)objArray[1];
-			array[2] = (UserGroupRole)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List findByUserId(long userId) throws SystemException {
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByUserId";
@@ -927,6 +727,206 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List findByU_G(long userId, long groupId) throws SystemException {
+		String finderClassName = UserGroupRole.class.getName();
+		String finderMethodName = "findByU_G";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(userId), new Long(groupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+				query.append("userId = ?");
+				query.append(" AND ");
+				query.append("groupId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, userId);
+				q.setLong(queryPos++, groupId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public List findByU_G(long userId, long groupId, int begin, int end)
+		throws SystemException {
+		return findByU_G(userId, groupId, begin, end, null);
+	}
+
+	public List findByU_G(long userId, long groupId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		String finderClassName = UserGroupRole.class.getName();
+		String finderMethodName = "findByU_G";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(), "java.lang.Integer",
+				"java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(userId), new Long(groupId), String.valueOf(begin),
+				String.valueOf(end), String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+				query.append("userId = ?");
+				query.append(" AND ");
+				query.append("groupId = ?");
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, userId);
+				q.setLong(queryPos++, groupId);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public UserGroupRole findByU_G_First(long userId, long groupId,
+		OrderByComparator obc)
+		throws NoSuchUserGroupRoleException, SystemException {
+		List list = findByU_G(userId, groupId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No UserGroupRole exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(", ");
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupRoleException(msg.toString());
+		}
+		else {
+			return (UserGroupRole)list.get(0);
+		}
+	}
+
+	public UserGroupRole findByU_G_Last(long userId, long groupId,
+		OrderByComparator obc)
+		throws NoSuchUserGroupRoleException, SystemException {
+		int count = countByU_G(userId, groupId);
+		List list = findByU_G(userId, groupId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No UserGroupRole exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(", ");
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupRoleException(msg.toString());
+		}
+		else {
+			return (UserGroupRole)list.get(0);
+		}
+	}
+
+	public UserGroupRole[] findByU_G_PrevAndNext(
+		UserGroupRolePK userGroupRolePK, long userId, long groupId,
+		OrderByComparator obc)
+		throws NoSuchUserGroupRoleException, SystemException {
+		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
+		int count = countByU_G(userId, groupId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+			query.append("userId = ?");
+			query.append(" AND ");
+			query.append("groupId = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setLong(queryPos++, userId);
+			q.setLong(queryPos++, groupId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					userGroupRole);
+			UserGroupRole[] array = new UserGroupRoleImpl[3];
+			array[0] = (UserGroupRole)objArray[0];
+			array[1] = (UserGroupRole)objArray[1];
+			array[2] = (UserGroupRole)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findByG_R(long groupId, long roleId) throws SystemException {
 		String finderClassName = UserGroupRole.class.getName();
 		String finderMethodName = "findByG_R";
@@ -1226,16 +1226,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByU_G(long userId, long groupId)
-		throws SystemException {
-		Iterator itr = findByU_G(userId, groupId).iterator();
-
-		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
-			remove(userGroupRole);
-		}
-	}
-
 	public void removeByUserId(long userId) throws SystemException {
 		Iterator itr = findByUserId(userId).iterator();
 
@@ -1263,6 +1253,16 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByU_G(long userId, long groupId)
+		throws SystemException {
+		Iterator itr = findByU_G(userId, groupId).iterator();
+
+		while (itr.hasNext()) {
+			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+			remove(userGroupRole);
+		}
+	}
+
 	public void removeByG_R(long groupId, long roleId)
 		throws SystemException {
 		Iterator itr = findByG_R(groupId, roleId).iterator();
@@ -1278,64 +1278,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			remove((UserGroupRole)itr.next());
-		}
-	}
-
-	public int countByU_G(long userId, long groupId) throws SystemException {
-		String finderClassName = UserGroupRole.class.getName();
-		String finderMethodName = "countByU_G";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
-		Object[] finderArgs = new Object[] { new Long(userId), new Long(groupId) };
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
-				query.append("userId = ?");
-				query.append(" AND ");
-				query.append("groupId = ?");
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-				int queryPos = 0;
-				q.setLong(queryPos++, userId);
-				q.setLong(queryPos++, groupId);
-
-				Long count = null;
-				Iterator itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = (Long)itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
-
-				return count.intValue();
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return ((Long)result).intValue();
 		}
 	}
 
@@ -1469,6 +1411,64 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 				int queryPos = 0;
 				q.setLong(queryPos++, roleId);
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByU_G(long userId, long groupId) throws SystemException {
+		String finderClassName = UserGroupRole.class.getName();
+		String finderMethodName = "countByU_G";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(userId), new Long(groupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portal.model.UserGroupRole WHERE ");
+				query.append("userId = ?");
+				query.append(" AND ");
+				query.append("groupId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, userId);
+				q.setLong(queryPos++, groupId);
 
 				Long count = null;
 				Iterator itr = q.list().iterator();

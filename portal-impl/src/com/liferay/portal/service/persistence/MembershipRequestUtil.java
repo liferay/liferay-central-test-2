@@ -151,42 +151,81 @@ public class MembershipRequestUtil {
 		return getPersistence().fetchByPrimaryKey(membershipRequestId);
 	}
 
-	public static java.util.List findByuserId(long userId)
+	public static java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByuserId(userId);
+		return getPersistence().findByGroupId(groupId);
 	}
 
-	public static java.util.List findByuserId(long userId, int begin, int end)
+	public static java.util.List findByGroupId(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByuserId(userId, begin, end);
+		return getPersistence().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByuserId(long userId, int begin, int end,
+	public static java.util.List findByGroupId(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.MembershipRequest findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchMembershipRequestException {
+		return getPersistence().findByGroupId_First(groupId, obc);
+	}
+
+	public static com.liferay.portal.model.MembershipRequest findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchMembershipRequestException {
+		return getPersistence().findByGroupId_Last(groupId, obc);
+	}
+
+	public static com.liferay.portal.model.MembershipRequest[] findByGroupId_PrevAndNext(
+		long membershipRequestId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchMembershipRequestException {
+		return getPersistence().findByGroupId_PrevAndNext(membershipRequestId,
+			groupId, obc);
+	}
+
+	public static java.util.List findByUserId(long userId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUserId(userId);
+	}
+
+	public static java.util.List findByUserId(long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUserId(userId, begin, end);
+	}
+
+	public static java.util.List findByUserId(long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByuserId(userId, begin, end, obc);
+		return getPersistence().findByUserId(userId, begin, end, obc);
 	}
 
-	public static com.liferay.portal.model.MembershipRequest findByuserId_First(
+	public static com.liferay.portal.model.MembershipRequest findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchMembershipRequestException {
-		return getPersistence().findByuserId_First(userId, obc);
+		return getPersistence().findByUserId_First(userId, obc);
 	}
 
-	public static com.liferay.portal.model.MembershipRequest findByuserId_Last(
+	public static com.liferay.portal.model.MembershipRequest findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchMembershipRequestException {
-		return getPersistence().findByuserId_Last(userId, obc);
+		return getPersistence().findByUserId_Last(userId, obc);
 	}
 
-	public static com.liferay.portal.model.MembershipRequest[] findByuserId_PrevAndNext(
+	public static com.liferay.portal.model.MembershipRequest[] findByUserId_PrevAndNext(
 		long membershipRequestId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchMembershipRequestException {
-		return getPersistence().findByuserId_PrevAndNext(membershipRequestId,
+		return getPersistence().findByUserId_PrevAndNext(membershipRequestId,
 			userId, obc);
 	}
 
@@ -231,45 +270,6 @@ public class MembershipRequestUtil {
 			groupId, statusId, obc);
 	}
 
-	public static java.util.List findBygroupId(long groupId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findBygroupId(groupId);
-	}
-
-	public static java.util.List findBygroupId(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findBygroupId(groupId, begin, end);
-	}
-
-	public static java.util.List findBygroupId(long groupId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findBygroupId(groupId, begin, end, obc);
-	}
-
-	public static com.liferay.portal.model.MembershipRequest findBygroupId_First(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchMembershipRequestException {
-		return getPersistence().findBygroupId_First(groupId, obc);
-	}
-
-	public static com.liferay.portal.model.MembershipRequest findBygroupId_Last(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchMembershipRequestException {
-		return getPersistence().findBygroupId_Last(groupId, obc);
-	}
-
-	public static com.liferay.portal.model.MembershipRequest[] findBygroupId_PrevAndNext(
-		long membershipRequestId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchMembershipRequestException {
-		return getPersistence().findBygroupId_PrevAndNext(membershipRequestId,
-			groupId, obc);
-	}
-
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -299,9 +299,14 @@ public class MembershipRequestUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByuserId(long userId)
+	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
-		getPersistence().removeByuserId(userId);
+		getPersistence().removeByGroupId(groupId);
+	}
+
+	public static void removeByUserId(long userId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByUserId(userId);
 	}
 
 	public static void removeByG_S(long groupId, int statusId)
@@ -309,28 +314,23 @@ public class MembershipRequestUtil {
 		getPersistence().removeByG_S(groupId, statusId);
 	}
 
-	public static void removeBygroupId(long groupId)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeBygroupId(groupId);
-	}
-
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
 
-	public static int countByuserId(long userId)
+	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByuserId(userId);
+		return getPersistence().countByGroupId(groupId);
+	}
+
+	public static int countByUserId(long userId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUserId(userId);
 	}
 
 	public static int countByG_S(long groupId, int statusId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_S(groupId, statusId);
-	}
-
-	public static int countBygroupId(long groupId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countBygroupId(groupId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

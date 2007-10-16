@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.LayoutSetVirtualHostException;
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchLayoutException;

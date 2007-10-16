@@ -39,7 +39,7 @@ import org.apache.commons.logging.LogFactory;
 public class PropertyComparator implements Comparator {
 
 	public PropertyComparator(String propertyName) {
-		_propertyNames = new String[]{propertyName};
+		_propertyNames = new String[] {propertyName};
 	}
 
 	public PropertyComparator(String[] propertyNames) {

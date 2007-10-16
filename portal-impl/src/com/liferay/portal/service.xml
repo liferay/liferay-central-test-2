@@ -511,22 +511,22 @@
 
 		<!-- PK fields -->
 
-		<column name="membershipRequestId" type="long" primary="true"/>
+		<column name="membershipRequestId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
-		<column name="userId" type="long"/>
+		<column name="userId" type="long" />
 		<column name="createDate" type="Date" />
 
 		<!-- Other fields -->
 
-		<column name="groupId" type="long"/>
-		<column name="comments" type="String"/>
-		<column name="replyComments" type="String"/>
+		<column name="groupId" type="long" />
+		<column name="comments" type="String" />
+		<column name="replyComments" type="String" />
 		<column name="replyDate" type="Date" />
-		<column name="replierUserId" type="long"/>
-		<column name="statusId" type="int"/>
+		<column name="replierUserId" type="long" />
+		<column name="statusId" type="int" />
 
 		<!-- Order -->
 
@@ -536,10 +536,10 @@
 
 		<!-- Finder methods -->
 
-		<finder name="groupId" return-type="Collection">
+		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="userId" return-type="Collection">
+		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
 		<finder name="G_S" return-type="Collection">
@@ -1336,16 +1336,12 @@
 
 		<!-- PK fields -->
 
-		<column name="userId" type="long" primary="true"/>
-		<column name="groupId" type="long" primary="true"/>
-		<column name="roleId" type="long" primary="true"/>
+		<column name="userId" type="long" primary="true" />
+		<column name="groupId" type="long" primary="true" />
+		<column name="roleId" type="long" primary="true" />
 
 		<!-- Finder methods -->
 
-		<finder name="U_G" return-type="Collection">
-			<finder-column name="userId" />
-			<finder-column name="groupId" />
-		</finder>
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
@@ -1354,6 +1350,10 @@
 		</finder>
 		<finder name="RoleId" return-type="Collection">
 			<finder-column name="roleId" />
+		</finder>
+		<finder name="U_G" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="groupId" />
 		</finder>
 		<finder name="G_R" return-type="Collection">
 			<finder-column name="groupId" />

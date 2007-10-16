@@ -44,7 +44,6 @@ import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 
 import java.util.List;
 import java.util.Locale;

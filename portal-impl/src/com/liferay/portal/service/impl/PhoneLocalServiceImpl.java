@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -33,7 +32,6 @@ import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.base.PhoneLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PhoneUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.format.PhoneNumberUtil;
 

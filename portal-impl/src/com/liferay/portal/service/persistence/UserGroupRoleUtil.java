@@ -151,48 +151,6 @@ public class UserGroupRoleUtil {
 		return getPersistence().fetchByPrimaryKey(userGroupRolePK);
 	}
 
-	public static java.util.List findByU_G(long userId, long groupId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByU_G(userId, groupId);
-	}
-
-	public static java.util.List findByU_G(long userId, long groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByU_G(userId, groupId, begin, end);
-	}
-
-	public static java.util.List findByU_G(long userId, long groupId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().findByU_G(userId, groupId, begin, end, obc);
-	}
-
-	public static com.liferay.portal.model.UserGroupRole findByU_G_First(
-		long userId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchUserGroupRoleException {
-		return getPersistence().findByU_G_First(userId, groupId, obc);
-	}
-
-	public static com.liferay.portal.model.UserGroupRole findByU_G_Last(
-		long userId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchUserGroupRoleException {
-		return getPersistence().findByU_G_Last(userId, groupId, obc);
-	}
-
-	public static com.liferay.portal.model.UserGroupRole[] findByU_G_PrevAndNext(
-		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
-		long userId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchUserGroupRoleException {
-		return getPersistence().findByU_G_PrevAndNext(userGroupRolePK, userId,
-			groupId, obc);
-	}
-
 	public static java.util.List findByUserId(long userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId);
@@ -310,6 +268,48 @@ public class UserGroupRoleUtil {
 			roleId, obc);
 	}
 
+	public static java.util.List findByU_G(long userId, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByU_G(userId, groupId);
+	}
+
+	public static java.util.List findByU_G(long userId, long groupId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByU_G(userId, groupId, begin, end);
+	}
+
+	public static java.util.List findByU_G(long userId, long groupId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByU_G(userId, groupId, begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.UserGroupRole findByU_G_First(
+		long userId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupRoleException {
+		return getPersistence().findByU_G_First(userId, groupId, obc);
+	}
+
+	public static com.liferay.portal.model.UserGroupRole findByU_G_Last(
+		long userId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupRoleException {
+		return getPersistence().findByU_G_Last(userId, groupId, obc);
+	}
+
+	public static com.liferay.portal.model.UserGroupRole[] findByU_G_PrevAndNext(
+		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
+		long userId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupRoleException {
+		return getPersistence().findByU_G_PrevAndNext(userGroupRolePK, userId,
+			groupId, obc);
+	}
+
 	public static java.util.List findByG_R(long groupId, long roleId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_R(groupId, roleId);
@@ -381,11 +381,6 @@ public class UserGroupRoleUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByU_G(long userId, long groupId)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByU_G(userId, groupId);
-	}
-
 	public static void removeByUserId(long userId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByUserId(userId);
@@ -401,6 +396,11 @@ public class UserGroupRoleUtil {
 		getPersistence().removeByRoleId(roleId);
 	}
 
+	public static void removeByU_G(long userId, long groupId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByU_G(userId, groupId);
+	}
+
 	public static void removeByG_R(long groupId, long roleId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_R(groupId, roleId);
@@ -408,11 +408,6 @@ public class UserGroupRoleUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
-	}
-
-	public static int countByU_G(long userId, long groupId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByU_G(userId, groupId);
 	}
 
 	public static int countByUserId(long userId)
@@ -428,6 +423,11 @@ public class UserGroupRoleUtil {
 	public static int countByRoleId(long roleId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByRoleId(roleId);
+	}
+
+	public static int countByU_G(long userId, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByU_G(userId, groupId);
 	}
 
 	public static int countByG_R(long groupId, long roleId)

@@ -30,8 +30,8 @@ import com.liferay.portal.model.MembershipRequest;
  * @author Jorge Ferrer
  *
  */
-public class MembershipRequestImpl extends MembershipRequestModelImpl
-	implements MembershipRequest {
+public class MembershipRequestImpl
+	extends MembershipRequestModelImpl implements MembershipRequest {
 
 	public static final int STATUS_PENDING = 0;
 

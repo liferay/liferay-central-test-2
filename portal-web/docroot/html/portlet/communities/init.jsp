@@ -33,7 +33,7 @@
 <%@ page import="com.liferay.portal.LayoutParentLayoutIdException" %>
 <%@ page import="com.liferay.portal.LayoutSetVirtualHostException" %>
 <%@ page import="com.liferay.portal.LayoutTypeException" %>
-<%@ page import="com.liferay.portal.MembershipRequestCommentsException"%>
+<%@ page import="com.liferay.portal.MembershipRequestCommentsException" %>
 <%@ page import="com.liferay.portal.NoSuchGroupException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutSetException" %>
@@ -46,10 +46,7 @@
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerChoice" %>
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerControl" %>
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerKeys" %>
-<%@ page import="com.liferay.portal.model.MembershipRequest"%>
-<%@ page import="com.liferay.portal.model.impl.MembershipRequestImpl"%>
 <%@ page import="com.liferay.portal.plugin.PluginUtil" %>
-<%@ page import="com.liferay.portal.service.MembershipRequestServiceUtil"%>
 <%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
 <%@ page import="com.liferay.portal.service.permission.GroupPermissionUtil" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>

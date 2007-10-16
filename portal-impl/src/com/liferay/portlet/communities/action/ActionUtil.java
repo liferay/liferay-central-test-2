@@ -70,6 +70,7 @@ public class ActionUtil
 
 	public static void getMembershipRequest(ActionRequest req)
 		throws Exception {
+
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getMembershipRequest(httpReq);
@@ -92,8 +93,9 @@ public class ActionUtil
 		MembershipRequest membershipRequest = null;
 
 		if (membershipRequestId > 0) {
-			membershipRequest = MembershipRequestLocalServiceUtil.
-				getMembershipRequest(membershipRequestId);
+			membershipRequest =
+				MembershipRequestLocalServiceUtil.getMembershipRequest(
+					membershipRequestId);
 		}
 
 		req.setAttribute(WebKeys.MEMBERSHIP_REQUEST, membershipRequest);

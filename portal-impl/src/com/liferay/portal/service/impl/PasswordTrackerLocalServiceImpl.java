@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.PasswordPolicy;
@@ -32,7 +31,6 @@ import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.base.PasswordTrackerLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PasswordTrackerUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 
 import java.util.Date;
 import java.util.Iterator;

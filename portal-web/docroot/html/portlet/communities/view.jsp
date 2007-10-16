@@ -44,11 +44,11 @@ pageContext.setAttribute("portletURL", portletURL);
 <liferay-portlet:renderURLParams varImpl="portletURL" />
 
 <liferay-ui:tabs
-	names="communities-owned,communities-joined,communities-available,all-communities"
+	names="communities-owned,communities-joined,available-communities,all-communities"
 	url="<%= portletURL.toString() %>"
 />
 
-<c:if test='<%= tabs1.equals("communities-available") %>'>
+<c:if test='<%= tabs1.equals("available-communities") %>'>
 	<liferay-ui:tabs
 		param="tabs2"
 		names="open,restricted"
@@ -87,11 +87,11 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		groupParams.put("usersGroups", new Long(user.getUserId()));
 		groupParams.put("active", Boolean.TRUE);
 	}
-	else if (tabs1.equals("communities-available") && tabs2.equals("open")) {
+	else if (tabs1.equals("available-communities") && tabs2.equals("open")) {
 		groupParams.put("type", GroupImpl.TYPE_COMMUNITY_OPEN);
 		groupParams.put("active", Boolean.TRUE);
 	}
-	else if (tabs1.equals("communities-available") && tabs2.equals("restricted")) {
+	else if (tabs1.equals("available-communities") && tabs2.equals("restricted")) {
 		groupParams.put("type", GroupImpl.TYPE_COMMUNITY_RESTRICTED);
 		groupParams.put("active", Boolean.TRUE);
 	}

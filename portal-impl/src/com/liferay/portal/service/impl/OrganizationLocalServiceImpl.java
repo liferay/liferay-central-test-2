@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicateOrganizationException;
 import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.OrganizationNameException;

@@ -58,33 +58,6 @@ public interface UserGroupRolePersistence {
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByU_G(long userId, long groupId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByU_G(long userId, long groupId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByU_G(long userId, long groupId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.UserGroupRole findByU_G_First(long userId,
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchUserGroupRoleException;
-
-	public com.liferay.portal.model.UserGroupRole findByU_G_Last(long userId,
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchUserGroupRoleException;
-
-	public com.liferay.portal.model.UserGroupRole[] findByU_G_PrevAndNext(
-		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
-		long userId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.NoSuchUserGroupRoleException;
-
 	public java.util.List findByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
@@ -163,6 +136,33 @@ public interface UserGroupRolePersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupRoleException;
 
+	public java.util.List findByU_G(long userId, long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByU_G(long userId, long groupId, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByU_G(long userId, long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.UserGroupRole findByU_G_First(long userId,
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupRoleException;
+
+	public com.liferay.portal.model.UserGroupRole findByU_G_Last(long userId,
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupRoleException;
+
+	public com.liferay.portal.model.UserGroupRole[] findByU_G_PrevAndNext(
+		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
+		long userId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserGroupRoleException;
+
 	public java.util.List findByG_R(long groupId, long roleId)
 		throws com.liferay.portal.SystemException;
 
@@ -208,9 +208,6 @@ public interface UserGroupRolePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByU_G(long userId, long groupId)
-		throws com.liferay.portal.SystemException;
-
 	public void removeByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
@@ -220,13 +217,13 @@ public interface UserGroupRolePersistence {
 	public void removeByRoleId(long roleId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByU_G(long userId, long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByG_R(long groupId, long roleId)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
-
-	public int countByU_G(long userId, long groupId)
-		throws com.liferay.portal.SystemException;
 
 	public int countByUserId(long userId)
 		throws com.liferay.portal.SystemException;
@@ -235,6 +232,9 @@ public interface UserGroupRolePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByRoleId(long roleId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByU_G(long userId, long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_R(long groupId, long roleId)

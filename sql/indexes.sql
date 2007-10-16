@@ -149,7 +149,6 @@ create index IX_CB854772 on MBThread (categoryId);
 
 create index IX_8A1CC4B on MembershipRequest (groupId);
 create index IX_C28C72EC on MembershipRequest (groupId, statusId);
-create index IX_18410BCA on MembershipRequest (statusId, groupId);
 create index IX_66D70879 on MembershipRequest (userId);
 
 create index IX_A425F71A on OrgGroupPermission (groupId);

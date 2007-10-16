@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
@@ -35,7 +34,6 @@ import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.PluginSettingLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PluginSettingUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import org.apache.commons.logging.Log;

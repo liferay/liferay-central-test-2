@@ -105,7 +105,7 @@ String tabs1 = (String)objArray[1];
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("communities-owned") || tabs1.equals("communities-joined") %>'>
-			<c:if test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN) || group.getType().equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED)%>">
+			<c:if test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN) || group.getType().equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED) %>">
 				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="leaveURL">
 					<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 					<portlet:param name="<%= Constants.CMD %>" value="group_users" />
@@ -144,7 +144,7 @@ String tabs1 = (String)objArray[1];
 					</c:choose>
 				</c:when>
 				<c:otherwise>
-					<c:if test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN) || group.getType().equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED)%>">
+					<c:if test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN) || group.getType().equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED) %>">
 						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="leaveURL">
 							<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 							<portlet:param name="<%= Constants.CMD %>" value="group_users" />
@@ -154,7 +154,7 @@ String tabs1 = (String)objArray[1];
 						</portlet:actionURL>
 
 						<liferay-ui:icon image="leave" url="<%= leaveURL %>" />
-					</c:if>					
+					</c:if>
 				</c:otherwise>
 			</c:choose>
 		</c:otherwise>

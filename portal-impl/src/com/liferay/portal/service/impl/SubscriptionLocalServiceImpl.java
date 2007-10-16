@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -31,7 +30,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.service.base.SubscriptionLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.SubscriptionUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.Date;

@@ -24,7 +24,6 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.base.UserTrackerPathLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 
 import java.util.List;
 

@@ -36,6 +36,7 @@ long groupId = BeanParamUtil.getLong(group, request, "groupId");
 String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 
 ActionUtil.getMembershipRequest(request);
+
 MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(WebKeys.MEMBERSHIP_REQUEST);
 %>
 
@@ -55,19 +56,19 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 <liferay-ui:error exception="<%= MembershipRequestCommentsException.class %>" message="please-enter-valid-comments" />
 <liferay-ui:error exception="<%= RequiredGroupException.class %>" message="old-group-name-is-a-required-system-group" />
 
-
 <table class="liferay-table">
 <tr>
-	<td valign="top">
+	<td>
 		<liferay-ui:message key="user-name" />
 	</td>
 	<td>
 		<%= group.getName() %>
 	</td>
 </tr>
+
 <c:if test="<%= Validator.isNotNull(group.getDescription()) %>">
 	<tr>
-		<td valign="top">
+		<td>
 			<liferay-ui:message key="description" />
 		</td>
 		<td>
@@ -75,6 +76,7 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 		</td>
 	</tr>
 </c:if>
+
 <tr>
 	<td>
 		<liferay-ui:message key="user-comments" />
@@ -95,7 +97,7 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 	</td>
 </tr>
 <tr>
-	<td valign="top">
+	<td>
 		<liferay-ui:message key="comments" />
 	</td>
 	<td>

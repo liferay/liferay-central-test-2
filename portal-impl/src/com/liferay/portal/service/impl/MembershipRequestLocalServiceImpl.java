@@ -103,7 +103,7 @@ public class MembershipRequestLocalServiceImpl
 	}
 
 	public void deleteByGroupId(long groupId) throws SystemException {
-		MembershipRequestUtil.removeBygroupId(groupId);
+		MembershipRequestUtil.removeByGroupId(groupId);
 	}
 
 	public void deleteByGroupIdAndStatus(long groupId, int statusId)
@@ -134,7 +134,7 @@ public class MembershipRequestLocalServiceImpl
 		Date now = new Date();
 
 		if (statusId == MembershipRequestImpl.STATUS_APPROVED) {
-			long[] addUserIds = new long[]{membershipRequest.getUserId()};
+			long[] addUserIds = new long[] {membershipRequest.getUserId()};
 
 			UserLocalServiceUtil.addGroupUsers(
 				membershipRequest.getGroupId(), addUserIds);

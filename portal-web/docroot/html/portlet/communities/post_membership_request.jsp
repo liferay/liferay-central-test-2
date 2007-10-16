@@ -50,16 +50,17 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 
 <table class="liferay-table">
 <tr>
-	<td valign="top">
+	<td>
 		<liferay-ui:message key="community" />
 	</td>
 	<td>
 		<%= group.getName() %>
 	</td>
 </tr>
+
 <c:if test="<%= Validator.isNotNull(group.getDescription()) %>">
 	<tr>
-		<td valign="top">
+		<td>
 			<liferay-ui:message key="description" />
 		</td>
 		<td>
@@ -67,8 +68,9 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 		</td>
 	</tr>
 </c:if>
+
 <tr>
-	<td valign="top">
+	<td>
 		<liferay-ui:message key="comments" />
 	</td>
 	<td>

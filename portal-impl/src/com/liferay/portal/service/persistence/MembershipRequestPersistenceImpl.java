@@ -191,9 +191,201 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByuserId(long userId) throws SystemException {
+	public List findByGroupId(long groupId) throws SystemException {
 		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "findByuserId";
+		String finderMethodName = "findByGroupId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+				query.append("groupId = ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("createDate DESC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public List findByGroupId(long groupId, int begin, int end)
+		throws SystemException {
+		return findByGroupId(groupId, begin, end, null);
+	}
+
+	public List findByGroupId(long groupId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		String finderClassName = MembershipRequest.class.getName();
+		String finderMethodName = "findByGroupId";
+		String[] finderParams = new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+				query.append("groupId = ?");
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+				else {
+					query.append("ORDER BY ");
+					query.append("createDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public MembershipRequest findByGroupId_First(long groupId,
+		OrderByComparator obc)
+		throws NoSuchMembershipRequestException, SystemException {
+		List list = findByGroupId(groupId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No MembershipRequest exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMembershipRequestException(msg.toString());
+		}
+		else {
+			return (MembershipRequest)list.get(0);
+		}
+	}
+
+	public MembershipRequest findByGroupId_Last(long groupId,
+		OrderByComparator obc)
+		throws NoSuchMembershipRequestException, SystemException {
+		int count = countByGroupId(groupId);
+		List list = findByGroupId(groupId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No MembershipRequest exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMembershipRequestException(msg.toString());
+		}
+		else {
+			return (MembershipRequest)list.get(0);
+		}
+	}
+
+	public MembershipRequest[] findByGroupId_PrevAndNext(
+		long membershipRequestId, long groupId, OrderByComparator obc)
+		throws NoSuchMembershipRequestException, SystemException {
+		MembershipRequest membershipRequest = findByPrimaryKey(membershipRequestId);
+		int count = countByGroupId(groupId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+			query.append("groupId = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("createDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					membershipRequest);
+			MembershipRequest[] array = new MembershipRequestImpl[3];
+			array[0] = (MembershipRequest)objArray[0];
+			array[1] = (MembershipRequest)objArray[1];
+			array[2] = (MembershipRequest)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByUserId(long userId) throws SystemException {
+		String finderClassName = MembershipRequest.class.getName();
+		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 		Object result = FinderCache.getResult(finderClassName,
@@ -235,15 +427,15 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findByuserId(long userId, int begin, int end)
+	public List findByUserId(long userId, int begin, int end)
 		throws SystemException {
-		return findByuserId(userId, begin, end, null);
+		return findByUserId(userId, begin, end, null);
 	}
 
-	public List findByuserId(long userId, int begin, int end,
+	public List findByUserId(long userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "findByuserId";
+		String finderMethodName = "findByUserId";
 		String[] finderParams = new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -298,10 +490,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public MembershipRequest findByuserId_First(long userId,
+	public MembershipRequest findByUserId_First(long userId,
 		OrderByComparator obc)
 		throws NoSuchMembershipRequestException, SystemException {
-		List list = findByuserId(userId, 0, 1, obc);
+		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -317,11 +509,11 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public MembershipRequest findByuserId_Last(long userId,
+	public MembershipRequest findByUserId_Last(long userId,
 		OrderByComparator obc)
 		throws NoSuchMembershipRequestException, SystemException {
-		int count = countByuserId(userId);
-		List list = findByuserId(userId, count - 1, count, obc);
+		int count = countByUserId(userId);
+		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
@@ -337,11 +529,11 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public MembershipRequest[] findByuserId_PrevAndNext(
+	public MembershipRequest[] findByUserId_PrevAndNext(
 		long membershipRequestId, long userId, OrderByComparator obc)
 		throws NoSuchMembershipRequestException, SystemException {
 		MembershipRequest membershipRequest = findByPrimaryKey(membershipRequestId);
-		int count = countByuserId(userId);
+		int count = countByUserId(userId);
 		Session session = null;
 
 		try {
@@ -595,198 +787,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List findBygroupId(long groupId) throws SystemException {
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "findBygroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(groupId) };
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-				query.append(
-					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
-				query.append("groupId = ?");
-				query.append(" ");
-				query.append("ORDER BY ");
-				query.append("createDate DESC");
-
-				Query q = session.createQuery(query.toString());
-				int queryPos = 0;
-				q.setLong(queryPos++, groupId);
-
-				List list = q.list();
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List)result;
-		}
-	}
-
-	public List findBygroupId(long groupId, int begin, int end)
-		throws SystemException {
-		return findBygroupId(groupId, begin, end, null);
-	}
-
-	public List findBygroupId(long groupId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "findBygroupId";
-		String[] finderParams = new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
-			};
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-				query.append(
-					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
-				query.append("groupId = ?");
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
-				}
-				else {
-					query.append("ORDER BY ");
-					query.append("createDate DESC");
-				}
-
-				Query q = session.createQuery(query.toString());
-				int queryPos = 0;
-				q.setLong(queryPos++, groupId);
-
-				List list = QueryUtil.list(q, getDialect(), begin, end);
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List)result;
-		}
-	}
-
-	public MembershipRequest findBygroupId_First(long groupId,
-		OrderByComparator obc)
-		throws NoSuchMembershipRequestException, SystemException {
-		List list = findBygroupId(groupId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MembershipRequest exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchMembershipRequestException(msg.toString());
-		}
-		else {
-			return (MembershipRequest)list.get(0);
-		}
-	}
-
-	public MembershipRequest findBygroupId_Last(long groupId,
-		OrderByComparator obc)
-		throws NoSuchMembershipRequestException, SystemException {
-		int count = countBygroupId(groupId);
-		List list = findBygroupId(groupId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-			msg.append("No MembershipRequest exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("groupId=");
-			msg.append(groupId);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-			throw new NoSuchMembershipRequestException(msg.toString());
-		}
-		else {
-			return (MembershipRequest)list.get(0);
-		}
-	}
-
-	public MembershipRequest[] findBygroupId_PrevAndNext(
-		long membershipRequestId, long groupId, OrderByComparator obc)
-		throws NoSuchMembershipRequestException, SystemException {
-		MembershipRequest membershipRequest = findByPrimaryKey(membershipRequestId);
-		int count = countBygroupId(groupId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-			query.append(
-				"FROM com.liferay.portal.model.MembershipRequest WHERE ");
-			query.append("groupId = ?");
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-			else {
-				query.append("ORDER BY ");
-				query.append("createDate DESC");
-			}
-
-			Query q = session.createQuery(query.toString());
-			int queryPos = 0;
-			q.setLong(queryPos++, groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					membershipRequest);
-			MembershipRequest[] array = new MembershipRequestImpl[3];
-			array[0] = (MembershipRequest)objArray[0];
-			array[1] = (MembershipRequest)objArray[1];
-			array[2] = (MembershipRequest)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		Session session = null;
@@ -890,8 +890,17 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByuserId(long userId) throws SystemException {
-		Iterator itr = findByuserId(userId).iterator();
+	public void removeByGroupId(long groupId) throws SystemException {
+		Iterator itr = findByGroupId(groupId).iterator();
+
+		while (itr.hasNext()) {
+			MembershipRequest membershipRequest = (MembershipRequest)itr.next();
+			remove(membershipRequest);
+		}
+	}
+
+	public void removeByUserId(long userId) throws SystemException {
+		Iterator itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
 			MembershipRequest membershipRequest = (MembershipRequest)itr.next();
@@ -909,15 +918,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeBygroupId(long groupId) throws SystemException {
-		Iterator itr = findBygroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			MembershipRequest membershipRequest = (MembershipRequest)itr.next();
-			remove(membershipRequest);
-		}
-	}
-
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -926,9 +926,62 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByuserId(long userId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "countByuserId";
+		String finderMethodName = "countByGroupId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(groupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
+				query.append("groupId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByUserId(long userId) throws SystemException {
+		String finderClassName = MembershipRequest.class.getName();
+		String finderMethodName = "countByUserId";
 		String[] finderParams = new String[] { Long.class.getName() };
 		Object[] finderArgs = new Object[] { new Long(userId) };
 		Object result = FinderCache.getResult(finderClassName,
@@ -1010,59 +1063,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				int queryPos = 0;
 				q.setLong(queryPos++, groupId);
 				q.setInteger(queryPos++, statusId);
-
-				Long count = null;
-				Iterator itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = (Long)itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCache.putResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, count);
-
-				return count.intValue();
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return ((Long)result).intValue();
-		}
-	}
-
-	public int countBygroupId(long groupId) throws SystemException {
-		String finderClassName = MembershipRequest.class.getName();
-		String finderMethodName = "countBygroupId";
-		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(groupId) };
-		Object result = FinderCache.getResult(finderClassName,
-				finderMethodName, finderParams, finderArgs, getSessionFactory());
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
-				query.append("groupId = ?");
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-				int queryPos = 0;
-				q.setLong(queryPos++, groupId);
 
 				Long count = null;
 				Iterator itr = q.list().iterator();

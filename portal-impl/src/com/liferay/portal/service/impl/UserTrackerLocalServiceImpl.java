@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.service.base.UserTrackerLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.service.persistence.UserTrackerUtil;
 import com.liferay.portal.util.PropsUtil;
 

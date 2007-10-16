@@ -22,27 +22,27 @@
 
 package com.liferay.portlet.communities.action;
 
-import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.MembershipRequestCommentsException;
-import com.liferay.portal.service.MembershipRequestServiceUtil;
+import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.MembershipRequestServiceUtil;
+import com.liferay.portal.struts.PortletAction;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
 
-import javax.portlet.PortletConfig;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
 /**
- * <a href="ViewMembershipRequestsAction.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="PostMembershipRequestAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
@@ -58,7 +58,8 @@ public class PostMembershipRequestAction extends PortletAction {
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String comments = ParamUtil.getString(req, "comments");
 
-			MembershipRequestServiceUtil.addMembershipRequest(groupId, comments);
+			MembershipRequestServiceUtil.addMembershipRequest(
+				groupId, comments);
 
 			SessionMessages.add(req, "membership_request_sent");
 
