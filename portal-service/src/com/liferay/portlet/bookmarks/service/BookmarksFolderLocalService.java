@@ -77,6 +77,8 @@ public interface BookmarksFolderLocalService {
 	public void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

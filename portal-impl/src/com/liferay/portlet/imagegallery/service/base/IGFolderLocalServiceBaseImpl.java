@@ -27,10 +27,15 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.IGImageLocalService;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceFactory;
 import com.liferay.portlet.imagegallery.service.IGImageService;
+import com.liferay.portlet.imagegallery.service.IGImageServiceFactory;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
+import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 
@@ -41,7 +46,7 @@ import java.util.List;
  *
  */
 public abstract class IGFolderLocalServiceBaseImpl
-	implements IGFolderLocalService {
+	implements IGFolderLocalService, InitializingBean {
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return IGFolderUtil.findWithDynamicQuery(queryInitializer);
@@ -82,6 +87,24 @@ public abstract class IGFolderLocalServiceBaseImpl
 
 	public void setIGImagePersistence(IGImagePersistence igImagePersistence) {
 		this.igImagePersistence = igImagePersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (igFolderPersistence == null) {
+			igFolderPersistence = IGFolderUtil.getPersistence();
+		}
+
+		if (igImageLocalService == null) {
+			igImageLocalService = IGImageLocalServiceFactory.getImpl();
+		}
+
+		if (igImageService == null) {
+			igImageService = IGImageServiceFactory.getImpl();
+		}
+
+		if (igImagePersistence == null) {
+			igImagePersistence = IGImageUtil.getPersistence();
+		}
 	}
 
 	protected IGFolderPersistence igFolderPersistence;

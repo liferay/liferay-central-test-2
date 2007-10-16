@@ -53,6 +53,14 @@ public class CalEventLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static CalEventLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (CalEventLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static CalEventLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (CalEventLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class CalEventLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = CalEventLocalServiceFactory.class.getName();
+	private static final String _IMPL = CalEventLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = CalEventLocalService.class.getName() +
 		".transaction";
 	private static CalEventLocalServiceFactory _factory;
+	private static CalEventLocalService _impl;
 	private static CalEventLocalService _txImpl;
 	private CalEventLocalService _service;
 }

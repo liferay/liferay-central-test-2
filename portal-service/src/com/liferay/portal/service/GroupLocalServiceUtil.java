@@ -533,6 +533,11 @@ public class GroupLocalServiceUtil {
 		groupLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.Group addGroup(long userId,
 		java.lang.String className, long classPK, java.lang.String name,
 		java.lang.String description, java.lang.String type,

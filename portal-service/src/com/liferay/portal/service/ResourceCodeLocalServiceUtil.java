@@ -534,6 +534,11 @@ public class ResourceCodeLocalServiceUtil {
 		resourceCodeLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+		resourceCodeLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.ResourceCode getResourceCode(
 		long codeId)
 		throws com.liferay.portal.PortalException, 

@@ -252,6 +252,8 @@ public interface MembershipRequestLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long userId, long groupId, java.lang.String comments)
 		throws com.liferay.portal.SystemException, 

@@ -252,6 +252,8 @@ public interface ReleaseLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public int getBuildNumberOrCreate()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

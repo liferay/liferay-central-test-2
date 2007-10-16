@@ -87,6 +87,8 @@ public interface JournalContentSearchLocalService {
 	public void setJournalTemplatePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence);
 
+	public void afterPropertiesSet();
+
 	public void checkContentSearches(long companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

@@ -92,6 +92,8 @@ public interface MBStatsUserLocalService {
 	public void setMBThreadPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence);
 
+	public void afterPropertiesSet();
+
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 

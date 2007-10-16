@@ -252,6 +252,8 @@ public interface EmailAddressLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portal.model.EmailAddress addEmailAddress(long userId,
 		java.lang.String className, long classPK, java.lang.String address,
 		int typeId, boolean primary)

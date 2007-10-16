@@ -53,6 +53,14 @@ public class PluginSettingServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static PluginSettingService getImpl() {
+		if (_impl == null) {
+			_impl = (PluginSettingService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static PluginSettingService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (PluginSettingService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class PluginSettingServiceFactory {
 	}
 
 	private static final String _FACTORY = PluginSettingServiceFactory.class.getName();
+	private static final String _IMPL = PluginSettingService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = PluginSettingService.class.getName() +
 		".transaction";
 	private static PluginSettingServiceFactory _factory;
+	private static PluginSettingService _impl;
 	private static PluginSettingService _txImpl;
 	private PluginSettingService _service;
 }

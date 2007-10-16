@@ -533,6 +533,11 @@ public class LayoutLocalServiceUtil {
 		layoutLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.Layout addLayout(long userId,
 		long groupId, boolean privateLayout, long parentLayoutId,
 		java.lang.String name, java.lang.String title,

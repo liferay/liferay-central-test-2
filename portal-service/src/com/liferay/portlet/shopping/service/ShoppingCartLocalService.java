@@ -97,6 +97,8 @@ public interface ShoppingCartLocalService {
 	public void setShoppingOrderItemPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence shoppingOrderItemPersistence);
 
+	public void afterPropertiesSet();
+
 	public void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException;
 

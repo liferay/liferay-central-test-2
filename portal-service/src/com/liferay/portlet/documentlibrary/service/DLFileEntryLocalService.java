@@ -82,6 +82,8 @@ public interface DLFileEntryLocalService {
 	public void setDLFolderPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,

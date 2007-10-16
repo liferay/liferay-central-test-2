@@ -534,6 +534,11 @@ public class PasswordPolicyRelLocalServiceUtil {
 		passwordPolicyRelLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
+		passwordPolicyRelLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.PasswordPolicyRel addPasswordPolicyRel(
 		long passwordPolicyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 

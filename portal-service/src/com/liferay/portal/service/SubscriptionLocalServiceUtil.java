@@ -534,6 +534,11 @@ public class SubscriptionLocalServiceUtil {
 		subscriptionLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.Subscription addSubscription(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 

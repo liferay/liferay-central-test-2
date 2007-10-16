@@ -252,6 +252,8 @@ public interface UserTrackerPathLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public java.util.List getUserTrackerPaths(long userTrackerId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 }

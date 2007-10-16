@@ -53,6 +53,14 @@ public class AddressServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static AddressService getImpl() {
+		if (_impl == null) {
+			_impl = (AddressService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static AddressService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (AddressService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class AddressServiceFactory {
 	}
 
 	private static final String _FACTORY = AddressServiceFactory.class.getName();
+	private static final String _IMPL = AddressService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = AddressService.class.getName() +
 		".transaction";
 	private static AddressServiceFactory _factory;
+	private static AddressService _impl;
 	private static AddressService _txImpl;
 	private AddressService _service;
 }

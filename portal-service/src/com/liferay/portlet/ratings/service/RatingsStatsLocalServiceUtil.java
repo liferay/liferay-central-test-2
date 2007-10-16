@@ -90,6 +90,11 @@ public class RatingsStatsLocalServiceUtil {
 		ratingsStatsLocalService.setRatingsStatsPersistence(ratingsStatsPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
+		ratingsStatsLocalService.afterPropertiesSet();
+	}
+
 	public static void deleteStats(java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

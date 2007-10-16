@@ -92,6 +92,8 @@ public interface MBMessageLocalService {
 	public void setMBThreadPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.SystemException, 

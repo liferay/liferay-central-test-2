@@ -53,6 +53,14 @@ public class DLFileShortcutServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static DLFileShortcutService getImpl() {
+		if (_impl == null) {
+			_impl = (DLFileShortcutService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static DLFileShortcutService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (DLFileShortcutService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class DLFileShortcutServiceFactory {
 	}
 
 	private static final String _FACTORY = DLFileShortcutServiceFactory.class.getName();
+	private static final String _IMPL = DLFileShortcutService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = DLFileShortcutService.class.getName() +
 		".transaction";
 	private static DLFileShortcutServiceFactory _factory;
+	private static DLFileShortcutService _impl;
 	private static DLFileShortcutService _txImpl;
 	private DLFileShortcutService _service;
 }

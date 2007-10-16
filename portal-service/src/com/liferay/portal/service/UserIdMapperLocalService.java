@@ -252,6 +252,8 @@ public interface UserIdMapperLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public void deleteUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException;
 

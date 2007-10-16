@@ -82,6 +82,8 @@ public interface BookmarksEntryLocalService {
 	public void setTagsAssetPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,

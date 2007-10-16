@@ -23,28 +23,45 @@
 package com.liferay.portlet.bookmarks.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
+import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.ResourceServiceFactory;
 import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceFactory;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceFactory;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceFactory;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
+import com.liferay.portlet.tags.service.TagsAssetServiceFactory;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
+import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * <a href="BookmarksEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -53,7 +70,7 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
  *
  */
 public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
-	implements BookmarksEntryService {
+	implements BookmarksEntryService, InitializingBean {
 	public BookmarksEntryLocalService getBookmarksEntryLocalService() {
 		return bookmarksEntryLocalService;
 	}
@@ -188,6 +205,72 @@ public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
 	public void setTagsAssetPersistence(
 		TagsAssetPersistence tagsAssetPersistence) {
 		this.tagsAssetPersistence = tagsAssetPersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (bookmarksEntryLocalService == null) {
+			bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getImpl();
+		}
+
+		if (bookmarksEntryPersistence == null) {
+			bookmarksEntryPersistence = BookmarksEntryUtil.getPersistence();
+		}
+
+		if (bookmarksFolderLocalService == null) {
+			bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getImpl();
+		}
+
+		if (bookmarksFolderService == null) {
+			bookmarksFolderService = BookmarksFolderServiceFactory.getImpl();
+		}
+
+		if (bookmarksFolderPersistence == null) {
+			bookmarksFolderPersistence = BookmarksFolderUtil.getPersistence();
+		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
+
+		if (resourceLocalService == null) {
+			resourceLocalService = ResourceLocalServiceFactory.getImpl();
+		}
+
+		if (resourceService == null) {
+			resourceService = ResourceServiceFactory.getImpl();
+		}
+
+		if (resourcePersistence == null) {
+			resourcePersistence = ResourceUtil.getPersistence();
+		}
+
+		if (userLocalService == null) {
+			userLocalService = UserLocalServiceFactory.getImpl();
+		}
+
+		if (userService == null) {
+			userService = UserServiceFactory.getImpl();
+		}
+
+		if (userPersistence == null) {
+			userPersistence = UserUtil.getPersistence();
+		}
+
+		if (tagsAssetLocalService == null) {
+			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
+		}
+
+		if (tagsAssetService == null) {
+			tagsAssetService = TagsAssetServiceFactory.getImpl();
+		}
+
+		if (tagsAssetPersistence == null) {
+			tagsAssetPersistence = TagsAssetUtil.getPersistence();
+		}
 	}
 
 	protected BookmarksEntryLocalService bookmarksEntryLocalService;

@@ -149,6 +149,11 @@ public class MBStatsUserLocalServiceUtil {
 		mbStatsUserLocalService.setMBThreadPersistence(mbThreadPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+		mbStatsUserLocalService.afterPropertiesSet();
+	}
+
 	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();

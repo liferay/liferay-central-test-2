@@ -252,6 +252,8 @@ public interface ImageLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public void deleteImage(long imageId)
 		throws com.liferay.portal.SystemException;
 

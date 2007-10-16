@@ -53,6 +53,14 @@ public class PasswordPolicyRelLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static PasswordPolicyRelLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (PasswordPolicyRelLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static PasswordPolicyRelLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (PasswordPolicyRelLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class PasswordPolicyRelLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = PasswordPolicyRelLocalServiceFactory.class.getName();
+	private static final String _IMPL = PasswordPolicyRelLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = PasswordPolicyRelLocalService.class.getName() +
 		".transaction";
 	private static PasswordPolicyRelLocalServiceFactory _factory;
+	private static PasswordPolicyRelLocalService _impl;
 	private static PasswordPolicyRelLocalService _txImpl;
 	private PasswordPolicyRelLocalService _service;
 }

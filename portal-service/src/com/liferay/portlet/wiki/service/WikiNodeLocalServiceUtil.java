@@ -101,6 +101,11 @@ public class WikiNodeLocalServiceUtil {
 		wikiNodeLocalService.setWikiPageResourcePersistence(wikiPageResourcePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+		wikiNodeLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
 		long plid, java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)

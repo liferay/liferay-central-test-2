@@ -534,6 +534,11 @@ public class EmailAddressLocalServiceUtil {
 		emailAddressLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+		emailAddressLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
 		long userId, java.lang.String className, long classPK,
 		java.lang.String address, int typeId, boolean primary)

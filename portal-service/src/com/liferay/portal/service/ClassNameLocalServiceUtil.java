@@ -533,6 +533,11 @@ public class ClassNameLocalServiceUtil {
 		classNameLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
+		classNameLocalService.afterPropertiesSet();
+	}
+
 	public static void checkClassNames()
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

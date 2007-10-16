@@ -97,6 +97,8 @@ public interface ShoppingOrderLocalService {
 	public void setShoppingOrderItemPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence shoppingOrderItemPersistence);
 
+	public void afterPropertiesSet();
+
 	public void completeOrder(java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,

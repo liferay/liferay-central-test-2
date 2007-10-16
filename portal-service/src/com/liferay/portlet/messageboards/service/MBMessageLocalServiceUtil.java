@@ -149,6 +149,11 @@ public class MBMessageLocalServiceUtil {
 		mbMessageLocalService.setMBThreadPersistence(mbThreadPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.PortalException, 

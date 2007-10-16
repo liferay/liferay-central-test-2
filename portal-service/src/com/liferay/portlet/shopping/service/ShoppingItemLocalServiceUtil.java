@@ -162,6 +162,11 @@ public class ShoppingItemLocalServiceUtil {
 		shoppingItemLocalService.setShoppingOrderItemPersistence(shoppingOrderItemPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+		shoppingItemLocalService.afterPropertiesSet();
+	}
+
 	public static void addBookItems(long userId, long categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException, 

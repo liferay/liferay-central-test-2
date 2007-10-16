@@ -149,6 +149,11 @@ public class MBThreadLocalServiceUtil {
 		mbThreadLocalService.setMBThreadPersistence(mbThreadPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		mbThreadLocalService.afterPropertiesSet();
+	}
+
 	public static void deleteThread(long threadId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

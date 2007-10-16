@@ -53,6 +53,14 @@ public class CompanyServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static CompanyService getImpl() {
+		if (_impl == null) {
+			_impl = (CompanyService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static CompanyService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (CompanyService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class CompanyServiceFactory {
 	}
 
 	private static final String _FACTORY = CompanyServiceFactory.class.getName();
+	private static final String _IMPL = CompanyService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = CompanyService.class.getName() +
 		".transaction";
 	private static CompanyServiceFactory _factory;
+	private static CompanyService _impl;
 	private static CompanyService _txImpl;
 	private CompanyService _service;
 }

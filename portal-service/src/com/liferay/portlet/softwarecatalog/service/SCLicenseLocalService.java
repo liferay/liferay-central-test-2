@@ -82,6 +82,8 @@ public interface SCLicenseLocalService {
 	public void setSCProductVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.softwarecatalog.model.SCLicense addLicense(
 		java.lang.String name, java.lang.String url, boolean openSource,
 		boolean active, boolean recommended)

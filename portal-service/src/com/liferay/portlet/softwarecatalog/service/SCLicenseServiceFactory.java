@@ -53,6 +53,14 @@ public class SCLicenseServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static SCLicenseService getImpl() {
+		if (_impl == null) {
+			_impl = (SCLicenseService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static SCLicenseService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (SCLicenseService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class SCLicenseServiceFactory {
 	}
 
 	private static final String _FACTORY = SCLicenseServiceFactory.class.getName();
+	private static final String _IMPL = SCLicenseService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = SCLicenseService.class.getName() +
 		".transaction";
 	private static SCLicenseServiceFactory _factory;
+	private static SCLicenseService _impl;
 	private static SCLicenseService _txImpl;
 	private SCLicenseService _service;
 }

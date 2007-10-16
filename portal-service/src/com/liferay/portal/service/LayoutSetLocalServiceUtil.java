@@ -533,6 +533,11 @@ public class LayoutSetLocalServiceUtil {
 		layoutSetLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+		layoutSetLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.LayoutSet addLayoutSet(
 		long groupId, boolean privateLayout)
 		throws com.liferay.portal.PortalException, 

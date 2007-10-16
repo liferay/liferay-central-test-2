@@ -533,6 +533,11 @@ public class WebsiteLocalServiceUtil {
 		websiteLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+		websiteLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.Website addWebsite(long userId,
 		java.lang.String className, long classPK, java.lang.String url,
 		int typeId, boolean primary)

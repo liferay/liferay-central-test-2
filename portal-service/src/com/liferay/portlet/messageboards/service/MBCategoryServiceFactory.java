@@ -53,6 +53,14 @@ public class MBCategoryServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static MBCategoryService getImpl() {
+		if (_impl == null) {
+			_impl = (MBCategoryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static MBCategoryService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (MBCategoryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class MBCategoryServiceFactory {
 	}
 
 	private static final String _FACTORY = MBCategoryServiceFactory.class.getName();
+	private static final String _IMPL = MBCategoryService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = MBCategoryService.class.getName() +
 		".transaction";
 	private static MBCategoryServiceFactory _factory;
+	private static MBCategoryService _impl;
 	private static MBCategoryService _txImpl;
 	private MBCategoryService _service;
 }

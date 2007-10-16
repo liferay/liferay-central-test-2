@@ -125,6 +125,11 @@ public class DLFolderLocalServiceUtil {
 		dlFolderLocalService.setDLFolderPersistence(dlFolderPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

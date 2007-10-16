@@ -533,6 +533,11 @@ public class PermissionLocalServiceUtil {
 		permissionLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+		permissionLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.Permission addPermission(
 		long companyId, java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.PortalException, 

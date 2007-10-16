@@ -252,6 +252,8 @@ public interface AccountLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portal.model.Account getAccount(long accountId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

@@ -252,6 +252,8 @@ public interface PermissionLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portal.model.Permission addPermission(long companyId,
 		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.SystemException, 

@@ -53,6 +53,14 @@ public class ShoppingCategoryLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static ShoppingCategoryLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (ShoppingCategoryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static ShoppingCategoryLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (ShoppingCategoryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class ShoppingCategoryLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = ShoppingCategoryLocalServiceFactory.class.getName();
+	private static final String _IMPL = ShoppingCategoryLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = ShoppingCategoryLocalService.class.getName() +
 		".transaction";
 	private static ShoppingCategoryLocalServiceFactory _factory;
+	private static ShoppingCategoryLocalService _impl;
 	private static ShoppingCategoryLocalService _txImpl;
 	private ShoppingCategoryLocalService _service;
 }

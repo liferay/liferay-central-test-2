@@ -53,6 +53,14 @@ public class UserGroupRoleServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static UserGroupRoleService getImpl() {
+		if (_impl == null) {
+			_impl = (UserGroupRoleService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static UserGroupRoleService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (UserGroupRoleService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class UserGroupRoleServiceFactory {
 	}
 
 	private static final String _FACTORY = UserGroupRoleServiceFactory.class.getName();
+	private static final String _IMPL = UserGroupRoleService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = UserGroupRoleService.class.getName() +
 		".transaction";
 	private static UserGroupRoleServiceFactory _factory;
+	private static UserGroupRoleService _impl;
 	private static UserGroupRoleService _txImpl;
 	private UserGroupRoleService _service;
 }

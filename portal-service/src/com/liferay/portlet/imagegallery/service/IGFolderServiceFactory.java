@@ -53,6 +53,14 @@ public class IGFolderServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static IGFolderService getImpl() {
+		if (_impl == null) {
+			_impl = (IGFolderService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static IGFolderService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (IGFolderService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class IGFolderServiceFactory {
 	}
 
 	private static final String _FACTORY = IGFolderServiceFactory.class.getName();
+	private static final String _IMPL = IGFolderService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = IGFolderService.class.getName() +
 		".transaction";
 	private static IGFolderServiceFactory _factory;
+	private static IGFolderService _impl;
 	private static IGFolderService _txImpl;
 	private IGFolderService _service;
 }

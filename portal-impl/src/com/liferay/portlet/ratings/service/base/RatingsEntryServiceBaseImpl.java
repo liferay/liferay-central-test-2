@@ -27,11 +27,16 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.impl.PrincipalBean;
 
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
+import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceFactory;
 import com.liferay.portlet.ratings.service.RatingsEntryService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * <a href="RatingsEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -40,7 +45,7 @@ import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
  *
  */
 public abstract class RatingsEntryServiceBaseImpl extends PrincipalBean
-	implements RatingsEntryService {
+	implements RatingsEntryService, InitializingBean {
 	public RatingsEntryLocalService getRatingsEntryLocalService() {
 		return ratingsEntryLocalService;
 	}
@@ -75,6 +80,24 @@ public abstract class RatingsEntryServiceBaseImpl extends PrincipalBean
 	public void setRatingsStatsPersistence(
 		RatingsStatsPersistence ratingsStatsPersistence) {
 		this.ratingsStatsPersistence = ratingsStatsPersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (ratingsEntryLocalService == null) {
+			ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (ratingsEntryPersistence == null) {
+			ratingsEntryPersistence = RatingsEntryUtil.getPersistence();
+		}
+
+		if (ratingsStatsLocalService == null) {
+			ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getImpl();
+		}
+
+		if (ratingsStatsPersistence == null) {
+			ratingsStatsPersistence = RatingsStatsUtil.getPersistence();
+		}
 	}
 
 	protected RatingsEntryLocalService ratingsEntryLocalService;

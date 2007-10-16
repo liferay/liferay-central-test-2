@@ -82,6 +82,8 @@ public interface DLFileShortcutLocalService {
 	public void setDLFolderPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		long userId, long folderId, long toFolderId, java.lang.String toName,
 		boolean addCommunityPermissions, boolean addGuestPermissions)

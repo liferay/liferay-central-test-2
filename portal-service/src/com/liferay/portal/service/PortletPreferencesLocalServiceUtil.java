@@ -534,6 +534,11 @@ public class PortletPreferencesLocalServiceUtil {
 		portletPreferencesLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+		portletPreferencesLocalService.afterPropertiesSet();
+	}
+
 	public static void deletePortletPreferences(long ownerId, int ownerType,
 		long plid)
 		throws com.liferay.portal.PortalException, 

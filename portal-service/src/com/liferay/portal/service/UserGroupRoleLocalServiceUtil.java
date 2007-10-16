@@ -534,6 +534,11 @@ public class UserGroupRoleLocalServiceUtil {
 		userGroupRoleLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+		userGroupRoleLocalService.afterPropertiesSet();
+	}
+
 	public static void addUserGroupRoles(long userId, long groupId,
 		long[] roleIds)
 		throws com.liferay.portal.PortalException, 

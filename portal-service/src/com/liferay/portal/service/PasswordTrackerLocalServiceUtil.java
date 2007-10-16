@@ -534,6 +534,11 @@ public class PasswordTrackerLocalServiceUtil {
 		passwordTrackerLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+		passwordTrackerLocalService.afterPropertiesSet();
+	}
+
 	public static void deletePasswordTrackers(long userId)
 		throws com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();

@@ -53,6 +53,14 @@ public class DLFileVersionLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static DLFileVersionLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (DLFileVersionLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static DLFileVersionLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (DLFileVersionLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class DLFileVersionLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = DLFileVersionLocalServiceFactory.class.getName();
+	private static final String _IMPL = DLFileVersionLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = DLFileVersionLocalService.class.getName() +
 		".transaction";
 	private static DLFileVersionLocalServiceFactory _factory;
+	private static DLFileVersionLocalService _impl;
 	private static DLFileVersionLocalService _txImpl;
 	private DLFileVersionLocalService _service;
 }

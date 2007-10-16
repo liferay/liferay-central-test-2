@@ -53,6 +53,14 @@ public class SCProductScreenshotLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static SCProductScreenshotLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (SCProductScreenshotLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static SCProductScreenshotLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (SCProductScreenshotLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class SCProductScreenshotLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = SCProductScreenshotLocalServiceFactory.class.getName();
+	private static final String _IMPL = SCProductScreenshotLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = SCProductScreenshotLocalService.class.getName() +
 		".transaction";
 	private static SCProductScreenshotLocalServiceFactory _factory;
+	private static SCProductScreenshotLocalService _impl;
 	private static SCProductScreenshotLocalService _txImpl;
 	private SCProductScreenshotLocalService _service;
 }

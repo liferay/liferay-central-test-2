@@ -97,6 +97,8 @@ public interface ShoppingItemPriceLocalService {
 	public void setShoppingOrderItemPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence shoppingOrderItemPersistence);
 
+	public void afterPropertiesSet();
+
 	public java.util.List getItemPrices(long itemId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

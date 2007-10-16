@@ -534,6 +534,11 @@ public class OrganizationLocalServiceUtil {
 		organizationLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+		organizationLocalService.afterPropertiesSet();
+	}
+
 	public static void addGroupOrganizations(long groupId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException, 

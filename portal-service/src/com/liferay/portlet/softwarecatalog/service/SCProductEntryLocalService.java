@@ -82,6 +82,8 @@ public interface SCProductEntryLocalService {
 	public void setSCProductVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
 		long userId, long plid, java.lang.String name, java.lang.String type,
 		java.lang.String tags, java.lang.String shortDescription,

@@ -53,6 +53,14 @@ public class MBBanServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static MBBanService getImpl() {
+		if (_impl == null) {
+			_impl = (MBBanService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static MBBanService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (MBBanService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class MBBanServiceFactory {
 	}
 
 	private static final String _FACTORY = MBBanServiceFactory.class.getName();
+	private static final String _IMPL = MBBanService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = MBBanService.class.getName() +
 		".transaction";
 	private static MBBanServiceFactory _factory;
+	private static MBBanService _impl;
 	private static MBBanService _txImpl;
 	private MBBanService _service;
 }

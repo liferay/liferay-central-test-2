@@ -53,6 +53,14 @@ public class EmailAddressServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static EmailAddressService getImpl() {
+		if (_impl == null) {
+			_impl = (EmailAddressService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static EmailAddressService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (EmailAddressService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class EmailAddressServiceFactory {
 	}
 
 	private static final String _FACTORY = EmailAddressServiceFactory.class.getName();
+	private static final String _IMPL = EmailAddressService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = EmailAddressService.class.getName() +
 		".transaction";
 	private static EmailAddressServiceFactory _factory;
+	private static EmailAddressService _impl;
 	private static EmailAddressService _txImpl;
 	private EmailAddressService _service;
 }

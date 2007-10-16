@@ -53,6 +53,14 @@ public class ReleaseLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static ReleaseLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (ReleaseLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static ReleaseLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (ReleaseLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class ReleaseLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = ReleaseLocalServiceFactory.class.getName();
+	private static final String _IMPL = ReleaseLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = ReleaseLocalService.class.getName() +
 		".transaction";
 	private static ReleaseLocalServiceFactory _factory;
+	private static ReleaseLocalService _impl;
 	private static ReleaseLocalService _txImpl;
 	private ReleaseLocalService _service;
 }

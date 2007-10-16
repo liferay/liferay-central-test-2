@@ -26,11 +26,16 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
+import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceFactory;
 import com.liferay.portlet.ratings.service.RatingsEntryService;
+import com.liferay.portlet.ratings.service.RatingsEntryServiceFactory;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence;
+import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 
@@ -41,7 +46,7 @@ import java.util.List;
  *
  */
 public abstract class RatingsStatsLocalServiceBaseImpl
-	implements RatingsStatsLocalService {
+	implements RatingsStatsLocalService, InitializingBean {
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return RatingsStatsUtil.findWithDynamicQuery(queryInitializer);
@@ -86,6 +91,24 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	public void setRatingsStatsPersistence(
 		RatingsStatsPersistence ratingsStatsPersistence) {
 		this.ratingsStatsPersistence = ratingsStatsPersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (ratingsEntryLocalService == null) {
+			ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (ratingsEntryService == null) {
+			ratingsEntryService = RatingsEntryServiceFactory.getImpl();
+		}
+
+		if (ratingsEntryPersistence == null) {
+			ratingsEntryPersistence = RatingsEntryUtil.getPersistence();
+		}
+
+		if (ratingsStatsPersistence == null) {
+			ratingsStatsPersistence = RatingsStatsUtil.getPersistence();
+		}
 	}
 
 	protected RatingsEntryLocalService ratingsEntryLocalService;

@@ -53,6 +53,14 @@ public class PasswordTrackerLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static PasswordTrackerLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (PasswordTrackerLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static PasswordTrackerLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (PasswordTrackerLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class PasswordTrackerLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = PasswordTrackerLocalServiceFactory.class.getName();
+	private static final String _IMPL = PasswordTrackerLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = PasswordTrackerLocalService.class.getName() +
 		".transaction";
 	private static PasswordTrackerLocalServiceFactory _factory;
+	private static PasswordTrackerLocalService _impl;
 	private static PasswordTrackerLocalService _txImpl;
 	private PasswordTrackerLocalService _service;
 }

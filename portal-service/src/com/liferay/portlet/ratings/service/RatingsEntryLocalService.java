@@ -67,6 +67,8 @@ public interface RatingsEntryLocalService {
 	public void setRatingsStatsPersistence(
 		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.ratings.model.RatingsEntry getEntry(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 

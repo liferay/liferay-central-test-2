@@ -26,13 +26,20 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
+import com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;
 import com.liferay.portlet.polls.service.PollsVoteLocalService;
+import com.liferay.portlet.polls.service.PollsVoteLocalServiceFactory;
 import com.liferay.portlet.polls.service.PollsVoteService;
+import com.liferay.portlet.polls.service.PollsVoteServiceFactory;
 import com.liferay.portlet.polls.service.persistence.PollsChoicePersistence;
+import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVotePersistence;
+import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 
@@ -43,7 +50,7 @@ import java.util.List;
  *
  */
 public abstract class PollsQuestionLocalServiceBaseImpl
-	implements PollsQuestionLocalService {
+	implements PollsQuestionLocalService, InitializingBean {
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return PollsQuestionUtil.findWithDynamicQuery(queryInitializer);
@@ -106,6 +113,32 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 	public void setPollsVotePersistence(
 		PollsVotePersistence pollsVotePersistence) {
 		this.pollsVotePersistence = pollsVotePersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (pollsChoiceLocalService == null) {
+			pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getImpl();
+		}
+
+		if (pollsChoicePersistence == null) {
+			pollsChoicePersistence = PollsChoiceUtil.getPersistence();
+		}
+
+		if (pollsQuestionPersistence == null) {
+			pollsQuestionPersistence = PollsQuestionUtil.getPersistence();
+		}
+
+		if (pollsVoteLocalService == null) {
+			pollsVoteLocalService = PollsVoteLocalServiceFactory.getImpl();
+		}
+
+		if (pollsVoteService == null) {
+			pollsVoteService = PollsVoteServiceFactory.getImpl();
+		}
+
+		if (pollsVotePersistence == null) {
+			pollsVotePersistence = PollsVoteUtil.getPersistence();
+		}
 	}
 
 	protected PollsChoiceLocalService pollsChoiceLocalService;

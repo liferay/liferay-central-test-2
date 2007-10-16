@@ -138,6 +138,11 @@ public class JournalContentSearchLocalServiceUtil {
 		journalContentSearchLocalService.setJournalTemplatePersistence(journalTemplatePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+		journalContentSearchLocalService.afterPropertiesSet();
+	}
+
 	public static void checkContentSearches(long companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -26,21 +26,36 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
+import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalService;
 import com.liferay.portlet.journal.service.JournalArticleService;
+import com.liferay.portlet.journal.service.JournalArticleServiceFactory;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalStructureLocalService;
+import com.liferay.portlet.journal.service.JournalStructureLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalStructureService;
+import com.liferay.portlet.journal.service.JournalStructureServiceFactory;
 import com.liferay.portlet.journal.service.JournalTemplateLocalService;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalTemplateService;
+import com.liferay.portlet.journal.service.JournalTemplateServiceFactory;
 import com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence;
+import com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticlePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
+import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence;
+import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructurePersistence;
+import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
+import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 
@@ -51,7 +66,7 @@ import java.util.List;
  *
  */
 public abstract class JournalArticleResourceLocalServiceBaseImpl
-	implements JournalArticleResourceLocalService {
+	implements JournalArticleResourceLocalService, InitializingBean {
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return JournalArticleResourceUtil.findWithDynamicQuery(queryInitializer);
@@ -187,6 +202,64 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 	public void setJournalTemplatePersistence(
 		JournalTemplatePersistence journalTemplatePersistence) {
 		this.journalTemplatePersistence = journalTemplatePersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (journalArticleLocalService == null) {
+			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
+		}
+
+		if (journalArticleService == null) {
+			journalArticleService = JournalArticleServiceFactory.getImpl();
+		}
+
+		if (journalArticlePersistence == null) {
+			journalArticlePersistence = JournalArticleUtil.getPersistence();
+		}
+
+		if (journalArticleImageLocalService == null) {
+			journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getImpl();
+		}
+
+		if (journalArticleImagePersistence == null) {
+			journalArticleImagePersistence = JournalArticleImageUtil.getPersistence();
+		}
+
+		if (journalArticleResourcePersistence == null) {
+			journalArticleResourcePersistence = JournalArticleResourceUtil.getPersistence();
+		}
+
+		if (journalContentSearchLocalService == null) {
+			journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getImpl();
+		}
+
+		if (journalContentSearchPersistence == null) {
+			journalContentSearchPersistence = JournalContentSearchUtil.getPersistence();
+		}
+
+		if (journalStructureLocalService == null) {
+			journalStructureLocalService = JournalStructureLocalServiceFactory.getImpl();
+		}
+
+		if (journalStructureService == null) {
+			journalStructureService = JournalStructureServiceFactory.getImpl();
+		}
+
+		if (journalStructurePersistence == null) {
+			journalStructurePersistence = JournalStructureUtil.getPersistence();
+		}
+
+		if (journalTemplateLocalService == null) {
+			journalTemplateLocalService = JournalTemplateLocalServiceFactory.getImpl();
+		}
+
+		if (journalTemplateService == null) {
+			journalTemplateService = JournalTemplateServiceFactory.getImpl();
+		}
+
+		if (journalTemplatePersistence == null) {
+			journalTemplatePersistence = JournalTemplateUtil.getPersistence();
+		}
 	}
 
 	protected JournalArticleLocalService journalArticleLocalService;

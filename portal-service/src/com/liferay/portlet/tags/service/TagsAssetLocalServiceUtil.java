@@ -113,6 +113,11 @@ public class TagsAssetLocalServiceUtil {
 		tagsAssetLocalService.setTagsSourcePersistence(tagsSourcePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+		tagsAssetLocalService.afterPropertiesSet();
+	}
+
 	public static void deleteAsset(long assetId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

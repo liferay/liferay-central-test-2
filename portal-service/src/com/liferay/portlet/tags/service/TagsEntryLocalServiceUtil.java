@@ -113,6 +113,11 @@ public class TagsEntryLocalServiceUtil {
 		tagsEntryLocalService.setTagsSourcePersistence(tagsSourcePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+		tagsEntryLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
 		long userId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 

@@ -77,6 +77,11 @@ public class CalEventLocalServiceUtil {
 		calEventLocalService.setCalEventPersistence(calEventPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,

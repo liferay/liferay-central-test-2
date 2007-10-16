@@ -89,6 +89,11 @@ public class IGImageLocalServiceUtil {
 		igImageLocalService.setIGImagePersistence(igImagePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		igImageLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
 		long userId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,

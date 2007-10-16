@@ -53,6 +53,14 @@ public class GroupLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static GroupLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (GroupLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static GroupLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (GroupLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class GroupLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = GroupLocalServiceFactory.class.getName();
+	private static final String _IMPL = GroupLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = GroupLocalService.class.getName() +
 		".transaction";
 	private static GroupLocalServiceFactory _factory;
+	private static GroupLocalService _impl;
 	private static GroupLocalService _txImpl;
 	private GroupLocalService _service;
 }

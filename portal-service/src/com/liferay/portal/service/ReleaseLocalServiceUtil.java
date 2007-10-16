@@ -533,6 +533,11 @@ public class ReleaseLocalServiceUtil {
 		releaseLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+		releaseLocalService.afterPropertiesSet();
+	}
+
 	public static int getBuildNumberOrCreate()
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

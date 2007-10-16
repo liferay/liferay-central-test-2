@@ -53,6 +53,14 @@ public class DLFileRankLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static DLFileRankLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (DLFileRankLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static DLFileRankLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (DLFileRankLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class DLFileRankLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = DLFileRankLocalServiceFactory.class.getName();
+	private static final String _IMPL = DLFileRankLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = DLFileRankLocalService.class.getName() +
 		".transaction";
 	private static DLFileRankLocalServiceFactory _factory;
+	private static DLFileRankLocalService _impl;
 	private static DLFileRankLocalService _txImpl;
 	private DLFileRankLocalService _service;
 }

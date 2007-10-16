@@ -533,6 +533,11 @@ public class UserGroupLocalServiceUtil {
 		userGroupLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
+		userGroupLocalService.afterPropertiesSet();
+	}
+
 	public static void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

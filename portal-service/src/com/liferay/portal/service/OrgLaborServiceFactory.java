@@ -53,6 +53,14 @@ public class OrgLaborServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static OrgLaborService getImpl() {
+		if (_impl == null) {
+			_impl = (OrgLaborService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static OrgLaborService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (OrgLaborService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class OrgLaborServiceFactory {
 	}
 
 	private static final String _FACTORY = OrgLaborServiceFactory.class.getName();
+	private static final String _IMPL = OrgLaborService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = OrgLaborService.class.getName() +
 		".transaction";
 	private static OrgLaborServiceFactory _factory;
+	private static OrgLaborService _impl;
 	private static OrgLaborService _txImpl;
 	private OrgLaborService _service;
 }

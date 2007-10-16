@@ -87,6 +87,8 @@ public interface JournalStructureLocalService {
 	public void setJournalTemplatePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
 		long userId, java.lang.String structureId, boolean autoStructureId,
 		long plid, java.lang.String name, java.lang.String description,

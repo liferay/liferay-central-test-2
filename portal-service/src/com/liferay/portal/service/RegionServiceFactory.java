@@ -53,6 +53,14 @@ public class RegionServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static RegionService getImpl() {
+		if (_impl == null) {
+			_impl = (RegionService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static RegionService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (RegionService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class RegionServiceFactory {
 	}
 
 	private static final String _FACTORY = RegionServiceFactory.class.getName();
+	private static final String _IMPL = RegionService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = RegionService.class.getName() +
 		".transaction";
 	private static RegionServiceFactory _factory;
+	private static RegionService _impl;
 	private static RegionService _txImpl;
 	private RegionService _service;
 }

@@ -533,6 +533,11 @@ public class ContactLocalServiceUtil {
 		contactLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+		contactLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.Contact getContact(long contactId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

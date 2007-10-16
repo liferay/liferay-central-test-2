@@ -92,6 +92,8 @@ public interface MBMessageFlagLocalService {
 	public void setMBThreadPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence);
 
+	public void afterPropertiesSet();
+
 	public void addReadFlags(long userId, java.util.List messages)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

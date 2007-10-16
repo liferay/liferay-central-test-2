@@ -125,6 +125,11 @@ public class DLFileEntryLocalServiceUtil {
 		dlFileEntryLocalService.setDLFolderPersistence(dlFolderPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		dlFileEntryLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,

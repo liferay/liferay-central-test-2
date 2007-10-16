@@ -53,6 +53,14 @@ public class PollsChoiceLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static PollsChoiceLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (PollsChoiceLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static PollsChoiceLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (PollsChoiceLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class PollsChoiceLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = PollsChoiceLocalServiceFactory.class.getName();
+	private static final String _IMPL = PollsChoiceLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = PollsChoiceLocalService.class.getName() +
 		".transaction";
 	private static PollsChoiceLocalServiceFactory _factory;
+	private static PollsChoiceLocalService _impl;
 	private static PollsChoiceLocalService _txImpl;
 	private PollsChoiceLocalService _service;
 }

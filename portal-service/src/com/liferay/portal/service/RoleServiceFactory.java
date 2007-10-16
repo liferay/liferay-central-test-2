@@ -53,6 +53,14 @@ public class RoleServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static RoleService getImpl() {
+		if (_impl == null) {
+			_impl = (RoleService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static RoleService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (RoleService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class RoleServiceFactory {
 	}
 
 	private static final String _FACTORY = RoleServiceFactory.class.getName();
+	private static final String _IMPL = RoleService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = RoleService.class.getName() +
 		".transaction";
 	private static RoleServiceFactory _factory;
+	private static RoleService _impl;
 	private static RoleService _txImpl;
 	private RoleService _service;
 }

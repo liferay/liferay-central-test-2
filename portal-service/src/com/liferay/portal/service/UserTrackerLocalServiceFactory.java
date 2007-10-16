@@ -53,6 +53,14 @@ public class UserTrackerLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static UserTrackerLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (UserTrackerLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static UserTrackerLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (UserTrackerLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class UserTrackerLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = UserTrackerLocalServiceFactory.class.getName();
+	private static final String _IMPL = UserTrackerLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = UserTrackerLocalService.class.getName() +
 		".transaction";
 	private static UserTrackerLocalServiceFactory _factory;
+	private static UserTrackerLocalService _impl;
 	private static UserTrackerLocalService _txImpl;
 	private UserTrackerLocalService _service;
 }

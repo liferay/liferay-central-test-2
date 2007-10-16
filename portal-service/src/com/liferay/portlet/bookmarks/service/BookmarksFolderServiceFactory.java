@@ -53,6 +53,14 @@ public class BookmarksFolderServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static BookmarksFolderService getImpl() {
+		if (_impl == null) {
+			_impl = (BookmarksFolderService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static BookmarksFolderService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (BookmarksFolderService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class BookmarksFolderServiceFactory {
 	}
 
 	private static final String _FACTORY = BookmarksFolderServiceFactory.class.getName();
+	private static final String _IMPL = BookmarksFolderService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = BookmarksFolderService.class.getName() +
 		".transaction";
 	private static BookmarksFolderServiceFactory _factory;
+	private static BookmarksFolderService _impl;
 	private static BookmarksFolderService _txImpl;
 	private BookmarksFolderService _service;
 }

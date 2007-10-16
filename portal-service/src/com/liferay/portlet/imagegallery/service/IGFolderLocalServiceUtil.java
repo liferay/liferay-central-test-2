@@ -89,6 +89,11 @@ public class IGFolderLocalServiceUtil {
 		igFolderLocalService.setIGImagePersistence(igImagePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+		igFolderLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

@@ -27,20 +27,34 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.impl.PrincipalBean;
 
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
+import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseService;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryService;
+import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionService;
+import com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * <a href="SCLicenseServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -49,7 +63,7 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionP
  *
  */
 public abstract class SCLicenseServiceBaseImpl extends PrincipalBean
-	implements SCLicenseService {
+	implements SCLicenseService, InitializingBean {
 	public SCLicenseLocalService getSCLicenseLocalService() {
 		return scLicenseLocalService;
 	}
@@ -165,6 +179,60 @@ public abstract class SCLicenseServiceBaseImpl extends PrincipalBean
 	public void setSCProductVersionPersistence(
 		SCProductVersionPersistence scProductVersionPersistence) {
 		this.scProductVersionPersistence = scProductVersionPersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (scLicenseLocalService == null) {
+			scLicenseLocalService = SCLicenseLocalServiceFactory.getImpl();
+		}
+
+		if (scLicensePersistence == null) {
+			scLicensePersistence = SCLicenseUtil.getPersistence();
+		}
+
+		if (scFrameworkVersionLocalService == null) {
+			scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getImpl();
+		}
+
+		if (scFrameworkVersionService == null) {
+			scFrameworkVersionService = SCFrameworkVersionServiceFactory.getImpl();
+		}
+
+		if (scFrameworkVersionPersistence == null) {
+			scFrameworkVersionPersistence = SCFrameworkVersionUtil.getPersistence();
+		}
+
+		if (scProductEntryLocalService == null) {
+			scProductEntryLocalService = SCProductEntryLocalServiceFactory.getImpl();
+		}
+
+		if (scProductEntryService == null) {
+			scProductEntryService = SCProductEntryServiceFactory.getImpl();
+		}
+
+		if (scProductEntryPersistence == null) {
+			scProductEntryPersistence = SCProductEntryUtil.getPersistence();
+		}
+
+		if (scProductScreenshotLocalService == null) {
+			scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getImpl();
+		}
+
+		if (scProductScreenshotPersistence == null) {
+			scProductScreenshotPersistence = SCProductScreenshotUtil.getPersistence();
+		}
+
+		if (scProductVersionLocalService == null) {
+			scProductVersionLocalService = SCProductVersionLocalServiceFactory.getImpl();
+		}
+
+		if (scProductVersionService == null) {
+			scProductVersionService = SCProductVersionServiceFactory.getImpl();
+		}
+
+		if (scProductVersionPersistence == null) {
+			scProductVersionPersistence = SCProductVersionUtil.getPersistence();
+		}
 	}
 
 	protected SCLicenseLocalService scLicenseLocalService;

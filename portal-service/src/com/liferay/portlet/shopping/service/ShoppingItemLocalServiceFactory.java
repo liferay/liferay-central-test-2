@@ -53,6 +53,14 @@ public class ShoppingItemLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static ShoppingItemLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (ShoppingItemLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static ShoppingItemLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (ShoppingItemLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class ShoppingItemLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = ShoppingItemLocalServiceFactory.class.getName();
+	private static final String _IMPL = ShoppingItemLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = ShoppingItemLocalService.class.getName() +
 		".transaction";
 	private static ShoppingItemLocalServiceFactory _factory;
+	private static ShoppingItemLocalService _impl;
 	private static ShoppingItemLocalService _txImpl;
 	private ShoppingItemLocalService _service;
 }

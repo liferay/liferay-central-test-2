@@ -252,6 +252,8 @@ public interface PortletPreferencesLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public void deletePortletPreferences(long ownerId, int ownerType, long plid)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

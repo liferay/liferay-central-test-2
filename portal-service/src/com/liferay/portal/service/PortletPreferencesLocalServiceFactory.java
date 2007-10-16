@@ -53,6 +53,14 @@ public class PortletPreferencesLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static PortletPreferencesLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (PortletPreferencesLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static PortletPreferencesLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (PortletPreferencesLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class PortletPreferencesLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = PortletPreferencesLocalServiceFactory.class.getName();
+	private static final String _IMPL = PortletPreferencesLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = PortletPreferencesLocalService.class.getName() +
 		".transaction";
 	private static PortletPreferencesLocalServiceFactory _factory;
+	private static PortletPreferencesLocalService _impl;
 	private static PortletPreferencesLocalService _txImpl;
 	private PortletPreferencesLocalService _service;
 }

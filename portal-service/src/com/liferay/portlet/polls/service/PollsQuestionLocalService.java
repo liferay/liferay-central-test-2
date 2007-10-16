@@ -72,6 +72,8 @@ public interface PollsQuestionLocalService {
 	public void setPollsVotePersistence(
 		com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,

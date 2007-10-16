@@ -87,6 +87,8 @@ public interface JournalArticleResourceLocalService {
 	public void setJournalTemplatePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence);
 
+	public void afterPropertiesSet();
+
 	public void deleteArticleResource(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

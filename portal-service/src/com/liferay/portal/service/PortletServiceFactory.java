@@ -53,6 +53,14 @@ public class PortletServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static PortletService getImpl() {
+		if (_impl == null) {
+			_impl = (PortletService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static PortletService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (PortletService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class PortletServiceFactory {
 	}
 
 	private static final String _FACTORY = PortletServiceFactory.class.getName();
+	private static final String _IMPL = PortletService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = PortletService.class.getName() +
 		".transaction";
 	private static PortletServiceFactory _factory;
+	private static PortletService _impl;
 	private static PortletService _txImpl;
 	private PortletService _service;
 }

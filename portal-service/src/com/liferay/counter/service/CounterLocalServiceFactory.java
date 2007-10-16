@@ -36,6 +36,14 @@ public class CounterLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static CounterLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (CounterLocalService)BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static CounterLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (CounterLocalService)BeanLocatorUtil.locate(_TX_IMPL);
@@ -60,10 +68,14 @@ public class CounterLocalServiceFactory {
 	private static final String _FACTORY =
 		CounterLocalServiceFactory.class.getName();
 
+	private static final String _IMPL =
+		CounterLocalService.class.getName() + ".professional";
+
 	private static final String _TX_IMPL =
 		CounterLocalService.class.getName() + ".transaction";
 
 	private static CounterLocalServiceFactory _factory;
+	private static CounterLocalService _impl;
 	private static CounterLocalService _txImpl;
 
 	private CounterLocalService _service;

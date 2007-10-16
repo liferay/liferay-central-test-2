@@ -67,6 +67,8 @@ public interface IGImageLocalService {
 	public void setIGImagePersistence(
 		com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
 		long userId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,

@@ -101,6 +101,11 @@ public class PollsVoteLocalServiceUtil {
 		pollsVoteLocalService.setPollsVotePersistence(pollsVotePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+		pollsVoteLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
 		long userId, long questionId, long choiceId)
 		throws com.liferay.portal.PortalException, 

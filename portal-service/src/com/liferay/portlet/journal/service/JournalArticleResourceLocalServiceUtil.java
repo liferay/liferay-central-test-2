@@ -138,6 +138,11 @@ public class JournalArticleResourceLocalServiceUtil {
 		journalArticleResourceLocalService.setJournalTemplatePersistence(journalTemplatePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+		journalArticleResourceLocalService.afterPropertiesSet();
+	}
+
 	public static void deleteArticleResource(long groupId,
 		java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 

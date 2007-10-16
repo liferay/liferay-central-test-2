@@ -53,6 +53,14 @@ public class EmailAddressLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static EmailAddressLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (EmailAddressLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static EmailAddressLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (EmailAddressLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class EmailAddressLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = EmailAddressLocalServiceFactory.class.getName();
+	private static final String _IMPL = EmailAddressLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = EmailAddressLocalService.class.getName() +
 		".transaction";
 	private static EmailAddressLocalServiceFactory _factory;
+	private static EmailAddressLocalService _impl;
 	private static EmailAddressLocalService _txImpl;
 	private EmailAddressLocalService _service;
 }

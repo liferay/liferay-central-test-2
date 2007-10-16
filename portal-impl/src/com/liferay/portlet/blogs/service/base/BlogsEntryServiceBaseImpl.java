@@ -27,14 +27,22 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.impl.PrincipalBean;
 
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
+import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceFactory;
 import com.liferay.portlet.blogs.service.BlogsCategoryService;
+import com.liferay.portlet.blogs.service.BlogsCategoryServiceFactory;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory;
 import com.liferay.portlet.blogs.service.BlogsEntryService;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory;
 import com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence;
+import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * <a href="BlogsEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -43,7 +51,7 @@ import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
  *
  */
 public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
-	implements BlogsEntryService {
+	implements BlogsEntryService, InitializingBean {
 	public BlogsCategoryLocalService getBlogsCategoryLocalService() {
 		return blogsCategoryLocalService;
 	}
@@ -105,6 +113,36 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 	public void setBlogsStatsUserPersistence(
 		BlogsStatsUserPersistence blogsStatsUserPersistence) {
 		this.blogsStatsUserPersistence = blogsStatsUserPersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (blogsCategoryLocalService == null) {
+			blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getImpl();
+		}
+
+		if (blogsCategoryService == null) {
+			blogsCategoryService = BlogsCategoryServiceFactory.getImpl();
+		}
+
+		if (blogsCategoryPersistence == null) {
+			blogsCategoryPersistence = BlogsCategoryUtil.getPersistence();
+		}
+
+		if (blogsEntryLocalService == null) {
+			blogsEntryLocalService = BlogsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (blogsEntryPersistence == null) {
+			blogsEntryPersistence = BlogsEntryUtil.getPersistence();
+		}
+
+		if (blogsStatsUserLocalService == null) {
+			blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getImpl();
+		}
+
+		if (blogsStatsUserPersistence == null) {
+			blogsStatsUserPersistence = BlogsStatsUserUtil.getPersistence();
+		}
 	}
 
 	protected BlogsCategoryLocalService blogsCategoryLocalService;

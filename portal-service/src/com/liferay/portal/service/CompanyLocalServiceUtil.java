@@ -533,6 +533,11 @@ public class CompanyLocalServiceUtil {
 		companyLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+		companyLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.Company addCompany(
 		java.lang.String webId, java.lang.String virtualHost,
 		java.lang.String mx)

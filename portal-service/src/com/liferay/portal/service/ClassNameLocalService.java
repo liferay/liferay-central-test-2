@@ -252,6 +252,8 @@ public interface ClassNameLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public void checkClassNames()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

@@ -53,6 +53,14 @@ public class RoleLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static RoleLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (RoleLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static RoleLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (RoleLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class RoleLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = RoleLocalServiceFactory.class.getName();
+	private static final String _IMPL = RoleLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = RoleLocalService.class.getName() +
 		".transaction";
 	private static RoleLocalServiceFactory _factory;
+	private static RoleLocalService _impl;
 	private static RoleLocalService _txImpl;
 	private RoleLocalService _service;
 }

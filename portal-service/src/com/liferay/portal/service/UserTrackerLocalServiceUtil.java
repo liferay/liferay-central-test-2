@@ -533,6 +533,11 @@ public class UserTrackerLocalServiceUtil {
 		userTrackerLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.UserTracker addUserTracker(
 		long companyId, long userId, java.util.Date modifiedDate,
 		java.lang.String sessionId, java.lang.String remoteAddr,

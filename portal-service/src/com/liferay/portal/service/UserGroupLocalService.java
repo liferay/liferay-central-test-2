@@ -252,6 +252,8 @@ public interface UserGroupLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

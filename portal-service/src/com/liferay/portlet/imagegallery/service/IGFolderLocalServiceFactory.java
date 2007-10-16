@@ -53,6 +53,14 @@ public class IGFolderLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static IGFolderLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (IGFolderLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static IGFolderLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (IGFolderLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class IGFolderLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = IGFolderLocalServiceFactory.class.getName();
+	private static final String _IMPL = IGFolderLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = IGFolderLocalService.class.getName() +
 		".transaction";
 	private static IGFolderLocalServiceFactory _factory;
+	private static IGFolderLocalService _impl;
 	private static IGFolderLocalService _txImpl;
 	private IGFolderLocalService _service;
 }

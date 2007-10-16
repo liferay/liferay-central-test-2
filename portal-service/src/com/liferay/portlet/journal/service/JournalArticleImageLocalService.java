@@ -87,6 +87,8 @@ public interface JournalArticleImageLocalService {
 	public void setJournalTemplatePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence);
 
+	public void afterPropertiesSet();
+
 	public void addArticleImageId(long articleImageId, long groupId,
 		java.lang.String articleId, double version, java.lang.String elName,
 		java.lang.String languageId)

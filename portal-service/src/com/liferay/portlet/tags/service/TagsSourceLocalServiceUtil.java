@@ -112,4 +112,9 @@ public class TagsSourceLocalServiceUtil {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
 		tagsSourceLocalService.setTagsSourcePersistence(tagsSourcePersistence);
 	}
+
+	public static void afterPropertiesSet() {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+		tagsSourceLocalService.afterPropertiesSet();
+	}
 }

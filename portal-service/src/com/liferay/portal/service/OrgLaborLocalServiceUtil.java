@@ -533,6 +533,11 @@ public class OrgLaborLocalServiceUtil {
 		orgLaborLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+		orgLaborLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.OrgLabor addOrgLabor(
 		long organizationId, int typeId, int sunOpen, int sunClose,
 		int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,

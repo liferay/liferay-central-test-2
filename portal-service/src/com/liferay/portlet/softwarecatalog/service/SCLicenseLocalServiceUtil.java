@@ -125,6 +125,11 @@ public class SCLicenseLocalServiceUtil {
 		scLicenseLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+		scLicenseLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense addLicense(
 		java.lang.String name, java.lang.String url, boolean openSource,
 		boolean active, boolean recommended)

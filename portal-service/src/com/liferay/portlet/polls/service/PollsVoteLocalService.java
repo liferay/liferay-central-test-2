@@ -72,6 +72,8 @@ public interface PollsVoteLocalService {
 	public void setPollsVotePersistence(
 		com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.polls.model.PollsVote addVote(long userId,
 		long questionId, long choiceId)
 		throws com.liferay.portal.SystemException, 

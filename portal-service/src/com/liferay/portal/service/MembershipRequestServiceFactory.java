@@ -53,6 +53,14 @@ public class MembershipRequestServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static MembershipRequestService getImpl() {
+		if (_impl == null) {
+			_impl = (MembershipRequestService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static MembershipRequestService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (MembershipRequestService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class MembershipRequestServiceFactory {
 	}
 
 	private static final String _FACTORY = MembershipRequestServiceFactory.class.getName();
+	private static final String _IMPL = MembershipRequestService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = MembershipRequestService.class.getName() +
 		".transaction";
 	private static MembershipRequestServiceFactory _factory;
+	private static MembershipRequestService _impl;
 	private static MembershipRequestService _txImpl;
 	private MembershipRequestService _service;
 }

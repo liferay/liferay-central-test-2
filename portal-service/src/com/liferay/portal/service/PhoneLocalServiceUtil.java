@@ -533,6 +533,11 @@ public class PhoneLocalServiceUtil {
 		phoneLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+		phoneLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.Phone addPhone(long userId,
 		java.lang.String className, long classPK, java.lang.String number,
 		java.lang.String extension, int typeId, boolean primary)

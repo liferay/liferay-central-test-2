@@ -252,6 +252,8 @@ public interface ContactLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portal.model.Contact getContact(long contactId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

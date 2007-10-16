@@ -27,9 +27,13 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 
@@ -40,7 +44,7 @@ import java.util.List;
  *
  */
 public abstract class RatingsEntryLocalServiceBaseImpl
-	implements RatingsEntryLocalService {
+	implements RatingsEntryLocalService, InitializingBean {
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return RatingsEntryUtil.findWithDynamicQuery(queryInitializer);
@@ -77,6 +81,20 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 	public void setRatingsStatsPersistence(
 		RatingsStatsPersistence ratingsStatsPersistence) {
 		this.ratingsStatsPersistence = ratingsStatsPersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (ratingsEntryPersistence == null) {
+			ratingsEntryPersistence = RatingsEntryUtil.getPersistence();
+		}
+
+		if (ratingsStatsLocalService == null) {
+			ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getImpl();
+		}
+
+		if (ratingsStatsPersistence == null) {
+			ratingsStatsPersistence = RatingsStatsUtil.getPersistence();
+		}
 	}
 
 	protected RatingsEntryPersistence ratingsEntryPersistence;

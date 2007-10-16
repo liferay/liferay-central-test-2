@@ -67,6 +67,8 @@ public interface RatingsStatsLocalService {
 	public void setRatingsStatsPersistence(
 		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence);
 
+	public void afterPropertiesSet();
+
 	public void deleteStats(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

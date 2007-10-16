@@ -126,6 +126,11 @@ public class BookmarksEntryLocalServiceUtil {
 		bookmarksEntryLocalService.setTagsAssetPersistence(tagsAssetPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+		bookmarksEntryLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,

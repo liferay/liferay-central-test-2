@@ -162,6 +162,11 @@ public class ShoppingCartLocalServiceUtil {
 		shoppingCartLocalService.setShoppingOrderItemPersistence(shoppingOrderItemPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
+		shoppingCartLocalService.afterPropertiesSet();
+	}
+
 	public static void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();

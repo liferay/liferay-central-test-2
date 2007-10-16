@@ -53,6 +53,14 @@ public class MBThreadLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static MBThreadLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (MBThreadLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static MBThreadLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (MBThreadLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class MBThreadLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = MBThreadLocalServiceFactory.class.getName();
+	private static final String _IMPL = MBThreadLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = MBThreadLocalService.class.getName() +
 		".transaction";
 	private static MBThreadLocalServiceFactory _factory;
+	private static MBThreadLocalService _impl;
 	private static MBThreadLocalService _txImpl;
 	private MBThreadLocalService _service;
 }

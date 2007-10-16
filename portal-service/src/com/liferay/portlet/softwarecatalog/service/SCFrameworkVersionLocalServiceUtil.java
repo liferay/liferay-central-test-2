@@ -126,6 +126,11 @@ public class SCFrameworkVersionLocalServiceUtil {
 		scFrameworkVersionLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+		scFrameworkVersionLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
 		long userId, long plid, java.lang.String name, java.lang.String url,
 		boolean active, int priority, boolean addCommunityPermissions,

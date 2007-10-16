@@ -101,6 +101,11 @@ public class WikiPageLocalServiceUtil {
 		wikiPageLocalService.setWikiPageResourcePersistence(wikiPageResourcePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
 		long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException, 

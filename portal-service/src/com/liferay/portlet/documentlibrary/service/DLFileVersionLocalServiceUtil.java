@@ -126,6 +126,11 @@ public class DLFileVersionLocalServiceUtil {
 		dlFileVersionLocalService.setDLFolderPersistence(dlFolderPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+		dlFileVersionLocalService.afterPropertiesSet();
+	}
+
 	public static java.util.List getFileVersions(long folderId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
 		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();

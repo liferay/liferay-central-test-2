@@ -534,6 +534,11 @@ public class PasswordPolicyLocalServiceUtil {
 		passwordPolicyLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+		passwordPolicyLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
 		long userId, boolean defaultPolicy, java.lang.String name,
 		java.lang.String description, boolean changeable,

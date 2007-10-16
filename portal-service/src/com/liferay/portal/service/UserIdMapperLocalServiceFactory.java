@@ -53,6 +53,14 @@ public class UserIdMapperLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static UserIdMapperLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (UserIdMapperLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static UserIdMapperLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (UserIdMapperLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class UserIdMapperLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = UserIdMapperLocalServiceFactory.class.getName();
+	private static final String _IMPL = UserIdMapperLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = UserIdMapperLocalService.class.getName() +
 		".transaction";
 	private static UserIdMapperLocalServiceFactory _factory;
+	private static UserIdMapperLocalService _impl;
 	private static UserIdMapperLocalService _txImpl;
 	private UserIdMapperLocalService _service;
 }

@@ -102,6 +102,11 @@ public class PollsQuestionLocalServiceUtil {
 		pollsQuestionLocalService.setPollsVotePersistence(pollsVotePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,

@@ -77,6 +77,8 @@ public interface TagsEntryLocalService {
 	public void setTagsSourcePersistence(
 		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 

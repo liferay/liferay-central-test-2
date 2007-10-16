@@ -126,6 +126,11 @@ public class SCProductScreenshotLocalServiceUtil {
 		scProductScreenshotLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+		scProductScreenshotLocalService.afterPropertiesSet();
+	}
+
 	public static void deleteProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot productScreenshot)
 		throws com.liferay.portal.SystemException {

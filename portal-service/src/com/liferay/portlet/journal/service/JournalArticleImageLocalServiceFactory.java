@@ -53,6 +53,14 @@ public class JournalArticleImageLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static JournalArticleImageLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (JournalArticleImageLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static JournalArticleImageLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (JournalArticleImageLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class JournalArticleImageLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = JournalArticleImageLocalServiceFactory.class.getName();
+	private static final String _IMPL = JournalArticleImageLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = JournalArticleImageLocalService.class.getName() +
 		".transaction";
 	private static JournalArticleImageLocalServiceFactory _factory;
+	private static JournalArticleImageLocalService _impl;
 	private static JournalArticleImageLocalService _txImpl;
 	private JournalArticleImageLocalService _service;
 }

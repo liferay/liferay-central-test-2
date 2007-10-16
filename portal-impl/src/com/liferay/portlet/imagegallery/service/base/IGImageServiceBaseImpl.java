@@ -27,12 +27,18 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.impl.PrincipalBean;
 
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceFactory;
 import com.liferay.portlet.imagegallery.service.IGFolderService;
+import com.liferay.portlet.imagegallery.service.IGFolderServiceFactory;
 import com.liferay.portlet.imagegallery.service.IGImageLocalService;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceFactory;
 import com.liferay.portlet.imagegallery.service.IGImageService;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
+import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * <a href="IGImageServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -41,7 +47,7 @@ import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
  *
  */
 public abstract class IGImageServiceBaseImpl extends PrincipalBean
-	implements IGImageService {
+	implements IGImageService, InitializingBean {
 	public IGFolderLocalService getIGFolderLocalService() {
 		return igFolderLocalService;
 	}
@@ -81,6 +87,28 @@ public abstract class IGImageServiceBaseImpl extends PrincipalBean
 
 	public void setIGImagePersistence(IGImagePersistence igImagePersistence) {
 		this.igImagePersistence = igImagePersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (igFolderLocalService == null) {
+			igFolderLocalService = IGFolderLocalServiceFactory.getImpl();
+		}
+
+		if (igFolderService == null) {
+			igFolderService = IGFolderServiceFactory.getImpl();
+		}
+
+		if (igFolderPersistence == null) {
+			igFolderPersistence = IGFolderUtil.getPersistence();
+		}
+
+		if (igImageLocalService == null) {
+			igImageLocalService = IGImageLocalServiceFactory.getImpl();
+		}
+
+		if (igImagePersistence == null) {
+			igImagePersistence = IGImageUtil.getPersistence();
+		}
 	}
 
 	protected IGFolderLocalService igFolderLocalService;

@@ -149,6 +149,11 @@ public class MBBanLocalServiceUtil {
 		mbBanLocalService.setMBThreadPersistence(mbThreadPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
 		long userId, long plid, long banUserId)
 		throws com.liferay.portal.PortalException, 

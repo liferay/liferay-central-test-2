@@ -53,6 +53,14 @@ public class OrganizationLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static OrganizationLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (OrganizationLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static OrganizationLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (OrganizationLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class OrganizationLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = OrganizationLocalServiceFactory.class.getName();
+	private static final String _IMPL = OrganizationLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = OrganizationLocalService.class.getName() +
 		".transaction";
 	private static OrganizationLocalServiceFactory _factory;
+	private static OrganizationLocalService _impl;
 	private static OrganizationLocalService _txImpl;
 	private OrganizationLocalService _service;
 }

@@ -23,111 +23,213 @@
 package com.liferay.portal.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.AccountLocalService;
+import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
+import com.liferay.portal.service.AccountServiceFactory;
 import com.liferay.portal.service.AddressLocalService;
+import com.liferay.portal.service.AddressLocalServiceFactory;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.AddressServiceFactory;
 import com.liferay.portal.service.ClassNameLocalService;
+import com.liferay.portal.service.ClassNameLocalServiceFactory;
 import com.liferay.portal.service.ClassNameService;
+import com.liferay.portal.service.ClassNameServiceFactory;
 import com.liferay.portal.service.CompanyLocalService;
+import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
+import com.liferay.portal.service.CompanyServiceFactory;
 import com.liferay.portal.service.ContactLocalService;
+import com.liferay.portal.service.ContactLocalServiceFactory;
 import com.liferay.portal.service.ContactService;
+import com.liferay.portal.service.ContactServiceFactory;
 import com.liferay.portal.service.CountryService;
+import com.liferay.portal.service.CountryServiceFactory;
 import com.liferay.portal.service.EmailAddressLocalService;
+import com.liferay.portal.service.EmailAddressLocalServiceFactory;
 import com.liferay.portal.service.EmailAddressService;
+import com.liferay.portal.service.EmailAddressServiceFactory;
 import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupLocalServiceFactory;
 import com.liferay.portal.service.GroupService;
+import com.liferay.portal.service.GroupServiceFactory;
 import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageLocalServiceFactory;
 import com.liferay.portal.service.LayoutLocalService;
+import com.liferay.portal.service.LayoutLocalServiceFactory;
 import com.liferay.portal.service.LayoutService;
+import com.liferay.portal.service.LayoutServiceFactory;
 import com.liferay.portal.service.LayoutSetLocalService;
+import com.liferay.portal.service.LayoutSetLocalServiceFactory;
 import com.liferay.portal.service.LayoutSetService;
+import com.liferay.portal.service.LayoutSetServiceFactory;
 import com.liferay.portal.service.ListTypeService;
+import com.liferay.portal.service.ListTypeServiceFactory;
 import com.liferay.portal.service.MembershipRequestLocalService;
+import com.liferay.portal.service.MembershipRequestLocalServiceFactory;
 import com.liferay.portal.service.MembershipRequestService;
+import com.liferay.portal.service.MembershipRequestServiceFactory;
 import com.liferay.portal.service.OrgLaborLocalService;
+import com.liferay.portal.service.OrgLaborLocalServiceFactory;
 import com.liferay.portal.service.OrgLaborService;
+import com.liferay.portal.service.OrgLaborServiceFactory;
 import com.liferay.portal.service.OrganizationLocalService;
+import com.liferay.portal.service.OrganizationLocalServiceFactory;
 import com.liferay.portal.service.OrganizationService;
+import com.liferay.portal.service.OrganizationServiceFactory;
 import com.liferay.portal.service.PasswordPolicyLocalService;
+import com.liferay.portal.service.PasswordPolicyLocalServiceFactory;
 import com.liferay.portal.service.PasswordPolicyRelLocalService;
+import com.liferay.portal.service.PasswordPolicyRelLocalServiceFactory;
 import com.liferay.portal.service.PasswordPolicyService;
+import com.liferay.portal.service.PasswordPolicyServiceFactory;
 import com.liferay.portal.service.PasswordTrackerLocalService;
+import com.liferay.portal.service.PasswordTrackerLocalServiceFactory;
 import com.liferay.portal.service.PermissionLocalService;
+import com.liferay.portal.service.PermissionLocalServiceFactory;
 import com.liferay.portal.service.PermissionService;
+import com.liferay.portal.service.PermissionServiceFactory;
 import com.liferay.portal.service.PhoneLocalService;
+import com.liferay.portal.service.PhoneLocalServiceFactory;
 import com.liferay.portal.service.PhoneService;
+import com.liferay.portal.service.PhoneServiceFactory;
 import com.liferay.portal.service.PluginSettingLocalService;
+import com.liferay.portal.service.PluginSettingLocalServiceFactory;
 import com.liferay.portal.service.PluginSettingService;
+import com.liferay.portal.service.PluginSettingServiceFactory;
 import com.liferay.portal.service.PortalService;
+import com.liferay.portal.service.PortalServiceFactory;
 import com.liferay.portal.service.PortletLocalService;
+import com.liferay.portal.service.PortletLocalServiceFactory;
 import com.liferay.portal.service.PortletPreferencesLocalService;
+import com.liferay.portal.service.PortletPreferencesLocalServiceFactory;
 import com.liferay.portal.service.PortletService;
+import com.liferay.portal.service.PortletServiceFactory;
 import com.liferay.portal.service.RegionService;
+import com.liferay.portal.service.RegionServiceFactory;
 import com.liferay.portal.service.ReleaseLocalService;
+import com.liferay.portal.service.ReleaseLocalServiceFactory;
 import com.liferay.portal.service.ResourceCodeLocalService;
+import com.liferay.portal.service.ResourceCodeLocalServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
+import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.ResourceServiceFactory;
 import com.liferay.portal.service.RoleLocalService;
+import com.liferay.portal.service.RoleLocalServiceFactory;
 import com.liferay.portal.service.RoleService;
+import com.liferay.portal.service.RoleServiceFactory;
 import com.liferay.portal.service.ServiceComponentLocalService;
+import com.liferay.portal.service.ServiceComponentLocalServiceFactory;
 import com.liferay.portal.service.SubscriptionLocalService;
+import com.liferay.portal.service.SubscriptionLocalServiceFactory;
 import com.liferay.portal.service.UserGroupLocalService;
+import com.liferay.portal.service.UserGroupLocalServiceFactory;
 import com.liferay.portal.service.UserGroupRoleLocalService;
+import com.liferay.portal.service.UserGroupRoleLocalServiceFactory;
 import com.liferay.portal.service.UserGroupRoleService;
+import com.liferay.portal.service.UserGroupRoleServiceFactory;
 import com.liferay.portal.service.UserGroupService;
+import com.liferay.portal.service.UserGroupServiceFactory;
 import com.liferay.portal.service.UserIdMapperLocalService;
 import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.UserTrackerLocalService;
+import com.liferay.portal.service.UserTrackerLocalServiceFactory;
 import com.liferay.portal.service.UserTrackerPathLocalService;
+import com.liferay.portal.service.UserTrackerPathLocalServiceFactory;
 import com.liferay.portal.service.WebsiteLocalService;
+import com.liferay.portal.service.WebsiteLocalServiceFactory;
 import com.liferay.portal.service.WebsiteService;
+import com.liferay.portal.service.WebsiteServiceFactory;
 import com.liferay.portal.service.persistence.AccountPersistence;
+import com.liferay.portal.service.persistence.AccountUtil;
 import com.liferay.portal.service.persistence.AddressPersistence;
+import com.liferay.portal.service.persistence.AddressUtil;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
+import com.liferay.portal.service.persistence.ClassNameUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
+import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.ContactPersistence;
+import com.liferay.portal.service.persistence.ContactUtil;
 import com.liferay.portal.service.persistence.CountryPersistence;
+import com.liferay.portal.service.persistence.CountryUtil;
 import com.liferay.portal.service.persistence.EmailAddressPersistence;
+import com.liferay.portal.service.persistence.EmailAddressUtil;
 import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
+import com.liferay.portal.service.persistence.LayoutSetUtil;
+import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.persistence.ListTypePersistence;
+import com.liferay.portal.service.persistence.ListTypeUtil;
 import com.liferay.portal.service.persistence.MembershipRequestPersistence;
+import com.liferay.portal.service.persistence.MembershipRequestUtil;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPersistence;
+import com.liferay.portal.service.persistence.OrgGroupPermissionUtil;
 import com.liferay.portal.service.persistence.OrgGroupRolePersistence;
+import com.liferay.portal.service.persistence.OrgGroupRoleUtil;
 import com.liferay.portal.service.persistence.OrgLaborPersistence;
+import com.liferay.portal.service.persistence.OrgLaborUtil;
 import com.liferay.portal.service.persistence.OrganizationPersistence;
+import com.liferay.portal.service.persistence.OrganizationUtil;
 import com.liferay.portal.service.persistence.PasswordPolicyPersistence;
 import com.liferay.portal.service.persistence.PasswordPolicyRelPersistence;
+import com.liferay.portal.service.persistence.PasswordPolicyRelUtil;
+import com.liferay.portal.service.persistence.PasswordPolicyUtil;
 import com.liferay.portal.service.persistence.PasswordTrackerPersistence;
+import com.liferay.portal.service.persistence.PasswordTrackerUtil;
 import com.liferay.portal.service.persistence.PermissionPersistence;
+import com.liferay.portal.service.persistence.PermissionUtil;
 import com.liferay.portal.service.persistence.PhonePersistence;
+import com.liferay.portal.service.persistence.PhoneUtil;
 import com.liferay.portal.service.persistence.PluginSettingPersistence;
+import com.liferay.portal.service.persistence.PluginSettingUtil;
 import com.liferay.portal.service.persistence.PortletPersistence;
 import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
+import com.liferay.portal.service.persistence.PortletPreferencesUtil;
+import com.liferay.portal.service.persistence.PortletUtil;
 import com.liferay.portal.service.persistence.RegionPersistence;
+import com.liferay.portal.service.persistence.RegionUtil;
 import com.liferay.portal.service.persistence.ReleasePersistence;
+import com.liferay.portal.service.persistence.ReleaseUtil;
 import com.liferay.portal.service.persistence.ResourceCodePersistence;
+import com.liferay.portal.service.persistence.ResourceCodeUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.RolePersistence;
+import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.ServiceComponentPersistence;
+import com.liferay.portal.service.persistence.ServiceComponentUtil;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
+import com.liferay.portal.service.persistence.SubscriptionUtil;
 import com.liferay.portal.service.persistence.UserGroupPersistence;
 import com.liferay.portal.service.persistence.UserGroupRolePersistence;
+import com.liferay.portal.service.persistence.UserGroupRoleUtil;
+import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserIdMapperPersistence;
 import com.liferay.portal.service.persistence.UserIdMapperUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserTrackerPathPersistence;
+import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.service.persistence.UserTrackerPersistence;
+import com.liferay.portal.service.persistence.UserTrackerUtil;
+import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
+import com.liferay.portal.service.persistence.WebsiteUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 
@@ -138,7 +240,7 @@ import java.util.List;
  *
  */
 public abstract class UserIdMapperLocalServiceBaseImpl
-	implements UserIdMapperLocalService {
+	implements UserIdMapperLocalService, InitializingBean {
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return UserIdMapperUtil.findWithDynamicQuery(queryInitializer);
@@ -1001,6 +1103,412 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 
 	public void setCounterService(CounterService counterService) {
 		this.counterService = counterService;
+	}
+
+	public void afterPropertiesSet() {
+		if (accountLocalService == null) {
+			accountLocalService = AccountLocalServiceFactory.getImpl();
+		}
+
+		if (accountService == null) {
+			accountService = AccountServiceFactory.getImpl();
+		}
+
+		if (accountPersistence == null) {
+			accountPersistence = AccountUtil.getPersistence();
+		}
+
+		if (addressLocalService == null) {
+			addressLocalService = AddressLocalServiceFactory.getImpl();
+		}
+
+		if (addressService == null) {
+			addressService = AddressServiceFactory.getImpl();
+		}
+
+		if (addressPersistence == null) {
+			addressPersistence = AddressUtil.getPersistence();
+		}
+
+		if (classNameLocalService == null) {
+			classNameLocalService = ClassNameLocalServiceFactory.getImpl();
+		}
+
+		if (classNameService == null) {
+			classNameService = ClassNameServiceFactory.getImpl();
+		}
+
+		if (classNamePersistence == null) {
+			classNamePersistence = ClassNameUtil.getPersistence();
+		}
+
+		if (companyLocalService == null) {
+			companyLocalService = CompanyLocalServiceFactory.getImpl();
+		}
+
+		if (companyService == null) {
+			companyService = CompanyServiceFactory.getImpl();
+		}
+
+		if (companyPersistence == null) {
+			companyPersistence = CompanyUtil.getPersistence();
+		}
+
+		if (contactLocalService == null) {
+			contactLocalService = ContactLocalServiceFactory.getImpl();
+		}
+
+		if (contactService == null) {
+			contactService = ContactServiceFactory.getImpl();
+		}
+
+		if (contactPersistence == null) {
+			contactPersistence = ContactUtil.getPersistence();
+		}
+
+		if (countryService == null) {
+			countryService = CountryServiceFactory.getImpl();
+		}
+
+		if (countryPersistence == null) {
+			countryPersistence = CountryUtil.getPersistence();
+		}
+
+		if (emailAddressLocalService == null) {
+			emailAddressLocalService = EmailAddressLocalServiceFactory.getImpl();
+		}
+
+		if (emailAddressService == null) {
+			emailAddressService = EmailAddressServiceFactory.getImpl();
+		}
+
+		if (emailAddressPersistence == null) {
+			emailAddressPersistence = EmailAddressUtil.getPersistence();
+		}
+
+		if (groupLocalService == null) {
+			groupLocalService = GroupLocalServiceFactory.getImpl();
+		}
+
+		if (groupService == null) {
+			groupService = GroupServiceFactory.getImpl();
+		}
+
+		if (groupPersistence == null) {
+			groupPersistence = GroupUtil.getPersistence();
+		}
+
+		if (imageLocalService == null) {
+			imageLocalService = ImageLocalServiceFactory.getImpl();
+		}
+
+		if (imagePersistence == null) {
+			imagePersistence = ImageUtil.getPersistence();
+		}
+
+		if (layoutLocalService == null) {
+			layoutLocalService = LayoutLocalServiceFactory.getImpl();
+		}
+
+		if (layoutService == null) {
+			layoutService = LayoutServiceFactory.getImpl();
+		}
+
+		if (layoutPersistence == null) {
+			layoutPersistence = LayoutUtil.getPersistence();
+		}
+
+		if (layoutSetLocalService == null) {
+			layoutSetLocalService = LayoutSetLocalServiceFactory.getImpl();
+		}
+
+		if (layoutSetService == null) {
+			layoutSetService = LayoutSetServiceFactory.getImpl();
+		}
+
+		if (layoutSetPersistence == null) {
+			layoutSetPersistence = LayoutSetUtil.getPersistence();
+		}
+
+		if (listTypeService == null) {
+			listTypeService = ListTypeServiceFactory.getImpl();
+		}
+
+		if (listTypePersistence == null) {
+			listTypePersistence = ListTypeUtil.getPersistence();
+		}
+
+		if (membershipRequestLocalService == null) {
+			membershipRequestLocalService = MembershipRequestLocalServiceFactory.getImpl();
+		}
+
+		if (membershipRequestService == null) {
+			membershipRequestService = MembershipRequestServiceFactory.getImpl();
+		}
+
+		if (membershipRequestPersistence == null) {
+			membershipRequestPersistence = MembershipRequestUtil.getPersistence();
+		}
+
+		if (organizationLocalService == null) {
+			organizationLocalService = OrganizationLocalServiceFactory.getImpl();
+		}
+
+		if (organizationService == null) {
+			organizationService = OrganizationServiceFactory.getImpl();
+		}
+
+		if (organizationPersistence == null) {
+			organizationPersistence = OrganizationUtil.getPersistence();
+		}
+
+		if (orgGroupPermissionPersistence == null) {
+			orgGroupPermissionPersistence = OrgGroupPermissionUtil.getPersistence();
+		}
+
+		if (orgGroupRolePersistence == null) {
+			orgGroupRolePersistence = OrgGroupRoleUtil.getPersistence();
+		}
+
+		if (orgLaborLocalService == null) {
+			orgLaborLocalService = OrgLaborLocalServiceFactory.getImpl();
+		}
+
+		if (orgLaborService == null) {
+			orgLaborService = OrgLaborServiceFactory.getImpl();
+		}
+
+		if (orgLaborPersistence == null) {
+			orgLaborPersistence = OrgLaborUtil.getPersistence();
+		}
+
+		if (passwordPolicyLocalService == null) {
+			passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getImpl();
+		}
+
+		if (passwordPolicyService == null) {
+			passwordPolicyService = PasswordPolicyServiceFactory.getImpl();
+		}
+
+		if (passwordPolicyPersistence == null) {
+			passwordPolicyPersistence = PasswordPolicyUtil.getPersistence();
+		}
+
+		if (passwordPolicyRelLocalService == null) {
+			passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getImpl();
+		}
+
+		if (passwordPolicyRelPersistence == null) {
+			passwordPolicyRelPersistence = PasswordPolicyRelUtil.getPersistence();
+		}
+
+		if (passwordTrackerLocalService == null) {
+			passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getImpl();
+		}
+
+		if (passwordTrackerPersistence == null) {
+			passwordTrackerPersistence = PasswordTrackerUtil.getPersistence();
+		}
+
+		if (permissionLocalService == null) {
+			permissionLocalService = PermissionLocalServiceFactory.getImpl();
+		}
+
+		if (permissionService == null) {
+			permissionService = PermissionServiceFactory.getImpl();
+		}
+
+		if (permissionPersistence == null) {
+			permissionPersistence = PermissionUtil.getPersistence();
+		}
+
+		if (phoneLocalService == null) {
+			phoneLocalService = PhoneLocalServiceFactory.getImpl();
+		}
+
+		if (phoneService == null) {
+			phoneService = PhoneServiceFactory.getImpl();
+		}
+
+		if (phonePersistence == null) {
+			phonePersistence = PhoneUtil.getPersistence();
+		}
+
+		if (portalService == null) {
+			portalService = PortalServiceFactory.getImpl();
+		}
+
+		if (pluginSettingLocalService == null) {
+			pluginSettingLocalService = PluginSettingLocalServiceFactory.getImpl();
+		}
+
+		if (pluginSettingService == null) {
+			pluginSettingService = PluginSettingServiceFactory.getImpl();
+		}
+
+		if (pluginSettingPersistence == null) {
+			pluginSettingPersistence = PluginSettingUtil.getPersistence();
+		}
+
+		if (portletLocalService == null) {
+			portletLocalService = PortletLocalServiceFactory.getImpl();
+		}
+
+		if (portletService == null) {
+			portletService = PortletServiceFactory.getImpl();
+		}
+
+		if (portletPersistence == null) {
+			portletPersistence = PortletUtil.getPersistence();
+		}
+
+		if (portletPreferencesLocalService == null) {
+			portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getImpl();
+		}
+
+		if (portletPreferencesPersistence == null) {
+			portletPreferencesPersistence = PortletPreferencesUtil.getPersistence();
+		}
+
+		if (regionService == null) {
+			regionService = RegionServiceFactory.getImpl();
+		}
+
+		if (regionPersistence == null) {
+			regionPersistence = RegionUtil.getPersistence();
+		}
+
+		if (releaseLocalService == null) {
+			releaseLocalService = ReleaseLocalServiceFactory.getImpl();
+		}
+
+		if (releasePersistence == null) {
+			releasePersistence = ReleaseUtil.getPersistence();
+		}
+
+		if (resourceLocalService == null) {
+			resourceLocalService = ResourceLocalServiceFactory.getImpl();
+		}
+
+		if (resourceService == null) {
+			resourceService = ResourceServiceFactory.getImpl();
+		}
+
+		if (resourcePersistence == null) {
+			resourcePersistence = ResourceUtil.getPersistence();
+		}
+
+		if (resourceCodeLocalService == null) {
+			resourceCodeLocalService = ResourceCodeLocalServiceFactory.getImpl();
+		}
+
+		if (resourceCodePersistence == null) {
+			resourceCodePersistence = ResourceCodeUtil.getPersistence();
+		}
+
+		if (roleLocalService == null) {
+			roleLocalService = RoleLocalServiceFactory.getImpl();
+		}
+
+		if (roleService == null) {
+			roleService = RoleServiceFactory.getImpl();
+		}
+
+		if (rolePersistence == null) {
+			rolePersistence = RoleUtil.getPersistence();
+		}
+
+		if (serviceComponentLocalService == null) {
+			serviceComponentLocalService = ServiceComponentLocalServiceFactory.getImpl();
+		}
+
+		if (serviceComponentPersistence == null) {
+			serviceComponentPersistence = ServiceComponentUtil.getPersistence();
+		}
+
+		if (subscriptionLocalService == null) {
+			subscriptionLocalService = SubscriptionLocalServiceFactory.getImpl();
+		}
+
+		if (subscriptionPersistence == null) {
+			subscriptionPersistence = SubscriptionUtil.getPersistence();
+		}
+
+		if (userLocalService == null) {
+			userLocalService = UserLocalServiceFactory.getImpl();
+		}
+
+		if (userService == null) {
+			userService = UserServiceFactory.getImpl();
+		}
+
+		if (userPersistence == null) {
+			userPersistence = UserUtil.getPersistence();
+		}
+
+		if (userGroupLocalService == null) {
+			userGroupLocalService = UserGroupLocalServiceFactory.getImpl();
+		}
+
+		if (userGroupService == null) {
+			userGroupService = UserGroupServiceFactory.getImpl();
+		}
+
+		if (userGroupPersistence == null) {
+			userGroupPersistence = UserGroupUtil.getPersistence();
+		}
+
+		if (userGroupRoleLocalService == null) {
+			userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getImpl();
+		}
+
+		if (userGroupRoleService == null) {
+			userGroupRoleService = UserGroupRoleServiceFactory.getImpl();
+		}
+
+		if (userGroupRolePersistence == null) {
+			userGroupRolePersistence = UserGroupRoleUtil.getPersistence();
+		}
+
+		if (userIdMapperPersistence == null) {
+			userIdMapperPersistence = UserIdMapperUtil.getPersistence();
+		}
+
+		if (userTrackerLocalService == null) {
+			userTrackerLocalService = UserTrackerLocalServiceFactory.getImpl();
+		}
+
+		if (userTrackerPersistence == null) {
+			userTrackerPersistence = UserTrackerUtil.getPersistence();
+		}
+
+		if (userTrackerPathLocalService == null) {
+			userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getImpl();
+		}
+
+		if (userTrackerPathPersistence == null) {
+			userTrackerPathPersistence = UserTrackerPathUtil.getPersistence();
+		}
+
+		if (websiteLocalService == null) {
+			websiteLocalService = WebsiteLocalServiceFactory.getImpl();
+		}
+
+		if (websiteService == null) {
+			websiteService = WebsiteServiceFactory.getImpl();
+		}
+
+		if (websitePersistence == null) {
+			websitePersistence = WebsiteUtil.getPersistence();
+		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
 	}
 
 	protected AccountLocalService accountLocalService;

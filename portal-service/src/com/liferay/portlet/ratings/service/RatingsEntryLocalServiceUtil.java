@@ -90,6 +90,11 @@ public class RatingsEntryLocalServiceUtil {
 		ratingsEntryLocalService.setRatingsStatsPersistence(ratingsStatsPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+		ratingsEntryLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.ratings.model.RatingsEntry getEntry(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 

@@ -162,6 +162,11 @@ public class ShoppingOrderLocalServiceUtil {
 		shoppingOrderLocalService.setShoppingOrderItemPersistence(shoppingOrderItemPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
+		shoppingOrderLocalService.afterPropertiesSet();
+	}
+
 	public static void completeOrder(java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,

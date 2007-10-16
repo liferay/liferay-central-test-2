@@ -72,6 +72,8 @@ public interface BlogsEntryLocalService {
 	public void setBlogsStatsUserPersistence(
 		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,
 		long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,

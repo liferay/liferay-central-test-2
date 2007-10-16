@@ -534,6 +534,11 @@ public class ServiceComponentLocalServiceUtil {
 		serviceComponentLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+		serviceComponentLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		javax.servlet.ServletContext ctx,
 		java.lang.ClassLoader portletClassLoader,

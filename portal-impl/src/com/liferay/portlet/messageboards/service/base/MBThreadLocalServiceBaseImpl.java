@@ -26,22 +26,38 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
+import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
+import com.liferay.portlet.messageboards.service.MBBanServiceFactory;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBCategoryService;
+import com.liferay.portlet.messageboards.service.MBCategoryServiceFactory;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBMessageService;
+import com.liferay.portlet.messageboards.service.MBMessageServiceFactory;
 import com.liferay.portlet.messageboards.service.MBStatsUserLocalService;
+import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBThreadLocalService;
 import com.liferay.portlet.messageboards.service.persistence.MBBanPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 
@@ -52,7 +68,7 @@ import java.util.List;
  *
  */
 public abstract class MBThreadLocalServiceBaseImpl
-	implements MBThreadLocalService {
+	implements MBThreadLocalService, InitializingBean {
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return MBThreadUtil.findWithDynamicQuery(queryInitializer);
@@ -190,6 +206,68 @@ public abstract class MBThreadLocalServiceBaseImpl
 
 	public void setMBThreadPersistence(MBThreadPersistence mbThreadPersistence) {
 		this.mbThreadPersistence = mbThreadPersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (mbBanLocalService == null) {
+			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
+		}
+
+		if (mbBanService == null) {
+			mbBanService = MBBanServiceFactory.getImpl();
+		}
+
+		if (mbBanPersistence == null) {
+			mbBanPersistence = MBBanUtil.getPersistence();
+		}
+
+		if (mbCategoryLocalService == null) {
+			mbCategoryLocalService = MBCategoryLocalServiceFactory.getImpl();
+		}
+
+		if (mbCategoryService == null) {
+			mbCategoryService = MBCategoryServiceFactory.getImpl();
+		}
+
+		if (mbCategoryPersistence == null) {
+			mbCategoryPersistence = MBCategoryUtil.getPersistence();
+		}
+
+		if (mbDiscussionPersistence == null) {
+			mbDiscussionPersistence = MBDiscussionUtil.getPersistence();
+		}
+
+		if (mbMessageLocalService == null) {
+			mbMessageLocalService = MBMessageLocalServiceFactory.getImpl();
+		}
+
+		if (mbMessageService == null) {
+			mbMessageService = MBMessageServiceFactory.getImpl();
+		}
+
+		if (mbMessagePersistence == null) {
+			mbMessagePersistence = MBMessageUtil.getPersistence();
+		}
+
+		if (mbMessageFlagLocalService == null) {
+			mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getImpl();
+		}
+
+		if (mbMessageFlagPersistence == null) {
+			mbMessageFlagPersistence = MBMessageFlagUtil.getPersistence();
+		}
+
+		if (mbStatsUserLocalService == null) {
+			mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getImpl();
+		}
+
+		if (mbStatsUserPersistence == null) {
+			mbStatsUserPersistence = MBStatsUserUtil.getPersistence();
+		}
+
+		if (mbThreadPersistence == null) {
+			mbThreadPersistence = MBThreadUtil.getPersistence();
+		}
 	}
 
 	protected MBBanLocalService mbBanLocalService;

@@ -252,6 +252,8 @@ public interface OrganizationLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public void addGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

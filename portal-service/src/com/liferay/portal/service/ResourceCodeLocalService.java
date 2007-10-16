@@ -252,6 +252,8 @@ public interface ResourceCodeLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portal.model.ResourceCode getResourceCode(long codeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

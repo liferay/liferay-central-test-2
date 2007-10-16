@@ -29,6 +29,8 @@ import com.liferay.portlet.calendar.service.CalEventLocalService;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
 
+import org.springframework.beans.factory.InitializingBean;
+
 import java.util.List;
 
 /**
@@ -38,7 +40,7 @@ import java.util.List;
  *
  */
 public abstract class CalEventLocalServiceBaseImpl
-	implements CalEventLocalService {
+	implements CalEventLocalService, InitializingBean {
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return CalEventUtil.findWithDynamicQuery(queryInitializer);
@@ -55,6 +57,12 @@ public abstract class CalEventLocalServiceBaseImpl
 
 	public void setCalEventPersistence(CalEventPersistence calEventPersistence) {
 		this.calEventPersistence = calEventPersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (calEventPersistence == null) {
+			calEventPersistence = CalEventUtil.getPersistence();
+		}
 	}
 
 	protected CalEventPersistence calEventPersistence;

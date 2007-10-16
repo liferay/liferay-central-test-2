@@ -72,6 +72,8 @@ public interface BlogsStatsUserLocalService {
 	public void setBlogsStatsUserPersistence(
 		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence);
 
+	public void afterPropertiesSet();
+
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 

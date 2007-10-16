@@ -102,6 +102,11 @@ public class BlogsCategoryLocalServiceUtil {
 		blogsCategoryLocalService.setBlogsStatsUserPersistence(blogsStatsUserPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
 		long userId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

@@ -26,13 +26,20 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
+import com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory;
 import com.liferay.portlet.wiki.service.WikiNodeService;
+import com.liferay.portlet.wiki.service.WikiNodeServiceFactory;
 import com.liferay.portlet.wiki.service.WikiPageLocalService;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalService;
+import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory;
 import com.liferay.portlet.wiki.service.persistence.WikiNodePersistence;
+import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPagePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
+import com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 
@@ -43,7 +50,7 @@ import java.util.List;
  *
  */
 public abstract class WikiPageLocalServiceBaseImpl
-	implements WikiPageLocalService {
+	implements WikiPageLocalService, InitializingBean {
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return WikiPageUtil.findWithDynamicQuery(queryInitializer);
@@ -103,6 +110,32 @@ public abstract class WikiPageLocalServiceBaseImpl
 	public void setWikiPageResourcePersistence(
 		WikiPageResourcePersistence wikiPageResourcePersistence) {
 		this.wikiPageResourcePersistence = wikiPageResourcePersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (wikiNodeLocalService == null) {
+			wikiNodeLocalService = WikiNodeLocalServiceFactory.getImpl();
+		}
+
+		if (wikiNodeService == null) {
+			wikiNodeService = WikiNodeServiceFactory.getImpl();
+		}
+
+		if (wikiNodePersistence == null) {
+			wikiNodePersistence = WikiNodeUtil.getPersistence();
+		}
+
+		if (wikiPagePersistence == null) {
+			wikiPagePersistence = WikiPageUtil.getPersistence();
+		}
+
+		if (wikiPageResourceLocalService == null) {
+			wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getImpl();
+		}
+
+		if (wikiPageResourcePersistence == null) {
+			wikiPageResourcePersistence = WikiPageResourceUtil.getPersistence();
+		}
 	}
 
 	protected WikiNodeLocalService wikiNodeLocalService;

@@ -149,6 +149,11 @@ public class MBCategoryLocalServiceUtil {
 		mbCategoryLocalService.setMBThreadPersistence(mbThreadPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		long userId, long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

@@ -126,6 +126,11 @@ public class DLFileShortcutLocalServiceUtil {
 		dlFileShortcutLocalService.setDLFolderPersistence(dlFolderPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+		dlFileShortcutLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		long userId, long folderId, long toFolderId, java.lang.String toName,
 		boolean addCommunityPermissions, boolean addGuestPermissions)

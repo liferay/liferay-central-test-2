@@ -126,6 +126,11 @@ public class SCProductVersionLocalServiceUtil {
 		scProductVersionLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+		scProductVersionLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
 		long userId, long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,

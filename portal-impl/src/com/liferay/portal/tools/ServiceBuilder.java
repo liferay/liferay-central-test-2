@@ -5415,30 +5415,36 @@ public class ServiceBuilder {
 			if (entity.equals(tempEntity)) {
 				if ((sessionType == _REMOTE) && tempEntity.hasLocalService()) {
 					sm.append("import " + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalService;");
+					sm.append("import " + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalServiceFactory;");
 				}
 			}
 			else {
 				if (tempEntity.hasLocalService()) {
 					sm.append("import " + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalService;");
+					sm.append("import " + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalServiceFactory;");
 				}
 
 				if (tempEntity.hasRemoteService()) {
 					sm.append("import " + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "Service;");
+					sm.append("import " + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "ServiceFactory;");
 				}
 			}
 
 			if (tempEntity.hasColumns()) {
 				sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "Persistence;");
+				sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "Util;");
 			}
 		}
+
+		sm.append("import org.springframework.beans.factory.InitializingBean;");
 
 		// Class declaration
 
 		if (sessionType == _REMOTE) {
-			sm.append("public abstract class " + entity.getName() + "ServiceBaseImpl extends PrincipalBean implements " + entity.getName() + "Service {");
+			sm.append("public abstract class " + entity.getName() + "ServiceBaseImpl extends PrincipalBean implements " + entity.getName() + "Service, InitializingBean {");
 		}
 		else {
-			sm.append("public abstract class " + entity.getName() + "LocalServiceBaseImpl implements " + entity.getName() + "LocalService {");
+			sm.append("public abstract class " + entity.getName() + "LocalServiceBaseImpl implements " + entity.getName() + "LocalService, InitializingBean {");
 		}
 
 		// Methods
@@ -5500,6 +5506,41 @@ public class ServiceBuilder {
 			}
 		}
 
+		sm.append("public void afterPropertiesSet() {");
+
+		for (int i = 0; i < referenceList.size(); i++) {
+			Entity tempEntity = (Entity)referenceList.get(i);
+
+			if (entity.equals(tempEntity)) {
+				if ((sessionType == _REMOTE) && tempEntity.hasLocalService()) {
+					sm.append("if (" + tempEntity.getVarName() + "LocalService == null) {");
+					sm.append(tempEntity.getVarName() + "LocalService = " + tempEntity.getName() + "LocalServiceFactory.getImpl();");
+					sm.append("}");
+				}
+			}
+			else {
+				if (tempEntity.hasLocalService()) {
+					sm.append("if (" + tempEntity.getVarName() + "LocalService == null) {");
+					sm.append(tempEntity.getVarName() + "LocalService = " + tempEntity.getName() + "LocalServiceFactory.getImpl();");
+					sm.append("}");
+				}
+
+				if (tempEntity.hasRemoteService()) {
+					sm.append("if (" + tempEntity.getVarName() + "Service == null) {");
+					sm.append(tempEntity.getVarName() + "Service = " + tempEntity.getName() + "ServiceFactory.getImpl();");
+					sm.append("}");
+				}
+			}
+
+			if (tempEntity.hasColumns()) {
+				sm.append("if (" + tempEntity.getVarName() + "Persistence == null) {");
+				sm.append(tempEntity.getVarName() + "Persistence = " + tempEntity.getName() + "Util.getPersistence();");
+				sm.append("}");
+			}
+		}
+
+		sm.append("}");
+
 		// Fields
 
 		for (int i = 0; i < referenceList.size(); i++) {
@@ -5553,6 +5594,13 @@ public class ServiceBuilder {
 		sm.append("return _getFactory()._service;");
 		sm.append("}");
 
+		sm.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getImpl() {");
+		sm.append("if (_impl == null) {");
+		sm.append("_impl = (" + entity.getName() + _getSessionTypeName(sessionType) + "Service)" + _beanLocatorUtilPackage + ".BeanLocatorUtil.locate(_IMPL);");
+		sm.append("}");
+		sm.append("return _impl;");
+		sm.append("}");
+
 		sm.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getTxImpl() {");
 		sm.append("if (_txImpl == null) {");
 		sm.append("_txImpl = (" + entity.getName() + _getSessionTypeName(sessionType) + "Service)" + _beanLocatorUtilPackage + ".BeanLocatorUtil.locate(_TX_IMPL);");
@@ -5574,9 +5622,11 @@ public class ServiceBuilder {
 		// Fields
 
 		sm.append("private static final String _FACTORY = " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.class.getName();");
+		sm.append("private static final String _IMPL = " + entity.getName() + _getSessionTypeName(sessionType) + "Service.class.getName() + \".professional\";");
 		sm.append("private static final String _TX_IMPL = " + entity.getName() + _getSessionTypeName(sessionType) + "Service.class.getName() + \".transaction\";");
 
 		sm.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory _factory;");
+		sm.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "Service _impl;");
 		sm.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "Service _txImpl;");
 
 		sm.append("private " + entity.getName() + _getSessionTypeName(sessionType) + "Service _service;");
@@ -6570,50 +6620,57 @@ public class ServiceBuilder {
 		List referenceList = _mergeReferenceList(entity.getReferenceList());
 		List txRequiredList = entity.getTxRequiredList();
 
-		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" class=\"" + _packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl\" lazy-init=\"true\">\n");
+		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" class=\"" + _packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl\" lazy-init=\"true\"");
 
-		for (int i = 0; i < referenceList.size(); i++) {
-			Entity tempEntity = (Entity)referenceList.get(i);
-
-			String tempEntityName = tempEntity.getName();
-
-			char[] tempEntityNameArray = tempEntityName.toCharArray();
-
-			if (tempEntityNameArray.length > 2) {
-				if (Character.isUpperCase(tempEntityNameArray[0]) && Character.isLowerCase(tempEntityNameArray[1])) {
-					tempEntityName = tempEntity.getVarName();
-				}
-			}
-
-			if (entity.equals(tempEntity)) {
-				if ((sessionType == _REMOTE) && tempEntity.hasLocalService()) {
-					sm.append("\t\t<property name=\"" + tempEntityName + "LocalService\">\n");
-					sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalService.professional\" />\n");
-					sm.append("\t\t</property>\n");
-				}
-			}
-			else {
-				if (tempEntity.hasLocalService()) {
-					sm.append("\t\t<property name=\"" + tempEntityName + "LocalService\">\n");
-					sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalService.professional\" />\n");
-					sm.append("\t\t</property>\n");
-				}
-
-				if (tempEntity.hasRemoteService()) {
-					sm.append("\t\t<property name=\"" + tempEntityName + "Service\">\n");
-					sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "Service.professional\" />\n");
-					sm.append("\t\t</property>\n");
-				}
-			}
-
-			if (tempEntity.hasColumns()) {
-				sm.append("\t\t<property name=\"" + tempEntityName + "Persistence\">\n");
-				sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "PersistenceImpl\" />\n");
-				sm.append("\t\t</property>\n");
-			}
+		if (true) {
+			sm.append(" />\n");
 		}
+		else {
+			sm.append(">\n");
 
-		sm.append("\t</bean>\n");
+			for (int i = 0; i < referenceList.size(); i++) {
+				Entity tempEntity = (Entity)referenceList.get(i);
+
+				String tempEntityName = tempEntity.getName();
+
+				char[] tempEntityNameArray = tempEntityName.toCharArray();
+
+				if (tempEntityNameArray.length > 2) {
+					if (Character.isUpperCase(tempEntityNameArray[0]) && Character.isLowerCase(tempEntityNameArray[1])) {
+						tempEntityName = tempEntity.getVarName();
+					}
+				}
+
+				if (entity.equals(tempEntity)) {
+					if ((sessionType == _REMOTE) && tempEntity.hasLocalService()) {
+						sm.append("\t\t<property name=\"" + tempEntityName + "LocalService\">\n");
+						sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalService.professional\" />\n");
+						sm.append("\t\t</property>\n");
+					}
+				}
+				else {
+					if (tempEntity.hasLocalService()) {
+						sm.append("\t\t<property name=\"" + tempEntityName + "LocalService\">\n");
+						sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalService.professional\" />\n");
+						sm.append("\t\t</property>\n");
+					}
+
+					if (tempEntity.hasRemoteService()) {
+						sm.append("\t\t<property name=\"" + tempEntityName + "Service\">\n");
+						sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "Service.professional\" />\n");
+						sm.append("\t\t</property>\n");
+					}
+				}
+
+				if (tempEntity.hasColumns()) {
+					sm.append("\t\t<property name=\"" + tempEntityName + "Persistence\">\n");
+					sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "PersistenceImpl\" />\n");
+					sm.append("\t\t</property>\n");
+				}
+			}
+
+			sm.append("\t</bean>\n");
+		}
 
 		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.transaction\" class=\"org.springframework.transaction.interceptor.TransactionProxyFactoryBean\" lazy-init=\"true\">\n");
 		sm.append("\t\t<property name=\"transactionManager\">\n");

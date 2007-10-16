@@ -114,6 +114,11 @@ public class BookmarksFolderLocalServiceUtil {
 		bookmarksFolderLocalService.setUserPersistence(userPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+		bookmarksFolderLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

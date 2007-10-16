@@ -53,6 +53,14 @@ public class SCProductEntryServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static SCProductEntryService getImpl() {
+		if (_impl == null) {
+			_impl = (SCProductEntryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static SCProductEntryService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (SCProductEntryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class SCProductEntryServiceFactory {
 	}
 
 	private static final String _FACTORY = SCProductEntryServiceFactory.class.getName();
+	private static final String _IMPL = SCProductEntryService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = SCProductEntryService.class.getName() +
 		".transaction";
 	private static SCProductEntryServiceFactory _factory;
+	private static SCProductEntryService _impl;
 	private static SCProductEntryService _txImpl;
 	private SCProductEntryService _service;
 }

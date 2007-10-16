@@ -82,6 +82,8 @@ public interface DLFileVersionLocalService {
 	public void setDLFolderPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence);
 
+	public void afterPropertiesSet();
+
 	public java.util.List getFileVersions(long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 }

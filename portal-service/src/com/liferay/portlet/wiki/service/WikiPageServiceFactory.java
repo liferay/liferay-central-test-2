@@ -53,6 +53,14 @@ public class WikiPageServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static WikiPageService getImpl() {
+		if (_impl == null) {
+			_impl = (WikiPageService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static WikiPageService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (WikiPageService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class WikiPageServiceFactory {
 	}
 
 	private static final String _FACTORY = WikiPageServiceFactory.class.getName();
+	private static final String _IMPL = WikiPageService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = WikiPageService.class.getName() +
 		".transaction";
 	private static WikiPageServiceFactory _factory;
+	private static WikiPageService _impl;
 	private static WikiPageService _txImpl;
 	private WikiPageService _service;
 }

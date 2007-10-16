@@ -125,6 +125,11 @@ public class DLFileRankLocalServiceUtil {
 		dlFileRankLocalService.setDLFolderPersistence(dlFolderPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+		dlFileRankLocalService.afterPropertiesSet();
+	}
+
 	public static void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();

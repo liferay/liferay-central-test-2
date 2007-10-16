@@ -53,6 +53,14 @@ public class MBStatsUserLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static MBStatsUserLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (MBStatsUserLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static MBStatsUserLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (MBStatsUserLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class MBStatsUserLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = MBStatsUserLocalServiceFactory.class.getName();
+	private static final String _IMPL = MBStatsUserLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = MBStatsUserLocalService.class.getName() +
 		".transaction";
 	private static MBStatsUserLocalServiceFactory _factory;
+	private static MBStatsUserLocalService _impl;
 	private static MBStatsUserLocalService _txImpl;
 	private MBStatsUserLocalService _service;
 }

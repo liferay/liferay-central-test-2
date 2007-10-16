@@ -162,6 +162,11 @@ public class ShoppingOrderItemLocalServiceUtil {
 		shoppingOrderItemLocalService.setShoppingOrderItemPersistence(shoppingOrderItemPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+		shoppingOrderItemLocalService.afterPropertiesSet();
+	}
+
 	public static java.util.List getOrderItems(long orderId)
 		throws com.liferay.portal.SystemException {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();

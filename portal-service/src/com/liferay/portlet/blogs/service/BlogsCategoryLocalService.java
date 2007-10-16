@@ -72,6 +72,8 @@ public interface BlogsCategoryLocalService {
 	public void setBlogsStatsUserPersistence(
 		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.blogs.model.BlogsCategory addCategory(
 		long userId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

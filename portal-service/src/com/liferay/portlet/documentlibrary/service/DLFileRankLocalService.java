@@ -82,6 +82,8 @@ public interface DLFileRankLocalService {
 	public void setDLFolderPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence);
 
+	public void afterPropertiesSet();
+
 	public void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException;
 

@@ -252,6 +252,8 @@ public interface SubscriptionLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portal.model.Subscription addSubscription(long userId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 

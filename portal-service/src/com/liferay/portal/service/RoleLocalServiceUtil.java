@@ -533,6 +533,11 @@ public class RoleLocalServiceUtil {
 		roleLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+		roleLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.Role addRole(long userId,
 		long companyId, java.lang.String name, int type)
 		throws com.liferay.portal.PortalException, 

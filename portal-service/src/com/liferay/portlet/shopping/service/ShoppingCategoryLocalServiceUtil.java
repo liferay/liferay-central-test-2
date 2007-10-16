@@ -162,6 +162,11 @@ public class ShoppingCategoryLocalServiceUtil {
 		shoppingCategoryLocalService.setShoppingOrderItemPersistence(shoppingOrderItemPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+		shoppingCategoryLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
 		long userId, long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

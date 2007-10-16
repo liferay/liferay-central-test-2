@@ -252,6 +252,8 @@ public interface UserTrackerLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portal.model.UserTracker addUserTracker(long companyId,
 		long userId, java.util.Date modifiedDate, java.lang.String sessionId,
 		java.lang.String remoteAddr, java.lang.String remoteHost,

@@ -77,6 +77,8 @@ public interface TagsAssetLocalService {
 	public void setTagsSourcePersistence(
 		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence);
 
+	public void afterPropertiesSet();
+
 	public void deleteAsset(long assetId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

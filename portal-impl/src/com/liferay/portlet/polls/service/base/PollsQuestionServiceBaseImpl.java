@@ -27,14 +27,22 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.impl.PrincipalBean;
 
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
+import com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;
+import com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory;
 import com.liferay.portlet.polls.service.PollsQuestionService;
 import com.liferay.portlet.polls.service.PollsVoteLocalService;
+import com.liferay.portlet.polls.service.PollsVoteLocalServiceFactory;
 import com.liferay.portlet.polls.service.PollsVoteService;
+import com.liferay.portlet.polls.service.PollsVoteServiceFactory;
 import com.liferay.portlet.polls.service.persistence.PollsChoicePersistence;
+import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVotePersistence;
+import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * <a href="PollsQuestionServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -43,7 +51,7 @@ import com.liferay.portlet.polls.service.persistence.PollsVotePersistence;
  *
  */
 public abstract class PollsQuestionServiceBaseImpl extends PrincipalBean
-	implements PollsQuestionService {
+	implements PollsQuestionService, InitializingBean {
 	public PollsChoiceLocalService getPollsChoiceLocalService() {
 		return pollsChoiceLocalService;
 	}
@@ -104,6 +112,36 @@ public abstract class PollsQuestionServiceBaseImpl extends PrincipalBean
 	public void setPollsVotePersistence(
 		PollsVotePersistence pollsVotePersistence) {
 		this.pollsVotePersistence = pollsVotePersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (pollsChoiceLocalService == null) {
+			pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getImpl();
+		}
+
+		if (pollsChoicePersistence == null) {
+			pollsChoicePersistence = PollsChoiceUtil.getPersistence();
+		}
+
+		if (pollsQuestionLocalService == null) {
+			pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getImpl();
+		}
+
+		if (pollsQuestionPersistence == null) {
+			pollsQuestionPersistence = PollsQuestionUtil.getPersistence();
+		}
+
+		if (pollsVoteLocalService == null) {
+			pollsVoteLocalService = PollsVoteLocalServiceFactory.getImpl();
+		}
+
+		if (pollsVoteService == null) {
+			pollsVoteService = PollsVoteServiceFactory.getImpl();
+		}
+
+		if (pollsVotePersistence == null) {
+			pollsVotePersistence = PollsVoteUtil.getPersistence();
+		}
 	}
 
 	protected PollsChoiceLocalService pollsChoiceLocalService;

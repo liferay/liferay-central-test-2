@@ -26,11 +26,16 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceFactory;
 import com.liferay.portlet.imagegallery.service.IGFolderService;
+import com.liferay.portlet.imagegallery.service.IGFolderServiceFactory;
 import com.liferay.portlet.imagegallery.service.IGImageLocalService;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
+import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 
@@ -40,7 +45,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService {
+public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService,
+	InitializingBean {
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return IGImageUtil.findWithDynamicQuery(queryInitializer);
@@ -82,6 +88,24 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 
 	public void setIGImagePersistence(IGImagePersistence igImagePersistence) {
 		this.igImagePersistence = igImagePersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (igFolderLocalService == null) {
+			igFolderLocalService = IGFolderLocalServiceFactory.getImpl();
+		}
+
+		if (igFolderService == null) {
+			igFolderService = IGFolderServiceFactory.getImpl();
+		}
+
+		if (igFolderPersistence == null) {
+			igFolderPersistence = IGFolderUtil.getPersistence();
+		}
+
+		if (igImagePersistence == null) {
+			igImagePersistence = IGImageUtil.getPersistence();
+		}
 	}
 
 	protected IGFolderLocalService igFolderLocalService;

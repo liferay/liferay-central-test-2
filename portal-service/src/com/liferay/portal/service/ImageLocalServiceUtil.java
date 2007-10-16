@@ -533,6 +533,11 @@ public class ImageLocalServiceUtil {
 		imageLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+		imageLocalService.afterPropertiesSet();
+	}
+
 	public static void deleteImage(long imageId)
 		throws com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();

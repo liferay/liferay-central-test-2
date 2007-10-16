@@ -26,17 +26,28 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
+import com.liferay.portlet.tags.service.TagsAssetServiceFactory;
 import com.liferay.portlet.tags.service.TagsEntryLocalService;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsEntryService;
+import com.liferay.portlet.tags.service.TagsEntryServiceFactory;
 import com.liferay.portlet.tags.service.TagsPropertyLocalService;
 import com.liferay.portlet.tags.service.TagsSourceLocalService;
+import com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsSourceService;
+import com.liferay.portlet.tags.service.TagsSourceServiceFactory;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
+import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
+import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.service.persistence.TagsSourcePersistence;
+import com.liferay.portlet.tags.service.persistence.TagsSourceUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 
@@ -47,7 +58,7 @@ import java.util.List;
  *
  */
 public abstract class TagsPropertyLocalServiceBaseImpl
-	implements TagsPropertyLocalService {
+	implements TagsPropertyLocalService, InitializingBean {
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return TagsPropertyUtil.findWithDynamicQuery(queryInitializer);
@@ -144,6 +155,48 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 	public void setTagsSourcePersistence(
 		TagsSourcePersistence tagsSourcePersistence) {
 		this.tagsSourcePersistence = tagsSourcePersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (tagsAssetLocalService == null) {
+			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
+		}
+
+		if (tagsAssetService == null) {
+			tagsAssetService = TagsAssetServiceFactory.getImpl();
+		}
+
+		if (tagsAssetPersistence == null) {
+			tagsAssetPersistence = TagsAssetUtil.getPersistence();
+		}
+
+		if (tagsEntryLocalService == null) {
+			tagsEntryLocalService = TagsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (tagsEntryService == null) {
+			tagsEntryService = TagsEntryServiceFactory.getImpl();
+		}
+
+		if (tagsEntryPersistence == null) {
+			tagsEntryPersistence = TagsEntryUtil.getPersistence();
+		}
+
+		if (tagsPropertyPersistence == null) {
+			tagsPropertyPersistence = TagsPropertyUtil.getPersistence();
+		}
+
+		if (tagsSourceLocalService == null) {
+			tagsSourceLocalService = TagsSourceLocalServiceFactory.getImpl();
+		}
+
+		if (tagsSourceService == null) {
+			tagsSourceService = TagsSourceServiceFactory.getImpl();
+		}
+
+		if (tagsSourcePersistence == null) {
+			tagsSourcePersistence = TagsSourceUtil.getPersistence();
+		}
 	}
 
 	protected TagsAssetLocalService tagsAssetLocalService;

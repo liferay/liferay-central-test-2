@@ -138,6 +138,11 @@ public class JournalStructureLocalServiceUtil {
 		journalStructureLocalService.setJournalTemplatePersistence(journalTemplatePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
+		journalStructureLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
 		long userId, java.lang.String structureId, boolean autoStructureId,
 		long plid, java.lang.String name, java.lang.String description,

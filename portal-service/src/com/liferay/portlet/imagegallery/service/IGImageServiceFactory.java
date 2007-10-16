@@ -53,6 +53,14 @@ public class IGImageServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static IGImageService getImpl() {
+		if (_impl == null) {
+			_impl = (IGImageService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static IGImageService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (IGImageService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class IGImageServiceFactory {
 	}
 
 	private static final String _FACTORY = IGImageServiceFactory.class.getName();
+	private static final String _IMPL = IGImageService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = IGImageService.class.getName() +
 		".transaction";
 	private static IGImageServiceFactory _factory;
+	private static IGImageService _impl;
 	private static IGImageService _txImpl;
 	private IGImageService _service;
 }

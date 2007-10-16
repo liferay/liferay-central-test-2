@@ -53,6 +53,14 @@ public class LayoutSetServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static LayoutSetService getImpl() {
+		if (_impl == null) {
+			_impl = (LayoutSetService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static LayoutSetService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (LayoutSetService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class LayoutSetServiceFactory {
 	}
 
 	private static final String _FACTORY = LayoutSetServiceFactory.class.getName();
+	private static final String _IMPL = LayoutSetService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = LayoutSetService.class.getName() +
 		".transaction";
 	private static LayoutSetServiceFactory _factory;
+	private static LayoutSetService _impl;
 	private static LayoutSetService _txImpl;
 	private LayoutSetService _service;
 }

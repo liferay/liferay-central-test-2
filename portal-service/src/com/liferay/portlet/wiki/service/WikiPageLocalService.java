@@ -72,6 +72,8 @@ public interface WikiPageLocalService {
 	public void setWikiPageResourcePersistence(
 		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
 		long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException, 

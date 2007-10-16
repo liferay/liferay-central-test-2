@@ -25,9 +25,14 @@ package com.liferay.portlet.workflow.service.base;
 import com.liferay.portal.service.impl.PrincipalBean;
 
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
+import com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
+import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowInstanceService;
+import com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowTaskService;
+
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * <a href="WorkflowTaskServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -36,7 +41,7 @@ import com.liferay.portlet.workflow.service.WorkflowTaskService;
  *
  */
 public abstract class WorkflowTaskServiceBaseImpl extends PrincipalBean
-	implements WorkflowTaskService {
+	implements WorkflowTaskService, InitializingBean {
 	public WorkflowComponentService getWorkflowComponentService() {
 		return workflowComponentService;
 	}
@@ -62,6 +67,20 @@ public abstract class WorkflowTaskServiceBaseImpl extends PrincipalBean
 	public void setWorkflowInstanceService(
 		WorkflowInstanceService workflowInstanceService) {
 		this.workflowInstanceService = workflowInstanceService;
+	}
+
+	public void afterPropertiesSet() {
+		if (workflowComponentService == null) {
+			workflowComponentService = WorkflowComponentServiceFactory.getImpl();
+		}
+
+		if (workflowDefinitionService == null) {
+			workflowDefinitionService = WorkflowDefinitionServiceFactory.getImpl();
+		}
+
+		if (workflowInstanceService == null) {
+			workflowInstanceService = WorkflowInstanceServiceFactory.getImpl();
+		}
 	}
 
 	protected WorkflowComponentService workflowComponentService;

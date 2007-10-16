@@ -138,6 +138,11 @@ public class JournalArticleImageLocalServiceUtil {
 		journalArticleImageLocalService.setJournalTemplatePersistence(journalTemplatePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+		journalArticleImageLocalService.afterPropertiesSet();
+	}
+
 	public static void addArticleImageId(long articleImageId, long groupId,
 		java.lang.String articleId, double version, java.lang.String elName,
 		java.lang.String languageId)

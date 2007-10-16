@@ -53,6 +53,14 @@ public class PermissionServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static PermissionService getImpl() {
+		if (_impl == null) {
+			_impl = (PermissionService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static PermissionService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (PermissionService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class PermissionServiceFactory {
 	}
 
 	private static final String _FACTORY = PermissionServiceFactory.class.getName();
+	private static final String _IMPL = PermissionService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = PermissionService.class.getName() +
 		".transaction";
 	private static PermissionServiceFactory _factory;
+	private static PermissionService _impl;
 	private static PermissionService _txImpl;
 	private PermissionService _service;
 }

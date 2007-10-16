@@ -53,6 +53,14 @@ public class RatingsStatsLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static RatingsStatsLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (RatingsStatsLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static RatingsStatsLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (RatingsStatsLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class RatingsStatsLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = RatingsStatsLocalServiceFactory.class.getName();
+	private static final String _IMPL = RatingsStatsLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = RatingsStatsLocalService.class.getName() +
 		".transaction";
 	private static RatingsStatsLocalServiceFactory _factory;
+	private static RatingsStatsLocalService _impl;
 	private static RatingsStatsLocalService _txImpl;
 	private RatingsStatsLocalService _service;
 }

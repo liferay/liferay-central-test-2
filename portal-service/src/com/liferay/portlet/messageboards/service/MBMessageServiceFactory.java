@@ -53,6 +53,14 @@ public class MBMessageServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static MBMessageService getImpl() {
+		if (_impl == null) {
+			_impl = (MBMessageService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static MBMessageService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (MBMessageService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class MBMessageServiceFactory {
 	}
 
 	private static final String _FACTORY = MBMessageServiceFactory.class.getName();
+	private static final String _IMPL = MBMessageService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = MBMessageService.class.getName() +
 		".transaction";
 	private static MBMessageServiceFactory _factory;
+	private static MBMessageService _impl;
 	private static MBMessageService _txImpl;
 	private MBMessageService _service;
 }

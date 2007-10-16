@@ -27,12 +27,19 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory;
 import com.liferay.portlet.blogs.service.BlogsEntryService;
+import com.liferay.portlet.blogs.service.BlogsEntryServiceFactory;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory;
 import com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 
@@ -43,7 +50,7 @@ import java.util.List;
  *
  */
 public abstract class BlogsCategoryLocalServiceBaseImpl
-	implements BlogsCategoryLocalService {
+	implements BlogsCategoryLocalService, InitializingBean {
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
 		return BlogsCategoryUtil.findWithDynamicQuery(queryInitializer);
@@ -106,6 +113,32 @@ public abstract class BlogsCategoryLocalServiceBaseImpl
 	public void setBlogsStatsUserPersistence(
 		BlogsStatsUserPersistence blogsStatsUserPersistence) {
 		this.blogsStatsUserPersistence = blogsStatsUserPersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (blogsCategoryPersistence == null) {
+			blogsCategoryPersistence = BlogsCategoryUtil.getPersistence();
+		}
+
+		if (blogsEntryLocalService == null) {
+			blogsEntryLocalService = BlogsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (blogsEntryService == null) {
+			blogsEntryService = BlogsEntryServiceFactory.getImpl();
+		}
+
+		if (blogsEntryPersistence == null) {
+			blogsEntryPersistence = BlogsEntryUtil.getPersistence();
+		}
+
+		if (blogsStatsUserLocalService == null) {
+			blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getImpl();
+		}
+
+		if (blogsStatsUserPersistence == null) {
+			blogsStatsUserPersistence = BlogsStatsUserUtil.getPersistence();
+		}
 	}
 
 	protected BlogsCategoryPersistence blogsCategoryPersistence;

@@ -92,6 +92,8 @@ public interface MBThreadLocalService {
 	public void setMBThreadPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence);
 
+	public void afterPropertiesSet();
+
 	public void deleteThread(long threadId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

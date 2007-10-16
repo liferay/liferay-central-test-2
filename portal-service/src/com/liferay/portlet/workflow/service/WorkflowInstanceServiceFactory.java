@@ -53,6 +53,14 @@ public class WorkflowInstanceServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static WorkflowInstanceService getImpl() {
+		if (_impl == null) {
+			_impl = (WorkflowInstanceService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static WorkflowInstanceService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (WorkflowInstanceService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class WorkflowInstanceServiceFactory {
 	}
 
 	private static final String _FACTORY = WorkflowInstanceServiceFactory.class.getName();
+	private static final String _IMPL = WorkflowInstanceService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = WorkflowInstanceService.class.getName() +
 		".transaction";
 	private static WorkflowInstanceServiceFactory _factory;
+	private static WorkflowInstanceService _impl;
 	private static WorkflowInstanceService _txImpl;
 	private WorkflowInstanceService _service;
 }

@@ -534,6 +534,11 @@ public class UserTrackerPathLocalServiceUtil {
 		userTrackerPathLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+		userTrackerPathLocalService.afterPropertiesSet();
+	}
+
 	public static java.util.List getUserTrackerPaths(long userTrackerId,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();

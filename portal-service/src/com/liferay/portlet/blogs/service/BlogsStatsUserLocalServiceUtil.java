@@ -102,6 +102,11 @@ public class BlogsStatsUserLocalServiceUtil {
 		blogsStatsUserLocalService.setBlogsStatsUserPersistence(blogsStatsUserPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+		blogsStatsUserLocalService.afterPropertiesSet();
+	}
+
 	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();

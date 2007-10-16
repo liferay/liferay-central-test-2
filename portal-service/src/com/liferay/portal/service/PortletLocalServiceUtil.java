@@ -533,6 +533,11 @@ public class PortletLocalServiceUtil {
 		portletLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+		portletLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.PortletCategory getEARDisplay(
 		java.lang.String xml) throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();

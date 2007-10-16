@@ -97,6 +97,8 @@ public interface ShoppingCouponLocalService {
 	public void setShoppingOrderItemPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence shoppingOrderItemPersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
 		long userId, long plid, java.lang.String code, boolean autoCode,
 		java.lang.String name, java.lang.String description,

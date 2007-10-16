@@ -53,6 +53,14 @@ public class DLFileEntryLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static DLFileEntryLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (DLFileEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static DLFileEntryLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (DLFileEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class DLFileEntryLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = DLFileEntryLocalServiceFactory.class.getName();
+	private static final String _IMPL = DLFileEntryLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = DLFileEntryLocalService.class.getName() +
 		".transaction";
 	private static DLFileEntryLocalServiceFactory _factory;
+	private static DLFileEntryLocalService _impl;
 	private static DLFileEntryLocalService _txImpl;
 	private DLFileEntryLocalService _service;
 }

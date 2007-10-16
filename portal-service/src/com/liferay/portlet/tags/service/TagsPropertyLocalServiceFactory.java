@@ -53,6 +53,14 @@ public class TagsPropertyLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static TagsPropertyLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (TagsPropertyLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static TagsPropertyLocalService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (TagsPropertyLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class TagsPropertyLocalServiceFactory {
 	}
 
 	private static final String _FACTORY = TagsPropertyLocalServiceFactory.class.getName();
+	private static final String _IMPL = TagsPropertyLocalService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = TagsPropertyLocalService.class.getName() +
 		".transaction";
 	private static TagsPropertyLocalServiceFactory _factory;
+	private static TagsPropertyLocalService _impl;
 	private static TagsPropertyLocalService _txImpl;
 	private TagsPropertyLocalService _service;
 }

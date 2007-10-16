@@ -101,6 +101,11 @@ public class BlogsEntryLocalServiceUtil {
 		blogsEntryLocalService.setBlogsStatsUserPersistence(blogsStatsUserPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+		blogsEntryLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		long userId, long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,

@@ -76,4 +76,6 @@ public interface TagsSourceLocalService {
 
 	public void setTagsSourcePersistence(
 		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence);
+
+	public void afterPropertiesSet();
 }

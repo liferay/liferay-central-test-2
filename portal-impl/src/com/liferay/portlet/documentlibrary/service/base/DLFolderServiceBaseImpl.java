@@ -27,19 +27,32 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.impl.PrincipalBean;
 
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
+
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * <a href="DLFolderServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +61,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
  *
  */
 public abstract class DLFolderServiceBaseImpl extends PrincipalBean
-	implements DLFolderService {
+	implements DLFolderService, InitializingBean {
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}
@@ -153,6 +166,56 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 
 	public void setDLFolderPersistence(DLFolderPersistence dlFolderPersistence) {
 		this.dlFolderPersistence = dlFolderPersistence;
+	}
+
+	public void afterPropertiesSet() {
+		if (dlFileEntryLocalService == null) {
+			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
+		}
+
+		if (dlFileEntryService == null) {
+			dlFileEntryService = DLFileEntryServiceFactory.getImpl();
+		}
+
+		if (dlFileEntryPersistence == null) {
+			dlFileEntryPersistence = DLFileEntryUtil.getPersistence();
+		}
+
+		if (dlFileRankLocalService == null) {
+			dlFileRankLocalService = DLFileRankLocalServiceFactory.getImpl();
+		}
+
+		if (dlFileRankPersistence == null) {
+			dlFileRankPersistence = DLFileRankUtil.getPersistence();
+		}
+
+		if (dlFileShortcutLocalService == null) {
+			dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getImpl();
+		}
+
+		if (dlFileShortcutService == null) {
+			dlFileShortcutService = DLFileShortcutServiceFactory.getImpl();
+		}
+
+		if (dlFileShortcutPersistence == null) {
+			dlFileShortcutPersistence = DLFileShortcutUtil.getPersistence();
+		}
+
+		if (dlFileVersionLocalService == null) {
+			dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getImpl();
+		}
+
+		if (dlFileVersionPersistence == null) {
+			dlFileVersionPersistence = DLFileVersionUtil.getPersistence();
+		}
+
+		if (dlFolderLocalService == null) {
+			dlFolderLocalService = DLFolderLocalServiceFactory.getImpl();
+		}
+
+		if (dlFolderPersistence == null) {
+			dlFolderPersistence = DLFolderUtil.getPersistence();
+		}
 	}
 
 	protected DLFileEntryLocalService dlFileEntryLocalService;

@@ -67,6 +67,8 @@ public interface IGFolderLocalService {
 	public void setIGImagePersistence(
 		com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

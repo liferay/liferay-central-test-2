@@ -36,6 +36,14 @@ public class CounterServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static CounterService getImpl() {
+		if (_impl == null) {
+			_impl = (CounterService)BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static CounterService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (CounterService)BeanLocatorUtil.locate(_TX_IMPL);
@@ -59,10 +67,14 @@ public class CounterServiceFactory {
 	private static final String _FACTORY =
 		CounterServiceFactory.class.getName();
 
+	private static final String _IMPL =
+		CounterService.class.getName() + ".professional";
+
 	private static final String _TX_IMPL =
 		CounterService.class.getName() + ".transaction";
 
 	private static CounterServiceFactory _factory;
+	private static CounterService _impl;
 	private static CounterService _txImpl;
 
 	private CounterService _service;

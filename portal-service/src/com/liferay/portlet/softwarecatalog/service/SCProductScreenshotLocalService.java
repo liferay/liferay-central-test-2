@@ -82,6 +82,8 @@ public interface SCProductScreenshotLocalService {
 	public void setSCProductVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence);
 
+	public void afterPropertiesSet();
+
 	public void deleteProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot productScreenshot)
 		throws com.liferay.portal.SystemException;

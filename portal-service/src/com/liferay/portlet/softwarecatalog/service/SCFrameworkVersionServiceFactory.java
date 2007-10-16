@@ -53,6 +53,14 @@ public class SCFrameworkVersionServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static SCFrameworkVersionService getImpl() {
+		if (_impl == null) {
+			_impl = (SCFrameworkVersionService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static SCFrameworkVersionService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (SCFrameworkVersionService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
@@ -74,9 +82,12 @@ public class SCFrameworkVersionServiceFactory {
 	}
 
 	private static final String _FACTORY = SCFrameworkVersionServiceFactory.class.getName();
+	private static final String _IMPL = SCFrameworkVersionService.class.getName() +
+		".professional";
 	private static final String _TX_IMPL = SCFrameworkVersionService.class.getName() +
 		".transaction";
 	private static SCFrameworkVersionServiceFactory _factory;
+	private static SCFrameworkVersionService _impl;
 	private static SCFrameworkVersionService _txImpl;
 	private SCFrameworkVersionService _service;
 }

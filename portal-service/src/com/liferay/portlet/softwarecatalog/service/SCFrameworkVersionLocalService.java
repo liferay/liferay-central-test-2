@@ -82,6 +82,8 @@ public interface SCFrameworkVersionLocalService {
 	public void setSCProductVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
 		long userId, long plid, java.lang.String name, java.lang.String url,
 		boolean active, int priority, boolean addCommunityPermissions,

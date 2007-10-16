@@ -252,6 +252,8 @@ public interface ServiceComponentLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		javax.servlet.ServletContext ctx,
 		java.lang.ClassLoader portletClassLoader,

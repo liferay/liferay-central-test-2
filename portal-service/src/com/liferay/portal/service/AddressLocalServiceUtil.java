@@ -533,6 +533,11 @@ public class AddressLocalServiceUtil {
 		addressLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.Address addAddress(long userId,
 		java.lang.String className, long classPK, java.lang.String street1,
 		java.lang.String street2, java.lang.String street3,

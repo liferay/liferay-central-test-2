@@ -252,6 +252,8 @@ public interface RoleLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public com.liferay.portal.model.Role addRole(long userId, long companyId,
 		java.lang.String name, int type)
 		throws com.liferay.portal.SystemException, 

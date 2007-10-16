@@ -162,6 +162,11 @@ public class ShoppingCouponLocalServiceUtil {
 		shoppingCouponLocalService.setShoppingOrderItemPersistence(shoppingOrderItemPersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+		shoppingCouponLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
 		long userId, long plid, java.lang.String code, boolean autoCode,
 		java.lang.String name, java.lang.String description,

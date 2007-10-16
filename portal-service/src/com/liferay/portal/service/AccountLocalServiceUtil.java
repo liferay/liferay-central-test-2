@@ -533,6 +533,11 @@ public class AccountLocalServiceUtil {
 		accountLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
+		accountLocalService.afterPropertiesSet();
+	}
+
 	public static com.liferay.portal.model.Account getAccount(long accountId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

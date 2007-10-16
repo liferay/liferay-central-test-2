@@ -252,6 +252,8 @@ public interface PasswordTrackerLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public void afterPropertiesSet();
+
 	public void deletePasswordTrackers(long userId)
 		throws com.liferay.portal.SystemException;
 

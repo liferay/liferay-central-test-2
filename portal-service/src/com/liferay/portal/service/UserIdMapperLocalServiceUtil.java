@@ -534,6 +534,11 @@ public class UserIdMapperLocalServiceUtil {
 		userIdMapperLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static void afterPropertiesSet() {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+		userIdMapperLocalService.afterPropertiesSet();
+	}
+
 	public static void deleteUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
