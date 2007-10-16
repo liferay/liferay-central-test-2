@@ -25,12 +25,11 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil;
-import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
+import com.liferay.portlet.softwarecatalog.service.base.SCFrameworkVersionServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.permission.SCFrameworkVersionPermission;
 
 import java.util.List;
@@ -44,7 +43,7 @@ import java.util.List;
  *
  */
 public class SCFrameworkVersionServiceImpl
-	extends PrincipalBean implements SCFrameworkVersionService {
+	extends SCFrameworkVersionServiceBaseImpl {
 
 	public SCFrameworkVersion addFrameworkVersion(
 			long plid, String name, String url, boolean active, int priority,

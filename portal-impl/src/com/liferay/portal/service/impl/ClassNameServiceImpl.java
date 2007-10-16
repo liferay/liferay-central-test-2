@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
-import com.liferay.portal.service.ClassNameService;
+import com.liferay.portal.service.base.ClassNameServiceBaseImpl;
 
 /**
  * <a href="ClassNameServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -34,8 +34,7 @@ import com.liferay.portal.service.ClassNameService;
  * @author Brian Wing Shun Chan
  *
  */
-public class ClassNameServiceImpl
-	extends PrincipalBean implements ClassNameService {
+public class ClassNameServiceImpl extends ClassNameServiceBaseImpl {
 
 	public ClassName getClassName(long classNameId)
 		throws PortalException, SystemException {

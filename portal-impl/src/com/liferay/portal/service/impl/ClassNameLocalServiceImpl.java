@@ -76,7 +76,7 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 			classNameModel = ClassNameUtil.fetchByValue(value);
 
 			if (classNameModel == null) {
-				long classNameId = CounterLocalServiceUtil.increment();
+				long classNameId = counterLocalService.increment();
 
 				classNameModel = ClassNameUtil.create(classNameId);
 

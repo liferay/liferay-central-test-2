@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.service.AddressLocalServiceUtil;
-import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.base.AddressServiceBaseImpl;
 import com.liferay.portal.service.permission.CommonPermissionUtil;
 import com.liferay.portal.service.persistence.AddressUtil;
 
@@ -40,8 +40,7 @@ import java.util.List;
  * @author Alexander Chow
  *
  */
-public class AddressServiceImpl
-	extends PrincipalBean implements AddressService {
+public class AddressServiceImpl extends AddressServiceBaseImpl {
 
 	public Address addAddress(
 			String className, long classPK, String street1, String street2,

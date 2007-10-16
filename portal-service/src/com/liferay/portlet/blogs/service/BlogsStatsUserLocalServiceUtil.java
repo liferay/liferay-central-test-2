@@ -66,6 +66,42 @@ public class BlogsStatsUserLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence getBlogsCategoryPersistence() {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		return blogsStatsUserLocalService.getBlogsCategoryPersistence();
+	}
+
+	public static void setBlogsCategoryPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence blogsCategoryPersistence) {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+		blogsStatsUserLocalService.setBlogsCategoryPersistence(blogsCategoryPersistence);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence() {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		return blogsStatsUserLocalService.getBlogsEntryPersistence();
+	}
+
+	public static void setBlogsEntryPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence) {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+		blogsStatsUserLocalService.setBlogsEntryPersistence(blogsEntryPersistence);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence getBlogsStatsUserPersistence() {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		return blogsStatsUserLocalService.getBlogsStatsUserPersistence();
+	}
+
+	public static void setBlogsStatsUserPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence) {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+		blogsStatsUserLocalService.setBlogsStatsUserPersistence(blogsStatsUserPersistence);
+	}
+
 	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();

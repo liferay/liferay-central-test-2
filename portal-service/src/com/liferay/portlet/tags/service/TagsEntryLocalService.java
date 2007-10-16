@@ -57,6 +57,26 @@ public interface TagsEntryLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence();
+
+	public void setTagsAssetPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence);
+
+	public com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence();
+
+	public void setTagsEntryPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence);
+
+	public com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence getTagsPropertyPersistence();
+
+	public void setTagsPropertyPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence tagsPropertyPersistence);
+
+	public com.liferay.portlet.tags.service.persistence.TagsSourcePersistence getTagsSourcePersistence();
+
+	public void setTagsSourcePersistence(
+		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence);
+
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 

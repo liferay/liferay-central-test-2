@@ -65,6 +65,66 @@ public class SCLicenseLocalServiceUtil {
 		return scLicenseLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence() {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
+		return scLicenseLocalService.getSCLicensePersistence();
+	}
+
+	public static void setSCLicensePersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence) {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+		scLicenseLocalService.setSCLicensePersistence(scLicensePersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence getSCFrameworkVersionPersistence() {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
+		return scLicenseLocalService.getSCFrameworkVersionPersistence();
+	}
+
+	public static void setSCFrameworkVersionPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence) {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+		scLicenseLocalService.setSCFrameworkVersionPersistence(scFrameworkVersionPersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence getSCProductEntryPersistence() {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
+		return scLicenseLocalService.getSCProductEntryPersistence();
+	}
+
+	public static void setSCProductEntryPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence) {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+		scLicenseLocalService.setSCProductEntryPersistence(scProductEntryPersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence getSCProductScreenshotPersistence() {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
+		return scLicenseLocalService.getSCProductScreenshotPersistence();
+	}
+
+	public static void setSCProductScreenshotPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence) {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+		scLicenseLocalService.setSCProductScreenshotPersistence(scProductScreenshotPersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence getSCProductVersionPersistence() {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
+		return scLicenseLocalService.getSCProductVersionPersistence();
+	}
+
+	public static void setSCProductVersionPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence) {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+		scLicenseLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense addLicense(
 		java.lang.String name, java.lang.String url, boolean openSource,
 		boolean active, boolean recommended)

@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
@@ -42,7 +41,7 @@ import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.portlet.blogs.service.BlogsEntryService;
+import com.liferay.portlet.blogs.service.base.BlogsEntryServiceBaseImpl;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
 import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
@@ -67,8 +66,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsEntryServiceImpl
-	extends PrincipalBean implements BlogsEntryService {
+public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	public BlogsEntry addEntry(
 			long plid, long categoryId, String title, String content,

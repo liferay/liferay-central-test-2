@@ -25,10 +25,9 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil;
-import com.liferay.portlet.softwarecatalog.service.SCProductVersionService;
+import com.liferay.portlet.softwarecatalog.service.base.SCProductVersionServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPermission;
 
 import java.util.List;
@@ -40,8 +39,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class SCProductVersionServiceImpl extends PrincipalBean
-	implements SCProductVersionService {
+public class SCProductVersionServiceImpl
+	extends SCProductVersionServiceBaseImpl {
 
 	public SCProductVersion addProductVersion(
 			long productEntryId, String version, String changeLog,

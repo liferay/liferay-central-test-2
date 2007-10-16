@@ -65,6 +65,90 @@ public class MBBanLocalServiceUtil {
 		return mbBanLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBBanPersistence();
+	}
+
+	public static void setMBBanPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setMBBanPersistence(mbBanPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence getMBCategoryPersistence() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBCategoryPersistence();
+	}
+
+	public static void setMBCategoryPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setMBCategoryPersistence(mbCategoryPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence getMBDiscussionPersistence() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBDiscussionPersistence();
+	}
+
+	public static void setMBDiscussionPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence mbDiscussionPersistence) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setMBDiscussionPersistence(mbDiscussionPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBMessagePersistence();
+	}
+
+	public static void setMBMessagePersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setMBMessagePersistence(mbMessagePersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence getMBMessageFlagPersistence() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBMessageFlagPersistence();
+	}
+
+	public static void setMBMessageFlagPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setMBMessageFlagPersistence(mbMessageFlagPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence getMBStatsUserPersistence() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBStatsUserPersistence();
+	}
+
+	public static void setMBStatsUserPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setMBStatsUserPersistence(mbStatsUserPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence getMBThreadPersistence() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBThreadPersistence();
+	}
+
+	public static void setMBThreadPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setMBThreadPersistence(mbThreadPersistence);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
 		long userId, long plid, long banUserId)
 		throws com.liferay.portal.PortalException, 

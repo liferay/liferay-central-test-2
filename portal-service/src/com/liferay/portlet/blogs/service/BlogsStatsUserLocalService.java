@@ -57,6 +57,21 @@ public interface BlogsStatsUserLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence getBlogsCategoryPersistence();
+
+	public void setBlogsCategoryPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence blogsCategoryPersistence);
+
+	public com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence();
+
+	public void setBlogsEntryPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence);
+
+	public com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence getBlogsStatsUserPersistence();
+
+	public void setBlogsStatsUserPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence);
+
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 

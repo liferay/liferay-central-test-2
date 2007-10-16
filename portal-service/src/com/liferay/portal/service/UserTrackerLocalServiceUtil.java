@@ -65,6 +65,462 @@ public class UserTrackerLocalServiceUtil {
 		return userTrackerLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getAccountPersistence();
+	}
+
+	public static void setAccountPersistence(
+		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setAccountPersistence(accountPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getAddressPersistence();
+	}
+
+	public static void setAddressPersistence(
+		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setAddressPersistence(addressPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ClassNamePersistence getClassNamePersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getClassNamePersistence();
+	}
+
+	public static void setClassNamePersistence(
+		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setClassNamePersistence(classNamePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getCompanyPersistence();
+	}
+
+	public static void setCompanyPersistence(
+		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setCompanyPersistence(companyPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ContactPersistence getContactPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getContactPersistence();
+	}
+
+	public static void setContactPersistence(
+		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setContactPersistence(contactPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.CountryPersistence getCountryPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getCountryPersistence();
+	}
+
+	public static void setCountryPersistence(
+		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setCountryPersistence(countryPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.EmailAddressPersistence getEmailAddressPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getEmailAddressPersistence();
+	}
+
+	public static void setEmailAddressPersistence(
+		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setEmailAddressPersistence(emailAddressPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getGroupPersistence();
+	}
+
+	public static void setGroupPersistence(
+		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setGroupPersistence(groupPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ImagePersistence getImagePersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getImagePersistence();
+	}
+
+	public static void setImagePersistence(
+		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setImagePersistence(imagePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.LayoutPersistence getLayoutPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getLayoutPersistence();
+	}
+
+	public static void setLayoutPersistence(
+		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setLayoutPersistence(layoutPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.LayoutSetPersistence getLayoutSetPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getLayoutSetPersistence();
+	}
+
+	public static void setLayoutSetPersistence(
+		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setLayoutSetPersistence(layoutSetPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ListTypePersistence getListTypePersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getListTypePersistence();
+	}
+
+	public static void setListTypePersistence(
+		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setListTypePersistence(listTypePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.OrganizationPersistence getOrganizationPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getOrganizationPersistence();
+	}
+
+	public static void setOrganizationPersistence(
+		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setOrganizationPersistence(organizationPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.OrgGroupPermissionPersistence getOrgGroupPermissionPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getOrgGroupPermissionPersistence();
+	}
+
+	public static void setOrgGroupPermissionPersistence(
+		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.OrgGroupRolePersistence getOrgGroupRolePersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getOrgGroupRolePersistence();
+	}
+
+	public static void setOrgGroupRolePersistence(
+		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.OrgLaborPersistence getOrgLaborPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getOrgLaborPersistence();
+	}
+
+	public static void setOrgLaborPersistence(
+		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setOrgLaborPersistence(orgLaborPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PasswordPolicyPersistence getPasswordPolicyPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getPasswordPolicyPersistence();
+	}
+
+	public static void setPasswordPolicyPersistence(
+		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PasswordPolicyRelPersistence getPasswordPolicyRelPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getPasswordPolicyRelPersistence();
+	}
+
+	public static void setPasswordPolicyRelPersistence(
+		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PasswordTrackerPersistence getPasswordTrackerPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getPasswordTrackerPersistence();
+	}
+
+	public static void setPasswordTrackerPersistence(
+		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PermissionPersistence getPermissionPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getPermissionPersistence();
+	}
+
+	public static void setPermissionPersistence(
+		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setPermissionPersistence(permissionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PhonePersistence getPhonePersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getPhonePersistence();
+	}
+
+	public static void setPhonePersistence(
+		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setPhonePersistence(phonePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PluginSettingPersistence getPluginSettingPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getPluginSettingPersistence();
+	}
+
+	public static void setPluginSettingPersistence(
+		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setPluginSettingPersistence(pluginSettingPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PortletPersistence getPortletPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getPortletPersistence();
+	}
+
+	public static void setPortletPersistence(
+		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setPortletPersistence(portletPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PortletPreferencesPersistence getPortletPreferencesPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getPortletPreferencesPersistence();
+	}
+
+	public static void setPortletPreferencesPersistence(
+		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.RegionPersistence getRegionPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getRegionPersistence();
+	}
+
+	public static void setRegionPersistence(
+		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setRegionPersistence(regionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ReleasePersistence getReleasePersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getReleasePersistence();
+	}
+
+	public static void setReleasePersistence(
+		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setReleasePersistence(releasePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceCodePersistence getResourceCodePersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getResourceCodePersistence();
+	}
+
+	public static void setResourceCodePersistence(
+		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setResourceCodePersistence(resourceCodePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.RolePersistence getRolePersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getRolePersistence();
+	}
+
+	public static void setRolePersistence(
+		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setRolePersistence(rolePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ServiceComponentPersistence getServiceComponentPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getServiceComponentPersistence();
+	}
+
+	public static void setServiceComponentPersistence(
+		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setServiceComponentPersistence(serviceComponentPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getSubscriptionPersistence();
+	}
+
+	public static void setSubscriptionPersistence(
+		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setSubscriptionPersistence(subscriptionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserGroupPersistence getUserGroupPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getUserGroupPersistence();
+	}
+
+	public static void setUserGroupPersistence(
+		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setUserGroupPersistence(userGroupPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserGroupRolePersistence getUserGroupRolePersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getUserGroupRolePersistence();
+	}
+
+	public static void setUserGroupRolePersistence(
+		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserIdMapperPersistence getUserIdMapperPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getUserIdMapperPersistence();
+	}
+
+	public static void setUserIdMapperPersistence(
+		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserTrackerPersistence getUserTrackerPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getUserTrackerPersistence();
+	}
+
+	public static void setUserTrackerPersistence(
+		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setUserTrackerPersistence(userTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserTrackerPathPersistence getUserTrackerPathPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getUserTrackerPathPersistence();
+	}
+
+	public static void setUserTrackerPathPersistence(
+		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.WebsitePersistence getWebsitePersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getWebsitePersistence();
+	}
+
+	public static void setWebsitePersistence(
+		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+		userTrackerLocalService.setWebsitePersistence(websitePersistence);
+	}
+
 	public static com.liferay.portal.model.UserTracker addUserTracker(
 		long companyId, long userId, java.util.Date modifiedDate,
 		java.lang.String sessionId, java.lang.String remoteAddr,

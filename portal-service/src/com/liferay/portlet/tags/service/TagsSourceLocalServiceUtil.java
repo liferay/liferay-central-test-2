@@ -64,4 +64,52 @@ public class TagsSourceLocalServiceUtil {
 
 		return tagsSourceLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		return tagsSourceLocalService.getTagsAssetPersistence();
+	}
+
+	public static void setTagsAssetPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+		tagsSourceLocalService.setTagsAssetPersistence(tagsAssetPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence() {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		return tagsSourceLocalService.getTagsEntryPersistence();
+	}
+
+	public static void setTagsEntryPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+		tagsSourceLocalService.setTagsEntryPersistence(tagsEntryPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence getTagsPropertyPersistence() {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		return tagsSourceLocalService.getTagsPropertyPersistence();
+	}
+
+	public static void setTagsPropertyPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence tagsPropertyPersistence) {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+		tagsSourceLocalService.setTagsPropertyPersistence(tagsPropertyPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsSourcePersistence getTagsSourcePersistence() {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		return tagsSourceLocalService.getTagsSourcePersistence();
+	}
+
+	public static void setTagsSourcePersistence(
+		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence) {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+		tagsSourceLocalService.setTagsSourcePersistence(tagsSourcePersistence);
+	}
 }

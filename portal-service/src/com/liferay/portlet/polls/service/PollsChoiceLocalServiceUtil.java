@@ -65,6 +65,42 @@ public class PollsChoiceLocalServiceUtil {
 		return pollsChoiceLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.polls.service.persistence.PollsChoicePersistence getPollsChoicePersistence() {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
+		return pollsChoiceLocalService.getPollsChoicePersistence();
+	}
+
+	public static void setPollsChoicePersistence(
+		com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence) {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+		pollsChoiceLocalService.setPollsChoicePersistence(pollsChoicePersistence);
+	}
+
+	public static com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence() {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
+		return pollsChoiceLocalService.getPollsQuestionPersistence();
+	}
+
+	public static void setPollsQuestionPersistence(
+		com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence) {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+		pollsChoiceLocalService.setPollsQuestionPersistence(pollsQuestionPersistence);
+	}
+
+	public static com.liferay.portlet.polls.service.persistence.PollsVotePersistence getPollsVotePersistence() {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
+		return pollsChoiceLocalService.getPollsVotePersistence();
+	}
+
+	public static void setPollsVotePersistence(
+		com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence) {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+		pollsChoiceLocalService.setPollsVotePersistence(pollsVotePersistence);
+	}
+
 	public static com.liferay.portlet.polls.model.PollsChoice getChoice(
 		long choiceId)
 		throws com.liferay.portal.PortalException, 

@@ -26,10 +26,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderService;
+import com.liferay.portlet.documentlibrary.service.base.DLFolderServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 
 /**
@@ -38,8 +37,7 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFolderServiceImpl
-	extends PrincipalBean implements DLFolderService {
+public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 	public DLFolder addFolder(
 			long plid, long parentFolderId, String name, String description,

@@ -29,7 +29,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.OrganizationService;
+import com.liferay.portal.service.base.OrganizationServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
@@ -43,8 +43,7 @@ import java.util.List;
  * @author Jorge Ferrer
  *
  */
-public class OrganizationServiceImpl extends PrincipalBean
-	implements OrganizationService {
+public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 	public void addGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {

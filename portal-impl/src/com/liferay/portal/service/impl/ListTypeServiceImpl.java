@@ -28,7 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
-import com.liferay.portal.service.ListTypeService;
+import com.liferay.portal.service.base.ListTypeServiceBaseImpl;
 import com.liferay.portal.service.persistence.ListTypeUtil;
 
 import java.util.List;
@@ -39,8 +39,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class ListTypeServiceImpl
-	extends PrincipalBean implements ListTypeService {
+public class ListTypeServiceImpl extends ListTypeServiceBaseImpl {
 
 	public ListType getListType(int listTypeId)
 		throws PortalException, SystemException {

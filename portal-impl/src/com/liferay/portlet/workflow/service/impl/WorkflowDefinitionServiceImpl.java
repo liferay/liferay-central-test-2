@@ -33,11 +33,10 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.workflow.NoSuchDefinitionException;
 import com.liferay.portlet.workflow.model.WorkflowDefinition;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
-import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
+import com.liferay.portlet.workflow.service.base.WorkflowDefinitionServiceBaseImpl;
 
 import java.rmi.RemoteException;
 
@@ -49,7 +48,7 @@ import java.rmi.RemoteException;
  *
  */
 public class WorkflowDefinitionServiceImpl
-	extends PrincipalBean implements WorkflowDefinitionService {
+	extends WorkflowDefinitionServiceBaseImpl {
 
 	public WorkflowDefinition addDefinition(
 			String xml, boolean addCommunityPermissions,

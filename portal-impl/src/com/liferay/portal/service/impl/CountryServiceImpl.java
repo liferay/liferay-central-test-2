@@ -25,7 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Country;
-import com.liferay.portal.service.CountryService;
+import com.liferay.portal.service.base.CountryServiceBaseImpl;
 import com.liferay.portal.service.persistence.CountryUtil;
 
 import java.util.List;
@@ -36,8 +36,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class CountryServiceImpl
-	extends PrincipalBean implements CountryService {
+public class CountryServiceImpl extends CountryServiceBaseImpl {
 
 	public List getCountries() throws SystemException {
 		return CountryUtil.findAll();

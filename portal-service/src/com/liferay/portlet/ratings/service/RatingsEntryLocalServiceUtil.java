@@ -66,6 +66,30 @@ public class RatingsEntryLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence getRatingsEntryPersistence() {
+		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
+		return ratingsEntryLocalService.getRatingsEntryPersistence();
+	}
+
+	public static void setRatingsEntryPersistence(
+		com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence ratingsEntryPersistence) {
+		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+		ratingsEntryLocalService.setRatingsEntryPersistence(ratingsEntryPersistence);
+	}
+
+	public static com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence getRatingsStatsPersistence() {
+		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
+		return ratingsEntryLocalService.getRatingsStatsPersistence();
+	}
+
+	public static void setRatingsStatsPersistence(
+		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence) {
+		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+		ratingsEntryLocalService.setRatingsStatsPersistence(ratingsStatsPersistence);
+	}
+
 	public static com.liferay.portlet.ratings.model.RatingsEntry getEntry(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 

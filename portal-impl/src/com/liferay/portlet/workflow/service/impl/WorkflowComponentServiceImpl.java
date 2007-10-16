@@ -26,10 +26,9 @@ import com.liferay.portal.kernel.jbi.WorkflowComponent;
 import com.liferay.portal.kernel.jbi.WorkflowComponentException;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.workflow.jbi.WorkflowURL;
 import com.liferay.portlet.workflow.jbi.WorkflowXMLUtil;
-import com.liferay.portlet.workflow.service.WorkflowComponentService;
+import com.liferay.portlet.workflow.service.base.WorkflowComponentServiceBaseImpl;
 
 import java.util.List;
 import java.util.Map;
@@ -41,8 +40,8 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  *
  */
-public class WorkflowComponentServiceImpl extends PrincipalBean
-	implements WorkflowComponentService, WorkflowComponent {
+public class WorkflowComponentServiceImpl
+	extends WorkflowComponentServiceBaseImpl implements WorkflowComponent {
 
 	public List getCurrentTasks(
 			long instanceId, long tokenId)

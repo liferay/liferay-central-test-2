@@ -66,6 +66,42 @@ public class BlogsCategoryLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence getBlogsCategoryPersistence() {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+
+		return blogsCategoryLocalService.getBlogsCategoryPersistence();
+	}
+
+	public static void setBlogsCategoryPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence blogsCategoryPersistence) {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.setBlogsCategoryPersistence(blogsCategoryPersistence);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence() {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+
+		return blogsCategoryLocalService.getBlogsEntryPersistence();
+	}
+
+	public static void setBlogsEntryPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence) {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.setBlogsEntryPersistence(blogsEntryPersistence);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence getBlogsStatsUserPersistence() {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+
+		return blogsCategoryLocalService.getBlogsStatsUserPersistence();
+	}
+
+	public static void setBlogsStatsUserPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence) {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.setBlogsStatsUserPersistence(blogsStatsUserPersistence);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
 		long userId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

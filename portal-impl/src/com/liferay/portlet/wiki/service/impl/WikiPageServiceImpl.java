@@ -25,10 +25,9 @@ package com.liferay.portlet.wiki.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
-import com.liferay.portlet.wiki.service.WikiPageService;
+import com.liferay.portlet.wiki.service.base.WikiPageServiceBaseImpl;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
 
@@ -38,8 +37,7 @@ import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
  * @author Brian Wing Shun Chan
  *
  */
-public class WikiPageServiceImpl
-	extends PrincipalBean implements WikiPageService {
+public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 	public WikiPage addPage(long nodeId, String title)
 		throws PortalException, SystemException {

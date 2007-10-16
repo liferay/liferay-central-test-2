@@ -65,6 +65,30 @@ public class IGFolderLocalServiceUtil {
 		return igFolderLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence getIGFolderPersistence() {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getIGFolderPersistence();
+	}
+
+	public static void setIGFolderPersistence(
+		com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence) {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+		igFolderLocalService.setIGFolderPersistence(igFolderPersistence);
+	}
+
+	public static com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence getIGImagePersistence() {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getIGImagePersistence();
+	}
+
+	public static void setIGImagePersistence(
+		com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence) {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+		igFolderLocalService.setIGImagePersistence(igImagePersistence);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

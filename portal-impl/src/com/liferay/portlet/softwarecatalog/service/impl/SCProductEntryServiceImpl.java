@@ -25,12 +25,11 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
-import com.liferay.portlet.softwarecatalog.service.SCProductEntryService;
+import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPermission;
 
 import java.util.List;
@@ -42,8 +41,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class SCProductEntryServiceImpl extends PrincipalBean
-	implements SCProductEntryService {
+public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 
 	public SCProductEntry addProductEntry(
 			long plid, String name, String type, String tags,

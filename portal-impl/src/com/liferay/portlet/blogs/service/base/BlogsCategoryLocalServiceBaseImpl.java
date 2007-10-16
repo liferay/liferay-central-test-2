@@ -26,7 +26,13 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
+import com.liferay.portlet.blogs.service.BlogsEntryService;
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
+import com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
 
 import java.util.List;
 
@@ -48,4 +54,64 @@ public abstract class BlogsCategoryLocalServiceBaseImpl
 		return BlogsCategoryUtil.findWithDynamicQuery(queryInitializer, begin,
 			end);
 	}
+
+	public BlogsCategoryPersistence getBlogsCategoryPersistence() {
+		return blogsCategoryPersistence;
+	}
+
+	public void setBlogsCategoryPersistence(
+		BlogsCategoryPersistence blogsCategoryPersistence) {
+		this.blogsCategoryPersistence = blogsCategoryPersistence;
+	}
+
+	public BlogsEntryLocalService getBlogsEntryLocalService() {
+		return blogsEntryLocalService;
+	}
+
+	public void setBlogsEntryLocalService(
+		BlogsEntryLocalService blogsEntryLocalService) {
+		this.blogsEntryLocalService = blogsEntryLocalService;
+	}
+
+	public BlogsEntryService getBlogsEntryService() {
+		return blogsEntryService;
+	}
+
+	public void setBlogsEntryService(BlogsEntryService blogsEntryService) {
+		this.blogsEntryService = blogsEntryService;
+	}
+
+	public BlogsEntryPersistence getBlogsEntryPersistence() {
+		return blogsEntryPersistence;
+	}
+
+	public void setBlogsEntryPersistence(
+		BlogsEntryPersistence blogsEntryPersistence) {
+		this.blogsEntryPersistence = blogsEntryPersistence;
+	}
+
+	public BlogsStatsUserLocalService getBlogsStatsUserLocalService() {
+		return blogsStatsUserLocalService;
+	}
+
+	public void setBlogsStatsUserLocalService(
+		BlogsStatsUserLocalService blogsStatsUserLocalService) {
+		this.blogsStatsUserLocalService = blogsStatsUserLocalService;
+	}
+
+	public BlogsStatsUserPersistence getBlogsStatsUserPersistence() {
+		return blogsStatsUserPersistence;
+	}
+
+	public void setBlogsStatsUserPersistence(
+		BlogsStatsUserPersistence blogsStatsUserPersistence) {
+		this.blogsStatsUserPersistence = blogsStatsUserPersistence;
+	}
+
+	protected BlogsCategoryPersistence blogsCategoryPersistence;
+	protected BlogsEntryLocalService blogsEntryLocalService;
+	protected BlogsEntryService blogsEntryService;
+	protected BlogsEntryPersistence blogsEntryPersistence;
+	protected BlogsStatsUserLocalService blogsStatsUserLocalService;
+	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
 }

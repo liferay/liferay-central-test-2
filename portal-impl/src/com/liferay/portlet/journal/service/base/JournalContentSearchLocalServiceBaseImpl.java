@@ -25,8 +25,22 @@ package com.liferay.portlet.journal.service.base;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
+import com.liferay.portlet.journal.service.JournalArticleLocalService;
+import com.liferay.portlet.journal.service.JournalArticleResourceLocalService;
+import com.liferay.portlet.journal.service.JournalArticleService;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
+import com.liferay.portlet.journal.service.JournalStructureLocalService;
+import com.liferay.portlet.journal.service.JournalStructureService;
+import com.liferay.portlet.journal.service.JournalTemplateLocalService;
+import com.liferay.portlet.journal.service.JournalTemplateService;
+import com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence;
+import com.liferay.portlet.journal.service.persistence.JournalArticlePersistence;
+import com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence;
+import com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
+import com.liferay.portlet.journal.service.persistence.JournalStructurePersistence;
+import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
 
 import java.util.List;
 
@@ -48,4 +62,145 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		return JournalContentSearchUtil.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}
+
+	public JournalArticleLocalService getJournalArticleLocalService() {
+		return journalArticleLocalService;
+	}
+
+	public void setJournalArticleLocalService(
+		JournalArticleLocalService journalArticleLocalService) {
+		this.journalArticleLocalService = journalArticleLocalService;
+	}
+
+	public JournalArticleService getJournalArticleService() {
+		return journalArticleService;
+	}
+
+	public void setJournalArticleService(
+		JournalArticleService journalArticleService) {
+		this.journalArticleService = journalArticleService;
+	}
+
+	public JournalArticlePersistence getJournalArticlePersistence() {
+		return journalArticlePersistence;
+	}
+
+	public void setJournalArticlePersistence(
+		JournalArticlePersistence journalArticlePersistence) {
+		this.journalArticlePersistence = journalArticlePersistence;
+	}
+
+	public JournalArticleImageLocalService getJournalArticleImageLocalService() {
+		return journalArticleImageLocalService;
+	}
+
+	public void setJournalArticleImageLocalService(
+		JournalArticleImageLocalService journalArticleImageLocalService) {
+		this.journalArticleImageLocalService = journalArticleImageLocalService;
+	}
+
+	public JournalArticleImagePersistence getJournalArticleImagePersistence() {
+		return journalArticleImagePersistence;
+	}
+
+	public void setJournalArticleImagePersistence(
+		JournalArticleImagePersistence journalArticleImagePersistence) {
+		this.journalArticleImagePersistence = journalArticleImagePersistence;
+	}
+
+	public JournalArticleResourceLocalService getJournalArticleResourceLocalService() {
+		return journalArticleResourceLocalService;
+	}
+
+	public void setJournalArticleResourceLocalService(
+		JournalArticleResourceLocalService journalArticleResourceLocalService) {
+		this.journalArticleResourceLocalService = journalArticleResourceLocalService;
+	}
+
+	public JournalArticleResourcePersistence getJournalArticleResourcePersistence() {
+		return journalArticleResourcePersistence;
+	}
+
+	public void setJournalArticleResourcePersistence(
+		JournalArticleResourcePersistence journalArticleResourcePersistence) {
+		this.journalArticleResourcePersistence = journalArticleResourcePersistence;
+	}
+
+	public JournalContentSearchPersistence getJournalContentSearchPersistence() {
+		return journalContentSearchPersistence;
+	}
+
+	public void setJournalContentSearchPersistence(
+		JournalContentSearchPersistence journalContentSearchPersistence) {
+		this.journalContentSearchPersistence = journalContentSearchPersistence;
+	}
+
+	public JournalStructureLocalService getJournalStructureLocalService() {
+		return journalStructureLocalService;
+	}
+
+	public void setJournalStructureLocalService(
+		JournalStructureLocalService journalStructureLocalService) {
+		this.journalStructureLocalService = journalStructureLocalService;
+	}
+
+	public JournalStructureService getJournalStructureService() {
+		return journalStructureService;
+	}
+
+	public void setJournalStructureService(
+		JournalStructureService journalStructureService) {
+		this.journalStructureService = journalStructureService;
+	}
+
+	public JournalStructurePersistence getJournalStructurePersistence() {
+		return journalStructurePersistence;
+	}
+
+	public void setJournalStructurePersistence(
+		JournalStructurePersistence journalStructurePersistence) {
+		this.journalStructurePersistence = journalStructurePersistence;
+	}
+
+	public JournalTemplateLocalService getJournalTemplateLocalService() {
+		return journalTemplateLocalService;
+	}
+
+	public void setJournalTemplateLocalService(
+		JournalTemplateLocalService journalTemplateLocalService) {
+		this.journalTemplateLocalService = journalTemplateLocalService;
+	}
+
+	public JournalTemplateService getJournalTemplateService() {
+		return journalTemplateService;
+	}
+
+	public void setJournalTemplateService(
+		JournalTemplateService journalTemplateService) {
+		this.journalTemplateService = journalTemplateService;
+	}
+
+	public JournalTemplatePersistence getJournalTemplatePersistence() {
+		return journalTemplatePersistence;
+	}
+
+	public void setJournalTemplatePersistence(
+		JournalTemplatePersistence journalTemplatePersistence) {
+		this.journalTemplatePersistence = journalTemplatePersistence;
+	}
+
+	protected JournalArticleLocalService journalArticleLocalService;
+	protected JournalArticleService journalArticleService;
+	protected JournalArticlePersistence journalArticlePersistence;
+	protected JournalArticleImageLocalService journalArticleImageLocalService;
+	protected JournalArticleImagePersistence journalArticleImagePersistence;
+	protected JournalArticleResourceLocalService journalArticleResourceLocalService;
+	protected JournalArticleResourcePersistence journalArticleResourcePersistence;
+	protected JournalContentSearchPersistence journalContentSearchPersistence;
+	protected JournalStructureLocalService journalStructureLocalService;
+	protected JournalStructureService journalStructureService;
+	protected JournalStructurePersistence journalStructurePersistence;
+	protected JournalTemplateLocalService journalTemplateLocalService;
+	protected JournalTemplateService journalTemplateService;
+	protected JournalTemplatePersistence journalTemplatePersistence;
 }

@@ -29,14 +29,11 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -87,8 +84,9 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Entry
 
-		User user = UserUtil.findByPrimaryKey(userId);
-		BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(folderId);
+		User user = userPersistence.findByPrimaryKey(userId);
+		BookmarksFolder folder =
+			bookmarksFolderPersistence.findByPrimaryKey(folderId);
 
 		if (Validator.isNull(name)) {
 			name = url;
@@ -100,7 +98,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		long entryId = counterLocalService.increment();
 
-		BookmarksEntry entry = BookmarksEntryUtil.create(entryId);
+		BookmarksEntry entry = bookmarksEntryPersistence.create(entryId);
 
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());
@@ -111,7 +109,7 @@ public class BookmarksEntryLocalServiceImpl
 		entry.setUrl(url);
 		entry.setComments(comments);
 
-		BookmarksEntryUtil.update(entry);
+		bookmarksEntryPersistence.update(entry);
 
 		// Resources
 
@@ -139,8 +137,10 @@ public class BookmarksEntryLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(folderId);
-		BookmarksEntry entry = BookmarksEntryUtil.findByPrimaryKey(entryId);
+		BookmarksFolder folder =
+			bookmarksFolderPersistence.findByPrimaryKey(folderId);
+		BookmarksEntry entry =
+			bookmarksEntryPersistence.findByPrimaryKey(entryId);
 
 		addEntryResources(
 			folder, entry, addCommunityPermissions, addGuestPermissions);
@@ -162,8 +162,10 @@ public class BookmarksEntryLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(folderId);
-		BookmarksEntry entry = BookmarksEntryUtil.findByPrimaryKey(entryId);
+		BookmarksFolder folder =
+			bookmarksFolderPersistence.findByPrimaryKey(folderId);
+		BookmarksEntry entry =
+			bookmarksEntryPersistence.findByPrimaryKey(entryId);
 
 		addEntryResources(
 			folder, entry, communityPermissions, guestPermissions);
@@ -183,7 +185,8 @@ public class BookmarksEntryLocalServiceImpl
 	public void deleteEntries(long folderId)
 		throws PortalException, SystemException {
 
-		Iterator itr = BookmarksEntryUtil.findByFolderId(folderId).iterator();
+		Iterator itr = bookmarksEntryPersistence.findByFolderId(
+			folderId).iterator();
 
 		while (itr.hasNext()) {
 			BookmarksEntry entry = (BookmarksEntry)itr.next();
@@ -195,7 +198,8 @@ public class BookmarksEntryLocalServiceImpl
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
-		BookmarksEntry entry = BookmarksEntryUtil.findByPrimaryKey(entryId);
+		BookmarksEntry entry =
+			bookmarksEntryPersistence.findByPrimaryKey(entryId);
 
 		deleteEntry(entry);
 	}
@@ -216,13 +220,13 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Entry
 
-		BookmarksEntryUtil.remove(entry.getEntryId());
+		bookmarksEntryPersistence.remove(entry.getEntryId());
 	}
 
 	public List getEntries(long folderId, int begin, int end)
 		throws SystemException {
 
-		return BookmarksEntryUtil.findByFolderId(folderId, begin, end);
+		return bookmarksEntryPersistence.findByFolderId(folderId, begin, end);
 	}
 
 	public List getEntries(
@@ -230,18 +234,18 @@ public class BookmarksEntryLocalServiceImpl
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
-		return BookmarksEntryUtil.findByFolderId(
+		return bookmarksEntryPersistence.findByFolderId(
 			folderId, begin, end, orderByComparator);
 	}
 
 	public int getEntriesCount(long folderId) throws SystemException {
-		return BookmarksEntryUtil.countByFolderId(folderId);
+		return bookmarksEntryPersistence.countByFolderId(folderId);
 	}
 
 	public BookmarksEntry getEntry(long entryId)
 		throws PortalException, SystemException {
 
-		return BookmarksEntryUtil.findByPrimaryKey(entryId);
+		return bookmarksEntryPersistence.findByPrimaryKey(entryId);
 	}
 
 	public int getFoldersEntriesCount(List folderIds)
@@ -289,11 +293,12 @@ public class BookmarksEntryLocalServiceImpl
 	public BookmarksEntry openEntry(long entryId)
 		throws PortalException, SystemException {
 
-		BookmarksEntry entry = BookmarksEntryUtil.findByPrimaryKey(entryId);
+		BookmarksEntry entry =
+			bookmarksEntryPersistence.findByPrimaryKey(entryId);
 
 		entry.setVisits(entry.getVisits() + 1);
 
-		BookmarksEntryUtil.update(entry);
+		bookmarksEntryPersistence.update(entry);
 
 		return entry;
 	}
@@ -305,7 +310,8 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Entry
 
-		BookmarksEntry entry = BookmarksEntryUtil.findByPrimaryKey(entryId);
+		BookmarksEntry entry =
+			bookmarksEntryPersistence.findByPrimaryKey(entryId);
 
 		BookmarksFolder folder = getFolder(entry, folderId);
 
@@ -321,7 +327,7 @@ public class BookmarksEntryLocalServiceImpl
 		entry.setUrl(url);
 		entry.setComments(comments);
 
-		BookmarksEntryUtil.update(entry);
+		bookmarksEntryPersistence.update(entry);
 
 		// Tags
 
@@ -345,11 +351,12 @@ public class BookmarksEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (entry.getFolderId() != folderId) {
-			BookmarksFolder oldFolder = BookmarksFolderUtil.findByPrimaryKey(
-				entry.getFolderId());
+			BookmarksFolder oldFolder =
+				bookmarksFolderPersistence.findByPrimaryKey(
+					entry.getFolderId());
 
-			BookmarksFolder newFolder = BookmarksFolderUtil.fetchByPrimaryKey(
-				folderId);
+			BookmarksFolder newFolder =
+				bookmarksFolderPersistence.fetchByPrimaryKey(folderId);
 
 			if ((newFolder == null) ||
 				(oldFolder.getGroupId() != newFolder.getGroupId())) {
@@ -358,7 +365,7 @@ public class BookmarksEntryLocalServiceImpl
 			}
 		}
 
-		return BookmarksFolderUtil.findByPrimaryKey(folderId);
+		return bookmarksFolderPersistence.findByPrimaryKey(folderId);
 	}
 
 	protected void validate(String url) throws PortalException {

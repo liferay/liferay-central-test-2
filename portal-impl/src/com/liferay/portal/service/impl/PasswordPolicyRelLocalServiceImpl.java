@@ -64,7 +64,7 @@ public class PasswordPolicyRelLocalServiceImpl
 		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
 
-		long passwordPolicyRelId = CounterLocalServiceUtil.increment();
+		long passwordPolicyRelId = counterLocalService.increment();
 
 		passwordPolicyRel = PasswordPolicyRelUtil.create(passwordPolicyRelId);
 

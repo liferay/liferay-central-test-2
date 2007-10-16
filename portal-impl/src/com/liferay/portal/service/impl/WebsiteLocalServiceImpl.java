@@ -58,7 +58,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 			boolean primary)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
@@ -66,9 +66,9 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 			0, user.getCompanyId(), classNameId, classPK, url, typeId,
 			primary);
 
-		long websiteId = CounterLocalServiceUtil.increment();
+		long websiteId = counterLocalService.increment();
 
-		Website website = WebsiteUtil.create(websiteId);
+		Website website = websitePersistence.create(websiteId);
 
 		website.setCompanyId(user.getCompanyId());
 		website.setUserId(user.getUserId());
@@ -81,7 +81,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		website.setTypeId(typeId);
 		website.setPrimary(primary);
 
-		WebsiteUtil.update(website);
+		websitePersistence.update(website);
 
 		return website;
 	}
@@ -89,7 +89,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 	public void deleteWebsite(long websiteId)
 		throws PortalException, SystemException {
 
-		WebsiteUtil.remove(websiteId);
+		websitePersistence.remove(websiteId);
 	}
 
 	public void deleteWebsites(long companyId, String className, long classPK)
@@ -97,17 +97,17 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		WebsiteUtil.removeByC_C_C(companyId, classNameId, classPK);
+		websitePersistence.removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Website getWebsite(long websiteId)
 		throws PortalException, SystemException {
 
-		return WebsiteUtil.findByPrimaryKey(websiteId);
+		return websitePersistence.findByPrimaryKey(websiteId);
 	}
 
 	public List getWebsites() throws SystemException {
-		return WebsiteUtil.findAll();
+		return websitePersistence.findAll();
 	}
 
 	public List getWebsites(long companyId, String className, long classPK)
@@ -115,7 +115,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return WebsiteUtil.findByC_C_C(companyId, classNameId, classPK);
+		return websitePersistence.findByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Website updateWebsite(
@@ -124,14 +124,14 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 
 		validate(websiteId, 0, 0, 0, url, typeId, primary);
 
-		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
+		Website website = websitePersistence.findByPrimaryKey(websiteId);
 
 		website.setModifiedDate(new Date());
 		website.setUrl(url);
 		website.setTypeId(typeId);
 		website.setPrimary(primary);
 
-		WebsiteUtil.update(website);
+		websitePersistence.update(website);
 
 		return website;
 	}
@@ -154,7 +154,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		}
 
 		if (websiteId > 0) {
-			Website website = WebsiteUtil.findByPrimaryKey(websiteId);
+			Website website = websitePersistence.findByPrimaryKey(websiteId);
 
 			companyId = website.getCompanyId();
 			classNameId = website.getClassNameId();
@@ -181,7 +181,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		// id, class name, and class pk that also has primary set to true
 
 		if (primary) {
-			Iterator itr = WebsiteUtil.findByC_C_C_P(
+			Iterator itr = websitePersistence.findByC_C_C_P(
 				companyId, classNameId, classPK, primary).iterator();
 
 			while (itr.hasNext()) {
@@ -192,7 +192,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 
 					website.setPrimary(false);
 
-					WebsiteUtil.update(website);
+					websitePersistence.update(website);
 				}
 			}
 		}

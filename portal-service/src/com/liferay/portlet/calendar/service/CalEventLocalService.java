@@ -57,6 +57,11 @@ public interface CalEventLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.calendar.service.persistence.CalEventPersistence getCalEventPersistence();
+
+	public void setCalEventPersistence(
+		com.liferay.portlet.calendar.service.persistence.CalEventPersistence calEventPersistence);
+
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
 		long plid, java.lang.String title, java.lang.String description,
 		int startDateMonth, int startDateDay, int startDateYear,

@@ -29,7 +29,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
-import com.liferay.portal.service.UserGroupService;
+import com.liferay.portal.service.base.UserGroupServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
@@ -42,8 +42,7 @@ import java.util.List;
  * @author Charles May
  *
  */
-public class UserGroupServiceImpl
-	extends PrincipalBean implements UserGroupService {
+public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws PortalException, SystemException {

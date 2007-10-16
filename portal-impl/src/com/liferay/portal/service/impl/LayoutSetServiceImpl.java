@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetService;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
+import com.liferay.portal.service.base.LayoutSetServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 
 import java.io.File;
@@ -40,8 +40,7 @@ import java.io.File;
  * @author Brian Wing Shun Chan
  *
  */
-public class LayoutSetServiceImpl
-	extends PrincipalBean implements LayoutSetService {
+public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 
 	public void updateLogo(
 			long groupId, boolean privateLayout, boolean logo, File file)

@@ -66,6 +66,66 @@ public class SCFrameworkVersionLocalServiceUtil {
 			begin, end);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence() {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getSCLicensePersistence();
+	}
+
+	public static void setSCLicensePersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence) {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+		scFrameworkVersionLocalService.setSCLicensePersistence(scLicensePersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence getSCFrameworkVersionPersistence() {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getSCFrameworkVersionPersistence();
+	}
+
+	public static void setSCFrameworkVersionPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence) {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+		scFrameworkVersionLocalService.setSCFrameworkVersionPersistence(scFrameworkVersionPersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence getSCProductEntryPersistence() {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getSCProductEntryPersistence();
+	}
+
+	public static void setSCProductEntryPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence) {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+		scFrameworkVersionLocalService.setSCProductEntryPersistence(scProductEntryPersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence getSCProductScreenshotPersistence() {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getSCProductScreenshotPersistence();
+	}
+
+	public static void setSCProductScreenshotPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence) {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+		scFrameworkVersionLocalService.setSCProductScreenshotPersistence(scProductScreenshotPersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence getSCProductVersionPersistence() {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getSCProductVersionPersistence();
+	}
+
+	public static void setSCProductVersionPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence) {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+		scFrameworkVersionLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
 		long userId, long plid, java.lang.String name, java.lang.String url,
 		boolean active, int priority, boolean addCommunityPermissions,

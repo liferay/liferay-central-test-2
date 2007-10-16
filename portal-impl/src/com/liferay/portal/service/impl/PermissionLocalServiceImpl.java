@@ -131,7 +131,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		List permissions = PermissionFinder.findByU_R(userId, resourceId);
 
@@ -595,7 +595,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		List permissions = PermissionFinder.findByU_R(userId, resourceId);
 

@@ -25,12 +25,11 @@ package com.liferay.portlet.wiki.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
-import com.liferay.portlet.wiki.service.WikiNodeService;
+import com.liferay.portlet.wiki.service.base.WikiNodeServiceBaseImpl;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 
 /**
@@ -40,8 +39,7 @@ import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
  * @author Charles May
  *
  */
-public class WikiNodeServiceImpl
-	extends PrincipalBean implements WikiNodeService {
+public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 
 	public WikiNode addNode(
 			long plid, String name, String description,

@@ -28,8 +28,8 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.CompanyService;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.base.CompanyServiceBaseImpl;
 
 import java.io.File;
 
@@ -39,8 +39,7 @@ import java.io.File;
  * @author Brian Wing Shun Chan
  *
  */
-public class CompanyServiceImpl
-	extends PrincipalBean implements CompanyService {
+public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 
 	public Company addCompany(String webId, String virtualHost, String mx)
 		throws PortalException, SystemException {

@@ -66,6 +66,90 @@ public class MBMessageFlagLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.getMBBanPersistence();
+	}
+
+	public static void setMBBanPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence) {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+		mbMessageFlagLocalService.setMBBanPersistence(mbBanPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence getMBCategoryPersistence() {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.getMBCategoryPersistence();
+	}
+
+	public static void setMBCategoryPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence) {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+		mbMessageFlagLocalService.setMBCategoryPersistence(mbCategoryPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence getMBDiscussionPersistence() {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.getMBDiscussionPersistence();
+	}
+
+	public static void setMBDiscussionPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence mbDiscussionPersistence) {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+		mbMessageFlagLocalService.setMBDiscussionPersistence(mbDiscussionPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence() {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.getMBMessagePersistence();
+	}
+
+	public static void setMBMessagePersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+		mbMessageFlagLocalService.setMBMessagePersistence(mbMessagePersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence getMBMessageFlagPersistence() {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.getMBMessageFlagPersistence();
+	}
+
+	public static void setMBMessageFlagPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence) {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+		mbMessageFlagLocalService.setMBMessageFlagPersistence(mbMessageFlagPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence getMBStatsUserPersistence() {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.getMBStatsUserPersistence();
+	}
+
+	public static void setMBStatsUserPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence) {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+		mbMessageFlagLocalService.setMBStatsUserPersistence(mbStatsUserPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence getMBThreadPersistence() {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.getMBThreadPersistence();
+	}
+
+	public static void setMBThreadPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence) {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+		mbMessageFlagLocalService.setMBThreadPersistence(mbThreadPersistence);
+	}
+
 	public static void addReadFlags(long userId, java.util.List messages)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

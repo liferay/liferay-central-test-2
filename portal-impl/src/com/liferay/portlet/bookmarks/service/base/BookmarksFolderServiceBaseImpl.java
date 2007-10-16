@@ -29,12 +29,18 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 
 /**
@@ -63,6 +69,15 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 		this.bookmarksEntryService = bookmarksEntryService;
 	}
 
+	public BookmarksEntryPersistence getBookmarksEntryPersistence() {
+		return bookmarksEntryPersistence;
+	}
+
+	public void setBookmarksEntryPersistence(
+		BookmarksEntryPersistence bookmarksEntryPersistence) {
+		this.bookmarksEntryPersistence = bookmarksEntryPersistence;
+	}
+
 	public BookmarksFolderLocalService getBookmarksFolderLocalService() {
 		return bookmarksFolderLocalService;
 	}
@@ -70,6 +85,15 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 	public void setBookmarksFolderLocalService(
 		BookmarksFolderLocalService bookmarksFolderLocalService) {
 		this.bookmarksFolderLocalService = bookmarksFolderLocalService;
+	}
+
+	public BookmarksFolderPersistence getBookmarksFolderPersistence() {
+		return bookmarksFolderPersistence;
+	}
+
+	public void setBookmarksFolderPersistence(
+		BookmarksFolderPersistence bookmarksFolderPersistence) {
+		this.bookmarksFolderPersistence = bookmarksFolderPersistence;
 	}
 
 	public CounterLocalService getCounterLocalService() {
@@ -105,11 +129,49 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 		this.resourceService = resourceService;
 	}
 
+	public ResourcePersistence getResourcePersistence() {
+		return resourcePersistence;
+	}
+
+	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
+		this.resourcePersistence = resourcePersistence;
+	}
+
+	public UserLocalService getUserLocalService() {
+		return userLocalService;
+	}
+
+	public void setUserLocalService(UserLocalService userLocalService) {
+		this.userLocalService = userLocalService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public UserPersistence getUserPersistence() {
+		return userPersistence;
+	}
+
+	public void setUserPersistence(UserPersistence userPersistence) {
+		this.userPersistence = userPersistence;
+	}
+
 	protected BookmarksEntryLocalService bookmarksEntryLocalService;
 	protected BookmarksEntryService bookmarksEntryService;
+	protected BookmarksEntryPersistence bookmarksEntryPersistence;
 	protected BookmarksFolderLocalService bookmarksFolderLocalService;
+	protected BookmarksFolderPersistence bookmarksFolderPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
+	protected ResourcePersistence resourcePersistence;
+	protected UserLocalService userLocalService;
+	protected UserService userService;
+	protected UserPersistence userPersistence;
 }

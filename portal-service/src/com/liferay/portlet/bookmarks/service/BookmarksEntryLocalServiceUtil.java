@@ -66,6 +66,66 @@ public class BookmarksEntryLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence getBookmarksEntryPersistence() {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.getBookmarksEntryPersistence();
+	}
+
+	public static void setBookmarksEntryPersistence(
+		com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence bookmarksEntryPersistence) {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+		bookmarksEntryLocalService.setBookmarksEntryPersistence(bookmarksEntryPersistence);
+	}
+
+	public static com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence getBookmarksFolderPersistence() {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.getBookmarksFolderPersistence();
+	}
+
+	public static void setBookmarksFolderPersistence(
+		com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence bookmarksFolderPersistence) {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+		bookmarksEntryLocalService.setBookmarksFolderPersistence(bookmarksFolderPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+		bookmarksEntryLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+		bookmarksEntryLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.getTagsAssetPersistence();
+	}
+
+	public static void setTagsAssetPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+		bookmarksEntryLocalService.setTagsAssetPersistence(tagsAssetPersistence);
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,

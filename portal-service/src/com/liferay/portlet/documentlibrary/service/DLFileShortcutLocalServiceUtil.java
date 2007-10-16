@@ -66,6 +66,66 @@ public class DLFileShortcutLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.getDLFileEntryPersistence();
+	}
+
+	public static void setDLFileEntryPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence) {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+		dlFileShortcutLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence getDLFileRankPersistence() {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.getDLFileRankPersistence();
+	}
+
+	public static void setDLFileRankPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence) {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+		dlFileShortcutLocalService.setDLFileRankPersistence(dlFileRankPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence getDLFileShortcutPersistence() {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.getDLFileShortcutPersistence();
+	}
+
+	public static void setDLFileShortcutPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence) {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+		dlFileShortcutLocalService.setDLFileShortcutPersistence(dlFileShortcutPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence getDLFileVersionPersistence() {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.getDLFileVersionPersistence();
+	}
+
+	public static void setDLFileVersionPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence dlFileVersionPersistence) {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+		dlFileShortcutLocalService.setDLFileVersionPersistence(dlFileVersionPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence getDLFolderPersistence() {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.getDLFolderPersistence();
+	}
+
+	public static void setDLFolderPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence) {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+		dlFileShortcutLocalService.setDLFolderPersistence(dlFolderPersistence);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		long userId, long folderId, long toFolderId, java.lang.String toName,
 		boolean addCommunityPermissions, boolean addGuestPermissions)

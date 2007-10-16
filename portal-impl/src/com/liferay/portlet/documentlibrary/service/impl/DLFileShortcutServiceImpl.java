@@ -26,11 +26,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.documentlibrary.FileShortcutPermissionException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
+import com.liferay.portlet.documentlibrary.service.base.DLFileShortcutServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileShortcutPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
@@ -41,8 +40,7 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFileShortcutServiceImpl
-	extends PrincipalBean implements DLFileShortcutService {
+public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 
 	public DLFileShortcut addFileShortcut(
 			long folderId, long toFolderId, String toName,

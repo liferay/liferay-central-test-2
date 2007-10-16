@@ -37,9 +37,9 @@ import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
-import com.liferay.portal.service.PermissionService;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.base.PermissionServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
@@ -50,8 +50,7 @@ import com.liferay.portal.service.permission.UserPermissionUtil;
  * @author Brian Wing Shun Chan
  *
  */
-public class PermissionServiceImpl
-	extends PrincipalBean implements PermissionService {
+public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
 	public void checkPermission(long groupId, String name, String primKey)
 		throws PortalException, SystemException {

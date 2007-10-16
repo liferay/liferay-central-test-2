@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -38,8 +37,8 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBMessageService;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.base.MBMessageServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 import com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
@@ -70,8 +69,7 @@ import javax.portlet.PortletPreferences;
  * @author Brian Wing Shun Chan
  *
  */
-public class MBMessageServiceImpl
-	extends PrincipalBean implements MBMessageService {
+public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
 			long groupId, String className, long classPK, long threadId,

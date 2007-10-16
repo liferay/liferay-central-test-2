@@ -25,12 +25,11 @@ package com.liferay.portlet.journal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalStructureService;
+import com.liferay.portlet.journal.service.base.JournalStructureServiceBaseImpl;
 import com.liferay.portlet.journal.service.permission.JournalStructurePermission;
 
 /**
@@ -40,7 +39,7 @@ import com.liferay.portlet.journal.service.permission.JournalStructurePermission
  *
  */
 public class JournalStructureServiceImpl
-	extends PrincipalBean implements JournalStructureService {
+	extends JournalStructureServiceBaseImpl {
 
 	public JournalStructure addStructure(
 			String structureId, boolean autoStructureId, long plid, String name,

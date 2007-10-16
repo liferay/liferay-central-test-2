@@ -57,6 +57,41 @@ public interface MBMessageLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence();
+
+	public void setMBBanPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence getMBCategoryPersistence();
+
+	public void setMBCategoryPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence getMBDiscussionPersistence();
+
+	public void setMBDiscussionPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence mbDiscussionPersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence();
+
+	public void setMBMessagePersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence getMBMessageFlagPersistence();
+
+	public void setMBMessageFlagPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence getMBStatsUserPersistence();
+
+	public void setMBStatsUserPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence getMBThreadPersistence();
+
+	public void setMBThreadPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence);
+
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.SystemException, 

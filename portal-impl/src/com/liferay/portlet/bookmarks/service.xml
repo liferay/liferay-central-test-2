@@ -42,6 +42,7 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<entity name="BookmarksFolder" local-service="true" remote-service="true">
@@ -88,6 +89,7 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<exceptions>
 		<exception>EntryURL</exception>

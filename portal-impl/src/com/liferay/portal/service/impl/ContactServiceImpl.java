@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.service.ContactService;
+import com.liferay.portal.service.base.ContactServiceBaseImpl;
 
 /**
  * <a href="ContactServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -30,7 +30,5 @@ import com.liferay.portal.service.ContactService;
  * @author Brian Wing Shun Chan
  *
  */
-public class ContactServiceImpl
-	extends PrincipalBean implements ContactService {
-
+public class ContactServiceImpl extends ContactServiceBaseImpl {
 }

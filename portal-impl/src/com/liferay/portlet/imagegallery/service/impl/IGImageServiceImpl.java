@@ -25,10 +25,9 @@ package com.liferay.portlet.imagegallery.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
-import com.liferay.portlet.imagegallery.service.IGImageService;
+import com.liferay.portlet.imagegallery.service.base.IGImageServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
 import com.liferay.portlet.imagegallery.service.permission.IGImagePermission;
 
@@ -40,8 +39,7 @@ import java.io.File;
  * @author Brian Wing Shun Chan
  *
  */
-public class IGImageServiceImpl
-	extends PrincipalBean implements IGImageService {
+public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 
 	public IGImage addImage(
 			long folderId, String description, File file, String contentType,

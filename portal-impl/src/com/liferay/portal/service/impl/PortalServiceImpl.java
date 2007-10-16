@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.service.PortalService;
+import com.liferay.portal.service.base.PortalServiceBaseImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalServiceImpl extends PrincipalBean implements PortalService {
+public class PortalServiceImpl extends PortalServiceBaseImpl {
 
 	public void test() {
 		long userId = 0;

@@ -59,11 +59,11 @@ public class SubscriptionLocalServiceImpl
 			long userId, String className, long classPK, String frequency)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
-		long subscriptionId = CounterLocalServiceUtil.increment();
+		long subscriptionId = counterLocalService.increment();
 
 		Subscription subscription = SubscriptionUtil.create(subscriptionId);
 
@@ -85,7 +85,7 @@ public class SubscriptionLocalServiceImpl
 			long userId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		SubscriptionUtil.removeByC_U_C_C(

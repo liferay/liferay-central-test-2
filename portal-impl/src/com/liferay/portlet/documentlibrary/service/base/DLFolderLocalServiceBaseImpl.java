@@ -25,7 +25,18 @@ package com.liferay.portlet.documentlibrary.service.base;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
+import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
 import java.util.List;
@@ -47,4 +58,113 @@ public abstract class DLFolderLocalServiceBaseImpl
 		int begin, int end) throws SystemException {
 		return DLFolderUtil.findWithDynamicQuery(queryInitializer, begin, end);
 	}
+
+	public DLFileEntryLocalService getDLFileEntryLocalService() {
+		return dlFileEntryLocalService;
+	}
+
+	public void setDLFileEntryLocalService(
+		DLFileEntryLocalService dlFileEntryLocalService) {
+		this.dlFileEntryLocalService = dlFileEntryLocalService;
+	}
+
+	public DLFileEntryService getDLFileEntryService() {
+		return dlFileEntryService;
+	}
+
+	public void setDLFileEntryService(DLFileEntryService dlFileEntryService) {
+		this.dlFileEntryService = dlFileEntryService;
+	}
+
+	public DLFileEntryPersistence getDLFileEntryPersistence() {
+		return dlFileEntryPersistence;
+	}
+
+	public void setDLFileEntryPersistence(
+		DLFileEntryPersistence dlFileEntryPersistence) {
+		this.dlFileEntryPersistence = dlFileEntryPersistence;
+	}
+
+	public DLFileRankLocalService getDLFileRankLocalService() {
+		return dlFileRankLocalService;
+	}
+
+	public void setDLFileRankLocalService(
+		DLFileRankLocalService dlFileRankLocalService) {
+		this.dlFileRankLocalService = dlFileRankLocalService;
+	}
+
+	public DLFileRankPersistence getDLFileRankPersistence() {
+		return dlFileRankPersistence;
+	}
+
+	public void setDLFileRankPersistence(
+		DLFileRankPersistence dlFileRankPersistence) {
+		this.dlFileRankPersistence = dlFileRankPersistence;
+	}
+
+	public DLFileShortcutLocalService getDLFileShortcutLocalService() {
+		return dlFileShortcutLocalService;
+	}
+
+	public void setDLFileShortcutLocalService(
+		DLFileShortcutLocalService dlFileShortcutLocalService) {
+		this.dlFileShortcutLocalService = dlFileShortcutLocalService;
+	}
+
+	public DLFileShortcutService getDLFileShortcutService() {
+		return dlFileShortcutService;
+	}
+
+	public void setDLFileShortcutService(
+		DLFileShortcutService dlFileShortcutService) {
+		this.dlFileShortcutService = dlFileShortcutService;
+	}
+
+	public DLFileShortcutPersistence getDLFileShortcutPersistence() {
+		return dlFileShortcutPersistence;
+	}
+
+	public void setDLFileShortcutPersistence(
+		DLFileShortcutPersistence dlFileShortcutPersistence) {
+		this.dlFileShortcutPersistence = dlFileShortcutPersistence;
+	}
+
+	public DLFileVersionLocalService getDLFileVersionLocalService() {
+		return dlFileVersionLocalService;
+	}
+
+	public void setDLFileVersionLocalService(
+		DLFileVersionLocalService dlFileVersionLocalService) {
+		this.dlFileVersionLocalService = dlFileVersionLocalService;
+	}
+
+	public DLFileVersionPersistence getDLFileVersionPersistence() {
+		return dlFileVersionPersistence;
+	}
+
+	public void setDLFileVersionPersistence(
+		DLFileVersionPersistence dlFileVersionPersistence) {
+		this.dlFileVersionPersistence = dlFileVersionPersistence;
+	}
+
+	public DLFolderPersistence getDLFolderPersistence() {
+		return dlFolderPersistence;
+	}
+
+	public void setDLFolderPersistence(DLFolderPersistence dlFolderPersistence) {
+		this.dlFolderPersistence = dlFolderPersistence;
+	}
+
+	protected DLFileEntryLocalService dlFileEntryLocalService;
+	protected DLFileEntryService dlFileEntryService;
+	protected DLFileEntryPersistence dlFileEntryPersistence;
+	protected DLFileRankLocalService dlFileRankLocalService;
+	protected DLFileRankPersistence dlFileRankPersistence;
+	protected DLFileShortcutLocalService dlFileShortcutLocalService;
+	protected DLFileShortcutService dlFileShortcutService;
+	protected DLFileShortcutPersistence dlFileShortcutPersistence;
+	protected DLFileVersionLocalService dlFileVersionLocalService;
+	protected DLFileVersionPersistence dlFileVersionPersistence;
+	protected DLFolderPersistence dlFolderPersistence;
 }

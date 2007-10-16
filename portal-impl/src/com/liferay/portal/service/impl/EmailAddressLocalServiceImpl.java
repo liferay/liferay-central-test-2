@@ -58,7 +58,7 @@ public class EmailAddressLocalServiceImpl
 			int typeId, boolean primary)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
@@ -66,7 +66,7 @@ public class EmailAddressLocalServiceImpl
 			0, user.getCompanyId(), classNameId, classPK, address, typeId,
 			primary);
 
-		long emailAddressId = CounterLocalServiceUtil.increment();
+		long emailAddressId = counterLocalService.increment();
 
 		EmailAddress emailAddress = EmailAddressUtil.create(emailAddressId);
 

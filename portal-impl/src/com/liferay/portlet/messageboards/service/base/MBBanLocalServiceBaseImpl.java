@@ -26,7 +26,21 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
+import com.liferay.portlet.messageboards.service.MBCategoryService;
+import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageService;
+import com.liferay.portlet.messageboards.service.MBStatsUserLocalService;
+import com.liferay.portlet.messageboards.service.MBThreadLocalService;
+import com.liferay.portlet.messageboards.service.persistence.MBBanPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 
 import java.util.List;
 
@@ -46,4 +60,141 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService {
 		int begin, int end) throws SystemException {
 		return MBBanUtil.findWithDynamicQuery(queryInitializer, begin, end);
 	}
+
+	public MBBanPersistence getMBBanPersistence() {
+		return mbBanPersistence;
+	}
+
+	public void setMBBanPersistence(MBBanPersistence mbBanPersistence) {
+		this.mbBanPersistence = mbBanPersistence;
+	}
+
+	public MBCategoryLocalService getMBCategoryLocalService() {
+		return mbCategoryLocalService;
+	}
+
+	public void setMBCategoryLocalService(
+		MBCategoryLocalService mbCategoryLocalService) {
+		this.mbCategoryLocalService = mbCategoryLocalService;
+	}
+
+	public MBCategoryService getMBCategoryService() {
+		return mbCategoryService;
+	}
+
+	public void setMBCategoryService(MBCategoryService mbCategoryService) {
+		this.mbCategoryService = mbCategoryService;
+	}
+
+	public MBCategoryPersistence getMBCategoryPersistence() {
+		return mbCategoryPersistence;
+	}
+
+	public void setMBCategoryPersistence(
+		MBCategoryPersistence mbCategoryPersistence) {
+		this.mbCategoryPersistence = mbCategoryPersistence;
+	}
+
+	public MBDiscussionPersistence getMBDiscussionPersistence() {
+		return mbDiscussionPersistence;
+	}
+
+	public void setMBDiscussionPersistence(
+		MBDiscussionPersistence mbDiscussionPersistence) {
+		this.mbDiscussionPersistence = mbDiscussionPersistence;
+	}
+
+	public MBMessageLocalService getMBMessageLocalService() {
+		return mbMessageLocalService;
+	}
+
+	public void setMBMessageLocalService(
+		MBMessageLocalService mbMessageLocalService) {
+		this.mbMessageLocalService = mbMessageLocalService;
+	}
+
+	public MBMessageService getMBMessageService() {
+		return mbMessageService;
+	}
+
+	public void setMBMessageService(MBMessageService mbMessageService) {
+		this.mbMessageService = mbMessageService;
+	}
+
+	public MBMessagePersistence getMBMessagePersistence() {
+		return mbMessagePersistence;
+	}
+
+	public void setMBMessagePersistence(
+		MBMessagePersistence mbMessagePersistence) {
+		this.mbMessagePersistence = mbMessagePersistence;
+	}
+
+	public MBMessageFlagLocalService getMBMessageFlagLocalService() {
+		return mbMessageFlagLocalService;
+	}
+
+	public void setMBMessageFlagLocalService(
+		MBMessageFlagLocalService mbMessageFlagLocalService) {
+		this.mbMessageFlagLocalService = mbMessageFlagLocalService;
+	}
+
+	public MBMessageFlagPersistence getMBMessageFlagPersistence() {
+		return mbMessageFlagPersistence;
+	}
+
+	public void setMBMessageFlagPersistence(
+		MBMessageFlagPersistence mbMessageFlagPersistence) {
+		this.mbMessageFlagPersistence = mbMessageFlagPersistence;
+	}
+
+	public MBStatsUserLocalService getMBStatsUserLocalService() {
+		return mbStatsUserLocalService;
+	}
+
+	public void setMBStatsUserLocalService(
+		MBStatsUserLocalService mbStatsUserLocalService) {
+		this.mbStatsUserLocalService = mbStatsUserLocalService;
+	}
+
+	public MBStatsUserPersistence getMBStatsUserPersistence() {
+		return mbStatsUserPersistence;
+	}
+
+	public void setMBStatsUserPersistence(
+		MBStatsUserPersistence mbStatsUserPersistence) {
+		this.mbStatsUserPersistence = mbStatsUserPersistence;
+	}
+
+	public MBThreadLocalService getMBThreadLocalService() {
+		return mbThreadLocalService;
+	}
+
+	public void setMBThreadLocalService(
+		MBThreadLocalService mbThreadLocalService) {
+		this.mbThreadLocalService = mbThreadLocalService;
+	}
+
+	public MBThreadPersistence getMBThreadPersistence() {
+		return mbThreadPersistence;
+	}
+
+	public void setMBThreadPersistence(MBThreadPersistence mbThreadPersistence) {
+		this.mbThreadPersistence = mbThreadPersistence;
+	}
+
+	protected MBBanPersistence mbBanPersistence;
+	protected MBCategoryLocalService mbCategoryLocalService;
+	protected MBCategoryService mbCategoryService;
+	protected MBCategoryPersistence mbCategoryPersistence;
+	protected MBDiscussionPersistence mbDiscussionPersistence;
+	protected MBMessageLocalService mbMessageLocalService;
+	protected MBMessageService mbMessageService;
+	protected MBMessagePersistence mbMessagePersistence;
+	protected MBMessageFlagLocalService mbMessageFlagLocalService;
+	protected MBMessageFlagPersistence mbMessageFlagPersistence;
+	protected MBStatsUserLocalService mbStatsUserLocalService;
+	protected MBStatsUserPersistence mbStatsUserPersistence;
+	protected MBThreadLocalService mbThreadLocalService;
+	protected MBThreadPersistence mbThreadPersistence;
 }

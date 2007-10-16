@@ -66,6 +66,42 @@ public class PollsQuestionLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.polls.service.persistence.PollsChoicePersistence getPollsChoicePersistence() {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		return pollsQuestionLocalService.getPollsChoicePersistence();
+	}
+
+	public static void setPollsChoicePersistence(
+		com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence) {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.setPollsChoicePersistence(pollsChoicePersistence);
+	}
+
+	public static com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence() {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		return pollsQuestionLocalService.getPollsQuestionPersistence();
+	}
+
+	public static void setPollsQuestionPersistence(
+		com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence) {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.setPollsQuestionPersistence(pollsQuestionPersistence);
+	}
+
+	public static com.liferay.portlet.polls.service.persistence.PollsVotePersistence getPollsVotePersistence() {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		return pollsQuestionLocalService.getPollsVotePersistence();
+	}
+
+	public static void setPollsVotePersistence(
+		com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence) {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.setPollsVotePersistence(pollsVotePersistence);
+	}
+
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,

@@ -28,8 +28,8 @@ import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
-import com.liferay.portal.service.PluginSettingService;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.base.PluginSettingServiceBaseImpl;
 
 /**
  * <a href="PluginSettingServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -37,8 +37,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
  * @author Brian Wing Shun Chan
  *
  */
-public class PluginSettingServiceImpl
-	extends PrincipalBean implements PluginSettingService {
+public class PluginSettingServiceImpl extends PluginSettingServiceBaseImpl {
 
 	public PluginSetting updatePluginSetting(
 			long companyId, String pluginId, String pluginType, String roles,

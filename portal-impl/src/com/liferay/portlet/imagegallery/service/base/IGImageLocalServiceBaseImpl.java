@@ -25,7 +25,11 @@ package com.liferay.portlet.imagegallery.service.base;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
+import com.liferay.portlet.imagegallery.service.IGFolderService;
 import com.liferay.portlet.imagegallery.service.IGImageLocalService;
+import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
+import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
 
 import java.util.List;
@@ -46,4 +50,42 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		int begin, int end) throws SystemException {
 		return IGImageUtil.findWithDynamicQuery(queryInitializer, begin, end);
 	}
+
+	public IGFolderLocalService getIGFolderLocalService() {
+		return igFolderLocalService;
+	}
+
+	public void setIGFolderLocalService(
+		IGFolderLocalService igFolderLocalService) {
+		this.igFolderLocalService = igFolderLocalService;
+	}
+
+	public IGFolderService getIGFolderService() {
+		return igFolderService;
+	}
+
+	public void setIGFolderService(IGFolderService igFolderService) {
+		this.igFolderService = igFolderService;
+	}
+
+	public IGFolderPersistence getIGFolderPersistence() {
+		return igFolderPersistence;
+	}
+
+	public void setIGFolderPersistence(IGFolderPersistence igFolderPersistence) {
+		this.igFolderPersistence = igFolderPersistence;
+	}
+
+	public IGImagePersistence getIGImagePersistence() {
+		return igImagePersistence;
+	}
+
+	public void setIGImagePersistence(IGImagePersistence igImagePersistence) {
+		this.igImagePersistence = igImagePersistence;
+	}
+
+	protected IGFolderLocalService igFolderLocalService;
+	protected IGFolderService igFolderService;
+	protected IGFolderPersistence igFolderPersistence;
+	protected IGImagePersistence igImagePersistence;
 }

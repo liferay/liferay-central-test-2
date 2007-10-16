@@ -41,7 +41,7 @@ public class UserTrackerPathLocalServiceImpl
 	public List getUserTrackerPaths(long userTrackerId, int begin, int end)
 		throws SystemException {
 
-		return UserTrackerPathUtil.findByUserTrackerId(
+		return userTrackerPathPersistence.findByUserTrackerId(
 			userTrackerId, begin, end);
 	}
 

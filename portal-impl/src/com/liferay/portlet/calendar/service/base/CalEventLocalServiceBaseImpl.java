@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.calendar.service.CalEventLocalService;
+import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
 
 import java.util.List;
@@ -47,4 +48,14 @@ public abstract class CalEventLocalServiceBaseImpl
 		int begin, int end) throws SystemException {
 		return CalEventUtil.findWithDynamicQuery(queryInitializer, begin, end);
 	}
+
+	public CalEventPersistence getCalEventPersistence() {
+		return calEventPersistence;
+	}
+
+	public void setCalEventPersistence(CalEventPersistence calEventPersistence) {
+		this.calEventPersistence = calEventPersistence;
+	}
+
+	protected CalEventPersistence calEventPersistence;
 }

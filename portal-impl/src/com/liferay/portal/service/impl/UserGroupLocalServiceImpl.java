@@ -71,7 +71,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		validate(0, companyId, name);
 
-		long userGroupId = CounterLocalServiceUtil.increment();
+		long userGroupId = counterLocalService.increment();
 
 		UserGroup userGroup = UserGroupUtil.create(userGroupId);
 

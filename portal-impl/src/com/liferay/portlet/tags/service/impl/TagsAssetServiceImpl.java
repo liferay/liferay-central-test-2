@@ -24,12 +24,11 @@ package com.liferay.portlet.tags.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
 import com.liferay.portlet.tags.model.TagsAssetType;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
-import com.liferay.portlet.tags.service.TagsAssetService;
+import com.liferay.portlet.tags.service.base.TagsAssetServiceBaseImpl;
 
 import java.util.Date;
 import java.util.List;
@@ -40,8 +39,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsAssetServiceImpl
-	extends PrincipalBean implements TagsAssetService {
+public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 
 	public void deleteAsset(long assetId)
 		throws PortalException, SystemException {

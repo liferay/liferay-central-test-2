@@ -25,7 +25,11 @@ package com.liferay.portlet.ratings.service.base;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
+import com.liferay.portlet.ratings.service.RatingsEntryService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 
 import java.util.List;
@@ -48,4 +52,44 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		return RatingsStatsUtil.findWithDynamicQuery(queryInitializer, begin,
 			end);
 	}
+
+	public RatingsEntryLocalService getRatingsEntryLocalService() {
+		return ratingsEntryLocalService;
+	}
+
+	public void setRatingsEntryLocalService(
+		RatingsEntryLocalService ratingsEntryLocalService) {
+		this.ratingsEntryLocalService = ratingsEntryLocalService;
+	}
+
+	public RatingsEntryService getRatingsEntryService() {
+		return ratingsEntryService;
+	}
+
+	public void setRatingsEntryService(RatingsEntryService ratingsEntryService) {
+		this.ratingsEntryService = ratingsEntryService;
+	}
+
+	public RatingsEntryPersistence getRatingsEntryPersistence() {
+		return ratingsEntryPersistence;
+	}
+
+	public void setRatingsEntryPersistence(
+		RatingsEntryPersistence ratingsEntryPersistence) {
+		this.ratingsEntryPersistence = ratingsEntryPersistence;
+	}
+
+	public RatingsStatsPersistence getRatingsStatsPersistence() {
+		return ratingsStatsPersistence;
+	}
+
+	public void setRatingsStatsPersistence(
+		RatingsStatsPersistence ratingsStatsPersistence) {
+		this.ratingsStatsPersistence = ratingsStatsPersistence;
+	}
+
+	protected RatingsEntryLocalService ratingsEntryLocalService;
+	protected RatingsEntryService ratingsEntryService;
+	protected RatingsEntryPersistence ratingsEntryPersistence;
+	protected RatingsStatsPersistence ratingsStatsPersistence;
 }

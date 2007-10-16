@@ -65,6 +65,42 @@ public class PollsVoteLocalServiceUtil {
 		return pollsVoteLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.polls.service.persistence.PollsChoicePersistence getPollsChoicePersistence() {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+
+		return pollsVoteLocalService.getPollsChoicePersistence();
+	}
+
+	public static void setPollsChoicePersistence(
+		com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence) {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+		pollsVoteLocalService.setPollsChoicePersistence(pollsChoicePersistence);
+	}
+
+	public static com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence() {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+
+		return pollsVoteLocalService.getPollsQuestionPersistence();
+	}
+
+	public static void setPollsQuestionPersistence(
+		com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence) {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+		pollsVoteLocalService.setPollsQuestionPersistence(pollsQuestionPersistence);
+	}
+
+	public static com.liferay.portlet.polls.service.persistence.PollsVotePersistence getPollsVotePersistence() {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+
+		return pollsVoteLocalService.getPollsVotePersistence();
+	}
+
+	public static void setPollsVotePersistence(
+		com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence) {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+		pollsVoteLocalService.setPollsVotePersistence(pollsVotePersistence);
+	}
+
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
 		long userId, long questionId, long choiceId)
 		throws com.liferay.portal.PortalException, 

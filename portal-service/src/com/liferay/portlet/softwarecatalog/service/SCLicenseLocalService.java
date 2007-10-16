@@ -57,6 +57,31 @@ public interface SCLicenseLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence();
+
+	public void setSCLicensePersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence);
+
+	public com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence getSCFrameworkVersionPersistence();
+
+	public void setSCFrameworkVersionPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence);
+
+	public com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence getSCProductEntryPersistence();
+
+	public void setSCProductEntryPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence);
+
+	public com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence getSCProductScreenshotPersistence();
+
+	public void setSCProductScreenshotPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence);
+
+	public com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence getSCProductVersionPersistence();
+
+	public void setSCProductVersionPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence);
+
 	public com.liferay.portlet.softwarecatalog.model.SCLicense addLicense(
 		java.lang.String name, java.lang.String url, boolean openSource,
 		boolean active, boolean recommended)

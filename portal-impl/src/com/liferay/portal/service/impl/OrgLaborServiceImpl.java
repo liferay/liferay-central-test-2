@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.service.OrgLaborLocalServiceUtil;
-import com.liferay.portal.service.OrgLaborService;
+import com.liferay.portal.service.base.OrgLaborServiceBaseImpl;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.persistence.OrgLaborUtil;
 
@@ -39,8 +39,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class OrgLaborServiceImpl
-	extends PrincipalBean implements OrgLaborService {
+public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 
 	public OrgLabor addOrgLabor(
 			long organizationId, int typeId, int sunOpen, int sunClose,

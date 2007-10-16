@@ -57,6 +57,21 @@ public interface WikiNodeLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence();
+
+	public void setWikiNodePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence);
+
+	public com.liferay.portlet.wiki.service.persistence.WikiPagePersistence getWikiPagePersistence();
+
+	public void setWikiPagePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence);
+
+	public com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence getWikiPageResourcePersistence();
+
+	public void setWikiPageResourcePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence);
+
 	public com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
 		long plid, java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)

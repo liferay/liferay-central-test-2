@@ -52,7 +52,7 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 
 		validate(typeId);
 
-		long orgLaborId = CounterLocalServiceUtil.increment();
+		long orgLaborId = counterLocalService.increment();
 
 		OrgLabor orgLabor = OrgLaborUtil.create(orgLaborId);
 

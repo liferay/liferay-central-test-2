@@ -166,7 +166,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Layout
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long layoutId = getNextLayoutId(groupId, privateLayout);
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
@@ -177,7 +177,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			groupId, privateLayout, layoutId, parentLayoutId, name, type,
 			hidden, friendlyURL);
 
-		long plid = CounterLocalServiceUtil.increment();
+		long plid = counterLocalService.increment();
 
 		Layout layout = LayoutUtil.create(plid);
 
@@ -747,7 +747,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Layouts
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		Set newLayoutIds = CollectionFactory.getHashSet();
 
@@ -812,7 +812,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 
 			if (layout == null) {
-				long plid = CounterLocalServiceUtil.increment();
+				long plid = counterLocalService.increment();
 
 				layout = LayoutUtil.create(plid);
 
@@ -1034,7 +1034,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				long iconImageId = layout.getIconImageId();
 
 				if (iconImageId <= 0) {
-					iconImageId = CounterLocalServiceUtil.increment();
+					iconImageId = counterLocalService.increment();
 
 					layout.setIconImageId(iconImageId);
 				}
@@ -2380,7 +2380,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			catch (NoSuchPortletPreferencesException nsppe) {
 			}
 
-			long portletPreferencesId = CounterLocalServiceUtil.increment();
+			long portletPreferencesId = counterLocalService.increment();
 
 			PortletPreferences portletPreferences =
 				PortletPreferencesUtil.create(portletPreferencesId);

@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
-import com.liferay.portal.service.PasswordPolicyService;
+import com.liferay.portal.service.base.PasswordPolicyServiceBaseImpl;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 
@@ -37,8 +37,7 @@ import com.liferay.portal.service.permission.PortalPermissionUtil;
  * @author Scott Lee
  *
  */
-public class PasswordPolicyServiceImpl extends PrincipalBean
-	implements PasswordPolicyService {
+public class PasswordPolicyServiceImpl extends PasswordPolicyServiceBaseImpl {
 
 	public PasswordPolicy addPasswordPolicy(
 			String name, String description, boolean changeable,

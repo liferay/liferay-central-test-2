@@ -57,6 +57,21 @@ public interface PollsChoiceLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.polls.service.persistence.PollsChoicePersistence getPollsChoicePersistence();
+
+	public void setPollsChoicePersistence(
+		com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence);
+
+	public com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence();
+
+	public void setPollsQuestionPersistence(
+		com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence);
+
+	public com.liferay.portlet.polls.service.persistence.PollsVotePersistence getPollsVotePersistence();
+
+	public void setPollsVotePersistence(
+		com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence);
+
 	public com.liferay.portlet.polls.model.PollsChoice getChoice(long choiceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

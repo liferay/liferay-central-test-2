@@ -66,6 +66,78 @@ public class JournalArticleImageLocalServiceUtil {
 			begin, end);
 	}
 
+	public static com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence() {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		return journalArticleImageLocalService.getJournalArticlePersistence();
+	}
+
+	public static void setJournalArticlePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence) {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+		journalArticleImageLocalService.setJournalArticlePersistence(journalArticlePersistence);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence getJournalArticleImagePersistence() {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		return journalArticleImageLocalService.getJournalArticleImagePersistence();
+	}
+
+	public static void setJournalArticleImagePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence journalArticleImagePersistence) {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+		journalArticleImageLocalService.setJournalArticleImagePersistence(journalArticleImagePersistence);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence getJournalArticleResourcePersistence() {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		return journalArticleImageLocalService.getJournalArticleResourcePersistence();
+	}
+
+	public static void setJournalArticleResourcePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence) {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+		journalArticleImageLocalService.setJournalArticleResourcePersistence(journalArticleResourcePersistence);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence getJournalContentSearchPersistence() {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		return journalArticleImageLocalService.getJournalContentSearchPersistence();
+	}
+
+	public static void setJournalContentSearchPersistence(
+		com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence) {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+		journalArticleImageLocalService.setJournalContentSearchPersistence(journalContentSearchPersistence);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalStructurePersistence getJournalStructurePersistence() {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		return journalArticleImageLocalService.getJournalStructurePersistence();
+	}
+
+	public static void setJournalStructurePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence) {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+		journalArticleImageLocalService.setJournalStructurePersistence(journalStructurePersistence);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence getJournalTemplatePersistence() {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		return journalArticleImageLocalService.getJournalTemplatePersistence();
+	}
+
+	public static void setJournalTemplatePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence) {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+		journalArticleImageLocalService.setJournalTemplatePersistence(journalTemplatePersistence);
+	}
+
 	public static void addArticleImageId(long articleImageId, long groupId,
 		java.lang.String articleId, double version, java.lang.String elName,
 		java.lang.String languageId)

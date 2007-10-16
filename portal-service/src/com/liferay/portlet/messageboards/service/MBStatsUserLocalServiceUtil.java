@@ -65,6 +65,90 @@ public class MBStatsUserLocalServiceUtil {
 		return mbStatsUserLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		return mbStatsUserLocalService.getMBBanPersistence();
+	}
+
+	public static void setMBBanPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence) {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+		mbStatsUserLocalService.setMBBanPersistence(mbBanPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence getMBCategoryPersistence() {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		return mbStatsUserLocalService.getMBCategoryPersistence();
+	}
+
+	public static void setMBCategoryPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence) {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+		mbStatsUserLocalService.setMBCategoryPersistence(mbCategoryPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence getMBDiscussionPersistence() {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		return mbStatsUserLocalService.getMBDiscussionPersistence();
+	}
+
+	public static void setMBDiscussionPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence mbDiscussionPersistence) {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+		mbStatsUserLocalService.setMBDiscussionPersistence(mbDiscussionPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence() {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		return mbStatsUserLocalService.getMBMessagePersistence();
+	}
+
+	public static void setMBMessagePersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+		mbStatsUserLocalService.setMBMessagePersistence(mbMessagePersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence getMBMessageFlagPersistence() {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		return mbStatsUserLocalService.getMBMessageFlagPersistence();
+	}
+
+	public static void setMBMessageFlagPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence) {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+		mbStatsUserLocalService.setMBMessageFlagPersistence(mbMessageFlagPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence getMBStatsUserPersistence() {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		return mbStatsUserLocalService.getMBStatsUserPersistence();
+	}
+
+	public static void setMBStatsUserPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence) {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+		mbStatsUserLocalService.setMBStatsUserPersistence(mbStatsUserPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence getMBThreadPersistence() {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		return mbStatsUserLocalService.getMBThreadPersistence();
+	}
+
+	public static void setMBThreadPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence) {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+		mbStatsUserLocalService.setMBThreadPersistence(mbThreadPersistence);
+	}
+
 	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();

@@ -78,7 +78,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		validate(0, companyId, name);
 
-		long roleId = CounterLocalServiceUtil.increment();
+		long roleId = counterLocalService.increment();
 
 		Role role = RoleUtil.create(roleId);
 

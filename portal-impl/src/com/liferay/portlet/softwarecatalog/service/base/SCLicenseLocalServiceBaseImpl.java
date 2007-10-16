@@ -25,8 +25,20 @@ package com.liferay.portlet.softwarecatalog.service.base;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCProductEntryService;
+import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCProductVersionService;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence;
 
 import java.util.List;
 
@@ -47,4 +59,125 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		int begin, int end) throws SystemException {
 		return SCLicenseUtil.findWithDynamicQuery(queryInitializer, begin, end);
 	}
+
+	public SCLicensePersistence getSCLicensePersistence() {
+		return scLicensePersistence;
+	}
+
+	public void setSCLicensePersistence(
+		SCLicensePersistence scLicensePersistence) {
+		this.scLicensePersistence = scLicensePersistence;
+	}
+
+	public SCFrameworkVersionLocalService getSCFrameworkVersionLocalService() {
+		return scFrameworkVersionLocalService;
+	}
+
+	public void setSCFrameworkVersionLocalService(
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService) {
+		this.scFrameworkVersionLocalService = scFrameworkVersionLocalService;
+	}
+
+	public SCFrameworkVersionService getSCFrameworkVersionService() {
+		return scFrameworkVersionService;
+	}
+
+	public void setSCFrameworkVersionService(
+		SCFrameworkVersionService scFrameworkVersionService) {
+		this.scFrameworkVersionService = scFrameworkVersionService;
+	}
+
+	public SCFrameworkVersionPersistence getSCFrameworkVersionPersistence() {
+		return scFrameworkVersionPersistence;
+	}
+
+	public void setSCFrameworkVersionPersistence(
+		SCFrameworkVersionPersistence scFrameworkVersionPersistence) {
+		this.scFrameworkVersionPersistence = scFrameworkVersionPersistence;
+	}
+
+	public SCProductEntryLocalService getSCProductEntryLocalService() {
+		return scProductEntryLocalService;
+	}
+
+	public void setSCProductEntryLocalService(
+		SCProductEntryLocalService scProductEntryLocalService) {
+		this.scProductEntryLocalService = scProductEntryLocalService;
+	}
+
+	public SCProductEntryService getSCProductEntryService() {
+		return scProductEntryService;
+	}
+
+	public void setSCProductEntryService(
+		SCProductEntryService scProductEntryService) {
+		this.scProductEntryService = scProductEntryService;
+	}
+
+	public SCProductEntryPersistence getSCProductEntryPersistence() {
+		return scProductEntryPersistence;
+	}
+
+	public void setSCProductEntryPersistence(
+		SCProductEntryPersistence scProductEntryPersistence) {
+		this.scProductEntryPersistence = scProductEntryPersistence;
+	}
+
+	public SCProductScreenshotLocalService getSCProductScreenshotLocalService() {
+		return scProductScreenshotLocalService;
+	}
+
+	public void setSCProductScreenshotLocalService(
+		SCProductScreenshotLocalService scProductScreenshotLocalService) {
+		this.scProductScreenshotLocalService = scProductScreenshotLocalService;
+	}
+
+	public SCProductScreenshotPersistence getSCProductScreenshotPersistence() {
+		return scProductScreenshotPersistence;
+	}
+
+	public void setSCProductScreenshotPersistence(
+		SCProductScreenshotPersistence scProductScreenshotPersistence) {
+		this.scProductScreenshotPersistence = scProductScreenshotPersistence;
+	}
+
+	public SCProductVersionLocalService getSCProductVersionLocalService() {
+		return scProductVersionLocalService;
+	}
+
+	public void setSCProductVersionLocalService(
+		SCProductVersionLocalService scProductVersionLocalService) {
+		this.scProductVersionLocalService = scProductVersionLocalService;
+	}
+
+	public SCProductVersionService getSCProductVersionService() {
+		return scProductVersionService;
+	}
+
+	public void setSCProductVersionService(
+		SCProductVersionService scProductVersionService) {
+		this.scProductVersionService = scProductVersionService;
+	}
+
+	public SCProductVersionPersistence getSCProductVersionPersistence() {
+		return scProductVersionPersistence;
+	}
+
+	public void setSCProductVersionPersistence(
+		SCProductVersionPersistence scProductVersionPersistence) {
+		this.scProductVersionPersistence = scProductVersionPersistence;
+	}
+
+	protected SCLicensePersistence scLicensePersistence;
+	protected SCFrameworkVersionLocalService scFrameworkVersionLocalService;
+	protected SCFrameworkVersionService scFrameworkVersionService;
+	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	protected SCProductEntryLocalService scProductEntryLocalService;
+	protected SCProductEntryService scProductEntryService;
+	protected SCProductEntryPersistence scProductEntryPersistence;
+	protected SCProductScreenshotLocalService scProductScreenshotLocalService;
+	protected SCProductScreenshotPersistence scProductScreenshotPersistence;
+	protected SCProductVersionLocalService scProductVersionLocalService;
+	protected SCProductVersionService scProductVersionService;
+	protected SCProductVersionPersistence scProductVersionPersistence;
 }

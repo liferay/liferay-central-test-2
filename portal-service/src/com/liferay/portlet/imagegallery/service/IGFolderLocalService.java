@@ -57,6 +57,16 @@ public interface IGFolderLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence getIGFolderPersistence();
+
+	public void setIGFolderPersistence(
+		com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence);
+
+	public com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence getIGImagePersistence();
+
+	public void setIGImagePersistence(
+		com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence);
+
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

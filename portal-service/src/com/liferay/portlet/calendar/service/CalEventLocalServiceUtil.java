@@ -65,6 +65,18 @@ public class CalEventLocalServiceUtil {
 		return calEventLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.calendar.service.persistence.CalEventPersistence getCalEventPersistence() {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.getCalEventPersistence();
+	}
+
+	public static void setCalEventPersistence(
+		com.liferay.portlet.calendar.service.persistence.CalEventPersistence calEventPersistence) {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.setCalEventPersistence(calEventPersistence);
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,

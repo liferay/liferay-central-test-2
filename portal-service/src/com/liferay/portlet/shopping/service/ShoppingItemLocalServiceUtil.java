@@ -66,6 +66,102 @@ public class ShoppingItemLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence() {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getShoppingCartPersistence();
+	}
+
+	public static void setShoppingCartPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence shoppingCartPersistence) {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+		shoppingItemLocalService.setShoppingCartPersistence(shoppingCartPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence getShoppingCategoryPersistence() {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getShoppingCategoryPersistence();
+	}
+
+	public static void setShoppingCategoryPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence shoppingCategoryPersistence) {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+		shoppingItemLocalService.setShoppingCategoryPersistence(shoppingCategoryPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence getShoppingCouponPersistence() {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getShoppingCouponPersistence();
+	}
+
+	public static void setShoppingCouponPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence shoppingCouponPersistence) {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+		shoppingItemLocalService.setShoppingCouponPersistence(shoppingCouponPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence getShoppingItemPersistence() {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getShoppingItemPersistence();
+	}
+
+	public static void setShoppingItemPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence shoppingItemPersistence) {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+		shoppingItemLocalService.setShoppingItemPersistence(shoppingItemPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence getShoppingItemFieldPersistence() {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getShoppingItemFieldPersistence();
+	}
+
+	public static void setShoppingItemFieldPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence shoppingItemFieldPersistence) {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+		shoppingItemLocalService.setShoppingItemFieldPersistence(shoppingItemFieldPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence getShoppingItemPricePersistence() {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getShoppingItemPricePersistence();
+	}
+
+	public static void setShoppingItemPricePersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence shoppingItemPricePersistence) {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+		shoppingItemLocalService.setShoppingItemPricePersistence(shoppingItemPricePersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence getShoppingOrderPersistence() {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getShoppingOrderPersistence();
+	}
+
+	public static void setShoppingOrderPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence shoppingOrderPersistence) {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+		shoppingItemLocalService.setShoppingOrderPersistence(shoppingOrderPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence getShoppingOrderItemPersistence() {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getShoppingOrderItemPersistence();
+	}
+
+	public static void setShoppingOrderItemPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence shoppingOrderItemPersistence) {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+		shoppingItemLocalService.setShoppingOrderItemPersistence(shoppingOrderItemPersistence);
+	}
+
 	public static void addBookItems(long userId, long categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException, 

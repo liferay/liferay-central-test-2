@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.service.AccountService;
+import com.liferay.portal.service.base.AccountServiceBaseImpl;
 
 /**
  * <a href="AccountServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -30,7 +30,5 @@ import com.liferay.portal.service.AccountService;
  * @author Brian Wing Shun Chan
  *
  */
-public class AccountServiceImpl
-	extends PrincipalBean implements AccountService {
-
+public class AccountServiceImpl extends AccountServiceBaseImpl {
 }

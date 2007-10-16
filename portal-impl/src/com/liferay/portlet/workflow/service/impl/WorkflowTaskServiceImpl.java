@@ -24,9 +24,8 @@ package com.liferay.portlet.workflow.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
-import com.liferay.portlet.workflow.service.WorkflowTaskService;
+import com.liferay.portlet.workflow.service.base.WorkflowTaskServiceBaseImpl;
 
 import java.rmi.RemoteException;
 
@@ -38,8 +37,7 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  *
  */
-public class WorkflowTaskServiceImpl
-	extends PrincipalBean implements WorkflowTaskService {
+public class WorkflowTaskServiceImpl extends WorkflowTaskServiceBaseImpl {
 
 	public Map updateTask(long taskId, String transition, Map parameterMap)
 		throws PortalException, SystemException {

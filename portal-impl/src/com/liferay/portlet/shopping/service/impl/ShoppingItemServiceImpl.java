@@ -25,10 +25,9 @@ package com.liferay.portlet.shopping.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
-import com.liferay.portlet.shopping.service.ShoppingItemService;
+import com.liferay.portlet.shopping.service.base.ShoppingItemServiceBaseImpl;
 import com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission;
 import com.liferay.portlet.shopping.service.permission.ShoppingItemPermission;
 
@@ -42,8 +41,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingItemServiceImpl
-	extends PrincipalBean implements ShoppingItemService {
+public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 
 	public void addBookItems(long categoryId, String[] isbns)
 		throws PortalException, SystemException {

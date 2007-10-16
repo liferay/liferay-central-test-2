@@ -65,6 +65,462 @@ public class ResourceLocalServiceUtil {
 		return resourceLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getAccountPersistence();
+	}
+
+	public static void setAccountPersistence(
+		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setAccountPersistence(accountPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getAddressPersistence();
+	}
+
+	public static void setAddressPersistence(
+		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setAddressPersistence(addressPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ClassNamePersistence getClassNamePersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getClassNamePersistence();
+	}
+
+	public static void setClassNamePersistence(
+		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setClassNamePersistence(classNamePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getCompanyPersistence();
+	}
+
+	public static void setCompanyPersistence(
+		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setCompanyPersistence(companyPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ContactPersistence getContactPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getContactPersistence();
+	}
+
+	public static void setContactPersistence(
+		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setContactPersistence(contactPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.CountryPersistence getCountryPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getCountryPersistence();
+	}
+
+	public static void setCountryPersistence(
+		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setCountryPersistence(countryPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.EmailAddressPersistence getEmailAddressPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getEmailAddressPersistence();
+	}
+
+	public static void setEmailAddressPersistence(
+		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setEmailAddressPersistence(emailAddressPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getGroupPersistence();
+	}
+
+	public static void setGroupPersistence(
+		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setGroupPersistence(groupPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ImagePersistence getImagePersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getImagePersistence();
+	}
+
+	public static void setImagePersistence(
+		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setImagePersistence(imagePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.LayoutPersistence getLayoutPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getLayoutPersistence();
+	}
+
+	public static void setLayoutPersistence(
+		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setLayoutPersistence(layoutPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.LayoutSetPersistence getLayoutSetPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getLayoutSetPersistence();
+	}
+
+	public static void setLayoutSetPersistence(
+		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setLayoutSetPersistence(layoutSetPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ListTypePersistence getListTypePersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getListTypePersistence();
+	}
+
+	public static void setListTypePersistence(
+		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setListTypePersistence(listTypePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.OrganizationPersistence getOrganizationPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getOrganizationPersistence();
+	}
+
+	public static void setOrganizationPersistence(
+		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setOrganizationPersistence(organizationPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.OrgGroupPermissionPersistence getOrgGroupPermissionPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getOrgGroupPermissionPersistence();
+	}
+
+	public static void setOrgGroupPermissionPersistence(
+		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.OrgGroupRolePersistence getOrgGroupRolePersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getOrgGroupRolePersistence();
+	}
+
+	public static void setOrgGroupRolePersistence(
+		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.OrgLaborPersistence getOrgLaborPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getOrgLaborPersistence();
+	}
+
+	public static void setOrgLaborPersistence(
+		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setOrgLaborPersistence(orgLaborPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PasswordPolicyPersistence getPasswordPolicyPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getPasswordPolicyPersistence();
+	}
+
+	public static void setPasswordPolicyPersistence(
+		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PasswordPolicyRelPersistence getPasswordPolicyRelPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getPasswordPolicyRelPersistence();
+	}
+
+	public static void setPasswordPolicyRelPersistence(
+		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PasswordTrackerPersistence getPasswordTrackerPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getPasswordTrackerPersistence();
+	}
+
+	public static void setPasswordTrackerPersistence(
+		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PermissionPersistence getPermissionPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getPermissionPersistence();
+	}
+
+	public static void setPermissionPersistence(
+		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setPermissionPersistence(permissionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PhonePersistence getPhonePersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getPhonePersistence();
+	}
+
+	public static void setPhonePersistence(
+		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setPhonePersistence(phonePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PluginSettingPersistence getPluginSettingPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getPluginSettingPersistence();
+	}
+
+	public static void setPluginSettingPersistence(
+		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setPluginSettingPersistence(pluginSettingPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PortletPersistence getPortletPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getPortletPersistence();
+	}
+
+	public static void setPortletPersistence(
+		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setPortletPersistence(portletPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PortletPreferencesPersistence getPortletPreferencesPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getPortletPreferencesPersistence();
+	}
+
+	public static void setPortletPreferencesPersistence(
+		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.RegionPersistence getRegionPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getRegionPersistence();
+	}
+
+	public static void setRegionPersistence(
+		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setRegionPersistence(regionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ReleasePersistence getReleasePersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getReleasePersistence();
+	}
+
+	public static void setReleasePersistence(
+		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setReleasePersistence(releasePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceCodePersistence getResourceCodePersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getResourceCodePersistence();
+	}
+
+	public static void setResourceCodePersistence(
+		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setResourceCodePersistence(resourceCodePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.RolePersistence getRolePersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getRolePersistence();
+	}
+
+	public static void setRolePersistence(
+		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setRolePersistence(rolePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ServiceComponentPersistence getServiceComponentPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getServiceComponentPersistence();
+	}
+
+	public static void setServiceComponentPersistence(
+		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setServiceComponentPersistence(serviceComponentPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getSubscriptionPersistence();
+	}
+
+	public static void setSubscriptionPersistence(
+		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setSubscriptionPersistence(subscriptionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserGroupPersistence getUserGroupPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getUserGroupPersistence();
+	}
+
+	public static void setUserGroupPersistence(
+		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setUserGroupPersistence(userGroupPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserGroupRolePersistence getUserGroupRolePersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getUserGroupRolePersistence();
+	}
+
+	public static void setUserGroupRolePersistence(
+		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserIdMapperPersistence getUserIdMapperPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getUserIdMapperPersistence();
+	}
+
+	public static void setUserIdMapperPersistence(
+		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserTrackerPersistence getUserTrackerPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getUserTrackerPersistence();
+	}
+
+	public static void setUserTrackerPersistence(
+		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setUserTrackerPersistence(userTrackerPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserTrackerPathPersistence getUserTrackerPathPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getUserTrackerPathPersistence();
+	}
+
+	public static void setUserTrackerPathPersistence(
+		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.WebsitePersistence getWebsitePersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getWebsitePersistence();
+	}
+
+	public static void setWebsitePersistence(
+		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.setWebsitePersistence(websitePersistence);
+	}
+
 	public static void addModelResources(long companyId, long groupId,
 		long userId, java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,

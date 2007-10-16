@@ -29,8 +29,8 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
+import com.liferay.portal.service.base.LayoutServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 
@@ -44,7 +44,7 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  *
  */
-public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
+public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	public Layout addLayout(
 			long groupId, boolean privateLayout, long parentLayoutId,

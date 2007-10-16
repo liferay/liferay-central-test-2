@@ -25,10 +25,9 @@ package com.liferay.portlet.blogs.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
-import com.liferay.portlet.blogs.service.BlogsCategoryService;
+import com.liferay.portlet.blogs.service.base.BlogsCategoryServiceBaseImpl;
 import com.liferay.portlet.blogs.service.permission.BlogsCategoryPermission;
 
 /**
@@ -37,8 +36,7 @@ import com.liferay.portlet.blogs.service.permission.BlogsCategoryPermission;
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsCategoryServiceImpl
-	extends PrincipalBean implements BlogsCategoryService {
+public class BlogsCategoryServiceImpl extends BlogsCategoryServiceBaseImpl {
 
 	public BlogsCategory addCategory(
 			long parentCategoryId, String name, String description,

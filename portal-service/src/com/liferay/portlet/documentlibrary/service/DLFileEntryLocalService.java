@@ -57,6 +57,31 @@ public interface DLFileEntryLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence();
+
+	public void setDLFileEntryPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence);
+
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence getDLFileRankPersistence();
+
+	public void setDLFileRankPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence);
+
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence getDLFileShortcutPersistence();
+
+	public void setDLFileShortcutPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence);
+
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence getDLFileVersionPersistence();
+
+	public void setDLFileVersionPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence dlFileVersionPersistence);
+
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence getDLFolderPersistence();
+
+	public void setDLFolderPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence);
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,

@@ -24,11 +24,10 @@ package com.liferay.portlet.workflow.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.workflow.jbi.WorkflowXMLUtil;
 import com.liferay.portlet.workflow.model.WorkflowInstance;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
-import com.liferay.portlet.workflow.service.WorkflowInstanceService;
+import com.liferay.portlet.workflow.service.base.WorkflowInstanceServiceBaseImpl;
 
 import java.rmi.RemoteException;
 
@@ -43,7 +42,7 @@ import org.dom4j.DocumentException;
  *
  */
 public class WorkflowInstanceServiceImpl
-	extends PrincipalBean implements WorkflowInstanceService {
+	extends WorkflowInstanceServiceBaseImpl {
 
 	public WorkflowInstance addInstance(long definitionId)
 		throws PortalException, SystemException {

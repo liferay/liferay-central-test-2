@@ -25,7 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Region;
-import com.liferay.portal.service.RegionService;
+import com.liferay.portal.service.base.RegionServiceBaseImpl;
 import com.liferay.portal.service.persistence.RegionUtil;
 
 import java.util.List;
@@ -36,7 +36,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class RegionServiceImpl extends PrincipalBean implements RegionService {
+public class RegionServiceImpl extends RegionServiceBaseImpl {
 
 	public List getRegions() throws SystemException {
 		return RegionUtil.findAll();

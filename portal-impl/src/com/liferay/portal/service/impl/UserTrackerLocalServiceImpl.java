@@ -58,7 +58,8 @@ public class UserTrackerLocalServiceImpl
 			long userTrackerId = CounterLocalServiceUtil.increment(
 				UserTracker.class.getName());
 
-			UserTracker userTracker = UserTrackerUtil.create(userTrackerId);
+			UserTracker userTracker =
+				userTrackerPersistence.create(userTrackerId);
 
 			userTracker.setCompanyId(companyId);
 			userTracker.setUserId(userId);
@@ -68,7 +69,7 @@ public class UserTrackerLocalServiceImpl
 			userTracker.setRemoteHost(remoteHost);
 			userTracker.setUserAgent(userAgent);
 
-			UserTrackerUtil.update(userTracker);
+			userTrackerPersistence.update(userTracker);
 
 			Iterator itr = userTrackerPaths.iterator();
 
@@ -81,7 +82,7 @@ public class UserTrackerLocalServiceImpl
 				userTrackerPath.setUserTrackerPathId(pathId);
 				userTrackerPath.setUserTrackerId(userTrackerId);
 
-				UserTrackerPathUtil.update(userTrackerPath);
+				userTrackerPathPersistence.update(userTrackerPath);
 			}
 
 			return userTracker;
@@ -96,7 +97,7 @@ public class UserTrackerLocalServiceImpl
 
 		// Paths
 
-		UserTrackerPathUtil.removeByUserTrackerId(userTrackerId);
+		userTrackerPathPersistence.removeByUserTrackerId(userTrackerId);
 
 		// User tracker
 
@@ -106,7 +107,7 @@ public class UserTrackerLocalServiceImpl
 	public List getUserTrackers(long companyId, int begin, int end)
 		throws SystemException {
 
-		return UserTrackerUtil.findByCompanyId(companyId, begin, end);
+		return userTrackerPersistence.findByCompanyId(companyId, begin, end);
 	}
 
 }

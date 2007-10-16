@@ -25,12 +25,11 @@ package com.liferay.portlet.shopping.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceUtil;
-import com.liferay.portlet.shopping.service.ShoppingCouponService;
+import com.liferay.portlet.shopping.service.base.ShoppingCouponServiceBaseImpl;
 
 import java.util.List;
 
@@ -40,8 +39,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingCouponServiceImpl
-	extends PrincipalBean implements ShoppingCouponService {
+public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 
 	public ShoppingCoupon addCoupon(
 			long plid, String code, boolean autoCode, String name,

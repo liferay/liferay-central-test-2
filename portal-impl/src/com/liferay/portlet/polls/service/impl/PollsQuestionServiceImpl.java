@@ -25,12 +25,11 @@ package com.liferay.portlet.polls.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
-import com.liferay.portlet.polls.service.PollsQuestionService;
+import com.liferay.portlet.polls.service.base.PollsQuestionServiceBaseImpl;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
 
 import java.util.List;
@@ -41,8 +40,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class PollsQuestionServiceImpl
-	extends PrincipalBean implements PollsQuestionService {
+public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 
 	public PollsQuestion addQuestion(
 			long plid, String title, String description,

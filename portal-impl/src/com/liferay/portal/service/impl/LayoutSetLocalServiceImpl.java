@@ -65,7 +65,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);
 
-		long layoutSetId = CounterLocalServiceUtil.increment();
+		long layoutSetId = counterLocalService.increment();
 
 		LayoutSet layoutSet = LayoutSetUtil.create(layoutSetId);
 
@@ -142,7 +142,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			long logoId = layoutSet.getLogoId();
 
 			if (logoId <= 0) {
-				logoId = CounterLocalServiceUtil.increment();
+				logoId = counterLocalService.increment();
 
 				layoutSet.setLogoId(logoId);
 			}

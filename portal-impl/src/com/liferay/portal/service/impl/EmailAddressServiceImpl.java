@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.service.EmailAddressLocalServiceUtil;
-import com.liferay.portal.service.EmailAddressService;
+import com.liferay.portal.service.base.EmailAddressServiceBaseImpl;
 import com.liferay.portal.service.permission.CommonPermissionUtil;
 import com.liferay.portal.service.persistence.EmailAddressUtil;
 
@@ -40,8 +40,7 @@ import java.util.List;
  * @author Alexander Chow
  *
  */
-public class EmailAddressServiceImpl
-	extends PrincipalBean implements EmailAddressService {
+public class EmailAddressServiceImpl extends EmailAddressServiceBaseImpl {
 
 	public EmailAddress addEmailAddress(
 			String className, long classPK, String address, int typeId,

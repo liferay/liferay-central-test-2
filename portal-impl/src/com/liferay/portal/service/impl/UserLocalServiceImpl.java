@@ -249,7 +249,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			password1 = PwdToolkitUtil.generate();
 		}
 
-		long userId = CounterLocalServiceUtil.increment();
+		long userId = counterLocalService.increment();
 
 		if (autoScreenName) {
 			ScreenNameGenerator screenNameGenerator =
@@ -466,7 +466,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		try {
-			User user = UserUtil.findByPrimaryKey(userId);
+			User user = userPersistence.findByPrimaryKey(userId);
 
 			if (user.isDefaultUser()) {
 				_log.error(
@@ -681,7 +681,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		long userId = GetterUtil.getLong(name);
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		try {
 			password = Encryptor.decrypt(company.getKeyObj(), password);
@@ -728,7 +728,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new RequiredUserException();
 		}
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		// Group
 
@@ -808,7 +808,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		long userId = GetterUtil.getLong(name);
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		Company company = CompanyUtil.findByPrimaryKey(user.getCompanyId());
 
@@ -1266,7 +1266,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public User updateActive(long userId, boolean active)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		user.setActive(active);
 
@@ -1279,7 +1279,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long userId, boolean agreedToTermsOfUse)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		user.setAgreedToTermsOfUse(agreedToTermsOfUse);
 
@@ -1291,7 +1291,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public User updateCreateDate(long userId, Date createDate)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		user.setCreateDate(createDate);
 
@@ -1303,7 +1303,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public User updateLastLogin(long userId, String loginIP)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		Date lastLoginDate = user.getLoginDate();
 
@@ -1414,7 +1414,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			boolean passwordReset, boolean silentUpdate)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		// Use silentUpdate so that imported user passwords are not exported
 		// or validated
@@ -1487,7 +1487,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// This method should only be used to manually massage data
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		user.setPassword(password);
 		user.setPasswordEncrypted(passwordEncrypted);
@@ -1512,7 +1512,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void updatePortrait(long userId, byte[] bytes)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		long imageMaxSize = GetterUtil.getLong(
 			PropsUtil.get(PropsUtil.USERS_IMAGE_MAX_SIZE));
@@ -1526,7 +1526,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		long portraitId = user.getPortraitId();
 
 		if (portraitId <= 0) {
-			portraitId = CounterLocalServiceUtil.increment();
+			portraitId = counterLocalService.increment();
 
 			user.setPortraitId(portraitId);
 		}
@@ -1575,7 +1575,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		validate(userId, screenName, emailAddress, firstName, lastName, smsSn);
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		Company company = CompanyUtil.findByPrimaryKey(user.getCompanyId());
 
 		validateOrganizations(user.getCompanyId(), organizationIds);
@@ -1999,7 +1999,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String firstName, String lastName, String smsSn)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		if (!user.getScreenName().equalsIgnoreCase(screenName)) {
 			validateScreenName(user.getCompanyId(), screenName);

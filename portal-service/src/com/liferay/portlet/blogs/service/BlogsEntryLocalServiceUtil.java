@@ -65,6 +65,42 @@ public class BlogsEntryLocalServiceUtil {
 		return blogsEntryLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence getBlogsCategoryPersistence() {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getBlogsCategoryPersistence();
+	}
+
+	public static void setBlogsCategoryPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence blogsCategoryPersistence) {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+		blogsEntryLocalService.setBlogsCategoryPersistence(blogsCategoryPersistence);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence() {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getBlogsEntryPersistence();
+	}
+
+	public static void setBlogsEntryPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence) {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+		blogsEntryLocalService.setBlogsEntryPersistence(blogsEntryPersistence);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence getBlogsStatsUserPersistence() {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getBlogsStatsUserPersistence();
+	}
+
+	public static void setBlogsStatsUserPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence) {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+		blogsEntryLocalService.setBlogsStatsUserPersistence(blogsStatsUserPersistence);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		long userId, long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,

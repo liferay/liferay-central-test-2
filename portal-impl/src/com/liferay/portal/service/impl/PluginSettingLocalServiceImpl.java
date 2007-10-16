@@ -108,7 +108,7 @@ public class PluginSettingLocalServiceImpl
 		long userId, String pluginId, String pluginType) {
 
 		try {
-			User user = UserUtil.findByPrimaryKey(userId);
+			User user = userPersistence.findByPrimaryKey(userId);
 
 			PluginSetting pluginSetting = getPluginSetting(
 				user.getCompanyId(), pluginId, pluginType);
@@ -141,7 +141,7 @@ public class PluginSettingLocalServiceImpl
 			companyId, pluginId, pluginType);
 
 		if (pluginSetting == null) {
-			long pluginSettingId = CounterLocalServiceUtil.increment();
+			long pluginSettingId = counterLocalService.increment();
 
 			pluginSetting = PluginSettingUtil.create(pluginSettingId);
 

@@ -65,6 +65,42 @@ public class WikiNodeLocalServiceUtil {
 		return wikiNodeLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence() {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getWikiNodePersistence();
+	}
+
+	public static void setWikiNodePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence) {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+		wikiNodeLocalService.setWikiNodePersistence(wikiNodePersistence);
+	}
+
+	public static com.liferay.portlet.wiki.service.persistence.WikiPagePersistence getWikiPagePersistence() {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getWikiPagePersistence();
+	}
+
+	public static void setWikiPagePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence) {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+		wikiNodeLocalService.setWikiPagePersistence(wikiPagePersistence);
+	}
+
+	public static com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence getWikiPageResourcePersistence() {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getWikiPageResourcePersistence();
+	}
+
+	public static void setWikiPageResourcePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence) {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+		wikiNodeLocalService.setWikiPageResourcePersistence(wikiPageResourcePersistence);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
 		long plid, java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)

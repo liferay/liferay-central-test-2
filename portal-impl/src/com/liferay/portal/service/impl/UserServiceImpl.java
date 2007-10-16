@@ -38,7 +38,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.base.UserServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
@@ -58,7 +58,7 @@ import java.util.Locale;
  * @author Jorge Ferrer
  *
  */
-public class UserServiceImpl extends PrincipalBean implements UserService {
+public class UserServiceImpl extends UserServiceBaseImpl {
 
 	public void addGroupUsers(long groupId, long[] userIds)
 		throws PortalException, SystemException {
@@ -423,7 +423,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		if (curUserId == userId) {
 			emailAddress = emailAddress.trim().toLowerCase();
 
-			User user = UserUtil.findByPrimaryKey(userId);
+			User user = userPersistence.findByPrimaryKey(userId);
 
 			if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
 				if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
@@ -448,7 +448,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 	protected void checkPermission(long userId, String actionId)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		checkPermission(userId, user.getOrganizationIds(), actionId);
 	}

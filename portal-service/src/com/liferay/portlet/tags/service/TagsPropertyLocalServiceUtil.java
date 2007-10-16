@@ -66,6 +66,54 @@ public class TagsPropertyLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
+		return tagsPropertyLocalService.getTagsAssetPersistence();
+	}
+
+	public static void setTagsAssetPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+		tagsPropertyLocalService.setTagsAssetPersistence(tagsAssetPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence() {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
+		return tagsPropertyLocalService.getTagsEntryPersistence();
+	}
+
+	public static void setTagsEntryPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+		tagsPropertyLocalService.setTagsEntryPersistence(tagsEntryPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence getTagsPropertyPersistence() {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
+		return tagsPropertyLocalService.getTagsPropertyPersistence();
+	}
+
+	public static void setTagsPropertyPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence tagsPropertyPersistence) {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+		tagsPropertyLocalService.setTagsPropertyPersistence(tagsPropertyPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsSourcePersistence getTagsSourcePersistence() {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
+		return tagsPropertyLocalService.getTagsSourcePersistence();
+	}
+
+	public static void setTagsSourcePersistence(
+		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence) {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+		tagsPropertyLocalService.setTagsSourcePersistence(tagsSourcePersistence);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, long entryId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException, 

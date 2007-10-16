@@ -69,7 +69,7 @@ public class UserIdMapperLocalServiceImpl
 		UserIdMapper userIdMapper = UserIdMapperUtil.fetchByU_T(userId, type);
 
 		if (userIdMapper == null) {
-			long userIdMapperId = CounterLocalServiceUtil.increment();
+			long userIdMapperId = counterLocalService.increment();
 
 			userIdMapper = UserIdMapperUtil.create(userIdMapperId);
 		}

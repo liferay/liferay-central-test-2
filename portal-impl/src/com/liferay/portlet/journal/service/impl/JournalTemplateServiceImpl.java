@@ -25,12 +25,11 @@ package com.liferay.portlet.journal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalTemplateService;
+import com.liferay.portlet.journal.service.base.JournalTemplateServiceBaseImpl;
 import com.liferay.portlet.journal.service.permission.JournalTemplatePermission;
 
 import java.io.File;
@@ -41,8 +40,7 @@ import java.io.File;
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalTemplateServiceImpl
-	extends PrincipalBean implements JournalTemplateService {
+public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 
 	public JournalTemplate addTemplate(
 			String templateId, boolean autoTemplateId, long plid,

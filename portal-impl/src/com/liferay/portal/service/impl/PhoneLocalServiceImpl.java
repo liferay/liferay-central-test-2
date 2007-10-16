@@ -56,7 +56,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 			String extension, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
@@ -67,7 +67,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 			0, user.getCompanyId(), classNameId, classPK, number, typeId,
 			primary);
 
-		long phoneId = CounterLocalServiceUtil.increment();
+		long phoneId = counterLocalService.increment();
 
 		Phone phone = PhoneUtil.create(phoneId);
 

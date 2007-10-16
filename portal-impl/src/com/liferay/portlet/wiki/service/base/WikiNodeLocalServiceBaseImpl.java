@@ -26,7 +26,13 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
+import com.liferay.portlet.wiki.service.WikiPageLocalService;
+import com.liferay.portlet.wiki.service.WikiPageResourceLocalService;
+import com.liferay.portlet.wiki.service.WikiPageService;
+import com.liferay.portlet.wiki.service.persistence.WikiNodePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
+import com.liferay.portlet.wiki.service.persistence.WikiPagePersistence;
+import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
 
 import java.util.List;
 
@@ -47,4 +53,62 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		int begin, int end) throws SystemException {
 		return WikiNodeUtil.findWithDynamicQuery(queryInitializer, begin, end);
 	}
+
+	public WikiNodePersistence getWikiNodePersistence() {
+		return wikiNodePersistence;
+	}
+
+	public void setWikiNodePersistence(WikiNodePersistence wikiNodePersistence) {
+		this.wikiNodePersistence = wikiNodePersistence;
+	}
+
+	public WikiPageLocalService getWikiPageLocalService() {
+		return wikiPageLocalService;
+	}
+
+	public void setWikiPageLocalService(
+		WikiPageLocalService wikiPageLocalService) {
+		this.wikiPageLocalService = wikiPageLocalService;
+	}
+
+	public WikiPageService getWikiPageService() {
+		return wikiPageService;
+	}
+
+	public void setWikiPageService(WikiPageService wikiPageService) {
+		this.wikiPageService = wikiPageService;
+	}
+
+	public WikiPagePersistence getWikiPagePersistence() {
+		return wikiPagePersistence;
+	}
+
+	public void setWikiPagePersistence(WikiPagePersistence wikiPagePersistence) {
+		this.wikiPagePersistence = wikiPagePersistence;
+	}
+
+	public WikiPageResourceLocalService getWikiPageResourceLocalService() {
+		return wikiPageResourceLocalService;
+	}
+
+	public void setWikiPageResourceLocalService(
+		WikiPageResourceLocalService wikiPageResourceLocalService) {
+		this.wikiPageResourceLocalService = wikiPageResourceLocalService;
+	}
+
+	public WikiPageResourcePersistence getWikiPageResourcePersistence() {
+		return wikiPageResourcePersistence;
+	}
+
+	public void setWikiPageResourcePersistence(
+		WikiPageResourcePersistence wikiPageResourcePersistence) {
+		this.wikiPageResourcePersistence = wikiPageResourcePersistence;
+	}
+
+	protected WikiNodePersistence wikiNodePersistence;
+	protected WikiPageLocalService wikiPageLocalService;
+	protected WikiPageService wikiPageService;
+	protected WikiPagePersistence wikiPagePersistence;
+	protected WikiPageResourceLocalService wikiPageResourceLocalService;
+	protected WikiPageResourcePersistence wikiPageResourcePersistence;
 }

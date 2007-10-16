@@ -25,10 +25,9 @@ package com.liferay.portlet.tags.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.json.JSONArrayWrapper;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
-import com.liferay.portlet.tags.service.TagsEntryService;
+import com.liferay.portlet.tags.service.base.TagsEntryServiceBaseImpl;
 
 import java.util.List;
 
@@ -38,8 +37,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsEntryServiceImpl
-	extends PrincipalBean implements TagsEntryService {
+public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 
 	public TagsEntry addEntry(String name)
 		throws PortalException, SystemException {

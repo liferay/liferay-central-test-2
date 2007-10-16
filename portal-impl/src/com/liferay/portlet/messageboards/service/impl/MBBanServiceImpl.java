@@ -25,12 +25,11 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBBanService;
+import com.liferay.portlet.messageboards.service.base.MBBanServiceBaseImpl;
 
 /**
  * <a href="MBBanServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +37,7 @@ import com.liferay.portlet.messageboards.service.MBBanService;
  * @author Brian Wing Shun Chan
  *
  */
-public class MBBanServiceImpl extends PrincipalBean implements MBBanService {
+public class MBBanServiceImpl extends MBBanServiceBaseImpl {
 
 	public MBBan addBan(long plid, long banUserId)
 		throws PortalException, SystemException {

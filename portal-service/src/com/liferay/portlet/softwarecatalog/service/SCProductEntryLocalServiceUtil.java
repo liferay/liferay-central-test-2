@@ -66,6 +66,66 @@ public class SCProductEntryLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence() {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getSCLicensePersistence();
+	}
+
+	public static void setSCLicensePersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence) {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+		scProductEntryLocalService.setSCLicensePersistence(scLicensePersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence getSCFrameworkVersionPersistence() {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getSCFrameworkVersionPersistence();
+	}
+
+	public static void setSCFrameworkVersionPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence) {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+		scProductEntryLocalService.setSCFrameworkVersionPersistence(scFrameworkVersionPersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence getSCProductEntryPersistence() {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getSCProductEntryPersistence();
+	}
+
+	public static void setSCProductEntryPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence) {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+		scProductEntryLocalService.setSCProductEntryPersistence(scProductEntryPersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence getSCProductScreenshotPersistence() {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getSCProductScreenshotPersistence();
+	}
+
+	public static void setSCProductScreenshotPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence) {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+		scProductEntryLocalService.setSCProductScreenshotPersistence(scProductScreenshotPersistence);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence getSCProductVersionPersistence() {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getSCProductVersionPersistence();
+	}
+
+	public static void setSCProductVersionPersistence(
+		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence) {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+		scProductEntryLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
 		long userId, long plid, java.lang.String name, java.lang.String type,
 		java.lang.String tags, java.lang.String shortDescription,

@@ -26,13 +26,12 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalArticleService;
+import com.liferay.portlet.journal.service.base.JournalArticleServiceBaseImpl;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 
@@ -47,8 +46,7 @@ import javax.portlet.PortletPreferences;
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalArticleServiceImpl
-	extends PrincipalBean implements JournalArticleService {
+public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 	public JournalArticle addArticle(
 			String articleId, boolean autoArticleId, long plid, String title,

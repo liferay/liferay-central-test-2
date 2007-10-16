@@ -26,7 +26,10 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 
 import java.util.List;
 
@@ -48,4 +51,35 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		return RatingsEntryUtil.findWithDynamicQuery(queryInitializer, begin,
 			end);
 	}
+
+	public RatingsEntryPersistence getRatingsEntryPersistence() {
+		return ratingsEntryPersistence;
+	}
+
+	public void setRatingsEntryPersistence(
+		RatingsEntryPersistence ratingsEntryPersistence) {
+		this.ratingsEntryPersistence = ratingsEntryPersistence;
+	}
+
+	public RatingsStatsLocalService getRatingsStatsLocalService() {
+		return ratingsStatsLocalService;
+	}
+
+	public void setRatingsStatsLocalService(
+		RatingsStatsLocalService ratingsStatsLocalService) {
+		this.ratingsStatsLocalService = ratingsStatsLocalService;
+	}
+
+	public RatingsStatsPersistence getRatingsStatsPersistence() {
+		return ratingsStatsPersistence;
+	}
+
+	public void setRatingsStatsPersistence(
+		RatingsStatsPersistence ratingsStatsPersistence) {
+		this.ratingsStatsPersistence = ratingsStatsPersistence;
+	}
+
+	protected RatingsEntryPersistence ratingsEntryPersistence;
+	protected RatingsStatsLocalService ratingsStatsLocalService;
+	protected RatingsStatsPersistence ratingsStatsPersistence;
 }

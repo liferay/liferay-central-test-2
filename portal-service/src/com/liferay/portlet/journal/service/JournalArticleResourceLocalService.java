@@ -57,6 +57,36 @@ public interface JournalArticleResourceLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence();
+
+	public void setJournalArticlePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence getJournalArticleImagePersistence();
+
+	public void setJournalArticleImagePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence journalArticleImagePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence getJournalArticleResourcePersistence();
+
+	public void setJournalArticleResourcePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence getJournalContentSearchPersistence();
+
+	public void setJournalContentSearchPersistence(
+		com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalStructurePersistence getJournalStructurePersistence();
+
+	public void setJournalStructurePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence getJournalTemplatePersistence();
+
+	public void setJournalTemplatePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence);
+
 	public void deleteArticleResource(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

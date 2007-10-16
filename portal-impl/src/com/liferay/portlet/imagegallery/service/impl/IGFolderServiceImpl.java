@@ -25,10 +25,9 @@ package com.liferay.portlet.imagegallery.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
-import com.liferay.portlet.imagegallery.service.IGFolderService;
+import com.liferay.portlet.imagegallery.service.base.IGFolderServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
 
 /**
@@ -37,8 +36,7 @@ import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
  * @author Brian Wing Shun Chan
  *
  */
-public class IGFolderServiceImpl
-	extends PrincipalBean implements IGFolderService {
+public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 
 	public IGFolder addFolder(
 			long plid, long parentFolderId, String name, String description,

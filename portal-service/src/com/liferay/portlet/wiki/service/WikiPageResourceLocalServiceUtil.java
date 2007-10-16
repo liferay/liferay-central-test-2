@@ -66,6 +66,42 @@ public class WikiPageResourceLocalServiceUtil {
 			begin, end);
 	}
 
+	public static com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence() {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
+		return wikiPageResourceLocalService.getWikiNodePersistence();
+	}
+
+	public static void setWikiNodePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence) {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+		wikiPageResourceLocalService.setWikiNodePersistence(wikiNodePersistence);
+	}
+
+	public static com.liferay.portlet.wiki.service.persistence.WikiPagePersistence getWikiPagePersistence() {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
+		return wikiPageResourceLocalService.getWikiPagePersistence();
+	}
+
+	public static void setWikiPagePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence) {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+		wikiPageResourceLocalService.setWikiPagePersistence(wikiPagePersistence);
+	}
+
+	public static com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence getWikiPageResourcePersistence() {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
+		return wikiPageResourceLocalService.getWikiPageResourcePersistence();
+	}
+
+	public static void setWikiPageResourcePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence) {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+		wikiPageResourceLocalService.setWikiPageResourcePersistence(wikiPageResourcePersistence);
+	}
+
 	public static void deletePageResource(long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

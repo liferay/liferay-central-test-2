@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
-import com.liferay.portal.service.RoleService;
+import com.liferay.portal.service.base.RoleServiceBaseImpl;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 
@@ -40,7 +40,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class RoleServiceImpl extends PrincipalBean implements RoleService {
+public class RoleServiceImpl extends RoleServiceBaseImpl {
 
 	public Role addRole(String name, int type)
 		throws PortalException, SystemException {

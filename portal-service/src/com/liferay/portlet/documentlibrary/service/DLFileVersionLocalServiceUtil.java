@@ -66,6 +66,66 @@ public class DLFileVersionLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.getDLFileEntryPersistence();
+	}
+
+	public static void setDLFileEntryPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence) {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+		dlFileVersionLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence getDLFileRankPersistence() {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.getDLFileRankPersistence();
+	}
+
+	public static void setDLFileRankPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence) {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+		dlFileVersionLocalService.setDLFileRankPersistence(dlFileRankPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence getDLFileShortcutPersistence() {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.getDLFileShortcutPersistence();
+	}
+
+	public static void setDLFileShortcutPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence) {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+		dlFileVersionLocalService.setDLFileShortcutPersistence(dlFileShortcutPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence getDLFileVersionPersistence() {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.getDLFileVersionPersistence();
+	}
+
+	public static void setDLFileVersionPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence dlFileVersionPersistence) {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+		dlFileVersionLocalService.setDLFileVersionPersistence(dlFileVersionPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence getDLFolderPersistence() {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.getDLFolderPersistence();
+	}
+
+	public static void setDLFolderPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence) {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+		dlFileVersionLocalService.setDLFolderPersistence(dlFolderPersistence);
+	}
+
 	public static java.util.List getFileVersions(long folderId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
 		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();

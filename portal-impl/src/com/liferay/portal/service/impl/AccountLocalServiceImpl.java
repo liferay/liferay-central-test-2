@@ -39,7 +39,7 @@ public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
 	public Account getAccount(long accountId)
 		throws PortalException, SystemException {
 
-		return AccountUtil.findByPrimaryKey(accountId);
+		return accountPersistence.findByPrimaryKey(accountId);
 	}
 
 }

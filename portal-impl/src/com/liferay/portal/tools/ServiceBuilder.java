@@ -2708,9 +2708,17 @@ public class ServiceBuilder {
 
 		// Write file
 
-		File ejbFile = new File(_outputPath + "/service/persistence/" + entity.getName() + "Persistence.java");
+		File ejbFile = new File(_serviceOutputPath + "/service/persistence/" + entity.getName() + "Persistence.java");
 
 		writeFile(ejbFile, sm.toString());
+
+		ejbFile = new File(_outputPath + "/service/persistence/" + entity.getName() + "Persistence.java");
+
+		if (ejbFile.exists()) {
+			System.out.println("Relocating " + ejbFile);
+
+			ejbFile.delete();
+		}
 	}
 
 	private void _createPersistenceImpl(Entity entity) throws IOException {
@@ -5418,6 +5426,10 @@ public class ServiceBuilder {
 					sm.append("import " + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "Service;");
 				}
 			}
+
+			if (tempEntity.hasColumns()) {
+				sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "Persistence;");
+			}
 		}
 
 		// Class declaration
@@ -5476,6 +5488,16 @@ public class ServiceBuilder {
 					sm.append("}");
 				}
 			}
+
+			if (tempEntity.hasColumns()) {
+				sm.append("public " + tempEntity.getName() + "Persistence get" + tempEntity.getName() + "Persistence() {");
+				sm.append("return " + tempEntity.getVarName() + "Persistence;");
+				sm.append("}");
+
+				sm.append("public void set" + tempEntity.getName() + "Persistence(" + tempEntity.getName() + "Persistence " + tempEntity.getVarName() + "Persistence) {");
+				sm.append("this." + tempEntity.getVarName() + "Persistence = " + tempEntity.getVarName() + "Persistence;");
+				sm.append("}");
+			}
 		}
 
 		// Fields
@@ -5496,6 +5518,10 @@ public class ServiceBuilder {
 				if (tempEntity.hasRemoteService()) {
 					sm.append("protected " + tempEntity.getName() + "Service " + tempEntity.getVarName() + "Service;");
 				}
+			}
+
+			if (tempEntity.hasColumns()) {
+				sm.append("protected " + tempEntity.getName() + "Persistence " + tempEntity.getVarName() + "Persistence;");
 			}
 		}
 
@@ -6549,25 +6575,41 @@ public class ServiceBuilder {
 		for (int i = 0; i < referenceList.size(); i++) {
 			Entity tempEntity = (Entity)referenceList.get(i);
 
+			String tempEntityName = tempEntity.getName();
+
+			char[] tempEntityNameArray = tempEntityName.toCharArray();
+
+			if (tempEntityNameArray.length > 2) {
+				if (Character.isUpperCase(tempEntityNameArray[0]) && Character.isLowerCase(tempEntityNameArray[1])) {
+					tempEntityName = tempEntity.getVarName();
+				}
+			}
+
 			if (entity.equals(tempEntity)) {
 				if ((sessionType == _REMOTE) && tempEntity.hasLocalService()) {
-					sm.append("\t\t<property name=\"" + tempEntity.getVarName() + "LocalService\">\n");
+					sm.append("\t\t<property name=\"" + tempEntityName + "LocalService\">\n");
 					sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalService.professional\" />\n");
 					sm.append("\t\t</property>\n");
 				}
 			}
 			else {
 				if (tempEntity.hasLocalService()) {
-					sm.append("\t\t<property name=\"" + tempEntity.getVarName() + "LocalService\">\n");
+					sm.append("\t\t<property name=\"" + tempEntityName + "LocalService\">\n");
 					sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalService.professional\" />\n");
 					sm.append("\t\t</property>\n");
 				}
 
 				if (tempEntity.hasRemoteService()) {
-					sm.append("\t\t<property name=\"" + tempEntity.getVarName() + "Service\">\n");
+					sm.append("\t\t<property name=\"" + tempEntityName + "Service\">\n");
 					sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "Service.professional\" />\n");
 					sm.append("\t\t</property>\n");
 				}
+			}
+
+			if (tempEntity.hasColumns()) {
+				sm.append("\t\t<property name=\"" + tempEntityName + "Persistence\">\n");
+				sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "PersistenceImpl\" />\n");
+				sm.append("\t\t</property>\n");
 			}
 		}
 

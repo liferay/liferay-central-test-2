@@ -65,6 +65,66 @@ public class DLFileRankLocalServiceUtil {
 		return dlFileRankLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.getDLFileEntryPersistence();
+	}
+
+	public static void setDLFileEntryPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence) {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+		dlFileRankLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence getDLFileRankPersistence() {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.getDLFileRankPersistence();
+	}
+
+	public static void setDLFileRankPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence) {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+		dlFileRankLocalService.setDLFileRankPersistence(dlFileRankPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence getDLFileShortcutPersistence() {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.getDLFileShortcutPersistence();
+	}
+
+	public static void setDLFileShortcutPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence) {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+		dlFileRankLocalService.setDLFileShortcutPersistence(dlFileShortcutPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence getDLFileVersionPersistence() {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.getDLFileVersionPersistence();
+	}
+
+	public static void setDLFileVersionPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence dlFileVersionPersistence) {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+		dlFileRankLocalService.setDLFileVersionPersistence(dlFileVersionPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence getDLFolderPersistence() {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.getDLFolderPersistence();
+	}
+
+	public static void setDLFolderPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence) {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+		dlFileRankLocalService.setDLFolderPersistence(dlFolderPersistence);
+	}
+
 	public static void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();

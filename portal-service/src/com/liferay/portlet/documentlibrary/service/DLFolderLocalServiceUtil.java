@@ -65,6 +65,66 @@ public class DLFolderLocalServiceUtil {
 		return dlFolderLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getDLFileEntryPersistence();
+	}
+
+	public static void setDLFileEntryPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence getDLFileRankPersistence() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getDLFileRankPersistence();
+	}
+
+	public static void setDLFileRankPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setDLFileRankPersistence(dlFileRankPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence getDLFileShortcutPersistence() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getDLFileShortcutPersistence();
+	}
+
+	public static void setDLFileShortcutPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setDLFileShortcutPersistence(dlFileShortcutPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence getDLFileVersionPersistence() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getDLFileVersionPersistence();
+	}
+
+	public static void setDLFileVersionPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence dlFileVersionPersistence) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setDLFileVersionPersistence(dlFileVersionPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence getDLFolderPersistence() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getDLFolderPersistence();
+	}
+
+	public static void setDLFolderPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setDLFolderPersistence(dlFolderPersistence);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

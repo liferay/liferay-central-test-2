@@ -24,10 +24,9 @@ package com.liferay.portlet.tags.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
-import com.liferay.portlet.tags.service.TagsPropertyService;
+import com.liferay.portlet.tags.service.base.TagsPropertyServiceBaseImpl;
 
 import java.util.List;
 
@@ -37,8 +36,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsPropertyServiceImpl
-	extends PrincipalBean implements TagsPropertyService {
+public class TagsPropertyServiceImpl extends TagsPropertyServiceBaseImpl {
 
 	public TagsProperty addProperty(long entryId, String key, String value)
 		throws PortalException, SystemException {

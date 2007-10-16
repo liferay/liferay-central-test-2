@@ -27,11 +27,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
+import com.liferay.portlet.documentlibrary.service.base.DLFileEntryServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
@@ -44,8 +43,7 @@ import java.rmi.RemoteException;
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFileEntryServiceImpl
-	extends PrincipalBean implements DLFileEntryService {
+public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
 			long folderId, String name, String title, String description,

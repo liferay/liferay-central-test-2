@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
-import com.liferay.portal.service.UserGroupRoleService;
+import com.liferay.portal.service.base.UserGroupRoleServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 
 /**
@@ -35,8 +35,7 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
  * @author Brian Wing Shun Chan
  *
  */
-public class UserGroupRoleServiceImpl
-	extends PrincipalBean implements UserGroupRoleService {
+public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 
 	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws PortalException, SystemException {

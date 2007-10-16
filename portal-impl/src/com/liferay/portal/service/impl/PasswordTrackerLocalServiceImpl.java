@@ -54,7 +54,7 @@ public class PasswordTrackerLocalServiceImpl
 	public boolean isSameAsCurrentPassword(long userId, String newClearTextPwd)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		String currentPwd = user.getPassword();
 
@@ -118,7 +118,7 @@ public class PasswordTrackerLocalServiceImpl
 	public void trackPassword(long userId, String encPwd)
 		throws PortalException, SystemException {
 
-		long passwordTrackerId = CounterLocalServiceUtil.increment();
+		long passwordTrackerId = counterLocalService.increment();
 
 		PasswordTracker passwordTracker =
 			PasswordTrackerUtil.create(passwordTrackerId);

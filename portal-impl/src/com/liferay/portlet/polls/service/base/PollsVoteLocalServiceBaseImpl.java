@@ -25,7 +25,13 @@ package com.liferay.portlet.polls.service.base;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.polls.service.PollsChoiceLocalService;
+import com.liferay.portlet.polls.service.PollsQuestionLocalService;
+import com.liferay.portlet.polls.service.PollsQuestionService;
 import com.liferay.portlet.polls.service.PollsVoteLocalService;
+import com.liferay.portlet.polls.service.persistence.PollsChoicePersistence;
+import com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence;
+import com.liferay.portlet.polls.service.persistence.PollsVotePersistence;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
 
 import java.util.List;
@@ -47,4 +53,65 @@ public abstract class PollsVoteLocalServiceBaseImpl
 		int begin, int end) throws SystemException {
 		return PollsVoteUtil.findWithDynamicQuery(queryInitializer, begin, end);
 	}
+
+	public PollsChoiceLocalService getPollsChoiceLocalService() {
+		return pollsChoiceLocalService;
+	}
+
+	public void setPollsChoiceLocalService(
+		PollsChoiceLocalService pollsChoiceLocalService) {
+		this.pollsChoiceLocalService = pollsChoiceLocalService;
+	}
+
+	public PollsChoicePersistence getPollsChoicePersistence() {
+		return pollsChoicePersistence;
+	}
+
+	public void setPollsChoicePersistence(
+		PollsChoicePersistence pollsChoicePersistence) {
+		this.pollsChoicePersistence = pollsChoicePersistence;
+	}
+
+	public PollsQuestionLocalService getPollsQuestionLocalService() {
+		return pollsQuestionLocalService;
+	}
+
+	public void setPollsQuestionLocalService(
+		PollsQuestionLocalService pollsQuestionLocalService) {
+		this.pollsQuestionLocalService = pollsQuestionLocalService;
+	}
+
+	public PollsQuestionService getPollsQuestionService() {
+		return pollsQuestionService;
+	}
+
+	public void setPollsQuestionService(
+		PollsQuestionService pollsQuestionService) {
+		this.pollsQuestionService = pollsQuestionService;
+	}
+
+	public PollsQuestionPersistence getPollsQuestionPersistence() {
+		return pollsQuestionPersistence;
+	}
+
+	public void setPollsQuestionPersistence(
+		PollsQuestionPersistence pollsQuestionPersistence) {
+		this.pollsQuestionPersistence = pollsQuestionPersistence;
+	}
+
+	public PollsVotePersistence getPollsVotePersistence() {
+		return pollsVotePersistence;
+	}
+
+	public void setPollsVotePersistence(
+		PollsVotePersistence pollsVotePersistence) {
+		this.pollsVotePersistence = pollsVotePersistence;
+	}
+
+	protected PollsChoiceLocalService pollsChoiceLocalService;
+	protected PollsChoicePersistence pollsChoicePersistence;
+	protected PollsQuestionLocalService pollsQuestionLocalService;
+	protected PollsQuestionService pollsQuestionService;
+	protected PollsQuestionPersistence pollsQuestionPersistence;
+	protected PollsVotePersistence pollsVotePersistence;
 }

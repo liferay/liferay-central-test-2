@@ -65,6 +65,30 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence getIGFolderPersistence() {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getIGFolderPersistence();
+	}
+
+	public static void setIGFolderPersistence(
+		com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence) {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		igImageLocalService.setIGFolderPersistence(igFolderPersistence);
+	}
+
+	public static com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence getIGImagePersistence() {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getIGImagePersistence();
+	}
+
+	public static void setIGImagePersistence(
+		com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence) {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		igImageLocalService.setIGImagePersistence(igImagePersistence);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
 		long userId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,

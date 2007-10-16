@@ -27,10 +27,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
-import com.liferay.portlet.polls.service.PollsVoteService;
+import com.liferay.portlet.polls.service.base.PollsVoteServiceBaseImpl;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
 
 /**
@@ -39,8 +38,7 @@ import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
  * @author Brian Wing Shun Chan
  *
  */
-public class PollsVoteServiceImpl extends PrincipalBean
-	implements PollsVoteService {
+public class PollsVoteServiceImpl extends PollsVoteServiceBaseImpl {
 
 	public PollsVote addVote(long questionId, long choiceId)
 		throws PortalException, SystemException {

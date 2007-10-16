@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
-import com.liferay.portal.service.PhoneService;
+import com.liferay.portal.service.base.PhoneServiceBaseImpl;
 import com.liferay.portal.service.permission.CommonPermissionUtil;
 import com.liferay.portal.service.persistence.PhoneUtil;
 
@@ -39,7 +39,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
+public class PhoneServiceImpl extends PhoneServiceBaseImpl {
 
 	public Phone addPhone(
 			String className, long classPK, String number, String extension,

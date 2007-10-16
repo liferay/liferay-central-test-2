@@ -148,7 +148,7 @@ public class PortletPreferencesLocalServiceImpl
 					ownerId, ownerType, plid, portletId);
 			}
 			catch (NoSuchPortletPreferencesException nsppe) {
-				long portletPreferencesId = CounterLocalServiceUtil.increment();
+				long portletPreferencesId = counterLocalService.increment();
 
 				portletPreferences = PortletPreferencesUtil.create(
 					portletPreferencesId);
@@ -194,7 +194,7 @@ public class PortletPreferencesLocalServiceImpl
 				ownerId, ownerType, plid, portletId);
 		}
 		catch (NoSuchPortletPreferencesException nsppe) {
-			long portletPreferencesId = CounterLocalServiceUtil.increment();
+			long portletPreferencesId = counterLocalService.increment();
 
 			portletPreferences = PortletPreferencesUtil.create(
 				portletPreferencesId);

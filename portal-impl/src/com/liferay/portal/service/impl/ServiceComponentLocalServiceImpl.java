@@ -78,7 +78,7 @@ public class ServiceComponentLocalServiceImpl
 			buildNamespace, 0, 1);
 
 		if (serviceComponents.size() == 0) {
-			long serviceComponentId = CounterLocalServiceUtil.increment();
+			long serviceComponentId = counterLocalService.increment();
 
 			serviceComponent = ServiceComponentUtil.create(serviceComponentId);
 
@@ -92,7 +92,7 @@ public class ServiceComponentLocalServiceImpl
 			if (serviceComponent.getBuildNumber() < buildNumber) {
 				previousServiceComponent = serviceComponent;
 
-				long serviceComponentId = CounterLocalServiceUtil.increment();
+				long serviceComponentId = counterLocalService.increment();
 
 				serviceComponent =
 					ServiceComponentUtil.create(serviceComponentId);

@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.base.ResourceServiceBaseImpl;
 
 /**
  * <a href="ResourceServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -34,8 +34,7 @@ import com.liferay.portal.service.ResourceService;
  * @author Brian Wing Shun Chan
  *
  */
-public class ResourceServiceImpl
-	extends PrincipalBean implements ResourceService {
+public class ResourceServiceImpl extends ResourceServiceBaseImpl {
 
 	public Resource getResource(
 			long companyId, String name, int scope, String primKey)

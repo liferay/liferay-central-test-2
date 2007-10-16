@@ -373,7 +373,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		Portlet portlet = PortletUtil.fetchByC_P(companyId, portletId);
 
 		if (portlet == null) {
-			long id = CounterLocalServiceUtil.increment();
+			long id = counterLocalService.increment();
 
 			portlet = PortletUtil.create(id);
 

@@ -22,8 +22,7 @@
 
 package com.liferay.portlet.tags.service.impl;
 
-import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portlet.tags.service.TagsSourceService;
+import com.liferay.portlet.tags.service.base.TagsSourceServiceBaseImpl;
 
 /**
  * <a href="TagsSourceServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -31,6 +30,5 @@ import com.liferay.portlet.tags.service.TagsSourceService;
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsSourceServiceImpl extends PrincipalBean
-	implements TagsSourceService {
+public class TagsSourceServiceImpl extends TagsSourceServiceBaseImpl {
 }

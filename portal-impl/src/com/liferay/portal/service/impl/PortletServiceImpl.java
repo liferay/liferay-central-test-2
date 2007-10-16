@@ -28,8 +28,8 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.service.PortletService;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.base.PortletServiceBaseImpl;
 
 /**
  * <a href="PortletServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -37,8 +37,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletServiceImpl
-	extends PrincipalBean implements PortletService {
+public class PortletServiceImpl extends PortletServiceBaseImpl {
 
 	public Portlet updatePortlet(
 			long companyId, String portletId, String roles, boolean active)

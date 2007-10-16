@@ -60,7 +60,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 			boolean primary)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
@@ -68,7 +68,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 			0, user.getCompanyId(), classNameId, classPK, street1, city, zip,
 			regionId, countryId, typeId, mailing, primary);
 
-		long addressId = CounterLocalServiceUtil.increment();
+		long addressId = counterLocalService.increment();
 
 		Address address = AddressUtil.create(addressId);
 

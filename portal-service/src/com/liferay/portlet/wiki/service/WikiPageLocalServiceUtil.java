@@ -65,6 +65,42 @@ public class WikiPageLocalServiceUtil {
 		return wikiPageLocalService.dynamicQuery(queryInitializer, begin, end);
 	}
 
+	public static com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getWikiNodePersistence();
+	}
+
+	public static void setWikiNodePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.setWikiNodePersistence(wikiNodePersistence);
+	}
+
+	public static com.liferay.portlet.wiki.service.persistence.WikiPagePersistence getWikiPagePersistence() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getWikiPagePersistence();
+	}
+
+	public static void setWikiPagePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.setWikiPagePersistence(wikiPagePersistence);
+	}
+
+	public static com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence getWikiPageResourcePersistence() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getWikiPageResourcePersistence();
+	}
+
+	public static void setWikiPageResourcePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.setWikiPageResourcePersistence(wikiPageResourcePersistence);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
 		long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException, 

@@ -25,10 +25,9 @@ package com.liferay.portlet.shopping.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
-import com.liferay.portlet.shopping.service.ShoppingCategoryService;
+import com.liferay.portlet.shopping.service.base.ShoppingCategoryServiceBaseImpl;
 import com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission;
 
 /**
@@ -38,7 +37,7 @@ import com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermissio
  *
  */
 public class ShoppingCategoryServiceImpl
-	extends PrincipalBean implements ShoppingCategoryService {
+	extends ShoppingCategoryServiceBaseImpl {
 
 	public ShoppingCategory addCategory(
 			long plid, long parentCategoryId, String name, String description,

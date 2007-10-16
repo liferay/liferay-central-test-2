@@ -25,11 +25,10 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil;
-import com.liferay.portlet.softwarecatalog.service.SCLicenseService;
+import com.liferay.portlet.softwarecatalog.service.base.SCLicenseServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.permission.SCLicensePermission;
 
 /**
@@ -39,8 +38,7 @@ import com.liferay.portlet.softwarecatalog.service.permission.SCLicensePermissio
  * @author Brian Wing Shun Chan
  *
  */
-public class SCLicenseServiceImpl
-	extends PrincipalBean implements SCLicenseService {
+public class SCLicenseServiceImpl extends SCLicenseServiceBaseImpl {
 
 	public SCLicense addLicense(
 			String name, String url, boolean openSource, boolean active,

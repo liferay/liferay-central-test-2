@@ -110,7 +110,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Group
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		if ((classNameId <= 0) || (classPK <= 0)) {
@@ -121,7 +121,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		validateFriendlyURL(0, user.getCompanyId(), friendlyURL);
 
-		long groupId = CounterLocalServiceUtil.increment();
+		long groupId = counterLocalService.increment();
 
 		if ((classNameId > 0) && (classPK > 0)) {
 			name = String.valueOf(groupId);

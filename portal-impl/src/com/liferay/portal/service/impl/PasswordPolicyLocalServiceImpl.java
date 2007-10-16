@@ -72,12 +72,12 @@ public class PasswordPolicyLocalServiceImpl
 
 		// Password policy
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
 		validate(0, user.getCompanyId(), name);
 
-		long passwordPolicyId = CounterLocalServiceUtil.increment();
+		long passwordPolicyId = counterLocalService.increment();
 
 		PasswordPolicy passwordPolicy = PasswordPolicyUtil.create(
 			passwordPolicyId);
@@ -224,7 +224,7 @@ public class PasswordPolicyLocalServiceImpl
 	public PasswordPolicy getPasswordPolicyByUserId(long userId)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		if (PortalLDAPUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
 			return null;

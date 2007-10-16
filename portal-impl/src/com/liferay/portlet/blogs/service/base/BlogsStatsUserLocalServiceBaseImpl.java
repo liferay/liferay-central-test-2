@@ -25,7 +25,14 @@ package com.liferay.portlet.blogs.service.base;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
+import com.liferay.portlet.blogs.service.BlogsCategoryService;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
+import com.liferay.portlet.blogs.service.BlogsEntryService;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
+import com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
 
 import java.util.List;
@@ -48,4 +55,74 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		return BlogsStatsUserUtil.findWithDynamicQuery(queryInitializer, begin,
 			end);
 	}
+
+	public BlogsCategoryLocalService getBlogsCategoryLocalService() {
+		return blogsCategoryLocalService;
+	}
+
+	public void setBlogsCategoryLocalService(
+		BlogsCategoryLocalService blogsCategoryLocalService) {
+		this.blogsCategoryLocalService = blogsCategoryLocalService;
+	}
+
+	public BlogsCategoryService getBlogsCategoryService() {
+		return blogsCategoryService;
+	}
+
+	public void setBlogsCategoryService(
+		BlogsCategoryService blogsCategoryService) {
+		this.blogsCategoryService = blogsCategoryService;
+	}
+
+	public BlogsCategoryPersistence getBlogsCategoryPersistence() {
+		return blogsCategoryPersistence;
+	}
+
+	public void setBlogsCategoryPersistence(
+		BlogsCategoryPersistence blogsCategoryPersistence) {
+		this.blogsCategoryPersistence = blogsCategoryPersistence;
+	}
+
+	public BlogsEntryLocalService getBlogsEntryLocalService() {
+		return blogsEntryLocalService;
+	}
+
+	public void setBlogsEntryLocalService(
+		BlogsEntryLocalService blogsEntryLocalService) {
+		this.blogsEntryLocalService = blogsEntryLocalService;
+	}
+
+	public BlogsEntryService getBlogsEntryService() {
+		return blogsEntryService;
+	}
+
+	public void setBlogsEntryService(BlogsEntryService blogsEntryService) {
+		this.blogsEntryService = blogsEntryService;
+	}
+
+	public BlogsEntryPersistence getBlogsEntryPersistence() {
+		return blogsEntryPersistence;
+	}
+
+	public void setBlogsEntryPersistence(
+		BlogsEntryPersistence blogsEntryPersistence) {
+		this.blogsEntryPersistence = blogsEntryPersistence;
+	}
+
+	public BlogsStatsUserPersistence getBlogsStatsUserPersistence() {
+		return blogsStatsUserPersistence;
+	}
+
+	public void setBlogsStatsUserPersistence(
+		BlogsStatsUserPersistence blogsStatsUserPersistence) {
+		this.blogsStatsUserPersistence = blogsStatsUserPersistence;
+	}
+
+	protected BlogsCategoryLocalService blogsCategoryLocalService;
+	protected BlogsCategoryService blogsCategoryService;
+	protected BlogsCategoryPersistence blogsCategoryPersistence;
+	protected BlogsEntryLocalService blogsEntryLocalService;
+	protected BlogsEntryService blogsEntryService;
+	protected BlogsEntryPersistence blogsEntryPersistence;
+	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
 }

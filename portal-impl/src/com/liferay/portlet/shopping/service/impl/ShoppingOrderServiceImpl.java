@@ -25,12 +25,11 @@ package com.liferay.portlet.shopping.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
-import com.liferay.portlet.shopping.service.ShoppingOrderService;
+import com.liferay.portlet.shopping.service.base.ShoppingOrderServiceBaseImpl;
 
 /**
  * <a href="ShoppingOrderServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -38,8 +37,7 @@ import com.liferay.portlet.shopping.service.ShoppingOrderService;
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingOrderServiceImpl
-	extends PrincipalBean implements ShoppingOrderService {
+public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 
 	public void completeOrder(
 			long plid, String number, String ppTxnId, String ppPaymentStatus,

@@ -25,10 +25,9 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBCategoryService;
+import com.liferay.portlet.messageboards.service.base.MBCategoryServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 
 /**
@@ -37,8 +36,7 @@ import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission
  * @author Brian Wing Shun Chan
  *
  */
-public class MBCategoryServiceImpl
-	extends PrincipalBean implements MBCategoryService {
+public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 	public MBCategory addCategory(
 			long plid, long parentCategoryId, String name, String description,

@@ -159,7 +159,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String type = null;
 			String size = null;
 
-			long companyId = CounterLocalServiceUtil.increment();
+			long companyId = counterLocalService.increment();
 
 			company = CompanyUtil.create(companyId);
 
@@ -233,7 +233,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 		}
 		catch (NoSuchUserException nsue) {
-			long userId = CounterLocalServiceUtil.increment();
+			long userId = counterLocalService.increment();
 
 			defaultUser = UserUtil.create(userId);
 
@@ -540,7 +540,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			account = AccountUtil.findByPrimaryKey(company.getAccountId());
 		}
 		catch (NoSuchAccountException nsae) {
-			long accountId = CounterLocalServiceUtil.increment();
+			long accountId = counterLocalService.increment();
 
 			account = AccountUtil.create(accountId);
 
@@ -590,7 +590,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		long logoId = company.getLogoId();
 
 		if (logoId <= 0) {
-			logoId = CounterLocalServiceUtil.increment();
+			logoId = counterLocalService.increment();
 
 			company.setLogoId(logoId);
 		}

@@ -93,7 +93,7 @@ public class OrganizationLocalServiceImpl
 
 		// Organization
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		parentOrganizationId = getParentOrganizationId(
 			user.getCompanyId(), parentOrganizationId);
 
@@ -101,7 +101,7 @@ public class OrganizationLocalServiceImpl
 			user.getCompanyId(), parentOrganizationId, name, type, countryId,
 			statusId);
 
-		long organizationId = CounterLocalServiceUtil.increment();
+		long organizationId = counterLocalService.increment();
 
 		Organization organization = OrganizationUtil.create(organizationId);
 

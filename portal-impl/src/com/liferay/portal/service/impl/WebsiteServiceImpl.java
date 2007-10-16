@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
-import com.liferay.portal.service.WebsiteService;
+import com.liferay.portal.service.base.WebsiteServiceBaseImpl;
 import com.liferay.portal.service.permission.CommonPermissionUtil;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
@@ -39,8 +39,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class WebsiteServiceImpl
-	extends PrincipalBean implements WebsiteService {
+public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 
 	public Website addWebsite(
 			String className, long classPK, String url, int typeId,
@@ -50,7 +49,7 @@ public class WebsiteServiceImpl
 		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
 
-		return WebsiteLocalServiceUtil.addWebsite(
+		return websiteLocalService.addWebsite(
 			getUserId(), className, classPK, url, typeId, primary);
 	}
 
@@ -63,7 +62,7 @@ public class WebsiteServiceImpl
 			getPermissionChecker(), website.getClassNameId(),
 			website.getClassPK(), ActionKeys.UPDATE);
 
-		WebsiteLocalServiceUtil.deleteWebsite(websiteId);
+		websiteLocalService.deleteWebsite(websiteId);
 	}
 
 	public Website getWebsite(long websiteId)
@@ -84,7 +83,7 @@ public class WebsiteServiceImpl
 		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
-		return WebsiteLocalServiceUtil.getWebsites(
+		return websiteLocalService.getWebsites(
 			getUser().getCompanyId(), className, classPK);
 	}
 
@@ -98,7 +97,7 @@ public class WebsiteServiceImpl
 			getPermissionChecker(), website.getClassNameId(),
 			website.getClassPK(), ActionKeys.UPDATE);
 
-		return WebsiteLocalServiceUtil.updateWebsite(
+		return websiteLocalService.updateWebsite(
 			websiteId, url, typeId, primary);
 	}
 

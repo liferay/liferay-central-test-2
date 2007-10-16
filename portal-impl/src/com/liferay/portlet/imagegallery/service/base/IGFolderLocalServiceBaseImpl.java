@@ -26,7 +26,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
+import com.liferay.portlet.imagegallery.service.IGImageLocalService;
+import com.liferay.portlet.imagegallery.service.IGImageService;
+import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
+import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
 
 import java.util.List;
 
@@ -47,4 +51,41 @@ public abstract class IGFolderLocalServiceBaseImpl
 		int begin, int end) throws SystemException {
 		return IGFolderUtil.findWithDynamicQuery(queryInitializer, begin, end);
 	}
+
+	public IGFolderPersistence getIGFolderPersistence() {
+		return igFolderPersistence;
+	}
+
+	public void setIGFolderPersistence(IGFolderPersistence igFolderPersistence) {
+		this.igFolderPersistence = igFolderPersistence;
+	}
+
+	public IGImageLocalService getIGImageLocalService() {
+		return igImageLocalService;
+	}
+
+	public void setIGImageLocalService(IGImageLocalService igImageLocalService) {
+		this.igImageLocalService = igImageLocalService;
+	}
+
+	public IGImageService getIGImageService() {
+		return igImageService;
+	}
+
+	public void setIGImageService(IGImageService igImageService) {
+		this.igImageService = igImageService;
+	}
+
+	public IGImagePersistence getIGImagePersistence() {
+		return igImagePersistence;
+	}
+
+	public void setIGImagePersistence(IGImagePersistence igImagePersistence) {
+		this.igImagePersistence = igImagePersistence;
+	}
+
+	protected IGFolderPersistence igFolderPersistence;
+	protected IGImageLocalService igImageLocalService;
+	protected IGImageService igImageService;
+	protected IGImagePersistence igImagePersistence;
 }

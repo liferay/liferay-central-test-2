@@ -24,10 +24,9 @@ package com.liferay.portlet.ratings.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
-import com.liferay.portlet.ratings.service.RatingsEntryService;
+import com.liferay.portlet.ratings.service.base.RatingsEntryServiceBaseImpl;
 
 /**
  * <a href="RatingsEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -35,8 +34,7 @@ import com.liferay.portlet.ratings.service.RatingsEntryService;
  * @author Brian Wing Shun Chan
  *
  */
-public class RatingsEntryServiceImpl
-	extends PrincipalBean implements RatingsEntryService {
+public class RatingsEntryServiceImpl extends RatingsEntryServiceBaseImpl {
 
 	public RatingsEntry updateEntry(
 			String className, long classPK, double score)
