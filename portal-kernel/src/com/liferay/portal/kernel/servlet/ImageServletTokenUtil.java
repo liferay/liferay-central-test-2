@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,31 +19,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/journal/init.jsp" %>
+package com.liferay.portal.kernel.servlet;
 
-<%
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
-JournalTemplate template = (JournalTemplate)row.getObject();
+/**
+ * <a href="ImageServletTokenUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class ImageServletTokenUtil {
 
-String rowHREF = (String)row.getParameter("rowHREF");
-%>
+	public static ImageServletToken getImageServletToken() {
+		return _getUtil()._imageServletToken;
+	}
 
-<a href="<%= rowHREF %>">
+	public static String getToken(long imageId) {
+		return getImageServletToken().getToken(imageId);
+	}
 
-<c:choose>
-	<c:when test="<%= template.isSmallImage() %>">
-		<img border="0" src="<%= Validator.isNotNull(template.getSmallImageURL()) ? template.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + template.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(template.getSmallImageId()) %>" />
-	</c:when>
-	<c:otherwise>
-		<%= template.getName() %><br />
+	public static void resetToken(long imageId) {
+		getImageServletToken().resetToken(imageId);
+	}
 
-		<span style="font-size: xx-small;">
-		<%= template.getDescription() %>
-		</span>
-	</c:otherwise>
-</c:choose>
+	public void setImageServletToken(ImageServletToken imageServletToken) {
+		_imageServletToken = imageServletToken;
+	}
 
-</a>
+	private static ImageServletTokenUtil _getUtil() {
+		if (_util == null) {
+			_util = (ImageServletTokenUtil)BeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = ImageServletTokenUtil.class.getName();
+
+	private static ImageServletTokenUtil _util;
+
+	private ImageServletToken _imageServletToken;
+
+}

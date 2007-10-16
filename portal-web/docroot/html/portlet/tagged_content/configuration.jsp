@@ -218,7 +218,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								sm.append("/image_gallery?img_id=");
 								sm.append(image.getSmallImageId());
 								sm.append("&t=");
-								sm.append(ImageServletToken.getToken(image.getSmallImageId()));
+								sm.append(ImageServletTokenUtil.getToken(image.getSmallImageId()));
 								sm.append("\" title=\"");
 								sm.append(image.getDescription());
 								sm.append("\" />");

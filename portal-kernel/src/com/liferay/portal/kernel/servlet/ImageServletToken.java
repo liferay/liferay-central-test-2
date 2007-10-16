@@ -20,29 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet;
+package com.liferay.portal.kernel.servlet;
 
 /**
- * <a href="ImageServletToken_IW.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImageServletToken.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ImageServletToken_IW {
-	public static ImageServletToken_IW getInstance() {
-		return _instance;
-	}
+public interface ImageServletToken {
 
-	public java.lang.String getToken(long imageId) {
-		return ImageServletToken.getToken(imageId);
-	}
+	public String getToken(long imageId);
 
-	public void resetToken(long imageId) {
-		ImageServletToken.resetToken(imageId);
-	}
+	public void resetToken(long imageId);
 
-	private ImageServletToken_IW() {
-	}
-
-	private static ImageServletToken_IW _instance = new ImageServletToken_IW();
 }

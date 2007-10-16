@@ -26,6 +26,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -39,7 +40,6 @@ import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.servlet.ImageServletToken;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
@@ -658,11 +658,11 @@ public class SCProductEntryLocalServiceImpl
 			DocUtil.add(
 				screenshotEl, "thumbnail-url",
 				baseImageURL + "?img_id=" + thumbnailId + "&t=" +
-					ImageServletToken.getToken(thumbnailId));
+					ImageServletTokenUtil.getToken(thumbnailId));
 			DocUtil.add(
 				screenshotEl, "large-image-url",
 				baseImageURL + "?img_id=" + fullImageId + "&t=" +
-					ImageServletToken.getToken(fullImageId));
+					ImageServletTokenUtil.getToken(fullImageId));
 		}
 
 		Element licensesEl = el.addElement("licenses");

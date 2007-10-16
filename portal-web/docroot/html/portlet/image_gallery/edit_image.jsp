@@ -105,7 +105,7 @@ if (image != null) {
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +"&t=" + ImageServletToken.getToken(image.getLargeImageId()) %>'
+				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +"&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId()) %>'
 			/>
 		</td>
 	</tr>

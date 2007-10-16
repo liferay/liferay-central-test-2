@@ -109,7 +109,7 @@ for (int i = 0; i < results.size(); i++) {
 			sm.append("/shopping/item?img_id=");
 			sm.append(item.getSmallImageId());
 			sm.append("&t=");
-			sm.append(ImageServletToken.getToken(item.getSmallImageId()));
+			sm.append(ImageServletTokenUtil.getToken(item.getSmallImageId()));
 		}
 
 		sm.append("\">");

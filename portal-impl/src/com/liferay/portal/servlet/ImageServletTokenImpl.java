@@ -25,22 +25,23 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.cms.servlet.CMSServletUtil;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.servlet.ImageServletToken;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
 /**
- * <a href="ImageServletToken.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImageServletTokenImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ImageServletToken {
+public class ImageServletTokenImpl implements ImageServletToken {
 
 	public static final String CACHE_NAME = ImageServletToken.class.getName();
 
-	public static String getToken(long imageId) {
+	public String getToken(long imageId) {
 		String key = _encodeKey(imageId);
 
 		String token = (String)MultiVMPoolUtil.get(_cache, key);
@@ -54,7 +55,7 @@ public class ImageServletToken {
 		return token;
 	}
 
-	public static void resetToken(long imageId) {
+	public void resetToken(long imageId) {
 		String key = _encodeKey(imageId);
 
 		_cache.remove(key);
@@ -72,11 +73,11 @@ public class ImageServletToken {
 		LayoutCacheUtil.clearCache();
 	}
 
-	private static String _createToken(long imageId) {
+	private String _createToken(long imageId) {
 		return String.valueOf(System.currentTimeMillis());
 	}
 
-	private static String _encodeKey(long imageId) {
+	private String _encodeKey(long imageId) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(CACHE_NAME);

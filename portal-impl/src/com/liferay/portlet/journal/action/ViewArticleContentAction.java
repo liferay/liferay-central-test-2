@@ -23,13 +23,13 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.impl.ImageLocalUtil;
-import com.liferay.portal.servlet.ImageServletToken;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -223,7 +223,7 @@ public class ViewArticleContentAction extends Action {
 
 					dynamicContent.setText(
 						"/image/journal/article?img_id=" + imageId + "&t=" +
-							ImageServletToken.getToken(imageId));
+							ImageServletTokenUtil.getToken(imageId));
 
 					ImageLocalUtil.updateImage(imageId, bytes);
 				}
@@ -236,7 +236,7 @@ public class ViewArticleContentAction extends Action {
 
 						dynamicContent.setText(
 							"/image/journal/article?img_id=" + imageId + "&t=" +
-								ImageServletToken.getToken(imageId));
+								ImageServletTokenUtil.getToken(imageId));
 					}
 				}
 			}

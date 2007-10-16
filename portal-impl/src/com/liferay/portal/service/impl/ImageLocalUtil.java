@@ -23,10 +23,10 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
-import com.liferay.portal.servlet.ImageServletToken;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 
@@ -189,7 +189,7 @@ public class ImageLocalUtil {
 		Image image = ImageLocalServiceUtil.updateImage(
 			imageId, bytes, type, height, width, size);
 
-		ImageServletToken.resetToken(imageId);
+		ImageServletTokenUtil.resetToken(imageId);
 
 		return image;
 	}
