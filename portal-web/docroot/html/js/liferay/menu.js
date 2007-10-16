@@ -27,11 +27,13 @@ Liferay.Menu = new Class({
 				var trigger = jQuery(this);
 
 				var parent = trigger.parent();
+
 				if (parent.is('.visible')) {
 					parent.removeClass('visible');
 				}
 				else {
 					instance._button.removeClass('visible');
+
 					parent.addClass('visible');
 				}
 
@@ -41,14 +43,14 @@ Liferay.Menu = new Class({
 				);
 
 				var originalTarget = jQuery(event.originalTarget || event.srcElement);
+
 				if (!originalTarget.is('a') && !originalTarget.is('img')) {
 					return false;
 				}
-				
 			};
 
 			instance._trigger.unbind().click(on);
-		} 
+		}
 		else {
 			instance._button.hide();
 		}
