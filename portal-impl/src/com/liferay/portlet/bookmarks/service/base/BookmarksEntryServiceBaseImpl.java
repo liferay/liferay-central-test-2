@@ -29,33 +29,31 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.impl.PrincipalBean;
 
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetService;
 
-import java.util.List;
-
 /**
- * <a href="BookmarksEntryLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="BookmarksEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class BookmarksEntryLocalServiceBaseImpl
-	implements BookmarksEntryLocalService {
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		return BookmarksEntryUtil.findWithDynamicQuery(queryInitializer);
+public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
+	implements BookmarksEntryService {
+	public BookmarksEntryLocalService getBookmarksEntryLocalService() {
+		return bookmarksEntryLocalService;
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		return BookmarksEntryUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+	public void setBookmarksEntryLocalService(
+		BookmarksEntryLocalService bookmarksEntryLocalService) {
+		this.bookmarksEntryLocalService = bookmarksEntryLocalService;
 	}
 
 	public BookmarksFolderLocalService getBookmarksFolderLocalService() {
@@ -126,6 +124,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		this.tagsAssetService = tagsAssetService;
 	}
 
+	protected BookmarksEntryLocalService bookmarksEntryLocalService;
 	protected BookmarksFolderLocalService bookmarksFolderLocalService;
 	protected BookmarksFolderService bookmarksFolderService;
 	protected CounterLocalService counterLocalService;

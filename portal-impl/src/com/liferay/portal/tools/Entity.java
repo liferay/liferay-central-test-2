@@ -47,7 +47,7 @@ public class Entity {
 
 	public Entity(String name) {
 		this(null, null, null, name, null, false, true, null, null, null, null,
-			 null, null, null, null, null, null, null);
+			 null, null, null, null, null, null, null, null);
 	}
 
 	public Entity(String packagePath, String portletName,
@@ -56,7 +56,8 @@ public class Entity {
 				  String persistenceClass, String dataSource,
 				  String sessionFactory, String txManager, List pkList,
 				  List regularColList, List collectionList, List columnList,
-				  EntityOrder order, List finderList, List txRequiredList) {
+				  EntityOrder order, List finderList, List referenceList,
+				  List txRequiredList) {
 
 		_packagePath = packagePath;
 		_portletName = portletName;
@@ -77,6 +78,7 @@ public class Entity {
 		_columnList = columnList;
 		_order = order;
 		_finderList = finderList;
+		_referenceList = referenceList;
 		_txRequiredList = txRequiredList;
 	}
 
@@ -225,6 +227,10 @@ public class Entity {
 		return _finderList;
 	}
 
+	public List getReferenceList() {
+		return _referenceList;
+	}
+
 	public List getTxRequiredList() {
 		return _txRequiredList;
 	}
@@ -277,6 +283,7 @@ public class Entity {
 	private List _columnList;
 	private EntityOrder _order;
 	private List _finderList;
+	private List _referenceList;
 	private List _txRequiredList;
 
 }

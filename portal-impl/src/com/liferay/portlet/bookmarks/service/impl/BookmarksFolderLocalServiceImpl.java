@@ -22,20 +22,17 @@
 
 package com.liferay.portlet.bookmarks.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.FolderNameException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
@@ -94,7 +91,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		validate(name);
 
-		long folderId = CounterLocalServiceUtil.increment();
+		long folderId = counterLocalService.increment();
 
 		BookmarksFolder folder = BookmarksFolderUtil.create(folderId);
 
@@ -141,7 +138,7 @@ public class BookmarksFolderLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
 			BookmarksFolder.class.getName(), folder.getFolderId(), false,
 			addCommunityPermissions, addGuestPermissions);
@@ -162,7 +159,7 @@ public class BookmarksFolderLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
 			BookmarksFolder.class.getName(), folder.getFolderId(),
 			communityPermissions, guestPermissions);
@@ -192,11 +189,11 @@ public class BookmarksFolderLocalServiceImpl
 
 		// Entries
 
-		BookmarksEntryLocalServiceUtil.deleteEntries(folder.getFolderId());
+		bookmarksEntryLocalService.deleteEntries(folder.getFolderId());
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			folder.getCompanyId(), BookmarksFolder.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, folder.getFolderId());
 

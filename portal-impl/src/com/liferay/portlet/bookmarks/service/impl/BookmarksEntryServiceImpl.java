@@ -25,10 +25,8 @@ package com.liferay.portlet.bookmarks.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
+import com.liferay.portlet.bookmarks.service.base.BookmarksEntryServiceBaseImpl;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission;
 
@@ -38,8 +36,7 @@ import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermissio
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksEntryServiceImpl
-	extends PrincipalBean implements BookmarksEntryService {
+public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 
 	public BookmarksEntry addEntry(
 			long folderId, String name, String url, String comments,
@@ -50,7 +47,7 @@ public class BookmarksEntryServiceImpl
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_ENTRY);
 
-		return BookmarksEntryLocalServiceUtil.addEntry(
+		return bookmarksEntryLocalService.addEntry(
 			getUserId(), folderId, name, url, comments, tagsEntries,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -64,7 +61,7 @@ public class BookmarksEntryServiceImpl
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_ENTRY);
 
-		return BookmarksEntryLocalServiceUtil.addEntry(
+		return bookmarksEntryLocalService.addEntry(
 			getUserId(), folderId, name, url, comments, tagsEntries,
 			communityPermissions, guestPermissions);
 	}
@@ -75,7 +72,7 @@ public class BookmarksEntryServiceImpl
 		BookmarksEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.DELETE);
 
-		BookmarksEntryLocalServiceUtil.deleteEntry(entryId);
+		bookmarksEntryLocalService.deleteEntry(entryId);
 	}
 
 	public BookmarksEntry getEntry(long entryId)
@@ -84,7 +81,7 @@ public class BookmarksEntryServiceImpl
 		BookmarksEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.VIEW);
 
-		return BookmarksEntryLocalServiceUtil.getEntry(entryId);
+		return bookmarksEntryLocalService.getEntry(entryId);
 	}
 
 	public BookmarksEntry openEntry(long entryId)
@@ -93,7 +90,7 @@ public class BookmarksEntryServiceImpl
 		BookmarksEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.VIEW);
 
-		return BookmarksEntryLocalServiceUtil.openEntry(entryId);
+		return bookmarksEntryLocalService.openEntry(entryId);
 	}
 
 	public BookmarksEntry updateEntry(
@@ -104,7 +101,7 @@ public class BookmarksEntryServiceImpl
 		BookmarksEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
-		return BookmarksEntryLocalServiceUtil.updateEntry(
+		return bookmarksEntryLocalService.updateEntry(
 			getUserId(), entryId, folderId, name, url, comments, tagsEntries);
 	}
 

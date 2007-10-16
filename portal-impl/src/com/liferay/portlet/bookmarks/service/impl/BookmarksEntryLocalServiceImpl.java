@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.bookmarks.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -30,7 +29,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
@@ -39,7 +37,6 @@ import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBase
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -101,7 +98,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		validate(url);
 
-		long entryId = CounterLocalServiceUtil.increment();
+		long entryId = counterLocalService.increment();
 
 		BookmarksEntry entry = BookmarksEntryUtil.create(entryId);
 
@@ -154,7 +151,7 @@ public class BookmarksEntryLocalServiceImpl
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			entry.getCompanyId(), folder.getGroupId(), entry.getUserId(),
 			BookmarksEntry.class.getName(), entry.getEntryId(), false,
 			addCommunityPermissions, addGuestPermissions);
@@ -177,7 +174,7 @@ public class BookmarksEntryLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			entry.getCompanyId(), folder.getGroupId(), entry.getUserId(),
 			BookmarksEntry.class.getName(), entry.getEntryId(),
 			communityPermissions, guestPermissions);
@@ -208,12 +205,12 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Tags
 
-		TagsAssetLocalServiceUtil.deleteAsset(
+		tagsAssetLocalService.deleteAsset(
 			BookmarksEntry.class.getName(), entry.getEntryId());
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			entry.getCompanyId(), BookmarksEntry.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, entry.getEntryId());
 
@@ -337,7 +334,7 @@ public class BookmarksEntryLocalServiceImpl
 			long userId, BookmarksEntry entry, String[] tagsEntries)
 		throws PortalException, SystemException {
 
-		TagsAssetLocalServiceUtil.updateAsset(
+		tagsAssetLocalService.updateAsset(
 			userId, BookmarksEntry.class.getName(), entry.getEntryId(),
 			tagsEntries, null, null, null, null, ContentTypes.TEXT_PLAIN,
 			entry.getName(), entry.getComments(), entry.getComments(),

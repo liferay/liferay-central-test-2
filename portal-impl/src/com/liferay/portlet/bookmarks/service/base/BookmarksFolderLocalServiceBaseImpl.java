@@ -22,9 +22,16 @@
 
 package com.liferay.portlet.bookmarks.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterService;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.ResourceLocalService;
+import com.liferay.portal.service.ResourceService;
 
+import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 
@@ -48,4 +55,62 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		return BookmarksFolderUtil.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}
+
+	public BookmarksEntryLocalService getBookmarksEntryLocalService() {
+		return bookmarksEntryLocalService;
+	}
+
+	public void setBookmarksEntryLocalService(
+		BookmarksEntryLocalService bookmarksEntryLocalService) {
+		this.bookmarksEntryLocalService = bookmarksEntryLocalService;
+	}
+
+	public BookmarksEntryService getBookmarksEntryService() {
+		return bookmarksEntryService;
+	}
+
+	public void setBookmarksEntryService(
+		BookmarksEntryService bookmarksEntryService) {
+		this.bookmarksEntryService = bookmarksEntryService;
+	}
+
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
+	public ResourceLocalService getResourceLocalService() {
+		return resourceLocalService;
+	}
+
+	public void setResourceLocalService(
+		ResourceLocalService resourceLocalService) {
+		this.resourceLocalService = resourceLocalService;
+	}
+
+	public ResourceService getResourceService() {
+		return resourceService;
+	}
+
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	protected BookmarksEntryLocalService bookmarksEntryLocalService;
+	protected BookmarksEntryService bookmarksEntryService;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
+	protected ResourceLocalService resourceLocalService;
+	protected ResourceService resourceService;
 }

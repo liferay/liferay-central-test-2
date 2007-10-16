@@ -220,6 +220,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//Liferay//DTD Service Builder 4.4.0//EN",
+			"liferay-service-builder_4_4_0.dtd"
+		),
+
+		new KeyValuePair(
 			"-//Liferay//DTD Theme Loader 4.3.0//EN",
 			"liferay-theme-loader_4_3_0.dtd"
 		),

@@ -25,10 +25,8 @@ package com.liferay.portlet.bookmarks.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
+import com.liferay.portlet.bookmarks.service.base.BookmarksFolderServiceBaseImpl;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission;
 
 /**
@@ -37,8 +35,7 @@ import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermissio
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksFolderServiceImpl
-	extends PrincipalBean implements BookmarksFolderService {
+public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 
 	public BookmarksFolder addFolder(
 			long plid, long parentFolderId, String name, String description,
@@ -49,7 +46,7 @@ public class BookmarksFolderServiceImpl
 			getPermissionChecker(), plid, parentFolderId,
 			ActionKeys.ADD_FOLDER);
 
-		return BookmarksFolderLocalServiceUtil.addFolder(
+		return bookmarksFolderLocalService.addFolder(
 			getUserId(), plid, parentFolderId, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -63,7 +60,7 @@ public class BookmarksFolderServiceImpl
 			getPermissionChecker(), plid, parentFolderId,
 			ActionKeys.ADD_FOLDER);
 
-		return BookmarksFolderLocalServiceUtil.addFolder(
+		return bookmarksFolderLocalService.addFolder(
 			getUserId(), plid, parentFolderId, name, description,
 			communityPermissions, guestPermissions);
 	}
@@ -74,7 +71,7 @@ public class BookmarksFolderServiceImpl
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.DELETE);
 
-		BookmarksFolderLocalServiceUtil.deleteFolder(folderId);
+		bookmarksFolderLocalService.deleteFolder(folderId);
 	}
 
 	public BookmarksFolder getFolder(long folderId)
@@ -83,7 +80,7 @@ public class BookmarksFolderServiceImpl
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.VIEW);
 
-		return BookmarksFolderLocalServiceUtil.getFolder(folderId);
+		return bookmarksFolderLocalService.getFolder(folderId);
 	}
 
 	public BookmarksFolder updateFolder(
@@ -94,7 +91,7 @@ public class BookmarksFolderServiceImpl
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.UPDATE);
 
-		return BookmarksFolderLocalServiceUtil.updateFolder(
+		return bookmarksFolderLocalService.updateFolder(
 			folderId, parentFolderId, name, description, mergeWithParentFolder);
 	}
 

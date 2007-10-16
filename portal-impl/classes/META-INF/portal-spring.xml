@@ -2137,7 +2137,32 @@
 			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistenceImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksEntryLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksEntryLocalServiceImpl" lazy-init="true">
+		<property name="bookmarksFolderLocalService">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.professional" />
+		</property>
+		<property name="bookmarksFolderService">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderService.professional" />
+		</property>
+		<property name="counterLocalService">
+			<ref bean="com.liferay.counter.service.CounterLocalService.professional" />
+		</property>
+		<property name="counterService">
+			<ref bean="com.liferay.counter.service.CounterService.professional" />
+		</property>
+		<property name="resourceLocalService">
+			<ref bean="com.liferay.portal.service.ResourceLocalService.professional" />
+		</property>
+		<property name="resourceService">
+			<ref bean="com.liferay.portal.service.ResourceService.professional" />
+		</property>
+		<property name="tagsAssetLocalService">
+			<ref bean="com.liferay.portlet.tags.service.TagsAssetLocalService.professional" />
+		</property>
+		<property name="tagsAssetService">
+			<ref bean="com.liferay.portlet.tags.service.TagsAssetService.professional" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
@@ -2162,7 +2187,35 @@
 			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.transaction" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksEntryServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksEntryServiceImpl" lazy-init="true">
+		<property name="bookmarksEntryLocalService">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.professional" />
+		</property>
+		<property name="bookmarksFolderLocalService">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.professional" />
+		</property>
+		<property name="bookmarksFolderService">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderService.professional" />
+		</property>
+		<property name="counterLocalService">
+			<ref bean="com.liferay.counter.service.CounterLocalService.professional" />
+		</property>
+		<property name="counterService">
+			<ref bean="com.liferay.counter.service.CounterService.professional" />
+		</property>
+		<property name="resourceLocalService">
+			<ref bean="com.liferay.portal.service.ResourceLocalService.professional" />
+		</property>
+		<property name="resourceService">
+			<ref bean="com.liferay.portal.service.ResourceService.professional" />
+		</property>
+		<property name="tagsAssetLocalService">
+			<ref bean="com.liferay.portlet.tags.service.TagsAssetLocalService.professional" />
+		</property>
+		<property name="tagsAssetService">
+			<ref bean="com.liferay.portlet.tags.service.TagsAssetService.professional" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
@@ -2200,7 +2253,26 @@
 			<ref bean="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistenceImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksFolderLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksFolderLocalServiceImpl" lazy-init="true">
+		<property name="bookmarksEntryLocalService">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.professional" />
+		</property>
+		<property name="bookmarksEntryService">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryService.professional" />
+		</property>
+		<property name="counterLocalService">
+			<ref bean="com.liferay.counter.service.CounterLocalService.professional" />
+		</property>
+		<property name="counterService">
+			<ref bean="com.liferay.counter.service.CounterService.professional" />
+		</property>
+		<property name="resourceLocalService">
+			<ref bean="com.liferay.portal.service.ResourceLocalService.professional" />
+		</property>
+		<property name="resourceService">
+			<ref bean="com.liferay.portal.service.ResourceService.professional" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
@@ -2225,7 +2297,29 @@
 			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.transaction" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksFolderServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksFolderServiceImpl" lazy-init="true">
+		<property name="bookmarksEntryLocalService">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.professional" />
+		</property>
+		<property name="bookmarksEntryService">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryService.professional" />
+		</property>
+		<property name="bookmarksFolderLocalService">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.professional" />
+		</property>
+		<property name="counterLocalService">
+			<ref bean="com.liferay.counter.service.CounterLocalService.professional" />
+		</property>
+		<property name="counterService">
+			<ref bean="com.liferay.counter.service.CounterService.professional" />
+		</property>
+		<property name="resourceLocalService">
+			<ref bean="com.liferay.portal.service.ResourceLocalService.professional" />
+		</property>
+		<property name="resourceService">
+			<ref bean="com.liferay.portal.service.ResourceService.professional" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />

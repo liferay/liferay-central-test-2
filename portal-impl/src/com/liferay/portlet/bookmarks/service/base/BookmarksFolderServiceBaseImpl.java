@@ -29,33 +29,38 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.impl.PrincipalBean;
 
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
-import com.liferay.portlet.tags.service.TagsAssetLocalService;
-import com.liferay.portlet.tags.service.TagsAssetService;
-
-import java.util.List;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 
 /**
- * <a href="BookmarksEntryLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="BookmarksFolderServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class BookmarksEntryLocalServiceBaseImpl
-	implements BookmarksEntryLocalService {
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
-		throws SystemException {
-		return BookmarksEntryUtil.findWithDynamicQuery(queryInitializer);
+public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
+	implements BookmarksFolderService {
+	public BookmarksEntryLocalService getBookmarksEntryLocalService() {
+		return bookmarksEntryLocalService;
 	}
 
-	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		return BookmarksEntryUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+	public void setBookmarksEntryLocalService(
+		BookmarksEntryLocalService bookmarksEntryLocalService) {
+		this.bookmarksEntryLocalService = bookmarksEntryLocalService;
+	}
+
+	public BookmarksEntryService getBookmarksEntryService() {
+		return bookmarksEntryService;
+	}
+
+	public void setBookmarksEntryService(
+		BookmarksEntryService bookmarksEntryService) {
+		this.bookmarksEntryService = bookmarksEntryService;
 	}
 
 	public BookmarksFolderLocalService getBookmarksFolderLocalService() {
@@ -65,15 +70,6 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	public void setBookmarksFolderLocalService(
 		BookmarksFolderLocalService bookmarksFolderLocalService) {
 		this.bookmarksFolderLocalService = bookmarksFolderLocalService;
-	}
-
-	public BookmarksFolderService getBookmarksFolderService() {
-		return bookmarksFolderService;
-	}
-
-	public void setBookmarksFolderService(
-		BookmarksFolderService bookmarksFolderService) {
-		this.bookmarksFolderService = bookmarksFolderService;
 	}
 
 	public CounterLocalService getCounterLocalService() {
@@ -109,29 +105,11 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		this.resourceService = resourceService;
 	}
 
-	public TagsAssetLocalService getTagsAssetLocalService() {
-		return tagsAssetLocalService;
-	}
-
-	public void setTagsAssetLocalService(
-		TagsAssetLocalService tagsAssetLocalService) {
-		this.tagsAssetLocalService = tagsAssetLocalService;
-	}
-
-	public TagsAssetService getTagsAssetService() {
-		return tagsAssetService;
-	}
-
-	public void setTagsAssetService(TagsAssetService tagsAssetService) {
-		this.tagsAssetService = tagsAssetService;
-	}
-
+	protected BookmarksEntryLocalService bookmarksEntryLocalService;
+	protected BookmarksEntryService bookmarksEntryService;
 	protected BookmarksFolderLocalService bookmarksFolderLocalService;
-	protected BookmarksFolderService bookmarksFolderService;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
-	protected TagsAssetLocalService tagsAssetLocalService;
-	protected TagsAssetService tagsAssetService;
 }
