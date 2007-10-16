@@ -45,6 +45,14 @@ public class PortalIncludeUtil {
 	public static void include(PageContext pageContext, String path)
 		throws IOException, ServletException {
 
+		String s = toString(pageContext, path);
+
+		pageContext.getOut().print(s);
+	}
+
+	public static String toString(PageContext pageContext, String path)
+		throws IOException, ServletException {
+
 		HttpServletRequest req = (HttpServletRequest)pageContext.getRequest();
 		HttpServletResponse res =
 			(HttpServletResponse)pageContext.getResponse();
@@ -57,7 +65,7 @@ public class PortalIncludeUtil {
 
 		rd.include(req, stringServletRes);
 
-		pageContext.getOut().print(stringServletRes.getString());
+		return stringServletRes.getString();
 	}
 
 }
