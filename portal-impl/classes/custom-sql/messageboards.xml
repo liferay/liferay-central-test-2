@@ -1,6 +1,38 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.countByS_G_U">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT MBCategory.categoryId) AS COUNT_VALUE
+			FROM
+				MBCategory
+			INNER JOIN
+				Subscription ON
+					(Subscription.classNameId = ?) AND
+					(Subscription.classPK = MBCategory.categoryId)
+			WHERE
+				(MBCategory.groupId = ?) AND
+				(Subscription.userId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.findByS_G_U">
+		<![CDATA[
+			SELECT
+				DISTINCT {MBCategory.*}
+			FROM
+				MBCategory
+			INNER JOIN
+				Subscription ON
+					(Subscription.classNameId = ?) AND
+					(Subscription.classPK = MBCategory.categoryId)
+			WHERE
+				(MBCategory.groupId = ?) AND
+				(Subscription.userId = ?)
+			ORDER BY
+				MBCategory.lastPostDate DESC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.countByCategoryIds">
 		<![CDATA[
 			SELECT

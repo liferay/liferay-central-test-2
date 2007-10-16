@@ -44,6 +44,7 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.base.MBCategoryLocalServiceBaseImpl;
+import com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
@@ -291,6 +292,19 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			getSubcategoryIds(
 				categoryIds, category.getGroupId(), category.getCategoryId());
 		}
+	}
+
+	public List getSubscribedCategories(
+			long groupId, long userId, int begin, int end)
+		throws SystemException {
+
+		return MBCategoryFinder.findByS_G_U(groupId, userId, begin, end);
+	}
+
+	public int getSubscribedCategoriesCount(long groupId, long userId)
+		throws SystemException {
+
+		return MBCategoryFinder.countByS_G_U(groupId, userId);
 	}
 
 	public MBCategory getSystemCategory()

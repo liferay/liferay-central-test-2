@@ -172,6 +172,12 @@ public interface MBCategoryLocalService {
 	public void getSubcategoryIds(java.util.List categoryIds, long groupId,
 		long categoryId) throws com.liferay.portal.SystemException;
 
+	public java.util.List getSubscribedCategories(long groupId, long userId,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public int getSubscribedCategoriesCount(long groupId, long userId)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBCategory getSystemCategory()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

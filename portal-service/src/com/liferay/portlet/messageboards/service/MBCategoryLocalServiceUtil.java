@@ -299,6 +299,23 @@ public class MBCategoryLocalServiceUtil {
 			categoryId);
 	}
 
+	public static java.util.List getSubscribedCategories(long groupId,
+		long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getSubscribedCategories(groupId, userId,
+			begin, end);
+	}
+
+	public static int getSubscribedCategoriesCount(long groupId, long userId)
+		throws com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getSubscribedCategoriesCount(groupId,
+			userId);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBCategory getSystemCategory()
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

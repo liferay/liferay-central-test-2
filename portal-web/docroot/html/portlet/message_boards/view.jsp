@@ -386,13 +386,114 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-posts") || tabs1.equals("my-subscriptions") || tabs1.equals("recent-posts") %>'>
-
 		<c:if test='<%= tabs1.equals("recent-posts") %>'>
 			<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue() %>' target="_blank" />
 
 			<liferay-ui:message key="recent-posts-rss" />
 
 			<br /><br />
+		</c:if>
+
+		<%
+		int totalCategories = 0;
+		%>
+
+		<c:if test='<%= tabs1.equals("my-subscriptions") %>'>
+
+			<%
+			List headerNames = new ArrayList();
+
+			headerNames.add("category");
+			headerNames.add("categories");
+			headerNames.add("threads");
+			headerNames.add("posts");
+			headerNames.add(StringPool.BLANK);
+
+			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+
+			int total = MBCategoryLocalServiceUtil.getSubscribedCategoriesCount(portletGroupId.longValue(), user.getUserId());
+
+			searchContainer.setTotal(total);
+
+			totalCategories = total;
+
+			List results = MBCategoryLocalServiceUtil.getSubscribedCategories(portletGroupId.longValue(), user.getUserId(), searchContainer.getStart(), searchContainer.getEnd());
+
+			searchContainer.setResults(results);
+
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				MBCategory curCategory = (MBCategory)results.get(i);
+
+				ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
+
+				boolean restricted = !MBCategoryPermission.contains(permissionChecker, curCategory, ActionKeys.VIEW);
+
+				row.setRestricted(restricted);
+
+				PortletURL rowURL = renderResponse.createRenderURL();
+
+				rowURL.setWindowState(WindowState.MAXIMIZED);
+
+				rowURL.setParameter("struts_action", "/message_boards/view");
+				rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
+
+				// Name and description
+
+				StringMaker sm = new StringMaker();
+
+				if (!restricted) {
+					sm.append("<a href=\"");
+					sm.append(rowURL);
+					sm.append("\">");
+				}
+
+				sm.append("<b>");
+				sm.append(curCategory.getName());
+				sm.append("</b>");
+
+				if (Validator.isNotNull(curCategory.getDescription())) {
+					sm.append("<br />");
+					sm.append("<span style=\"font-size: xx-small;\">");
+					sm.append(curCategory.getDescription());
+					sm.append("</span>");
+				}
+
+				row.addText(sm.toString());
+
+				// Statistics
+
+				List subcategoryIds = new ArrayList();
+
+				subcategoryIds.add(new Long(curCategory.getCategoryId()));
+
+				MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId.longValue(), curCategory.getCategoryId());
+
+				int categoriesCount = subcategoryIds.size() - 1;
+				int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);
+				int messagesCount = MBMessageLocalServiceUtil.getCategoriesMessagesCount(subcategoryIds);
+
+				row.addText(String.valueOf(categoriesCount), rowURL);
+				row.addText(String.valueOf(threadsCount), rowURL);
+				row.addText(String.valueOf(messagesCount), rowURL);
+
+				// Action
+
+				if (restricted) {
+					row.addText(StringPool.BLANK);
+				}
+				else {
+					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/message_boards/category_action.jsp");
+				}
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 		</c:if>
 
 		<%
@@ -527,6 +628,10 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			resultRows.add(row);
 		}
 		%>
+
+		<c:if test="<%= (totalCategories > 0) && (results.size() > 0) %>">
+			<br />
+		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
