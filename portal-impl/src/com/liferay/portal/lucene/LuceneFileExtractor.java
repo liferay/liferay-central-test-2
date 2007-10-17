@@ -25,6 +25,7 @@ package com.liferay.portal.lucene;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.UnicodeFormatter;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -156,6 +157,10 @@ public class LuceneFileExtractor {
 				reader.close();
 
 				text = sm.toString();
+
+				if (fileExt.equals(".ppt")) {
+					text = fixPptText(text);
+				}
 			}
 			else {
 				if (_log.isInfoEnabled()) {
@@ -193,6 +198,18 @@ public class LuceneFileExtractor {
 		InputStream in = new FileInputStream(file);
 
 		return getFile(field, in, fileExt);
+	}
+
+	protected String fixPptText(String text) {
+		char[] array = text.toCharArray();
+
+		for (int i = 0; i < array.length; i++) {
+			 if (UnicodeFormatter.charToHex(array[i]).equals("000")) {
+				  array[i] = ' ';
+			 }
+		}
+
+		return new String(array);
 	}
 
 	private static Log _log = LogFactory.getLog(LuceneFileExtractor.class);
