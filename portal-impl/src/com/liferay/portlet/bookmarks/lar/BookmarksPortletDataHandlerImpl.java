@@ -270,7 +270,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BookmarksEntry entry = (BookmarksEntry)itr.next();
 
-				if (JournalStructureUtil.fetchByPrimaryKey(
+				if (BookmarksEntryUtil.fetchByPrimaryKey(
 						entry.getPrimaryKey()) == null) {
 
 					boolean addCommunityPermissions = true;
