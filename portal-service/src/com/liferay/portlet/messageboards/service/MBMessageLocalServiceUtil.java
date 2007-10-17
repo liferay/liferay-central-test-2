@@ -430,6 +430,14 @@ public class MBMessageLocalServiceUtil {
 			className, classPK);
 	}
 
+	public static int getDiscussionMessagesCount(long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getDiscussionMessagesCount(classNameId,
+			classPK);
+	}
+
 	public static java.util.List getGroupMessages(long groupId, int begin,
 		int end) throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();

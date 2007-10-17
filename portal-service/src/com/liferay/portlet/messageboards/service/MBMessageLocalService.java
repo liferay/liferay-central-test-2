@@ -251,6 +251,9 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public int getDiscussionMessagesCount(long classNameId, long classPK)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getGroupMessages(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 

@@ -761,6 +761,26 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return getMessageDisplay(message);
 	}
 
+	public int getDiscussionMessagesCount(long classNameId, long classPK)
+		throws SystemException {
+
+		MBDiscussion discussion = MBDiscussionUtil.fetchByC_C(
+			classNameId, classPK);
+
+		if (discussion == null) {
+			return 0;
+		}
+
+		int count = MBMessageUtil.countByThreadId(discussion.getThreadId());
+
+		if (count >= 1) {
+			return count - 1;
+		}
+		else {
+			return 0;
+		}
+	}
+
 	public List getGroupMessages(long groupId, int begin, int end)
 		throws SystemException {
 

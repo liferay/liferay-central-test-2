@@ -31,6 +31,12 @@
 			String strutsAction = ParamUtil.getString(request, "struts_action");
 			%>
 
+			<portlet:renderURL var="viewEntryURL">
+				<portlet:param name="struts_action" value="/blogs/view_entry" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
+			</portlet:renderURL>
+
 			<span style="font-size: small;"><b>
 
 			<c:choose>
@@ -38,12 +44,6 @@
 					<%= entry.getTitle() %>
 				</c:when>
 				<c:otherwise>
-					<portlet:renderURL var="viewEntryURL">
-						<portlet:param name="struts_action" value="/blogs/view_entry" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
-					</portlet:renderURL>
-
 					<a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a>
 				</c:otherwise>
 			</c:choose>
@@ -92,7 +92,7 @@
 				<portlet:actionURL var="deleteEntryURL">
 					<portlet:param name="struts_action" value="/blogs/edit_entry" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
 					<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 				</portlet:actionURL>
 
@@ -108,6 +108,30 @@
 	<tr>
 		<td>
 			<%= entry.getContent() %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td>
+
+			<%
+			long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
+
+			int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
+			%>
+
+			<c:choose>
+				<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
+					<%= messagesCount %> <liferay-ui:message key="comments" />
+				</c:when>
+				<c:otherwise>
+					<a href="<%= viewEntryURL %>"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
+				</c:otherwise>
+			</c:choose>
 		</td>
 	</tr>
 	</table>

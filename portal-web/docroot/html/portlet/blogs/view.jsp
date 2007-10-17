@@ -27,6 +27,8 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
+String redirect = currentURL;
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/blogs/view");
