@@ -129,7 +129,7 @@
 					<%= messagesCount %> <liferay-ui:message key="comments" />
 				</c:when>
 				<c:otherwise>
-					<a href="<%= viewEntryURL %>"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
+					<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
 				</c:otherwise>
 			</c:choose>
 		</td>
