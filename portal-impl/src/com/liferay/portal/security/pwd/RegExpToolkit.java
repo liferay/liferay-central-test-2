@@ -25,6 +25,7 @@ package com.liferay.portal.security.pwd;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.PwdGenerator;
@@ -42,10 +43,13 @@ public class RegExpToolkit extends BasicToolkit {
 
 	public RegExpToolkit() {
 		_pattern = PropsUtil.get(PropsUtil.PASSWORDS_REGEXPTOOLKIT_PATTERN);
+		_charset = PropsUtil.get(PropsUtil.PASSWORDS_REGEXPTOOLKIT_CHARSET);
+		_length = GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.PASSWORDS_REGEXPTOOLKIT_LENGTH));
 	}
 
 	public String generate() {
-		return PwdGenerator.getPinNumber();
+		return PwdGenerator.getPassword(_charset,_length);
 	}
 
 	public void validate(
@@ -68,5 +72,7 @@ public class RegExpToolkit extends BasicToolkit {
 	private static Log _log = LogFactory.getLog(RegExpToolkit.class);
 
 	private String _pattern;
+	private String _charset;
+	private int _length;
 
 }
