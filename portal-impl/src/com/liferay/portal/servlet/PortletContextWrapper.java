@@ -125,11 +125,16 @@ public class PortletContextWrapper {
 
 	public ResourceBundle getResourceBundle(Locale locale) {
 		ResourceBundle resourceBundle = (ResourceBundle)_resourceBundles.get(
-			locale.getLanguage());
+			LocaleUtil.toLanguageId(locale));
 
 		if (resourceBundle == null) {
 			resourceBundle = (ResourceBundle)_resourceBundles.get(
-				LocaleUtil.getDefault().getLanguage());
+				locale.getLanguage());
+
+			if (resourceBundle == null) {
+				resourceBundle = (ResourceBundle)_resourceBundles.get(
+					LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
+			}
 		}
 
 		return resourceBundle;

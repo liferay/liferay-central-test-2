@@ -268,7 +268,8 @@ public class PortletHotDeployListener implements HotDeployListener {
 									portletClassLoader);
 
 							resourceBundles.put(
-								locale.getLanguage(), resourceBundle);
+								LocaleUtil.toLanguageId(locale),
+								resourceBundle);
 						}
 						catch (MissingResourceException mre) {
 							_log.warn(mre.getMessage());

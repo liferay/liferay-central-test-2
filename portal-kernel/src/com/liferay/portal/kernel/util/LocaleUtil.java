@@ -76,11 +76,16 @@ public class LocaleUtil {
 			if (locale == null) {
 				int pos = languageId.indexOf(StringPool.UNDERLINE);
 
-				String languageCode = languageId.substring(0, pos);
-				String countryCode = languageId.substring(
-					pos + 1, languageId.length());
+				if (pos == -1) {
+					locale = new Locale(languageId);
+				}
+				else {
+					String languageCode = languageId.substring(0, pos);
+					String countryCode = languageId.substring(
+						pos + 1, languageId.length());
 
-				locale = new Locale(languageCode, countryCode);
+					locale = new Locale(languageCode, countryCode);
+				}
 
 				_locales.put(languageId, locale);
 			}
@@ -142,8 +147,11 @@ public class LocaleUtil {
 		StringMaker sm = new StringMaker();
 
 		sm.append(locale.getLanguage());
-		sm.append(StringPool.UNDERLINE);
-		sm.append(locale.getCountry());
+
+		if (Validator.isNotNull(locale.getCountry())) {
+			sm.append(StringPool.UNDERLINE);
+			sm.append(locale.getCountry());
+		}
 
 		return sm.toString();
 	}

@@ -607,7 +607,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			Set supportedLocales = portletModel.getSupportedLocales();
 
-			supportedLocales.add(LocaleUtil.getDefault().getLanguage());
+			supportedLocales.add(
+				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 
 			itr2 = portlet.elements("supported-locale").iterator();
 
