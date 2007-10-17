@@ -96,64 +96,54 @@
 	</tr>
 </c:if>
 
-<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.ADD_DISCUSSION) %>">
-	<tr>
-		<td>
-			<table class="liferay-table">
-			<tr>
-				<c:if test="<%= themeDisplay.isSignedIn() %>">
-					<td>
-
-						<%
-						postReplyHREF = "javascript: document.getElementById('" + namespace + "postReplyForm" + i + "').style.display = ''; void('');";
-						%>
-
-						<liferay-ui:icon image="reply" message="post-reply" url="<%= postReplyHREF %>" />
-
-						<a href="<%= postReplyHREF %>"><liferay-ui:message key="post-reply" /></a>
-					</td>
-				</c:if>
-
-				<c:if test="<%= i > 0 %>">
+<tr>
+	<td>
+		<table class="liferay-table">
+		<tr>
+			<c:if test="<%= themeDisplay.isSignedIn() && MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.ADD_DISCUSSION) %>">
+				<td>
 
 					<%
-					topHREF = "javascript: " + namespace + "scrollIntoView('0');";
+					postReplyHREF = "javascript: document.getElementById('" + namespace + "postReplyForm" + i + "').style.display = ''; void('');";
+					%>
+
+					<liferay-ui:icon image="reply" message="post-reply" url="<%= postReplyHREF %>" label="<%= true %>" />
+				</td>
+			</c:if>
+
+			<c:if test="<%= i > 0 %>">
+
+				<%
+				topHREF = "javascript: " + namespace + "scrollIntoView('0');";
+				%>
+
+				<td>
+					<liferay-ui:icon image="top" url="<%= topHREF %>" label="<%= true %>" />
+				</td>
+
+				<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
+
+					<%
+					editHREF = "javascript: document.getElementById('" + namespace + "editForm" + i + "').style.display = ''; void('');";
 					%>
 
 					<td>
-						<liferay-ui:icon image="top" url="<%= topHREF %>" />
-
-						<a href="<%= topHREF %>"><liferay-ui:message key="top" /></a>
+						<liferay-ui:icon image="edit" url="<%= editHREF %>" label="<%= true %>" />
 					</td>
-
-					<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
-
-						<%
-						editHREF = "javascript: document.getElementById('" + namespace + "editForm" + i + "').style.display = ''; void('');";
-						%>
-
-						<td>
-							<liferay-ui:icon image="edit" url="<%= editHREF %>" />
-
-							<a href="<%= editHREF %>"><liferay-ui:message key="edit" /></a>
-						</td>
-					</c:if>
-
-					<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.DELETE_DISCUSSION) %>">
-
-						<%
-						deleteHREF = "javascript: " + namespace + "deleteMessage(" + i + ");";
-						%>
-
-						<td>
-							<liferay-ui:icon-delete url="<%= deleteHREF %>" />
-
-							<a href="<%= deleteHREF %>"><liferay-ui:message key="delete" /></a>
-						</td>
-					</c:if>
 				</c:if>
-			</tr>
-			</table>
-		</td>
-	</tr>
-</c:if>
+
+				<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.DELETE_DISCUSSION) %>">
+
+					<%
+					deleteHREF = "javascript: " + namespace + "deleteMessage(" + i + ");";
+					%>
+
+					<td>
+						<liferay-ui:icon-delete url="<%= deleteHREF %>" label="<%= true %>" />
+					</td>
+				</c:if>
+			</c:if>
+		</tr>
+		</table>
+	</td>
+</tr>

@@ -51,7 +51,7 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
 </form>
 
-<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.ADD_DISCUSSION) %>">
+<c:if test="<%= true || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.ADD_DISCUSSION) %>">
 	<br />
 
 	<liferay-ui:tabs names="comments" />

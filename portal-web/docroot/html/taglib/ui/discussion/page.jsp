@@ -124,7 +124,9 @@ List messages = treeWalker.getMessages();
 %>
 
 <c:if test="<%= messages.size() > 1 %>">
-	<br />
+	<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.ADD_DISCUSSION) %>">
+		<br />
+	</c:if>
 
 	<table border="0" cellpadding="4" cellspacing="0" class="taglib-discussion" width="100%">
 	<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">

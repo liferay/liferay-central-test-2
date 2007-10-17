@@ -28,4 +28,4 @@
 String jsUrl = "javascript: if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this") + "')) { self.location= '" + HttpUtil.encodeURL(url) + "'; } else { self.focus(); }";
 %>
 
-<liferay-ui:icon image="deactivate" url="<%= jsUrl %>" />
+<liferay-ui:icon image="deactivate" url="<%= jsUrl %>" label="<%= label %>" />
