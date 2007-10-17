@@ -23,7 +23,12 @@
 package com.liferay.portlet.tags.util;
 
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.PortalException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -31,6 +36,13 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
+import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
+import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.model.TagsProperty;
+
+import java.util.List;
+import java.util.Iterator;
 
 /**
  * <a href="TagsUtil.java.html"><b><i>View Source</i></b></a>
@@ -71,6 +83,45 @@ public class TagsUtil {
 		}
 
 		return true;
+	}
+
+	public static String substitutePropertyVariables(
+		long companyId, String entryName, String s)
+		throws SystemException, PortalException {
+
+		String result = s;
+
+		if (entryName != null) {
+			TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(
+				companyId, entryName);
+		
+			List properties = TagsPropertyLocalServiceUtil.getProperties(
+				entry.getEntryId());
+
+			Iterator it = properties.iterator();
+
+			while (it.hasNext()) {
+				TagsProperty property = (TagsProperty) it.next();
+				result = StringUtil.replace(
+					result, "[$" + property.getKey() + "$]", property.getValue());
+			}
+		}
+		
+		// Clear variables without a matching property
+
+		StringMaker sm = new StringMaker(result);
+
+		int varStart = result.indexOf("[$");
+
+		while (varStart != -1) {
+			int varEnd = result.indexOf("$]", varStart);
+
+			sm = sm.replace(varStart, varEnd + 2, StringPool.BLANK);
+
+			varStart = sm.indexOf("[$");
+		}
+
+		return sm.toString();
 	}
 
 }

@@ -28,13 +28,22 @@
 
 // Merge URL tags
 
+String titleEntry = null;
 String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
 
 if ((compilerEntries != null) && (compilerEntries.length > 0)) {
 	String[] newEntries = ArrayUtil.append(entries, compilerEntries);
 
 	entries = newEntries;
+
+	titleEntry = compilerEntries[compilerEntries.length - 1];
 }
+
+String portletTitle = portletDisplay.getTitle();
+
+portletTitle = TagsUtil.substitutePropertyVariables(company.getCompanyId(), titleEntry, portletTitle);
+
+renderResponse.setTitle(portletTitle);
 
 if (themeDisplay.isSignedIn()) {
 
