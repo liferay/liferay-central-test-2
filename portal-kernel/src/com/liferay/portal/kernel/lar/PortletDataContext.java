@@ -41,7 +41,7 @@ import java.util.Set;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class PortletDataContext implements Serializable {
@@ -78,6 +78,14 @@ public class PortletDataContext implements Serializable {
 
 	public Map getParameterMap() {
 		return _parameterMap;
+	}
+
+	public long getPlid() {
+		return _plid;
+	}
+
+	public void setPlid(long plid) {
+		_plid = plid;
 	}
 
 	public Set getPrimaryKeys() {
@@ -118,6 +126,7 @@ public class PortletDataContext implements Serializable {
 
 	private long _companyId;
 	private long _groupId;
+	private long _plid;
 	private Map _parameterMap;
 	private Set _primaryKeys;
 	private ZipReader _zipReader;

@@ -314,6 +314,7 @@
 		<portlet-name>28</portlet-name>
 		<icon>/html/portlet/bookmarks/icon.png</icon>
 		<struts-path>bookmarks</struts-path>
+		<portlet-data-handler-class>com.liferay.portlet.bookmarks.lar.BookmarksPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>

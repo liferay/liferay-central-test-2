@@ -139,7 +139,7 @@ import org.dom4j.io.SAXReader;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
@@ -834,6 +834,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			fixTypeSettings(layout);
 
 			LayoutUtil.update(layout);
+
+			context.setPlid(layout.getPlid());
 
 			newLayoutIds.add(new Long(layoutId));
 
