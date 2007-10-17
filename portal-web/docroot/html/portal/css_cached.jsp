@@ -804,19 +804,23 @@ ul.gamma .tree-item-hover {
 
 .taglib-page-iterator .search-pages .page-links a.first, .taglib-page-iterator .search-pages .page-links span.first {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/paging_first.png);
+	background-repeat: no-repeat;
 	border-left: none;
 }
 
 .taglib-page-iterator .search-pages .page-links a.previous, .taglib-page-iterator .search-pages .page-links span.previous {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/paging_previous.png);
+	background-repeat: no-repeat;
 }
 
 .taglib-page-iterator .search-pages .page-links a.next, .taglib-page-iterator .search-pages .page-links span.next {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/paging_next.png);
+	background-repeat: no-repeat;
 }
 
 .taglib-page-iterator .search-pages .page-links a.last, .taglib-page-iterator .search-pages .page-links span.last {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/arrows/paging_last.png);
+	background-repeat: no-repeat;
 }
 
 .taglib-page-iterator .search-pages .page-links a.first, .taglib-page-iterator .search-pages .page-links span.first, .taglib-page-iterator .search-pages .page-links a.previous, .taglib-page-iterator .search-pages .page-links span.previous {
