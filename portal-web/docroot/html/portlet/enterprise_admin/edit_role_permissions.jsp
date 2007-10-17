@@ -181,7 +181,7 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" /></portlet:actionURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="" />
@@ -532,7 +532,14 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 				<liferay-ui:message key="action" />
 			</th>
 			<th>
-				<%= LanguageUtil.get(pageContext, (role.getType() == RoleImpl.TYPE_REGULAR) ? "scope" : "") %>
+				<c:choose>
+					<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
+						<liferay-ui:message key="scope" />
+					</c:when>
+					<c:when test="<%= (role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION) %>">
+						<input name="<portlet:namespace />actionAllBox" type="checkbox" />
+					</c:when>
+				</c:choose>
 			</th>
 		</tr>
 
@@ -597,6 +604,59 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		<br />
 
 		<input type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />updateActions();" />
+
+		<script type="text/javascript">
+			jQuery(
+				function() {
+					var form = jQuery("#<portlet:namespace />fm");
+
+					var allBox = form.find("input[@name=<portlet:namespace />actionAllBox]");
+					var inputs = form.find("input[@type=checkbox]").not(allBox);
+
+					var inputsCount = inputs.length;
+
+					if (inputs.not(":checked").length == 0) {
+						allBox.attr("checked", true);
+					}
+
+					allBox.click(
+						function() {
+							var allBoxChecked = this.checked;
+
+							if (allBoxChecked) {
+								var uncheckedInputs = inputs.not(":checked");
+
+								uncheckedInputs.trigger("click");
+							}
+							else {
+								var checkedInputs = inputs.filter(":checked");
+
+								checkedInputs.trigger("click");
+							}
+
+							allBox.attr("checked", allBoxChecked);
+						}
+					);
+
+					inputs.click(
+						function() {
+							var uncheckedCount = inputs.not(":checked").length;
+
+							if (this.checked) {
+								if (uncheckedCount == 0) {
+									allBox.attr("checked", true);
+								}
+							}
+							else {
+								if (inputsCount > uncheckedCount) {
+									allBox.attr("checked", false);
+								}
+							}
+						}
+					);
+				}
+			);
+		</script>
 	</c:when>
 	<c:when test="<%= Validator.isNotNull(portletResource) %>">
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
