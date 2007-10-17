@@ -65,12 +65,11 @@ import org.dom4j.io.SAXReader;
  * </a>
  *
  * <p>
- * Provides the Bookmarks export and import functionality, which is to
- * clone all bookmark entries associated with the layout's
- * group. Upon import, new instances of the corresponding bookmark entries
- * are created or updated. The author of the newly created
- * objects is assumed to be the same one as the original author and that an
- * account for it exists and has the same id
+ * Provides the Bookmarks portlet export and import functionality, which is to
+ * clone all bookmark entries associated with the layout's group. Upon import,
+ * new instances of the corresponding bookmark entries are created or updated.
+ * The author of the newly created objects is assumed to be the same one as the
+ * original author and that an account for it exists and has the same id.
  * </p>
  *
  * @author JorgeFerrer
@@ -124,7 +123,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
 
-			// Bookmark folders
+			// Folders
 
 			List folders = BookmarksFolderUtil.findByGroupId(
 				context.getGroupId());
@@ -138,7 +137,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (context.addPrimaryKey(
 						BookmarksFolder.class,
-						Long.valueOf(folder.getFolderId()))) {
+						new Long(folder.getFolderId()))) {
 
 					itr.remove();
 				}
@@ -158,7 +157,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
-			// Bookmark entries
+			// Entries
 
 			itr = entries.iterator();
 
@@ -166,8 +165,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				BookmarksEntry entry = (BookmarksEntry)itr.next();
 
 				if (context.addPrimaryKey(
-						BookmarksFolder.class,
-						Long.valueOf(entry.getEntryId()))) {
+						BookmarksFolder.class, new Long(entry.getEntryId()))) {
 
 					itr.remove();
 				}
@@ -242,10 +240,10 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				if (BookmarksFolderUtil.fetchByPrimaryKey(
 						folder.getPrimaryKey()) == null) {
 
+					long plid = context.getPlid();
 					boolean addCommunityPermissions = true;
 					boolean addGuestPermissions = true;
 
-					long plid = context.getPlid();
 					BookmarksFolderLocalServiceUtil.addFolder(
 						folder.getUserId(), plid, folder.getFolderId(),
 						folder.getName(), folder.getDescription(),

@@ -76,16 +76,16 @@ public class PortletDataContext implements Serializable {
 		return _groupId;
 	}
 
-	public Map getParameterMap() {
-		return _parameterMap;
-	}
-
 	public long getPlid() {
 		return _plid;
 	}
 
 	public void setPlid(long plid) {
 		_plid = plid;
+	}
+
+	public Map getParameterMap() {
+		return _parameterMap;
 	}
 
 	public Set getPrimaryKeys() {
