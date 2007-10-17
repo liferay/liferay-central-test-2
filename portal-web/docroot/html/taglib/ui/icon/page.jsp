@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
 <c:choose>
-	<c:when test="<%= iconMenuTag %>">
+	<c:when test="<%= (iconMenuIconCount != null) && (iconMenuSingleIcon == null) %>">
 		<li><nobr><a href="<%= url %>" target="<%= target %>"><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /></a></nobr></li>
 	</c:when>
 	<c:otherwise>

@@ -22,12 +22,15 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.PortalIncludeUtil;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.TagSupport;
+import javax.servlet.jsp.tagext.BodyContent;
+import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
  * <a href="IconMenuTag.java.html"><b><i>View Source</i></b></a>
@@ -35,20 +38,41 @@ import javax.servlet.jsp.tagext.TagSupport;
  * @author Brian Wing Shun Chan
  *
  */
-public class IconMenuTag extends TagSupport {
+public class IconMenuTag extends BodyTagSupport {
 
 	public int doStartTag() throws JspException {
-		try {
-			ServletRequest req = pageContext.getRequest();
+		ServletRequest req = pageContext.getRequest();
 
-			req.setAttribute("liferay-ui:icon-menu", Boolean.TRUE.toString());
+		req.setAttribute(
+			"liferay-ui:icon-menu:icon-count", new IntegerWrapper());
 
-			PortalIncludeUtil.include(pageContext, getStartPage());
+		return EVAL_BODY_BUFFERED;
+	}
 
-			return EVAL_BODY_INCLUDE;
+	public int doAfterBody() {
+		BodyContent bodyContent = getBodyContent();
+
+		_bodyContentString = bodyContent.getString();
+
+		ServletRequest req = pageContext.getRequest();
+
+		IntegerWrapper iconCount = (IntegerWrapper)req.getAttribute(
+			"liferay-ui:icon-menu:icon-count");
+
+		Boolean singleIcon = (Boolean)req.getAttribute(
+			"liferay-ui:icon-menu:single-icon");
+
+		if ((iconCount != null) && (iconCount.getValue() == 1) &&
+			(singleIcon == null)) {
+
+			bodyContent.clearBody();
+
+			req.setAttribute("liferay-ui:icon-menu:single-icon", Boolean.TRUE);
+
+			return EVAL_BODY_AGAIN;
 		}
-		catch (Exception e) {
-			throw new JspException(e);
+		else {
+			return SKIP_BODY;
 		}
 	}
 
@@ -56,9 +80,29 @@ public class IconMenuTag extends TagSupport {
 		try {
 			ServletRequest req = pageContext.getRequest();
 
-			req.removeAttribute("liferay-ui:icon-menu");
+			IntegerWrapper iconCount = (IntegerWrapper)req.getAttribute(
+				"liferay-ui:icon-menu:icon-count");
 
-			PortalIncludeUtil.include(pageContext, getEndPage());
+			req.removeAttribute("liferay-ui:icon-menu:icon-count");
+
+			Boolean singleIcon = (Boolean)req.getAttribute(
+				"liferay-ui:icon-menu:single-icon");
+
+			req.removeAttribute("liferay-ui:icon-menu:single-icon");
+
+			if ((iconCount != null) && (iconCount.getValue() > 1) &&
+				(singleIcon == null)) {
+
+				PortalIncludeUtil.include(pageContext, getStartPage());
+			}
+
+			pageContext.getOut().print(_bodyContentString);
+
+			if ((iconCount != null) && (iconCount.getValue() > 1) &&
+				(singleIcon == null)) {
+
+				PortalIncludeUtil.include(pageContext, getEndPage());
+			}
 
 			return EVAL_PAGE;
 		}
@@ -100,5 +144,6 @@ public class IconMenuTag extends TagSupport {
 
 	private String _startPage;
 	private String _endPage;
+	private String _bodyContentString = StringPool.BLANK;
 
 }

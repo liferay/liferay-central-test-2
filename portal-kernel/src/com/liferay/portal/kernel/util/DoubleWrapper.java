@@ -32,6 +32,10 @@ public class DoubleWrapper extends PrimitiveWrapper {
 
 	public static final Class TYPE = Double.TYPE;
 
+	public DoubleWrapper() {
+		this(0D);
+	}
+
 	public DoubleWrapper(double value) {
 		_value = value;
 	}

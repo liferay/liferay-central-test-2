@@ -32,6 +32,10 @@ public class BooleanWrapper extends PrimitiveWrapper {
 
 	public static final Class TYPE = Boolean.TYPE;
 
+	public BooleanWrapper() {
+		this(false);
+	}
+
 	public BooleanWrapper(boolean value) {
 		_value = value;
 	}

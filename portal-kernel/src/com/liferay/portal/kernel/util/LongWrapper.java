@@ -32,6 +32,10 @@ public class LongWrapper extends PrimitiveWrapper {
 
 	public static final Class TYPE = Long.TYPE;
 
+	public LongWrapper() {
+		this(0L);
+	}
+
 	public LongWrapper(long value) {
 		_value = value;
 	}

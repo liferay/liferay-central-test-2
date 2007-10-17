@@ -32,6 +32,10 @@ public class ShortWrapper extends PrimitiveWrapper {
 
 	public static final Class TYPE = Short.TYPE;
 
+	public ShortWrapper() {
+		this((short)0);
+	}
+
 	public ShortWrapper(short value) {
 		_value = value;
 	}

@@ -25,7 +25,13 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-boolean iconMenuTag = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon-menu"));
+IntegerWrapper iconMenuIconCount = (IntegerWrapper)request.getAttribute("liferay-ui:icon-menu:icon-count");
+
+if (iconMenuIconCount != null) {
+	iconMenuIconCount.increment();
+}
+
+Boolean iconMenuSingleIcon = (Boolean)request.getAttribute("liferay-ui:icon-menu:single-icon");
 
 String image = (String)request.getAttribute("liferay-ui:icon:image");
 
@@ -43,8 +49,12 @@ if (Validator.isNull(src)) {
 
 String url = (String)request.getAttribute("liferay-ui:icon:url");
 String target = (String)request.getAttribute("liferay-ui:icon:target");
-boolean label = iconMenuTag || GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:label"));
+boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:label"));
 boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:toolTip"));
+
+if ((iconMenuIconCount != null) || (iconMenuSingleIcon != null)) {
+	label = true;
+}
 
 String details = StringPool.BLANK;
 

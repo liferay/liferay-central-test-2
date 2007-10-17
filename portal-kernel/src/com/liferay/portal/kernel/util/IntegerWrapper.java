@@ -32,6 +32,10 @@ public class IntegerWrapper extends PrimitiveWrapper {
 
 	public static final Class TYPE = Integer.TYPE;
 
+	public IntegerWrapper() {
+		this(0);
+	}
+
 	public IntegerWrapper(int value) {
 		_value = value;
 	}

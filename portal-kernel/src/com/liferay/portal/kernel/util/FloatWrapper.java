@@ -32,6 +32,10 @@ public class FloatWrapper extends PrimitiveWrapper {
 
 	public static final Class TYPE = Float.TYPE;
 
+	public FloatWrapper() {
+		this(0F);
+	}
+
 	public FloatWrapper(float value) {
 		_value = value;
 	}
