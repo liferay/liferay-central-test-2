@@ -347,6 +347,7 @@
 		<portlet-name>31</portlet-name>
 		<icon>/html/portlet/image_gallery/icon.png</icon>
 		<struts-path>image_gallery</struts-path>
+		<portlet-data-handler-class>com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
