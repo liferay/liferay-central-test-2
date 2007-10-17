@@ -33,7 +33,7 @@
 		<portlet-name>3</portlet-name>
 		<icon>/html/portlet/search/icon.png</icon>
 		<struts-path>search</struts-path>
-		<open-search-class>com.liferay.portal.search.PortalOpenSearchImpl</open-search-class>
+		<!--<open-search-class>com.liferay.portal.search.PortalOpenSearchImpl</open-search-class>-->
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -172,6 +172,7 @@
 		<struts-path>journal</struts-path>
 		<configuration-action-class>com.liferay.portlet.journal.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.journal.util.Indexer</indexer-class>
+		<open-search-class>com.liferay.portlet.journal.util.JournalOpenSearchImpl</open-search-class>
 		<scheduler-class>com.liferay.portlet.journal.job.Scheduler</scheduler-class>
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl</portlet-data-handler-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>

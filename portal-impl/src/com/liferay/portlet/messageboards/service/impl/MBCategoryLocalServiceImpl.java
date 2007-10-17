@@ -388,8 +388,11 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 			LuceneUtil.addRequiredTerm(
 				contextQuery, LuceneFields.PORTLET_ID, IndexerImpl.PORTLET_ID);
-			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.GROUP_ID, groupId);
+
+			if (groupId > 0) {
+				LuceneUtil.addRequiredTerm(
+					contextQuery, LuceneFields.GROUP_ID, groupId);
+			}
 
 			if ((categoryIds != null) && (categoryIds.length > 0)) {
 				BooleanQuery categoryIdsQuery = new BooleanQuery();

@@ -167,8 +167,11 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 			LuceneUtil.addRequiredTerm(
 				contextQuery, LuceneFields.PORTLET_ID, portletId);
-			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.GROUP_ID, groupId);
+
+			if (groupId > 0) {
+				LuceneUtil.addRequiredTerm(
+					contextQuery, LuceneFields.GROUP_ID, groupId);
+			}
 
 			if ((repositoryIds != null) && (repositoryIds.length > 0)) {
 				BooleanQuery repositoryIdsQuery = new BooleanQuery();

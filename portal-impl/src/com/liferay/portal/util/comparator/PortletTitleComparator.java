@@ -40,10 +40,8 @@ import javax.servlet.ServletContext;
  */
 public class PortletTitleComparator implements Comparator, Serializable {
 
-	public PortletTitleComparator(ServletContext application,
-								  Locale locale) {
-
-		_application = application;
+	public PortletTitleComparator(ServletContext ctx, Locale locale) {
+		_ctx = ctx;
 		_locale = locale;
 	}
 
@@ -52,15 +50,15 @@ public class PortletTitleComparator implements Comparator, Serializable {
 		Portlet portlet2 = (Portlet)obj2;
 
 		String portletTitle1 =
-			PortalUtil.getPortletTitle(portlet1, _application, _locale);
+			PortalUtil.getPortletTitle(portlet1, _ctx, _locale);
 
 		String portletTitle2 =
-			PortalUtil.getPortletTitle(portlet2, _application, _locale);
+			PortalUtil.getPortletTitle(portlet2, _ctx, _locale);
 
 		return portletTitle1.compareTo(portletTitle2);
 	}
 
-	private ServletContext _application;
+	private ServletContext _ctx;
 	private Locale _locale;
 
 }

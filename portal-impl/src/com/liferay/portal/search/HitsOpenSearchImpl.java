@@ -108,7 +108,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 					result, portletURL);
 
 				String title = docSummary.getTitle();
-				String url = portletURL.toString();
+				String url = getURL(themeDisplay, groupId, result, portletURL);
 				Date modifedDate = DateTools.stringToDate(
 					(String)result.get(LuceneFields.MODIFIED));
 				String content = docSummary.getContent();
@@ -133,6 +133,14 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				hits.closeSearcher();
 			}
 		}
+	}
+
+	protected String getURL(
+			ThemeDisplay themeDisplay, long groupId, Document result,
+			PortletURL portletURL)
+		throws Exception {
+
+		return portletURL.toString();
 	}
 
 	private static Log _log = LogFactory.getLog(HitsOpenSearchImpl.class);

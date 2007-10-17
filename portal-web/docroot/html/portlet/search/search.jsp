@@ -68,6 +68,8 @@ while (itr.hasNext()) {
 	}
 }
 
+Collections.sort(portlets, new PortletTitleComparator(application, locale));
+
 if (Validator.isNotNull(primarySearch)) {
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
