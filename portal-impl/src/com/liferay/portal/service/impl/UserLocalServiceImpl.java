@@ -1031,7 +1031,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long timeStartWarning =
 				passwordExpiresOn - (passwordPolicy.getWarningTime() * 1000);
 
-			if ((now.getTime() * 1000) > timeStartWarning) {
+			if (now.getTime() > timeStartWarning) {
 				return true;
 			}
 			else {
