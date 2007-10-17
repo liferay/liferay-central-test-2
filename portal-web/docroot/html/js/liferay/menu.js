@@ -16,43 +16,38 @@ Liferay.Menu = new Class({
 
 		var lastLi = instance._trigger.find('ul:first li:last-child');
 
-		if (lastLi.length) {
-			lastLi.addClass('last');
+		lastLi.addClass('last');
 
-			var off = function(event) {
+		var off = function(event) {
+			instance._button.removeClass('visible');
+		}
+
+		var on = function(event) {
+			var trigger = jQuery(this);
+
+			var parent = trigger.parent();
+
+			if (parent.is('.visible')) {
+				parent.removeClass('visible');
+			}
+			else {
 				instance._button.removeClass('visible');
+
+				parent.addClass('visible');
 			}
 
-			var on = function(event) {
-				var trigger = jQuery(this);
+			jQuery(document).unbind().one(
+				'click',
+				off
+			);
 
-				var parent = trigger.parent();
+			var originalTarget = jQuery(event.originalTarget || event.srcElement);
 
-				if (parent.is('.visible')) {
-					parent.removeClass('visible');
-				}
-				else {
-					instance._button.removeClass('visible');
+			if (!originalTarget.is('a') && !originalTarget.is('img')) {
+				return false;
+			}
+		};
 
-					parent.addClass('visible');
-				}
-
-				jQuery(document).unbind().one(
-					'click',
-					off
-				);
-
-				var originalTarget = jQuery(event.originalTarget || event.srcElement);
-
-				if (!originalTarget.is('a') && !originalTarget.is('img')) {
-					return false;
-				}
-			};
-
-			instance._trigger.unbind().click(on);
-		}
-		else {
-			instance._button.hide();
-		}
+		instance._trigger.unbind().click(on);
 	}
 });
