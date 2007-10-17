@@ -188,6 +188,23 @@ public class JournalStructureLocalServiceUtil {
 			guestPermissions);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalStructure addStructureToGroup(
+		long userId, java.lang.String structureId, boolean autoStructureId,
+		long groupId, java.lang.String name, java.lang.String description,
+		java.lang.String xsd, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
+
+		return journalStructureLocalService.addStructureToGroup(userId,
+			structureId, autoStructureId, groupId, name, description, xsd,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
+	}
+
 	public static void addStructureResources(long groupId,
 		java.lang.String structureId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)

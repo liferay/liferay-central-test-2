@@ -198,11 +198,40 @@ public class JournalArticleLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
+		long groupId = PortalUtil.getPortletGroupId(plid);
+
+		return addArticleToGroup(
+			userId, articleId, autoArticleId, groupId, title, description,
+			content, type, structureId, templateId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+			reviewDateMinute, neverReview, indexable, images, articleURL,
+			prefs, tagsEntries, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
+	}
+
+	public JournalArticle addArticleToGroup(
+			long userId, String articleId, boolean autoArticleId, long groupId,
+			String title, String description, String content, String type,
+			String structureId, String templateId, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
+			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
+			boolean neverReview, boolean indexable, Map images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Article
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		articleId = articleId.trim().toUpperCase();
-		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
 		Date displayDate = PortalUtil.getDate(

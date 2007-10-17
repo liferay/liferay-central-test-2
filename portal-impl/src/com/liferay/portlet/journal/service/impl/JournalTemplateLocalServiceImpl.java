@@ -114,11 +114,28 @@ public class JournalTemplateLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
+		long groupId = PortalUtil.getPortletGroupId(plid);
+
+		return addTemplateToGroup(
+			userId, templateId, autoTemplateId, groupId, structureId, name,
+			description, xsl, formatXsl, langType, smallImage, smallImageURL,
+			smallFile, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
+	}
+
+	public JournalTemplate addTemplateToGroup(
+			long userId, String templateId, boolean autoTemplateId,
+			long groupId, String structureId, String name, String description,
+			String xsl, boolean formatXsl, String langType, boolean smallImage,
+			String smallImageURL, File smallFile,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Template
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		templateId = templateId.trim().toUpperCase();
-		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
 		try {
