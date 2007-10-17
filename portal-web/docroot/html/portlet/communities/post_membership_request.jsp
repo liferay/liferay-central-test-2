@@ -70,6 +70,11 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 </c:if>
 
 <tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
 	<td>
 		<liferay-ui:message key="comments" />
 	</td>
@@ -81,7 +86,7 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 
 <br />
 
-<input type="submit" value="<liferay-ui:message key="post" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 

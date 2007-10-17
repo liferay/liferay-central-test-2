@@ -139,7 +139,7 @@ String tabs1 = (String)objArray[1];
 								<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 							</portlet:renderURL>
 
-							<liferay-ui:icon image="post" message="post-membership-request" url="<%= membershipRequestURL %>" />
+							<liferay-ui:icon image="post" message="request-membership" url="<%= membershipRequestURL %>" />
 						</c:when>
 					</c:choose>
 				</c:when>

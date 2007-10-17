@@ -44,7 +44,7 @@ else {
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 %>
 
-<liferay-ui:success key="membership_reply_sent" message="your-reply-will-be-notified-to-the-user-by-email" />
+<liferay-ui:success key="membership_reply_sent" message="your-reply-will-be-sent-to-the-user-by-email" />
 
 <liferay-ui:message key="edit-requests-for-community" />: <%= group.getName() %>
 
@@ -69,7 +69,7 @@ List headerNames = new ArrayList();
 
 headerNames.add("date");
 headerNames.add("user");
-headerNames.add("comments");
+headerNames.add("user-comments");
 
 if (!tabs1.equals("pending")) {
 	headerNames.add("reply-date");
@@ -146,5 +146,3 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />

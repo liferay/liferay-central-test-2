@@ -78,6 +78,11 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 </c:if>
 
 <tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
 	<td>
 		<liferay-ui:message key="user-comments" />
 	</td>
@@ -86,8 +91,13 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 	</td>
 </tr>
 <tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
 	<td>
-		<liferay-ui:message key="reply" />
+		<liferay-ui:message key="status" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />statusId">
@@ -97,8 +107,13 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 	</td>
 </tr>
 <tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
 	<td>
-		<liferay-ui:message key="comments" />
+		<liferay-ui:message key="reply-comments" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= MembershipRequest.class %>" bean="<%= membershipRequest %>" field="replyComments" />
