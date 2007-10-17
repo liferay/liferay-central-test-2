@@ -157,6 +157,14 @@ public abstract class CustomSQLUtil {
 							"Detected Oracle with database name " + dbName);
 					}
 				}
+				else if (dbName.startsWith("PostgreSQL")) {
+					_vendorPostgreSQL = true;
+
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Detected PostgreSQL with database name " + dbName);
+					}
+				}
 				else {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
@@ -233,6 +241,15 @@ public abstract class CustomSQLUtil {
 	}
 
 	/**
+	 * Returns true if Hibernate is connecting to a PostgreSQL database.
+	 *
+	 * @return		true if Hibernate is connecting to a PostgreSQL database
+	 */
+	public boolean isVendorPostgreSQL() {
+		return _vendorPostgreSQL;
+	}
+
+	/**
 	 * Returns true if Hibernate is connecting to a Sybase database.
 	 *
 	 * @return		true if Hibernate is connecting to a Sybase database
@@ -299,6 +316,23 @@ public abstract class CustomSQLUtil {
 			new String[] {
 				andOrConnector, andOrNullCheck
 			});
+
+		if (_vendorPostgreSQL) {
+			sql = StringUtil.replace(
+				sql,
+				new String[] {
+					"Date >= ? AND ? IS NOT NULL",
+					"Date <= ? AND ? IS NOT NULL",
+					"Date >= ? OR ? IS NULL",
+					"Date <= ? OR ? IS NULL"
+				},
+				new String[] {
+					"Date >= ? AND CAST(? AS TIMESTAMP) IS NOT NULL",
+					"Date <= ? AND CAST(? AS TIMESTAMP) IS NOT NULL",
+					"Date >= ? OR CAST(? AS TIMESTAMP) IS NULL",
+					"Date <= ? OR CAST(? AS TIMESTAMP) IS NULL"
+				});
+		}
 
 		sql = replaceIsNull(sql);
 
@@ -467,6 +501,7 @@ public abstract class CustomSQLUtil {
 	private boolean _vendorInformix;
 	private boolean _vendorMySQL;
 	private boolean _vendorOracle;
+	private boolean _vendorPostgreSQL;
 	private boolean _vendorSybase;
 	private String _functionIsNull;
 	private String _functionIsNotNull;
