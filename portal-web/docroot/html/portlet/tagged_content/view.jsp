@@ -28,8 +28,9 @@
 
 // Merge URL tags
 
-String titleEntry = null;
 String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
+
+String titleEntry = null;
 
 if ((compilerEntries != null) && (compilerEntries.length > 0)) {
 	String[] newEntries = ArrayUtil.append(entries, compilerEntries);
