@@ -45,14 +45,14 @@ public class UpgradeJournal extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			upgradeArticles();
+			doUpgrade();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	public void upgradeArticles() throws Exception {
+	public void doUpgrade() throws Exception {
 		TempUpgradeColumnImpl structureIdColumn =
 			new TempUpgradeColumnImpl("structureId");
 
