@@ -236,21 +236,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 				folder.setGroupId(context.getGroupId());
 
-				if (BookmarksFolderUtil.fetchByPrimaryKey(
-						folder.getPrimaryKey()) == null) {
-
-					long plid = context.getPlid();
-					boolean addCommunityPermissions = true;
-					boolean addGuestPermissions = true;
-
-					BookmarksFolderLocalServiceUtil.addFolder(
-						folder.getUserId(), plid, folder.getFolderId(),
-						folder.getName(), folder.getDescription(),
-						addCommunityPermissions, addGuestPermissions);
-				}
-				else {
-					BookmarksFolderUtil.update(folder, true);
-				}
+				BookmarksFolderUtil.update(folder, true);
 			}
 
 			// Entries
@@ -269,20 +255,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BookmarksEntry entry = (BookmarksEntry)itr.next();
 
-				if (BookmarksEntryUtil.fetchByPrimaryKey(
-						entry.getPrimaryKey()) == null) {
-
-					boolean addCommunityPermissions = true;
-					boolean addGuestPermissions = true;
-
-					BookmarksEntryLocalServiceUtil.addEntry(
-						entry.getUserId(), entry.getFolderId(), entry.getName(),
-						entry.getUrl(), entry.getComments(), new String[0],
-						addCommunityPermissions, addGuestPermissions);
-				}
-				else {
-					BookmarksEntryUtil.update(entry, true);
-				}
+				BookmarksEntryUtil.update(entry, true);
 			}
 
 			// No special modification to the incoming portlet preferences
