@@ -262,6 +262,7 @@ public class LocalizationUtil {
 				localeEl.addAttribute("language-id", requestedLanguageId);
 
 				if (cdata) {
+					localeEl.clearContent();
 					localeEl.addCDATA(value);
 				}
 				else {
