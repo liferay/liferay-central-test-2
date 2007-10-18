@@ -204,7 +204,7 @@ public class LuceneFileExtractor {
 		char[] array = text.toCharArray();
 
 		for (int i = 0; i < array.length; i++) {
-			 if (UnicodeFormatter.charToHex(array[i]).equals("000")) {
+			 if (UnicodeFormatter.charToHex(array[i]).equals("0000")) {
 				  array[i] = ' ';
 			 }
 		}
