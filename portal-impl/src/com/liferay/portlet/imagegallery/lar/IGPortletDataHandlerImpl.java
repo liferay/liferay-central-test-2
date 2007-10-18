@@ -60,10 +60,10 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 /**
- * <a href="IGPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="IGPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ *
  */
 public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
@@ -126,8 +126,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				IGFolder folder = (IGFolder)itr.next();
 
 				if (context.addPrimaryKey(
-						IGFolder.class,
-						new Long(folder.getFolderId()))) {
+						IGFolder.class, new Long(folder.getFolderId()))) {
 
 					itr.remove();
 				}
@@ -162,13 +161,13 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
-					Image smallImage =
-						ImageUtil.fetchByPrimaryKey(igImage.getSmallImageId());
+					Image smallImage = ImageUtil.fetchByPrimaryKey(
+						igImage.getSmallImageId());
 
 					images.add(smallImage);
 
-					Image largeImage =
-						ImageUtil.fetchByPrimaryKey(igImage.getLargeImageId());
+					Image largeImage = ImageUtil.fetchByPrimaryKey(
+						igImage.getLargeImageId());
 
 					images.add(largeImage);
 				}
@@ -219,8 +218,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_IG_DATA,
-			_enableImport.getDefaultState());
+			parameterMap, _IMPORT_IG_DATA, _enableImport.getDefaultState());
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -273,7 +271,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List igImages = (List) xStream.fromXML(
+			List igImages = (List)xStream.fromXML(
 				XMLFormatter.toString(tempDoc));
 
 			itr = igImages.iterator();
@@ -292,7 +290,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List images = (List) xStream.fromXML(
+			List images = (List)xStream.fromXML(
 				XMLFormatter.toString(tempDoc));
 
 			itr = images.iterator();
