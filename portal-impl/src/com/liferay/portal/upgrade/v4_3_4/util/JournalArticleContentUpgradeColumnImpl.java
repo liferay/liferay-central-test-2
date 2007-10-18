@@ -54,13 +54,17 @@ public class JournalArticleContentUpgradeColumnImpl
 		String structureId = (String)_structureIdColumn.getOldValue();
 
 		if (Validator.isNull(structureId)) {
-			String defaultLanguageId = LocaleUtil.toLanguageId(
-				LocaleUtil.getDefault());
+			if (Validator.isNotNull(oldContent) &&
+				(oldContent.indexOf("<static-content") == -1)) {
 
-			oldContent = LocalizationUtil.updateLocalization(
-				StringPool.BLANK, "static-content",
-				GetterUtil.getString(oldContent), defaultLanguageId,
-				defaultLanguageId);
+				String defaultLanguageId = LocaleUtil.toLanguageId(
+						LocaleUtil.getDefault());
+
+				oldContent = LocalizationUtil.updateLocalization(
+					StringPool.BLANK, "static-content",
+					GetterUtil.getString(oldContent), defaultLanguageId,
+					defaultLanguageId, true);
+			}
 		}
 
 		return oldContent;

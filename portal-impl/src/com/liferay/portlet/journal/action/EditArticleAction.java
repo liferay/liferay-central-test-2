@@ -363,7 +363,8 @@ public class EditArticleAction extends PortletAction {
 		if (cmd.equals(Constants.ADD)) {
 			if (Validator.isNull(structureId)) {
 				content = LocalizationUtil.updateLocalization(
-					StringPool.BLANK, "static-content", content);
+					StringPool.BLANK, "static-content", content,
+					lastLanguageId, defaultLanguageId, true);
 			}
 
 			// Add article
@@ -394,7 +395,7 @@ public class EditArticleAction extends PortletAction {
 				if (!curArticle.isTemplateDriven()) {
 					content = LocalizationUtil.updateLocalization(
 						curArticle.getContent(), "static-content", content,
-						lastLanguageId, defaultLanguageId);
+						lastLanguageId, defaultLanguageId, true);
 				}
 			}
 			else {

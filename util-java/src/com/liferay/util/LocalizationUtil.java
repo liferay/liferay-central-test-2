@@ -217,6 +217,14 @@ public class LocalizationUtil {
 	public static String updateLocalization(
 			String xml, String key, String value, String requestedLanguageId,
 			String defaultLanguageId) {
+		
+		return updateLocalization(
+			xml, key, value, requestedLanguageId, defaultLanguageId, false);
+	}
+
+	public static String updateLocalization(
+			String xml, String key, String value, String requestedLanguageId,
+			String defaultLanguageId, boolean isCDATA) {
 
 		if (Validator.isNull(xml) || (xml.indexOf("<root") == -1)) {
 			xml = "<root />";
@@ -252,13 +260,25 @@ public class LocalizationUtil {
 
 			if (localeEl != null) {
 				localeEl.addAttribute("language-id", requestedLanguageId);
-				localeEl.setText(value);
+
+				if (isCDATA) {
+					localeEl.addCDATA(value);
+				}
+				else {
+					localeEl.setText(value);
+				}
 			}
 			else {
 				localeEl = root.addElement(key);
 
 				localeEl.addAttribute("language-id", requestedLanguageId);
-				localeEl.setText(value);
+
+				if (isCDATA) {
+					localeEl.addCDATA(value);
+				}
+				else {
+					localeEl.setText(value);
+				}
 
 				if (availableLocales == null) {
 					availableLocales = defaultLanguageId;
