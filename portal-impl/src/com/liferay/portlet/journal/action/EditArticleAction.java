@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
@@ -53,6 +54,7 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.FileUtil;
+import com.liferay.util.LocalizationUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 
@@ -296,6 +298,10 @@ public class EditArticleAction extends PortletAction {
 		String structureId = ParamUtil.getString(req, "structureId");
 		String templateId = ParamUtil.getString(req, "templateId");
 
+		String lastLanguageId = ParamUtil.getString(req, "lastLanguageId");
+		String defaultLanguageId =
+			ParamUtil.getString(req, "defaultLanguageId");
+
 		int displayDateMonth = ParamUtil.getInteger(req, "displayDateMonth");
 		int displayDateDay = ParamUtil.getInteger(req, "displayDateDay");
 		int displayDateYear = ParamUtil.getInteger(req, "displayDateYear");
@@ -355,6 +361,10 @@ public class EditArticleAction extends PortletAction {
 		JournalArticle article = null;
 
 		if (cmd.equals(Constants.ADD)) {
+			if (Validator.isNull(structureId)) {
+				content = LocalizationUtil.updateLocalization(
+					StringPool.BLANK, "static-content", content);
+			}
 
 			// Add article
 
@@ -377,12 +387,19 @@ public class EditArticleAction extends PortletAction {
 
 			// Merge current content with new content
 
-			if (Validator.isNotNull(structureId)) {
-				JournalArticle curArticle =
-					JournalArticleServiceUtil.getArticle(
-						groupId, articleId, version);
+			JournalArticle curArticle =
+				JournalArticleServiceUtil.getArticle(
+					groupId, articleId, version);
 
-				if (Validator.isNotNull(curArticle.getStructureId())) {
+			if (Validator.isNull(structureId)) {
+				if (!curArticle.isTemplateDriven()) {
+					content = LocalizationUtil.updateLocalization(
+						curArticle.getContent(), "static-content", content,
+						lastLanguageId, defaultLanguageId);
+				}
+			}
+			else {
+				if (curArticle.isTemplateDriven()) {
 					JournalStructure structure =
 						JournalStructureLocalServiceUtil.getStructure(
 							groupId, structureId);

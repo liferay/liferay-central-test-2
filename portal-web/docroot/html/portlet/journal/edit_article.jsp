@@ -734,114 +734,109 @@ String[] availableLocales = null;
 	<liferay-ui:section>
 		<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
 
-		<c:choose>
-			<c:when test="<%= (structure != null) %>">
+		<table class="liferay-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="language" />
+			</td>
+			<td>
+				<input name="<portlet:namespace />lastLanguageId" type="hidden" value="<%= languageId %>" />
+
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<liferay-ui:message key="language" />
+						<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />changeLanguageView();">
+
+							<%
+							Locale[] locales = LanguageUtil.getAvailableLocales();
+
+							for (int i = 0; i < locales.length; i++) {
+							%>
+
+								<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+
+							<%
+							}
+							%>
+
+						</select>
+
+						<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
+							<input type="button" name="<portlet:namespace />removeArticleLocaleButton" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeArticleLocale();" />
+						</c:if>
 					</td>
 					<td>
 						<table class="liferay-table">
+
+						<%
+						contentDoc = null;
+
+						try {
+							contentDoc = reader.read(new StringReader(content));
+
+							Element contentEl = contentDoc.getRootElement();
+
+							availableLocales = StringUtil.split(contentEl.attributeValue("available-locales"));
+						}
+						catch (Exception e) {
+							contentDoc = null;
+						}
+						%>
+
 						<tr>
 							<td>
-								<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />changeLanguageView();">
+								<liferay-ui:message key="default-language" />
+							</td>
+							<td>
+								<select name="<portlet:namespace />defaultLanguageId" onChange="<portlet:namespace />changeLanguageView();">
 
 									<%
-									Locale[] locales = LanguageUtil.getAvailableLocales();
+									if ((availableLocales != null) && (availableLocales.length > 0)) {
+										boolean wasLanguageId = false;
 
-									for (int i = 0; i < locales.length; i++) {
+										for (int i = 0; i < availableLocales.length; i++) {
+											if (availableLocales[i].equals(languageId)) {
+												wasLanguageId = true;
+											}
+
+											Locale availableLocale = LocaleUtil.fromLanguageId(availableLocales[i]);
 									%>
 
-										<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+											<option <%= (availableLocales[i].equals(defaultLanguageId)) ? "selected" : "" %> value="<%= availableLocales[i] %>"><%= availableLocale.getDisplayName(availableLocale) %></option>
+
+									<%
+										}
+
+										if (!wasLanguageId) {
+											Locale languageLocale = LocaleUtil.fromLanguageId(languageId);
+									%>
+
+											<option value="<%= languageId %>"><%= languageLocale.getDisplayName(languageLocale) %></option>
+
+									<%
+										}
+									}
+									else  {
+									%>
+
+										<option value="<%= defaultLanguageId %>"><%= defaultLocale.getDisplayName(defaultLocale) %></option>
 
 									<%
 									}
 									%>
 
 								</select>
-
-								<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
-									<input type="button" name="<portlet:namespace />removeArticleLocaleButton" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeArticleLocale();" />
-								</c:if>
-							</td>
-							<td>
-								<table class="liferay-table">
-
-								<%
-								contentDoc = null;
-
-								try {
-									contentDoc = reader.read(new StringReader(content));
-
-									Element contentEl = contentDoc.getRootElement();
-
-									availableLocales = StringUtil.split(contentEl.attributeValue("available-locales"));
-								}
-								catch (Exception e) {
-									contentDoc = null;
-								}
-								%>
-
-								<tr>
-									<td>
-										<liferay-ui:message key="default-language" />
-									</td>
-									<td>
-										<select name="<portlet:namespace />defaultLanguageId" onChange="<portlet:namespace />changeLanguageView();">
-
-											<%
-											if ((availableLocales != null) && (availableLocales.length > 0)) {
-												boolean wasLanguageId = false;
-
-												for (int i = 0; i < availableLocales.length; i++) {
-													if (availableLocales[i].equals(languageId)) {
-														wasLanguageId = true;
-													}
-
-													Locale availableLocale = LocaleUtil.fromLanguageId(availableLocales[i]);
-											%>
-
-													<option <%= (availableLocales[i].equals(defaultLanguageId)) ? "selected" : "" %> value="<%= availableLocales[i] %>"><%= availableLocale.getDisplayName(availableLocale) %></option>
-
-											<%
-												}
-
-												if (!wasLanguageId) {
-													Locale languageLocale = LocaleUtil.fromLanguageId(languageId);
-											%>
-
-													<option value="<%= languageId %>"><%= languageLocale.getDisplayName(languageLocale) %></option>
-
-											<%
-												}
-											}
-											else  {
-											%>
-
-												<option value="<%= defaultLanguageId %>"><%= defaultLocale.getDisplayName(defaultLocale) %></option>
-
-											<%
-											}
-											%>
-
-										</select>
-									</td>
-								</tr>
-								</table>
 							</td>
 						</tr>
 						</table>
 					</td>
 				</tr>
 				</table>
+			</td>
+		</tr>
+		</table>
 
-				<br />
-			</c:when>
-			<c:otherwise>
-				<input name="<portlet:namespace />languageId" type="hidden" value="<%= defaultLanguageId %>" />
-			</c:otherwise>
-		</c:choose>
+		<br />
 
 		<table class="liferay-table">
 		<tr>
@@ -934,7 +929,7 @@ String[] availableLocales = null;
 
 		<c:choose>
 			<c:when test="<%= structure == null %>">
-				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
+				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
 			</c:when>
 			<c:otherwise>
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">

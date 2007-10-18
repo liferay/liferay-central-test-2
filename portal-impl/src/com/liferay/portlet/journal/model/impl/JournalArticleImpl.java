@@ -23,20 +23,14 @@
 package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
-
-import java.io.StringReader;
+import com.liferay.util.LocalizationUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="JournalArticleImpl.java.html"><b><i>View Source</i></b></a>
@@ -60,31 +54,15 @@ public class JournalArticleImpl
 	}
 
 	public String[] getAvailableLocales() {
-		String[] availableLocales = new String[0];
-
-		if (isTemplateDriven()) {
-			try {
-				SAXReader reader = new SAXReader();
-
-				Document doc = reader.read(new StringReader(getContent()));
-
-				Element root = doc.getRootElement();
-
-				availableLocales = StringUtil.split(
-					root.attributeValue("available-locales"));
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return availableLocales;
+		return LocalizationUtil.getAvailableLocales(getContent());
 	}
 
 	public String getContentByLocale(String languageId){
-		LocaleTransformerListener listener = new LocaleTransformerListener();
+		LocaleTransformerListener listener =
+			new LocaleTransformerListener();
 
 		listener.setLanguageId(languageId);
+		listener.setTemplateDriven(isTemplateDriven());
 
 		return listener.onXml(getContent());
 	}
@@ -92,30 +70,19 @@ public class JournalArticleImpl
 	public String getDefaultLocale() {
 		String xml = getContent();
 
-		String defaultLanguageId = LocaleUtil.toLanguageId(
-			LocaleUtil.getDefault());
+		if (xml == null) {
+			return "";
+		}
 
-		if ((Validator.isNull(xml)) ||
-			(xml.indexOf("<dynamic-element name=\"") == -1)) {
+		if (isTemplateDriven()) {
+			String defaultLanguageId = LocaleUtil.toLanguageId(
+				LocaleUtil.getDefault());
 
 			return defaultLanguageId;
 		}
-
-		try {
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(xml));
-
-			Element root = doc.getRootElement();
-
-			return root.attributeValue("default-locale", defaultLanguageId);
-
+		else {
+			return LocalizationUtil.getDefaultLocale(xml);
 		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		return defaultLanguageId;
 	}
 
 	public boolean isTemplateDriven() {

@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.util.LocalizationUtil;
 
 import java.io.StringReader;
 
@@ -74,53 +75,53 @@ public class LocaleTransformerListener extends TransformerListener {
 	}
 
 	protected String localize(String xml) {
-
-		// Don't localize articles without a strucutre
-
-		if ((xml == null) || (xml.indexOf("<dynamic-element name=\"") == -1)) {
+		if (xml == null) {
 			return xml;
 		}
 
-		// Localize articles with a structure
-
 		_requestedLocale = getLanguageId();
 
-		try {
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(xml));
-
-			Element root = doc.getRootElement();
-
-			String defaultLanguageId = LocaleUtil.toLanguageId(
-				LocaleUtil.getDefault());
-
-			String[] availableLocales = StringUtil.split(
-				root.attributeValue("available-locales", defaultLanguageId));
-
-			String defaultLocale = root.attributeValue(
-				"default-locale", defaultLanguageId);
-
-			boolean isSupportedLocale = false;
-
-			for (int i = 0; i < availableLocales.length; i++) {
-				if (availableLocales[i].equalsIgnoreCase(getLanguageId())) {
-					isSupportedLocale = true;
-
-					break;
-				}
-			}
-
-			if (!isSupportedLocale) {
-				setLanguageId(defaultLocale);
-			}
-
-			localize(root);
-
-			xml = JournalUtil.formatXML(doc);
+		if (!isTemplateDriven()) {
+			return LocalizationUtil.getLocalization(xml, _requestedLocale);
 		}
-		catch (Exception e) {
-			_log.error(e);
+		else {
+			try {
+				SAXReader reader = new SAXReader();
+
+				Document doc = reader.read(new StringReader(xml));
+
+				Element root = doc.getRootElement();
+
+				String defaultLanguageId = LocaleUtil.toLanguageId(
+					LocaleUtil.getDefault());
+
+				String[] availableLocales = StringUtil.split(
+					root.attributeValue("available-locales", defaultLanguageId));
+
+				String defaultLocale = root.attributeValue(
+					"default-locale", defaultLanguageId);
+
+				boolean isSupportedLocale = false;
+
+				for (int i = 0; i < availableLocales.length; i++) {
+					if (availableLocales[i].equalsIgnoreCase(getLanguageId())) {
+						isSupportedLocale = true;
+
+						break;
+					}
+				}
+
+				if (!isSupportedLocale) {
+					setLanguageId(defaultLocale);
+				}
+
+				localize(root);
+
+				xml = JournalUtil.formatXML(doc);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 
 		return xml;

@@ -84,6 +84,7 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
+import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.lucene.HitsImpl;
 
@@ -1137,14 +1138,19 @@ public class JournalArticleLocalServiceImpl
 		JournalArticle article = JournalArticleUtil.findByG_A_V(
 			groupId, articleId, version);
 
-		if (Validator.isNotNull(article.getStructureId())) {
-			String content = JournalUtil.removeArticleLocale(
-				article.getContent(), languageId);
+		String content = article.getContent();
 
-			article.setContent(content);
-
-			JournalArticleUtil.update(article);
+		if (article.isTemplateDriven()) {
+			content = JournalUtil.removeArticleLocale(content, languageId);
 		}
+		else {
+			content = LocalizationUtil.removeLocalization(
+				content, "static-content", languageId);
+		}
+
+		article.setContent(content);
+
+		JournalArticleUtil.update(article);
 
 		return article;
 	}

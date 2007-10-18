@@ -35,12 +35,12 @@ public abstract class TransformerListener {
 	public TransformerListener() {
 	}
 
-	public Map getTokens() {
-		return _tokens;
+	public boolean isTemplateDriven() {
+		return _isTemplateDriven;
 	}
 
-	public void setTokens(Map tokens) {
-		_tokens = tokens;
+	public void setTemplateDriven(boolean isTemplateDriven) {
+		_isTemplateDriven = isTemplateDriven;
 	}
 
 	public String getLanguageId() {
@@ -51,13 +51,22 @@ public abstract class TransformerListener {
 		_languageId = languageId;
 	}
 
+	public Map getTokens() {
+		return _tokens;
+	}
+
+	public void setTokens(Map tokens) {
+		_tokens = tokens;
+	}
+
 	public abstract String onXml(String s);
 
 	public abstract String onScript(String s);
 
 	public abstract String onOutput(String s);
 
-	private Map _tokens;
+	private boolean _isTemplateDriven;
 	private String _languageId;
+	private Map _tokens;
 
 }

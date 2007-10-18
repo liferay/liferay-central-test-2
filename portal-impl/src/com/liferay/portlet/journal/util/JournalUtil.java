@@ -610,6 +610,7 @@ public class JournalUtil {
 
 					listener.setTokens(tokens);
 					listener.setLanguageId(languageId);
+					listener.setTemplateDriven(true);
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -876,11 +877,14 @@ public class JournalUtil {
 					_log.debug("Instantiate listener " + listeners[i]);
 				}
 
+				boolean isTemplateDriven = Validator.isNotNull(langType);
+
 				listener = (TransformerListener)Class.forName(
 					listeners[i]).newInstance();
 
 				listener.setTokens(tokens);
 				listener.setLanguageId(languageId);
+				listener.setTemplateDriven(isTemplateDriven);
 
 				listenersList.add(listener);
 			}

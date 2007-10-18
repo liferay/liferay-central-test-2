@@ -54,10 +54,9 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.Http;
-import com.liferay.util.xml.XMLFormatter;
+import com.liferay.util.LocalizationUtil;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -73,11 +72,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="LayoutImpl.java.html"><b><i>View Source</i></b></a>
@@ -348,16 +342,14 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public String getName(String localeLanguageId) {
-		return _parseLocalizedXml(getName(), localeLanguageId);
+		return LocalizationUtil.getLocalization(getName(), localeLanguageId);
 	}
 
 	public void setName(String name, Locale locale) {
-		try {
-			setName(_updateLocalizedXml(getName(), "name", name, locale));
-		}
-		catch (Exception e) {
-			_log.warn(e);
-		}
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+		setName(LocalizationUtil.updateLocalization(
+			getName(), "name", name, localeLanguageId));
 	}
 
 	public String getTitle(Locale locale) {
@@ -367,7 +359,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public String getTitle(String localeLanguageId) {
-		return _parseLocalizedXml(getTitle(), localeLanguageId);
+		return LocalizationUtil.getLocalization(getTitle(), localeLanguageId);
 	}
 
 	public String getHTMLTitle(Locale locale) {
@@ -387,12 +379,10 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public void setTitle(String title, Locale locale) {
-		try {
-			setTitle(_updateLocalizedXml(getTitle(), "title", title, locale));
-		}
-		catch (Exception e) {
-			_log.warn(e);
-		}
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+		setTitle(LocalizationUtil.updateLocalization(
+			getTitle(), "title", title, localeLanguageId));
 	}
 
 	public LayoutType getLayoutType() {
@@ -679,107 +669,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 
 		return url;
-	}
-
-	private String _parseLocalizedXml(String xml, String localeLanguageId) {
-		String value = StringPool.BLANK;
-
-		try {
-			String defaultLanguageId =
-				LocaleUtil.toLanguageId(LocaleUtil.getDefault());
-
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(xml));
-
-			Element root = doc.getRootElement();
-
-			Iterator itr = root.elements().iterator();
-
-			while (itr.hasNext()) {
-				Element el = (Element)itr.next();
-
-				String languageId =
-					el.attributeValue("language-id", defaultLanguageId);
-
-				if (languageId.equals(defaultLanguageId)) {
-					value = el.getText();
-				}
-
-				if (languageId.equals(localeLanguageId)) {
-					value = el.getText();
-
-					break;
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.warn(e);
-		}
-
-		return value;
-	}
-
-	private String _updateLocalizedXml(
-			String xml, String key, String value, Locale locale)
-		throws DocumentException, IOException {
-
-		if (Validator.isNull(xml) || (xml.indexOf("<root") == -1)) {
-			xml = "<root />";
-		}
-
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		String defaultLanguageId = LocaleUtil.toLanguageId(
-			LocaleUtil.getDefault());
-
-		SAXReader reader = new SAXReader();
-
-		Document doc = reader.read(new StringReader(xml));
-
-		Element root = doc.getRootElement();
-
-		String availableLocales = root.attributeValue("available-locales");
-
-		Element localeEl = null;
-
-		Iterator itr = root.elements().iterator();
-
-		while (itr.hasNext()) {
-			Element el = (Element) itr.next();
-
-			String languageId =
-				el.attributeValue("language-id", defaultLanguageId);
-
-			if (languageId.equals(localeLanguageId)) {
-				localeEl = el;
-
-				break;
-			}
-		}
-
-		if (localeEl != null) {
-			localeEl.setText(value);
-		}
-		else {
-			localeEl = root.addElement(key);
-
-			if (!localeLanguageId.equals(defaultLanguageId)) {
-				localeEl.addAttribute("language-id", localeLanguageId);
-
-				if (availableLocales == null) {
-					availableLocales = defaultLanguageId;
-				}
-
-				availableLocales += StringPool.COMMA + localeLanguageId;
-
-				root.addAttribute("available-locales", availableLocales);
-			}
-
-			localeEl.setText(value);
-		}
-
-		return XMLFormatter.toString(doc, "  ");
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutImpl.class);

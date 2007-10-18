@@ -19,35 +19,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.liferay.portal.upgrade.v4_3_4;
 
-package com.liferay.portal.upgrade;
-
-import com.liferay.portal.upgrade.v4_3_4.UpgradeJournal;
-import com.liferay.portal.upgrade.v4_3_4.UpgradeSchema;
-import com.liferay.portal.util.ReleaseInfo;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v4_3_4.util.JournalArticleContentUpgradeColumnImpl;
+import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeProcess_4_3_4.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public class UpgradeProcess_4_3_4 extends UpgradeProcess {
-
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_4_3_4_BUILD_NUMBER;
-	}
+public class UpgradeJournal extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(new UpgradeSchema());
-		upgrade(new UpgradeJournal());
+		try {
+			upgradeArticles();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_4.class);
+	public void upgradeArticles() throws Exception {
+		TempUpgradeColumnImpl structureColumn =
+			new TempUpgradeColumnImpl("structureId");
+
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
+			structureColumn,
+			new JournalArticleContentUpgradeColumnImpl(structureColumn));
+
+		upgradeTable.updateTable();
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeJournal.class);
 
 }
