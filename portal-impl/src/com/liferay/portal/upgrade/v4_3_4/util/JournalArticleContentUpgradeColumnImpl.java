@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.upgrade.v4_3_4.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -40,17 +41,19 @@ public class JournalArticleContentUpgradeColumnImpl
 	extends BaseUpgradeColumnImpl {
 
 	public JournalArticleContentUpgradeColumnImpl(
-			TempUpgradeColumnImpl structureColumn) {
+			TempUpgradeColumnImpl structureIdColumn) {
 
 		super("content");
 
-		_structureColumn = structureColumn;
+		_structureIdColumn = structureIdColumn;
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
 		String oldContent = (String)oldValue;
 
-		if (Validator.isNull((String)_structureColumn.getOldValue())) {
+		String structureId = (String)_structureIdColumn.getOldValue();
+
+		if (Validator.isNull(structureId)) {
 			String defaultLanguageId = LocaleUtil.toLanguageId(
 				LocaleUtil.getDefault());
 
@@ -63,6 +66,6 @@ public class JournalArticleContentUpgradeColumnImpl
 		return oldContent;
 	}
 
-	private TempUpgradeColumnImpl _structureColumn;
+	private TempUpgradeColumnImpl _structureIdColumn;
 
 }

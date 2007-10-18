@@ -348,8 +348,9 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	public void setName(String name, Locale locale) {
 		String localeLanguageId = LocaleUtil.toLanguageId(locale);
 
-		setName(LocalizationUtil.updateLocalization(
-			getName(), "name", name, localeLanguageId));
+		setName(
+			LocalizationUtil.updateLocalization(
+				getName(), "name", name, localeLanguageId));
 	}
 
 	public String getTitle(Locale locale) {
@@ -381,8 +382,9 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	public void setTitle(String title, Locale locale) {
 		String localeLanguageId = LocaleUtil.toLanguageId(locale);
 
-		setTitle(LocalizationUtil.updateLocalization(
-			getTitle(), "title", title, localeLanguageId));
+		setTitle(
+			LocalizationUtil.updateLocalization(
+				getTitle(), "title", title, localeLanguageId));
 	}
 
 	public LayoutType getLayoutType() {

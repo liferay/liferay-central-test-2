@@ -84,44 +84,43 @@ public class LocaleTransformerListener extends TransformerListener {
 		if (!isTemplateDriven()) {
 			return LocalizationUtil.getLocalization(xml, _requestedLocale);
 		}
-		else {
-			try {
-				SAXReader reader = new SAXReader();
 
-				Document doc = reader.read(new StringReader(xml));
+		try {
+			SAXReader reader = new SAXReader();
 
-				Element root = doc.getRootElement();
+			Document doc = reader.read(new StringReader(xml));
 
-				String defaultLanguageId = LocaleUtil.toLanguageId(
-					LocaleUtil.getDefault());
+			Element root = doc.getRootElement();
 
-				String[] availableLocales = StringUtil.split(
-					root.attributeValue("available-locales", defaultLanguageId));
+			String defaultLanguageId = LocaleUtil.toLanguageId(
+				LocaleUtil.getDefault());
 
-				String defaultLocale = root.attributeValue(
-					"default-locale", defaultLanguageId);
+			String[] availableLocales = StringUtil.split(
+				root.attributeValue("available-locales", defaultLanguageId));
 
-				boolean isSupportedLocale = false;
+			String defaultLocale = root.attributeValue(
+				"default-locale", defaultLanguageId);
 
-				for (int i = 0; i < availableLocales.length; i++) {
-					if (availableLocales[i].equalsIgnoreCase(getLanguageId())) {
-						isSupportedLocale = true;
+			boolean isSupportedLocale = false;
 
-						break;
-					}
+			for (int i = 0; i < availableLocales.length; i++) {
+				if (availableLocales[i].equalsIgnoreCase(getLanguageId())) {
+					isSupportedLocale = true;
+
+					break;
 				}
-
-				if (!isSupportedLocale) {
-					setLanguageId(defaultLocale);
-				}
-
-				localize(root);
-
-				xml = JournalUtil.formatXML(doc);
 			}
-			catch (Exception e) {
-				_log.error(e);
+
+			if (!isSupportedLocale) {
+				setLanguageId(defaultLocale);
 			}
+
+			localize(root);
+
+			xml = JournalUtil.formatXML(doc);
+		}
+		catch (Exception e) {
+			_log.error(e);
 		}
 
 		return xml;

@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -58,11 +59,10 @@ public class JournalArticleImpl
 	}
 
 	public String getContentByLocale(String languageId){
-		LocaleTransformerListener listener =
-			new LocaleTransformerListener();
+		LocaleTransformerListener listener = new LocaleTransformerListener();
 
-		listener.setLanguageId(languageId);
 		listener.setTemplateDriven(isTemplateDriven());
+		listener.setLanguageId(languageId);
 
 		return listener.onXml(getContent());
 	}
@@ -71,7 +71,7 @@ public class JournalArticleImpl
 		String xml = getContent();
 
 		if (xml == null) {
-			return "";
+			return StringPool.BLANK;
 		}
 
 		if (isTemplateDriven()) {

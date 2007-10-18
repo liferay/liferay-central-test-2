@@ -36,11 +36,11 @@ public abstract class TransformerListener {
 	}
 
 	public boolean isTemplateDriven() {
-		return _isTemplateDriven;
+		return _templateDriven;
 	}
 
-	public void setTemplateDriven(boolean isTemplateDriven) {
-		_isTemplateDriven = isTemplateDriven;
+	public void setTemplateDriven(boolean templateDriven) {
+		_templateDriven = templateDriven;
 	}
 
 	public String getLanguageId() {
@@ -65,7 +65,7 @@ public abstract class TransformerListener {
 
 	public abstract String onOutput(String s);
 
-	private boolean _isTemplateDriven;
+	private boolean _templateDriven;
 	private String _languageId;
 	private Map _tokens;
 

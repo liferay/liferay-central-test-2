@@ -60,7 +60,9 @@ public class LocalizationUtil {
 				root.attributeValue("available-locales"));
 		}
 		catch (Exception e) {
-			_log.warn(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 
 		return availableLocales;
@@ -80,7 +82,9 @@ public class LocalizationUtil {
 			return root.attributeValue("default-locale", defaultLanguageId);
 		}
 		catch (Exception e) {
-			_log.warn(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 
 		return defaultLanguageId;
@@ -127,7 +131,9 @@ public class LocalizationUtil {
 			}
 		}
 		catch (Exception e) {
-			_log.warn(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 
 		return value;
@@ -180,7 +186,9 @@ public class LocalizationUtil {
 			xml = XMLFormatter.toString(doc, "  ");
 		}
 		catch (Exception e) {
-			_log.warn(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 
 		return xml;
@@ -268,7 +276,9 @@ public class LocalizationUtil {
 			updatedXml = XMLFormatter.toString(doc, "  ");
 		}
 		catch (Exception e) {
-			_log.warn(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 
 		return updatedXml;

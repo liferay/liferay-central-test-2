@@ -608,9 +608,9 @@ public class JournalUtil {
 						(TransformerListener)Class.forName(
 							listeners[i]).newInstance();
 
-					listener.setTokens(tokens);
-					listener.setLanguageId(languageId);
 					listener.setTemplateDriven(true);
+					listener.setLanguageId(languageId);
+					listener.setTokens(tokens);
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -877,14 +877,14 @@ public class JournalUtil {
 					_log.debug("Instantiate listener " + listeners[i]);
 				}
 
-				boolean isTemplateDriven = Validator.isNotNull(langType);
+				boolean templateDriven = Validator.isNotNull(langType);
 
 				listener = (TransformerListener)Class.forName(
 					listeners[i]).newInstance();
 
-				listener.setTokens(tokens);
+				listener.setTemplateDriven(templateDriven);
 				listener.setLanguageId(languageId);
-				listener.setTemplateDriven(isTemplateDriven);
+				listener.setTokens(tokens);
 
 				listenersList.add(listener);
 			}

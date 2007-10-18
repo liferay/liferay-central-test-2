@@ -299,8 +299,8 @@ public class EditArticleAction extends PortletAction {
 		String templateId = ParamUtil.getString(req, "templateId");
 
 		String lastLanguageId = ParamUtil.getString(req, "lastLanguageId");
-		String defaultLanguageId =
-			ParamUtil.getString(req, "defaultLanguageId");
+		String defaultLanguageId = ParamUtil.getString(
+			req, "defaultLanguageId");
 
 		int displayDateMonth = ParamUtil.getInteger(req, "displayDateMonth");
 		int displayDateDay = ParamUtil.getInteger(req, "displayDateDay");
@@ -387,9 +387,8 @@ public class EditArticleAction extends PortletAction {
 
 			// Merge current content with new content
 
-			JournalArticle curArticle =
-				JournalArticleServiceUtil.getArticle(
-					groupId, articleId, version);
+			JournalArticle curArticle = JournalArticleServiceUtil.getArticle(
+				groupId, articleId, version);
 
 			if (Validator.isNull(structureId)) {
 				if (!curArticle.isTemplateDriven()) {

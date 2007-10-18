@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.upgrade.v4_3_4;
 
 import com.liferay.portal.upgrade.UpgradeException;
@@ -52,13 +53,13 @@ public class UpgradeJournal extends UpgradeProcess {
 	}
 
 	public void upgradeArticles() throws Exception {
-		TempUpgradeColumnImpl structureColumn =
+		TempUpgradeColumnImpl structureIdColumn =
 			new TempUpgradeColumnImpl("structureId");
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
-			structureColumn,
-			new JournalArticleContentUpgradeColumnImpl(structureColumn));
+			structureIdColumn,
+			new JournalArticleContentUpgradeColumnImpl(structureIdColumn));
 
 		upgradeTable.updateTable();
 	}
