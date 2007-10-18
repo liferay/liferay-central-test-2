@@ -52,7 +52,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		}
 	}
 
-	public void doUpgrade() throws Exception {
+	protected void doUpgrade() throws Exception {
 		TempUpgradeColumnImpl structureIdColumn =
 			new TempUpgradeColumnImpl("structureId");
 
