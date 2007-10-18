@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.PortletURLImpl;
@@ -43,8 +44,6 @@ import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.id.uuid.UUID;
 
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -105,7 +104,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		OpenSearchUtil.addElement(
 			entry, "id", OpenSearchUtil.DEFAULT_NAMESPACE,
-			"urn:uuid:" + UUID.timeUUID());
+			"urn:uuid:" + PortalUUIDUtil.generate());
 
 		// updated
 
@@ -209,7 +208,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		OpenSearchUtil.addElement(
 			root, "id", OpenSearchUtil.DEFAULT_NAMESPACE,
-			"urn:uuid:" + UUID.timeUUID());
+			"urn:uuid:" + PortalUUIDUtil.generate());
 
 		// opensearch:totalResults
 
