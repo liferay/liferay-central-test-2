@@ -79,7 +79,7 @@ public class OpenSearchUtil {
 
 		Element returnElement = el.addElement(getQName(name, namespaceType));
 
-		returnElement.addCDATA(value);
+		returnElement.addText(value);
 
 		return returnElement;
 	}

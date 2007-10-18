@@ -25,7 +25,6 @@ package com.liferay.portal.lucene;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.UnicodeFormatter;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -203,10 +202,12 @@ public class LuceneFileExtractor {
 	protected String fixPptText(String text) {
 		char[] array = text.toCharArray();
 
+		// Remove characters between 0000 and 001f
+
 		for (int i = 0; i < array.length; i++) {
-			 if (UnicodeFormatter.charToHex(array[i]).equals("0000")) {
-				  array[i] = ' ';
-			 }
+			if (String.valueOf(array[i]).matches("[\u0000-\u001f]")) {
+				array[i] = ' ';
+			}
 		}
 
 		return new String(array);
