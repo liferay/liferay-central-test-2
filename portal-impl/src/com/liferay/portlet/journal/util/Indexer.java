@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lucene.LuceneFields;
@@ -33,14 +34,19 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.Html;
 
 import java.io.IOException;
+import java.io.StringReader;
 
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.portlet.PortletURL;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
+
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
@@ -59,13 +65,17 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			Date displayDate)
 		throws IOException {
 
-		if ((content != null) && (content.indexOf("<root>") != -1) &&
-			(content.indexOf("<dynamic-content>") != -1)) {
+		if ((content != null) && (content.indexOf("<dynamic-content>") != -1)) {
+			content = _getIndexableContent(content);
 
 			content = StringUtil.replace(
 				content, "<![CDATA[", StringPool.BLANK);
 			content = StringUtil.replace(content, "]]>", StringPool.BLANK);
 		}
+
+		content = StringUtil.replace(content, "&amp;", "&");
+		content = StringUtil.replace(content, "&lt;", "<");
+		content = StringUtil.replace(content, "&gt;", ">");
 
 		content = Html.stripHtml(content);
 
@@ -164,6 +174,52 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
+		}
+	}
+
+	private static String _getIndexableContent(String content) {
+		try {
+			StringMaker sm = new StringMaker();
+
+			SAXReader reader = new SAXReader();
+
+			org.dom4j.Document doc = reader.read(new StringReader(content));
+
+			Element root = doc.getRootElement();
+
+			_getIndexableContent(sm, root);
+
+			return sm.toString();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+
+			return content;
+		}
+	}
+
+	private static void _getIndexableContent(StringMaker sm, Element root)
+		throws Exception {
+
+		Iterator itr = root.elements().iterator();
+
+		while (itr.hasNext()) {
+			Element el = (Element)itr.next();
+
+			String elType = el.attributeValue("type", StringPool.BLANK);
+
+			if (elType.equals("text") || elType.equals("text_box") ||
+				elType.equals("text_area")) {
+
+				Element dynamicContent = el.element("dynamic-content");
+
+				String text = dynamicContent.getText();
+
+				sm.append(text);
+				sm.append(StringPool.BLANK);
+			}
+
+			_getIndexableContent(sm, el);
 		}
 	}
 
