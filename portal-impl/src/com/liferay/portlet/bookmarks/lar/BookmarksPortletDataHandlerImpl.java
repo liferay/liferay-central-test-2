@@ -245,7 +245,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List entries = (List) xStream.fromXML(
+			List entries = (List)xStream.fromXML(
 				XMLFormatter.toString(tempDoc));
 
 			itr = entries.iterator();
