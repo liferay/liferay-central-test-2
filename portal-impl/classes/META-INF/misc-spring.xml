@@ -112,7 +112,7 @@
 	</bean>
 	<bean id="com.liferay.portal.uuid.PortalUUIDImpl" class="com.liferay.portal.uuid.PortalUUIDImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.uuid.PortalUUIDUtil" class="com.liferay.portal.kernel.uuid.PortalUUIDUtil" lazy-init="true">
-		<property name="portalJNDI">
+		<property name="portalUUID">
 			<ref bean="com.liferay.portal.uuid.PortalUUIDImpl" />
 		</property>
 	</bean>
