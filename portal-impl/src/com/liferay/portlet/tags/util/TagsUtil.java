@@ -24,8 +24,6 @@ package com.liferay.portlet.tags.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
@@ -109,21 +107,7 @@ public class TagsUtil {
 			}
 		}
 
-		// Clear variables without a matching property
-
-		StringMaker sm = new StringMaker(result);
-
-		int varStart = result.indexOf("[$");
-
-		while (varStart != -1) {
-			int varEnd = result.indexOf("$]", varStart);
-
-			sm = sm.replace(varStart, varEnd + 2, StringPool.BLANK);
-
-			varStart = sm.indexOf("[$");
-		}
-
-		return sm.toString();
+		return StringUtil.removeBetween(result, "[$", "$]");
 	}
 
 }

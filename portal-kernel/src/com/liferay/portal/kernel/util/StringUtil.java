@@ -549,6 +549,34 @@ public class StringUtil {
 		return s;
 	}
 
+	public static String removeBetween(String s, String begin, String end) {
+		if ((s == null) || (begin == null) || (end == null)) {
+			return s;
+		}
+
+		StringMaker sm = new StringMaker(s.length());
+
+		int pos = 0;
+
+		while (true) {
+			int x = s.indexOf(begin, pos);
+			int y = s.indexOf(end, x + begin.length());
+
+			if ((x == -1) || (y == -1)) {
+				sm.append(s.substring(pos, s.length()));
+
+				break;
+			}
+			else {
+				sm.append(s.substring(pos, x));
+
+				pos = y + end.length();
+			}
+		}
+
+		return sm.toString();
+	}
+
 	public static String replace(String s, char oldSub, char newSub) {
 		return replace(s, oldSub, new Character(newSub).toString());
 	}
