@@ -91,7 +91,7 @@ public class LocalizationUtil {
 	}
 
 	public static String getLocalization(
-			String xml, String requestedLanguageId) {
+		String xml, String requestedLanguageId) {
 
 		String defaultLanguageId =
 			LocaleUtil.toLanguageId(LocaleUtil.getDefault());
@@ -100,7 +100,7 @@ public class LocalizationUtil {
 	}
 
 	public static String getLocalization(
-			String xml, String requestedLanguageId, String defaultLanguageId) {
+		String xml, String requestedLanguageId, String defaultLanguageId) {
 
 		String value = StringPool.BLANK;
 
@@ -140,7 +140,7 @@ public class LocalizationUtil {
 	}
 
 	public static String removeLocalization(
-			String xml, String key, String requestedLanguageId) {
+		String xml, String key, String requestedLanguageId) {
 
 		if (Validator.isNull(xml) || (xml.indexOf("<root") == -1)) {
 			xml = "<root />";
@@ -195,7 +195,7 @@ public class LocalizationUtil {
 	}
 
 	public static String updateLocalization(
-			String xml, String key, String value) {
+		String xml, String key, String value) {
 
 		String defaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
@@ -205,7 +205,7 @@ public class LocalizationUtil {
 	}
 
 	public static String updateLocalization(
-			String xml, String key, String value, String requestedLanguageId) {
+		String xml, String key, String value, String requestedLanguageId) {
 
 		String defaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
@@ -215,16 +215,16 @@ public class LocalizationUtil {
 	}
 
 	public static String updateLocalization(
-			String xml, String key, String value, String requestedLanguageId,
-			String defaultLanguageId) {
-		
+		String xml, String key, String value, String requestedLanguageId,
+		String defaultLanguageId) {
+
 		return updateLocalization(
 			xml, key, value, requestedLanguageId, defaultLanguageId, false);
 	}
 
 	public static String updateLocalization(
-			String xml, String key, String value, String requestedLanguageId,
-			String defaultLanguageId, boolean isCDATA) {
+		String xml, String key, String value, String requestedLanguageId,
+		String defaultLanguageId, boolean cdata) {
 
 		if (Validator.isNull(xml) || (xml.indexOf("<root") == -1)) {
 			xml = "<root />";
@@ -261,7 +261,7 @@ public class LocalizationUtil {
 			if (localeEl != null) {
 				localeEl.addAttribute("language-id", requestedLanguageId);
 
-				if (isCDATA) {
+				if (cdata) {
 					localeEl.addCDATA(value);
 				}
 				else {
@@ -273,7 +273,7 @@ public class LocalizationUtil {
 
 				localeEl.addAttribute("language-id", requestedLanguageId);
 
-				if (isCDATA) {
+				if (cdata) {
 					localeEl.addCDATA(value);
 				}
 				else {

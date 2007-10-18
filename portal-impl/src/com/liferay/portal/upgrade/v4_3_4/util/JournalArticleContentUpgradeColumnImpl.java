@@ -58,7 +58,7 @@ public class JournalArticleContentUpgradeColumnImpl
 				(oldContent.indexOf("<static-content") == -1)) {
 
 				String defaultLanguageId = LocaleUtil.toLanguageId(
-						LocaleUtil.getDefault());
+					LocaleUtil.getDefault());
 
 				oldContent = LocalizationUtil.updateLocalization(
 					StringPool.BLANK, "static-content",
