@@ -202,10 +202,8 @@ public class LuceneFileExtractor {
 	protected String fixPptText(String text) {
 		char[] array = text.toCharArray();
 
-		// Remove characters between 0000 and 001f
-
 		for (int i = 0; i < array.length; i++) {
-			if (String.valueOf(array[i]).matches("[\u0000-\u001f]")) {
+			if (String.valueOf(array[i]).matches("[^\u0020-\ud7ff]")) {
 				array[i] = ' ';
 			}
 		}
