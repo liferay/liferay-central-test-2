@@ -203,7 +203,7 @@ public class LuceneFileExtractor {
 		char[] array = text.toCharArray();
 
 		for (int i = 0; i < array.length; i++) {
-			if (String.valueOf(array[i]).matches("[^\u0020-\ud7ff]")) {
+			if (!(String.valueOf(array[i])).matches("[\\d\\w]")) {
 				array[i] = ' ';
 			}
 		}
