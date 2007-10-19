@@ -69,6 +69,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
@@ -205,6 +206,7 @@ public class ServiceBuilder {
 		badCmpFields.add("text");
 		badCmpFields.add("to");
 		badCmpFields.add("type");
+		badCmpFields.add("uuid");
 		badCmpFields.add("values");
 
 		return badCmpFields;
@@ -266,6 +268,8 @@ public class ServiceBuilder {
 			"com.liferay.portal.kernel.util.ShortWrapper",
 			"com.liferay.portal.kernel.util.StringMaker",
 			"com.liferay.portal.kernel.util.StringPool",
+			"com.liferay.portal.kernel.util.Validator",
+			"com.liferay.portal.kernel.uuid.PortalUUIDUtil",
 			"com.liferay.portal.security.auth.HttpPrincipal",
 			"com.liferay.portal.service.http.TunnelUtil",
 			"com.liferay.portal.spring.hibernate.FinderCache",
@@ -591,6 +595,8 @@ public class ServiceBuilder {
 					table = _portletShortName + "_" + table;
 				}
 
+				boolean uuid = GetterUtil.getBoolean(
+					entityEl.attributeValue("uuid"), false);
 				boolean localService = GetterUtil.getBoolean(
 					entityEl.attributeValue("local-service"), false);
 				boolean remoteService = GetterUtil.getBoolean(
@@ -613,6 +619,15 @@ public class ServiceBuilder {
 				List columnList = new ArrayList();
 
 				List columns = entityEl.elements("column");
+
+				if (uuid) {
+					Element column = DocumentHelper.createElement("column");
+
+					column.addAttribute("name", "uuid");
+					column.addAttribute("type", "String");
+
+					columns.add(0, column);
+				}
 
 				itr2 = columns.iterator();
 
@@ -667,6 +682,7 @@ public class ServiceBuilder {
 
 				if (orderEl != null) {
 					boolean asc = true;
+
 					if ((orderEl.attribute("by") != null) &&
 						(orderEl.attributeValue("by").equals("desc"))) {
 
@@ -715,6 +731,19 @@ public class ServiceBuilder {
 				List finderList = new ArrayList();
 
 				List finders = entityEl.elements("finder");
+
+				if (uuid) {
+					Element finderEl = DocumentHelper.createElement("finder");
+
+					finderEl.addAttribute("name", "Uuid");
+					finderEl.addAttribute("return-type", ejbName);
+
+					Element finderColEl = finderEl.addElement("finder-column");
+
+					finderColEl.addAttribute("name", "uuid");
+
+					finders.add(0, finderEl);
+				}
 
 				itr2 = finders.iterator();
 
@@ -805,10 +834,10 @@ public class ServiceBuilder {
 				_ejbList.add(
 					new Entity(
 						_packagePath, _portletName, _portletShortName, ejbName,
-						table, localService, remoteService, persistenceClass,
-						dataSource, sessionFactory, txManager, pkList,
-						regularColList, collectionList, columnList, order,
-						finderList, referenceList, txRequiredList));
+						table, uuid, localService, remoteService,
+						persistenceClass, dataSource, sessionFactory, txManager,
+						pkList, regularColList, collectionList, columnList,
+						order, finderList, referenceList, txRequiredList));
 			}
 
 			List exceptionList = new ArrayList();
@@ -2749,6 +2778,8 @@ public class ServiceBuilder {
 		sm.append("import com.liferay.portal.kernel.util.OrderByComparator;");
 		sm.append("import com.liferay.portal.kernel.util.StringMaker;");
 		sm.append("import com.liferay.portal.kernel.util.StringPool;");
+		sm.append("import com.liferay.portal.kernel.util.Validator;");
+		sm.append("import com.liferay.portal.kernel.uuid.PortalUUIDUtil;");
 		sm.append("import com.liferay.util.dao.hibernate.QueryPos;");
 		sm.append("import com.liferay.util.dao.hibernate.QueryUtil;");
 		sm.append("import java.sql.ResultSet;");
@@ -2784,6 +2815,12 @@ public class ServiceBuilder {
 		sm.append(entity.getName() + " " + entity.getVarName() + " = new " + entity.getName() + "Impl();");
 		sm.append(entity.getVarName() + ".setNew(true);");
 		sm.append(entity.getVarName() + ".setPrimaryKey(" + pkVarName + ");");
+
+		if (entity.hasUuid()) {
+			sm.append("String uuid = PortalUUIDUtil.generate();");
+			sm.append(entity.getVarName() + ".setUuid(uuid);");
+		}
+
 		sm.append("return " + entity.getVarName() + ";");
 		sm.append("}");
 
@@ -2880,6 +2917,13 @@ public class ServiceBuilder {
 			if (col.isCollection() && col.isMappingManyToMany()) {
 				sm.append("FinderCache.clearCache(\"" + col.getMappingTable() + "\");");
 			}
+		}
+
+		if (entity.hasUuid()) {
+			sm.append("if (Validator.isNull(" + entity.getVarName() + ".getUuid())) {");
+			sm.append("String uuid = PortalUUIDUtil.generate();");
+			sm.append(entity.getVarName() + ".setUuid(uuid);");
+			sm.append("}");
 		}
 
 		sm.append("Session session = null;");

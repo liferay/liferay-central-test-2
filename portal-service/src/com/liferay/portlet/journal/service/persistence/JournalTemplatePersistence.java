@@ -55,6 +55,14 @@ public interface JournalTemplatePersistence {
 	public com.liferay.portlet.journal.model.JournalTemplate fetchByPrimaryKey(
 		long id) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalTemplate findByUuid(
+		java.lang.String uuid)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchTemplateException;
+
+	public com.liferay.portlet.journal.model.JournalTemplate fetchByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException;
+
 	public java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -163,6 +171,10 @@ public interface JournalTemplatePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchTemplateException;
+
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -177,6 +189,9 @@ public interface JournalTemplatePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;

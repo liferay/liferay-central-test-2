@@ -46,13 +46,13 @@ public class Entity {
 	}
 
 	public Entity(String name) {
-		this(null, null, null, name, null, false, true, null, null, null, null,
-			 null, null, null, null, null, null, null, null);
+		this(null, null, null, name, null, false, false, true, null, null, null,
+			 null, null, null, null, null, null, null, null, null);
 	}
 
 	public Entity(String packagePath, String portletName,
 				  String portletShortName, String name, String table,
-				  boolean localService, boolean remoteService,
+				  boolean uuid, boolean localService, boolean remoteService,
 				  String persistenceClass, String dataSource,
 				  String sessionFactory, String txManager, List pkList,
 				  List regularColList, List collectionList, List columnList,
@@ -64,6 +64,7 @@ public class Entity {
 		_portletShortName = portletShortName;
 		_name = name;
 		_table = table;
+		_uuid = uuid;
 		_localService = localService;
 		_remoteService = remoteService;
 		_persistenceClass = persistenceClass;
@@ -112,6 +113,10 @@ public class Entity {
 
 	public String getTable() {
 		return _table;
+	}
+
+	public boolean hasUuid() {
+		return _uuid;
 	}
 
 	public boolean hasLocalService() {
@@ -271,6 +276,7 @@ public class Entity {
 	private String _portletShortName;
 	private String _name;
 	private String _table;
+	private boolean _uuid;
 	private boolean _localService;
 	private boolean _remoteService;
 	private String _persistenceClass;

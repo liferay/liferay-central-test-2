@@ -348,6 +348,7 @@ create table Image (
 );
 
 create table JournalArticle (
+	uuid_ VARCHAR(75) null,
 	id_ LONG not null primary key,
 	resourcePrimKey LONG,
 	groupId LONG,
@@ -376,6 +377,7 @@ create table JournalArticle (
 );
 
 create table JournalArticleImage (
+	uuid_ VARCHAR(75) null,
 	articleImageId LONG not null primary key,
 	groupId LONG,
 	articleId VARCHAR(75) null,
@@ -402,6 +404,7 @@ create table JournalContentSearch (
 );
 
 create table JournalStructure (
+	uuid_ VARCHAR(75) null,
 	id_ LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -416,6 +419,7 @@ create table JournalStructure (
 );
 
 create table JournalTemplate (
+	uuid_ VARCHAR(75) null,
 	id_ LONG not null primary key,
 	groupId LONG,
 	companyId LONG,

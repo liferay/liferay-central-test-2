@@ -49,6 +49,10 @@ public interface JournalArticleImageModel extends BaseModel {
 
 	public void setPrimaryKey(long pk);
 
+	public String getUuid();
+
+	public void setUuid(String uuid);
+
 	public long getArticleImageId();
 
 	public void setArticleImageId(long articleImageId);

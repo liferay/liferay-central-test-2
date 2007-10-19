@@ -51,11 +51,16 @@ The table value specifies the name of the table that this entity maps to in the
 database. If this value is not set, then the name of the table is the same as
 the name of the entity name.
 
-If the local-service is true, then the service will generate the local
+If the uuid value is true, then the service will generate a UUID column for the
+service. This column will automatically be populated with a UUID. Developers
+will also be able to find and remove based on that UUID. The default value is
+false.
+
+If the local-service value is true, then the service will generate the local
 interfaces for the service. The default value is false.
 
-If the remote-service is true, then the service will generate remote interfaces
-for the service. The default value is true.
+If the remote-service value is true, then the service will generate remote
+interfaces for the service. The default value is true.
 
 The persistence-class value specifies the name of your custom persistence class.
 This class must implmeent the generated persistence interface or extend the
@@ -85,6 +90,7 @@ data-source-spring-enterprise.xml).
 <!ATTLIST entity
 	name CDATA #REQUIRED
 	table CDATA #IMPLIED
+	uuid CDATA #IMPLIED
 	local-service CDATA #IMPLIED
 	remote-service CDATA #IMPLIED
 	persistence-class CDATA #IMPLIED

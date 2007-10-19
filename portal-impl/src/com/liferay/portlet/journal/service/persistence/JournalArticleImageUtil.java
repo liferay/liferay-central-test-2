@@ -150,6 +150,18 @@ public class JournalArticleImageUtil {
 		return getPersistence().fetchByPrimaryKey(articleImageId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticleImage findByUuid(
+		java.lang.String uuid)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleImageException {
+		return getPersistence().findByUuid(uuid);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticleImage fetchByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUuid(uuid);
+	}
+
 	public static java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
@@ -322,6 +334,12 @@ public class JournalArticleImageUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleImageException {
+		getPersistence().removeByUuid(uuid);
+	}
+
 	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByGroupId(groupId);
@@ -348,6 +366,11 @@ public class JournalArticleImageUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUuid(uuid);
 	}
 
 	public static int countByGroupId(long groupId)

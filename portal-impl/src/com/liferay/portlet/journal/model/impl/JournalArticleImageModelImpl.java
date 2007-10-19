@@ -55,6 +55,7 @@ import java.sql.Types;
 public class JournalArticleImageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalArticleImage";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "articleImageId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "articleId", new Integer(Types.VARCHAR) },
@@ -63,11 +64,14 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 			{ "languageId", new Integer(Types.VARCHAR) },
 			{ "tempImage", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table JournalArticleImage (articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
+	public static String TABLE_SQL_CREATE = "create table JournalArticleImage (uuid_ VARCHAR(75) null,articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table JournalArticleImage";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticleImage"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.journal.model.JournalArticleImage.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ARTICLEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticleImage.articleId"),
 			XSS_ALLOW_BY_MODEL);
@@ -93,6 +97,22 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_articleImageId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if (((uuid == null) && (_uuid != null)) ||
+				((uuid != null) && (_uuid == null)) ||
+				((uuid != null) && (_uuid != null) && !uuid.equals(_uuid))) {
+			if (!XSS_ALLOW_UUID) {
+				uuid = XSSUtil.strip(uuid);
+			}
+
+			_uuid = uuid;
+		}
 	}
 
 	public long getArticleImageId() {
@@ -192,6 +212,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		JournalArticleImageImpl clone = new JournalArticleImageImpl();
+		clone.setUuid(getUuid());
 		clone.setArticleImageId(getArticleImageId());
 		clone.setGroupId(getGroupId());
 		clone.setArticleId(getArticleId());
@@ -250,6 +271,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _articleImageId;
 	private long _groupId;
 	private String _articleId;

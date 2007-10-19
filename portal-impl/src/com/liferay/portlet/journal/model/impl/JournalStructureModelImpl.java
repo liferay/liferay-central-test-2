@@ -57,6 +57,7 @@ import java.util.Date;
 public class JournalStructureModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalStructure";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "id_", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
@@ -69,11 +70,14 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "xsd", new Integer(Types.CLOB) }
 		};
-	public static String TABLE_SQL_CREATE = "create table JournalStructure (id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,structureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsd TEXT null)";
+	public static String TABLE_SQL_CREATE = "create table JournalStructure (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,structureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsd TEXT null)";
 	public static String TABLE_SQL_DROP = "drop table JournalStructure";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalStructure"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.journal.model.JournalStructure.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalStructure.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -105,6 +109,22 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_id);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if (((uuid == null) && (_uuid != null)) ||
+				((uuid != null) && (_uuid == null)) ||
+				((uuid != null) && (_uuid != null) && !uuid.equals(_uuid))) {
+			if (!XSS_ALLOW_UUID) {
+				uuid = XSSUtil.strip(uuid);
+			}
+
+			_uuid = uuid;
+		}
 	}
 
 	public long getId() {
@@ -258,6 +278,7 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		JournalStructureImpl clone = new JournalStructureImpl();
+		clone.setUuid(getUuid());
 		clone.setId(getId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -317,6 +338,7 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _id;
 	private long _groupId;
 	private long _companyId;

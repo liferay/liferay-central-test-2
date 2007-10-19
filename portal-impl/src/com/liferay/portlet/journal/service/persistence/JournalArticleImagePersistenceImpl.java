@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -60,6 +62,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		JournalArticleImage journalArticleImage = new JournalArticleImageImpl();
 		journalArticleImage.setNew(true);
 		journalArticleImage.setPrimaryKey(articleImageId);
+
+		String uuid = PortalUUIDUtil.generate();
+		journalArticleImage.setUuid(uuid);
 
 		return journalArticleImage;
 	}
@@ -128,6 +133,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 	public JournalArticleImage update(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
 		boolean merge) throws SystemException {
+		if (Validator.isNull(journalArticleImage.getUuid())) {
+			String uuid = PortalUUIDUtil.generate();
+			journalArticleImage.setUuid(uuid);
+		}
+
 		Session session = null;
 
 		try {
@@ -189,6 +199,93 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	public JournalArticleImage findByUuid(String uuid)
+		throws NoSuchArticleImageException, SystemException {
+		JournalArticleImage journalArticleImage = fetchByUuid(uuid);
+
+		if (journalArticleImage == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalArticleImage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchArticleImageException(msg.toString());
+		}
+
+		return journalArticleImage;
+	}
+
+	public JournalArticleImage fetchByUuid(String uuid)
+		throws SystemException {
+		String finderClassName = JournalArticleImage.class.getName();
+		String finderMethodName = "fetchByUuid";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { uuid };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (JournalArticleImage)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (JournalArticleImage)list.get(0);
+			}
 		}
 	}
 
@@ -1052,6 +1149,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByUuid(String uuid)
+		throws NoSuchArticleImageException, SystemException {
+		JournalArticleImage journalArticleImage = findByUuid(uuid);
+		remove(journalArticleImage);
+	}
+
 	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
@@ -1093,6 +1196,69 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			remove((JournalArticleImage)itr.next());
+		}
+	}
+
+	public int countByUuid(String uuid) throws SystemException {
+		String finderClassName = JournalArticleImage.class.getName();
+		String finderMethodName = "countByUuid";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { uuid };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

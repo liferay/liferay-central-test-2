@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.3.3//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_3_3.dtd">
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_4_0.dtd">
 
 <service-builder package-path="com.liferay.portlet.journal">
 	<namespace>Journal</namespace>
-	<entity name="JournalArticle" local-service="true" remote-service="true">
+	<entity name="JournalArticle" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -83,7 +83,7 @@
 			<finder-column name="approved" />
 		</finder>
 	</entity>
-	<entity name="JournalArticleImage" local-service="true" remote-service="false">
+	<entity name="JournalArticleImage" uuid="true" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -192,7 +192,7 @@
 			<finder-column name="articleId" />
 		</finder>
 	</entity>
-	<entity name="JournalStructure" local-service="true" remote-service="true">
+	<entity name="JournalStructure" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -236,7 +236,7 @@
 			<finder-column name="structureId" />
 		</finder>
 	</entity>
-	<entity name="JournalTemplate" local-service="true" remote-service="true">
+	<entity name="JournalTemplate" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

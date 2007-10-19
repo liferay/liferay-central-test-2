@@ -761,6 +761,7 @@
 		<field name="largeImageId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalArticle">
+		<field name="uuid" type="String" />
 		<field name="id" type="long" />
 		<field name="resourcePrimKey" type="long" />
 		<field name="groupId" type="long" />
@@ -798,6 +799,7 @@
 		</field>
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalArticleImage">
+		<field name="uuid" type="String" />
 		<field name="articleImageId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="articleId" type="String" />
@@ -823,6 +825,7 @@
 		<field name="articleId" type="String" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalStructure">
+		<field name="uuid" type="String" />
 		<field name="id" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
@@ -842,6 +845,7 @@
 		</field>
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalTemplate">
+		<field name="uuid" type="String" />
 		<field name="id" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />

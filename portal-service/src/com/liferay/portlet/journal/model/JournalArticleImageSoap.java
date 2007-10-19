@@ -47,6 +47,7 @@ import java.util.List;
 public class JournalArticleImageSoap implements Serializable {
 	public static JournalArticleImageSoap toSoapModel(JournalArticleImage model) {
 		JournalArticleImageSoap soapModel = new JournalArticleImageSoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setArticleImageId(model.getArticleImageId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setArticleId(model.getArticleId());
@@ -78,6 +79,14 @@ public class JournalArticleImageSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setArticleImageId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getArticleImageId() {
@@ -140,6 +149,7 @@ public class JournalArticleImageSoap implements Serializable {
 		_tempImage = tempImage;
 	}
 
+	private String _uuid;
 	private long _articleImageId;
 	private long _groupId;
 	private String _articleId;

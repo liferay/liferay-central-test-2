@@ -48,6 +48,7 @@ import java.util.List;
 public class JournalTemplateSoap implements Serializable {
 	public static JournalTemplateSoap toSoapModel(JournalTemplate model) {
 		JournalTemplateSoap soapModel = new JournalTemplateSoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setId(model.getId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -88,6 +89,14 @@ public class JournalTemplateSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getId() {
@@ -222,6 +231,7 @@ public class JournalTemplateSoap implements Serializable {
 		_smallImageURL = smallImageURL;
 	}
 
+	private String _uuid;
 	private long _id;
 	private long _groupId;
 	private long _companyId;

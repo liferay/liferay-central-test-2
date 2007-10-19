@@ -52,6 +52,7 @@ import java.util.List;
 public class JournalArticleJSONSerializer {
 	public static JSONObject toJSONObject(JournalArticle model) {
 		JSONObject jsonObj = new JSONObject();
+		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "id", model.getId());
 		JSONUtil.put(jsonObj, "resourcePrimKey", model.getResourcePrimKey());
 		JSONUtil.put(jsonObj, "groupId", model.getGroupId());

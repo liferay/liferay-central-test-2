@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -60,6 +62,9 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		JournalStructure journalStructure = new JournalStructureImpl();
 		journalStructure.setNew(true);
 		journalStructure.setPrimaryKey(id);
+
+		String uuid = PortalUUIDUtil.generate();
+		journalStructure.setUuid(uuid);
 
 		return journalStructure;
 	}
@@ -127,6 +132,11 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	public JournalStructure update(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure,
 		boolean merge) throws SystemException {
+		if (Validator.isNull(journalStructure.getUuid())) {
+			String uuid = PortalUUIDUtil.generate();
+			journalStructure.setUuid(uuid);
+		}
+
 		Session session = null;
 
 		try {
@@ -187,6 +197,94 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	public JournalStructure findByUuid(String uuid)
+		throws NoSuchStructureException, SystemException {
+		JournalStructure journalStructure = fetchByUuid(uuid);
+
+		if (journalStructure == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalStructure exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchStructureException(msg.toString());
+		}
+
+		return journalStructure;
+	}
+
+	public JournalStructure fetchByUuid(String uuid) throws SystemException {
+		String finderClassName = JournalStructure.class.getName();
+		String finderMethodName = "fetchByUuid";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { uuid };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("structureId ASC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (JournalStructure)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (JournalStructure)list.get(0);
+			}
 		}
 	}
 
@@ -800,6 +898,12 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByUuid(String uuid)
+		throws NoSuchStructureException, SystemException {
+		JournalStructure journalStructure = findByUuid(uuid);
+		remove(journalStructure);
+	}
+
 	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
@@ -830,6 +934,69 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			remove((JournalStructure)itr.next());
+		}
+	}
+
+	public int countByUuid(String uuid) throws SystemException {
+		String finderClassName = JournalStructure.class.getName();
+		String finderMethodName = "countByUuid";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { uuid };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

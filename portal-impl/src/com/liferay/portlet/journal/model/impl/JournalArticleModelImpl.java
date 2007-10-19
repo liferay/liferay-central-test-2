@@ -57,6 +57,7 @@ import java.util.Date;
 public class JournalArticleModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "JournalArticle";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "id_", new Integer(Types.BIGINT) },
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
@@ -83,11 +84,14 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			{ "reviewDate", new Integer(Types.TIMESTAMP) },
 			{ "indexable", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table JournalArticle (id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title VARCHAR(100) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,approved BOOLEAN,approvedByUserId LONG,approvedByUserName VARCHAR(75) null,approvedDate DATE null,expired BOOLEAN,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN)";
+	public static String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title VARCHAR(100) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,approved BOOLEAN,approvedByUserId LONG,approvedByUserName VARCHAR(75) null,approvedDate DATE null,expired BOOLEAN,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table JournalArticle";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -131,6 +135,22 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_id);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if (((uuid == null) && (_uuid != null)) ||
+				((uuid != null) && (_uuid == null)) ||
+				((uuid != null) && (_uuid != null) && !uuid.equals(_uuid))) {
+			if (!XSS_ALLOW_UUID) {
+				uuid = XSSUtil.strip(uuid);
+			}
+
+			_uuid = uuid;
+		}
 	}
 
 	public long getId() {
@@ -476,6 +496,7 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		JournalArticleImpl clone = new JournalArticleImpl();
+		clone.setUuid(getUuid());
 		clone.setId(getId());
 		clone.setResourcePrimKey(getResourcePrimKey());
 		clone.setGroupId(getGroupId());
@@ -565,6 +586,7 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _id;
 	private long _resourcePrimKey;
 	private long _groupId;
