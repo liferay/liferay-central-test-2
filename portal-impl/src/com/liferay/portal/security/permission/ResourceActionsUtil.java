@@ -93,7 +93,7 @@ public class ResourceActionsUtil {
 
 		String value = LanguageUtil.get(companyId, locale, key, null);
 
-		if (value == null) {
+		if ((value == null) || (value.equals(key))) {
 			value = PortletResourceBundles.getString(locale, key);
 		}
 
@@ -109,7 +109,7 @@ public class ResourceActionsUtil {
 
 		String value = LanguageUtil.get(pageContext, key, null);
 
-		if (value == null) {
+		if ((value == null) || (value.equals(key))) {
 			value = PortletResourceBundles.getString(pageContext, key);
 		}
 
@@ -161,7 +161,7 @@ public class ResourceActionsUtil {
 
 		String value = LanguageUtil.get(companyId, locale, key, null);
 
-		if (value == null) {
+		if ((value == null) || (value.equals(key))) {
 			value = PortletResourceBundles.getString(locale, key);
 		}
 
@@ -179,7 +179,7 @@ public class ResourceActionsUtil {
 
 		String value = LanguageUtil.get(pageContext, key, null);
 
-		if (value == null) {
+		if ((value == null) || (value.equals(key))) {
 			value = PortletResourceBundles.getString(pageContext, key);
 		}
 
