@@ -107,7 +107,7 @@ public class PortletUtil {
 	}
 
 	public static com.liferay.portal.model.Portlet update(
-		com.liferay.portal.model.Portlet portlet, boolean saveOrUpdate)
+		com.liferay.portal.model.Portlet portlet, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = portlet.isNew();
@@ -121,7 +121,7 @@ public class PortletUtil {
 			}
 		}
 
-		portlet = getPersistence().update(portlet, saveOrUpdate);
+		portlet = getPersistence().update(portlet, merge);
 
 		if (listener != null) {
 			if (isNew) {

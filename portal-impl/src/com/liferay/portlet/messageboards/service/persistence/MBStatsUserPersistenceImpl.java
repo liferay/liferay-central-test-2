@@ -126,14 +126,14 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 	public MBStatsUser update(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(mbStatsUser);
+			if (merge) {
+				session.merge(mbStatsUser);
 			}
 			else {
 				if (mbStatsUser.isNew()) {

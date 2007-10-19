@@ -111,7 +111,7 @@ public class BlogsCategoryUtil {
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory update(
 		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = blogsCategory.isNew();
 
@@ -124,7 +124,7 @@ public class BlogsCategoryUtil {
 			}
 		}
 
-		blogsCategory = getPersistence().update(blogsCategory, saveOrUpdate);
+		blogsCategory = getPersistence().update(blogsCategory, merge);
 
 		if (listener != null) {
 			if (isNew) {

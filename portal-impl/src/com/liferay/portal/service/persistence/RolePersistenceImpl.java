@@ -160,7 +160,7 @@ public class RolePersistenceImpl extends BasePersistence
 		return update(role, false);
 	}
 
-	public Role update(com.liferay.portal.model.Role role, boolean saveOrUpdate)
+	public Role update(com.liferay.portal.model.Role role, boolean merge)
 		throws SystemException {
 		FinderCache.clearCache("Groups_Roles");
 		FinderCache.clearCache("Roles_Permissions");
@@ -171,8 +171,8 @@ public class RolePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(role);
+			if (merge) {
+				session.merge(role);
 			}
 			else {
 				if (role.isNew()) {

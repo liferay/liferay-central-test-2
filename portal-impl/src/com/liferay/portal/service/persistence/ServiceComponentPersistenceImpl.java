@@ -126,14 +126,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 	public ServiceComponent update(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(serviceComponent);
+			if (merge) {
+				session.merge(serviceComponent);
 			}
 			else {
 				if (serviceComponent.isNew()) {

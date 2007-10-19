@@ -47,7 +47,7 @@ public interface SCProductVersionPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion findByPrimaryKey(
 		long productVersionId)

@@ -107,7 +107,7 @@ public class UserGroupUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroup update(
-		com.liferay.portal.model.UserGroup userGroup, boolean saveOrUpdate)
+		com.liferay.portal.model.UserGroup userGroup, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = userGroup.isNew();
@@ -121,7 +121,7 @@ public class UserGroupUtil {
 			}
 		}
 
-		userGroup = getPersistence().update(userGroup, saveOrUpdate);
+		userGroup = getPersistence().update(userGroup, merge);
 
 		if (listener != null) {
 			if (isNew) {

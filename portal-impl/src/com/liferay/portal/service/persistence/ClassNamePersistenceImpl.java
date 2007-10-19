@@ -121,14 +121,14 @@ public class ClassNamePersistenceImpl extends BasePersistence
 	}
 
 	public ClassName update(com.liferay.portal.model.ClassName className,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(className);
+			if (merge) {
+				session.merge(className);
 			}
 			else {
 				if (className.isNew()) {

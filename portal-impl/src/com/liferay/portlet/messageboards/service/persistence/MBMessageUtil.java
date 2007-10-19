@@ -111,7 +111,7 @@ public class MBMessageUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage update(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = mbMessage.isNew();
 
@@ -124,7 +124,7 @@ public class MBMessageUtil {
 			}
 		}
 
-		mbMessage = getPersistence().update(mbMessage, saveOrUpdate);
+		mbMessage = getPersistence().update(mbMessage, merge);
 
 		if (listener != null) {
 			if (isNew) {

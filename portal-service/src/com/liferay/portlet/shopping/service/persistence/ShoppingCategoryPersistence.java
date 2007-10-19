@@ -47,7 +47,7 @@ public interface ShoppingCategoryPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory update(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory findByPrimaryKey(
 		long categoryId)

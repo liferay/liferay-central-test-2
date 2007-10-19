@@ -120,14 +120,14 @@ public class AccountPersistenceImpl extends BasePersistence
 	}
 
 	public Account update(com.liferay.portal.model.Account account,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(account);
+			if (merge) {
+				session.merge(account);
 			}
 			else {
 				if (account.isNew()) {

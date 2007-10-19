@@ -127,14 +127,14 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 	public ShoppingCategory update(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(shoppingCategory);
+			if (merge) {
+				session.merge(shoppingCategory);
 			}
 			else {
 				if (shoppingCategory.isNew()) {

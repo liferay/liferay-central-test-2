@@ -124,14 +124,14 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 	public SCLicense update(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(scLicense);
+			if (merge) {
+				session.merge(scLicense);
 			}
 			else {
 				if (scLicense.isNew()) {

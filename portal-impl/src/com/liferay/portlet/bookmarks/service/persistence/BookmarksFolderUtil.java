@@ -111,7 +111,7 @@ public class BookmarksFolderUtil {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder update(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = bookmarksFolder.isNew();
 
@@ -124,7 +124,7 @@ public class BookmarksFolderUtil {
 			}
 		}
 
-		bookmarksFolder = getPersistence().update(bookmarksFolder, saveOrUpdate);
+		bookmarksFolder = getPersistence().update(bookmarksFolder, merge);
 
 		if (listener != null) {
 			if (isNew) {

@@ -111,7 +111,7 @@ public class ShoppingCartUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart update(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = shoppingCart.isNew();
 
@@ -124,7 +124,7 @@ public class ShoppingCartUtil {
 			}
 		}
 
-		shoppingCart = getPersistence().update(shoppingCart, saveOrUpdate);
+		shoppingCart = getPersistence().update(shoppingCart, merge);
 
 		if (listener != null) {
 			if (isNew) {

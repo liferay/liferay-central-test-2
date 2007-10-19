@@ -124,15 +124,15 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 	}
 
 	public UserGroupRole update(
-		com.liferay.portal.model.UserGroupRole userGroupRole,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portal.model.UserGroupRole userGroupRole, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(userGroupRole);
+			if (merge) {
+				session.merge(userGroupRole);
 			}
 			else {
 				if (userGroupRole.isNew()) {

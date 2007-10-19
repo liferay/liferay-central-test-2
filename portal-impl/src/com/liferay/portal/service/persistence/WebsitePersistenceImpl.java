@@ -121,14 +121,14 @@ public class WebsitePersistenceImpl extends BasePersistence
 	}
 
 	public Website update(com.liferay.portal.model.Website website,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(website);
+			if (merge) {
+				session.merge(website);
 			}
 			else {
 				if (website.isNew()) {

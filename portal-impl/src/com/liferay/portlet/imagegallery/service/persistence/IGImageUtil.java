@@ -110,8 +110,8 @@ public class IGImageUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage update(
-		com.liferay.portlet.imagegallery.model.IGImage igImage,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
+		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = igImage.isNew();
 
@@ -124,7 +124,7 @@ public class IGImageUtil {
 			}
 		}
 
-		igImage = getPersistence().update(igImage, saveOrUpdate);
+		igImage = getPersistence().update(igImage, merge);
 
 		if (listener != null) {
 			if (isNew) {

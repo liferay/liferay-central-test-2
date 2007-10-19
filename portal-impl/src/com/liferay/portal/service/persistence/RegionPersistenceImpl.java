@@ -120,15 +120,15 @@ public class RegionPersistenceImpl extends BasePersistence
 		return update(region, false);
 	}
 
-	public Region update(com.liferay.portal.model.Region region,
-		boolean saveOrUpdate) throws SystemException {
+	public Region update(com.liferay.portal.model.Region region, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(region);
+			if (merge) {
+				session.merge(region);
 			}
 			else {
 				if (region.isNew()) {

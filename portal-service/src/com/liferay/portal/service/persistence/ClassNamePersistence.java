@@ -44,7 +44,7 @@ public interface ClassNamePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ClassName update(
-		com.liferay.portal.model.ClassName className, boolean saveOrUpdate)
+		com.liferay.portal.model.ClassName className, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ClassName findByPrimaryKey(long classNameId)

@@ -157,7 +157,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public Organization update(
-		com.liferay.portal.model.Organization organization, boolean saveOrUpdate)
+		com.liferay.portal.model.Organization organization, boolean merge)
 		throws SystemException {
 		FinderCache.clearCache("Groups_Orgs");
 		FinderCache.clearCache("Users_Orgs");
@@ -167,8 +167,8 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(organization);
+			if (merge) {
+				session.merge(organization);
 			}
 			else {
 				if (organization.isNew()) {

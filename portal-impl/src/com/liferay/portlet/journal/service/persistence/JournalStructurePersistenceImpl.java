@@ -126,14 +126,14 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 	public JournalStructure update(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(journalStructure);
+			if (merge) {
+				session.merge(journalStructure);
 			}
 			else {
 				if (journalStructure.isNew()) {

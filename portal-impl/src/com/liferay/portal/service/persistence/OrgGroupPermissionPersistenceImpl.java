@@ -126,14 +126,14 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 
 	public OrgGroupPermission update(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(orgGroupPermission);
+			if (merge) {
+				session.merge(orgGroupPermission);
 			}
 			else {
 				if (orgGroupPermission.isNew()) {

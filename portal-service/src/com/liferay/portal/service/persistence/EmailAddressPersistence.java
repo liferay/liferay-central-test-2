@@ -44,7 +44,7 @@ public interface EmailAddressPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress update(
-		com.liferay.portal.model.EmailAddress emailAddress, boolean saveOrUpdate)
+		com.liferay.portal.model.EmailAddress emailAddress, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress findByPrimaryKey(

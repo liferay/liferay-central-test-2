@@ -125,14 +125,14 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 
 	public RatingsStats update(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(ratingsStats);
+			if (merge) {
+				session.merge(ratingsStats);
 			}
 			else {
 				if (ratingsStats.isNew()) {

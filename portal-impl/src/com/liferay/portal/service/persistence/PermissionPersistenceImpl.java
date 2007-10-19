@@ -165,7 +165,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public Permission update(com.liferay.portal.model.Permission permission,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		FinderCache.clearCache("Groups_Permissions");
 		FinderCache.clearCache("Roles_Permissions");
 		FinderCache.clearCache("Users_Permissions");
@@ -175,8 +175,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(permission);
+			if (merge) {
+				session.merge(permission);
 			}
 			else {
 				if (permission.isNew()) {

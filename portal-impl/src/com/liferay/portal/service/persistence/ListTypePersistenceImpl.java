@@ -121,14 +121,14 @@ public class ListTypePersistenceImpl extends BasePersistence
 	}
 
 	public ListType update(com.liferay.portal.model.ListType listType,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(listType);
+			if (merge) {
+				session.merge(listType);
 			}
 			else {
 				if (listType.isNew()) {

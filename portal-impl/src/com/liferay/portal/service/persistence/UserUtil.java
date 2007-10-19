@@ -107,7 +107,7 @@ public class UserUtil {
 	}
 
 	public static com.liferay.portal.model.User update(
-		com.liferay.portal.model.User user, boolean saveOrUpdate)
+		com.liferay.portal.model.User user, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = user.isNew();
@@ -121,7 +121,7 @@ public class UserUtil {
 			}
 		}
 
-		user = getPersistence().update(user, saveOrUpdate);
+		user = getPersistence().update(user, merge);
 
 		if (listener != null) {
 			if (isNew) {

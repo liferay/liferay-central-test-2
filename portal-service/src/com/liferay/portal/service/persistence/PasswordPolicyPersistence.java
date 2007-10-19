@@ -44,8 +44,8 @@ public interface PasswordPolicyPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy update(
-		com.liferay.portal.model.PasswordPolicy passwordPolicy,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		com.liferay.portal.model.PasswordPolicy passwordPolicy, boolean merge)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy findByPrimaryKey(
 		long passwordPolicyId)

@@ -107,7 +107,7 @@ public class CountryUtil {
 	}
 
 	public static com.liferay.portal.model.Country update(
-		com.liferay.portal.model.Country country, boolean saveOrUpdate)
+		com.liferay.portal.model.Country country, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = country.isNew();
@@ -121,7 +121,7 @@ public class CountryUtil {
 			}
 		}
 
-		country = getPersistence().update(country, saveOrUpdate);
+		country = getPersistence().update(country, merge);
 
 		if (listener != null) {
 			if (isNew) {

@@ -111,7 +111,7 @@ public class SCProductVersionUtil {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = scProductVersion.isNew();
 
@@ -124,8 +124,7 @@ public class SCProductVersionUtil {
 			}
 		}
 
-		scProductVersion = getPersistence().update(scProductVersion,
-				saveOrUpdate);
+		scProductVersion = getPersistence().update(scProductVersion, merge);
 
 		if (listener != null) {
 			if (isNew) {

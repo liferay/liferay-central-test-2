@@ -111,7 +111,7 @@ public class JournalArticleImageUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticleImage update(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = journalArticleImage.isNew();
 
@@ -124,8 +124,7 @@ public class JournalArticleImageUtil {
 			}
 		}
 
-		journalArticleImage = getPersistence().update(journalArticleImage,
-				saveOrUpdate);
+		journalArticleImage = getPersistence().update(journalArticleImage, merge);
 
 		if (listener != null) {
 			if (isNew) {

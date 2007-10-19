@@ -124,15 +124,15 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 	}
 
 	public PluginSetting update(
-		com.liferay.portal.model.PluginSetting pluginSetting,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(pluginSetting);
+			if (merge) {
+				session.merge(pluginSetting);
 			}
 			else {
 				if (pluginSetting.isNew()) {

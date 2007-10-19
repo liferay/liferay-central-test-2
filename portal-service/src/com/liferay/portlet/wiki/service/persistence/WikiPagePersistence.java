@@ -44,7 +44,7 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiPage update(
-		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean saveOrUpdate)
+		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiPage findByPrimaryKey(long pageId)

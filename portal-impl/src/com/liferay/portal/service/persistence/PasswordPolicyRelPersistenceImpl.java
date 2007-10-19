@@ -126,14 +126,14 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 	public PasswordPolicyRel update(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(passwordPolicyRel);
+			if (merge) {
+				session.merge(passwordPolicyRel);
 			}
 			else {
 				if (passwordPolicyRel.isNew()) {

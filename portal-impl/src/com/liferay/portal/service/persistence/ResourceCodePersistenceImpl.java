@@ -123,15 +123,15 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 	}
 
 	public ResourceCode update(
-		com.liferay.portal.model.ResourceCode resourceCode, boolean saveOrUpdate)
+		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(resourceCode);
+			if (merge) {
+				session.merge(resourceCode);
 			}
 			else {
 				if (resourceCode.isNew()) {

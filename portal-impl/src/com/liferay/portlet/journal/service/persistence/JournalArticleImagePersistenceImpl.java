@@ -127,14 +127,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 	public JournalArticleImage update(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(journalArticleImage);
+			if (merge) {
+				session.merge(journalArticleImage);
 			}
 			else {
 				if (journalArticleImage.isNew()) {

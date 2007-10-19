@@ -107,7 +107,7 @@ public class PhoneUtil {
 	}
 
 	public static com.liferay.portal.model.Phone update(
-		com.liferay.portal.model.Phone phone, boolean saveOrUpdate)
+		com.liferay.portal.model.Phone phone, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = phone.isNew();
@@ -121,7 +121,7 @@ public class PhoneUtil {
 			}
 		}
 
-		phone = getPersistence().update(phone, saveOrUpdate);
+		phone = getPersistence().update(phone, merge);
 
 		if (listener != null) {
 			if (isNew) {

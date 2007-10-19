@@ -126,14 +126,14 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 	public BlogsStatsUser update(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(blogsStatsUser);
+			if (merge) {
+				session.merge(blogsStatsUser);
 			}
 			else {
 				if (blogsStatsUser.isNew()) {

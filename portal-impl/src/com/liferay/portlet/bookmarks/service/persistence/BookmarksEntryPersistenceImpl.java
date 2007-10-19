@@ -125,14 +125,14 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 	public BookmarksEntry update(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(bookmarksEntry);
+			if (merge) {
+				session.merge(bookmarksEntry);
 			}
 			else {
 				if (bookmarksEntry.isNew()) {

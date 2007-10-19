@@ -108,7 +108,7 @@ public class ResourceCodeUtil {
 	}
 
 	public static com.liferay.portal.model.ResourceCode update(
-		com.liferay.portal.model.ResourceCode resourceCode, boolean saveOrUpdate)
+		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = resourceCode.isNew();
@@ -122,7 +122,7 @@ public class ResourceCodeUtil {
 			}
 		}
 
-		resourceCode = getPersistence().update(resourceCode, saveOrUpdate);
+		resourceCode = getPersistence().update(resourceCode, merge);
 
 		if (listener != null) {
 			if (isNew) {

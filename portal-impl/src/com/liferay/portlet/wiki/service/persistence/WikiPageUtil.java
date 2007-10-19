@@ -108,7 +108,7 @@ public class WikiPageUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage update(
-		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean saveOrUpdate)
+		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = wikiPage.isNew();
@@ -122,7 +122,7 @@ public class WikiPageUtil {
 			}
 		}
 
-		wikiPage = getPersistence().update(wikiPage, saveOrUpdate);
+		wikiPage = getPersistence().update(wikiPage, merge);
 
 		if (listener != null) {
 			if (isNew) {

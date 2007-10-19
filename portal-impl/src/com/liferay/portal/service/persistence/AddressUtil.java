@@ -107,7 +107,7 @@ public class AddressUtil {
 	}
 
 	public static com.liferay.portal.model.Address update(
-		com.liferay.portal.model.Address address, boolean saveOrUpdate)
+		com.liferay.portal.model.Address address, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = address.isNew();
@@ -121,7 +121,7 @@ public class AddressUtil {
 			}
 		}
 
-		address = getPersistence().update(address, saveOrUpdate);
+		address = getPersistence().update(address, merge);
 
 		if (listener != null) {
 			if (isNew) {

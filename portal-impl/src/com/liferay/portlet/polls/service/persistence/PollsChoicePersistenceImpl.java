@@ -124,15 +124,15 @@ public class PollsChoicePersistenceImpl extends BasePersistence
 	}
 
 	public PollsChoice update(
-		com.liferay.portlet.polls.model.PollsChoice pollsChoice,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portlet.polls.model.PollsChoice pollsChoice, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(pollsChoice);
+			if (merge) {
+				session.merge(pollsChoice);
 			}
 			else {
 				if (pollsChoice.isNew()) {

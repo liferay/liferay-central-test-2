@@ -110,8 +110,8 @@ public class MBThreadUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread update(
-		com.liferay.portlet.messageboards.model.MBThread mbThread,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
+		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = mbThread.isNew();
 
@@ -124,7 +124,7 @@ public class MBThreadUtil {
 			}
 		}
 
-		mbThread = getPersistence().update(mbThread, saveOrUpdate);
+		mbThread = getPersistence().update(mbThread, merge);
 
 		if (listener != null) {
 			if (isNew) {

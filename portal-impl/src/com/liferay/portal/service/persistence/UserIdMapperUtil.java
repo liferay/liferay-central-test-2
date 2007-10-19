@@ -110,7 +110,7 @@ public class UserIdMapperUtil {
 	}
 
 	public static com.liferay.portal.model.UserIdMapper update(
-		com.liferay.portal.model.UserIdMapper userIdMapper, boolean saveOrUpdate)
+		com.liferay.portal.model.UserIdMapper userIdMapper, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = userIdMapper.isNew();
@@ -124,7 +124,7 @@ public class UserIdMapperUtil {
 			}
 		}
 
-		userIdMapper = getPersistence().update(userIdMapper, saveOrUpdate);
+		userIdMapper = getPersistence().update(userIdMapper, merge);
 
 		if (listener != null) {
 			if (isNew) {

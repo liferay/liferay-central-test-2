@@ -124,15 +124,15 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 	}
 
 	public UserIdMapper update(
-		com.liferay.portal.model.UserIdMapper userIdMapper, boolean saveOrUpdate)
+		com.liferay.portal.model.UserIdMapper userIdMapper, boolean merge)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(userIdMapper);
+			if (merge) {
+				session.merge(userIdMapper);
 			}
 			else {
 				if (userIdMapper.isNew()) {

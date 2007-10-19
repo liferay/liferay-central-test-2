@@ -46,7 +46,7 @@ public interface OrgGroupRolePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgGroupRole update(
-		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean saveOrUpdate)
+		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgGroupRole findByPrimaryKey(

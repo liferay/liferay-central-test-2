@@ -47,7 +47,7 @@ public interface DLFolderPersistence {
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder update(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder findByPrimaryKey(
 		long folderId)

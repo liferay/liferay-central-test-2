@@ -44,8 +44,8 @@ public interface BlogsEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry update(
-		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry, boolean merge)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry findByPrimaryKey(
 		long entryId)

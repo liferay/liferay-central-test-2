@@ -107,7 +107,7 @@ public class RoleUtil {
 	}
 
 	public static com.liferay.portal.model.Role update(
-		com.liferay.portal.model.Role role, boolean saveOrUpdate)
+		com.liferay.portal.model.Role role, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = role.isNew();
@@ -121,7 +121,7 @@ public class RoleUtil {
 			}
 		}
 
-		role = getPersistence().update(role, saveOrUpdate);
+		role = getPersistence().update(role, merge);
 
 		if (listener != null) {
 			if (isNew) {

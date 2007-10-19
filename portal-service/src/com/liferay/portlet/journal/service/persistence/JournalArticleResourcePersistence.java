@@ -47,7 +47,7 @@ public interface JournalArticleResourcePersistence {
 
 	public com.liferay.portlet.journal.model.JournalArticleResource update(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticleResource findByPrimaryKey(
 		long resourcePrimKey)

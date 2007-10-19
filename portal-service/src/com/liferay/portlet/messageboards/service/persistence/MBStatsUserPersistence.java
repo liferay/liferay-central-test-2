@@ -47,7 +47,7 @@ public interface MBStatsUserPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser update(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser findByPrimaryKey(
 		long statsUserId)

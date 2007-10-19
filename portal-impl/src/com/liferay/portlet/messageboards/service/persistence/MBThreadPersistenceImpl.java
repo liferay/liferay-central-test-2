@@ -123,15 +123,15 @@ public class MBThreadPersistenceImpl extends BasePersistence
 	}
 
 	public MBThread update(
-		com.liferay.portlet.messageboards.model.MBThread mbThread,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(mbThread);
+			if (merge) {
+				session.merge(mbThread);
 			}
 			else {
 				if (mbThread.isNew()) {

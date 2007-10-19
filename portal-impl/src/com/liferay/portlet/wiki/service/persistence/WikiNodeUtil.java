@@ -108,7 +108,7 @@ public class WikiNodeUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode update(
-		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean saveOrUpdate)
+		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = wikiNode.isNew();
@@ -122,7 +122,7 @@ public class WikiNodeUtil {
 			}
 		}
 
-		wikiNode = getPersistence().update(wikiNode, saveOrUpdate);
+		wikiNode = getPersistence().update(wikiNode, merge);
 
 		if (listener != null) {
 			if (isNew) {

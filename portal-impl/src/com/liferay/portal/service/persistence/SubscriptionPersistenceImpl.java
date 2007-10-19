@@ -124,15 +124,15 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 	}
 
 	public Subscription update(
-		com.liferay.portal.model.Subscription subscription, boolean saveOrUpdate)
+		com.liferay.portal.model.Subscription subscription, boolean merge)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(subscription);
+			if (merge) {
+				session.merge(subscription);
 			}
 			else {
 				if (subscription.isNew()) {

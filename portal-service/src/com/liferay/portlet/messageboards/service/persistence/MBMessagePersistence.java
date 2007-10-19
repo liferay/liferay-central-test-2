@@ -47,7 +47,7 @@ public interface MBMessagePersistence {
 
 	public com.liferay.portlet.messageboards.model.MBMessage update(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage findByPrimaryKey(
 		long messageId)

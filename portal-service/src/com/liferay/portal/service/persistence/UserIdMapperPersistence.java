@@ -44,7 +44,7 @@ public interface UserIdMapperPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserIdMapper update(
-		com.liferay.portal.model.UserIdMapper userIdMapper, boolean saveOrUpdate)
+		com.liferay.portal.model.UserIdMapper userIdMapper, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserIdMapper findByPrimaryKey(

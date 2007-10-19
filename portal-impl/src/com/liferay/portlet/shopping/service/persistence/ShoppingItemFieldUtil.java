@@ -111,7 +111,7 @@ public class ShoppingItemFieldUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField update(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = shoppingItemField.isNew();
 
@@ -124,8 +124,7 @@ public class ShoppingItemFieldUtil {
 			}
 		}
 
-		shoppingItemField = getPersistence().update(shoppingItemField,
-				saveOrUpdate);
+		shoppingItemField = getPersistence().update(shoppingItemField, merge);
 
 		if (listener != null) {
 			if (isNew) {

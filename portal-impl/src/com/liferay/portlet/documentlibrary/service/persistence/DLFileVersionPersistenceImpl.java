@@ -126,14 +126,14 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 	public DLFileVersion update(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(dlFileVersion);
+			if (merge) {
+				session.merge(dlFileVersion);
 			}
 			else {
 				if (dlFileVersion.isNew()) {

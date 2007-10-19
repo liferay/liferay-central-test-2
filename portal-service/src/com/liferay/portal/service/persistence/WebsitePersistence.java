@@ -44,7 +44,7 @@ public interface WebsitePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Website update(
-		com.liferay.portal.model.Website website, boolean saveOrUpdate)
+		com.liferay.portal.model.Website website, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Website findByPrimaryKey(long websiteId)

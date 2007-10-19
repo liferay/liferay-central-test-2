@@ -145,7 +145,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	}
 
 	public TagsAsset update(
-		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean saveOrUpdate)
+		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean merge)
 		throws SystemException {
 		FinderCache.clearCache("TagsAssets_TagsEntries");
 
@@ -154,8 +154,8 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(tagsAsset);
+			if (merge) {
+				session.merge(tagsAsset);
 			}
 			else {
 				if (tagsAsset.isNew()) {

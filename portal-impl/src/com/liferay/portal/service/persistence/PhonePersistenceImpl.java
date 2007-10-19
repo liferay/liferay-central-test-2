@@ -119,15 +119,15 @@ public class PhonePersistenceImpl extends BasePersistence
 		return update(phone, false);
 	}
 
-	public Phone update(com.liferay.portal.model.Phone phone,
-		boolean saveOrUpdate) throws SystemException {
+	public Phone update(com.liferay.portal.model.Phone phone, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(phone);
+			if (merge) {
+				session.merge(phone);
 			}
 			else {
 				if (phone.isNew()) {

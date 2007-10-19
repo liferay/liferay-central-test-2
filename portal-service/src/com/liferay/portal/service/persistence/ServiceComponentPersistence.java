@@ -47,7 +47,7 @@ public interface ServiceComponentPersistence {
 
 	public com.liferay.portal.model.ServiceComponent update(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ServiceComponent findByPrimaryKey(
 		long serviceComponentId)

@@ -44,7 +44,7 @@ public interface ListTypePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ListType update(
-		com.liferay.portal.model.ListType listType, boolean saveOrUpdate)
+		com.liferay.portal.model.ListType listType, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ListType findByPrimaryKey(int listTypeId)

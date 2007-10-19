@@ -122,14 +122,14 @@ public class WikiPagePersistenceImpl extends BasePersistence
 	}
 
 	public WikiPage update(com.liferay.portlet.wiki.model.WikiPage wikiPage,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(wikiPage);
+			if (merge) {
+				session.merge(wikiPage);
 			}
 			else {
 				if (wikiPage.isNew()) {

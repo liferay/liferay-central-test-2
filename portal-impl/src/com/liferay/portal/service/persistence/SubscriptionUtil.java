@@ -110,7 +110,7 @@ public class SubscriptionUtil {
 	}
 
 	public static com.liferay.portal.model.Subscription update(
-		com.liferay.portal.model.Subscription subscription, boolean saveOrUpdate)
+		com.liferay.portal.model.Subscription subscription, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = subscription.isNew();
@@ -124,7 +124,7 @@ public class SubscriptionUtil {
 			}
 		}
 
-		subscription = getPersistence().update(subscription, saveOrUpdate);
+		subscription = getPersistence().update(subscription, merge);
 
 		if (listener != null) {
 			if (isNew) {

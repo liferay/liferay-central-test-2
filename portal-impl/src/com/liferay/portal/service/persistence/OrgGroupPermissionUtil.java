@@ -111,7 +111,7 @@ public class OrgGroupPermissionUtil {
 
 	public static com.liferay.portal.model.OrgGroupPermission update(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = orgGroupPermission.isNew();
 
@@ -124,8 +124,7 @@ public class OrgGroupPermissionUtil {
 			}
 		}
 
-		orgGroupPermission = getPersistence().update(orgGroupPermission,
-				saveOrUpdate);
+		orgGroupPermission = getPersistence().update(orgGroupPermission, merge);
 
 		if (listener != null) {
 			if (isNew) {

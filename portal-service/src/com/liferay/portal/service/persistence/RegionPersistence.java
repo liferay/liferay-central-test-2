@@ -44,7 +44,7 @@ public interface RegionPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Region update(
-		com.liferay.portal.model.Region region, boolean saveOrUpdate)
+		com.liferay.portal.model.Region region, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Region findByPrimaryKey(long regionId)

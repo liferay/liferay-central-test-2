@@ -144,7 +144,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 	}
 
 	public UserGroup update(com.liferay.portal.model.UserGroup userGroup,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		FinderCache.clearCache("Users_UserGroups");
 
 		Session session = null;
@@ -152,8 +152,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(userGroup);
+			if (merge) {
+				session.merge(userGroup);
 			}
 			else {
 				if (userGroup.isNew()) {

@@ -124,15 +124,15 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 	}
 
 	public UserTrackerPath update(
-		com.liferay.portal.model.UserTrackerPath userTrackerPath,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portal.model.UserTrackerPath userTrackerPath, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(userTrackerPath);
+			if (merge) {
+				session.merge(userTrackerPath);
 			}
 			else {
 				if (userTrackerPath.isNew()) {

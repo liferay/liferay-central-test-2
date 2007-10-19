@@ -111,7 +111,7 @@ public class SCProductEntryUtil {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry update(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = scProductEntry.isNew();
 
@@ -124,7 +124,7 @@ public class SCProductEntryUtil {
 			}
 		}
 
-		scProductEntry = getPersistence().update(scProductEntry, saveOrUpdate);
+		scProductEntry = getPersistence().update(scProductEntry, merge);
 
 		if (listener != null) {
 			if (isNew) {

@@ -107,7 +107,7 @@ public class ListTypeUtil {
 	}
 
 	public static com.liferay.portal.model.ListType update(
-		com.liferay.portal.model.ListType listType, boolean saveOrUpdate)
+		com.liferay.portal.model.ListType listType, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = listType.isNew();
@@ -121,7 +121,7 @@ public class ListTypeUtil {
 			}
 		}
 
-		listType = getPersistence().update(listType, saveOrUpdate);
+		listType = getPersistence().update(listType, merge);
 
 		if (listener != null) {
 			if (isNew) {

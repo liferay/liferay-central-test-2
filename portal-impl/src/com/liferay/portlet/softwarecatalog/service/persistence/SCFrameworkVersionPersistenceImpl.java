@@ -127,14 +127,14 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 	public SCFrameworkVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(scFrameworkVersion);
+			if (merge) {
+				session.merge(scFrameworkVersion);
 			}
 			else {
 				if (scFrameworkVersion.isNew()) {

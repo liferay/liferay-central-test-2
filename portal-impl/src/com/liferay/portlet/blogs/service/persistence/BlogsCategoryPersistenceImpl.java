@@ -126,14 +126,14 @@ public class BlogsCategoryPersistenceImpl extends BasePersistence
 
 	public BlogsCategory update(
 		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(blogsCategory);
+			if (merge) {
+				session.merge(blogsCategory);
 			}
 			else {
 				if (blogsCategory.isNew()) {

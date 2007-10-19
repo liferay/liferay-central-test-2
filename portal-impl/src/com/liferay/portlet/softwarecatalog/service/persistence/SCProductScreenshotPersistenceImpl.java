@@ -127,14 +127,14 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 	public SCProductScreenshot update(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(scProductScreenshot);
+			if (merge) {
+				session.merge(scProductScreenshot);
 			}
 			else {
 				if (scProductScreenshot.isNew()) {

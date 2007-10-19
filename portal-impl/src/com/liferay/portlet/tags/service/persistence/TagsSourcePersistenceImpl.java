@@ -122,15 +122,15 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 	}
 
 	public TagsSource update(
-		com.liferay.portlet.tags.model.TagsSource tagsSource,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portlet.tags.model.TagsSource tagsSource, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(tagsSource);
+			if (merge) {
+				session.merge(tagsSource);
 			}
 			else {
 				if (tagsSource.isNew()) {

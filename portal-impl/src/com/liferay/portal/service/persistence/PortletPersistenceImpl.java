@@ -120,14 +120,14 @@ public class PortletPersistenceImpl extends BasePersistence
 	}
 
 	public Portlet update(com.liferay.portal.model.Portlet portlet,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(portlet);
+			if (merge) {
+				session.merge(portlet);
 			}
 			else {
 				if (portlet.isNew()) {

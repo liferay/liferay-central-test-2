@@ -127,14 +127,14 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 
 	public ShoppingItemPrice update(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(shoppingItemPrice);
+			if (merge) {
+				session.merge(shoppingItemPrice);
 			}
 			else {
 				if (shoppingItemPrice.isNew()) {

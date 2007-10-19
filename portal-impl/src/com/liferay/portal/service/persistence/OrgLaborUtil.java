@@ -107,7 +107,7 @@ public class OrgLaborUtil {
 	}
 
 	public static com.liferay.portal.model.OrgLabor update(
-		com.liferay.portal.model.OrgLabor orgLabor, boolean saveOrUpdate)
+		com.liferay.portal.model.OrgLabor orgLabor, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = orgLabor.isNew();
@@ -121,7 +121,7 @@ public class OrgLaborUtil {
 			}
 		}
 
-		orgLabor = getPersistence().update(orgLabor, saveOrUpdate);
+		orgLabor = getPersistence().update(orgLabor, merge);
 
 		if (listener != null) {
 			if (isNew) {

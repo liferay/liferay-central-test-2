@@ -110,8 +110,8 @@ public class PluginSettingUtil {
 	}
 
 	public static com.liferay.portal.model.PluginSetting update(
-		com.liferay.portal.model.PluginSetting pluginSetting,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
+		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = pluginSetting.isNew();
 
@@ -124,7 +124,7 @@ public class PluginSettingUtil {
 			}
 		}
 
-		pluginSetting = getPersistence().update(pluginSetting, saveOrUpdate);
+		pluginSetting = getPersistence().update(pluginSetting, merge);
 
 		if (listener != null) {
 			if (isNew) {

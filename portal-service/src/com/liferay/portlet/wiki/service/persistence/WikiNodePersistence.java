@@ -44,7 +44,7 @@ public interface WikiNodePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiNode update(
-		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean saveOrUpdate)
+		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiNode findByPrimaryKey(long nodeId)

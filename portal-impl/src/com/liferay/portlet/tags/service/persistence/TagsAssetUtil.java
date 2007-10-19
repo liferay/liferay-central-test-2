@@ -108,7 +108,7 @@ public class TagsAssetUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset update(
-		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean saveOrUpdate)
+		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = tagsAsset.isNew();
@@ -122,7 +122,7 @@ public class TagsAssetUtil {
 			}
 		}
 
-		tagsAsset = getPersistence().update(tagsAsset, saveOrUpdate);
+		tagsAsset = getPersistence().update(tagsAsset, merge);
 
 		if (listener != null) {
 			if (isNew) {

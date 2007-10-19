@@ -124,15 +124,15 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 	}
 
 	public EmailAddress update(
-		com.liferay.portal.model.EmailAddress emailAddress, boolean saveOrUpdate)
+		com.liferay.portal.model.EmailAddress emailAddress, boolean merge)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(emailAddress);
+			if (merge) {
+				session.merge(emailAddress);
 			}
 			else {
 				if (emailAddress.isNew()) {

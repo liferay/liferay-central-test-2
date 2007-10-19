@@ -110,8 +110,8 @@ public class TagsPropertyUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty update(
-		com.liferay.portlet.tags.model.TagsProperty tagsProperty,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty, boolean merge)
+		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = tagsProperty.isNew();
 
@@ -124,7 +124,7 @@ public class TagsPropertyUtil {
 			}
 		}
 
-		tagsProperty = getPersistence().update(tagsProperty, saveOrUpdate);
+		tagsProperty = getPersistence().update(tagsProperty, merge);
 
 		if (listener != null) {
 			if (isNew) {

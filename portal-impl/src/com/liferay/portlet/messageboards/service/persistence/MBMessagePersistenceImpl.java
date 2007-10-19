@@ -124,14 +124,14 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 	public MBMessage update(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(mbMessage);
+			if (merge) {
+				session.merge(mbMessage);
 			}
 			else {
 				if (mbMessage.isNew()) {

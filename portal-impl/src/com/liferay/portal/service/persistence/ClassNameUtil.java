@@ -107,7 +107,7 @@ public class ClassNameUtil {
 	}
 
 	public static com.liferay.portal.model.ClassName update(
-		com.liferay.portal.model.ClassName className, boolean saveOrUpdate)
+		com.liferay.portal.model.ClassName className, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = className.isNew();
@@ -121,7 +121,7 @@ public class ClassNameUtil {
 			}
 		}
 
-		className = getPersistence().update(className, saveOrUpdate);
+		className = getPersistence().update(className, merge);
 
 		if (listener != null) {
 			if (isNew) {

@@ -111,7 +111,7 @@ public class DLFileShortcutUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut update(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = dlFileShortcut.isNew();
 
@@ -124,7 +124,7 @@ public class DLFileShortcutUtil {
 			}
 		}
 
-		dlFileShortcut = getPersistence().update(dlFileShortcut, saveOrUpdate);
+		dlFileShortcut = getPersistence().update(dlFileShortcut, merge);
 
 		if (listener != null) {
 			if (isNew) {

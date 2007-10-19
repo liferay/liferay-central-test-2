@@ -47,7 +47,7 @@ public interface MBDiscussionPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion update(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion findByPrimaryKey(
 		long discussionId)

@@ -123,15 +123,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public BlogsEntry update(
-		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(blogsEntry);
+			if (merge) {
+				session.merge(blogsEntry);
 			}
 			else {
 				if (blogsEntry.isNew()) {

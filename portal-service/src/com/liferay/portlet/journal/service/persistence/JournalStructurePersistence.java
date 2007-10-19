@@ -45,7 +45,7 @@ public interface JournalStructurePersistence {
 
 	public com.liferay.portlet.journal.model.JournalStructure update(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure findByPrimaryKey(
 		long id)

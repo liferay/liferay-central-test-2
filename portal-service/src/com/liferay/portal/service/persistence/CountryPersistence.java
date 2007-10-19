@@ -44,7 +44,7 @@ public interface CountryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Country update(
-		com.liferay.portal.model.Country country, boolean saveOrUpdate)
+		com.liferay.portal.model.Country country, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Country findByPrimaryKey(long countryId)

@@ -111,7 +111,7 @@ public class MBCategoryUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBCategory update(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = mbCategory.isNew();
 
@@ -124,7 +124,7 @@ public class MBCategoryUtil {
 			}
 		}
 
-		mbCategory = getPersistence().update(mbCategory, saveOrUpdate);
+		mbCategory = getPersistence().update(mbCategory, merge);
 
 		if (listener != null) {
 			if (isNew) {

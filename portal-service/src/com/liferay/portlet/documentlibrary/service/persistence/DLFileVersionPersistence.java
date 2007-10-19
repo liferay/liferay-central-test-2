@@ -47,7 +47,7 @@ public interface DLFileVersionPersistence {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion update(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion findByPrimaryKey(
 		long fileVersionId)

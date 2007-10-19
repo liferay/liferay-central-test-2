@@ -107,7 +107,7 @@ public class AccountUtil {
 	}
 
 	public static com.liferay.portal.model.Account update(
-		com.liferay.portal.model.Account account, boolean saveOrUpdate)
+		com.liferay.portal.model.Account account, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = account.isNew();
@@ -121,7 +121,7 @@ public class AccountUtil {
 			}
 		}
 
-		account = getPersistence().update(account, saveOrUpdate);
+		account = getPersistence().update(account, merge);
 
 		if (listener != null) {
 			if (isNew) {

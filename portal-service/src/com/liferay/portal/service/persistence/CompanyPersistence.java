@@ -44,7 +44,7 @@ public interface CompanyPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company update(
-		com.liferay.portal.model.Company company, boolean saveOrUpdate)
+		com.liferay.portal.model.Company company, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company findByPrimaryKey(long companyId)

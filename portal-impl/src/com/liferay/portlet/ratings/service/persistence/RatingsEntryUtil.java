@@ -111,7 +111,7 @@ public class RatingsEntryUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry update(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = ratingsEntry.isNew();
 
@@ -124,7 +124,7 @@ public class RatingsEntryUtil {
 			}
 		}
 
-		ratingsEntry = getPersistence().update(ratingsEntry, saveOrUpdate);
+		ratingsEntry = getPersistence().update(ratingsEntry, merge);
 
 		if (listener != null) {
 			if (isNew) {

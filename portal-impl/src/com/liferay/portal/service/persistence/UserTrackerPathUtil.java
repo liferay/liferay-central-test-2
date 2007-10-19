@@ -110,8 +110,8 @@ public class UserTrackerPathUtil {
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath update(
-		com.liferay.portal.model.UserTrackerPath userTrackerPath,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		com.liferay.portal.model.UserTrackerPath userTrackerPath, boolean merge)
+		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = userTrackerPath.isNew();
 
@@ -124,7 +124,7 @@ public class UserTrackerPathUtil {
 			}
 		}
 
-		userTrackerPath = getPersistence().update(userTrackerPath, saveOrUpdate);
+		userTrackerPath = getPersistence().update(userTrackerPath, merge);
 
 		if (listener != null) {
 			if (isNew) {

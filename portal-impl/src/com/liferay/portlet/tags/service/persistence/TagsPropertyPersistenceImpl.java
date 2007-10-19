@@ -125,15 +125,15 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 	}
 
 	public TagsProperty update(
-		com.liferay.portlet.tags.model.TagsProperty tagsProperty,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(tagsProperty);
+			if (merge) {
+				session.merge(tagsProperty);
 			}
 			else {
 				if (tagsProperty.isNew()) {

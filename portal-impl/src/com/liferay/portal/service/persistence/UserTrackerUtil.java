@@ -110,7 +110,7 @@ public class UserTrackerUtil {
 	}
 
 	public static com.liferay.portal.model.UserTracker update(
-		com.liferay.portal.model.UserTracker userTracker, boolean saveOrUpdate)
+		com.liferay.portal.model.UserTracker userTracker, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = userTracker.isNew();
@@ -124,7 +124,7 @@ public class UserTrackerUtil {
 			}
 		}
 
-		userTracker = getPersistence().update(userTracker, saveOrUpdate);
+		userTracker = getPersistence().update(userTracker, merge);
 
 		if (listener != null) {
 			if (isNew) {

@@ -121,14 +121,14 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 	}
 
 	public LayoutSet update(com.liferay.portal.model.LayoutSet layoutSet,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(layoutSet);
+			if (merge) {
+				session.merge(layoutSet);
 			}
 			else {
 				if (layoutSet.isNew()) {

@@ -123,15 +123,15 @@ public class IGImagePersistenceImpl extends BasePersistence
 	}
 
 	public IGImage update(
-		com.liferay.portlet.imagegallery.model.IGImage igImage,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(igImage);
+			if (merge) {
+				session.merge(igImage);
 			}
 			else {
 				if (igImage.isNew()) {

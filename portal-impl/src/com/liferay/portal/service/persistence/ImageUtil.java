@@ -107,7 +107,7 @@ public class ImageUtil {
 	}
 
 	public static com.liferay.portal.model.Image update(
-		com.liferay.portal.model.Image image, boolean saveOrUpdate)
+		com.liferay.portal.model.Image image, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = image.isNew();
@@ -121,7 +121,7 @@ public class ImageUtil {
 			}
 		}
 
-		image = getPersistence().update(image, saveOrUpdate);
+		image = getPersistence().update(image, merge);
 
 		if (listener != null) {
 			if (isNew) {

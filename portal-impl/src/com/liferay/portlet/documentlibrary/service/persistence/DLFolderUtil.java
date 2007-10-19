@@ -111,7 +111,7 @@ public class DLFolderUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder update(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = dlFolder.isNew();
 
@@ -124,7 +124,7 @@ public class DLFolderUtil {
 			}
 		}
 
-		dlFolder = getPersistence().update(dlFolder, saveOrUpdate);
+		dlFolder = getPersistence().update(dlFolder, merge);
 
 		if (listener != null) {
 			if (isNew) {

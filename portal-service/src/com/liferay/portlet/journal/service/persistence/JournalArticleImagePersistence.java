@@ -47,7 +47,7 @@ public interface JournalArticleImagePersistence {
 
 	public com.liferay.portlet.journal.model.JournalArticleImage update(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage findByPrimaryKey(
 		long articleImageId)

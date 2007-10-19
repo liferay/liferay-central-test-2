@@ -110,8 +110,8 @@ public class CalEventUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent update(
-		com.liferay.portlet.calendar.model.CalEvent calEvent,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
+		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = calEvent.isNew();
 
@@ -124,7 +124,7 @@ public class CalEventUtil {
 			}
 		}
 
-		calEvent = getPersistence().update(calEvent, saveOrUpdate);
+		calEvent = getPersistence().update(calEvent, merge);
 
 		if (listener != null) {
 			if (isNew) {

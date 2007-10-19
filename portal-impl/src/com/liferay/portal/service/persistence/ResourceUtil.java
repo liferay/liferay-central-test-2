@@ -107,7 +107,7 @@ public class ResourceUtil {
 	}
 
 	public static com.liferay.portal.model.Resource update(
-		com.liferay.portal.model.Resource resource, boolean saveOrUpdate)
+		com.liferay.portal.model.Resource resource, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = resource.isNew();
@@ -121,7 +121,7 @@ public class ResourceUtil {
 			}
 		}
 
-		resource = getPersistence().update(resource, saveOrUpdate);
+		resource = getPersistence().update(resource, merge);
 
 		if (listener != null) {
 			if (isNew) {

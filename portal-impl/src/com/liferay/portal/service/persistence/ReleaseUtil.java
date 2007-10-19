@@ -107,7 +107,7 @@ public class ReleaseUtil {
 	}
 
 	public static com.liferay.portal.model.Release update(
-		com.liferay.portal.model.Release release, boolean saveOrUpdate)
+		com.liferay.portal.model.Release release, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = release.isNew();
@@ -121,7 +121,7 @@ public class ReleaseUtil {
 			}
 		}
 
-		release = getPersistence().update(release, saveOrUpdate);
+		release = getPersistence().update(release, merge);
 
 		if (listener != null) {
 			if (isNew) {

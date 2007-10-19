@@ -44,7 +44,7 @@ public interface OrganizationPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Organization update(
-		com.liferay.portal.model.Organization organization, boolean saveOrUpdate)
+		com.liferay.portal.model.Organization organization, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Organization findByPrimaryKey(

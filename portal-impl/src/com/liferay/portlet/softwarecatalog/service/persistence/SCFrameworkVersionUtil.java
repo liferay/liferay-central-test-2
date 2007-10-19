@@ -111,7 +111,7 @@ public class SCFrameworkVersionUtil {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = scFrameworkVersion.isNew();
 
@@ -124,8 +124,7 @@ public class SCFrameworkVersionUtil {
 			}
 		}
 
-		scFrameworkVersion = getPersistence().update(scFrameworkVersion,
-				saveOrUpdate);
+		scFrameworkVersion = getPersistence().update(scFrameworkVersion, merge);
 
 		if (listener != null) {
 			if (isNew) {

@@ -111,7 +111,7 @@ public class DLFileVersionUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion update(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = dlFileVersion.isNew();
 
@@ -124,7 +124,7 @@ public class DLFileVersionUtil {
 			}
 		}
 
-		dlFileVersion = getPersistence().update(dlFileVersion, saveOrUpdate);
+		dlFileVersion = getPersistence().update(dlFileVersion, merge);
 
 		if (listener != null) {
 			if (isNew) {

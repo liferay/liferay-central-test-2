@@ -47,7 +47,7 @@ public interface SCLicensePersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCLicense update(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCLicense findByPrimaryKey(
 		long licenseId)

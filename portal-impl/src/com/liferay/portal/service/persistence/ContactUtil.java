@@ -107,7 +107,7 @@ public class ContactUtil {
 	}
 
 	public static com.liferay.portal.model.Contact update(
-		com.liferay.portal.model.Contact contact, boolean saveOrUpdate)
+		com.liferay.portal.model.Contact contact, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = contact.isNew();
@@ -121,7 +121,7 @@ public class ContactUtil {
 			}
 		}
 
-		contact = getPersistence().update(contact, saveOrUpdate);
+		contact = getPersistence().update(contact, merge);
 
 		if (listener != null) {
 			if (isNew) {

@@ -46,8 +46,8 @@ public interface UserGroupRolePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroupRole update(
-		com.liferay.portal.model.UserGroupRole userGroupRole,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		com.liferay.portal.model.UserGroupRole userGroupRole, boolean merge)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroupRole findByPrimaryKey(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)

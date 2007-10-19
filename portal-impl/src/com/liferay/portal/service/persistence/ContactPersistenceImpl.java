@@ -121,14 +121,14 @@ public class ContactPersistenceImpl extends BasePersistence
 	}
 
 	public Contact update(com.liferay.portal.model.Contact contact,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(contact);
+			if (merge) {
+				session.merge(contact);
 			}
 			else {
 				if (contact.isNew()) {

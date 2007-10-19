@@ -47,7 +47,7 @@ public interface PortletPreferencesPersistence {
 
 	public com.liferay.portal.model.PortletPreferences update(
 		com.liferay.portal.model.PortletPreferences portletPreferences,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PortletPreferences findByPrimaryKey(
 		long portletPreferencesId)

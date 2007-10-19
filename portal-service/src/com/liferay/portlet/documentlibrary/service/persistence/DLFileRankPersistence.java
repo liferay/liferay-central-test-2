@@ -47,7 +47,7 @@ public interface DLFileRankPersistence {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank findByPrimaryKey(
 		long fileRankId)

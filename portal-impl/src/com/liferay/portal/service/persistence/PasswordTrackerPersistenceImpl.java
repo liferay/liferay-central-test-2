@@ -124,15 +124,15 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 	}
 
 	public PasswordTracker update(
-		com.liferay.portal.model.PasswordTracker passwordTracker,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(passwordTracker);
+			if (merge) {
+				session.merge(passwordTracker);
 			}
 			else {
 				if (passwordTracker.isNew()) {

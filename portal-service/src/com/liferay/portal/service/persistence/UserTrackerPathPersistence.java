@@ -46,8 +46,8 @@ public interface UserTrackerPathPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserTrackerPath update(
-		com.liferay.portal.model.UserTrackerPath userTrackerPath,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		com.liferay.portal.model.UserTrackerPath userTrackerPath, boolean merge)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserTrackerPath findByPrimaryKey(
 		long userTrackerPathId)

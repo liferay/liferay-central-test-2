@@ -47,7 +47,7 @@ public interface SCProductEntryPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry update(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry findByPrimaryKey(
 		long productEntryId)

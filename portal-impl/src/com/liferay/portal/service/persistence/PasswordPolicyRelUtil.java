@@ -111,7 +111,7 @@ public class PasswordPolicyRelUtil {
 
 	public static com.liferay.portal.model.PasswordPolicyRel update(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = passwordPolicyRel.isNew();
 
@@ -124,8 +124,7 @@ public class PasswordPolicyRelUtil {
 			}
 		}
 
-		passwordPolicyRel = getPersistence().update(passwordPolicyRel,
-				saveOrUpdate);
+		passwordPolicyRel = getPersistence().update(passwordPolicyRel, merge);
 
 		if (listener != null) {
 			if (isNew) {

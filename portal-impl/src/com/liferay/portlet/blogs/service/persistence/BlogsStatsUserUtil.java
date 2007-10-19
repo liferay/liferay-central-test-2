@@ -111,7 +111,7 @@ public class BlogsStatsUserUtil {
 
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser update(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = blogsStatsUser.isNew();
 
@@ -124,7 +124,7 @@ public class BlogsStatsUserUtil {
 			}
 		}
 
-		blogsStatsUser = getPersistence().update(blogsStatsUser, saveOrUpdate);
+		blogsStatsUser = getPersistence().update(blogsStatsUser, merge);
 
 		if (listener != null) {
 			if (isNew) {

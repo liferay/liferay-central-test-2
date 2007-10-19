@@ -121,14 +121,14 @@ public class AddressPersistenceImpl extends BasePersistence
 	}
 
 	public Address update(com.liferay.portal.model.Address address,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(address);
+			if (merge) {
+				session.merge(address);
 			}
 			else {
 				if (address.isNew()) {

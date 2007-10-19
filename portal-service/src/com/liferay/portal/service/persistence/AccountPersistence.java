@@ -44,7 +44,7 @@ public interface AccountPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Account update(
-		com.liferay.portal.model.Account account, boolean saveOrUpdate)
+		com.liferay.portal.model.Account account, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Account findByPrimaryKey(long accountId)

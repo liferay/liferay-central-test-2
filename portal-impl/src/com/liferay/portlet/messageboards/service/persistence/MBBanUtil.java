@@ -110,8 +110,8 @@ public class MBBanUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan update(
-		com.liferay.portlet.messageboards.model.MBBan mbBan,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		com.liferay.portlet.messageboards.model.MBBan mbBan, boolean merge)
+		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = mbBan.isNew();
 
@@ -124,7 +124,7 @@ public class MBBanUtil {
 			}
 		}
 
-		mbBan = getPersistence().update(mbBan, saveOrUpdate);
+		mbBan = getPersistence().update(mbBan, merge);
 
 		if (listener != null) {
 			if (isNew) {

@@ -44,7 +44,7 @@ public interface TagsAssetPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset update(
-		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean saveOrUpdate)
+		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset findByPrimaryKey(

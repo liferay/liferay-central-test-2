@@ -122,14 +122,14 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	}
 
 	public WikiNode update(com.liferay.portlet.wiki.model.WikiNode wikiNode,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(wikiNode);
+			if (merge) {
+				session.merge(wikiNode);
 			}
 			else {
 				if (wikiNode.isNew()) {

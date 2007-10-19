@@ -126,14 +126,14 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 	public MBDiscussion update(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(mbDiscussion);
+			if (merge) {
+				session.merge(mbDiscussion);
 			}
 			else {
 				if (mbDiscussion.isNew()) {

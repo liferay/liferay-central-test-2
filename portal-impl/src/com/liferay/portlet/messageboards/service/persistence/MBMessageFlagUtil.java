@@ -111,7 +111,7 @@ public class MBMessageFlagUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = mbMessageFlag.isNew();
 
@@ -124,7 +124,7 @@ public class MBMessageFlagUtil {
 			}
 		}
 
-		mbMessageFlag = getPersistence().update(mbMessageFlag, saveOrUpdate);
+		mbMessageFlag = getPersistence().update(mbMessageFlag, merge);
 
 		if (listener != null) {
 			if (isNew) {

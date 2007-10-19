@@ -108,7 +108,7 @@ public class PermissionUtil {
 	}
 
 	public static com.liferay.portal.model.Permission update(
-		com.liferay.portal.model.Permission permission, boolean saveOrUpdate)
+		com.liferay.portal.model.Permission permission, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = permission.isNew();
@@ -122,7 +122,7 @@ public class PermissionUtil {
 			}
 		}
 
-		permission = getPersistence().update(permission, saveOrUpdate);
+		permission = getPersistence().update(permission, merge);
 
 		if (listener != null) {
 			if (isNew) {

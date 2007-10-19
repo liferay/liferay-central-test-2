@@ -111,7 +111,7 @@ public class PortletPreferencesUtil {
 
 	public static com.liferay.portal.model.PortletPreferences update(
 		com.liferay.portal.model.PortletPreferences portletPreferences,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = portletPreferences.isNew();
 
@@ -124,8 +124,7 @@ public class PortletPreferencesUtil {
 			}
 		}
 
-		portletPreferences = getPersistence().update(portletPreferences,
-				saveOrUpdate);
+		portletPreferences = getPersistence().update(portletPreferences, merge);
 
 		if (listener != null) {
 			if (isNew) {

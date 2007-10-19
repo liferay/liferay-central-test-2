@@ -111,7 +111,7 @@ public class MembershipRequestUtil {
 
 	public static com.liferay.portal.model.MembershipRequest update(
 		com.liferay.portal.model.MembershipRequest membershipRequest,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = membershipRequest.isNew();
 
@@ -124,8 +124,7 @@ public class MembershipRequestUtil {
 			}
 		}
 
-		membershipRequest = getPersistence().update(membershipRequest,
-				saveOrUpdate);
+		membershipRequest = getPersistence().update(membershipRequest, merge);
 
 		if (listener != null) {
 			if (isNew) {

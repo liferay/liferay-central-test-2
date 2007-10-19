@@ -44,7 +44,7 @@ public interface UserTrackerPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserTracker update(
-		com.liferay.portal.model.UserTracker userTracker, boolean saveOrUpdate)
+		com.liferay.portal.model.UserTracker userTracker, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserTracker findByPrimaryKey(

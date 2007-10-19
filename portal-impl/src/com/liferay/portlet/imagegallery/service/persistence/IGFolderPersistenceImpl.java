@@ -123,15 +123,15 @@ public class IGFolderPersistenceImpl extends BasePersistence
 	}
 
 	public IGFolder update(
-		com.liferay.portlet.imagegallery.model.IGFolder igFolder,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(igFolder);
+			if (merge) {
+				session.merge(igFolder);
 			}
 			else {
 				if (igFolder.isNew()) {

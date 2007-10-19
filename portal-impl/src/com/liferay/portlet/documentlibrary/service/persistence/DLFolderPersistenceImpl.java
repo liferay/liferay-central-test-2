@@ -124,14 +124,14 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 	public DLFolder update(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(dlFolder);
+			if (merge) {
+				session.merge(dlFolder);
 			}
 			else {
 				if (dlFolder.isNew()) {

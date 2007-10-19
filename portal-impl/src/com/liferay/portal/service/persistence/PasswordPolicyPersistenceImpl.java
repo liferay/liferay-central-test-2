@@ -124,15 +124,15 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 	}
 
 	public PasswordPolicy update(
-		com.liferay.portal.model.PasswordPolicy passwordPolicy,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portal.model.PasswordPolicy passwordPolicy, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(passwordPolicy);
+			if (merge) {
+				session.merge(passwordPolicy);
 			}
 			else {
 				if (passwordPolicy.isNew()) {

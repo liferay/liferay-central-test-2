@@ -107,7 +107,7 @@ public class WebsiteUtil {
 	}
 
 	public static com.liferay.portal.model.Website update(
-		com.liferay.portal.model.Website website, boolean saveOrUpdate)
+		com.liferay.portal.model.Website website, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = website.isNew();
@@ -121,7 +121,7 @@ public class WebsiteUtil {
 			}
 		}
 
-		website = getPersistence().update(website, saveOrUpdate);
+		website = getPersistence().update(website, merge);
 
 		if (listener != null) {
 			if (isNew) {

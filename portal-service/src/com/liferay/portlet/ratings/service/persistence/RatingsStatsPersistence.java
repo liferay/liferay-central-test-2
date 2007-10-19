@@ -45,7 +45,7 @@ public interface RatingsStatsPersistence {
 
 	public com.liferay.portlet.ratings.model.RatingsStats update(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.ratings.model.RatingsStats findByPrimaryKey(
 		long statsId)

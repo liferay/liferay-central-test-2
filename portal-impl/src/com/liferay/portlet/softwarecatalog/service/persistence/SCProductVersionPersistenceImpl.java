@@ -150,7 +150,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 	public SCProductVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
 
 		Session session = null;
@@ -158,8 +158,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(scProductVersion);
+			if (merge) {
+				session.merge(scProductVersion);
 			}
 			else {
 				if (scProductVersion.isNew()) {

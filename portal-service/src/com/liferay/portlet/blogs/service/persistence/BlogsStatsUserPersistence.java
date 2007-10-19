@@ -47,7 +47,7 @@ public interface BlogsStatsUserPersistence {
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser update(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByPrimaryKey(
 		long statsUserId)

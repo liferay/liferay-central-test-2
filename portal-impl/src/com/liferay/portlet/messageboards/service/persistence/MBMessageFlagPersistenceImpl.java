@@ -126,14 +126,14 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 	public MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(mbMessageFlag);
+			if (merge) {
+				session.merge(mbMessageFlag);
 			}
 			else {
 				if (mbMessageFlag.isNew()) {

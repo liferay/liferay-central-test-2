@@ -127,14 +127,14 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 	public JournalContentSearch update(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(journalContentSearch);
+			if (merge) {
+				session.merge(journalContentSearch);
 			}
 			else {
 				if (journalContentSearch.isNew()) {

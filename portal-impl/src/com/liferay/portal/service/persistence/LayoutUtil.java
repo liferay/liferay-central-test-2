@@ -107,7 +107,7 @@ public class LayoutUtil {
 	}
 
 	public static com.liferay.portal.model.Layout update(
-		com.liferay.portal.model.Layout layout, boolean saveOrUpdate)
+		com.liferay.portal.model.Layout layout, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = layout.isNew();
@@ -121,7 +121,7 @@ public class LayoutUtil {
 			}
 		}
 
-		layout = getPersistence().update(layout, saveOrUpdate);
+		layout = getPersistence().update(layout, merge);
 
 		if (listener != null) {
 			if (isNew) {

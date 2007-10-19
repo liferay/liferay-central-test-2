@@ -119,15 +119,15 @@ public class ImagePersistenceImpl extends BasePersistence
 		return update(image, false);
 	}
 
-	public Image update(com.liferay.portal.model.Image image,
-		boolean saveOrUpdate) throws SystemException {
+	public Image update(com.liferay.portal.model.Image image, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(image);
+			if (merge) {
+				session.merge(image);
 			}
 			else {
 				if (image.isNew()) {

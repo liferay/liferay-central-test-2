@@ -128,14 +128,14 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 
 	public JournalArticleResource update(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(journalArticleResource);
+			if (merge) {
+				session.merge(journalArticleResource);
 			}
 			else {
 				if (journalArticleResource.isNew()) {

@@ -111,7 +111,7 @@ public class JournalStructureUtil {
 
 	public static com.liferay.portlet.journal.model.JournalStructure update(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = journalStructure.isNew();
 
@@ -124,8 +124,7 @@ public class JournalStructureUtil {
 			}
 		}
 
-		journalStructure = getPersistence().update(journalStructure,
-				saveOrUpdate);
+		journalStructure = getPersistence().update(journalStructure, merge);
 
 		if (listener != null) {
 			if (isNew) {

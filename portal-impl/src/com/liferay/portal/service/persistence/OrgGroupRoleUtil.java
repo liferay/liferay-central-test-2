@@ -110,7 +110,7 @@ public class OrgGroupRoleUtil {
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole update(
-		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean saveOrUpdate)
+		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = orgGroupRole.isNew();
@@ -124,7 +124,7 @@ public class OrgGroupRoleUtil {
 			}
 		}
 
-		orgGroupRole = getPersistence().update(orgGroupRole, saveOrUpdate);
+		orgGroupRole = getPersistence().update(orgGroupRole, merge);
 
 		if (listener != null) {
 			if (isNew) {

@@ -126,14 +126,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 	public MembershipRequest update(
 		com.liferay.portal.model.MembershipRequest membershipRequest,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(membershipRequest);
+			if (merge) {
+				session.merge(membershipRequest);
 			}
 			else {
 				if (membershipRequest.isNew()) {

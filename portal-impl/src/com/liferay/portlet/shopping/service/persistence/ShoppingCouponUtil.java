@@ -111,7 +111,7 @@ public class ShoppingCouponUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon update(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = shoppingCoupon.isNew();
 
@@ -124,7 +124,7 @@ public class ShoppingCouponUtil {
 			}
 		}
 
-		shoppingCoupon = getPersistence().update(shoppingCoupon, saveOrUpdate);
+		shoppingCoupon = getPersistence().update(shoppingCoupon, merge);
 
 		if (listener != null) {
 			if (isNew) {

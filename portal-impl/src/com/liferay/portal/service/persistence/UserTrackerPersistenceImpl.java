@@ -123,15 +123,15 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 	}
 
 	public UserTracker update(
-		com.liferay.portal.model.UserTracker userTracker, boolean saveOrUpdate)
+		com.liferay.portal.model.UserTracker userTracker, boolean merge)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(userTracker);
+			if (merge) {
+				session.merge(userTracker);
 			}
 			else {
 				if (userTracker.isNew()) {

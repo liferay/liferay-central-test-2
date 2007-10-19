@@ -111,7 +111,7 @@ public class DLFileEntryUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry update(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = dlFileEntry.isNew();
 
@@ -124,7 +124,7 @@ public class DLFileEntryUtil {
 			}
 		}
 
-		dlFileEntry = getPersistence().update(dlFileEntry, saveOrUpdate);
+		dlFileEntry = getPersistence().update(dlFileEntry, merge);
 
 		if (listener != null) {
 			if (isNew) {

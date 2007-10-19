@@ -120,14 +120,14 @@ public class ReleasePersistenceImpl extends BasePersistence
 	}
 
 	public Release update(com.liferay.portal.model.Release release,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(release);
+			if (merge) {
+				session.merge(release);
 			}
 			else {
 				if (release.isNew()) {

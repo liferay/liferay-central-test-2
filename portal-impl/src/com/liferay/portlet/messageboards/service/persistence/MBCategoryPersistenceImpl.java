@@ -124,14 +124,14 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 
 	public MBCategory update(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(mbCategory);
+			if (merge) {
+				session.merge(mbCategory);
 			}
 			else {
 				if (mbCategory.isNew()) {

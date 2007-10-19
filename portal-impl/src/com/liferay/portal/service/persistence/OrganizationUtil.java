@@ -110,7 +110,7 @@ public class OrganizationUtil {
 	}
 
 	public static com.liferay.portal.model.Organization update(
-		com.liferay.portal.model.Organization organization, boolean saveOrUpdate)
+		com.liferay.portal.model.Organization organization, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = organization.isNew();
@@ -124,7 +124,7 @@ public class OrganizationUtil {
 			}
 		}
 
-		organization = getPersistence().update(organization, saveOrUpdate);
+		organization = getPersistence().update(organization, merge);
 
 		if (listener != null) {
 			if (isNew) {

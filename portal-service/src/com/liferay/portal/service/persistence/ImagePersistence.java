@@ -44,7 +44,7 @@ public interface ImagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image update(
-		com.liferay.portal.model.Image image, boolean saveOrUpdate)
+		com.liferay.portal.model.Image image, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image findByPrimaryKey(long imageId)

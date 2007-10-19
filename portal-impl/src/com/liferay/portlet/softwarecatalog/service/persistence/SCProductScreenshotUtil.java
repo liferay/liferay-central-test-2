@@ -111,7 +111,7 @@ public class SCProductScreenshotUtil {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot update(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = scProductScreenshot.isNew();
 
@@ -124,8 +124,7 @@ public class SCProductScreenshotUtil {
 			}
 		}
 
-		scProductScreenshot = getPersistence().update(scProductScreenshot,
-				saveOrUpdate);
+		scProductScreenshot = getPersistence().update(scProductScreenshot, merge);
 
 		if (listener != null) {
 			if (isNew) {

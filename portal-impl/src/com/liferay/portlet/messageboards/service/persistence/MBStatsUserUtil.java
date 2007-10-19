@@ -111,7 +111,7 @@ public class MBStatsUserUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser update(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = mbStatsUser.isNew();
 
@@ -124,7 +124,7 @@ public class MBStatsUserUtil {
 			}
 		}
 
-		mbStatsUser = getPersistence().update(mbStatsUser, saveOrUpdate);
+		mbStatsUser = getPersistence().update(mbStatsUser, merge);
 
 		if (listener != null) {
 			if (isNew) {

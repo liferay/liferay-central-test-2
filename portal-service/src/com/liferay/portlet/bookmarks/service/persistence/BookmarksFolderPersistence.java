@@ -47,7 +47,7 @@ public interface BookmarksFolderPersistence {
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder update(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder findByPrimaryKey(
 		long folderId)

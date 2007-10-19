@@ -111,7 +111,7 @@ public class JournalTemplateUtil {
 
 	public static com.liferay.portlet.journal.model.JournalTemplate update(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = journalTemplate.isNew();
 
@@ -124,7 +124,7 @@ public class JournalTemplateUtil {
 			}
 		}
 
-		journalTemplate = getPersistence().update(journalTemplate, saveOrUpdate);
+		journalTemplate = getPersistence().update(journalTemplate, merge);
 
 		if (listener != null) {
 			if (isNew) {

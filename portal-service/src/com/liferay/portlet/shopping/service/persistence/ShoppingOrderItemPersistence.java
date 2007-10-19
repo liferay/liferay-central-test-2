@@ -47,7 +47,7 @@ public interface ShoppingOrderItemPersistence {
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem update(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByPrimaryKey(
 		long orderItemId)

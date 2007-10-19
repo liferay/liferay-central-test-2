@@ -107,7 +107,7 @@ public class RegionUtil {
 	}
 
 	public static com.liferay.portal.model.Region update(
-		com.liferay.portal.model.Region region, boolean saveOrUpdate)
+		com.liferay.portal.model.Region region, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = region.isNew();
@@ -121,7 +121,7 @@ public class RegionUtil {
 			}
 		}
 
-		region = getPersistence().update(region, saveOrUpdate);
+		region = getPersistence().update(region, merge);
 
 		if (listener != null) {
 			if (isNew) {

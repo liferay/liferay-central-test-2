@@ -47,7 +47,7 @@ public interface MBMessageFlagPersistence {
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByPrimaryKey(
 		long messageFlagId)

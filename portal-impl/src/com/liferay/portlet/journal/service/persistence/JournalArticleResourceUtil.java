@@ -111,7 +111,7 @@ public class JournalArticleResourceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource update(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = journalArticleResource.isNew();
 
@@ -125,7 +125,7 @@ public class JournalArticleResourceUtil {
 		}
 
 		journalArticleResource = getPersistence().update(journalArticleResource,
-				saveOrUpdate);
+				merge);
 
 		if (listener != null) {
 			if (isNew) {

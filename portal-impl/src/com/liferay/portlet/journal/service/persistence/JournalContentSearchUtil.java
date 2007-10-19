@@ -111,7 +111,7 @@ public class JournalContentSearchUtil {
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch update(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = journalContentSearch.isNew();
 
@@ -125,7 +125,7 @@ public class JournalContentSearchUtil {
 		}
 
 		journalContentSearch = getPersistence().update(journalContentSearch,
-				saveOrUpdate);
+				merge);
 
 		if (listener != null) {
 			if (isNew) {

@@ -111,7 +111,7 @@ public class WikiPageResourceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource update(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = wikiPageResource.isNew();
 
@@ -124,8 +124,7 @@ public class WikiPageResourceUtil {
 			}
 		}
 
-		wikiPageResource = getPersistence().update(wikiPageResource,
-				saveOrUpdate);
+		wikiPageResource = getPersistence().update(wikiPageResource, merge);
 
 		if (listener != null) {
 			if (isNew) {

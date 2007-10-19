@@ -44,8 +44,8 @@ public interface PluginSettingPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PluginSetting update(
-		com.liferay.portal.model.PluginSetting pluginSetting,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PluginSetting findByPrimaryKey(
 		long pluginSettingId)

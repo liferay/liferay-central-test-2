@@ -44,7 +44,7 @@ public interface GroupPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group update(
-		com.liferay.portal.model.Group group, boolean saveOrUpdate)
+		com.liferay.portal.model.Group group, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group findByPrimaryKey(long groupId)

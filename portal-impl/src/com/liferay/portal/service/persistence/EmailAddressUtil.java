@@ -110,7 +110,7 @@ public class EmailAddressUtil {
 	}
 
 	public static com.liferay.portal.model.EmailAddress update(
-		com.liferay.portal.model.EmailAddress emailAddress, boolean saveOrUpdate)
+		com.liferay.portal.model.EmailAddress emailAddress, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = emailAddress.isNew();
@@ -124,7 +124,7 @@ public class EmailAddressUtil {
 			}
 		}
 
-		emailAddress = getPersistence().update(emailAddress, saveOrUpdate);
+		emailAddress = getPersistence().update(emailAddress, merge);
 
 		if (listener != null) {
 			if (isNew) {

@@ -110,8 +110,8 @@ public class TagsSourceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsSource update(
-		com.liferay.portlet.tags.model.TagsSource tagsSource,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		com.liferay.portlet.tags.model.TagsSource tagsSource, boolean merge)
+		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = tagsSource.isNew();
 
@@ -124,7 +124,7 @@ public class TagsSourceUtil {
 			}
 		}
 
-		tagsSource = getPersistence().update(tagsSource, saveOrUpdate);
+		tagsSource = getPersistence().update(tagsSource, merge);
 
 		if (listener != null) {
 			if (isNew) {

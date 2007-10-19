@@ -126,14 +126,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 	public DLFileShortcut update(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(dlFileShortcut);
+			if (merge) {
+				session.merge(dlFileShortcut);
 			}
 			else {
 				if (dlFileShortcut.isNew()) {

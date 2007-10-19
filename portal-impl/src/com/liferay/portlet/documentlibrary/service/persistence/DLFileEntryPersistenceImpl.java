@@ -126,14 +126,14 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 	public DLFileEntry update(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(dlFileEntry);
+			if (merge) {
+				session.merge(dlFileEntry);
 			}
 			else {
 				if (dlFileEntry.isNew()) {

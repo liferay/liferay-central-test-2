@@ -111,7 +111,7 @@ public class ServiceComponentUtil {
 
 	public static com.liferay.portal.model.ServiceComponent update(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = serviceComponent.isNew();
 
@@ -124,8 +124,7 @@ public class ServiceComponentUtil {
 			}
 		}
 
-		serviceComponent = getPersistence().update(serviceComponent,
-				saveOrUpdate);
+		serviceComponent = getPersistence().update(serviceComponent, merge);
 
 		if (listener != null) {
 			if (isNew) {

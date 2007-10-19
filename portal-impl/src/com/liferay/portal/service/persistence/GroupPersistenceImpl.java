@@ -182,8 +182,8 @@ public class GroupPersistenceImpl extends BasePersistence
 		return update(group, false);
 	}
 
-	public Group update(com.liferay.portal.model.Group group,
-		boolean saveOrUpdate) throws SystemException {
+	public Group update(com.liferay.portal.model.Group group, boolean merge)
+		throws SystemException {
 		FinderCache.clearCache("Groups_Orgs");
 		FinderCache.clearCache("Groups_Permissions");
 		FinderCache.clearCache("Groups_Roles");
@@ -195,8 +195,8 @@ public class GroupPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(group);
+			if (merge) {
+				session.merge(group);
 			}
 			else {
 				if (group.isNew()) {

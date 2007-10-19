@@ -111,7 +111,7 @@ public class ShoppingCategoryUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory update(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = shoppingCategory.isNew();
 
@@ -124,8 +124,7 @@ public class ShoppingCategoryUtil {
 			}
 		}
 
-		shoppingCategory = getPersistence().update(shoppingCategory,
-				saveOrUpdate);
+		shoppingCategory = getPersistence().update(shoppingCategory, merge);
 
 		if (listener != null) {
 			if (isNew) {

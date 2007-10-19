@@ -121,14 +121,14 @@ public class CompanyPersistenceImpl extends BasePersistence
 	}
 
 	public Company update(com.liferay.portal.model.Company company,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(company);
+			if (merge) {
+				session.merge(company);
 			}
 			else {
 				if (company.isNew()) {

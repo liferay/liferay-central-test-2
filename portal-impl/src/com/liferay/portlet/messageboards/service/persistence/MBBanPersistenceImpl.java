@@ -119,14 +119,14 @@ public class MBBanPersistenceImpl extends BasePersistence
 	}
 
 	public MBBan update(com.liferay.portlet.messageboards.model.MBBan mbBan,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(mbBan);
+			if (merge) {
+				session.merge(mbBan);
 			}
 			else {
 				if (mbBan.isNew()) {

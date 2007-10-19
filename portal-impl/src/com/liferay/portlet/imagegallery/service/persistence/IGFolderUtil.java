@@ -110,8 +110,8 @@ public class IGFolderUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder update(
-		com.liferay.portlet.imagegallery.model.IGFolder igFolder,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
+		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = igFolder.isNew();
 
@@ -124,7 +124,7 @@ public class IGFolderUtil {
 			}
 		}
 
-		igFolder = getPersistence().update(igFolder, saveOrUpdate);
+		igFolder = getPersistence().update(igFolder, merge);
 
 		if (listener != null) {
 			if (isNew) {

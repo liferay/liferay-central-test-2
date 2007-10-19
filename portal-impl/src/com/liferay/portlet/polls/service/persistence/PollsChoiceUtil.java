@@ -110,8 +110,8 @@ public class PollsChoiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice update(
-		com.liferay.portlet.polls.model.PollsChoice pollsChoice,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		com.liferay.portlet.polls.model.PollsChoice pollsChoice, boolean merge)
+		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = pollsChoice.isNew();
 
@@ -124,7 +124,7 @@ public class PollsChoiceUtil {
 			}
 		}
 
-		pollsChoice = getPersistence().update(pollsChoice, saveOrUpdate);
+		pollsChoice = getPersistence().update(pollsChoice, merge);
 
 		if (listener != null) {
 			if (isNew) {

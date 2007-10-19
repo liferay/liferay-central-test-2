@@ -44,7 +44,7 @@ public interface UserPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User update(
-		com.liferay.portal.model.User user, boolean saveOrUpdate)
+		com.liferay.portal.model.User user, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByPrimaryKey(long userId)

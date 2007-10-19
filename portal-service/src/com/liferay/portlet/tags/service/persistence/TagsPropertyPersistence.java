@@ -44,8 +44,8 @@ public interface TagsPropertyPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsProperty update(
-		com.liferay.portlet.tags.model.TagsProperty tagsProperty,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty, boolean merge)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsProperty findByPrimaryKey(
 		long propertyId)

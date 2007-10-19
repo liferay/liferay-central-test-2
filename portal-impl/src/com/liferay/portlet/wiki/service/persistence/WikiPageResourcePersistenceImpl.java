@@ -127,14 +127,14 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 
 	public WikiPageResource update(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(wikiPageResource);
+			if (merge) {
+				session.merge(wikiPageResource);
 			}
 			else {
 				if (wikiPageResource.isNew()) {

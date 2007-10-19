@@ -44,7 +44,7 @@ public interface PermissionPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Permission update(
-		com.liferay.portal.model.Permission permission, boolean saveOrUpdate)
+		com.liferay.portal.model.Permission permission, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Permission findByPrimaryKey(

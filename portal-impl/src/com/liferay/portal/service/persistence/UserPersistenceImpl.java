@@ -180,7 +180,7 @@ public class UserPersistenceImpl extends BasePersistence
 		return update(user, false);
 	}
 
-	public User update(com.liferay.portal.model.User user, boolean saveOrUpdate)
+	public User update(com.liferay.portal.model.User user, boolean merge)
 		throws SystemException {
 		FinderCache.clearCache("Users_Groups");
 		FinderCache.clearCache("Users_Orgs");
@@ -193,8 +193,8 @@ public class UserPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(user);
+			if (merge) {
+				session.merge(user);
 			}
 			else {
 				if (user.isNew()) {

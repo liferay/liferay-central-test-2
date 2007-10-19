@@ -44,7 +44,7 @@ public interface ResourceCodePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ResourceCode update(
-		com.liferay.portal.model.ResourceCode resourceCode, boolean saveOrUpdate)
+		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ResourceCode findByPrimaryKey(long codeId)

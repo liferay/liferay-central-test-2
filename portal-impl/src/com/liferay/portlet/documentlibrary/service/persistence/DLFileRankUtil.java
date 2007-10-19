@@ -111,7 +111,7 @@ public class DLFileRankUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = dlFileRank.isNew();
 
@@ -124,7 +124,7 @@ public class DLFileRankUtil {
 			}
 		}
 
-		dlFileRank = getPersistence().update(dlFileRank, saveOrUpdate);
+		dlFileRank = getPersistence().update(dlFileRank, merge);
 
 		if (listener != null) {
 			if (isNew) {

@@ -122,15 +122,15 @@ public class CalEventPersistenceImpl extends BasePersistence
 	}
 
 	public CalEvent update(
-		com.liferay.portlet.calendar.model.CalEvent calEvent,
-		boolean saveOrUpdate) throws SystemException {
+		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(calEvent);
+			if (merge) {
+				session.merge(calEvent);
 			}
 			else {
 				if (calEvent.isNew()) {

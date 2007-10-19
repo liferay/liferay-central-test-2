@@ -44,7 +44,7 @@ public interface SubscriptionPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Subscription update(
-		com.liferay.portal.model.Subscription subscription, boolean saveOrUpdate)
+		com.liferay.portal.model.Subscription subscription, boolean merge)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Subscription findByPrimaryKey(

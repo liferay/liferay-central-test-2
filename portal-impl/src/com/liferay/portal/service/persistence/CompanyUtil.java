@@ -107,7 +107,7 @@ public class CompanyUtil {
 	}
 
 	public static com.liferay.portal.model.Company update(
-		com.liferay.portal.model.Company company, boolean saveOrUpdate)
+		com.liferay.portal.model.Company company, boolean merge)
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = company.isNew();
@@ -121,7 +121,7 @@ public class CompanyUtil {
 			}
 		}
 
-		company = getPersistence().update(company, saveOrUpdate);
+		company = getPersistence().update(company, merge);
 
 		if (listener != null) {
 			if (isNew) {

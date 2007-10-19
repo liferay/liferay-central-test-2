@@ -121,14 +121,14 @@ public class ResourcePersistenceImpl extends BasePersistence
 	}
 
 	public Resource update(com.liferay.portal.model.Resource resource,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(resource);
+			if (merge) {
+				session.merge(resource);
 			}
 			else {
 				if (resource.isNew()) {

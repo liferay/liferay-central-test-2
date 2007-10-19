@@ -110,8 +110,8 @@ public class PasswordTrackerUtil {
 	}
 
 	public static com.liferay.portal.model.PasswordTracker update(
-		com.liferay.portal.model.PasswordTracker passwordTracker,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
+		throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = passwordTracker.isNew();
 
@@ -124,7 +124,7 @@ public class PasswordTrackerUtil {
 			}
 		}
 
-		passwordTracker = getPersistence().update(passwordTracker, saveOrUpdate);
+		passwordTracker = getPersistence().update(passwordTracker, merge);
 
 		if (listener != null) {
 			if (isNew) {

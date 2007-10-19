@@ -2872,7 +2872,7 @@ public class ServiceBuilder {
 		sm.append("return update(" + entity.getVarName() + ", false);");
 		sm.append("}");
 
-		sm.append("public " + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ", boolean saveOrUpdate) throws SystemException {");
+		sm.append("public " + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ", boolean merge) throws SystemException {");
 
 		for (int i = 0; i < columnList.size(); i++) {
 			EntityColumn col = (EntityColumn)columnList.get(i);
@@ -2885,8 +2885,8 @@ public class ServiceBuilder {
 		sm.append("Session session = null;");
 		sm.append("try {");
 		sm.append("session = openSession();");
-		sm.append("if (saveOrUpdate) {");
-		sm.append("session.saveOrUpdate(" + entity.getVarName() + ");");
+		sm.append("if (merge) {");
+		sm.append("session.merge(" + entity.getVarName() + ");");
 		sm.append("}");
 		sm.append("else {");
 		sm.append("if (" + entity.getVarName() + ".isNew()) {");

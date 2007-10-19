@@ -111,7 +111,7 @@ public class SCLicenseUtil {
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense update(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		boolean merge) throws com.liferay.portal.SystemException {
 		ModelListener listener = _getListener();
 		boolean isNew = scLicense.isNew();
 
@@ -124,7 +124,7 @@ public class SCLicenseUtil {
 			}
 		}
 
-		scLicense = getPersistence().update(scLicense, saveOrUpdate);
+		scLicense = getPersistence().update(scLicense, merge);
 
 		if (listener != null) {
 			if (isNew) {

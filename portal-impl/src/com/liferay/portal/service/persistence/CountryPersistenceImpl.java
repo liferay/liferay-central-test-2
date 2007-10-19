@@ -121,14 +121,14 @@ public class CountryPersistenceImpl extends BasePersistence
 	}
 
 	public Country update(com.liferay.portal.model.Country country,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(country);
+			if (merge) {
+				session.merge(country);
 			}
 			else {
 				if (country.isNew()) {

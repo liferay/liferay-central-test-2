@@ -47,7 +47,7 @@ public interface SCFrameworkVersionPersistence {
 
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
-		boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion findByPrimaryKey(
 		long frameworkVersionId)

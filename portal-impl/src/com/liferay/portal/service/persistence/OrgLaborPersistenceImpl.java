@@ -121,14 +121,14 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 	}
 
 	public OrgLabor update(com.liferay.portal.model.OrgLabor orgLabor,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(orgLabor);
+			if (merge) {
+				session.merge(orgLabor);
 			}
 			else {
 				if (orgLabor.isNew()) {

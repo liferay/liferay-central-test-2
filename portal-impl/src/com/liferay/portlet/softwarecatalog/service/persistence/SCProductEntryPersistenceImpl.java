@@ -149,7 +149,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 	public SCProductEntry update(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
-		boolean saveOrUpdate) throws SystemException {
+		boolean merge) throws SystemException {
 		FinderCache.clearCache("SCLicenses_SCProductEntries");
 
 		Session session = null;
@@ -157,8 +157,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			if (saveOrUpdate) {
-				session.saveOrUpdate(scProductEntry);
+			if (merge) {
+				session.merge(scProductEntry);
 			}
 			else {
 				if (scProductEntry.isNew()) {
