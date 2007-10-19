@@ -274,6 +274,7 @@ a-map-could-not-be-found-for-the-address=Nessuna mappa trovata per l'indirizzo:
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=Una pagina non può essere figlia di una pagina con una diversa gerarchia.
 a-page-cannot-become-a-child-of-itself=Una pagina non può essere figlia di se stessa.
 a-page-may-not-contain-more-than-x-portlets=Una pagina non può contenere più di {0} portlets.
+about-me=Circa Me
 about=Informazioni su
 abstracts=Estratti
 access-denied=Accesso Negato

@@ -274,6 +274,7 @@ a-map-could-not-be-found-for-the-address=Um mapa não podia ser encontrado para 
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=Uma página não pode assentar bem em uma criança de uma página que não seja parentable.
 a-page-cannot-become-a-child-of-itself=Uma página não pode assentar bem em uma criança dse.
 a-page-may-not-contain-more-than-x-portlets=A page may not contain more than {0} portlets.
+about-me=Sobre Mim
 about=Sobre
 abstracts=Sumários
 access-denied=O Acesso Negou

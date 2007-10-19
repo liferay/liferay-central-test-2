@@ -274,6 +274,7 @@ a-map-could-not-be-found-for-the-address=지도는 주소를 위해 발견될 �
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=페이지는parentable이지 않는 페이지의 아이에 어울릴.
 a-page-cannot-become-a-child-of-itself=페이지는 자체적으로의 아이에 어울릴.
 a-page-may-not-contain-more-than-x-portlets=A page may not contain more than {0} portlets.
+about-me=나에 관하여
 about=에 관한
 abstracts=요약
 access-denied=부정되는 접근

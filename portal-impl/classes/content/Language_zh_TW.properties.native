@@ -274,6 +274,7 @@ a-map-could-not-be-found-for-the-address=此地址找不到地圖:
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=頁無法適合不是parentable 頁的孩子。
 a-page-cannot-become-a-child-of-itself=頁無法適合孩子本身。
 a-page-may-not-contain-more-than-x-portlets=一頁不可以超過多於 {0} portlets.
+about-me=關於我
 about=有關於
 abstracts=摘要
 access-denied=存取被拒絕

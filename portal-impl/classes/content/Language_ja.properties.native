@@ -274,6 +274,7 @@ a-map-could-not-be-found-for-the-address=地図は住所のために見つける
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=ページはparentable でないページの子供に似合うことができない。
 a-page-cannot-become-a-child-of-itself=ページはそれ自身の子供に似合うことができない。
 a-page-may-not-contain-more-than-x-portlets=A page may not contain more than {0} portlets.
+about-me=私について
 about=について
 abstracts=概要
 access-denied=否定されるアクセス

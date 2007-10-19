@@ -274,6 +274,7 @@ a-map-could-not-be-found-for-the-address=Ένας χάρτης δεν θα μπ�
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=Μια σελίδα δεν μπορεί να γίνει παιδί μιας σελίδας που δεν είναι parentable.
 a-page-cannot-become-a-child-of-itself=Μια σελίδα δεν μπορεί να γίνει παιδί του.
 a-page-may-not-contain-more-than-x-portlets=Μια σελίδα δεν μπορεί να περιέχει περισσότερα από {0} portlets.
+about-me=Περίπου εγώ
 about=Ταυτότητα
 abstracts=Περιλήψεις
 access-denied=Άρνηση Πρόσβασης

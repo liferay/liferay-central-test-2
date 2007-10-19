@@ -274,6 +274,7 @@ a-map-could-not-be-found-for-the-address=此地址找不到地图:
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=本页不能成为本身不是parentable页的子孙。
 a-page-cannot-become-a-child-of-itself=页无法变成自己的子孙。
 a-page-may-not-contain-more-than-x-portlets=一页不能超过{0} portlets.
+about-me=关于我
 about=关于
 abstracts=摘要
 access-denied=拒绝访问
