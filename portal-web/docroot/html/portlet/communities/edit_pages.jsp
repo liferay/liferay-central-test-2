@@ -850,13 +850,14 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					<liferay-ui:tabs
 						names="<%= tabs4Names %>"
 						param="tabs4"
-						url="<%= portletURL.toString() %>"
+						url='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
 					/>
+
+					<input name="<portlet:namespace />parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>" />
+					<input name="<portlet:namespace />layoutIds" type="hidden" value="" />
 
 					<c:choose>
 						<c:when test='<%= tabs4.equals("new-page") %>'>
-							<input name="<portlet:namespace />parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>" />
-							<input name="<portlet:namespace />layoutIds" type="hidden" value="" />
 
 							<%
 							String name = ParamUtil.getString(request, "name");
