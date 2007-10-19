@@ -1728,7 +1728,8 @@ public class PortalUtil {
 					// portlet that had a maximum window state
 
 					CachePortlet.clearResponse(
-						req.getSession(), layout.getPlid(), curMaxPortletId);
+						req.getSession(), layout.getPlid(), curMaxPortletId,
+						LanguageUtil.getLanguageId(req));
 
 					/*RenderParametersPool.clear(
 						req, layout.getPlid(), curMaxPortletId);*/

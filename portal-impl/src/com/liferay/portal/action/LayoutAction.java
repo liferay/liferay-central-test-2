@@ -22,6 +22,7 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
@@ -323,7 +324,9 @@ public class LayoutAction extends Action {
 		CachePortlet cachePortlet = PortletInstanceFactory.create(portlet, ctx);
 
 		if (user != null) {
-			CachePortlet.clearResponse(ses, layout.getPrimaryKey(), portletId);
+			CachePortlet.clearResponse(
+				ses, layout.getPrimaryKey(), portletId,
+				LanguageUtil.getLanguageId(req));
 		}
 
 		PortletPreferencesIds portletPreferencesIds =

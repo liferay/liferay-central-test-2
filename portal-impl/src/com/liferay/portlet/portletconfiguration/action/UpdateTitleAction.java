@@ -86,7 +86,9 @@ public class UpdateTitleAction extends JSONAction {
 
 		portletSetup.store();
 
-		CachePortlet.clearResponse(ses, layout.getPrimaryKey(), portletId);
+		CachePortlet.clearResponse(
+			ses, layout.getPrimaryKey(), portletId,
+			LanguageUtil.getLanguageId(req));
 
 		return null;
 	}

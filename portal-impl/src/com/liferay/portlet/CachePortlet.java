@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ClassUtil;
@@ -71,9 +72,9 @@ import org.apache.commons.logging.LogFactory;
 public class CachePortlet implements Portlet {
 
 	public static void clearResponse(
-		HttpSession ses, long plid, String portletId) {
+		HttpSession ses, long plid, String portletId, String languageId) {
 
-		String sesResponseId = encodeResponseKey(plid, portletId);
+		String sesResponseId = encodeResponseKey(plid, portletId, languageId);
 
 		getResponses(ses).remove(sesResponseId);
 	}
@@ -86,12 +87,16 @@ public class CachePortlet implements Portlet {
 		getResponses(ses).clear();
 	}
 
-	public static String encodeResponseKey(long plid, String portletId) {
+	public static String encodeResponseKey(
+			long plid, String portletId, String languageId) {
+
 		StringMaker sm = new StringMaker();
 
 		sm.append(plid);
 		sm.append(StringPool.UNDERLINE);
 		sm.append(portletId);
+		sm.append(StringPool.UNDERLINE);
+		sm.append(languageId);
 
 		return sm.toString();
 	}
@@ -215,7 +220,7 @@ public class CachePortlet implements Portlet {
 			Map sesResponses = getResponses(ses);
 
 			String sesResponseId = encodeResponseKey(
-				layout.getPlid(), _portletId);
+				layout.getPlid(), _portletId, LanguageUtil.getLanguageId(req));
 
 			CachePortletResponse response =
 				(CachePortletResponse)sesResponses.get(sesResponseId);
