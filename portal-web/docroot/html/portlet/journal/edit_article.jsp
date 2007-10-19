@@ -745,7 +745,7 @@ String[] availableLocales = null;
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />changeLanguageView();">
+						<select name="<portlet:namespace />languageId" <%= (article == null) ?  "disabled='disabled'" : "" %> onChange="<portlet:namespace />changeLanguageView();">
 
 							<%
 							Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -788,7 +788,7 @@ String[] availableLocales = null;
 								<liferay-ui:message key="default-language" />
 							</td>
 							<td>
-								<select name="<portlet:namespace />defaultLanguageId" onChange="<portlet:namespace />changeLanguageView();">
+								<select name="<portlet:namespace />defaultLanguageId" <%= (article == null) ?  "disabled='disabled'" : "" %> onChange="<portlet:namespace />changeLanguageView();">
 
 									<%
 									if ((availableLocales != null) && (availableLocales.length > 0)) {
