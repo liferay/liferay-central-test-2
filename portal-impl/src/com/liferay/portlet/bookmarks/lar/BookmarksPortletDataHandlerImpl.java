@@ -74,6 +74,7 @@ import org.dom4j.io.SAXReader;
  *
  * @author Jorge Ferrer
  * @author Bruno Farache
+ *
  */
 public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
@@ -143,8 +144,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
-					List folderEntries = 
-						BookmarksEntryUtil.findByFolderId(folder.getFolderId());
+					List folderEntries = BookmarksEntryUtil.findByFolderId(
+						folder.getFolderId());
 
 					entries.addAll(folderEntries);
 				}
@@ -233,55 +234,12 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			Iterator itr = folders.iterator();
 
-			Map foldersPKs = new HashMap();
+			Map folderPKs = new HashMap();
 
 			while (itr.hasNext()) {
 				BookmarksFolder folder = (BookmarksFolder)itr.next();
 
-				BookmarksFolder existingFolder =
-					BookmarksFolderUtil.fetchByPrimaryKey(
-						folder.getPrimaryKey());
-
-				if (existingFolder == null ||
-						existingFolder.getGroupId() != context.getGroupId()) {
-
-					Long newParentFolderId = (Long)foldersPKs.get(
-						new Long(folder.getParentFolderId()));
-
-					if (newParentFolderId == null) {
-						// TODO: We should probably throw an exception here
-						_log.error(
-							"Couldn't find the parent folder for " +
-								folder.getFolderId());
-						newParentFolderId =
-							new Long(folder.getParentFolderId());
-					}
-
-					long plid = context.getPlid();
-
-					boolean addCommunityPermissions = true;
-					boolean addGuestPermissions = true;
-
-					BookmarksFolder newFolder =
-						BookmarksFolderLocalServiceUtil.addFolder(
-							folder.getUserId(), plid,
-							newParentFolderId.longValue(), folder.getName(),
-							folder.getDescription(),
-							addCommunityPermissions, addGuestPermissions);
-
-					foldersPKs.put(
-						folder.getPrimaryKeyObj(),
-						newFolder.getPrimaryKeyObj());
-
-				}
-				else {
-					// TODO: use merge instead
-					BookmarksFolderUtil.update(folder, true);
-
-					foldersPKs.put(
-						folder.getPrimaryKeyObj(),
-						folder.getPrimaryKeyObj());
-				}
+				importFolder(context, folderPKs, folder);
 			}
 
 			// Entries
@@ -300,12 +258,12 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BookmarksEntry entry = (BookmarksEntry)itr.next();
 
-				Long parentFolderId =
-					(Long)foldersPKs.get(new Long(entry.getFolderId()));
+				Long parentFolderId = (Long)folderPKs.get(
+					new Long(entry.getFolderId()));
 
-				if (BookmarksEntryUtil.fetchByPrimaryKey(
-						entry.getPrimaryKey()) == null ||
-						parentFolderId != null) {
+				if ((BookmarksEntryUtil.fetchByPrimaryKey(
+						entry.getPrimaryKey()) == null) ||
+					(parentFolderId != null)) {
 
 					boolean addCommunityPermissions = true;
 					boolean addGuestPermissions = true;
@@ -339,6 +297,54 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		sm.append(key);
 
 		return sm.toString();
+	}
+
+	protected void importFolder(
+			PortletDataContext context, Map folderPKs, BookmarksFolder folder)
+		throws Exception {
+
+		BookmarksFolder existingFolder = BookmarksFolderUtil.fetchByPrimaryKey(
+			folder.getPrimaryKey());
+
+		if ((existingFolder == null) ||
+			(existingFolder.getGroupId() != context.getGroupId())) {
+
+			Long newParentFolderId = (Long)folderPKs.get(
+				new Long(folder.getParentFolderId()));
+
+			if (newParentFolderId == null) {
+
+				// TODO: We should probably throw an exception here
+
+				_log.error(
+					"Could not find the parent folder for " +
+						folder.getFolderId());
+
+				newParentFolderId = new Long(folder.getParentFolderId());
+			}
+
+			long plid = context.getPlid();
+
+			boolean addCommunityPermissions = true;
+			boolean addGuestPermissions = true;
+
+			BookmarksFolder newFolder =
+				BookmarksFolderLocalServiceUtil.addFolder(
+					folder.getUserId(), plid, newParentFolderId.longValue(),
+					folder.getName(), folder.getDescription(),
+					addCommunityPermissions, addGuestPermissions);
+
+			folderPKs.put(
+				folder.getPrimaryKeyObj(), newFolder.getPrimaryKeyObj());
+		}
+		else {
+
+			// TODO: Use merge instead
+
+			BookmarksFolderUtil.update(folder, true);
+
+			folderPKs.put(folder.getPrimaryKeyObj(), folder.getPrimaryKeyObj());
+		}
 	}
 
 	private static final String _EXPORT_BOOKMARKS_DATA =
