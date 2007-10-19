@@ -99,7 +99,7 @@ public abstract class BaseUpgradeTableImpl {
 	}
 
 	public void setColumns(Object[][] columns) {
-		_columns = columns;;
+		_columns = columns;
 	}
 
 	public abstract String getExportedData(ResultSet rs) throws Exception;
