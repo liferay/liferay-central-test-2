@@ -88,7 +88,7 @@ public class CachePortlet implements Portlet {
 	}
 
 	public static String encodeResponseKey(
-			long plid, String portletId, String languageId) {
+		long plid, String portletId, String languageId) {
 
 		StringMaker sm = new StringMaker();
 
