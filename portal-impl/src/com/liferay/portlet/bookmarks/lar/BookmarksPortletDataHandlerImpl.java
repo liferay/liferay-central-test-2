@@ -43,6 +43,7 @@ import com.thoughtworks.xstream.XStream;
 import java.io.StringReader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +70,8 @@ import org.dom4j.io.SAXReader;
  * original author and that an account for it exists and has the same id.
  * </p>
  *
- * @author JorgeFerrer
+ * @author Jorge Ferrer
+ * @author Bruno Farache
  */
 public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
@@ -229,12 +231,55 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			Iterator itr = folders.iterator();
 
+			Map foldersPKs = new HashMap();
+
 			while (itr.hasNext()) {
 				BookmarksFolder folder = (BookmarksFolder)itr.next();
 
-				folder.setGroupId(context.getGroupId());
+				BookmarksFolder existingFolder =
+					BookmarksFolderUtil.fetchByPrimaryKey(
+						folder.getPrimaryKey());
 
-				BookmarksFolderUtil.update(folder, true);
+				if (existingFolder == null ||
+						existingFolder.getGroupId() != context.getGroupId()) {
+
+					Long newParentFolderId = (Long)foldersPKs.get(
+							new Long(folder.getParentFolderId()));
+
+					if (newParentFolderId == null) {
+						// TODO: We should probably throw an exception here
+						_log.error(
+							"Couldn't find the parent folder for " +
+								folder.getFolderId());
+						newParentFolderId =
+							new Long(folder.getParentFolderId());
+					}
+
+					long plid = context.getPlid();
+
+					boolean addCommunityPermissions = true;
+					boolean addGuestPermissions = true;
+
+					BookmarksFolder newFolder =
+						BookmarksFolderLocalServiceUtil.addFolder(
+								folder.getUserId(), plid,
+								newParentFolderId.longValue(), folder.getName(),
+								folder.getDescription(),
+								addCommunityPermissions, addGuestPermissions);
+
+					foldersPKs.put(
+						folder.getPrimaryKeyObj(),
+						newFolder.getPrimaryKeyObj());
+
+				}
+				else {
+					// TODO: use merge instead
+					BookmarksFolderUtil.update(folder, true);
+
+					foldersPKs.put(
+						folder.getPrimaryKeyObj(),
+						folder.getPrimaryKeyObj());
+				}
 			}
 
 			// Entries
@@ -253,7 +298,25 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BookmarksEntry entry = (BookmarksEntry)itr.next();
 
-				BookmarksEntryUtil.update(entry, true);
+				Long parentFolderId =
+					(Long)foldersPKs.get(new Long(entry.getFolderId()));
+
+				if (BookmarksEntryUtil.fetchByPrimaryKey(
+						entry.getPrimaryKey()) == null ||
+						parentFolderId != null) {
+
+					boolean addCommunityPermissions = true;
+					boolean addGuestPermissions = true;
+
+					BookmarksEntryLocalServiceUtil.addEntry(
+						entry.getUserId(), parentFolderId.longValue(),
+						entry.getName(), entry.getUrl(), entry.getComments(),
+						new String[0], addCommunityPermissions,
+						addGuestPermissions);
+				}
+				else {
+					BookmarksEntryUtil.update(entry, true);
+				}
 			}
 
 			// No special modification to the incoming portlet preferences
