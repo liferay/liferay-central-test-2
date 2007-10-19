@@ -276,8 +276,9 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				}
 				else {
 					if (newParentFolderId != null) {
-						entry.setFolderId(newParentFolderId);
+						entry.setFolderId(newParentFolderId.longValue());
 					}
+
 					BookmarksEntryUtil.update(entry, true);
 				}
 			}
@@ -311,7 +312,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		Long newParentFolderId = (Long)folderPKs.get(
 			new Long(folder.getParentFolderId()));
-		
+
 		if (newParentFolderId == null) {
 			newParentFolderId = new Long(folder.getParentFolderId());
 		}
@@ -334,7 +335,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				folder.getPrimaryKeyObj(), newFolder.getPrimaryKeyObj());
 		}
 		else {
-			folder.setParentFolderId(newParentFolderId);
+			folder.setParentFolderId(newParentFolderId.longValue());
+
 			BookmarksFolderUtil.update(folder, true);
 		}
 	}
