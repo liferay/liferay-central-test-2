@@ -143,8 +143,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
-					List folderEntries = BookmarksEntryUtil.findByFolderId(
-						folder.getFolderId());
+					List folderEntries = 
+						BookmarksEntryUtil.findByFolderId(folder.getFolderId());
 
 					entries.addAll(folderEntries);
 				}
@@ -246,7 +246,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 						existingFolder.getGroupId() != context.getGroupId()) {
 
 					Long newParentFolderId = (Long)foldersPKs.get(
-							new Long(folder.getParentFolderId()));
+						new Long(folder.getParentFolderId()));
 
 					if (newParentFolderId == null) {
 						// TODO: We should probably throw an exception here
@@ -264,10 +264,10 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 					BookmarksFolder newFolder =
 						BookmarksFolderLocalServiceUtil.addFolder(
-								folder.getUserId(), plid,
-								newParentFolderId.longValue(), folder.getName(),
-								folder.getDescription(),
-								addCommunityPermissions, addGuestPermissions);
+							folder.getUserId(), plid,
+							newParentFolderId.longValue(), folder.getName(),
+							folder.getDescription(),
+							addCommunityPermissions, addGuestPermissions);
 
 					foldersPKs.put(
 						folder.getPrimaryKeyObj(),
