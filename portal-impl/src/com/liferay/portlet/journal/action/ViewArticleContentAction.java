@@ -129,6 +129,8 @@ public class ViewArticleContentAction extends Action {
 
 				Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
+				tokens.put("article_resource_pkey", "-1");
+
 				JournalArticle article = new JournalArticleImpl();
 
 				article.setUserId(user.getUserId());

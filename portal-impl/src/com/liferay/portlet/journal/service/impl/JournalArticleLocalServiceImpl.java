@@ -824,6 +824,9 @@ public class JournalArticleLocalServiceImpl
 
 		Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
+		tokens.put("article_resource_pkey",
+				String.valueOf(article.getResourcePrimKey()));
+
 		String xml = article.getContent();
 
 		try {
