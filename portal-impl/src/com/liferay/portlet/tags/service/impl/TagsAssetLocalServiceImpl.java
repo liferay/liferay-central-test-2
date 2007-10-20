@@ -219,6 +219,26 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		return TagsAssetUtil.countByCompanyId(companyId);
 	}
 
+	public TagsAsset incrementViewCounter(String className, long classPK)
+		throws PortalException, SystemException {
+	
+		if (classPK <= 0) {
+			return null;
+		}
+		
+		long classNameId = PortalUtil.getClassNameId(className);
+		
+		TagsAsset asset = TagsAssetUtil.fetchByC_C(classNameId, classPK);
+		
+		if (asset != null) {
+			asset.setViewCount(asset.getViewCount() + 1);
+			
+			TagsAssetUtil.update(asset);
+		}
+		
+		return asset;
+	}
+	
 	public Hits search(long companyId, String portletId, String keywords)
 		throws SystemException {
 
@@ -359,6 +379,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			asset.setPublishDate(publishDate);
 			asset.setExpirationDate(expirationDate);
 			asset.setPriority(0);
+			asset.setViewCount(0);
 		}
 
 		asset.setModifiedDate(now);
@@ -404,7 +425,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		return asset;
 	}
-
+	
 	public void validate(String className, String[] entryNames)
 		throws PortalException {
 

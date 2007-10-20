@@ -130,4 +130,8 @@ public interface TagsAssetModel extends BaseModel {
 	public double getPriority();
 
 	public void setPriority(double priority);
+
+	public int getViewCount();
+
+	public void setViewCount(int viewCount);
 }

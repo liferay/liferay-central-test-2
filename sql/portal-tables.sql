@@ -1097,7 +1097,8 @@ create table TagsAsset (
 	url STRING null,
 	height INTEGER,
 	width INTEGER,
-	priority DOUBLE
+	priority DOUBLE,
+	viewCount INTEGER
 );
 
 create table TagsAssets_TagsEntries (

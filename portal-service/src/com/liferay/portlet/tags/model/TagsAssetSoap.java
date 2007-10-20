@@ -68,6 +68,7 @@ public class TagsAssetSoap implements Serializable {
 		soapModel.setHeight(model.getHeight());
 		soapModel.setWidth(model.getWidth());
 		soapModel.setPriority(model.getPriority());
+		soapModel.setViewCount(model.getViewCount());
 
 		return soapModel;
 	}
@@ -254,6 +255,14 @@ public class TagsAssetSoap implements Serializable {
 		_priority = priority;
 	}
 
+	public int getViewCount() {
+		return _viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		_viewCount = viewCount;
+	}
+
 	private long _assetId;
 	private long _companyId;
 	private long _userId;
@@ -274,4 +283,5 @@ public class TagsAssetSoap implements Serializable {
 	private int _height;
 	private int _width;
 	private double _priority;
+	private int _viewCount;
 }

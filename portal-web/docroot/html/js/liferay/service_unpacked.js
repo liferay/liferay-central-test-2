@@ -2123,6 +2123,13 @@ Liferay.Service.Tags.TagsAsset = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	incrementViewCounter: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "incrementViewCounter";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	searchAssetDisplays: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "searchAssetDisplays";

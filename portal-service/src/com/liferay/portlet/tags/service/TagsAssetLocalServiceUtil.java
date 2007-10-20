@@ -239,6 +239,15 @@ public class TagsAssetLocalServiceUtil {
 		return tagsAssetLocalService.getCompanyAssetsCount(companyId);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.incrementViewCounter(className, classPK);
+	}
+
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String portletId, java.lang.String keywords)
 		throws com.liferay.portal.SystemException {

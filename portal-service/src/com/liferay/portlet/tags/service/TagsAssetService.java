@@ -71,6 +71,11 @@ public interface TagsAssetService {
 	public int getCompanyAssetsCount(long companyId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int begin, int end)
