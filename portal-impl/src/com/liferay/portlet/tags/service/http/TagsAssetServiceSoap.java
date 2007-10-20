@@ -156,6 +156,20 @@ public class TagsAssetServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAssetSoap incrementViewCounter(
+		java.lang.String className, long classPK) throws RemoteException {
+		try {
+			com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.incrementViewCounter(className,
+					classPK);
+
+			return com.liferay.portlet.tags.model.TagsAssetSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int begin, int end)
