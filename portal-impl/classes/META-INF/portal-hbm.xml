@@ -1297,6 +1297,7 @@
 		<property name="height" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="width" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="priority" type="com.liferay.util.dao.hibernate.DoubleType" />
+		<property name="viewCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.tags.model.impl.TagsEntryImpl" table="TagsEntry">
 		<cache usage="read-write" />
