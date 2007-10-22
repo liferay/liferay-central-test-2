@@ -109,7 +109,7 @@ if (Validator.isNull(selectionStyle)) {
 	selectionStyle = "dynamic";
 }
 
-String category = GetterUtil.getString(prefs.getValue("category", "none"));
+String category = GetterUtil.getString(prefs.getValue("category", StringPool.BLANK));
 String[] entries = prefs.getValues("entries", new String[0]);
 String[] notEntries = prefs.getValues("not-entries", new String[0]);
 boolean andOperator = GetterUtil.getBoolean(prefs.getValue("and-operator", null), false);
