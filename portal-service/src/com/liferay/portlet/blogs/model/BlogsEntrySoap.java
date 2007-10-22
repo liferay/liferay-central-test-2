@@ -57,6 +57,7 @@ public class BlogsEntrySoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCategoryId(model.getCategoryId());
 		soapModel.setTitle(model.getTitle());
+		soapModel.setUrlTitle(model.getUrlTitle());
 		soapModel.setContent(model.getContent());
 		soapModel.setDisplayDate(model.getDisplayDate());
 
@@ -157,6 +158,14 @@ public class BlogsEntrySoap implements Serializable {
 		_title = title;
 	}
 
+	public String getUrlTitle() {
+		return _urlTitle;
+	}
+
+	public void setUrlTitle(String urlTitle) {
+		_urlTitle = urlTitle;
+	}
+
 	public String getContent() {
 		return _content;
 	}
@@ -182,6 +191,7 @@ public class BlogsEntrySoap implements Serializable {
 	private Date _modifiedDate;
 	private long _categoryId;
 	private String _title;
+	private String _urlTitle;
 	private String _content;
 	private Date _displayDate;
 }

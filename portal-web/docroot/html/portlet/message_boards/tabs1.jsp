@@ -25,33 +25,30 @@
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "categories");
+
 PortletURL tabs1URL = renderResponse.createRenderURL();
 
 tabs1URL.setWindowState(WindowState.MAXIMIZED);
 
 tabs1URL.setParameter("struts_action", "/message_boards/view");
+tabs1URL.setParameter("tabs1", tabs1);
 
-String tabs1Names = "categories,recent-posts,statistics";
+String tabs1Values = "categories,recent_posts,statistics";
 
 if (themeDisplay.isSignedIn()) {
-	tabs1Names = "categories,my-posts,my-subscriptions,recent-posts,statistics";
+	tabs1Values = "categories,my_posts,my_subscriptions,recent_posts,statistics";
 
 	if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER)) {
-		tabs1Names += ",banned-users";
+		tabs1Values += ",banned_users";
 	}
 }
 
-String url0HREF = tabs1URL.toString();
-
-if (Validator.isNotNull(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay))) {
-	url0HREF = PortalUtil.getLayoutURL(layout, themeDisplay) + "/message_boards/";
-}
-else {
-}
+String tabs1Names = StringUtil.replace(tabs1Values, StringPool.UNDERLINE, StringPool.DASH);
 %>
 
 <liferay-ui:tabs
 	names="<%= tabs1Names %>"
-	url="<%= tabs1URL.toString() %>"
-	url0="<%= url0HREF %>"
+	tabsValues="<%= tabs1Values %>"
+	portletURL="<%= tabs1URL %>"
 />

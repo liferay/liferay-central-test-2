@@ -964,6 +964,103 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public BlogsEntry findByG_UT(long groupId, String urlTitle)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = fetchByG_UT(groupId, urlTitle);
+
+		if (blogsEntry == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No BlogsEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("urlTitle=");
+			msg.append(urlTitle);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+
+		return blogsEntry;
+	}
+
+	public BlogsEntry fetchByG_UT(long groupId, String urlTitle)
+		throws SystemException {
+		String finderClassName = BlogsEntry.class.getName();
+		String finderMethodName = "fetchByG_UT";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(groupId), urlTitle };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+				query.append("groupId = ?");
+				query.append(" AND ");
+
+				if (urlTitle == null) {
+					query.append("urlTitle IS NULL");
+				}
+				else {
+					query.append("urlTitle = ?");
+				}
+
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+
+				if (urlTitle != null) {
+					q.setString(queryPos++, urlTitle);
+				}
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (BlogsEntry)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (BlogsEntry)list.get(0);
+			}
+		}
+	}
+
 	public List findByC_U(long companyId, long userId)
 		throws SystemException {
 		String finderClassName = BlogsEntry.class.getName();
@@ -1313,6 +1410,12 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByG_UT(long groupId, String urlTitle)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByG_UT(groupId, urlTitle);
+		remove(blogsEntry);
+	}
+
 	public void removeByC_U(long companyId, long userId)
 		throws SystemException {
 		Iterator itr = findByC_U(companyId, userId).iterator();
@@ -1519,6 +1622,75 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 				int queryPos = 0;
 				q.setLong(queryPos++, groupId);
 				q.setLong(queryPos++, userId);
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByG_UT(long groupId, String urlTitle)
+		throws SystemException {
+		String finderClassName = BlogsEntry.class.getName();
+		String finderMethodName = "countByG_UT";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(groupId), urlTitle };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+				query.append("groupId = ?");
+				query.append(" AND ");
+
+				if (urlTitle == null) {
+					query.append("urlTitle IS NULL");
+				}
+				else {
+					query.append("urlTitle = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, groupId);
+
+				if (urlTitle != null) {
+					q.setString(queryPos++, urlTitle);
+				}
 
 				Long count = null;
 				Iterator itr = q.list().iterator();

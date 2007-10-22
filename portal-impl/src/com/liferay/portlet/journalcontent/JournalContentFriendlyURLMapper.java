@@ -31,7 +31,9 @@ import com.liferay.portlet.PortletURLImpl;
 
 import java.util.Map;
 
+import javax.portlet.PortletMode;
 import javax.portlet.PortletURL;
+import javax.portlet.WindowState;
 
 /**
  * <a href="JournalContentFriendlyURLMapper.java.html"><b><i>View Source</i></b>
@@ -112,15 +114,15 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 			namespace = StringPool.UNDERLINE + portletId + StringPool.UNDERLINE;
 
 			params.put("p_p_id", portletId);
-			params.put("p_p_state", "maximized");
+			params.put("p_p_state", WindowState.MAXIMIZED.toString());
 		}
 		else {
 			params.put("p_p_id", portletId);
-			params.put("p_p_state", "normal");
+			params.put("p_p_state", WindowState.NORMAL.toString());
 		}
 
-		params.put("p_p_mode", "view");
 		params.put("p_p_action", "0");
+		params.put("p_p_mode", PortletMode.VIEW.toString());
 
 		String groupId = friendlyURLPath.substring(x + 1, y);
 

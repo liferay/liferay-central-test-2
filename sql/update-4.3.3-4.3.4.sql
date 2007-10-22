@@ -1,3 +1,5 @@
+alter table BlogsEntry add urlTitle VARCHAR(150) null;
+
 create table BlogsStatsUser (
 	statsUserId LONG not null primary key,
 	groupId LONG,

@@ -1149,13 +1149,6 @@ Liferay.Service.Blogs.BlogsCategory = {
 Liferay.Service.Blogs.BlogsEntry = {
 	serviceClassName: Liferay.Service.Blogs.servicePackage + "BlogsEntry" + Liferay.Service.classNameSuffix,
 
-	addEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	deleteEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "deleteEntry";
@@ -1201,13 +1194,6 @@ Liferay.Service.Blogs.BlogsEntry = {
 	getGroupEntriesRSS: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getGroupEntriesRSS";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateEntry: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateEntry";
 
 		return Liferay.Service.ajax(params, callback);
 	}

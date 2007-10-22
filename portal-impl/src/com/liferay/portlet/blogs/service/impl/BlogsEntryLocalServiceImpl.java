@@ -29,13 +29,17 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
@@ -54,6 +58,8 @@ import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
 import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
+import com.liferay.util.Http;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;
@@ -84,14 +90,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long userId, long plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
-			String[] tagsEntries, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			ThemeDisplay themeDisplay, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addEntry(
 			userId, plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			tagsEntries, new Boolean(addCommunityPermissions),
+			themeDisplay, tagsEntries, new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
 
@@ -99,23 +105,24 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long userId, long plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
-			String[] tagsEntries, String[] communityPermissions,
-			String[] guestPermissions)
+			ThemeDisplay themeDisplay, String[] tagsEntries,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addEntry(
 			userId, plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			tagsEntries, null, null, communityPermissions, guestPermissions);
+			themeDisplay, tagsEntries, null, null, communityPermissions,
+			guestPermissions);
 	}
 
 	public BlogsEntry addEntry(
 			long userId, long plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
-			String[] tagsEntries, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			ThemeDisplay themeDisplay, String[] tagsEntries,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -144,6 +151,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setModifiedDate(now);
 		entry.setCategoryId(categoryId);
 		entry.setTitle(title);
+		entry.setUrlTitle(getUniqueUrlTitle(entryId, groupId, title));
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 
@@ -181,6 +189,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			_log.error("Indexing " + entryId, ioe);
 		}
+
+		// Google
+
+		pingGoogle(entry, themeDisplay);
 
 		return entry;
 	}
@@ -319,6 +331,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return BlogsEntryUtil.findByPrimaryKey(entryId);
 	}
 
+	public BlogsEntry getEntry(long groupId, String urlTitle)
+		throws PortalException, SystemException {
+
+		return BlogsEntryUtil.findByG_UT(groupId, urlTitle);
+	}
+
 	public List getGroupEntries(long groupId, int begin, int end)
 		throws SystemException {
 
@@ -344,6 +362,47 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public List getNoAssetEntries() throws SystemException {
 		return BlogsEntryFinder.findByNoAssets();
+	}
+
+	public String getUrlTitle(long entryId, String title) {
+		String urlTitle = String.valueOf(entryId);
+
+		title = title.trim().toLowerCase();
+
+		if (Validator.isNull(title) || Validator.isNumber(title) ||
+			title.equals("rss")) {
+
+			return urlTitle;
+		}
+
+		char[] urlTitleCharArray = title.toCharArray();
+
+		for (int i = 0; i < urlTitleCharArray.length; i++) {
+			char oldChar = urlTitleCharArray[i];
+
+			char newChar = oldChar;
+
+			if ((oldChar == '_') || (Validator.isChar(oldChar)) ||
+				(Validator.isDigit(oldChar))) {
+
+			}
+			else if ((oldChar == ' ') || (oldChar == '-') || (oldChar == ',') ||
+					 (oldChar == '/') || (oldChar == '\\')) {
+
+				newChar = '_';
+			}
+			else {
+				return urlTitle;
+			}
+
+			if (oldChar != newChar) {
+				urlTitleCharArray[i] = newChar;
+			}
+		}
+
+		urlTitle = new String(urlTitleCharArray);
+
+		return urlTitle;
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
@@ -447,7 +506,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long userId, long entryId, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
-			String[] tagsEntries)
+			ThemeDisplay themeDisplay, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -468,6 +527,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setModifiedDate(now);
 		entry.setCategoryId(categoryId);
 		entry.setTitle(title);
+		entry.setUrlTitle(
+			getUniqueUrlTitle(entryId, entry.getGroupId(), title));
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 
@@ -498,6 +559,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			_log.error("Indexing " + entryId, ioe);
 		}
+
+		// Google
+
+		pingGoogle(entry, themeDisplay);
 
 		return entry;
 	}
@@ -533,6 +598,78 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 
 		return categoryId;
+	}
+
+	protected String getUniqueUrlTitle(
+			long entryId, long groupId, String title)
+		throws SystemException {
+
+		String urlTitle = getUrlTitle(entryId, title);
+
+		String newUrlTitle = new String(urlTitle);
+
+		for (int i = 1;; i++) {
+			BlogsEntry entry = BlogsEntryUtil.fetchByG_UT(groupId, newUrlTitle);
+
+			if ((entry == null) || (entry.getEntryId() == entryId)) {
+				break;
+			}
+			else {
+				newUrlTitle = urlTitle + "_" + i;
+			}
+		}
+
+		return newUrlTitle;
+	}
+
+	protected void pingGoogle(BlogsEntry entry, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		if (themeDisplay == null) {
+			return;
+		}
+
+		Group group = GroupUtil.findByPrimaryKey(entry.getGroupId());
+
+		String portalURL = PortalUtil.getPortalURL(themeDisplay);
+
+		if ((portalURL.indexOf("://localhost") != -1) ||
+			(portalURL.indexOf("://127.0.0.1") != -1)) {
+
+			return;
+		}
+
+		String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
+
+		StringMaker sm = new StringMaker();
+
+		String name = group.getDescriptiveName();
+		String url = portalURL + layoutURL + "/blogs/" + entry.getUrlTitle();
+		String changesURL = portalURL + layoutURL + "/blogs/rss";
+
+		sm.append("http://blogsearch.google.com/ping?name=");
+		sm.append(HttpUtil.encodeURL(name));
+		sm.append("&url=");
+		sm.append(HttpUtil.encodeURL(url));
+		sm.append("&changesURL=");
+		sm.append(HttpUtil.encodeURL(changesURL));
+
+		String location = sm.toString();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Pinging Google at " + location);
+		}
+
+		try {
+			String response = Http.URLtoString(sm.toString());
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Google ping response: " + response);
+			}
+		}
+		catch (IOException ioe) {
+			_log.error("Unable to ping Google at " + location, ioe);
+		}
 	}
 
 	protected void validate(String title, String content)

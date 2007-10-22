@@ -22,54 +22,70 @@
 
 package com.liferay.portal.upgrade.v4_3_4.util;
 
-import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
-import com.liferay.util.LocalizationUtil;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.util.CollectionFactory;
+
+import java.util.Set;
 
 /**
- * <a href="JournalArticleContentUpgradeColumnImpl.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="BlogsEntryUrlTitleUpgradeColumnImpl.java.html"><b><i>View Source</i>
+ * </b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class JournalArticleContentUpgradeColumnImpl
-	extends BaseUpgradeColumnImpl {
+public class BlogsEntryUrlTitleUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public JournalArticleContentUpgradeColumnImpl(
-		UpgradeColumn structureIdColumn) {
+	public BlogsEntryUrlTitleUpgradeColumnImpl(
+		UpgradeColumn entryIdColumn, UpgradeColumn titleColumn) {
 
-		super("content");
+		super("urlTitle");
 
-		_structureIdColumn = structureIdColumn;
+		_entryIdColumn = entryIdColumn;
+		_titleColumn = titleColumn;
+		_urlTitles = CollectionFactory.getHashSet();
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
-		String oldContent = (String)oldValue;
+		String oldUrlTitle = (String)oldValue;
 
-		String newContent = oldContent;
+		String newUrlTitle = oldUrlTitle;
 
-		String structureId = (String)_structureIdColumn.getOldValue();
+		if (Validator.isNull(oldUrlTitle)) {
+			long entryId = ((Long)_entryIdColumn.getOldValue()).longValue();
 
-		if (Validator.isNull(structureId)) {
-			if (Validator.isNotNull(oldContent) &&
-				(oldContent.indexOf("<static-content") == -1)) {
+			String title = (String)_titleColumn.getOldValue();
 
-				String defaultLanguageId = LocaleUtil.toLanguageId(
-					LocaleUtil.getDefault());
+			newUrlTitle = getUrlTitle(entryId, title);
 
-				newContent = LocalizationUtil.updateLocalization(
-					StringPool.BLANK, "static-content", oldContent,
-					defaultLanguageId, defaultLanguageId, true);
-			}
+			_urlTitles.add(newUrlTitle);
 		}
 
-		return newContent;
+		return newUrlTitle;
 	}
 
-	private UpgradeColumn _structureIdColumn;
+	protected String getUrlTitle(long entryId, String title) {
+		String urlTitle = BlogsEntryLocalServiceUtil.getUrlTitle(
+			entryId, title);
+
+		String newUrlTitle = new String(urlTitle);
+
+		for (int i = 1;; i++) {
+			if (!_urlTitles.contains(newUrlTitle)) {
+				break;
+			}
+
+			newUrlTitle = urlTitle + "_" + i;
+		}
+
+		return newUrlTitle;
+	}
+
+	private UpgradeColumn _entryIdColumn;
+	private UpgradeColumn _titleColumn;
+	private Set _urlTitles;
 
 }

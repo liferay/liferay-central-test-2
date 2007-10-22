@@ -34,7 +34,7 @@
 			<portlet:renderURL var="viewEntryURL">
 				<portlet:param name="struts_action" value="/blogs/view_entry" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
+				<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
 			</portlet:renderURL>
 
 			<span style="font-size: small;"><b>
@@ -86,7 +86,11 @@
 				<liferay-ui:icon image="permissions" url="<%= permissionsEntryURL %>" />
 			</c:if>
 
-			<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/blogs/rss?p_l_id=" + plid + "&groupId=" + portletGroupId %>' target="_blank" />
+			<%
+			String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/blogs/rss";
+			%>
+
+			<liferay-ui:icon image="rss" url="<%= rssURL %>" target="_blank" />
 
 			<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
 				<portlet:actionURL var="deleteEntryURL">

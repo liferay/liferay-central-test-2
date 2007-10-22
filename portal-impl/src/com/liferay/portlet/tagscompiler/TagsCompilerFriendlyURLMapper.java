@@ -29,6 +29,7 @@ import com.liferay.portlet.BaseFriendlyURLMapper;
 
 import java.util.Map;
 
+import javax.portlet.PortletMode;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
@@ -57,6 +58,7 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 		params.put("p_p_id", _PORTLET_ID);
 		params.put("p_p_action", "0");
 		params.put("p_p_state", WindowState.NORMAL.toString());
+		params.put("p_p_mode", PortletMode.VIEW.toString());
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 		int y = friendlyURLPath.length();

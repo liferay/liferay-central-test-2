@@ -385,8 +385,8 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			</c:if>
 		</c:if>
 	</c:when>
-	<c:when test='<%= tabs1.equals("my-posts") || tabs1.equals("my-subscriptions") || tabs1.equals("recent-posts") %>'>
-		<c:if test='<%= tabs1.equals("recent-posts") %>'>
+	<c:when test='<%= tabs1.equals("my_posts") || tabs1.equals("my_subscriptions") || tabs1.equals("recent_posts") %>'>
+		<c:if test='<%= tabs1.equals("recent_posts") %>'>
 			<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue() %>' target="_blank" />
 
 			<liferay-ui:message key="recent-posts-rss" />
@@ -398,7 +398,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		int totalCategories = 0;
 		%>
 
-		<c:if test='<%= tabs1.equals("my-subscriptions") %>'>
+		<c:if test='<%= tabs1.equals("my_subscriptions") %>'>
 
 			<%
 			List headerNames = new ArrayList();
@@ -499,7 +499,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		<%
 		long groupThreadsUserId = 0;
 
-		if ((tabs1.equals("my-posts") || tabs1.equals("my-subscriptions")) && themeDisplay.isSignedIn()) {
+		if ((tabs1.equals("my_posts") || tabs1.equals("my_subscriptions")) && themeDisplay.isSignedIn()) {
 			groupThreadsUserId = user.getUserId();
 		}
 
@@ -516,7 +516,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		List results = null;
 
-		if (tabs1.equals("my-subscriptions")) {
+		if (tabs1.equals("my_subscriptions")) {
 			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(portletGroupId.longValue(), groupThreadsUserId, true);
 
 			searchContainer.setTotal(total);
@@ -733,7 +733,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			</c:when>
 		</c:choose>
 	</c:when>
-	<c:when test='<%= tabs1.equals("banned-users") %>'>
+	<c:when test='<%= tabs1.equals("banned_users") %>'>
 
 		<%
 		int expireInterval = GetterUtil.getInteger(PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL));

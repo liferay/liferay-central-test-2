@@ -67,10 +67,11 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "categoryId", new Integer(Types.BIGINT) },
 			{ "title", new Integer(Types.VARCHAR) },
+			{ "urlTitle", new Integer(Types.VARCHAR) },
 			{ "content", new Integer(Types.CLOB) },
 			{ "displayDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static String TABLE_SQL_CREATE = "create table BlogsEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,title VARCHAR(150) null,content TEXT null,displayDate DATE null)";
+	public static String TABLE_SQL_CREATE = "create table BlogsEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,displayDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table BlogsEntry";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry"),
@@ -80,6 +81,9 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.title"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_URLTITLE = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.urlTitle"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CONTENT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.content"),
@@ -211,6 +215,23 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getUrlTitle() {
+		return GetterUtil.getString(_urlTitle);
+	}
+
+	public void setUrlTitle(String urlTitle) {
+		if (((urlTitle == null) && (_urlTitle != null)) ||
+				((urlTitle != null) && (_urlTitle == null)) ||
+				((urlTitle != null) && (_urlTitle != null) &&
+				!urlTitle.equals(_urlTitle))) {
+			if (!XSS_ALLOW_URLTITLE) {
+				urlTitle = XSSUtil.strip(urlTitle);
+			}
+
+			_urlTitle = urlTitle;
+		}
+	}
+
 	public String getContent() {
 		return GetterUtil.getString(_content);
 	}
@@ -252,6 +273,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		clone.setModifiedDate(getModifiedDate());
 		clone.setCategoryId(getCategoryId());
 		clone.setTitle(getTitle());
+		clone.setUrlTitle(getUrlTitle());
 		clone.setContent(getContent());
 		clone.setDisplayDate(getDisplayDate());
 
@@ -312,6 +334,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 	private Date _modifiedDate;
 	private long _categoryId;
 	private String _title;
+	private String _urlTitle;
 	private String _content;
 	private Date _displayDate;
 }

@@ -145,11 +145,18 @@ public class PortletURLImpl implements PortletURL, Serializable {
 	public String getPortletFriendlyURLPath() {
 		String portletFriendlyURLPath = null;
 
-		if (_portlet != null) {
-			FriendlyURLMapper mapper = _portlet.getFriendlyURLMapper();
+		Portlet portlet = getPortlet();
+
+		if (portlet != null) {
+			FriendlyURLMapper mapper = portlet.getFriendlyURLMapper();
 
 			if (mapper != null) {
 				portletFriendlyURLPath = mapper.buildPath(this);
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Portlet friendly URL path " + portletFriendlyURLPath);
+				}
 			}
 		}
 
@@ -498,17 +505,17 @@ public class PortletURLImpl implements PortletURL, Serializable {
 					addParameterIncludedInPath("p_p_action");
 				}
 
-				if ((_windowState != null) &&
-					_windowState.equals(WindowState.MAXIMIZED)) {
+				//if ((_windowState != null) &&
+				//	_windowState.equals(WindowState.MAXIMIZED)) {
 
 					addParameterIncludedInPath("p_p_state");
-				}
+				//}
 
-				if ((_portletMode != null) &&
-					_portletMode.equals(PortletMode.VIEW)) {
+				//if ((_portletMode != null) &&
+				//	_portletMode.equals(PortletMode.VIEW)) {
 
 					addParameterIncludedInPath("p_p_mode");
-				}
+				//}
 
 				addParameterIncludedInPath("p_p_col_id");
 				addParameterIncludedInPath("p_p_col_pos");
@@ -539,18 +546,22 @@ public class PortletURLImpl implements PortletURL, Serializable {
 			sm.append(StringPool.AMPERSAND);
 		}
 
-		if (_windowState != null && !isParameterIncludedInPath("p_p_state")) {
-			sm.append("p_p_state");
-			sm.append(StringPool.EQUAL);
-			sm.append(processValue(key, _windowState.toString()));
-			sm.append(StringPool.AMPERSAND);
+		if (!isParameterIncludedInPath("p_p_state")) {
+			if (_windowState != null) {
+				sm.append("p_p_state");
+				sm.append(StringPool.EQUAL);
+				sm.append(processValue(key, _windowState.toString()));
+				sm.append(StringPool.AMPERSAND);
+			}
 		}
 
-		if (_portletMode != null && !isParameterIncludedInPath("p_p_mode")) {
-			sm.append("p_p_mode");
-			sm.append(StringPool.EQUAL);
-			sm.append(processValue(key, _portletMode.toString()));
-			sm.append(StringPool.AMPERSAND);
+		if (!isParameterIncludedInPath("p_p_mode")) {
+			if (_portletMode != null) {
+				sm.append("p_p_mode");
+				sm.append(StringPool.EQUAL);
+				sm.append(processValue(key, _portletMode.toString()));
+				sm.append(StringPool.AMPERSAND);
+			}
 		}
 
 		if (!isParameterIncludedInPath("p_p_col_id")) {

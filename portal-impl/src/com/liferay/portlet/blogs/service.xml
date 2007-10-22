@@ -57,6 +57,7 @@
 
 		<column name="categoryId" type="long" />
 		<column name="title" type="String" />
+		<column name="urlTitle" type="String" />
 		<column name="content" type="String" />
 		<column name="displayDate" type="Date" />
 
@@ -80,6 +81,10 @@
 		<finder name="G_U" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
+		</finder>
+		<finder name="G_UT" return-type="BlogsEntry">
+			<finder-column name="groupId" />
+			<finder-column name="urlTitle" />
 		</finder>
 		<finder name="C_U" return-type="Collection">
 			<finder-column name="companyId" />

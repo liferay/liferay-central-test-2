@@ -23,6 +23,8 @@
 package com.liferay.portlet.blogs.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.model.BlogsCategory;
@@ -80,12 +82,21 @@ public class ActionUtil {
 	}
 
 	public static void getEntry(HttpServletRequest req) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long entryId = ParamUtil.getLong(req, "entryId");
+
+		String urlTitle = ParamUtil.getString(req, "urlTitle");
 
 		BlogsEntry entry = null;
 
 		if (entryId > 0) {
 			entry = BlogsEntryServiceUtil.getEntry(entryId);
+		}
+		else if (Validator.isNotNull(urlTitle)) {
+			entry = BlogsEntryServiceUtil.getEntry(
+				themeDisplay.getPortletGroupId(), urlTitle);
 		}
 
 		req.setAttribute(WebKeys.BLOGS_ENTRY, entry);

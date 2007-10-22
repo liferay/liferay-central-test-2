@@ -88,7 +88,7 @@ try {
 
 		rowURL.setParameter("struts_action", "/blogs/view_entry");
 		rowURL.setParameter("redirect", currentURL);
-		rowURL.setParameter("entryId", String.valueOf(entryId));
+		rowURL.setParameter("urlTitle", entry.getUrlTitle());
 
 		row.addText(entry.getTitle(), rowURL);
 

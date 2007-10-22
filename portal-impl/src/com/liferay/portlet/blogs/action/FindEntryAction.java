@@ -24,6 +24,8 @@ package com.liferay.portlet.blogs.action;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -77,15 +79,25 @@ public class FindEntryAction extends Action {
 				}
 			}
 
+			String urlTitle = getUrlTitle(entryId);
+
 			PortletURL portletURL = new PortletURLImpl(
 				req, PortletKeys.BLOGS, plid, false);
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
 			portletURL.setParameter("struts_action", "/blogs/view_entry");
-			portletURL.setParameter("entryId", String.valueOf(entryId));
 
-			res.sendRedirect(portletURL.toString());
+			if (Validator.isNotNull(urlTitle)) {
+				portletURL.setParameter("urlTitle", urlTitle);
+			}
+			else {
+				portletURL.setParameter("entryId", String.valueOf(entryId));
+			}
+
+			String redirect = portletURL.toString();
+
+			res.sendRedirect(redirect);
 
 			return null;
 		}
@@ -138,6 +150,23 @@ public class FindEntryAction extends Action {
 		}
 
 		return plid;
+	}
+
+	protected String getUrlTitle(long entryId) {
+		String urlTitle = StringPool.BLANK;
+
+		try {
+			BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
+
+			urlTitle = entry.getUrlTitle();
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+		}
+
+		return urlTitle;
 	}
 
 	private static Log _log = LogFactory.getLog(FindEntryAction.class);

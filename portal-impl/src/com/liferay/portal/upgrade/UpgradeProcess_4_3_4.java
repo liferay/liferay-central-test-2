@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.upgrade.v4_3_4.UpgradeBlogs;
 import com.liferay.portal.upgrade.v4_3_4.UpgradeJournal;
 import com.liferay.portal.upgrade.v4_3_4.UpgradeSchema;
 import com.liferay.portal.util.ReleaseInfo;
@@ -45,6 +46,7 @@ public class UpgradeProcess_4_3_4 extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		upgrade(new UpgradeSchema());
+		upgrade(new UpgradeBlogs());
 		upgrade(new UpgradeJournal());
 	}
 

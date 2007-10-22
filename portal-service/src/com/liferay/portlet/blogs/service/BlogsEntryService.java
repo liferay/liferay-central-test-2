@@ -53,8 +53,9 @@ public interface BlogsEntryService {
 		long categoryId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute,
-		boolean addCommunityPermissions, boolean addGuestPermissions,
-		java.lang.String[] tagsEntries)
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
+		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -62,6 +63,7 @@ public interface BlogsEntryService {
 		long categoryId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -92,6 +94,11 @@ public interface BlogsEntryService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public com.liferay.portlet.blogs.model.BlogsEntry getEntry(long groupId,
+		java.lang.String urlTitle)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public java.util.List getGroupEntries(long groupId, int max)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
@@ -106,6 +113,7 @@ public interface BlogsEntryService {
 		long entryId, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

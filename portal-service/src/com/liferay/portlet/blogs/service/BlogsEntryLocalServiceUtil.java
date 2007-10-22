@@ -110,6 +110,7 @@ public class BlogsEntryLocalServiceUtil {
 		long userId, long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -118,7 +119,7 @@ public class BlogsEntryLocalServiceUtil {
 
 		return blogsEntryLocalService.addEntry(userId, plid, categoryId, title,
 			content, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, tagsEntries,
+			displayDateHour, displayDateMinute, themeDisplay, tagsEntries,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -126,6 +127,7 @@ public class BlogsEntryLocalServiceUtil {
 		long userId, long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -135,7 +137,7 @@ public class BlogsEntryLocalServiceUtil {
 
 		return blogsEntryLocalService.addEntry(userId, plid, categoryId, title,
 			content, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, tagsEntries,
+			displayDateHour, displayDateMinute, themeDisplay, tagsEntries,
 			communityPermissions, guestPermissions);
 	}
 
@@ -143,6 +145,7 @@ public class BlogsEntryLocalServiceUtil {
 		long userId, long plid, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
@@ -154,7 +157,7 @@ public class BlogsEntryLocalServiceUtil {
 
 		return blogsEntryLocalService.addEntry(userId, plid, categoryId, title,
 			content, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, tagsEntries,
+			displayDateHour, displayDateMinute, themeDisplay, tagsEntries,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions);
 	}
@@ -274,6 +277,15 @@ public class BlogsEntryLocalServiceUtil {
 		return blogsEntryLocalService.getEntry(entryId);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
+		long groupId, java.lang.String urlTitle)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getEntry(groupId, urlTitle);
+	}
+
 	public static java.util.List getGroupEntries(long groupId, int begin,
 		int end) throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
@@ -310,6 +322,13 @@ public class BlogsEntryLocalServiceUtil {
 		return blogsEntryLocalService.getNoAssetEntries();
 	}
 
+	public static java.lang.String getUrlTitle(long entryId,
+		java.lang.String title) {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getUrlTitle(entryId, title);
+	}
+
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
@@ -329,6 +348,7 @@ public class BlogsEntryLocalServiceUtil {
 		long userId, long entryId, long categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -336,7 +356,7 @@ public class BlogsEntryLocalServiceUtil {
 
 		return blogsEntryLocalService.updateEntry(userId, entryId, categoryId,
 			title, content, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, tagsEntries);
+			displayDateHour, displayDateMinute, themeDisplay, tagsEntries);
 	}
 
 	public static void updateTagsAsset(long userId,

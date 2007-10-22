@@ -32,7 +32,9 @@ import com.liferay.portlet.PortletURLImpl;
 
 import java.util.Map;
 
+import javax.portlet.PortletMode;
 import javax.portlet.PortletURL;
+import javax.portlet.WindowState;
 
 /**
  * <a href="SCFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
@@ -110,13 +112,13 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 				"frameworkVersionId");
 
 			if (Validator.isNotNull(frameworkVersionId)) {
-				friendlyURL = "/software_catalog/framework-versions/" +
+				friendlyURL = "/software_catalog/framework_versions/" +
 					frameworkVersionId + "/edit";
 
 				url.addParameterIncludedInPath("frameworkVersionId");
 			}
 			else {
-				friendlyURL = "/software_catalog/framework-versions/new";
+				friendlyURL = "/software_catalog/framework_versions/new";
 			}
 		}
 		else if (action.equals(
@@ -152,6 +154,13 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 	public void populateParams(String friendlyURLPath, Map params) {
 		params.put("p_p_id", _PORTLET_ID);
 
+		if (!params.containsKey("p_p_action")) {
+			params.put("p_p_action", "0");
+		}
+
+		params.put("p_p_state", WindowState.MAXIMIZED.toString());
+		params.put("p_p_mode", PortletMode.VIEW.toString());
+
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 
 		String[] urlFragments = StringUtil.split(
@@ -160,15 +169,8 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String resourceIdParam = getResourceIdParam(urlFragments[0]);
 
 		if (urlFragments.length == 1) {
-			if (urlFragments[0].equals("search")) {
-				addParam(
-					params, "struts_action", "/software_catalog/search");
-			}
-			else {
-				addParam(
-					params, "struts_action", "/software_catalog/view");
-				addParam(params, "tabs1", urlFragments[0]);
-			}
+			addParam(params, "struts_action", "/software_catalog/view");
+			addParam(params, "tabs1", urlFragments[0]);
 		}
 		else if (urlFragments.length == 2) {
 			if (urlFragments[1].equals("new")) {
@@ -218,17 +220,17 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 	protected String getEditAction(String resource) {
 		String action = null;
 
-		if (resource.equals("my-products") || resource.equals("products")) {
+		if (resource.equals("my_products") || resource.equals("products")) {
 			action = "edit_product_entry";
 		}
-		else if (resource.equals("framework-versions")) {
+		else if (resource.equals("versions")) {
+			action = "edit_product_version";
+		}
+		else if (resource.equals("framework_versions")) {
 			action = "edit_framework_version";
 		}
 		else if (resource.equals("licenses")) {
 			action = "edit_license";
-		}
-		else if (resource.equals("versions")) {
-			action = "edit_product_version";
 		}
 		else {
 			return null;
@@ -238,13 +240,13 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	protected String getResourceIdParam(String resource) {
-		if (resource.equals("my-products") || resource.equals("products")) {
+		if (resource.equals("my_products") || resource.equals("products")) {
 			return "productEntryId";
 		}
 		else if (resource.equals("versions")) {
 			return "productVersionId";
 		}
-		else if (resource.equals("framework-versions")) {
+		else if (resource.equals("framework_versions")) {
 			return "frameworkVersionId";
 		}
 		else if (resource.equals("licenses")) {

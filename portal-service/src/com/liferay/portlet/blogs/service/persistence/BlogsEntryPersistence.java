@@ -161,6 +161,15 @@ public interface BlogsEntryPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.blogs.NoSuchEntryException;
 
+	public com.liferay.portlet.blogs.model.BlogsEntry findByG_UT(long groupId,
+		java.lang.String urlTitle)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
+	public com.liferay.portlet.blogs.model.BlogsEntry fetchByG_UT(
+		long groupId, java.lang.String urlTitle)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List findByC_U(long companyId, long userId)
 		throws com.liferay.portal.SystemException;
 
@@ -218,6 +227,10 @@ public interface BlogsEntryPersistence {
 	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByG_UT(long groupId, java.lang.String urlTitle)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
 	public void removeByC_U(long companyId, long userId)
 		throws com.liferay.portal.SystemException;
 
@@ -233,6 +246,9 @@ public interface BlogsEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByG_UT(long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_U(long companyId, long userId)

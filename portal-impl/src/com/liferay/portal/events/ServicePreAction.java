@@ -988,6 +988,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setLanguageId(LocaleUtil.toLanguageId(locale));
 		themeDisplay.setTimeZone(timeZone);
 		themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
+		themeDisplay.setServerName(req.getServerName());
 		themeDisplay.setServerPort(req.getServerPort());
 		themeDisplay.setSecure(req.isSecure());
 		themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(req));

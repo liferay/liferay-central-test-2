@@ -27,19 +27,21 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "products");
 
-String tabs1Names = "products";
+String tabs1Values = "products";
 
 if (themeDisplay.isSignedIn()) {
-	tabs1Names += ",my-products";
+	tabs1Values += ",my_products";
 }
 
 if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LICENSE)) {
-	tabs1Names += ",licenses";
+	tabs1Values += ",licenses";
 }
 
 if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION)) {
-	tabs1Names += ",framework-versions";
+	tabs1Values += ",framework_versions";
 }
+
+String tabs1Names = StringUtil.replace(tabs1Values, StringPool.UNDERLINE, StringPool.DASH);
 
 String keywords = ParamUtil.getString(request, "keywords");
 String type = ParamUtil.getString(request, "type");
@@ -50,8 +52,8 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/software_catalog/view");
 portletURL.setParameter("tabs1", tabs1);
-portletURL.setParameter("keywords", keywords);
-portletURL.setParameter("type", type);
+//portletURL.setParameter("keywords", keywords);
+//portletURL.setParameter("type", type);
 %>
 
 <form action="<%= portletURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
@@ -59,6 +61,7 @@ portletURL.setParameter("type", type);
 
 <liferay-ui:tabs
 	names="<%= tabs1Names %>"
+	tabsValues="<%= tabs1Values %>"
 	portletURL="<%= portletURL %>"
 />
 
@@ -257,7 +260,7 @@ portletURL.setParameter("type", type);
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
-	<c:when test='<%= tabs1.equals("my-products") %>'>
+	<c:when test='<%= tabs1.equals("my_products") %>'>
 
 		<%
 		String orderByCol = ParamUtil.getString(request, "orderByCol");
@@ -417,7 +420,7 @@ portletURL.setParameter("type", type);
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
-	<c:when test='<%= tabs1.equals("framework-versions") %>'>
+	<c:when test='<%= tabs1.equals("framework_versions") %>'>
 
 		<%
 		List headerNames = new ArrayList();

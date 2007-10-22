@@ -35,6 +35,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.GroupNames;
@@ -72,6 +73,34 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		"COMMUNITY_RESTRICTED";
 
 	public GroupImpl() {
+	}
+
+	public String getDescriptiveName() {
+		String name = getName();
+
+		try {
+			if (isOrganization()) {
+				long organizationId = getClassPK();
+
+				Organization organization =
+					OrganizationLocalServiceUtil.getOrganization(
+						organizationId);
+
+				name = organization.getName();
+			}
+			else if (isUser()) {
+				long userId = getClassPK();
+
+				User user = UserLocalServiceUtil.getUserById(userId);
+
+				name = user.getFullName();
+			}
+		}
+		catch (Exception e) {
+			_log.error("Error getting descriptive name for " + getGroupId(), e);
+		}
+
+		return name;
 	}
 
 	public boolean isCommunity() {

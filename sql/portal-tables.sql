@@ -60,6 +60,7 @@ create table BlogsEntry (
 	modifiedDate DATE null,
 	categoryId LONG,
 	title VARCHAR(150) null,
+	urlTitle VARCHAR(150) null,
 	content TEXT null,
 	displayDate DATE null
 );

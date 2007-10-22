@@ -555,6 +555,12 @@ public class PortalUtil {
 			PropsUtil.LAYOUT_VIEW_PAGE, Filter.by(layout.getType()));
 	}
 
+	public static String getLayoutURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getLayoutURL(themeDisplay.getLayout(), themeDisplay);
+	}
+
 	public static String getLayoutURL(Layout layout, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -797,6 +803,23 @@ public class PortalUtil {
 		return _instance._portalLibDir;
 	}
 
+	public static String getPortalURL(ThemeDisplay themeDisplay) {
+		String serverName = themeDisplay.getServerName();
+
+		Layout layout = themeDisplay.getLayout();
+
+		if (layout != null) {
+			LayoutSet layoutSet = layout.getLayoutSet();
+
+			if (Validator.isNotNull(layoutSet.getVirtualHost())) {
+				serverName = layoutSet.getVirtualHost();
+			}
+		}
+
+		return getPortalURL(
+			serverName, themeDisplay.getServerPort(), themeDisplay.isSecure());
+	}
+
 	public static String getPortalURL(HttpServletRequest req) {
 		return getPortalURL(req, req.isSecure());
 	}
@@ -933,7 +956,7 @@ public class PortalUtil {
 					actualParams = new HashMap();
 				}
 
-				Object action = actualParams.get("p_p_action");
+				/*Object action = actualParams.get("p_p_action");
 
 				if ((action == null) || (((String[])action).length == 0)) {
 					actualParams.put("p_p_action", "0");
@@ -944,7 +967,7 @@ public class PortalUtil {
 				if ((state == null) || (((String[])state).length == 0)) {
 					actualParams.put(
 						"p_p_state", WindowState.MAXIMIZED.toString());
-				}
+				}*/
 
 				friendlyURLMapper.populateParams(
 					url.substring(pos), actualParams);

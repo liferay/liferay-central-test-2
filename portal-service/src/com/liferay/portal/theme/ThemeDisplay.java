@@ -326,6 +326,14 @@ public class ThemeDisplay implements Serializable {
 		_freeformLayout = freeformLayout;
 	}
 
+	public String getServerName() {
+		return _serverName;
+	}
+
+	public void setServerName(String serverName) {
+		_serverName = serverName;
+	}
+
 	public int getServerPort() {
 		return _serverPort;
 	}
@@ -765,6 +773,7 @@ public class ThemeDisplay implements Serializable {
 		_theme = null;
 		_colorScheme = null;
 		_freeformLayout = false;
+		_serverName = StringPool.BLANK;
 		_serverPort = 0;
 		_secure = false;
 		_stateExclusive = false;
@@ -842,6 +851,7 @@ public class ThemeDisplay implements Serializable {
 	private Theme _theme;
 	private ColorScheme _colorScheme;
 	private boolean _freeformLayout;
+	private String _serverName;
 	private int _serverPort;
 	private boolean _secure;
 	private boolean _stateExclusive;

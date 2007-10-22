@@ -24,10 +24,13 @@ package com.liferay.portlet.blogs.action;
 
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
@@ -35,6 +38,7 @@ import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.NoSuchEntryException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
@@ -69,14 +73,45 @@ public class EditEntryAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
+			BlogsEntry entry = null;
+			String oldUrlTitle = StringPool.BLANK;
+
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateEntry(req);
+				Object[] returnValue = updateEntry(req);
+
+				entry = (BlogsEntry)returnValue[0];
+				oldUrlTitle = ((String)returnValue[1]);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteEntry(req);
 			}
 
-			sendRedirect(req, res);
+			String redirect = ParamUtil.getString(req, "redirect");
+
+			if ((entry != null) && (Validator.isNotNull(oldUrlTitle)) &&
+				(redirect.endsWith("/blogs/" + oldUrlTitle) ||
+				 redirect.indexOf("/blogs/" + oldUrlTitle + "?") != -1)) {
+
+				int pos = redirect.indexOf("?");
+
+				if (pos == -1) {
+					pos = redirect.length();
+				}
+
+				String newRedirect = redirect.substring(
+					0, pos - oldUrlTitle.length());
+
+				newRedirect += entry.getUrlTitle();
+
+				if (pos < redirect.length()) {
+					newRedirect +=
+						"?" + redirect.substring(pos + 1, redirect.length());
+				}
+
+				redirect = newRedirect;
+			}
+
+			sendRedirect(req, res, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchCategoryException ||
@@ -132,8 +167,11 @@ public class EditEntryAction extends PortletAction {
 		BlogsEntryServiceUtil.deleteEntry(entryId);
 	}
 
-	protected void updateEntry(ActionRequest req) throws Exception {
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+	protected Object[] updateEntry(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
 
 		long entryId = ParamUtil.getLong(req, "entryId");
 
@@ -160,15 +198,18 @@ public class EditEntryAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
+		BlogsEntry entry = null;
+		String oldUrlTitle = StringPool.BLANK;
+
 		if (entryId <= 0) {
 
 			// Add entry
 
-			BlogsEntry entry = BlogsEntryServiceUtil.addEntry(
+			entry = BlogsEntryServiceUtil.addEntry(
 				layout.getPlid(), categoryId, title, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, tagsEntries, communityPermissions,
-				guestPermissions);
+				displayDateMinute, themeDisplay, tagsEntries,
+				communityPermissions, guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				req, BlogsEntry.class.getName(), entry.getEntryId(), -1);
@@ -177,11 +218,21 @@ public class EditEntryAction extends PortletAction {
 
 			// Update entry
 
-			BlogsEntryServiceUtil.updateEntry(
+			entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
+
+			String tempOldUrlTitle = entry.getUrlTitle();
+
+			entry = BlogsEntryServiceUtil.updateEntry(
 				entryId, categoryId, title, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, tagsEntries);
+				displayDateMinute, themeDisplay, tagsEntries);
+
+			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
+				oldUrlTitle = tempOldUrlTitle;
+			}
 		}
+
+		return new Object[] {entry, oldUrlTitle};
 	}
 
 }

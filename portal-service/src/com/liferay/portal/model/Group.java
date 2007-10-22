@@ -48,6 +48,8 @@ package com.liferay.portal.model;
  *
  */
 public interface Group extends GroupModel {
+	public java.lang.String getDescriptiveName();
+
 	public boolean isCommunity();
 
 	public boolean isOrganization();

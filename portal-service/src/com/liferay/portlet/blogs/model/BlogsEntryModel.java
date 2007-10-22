@@ -87,6 +87,10 @@ public interface BlogsEntryModel extends BaseModel {
 
 	public void setTitle(String title);
 
+	public String getUrlTitle();
+
+	public void setUrlTitle(String urlTitle);
+
 	public String getContent();
 
 	public void setContent(String content);

@@ -31,7 +31,9 @@ import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 
 import java.util.Map;
 
+import javax.portlet.PortletMode;
 import javax.portlet.PortletURL;
+import javax.portlet.WindowState;
 
 /**
  * <a href="MBFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
@@ -59,7 +61,8 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		String friendlyURLPath = null;
 
-		String tabs2 = url.getParameter("tabs2");
+		String tabs1 = GetterUtil.getString(url.getParameter("tabs1"));
+		String tabs2 = GetterUtil.getString(url.getParameter("tabs2"));
 
 		if (Validator.isNotNull(tabs2)) {
 			return null;
@@ -69,12 +72,26 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 			url.getParameter("struts_action"));
 
 		if (strutsAction.equals("/message_boards/view")) {
-			String categoryId = url.getParameter("categoryId");
+			String categoryId = GetterUtil.getString(
+				url.getParameter("categoryId"));
 
-			if (Validator.isNotNull(categoryId)) {
+			if (Validator.isNotNull(categoryId) && !categoryId.equals("0")) {
 				friendlyURLPath = "/message_boards/category/" + categoryId;
 
 				url.addParameterIncludedInPath("categoryId");
+			}
+			else {
+				friendlyURLPath = "/message_boards";
+
+				if (Validator.isNotNull(tabs1) && !tabs1.equals("categories")) {
+					friendlyURLPath += "/" + tabs1;
+				}
+
+				url.addParameterIncludedInPath("tabs1");
+
+				if (categoryId.equals("0")) {
+					url.addParameterIncludedInPath("categoryId");
+				}
 			}
 		}
 		else if (strutsAction.equals("/message_boards/view_message")) {
@@ -97,17 +114,25 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public void populateParams(String friendlyURLPath, Map params) {
 		params.put("p_p_id", _PORTLET_ID);
+		params.put("p_p_action", "0");
+		params.put("p_p_state", WindowState.MAXIMIZED.toString());
+		params.put("p_p_mode", PortletMode.VIEW.toString());
 
 		int x = friendlyURLPath.indexOf("/", 1);
-		int y = friendlyURLPath.indexOf("/", x + 1);
 
-		if (y == -1) {
+		if ((x + 1) == friendlyURLPath.length()) {
 			addParam(params, "struts_action", "/message_boards/view");
 			addParam(
 				params, "categoryId",
 				MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 			return;
+		}
+
+		int y = friendlyURLPath.indexOf("/", x + 1);
+
+		if (y == -1) {
+			y = friendlyURLPath.length();
 		}
 
 		String type = friendlyURLPath.substring(x + 1, y);
@@ -125,6 +150,13 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 			addParam(params, "struts_action", "/message_boards/view_message");
 			addParam(params, "messageId", messageId);
+		}
+		else if (type.equals("my_posts") || type.equals("my_subscriptions") ||
+				 type.equals("recent_posts") || type.equals("statistics") ||
+				 type.equals("banned_users")) {
+
+			addParam(params, "struts_action", "/message_boards/view");
+			params.put("tabs1", type);
 		}
 	}
 

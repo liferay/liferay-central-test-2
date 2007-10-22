@@ -28,13 +28,22 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +51,6 @@ import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -53,9 +61,9 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  *
  */
-public class RSSAction extends Action {
+public class RSSAction extends PortletAction {
 
-	public ActionForward execute(
+	public ActionForward strutsExecute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
@@ -73,11 +81,29 @@ public class RSSAction extends Action {
 		}
 	}
 
+	public void processAction(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionRequest req, ActionResponse res)
+		throws Exception {
+
+		HttpServletRequest httpReq =
+			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletResponse httpRes =
+			((ActionResponseImpl)res).getHttpServletResponse();
+
+		ServletResponseUtil.sendFile(
+			httpRes, null, getRSS(httpReq), ContentTypes.TEXT_XML_UTF8);
+
+		setForward(req, ActionConstants.COMMON_NULL);
+	}
+
 	protected byte[] getRSS(HttpServletRequest req) throws Exception {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String plid = ParamUtil.getString(req, "p_l_id");
+		Layout layout = themeDisplay.getLayout();
+
+		long plid = ParamUtil.getLong(req, "p_l_id");
 		long companyId = ParamUtil.getLong(req, "companyId");
 		long groupId = ParamUtil.getLong(req, "groupId");
 		long categoryId = ParamUtil.getLong(req, "categoryId");
@@ -135,6 +161,23 @@ public class RSSAction extends Action {
 			catch (NoSuchCategoryException nsce) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(nsce);
+				}
+			}
+		}
+		else if (layout != null) {
+			groupId = layout.getGroupId();
+
+			feedURL = PortalUtil.getLayoutURL(themeDisplay) + "/blogs/rss";
+
+			entryURL = feedURL;
+
+			try {
+				rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
+					groupId, max, type, version, feedURL, entryURL);
+			}
+			catch (NoSuchGroupException nsge) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsge);
 				}
 			}
 		}

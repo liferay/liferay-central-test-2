@@ -28,19 +28,19 @@ import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_4.util.JournalArticleContentUpgradeColumnImpl;
-import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
+import com.liferay.portal.upgrade.v4_3_4.util.BlogsEntryUrlTitleUpgradeColumnImpl;
+import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeBlogs.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeJournal extends UpgradeProcess {
+public class UpgradeBlogs extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
@@ -54,19 +54,20 @@ public class UpgradeJournal extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		UpgradeColumn structureIdColumn =
-			new TempUpgradeColumnImpl("structureId");
+		UpgradeColumn entryIdColumn = new TempUpgradeColumnImpl("entryId");
 
-		UpgradeColumn contentColumn =
-			new JournalArticleContentUpgradeColumnImpl(structureIdColumn);
+		UpgradeColumn titleColumn = new TempUpgradeColumnImpl("title");
+
+		UpgradeColumn urlTitleColumn = new BlogsEntryUrlTitleUpgradeColumnImpl(
+			entryIdColumn, titleColumn);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
-			structureIdColumn, contentColumn);
+			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,
+			entryIdColumn, titleColumn, urlTitleColumn);
 
 		upgradeTable.updateTable();
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeJournal.class);
+	private static Log _log = LogFactory.getLog(UpgradeBlogs.class);
 
 }

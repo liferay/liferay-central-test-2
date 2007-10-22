@@ -123,6 +123,10 @@ public class FriendlyURLServlet extends HttpServlet {
 			redirect = mainPath;
 		}
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Redirect " + redirect);
+		}
+
 		if (redirect.startsWith(StringPool.SLASH)) {
 			RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
 

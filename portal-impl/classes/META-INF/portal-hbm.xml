@@ -583,6 +583,7 @@
 		<property name="modifiedDate" />
 		<property name="categoryId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="urlTitle" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="content" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="displayDate" />
 	</class>

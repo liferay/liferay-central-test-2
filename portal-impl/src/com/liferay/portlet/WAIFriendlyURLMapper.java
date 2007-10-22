@@ -31,7 +31,9 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.util.Map;
 
+import javax.portlet.PortletMode;
 import javax.portlet.PortletURL;
+import javax.portlet.WindowState;
 
 /**
  * <a href="WAIFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
@@ -75,18 +77,22 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 			return;
 		}
 
-		if (hasBinaryExtension(friendlyURLPath)) {
-			params.put("p_p_state", LiferayWindowState.EXCLUSIVE.toString());
-		}
-		else {
-			params.put("p_p_state", LiferayWindowState.MAXIMIZED.toString());
-		}
-
 		String prefix = friendlyURLPath.substring(x + _MAPPING.length() + 1, y);
 
 		String portletId = prefix + PortletImpl.WAR_SEPARATOR + prefix;
 
 		params.put("p_p_id", portletId);
+
+		params.put("p_p_action", "0");
+
+		if (hasBinaryExtension(friendlyURLPath)) {
+			params.put("p_p_state", LiferayWindowState.EXCLUSIVE.toString());
+		}
+		else {
+			params.put("p_p_state", WindowState.MAXIMIZED.toString());
+		}
+
+		params.put("p_p_mode", PortletMode.VIEW.toString());
 
 		String namespace = PortalUtil.getPortletNamespace(portletId);
 
