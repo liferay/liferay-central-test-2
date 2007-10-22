@@ -93,6 +93,15 @@ public class StripResponse extends HttpServletResponseWrapper {
 		return _writer;
 	}
 
+	public boolean isCommitted() {
+		if (_stream != null) {
+			return true;
+		}
+		else {
+			return super.isCommitted();
+		}
+	}
+
 	public String getContentType() {
 		return _contentType;
 	}
