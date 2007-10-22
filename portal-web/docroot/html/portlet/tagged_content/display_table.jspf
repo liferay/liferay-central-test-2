@@ -101,10 +101,10 @@ if (Validator.isNotNull(asset.getUrl())) {
 			<liferay-ui:message key="title" />
 		</th>
 		<%
-		for (int i = 0; i < metadataFields.length; i++) {
+		for (int m = 0; m < metadataFields.length; m++) {
 		%>
 			<th>
-				<liferay-ui:message key="<%= metadataFields[i] %>" />
+				<liferay-ui:message key="<%= metadataFields[m] %>" />
 			</th>
 		<%
 		}
@@ -132,16 +132,16 @@ if (Validator.isNotNull(asset.getUrl())) {
 			</c:choose>
 		</td>
 		<%
-		for (int i = 0; i < metadataFields.length; i++) {
+		for (int m = 0; m < metadataFields.length; m++) {
 			String value = null;
 
-			if (metadataFields[i].equals("create-date")) {
+			if (metadataFields[m].equals("create-date")) {
 				value = dateFormatDate.format(asset.getCreateDate());
 			}
-			else if (metadataFields[i].equals("modified-date")) {
+			else if (metadataFields[m].equals("modified-date")) {
 				value = dateFormatDate.format(asset.getModifiedDate());
 			}
-			else if (metadataFields[i].equals("publish-date")) {
+			else if (metadataFields[m].equals("publish-date")) {
 				if (asset.getPublishDate() == null) {
 					value = StringPool.BLANK;
 				}
@@ -149,7 +149,7 @@ if (Validator.isNotNull(asset.getUrl())) {
 					value = dateFormatDate.format(asset.getPublishDate());
 				}
 			}
-			else if (metadataFields[i].equals("expiration-date")) {
+			else if (metadataFields[m].equals("expiration-date")) {
 				if (asset.getExpirationDate() == null) {
 					value = StringPool.BLANK;
 				}
@@ -157,13 +157,13 @@ if (Validator.isNotNull(asset.getUrl())) {
 					value = dateFormatDate.format(asset.getExpirationDate());
 				}
 			}
-			else if (metadataFields[i].equals("priority")) {
+			else if (metadataFields[m].equals("priority")) {
 				value = Double.toString(asset.getPriority());
 			}
-			else if (metadataFields[i].equals("author")) {
+			else if (metadataFields[m].equals("author")) {
 				value = asset.getUserName();
 			}
-			else if (metadataFields[i].equals("view-count")) {
+			else if (metadataFields[m].equals("view-count")) {
 				value = Integer.toString(asset.getViewCount());
 			}
 

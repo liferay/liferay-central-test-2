@@ -68,6 +68,9 @@ for (int i = 0; i < categoryEntries.size(); i++) {
 						<c:when test='<%= displayStyle.equals("title-list") %>'>
 							<%@ include file="/html/portlet/tagged_content/display_title_list.jspf" %>
 						</c:when>
+						<c:when test='<%= displayStyle.equals("table") %>'>
+							<%@ include file="/html/portlet/tagged_content/display_table.jspf" %>
+						</c:when>
 						<c:otherwise>
 							<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
 						</c:otherwise>
