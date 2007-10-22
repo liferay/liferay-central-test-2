@@ -32,6 +32,9 @@
 			<option <%= displayStyle.equals("full-content") ? "selected" : "" %> value="full-content"><liferay-ui:message key="full-content" /></option>
 			<option <%= displayStyle.equals("abstracts") ? "selected" : "" %> value="abstracts"><liferay-ui:message key="abstracts" /></option>
 			<option <%= displayStyle.equals("title-list") ? "selected" : "" %> value="title-list"><liferay-ui:message key="title-list" /></option>
+			<c:if test='<%= selectionStyle.equals("view-count") %>'>
+				<option <%= displayStyle.equals("view-count-details") ? "selected" : "" %> value="view-count-details"><liferay-ui:message key="view-count-details" /></option>
+			</c:if>
 		</select>
 	</td>
 </tr>
@@ -81,6 +84,35 @@
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="showQueryLogic" defaultValue="<%= showQueryLogic %>" />
+		</td>
+	</tr>
+</c:if>
+<c:if test='<%= selectionStyle.equals("view-count") %>'>
+	<tr>
+		<td>
+			<liferay-ui:message key="maximum-items-to-display" />
+		</td>
+		<td>
+			<select name="<portlet:namespace />delta">
+				<option <%= delta == 1 ? "selected" : "" %> value="1">1</option>
+				<option <%= delta == 5 ? "selected" : "" %> value="5">5</option>
+				<option <%= delta == 10 ? "selected" : "" %> value="10">10</option>
+				<option <%= delta == 15 ? "selected" : "" %> value="15">15</option>
+				<option <%= delta == 20 ? "selected" : "" %> value="20">20</option>
+				<option <%= delta == 25 ? "selected" : "" %> value="25">25</option>
+				<option <%= delta == 50 ? "selected" : "" %> value="50">50</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="order" />
+		</td>
+		<td>
+			<select name="<portlet:namespace />order">
+				<option <%= order.equals("ASC") ? "selected" : "" %> value="ASC"><liferay-ui:message key="ascending" /></option>
+				<option <%= order.equals("DESC") ? "selected" : "" %> value="DESC"><liferay-ui:message key="descending" /></option>
+			</select>
 		</td>
 	</tr>
 </c:if>

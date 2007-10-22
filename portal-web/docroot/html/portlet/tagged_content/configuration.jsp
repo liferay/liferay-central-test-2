@@ -103,6 +103,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 		<select name="<portlet:namespace />selectionStyle" onchange="<portlet:namespace />chooseSelectionStyle();">
 			<option <%= selectionStyle.equals("dynamic") ? " selected=\"selected\"" : "" %> value="dynamic"><liferay-ui:message key="dynamic" /></option>
 			<option <%= selectionStyle.equals("manual") ? " selected=\"selected\"" : "" %> value="manual"><liferay-ui:message key="manual" /></option>
+			<option <%= selectionStyle.equals("view-count") ? " selected=\"selected\"" : "" %> value="view-count"><liferay-ui:message key="view-count" /></option>
 		</select>
 
 		<br /><br />
@@ -324,6 +325,24 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						</tr>
 						</table>
 					</liferay-ui:section>
+					<liferay-ui:section>
+						<%@ include file="/html/portlet/tagged_content/display_settings.jspf" %>
+					</liferay-ui:section>
+				</liferay-ui:tabs>
+
+				<br />
+
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+
+				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+			</c:when>
+			<c:when test='<%= selectionStyle.equals("view-count") %>'>
+				<liferay-ui:tabs
+					names="display-settings"
+					formName="fm"
+					param="tabs2"
+					refresh="<%= false %>"
+				>
 					<liferay-ui:section>
 						<%@ include file="/html/portlet/tagged_content/display_settings.jspf" %>
 					</liferay-ui:section>

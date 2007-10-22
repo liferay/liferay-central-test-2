@@ -122,14 +122,17 @@ if (Validator.isNull(displayStyle)) {
 
 String orderByColumn1 = GetterUtil.getString(prefs.getValue("order-by-column-1", "modifiedDate"));
 String orderByColumn2 = GetterUtil.getString(prefs.getValue("order-by-column-2", "title"));
-String orderByType1 = GetterUtil.getString(prefs.getValue("order-by-type-1", "desc"));
-String orderByType2 = GetterUtil.getString(prefs.getValue("order-by-type-2", "asc"));
+String orderByType1 = GetterUtil.getString(prefs.getValue("order-by-type-1", "DESC"));
+String orderByType2 = GetterUtil.getString(prefs.getValue("order-by-type-2", "ASC"));
 boolean showQueryLogic = GetterUtil.getBoolean(prefs.getValue("show-query-logic", StringPool.BLANK));
 boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));
 
 Arrays.sort(entries);
 
 String[] manualEntries = prefs.getValues("manual-entries", new String[0]);
+
+int delta = GetterUtil.getInteger(prefs.getValue("delta", "10"));
+String order = GetterUtil.getString(prefs.getValue("order", "DESC"));
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

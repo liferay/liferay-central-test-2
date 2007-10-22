@@ -76,14 +76,16 @@ if (themeDisplay.isSignedIn()) {
 entries = ArrayUtil.distinct(entries, new StringComparator());
 %>
 
-<form name="<portlet:namespace/>fm">
-
-	<%
-	String portletId = portletDisplay.getId();
-	%>
-
-	<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
-</form>
+<c:if test='<%= !selectionStyle.equals("view-count") %>'>
+	<form name="<portlet:namespace/>fm">
+	
+		<%
+		String portletId = portletDisplay.getId();
+		%>
+	
+		<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
+	</form>
+</c:if>
 
 <br />
 
@@ -145,6 +147,9 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 %>
 
 <c:choose>
+	<c:when test='<%= selectionStyle.equals("view-count") %>'>
+		<%@ include file="/html/portlet/tagged_content/view_dynamic_by_view_count.jspf" %>
+	</c:when>
 	<c:when test='<%= selectionStyle.equals("dynamic") && Validator.isNotNull(category)%>'>
 		<%@ include file="/html/portlet/tagged_content/view_dynamic_by_category.jspf" %>
 	</c:when>
