@@ -39,6 +39,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -47,7 +48,6 @@ import com.thoughtworks.xstream.XStream;
 import java.io.StringReader;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -169,7 +169,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				BookmarksEntry entry = (BookmarksEntry)itr.next();
 
 				if (context.addPrimaryKey(
-						BookmarksFolder.class, new Long(entry.getEntryId()))) {
+						BookmarksEntry.class, new Long(entry.getEntryId()))) {
 
 					itr.remove();
 				}
@@ -231,12 +231,12 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
+			Map folderPKs = CollectionFactory.getHashMap();
+
 			List folders = (List)xStream.fromXML(
 				XMLFormatter.toString(tempDoc));
 
 			Iterator itr = folders.iterator();
-
-			Map folderPKs = new HashMap();
 
 			while (itr.hasNext()) {
 				BookmarksFolder folder = (BookmarksFolder)itr.next();
@@ -299,7 +299,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		try {
 			if (folderId.longValue() !=
-				BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+					BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 
 				BookmarksFolderUtil.findByPrimaryKey(folderId.longValue());
 			}
@@ -324,8 +324,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
-				"Couldn't find the parent folder for entry " +
-					entry.getName());
+				"Could not find the parent folder for entry " +
+					entry.getEntryId());
 		}
 	}
 
@@ -345,7 +345,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		try {
 			if (parentFolderId.longValue() !=
-				BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+					BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 
 				BookmarksFolderUtil.findByPrimaryKey(
 					parentFolderId.longValue());
@@ -376,8 +376,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
-					"Couldn't find the parent folder for folder " +
-						folder.getName());
+				"Could not find the parent folder for folder " +
+					folder.getFolderId());
 		}
 	}
 
