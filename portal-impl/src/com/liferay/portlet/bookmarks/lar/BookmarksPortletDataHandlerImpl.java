@@ -286,8 +286,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 	protected void importEntry(Map folderPKs, BookmarksEntry entry)
 		throws Exception {
 
-		Long folderId = (Long)folderPKs.get(
-			new Long(entry.getFolderId()));
+		Long folderId = (Long)folderPKs.get(new Long(entry.getFolderId()));
 
 		boolean newParentFolder = false;
 
