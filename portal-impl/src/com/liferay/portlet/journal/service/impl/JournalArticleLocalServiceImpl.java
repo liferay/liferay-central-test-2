@@ -471,7 +471,7 @@ public class JournalArticleLocalServiceImpl
 				article.getTemplateId());
 
 			// Lucene
-			
+
 			try {
 				if (article.isIndexable()) {
 					Indexer.deleteArticle(
@@ -685,9 +685,9 @@ public class JournalArticleLocalServiceImpl
 		article.setExpired(true);
 
 		JournalArticleUtil.update(article);
-		
+
 		// Lucene
-		
+
 		try {
 			if (article.isIndexable()) {
 				Indexer.deleteArticle(
@@ -856,8 +856,9 @@ public class JournalArticleLocalServiceImpl
 
 		Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
-		tokens.put("article_resource_pkey",
-				String.valueOf(article.getResourcePrimKey()));
+		tokens.put(
+			"article_resource_pk",
+			String.valueOf(article.getResourcePrimKey()));
 
 		String xml = article.getContent();
 

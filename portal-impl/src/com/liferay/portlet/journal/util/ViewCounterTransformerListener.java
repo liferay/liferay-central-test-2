@@ -32,9 +32,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="TokensTransformerListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewCounterTransformerListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class ViewCounterTransformerListener extends TransformerListener {
@@ -71,29 +72,23 @@ public class ViewCounterTransformerListener extends TransformerListener {
 	 */
 	protected String replaceViewCounterToken(String s) {
 		Map tokens = getTokens();
-		
-		String articleResourcePKey = 
-			(String)tokens.get("article_resource_pkey");
-		
+
+		String articleResourcePK = (String)tokens.get("article_resource_pk");
+
 		String counterToken = StringPool.AT + "view_counter" + StringPool.AT;
-		
+
 		StringMaker sm = new StringMaker();
-		
-		sm.append("<script type=\"text/javascript\" ");
-		sm.append("src=\"/html/js/liferay/service_packed.js\"></script>");
+
 		sm.append("<script type=\"text/javascript\">");
 		sm.append("Liferay.Service.Tags.TagsAsset.incrementViewCounter");
 		sm.append("({className:'");
 		sm.append("com.liferay.portlet.journal.model.JournalArticle', ");
 		sm.append("classPK:");
-		sm.append(articleResourcePKey);
+		sm.append(articleResourcePK);
 		sm.append("});");
 		sm.append("</script>");
-		
-		s = StringUtil.replace(
-			s,
-			counterToken,
-			sm.toString());
+
+		s = StringUtil.replace(s, counterToken, sm.toString());
 
 		return s;
 	}

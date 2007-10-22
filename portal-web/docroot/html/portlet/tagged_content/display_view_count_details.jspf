@@ -116,7 +116,7 @@ if (Validator.isNotNull(asset.getUrl())) {
 	<tr <%= style %>>
 		<td>
 			<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
-	
+
 			<c:choose>
 				<c:when test="<%= Validator.isNotNull(viewURL) %>">
 					<a href="<%= viewURL %>"><%= title %></a>

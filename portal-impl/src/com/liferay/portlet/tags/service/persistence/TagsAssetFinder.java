@@ -64,7 +64,7 @@ public class TagsAssetFinder {
 
 	public static String FIND_BY_OR_ENTRY_IDS =
 		TagsAssetFinder.class.getName() + ".findByOrEntryIds";
-	
+
 	public static String FIND_BY_VIEW_COUNT =
 		TagsAssetFinder.class.getName() + ".findByViewCount";
 
@@ -435,9 +435,9 @@ public class TagsAssetFinder {
 			HibernateUtil.closeSession(session);
 		}
 	}
-	
-	public static List findByViewCount(long[] classNameId, boolean ascending, 
-			int begin, int end)
+
+	public static List findByViewCount(
+			long[] classNameId, boolean asc, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -446,27 +446,25 @@ public class TagsAssetFinder {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_VIEW_COUNT);
-			
+
 			StringMaker sm = new StringMaker();
 
 			for (int i = 0; i < classNameId.length; i++) {
 				sm.append("(TagsAsset.classNameId = ?)");
-				
+
 				if ((i+1) < classNameId.length) {
 					sm.append(" OR ");
 				}
 			}
 
 			sql = StringUtil.replace(
-					sql,
-					"(TagsAsset.classNameId = ?)",
-					sm.toString());
+				sql, "(TagsAsset.classNameId = ?)", sm.toString());
 
 			sm = new StringMaker();
-			
+
 			sm.append(" ORDER BY TagsAsset.viewCount");
-			
-			if (ascending) {
+
+			if (asc) {
 				sm.append(" ASC");
 			}
 			else {
@@ -474,7 +472,7 @@ public class TagsAssetFinder {
 			}
 
 			sql += sm.toString();
-			
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addEntity("TagsAsset", TagsAssetImpl.class);

@@ -52,6 +52,7 @@
 				<option <%= orderByColumn1.equals("priority") ? "selected" : "" %> value="priority"><liferay-ui:message key="priority" /></option>
 				<option <%= orderByColumn1.equals("viewCount") ? "selected" : "" %> value="viewCount"><liferay-ui:message key="view-count" /></option>
 			</select>
+
 			<select name="<portlet:namespace />orderByType1">
 				<option <%= orderByType1.equals("ASC") ? "selected" : "" %> value="ASC"><liferay-ui:message key="ascending" /></option>
 				<option <%= orderByType1.equals("DESC") ? "selected" : "" %> value="DESC"><liferay-ui:message key="descending" /></option>
@@ -72,6 +73,7 @@
 				<option <%= orderByColumn2.equals("priority") ? "selected" : "" %> value="priority"><liferay-ui:message key="priority" /></option>
 				<option <%= orderByColumn2.equals("viewCount") ? "selected" : "" %> value="viewCount"><liferay-ui:message key="view-count" /></option>
 			</select>
+
 			<select name="<portlet:namespace />orderByType2">
 				<option <%= orderByType2.equals("ASC") ? "selected" : "" %> value="ASC"><liferay-ui:message key="ascending" /></option>
 				<option <%= orderByType2.equals("DESC") ? "selected" : "" %> value="DESC"><liferay-ui:message key="descending" /></option>
@@ -105,6 +107,7 @@
 		</td>
 	</tr>
 </c:if>
+
 <tr>
 	<td>
 		<liferay-ui:message key="show-available-locales" />
@@ -113,6 +116,7 @@
 		<liferay-ui:input-checkbox param="showAvailableLocales" defaultValue="<%= showAvailableLocales %>" />
 	</td>
 </tr>
+
 <c:if test='<%= selectionStyle.equals("dynamic") %>'>
 	<tr>
 		<td>
@@ -123,6 +127,7 @@
 		</td>
 	</tr>
 </c:if>
+
 <tr>
 	<td>
 		<liferay-ui:message key="show-metadata" />

@@ -100,6 +100,7 @@ if (Validator.isNotNull(asset.getUrl())) {
 		<th>
 			<liferay-ui:message key="title" />
 		</th>
+
 		<%
 		for (int m = 0; m < metadataFields.length; m++) {
 		%>
@@ -109,17 +110,21 @@ if (Validator.isNotNull(asset.getUrl())) {
 		<%
 		}
 		%>
+
 		<th></th>
 	</tr>
 </c:if>
 
 <c:if test="<%= show %>">
+
 	<%
-		String style = "class=\"portlet-section-body\" onmouseover=\"this.className = 'portlet-section-body-hover';\" onmouseout=\"this.className = 'portlet-section-body';\"";
-		if (assetIndex%2 == 0) {
-			style = "class=\"portlet-section-alternate\" onmouseover=\"this.className = 'portlet-section-alternate-hover';\" onmouseout=\"this.className = 'portlet-section-alternate';\"";
-		}
+	String style = "class=\"portlet-section-body\" onmouseover=\"this.className = 'portlet-section-body-hover';\" onmouseout=\"this.className = 'portlet-section-body';\"";
+
+	if (assetIndex % 2 == 0) {
+		style = "class=\"portlet-section-alternate\" onmouseover=\"this.className = 'portlet-section-alternate-hover';\" onmouseout=\"this.className = 'portlet-section-alternate';\"";
+	}
 	%>
+
 	<tr <%= style %>>
 		<td>
 			<c:choose>
@@ -131,6 +136,7 @@ if (Validator.isNotNull(asset.getUrl())) {
 				</c:otherwise>
 			</c:choose>
 		</td>
+
 		<%
 		for (int m = 0; m < metadataFields.length; m++) {
 			String value = null;
@@ -158,24 +164,27 @@ if (Validator.isNotNull(asset.getUrl())) {
 				}
 			}
 			else if (metadataFields[m].equals("priority")) {
-				value = Double.toString(asset.getPriority());
+				value = String.valueOf(asset.getPriority());
 			}
 			else if (metadataFields[m].equals("author")) {
 				value = asset.getUserName();
 			}
 			else if (metadataFields[m].equals("view-count")) {
-				value = Integer.toString(asset.getViewCount());
+				value = String.valueOf(asset.getViewCount());
 			}
 
 			if (value != null) {
 		%>
+
 				<td>
 					<liferay-ui:message key="<%= value %>" />
 				</td>
+
 		<%
 			}
 		}
 		%>
+
 		<td></td>
 	</tr>
 </c:if>

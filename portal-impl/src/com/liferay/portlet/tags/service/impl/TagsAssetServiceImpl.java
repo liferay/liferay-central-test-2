@@ -75,10 +75,10 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 	public int getCompanyAssetsCount(long companyId) throws SystemException {
 		return TagsAssetLocalServiceUtil.getCompanyAssetsCount(companyId);
 	}
-	
-	public TagsAsset incrementViewCounter(String className, long classPK) 
+
+	public TagsAsset incrementViewCounter(String className, long classPK)
 		throws PortalException, SystemException {
-		
+
 		return TagsAssetLocalServiceUtil.incrementViewCounter(
 			className, classPK);
 	}

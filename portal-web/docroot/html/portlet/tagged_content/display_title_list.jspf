@@ -110,6 +110,7 @@ if (Validator.isNotNull(asset.getUrl())) {
 				<%= title %>
 			</c:otherwise>
 		</c:choose>
+
 		<span class="portlet-journal-metadata">
 			<%@ include file="/html/portlet/tagged_content/asset_metadata.jspf" %>
 		</span>

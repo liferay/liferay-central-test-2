@@ -218,50 +218,47 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	public int getCompanyAssetsCount(long companyId) throws SystemException {
 		return TagsAssetUtil.countByCompanyId(companyId);
 	}
-	
-	public List getTopViewCount(String className, boolean ascending, int delta) 
+
+	public List getTopViewedAssets(
+			String className, boolean asc, int begin, int end)
 		throws SystemException {
-		
-		long classNameId = PortalUtil.getClassNameId(className);
-		
-		return TagsAssetFinder.findByViewCount(
-			new long[]{classNameId}, ascending, 0, delta);
+
+		return getTopViewedAssets(new String[] {className}, asc, begin, end);
 	}
 
-	public List getTopViewCount(String[] className, boolean ascending,
-			int delta) 
+	public List getTopViewedAssets(
+			String[] className, boolean asc, int begin, int end)
 		throws SystemException {
-		
+
 		long[] classNameIds = new long[className.length];
-		
+
 		for (int i = 0; i < className.length; i++) {
 			classNameIds[i] = PortalUtil.getClassNameId(className[i]);
 		}
-		
-		return TagsAssetFinder.findByViewCount(
-			classNameIds, ascending, 0, delta);
+
+		return TagsAssetFinder.findByViewCount(classNameIds, asc, begin, end);
 	}
-	
+
 	public TagsAsset incrementViewCounter(String className, long classPK)
 		throws PortalException, SystemException {
-	
+
 		if (classPK <= 0) {
 			return null;
 		}
-		
+
 		long classNameId = PortalUtil.getClassNameId(className);
-		
+
 		TagsAsset asset = TagsAssetUtil.fetchByC_C(classNameId, classPK);
-		
+
 		if (asset != null) {
 			asset.setViewCount(asset.getViewCount() + 1);
-			
+
 			TagsAssetUtil.update(asset);
 		}
-		
+
 		return asset;
 	}
-	
+
 	public Hits search(long companyId, String portletId, String keywords)
 		throws SystemException {
 
@@ -448,7 +445,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		return asset;
 	}
-	
+
 	public void validate(String className, String[] entryNames)
 		throws PortalException {
 

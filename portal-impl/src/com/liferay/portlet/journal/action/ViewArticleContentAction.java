@@ -129,7 +129,7 @@ public class ViewArticleContentAction extends Action {
 
 				Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
-				tokens.put("article_resource_pkey", "-1");
+				tokens.put("article_resource_pk", "-1");
 
 				JournalArticle article = new JournalArticleImpl();
 

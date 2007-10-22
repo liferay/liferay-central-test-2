@@ -176,12 +176,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("selection-style", selectionStyle);
 
 		if (selectionStyle.equals("manual") ||
-				selectionStyle.equals("view-count")) {
+			selectionStyle.equals("view-count")) {
+
 			prefs.setValue("show-query-logic", String.valueOf(false));
 		}
-		
+
 		if (!selectionStyle.equals("view-count") &&
-				displayStyle.equals("view-count-details")) {
+			displayStyle.equals("view-count-details")) {
+
 			prefs.setValue("display-style", "full-content");
 		}
 	}
