@@ -33,18 +33,25 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.SAXReaderFactory;
+import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
+import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
+import java.io.File;
 import java.io.StringReader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -161,11 +168,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
-					Image smallImage = ImageUtil.fetchByPrimaryKey(
-						igImage.getSmallImageId());
-
-					images.add(smallImage);
-
 					Image largeImage = ImageUtil.fetchByPrimaryKey(
 						igImage.getLargeImageId());
 
@@ -255,12 +257,33 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			Iterator itr = folders.iterator();
 
+			Map folderPKs = new HashMap();
+
 			while (itr.hasNext()) {
 				IGFolder folder = (IGFolder)itr.next();
 
-				folder.setGroupId(context.getGroupId());
+				importFolder(context, folderPKs, folder);
+			}
 
-				IGFolderUtil.update(folder, true);
+			// Images
+
+			el = root.element("images").element("list");
+
+			tempDoc = DocumentHelper.createDocument();
+
+			tempDoc.content().add(el.createCopy());
+
+			List images = (List)xStream.fromXML(
+				XMLFormatter.toString(tempDoc));
+
+			itr = images.iterator();
+
+			Map imagesPKs = new HashMap();
+
+			while (itr.hasNext()) {
+				Image image = (Image)itr.next();
+
+				imagesPKs.put(image.getPrimaryKeyObj(), image);
 			}
 
 			// IGImages
@@ -279,26 +302,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				IGImage igImage = (IGImage)itr.next();
 
-				IGImageUtil.update(igImage, true);
-			}
-
-			// Images
-
-			el = root.element("images").element("list");
-
-			tempDoc = DocumentHelper.createDocument();
-
-			tempDoc.content().add(el.createCopy());
-
-			List images = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
-
-			itr = images.iterator();
-
-			while (itr.hasNext()) {
-				Image image = (Image)itr.next();
-
-				ImageUtil.update(image, true);
+				importIGImage(folderPKs, imagesPKs, igImage);
 			}
 
 			// No special modification to the incoming portlet preferences
@@ -319,6 +323,118 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		sm.append(key);
 
 		return sm.toString();
+	}
+
+	protected void importFolder(
+			PortletDataContext context, Map folderPKs, IGFolder folder)
+		throws Exception {
+
+		IGFolder existingFolder = IGFolderUtil.fetchByPrimaryKey(
+			folder.getPrimaryKey());
+
+		Long parentFolderId = (Long)folderPKs.get(
+			new Long(folder.getParentFolderId()));
+
+		if (parentFolderId == null) {
+			parentFolderId = new Long(folder.getParentFolderId());
+		}
+
+		try {
+			if (parentFolderId.longValue() !=
+				IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+
+				IGFolderUtil.findByPrimaryKey(parentFolderId.longValue());
+			}
+
+			if ((existingFolder == null) ||
+				(existingFolder.getGroupId() != context.getGroupId())) {
+
+				long plid = context.getPlid();
+
+				boolean addCommunityPermissions = true;
+				boolean addGuestPermissions = true;
+
+				IGFolder newFolder =
+					IGFolderLocalServiceUtil.addFolder(
+						folder.getUserId(), plid, parentFolderId.longValue(),
+						folder.getName(), folder.getDescription(),
+						addCommunityPermissions, addGuestPermissions);
+
+				folderPKs.put(
+					folder.getPrimaryKeyObj(), newFolder.getPrimaryKeyObj());
+			}
+			else {
+				folder.setParentFolderId(parentFolderId.longValue());
+
+				IGFolderUtil.update(folder, true);
+			}
+		}
+		catch (NoSuchFolderException nsfe) {
+			_log.error(
+					"Couldn't find the parent folder for folder " +
+						folder.getName());
+		}
+	}
+
+	protected void importIGImage(
+			Map folderPKs, Map images, IGImage igImage)
+		throws Exception {
+
+		Long folderId = (Long)folderPKs.get(new Long(igImage.getFolderId()));
+
+		boolean newParentFolder = false;
+
+		if (folderId == null) {
+			folderId = new Long(igImage.getFolderId());
+		}
+		else {
+			newParentFolder = true;
+		}
+
+		try {
+			if (folderId.longValue() !=
+				IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+
+				IGFolderUtil.findByPrimaryKey(folderId.longValue());
+			}
+
+			if ((IGImageUtil.fetchByPrimaryKey(
+					igImage.getPrimaryKey()) == null) ||
+				newParentFolder) {
+
+				Image image =
+					(Image)images.get(new Long(igImage.getLargeImageId()));
+
+				if (image != null) {
+					File file = new File(
+						igImage.getDescription() + "." + image.getType());
+					FileUtil.write(file, image.getTextObj());
+
+					boolean addCommunityPermissions = true;
+					boolean addGuestPermissions = true;
+
+					IGImageLocalServiceUtil.addImage(
+						igImage.getUserId(), folderId.longValue(),
+						igImage.getDescription(), file, image.getType(), null,
+						addCommunityPermissions, addGuestPermissions);
+				}
+				else {
+					_log.error(
+						"Couldn't find Image for IGImage " +
+							igImage.getDescription());
+				}
+			}
+			else {
+				igImage.setFolderId(folderId.longValue());
+
+				IGImageUtil.update(igImage, true);
+			}
+		}
+		catch (NoSuchFolderException nsfe) {
+			_log.error(
+				"Couldn't find the parent folder for IGImage " +
+					igImage.getDescription());
+		}
 	}
 
 	private static final String _EXPORT_IG_DATA =
