@@ -27,7 +27,7 @@
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
-<liferay-ui:message key="please-select-the-article-type-that-you-would-like-to-limit-the-search-to" />
+<liferay-ui:message key="define-the-behavior-of-this-search" />
 
 <br /><br />
 
@@ -50,6 +50,36 @@
 			}
 			%>
 
+		</select>
+	</td>
+</tr>
+<tr>
+	<td colspan="2"><br /></td>
+</tr>
+<tr>
+	<td colspan="2">
+		<input type="checkbox" name="<portlet:namespace />showListed" <%= onlyShowListed?"checked":"" %> onchange="if(this.checked){document.<portlet:namespace />fm.<portlet:namespace />targetPortletId.disabled = true;document.<portlet:namespace />fm.<portlet:namespace />scope.disabled = true;}else {document.<portlet:namespace />fm.<portlet:namespace />targetPortletId.disabled = false;document.<portlet:namespace />fm.<portlet:namespace />scope.disabled = false;}" /> <liferay-ui:message key="only-show-listed" />
+	</td>
+</tr>
+<tr>
+	<td colspan="2"><br /></td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="target-portlet-id" />
+	</td>
+	<td>
+		<input type="text" name="<portlet:namespace />targetPortletId" <%= onlyShowListed?"disabled":"" %> value="<%= targetPortletId %>" size="20" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="search-scope" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />scope" <%= onlyShowListed?"disabled":"" %>>
+			<option <%= scope == ContentHits.COMMUNITY_SCOPE ?"selected":"" %> value="<%= ContentHits.COMMUNITY_SCOPE %>"><liferay-ui:message key="community" /></option>
+			<option <%= scope == ContentHits.ENTERPRISE_SCOPE ?"selected":"" %> value="<%= ContentHits.ENTERPRISE_SCOPE %>"><liferay-ui:message key="enterprise" /></option>
 		</select>
 	</td>
 </tr>
