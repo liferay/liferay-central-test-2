@@ -138,6 +138,12 @@ public interface TagsAssetLocalService {
 	public int getCompanyAssetsCount(long companyId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getTopViewCount(java.lang.String className,
+		boolean ascending, int delta) throws com.liferay.portal.SystemException;
+
+	public java.util.List getTopViewCount(java.lang.String[] className,
+		boolean ascending, int delta) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, 

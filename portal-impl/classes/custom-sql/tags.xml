@@ -53,6 +53,19 @@
 				([$ENTRY_ID$]) [$NOT_ENTRY_ID$] [$DATES$]
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.findByViewCount">
+		<![CDATA[
+			SELECT
+				DISTINCT {TagsAsset.*}
+			FROM
+				TagsAsset
+			WHERE
+				(TagsAsset.viewCount > 0) AND
+				(
+					(TagsAsset.classNameId = ?)
+				)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByC_N_P">
 		<![CDATA[
 			SELECT

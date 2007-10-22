@@ -239,6 +239,20 @@ public class TagsAssetLocalServiceUtil {
 		return tagsAssetLocalService.getCompanyAssetsCount(companyId);
 	}
 
+	public static java.util.List getTopViewCount(java.lang.String className,
+		boolean ascending, int delta) throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getTopViewCount(className, ascending, delta);
+	}
+
+	public static java.util.List getTopViewCount(java.lang.String[] className,
+		boolean ascending, int delta) throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getTopViewCount(className, ascending, delta);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException, 

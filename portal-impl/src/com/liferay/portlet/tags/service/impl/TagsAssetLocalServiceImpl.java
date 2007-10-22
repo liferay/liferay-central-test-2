@@ -218,7 +218,30 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	public int getCompanyAssetsCount(long companyId) throws SystemException {
 		return TagsAssetUtil.countByCompanyId(companyId);
 	}
+	
+	public List getTopViewCount(String className, boolean ascending, int delta) 
+		throws SystemException {
+		
+		long classNameId = PortalUtil.getClassNameId(className);
+		
+		return TagsAssetFinder.findByViewCount(
+			new long[]{classNameId}, ascending, 0, delta);
+	}
 
+	public List getTopViewCount(String[] className, boolean ascending,
+			int delta) 
+		throws SystemException {
+		
+		long[] classNameIds = new long[className.length];
+		
+		for (int i = 0; i < className.length; i++) {
+			classNameIds[i] = PortalUtil.getClassNameId(className[i]);
+		}
+		
+		return TagsAssetFinder.findByViewCount(
+			classNameIds, ascending, 0, delta);
+	}
+	
 	public TagsAsset incrementViewCounter(String className, long classPK)
 		throws PortalException, SystemException {
 	

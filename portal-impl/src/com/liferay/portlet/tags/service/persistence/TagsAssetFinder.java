@@ -64,6 +64,9 @@ public class TagsAssetFinder {
 
 	public static String FIND_BY_OR_ENTRY_IDS =
 		TagsAssetFinder.class.getName() + ".findByOrEntryIds";
+	
+	public static String FIND_BY_VIEW_COUNT =
+		TagsAssetFinder.class.getName() + ".findByViewCount";
 
 	public static String[] ORDER_BY_COLUMNS = new String[] {
 		"title", "createDate", "modifiedDate", "publishDate", "expirationDate",
@@ -422,6 +425,65 @@ public class TagsAssetFinder {
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
 			_setDates(qPos, publishDate, expirationDate);
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+	
+	public static List findByViewCount(long[] classNameId, boolean ascending, 
+			int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_VIEW_COUNT);
+			
+			StringMaker sm = new StringMaker();
+
+			for (int i = 0; i < classNameId.length; i++) {
+				sm.append("(TagsAsset.classNameId = ?)");
+				
+				if ((i+1) < classNameId.length) {
+					sm.append(" OR ");
+				}
+			}
+
+			sql = StringUtil.replace(
+					sql,
+					"(TagsAsset.classNameId = ?)",
+					sm.toString());
+
+			sm = new StringMaker();
+			
+			sm.append(" ORDER BY TagsAsset.viewCount");
+			
+			if (ascending) {
+				sm.append(" ASC");
+			}
+			else {
+				sm.append(" DESC");
+			}
+
+			sql += sm.toString();
+			
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("TagsAsset", TagsAssetImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			for (int i = 0; i < classNameId.length; i++) {
+				qPos.add(classNameId[i]);
+			}
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
