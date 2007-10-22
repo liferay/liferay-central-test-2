@@ -24,9 +24,6 @@ package com.liferay.portlet.journalcontentsearch.util;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.Time;
 import com.liferay.util.lucene.HitsImpl;
@@ -38,20 +35,12 @@ import java.util.List;
  * <a href="ContentHits.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- * @author Raymond Augé
  *
  */
 public class ContentHits extends HitsImpl {
 
-	public static final int COMMUNITY_SCOPE = 0;
-	
-	public static final int ENTERPRISE_SCOPE = 1;	
-	
 	public ContentHits() {
 		super();
-		
-		_showListed = true;
-		_scope = COMMUNITY_SCOPE;
 	}
 
 	public void recordHits(Hits hits, long groupId, boolean privateLayout)
@@ -68,23 +57,10 @@ public class ContentHits extends HitsImpl {
 			Document doc = hits.doc(i);
 
 			String articleId = doc.get("articleId");
-			long articleGroupId = GetterUtil.getLong(doc.get(
-					LuceneFields.GROUP_ID));
 
-			if (isShowListed()) {
-				if (JournalContentSearchLocalServiceUtil.getLayoutIdsCount(
+			if (JournalContentSearchLocalServiceUtil.getLayoutIdsCount(
 					groupId, privateLayout, articleId) > 0) {
-			
-					docs.add(hits.doc(i));
-					scores.add(new Float(hits.score(i)));
-				}
-			}
-			else if (getScope() == ENTERPRISE_SCOPE) {
-				docs.add(hits.doc(i));
-				scores.add(new Float(hits.score(i)));
-			}
-			else if (getScope() == COMMUNITY_SCOPE && 
-					articleGroupId == groupId) {
+
 				docs.add(hits.doc(i));
 				scores.add(new Float(hits.score(i)));
 			}
@@ -97,26 +73,5 @@ public class ContentHits extends HitsImpl {
 		setSearchTime(
 			(float)(System.currentTimeMillis() - getStart()) / Time.SECOND);
 	}
-
-	public boolean isShowListed() {
-		return _showListed;
-	}
-	
-	public void setShowListed(boolean showListed) {
-		_showListed = showListed;
-	}
-	
-	public int getScope() {
-		return _scope;
-	}
-	
-	public void setScope(int scope) {
-		if (scope == COMMUNITY_SCOPE || scope == ENTERPRISE_SCOPE) {
-			_scope = scope;
-		}
-	}
-	
-	private boolean _showListed;
-	private int _scope;
 
 }

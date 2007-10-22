@@ -470,19 +470,6 @@ public class JournalArticleLocalServiceImpl
 				article.getGroupId(), article.getArticleId(),
 				article.getTemplateId());
 
-			// Lucene
-
-			try {
-				if (article.isIndexable()) {
-					Indexer.deleteArticle(
-							article.getCompanyId(),
-							article.getArticleId());
-				}
-			}
-			catch (IOException ioe) {
-				_log.error("Remove Indexing of " + article.getPrimaryKey(), ioe);
-			}
-
 			companies.add(new Long(article.getCompanyId()));
 		}
 
@@ -568,7 +555,7 @@ public class JournalArticleLocalServiceImpl
 		// Lucene
 
 		try {
-			if (article.isApproved() && article.isIndexable()) {
+			if (article.isApproved()) {
 				Indexer.deleteArticle(
 					article.getCompanyId(), article.getArticleId());
 			}
@@ -685,19 +672,6 @@ public class JournalArticleLocalServiceImpl
 		article.setExpired(true);
 
 		JournalArticleUtil.update(article);
-
-		// Lucene
-
-		try {
-			if (article.isIndexable()) {
-				Indexer.deleteArticle(
-						article.getCompanyId(),
-						article.getArticleId());
-			}
-		}
-		catch (IOException ioe) {
-			_log.error("Remove Indexing of " + article.getPrimaryKey(), ioe);
-		}
 	}
 
 	public JournalArticle getArticle(long id)
@@ -842,12 +816,6 @@ public class JournalArticleLocalServiceImpl
 			if ((expirationDate != null) && expirationDate.before(new Date())) {
 				return null;
 			}
-		}
-
-		Date now = new Date();
-
-		if (article.getDisplayDate().after(now)) {
-			return null;
 		}
 
 		/*if (!article.isTemplateDriven()) {
@@ -1467,20 +1435,13 @@ public class JournalArticleLocalServiceImpl
 		// Lucene
 
 		try {
-			if (article.isIndexable()) {
-				if (article.isApproved()) {
-					Indexer.updateArticle(
-						article.getCompanyId(), article.getGroupId(),
-						article.getArticleId(), article.getVersion(),
-						article.getTitle(), article.getDescription(),
-						article.getContent(), article.getType(),
-						article.getDisplayDate());
-				}
-				else {
-					Indexer.deleteArticle(
-							article.getCompanyId(),
-							article.getArticleId());
-				}
+			if (article.isApproved() && article.isIndexable()) {
+				Indexer.updateArticle(
+					article.getCompanyId(), article.getGroupId(),
+					article.getArticleId(), article.getVersion(),
+					article.getTitle(), article.getDescription(),
+					article.getContent(), article.getType(),
+					article.getDisplayDate());
 			}
 		}
 		catch (IOException ioe) {

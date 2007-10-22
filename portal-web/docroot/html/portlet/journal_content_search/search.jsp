@@ -59,9 +59,6 @@
 			hits = CompanyLocalServiceUtil.search(company.getCompanyId(), PortletKeys.JOURNAL, 0, type, keywords);
 
 			ContentHits contentHits = new ContentHits();
-			
-			contentHits.setShowListed(onlyShowListed);
-			contentHits.setScope(scope);
 
 			contentHits.recordHits(hits, layout.getGroupId(), layout.isPrivateLayout());
 
