@@ -260,50 +260,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BookmarksEntry entry = (BookmarksEntry)itr.next();
 
-				Long folderId = (Long)folderPKs.get(
-					new Long(entry.getFolderId()));
-
-				boolean newParentFolder = false;
-
-				if (folderId == null) {
-					folderId = new Long(entry.getFolderId());
-				}
-				else {
-					newParentFolder = true;
-				}
-
-				try {
-					if (folderId.longValue() !=
-						BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-
-						BookmarksFolderUtil.findByPrimaryKey(
-							folderId.longValue());
-					}
-
-					if ((BookmarksEntryUtil.fetchByPrimaryKey(
-							entry.getPrimaryKey()) == null) ||
-						newParentFolder) {
-
-						boolean addCommunityPermissions = true;
-						boolean addGuestPermissions = true;
-
-						BookmarksEntryLocalServiceUtil.addEntry(
-							entry.getUserId(), folderId.longValue(),
-							entry.getName(), entry.getUrl(),
-							entry.getComments(), new String[0],
-							addCommunityPermissions, addGuestPermissions);
-					}
-					else {
-						entry.setFolderId(folderId.longValue());
-
-						BookmarksEntryUtil.update(entry, true);
-					}
-				}
-				catch (NoSuchFolderException nsfe) {
-					_log.error(
-						"Couldn't find the parent folder for entry " +
-							entry.getName());
-				}
+				importEntry(folderPKs, entry);
 			}
 
 			// No special modification to the incoming portlet preferences
@@ -324,6 +281,53 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		sm.append(key);
 
 		return sm.toString();
+	}
+
+	protected void importEntry(Map folderPKs, BookmarksEntry entry)
+		throws Exception {
+
+		Long folderId = (Long)folderPKs.get(
+			new Long(entry.getFolderId()));
+
+		boolean newParentFolder = false;
+
+		if (folderId == null) {
+			folderId = new Long(entry.getFolderId());
+		}
+		else {
+			newParentFolder = true;
+		}
+
+		try {
+			if (folderId.longValue() !=
+				BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+
+				BookmarksFolderUtil.findByPrimaryKey(folderId.longValue());
+			}
+
+			if ((BookmarksEntryUtil.fetchByPrimaryKey(
+					entry.getPrimaryKey()) == null) ||
+				newParentFolder) {
+
+				boolean addCommunityPermissions = true;
+				boolean addGuestPermissions = true;
+
+				BookmarksEntryLocalServiceUtil.addEntry(
+					entry.getUserId(), folderId.longValue(), entry.getName(),
+					entry.getUrl(), entry.getComments(), new String[0],
+					addCommunityPermissions, addGuestPermissions);
+			}
+			else {
+				entry.setFolderId(folderId.longValue());
+
+				BookmarksEntryUtil.update(entry, true);
+			}
+		}
+		catch (NoSuchFolderException nsfe) {
+			_log.error(
+				"Couldn't find the parent folder for entry " +
+					entry.getName());
+		}
 	}
 
 	protected void importFolder(
