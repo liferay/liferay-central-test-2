@@ -466,6 +466,16 @@ public class JournalArticleLocalServiceImpl
 
 			JournalArticleUtil.update(article);
 
+			try {
+				if (article.isIndexable()) {
+					Indexer.deleteArticle(
+						article.getCompanyId(), article.getArticleId());
+				}
+			}
+			catch (IOException ioe) {
+				_log.error("Removing index " + article.getId(), ioe);
+			}
+
 			JournalContentUtil.clearCache(
 				article.getGroupId(), article.getArticleId(),
 				article.getTemplateId());
@@ -555,7 +565,7 @@ public class JournalArticleLocalServiceImpl
 		// Lucene
 
 		try {
-			if (article.isApproved()) {
+			if (article.isApproved() && article.isIndexable()) {
 				Indexer.deleteArticle(
 					article.getCompanyId(), article.getArticleId());
 			}
@@ -672,6 +682,18 @@ public class JournalArticleLocalServiceImpl
 		article.setExpired(true);
 
 		JournalArticleUtil.update(article);
+
+		// Lucene
+
+		try {
+			if (article.isIndexable()) {
+				Indexer.deleteArticle(
+					article.getCompanyId(), article.getArticleId());
+			}
+		}
+		catch (IOException ioe) {
+			_log.error("Removing index " + article.getId(), ioe);
+		}
 	}
 
 	public JournalArticle getArticle(long id)
@@ -807,15 +829,21 @@ public class JournalArticleLocalServiceImpl
 
 		String content = null;
 
+		Date now = new Date();
+
 		JournalArticle article = JournalArticleUtil.findByG_A_V(
 			groupId, articleId, version);
 
 		if (article.isExpired()) {
 			Date expirationDate = article.getExpirationDate();
 
-			if ((expirationDate != null) && expirationDate.before(new Date())) {
+			if ((expirationDate != null) && expirationDate.before(now)) {
 				return null;
 			}
+		}
+
+		if (article.getDisplayDate().after(now)) {
+			return null;
 		}
 
 		/*if (!article.isTemplateDriven()) {
@@ -823,10 +851,6 @@ public class JournalArticleLocalServiceImpl
 		}*/
 
 		Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
-
-		tokens.put(
-			"article_resource_pk",
-			String.valueOf(article.getResourcePrimKey()));
 
 		String xml = article.getContent();
 
@@ -1435,13 +1459,19 @@ public class JournalArticleLocalServiceImpl
 		// Lucene
 
 		try {
-			if (article.isApproved() && article.isIndexable()) {
-				Indexer.updateArticle(
-					article.getCompanyId(), article.getGroupId(),
-					article.getArticleId(), article.getVersion(),
-					article.getTitle(), article.getDescription(),
-					article.getContent(), article.getType(),
-					article.getDisplayDate());
+			if (article.isIndexable()) {
+				if (article.isApproved()) {
+					Indexer.updateArticle(
+						article.getCompanyId(), article.getGroupId(),
+						article.getArticleId(), article.getVersion(),
+						article.getTitle(), article.getDescription(),
+						article.getContent(), article.getType(),
+						article.getDisplayDate());
+				}
+				else {
+					Indexer.deleteArticle(
+						article.getCompanyId(), article.getArticleId());
+				}
 			}
 		}
 		catch (IOException ioe) {
