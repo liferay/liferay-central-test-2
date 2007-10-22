@@ -41,6 +41,7 @@ import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
@@ -51,7 +52,6 @@ import java.io.File;
 import java.io.StringReader;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -252,12 +252,12 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
+			Map folderPKs = CollectionFactory.getHashMap();
+
 			List folders = (List)xStream.fromXML(
 				XMLFormatter.toString(tempDoc));
 
 			Iterator itr = folders.iterator();
-
-			Map folderPKs = new HashMap();
 
 			while (itr.hasNext()) {
 				IGFolder folder = (IGFolder)itr.next();
@@ -273,12 +273,12 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
+			Map imagesPKs = CollectionFactory.getHashMap();
+
 			List images = (List)xStream.fromXML(
 				XMLFormatter.toString(tempDoc));
 
 			itr = images.iterator();
-
-			Map imagesPKs = new HashMap();
 
 			while (itr.hasNext()) {
 				Image image = (Image)itr.next();
@@ -341,7 +341,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 		try {
 			if (parentFolderId.longValue() !=
-				IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+					IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 
 				IGFolderUtil.findByPrimaryKey(parentFolderId.longValue());
 			}
@@ -371,13 +371,13 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
-					"Couldn't find the parent folder for folder " +
-						folder.getName());
+				"Could not find the parent folder for folder " +
+					folder.getFolderId());
 		}
 	}
 
 	protected void importIGImage(
-			Map folderPKs, Map images, IGImage igImage)
+			Map folderPKs, Map imagesPKs, IGImage igImage)
 		throws Exception {
 
 		Long folderId = (Long)folderPKs.get(new Long(igImage.getFolderId()));
@@ -392,9 +392,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		try {
-			if (folderId.longValue() !=
-				IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-
+			if (folderId.longValue() != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 				IGFolderUtil.findByPrimaryKey(folderId.longValue());
 			}
 
@@ -402,12 +400,13 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 					igImage.getPrimaryKey()) == null) ||
 				newParentFolder) {
 
-				Image image =
-					(Image)images.get(new Long(igImage.getLargeImageId()));
+				Image image = (Image)imagesPKs.get(
+					new Long(igImage.getLargeImageId()));
 
 				if (image != null) {
 					File file = new File(
 						igImage.getDescription() + "." + image.getType());
+
 					FileUtil.write(file, image.getTextObj());
 
 					boolean addCommunityPermissions = true;
@@ -420,8 +419,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				}
 				else {
 					_log.error(
-						"Couldn't find Image for IGImage " +
-							igImage.getDescription());
+						"Could not find image for IG image " +
+							igImage.getImageId());
 				}
 			}
 			else {
@@ -432,8 +431,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
-				"Couldn't find the parent folder for IGImage " +
-					igImage.getDescription());
+				"Could not find the parent folder for IG image " +
+					igImage.getImageId());
 		}
 	}
 
