@@ -20,7 +20,8 @@ create table MembershipRequest (
 );
 
 alter table TagsAsset add priority DOUBLE;
+alter table TagsAsset add viewCount INTEGER;
 
 COMMIT_TRANSACTION;
 
-update TagsAsset set priority = 0;
+update TagsAsset set priority = 0, viewCount = 0;
