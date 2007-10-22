@@ -123,6 +123,10 @@ if (Validator.isNotNull(asset.getUrl())) {
 			</c:otherwise>
 		</c:choose>
 
+		<div class="portlet-journal-metadata">
+			<%@ include file="/html/portlet/tagged_content/asset_metadata.jspf" %>
+		</div>
+
 		<p class="portlet-journal-summary">
 			<%= summary %>
 		</p>

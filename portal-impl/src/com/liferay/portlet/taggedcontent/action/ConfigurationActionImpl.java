@@ -83,9 +83,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			else if (selectionStyle.equals("manual")) {
 				updateManualSettings(req, prefs);
 			}
-			else if (selectionStyle.equals("view-count")) {
-				updateViewCountSettings(req, prefs);
-			}
 		}
 
 		if (SessionErrors.isEmpty(req)) {
@@ -206,8 +203,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String orderByType1 = ParamUtil.getString(req, "orderByType1");
 		String orderByType2 = ParamUtil.getString(req, "orderByType2");
 		boolean showQueryLogic = ParamUtil.getBoolean(req, "showQueryLogic");
+		int delta = ParamUtil.getInteger(req, "delta");
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			req, "showAvailableLocales");
+		String medatadaFields = ParamUtil.getString(req, "metadataFields");
 
 		prefs.setValues("entries", entries);
 		prefs.setValues("not-entries", notEntries);
@@ -220,8 +219,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("order-by-type-1", orderByType1);
 		prefs.setValue("order-by-type-2", orderByType2);
 		prefs.setValue("show-query-logic", String.valueOf(showQueryLogic));
+		prefs.setValue("delta", String.valueOf(delta));
 		prefs.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
+		prefs.setValue("metadata-fields", medatadaFields);
 	}
 
 	protected void updateManualSettings(
@@ -233,23 +234,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			req, "showAvailableLocales");
 
 		prefs.setValue("display-style", displayStyle);
-		prefs.setValue(
-			"show-available-locales", String.valueOf(showAvailableLocales));
-	}
-
-	protected void updateViewCountSettings(
-			ActionRequest req, PortletPreferences prefs)
-		throws Exception {
-
-		int delta = ParamUtil.getInteger(req, "delta");
-		String displayStyle = ParamUtil.getString(req, "displayStyle");
-		String order = ParamUtil.getString(req, "order");
-		boolean showAvailableLocales = ParamUtil.getBoolean(
-			req, "showAvailableLocales");
-
-		prefs.setValue("delta", String.valueOf(delta));
-		prefs.setValue("display-style", displayStyle);
-		prefs.setValue("order", order);
 		prefs.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
 	}

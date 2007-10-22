@@ -124,15 +124,18 @@ String orderByColumn1 = GetterUtil.getString(prefs.getValue("order-by-column-1",
 String orderByColumn2 = GetterUtil.getString(prefs.getValue("order-by-column-2", "title"));
 String orderByType1 = GetterUtil.getString(prefs.getValue("order-by-type-1", "DESC"));
 String orderByType2 = GetterUtil.getString(prefs.getValue("order-by-type-2", "ASC"));
+int delta = GetterUtil.getInteger(prefs.getValue("delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 boolean showQueryLogic = GetterUtil.getBoolean(prefs.getValue("show-query-logic", StringPool.BLANK));
 boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));
+
+String defaultMetadataFields = "";
+String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count";
+
+String[] metadataFields = StringUtil.split(PrefsParamUtil.getString(prefs, request, "metadata-fields", defaultMetadataFields));
 
 Arrays.sort(entries);
 
 String[] manualEntries = prefs.getValues("manual-entries", new String[0]);
-
-int delta = GetterUtil.getInteger(prefs.getValue("delta", "10"));
-String order = GetterUtil.getString(prefs.getValue("order", "DESC"));
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

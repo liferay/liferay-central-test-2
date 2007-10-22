@@ -148,6 +148,9 @@
 </c:choose>
 
 <c:if test="<%= show %>">
+	<div class="portlet-journal-metadata">
+		<%@ include file="/html/portlet/tagged_content/asset_metadata.jspf" %>
+	</div>
 	<div>
 		<br />
 

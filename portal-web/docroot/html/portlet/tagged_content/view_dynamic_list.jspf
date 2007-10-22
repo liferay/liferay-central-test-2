@@ -7,7 +7,8 @@ Date now = new Date();
 int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, notEntryIds, andOperator, now, now);
 
 searchContainer.setTotal(total);
-
+searchContainer.setDelta(delta);
+	
 List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
@@ -41,6 +42,9 @@ for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 			</c:when>
 			<c:when test='<%= displayStyle.equals("title-list") %>'>
 				<%@ include file="/html/portlet/tagged_content/display_title_list.jspf" %>
+			</c:when>
+			<c:when test='<%= displayStyle.equals("table") %>'>
+				<%@ include file="/html/portlet/tagged_content/display_table.jspf" %>
 			</c:when>
 			<c:otherwise>
 				<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>

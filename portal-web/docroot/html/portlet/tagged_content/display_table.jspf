@@ -95,27 +95,91 @@ if (Validator.isNotNull(asset.getUrl())) {
 %>
 
 <c:if test="<%= assetIndex == 0 %>">
-	<ul>
+	<table class="taglib-search-iterator">
+	<tr class="portlet-section-header">
+		<th>
+			<liferay-ui:message key="title" />
+		</th>
+		<%
+		for (int i = 0; i < metadataFields.length; i++) {
+		%>
+			<th>
+				<liferay-ui:message key="<%= metadataFields[i] %>" />
+			</th>
+		<%
+		}
+		%>
+		<th></th>
+	</tr>
 </c:if>
 
 <c:if test="<%= show %>">
-	<li>
-		<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
+	<%
+		String style = "class=\"portlet-section-body\" onmouseover=\"this.className = 'portlet-section-body-hover';\" onmouseout=\"this.className = 'portlet-section-body';\"";
+		if (assetIndex%2 == 0) {
+			style = "class=\"portlet-section-alternate\" onmouseover=\"this.className = 'portlet-section-alternate-hover';\" onmouseout=\"this.className = 'portlet-section-alternate';\"";
+		}
+	%>
+	<tr <%= style %>>
+		<td>
+			<c:choose>
+				<c:when test="<%= Validator.isNotNull(viewURL) %>">
+					<a href="<%= viewURL %>"><%= title %></a>
+				</c:when>
+				<c:otherwise>
+					<%= title %>
+				</c:otherwise>
+			</c:choose>
+		</td>
+		<%
+		for (int i = 0; i < metadataFields.length; i++) {
+			String value = null;
 
-		<c:choose>
-			<c:when test="<%= Validator.isNotNull(viewURL) %>">
-				<a href="<%= viewURL %>"><%= title %></a>
-			</c:when>
-			<c:otherwise>
-				<%= title %>
-			</c:otherwise>
-		</c:choose>
-		<span class="portlet-journal-metadata">
-			<%@ include file="/html/portlet/tagged_content/asset_metadata.jspf" %>
-		</span>
-	</li>
+			if (metadataFields[i].equals("create-date")) {
+				value = dateFormatDate.format(asset.getCreateDate());
+			}
+			else if (metadataFields[i].equals("modified-date")) {
+				value = dateFormatDate.format(asset.getModifiedDate());
+			}
+			else if (metadataFields[i].equals("publish-date")) {
+				if (asset.getPublishDate() == null) {
+					value = StringPool.BLANK;
+				}
+				else {
+					value = dateFormatDate.format(asset.getPublishDate());
+				}
+			}
+			else if (metadataFields[i].equals("expiration-date")) {
+				if (asset.getExpirationDate() == null) {
+					value = StringPool.BLANK;
+				}
+				else {
+					value = dateFormatDate.format(asset.getExpirationDate());
+				}
+			}
+			else if (metadataFields[i].equals("priority")) {
+				value = Double.toString(asset.getPriority());
+			}
+			else if (metadataFields[i].equals("author")) {
+				value = asset.getUserName();
+			}
+			else if (metadataFields[i].equals("view-count")) {
+				value = Integer.toString(asset.getViewCount());
+			}
+
+			if (value != null) {
+		%>
+				<td>
+					<liferay-ui:message key="<%= value %>" />
+				</td>
+		<%
+			}
+		}
+		%>
+		<td></td>
+	</tr>
 </c:if>
 
 <c:if test="<%= (assetIndex + 1) == results.size() %>">
-	</ul>
+	</table>
 </c:if>

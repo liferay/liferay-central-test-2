@@ -1,0 +1,52 @@
+<%
+boolean previous = false;
+for (int j = 0; j < metadataFields.length; j++) {
+	String value = null;
+
+	if (metadataFields[j].equals("create-date")) {
+		value = dateFormatDate.format(asset.getCreateDate());
+	}
+	else if (metadataFields[j].equals("modified-date")) {
+		value = dateFormatDate.format(asset.getModifiedDate());
+	}
+	else if (metadataFields[j].equals("publish-date")) {
+		if (asset.getPublishDate() == null) {
+			value = StringPool.BLANK;
+		}
+		else {
+			value = dateFormatDate.format(asset.getPublishDate());
+		}
+	}
+	else if (metadataFields[j].equals("expiration-date")) {
+		if (asset.getExpirationDate() == null) {
+			value = StringPool.BLANK;
+		}
+		else {
+			value = dateFormatDate.format(asset.getExpirationDate());
+		}
+	}
+	else if (metadataFields[j].equals("priority")) {
+		value = LanguageUtil.get(pageContext, "priority") + StringPool.COLON + StringPool.SPACE + Double.toString(asset.getPriority());
+	}
+	else if (metadataFields[j].equals("author")) {
+		value = LanguageUtil.get(pageContext, "by") + StringPool.SPACE + asset.getUserName();
+	}
+	else if (metadataFields[j].equals("view-count")) {
+		value = Integer.toString(asset.getViewCount()) + StringPool.SPACE + LanguageUtil.get(pageContext, "views") ;
+	}
+
+	if (Validator.isNotNull(value)) {
+		if (previous) {
+		%>
+			&nbsp;-&nbsp;
+		<%
+	    }
+		previous = true;
+%>
+		<span class="<%= "portlet-journal-metadata-" + metadataFields[j] %>">
+			<%= value %>
+		</span>
+<%
+	}
+}
+%>
