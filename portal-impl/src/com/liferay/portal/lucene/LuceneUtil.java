@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -45,7 +44,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
@@ -125,22 +123,22 @@ public class LuceneUtil {
 		throws ParseException {
 
 		if (Validator.isNotNull(text)) {
-			Matcher matcher = TERM_END_PATTERN.matcher(text);
+			//Matcher matcher = TERM_END_PATTERN.matcher(text);
 
 			// Add wildcard to the end of every word 4 chars or longer
 
-			text = matcher.replaceAll("$1*");
+			//text = matcher.replaceAll("$1*");
 
 			// Add fuzzy query to the end of every word 4 chars or longer
 
-			text = text + " " + matcher.replaceAll("$1~");
+			//text = text + " " + matcher.replaceAll("$1~");
 
 			// Remove invalid hints
 
-			text = StringUtil.replace(text, "**", "*");
-			text = StringUtil.replace(text, "*~", "*");
-			text = StringUtil.replace(text, "~~", "~");
-			text = StringUtil.replace(text, "~*", "~");
+			//text = StringUtil.replace(text, "**", "*");
+			//text = StringUtil.replace(text, "*~", "*");
+			//text = StringUtil.replace(text, "~~", "~");
+			//text = StringUtil.replace(text, "~*", "~");
 
 			QueryParser queryParser = new QueryParser(
 				field, LuceneUtil.getAnalyzer());
