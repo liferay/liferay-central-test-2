@@ -22,13 +22,21 @@
 
 package com.liferay.portal.kernel.lar;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portlet.tags.model.TagsAsset;
+import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 
 import java.io.Serializable;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -102,8 +110,54 @@ public class PortletDataContext implements Serializable {
 		return value;
 	}
 
+	public void addTagsEntries(Class classObj, Object classPK)
+		throws PortalException, SystemException {
+
+		TagsAsset tagsAsset =
+			TagsAssetLocalServiceUtil.getAsset(
+				classObj.getName(), ((Long)classPK).longValue());
+
+		List tagsEntriesList = tagsAsset.getEntries();
+
+		String[] tagsEntries = new String[tagsEntriesList.size()];
+		int i = 0;
+
+		Iterator itr = tagsAsset.getEntries().iterator();
+
+		while (itr.hasNext()) {
+			TagsEntry tagsEntry = (TagsEntry) itr.next();
+
+			tagsEntries[i] = tagsEntry.getName();
+			i++;
+		}
+
+		_tagsEntriesMap.put(
+			getPrimaryKeyString(classObj, classPK), tagsEntries);
+	}
+
+	public void addTagsEntries(
+			String className, Object classPK, String[] values)
+		throws PortalException, SystemException {
+
+		_tagsEntriesMap.put(getPrimaryKeyString(className, classPK), values);
+	}
+
 	public boolean hasPrimaryKey(Class classObj, Object primaryKey) {
 		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
+	}
+
+	public String[] getTagsEntries(Class classObj, Object primaryKey) {
+		return (String[])_tagsEntriesMap.get(
+			getPrimaryKeyString(classObj, primaryKey));
+	}
+
+	public String[] getTagsEntries(String className, Object primaryKey) {
+		return (String[])_tagsEntriesMap.get(
+			getPrimaryKeyString(className, primaryKey));
+	}
+
+	public Map getTagsEntries() {
+		return _tagsEntriesMap;
 	}
 
 	public ZipReader getZipReader() {
@@ -117,7 +171,13 @@ public class PortletDataContext implements Serializable {
 	protected String getPrimaryKeyString(Class classObj, Object primaryKey) {
 		StringMaker sm = new StringMaker();
 
-		sm.append(classObj.getName());
+		return getPrimaryKeyString(classObj.getName(), primaryKey);
+	}
+
+	protected String getPrimaryKeyString(String className, Object primaryKey) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(className);
 		sm.append(StringPool.POUND);
 		sm.append(primaryKey);
 
@@ -128,6 +188,7 @@ public class PortletDataContext implements Serializable {
 	private long _groupId;
 	private long _plid;
 	private Map _parameterMap;
+	private Map _tagsEntriesMap = new HashMap();
 	private Set _primaryKeys;
 	private ZipReader _zipReader;
 	private ZipWriter _zipWriter;

@@ -37,6 +37,8 @@ public class PortletDataHandlerKeys {
 	public static final String EXPORT_PORTLET_PREFERENCES =
 		"EXPORT_PORTLET_PREFERENCES";
 
+	public static final String EXPORT_TAGS = "EXPORT_TAGS";
+
 	public static final String EXPORT_SELECTED_LAYOUTS =
 		"EXPORT_SELECTED_LAYOUTS";
 
@@ -48,6 +50,8 @@ public class PortletDataHandlerKeys {
 
 	public static final String IMPORT_PORTLET_PREFERENCES =
 		"IMPORT_PORTLET_PREFERENCES";
+
+	public static final String IMPORT_TAGS = "IMPORT_TAGS";
 
 	public static final String IMPORT_THEME = "IMPORT_THEME";
 
