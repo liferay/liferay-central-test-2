@@ -37,7 +37,7 @@ alter_column_name Address className classNameId VARCHAR(75) null;
 
 create table ClassName_ (
 	classNameId LONG not null primary key,
-	value VARCHAR(75) null
+	value VARCHAR(200) null
 );
 
 drop table ColorScheme;

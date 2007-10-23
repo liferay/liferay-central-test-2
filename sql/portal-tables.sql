@@ -126,7 +126,7 @@ create table CalEvent (
 
 create table ClassName_ (
 	classNameId LONG not null primary key,
-	value VARCHAR(75) null
+	value VARCHAR(200) null
 );
 
 create table Company (

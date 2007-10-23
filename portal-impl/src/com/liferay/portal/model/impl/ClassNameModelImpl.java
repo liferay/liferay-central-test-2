@@ -58,7 +58,7 @@ public class ClassNameModelImpl extends BaseModelImpl {
 			{ "classNameId", new Integer(Types.BIGINT) },
 			{ "value", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table ClassName_ (classNameId LONG not null primary key,value VARCHAR(75) null)";
+	public static String TABLE_SQL_CREATE = "create table ClassName_ (classNameId LONG not null primary key,value VARCHAR(200) null)";
 	public static String TABLE_SQL_DROP = "drop table ClassName_";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.ClassName"), XSS_ALLOW);
