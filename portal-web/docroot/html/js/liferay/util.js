@@ -922,5 +922,6 @@ Liferay.zIndex = {
 	ALERT:			430,
 	DROP_AREA:		440,
 	DROP_POSITION:	450,
-	DRAG_ITEM:		460
+	DRAG_ITEM:		460,
+	TOOLTIP:		470
 };
