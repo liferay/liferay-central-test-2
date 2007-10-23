@@ -24,10 +24,15 @@
 
 <%@ include file="/html/portlet/my_account/init.jsp" %>
 
+<%
+String backURL = ParamUtil.getString(request, "backURL");
+%>
+
 <c:if test="<%= user.isLayoutsRequired() %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 		<portlet:param name="struts_action" value="/my_account/edit_pages" />
 		<portlet:param name="tabs2" value='<%= layout.isPrivateLayout() ? "private" : "public" %>' />
+		<portlet:param name="backURL" value="<%= backURL %>" />
 		<portlet:param name="groupId" value="<%= String.valueOf(user.getGroup().getGroupId()) %>" />
 	</portlet:renderURL>
 

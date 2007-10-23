@@ -31,6 +31,11 @@ String tabs3 = ParamUtil.getString(request, "tabs3", "page");
 String tabs4 = ParamUtil.getString(request, "tabs4");
 
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL", redirect);
+
+if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
+	portletDisplay.setURLBack(backURL);
+}
 
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
@@ -192,6 +197,7 @@ portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 //portletURL.setParameter("tabs4", tabs4);
 portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("backURL", backURL);
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 
 PortletURL viewPagesURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);

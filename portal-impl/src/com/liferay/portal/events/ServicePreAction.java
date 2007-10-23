@@ -1017,6 +1017,8 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowSignInIcon(!signedIn);
 		themeDisplay.setShowSignOutIcon(signedIn);
 
+		String currentURL = PortalUtil.getCurrentURL(req);
+
 		PortletURL createAccountURL = new PortletURLImpl(
 			req, PortletKeys.MY_ACCOUNT, plid, true);
 
@@ -1083,12 +1085,19 @@ public class ServicePreAction extends Action {
 					pageSettingsURL.setParameter("tabs2", "public");
 				}
 
+				pageSettingsURL.setParameter("redirect", currentURL);
 				pageSettingsURL.setParameter(
 					"groupId", String.valueOf(portletGroupId));
 				pageSettingsURL.setParameter("selPlid", String.valueOf(plid));
 
 				themeDisplay.setURLPageSettings(pageSettingsURL);
 			}
+
+			String myAccountNamespace = PortalUtil.getPortletNamespace(
+				PortletKeys.MY_ACCOUNT);
+
+			String myAccountRedirect = ParamUtil.getString(
+				req, myAccountNamespace + "backURL", currentURL);
 
 			PortletURL myAccountURL = new PortletURLImpl(
 				req, PortletKeys.MY_ACCOUNT, plid, false);
@@ -1097,6 +1106,7 @@ public class ServicePreAction extends Action {
 			myAccountURL.setPortletMode(PortletMode.VIEW);
 
 			myAccountURL.setParameter("struts_action", "/my_account/edit_user");
+			myAccountURL.setParameter("backURL", myAccountRedirect);
 
 			themeDisplay.setURLMyAccount(myAccountURL);
 		}

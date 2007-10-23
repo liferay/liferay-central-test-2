@@ -32,6 +32,10 @@ String tabs4 = ParamUtil.getString(request, "tabs4", "phone-numbers");
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
+if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
+	portletDisplay.setURLBack(backURL);
+}
+
 User user2 = PortalUtil.getSelectedUser(request);
 
 boolean editable = false;
