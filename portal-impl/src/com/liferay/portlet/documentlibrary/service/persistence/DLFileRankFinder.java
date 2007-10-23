@@ -92,7 +92,7 @@ public class DLFileRankFinder {
 	public static List findByG_U(long groupId, long userId)
 		throws SystemException {
 
-		return findByG_U(groupId, userId, 0, QueryUtil.ALL_POS);
+		return findByG_U(groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public static List findByG_U(long groupId, long userId, int begin, int end)

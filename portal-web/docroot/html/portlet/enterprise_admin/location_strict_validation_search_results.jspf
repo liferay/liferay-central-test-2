@@ -76,7 +76,7 @@ public List searchBottomUpRecursiveOrganizations(long companyId, Organization or
 	List organizations = null;
 
 	if (searchTerms.isAdvancedSearch()) {
-		organizations = OrganizationLocalServiceUtil.search(companyId, organization.getOrganizationId(), searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), 0, QueryUtil.ALL_POS, new OrganizationNameComparator(true));
+		organizations = OrganizationLocalServiceUtil.search(companyId, organization.getOrganizationId(), searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchTerms.isAndOperator(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, new OrganizationNameComparator(true));
 	}
 	else {
 		organizations = OrganizationLocalServiceUtil.search(companyId, organization.getOrganizationId(), searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), null, searchContainer.getStart(), searchContainer.getEnd(), new OrganizationNameComparator(true));
