@@ -24,6 +24,8 @@ package com.liferay.portal.lucene;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -359,56 +361,69 @@ public class LuceneUtil {
 	}
 
 	public void _delete(long companyId) {
-		if (PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE).equals(
-				_LUCENE_STORE_TYPE_JDBC)) {
+		String storeType = PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE);
 
-			String tableName = _getTableName(companyId);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Lucene store type " + storeType);
+		}
 
-			try {
-				DataSource ds = HibernateUtil.getDataSource();
-
-				JdbcDirectory directory = new JdbcDirectory(
-					ds, _dialect, tableName);
-
-				if (directory.tableExists()) {
-					directory.delete();
-				}
-			}
-			catch (IOException ioe) {
-				throw new RuntimeException(ioe);
-			}
-			catch (UnsupportedOperationException uoe) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Database doesn't support the ability to check " +
-							"whether a table exists");
-				}
-
-				Connection con = null;
-				Statement s = null;
-
-				try {
-					con = HibernateUtil.getConnection();
-
-					s = con.createStatement();
-
-					s.executeUpdate("DELETE FROM " + tableName);
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn("Could not truncate " + tableName);
-					}
-				}
-				finally {
-					DataAccess.cleanUp(con, s);
-				}
-			}
+		if (storeType.equals(_LUCENE_STORE_TYPE_FILE)) {
+			_deleteFile(companyId);
+		}
+		else if (storeType.equals(_LUCENE_STORE_TYPE_JDBC)) {
+			_deleteJdbc(companyId);
+		}
+		else if (storeType.equals(_LUCENE_STORE_TYPE_RAM)) {
+			_deleteRam(companyId);
 		}
 		else {
-			FileUtil.deltree(
-				PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
-					StringPool.SLASH);
+			throw new RuntimeException("Invalid store type " + storeType);
 		}
+	}
+
+	private void _deleteFile(long companyId) {
+		String path = _getPath(companyId);
+
+		FileUtil.deltree(path);
+	}
+
+	private void _deleteJdbc(long companyId) {
+		String tableName = _getTableName(companyId);
+
+		try {
+			Directory directory = (Directory)_jdbcDirectories.remove(tableName);
+
+			if (directory != null) {
+				directory.close();
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Could not close directory " + tableName);
+			}
+		}
+
+		Connection con = null;
+		Statement s = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			s = con.createStatement();
+
+			s.executeUpdate("DELETE FROM " + tableName);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Could not truncate " + tableName);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, s);
+		}
+	}
+
+	private void _deleteRam(long companyId) {
 	}
 
 	private Analyzer _getAnalyzer() {
@@ -421,8 +436,6 @@ public class LuceneUtil {
 	}
 
 	private Directory _getLuceneDir(long companyId) {
-		Directory directory = null;
-
 		String storeType = PropsUtil.get(PropsUtil.LUCENE_STORE_TYPE);
 
 		if (_log.isDebugEnabled()) {
@@ -430,40 +443,70 @@ public class LuceneUtil {
 		}
 
 		if (storeType.equals(_LUCENE_STORE_TYPE_FILE)) {
-			String path =
-				PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
-					StringPool.SLASH;
-
-			try {
-				directory = FSDirectory.getDirectory(path, false);
-			}
-			catch (IOException ioe1) {
-				try {
-					if (directory != null) {
-						directory.close();
-					}
-
-					directory = FSDirectory.getDirectory(path, true);
-				}
-				catch (IOException ioe2) {
-					throw new RuntimeException(ioe2);
-				}
-			}
+			return _getLuceneDirFile(companyId);
 		}
 		else if (storeType.equals(_LUCENE_STORE_TYPE_JDBC)) {
+			return _getLuceneDirJdbc(companyId);
+		}
+		else if (storeType.equals(_LUCENE_STORE_TYPE_RAM)) {
+			return _getLuceneDirRam(companyId);
+		}
+		else {
+			throw new RuntimeException("Invalid store type " + storeType);
+		}
+	}
+
+	private Directory _getLuceneDirFile(long companyId) {
+		Directory directory = null;
+
+		String path = _getPath(companyId);
+
+		try {
+			directory = FSDirectory.getDirectory(path, false);
+		}
+		catch (IOException ioe1) {
+			try {
+				if (directory != null) {
+					directory.close();
+				}
+
+				directory = FSDirectory.getDirectory(path, true);
+			}
+			catch (IOException ioe2) {
+				throw new RuntimeException(ioe2);
+			}
+		}
+
+		return directory;
+	}
+
+	private Directory _getLuceneDirJdbc(long companyId) {
+		JdbcDirectory directory = null;
+
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
+		try {
+			Thread.currentThread().setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
+
 			String tableName = _getTableName(companyId);
 
-			JdbcDirectory jdbcDir = null;
+			directory = (JdbcDirectory)_jdbcDirectories.get(tableName);
+
+			if (directory != null) {
+				return directory;
+			}
 
 			try {
 				DataSource ds = HibernateUtil.getDataSource();
 
 				directory = new JdbcDirectory(ds, _dialect, tableName);
 
-				jdbcDir = (JdbcDirectory)directory;
+				_jdbcDirectories.put(tableName, directory);
 
-				if (!jdbcDir.tableExists()) {
-					jdbcDir.create();
+				if (!directory.tableExists()) {
+					directory.create();
 				}
 			}
 			catch (IOException ioe) {
@@ -476,70 +519,90 @@ public class LuceneUtil {
 							"whether a table exists");
 				}
 
-				// LEP-2181
-
-				Connection con = null;
-				ResultSet rs = null;
-
-				try {
-					con = HibernateUtil.getConnection();
-
-					// Check if table exists
-
-					DatabaseMetaData metaData = con.getMetaData();
-
-					rs = metaData.getTables(null, null, tableName, null);
-
-					if (!rs.next()) {
-						JdbcTemplate jdbcTemplate = jdbcDir.getJdbcTemplate();
-
-						jdbcTemplate.executeUpdate(
-							jdbcDir.getTable().sqlCreate());
-
-						Class lockClass = jdbcDir.getSettings().getLockClass();
-
-						JdbcLock jdbcLock = null;
-
-						try {
-							jdbcLock = (JdbcLock)lockClass.newInstance();
-						}
-						catch (Exception e) {
-							throw new JdbcStoreException(
-								"Failed to create lock class " + lockClass);
-						}
-
-						jdbcLock.initializeDatabase(jdbcDir);
-					}
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn("Could not create " + tableName);
-					}
-				}
-				finally {
-					DataAccess.cleanUp(con, null, rs);
-				}
+				_manuallyCreateJdbcDirectory(directory, tableName);
 			}
 		}
-		else if (storeType.equals(_LUCENE_STORE_TYPE_RAM)) {
-			String path =
-				PropsUtil.get(PropsUtil.LUCENE_DIR) + companyId +
-					StringPool.SLASH;
-
-			directory = (Directory)_ramDirectories.get(path);
-
-			if (directory == null) {
-				directory = new RAMDirectory();
-
-				_ramDirectories.put(path, directory);
-			}
+		finally {
+			Thread.currentThread().setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
 		}
 
 		return directory;
 	}
 
+	private Directory _getLuceneDirRam(long companyId) {
+		String path = _getPath(companyId);
+
+		Directory directory = (Directory)_ramDirectories.get(path);
+
+		if (directory == null) {
+			directory = new RAMDirectory();
+
+			_ramDirectories.put(path, directory);
+		}
+
+		return directory;
+	}
+
+	private String _getPath(long companyId) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(PropsUtil.get(PropsUtil.LUCENE_DIR));
+		sm.append(companyId);
+		sm.append(StringPool.SLASH);
+
+		return sm.toString();
+	}
+
 	private String _getTableName(long companyId) {
 		return _LUCENE_TABLE_PREFIX + companyId;
+	}
+
+	private void _manuallyCreateJdbcDirectory(
+		JdbcDirectory directory, String tableName) {
+
+		// LEP-2181
+
+		Connection con = null;
+		ResultSet rs = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			// Check if table exists
+
+			DatabaseMetaData metaData = con.getMetaData();
+
+			rs = metaData.getTables(null, null, tableName, null);
+
+			if (!rs.next()) {
+				JdbcTemplate jdbcTemplate = directory.getJdbcTemplate();
+
+				jdbcTemplate.executeUpdate(directory.getTable().sqlCreate());
+
+				Class lockClass = directory.getSettings().getLockClass();
+
+				JdbcLock jdbcLock = null;
+
+				try {
+					jdbcLock = (JdbcLock)lockClass.newInstance();
+				}
+				catch (Exception e) {
+					throw new JdbcStoreException(
+						"Failed to create lock class " + lockClass);
+				}
+
+				jdbcLock.initializeDatabase(directory);
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Could not create " + tableName);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, null, rs);
+		}
 	}
 
 	private static final String _LUCENE_STORE_TYPE_FILE = "file";
@@ -557,6 +620,7 @@ public class LuceneUtil {
 	private IndexWriterFactory _sharedWriter = new IndexWriterFactory();
 	private Class _analyzerClass = WhitespaceAnalyzer.class;
 	private Dialect _dialect;
+	private Map _jdbcDirectories = CollectionFactory.getSyncHashMap();
 	private Map _ramDirectories = CollectionFactory.getSyncHashMap();
 
 }
