@@ -324,15 +324,13 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			int birthdayDay = 1;
 			int birthdayYear = 1970;
 			String jobTitle = StringPool.BLANK;
-			long organizationId = 0;
-			long locationId = 0;
+			long[] organizationIds = new long[0];
 
 			User user = UserLocalServiceUtil.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,
 				autoScreenName, screenName, emailAddress, locale, firstName,
 				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-				birthdayDay, birthdayYear, jobTitle, organizationId, locationId,
-				false);
+				birthdayDay, birthdayYear, jobTitle, organizationIds, false);
 
 			Group guestGroup = GroupLocalServiceUtil.getGroup(
 				companyId, GroupImpl.GUEST);

@@ -111,6 +111,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Group
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		className = GetterUtil.getString(className);
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		if ((classNameId <= 0) || (classPK <= 0)) {
