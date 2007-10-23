@@ -549,34 +549,6 @@ public class StringUtil {
 		return s;
 	}
 
-	public static String removeBetween(String s, String begin, String end) {
-		if ((s == null) || (begin == null) || (end == null)) {
-			return s;
-		}
-
-		StringMaker sm = new StringMaker(s.length());
-
-		int pos = 0;
-
-		while (true) {
-			int x = s.indexOf(begin, pos);
-			int y = s.indexOf(end, x + begin.length());
-
-			if ((x == -1) || (y == -1)) {
-				sm.append(s.substring(pos, s.length()));
-
-				break;
-			}
-			else {
-				sm.append(s.substring(pos, x));
-
-				pos = y + end.length();
-			}
-		}
-
-		return sm.toString();
-	}
-
 	public static String replace(String s, char oldSub, char newSub) {
 		return replace(s, oldSub, new Character(newSub).toString());
 	}
@@ -980,25 +952,29 @@ public class StringUtil {
 		}
 	}
 
-	public static String stripBetween(String text, String begin, String end) {
-		if (text == null) {
-			return null;
+	public static String stripBetween(String s, String begin, String end) {
+		if ((s == null) || (begin == null) || (end == null)) {
+			return s;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringMaker sm = new StringMaker(s.length());
 
-		int x = 0;
-		int y = text.indexOf(begin);
+		int pos = 0;
 
-		while (y != -1) {
-			sm.append(text.substring(x, y));
+		while (true) {
+			int x = s.indexOf(begin, pos);
+			int y = s.indexOf(end, x + begin.length());
 
-			x = text.indexOf(end, y) + end.length();
-			y = text.indexOf(begin, x);
-		}
+			if ((x == -1) || (y == -1)) {
+				sm.append(s.substring(pos, s.length()));
 
-		if (y == -1) {
-			sm.append(text.substring(x, text.length()));
+				break;
+			}
+			else {
+				sm.append(s.substring(pos, x));
+
+				pos = y + end.length();
+			}
 		}
 
 		return sm.toString();

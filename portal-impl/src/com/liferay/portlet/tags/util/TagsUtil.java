@@ -107,7 +107,7 @@ public class TagsUtil {
 			}
 		}
 
-		return StringUtil.removeBetween(result, "[$", "$]");
+		return StringUtil.stripBetween(result, "[$", "$]");
 	}
 
 }

@@ -299,9 +299,9 @@ public class StringUtil_IW {
 		return StringUtil.startsWith(s, start);
 	}
 
-	public java.lang.String stripBetween(java.lang.String text,
+	public java.lang.String stripBetween(java.lang.String s,
 		java.lang.String begin, java.lang.String end) {
-		return StringUtil.stripBetween(text, begin, end);
+		return StringUtil.stripBetween(s, begin, end);
 	}
 
 	public java.lang.String trim(java.lang.String s) {
