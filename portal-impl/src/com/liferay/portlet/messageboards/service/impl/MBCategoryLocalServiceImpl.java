@@ -61,6 +61,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
@@ -327,8 +329,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
+		long companyId = GetterUtil.getLong(ids[0]);
+
+		IndexWriter writer = null;
+
 		try {
-			long companyId = GetterUtil.getLong(ids[0]);
+			writer = LuceneUtil.getWriter(companyId);
 
 			Iterator itr1 = MBCategoryUtil.findByCompanyId(
 				companyId).iterator();
@@ -352,9 +358,11 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 					String content = message.getBody();
 
 					try {
-						IndexerImpl.addMessage(
+						Document doc = IndexerImpl.getAddMessageDocument(
 							companyId, groupId, userName, categoryId, threadId,
 							messageId, title, content);
+
+						writer.addDocument(doc);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + messageId, e1);
@@ -367,6 +375,16 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		}
 		catch (Exception e2) {
 			throw new SystemException(e2);
+		}
+		finally {
+			try {
+				if (writer != null) {
+					LuceneUtil.write(companyId);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 	}
 

@@ -23,6 +23,7 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 /**
@@ -160,6 +161,7 @@ public class Html {
 
 		while (y != -1) {
 			sm.append(text.substring(x, y));
+			sm.append(StringPool.SPACE);
 
 			// Look for text enclosed by <script></script>
 

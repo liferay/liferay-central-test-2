@@ -74,6 +74,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
@@ -541,7 +542,11 @@ public class PluginPackageUtil {
 	}
 
 	public static void reIndex() throws SystemException {
+		IndexWriter writer = null;
+
 		try {
+			writer = LuceneUtil.getWriter(CompanyImpl.SYSTEM);
+
 			PluginPackageIndexer.cleanIndex();
 
 			Iterator itr = getAllAvailablePluginPackages().iterator();
@@ -549,7 +554,28 @@ public class PluginPackageUtil {
 			while (itr.hasNext()) {
 				PluginPackage pluginPackage = (PluginPackage)itr.next();
 
-				_indexPluginPackage(pluginPackage);
+				String[] statusAndInstalledVersion =
+					_getStatusAndInstalledVersion(pluginPackage);
+
+				String status = statusAndInstalledVersion[0];
+				String installedVersion = statusAndInstalledVersion[1];
+
+				org.apache.lucene.document.Document doc =
+					PluginPackageIndexer.getAddPluginPackageDocument(
+						pluginPackage.getModuleId(), pluginPackage.getName(),
+						pluginPackage.getVersion(),
+						pluginPackage.getModifiedDate(),
+						pluginPackage.getAuthor(), pluginPackage.getTypes(),
+						pluginPackage.getTags(), pluginPackage.getLicenses(),
+						pluginPackage.getLiferayVersions(),
+						pluginPackage.getShortDescription(),
+						pluginPackage.getLongDescription(),
+						pluginPackage.getChangeLog(),
+						pluginPackage.getPageURL(),
+						pluginPackage.getRepositoryURL(), status,
+					installedVersion);
+
+				writer.addDocument(doc);
 			}
 		}
 		catch (SystemException se) {
@@ -557,6 +583,16 @@ public class PluginPackageUtil {
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
+		}
+		finally {
+			try {
+				if (writer != null) {
+					LuceneUtil.write(CompanyImpl.SYSTEM);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 	}
 
@@ -756,7 +792,9 @@ public class PluginPackageUtil {
 		return pluginPackage;
 	}
 
-	private static void _indexPluginPackage(PluginPackage pluginPackage) {
+	private static String[] _getStatusAndInstalledVersion(
+		PluginPackage pluginPackage) {
+
 		PluginPackage installedPluginPackage =
 			_installedPluginPackages.getLatestPluginPackage(
 				pluginPackage.getGroupId(), pluginPackage.getArtifactId());
@@ -774,13 +812,24 @@ public class PluginPackageUtil {
 				status = PluginPackageImpl.STATUS_NEWER_VERSION_INSTALLED;
 			}
 			else if (installedPluginPackage.isPreviousVersionThan(
-				pluginPackage)) {
+						pluginPackage)) {
+
 				status = PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED;
 			}
 			else {
 				status = PluginPackageImpl.STATUS_SAME_VERSION_INSTALLED;
 			}
 		}
+
+		return new String[] {status, installedVersion};
+	}
+
+	private static void _indexPluginPackage(PluginPackage pluginPackage) {
+		String[] statusAndInstalledVersion =
+			_getStatusAndInstalledVersion(pluginPackage);
+
+		String status = statusAndInstalledVersion[0];
+		String installedVersion = statusAndInstalledVersion[1];
 
 		try {
 			PluginPackageIndexer.updatePluginPackage(

@@ -106,6 +106,7 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
@@ -1121,8 +1122,12 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
+		long companyId = GetterUtil.getLong(ids[0]);
+
+		IndexWriter writer = null;
+
 		try {
-			long companyId = GetterUtil.getLong(ids[0]);
+			writer = LuceneUtil.getWriter(companyId);
 
 			Iterator itr = JournalArticleUtil.findByCompanyId(
 				companyId).iterator();
@@ -1141,12 +1146,15 @@ public class JournalArticleLocalServiceImpl
 
 				if (article.isApproved() && article.isIndexable()) {
 					try {
-						Indexer.addArticle(
-							companyId, groupId, articleId, version, title,
-							description, content, type, displayDate);
+						org.apache.lucene.document.Document doc =
+							Indexer.getAddArticleDocument(
+								companyId, groupId, articleId, version, title,
+								description, content, type, displayDate);
+
+						writer.addDocument(doc);
 					}
 					catch (Exception e1) {
-						_log.error("Reindexing " + article.getPrimaryKey(), e1);
+						_log.error("Reindexing " + article.getId(), e1);
 					}
 				}
 			}
@@ -1156,6 +1164,16 @@ public class JournalArticleLocalServiceImpl
 		}
 		catch (Exception e2) {
 			throw new SystemException(e2);
+		}
+		finally {
+			try {
+				if (writer != null) {
+					LuceneUtil.write(companyId);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 	}
 

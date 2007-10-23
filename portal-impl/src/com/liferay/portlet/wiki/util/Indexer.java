@@ -62,27 +62,14 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			String content)
 		throws IOException {
 
-		content = Html.stripHtml(content);
+		try {
+			deletePage(companyId, nodeId, title);
+		}
+		catch (IOException ioe) {
+		}
 
-		deletePage(companyId, nodeId, title);
-
-		Document doc = new Document();
-
-		doc.add(
-			LuceneFields.getKeyword(
-				LuceneFields.UID,
-				LuceneFields.getUID(PORTLET_ID, nodeId, title)));
-
-		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
-
-		doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
-		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
-
-		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
-
-		doc.add(LuceneFields.getKeyword("nodeId", nodeId));
+		Document doc = getAddPageDocument(
+			companyId, groupId, nodeId, title, content);
 
 		IndexWriter writer = null;
 
@@ -152,6 +139,33 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		finally {
 			LuceneUtil.closeSearcher(searcher);
 		}
+	}
+
+	public static Document getAddPageDocument(
+		long companyId, long groupId, long nodeId, String title,
+		String content) {
+
+		content = Html.stripHtml(content);
+
+		Document doc = new Document();
+
+		doc.add(
+			LuceneFields.getKeyword(
+				LuceneFields.UID,
+				LuceneFields.getUID(PORTLET_ID, nodeId, title)));
+
+		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
+		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
+		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+
+		doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
+		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+
+		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+
+		doc.add(LuceneFields.getKeyword("nodeId", nodeId));
+
+		return doc;
 	}
 
 	public static void updatePage(

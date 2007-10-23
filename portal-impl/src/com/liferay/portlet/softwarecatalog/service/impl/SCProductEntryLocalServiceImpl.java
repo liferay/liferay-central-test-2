@@ -78,6 +78,7 @@ import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
@@ -415,8 +416,12 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
+		long companyId = GetterUtil.getLong(ids[0]);
+
+		IndexWriter writer = null;
+
 		try {
-			long companyId = GetterUtil.getLong(ids[0]);
+			writer = LuceneUtil.getWriter(companyId);
 
 			Iterator itr = SCProductEntryUtil.findByCompanyId(
 				companyId).iterator();
@@ -436,17 +441,21 @@ public class SCProductEntryLocalServiceImpl
 				}
 
 				try {
-					Indexer.addProductEntry(
-						companyId, productEntry.getGroupId(),
-						productEntry.getUserId(), productEntry.getUserName(),
-						productEntryId, productEntry.getName(),
-						productEntry.getModifiedDate(), version,
-						productEntry.getType(),
-						productEntry.getShortDescription(),
-						productEntry.getLongDescription(),
-						productEntry.getPageURL(),
-						productEntry.getRepoGroupId(),
-						productEntry.getRepoArtifactId());
+					org.apache.lucene.document.Document doc =
+						Indexer.getAddProductEntryDocument(
+							companyId, productEntry.getGroupId(),
+							productEntry.getUserId(),
+							productEntry.getUserName(),
+							productEntryId, productEntry.getName(),
+							productEntry.getModifiedDate(), version,
+							productEntry.getType(),
+							productEntry.getShortDescription(),
+							productEntry.getLongDescription(),
+							productEntry.getPageURL(),
+							productEntry.getRepoGroupId(),
+							productEntry.getRepoArtifactId());
+
+					writer.addDocument(doc);
 				}
 				catch (Exception e1) {
 					_log.error("Reindexing " + productEntryId, e1);
@@ -458,6 +467,16 @@ public class SCProductEntryLocalServiceImpl
 		}
 		catch (Exception e2) {
 			throw new SystemException(e2);
+		}
+		finally {
+			try {
+				if (writer != null) {
+					LuceneUtil.write(companyId);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 	}
 

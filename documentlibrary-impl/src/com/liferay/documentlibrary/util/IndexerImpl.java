@@ -63,6 +63,62 @@ public class IndexerImpl {
 			String fileName)
 		throws IOException {
 
+		Document doc = getAddFileDocument(
+			companyId, portletId, groupId, repositoryId, fileName);
+
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
+
+			writer.addDocument(doc);
+		}
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
+			}
+		}
+	}
+
+	public static void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String properties)
+		throws IOException {
+
+		Document doc = getAddFileDocument(
+			companyId, portletId, groupId, repositoryId, fileName, properties);
+
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
+
+			writer.addDocument(doc);
+		}
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
+			}
+		}
+	}
+
+	public static void deleteFile(
+			long companyId, String portletId, long repositoryId,
+			String fileName)
+		throws IOException {
+
+		LuceneUtil.deleteDocuments(
+			companyId,
+			new Term(
+				LuceneFields.UID,
+				LuceneFields.getUID(portletId, repositoryId, fileName)));
+	}
+
+	public static Document getAddFileDocument(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName)
+		throws IOException {
+
 		try {
 			DLFileEntry fileEntry = null;
 
@@ -78,7 +134,7 @@ public class IndexerImpl {
 								"not exist in the database");
 				}
 
-				return;
+				return null;
 			}
 
 			StringMaker sm = new StringMaker();
@@ -105,7 +161,7 @@ public class IndexerImpl {
 
 			String properties = sm.toString();
 
-			addFile(
+			return getAddFileDocument(
 				companyId, portletId, groupId, repositoryId, fileName,
 				properties);
 		}
@@ -117,7 +173,7 @@ public class IndexerImpl {
 		}
 	}
 
-	public static void addFile(
+	public static Document getAddFileDocument(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String properties)
 		throws IOException {
@@ -166,7 +222,7 @@ public class IndexerImpl {
 							" does not have any content");
 			}
 
-			return;
+			return null;
 		}
 
 		Document doc = new Document();
@@ -191,37 +247,14 @@ public class IndexerImpl {
 		doc.add(LuceneFields.getKeyword("repositoryId", repositoryId));
 		doc.add(LuceneFields.getKeyword("path", fileName));
 
-		IndexWriter writer = null;
-
-		try {
-			writer = LuceneUtil.getWriter(companyId);
-
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(companyId);
-			}
-		}
-
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Document " + companyId + " " + portletId + " " + groupId +
 					" " + repositoryId + " " + fileName +
 						" indexed successfully");
 		}
-	}
 
-	public static void deleteFile(
-			long companyId, String portletId, long repositoryId,
-			String fileName)
-		throws IOException {
-
-		LuceneUtil.deleteDocuments(
-			companyId,
-			new Term(
-				LuceneFields.UID,
-				LuceneFields.getUID(portletId, repositoryId, fileName)));
+		return doc;
 	}
 
 	public static void reIndex(String[] ids) throws SearchException {

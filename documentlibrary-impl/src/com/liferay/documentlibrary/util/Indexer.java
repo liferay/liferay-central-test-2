@@ -154,21 +154,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public void reIndex(String[] ids) throws SearchException {
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(
-				IndexerImpl.class.getName(), "reIndex",
-				new Object[] {ids});
-
-			IndexProducer.produce(methodWrapper);
-		}
-		catch (Exception e) {
-			if (e instanceof SearchException) {
-				throw (SearchException)e;
-			}
-			else {
-				_log.error(e);
-			}
-		}
+		IndexerImpl.reIndex(ids);
 	}
 
 	private static Log _log = LogFactory.getLog(Indexer.class);

@@ -340,9 +340,9 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
-		try {
-			long companyId = GetterUtil.getLong(ids[0]);
+		long companyId = GetterUtil.getLong(ids[0]);
 
+		try {
 			List folders = getFolders(companyId);
 
 			for (int i = 0; i < folders.size(); i++) {

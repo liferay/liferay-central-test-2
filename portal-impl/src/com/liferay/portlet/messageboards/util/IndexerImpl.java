@@ -57,27 +57,9 @@ public class IndexerImpl {
 			long threadId, long messageId, String title, String content)
 		throws IOException {
 
-		content = Html.stripHtml(content);
-
-		Document doc = new Document();
-
-		doc.add(
-			LuceneFields.getKeyword(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, messageId)));
-
-		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
-
-		doc.add(LuceneFields.getText(LuceneFields.USER_NAME, userName));
-		doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
-		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
-
-		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
-
-		doc.add(LuceneFields.getKeyword("categoryId", categoryId));
-		doc.add(LuceneFields.getKeyword("threadId", threadId));
-		doc.add(LuceneFields.getKeyword("messageId", messageId));
+		Document doc = getAddMessageDocument(
+			companyId, groupId, userName, categoryId, threadId, messageId,
+			title, content);
 
 		IndexWriter writer = null;
 
@@ -146,6 +128,35 @@ public class IndexerImpl {
 		finally {
 			LuceneUtil.closeSearcher(searcher);
 		}
+	}
+
+	public static Document getAddMessageDocument(
+		long companyId, long groupId, String userName, long categoryId,
+		long threadId, long messageId, String title, String content) {
+
+		content = Html.stripHtml(content);
+
+		Document doc = new Document();
+
+		doc.add(
+			LuceneFields.getKeyword(
+				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, messageId)));
+
+		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
+		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
+		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+
+		doc.add(LuceneFields.getText(LuceneFields.USER_NAME, userName));
+		doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
+		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+
+		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+
+		doc.add(LuceneFields.getKeyword("categoryId", categoryId));
+		doc.add(LuceneFields.getKeyword("threadId", threadId));
+		doc.add(LuceneFields.getKeyword("messageId", messageId));
+
+		return doc;
 	}
 
 	public static void reIndex(String[] ids) throws SearchException {

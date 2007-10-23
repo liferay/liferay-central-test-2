@@ -140,6 +140,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.lucene.IndexWriterFactory">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.lucene.LuceneFileExtractor">
 		<priority value="INFO" />
 	</category>

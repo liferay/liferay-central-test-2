@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.lucene.LuceneUtil;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -57,6 +58,8 @@ import javax.jcr.version.VersionIterator;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexWriter;
 
 /**
  * <a href="JCRHook.java.html"><b><i>View Source</i></b></a>
@@ -522,9 +525,13 @@ public class JCRHook extends BaseHook {
 		long groupId = GetterUtil.getLong(ids[2]);
 		long repositoryId = GetterUtil.getLong(ids[3]);
 
+		IndexWriter writer = null;
+
 		Session session = null;
 
 		try {
+			writer = LuceneUtil.getWriter(companyId);
+
 			session = JCRFactoryUtil.createSession();
 
 			Node rootNode = getRootNode(session, companyId);
@@ -538,18 +545,39 @@ public class JCRHook extends BaseHook {
 				if (node.getPrimaryNodeType().getName().equals(
 						JCRConstants.NT_FILE)) {
 
-					IndexerImpl.addFile(
-						companyId, portletId, groupId, repositoryId,
-						node.getName());
+					try {
+						Document doc = IndexerImpl.getAddFileDocument(
+							companyId, portletId, groupId, repositoryId,
+							node.getName());
+
+						writer.addDocument(doc);
+					}
+					catch (Exception e1) {
+						_log.error("Reindexing " + node.getName(), e1);
+					}
 				}
 			}
 		}
-		catch (Exception e) {
-			throw new SearchException(e);
+		catch (Exception e2) {
+			throw new SearchException(e2);
 		}
 		finally {
-			if (session != null) {
-				session.logout();
+			try {
+				if (session != null) {
+					session.logout();
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+
+			try {
+				if (writer != null) {
+					LuceneUtil.write(companyId);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
 			}
 		}
 	}

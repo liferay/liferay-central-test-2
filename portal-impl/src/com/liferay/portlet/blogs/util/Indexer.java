@@ -55,26 +55,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			long entryId, String title, String content)
 		throws IOException {
 
-		content = Html.stripHtml(content);
-
-		Document doc = new Document();
-
-		doc.add(
-			LuceneFields.getKeyword(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, entryId)));
-
-		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
-		doc.add(LuceneFields.getKeyword(LuceneFields.USER_ID, userId));
-
-		doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
-		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
-
-		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
-
-		doc.add(LuceneFields.getKeyword("categoryId", categoryId));
-		doc.add(LuceneFields.getKeyword("entryId", entryId));
+		Document doc = getAddEntryDocument(
+			companyId, groupId, userId, categoryId, entryId, title, content);
 
 		IndexWriter writer = null;
 
@@ -97,6 +79,34 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			companyId,
 			new Term(
 				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, entryId)));
+	}
+
+	public static Document getAddEntryDocument(
+		long companyId, long groupId, long userId, long categoryId,
+		long entryId, String title, String content) {
+
+		content = Html.stripHtml(content);
+
+		Document doc = new Document();
+
+		doc.add(
+			LuceneFields.getKeyword(
+				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, entryId)));
+
+		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
+		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
+		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+		doc.add(LuceneFields.getKeyword(LuceneFields.USER_ID, userId));
+
+		doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
+		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+
+		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+
+		doc.add(LuceneFields.getKeyword("categoryId", categoryId));
+		doc.add(LuceneFields.getKeyword("entryId", entryId));
+
+		return doc;
 	}
 
 	public static void updateEntry(

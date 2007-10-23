@@ -48,11 +48,13 @@ public class UpgradeSchema extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		if (!_alreadyUpgraded) {
-			_alreadyUpgraded = true;
-
-			runSQLTemplate("update-4.3.0-4.3.1.sql", false);
+		if (_alreadyUpgraded) {
+			return;
 		}
+
+		_alreadyUpgraded = true;
+
+		runSQLTemplate("update-4.3.0-4.3.1.sql", false);
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeSchema.class);

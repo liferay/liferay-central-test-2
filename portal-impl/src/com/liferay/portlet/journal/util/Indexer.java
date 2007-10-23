@@ -65,6 +65,38 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			Date displayDate)
 		throws IOException {
 
+		Document doc = getAddArticleDocument(
+			companyId, groupId, articleId, version, title, description, content,
+			type, displayDate);
+
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
+
+			writer.addDocument(doc);
+		}
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
+			}
+		}
+	}
+
+	public static void deleteArticle(long companyId, String articleId)
+		throws IOException {
+
+		LuceneUtil.deleteDocuments(
+			companyId,
+			new Term(
+				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, articleId)));
+	}
+
+	public static Document getAddArticleDocument(
+		long companyId, long groupId, String articleId, double version,
+		String title, String description, String content, String type,
+		Date displayDate) {
+
 		if ((content != null) && (content.indexOf("<dynamic-content>") != -1)) {
 			content = _getIndexableContent(content);
 
@@ -101,27 +133,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.add(LuceneFields.getKeyword("type", type));
 		doc.add(LuceneFields.getDate("displayDate", displayDate));
 
-		IndexWriter writer = null;
-
-		try {
-			writer = LuceneUtil.getWriter(companyId);
-
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(companyId);
-			}
-		}
-	}
-
-	public static void deleteArticle(long companyId, String articleId)
-		throws IOException {
-
-		LuceneUtil.deleteDocuments(
-			companyId,
-			new Term(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, articleId)));
+		return doc;
 	}
 
 	public static void updateArticle(

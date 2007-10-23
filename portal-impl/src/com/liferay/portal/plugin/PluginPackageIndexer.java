@@ -67,6 +67,37 @@ public class PluginPackageIndexer implements Indexer {
 			String repositoryURL, String status, String installedVersion)
 		throws IOException {
 
+		Document doc = getAddPluginPackageDocument(
+			moduleId, name, version, modifiedDate, author, types, tags,
+			licenses, liferayVersions, shortDescription, longDescription,
+			changeLog, pageURL, repositoryURL, status, installedVersion);
+
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(CompanyImpl.SYSTEM);
+
+			writer.addDocument(doc);
+		}
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(CompanyImpl.SYSTEM);
+			}
+		}
+	}
+
+	public static void cleanIndex() throws IOException {
+		LuceneUtil.deleteDocuments(
+			CompanyImpl.SYSTEM, new Term(LuceneFields.PORTLET_ID, PORTLET_ID));
+	}
+
+	public static Document getAddPluginPackageDocument(
+		String moduleId, String name, String version, Date modifiedDate,
+		String author, List types, List tags, List licenses,
+		List liferayVersions, String shortDescription,
+		String longDescription, String changeLog, String pageURL,
+		String repositoryURL, String status, String installedVersion) {
+
 		ModuleId moduleIdObj = ModuleId.getInstance(moduleId);
 
 		shortDescription = Html.stripHtml(shortDescription);
@@ -164,23 +195,7 @@ public class PluginPackageIndexer implements Indexer {
 				LuceneFields.getKeyword("installedVersion", installedVersion));
 		}
 
-		IndexWriter writer = null;
-
-		try {
-			writer = LuceneUtil.getWriter(CompanyImpl.SYSTEM);
-
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(CompanyImpl.SYSTEM);
-			}
-		}
-	}
-
-	public static void cleanIndex() throws IOException {
-		LuceneUtil.deleteDocuments(
-			CompanyImpl.SYSTEM, new Term(LuceneFields.PORTLET_ID, PORTLET_ID));
+		return doc;
 	}
 
 	public static void removePluginPackage(

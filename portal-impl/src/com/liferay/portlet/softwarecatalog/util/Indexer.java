@@ -61,6 +61,41 @@ public class Indexer
 			String pageURL, String repoGroupId, String repoArtifactId)
 		throws IOException {
 
+		Document doc = getAddProductEntryDocument(
+			companyId, groupId, userId, userName, productEntryId, name,
+			modifiedDate, version, type, shortDescription, longDescription,
+			pageURL, repoGroupId, repoArtifactId);
+
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
+
+			writer.addDocument(doc);
+		}
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
+			}
+		}
+	}
+
+	public static void deleteProductEntry(long companyId, long productEntryId)
+		throws IOException {
+
+		LuceneUtil.deleteDocuments(
+			companyId,
+			new Term(
+				LuceneFields.UID,
+				LuceneFields.getUID(PORTLET_ID, productEntryId)));
+	}
+
+	public static Document getAddProductEntryDocument(
+		long companyId, long groupId, long userId, String userName,
+		long productEntryId, String name, Date modifiedDate, String version,
+		String type, String shortDescription, String longDescription,
+		String pageURL, String repoGroupId, String repoArtifactId) {
+
 		shortDescription = Html.stripHtml(shortDescription);
 		longDescription = Html.stripHtml(longDescription);
 
@@ -93,28 +128,7 @@ public class Indexer
 		doc.add(LuceneFields.getKeyword("repoGroupId", repoGroupId));
 		doc.add(LuceneFields.getKeyword("repoArtifactId", repoArtifactId));
 
-		IndexWriter writer = null;
-
-		try {
-			writer = LuceneUtil.getWriter(companyId);
-
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(companyId);
-			}
-		}
-	}
-
-	public static void deleteProductEntry(long companyId, long productEntryId)
-		throws IOException {
-
-		LuceneUtil.deleteDocuments(
-			companyId,
-			new Term(
-				LuceneFields.UID,
-				LuceneFields.getUID(PORTLET_ID, productEntryId)));
+		return doc;
 	}
 
 	public static void updateProductEntry(

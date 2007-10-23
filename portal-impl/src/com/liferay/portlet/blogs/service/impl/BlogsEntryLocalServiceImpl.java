@@ -70,6 +70,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
@@ -406,8 +408,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
+		long companyId = GetterUtil.getLong(ids[0]);
+
+		IndexWriter writer = null;
+
 		try {
-			long companyId = GetterUtil.getLong(ids[0]);
+			writer = LuceneUtil.getWriter(companyId);
 
 			Iterator itr = BlogsEntryUtil.findByCompanyId(companyId).iterator();
 
@@ -422,9 +428,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				String content = entry.getContent();
 
 				try {
-					Indexer.addEntry(
+					Document doc = Indexer.getAddEntryDocument(
 						companyId, groupId, userId, categoryId, entryId, title,
 						content);
+
+					writer.addDocument(doc);
 				}
 				catch (Exception e1) {
 					_log.error("Reindexing " + entryId, e1);
@@ -436,6 +444,16 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 		catch (Exception e2) {
 			throw new SystemException(e2);
+		}
+		finally {
+			try {
+				if (writer != null) {
+					LuceneUtil.write(companyId);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 	}
 

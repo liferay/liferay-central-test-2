@@ -31,6 +31,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 
@@ -40,6 +41,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Arrays;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexWriter;
 
 /**
  * <a href="FileSystemHook.java.html"><b><i>View Source</i></b></a>
@@ -249,7 +255,11 @@ public class FileSystemHook extends BaseHook {
 		long groupId = GetterUtil.getLong(ids[2]);
 		long repositoryId = GetterUtil.getLong(ids[3]);
 
+		IndexWriter writer = null;
+
 		try {
+			writer = LuceneUtil.getWriter(companyId);
+
 			File repistoryDir = getRepositoryDir(companyId, repositoryId);
 
 			String[] fileNames = FileUtil.listDirs(repistoryDir);
@@ -257,12 +267,29 @@ public class FileSystemHook extends BaseHook {
 			for (int i = 0; i < fileNames.length; i++) {
 				String fileName = fileNames[i];
 
-				IndexerImpl.addFile(
-					companyId, portletId, groupId, repositoryId, fileName);
+				try {
+					Document doc = IndexerImpl.getAddFileDocument(
+						companyId, portletId, groupId, repositoryId, fileName);
+
+					writer.addDocument(doc);
+				}
+				catch (Exception e) {
+					_log.error("Reindexing " + fileName, e);
+				}
 			}
 		}
 		catch (IOException ioe) {
 			throw new SearchException(ioe);
+		}
+		finally {
+			try {
+				if (writer != null) {
+					LuceneUtil.write(companyId);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 	}
 
@@ -399,6 +426,8 @@ public class FileSystemHook extends BaseHook {
 
 	private static final String _ROOT_DIR = PropsUtil.get(
 		PropsUtil.DL_HOOK_FILE_SYSTEM_ROOT_DIR);
+
+	private static Log _log = LogFactory.getLog(FileSystemHook.class);
 
 	private File _rootDir;
 

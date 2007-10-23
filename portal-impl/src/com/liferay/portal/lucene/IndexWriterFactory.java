@@ -26,9 +26,11 @@ import EDU.oswego.cs.dl.util.concurrent.FIFOSemaphore;
 import EDU.oswego.cs.dl.util.concurrent.Semaphore;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 
 import java.io.IOException;
@@ -181,6 +183,8 @@ public class IndexWriterFactory {
 						LuceneUtil.getLuceneDir(companyId),
 						LuceneUtil.getAnalyzer(), create);
 
+					writer.setMergeFactor(_MERGE_FACTOR);
+
 					writerData = new IndexWriterData(companyId, writer, 0);
 
 					_writerLookup.put(companyIdObj, writerData);
@@ -288,6 +292,9 @@ public class IndexWriterFactory {
 			}
 		}
 	}
+
+	private static final int _MERGE_FACTOR = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.LUCENE_MERGE_FACTOR));
 
 	private static Log _log = LogFactory.getLog(IndexWriterFactory.class);
 
