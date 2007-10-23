@@ -331,6 +331,4 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String WSRP_PRODUCER = "WSRP_PRODUCER";
 
-	public static final String WSRP_REGISTER_PRODUCER = "WSRP_REGISTER_PRODUCER";
-
 }

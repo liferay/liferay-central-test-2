@@ -1560,6 +1560,35 @@
 				<value>E:9:default</value>
 			</preference>
 
+			<!-- NetUnity Producer -->
+
+			<!--
+			<preference>
+				<name>wsrp-service-url</name>
+				<value>http://wsrp.netunitysoftware.com/WSRPTestService/WSRPTestService.asmx?Operation=WSDL</value>
+			</preference>
+			<preference>
+				<name>markup-endpoint</name>
+				<value>WSRPBaseService</value>
+			</preference>
+			<preference>
+				<name>service-description-endpoint</name>
+				<value>WSRPServiceDescriptionService</value>
+			</preference>
+			<preference>
+				<name>registration-endpoint</name>
+				<value>WSRPRegistrationService</value>
+			</preference>
+			<preference>
+				<name>portlet-management-endpoint</name>
+				<value>WSRPPortletManagementService</value>
+			</preference>
+			<preference>
+				<name>portlet-handle</name>
+				<value>E3C98E07-2C61-473a-B303-663B0D20E1B7</value>
+			</preference>
+			-->
+
 			<!-- Liferay Producer -->
 
 			<!--

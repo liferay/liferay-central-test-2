@@ -24,7 +24,9 @@ package com.liferay.portlet.wsrp;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.util.WSRPUtil;
 import com.liferay.portlet.StrutsPortlet;
@@ -117,7 +119,7 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 
 		Exception producerConfigError = null;
 		try {
-			Producer producer = _createProducer(request.getPreferences());
+			Producer producer = _getProducer(request.getPreferences());
 			request.setAttribute(WebKeys.WSRP_PRODUCER, producer);
 		}
 		catch (WSRPException e) {
@@ -148,38 +150,6 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 		}
 	}
 
-	private Producer _createProducer(PortletPreferences preferences)
-			throws WSRPException {
-
-		String wsrpServiceUrl = preferences.getValue("wsrp-service-url",
-				StringPool.BLANK);
-		String markupEndpoint = preferences.getValue("markup-endpoint",
-				StringPool.BLANK);
-		String serviceDescriptionEndpoint = preferences.getValue(
-				"service-description-endpoint", StringPool.BLANK);
-		String registrationEndpoint = preferences.getValue(
-				"registration-endpoint", StringPool.BLANK);
-		String portletManagementEndpoint = preferences.getValue(
-				"portlet-management-endpoint", StringPool.BLANK);
-
-		markupEndpoint = wsrpServiceUrl + "/" + markupEndpoint;
-		serviceDescriptionEndpoint = wsrpServiceUrl + "/"
-				+ serviceDescriptionEndpoint;
-		registrationEndpoint = wsrpServiceUrl + "/" + registrationEndpoint;
-		portletManagementEndpoint = wsrpServiceUrl + "/"
-				+ portletManagementEndpoint;
-
-		RegistrationData regData = new RegistrationData();
-		regData.setConsumerName("Liferay WSRP Agent");
-		regData.setConsumerAgent("Liferay WSRP Agent");
-
-		Producer producer = new ProducerImpl(PRODUCER_ID, markupEndpoint,
-				serviceDescriptionEndpoint, registrationEndpoint,
-				portletManagementEndpoint, regData);
-
-		return producer;
-	}
-
 	public void _processActionRemote(ActionRequest request,
 			ActionResponse actionResponse) throws PortletException {
 		String MN = "processAction";
@@ -195,13 +165,11 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 				userID = user.getUserID();
 			}
 
-			_registerProducer(request.getPreferences(), request
-					.getPortletSession());
-
 			// get all information and objects which are needed to perform the
 			// interaction
-			Map preferences = _getPreferences(request);
-
+			
+			PortletPreferences preferences = request.getPreferences();
+			
 			PortletKey portletKey = _getPortletKey(preferences);
 			WSRPPortlet portlet = _getPortlet(portletKey, preferences);
 			PortletWindowSession windowSession = _getWindowSession(userID,
@@ -340,12 +308,9 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 				userID = user.getUserID();
 			}
 
-			_registerProducer(request.getPreferences(), request
-					.getPortletSession());
-
 			// get all information and objects which are needed to perform the
 			// interaction
-			Map preferences = _getPreferences(request);
+			PortletPreferences preferences = request.getPreferences();
 
 			PortletKey portletKey = _getPortletKey(preferences);
 			WSRPPortlet portlet = _getPortlet(portletKey, preferences);
@@ -455,26 +420,40 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 
 		// to ensure that producer is added to the producer registry
 		// throws exception which we pass
-		_getProducer(portletKey.getProducerId());
+		_getProducer(request.getPreferences());
 
 		// now we can get our sessions
+
 		UserSession userSession = null;
+
 		synchronized (_sessionHdlrLock) {
 			SessionHandler sessionHandler = (SessionHandler) _consumerEnv
 					.getSessionHandler();
 			sessionHandler.setPortletSession(jsrPortletSession);
+
 			// get the user session
+
 			userSession = sessionHandler.getUserSession(portletKey
 					.getProducerId(), userID);
 		}
 
 		if (userSession != null) {
+			
 			// get the group session
-			String groupID = _getPortletDescription(portlet).getGroupID();
-			groupID = groupID == null ? "default" : groupID;
+
+			PortletDescription portletDescription = 
+				_getPortletDescription(portlet, request.getPreferences());
+			
+			String groupID = portletDescription.getGroupID();
+			
+			if (groupID == null) {
+				groupID = "default";
+			}
 
 			GroupSession groupSession = userSession.getGroupSession(groupID);
+
 			if (groupSession != null) {
+
 				// get the portlet session
 				String handle = _portletConfig.getPortletName();
 
@@ -493,7 +472,9 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 				}
 
 				if (portletSession != null) {
+					
 					// get the window session
+
 					PortletWindowSession windowSession = portletSession
 							.getPortletWindowSession(handle);
 
@@ -510,30 +491,10 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 		else {
 			WSRPXHelper.throwX(ErrorCodes.USER_SESSION_NOT_FOUND);
 		}
+
 		// we will never reach this
+
 		return null;
-	}
-
-	private void _registerProducer(PortletPreferences preferences,
-			javax.portlet.PortletSession portletSession) throws WSRPException {
-
-		int sessionScope = javax.portlet.PortletSession.PORTLET_SCOPE;
-		boolean regProducer = GetterUtil.getBoolean((String) portletSession
-				.getAttribute(WebKeys.WSRP_REGISTER_PRODUCER, sessionScope));
-
-		ProducerRegistry producerReg = _consumerEnv.getProducerRegistry();
-		Producer producer = producerReg.getProducer(PRODUCER_ID);
-
-		if (!regProducer && producer != null) {
-			return;
-		}
-
-		producer = _createProducer(preferences);
-
-		producerReg.addProducer(producer);
-
-		portletSession.setAttribute(WebKeys.WSRP_REGISTER_PRODUCER, "false");
-
 	}
 
 	private void _updateSessionContext(SessionContext sessionContext,
@@ -626,28 +587,14 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 		return userProfile;
 	}
 
-	private Map _getPreferences(PortletRequest request) {
-
-		Map preferences = CollectionFactory.getSyncHashMap();
-		Enumeration keys = request.getPreferences().getNames();
-
-		while (keys.hasMoreElements()) {
-			String key = (String) keys.nextElement();
-			String value = request.getPreferences().getValue(key, null);
-
-			preferences.put(key, value);
-		}
-
-		return preferences;
-	}
-
-	private PortletKey _getPortletKey(Map preferences) {
+	private PortletKey _getPortletKey(PortletPreferences preferences) {
 		PortletKey portletKey = null;
 
-		String portletHandle = (String) preferences.get("portlet-handle");
+		String portletHandle = preferences.getValue(
+				"portlet-handle", StringPool.BLANK);
 
 		if (portletHandle != null) {
-			String producerID = PRODUCER_ID;
+			String producerID = _getProducerID(preferences);
 			if (producerID != null) {
 				portletKey = new PortletKeyImpl(portletHandle, producerID);
 			}
@@ -656,20 +603,30 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 		return portletKey;
 	}
 
-	private WSRPPortlet _getPortlet(PortletKey portletKey, Map preferences)
-			throws WSRPException {
+	private WSRPPortlet _getPortlet(
+			PortletKey portletKey, PortletPreferences preferences) 
+		throws WSRPException {
 
 		WSRPPortlet portlet = null;
 
 		if (portletKey != null) {
-			portlet = _consumerEnv.getPortletRegistry().getPortlet(portletKey);
-			if (portlet == null) {
-				// not yet in registry, create new one
-				String parentHandle = GetterUtil.getString((String) preferences
-						.get("parent-handle"), (String) preferences
-						.get("portlet-handle"));
 
+			portlet = _consumerEnv.getPortletRegistry().getPortlet(portletKey);
+
+			if (portlet == null) {
+
+				String parentHandle = preferences.getValue(
+						"parent-handle", StringPool.BLANK);
+
+				// not yet in registry, create new one
+
+				if (Validator.isNull(parentHandle)) {
+					parentHandle = preferences.getValue(
+							"portlet-handle", StringPool.BLANK);;
+				}
+				
 				portlet = _createPortlet(portletKey, parentHandle);
+				
 				_consumerEnv.getPortletRegistry().addPortlet(portlet);
 			}
 		}
@@ -682,7 +639,9 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 
 		WSRPPortlet portlet = new WSRPPortletImpl(portletKey);
 
-		oasis.names.tc.wsrp.v1.types.PortletContext portletContext = new oasis.names.tc.wsrp.v1.types.PortletContext();
+		oasis.names.tc.wsrp.v1.types.PortletContext portletContext = 
+			new oasis.names.tc.wsrp.v1.types.PortletContext();
+
 		portletContext.setPortletHandle(portletKey.getPortletHandle());
 		portletContext.setPortletState(null);
 		portletContext.setExtensions(null);
@@ -699,13 +658,15 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 		return portlet;
 	}
 
-	private PortletDescription _getPortletDescription(WSRPPortlet portlet)
-			throws WSRPException {
-		String producerID = portlet.getPortletKey().getProducerId();
-		Producer producer = _getProducer(producerID);
+	private PortletDescription _getPortletDescription(
+			WSRPPortlet portlet, PortletPreferences preferences)
+		throws WSRPException {
+		
+		Producer producer = _getProducer(preferences);
 
-		PortletDescription portletDesc = producer.getPortletDescription(portlet
-				.getParent());
+		PortletDescription portletDesc = 
+			producer.getPortletDescription(portlet.getParent());
+		
 		if (portletDesc == null) {
 			WSRPXHelper.throwX(ErrorCodes.PORTLET_DESC_NOT_FOUND);
 		}
@@ -713,16 +674,52 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 		return portletDesc;
 	}
 
-	private Producer _getProducer(String producerID) throws WSRPException {
+	private Producer _getProducer(PortletPreferences preferences) 
+		throws WSRPException {
+		
 		final String MN = "getProducer";
 
 		if (_logger.isLogging(Logger.TRACE_HIGH)) {
 			_logger.text(Logger.TRACE_HIGH, MN,
-					"Trying to load producer with ID :" + producerID);
+					"Trying to load producer with ID :" + 
+					_getProducerID(preferences));
 		}
 
-		Producer producer = _consumerEnv.getProducerRegistry().getProducer(
-				producerID);
+		String producerID = _getProducerID(preferences);
+
+		ProducerRegistry producerReg = _consumerEnv.getProducerRegistry();
+		Producer producer = producerReg.getProducer(producerID);
+
+		if (producer == null) {
+			
+			String wsrpServiceUrl = preferences.getValue("wsrp-service-url",
+					StringPool.BLANK);
+			String markupEndpoint = preferences.getValue("markup-endpoint",
+					StringPool.BLANK);
+			String serviceDescriptionEndpoint = preferences.getValue(
+					"service-description-endpoint", StringPool.BLANK);
+			String registrationEndpoint = preferences.getValue(
+					"registration-endpoint", StringPool.BLANK);
+			String portletManagementEndpoint = preferences.getValue(
+					"portlet-management-endpoint", StringPool.BLANK);
+
+			markupEndpoint = wsrpServiceUrl + "/" + markupEndpoint;
+			serviceDescriptionEndpoint = wsrpServiceUrl + "/"
+					+ serviceDescriptionEndpoint;
+			registrationEndpoint = wsrpServiceUrl + "/" + registrationEndpoint;
+			portletManagementEndpoint = wsrpServiceUrl + "/"
+					+ portletManagementEndpoint;
+
+			RegistrationData regData = new RegistrationData();
+			regData.setConsumerName("Liferay WSRP Agent");
+			regData.setConsumerAgent("Liferay WSRP Agent");
+
+			producer = new ProducerImpl(producerID, 
+					markupEndpoint, serviceDescriptionEndpoint, 
+					registrationEndpoint, portletManagementEndpoint, regData);
+
+			producerReg.addProducer(producer);
+		}
 
 		if (producer == null) {
 			WSRPXHelper.throwX(_logger, Logger.ERROR, MN,
@@ -731,7 +728,37 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 
 		return producer;
 	}
+	
+	private String _getProducerID(PortletPreferences preferences) {
+		String wsrpServiceUrl = preferences.getValue("wsrp-service-url",
+				StringPool.BLANK);
+		String markupEndpoint = preferences.getValue("markup-endpoint",
+				StringPool.BLANK);
+		String serviceDescriptionEndpoint = preferences.getValue(
+				"service-description-endpoint", StringPool.BLANK);
+		String registrationEndpoint = preferences.getValue(
+				"registration-endpoint", StringPool.BLANK);
+		String portletManagementEndpoint = preferences.getValue(
+				"portlet-management-endpoint", StringPool.BLANK);
+		
+		StringMaker sm = new StringMaker();
 
+		sm.append(wsrpServiceUrl);
+		sm.append(StringPool.UNDERLINE);
+		sm.append(markupEndpoint);
+		sm.append(StringPool.UNDERLINE);
+		sm.append(serviceDescriptionEndpoint);
+		sm.append(StringPool.UNDERLINE);
+		sm.append(registrationEndpoint);
+		sm.append(StringPool.UNDERLINE);
+		sm.append(portletManagementEndpoint);
+		sm.append(StringPool.UNDERLINE);
+
+		String producerID = sm.toString();
+		
+		return producerID;
+	}
+	
 	// stores consumer specific information
 	private static final ConsumerEnvironment _consumerEnv = new ConsumerEnvironmentImpl();
 
@@ -747,8 +774,6 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 
 	// lock object for thread synchronization while updating session handler
 	private static final Object _sessionHdlrLock = new Object();
-
-	private static final String PRODUCER_ID = "1";
 
 	// used as keys in render params
 	public static final String NAVIGATIONAL_STATE = "proxyportlet-updateResponse-navState";

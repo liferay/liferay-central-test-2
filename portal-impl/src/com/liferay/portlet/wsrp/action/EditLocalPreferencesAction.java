@@ -81,7 +81,6 @@ public class EditLocalPreferencesAction extends PortletAction {
 		// start a new wsrp session on next render
 		PortletSession ses = req.getPortletSession();
 		ses.setAttribute(WebKeys.WSRP_NEW_SESSION, "true");
-		ses.setAttribute(WebKeys.WSRP_REGISTER_PRODUCER, "true");
 
 		prefs.store();
 
