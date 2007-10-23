@@ -1019,10 +1019,12 @@ public class BaseDeployer {
 		String[] files = FileUtil.listFiles(srcDir + "/WEB-INF/");
 
 		for (int i = 0; i < files.length; i++) {
-			if (FileUtil.getExtension(files[i]).equalsIgnoreCase("xml")) {
+			String ext = FileUtil.getExtension(files[i]);
+
+			if (ext.equalsIgnoreCase("xml")) {
 
 				// Make sure to rewrite any XML files to include external
-				// entities into same file.  LEP-3142
+				// entities into same file. See LEP-3142.
 
 				File file = new File(srcDir + "/WEB-INF/" + files[i]);
 
@@ -1030,10 +1032,10 @@ public class BaseDeployer {
 
 				Document doc = reader.read(file);
 
-				String newXml =
-					XMLFormatter.toString(doc, XMLFormatter.INDENT, true);
+				String content = XMLFormatter.toString(
+					doc, XMLFormatter.INDENT, true);
 
-				FileUtil.write(file, newXml);
+				FileUtil.write(file, content);
 			}
 		}
 	}
