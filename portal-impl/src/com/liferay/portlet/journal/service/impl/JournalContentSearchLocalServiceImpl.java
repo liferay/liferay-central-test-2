@@ -162,7 +162,7 @@ public class JournalContentSearchLocalServiceImpl
 
 		return JournalContentSearchUtil.findByG_A(groupId, articleId);
 	}
-	
+
 	public List getLayoutIds(
 			long groupId, boolean privateLayout, String articleId)
 		throws SystemException {
@@ -195,15 +195,15 @@ public class JournalContentSearchLocalServiceImpl
 			String portletId, String articleId)
 		throws PortalException, SystemException {
 
-		return updateContentSearch(groupId, privateLayout, layoutId,
-			portletId, articleId, false);
+		return updateContentSearch(
+			groupId, privateLayout, layoutId, portletId, articleId, false);
 	}
 
 	public JournalContentSearch updateContentSearch(
 			long groupId, boolean privateLayout, long layoutId,
 			String portletId, String articleId, boolean purge)
 		throws PortalException, SystemException {
-		
+
 		if (purge) {
 			JournalContentSearchUtil.removeByG_P_L_P(
 				groupId, privateLayout, layoutId, portletId);
@@ -239,7 +239,7 @@ public class JournalContentSearchLocalServiceImpl
 		throws PortalException, SystemException {
 
 		JournalContentSearchUtil.removeByG_P_L_P(
-				groupId, privateLayout, layoutId, portletId);
+			groupId, privateLayout, layoutId, portletId);
 
 		List contentSearches = new ArrayList();
 

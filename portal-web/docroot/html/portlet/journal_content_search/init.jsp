@@ -41,7 +41,7 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
 }
 
-boolean onlyShowListed = GetterUtil.getBoolean(prefs.getValue("show-listed", "true"));
+boolean showListed = GetterUtil.getBoolean(prefs.getValue("show-listed", "true"));
 String targetPortletId = prefs.getValue("target-portlet-id", StringPool.BLANK);
 String type = prefs.getValue("type", StringPool.BLANK);
 %>

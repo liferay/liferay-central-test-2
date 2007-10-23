@@ -53,25 +53,23 @@
 		</select>
 	</td>
 </tr>
-<tr>
-	<td colspan="2"><br /></td>
-</tr>
-<tr>
-	<td colspan="2">
-		<input type="checkbox" name="<portlet:namespace />showListed" <%= onlyShowListed?"checked":"" %> onchange="if(this.checked){document.<portlet:namespace />fm.<portlet:namespace />targetPortletId.disabled = true;}else {document.<portlet:namespace />fm.<portlet:namespace />targetPortletId.disabled = false;}" /> 
+</table>
 
-		<liferay-ui:message key="only-show-results-for-articles-listed-in-a-journal-content-portlet" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2"><br /></td>
-</tr>
+<br />
+
+<liferay-ui:message key="only-show-results-for-articles-listed-in-a-journal-content-portlet" />
+
+<input <%= showListed ? "checked" : "" %> name="<portlet:namespace />showListed" type="checkbox" onClick="document.<portlet:namespace />fm.<portlet:namespace />targetPortletId.disabled = this.checked;" />
+
+<br /><br />
+
+<table class="liferay-table">
 <tr>
 	<td>
 		<liferay-ui:message key="target-portlet-id" />
 	</td>
 	<td>
-		<input type="text" name="<portlet:namespace />targetPortletId" <%= onlyShowListed?"disabled":"" %> value="<%= targetPortletId %>" size="20" />
+		<input class="liferay-input-text" <%= showListed ? "disabled" : "" %> name="<portlet:namespace />targetPortletId" type="text" value="<%= targetPortletId %>" />
 	</td>
 </tr>
 </table>

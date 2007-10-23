@@ -24,7 +24,6 @@ package com.liferay.portlet.journalcontentsearch.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.servlet.SessionMessages;
@@ -55,7 +54,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
-		boolean onlyShowListed = ParamUtil.getBoolean(req, "showListed");
+		boolean showListed = ParamUtil.getBoolean(req, "showListed");
 		String targetPortletId = ParamUtil.getString(req, "targetPortletId");
 		String type = ParamUtil.getString(req, "type");
 
@@ -65,7 +64,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, portletResource, true, true);
 
-		prefs.setValue("show-listed", String.valueOf(onlyShowListed));
+		prefs.setValue("show-listed", String.valueOf(showListed));
 		prefs.setValue("target-portlet-id", targetPortletId);
 		prefs.setValue("type", type);
 
