@@ -236,7 +236,6 @@ public class IndexWriterFactory {
 
 		synchronized(this) {
 			if (!_writerLookup.isEmpty()) {
-
 				Iterator itr = _writerLookup.values().iterator();
 
 				while (itr.hasNext()) {
@@ -271,11 +270,13 @@ public class IndexWriterFactory {
 				_writerLookup.remove(new Long(writerData.getCompanyId()));
 
 				try {
+					IndexWriter writer = writerData.getWriter();
+
 					try {
-						writerData.getWriter().optimize();
+						writer.optimize();
 					}
 					finally {
-						writerData.getWriter().close();
+						writer.close();
 					}
 				}
 				catch (Exception e) {
