@@ -371,6 +371,7 @@
 		<indexer-class>com.liferay.portlet.blogs.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.blogs.util.BlogsOpenSearchImpl</open-search-class>
 		<friendly-url-mapper-class>com.liferay.portlet.blogs.BlogsFriendlyURLMapper</friendly-url-mapper-class>
+		<portlet-data-handler-class>com.liferay.portlet.blogs.lar.BlogsPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
