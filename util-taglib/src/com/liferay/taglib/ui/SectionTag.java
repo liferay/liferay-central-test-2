@@ -41,9 +41,9 @@ import javax.servlet.jsp.JspException;
 public class SectionTag extends ParamAncestorTagImpl {
 
 	public int doStartTag() throws JspException {
-		TabsTag tabsTag = (TabsTag)findAncestorWithClass(this, TabsTag.class);
+		_tabsTag = (TabsTag)findAncestorWithClass(this, TabsTag.class);
 
-		if (tabsTag == null) {
+		if (_tabsTag == null) {
 			throw new JspException();
 		}
 
@@ -59,30 +59,30 @@ public class SectionTag extends ParamAncestorTagImpl {
 				namespace = renderResponse.getNamespace();
 			}
 
-			String sectionParam = tabsTag.getParam();
-			String sectionName = tabsTag.getSectionName();
-			Boolean sectionSelected = new Boolean(tabsTag.getSectionSelected());
+			String sectionParam = _tabsTag.getParam();
+			String sectionName = _tabsTag.getSectionName();
+			_sectionSelected = new Boolean(_tabsTag.getSectionSelected());
 			String sectionScroll = namespace + sectionParam + "TabsScroll";
 			String sectionRedirectParams =
 				"&scroll=" + sectionScroll + "&" + sectionParam + "=" +
 					sectionName;
 
-			tabsTag.incrementSection();
+			_tabsTag.incrementSection();
 
 			req.setAttribute("liferay-ui:section:param", sectionParam);
 			req.setAttribute("liferay-ui:section:name", sectionName);
-			req.setAttribute("liferay-ui:section:selected", sectionSelected);
+			req.setAttribute("liferay-ui:section:selected", _sectionSelected);
 			req.setAttribute("liferay-ui:section:scroll", sectionScroll);
 
-			pageContext.setAttribute("sectionSelected", sectionSelected);
+			pageContext.setAttribute("sectionSelected", _sectionSelected);
 			pageContext.setAttribute("sectionParam", sectionParam);
 			pageContext.setAttribute("sectionName", sectionName);
 			pageContext.setAttribute("sectionScroll", sectionScroll);
 			pageContext.setAttribute(
 				"sectionRedirectParams", sectionRedirectParams);
 
-			if (!tabsTag.isRefresh() || sectionSelected.booleanValue()) {
-				if (!tabsTag.isRefresh()) {
+			if (!_tabsTag.isRefresh() || _sectionSelected.booleanValue()) {
+				if (!_tabsTag.isRefresh()) {
 					include(getStartPage());
 				}
 
@@ -99,9 +99,16 @@ public class SectionTag extends ParamAncestorTagImpl {
 
 	public int doEndTag() throws JspException {
 		try {
-			include(getEndPage());
+			if (!_tabsTag.isRefresh() || _sectionSelected.booleanValue()) {
+				if (!_tabsTag.isRefresh()) {
+					include(getEndPage());
+				}
 
-			return EVAL_PAGE;
+				return EVAL_BODY_INCLUDE;
+			}
+			else {
+				return EVAL_PAGE;
+			}
 		}
 		catch (Exception e) {
 			throw new JspException(e);
@@ -141,5 +148,7 @@ public class SectionTag extends ParamAncestorTagImpl {
 
 	private String _startPage;
 	private String _endPage;
+	private TabsTag _tabsTag = null;
+	private Boolean _sectionSelected = Boolean.FALSE;
 
 }
