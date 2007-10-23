@@ -377,6 +377,8 @@ public class BaseDeployer {
 			boolean overwrite, PluginPackage pluginPackage)
 		throws Exception {
 
+		rewriteFiles(srcFile);
+
 		mergeDirectory(mergeDir, srcFile);
 
 		processPluginPackageProperties(srcFile, displayName, pluginPackage);
@@ -1011,6 +1013,29 @@ public class BaseDeployer {
 		}
 
 		return null;
+	}
+
+	protected void rewriteFiles(File srcDir) throws Exception {
+		String[] files = FileUtil.listFiles(srcDir + "/WEB-INF/");
+
+		for (int i = 0; i < files.length; i++) {
+			if (FileUtil.getExtension(files[i]).equalsIgnoreCase("xml")) {
+
+				// Make sure to rewrite any XML files to include external
+				// entities into same file.  LEP-3142
+
+				File file = new File(srcDir + "/WEB-INF/" + files[i]);
+
+				SAXReader reader = SAXReaderFactory.getInstance(false);
+
+				Document doc = reader.read(file);
+
+				String newXml =
+					XMLFormatter.toString(doc, XMLFormatter.INDENT, true);
+
+				FileUtil.write(file, newXml);
+			}
+		}
 	}
 
 	protected void updateDeployDirectory(File srcFile) throws Exception {

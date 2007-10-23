@@ -100,10 +100,18 @@ public class XMLFormatter {
 	public static String toString(Branch branch, String indent)
 		throws IOException {
 
+		return toString(branch, INDENT, false);
+	}
+
+	public static String toString(
+			Branch branch, String indent, boolean expandEmptyElements)
+		throws IOException {
+
 		ByteArrayMaker bam = new ByteArrayMaker();
 
 		OutputFormat format = OutputFormat.createPrettyPrint();
 
+		format.setExpandEmptyElements(expandEmptyElements);
 		format.setIndent(indent);
 		format.setLineSeparator("\n");
 
