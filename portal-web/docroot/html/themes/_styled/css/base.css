@@ -254,8 +254,8 @@ body.staging {
 	border: 1px solid #BFBFBF;
 	color: #333;
 	font-weight: bold;
-	padding: 0.5em 0.3em;
 	max-width: 200px;
+	padding: 0.5em 0.3em;
 }
 
 /* ---------- Autocomplete styles ---------- */

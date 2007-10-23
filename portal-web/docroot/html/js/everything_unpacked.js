@@ -16778,7 +16778,7 @@ var ToolTip = {
 		var container = instance.container;
 		var currentItem = jQuery(obj);
 		var position = currentItem.offset();
-		
+
 		var dimensions = instance._windowCalculation();
 
 		if (!container) {
@@ -16786,8 +16786,7 @@ var ToolTip = {
 
 			instance.container = container;
 		}
-		
-		
+
 		container.html(text);
 
 		container.show();
@@ -16798,33 +16797,34 @@ var ToolTip = {
 		var boxHeight = container.height();
 		var left = position.left - (boxWidth / 2);
 		var top = position.top + height + 5;
-		
+
 		if (left < 0) {
 			left = 5;
 		}
 		else {
 			left += 5;
 		}
-		
+
 		if (left + boxWidth > dimensions.right) {
 			left = (left - (boxWidth / 2 )) + width;
 		}
-		
+
 		if (top + boxHeight > dimensions.bottom) {
 			top = top - (height + boxHeight + 5);
 		}
-		
+
 		container.css(
 			{
 				cursor: 'default',
 				left: left + 'px',
 				position: 'absolute',
-				top: top +'px',
+				top: top + 'px',
 				zIndex: Liferay.zIndex.TOOLTIP
 			}
 		);
 
-		currentItem.one('mouseout',
+		currentItem.one(
+			'mouseout',
 			function() {
 				instance.hide();
 			}
@@ -16836,10 +16836,10 @@ var ToolTip = {
 
 		instance.container.hide();
 	},
-	
+
 	_windowCalculation: function() {
 		var instance = this;
-		
+
 		if (instance._window.right == null) {
 			var windowSize = {};
 			var body = instance._body;
@@ -16847,7 +16847,7 @@ var ToolTip = {
 				body = jQuery('body');
 				instance._body = body;
 			}
-		
+
 			instance._window = {
 				bottom: body.height(),
 				left: 0,
