@@ -333,6 +333,58 @@ public class JournalContentSearchUtil {
 			groupId, privateLayout, articleId, obc);
 	}
 
+	public static java.util.List findByG_P_L_P(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String portletId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_P_L_P(groupId, privateLayout, layoutId,
+			portletId);
+	}
+
+	public static java.util.List findByG_P_L_P(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String portletId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_P_L_P(groupId, privateLayout, layoutId,
+			portletId, begin, end);
+	}
+
+	public static java.util.List findByG_P_L_P(long groupId,
+		boolean privateLayout, long layoutId, java.lang.String portletId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_P_L_P(groupId, privateLayout, layoutId,
+			portletId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalContentSearch findByG_P_L_P_First(
+		long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchContentSearchException {
+		return getPersistence().findByG_P_L_P_First(groupId, privateLayout,
+			layoutId, portletId, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalContentSearch findByG_P_L_P_Last(
+		long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchContentSearchException {
+		return getPersistence().findByG_P_L_P_Last(groupId, privateLayout,
+			layoutId, portletId, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalContentSearch[] findByG_P_L_P_PrevAndNext(
+		long contentSearchId, long groupId, boolean privateLayout,
+		long layoutId, java.lang.String portletId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchContentSearchException {
+		return getPersistence().findByG_P_L_P_PrevAndNext(contentSearchId,
+			groupId, privateLayout, layoutId, portletId, obc);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalContentSearch findByG_P_L_P_A(
 		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String portletId, java.lang.String articleId)
@@ -399,6 +451,13 @@ public class JournalContentSearchUtil {
 		getPersistence().removeByG_P_A(groupId, privateLayout, articleId);
 	}
 
+	public static void removeByG_P_L_P(long groupId, boolean privateLayout,
+		long layoutId, java.lang.String portletId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByG_P_L_P(groupId, privateLayout, layoutId,
+			portletId);
+	}
+
 	public static void removeByG_P_L_P_A(long groupId, boolean privateLayout,
 		long layoutId, java.lang.String portletId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
@@ -429,6 +488,13 @@ public class JournalContentSearchUtil {
 	public static int countByG_P_A(long groupId, boolean privateLayout,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_P_A(groupId, privateLayout, articleId);
+	}
+
+	public static int countByG_P_L_P(long groupId, boolean privateLayout,
+		long layoutId, java.lang.String portletId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_P_L_P(groupId, privateLayout,
+			layoutId, portletId);
 	}
 
 	public static int countByG_P_L_P_A(long groupId, boolean privateLayout,

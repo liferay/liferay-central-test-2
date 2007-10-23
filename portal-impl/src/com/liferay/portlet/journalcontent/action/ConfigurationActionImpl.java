@@ -135,7 +135,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		JournalContentSearchLocalServiceUtil.updateContentSearch(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
-			portletResource, articleId);
+			portletResource, articleId, true);
 	}
 
 }

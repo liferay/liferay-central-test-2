@@ -126,6 +126,12 @@ public interface JournalContentSearchLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
+		long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId, java.lang.String articleId, boolean purge)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List updateContentSearch(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String portletId,
 		java.lang.String[] articleIds)

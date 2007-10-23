@@ -225,6 +225,17 @@ public class JournalContentSearchLocalServiceUtil {
 			privateLayout, layoutId, portletId, articleId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
+		long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId, java.lang.String articleId, boolean purge)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		return journalContentSearchLocalService.updateContentSearch(groupId,
+			privateLayout, layoutId, portletId, articleId, purge);
+	}
+
 	public static java.util.List updateContentSearch(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String portletId,
 		java.lang.String[] articleIds)

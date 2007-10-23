@@ -37,29 +37,58 @@ content = StringUtil.shorten(content, 200);
 content = StringUtil.highlight(content, keywords);
 
 String articleId = doc.get("articleId");
+long articleGroupId = GetterUtil.getLong(doc.get(LuceneFields.GROUP_ID));
 
 List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.getGroupId(), layout.isPrivateLayout(), articleId);
 %>
 
 <%= content %><br />
 
-<c:if test="<%= hitLayoutIds.size() > 0 %>">
-	<span style="font-size: xx-small;">
+<c:choose>
+	<c:when test="<%= hitLayoutIds.size() > 0 %>">
+		<span style="font-size: xx-small;">
+	
+		<%
+		for (int i = 0; i < hitLayoutIds.size(); i++) {
+			Long hitLayoutId = (Long)hitLayoutIds.get(i);
+	
+			Layout hitLayout = LayoutLocalServiceUtil.getLayout(layout.getGroupId(), layout.isPrivateLayout(), hitLayoutId.longValue());
+	
+			String hitLayoutURL = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+		%>
+	
+			<br /><a href="<%= hitLayoutURL %>"><%= PortalUtil.getPortalURL(request) %><%= StringUtil.shorten(hitLayoutURL, 100) %></a>
 
-	<%
-	for (int i = 0; i < hitLayoutIds.size(); i++) {
-		Long hitLayoutId = (Long)hitLayoutIds.get(i);
-
-		Layout hitLayout = LayoutLocalServiceUtil.getLayout(layout.getGroupId(), layout.isPrivateLayout(), hitLayoutId.longValue());
-
-		String hitLayoutURL = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
-	%>
-
-		<br /><a href="<%= hitLayoutURL %>"><%= PortalUtil.getPortalURL(request) %><%= StringUtil.shorten(hitLayoutURL, 100) %></a>
-
-	<%
-	}
-	%>
-
-	</span>
-</c:if>
+		<%
+		}
+		%>
+	
+		</span>
+	</c:when>
+	<c:otherwise>
+		<span style="font-size: xx-small;">
+		
+		<%
+		StringMaker sm = new StringMaker();
+		
+		sm.append(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
+		sm.append("/journal_content/");
+		
+		if (Validator.isNotNull(targetPortletId)) {
+			sm.append(targetPortletId);
+		}
+		else {
+			sm.append(PortletKeys.JOURNAL_CONTENT);
+		}
+		
+		sm.append("/");
+		sm.append(String.valueOf(articleGroupId));
+		sm.append("/");
+		sm.append(articleId);
+		
+		%>
+	
+			<br /><a href="<%= sm.toString() %>"><%= PortalUtil.getPortalURL(request) %><%= StringUtil.shorten(sm.toString(), 100) %></a>
+		</span>
+	</c:otherwise>
+</c:choose>

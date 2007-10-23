@@ -99,6 +99,7 @@ create index IX_6838E427 on JournalContentSearch (groupId, articleId);
 create index IX_20962903 on JournalContentSearch (groupId, privateLayout);
 create index IX_7CC7D73E on JournalContentSearch (groupId, privateLayout, articleId);
 create index IX_B3B318DC on JournalContentSearch (groupId, privateLayout, layoutId);
+create index IX_7ACC74C9 on JournalContentSearch (groupId, privateLayout, layoutId, portletId);
 create index IX_C3AA93B8 on JournalContentSearch (groupId, privateLayout, layoutId, portletId, articleId);
 
 create index IX_B97F5608 on JournalStructure (groupId);
