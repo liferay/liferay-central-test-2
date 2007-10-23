@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -59,10 +60,10 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 /**
- * <a href="BlogsPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="BlogsPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ *
  */
 public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
@@ -86,8 +87,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_BLOGS_DATA,
-			_enableExport.getDefaultState());
+			parameterMap, _EXPORT_BLOGS_DATA, _enableExport.getDefaultState());
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -140,7 +140,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
-			// StatsUser
+			// Stats users
 
 			List statsUsers = BlogsStatsUserUtil.findByGroupId(
 				context.getGroupId());
@@ -181,8 +181,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_BLOGS_DATA,
-			_enableImport.getDefaultState());
+			parameterMap, _IMPORT_BLOGS_DATA, _enableImport.getDefaultState());
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -225,14 +224,15 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				String[] entryNames = context.getTagsEntries(
 					BlogsEntry.class, entry.getPrimaryKeyObj());
 
-				BlogsEntry existingEntry =
-					BlogsEntryUtil.fetchByPrimaryKey(entry.getPrimaryKey());
+				BlogsEntry existingEntry = BlogsEntryUtil.fetchByPrimaryKey(
+					entry.getPrimaryKey());
 
 				if ((existingEntry == null) ||
 					(existingEntry.getGroupId() != context.getGroupId())) {
 
 					long plid = context.getPlid();
 
+					ThemeDisplay themeDisplay = null;
 					boolean addCommunityPermissions = true;
 					boolean addGuestPermissions = true;
 
@@ -243,7 +243,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 						entry.getTitle(), entry.getContent(),
 						displayDate.getMonth(), displayDate.getDay(),
 						displayDate.getYear(), displayDate.getHours(),
-						displayDate.getMinutes(), entryNames,
+						displayDate.getMinutes(), themeDisplay, entryNames,
 						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
@@ -255,7 +255,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				}
 			}
 
-			// StatsUser
+			// Stats users
 
 			el = root.element("blog-stats-users").element("list");
 
