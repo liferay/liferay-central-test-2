@@ -119,6 +119,10 @@ public class PortletDataContext implements Serializable {
 
 		List tagsEntriesList = tagsAsset.getEntries();
 
+		if (tagsEntriesList.size() == 0) {
+			return;
+		}
+
 		String[] tagsEntries = new String[tagsEntriesList.size()];
 		int i = 0;
 
