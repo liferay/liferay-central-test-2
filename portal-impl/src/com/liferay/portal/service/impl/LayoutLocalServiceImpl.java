@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.lar.PortletDataContextImpl;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
@@ -362,7 +363,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		ZipWriter zipWriter = new ZipWriter();
 
-		PortletDataContext context = new PortletDataContext(
+		PortletDataContext context = new PortletDataContextImpl(
 			companyId, groupId, parameterMap, CollectionFactory.getHashSet(),
 			zipWriter);
 
@@ -669,7 +670,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		ZipReader zipReader = new ZipReader(is);
 
-		PortletDataContext context = new PortletDataContext(
+		PortletDataContext context = new PortletDataContextImpl(
 			companyId, groupId, parameterMap, CollectionFactory.getHashSet(),
 			zipReader);
 

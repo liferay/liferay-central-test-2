@@ -24,19 +24,11 @@ package com.liferay.portal.kernel.lar;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
-import com.liferay.portlet.tags.model.TagsAsset;
-import com.liferay.portlet.tags.model.TagsEntry;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 
 import java.io.Serializable;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -52,146 +44,39 @@ import java.util.Set;
  * @author Raymond Augé
  *
  */
-public class PortletDataContext implements Serializable {
+public interface PortletDataContext extends Serializable {
 
-	public PortletDataContext(long companyId, long groupId, Map parameterMap,
-							  Set primaryKeys, ZipReader zipReader) {
+	public long getCompanyId();
 
-		_companyId = companyId;
-		_groupId = groupId;
-		_parameterMap = parameterMap;
-		_primaryKeys = primaryKeys;
-		_zipReader = zipReader;
-		_zipWriter = null;
-	}
+	public long getGroupId();
 
-	public PortletDataContext(long companyId, long groupId, Map parameterMap,
-							  Set primaryKeys, ZipWriter zipWriter) {
+	public long getPlid();
 
-		_companyId = companyId;
-		_groupId = groupId;
-		_parameterMap = parameterMap;
-		_primaryKeys = primaryKeys;
-		_zipReader = null;
-		_zipWriter = zipWriter;
-	}
+	public void setPlid(long plid);
 
-	public long getCompanyId() {
-		return _companyId;
-	}
+	public Map getParameterMap();
 
-	public long getGroupId() {
-		return _groupId;
-	}
+	public Set getPrimaryKeys();
 
-	public long getPlid() {
-		return _plid;
-	}
+	public boolean addPrimaryKey(Class classObj, Object primaryKey);
 
-	public void setPlid(long plid) {
-		_plid = plid;
-	}
+	public boolean hasPrimaryKey(Class classObj, Object primaryKey);
 
-	public Map getParameterMap() {
-		return _parameterMap;
-	}
+	public String[] getTagsEntries(Class classObj, Object primaryKey);
 
-	public Set getPrimaryKeys() {
-		return _primaryKeys;
-	}
+	public String[] getTagsEntries(String className, Object primaryKey);
 
-	public boolean addPrimaryKey(Class classObj, Object primaryKey) {
-		boolean value = hasPrimaryKey(classObj, primaryKey);
-
-		if (!value) {
-			_primaryKeys.add(getPrimaryKeyString(classObj, primaryKey));
-		}
-
-		return value;
-	}
-
-	public boolean hasPrimaryKey(Class classObj, Object primaryKey) {
-		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
-	}
-
-	public String[] getTagsEntries(Class classObj, Object primaryKey) {
-		return (String[])_tagsEntriesMap.get(
-			getPrimaryKeyString(classObj, primaryKey));
-	}
-
-	public String[] getTagsEntries(String className, Object primaryKey) {
-		return (String[])_tagsEntriesMap.get(
-			getPrimaryKeyString(className, primaryKey));
-	}
-
-	public Map getTagsEntries() {
-		return _tagsEntriesMap;
-	}
+	public Map getTagsEntries();
 
 	public void addTagsEntries(Class classObj, Object classPK)
-		throws PortalException, SystemException {
-
-		TagsAsset tagsAsset = TagsAssetLocalServiceUtil.getAsset(
-			classObj.getName(), ((Long)classPK).longValue());
-
-		List tagsEntriesList = tagsAsset.getEntries();
-
-		if (tagsEntriesList.size() == 0) {
-			return;
-		}
-
-		String[] tagsEntries = new String[tagsEntriesList.size()];
-
-		Iterator itr = tagsEntriesList.iterator();
-
-		for (int i = 0; itr.hasNext(); i++) {
-			TagsEntry tagsEntry = (TagsEntry)itr.next();
-
-			tagsEntries[i] = tagsEntry.getName();
-		}
-
-		_tagsEntriesMap.put(
-			getPrimaryKeyString(classObj, classPK), tagsEntries);
-	}
+		throws PortalException, SystemException;
 
 	public void addTagsEntries(
 			String className, Object classPK, String[] values)
-		throws PortalException, SystemException {
+		throws PortalException, SystemException;
 
-		_tagsEntriesMap.put(getPrimaryKeyString(className, classPK), values);
-	}
+	public ZipReader getZipReader();
 
-	public ZipReader getZipReader() {
-		return _zipReader;
-	}
-
-	public ZipWriter getZipWriter() {
-		return _zipWriter;
-	}
-
-	protected String getPrimaryKeyString(Class classObj, Object primaryKey) {
-		StringMaker sm = new StringMaker();
-
-		return getPrimaryKeyString(classObj.getName(), primaryKey);
-	}
-
-	protected String getPrimaryKeyString(String className, Object primaryKey) {
-		StringMaker sm = new StringMaker();
-
-		sm.append(className);
-		sm.append(StringPool.POUND);
-		sm.append(primaryKey);
-
-		return sm.toString();
-	}
-
-	private long _companyId;
-	private long _groupId;
-	private long _plid;
-	private Map _parameterMap;
-	private Map _tagsEntriesMap = new HashMap();
-	private Set _primaryKeys;
-	private ZipReader _zipReader;
-	private ZipWriter _zipWriter;
+	public ZipWriter getZipWriter();
 
 }
