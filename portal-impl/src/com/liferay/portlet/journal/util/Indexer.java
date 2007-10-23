@@ -97,7 +97,10 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		String title, String description, String content, String type,
 		Date displayDate) {
 
-		if ((content != null) && (content.indexOf("<dynamic-content>") != -1)) {
+		if ((content != null) &&
+			((content.indexOf("<dynamic-content>") != -1) ||
+			 (content.indexOf("<static-content") != -1))) {
+
 			content = _getIndexableContent(content);
 
 			content = StringUtil.replace(
@@ -226,6 +229,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 				Element dynamicContent = el.element("dynamic-content");
 
 				String text = dynamicContent.getText();
+
+				sm.append(text);
+				sm.append(StringPool.BLANK);
+			}
+			else if (el.getName().equals("static-content")) {
+				String text = el.getText();
 
 				sm.append(text);
 				sm.append(StringPool.BLANK);
