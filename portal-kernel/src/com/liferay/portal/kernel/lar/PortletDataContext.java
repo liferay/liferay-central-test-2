@@ -49,7 +49,7 @@ import java.util.Set;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
 public class PortletDataContext implements Serializable {
@@ -110,42 +110,6 @@ public class PortletDataContext implements Serializable {
 		return value;
 	}
 
-	public void addTagsEntries(Class classObj, Object classPK)
-		throws PortalException, SystemException {
-
-		TagsAsset tagsAsset =
-			TagsAssetLocalServiceUtil.getAsset(
-				classObj.getName(), ((Long)classPK).longValue());
-
-		List tagsEntriesList = tagsAsset.getEntries();
-
-		if (tagsEntriesList.size() == 0) {
-			return;
-		}
-
-		String[] tagsEntries = new String[tagsEntriesList.size()];
-		int i = 0;
-
-		Iterator itr = tagsAsset.getEntries().iterator();
-
-		while (itr.hasNext()) {
-			TagsEntry tagsEntry = (TagsEntry) itr.next();
-
-			tagsEntries[i] = tagsEntry.getName();
-			i++;
-		}
-
-		_tagsEntriesMap.put(
-			getPrimaryKeyString(classObj, classPK), tagsEntries);
-	}
-
-	public void addTagsEntries(
-			String className, Object classPK, String[] values)
-		throws PortalException, SystemException {
-
-		_tagsEntriesMap.put(getPrimaryKeyString(className, classPK), values);
-	}
-
 	public boolean hasPrimaryKey(Class classObj, Object primaryKey) {
 		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
 	}
@@ -162,6 +126,39 @@ public class PortletDataContext implements Serializable {
 
 	public Map getTagsEntries() {
 		return _tagsEntriesMap;
+	}
+
+	public void addTagsEntries(Class classObj, Object classPK)
+		throws PortalException, SystemException {
+
+		TagsAsset tagsAsset = TagsAssetLocalServiceUtil.getAsset(
+			classObj.getName(), ((Long)classPK).longValue());
+
+		List tagsEntriesList = tagsAsset.getEntries();
+
+		if (tagsEntriesList.size() == 0) {
+			return;
+		}
+
+		String[] tagsEntries = new String[tagsEntriesList.size()];
+
+		Iterator itr = tagsEntriesList.iterator();
+
+		for (int i = 0; itr.hasNext(); i++) {
+			TagsEntry tagsEntry = (TagsEntry)itr.next();
+
+			tagsEntries[i] = tagsEntry.getName();
+		}
+
+		_tagsEntriesMap.put(
+			getPrimaryKeyString(classObj, classPK), tagsEntries);
+	}
+
+	public void addTagsEntries(
+			String className, Object classPK, String[] values)
+		throws PortalException, SystemException {
+
+		_tagsEntriesMap.put(getPrimaryKeyString(className, classPK), values);
 	}
 
 	public ZipReader getZipReader() {

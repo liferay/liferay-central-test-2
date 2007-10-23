@@ -331,7 +331,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		boolean exportPortletPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES);
 		boolean exportTags = MapUtil.getBoolean(
-				parameterMap, PortletDataHandlerKeys.EXPORT_TAGS);
+			parameterMap, PortletDataHandlerKeys.EXPORT_TAGS);
 		boolean exportTheme = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_THEME);
 
@@ -477,12 +477,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		}
 
-		// Tags
-
-		if (exportTags) {
-			exportTags(context, root);
-		}
-
 		Element rolesEl = root.addElement("roles");
 
 		// Layout roles
@@ -496,6 +490,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		if (exportPermissions) {
 			exportPortletRoles(
 				layoutCache, companyId, groupId, portletIds, rolesEl);
+		}
+
+		// Tags
+
+		if (exportTags) {
+			exportTags(context, root);
 		}
 
 		// Look and feel
@@ -640,7 +640,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		boolean importPortletPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES);
 		boolean importTags = MapUtil.getBoolean(
-				parameterMap, PortletDataHandlerKeys.IMPORT_TAGS);
+			parameterMap, PortletDataHandlerKeys.IMPORT_TAGS);
 		boolean importTheme = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_THEME);
 
@@ -1670,29 +1670,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
-	protected void exportTags(PortletDataContext context, Element root) {
-		Element el = root.addElement("tags");
-
-		Map tagsEntries = context.getTagsEntries();
-
-		Iterator itr = tagsEntries.keySet().iterator();
-
-		while (itr.hasNext()) {
-			String key = (String)itr.next();
-
-			String[] tagsEntry = key.split(StringPool.POUND);
-
-			el.addAttribute("class-name", tagsEntry[0]);
-			el.addAttribute("class-pk", tagsEntry[1]);
-			el.addAttribute(
-				"entries",
-				StringUtil.merge(
-					context.getTagsEntries(tagsEntry[0], tagsEntry[1]), ","
-				)
-			);
-		}
-	}
-
 	protected void exportPortletRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
 			Set portletIds, Element rolesEl)
@@ -1771,6 +1748,27 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return el;
+	}
+
+	protected void exportTags(PortletDataContext context, Element root) {
+		Element el = root.addElement("tags");
+
+		Map tagsEntries = context.getTagsEntries();
+
+		Iterator itr = tagsEntries.keySet().iterator();
+
+		while (itr.hasNext()) {
+			String key = (String)itr.next();
+
+			String[] tagsEntry = key.split(StringPool.POUND);
+
+			el.addAttribute("class-name", tagsEntry[0]);
+			el.addAttribute("class-pk", tagsEntry[1]);
+			el.addAttribute(
+				"entries",
+				StringUtil.merge(
+					context.getTagsEntries(tagsEntry[0], tagsEntry[1]), ","));
+		}
 	}
 
 	protected byte[] exportTheme(LayoutSet layoutSet)
@@ -2435,25 +2433,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
-	protected void importTags(PortletDataContext context, Element root)
-		throws PortalException, SystemException {
-
-		Iterator itr = root.elements("tags").iterator();
-
-		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
-
-			String className =
-				GetterUtil.getString(el.attributeValue("class-name"));
-			long classPK =
-				GetterUtil.getLong(el.attributeValue("class-pk"));
-			String entries = GetterUtil.getString(el.attributeValue("entries"));
-
-			context.addTagsEntries(
-				className, new Long(classPK), StringUtil.split(entries, ","));
-		}
-	}
-
 	protected void importPortletRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
 			Element rolesEl)
@@ -2534,6 +2513,24 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 						role.getRoleId(), groupIds);
 				}
 			}
+		}
+	}
+
+	protected void importTags(PortletDataContext context, Element root)
+		throws PortalException, SystemException {
+
+		Iterator itr = root.elements("tags").iterator();
+
+		while (itr.hasNext()) {
+			Element el = (Element)itr.next();
+
+			String className = GetterUtil.getString(
+				el.attributeValue("class-name"));
+			long classPK = GetterUtil.getLong(el.attributeValue("class-pk"));
+			String entries = GetterUtil.getString(el.attributeValue("entries"));
+
+			context.addTagsEntries(
+				className, new Long(classPK), StringUtil.split(entries, ","));
 		}
 	}
 

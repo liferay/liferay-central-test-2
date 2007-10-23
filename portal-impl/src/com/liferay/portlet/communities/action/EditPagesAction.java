@@ -312,8 +312,7 @@ public class EditPagesAction extends PortletAction {
 			PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES,
 			Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_TAGS,
-			Boolean.TRUE.toString());
+			PortletDataHandlerKeys.EXPORT_TAGS, Boolean.TRUE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.EXPORT_THEME, Boolean.FALSE.toString());
 		parameterMap.put(
@@ -325,8 +324,7 @@ public class EditPagesAction extends PortletAction {
 			PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES,
 			Boolean.TRUE.toString());
 		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_TAGS,
-			Boolean.TRUE.toString());
+			PortletDataHandlerKeys.IMPORT_TAGS, Boolean.TRUE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.IMPORT_THEME, Boolean.FALSE.toString());
 
