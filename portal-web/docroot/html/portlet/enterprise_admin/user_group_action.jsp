@@ -35,34 +35,36 @@ UserGroup userGroup = (UserGroup)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
-			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
-		</portlet:renderURL>
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+		<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.UPDATE) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
+				<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
+			</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL %>" />
-	</c:if>
+			<liferay-ui:icon image="edit" url="<%= editURL %>" />
+		</c:if>
 
-	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.PERMISSIONS) %>">
-		<liferay-security:permissionsURL
-			modelResource="<%= UserGroup.class.getName() %>"
-			modelResourceDescription="<%= userGroup.getName() %>"
-			resourcePrimKey="<%= String.valueOf(userGroup.getUserGroupId()) %>"
-			var="permissionsURL"
-		/>
+		<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.PERMISSIONS) %>">
+			<liferay-security:permissionsURL
+				modelResource="<%= UserGroup.class.getName() %>"
+				modelResourceDescription="<%= userGroup.getName() %>"
+				resourcePrimKey="<%= String.valueOf(userGroup.getUserGroupId()) %>"
+				var="permissionsURL"
+			/>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
-	</c:if>
+			<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+		</c:if>
 
-	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_USERS) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" />
-			<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
-		</portlet:renderURL>
+		<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_USERS) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" />
+				<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
+			</portlet:renderURL>
 
-		<liferay-ui:icon image="assign" url="<%= assignURL %>" />
+			<liferay-ui:icon image="assign" url="<%= assignURL %>" />
+		</c:if>
 	</c:if>
 
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
@@ -78,14 +80,16 @@ UserGroup userGroup = (UserGroup)row.getObject();
 
 	<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 
-	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="deleteUserGroupIds" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
-		</portlet:actionURL>
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+		<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.DELETE) %>">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
+				<portlet:param name="deleteUserGroupIds" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
+			</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+			<liferay-ui:icon-delete url="<%= deleteURL %>" />
+		</c:if>
 	</c:if>
 </liferay-ui:icon-menu>
