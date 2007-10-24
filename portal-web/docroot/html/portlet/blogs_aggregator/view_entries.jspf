@@ -23,33 +23,11 @@
 %>
 
 <%
-boolean showAddEntryButton = tabs1.equals("entries") && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY);
-%>
-
-<c:if test="<%= showAddEntryButton || (results.size() > 0) %>">
-	<div>
-		<c:if test="<%= results.size() > 0 %>">
-			<label for="<portlet:namespace />keywords"><liferay-ui:message key="search" /></label>
-
-			<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" />
-
-			<input type="submit" value="<liferay-ui:message key="search-entries" />" />
-		</c:if>
-
-		<c:if test="<%= showAddEntryButton %>">
-			<input type="button" value="<liferay-ui:message key="add-entry" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
-		</c:if>
-	</div>
-
-	<br />
-</c:if>
-
-<%
 for (int i = 0; i < results.size(); i++) {
 	BlogsEntry entry = (BlogsEntry)results.get(i);
 %>
 
-	<%@ include file="/html/portlet/blogs/view_entry_content.jspf" %>
+	<%@ include file="/html/portlet/blogs_aggregator/view_entry_content.jspf" %>
 
 	<div class="separator"><!-- --></div>
 
@@ -58,10 +36,20 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <%
-String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/blogs/rss";
+//String rssURL = "/blogs/rss?companyId=" + company.getCompanyId();
+StringMaker sm = new StringMaker();
+sm.append("/c/blogs/rss?");
+if (organizationId > 0) {
+	sm.append("organizationId=" + organizationId);
+}
+else {
+	sm.append("companyId=" + company.getCompanyId());
+}
+
+String rssURL = sm.toString();
 %>
 
-<liferay-ui:icon image="rss" url="<%= rssURL %>" target="_blank" />
+<liferay-ui:icon image="rss" message="rss" url="<%= rssURL %>" target="_blank" />
 
 <a href="<%= rssURL %>">
 	<liferay-ui:message key="subscribe-to-this-blog" />
@@ -70,3 +58,4 @@ String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/blogs/rss";
 <br /><br />
 
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+

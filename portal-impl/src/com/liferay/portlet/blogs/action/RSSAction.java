@@ -107,6 +107,7 @@ public class RSSAction extends PortletAction {
 		long companyId = ParamUtil.getLong(req, "companyId");
 		long groupId = ParamUtil.getLong(req, "groupId");
 		long categoryId = ParamUtil.getLong(req, "categoryId");
+		long organizationId = ParamUtil.getLong(req, "organizationId");
 		int max = ParamUtil.getInteger(
 			req, "max", SearchContainer.DEFAULT_DELTA);
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
@@ -127,6 +128,19 @@ public class RSSAction extends PortletAction {
 			try {
 				rss = BlogsEntryServiceUtil.getCompanyEntriesRSS(
 					companyId, max, type, version, feedURL, entryURL);
+			}
+			catch (NoSuchCompanyException nsce) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsce);
+				}
+			}
+		}
+		else if (organizationId > 0) {
+			feedURL = StringPool.BLANK;
+
+			try {
+				rss = BlogsEntryServiceUtil.getOrganizationEntriesRSS(
+					organizationId, max, type, version, feedURL, entryURL);
 			}
 			catch (NoSuchCompanyException nsce) {
 				if (_log.isWarnEnabled()) {

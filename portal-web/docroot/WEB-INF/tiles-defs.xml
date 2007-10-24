@@ -170,6 +170,18 @@
 		<put name="portlet_content" value="/portlet/blogs/view_entry.jsp" />
 	</definition>
 
+	<!-- Blogs Aggregator -->
+
+	<definition name="portlet.blogs_aggregator" extends="portlet" />
+
+	<definition name="portlet.blogs_aggregator.error" extends="portlet.blogs_aggregator">
+		<put name="portlet_content" value="/portlet/blogs_aggregator/error.jsp" />
+	</definition>
+
+	<definition name="portlet.blogs_aggregator.view" extends="portlet.blogs_aggregator">
+		<put name="portlet_content" value="/portlet/blogs_aggregator/view.jsp" />
+	</definition>
+
 	<!-- Bookmarks -->
 
 	<definition name="portlet.bookmarks" extends="portlet" />

@@ -22,24 +22,8 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%@ include file="/html/portlet/blogs_aggregator/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
+<liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
 
-<%
-String className = (String)request.getAttribute("liferay-ui:tags_summary:className");
-long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_summary:classPK"));
-String message = (String)request.getAttribute("liferay-ui:tags_summary:message");
-
-if (message == null) {
-	message = "tags";
-}
-
-List entries = TagsEntryLocalServiceUtil.getEntries(className, classPK);
-
-String curTags = ListUtil.toString(entries, "name", ", ");
-%>
-
-<c:if test="<%= entries.size() > 0 %>">
-	<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %><%= curTags %>
-</c:if>
+<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />

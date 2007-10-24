@@ -87,7 +87,7 @@ List statsUsers = BlogsStatsUserLocalServiceUtil.getCompanyStatsUsers(company.ge
 					// User
 
 					//row.addText(user2.getFullName(), rowHREF);
-					row.addText("<img src=\"" + themeDisplay.getPathImage() + "/user_portrait?img_id=" + user2.getPortraitId() + "&t=" + ImageServletTokenUtil.getToken(user2.getPortraitId()) + "\" width=\"65\" /><br />" + user2.getFullName(), rowHREF);
+					row.addText("<img src=\"" + themeDisplay.getPathImage() + "/user_portrait?img_id=" + user2.getPortraitId() + "&t=" + ImageServletTokenUtil.getToken(user2.getPortraitId()) + "\" width=\"65\" border=\"0\"/><br />" + user2.getFullName(), rowHREF);
 
 					// Type
 

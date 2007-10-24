@@ -22,24 +22,39 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
-
-<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
+<%@ include file="/html/portlet/blogs_aggregator/init.jsp" %>
 
 <%
-String className = (String)request.getAttribute("liferay-ui:tags_summary:className");
-long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_summary:classPK"));
-String message = (String)request.getAttribute("liferay-ui:tags_summary:message");
+String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
-if (message == null) {
-	message = "tags";
-}
+String redirect = currentURL;
 
-List entries = TagsEntryLocalServiceUtil.getEntries(className, classPK);
+PortletURL portletURL = renderResponse.createRenderURL();
 
-String curTags = ListUtil.toString(entries, "name", ", ");
+portletURL.setParameter("struts_action", "/blogs/view");
+portletURL.setParameter("tabs1", tabs1);
 %>
 
-<c:if test="<%= entries.size() > 0 %>">
-	<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %><%= curTags %>
+<%
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, null, null);
+
+List results = null;
+if (organizationId > 0) {
+	results = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
+}
+else {
+	results = BlogsEntryServiceUtil.getCompanyEntries(company.getCompanyId(), max);
+}
+
+searchContainer.setResults(results);
+
+searchContainer.setTotal(results.size());
+%>
+
+<%@ include file="/html/portlet/blogs_aggregator/view_entries.jspf" %>
+
+<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
+	</script>
 </c:if>

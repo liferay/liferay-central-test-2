@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
@@ -141,6 +143,51 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		return exportToRSS(
 			name, description, type, version, feedURL, entryURL, blogsEntries);
+	}
+
+	public List getOrganizationEntries(long organizationId, int max)
+		throws PortalException, SystemException {
+
+		List entries = new ArrayList();
+
+		Organization organization =
+			OrganizationLocalServiceUtil.getOrganization(organizationId);
+
+		Iterator itr = BlogsEntryLocalServiceUtil.getCompanyEntries(
+			organization.getCompanyId(), 0, _MAX_END).iterator();
+
+		while (itr.hasNext() && (entries.size() < max)) {
+			BlogsEntry entry = (BlogsEntry)itr.next();
+
+			if (OrganizationLocalServiceUtil.hasUserOrganization(
+					entry.getUserId(), organizationId) &&
+			   (BlogsEntryPermission.contains(
+					getPermissionChecker(), entry, ActionKeys.VIEW))) {
+
+				entries.add(entry);
+			}
+		}
+
+		return entries;
+	}
+
+	public String getOrganizationEntriesRSS(
+			long organizationId, int max, String type, double version,
+			String feedURL, String entryURL)
+		throws PortalException, SystemException {
+
+		Organization organization =
+			OrganizationLocalServiceUtil.getOrganization(organizationId);
+
+		Company company = CompanyUtil.findByPrimaryKey(
+			organization.getCompanyId());
+
+		String name = company.getName();
+
+		List blogsEntries = getOrganizationEntries(organizationId, max);
+
+		return exportToRSS(
+			name, null, type, version, feedURL, entryURL, blogsEntries);
 	}
 
 	public List getCompanyEntries(long companyId, int max)

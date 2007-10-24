@@ -187,6 +187,13 @@
 			<forward name="portlet.blogs.error" path="portlet.blogs.error" />
 		</action>
 
+		<!-- Blogs Aggregator -->
+
+		<action path="/blogs_aggregator/view" type="com.liferay.portlet.blogs.action.ViewAction">
+			<forward name="portlet.blogs.error" path="portlet.blogs_aggregator.error" />
+			<forward name="portlet.blogs.view" path="portlet.blogs_aggregator.view" />
+		</action>
+
 		<!-- Bookmarks -->
 
 		<action path="/bookmarks/edit_folder" type="com.liferay.portlet.bookmarks.action.EditFolderAction">
@@ -1036,6 +1043,8 @@
 		<action path="/portlet_configuration/update_look_and_feel" type="com.liferay.portlet.portletconfiguration.action.UpdateLookAndFeelAction" />
 
 		<action path="/portlet_configuration/update_title" type="com.liferay.portlet.portletconfiguration.action.UpdateTitleAction" />
+
+		<action path="/portlet_configuration/select_organization" forward="portlet.enterprise_admin.select_organization" />
 
 		<!-- Portlet CSS -->
 
