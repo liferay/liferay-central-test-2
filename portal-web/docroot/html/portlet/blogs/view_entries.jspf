@@ -57,4 +57,14 @@ for (int i = 0; i < results.size(); i++) {
 }
 %>
 
+<%
+String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/blogs/rss";
+%>
+
+<liferay-ui:icon image="rss" url="<%= rssURL %>" target="_blank" />
+
+<liferay-ui:message key="subscribe-to-this-blog" />
+
+<br /><br />
+
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
