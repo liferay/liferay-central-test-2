@@ -389,7 +389,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 			}
 			else if ((oldChar == ' ') || (oldChar == '-') || (oldChar == ',') ||
-					 (oldChar == '/') || (oldChar == '\\')) {
+					 (oldChar == '/') || (oldChar == '\\') ||
+					 (oldChar == '''') || (oldChar == '\"')) {
 
 				newChar = '_';
 			}
