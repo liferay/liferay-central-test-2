@@ -385,9 +385,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			IGImage igImage)
 		throws Exception {
 
-		String[] tagsEntries = context.getTagsEntries(
-			IGImage.class, igImage.getPrimaryKeyObj());
-
 		Long folderId = (Long)folderPKs.get(new Long(igImage.getFolderId()));
 
 		boolean newParentFolder = false;
@@ -398,6 +395,9 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		else {
 			newParentFolder = true;
 		}
+
+		String[] tagsEntries = context.getTagsEntries(
+			IGImage.class, igImage.getPrimaryKeyObj());
 
 		try {
 			if (folderId.longValue() != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {

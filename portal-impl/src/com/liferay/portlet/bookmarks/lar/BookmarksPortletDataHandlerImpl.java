@@ -292,9 +292,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, Map folderPKs, BookmarksEntry entry)
 		throws Exception {
 
-		String[] tagsEntries = context.getTagsEntries(
-			BookmarksEntry.class, entry.getPrimaryKeyObj());
-
 		Long folderId = (Long)folderPKs.get(new Long(entry.getFolderId()));
 
 		boolean newParentFolder = false;
@@ -305,6 +302,9 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		else {
 			newParentFolder = true;
 		}
+
+		String[] tagsEntries = context.getTagsEntries(
+			BookmarksEntry.class, entry.getPrimaryKeyObj());
 
 		try {
 			if (folderId.longValue() !=

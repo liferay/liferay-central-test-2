@@ -1757,10 +1757,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Iterator itr = tagsEntries.keySet().iterator();
 
 		while (itr.hasNext()) {
-			Element el = root.addElement("tags");
-
 			String key = (String)itr.next();
+
 			String[] tagsEntry = key.split(StringPool.POUND);
+
+			Element el = root.addElement("tags");
 
 			el.addAttribute("class-name", tagsEntry[0]);
 			el.addAttribute("class-pk", tagsEntry[1]);
