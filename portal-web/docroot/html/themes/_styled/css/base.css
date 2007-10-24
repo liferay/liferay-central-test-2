@@ -304,3 +304,11 @@ hr, .separator {
 	padding: 2px 20px;
 	text-align: left;
 }
+
+/* ---------- Text highlighting ---------- */
+
+.highlight {
+	font-weight: bold;
+	background: #ffc;
+	padding: 0 1px;
+}
