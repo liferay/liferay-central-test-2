@@ -77,6 +77,7 @@ portletURL.setParameter("struts_action", "/message_boards/search");
 portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
 portletURL.setParameter("breadcrumbsMessageId", String.valueOf(breadcrumbsMessageId));
 portletURL.setParameter("searchCategoryId", String.valueOf(searchCategoryId));
+portletURL.setParameter("searchCategoryIds", String.valueOf(searchCategoryIds));
 portletURL.setParameter("threadId", String.valueOf(threadId));
 portletURL.setParameter("keywords", keywords);
 

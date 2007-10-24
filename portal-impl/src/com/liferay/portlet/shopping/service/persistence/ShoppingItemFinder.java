@@ -195,9 +195,9 @@ public class ShoppingItemFinder {
 				query.append(") AND ");
 			}
 
-			query.append("ShoppingItem.name LIKE ? OR ");
+			query.append("(ShoppingItem.name LIKE ? OR ");
 			query.append("ShoppingItem.description LIKE ? OR ");
-			query.append("ShoppingItem.properties LIKE ?)");
+			query.append("ShoppingItem.properties LIKE ?))");
 
 			keywords = '%' + keywords + '%';
 
@@ -402,9 +402,9 @@ public class ShoppingItemFinder {
 				query.append(") AND ");
 			}
 
-			query.append("ShoppingItem.name LIKE ? OR ");
+			query.append("(ShoppingItem.name LIKE ? OR ");
 			query.append("ShoppingItem.description LIKE ? OR ");
-			query.append("ShoppingItem.properties LIKE ?)");
+			query.append("ShoppingItem.properties LIKE ?))");
 
 			keywords = '%' + keywords + '%';
 

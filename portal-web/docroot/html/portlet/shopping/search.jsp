@@ -29,8 +29,23 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 long breadcrumbsCategoryId = ParamUtil.getLong(request, "breadcrumbsCategoryId");
 
-String categoryIds = ParamUtil.getString(request, "categoryIds");
-long[] categoryIdsArray = StringUtil.split(categoryIds, 0L);
+long searchCategoryId = ParamUtil.getLong(request, "searchCategoryId");
+long searchCategoryIds = ParamUtil.getLong(request, "searchCategoryIds");
+
+long[] categoryIdsArray = null;
+
+if (searchCategoryId > 0) {
+	categoryIdsArray = new long[] {searchCategoryId};
+}
+else {
+	List categoryIds = new ArrayList();
+
+	categoryIds.add(new Long(searchCategoryIds));
+
+	ShoppingCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, portletGroupId.longValue(), searchCategoryIds);
+
+	categoryIdsArray = StringUtil.split(StringUtil.merge(categoryIds), 0L);
+}
 
 String keywords = ParamUtil.getString(request, "keywords");
 %>
@@ -41,7 +56,8 @@ String keywords = ParamUtil.getString(request, "keywords");
 <liferay-portlet:renderURLParams varImpl="searchURL" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
-<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryIds %>" />
+<input name="<portlet:namespace />searchCategoryId" type="hidden" value="<%= searchCategoryId %>" />
+<input name="<portlet:namespace />searchCategoryIds" type="hidden" value="<%= searchCategoryIds %>" />
 
 <liferay-ui:tabs
 	names="search"
@@ -55,7 +71,8 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/shopping/search");
 portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
-portletURL.setParameter("categoryIds", categoryIds);
+portletURL.setParameter("searchCategoryId", String.valueOf(searchCategoryId));
+portletURL.setParameter("searchCategoryIds", String.valueOf(searchCategoryIds));
 portletURL.setParameter("keywords", keywords);
 
 List headerNames = new ArrayList();

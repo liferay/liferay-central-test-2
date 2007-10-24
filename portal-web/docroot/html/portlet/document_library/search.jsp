@@ -29,8 +29,23 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 long breadcrumbsFolderId = ParamUtil.getLong(request, "breadcrumbsFolderId");
 
-String folderIds = ParamUtil.getString(request, "folderIds");
-long[] folderIdsArray = StringUtil.split(folderIds, 0L);
+long searchFolderId = ParamUtil.getLong(request, "searchFolderId");
+long searchFolderIds = ParamUtil.getLong(request, "searchFolderIds");
+
+long[] folderIdsArray = null;
+
+if (searchFolderId > 0) {
+	folderIdsArray = new long[] {searchFolderId};
+}
+else {
+	List folderIds = new ArrayList();
+
+	folderIds.add(new Long(searchFolderIds));
+
+	DLFolderLocalServiceUtil.getSubfolderIds(folderIds, portletGroupId.longValue(), searchFolderIds);
+
+	folderIdsArray = StringUtil.split(StringUtil.merge(folderIds), 0L);
+}
 
 String keywords = ParamUtil.getString(request, "keywords");
 %>
@@ -41,7 +56,8 @@ String keywords = ParamUtil.getString(request, "keywords");
 <liferay-portlet:renderURLParams varImpl="searchURL" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= breadcrumbsFolderId %>" />
-<input name="<portlet:namespace />folderIds" type="hidden" value="<%= folderIds %>" />
+<input name="<portlet:namespace />searchFolderId" type="hidden" value="<%= searchFolderId %>" />
+<input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= searchFolderIds %>" />
 
 <liferay-ui:tabs
 	names="search"
@@ -55,7 +71,8 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/document_library/search");
 portletURL.setParameter("breadcrumbsFolderId", String.valueOf(breadcrumbsFolderId));
-portletURL.setParameter("folderIds", folderIds);
+portletURL.setParameter("searchFolderId", String.valueOf(searchFolderId));
+portletURL.setParameter("searchFolderIds", String.valueOf(searchFolderIds));
 portletURL.setParameter("keywords", keywords);
 
 List headerNames = new ArrayList();

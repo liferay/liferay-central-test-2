@@ -42,12 +42,6 @@ if ((folder == null) && (defaultFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_I
 	}
 }
 
-List folderIds = new ArrayList();
-
-folderIds.add(new Long(folderId));
-
-DLFolderLocalServiceUtil.getSubfolderIds(folderIds, portletGroupId.longValue(), folderId);
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -63,7 +57,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 <liferay-portlet:renderURLParams varImpl="searchURL" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 <input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-<input name="<portlet:namespace />folderIds" type="hidden" value="<%= StringUtil.merge(folderIds) %>" />
+<input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
 
 <c:choose>
 	<c:when test="<%= showTabs && (rootFolder == null) %>">
@@ -186,7 +180,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			<liferay-portlet:renderURLParams varImpl="searchURL" />
 			<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 			<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-			<input name="<portlet:namespace />folderIds" type="hidden" value="<%= folderId %>" />
+			<input name="<portlet:namespace />searchFolderId" type="hidden" value="<%= folderId %>" />
 
 			<c:if test="<%= showTabs && showSubfolders %>">
 				<liferay-ui:tabs names="documents" />
