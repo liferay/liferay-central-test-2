@@ -1078,9 +1078,7 @@
 		<portlet-name>115</portlet-name>
 		<icon>/html/portlet/blogs_aggregator/icon.png</icon>
 		<struts-path>blogs_aggregator</struts-path>
-		<configuration-action-class>
-			com.liferay.portlet.recentbloggers.action.ConfigurationActionImpl
-		</configuration-action-class>
+		<configuration-action-class>com.liferay.portlet.blogsaggregator.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
