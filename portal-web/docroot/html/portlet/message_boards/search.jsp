@@ -30,8 +30,23 @@ String redirect = ParamUtil.getString(request, "redirect");
 long breadcrumbsCategoryId = ParamUtil.getLong(request, "breadcrumbsCategoryId");
 long breadcrumbsMessageId = ParamUtil.getLong(request, "breadcrumbsMessageId");
 
-String categoryIds = ParamUtil.getString(request, "categoryIds");
-long[] categoryIdsArray = StringUtil.split(categoryIds, 0L);
+long searchCategoryId = ParamUtil.getLong(request, "searchCategoryId");
+long searchCategoryIds = ParamUtil.getLong(request, "searchCategoryIds");
+
+long[] categoryIdsArray = null;
+
+if (searchCategoryId > 0) {
+	categoryIdsArray = new long[] {searchCategoryId};
+}
+else {
+	List categoryIds = new ArrayList();
+
+	categoryIds.add(new Long(searchCategoryIds));
+
+	MBCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, portletGroupId.longValue(), searchCategoryIds);
+
+	categoryIdsArray = StringUtil.split(StringUtil.merge(categoryIds), 0L);
+}
 
 long threadId = ParamUtil.getLong(request, "threadId");
 String keywords = ParamUtil.getString(request, "keywords");
@@ -44,7 +59,8 @@ String keywords = ParamUtil.getString(request, "keywords");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
 <input name="<portlet:namespace />breadcrumbsMessageId" type="hidden" value="<%= breadcrumbsMessageId %>" />
-<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryIds %>" />
+<input name="<portlet:namespace />searchCategoryId" type="hidden" value="<%= searchCategoryId %>" />
+<input name="<portlet:namespace />searchCategoryIds" type="hidden" value="<%= searchCategoryIds %>" />
 <input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>" />
 
 <liferay-ui:tabs
@@ -60,7 +76,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", "/message_boards/search");
 portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
 portletURL.setParameter("breadcrumbsMessageId", String.valueOf(breadcrumbsMessageId));
-portletURL.setParameter("categoryIds", categoryIds);
+portletURL.setParameter("searchCategoryId", String.valueOf(searchCategoryId));
 portletURL.setParameter("threadId", String.valueOf(threadId));
 portletURL.setParameter("keywords", keywords);
 

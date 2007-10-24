@@ -34,12 +34,6 @@ MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CA
 
 long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
-List categoryIds = new ArrayList();
-
-categoryIds.add(new Long(categoryId));
-
-MBCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, portletGroupId.longValue(), categoryId);
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -60,7 +54,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		<liferay-portlet:renderURLParams varImpl="searchURL" />
 		<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
-		<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= StringUtil.merge(categoryIds) %>" />
+		<input name="<portlet:namespace />searchCategoryIds" type="hidden" value="<%= categoryId %>" />
 
 		<c:if test="<%= category != null %>">
 			<div class="breadcrumbs">
@@ -233,7 +227,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			<liferay-portlet:renderURLParams varImpl="searchURL" />
 			<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 			<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
-			<input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryId %>" />
+			<input name="<portlet:namespace />searchCategoryId" type="hidden" value="<%= categoryId %>" />
 
 			<liferay-ui:tabs names="threads" />
 
