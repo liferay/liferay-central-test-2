@@ -675,15 +675,15 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		String location = sm.toString();
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Pinging Google at " + location);
+		if (_log.isInfoEnabled()) {
+			_log.info("Pinging Google at " + location);
 		}
 
 		try {
 			String response = Http.URLtoString(sm.toString());
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Google ping response: " + response);
+			if (_log.isInfoEnabled()) {
+				_log.info("Google ping response: " + response);
 			}
 		}
 		catch (IOException ioe) {
