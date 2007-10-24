@@ -25,76 +25,107 @@
 <div class="message-board-message-container" style="margin-left: <%= depth * 10 %>px;">
 	<table cellpadding="0" cellspacing="0" class="<%= className %>" id="<portlet:namespace />messageScroll<%= message.getMessageId() %>" width="100%">
 	<tr>
-		<td class="message-board-user-info" rowspan="2" width="100">
+		<td class="message-board-user-info" rowspan="2" valign="top" width="100">
 			<c:choose>
 				<c:when test="<%= message.isAnonymous() %>">
 					<liferay-ui:message key="anonymous" />
 				</c:when>
 				<c:otherwise>
-					<b><%= MBUtil.getUserName(message.getUserId(), message.getUserName(), request, portletSetup) %></b><br />
 
-						<%
-						User user2 = null;
+					<%
+					User user2 = null;
 
-						try {
-							user2 = UserLocalServiceUtil.getUserById(message.getUserId());
-							List organizations = user2.getOrganizations();
-							int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId.longValue(), message.getUserId()).getMessageCount();
-							String rank = MBUtil.getUserRank(portletSetup, LocaleUtil.toLanguageId(locale), posts);
-						%>
+					try {
+						user2 = UserLocalServiceUtil.getUserById(message.getUserId());
+						List organizations = user2.getOrganizations();
+						int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId.longValue(), message.getUserId()).getMessageCount();
+						String rank = MBUtil.getUserRank(portletSetup, LocaleUtil.toLanguageId(locale), posts);
 
-							<img class="message-board-user-icon" src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user2.getPortraitId()) %>" /><br />
+						Group userGroup = user2.getGroup();
 
-							<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-								<div>
-									<a href="javascript: Messaging.chat({toId:'<%= user2.getUserId() %>', toName:'<%= MBUtil.getUserName(message.getUserId(), message.getUserName(), portletSetup) %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png" /></a>
-								</div>
-							</c:if>
+						int publicLayoutsPageCount = userGroup.getPublicLayoutsPageCount();
 
-							<c:if test="<%= organizations.size() > 0 %>">
-								<liferay-ui:message key="organizations" />: <%= ListUtil.toString(organizations, "name", ", ") %>
+						PortletURL portletURL = null;
 
-								<br /><br />
-							</c:if>
+						if (publicLayoutsPageCount > 0) {
+							portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
 
-							<liferay-ui:message key="rank" />: <%= rank %><br />
-							<liferay-ui:message key="posts" />: <%= posts %><br />
-							<liferay-ui:message key="joined" />: <%= dateFormatDate.format(user2.getCreateDate()) %>
+							portletURL.setWindowState(WindowState.NORMAL);
+							portletURL.setPortletMode(PortletMode.VIEW);
 
-						<%
+							portletURL.setParameter("struts_action", "/my_places/view");
+
+							portletURL.setParameter("groupId", String.valueOf(userGroup.getGroupId()));
+							portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
 						}
-						catch (NoSuchStatsUserException nssue) {
-						}
-						catch (NoSuchUserException nsue) {
-						}
-						%>
+					%>
 
-						<c:if test="<%= (user2 != null) && (user.getUserId() != user2.getUserId()) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER) %>">
-							<hr />
-
-							<c:choose>
-								<c:when test="<%= MBBanLocalServiceUtil.hasBan(portletGroupId.longValue(), user2.getUserId()) %>">
-									<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
-										<portlet:param name="struts_action" value="/message_boards/ban_user" />
-										<portlet:param name="<%= Constants.CMD %>" value="unban" />
-										<portlet:param name="redirect" value="<%= currentURL %>" />
-										<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
-									</portlet:actionURL>
-
-									<a href="<%= unbanUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unban_user.png" /></a> <a href="<%= unbanUserURL.toString() %>"><liferay-ui:message key="unban-this-user" /></a>
-								</c:when>
-								<c:otherwise>
-									<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banUserURL">
-										<portlet:param name="struts_action" value="/message_boards/ban_user" />
-										<portlet:param name="<%= Constants.CMD %>" value="ban" />
-										<portlet:param name="redirect" value="<%= currentURL %>" />
-										<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
-									</portlet:actionURL>
-
-									<a href="<%= banUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ban_user.png" /></a> <a href="<%= banUserURL.toString() %>"><liferay-ui:message key="ban-this-user" /></a>
-								</c:otherwise>
-							</c:choose>
+						<c:if test="<%= publicLayoutsPageCount > 0 %>">
+							<a href="<%= portletURL.toString() %>">
 						</c:if>
+
+						<b><%= MBUtil.getUserName(message.getUserId(), message.getUserName(), null, portletSetup) %></b><br />
+
+						<img class="message-board-user-icon" src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user2.getPortraitId()) %>" /><br />
+
+						<c:if test="<%= publicLayoutsPageCount > 0 %>">
+							</a>
+						</c:if>
+
+						<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
+							<div>
+								<a href="javascript: Messaging.chat({toId:'<%= user2.getUserId() %>', toName:'<%= MBUtil.getUserName(message.getUserId(), message.getUserName(), portletSetup) %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png" /></a>
+							</div>
+						</c:if>
+
+						<c:if test="<%= organizations.size() > 0 %>">
+							<liferay-ui:message key="organizations" />: <%= ListUtil.toString(organizations, "name", ", ") %>
+
+							<br /><br />
+						</c:if>
+
+						<liferay-ui:message key="rank" />: <%= rank %><br />
+						<liferay-ui:message key="posts" />: <%= posts %><br />
+						<liferay-ui:message key="joined" />: <%= dateFormatDate.format(user2.getCreateDate()) %>
+
+					<%
+					}
+					catch (NoSuchStatsUserException nssue) {
+					}
+					catch (NoSuchUserException nsue) {
+					}
+					%>
+
+					<c:if test="<%= user2 == null %>">
+						<b><%= MBUtil.getUserName(message.getUserId(), message.getUserName(), null, portletSetup) %></b>
+					</c:if>
+
+					<c:if test="<%= (user2 != null) && (user.getUserId() != user2.getUserId()) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER) %>">
+						<hr />
+
+						<c:choose>
+							<c:when test="<%= MBBanLocalServiceUtil.hasBan(portletGroupId.longValue(), user2.getUserId()) %>">
+								<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
+									<portlet:param name="struts_action" value="/message_boards/ban_user" />
+									<portlet:param name="<%= Constants.CMD %>" value="unban" />
+									<portlet:param name="redirect" value="<%= currentURL %>" />
+									<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
+								</portlet:actionURL>
+
+								<a href="<%= unbanUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/unban_user.png" /></a> <a href="<%= unbanUserURL.toString() %>"><liferay-ui:message key="unban-this-user" /></a>
+							</c:when>
+							<c:otherwise>
+								<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="banUserURL">
+									<portlet:param name="struts_action" value="/message_boards/ban_user" />
+									<portlet:param name="<%= Constants.CMD %>" value="ban" />
+									<portlet:param name="redirect" value="<%= currentURL %>" />
+									<portlet:param name="banUserId" value="<%= String.valueOf(user2.getUserId()) %>" />
+								</portlet:actionURL>
+
+								<a href="<%= banUserURL.toString() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/ban_user.png" /></a> <a href="<%= banUserURL.toString() %>"><liferay-ui:message key="ban-this-user" /></a>
+							</c:otherwise>
+						</c:choose>
+					</c:if>
 				</c:otherwise>
 				</c:choose>
 		</td>

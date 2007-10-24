@@ -69,6 +69,8 @@ public class FindEntryAction extends Action {
 		try {
 			long plid = ParamUtil.getLong(req, "p_l_id");
 			long entryId = ParamUtil.getLong(req, "entryId");
+			boolean showAllEntries = ParamUtil.getBoolean(
+				req, "showAllEntries");
 
 			try {
 				plid = getPlid(plid, entryId);
@@ -86,13 +88,19 @@ public class FindEntryAction extends Action {
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
-			portletURL.setParameter("struts_action", "/blogs/view_entry");
 
-			if (Validator.isNotNull(urlTitle)) {
-				portletURL.setParameter("urlTitle", urlTitle);
+			if (showAllEntries) {
+				portletURL.setParameter("struts_action", "/blogs/view");
 			}
 			else {
-				portletURL.setParameter("entryId", String.valueOf(entryId));
+				portletURL.setParameter("struts_action", "/blogs/view_entry");
+
+				if (Validator.isNotNull(urlTitle)) {
+					portletURL.setParameter("urlTitle", urlTitle);
+				}
+				else {
+					portletURL.setParameter("entryId", String.valueOf(entryId));
+				}
 			}
 
 			String redirect = portletURL.toString();

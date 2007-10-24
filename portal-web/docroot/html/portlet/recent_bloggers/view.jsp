@@ -42,7 +42,7 @@ List statsUsers = BlogsStatsUserLocalServiceUtil.getCompanyStatsUsers(company.ge
 		headerNames.add("user");
 		//headerNames.add("place");
 		headerNames.add("posts");
-		//headerNames.add("date");
+		headerNames.add("date");
 
 		searchContainer.setHeaderNames(headerNames);
 
@@ -80,12 +80,14 @@ List statsUsers = BlogsStatsUserLocalServiceUtil.getCompanyStatsUsers(company.ge
 					sm.append(themeDisplay.getPathMain());
 					sm.append("/blogs/find_entry?entryId=");
 					sm.append(entry.getEntryId());
+					sm.append("&showAllEntries=1");
 
 					String rowHREF = sm.toString();
 
 					// User
 
-					row.addText(user2.getFullName(), rowHREF);
+					//row.addText(user2.getFullName(), rowHREF);
+					row.addText("<img src=\"" + themeDisplay.getPathImage() + "/user_portrait?img_id=" + user2.getPortraitId() + "&t=" + ImageServletTokenUtil.getToken(user2.getPortraitId()) + "\" width=\"65\" /><br />" + user2.getFullName(), rowHREF);
 
 					// Type
 
@@ -97,7 +99,7 @@ List statsUsers = BlogsStatsUserLocalServiceUtil.getCompanyStatsUsers(company.ge
 
 					// Last post date
 
-					//row.addText(dateFormatDate.format(entry.getModifiedDate()), rowHREF);
+					row.addText(dateFormatDate.format(entry.getModifiedDate()), rowHREF);
 
 					// Add result row
 
