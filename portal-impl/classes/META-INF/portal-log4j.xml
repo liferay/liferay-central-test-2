@@ -145,7 +145,7 @@
 	</category>
 
 	<category name="com.liferay.portal.lucene.LuceneFileExtractor">
-		<priority value="INFO" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.model.Image">
