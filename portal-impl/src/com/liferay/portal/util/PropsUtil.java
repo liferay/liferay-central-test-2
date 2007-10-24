@@ -227,8 +227,6 @@ public class PropsUtil {
 
 	public static final String OMNIADMIN_USERS = "omniadmin.users";
 
-	public static final String UNIVERSAL_PERSONALIZATION = "universal.personalization";
-
 	public static final String TERMS_OF_USE_REQUIRED = "terms.of.use.required";
 
 	// Languages and Time Zones
