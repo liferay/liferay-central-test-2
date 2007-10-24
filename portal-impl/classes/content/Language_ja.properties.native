@@ -165,6 +165,7 @@ model.resource.com.liferay.portlet.messageboards.model.MBTopic=伝言板のト�
 model.resource.com.liferay.portlet.polls.model.PollsQuestion=投票の質問
 model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=ショッピング部門
 model.resource.com.liferay.portlet.shopping.model.ShoppingItem=ショッピング項目
+model.resource.com.liferay.portlet.shopping.model.ShoppingOrder=ショッピング順序
 model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=ソフトウェアカタログフレームワーク版
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=ソフトウェアカタログプロダクト免許証
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=ソフトウェアカタログプロダクト記入項目

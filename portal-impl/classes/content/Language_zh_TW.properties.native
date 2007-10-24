@@ -165,6 +165,7 @@ model.resource.com.liferay.portlet.messageboards.model.MBTopic=留言簿題目
 model.resource.com.liferay.portlet.polls.model.PollsQuestion=民意測驗問題
 model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=購物類別
 model.resource.com.liferay.portlet.shopping.model.ShoppingItem=購物項目
+model.resource.com.liferay.portlet.shopping.model.ShoppingOrder=購物次序
 model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=軟體編目框架版本
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=軟體編目產品執照
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=軟體編目產品詞條

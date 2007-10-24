@@ -101,6 +101,7 @@
 <%@ page import="com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission" %>
 <%@ page import="com.liferay.portlet.shopping.service.permission.ShoppingItemPermission" %>
+<%@ page import="com.liferay.portlet.shopping.service.permission.ShoppingOrderPermission" %>
 <%@ page import="com.liferay.portlet.shopping.util.ShoppingPreferences" %>
 <%@ page import="com.liferay.portlet.shopping.util.ShoppingUtil" %>
 

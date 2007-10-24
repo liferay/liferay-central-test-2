@@ -602,7 +602,9 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	<input type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendShippingEmail() ? "" : "re") + "send-shipping-email") %>' onClick="<portlet:namespace />sendEmail('shipping');" />
 
-	<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrder();" />
+	<c:if test="<%= ShoppingOrderPermission.contains(permissionChecker, plid.longValue(), order, ActionKeys.DELETE) %>">
+		<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrder();" />
+	</c:if>
 
 	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 </c:if>

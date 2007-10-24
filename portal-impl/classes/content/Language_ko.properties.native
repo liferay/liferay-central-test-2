@@ -165,6 +165,7 @@ model.resource.com.liferay.portlet.messageboards.model.MBTopic=전보국 화제
 model.resource.com.liferay.portlet.polls.model.PollsQuestion=투표 질문
 model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=쇼핑 종류
 model.resource.com.liferay.portlet.shopping.model.ShoppingItem=쇼핑 품목
+model.resource.com.liferay.portlet.shopping.model.ShoppingOrder=쇼핑 순서
 model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=소프트웨어 카탈로그 기구 버전
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=소프트웨어 카탈로그 제품 면허
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=소프트웨어 카탈로그 제품 입장

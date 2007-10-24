@@ -165,6 +165,7 @@ model.resource.com.liferay.portlet.messageboards.model.MBTopic=Θέμα πινά
 model.resource.com.liferay.portlet.polls.model.PollsQuestion=Ερώτηση ψηφοφοριών
 model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=Κατηγορία αγορών
 model.resource.com.liferay.portlet.shopping.model.ShoppingItem=Στοιχείο αγορών
+model.resource.com.liferay.portlet.shopping.model.ShoppingOrder=Διαταγή αγορών
 model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=Έκδοση πλαισίου καταλόγων λογισμικού
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=Αδεια προϊόντων καταλόγων λογισμικού
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=Είσοδος προϊόντων καταλόγων λογισμικού

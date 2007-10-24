@@ -165,6 +165,7 @@ model.resource.com.liferay.portlet.messageboards.model.MBTopic=A Mensagem Boards
 model.resource.com.liferay.portlet.polls.model.PollsQuestion=Pergunta Das Votações
 model.resource.com.liferay.portlet.shopping.model.ShoppingCategory=Categoria Do Shopping
 model.resource.com.liferay.portlet.shopping.model.ShoppingItem=Artigo Do Shopping
+model.resource.com.liferay.portlet.shopping.model.ShoppingOrder=Ordem Do Shopping
 model.resource.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion=Versão Da Estrutura Do Catálogo Do Software
 model.resource.com.liferay.portlet.softwarecatalog.model.SCLicense=Licença Do Produto Do Catálogo Do Software
 model.resource.com.liferay.portlet.softwarecatalog.model.SCProductEntry=Entrada Do Produto Do Catálogo Do Software
