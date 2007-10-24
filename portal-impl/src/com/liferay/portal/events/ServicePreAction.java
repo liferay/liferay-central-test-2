@@ -746,7 +746,15 @@ public class ServicePreAction extends Action {
 
 		// Cookie support
 
-		CookieKeys.addSupportCookie(res);
+		try {
+
+			// LEP-4069
+
+			CookieKeys.validateSupportCookie(req);
+		}
+		catch (Exception e) {
+			CookieKeys.addSupportCookie(res);
+		}
 
 		// Time zone
 
