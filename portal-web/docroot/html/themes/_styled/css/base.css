@@ -308,7 +308,7 @@ hr, .separator {
 /* ---------- Text highlighting ---------- */
 
 .highlight {
-	font-weight: bold;
 	background: #ffc;
+	font-weight: bold;
 	padding: 0 1px;
 }
