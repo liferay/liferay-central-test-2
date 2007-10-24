@@ -817,7 +817,7 @@ String portletURLString = portletURL.toString();
 		<c:choose>
 			<c:when test='<%= tabs2.equals("authentication") %>'>
 				<liferay-ui:tabs
-					names="general,ldap,ntlm,cas,open-id"
+					names="general,ldap,cas,ntlm,open-id,open-sso"
 					param="tabs3"
 					url="<%= portletURLString %>"
 				/>
@@ -1083,38 +1083,6 @@ String portletURLString = portletURL.toString();
 
 						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateLdap');" />
 					</c:when>
-					<c:when test='<%= tabs3.equals("ntlm") %>'>
-						<table class="liferay-table">
-						<tr>
-							<td>
-								<liferay-ui:message key="enabled" />
-							</td>
-							<td>
-								<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.NTLM_AUTH_ENABLED) %>' />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<liferay-ui:message key="domain-controller" />
-							</td>
-							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />domainController" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.NTLM_DOMAIN_CONTROLLER) %>" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<liferay-ui:message key="domain" />
-							</td>
-							<td>
-								<input class="liferay-input-text" name="<portlet:namespace />domain" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.NTLM_DOMAIN) %>" />
-							</td>
-						</tr>
-						</table>
-
-						<br />
-
-						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateNtlm');" />
-					</c:when>
 					<c:when test='<%= tabs3.equals("cas") %>'>
 						<table class="liferay-table">
 						<tr>
@@ -1173,6 +1141,38 @@ String portletURLString = portletURL.toString();
 
 						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateCAS');" />
 					</c:when>
+					<c:when test='<%= tabs3.equals("ntlm") %>'>
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<liferay-ui:message key="enabled" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.NTLM_AUTH_ENABLED) %>' />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="domain-controller" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />domainController" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.NTLM_DOMAIN_CONTROLLER) %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="domain" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />domain" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.NTLM_DOMAIN) %>" />
+							</td>
+						</tr>
+						</table>
+
+						<br />
+
+						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateNtlm');" />
+					</c:when>
 					<c:when test='<%= tabs3.equals("open-id") %>'>
 						<table class="liferay-table">
 						<tr>
@@ -1188,6 +1188,54 @@ String portletURLString = portletURL.toString();
 						<br />
 
 						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateOpenId');" />
+					</c:when>
+					<c:when test='<%= tabs3.equals("open-sso") %>'>
+						<table class="liferay-table">
+						<tr>
+							<td>
+								<liferay-ui:message key="enabled" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.OPEN_SSO_AUTH_ENABLED) %>' />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="login-url" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LOGIN_URL) %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="logout-url" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LOGOUT_URL) %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="service-url" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SERVICE_URL) %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="cookie-name" />
+							</td>
+							<td>
+								<input class="liferay-input-text" name="<portlet:namespace />subjectCookieName" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME) %>" />
+							</td>
+						</tr>
+						</table>
+
+						<br />
+
+						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateOpenSSO');" />
 					</c:when>
 					<c:otherwise>
 						<table class="liferay-table">

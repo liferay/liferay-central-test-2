@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 
 import javax.servlet.http.Cookie;
@@ -37,9 +38,9 @@ public class CookieUtil {
 	public static String get(Cookie[] cookies, String name) {
 		if ((cookies != null) && (cookies.length > 0)) {
 			for (int i = 0; i < cookies.length; i++) {
-				String cookieName = cookies[i].getName();
+				String cookieName = GetterUtil.getString(cookies[i].getName());
 
-				if ((cookieName != null) && (cookieName.equals(name))) {
+				if (cookieName.equalsIgnoreCase(name)) {
 					return cookies[i].getValue();
 				}
 			}

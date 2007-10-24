@@ -646,8 +646,7 @@ public class PortalLDAPUtil {
 		int birthdayYear = 1970;
 		String jobTitle = LDAPUtil.getAttributeValue(
 			attrs, userMappings.getProperty("jobTitle"));
-		long organizationId = 0;
-		long locationId = 0;
+		long[] organizationIds = new long[0];
 		boolean sendEmail = false;
 
 		if (_log.isDebugEnabled()) {
@@ -714,7 +713,7 @@ public class PortalLDAPUtil {
 					autoScreenName, screenName, emailAddress, locale, firstName,
 					middleName, lastName, prefixId, suffixId, male,
 					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-					organizationId, locationId, sendEmail);
+					organizationIds, sendEmail);
 			}
 			catch (Exception e){
 				_log.error(

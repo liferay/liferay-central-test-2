@@ -403,6 +403,18 @@ public class PropsUtil {
 
 	public static final String OPEN_ID_AUTH_ENABLED = "open.id.auth.enabled";
 
+	// OpenSSO
+
+	public static final String OPEN_SSO_AUTH_ENABLED = "open.sso.auth.enabled";
+
+	public static final String OPEN_SSO_LOGIN_URL = "open.sso.login.url";
+
+	public static final String OPEN_SSO_LOGOUT_URL = "open.sso.logout.url";
+
+	public static final String OPEN_SSO_SERVICE_URL = "open.sso.service.url";
+
+	public static final String OPEN_SSO_SUBJECT_COOKIE_NAME = "open.sso.subject.cookie.name";
+
 	// Authentication Pipeline
 
 	public static final String AUTH_PIPELINE_PRE = "auth.pipeline.pre";

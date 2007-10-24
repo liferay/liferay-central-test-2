@@ -107,6 +107,9 @@ public class EditSettingsAction extends PortletAction {
 		else if (cmd.equals("updateOpenId")) {
 			updateOpenId(req, prefs);
 		}
+		else if (cmd.equals("updateOpenSSO")) {
+			updateOpenSSO(req, companyId, prefs);
+		}
 		else if (cmd.equals("updateReservedUsers")) {
 			updateReservedUsers(req, prefs);
 		}
@@ -365,6 +368,28 @@ public class EditSettingsAction extends PortletAction {
 		boolean enabled = ParamUtil.getBoolean(req, "enabled");
 
 		prefs.setValue(PropsUtil.OPEN_ID_AUTH_ENABLED, String.valueOf(enabled));
+
+		prefs.store();
+	}
+
+	protected void updateOpenSSO(
+			ActionRequest req, long companyId, PortletPreferences prefs)
+		throws Exception {
+
+		boolean enabled = ParamUtil.getBoolean(req, "enabled");
+		String loginUrl = ParamUtil.getString(req, "loginUrl");
+		String logoutUrl = ParamUtil.getString(req, "logoutUrl");
+		String serviceUrl = ParamUtil.getString(req, "serviceUrl");
+		String subjectCookieName = ParamUtil.getString(
+			req, "subjectCookieName");
+
+		prefs.setValue(
+			PropsUtil.OPEN_SSO_AUTH_ENABLED, String.valueOf(enabled));
+		prefs.setValue(PropsUtil.OPEN_SSO_LOGIN_URL, loginUrl);
+		prefs.setValue(PropsUtil.OPEN_SSO_LOGOUT_URL, logoutUrl);
+		prefs.setValue(PropsUtil.OPEN_SSO_SERVICE_URL, serviceUrl);
+		prefs.setValue(
+			PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME, subjectCookieName);
 
 		prefs.store();
 	}

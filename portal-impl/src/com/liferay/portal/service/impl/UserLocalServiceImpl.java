@@ -207,12 +207,23 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long locationId, boolean sendEmail)
 		throws PortalException, SystemException {
 
+		long[] organizationIds = new long[] {organizationId, locationId};
+
+		if ((organizationId <= 0) && (locationId <= 0)) {
+			organizationIds = new long[0];
+		}
+		else if (organizationId > 0) {
+			organizationIds = new long[] {organizationId};
+		}
+		else if (locationId > 0) {
+			organizationIds = new long[] {locationId};
+		}
+
 		return addUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle,
-			new long[] {organizationId, locationId}, sendEmail);
+			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
 	}
 
 	public User addUser(
