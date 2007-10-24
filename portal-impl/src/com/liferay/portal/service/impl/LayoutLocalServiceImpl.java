@@ -1752,15 +1752,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportTags(PortletDataContext context, Element root) {
-		Element el = root.addElement("tags");
-
 		Map tagsEntries = context.getTagsEntries();
 
 		Iterator itr = tagsEntries.keySet().iterator();
 
 		while (itr.hasNext()) {
-			String key = (String)itr.next();
+			Element el = root.addElement("tags");
 
+			String key = (String)itr.next();
 			String[] tagsEntry = key.split(StringPool.POUND);
 
 			el.addAttribute("class-name", tagsEntry[0]);

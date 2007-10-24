@@ -39,6 +39,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
@@ -173,6 +174,10 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 					itr.remove();
 				}
+				else {
+					context.addTagsEntries(
+						BookmarksEntry.class, entry.getPrimaryKeyObj());
+				}
 			}
 
 			xml = xStream.toXML(entries);
@@ -260,7 +265,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BookmarksEntry entry = (BookmarksEntry)itr.next();
 
-				importEntry(folderPKs, entry);
+				importEntry(context, folderPKs, entry);
 			}
 
 			// No special modification to the incoming portlet preferences
@@ -283,8 +288,12 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		return sm.toString();
 	}
 
-	protected void importEntry(Map folderPKs, BookmarksEntry entry)
+	protected void importEntry(
+			PortletDataContext context, Map folderPKs, BookmarksEntry entry)
 		throws Exception {
+
+		String[] tagsEntries = context.getTagsEntries(
+			BookmarksEntry.class, entry.getPrimaryKeyObj());
 
 		Long folderId = (Long)folderPKs.get(new Long(entry.getFolderId()));
 
@@ -313,10 +322,14 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 				BookmarksEntryLocalServiceUtil.addEntry(
 					entry.getUserId(), folderId.longValue(), entry.getName(),
-					entry.getUrl(), entry.getComments(), new String[0],
+					entry.getUrl(), entry.getComments(), tagsEntries,
 					addCommunityPermissions, addGuestPermissions);
 			}
 			else {
+				TagsAssetLocalServiceUtil.updateAsset(
+					entry.getUserId(), BookmarksEntry.class.getName(),
+					entry.getPrimaryKey(), tagsEntries);
+
 				entry.setFolderId(folderId.longValue());
 
 				BookmarksEntryUtil.update(entry, true);

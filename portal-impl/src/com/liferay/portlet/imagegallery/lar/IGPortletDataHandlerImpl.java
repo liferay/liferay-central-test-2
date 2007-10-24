@@ -41,6 +41,7 @@ import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
+import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
@@ -172,6 +173,9 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 						igImage.getLargeImageId());
 
 					images.add(largeImage);
+
+					context.addTagsEntries(
+						IGImage.class, igImage.getPrimaryKeyObj());
 				}
 			}
 
@@ -302,7 +306,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				IGImage igImage = (IGImage)itr.next();
 
-				importIGImage(folderPKs, imagesPKs, igImage);
+				importIGImage(context, folderPKs, imagesPKs, igImage);
 			}
 
 			// No special modification to the incoming portlet preferences
@@ -377,8 +381,12 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importIGImage(
-			Map folderPKs, Map imagesPKs, IGImage igImage)
+			PortletDataContext context, Map folderPKs, Map imagesPKs,
+			IGImage igImage)
 		throws Exception {
+
+		String[] tagsEntries = context.getTagsEntries(
+			IGImage.class, igImage.getPrimaryKeyObj());
 
 		Long folderId = (Long)folderPKs.get(new Long(igImage.getFolderId()));
 
@@ -414,8 +422,9 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 					IGImageLocalServiceUtil.addImage(
 						igImage.getUserId(), folderId.longValue(),
-						igImage.getDescription(), file, image.getType(), null,
-						addCommunityPermissions, addGuestPermissions);
+						igImage.getDescription(), file, image.getType(),
+					    tagsEntries, addCommunityPermissions,
+					    addGuestPermissions);
 				}
 				else {
 					_log.error(
@@ -424,6 +433,10 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				}
 			}
 			else {
+				TagsAssetLocalServiceUtil.updateAsset(
+					igImage.getUserId(), IGImage.class.getName(),
+					igImage.getPrimaryKey(), tagsEntries);
+
 				igImage.setFolderId(folderId.longValue());
 
 				IGImageUtil.update(igImage, true);

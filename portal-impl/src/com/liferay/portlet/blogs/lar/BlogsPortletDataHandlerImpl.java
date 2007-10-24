@@ -122,13 +122,14 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BlogsEntry entry = (BlogsEntry)itr.next();
 
-				context.addTagsEntries(
-					BlogsEntry.class, entry.getPrimaryKeyObj());
-
 				if (context.addPrimaryKey(
 						BlogsEntry.class, new Long(entry.getEntryId()))) {
 
 					itr.remove();
+				}
+				else {
+					context.addTagsEntries(
+						BlogsEntry.class, entry.getPrimaryKeyObj());
 				}
 			}
 
@@ -221,7 +222,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BlogsEntry entry = (BlogsEntry)itr.next();
 
-				String[] entryNames = context.getTagsEntries(
+				String[] tagsEntries = context.getTagsEntries(
 					BlogsEntry.class, entry.getPrimaryKeyObj());
 
 				BlogsEntry existingEntry = BlogsEntryUtil.fetchByPrimaryKey(
@@ -243,13 +244,13 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 						entry.getTitle(), entry.getContent(),
 						displayDate.getMonth(), displayDate.getDay(),
 						displayDate.getYear(), displayDate.getHours(),
-						displayDate.getMinutes(), themeDisplay, entryNames,
+						displayDate.getMinutes(), themeDisplay, tagsEntries,
 						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
 					TagsAssetLocalServiceUtil.updateAsset(
 							entry.getUserId(), BlogsEntry.class.getName(),
-							entry.getPrimaryKey(), entryNames);
+							entry.getPrimaryKey(), tagsEntries);
 
 					BlogsEntryUtil.update(entry, true);
 				}
