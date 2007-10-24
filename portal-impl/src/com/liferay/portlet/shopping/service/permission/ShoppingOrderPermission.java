@@ -24,13 +24,13 @@ package com.liferay.portlet.shopping.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portlet.shopping.model.ShoppingOrder;
-import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.shopping.model.ShoppingOrder;
+import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
 
 /**
  * <a href="ShoppingOrderPermission.java.html"><b><i>View Source</i></b></a>

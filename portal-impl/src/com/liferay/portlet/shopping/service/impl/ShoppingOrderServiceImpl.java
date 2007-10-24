@@ -28,10 +28,10 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
-import com.liferay.portlet.shopping.service.permission.ShoppingOrderPermission;
 import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil;
 import com.liferay.portlet.shopping.service.base.ShoppingOrderServiceBaseImpl;
+import com.liferay.portlet.shopping.service.permission.ShoppingOrderPermission;
+import com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil;
 
 /**
  * <a href="ShoppingOrderServiceImpl.java.html"><b><i>View Source</i></b></a>
