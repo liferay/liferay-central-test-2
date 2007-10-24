@@ -40,7 +40,7 @@
 				<liferay-ui:message key="subject" />
 			</td>
 			<td>
-				<input name="<%= namespace %>postReplySubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" /><br />
+				<input name="<%= namespace %>postReplySubject<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" onKeyUp="document.<%= formName %>.<%= namespace %>postReplyButton<%= i %>.disabled = ((this.value == '') || (document.<%= formName %>.<%= namespace %>postReplyBody<%= i %>.value == ''));" /><br />
 			</td>
 		</tr>
 		<tr>
@@ -48,14 +48,14 @@
 				<liferay-ui:message key="body" />
 			</td>
 			<td>
-				<textarea name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
+				<textarea name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>postReplyButton<%= i %>.disabled = ((this.value == '') || (document.<%= formName %>.<%= namespace %>postReplySubject<%= i %>.value == ''));"></textarea>
 			</td>
 		</tr>
 		</table>
 
 		<br />
 
-		<input type="button" value="<liferay-ui:message key="reply" />" onClick="<%= namespace %>postReply(<%= i %>);" />
+		<input disabled name="<%= namespace %>postReplyButton<%= i %>" type="button" value="<liferay-ui:message key="reply" />" onClick="<%= namespace %>postReply(<%= i %>);" />
 
 		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= namespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
 

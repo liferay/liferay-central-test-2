@@ -83,6 +83,8 @@ public class EditDiscussionAction extends PortletAction {
 					 e instanceof MessageSubjectException) {
 
 				SessionErrors.add(req, e.getClass().getName());
+
+				sendRedirect(req, res);
 			}
 			else {
 				throw e;
