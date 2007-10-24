@@ -262,7 +262,7 @@ public class StringUtil {
 	}
 
 	public static String highlight(String s, String keywords) {
-		return highlight(s, keywords, "<b>", "</b>");
+		return highlight(s, keywords, "<span class=\"highlight\">", "</span>");
 	}
 
 	public static String highlight(
