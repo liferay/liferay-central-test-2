@@ -123,7 +123,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				BlogsEntry entry = (BlogsEntry)itr.next();
 
 				if (context.addPrimaryKey(
-						BlogsEntry.class, new Long(entry.getEntryId()))) {
+						BlogsEntry.class, entry.getPrimaryKeyObj())) {
 
 					itr.remove();
 				}
@@ -152,8 +152,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				BlogsStatsUser statsUser = (BlogsStatsUser)itr.next();
 
 				if (context.addPrimaryKey(
-						BlogsStatsUser.class, new Long(
-							statsUser.getStatsUserId()))) {
+						BlogsStatsUser.class, statsUser.getPrimaryKeyObj())) {
 
 					itr.remove();
 				}

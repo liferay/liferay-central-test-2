@@ -27,8 +27,6 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -134,7 +132,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				IGFolder folder = (IGFolder)itr.next();
 
 				if (context.addPrimaryKey(
-						IGFolder.class, new Long(folder.getFolderId()))) {
+						IGFolder.class, folder.getPrimaryKeyObj())) {
 
 					itr.remove();
 				}
@@ -164,7 +162,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				IGImage igImage = (IGImage)itr.next();
 
 				if (context.addPrimaryKey(
-						IGImage.class, new Long(igImage.getImageId()))) {
+						IGImage.class, igImage.getPrimaryKeyObj())) {
 
 					itr.remove();
 				}
@@ -195,7 +193,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				Image image = (Image)itr.next();
 
 				if (context.addPrimaryKey(
-						Image.class, new Long(image.getImageId()))) {
+						Image.class, image.getPrimaryKeyObj())) {
 
 					itr.remove();
 				}
@@ -317,16 +315,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
-	}
-
-	protected String getPrimaryKey(long groupId, String key) {
-		StringMaker sm = new StringMaker();
-
-		sm.append(groupId);
-		sm.append(StringPool.POUND);
-		sm.append(key);
-
-		return sm.toString();
 	}
 
 	protected void importFolder(

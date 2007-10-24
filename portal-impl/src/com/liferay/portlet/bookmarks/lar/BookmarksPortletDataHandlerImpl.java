@@ -27,8 +27,6 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
@@ -141,8 +139,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				BookmarksFolder folder = (BookmarksFolder)itr.next();
 
 				if (context.addPrimaryKey(
-						BookmarksFolder.class,
-						new Long(folder.getFolderId()))) {
+						BookmarksFolder.class, folder.getPrimaryKeyObj())) {
 
 					itr.remove();
 				}
@@ -170,7 +167,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				BookmarksEntry entry = (BookmarksEntry)itr.next();
 
 				if (context.addPrimaryKey(
-						BookmarksEntry.class, new Long(entry.getEntryId()))) {
+						BookmarksEntry.class, entry.getPrimaryKeyObj())) {
 
 					itr.remove();
 				}
@@ -276,16 +273,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
-	}
-
-	protected String getPrimaryKey(long groupId, String key) {
-		StringMaker sm = new StringMaker();
-
-		sm.append(groupId);
-		sm.append(StringPool.POUND);
-		sm.append(key);
-
-		return sm.toString();
 	}
 
 	protected void importEntry(
