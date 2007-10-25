@@ -545,9 +545,9 @@ public class PluginPackageUtil {
 		IndexWriter writer = null;
 
 		try {
-			writer = LuceneUtil.getWriter(CompanyImpl.SYSTEM);
-
 			PluginPackageIndexer.cleanIndex();
+
+			writer = LuceneUtil.getWriter(CompanyImpl.SYSTEM);
 
 			Iterator itr = getAllAvailablePluginPackages().iterator();
 
