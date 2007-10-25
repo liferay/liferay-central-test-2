@@ -106,13 +106,13 @@ else {
 						sm.append(ImageServletTokenUtil.getToken(user2.getPortraitId()));
 						sm.append("\" width=\"65\" /></a><br />");
 					}
+
 					sm.append("<a href=\"");
 					sm.append(rowHREF);
 					sm.append("\">");
 					sm.append(user2.getFullName());
 					sm.append("</a>");
 
-					//row.addText(user2.getFullName(), rowHREF);
 					if (displayStyle.endsWith("-image")) {
 						row.addText("center", "middle", sm.toString());
 					}
