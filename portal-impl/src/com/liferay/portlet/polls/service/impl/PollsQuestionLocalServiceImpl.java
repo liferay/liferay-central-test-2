@@ -37,6 +37,7 @@ import com.liferay.portlet.polls.QuestionExpirationDateException;
 import com.liferay.portlet.polls.QuestionTitleException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
+import com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil;
 import com.liferay.portlet.polls.service.base.PollsQuestionLocalServiceBaseImpl;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
@@ -55,6 +56,22 @@ import java.util.List;
  */
 public class PollsQuestionLocalServiceImpl
 	extends PollsQuestionLocalServiceBaseImpl {
+
+	public PollsQuestion addQuestion(
+			long userId, long plid, String title, String description,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addQuestion(
+			userId, plid, title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, null,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
 
 	public PollsQuestion addQuestion(
 			long userId, long plid, String title, String description,
@@ -145,17 +162,15 @@ public class PollsQuestionLocalServiceImpl
 
 		// Choices
 
-		Iterator itr = choices.iterator();
+		if (choices != null) {
+			Iterator itr = choices.iterator();
 
-		while (itr.hasNext()) {
-			PollsChoice choice = (PollsChoice)itr.next();
+			while (itr.hasNext()) {
+				PollsChoice choice = (PollsChoice)itr.next();
 
-			long choiceId = CounterLocalServiceUtil.increment();
-
-			choice.setChoiceId(choiceId);
-			choice.setQuestionId(questionId);
-
-			PollsChoiceUtil.update(choice);
+				PollsChoiceLocalServiceUtil.addChoice(
+					questionId, choice.getName(), choice.getDescription());
+			}
 		}
 
 		return question;
@@ -317,12 +332,8 @@ public class PollsQuestionLocalServiceImpl
 			choice = PollsChoiceUtil.fetchByQ_N(questionId, choiceName);
 
 			if (choice == null) {
-				long choiceId = CounterLocalServiceUtil.increment();
-
-				choice = PollsChoiceUtil.create(choiceId);
-
-				choice.setQuestionId(questionId);
-				choice.setName(choiceName);
+				choice = PollsChoiceLocalServiceUtil.addChoice(
+					questionId, choice.getName(), choice.getDescription());
 			}
 
 			choice.setDescription(choiceDescription);
@@ -343,18 +354,8 @@ public class PollsQuestionLocalServiceImpl
 			throw new QuestionDescriptionException();
 		}
 
-		if (choices.size() < 2) {
+		if (choices != null && choices.size() < 2) {
 			throw new QuestionChoiceException();
-		}
-
-		for (int i = 0; i < choices.size(); i++) {
-			PollsChoice choice = (PollsChoice)choices.get(i);
-
-			if (Validator.isNull(choice.getName()) ||
-				Validator.isNull(choice.getDescription())) {
-
-				throw new QuestionChoiceException();
-			}
 		}
 	}
 

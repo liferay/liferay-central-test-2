@@ -22,11 +22,15 @@
 
 package com.liferay.portlet.polls.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portlet.polls.QuestionChoiceException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.service.base.PollsChoiceLocalServiceBaseImpl;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
+import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 
 import java.util.List;
 
@@ -39,6 +43,27 @@ import java.util.List;
 public class PollsChoiceLocalServiceImpl
 	extends PollsChoiceLocalServiceBaseImpl {
 
+	public PollsChoice addChoice(
+			long questionId, String name, String description)
+		throws PortalException, SystemException {
+
+		validate(name, description);
+
+		PollsQuestionUtil.findByPrimaryKey(questionId);
+
+		long choiceId = CounterLocalServiceUtil.increment();
+
+		PollsChoice choice = PollsChoiceUtil.create(choiceId);
+
+		choice.setQuestionId(questionId);
+		choice.setName(name);
+		choice.setDescription(description);
+
+		PollsChoiceUtil.update(choice);
+
+		return choice;
+	}
+
 	public PollsChoice getChoice(long choiceId)
 		throws PortalException, SystemException {
 
@@ -47,6 +72,16 @@ public class PollsChoiceLocalServiceImpl
 
 	public List getChoices(long questionId) throws SystemException {
 		return PollsChoiceUtil.findByQuestionId(questionId);
+	}
+
+	protected void validate(String name, String description)
+		throws PortalException {
+
+		if (Validator.isNull(name) ||
+			Validator.isNull(description)) {
+
+			throw new QuestionChoiceException();
+		}
 	}
 
 }

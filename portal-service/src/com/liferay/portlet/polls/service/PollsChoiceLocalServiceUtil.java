@@ -106,6 +106,15 @@ public class PollsChoiceLocalServiceUtil {
 		pollsChoiceLocalService.afterPropertiesSet();
 	}
 
+	public static com.liferay.portlet.polls.model.PollsChoice addChoice(
+		long questionId, java.lang.String name, java.lang.String description)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
+		return pollsChoiceLocalService.addChoice(questionId, name, description);
+	}
+
 	public static com.liferay.portlet.polls.model.PollsChoice getChoice(
 		long choiceId)
 		throws com.liferay.portal.PortalException, 
