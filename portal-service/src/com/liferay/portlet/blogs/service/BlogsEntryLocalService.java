@@ -187,6 +187,12 @@ public interface BlogsEntryLocalService {
 	public java.util.List getNoAssetEntries()
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getOrganizationEntries(long organizationId,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public int getOrganizationEntriesCount(long organizationId)
+		throws com.liferay.portal.SystemException;
+
 	public java.lang.String getUrlTitle(long entryId, java.lang.String title);
 
 	public void reIndex(java.lang.String[] ids)

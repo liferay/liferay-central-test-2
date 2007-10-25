@@ -23,7 +23,7 @@
 %>
 
 <%
-boolean showAddEntryButton = tabs1.equals("entries") && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY);
+boolean showAddEntryButton = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY);
 %>
 
 <c:if test="<%= showAddEntryButton || (results.size() > 0) %>">
@@ -55,17 +55,11 @@ for (int i = 0; i < results.size(); i++) {
 
 <%
 }
-%>
 
-<%
 String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/blogs/rss";
 %>
 
-<liferay-ui:icon image="rss" url="<%= rssURL %>" target="_blank" />
-
-<a href="<%= rssURL %>">
-	<liferay-ui:message key="subscribe-to-this-blog" />
-</a>
+<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
 
 <br /><br />
 

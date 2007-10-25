@@ -24,6 +24,7 @@ package com.liferay.portlet.blogs.action;
 
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -106,8 +107,8 @@ public class RSSAction extends PortletAction {
 		long plid = ParamUtil.getLong(req, "p_l_id");
 		long companyId = ParamUtil.getLong(req, "companyId");
 		long groupId = ParamUtil.getLong(req, "groupId");
-		long categoryId = ParamUtil.getLong(req, "categoryId");
 		long organizationId = ParamUtil.getLong(req, "organizationId");
+		long categoryId = ParamUtil.getLong(req, "categoryId");
 		int max = ParamUtil.getInteger(
 			req, "max", SearchContainer.DEFAULT_DELTA);
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
@@ -135,19 +136,6 @@ public class RSSAction extends PortletAction {
 				}
 			}
 		}
-		else if (organizationId > 0) {
-			feedURL = StringPool.BLANK;
-
-			try {
-				rss = BlogsEntryServiceUtil.getOrganizationEntriesRSS(
-					organizationId, max, type, version, feedURL, entryURL);
-			}
-			catch (NoSuchCompanyException nsce) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsce);
-				}
-			}
-		}
 		else if (groupId > 0) {
 			feedURL += "p_l_id=" + plid;
 
@@ -158,6 +146,19 @@ public class RSSAction extends PortletAction {
 					groupId, max, type, version, feedURL, entryURL);
 			}
 			catch (NoSuchGroupException nsge) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsge);
+				}
+			}
+		}
+		else if (organizationId > 0) {
+			feedURL = StringPool.BLANK;
+
+			try {
+				rss = BlogsEntryServiceUtil.getOrganizationEntriesRSS(
+					organizationId, max, type, version, feedURL, entryURL);
+			}
+			catch (NoSuchOrganizationException nsge) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(nsge);
 				}

@@ -86,8 +86,25 @@ List statsUsers = BlogsStatsUserLocalServiceUtil.getCompanyStatsUsers(company.ge
 
 					// User
 
+					sm = new StringMaker();
+
+					sm.append("<a href=\"");
+					sm.append(rowHREF);
+					sm.append("\"><img border=\"0\" src=\"");
+					sm.append(themeDisplay.getPathImage());
+					sm.append("/user_portrait?img_id=");
+					sm.append(user2.getPortraitId());
+					sm.append("&t=");
+					sm.append(ImageServletTokenUtil.getToken(user2.getPortraitId()));
+					sm.append("\" width=\"65\" /></a><br />");
+					sm.append("<a href=\"");
+					sm.append(rowHREF);
+					sm.append("\">");
+					sm.append(user2.getFullName());
+					sm.append("</a>");
+
 					//row.addText(user2.getFullName(), rowHREF);
-					row.addText("<img src=\"" + themeDisplay.getPathImage() + "/user_portrait?img_id=" + user2.getPortraitId() + "&t=" + ImageServletTokenUtil.getToken(user2.getPortraitId()) + "\" width=\"65\" border=\"0\"/><br />" + user2.getFullName(), rowHREF);
+					row.addText("center", "middle", sm.toString());
 
 					// Type
 

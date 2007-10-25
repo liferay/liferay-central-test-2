@@ -44,6 +44,7 @@ import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.base.BlogsEntryServiceBaseImpl;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
 
@@ -145,51 +146,6 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			name, description, type, version, feedURL, entryURL, blogsEntries);
 	}
 
-	public List getOrganizationEntries(long organizationId, int max)
-		throws PortalException, SystemException {
-
-		List entries = new ArrayList();
-
-		Organization organization =
-			OrganizationLocalServiceUtil.getOrganization(organizationId);
-
-		Iterator itr = BlogsEntryLocalServiceUtil.getCompanyEntries(
-			organization.getCompanyId(), 0, _MAX_END).iterator();
-
-		while (itr.hasNext() && (entries.size() < max)) {
-			BlogsEntry entry = (BlogsEntry)itr.next();
-
-			if (OrganizationLocalServiceUtil.hasUserOrganization(
-					entry.getUserId(), organizationId) &&
-			   (BlogsEntryPermission.contains(
-					getPermissionChecker(), entry, ActionKeys.VIEW))) {
-
-				entries.add(entry);
-			}
-		}
-
-		return entries;
-	}
-
-	public String getOrganizationEntriesRSS(
-			long organizationId, int max, String type, double version,
-			String feedURL, String entryURL)
-		throws PortalException, SystemException {
-
-		Organization organization =
-			OrganizationLocalServiceUtil.getOrganization(organizationId);
-
-		Company company = CompanyUtil.findByPrimaryKey(
-			organization.getCompanyId());
-
-		String name = company.getName();
-
-		List blogsEntries = getOrganizationEntries(organizationId, max);
-
-		return exportToRSS(
-			name, null, type, version, feedURL, entryURL, blogsEntries);
-	}
-
 	public List getCompanyEntries(long companyId, int max)
 		throws PortalException, SystemException {
 
@@ -278,6 +234,43 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		String name = group.getDescriptiveName();
 
 		List blogsEntries = getGroupEntries(groupId, max);
+
+		return exportToRSS(
+			name, null, type, version, feedURL, entryURL, blogsEntries);
+	}
+
+	public List getOrganizationEntries(long organizationId, int max)
+		throws PortalException, SystemException {
+
+		List entries = new ArrayList();
+
+		Iterator itr = BlogsEntryFinder.findByOrganizationId(
+			organizationId, 0, _MAX_END).iterator();
+
+		while (itr.hasNext() && (entries.size() < max)) {
+			BlogsEntry entry = (BlogsEntry)itr.next();
+
+			if (BlogsEntryPermission.contains(
+					getPermissionChecker(), entry, ActionKeys.VIEW)) {
+
+				entries.add(entry);
+			}
+		}
+
+		return entries;
+	}
+
+	public String getOrganizationEntriesRSS(
+			long organizationId, int max, String type, double version,
+			String feedURL, String entryURL)
+		throws PortalException, SystemException {
+
+		Organization organization =
+			OrganizationLocalServiceUtil.getOrganization(organizationId);
+
+		String name = organization.getName();
+
+		List blogsEntries = getOrganizationEntries(organizationId, max);
 
 		return exportToRSS(
 			name, null, type, version, feedURL, entryURL, blogsEntries);

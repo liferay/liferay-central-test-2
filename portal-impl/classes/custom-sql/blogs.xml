@@ -11,6 +11,40 @@
 				[$CATEGORY_ID$]
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.countByOrganizationIds">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				BlogsEntry
+			INNER JOIN
+				User_ ON
+					(User_.userId = BlogsEntry.userId)
+			INNER JOIN
+				Users_Orgs ON
+					(Users_Orgs.userId = User_.userId)
+			WHERE
+				[$ORGANIZATION_ID$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.findByOrganizationIds">
+		<![CDATA[
+			SELECT
+				{BlogsEntry.*}
+			FROM
+				BlogsEntry
+			INNER JOIN
+				User_ ON
+					(User_.userId = BlogsEntry.userId)
+			INNER JOIN
+				Users_Orgs ON
+					(Users_Orgs.userId = User_.userId)
+			WHERE
+				[$ORGANIZATION_ID$]
+			ORDER BY
+				BlogsEntry.displayDate DESC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.findByNoAssets">
 		<![CDATA[
 			SELECT

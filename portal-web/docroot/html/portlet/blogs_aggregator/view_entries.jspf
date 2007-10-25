@@ -33,12 +33,12 @@ for (int i = 0; i < results.size(); i++) {
 
 <%
 }
-%>
 
-<%
-//String rssURL = "/blogs/rss?companyId=" + company.getCompanyId();
 StringMaker sm = new StringMaker();
-sm.append("/c/blogs/rss?");
+
+sm.append(themeDisplay.getPathMain());
+sm.append("/blogs/rss?");
+
 if (organizationId > 0) {
 	sm.append("organizationId=" + organizationId);
 }
@@ -49,13 +49,8 @@ else {
 String rssURL = sm.toString();
 %>
 
-<liferay-ui:icon image="rss" message="rss" url="<%= rssURL %>" target="_blank" />
-
-<a href="<%= rssURL %>">
-	<liferay-ui:message key="subscribe-to-this-blog" />
-</a>
+<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
 
 <br /><br />
 
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-

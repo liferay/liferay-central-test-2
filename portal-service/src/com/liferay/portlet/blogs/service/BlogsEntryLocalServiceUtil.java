@@ -322,6 +322,21 @@ public class BlogsEntryLocalServiceUtil {
 		return blogsEntryLocalService.getNoAssetEntries();
 	}
 
+	public static java.util.List getOrganizationEntries(long organizationId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getOrganizationEntries(organizationId,
+			begin, end);
+	}
+
+	public static int getOrganizationEntriesCount(long organizationId)
+		throws com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getOrganizationEntriesCount(organizationId);
+	}
+
 	public static java.lang.String getUrlTitle(long entryId,
 		java.lang.String title) {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();

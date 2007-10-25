@@ -25,20 +25,16 @@
 <%@ include file="/html/portlet/blogs_aggregator/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
-
 String redirect = currentURL;
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/blogs/view");
-portletURL.setParameter("tabs1", tabs1);
-%>
+portletURL.setParameter("struts_action", "/blogs_aggregator/view");
 
-<%
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, null, null);
 
 List results = null;
+
 if (organizationId > 0) {
 	results = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
 }
@@ -47,7 +43,6 @@ else {
 }
 
 searchContainer.setResults(results);
-
 searchContainer.setTotal(results.size());
 %>
 

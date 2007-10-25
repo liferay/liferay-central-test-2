@@ -29,7 +29,9 @@ import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -47,6 +49,12 @@ public class BlogsEntryFinder {
 
 	public static String COUNT_BY_CATEGORY_IDS =
 		BlogsEntryFinder.class.getName() + ".countByCategoryIds";
+
+	public static String COUNT_BY_ORGANIZATION_IDS =
+		BlogsEntryFinder.class.getName() + ".countByOrganizationIds";
+
+	public static String FIND_BY_ORGANIZATION_IDS =
+		BlogsEntryFinder.class.getName() + ".findByOrganizationIds";
 
 	public static String FIND_BY_NO_ASSETS =
 		BlogsEntryFinder.class.getName() + ".findByNoAssets";
@@ -96,6 +104,110 @@ public class BlogsEntryFinder {
 		}
 	}
 
+	public static int countByOrganizationId(long organizationId)
+		throws SystemException {
+
+		List organizationIds = new ArrayList();
+
+		organizationIds.add(new Long(organizationId));
+
+		return countByOrganizationIds(organizationIds);
+	}
+
+	public static int countByOrganizationIds(List organizationIds)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_ORGANIZATION_IDS);
+
+			sql = StringUtil.replace(
+				sql, "[$ORGANIZATION_ID$]",
+				_getOrganizationIds(organizationIds));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			for (int i = 0; i < organizationIds.size(); i++) {
+				Long organizationId = (Long)organizationIds.get(i);
+
+				qPos.add(organizationId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByOrganizationId(
+			long organizationId, int begin, int end)
+		throws SystemException {
+
+		List organizationIds = new ArrayList();
+
+		organizationIds.add(new Long(organizationId));
+
+		return findByOrganizationIds(organizationIds, begin, end);
+	}
+
+	public static List findByOrganizationIds(
+			List organizationIds, int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_ORGANIZATION_IDS);
+
+			sql = StringUtil.replace(
+				sql, "[$ORGANIZATION_ID$]",
+				_getOrganizationIds(organizationIds));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("BlogsEntry", BlogsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			for (int i = 0; i < organizationIds.size(); i++) {
+				Long organizationId = (Long)organizationIds.get(i);
+
+				qPos.add(organizationId);
+			}
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
 	public static List findByNoAssets() throws SystemException {
 		Session session = null;
 
@@ -125,6 +237,20 @@ public class BlogsEntryFinder {
 			sm.append("categoryId = ? ");
 
 			if ((i + 1) != categoryIds.size()) {
+				sm.append("OR ");
+			}
+		}
+
+		return sm.toString();
+	}
+
+	private static String _getOrganizationIds(List organizationIds) {
+		StringMaker sm = new StringMaker();
+
+		for (int i = 0; i < organizationIds.size(); i++) {
+			sm.append("Users_Orgs.organizationId = ? ");
+
+			if ((i + 1) != organizationIds.size()) {
 				sm.append("OR ");
 			}
 		}

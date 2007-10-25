@@ -104,36 +104,6 @@ public class BlogsEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.blogs.model.BlogsEntrySoap[] getOrganizationEntries(
-		long organizationId, int max) throws RemoteException {
-		try {
-			java.util.List returnValue = BlogsEntryServiceUtil.getOrganizationEntries(organizationId,
-					max);
-
-			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static java.lang.String getOrganizationEntriesRSS(
-		long organizationId, int max, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws RemoteException {
-		try {
-			java.lang.String returnValue = BlogsEntryServiceUtil.getOrganizationEntriesRSS(organizationId,
-					max, type, version, feedURL, entryURL);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap[] getCompanyEntries(
 		long companyId, int max) throws RemoteException {
 		try {
@@ -210,6 +180,36 @@ public class BlogsEntryServiceSoap {
 		java.lang.String entryURL) throws RemoteException {
 		try {
 			java.lang.String returnValue = BlogsEntryServiceUtil.getGroupEntriesRSS(groupId,
+					max, type, version, feedURL, entryURL);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsEntrySoap[] getOrganizationEntries(
+		long organizationId, int max) throws RemoteException {
+		try {
+			java.util.List returnValue = BlogsEntryServiceUtil.getOrganizationEntries(organizationId,
+					max);
+
+			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getOrganizationEntriesRSS(
+		long organizationId, int max, java.lang.String type, double version,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = BlogsEntryServiceUtil.getOrganizationEntriesRSS(organizationId,
 					max, type, version, feedURL, entryURL);
 
 			return returnValue;

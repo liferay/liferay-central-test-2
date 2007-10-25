@@ -80,16 +80,6 @@ public interface BlogsEntryService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.util.List getOrganizationEntries(long organizationId, int max)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException;
-
-	public java.lang.String getOrganizationEntriesRSS(long organizationId,
-		int max, java.lang.String type, double version,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException;
-
 	public java.util.List getCompanyEntries(long companyId, int max)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
@@ -116,6 +106,16 @@ public interface BlogsEntryService {
 	public java.lang.String getGroupEntriesRSS(long groupId, int max,
 		java.lang.String type, double version, java.lang.String feedURL,
 		java.lang.String entryURL)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public java.util.List getOrganizationEntries(long organizationId, int max)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public java.lang.String getOrganizationEntriesRSS(long organizationId,
+		int max, java.lang.String type, double version,
+		java.lang.String feedURL, java.lang.String entryURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

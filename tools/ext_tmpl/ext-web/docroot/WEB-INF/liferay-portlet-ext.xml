@@ -488,6 +488,11 @@
 		<struts-path>recent_bloggers</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>115</portlet-name>
+		<struts-path>blogs_aggregator</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

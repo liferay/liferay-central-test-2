@@ -46,10 +46,8 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
 }
 
-String displayStyle = prefs.getValue("display-style", "body-and-image");
-
 long organizationId = GetterUtil.getLong(prefs.getValue("organization-id", "0"));
-
+String displayStyle = prefs.getValue("display-style", "body-and-image");
 int max = GetterUtil.getInteger(prefs.getValue("max", "20"));
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

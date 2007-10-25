@@ -23,7 +23,7 @@
 %>
 
 <c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) %>">
-	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<table class="liferay-table">
 	<tr>
 		<td>
 
@@ -44,9 +44,7 @@
 			%>
 
 			<span style="font-size: small;"><b>
-
 			<a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a>
-
 			</b></span><br />
 
 			<span style="font-size: x-small;"><liferay-ui:message key="by" /> <a href="<%= viewAllEntriesURL %>"><%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %></a>, <liferay-ui:message key="on" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %></span><br />
@@ -59,58 +57,51 @@
 	</tr>
 
 	<c:if test='<%= !displayStyle.equals("title") %>'>
-	<tr>
-		<td>
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<c:if test='<%= displayStyle.endsWith("-image") %>'>
-				<a href="<%= viewAllEntriesURL %>">
-					<img src="<%= themeDisplay.getPathImage() + "/user_portrait?img_id=" + user2.getPortraitId() + "&t=" + ImageServletTokenUtil.getToken(user2.getPortraitId()) %>" width="65" border="0" align="left" hspace="5"/>
-				</a>
-			</c:if>
-			<c:choose>
-				<c:when test='<%= displayStyle.startsWith("abstract") %>'>
-					<%= StringUtil.shorten(Html.stripHtml(entry.getContent()), 200, StringPool.BLANK) %>
-				</c:when>
-				<c:otherwise>
-					<%= entry.getContent() %>
-				</c:otherwise>
-			</c:choose>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<c:choose>
-				<c:when test='<%= displayStyle.startsWith("abstract") %>'>
-					<a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</a>
-				</c:when>
-				<c:otherwise>
-					<%
-					long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
+		<tr>
+			<td>
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<c:if test='<%= displayStyle.endsWith("-image") %>'>
+					<a href="<%= viewAllEntriesURL %>"><img align="left" border="0" hspace="0" src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user2.getPortraitId()) %>" width="65" /></a>
+				</c:if>
+				<c:choose>
+					<c:when test='<%= displayStyle.startsWith("abstract") %>'>
+						<%= StringUtil.shorten(Html.stripHtml(entry.getContent()), 200, StringPool.BLANK) %>
+					</c:when>
+					<c:otherwise>
+						<%= entry.getContent() %>
+					</c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<c:choose>
+					<c:when test='<%= displayStyle.startsWith("abstract") %>'>
+						<a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</a>
+					</c:when>
+					<c:otherwise>
 
-					int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
-					%>
+						<%
+						long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
 
-					<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
-				</c:otherwise>
-			</c:choose>
+						int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
+						%>
 
-
-		</td>
-	</tr>
+						<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
+					</c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
 	</c:if>
+
 	</table>
 </c:if>

@@ -366,6 +366,20 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return BlogsEntryFinder.findByNoAssets();
 	}
 
+	public List getOrganizationEntries(long organizationId, int begin, int end)
+		throws SystemException {
+
+		return BlogsEntryFinder.findByOrganizationId(
+			organizationId, begin, end);
+	}
+
+	public int getOrganizationEntriesCount(long organizationId)
+		throws SystemException {
+
+		return BlogsEntryFinder.countByOrganizationId(
+			organizationId);
+	}
+
 	public String getUrlTitle(long entryId, String title) {
 		String urlTitle = String.valueOf(entryId);
 

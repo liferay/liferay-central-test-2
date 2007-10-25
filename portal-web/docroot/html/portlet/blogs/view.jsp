@@ -25,14 +25,11 @@
 <%@ include file="/html/portlet/blogs/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
-
 String redirect = currentURL;
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/blogs/view");
-portletURL.setParameter("tabs1", tabs1);
 %>
 
 <liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/blogs/search" /></liferay-portlet:renderURL>
