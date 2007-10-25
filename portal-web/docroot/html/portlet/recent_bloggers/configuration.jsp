@@ -75,6 +75,17 @@ if (organizationId > 0) {
 		<input <%= (organizationId <= 0) ? "disabled" : "" %> id="<portlet:namespace />removeOrganizationButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeOrganization();">
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="display-style" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />displayStyle">
+			<option <%= (displayStyle.equals("user-name-and-image")) ? "selected" : "" %> value="user-name-and-image"><liferay-ui:message key="user-name-and-image"/></option>
+			<option <%= (displayStyle.equals("user-name")) ? "selected" : "" %> value="user-name"><liferay-ui:message key="user-name"/></option>
+		</select>
+	</td>
+</tr>
 </table>
 
 <br />

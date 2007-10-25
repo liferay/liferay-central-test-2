@@ -54,6 +54,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 
 		String organizationId = ParamUtil.getString(req, "organizationId");
+		String displayStyle = ParamUtil.getString(req, "displayStyle");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
@@ -62,6 +63,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				req, portletResource, true, true);
 
 		prefs.setValue("organization-id", organizationId);
+		prefs.setValue("display-style", displayStyle);
 
 		prefs.store();
 

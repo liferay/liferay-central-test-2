@@ -40,6 +40,7 @@ if (Validator.isNotNull(portletResource)) {
 }
 
 long organizationId = GetterUtil.getLong(prefs.getValue("organization-id", "0"));
+String displayStyle = prefs.getValue("display-style", "user-name-and-image");
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>
