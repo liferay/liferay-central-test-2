@@ -40,7 +40,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a href="PortletDataContext.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletDataContextImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * Holds context information that is used during exporting adn importing portlet
