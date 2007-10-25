@@ -28,12 +28,12 @@ long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(
 
 Date now = new Date();
 
-int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, notEntryIds, andOperator, now, now);
+int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
 
 searchContainer.setTotal(total);
 searchContainer.setDelta(delta);
 
-List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, now, now, searchContainer.getStart(), searchContainer.getEnd());
+List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 

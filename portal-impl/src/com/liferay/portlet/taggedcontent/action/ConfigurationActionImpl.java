@@ -204,6 +204,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String orderByColumn2 = ParamUtil.getString(req, "orderByColumn2");
 		String orderByType1 = ParamUtil.getString(req, "orderByType1");
 		String orderByType2 = ParamUtil.getString(req, "orderByType2");
+		boolean excludeZeroViewCount = ParamUtil.getBoolean(
+			req, "excludeZeroViewCount");
 		boolean showQueryLogic = ParamUtil.getBoolean(req, "showQueryLogic");
 		int delta = ParamUtil.getInteger(req, "delta");
 		boolean showAvailableLocales = ParamUtil.getBoolean(
@@ -220,6 +222,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("order-by-column-2", orderByColumn2);
 		prefs.setValue("order-by-type-1", orderByType1);
 		prefs.setValue("order-by-type-2", orderByType2);
+		prefs.setValue(
+			"exclude-zero-view-count", String.valueOf(excludeZeroViewCount));
 		prefs.setValue("show-query-logic", String.valueOf(showQueryLogic));
 		prefs.setValue("delta", String.valueOf(delta));
 		prefs.setValue(

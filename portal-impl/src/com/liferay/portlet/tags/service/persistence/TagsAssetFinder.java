@@ -70,7 +70,7 @@ public class TagsAssetFinder {
 
 	public static String[] ORDER_BY_COLUMNS = new String[] {
 		"title", "createDate", "modifiedDate", "publishDate", "expirationDate",
-		"priority"
+		"priority", "viewCount"
 	};
 
 	public static String[] ORDER_BY_TYPE = new String[] {
@@ -78,8 +78,8 @@ public class TagsAssetFinder {
 	};
 
 	public static int countByAndEntryIds(
-			long[] entryIds, long[] notEntryIds, Date publishDate,
-			Date expirationDate)
+			long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
+			Date publishDate, Date expirationDate)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -108,6 +108,10 @@ public class TagsAssetFinder {
 				if ((i + 1) < entryIds.length) {
 					sm.append(StringPool.CLOSE_PARENTHESIS);
 				}
+			}
+
+			if (excludeZeroViewCount) {
+				sm.append(" AND (TagsAsset.viewCount > 0)");
 			}
 
 			sm.append(StringPool.CLOSE_PARENTHESIS);
@@ -165,8 +169,8 @@ public class TagsAssetFinder {
 	}
 
 	public static int countByOrEntryIds(
-			long[] entryIds, long[] notEntryIds, Date publishDate,
-			Date expirationDate )
+			long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
+			Date publishDate, Date expirationDate )
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -210,6 +214,10 @@ public class TagsAssetFinder {
 
 			sql = _getDates(sql, publishDate, expirationDate);
 
+			if (excludeZeroViewCount) {
+				sql += " AND (TagsAsset.viewCount > 0)";
+			}
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
@@ -243,7 +251,8 @@ public class TagsAssetFinder {
 	public static List findByAndEntryIds(
 			long[] entryIds, long[] notEntryIds, String orderByCol1,
 			String orderByCol2, String orderByType1, String orderByType2,
-			Date publishDate, Date expirationDate, int begin, int end)
+	        boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
+	        int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -277,6 +286,10 @@ public class TagsAssetFinder {
 				if ((i + 1) < entryIds.length) {
 					sm.append(StringPool.CLOSE_PARENTHESIS);
 				}
+			}
+
+			if (excludeZeroViewCount) {
+				sm.append(" AND (TagsAsset.viewCount > 0)");	
 			}
 
 			sm.append(StringPool.CLOSE_PARENTHESIS);
@@ -342,14 +355,15 @@ public class TagsAssetFinder {
 		throws SystemException {
 
 		return findByOrEntryIds(
-			entryIds, notEntryIds, null, null, null, null, publishDate,
+			entryIds, notEntryIds, null, null, null, null, false, publishDate,
 			expirationDate, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public static List findByOrEntryIds(
 			long[] entryIds, long[] notEntryIds, String orderByCol1,
 			String orderByCol2, String orderByType1, String orderByType2,
-			Date publishDate, Date expirationDate, int begin, int end)
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
+			int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -397,6 +411,10 @@ public class TagsAssetFinder {
 			}
 
 			sql = _getDates(sql, publishDate, expirationDate);
+
+			if (excludeZeroViewCount) {
+				sql += " AND (TagsAsset.viewCount > 0)";
+			}
 
 			StringMaker sm = new StringMaker();
 

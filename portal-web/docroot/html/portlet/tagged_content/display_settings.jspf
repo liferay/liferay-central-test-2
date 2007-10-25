@@ -108,6 +108,17 @@
 	</tr>
 </c:if>
 
+<c:if test='<%= selectionStyle.equals("dynamic") %>'>
+	<tr>
+		<td>
+			<liferay-ui:message key="exclude-assets-with-zero-views" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="excludeZeroViewCount" defaultValue="<%= excludeZeroViewCount %>" />
+		</td>
+	</tr>
+</c:if>
+
 <tr>
 	<td>
 		<liferay-ui:message key="show-available-locales" />

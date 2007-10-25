@@ -104,27 +104,28 @@ public interface TagsAssetLocalService {
 		java.lang.String languageId);
 
 	public java.util.List getAssets(long[] entryIds, long[] notEntryIds,
-		boolean andOperator, int begin, int end)
+		boolean andOperator, boolean excludeZeroViewCount, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getAssets(long[] entryIds, long[] notEntryIds,
-		boolean andOperator, java.util.Date publishDate,
-		java.util.Date expirationDate, int begin, int end)
-		throws com.liferay.portal.SystemException;
+		boolean andOperator, boolean excludeZeroViewCount,
+		java.util.Date publishDate, java.util.Date expirationDate, int begin,
+		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List getAssets(long[] entryIds, long[] notEntryIds,
 		boolean andOperator, java.lang.String orderByCol1,
 		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, java.util.Date publishDate,
-		java.util.Date expirationDate, int begin, int end)
+		java.lang.String orderByType2, boolean excludeZeroViewCount,
+		java.util.Date publishDate, java.util.Date expirationDate, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public int getAssetsCount(long[] entryIds, long[] notEntryIds,
+		boolean andOperator, boolean excludeZeroViewCount)
 		throws com.liferay.portal.SystemException;
 
 	public int getAssetsCount(long[] entryIds, long[] notEntryIds,
-		boolean andOperator) throws com.liferay.portal.SystemException;
-
-	public int getAssetsCount(long[] entryIds, long[] notEntryIds,
-		boolean andOperator, java.util.Date publishDate,
-		java.util.Date expirationDate)
+		boolean andOperator, boolean excludeZeroViewCount,
+		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
