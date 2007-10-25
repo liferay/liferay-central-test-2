@@ -146,8 +146,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 	public List getAssets(
 			long[] entryIds, long[] notEntryIds, boolean andOperator,
-	        boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
-	        int begin, int end)
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
+			int begin, int end)
 		throws SystemException {
 
 		if (andOperator) {
@@ -172,8 +172,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		if (andOperator) {
 			return TagsAssetFinder.findByAndEntryIds(
 				entryIds, notEntryIds, orderByCol1, orderByCol2, orderByType1,
-			    orderByType2, excludeZeroViewCount, publishDate, expirationDate,
-			    begin, end);
+				orderByType2, excludeZeroViewCount, publishDate, expirationDate,
+				begin, end);
 		}
 		else {
 			return TagsAssetFinder.findByOrEntryIds(
@@ -195,7 +195,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 	public int getAssetsCount(
 			long[] entryIds, long[] notEntryIds, boolean andOperator,
-	        boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
 		throws SystemException {
 
 		if (andOperator) {
@@ -205,7 +205,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		}
 		else {
 			return TagsAssetFinder.countByOrEntryIds(
-				entryIds, notEntryIds, excludeZeroViewCount, publishDate, 
+				entryIds, notEntryIds, excludeZeroViewCount, publishDate,
 				expirationDate);
 		}
 	}

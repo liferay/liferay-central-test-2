@@ -251,8 +251,8 @@ public class TagsAssetFinder {
 	public static List findByAndEntryIds(
 			long[] entryIds, long[] notEntryIds, String orderByCol1,
 			String orderByCol2, String orderByType1, String orderByType2,
-	        boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
-	        int begin, int end)
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
+			int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -289,7 +289,7 @@ public class TagsAssetFinder {
 			}
 
 			if (excludeZeroViewCount) {
-				sm.append(" AND (TagsAsset.viewCount > 0)");	
+				sm.append(" AND (TagsAsset.viewCount > 0)");
 			}
 
 			sm.append(StringPool.CLOSE_PARENTHESIS);
