@@ -86,6 +86,32 @@ if (organizationId > 0) {
 		</select>
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="maximum-bloggers-to-display" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />max">
+			<option <%= max == 1 ? "selected" : "" %> value="1">1</option>
+			<option <%= max == 2 ? "selected" : "" %> value="2">2</option>
+			<option <%= max == 3 ? "selected" : "" %> value="3">3</option>
+			<option <%= max == 4 ? "selected" : "" %> value="4">4</option>
+			<option <%= max == 5 ? "selected" : "" %> value="5">5</option>
+			<option <%= max == 10 ? "selected" : "" %> value="10">10</option>
+			<option <%= max == 15 ? "selected" : "" %> value="15">15</option>
+			<option <%= max == 20 ? "selected" : "" %> value="20">20</option>
+			<option <%= max == 25 ? "selected" : "" %> value="25">25</option>
+			<option <%= max == 30 ? "selected" : "" %> value="30">30</option>
+			<option <%= max == 40 ? "selected" : "" %> value="40">40</option>
+			<option <%= max == 50 ? "selected" : "" %> value="50">50</option>
+			<option <%= max == 60 ? "selected" : "" %> value="60">60</option>
+			<option <%= max == 70 ? "selected" : "" %> value="70">70</option>
+			<option <%= max == 80 ? "selected" : "" %> value="80">80</option>
+			<option <%= max == 90 ? "selected" : "" %> value="90">90</option>
+			<option <%= max == 100 ? "selected" : "" %> value="100">100</option>
+		</select>
+	</td>
+</tr>
 </table>
 
 <br />

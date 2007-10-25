@@ -41,6 +41,7 @@ if (Validator.isNotNull(portletResource)) {
 
 long organizationId = GetterUtil.getLong(prefs.getValue("organization-id", "0"));
 String displayStyle = prefs.getValue("display-style", "user-name-and-image");
+int max = GetterUtil.getInteger(prefs.getValue("max", "20"));
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>
