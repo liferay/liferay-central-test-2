@@ -151,6 +151,23 @@ public class BlogsStatsUserLocalServiceUtil {
 		return blogsStatsUserLocalService.getGroupStatsUsersCount(groupId);
 	}
 
+	public static java.util.List getOrganizationStatsUsers(
+		long organizationId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		return blogsStatsUserLocalService.getOrganizationStatsUsers(organizationId,
+			begin, end, obc);
+	}
+
+	public static int getOrganizationStatsUsersCount(long organizationId)
+		throws com.liferay.portal.SystemException {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		return blogsStatsUserLocalService.getOrganizationStatsUsersCount(organizationId);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser getStatsUser(
 		long groupId, long userId)
 		throws com.liferay.portal.PortalException, 

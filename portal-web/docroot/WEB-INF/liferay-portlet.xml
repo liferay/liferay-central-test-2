@@ -1069,6 +1069,7 @@
 		<portlet-name>114</portlet-name>
 		<icon>/html/portlet/recent_bloggers/icon.png</icon>
 		<struts-path>recent_bloggers</struts-path>
+		<configuration-action-class>com.liferay.portlet.recentbloggers.action.ConfigurationActionImpl</configuration-action-class>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>

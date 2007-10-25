@@ -25,7 +25,14 @@
 <%@ include file="/html/portlet/recent_bloggers/init.jsp" %>
 
 <%
-List statsUsers = BlogsStatsUserLocalServiceUtil.getCompanyStatsUsers(company.getCompanyId(), 0, SearchContainer.DEFAULT_DELTA, new StatsUserLastPostDateComparator(false));
+List statsUsers = null;
+
+if (organizationId > 0) {
+	statsUsers = BlogsStatsUserLocalServiceUtil.getOrganizationStatsUsers(organizationId, 0, SearchContainer.DEFAULT_DELTA, new StatsUserLastPostDateComparator(false));
+}
+else {
+	statsUsers = BlogsStatsUserLocalServiceUtil.getCompanyStatsUsers(company.getCompanyId(), 0, SearchContainer.DEFAULT_DELTA, new StatsUserLastPostDateComparator(false));
+}
 %>
 
 <c:choose>

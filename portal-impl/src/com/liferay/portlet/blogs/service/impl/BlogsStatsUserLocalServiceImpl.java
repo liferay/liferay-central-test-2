@@ -31,6 +31,7 @@ import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.service.base.BlogsStatsUserLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
 
 import java.util.Date;
@@ -77,6 +78,20 @@ public class BlogsStatsUserLocalServiceImpl
 
 	public int getGroupStatsUsersCount(long groupId) throws SystemException {
 		return BlogsStatsUserUtil.countByG_E(groupId, 0);
+	}
+
+	public List getOrganizationStatsUsers(
+			long organizationId, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return BlogsStatsUserFinder.findByOrganizationId(
+			organizationId, begin, end, obc);
+	}
+
+	public int getOrganizationStatsUsersCount(long organizationId)
+		throws SystemException {
+
+		return BlogsStatsUserFinder.countByOrganizationId(organizationId);
 	}
 
 	public BlogsStatsUser getStatsUser(long groupId, long userId)

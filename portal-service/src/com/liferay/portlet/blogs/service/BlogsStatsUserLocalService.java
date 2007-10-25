@@ -94,6 +94,13 @@ public interface BlogsStatsUserLocalService {
 	public int getGroupStatsUsersCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getOrganizationStatsUsers(long organizationId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public int getOrganizationStatsUsersCount(long organizationId)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.blogs.model.BlogsStatsUser getStatsUser(
 		long groupId, long userId)
 		throws com.liferay.portal.SystemException, 

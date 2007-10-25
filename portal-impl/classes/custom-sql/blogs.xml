@@ -62,4 +62,38 @@
 				))
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.countByOrganizationIds">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				BlogsStatsUser
+			INNER JOIN
+				User_ ON
+					(User_.userId = BlogsStatsUser.userId)
+			INNER JOIN
+				Users_Orgs ON
+					(Users_Orgs.userId = User_.userId)
+			WHERE
+				(BlogsStatsUser.entryCount != 0) AND
+				[$ORGANIZATION_ID$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.findByOrganizationIds">
+		<![CDATA[
+			SELECT
+				{BlogsStatsUser.*}
+			FROM
+				BlogsStatsUser
+			INNER JOIN
+				User_ ON
+					(User_.userId = BlogsStatsUser.userId)
+			INNER JOIN
+				Users_Orgs ON
+					(Users_Orgs.userId = User_.userId)
+			WHERE
+				(BlogsStatsUser.entryCount != 0) AND
+				[$ORGANIZATION_ID$]
+		]]>
+	</sql>
 </custom-sql>

@@ -31,5 +31,15 @@
 <%@ page import="com.liferay.portlet.blogs.util.comparator.StatsUserLastPostDateComparator" %>
 
 <%
+PortletPreferences prefs = renderRequest.getPreferences();
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
+}
+
+long organizationId = GetterUtil.getLong(prefs.getValue("organization-id", "0"));
+
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>
