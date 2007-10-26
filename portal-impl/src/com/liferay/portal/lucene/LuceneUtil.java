@@ -521,8 +521,7 @@ public class LuceneUtil {
 			}
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
 		}
 
 		return directory;
