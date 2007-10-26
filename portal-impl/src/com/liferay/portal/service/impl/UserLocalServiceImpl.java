@@ -2016,7 +2016,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			validateScreenName(user.getCompanyId(), screenName);
 		}
 
-		if (!Validator.isEmailAddress(emailAddress)) {
+		if (!Validator.isEmailAddress(emailAddress) ||
+			emailAddress.startsWith("root@") ||
+			emailAddress.startsWith("postmaster@")) {
+
 			throw new UserEmailAddressException();
 		}
 		else if (!user.isDefaultUser()) {
@@ -2076,7 +2079,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				companyId, 0, password1, password2, passwordPolicy);
 		}
 
-		if (!Validator.isEmailAddress(emailAddress)) {
+		if (!Validator.isEmailAddress(emailAddress) ||
+			emailAddress.startsWith("root@") ||
+			emailAddress.startsWith("postmaster@")) {
+
 			throw new UserEmailAddressException();
 		}
 		else {

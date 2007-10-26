@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 /**
  * <a href="Validator.java.html"><b><i>View Source</i></b></a>
  *
@@ -229,115 +232,22 @@ public class Validator {
 	}
 
 	public static boolean isEmailAddress(String ea) {
-		if (isNull(ea)) {
+		Boolean valid = null;
+
+		try {
+			valid = (Boolean)PortalClassInvoker.invoke(
+				"com.liferay.util.mail.InternetAddressUtil", "isValid", ea);
+		}
+		catch (Exception e) {
+			_log.warn(e);
+		}
+
+		if (valid == null) {
 			return false;
 		}
-
-		int eaLength = ea.length();
-
-		if (eaLength < 6) {
-
-			// j@j.c
-
-			return false;
+		else {
+			return valid.booleanValue();
 		}
-
-		ea = ea.toLowerCase();
-
-		int at = ea.indexOf('@');
-
-		// Unix based email addresses cannot be longer than 24 characters.
-		// However, many Windows based email addresses can be longer than 24,
-		// so we will set the maximum at 96.
-
-		//int maxEmailLength = 24;
-		int maxEmailLength = 96;
-
-		if ((at > maxEmailLength) || (at == -1) || (at == 0) ||
-			((at <= eaLength) && (at > eaLength - 5))) {
-
-			// 123456789012345678901234@joe.com
-			// joe.com
-			// @joe.com
-			// joe@joe
-			// joe@jo
-			// joe@j
-
-			return false;
-		}
-
-		int dot = ea.lastIndexOf('.');
-
-		if ((dot == -1) || (dot < at) || (dot > eaLength - 3)) {
-
-			// joe@joecom
-			// joe.@joecom
-			// joe@joe.c
-
-			return false;
-		}
-
-		if (ea.indexOf("..") != -1) {
-
-			// joe@joe..com
-
-			return false;
-		}
-
-		char[] name = ea.substring(0, at).toCharArray();
-
-		for (int i = 0; i < name.length; i++) {
-			if ((!isChar(name[i])) &&
-				(!isDigit(name[i])) &&
-				(!isEmailAddressSpecialChar(name[i]))) {
-
-				return false;
-			}
-		}
-
-		if (isEmailAddressSpecialChar(name[0]) ||
-			isEmailAddressSpecialChar(name[name.length - 1])) {
-
-			// .joe.@joe.com
-			// -joe-@joe.com
-			// _joe_@joe.com
-
-			return false;
-		}
-
-		char[] host = ea.substring(at + 1, ea.length()).toCharArray();
-
-		for (int i = 0; i < host.length; i++) {
-			if ((!isChar(host[i])) &&
-				(!isDigit(host[i])) &&
-				(!isEmailAddressSpecialChar(host[i]))) {
-
-				return false;
-			}
-		}
-
-		if (isEmailAddressSpecialChar(host[0]) ||
-			isEmailAddressSpecialChar(host[host.length - 1])) {
-
-			// joe@.joe.com.
-			// joe@-joe.com-
-
-			return false;
-		}
-
-		// postmaster@joe.com
-
-		if (ea.startsWith("postmaster@")) {
-			return false;
-		}
-
-		// root@.com
-
-		if (ea.startsWith("root@")) {
-			return false;
-		}
-
-		return true;
 	}
 
 	public static boolean isEmailAddressSpecialChar(char c) {
@@ -497,5 +407,7 @@ public class Validator {
 		'.', '!', '#', '$', '%', '&', '\'', '*', '+', '-', '/', '=', '?', '^',
 		'_', '`', '{', '|', '}', '~'
 	};
+
+	private static Log _log = LogFactoryUtil.getLog(Validator.class);
 
 }

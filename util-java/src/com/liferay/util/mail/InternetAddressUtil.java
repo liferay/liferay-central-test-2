@@ -32,6 +32,8 @@ import java.util.List;
 import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
 
+import org.apache.commons.validator.EmailValidator;
+
 /**
  * <a href="InternetAddressUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -52,6 +54,10 @@ public class InternetAddressUtil {
 		}
 
 		return false;
+	}
+
+	public static boolean isValid(String emailAddress) {
+		return EmailValidator.getInstance().isValid(emailAddress);
 	}
 
 	public static InternetAddress[] removeEntry(
