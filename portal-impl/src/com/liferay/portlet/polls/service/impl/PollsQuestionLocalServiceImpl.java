@@ -354,7 +354,7 @@ public class PollsQuestionLocalServiceImpl
 			throw new QuestionDescriptionException();
 		}
 
-		if (choices != null && choices.size() < 2) {
+		if ((choices != null) && (choices.size() < 2)) {
 			throw new QuestionChoiceException();
 		}
 	}

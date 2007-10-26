@@ -77,9 +77,7 @@ public class PollsChoiceLocalServiceImpl
 	protected void validate(String name, String description)
 		throws PortalException {
 
-		if (Validator.isNull(name) ||
-			Validator.isNull(description)) {
-
+		if (Validator.isNull(name) || Validator.isNull(description)) {
 			throw new QuestionChoiceException();
 		}
 	}

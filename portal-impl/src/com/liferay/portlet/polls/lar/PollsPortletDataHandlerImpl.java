@@ -122,8 +122,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Questions
 
-			List questions =
-				PollsQuestionUtil.findByGroupId(context.getGroupId());
+			List questions = PollsQuestionUtil.findByGroupId(
+				context.getGroupId());
 
 			List choices = new ArrayList();
 
@@ -319,8 +319,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			PollsChoice choice)
 		throws Exception {
 
-		Long questionId =
-			(Long)questionPKs.get(new Long(choice.getQuestionId()));
+		Long questionId = (Long)questionPKs.get(
+			new Long(choice.getQuestionId()));
 
 		boolean newParentQuestion = false;
 
@@ -411,8 +411,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			PollsVote vote)
 		throws Exception {
 
-		Long questionId =
-			(Long)questionPKs.get(new Long(vote.getQuestionId()));
+		Long questionId = (Long)questionPKs.get(
+			new Long(vote.getQuestionId()));
 
 		boolean newParentQuestion = false;
 
@@ -423,8 +423,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			newParentQuestion = true;
 		}
 
-		Long choiceId =
-			(Long)choicePKs.get(new Long(vote.getChoiceId()));
+		Long choiceId = (Long)choicePKs.get(new Long(vote.getChoiceId()));
 
 		boolean newParentChoice = false;
 
@@ -441,8 +440,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			if ((PollsChoiceUtil.fetchByPrimaryKey(
 					vote.getPrimaryKey()) == null) ||
-				newParentChoice ||
-				newParentQuestion) {
+				newParentChoice || newParentQuestion) {
 
 				PollsVoteLocalServiceUtil.addVote(
 					vote.getPrimaryKey(), questionId.longValue(),
@@ -450,20 +448,18 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			}
 			else {
 				vote.setQuestionId(questionId.longValue());
-				vote.setQuestionId(choiceId.longValue());
+				vote.setChoiceId(choiceId.longValue());
 
 				PollsVoteUtil.update(vote, true);
 			}
 		}
 		catch (NoSuchQuestionException nsqe) {
 			_log.error(
-				"Could not find the question for vote " +
-					vote.getVoteId());
+				"Could not find the question for vote " + vote.getVoteId());
 		}
 		catch (NoSuchChoiceException nsve) {
 			_log.error(
-				"Could not find the choice for vote " +
-					vote.getVoteId());
+				"Could not find the choice for vote " + vote.getVoteId());
 		}
 	}
 
