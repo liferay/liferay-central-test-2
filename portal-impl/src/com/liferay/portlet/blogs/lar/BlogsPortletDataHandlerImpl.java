@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -44,7 +45,7 @@ import com.thoughtworks.xstream.XStream;
 
 import java.io.StringReader;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -232,18 +233,25 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 					long plid = context.getPlid();
 
+					Calendar displayDateCal = CalendarFactoryUtil.getCalendar();
+
+					displayDateCal.setTime(entry.getDisplayDate());
+
+					int displayDateMonth = displayDateCal.get(Calendar.MONTH);
+					int displayDateDay = displayDateCal.get(Calendar.DATE);
+					int displayDateYear = displayDateCal.get(Calendar.YEAR);
+					int displayDateHour = displayDateCal.get(Calendar.HOUR);
+					int displayDateMinute = displayDateCal.get(Calendar.MINUTE);
+
 					ThemeDisplay themeDisplay = null;
 					boolean addCommunityPermissions = true;
 					boolean addGuestPermissions = true;
 
-					Date displayDate = entry.getDisplayDate();
-
 					BlogsEntryLocalServiceUtil.addEntry(
 						entry.getUserId(), plid, entry.getCategoryId(),
-						entry.getTitle(), entry.getContent(),
-						displayDate.getMonth(), displayDate.getDay(),
-						displayDate.getYear(), displayDate.getHours(),
-						displayDate.getMinutes(), themeDisplay, tagsEntries,
+						entry.getTitle(), entry.getContent(), displayDateMonth,
+						displayDateDay, displayDateYear, displayDateHour,
+						displayDateMinute, themeDisplay, tagsEntries,
 						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
@@ -279,9 +287,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 					(existingStatsUser.getGroupId() != context.getGroupId())) {
 
 					long groupId = context.getGroupId();
-
-					boolean addCommunityPermissions = true;
-					boolean addGuestPermissions = true;
 
 					BlogsStatsUserLocalServiceUtil.updateStatsUser(
 						groupId, statsUser.getUserId(),

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.polls.NoSuchChoiceException;
@@ -51,6 +52,7 @@ import com.thoughtworks.xstream.XStream;
 import java.io.StringReader;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -371,20 +373,24 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			long plid = context.getPlid();
 
 			Date expirationDate = question.getExpirationDate();
+
 			int expirationMonth = 0;
 			int expirationDay = 0;
 			int expirationYear = 0;
-			int expirationHours = 0;
-			int expirationMinutes = 0;
-
+			int expirationHour = 0;
+			int expirationMinute = 0;
 			boolean neverExpire = true;
 
 			if (expirationDate != null) {
-				expirationMonth = expirationDate.getMonth();
-				expirationDay = expirationDate.getDay();;
-				expirationYear = expirationDate.getYear();
-				expirationHours = expirationDate.getHours();
-				expirationMinutes = expirationDate.getMinutes();
+				Calendar expirationCal = CalendarFactoryUtil.getCalendar();
+
+				expirationCal.setTime(expirationDate);
+
+				expirationMonth = expirationCal.get(Calendar.MONTH);
+				expirationDay = expirationCal.get(Calendar.DATE);
+				expirationYear = expirationCal.get(Calendar.YEAR);
+				expirationHour = expirationCal.get(Calendar.HOUR);
+				expirationMinute = expirationCal.get(Calendar.MINUTE);
 				neverExpire = false;
 			}
 
@@ -395,7 +401,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 				PollsQuestionLocalServiceUtil.addQuestion(
 					question.getUserId(), plid, question.getTitle(),
 					question.getDescription(), expirationMonth, expirationDay,
-					expirationYear, expirationHours, expirationMinutes,
+					expirationYear, expirationHour, expirationMinute,
 					neverExpire, addCommunityPermissions, addGuestPermissions);
 
 			questionPKs.put(
