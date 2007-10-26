@@ -32,6 +32,11 @@
 		<h3 class="journal-content-title"><%= title %></h3>
 
 		<%= entry.getContent() %>
+
+		<br />
+
+		<a href="<%= themeDisplay.getPathMain() %>/blogs/find_entry?entryId=<%= entry.getEntryId() %>"><liferay-ui:message key="view-in-context"/>&raquo;</a>
+
 	</c:when>
 	<c:when test="<%= className.equals(BookmarksEntry.class.getName()) %>">
 
