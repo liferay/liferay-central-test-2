@@ -30,9 +30,6 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
 import com.liferay.util.LocalizationUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="JournalArticleImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -93,7 +90,5 @@ public class JournalArticleImpl
 			return true;
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(JournalArticleImpl.class);
 
 }

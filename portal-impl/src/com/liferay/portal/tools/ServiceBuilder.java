@@ -253,6 +253,8 @@ public class ServiceBuilder {
 
 		String[] checkImports = new String[] {
 			"com.liferay.portal.PortalException",
+			"com.liferay.portal.SystemException",
+			"com.liferay.portal.kernel.dao.DynamicQueryInitializer",
 			"com.liferay.portal.kernel.log.Log",
 			"com.liferay.portal.kernel.log.LogFactoryUtil",
 			"com.liferay.portal.kernel.util.BooleanWrapper",

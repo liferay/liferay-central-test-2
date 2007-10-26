@@ -34,9 +34,6 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PrincipalBean.java.html"><b><i>View Source</i></b></a>
  *
@@ -108,7 +105,5 @@ public class PrincipalBean {
 
 		return permissionChecker;
 	}
-
-	private static Log _log = LogFactory.getLog(PrincipalBean.class);
 
 }

@@ -42,8 +42,6 @@ import java.util.List;
 
 import javax.portlet.PortletURL;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
@@ -265,7 +263,5 @@ public class PluginPackageIndexer implements Indexer {
 			throw new SearchException(e);
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(PluginPackageIndexer.class);
 
 }

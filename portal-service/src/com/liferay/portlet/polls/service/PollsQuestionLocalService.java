@@ -80,8 +80,8 @@ public interface PollsQuestionLocalService {
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long userId, long plid, java.lang.String title,

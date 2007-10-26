@@ -171,8 +171,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	protected String getPrimaryKeyString(Class classObj, Object primaryKey) {
-		StringMaker sm = new StringMaker();
-
 		return getPrimaryKeyString(classObj.getName(), primaryKey);
 	}
 

@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.tags.service.base;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.impl.PrincipalBean;
 
 import com.liferay.portlet.tags.service.TagsAssetLocalService;

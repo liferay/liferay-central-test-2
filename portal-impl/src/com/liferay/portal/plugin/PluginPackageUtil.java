@@ -376,13 +376,11 @@ public class PluginPackageUtil {
 		int pos = displayName.indexOf("-portlet-");
 
 		String pluginType = "portlet";
-		String pluginTypeName = "Portlet";
 
 		if (pos == -1) {
 			pos = displayName.indexOf("-theme-");
 
 			pluginType = "theme";
-			pluginTypeName = "Theme";
 		}
 
 		if (pos == -1) {
