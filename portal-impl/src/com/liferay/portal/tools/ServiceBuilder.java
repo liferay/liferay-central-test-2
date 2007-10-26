@@ -2788,17 +2788,20 @@ public class ServiceBuilder {
 		sm.append("import " + _packagePath + ".model." + entity.getName() + ";");
 		sm.append("import " + _packagePath + ".model.impl." + entity.getName() + "Impl;");
 		sm.append("import " + _basePersistencePackage + ".BasePersistence;");
+		sm.append("import " + _propsUtilPackage + ".PropsUtil;");
 		sm.append("import " + _springHibernatePackage + ".FinderCache;");
 		sm.append("import " + _springHibernatePackage + ".HibernateUtil;");
 		sm.append("import com.liferay.portal.PortalException;");
 		sm.append("import com.liferay.portal.SystemException;");
 		sm.append("import com.liferay.portal.kernel.dao.DynamicQuery;");
 		sm.append("import com.liferay.portal.kernel.dao.DynamicQueryInitializer;");
+		sm.append("import com.liferay.portal.kernel.util.GetterUtil;");
 		sm.append("import com.liferay.portal.kernel.util.OrderByComparator;");
 		sm.append("import com.liferay.portal.kernel.util.StringMaker;");
 		sm.append("import com.liferay.portal.kernel.util.StringPool;");
 		sm.append("import com.liferay.portal.kernel.util.Validator;");
 		sm.append("import com.liferay.portal.kernel.uuid.PortalUUIDUtil;");
+		sm.append("import com.liferay.portal.model.ModelListener;");
 		sm.append("import com.liferay.util.dao.hibernate.QueryPos;");
 		sm.append("import com.liferay.util.dao.hibernate.QueryUtil;");
 		sm.append("import java.sql.ResultSet;");
@@ -2884,6 +2887,18 @@ public class ServiceBuilder {
 		sm.append("}");
 
 		sm.append("public " + entity.getName() + " remove(" + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
+		sm.append("ModelListener listener = _getListener();");
+		sm.append("if (listener != null) {");
+		sm.append("listener.onBeforeRemove(" + entity.getVarName() + ");");
+		sm.append("}");
+		sm.append(entity.getVarName() + " = removeImpl(" + entity.getVarName() + ");");
+		sm.append("if (listener != null) {");
+		sm.append("listener.onAfterRemove(" + entity.getVarName() + ");");
+		sm.append("}");
+		sm.append("return " + entity.getVarName() + ";");
+		sm.append("}");
+
+		sm.append("protected " + entity.getName() + " removeImpl(" + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
 
 		for (int i = 0; i < columnList.size(); i++) {
 			EntityColumn col = (EntityColumn)columnList.get(i);
@@ -2929,6 +2944,29 @@ public class ServiceBuilder {
 		sm.append("}");
 
 		sm.append("public " + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ", boolean merge) throws SystemException {");
+		sm.append("ModelListener listener = _getListener();");
+		sm.append("boolean isNew = " + entity.getVarName() + ".isNew();");
+		sm.append("if (listener != null) {");
+		sm.append("if (isNew) {");
+		sm.append("listener.onBeforeCreate(" + entity.getVarName() + ");");
+		sm.append("}");
+		sm.append("else {");
+		sm.append("listener.onBeforeUpdate(" + entity.getVarName() + ");");
+		sm.append("}");
+		sm.append("}");
+		sm.append(entity.getVarName() + " = updateImpl(" + entity.getVarName() + ", merge);");
+		sm.append("if (listener != null) {");
+		sm.append("if (isNew) {");
+		sm.append("listener.onAfterCreate(" + entity.getVarName() + ");");
+		sm.append("}");
+		sm.append("else {");
+		sm.append("listener.onAfterUpdate(" + entity.getVarName() + ");");
+		sm.append("}");
+		sm.append("}");
+		sm.append("return " + entity.getVarName() + ";");
+		sm.append("}");
+
+		sm.append("public " + entity.getName() + " updateImpl(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ", boolean merge) throws SystemException {");
 
 		for (int i = 0; i < columnList.size(); i++) {
 			EntityColumn col = (EntityColumn)columnList.get(i);
@@ -4876,6 +4914,18 @@ public class ServiceBuilder {
 			}
 		}
 
+		sm.append("private static ModelListener _getListener() {");
+		sm.append("if (Validator.isNotNull(_LISTENER)) {");
+		sm.append("try {");
+		sm.append("return (ModelListener)Class.forName(_LISTENER).newInstance();");
+		sm.append("}");
+		sm.append("catch (Exception e) {");
+		sm.append("_log.error(e);");
+		sm.append("}");
+		sm.append("}");
+		sm.append("return null;");
+		sm.append("}");
+
 		for (int i = 0; i < columnList.size(); i++) {
 			EntityColumn col = (EntityColumn)columnList.get(i);
 
@@ -4915,6 +4965,8 @@ public class ServiceBuilder {
 
 		// Fields
 
+		sm.append("private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(\"value.object.listener." + _packagePath + ".model." + entity.getName() + "\"));");
+
 		sm.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "PersistenceImpl.class);");
 
 		// Class close brace
@@ -4938,15 +4990,6 @@ public class ServiceBuilder {
 		// Package
 
 		sm.append("package " + _packagePath + ".service.persistence;");
-
-		// Imports
-
-		sm.append("import " + _propsUtilPackage + ".PropsUtil;");
-		sm.append("import com.liferay.portal.kernel.util.GetterUtil;");
-		sm.append("import com.liferay.portal.kernel.util.Validator;");
-		sm.append("import com.liferay.portal.model.ModelListener;");
-		sm.append("import org.apache.commons.logging.Log;");
-		sm.append("import org.apache.commons.logging.LogFactory;");
 
 		// Class declaration
 
@@ -5000,45 +5043,8 @@ public class ServiceBuilder {
 
 				sm.append(" {");
 
-				if (methodName.equals("remove") || methodName.equals("update")) {
-					sm.append("ModelListener listener = _getListener();");
-
-					if (methodName.equals("update")) {
-						sm.append("boolean isNew = " + p0Name + ".isNew();");
-					}
-
-					sm.append("if (listener != null) {");
-
-					if (methodName.equals("remove")) {
-						if (entity.getVarName().equals(p0Name)) {
-							sm.append("listener.onBeforeRemove(" + p0Name + ");");
-						}
-						else {
-							sm.append("listener.onBeforeRemove(findByPrimaryKey(" + p0Name + "));");
-						}
-					}
-					else {
-						sm.append("if (isNew) {");
-						sm.append("listener.onBeforeCreate(" + p0Name + ");");
-						sm.append("}");
-						sm.append("else {");
-						sm.append("listener.onBeforeUpdate(" + p0Name + ");");
-						sm.append("}");
-					}
-
-					sm.append("}");
-
-					if (methodName.equals("remove") && !entity.getVarName().equals(p0Name)) {
-						sm.append(_packagePath + ".model." + entity.getName() + " " + entity.getVarName() + " = ");
-					}
-					else {
-						sm.append(entity.getVarName() + " = ");
-					}
-				}
-				else {
-					if (!javaMethod.getReturns().getValue().equals("void")) {
-						sm.append("return ");
-					}
+				if (!javaMethod.getReturns().getValue().equals("void")) {
+					sm.append("return ");
 				}
 
 				sm.append("getPersistence()." + methodName + "(");
@@ -5054,27 +5060,6 @@ public class ServiceBuilder {
 				}
 
 				sm.append(");");
-
-				if (methodName.equals("remove") || methodName.equals("update")) {
-					sm.append("if (listener != null) {");
-
-					if (methodName.equals("remove")) {
-						sm.append("listener.onAfterRemove(" + entity.getVarName() + ");");
-					}
-					else {
-						sm.append("if (isNew) {");
-						sm.append("listener.onAfterCreate(" + entity.getVarName() + ");");
-						sm.append("}");
-						sm.append("else {");
-						sm.append("listener.onAfterUpdate(" + entity.getVarName() + ");");
-						sm.append("}");
-					}
-
-					sm.append("}");
-
-					sm.append("return " + entity.getVarName() + ";");
-				}
-
 				sm.append("}");
 			}
 		}
@@ -5094,24 +5079,9 @@ public class ServiceBuilder {
 		sm.append("return _util;");
 		sm.append("}");
 
-		sm.append("private static ModelListener _getListener() {");
-		sm.append("if (Validator.isNotNull(_LISTENER)) {");
-		sm.append("try {");
-		sm.append("return (ModelListener)Class.forName(_LISTENER).newInstance();");
-		sm.append("}");
-		sm.append("catch (Exception e) {");
-		sm.append("_log.error(e);");
-		sm.append("}");
-		sm.append("}");
-		sm.append("return null;");
-		sm.append("}");
-
 		// Fields
 
 		sm.append("private static final String _UTIL = " + entity.getName() + "Util.class.getName();");
-		sm.append("private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(\"value.object.listener." + _packagePath + ".model." + entity.getName() + "\"));");
-
-		sm.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "Util.class);");
 
 		sm.append("private static " + entity.getName() + "Util _util;");
 
