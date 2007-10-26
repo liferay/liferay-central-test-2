@@ -23,7 +23,26 @@
 %>
 
 <%
-if (className.equals(BookmarksEntry.class.getName())) {
+if (className.equals(BlogsEntry.class.getName())) {
+	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
+
+	if (Validator.isNull(title)) {
+		title = entry.getTitle();
+	}
+
+	summary = entry.getTitle();
+
+	PortletURL entryURL = renderResponse.createRenderURL();
+
+	entryURL.setParameter("struts_action", "/tagged_content/view_content");
+	entryURL.setParameter("redirect", currentURL);
+	entryURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
+
+	viewURL = entryURL.toString();
+
+	viewURLMessage = "read-more";
+}
+else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 
 	if (Validator.isNull(title)) {
