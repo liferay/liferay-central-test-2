@@ -3117,7 +3117,12 @@ public class ServiceBuilder {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (col.isPrimitiveType()) {
-						sm.append("new " + _getPrimitiveObj(col.getType()) + "(");
+						if (col.getType().equals("boolean")) {
+							sm.append(_getPrimitiveObj(col.getType()) + ".valueOf(");
+						}
+						else {
+							sm.append("new " + _getPrimitiveObj(col.getType()) + "(");
+						}
 					}
 
 					sm.append(col.getName());
@@ -3299,7 +3304,12 @@ public class ServiceBuilder {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (col.isPrimitiveType()) {
-						sm.append("new " + _getPrimitiveObj(col.getType()) + "(");
+						if (col.getType().equals("boolean")) {
+							sm.append(_getPrimitiveObj(col.getType()) + ".valueOf(");
+						}
+						else {
+							sm.append("new " + _getPrimitiveObj(col.getType()) + "(");
+						}
 					}
 
 					sm.append(col.getName());
@@ -3482,7 +3492,12 @@ public class ServiceBuilder {
 					EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 					if (col.isPrimitiveType()) {
-						sm.append("new " + _getPrimitiveObj(col.getType()) + "(");
+						if (col.getType().equals("boolean")) {
+							sm.append(_getPrimitiveObj(col.getType()) + ".valueOf(");
+						}
+						else {
+							sm.append("new " + _getPrimitiveObj(col.getType()) + "(");
+						}
 					}
 
 					sm.append(col.getName());
@@ -4107,7 +4122,12 @@ public class ServiceBuilder {
 				EntityColumn col = (EntityColumn)finderColsList.get(j);
 
 				if (col.isPrimitiveType()) {
-					sm.append("new " + _getPrimitiveObj(col.getType()) + "(");
+					if (col.getType().equals("boolean")) {
+						sm.append(_getPrimitiveObj(col.getType()) + ".valueOf(");
+					}
+					else {
+						sm.append("new " + _getPrimitiveObj(col.getType()) + "(");
+					}
 				}
 
 				sm.append(col.getName());
@@ -4303,7 +4323,12 @@ public class ServiceBuilder {
 				sm.append("Object finderArgs[] = new Object[] {");
 
 				if (entity.hasPrimitivePK()) {
-					sm.append("new " + _getPrimitiveObj(entity.getPKClassName()) + "(");
+					if (entity.getPKClassName().equals("boolean")) {
+						sm.append(_getPrimitiveObj(entity.getPKClassName()) + ".valueOf(");
+					}
+					else {
+						sm.append("new " + _getPrimitiveObj(entity.getPKClassName()) + "(");
+					}
 				}
 
 				sm.append("pk");
@@ -4386,7 +4411,12 @@ public class ServiceBuilder {
 				sm.append("Object finderArgs[] = new Object[] {");
 
 				if (entity.hasPrimitivePK()) {
-					sm.append("new " + _getPrimitiveObj(entity.getPKClassName()) + "(");
+					if (entity.getPKClassName().equals("boolean")) {
+						sm.append(_getPrimitiveObj(entity.getPKClassName()) + ".valueOf(");
+					}
+					else {
+						sm.append("new " + _getPrimitiveObj(entity.getPKClassName()) + "(");
+					}
 				}
 
 				sm.append("pk");
@@ -4456,7 +4486,12 @@ public class ServiceBuilder {
 				sm.append("Object finderArgs[] = new Object[] {");
 
 				if (entity.hasPrimitivePK()) {
-					sm.append("new " + _getPrimitiveObj(entity.getPKClassName()) + "(");
+					if (entity.getPKClassName().equals("boolean")) {
+						sm.append(_getPrimitiveObj(entity.getPKClassName()) + ".valueOf(");
+					}
+					else {
+						sm.append("new " + _getPrimitiveObj(entity.getPKClassName()) + "(");
+					}
 				}
 
 				sm.append("pk");

@@ -690,7 +690,7 @@ public class UserPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Boolean(defaultUser)
+				new Long(companyId), Boolean.valueOf(defaultUser)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -1540,7 +1540,7 @@ public class UserPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Boolean(defaultUser)
+				new Long(companyId), Boolean.valueOf(defaultUser)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());

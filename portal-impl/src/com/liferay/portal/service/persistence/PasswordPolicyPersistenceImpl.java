@@ -223,7 +223,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Boolean(defaultPolicy)
+				new Long(companyId), Boolean.valueOf(defaultPolicy)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -499,7 +499,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Boolean(defaultPolicy)
+				new Long(companyId), Boolean.valueOf(defaultPolicy)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());

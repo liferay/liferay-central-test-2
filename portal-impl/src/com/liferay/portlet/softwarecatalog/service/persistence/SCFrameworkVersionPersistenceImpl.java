@@ -590,7 +590,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(active)
+				new Long(groupId), Boolean.valueOf(active)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -650,8 +650,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(active), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(groupId), Boolean.valueOf(active),
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -1053,7 +1053,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(active)
+				new Long(groupId), Boolean.valueOf(active)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());

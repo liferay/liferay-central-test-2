@@ -571,7 +571,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderClassName = JournalArticleImage.class.getName();
 		String finderMethodName = "findByTempImage";
 		String[] finderParams = new String[] { Boolean.class.getName() };
-		Object[] finderArgs = new Object[] { new Boolean(tempImage) };
+		Object[] finderArgs = new Object[] { Boolean.valueOf(tempImage) };
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -624,7 +624,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Boolean(tempImage), String.valueOf(begin),
+				Boolean.valueOf(tempImage), String.valueOf(begin),
 				String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -1491,7 +1491,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		String finderClassName = JournalArticleImage.class.getName();
 		String finderMethodName = "countByTempImage";
 		String[] finderParams = new String[] { Boolean.class.getName() };
-		Object[] finderArgs = new Object[] { new Boolean(tempImage) };
+		Object[] finderArgs = new Object[] { Boolean.valueOf(tempImage) };
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 

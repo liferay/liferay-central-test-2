@@ -266,7 +266,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout)
+				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -325,7 +325,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -505,7 +505,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -574,7 +574,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(parentLayoutId)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -639,7 +639,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(parentLayoutId), String.valueOf(begin),
 				String.valueOf(end), String.valueOf(obc)
 			};
@@ -836,7 +836,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout), friendlyURL
+				new Long(groupId), Boolean.valueOf(privateLayout), friendlyURL
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -1116,7 +1116,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout)
+				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -1177,7 +1177,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -1242,7 +1242,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(parentLayoutId)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -1307,7 +1307,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout), friendlyURL
+				new Long(groupId), Boolean.valueOf(privateLayout), friendlyURL
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());

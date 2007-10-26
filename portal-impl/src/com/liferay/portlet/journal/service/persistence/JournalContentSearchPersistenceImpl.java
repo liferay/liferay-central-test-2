@@ -201,7 +201,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout)
+				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -258,7 +258,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -636,7 +636,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -697,7 +697,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId), String.valueOf(begin), String.valueOf(end),
 				String.valueOf(obc)
 			};
@@ -859,7 +859,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout), articleId
+				new Long(groupId), Boolean.valueOf(privateLayout), articleId
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -930,7 +930,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout), articleId,
+				new Long(groupId), Boolean.valueOf(privateLayout), articleId,
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -1111,7 +1111,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId), portletId
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -1189,7 +1189,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId), portletId, String.valueOf(begin),
 				String.valueOf(end), String.valueOf(obc)
 			};
@@ -1424,7 +1424,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId), portletId, articleId
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -1683,7 +1683,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout)
+				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -1814,7 +1814,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -1880,7 +1880,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout), articleId
+				new Long(groupId), Boolean.valueOf(privateLayout), articleId
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -1955,7 +1955,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				Long.class.getName(), String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId), portletId
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -2036,7 +2036,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 				String.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout),
+				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId), portletId, articleId
 			};
 		Object result = FinderCache.getResult(finderClassName,

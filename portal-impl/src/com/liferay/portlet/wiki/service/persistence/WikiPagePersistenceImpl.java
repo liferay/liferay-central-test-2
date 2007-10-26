@@ -624,7 +624,9 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] {
 				Long.class.getName(), Boolean.class.getName()
 			};
-		Object[] finderArgs = new Object[] { new Long(nodeId), new Boolean(head) };
+		Object[] finderArgs = new Object[] {
+				new Long(nodeId), Boolean.valueOf(head)
+			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -684,7 +686,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId), new Boolean(head), String.valueOf(begin),
+				new Long(nodeId), Boolean.valueOf(head), String.valueOf(begin),
 				String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -948,7 +950,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 				Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId), title, new Boolean(head)
+				new Long(nodeId), title, Boolean.valueOf(head)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -1024,7 +1026,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId), title, new Boolean(head),
+				new Long(nodeId), title, Boolean.valueOf(head),
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -1489,7 +1491,9 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		String[] finderParams = new String[] {
 				Long.class.getName(), Boolean.class.getName()
 			};
-		Object[] finderArgs = new Object[] { new Long(nodeId), new Boolean(head) };
+		Object[] finderArgs = new Object[] {
+				new Long(nodeId), Boolean.valueOf(head)
+			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -1626,7 +1630,7 @@ public class WikiPagePersistenceImpl extends BasePersistence
 				Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(nodeId), title, new Boolean(head)
+				new Long(nodeId), title, Boolean.valueOf(head)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());

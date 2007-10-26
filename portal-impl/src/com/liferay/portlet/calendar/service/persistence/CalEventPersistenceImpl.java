@@ -623,7 +623,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(repeating)
+				new Long(groupId), Boolean.valueOf(repeating)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -683,8 +683,8 @@ public class CalEventPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(repeating), String.valueOf(begin),
-				String.valueOf(end), String.valueOf(obc)
+				new Long(groupId), Boolean.valueOf(repeating),
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -1099,7 +1099,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(repeating)
+				new Long(groupId), Boolean.valueOf(repeating)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());

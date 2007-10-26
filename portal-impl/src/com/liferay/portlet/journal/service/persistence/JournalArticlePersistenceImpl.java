@@ -1614,7 +1614,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, new Boolean(approved)
+				new Long(groupId), articleId, Boolean.valueOf(approved)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -1689,7 +1689,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, new Boolean(approved),
+				new Long(groupId), articleId, Boolean.valueOf(approved),
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -2592,7 +2592,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), articleId, new Boolean(approved)
+				new Long(groupId), articleId, Boolean.valueOf(approved)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());

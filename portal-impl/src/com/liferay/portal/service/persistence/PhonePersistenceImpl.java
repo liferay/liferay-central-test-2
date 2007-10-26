@@ -993,7 +993,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
-				new Boolean(primary)
+				Boolean.valueOf(primary)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -1061,8 +1061,8 @@ public class PhonePersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
-				new Boolean(primary), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				Boolean.valueOf(primary), String.valueOf(begin),
+				String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -1627,7 +1627,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
-				new Boolean(primary)
+				Boolean.valueOf(primary)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());

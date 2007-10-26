@@ -481,7 +481,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout)
+				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -784,7 +784,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 				Long.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Boolean(privateLayout)
+				new Long(groupId), Boolean.valueOf(privateLayout)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());

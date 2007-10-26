@@ -192,7 +192,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "findByActive";
 		String[] finderParams = new String[] { Boolean.class.getName() };
-		Object[] finderArgs = new Object[] { new Boolean(active) };
+		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -247,8 +247,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Boolean(active), String.valueOf(begin), String.valueOf(end),
-				String.valueOf(obc)
+				Boolean.valueOf(active), String.valueOf(begin),
+				String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -386,7 +386,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				Boolean.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Boolean(active), new Boolean(recommended)
+				Boolean.valueOf(active), Boolean.valueOf(recommended)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
@@ -445,7 +445,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Boolean(active), new Boolean(recommended),
+				Boolean.valueOf(active), Boolean.valueOf(recommended),
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 		Object result = FinderCache.getResult(finderClassName,
@@ -724,7 +724,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "countByActive";
 		String[] finderParams = new String[] { Boolean.class.getName() };
-		Object[] finderArgs = new Object[] { new Boolean(active) };
+		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
 
@@ -781,7 +781,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				Boolean.class.getName(), Boolean.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Boolean(active), new Boolean(recommended)
+				Boolean.valueOf(active), Boolean.valueOf(recommended)
 			};
 		Object result = FinderCache.getResult(finderClassName,
 				finderMethodName, finderParams, finderArgs, getSessionFactory());
