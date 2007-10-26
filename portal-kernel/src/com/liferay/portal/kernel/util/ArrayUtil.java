@@ -299,7 +299,7 @@ public class ArrayUtil {
 		Boolean[] objArray = new Boolean[array.length];
 
 		for (int i = 0; i < array.length; i++) {
-			objArray[i] = new Boolean(array[i]);
+			objArray[i] = Boolean.valueOf(array[i]);
 		}
 
 		return objArray;

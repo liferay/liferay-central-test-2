@@ -85,8 +85,8 @@ public class JournalStructureLocalServiceImpl
 
 		return addStructure(
 			userId, structureId, autoStructureId, plid, name, description, xsd,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public JournalStructure addStructure(

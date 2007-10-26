@@ -516,7 +516,7 @@ public class EditPagesAction extends PortletAction {
 			layout = LayoutServiceUtil.updateLayout(
 				groupId, privateLayout, layoutId, layout.getParentLayoutId(),
 				name, title, languageId, description, type, hidden, friendlyURL,
-				new Boolean(iconImage), iconBytes);
+				Boolean.valueOf(iconImage), iconBytes);
 
 			if (type.equals(LayoutImpl.TYPE_PORTLET)) {
 				if ((copyLayoutId > 0) &&

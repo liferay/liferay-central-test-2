@@ -109,8 +109,8 @@ public class SCProductEntryLocalServiceImpl
 		return addProductEntry(
 			userId, plid, name, type, tags, shortDescription, longDescription,
 			pageURL, author, repoGroupId, repoArtifactId, licenseIds,
-			thumbnails, fullImages, new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			thumbnails, fullImages, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public SCProductEntry addProductEntry(

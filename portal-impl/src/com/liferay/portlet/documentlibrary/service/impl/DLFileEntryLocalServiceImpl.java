@@ -95,8 +95,8 @@ public class DLFileEntryLocalServiceImpl
 
 		return addFileEntry(
 			userId, folderId, name, title, description, tagsEntries,
-			extraSettings, file, new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			extraSettings, file, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public DLFileEntry addFileEntry(
@@ -108,8 +108,8 @@ public class DLFileEntryLocalServiceImpl
 
 		return addFileEntry(
 			userId, folderId, name, title, description, tagsEntries,
-			extraSettings, byteArray, new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			extraSettings, byteArray, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public DLFileEntry addFileEntry(

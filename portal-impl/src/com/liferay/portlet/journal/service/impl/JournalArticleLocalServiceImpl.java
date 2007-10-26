@@ -154,8 +154,8 @@ public class JournalArticleLocalServiceImpl
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, indexable, images, articleURL, prefs,
-			tagsEntries, new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public JournalArticle addArticle(

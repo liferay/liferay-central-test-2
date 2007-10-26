@@ -87,8 +87,8 @@ public class JournalTemplateLocalServiceImpl
 		return addTemplate(
 			userId, templateId, autoTemplateId, plid, structureId, name,
 			description, xsl, formatXsl, langType, smallImage, smallImageURL,
-			smallFile, new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			smallFile, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public JournalTemplate addTemplate(

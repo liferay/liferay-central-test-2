@@ -261,7 +261,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			user.getUserId(), groupId, name, primKey, actionId);
 
 		if (value == null) {
-			value = new Boolean(
+			value = Boolean.valueOf(
 				hasPermissionImpl(groupId, name, primKey, actionId));
 
 			PermissionCacheUtil.putPermission(
@@ -321,7 +321,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 	public boolean isOmniadmin() {
 		if (omniadmin == null) {
-			omniadmin = new Boolean(OmniadminUtil.isOmniadmin(getUserId()));
+			omniadmin = Boolean.valueOf(OmniadminUtil.isOmniadmin(getUserId()));
 		}
 
 		return omniadmin.booleanValue();

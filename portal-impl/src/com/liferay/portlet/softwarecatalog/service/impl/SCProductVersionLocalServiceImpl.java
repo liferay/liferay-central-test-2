@@ -69,8 +69,8 @@ public class SCProductVersionLocalServiceImpl
 		return addProductVersion(
 			userId, productEntryId, version, changeLog, downloadPageURL,
 			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public SCProductVersion addProductVersion(

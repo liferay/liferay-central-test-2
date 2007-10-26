@@ -152,8 +152,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		return addMessage(
 			userId, categoryId, subject, body, files, anonymous, priority,
-			tagsEntries, prefs, new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			tagsEntries, prefs, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public MBMessage addMessage(
@@ -196,8 +196,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return addMessage(
 			userId, categoryId, threadId, parentMessageId, subject, body, files,
 			anonymous, priority, tagsEntries, prefs,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public MBMessage addMessage(

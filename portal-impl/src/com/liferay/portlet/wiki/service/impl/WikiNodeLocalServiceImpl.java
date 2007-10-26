@@ -78,8 +78,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		return addNode(
 			userId, plid, name, description,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public WikiNode addNode(

@@ -117,7 +117,7 @@ public class VirtualHostFilter implements Filter {
 		Boolean httpsInitial = (Boolean)ses.getAttribute(WebKeys.HTTPS_INITIAL);
 
 		if (httpsInitial == null) {
-			httpsInitial = new Boolean(httpReq.isSecure());
+			httpsInitial = Boolean.valueOf(httpReq.isSecure());
 
 			ses.setAttribute(WebKeys.HTTPS_INITIAL, httpsInitial);
 

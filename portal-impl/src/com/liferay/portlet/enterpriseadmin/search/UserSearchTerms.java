@@ -50,7 +50,7 @@ public class UserSearchTerms extends UserDisplayTerms {
 	}
 
 	public Boolean getActiveObj() {
-		return new Boolean(active);
+		return Boolean.valueOf(active);
 	}
 
 }

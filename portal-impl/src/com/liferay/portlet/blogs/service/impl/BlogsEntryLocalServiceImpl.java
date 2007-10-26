@@ -99,8 +99,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return addEntry(
 			userId, plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			themeDisplay, tagsEntries, new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			themeDisplay, tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public BlogsEntry addEntry(

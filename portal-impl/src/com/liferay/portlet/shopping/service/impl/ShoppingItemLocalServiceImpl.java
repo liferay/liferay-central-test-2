@@ -235,8 +235,8 @@ public class ShoppingItemLocalServiceImpl
 			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
 			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
 			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
-			itemPrices, new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			itemPrices, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public ShoppingItem addItem(

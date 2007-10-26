@@ -76,8 +76,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		return addImage(
 			userId, folderId, description, file, contentType, tagsEntries,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public IGImage addImage(

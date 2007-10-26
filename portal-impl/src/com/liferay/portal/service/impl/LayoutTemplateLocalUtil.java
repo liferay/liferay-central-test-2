@@ -350,8 +350,10 @@ public class LayoutTemplateLocalUtil {
 			String layoutTemplateId = layoutTemplate.attributeValue("id");
 
 			if (layoutTemplateIds != null) {
-				layoutTemplateIds.add(new ObjectValuePair(
-					layoutTemplateId, new Boolean(standard)));
+				ObjectValuePair ovp = new ObjectValuePair(
+					layoutTemplateId, Boolean.valueOf(standard));
+
+				layoutTemplateIds.add(ovp);
 			}
 
 			LayoutTemplate layoutTemplateModel =

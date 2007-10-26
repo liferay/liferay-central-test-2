@@ -60,8 +60,8 @@ public class BookmarksEntryLocalServiceImpl
 
 		return addEntry(
 			userId, folderId, name, url, comments, tagsEntries,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public BookmarksEntry addEntry(

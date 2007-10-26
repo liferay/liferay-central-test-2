@@ -57,8 +57,8 @@ public class BookmarksFolderLocalServiceImpl
 
 		return addFolder(
 			userId, plid, parentFolderId, name, description,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public BookmarksFolder addFolder(

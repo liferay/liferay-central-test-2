@@ -105,7 +105,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 			boolean hasAdminRole = RoleServiceUtil.hasUserRole(
 				_userId, companyId, RoleImpl.ADMINISTRATOR, true);
 
-			value = new Boolean(hasAdminRole);
+			value = Boolean.valueOf(hasAdminRole);
 
 			_isCompanyAdmin.put(key, value);
 		}
@@ -124,7 +124,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		Boolean value = (Boolean)_isCommunityAdmin.get(key);
 
 		if (value == null) {
-			value = new Boolean(
+			value = Boolean.valueOf(
 				isCommunityAdminImpl(
 					permissionChecker, companyId, groupId, name));
 

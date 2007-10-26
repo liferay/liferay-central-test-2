@@ -56,8 +56,8 @@ public class WorkflowDefinitionServiceImpl
 		throws PortalException, SystemException {
 
 		return addDefinition(
-			xml, new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			xml, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public WorkflowDefinition addDefinition(

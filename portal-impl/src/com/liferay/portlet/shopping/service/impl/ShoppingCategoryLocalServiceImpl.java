@@ -64,8 +64,8 @@ public class ShoppingCategoryLocalServiceImpl
 
 		return addCategory(
 			userId, plid, parentCategoryId, name, description,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public ShoppingCategory addCategory(

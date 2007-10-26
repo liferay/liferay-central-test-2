@@ -64,7 +64,7 @@ public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 		int ownerType = 0;
 
 		if (ownerId.startsWith("PUB.") || ownerId.startsWith("PRI.")) {
-			_privateLayout = new Boolean(ownerId.startsWith("PRI."));
+			_privateLayout = Boolean.valueOf(ownerId.startsWith("PRI."));
 
 			int pos = ownerId.indexOf(".USER.");
 

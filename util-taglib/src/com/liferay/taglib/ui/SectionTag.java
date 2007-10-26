@@ -61,7 +61,7 @@ public class SectionTag extends ParamAncestorTagImpl {
 
 			String sectionParam = _tabsTag.getParam();
 			String sectionName = _tabsTag.getSectionName();
-			_sectionSelected = new Boolean(_tabsTag.getSectionSelected());
+			_sectionSelected = Boolean.valueOf(_tabsTag.getSectionSelected());
 			String sectionScroll = namespace + sectionParam + "TabsScroll";
 			String sectionRedirectParams =
 				"&scroll=" + sectionScroll + "&" + sectionParam + "=" +

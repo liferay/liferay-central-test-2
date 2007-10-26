@@ -58,8 +58,8 @@ public class SCFrameworkVersionLocalServiceImpl
 
 		return addFrameworkVersion(
 			userId, plid, name, url, active, priority,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public SCFrameworkVersion addFrameworkVersion(

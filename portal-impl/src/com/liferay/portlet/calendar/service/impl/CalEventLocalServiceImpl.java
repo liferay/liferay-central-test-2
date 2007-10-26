@@ -142,8 +142,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			startDateYear, startDateHour, startDateMinute, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay,
 			timeZoneSensitive, type, repeating, recurrence, remindBy,
-			firstReminder, secondReminder, new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			firstReminder, secondReminder,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public CalEvent addEvent(

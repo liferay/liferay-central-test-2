@@ -83,7 +83,7 @@ public class BooleanType implements UserType {
 		Boolean value = (Boolean)Hibernate.BOOLEAN.nullSafeGet(rs, names[0]);
 
 		if (value == null) {
-			return new Boolean(DEFAULT_VALUE);
+			return Boolean.valueOf(DEFAULT_VALUE);
 		}
 		else {
 			return value;
@@ -94,7 +94,7 @@ public class BooleanType implements UserType {
 		throws HibernateException, SQLException {
 
 		if (obj == null) {
-			obj = new Boolean(DEFAULT_VALUE);
+			obj = Boolean.valueOf(DEFAULT_VALUE);
 		}
 
 		Hibernate.BOOLEAN.nullSafeSet(ps, obj, index);

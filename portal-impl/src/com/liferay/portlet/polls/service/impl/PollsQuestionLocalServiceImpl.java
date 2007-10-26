@@ -69,8 +69,8 @@ public class PollsQuestionLocalServiceImpl
 			userId, plid, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
 			expirationDateMinute, neverExpire, null,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public PollsQuestion addQuestion(
@@ -85,8 +85,8 @@ public class PollsQuestionLocalServiceImpl
 			userId, plid, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
 			expirationDateMinute, neverExpire, choices,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public PollsQuestion addQuestion(

@@ -65,8 +65,8 @@ public class BlogsCategoryLocalServiceImpl
 
 		return addCategory(
 			userId, parentCategoryId, name, description,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public BlogsCategory addCategory(

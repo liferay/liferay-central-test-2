@@ -60,8 +60,8 @@ public class DLFileShortcutLocalServiceImpl
 
 		return addFileShortcut(
 			userId, folderId, toFolderId, toName,
-			new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public DLFileShortcut addFileShortcut(
