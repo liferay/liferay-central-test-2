@@ -23,6 +23,8 @@
 %>
 
 <%
+Date now = new Date();
+
 String[] properties = new String[] {"category:" + category };
 
 List categoryEntries = TagsEntryLocalServiceUtil.search(company.getCompanyId(), null, properties);
@@ -47,8 +49,6 @@ for (int i = 0; i < categoryEntries.size(); i++) {
 
 	long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), allEntries);
 	long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
-
-	Date now = new Date();
 
 	List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
