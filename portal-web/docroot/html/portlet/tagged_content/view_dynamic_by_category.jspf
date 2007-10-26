@@ -48,7 +48,9 @@ for (int i = 0; i < categoryEntries.size(); i++) {
 	long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), allEntries);
 	long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
 
-	List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, excludeZeroViewCount, searchContainer.getStart(), searchContainer.getEnd());
+	Date now = new Date();
+
+	List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 	searchContainer.setTotal(results.size());
