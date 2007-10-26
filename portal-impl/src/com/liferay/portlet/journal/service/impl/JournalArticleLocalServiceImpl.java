@@ -816,8 +816,6 @@ public class JournalArticleLocalServiceImpl
 			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		JournalArticle article = getDisplayArticle(groupId, articleId);
-
 		return getArticleDisplay(
 			groupId, articleId, version, templateId, languageId, themeDisplay,
 			null);
