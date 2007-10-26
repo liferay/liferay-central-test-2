@@ -106,7 +106,7 @@ public class UserSessionImpl extends GenericUserSessionImpl {
 		Boolean initCookieReq = null;
 		if ((initCookieReq = (Boolean) _userSession
 				.get(ConsumerConstants.WSRP_INIT_COOKIE_REQ)) == null) {
-			initCookieReq = new Boolean(super.isInitCookieRequired());
+			initCookieReq = Boolean.valueOf(super.isInitCookieRequired());
 			setInitCookieRequired(initCookieReq.booleanValue());
 		}
 
@@ -114,7 +114,7 @@ public class UserSessionImpl extends GenericUserSessionImpl {
 	}
 
 	public void setInitCookieRequired(boolean initCookieRequired) {
-		_userSession.put(ConsumerConstants.WSRP_INIT_COOKIE_REQ, new Boolean(
+		_userSession.put(ConsumerConstants.WSRP_INIT_COOKIE_REQ, Boolean.valueOf(
 				initCookieRequired));
 		super.setInitCookieRequired(initCookieRequired);
 	}
@@ -123,7 +123,7 @@ public class UserSessionImpl extends GenericUserSessionImpl {
 		Boolean initCookieDone = null;
 		if ((initCookieDone = (Boolean) _userSession
 				.get(ConsumerConstants.WSRP_INIT_COOKIE_DONE)) == null) {
-			initCookieDone = new Boolean(super.isInitCookieDone());
+			initCookieDone = Boolean.valueOf(super.isInitCookieDone());
 			setInitCookieDone(initCookieDone.booleanValue());
 		}
 
@@ -131,7 +131,7 @@ public class UserSessionImpl extends GenericUserSessionImpl {
 	}
 
 	public void setInitCookieDone(boolean initCookieDone) {
-		_userSession.put(ConsumerConstants.WSRP_INIT_COOKIE_DONE, new Boolean(
+		_userSession.put(ConsumerConstants.WSRP_INIT_COOKIE_DONE, Boolean.valueOf(
 				initCookieDone));
 		super.setInitCookieRequired(initCookieDone);
 	}

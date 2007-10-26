@@ -1156,7 +1156,7 @@ public class ServicePreAction extends Action {
 			}
 		}
 
-		Boolean parallelRenderEnableObj = new Boolean(
+		Boolean parallelRenderEnableObj = Boolean.valueOf(
 			ParamUtil.getBoolean(req, "p_p_parallel", parallelRenderEnable));
 
 		req.setAttribute(

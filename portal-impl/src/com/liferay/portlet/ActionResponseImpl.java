@@ -288,7 +288,7 @@ public class ActionResponseImpl implements ActionResponse {
 					});
 
 				return (PortletURL)constructor.newInstance(
-					new Object[] {this, new Boolean(action)});
+					new Object[] {this, Boolean.valueOf(action)});
 			}
 			catch (Exception e) {
 				_log.error(e);

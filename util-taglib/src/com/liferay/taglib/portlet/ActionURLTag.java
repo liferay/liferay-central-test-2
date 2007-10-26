@@ -197,7 +197,7 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 	}
 
 	public void setSecure(boolean secure) {
-		_secure = new Boolean(secure);
+		_secure = Boolean.valueOf(secure);
 	}
 
 	public void setPortletName(String portletName) {
@@ -205,11 +205,11 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 	}
 
 	public void setAnchor(boolean anchor) {
-		_anchor = new Boolean(anchor);
+		_anchor = Boolean.valueOf(anchor);
 	}
 
 	public void setEncrypt(boolean encrypt) {
-		_encrypt = new Boolean(encrypt);
+		_encrypt = Boolean.valueOf(encrypt);
 	}
 
 	public void setDoAsUserId(long doAsUserId) {
@@ -217,7 +217,7 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 	}
 
 	public void setPortletConfiguration(boolean portletConfiguration) {
-		_portletConfiguration = new Boolean(portletConfiguration);
+		_portletConfiguration = Boolean.valueOf(portletConfiguration);
 	}
 
 	private static final String _TAG_CLASS =

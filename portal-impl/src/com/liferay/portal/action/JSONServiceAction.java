@@ -158,7 +158,7 @@ public class JSONServiceAction extends JSONAction {
 		if (parameterTypeName.equals("boolean") ||
 			parameterTypeName.equals(Boolean.class.getName())) {
 
-			return new Boolean(ParamUtil.getBoolean(req, parameter));
+			return Boolean.valueOf(ParamUtil.getBoolean(req, parameter));
 		}
 		else if (parameterTypeName.equals("double") ||
 				 parameterTypeName.equals(Double.class.getName())) {

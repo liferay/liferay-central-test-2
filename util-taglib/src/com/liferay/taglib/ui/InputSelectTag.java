@@ -55,7 +55,7 @@ public class InputSelectTag extends IncludeTag {
 	}
 
 	public void setDefaultValue(boolean defaultValue) {
-		_defaultValue = new Boolean(defaultValue);
+		_defaultValue = Boolean.valueOf(defaultValue);
 	}
 
 	public void setDisabled(boolean disabled) {
