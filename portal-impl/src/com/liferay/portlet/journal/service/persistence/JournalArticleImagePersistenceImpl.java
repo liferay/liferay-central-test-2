@@ -289,6 +289,102 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public JournalArticleImage findByUUID_G(String uuid, long groupId)
+		throws NoSuchArticleImageException, SystemException {
+		JournalArticleImage journalArticleImage = fetchByUUID_G(uuid, groupId);
+
+		if (journalArticleImage == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalArticleImage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(", ");
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchArticleImageException(msg.toString());
+		}
+
+		return journalArticleImage;
+	}
+
+	public JournalArticleImage fetchByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		String finderClassName = JournalArticleImage.class.getName();
+		String finderMethodName = "fetchByUUID_G";
+		String[] finderParams = new String[] {
+				String.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" AND ");
+				query.append("groupId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				q.setLong(queryPos++, groupId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (JournalArticleImage)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (JournalArticleImage)list.get(0);
+			}
+		}
+	}
+
 	public List findByGroupId(long groupId) throws SystemException {
 		String finderClassName = JournalArticleImage.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -1155,6 +1251,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		remove(journalArticleImage);
 	}
 
+	public void removeByUUID_G(String uuid, long groupId)
+		throws NoSuchArticleImageException, SystemException {
+		JournalArticleImage journalArticleImage = findByUUID_G(uuid, groupId);
+		remove(journalArticleImage);
+	}
+
 	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
@@ -1233,6 +1335,76 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				if (uuid != null) {
 					q.setString(queryPos++, uuid);
 				}
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		String finderClassName = JournalArticleImage.class.getName();
+		String finderMethodName = "countByUUID_G";
+		String[] finderParams = new String[] {
+				String.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" AND ");
+				query.append("groupId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				q.setLong(queryPos++, groupId);
 
 				Long count = null;
 				Iterator itr = q.list().iterator();

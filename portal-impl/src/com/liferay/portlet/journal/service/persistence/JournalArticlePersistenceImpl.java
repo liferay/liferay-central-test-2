@@ -287,6 +287,105 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public JournalArticle findByUUID_G(String uuid, long groupId)
+		throws NoSuchArticleException, SystemException {
+		JournalArticle journalArticle = fetchByUUID_G(uuid, groupId);
+
+		if (journalArticle == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalArticle exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(", ");
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+
+		return journalArticle;
+	}
+
+	public JournalArticle fetchByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		String finderClassName = JournalArticle.class.getName();
+		String finderMethodName = "fetchByUUID_G";
+		String[] finderParams = new String[] {
+				String.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" AND ");
+				query.append("groupId = ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("articleId ASC").append(", ");
+				query.append("version DESC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				q.setLong(queryPos++, groupId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (JournalArticle)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (JournalArticle)list.get(0);
+			}
+		}
+	}
+
 	public List findByGroupId(long groupId) throws SystemException {
 		String finderClassName = JournalArticle.class.getName();
 		String finderMethodName = "findByGroupId";
@@ -1884,6 +1983,12 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		remove(journalArticle);
 	}
 
+	public void removeByUUID_G(String uuid, long groupId)
+		throws NoSuchArticleException, SystemException {
+		JournalArticle journalArticle = findByUUID_G(uuid, groupId);
+		remove(journalArticle);
+	}
+
 	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
@@ -1990,6 +2095,76 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 				if (uuid != null) {
 					q.setString(queryPos++, uuid);
 				}
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		String finderClassName = JournalArticle.class.getName();
+		String finderMethodName = "countByUUID_G";
+		String[] finderParams = new String[] {
+				String.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticle WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" AND ");
+				query.append("groupId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				q.setLong(queryPos++, groupId);
 
 				Long count = null;
 				Iterator itr = q.list().iterator();

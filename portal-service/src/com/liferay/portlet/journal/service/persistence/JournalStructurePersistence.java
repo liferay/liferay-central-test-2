@@ -63,6 +63,15 @@ public interface JournalStructurePersistence {
 	public com.liferay.portlet.journal.model.JournalStructure fetchByUuid(
 		java.lang.String uuid) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalStructure findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException;
+
+	public com.liferay.portlet.journal.model.JournalStructure fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -147,6 +156,10 @@ public interface JournalStructurePersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchStructureException;
 
+	public void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException;
+
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -160,6 +173,9 @@ public interface JournalStructurePersistence {
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)

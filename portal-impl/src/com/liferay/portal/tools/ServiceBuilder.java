@@ -745,6 +745,23 @@ public class ServiceBuilder {
 					finderColEl.addAttribute("name", "uuid");
 
 					finders.add(0, finderEl);
+
+					if (columnList.contains(new EntityColumn("groupId"))) {
+						finderEl = DocumentHelper.createElement("finder");
+
+						finderEl.addAttribute("name", "UUID_G");
+						finderEl.addAttribute("return-type", ejbName);
+
+						finderColEl = finderEl.addElement("finder-column");
+
+						finderColEl.addAttribute("name", "uuid");
+
+						finderColEl = finderEl.addElement("finder-column");
+
+						finderColEl.addAttribute("name", "groupId");
+
+						finders.add(1, finderEl);
+					}
 				}
 
 				itr2 = finders.iterator();
