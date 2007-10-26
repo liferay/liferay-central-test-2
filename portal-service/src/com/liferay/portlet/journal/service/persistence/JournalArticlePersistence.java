@@ -47,6 +47,10 @@ public interface JournalArticlePersistence {
 		com.liferay.portlet.journal.model.JournalArticle journalArticle,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalArticle updateImpl(
+		com.liferay.portlet.journal.model.JournalArticle journalArticle,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalArticle findByPrimaryKey(
 		long id)
 		throws com.liferay.portal.SystemException, 

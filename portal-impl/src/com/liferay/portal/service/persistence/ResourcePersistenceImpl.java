@@ -26,14 +26,18 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -97,6 +101,22 @@ public class ResourcePersistenceImpl extends BasePersistence
 	}
 
 	public Resource remove(Resource resource) throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(resource);
+		}
+
+		resource = removeImpl(resource);
+
+		if (listener != null) {
+			listener.onAfterRemove(resource);
+		}
+
+		return resource;
+	}
+
+	protected Resource removeImpl(Resource resource) throws SystemException {
 		Session session = null;
 
 		try {
@@ -121,6 +141,34 @@ public class ResourcePersistenceImpl extends BasePersistence
 	}
 
 	public Resource update(com.liferay.portal.model.Resource resource,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = resource.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(resource);
+			}
+			else {
+				listener.onBeforeUpdate(resource);
+			}
+		}
+
+		resource = updateImpl(resource, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(resource);
+			}
+			else {
+				listener.onAfterUpdate(resource);
+			}
+		}
+
+		return resource;
+	}
+
+	public Resource updateImpl(com.liferay.portal.model.Resource resource,
 		boolean merge) throws SystemException {
 		Session session = null;
 
@@ -746,5 +794,20 @@ public class ResourcePersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Resource"));
 	private static Log _log = LogFactory.getLog(ResourcePersistenceImpl.class);
 }

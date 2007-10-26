@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="BookmarksEntryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class BookmarksEntryUtil {
 		long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.bookmarks.NoSuchEntryException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(entryId));
-		}
-
-		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry = getPersistence()
-																				.remove(entryId);
-
-		if (listener != null) {
-			listener.onAfterRemove(bookmarksEntry);
-		}
-
-		return bookmarksEntry;
+		return getPersistence().remove(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry remove(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(bookmarksEntry);
-		}
-
-		bookmarksEntry = getPersistence().remove(bookmarksEntry);
-
-		if (listener != null) {
-			listener.onAfterRemove(bookmarksEntry);
-		}
-
-		return bookmarksEntry;
+		return getPersistence().remove(bookmarksEntry);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry update(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = bookmarksEntry.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(bookmarksEntry);
-			}
-			else {
-				listener.onBeforeUpdate(bookmarksEntry);
-			}
-		}
-
-		bookmarksEntry = getPersistence().update(bookmarksEntry);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(bookmarksEntry);
-			}
-			else {
-				listener.onAfterUpdate(bookmarksEntry);
-			}
-		}
-
-		return bookmarksEntry;
+		return getPersistence().update(bookmarksEntry);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry update(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = bookmarksEntry.isNew();
+		return getPersistence().update(bookmarksEntry, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(bookmarksEntry);
-			}
-			else {
-				listener.onBeforeUpdate(bookmarksEntry);
-			}
-		}
-
-		bookmarksEntry = getPersistence().update(bookmarksEntry, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(bookmarksEntry);
-			}
-			else {
-				listener.onAfterUpdate(bookmarksEntry);
-			}
-		}
-
-		return bookmarksEntry;
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateImpl(
+		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(bookmarksEntry, merge);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByPrimaryKey(
@@ -252,23 +179,7 @@ public class BookmarksEntryUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = BookmarksEntryUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.bookmarks.model.BookmarksEntry"));
-	private static Log _log = LogFactory.getLog(BookmarksEntryUtil.class);
 	private static BookmarksEntryUtil _util;
 	private BookmarksEntryPersistence _persistence;
 }

@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="WikiPageUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,96 +36,31 @@ public class WikiPageUtil {
 	public static com.liferay.portlet.wiki.model.WikiPage remove(long pageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchPageException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(pageId));
-		}
-
-		com.liferay.portlet.wiki.model.WikiPage wikiPage = getPersistence()
-															   .remove(pageId);
-
-		if (listener != null) {
-			listener.onAfterRemove(wikiPage);
-		}
-
-		return wikiPage;
+		return getPersistence().remove(pageId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage remove(
 		com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(wikiPage);
-		}
-
-		wikiPage = getPersistence().remove(wikiPage);
-
-		if (listener != null) {
-			listener.onAfterRemove(wikiPage);
-		}
-
-		return wikiPage;
+		return getPersistence().remove(wikiPage);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage update(
 		com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = wikiPage.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(wikiPage);
-			}
-			else {
-				listener.onBeforeUpdate(wikiPage);
-			}
-		}
-
-		wikiPage = getPersistence().update(wikiPage);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(wikiPage);
-			}
-			else {
-				listener.onAfterUpdate(wikiPage);
-			}
-		}
-
-		return wikiPage;
+		return getPersistence().update(wikiPage);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage update(
 		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = wikiPage.isNew();
+		return getPersistence().update(wikiPage, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(wikiPage);
-			}
-			else {
-				listener.onBeforeUpdate(wikiPage);
-			}
-		}
-
-		wikiPage = getPersistence().update(wikiPage, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(wikiPage);
-			}
-			else {
-				listener.onAfterUpdate(wikiPage);
-			}
-		}
-
-		return wikiPage;
+	public static com.liferay.portlet.wiki.model.WikiPage updateImpl(
+		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(wikiPage, merge);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByPrimaryKey(
@@ -428,23 +355,7 @@ public class WikiPageUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = WikiPageUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.wiki.model.WikiPage"));
-	private static Log _log = LogFactory.getLog(WikiPageUtil.class);
 	private static WikiPageUtil _util;
 	private WikiPagePersistence _persistence;
 }

@@ -49,6 +49,10 @@ public interface DLFileEntryPersistence {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateImpl(
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByPrimaryKey(
 		long fileEntryId)
 		throws com.liferay.portal.SystemException, 

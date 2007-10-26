@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="SCProductScreenshotUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class SCProductScreenshotUtil {
 		long productScreenshotId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(productScreenshotId));
-		}
-
-		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot =
-			getPersistence().remove(productScreenshotId);
-
-		if (listener != null) {
-			listener.onAfterRemove(scProductScreenshot);
-		}
-
-		return scProductScreenshot;
+		return getPersistence().remove(productScreenshotId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot remove(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(scProductScreenshot);
-		}
-
-		scProductScreenshot = getPersistence().remove(scProductScreenshot);
-
-		if (listener != null) {
-			listener.onAfterRemove(scProductScreenshot);
-		}
-
-		return scProductScreenshot;
+		return getPersistence().remove(scProductScreenshot);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot update(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = scProductScreenshot.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(scProductScreenshot);
-			}
-			else {
-				listener.onBeforeUpdate(scProductScreenshot);
-			}
-		}
-
-		scProductScreenshot = getPersistence().update(scProductScreenshot);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(scProductScreenshot);
-			}
-			else {
-				listener.onAfterUpdate(scProductScreenshot);
-			}
-		}
-
-		return scProductScreenshot;
+		return getPersistence().update(scProductScreenshot);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot update(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = scProductScreenshot.isNew();
+		return getPersistence().update(scProductScreenshot, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(scProductScreenshot);
-			}
-			else {
-				listener.onBeforeUpdate(scProductScreenshot);
-			}
-		}
-
-		scProductScreenshot = getPersistence().update(scProductScreenshot, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(scProductScreenshot);
-			}
-			else {
-				listener.onAfterUpdate(scProductScreenshot);
-			}
-		}
-
-		return scProductScreenshot;
+	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot updateImpl(
+		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(scProductScreenshot, merge);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByPrimaryKey(
@@ -279,23 +206,7 @@ public class SCProductScreenshotUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = SCProductScreenshotUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCProductScreenshot"));
-	private static Log _log = LogFactory.getLog(SCProductScreenshotUtil.class);
 	private static SCProductScreenshotUtil _util;
 	private SCProductScreenshotPersistence _persistence;
 }

@@ -49,6 +49,10 @@ public interface OrgGroupPermissionPersistence {
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.OrgGroupPermission updateImpl(
+		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.OrgGroupPermission findByPrimaryKey(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK)
 		throws com.liferay.portal.SystemException, 

@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.polls.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PollsQuestionUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class PollsQuestionUtil {
 		long questionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.polls.NoSuchQuestionException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(questionId));
-		}
-
-		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion = getPersistence()
-																		  .remove(questionId);
-
-		if (listener != null) {
-			listener.onAfterRemove(pollsQuestion);
-		}
-
-		return pollsQuestion;
+		return getPersistence().remove(questionId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion remove(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(pollsQuestion);
-		}
-
-		pollsQuestion = getPersistence().remove(pollsQuestion);
-
-		if (listener != null) {
-			listener.onAfterRemove(pollsQuestion);
-		}
-
-		return pollsQuestion;
+		return getPersistence().remove(pollsQuestion);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion update(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = pollsQuestion.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(pollsQuestion);
-			}
-			else {
-				listener.onBeforeUpdate(pollsQuestion);
-			}
-		}
-
-		pollsQuestion = getPersistence().update(pollsQuestion);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(pollsQuestion);
-			}
-			else {
-				listener.onAfterUpdate(pollsQuestion);
-			}
-		}
-
-		return pollsQuestion;
+		return getPersistence().update(pollsQuestion);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion update(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = pollsQuestion.isNew();
+		return getPersistence().update(pollsQuestion, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(pollsQuestion);
-			}
-			else {
-				listener.onBeforeUpdate(pollsQuestion);
-			}
-		}
-
-		pollsQuestion = getPersistence().update(pollsQuestion, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(pollsQuestion);
-			}
-			else {
-				listener.onAfterUpdate(pollsQuestion);
-			}
-		}
-
-		return pollsQuestion;
+	public static com.liferay.portlet.polls.model.PollsQuestion updateImpl(
+		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(pollsQuestion, merge);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion findByPrimaryKey(
@@ -252,23 +179,7 @@ public class PollsQuestionUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = PollsQuestionUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.polls.model.PollsQuestion"));
-	private static Log _log = LogFactory.getLog(PollsQuestionUtil.class);
 	private static PollsQuestionUtil _util;
 	private PollsQuestionPersistence _persistence;
 }

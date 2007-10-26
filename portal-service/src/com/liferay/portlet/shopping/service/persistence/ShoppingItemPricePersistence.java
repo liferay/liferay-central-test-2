@@ -49,6 +49,10 @@ public interface ShoppingItemPricePersistence {
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingItemPrice updateImpl(
+		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.shopping.model.ShoppingItemPrice findByPrimaryKey(
 		long itemPriceId)
 		throws com.liferay.portal.SystemException, 

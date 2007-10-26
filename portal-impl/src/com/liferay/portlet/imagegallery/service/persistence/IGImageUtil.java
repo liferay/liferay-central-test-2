@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="IGImageUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class IGImageUtil {
 		long imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(imageId));
-		}
-
-		com.liferay.portlet.imagegallery.model.IGImage igImage = getPersistence()
-																	 .remove(imageId);
-
-		if (listener != null) {
-			listener.onAfterRemove(igImage);
-		}
-
-		return igImage;
+		return getPersistence().remove(imageId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage remove(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(igImage);
-		}
-
-		igImage = getPersistence().remove(igImage);
-
-		if (listener != null) {
-			listener.onAfterRemove(igImage);
-		}
-
-		return igImage;
+		return getPersistence().remove(igImage);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage update(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = igImage.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(igImage);
-			}
-			else {
-				listener.onBeforeUpdate(igImage);
-			}
-		}
-
-		igImage = getPersistence().update(igImage);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(igImage);
-			}
-			else {
-				listener.onAfterUpdate(igImage);
-			}
-		}
-
-		return igImage;
+		return getPersistence().update(igImage);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage update(
 		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = igImage.isNew();
+		return getPersistence().update(igImage, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(igImage);
-			}
-			else {
-				listener.onBeforeUpdate(igImage);
-			}
-		}
-
-		igImage = getPersistence().update(igImage, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(igImage);
-			}
-			else {
-				listener.onAfterUpdate(igImage);
-			}
-		}
-
-		return igImage;
+	public static com.liferay.portlet.imagegallery.model.IGImage updateImpl(
+		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(igImage, merge);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByPrimaryKey(
@@ -252,23 +179,7 @@ public class IGImageUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = IGImageUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.imagegallery.model.IGImage"));
-	private static Log _log = LogFactory.getLog(IGImageUtil.class);
 	private static IGImageUtil _util;
 	private IGImagePersistence _persistence;
 }

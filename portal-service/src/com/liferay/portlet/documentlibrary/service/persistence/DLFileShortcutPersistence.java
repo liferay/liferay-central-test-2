@@ -49,6 +49,10 @@ public interface DLFileShortcutPersistence {
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut updateImpl(
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByPrimaryKey(
 		long fileShortcutId)
 		throws com.liferay.portal.SystemException, 

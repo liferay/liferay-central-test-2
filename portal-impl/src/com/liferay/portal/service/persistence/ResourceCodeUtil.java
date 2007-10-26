@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ResourceCodeUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,96 +36,31 @@ public class ResourceCodeUtil {
 	public static com.liferay.portal.model.ResourceCode remove(long codeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(codeId));
-		}
-
-		com.liferay.portal.model.ResourceCode resourceCode = getPersistence()
-																 .remove(codeId);
-
-		if (listener != null) {
-			listener.onAfterRemove(resourceCode);
-		}
-
-		return resourceCode;
+		return getPersistence().remove(codeId);
 	}
 
 	public static com.liferay.portal.model.ResourceCode remove(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(resourceCode);
-		}
-
-		resourceCode = getPersistence().remove(resourceCode);
-
-		if (listener != null) {
-			listener.onAfterRemove(resourceCode);
-		}
-
-		return resourceCode;
+		return getPersistence().remove(resourceCode);
 	}
 
 	public static com.liferay.portal.model.ResourceCode update(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = resourceCode.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(resourceCode);
-			}
-			else {
-				listener.onBeforeUpdate(resourceCode);
-			}
-		}
-
-		resourceCode = getPersistence().update(resourceCode);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(resourceCode);
-			}
-			else {
-				listener.onAfterUpdate(resourceCode);
-			}
-		}
-
-		return resourceCode;
+		return getPersistence().update(resourceCode);
 	}
 
 	public static com.liferay.portal.model.ResourceCode update(
 		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = resourceCode.isNew();
+		return getPersistence().update(resourceCode, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(resourceCode);
-			}
-			else {
-				listener.onBeforeUpdate(resourceCode);
-			}
-		}
-
-		resourceCode = getPersistence().update(resourceCode, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(resourceCode);
-			}
-			else {
-				listener.onAfterUpdate(resourceCode);
-			}
-		}
-
-		return resourceCode;
+	public static com.liferay.portal.model.ResourceCode updateImpl(
+		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(resourceCode, merge);
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByPrimaryKey(
@@ -325,23 +252,7 @@ public class ResourceCodeUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ResourceCodeUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.ResourceCode"));
-	private static Log _log = LogFactory.getLog(ResourceCodeUtil.class);
 	private static ResourceCodeUtil _util;
 	private ResourceCodePersistence _persistence;
 }

@@ -49,6 +49,10 @@ public interface JournalArticleResourcePersistence {
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalArticleResource updateImpl(
+		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalArticleResource findByPrimaryKey(
 		long resourcePrimKey)
 		throws com.liferay.portal.SystemException, 

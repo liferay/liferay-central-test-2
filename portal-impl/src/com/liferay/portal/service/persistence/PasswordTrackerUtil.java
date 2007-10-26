@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PasswordTrackerUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class PasswordTrackerUtil {
 		long passwordTrackerId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordTrackerException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(passwordTrackerId));
-		}
-
-		com.liferay.portal.model.PasswordTracker passwordTracker = getPersistence()
-																	   .remove(passwordTrackerId);
-
-		if (listener != null) {
-			listener.onAfterRemove(passwordTracker);
-		}
-
-		return passwordTracker;
+		return getPersistence().remove(passwordTrackerId);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker remove(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(passwordTracker);
-		}
-
-		passwordTracker = getPersistence().remove(passwordTracker);
-
-		if (listener != null) {
-			listener.onAfterRemove(passwordTracker);
-		}
-
-		return passwordTracker;
+		return getPersistence().remove(passwordTracker);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker update(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = passwordTracker.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(passwordTracker);
-			}
-			else {
-				listener.onBeforeUpdate(passwordTracker);
-			}
-		}
-
-		passwordTracker = getPersistence().update(passwordTracker);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(passwordTracker);
-			}
-			else {
-				listener.onAfterUpdate(passwordTracker);
-			}
-		}
-
-		return passwordTracker;
+		return getPersistence().update(passwordTracker);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker update(
 		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = passwordTracker.isNew();
+		return getPersistence().update(passwordTracker, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(passwordTracker);
-			}
-			else {
-				listener.onBeforeUpdate(passwordTracker);
-			}
-		}
-
-		passwordTracker = getPersistence().update(passwordTracker, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(passwordTracker);
-			}
-			else {
-				listener.onAfterUpdate(passwordTracker);
-			}
-		}
-
-		return passwordTracker;
+	public static com.liferay.portal.model.PasswordTracker updateImpl(
+		com.liferay.portal.model.PasswordTracker passwordTracker, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(passwordTracker, merge);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker findByPrimaryKey(
@@ -252,23 +179,7 @@ public class PasswordTrackerUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = PasswordTrackerUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.PasswordTracker"));
-	private static Log _log = LogFactory.getLog(PasswordTrackerUtil.class);
 	private static PasswordTrackerUtil _util;
 	private PasswordTrackerPersistence _persistence;
 }

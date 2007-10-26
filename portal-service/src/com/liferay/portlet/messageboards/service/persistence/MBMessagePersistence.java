@@ -49,6 +49,10 @@ public interface MBMessagePersistence {
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBMessage updateImpl(
+		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBMessage findByPrimaryKey(
 		long messageId)
 		throws com.liferay.portal.SystemException, 

@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="AddressUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class AddressUtil {
 	public static com.liferay.portal.model.Address remove(long addressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAddressException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(addressId));
-		}
-
-		com.liferay.portal.model.Address address = getPersistence().remove(addressId);
-
-		if (listener != null) {
-			listener.onAfterRemove(address);
-		}
-
-		return address;
+		return getPersistence().remove(addressId);
 	}
 
 	public static com.liferay.portal.model.Address remove(
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(address);
-		}
-
-		address = getPersistence().remove(address);
-
-		if (listener != null) {
-			listener.onAfterRemove(address);
-		}
-
-		return address;
+		return getPersistence().remove(address);
 	}
 
 	public static com.liferay.portal.model.Address update(
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = address.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(address);
-			}
-			else {
-				listener.onBeforeUpdate(address);
-			}
-		}
-
-		address = getPersistence().update(address);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(address);
-			}
-			else {
-				listener.onAfterUpdate(address);
-			}
-		}
-
-		return address;
+		return getPersistence().update(address);
 	}
 
 	public static com.liferay.portal.model.Address update(
 		com.liferay.portal.model.Address address, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = address.isNew();
+		return getPersistence().update(address, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(address);
-			}
-			else {
-				listener.onBeforeUpdate(address);
-			}
-		}
-
-		address = getPersistence().update(address, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(address);
-			}
-			else {
-				listener.onAfterUpdate(address);
-			}
-		}
-
-		return address;
+	public static com.liferay.portal.model.Address updateImpl(
+		com.liferay.portal.model.Address address, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(address, merge);
 	}
 
 	public static com.liferay.portal.model.Address findByPrimaryKey(
@@ -532,23 +460,7 @@ public class AddressUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = AddressUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Address"));
-	private static Log _log = LogFactory.getLog(AddressUtil.class);
 	private static AddressUtil _util;
 	private AddressPersistence _persistence;
 }

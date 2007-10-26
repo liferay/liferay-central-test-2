@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="WikiPageResourceUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class WikiPageResourceUtil {
 		long resourcePrimKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchPageResourceException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(resourcePrimKey));
-		}
-
-		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource = getPersistence()
-																			   .remove(resourcePrimKey);
-
-		if (listener != null) {
-			listener.onAfterRemove(wikiPageResource);
-		}
-
-		return wikiPageResource;
+		return getPersistence().remove(resourcePrimKey);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource remove(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(wikiPageResource);
-		}
-
-		wikiPageResource = getPersistence().remove(wikiPageResource);
-
-		if (listener != null) {
-			listener.onAfterRemove(wikiPageResource);
-		}
-
-		return wikiPageResource;
+		return getPersistence().remove(wikiPageResource);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource update(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = wikiPageResource.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(wikiPageResource);
-			}
-			else {
-				listener.onBeforeUpdate(wikiPageResource);
-			}
-		}
-
-		wikiPageResource = getPersistence().update(wikiPageResource);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(wikiPageResource);
-			}
-			else {
-				listener.onAfterUpdate(wikiPageResource);
-			}
-		}
-
-		return wikiPageResource;
+		return getPersistence().update(wikiPageResource);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource update(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = wikiPageResource.isNew();
+		return getPersistence().update(wikiPageResource, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(wikiPageResource);
-			}
-			else {
-				listener.onBeforeUpdate(wikiPageResource);
-			}
-		}
-
-		wikiPageResource = getPersistence().update(wikiPageResource, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(wikiPageResource);
-			}
-			else {
-				listener.onAfterUpdate(wikiPageResource);
-			}
-		}
-
-		return wikiPageResource;
+	public static com.liferay.portlet.wiki.model.WikiPageResource updateImpl(
+		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(wikiPageResource, merge);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource findByPrimaryKey(
@@ -227,23 +154,7 @@ public class WikiPageResourceUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = WikiPageResourceUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.wiki.model.WikiPageResource"));
-	private static Log _log = LogFactory.getLog(WikiPageResourceUtil.class);
 	private static WikiPageResourceUtil _util;
 	private WikiPageResourcePersistence _persistence;
 }

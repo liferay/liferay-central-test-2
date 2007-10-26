@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ListTypeUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class ListTypeUtil {
 	public static com.liferay.portal.model.ListType remove(int listTypeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchListTypeException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(listTypeId));
-		}
-
-		com.liferay.portal.model.ListType listType = getPersistence().remove(listTypeId);
-
-		if (listener != null) {
-			listener.onAfterRemove(listType);
-		}
-
-		return listType;
+		return getPersistence().remove(listTypeId);
 	}
 
 	public static com.liferay.portal.model.ListType remove(
 		com.liferay.portal.model.ListType listType)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(listType);
-		}
-
-		listType = getPersistence().remove(listType);
-
-		if (listener != null) {
-			listener.onAfterRemove(listType);
-		}
-
-		return listType;
+		return getPersistence().remove(listType);
 	}
 
 	public static com.liferay.portal.model.ListType update(
 		com.liferay.portal.model.ListType listType)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = listType.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(listType);
-			}
-			else {
-				listener.onBeforeUpdate(listType);
-			}
-		}
-
-		listType = getPersistence().update(listType);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(listType);
-			}
-			else {
-				listener.onAfterUpdate(listType);
-			}
-		}
-
-		return listType;
+		return getPersistence().update(listType);
 	}
 
 	public static com.liferay.portal.model.ListType update(
 		com.liferay.portal.model.ListType listType, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = listType.isNew();
+		return getPersistence().update(listType, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(listType);
-			}
-			else {
-				listener.onBeforeUpdate(listType);
-			}
-		}
-
-		listType = getPersistence().update(listType, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(listType);
-			}
-			else {
-				listener.onAfterUpdate(listType);
-			}
-		}
-
-		return listType;
+	public static com.liferay.portal.model.ListType updateImpl(
+		com.liferay.portal.model.ListType listType, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(listType, merge);
 	}
 
 	public static com.liferay.portal.model.ListType findByPrimaryKey(
@@ -250,23 +178,7 @@ public class ListTypeUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ListTypeUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.ListType"));
-	private static Log _log = LogFactory.getLog(ListTypeUtil.class);
 	private static ListTypeUtil _util;
 	private ListTypePersistence _persistence;
 }

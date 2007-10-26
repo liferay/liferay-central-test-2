@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="UserGroupUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class UserGroupUtil {
 	public static com.liferay.portal.model.UserGroup remove(long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(userGroupId));
-		}
-
-		com.liferay.portal.model.UserGroup userGroup = getPersistence().remove(userGroupId);
-
-		if (listener != null) {
-			listener.onAfterRemove(userGroup);
-		}
-
-		return userGroup;
+		return getPersistence().remove(userGroupId);
 	}
 
 	public static com.liferay.portal.model.UserGroup remove(
 		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(userGroup);
-		}
-
-		userGroup = getPersistence().remove(userGroup);
-
-		if (listener != null) {
-			listener.onAfterRemove(userGroup);
-		}
-
-		return userGroup;
+		return getPersistence().remove(userGroup);
 	}
 
 	public static com.liferay.portal.model.UserGroup update(
 		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = userGroup.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(userGroup);
-			}
-			else {
-				listener.onBeforeUpdate(userGroup);
-			}
-		}
-
-		userGroup = getPersistence().update(userGroup);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(userGroup);
-			}
-			else {
-				listener.onAfterUpdate(userGroup);
-			}
-		}
-
-		return userGroup;
+		return getPersistence().update(userGroup);
 	}
 
 	public static com.liferay.portal.model.UserGroup update(
 		com.liferay.portal.model.UserGroup userGroup, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = userGroup.isNew();
+		return getPersistence().update(userGroup, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(userGroup);
-			}
-			else {
-				listener.onBeforeUpdate(userGroup);
-			}
-		}
-
-		userGroup = getPersistence().update(userGroup, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(userGroup);
-			}
-			else {
-				listener.onAfterUpdate(userGroup);
-			}
-		}
-
-		return userGroup;
+	public static com.liferay.portal.model.UserGroup updateImpl(
+		com.liferay.portal.model.UserGroup userGroup, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(userGroup, merge);
 	}
 
 	public static com.liferay.portal.model.UserGroup findByPrimaryKey(
@@ -439,23 +367,7 @@ public class UserGroupUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = UserGroupUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.UserGroup"));
-	private static Log _log = LogFactory.getLog(UserGroupUtil.class);
 	private static UserGroupUtil _util;
 	private UserGroupPersistence _persistence;
 }

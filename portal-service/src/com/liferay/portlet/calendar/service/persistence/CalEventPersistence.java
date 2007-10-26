@@ -47,6 +47,10 @@ public interface CalEventPersistence {
 		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.calendar.model.CalEvent updateImpl(
+		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.calendar.model.CalEvent findByPrimaryKey(
 		long eventId)
 		throws com.liferay.portal.SystemException, 

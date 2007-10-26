@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PermissionUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,96 +36,31 @@ public class PermissionUtil {
 	public static com.liferay.portal.model.Permission remove(long permissionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPermissionException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(permissionId));
-		}
-
-		com.liferay.portal.model.Permission permission = getPersistence()
-															 .remove(permissionId);
-
-		if (listener != null) {
-			listener.onAfterRemove(permission);
-		}
-
-		return permission;
+		return getPersistence().remove(permissionId);
 	}
 
 	public static com.liferay.portal.model.Permission remove(
 		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(permission);
-		}
-
-		permission = getPersistence().remove(permission);
-
-		if (listener != null) {
-			listener.onAfterRemove(permission);
-		}
-
-		return permission;
+		return getPersistence().remove(permission);
 	}
 
 	public static com.liferay.portal.model.Permission update(
 		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = permission.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(permission);
-			}
-			else {
-				listener.onBeforeUpdate(permission);
-			}
-		}
-
-		permission = getPersistence().update(permission);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(permission);
-			}
-			else {
-				listener.onAfterUpdate(permission);
-			}
-		}
-
-		return permission;
+		return getPersistence().update(permission);
 	}
 
 	public static com.liferay.portal.model.Permission update(
 		com.liferay.portal.model.Permission permission, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = permission.isNew();
+		return getPersistence().update(permission, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(permission);
-			}
-			else {
-				listener.onBeforeUpdate(permission);
-			}
-		}
-
-		permission = getPersistence().update(permission, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(permission);
-			}
-			else {
-				listener.onAfterUpdate(permission);
-			}
-		}
-
-		return permission;
+	public static com.liferay.portal.model.Permission updateImpl(
+		com.liferay.portal.model.Permission permission, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(permission, merge);
 	}
 
 	public static com.liferay.portal.model.Permission findByPrimaryKey(
@@ -604,23 +531,7 @@ public class PermissionUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = PermissionUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Permission"));
-	private static Log _log = LogFactory.getLog(PermissionUtil.class);
 	private static PermissionUtil _util;
 	private PermissionPersistence _persistence;
 }

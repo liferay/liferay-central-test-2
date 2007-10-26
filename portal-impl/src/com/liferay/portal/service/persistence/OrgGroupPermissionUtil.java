@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="OrgGroupPermissionUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class OrgGroupPermissionUtil {
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrgGroupPermissionException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(orgGroupPermissionPK));
-		}
-
-		com.liferay.portal.model.OrgGroupPermission orgGroupPermission = getPersistence()
-																			 .remove(orgGroupPermissionPK);
-
-		if (listener != null) {
-			listener.onAfterRemove(orgGroupPermission);
-		}
-
-		return orgGroupPermission;
+		return getPersistence().remove(orgGroupPermissionPK);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission remove(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(orgGroupPermission);
-		}
-
-		orgGroupPermission = getPersistence().remove(orgGroupPermission);
-
-		if (listener != null) {
-			listener.onAfterRemove(orgGroupPermission);
-		}
-
-		return orgGroupPermission;
+		return getPersistence().remove(orgGroupPermission);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission update(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = orgGroupPermission.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(orgGroupPermission);
-			}
-			else {
-				listener.onBeforeUpdate(orgGroupPermission);
-			}
-		}
-
-		orgGroupPermission = getPersistence().update(orgGroupPermission);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(orgGroupPermission);
-			}
-			else {
-				listener.onAfterUpdate(orgGroupPermission);
-			}
-		}
-
-		return orgGroupPermission;
+		return getPersistence().update(orgGroupPermission);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission update(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = orgGroupPermission.isNew();
+		return getPersistence().update(orgGroupPermission, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(orgGroupPermission);
-			}
-			else {
-				listener.onBeforeUpdate(orgGroupPermission);
-			}
-		}
-
-		orgGroupPermission = getPersistence().update(orgGroupPermission, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(orgGroupPermission);
-			}
-			else {
-				listener.onAfterUpdate(orgGroupPermission);
-			}
-		}
-
-		return orgGroupPermission;
+	public static com.liferay.portal.model.OrgGroupPermission updateImpl(
+		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(orgGroupPermission, merge);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission findByPrimaryKey(
@@ -302,23 +229,7 @@ public class OrgGroupPermissionUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = OrgGroupPermissionUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.OrgGroupPermission"));
-	private static Log _log = LogFactory.getLog(OrgGroupPermissionUtil.class);
 	private static OrgGroupPermissionUtil _util;
 	private OrgGroupPermissionPersistence _persistence;
 }

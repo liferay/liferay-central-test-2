@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.blogs.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="BlogsStatsUserUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class BlogsStatsUserUtil {
 		long statsUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.blogs.NoSuchStatsUserException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(statsUserId));
-		}
-
-		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser = getPersistence()
-																			.remove(statsUserId);
-
-		if (listener != null) {
-			listener.onAfterRemove(blogsStatsUser);
-		}
-
-		return blogsStatsUser;
+		return getPersistence().remove(statsUserId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser remove(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(blogsStatsUser);
-		}
-
-		blogsStatsUser = getPersistence().remove(blogsStatsUser);
-
-		if (listener != null) {
-			listener.onAfterRemove(blogsStatsUser);
-		}
-
-		return blogsStatsUser;
+		return getPersistence().remove(blogsStatsUser);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser update(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = blogsStatsUser.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(blogsStatsUser);
-			}
-			else {
-				listener.onBeforeUpdate(blogsStatsUser);
-			}
-		}
-
-		blogsStatsUser = getPersistence().update(blogsStatsUser);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(blogsStatsUser);
-			}
-			else {
-				listener.onAfterUpdate(blogsStatsUser);
-			}
-		}
-
-		return blogsStatsUser;
+		return getPersistence().update(blogsStatsUser);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser update(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = blogsStatsUser.isNew();
+		return getPersistence().update(blogsStatsUser, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(blogsStatsUser);
-			}
-			else {
-				listener.onBeforeUpdate(blogsStatsUser);
-			}
-		}
-
-		blogsStatsUser = getPersistence().update(blogsStatsUser, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(blogsStatsUser);
-			}
-			else {
-				listener.onAfterUpdate(blogsStatsUser);
-			}
-		}
-
-		return blogsStatsUser;
+	public static com.liferay.portlet.blogs.model.BlogsStatsUser updateImpl(
+		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(blogsStatsUser, merge);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser findByPrimaryKey(
@@ -426,23 +353,7 @@ public class BlogsStatsUserUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = BlogsStatsUserUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.blogs.model.BlogsStatsUser"));
-	private static Log _log = LogFactory.getLog(BlogsStatsUserUtil.class);
 	private static BlogsStatsUserUtil _util;
 	private BlogsStatsUserPersistence _persistence;
 }

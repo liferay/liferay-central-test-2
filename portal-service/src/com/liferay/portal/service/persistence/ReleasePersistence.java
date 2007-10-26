@@ -47,6 +47,10 @@ public interface ReleasePersistence {
 		com.liferay.portal.model.Release release, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Release updateImpl(
+		com.liferay.portal.model.Release release, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Release findByPrimaryKey(long releaseId)
 		throws com.liferay.portal.NoSuchReleaseException, 
 			com.liferay.portal.SystemException;

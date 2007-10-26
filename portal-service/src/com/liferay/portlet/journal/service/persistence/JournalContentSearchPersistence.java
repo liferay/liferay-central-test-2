@@ -49,6 +49,10 @@ public interface JournalContentSearchPersistence {
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalContentSearch updateImpl(
+		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalContentSearch findByPrimaryKey(
 		long contentSearchId)
 		throws com.liferay.portal.SystemException, 

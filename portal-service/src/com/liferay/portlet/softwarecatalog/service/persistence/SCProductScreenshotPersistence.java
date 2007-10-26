@@ -49,6 +49,10 @@ public interface SCProductScreenshotPersistence {
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot updateImpl(
+		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByPrimaryKey(
 		long productScreenshotId)
 		throws com.liferay.portal.SystemException, 

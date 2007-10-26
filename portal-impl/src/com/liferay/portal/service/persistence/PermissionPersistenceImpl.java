@@ -26,14 +26,18 @@ import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -111,6 +115,23 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public Permission remove(Permission permission) throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(permission);
+		}
+
+		permission = removeImpl(permission);
+
+		if (listener != null) {
+			listener.onAfterRemove(permission);
+		}
+
+		return permission;
+	}
+
+	protected Permission removeImpl(Permission permission)
+		throws SystemException {
 		try {
 			clearGroups.clear(permission.getPrimaryKey());
 		}
@@ -166,6 +187,35 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 	public Permission update(com.liferay.portal.model.Permission permission,
 		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = permission.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(permission);
+			}
+			else {
+				listener.onBeforeUpdate(permission);
+			}
+		}
+
+		permission = updateImpl(permission, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(permission);
+			}
+			else {
+				listener.onAfterUpdate(permission);
+			}
+		}
+
+		return permission;
+	}
+
+	public Permission updateImpl(
+		com.liferay.portal.model.Permission permission, boolean merge)
+		throws SystemException {
 		FinderCache.clearCache("Groups_Permissions");
 		FinderCache.clearCache("Roles_Permissions");
 		FinderCache.clearCache("Users_Permissions");
@@ -2026,6 +2076,19 @@ public class PermissionPersistenceImpl extends BasePersistence
 		}
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Permissions ON (Groups_Permissions.groupId = Group_.groupId) WHERE (Groups_Permissions.permissionId = ?)";
 	private static final String _SQL_GETGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Permissions WHERE permissionId = ?";
 	private static final String _SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Permissions WHERE permissionId = ? AND groupId = ?";
@@ -2035,5 +2098,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_Permissions ON (Users_Permissions.userId = User_.userId) WHERE (Users_Permissions.permissionId = ?)";
 	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Permissions WHERE permissionId = ?";
 	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Permissions WHERE permissionId = ? AND userId = ?";
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Permission"));
 	private static Log _log = LogFactory.getLog(PermissionPersistenceImpl.class);
 }

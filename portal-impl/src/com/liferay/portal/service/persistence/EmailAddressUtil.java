@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="EmailAddressUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class EmailAddressUtil {
 		long emailAddressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchEmailAddressException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(emailAddressId));
-		}
-
-		com.liferay.portal.model.EmailAddress emailAddress = getPersistence()
-																 .remove(emailAddressId);
-
-		if (listener != null) {
-			listener.onAfterRemove(emailAddress);
-		}
-
-		return emailAddress;
+		return getPersistence().remove(emailAddressId);
 	}
 
 	public static com.liferay.portal.model.EmailAddress remove(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(emailAddress);
-		}
-
-		emailAddress = getPersistence().remove(emailAddress);
-
-		if (listener != null) {
-			listener.onAfterRemove(emailAddress);
-		}
-
-		return emailAddress;
+		return getPersistence().remove(emailAddress);
 	}
 
 	public static com.liferay.portal.model.EmailAddress update(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = emailAddress.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(emailAddress);
-			}
-			else {
-				listener.onBeforeUpdate(emailAddress);
-			}
-		}
-
-		emailAddress = getPersistence().update(emailAddress);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(emailAddress);
-			}
-			else {
-				listener.onAfterUpdate(emailAddress);
-			}
-		}
-
-		return emailAddress;
+		return getPersistence().update(emailAddress);
 	}
 
 	public static com.liferay.portal.model.EmailAddress update(
 		com.liferay.portal.model.EmailAddress emailAddress, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = emailAddress.isNew();
+		return getPersistence().update(emailAddress, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(emailAddress);
-			}
-			else {
-				listener.onBeforeUpdate(emailAddress);
-			}
-		}
-
-		emailAddress = getPersistence().update(emailAddress, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(emailAddress);
-			}
-			else {
-				listener.onAfterUpdate(emailAddress);
-			}
-		}
-
-		return emailAddress;
+	public static com.liferay.portal.model.EmailAddress updateImpl(
+		com.liferay.portal.model.EmailAddress emailAddress, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(emailAddress, merge);
 	}
 
 	public static com.liferay.portal.model.EmailAddress findByPrimaryKey(
@@ -473,23 +400,7 @@ public class EmailAddressUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = EmailAddressUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.EmailAddress"));
-	private static Log _log = LogFactory.getLog(EmailAddressUtil.class);
 	private static EmailAddressUtil _util;
 	private EmailAddressPersistence _persistence;
 }

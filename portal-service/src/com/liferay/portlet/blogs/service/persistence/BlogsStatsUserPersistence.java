@@ -49,6 +49,10 @@ public interface BlogsStatsUserPersistence {
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.blogs.model.BlogsStatsUser updateImpl(
+		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.blogs.model.BlogsStatsUser findByPrimaryKey(
 		long statsUserId)
 		throws com.liferay.portal.SystemException, 

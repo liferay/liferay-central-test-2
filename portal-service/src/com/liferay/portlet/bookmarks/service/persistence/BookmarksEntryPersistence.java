@@ -49,6 +49,10 @@ public interface BookmarksEntryPersistence {
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateImpl(
+		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByPrimaryKey(
 		long entryId)
 		throws com.liferay.portal.SystemException, 

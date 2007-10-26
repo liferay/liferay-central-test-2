@@ -47,6 +47,10 @@ public interface SubscriptionPersistence {
 		com.liferay.portal.model.Subscription subscription, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Subscription updateImpl(
+		com.liferay.portal.model.Subscription subscription, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Subscription findByPrimaryKey(
 		long subscriptionId)
 		throws com.liferay.portal.SystemException, 

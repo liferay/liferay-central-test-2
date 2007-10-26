@@ -25,12 +25,16 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
@@ -114,6 +118,23 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 	public SCProductVersion remove(SCProductVersion scProductVersion)
 		throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(scProductVersion);
+		}
+
+		scProductVersion = removeImpl(scProductVersion);
+
+		if (listener != null) {
+			listener.onAfterRemove(scProductVersion);
+		}
+
+		return scProductVersion;
+	}
+
+	protected SCProductVersion removeImpl(SCProductVersion scProductVersion)
+		throws SystemException {
 		try {
 			clearSCFrameworkVersions.clear(scProductVersion.getPrimaryKey());
 		}
@@ -149,6 +170,35 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 	}
 
 	public SCProductVersion update(
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = scProductVersion.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(scProductVersion);
+			}
+			else {
+				listener.onBeforeUpdate(scProductVersion);
+			}
+		}
+
+		scProductVersion = updateImpl(scProductVersion, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(scProductVersion);
+			}
+			else {
+				listener.onAfterUpdate(scProductVersion);
+			}
+		}
+
+		return scProductVersion;
+	}
+
+	public SCProductVersion updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
 		boolean merge) throws SystemException {
 		FinderCache.clearCache("SCFrameworkVersi_SCProductVers");
@@ -1083,8 +1133,23 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
 	private static final String _SQL_GETSCFRAMEWORKVERSIONS = "SELECT {SCFrameworkVersion.*} FROM SCFrameworkVersion INNER JOIN SCFrameworkVersi_SCProductVers ON (SCFrameworkVersi_SCProductVers.frameworkVersionId = SCFrameworkVersion.frameworkVersionId) WHERE (SCFrameworkVersi_SCProductVers.productVersionId = ?)";
 	private static final String _SQL_GETSCFRAMEWORKVERSIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ?";
 	private static final String _SQL_CONTAINSSCFRAMEWORKVERSION = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ? AND frameworkVersionId = ?";
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCProductVersion"));
 	private static Log _log = LogFactory.getLog(SCProductVersionPersistenceImpl.class);
 }

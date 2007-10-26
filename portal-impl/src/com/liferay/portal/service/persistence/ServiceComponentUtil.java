@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ServiceComponentUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class ServiceComponentUtil {
 		long serviceComponentId)
 		throws com.liferay.portal.NoSuchServiceComponentException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(serviceComponentId));
-		}
-
-		com.liferay.portal.model.ServiceComponent serviceComponent = getPersistence()
-																		 .remove(serviceComponentId);
-
-		if (listener != null) {
-			listener.onAfterRemove(serviceComponent);
-		}
-
-		return serviceComponent;
+		return getPersistence().remove(serviceComponentId);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent remove(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(serviceComponent);
-		}
-
-		serviceComponent = getPersistence().remove(serviceComponent);
-
-		if (listener != null) {
-			listener.onAfterRemove(serviceComponent);
-		}
-
-		return serviceComponent;
+		return getPersistence().remove(serviceComponent);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent update(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = serviceComponent.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(serviceComponent);
-			}
-			else {
-				listener.onBeforeUpdate(serviceComponent);
-			}
-		}
-
-		serviceComponent = getPersistence().update(serviceComponent);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(serviceComponent);
-			}
-			else {
-				listener.onAfterUpdate(serviceComponent);
-			}
-		}
-
-		return serviceComponent;
+		return getPersistence().update(serviceComponent);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent update(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = serviceComponent.isNew();
+		return getPersistence().update(serviceComponent, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(serviceComponent);
-			}
-			else {
-				listener.onBeforeUpdate(serviceComponent);
-			}
-		}
-
-		serviceComponent = getPersistence().update(serviceComponent, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(serviceComponent);
-			}
-			else {
-				listener.onAfterUpdate(serviceComponent);
-			}
-		}
-
-		return serviceComponent;
+	public static com.liferay.portal.model.ServiceComponent updateImpl(
+		com.liferay.portal.model.ServiceComponent serviceComponent,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(serviceComponent, merge);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent findByPrimaryKey(
@@ -283,23 +210,7 @@ public class ServiceComponentUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ServiceComponentUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.ServiceComponent"));
-	private static Log _log = LogFactory.getLog(ServiceComponentUtil.class);
 	private static ServiceComponentUtil _util;
 	private ServiceComponentPersistence _persistence;
 }

@@ -26,14 +26,18 @@ import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -96,6 +100,22 @@ public class ImagePersistenceImpl extends BasePersistence
 	}
 
 	public Image remove(Image image) throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(image);
+		}
+
+		image = removeImpl(image);
+
+		if (listener != null) {
+			listener.onAfterRemove(image);
+		}
+
+		return image;
+	}
+
+	protected Image removeImpl(Image image) throws SystemException {
 		Session session = null;
 
 		try {
@@ -120,6 +140,34 @@ public class ImagePersistenceImpl extends BasePersistence
 	}
 
 	public Image update(com.liferay.portal.model.Image image, boolean merge)
+		throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = image.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(image);
+			}
+			else {
+				listener.onBeforeUpdate(image);
+			}
+		}
+
+		image = updateImpl(image, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(image);
+			}
+			else {
+				listener.onAfterUpdate(image);
+			}
+		}
+
+		return image;
+	}
+
+	public Image updateImpl(com.liferay.portal.model.Image image, boolean merge)
 		throws SystemException {
 		Session session = null;
 
@@ -589,5 +637,20 @@ public class ImagePersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Image"));
 	private static Log _log = LogFactory.getLog(ImagePersistenceImpl.class);
 }

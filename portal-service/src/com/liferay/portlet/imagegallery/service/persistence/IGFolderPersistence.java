@@ -47,6 +47,10 @@ public interface IGFolderPersistence {
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGFolder updateImpl(
+		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGFolder findByPrimaryKey(
 		long folderId)
 		throws com.liferay.portal.SystemException, 

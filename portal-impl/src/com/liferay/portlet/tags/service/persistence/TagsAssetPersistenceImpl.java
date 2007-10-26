@@ -25,12 +25,16 @@ package com.liferay.portlet.tags.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.tags.NoSuchAssetException;
 import com.liferay.portlet.tags.model.TagsAsset;
@@ -111,6 +115,23 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	}
 
 	public TagsAsset remove(TagsAsset tagsAsset) throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(tagsAsset);
+		}
+
+		tagsAsset = removeImpl(tagsAsset);
+
+		if (listener != null) {
+			listener.onAfterRemove(tagsAsset);
+		}
+
+		return tagsAsset;
+	}
+
+	protected TagsAsset removeImpl(TagsAsset tagsAsset)
+		throws SystemException {
 		try {
 			clearTagsEntries.clear(tagsAsset.getPrimaryKey());
 		}
@@ -145,6 +166,35 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	}
 
 	public TagsAsset update(
+		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean merge)
+		throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = tagsAsset.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(tagsAsset);
+			}
+			else {
+				listener.onBeforeUpdate(tagsAsset);
+			}
+		}
+
+		tagsAsset = updateImpl(tagsAsset, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(tagsAsset);
+			}
+			else {
+				listener.onAfterUpdate(tagsAsset);
+			}
+		}
+
+		return tagsAsset;
+	}
+
+	public TagsAsset updateImpl(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset, boolean merge)
 		throws SystemException {
 		FinderCache.clearCache("TagsAssets_TagsEntries");
@@ -1176,8 +1226,23 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
 	private static final String _SQL_GETTAGSENTRYS = "SELECT {TagsEntry.*} FROM TagsEntry INNER JOIN TagsAssets_TagsEntries ON (TagsAssets_TagsEntries.entryId = TagsEntry.entryId) WHERE (TagsAssets_TagsEntries.assetId = ?)";
 	private static final String _SQL_GETTAGSENTRYSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_TagsEntries WHERE assetId = ?";
 	private static final String _SQL_CONTAINSTAGSENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_TagsEntries WHERE assetId = ? AND entryId = ?";
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.tags.model.TagsAsset"));
 	private static Log _log = LogFactory.getLog(TagsAssetPersistenceImpl.class);
 }

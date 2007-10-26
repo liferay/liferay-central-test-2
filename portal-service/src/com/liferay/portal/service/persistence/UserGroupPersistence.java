@@ -47,6 +47,10 @@ public interface UserGroupPersistence {
 		com.liferay.portal.model.UserGroup userGroup, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserGroup updateImpl(
+		com.liferay.portal.model.UserGroup userGroup, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.UserGroup findByPrimaryKey(long userGroupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupException;

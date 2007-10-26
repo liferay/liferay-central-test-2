@@ -47,6 +47,10 @@ public interface BlogsCategoryPersistence {
 		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.blogs.model.BlogsCategory updateImpl(
+		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.blogs.model.BlogsCategory findByPrimaryKey(
 		long categoryId)
 		throws com.liferay.portal.SystemException, 

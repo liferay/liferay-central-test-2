@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="JournalStructureUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class JournalStructureUtil {
 		long id)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchStructureException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(id));
-		}
-
-		com.liferay.portlet.journal.model.JournalStructure journalStructure = getPersistence()
-																				  .remove(id);
-
-		if (listener != null) {
-			listener.onAfterRemove(journalStructure);
-		}
-
-		return journalStructure;
+		return getPersistence().remove(id);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure remove(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(journalStructure);
-		}
-
-		journalStructure = getPersistence().remove(journalStructure);
-
-		if (listener != null) {
-			listener.onAfterRemove(journalStructure);
-		}
-
-		return journalStructure;
+		return getPersistence().remove(journalStructure);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure update(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = journalStructure.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(journalStructure);
-			}
-			else {
-				listener.onBeforeUpdate(journalStructure);
-			}
-		}
-
-		journalStructure = getPersistence().update(journalStructure);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(journalStructure);
-			}
-			else {
-				listener.onAfterUpdate(journalStructure);
-			}
-		}
-
-		return journalStructure;
+		return getPersistence().update(journalStructure);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure update(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = journalStructure.isNew();
+		return getPersistence().update(journalStructure, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(journalStructure);
-			}
-			else {
-				listener.onBeforeUpdate(journalStructure);
-			}
-		}
-
-		journalStructure = getPersistence().update(journalStructure, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(journalStructure);
-			}
-			else {
-				listener.onAfterUpdate(journalStructure);
-			}
-		}
-
-		return journalStructure;
+	public static com.liferay.portlet.journal.model.JournalStructure updateImpl(
+		com.liferay.portlet.journal.model.JournalStructure journalStructure,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(journalStructure, merge);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure findByPrimaryKey(
@@ -375,23 +302,7 @@ public class JournalStructureUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = JournalStructureUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.journal.model.JournalStructure"));
-	private static Log _log = LogFactory.getLog(JournalStructureUtil.class);
 	private static JournalStructureUtil _util;
 	private JournalStructurePersistence _persistence;
 }

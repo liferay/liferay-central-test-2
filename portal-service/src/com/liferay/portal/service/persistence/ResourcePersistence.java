@@ -47,6 +47,10 @@ public interface ResourcePersistence {
 		com.liferay.portal.model.Resource resource, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Resource updateImpl(
+		com.liferay.portal.model.Resource resource, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Resource findByPrimaryKey(long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceException;

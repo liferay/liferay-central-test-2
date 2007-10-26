@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="SCFrameworkVersionUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class SCFrameworkVersionUtil {
 		long frameworkVersionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(frameworkVersionId));
-		}
-
-		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion =
-			getPersistence().remove(frameworkVersionId);
-
-		if (listener != null) {
-			listener.onAfterRemove(scFrameworkVersion);
-		}
-
-		return scFrameworkVersion;
+		return getPersistence().remove(frameworkVersionId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion remove(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(scFrameworkVersion);
-		}
-
-		scFrameworkVersion = getPersistence().remove(scFrameworkVersion);
-
-		if (listener != null) {
-			listener.onAfterRemove(scFrameworkVersion);
-		}
-
-		return scFrameworkVersion;
+		return getPersistence().remove(scFrameworkVersion);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = scFrameworkVersion.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(scFrameworkVersion);
-			}
-			else {
-				listener.onBeforeUpdate(scFrameworkVersion);
-			}
-		}
-
-		scFrameworkVersion = getPersistence().update(scFrameworkVersion);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(scFrameworkVersion);
-			}
-			else {
-				listener.onAfterUpdate(scFrameworkVersion);
-			}
-		}
-
-		return scFrameworkVersion;
+		return getPersistence().update(scFrameworkVersion);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = scFrameworkVersion.isNew();
+		return getPersistence().update(scFrameworkVersion, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(scFrameworkVersion);
-			}
-			else {
-				listener.onBeforeUpdate(scFrameworkVersion);
-			}
-		}
-
-		scFrameworkVersion = getPersistence().update(scFrameworkVersion, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(scFrameworkVersion);
-			}
-			else {
-				listener.onAfterUpdate(scFrameworkVersion);
-			}
-		}
-
-		return scFrameworkVersion;
+	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateImpl(
+		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(scFrameworkVersion, merge);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion findByPrimaryKey(
@@ -352,23 +279,7 @@ public class SCFrameworkVersionUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = SCFrameworkVersionUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion"));
-	private static Log _log = LogFactory.getLog(SCFrameworkVersionUtil.class);
 	private static SCFrameworkVersionUtil _util;
 	private SCFrameworkVersionPersistence _persistence;
 }

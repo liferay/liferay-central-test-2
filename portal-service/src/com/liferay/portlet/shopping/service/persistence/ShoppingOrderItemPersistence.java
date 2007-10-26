@@ -49,6 +49,10 @@ public interface ShoppingOrderItemPersistence {
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingOrderItem updateImpl(
+		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByPrimaryKey(
 		long orderItemId)
 		throws com.liferay.portal.SystemException, 

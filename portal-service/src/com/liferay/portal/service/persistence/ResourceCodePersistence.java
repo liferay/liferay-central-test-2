@@ -47,6 +47,10 @@ public interface ResourceCodePersistence {
 		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.ResourceCode updateImpl(
+		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.ResourceCode findByPrimaryKey(long codeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceCodeException;

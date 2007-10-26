@@ -47,6 +47,10 @@ public interface MBBanPersistence {
 		com.liferay.portlet.messageboards.model.MBBan mbBan, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBBan updateImpl(
+		com.liferay.portlet.messageboards.model.MBBan mbBan, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBBan findByPrimaryKey(
 		long banId)
 		throws com.liferay.portal.SystemException, 

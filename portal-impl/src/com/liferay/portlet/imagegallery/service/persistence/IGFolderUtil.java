@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="IGFolderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class IGFolderUtil {
 		long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.imagegallery.NoSuchFolderException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(folderId));
-		}
-
-		com.liferay.portlet.imagegallery.model.IGFolder igFolder = getPersistence()
-																	   .remove(folderId);
-
-		if (listener != null) {
-			listener.onAfterRemove(igFolder);
-		}
-
-		return igFolder;
+		return getPersistence().remove(folderId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder remove(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(igFolder);
-		}
-
-		igFolder = getPersistence().remove(igFolder);
-
-		if (listener != null) {
-			listener.onAfterRemove(igFolder);
-		}
-
-		return igFolder;
+		return getPersistence().remove(igFolder);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder update(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = igFolder.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(igFolder);
-			}
-			else {
-				listener.onBeforeUpdate(igFolder);
-			}
-		}
-
-		igFolder = getPersistence().update(igFolder);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(igFolder);
-			}
-			else {
-				listener.onAfterUpdate(igFolder);
-			}
-		}
-
-		return igFolder;
+		return getPersistence().update(igFolder);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder update(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = igFolder.isNew();
+		return getPersistence().update(igFolder, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(igFolder);
-			}
-			else {
-				listener.onBeforeUpdate(igFolder);
-			}
-		}
-
-		igFolder = getPersistence().update(igFolder, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(igFolder);
-			}
-			else {
-				listener.onAfterUpdate(igFolder);
-			}
-		}
-
-		return igFolder;
+	public static com.liferay.portlet.imagegallery.model.IGFolder updateImpl(
+		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(igFolder, merge);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder findByPrimaryKey(
@@ -303,23 +230,7 @@ public class IGFolderUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = IGFolderUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.imagegallery.model.IGFolder"));
-	private static Log _log = LogFactory.getLog(IGFolderUtil.class);
 	private static IGFolderUtil _util;
 	private IGFolderPersistence _persistence;
 }

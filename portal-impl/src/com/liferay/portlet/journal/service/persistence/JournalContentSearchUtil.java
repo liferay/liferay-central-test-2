@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="JournalContentSearchUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,97 +38,31 @@ public class JournalContentSearchUtil {
 		long contentSearchId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchContentSearchException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(contentSearchId));
-		}
-
-		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch =
-			getPersistence().remove(contentSearchId);
-
-		if (listener != null) {
-			listener.onAfterRemove(journalContentSearch);
-		}
-
-		return journalContentSearch;
+		return getPersistence().remove(contentSearchId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch remove(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(journalContentSearch);
-		}
-
-		journalContentSearch = getPersistence().remove(journalContentSearch);
-
-		if (listener != null) {
-			listener.onAfterRemove(journalContentSearch);
-		}
-
-		return journalContentSearch;
+		return getPersistence().remove(journalContentSearch);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch update(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = journalContentSearch.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(journalContentSearch);
-			}
-			else {
-				listener.onBeforeUpdate(journalContentSearch);
-			}
-		}
-
-		journalContentSearch = getPersistence().update(journalContentSearch);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(journalContentSearch);
-			}
-			else {
-				listener.onAfterUpdate(journalContentSearch);
-			}
-		}
-
-		return journalContentSearch;
+		return getPersistence().update(journalContentSearch);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch update(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = journalContentSearch.isNew();
+		return getPersistence().update(journalContentSearch, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(journalContentSearch);
-			}
-			else {
-				listener.onBeforeUpdate(journalContentSearch);
-			}
-		}
-
-		journalContentSearch = getPersistence().update(journalContentSearch,
-				merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(journalContentSearch);
-			}
-			else {
-				listener.onAfterUpdate(journalContentSearch);
-			}
-		}
-
-		return journalContentSearch;
+	public static com.liferay.portlet.journal.model.JournalContentSearch updateImpl(
+		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(journalContentSearch, merge);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch findByPrimaryKey(
@@ -524,23 +450,7 @@ public class JournalContentSearchUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = JournalContentSearchUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.journal.model.JournalContentSearch"));
-	private static Log _log = LogFactory.getLog(JournalContentSearchUtil.class);
 	private static JournalContentSearchUtil _util;
 	private JournalContentSearchPersistence _persistence;
 }

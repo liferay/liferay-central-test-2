@@ -49,6 +49,10 @@ public interface SCProductVersionPersistence {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductVersion updateImpl(
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion findByPrimaryKey(
 		long productVersionId)
 		throws com.liferay.portal.SystemException, 

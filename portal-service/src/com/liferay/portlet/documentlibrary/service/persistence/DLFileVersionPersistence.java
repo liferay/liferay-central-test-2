@@ -49,6 +49,10 @@ public interface DLFileVersionPersistence {
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion updateImpl(
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion findByPrimaryKey(
 		long fileVersionId)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 

@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MembershipRequestUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class MembershipRequestUtil {
 		long membershipRequestId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchMembershipRequestException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(membershipRequestId));
-		}
-
-		com.liferay.portal.model.MembershipRequest membershipRequest = getPersistence()
-																		   .remove(membershipRequestId);
-
-		if (listener != null) {
-			listener.onAfterRemove(membershipRequest);
-		}
-
-		return membershipRequest;
+		return getPersistence().remove(membershipRequestId);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest remove(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(membershipRequest);
-		}
-
-		membershipRequest = getPersistence().remove(membershipRequest);
-
-		if (listener != null) {
-			listener.onAfterRemove(membershipRequest);
-		}
-
-		return membershipRequest;
+		return getPersistence().remove(membershipRequest);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest update(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = membershipRequest.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(membershipRequest);
-			}
-			else {
-				listener.onBeforeUpdate(membershipRequest);
-			}
-		}
-
-		membershipRequest = getPersistence().update(membershipRequest);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(membershipRequest);
-			}
-			else {
-				listener.onAfterUpdate(membershipRequest);
-			}
-		}
-
-		return membershipRequest;
+		return getPersistence().update(membershipRequest);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest update(
 		com.liferay.portal.model.MembershipRequest membershipRequest,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = membershipRequest.isNew();
+		return getPersistence().update(membershipRequest, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(membershipRequest);
-			}
-			else {
-				listener.onBeforeUpdate(membershipRequest);
-			}
-		}
-
-		membershipRequest = getPersistence().update(membershipRequest, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(membershipRequest);
-			}
-			else {
-				listener.onAfterUpdate(membershipRequest);
-			}
-		}
-
-		return membershipRequest;
+	public static com.liferay.portal.model.MembershipRequest updateImpl(
+		com.liferay.portal.model.MembershipRequest membershipRequest,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(membershipRequest, merge);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest findByPrimaryKey(
@@ -352,23 +279,7 @@ public class MembershipRequestUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = MembershipRequestUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.MembershipRequest"));
-	private static Log _log = LogFactory.getLog(MembershipRequestUtil.class);
 	private static MembershipRequestUtil _util;
 	private MembershipRequestPersistence _persistence;
 }

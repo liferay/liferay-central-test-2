@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="RatingsStatsUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class RatingsStatsUtil {
 		long statsId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.ratings.NoSuchStatsException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(statsId));
-		}
-
-		com.liferay.portlet.ratings.model.RatingsStats ratingsStats = getPersistence()
-																		  .remove(statsId);
-
-		if (listener != null) {
-			listener.onAfterRemove(ratingsStats);
-		}
-
-		return ratingsStats;
+		return getPersistence().remove(statsId);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsStats remove(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(ratingsStats);
-		}
-
-		ratingsStats = getPersistence().remove(ratingsStats);
-
-		if (listener != null) {
-			listener.onAfterRemove(ratingsStats);
-		}
-
-		return ratingsStats;
+		return getPersistence().remove(ratingsStats);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsStats update(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = ratingsStats.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(ratingsStats);
-			}
-			else {
-				listener.onBeforeUpdate(ratingsStats);
-			}
-		}
-
-		ratingsStats = getPersistence().update(ratingsStats);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(ratingsStats);
-			}
-			else {
-				listener.onAfterUpdate(ratingsStats);
-			}
-		}
-
-		return ratingsStats;
+		return getPersistence().update(ratingsStats);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsStats update(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = ratingsStats.isNew();
+		return getPersistence().update(ratingsStats, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(ratingsStats);
-			}
-			else {
-				listener.onBeforeUpdate(ratingsStats);
-			}
-		}
-
-		ratingsStats = getPersistence().update(ratingsStats, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(ratingsStats);
-			}
-			else {
-				listener.onAfterUpdate(ratingsStats);
-			}
-		}
-
-		return ratingsStats;
+	public static com.liferay.portlet.ratings.model.RatingsStats updateImpl(
+		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(ratingsStats, merge);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsStats findByPrimaryKey(
@@ -227,23 +154,7 @@ public class RatingsStatsUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = RatingsStatsUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.ratings.model.RatingsStats"));
-	private static Log _log = LogFactory.getLog(RatingsStatsUtil.class);
 	private static RatingsStatsUtil _util;
 	private RatingsStatsPersistence _persistence;
 }

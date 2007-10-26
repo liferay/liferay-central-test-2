@@ -25,14 +25,17 @@ package com.liferay.portlet.journal.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -105,6 +108,23 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 	public JournalStructure remove(JournalStructure journalStructure)
 		throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(journalStructure);
+		}
+
+		journalStructure = removeImpl(journalStructure);
+
+		if (listener != null) {
+			listener.onAfterRemove(journalStructure);
+		}
+
+		return journalStructure;
+	}
+
+	protected JournalStructure removeImpl(JournalStructure journalStructure)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -130,6 +150,35 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	}
 
 	public JournalStructure update(
+		com.liferay.portlet.journal.model.JournalStructure journalStructure,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = journalStructure.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(journalStructure);
+			}
+			else {
+				listener.onBeforeUpdate(journalStructure);
+			}
+		}
+
+		journalStructure = updateImpl(journalStructure, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(journalStructure);
+			}
+			else {
+				listener.onAfterUpdate(journalStructure);
+			}
+		}
+
+		return journalStructure;
+	}
+
+	public JournalStructure updateImpl(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure,
 		boolean merge) throws SystemException {
 		if (Validator.isNull(journalStructure.getUuid())) {
@@ -1410,5 +1459,20 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.journal.model.JournalStructure"));
 	private static Log _log = LogFactory.getLog(JournalStructurePersistenceImpl.class);
 }

@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="UserGroupRoleUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class UserGroupRoleUtil {
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupRoleException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(userGroupRolePK));
-		}
-
-		com.liferay.portal.model.UserGroupRole userGroupRole = getPersistence()
-																   .remove(userGroupRolePK);
-
-		if (listener != null) {
-			listener.onAfterRemove(userGroupRole);
-		}
-
-		return userGroupRole;
+		return getPersistence().remove(userGroupRolePK);
 	}
 
 	public static com.liferay.portal.model.UserGroupRole remove(
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(userGroupRole);
-		}
-
-		userGroupRole = getPersistence().remove(userGroupRole);
-
-		if (listener != null) {
-			listener.onAfterRemove(userGroupRole);
-		}
-
-		return userGroupRole;
+		return getPersistence().remove(userGroupRole);
 	}
 
 	public static com.liferay.portal.model.UserGroupRole update(
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = userGroupRole.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(userGroupRole);
-			}
-			else {
-				listener.onBeforeUpdate(userGroupRole);
-			}
-		}
-
-		userGroupRole = getPersistence().update(userGroupRole);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(userGroupRole);
-			}
-			else {
-				listener.onAfterUpdate(userGroupRole);
-			}
-		}
-
-		return userGroupRole;
+		return getPersistence().update(userGroupRole);
 	}
 
 	public static com.liferay.portal.model.UserGroupRole update(
 		com.liferay.portal.model.UserGroupRole userGroupRole, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = userGroupRole.isNew();
+		return getPersistence().update(userGroupRole, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(userGroupRole);
-			}
-			else {
-				listener.onBeforeUpdate(userGroupRole);
-			}
-		}
-
-		userGroupRole = getPersistence().update(userGroupRole, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(userGroupRole);
-			}
-			else {
-				listener.onAfterUpdate(userGroupRole);
-			}
-		}
-
-		return userGroupRole;
+	public static com.liferay.portal.model.UserGroupRole updateImpl(
+		com.liferay.portal.model.UserGroupRole userGroupRole, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(userGroupRole, merge);
 	}
 
 	public static com.liferay.portal.model.UserGroupRole findByPrimaryKey(
@@ -455,23 +382,7 @@ public class UserGroupRoleUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = UserGroupRoleUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.UserGroupRole"));
-	private static Log _log = LogFactory.getLog(UserGroupRoleUtil.class);
 	private static UserGroupRoleUtil _util;
 	private UserGroupRolePersistence _persistence;
 }

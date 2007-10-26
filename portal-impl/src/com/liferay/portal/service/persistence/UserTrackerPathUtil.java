@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="UserTrackerPathUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class UserTrackerPathUtil {
 		long userTrackerPathId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserTrackerPathException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(userTrackerPathId));
-		}
-
-		com.liferay.portal.model.UserTrackerPath userTrackerPath = getPersistence()
-																	   .remove(userTrackerPathId);
-
-		if (listener != null) {
-			listener.onAfterRemove(userTrackerPath);
-		}
-
-		return userTrackerPath;
+		return getPersistence().remove(userTrackerPathId);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath remove(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(userTrackerPath);
-		}
-
-		userTrackerPath = getPersistence().remove(userTrackerPath);
-
-		if (listener != null) {
-			listener.onAfterRemove(userTrackerPath);
-		}
-
-		return userTrackerPath;
+		return getPersistence().remove(userTrackerPath);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath update(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = userTrackerPath.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(userTrackerPath);
-			}
-			else {
-				listener.onBeforeUpdate(userTrackerPath);
-			}
-		}
-
-		userTrackerPath = getPersistence().update(userTrackerPath);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(userTrackerPath);
-			}
-			else {
-				listener.onAfterUpdate(userTrackerPath);
-			}
-		}
-
-		return userTrackerPath;
+		return getPersistence().update(userTrackerPath);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath update(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = userTrackerPath.isNew();
+		return getPersistence().update(userTrackerPath, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(userTrackerPath);
-			}
-			else {
-				listener.onBeforeUpdate(userTrackerPath);
-			}
-		}
-
-		userTrackerPath = getPersistence().update(userTrackerPath, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(userTrackerPath);
-			}
-			else {
-				listener.onAfterUpdate(userTrackerPath);
-			}
-		}
-
-		return userTrackerPath;
+	public static com.liferay.portal.model.UserTrackerPath updateImpl(
+		com.liferay.portal.model.UserTrackerPath userTrackerPath, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(userTrackerPath, merge);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath findByPrimaryKey(
@@ -253,23 +180,7 @@ public class UserTrackerPathUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = UserTrackerPathUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.UserTrackerPath"));
-	private static Log _log = LogFactory.getLog(UserTrackerPathUtil.class);
 	private static UserTrackerPathUtil _util;
 	private UserTrackerPathPersistence _persistence;
 }

@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PasswordPolicyUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class PasswordPolicyUtil {
 		long passwordPolicyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordPolicyException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(passwordPolicyId));
-		}
-
-		com.liferay.portal.model.PasswordPolicy passwordPolicy = getPersistence()
-																	 .remove(passwordPolicyId);
-
-		if (listener != null) {
-			listener.onAfterRemove(passwordPolicy);
-		}
-
-		return passwordPolicy;
+		return getPersistence().remove(passwordPolicyId);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy remove(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(passwordPolicy);
-		}
-
-		passwordPolicy = getPersistence().remove(passwordPolicy);
-
-		if (listener != null) {
-			listener.onAfterRemove(passwordPolicy);
-		}
-
-		return passwordPolicy;
+		return getPersistence().remove(passwordPolicy);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy update(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = passwordPolicy.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(passwordPolicy);
-			}
-			else {
-				listener.onBeforeUpdate(passwordPolicy);
-			}
-		}
-
-		passwordPolicy = getPersistence().update(passwordPolicy);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(passwordPolicy);
-			}
-			else {
-				listener.onAfterUpdate(passwordPolicy);
-			}
-		}
-
-		return passwordPolicy;
+		return getPersistence().update(passwordPolicy);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy update(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = passwordPolicy.isNew();
+		return getPersistence().update(passwordPolicy, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(passwordPolicy);
-			}
-			else {
-				listener.onBeforeUpdate(passwordPolicy);
-			}
-		}
-
-		passwordPolicy = getPersistence().update(passwordPolicy, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(passwordPolicy);
-			}
-			else {
-				listener.onAfterUpdate(passwordPolicy);
-			}
-		}
-
-		return passwordPolicy;
+	public static com.liferay.portal.model.PasswordPolicy updateImpl(
+		com.liferay.portal.model.PasswordPolicy passwordPolicy, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(passwordPolicy, merge);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy findByPrimaryKey(
@@ -251,23 +178,7 @@ public class PasswordPolicyUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = PasswordPolicyUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.PasswordPolicy"));
-	private static Log _log = LogFactory.getLog(PasswordPolicyUtil.class);
 	private static PasswordPolicyUtil _util;
 	private PasswordPolicyPersistence _persistence;
 }

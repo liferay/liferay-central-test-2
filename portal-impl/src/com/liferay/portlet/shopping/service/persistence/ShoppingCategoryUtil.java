@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ShoppingCategoryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class ShoppingCategoryUtil {
 		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchCategoryException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(categoryId));
-		}
-
-		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory = getPersistence()
-																				   .remove(categoryId);
-
-		if (listener != null) {
-			listener.onAfterRemove(shoppingCategory);
-		}
-
-		return shoppingCategory;
+		return getPersistence().remove(categoryId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory remove(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(shoppingCategory);
-		}
-
-		shoppingCategory = getPersistence().remove(shoppingCategory);
-
-		if (listener != null) {
-			listener.onAfterRemove(shoppingCategory);
-		}
-
-		return shoppingCategory;
+		return getPersistence().remove(shoppingCategory);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory update(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = shoppingCategory.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingCategory);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingCategory);
-			}
-		}
-
-		shoppingCategory = getPersistence().update(shoppingCategory);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingCategory);
-			}
-			else {
-				listener.onAfterUpdate(shoppingCategory);
-			}
-		}
-
-		return shoppingCategory;
+		return getPersistence().update(shoppingCategory);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory update(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = shoppingCategory.isNew();
+		return getPersistence().update(shoppingCategory, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingCategory);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingCategory);
-			}
-		}
-
-		shoppingCategory = getPersistence().update(shoppingCategory, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingCategory);
-			}
-			else {
-				listener.onAfterUpdate(shoppingCategory);
-			}
-		}
-
-		return shoppingCategory;
+	public static com.liferay.portlet.shopping.model.ShoppingCategory updateImpl(
+		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(shoppingCategory, merge);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory findByPrimaryKey(
@@ -304,23 +231,7 @@ public class ShoppingCategoryUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ShoppingCategoryUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.shopping.model.ShoppingCategory"));
-	private static Log _log = LogFactory.getLog(ShoppingCategoryUtil.class);
 	private static ShoppingCategoryUtil _util;
 	private ShoppingCategoryPersistence _persistence;
 }

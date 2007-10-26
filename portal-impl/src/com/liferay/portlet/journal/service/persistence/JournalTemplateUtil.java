@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="JournalTemplateUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class JournalTemplateUtil {
 		long id)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchTemplateException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(id));
-		}
-
-		com.liferay.portlet.journal.model.JournalTemplate journalTemplate = getPersistence()
-																				.remove(id);
-
-		if (listener != null) {
-			listener.onAfterRemove(journalTemplate);
-		}
-
-		return journalTemplate;
+		return getPersistence().remove(id);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate remove(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(journalTemplate);
-		}
-
-		journalTemplate = getPersistence().remove(journalTemplate);
-
-		if (listener != null) {
-			listener.onAfterRemove(journalTemplate);
-		}
-
-		return journalTemplate;
+		return getPersistence().remove(journalTemplate);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate update(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = journalTemplate.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(journalTemplate);
-			}
-			else {
-				listener.onBeforeUpdate(journalTemplate);
-			}
-		}
-
-		journalTemplate = getPersistence().update(journalTemplate);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(journalTemplate);
-			}
-			else {
-				listener.onAfterUpdate(journalTemplate);
-			}
-		}
-
-		return journalTemplate;
+		return getPersistence().update(journalTemplate);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate update(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = journalTemplate.isNew();
+		return getPersistence().update(journalTemplate, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(journalTemplate);
-			}
-			else {
-				listener.onBeforeUpdate(journalTemplate);
-			}
-		}
-
-		journalTemplate = getPersistence().update(journalTemplate, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(journalTemplate);
-			}
-			else {
-				listener.onAfterUpdate(journalTemplate);
-			}
-		}
-
-		return journalTemplate;
+	public static com.liferay.portlet.journal.model.JournalTemplate updateImpl(
+		com.liferay.portlet.journal.model.JournalTemplate journalTemplate,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(journalTemplate, merge);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate findByPrimaryKey(
@@ -425,23 +352,7 @@ public class JournalTemplateUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = JournalTemplateUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.journal.model.JournalTemplate"));
-	private static Log _log = LogFactory.getLog(JournalTemplateUtil.class);
 	private static JournalTemplateUtil _util;
 	private JournalTemplatePersistence _persistence;
 }

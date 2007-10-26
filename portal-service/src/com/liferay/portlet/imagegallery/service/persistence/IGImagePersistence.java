@@ -47,6 +47,10 @@ public interface IGImagePersistence {
 		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage updateImpl(
+		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage findByPrimaryKey(
 		long imageId)
 		throws com.liferay.portal.SystemException, 

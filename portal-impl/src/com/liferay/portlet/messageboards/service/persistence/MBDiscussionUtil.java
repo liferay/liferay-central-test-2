@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MBDiscussionUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class MBDiscussionUtil {
 		long discussionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchDiscussionException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(discussionId));
-		}
-
-		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion = getPersistence()
-																				.remove(discussionId);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbDiscussion);
-		}
-
-		return mbDiscussion;
+		return getPersistence().remove(discussionId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion remove(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(mbDiscussion);
-		}
-
-		mbDiscussion = getPersistence().remove(mbDiscussion);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbDiscussion);
-		}
-
-		return mbDiscussion;
+		return getPersistence().remove(mbDiscussion);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion update(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbDiscussion.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbDiscussion);
-			}
-			else {
-				listener.onBeforeUpdate(mbDiscussion);
-			}
-		}
-
-		mbDiscussion = getPersistence().update(mbDiscussion);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbDiscussion);
-			}
-			else {
-				listener.onAfterUpdate(mbDiscussion);
-			}
-		}
-
-		return mbDiscussion;
+		return getPersistence().update(mbDiscussion);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion update(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbDiscussion.isNew();
+		return getPersistence().update(mbDiscussion, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbDiscussion);
-			}
-			else {
-				listener.onBeforeUpdate(mbDiscussion);
-			}
-		}
-
-		mbDiscussion = getPersistence().update(mbDiscussion, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbDiscussion);
-			}
-			else {
-				listener.onAfterUpdate(mbDiscussion);
-			}
-		}
-
-		return mbDiscussion;
+	public static com.liferay.portlet.messageboards.model.MBDiscussion updateImpl(
+		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(mbDiscussion, merge);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion findByPrimaryKey(
@@ -227,23 +154,7 @@ public class MBDiscussionUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = MBDiscussionUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.messageboards.model.MBDiscussion"));
-	private static Log _log = LogFactory.getLog(MBDiscussionUtil.class);
 	private static MBDiscussionUtil _util;
 	private MBDiscussionPersistence _persistence;
 }

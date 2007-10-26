@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="RoleUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class RoleUtil {
 	public static com.liferay.portal.model.Role remove(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(roleId));
-		}
-
-		com.liferay.portal.model.Role role = getPersistence().remove(roleId);
-
-		if (listener != null) {
-			listener.onAfterRemove(role);
-		}
-
-		return role;
+		return getPersistence().remove(roleId);
 	}
 
 	public static com.liferay.portal.model.Role remove(
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(role);
-		}
-
-		role = getPersistence().remove(role);
-
-		if (listener != null) {
-			listener.onAfterRemove(role);
-		}
-
-		return role;
+		return getPersistence().remove(role);
 	}
 
 	public static com.liferay.portal.model.Role update(
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = role.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(role);
-			}
-			else {
-				listener.onBeforeUpdate(role);
-			}
-		}
-
-		role = getPersistence().update(role);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(role);
-			}
-			else {
-				listener.onAfterUpdate(role);
-			}
-		}
-
-		return role;
+		return getPersistence().update(role);
 	}
 
 	public static com.liferay.portal.model.Role update(
 		com.liferay.portal.model.Role role, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = role.isNew();
+		return getPersistence().update(role, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(role);
-			}
-			else {
-				listener.onBeforeUpdate(role);
-			}
-		}
-
-		role = getPersistence().update(role, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(role);
-			}
-			else {
-				listener.onAfterUpdate(role);
-			}
-		}
-
-		return role;
+	public static com.liferay.portal.model.Role updateImpl(
+		com.liferay.portal.model.Role role, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(role, merge);
 	}
 
 	public static com.liferay.portal.model.Role findByPrimaryKey(long roleId)
@@ -628,23 +556,7 @@ public class RoleUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = RoleUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Role"));
-	private static Log _log = LogFactory.getLog(RoleUtil.class);
 	private static RoleUtil _util;
 	private RolePersistence _persistence;
 }

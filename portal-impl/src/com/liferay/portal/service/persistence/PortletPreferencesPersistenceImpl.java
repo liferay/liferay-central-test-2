@@ -26,14 +26,18 @@ import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -100,6 +104,23 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public PortletPreferences remove(PortletPreferences portletPreferences)
 		throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(portletPreferences);
+		}
+
+		portletPreferences = removeImpl(portletPreferences);
+
+		if (listener != null) {
+			listener.onAfterRemove(portletPreferences);
+		}
+
+		return portletPreferences;
+	}
+
+	protected PortletPreferences removeImpl(
+		PortletPreferences portletPreferences) throws SystemException {
 		Session session = null;
 
 		try {
@@ -125,6 +146,35 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	}
 
 	public PortletPreferences update(
+		com.liferay.portal.model.PortletPreferences portletPreferences,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = portletPreferences.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(portletPreferences);
+			}
+			else {
+				listener.onBeforeUpdate(portletPreferences);
+			}
+		}
+
+		portletPreferences = updateImpl(portletPreferences, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(portletPreferences);
+			}
+			else {
+				listener.onAfterUpdate(portletPreferences);
+			}
+		}
+
+		return portletPreferences;
+	}
+
+	public PortletPreferences updateImpl(
 		com.liferay.portal.model.PortletPreferences portletPreferences,
 		boolean merge) throws SystemException {
 		Session session = null;
@@ -1086,5 +1136,20 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.PortletPreferences"));
 	private static Log _log = LogFactory.getLog(PortletPreferencesPersistenceImpl.class);
 }

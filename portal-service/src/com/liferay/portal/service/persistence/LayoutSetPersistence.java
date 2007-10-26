@@ -47,6 +47,10 @@ public interface LayoutSetPersistence {
 		com.liferay.portal.model.LayoutSet layoutSet, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.LayoutSet updateImpl(
+		com.liferay.portal.model.LayoutSet layoutSet, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.LayoutSet findByPrimaryKey(long layoutSetId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutSetException;

@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ShoppingCouponUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class ShoppingCouponUtil {
 		long couponId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchCouponException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(couponId));
-		}
-
-		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon = getPersistence()
-																			   .remove(couponId);
-
-		if (listener != null) {
-			listener.onAfterRemove(shoppingCoupon);
-		}
-
-		return shoppingCoupon;
+		return getPersistence().remove(couponId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon remove(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(shoppingCoupon);
-		}
-
-		shoppingCoupon = getPersistence().remove(shoppingCoupon);
-
-		if (listener != null) {
-			listener.onAfterRemove(shoppingCoupon);
-		}
-
-		return shoppingCoupon;
+		return getPersistence().remove(shoppingCoupon);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon update(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = shoppingCoupon.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingCoupon);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingCoupon);
-			}
-		}
-
-		shoppingCoupon = getPersistence().update(shoppingCoupon);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingCoupon);
-			}
-			else {
-				listener.onAfterUpdate(shoppingCoupon);
-			}
-		}
-
-		return shoppingCoupon;
+		return getPersistence().update(shoppingCoupon);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon update(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = shoppingCoupon.isNew();
+		return getPersistence().update(shoppingCoupon, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingCoupon);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingCoupon);
-			}
-		}
-
-		shoppingCoupon = getPersistence().update(shoppingCoupon, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingCoupon);
-			}
-			else {
-				listener.onAfterUpdate(shoppingCoupon);
-			}
-		}
-
-		return shoppingCoupon;
+	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateImpl(
+		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(shoppingCoupon, merge);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByPrimaryKey(
@@ -274,23 +201,7 @@ public class ShoppingCouponUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ShoppingCouponUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.shopping.model.ShoppingCoupon"));
-	private static Log _log = LogFactory.getLog(ShoppingCouponUtil.class);
 	private static ShoppingCouponUtil _util;
 	private ShoppingCouponPersistence _persistence;
 }

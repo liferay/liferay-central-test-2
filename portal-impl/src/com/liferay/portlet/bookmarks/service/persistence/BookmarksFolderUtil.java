@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="BookmarksFolderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class BookmarksFolderUtil {
 		long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.bookmarks.NoSuchFolderException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(folderId));
-		}
-
-		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder = getPersistence()
-																				  .remove(folderId);
-
-		if (listener != null) {
-			listener.onAfterRemove(bookmarksFolder);
-		}
-
-		return bookmarksFolder;
+		return getPersistence().remove(folderId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder remove(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(bookmarksFolder);
-		}
-
-		bookmarksFolder = getPersistence().remove(bookmarksFolder);
-
-		if (listener != null) {
-			listener.onAfterRemove(bookmarksFolder);
-		}
-
-		return bookmarksFolder;
+		return getPersistence().remove(bookmarksFolder);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder update(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = bookmarksFolder.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(bookmarksFolder);
-			}
-			else {
-				listener.onBeforeUpdate(bookmarksFolder);
-			}
-		}
-
-		bookmarksFolder = getPersistence().update(bookmarksFolder);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(bookmarksFolder);
-			}
-			else {
-				listener.onAfterUpdate(bookmarksFolder);
-			}
-		}
-
-		return bookmarksFolder;
+		return getPersistence().update(bookmarksFolder);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder update(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = bookmarksFolder.isNew();
+		return getPersistence().update(bookmarksFolder, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(bookmarksFolder);
-			}
-			else {
-				listener.onBeforeUpdate(bookmarksFolder);
-			}
-		}
-
-		bookmarksFolder = getPersistence().update(bookmarksFolder, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(bookmarksFolder);
-			}
-			else {
-				listener.onAfterUpdate(bookmarksFolder);
-			}
-		}
-
-		return bookmarksFolder;
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateImpl(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(bookmarksFolder, merge);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder findByPrimaryKey(
@@ -303,23 +230,7 @@ public class BookmarksFolderUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = BookmarksFolderUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.bookmarks.model.BookmarksFolder"));
-	private static Log _log = LogFactory.getLog(BookmarksFolderUtil.class);
 	private static BookmarksFolderUtil _util;
 	private BookmarksFolderPersistence _persistence;
 }

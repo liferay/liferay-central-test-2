@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MBThreadUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class MBThreadUtil {
 		long threadId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchThreadException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(threadId));
-		}
-
-		com.liferay.portlet.messageboards.model.MBThread mbThread = getPersistence()
-																		.remove(threadId);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbThread);
-		}
-
-		return mbThread;
+		return getPersistence().remove(threadId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread remove(
 		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(mbThread);
-		}
-
-		mbThread = getPersistence().remove(mbThread);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbThread);
-		}
-
-		return mbThread;
+		return getPersistence().remove(mbThread);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread update(
 		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbThread.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbThread);
-			}
-			else {
-				listener.onBeforeUpdate(mbThread);
-			}
-		}
-
-		mbThread = getPersistence().update(mbThread);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbThread);
-			}
-			else {
-				listener.onAfterUpdate(mbThread);
-			}
-		}
-
-		return mbThread;
+		return getPersistence().update(mbThread);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread update(
 		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbThread.isNew();
+		return getPersistence().update(mbThread, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbThread);
-			}
-			else {
-				listener.onBeforeUpdate(mbThread);
-			}
-		}
-
-		mbThread = getPersistence().update(mbThread, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbThread);
-			}
-			else {
-				listener.onAfterUpdate(mbThread);
-			}
-		}
-
-		return mbThread;
+	public static com.liferay.portlet.messageboards.model.MBThread updateImpl(
+		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(mbThread, merge);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByPrimaryKey(
@@ -252,23 +179,7 @@ public class MBThreadUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = MBThreadUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.messageboards.model.MBThread"));
-	private static Log _log = LogFactory.getLog(MBThreadUtil.class);
 	private static MBThreadUtil _util;
 	private MBThreadPersistence _persistence;
 }

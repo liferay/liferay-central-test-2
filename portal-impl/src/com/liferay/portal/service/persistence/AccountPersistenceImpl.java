@@ -26,13 +26,17 @@ import com.liferay.portal.NoSuchAccountException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.AccountImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -96,6 +100,22 @@ public class AccountPersistenceImpl extends BasePersistence
 	}
 
 	public Account remove(Account account) throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(account);
+		}
+
+		account = removeImpl(account);
+
+		if (listener != null) {
+			listener.onAfterRemove(account);
+		}
+
+		return account;
+	}
+
+	protected Account removeImpl(Account account) throws SystemException {
 		Session session = null;
 
 		try {
@@ -120,6 +140,34 @@ public class AccountPersistenceImpl extends BasePersistence
 	}
 
 	public Account update(com.liferay.portal.model.Account account,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = account.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(account);
+			}
+			else {
+				listener.onBeforeUpdate(account);
+			}
+		}
+
+		account = updateImpl(account, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(account);
+			}
+			else {
+				listener.onAfterUpdate(account);
+			}
+		}
+
+		return account;
+	}
+
+	public Account updateImpl(com.liferay.portal.model.Account account,
 		boolean merge) throws SystemException {
 		Session session = null;
 
@@ -339,5 +387,20 @@ public class AccountPersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Account"));
 	private static Log _log = LogFactory.getLog(AccountPersistenceImpl.class);
 }

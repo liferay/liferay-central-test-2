@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ShoppingOrderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class ShoppingOrderUtil {
 		long orderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchOrderException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(orderId));
-		}
-
-		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder = getPersistence()
-																			 .remove(orderId);
-
-		if (listener != null) {
-			listener.onAfterRemove(shoppingOrder);
-		}
-
-		return shoppingOrder;
+		return getPersistence().remove(orderId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder remove(
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(shoppingOrder);
-		}
-
-		shoppingOrder = getPersistence().remove(shoppingOrder);
-
-		if (listener != null) {
-			listener.onAfterRemove(shoppingOrder);
-		}
-
-		return shoppingOrder;
+		return getPersistence().remove(shoppingOrder);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder update(
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = shoppingOrder.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingOrder);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingOrder);
-			}
-		}
-
-		shoppingOrder = getPersistence().update(shoppingOrder);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingOrder);
-			}
-			else {
-				listener.onAfterUpdate(shoppingOrder);
-			}
-		}
-
-		return shoppingOrder;
+		return getPersistence().update(shoppingOrder);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder update(
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = shoppingOrder.isNew();
+		return getPersistence().update(shoppingOrder, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingOrder);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingOrder);
-			}
-		}
-
-		shoppingOrder = getPersistence().update(shoppingOrder, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingOrder);
-			}
-			else {
-				listener.onAfterUpdate(shoppingOrder);
-			}
-		}
-
-		return shoppingOrder;
+	public static com.liferay.portlet.shopping.model.ShoppingOrder updateImpl(
+		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(shoppingOrder, merge);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder findByPrimaryKey(
@@ -287,23 +214,7 @@ public class ShoppingOrderUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ShoppingOrderUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.shopping.model.ShoppingOrder"));
-	private static Log _log = LogFactory.getLog(ShoppingOrderUtil.class);
 	private static ShoppingOrderUtil _util;
 	private ShoppingOrderPersistence _persistence;
 }

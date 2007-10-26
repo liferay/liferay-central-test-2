@@ -26,14 +26,18 @@ import com.liferay.portal.NoSuchOrgLaborException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -97,6 +101,22 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 	}
 
 	public OrgLabor remove(OrgLabor orgLabor) throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(orgLabor);
+		}
+
+		orgLabor = removeImpl(orgLabor);
+
+		if (listener != null) {
+			listener.onAfterRemove(orgLabor);
+		}
+
+		return orgLabor;
+	}
+
+	protected OrgLabor removeImpl(OrgLabor orgLabor) throws SystemException {
 		Session session = null;
 
 		try {
@@ -121,6 +141,34 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 	}
 
 	public OrgLabor update(com.liferay.portal.model.OrgLabor orgLabor,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = orgLabor.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(orgLabor);
+			}
+			else {
+				listener.onBeforeUpdate(orgLabor);
+			}
+		}
+
+		orgLabor = updateImpl(orgLabor, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(orgLabor);
+			}
+			else {
+				listener.onAfterUpdate(orgLabor);
+			}
+		}
+
+		return orgLabor;
+	}
+
+	public OrgLabor updateImpl(com.liferay.portal.model.OrgLabor orgLabor,
 		boolean merge) throws SystemException {
 		Session session = null;
 
@@ -600,5 +648,20 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.OrgLabor"));
 	private static Log _log = LogFactory.getLog(OrgLaborPersistenceImpl.class);
 }

@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="SCProductEntryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class SCProductEntryUtil {
 		long productEntryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(productEntryId));
-		}
-
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry = getPersistence()
-																					  .remove(productEntryId);
-
-		if (listener != null) {
-			listener.onAfterRemove(scProductEntry);
-		}
-
-		return scProductEntry;
+		return getPersistence().remove(productEntryId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry remove(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(scProductEntry);
-		}
-
-		scProductEntry = getPersistence().remove(scProductEntry);
-
-		if (listener != null) {
-			listener.onAfterRemove(scProductEntry);
-		}
-
-		return scProductEntry;
+		return getPersistence().remove(scProductEntry);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry update(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = scProductEntry.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(scProductEntry);
-			}
-			else {
-				listener.onBeforeUpdate(scProductEntry);
-			}
-		}
-
-		scProductEntry = getPersistence().update(scProductEntry);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(scProductEntry);
-			}
-			else {
-				listener.onAfterUpdate(scProductEntry);
-			}
-		}
-
-		return scProductEntry;
+		return getPersistence().update(scProductEntry);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry update(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = scProductEntry.isNew();
+		return getPersistence().update(scProductEntry, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(scProductEntry);
-			}
-			else {
-				listener.onBeforeUpdate(scProductEntry);
-			}
-		}
-
-		scProductEntry = getPersistence().update(scProductEntry, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(scProductEntry);
-			}
-			else {
-				listener.onAfterUpdate(scProductEntry);
-			}
-		}
-
-		return scProductEntry;
+	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry updateImpl(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(scProductEntry, merge);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry findByPrimaryKey(
@@ -464,23 +391,7 @@ public class SCProductEntryUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = SCProductEntryUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCProductEntry"));
-	private static Log _log = LogFactory.getLog(SCProductEntryUtil.class);
 	private static SCProductEntryUtil _util;
 	private SCProductEntryPersistence _persistence;
 }

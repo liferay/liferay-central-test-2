@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="CompanyUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class CompanyUtil {
 	public static com.liferay.portal.model.Company remove(long companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchCompanyException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(companyId));
-		}
-
-		com.liferay.portal.model.Company company = getPersistence().remove(companyId);
-
-		if (listener != null) {
-			listener.onAfterRemove(company);
-		}
-
-		return company;
+		return getPersistence().remove(companyId);
 	}
 
 	public static com.liferay.portal.model.Company remove(
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(company);
-		}
-
-		company = getPersistence().remove(company);
-
-		if (listener != null) {
-			listener.onAfterRemove(company);
-		}
-
-		return company;
+		return getPersistence().remove(company);
 	}
 
 	public static com.liferay.portal.model.Company update(
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = company.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(company);
-			}
-			else {
-				listener.onBeforeUpdate(company);
-			}
-		}
-
-		company = getPersistence().update(company);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(company);
-			}
-			else {
-				listener.onAfterUpdate(company);
-			}
-		}
-
-		return company;
+		return getPersistence().update(company);
 	}
 
 	public static com.liferay.portal.model.Company update(
 		com.liferay.portal.model.Company company, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = company.isNew();
+		return getPersistence().update(company, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(company);
-			}
-			else {
-				listener.onBeforeUpdate(company);
-			}
-		}
-
-		company = getPersistence().update(company, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(company);
-			}
-			else {
-				listener.onAfterUpdate(company);
-			}
-		}
-
-		return company;
+	public static com.liferay.portal.model.Company updateImpl(
+		com.liferay.portal.model.Company company, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(company, merge);
 	}
 
 	public static com.liferay.portal.model.Company findByPrimaryKey(
@@ -268,23 +196,7 @@ public class CompanyUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = CompanyUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Company"));
-	private static Log _log = LogFactory.getLog(CompanyUtil.class);
 	private static CompanyUtil _util;
 	private CompanyPersistence _persistence;
 }

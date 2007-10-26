@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ShoppingItemPriceUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class ShoppingItemPriceUtil {
 		long itemPriceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemPriceException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(itemPriceId));
-		}
-
-		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice = getPersistence()
-																					 .remove(itemPriceId);
-
-		if (listener != null) {
-			listener.onAfterRemove(shoppingItemPrice);
-		}
-
-		return shoppingItemPrice;
+		return getPersistence().remove(itemPriceId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice remove(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(shoppingItemPrice);
-		}
-
-		shoppingItemPrice = getPersistence().remove(shoppingItemPrice);
-
-		if (listener != null) {
-			listener.onAfterRemove(shoppingItemPrice);
-		}
-
-		return shoppingItemPrice;
+		return getPersistence().remove(shoppingItemPrice);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice update(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = shoppingItemPrice.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingItemPrice);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingItemPrice);
-			}
-		}
-
-		shoppingItemPrice = getPersistence().update(shoppingItemPrice);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingItemPrice);
-			}
-			else {
-				listener.onAfterUpdate(shoppingItemPrice);
-			}
-		}
-
-		return shoppingItemPrice;
+		return getPersistence().update(shoppingItemPrice);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice update(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = shoppingItemPrice.isNew();
+		return getPersistence().update(shoppingItemPrice, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingItemPrice);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingItemPrice);
-			}
-		}
-
-		shoppingItemPrice = getPersistence().update(shoppingItemPrice, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingItemPrice);
-			}
-			else {
-				listener.onAfterUpdate(shoppingItemPrice);
-			}
-		}
-
-		return shoppingItemPrice;
+	public static com.liferay.portlet.shopping.model.ShoppingItemPrice updateImpl(
+		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(shoppingItemPrice, merge);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice findByPrimaryKey(
@@ -252,23 +179,7 @@ public class ShoppingItemPriceUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ShoppingItemPriceUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.shopping.model.ShoppingItemPrice"));
-	private static Log _log = LogFactory.getLog(ShoppingItemPriceUtil.class);
 	private static ShoppingItemPriceUtil _util;
 	private ShoppingItemPricePersistence _persistence;
 }

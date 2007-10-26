@@ -47,6 +47,10 @@ public interface PollsVotePersistence {
 		com.liferay.portlet.polls.model.PollsVote pollsVote, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.polls.model.PollsVote updateImpl(
+		com.liferay.portlet.polls.model.PollsVote pollsVote, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.polls.model.PollsVote findByPrimaryKey(
 		long voteId)
 		throws com.liferay.portal.SystemException, 

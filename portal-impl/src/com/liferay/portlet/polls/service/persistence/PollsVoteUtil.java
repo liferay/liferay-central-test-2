@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.polls.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PollsVoteUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,96 +36,31 @@ public class PollsVoteUtil {
 	public static com.liferay.portlet.polls.model.PollsVote remove(long voteId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.polls.NoSuchVoteException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(voteId));
-		}
-
-		com.liferay.portlet.polls.model.PollsVote pollsVote = getPersistence()
-																  .remove(voteId);
-
-		if (listener != null) {
-			listener.onAfterRemove(pollsVote);
-		}
-
-		return pollsVote;
+		return getPersistence().remove(voteId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote remove(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(pollsVote);
-		}
-
-		pollsVote = getPersistence().remove(pollsVote);
-
-		if (listener != null) {
-			listener.onAfterRemove(pollsVote);
-		}
-
-		return pollsVote;
+		return getPersistence().remove(pollsVote);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote update(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = pollsVote.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(pollsVote);
-			}
-			else {
-				listener.onBeforeUpdate(pollsVote);
-			}
-		}
-
-		pollsVote = getPersistence().update(pollsVote);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(pollsVote);
-			}
-			else {
-				listener.onAfterUpdate(pollsVote);
-			}
-		}
-
-		return pollsVote;
+		return getPersistence().update(pollsVote);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote update(
 		com.liferay.portlet.polls.model.PollsVote pollsVote, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = pollsVote.isNew();
+		return getPersistence().update(pollsVote, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(pollsVote);
-			}
-			else {
-				listener.onBeforeUpdate(pollsVote);
-			}
-		}
-
-		pollsVote = getPersistence().update(pollsVote, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(pollsVote);
-			}
-			else {
-				listener.onAfterUpdate(pollsVote);
-			}
-		}
-
-		return pollsVote;
+	public static com.liferay.portlet.polls.model.PollsVote updateImpl(
+		com.liferay.portlet.polls.model.PollsVote pollsVote, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(pollsVote, merge);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote findByPrimaryKey(
@@ -321,23 +248,7 @@ public class PollsVoteUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = PollsVoteUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.polls.model.PollsVote"));
-	private static Log _log = LogFactory.getLog(PollsVoteUtil.class);
 	private static PollsVoteUtil _util;
 	private PollsVotePersistence _persistence;
 }

@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="JournalArticleResourceUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,97 +38,31 @@ public class JournalArticleResourceUtil {
 		long resourcePrimKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchArticleResourceException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(resourcePrimKey));
-		}
-
-		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource =
-			getPersistence().remove(resourcePrimKey);
-
-		if (listener != null) {
-			listener.onAfterRemove(journalArticleResource);
-		}
-
-		return journalArticleResource;
+		return getPersistence().remove(resourcePrimKey);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource remove(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(journalArticleResource);
-		}
-
-		journalArticleResource = getPersistence().remove(journalArticleResource);
-
-		if (listener != null) {
-			listener.onAfterRemove(journalArticleResource);
-		}
-
-		return journalArticleResource;
+		return getPersistence().remove(journalArticleResource);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource update(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = journalArticleResource.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(journalArticleResource);
-			}
-			else {
-				listener.onBeforeUpdate(journalArticleResource);
-			}
-		}
-
-		journalArticleResource = getPersistence().update(journalArticleResource);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(journalArticleResource);
-			}
-			else {
-				listener.onAfterUpdate(journalArticleResource);
-			}
-		}
-
-		return journalArticleResource;
+		return getPersistence().update(journalArticleResource);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource update(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = journalArticleResource.isNew();
+		return getPersistence().update(journalArticleResource, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(journalArticleResource);
-			}
-			else {
-				listener.onBeforeUpdate(journalArticleResource);
-			}
-		}
-
-		journalArticleResource = getPersistence().update(journalArticleResource,
-				merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(journalArticleResource);
-			}
-			else {
-				listener.onAfterUpdate(journalArticleResource);
-			}
-		}
-
-		return journalArticleResource;
+	public static com.liferay.portlet.journal.model.JournalArticleResource updateImpl(
+		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(journalArticleResource, merge);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource findByPrimaryKey(
@@ -277,23 +203,7 @@ public class JournalArticleResourceUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = JournalArticleResourceUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.journal.model.JournalArticleResource"));
-	private static Log _log = LogFactory.getLog(JournalArticleResourceUtil.class);
 	private static JournalArticleResourceUtil _util;
 	private JournalArticleResourcePersistence _persistence;
 }

@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ReleaseUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class ReleaseUtil {
 	public static com.liferay.portal.model.Release remove(long releaseId)
 		throws com.liferay.portal.NoSuchReleaseException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(releaseId));
-		}
-
-		com.liferay.portal.model.Release release = getPersistence().remove(releaseId);
-
-		if (listener != null) {
-			listener.onAfterRemove(release);
-		}
-
-		return release;
+		return getPersistence().remove(releaseId);
 	}
 
 	public static com.liferay.portal.model.Release remove(
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(release);
-		}
-
-		release = getPersistence().remove(release);
-
-		if (listener != null) {
-			listener.onAfterRemove(release);
-		}
-
-		return release;
+		return getPersistence().remove(release);
 	}
 
 	public static com.liferay.portal.model.Release update(
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = release.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(release);
-			}
-			else {
-				listener.onBeforeUpdate(release);
-			}
-		}
-
-		release = getPersistence().update(release);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(release);
-			}
-			else {
-				listener.onAfterUpdate(release);
-			}
-		}
-
-		return release;
+		return getPersistence().update(release);
 	}
 
 	public static com.liferay.portal.model.Release update(
 		com.liferay.portal.model.Release release, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = release.isNew();
+		return getPersistence().update(release, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(release);
-			}
-			else {
-				listener.onBeforeUpdate(release);
-			}
-		}
-
-		release = getPersistence().update(release, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(release);
-			}
-			else {
-				listener.onAfterUpdate(release);
-			}
-		}
-
-		return release;
+	public static com.liferay.portal.model.Release updateImpl(
+		com.liferay.portal.model.Release release, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(release, merge);
 	}
 
 	public static com.liferay.portal.model.Release findByPrimaryKey(
@@ -200,23 +128,7 @@ public class ReleaseUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ReleaseUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Release"));
-	private static Log _log = LogFactory.getLog(ReleaseUtil.class);
 	private static ReleaseUtil _util;
 	private ReleasePersistence _persistence;
 }

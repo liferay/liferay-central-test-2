@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="RegionUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class RegionUtil {
 	public static com.liferay.portal.model.Region remove(long regionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRegionException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(regionId));
-		}
-
-		com.liferay.portal.model.Region region = getPersistence().remove(regionId);
-
-		if (listener != null) {
-			listener.onAfterRemove(region);
-		}
-
-		return region;
+		return getPersistence().remove(regionId);
 	}
 
 	public static com.liferay.portal.model.Region remove(
 		com.liferay.portal.model.Region region)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(region);
-		}
-
-		region = getPersistence().remove(region);
-
-		if (listener != null) {
-			listener.onAfterRemove(region);
-		}
-
-		return region;
+		return getPersistence().remove(region);
 	}
 
 	public static com.liferay.portal.model.Region update(
 		com.liferay.portal.model.Region region)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = region.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(region);
-			}
-			else {
-				listener.onBeforeUpdate(region);
-			}
-		}
-
-		region = getPersistence().update(region);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(region);
-			}
-			else {
-				listener.onAfterUpdate(region);
-			}
-		}
-
-		return region;
+		return getPersistence().update(region);
 	}
 
 	public static com.liferay.portal.model.Region update(
 		com.liferay.portal.model.Region region, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = region.isNew();
+		return getPersistence().update(region, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(region);
-			}
-			else {
-				listener.onBeforeUpdate(region);
-			}
-		}
-
-		region = getPersistence().update(region, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(region);
-			}
-			else {
-				listener.onAfterUpdate(region);
-			}
-		}
-
-		return region;
+	public static com.liferay.portal.model.Region updateImpl(
+		com.liferay.portal.model.Region region, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(region, merge);
 	}
 
 	public static com.liferay.portal.model.Region findByPrimaryKey(
@@ -348,23 +276,7 @@ public class RegionUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = RegionUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Region"));
-	private static Log _log = LogFactory.getLog(RegionUtil.class);
 	private static RegionUtil _util;
 	private RegionPersistence _persistence;
 }

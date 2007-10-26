@@ -25,12 +25,16 @@ package com.liferay.portlet.bookmarks.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -100,6 +104,23 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 	public BookmarksFolder remove(BookmarksFolder bookmarksFolder)
 		throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(bookmarksFolder);
+		}
+
+		bookmarksFolder = removeImpl(bookmarksFolder);
+
+		if (listener != null) {
+			listener.onAfterRemove(bookmarksFolder);
+		}
+
+		return bookmarksFolder;
+	}
+
+	protected BookmarksFolder removeImpl(BookmarksFolder bookmarksFolder)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -125,6 +146,35 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	}
 
 	public BookmarksFolder update(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = bookmarksFolder.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(bookmarksFolder);
+			}
+			else {
+				listener.onBeforeUpdate(bookmarksFolder);
+			}
+		}
+
+		bookmarksFolder = updateImpl(bookmarksFolder, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(bookmarksFolder);
+			}
+			else {
+				listener.onAfterUpdate(bookmarksFolder);
+			}
+		}
+
+		return bookmarksFolder;
+	}
+
+	public BookmarksFolder updateImpl(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
 		boolean merge) throws SystemException {
 		Session session = null;
@@ -894,5 +944,20 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.bookmarks.model.BookmarksFolder"));
 	private static Log _log = LogFactory.getLog(BookmarksFolderPersistenceImpl.class);
 }

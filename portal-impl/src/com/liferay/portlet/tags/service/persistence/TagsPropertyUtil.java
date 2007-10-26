@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.tags.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="TagsPropertyUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class TagsPropertyUtil {
 		long propertyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.tags.NoSuchPropertyException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(propertyId));
-		}
-
-		com.liferay.portlet.tags.model.TagsProperty tagsProperty = getPersistence()
-																	   .remove(propertyId);
-
-		if (listener != null) {
-			listener.onAfterRemove(tagsProperty);
-		}
-
-		return tagsProperty;
+		return getPersistence().remove(propertyId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty remove(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(tagsProperty);
-		}
-
-		tagsProperty = getPersistence().remove(tagsProperty);
-
-		if (listener != null) {
-			listener.onAfterRemove(tagsProperty);
-		}
-
-		return tagsProperty;
+		return getPersistence().remove(tagsProperty);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty update(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = tagsProperty.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(tagsProperty);
-			}
-			else {
-				listener.onBeforeUpdate(tagsProperty);
-			}
-		}
-
-		tagsProperty = getPersistence().update(tagsProperty);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(tagsProperty);
-			}
-			else {
-				listener.onAfterUpdate(tagsProperty);
-			}
-		}
-
-		return tagsProperty;
+		return getPersistence().update(tagsProperty);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty update(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = tagsProperty.isNew();
+		return getPersistence().update(tagsProperty, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(tagsProperty);
-			}
-			else {
-				listener.onBeforeUpdate(tagsProperty);
-			}
-		}
-
-		tagsProperty = getPersistence().update(tagsProperty, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(tagsProperty);
-			}
-			else {
-				listener.onAfterUpdate(tagsProperty);
-			}
-		}
-
-		return tagsProperty;
+	public static com.liferay.portlet.tags.model.TagsProperty updateImpl(
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(tagsProperty, merge);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty findByPrimaryKey(
@@ -378,23 +305,7 @@ public class TagsPropertyUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = TagsPropertyUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.tags.model.TagsProperty"));
-	private static Log _log = LogFactory.getLog(TagsPropertyUtil.class);
 	private static TagsPropertyUtil _util;
 	private TagsPropertyPersistence _persistence;
 }

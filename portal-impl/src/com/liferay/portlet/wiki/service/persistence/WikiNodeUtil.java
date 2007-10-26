@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="WikiNodeUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,96 +36,31 @@ public class WikiNodeUtil {
 	public static com.liferay.portlet.wiki.model.WikiNode remove(long nodeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.wiki.NoSuchNodeException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(nodeId));
-		}
-
-		com.liferay.portlet.wiki.model.WikiNode wikiNode = getPersistence()
-															   .remove(nodeId);
-
-		if (listener != null) {
-			listener.onAfterRemove(wikiNode);
-		}
-
-		return wikiNode;
+		return getPersistence().remove(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode remove(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(wikiNode);
-		}
-
-		wikiNode = getPersistence().remove(wikiNode);
-
-		if (listener != null) {
-			listener.onAfterRemove(wikiNode);
-		}
-
-		return wikiNode;
+		return getPersistence().remove(wikiNode);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode update(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = wikiNode.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(wikiNode);
-			}
-			else {
-				listener.onBeforeUpdate(wikiNode);
-			}
-		}
-
-		wikiNode = getPersistence().update(wikiNode);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(wikiNode);
-			}
-			else {
-				listener.onAfterUpdate(wikiNode);
-			}
-		}
-
-		return wikiNode;
+		return getPersistence().update(wikiNode);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode update(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = wikiNode.isNew();
+		return getPersistence().update(wikiNode, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(wikiNode);
-			}
-			else {
-				listener.onBeforeUpdate(wikiNode);
-			}
-		}
-
-		wikiNode = getPersistence().update(wikiNode, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(wikiNode);
-			}
-			else {
-				listener.onAfterUpdate(wikiNode);
-			}
-		}
-
-		return wikiNode;
+	public static com.liferay.portlet.wiki.model.WikiNode updateImpl(
+		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(wikiNode, merge);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode findByPrimaryKey(
@@ -298,23 +225,7 @@ public class WikiNodeUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = WikiNodeUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.wiki.model.WikiNode"));
-	private static Log _log = LogFactory.getLog(WikiNodeUtil.class);
 	private static WikiNodeUtil _util;
 	private WikiNodePersistence _persistence;
 }

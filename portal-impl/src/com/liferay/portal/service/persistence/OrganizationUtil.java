@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="OrganizationUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class OrganizationUtil {
 		long organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrganizationException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(organizationId));
-		}
-
-		com.liferay.portal.model.Organization organization = getPersistence()
-																 .remove(organizationId);
-
-		if (listener != null) {
-			listener.onAfterRemove(organization);
-		}
-
-		return organization;
+		return getPersistence().remove(organizationId);
 	}
 
 	public static com.liferay.portal.model.Organization remove(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(organization);
-		}
-
-		organization = getPersistence().remove(organization);
-
-		if (listener != null) {
-			listener.onAfterRemove(organization);
-		}
-
-		return organization;
+		return getPersistence().remove(organization);
 	}
 
 	public static com.liferay.portal.model.Organization update(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = organization.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(organization);
-			}
-			else {
-				listener.onBeforeUpdate(organization);
-			}
-		}
-
-		organization = getPersistence().update(organization);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(organization);
-			}
-			else {
-				listener.onAfterUpdate(organization);
-			}
-		}
-
-		return organization;
+		return getPersistence().update(organization);
 	}
 
 	public static com.liferay.portal.model.Organization update(
 		com.liferay.portal.model.Organization organization, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = organization.isNew();
+		return getPersistence().update(organization, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(organization);
-			}
-			else {
-				listener.onBeforeUpdate(organization);
-			}
-		}
-
-		organization = getPersistence().update(organization, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(organization);
-			}
-			else {
-				listener.onAfterUpdate(organization);
-			}
-		}
-
-		return organization;
+	public static com.liferay.portal.model.Organization updateImpl(
+		com.liferay.portal.model.Organization organization, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(organization, merge);
 	}
 
 	public static com.liferay.portal.model.Organization findByPrimaryKey(
@@ -602,23 +529,7 @@ public class OrganizationUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = OrganizationUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Organization"));
-	private static Log _log = LogFactory.getLog(OrganizationUtil.class);
 	private static OrganizationUtil _util;
 	private OrganizationPersistence _persistence;
 }

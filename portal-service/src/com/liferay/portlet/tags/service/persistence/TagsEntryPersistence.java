@@ -47,6 +47,10 @@ public interface TagsEntryPersistence {
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsEntry updateImpl(
+		com.liferay.portlet.tags.model.TagsEntry tagsEntry, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsEntry findByPrimaryKey(
 		long entryId)
 		throws com.liferay.portal.SystemException, 

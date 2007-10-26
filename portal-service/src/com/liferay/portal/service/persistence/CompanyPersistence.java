@@ -47,6 +47,10 @@ public interface CompanyPersistence {
 		com.liferay.portal.model.Company company, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Company updateImpl(
+		com.liferay.portal.model.Company company, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Company findByPrimaryKey(long companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchCompanyException;

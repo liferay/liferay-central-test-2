@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="DLFileVersionUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class DLFileVersionUtil {
 		long fileVersionId)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(fileVersionId));
-		}
-
-		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion = getPersistence()
-																					.remove(fileVersionId);
-
-		if (listener != null) {
-			listener.onAfterRemove(dlFileVersion);
-		}
-
-		return dlFileVersion;
+		return getPersistence().remove(fileVersionId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion remove(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(dlFileVersion);
-		}
-
-		dlFileVersion = getPersistence().remove(dlFileVersion);
-
-		if (listener != null) {
-			listener.onAfterRemove(dlFileVersion);
-		}
-
-		return dlFileVersion;
+		return getPersistence().remove(dlFileVersion);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion update(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = dlFileVersion.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFileVersion);
-			}
-			else {
-				listener.onBeforeUpdate(dlFileVersion);
-			}
-		}
-
-		dlFileVersion = getPersistence().update(dlFileVersion);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(dlFileVersion);
-			}
-			else {
-				listener.onAfterUpdate(dlFileVersion);
-			}
-		}
-
-		return dlFileVersion;
+		return getPersistence().update(dlFileVersion);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion update(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = dlFileVersion.isNew();
+		return getPersistence().update(dlFileVersion, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFileVersion);
-			}
-			else {
-				listener.onBeforeUpdate(dlFileVersion);
-			}
-		}
-
-		dlFileVersion = getPersistence().update(dlFileVersion, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(dlFileVersion);
-			}
-			else {
-				listener.onAfterUpdate(dlFileVersion);
-			}
-		}
-
-		return dlFileVersion;
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateImpl(
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(dlFileVersion, merge);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByPrimaryKey(
@@ -281,23 +208,7 @@ public class DLFileVersionUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = DLFileVersionUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.documentlibrary.model.DLFileVersion"));
-	private static Log _log = LogFactory.getLog(DLFileVersionUtil.class);
 	private static DLFileVersionUtil _util;
 	private DLFileVersionPersistence _persistence;
 }

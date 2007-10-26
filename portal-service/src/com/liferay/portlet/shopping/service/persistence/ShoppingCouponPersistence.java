@@ -49,6 +49,10 @@ public interface ShoppingCouponPersistence {
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingCoupon updateImpl(
+		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.shopping.model.ShoppingCoupon findByPrimaryKey(
 		long couponId)
 		throws com.liferay.portal.SystemException, 

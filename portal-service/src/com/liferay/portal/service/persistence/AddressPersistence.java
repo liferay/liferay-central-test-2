@@ -47,6 +47,10 @@ public interface AddressPersistence {
 		com.liferay.portal.model.Address address, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Address updateImpl(
+		com.liferay.portal.model.Address address, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Address findByPrimaryKey(long addressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAddressException;

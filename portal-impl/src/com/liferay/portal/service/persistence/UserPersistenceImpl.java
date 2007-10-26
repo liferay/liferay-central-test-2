@@ -26,14 +26,18 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -107,6 +111,22 @@ public class UserPersistenceImpl extends BasePersistence
 	}
 
 	public User remove(User user) throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(user);
+		}
+
+		user = removeImpl(user);
+
+		if (listener != null) {
+			listener.onAfterRemove(user);
+		}
+
+		return user;
+	}
+
+	protected User removeImpl(User user) throws SystemException {
 		try {
 			clearGroups.clear(user.getPrimaryKey());
 		}
@@ -181,6 +201,34 @@ public class UserPersistenceImpl extends BasePersistence
 	}
 
 	public User update(com.liferay.portal.model.User user, boolean merge)
+		throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = user.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(user);
+			}
+			else {
+				listener.onBeforeUpdate(user);
+			}
+		}
+
+		user = updateImpl(user, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(user);
+			}
+			else {
+				listener.onAfterUpdate(user);
+			}
+		}
+
+		return user;
+	}
+
+	public User updateImpl(com.liferay.portal.model.User user, boolean merge)
 		throws SystemException {
 		FinderCache.clearCache("Users_Groups");
 		FinderCache.clearCache("Users_Orgs");
@@ -3903,6 +3951,19 @@ public class UserPersistenceImpl extends BasePersistence
 		}
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Users_Groups ON (Users_Groups.groupId = Group_.groupId) WHERE (Users_Groups.userId = ?)";
 	private static final String _SQL_GETGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Groups WHERE userId = ?";
 	private static final String _SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Groups WHERE userId = ? AND groupId = ?";
@@ -3918,5 +3979,7 @@ public class UserPersistenceImpl extends BasePersistence
 	private static final String _SQL_GETUSERGROUPS = "SELECT {UserGroup.*} FROM UserGroup INNER JOIN Users_UserGroups ON (Users_UserGroups.userGroupId = UserGroup.userGroupId) WHERE (Users_UserGroups.userId = ?)";
 	private static final String _SQL_GETUSERGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userId = ?";
 	private static final String _SQL_CONTAINSUSERGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userId = ? AND userGroupId = ?";
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.User"));
 	private static Log _log = LogFactory.getLog(UserPersistenceImpl.class);
 }

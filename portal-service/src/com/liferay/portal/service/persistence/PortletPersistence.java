@@ -47,6 +47,10 @@ public interface PortletPersistence {
 		com.liferay.portal.model.Portlet portlet, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Portlet updateImpl(
+		com.liferay.portal.model.Portlet portlet, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Portlet findByPrimaryKey(long id)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPortletException;

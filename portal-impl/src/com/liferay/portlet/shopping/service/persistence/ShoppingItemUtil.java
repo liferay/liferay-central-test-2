@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ShoppingItemUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class ShoppingItemUtil {
 		long itemId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(itemId));
-		}
-
-		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem = getPersistence()
-																		   .remove(itemId);
-
-		if (listener != null) {
-			listener.onAfterRemove(shoppingItem);
-		}
-
-		return shoppingItem;
+		return getPersistence().remove(itemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem remove(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(shoppingItem);
-		}
-
-		shoppingItem = getPersistence().remove(shoppingItem);
-
-		if (listener != null) {
-			listener.onAfterRemove(shoppingItem);
-		}
-
-		return shoppingItem;
+		return getPersistence().remove(shoppingItem);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem update(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = shoppingItem.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingItem);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingItem);
-			}
-		}
-
-		shoppingItem = getPersistence().update(shoppingItem);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingItem);
-			}
-			else {
-				listener.onAfterUpdate(shoppingItem);
-			}
-		}
-
-		return shoppingItem;
+		return getPersistence().update(shoppingItem);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem update(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = shoppingItem.isNew();
+		return getPersistence().update(shoppingItem, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingItem);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingItem);
-			}
-		}
-
-		shoppingItem = getPersistence().update(shoppingItem, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingItem);
-			}
-			else {
-				listener.onAfterUpdate(shoppingItem);
-			}
-		}
-
-		return shoppingItem;
+	public static com.liferay.portlet.shopping.model.ShoppingItem updateImpl(
+		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(shoppingItem, merge);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByPrimaryKey(
@@ -312,23 +239,7 @@ public class ShoppingItemUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ShoppingItemUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.shopping.model.ShoppingItem"));
-	private static Log _log = LogFactory.getLog(ShoppingItemUtil.class);
 	private static ShoppingItemUtil _util;
 	private ShoppingItemPersistence _persistence;
 }

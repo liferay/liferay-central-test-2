@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="SCProductVersionUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class SCProductVersionUtil {
 		long productVersionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(productVersionId));
-		}
-
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion =
-			getPersistence().remove(productVersionId);
-
-		if (listener != null) {
-			listener.onAfterRemove(scProductVersion);
-		}
-
-		return scProductVersion;
+		return getPersistence().remove(productVersionId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion remove(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(scProductVersion);
-		}
-
-		scProductVersion = getPersistence().remove(scProductVersion);
-
-		if (listener != null) {
-			listener.onAfterRemove(scProductVersion);
-		}
-
-		return scProductVersion;
+		return getPersistence().remove(scProductVersion);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = scProductVersion.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(scProductVersion);
-			}
-			else {
-				listener.onBeforeUpdate(scProductVersion);
-			}
-		}
-
-		scProductVersion = getPersistence().update(scProductVersion);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(scProductVersion);
-			}
-			else {
-				listener.onAfterUpdate(scProductVersion);
-			}
-		}
-
-		return scProductVersion;
+		return getPersistence().update(scProductVersion);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = scProductVersion.isNew();
+		return getPersistence().update(scProductVersion, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(scProductVersion);
-			}
-			else {
-				listener.onBeforeUpdate(scProductVersion);
-			}
-		}
-
-		scProductVersion = getPersistence().update(scProductVersion, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(scProductVersion);
-			}
-			else {
-				listener.onAfterUpdate(scProductVersion);
-			}
-		}
-
-		return scProductVersion;
+	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion updateImpl(
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(scProductVersion, merge);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion findByPrimaryKey(
@@ -376,23 +303,7 @@ public class SCProductVersionUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = SCProductVersionUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCProductVersion"));
-	private static Log _log = LogFactory.getLog(SCProductVersionUtil.class);
 	private static SCProductVersionUtil _util;
 	private SCProductVersionPersistence _persistence;
 }

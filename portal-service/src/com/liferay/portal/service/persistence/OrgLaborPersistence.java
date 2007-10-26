@@ -47,6 +47,10 @@ public interface OrgLaborPersistence {
 		com.liferay.portal.model.OrgLabor orgLabor, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.OrgLabor updateImpl(
+		com.liferay.portal.model.OrgLabor orgLabor, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.OrgLabor findByPrimaryKey(long orgLaborId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrgLaborException;

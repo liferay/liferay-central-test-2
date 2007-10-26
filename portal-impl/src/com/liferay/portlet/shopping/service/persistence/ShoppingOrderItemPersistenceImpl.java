@@ -25,12 +25,16 @@ package com.liferay.portlet.shopping.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.NoSuchOrderItemException;
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
@@ -101,6 +105,23 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 
 	public ShoppingOrderItem remove(ShoppingOrderItem shoppingOrderItem)
 		throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(shoppingOrderItem);
+		}
+
+		shoppingOrderItem = removeImpl(shoppingOrderItem);
+
+		if (listener != null) {
+			listener.onAfterRemove(shoppingOrderItem);
+		}
+
+		return shoppingOrderItem;
+	}
+
+	protected ShoppingOrderItem removeImpl(ShoppingOrderItem shoppingOrderItem)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -126,6 +147,35 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 	}
 
 	public ShoppingOrderItem update(
+		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = shoppingOrderItem.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(shoppingOrderItem);
+			}
+			else {
+				listener.onBeforeUpdate(shoppingOrderItem);
+			}
+		}
+
+		shoppingOrderItem = updateImpl(shoppingOrderItem, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(shoppingOrderItem);
+			}
+			else {
+				listener.onAfterUpdate(shoppingOrderItem);
+			}
+		}
+
+		return shoppingOrderItem;
+	}
+
+	public ShoppingOrderItem updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem,
 		boolean merge) throws SystemException {
 		Session session = null;
@@ -611,5 +661,20 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.shopping.model.ShoppingOrderItem"));
 	private static Log _log = LogFactory.getLog(ShoppingOrderItemPersistenceImpl.class);
 }

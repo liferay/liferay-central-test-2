@@ -25,14 +25,17 @@ package com.liferay.portlet.journal.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -104,6 +107,23 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 	public JournalArticle remove(JournalArticle journalArticle)
 		throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(journalArticle);
+		}
+
+		journalArticle = removeImpl(journalArticle);
+
+		if (listener != null) {
+			listener.onAfterRemove(journalArticle);
+		}
+
+		return journalArticle;
+	}
+
+	protected JournalArticle removeImpl(JournalArticle journalArticle)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -129,6 +149,35 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	}
 
 	public JournalArticle update(
+		com.liferay.portlet.journal.model.JournalArticle journalArticle,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = journalArticle.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(journalArticle);
+			}
+			else {
+				listener.onBeforeUpdate(journalArticle);
+			}
+		}
+
+		journalArticle = updateImpl(journalArticle, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(journalArticle);
+			}
+			else {
+				listener.onAfterUpdate(journalArticle);
+			}
+		}
+
+		return journalArticle;
+	}
+
+	public JournalArticle updateImpl(
 		com.liferay.portlet.journal.model.JournalArticle journalArticle,
 		boolean merge) throws SystemException {
 		if (Validator.isNull(journalArticle.getUuid())) {
@@ -2710,5 +2759,20 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.journal.model.JournalArticle"));
 	private static Log _log = LogFactory.getLog(JournalArticlePersistenceImpl.class);
 }

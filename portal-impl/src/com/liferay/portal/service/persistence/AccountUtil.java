@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="AccountUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class AccountUtil {
 	public static com.liferay.portal.model.Account remove(long accountId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAccountException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(accountId));
-		}
-
-		com.liferay.portal.model.Account account = getPersistence().remove(accountId);
-
-		if (listener != null) {
-			listener.onAfterRemove(account);
-		}
-
-		return account;
+		return getPersistence().remove(accountId);
 	}
 
 	public static com.liferay.portal.model.Account remove(
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(account);
-		}
-
-		account = getPersistence().remove(account);
-
-		if (listener != null) {
-			listener.onAfterRemove(account);
-		}
-
-		return account;
+		return getPersistence().remove(account);
 	}
 
 	public static com.liferay.portal.model.Account update(
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = account.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(account);
-			}
-			else {
-				listener.onBeforeUpdate(account);
-			}
-		}
-
-		account = getPersistence().update(account);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(account);
-			}
-			else {
-				listener.onAfterUpdate(account);
-			}
-		}
-
-		return account;
+		return getPersistence().update(account);
 	}
 
 	public static com.liferay.portal.model.Account update(
 		com.liferay.portal.model.Account account, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = account.isNew();
+		return getPersistence().update(account, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(account);
-			}
-			else {
-				listener.onBeforeUpdate(account);
-			}
-		}
-
-		account = getPersistence().update(account, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(account);
-			}
-			else {
-				listener.onAfterUpdate(account);
-			}
-		}
-
-		return account;
+	public static com.liferay.portal.model.Account updateImpl(
+		com.liferay.portal.model.Account account, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(account, merge);
 	}
 
 	public static com.liferay.portal.model.Account findByPrimaryKey(
@@ -200,23 +128,7 @@ public class AccountUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = AccountUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Account"));
-	private static Log _log = LogFactory.getLog(AccountUtil.class);
 	private static AccountUtil _util;
 	private AccountPersistence _persistence;
 }

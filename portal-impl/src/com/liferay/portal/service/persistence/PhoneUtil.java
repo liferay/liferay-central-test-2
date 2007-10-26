@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PhoneUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class PhoneUtil {
 	public static com.liferay.portal.model.Phone remove(long phoneId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPhoneException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(phoneId));
-		}
-
-		com.liferay.portal.model.Phone phone = getPersistence().remove(phoneId);
-
-		if (listener != null) {
-			listener.onAfterRemove(phone);
-		}
-
-		return phone;
+		return getPersistence().remove(phoneId);
 	}
 
 	public static com.liferay.portal.model.Phone remove(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(phone);
-		}
-
-		phone = getPersistence().remove(phone);
-
-		if (listener != null) {
-			listener.onAfterRemove(phone);
-		}
-
-		return phone;
+		return getPersistence().remove(phone);
 	}
 
 	public static com.liferay.portal.model.Phone update(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = phone.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(phone);
-			}
-			else {
-				listener.onBeforeUpdate(phone);
-			}
-		}
-
-		phone = getPersistence().update(phone);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(phone);
-			}
-			else {
-				listener.onAfterUpdate(phone);
-			}
-		}
-
-		return phone;
+		return getPersistence().update(phone);
 	}
 
 	public static com.liferay.portal.model.Phone update(
 		com.liferay.portal.model.Phone phone, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = phone.isNew();
+		return getPersistence().update(phone, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(phone);
-			}
-			else {
-				listener.onBeforeUpdate(phone);
-			}
-		}
-
-		phone = getPersistence().update(phone, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(phone);
-			}
-			else {
-				listener.onAfterUpdate(phone);
-			}
-		}
-
-		return phone;
+	public static com.liferay.portal.model.Phone updateImpl(
+		com.liferay.portal.model.Phone phone, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(phone, merge);
 	}
 
 	public static com.liferay.portal.model.Phone findByPrimaryKey(long phoneId)
@@ -468,23 +396,7 @@ public class PhoneUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = PhoneUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Phone"));
-	private static Log _log = LogFactory.getLog(PhoneUtil.class);
 	private static PhoneUtil _util;
 	private PhonePersistence _persistence;
 }

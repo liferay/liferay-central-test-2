@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ResourceUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class ResourceUtil {
 	public static com.liferay.portal.model.Resource remove(long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(resourceId));
-		}
-
-		com.liferay.portal.model.Resource resource = getPersistence().remove(resourceId);
-
-		if (listener != null) {
-			listener.onAfterRemove(resource);
-		}
-
-		return resource;
+		return getPersistence().remove(resourceId);
 	}
 
 	public static com.liferay.portal.model.Resource remove(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(resource);
-		}
-
-		resource = getPersistence().remove(resource);
-
-		if (listener != null) {
-			listener.onAfterRemove(resource);
-		}
-
-		return resource;
+		return getPersistence().remove(resource);
 	}
 
 	public static com.liferay.portal.model.Resource update(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = resource.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(resource);
-			}
-			else {
-				listener.onBeforeUpdate(resource);
-			}
-		}
-
-		resource = getPersistence().update(resource);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(resource);
-			}
-			else {
-				listener.onAfterUpdate(resource);
-			}
-		}
-
-		return resource;
+		return getPersistence().update(resource);
 	}
 
 	public static com.liferay.portal.model.Resource update(
 		com.liferay.portal.model.Resource resource, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = resource.isNew();
+		return getPersistence().update(resource, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(resource);
-			}
-			else {
-				listener.onBeforeUpdate(resource);
-			}
-		}
-
-		resource = getPersistence().update(resource, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(resource);
-			}
-			else {
-				listener.onAfterUpdate(resource);
-			}
-		}
-
-		return resource;
+	public static com.liferay.portal.model.Resource updateImpl(
+		com.liferay.portal.model.Resource resource, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(resource, merge);
 	}
 
 	public static com.liferay.portal.model.Resource findByPrimaryKey(
@@ -271,23 +199,7 @@ public class ResourceUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ResourceUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Resource"));
-	private static Log _log = LogFactory.getLog(ResourceUtil.class);
 	private static ResourceUtil _util;
 	private ResourcePersistence _persistence;
 }

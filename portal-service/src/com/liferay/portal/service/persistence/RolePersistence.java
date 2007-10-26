@@ -47,6 +47,10 @@ public interface RolePersistence {
 		com.liferay.portal.model.Role role, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Role updateImpl(
+		com.liferay.portal.model.Role role, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Role findByPrimaryKey(long roleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchRoleException;

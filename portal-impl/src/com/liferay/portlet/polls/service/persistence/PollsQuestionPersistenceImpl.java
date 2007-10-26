@@ -25,12 +25,16 @@ package com.liferay.portlet.polls.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.polls.NoSuchQuestionException;
 import com.liferay.portlet.polls.model.PollsQuestion;
@@ -100,6 +104,23 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 	public PollsQuestion remove(PollsQuestion pollsQuestion)
 		throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(pollsQuestion);
+		}
+
+		pollsQuestion = removeImpl(pollsQuestion);
+
+		if (listener != null) {
+			listener.onAfterRemove(pollsQuestion);
+		}
+
+		return pollsQuestion;
+	}
+
+	protected PollsQuestion removeImpl(PollsQuestion pollsQuestion)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -125,6 +146,35 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 	}
 
 	public PollsQuestion update(
+		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = pollsQuestion.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(pollsQuestion);
+			}
+			else {
+				listener.onBeforeUpdate(pollsQuestion);
+			}
+		}
+
+		pollsQuestion = updateImpl(pollsQuestion, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(pollsQuestion);
+			}
+			else {
+				listener.onAfterUpdate(pollsQuestion);
+			}
+		}
+
+		return pollsQuestion;
+	}
+
+	public PollsQuestion updateImpl(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
 		boolean merge) throws SystemException {
 		Session session = null;
@@ -605,5 +655,20 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.polls.model.PollsQuestion"));
 	private static Log _log = LogFactory.getLog(PollsQuestionPersistenceImpl.class);
 }

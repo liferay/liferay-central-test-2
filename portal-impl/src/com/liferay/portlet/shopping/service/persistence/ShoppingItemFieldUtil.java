@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ShoppingItemFieldUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class ShoppingItemFieldUtil {
 		long itemFieldId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.shopping.NoSuchItemFieldException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(itemFieldId));
-		}
-
-		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField = getPersistence()
-																					 .remove(itemFieldId);
-
-		if (listener != null) {
-			listener.onAfterRemove(shoppingItemField);
-		}
-
-		return shoppingItemField;
+		return getPersistence().remove(itemFieldId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField remove(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(shoppingItemField);
-		}
-
-		shoppingItemField = getPersistence().remove(shoppingItemField);
-
-		if (listener != null) {
-			listener.onAfterRemove(shoppingItemField);
-		}
-
-		return shoppingItemField;
+		return getPersistence().remove(shoppingItemField);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField update(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = shoppingItemField.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingItemField);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingItemField);
-			}
-		}
-
-		shoppingItemField = getPersistence().update(shoppingItemField);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingItemField);
-			}
-			else {
-				listener.onAfterUpdate(shoppingItemField);
-			}
-		}
-
-		return shoppingItemField;
+		return getPersistence().update(shoppingItemField);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField update(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = shoppingItemField.isNew();
+		return getPersistence().update(shoppingItemField, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingItemField);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingItemField);
-			}
-		}
-
-		shoppingItemField = getPersistence().update(shoppingItemField, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingItemField);
-			}
-			else {
-				listener.onAfterUpdate(shoppingItemField);
-			}
-		}
-
-		return shoppingItemField;
+	public static com.liferay.portlet.shopping.model.ShoppingItemField updateImpl(
+		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(shoppingItemField, merge);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField findByPrimaryKey(
@@ -252,23 +179,7 @@ public class ShoppingItemFieldUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ShoppingItemFieldUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.shopping.model.ShoppingItemField"));
-	private static Log _log = LogFactory.getLog(ShoppingItemFieldUtil.class);
 	private static ShoppingItemFieldUtil _util;
 	private ShoppingItemFieldPersistence _persistence;
 }

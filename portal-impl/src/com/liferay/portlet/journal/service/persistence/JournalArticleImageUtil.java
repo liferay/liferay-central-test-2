@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="JournalArticleImageUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class JournalArticleImageUtil {
 		long articleImageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchArticleImageException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(articleImageId));
-		}
-
-		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage =
-			getPersistence().remove(articleImageId);
-
-		if (listener != null) {
-			listener.onAfterRemove(journalArticleImage);
-		}
-
-		return journalArticleImage;
+		return getPersistence().remove(articleImageId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleImage remove(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(journalArticleImage);
-		}
-
-		journalArticleImage = getPersistence().remove(journalArticleImage);
-
-		if (listener != null) {
-			listener.onAfterRemove(journalArticleImage);
-		}
-
-		return journalArticleImage;
+		return getPersistence().remove(journalArticleImage);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleImage update(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = journalArticleImage.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(journalArticleImage);
-			}
-			else {
-				listener.onBeforeUpdate(journalArticleImage);
-			}
-		}
-
-		journalArticleImage = getPersistence().update(journalArticleImage);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(journalArticleImage);
-			}
-			else {
-				listener.onAfterUpdate(journalArticleImage);
-			}
-		}
-
-		return journalArticleImage;
+		return getPersistence().update(journalArticleImage);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleImage update(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = journalArticleImage.isNew();
+		return getPersistence().update(journalArticleImage, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(journalArticleImage);
-			}
-			else {
-				listener.onBeforeUpdate(journalArticleImage);
-			}
-		}
-
-		journalArticleImage = getPersistence().update(journalArticleImage, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(journalArticleImage);
-			}
-			else {
-				listener.onAfterUpdate(journalArticleImage);
-			}
-		}
-
-		return journalArticleImage;
+	public static com.liferay.portlet.journal.model.JournalArticleImage updateImpl(
+		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(journalArticleImage, merge);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleImage findByPrimaryKey(
@@ -439,23 +366,7 @@ public class JournalArticleImageUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = JournalArticleImageUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.journal.model.JournalArticleImage"));
-	private static Log _log = LogFactory.getLog(JournalArticleImageUtil.class);
 	private static JournalArticleImageUtil _util;
 	private JournalArticleImagePersistence _persistence;
 }

@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MBStatsUserUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class MBStatsUserUtil {
 		long statsUserId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchStatsUserException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(statsUserId));
-		}
-
-		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser = getPersistence()
-																			  .remove(statsUserId);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbStatsUser);
-		}
-
-		return mbStatsUser;
+		return getPersistence().remove(statsUserId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser remove(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(mbStatsUser);
-		}
-
-		mbStatsUser = getPersistence().remove(mbStatsUser);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbStatsUser);
-		}
-
-		return mbStatsUser;
+		return getPersistence().remove(mbStatsUser);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser update(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbStatsUser.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbStatsUser);
-			}
-			else {
-				listener.onBeforeUpdate(mbStatsUser);
-			}
-		}
-
-		mbStatsUser = getPersistence().update(mbStatsUser);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbStatsUser);
-			}
-			else {
-				listener.onAfterUpdate(mbStatsUser);
-			}
-		}
-
-		return mbStatsUser;
+		return getPersistence().update(mbStatsUser);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser update(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbStatsUser.isNew();
+		return getPersistence().update(mbStatsUser, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbStatsUser);
-			}
-			else {
-				listener.onBeforeUpdate(mbStatsUser);
-			}
-		}
-
-		mbStatsUser = getPersistence().update(mbStatsUser, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbStatsUser);
-			}
-			else {
-				listener.onAfterUpdate(mbStatsUser);
-			}
-		}
-
-		return mbStatsUser;
+	public static com.liferay.portlet.messageboards.model.MBStatsUser updateImpl(
+		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(mbStatsUser, merge);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser findByPrimaryKey(
@@ -375,23 +302,7 @@ public class MBStatsUserUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = MBStatsUserUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.messageboards.model.MBStatsUser"));
-	private static Log _log = LogFactory.getLog(MBStatsUserUtil.class);
 	private static MBStatsUserUtil _util;
 	private MBStatsUserPersistence _persistence;
 }

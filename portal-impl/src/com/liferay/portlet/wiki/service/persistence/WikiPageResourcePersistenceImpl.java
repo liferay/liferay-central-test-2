@@ -25,12 +25,16 @@ package com.liferay.portlet.wiki.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.wiki.NoSuchPageResourceException;
 import com.liferay.portlet.wiki.model.WikiPageResource;
@@ -101,6 +105,23 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 
 	public WikiPageResource remove(WikiPageResource wikiPageResource)
 		throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(wikiPageResource);
+		}
+
+		wikiPageResource = removeImpl(wikiPageResource);
+
+		if (listener != null) {
+			listener.onAfterRemove(wikiPageResource);
+		}
+
+		return wikiPageResource;
+	}
+
+	protected WikiPageResource removeImpl(WikiPageResource wikiPageResource)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -126,6 +147,35 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 	}
 
 	public WikiPageResource update(
+		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = wikiPageResource.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(wikiPageResource);
+			}
+			else {
+				listener.onBeforeUpdate(wikiPageResource);
+			}
+		}
+
+		wikiPageResource = updateImpl(wikiPageResource, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(wikiPageResource);
+			}
+			else {
+				listener.onAfterUpdate(wikiPageResource);
+			}
+		}
+
+		return wikiPageResource;
+	}
+
+	public WikiPageResource updateImpl(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
 		boolean merge) throws SystemException {
 		Session session = null;
@@ -520,5 +570,20 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.wiki.model.WikiPageResource"));
 	private static Log _log = LogFactory.getLog(WikiPageResourcePersistenceImpl.class);
 }

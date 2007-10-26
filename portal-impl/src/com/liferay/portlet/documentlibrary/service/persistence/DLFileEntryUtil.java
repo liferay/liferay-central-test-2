@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="DLFileEntryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class DLFileEntryUtil {
 		long fileEntryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(fileEntryId));
-		}
-
-		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry = getPersistence()
-																				.remove(fileEntryId);
-
-		if (listener != null) {
-			listener.onAfterRemove(dlFileEntry);
-		}
-
-		return dlFileEntry;
+		return getPersistence().remove(fileEntryId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry remove(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(dlFileEntry);
-		}
-
-		dlFileEntry = getPersistence().remove(dlFileEntry);
-
-		if (listener != null) {
-			listener.onAfterRemove(dlFileEntry);
-		}
-
-		return dlFileEntry;
+		return getPersistence().remove(dlFileEntry);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry update(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = dlFileEntry.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFileEntry);
-			}
-			else {
-				listener.onBeforeUpdate(dlFileEntry);
-			}
-		}
-
-		dlFileEntry = getPersistence().update(dlFileEntry);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(dlFileEntry);
-			}
-			else {
-				listener.onAfterUpdate(dlFileEntry);
-			}
-		}
-
-		return dlFileEntry;
+		return getPersistence().update(dlFileEntry);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry update(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = dlFileEntry.isNew();
+		return getPersistence().update(dlFileEntry, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFileEntry);
-			}
-			else {
-				listener.onBeforeUpdate(dlFileEntry);
-			}
-		}
-
-		dlFileEntry = getPersistence().update(dlFileEntry, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(dlFileEntry);
-			}
-			else {
-				listener.onAfterUpdate(dlFileEntry);
-			}
-		}
-
-		return dlFileEntry;
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateImpl(
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(dlFileEntry, merge);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByPrimaryKey(
@@ -276,23 +203,7 @@ public class DLFileEntryUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = DLFileEntryUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.documentlibrary.model.DLFileEntry"));
-	private static Log _log = LogFactory.getLog(DLFileEntryUtil.class);
 	private static DLFileEntryUtil _util;
 	private DLFileEntryPersistence _persistence;
 }

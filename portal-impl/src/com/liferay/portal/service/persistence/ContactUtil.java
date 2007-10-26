@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ContactUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class ContactUtil {
 	public static com.liferay.portal.model.Contact remove(long contactId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchContactException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(contactId));
-		}
-
-		com.liferay.portal.model.Contact contact = getPersistence().remove(contactId);
-
-		if (listener != null) {
-			listener.onAfterRemove(contact);
-		}
-
-		return contact;
+		return getPersistence().remove(contactId);
 	}
 
 	public static com.liferay.portal.model.Contact remove(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(contact);
-		}
-
-		contact = getPersistence().remove(contact);
-
-		if (listener != null) {
-			listener.onAfterRemove(contact);
-		}
-
-		return contact;
+		return getPersistence().remove(contact);
 	}
 
 	public static com.liferay.portal.model.Contact update(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = contact.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(contact);
-			}
-			else {
-				listener.onBeforeUpdate(contact);
-			}
-		}
-
-		contact = getPersistence().update(contact);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(contact);
-			}
-			else {
-				listener.onAfterUpdate(contact);
-			}
-		}
-
-		return contact;
+		return getPersistence().update(contact);
 	}
 
 	public static com.liferay.portal.model.Contact update(
 		com.liferay.portal.model.Contact contact, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = contact.isNew();
+		return getPersistence().update(contact, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(contact);
-			}
-			else {
-				listener.onBeforeUpdate(contact);
-			}
-		}
-
-		contact = getPersistence().update(contact, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(contact);
-			}
-			else {
-				listener.onAfterUpdate(contact);
-			}
-		}
-
-		return contact;
+	public static com.liferay.portal.model.Contact updateImpl(
+		com.liferay.portal.model.Contact contact, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(contact, merge);
 	}
 
 	public static com.liferay.portal.model.Contact findByPrimaryKey(
@@ -249,23 +177,7 @@ public class ContactUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ContactUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Contact"));
-	private static Log _log = LogFactory.getLog(ContactUtil.class);
 	private static ContactUtil _util;
 	private ContactPersistence _persistence;
 }

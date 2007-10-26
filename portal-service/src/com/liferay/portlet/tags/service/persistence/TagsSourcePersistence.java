@@ -47,6 +47,10 @@ public interface TagsSourcePersistence {
 		com.liferay.portlet.tags.model.TagsSource tagsSource, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsSource updateImpl(
+		com.liferay.portlet.tags.model.TagsSource tagsSource, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsSource findByPrimaryKey(
 		long sourceId)
 		throws com.liferay.portal.SystemException, 

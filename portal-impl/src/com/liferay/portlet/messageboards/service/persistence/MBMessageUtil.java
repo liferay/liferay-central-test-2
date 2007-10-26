@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MBMessageUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class MBMessageUtil {
 		long messageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(messageId));
-		}
-
-		com.liferay.portlet.messageboards.model.MBMessage mbMessage = getPersistence()
-																		  .remove(messageId);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbMessage);
-		}
-
-		return mbMessage;
+		return getPersistence().remove(messageId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage remove(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(mbMessage);
-		}
-
-		mbMessage = getPersistence().remove(mbMessage);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbMessage);
-		}
-
-		return mbMessage;
+		return getPersistence().remove(mbMessage);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage update(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbMessage.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbMessage);
-			}
-			else {
-				listener.onBeforeUpdate(mbMessage);
-			}
-		}
-
-		mbMessage = getPersistence().update(mbMessage);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbMessage);
-			}
-			else {
-				listener.onAfterUpdate(mbMessage);
-			}
-		}
-
-		return mbMessage;
+		return getPersistence().update(mbMessage);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage update(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbMessage.isNew();
+		return getPersistence().update(mbMessage, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbMessage);
-			}
-			else {
-				listener.onBeforeUpdate(mbMessage);
-			}
-		}
-
-		mbMessage = getPersistence().update(mbMessage, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbMessage);
-			}
-			else {
-				listener.onAfterUpdate(mbMessage);
-			}
-		}
-
-		return mbMessage;
+	public static com.liferay.portlet.messageboards.model.MBMessage updateImpl(
+		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(mbMessage, merge);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByPrimaryKey(
@@ -453,23 +380,7 @@ public class MBMessageUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = MBMessageUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.messageboards.model.MBMessage"));
-	private static Log _log = LogFactory.getLog(MBMessageUtil.class);
 	private static MBMessageUtil _util;
 	private MBMessagePersistence _persistence;
 }

@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="CountryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class CountryUtil {
 	public static com.liferay.portal.model.Country remove(long countryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchCountryException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(countryId));
-		}
-
-		com.liferay.portal.model.Country country = getPersistence().remove(countryId);
-
-		if (listener != null) {
-			listener.onAfterRemove(country);
-		}
-
-		return country;
+		return getPersistence().remove(countryId);
 	}
 
 	public static com.liferay.portal.model.Country remove(
 		com.liferay.portal.model.Country country)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(country);
-		}
-
-		country = getPersistence().remove(country);
-
-		if (listener != null) {
-			listener.onAfterRemove(country);
-		}
-
-		return country;
+		return getPersistence().remove(country);
 	}
 
 	public static com.liferay.portal.model.Country update(
 		com.liferay.portal.model.Country country)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = country.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(country);
-			}
-			else {
-				listener.onBeforeUpdate(country);
-			}
-		}
-
-		country = getPersistence().update(country);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(country);
-			}
-			else {
-				listener.onAfterUpdate(country);
-			}
-		}
-
-		return country;
+		return getPersistence().update(country);
 	}
 
 	public static com.liferay.portal.model.Country update(
 		com.liferay.portal.model.Country country, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = country.isNew();
+		return getPersistence().update(country, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(country);
-			}
-			else {
-				listener.onBeforeUpdate(country);
-			}
-		}
-
-		country = getPersistence().update(country, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(country);
-			}
-			else {
-				listener.onAfterUpdate(country);
-			}
-		}
-
-		return country;
+	public static com.liferay.portal.model.Country updateImpl(
+		com.liferay.portal.model.Country country, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(country, merge);
 	}
 
 	public static com.liferay.portal.model.Country findByPrimaryKey(
@@ -248,23 +176,7 @@ public class CountryUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = CountryUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Country"));
-	private static Log _log = LogFactory.getLog(CountryUtil.class);
 	private static CountryUtil _util;
 	private CountryPersistence _persistence;
 }

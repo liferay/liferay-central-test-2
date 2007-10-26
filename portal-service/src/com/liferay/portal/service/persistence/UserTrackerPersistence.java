@@ -47,6 +47,10 @@ public interface UserTrackerPersistence {
 		com.liferay.portal.model.UserTracker userTracker, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserTracker updateImpl(
+		com.liferay.portal.model.UserTracker userTracker, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.UserTracker findByPrimaryKey(
 		long userTrackerId)
 		throws com.liferay.portal.SystemException, 

@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="LayoutUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class LayoutUtil {
 	public static com.liferay.portal.model.Layout remove(long plid)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchLayoutException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(plid));
-		}
-
-		com.liferay.portal.model.Layout layout = getPersistence().remove(plid);
-
-		if (listener != null) {
-			listener.onAfterRemove(layout);
-		}
-
-		return layout;
+		return getPersistence().remove(plid);
 	}
 
 	public static com.liferay.portal.model.Layout remove(
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(layout);
-		}
-
-		layout = getPersistence().remove(layout);
-
-		if (listener != null) {
-			listener.onAfterRemove(layout);
-		}
-
-		return layout;
+		return getPersistence().remove(layout);
 	}
 
 	public static com.liferay.portal.model.Layout update(
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = layout.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(layout);
-			}
-			else {
-				listener.onBeforeUpdate(layout);
-			}
-		}
-
-		layout = getPersistence().update(layout);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(layout);
-			}
-			else {
-				listener.onAfterUpdate(layout);
-			}
-		}
-
-		return layout;
+		return getPersistence().update(layout);
 	}
 
 	public static com.liferay.portal.model.Layout update(
 		com.liferay.portal.model.Layout layout, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = layout.isNew();
+		return getPersistence().update(layout, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(layout);
-			}
-			else {
-				listener.onBeforeUpdate(layout);
-			}
-		}
-
-		layout = getPersistence().update(layout, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(layout);
-			}
-			else {
-				listener.onAfterUpdate(layout);
-			}
-		}
-
-		return layout;
+	public static com.liferay.portal.model.Layout updateImpl(
+		com.liferay.portal.model.Layout layout, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(layout, merge);
 	}
 
 	public static com.liferay.portal.model.Layout findByPrimaryKey(long plid)
@@ -383,23 +311,7 @@ public class LayoutUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = LayoutUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Layout"));
-	private static Log _log = LogFactory.getLog(LayoutUtil.class);
 	private static LayoutUtil _util;
 	private LayoutPersistence _persistence;
 }

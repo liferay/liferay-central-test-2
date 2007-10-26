@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="DLFileShortcutUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class DLFileShortcutUtil {
 		long fileShortcutId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(fileShortcutId));
-		}
-
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut = getPersistence()
-																					  .remove(fileShortcutId);
-
-		if (listener != null) {
-			listener.onAfterRemove(dlFileShortcut);
-		}
-
-		return dlFileShortcut;
+		return getPersistence().remove(fileShortcutId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut remove(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(dlFileShortcut);
-		}
-
-		dlFileShortcut = getPersistence().remove(dlFileShortcut);
-
-		if (listener != null) {
-			listener.onAfterRemove(dlFileShortcut);
-		}
-
-		return dlFileShortcut;
+		return getPersistence().remove(dlFileShortcut);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut update(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = dlFileShortcut.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFileShortcut);
-			}
-			else {
-				listener.onBeforeUpdate(dlFileShortcut);
-			}
-		}
-
-		dlFileShortcut = getPersistence().update(dlFileShortcut);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(dlFileShortcut);
-			}
-			else {
-				listener.onAfterUpdate(dlFileShortcut);
-			}
-		}
-
-		return dlFileShortcut;
+		return getPersistence().update(dlFileShortcut);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut update(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = dlFileShortcut.isNew();
+		return getPersistence().update(dlFileShortcut, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFileShortcut);
-			}
-			else {
-				listener.onBeforeUpdate(dlFileShortcut);
-			}
-		}
-
-		dlFileShortcut = getPersistence().update(dlFileShortcut, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(dlFileShortcut);
-			}
-			else {
-				listener.onAfterUpdate(dlFileShortcut);
-			}
-		}
-
-		return dlFileShortcut;
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateImpl(
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(dlFileShortcut, merge);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByPrimaryKey(
@@ -305,23 +232,7 @@ public class DLFileShortcutUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = DLFileShortcutUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.documentlibrary.model.DLFileShortcut"));
-	private static Log _log = LogFactory.getLog(DLFileShortcutUtil.class);
 	private static DLFileShortcutUtil _util;
 	private DLFileShortcutPersistence _persistence;
 }

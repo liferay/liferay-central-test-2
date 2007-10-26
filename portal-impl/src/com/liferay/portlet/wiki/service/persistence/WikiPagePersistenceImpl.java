@@ -25,12 +25,16 @@ package com.liferay.portlet.wiki.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -98,6 +102,22 @@ public class WikiPagePersistenceImpl extends BasePersistence
 	}
 
 	public WikiPage remove(WikiPage wikiPage) throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(wikiPage);
+		}
+
+		wikiPage = removeImpl(wikiPage);
+
+		if (listener != null) {
+			listener.onAfterRemove(wikiPage);
+		}
+
+		return wikiPage;
+	}
+
+	protected WikiPage removeImpl(WikiPage wikiPage) throws SystemException {
 		Session session = null;
 
 		try {
@@ -123,6 +143,35 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 	public WikiPage update(com.liferay.portlet.wiki.model.WikiPage wikiPage,
 		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = wikiPage.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(wikiPage);
+			}
+			else {
+				listener.onBeforeUpdate(wikiPage);
+			}
+		}
+
+		wikiPage = updateImpl(wikiPage, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(wikiPage);
+			}
+			else {
+				listener.onAfterUpdate(wikiPage);
+			}
+		}
+
+		return wikiPage;
+	}
+
+	public WikiPage updateImpl(
+		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean merge)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1747,5 +1796,20 @@ public class WikiPagePersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.wiki.model.WikiPage"));
 	private static Log _log = LogFactory.getLog(WikiPagePersistenceImpl.class);
 }

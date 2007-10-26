@@ -47,6 +47,10 @@ public interface ContactPersistence {
 		com.liferay.portal.model.Contact contact, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Contact updateImpl(
+		com.liferay.portal.model.Contact contact, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Contact findByPrimaryKey(long contactId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchContactException;

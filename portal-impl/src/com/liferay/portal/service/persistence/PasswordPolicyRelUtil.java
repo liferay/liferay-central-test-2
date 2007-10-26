@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PasswordPolicyRelUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class PasswordPolicyRelUtil {
 		long passwordPolicyRelId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPasswordPolicyRelException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(passwordPolicyRelId));
-		}
-
-		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel = getPersistence()
-																		   .remove(passwordPolicyRelId);
-
-		if (listener != null) {
-			listener.onAfterRemove(passwordPolicyRel);
-		}
-
-		return passwordPolicyRel;
+		return getPersistence().remove(passwordPolicyRelId);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel remove(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(passwordPolicyRel);
-		}
-
-		passwordPolicyRel = getPersistence().remove(passwordPolicyRel);
-
-		if (listener != null) {
-			listener.onAfterRemove(passwordPolicyRel);
-		}
-
-		return passwordPolicyRel;
+		return getPersistence().remove(passwordPolicyRel);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel update(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = passwordPolicyRel.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(passwordPolicyRel);
-			}
-			else {
-				listener.onBeforeUpdate(passwordPolicyRel);
-			}
-		}
-
-		passwordPolicyRel = getPersistence().update(passwordPolicyRel);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(passwordPolicyRel);
-			}
-			else {
-				listener.onAfterUpdate(passwordPolicyRel);
-			}
-		}
-
-		return passwordPolicyRel;
+		return getPersistence().update(passwordPolicyRel);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel update(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = passwordPolicyRel.isNew();
+		return getPersistence().update(passwordPolicyRel, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(passwordPolicyRel);
-			}
-			else {
-				listener.onBeforeUpdate(passwordPolicyRel);
-			}
-		}
-
-		passwordPolicyRel = getPersistence().update(passwordPolicyRel, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(passwordPolicyRel);
-			}
-			else {
-				listener.onAfterUpdate(passwordPolicyRel);
-			}
-		}
-
-		return passwordPolicyRel;
+	public static com.liferay.portal.model.PasswordPolicyRel updateImpl(
+		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(passwordPolicyRel, merge);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel findByPrimaryKey(
@@ -255,23 +182,7 @@ public class PasswordPolicyRelUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = PasswordPolicyRelUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.PasswordPolicyRel"));
-	private static Log _log = LogFactory.getLog(PasswordPolicyRelUtil.class);
 	private static PasswordPolicyRelUtil _util;
 	private PasswordPolicyRelPersistence _persistence;
 }

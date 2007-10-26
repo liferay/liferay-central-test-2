@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MBMessageFlagUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class MBMessageFlagUtil {
 		long messageFlagId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(messageFlagId));
-		}
-
-		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag = getPersistence()
-																				  .remove(messageFlagId);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbMessageFlag);
-		}
-
-		return mbMessageFlag;
+		return getPersistence().remove(messageFlagId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag remove(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(mbMessageFlag);
-		}
-
-		mbMessageFlag = getPersistence().remove(mbMessageFlag);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbMessageFlag);
-		}
-
-		return mbMessageFlag;
+		return getPersistence().remove(mbMessageFlag);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbMessageFlag.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbMessageFlag);
-			}
-			else {
-				listener.onBeforeUpdate(mbMessageFlag);
-			}
-		}
-
-		mbMessageFlag = getPersistence().update(mbMessageFlag);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbMessageFlag);
-			}
-			else {
-				listener.onAfterUpdate(mbMessageFlag);
-			}
-		}
-
-		return mbMessageFlag;
+		return getPersistence().update(mbMessageFlag);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbMessageFlag.isNew();
+		return getPersistence().update(mbMessageFlag, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbMessageFlag);
-			}
-			else {
-				listener.onBeforeUpdate(mbMessageFlag);
-			}
-		}
-
-		mbMessageFlag = getPersistence().update(mbMessageFlag, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbMessageFlag);
-			}
-			else {
-				listener.onAfterUpdate(mbMessageFlag);
-			}
-		}
-
-		return mbMessageFlag;
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag updateImpl(
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(mbMessageFlag, merge);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByPrimaryKey(
@@ -324,23 +251,7 @@ public class MBMessageFlagUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = MBMessageFlagUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.messageboards.model.MBMessageFlag"));
-	private static Log _log = LogFactory.getLog(MBMessageFlagUtil.class);
 	private static MBMessageFlagUtil _util;
 	private MBMessageFlagPersistence _persistence;
 }

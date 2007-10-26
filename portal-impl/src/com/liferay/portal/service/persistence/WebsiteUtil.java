@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="WebsiteUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website remove(long websiteId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchWebsiteException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(websiteId));
-		}
-
-		com.liferay.portal.model.Website website = getPersistence().remove(websiteId);
-
-		if (listener != null) {
-			listener.onAfterRemove(website);
-		}
-
-		return website;
+		return getPersistence().remove(websiteId);
 	}
 
 	public static com.liferay.portal.model.Website remove(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(website);
-		}
-
-		website = getPersistence().remove(website);
-
-		if (listener != null) {
-			listener.onAfterRemove(website);
-		}
-
-		return website;
+		return getPersistence().remove(website);
 	}
 
 	public static com.liferay.portal.model.Website update(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = website.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(website);
-			}
-			else {
-				listener.onBeforeUpdate(website);
-			}
-		}
-
-		website = getPersistence().update(website);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(website);
-			}
-			else {
-				listener.onAfterUpdate(website);
-			}
-		}
-
-		return website;
+		return getPersistence().update(website);
 	}
 
 	public static com.liferay.portal.model.Website update(
 		com.liferay.portal.model.Website website, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = website.isNew();
+		return getPersistence().update(website, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(website);
-			}
-			else {
-				listener.onBeforeUpdate(website);
-			}
-		}
-
-		website = getPersistence().update(website, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(website);
-			}
-			else {
-				listener.onAfterUpdate(website);
-			}
-		}
-
-		return website;
+	public static com.liferay.portal.model.Website updateImpl(
+		com.liferay.portal.model.Website website, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(website, merge);
 	}
 
 	public static com.liferay.portal.model.Website findByPrimaryKey(
@@ -469,23 +397,7 @@ public class WebsiteUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = WebsiteUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Website"));
-	private static Log _log = LogFactory.getLog(WebsiteUtil.class);
 	private static WebsiteUtil _util;
 	private WebsitePersistence _persistence;
 }

@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="DLFolderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class DLFolderUtil {
 		long folderId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(folderId));
-		}
-
-		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder = getPersistence()
-																		  .remove(folderId);
-
-		if (listener != null) {
-			listener.onAfterRemove(dlFolder);
-		}
-
-		return dlFolder;
+		return getPersistence().remove(folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder remove(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(dlFolder);
-		}
-
-		dlFolder = getPersistence().remove(dlFolder);
-
-		if (listener != null) {
-			listener.onAfterRemove(dlFolder);
-		}
-
-		return dlFolder;
+		return getPersistence().remove(dlFolder);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder update(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = dlFolder.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFolder);
-			}
-			else {
-				listener.onBeforeUpdate(dlFolder);
-			}
-		}
-
-		dlFolder = getPersistence().update(dlFolder);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(dlFolder);
-			}
-			else {
-				listener.onAfterUpdate(dlFolder);
-			}
-		}
-
-		return dlFolder;
+		return getPersistence().update(dlFolder);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder update(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = dlFolder.isNew();
+		return getPersistence().update(dlFolder, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFolder);
-			}
-			else {
-				listener.onBeforeUpdate(dlFolder);
-			}
-		}
-
-		dlFolder = getPersistence().update(dlFolder, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(dlFolder);
-			}
-			else {
-				listener.onAfterUpdate(dlFolder);
-			}
-		}
-
-		return dlFolder;
+	public static com.liferay.portlet.documentlibrary.model.DLFolder updateImpl(
+		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(dlFolder, merge);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByPrimaryKey(
@@ -376,23 +303,7 @@ public class DLFolderUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = DLFolderUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.documentlibrary.model.DLFolder"));
-	private static Log _log = LogFactory.getLog(DLFolderUtil.class);
 	private static DLFolderUtil _util;
 	private DLFolderPersistence _persistence;
 }

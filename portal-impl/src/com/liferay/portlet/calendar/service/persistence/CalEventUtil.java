@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.calendar.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="CalEventUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class CalEventUtil {
 		long eventId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(eventId));
-		}
-
-		com.liferay.portlet.calendar.model.CalEvent calEvent = getPersistence()
-																   .remove(eventId);
-
-		if (listener != null) {
-			listener.onAfterRemove(calEvent);
-		}
-
-		return calEvent;
+		return getPersistence().remove(eventId);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent remove(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(calEvent);
-		}
-
-		calEvent = getPersistence().remove(calEvent);
-
-		if (listener != null) {
-			listener.onAfterRemove(calEvent);
-		}
-
-		return calEvent;
+		return getPersistence().remove(calEvent);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent update(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = calEvent.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(calEvent);
-			}
-			else {
-				listener.onBeforeUpdate(calEvent);
-			}
-		}
-
-		calEvent = getPersistence().update(calEvent);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(calEvent);
-			}
-			else {
-				listener.onAfterUpdate(calEvent);
-			}
-		}
-
-		return calEvent;
+		return getPersistence().update(calEvent);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent update(
 		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = calEvent.isNew();
+		return getPersistence().update(calEvent, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(calEvent);
-			}
-			else {
-				listener.onBeforeUpdate(calEvent);
-			}
-		}
-
-		calEvent = getPersistence().update(calEvent, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(calEvent);
-			}
-			else {
-				listener.onAfterUpdate(calEvent);
-			}
-		}
-
-		return calEvent;
+	public static com.liferay.portlet.calendar.model.CalEvent updateImpl(
+		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(calEvent, merge);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent findByPrimaryKey(
@@ -353,23 +280,7 @@ public class CalEventUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = CalEventUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.calendar.model.CalEvent"));
-	private static Log _log = LogFactory.getLog(CalEventUtil.class);
 	private static CalEventUtil _util;
 	private CalEventPersistence _persistence;
 }

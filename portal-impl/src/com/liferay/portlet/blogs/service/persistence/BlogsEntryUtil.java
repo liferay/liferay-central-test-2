@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.blogs.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="BlogsEntryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class BlogsEntryUtil {
 		long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.blogs.NoSuchEntryException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(entryId));
-		}
-
-		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry = getPersistence()
-																	.remove(entryId);
-
-		if (listener != null) {
-			listener.onAfterRemove(blogsEntry);
-		}
-
-		return blogsEntry;
+		return getPersistence().remove(entryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry remove(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(blogsEntry);
-		}
-
-		blogsEntry = getPersistence().remove(blogsEntry);
-
-		if (listener != null) {
-			listener.onAfterRemove(blogsEntry);
-		}
-
-		return blogsEntry;
+		return getPersistence().remove(blogsEntry);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry update(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = blogsEntry.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(blogsEntry);
-			}
-			else {
-				listener.onBeforeUpdate(blogsEntry);
-			}
-		}
-
-		blogsEntry = getPersistence().update(blogsEntry);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(blogsEntry);
-			}
-			else {
-				listener.onAfterUpdate(blogsEntry);
-			}
-		}
-
-		return blogsEntry;
+		return getPersistence().update(blogsEntry);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry update(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = blogsEntry.isNew();
+		return getPersistence().update(blogsEntry, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(blogsEntry);
-			}
-			else {
-				listener.onBeforeUpdate(blogsEntry);
-			}
-		}
-
-		blogsEntry = getPersistence().update(blogsEntry, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(blogsEntry);
-			}
-			else {
-				listener.onAfterUpdate(blogsEntry);
-			}
-		}
-
-		return blogsEntry;
+	public static com.liferay.portlet.blogs.model.BlogsEntry updateImpl(
+		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(blogsEntry, merge);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByPrimaryKey(
@@ -475,23 +402,7 @@ public class BlogsEntryUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = BlogsEntryUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.blogs.model.BlogsEntry"));
-	private static Log _log = LogFactory.getLog(BlogsEntryUtil.class);
 	private static BlogsEntryUtil _util;
 	private BlogsEntryPersistence _persistence;
 }

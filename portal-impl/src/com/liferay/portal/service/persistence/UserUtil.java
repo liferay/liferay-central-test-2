@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="UserUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class UserUtil {
 	public static com.liferay.portal.model.User remove(long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(userId));
-		}
-
-		com.liferay.portal.model.User user = getPersistence().remove(userId);
-
-		if (listener != null) {
-			listener.onAfterRemove(user);
-		}
-
-		return user;
+		return getPersistence().remove(userId);
 	}
 
 	public static com.liferay.portal.model.User remove(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(user);
-		}
-
-		user = getPersistence().remove(user);
-
-		if (listener != null) {
-			listener.onAfterRemove(user);
-		}
-
-		return user;
+		return getPersistence().remove(user);
 	}
 
 	public static com.liferay.portal.model.User update(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = user.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(user);
-			}
-			else {
-				listener.onBeforeUpdate(user);
-			}
-		}
-
-		user = getPersistence().update(user);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(user);
-			}
-			else {
-				listener.onAfterUpdate(user);
-			}
-		}
-
-		return user;
+		return getPersistence().update(user);
 	}
 
 	public static com.liferay.portal.model.User update(
 		com.liferay.portal.model.User user, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = user.isNew();
+		return getPersistence().update(user, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(user);
-			}
-			else {
-				listener.onBeforeUpdate(user);
-			}
-		}
-
-		user = getPersistence().update(user, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(user);
-			}
-			else {
-				listener.onAfterUpdate(user);
-			}
-		}
-
-		return user;
+	public static com.liferay.portal.model.User updateImpl(
+		com.liferay.portal.model.User user, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(user, merge);
 	}
 
 	public static com.liferay.portal.model.User findByPrimaryKey(long userId)
@@ -996,23 +924,7 @@ public class UserUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = UserUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.User"));
-	private static Log _log = LogFactory.getLog(UserUtil.class);
 	private static UserUtil _util;
 	private UserPersistence _persistence;
 }

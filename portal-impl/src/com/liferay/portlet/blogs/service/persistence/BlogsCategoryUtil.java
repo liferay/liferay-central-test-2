@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.blogs.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="BlogsCategoryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class BlogsCategoryUtil {
 		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.blogs.NoSuchCategoryException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(categoryId));
-		}
-
-		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory = getPersistence()
-																		  .remove(categoryId);
-
-		if (listener != null) {
-			listener.onAfterRemove(blogsCategory);
-		}
-
-		return blogsCategory;
+		return getPersistence().remove(categoryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory remove(
 		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(blogsCategory);
-		}
-
-		blogsCategory = getPersistence().remove(blogsCategory);
-
-		if (listener != null) {
-			listener.onAfterRemove(blogsCategory);
-		}
-
-		return blogsCategory;
+		return getPersistence().remove(blogsCategory);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory update(
 		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = blogsCategory.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(blogsCategory);
-			}
-			else {
-				listener.onBeforeUpdate(blogsCategory);
-			}
-		}
-
-		blogsCategory = getPersistence().update(blogsCategory);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(blogsCategory);
-			}
-			else {
-				listener.onAfterUpdate(blogsCategory);
-			}
-		}
-
-		return blogsCategory;
+		return getPersistence().update(blogsCategory);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory update(
 		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = blogsCategory.isNew();
+		return getPersistence().update(blogsCategory, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(blogsCategory);
-			}
-			else {
-				listener.onBeforeUpdate(blogsCategory);
-			}
-		}
-
-		blogsCategory = getPersistence().update(blogsCategory, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(blogsCategory);
-			}
-			else {
-				listener.onAfterUpdate(blogsCategory);
-			}
-		}
-
-		return blogsCategory;
+	public static com.liferay.portlet.blogs.model.BlogsCategory updateImpl(
+		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(blogsCategory, merge);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory findByPrimaryKey(
@@ -258,23 +185,7 @@ public class BlogsCategoryUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = BlogsCategoryUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.blogs.model.BlogsCategory"));
-	private static Log _log = LogFactory.getLog(BlogsCategoryUtil.class);
 	private static BlogsCategoryUtil _util;
 	private BlogsCategoryPersistence _persistence;
 }

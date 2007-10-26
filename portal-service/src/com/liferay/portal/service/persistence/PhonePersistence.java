@@ -47,6 +47,10 @@ public interface PhonePersistence {
 		com.liferay.portal.model.Phone phone, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Phone updateImpl(
+		com.liferay.portal.model.Phone phone, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Phone findByPrimaryKey(long phoneId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPhoneException;

@@ -47,6 +47,10 @@ public interface ClassNamePersistence {
 		com.liferay.portal.model.ClassName className, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.ClassName updateImpl(
+		com.liferay.portal.model.ClassName className, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.ClassName findByPrimaryKey(long classNameId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchClassNameException;

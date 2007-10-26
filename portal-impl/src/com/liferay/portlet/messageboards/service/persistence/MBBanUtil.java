@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MBBanUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class MBBanUtil {
 		long banId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchBanException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(banId));
-		}
-
-		com.liferay.portlet.messageboards.model.MBBan mbBan = getPersistence()
-																  .remove(banId);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbBan);
-		}
-
-		return mbBan;
+		return getPersistence().remove(banId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan remove(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(mbBan);
-		}
-
-		mbBan = getPersistence().remove(mbBan);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbBan);
-		}
-
-		return mbBan;
+		return getPersistence().remove(mbBan);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan update(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbBan.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbBan);
-			}
-			else {
-				listener.onBeforeUpdate(mbBan);
-			}
-		}
-
-		mbBan = getPersistence().update(mbBan);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbBan);
-			}
-			else {
-				listener.onAfterUpdate(mbBan);
-			}
-		}
-
-		return mbBan;
+		return getPersistence().update(mbBan);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan update(
 		com.liferay.portlet.messageboards.model.MBBan mbBan, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbBan.isNew();
+		return getPersistence().update(mbBan, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbBan);
-			}
-			else {
-				listener.onBeforeUpdate(mbBan);
-			}
-		}
-
-		mbBan = getPersistence().update(mbBan, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbBan);
-			}
-			else {
-				listener.onAfterUpdate(mbBan);
-			}
-		}
-
-		return mbBan;
+	public static com.liferay.portlet.messageboards.model.MBBan updateImpl(
+		com.liferay.portlet.messageboards.model.MBBan mbBan, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(mbBan, merge);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan findByPrimaryKey(
@@ -371,23 +298,7 @@ public class MBBanUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = MBBanUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.messageboards.model.MBBan"));
-	private static Log _log = LogFactory.getLog(MBBanUtil.class);
 	private static MBBanUtil _util;
 	private MBBanPersistence _persistence;
 }

@@ -49,6 +49,10 @@ public interface MembershipRequestPersistence {
 		com.liferay.portal.model.MembershipRequest membershipRequest,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.MembershipRequest updateImpl(
+		com.liferay.portal.model.MembershipRequest membershipRequest,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.MembershipRequest findByPrimaryKey(
 		long membershipRequestId)
 		throws com.liferay.portal.SystemException, 

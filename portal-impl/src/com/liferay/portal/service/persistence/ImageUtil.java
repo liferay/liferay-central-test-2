@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ImageUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,95 +36,31 @@ public class ImageUtil {
 	public static com.liferay.portal.model.Image remove(long imageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchImageException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(imageId));
-		}
-
-		com.liferay.portal.model.Image image = getPersistence().remove(imageId);
-
-		if (listener != null) {
-			listener.onAfterRemove(image);
-		}
-
-		return image;
+		return getPersistence().remove(imageId);
 	}
 
 	public static com.liferay.portal.model.Image remove(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(image);
-		}
-
-		image = getPersistence().remove(image);
-
-		if (listener != null) {
-			listener.onAfterRemove(image);
-		}
-
-		return image;
+		return getPersistence().remove(image);
 	}
 
 	public static com.liferay.portal.model.Image update(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = image.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(image);
-			}
-			else {
-				listener.onBeforeUpdate(image);
-			}
-		}
-
-		image = getPersistence().update(image);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(image);
-			}
-			else {
-				listener.onAfterUpdate(image);
-			}
-		}
-
-		return image;
+		return getPersistence().update(image);
 	}
 
 	public static com.liferay.portal.model.Image update(
 		com.liferay.portal.model.Image image, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = image.isNew();
+		return getPersistence().update(image, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(image);
-			}
-			else {
-				listener.onBeforeUpdate(image);
-			}
-		}
-
-		image = getPersistence().update(image, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(image);
-			}
-			else {
-				listener.onAfterUpdate(image);
-			}
-		}
-
-		return image;
+	public static com.liferay.portal.model.Image updateImpl(
+		com.liferay.portal.model.Image image, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(image, merge);
 	}
 
 	public static com.liferay.portal.model.Image findByPrimaryKey(long imageId)
@@ -247,23 +175,7 @@ public class ImageUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = ImageUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Image"));
-	private static Log _log = LogFactory.getLog(ImageUtil.class);
 	private static ImageUtil _util;
 	private ImagePersistence _persistence;
 }

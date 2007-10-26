@@ -26,14 +26,18 @@ import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -107,6 +111,22 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public Role remove(Role role) throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(role);
+		}
+
+		role = removeImpl(role);
+
+		if (listener != null) {
+			listener.onAfterRemove(role);
+		}
+
+		return role;
+	}
+
+	protected Role removeImpl(Role role) throws SystemException {
 		try {
 			clearGroups.clear(role.getPrimaryKey());
 		}
@@ -161,6 +181,34 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public Role update(com.liferay.portal.model.Role role, boolean merge)
+		throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = role.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(role);
+			}
+			else {
+				listener.onBeforeUpdate(role);
+			}
+		}
+
+		role = updateImpl(role, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(role);
+			}
+			else {
+				listener.onAfterUpdate(role);
+			}
+		}
+
+		return role;
+	}
+
+	public Role updateImpl(com.liferay.portal.model.Role role, boolean merge)
 		throws SystemException {
 		FinderCache.clearCache("Groups_Roles");
 		FinderCache.clearCache("Roles_Permissions");
@@ -2190,6 +2238,19 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Roles ON (Groups_Roles.groupId = Group_.groupId) WHERE (Groups_Roles.roleId = ?)";
 	private static final String _SQL_GETGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE roleId = ?";
 	private static final String _SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE roleId = ? AND groupId = ?";
@@ -2199,5 +2260,7 @@ public class RolePersistenceImpl extends BasePersistence
 	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_Roles ON (Users_Roles.userId = User_.userId) WHERE (Users_Roles.roleId = ?)";
 	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Roles WHERE roleId = ?";
 	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Roles WHERE roleId = ? AND userId = ?";
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Role"));
 	private static Log _log = LogFactory.getLog(RolePersistenceImpl.class);
 }

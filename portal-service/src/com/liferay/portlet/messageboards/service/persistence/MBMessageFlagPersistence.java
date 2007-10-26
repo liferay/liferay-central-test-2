@@ -49,6 +49,10 @@ public interface MBMessageFlagPersistence {
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBMessageFlag updateImpl(
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByPrimaryKey(
 		long messageFlagId)
 		throws com.liferay.portal.SystemException, 

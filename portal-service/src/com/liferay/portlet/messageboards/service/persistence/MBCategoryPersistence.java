@@ -49,6 +49,10 @@ public interface MBCategoryPersistence {
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBCategory updateImpl(
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBCategory findByPrimaryKey(
 		long categoryId)
 		throws com.liferay.portal.SystemException, 

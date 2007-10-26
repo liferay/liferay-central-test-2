@@ -49,6 +49,10 @@ public interface MBThreadPersistence {
 		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBThread updateImpl(
+		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBThread findByPrimaryKey(
 		long threadId)
 		throws com.liferay.portal.SystemException, 

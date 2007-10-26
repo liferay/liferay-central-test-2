@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="JournalArticleUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class JournalArticleUtil {
 		long id)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchArticleException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(id));
-		}
-
-		com.liferay.portlet.journal.model.JournalArticle journalArticle = getPersistence()
-																			  .remove(id);
-
-		if (listener != null) {
-			listener.onAfterRemove(journalArticle);
-		}
-
-		return journalArticle;
+		return getPersistence().remove(id);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle remove(
 		com.liferay.portlet.journal.model.JournalArticle journalArticle)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(journalArticle);
-		}
-
-		journalArticle = getPersistence().remove(journalArticle);
-
-		if (listener != null) {
-			listener.onAfterRemove(journalArticle);
-		}
-
-		return journalArticle;
+		return getPersistence().remove(journalArticle);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle update(
 		com.liferay.portlet.journal.model.JournalArticle journalArticle)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = journalArticle.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(journalArticle);
-			}
-			else {
-				listener.onBeforeUpdate(journalArticle);
-			}
-		}
-
-		journalArticle = getPersistence().update(journalArticle);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(journalArticle);
-			}
-			else {
-				listener.onAfterUpdate(journalArticle);
-			}
-		}
-
-		return journalArticle;
+		return getPersistence().update(journalArticle);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle update(
 		com.liferay.portlet.journal.model.JournalArticle journalArticle,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = journalArticle.isNew();
+		return getPersistence().update(journalArticle, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(journalArticle);
-			}
-			else {
-				listener.onBeforeUpdate(journalArticle);
-			}
-		}
-
-		journalArticle = getPersistence().update(journalArticle, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(journalArticle);
-			}
-			else {
-				listener.onAfterUpdate(journalArticle);
-			}
-		}
-
-		return journalArticle;
+	public static com.liferay.portlet.journal.model.JournalArticle updateImpl(
+		com.liferay.portlet.journal.model.JournalArticle journalArticle,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(journalArticle, merge);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByPrimaryKey(
@@ -588,23 +515,7 @@ public class JournalArticleUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = JournalArticleUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.journal.model.JournalArticle"));
-	private static Log _log = LogFactory.getLog(JournalArticleUtil.class);
 	private static JournalArticleUtil _util;
 	private JournalArticlePersistence _persistence;
 }

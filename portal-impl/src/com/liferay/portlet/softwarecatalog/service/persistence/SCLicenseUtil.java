@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="SCLicenseUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class SCLicenseUtil {
 		long licenseId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(licenseId));
-		}
-
-		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = getPersistence()
-																			.remove(licenseId);
-
-		if (listener != null) {
-			listener.onAfterRemove(scLicense);
-		}
-
-		return scLicense;
+		return getPersistence().remove(licenseId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense remove(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(scLicense);
-		}
-
-		scLicense = getPersistence().remove(scLicense);
-
-		if (listener != null) {
-			listener.onAfterRemove(scLicense);
-		}
-
-		return scLicense;
+		return getPersistence().remove(scLicense);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense update(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = scLicense.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(scLicense);
-			}
-			else {
-				listener.onBeforeUpdate(scLicense);
-			}
-		}
-
-		scLicense = getPersistence().update(scLicense);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(scLicense);
-			}
-			else {
-				listener.onAfterUpdate(scLicense);
-			}
-		}
-
-		return scLicense;
+		return getPersistence().update(scLicense);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense update(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = scLicense.isNew();
+		return getPersistence().update(scLicense, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(scLicense);
-			}
-			else {
-				listener.onBeforeUpdate(scLicense);
-			}
-		}
-
-		scLicense = getPersistence().update(scLicense, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(scLicense);
-			}
-			else {
-				listener.onAfterUpdate(scLicense);
-			}
-		}
-
-		return scLicense;
+	public static com.liferay.portlet.softwarecatalog.model.SCLicense updateImpl(
+		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(scLicense, merge);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense findByPrimaryKey(
@@ -302,23 +229,7 @@ public class SCLicenseUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = SCLicenseUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCLicense"));
-	private static Log _log = LogFactory.getLog(SCLicenseUtil.class);
 	private static SCLicenseUtil _util;
 	private SCLicensePersistence _persistence;
 }

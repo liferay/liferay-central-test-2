@@ -49,6 +49,10 @@ public interface WikiPageResourcePersistence {
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.model.WikiPageResource updateImpl(
+		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.wiki.model.WikiPageResource findByPrimaryKey(
 		long resourcePrimKey)
 		throws com.liferay.portal.SystemException, 

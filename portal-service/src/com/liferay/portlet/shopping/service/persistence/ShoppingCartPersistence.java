@@ -47,6 +47,10 @@ public interface ShoppingCartPersistence {
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingCart updateImpl(
+		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.shopping.model.ShoppingCart findByPrimaryKey(
 		long cartId)
 		throws com.liferay.portal.SystemException, 

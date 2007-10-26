@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PluginSettingUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class PluginSettingUtil {
 		long pluginSettingId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPluginSettingException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(pluginSettingId));
-		}
-
-		com.liferay.portal.model.PluginSetting pluginSetting = getPersistence()
-																   .remove(pluginSettingId);
-
-		if (listener != null) {
-			listener.onAfterRemove(pluginSetting);
-		}
-
-		return pluginSetting;
+		return getPersistence().remove(pluginSettingId);
 	}
 
 	public static com.liferay.portal.model.PluginSetting remove(
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(pluginSetting);
-		}
-
-		pluginSetting = getPersistence().remove(pluginSetting);
-
-		if (listener != null) {
-			listener.onAfterRemove(pluginSetting);
-		}
-
-		return pluginSetting;
+		return getPersistence().remove(pluginSetting);
 	}
 
 	public static com.liferay.portal.model.PluginSetting update(
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = pluginSetting.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(pluginSetting);
-			}
-			else {
-				listener.onBeforeUpdate(pluginSetting);
-			}
-		}
-
-		pluginSetting = getPersistence().update(pluginSetting);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(pluginSetting);
-			}
-			else {
-				listener.onAfterUpdate(pluginSetting);
-			}
-		}
-
-		return pluginSetting;
+		return getPersistence().update(pluginSetting);
 	}
 
 	public static com.liferay.portal.model.PluginSetting update(
 		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = pluginSetting.isNew();
+		return getPersistence().update(pluginSetting, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(pluginSetting);
-			}
-			else {
-				listener.onBeforeUpdate(pluginSetting);
-			}
-		}
-
-		pluginSetting = getPersistence().update(pluginSetting, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(pluginSetting);
-			}
-			else {
-				listener.onAfterUpdate(pluginSetting);
-			}
-		}
-
-		return pluginSetting;
+	public static com.liferay.portal.model.PluginSetting updateImpl(
+		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(pluginSetting, merge);
 	}
 
 	public static com.liferay.portal.model.PluginSetting findByPrimaryKey(
@@ -277,23 +204,7 @@ public class PluginSettingUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = PluginSettingUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.PluginSetting"));
-	private static Log _log = LogFactory.getLog(PluginSettingUtil.class);
 	private static PluginSettingUtil _util;
 	private PluginSettingPersistence _persistence;
 }

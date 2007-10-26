@@ -49,6 +49,10 @@ public interface ServiceComponentPersistence {
 		com.liferay.portal.model.ServiceComponent serviceComponent,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.ServiceComponent updateImpl(
+		com.liferay.portal.model.ServiceComponent serviceComponent,
+		boolean merge) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.ServiceComponent findByPrimaryKey(
 		long serviceComponentId)
 		throws com.liferay.portal.NoSuchServiceComponentException, 

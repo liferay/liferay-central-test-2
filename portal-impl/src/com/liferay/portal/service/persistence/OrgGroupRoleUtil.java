@@ -22,14 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="OrgGroupRoleUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class OrgGroupRoleUtil {
 		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchOrgGroupRoleException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(orgGroupRolePK));
-		}
-
-		com.liferay.portal.model.OrgGroupRole orgGroupRole = getPersistence()
-																 .remove(orgGroupRolePK);
-
-		if (listener != null) {
-			listener.onAfterRemove(orgGroupRole);
-		}
-
-		return orgGroupRole;
+		return getPersistence().remove(orgGroupRolePK);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole remove(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(orgGroupRole);
-		}
-
-		orgGroupRole = getPersistence().remove(orgGroupRole);
-
-		if (listener != null) {
-			listener.onAfterRemove(orgGroupRole);
-		}
-
-		return orgGroupRole;
+		return getPersistence().remove(orgGroupRole);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole update(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = orgGroupRole.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(orgGroupRole);
-			}
-			else {
-				listener.onBeforeUpdate(orgGroupRole);
-			}
-		}
-
-		orgGroupRole = getPersistence().update(orgGroupRole);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(orgGroupRole);
-			}
-			else {
-				listener.onAfterUpdate(orgGroupRole);
-			}
-		}
-
-		return orgGroupRole;
+		return getPersistence().update(orgGroupRole);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole update(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean merge)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = orgGroupRole.isNew();
+		return getPersistence().update(orgGroupRole, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(orgGroupRole);
-			}
-			else {
-				listener.onBeforeUpdate(orgGroupRole);
-			}
-		}
-
-		orgGroupRole = getPersistence().update(orgGroupRole, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(orgGroupRole);
-			}
-			else {
-				listener.onAfterUpdate(orgGroupRole);
-			}
-		}
-
-		return orgGroupRole;
+	public static com.liferay.portal.model.OrgGroupRole updateImpl(
+		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean merge)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(orgGroupRole, merge);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole findByPrimaryKey(
@@ -302,23 +229,7 @@ public class OrgGroupRoleUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = OrgGroupRoleUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.OrgGroupRole"));
-	private static Log _log = LogFactory.getLog(OrgGroupRoleUtil.class);
 	private static OrgGroupRoleUtil _util;
 	private OrgGroupRolePersistence _persistence;
 }

@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="DLFileRankUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class DLFileRankUtil {
 		long fileRankId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(fileRankId));
-		}
-
-		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank = getPersistence()
-																			  .remove(fileRankId);
-
-		if (listener != null) {
-			listener.onAfterRemove(dlFileRank);
-		}
-
-		return dlFileRank;
+		return getPersistence().remove(fileRankId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank remove(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(dlFileRank);
-		}
-
-		dlFileRank = getPersistence().remove(dlFileRank);
-
-		if (listener != null) {
-			listener.onAfterRemove(dlFileRank);
-		}
-
-		return dlFileRank;
+		return getPersistence().remove(dlFileRank);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = dlFileRank.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFileRank);
-			}
-			else {
-				listener.onBeforeUpdate(dlFileRank);
-			}
-		}
-
-		dlFileRank = getPersistence().update(dlFileRank);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(dlFileRank);
-			}
-			else {
-				listener.onAfterUpdate(dlFileRank);
-			}
-		}
-
-		return dlFileRank;
+		return getPersistence().update(dlFileRank);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = dlFileRank.isNew();
+		return getPersistence().update(dlFileRank, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(dlFileRank);
-			}
-			else {
-				listener.onBeforeUpdate(dlFileRank);
-			}
-		}
-
-		dlFileRank = getPersistence().update(dlFileRank, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(dlFileRank);
-			}
-			else {
-				listener.onAfterUpdate(dlFileRank);
-			}
-		}
-
-		return dlFileRank;
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateImpl(
+		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(dlFileRank, merge);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank findByPrimaryKey(
@@ -330,23 +257,7 @@ public class DLFileRankUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = DLFileRankUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.documentlibrary.model.DLFileRank"));
-	private static Log _log = LogFactory.getLog(DLFileRankUtil.class);
 	private static DLFileRankUtil _util;
 	private DLFileRankPersistence _persistence;
 }

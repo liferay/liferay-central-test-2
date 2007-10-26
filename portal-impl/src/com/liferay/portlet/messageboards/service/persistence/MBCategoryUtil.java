@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.util.PropsUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MBCategoryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -46,96 +38,31 @@ public class MBCategoryUtil {
 		long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.messageboards.NoSuchCategoryException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(findByPrimaryKey(categoryId));
-		}
-
-		com.liferay.portlet.messageboards.model.MBCategory mbCategory = getPersistence()
-																			.remove(categoryId);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbCategory);
-		}
-
-		return mbCategory;
+		return getPersistence().remove(categoryId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory remove(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(mbCategory);
-		}
-
-		mbCategory = getPersistence().remove(mbCategory);
-
-		if (listener != null) {
-			listener.onAfterRemove(mbCategory);
-		}
-
-		return mbCategory;
+		return getPersistence().remove(mbCategory);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory update(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbCategory.isNew();
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbCategory);
-			}
-			else {
-				listener.onBeforeUpdate(mbCategory);
-			}
-		}
-
-		mbCategory = getPersistence().update(mbCategory);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbCategory);
-			}
-			else {
-				listener.onAfterUpdate(mbCategory);
-			}
-		}
-
-		return mbCategory;
+		return getPersistence().update(mbCategory);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory update(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
 		boolean merge) throws com.liferay.portal.SystemException {
-		ModelListener listener = _getListener();
-		boolean isNew = mbCategory.isNew();
+		return getPersistence().update(mbCategory, merge);
+	}
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbCategory);
-			}
-			else {
-				listener.onBeforeUpdate(mbCategory);
-			}
-		}
-
-		mbCategory = getPersistence().update(mbCategory, merge);
-
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbCategory);
-			}
-			else {
-				listener.onAfterUpdate(mbCategory);
-			}
-		}
-
-		return mbCategory;
+	public static com.liferay.portlet.messageboards.model.MBCategory updateImpl(
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(mbCategory, merge);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory findByPrimaryKey(
@@ -353,23 +280,7 @@ public class MBCategoryUtil {
 		return _util;
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _UTIL = MBCategoryUtil.class.getName();
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.messageboards.model.MBCategory"));
-	private static Log _log = LogFactory.getLog(MBCategoryUtil.class);
 	private static MBCategoryUtil _util;
 	private MBCategoryPersistence _persistence;
 }

@@ -26,14 +26,18 @@ import com.liferay.portal.NoSuchMembershipRequestException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.MembershipRequest;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.MembershipRequestImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -100,6 +104,23 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 	public MembershipRequest remove(MembershipRequest membershipRequest)
 		throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(membershipRequest);
+		}
+
+		membershipRequest = removeImpl(membershipRequest);
+
+		if (listener != null) {
+			listener.onAfterRemove(membershipRequest);
+		}
+
+		return membershipRequest;
+	}
+
+	protected MembershipRequest removeImpl(MembershipRequest membershipRequest)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -125,6 +146,35 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 	}
 
 	public MembershipRequest update(
+		com.liferay.portal.model.MembershipRequest membershipRequest,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = membershipRequest.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(membershipRequest);
+			}
+			else {
+				listener.onBeforeUpdate(membershipRequest);
+			}
+		}
+
+		membershipRequest = updateImpl(membershipRequest, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(membershipRequest);
+			}
+			else {
+				listener.onAfterUpdate(membershipRequest);
+			}
+		}
+
+		return membershipRequest;
+	}
+
+	public MembershipRequest updateImpl(
 		com.liferay.portal.model.MembershipRequest membershipRequest,
 		boolean merge) throws SystemException {
 		Session session = null;
@@ -1142,5 +1192,20 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 	protected void initDao() {
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.MembershipRequest"));
 	private static Log _log = LogFactory.getLog(MembershipRequestPersistenceImpl.class);
 }

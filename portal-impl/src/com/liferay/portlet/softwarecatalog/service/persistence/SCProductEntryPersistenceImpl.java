@@ -25,12 +25,16 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
@@ -113,6 +117,23 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 	public SCProductEntry remove(SCProductEntry scProductEntry)
 		throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(scProductEntry);
+		}
+
+		scProductEntry = removeImpl(scProductEntry);
+
+		if (listener != null) {
+			listener.onAfterRemove(scProductEntry);
+		}
+
+		return scProductEntry;
+	}
+
+	protected SCProductEntry removeImpl(SCProductEntry scProductEntry)
+		throws SystemException {
 		try {
 			clearSCLicenses.clear(scProductEntry.getPrimaryKey());
 		}
@@ -148,6 +169,35 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 	}
 
 	public SCProductEntry update(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = scProductEntry.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(scProductEntry);
+			}
+			else {
+				listener.onBeforeUpdate(scProductEntry);
+			}
+		}
+
+		scProductEntry = updateImpl(scProductEntry, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(scProductEntry);
+			}
+			else {
+				listener.onAfterUpdate(scProductEntry);
+			}
+		}
+
+		return scProductEntry;
+	}
+
+	public SCProductEntry updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
 		boolean merge) throws SystemException {
 		FinderCache.clearCache("SCLicenses_SCProductEntries");
@@ -1602,8 +1652,23 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
 	private static final String _SQL_GETSCLICENSES = "SELECT {SCLicense.*} FROM SCLicense INNER JOIN SCLicenses_SCProductEntries ON (SCLicenses_SCProductEntries.licenseId = SCLicense.licenseId) WHERE (SCLicenses_SCProductEntries.productEntryId = ?)";
 	private static final String _SQL_GETSCLICENSESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCLicenses_SCProductEntries WHERE productEntryId = ?";
 	private static final String _SQL_CONTAINSSCLICENSE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCLicenses_SCProductEntries WHERE productEntryId = ? AND licenseId = ?";
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCProductEntry"));
 	private static Log _log = LogFactory.getLog(SCProductEntryPersistenceImpl.class);
 }
