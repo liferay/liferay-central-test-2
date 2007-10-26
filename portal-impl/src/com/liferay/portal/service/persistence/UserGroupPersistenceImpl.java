@@ -1190,7 +1190,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 		if (result == null) {
 			try {
-				Boolean value = new Boolean(containsUser.contains(pk, userPK));
+				Boolean value = Boolean.valueOf(containsUser.contains(pk, userPK));
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 

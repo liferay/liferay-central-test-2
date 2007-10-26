@@ -1972,7 +1972,8 @@ public class UserPersistenceImpl extends BasePersistence
 
 		if (result == null) {
 			try {
-				Boolean value = new Boolean(containsGroup.contains(pk, groupPK));
+				Boolean value = Boolean.valueOf(containsGroup.contains(pk,
+							groupPK));
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -2300,8 +2301,8 @@ public class UserPersistenceImpl extends BasePersistence
 
 		if (result == null) {
 			try {
-				Boolean value = new Boolean(containsOrganization.contains(pk,
-							organizationPK));
+				Boolean value = Boolean.valueOf(containsOrganization.contains(
+							pk, organizationPK));
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -2625,8 +2626,8 @@ public class UserPersistenceImpl extends BasePersistence
 
 		if (result == null) {
 			try {
-				Boolean value = new Boolean(containsPermission.contains(pk,
-							permissionPK));
+				Boolean value = Boolean.valueOf(containsPermission.contains(
+							pk, permissionPK));
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -2952,7 +2953,7 @@ public class UserPersistenceImpl extends BasePersistence
 
 		if (result == null) {
 			try {
-				Boolean value = new Boolean(containsRole.contains(pk, rolePK));
+				Boolean value = Boolean.valueOf(containsRole.contains(pk, rolePK));
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);
 
@@ -3277,7 +3278,7 @@ public class UserPersistenceImpl extends BasePersistence
 
 		if (result == null) {
 			try {
-				Boolean value = new Boolean(containsUserGroup.contains(pk,
+				Boolean value = Boolean.valueOf(containsUserGroup.contains(pk,
 							userGroupPK));
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);

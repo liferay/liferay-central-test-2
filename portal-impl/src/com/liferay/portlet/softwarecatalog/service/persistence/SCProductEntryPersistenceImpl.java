@@ -1301,7 +1301,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 		if (result == null) {
 			try {
-				Boolean value = new Boolean(containsSCLicense.contains(pk,
+				Boolean value = Boolean.valueOf(containsSCLicense.contains(pk,
 							scLicensePK));
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);

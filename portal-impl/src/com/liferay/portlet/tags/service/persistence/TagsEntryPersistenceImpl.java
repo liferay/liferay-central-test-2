@@ -666,7 +666,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 		if (result == null) {
 			try {
-				Boolean value = new Boolean(containsTagsAsset.contains(pk,
+				Boolean value = Boolean.valueOf(containsTagsAsset.contains(pk,
 							tagsAssetPK));
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);

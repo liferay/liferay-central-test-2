@@ -769,7 +769,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 		if (result == null) {
 			try {
-				Boolean value = new Boolean(containsSCFrameworkVersion.contains(
+				Boolean value = Boolean.valueOf(containsSCFrameworkVersion.contains(
 							pk, scFrameworkVersionPK));
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);

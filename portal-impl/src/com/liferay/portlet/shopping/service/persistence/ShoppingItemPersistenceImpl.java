@@ -918,7 +918,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 		if (result == null) {
 			try {
-				Boolean value = new Boolean(containsShoppingItemPrice.contains(
+				Boolean value = Boolean.valueOf(containsShoppingItemPrice.contains(
 							pk, shoppingItemPricePK));
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, value);

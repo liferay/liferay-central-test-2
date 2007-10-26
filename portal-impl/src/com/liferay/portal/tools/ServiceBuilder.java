@@ -4481,7 +4481,7 @@ public class ServiceBuilder {
 				sm.append("Object result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());");
 				sm.append("if (result == null) {");
 				sm.append("try {");
-				sm.append("Boolean value = new Boolean(contains" + tempEntity.getName() + ".contains(pk, " + tempEntity.getVarName() + "PK));");
+				sm.append("Boolean value = Boolean.valueOf(contains" + tempEntity.getName() + ".contains(pk, " + tempEntity.getVarName() + "PK));");
 				sm.append("FinderCache.putResult(finderClassName, finderMethodName, finderParams, finderArgs, value);");
 				sm.append("return value.booleanValue();");
 				sm.append("}");
