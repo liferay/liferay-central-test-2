@@ -68,29 +68,33 @@ import org.dom4j.io.SAXReader;
 public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 	public PortletDataHandlerControl[] getExportControls()
-			throws PortletDataException {
+		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] { _enableExport };
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
-			throws PortletDataException {
+		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] { _enableImport };
 	}
 
-	public String exportData(PortletDataContext context, String portletId,
-			PortletPreferences prefs) throws PortletDataException {
+	public String exportData(
+			PortletDataContext context, String portletId, 
+			PortletPreferences prefs) 
+		throws PortletDataException {
 
 		Map parameterMap = context.getParameterMap();
 
-		boolean exportData = MapUtil.getBoolean(parameterMap,
-				_EXPORT_CALENDAR_DATA, _enableExport.getDefaultState());
+		boolean exportData = MapUtil.getBoolean(
+			parameterMap, _EXPORT_CALENDAR_DATA, 
+			_enableExport.getDefaultState());
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
 				_log.debug("Exporting data is enabled");
-			} else {
+			} 
+			else {
 				_log.debug("Exporting data is disabled");
 			}
 		}
@@ -141,9 +145,10 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	public PortletPreferences importData(PortletDataContext context,
-			String portletId, PortletPreferences prefs, String data)
-			throws PortletDataException {
+	public PortletPreferences importData(
+			PortletDataContext context, String portletId, 
+			PortletPreferences prefs, String data)
+		throws PortletDataException {
 
 		Map parameterMap = context.getParameterMap();
 
@@ -154,7 +159,8 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		if (_log.isDebugEnabled()) {
 			if (importData) {
 				_log.debug("Importing data is enabled");
-			} else {
+			} 
+			else {
 				_log.debug("Importing data is disabled");
 			}
 		}
@@ -202,7 +208,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importEvent(PortletDataContext context, CalEvent event)
-		throws SystemException, PortalException {
+		throws Exception {
 
 		Map parameterMap = context.getParameterMap();
 
