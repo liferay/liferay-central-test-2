@@ -90,6 +90,7 @@
 		<struts-path>calendar</struts-path>
 		<configuration-action-class>com.liferay.portlet.calendar.action.ConfigurationActionImpl</configuration-action-class>
 		<scheduler-class>com.liferay.portlet.calendar.job.Scheduler</scheduler-class>
+		<portlet-data-handler-class>com.liferay.portlet.calendar.lar.CalendarPortletDataHandlerImpl</portlet-data-handler-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>true</show-portlet-access-denied>
