@@ -58,6 +58,7 @@ import java.util.Date;
 public class CalEventModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "CalEvent";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "eventId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
@@ -80,11 +81,14 @@ public class CalEventModelImpl extends BaseModelImpl {
 			{ "firstReminder", new Integer(Types.INTEGER) },
 			{ "secondReminder", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table CalEvent (eventId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,durationHour INTEGER,durationMinute INTEGER,allDay BOOLEAN,timeZoneSensitive BOOLEAN,type_ VARCHAR(75) null,repeating BOOLEAN,recurrence TEXT null,remindBy VARCHAR(75) null,firstReminder INTEGER,secondReminder INTEGER)";
+	public static String TABLE_SQL_CREATE = "create table CalEvent (uuid_ VARCHAR(75) null,eventId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,durationHour INTEGER,durationMinute INTEGER,allDay BOOLEAN,timeZoneSensitive BOOLEAN,type_ VARCHAR(75) null,repeating BOOLEAN,recurrence TEXT null,remindBy VARCHAR(75) null,firstReminder INTEGER,secondReminder INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table CalEvent";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -119,6 +123,22 @@ public class CalEventModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_eventId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if (((uuid == null) && (_uuid != null)) ||
+				((uuid != null) && (_uuid == null)) ||
+				((uuid != null) && (_uuid != null) && !uuid.equals(_uuid))) {
+			if (!XSS_ALLOW_UUID) {
+				uuid = XSSUtil.strip(uuid);
+			}
+
+			_uuid = uuid;
+		}
 	}
 
 	public long getEventId() {
@@ -397,6 +417,7 @@ public class CalEventModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		CalEventImpl clone = new CalEventImpl();
+		clone.setUuid(getUuid());
 		clone.setEventId(getEventId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -473,6 +494,7 @@ public class CalEventModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _eventId;
 	private long _groupId;
 	private long _companyId;

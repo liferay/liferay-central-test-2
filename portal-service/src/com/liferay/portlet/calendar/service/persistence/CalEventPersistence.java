@@ -59,6 +59,23 @@ public interface CalEventPersistence {
 	public com.liferay.portlet.calendar.model.CalEvent fetchByPrimaryKey(
 		long eventId) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.calendar.model.CalEvent findByUuid(
+		java.lang.String uuid)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.calendar.NoSuchEventException;
+
+	public com.liferay.portlet.calendar.model.CalEvent fetchByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.calendar.model.CalEvent findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.calendar.NoSuchEventException;
+
+	public com.liferay.portlet.calendar.model.CalEvent fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -158,6 +175,14 @@ public interface CalEventPersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.calendar.NoSuchEventException;
+
+	public void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.calendar.NoSuchEventException;
+
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -168,6 +193,12 @@ public interface CalEventPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;

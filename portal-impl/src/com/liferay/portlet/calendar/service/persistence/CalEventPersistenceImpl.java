@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
@@ -64,6 +65,9 @@ public class CalEventPersistenceImpl extends BasePersistence
 		CalEvent calEvent = new CalEventImpl();
 		calEvent.setNew(true);
 		calEvent.setPrimaryKey(eventId);
+
+		String uuid = PortalUUIDUtil.generate();
+		calEvent.setUuid(uuid);
 
 		return calEvent;
 	}
@@ -173,6 +177,11 @@ public class CalEventPersistenceImpl extends BasePersistence
 	public CalEvent updateImpl(
 		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
 		throws SystemException {
+		if (Validator.isNull(calEvent.getUuid())) {
+			String uuid = PortalUUIDUtil.generate();
+			calEvent.setUuid(uuid);
+		}
+
 		Session session = null;
 
 		try {
@@ -230,6 +239,194 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	public CalEvent findByUuid(String uuid)
+		throws NoSuchEventException, SystemException {
+		CalEvent calEvent = fetchByUuid(uuid);
+
+		if (calEvent == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No CalEvent exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEventException(msg.toString());
+		}
+
+		return calEvent;
+	}
+
+	public CalEvent fetchByUuid(String uuid) throws SystemException {
+		String finderClassName = CalEvent.class.getName();
+		String finderMethodName = "fetchByUuid";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { uuid };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("startDate ASC").append(", ");
+				query.append("title ASC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (CalEvent)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (CalEvent)list.get(0);
+			}
+		}
+	}
+
+	public CalEvent findByUUID_G(String uuid, long groupId)
+		throws NoSuchEventException, SystemException {
+		CalEvent calEvent = fetchByUUID_G(uuid, groupId);
+
+		if (calEvent == null) {
+			StringMaker msg = new StringMaker();
+			msg.append("No CalEvent exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(", ");
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEventException(msg.toString());
+		}
+
+		return calEvent;
+	}
+
+	public CalEvent fetchByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		String finderClassName = CalEvent.class.getName();
+		String finderMethodName = "fetchByUUID_G";
+		String[] finderParams = new String[] {
+				String.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" AND ");
+				query.append("groupId = ?");
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("startDate ASC").append(", ");
+				query.append("title ASC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				q.setLong(queryPos++, groupId);
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return (CalEvent)list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List list = (List)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (CalEvent)list.get(0);
+			}
 		}
 	}
 
@@ -982,6 +1179,18 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByUuid(String uuid)
+		throws NoSuchEventException, SystemException {
+		CalEvent calEvent = findByUuid(uuid);
+		remove(calEvent);
+	}
+
+	public void removeByUUID_G(String uuid, long groupId)
+		throws NoSuchEventException, SystemException {
+		CalEvent calEvent = findByUUID_G(uuid, groupId);
+		remove(calEvent);
+	}
+
 	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
@@ -1016,6 +1225,139 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			remove((CalEvent)itr.next());
+		}
+	}
+
+	public int countByUuid(String uuid) throws SystemException {
+		String finderClassName = CalEvent.class.getName();
+		String finderMethodName = "countByUuid";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { uuid };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		String finderClassName = CalEvent.class.getName();
+		String finderMethodName = "countByUUID_G";
+		String[] finderParams = new String[] {
+				String.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { uuid, new Long(groupId) };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" AND ");
+				query.append("groupId = ?");
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				q.setLong(queryPos++, groupId);
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

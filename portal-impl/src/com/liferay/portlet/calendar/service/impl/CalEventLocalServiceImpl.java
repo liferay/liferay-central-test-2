@@ -148,6 +148,26 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public CalEvent addEvent(
+			String uuid, long userId, long plid, String title,
+			String description, int startDateMonth, int startDateDay,
+			int startDateYear, int startDateHour, int startDateMinute,
+			int endDateMonth, int endDateDay, int endDateYear, int durationHour,
+			int durationMinute, boolean allDay, boolean timeZoneSensitive,
+			String type, boolean repeating, Recurrence recurrence,
+			String remindBy, int firstReminder, int secondReminder,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addEvent(
+			uuid, userId, plid, title, description, startDateMonth, startDateDay,
+			startDateYear, startDateHour, startDateMinute, endDateMonth,
+			endDateDay, endDateYear, durationHour, durationMinute, allDay,
+			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			firstReminder, secondReminder, new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public CalEvent addEvent(
 			long userId, long plid, String title, String description,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
@@ -172,6 +192,27 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,
+			int durationMinute, boolean allDay, boolean timeZoneSensitive,
+			String type, boolean repeating, Recurrence recurrence,
+			String remindBy, int firstReminder, int secondReminder,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addEvent(
+			null, userId, plid, title, description, startDateMonth, startDateDay,
+			startDateYear, startDateHour, startDateMinute, endDateMonth,
+			endDateDay, endDateYear, durationHour, durationMinute, allDay,
+			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			firstReminder, secondReminder, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
+	}
+
+	public CalEvent addEvent(
+			String uuid, long userId, long plid, String title,
+			String description, int startDateMonth, int startDateDay,
+			int startDateYear, int startDateHour, int startDateMinute,
+			int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 			int durationMinute, boolean allDay, boolean timeZoneSensitive,
 			String type, boolean repeating, Recurrence recurrence,
 			String remindBy, int firstReminder, int secondReminder,
@@ -232,6 +273,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		long eventId = CounterLocalServiceUtil.increment();
 
 		CalEvent event = CalEventUtil.create(eventId);
+
+		if (uuid != null) {
+			event.setUuid(uuid);
+		}
 
 		event.setGroupId(groupId);
 		event.setCompanyId(user.getCompanyId());

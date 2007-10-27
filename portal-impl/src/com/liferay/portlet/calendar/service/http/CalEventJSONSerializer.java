@@ -52,6 +52,7 @@ import java.util.List;
 public class CalEventJSONSerializer {
 	public static JSONObject toJSONObject(CalEvent model) {
 		JSONObject jsonObj = new JSONObject();
+		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "eventId", model.getEventId());
 		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());

@@ -48,6 +48,7 @@ import java.util.List;
 public class CalEventSoap implements Serializable {
 	public static CalEventSoap toSoapModel(CalEvent model) {
 		CalEventSoap soapModel = new CalEventSoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setEventId(model.getEventId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -93,6 +94,14 @@ public class CalEventSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setEventId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getEventId() {
@@ -275,6 +284,7 @@ public class CalEventSoap implements Serializable {
 		_secondReminder = secondReminder;
 	}
 
+	private String _uuid;
 	private long _eventId;
 	private long _groupId;
 	private long _companyId;
