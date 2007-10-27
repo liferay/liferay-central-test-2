@@ -420,7 +420,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 
 		<%
-		priorities = prefs.getValues("priorities", new String[0]);
+		priorities = LocalizationUtil.getPrefsValues(prefs, "priorities", languageId);
 
 		for (int i = 0; i < 10; i++) {
 			String name = StringPool.BLANK;
@@ -461,19 +461,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 		%>
 
 		</table>
-	</c:when>
-	<c:when test='<%= tabs2.equals("user-ranks") %>'>
-		<liferay-ui:message key="enter-rank-and-minimum-post-pairs-per-line" />
 
-		<br /><br />
-
-		<%
-		String languageId = ParamUtil.getString(request, "languageId", LocaleUtil.toLanguageId(locale));
-		%>
-
-		<textarea class="liferay-textarea" name="<portlet:namespace />ranks"><%= StringUtil.merge(prefs.getValues(MBUtil.getRanksKey(languageId), new String[0]), StringPool.NEW_LINE) %></textarea><br />
-
-		<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />getLocalizedRanks();">
+		<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />getLanguageId();">
 
 			<%
 			Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -492,7 +481,38 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<br />
 
 		<script type="text/javascript">
-			function <portlet:namespace />getLocalizedRanks() {
+			function <portlet:namespace />getLanguageId() {
+				self.location = '<%= portletURL %>&<portlet:namespace />languageId=' + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
+			}
+		</script>
+	</c:when>
+	<c:when test='<%= tabs2.equals("user-ranks") %>'>
+		<liferay-ui:message key="enter-rank-and-minimum-post-pairs-per-line" />
+
+		<br /><br />
+
+		<textarea class="liferay-textarea" name="<portlet:namespace />ranks"><%= StringUtil.merge(LocalizationUtil.getPrefsValues(prefs, "ranks", languageId), StringPool.NEW_LINE) %></textarea><br />
+
+		<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />getLanguageId();">
+
+			<%
+			Locale[] locales = LanguageUtil.getAvailableLocales();
+
+			for (int i = 0; i < locales.length; i++) {
+			%>
+
+				<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+
+			<%
+			}
+			%>
+
+		</select>
+
+		<br />
+
+		<script type="text/javascript">
+			function <portlet:namespace />getLanguageId() {
 				self.location = '<%= portletURL %>&<portlet:namespace />languageId=' + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
 			}
 		</script>

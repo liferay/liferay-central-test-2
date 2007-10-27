@@ -167,6 +167,7 @@
 <%@ page import="com.liferay.util.HttpUtil" %>
 <%@ page import="com.liferay.util.JS" %>
 <%@ page import="com.liferay.util.ListUtil" %>
+<%@ page import="com.liferay.util.LocalizationUtil" %>
 <%@ page import="com.liferay.util.MathUtil" %>
 <%@ page import="com.liferay.util.PKParser" %>
 <%@ page import="com.liferay.util.PwdGenerator" %>

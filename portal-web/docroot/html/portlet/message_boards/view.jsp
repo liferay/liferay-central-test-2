@@ -274,7 +274,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 				StringMaker sm = new StringMaker();
 
-				String[] threadPriority = MBUtil.getThreadPriority(portletSetup, thread.getPriority(), themeDisplay);
+				String[] threadPriority = MBUtil.getThreadPriority(portletSetup, LocaleUtil.toLanguageId(locale), thread.getPriority(), themeDisplay);
 
 				if ((threadPriority != null) && (thread.getPriority() > 0)) {
 					sm.append("<img align=\"left\" alt=\"");
@@ -552,7 +552,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			StringMaker sm = new StringMaker();
 
-			String[] threadPriority = MBUtil.getThreadPriority(portletSetup, thread.getPriority(), themeDisplay);
+			String[] threadPriority = MBUtil.getThreadPriority(portletSetup, LocaleUtil.toLanguageId(locale), thread.getPriority(), themeDisplay);
 
 			if ((threadPriority != null) && (thread.getPriority() > 0)) {
 				sm.append("<img align=\"left\" alt=\"");

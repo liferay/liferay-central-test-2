@@ -64,7 +64,9 @@
 <%
 PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(request, portletDisplay.getId(), false, true);
 
-String[] priorities = portletSetup.getValues("priorities", new String[0]);
+String languageId = ParamUtil.getString(request, "languageId", LocaleUtil.toLanguageId(locale));
+
+String[] priorities = LocalizationUtil.getPrefsValues(portletSetup, "priorities", languageId);
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

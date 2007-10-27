@@ -34,6 +34,8 @@ import java.io.StringReader;
 
 import java.util.Iterator;
 
+import javax.portlet.PortletPreferences;
+
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -139,6 +141,34 @@ public class LocalizationUtil {
 		return value;
 	}
 
+	public static String getPrefsValue(
+			PortletPreferences prefs, String key, String languageId) {
+
+		String localizedKey = _getPrefsKey(key, languageId);
+
+		String value = prefs.getValue(localizedKey, StringPool.BLANK);
+
+		if (Validator.isNull(value)) {
+			value = prefs.getValue(key, StringPool.BLANK);
+		}
+
+		return value;
+	}
+
+	public static String[] getPrefsValues(
+			PortletPreferences prefs, String key, String languageId) {
+
+		String localizedKey = _getPrefsKey(key, languageId);
+
+		String[] values = prefs.getValues(localizedKey, new String[0]);
+
+		if (Validator.isNull(values)) {
+			values = prefs.getValues(key, new String[0]);
+		}
+
+		return values;
+	}
+
 	public static String removeLocalization(
 		String xml, String key, String requestedLanguageId) {
 
@@ -192,6 +222,20 @@ public class LocalizationUtil {
 		}
 
 		return xml;
+	}
+
+	public static void setPrefsValue(
+			PortletPreferences prefs, String key, String languageId,
+			String value) throws Exception {
+
+		prefs.setValue(_getPrefsKey(key, languageId), value);
+	}
+
+	public static void setPrefsValues(
+			PortletPreferences prefs, String key, String languageId,
+			String[] values) throws Exception {
+
+		prefs.setValues(_getPrefsKey(key, languageId), values);
 	}
 
 	public static String updateLocalization(
@@ -303,6 +347,17 @@ public class LocalizationUtil {
 		}
 
 		return updatedXml;
+	}
+
+	private static String _getPrefsKey(String key, String languageId) {
+		String defaultLanguageId = LocaleUtil.toLanguageId(
+			LocaleUtil.getDefault());
+
+		if (!languageId.equals(defaultLanguageId)) {
+			key += "_" + languageId;
+		}
+
+		return key;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LocalizationUtil.class);

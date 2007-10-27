@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.messageboards.util.MBUtil;
+import com.liferay.util.LocalizationUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
@@ -214,12 +214,19 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			String image = ParamUtil.getString(req, "priorityImage" + i);
 			double value = ParamUtil.getDouble(req, "priorityValue" + i);
 
-			priorities.add(
-				name + StringPool.COMMA + image + StringPool.COMMA + value);
+			if (Validator.isNotNull(name) || Validator.isNotNull(image) ||
+				(value != 0.0)) {
+
+				priorities.add(
+					name + StringPool.COMMA + image + StringPool.COMMA + value);
+			}
 		}
 
-		prefs.setValues(
-			"priorities", (String[])priorities.toArray(new String[0]));
+		String languageId = ParamUtil.getString(req, "languageId");
+
+		LocalizationUtil.setPrefsValues(
+			prefs, "priorities", languageId,
+			(String[])priorities.toArray(new String[0]));
 	}
 
 	protected void updateUserRanks(ActionRequest req, PortletPreferences prefs)
@@ -260,7 +267,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		String languageId = ParamUtil.getString(req, "languageId");
 
-		prefs.setValues(MBUtil.getRanksKey(languageId), ranks);
+		LocalizationUtil.setPrefsValues(prefs, "ranks", languageId, ranks);
 	}
 
 }

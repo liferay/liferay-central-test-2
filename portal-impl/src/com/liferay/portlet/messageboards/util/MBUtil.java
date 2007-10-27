@@ -41,6 +41,7 @@ import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.util.Http;
+import com.liferay.util.LocalizationUtil;
 
 import java.io.IOException;
 
@@ -381,19 +382,6 @@ public class MBUtil {
 		return messageId;
 	}
 
-	public static String getRanksKey(String languageId) {
-		String ranksKey = "ranks";
-
-		String defaultLanguageId = LocaleUtil.toLanguageId(
-			LocaleUtil.getDefault());
-
-		if (!languageId.equals(defaultLanguageId)) {
-			ranksKey += "_" + languageId;
-		}
-
-		return ranksKey;
-	}
-
 	public static int getRSSContentLength(PortletPreferences prefs) {
 		String rssContentLength = PropsUtil.get(
 			PropsUtil.MESSAGE_BOARDS_RSS_CONTENT_LENGTH);
@@ -403,33 +391,29 @@ public class MBUtil {
 	}
 
 	public static String[] getThreadPriority(
-			PortletPreferences prefs, double value, ThemeDisplay themeDisplay)
+			PortletPreferences prefs, String languageId, double value,
+			ThemeDisplay themeDisplay)
 		throws Exception {
 
-		String[] priorities = prefs.getValues("priorities", new String[0]);
+		String[] priorities =
+			LocalizationUtil.getPrefsValues(prefs, "priorities", languageId);
 
-		for (int i = 0; i < priorities.length; i++) {
-			String[] priority = StringUtil.split(priorities[i]);
+		String[] priorityPair =
+			_findThreadPriority(value, themeDisplay, priorities);
 
-			try {
-				String priorityName = priority[0];
-				String priorityImage = priority[1];
-				double priorityValue = GetterUtil.getDouble(priority[2]);
+		if (priorityPair == null) {
+			String defaultLanguageId = LocaleUtil.toLanguageId(
+					LocaleUtil.getDefault());
 
-				if (value == priorityValue) {
-					if (!priorityImage.startsWith(Http.HTTP)) {
-						priorityImage =
-							themeDisplay.getPathThemeImages() + priorityImage;
-					}
+			priorities =
+				LocalizationUtil.getPrefsValues(prefs, "priorities",
+					defaultLanguageId);
 
-					return new String[] {priorityName, priorityImage};
-				}
-			}
-			catch (Exception e) {
-			}
+			priorityPair =
+				_findThreadPriority(value, themeDisplay, priorities);
 		}
 
-		return null;
+		return priorityPair;
 	}
 
 	public static Date getUnbanDate(MBBan ban, int expireInterval) {
@@ -473,8 +457,8 @@ public class MBUtil {
 
 		String rank = StringPool.BLANK;
 
-		String[] ranks = prefs.getValues(
-			getRanksKey(languageId), new String[0]);
+		String[] ranks =
+			LocalizationUtil.getPrefsValues(prefs, "ranks", languageId);
 
 		for (int i = 0; i < ranks.length; i++) {
 			String[] kvp = StringUtil.split(ranks[i], StringPool.EQUAL);
@@ -491,6 +475,33 @@ public class MBUtil {
 		}
 
 		return rank;
+	}
+
+	private static String[] _findThreadPriority(
+			double value, ThemeDisplay themeDisplay, String[] priorities) {
+
+		for (int i = 0; i < priorities.length; i++) {
+			String[] priority = StringUtil.split(priorities[i]);
+
+			try {
+				String priorityName = priority[0];
+				String priorityImage = priority[1];
+				double priorityValue = GetterUtil.getDouble(priority[2]);
+
+				if (value == priorityValue) {
+					if (!priorityImage.startsWith(Http.HTTP)) {
+						priorityImage =
+							themeDisplay.getPathThemeImages() + priorityImage;
+					}
+
+					return new String[] {priorityName, priorityImage};
+				}
+			}
+			catch (Exception e) {
+			}
+		}
+
+		return null;
 	}
 
 }
