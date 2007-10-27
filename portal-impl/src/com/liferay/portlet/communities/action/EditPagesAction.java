@@ -307,7 +307,7 @@ public class EditPagesAction extends PortletAction {
 			PortletDataHandlerKeys.EXPORT_PERMISSIONS, Boolean.TRUE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.EXPORT_PORTLET_DATA,
-			Boolean.FALSE.toString());
+			Boolean.TRUE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES,
 			Boolean.TRUE.toString());
@@ -319,7 +319,7 @@ public class EditPagesAction extends PortletAction {
 			PortletDataHandlerKeys.IMPORT_PERMISSIONS, Boolean.TRUE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.IMPORT_PORTLET_DATA,
-			Boolean.FALSE.toString());
+			Boolean.TRUE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES,
 			Boolean.TRUE.toString());
@@ -327,6 +327,8 @@ public class EditPagesAction extends PortletAction {
 			PortletDataHandlerKeys.IMPORT_TAGS, Boolean.TRUE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.IMPORT_THEME, Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.MERGE_DATA, Boolean.TRUE.toString());
 
 		byte[] data = LayoutLocalServiceUtil.exportLayouts(
 			sourceGroupId, sourcePrivateLayout, parameterMap);

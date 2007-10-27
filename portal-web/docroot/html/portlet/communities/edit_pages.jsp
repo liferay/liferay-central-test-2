@@ -1428,6 +1428,12 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /></label>
 								</div>
 
+								<div>
+									<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.MERGE_DATA %>" defaultValue="<%= false %>" />
+
+									<label for="<portlet:namespace /><%= PortletDataHandlerKeys.MERGE_DATA %>Checkbox"><liferay-ui:message key="merge-data" /></label>
+								</div>
+
 								<%
 								itr1 = portletsList.iterator();
 

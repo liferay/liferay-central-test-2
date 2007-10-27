@@ -55,4 +55,6 @@ public class PortletDataHandlerKeys {
 
 	public static final String IMPORT_THEME = "IMPORT_THEME";
 
+	public static final String MERGE_DATA = "MERGE_DATA";
+
 }
