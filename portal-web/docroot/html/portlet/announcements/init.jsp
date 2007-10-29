@@ -35,5 +35,7 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, false, false);
 }
 
-String content = prefs.getValue("content", StringPool.BLANK);
+String languageId = ParamUtil.getString(request, "languageId", LocaleUtil.toLanguageId(locale));
+
+String content = LocalizationUtil.getPrefsValue(prefs, "content", languageId);
 %>

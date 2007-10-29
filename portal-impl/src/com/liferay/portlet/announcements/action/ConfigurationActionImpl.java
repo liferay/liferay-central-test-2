@@ -22,12 +22,14 @@
 
 package com.liferay.portlet.announcements.action;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.announcements.AnnouncementsContentException;
+import com.liferay.util.LocalizationUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
@@ -66,11 +68,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			String portletResource = ParamUtil.getString(
 				req, "portletResource");
 
+			String languageId = LanguageUtil.getLanguageId(req);
+
 			PortletPreferences prefs =
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					req, portletResource, false, false);
 
-			prefs.setValue("content", content);
+			LocalizationUtil.setPrefsValue(
+				prefs, "content", languageId, content);
 
 			prefs.store();
 

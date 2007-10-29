@@ -26,7 +26,13 @@
 
 <%
 content = ParamUtil.getString(request, "content", content);
+
+String redirect = ParamUtil.getString(request, "redirect");
 %>
+
+<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
+	<liferay-portlet:param name="redirect" value="<%= redirect %>" />
+</liferay-portlet:renderURL>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
@@ -35,7 +41,33 @@ content = ParamUtil.getString(request, "content", content);
 
 <textarea class="liferay-textarea" name="<portlet:namespace />content" wrap="soft"><%= content %></textarea>
 
-<br /><br />
+<br />
+
+<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />getLanguageId();">
+
+	<%
+	Locale[] locales = LanguageUtil.getAvailableLocales();
+
+	for (int i = 0; i < locales.length; i++) {
+	%>
+
+		<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+
+	<%
+	}
+	%>
+
+</select>
+
+<br />
+
+<script type="text/javascript">
+	function <portlet:namespace />getLanguageId() {
+		self.location = '<%= portletURL %>&<portlet:namespace />languageId=' + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
+	}
+</script>
+
+<br />
 
 <input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 

@@ -22,10 +22,11 @@
 
 package com.liferay.portlet.announcements.action;
 
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.announcements.AnnouncementsContentException;
+import com.liferay.util.LocalizationUtil;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -52,7 +53,10 @@ public class ViewAction extends PortletAction {
 		try {
 			PortletPreferences prefs = req.getPreferences();
 
-			String content = prefs.getValue("content", StringPool.BLANK);
+			String languageId = LanguageUtil.getLanguageId(req);
+
+			String content = LocalizationUtil.getPrefsValue(
+				prefs, "content", languageId);
 
 			if (Validator.isNull(content)) {
 				throw new AnnouncementsContentException();
