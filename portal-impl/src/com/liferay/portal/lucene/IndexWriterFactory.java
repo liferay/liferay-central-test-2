@@ -127,14 +127,7 @@ public class IndexWriterFactory {
 		throws InterruptedException, IOException {
 
 		try {
-			try {
-				acquireLock(companyId, true);
-			}
-			finally {
-				synchronized (_lockLookup) {
-					_needExclusiveLock--;
-				}
-			}
+			acquireLock(companyId, true);
 
 			IndexReader reader = null;
 
