@@ -517,16 +517,14 @@ Document contentDoc = null;
 String[] availableLocales = null;
 %>
 
-<liferay-ui:tabs
-	names="summary,content,schedule"
-	formName="fm1"
-	param="tabs2"
-	refresh="<%= false %>"
->
-	<liferay-ui:section>
+<%@ include file="edit_article_extra.jspf" %>
+
+<table class="liferay-table" style="clear: none" width="100%">
+	<tr>
+	<td valign="top">
+		<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
 		<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
 		<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
-		<liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
 		<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
 		<liferay-ui:tags-error />
 
@@ -657,86 +655,6 @@ String[] availableLocales = null;
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="type" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />type">
-					<option value=""></option>
-
-					<%
-					for (int i = 0; i < JournalArticleImpl.TYPES.length; i++) {
-					%>
-
-						<option <%= type.equals(JournalArticleImpl.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticleImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleImpl.TYPES[i]) %></option>
-
-					<%
-					}
-					%>
-
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="searchable" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="indexable" />
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="tags" />
-			</td>
-			<td>
-
-				<%
-				long classPK = 0;
-
-				if (article != null) {
-					classPK = article.getResourcePrimKey();
-				}
-				%>
-
-				<liferay-ui:tags-selector
-					className="<%= JournalArticle.class.getName() %>"
-					classPK="<%= classPK %>"
-					hiddenInput="tagsEntries"
-				/>
-			</td>
-		</tr>
-
-		<c:if test="<%= article == null %>">
-			<tr>
-				<td colspan="2">
-					<br />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<liferay-ui:message key="permissions" />
-				</td>
-				<td>
-					<liferay-ui:input-permissions
-						modelName="<%= JournalArticle.class.getName() %>"
-					/>
-				</td>
-			</tr>
-		</c:if>
-
-		</table>
-	</liferay-ui:section>
-	<liferay-ui:section>
-		<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
-
-		<table class="liferay-table">
-		<tr>
-			<td>
 				<liferay-ui:message key="language" />
 			</td>
 			<td>
@@ -838,95 +756,6 @@ String[] availableLocales = null;
 
 		<br />
 
-		<table class="liferay-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="structure" />
-			</td>
-			<td>
-				<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>" />
-
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="structureId" value="<%= structureId %>" /></portlet:renderURL>" id="<portlet:namespace />structureName">
-				<%= structureName %>
-				</a>
-
-				<input type="button" value="<liferay-ui:message key="select" />"
-					onClick="
-						if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates") %>')) {
-							var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680');
-							void('');
-							structureWindow.focus();
-						}"
-					>
-
-				<input <%= Validator.isNull(structureId) ? "disabled" : "" %> id="<portlet:namespace />removeStructureButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeStructure();">
-			</td>
-		</tr>
-		</table>
-
-		<br />
-
-		<table class="liferay-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="template" />
-			</td>
-			<td>
-				<c:choose>
-					<c:when test="<%= templates.size() == 0 %>">
-						<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
-
-						<input type="button" value="<liferay-ui:message key="select" />"
-							onClick="
-								if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
-									var templateWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'template', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680');
-									void('');
-									templateWindow.focus();
-								}"
-							>
-					</c:when>
-					<c:otherwise>
-						<liferay-ui:table-iterator
-							list="<%= templates %>"
-							listType="com.liferay.portlet.journal.model.JournalTemplate"
-							rowLength="3"
-							rowPadding="30"
-						>
-
-							<%
-							boolean templateChecked = false;
-
-							if (templateId.equals(tableIteratorObj.getTemplateId())) {
-								templateChecked = true;
-							}
-
-							if ((tableIteratorPos.intValue() == 0) && Validator.isNull(templateId)) {
-								templateChecked = true;
-							}
-							%>
-
-							<input id="<portlet:namespace />template<%= tableIteratorObj.getTemplateId() %>_xsl" type="hidden" value="<%= JS.encodeURIComponent(tableIteratorObj.getXsl()) %>" />
-
-							<input <%= templateChecked ? "checked" : "" %> name="<portlet:namespace />templateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>">
-
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(tableIteratorObj.getGroupId()) %>" /><portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" /></portlet:renderURL>">
-							<%= tableIteratorObj.getName() %>
-							</a>
-
-							<c:if test="<%= tableIteratorObj.isSmallImage() %>">
-								<br />
-
-								<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(tableIteratorObj.getSmallImageId()) %>" vspace="0" />
-							</c:if>
-						</liferay-ui:table-iterator>
-					</c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-		</table>
-
-		<br />
-
 		<c:choose>
 			<c:when test="<%= structure == null %>">
 				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
@@ -1005,61 +834,28 @@ String[] availableLocales = null;
 				</table>
 			</c:otherwise>
 		</c:choose>
-	</liferay-ui:section>
-	<liferay-ui:section>
-		<liferay-ui:error exception="<%= ArticleDisplayDateException.class %>" message="please-enter-a-valid-display-date" />
-		<liferay-ui:error exception="<%= ArticleExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
-
-		<table class="liferay-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="display-date" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="displayDate" defaultValue="<%= displayDate %>" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="expiration-date" />
-			</td>
-			<td>
-				<table class="liferay-table">
-				<tr>
-					<td>
-						<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="expirationDate" defaultValue="<%= expirationDate %>" disabled="<%= neverExpire %>" />
-					</td>
-					<td>
-						<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'expirationDate\', this.checked);" %>' />
-
-						<liferay-ui:message key="never-auto-expire" />
-					</td>
-				</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="review-date" />
-			</td>
-			<td>
-				<table class="liferay-table">
-				<tr>
-					<td>
-						<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="reviewDate" defaultValue="<%= reviewDate %>" disabled="<%= neverReview %>" />
-					</td>
-					<td>
-						<liferay-ui:input-checkbox param="neverReview" defaultValue="<%= neverReview %>" onClick='<%= renderResponse.getNamespace() + "disableInputDate(\'reviewDate\', this.checked);" %>' />
-
-						<liferay-ui:message key="never-review" />
-					</td>
-				</tr>
-				</table>
-			</td>
-		</tr>
-		</table>
-	</liferay-ui:section>
-</liferay-ui:tabs>
+		<c:if test="<%= article == null %>">
+			<table>
+			<tr>
+				<td>
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="permissions" />
+				</td>
+				<td>
+					<liferay-ui:input-permissions
+						modelName="<%= JournalArticle.class.getName() %>"
+					/>
+				</td>
+			</tr>
+			</table>
+		</c:if>
+	</td>
+	</tr>
+</table>
 
 <br />
 
