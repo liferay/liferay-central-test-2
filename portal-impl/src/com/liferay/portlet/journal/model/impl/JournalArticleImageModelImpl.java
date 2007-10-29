@@ -104,13 +104,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 	}
 
 	public void setUuid(String uuid) {
-		if (((uuid == null) && (_uuid != null)) ||
-				((uuid != null) && (_uuid == null)) ||
-				((uuid != null) && (_uuid != null) && !uuid.equals(_uuid))) {
-			if (!XSS_ALLOW_UUID) {
-				uuid = XSSUtil.strip(uuid);
-			}
-
+		if ((uuid != null) && (uuid != _uuid)) {
 			_uuid = uuid;
 		}
 	}

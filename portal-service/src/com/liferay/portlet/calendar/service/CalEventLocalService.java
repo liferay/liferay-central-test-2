@@ -86,19 +86,6 @@ public interface CalEventLocalService {
 		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
-		long plid, java.lang.String title, java.lang.String description,
-		int startDateMonth, int startDateDay, int startDateYear,
-		int startDateHour, int startDateMinute, int endDateMonth,
-		int endDateDay, int endDateYear, int durationHour, int durationMinute,
-		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
-		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
-		java.lang.String remindBy, int firstReminder, int secondReminder,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -110,8 +97,6 @@ public interface CalEventLocalService {
 		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
 		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -130,8 +115,8 @@ public interface CalEventLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public void addEventResources(long eventId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)

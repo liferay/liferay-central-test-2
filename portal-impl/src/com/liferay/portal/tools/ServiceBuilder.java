@@ -2330,27 +2330,36 @@ public class ServiceBuilder {
 			}
 
 			sm.append("public void set" + col.getMethodName() + "(" + colType + " " + col.getName() + ") {");
-			sm.append("if (");
 
-			if (!col.isPrimitiveType()) {
-				sm.append("(" + col.getName() + " == null && _" + col.getName() + " != null) ||");
-				sm.append("(" + col.getName() + " != null && _" + col.getName() + " == null) ||");
-				sm.append("(" + col.getName() + " != null && _" + col.getName() + " != null && !" + col.getName() + ".equals(_" + col.getName() + "))");
+			if (col.getName().equals("uuid")) {
+				sm.append("if ((uuid != null) && (uuid != _uuid)) {");
+				sm.append("_uuid = uuid;");
+				sm.append("}");
 			}
 			else {
-				sm.append(col.getName() + " != _" + col.getName());
-			}
+				sm.append("if (");
 
-			sm.append(") {");
+				if (!col.isPrimitiveType()) {
+					sm.append("(" + col.getName() + " == null && _" + col.getName() + " != null) ||");
+					sm.append("(" + col.getName() + " != null && _" + col.getName() + " == null) ||");
+					sm.append("(" + col.getName() + " != null && _" + col.getName() + " != null && !" + col.getName() + ".equals(_" + col.getName() + "))");
+				}
+				else {
+					sm.append(col.getName() + " != _" + col.getName());
+				}
 
-			if (colType.equals("String")) {
-				sm.append("if (!XSS_ALLOW_" + col.getName().toUpperCase() + ") {");
-				sm.append(col.getName() + " = XSSUtil.strip(" + col.getName() + ");");
+				sm.append(") {");
+
+				if (colType.equals("String")) {
+					sm.append("if (!XSS_ALLOW_" + col.getName().toUpperCase() + ") {");
+					sm.append(col.getName() + " = XSSUtil.strip(" + col.getName() + ");");
+					sm.append("}");
+				}
+
+				sm.append("_" + col.getName() + " = " + col.getName() + ";");
 				sm.append("}");
 			}
 
-			sm.append("_" + col.getName() + " = " + col.getName() + ";");
-			sm.append("}");
 			sm.append("}");
 		}
 

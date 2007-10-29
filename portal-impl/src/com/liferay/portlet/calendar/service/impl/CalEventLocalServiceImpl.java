@@ -138,10 +138,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addEvent(
-			userId, plid, title, description, startDateMonth, startDateDay,
-			startDateYear, startDateHour, startDateMinute, endDateMonth,
-			endDateDay, endDateYear, durationHour, durationMinute, allDay,
-			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			null, userId, plid, title, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, durationHour, durationMinute,
+			allDay, timeZoneSensitive, type, repeating, recurrence, remindBy,
 			firstReminder, secondReminder,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
@@ -179,33 +179,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addEvent(
-			userId, plid, title, description, startDateMonth, startDateDay,
-			startDateYear, startDateHour, startDateMinute, endDateMonth,
-			endDateDay, endDateYear, durationHour, durationMinute, allDay,
-			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			null, userId, plid, title, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, durationHour, durationMinute,
+			allDay, timeZoneSensitive, type, repeating, recurrence, remindBy,
 			firstReminder, secondReminder, null, null, communityPermissions,
 			guestPermissions);
-	}
-
-	public CalEvent addEvent(
-			long userId, long plid, String title, String description,
-			int startDateMonth, int startDateDay, int startDateYear,
-			int startDateHour, int startDateMinute, int endDateMonth,
-			int endDateDay, int endDateYear, int durationHour,
-			int durationMinute, boolean allDay, boolean timeZoneSensitive,
-			String type, boolean repeating, Recurrence recurrence,
-			String remindBy, int firstReminder, int secondReminder,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addEvent(
-			null, userId, plid, title, description, startDateMonth, startDateDay,
-			startDateYear, startDateHour, startDateMinute, endDateMonth,
-			endDateDay, endDateYear, durationHour, durationMinute, allDay,
-			timeZoneSensitive, type, repeating, recurrence, remindBy,
-			firstReminder, secondReminder, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public CalEvent addEvent(
@@ -274,10 +253,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		CalEvent event = CalEventUtil.create(eventId);
 
-		if (uuid != null) {
-			event.setUuid(uuid);
-		}
-
+		event.setUuid(uuid);
 		event.setGroupId(groupId);
 		event.setCompanyId(user.getCompanyId());
 		event.setUserId(user.getUserId());

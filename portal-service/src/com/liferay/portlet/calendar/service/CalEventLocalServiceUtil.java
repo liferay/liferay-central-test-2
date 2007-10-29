@@ -151,32 +151,6 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
-		long userId, long plid, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
-		java.lang.String remindBy, int firstReminder, int secondReminder,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
-
-		return calEventLocalService.addEvent(userId, plid, title, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear,
-			durationHour, durationMinute, allDay, timeZoneSensitive, type,
-			repeating, recurrence, remindBy, firstReminder, secondReminder,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
-	}
-
-	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
 		java.lang.String uuid, long userId, long plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,

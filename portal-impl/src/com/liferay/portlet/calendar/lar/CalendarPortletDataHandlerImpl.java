@@ -218,7 +218,6 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			event.getUuid(), context.getGroupId());
 
 		if (existingEvent == null) {
-
 			long plid = context.getPlid();
 
 			Date startDate = event.getStartDate();

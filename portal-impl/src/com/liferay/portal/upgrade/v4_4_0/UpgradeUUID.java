@@ -55,6 +55,7 @@ public class UpgradeUUID extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+		upgradeTable("CalEvent", "eventId");
 		upgradeTable("JournalArticle", "id_");
 		//upgradeTable("JournalArticleImage", "id_");
 		upgradeTable("JournalStructure", "id_");
