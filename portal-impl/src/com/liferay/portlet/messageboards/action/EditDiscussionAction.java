@@ -29,10 +29,12 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
+import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -56,17 +58,25 @@ public class EditDiscussionAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		ActionResponseImpl resImpl = (ActionResponseImpl)res;
+
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
+			String redirect = ParamUtil.getString(req, "redirect");
+
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateMessage(req);
+				MBMessage message = updateMessage(req);
+
+				redirect +=
+					"#" + resImpl.getNamespace() + "messageScroll" +
+						message.getMessageId();
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteMessage(req);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(req, res, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchMessageException ||
@@ -103,7 +113,7 @@ public class EditDiscussionAction extends PortletAction {
 			groupId, className, classPK, messageId);
 	}
 
-	protected void updateMessage(ActionRequest req) throws Exception {
+	protected MBMessage updateMessage(ActionRequest req) throws Exception {
 		long groupId = PortalUtil.getPortletGroupId(req);
 		String className = ParamUtil.getString(req, "className");
 		long classPK = ParamUtil.getLong(req, "classPK");
@@ -115,11 +125,13 @@ public class EditDiscussionAction extends PortletAction {
 		String subject = ParamUtil.getString(req, "subject");
 		String body = ParamUtil.getString(req, "body");
 
+		MBMessage message = null;
+
 		if (messageId <= 0) {
 
 			// Add message
 
-			MBMessageServiceUtil.addDiscussionMessage(
+			message = MBMessageServiceUtil.addDiscussionMessage(
 				groupId, className, classPK, threadId, parentMessageId, subject,
 				body);
 		}
@@ -127,9 +139,11 @@ public class EditDiscussionAction extends PortletAction {
 
 			// Update message
 
-			MBMessageServiceUtil.updateDiscussionMessage(
+			message = MBMessageServiceUtil.updateDiscussionMessage(
 				groupId, className, classPK, messageId, subject, body);
 		}
+
+		return message;
 	}
 
 }

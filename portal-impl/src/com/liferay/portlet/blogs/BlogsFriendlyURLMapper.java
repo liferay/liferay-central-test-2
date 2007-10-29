@@ -115,6 +115,8 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 			addParam(params, "struts_action", "/blogs/rss");
 		}
 		else {
+			params.put("p_p_state", WindowState.MAXIMIZED.toString());
+
 			addParam(params, "struts_action", "/blogs/view_entry");
 
 			if (Validator.isNumber(type)) {

@@ -645,14 +645,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			<c:when test='<%= tabs2.equals("top-posters") %>'>
 
 				<%
-				List headerNames = new ArrayList();
-
-				headerNames.add("name");
-				headerNames.add("posts");
-				headerNames.add("join-date");
-				headerNames.add("last-post-date");
-
-				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
 				int total = MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId.longValue());
 
@@ -669,53 +662,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 					ResultRow row = new ResultRow(statsUser, statsUser.getStatsUserId(), i);
 
-					PortletURL rowURL = null;
+					// User display
 
-					String fullName = null;
-					Date createDate = null;
-
-					try {
-						User user2 = UserLocalServiceUtil.getUserById(statsUser.getUserId());
-
-						rowURL = new PortletURLImpl(request, PortletKeys.DIRECTORY, plid.longValue(), false);
-
-						rowURL.setWindowState(WindowState.MAXIMIZED);
-						rowURL.setPortletMode(PortletMode.VIEW);
-
-						rowURL.setParameter("struts_action", "/directory/edit_user");
-						rowURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
-
-						fullName = MBUtil.getUserName(user2.getUserId(), StringPool.BLANK, portletSetup);
-						createDate = user2.getCreateDate();
-					}
-					catch (NoSuchUserException nsue) {
-					}
-
-					// Name
-
-					row.addText(fullName, rowURL);
-
-					// Number of posts
-
-					row.addText(String.valueOf(statsUser.getMessageCount()), rowURL);
-
-					// Join date
-
-					if (createDate == null) {
-						row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
-					}
-					else {
-						row.addText(dateFormatDateTime.format(createDate), rowURL);
-					}
-
-					// Last post date
-
-					if (statsUser.getLastPostDate() == null) {
-						row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
-					}
-					else {
-						row.addText(dateFormatDateTime.format(statsUser.getLastPostDate()), rowURL);
-					}
+					row.addJSP("/html/portlet/message_boards/top_posters_user_display.jsp");
 
 					// Add result row
 

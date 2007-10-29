@@ -150,11 +150,6 @@
 		margin: 5px 0px 0px 0px;
 	}
 
-	.message-board-user-icon {
-		margin: 10px 0px;
-		width: 75%;
-	}
-
 	.liferay-textarea.message-edit {
 		font-family: monospace;
 		height: 378px;

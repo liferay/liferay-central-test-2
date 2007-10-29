@@ -344,7 +344,7 @@ public class JournalTemplateLocalServiceImpl
 	public JournalTemplate getTemplate(long groupId, String templateId)
 		throws PortalException, SystemException {
 
-		templateId = templateId.trim().toUpperCase();
+		templateId = GetterUtil.getString(templateId).toUpperCase();
 
 		if (groupId == 0) {
 			_log.error(

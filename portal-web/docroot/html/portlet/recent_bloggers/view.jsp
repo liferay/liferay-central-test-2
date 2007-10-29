@@ -51,7 +51,9 @@ else {
 		headerNames.add("posts");
 		headerNames.add("date");
 
-		searchContainer.setHeaderNames(headerNames);
+		if (displayStyle.equals("user-name")) {
+			searchContainer.setHeaderNames(headerNames);
+		}
 
 		List resultRows = searchContainer.getResultRows();
 
@@ -80,8 +82,6 @@ else {
 				if (entries.size() == 1) {
 					BlogsEntry entry = (BlogsEntry)entries.get(0);
 
-					ResultRow row = new ResultRow(statsUser, statsUser.getStatsUserId(), i);
-
 					StringMaker sm = new StringMaker();
 
 					sm.append(themeDisplay.getPathMain());
@@ -91,46 +91,32 @@ else {
 
 					String rowHREF = sm.toString();
 
-					// User
+					ResultRow row = new ResultRow(new Object[] {statsUser, rowHREF}, statsUser.getStatsUserId(), i);
 
-					sm = new StringMaker();
+					if (displayStyle.equals("user-name")) {
 
-					if (displayStyle.endsWith("-image")) {
-						sm.append("<a href=\"");
-						sm.append(rowHREF);
-						sm.append("\"><img border=\"0\" src=\"");
-						sm.append(themeDisplay.getPathImage());
-						sm.append("/user_portrait?img_id=");
-						sm.append(user2.getPortraitId());
-						sm.append("&t=");
-						sm.append(ImageServletTokenUtil.getToken(user2.getPortraitId()));
-						sm.append("\" width=\"65\" /></a><br />");
-					}
+						// User
 
-					sm.append("<a href=\"");
-					sm.append(rowHREF);
-					sm.append("\">");
-					sm.append(user2.getFullName());
-					sm.append("</a>");
+						row.addText(user2.getFullName(), rowHREF);
 
-					if (displayStyle.endsWith("-image")) {
-						row.addText("center", "middle", sm.toString());
+						// Type
+
+						//row.addText(blogType, rowHREF);
+
+						// Number of posts
+
+						row.addText(String.valueOf(entryCount), rowHREF);
+
+						// Last post date
+
+						row.addText(dateFormatDate.format(entry.getModifiedDate()), rowHREF);
 					}
 					else {
-						row.addText(sm.toString());
+
+						// User display
+
+						row.addJSP("/html/portlet/recent_bloggers/user_display.jsp");
 					}
-
-					// Type
-
-					//row.addText(blogType, rowHREF);
-
-					// Number of posts
-
-					row.addText(String.valueOf(entryCount), rowHREF);
-
-					// Last post date
-
-					row.addText(dateFormatDate.format(entry.getModifiedDate()), rowHREF);
 
 					// Add result row
 

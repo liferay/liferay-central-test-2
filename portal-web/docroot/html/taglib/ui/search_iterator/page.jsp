@@ -35,6 +35,7 @@ int total = searchContainer.getTotal();
 List resultRows = searchContainer.getResultRows();
 List headerNames = searchContainer.getHeaderNames();
 Map orderableHeaders = searchContainer.getOrderableHeaders();
+String emptyResultsMessage = searchContainer.getEmptyResultsMessage();
 RowChecker rowChecker = searchContainer.getRowChecker();
 
 if (end > total) {
@@ -42,11 +43,13 @@ if (end > total) {
 }
 
 if (rowChecker != null) {
-	headerNames.add(0, rowChecker.getAllRowsCheckBox());
+	if (headerNames != null) {
+		headerNames.add(0, rowChecker.getAllRowsCheckBox());
+	}
 }
 %>
 
-<c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (searchContainer.getEmptyResultsMessage() != null)) %>">
+<c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (emptyResultsMessage != null)) %>">
 	<c:if test="<%= paginate %>">
 		<div class="taglib-search-iterator-page-iterator-top">
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
@@ -57,7 +60,7 @@ if (rowChecker != null) {
 	<tr class="portlet-section-header">
 
 	<%
-	for (int i = 0; i < headerNames.size(); i++) {
+	for (int i = 0; (headerNames != null) && (i < headerNames.size()); i++) {
 		String headerName = (String)headerNames.get(i);
 
 		String orderKey = null;
@@ -135,10 +138,10 @@ if (rowChecker != null) {
 
 	</tr>
 
-	<c:if test="<%= (resultRows.size() == 0) && (searchContainer.getEmptyResultsMessage() != null) %>">
+	<c:if test="<%= (headerNames != null) && (resultRows.size() == 0) && (emptyResultsMessage != null) %>">
 		<tr class="portlet-section-body">
 			<td align="center" colspan="<%= headerNames.size() %>">
-				<%= LanguageUtil.get(pageContext, searchContainer.getEmptyResultsMessage()) %>
+				<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
 			</td>
 		</tr>
 	</c:if>

@@ -67,7 +67,6 @@ import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.model.impl.MBTreeWalkerImpl;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl;
@@ -127,6 +126,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		long categoryId = CompanyImpl.SYSTEM;
+		subject = "N/A";
 		List files = new ArrayList();
 		boolean anonymous = false;
 		double priority = 0.0;
@@ -744,8 +744,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String subject = String.valueOf(classPK);
 			String body = subject;
 
-			message = MBMessageLocalServiceUtil.addDiscussionMessage(
-				userId, subject, body);
+			message = addDiscussionMessage(userId, subject, body);
 
 			long discussionId = CounterLocalServiceUtil.increment();
 
@@ -907,6 +906,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		long categoryId = CompanyImpl.SYSTEM;
+		subject = "N/A";
 		List files = new ArrayList();
 		double priority = 0.0;
 		String[] tagsEntries = null;

@@ -40,7 +40,6 @@ String formAction = (String)request.getAttribute("liferay-ui:discussion:formActi
 String className = (String)request.getAttribute("liferay-ui:discussion:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:classPK"));
 long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:userId"));
-String subject = (String)request.getAttribute("liferay-ui:discussion:subject");
 String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect");
 
 MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK);
@@ -64,12 +63,10 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 
 	function <%= namespace %>postReply(i) {
 		eval("var parentMessageId = document.<%= formName %>.<%= namespace %>parentMessageId" + i + ".value;");
-		eval("var subject = document.<%= formName %>.<%= namespace %>postReplySubject" + i + ".value;");
 		eval("var body = document.<%= formName %>.<%= namespace %>postReplyBody" + i + ".value;");
 
 		document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.ADD %>";
 		document.<%= formName %>.<%= namespace %>parentMessageId.value = parentMessageId;
-		document.<%= formName %>.<%= namespace %>subject.value = subject;
 		document.<%= formName %>.<%= namespace %>body.value = body;
 		submitForm(document.<%= formName %>);
 	}
@@ -78,14 +75,17 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 		document.getElementById("<%= namespace %>messageScroll" + messageId).scrollIntoView();
 	}
 
+	function <%= namespace %>showForm(rowId, textAreaId) {
+		document.getElementById(rowId).style.display = "";
+		document.getElementById(textAreaId).focus();
+	}
+
 	function <%= namespace %>updateMessage(i) {
 		eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
-		eval("var subject = document.<%= formName %>.<%= namespace %>editSubject" + i + ".value;");
 		eval("var body = document.<%= formName %>.<%= namespace %>editBody" + i + ".value;");
 
 		document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 		document.<%= formName %>.<%= namespace %>messageId.value = messageId;
-		document.<%= formName %>.<%= namespace %>subject.value = subject;
 		document.<%= formName %>.<%= namespace %>body.value = body;
 		submitForm(document.<%= formName %>);
 	}
@@ -99,7 +99,6 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 <input name="<%= namespace %>messageId" type="hidden" value="" />
 <input name="<%= namespace %>threadId" type="hidden" value="<%= thread.getThreadId() %>" />
 <input name="<%= namespace %>parentMessageId" type="hidden" value="" />
-<input name="<%= namespace %>subject" type="hidden" value="" />
 <input name="<%= namespace %>body" type="hidden" value="" />
 
 <table border="0" cellpadding="0" cellspacing="0" id="<%= namespace %>messageScroll0" width="100%">
@@ -115,8 +114,39 @@ String editHREF = null;
 String deleteHREF = null;
 %>
 
-<%@ include file="/html/taglib/ui/discussion/post_reply_form.jspf" %>
+<tr>
+	<td id="<%= namespace %>messageScroll<%= message.getMessageId() %>">
+		<input name="<%= namespace %>messageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
+		<input name="<%= namespace %>parentMessageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<c:if test="<%= themeDisplay.isSignedIn() && MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.ADD_DISCUSSION) %>">
 
+			<%
+			postReplyHREF = "javascript: " + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
+			%>
+
+			<liferay-ui:icon image="reply" message="post-reply" url="<%= postReplyHREF %>" label="<%= true %>" />
+		</c:if>
+	</td>
+</tr>
+<tr id="<%= namespace %>postReplyForm<%= i %>" style="display: none;">
+	<td>
+		<br />
+
+		<div>
+			<textarea id="<%= namespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>postReplyButton<%= i %>.disabled = (this.value == '');"></textarea>
+		</div>
+
+		<br />
+
+		<input disabled id="<%= namespace %>postReplyButton<%= i %>" type="button" value="<liferay-ui:message key="reply" />" onClick="<%= namespace %>postReply(<%= i %>);" />
+
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= namespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
+	</td>
+</tr>
 </table>
 
 <%
@@ -128,7 +158,7 @@ List messages = treeWalker.getMessages();
 		<br />
 	</c:if>
 
-	<table border="0" cellpadding="4" cellspacing="0" class="taglib-discussion" width="100%">
+	<%--<table border="0" cellpadding="4" cellspacing="0" class="taglib-discussion" width="100%">
 	<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
 		<td>
 			<liferay-ui:message key="threaded-replies" />
@@ -171,36 +201,136 @@ List messages = treeWalker.getMessages();
 
 	</table>
 
-	<br />
+	<br />--%>
 
-	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<table class="liferay-table" width="100%">
 
 	<%
 	Collections.sort(messages, new MessageCreateDateComparator(true, false));
 
 	for (i = 1; i < messages.size(); i++) {
 		message = (MBMessage)messages.get(i);
+
+		User user2 = UserLocalServiceUtil.getUserById(message.getUserId());
 	%>
 
 		<tr>
-			<td>
-				<b><%= message.getSubject() %></b><br />
+			<td colspan="2" id="<%= namespace %>messageScroll<%= message.getMessageId() %>">
+				<input name="<%= namespace %>messageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
+				<input name="<%= namespace %>parentMessageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
+			</td>
+		</tr>
+		<tr>
+			<td align="center" valign="top">
+				<liferay-ui:user-display
+					userId="<%= message.getUserId() %>"
+					userName="<%= message.getUserName() %>"
+					displayStyle="<%= 2 %>"
+				/>
+			</td>
+			<td valign="top" width="99%">
+				<div>
+					<%= StringUtil.replace(message.getBody(), "\n", "<br />") %>
+				</div>
 
-				<span style="font-size: xx-small;">
-				<liferay-ui:message key="by" /> <%= PortalUtil.getUserName(message.getUserId(), message.getUserName(), request) %>, <liferay-ui:message key="on" /> <%= dateFormatDateTime.format(message.getModifiedDate()) %>
-				</span>
+				<br />
 
-				<br /><br />
+				<div>
+					<%= LanguageUtil.format(pageContext, "posted-on-x", dateFormatDateTime.format(message.getModifiedDate())) %>
+				</div>
 
-				<%= StringUtil.replace(message.getBody(), "\n", "<br />") %>
+				<br />
+
+				<table class="liferay-table">
+				<tr>
+					<%--<c:if test="<%= themeDisplay.isSignedIn() && MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.ADD_DISCUSSION) %>">
+						<td>
+
+							<%
+							postReplyHREF = "javascript: " + namespace + "showForm('" + namespace + "postReplyForm" + i + "', '" + namespace + "postReplyBody" + i + "');";
+							%>
+
+							<liferay-ui:icon image="reply" message="post-reply" url="<%= postReplyHREF %>" label="<%= true %>" />
+						</td>
+					</c:if>--%>
+
+					<c:if test="<%= i > 0 %>">
+
+						<%
+						topHREF = "javascript: " + namespace + "scrollIntoView('0');";
+						%>
+
+						<td>
+							<liferay-ui:icon image="top" url="<%= topHREF %>" label="<%= true %>" />
+						</td>
+
+						<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
+
+							<%
+							editHREF = "javascript: " + namespace + "showForm('" + namespace + "editForm" + i + "', '" + namespace + "editBody" + i + "');";
+							%>
+
+							<td>
+								<liferay-ui:icon image="edit" url="<%= editHREF %>" label="<%= true %>" />
+							</td>
+						</c:if>
+
+						<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.DELETE_DISCUSSION) %>">
+
+							<%
+							deleteHREF = "javascript: " + namespace + "deleteMessage(" + i + ");";
+							%>
+
+							<td>
+								<liferay-ui:icon-delete url="<%= deleteHREF %>" label="<%= true %>" />
+							</td>
+						</c:if>
+					</c:if>
+				</tr>
+				</table>
+
+				<table class="liferay-table">
+				<%--<tr id="<%= namespace %>postReplyForm<%= i %>" style="display: none;">
+					<td>
+						<br />
+
+						<div>
+							<textarea id="<%= namespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>postReplyButton<%= i %>.disabled = (this.value == '');"></textarea>
+						</div>
+
+						<br />
+
+						<input disabled id="<%= namespace %>postReplyButton<%= i %>" type="button" value="<liferay-ui:message key="reply" />" onClick="<%= namespace %>postReply(<%= i %>);" />
+
+						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= namespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
+					</td>
+				</tr>--%>
+
+				<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
+					<tr id="<%= namespace %>editForm<%= i %>" style="display: none;">
+						<td>
+							<br />
+
+							<div>
+								<textarea id="<%= namespace %>editBody<%= i %>" name="<%= namespace %>editBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>updateReplyButton<%= i %>.disabled = (this.value == '');"><%= Html.toInputSafe(message.getBody()) %></textarea>
+							</div>
+
+							<br />
+
+							<input id="<%= namespace %>updateReplyButton<%= i %>" type="button" value="<liferay-ui:message key="update" />" onClick="<%= namespace %>updateMessage(<%= i %>);" />
+
+							<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= namespace %>editForm<%= i %>').style.display = 'none'; void('');" />
+						</td>
+					</tr>
+				</c:if>
+
+				</table>
 			</td>
 		</tr>
 
-		<%@ include file="/html/taglib/ui/discussion/post_reply_form.jspf" %>
-
 		<c:if test="<%= i + 1 < messages.size() %>">
 			<tr>
-				<td>
+				<td colspan="2">
 					<div class="separator"><!-- --></div>
 				</td>
 			</tr>

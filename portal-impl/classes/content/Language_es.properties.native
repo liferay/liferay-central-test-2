@@ -2054,6 +2054,7 @@ post-reply=Responder
 post=Mensaje
 posted-as-a-reply-to=en respuesta a {0}.
 posted-by=Enviado por
+posted-on-x=Posted on {0}.
 posts=Mensajes
 pound=Libra
 precompile-jsps-for-faster-speed=Precompilar JSPs para aumentar la velocidad

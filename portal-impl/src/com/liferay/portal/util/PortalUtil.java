@@ -1358,7 +1358,7 @@ public class PortalUtil {
 
 	public static String getUserName(long userId, String defaultUserName) {
 		return getUserName(
-			userId, defaultUserName, UserAttributes.USER_NAME_NICKNAME);
+			userId, defaultUserName, UserAttributes.USER_NAME_FULL);
 	}
 
 	public static String getUserName(
@@ -1371,7 +1371,7 @@ public class PortalUtil {
 		long userId, String defaultUserName, HttpServletRequest req) {
 
 		return getUserName(
-			userId, defaultUserName, UserAttributes.USER_NAME_NICKNAME, req);
+			userId, defaultUserName, UserAttributes.USER_NAME_FULL, req);
 	}
 
 	public static String getUserName(

@@ -1755,6 +1755,7 @@ post-reply=أرسل رد
 post=أرسل
 posted-as-a-reply-to=على شكل رد على {0}.
 posted-by=مرسلة من
+posted-on-x=Posted on {0}.
 posts=المشاركات
 pound=رطل
 precompile-jsps-for-faster-speed=جمّع صفحات الـjsp لتحسين السرعة..

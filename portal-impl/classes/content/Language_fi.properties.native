@@ -1937,6 +1937,7 @@ post-reply=Vastaa
 post=Post
 posted-as-a-reply-to=vastauksena {0}:aan.
 posted-by=Lähettäjä
+posted-on-x=Posted on {0}.
 posts=Viestejä
 pound=Pauna
 precompile-jsps-for-faster-speed=Esikäännä JSP-sivut (nopeuttaa)

@@ -2054,6 +2054,7 @@ post-reply=崗位回復
 post=貼入
 posted-as-a-reply-to=as a reply to {0}.
 posted-by=貼入
+posted-on-x=Posted on {0}.
 posts=崗位
 pound=磅
 precompile-jsps-for-faster-speed=為加速執行速度預先編譯的JSP。

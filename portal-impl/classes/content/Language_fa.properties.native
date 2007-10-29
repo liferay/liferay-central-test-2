@@ -1476,6 +1476,7 @@ post-reply=ارسال جواب
 post=ارسال
 posted-as-a-reply-to=به عنوان پاسخ ارسال شد به: <a href="{0}">پيغام #{1}</a> توسط {2}.
 posted-by=ارسال توسط
+posted-on-x=Posted on {0}.
 pound=پوند
 precompile-jsps-for-faster-speed=برای بالا بردن سرعت.
 preferences=تنظيمات

@@ -2050,6 +2050,7 @@ post-reply=ポストの応答
 post=ポスト
 posted-as-a-reply-to=as a reply to {0}.
 posted-by=掲示される
+posted-on-x=Posted on {0}.
 posts=ポスト
 pound=ポンド
 precompile-jsps-for-faster-speed=より速い速度のためのPrecompile のjsps 。
