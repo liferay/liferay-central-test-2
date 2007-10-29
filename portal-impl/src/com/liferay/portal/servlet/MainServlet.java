@@ -45,6 +45,7 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.ContentUtil;
@@ -126,8 +127,13 @@ public class MainServlet extends ActionServlet {
 				},
 				true);
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		catch (RuntimeException re) {
+			ShutdownUtil.shutdown(0);
+
+			throw new ServletException(re);
+		}
+		catch (ActionException ae) {
+			_log.error(ae, ae);
 		}
 
 		// Velocity

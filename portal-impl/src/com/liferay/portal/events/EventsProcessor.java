@@ -148,12 +148,7 @@ public class EventsProcessor {
 				else if (obj instanceof SimpleAction) {
 					SimpleAction sa = (SimpleAction)obj;
 
-					try {
-						sa.run(ids);
-					}
-					catch (Exception e) {
-						throw new ActionException(e);
-					}
+					sa.run(ids);
 				}
 			}
 		}

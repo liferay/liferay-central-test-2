@@ -99,9 +99,11 @@ public class StartupAction extends SimpleAction {
 			int buildNumber = ReleaseLocalServiceUtil.getBuildNumberOrCreate();
 
 			if (buildNumber < ReleaseInfo.RELEASE_4_2_1_BUILD_NUMBER) {
-				_log.error("You must first upgrade to Liferay Portal 4.2.1");
+				String msg = "You must first upgrade to Liferay Portal 4.2.1";
 
-				System.exit(0);
+				_log.fatal(msg);
+
+				throw new RuntimeException(msg);
 			}
 
 			boolean ranUpgradeProcess = false;
@@ -228,6 +230,9 @@ public class StartupAction extends SimpleAction {
 			// Lucene
 
 			LuceneUtil.checkLuceneDir(CompanyImpl.SYSTEM);
+		}
+		catch (RuntimeException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			throw new ActionException(e);
