@@ -231,15 +231,18 @@ public class Validator {
 		return true;
 	}
 
-	public static boolean isEmailAddress(String ea) {
+	public static boolean isEmailAddress(String emailAddress) {
 		Boolean valid = null;
 
 		try {
 			valid = (Boolean)PortalClassInvoker.invoke(
-				"com.liferay.util.mail.InternetAddressUtil", "isValid", ea);
+				"com.liferay.util.mail.InternetAddressUtil", "isValid",
+				emailAddress);
 		}
 		catch (Exception e) {
-			_log.warn(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 
 		if (valid == null) {

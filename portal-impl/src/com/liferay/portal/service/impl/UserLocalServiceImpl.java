@@ -2016,13 +2016,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			validateScreenName(user.getCompanyId(), screenName);
 		}
 
-		if (!Validator.isEmailAddress(emailAddress) ||
-			emailAddress.startsWith("root@") ||
-			emailAddress.startsWith("postmaster@")) {
+		validateEmailAddress(emailAddress);
 
-			throw new UserEmailAddressException();
-		}
-		else if (!user.isDefaultUser()) {
+		if (!user.isDefaultUser()) {
 			try {
 				if (!user.getEmailAddress().equalsIgnoreCase(emailAddress)) {
 					if (UserUtil.findByC_EA(
@@ -2043,9 +2039,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					throw new ReservedUserEmailAddressException();
 				}
 			}
-		}
 
-		if (!user.isDefaultUser()) {
 			if (Validator.isNull(firstName)) {
 				throw new ContactFirstNameException();
 			}
@@ -2079,30 +2073,24 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				companyId, 0, password1, password2, passwordPolicy);
 		}
 
-		if (!Validator.isEmailAddress(emailAddress) ||
-			emailAddress.startsWith("root@") ||
-			emailAddress.startsWith("postmaster@")) {
+		validateEmailAddress(emailAddress);
 
-			throw new UserEmailAddressException();
+		try {
+			User user = UserUtil.findByC_EA(companyId, emailAddress);
+
+			if (user != null) {
+				throw new DuplicateUserEmailAddressException();
+			}
 		}
-		else {
-			try {
-				User user = UserUtil.findByC_EA(companyId, emailAddress);
+		catch (NoSuchUserException nsue) {
+		}
 
-				if (user != null) {
-					throw new DuplicateUserEmailAddressException();
-				}
-			}
-			catch (NoSuchUserException nsue) {
-			}
+		String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
+			companyId, PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES);
 
-			String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
-				companyId, PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES);
-
-			for (int i = 0; i < reservedEmailAddresses.length; i++) {
-				if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
-					throw new ReservedUserEmailAddressException();
-				}
+		for (int i = 0; i < reservedEmailAddresses.length; i++) {
+			if (emailAddress.equalsIgnoreCase(reservedEmailAddresses[i])) {
+				throw new ReservedUserEmailAddressException();
 			}
 		}
 
@@ -2111,6 +2099,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 		else if (Validator.isNull(lastName)) {
 			throw new ContactLastNameException();
+		}
+	}
+
+	protected void validateEmailAddress(String emailAddress)
+		throws PortalException {
+
+		if (!Validator.isEmailAddress(emailAddress) ||
+			emailAddress.startsWith("root@") ||
+			emailAddress.startsWith("postmaster@")) {
+
+			throw new UserEmailAddressException();
 		}
 	}
 
