@@ -75,6 +75,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 	}
 	%>
 
+	function <portlet:namespace />getLanguageId() {
+		self.location = '<%= portletURL %>&<portlet:namespace />languageId=' + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
+	}
 </script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
@@ -479,12 +482,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</select>
 
 		<br />
-
-		<script type="text/javascript">
-			function <portlet:namespace />getLanguageId() {
-				self.location = '<%= portletURL %>&<portlet:namespace />languageId=' + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
-			}
-		</script>
 	</c:when>
 	<c:when test='<%= tabs2.equals("user-ranks") %>'>
 		<liferay-ui:message key="enter-rank-and-minimum-post-pairs-per-line" />
@@ -510,12 +507,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</select>
 
 		<br />
-
-		<script type="text/javascript">
-			function <portlet:namespace />getLanguageId() {
-				self.location = '<%= portletURL %>&<portlet:namespace />languageId=' + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
-			}
-		</script>
 	</c:when>
 	<c:when test='<%= tabs2.equals("display-settings") %>'>
 		<table class="liferay-table">
