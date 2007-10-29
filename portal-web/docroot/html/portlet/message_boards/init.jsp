@@ -64,7 +64,7 @@
 <%
 PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(request, portletDisplay.getId(), false, true);
 
-String languageId = ParamUtil.getString(request, "languageId", LocaleUtil.toLanguageId(locale));
+String languageId = ParamUtil.getString(request, "languageId", themeDisplay.getLanguageId());
 
 String[] priorities = LocalizationUtil.getPrefsValues(portletSetup, "priorities", languageId);
 

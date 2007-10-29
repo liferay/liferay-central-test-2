@@ -142,7 +142,7 @@ public class LocalizationUtil {
 	}
 
 	public static String getPrefsValue(
-			PortletPreferences prefs, String key, String languageId) {
+		PortletPreferences prefs, String key, String languageId) {
 
 		String localizedKey = _getPrefsKey(key, languageId);
 
@@ -156,7 +156,7 @@ public class LocalizationUtil {
 	}
 
 	public static String[] getPrefsValues(
-			PortletPreferences prefs, String key, String languageId) {
+		PortletPreferences prefs, String key, String languageId) {
 
 		String localizedKey = _getPrefsKey(key, languageId);
 
@@ -226,14 +226,16 @@ public class LocalizationUtil {
 
 	public static void setPrefsValue(
 			PortletPreferences prefs, String key, String languageId,
-			String value) throws Exception {
+			String value)
+		throws Exception {
 
 		prefs.setValue(_getPrefsKey(key, languageId), value);
 	}
 
 	public static void setPrefsValues(
 			PortletPreferences prefs, String key, String languageId,
-			String[] values) throws Exception {
+			String[] values)
+		throws Exception {
 
 		prefs.setValues(_getPrefsKey(key, languageId), values);
 	}

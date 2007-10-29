@@ -63,7 +63,7 @@ if (portletDecorateObj != null) {
 
 // Portlet title
 
-String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, LocaleUtil.toLanguageId(locale));
+String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, themeDisplay.getLanguageId());
 
 if (portletDisplay.isAccess() && portletDisplay.isActive()) {
 	if (Validator.isNull(portletTitle)) {

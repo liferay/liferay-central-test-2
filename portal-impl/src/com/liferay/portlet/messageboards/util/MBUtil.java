@@ -395,22 +395,20 @@ public class MBUtil {
 			ThemeDisplay themeDisplay)
 		throws Exception {
 
-		String[] priorities =
-			LocalizationUtil.getPrefsValues(prefs, "priorities", languageId);
+		String[] priorities = LocalizationUtil.getPrefsValues(
+			prefs, "priorities", languageId);
 
-		String[] priorityPair =
-			_findThreadPriority(value, themeDisplay, priorities);
+		String[] priorityPair = _findThreadPriority(
+			value, themeDisplay, priorities);
 
 		if (priorityPair == null) {
 			String defaultLanguageId = LocaleUtil.toLanguageId(
-					LocaleUtil.getDefault());
+				LocaleUtil.getDefault());
 
-			priorities =
-				LocalizationUtil.getPrefsValues(prefs, "priorities",
-					defaultLanguageId);
+			priorities = LocalizationUtil.getPrefsValues(
+				prefs, "priorities", defaultLanguageId);
 
-			priorityPair =
-				_findThreadPriority(value, themeDisplay, priorities);
+			priorityPair = _findThreadPriority(value, themeDisplay, priorities);
 		}
 
 		return priorityPair;
@@ -457,8 +455,8 @@ public class MBUtil {
 
 		String rank = StringPool.BLANK;
 
-		String[] ranks =
-			LocalizationUtil.getPrefsValues(prefs, "ranks", languageId);
+		String[] ranks = LocalizationUtil.getPrefsValues(
+			prefs, "ranks", languageId);
 
 		for (int i = 0; i < ranks.length; i++) {
 			String[] kvp = StringUtil.split(ranks[i], StringPool.EQUAL);
@@ -478,7 +476,7 @@ public class MBUtil {
 	}
 
 	private static String[] _findThreadPriority(
-			double value, ThemeDisplay themeDisplay, String[] priorities) {
+		double value, ThemeDisplay themeDisplay, String[] priorities) {
 
 		for (int i = 0; i < priorities.length; i++) {
 			String[] priority = StringUtil.split(priorities[i]);
