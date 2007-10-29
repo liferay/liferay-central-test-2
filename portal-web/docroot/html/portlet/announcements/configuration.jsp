@@ -25,14 +25,20 @@
 <%@ include file="/html/portlet/announcements/init.jsp" %>
 
 <%
-content = ParamUtil.getString(request, "content", content);
-
 String redirect = ParamUtil.getString(request, "redirect");
+
+content = ParamUtil.getString(request, "content", content);
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
 	<liferay-portlet:param name="redirect" value="<%= redirect %>" />
 </liferay-portlet:renderURL>
+
+<script type="text/javascript">
+	function <portlet:namespace />getLanguageId() {
+		self.location = '<%= portletURL %>&<portlet:namespace />languageId=' + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
+	}
+</script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
@@ -59,15 +65,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 </select>
 
-<br />
-
-<script type="text/javascript">
-	function <portlet:namespace />getLanguageId() {
-		self.location = '<%= portletURL %>&<portlet:namespace />languageId=' + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
-	}
-</script>
-
-<br />
+<br /><br />
 
 <input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 

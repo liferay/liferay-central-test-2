@@ -35,7 +35,7 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, false, false);
 }
 
-String languageId = ParamUtil.getString(request, "languageId", LocaleUtil.toLanguageId(locale));
+String languageId = ParamUtil.getString(request, "languageId", themeDisplay.getLanguageId());
 
 String content = LocalizationUtil.getPrefsValue(prefs, "content", languageId);
 %>
