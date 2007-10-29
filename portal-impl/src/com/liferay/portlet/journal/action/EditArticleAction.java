@@ -34,8 +34,8 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.journal.ArticleContentException;
 import com.liferay.portlet.journal.ArticleDisplayDateException;
@@ -116,42 +116,19 @@ public class EditArticleAction extends PortletAction {
 			}
 
 			if (Validator.isNotNull(cmd)) {
-				boolean saveAndContinue = ParamUtil.getBoolean(
-					req, "saveAndContinue", false);
+				String redirect = ParamUtil.getString(req, "redirect");
 
-				if (saveAndContinue && (article != null)) {
-					ThemeDisplay themeDisplay = (ThemeDisplay) req.getAttribute(
-						WebKeys.THEME_DISPLAY);
+				if (article != null) {
+					boolean saveAndContinue = ParamUtil.getBoolean(
+						req, "saveAndContinue");
 
-					String redirect = ParamUtil.getString(req, "redirect");
-					
-					String originalRedirect = ParamUtil.getString(
-						req, "originalRedirect ");
-
-					PortletURLImpl portletURL = new PortletURLImpl(
-						(ActionRequestImpl) req, config.getPortletName(),
-						themeDisplay.getPlid(), false);
-
-					portletURL.setWindowState(WindowState.MAXIMIZED);
-					
-					portletURL.setParameter(
-						"struts_action", "/journal/edit_article");
-					portletURL.setParameter(
-						"articleId", article.getArticleId(), false);
-					portletURL.setParameter(
-						"groupId", String.valueOf(article.getGroupId()), false);
-					portletURL.setParameter(
-						"version", String.valueOf(article.getVersion()), false);
-					portletURL.setParameter("cmd", Constants.UPDATE, false);
-					portletURL.setParameter("redirect", redirect, false);
-					portletURL.setParameter(
-						"originalRedirect", originalRedirect, false);
-
-					sendRedirect(req, res, portletURL.toString());
+					if (saveAndContinue) {
+						redirect = getSaveAndContinueRedirect(
+							config, req, article, redirect);
+					}
 				}
-				else {
-					sendRedirect(req, res);
-				}
+
+				sendRedirect(req, res, redirect);
 			}
 		}
 		catch (Exception e) {
@@ -295,6 +272,35 @@ public class EditArticleAction extends PortletAction {
 		}
 
 		return images;
+	}
+
+	protected String getSaveAndContinueRedirect(
+			PortletConfig config, ActionRequest req, JournalArticle article,
+			String redirect)
+		throws Exception{
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String originalRedirect = ParamUtil.getString(req, "originalRedirect");
+
+		PortletURLImpl portletURL = new PortletURLImpl(
+			(ActionRequestImpl)req, config.getPortletName(),
+			themeDisplay.getPlid(), false);
+
+		portletURL.setWindowState(WindowState.MAXIMIZED);
+
+		portletURL.setParameter("struts_action", "/journal/edit_article");
+		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
+		portletURL.setParameter("redirect", redirect, false);
+		portletURL.setParameter("originalRedirect", originalRedirect, false);
+		portletURL.setParameter(
+			"groupId", String.valueOf(article.getGroupId()), false);
+		portletURL.setParameter("articleId", article.getArticleId(), false);
+		portletURL.setParameter(
+			"version", String.valueOf(article.getVersion()), false);
+
+		return portletURL.toString();
 	}
 
 	protected void removeArticlesLocale(ActionRequest req) throws Exception {

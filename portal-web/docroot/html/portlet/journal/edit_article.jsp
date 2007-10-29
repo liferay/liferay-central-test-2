@@ -523,10 +523,8 @@ Document contentDoc = null;
 String[] availableLocales = null;
 %>
 
-<%@ include file="edit_article_extra.jspf" %>
-
-<table class="liferay-table" style="clear: none" width="100%">
-	<tr>
+<table class="liferay-table">
+<tr>
 	<td valign="top">
 		<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
 		<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
@@ -669,7 +667,7 @@ String[] availableLocales = null;
 				<table class="liferay-table">
 				<tr>
 					<td>
-						<select <%= (article == null) ?  "disabled" : "" %> name="<portlet:namespace />languageId" onChange="<portlet:namespace />changeLanguageView();">
+						<select <%= (article == null) ? "disabled" : "" %> name="<portlet:namespace />languageId" onChange="<portlet:namespace />changeLanguageView();">
 
 							<%
 							Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -712,7 +710,7 @@ String[] availableLocales = null;
 								<liferay-ui:message key="default-language" />
 							</td>
 							<td>
-								<select <%= (article == null) ?  "disabled" : "" %> name="<portlet:namespace />defaultLanguageId" onChange="<portlet:namespace />changeLanguageView();">
+								<select <%= (article == null) ? "disabled" : "" %> name="<portlet:namespace />defaultLanguageId" onChange="<portlet:namespace />changeLanguageView();">
 
 									<%
 									if ((availableLocales != null) && (availableLocales.length > 0)) {
@@ -740,7 +738,7 @@ String[] availableLocales = null;
 									<%
 										}
 									}
-									else  {
+									else {
 									%>
 
 										<option value="<%= defaultLanguageId %>"><%= defaultLocale.getDisplayName(defaultLocale) %></option>
@@ -840,10 +838,11 @@ String[] availableLocales = null;
 				</table>
 			</c:otherwise>
 		</c:choose>
+
 		<c:if test="<%= article == null %>">
-			<table>
+			<table class="liferay-table">
 			<tr>
-				<td>
+				<td colspan="2">
 					<br />
 				</td>
 			</tr>
@@ -859,42 +858,48 @@ String[] availableLocales = null;
 			</tr>
 			</table>
 		</c:if>
+
+		<div>
+			<br />
+
+			<input type="submit" value="<liferay-ui:message key="save" />" />
+
+			<input name="save-and-continue" type="button" value="<liferay-ui:message key="save-and-continue" />" onClick="<portlet:namespace />saveAndContinueArticle();" />
+
+			<c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE) %>">
+				<input type="button" value="<liferay-ui:message key="save-and-approve" />" onClick="<portlet:namespace />saveAndApproveArticle();" />
+
+				<c:if test="<%= article != null %>">
+					<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveArticle();" />
+				</c:if>
+			</c:if>
+
+			<c:if test="<%= Validator.isNotNull(structureId) %>">
+				<input type="button" value="<liferay-ui:message key="preview" />" onClick="<portlet:namespace />previewArticle();" />
+			</c:if>
+
+			<c:if test="<%= structure != null %>">
+				<input type="button" value="<liferay-ui:message key="download" />" onClick="<portlet:namespace />downloadArticleContent();" />
+			</c:if>
+
+			<c:if test="<%= article != null %>">
+				<c:if test="<%= !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
+					<input type="button" value="<liferay-ui:message key="expire" />" onClick="<portlet:namespace />expireArticle();" />
+				</c:if>
+
+				<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
+					<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteArticle();" />
+				</c:if>
+			</c:if>
+
+			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+		</div>
 	</td>
-	</tr>
+	<td valign="top">
+		<%@ include file="edit_article_extra.jspf" %>
+	</td>
+</tr>
 </table>
-
-<br />
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
-<input name="save-and-continue" type="button" value="<liferay-ui:message key="save-and-continue" />"  onClick="<portlet:namespace />saveAndContinueArticle();" />
-
-<c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE) %>">
-	<input type="button" value="<liferay-ui:message key="save-and-approve" />" onClick="<portlet:namespace />saveAndApproveArticle();" />
-
-	<c:if test="<%= article != null %>">
-		<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveArticle();" />
-	</c:if>
-</c:if>
-
-<c:if test="<%= Validator.isNotNull(structureId) %>">
-	<input type="button" value="<liferay-ui:message key="preview" />" onClick="<portlet:namespace />previewArticle();" />
-</c:if>
-
-<c:if test="<%= structure != null %>">
-	<input type="button" value="<liferay-ui:message key="download" />" onClick="<portlet:namespace />downloadArticleContent();" />
-</c:if>
-
-<c:if test="<%= article != null %>">
-	<c:if test="<%= !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
-		<input type="button" value="<liferay-ui:message key="expire" />" onClick="<portlet:namespace />expireArticle();" />
-	</c:if>
-
-	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
-		<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteArticle();" />
-	</c:if>
-</c:if>
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 
 </form>
 
