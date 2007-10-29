@@ -24,6 +24,8 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
+<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
+
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
@@ -103,7 +105,7 @@ try {
 
 		rowURL.setWindowState(WindowState.MAXIMIZED);
 
-		rowURL.setParameter("struts_action", "/wiki/view_page");
+		rowURL.setParameter("struts_action", "/wiki/view");
 		rowURL.setParameter("nodeId", String.valueOf(curNodeId));
 		rowURL.setParameter("title", title);
 

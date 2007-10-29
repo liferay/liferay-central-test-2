@@ -24,34 +24,38 @@
 
 <%@ include file="/html/portlet/wiki/css.jspf" %>
 
+<%
+String content = null;
+if (wikiPage.getFormat().equals(WikiPageImpl.HTML_FORMAT)) {
+	content = wikiPage.getContent();
+}
+else if (wikiPage.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT)) {
+	PortletURL pageURL = renderResponse.createRenderURL();
+
+	pageURL.setParameter("struts_action", "/wiki/view");
+
+	content = WikiUtil.convert(WikiUtil.getFilter(pageURL, node.getNodeId()), wikiPage.getContent());
+}
+else if (wikiPage.getFormat().equals(WikiPageImpl.PLAIN_TEXT_FORMAT)) {
+	if (Validator.isNotNull(wikiPage.getContent())) {
+	    content = "<pre>" + wikiPage.getContent() + "</pre>";
+	}
+}
+
+if (Validator.isNull(content)) {
+	content = LanguageUtil.get(pageContext, "this-page-is-empty-edit-it-to-add-some-text");
+}
+%>
+
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td class="wiki-body">
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.HTML_FORMAT) %>">
-			<%= wikiPage.getContent() %>
-		</c:if>
-
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) %>">
-
-			<%
-			PortletURL pageURL = renderResponse.createRenderURL();
-
-			pageURL.setParameter("struts_action", "/wiki/view_page");
-			%>
-
-			<%= WikiUtil.convert(WikiUtil.getFilter(pageURL, node.getNodeId()), wikiPage.getContent()) %>
-		</c:if>
-
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.PLAIN_TEXT_FORMAT) %>">
-<pre>
-<%= wikiPage.getContent() %>
-</pre>
-		</c:if>
+		<%= content %>
 	</td>
 </tr>
 </table>
 
-<br />
+<div class="separator"><!-- --></div>
 
 <div>
 	<liferay-ui:tags-summary

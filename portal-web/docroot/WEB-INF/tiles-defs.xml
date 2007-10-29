@@ -1135,8 +1135,8 @@
 		<put name="portlet_content" value="/portlet/wiki/view_orphan_pages.jsp" />
 	</definition>
 
-	<definition name="portlet.wiki.view_page" extends="portlet.wiki">
-		<put name="portlet_content" value="/portlet/wiki/view_page.jsp" />
+	<definition name="portlet.wiki.view_nodes" extends="portlet.wiki">
+		<put name="portlet_content" value="/portlet/wiki/view_nodes.jsp" />
 	</definition>
 
 	<definition name="portlet.wiki.view_page_history" extends="portlet.wiki">

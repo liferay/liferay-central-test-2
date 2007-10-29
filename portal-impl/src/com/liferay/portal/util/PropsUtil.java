@@ -1113,7 +1113,11 @@ public class PropsUtil {
 
 	// Wiki Portlet
 
+	public static final String WIKI_CLASSIC_SYNTAX_HELP_URL = "wiki.classic.syntax.help.url";
+
 	public static final String WIKI_FRONT_PAGE_NAME = "wiki.front.page.name";
+
+	public static final String WIKI_INITIAL_NODE_NAME = "wiki.initial.node.name";
 
 	public static final String WIKI_PERMISSION_CHECKER = "wiki.permission.checker";
 

@@ -23,7 +23,26 @@
 %>
 
 <%
-if (className.equals(BookmarksEntry.class.getName())) {
+if (className.equals(BlogsEntry.class.getName())) {
+	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
+
+	if (Validator.isNull(title)) {
+		title = entry.getTitle();
+	}
+
+	summary = entry.getTitle();
+
+	PortletURL entryURL = renderResponse.createRenderURL();
+
+	entryURL.setParameter("struts_action", "/tagged_content/view_content");
+	entryURL.setParameter("redirect", currentURL);
+	entryURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
+
+	viewURL = entryURL.toString();
+
+	viewURLMessage = "read-more";
+}
+else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 
 	if (Validator.isNull(title)) {
@@ -109,6 +128,21 @@ else if (className.equals(JournalArticle.class.getName())) {
 	else {
 		show = false;
 	}
+}
+else if (className.equals(WikiPage.class.getName())) {
+	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
+
+	WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
+
+	PortletURL pageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
+
+	pageURL.setWindowState(WindowState.MAXIMIZED);
+	pageURL.setPortletMode(PortletMode.VIEW);
+
+	pageURL.setParameter("struts_action", "/wiki/view");
+	pageURL.setParameter("title", wikiPage.getTitle());
+
+	viewURL = pageURL.toString();
 }
 
 // URLs set through the asset override automatically generated URLs

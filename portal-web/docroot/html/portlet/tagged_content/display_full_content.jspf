@@ -157,7 +157,7 @@
 				pageURL.setWindowState(WindowState.MAXIMIZED);
 				pageURL.setPortletMode(PortletMode.VIEW);
 
-				pageURL.setParameter("struts_action", "/wiki/view_page");
+				pageURL.setParameter("struts_action", "/wiki/view");
 				%>
 
 				<%= WikiUtil.convert(WikiUtil.getFilter(pageURL, node.getNodeId()), wikiPage.getContent()) %>

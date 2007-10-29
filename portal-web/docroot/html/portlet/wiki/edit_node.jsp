@@ -32,6 +32,11 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 %>
 
+<liferay-ui:tabs
+	names="administer-nodes"
+	backURL="<%= redirect %>"
+/>
+
 <script type="text/javascript">
 	function <portlet:namespace />saveNode() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= node == null ? Constants.ADD : Constants.UPDATE %>";

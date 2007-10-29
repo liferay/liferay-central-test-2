@@ -1,0 +1,44 @@
+<%
+String syntaxHelpURL = PropsUtil.get(PropsUtil.WIKI_CLASSIC_SYNTAX_HELP_URL);
+%>
+
+<table class="liferay-table" width="100%">
+	<tr>
+		<td width="70%" valign="top">
+			<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="content" />
+		</td>
+		<td>
+			<br />
+		</td>
+		<td class="wiki-syntax-help" style="border: 1px dotted gray" width="250" valign="top">
+			<h3><liferay-ui:message key="syntax-help"/></h3>
+			<h4><liferay-ui:message key="text-styles"/></h4>
+			<pre>
+'quoted'
+''italics''
+'''bold'''
+monospaced
+			</pre>
+			<h4><liferay-ui:message key="headers"/></h4>
+			<pre>
+= Header 1 =
+== Header 2 ==
+=== Header 3 ===
+			</pre>
+			<h4><liferay-ui:message key="links"/></h4>
+			<pre>
+CamelCaseWordsAreLinksToPages
+[http://www.liferay.com Liferay's Website]
+			</pre>
+			<h4><liferay-ui:message key="lists"/></h4>
+			<pre>
+* Item
+* Subitem
+
+1 Ordered Item
+1 Ordered Subitem
+			</pre>
+			<a href="<%= syntaxHelpURL %>" target="_blank"><liferay-ui:message key="more"/>...</a>
+		</td>
+	</tr>
+</table>

@@ -32,7 +32,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 
 <liferay-ui:icon-menu>
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pageURL">
-		<portlet:param name="struts_action" value="/wiki/view_page" />
+		<portlet:param name="struts_action" value="/wiki/view" />
 		<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
 		<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
 	</portlet:renderURL>

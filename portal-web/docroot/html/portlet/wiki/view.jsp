@@ -24,106 +24,145 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
-
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm">
-<liferay-portlet:renderURLParams varImpl="searchURL" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
-
 <%
-PortletURL portletURL = renderResponse.createRenderURL();
+WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
+WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
+PortletURL addPageURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/wiki/view");
+addPageURL.setWindowState(WindowState.MAXIMIZED);
 
-List headerNames = new ArrayList();
-
-headerNames.add("node");
-headerNames.add("num-of-pages");
-headerNames.add("last-post-date");
-headerNames.add(StringPool.BLANK);
-
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
-
-int total = WikiNodeLocalServiceUtil.getNodesCount(portletGroupId.longValue());
-
-searchContainer.setTotal(total);
-
-List results = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
-
-searchContainer.setResults(results);
-
-List resultRows = searchContainer.getResultRows();
-
-for (int i = 0; i < results.size(); i++) {
-	WikiNode node = (WikiNode)results.get(i);
-
-	ResultRow row = new ResultRow(node, node.getNodeId(), i);
-
-	PortletURL rowURL = renderResponse.createRenderURL();
-
-	rowURL.setWindowState(WindowState.MAXIMIZED);
-
-	rowURL.setParameter("struts_action", "/wiki/view_page");
-	rowURL.setParameter("redirect", currentURL);
-	rowURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-	rowURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
-
-	// Name
-
-	row.addText(node.getName(), rowURL);
-
-	// Number of pages
-
-	int pagesCount = WikiPageLocalServiceUtil.getPagesCount(node.getNodeId(), true);
-
-	row.addText(String.valueOf(pagesCount), rowURL);
-
-	// Last post date
-
-	if (node.getLastPostDate() == null) {
-		row.addText(LanguageUtil.get(pageContext, "never"), rowURL);
-	}
-	else {
-		row.addText(dateFormatDateTime.format(node.getLastPostDate()), rowURL);
-	}
-
-	// Action
-
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wiki/node_action.jsp");
-
-	// Add result row
-
-	resultRows.add(row);
-}
-
-boolean showAddNodeButton = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.WIKI, ActionKeys.ADD_NODE);
+addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 %>
 
-<c:if test="<%= showAddNodeButton || (results.size() > 0) %>">
-	<div>
-		<c:if test="<%= results.size() > 0 %>">
-			<label for="<portlet:namespace />keywords"><liferay-ui:message key="search" /></label>
+<script type="text/javascript">
+	function <portlet:namespace />addPage() {
+		var pageName = prompt('<%= LanguageUtil.get(pageContext, "page-name") %> (<%= LanguageUtil.get(pageContext, "use-camel-case-syntax") %>)','');
+		window.location = '<%= addPageURL.toString() + "&" + renderResponse.getNamespace() + "title=" %>' + pageName;
+	}
+</script>
 
-			<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" />
+<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
 
-			<input type="submit" value="<liferay-ui:message key="search-pages" />" />
-		</c:if>
+<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
 
-		<c:if test="<%= showAddNodeButton %>">
-			<input type="button" value="<liferay-ui:message key="add-node" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
-		</c:if>
-	</div>
+<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURLParams varImpl="searchURL" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 
-	<c:if test="<%= results.size() > 0 %>">
-		<br />
-	</c:if>
-</c:if>
+<input name="<portlet:namespace />keywords" size="30" type="text" />
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+<input type="submit" value="<liferay-ui:message key="search" />" />
 
 </form>
+
+<br />
+
+<%@ include file="/html/portlet/wiki/page_name.jspf" %>
+
+<div>
+<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
+</div>
+
+<liferay-ui:icon-menu>
+
+	<%
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setWindowState(WindowState.MAXIMIZED);
+
+	portletURL.setParameter("redirect", currentURL);
+	portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+	portletURL.setParameter("title", wikiPage.getTitle());
+	%>
+
+	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
+		<%
+		portletURL.setParameter("struts_action", "/wiki/edit_page");
+		%>
+
+		<liferay-ui:icon image="edit" url="<%= portletURL.toString() %>" />
+	</c:if>
+
+	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.PERMISSIONS) %>">
+		<liferay-security:permissionsURL
+			modelResource="<%= WikiPage.class.getName() %>"
+			modelResourceDescription="<%= wikiPage.getTitle() %>"
+			resourcePrimKey="<%= String.valueOf(wikiPage.getResourcePrimKey()) %>"
+			var="permissionsURL"
+		/>
+
+		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+	</c:if>
+
+	<liferay-ui:icon image="add_article" message="add-page" url='<%= "javascript:" + renderResponse.getNamespace() + "addPage()"%>' />
+
+	<%
+	portletURL.setParameter("struts_action", "/wiki/view_page_links");
+	%>
+
+	<liferay-ui:icon image="links" message="page-links" url="<%= portletURL.toString() %>" />
+
+	<%
+	portletURL.setParameter("struts_action", "/wiki/view_page_history");
+	%>
+
+	<liferay-ui:icon image="history" message="page-history" url="<%= portletURL.toString() %>" />
+
+	<%
+	portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
+	%>
+
+	<liferay-ui:icon image="recent_changes" message="recent-changes" url="<%= portletURL.toString() %>" />
+
+	<%
+	portletURL.setParameter("struts_action", "/wiki/view_all_pages");
+	%>
+
+	<liferay-ui:icon image="all_pages" message="all-pages" url="<%= portletURL.toString() %>" />
+
+	<%
+	portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
+	%>
+
+	<liferay-ui:icon image="orphan_pages" message="orphan-pages" url="<%= portletURL.toString() %>" />
+
+	<%
+	if (themeDisplay.isSignedIn()) {
+		if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.WIKI, ActionKeys.ADD_NODE)) {
+
+			portletURL.setParameter("struts_action", "/wiki/view_nodes");
+	%>
+
+			<liferay-ui:icon image="manage_task" message="administer-nodes" url="<%= portletURL.toString() %>" />
+
+	<%
+		}
+	}
+	%>
+
+</liferay-ui:icon-menu>
+
+<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
+	<br />
+
+	<liferay-ui:tabs names="comments" />
+
+	<portlet:actionURL var="discussionURL">
+		<portlet:param name="struts_action" value="/wiki/edit_page_discussion" />
+	</portlet:actionURL>
+
+	<liferay-ui:discussion
+		formName="fm2"
+		formAction="<%= discussionURL %>"
+		className="<%= WikiPage.class.getName() %>"
+		classPK="<%= wikiPage.getResourcePrimKey() %>"
+		userId="<%= wikiPage.getUserId() %>"
+		subject="<%= wikiPage.getTitle() %>"
+		redirect="<%= currentURL %>"
+	/>
+</c:if>
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

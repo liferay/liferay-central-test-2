@@ -78,20 +78,20 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	public String exportData(
-			PortletDataContext context, String portletId, 
-			PortletPreferences prefs) 
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs)
 		throws PortletDataException {
 
 		Map parameterMap = context.getParameterMap();
 
 		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_CALENDAR_DATA, 
+			parameterMap, _EXPORT_CALENDAR_DATA,
 			_enableExport.getDefaultState());
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
 				_log.debug("Exporting data is enabled");
-			} 
+			}
 			else {
 				_log.debug("Exporting data is disabled");
 			}
@@ -144,7 +144,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	public PortletPreferences importData(
-			PortletDataContext context, String portletId, 
+			PortletDataContext context, String portletId,
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
@@ -157,7 +157,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		if (_log.isDebugEnabled()) {
 			if (importData) {
 				_log.debug("Importing data is enabled");
-			} 
+			}
 			else {
 				_log.debug("Importing data is disabled");
 			}

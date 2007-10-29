@@ -24,6 +24,8 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
+<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
+
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="all_pages" />
 </liferay-util:include>

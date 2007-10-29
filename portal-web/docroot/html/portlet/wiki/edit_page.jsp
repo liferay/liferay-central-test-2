@@ -24,6 +24,8 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
+<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
+
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
@@ -71,7 +73,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <liferay-ui:tags-error />
 
-<%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
+<%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
 <table class="liferay-table">
 <tr>
@@ -96,6 +98,9 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
 
 			<input name="<portlet:namespace />content" type="hidden" value="" />
+		</c:when>
+		<c:when test="<%= format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) %>">
+			<%@ include file="/html/portlet/wiki/edit_page_syntax_help.jspf" %>
 		</c:when>
 		<c:otherwise>
 			<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="content" />

@@ -31,7 +31,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 String type = ParamUtil.getString(request, "type");
 %>
 
-<%@ include file="/html/portlet/wiki/breadcrumb.jspf" %>
+<%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
 <%
 String strutsAction = "";
@@ -150,7 +150,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
-	rowURL.setParameter("struts_action", "/wiki/view_page");
+	rowURL.setParameter("struts_action", "/wiki/view");
 	rowURL.setParameter("nodeId", String.valueOf(curWikiPage.getNodeId()));
 	rowURL.setParameter("title", curWikiPage.getTitle());
 	rowURL.setParameter("version", String.valueOf(curWikiPage.getVersion()));

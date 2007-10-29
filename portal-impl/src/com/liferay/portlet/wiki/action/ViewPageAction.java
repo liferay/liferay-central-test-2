@@ -22,11 +22,21 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
+import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
+
+import java.util.List;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
@@ -40,6 +50,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="ViewPageAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class ViewPageAction extends PortletAction {
@@ -51,6 +62,9 @@ public class ViewPageAction extends PortletAction {
 
 		try {
 			ActionUtil.getNode(req);
+
+			checkNode(req);
+
 			ActionUtil.getPage(req);
 		}
 		catch (Exception e) {
@@ -68,6 +82,34 @@ public class ViewPageAction extends PortletAction {
 		}
 
 		return mapping.findForward(getForward(req, "portlet.wiki.view_page"));
+	}
+
+	private void checkNode(RenderRequest req)
+		throws PortalException, SystemException {
+		WikiNode node = (WikiNode) req.getAttribute(WebKeys.WIKI_NODE);
+
+		if (node == null) {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+			List nodes = WikiNodeLocalServiceUtil.getNodes(
+				themeDisplay.getLayout().getGroupId(), 0, 1);
+
+			if (nodes.size() == 0) {
+				String nodeName = PropsUtil.get(
+					PropsUtil.WIKI_INITIAL_NODE_NAME);
+
+				node = WikiNodeLocalServiceUtil.addNode(
+					themeDisplay.getUserId(), themeDisplay.getPlid(), nodeName,
+					StringPool.BLANK, true, true);
+			}
+			else {
+				node = (WikiNode) nodes.get(0);
+			}
+
+			req.setAttribute(WebKeys.WIKI_NODE, node);
+		}
+
 	}
 
 }

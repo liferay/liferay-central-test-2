@@ -128,6 +128,21 @@ else if (className.equals(JournalArticle.class.getName())) {
 		show = false;
 	}
 }
+else if (className.equals(WikiPage.class.getName())) {
+	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
+
+	WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
+
+	PortletURL pageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
+
+	pageURL.setWindowState(WindowState.MAXIMIZED);
+	pageURL.setPortletMode(PortletMode.VIEW);
+
+	pageURL.setParameter("struts_action", "/wiki/view");
+	pageURL.setParameter("title", wikiPage.getTitle());
+
+	viewURL = pageURL.toString();
+}
 
 // URLs set through the asset override automatically generated URLs
 

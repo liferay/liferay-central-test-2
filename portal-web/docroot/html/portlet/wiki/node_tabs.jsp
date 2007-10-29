@@ -24,8 +24,23 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
+<%
+String nodeId = ParamUtil.getString(request, "nodeId", "");
 
-<liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
-	<liferay-util:param name="type" value="recent_changes" />
-</liferay-util:include>
+PortletURL tabs1URL = renderResponse.createRenderURL();
+
+tabs1URL.setParameter("struts_action", "/wiki/view");
+tabs1URL.setParameter("nodeId", nodeId);
+
+List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
+
+String tabs1Names = ListUtil.toString(nodes, "name");
+String tabs1Values = ListUtil.toString(nodes, "nodeId");
+%>
+
+<liferay-ui:tabs
+	param="nodeId"
+	names="<%= tabs1Names %>"
+	tabsValues="<%= tabs1Values %>"
+	portletURL="<%= tabs1URL %>"
+/>

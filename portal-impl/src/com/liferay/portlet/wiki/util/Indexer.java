@@ -199,7 +199,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		long nodeId = GetterUtil.getLong(doc.get("nodeId"));
 
-		portletURL.setParameter("struts_action", "/wiki/view_page");
+		portletURL.setParameter("struts_action", "/wiki/view");
 		portletURL.setParameter("nodeId", String.valueOf(nodeId));
 		portletURL.setParameter("title", title);
 

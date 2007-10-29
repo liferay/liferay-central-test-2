@@ -23,11 +23,13 @@
 package com.liferay.portlet.wiki.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 
@@ -86,6 +88,17 @@ public class ActionUtil {
 		double version = ParamUtil.getDouble(req, "version");
 
 		WikiPage page = null;
+
+		if (nodeId == 0) {
+			WikiNode node = (WikiNode)req.getAttribute(WebKeys.WIKI_NODE);
+			if (node != null) {
+				nodeId = node.getNodeId();
+			}
+		}
+
+		if (Validator.isNull(title)) {
+			title = WikiPageImpl.FRONT_PAGE;
+		}
 
 		try {
 			page = WikiPageServiceUtil.getPage(nodeId, title, version);
