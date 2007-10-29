@@ -28,6 +28,7 @@ import junit.framework.TestCase;
  * <a href="VersionTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class VersionTest extends TestCase {
 
