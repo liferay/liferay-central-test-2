@@ -422,6 +422,11 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		<portlet:namespace />saveArticle();
 	}
 
+	function <portlet:namespace />saveAndContinueArticle() {
+		document.<portlet:namespace />fm1.<portlet:namespace />saveAndContinue.value = "1";
+		<portlet:namespace />saveArticle();
+	}
+
 	function <portlet:namespace />saveArticle(cmd) {
 		if (cmd == null) {
 			cmd = "<%= article == null ? Constants.ADD : Constants.UPDATE %>";
@@ -500,6 +505,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <input name="<portlet:namespace />content" type="hidden" value="" />
 <input name="<portlet:namespace />articleURL" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:renderURL>" />
 <input name="<portlet:namespace />approve" type="hidden" value="" />
+<input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
 <input name="<portlet:namespace />deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 <input name="<portlet:namespace />expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 
@@ -860,6 +866,7 @@ String[] availableLocales = null;
 <br />
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
+<input name="save-and-continue" type="button" value="<liferay-ui:message key="save-and-continue" />"  onClick="<portlet:namespace />saveAndContinueArticle();" />
 
 <c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE) %>">
 	<input type="button" value="<liferay-ui:message key="save-and-approve" />" onClick="<portlet:namespace />saveAndApproveArticle();" />

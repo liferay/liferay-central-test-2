@@ -35,6 +35,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.journal.ArticleContentException;
 import com.liferay.portlet.journal.ArticleDisplayDateException;
 import com.liferay.portlet.journal.ArticleExpirationDateException;
@@ -71,6 +73,7 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -93,9 +96,11 @@ public class EditArticleAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
+		JournalArticle article = null;
+
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateArticle(req);
+				article = updateArticle(req);
 			}
 			else if (cmd.equals(Constants.APPROVE)) {
 				approveArticle(req);
@@ -111,7 +116,42 @@ public class EditArticleAction extends PortletAction {
 			}
 
 			if (Validator.isNotNull(cmd)) {
-				sendRedirect(req, res);
+				boolean saveAndContinue = ParamUtil.getBoolean(
+					req, "saveAndContinue", false);
+
+				if (saveAndContinue && (article != null)) {
+					ThemeDisplay themeDisplay = (ThemeDisplay) req.getAttribute(
+						WebKeys.THEME_DISPLAY);
+
+					String redirect = ParamUtil.getString(req, "redirect");
+					
+					String originalRedirect = ParamUtil.getString(
+						req, "originalRedirect ");
+
+					PortletURLImpl portletURL = new PortletURLImpl(
+						(ActionRequestImpl) req, config.getPortletName(),
+						themeDisplay.getPlid(), false);
+
+					portletURL.setWindowState(WindowState.MAXIMIZED);
+					
+					portletURL.setParameter(
+						"struts_action", "/journal/edit_article");
+					portletURL.setParameter(
+						"articleId", article.getArticleId(), false);
+					portletURL.setParameter(
+						"groupId", String.valueOf(article.getGroupId()), false);
+					portletURL.setParameter(
+						"version", String.valueOf(article.getVersion()), false);
+					portletURL.setParameter("cmd", Constants.UPDATE, false);
+					portletURL.setParameter("redirect", redirect, false);
+					portletURL.setParameter(
+						"originalRedirect", originalRedirect, false);
+
+					sendRedirect(req, res, portletURL.toString());
+				}
+				else {
+					sendRedirect(req, res);
+				}
 			}
 		}
 		catch (Exception e) {
@@ -277,7 +317,7 @@ public class EditArticleAction extends PortletAction {
 		}
 	}
 
-	protected void updateArticle(ActionRequest req) throws Exception {
+	protected JournalArticle updateArticle(ActionRequest req) throws Exception {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
@@ -452,6 +492,8 @@ public class EditArticleAction extends PortletAction {
 
 			updateContentSearch(req, portletResource, article.getArticleId());
 		}
+
+		return article;
 	}
 
 	protected void updateContentSearch(
