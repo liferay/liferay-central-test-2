@@ -598,6 +598,9 @@
 		<field name="userId" type="long" />
 		<field name="entryCount" type="int" />
 		<field name="lastPostDate" type="Date" />
+		<field name="ratingsTotalEntries" type="int" />
+		<field name="ratingsTotalScore" type="double" />
+		<field name="ratingsAverageScore" type="double" />
 	</model>
 	<model name="com.liferay.portlet.bookmarks.model.BookmarksEntry">
 		<field name="entryId" type="long" />

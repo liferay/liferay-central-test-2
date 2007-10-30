@@ -60,9 +60,12 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "entryCount", new Integer(Types.INTEGER) },
-			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
+			{ "lastPostDate", new Integer(Types.TIMESTAMP) },
+			{ "ratingsTotalEntries", new Integer(Types.INTEGER) },
+			{ "ratingsTotalScore", new Integer(Types.DOUBLE) },
+			{ "ratingsAverageScore", new Integer(Types.DOUBLE) }
 		};
-	public static String TABLE_SQL_CREATE = "create table BlogsStatsUser (statsUserId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,entryCount INTEGER,lastPostDate DATE null)";
+	public static String TABLE_SQL_CREATE = "create table BlogsStatsUser (statsUserId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,entryCount INTEGER,lastPostDate DATE null,ratingsTotalEntries INTEGER,ratingsTotalScore DOUBLE,ratingsAverageScore DOUBLE)";
 	public static String TABLE_SQL_DROP = "drop table BlogsStatsUser";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsStatsUser"),
@@ -148,6 +151,36 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public int getRatingsTotalEntries() {
+		return _ratingsTotalEntries;
+	}
+
+	public void setRatingsTotalEntries(int ratingsTotalEntries) {
+		if (ratingsTotalEntries != _ratingsTotalEntries) {
+			_ratingsTotalEntries = ratingsTotalEntries;
+		}
+	}
+
+	public double getRatingsTotalScore() {
+		return _ratingsTotalScore;
+	}
+
+	public void setRatingsTotalScore(double ratingsTotalScore) {
+		if (ratingsTotalScore != _ratingsTotalScore) {
+			_ratingsTotalScore = ratingsTotalScore;
+		}
+	}
+
+	public double getRatingsAverageScore() {
+		return _ratingsAverageScore;
+	}
+
+	public void setRatingsAverageScore(double ratingsAverageScore) {
+		if (ratingsAverageScore != _ratingsAverageScore) {
+			_ratingsAverageScore = ratingsAverageScore;
+		}
+	}
+
 	public Object clone() {
 		BlogsStatsUserImpl clone = new BlogsStatsUserImpl();
 		clone.setStatsUserId(getStatsUserId());
@@ -156,6 +189,9 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 		clone.setUserId(getUserId());
 		clone.setEntryCount(getEntryCount());
 		clone.setLastPostDate(getLastPostDate());
+		clone.setRatingsTotalEntries(getRatingsTotalEntries());
+		clone.setRatingsTotalScore(getRatingsTotalScore());
+		clone.setRatingsAverageScore(getRatingsAverageScore());
 
 		return clone;
 	}
@@ -221,4 +257,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 	private long _userId;
 	private int _entryCount;
 	private Date _lastPostDate;
+	private int _ratingsTotalEntries;
+	private double _ratingsTotalScore;
+	private double _ratingsAverageScore;
 }

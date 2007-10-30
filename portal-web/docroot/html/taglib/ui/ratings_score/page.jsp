@@ -24,16 +24,28 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.dao.search.ScoreSearchEntry" %>
-
-<%@ page import="java.math.BigDecimal" %>
-
-<%@ page import="org.apache.commons.math.util.MathUtils" %>
-
 <%
-ScoreSearchEntry entry = (ScoreSearchEntry)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY);
+String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 
-double score = MathUtils.round((entry.getScore() * 10) / 2, 1, BigDecimal.ROUND_UP);
+double score = GetterUtil.getDouble((String)request.getAttribute("liferay-ui:ratings-score:score"));
+
+NumberFormat numberFormat = NumberFormat.getInstance();
+
+numberFormat.setMaximumFractionDigits(1);
+numberFormat.setMinimumFractionDigits(0);
+
+String scoreString = numberFormat.format(score);
 %>
 
-<liferay-ui:ratings-score score="<%= score %>" />
+<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= scoreString %> Stars')">
+	<img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
+</div>
+
+<script type="text/javascript">
+	<%= randomNamespace %>averageRatingObj = new StarRating(
+		"<%= randomNamespace %>averageRating",
+		{
+			displayOnly: true,
+			rating: <%= scoreString %>
+		});
+</script>

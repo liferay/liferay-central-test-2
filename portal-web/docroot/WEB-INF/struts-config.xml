@@ -168,6 +168,8 @@
 
 		<action path="/blogs/find_entry" type="com.liferay.portlet.blogs.action.FindEntryAction" />
 
+		<action path="/blogs/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
+
 		<action path="/blogs/rss" type="com.liferay.portlet.blogs.action.RSSAction" />
 
 		<action path="/blogs/search" forward="portlet.blogs.search" />

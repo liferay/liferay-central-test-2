@@ -71,7 +71,10 @@ create table BlogsStatsUser (
 	companyId LONG,
 	userId LONG,
 	entryCount INTEGER,
-	lastPostDate DATE null
+	lastPostDate DATE null,
+	ratingsTotalEntries INTEGER,
+	ratingsTotalScore DOUBLE,
+	ratingsAverageScore DOUBLE
 );
 
 create table BookmarksEntry (

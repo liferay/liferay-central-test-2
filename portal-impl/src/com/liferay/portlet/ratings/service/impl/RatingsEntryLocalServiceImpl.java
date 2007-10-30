@@ -28,6 +28,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.model.BlogsStatsUser;
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
 import com.liferay.portlet.ratings.NoSuchEntryException;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
@@ -60,7 +65,10 @@ public class RatingsEntryLocalServiceImpl
 			long userId, String className, long classPK, double score)
 		throws PortalException, SystemException {
 
+		boolean newEntry = false;
+
 		long classNameId = PortalUtil.getClassNameId(className);
+		double oldScore = 0;
 		Date now = new Date();
 
 		RatingsEntry entry = null;
@@ -68,7 +76,7 @@ public class RatingsEntryLocalServiceImpl
 		try {
 			entry = RatingsEntryUtil.findByU_C_C(userId, classNameId, classPK);
 
-			double oldScore = entry.getScore();
+			oldScore = entry.getScore();
 
 			entry.setModifiedDate(now);
 			entry.setScore(score);
@@ -87,6 +95,8 @@ public class RatingsEntryLocalServiceImpl
 			RatingsStatsUtil.update(stats);
 		}
 		catch (NoSuchEntryException nsee) {
+			newEntry = true;
+
 			User user = UserUtil.findByPrimaryKey(userId);
 
 			long entryId = CounterLocalServiceUtil.increment();
@@ -115,6 +125,36 @@ public class RatingsEntryLocalServiceImpl
 				stats.getTotalScore() / stats.getTotalEntries());
 
 			RatingsStatsUtil.update(stats);
+		}
+
+		// Blogs entry
+
+		if (className.equals(BlogsEntry.class.getName())) {
+			BlogsEntry blogsEntry = BlogsEntryUtil.findByPrimaryKey(classPK);
+
+			BlogsStatsUser blogsStasUser =
+				BlogsStatsUserLocalServiceUtil.getStatsUser(
+					blogsEntry.getGroupId(), blogsEntry.getUserId());
+
+			int ratingsTotalEntries = blogsStasUser.getRatingsTotalEntries();
+			double ratingsTotalScore = blogsStasUser.getRatingsTotalScore();
+			double ratingsAverageScore = blogsStasUser.getRatingsAverageScore();
+
+			if (newEntry) {
+				ratingsTotalEntries++;
+				ratingsTotalScore += score;
+			}
+			else {
+				ratingsTotalScore = ratingsTotalScore - oldScore + score;
+			}
+
+			ratingsAverageScore = ratingsTotalScore / ratingsTotalEntries;
+
+			blogsStasUser.setRatingsTotalEntries(ratingsTotalEntries);
+			blogsStasUser.setRatingsTotalScore(ratingsTotalScore);
+			blogsStasUser.setRatingsAverageScore(ratingsAverageScore);
+
+			BlogsStatsUserUtil.update(blogsStasUser);
 		}
 
 		return entry;

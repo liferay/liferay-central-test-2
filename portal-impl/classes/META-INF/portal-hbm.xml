@@ -597,6 +597,9 @@
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="entryCount" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="lastPostDate" />
+		<property name="ratingsTotalEntries" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="ratingsTotalScore" type="com.liferay.util.dao.hibernate.DoubleType" />
+		<property name="ratingsAverageScore" type="com.liferay.util.dao.hibernate.DoubleType" />
 	</class>
 	<class name="com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl" table="BookmarksEntry">
 		<cache usage="read-write" />

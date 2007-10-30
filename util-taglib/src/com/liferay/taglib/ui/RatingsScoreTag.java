@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,20 +19,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/taglib/init.jsp" %>
+package com.liferay.taglib.ui;
 
-<%@ page import="com.liferay.portal.kernel.dao.search.ScoreSearchEntry" %>
+import com.liferay.taglib.util.IncludeTag;
 
-<%@ page import="java.math.BigDecimal" %>
+import javax.servlet.ServletRequest;
 
-<%@ page import="org.apache.commons.math.util.MathUtils" %>
+/**
+ * <a href="RatingsScoreTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class RatingsScoreTag extends IncludeTag {
 
-<%
-ScoreSearchEntry entry = (ScoreSearchEntry)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY);
+	public int doStartTag() {
+		ServletRequest req = pageContext.getRequest();
 
-double score = MathUtils.round((entry.getScore() * 10) / 2, 1, BigDecimal.ROUND_UP);
-%>
+		req.setAttribute(
+			"liferay-ui:ratings-score:score", String.valueOf(_score));
 
-<liferay-ui:ratings-score score="<%= score %>" />
+		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setScore(double score) {
+		_score = score;
+	}
+
+	protected String getDefaultPage() {
+		return _PAGE;
+	}
+
+	private static final String _PAGE =
+		"/html/taglib/ui/ratings_score/page.jsp";
+
+	private double _score;
+
+}

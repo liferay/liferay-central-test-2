@@ -110,6 +110,9 @@
 
 		<column name="entryCount" type="int" />
 		<column name="lastPostDate" type="Date" />
+		<column name="ratingsTotalEntries" type="int" />
+		<column name="ratingsTotalScore" type="double" />
+		<column name="ratingsAverageScore" type="double" />
 
 		<!-- Order -->
 

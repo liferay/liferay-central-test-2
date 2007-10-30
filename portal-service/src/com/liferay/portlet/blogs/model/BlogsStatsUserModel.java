@@ -74,4 +74,16 @@ public interface BlogsStatsUserModel extends BaseModel {
 	public Date getLastPostDate();
 
 	public void setLastPostDate(Date lastPostDate);
+
+	public int getRatingsTotalEntries();
+
+	public void setRatingsTotalEntries(int ratingsTotalEntries);
+
+	public double getRatingsTotalScore();
+
+	public void setRatingsTotalScore(double ratingsTotalScore);
+
+	public double getRatingsAverageScore();
+
+	public void setRatingsAverageScore(double ratingsAverageScore);
 }
