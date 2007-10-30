@@ -689,6 +689,11 @@ ul.gamma .tree-item-hover {
 	display: block;
 }
 
+.lfr-actions.left ul {
+	right: auto;
+	left: 100%;
+}
+
 .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/common/button_bg.png) no-repeat;
 	font-weight: normal;
@@ -724,8 +729,13 @@ ul.gamma .tree-item-hover {
 }
 
 .lfr-actions .lfr-trigger strong span {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/common/action.png) no-repeat 5px 50%;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/common/action.png) no-repeat 5px 0;
 	padding: 2px 10px 2px 35px;
+}
+
+.lfr-actions.left .lfr-trigger strong span {
+	background-position: 98% 100%;
+	padding: 2px 35px 2px 10px;
 }
 
 .lfr-actions .lfr-trigger li {

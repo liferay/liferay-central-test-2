@@ -362,7 +362,11 @@
 }
 
 .lfr-actions .lfr-trigger strong span {
-	background: url(../images/common/action.png) no-repeat 5px 50%;
+	background: url(../images/common/action.png) no-repeat 5px 0;
+}
+
+.lfr-actions.left .lfr-trigger strong span {
+	background: url(../images/common/action.png) no-repeat 98% 100%;
 }
 
 .lfr-actions .lfr-trigger li {
