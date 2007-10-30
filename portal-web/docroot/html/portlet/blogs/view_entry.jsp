@@ -28,9 +28,7 @@
 String redirect = ParamUtil.getString(request, "redirect");
 
 if (Validator.isNull(redirect)) {
-	PortletURL redirectURL = renderResponse.createRenderURL();
-
-	redirect = redirectURL.toString();
+	redirect = PortalUtil.getLayoutURL(layout, themeDisplay) + "/blogs";
 }
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
