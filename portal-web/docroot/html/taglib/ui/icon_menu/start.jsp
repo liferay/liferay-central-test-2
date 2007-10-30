@@ -24,7 +24,11 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<ul class="lfr-actions">
+<%
+String align = (String)request.getAttribute("liferay-ui:icon-menu:align");
+%>
+
+<ul class="lfr-actions <%= align %>">
 	<li class="lfr-trigger">
 		<strong><span><liferay-ui:message key="actions" /></span></strong>
 			<ul>

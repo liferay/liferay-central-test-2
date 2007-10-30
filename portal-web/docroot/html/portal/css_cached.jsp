@@ -666,6 +666,13 @@ ul.gamma .tree-item-hover {
 	text-align: left;
 }
 
+.lfr-actions.left {
+	float: left;
+}
+
+.lfr-actions.right {
+}
+
 .lfr-actions.visible {
 	position: relative;
 }

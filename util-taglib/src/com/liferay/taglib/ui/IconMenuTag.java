@@ -43,6 +43,7 @@ public class IconMenuTag extends BodyTagSupport {
 	public int doStartTag() throws JspException {
 		ServletRequest req = pageContext.getRequest();
 
+		req.setAttribute("liferay-ui:icon-menu:align", _align);
 		req.setAttribute(
 			"liferay-ui:icon-menu:icon-count", new IntegerWrapper());
 
@@ -137,6 +138,10 @@ public class IconMenuTag extends BodyTagSupport {
 		_endPage = endPage;
 	}
 
+	public void setAlign(String align) {
+		_align = align;
+	}
+
 	private static final String _START_PAGE =
 		"/html/taglib/ui/icon_menu/start.jsp";
 
@@ -144,6 +149,7 @@ public class IconMenuTag extends BodyTagSupport {
 
 	private String _startPage;
 	private String _endPage;
+	private String _align = "right";
 	private String _bodyContentString = StringPool.BLANK;
 
 }
