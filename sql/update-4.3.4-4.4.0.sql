@@ -1,3 +1,5 @@
+alter table CalEvent add uuid_ VARCHAR(75) null;
+
 alter table JournalArticle add uuid_ VARCHAR(75) null;
 
 alter table JournalArticleImage add uuid_ VARCHAR(75) null;
