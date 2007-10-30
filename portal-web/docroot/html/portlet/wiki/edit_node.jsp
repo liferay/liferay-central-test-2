@@ -32,17 +32,17 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 %>
 
-<liferay-ui:tabs
-	names="administer-nodes"
-	backURL="<%= redirect %>"
-/>
-
 <script type="text/javascript">
 	function <portlet:namespace />saveNode() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= node == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
+
+<liferay-ui:tabs
+	names="administer-nodes"
+	backURL="<%= redirect %>"
+/>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/edit_node" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveNode(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />

@@ -37,8 +37,9 @@ addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
 <script type="text/javascript">
 	function <portlet:namespace />addPage() {
-		var pageName = prompt('<%= LanguageUtil.get(pageContext, "page-name") %> (<%= LanguageUtil.get(pageContext, "use-camel-case-syntax") %>)','');
-		window.location = '<%= addPageURL.toString() + "&" + renderResponse.getNamespace() + "title=" %>' + pageName;
+		var pageName = prompt('<liferay-ui message key="page-name" /> (<liferay-ui message key="use-camel-case-syntax" />)', '');
+
+		window.location = '<%= addPageURL.toString() %>&<%= renderResponse.getNamespace() %>title=' + pageName;
 	}
 </script>
 
@@ -62,10 +63,10 @@ addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
 <div>
-<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
+	<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 </div>
 
-<liferay-ui:icon-menu>
+<liferay-ui:icon-menu align="left">
 
 	<%
 	PortletURL portletURL = renderResponse.createRenderURL();
@@ -78,6 +79,7 @@ addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 	%>
 
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
+
 		<%
 		portletURL.setParameter("struts_action", "/wiki/edit_page");
 		%>
@@ -96,7 +98,7 @@ addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<liferay-ui:icon image="add_article" message="add-page" url='<%= "javascript:" + renderResponse.getNamespace() + "addPage()"%>' />
+	<liferay-ui:icon image="add_article" message="add-page" url='<%= "javascript: " + renderResponse.getNamespace() + "addPage();" %>' />
 
 	<%
 	portletURL.setParameter("struts_action", "/wiki/view_page_links");
@@ -145,7 +147,7 @@ addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 </liferay-ui:icon-menu>
 
 <c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
-	<br />
+	<br /><br />
 
 	<liferay-ui:tabs names="comments" />
 

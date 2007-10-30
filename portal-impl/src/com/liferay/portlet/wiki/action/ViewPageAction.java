@@ -86,7 +86,8 @@ public class ViewPageAction extends PortletAction {
 
 	private void checkNode(RenderRequest req)
 		throws PortalException, SystemException {
-		WikiNode node = (WikiNode) req.getAttribute(WebKeys.WIKI_NODE);
+
+		WikiNode node = (WikiNode)req.getAttribute(WebKeys.WIKI_NODE);
 
 		if (node == null) {
 			ThemeDisplay themeDisplay =
@@ -104,12 +105,11 @@ public class ViewPageAction extends PortletAction {
 					StringPool.BLANK, true, true);
 			}
 			else {
-				node = (WikiNode) nodes.get(0);
+				node = (WikiNode)nodes.get(0);
 			}
 
 			req.setAttribute(WebKeys.WIKI_NODE, node);
 		}
-
 	}
 
 }

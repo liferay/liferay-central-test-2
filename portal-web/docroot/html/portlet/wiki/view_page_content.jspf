@@ -26,6 +26,7 @@
 
 <%
 String content = null;
+
 if (wikiPage.getFormat().equals(WikiPageImpl.HTML_FORMAT)) {
 	content = wikiPage.getContent();
 }
@@ -63,5 +64,3 @@ if (Validator.isNull(content)) {
 		classPK="<%= wikiPage.getResourcePrimKey() %>"
 	/>
 </div>
-
-<br />

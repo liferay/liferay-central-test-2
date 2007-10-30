@@ -1119,8 +1119,6 @@ public class PropsUtil {
 
 	public static final String WIKI_INITIAL_NODE_NAME = "wiki.initial.node.name";
 
-	public static final String WIKI_PERMISSION_CHECKER = "wiki.permission.checker";
-
 	public static boolean containsKey(String key) {
 		return _getInstance().containsKey(key);
 	}

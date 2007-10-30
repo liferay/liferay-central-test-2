@@ -110,8 +110,8 @@ public class EditPageAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
-				e instanceof PageTitleException ||
 				e instanceof NoSuchPageException ||
+				e instanceof PageTitleException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());

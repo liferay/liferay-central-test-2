@@ -25,8 +25,7 @@
 <c:if test="<%= wikiPage != null %>">
 	<h2 class="wiki-page-title">
 		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /></portlet:renderURL>">
-		<%= wikiPage.getTitle() %>
-		</a>
+		<%= wikiPage.getTitle() %></a>
 	</h2>
 
 	<br />

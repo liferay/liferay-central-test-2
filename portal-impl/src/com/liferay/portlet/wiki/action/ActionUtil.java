@@ -87,10 +87,9 @@ public class ActionUtil {
 		String title = ParamUtil.getString(req, "title");
 		double version = ParamUtil.getDouble(req, "version");
 
-		WikiPage page = null;
-
 		if (nodeId == 0) {
 			WikiNode node = (WikiNode)req.getAttribute(WebKeys.WIKI_NODE);
+
 			if (node != null) {
 				nodeId = node.getNodeId();
 			}
@@ -99,6 +98,8 @@ public class ActionUtil {
 		if (Validator.isNull(title)) {
 			title = WikiPageImpl.FRONT_PAGE;
 		}
+
+		WikiPage page = null;
 
 		try {
 			page = WikiPageServiceUtil.getPage(nodeId, title, version);

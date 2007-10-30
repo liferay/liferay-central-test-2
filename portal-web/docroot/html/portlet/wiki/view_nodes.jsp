@@ -47,7 +47,6 @@ searchContainer.setTotal(total);
 List results = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
-
 %>
 
 <liferay-ui:tabs

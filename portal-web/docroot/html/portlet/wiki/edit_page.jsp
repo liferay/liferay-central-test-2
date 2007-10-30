@@ -94,13 +94,13 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <div>
 	<c:choose>
+		<c:when test="<%= format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) %>">
+			<%@ include file="/html/portlet/wiki/edit_page_syntax_help.jspf" %>
+		</c:when>
 		<c:when test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
 			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
 
 			<input name="<portlet:namespace />content" type="hidden" value="" />
-		</c:when>
-		<c:when test="<%= format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) %>">
-			<%@ include file="/html/portlet/wiki/edit_page_syntax_help.jspf" %>
 		</c:when>
 		<c:otherwise>
 			<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="content" />
