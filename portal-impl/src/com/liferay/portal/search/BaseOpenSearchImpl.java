@@ -30,8 +30,10 @@ import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.Http;
 
@@ -280,6 +282,18 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			   WindowStateException {
 
 		long plid = LayoutLocalServiceUtil.getDefaultPlid(groupId, true);
+
+		if (plid == 0) {
+			plid = LayoutLocalServiceUtil.getDefaultPlid(groupId, false);
+		}
+
+		if (plid == 0) {
+			Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+
+			if (layout != null) {
+				plid = layout.getPlid();
+			}
+		}
 
 		PortletURL portletURL = new PortletURLImpl(req, portletId, plid, false);
 
