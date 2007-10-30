@@ -673,6 +673,8 @@ public class PropsUtil {
 
 	public static final String LUCENE_FILE_EXTRACTOR = "lucene.file.extractor";
 
+	public static final String LUCENE_FILE_EXTRACTOR_REGEXP_STRIP = "lucene.file.extractor.regexp.strip";
+
 	public static final String LUCENE_ANALYZER = "lucene.analyzer";
 
 	public static final String LUCENE_MERGE_FACTOR = "lucene.merge.factor";

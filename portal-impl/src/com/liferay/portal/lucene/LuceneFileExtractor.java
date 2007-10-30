@@ -22,9 +22,12 @@
 
 package com.liferay.portal.lucene;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsUtil;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -157,8 +160,8 @@ public class LuceneFileExtractor {
 
 				text = sm.toString();
 
-				if (fileExt.equals(".ppt")) {
-					text = fixPptText(text);
+				if (Validator.isNotNull(REGEXP_STRIP)) {
+					text = regexpStrip(text);
 				}
 			}
 			else {
@@ -199,17 +202,22 @@ public class LuceneFileExtractor {
 		return getFile(field, in, fileExt);
 	}
 
-	protected String fixPptText(String text) {
+	protected String regexpStrip(String text) {
 		char[] array = text.toCharArray();
 
 		for (int i = 0; i < array.length; i++) {
-			if (!(String.valueOf(array[i])).matches("[\\d\\w]")) {
-				array[i] = ' ';
+			String s = String.valueOf(array[i]);
+
+			if (!s.matches(REGEXP_STRIP)) {
+				array[i] = CharPool.SPACE;
 			}
 		}
 
 		return new String(array);
 	}
+
+	private static final String REGEXP_STRIP = PropsUtil.get(
+		PropsUtil.LUCENE_FILE_EXTRACTOR_REGEXP_STRIP);
 
 	private static Log _log = LogFactory.getLog(LuceneFileExtractor.class);
 
