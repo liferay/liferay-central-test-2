@@ -72,172 +72,224 @@ numberFormat.setMinimumIntegerDigits(2);
 				</table>
 			</c:when>
 			<c:when test='<%= tabs2.equals("log-levels") %>'>
+				<liferay-ui:tabs
+					names="update-categories,add-category"
+					param="tabs3"
+					url="<%= portletURL.toString() %>"
+				/>
 
-				<%
-				SearchContainer searchContainer = new SearchContainer();
-
-				List headerNames = new ArrayList();
-
-				headerNames.add("category");
-				headerNames.add("level");
-
-				searchContainer.setHeaderNames(headerNames);
-
-				Map currentLoggerNames = new TreeMap();
-
-				Enumeration enu = LogManager.getCurrentLoggers();
-
-				while (enu.hasMoreElements()) {
-					Logger logger = (Logger)enu.nextElement();
-
-					currentLoggerNames.put(logger.getName(), logger);
-				}
-
-				List results = ListUtil.fromCollection(currentLoggerNames.entrySet());
-
-				searchContainer.setResults(results);
-
-				List resultRows = searchContainer.getResultRows();
-
-				for (int i = 0; i < results.size(); i++) {
-					Map.Entry entry = (Map.Entry)results.get(i);
-
-					String name = (String)entry.getKey();
-					Logger logger = (Logger)entry.getValue();
-
-					Level level = logger.getLevel();
-
-					if (level != null) {
-						ResultRow row = new ResultRow(entry, name, i);
-
-						// Name
-
-						row.addText(name);
-
-						// Logger
-
-						StringMaker sm = new StringMaker();
-
-						sm.append("<select name=\"");
-						sm.append(renderResponse.getNamespace());
-						sm.append("logLevel");
-						sm.append(name);
-						sm.append("\">");
-
-						for (int j = 0; j < Levels.ALL_LEVELS.length; j++) {
-							sm.append("<option ");
-
-							if (level.equals(Levels.ALL_LEVELS[j])) {
-								sm.append("selected");
-							}
-
-							sm.append(" value=\"");
-							sm.append(Levels.ALL_LEVELS[j]);
-							sm.append("\">");
-							sm.append(Levels.ALL_LEVELS[j]);
-							sm.append("</option>");
-						}
-
-						sm.append("</select>");
-
-						row.addText(sm.toString());
-
-						// Add result row
-
-						resultRows.add(row);
-					}
-				}
-				%>
-
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-				<%--
-				Map currentLoggerNames = new TreeMap();
-
-				Enumeration enu = LogManager.getCurrentLoggers();
-
-				while (enu.hasMoreElements()) {
-					Logger logger = (Logger)enu.nextElement();
-
-					currentLoggerNames.put(logger.getName(), logger);
-				}
-				%>
-
-				<table border="0" cellpadding="4" cellspacing="0" width="100%">
-
-				<%
-				int counter = 0;
-
-				Iterator itr = currentLoggerNames.entrySet().iterator();
-
-				while (itr.hasNext()) {
-					Map.Entry entry = (Map.Entry)itr.next();
-
-					String name = (String)entry.getKey();
-					Logger logger = (Logger)entry.getValue();
-				%>
-
-					<c:if test="<%= logger.getLevel() != null %>">
-
-						<%
-						String className = "portlet-section-body";
-						String classHoverName = "portlet-section-body-hover";
-
-						if (MathUtil.isEven(counter++)) {
-							className = "portlet-section-alternate";
-							classHoverName = "portlet-section-alternate-hover";
-						}
-						%>
-
-						<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+				<c:choose>
+					<c:when test='<%= tabs3.equals("add-category") %>'>
+						<table class="liferay-table">
+						<tr>
 							<td>
-								<%= name %>
-							</td>
-							<td>
-								<select class="form-button" name="<portlet:namespace />logLevel<%= name %>">
+								<input class="liferay-input-text" name="<portlet:namespace />loggerName" type="text" />
+
+								<select name="<portlet:namespace />priority">
 
 									<%
 									for (int i = 0; i < Levels.ALL_LEVELS.length; i++) {
 									%>
 
-										<option <%= logger.getLevel().equals(Levels.ALL_LEVELS[i]) ? "selected" : "" %> value="<%= Levels.ALL_LEVELS[i] %>"><%= Levels.ALL_LEVELS[i] %></option>
+										<option <%= Level.INFO.equals(Levels.ALL_LEVELS[i]) ? "selected" : "" %> value="<%= Levels.ALL_LEVELS[i] %>"><%= Levels.ALL_LEVELS[i] %></option>
 
 									<%
 									}
 									%>
 
 								</select>
+
+								<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('addLogLevel');" />
 							</td>
 						</tr>
-					</c:if>
+						</table>
+					</c:when>
+					<c:otherwise>
 
-				<%
-				}
-				%>
+						<%
+						List headerNames = new ArrayList();
 
-				</table>--%>
+						headerNames.add("category");
+						headerNames.add("level");
 
-				<br />
+						SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateLogLevels');" />
+						Map currentLoggerNames = new TreeMap();
+
+						Enumeration enu = LogManager.getCurrentLoggers();
+
+						while (enu.hasMoreElements()) {
+							Logger logger = (Logger)enu.nextElement();
+
+							currentLoggerNames.put(logger.getName(), logger);
+						}
+
+						List results = ListUtil.fromCollection(currentLoggerNames.entrySet());
+
+						Iterator itr = results.iterator();
+
+						while (itr.hasNext()) {
+							Map.Entry entry = (Map.Entry)itr.next();
+
+							String name = (String)entry.getKey();
+							Logger logger = (Logger)entry.getValue();
+
+							Level level = logger.getLevel();
+
+							if (level == null) {
+								itr.remove();
+							}
+						}
+
+						searchContainer.setTotal(results.size());
+
+						results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
+
+						searchContainer.setResults(results);
+
+						List resultRows = searchContainer.getResultRows();
+
+						for (int i = 0; i < results.size(); i++) {
+							Map.Entry entry = (Map.Entry)results.get(i);
+
+							String name = (String)entry.getKey();
+							Logger logger = (Logger)entry.getValue();
+
+							Level level = logger.getLevel();
+
+							ResultRow row = new ResultRow(entry, name, i);
+
+							// Name
+
+							row.addText(name);
+
+							// Logger
+
+							StringMaker sm = new StringMaker();
+
+							sm.append("<select name=\"");
+							sm.append(renderResponse.getNamespace());
+							sm.append("logLevel");
+							sm.append(name);
+							sm.append("\">");
+
+							for (int j = 0; j < Levels.ALL_LEVELS.length; j++) {
+								sm.append("<option ");
+
+								if (level.equals(Levels.ALL_LEVELS[j])) {
+									sm.append("selected");
+								}
+
+								sm.append(" value=\"");
+								sm.append(Levels.ALL_LEVELS[j]);
+								sm.append("\">");
+								sm.append(Levels.ALL_LEVELS[j]);
+								sm.append("</option>");
+							}
+
+							sm.append("</select>");
+
+							row.addText(sm.toString());
+
+							// Add result row
+
+							resultRows.add(row);
+						}
+						%>
+
+						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+						<%--
+						Map currentLoggerNames = new TreeMap();
+
+						Enumeration enu = LogManager.getCurrentLoggers();
+
+						while (enu.hasMoreElements()) {
+							Logger logger = (Logger)enu.nextElement();
+
+							currentLoggerNames.put(logger.getName(), logger);
+						}
+						%>
+
+						<table border="0" cellpadding="4" cellspacing="0" width="100%">
+
+						<%
+						int counter = 0;
+
+						Iterator itr = currentLoggerNames.entrySet().iterator();
+
+						while (itr.hasNext()) {
+							Map.Entry entry = (Map.Entry)itr.next();
+
+							String name = (String)entry.getKey();
+							Logger logger = (Logger)entry.getValue();
+						%>
+
+							<c:if test="<%= logger.getLevel() != null %>">
+
+								<%
+								String className = "portlet-section-body";
+								String classHoverName = "portlet-section-body-hover";
+
+								if (MathUtil.isEven(counter++)) {
+									className = "portlet-section-alternate";
+									classHoverName = "portlet-section-alternate-hover";
+								}
+								%>
+
+								<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+									<td>
+										<%= name %>
+									</td>
+									<td>
+										<select class="form-button" name="<portlet:namespace />logLevel<%= name %>">
+
+											<%
+											for (int i = 0; i < Levels.ALL_LEVELS.length; i++) {
+											%>
+
+												<option <%= logger.getLevel().equals(Levels.ALL_LEVELS[i]) ? "selected" : "" %> value="<%= Levels.ALL_LEVELS[i] %>"><%= Levels.ALL_LEVELS[i] %></option>
+
+											<%
+											}
+											%>
+
+										</select>
+									</td>
+								</tr>
+							</c:if>
+
+						<%
+						}
+						%>
+
+						</table>--%>
+
+						<br />
+
+						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateLogLevels');" />
+					</c:otherwise>
+				</c:choose>
 			</c:when>
 			<c:when test='<%= tabs2.equals("system-properties") %>'>
 
 				<%
-				SearchContainer searchContainer = new SearchContainer();
-
 				List headerNames = new ArrayList();
 
 				headerNames.add("property");
 				headerNames.add("value");
 
-				searchContainer.setHeaderNames(headerNames);
+				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
 				Map portalProps = new TreeMap();
 
 				portalProps.putAll(System.getProperties());
 
 				List results = ListUtil.fromCollection(portalProps.entrySet());
+
+				searchContainer.setTotal(results.size());
+
+				results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
 
 				searchContainer.setResults(results);
 
@@ -270,20 +322,22 @@ numberFormat.setMinimumIntegerDigits(2);
 			<c:when test='<%= tabs2.equals("portal-properties") %>'>
 
 				<%
-				SearchContainer searchContainer = new SearchContainer();
-
 				List headerNames = new ArrayList();
 
 				headerNames.add("property");
 				headerNames.add("value");
 
-				searchContainer.setHeaderNames(headerNames);
+				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
 				Map portalProps = new TreeMap();
 
 				portalProps.putAll(PropsUtil.getProperties());
 
 				List results = ListUtil.fromCollection(portalProps.entrySet());
+
+				searchContainer.setTotal(results.size());
+
+				results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
 
 				searchContainer.setResults(results);
 

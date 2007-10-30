@@ -123,7 +123,7 @@ public class ListUtil {
 	}
 
 	public static List fromCollection(Collection c) {
-		if (c != null && c instanceof List) {
+		if ((c != null) && (c instanceof List)) {
 			return (List)c;
 		}
 

@@ -99,7 +99,10 @@ public class EditServerAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		if (cmd.equals("cacheDb")) {
+		if (cmd.equals("addLogLevel")) {
+			addLogLevel(req);
+		}
+		else if (cmd.equals("cacheDb")) {
 			cacheDb();
 		}
 		else if (cmd.equals("cacheMulti")) {
@@ -125,6 +128,15 @@ public class EditServerAction extends PortletAction {
 		}
 
 		sendRedirect(req, res);
+	}
+
+	protected void addLogLevel(ActionRequest req) throws Exception {
+		String loggerName = ParamUtil.getString(req, "loggerName");
+		String priority = ParamUtil.getString(req, "priority");
+
+		Logger logger = Logger.getLogger(loggerName);
+
+		logger.setLevel(Level.toLevel(priority));
 	}
 
 	protected void cacheDb() throws Exception {

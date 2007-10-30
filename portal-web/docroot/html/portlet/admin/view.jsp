@@ -30,12 +30,15 @@
 		<%
 		String tabs1 = ParamUtil.getString(request, "tabs1", "server");
 		String tabs2 = ParamUtil.getString(request, "tabs2", "memory");
+		String tabs3 = ParamUtil.getString(request, "tabs3");
 
 		if (tabs1.equals("plugins")) {
 			if (!tabs2.equals("portlets") && !tabs2.equals("themes") && !tabs2.equals("layout-templates")) {
 				tabs2 = "portlets";
 			}
 		}
+
+		String cur = ParamUtil.getString(request, "cur");
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -49,7 +52,7 @@
 		<script type="text/javascript">
 			function <portlet:namespace />saveServer(cmd) {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /></portlet:renderURL>";
+				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /><portlet:param name="cur" value="<%= cur %>" /></portlet:renderURL>";
 				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_server" /></portlet:actionURL>");
 			}
 		</script>
@@ -58,7 +61,8 @@
 		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 		<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
-		<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /></portlet:renderURL>" />
+		<input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" />portlet:param name="cur" value="<%= cur %>" /></portlet:renderURL>" />
 
 		<liferay-ui:tabs
 			names="server,instances,plugins"
