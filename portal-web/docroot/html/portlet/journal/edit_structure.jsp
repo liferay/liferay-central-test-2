@@ -274,6 +274,34 @@ int tabIndex = 1;
 	</td>
 </tr>
 
+<c:if test="<%= structure != null %>">
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="url" />
+		</td>
+		<td>
+			<liferay-ui:input-resource
+				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathMain() + "/journal/get_structure?groupId=" + groupId + "&structureId=" + structureId %>'
+			/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="webdav-url" />
+		</td>
+		<td>
+			<liferay-ui:input-resource
+				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/journal/" + company.getCompanyId() + "/" + portletGroupId + "/Structures/" + structureId %>'
+			/>
+		</td>
+	</tr>
+</c:if>
+
 <c:if test="<%= structure == null %>">
 	<tr>
 		<td colspan="2">
