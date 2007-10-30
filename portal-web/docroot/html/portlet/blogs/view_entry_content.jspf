@@ -119,6 +119,14 @@
 	</tr>
 	<tr>
 		<td>
+			<liferay-ui:social-all
+				url="<%= viewEntryURL.toString() %>"
+				title="<%= entry.getTitle() %>"
+				target="_blank"
+			/>
+
+			<br />
+
 			<liferay-ui:ratings
 				className="<%= BlogsEntry.class.getName() %>"
 				classPK="<%= entry.getEntryId() %>"

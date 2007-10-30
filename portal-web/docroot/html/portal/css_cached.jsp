@@ -866,6 +866,43 @@ ul.gamma .tree-item-hover {
 	padding-right: 10px;
 }
 
+/* ---------- Taglib social ---------- */
+
+.taglib-social-blinklist {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/social/blinklist.gif) no-repeat 0 50%;
+	padding: 3px 2px 3px 20px;
+}
+
+.taglib-social-delicious {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/social/delicious.gif) no-repeat 0 50%;
+	padding: 3px 2px 3px 20px;
+}
+
+.taglib-social-digg {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/social/digg.gif) no-repeat 0 50%;
+	padding: 3px 2px 3px 20px;
+}
+
+.taglib-social-furl {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/social/furl.gif) no-repeat 0 50%;
+	padding: 3px 2px 3px 20px;
+}
+
+.taglib-social-newsvine {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/social/newsvine.gif) no-repeat 0 50%;
+	padding: 3px 2px 3px 20px;
+}
+
+.taglib-social-reddit {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/social/reddit.gif) no-repeat 0 50%;
+	padding: 3px 2px 3px 20px;
+}
+
+.taglib-social-technorati {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/social/technorati.gif) no-repeat 0 50%;
+	padding: 3px 2px 3px 20px;
+}
+
 /* ---------- Specific portlet styles ---------- */
 
 /* ---------- Quick note ---------- */
