@@ -1255,7 +1255,20 @@ public class JournalArticleLocalServiceImpl
 
 			Sort sort = new Sort(new SortField(sortField, true));
 
-			hits.recordHits(searcher.search(fullQuery, sort), searcher);
+			try {
+				hits.recordHits(searcher.search(fullQuery, sort), searcher);
+			}
+			catch (RuntimeException re) {
+
+				// Trying to sort on a field when there are no results throws a
+				// RuntimeException that should not be rethrown
+
+				String msg = GetterUtil.getString(re.getMessage());
+
+				if (!msg.endsWith("does not appear to be indexed")) {
+					throw re;
+				}
+			}
 
 			return hits;
 		}

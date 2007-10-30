@@ -33,7 +33,6 @@ import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.Date;
@@ -93,8 +92,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					themeDisplay.getCompanyId(), portletId);
 
-				String portletTitle = PortalUtil.getPortletTitle(
-					portletId, themeDisplay.getUser());
+				//String portletTitle = PortalUtil.getPortletTitle(
+				//	portletId, themeDisplay.getUser());
 
 				long groupId = GetterUtil.getLong(
 					(String)result.get(LuceneFields.GROUP_ID));
@@ -114,9 +113,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				String content = docSummary.getContent();
 				double score = hits.score(i);
 
-				addSearchResult(
-					root, portletTitle + " &raquo; " + title, url, modifedDate,
-					content, score);
+				addSearchResult(root, title, url, modifedDate, content, score);
 			}
 
 			if (_log.isDebugEnabled()) {

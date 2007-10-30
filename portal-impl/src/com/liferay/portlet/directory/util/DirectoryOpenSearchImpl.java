@@ -27,7 +27,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.search.BaseOpenSearchImpl;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.util.comparator.ContactLastNameComparator;
@@ -97,8 +96,8 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 
 			String portletId = PortletKeys.DIRECTORY;
 
-			String portletTitle = PortalUtil.getPortletTitle(
-				portletId, themeDisplay.getUser());
+			//String portletTitle = PortalUtil.getPortletTitle(
+			//	portletId, themeDisplay.getUser());
 
 			PortletURL portletURL = getPortletURL(req, portletId);
 
@@ -109,9 +108,7 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 				user.getFullName() + " &lt;" + user.getEmailAddress() + "&gt;";
 			double score = 1.0;
 
-			addSearchResult(
-				root, portletTitle + " &raquo; " + title, url, modifedDate,
-				content, score);
+			addSearchResult(root, title, url, modifedDate, content, score);
 		}
 
 		if (_log.isDebugEnabled()) {

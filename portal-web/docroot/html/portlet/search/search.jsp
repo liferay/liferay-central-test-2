@@ -155,6 +155,15 @@ for (int i = 0; i < portlets.size(); i++) {
 			String entryHref = el.element("link").attributeValue("href");
 			String summary = el.elementText("summary");
 
+			if (portlet.getPortletId().equals(PortletKeys.DOCUMENT_LIBRARY)) {
+				long folderId = GetterUtil.getLong(Http.getParameter(entryHref, "_20_folderId", false));
+				String name = GetterUtil.getString(Http.getParameter(entryHref, "_20_name", false));
+
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(folderId, name);
+
+				entryTitle = fileEntry.getTitle();
+			}
+
 			StringMaker sm = new StringMaker();
 
 			sm.append("<a href=\"");
