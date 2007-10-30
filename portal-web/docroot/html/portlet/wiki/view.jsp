@@ -37,7 +37,7 @@ addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
 <script type="text/javascript">
 	function <portlet:namespace />addPage() {
-		var pageName = prompt('<liferay-ui message key="page-name" /> (<liferay-ui message key="use-camel-case-syntax" />)', '');
+		var pageName = prompt('<liferay-ui:message key="page-name" /> (<liferay-ui:message key="use-camel-case-syntax" />)', '');
 
 		window.location = '<%= addPageURL.toString() %>&<%= renderResponse.getNamespace() %>title=' + pageName;
 	}
