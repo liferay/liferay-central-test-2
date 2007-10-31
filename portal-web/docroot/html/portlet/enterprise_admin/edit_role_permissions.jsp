@@ -197,6 +197,11 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 <c:choose>
 	<c:when test="<%= cmd.equals(Constants.VIEW) %>">
+
+		<%
+		portletURL.setParameter(Constants.CMD, Constants.VIEW);
+		%>
+
 		<div class="breadcrumbs">
 			<%= breadcrumbs %>
 		</div>
@@ -216,8 +221,6 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 		}
 
 		headerNames.add(StringPool.BLANK);
-
-		portletURL.setParameter(Constants.CMD, "view");
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "this-role-does-have-any-permissions");
 
