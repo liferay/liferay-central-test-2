@@ -156,10 +156,8 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 	</c:when>
 </c:choose>
 
-<c:if test="<%= searchContainer.getTotal() > searchContainer.getResults().size() %>">
-	<div class="taglib-search-iterator-page-iterator-bottom">
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-	</div>
+<c:if test="<%= (!paginationType.equals("none")) && searchContainer.getTotal() > searchContainer.getResults().size() %>">
+	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>"/>
 </c:if>
 
 <%!

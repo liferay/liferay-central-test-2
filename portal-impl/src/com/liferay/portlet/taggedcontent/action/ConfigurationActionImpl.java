@@ -208,6 +208,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			req, "excludeZeroViewCount");
 		boolean showQueryLogic = ParamUtil.getBoolean(req, "showQueryLogic");
 		int delta = ParamUtil.getInteger(req, "delta");
+		String paginationType = ParamUtil.getString(req, "paginationType");
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			req, "showAvailableLocales");
 		String medatadaFields = ParamUtil.getString(req, "metadataFields");
@@ -226,6 +227,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			"exclude-zero-view-count", String.valueOf(excludeZeroViewCount));
 		prefs.setValue("show-query-logic", String.valueOf(showQueryLogic));
 		prefs.setValue("delta", String.valueOf(delta));
+		prefs.setValue("pagination-type", paginationType);
 		prefs.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
 		prefs.setValue("metadata-fields", medatadaFields);
