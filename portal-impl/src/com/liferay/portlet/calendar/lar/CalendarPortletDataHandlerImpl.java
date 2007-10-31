@@ -263,14 +263,14 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 				CalEventLocalServiceUtil.addEvent(
 					event.getUuid(), event.getUserId(), plid, event.getTitle(),
 					event.getDescription(), startDateMonth, startDateDay,
-					startDateYear, startDateHour, startDateMinute,
-					endDateMonth, endDateDay, endDateYear,
-					event.getDurationHour(), event.getDurationMinute(),
-					event.getAllDay(), event.getTimeZoneSensitive(),
-					event.getType(), event.getRepeating(),
-					event.getRecurrenceObj(), event.getRemindBy(),
-					event.getFirstReminder(), event.getSecondReminder(),
-					addCommunityPermissions, addGuestPermissions);
+					startDateYear, startDateHour, startDateMinute, endDateMonth,
+					endDateDay, endDateYear, event.getDurationHour(),
+					event.getDurationMinute(), event.getAllDay(),
+					event.getTimeZoneSensitive(), event.getType(),
+					event.getRepeating(), event.getRecurrenceObj(),
+					event.getRemindBy(), event.getFirstReminder(),
+					event.getSecondReminder(), addCommunityPermissions,
+					addGuestPermissions);
 			}
 			else {
 				event.setGroupId(existingEvent.getGroupId());
@@ -283,14 +283,14 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			CalEventLocalServiceUtil.addEvent(
 				event.getUserId(), plid, event.getTitle(),
 				event.getDescription(), startDateMonth, startDateDay,
-				startDateYear, startDateHour, startDateMinute,
-				endDateMonth, endDateDay, endDateYear,
-				event.getDurationHour(), event.getDurationMinute(),
-				event.getAllDay(), event.getTimeZoneSensitive(),
-				event.getType(), event.getRepeating(),
-				event.getRecurrenceObj(), event.getRemindBy(),
-				event.getFirstReminder(), event.getSecondReminder(),
-				addCommunityPermissions, addGuestPermissions);
+				startDateYear, startDateHour, startDateMinute, endDateMonth,
+				endDateDay, endDateYear, event.getDurationHour(),
+				event.getDurationMinute(), event.getAllDay(),
+				event.getTimeZoneSensitive(), event.getType(),
+				event.getRepeating(), event.getRecurrenceObj(),
+				event.getRemindBy(), event.getFirstReminder(),
+				event.getSecondReminder(), addCommunityPermissions,
+				addGuestPermissions);
 		}
 	}
 
