@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -19,22 +20,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.taglib.ui;
+<%@ include file="/html/taglib/init.jsp" %>
 
-/**
- * <a href="SocialBlinkListTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author David Truong
- *
- */
-public class SocialBlinkListTag extends SocialTag {
+<%
+String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:social-bookmark:url"));
+String title = GetterUtil.getString((String)request.getAttribute("liferay-ui:social-bookmark:title"));
+String target = GetterUtil.getString((String)request.getAttribute("liferay-ui:social-bookmark:target"));
 
-	protected String getDefaultPage() {
-		return _PAGE;
-	}
-
-	private static final String _PAGE =
-		"/html/taglib/ui/social_blinklist/page.jsp";
-
-}
+String type = (String)request.getAttribute("liferay-ui:social-bookmark:type");
+String postUrl = (String)request.getAttribute("liferay-ui:social-bookmark:postUrl");
+String styleClass = "taglib-social-" + type;
+String messageKey = "social-" + type;
+%>

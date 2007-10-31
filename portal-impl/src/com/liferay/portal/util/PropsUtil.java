@@ -757,6 +757,12 @@ public class PropsUtil {
 
 	public static final String SMTP_SERVER_SUBDOMAIN = "smtp.server.subdomain";
 
+	// Social Bookmarking
+
+	public static final String SOCIAL_BOOKMARK_TYPES = "social.bookmark.types";
+
+	public static final String SOCIAL_BOOKMARK_POST_URL = "social.bookmark.post.url";
+
 	// Velocity Engine
 
 	public static final String VELOCITY_ENGINE_RESOURCE_LISTENERS = "velocity.engine.resource.listeners";

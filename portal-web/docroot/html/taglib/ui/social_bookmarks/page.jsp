@@ -22,30 +22,18 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/social/init.jsp" %>
+<%@ include file="/html/taglib/ui/social_bookmarks/init.jsp" %>
 
 <table class="liferay-table">
 <tr>
-	<td>
-		<liferay-ui:social-blinklist url="<%= url %>" title="<%= title %>" target="<%= target %>" />
-	</td>
-	<td>
-		<liferay-ui:social-delicious url="<%= url %>" title="<%= title %>" target="<%= target %>" />
-	</td>
-	<td>
-		<liferay-ui:social-digg url="<%= url %>" title="<%= title %>" target="<%= target %>" />
-	</td>
-	<td>
-		<liferay-ui:social-furl url="<%= url %>" title="<%= title %>" target="<%= target %>" />
-	</td>
-	<td>
-		<liferay-ui:social-newsvine url="<%= url %>" title="<%= title %>" target="<%= target %>" />
-	</td>
-	<td>
-		<liferay-ui:social-reddit url="<%= url %>" title="<%= title %>" target="<%= target %>" />
-	</td>
-	<td>
-		<liferay-ui:social-technorati url="<%= url %>" title="<%= title %>" target="<%= target %>" />
-	</td>
+	<%
+	for (int i = 0; i < typesArray.length; i++) {
+	%>
+		<td>
+			<liferay-ui:social-bookmark url="<%= url %>" title="<%= title %>" target="<%= target %>" type="<%= typesArray[i] %>"/>
+		</td>
+	<%
+	}
+	%>
 </tr>
 </table>

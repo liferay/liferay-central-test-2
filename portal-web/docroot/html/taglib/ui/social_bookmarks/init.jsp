@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -19,45 +20,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.taglib.ui;
+<%@ include file="/html/taglib/init.jsp" %>
 
-import com.liferay.taglib.util.IncludeTag;
+<%
+String url = GetterUtil.getString((String) request.getAttribute("liferay-ui:social-bookmark:url"));
+String title = GetterUtil.getString((String) request.getAttribute("liferay-ui:social-bookmark:title"));
+String target = GetterUtil.getString((String) request.getAttribute("liferay-ui:social-bookmark:target"));
+String types = GetterUtil.getString((String) request.getAttribute("liferay-ui:social-bookmark:types"));
 
-import javax.servlet.ServletRequest;
-
-/**
- * <a href="SocialTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author David Truong
- *
- */
-public class SocialTag extends IncludeTag {
-
-	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
-
-		req.setAttribute("liferay-ui:social:url", _url);
-		req.setAttribute("liferay-ui:social:title", _title);
-		req.setAttribute("liferay-ui:social:target", _target);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
-	public void setUrl(String url) {
-		_url = url;
-	}
-
-	public void setTitle(String title) {
-		_title = title;
-	}
-
-	public void setTarget(String target) {
-		_target = target;
-	}
-
-	private String _url;
-	private String _title;
-	private String _target;
-
+String[] typesArray = null;
+if (Validator.isNotNull(types)) {
+	typesArray = StringUtil.split(types);
 }
+else {
+	typesArray = PropsUtil.getArray(PropsUtil.SOCIAL_BOOKMARK_TYPES);
+}
+%>

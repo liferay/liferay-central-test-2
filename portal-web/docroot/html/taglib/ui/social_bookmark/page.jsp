@@ -22,6 +22,6 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/social/init.jsp" %>
+<%@ include file="/html/taglib/ui/social_bookmark/init.jsp" %>
 
-<a class="taglib-social-blinklist" href="http://blinklist.com/index.php?Action=Blink/addblink.php&url=<%= url %>&Title=<%= HttpUtil.encodeURL(title) %>" target="<%= target %>"><liferay-ui:message key="social-blinklist" /></a>
+<a class="<%= styleClass %>" href="<%= postUrl %>" target="<%= target %>"><liferay-ui:message key="<%= messageKey %>" /></a>

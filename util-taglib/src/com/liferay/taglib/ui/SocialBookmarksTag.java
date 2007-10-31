@@ -22,19 +22,56 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.taglib.util.IncludeTag;
+
+import javax.servlet.ServletRequest;
+
 /**
- * <a href="SocialNewsvineTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="SocialBookmarksTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author David Truong
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
-public class SocialNewsvineTag extends SocialTag {
+public class SocialBookmarksTag extends IncludeTag {
+
+	public int doStartTag() {
+		ServletRequest req = pageContext.getRequest();
+
+		req.setAttribute("liferay-ui:social-bookmark:url", _url);
+		req.setAttribute("liferay-ui:social-bookmark:title", _title);
+		req.setAttribute("liferay-ui:social-bookmark:target", _target);
+		req.setAttribute("liferay-ui:social-bookmark:types", _types);
+
+		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setUrl(String url) {
+		_url = url;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	public void setTarget(String target) {
+		_target = target;
+	}
+
+	public void setTypes(String types) {
+		_types = types;
+	}
 
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
 
 	private static final String _PAGE =
-		"/html/taglib/ui/social_newsvine/page.jsp";
+		"/html/taglib/ui/social_bookmarks/page.jsp";
+
+	private String _url;
+	private String _title;
+	private String _target;
+	private String _types;
 
 }
