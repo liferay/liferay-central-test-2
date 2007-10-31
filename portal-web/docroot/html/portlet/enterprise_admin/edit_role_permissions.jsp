@@ -217,6 +217,8 @@ if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(modelResource)) {
 
 		headerNames.add(StringPool.BLANK);
 
+		portletURL.setParameter(Constants.CMD, "view");
+
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "this-role-does-have-any-permissions");
 
 		List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId());
