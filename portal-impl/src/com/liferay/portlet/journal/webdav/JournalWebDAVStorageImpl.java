@@ -314,7 +314,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		String href = getRootPath() + webDavReq.getPath();
 
 		if (appendPath) {
-			href += StringPool.SLASH + structure.getStructureId() + ".xml";
+			href += StringPool.SLASH + structure.getStructureId();
 		}
 
 		return new JournalStructureResourceImpl(structure, href);
