@@ -36,6 +36,7 @@ int total = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-
 String url = (String)request.getAttribute("liferay-ui:page-iterator:url");
 String urlAnchor = (String)request.getAttribute("liferay-ui:page-iterator:urlAnchor");
 int pages = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:page-iterator:pages"));
+String type = (String)request.getAttribute("liferay-ui:page-iterator:type");
 
 int start = (curValue - 1) * delta;
 int end = curValue * delta;
@@ -84,128 +85,139 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 </script>
 
 <div class="taglib-page-iterator">
-	<div class="search-results">
-		<c:choose>
-			<c:when test="<%= total > resultRowsSize %>">
-				<%= LanguageUtil.format(pageContext, "showing-x-x-of-x-results", new Object[] {numberFormat.format(start + 1), numberFormat.format(end), numberFormat.format(total)}) %>
-			</c:when>
-			<c:otherwise>
-				<c:choose>
-					<c:when test="<%= total != 1 %>">
-						<%= LanguageUtil.format(pageContext, "showing-x-results", numberFormat.format(total)) %>
-					</c:when>
-					<c:otherwise>
-						<%= LanguageUtil.format(pageContext, "showing-x-result", numberFormat.format(total)) %>
-					</c:otherwise>
-				</c:choose>
-			</c:otherwise>
-		</c:choose>
-	</div>
+	<c:if test="<%= !type.equals("simple") %>">
+		<div class="search-results">
+			<c:choose>
+				<c:when test="<%= total > resultRowsSize %>">
+					<%= LanguageUtil.format(pageContext, "showing-x-x-of-x-results", new Object[] {numberFormat.format(start + 1), numberFormat.format(end), numberFormat.format(total)}) %>
+				</c:when>
+				<c:otherwise>
+					<c:choose>
+						<c:when test="<%= total != 1 %>">
+							<%= LanguageUtil.format(pageContext, "showing-x-results", numberFormat.format(total)) %>
+						</c:when>
+						<c:otherwise>
+							<%= LanguageUtil.format(pageContext, "showing-x-result", numberFormat.format(total)) %>
+						</c:otherwise>
+					</c:choose>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</c:if>
 
 	<c:if test="<%= total > delta %>">
 		<div class="search-pages">
-			<div class="page-selector">
-				<liferay-ui:message key="page" />
+			<c:if test="<%= !type.equals("simple") %>">
+				<div class="page-selector">
+					<liferay-ui:message key="page" />
 
-				<select class="pages <%= namespace %>pageIteratorValue">
+					<select class="pages <%= namespace %>pageIteratorValue">
 
-					<%
-					int pagesIteratorMax = maxPages;
-					int pagesIteratorBegin = 1;
-					int pagesIteratorEnd = pages;
+						<%
+						int pagesIteratorMax = maxPages;
+						int pagesIteratorBegin = 1;
+						int pagesIteratorEnd = pages;
 
-					if (pages > pagesIteratorMax) {
-						pagesIteratorBegin = curValue - pagesIteratorMax;
-						pagesIteratorEnd = curValue + pagesIteratorMax;
+						if (pages > pagesIteratorMax) {
+							pagesIteratorBegin = curValue - pagesIteratorMax;
+							pagesIteratorEnd = curValue + pagesIteratorMax;
 
-						if (pagesIteratorBegin < 1) {
-							pagesIteratorBegin = 1;
+							if (pagesIteratorBegin < 1) {
+								pagesIteratorBegin = 1;
+							}
+
+							if (pagesIteratorEnd > pages) {
+								pagesIteratorEnd = pages;
+							}
 						}
 
-						if (pagesIteratorEnd > pages) {
-							pagesIteratorEnd = pages;
+						for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
+						%>
+
+							<option <%= (i == curValue) ? "selected=\"selected\"" : "" %> value="<%= i %>"><%= i %></option>
+
+						<%
 						}
-					}
+						%>
 
-					for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
-					%>
+					</select>
 
-						<option <%= (i == curValue) ? "selected=\"selected\"" : "" %> value="<%= i %>"><%= i %></option>
+					<liferay-ui:message key="of" />
 
-					<%
-					}
-					%>
+					<%= numberFormat.format(pages) %>
 
-				</select>
-
-				<liferay-ui:message key="of" />
-
-				<%= numberFormat.format(pages) %>
-
-				<%--<input class="page-iterator-submit" type="submit" value="<liferay-ui:message key="submit" />" />--%>
-			</div>
+					<%--<input class="page-iterator-submit" type="submit" value="<liferay-ui:message key="submit" />" />--%>
+				</div>
+			</c:if>
 
 			<div class="page-links">
-				<c:choose>
-					<c:when test="<%= curValue != 1 %>">
-						<a class="first" href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
-					</c:when>
-					<c:otherwise>
-						<span class="first">
-					</c:otherwise>
-				</c:choose>
+				<c:if test="<%= !type.equals("simple") %>">
+					<c:choose>
+						<c:when test="<%= curValue != 1 %>">
+							<a class="first" href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
+						</c:when>
+						<c:otherwise>
+							<span class="first">
+						</c:otherwise>
+					</c:choose>
 
-				<liferay-ui:message key="first" />
+					<liferay-ui:message key="first" />
 
-				<c:choose>
-					<c:when test="<%= curValue != 1 %>">
-						</a>
-					</c:when>
-					<c:otherwise>
-						</span>
-					</c:otherwise>
-				</c:choose>
+					<c:choose>
+						<c:when test="<%= curValue != 1 %>">
+							</a>
+						</c:when>
+						<c:otherwise>
+							</span>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
 
 				<c:choose>
 					<c:when test="<%= curValue != 1 %>">
 						<a class="previous" href="<%= _getHREF(formName, curParam, curValue - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 					</c:when>
-					<c:otherwise>
+					<c:when test="<%= !type.equals("simple") %>">
 						<span class="previous">
-					</c:otherwise>
+					</c:when>
 				</c:choose>
 
-				<liferay-ui:message key="previous" />
+				<c:if test="<%= !(type.equals("simple") && curValue == 1) %>">
+					<liferay-ui:message key="previous" />
+				</c:if>
 
 				<c:choose>
 					<c:when test="<%= curValue != 1 %>">
 						</a>
 					</c:when>
-					<c:otherwise>
+					<c:when test="<%= !type.equals("simple") %>">
 						</span>
-					</c:otherwise>
+					</c:when>
 				</c:choose>
 
 				<c:choose>
 					<c:when test="<%= curValue != pages %>">
 						<a class="next" href="<%= _getHREF(formName, curParam, curValue + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 					</c:when>
-					<c:otherwise>
+					<c:when test="<%= !type.equals("simple") %>">
 						<span class="next">
-					</c:otherwise>
+					</c:when>
 				</c:choose>
 
-				<liferay-ui:message key="next" />
-
+				<c:if test="<%= !(type.equals("simple") && curValue == pages) %>">
+					<liferay-ui:message key="next" />
+				</c:if>
+		
 				<c:choose>
 					<c:when test="<%= curValue != pages %>">
 						</a>
 					</c:when>
-					<c:otherwise>
+					<c:when test="<%= !type.equals("simple") %>">
 						</span>
-					</c:otherwise>
+					</c:when>
 				</c:choose>
 
+				<c:if test="<%= !type.equals("simple") %>">
 				<c:choose>
 					<c:when test="<%= curValue != pages %>">
 						<a class="last" href="<%= _getHREF(formName, curParam, pages, jsCall, url, urlAnchor) %>" target="<%= target %>">
@@ -225,6 +237,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 						</span>
 					</c:otherwise>
 				</c:choose>
+				</c:if>
 			</div>
 		</div>
 	</c:if>

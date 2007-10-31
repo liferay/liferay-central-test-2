@@ -26,6 +26,7 @@
 
 <%
 SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
+String type = (String)request.getAttribute("liferay-ui:search:type");
 
 PortletURL iteratorURL = searchContainer.getIteratorURL();
 
@@ -42,5 +43,6 @@ if (iteratorURL != null) {
 	delta="<%= searchContainer.getDelta() %>"
 	maxPages="<%= 25 %>"
 	total="<%= searchContainer.getTotal() %>"
+	type="<%= type %>"
 	url="<%= url %>"
 />

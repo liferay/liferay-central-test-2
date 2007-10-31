@@ -113,6 +113,7 @@
 		<td>
 			<select name="<portlet:namespace />paginationType">
 				<option <%= paginationType.equals("none") ? "selected" : "" %> value="none"><liferay-ui:message key="none"/></option>
+				<option <%= paginationType.equals("simple") ? "selected" : "" %> value="simple"><liferay-ui:message key="simple"/></option>
 				<option <%= paginationType.equals("regular") ? "selected" : "" %> value="regular"><liferay-ui:message key="regular"/></option>
 			</select>
 		</td>

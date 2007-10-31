@@ -22,6 +22,8 @@
 
 package com.liferay.taglib.ui;
 
+import javax.servlet.ServletRequest;
+
 /**
  * <a href="SearchPaginatorTag.java.html"><b><i>View Source</i></b></a>
  *
@@ -30,11 +32,28 @@ package com.liferay.taglib.ui;
  */
 public class SearchPaginatorTag extends SearchFormTag {
 
+	public int doStartTag() {
+		super.doStartTag();
+
+		ServletRequest req = pageContext.getRequest();
+
+		req.setAttribute(
+			"liferay-ui:search:type", _type);
+
+		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setType(String type) {
+		_type = type;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
 
 	private static final String _PAGE =
 		"/html/taglib/ui/search_paginator/page.jsp";
+
+	private String _type = "regular";
 
 }
