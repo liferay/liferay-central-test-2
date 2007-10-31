@@ -129,8 +129,13 @@
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:social-all
-				url="<%= viewEntryURL.toString() %>"
+			<portlet:renderURL var="bookmarkURL">
+				<portlet:param name="struts_action" value="/blogs/view_entry" />
+				<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
+			</portlet:renderURL>
+
+			<liferay-ui:social-bookmarks
+				url="<%= bookmarkURL.toString() %>"
 				title="<%= entry.getTitle() %>"
 				target="_blank"
 			/>
