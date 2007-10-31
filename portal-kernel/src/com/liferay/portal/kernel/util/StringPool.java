@@ -84,8 +84,6 @@ public class StringPool {
 
 	public static final String OPEN_PARENTHESIS = "(";
 
-	public static final String PAGE_BREAK = "@PAGE_BREAK@";
-
 	public static final String PERCENT = "%";
 
 	public static final String PERIOD = ".";

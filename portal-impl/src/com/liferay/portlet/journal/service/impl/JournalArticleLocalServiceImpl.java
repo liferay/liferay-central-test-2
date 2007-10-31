@@ -119,7 +119,6 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentFactory;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.Node;
 import org.dom4j.XPath;
 import org.dom4j.io.SAXReader;
 
@@ -789,7 +788,7 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return getArticleDisplay(
-			groupId, articleId, null, languageId, page, themeDisplay, 
+			groupId, articleId, null, languageId, page, themeDisplay,
 			xmlRequest);
 	}
 
@@ -807,7 +806,7 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, String templateId,
-			String languageId, int page, ThemeDisplay themeDisplay, 
+			String languageId, int page, ThemeDisplay themeDisplay,
 			String xmlRequest)
 		throws PortalException, SystemException {
 
@@ -824,13 +823,14 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return getArticleDisplay(
-			groupId, articleId, version, templateId, languageId, 1, 
+			groupId, articleId, version, templateId, languageId, 1,
 			themeDisplay, null);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, double version, String templateId,
-			String languageId, int page, ThemeDisplay themeDisplay, String xmlRequest)
+			String languageId, int page, ThemeDisplay themeDisplay,
+			String xmlRequest)
 		throws PortalException, SystemException {
 
 		String content = null;
@@ -851,96 +851,82 @@ public class JournalArticleLocalServiceImpl
 		if (article.getDisplayDate().after(now)) {
 			return null;
 		}
-		
-		String targetPage = null;
-		
-		int numberOfPages = 1;
-		
-		boolean paginate = false;
-		
-		boolean pageFlow = false;
-		
+
 		if (page < 1) {
 			page = 1;
 		}
-		
-		/*if (!article.isTemplateDriven()) {
-			return article.getContent();
-		}*/
+
+		int numberOfPages = 1;
+		boolean paginate = false;
+		boolean pageFlow = false;
 
 		Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
 		String xml = article.getContent();
-
-		SAXReader reader = new SAXReader();
 
 		try {
 			Document doc = null;
 
 			Element root = null;
 
-			Document request = null;
-
-			Element pageEl = null;
-
 			if (article.isTemplateDriven()) {
+				SAXReader reader = new SAXReader();
+
 				doc = reader.read(new StringReader(xml));
 
 				root = doc.getRootElement();
 
-				try {
-					if (Validator.isNotNull(xmlRequest)) {
-						request = reader.read(
-							new StringReader(xmlRequest));
+				Document request = null;
+
+				if (Validator.isNotNull(xmlRequest)) {
+					request = reader.read(new StringReader(xmlRequest));
+				}
+
+				List pages = root.elements("page");
+
+				if (pages.size() > 0) {
+					pageFlow = true;
+
+					String targetPage = request.valueOf(
+						"/request/parameters/parameter[name='targetPage']/" +
+							"value");
+
+					Element pageEl = null;
+
+					if (Validator.isNotNull(targetPage)) {
+						XPath xpathSelector = DocumentHelper.createXPath(
+							"/root/page[@id = '" + targetPage + "']");
+
+						pageEl = (Element)xpathSelector.selectSingleNode(doc);
 					}
 
-					List pages = root.elements("page");
+					DocumentFactory docFactory = DocumentFactory.getInstance();
 
-					if (pages.size() > 0) {
-						pageFlow = true;
-						
-						targetPage = request.valueOf(
-							"/request/parameters/parameter[name='targetPage']/value");					
+					if (pageEl != null) {
+						doc = docFactory.createDocument(pageEl);
 
-						if (Validator.isNotNull(targetPage)) {
-							XPath xpathSelector = DocumentHelper.createXPath(
-								"/root/page[@id = '" + targetPage + "']");
+						root = doc.getRootElement();
 
-							pageEl =
-								(Element)xpathSelector.selectSingleNode(doc);
-						}
-
-						if (pageEl != null) {
-							doc = DocumentFactory.getInstance().createDocument(
-								pageEl);
-
-							root = doc.getRootElement();
-
-							numberOfPages = pages.size();
-						}
-						else {
-							if (page > pages.size()) {
-								page = 1;
-							}
-
-							pageEl = (Element)pages.get(page - 1);
-
-							doc = DocumentFactory.getInstance().createDocument(
-								pageEl);
-
-							root = doc.getRootElement();
-
-							numberOfPages = pages.size();
-							paginate = true;
-						}
+						numberOfPages = pages.size();
 					}
+					else {
+						if (page > pages.size()) {
+							page = 1;
+						}
 
-					if (request != null) {
-						root.add(request.getRootElement().createCopy());
+						pageEl = (Element)pages.get(page - 1);
+
+						doc = docFactory.createDocument(pageEl);
+
+						root = doc.getRootElement();
+
+						numberOfPages = pages.size();
+						paginate = true;
 					}
 				}
-				catch (DocumentException de) {
-					throw new SystemException(de);
+
+				if (request != null) {
+					root.add(request.getRootElement().createCopy());
 				}
 
 				JournalUtil.addAllReservedEls(root, tokens, article);
@@ -1002,19 +988,15 @@ public class JournalArticleLocalServiceImpl
 				tokens, languageId, xml, script, langType);
 
 			if (!pageFlow) {
-				String[] pieces = StringUtil.split(
-					content, 
-					GetterUtil.getString(
-						PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_PAGE_BREAK), 
-						StringPool.PAGE_BREAK));
-				
+				String[] pieces = StringUtil.split(content, _TOKEN_PAGE_BREAK);
+
 				if (pieces.length > 1) {
 					if (page > pieces.length) {
 						page = 1;
 					}
-					
-					numberOfPages = pieces.length;
+
 					content = pieces[page - 1];
+					numberOfPages = pieces.length;
 					paginate = true;
 				}
 			}
@@ -1028,7 +1010,7 @@ public class JournalArticleLocalServiceImpl
 			article.getUserId(), article.getArticleId(), article.getVersion(),
 			article.getTitle(), article.getDescription(),
 			article.getAvailableLocales(), content, article.getType(),
-			article.getStructureId(), templateId, numberOfPages, page, 
+			article.getStructureId(), templateId, numberOfPages, page,
 			paginate);
 	}
 
@@ -2042,6 +2024,9 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 	}
+
+	private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(
+		PropsUtil.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
 
 	private static Log _log =
 		LogFactory.getLog(JournalArticleLocalServiceImpl.class);

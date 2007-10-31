@@ -92,12 +92,11 @@ else if (className.equals(IGImage.class.getName())) {
 else if (className.equals(JournalArticle.class.getName())) {
 	JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
 
-	String languageId = LanguageUtil.getLanguageId(request);
-
 	JournalArticleDisplay articleDisplay = null;
 
 	try {
 		double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
+		String languageId = LanguageUtil.getLanguageId(request);
 
 		articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), languageId, themeDisplay);
 	}

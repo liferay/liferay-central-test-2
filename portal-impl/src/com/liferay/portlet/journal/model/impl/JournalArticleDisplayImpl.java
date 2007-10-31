@@ -28,7 +28,7 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
  * <a href="JournalArticleDisplayImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Auge
+ * @author Raymond Augé
  *
  */
 public class JournalArticleDisplayImpl implements JournalArticleDisplay {
@@ -121,7 +121,7 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 	public void setTemplateId(String templateId) {
 		_templateId = templateId;
 	}
-	
+
 	public int getNumberOfPages() {
 		return _numberOfPages;
 	}

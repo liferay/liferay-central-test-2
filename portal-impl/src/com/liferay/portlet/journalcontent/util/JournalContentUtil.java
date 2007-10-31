@@ -35,6 +35,7 @@ import com.liferay.util.CollectionFactory;
 
 import java.util.Map;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -115,11 +116,17 @@ public class JournalContentUtil {
 
 	public static JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String templateId, String languageId,
-		ThemeDisplay themeDisplay, boolean disableCaching, int page, 
+		ThemeDisplay themeDisplay, boolean disableCaching, int page,
 		String xmlRequest) {
 
-		long start = System.currentTimeMillis();
-		
+		StopWatch stopWatch = null;
+
+		if (_log.isDebugEnabled()) {
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
+
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
@@ -129,7 +136,7 @@ public class JournalContentUtil {
 				page, xmlRequest);
 		}
 
-		String key = 
+		String key =
 			_encodeKey(groupId, articleId, templateId, languageId, page);
 
 		JournalArticleDisplay articleDisplay =
@@ -148,7 +155,12 @@ public class JournalContentUtil {
 			}
 		}
 
-		_log.debug("[" + articleId + "," + groupId + "," + page + "] " + (System.currentTimeMillis() - start));
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"getDisplay for {" + groupId + ", " + articleId + ", " +
+					templateId + ", " + languageId + ", " + page + "} takes " +
+						stopWatch.getTime() + " ms");
+		}
 
 		return articleDisplay;
 	}
@@ -160,7 +172,7 @@ public class JournalContentUtil {
 	}
 
 	private static String _encodeKey(
-		long groupId, String articleId, String templateId, String languageId, 
+		long groupId, String articleId, String templateId, String languageId,
 		int page) {
 
 		StringMaker sm = new StringMaker();
@@ -177,7 +189,7 @@ public class JournalContentUtil {
 			sm.append(LANGUAGE_SEPARATOR);
 			sm.append(languageId);
 		}
-		
+
 		if (page > 0) {
 			sm.append(PAGE_SEPARATOR);
 			sm.append(page);

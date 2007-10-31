@@ -80,22 +80,13 @@
 		<%
 		JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
 
-		String languageId = LanguageUtil.getLanguageId(request);
-		
-		int articlePage = ParamUtil.getInteger(request, "page", 1);
-
-		int cur = ParamUtil.getInteger(request, "cur");
-
-		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
-
 		JournalArticleDisplay articleDisplay = null;
-
-		PortletURL articlePagerURL = renderResponse.createRenderURL();
-		
-		articlePagerURL.setParameter("cur", String.valueOf(cur));
 
 		try {
 			double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
+			String languageId = LanguageUtil.getLanguageId(request);
+			int page = ParamUtil.getInteger(request, "page", 1);
+			String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
 			articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), latestApprovedVersion, null, languageId, articlePage, themeDisplay, xmlRequest);
 		}
@@ -111,6 +102,15 @@
 			<h3 class="journal-content-title"><%= title %></h3>
 
 			<c:if test="<%= articleDisplay.isPaginate() %>">
+
+				<%
+				int cur = ParamUtil.getInteger(request, "cur");
+
+				PortletURL articlePagerURL = renderResponse.createRenderURL();
+
+				articlePagerURL.setParameter("cur", String.valueOf(cur));
+				%>
+
 				<liferay-ui:page-iterator
 					curParam="<%= "page" %>"
 					curValue="<%= articleDisplay.getCurrentPage() %>"
@@ -119,10 +119,10 @@
 					total="<%= articleDisplay.getNumberOfPages() %>"
 					url="<%= articlePagerURL.toString() %>"
 				/>
-				
+
 				<br/>
 			</c:if>
-	
+
 			<%= articleDisplay.getContent() %>
 
 			<c:if test="<%= showAvailableLocales %>">
