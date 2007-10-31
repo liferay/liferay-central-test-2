@@ -60,8 +60,7 @@ public class PageIteratorTag extends TagSupport {
 			req.setAttribute("liferay-ui:page-iterator:urlAnchor", _urlAnchor);
 			req.setAttribute(
 				"liferay-ui:page-iterator:pages", String.valueOf(_pages));
-			req.setAttribute(
-				"liferay-ui:page-iterator:type", _type);
+			req.setAttribute("liferay-ui:page-iterator:type", _type);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
 
@@ -182,9 +181,9 @@ public class PageIteratorTag extends TagSupport {
 	private int _maxPages = 10;
 	private String _target = "_self";
 	private int _total;
+	private String _type = "regular";
 	private String _url;
 	private String _urlAnchor;
 	private int _pages;
-	private String _type = "regular";
 
 }

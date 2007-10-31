@@ -141,7 +141,7 @@ if (showQueryLogic) {
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
 %>
 
 <c:choose>
@@ -156,7 +156,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 	</c:when>
 </c:choose>
 
-<c:if test="<%= (!paginationType.equals("none")) && searchContainer.getTotal() > searchContainer.getResults().size() %>">
+<c:if test='<%= !paginationType.equals("none") && (searchContainer.getTotal() > searchContainer.getResults().size()) %>'>
 	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>"  type="<%= paginationType %>"/>
 </c:if>
 

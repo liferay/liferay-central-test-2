@@ -30,7 +30,6 @@ Date now = new Date();
 
 int total = TagsAssetLocalServiceUtil.getAssetsCount(entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
 
-searchContainer.setDelta(delta);
 searchContainer.setTotal(total);
 
 List results = TagsAssetLocalServiceUtil.getAssets(entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());

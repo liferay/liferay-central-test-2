@@ -37,8 +37,7 @@ public class SearchPaginatorTag extends SearchFormTag {
 
 		ServletRequest req = pageContext.getRequest();
 
-		req.setAttribute(
-			"liferay-ui:search:type", _type);
+		req.setAttribute("liferay-ui:search:type", _type);
 
 		return EVAL_BODY_BUFFERED;
 	}
