@@ -56,6 +56,8 @@ public class JournalContentUtil {
 
 	public static String LANGUAGE_SEPARATOR = "_LANGUAGE_";
 
+	public static String PAGE_SEPARATOR = "_PAGE_";
+
 	public static void clearCache() {
 		_cache.removeAll();
 	}
@@ -108,23 +110,27 @@ public class JournalContentUtil {
 
 		return getDisplay(
 			groupId, articleId, templateId, languageId, themeDisplay,
-			disableCaching, null);
+			disableCaching, 1, null);
 	}
 
 	public static JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String templateId, String languageId,
-		ThemeDisplay themeDisplay, boolean disableCaching, String xmlRequest) {
+		ThemeDisplay themeDisplay, boolean disableCaching, int page, 
+		String xmlRequest) {
 
+		long start = System.currentTimeMillis();
+		
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
 		if (disableCaching) {
 			return _getArticleDisplay(
 				groupId, articleId, templateId, languageId, themeDisplay,
-				xmlRequest);
+				page, xmlRequest);
 		}
 
-		String key = _encodeKey(groupId, articleId, templateId, languageId);
+		String key = 
+			_encodeKey(groupId, articleId, templateId, languageId, page);
 
 		JournalArticleDisplay articleDisplay =
 			(JournalArticleDisplay)MultiVMPoolUtil.get(_cache, key);
@@ -132,7 +138,7 @@ public class JournalContentUtil {
 		if (articleDisplay == null) {
 			articleDisplay = _getArticleDisplay(
 				groupId, articleId, templateId, languageId, themeDisplay,
-				xmlRequest);
+				page, xmlRequest);
 
 			if (articleDisplay != null) {
 				String groupKey = _encodeGroupKey(
@@ -142,17 +148,20 @@ public class JournalContentUtil {
 			}
 		}
 
+		_log.debug("[" + articleId + "," + groupId + "," + page + "] " + (System.currentTimeMillis() - start));
+
 		return articleDisplay;
 	}
 
 	private static String _encodeGroupKey(
 		long groupId, String articleId, String templateId) {
 
-		return _encodeKey(groupId, articleId, templateId, null);
+		return _encodeKey(groupId, articleId, templateId, null, 0);
 	}
 
 	private static String _encodeKey(
-		long groupId, String articleId, String templateId, String languageId) {
+		long groupId, String articleId, String templateId, String languageId, 
+		int page) {
 
 		StringMaker sm = new StringMaker();
 
@@ -168,17 +177,22 @@ public class JournalContentUtil {
 			sm.append(LANGUAGE_SEPARATOR);
 			sm.append(languageId);
 		}
+		
+		if (page > 0) {
+			sm.append(PAGE_SEPARATOR);
+			sm.append(page);
+		}
 
 		return sm.toString();
 	}
 
 	private static JournalArticleDisplay _getArticleDisplay(
 		long groupId, String articleId, String templateId, String languageId,
-		ThemeDisplay themeDisplay, String xmlRequest) {
+		ThemeDisplay themeDisplay, int page, String xmlRequest) {
 
 		try {
 			return JournalArticleLocalServiceUtil.getArticleDisplay(
-				groupId, articleId, templateId, languageId, themeDisplay,
+				groupId, articleId, templateId, languageId, page, themeDisplay,
 				xmlRequest);
 		}
 		catch (Exception e) {

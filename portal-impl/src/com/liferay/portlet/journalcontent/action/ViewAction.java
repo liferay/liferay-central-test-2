@@ -47,6 +47,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class ViewAction extends PortletAction {
@@ -83,6 +84,8 @@ public class ViewAction extends PortletAction {
 		boolean disableCaching = GetterUtil.getBoolean(
 			prefs.getValue("disable-caching", StringPool.BLANK));
 
+		int page = ParamUtil.getInteger(req, "page", 1);
+
 		String xmlRequest = PortletRequestUtil.toXML(req, res);
 
 		JournalArticleDisplay articleDisplay = null;
@@ -90,7 +93,7 @@ public class ViewAction extends PortletAction {
 		if ((groupId > 0) && Validator.isNotNull(articleId)) {
 			articleDisplay = JournalContentUtil.getDisplay(
 				groupId, articleId, templateId, languageId, themeDisplay,
-				disableCaching, xmlRequest);
+				disableCaching, page, xmlRequest);
 		}
 
 		if (articleDisplay != null) {

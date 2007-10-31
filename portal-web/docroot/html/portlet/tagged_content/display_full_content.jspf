@@ -81,15 +81,23 @@
 		JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
 
 		String languageId = LanguageUtil.getLanguageId(request);
+		
+		int articlePage = ParamUtil.getInteger(request, "page", 1);
+
+		int cur = ParamUtil.getInteger(request, "cur");
 
 		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
 		JournalArticleDisplay articleDisplay = null;
 
+		PortletURL articlePagerURL = renderResponse.createRenderURL();
+		
+		articlePagerURL.setParameter("cur", String.valueOf(cur));
+
 		try {
 			double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
 
-			articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), latestApprovedVersion, null, languageId, themeDisplay, xmlRequest);
+			articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), latestApprovedVersion, null, languageId, articlePage, themeDisplay, xmlRequest);
 		}
 		catch (NoSuchArticleException nsae) {
 
@@ -102,6 +110,19 @@
 		<c:if test="<%= articleDisplay != null %>">
 			<h3 class="journal-content-title"><%= title %></h3>
 
+			<c:if test="<%= articleDisplay.isPaginate() %>">
+				<liferay-ui:page-iterator
+					curParam="<%= "page" %>"
+					curValue="<%= articleDisplay.getCurrentPage() %>"
+					delta="<%= 1 %>"
+					maxPages="<%= 25 %>"
+					total="<%= articleDisplay.getNumberOfPages() %>"
+					url="<%= articlePagerURL.toString() %>"
+				/>
+				
+				<br/>
+			</c:if>
+	
 			<%= articleDisplay.getContent() %>
 
 			<c:if test="<%= showAvailableLocales %>">

@@ -28,6 +28,7 @@ import java.io.Serializable;
  * <a href="JournalArticleDisplay.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Auge
  *
  */
 public interface JournalArticleDisplay extends Serializable {
@@ -63,5 +64,17 @@ public interface JournalArticleDisplay extends Serializable {
 	public String getTemplateId();
 
 	public void setTemplateId(String templateId);
+
+	public int getNumberOfPages();
+
+	public void setNumberOfPages(int numberOfPages);
+
+	public int getCurrentPage();
+
+	public void setCurrentPage(int currentPage);
+
+	public boolean isPaginate();
+
+	public void setPaginate(boolean paginate);
 
 }

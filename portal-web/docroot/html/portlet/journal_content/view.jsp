@@ -42,7 +42,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 		content = RuntimePortletUtil.processXML(request, content, actionURLLogic);
 		content = RuntimePortletUtil.processXML(request, content, renderURLLogic);
 		%>
-
+		
 		<%= content %>
 	</c:when>
 	<c:otherwise>
@@ -59,12 +59,27 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 				content = RuntimePortletUtil.processXML(request, content, portletLogic);
 				content = RuntimePortletUtil.processXML(request, content, actionURLLogic);
 				content = RuntimePortletUtil.processXML(request, content, renderURLLogic);
+
+				PortletURL portletURL = renderResponse.createRenderURL();
 				%>
 
+				<c:if test="<%= articleDisplay.isPaginate() %>">
+					<liferay-ui:page-iterator
+						curParam="<%= "page" %>"
+						curValue="<%= articleDisplay.getCurrentPage() %>"
+						delta="<%= 1 %>"
+						maxPages="<%= 25 %>"
+						total="<%= articleDisplay.getNumberOfPages() %>"
+						url="<%= portletURL.toString() %>"
+					/>
+					
+					<br/>
+				</c:if>
+		
 				<span class="journal-content-article" id="<%= articleDisplay.getGroupId() %>_<%= articleDisplay.getArticleId() %>_<%= articleDisplay.getVersion() %>">
 				<%= content %>
 				</span>
-
+		
 				<c:if test="<%= showAvailableLocales %>">
 
 					<%

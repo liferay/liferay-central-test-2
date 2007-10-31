@@ -28,6 +28,7 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
  * <a href="JournalArticleDisplayImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Auge
  *
  */
 public class JournalArticleDisplayImpl implements JournalArticleDisplay {
@@ -36,7 +37,8 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		long id, long resourcePrimKey, long groupId, long userId,
 		String articleId, double version, String title, String description,
 		String[] availableLocales, String content, String type,
-		String structureId, String templateId) {
+		String structureId, String templateId, int numberOfPages,
+		int currentPage, boolean paginate) {
 
 		_id = id;
 		_resourcePrimKey = resourcePrimKey;
@@ -51,6 +53,9 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		_type = type;
 		_structureId = structureId;
 		_templateId = templateId;
+		_numberOfPages = numberOfPages;
+		_currentPage = currentPage;
+		_paginate = paginate;
 	}
 
 	public long getId() {
@@ -116,6 +121,30 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 	public void setTemplateId(String templateId) {
 		_templateId = templateId;
 	}
+	
+	public int getNumberOfPages() {
+		return _numberOfPages;
+	}
+
+	public void setNumberOfPages(int numberOfPages) {
+		_numberOfPages = numberOfPages;
+	}
+
+	public int getCurrentPage() {
+		return _currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		_currentPage = currentPage;
+	}
+
+	public boolean isPaginate() {
+		return _paginate;
+	}
+
+	public void setPaginate(boolean paginate) {
+		_paginate = paginate;
+	}
 
 	private long _id;
 	private long _resourcePrimKey;
@@ -130,5 +159,8 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 	private String _type;
 	private String _structureId;
 	private String _templateId;
+	private int _numberOfPages;
+	private int _currentPage;
+	private boolean _paginate;
 
 }

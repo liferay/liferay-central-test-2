@@ -912,6 +912,8 @@ public class PropsUtil {
 	public static final String JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION = "journal.article.force.increment.version";
 
 	public static final String JOURNAL_ARTICLE_TYPES = "journal.article.types";
+	
+	public static final String JOURNAL_ARTICLE_PAGE_BREAK = "journal.article.page.break";
 
 	public static final String JOURNAL_ARTICLE_CHECK_INTERVAL = "journal.article.check.interval";
 

@@ -477,14 +477,14 @@ public class JournalArticleLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
 		long groupId, java.lang.String articleId, java.lang.String languageId,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay,
+		int page, com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String xmlRequest)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
 		return journalArticleLocalService.getArticleDisplay(groupId, articleId,
-			languageId, themeDisplay, xmlRequest);
+			languageId, page, themeDisplay, xmlRequest);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
@@ -501,7 +501,7 @@ public class JournalArticleLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
 		long groupId, java.lang.String articleId, java.lang.String templateId,
-		java.lang.String languageId,
+		java.lang.String languageId, int page,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String xmlRequest)
 		throws com.liferay.portal.PortalException, 
@@ -509,7 +509,7 @@ public class JournalArticleLocalServiceUtil {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
 		return journalArticleLocalService.getArticleDisplay(groupId, articleId,
-			templateId, languageId, themeDisplay, xmlRequest);
+			templateId, languageId, page, themeDisplay, xmlRequest);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
@@ -526,7 +526,7 @@ public class JournalArticleLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticleDisplay getArticleDisplay(
 		long groupId, java.lang.String articleId, double version,
-		java.lang.String templateId, java.lang.String languageId,
+		java.lang.String templateId, java.lang.String languageId, int page,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String xmlRequest)
 		throws com.liferay.portal.PortalException, 
@@ -534,7 +534,7 @@ public class JournalArticleLocalServiceUtil {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
 		return journalArticleLocalService.getArticleDisplay(groupId, articleId,
-			version, templateId, languageId, themeDisplay, xmlRequest);
+			version, templateId, languageId, page, themeDisplay, xmlRequest);
 	}
 
 	public static java.util.List getArticles()

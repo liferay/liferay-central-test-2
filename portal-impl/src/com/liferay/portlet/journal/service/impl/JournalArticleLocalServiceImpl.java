@@ -52,6 +52,7 @@ import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.ArticleContentException;
 import com.liferay.portlet.journal.ArticleDisplayDateException;
 import com.liferay.portlet.journal.ArticleExpirationDateException;
@@ -115,7 +116,11 @@ import org.apache.lucene.search.SortField;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
+import org.dom4j.DocumentFactory;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.dom4j.Node;
+import org.dom4j.XPath;
 import org.dom4j.io.SAXReader;
 
 import org.htmlparser.util.ParserException;
@@ -780,11 +785,12 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, String languageId,
-			ThemeDisplay themeDisplay, String xmlRequest)
+			int page, ThemeDisplay themeDisplay, String xmlRequest)
 		throws PortalException, SystemException {
 
 		return getArticleDisplay(
-			groupId, articleId, null, languageId, themeDisplay, xmlRequest);
+			groupId, articleId, null, languageId, page, themeDisplay, 
+			xmlRequest);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
@@ -801,14 +807,15 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, String templateId,
-			String languageId, ThemeDisplay themeDisplay, String xmlRequest)
+			String languageId, int page, ThemeDisplay themeDisplay, 
+			String xmlRequest)
 		throws PortalException, SystemException {
 
 		JournalArticle article = getDisplayArticle(groupId, articleId);
 
 		return getArticleDisplay(
 			groupId, articleId, article.getVersion(), templateId, languageId,
-			themeDisplay, xmlRequest);
+			page, themeDisplay, xmlRequest);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
@@ -817,13 +824,13 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return getArticleDisplay(
-			groupId, articleId, version, templateId, languageId, themeDisplay,
-			null);
+			groupId, articleId, version, templateId, languageId, 1, 
+			themeDisplay, null);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
 			long groupId, String articleId, double version, String templateId,
-			String languageId, ThemeDisplay themeDisplay, String xmlRequest)
+			String languageId, int page, ThemeDisplay themeDisplay, String xmlRequest)
 		throws PortalException, SystemException {
 
 		String content = null;
@@ -844,7 +851,19 @@ public class JournalArticleLocalServiceImpl
 		if (article.getDisplayDate().after(now)) {
 			return null;
 		}
-
+		
+		String targetPage = null;
+		
+		int numberOfPages = 1;
+		
+		boolean paginate = false;
+		
+		boolean pageFlow = false;
+		
+		if (page < 1) {
+			page = 1;
+		}
+		
 		/*if (!article.isTemplateDriven()) {
 			return article.getContent();
 		}*/
@@ -853,27 +872,75 @@ public class JournalArticleLocalServiceImpl
 
 		String xml = article.getContent();
 
+		SAXReader reader = new SAXReader();
+
 		try {
 			Document doc = null;
 
 			Element root = null;
 
-			if (article.isTemplateDriven()) {
-				SAXReader reader = new SAXReader();
+			Document request = null;
 
+			Element pageEl = null;
+
+			if (article.isTemplateDriven()) {
 				doc = reader.read(new StringReader(xml));
 
 				root = doc.getRootElement();
 
-				if (Validator.isNotNull(xmlRequest)) {
-					try {
-						Document request = reader.read(
+				try {
+					if (Validator.isNotNull(xmlRequest)) {
+						request = reader.read(
 							new StringReader(xmlRequest));
+					}
 
+					List pages = root.elements("page");
+
+					if (pages.size() > 0) {
+						pageFlow = true;
+						
+						targetPage = request.valueOf(
+							"/request/parameters/parameter[name='targetPage']/value");					
+
+						if (Validator.isNotNull(targetPage)) {
+							XPath xpathSelector = DocumentHelper.createXPath(
+								"/root/page[@id = '" + targetPage + "']");
+
+							pageEl =
+								(Element)xpathSelector.selectSingleNode(doc);
+						}
+
+						if (pageEl != null) {
+							doc = DocumentFactory.getInstance().createDocument(
+								pageEl);
+
+							root = doc.getRootElement();
+
+							numberOfPages = pages.size();
+						}
+						else {
+							if (page > pages.size()) {
+								page = 1;
+							}
+
+							pageEl = (Element)pages.get(page - 1);
+
+							doc = DocumentFactory.getInstance().createDocument(
+								pageEl);
+
+							root = doc.getRootElement();
+
+							numberOfPages = pages.size();
+							paginate = true;
+						}
+					}
+
+					if (request != null) {
 						root.add(request.getRootElement().createCopy());
 					}
-					catch (Exception e) {
-					}
+				}
+				catch (DocumentException de) {
+					throw new SystemException(de);
 				}
 
 				JournalUtil.addAllReservedEls(root, tokens, article);
@@ -933,6 +1000,24 @@ public class JournalArticleLocalServiceImpl
 
 			content = JournalUtil.transform(
 				tokens, languageId, xml, script, langType);
+
+			if (!pageFlow) {
+				String[] pieces = StringUtil.split(
+					content, 
+					GetterUtil.getString(
+						PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_PAGE_BREAK), 
+						StringPool.PAGE_BREAK));
+				
+				if (pieces.length > 1) {
+					if (page > pieces.length) {
+						page = 1;
+					}
+					
+					numberOfPages = pieces.length;
+					content = pieces[page - 1];
+					paginate = true;
+				}
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -943,7 +1028,8 @@ public class JournalArticleLocalServiceImpl
 			article.getUserId(), article.getArticleId(), article.getVersion(),
 			article.getTitle(), article.getDescription(),
 			article.getAvailableLocales(), content, article.getType(),
-			article.getStructureId(), templateId);
+			article.getStructureId(), templateId, numberOfPages, page, 
+			paginate);
 	}
 
 	public List getArticles() throws SystemException {
