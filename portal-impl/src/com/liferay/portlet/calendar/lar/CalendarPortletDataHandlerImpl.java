@@ -255,20 +255,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
-		if (!mergeData) {
-			CalEventLocalServiceUtil.addEvent(
-				event.getUserId(), plid, event.getTitle(),
-				event.getDescription(), startDateMonth, startDateDay,
-				startDateYear, startDateHour, startDateMinute,
-				endDateMonth, endDateDay, endDateYear,
-				event.getDurationHour(), event.getDurationMinute(),
-				event.getAllDay(), event.getTimeZoneSensitive(),
-				event.getType(), event.getRepeating(),
-				event.getRecurrenceObj(), event.getRemindBy(),
-				event.getFirstReminder(), event.getSecondReminder(),
-				addCommunityPermissions, addGuestPermissions);
-		}
-		else {
+		if (mergeData) {
 			CalEvent existingEvent = CalEventUtil.fetchByUUID_G(
 				event.getUuid(), context.getGroupId());
 
@@ -291,6 +278,19 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 				CalEventUtil.update(event, true);
 			}
+		}
+		else {
+			CalEventLocalServiceUtil.addEvent(
+				event.getUserId(), plid, event.getTitle(),
+				event.getDescription(), startDateMonth, startDateDay,
+				startDateYear, startDateHour, startDateMinute,
+				endDateMonth, endDateDay, endDateYear,
+				event.getDurationHour(), event.getDurationMinute(),
+				event.getAllDay(), event.getTimeZoneSensitive(),
+				event.getType(), event.getRepeating(),
+				event.getRecurrenceObj(), event.getRemindBy(),
+				event.getFirstReminder(), event.getSecondReminder(),
+				addCommunityPermissions, addGuestPermissions);
 		}
 	}
 
