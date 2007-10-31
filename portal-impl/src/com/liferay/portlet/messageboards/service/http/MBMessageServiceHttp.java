@@ -76,7 +76,8 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
 		long classPK, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body)
+		java.lang.String subject, java.lang.String body,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -102,11 +103,18 @@ public class MBMessageServiceHttp {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj7 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj7 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"addDiscussionMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 			Object returnObj = null;
 

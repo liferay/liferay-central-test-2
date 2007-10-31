@@ -26,8 +26,10 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -47,9 +49,13 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
@@ -95,6 +101,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.mail.internet.InternetAddress;
+
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.time.StopWatch;
@@ -113,16 +121,22 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, String subject, String body)
 		throws PortalException, SystemException {
 
+		long groupId = 0;
+		String className = StringPool.BLANK;
+		long classPK = 0;
 		long threadId = 0;
 		long parentMessageId = 0;
+		ThemeDisplay themeDisplay = null;
 
 		return addDiscussionMessage(
-			userId, threadId, parentMessageId, subject, body);
+			userId, groupId, className, classPK, threadId, parentMessageId,
+			subject, body, themeDisplay);
 	}
 
 	public MBMessage addDiscussionMessage(
-			long userId, long threadId, long parentMessageId, String subject,
-			String body)
+			long userId, long groupId, String className, long classPK,
+			long threadId, long parentMessageId, String subject, String body,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		long categoryId = CompanyImpl.SYSTEM;
@@ -137,10 +151,21 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBCategoryLocalServiceUtil.getSystemCategory();
 
-		return addMessage(
+		MBMessage message = addMessage(
 			userId, categoryId, threadId, parentMessageId, subject, body, files,
 			anonymous, priority, tagsEntries, prefs, addCommunityPermissions,
 			addGuestPermissions);
+
+		if (className.equals(BlogsEntry.class.getName())) {
+			try {
+				sendBlogsCommentsEmail(userId, classPK, message, themeDisplay);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		return message;
 	}
 
 	public MBMessage addMessage(
@@ -1379,6 +1404,95 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
+	}
+
+	protected void sendBlogsCommentsEmail(
+			long userId, long entryId, MBMessage message,
+			ThemeDisplay themeDisplay)
+		throws IOException, PortalException, SystemException {
+
+		long companyId = message.getCompanyId();
+
+		if (!PrefsPropsUtil.getBoolean(
+				companyId, PropsUtil.BLOGS_EMAIL_COMMENTS_ADDED_ENABLED)) {
+
+			return;
+		}
+
+		BlogsEntry entry = BlogsEntryUtil.findByPrimaryKey(entryId);
+
+		String portalURL = PortalUtil.getPortalURL(themeDisplay);
+		String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
+
+		String blogsEntryURL =
+			portalURL + layoutURL + "/blogs/" + entry.getUrlTitle();
+
+		User blogsUser = UserUtil.findByPrimaryKey(entry.getUserId());
+		User commentsUser = UserUtil.findByPrimaryKey(userId);
+
+		String fromName = PrefsPropsUtil.getString(
+			companyId, PropsUtil.ADMIN_EMAIL_FROM_NAME);
+		String fromAddress = PrefsPropsUtil.getString(
+			companyId, PropsUtil.ADMIN_EMAIL_FROM_ADDRESS);
+
+		String toName = blogsUser.getFullName();
+		String toAddress = blogsUser.getEmailAddress();
+
+		String subject = PrefsPropsUtil.getContent(
+			companyId, PropsUtil.BLOGS_EMAIL_COMMENTS_ADDED_SUBJECT);
+		String body = PrefsPropsUtil.getContent(
+			companyId, PropsUtil.BLOGS_EMAIL_COMMENTS_ADDED_BODY);
+
+		subject = StringUtil.replace(
+			subject,
+			new String[] {
+				"[$BLOGS_COMMENTS_USER_ADDRESS$]",
+				"[$BLOGS_COMMENTS_USER_NAME$]",
+				"[$BLOGS_ENTRY_URL$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]"
+			},
+			new String[] {
+				commentsUser.getEmailAddress(),
+				commentsUser.getFullName(),
+				blogsEntryURL,
+				fromAddress,
+				fromName,
+				toAddress,
+				toName
+			});
+
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$BLOGS_COMMENTS_USER_ADDRESS$]",
+				"[$BLOGS_COMMENTS_USER_NAME$]",
+				"[$BLOGS_ENTRY_URL$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]"
+			},
+			new String[] {
+				commentsUser.getEmailAddress(),
+				commentsUser.getFullName(),
+				blogsEntryURL,
+				fromAddress,
+				fromName,
+				toAddress,
+				toName
+			});
+
+		InternetAddress from = new InternetAddress(fromAddress, fromName);
+
+		InternetAddress to = new InternetAddress(toAddress, toName);
+
+		MailMessage mailMessage = new MailMessage(
+			from, to, subject, body, true);
+
+		MailServiceUtil.sendEmail(mailMessage);
 	}
 
 	protected void updateAsset(MBMessage message, String[] tagsEntries)

@@ -78,22 +78,6 @@ import java.rmi.RemoteException;
  *
  */
 public class MBMessageServiceSoap {
-	public static com.liferay.portlet.messageboards.model.MBMessageSoap addDiscussionMessage(
-		long groupId, java.lang.String className, long classPK, long threadId,
-		long parentMessageId, java.lang.String subject, java.lang.String body)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addDiscussionMessage(groupId,
-					className, classPK, threadId, parentMessageId, subject, body);
-
-			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
 		long categoryId, java.lang.String subject, java.lang.String body,
 		java.util.List files, boolean anonymous, double priority,

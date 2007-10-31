@@ -823,6 +823,14 @@ public class PropsUtil {
 
 	public static final String ADMIN_EMAIL_PASSWORD_SENT_BODY = "admin.email.password.sent.body";
 
+	// Blogs Portlet
+
+	public static final String BLOGS_EMAIL_COMMENTS_ADDED_ENABLED = "blogs.email.comments.added.enabled";
+
+	public static final String BLOGS_EMAIL_COMMENTS_ADDED_SUBJECT = "blogs.email.comments.added.subject";
+
+	public static final String BLOGS_EMAIL_COMMENTS_ADDED_BODY = "blogs.email.comments.added.body";
+
 	// Calendar Portlet
 
 	public static final String CALENDAR_EVENT_TYPES = "calendar.event.types";

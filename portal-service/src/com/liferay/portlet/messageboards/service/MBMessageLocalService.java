@@ -100,8 +100,10 @@ public interface MBMessageLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		long userId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body)
+		long userId, long groupId, java.lang.String className, long classPK,
+		long threadId, long parentMessageId, java.lang.String subject,
+		java.lang.String body,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

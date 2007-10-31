@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.persistence.CompanyUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
@@ -73,7 +74,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
 			long groupId, String className, long classPK, long threadId,
-			long parentMessageId, String subject, String body)
+			long parentMessageId, String subject, String body,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		MBDiscussionPermission.check(
@@ -81,7 +83,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			ActionKeys.ADD_DISCUSSION);
 
 		return MBMessageLocalServiceUtil.addDiscussionMessage(
-			getUserId(), threadId, parentMessageId, subject, body);
+			getUserId(), groupId, className, classPK, threadId, parentMessageId,
+			subject, body, themeDisplay);
 	}
 
 	public MBMessage addMessage(

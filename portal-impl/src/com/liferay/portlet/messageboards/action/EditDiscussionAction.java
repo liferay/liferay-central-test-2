@@ -28,7 +28,9 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
@@ -114,6 +116,9 @@ public class EditDiscussionAction extends PortletAction {
 	}
 
 	protected MBMessage updateMessage(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
 		long groupId = PortalUtil.getPortletGroupId(req);
 		String className = ParamUtil.getString(req, "className");
 		long classPK = ParamUtil.getLong(req, "classPK");
@@ -133,7 +138,7 @@ public class EditDiscussionAction extends PortletAction {
 
 			message = MBMessageServiceUtil.addDiscussionMessage(
 				groupId, className, classPK, threadId, parentMessageId, subject,
-				body);
+				body, themeDisplay);
 		}
 		else {
 

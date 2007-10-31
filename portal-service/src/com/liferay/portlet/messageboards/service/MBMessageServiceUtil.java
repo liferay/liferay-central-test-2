@@ -51,13 +51,14 @@ package com.liferay.portlet.messageboards.service;
 public class MBMessageServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long groupId, java.lang.String className, long classPK, long threadId,
-		long parentMessageId, java.lang.String subject, java.lang.String body)
+		long parentMessageId, java.lang.String subject, java.lang.String body,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
 		return mbMessageService.addDiscussionMessage(groupId, className,
-			classPK, threadId, parentMessageId, subject, body);
+			classPK, threadId, parentMessageId, subject, body, themeDisplay);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(

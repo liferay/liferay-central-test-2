@@ -164,14 +164,17 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		long userId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body)
+		long userId, long groupId, java.lang.String className, long classPK,
+		long threadId, long parentMessageId, java.lang.String subject,
+		java.lang.String body,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.addDiscussionMessage(userId, threadId,
-			parentMessageId, subject, body);
+		return mbMessageLocalService.addDiscussionMessage(userId, groupId,
+			className, classPK, threadId, parentMessageId, subject, body,
+			themeDisplay);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(

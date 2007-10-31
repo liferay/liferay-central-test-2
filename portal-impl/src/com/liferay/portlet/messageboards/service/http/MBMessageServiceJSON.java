@@ -68,17 +68,6 @@ import org.json.JSONObject;
  *
  */
 public class MBMessageServiceJSON {
-	public static JSONObject addDiscussionMessage(long groupId,
-		java.lang.String className, long classPK, long threadId,
-		long parentMessageId, java.lang.String subject, java.lang.String body)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addDiscussionMessage(groupId,
-				className, classPK, threadId, parentMessageId, subject, body);
-
-		return MBMessageJSONSerializer.toJSONObject(returnValue);
-	}
-
 	public static JSONObject addMessage(long categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
