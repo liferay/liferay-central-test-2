@@ -82,4 +82,5 @@ FCKConfig.ImageUpload = false ;
 FCKConfig.FlashUpload = false ;
 
 var sOtherPluginPath = FCKConfig.BasePath.substr(0, FCKConfig.BasePath.length - 7) + 'editor/plugins/' ;
+
 FCKConfig.Plugins.Add('liferaypagebreak', null, sOtherPluginPath ) ;

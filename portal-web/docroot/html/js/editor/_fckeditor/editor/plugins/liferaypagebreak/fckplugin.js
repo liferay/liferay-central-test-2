@@ -22,25 +22,27 @@
 
 FCKToolbarItems.RegisterItem(
 	'LiferayPageBreak',
-	new FCKToolbarButton(
-		'LiferayPageBreak', FCKLang.Source, null, FCK_TOOLBARITEM_ONLYICON, true, true, 1 ) ) ;
+	new FCKToolbarButton('LiferayPageBreak', FCKLang.Source, null, FCK_TOOLBARITEM_ONLYICON, true, true, 1));
 
-var InsertLiferayPageBreakCommand=function(){
+var InsertLiferayPageBreakCommand = function() {
 };
 
-InsertLiferayPageBreakCommand.prototype.Execute=function(){
+InsertLiferayPageBreakCommand.prototype.Execute = function() {
 }
 
-InsertLiferayPageBreakCommand.GetState=function() {
-	return FCK_TRISTATE_OFF; //we dont want the button to be toggled
+InsertLiferayPageBreakCommand.GetState = function() {
+	return FCK_TRISTATE_OFF;
 }
 
-InsertLiferayPageBreakCommand.Execute=function() {
+InsertLiferayPageBreakCommand.Execute = function() {
 	FCK.Focus();
 	FCK.InsertHtml("@page_break@")
 }
 
-FCKCommands.RegisterCommand('LiferayPageBreak', InsertLiferayPageBreakCommand );
+FCKCommands.RegisterCommand('LiferayPageBreak', InsertLiferayPageBreakCommand);
+
 var oInsertVariables = new FCKToolbarButton('LiferayPageBreak', 'Insert page break');
+
 oInsertVariables.IconPath = FCKConfig.PluginsPath + 'liferaypagebreak/pagebreak.gif';
+
 FCKToolbarItems.RegisterItem('LiferayPageBreak', oInsertVariables);

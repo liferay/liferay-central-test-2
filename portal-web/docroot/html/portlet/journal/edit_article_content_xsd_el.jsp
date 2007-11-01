@@ -141,7 +141,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 							<liferay-ui:input-editor
 								name='<%= renderResponse.getNamespace() + "structure_el" + count.getValue() + "_content" %>'
 								editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
-								toolbarSet="liferay-article" 
+								toolbarSet="liferay-article"
 								initMethod='<%= "initEditor" + count.getValue() %>'
 								onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>'
 								height="250"

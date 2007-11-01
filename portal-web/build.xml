@@ -417,6 +417,11 @@
 					<fileset dir="docroot/html/js/editor/_codepress" />
 				</copy>
 			</then>
+			<else>
+				<copy todir="docroot/html/js/editor/codepress" overwrite="no">
+					<fileset dir="docroot/html/js/editor/_codepress" />
+				</copy>
+			</else>
 		</if>
 	</target>
 
