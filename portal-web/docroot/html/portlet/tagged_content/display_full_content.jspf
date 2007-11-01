@@ -136,13 +136,15 @@
 				articlePageURL.setParameter("cur", String.valueOf(cur));
 				%>
 
+				<br/>
+				
 				<liferay-ui:page-iterator
 					curParam="<%= "page" %>"
 					curValue="<%= articleDisplay.getCurrentPage() %>"
 					delta="<%= 1 %>"
 					maxPages="<%= 25 %>"
 					total="<%= articleDisplay.getNumberOfPages() %>"
-					type="simple"
+					type="article"
 					url="<%= articlePageURL.toString() %>"
 				/>
 

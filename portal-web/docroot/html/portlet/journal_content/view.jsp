@@ -89,7 +89,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 						delta="<%= 1 %>"
 						maxPages="<%= 25 %>"
 						total="<%= articleDisplay.getNumberOfPages() %>"
-						type="simple"
+						type="article"
 						url="<%= portletURL.toString() %>"
 					/>
 

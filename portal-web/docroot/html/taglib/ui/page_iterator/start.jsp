@@ -61,31 +61,33 @@ else {
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
 
-<script type="text/javascript">
-	function <%= namespace %>submitPageIterator() {
-		var curValue = jQuery("option:selected", this).val();
+<c:if test='<%= type.equals("regular") %>'>
+	<script type="text/javascript">
+		function <%= namespace %>submitPageIterator() {
+			var curValue = jQuery("option:selected", this).val();
 
-		if (<%= Validator.isNotNull(url) %>) {
-			var href = "<%= url + curParam %>" + "=" + curValue + "<%= urlAnchor %>";
+			if (<%= Validator.isNotNull(url) %>) {
+				var href = "<%= url + curParam %>" + "=" + curValue + "<%= urlAnchor %>";
 
-			self.location = href;
+				self.location = href;
+			}
+			else {
+				document.<%= formName %>.<%= curParam %>.value = curValue;
+
+				<%= jsCall %>;
+			}
 		}
-		else {
-			document.<%= formName %>.<%= curParam %>.value = curValue;
 
-			<%= jsCall %>;
-		}
-	}
-
-	jQuery(
-		function() {
-			jQuery('.<%= namespace %>pageIteratorValue').change(<%= namespace %>submitPageIterator);
-		}
-	);
-</script>
+		jQuery(
+			function() {
+				jQuery('.<%= namespace %>pageIteratorValue').change(<%= namespace %>submitPageIterator);
+			}
+		);
+	</script>
+</c:if>
 
 <div class="taglib-page-iterator">
-	<c:if test='<%= !type.equals("simple") %>'>
+	<c:if test='<%= type.equals("regular") %>'>
 		<div class="search-results">
 			<c:choose>
 				<c:when test="<%= total > resultRowsSize %>">
@@ -104,10 +106,61 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			</c:choose>
 		</div>
 	</c:if>
+	<c:if test='<%= type.equals("article") %>'>
+		<div class="search-results">
+			<c:if test="<%= total > resultRowsSize %>">
+				<liferay-ui:message key="pages"/>:
+				<%
+				int pagesIteratorMax = maxPages;
+				int pagesIteratorBegin = 1;
+				int pagesIteratorEnd = pages;
+
+				if (pages > pagesIteratorMax) {
+					pagesIteratorBegin = curValue - pagesIteratorMax;
+					pagesIteratorEnd = curValue + pagesIteratorMax;
+
+					if (pagesIteratorBegin < 1) {
+						pagesIteratorBegin = 1;
+					}
+
+					if (pagesIteratorEnd > pages) {
+						pagesIteratorEnd = pages;
+					}
+				}
+
+				StringMaker sm = new StringMaker();
+				for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
+					if (i == curValue) {
+						sm.append("<b class='journal-article-page-number'>");
+					}
+					else {
+						sm.append("<a class='journal-article-page-number' href='");
+						sm.append(_getHREF(formName, curParam, i - 1, jsCall, url, urlAnchor));
+						sm.append("'>");
+					}
+
+					sm.append(i);
+
+					if (i == curValue) {
+						sm.append("</b>");
+					}
+					else {
+						sm.append("</a>");
+					}
+
+					sm.append("&nbsp;&nbsp;");
+				}
+				%>
+
+				<%= sm.toString() %>
+
+			</c:if>
+		</div>
+	</c:if>
 
 	<c:if test="<%= total > delta %>">
 		<div class="search-pages">
-			<c:if test='<%= !type.equals("simple") %>'>
+			<c:if test='<%= type.equals("regular") %>'>
 				<div class="page-selector">
 					<liferay-ui:message key="page" />
 
@@ -151,7 +204,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			</c:if>
 
 			<div class="page-links">
-				<c:if test='<%= !type.equals("simple") %>'>
+				<c:if test='<%= type.equals("regular") %>'>
 					<c:choose>
 						<c:when test="<%= curValue != 1 %>">
 							<a class="first" href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
@@ -177,12 +230,12 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 					<c:when test="<%= curValue != 1 %>">
 						<a class="previous" href="<%= _getHREF(formName, curParam, curValue - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 					</c:when>
-					<c:when test='<%= !type.equals("simple") %>'>
+					<c:when test='<%= type.equals("regular") %>'>
 						<span class="previous">
 					</c:when>
 				</c:choose>
 
-				<c:if test='<%= !(type.equals("simple") && curValue == 1) %>'>
+				<c:if test='<%= (type.equals("regular") || curValue != 1) %>'>
 					<liferay-ui:message key="previous" />
 				</c:if>
 
@@ -190,7 +243,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 					<c:when test="<%= curValue != 1 %>">
 						</a>
 					</c:when>
-					<c:when test='<%= !type.equals("simple") %>'>
+					<c:when test='<%= type.equals("regular") %>'>
 						</span>
 					</c:when>
 				</c:choose>
@@ -199,12 +252,12 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 					<c:when test="<%= curValue != pages %>">
 						<a class="next" href="<%= _getHREF(formName, curParam, curValue + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 					</c:when>
-					<c:when test='<%= !type.equals("simple") %>'>
+					<c:when test='<%= type.equals("regular") %>'>
 						<span class="next">
 					</c:when>
 				</c:choose>
 
-				<c:if test='<%= !(type.equals("simple") && curValue == pages) %>'>
+				<c:if test='<%= (type.equals("regular") || curValue != pages) %>'>
 					<liferay-ui:message key="next" />
 				</c:if>
 
@@ -212,12 +265,12 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 					<c:when test="<%= curValue != pages %>">
 						</a>
 					</c:when>
-					<c:when test='<%= !type.equals("simple") %>'>
+					<c:when test='<%= type.equals("regular") %>'>
 						</span>
 					</c:when>
 				</c:choose>
 
-				<c:if test='<%= !type.equals("simple") %>'>
+				<c:if test='<%= type.equals("regular") %>'>
 					<c:choose>
 						<c:when test="<%= curValue != pages %>">
 							<a class="last" href="<%= _getHREF(formName, curParam, pages, jsCall, url, urlAnchor) %>" target="<%= target %>">
