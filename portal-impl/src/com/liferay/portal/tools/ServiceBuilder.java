@@ -605,8 +605,20 @@ public class ServiceBuilder {
 					entityEl.attributeValue("remote-service"), true);
 				String persistenceClass = GetterUtil.getString(
 					entityEl.attributeValue("persistence-class"),
-					_packagePath + ".service.persistence."+ ejbName +
+					_packagePath + ".service.persistence." + ejbName +
 						"PersistenceImpl");
+
+				String finderClass = "";
+
+				if (FileUtil.exists(
+					_outputPath + "/service/persistence/" + ejbName +
+						"FinderImpl.java")) {
+
+					finderClass =
+						_packagePath + ".service.persistence." + ejbName +
+							"FinderImpl";
+				}
+
 				String dataSource = entityEl.attributeValue("data-source");
 				String sessionFactory = entityEl.attributeValue(
 					"session-factory");
@@ -854,9 +866,10 @@ public class ServiceBuilder {
 					new Entity(
 						_packagePath, _portletName, _portletShortName, ejbName,
 						table, uuid, localService, remoteService,
-						persistenceClass, dataSource, sessionFactory, txManager,
-						pkList, regularColList, collectionList, columnList,
-						order, finderList, referenceList, txRequiredList));
+						persistenceClass, finderClass, dataSource,
+						sessionFactory, txManager, pkList, regularColList,
+						collectionList, columnList, order, finderList,
+						referenceList, txRequiredList));
 			}
 
 			List exceptionList = new ArrayList();
@@ -891,6 +904,9 @@ public class ServiceBuilder {
 							_createPersistenceImpl(entity);
 							_createPersistence(entity);
 							_createPersistenceUtil(entity);
+
+							_createFinder(entity);
+							_createFinderUtil(entity);
 
 							_createModelImpl(entity);
 							_createExtendedModelImpl(entity);
@@ -1615,6 +1631,202 @@ public class ServiceBuilder {
 		if (!modelFile.exists()) {
 			writeFile(modelFile, sm.toString());
 		}
+	}
+
+	private void _createFinder(Entity entity) throws IOException {
+		if (!entity.hasFinderClass()) {
+			return;
+		}
+
+		JavaClass javaClass = _getJavaClass(_outputPath + "/service/persistence/" + entity.getName() + "FinderImpl.java");
+
+		JavaMethod[] methods = javaClass.getMethods();
+
+		StringMaker sm = new StringMaker();
+
+		// Package
+
+		sm.append("package " + _packagePath + ".service.persistence;");
+
+		// Class declaration
+
+		sm.append("public interface " + entity.getName() + "Finder {");
+
+		// Methods
+
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
+
+			String methodName = javaMethod.getName();
+
+			if (!javaMethod.isConstructor() && javaMethod.isPublic()) {
+				sm.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+
+				JavaParameter[] parameters = javaMethod.getParameters();
+
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
+
+					sm.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+
+					if ((j + 1) != parameters.length) {
+						sm.append(", ");
+					}
+				}
+
+				sm.append(")");
+
+				Type[] thrownExceptions = javaMethod.getExceptions();
+
+				if (thrownExceptions.length > 0) {
+					sm.append(" throws ");
+
+					for (int j = 0; j < thrownExceptions.length; j++) {
+						Type thrownException = thrownExceptions[j];
+
+						sm.append(thrownException.getValue());
+
+						if ((j + 1) != thrownExceptions.length) {
+							sm.append(", ");
+						}
+					}
+				}
+
+				sm.append(";");
+			}
+		}
+
+		// Class close brace
+
+		sm.append("}");
+
+		// Write file
+
+		File ejbFile = new File(_serviceOutputPath + "/service/persistence/" + entity.getName() + "Finder.java");
+
+		writeFile(ejbFile, sm.toString());
+	}
+
+	private void _createFinderUtil(Entity entity) throws IOException {
+		if (!entity.hasFinderClass()) {
+			return;
+		}
+
+		JavaClass javaClass = _getJavaClass(_outputPath + "/service/persistence/" + entity.getName() + "FinderImpl.java");
+
+		JavaMethod[] methods = javaClass.getMethods();
+
+		StringMaker sm = new StringMaker();
+
+		// Package
+
+		sm.append("package " + _packagePath + ".service.persistence;");
+
+		// Class declaration
+
+		sm.append("public class " + entity.getName() + "FinderUtil {");
+
+		// Methods
+
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
+
+			String methodName = javaMethod.getName();
+
+			if (!javaMethod.isConstructor() && javaMethod.isPublic()) {
+				sm.append("public static " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+
+				JavaParameter[] parameters = javaMethod.getParameters();
+
+				String p0Name = "";
+
+				if (parameters.length > 0) {
+					p0Name = parameters[0].getName();
+				}
+
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
+
+					sm.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+
+					if ((j + 1) != parameters.length) {
+						sm.append(", ");
+					}
+				}
+
+				sm.append(")");
+
+				Type[] thrownExceptions = javaMethod.getExceptions();
+
+				if (thrownExceptions.length > 0) {
+					sm.append(" throws ");
+
+					for (int j = 0; j < thrownExceptions.length; j++) {
+						Type thrownException = thrownExceptions[j];
+
+						sm.append(thrownException.getValue());
+
+						if ((j + 1) != thrownExceptions.length) {
+							sm.append(", ");
+						}
+					}
+				}
+
+				sm.append(" {");
+
+				if (!javaMethod.getReturns().getValue().equals("void")) {
+					sm.append("return ");
+				}
+
+				sm.append("getFinder()." + methodName + "(");
+
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
+
+					sm.append(javaParameter.getName());
+
+					if ((j + 1) != parameters.length) {
+						sm.append(", ");
+					}
+				}
+
+				sm.append(");");
+				sm.append("}");
+			}
+		}
+
+		sm.append("public static " + entity.getName() + "Finder getFinder() {");
+		sm.append("return _getUtil()._finder;");
+		sm.append("}");
+
+		sm.append("public void setFinder(" + entity.getName() + "Finder finder) {");
+		sm.append("_finder = finder;");
+		sm.append("}");
+
+		sm.append("private static " + entity.getName() + "FinderUtil _getUtil() {");
+		sm.append("if (_util == null) {");
+		sm.append("_util = (" + entity.getName() + "FinderUtil)" + _beanLocatorUtilPackage + ".BeanLocatorUtil.locate(_UTIL);");
+		sm.append("}");
+		sm.append("return _util;");
+		sm.append("}");
+
+		// Fields
+
+		sm.append("private static final String _UTIL = " + entity.getName() + "FinderUtil.class.getName();");
+
+		sm.append("private static " + entity.getName() + "FinderUtil _util;");
+
+		sm.append("private " + entity.getName() + "Finder _finder;");
+
+		// Class close brace
+
+		sm.append("}");
+
+		// Write file
+
+		File ejbFile = new File(_serviceOutputPath + "/service/persistence/" + entity.getName() + "FinderUtil.java");
+
+		writeFile(ejbFile, sm.toString());
 	}
 
 	private void _createFinderCache() throws IOException {
@@ -5102,9 +5314,17 @@ public class ServiceBuilder {
 
 		// Write file
 
-		File ejbFile = new File(_outputPath + "/service/persistence/" + entity.getName() + "Util.java");
+		File ejbFile = new File(_serviceOutputPath + "/service/persistence/" + entity.getName() + "Util.java");
 
 		writeFile(ejbFile, sm.toString());
+
+		ejbFile = new File(_outputPath + "/service/persistence/" + entity.getName() + "Util.java");
+
+		if (ejbFile.exists()) {
+			System.out.println("Relocating " + ejbFile);
+
+			ejbFile.delete();
+		}
 	}
 
 	private void _createPool(Entity entity) throws IOException {
@@ -5510,6 +5730,11 @@ public class ServiceBuilder {
 			if (tempEntity.hasColumns()) {
 				sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "Persistence;");
 				sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "Util;");
+
+				if (tempEntity.hasFinderClass()) {
+					sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "Finder;");
+					sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "FinderUtil;");
+				}
 			}
 		}
 
@@ -5580,6 +5805,16 @@ public class ServiceBuilder {
 				sm.append("public void set" + tempEntity.getName() + "Persistence(" + tempEntity.getName() + "Persistence " + tempEntity.getVarName() + "Persistence) {");
 				sm.append("this." + tempEntity.getVarName() + "Persistence = " + tempEntity.getVarName() + "Persistence;");
 				sm.append("}");
+
+				if (tempEntity.hasFinderClass()) {
+					sm.append("public " + tempEntity.getName() + "Finder get" + tempEntity.getName() + "Finder() {");
+					sm.append("return " + tempEntity.getVarName() + "Finder;");
+					sm.append("}");
+
+					sm.append("public void set" + tempEntity.getName() + "Finder(" + tempEntity.getName() + "Finder " + tempEntity.getVarName() + "Finder) {");
+					sm.append("this." + tempEntity.getVarName() + "Finder = " + tempEntity.getVarName() + "Finder;");
+					sm.append("}");
+				}
 			}
 		}
 
@@ -5613,6 +5848,12 @@ public class ServiceBuilder {
 				sm.append("if (" + tempEntity.getVarName() + "Persistence == null) {");
 				sm.append(tempEntity.getVarName() + "Persistence = " + tempEntity.getName() + "Util.getPersistence();");
 				sm.append("}");
+
+				if (tempEntity.hasFinderClass()) {
+					sm.append("if (" + tempEntity.getVarName() + "Finder == null) {");
+					sm.append(tempEntity.getVarName() + "Finder = " + tempEntity.getName() + "FinderUtil.getFinder();");
+					sm.append("}");
+				}
 			}
 		}
 
@@ -5640,6 +5881,10 @@ public class ServiceBuilder {
 
 			if (tempEntity.hasColumns()) {
 				sm.append("protected " + tempEntity.getName() + "Persistence " + tempEntity.getVarName() + "Persistence;");
+
+				if (tempEntity.hasFinderClass()) {
+					sm.append("protected " + tempEntity.getName() + "Finder " + tempEntity.getVarName() + "Finder;");
+				}
 			}
 		}
 
@@ -6743,6 +6988,12 @@ public class ServiceBuilder {
 					sm.append("\t\t<property name=\"" + tempEntityName + "Persistence\">\n");
 					sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "PersistenceImpl\" />\n");
 					sm.append("\t\t</property>\n");
+
+					if (tempEntity.hasFinderClass()) {
+						sm.append("\t\t<property name=\"" + tempEntityName + "Finder\">\n");
+						sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "FinderImpl\" />\n");
+						sm.append("\t\t</property>\n");
+					}
 				}
 			}
 
@@ -6800,6 +7051,16 @@ public class ServiceBuilder {
 			sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service.persistence." + entity.getName() + "PersistenceImpl\" />\n");
 			sm.append("\t\t</property>\n");
 			sm.append("\t</bean>\n");
+
+			if (entity.hasFinderClass()) {
+				sm.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "FinderImpl\" class=\"" + entity.getFinderClass() + "\" lazy-init=\"true\" />\n");
+
+				sm.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "FinderUtil\" class=\"" + _packagePath + ".service.persistence." + entity.getName() + "FinderUtil\" lazy-init=\"true\">\n");
+				sm.append("\t\t<property name=\"finder\">\n");
+				sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service.persistence." + entity.getName() + "FinderImpl\" />\n");
+				sm.append("\t\t</property>\n");
+				sm.append("\t</bean>\n");
+			}
 		}
 	}
 
@@ -7355,7 +7616,13 @@ public class ServiceBuilder {
 
 		JavaDocBuilder builder = new JavaDocBuilder();
 
-		builder.addSource(new File(fileName));
+		File file = new File(fileName);
+
+		if (!file.exists()) {
+			return null;
+		}
+
+		builder.addSource(file);
 
 		return builder.getClassByName(className);
 	}

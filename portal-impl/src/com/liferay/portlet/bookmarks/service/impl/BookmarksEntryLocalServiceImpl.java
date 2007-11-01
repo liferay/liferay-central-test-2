@@ -33,7 +33,6 @@ import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBaseImpl;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -251,43 +250,43 @@ public class BookmarksEntryLocalServiceImpl
 	public int getFoldersEntriesCount(List folderIds)
 		throws SystemException {
 
-		return BookmarksEntryFinder.countByFolderIds(folderIds);
+		return bookmarksEntryFinder.countByFolderIds(folderIds);
 	}
 
 	public List getGroupEntries(long groupId, int begin, int end)
 		throws SystemException {
 
-		return BookmarksEntryFinder.findByGroupId(groupId, begin, end);
+		return bookmarksEntryFinder.findByGroupId(groupId, begin, end);
 	}
 
 	public List getGroupEntries(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		if (userId <= 0) {
-			return BookmarksEntryFinder.findByGroupId(groupId, begin, end);
+			return bookmarksEntryFinder.findByGroupId(groupId, begin, end);
 		}
 		else {
-			return BookmarksEntryFinder.findByG_U(groupId, userId, begin, end);
+			return bookmarksEntryFinder.findByG_U(groupId, userId, begin, end);
 		}
 	}
 
 	public int getGroupEntriesCount(long groupId) throws SystemException {
-		return BookmarksEntryFinder.countByGroupId(groupId);
+		return bookmarksEntryFinder.countByGroupId(groupId);
 	}
 
 	public int getGroupEntriesCount(long groupId, long userId)
 		throws SystemException {
 
 		if (userId <= 0) {
-			return BookmarksEntryFinder.countByGroupId(groupId);
+			return bookmarksEntryFinder.countByGroupId(groupId);
 		}
 		else {
-			return BookmarksEntryFinder.countByG_U(groupId, userId);
+			return bookmarksEntryFinder.countByG_U(groupId, userId);
 		}
 	}
 
 	public List getNoAssetEntries() throws SystemException {
-		return BookmarksEntryFinder.findByNoAssets();
+		return bookmarksEntryFinder.findByNoAssets();
 	}
 
 	public BookmarksEntry openEntry(long entryId)

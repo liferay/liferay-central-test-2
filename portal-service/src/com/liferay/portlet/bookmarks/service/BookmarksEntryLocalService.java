@@ -62,6 +62,11 @@ public interface BookmarksEntryLocalService {
 	public void setBookmarksEntryPersistence(
 		com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence bookmarksEntryPersistence);
 
+	public com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder getBookmarksEntryFinder();
+
+	public void setBookmarksEntryFinder(
+		com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder bookmarksEntryFinder);
+
 	public com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence getBookmarksFolderPersistence();
 
 	public void setBookmarksFolderPersistence(

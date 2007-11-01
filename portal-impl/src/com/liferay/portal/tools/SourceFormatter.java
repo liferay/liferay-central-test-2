@@ -95,7 +95,7 @@ public class SourceFormatter {
 					"**\\service\\impl\\*.java", "**\\service\\jms\\*.java",
 					"**\\service\\permission\\*.java",
 					"**\\service\\persistence\\BasePersistence.java",
-					"**\\service\\persistence\\*Finder.java",
+					"**\\service\\persistence\\*FinderImpl.java",
 					"**\\portal-service\\**\\liferay\\counter\\**.java",
 					"**\\portal-service\\**\\liferay\\documentlibrary\\**.java",
 					"**\\portal-service\\**\\liferay\\lock\\**.java",

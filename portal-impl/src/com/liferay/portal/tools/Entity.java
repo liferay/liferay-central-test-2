@@ -23,6 +23,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.TextFormatter;
 
 import java.util.List;
@@ -46,18 +47,19 @@ public class Entity {
 	}
 
 	public Entity(String name) {
-		this(null, null, null, name, null, false, false, true, null, null, null,
-			 null, null, null, null, null, null, null, null, null);
+		this(
+			null, null, null, name, null, false, false, true, null, null, null,
+			null, null, null, null, null, null, null, null, null, null);
 	}
 
-	public Entity(String packagePath, String portletName,
-				  String portletShortName, String name, String table,
-				  boolean uuid, boolean localService, boolean remoteService,
-				  String persistenceClass, String dataSource,
-				  String sessionFactory, String txManager, List pkList,
-				  List regularColList, List collectionList, List columnList,
-				  EntityOrder order, List finderList, List referenceList,
-				  List txRequiredList) {
+	public Entity(
+		String packagePath, String portletName, String portletShortName,
+		String name, String table, boolean uuid, boolean localService,
+		boolean remoteService, String persistenceClass, String finderClass,
+		String dataSource, String sessionFactory, String txManager, List pkList,
+		List regularColList, List collectionList, List columnList,
+		EntityOrder order, List finderList, List referenceList,
+		List txRequiredList) {
 
 		_packagePath = packagePath;
 		_portletName = portletName;
@@ -68,6 +70,7 @@ public class Entity {
 		_localService = localService;
 		_remoteService = remoteService;
 		_persistenceClass = persistenceClass;
+		_finderClass = finderClass;
 		_dataSource = GetterUtil.getString(dataSource, "liferayDataSource");
 		_sessionFactory = GetterUtil.getString(
 			sessionFactory, "liferaySessionFactory");
@@ -129,6 +132,19 @@ public class Entity {
 
 	public String getPersistenceClass() {
 		return _persistenceClass;
+	}
+
+	public String getFinderClass() {
+		return _finderClass;
+	}
+
+	public boolean hasFinderClass() {
+		if (Validator.isNull(_finderClass)) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	public String getDataSource() {
@@ -280,6 +296,7 @@ public class Entity {
 	private boolean _localService;
 	private boolean _remoteService;
 	private String _persistenceClass;
+	private String _finderClass;
 	private String _dataSource;
 	private String _sessionFactory;
 	private String _txManager;
