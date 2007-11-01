@@ -125,8 +125,13 @@
 
 				PortletURL articlePagerURL = renderResponse.createRenderURL();
 
+				String pagerRedirect = ParamUtil.getString(request, "redirect");
+				if (Validator.isNull(pagerRedirect)) {
+					pagerRedirect = currentURL;
+				}
+
 				articlePagerURL.setParameter("struts_action", "/tagged_content/view_content");
-				articlePagerURL.setParameter("redirect", ParamUtil.getString(request, "redirect"));
+				articlePagerURL.setParameter("redirect", pagerRedirect);
 				articlePagerURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 				articlePagerURL.setParameter("cur", String.valueOf(cur));
 				%>
