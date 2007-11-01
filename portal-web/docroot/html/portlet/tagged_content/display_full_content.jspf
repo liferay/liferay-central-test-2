@@ -136,8 +136,8 @@
 				articlePageURL.setParameter("cur", String.valueOf(cur));
 				%>
 
-				<br/>
-				
+				<br />
+
 				<liferay-ui:page-iterator
 					curParam="<%= "page" %>"
 					curValue="<%= articleDisplay.getCurrentPage() %>"
@@ -148,7 +148,7 @@
 					url="<%= articlePageURL.toString() %>"
 				/>
 
-				<br/>
+				<br />
 			</c:if>
 		</c:if>
 	</c:when>

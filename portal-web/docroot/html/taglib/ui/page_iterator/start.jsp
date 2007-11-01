@@ -106,10 +106,12 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			</c:choose>
 		</div>
 	</c:if>
+
 	<c:if test='<%= type.equals("article") %>'>
 		<div class="search-results">
 			<c:if test="<%= total > resultRowsSize %>">
-				<liferay-ui:message key="pages"/>:
+				<liferay-ui:message key="pages" />:
+
 				<%
 				int pagesIteratorMax = maxPages;
 				int pagesIteratorBegin = 1;
@@ -129,6 +131,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 				}
 
 				StringMaker sm = new StringMaker();
+
 				for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
 					if (i == curValue) {
 						sm.append("<b class='journal-article-page-number'>");
@@ -153,7 +156,6 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 				%>
 
 				<%= sm.toString() %>
-
 			</c:if>
 		</div>
 	</c:if>
