@@ -63,23 +63,6 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 				PortletURL portletURL = renderResponse.createRenderURL();
 				%>
 
-				<c:if test="<%= articleDisplay.isPaginate() %>">
-					<liferay-ui:page-iterator
-						curParam='<%= "page" %>'
-						curValue="<%= articleDisplay.getCurrentPage() %>"
-						delta="<%= 1 %>"
-						maxPages="<%= 25 %>"
-						total="<%= articleDisplay.getNumberOfPages() %>"
-						url="<%= portletURL.toString() %>"
-					/>
-
-					<br />
-				</c:if>
-
-				<span class="journal-content-article" id="<%= articleDisplay.getGroupId() %>_<%= articleDisplay.getArticleId() %>_<%= articleDisplay.getVersion() %>">
-				<%= content %>
-				</span>
-
 				<c:if test="<%= showAvailableLocales %>">
 
 					<%
@@ -93,6 +76,24 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 							<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
 						</div>
 					</c:if>
+				</c:if>
+
+				<span class="journal-content-article" id="<%= articleDisplay.getGroupId() %>_<%= articleDisplay.getArticleId() %>_<%= articleDisplay.getVersion() %>">
+				<%= content %>
+				</span>
+
+				<c:if test="<%= articleDisplay.isPaginate() %>">
+					<liferay-ui:page-iterator
+						curParam='<%= "page" %>'
+						curValue="<%= articleDisplay.getCurrentPage() %>"
+						delta="<%= 1 %>"
+						maxPages="<%= 25 %>"
+						total="<%= articleDisplay.getNumberOfPages() %>"
+						type="simple"
+						url="<%= portletURL.toString() %>"
+					/>
+
+					<br />
 				</c:if>
 			</c:when>
 			<c:when test="<%= portletDisplay.isShowConfigurationIcon() %>">

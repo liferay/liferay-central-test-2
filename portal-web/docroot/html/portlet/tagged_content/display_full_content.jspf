@@ -85,7 +85,7 @@
 		try {
 			double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
 			String languageId = LanguageUtil.getLanguageId(request);
-			int page = ParamUtil.getInteger(request, "page", 1);
+			int articlePage = ParamUtil.getInteger(request, "page", 1);
 			String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
 			articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), latestApprovedVersion, null, languageId, articlePage, themeDisplay, xmlRequest);
@@ -103,11 +103,31 @@
 
 			<c:if test="<%= articleDisplay.isPaginate() %>">
 
+				<c:if test="<%= showAvailableLocales %>">
+
+					<%
+					String[] availableLocales = articleDisplay.getAvailableLocales();
+					%>
+
+					<c:if test="<%= availableLocales.length > 0 %>">
+						<div>
+							<br />
+
+							<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
+						</div>
+					</c:if>
+				</c:if>
+
+				<%= articleDisplay.getContent() %>
+
 				<%
 				int cur = ParamUtil.getInteger(request, "cur");
 
 				PortletURL articlePagerURL = renderResponse.createRenderURL();
 
+				articlePagerURL.setParameter("struts_action", "/tagged_content/view_content");
+				articlePagerURL.setParameter("redirect", ParamUtil.getString(request, "redirect"));
+				articlePagerURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
 				articlePagerURL.setParameter("cur", String.valueOf(cur));
 				%>
 
@@ -117,27 +137,11 @@
 					delta="<%= 1 %>"
 					maxPages="<%= 25 %>"
 					total="<%= articleDisplay.getNumberOfPages() %>"
+					type="simple"
 					url="<%= articlePagerURL.toString() %>"
 				/>
 
 				<br/>
-			</c:if>
-
-			<%= articleDisplay.getContent() %>
-
-			<c:if test="<%= showAvailableLocales %>">
-
-				<%
-				String[] availableLocales = articleDisplay.getAvailableLocales();
-				%>
-
-				<c:if test="<%= availableLocales.length > 0 %>">
-					<div>
-						<br />
-
-						<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
-					</div>
-				</c:if>
 			</c:if>
 		</c:if>
 	</c:when>

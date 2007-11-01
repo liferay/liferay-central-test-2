@@ -27,9 +27,7 @@
 <%
 String tabs2 = ParamUtil.getString(request, "tabs2");
 
-String redirect = ParamUtil.getString(request, "backURL");
-
-redirect = ParamUtil.getString(request, "redirect");
+String redirect = ParamUtil.getString(request, "redirect");
 
 String typeSelection = ParamUtil.getString(request, "typeSelection", StringPool.BLANK);
 
