@@ -90,6 +90,18 @@ public class WikiPageResourceLocalServiceUtil {
 		wikiPageResourceLocalService.setWikiPagePersistence(wikiPagePersistence);
 	}
 
+	public static com.liferay.portlet.wiki.service.persistence.WikiPageFinder getWikiPageFinder() {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
+		return wikiPageResourceLocalService.getWikiPageFinder();
+	}
+
+	public static void setWikiPageFinder(
+		com.liferay.portlet.wiki.service.persistence.WikiPageFinder wikiPageFinder) {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+		wikiPageResourceLocalService.setWikiPageFinder(wikiPageFinder);
+	}
+
 	public static com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence getWikiPageResourcePersistence() {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
 

@@ -89,6 +89,18 @@ public class IGImageLocalServiceUtil {
 		igImageLocalService.setIGImagePersistence(igImagePersistence);
 	}
 
+	public static com.liferay.portlet.imagegallery.service.persistence.IGImageFinder getIGImageFinder() {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getIGImageFinder();
+	}
+
+	public static void setIGImageFinder(
+		com.liferay.portlet.imagegallery.service.persistence.IGImageFinder igImageFinder) {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		igImageLocalService.setIGImageFinder(igImageFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 		igImageLocalService.afterPropertiesSet();

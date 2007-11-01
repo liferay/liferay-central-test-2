@@ -27,6 +27,8 @@ import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.calendar.service.CalEventLocalService;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceFactory;
 import com.liferay.portlet.calendar.service.CalEventService;
+import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
+import com.liferay.portlet.calendar.service.persistence.CalEventFinderUtil;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
 
@@ -57,6 +59,14 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 		this.calEventPersistence = calEventPersistence;
 	}
 
+	public CalEventFinder getCalEventFinder() {
+		return calEventFinder;
+	}
+
+	public void setCalEventFinder(CalEventFinder calEventFinder) {
+		this.calEventFinder = calEventFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (calEventLocalService == null) {
 			calEventLocalService = CalEventLocalServiceFactory.getImpl();
@@ -65,8 +75,13 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 		if (calEventPersistence == null) {
 			calEventPersistence = CalEventUtil.getPersistence();
 		}
+
+		if (calEventFinder == null) {
+			calEventFinder = CalEventFinderUtil.getFinder();
+		}
 	}
 
 	protected CalEventLocalService calEventLocalService;
 	protected CalEventPersistence calEventPersistence;
+	protected CalEventFinder calEventFinder;
 }

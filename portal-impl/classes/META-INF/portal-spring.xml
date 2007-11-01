@@ -2395,6 +2395,12 @@
 			<ref bean="com.liferay.portlet.calendar.service.persistence.CalEventPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventFinderImpl" class="com.liferay.portlet.calendar.service.persistence.CalEventFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventFinderUtil" class="com.liferay.portlet.calendar.service.persistence.CalEventFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.calendar.service.persistence.CalEventFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.professional" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -2784,6 +2790,12 @@
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImageUtil" class="com.liferay.portlet.imagegallery.service.persistence.IGImageUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinderImpl" class="com.liferay.portlet.imagegallery.service.persistence.IGImageFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinderUtil" class="com.liferay.portlet.imagegallery.service.persistence.IGImageFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.imagegallery.service.persistence.IGImageFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalService.professional" class="com.liferay.portlet.journal.service.impl.JournalArticleLocalServiceImpl" lazy-init="true" />
@@ -4740,6 +4752,12 @@
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPagePersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageFinderImpl" class="com.liferay.portlet.wiki.service.persistence.WikiPageFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPageFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.professional" class="com.liferay.portlet.wiki.service.impl.WikiPageResourceLocalServiceImpl" lazy-init="true" />

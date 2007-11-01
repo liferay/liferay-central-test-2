@@ -43,7 +43,6 @@ import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 import com.liferay.portlet.wiki.service.base.WikiPageLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
-import com.liferay.portlet.wiki.service.persistence.WikiPageFinder;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.portlet.wiki.util.Indexer;
 import com.liferay.portlet.wiki.util.NodeFilter;
@@ -223,7 +222,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public List getNoAssetPages() throws SystemException {
-		return WikiPageFinder.findByNoAssets();
+		return wikiPageFinder.findByNoAssets();
 	}
 
 	public List getLinks(long nodeId, String title) throws SystemException {
@@ -395,7 +394,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		cal.add(Calendar.WEEK_OF_YEAR, -1);
 
-		return WikiPageFinder.findByCreateDate(
+		return wikiPageFinder.findByCreateDate(
 			nodeId, cal.getTime(), false, begin, end);
 	}
 
@@ -404,7 +403,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		cal.add(Calendar.WEEK_OF_YEAR, -1);
 
-		return WikiPageFinder.countByCreateDate(nodeId, cal.getTime(), false);
+		return wikiPageFinder.countByCreateDate(nodeId, cal.getTime(), false);
 	}
 
 	public WikiPage revertPage(

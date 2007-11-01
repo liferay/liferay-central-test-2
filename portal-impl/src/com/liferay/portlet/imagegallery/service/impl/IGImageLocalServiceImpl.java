@@ -43,7 +43,6 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
-import com.liferay.portlet.imagegallery.service.persistence.IGImageFinder;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.FileUtil;
@@ -249,38 +248,38 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public int getFoldersImagesCount(List folderIds)
 		throws SystemException {
 
-		return IGImageFinder.countByFolderIds(folderIds);
+		return igImageFinder.countByFolderIds(folderIds);
 	}
 
 	public List getGroupImages(long groupId, int begin, int end)
 		throws SystemException {
 
-		return IGImageFinder.findByGroupId(groupId, begin, end);
+		return igImageFinder.findByGroupId(groupId, begin, end);
 	}
 
 	public List getGroupImages(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		if (userId <= 0) {
-			return IGImageFinder.findByGroupId(groupId, begin, end);
+			return igImageFinder.findByGroupId(groupId, begin, end);
 		}
 		else {
-			return IGImageFinder.findByG_U(groupId, userId, begin, end);
+			return igImageFinder.findByG_U(groupId, userId, begin, end);
 		}
 	}
 
 	public int getGroupImagesCount(long groupId) throws SystemException {
-		return IGImageFinder.countByGroupId(groupId);
+		return igImageFinder.countByGroupId(groupId);
 	}
 
 	public int getGroupImagesCount(long groupId, long userId)
 		throws SystemException {
 
 		if (userId <= 0) {
-			return IGImageFinder.countByGroupId(groupId);
+			return igImageFinder.countByGroupId(groupId);
 		}
 		else {
-			return IGImageFinder.countByG_U(groupId, userId);
+			return igImageFinder.countByG_U(groupId, userId);
 		}
 	}
 
@@ -312,7 +311,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public List getNoAssetImages() throws SystemException {
-		return IGImageFinder.findByNoAssets();
+		return igImageFinder.findByNoAssets();
 	}
 
 	public IGImage updateImage(

@@ -39,12 +39,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="IGImageFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="IGImageFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class IGImageFinder {
+public class IGImageFinderImpl implements IGImageFinder {
 
 	public static String COUNT_BY_FOLDER_IDS =
 		IGImageFinder.class.getName() + ".countByFolderIds";
@@ -64,9 +64,7 @@ public class IGImageFinder {
 	public static String FIND_BY_G_U =
 		IGImageFinder.class.getName() + ".findByG_U";
 
-	public static int countByFolderIds(List folderIds)
-		throws SystemException {
-
+	public int countByFolderIds(List folderIds) throws SystemException {
 		Session session = null;
 
 		try {
@@ -109,7 +107,7 @@ public class IGImageFinder {
 		}
 	}
 
-	public static int countByGroupId(long groupId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -145,7 +143,7 @@ public class IGImageFinder {
 		}
 	}
 
-	public static int countByG_U(long groupId, long userId)
+	public int countByG_U(long groupId, long userId)
 		throws SystemException {
 
 		Session session = null;
@@ -184,7 +182,7 @@ public class IGImageFinder {
 		}
 	}
 
-	public static List findByGroupId(long groupId, int begin, int end)
+	public List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -212,7 +210,7 @@ public class IGImageFinder {
 		}
 	}
 
-	public static List findByNoAssets() throws SystemException {
+	public List findByNoAssets() throws SystemException {
 		Session session = null;
 
 		try {
@@ -234,7 +232,7 @@ public class IGImageFinder {
 		}
 	}
 
-	public static List findByG_U(long groupId, long userId, int begin, int end)
+	public List findByG_U(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -263,7 +261,7 @@ public class IGImageFinder {
 		}
 	}
 
-	private static String _getFolderIds(List folderIds) {
+	private String _getFolderIds(List folderIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < folderIds.size(); i++) {

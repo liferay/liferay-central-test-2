@@ -77,6 +77,18 @@ public class CalEventLocalServiceUtil {
 		calEventLocalService.setCalEventPersistence(calEventPersistence);
 	}
 
+	public static com.liferay.portlet.calendar.service.persistence.CalEventFinder getCalEventFinder() {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.getCalEventFinder();
+	}
+
+	public static void setCalEventFinder(
+		com.liferay.portlet.calendar.service.persistence.CalEventFinder calEventFinder) {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.setCalEventFinder(calEventFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 		calEventLocalService.afterPropertiesSet();

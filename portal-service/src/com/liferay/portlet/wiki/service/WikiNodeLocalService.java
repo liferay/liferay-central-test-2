@@ -67,6 +67,11 @@ public interface WikiNodeLocalService {
 	public void setWikiPagePersistence(
 		com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence);
 
+	public com.liferay.portlet.wiki.service.persistence.WikiPageFinder getWikiPageFinder();
+
+	public void setWikiPageFinder(
+		com.liferay.portlet.wiki.service.persistence.WikiPageFinder wikiPageFinder);
+
 	public com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence getWikiPageResourcePersistence();
 
 	public void setWikiPageResourcePersistence(

@@ -38,12 +38,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="CalEventFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="CalEventFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CalEventFinder {
+public class CalEventFinderImpl implements CalEventFinder {
 
 	public static String FIND_BY_G_SD =
 		CalEventFinder.class.getName() + ".findByG_SD";
@@ -51,7 +51,7 @@ public class CalEventFinder {
 	public static String FIND_BY_REMINDBY =
 		CalEventFinder.class.getName() + ".findByRemindBy";
 
-	public static List findByG_SD(
+	public List findByG_SD(
 			long groupId, Date startDateGT, Date startDateLT,
 			boolean timeZoneSensitive)
 		throws SystemException {
@@ -88,7 +88,7 @@ public class CalEventFinder {
 		}
 	}
 
-	public static List findByRemindBy() throws SystemException {
+	public List findByRemindBy() throws SystemException {
 		Session session = null;
 
 		try {

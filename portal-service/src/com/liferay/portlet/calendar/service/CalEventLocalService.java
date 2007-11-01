@@ -62,6 +62,11 @@ public interface CalEventLocalService {
 	public void setCalEventPersistence(
 		com.liferay.portlet.calendar.service.persistence.CalEventPersistence calEventPersistence);
 
+	public com.liferay.portlet.calendar.service.persistence.CalEventFinder getCalEventFinder();
+
+	public void setCalEventFinder(
+		com.liferay.portlet.calendar.service.persistence.CalEventFinder calEventFinder);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,

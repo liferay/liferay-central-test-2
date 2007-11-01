@@ -61,7 +61,6 @@ import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
-import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
 import com.liferay.portlet.calendar.util.CalUtil;
 import com.liferay.util.Time;
@@ -341,7 +340,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public void checkEvents() throws PortalException, SystemException {
-		Iterator itr = CalEventFinder.findByRemindBy().iterator();
+		Iterator itr = calEventFinder.findByRemindBy().iterator();
 
 		while (itr.hasNext()) {
 			CalEvent event = (CalEvent)itr.next();
@@ -471,7 +470,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			// Time zone sensitive
 
-			Collection eventsCol1 = CalEventFinder.findByG_SD(
+			Collection eventsCol1 = calEventFinder.findByG_SD(
 				groupId, CalendarUtil.getGTDate(cal),
 				CalendarUtil.getLTDate(cal), true);
 
@@ -482,7 +481,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				cal.get(Calendar.MONTH),
 				cal.get(Calendar.DATE));
 
-			Collection eventsCol2 = CalEventFinder.findByG_SD(
+			Collection eventsCol2 = calEventFinder.findByG_SD(
 				groupId, CalendarUtil.getGTDate(tzICal),
 				CalendarUtil.getLTDate(tzICal), false);
 

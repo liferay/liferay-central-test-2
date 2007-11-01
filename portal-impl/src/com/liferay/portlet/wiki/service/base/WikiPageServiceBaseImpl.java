@@ -35,6 +35,8 @@ import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory;
 import com.liferay.portlet.wiki.service.WikiPageService;
 import com.liferay.portlet.wiki.service.persistence.WikiNodePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
+import com.liferay.portlet.wiki.service.persistence.WikiPageFinder;
+import com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPagePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil;
@@ -92,6 +94,14 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 		this.wikiPagePersistence = wikiPagePersistence;
 	}
 
+	public WikiPageFinder getWikiPageFinder() {
+		return wikiPageFinder;
+	}
+
+	public void setWikiPageFinder(WikiPageFinder wikiPageFinder) {
+		this.wikiPageFinder = wikiPageFinder;
+	}
+
 	public WikiPageResourceLocalService getWikiPageResourceLocalService() {
 		return wikiPageResourceLocalService;
 	}
@@ -131,6 +141,10 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 			wikiPagePersistence = WikiPageUtil.getPersistence();
 		}
 
+		if (wikiPageFinder == null) {
+			wikiPageFinder = WikiPageFinderUtil.getFinder();
+		}
+
 		if (wikiPageResourceLocalService == null) {
 			wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getImpl();
 		}
@@ -145,6 +159,7 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 	protected WikiNodePersistence wikiNodePersistence;
 	protected WikiPageLocalService wikiPageLocalService;
 	protected WikiPagePersistence wikiPagePersistence;
+	protected WikiPageFinder wikiPageFinder;
 	protected WikiPageResourceLocalService wikiPageResourceLocalService;
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
 }

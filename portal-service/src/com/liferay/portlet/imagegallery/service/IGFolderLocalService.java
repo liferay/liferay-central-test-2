@@ -67,6 +67,11 @@ public interface IGFolderLocalService {
 	public void setIGImagePersistence(
 		com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence);
 
+	public com.liferay.portlet.imagegallery.service.persistence.IGImageFinder getIGImageFinder();
+
+	public void setIGImageFinder(
+		com.liferay.portlet.imagegallery.service.persistence.IGImageFinder igImageFinder);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(

@@ -32,6 +32,8 @@ import com.liferay.portlet.imagegallery.service.IGImageService;
 import com.liferay.portlet.imagegallery.service.IGImageServiceFactory;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
+import com.liferay.portlet.imagegallery.service.persistence.IGImageFinder;
+import com.liferay.portlet.imagegallery.service.persistence.IGImageFinderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
 
@@ -89,6 +91,14 @@ public abstract class IGFolderLocalServiceBaseImpl
 		this.igImagePersistence = igImagePersistence;
 	}
 
+	public IGImageFinder getIGImageFinder() {
+		return igImageFinder;
+	}
+
+	public void setIGImageFinder(IGImageFinder igImageFinder) {
+		this.igImageFinder = igImageFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (igFolderPersistence == null) {
 			igFolderPersistence = IGFolderUtil.getPersistence();
@@ -105,10 +115,15 @@ public abstract class IGFolderLocalServiceBaseImpl
 		if (igImagePersistence == null) {
 			igImagePersistence = IGImageUtil.getPersistence();
 		}
+
+		if (igImageFinder == null) {
+			igImageFinder = IGImageFinderUtil.getFinder();
+		}
 	}
 
 	protected IGFolderPersistence igFolderPersistence;
 	protected IGImageLocalService igImageLocalService;
 	protected IGImageService igImageService;
 	protected IGImagePersistence igImagePersistence;
+	protected IGImageFinder igImageFinder;
 }
