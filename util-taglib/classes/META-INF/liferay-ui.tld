@@ -597,6 +597,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>toolbarSet</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>initMethod</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

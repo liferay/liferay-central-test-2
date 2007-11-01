@@ -561,6 +561,11 @@
 					<fileset dir="docroot/html/js/editor/_fckeditor" />
 				</copy>
 			</then>
+			<else>
+				<copy todir="docroot/html/js/editor/fckeditor" overwrite="no">
+					<fileset dir="docroot/html/js/editor/_fckeditor" />
+				</copy>
+			</else>
 		</if>
 	</target>
 

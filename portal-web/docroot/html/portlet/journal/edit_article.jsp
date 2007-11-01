@@ -762,7 +762,7 @@ String[] availableLocales = null;
 
 		<c:choose>
 			<c:when test="<%= structure == null %>">
-				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
+				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
 			</c:when>
 			<c:otherwise>
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">

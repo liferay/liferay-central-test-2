@@ -38,6 +38,7 @@ else {
 	editorImpl = PropsUtil.get(editorImpl);
 }
 
+String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
 String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
 String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 String height = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:height"), "400");
@@ -62,6 +63,11 @@ sm.append(HttpUtil.encodeURL(doAsUserId));
 
 sm.append("&editorImpl=");
 sm.append(editorImpl);
+
+if (Validator.isNotNull(toolbarSet)) {
+	sm.append("&toolbarSet=");
+	sm.append(toolbarSet);
+}
 
 if (Validator.isNotNull(initMethod)) {
 	sm.append("&initMethod=");

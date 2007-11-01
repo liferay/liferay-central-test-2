@@ -39,6 +39,7 @@ public class InputEditorTag extends IncludeTag {
 
 		req.setAttribute("liferay-ui:input-editor:name", _name);
 		req.setAttribute("liferay-ui:input-editor:editorImpl", _editorImpl);
+		req.setAttribute("liferay-ui:input-editor:toolbarSet", _toolbarSet);
 		req.setAttribute("liferay-ui:input-editor:initMethod", _initMethod);
 		req.setAttribute(
 			"liferay-ui:input-editor:onChangeMethod", _onChangeMethod);
@@ -54,6 +55,10 @@ public class InputEditorTag extends IncludeTag {
 
 	public void setEditorImpl(String editorImpl) {
 		_editorImpl = editorImpl;
+	}
+
+	public void setToolbarSet(String toolbarSet) {
+		_toolbarSet = toolbarSet;
 	}
 
 	public void setInitMethod(String initMethod) {
@@ -80,6 +85,7 @@ public class InputEditorTag extends IncludeTag {
 
 	private String _name;
 	private String _editorImpl;
+	private String _toolbarSet;
 	private String _initMethod;
 	private String _onChangeMethod;
 	private String _height;

@@ -50,6 +50,21 @@ FCKConfig.ToolbarSets["liferay"] = [
 	['Image','Flash','Table','-','Smiley','SpecialChar']
 ] ;
 
+FCKConfig.ToolbarSets["liferay-article"] = [
+	['FontName','FontSize','-','TextColor','BGColor'],
+	['Bold','Italic','Underline','StrikeThrough'],
+	['Subscript','Superscript'],
+	'/',
+	['Undo','Redo','-','Cut','Copy','Paste','PasteText','PasteWord','-','SelectAll','RemoveFormat'],
+	['Find','Replace','SpellCheck'],
+	['OrderedList','UnorderedList','-','Outdent','Indent'],
+	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+	'/',
+	['Source'],
+	['Link','Unlink','Anchor'],
+	['Image','Flash','Table','-','Smiley','SpecialChar','LiferayPageBreak']
+] ;
+
 FCKConfig.ToolbarSets["edit-in-place"] = [
 	['Style','FontFormat'],
 	['Bold','Italic','Underline','StrikeThrough'],
@@ -65,3 +80,6 @@ FCKConfig.FlashBrowser = false ;
 FCKConfig.LinkUpload = false ;
 FCKConfig.ImageUpload = false ;
 FCKConfig.FlashUpload = false ;
+
+var sOtherPluginPath = FCKConfig.BasePath.substr(0, FCKConfig.BasePath.length - 7) + 'editor/plugins/' ;
+FCKConfig.Plugins.Add('liferaypagebreak', null, sOtherPluginPath ) ;
