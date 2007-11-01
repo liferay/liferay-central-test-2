@@ -23,6 +23,7 @@
 %>
 
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.util.PropsUtil"%>
 <%@ page import="com.liferay.util.HttpUtil" %>
 
 <%
@@ -83,4 +84,10 @@ FCKConfig.FlashUpload = false ;
 
 var sOtherPluginPath = FCKConfig.BasePath.substr(0, FCKConfig.BasePath.length - 7) + 'editor/plugins/' ;
 
+var _TOKEN_PAGE_BREAK = '<%= _TOKEN_PAGE_BREAK %>';
+
 FCKConfig.Plugins.Add('liferaypagebreak', null, sOtherPluginPath ) ;
+
+<%!
+private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
+%>

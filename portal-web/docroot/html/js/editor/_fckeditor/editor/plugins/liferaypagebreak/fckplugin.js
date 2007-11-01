@@ -36,7 +36,7 @@ InsertLiferayPageBreakCommand.GetState = function() {
 
 InsertLiferayPageBreakCommand.Execute = function() {
 	FCK.Focus();
-	FCK.InsertHtml("@page_break@")
+	FCK.InsertHtml(_TOKEN_PAGE_BREAK);
 }
 
 FCKCommands.RegisterCommand('LiferayPageBreak', InsertLiferayPageBreakCommand);
