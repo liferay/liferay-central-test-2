@@ -77,16 +77,44 @@ public class CalEventUtil {
 		return getPersistence().fetchByPrimaryKey(eventId);
 	}
 
-	public static com.liferay.portlet.calendar.model.CalEvent findByUuid(
-		java.lang.String uuid)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.calendar.NoSuchEventException {
+	public static java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUuid(uuid);
 	}
 
-	public static com.liferay.portlet.calendar.model.CalEvent fetchByUuid(
-		java.lang.String uuid) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByUuid(uuid);
+	public static java.util.List findByUuid(java.lang.String uuid, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end);
+	}
+
+	public static java.util.List findByUuid(java.lang.String uuid, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.calendar.NoSuchEventException {
+		return getPersistence().findByUuid_First(uuid, obc);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.calendar.NoSuchEventException {
+		return getPersistence().findByUuid_Last(uuid, obc);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent[] findByUuid_PrevAndNext(
+		long eventId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.calendar.NoSuchEventException {
+		return getPersistence().findByUuid_PrevAndNext(eventId, uuid, obc);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent findByUUID_G(
@@ -252,8 +280,7 @@ public class CalEventUtil {
 	}
 
 	public static void removeByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.calendar.NoSuchEventException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeByUuid(uuid);
 	}
 

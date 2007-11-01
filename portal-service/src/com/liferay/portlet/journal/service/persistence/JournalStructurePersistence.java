@@ -59,13 +59,33 @@ public interface JournalStructurePersistence {
 	public com.liferay.portlet.journal.model.JournalStructure fetchByPrimaryKey(
 		long id) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.journal.model.JournalStructure findByUuid(
-		java.lang.String uuid)
+	public java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalStructure findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.journal.NoSuchStructureException;
 
-	public com.liferay.portlet.journal.model.JournalStructure fetchByUuid(
-		java.lang.String uuid) throws com.liferay.portal.SystemException;
+	public com.liferay.portlet.journal.model.JournalStructure findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException;
+
+	public com.liferay.portlet.journal.model.JournalStructure[] findByUuid_PrevAndNext(
+		long id, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException;
 
 	public com.liferay.portlet.journal.model.JournalStructure findByUUID_G(
 		java.lang.String uuid, long groupId)
@@ -157,8 +177,7 @@ public interface JournalStructurePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.journal.NoSuchStructureException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException, 

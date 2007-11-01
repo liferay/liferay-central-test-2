@@ -77,16 +77,44 @@ public class JournalArticleUtil {
 		return getPersistence().fetchByPrimaryKey(id);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticle findByUuid(
-		java.lang.String uuid)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.journal.NoSuchArticleException {
+	public static java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUuid(uuid);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticle fetchByUuid(
-		java.lang.String uuid) throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByUuid(uuid);
+	public static java.util.List findByUuid(java.lang.String uuid, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end);
+	}
+
+	public static java.util.List findByUuid(java.lang.String uuid, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findByUuid_First(uuid, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findByUuid_Last(uuid, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByUuid_PrevAndNext(
+		long id, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence().findByUuid_PrevAndNext(id, uuid, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByUUID_G(
@@ -398,8 +426,7 @@ public class JournalArticleUtil {
 	}
 
 	public static void removeByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.journal.NoSuchArticleException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeByUuid(uuid);
 	}
 

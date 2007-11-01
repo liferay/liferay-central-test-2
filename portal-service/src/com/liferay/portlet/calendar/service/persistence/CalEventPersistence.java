@@ -59,13 +59,33 @@ public interface CalEventPersistence {
 	public com.liferay.portlet.calendar.model.CalEvent fetchByPrimaryKey(
 		long eventId) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.calendar.model.CalEvent findByUuid(
-		java.lang.String uuid)
+	public java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.calendar.model.CalEvent findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException;
 
-	public com.liferay.portlet.calendar.model.CalEvent fetchByUuid(
-		java.lang.String uuid) throws com.liferay.portal.SystemException;
+	public com.liferay.portlet.calendar.model.CalEvent findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.calendar.NoSuchEventException;
+
+	public com.liferay.portlet.calendar.model.CalEvent[] findByUuid_PrevAndNext(
+		long eventId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.calendar.NoSuchEventException;
 
 	public com.liferay.portlet.calendar.model.CalEvent findByUUID_G(
 		java.lang.String uuid, long groupId)
@@ -176,8 +196,7 @@ public interface CalEventPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.calendar.NoSuchEventException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException, 

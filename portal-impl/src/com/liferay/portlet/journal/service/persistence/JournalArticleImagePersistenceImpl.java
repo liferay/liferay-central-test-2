@@ -251,32 +251,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public JournalArticleImage findByUuid(String uuid)
-		throws NoSuchArticleImageException, SystemException {
-		JournalArticleImage journalArticleImage = fetchByUuid(uuid);
-
-		if (journalArticleImage == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No JournalArticleImage exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("uuid=");
-			msg.append(uuid);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchArticleImageException(msg.toString());
-		}
-
-		return journalArticleImage;
-	}
-
-	public JournalArticleImage fetchByUuid(String uuid)
-		throws SystemException {
+	public List findByUuid(String uuid) throws SystemException {
 		String finderClassName = JournalArticleImage.class.getName();
-		String finderMethodName = "fetchByUuid";
+		String finderMethodName = "findByUuid";
 		String[] finderParams = new String[] { String.class.getName() };
 		Object[] finderArgs = new Object[] { uuid };
 		Object result = FinderCache.getResult(finderClassName,
@@ -312,12 +289,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return (JournalArticleImage)list.get(0);
-				}
+				return list;
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -327,14 +299,167 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			return (List)result;
+		}
+	}
 
-			if (list.size() == 0) {
-				return null;
+	public List findByUuid(String uuid, int begin, int end)
+		throws SystemException {
+		return findByUuid(uuid, begin, end, null);
+	}
+
+	public List findByUuid(String uuid, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		String finderClassName = JournalArticleImage.class.getName();
+		String finderMethodName = "findByUuid";
+		String[] finderParams = new String[] {
+				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				uuid, String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public JournalArticleImage findByUuid_First(String uuid,
+		OrderByComparator obc)
+		throws NoSuchArticleImageException, SystemException {
+		List list = findByUuid(uuid, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalArticleImage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchArticleImageException(msg.toString());
+		}
+		else {
+			return (JournalArticleImage)list.get(0);
+		}
+	}
+
+	public JournalArticleImage findByUuid_Last(String uuid,
+		OrderByComparator obc)
+		throws NoSuchArticleImageException, SystemException {
+		int count = countByUuid(uuid);
+		List list = findByUuid(uuid, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No JournalArticleImage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchArticleImageException(msg.toString());
+		}
+		else {
+			return (JournalArticleImage)list.get(0);
+		}
+	}
+
+	public JournalArticleImage[] findByUuid_PrevAndNext(long articleImageId,
+		String uuid, OrderByComparator obc)
+		throws NoSuchArticleImageException, SystemException {
+		JournalArticleImage journalArticleImage = findByPrimaryKey(articleImageId);
+		int count = countByUuid(uuid);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
+
+			if (uuid == null) {
+				query.append("uuid_ IS NULL");
 			}
 			else {
-				return (JournalArticleImage)list.get(0);
+				query.append("uuid_ = ?");
 			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (uuid != null) {
+				q.setString(queryPos++, uuid);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					journalArticleImage);
+			JournalArticleImage[] array = new JournalArticleImageImpl[3];
+			array[0] = (JournalArticleImage)objArray[0];
+			array[1] = (JournalArticleImage)objArray[1];
+			array[2] = (JournalArticleImage)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -1294,10 +1419,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByUuid(String uuid)
-		throws NoSuchArticleImageException, SystemException {
-		JournalArticleImage journalArticleImage = findByUuid(uuid);
-		remove(journalArticleImage);
+	public void removeByUuid(String uuid) throws SystemException {
+		Iterator itr = findByUuid(uuid).iterator();
+
+		while (itr.hasNext()) {
+			JournalArticleImage journalArticleImage = (JournalArticleImage)itr.next();
+			remove(journalArticleImage);
+		}
 	}
 
 	public void removeByUUID_G(String uuid, long groupId)
