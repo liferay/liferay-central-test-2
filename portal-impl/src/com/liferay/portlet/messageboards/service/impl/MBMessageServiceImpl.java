@@ -526,7 +526,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			ActionKeys.UPDATE_DISCUSSION);
 
 		return MBMessageLocalServiceUtil.updateDiscussionMessage(
-			messageId, subject, body);
+			getUserId(), messageId, subject, body);
 	}
 
 	public MBMessage updateMessage(
@@ -556,8 +556,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return MBMessageLocalServiceUtil.updateMessage(
-			messageId, categoryId, subject, body, files, priority, tagsEntries,
-			null);
+			getUserId(), messageId, categoryId, subject, body, files, priority,
+			tagsEntries, null);
 	}
 
 	public MBMessage updateMessage(
@@ -588,8 +588,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return MBMessageLocalServiceUtil.updateMessage(
-			messageId, categoryId, subject, body, files, priority, tagsEntries,
-			prefs);
+			getUserId(), messageId, categoryId, subject, body, files, priority,
+			tagsEntries, prefs);
 	}
 
 	protected String exportToRSS(

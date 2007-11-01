@@ -281,6 +281,9 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getNoAssetMessages()
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getThreadMessages(long threadId)
 		throws com.liferay.portal.SystemException;
 
@@ -300,12 +303,13 @@ public interface MBMessageLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
-		long messageId, java.lang.String subject, java.lang.String body)
+		long userId, long messageId, java.lang.String subject,
+		java.lang.String body)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
-		long messageId, long categoryId, java.lang.String subject,
+		long userId, long messageId, long categoryId, java.lang.String subject,
 		java.lang.String body, java.util.List files, double priority,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
@@ -318,6 +322,12 @@ public interface MBMessageLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.lang.String body)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void updateTagsAsset(long userId,
+		com.liferay.portlet.messageboards.model.MBMessage message,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

@@ -41,6 +41,8 @@ public class VerifyProcessSuite extends VerifyProcess {
 		verify(new VerifyDocumentLibrary());
 		verify(new VerifyImageGallery());
 		verify(new VerifyJournal());
+		verify(new VerifyMessageBoards());
+		verify(new VerifyWiki());
 	}
 
 	private static Log _log = LogFactory.getLog(VerifyProcessSuite.class);

@@ -22,8 +22,8 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 import java.util.List;
 
@@ -31,54 +31,54 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="VerifyBookmarks.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyMessageBoards.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  *
  */
-public class VerifyBookmarks extends VerifyProcess {
+public class VerifyMessageBoards extends VerifyProcess {
 
 	public void verify() throws VerifyException {
 		_log.info("Verifying integrity");
 
 		try {
-			verifyBookmarks();
+			verifyMessageBoards();
 		}
 		catch (Exception e) {
 			throw new VerifyException(e);
 		}
 	}
 
-	protected void verifyBookmarks() throws Exception {
-		List entries = BookmarksEntryLocalServiceUtil.getNoAssetEntries();
+	protected void verifyMessageBoards() throws Exception {
+		List messages = MBMessageLocalServiceUtil.getNoAssetMessages();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Processing " + entries.size() +
-					" entries with no tags assets");
+				"Processing " + messages.size() +
+					" messages with no tags assets");
 		}
 
-		for (int i = 0; i < entries.size(); i++) {
-			BookmarksEntry entry = (BookmarksEntry)entries.get(i);
+		for (int i = 0; i < messages.size(); i++) {
+			MBMessage message = (MBMessage)messages.get(i);
 
 			try {
-				BookmarksEntryLocalServiceUtil.updateTagsAsset(
-					entry.getUserId(), entry, new String[0]);
+				MBMessageLocalServiceUtil.updateTagsAsset(
+					message.getUserId(), message, new String[0]);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to update tags asset for entry " +
-							entry.getEntryId() + ": " + e.getMessage());
+						"Unable to update tags asset for message " +
+							message.getMessageId() + ": " + e.getMessage());
 				}
 			}
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Tags assets verified for entries");
+			_log.debug("Tags assets verified for messages");
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyBookmarks.class);
+	private static Log _log = LogFactory.getLog(VerifyMessageBoards.class);
 
 }

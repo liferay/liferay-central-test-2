@@ -68,8 +68,7 @@ public class VerifyImageGallery extends VerifyProcess {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Unable to update tags asset for image " +
-							image.getImageId(),
-						e);
+							image.getImageId() + ": " + e.getMessage());
 				}
 			}
 		}

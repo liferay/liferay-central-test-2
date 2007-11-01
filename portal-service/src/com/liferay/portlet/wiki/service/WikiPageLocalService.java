@@ -115,6 +115,9 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getNoAssetPages()
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getLinks(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException;
 
@@ -170,6 +173,12 @@ public interface WikiPageLocalService {
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(long userId,
 		long nodeId, java.lang.String title, java.lang.String content,
 		java.lang.String format, java.lang.String[] tagsEntries)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void updateTagsAsset(long userId,
+		com.liferay.portlet.wiki.model.WikiPage page,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

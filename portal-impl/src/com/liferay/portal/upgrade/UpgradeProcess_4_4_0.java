@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade;
 
 import com.liferay.portal.upgrade.v4_4_0.UpgradeSchema;
+import com.liferay.portal.upgrade.v4_4_0.UpgradeTags;
 import com.liferay.portal.upgrade.v4_4_0.UpgradeUUID;
 import com.liferay.portal.util.ReleaseInfo;
 
@@ -46,6 +47,7 @@ public class UpgradeProcess_4_4_0 extends UpgradeProcess {
 
 		upgrade(new UpgradeSchema());
 		upgrade(new UpgradeUUID());
+		upgrade(new UpgradeTags());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_4_4_0.class);

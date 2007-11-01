@@ -69,8 +69,7 @@ public class VerifyBlogs extends VerifyProcess {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Unable to update tags asset for entry " +
-							entry.getEntryId(),
-						e);
+							entry.getEntryId() + ": " + e.getMessage());
 				}
 			}
 		}

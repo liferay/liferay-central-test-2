@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_4;
+package com.liferay.portal.upgrade.v4_4_0;
 
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -28,19 +28,19 @@ import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_4.util.JournalArticleContentUpgradeColumnImpl;
-import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
+import com.liferay.portal.upgrade.v4_4_0.util.TagsAssetGroupIdUpgradeColumnImpl;
+import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeTags.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeJournal extends UpgradeProcess {
+public class UpgradeTags extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
@@ -55,21 +55,23 @@ public class UpgradeJournal extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 
-		// JournalArticle
+		// TagsAsset
 
-		UpgradeColumn structureIdColumn =
-			new TempUpgradeColumnImpl("structureId");
+		UpgradeColumn classNameIdColumn =
+			new TempUpgradeColumnImpl("classNameId");
 
-		UpgradeColumn contentColumn =
-			new JournalArticleContentUpgradeColumnImpl(structureIdColumn);
+		UpgradeColumn classPKColumn = new TempUpgradeColumnImpl("classPK");
+
+		UpgradeColumn groupIdColumn = new TagsAssetGroupIdUpgradeColumnImpl(
+			classNameIdColumn, classPKColumn);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
-			structureIdColumn, contentColumn);
+			TagsAssetImpl.TABLE_NAME, TagsAssetImpl.TABLE_COLUMNS,
+			classNameIdColumn, classPKColumn, groupIdColumn);
 
 		upgradeTable.updateTable();
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeJournal.class);
+	private static Log _log = LogFactory.getLog(UpgradeTags.class);
 
 }

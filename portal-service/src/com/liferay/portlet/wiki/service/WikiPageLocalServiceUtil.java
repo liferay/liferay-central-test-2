@@ -178,6 +178,13 @@ public class WikiPageLocalServiceUtil {
 		wikiPageLocalService.deletePages(nodeId);
 	}
 
+	public static java.util.List getNoAssetPages()
+		throws com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getNoAssetPages();
+	}
+
 	public static java.util.List getLinks(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
@@ -300,5 +307,14 @@ public class WikiPageLocalServiceUtil {
 
 		return wikiPageLocalService.updatePage(userId, nodeId, title, content,
 			format, tagsEntries);
+	}
+
+	public static void updateTagsAsset(long userId,
+		com.liferay.portlet.wiki.model.WikiPage page,
+		java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.updateTagsAsset(userId, page, tagsEntries);
 	}
 }

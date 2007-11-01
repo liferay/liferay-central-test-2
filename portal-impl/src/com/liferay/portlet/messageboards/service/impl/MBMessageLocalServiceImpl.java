@@ -425,7 +425,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Tags
 
-		updateAsset(message, tagsEntries);
+		updateTagsAsset(userId, message, tagsEntries);
 
 		logAddMessage(messageId, stopWatch, 9);
 
@@ -890,6 +890,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			previousThread, nextThread, firstThread, lastThread);
 	}
 
+	public List getNoAssetMessages() throws SystemException {
+		return MBMessageFinder.findByNoAssets();
+	}
+
 	public List getThreadMessages(long threadId) throws SystemException {
 		return getThreadMessages(threadId, new MessageThreadComparator());
 	}
@@ -927,7 +931,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage updateDiscussionMessage(
-			long messageId, String subject, String body)
+			long userId, long messageId, String subject, String body)
 		throws PortalException, SystemException {
 
 		long categoryId = CompanyImpl.SYSTEM;
@@ -938,13 +942,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		PortletPreferences prefs = null;
 
 		return updateMessage(
-			messageId, categoryId, subject, body, files, priority, tagsEntries,
-			prefs);
+			userId, messageId, categoryId, subject, body, files, priority,
+			tagsEntries, prefs);
 	}
 
 	public MBMessage updateMessage(
-			long messageId, long categoryId, String subject, String body,
-			List files, double priority, String[] tagsEntries,
+			long userId, long messageId, long categoryId, String subject,
+			String body, List files, double priority, String[] tagsEntries,
 			PortletPreferences prefs)
 		throws PortalException, SystemException {
 
@@ -1068,7 +1072,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Tags
 
-		updateAsset(message, tagsEntries);
+		updateTagsAsset(userId, message, tagsEntries);
 
 		// Lucene
 
@@ -1148,6 +1152,22 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBMessageUtil.update(message);
 
 		return message;
+	}
+
+	public void updateTagsAsset(
+			long userId, MBMessage message, String[] tagsEntries)
+		throws PortalException, SystemException {
+
+		if ((tagsEntries == null) || message.isDiscussion()) {
+			return;
+		}
+
+		TagsAssetLocalServiceUtil.updateAsset(
+			userId, message.getCategory().getGroupId(),
+			MBMessage.class.getName(), message.getMessageId(), tagsEntries,
+			null, null, null, null, ContentTypes.TEXT_HTML,
+			message.getSubject(), message.getSubject(), message.getSubject(),
+			null, 0, 0);
 	}
 
 	protected MBCategory getCategory(MBMessage message, long categoryId)
@@ -1493,21 +1513,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			from, to, subject, body, true);
 
 		MailServiceUtil.sendEmail(mailMessage);
-	}
-
-	protected void updateAsset(MBMessage message, String[] tagsEntries)
-		throws PortalException, SystemException {
-
-		if (tagsEntries == null) {
-			return;
-		}
-
-		TagsAssetLocalServiceUtil.updateAsset(
-			message.getUserId(), message.getCategory().getGroupId(),
-			MBMessage.class.getName(), message.getMessageId(), tagsEntries,
-			null, null, null, null, ContentTypes.TEXT_HTML,
-			message.getSubject(), message.getSubject(), message.getSubject(),
-			null, 0, 0);
 	}
 
 	protected void validate(String subject, String body)

@@ -55,6 +55,9 @@ public class WikiPageFinder {
 	public static String FIND_BY_CREATEDATE =
 		WikiPageFinder.class.getName() + ".findByCreateDate";
 
+	public static String FIND_BY_NO_ASSETS =
+		WikiPageFinder.class.getName() + ".findByNoAssets";
+
 	public static int countByCreateDate(
 			long nodeId, Date createDate, boolean before)
 		throws SystemException {
@@ -153,6 +156,28 @@ public class WikiPageFinder {
 			qPos.add(true);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByNoAssets() throws SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("WikiPage", WikiPageImpl.class);
+
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

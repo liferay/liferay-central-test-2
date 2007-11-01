@@ -222,6 +222,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
+	public List getNoAssetPages() throws SystemException {
+		return WikiPageFinder.findByNoAssets();
+	}
+
 	public List getLinks(long nodeId, String title) throws SystemException {
 		List links = new ArrayList();
 
@@ -465,7 +469,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Tags
 
-		updateAsset(page, tagsEntries);
+		updateTagsAsset(userId, page, tagsEntries);
 
 		// Lucene
 
@@ -480,14 +484,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return page;
 	}
 
-	protected void updateAsset(WikiPage page, String[] tagsEntries)
+	public void updateTagsAsset(
+			long userId, WikiPage page, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			page.getUserId(), page.getNode().getGroupId(),
-			WikiPage.class.getName(), page.getResourcePrimKey(), tagsEntries,
-			null, null, null, null, ContentTypes.TEXT_HTML, page.getTitle(),
-			page.getTitle(), page.getTitle(), null, 0, 0);
+			userId, page.getNode().getGroupId(), WikiPage.class.getName(),
+			page.getResourcePrimKey(), tagsEntries, null, null, null, null,
+			ContentTypes.TEXT_HTML, page.getTitle(), page.getTitle(),
+			page.getTitle(), null, 0, 0);
 	}
 
 	protected void validate(String title) throws PortalException {

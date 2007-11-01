@@ -125,8 +125,7 @@ public class VerifyJournal extends VerifyProcess {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
 							"Unable to update tags asset for article " +
-								article.getId(),
-							e);
+								article.getId() + ": " + e.getMessage());
 					}
 				}
 			}

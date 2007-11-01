@@ -490,6 +490,13 @@ public class MBMessageLocalServiceUtil {
 		return mbMessageLocalService.getMessageDisplay(message);
 	}
 
+	public static java.util.List getNoAssetMessages()
+		throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getNoAssetMessages();
+	}
+
 	public static java.util.List getThreadMessages(long threadId)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
@@ -527,25 +534,26 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
-		long messageId, java.lang.String subject, java.lang.String body)
+		long userId, long messageId, java.lang.String subject,
+		java.lang.String body)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.updateDiscussionMessage(messageId,
+		return mbMessageLocalService.updateDiscussionMessage(userId, messageId,
 			subject, body);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
-		long messageId, long categoryId, java.lang.String subject,
+		long userId, long messageId, long categoryId, java.lang.String subject,
 		java.lang.String body, java.util.List files, double priority,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.updateMessage(messageId, categoryId,
-			subject, body, files, priority, tagsEntries, prefs);
+		return mbMessageLocalService.updateMessage(userId, messageId,
+			categoryId, subject, body, files, priority, tagsEntries, prefs);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
@@ -565,5 +573,14 @@ public class MBMessageLocalServiceUtil {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.updateMessage(messageId, body);
+	}
+
+	public static void updateTagsAsset(long userId,
+		com.liferay.portlet.messageboards.model.MBMessage message,
+		java.lang.String[] tagsEntries)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.updateTagsAsset(userId, message, tagsEntries);
 	}
 }

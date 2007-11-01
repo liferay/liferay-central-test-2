@@ -32,6 +32,8 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.wiki.model.WikiPage;
 
 import java.sql.SQLException;
 
@@ -68,6 +70,8 @@ public class PortalCustomSQLUtil
 		long dlFileEntryClassNameId = PortalUtil.getClassNameId(
 			DLFileEntry.class);
 		long igImageClassNameId = PortalUtil.getClassNameId(IGImage.class);
+		long mbMessageClassNameId = PortalUtil.getClassNameId(MBMessage.class);
+		long wikiPageClassNameId = PortalUtil.getClassNameId(WikiPage.class);
 
 		sql = StringUtil.replace(
 			sql,
@@ -78,7 +82,9 @@ public class PortalCustomSQLUtil
 				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BLOGS.MODEL.BLOGSENTRY$]",
 				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BOOKMARKS.MODEL.BOOKMARKSENTRY$]",
 				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.DOCUMENTLIBRARY.MODEL.DLFILEENTRY$]",
-				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.IMAGEGALLERY.MODEL.IGIMAGE$]"
+				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.IMAGEGALLERY.MODEL.IGIMAGE$]",
+				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.MESSAGEBOARDS.MODEL.MBMESSAGE$]",
+				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.WIKI.MODEL.WIKIPAGE$]"
 			},
 			new String[] {
 				String.valueOf(organizationClassNameId),
@@ -87,7 +93,9 @@ public class PortalCustomSQLUtil
 				String.valueOf(blogsEntryClassNameId),
 				String.valueOf(bookmarksEntryClassNameId),
 				String.valueOf(dlFileEntryClassNameId),
-				String.valueOf(igImageClassNameId)
+				String.valueOf(igImageClassNameId),
+				String.valueOf(mbMessageClassNameId),
+				String.valueOf(wikiPageClassNameId)
 			});
 
 		return sql;

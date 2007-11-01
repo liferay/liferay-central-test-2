@@ -56,6 +56,9 @@ public class MBMessageFinder {
 	public static String FIND_BY_GROUP_ID =
 		MBMessageFinder.class.getName() + ".findByGroupId";
 
+	public static String FIND_BY_NO_ASSETS =
+		MBMessageFinder.class.getName() + ".findByNoAssets";
+
 	public static int countByCategoryIds(List categoryIds)
 		throws SystemException {
 
@@ -165,6 +168,28 @@ public class MBMessageFinder {
 			qPos.add(groupId);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByNoAssets() throws SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("MBMessage", MBMessageImpl.class);
+
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

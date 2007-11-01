@@ -83,6 +83,23 @@
 				(MBCategory.groupId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByNoAssets">
+		<![CDATA[
+			SELECT
+				{MBMessage.*}
+			FROM
+				MBMessage
+			WHERE
+				(messageId NOT IN(
+					SELECT
+						classPK
+					FROM
+						TagsAsset
+					WHERE
+						classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTLET.MESSAGEBOARDS.MODEL.MBMESSAGE$]
+				))
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByCategoryIds">
 		<![CDATA[
 			SELECT
