@@ -55,16 +55,19 @@ if (curTagsParam != null) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<input id="<%= randomNamespace %>tags" size="30" type="text" />
+		<span id="<%= randomNamespace %>tagsSummary"></span>
+	</td>
+</tr>
+<tr>
+	<td>
+		<nobr>
+			<input id="<%= randomNamespace %>tags" size="15" type="text" />
 
-		<input disabled id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
-
+			<input disabled id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
+		</nobr>
 		<liferay-ui:message key="or" />
 
 		<input id="<%= randomNamespace %>selectTag" type="button" value="<liferay-ui:message key="select-tags" />" />
-	</td>
-	<td>
-		<span id="<%= randomNamespace %>tagsSummary"></span>
 	</td>
 </tr>
 </table>
