@@ -51,16 +51,15 @@ import org.hibernate.util.FastHashMap;
 public class SocialBookmarkTagUtil {
 
 	public static void doEndTag(
-			String page, String target, String title, String type, String url,
+			String page, String type, String url, String title, String target,
 			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
 		throws JspException {
 
 		try {
+			req.setAttribute("liferay-ui:social-bookmark:type", type);
 			req.setAttribute("liferay-ui:social-bookmark:url", url);
 			req.setAttribute("liferay-ui:social-bookmark:title", title);
 			req.setAttribute("liferay-ui:social-bookmark:target", target);
-
-			req.setAttribute("liferay-ui:social-bookmark:type", type);
 
 			try {
 				String[] socialTypes = PropsUtil.getArray(
@@ -70,9 +69,7 @@ public class SocialBookmarkTagUtil {
 					return;
 				}
 
-				String postUrl = null;
-
-				postUrl = _getPostUrl(type, url, title);
+				String postUrl = _getPostUrl(type, url, title);
 
 				req.setAttribute("liferay-ui:social-bookmark:postUrl", postUrl);
 			}
@@ -93,6 +90,7 @@ public class SocialBookmarkTagUtil {
 
 	private static String _getPostUrl(String type, String url, String title)
 		throws Exception {
+
 		Map vars = new FastHashMap();
 
 		vars.put("liferay:social-bookmark:url", url);

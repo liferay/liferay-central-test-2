@@ -738,7 +738,7 @@ public class ServiceBuilder {
 					Element finderEl = DocumentHelper.createElement("finder");
 
 					finderEl.addAttribute("name", "Uuid");
-					finderEl.addAttribute("return-type", ejbName);
+					finderEl.addAttribute("return-type", "Collection");
 
 					Element finderColEl = finderEl.addElement("finder-column");
 

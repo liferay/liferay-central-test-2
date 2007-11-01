@@ -38,12 +38,16 @@ public class SocialBookmarksTag extends IncludeTag {
 	public int doStartTag() {
 		ServletRequest req = pageContext.getRequest();
 
+		req.setAttribute("liferay-ui:social-bookmark:types", _types);
 		req.setAttribute("liferay-ui:social-bookmark:url", _url);
 		req.setAttribute("liferay-ui:social-bookmark:title", _title);
 		req.setAttribute("liferay-ui:social-bookmark:target", _target);
-		req.setAttribute("liferay-ui:social-bookmark:types", _types);
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setTypes(String types) {
+		_types = types;
 	}
 
 	public void setUrl(String url) {
@@ -58,10 +62,6 @@ public class SocialBookmarksTag extends IncludeTag {
 		_target = target;
 	}
 
-	public void setTypes(String types) {
-		_types = types;
-	}
-
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
@@ -69,9 +69,9 @@ public class SocialBookmarksTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/social_bookmarks/page.jsp";
 
+	private String _types;
 	private String _url;
 	private String _title;
 	private String _target;
-	private String _types;
 
 }

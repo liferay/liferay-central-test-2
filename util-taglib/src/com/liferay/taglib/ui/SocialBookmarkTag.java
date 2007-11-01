@@ -45,7 +45,7 @@ import org.apache.commons.logging.LogFactory;
 public class SocialBookmarkTag extends TagSupport {
 
 	public static String doTag(
-			String target, String title, String type, String url,
+			String type, String url, String title, String target,
 			PageContext pageContext)
 		throws Exception {
 
@@ -67,7 +67,7 @@ public class SocialBookmarkTag extends TagSupport {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				_TAG_CLASS, _TAG_DO_END_METHOD,
 				new Object[] {
-					_PAGE, targetWrapper, title, type, url,
+					_PAGE, type, url, title, targetWrapper,
 					pageContext.getServletContext(), pageContext.getRequest(),
 					pageContext.getResponse()
 				});
@@ -91,8 +91,7 @@ public class SocialBookmarkTag extends TagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
-			doTag(
-				_target, _title, _type, _url, pageContext);
+			doTag(_url, _type, _title, _target, pageContext);
 		}
 		catch (Exception e) {
 			if (e instanceof JspException) {
@@ -104,6 +103,10 @@ public class SocialBookmarkTag extends TagSupport {
 		}
 
 		return EVAL_PAGE;
+	}
+
+	public void setType(String type) {
+		_type = type;
 	}
 
 	public void setUrl(String url) {
@@ -118,10 +121,6 @@ public class SocialBookmarkTag extends TagSupport {
 		_target = target;
 	}
 
-	public void setType(String type) {
-		_type = type;
-	}
-
 	private static final String _TAG_CLASS =
 		"com.liferay.portal.servlet.taglib.ui.SocialBookmarkTagUtil";
 
@@ -132,9 +131,9 @@ public class SocialBookmarkTag extends TagSupport {
 
 	private static Log _log = LogFactory.getLog(SocialBookmarkTag.class);
 
+	private String _type;
 	private String _url;
 	private String _title;
 	private String _target;
-	private String _type;
 
 }

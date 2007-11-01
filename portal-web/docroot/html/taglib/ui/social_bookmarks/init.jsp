@@ -25,12 +25,13 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String url = GetterUtil.getString((String) request.getAttribute("liferay-ui:social-bookmark:url"));
-String title = GetterUtil.getString((String) request.getAttribute("liferay-ui:social-bookmark:title"));
-String target = GetterUtil.getString((String) request.getAttribute("liferay-ui:social-bookmark:target"));
-String types = GetterUtil.getString((String) request.getAttribute("liferay-ui:social-bookmark:types"));
+String types = GetterUtil.getString((String)request.getAttribute("liferay-ui:social-bookmark:types"));
+String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:social-bookmark:url"));
+String title = GetterUtil.getString((String)request.getAttribute("liferay-ui:social-bookmark:title"));
+String target = GetterUtil.getString((String)request.getAttribute("liferay-ui:social-bookmark:target"));
 
 String[] typesArray = null;
+
 if (Validator.isNotNull(types)) {
 	typesArray = StringUtil.split(types);
 }
