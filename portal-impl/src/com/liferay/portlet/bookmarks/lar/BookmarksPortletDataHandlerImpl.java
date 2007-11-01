@@ -315,12 +315,12 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			else {
 				entry.setFolderId(folderId.longValue());
 
+				BookmarksEntryUtil.update(entry, true);
+
 				TagsAssetLocalServiceUtil.updateAsset(
 					entry.getUserId(), entry.getFolder().getGroupId(),
 					BookmarksEntry.class.getName(), entry.getPrimaryKey(),
 					tagsEntries);
-
-				BookmarksEntryUtil.update(entry, true);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {

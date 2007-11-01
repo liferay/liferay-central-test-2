@@ -132,11 +132,11 @@ public class TagsAssetFinder {
 				sm.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
-			sm.append("[$DATES$]");
-
-			if (groupId != -1) {
+			if (groupId > 0) {
 				sm.append(" AND (TagsAsset.groupId = ?)");
 			}
+
+			sm.append("[$DATES$]");
 
 			String sql = sm.toString();
 
@@ -150,8 +150,8 @@ public class TagsAssetFinder {
 
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
-			_setDates(qPos, publishDate, expirationDate);
 			_setGroupId(qPos, groupId);
+			_setDates(qPos, publishDate, expirationDate);
 
 			Iterator itr = q.list().iterator();
 
@@ -217,14 +217,14 @@ public class TagsAssetFinder {
 					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
 			}
 
+			if (groupId > 0) {
+				sql += " AND (TagsAsset.groupId = ?)";
+			}
+
 			sql = _getDates(sql, publishDate, expirationDate);
 
 			if (excludeZeroViewCount) {
 				sql += " AND (TagsAsset.viewCount > 0)";
-			}
-
-			if (groupId != -1) {
-				sql += " AND (TagsAsset.groupId = ?)";
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -235,8 +235,8 @@ public class TagsAssetFinder {
 
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
-			_setDates(qPos, publishDate, expirationDate);
 			_setGroupId(qPos, groupId);
+			_setDates(qPos, publishDate, expirationDate);
 
 			Iterator itr = q.list().iterator();
 
@@ -320,11 +320,11 @@ public class TagsAssetFinder {
 				sm.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
-			sm.append("[$DATES$]");
-
-			if (groupId != -1) {
+			if (groupId > 0) {
 				sm.append(" AND (TagsAsset.groupId = ?)");
 			}
+
+			sm.append("[$DATES$]");
 
 			sm.append(" ORDER BY TagsAsset.");
 			sm.append(orderByCol1);
@@ -352,8 +352,8 @@ public class TagsAssetFinder {
 
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
-			_setDates(qPos, publishDate, expirationDate);
 			_setGroupId(qPos, groupId);
+			_setDates(qPos, publishDate, expirationDate);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
@@ -426,11 +426,11 @@ public class TagsAssetFinder {
 					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
 			}
 
-			sql = _getDates(sql, publishDate, expirationDate);
-
-			if (groupId != -1) {
+			if (groupId > 0) {
 				sql += " AND (TagsAsset.groupId = ?)";
 			}
+
+			sql = _getDates(sql, publishDate, expirationDate);
 
 			if (excludeZeroViewCount) {
 				sql += " AND (TagsAsset.viewCount > 0)";
@@ -462,8 +462,8 @@ public class TagsAssetFinder {
 
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
-			_setDates(qPos, publishDate, expirationDate);
 			_setGroupId(qPos, groupId);
+			_setDates(qPos, publishDate, expirationDate);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
@@ -594,16 +594,6 @@ public class TagsAssetFinder {
 		return sm.toString();
 	}
 
-	private static void _setEntryIds(QueryPos qPos, long[] entryIds) {
-		for (int i = 0; i < entryIds.length; i++) {
-			qPos.add(entryIds[i]);
-		}
-	}
-
-	private static void _setGroupId(QueryPos qPos, long groupId) {
-		qPos.add(groupId);
-	}
-
 	private static void _setDates(
 		QueryPos qPos, Date publishDate, Date expirationDate) {
 
@@ -618,6 +608,16 @@ public class TagsAssetFinder {
 				CalendarUtil.getTimestamp(expirationDate);
 
 			qPos.add(expirationDate_TS);
+		}
+	}
+
+	private static void _setGroupId(QueryPos qPos, long groupId) {
+		qPos.add(groupId);
+	}
+
+	private static void _setEntryIds(QueryPos qPos, long[] entryIds) {
+		for (int i = 0; i < entryIds.length; i++) {
+			qPos.add(entryIds[i]);
 		}
 	}
 

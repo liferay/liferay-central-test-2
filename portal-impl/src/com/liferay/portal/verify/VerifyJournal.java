@@ -30,7 +30,6 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.tags.NoSuchAssetException;
-import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 
 import java.util.List;
@@ -112,22 +111,12 @@ public class VerifyJournal extends VerifyProcess {
 				JournalArticle.class.getName(), article.getResourcePrimKey(),
 				false, true, true);
 
-			boolean updateAsset = false;
-
 			try {
-				TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(
+				TagsAssetLocalServiceUtil.getAsset(
 					JournalArticle.class.getName(),
 					article.getResourcePrimKey());
-
-				if (asset.getGroupId() == 0) {
-					updateAsset = true;
-				}
 			}
 			catch (NoSuchAssetException nsae) {
-				updateAsset = true;
-			}
-
-			if (updateAsset) {
 				try {
 					JournalArticleLocalServiceUtil.updateTagsAsset(
 						article.getUserId(), article, new String[0]);

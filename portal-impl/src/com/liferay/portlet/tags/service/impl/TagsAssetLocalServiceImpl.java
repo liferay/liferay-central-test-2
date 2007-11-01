@@ -138,8 +138,9 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			long[] entryIds, long[] notEntryIds, boolean andOperator,
 			boolean excludeZeroViewCount, int begin, int end)
 		throws SystemException {
+
 		return getAssets(
-			-1, entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
+			0, entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
 			null, begin, end);
 	}
 
@@ -159,8 +160,9 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
 			int begin, int end)
 		throws SystemException {
+
 		return getAssets(
-			-1, entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
+			0, entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
 			null, begin, end);
 	}
 
@@ -188,8 +190,9 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			String orderByType2, boolean excludeZeroViewCount, Date publishDate,
 			Date expirationDate, int begin, int end)
 		throws SystemException {
+
 		return getAssets(
-			-1, entryIds, notEntryIds, andOperator, excludeZeroViewCount,
+			0, entryIds, notEntryIds, andOperator, excludeZeroViewCount,
 			publishDate, expirationDate, begin, end);
 	}
 
@@ -219,8 +222,9 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			long[] entryIds, long[] notEntryIds, boolean andOperator,
 			boolean excludeZeroViewCount)
 		throws SystemException {
+
 		return getAssetsCount(
-			-1, entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
+			0, entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
 			null);
 	}
 
@@ -238,8 +242,9 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			long[] entryIds, long[] notEntryIds, boolean andOperator,
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
 		throws SystemException {
+
 		return getAssetsCount(
-			-1, entryIds, notEntryIds, andOperator, excludeZeroViewCount,
+			0, entryIds, notEntryIds, andOperator, excludeZeroViewCount,
 			publishDate, expirationDate);
 	}
 
