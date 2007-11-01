@@ -128,7 +128,7 @@ public class TagsAssetServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
-		java.lang.String className, long classPK,
+		long groupId, java.lang.String className, long classPK,
 		java.lang.String[] entryNames, java.util.Date startDate,
 		java.util.Date endDate, java.util.Date publishDate,
 		java.util.Date expirationDate, java.lang.String mimeType,
@@ -138,8 +138,8 @@ public class TagsAssetServiceUtil {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
 
-		return tagsAssetService.updateAsset(className, classPK, entryNames,
-			startDate, endDate, publishDate, expirationDate, mimeType, title,
-			description, summary, url, height, width);
+		return tagsAssetService.updateAsset(groupId, className, classPK,
+			entryNames, startDate, endDate, publishDate, expirationDate,
+			mimeType, title, description, summary, url, height, width);
 	}
 }

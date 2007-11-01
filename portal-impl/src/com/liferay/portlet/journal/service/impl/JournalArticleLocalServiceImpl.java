@@ -1612,7 +1612,7 @@ public class JournalArticleLocalServiceImpl
 
 		if (updateAsset) {
 			TagsAssetLocalServiceUtil.updateAsset(
-				userId, JournalArticle.class.getName(),
+				userId, article.getGroupId(), JournalArticle.class.getName(),
 				article.getResourcePrimKey(), tagsEntries, null, null,
 				article.getDisplayDate(), article.getExpirationDate(),
 				ContentTypes.TEXT_HTML, article.getTitle(),

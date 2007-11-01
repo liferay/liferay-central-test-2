@@ -37,6 +37,7 @@ import java.util.List;
  * <a href="TagsAssetServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
@@ -102,16 +103,16 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 	}
 
 	public TagsAsset updateAsset(
-			String className, long classPK, String[] entryNames, Date startDate,
-			Date endDate, Date publishDate, Date expirationDate,
+			long groupId, String className, long classPK, String[] entryNames,
+			Date startDate, Date endDate, Date publishDate, Date expirationDate,
 			String mimeType, String title, String description, String summary,
 			String url, int height, int width)
 		throws PortalException, SystemException {
 
 		return TagsAssetLocalServiceUtil.updateAsset(
-			getUserId(), className, classPK, entryNames, startDate, endDate,
-			publishDate, expirationDate, mimeType, title, description, summary,
-			url, height, width);
+			getUserId(), groupId, className, classPK, entryNames, startDate,
+			endDate, publishDate, expirationDate, mimeType, title, description,
+			summary, url, height, width);
 	}
 
 }

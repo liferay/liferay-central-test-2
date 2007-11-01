@@ -55,6 +55,10 @@ public interface TagsAssetModel extends BaseModel {
 
 	public void setAssetId(long assetId);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);

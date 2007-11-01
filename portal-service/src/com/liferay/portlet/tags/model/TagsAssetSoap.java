@@ -49,6 +49,7 @@ public class TagsAssetSoap implements Serializable {
 	public static TagsAssetSoap toSoapModel(TagsAsset model) {
 		TagsAssetSoap soapModel = new TagsAssetSoap();
 		soapModel.setAssetId(model.getAssetId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -101,6 +102,14 @@ public class TagsAssetSoap implements Serializable {
 
 	public void setAssetId(long assetId) {
 		_assetId = assetId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -264,6 +273,7 @@ public class TagsAssetSoap implements Serializable {
 	}
 
 	private long _assetId;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

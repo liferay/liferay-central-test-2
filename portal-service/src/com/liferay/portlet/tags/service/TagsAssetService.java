@@ -87,7 +87,7 @@ public interface TagsAssetService {
 		java.lang.String languageId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public com.liferay.portlet.tags.model.TagsAsset updateAsset(
+	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long groupId,
 		java.lang.String className, long classPK,
 		java.lang.String[] entryNames, java.util.Date startDate,
 		java.util.Date endDate, java.util.Date publishDate,

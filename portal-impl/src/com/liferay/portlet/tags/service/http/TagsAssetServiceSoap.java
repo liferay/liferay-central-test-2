@@ -202,7 +202,7 @@ public class TagsAssetServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetSoap updateAsset(
-		java.lang.String className, long classPK,
+		long groupId, java.lang.String className, long classPK,
 		java.lang.String[] entryNames, java.util.Date startDate,
 		java.util.Date endDate, java.util.Date publishDate,
 		java.util.Date expirationDate, java.lang.String mimeType,
@@ -210,10 +210,10 @@ public class TagsAssetServiceSoap {
 		java.lang.String summary, java.lang.String url, int height, int width)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.updateAsset(className,
-					classPK, entryNames, startDate, endDate, publishDate,
-					expirationDate, mimeType, title, description, summary, url,
-					height, width);
+			com.liferay.portlet.tags.model.TagsAsset returnValue = TagsAssetServiceUtil.updateAsset(groupId,
+					className, classPK, entryNames, startDate, endDate,
+					publishDate, expirationDate, mimeType, title, description,
+					summary, url, height, width);
 
 			return com.liferay.portlet.tags.model.TagsAssetSoap.toSoapModel(returnValue);
 		}

@@ -1283,6 +1283,7 @@
 		<id name="assetId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />

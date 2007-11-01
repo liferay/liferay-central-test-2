@@ -376,11 +376,11 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			userId, IGImage.class.getName(), image.getImageId(), tagsEntries,
-			null, null, null, null, largeImage.getType(),
-			image.getDescription(), image.getDescription(),
-			image.getDescription(), null, largeImage.getHeight(),
-			largeImage.getWidth());
+			userId, image.getFolder().getGroupId(), IGImage.class.getName(),
+			image.getImageId(), tagsEntries, null, null, null, null,
+			largeImage.getType(), image.getDescription(),
+			image.getDescription(), image.getDescription(), null,
+			largeImage.getHeight(), largeImage.getWidth());
 	}
 
 	protected IGFolder getFolder(IGImage image, long folderId)

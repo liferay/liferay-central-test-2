@@ -484,10 +484,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			page.getUserId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(), tagsEntries, null, null, null, null,
-			ContentTypes.TEXT_HTML, page.getTitle(), page.getTitle(),
-			page.getTitle(), null, 0, 0);
+			page.getUserId(), page.getNode().getGroupId(),
+			WikiPage.class.getName(), page.getResourcePrimKey(), tagsEntries,
+			null, null, null, null, ContentTypes.TEXT_HTML, page.getTitle(),
+			page.getTitle(), page.getTitle(), null, 0, 0);
 	}
 
 	protected void validate(String title) throws PortalException {

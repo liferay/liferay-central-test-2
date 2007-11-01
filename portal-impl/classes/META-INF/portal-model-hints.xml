@@ -1302,6 +1302,7 @@
 	</model>
 	<model name="com.liferay.portlet.tags.model.TagsAsset">
 		<field name="assetId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />

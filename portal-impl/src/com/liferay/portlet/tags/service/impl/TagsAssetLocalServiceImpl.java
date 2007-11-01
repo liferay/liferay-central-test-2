@@ -138,10 +138,20 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			long[] entryIds, long[] notEntryIds, boolean andOperator,
 			boolean excludeZeroViewCount, int begin, int end)
 		throws SystemException {
+		return getAssets(
+			-1, entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
+			null, begin, end);
+	}
+
+	public List getAssets(
+			long groupId, long[] entryIds, long[] notEntryIds,
+			boolean andOperator, boolean excludeZeroViewCount, int begin,
+			int end)
+		throws SystemException {
 
 		return getAssets(
-			entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
-			null, begin, end);
+			groupId, entryIds, notEntryIds, andOperator, excludeZeroViewCount,
+			null, null, begin, end);
 	}
 
 	public List getAssets(
@@ -149,15 +159,25 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
 			int begin, int end)
 		throws SystemException {
+		return getAssets(
+			-1, entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
+			null, begin, end);
+	}
+
+	public List getAssets(
+			long groupId, long[] entryIds, long[] notEntryIds,
+			boolean andOperator, boolean excludeZeroViewCount, Date publishDate,
+			Date expirationDate, int begin, int end)
+		throws SystemException {
 
 		if (andOperator) {
 			return TagsAssetFinder.findByAndEntryIds(
-				entryIds, notEntryIds, null, null, null, null,
+				groupId, entryIds, notEntryIds, null, null, null, null,
 				excludeZeroViewCount, publishDate, expirationDate, begin, end);
 		}
 		else {
 			return TagsAssetFinder.findByOrEntryIds(
-				entryIds, notEntryIds, null, null, null, null,
+				groupId, entryIds, notEntryIds, null, null, null, null,
 				excludeZeroViewCount, publishDate, expirationDate, begin, end);
 		}
 	}
@@ -168,18 +188,30 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			String orderByType2, boolean excludeZeroViewCount, Date publishDate,
 			Date expirationDate, int begin, int end)
 		throws SystemException {
+		return getAssets(
+			-1, entryIds, notEntryIds, andOperator, excludeZeroViewCount,
+			publishDate, expirationDate, begin, end);
+	}
+
+	public List getAssets(
+			long groupId, long[] entryIds, long[] notEntryIds,
+			boolean andOperator, String orderByCol1, String orderByCol2,
+			String orderByType1, String orderByType2,
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
+			int begin, int end)
+		throws SystemException {
 
 		if (andOperator) {
 			return TagsAssetFinder.findByAndEntryIds(
-				entryIds, notEntryIds, orderByCol1, orderByCol2, orderByType1,
-				orderByType2, excludeZeroViewCount, publishDate, expirationDate,
-				begin, end);
+				groupId, entryIds, notEntryIds, orderByCol1, orderByCol2,
+				orderByType1, orderByType2, excludeZeroViewCount, publishDate,
+				expirationDate, begin, end);
 		}
 		else {
 			return TagsAssetFinder.findByOrEntryIds(
-				entryIds, notEntryIds, orderByCol1, orderByCol2, orderByType1,
-				orderByType2, excludeZeroViewCount, publishDate, expirationDate,
-				begin, end);
+				groupId, entryIds, notEntryIds, orderByCol1, orderByCol2,
+				orderByType1, orderByType2, excludeZeroViewCount, publishDate,
+				expirationDate, begin, end);
 		}
 	}
 
@@ -187,26 +219,45 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			long[] entryIds, long[] notEntryIds, boolean andOperator,
 			boolean excludeZeroViewCount)
 		throws SystemException {
+		return getAssetsCount(
+			-1, entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
+			null);
+	}
+
+	public int getAssetsCount(
+			long groupId, long[] entryIds, long[] notEntryIds,
+			boolean andOperator, boolean excludeZeroViewCount)
+		throws SystemException {
 
 		return getAssetsCount(
-			entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
-			null);
+			groupId, entryIds, notEntryIds, andOperator, excludeZeroViewCount,
+			null, null);
 	}
 
 	public int getAssetsCount(
 			long[] entryIds, long[] notEntryIds, boolean andOperator,
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
 		throws SystemException {
+		return getAssetsCount(
+			-1, entryIds, notEntryIds, andOperator, excludeZeroViewCount,
+			publishDate, expirationDate);
+	}
+
+	public int getAssetsCount(
+			long groupId, long[] entryIds, long[] notEntryIds,
+			boolean andOperator, boolean excludeZeroViewCount, Date publishDate,
+			Date expirationDate)
+		throws SystemException {
 
 		if (andOperator) {
 			return TagsAssetFinder.countByAndEntryIds(
-				entryIds, notEntryIds, excludeZeroViewCount, publishDate,
-				expirationDate);
+				groupId, entryIds, notEntryIds, excludeZeroViewCount,
+				publishDate, expirationDate);
 		}
 		else {
 			return TagsAssetFinder.countByOrEntryIds(
-				entryIds, notEntryIds, excludeZeroViewCount, publishDate,
-				expirationDate);
+				groupId, entryIds, notEntryIds, excludeZeroViewCount,
+				publishDate, expirationDate);
 		}
 	}
 
@@ -368,19 +419,21 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	}
 
 	public TagsAsset updateAsset(
-			long userId, String className, long classPK, String[] entryNames)
+			long userId, long groupId, String className, long classPK,
+			String[] entryNames)
 		throws PortalException, SystemException {
 
 		return updateAsset(
-			userId, className, classPK, entryNames, null, null, null, null,
-			null, null, null, null, null, 0, 0);
+			userId, groupId, className, classPK, entryNames, null, null, null,
+			null, null, null, null, null, null, 0, 0);
 	}
 
 	public TagsAsset updateAsset(
-			long userId, String className, long classPK, String[] entryNames,
-			Date startDate, Date endDate, Date publishDate, Date expirationDate,
-			String mimeType, String title, String description, String summary,
-			String url, int height, int width)
+			long userId, long groupId, String className, long classPK,
+			String[] entryNames, Date startDate, Date endDate, Date publishDate,
+			Date expirationDate, String mimeType, String title,
+			String description, String summary, String url, int height,
+			int width)
 		throws PortalException, SystemException {
 
 		// Asset
@@ -416,6 +469,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			asset.setViewCount(0);
 		}
 
+		asset.setGroupId(groupId);
 		asset.setModifiedDate(now);
 		asset.setStartDate(startDate);
 		asset.setEndDate(endDate);

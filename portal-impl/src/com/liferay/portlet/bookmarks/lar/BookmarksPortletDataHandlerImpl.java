@@ -313,11 +313,12 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 					addCommunityPermissions, addGuestPermissions);
 			}
 			else {
-				TagsAssetLocalServiceUtil.updateAsset(
-					entry.getUserId(), BookmarksEntry.class.getName(),
-					entry.getPrimaryKey(), tagsEntries);
-
 				entry.setFolderId(folderId.longValue());
+
+				TagsAssetLocalServiceUtil.updateAsset(
+					entry.getUserId(), entry.getFolder().getGroupId(),
+					BookmarksEntry.class.getName(), entry.getPrimaryKey(),
+					tagsEntries);
 
 				BookmarksEntryUtil.update(entry, true);
 			}

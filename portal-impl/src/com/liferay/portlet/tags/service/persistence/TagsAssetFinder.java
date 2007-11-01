@@ -78,8 +78,8 @@ public class TagsAssetFinder {
 	};
 
 	public static int countByAndEntryIds(
-			long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
-			Date publishDate, Date expirationDate)
+			long groupId, long[] entryIds, long[] notEntryIds,
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -134,6 +134,10 @@ public class TagsAssetFinder {
 
 			sm.append("[$DATES$]");
 
+			if (groupId != -1) {
+				sm.append(" AND (TagsAsset.groupId = ?)");
+			}
+
 			String sql = sm.toString();
 
 			sql = _getDates(sql, publishDate, expirationDate);
@@ -147,6 +151,7 @@ public class TagsAssetFinder {
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
 			_setDates(qPos, publishDate, expirationDate);
+			_setGroupId(qPos, groupId);
 
 			Iterator itr = q.list().iterator();
 
@@ -169,8 +174,8 @@ public class TagsAssetFinder {
 	}
 
 	public static int countByOrEntryIds(
-			long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
-			Date publishDate, Date expirationDate )
+			long groupId, long[] entryIds, long[] notEntryIds,
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -218,6 +223,10 @@ public class TagsAssetFinder {
 				sql += " AND (TagsAsset.viewCount > 0)";
 			}
 
+			if (groupId != -1) {
+				sql += " AND (TagsAsset.groupId = ?)";
+			}
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
@@ -227,6 +236,7 @@ public class TagsAssetFinder {
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
 			_setDates(qPos, publishDate, expirationDate);
+			_setGroupId(qPos, groupId);
 
 			Iterator itr = q.list().iterator();
 
@@ -249,10 +259,10 @@ public class TagsAssetFinder {
 	}
 
 	public static List findByAndEntryIds(
-			long[] entryIds, long[] notEntryIds, String orderByCol1,
-			String orderByCol2, String orderByType1, String orderByType2,
-			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
-			int begin, int end)
+			long groupId, long[] entryIds, long[] notEntryIds,
+			String orderByCol1, String orderByCol2, String orderByType1,
+			String orderByType2, boolean excludeZeroViewCount, Date publishDate,
+			Date expirationDate, int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -312,6 +322,10 @@ public class TagsAssetFinder {
 
 			sm.append("[$DATES$]");
 
+			if (groupId != -1) {
+				sm.append(" AND (TagsAsset.groupId = ?)");
+			}
+
 			sm.append(" ORDER BY TagsAsset.");
 			sm.append(orderByCol1);
 			sm.append(StringPool.SPACE);
@@ -339,6 +353,7 @@ public class TagsAssetFinder {
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
 			_setDates(qPos, publishDate, expirationDate);
+			_setGroupId(qPos, groupId);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
@@ -350,20 +365,21 @@ public class TagsAssetFinder {
 		}
 	}
 
-	public static List findByOrEntryIds(long[] entryIds, long[] notEntryIds,
-			Date publishDate, Date expirationDate )
+	public static List findByOrEntryIds(
+			long groupId, long[] entryIds, long[] notEntryIds, Date publishDate,
+			Date expirationDate )
 		throws SystemException {
 
 		return findByOrEntryIds(
-			entryIds, notEntryIds, null, null, null, null, false, publishDate,
-			expirationDate, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			groupId, entryIds, notEntryIds, null, null, null, null, false,
+			publishDate, expirationDate, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public static List findByOrEntryIds(
-			long[] entryIds, long[] notEntryIds, String orderByCol1,
-			String orderByCol2, String orderByType1, String orderByType2,
-			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
-			int begin, int end)
+			long groupId, long[] entryIds, long[] notEntryIds,
+			String orderByCol1, String orderByCol2, String orderByType1,
+			String orderByType2, boolean excludeZeroViewCount, Date publishDate,
+			Date expirationDate, int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -412,6 +428,10 @@ public class TagsAssetFinder {
 
 			sql = _getDates(sql, publishDate, expirationDate);
 
+			if (groupId != -1) {
+				sql += " AND (TagsAsset.groupId = ?)";
+			}
+
 			if (excludeZeroViewCount) {
 				sql += " AND (TagsAsset.viewCount > 0)";
 			}
@@ -443,6 +463,7 @@ public class TagsAssetFinder {
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
 			_setDates(qPos, publishDate, expirationDate);
+			_setGroupId(qPos, groupId);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
@@ -577,6 +598,10 @@ public class TagsAssetFinder {
 		for (int i = 0; i < entryIds.length; i++) {
 			qPos.add(entryIds[i]);
 		}
+	}
+
+	private static void _setGroupId(QueryPos qPos, long groupId) {
+		qPos.add(groupId);
 	}
 
 	private static void _setDates(

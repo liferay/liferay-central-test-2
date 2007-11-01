@@ -78,18 +78,6 @@ public class BookmarksFolderLocalServiceUtil {
 		bookmarksFolderLocalService.setBookmarksEntryPersistence(bookmarksEntryPersistence);
 	}
 
-	public static com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder getBookmarksEntryFinder() {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.getBookmarksEntryFinder();
-	}
-
-	public static void setBookmarksEntryFinder(
-		com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder bookmarksEntryFinder) {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-		bookmarksFolderLocalService.setBookmarksEntryFinder(bookmarksEntryFinder);
-	}
-
 	public static com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence getBookmarksFolderPersistence() {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 

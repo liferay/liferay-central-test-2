@@ -801,7 +801,8 @@ public class DLFileEntryLocalServiceImpl
 		String mimeType = MimeTypesUtil.getContentType(fileEntry.getName());
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			userId, DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
+			userId, fileEntry.getFolder().getGroupId(),
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
 			tagsEntries, null, null, null, null, mimeType, fileEntry.getTitle(),
 			fileEntry.getDescription(), fileEntry.getDescription(), null, 0, 0);
 	}

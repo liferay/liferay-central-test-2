@@ -23,6 +23,7 @@ create table MembershipRequest (
 
 alter table TagsAsset add priority DOUBLE;
 alter table TagsAsset add viewCount INTEGER;
+alter table TagsAsset add groupId LONG;
 
 COMMIT_TRANSACTION;
 

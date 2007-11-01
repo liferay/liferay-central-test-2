@@ -47,8 +47,6 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceFactory;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence;
@@ -102,15 +100,6 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	public void setBookmarksEntryPersistence(
 		BookmarksEntryPersistence bookmarksEntryPersistence) {
 		this.bookmarksEntryPersistence = bookmarksEntryPersistence;
-	}
-
-	public BookmarksEntryFinder getBookmarksEntryFinder() {
-		return bookmarksEntryFinder;
-	}
-
-	public void setBookmarksEntryFinder(
-		BookmarksEntryFinder bookmarksEntryFinder) {
-		this.bookmarksEntryFinder = bookmarksEntryFinder;
 	}
 
 	public BookmarksFolderPersistence getBookmarksFolderPersistence() {
@@ -200,10 +189,6 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 			bookmarksEntryPersistence = BookmarksEntryUtil.getPersistence();
 		}
 
-		if (bookmarksEntryFinder == null) {
-			bookmarksEntryFinder = BookmarksEntryFinderUtil.getFinder();
-		}
-
 		if (bookmarksFolderPersistence == null) {
 			bookmarksFolderPersistence = BookmarksFolderUtil.getPersistence();
 		}
@@ -244,7 +229,6 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	protected BookmarksEntryLocalService bookmarksEntryLocalService;
 	protected BookmarksEntryService bookmarksEntryService;
 	protected BookmarksEntryPersistence bookmarksEntryPersistence;
-	protected BookmarksEntryFinder bookmarksEntryFinder;
 	protected BookmarksFolderPersistence bookmarksFolderPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;

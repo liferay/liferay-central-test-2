@@ -48,8 +48,6 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceFactory;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence;
@@ -90,15 +88,6 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 	public void setBookmarksEntryPersistence(
 		BookmarksEntryPersistence bookmarksEntryPersistence) {
 		this.bookmarksEntryPersistence = bookmarksEntryPersistence;
-	}
-
-	public BookmarksEntryFinder getBookmarksEntryFinder() {
-		return bookmarksEntryFinder;
-	}
-
-	public void setBookmarksEntryFinder(
-		BookmarksEntryFinder bookmarksEntryFinder) {
-		this.bookmarksEntryFinder = bookmarksEntryFinder;
 	}
 
 	public BookmarksFolderLocalService getBookmarksFolderLocalService() {
@@ -197,10 +186,6 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 			bookmarksEntryPersistence = BookmarksEntryUtil.getPersistence();
 		}
 
-		if (bookmarksEntryFinder == null) {
-			bookmarksEntryFinder = BookmarksEntryFinderUtil.getFinder();
-		}
-
 		if (bookmarksFolderLocalService == null) {
 			bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getImpl();
 		}
@@ -245,7 +230,6 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 	protected BookmarksEntryLocalService bookmarksEntryLocalService;
 	protected BookmarksEntryService bookmarksEntryService;
 	protected BookmarksEntryPersistence bookmarksEntryPersistence;
-	protected BookmarksEntryFinder bookmarksEntryFinder;
 	protected BookmarksFolderLocalService bookmarksFolderLocalService;
 	protected BookmarksFolderPersistence bookmarksFolderPersistence;
 	protected CounterLocalService counterLocalService;

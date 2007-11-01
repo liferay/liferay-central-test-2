@@ -421,11 +421,12 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				}
 			}
 			else {
-				TagsAssetLocalServiceUtil.updateAsset(
-					igImage.getUserId(), IGImage.class.getName(),
-					igImage.getPrimaryKey(), tagsEntries);
-
 				igImage.setFolderId(folderId.longValue());
+
+				TagsAssetLocalServiceUtil.updateAsset(
+					igImage.getUserId(), igImage.getFolder().getGroupId(),
+					IGImage.class.getName(), igImage.getPrimaryKey(),
+					tagsEntries);
 
 				IGImageUtil.update(igImage, true);
 			}

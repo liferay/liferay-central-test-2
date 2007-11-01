@@ -1503,10 +1503,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			message.getUserId(), MBMessage.class.getName(),
-			message.getMessageId(), tagsEntries, null, null, null, null,
-			ContentTypes.TEXT_HTML, message.getSubject(), message.getSubject(),
-			message.getSubject(), null, 0, 0);
+			message.getUserId(), message.getCategory().getGroupId(),
+			MBMessage.class.getName(), message.getMessageId(), tagsEntries,
+			null, null, null, null, ContentTypes.TEXT_HTML,
+			message.getSubject(), message.getSubject(), message.getSubject(),
+			null, 0, 0);
 	}
 
 	protected void validate(String subject, String body)

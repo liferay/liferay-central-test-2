@@ -605,9 +605,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		TagsAssetLocalServiceUtil.updateAsset(
-			userId, BlogsEntry.class.getName(), entry.getEntryId(), tagsEntries,
-			null, null, null, null, ContentTypes.TEXT_HTML, entry.getTitle(),
-			entry.getTitle(), entry.getTitle(), null, 0, 0);
+			userId, entry.getGroupId(), BlogsEntry.class.getName(),
+			entry.getEntryId(),tagsEntries, null, null, null, null,
+			ContentTypes.TEXT_HTML, entry.getTitle(), entry.getTitle(),
+			entry.getTitle(), null, 0, 0);
 	}
 
 	protected long getCategoryId(long companyId, long categoryId)

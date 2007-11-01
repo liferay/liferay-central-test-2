@@ -53,6 +53,7 @@ public class TagsAssetJSONSerializer {
 	public static JSONObject toJSONObject(TagsAsset model) {
 		JSONObject jsonObj = new JSONObject();
 		JSONUtil.put(jsonObj, "assetId", model.getAssetId());
+		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "userId", model.getUserId());
 		JSONUtil.put(jsonObj, "userName", model.getUserName());
