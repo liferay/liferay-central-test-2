@@ -31,10 +31,12 @@ import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.RequiredLayoutException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -78,6 +80,7 @@ import java.io.File;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
@@ -456,9 +459,6 @@ public class EditPagesAction extends PortletAction {
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 		long layoutId = ParamUtil.getLong(req, "layoutId");
 		long parentLayoutId = ParamUtil.getLong(uploadReq, "parentLayoutId");
-		String name = ParamUtil.getString(uploadReq, "name");
-		String title = ParamUtil.getString(uploadReq, "title");
-		String languageId = ParamUtil.getString(uploadReq, "curLanguageId");
 		String description = ParamUtil.getString(uploadReq, "description");
 		String type = ParamUtil.getString(uploadReq, "type");
 		boolean hidden = ParamUtil.getBoolean(uploadReq, "hidden");
@@ -472,6 +472,21 @@ public class EditPagesAction extends PortletAction {
 
 		long copyLayoutId = ParamUtil.getLong(uploadReq, "copyLayoutId");
 
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+		Map localeNameMap = new HashMap();
+		Map localeTitleMap = new HashMap();
+
+		for (int i = 0; i < locales.length; i++) {
+			String languageId = LocaleUtil.toLanguageId(locales[i]);
+
+			localeNameMap.put(
+				locales[i],
+				ParamUtil.getString(uploadReq, "name_" + languageId));
+			localeTitleMap.put(
+				locales[i],
+				ParamUtil.getString(uploadReq, "title_" + languageId));
+		}
+
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add layout
@@ -481,7 +496,7 @@ public class EditPagesAction extends PortletAction {
 					groupId, privateLayout, parentLayoutId);
 
 				Layout layout = LayoutServiceUtil.addLayout(
-					groupId, privateLayout, parentLayoutId, name, title,
+					groupId, privateLayout, parentLayoutId, localeNameMap, localeTitleMap,
 					description, parentLayout.getType(),
 					parentLayout.isHidden(), friendlyURL);
 
@@ -491,7 +506,7 @@ public class EditPagesAction extends PortletAction {
 			}
 			else {
 				Layout layout = LayoutServiceUtil.addLayout(
-					groupId, privateLayout, parentLayoutId, name, title,
+					groupId, privateLayout, parentLayoutId, localeNameMap, localeTitleMap,
 					description, type, hidden, friendlyURL);
 
 				if (type.equals(LayoutImpl.TYPE_PORTLET)) {
@@ -517,7 +532,7 @@ public class EditPagesAction extends PortletAction {
 
 			layout = LayoutServiceUtil.updateLayout(
 				groupId, privateLayout, layoutId, layout.getParentLayoutId(),
-				name, title, languageId, description, type, hidden, friendlyURL,
+				localeNameMap, localeTitleMap, description, type, hidden, friendlyURL,
 				Boolean.valueOf(iconImage), iconBytes);
 
 			if (type.equals(LayoutImpl.TYPE_PORTLET)) {

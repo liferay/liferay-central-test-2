@@ -260,10 +260,6 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 			</c:otherwise>
 		</c:choose>
 
-		if (document.<portlet:namespace />fm.<portlet:namespace />languageId) {
-			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value += "&<portlet:namespace />languageId=" + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
-		}
-
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -597,26 +593,16 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 				<c:when test='<%= tabs3.equals("page") %>'>
 
 					<%
-					String languageId = LanguageUtil.getLanguageId(request);
-					Locale languageLocale = LocaleUtil.fromLanguageId(languageId);
+					String currentLanguageId = LanguageUtil.getLanguageId(request);
+					Locale currentLocale = LocaleUtil.fromLanguageId(currentLanguageId);
+					Locale defaultLocale = LocaleUtil.getDefault();
+					String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
-					String name = request.getParameter("name");
-
-					if (Validator.isNull(name)) {
-						name = selLayout.getName(languageLocale);
-					}
-
-					String title = request.getParameter("title");
-
-					if (Validator.isNull(title)) {
-						title = selLayout.getTitle(languageLocale);
-					}
+					Locale[] locales = LanguageUtil.getAvailableLocales();
 
 					String type = BeanParamUtil.getString(selLayout, request, "type");
 					String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 					%>
-
-					<input name="<portlet:namespace />curLanguageId" type="hidden" value="<%= languageId %>" />
 
 					<table border="0" cellpadding="0" cellspacing="0" width="100%">
 					<tr>
@@ -624,33 +610,55 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							<table class="liferay-table">
 							<tr>
 								<td>
+									<br />
+								</td>
+								<td>
+									<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
+								</td>
+								<td>
+									<liferay-ui:message key="localized-language" />:
+
+									<select id="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage();">
+										<option value="" />
+
+										<%
+										for (int i = 0; i < locales.length; i++) {
+											if (locales[i].equals(defaultLocale)) {
+												continue;
+											}
+										%>
+
+											<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+
+										<%
+										}
+										%>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>
 									<liferay-ui:message key="name" />
 								</td>
 								<td>
-									<table class="liferay-table">
-									<tr>
-										<td>
-											<input name="<portlet:namespace />name" size="30" type="text" value="<%= name %>" />
-										</td>
-										<td>
-											<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />savePage();">
+									<input id="<portlet:namespace />name_<%= defaultLanguageId %>" name="<portlet:namespace />name_<%= defaultLanguageId %>" size="30" type="text" value="<%= selLayout.getName(defaultLocale) %>" />
+								</td>
+								<td>
+									<%
+									for (int i = 0; i < locales.length; i++) {
+										if (locales[i].equals(defaultLocale)) {
+											continue;
+										}
+									%>
 
-												<%
-												Locale[] locales = LanguageUtil.getAvailableLocales();
+										<input id="<portlet:namespace />name_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />name_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= selLayout.getName(locales[i], false) %>" />
 
-												for (int i = 0; i < locales.length; i++) {
-												%>
+									<%
+									}
+									%>
 
-													<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+									<input id="<portlet:namespace />name_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onNameChanged();" />
 
-												<%
-												}
-												%>
-
-											</select>
-										</td>
-									</tr>
-									</table>
 								</td>
 							</tr>
 							<tr>
@@ -658,11 +666,28 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<liferay-ui:message key="html-title" />
 								</td>
 								<td>
-									<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>" />
+									<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= selLayout.getTitle(defaultLocale) %>" />
+								</td>
+								<td>
+									<%
+									for (int i = 0; i < locales.length; i++) {
+										if (locales[i].equals(defaultLocale)) {
+											continue;
+										}
+									%>
+
+										<input id="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= selLayout.getTitle(locales[i], false) %>" />
+
+									<%
+									}
+									%>
+
+									<input id="<portlet:namespace />title_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onTitleChanged();" />
+
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2">
+								<td colspan="3">
 									<br />
 								</td>
 							</tr>
@@ -670,7 +695,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 								<td>
 									<liferay-ui:message key="type" />
 								</td>
-								<td>
+								<td colspan="2">
 									<select name="<portlet:namespace />type">
 
 										<%
@@ -690,7 +715,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 								<td>
 									<liferay-ui:message key="hidden" />
 								</td>
-								<td>
+								<td colspan="2">
 									<liferay-ui:input-checkbox param="hidden" defaultValue="<%= selLayout.isHidden() %>" />
 								</td>
 							</tr>
@@ -700,7 +725,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<td>
 										<liferay-ui:message key="friendly-url" />
 									</td>
-									<td nowrap>
+									<td colspan="2" nowrap>
 
 										<%
 										StringMaker friendlyURLBase = new StringMaker();
@@ -724,13 +749,21 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 										<%= friendlyURLBase.toString() %>
 
-										<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>" /> <%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
+										<input name="<portlet:namespace />friendlyURL" size="30" type="text" value="<%= friendlyURL %>" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<br />
+									</td>
+									<td colspan="3">
+										<%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
 									</td>
 								</tr>
 							</c:if>
 
 							<tr>
-								<td colspan="2">
+								<td colspan="3">
 									<br />
 								</td>
 							</tr>
@@ -738,7 +771,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 								<td>
 									<liferay-ui:message key="icon" />
 								</td>
-								<td>
+								<td colspan="2">
 									<liferay-theme:layout-icon layout="<%= selLayout %>" />
 
 									<input name="<portlet:namespace />iconFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />iconImage.value = true; document.<portlet:namespace />fm.<portlet:namespace />iconImageCheckbox.checked = true;" />
@@ -748,7 +781,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 								<td>
 									<liferay-ui:message key="use-icon" />
 								</td>
-								<td>
+								<td colspan="2">
 									<liferay-ui:input-checkbox param="iconImage" defaultValue="<%= selLayout.isIconImage() %>" />
 								</td>
 							</tr>
@@ -789,43 +822,104 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 					<script type="text/javascript">
 						<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-							Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
+							Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name_<%= defaultLanguageId %>);
 						</c:if>
 
-						function <portlet:namespace />getChoice(value) {
-							for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
-								if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value == value) {
-									return document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].index;
+						var nameChanged = false;
+						var titleChanged = false;
+						var lastLanguageId = "<%= currentLanguageId %>";
+
+						function <portlet:namespace />onNameChanged() {
+							nameChanged = true;
+						}
+
+						function <portlet:namespace />onTitleChanged() {
+							titleChanged = true;
+						}
+
+						function <portlet:namespace />updateLanguage() {
+							if (lastLanguageId != "<%= defaultLanguageId %>") {
+								if (nameChanged) {
+									var nameValue = jQuery("#<portlet:namespace />name_temp").attr("value");
+
+									if (nameValue == null) {
+										nameValue = "";
+									}
+
+									jQuery("#<portlet:namespace />name_" + lastLanguageId).attr("value", nameValue);
+									nameChanged = false;
+								}
+
+								if (titleChanged) {
+									var titleValue = jQuery("#<portlet:namespace />title_temp").attr("value");
+
+									if (titleValue == null) {
+										titleValue = "";
+									}
+
+									jQuery("#<portlet:namespace />title_" + lastLanguageId).attr("value", titleValue);
+									titleChanged = false;
 								}
 							}
+
+							var selLangId = "";
+
+							for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
+								if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
+									selLangId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
+
+									break;
+								}
+							}
+
+							if (selLangId != "") {
+								<portlet:namespace />updateLanguageTemps(selLangId);
+
+								jQuery("#<portlet:namespace />name_temp").show();
+								jQuery("#<portlet:namespace />title_temp").show();
+							}
+							else {
+								jQuery("#<portlet:namespace />name_temp").hide();
+								jQuery("#<portlet:namespace />title_temp").hide();
+							}
+
+							lastLanguageId = selLangId;
 
 							return null;
 						}
 
-						<%
-						try {
-							SAXReader reader = new SAXReader();
+						function <portlet:namespace />updateLanguageTemps(lang) {
+							if (lang != "<%= defaultLanguageId %>") {
+								var nameValue = jQuery("#<portlet:namespace />name_" + lang).attr("value");
+								var titleValue = jQuery("#<portlet:namespace />title_" + lang).attr("value");
+								var defaultNameValue = jQuery("#<portlet:namespace />name_<%= defaultLanguageId %>").attr("value");
+								var defaultTitleValue = jQuery("#<portlet:namespace />title_<%= defaultLanguageId %>").attr("value");
 
-							Document doc = reader.read(new StringReader(selLayout.getName()));
+								if (defaultNameValue == null) {
+									defaultNameValue = "";
+								}
 
-							Element root = doc.getRootElement();
+								if (defaultTitleValue == null) {
+									defaultTitleValue = "";
+								}
 
-							String [] availableLocales = StringUtil.split(root.attributeValue("available-locales"));
+								if (nameValue == null || nameValue == "") {
+									jQuery("#<portlet:namespace />name_temp").attr("value", defaultNameValue);
+								}
+								else {
+									jQuery("#<portlet:namespace />name_temp").attr("value", nameValue);
+								}
 
-							if (availableLocales != null) {
-								for (int i = 0; i < availableLocales.length; i++) {
-						%>
-
-									document.<portlet:namespace />fm.<portlet:namespace />languageId.options[<portlet:namespace />getChoice("<%= availableLocales[i] %>")].style.color = "<%= colorScheme.getPortletMsgError() %>";
-
-						<%
+								if (titleValue == null || titleValue == "") {
+									jQuery("#<portlet:namespace />title_temp").attr("value", defaultTitleValue);
+								}
+								else {
+									jQuery("#<portlet:namespace />title_temp").attr("value", titleValue);
 								}
 							}
 						}
-						catch (Exception e) {
-						}
-						%>
 
+						<portlet:namespace />updateLanguageTemps(lastLanguageId);
 					</script>
 				</c:when>
 				<c:when test='<%= tabs3.equals("children") %>'>

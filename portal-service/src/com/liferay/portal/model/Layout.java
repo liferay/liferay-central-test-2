@@ -83,11 +83,21 @@ public interface Layout extends LayoutModel {
 
 	public java.lang.String getName(java.lang.String localeLanguageId);
 
+	public java.lang.String getName(java.util.Locale locale, boolean useDefault);
+
+	public java.lang.String getName(java.lang.String localeLanguageId,
+		boolean useDefault);
+
 	public void setName(java.lang.String name, java.util.Locale locale);
 
 	public java.lang.String getTitle(java.util.Locale locale);
 
 	public java.lang.String getTitle(java.lang.String localeLanguageId);
+
+	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault);
+
+	public java.lang.String getTitle(java.lang.String localeLanguageId,
+		boolean useDefault);
 
 	public java.lang.String getHTMLTitle(java.util.Locale locale);
 

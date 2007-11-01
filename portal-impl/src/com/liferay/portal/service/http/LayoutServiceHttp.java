@@ -144,6 +144,79 @@ public class LayoutServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.model.Layout addLayout(
+		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
+		long parentLayoutId, java.util.Map localeNameMap,
+		java.util.Map localeTitleMap, java.lang.String description,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+			Object paramObj2 = new LongWrapper(parentLayoutId);
+			Object paramObj3 = localeNameMap;
+
+			if (localeNameMap == null) {
+				paramObj3 = new NullWrapper("java.util.Map");
+			}
+
+			Object paramObj4 = localeTitleMap;
+
+			if (localeTitleMap == null) {
+				paramObj4 = new NullWrapper("java.util.Map");
+			}
+
+			Object paramObj5 = description;
+
+			if (description == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = type;
+
+			if (type == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = new BooleanWrapper(hidden);
+			Object paramObj8 = friendlyURL;
+
+			if (friendlyURL == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"addLayout",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Layout)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static void deleteLayout(HttpPrincipal httpPrincipal, long plid)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -423,10 +496,9 @@ public class LayoutServiceHttp {
 
 	public static com.liferay.portal.model.Layout updateLayout(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
-		long layoutId, long parentLayoutId, java.lang.String name,
-		java.lang.String title, java.lang.String languageId,
-		java.lang.String description, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		long layoutId, long parentLayoutId, java.util.Map localeNameMap,
+		java.util.Map localeTitleMap, java.lang.String description,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -434,49 +506,42 @@ public class LayoutServiceHttp {
 			Object paramObj1 = new BooleanWrapper(privateLayout);
 			Object paramObj2 = new LongWrapper(layoutId);
 			Object paramObj3 = new LongWrapper(parentLayoutId);
-			Object paramObj4 = name;
+			Object paramObj4 = localeNameMap;
 
-			if (name == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+			if (localeNameMap == null) {
+				paramObj4 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj5 = title;
+			Object paramObj5 = localeTitleMap;
 
-			if (title == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+			if (localeTitleMap == null) {
+				paramObj5 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj6 = languageId;
+			Object paramObj6 = description;
 
-			if (languageId == null) {
+			if (description == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = description;
+			Object paramObj7 = type;
 
-			if (description == null) {
+			if (type == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = type;
-
-			if (type == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = new BooleanWrapper(hidden);
-			Object paramObj10 = friendlyURL;
+			Object paramObj8 = new BooleanWrapper(hidden);
+			Object paramObj9 = friendlyURL;
 
 			if (friendlyURL == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
+				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateLayout",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 			Object returnObj = null;
 
@@ -505,11 +570,10 @@ public class LayoutServiceHttp {
 
 	public static com.liferay.portal.model.Layout updateLayout(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
-		long layoutId, long parentLayoutId, java.lang.String name,
-		java.lang.String title, java.lang.String languageId,
-		java.lang.String description, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL, java.lang.Boolean iconImage,
-		byte[] iconBytes)
+		long layoutId, long parentLayoutId, java.util.Map localeNameMap,
+		java.util.Map localeTitleMap, java.lang.String description,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		java.lang.Boolean iconImage, byte[] iconBytes)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -517,53 +581,47 @@ public class LayoutServiceHttp {
 			Object paramObj1 = new BooleanWrapper(privateLayout);
 			Object paramObj2 = new LongWrapper(layoutId);
 			Object paramObj3 = new LongWrapper(parentLayoutId);
-			Object paramObj4 = name;
+			Object paramObj4 = localeNameMap;
 
-			if (name == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+			if (localeNameMap == null) {
+				paramObj4 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj5 = title;
+			Object paramObj5 = localeTitleMap;
 
-			if (title == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+			if (localeTitleMap == null) {
+				paramObj5 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj6 = languageId;
+			Object paramObj6 = description;
 
-			if (languageId == null) {
+			if (description == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = description;
+			Object paramObj7 = type;
 
-			if (description == null) {
+			if (type == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = type;
-
-			if (type == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = new BooleanWrapper(hidden);
-			Object paramObj10 = friendlyURL;
+			Object paramObj8 = new BooleanWrapper(hidden);
+			Object paramObj9 = friendlyURL;
 
 			if (friendlyURL == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
+				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj11 = iconImage;
+			Object paramObj10 = iconImage;
 
 			if (iconImage == null) {
-				paramObj11 = new NullWrapper("java.lang.Boolean");
+				paramObj10 = new NullWrapper("java.lang.Boolean");
 			}
 
-			Object paramObj12 = iconBytes;
+			Object paramObj11 = iconBytes;
 
 			if (iconBytes == null) {
-				paramObj12 = new NullWrapper("[B");
+				paramObj11 = new NullWrapper("[B");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
@@ -571,7 +629,7 @@ public class LayoutServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12
+						paramObj10, paramObj11
 					});
 			Object returnObj = null;
 

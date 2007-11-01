@@ -345,6 +345,17 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return LocalizationUtil.getLocalization(getName(), localeLanguageId);
 	}
 
+	public String getName(Locale locale, boolean useDefault) {
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(localeLanguageId, useDefault);
+	}
+
+	public String getName(String localeLanguageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(
+			getName(), localeLanguageId, useDefault);
+	}
+
 	public void setName(String name, Locale locale) {
 		String localeLanguageId = LocaleUtil.toLanguageId(locale);
 
@@ -361,6 +372,17 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 	public String getTitle(String localeLanguageId) {
 		return LocalizationUtil.getLocalization(getTitle(), localeLanguageId);
+	}
+
+	public String getTitle(Locale locale, boolean useDefault) {
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(localeLanguageId, useDefault);
+	}
+
+	public String getTitle(String localeLanguageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(
+			getTitle(), localeLanguageId, useDefault);
 	}
 
 	public String getHTMLTitle(Locale locale) {
