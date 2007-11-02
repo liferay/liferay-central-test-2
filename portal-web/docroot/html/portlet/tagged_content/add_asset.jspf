@@ -28,8 +28,7 @@ List assetTypes = new ArrayList();
 TagsAssetType[] allAssetTypes = TagsAssetServiceUtil.getAssetTypes(themeDisplay.getLocale().toString());
 
 for (int i = 0; i < allAssetTypes.length; i++) {
-
-	if (Validator.isNull(classNameId) || (classNameId.equals(String.valueOf(allAssetTypes[i].getClassNameId())))) {
+	if ((classNameId == 0) || (classNameId == allAssetTypes[i].getClassNameId())) {
 		assetTypes.add(allAssetTypes[i]);
 	}
 }
@@ -52,10 +51,10 @@ PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, assetTy
 		<option value=""><liferay-ui:message key="add-new"/>...</option>
 
 		<%
-		Iterator it = assetTypes.iterator();
+		Iterator itr = assetTypes.iterator();
 
-		while (it.hasNext()) {
-			TagsAssetType assetType = (TagsAssetType)it.next();
+		while (itr.hasNext()) {
+			TagsAssetType assetType = (TagsAssetType)itr.next();
 
 			PortletURLImpl redirectURLObj = (PortletURLImpl)currentURLObj;
 
@@ -71,11 +70,11 @@ PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, assetTy
 			PortletURL url = getAddURL(assetType.getClassName(), permissionChecker, request, themeDisplay, entries, redirectURLObj);
 
 			if (url != null) {
-			%>
-	
+		%>
+
 				<option value="<%= url.toString() %>"><liferay-ui:message key='<%= "model.resource." + assetType.getClassName() %>' /></option>
 
-			<%
+		<%
 			}
 		}
 		%>
@@ -148,11 +147,11 @@ public PortletURL getAddURL(String assetType, PermissionChecker permissionChecke
 public PortletURL[] getAddURLs(PermissionChecker permissionChecker, HttpServletRequest request, ThemeDisplay themeDisplay, List assetTypes, String[] entries, PortletURLImpl currentURLObj) throws Exception {
 	List urls = new ArrayList();
 
-	Iterator it = assetTypes.iterator();
+	Iterator itr = assetTypes.iterator();
 
-	while (it.hasNext()) {
-		TagsAssetType assetType = (TagsAssetType)it.next();
-		
+	while (itr.hasNext()) {
+		TagsAssetType assetType = (TagsAssetType)itr.next();
+
 		PortletURL url = getAddURL(assetType.getClassName(), permissionChecker, request, themeDisplay, entries, currentURLObj);
 
 		if (url != null) {

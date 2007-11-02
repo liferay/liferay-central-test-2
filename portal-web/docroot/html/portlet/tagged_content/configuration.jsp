@@ -266,15 +266,16 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<select name="<portlet:namespace/>classNameId">
 							<option value=""><liferay-ui:message key="all"/></option>
+
 							<%
-							TagsAssetType[] assetTypes = TagsAssetServiceUtil.getAssetTypes(themeDisplay.getLocale().toString()); 
+							TagsAssetType[] assetTypes = TagsAssetServiceUtil.getAssetTypes(themeDisplay.getLocale().toString());
 
 							for (int i = 0; i < assetTypes.length; i++) {
-								%>
+							%>
 
-								<option <%= classNameId.equals(String.valueOf(assetTypes[i].getClassNameId())) ? "selected" : "" %> value="<%= String.valueOf(assetTypes[i].getClassNameId()) %>"><liferay-ui:message key='<%= "model.resource." + assetTypes[i].getClassName() %>' /></option>
+								<option <%= (classNameId == assetTypes[i].getClassNameId()) ? "selected" : "" %> value="<%= assetTypes[i].getClassNameId() %>"><liferay-ui:message key='<%= "model.resource." + assetTypes[i].getClassName() %>' /></option>
 
-								<%
+							<%
 							}
 							%>
 

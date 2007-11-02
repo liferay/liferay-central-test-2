@@ -78,8 +78,9 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 	};
 
 	public int countByAndEntryIds(
-			long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
-			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
+			long groupId, long[] classNameIds, long[] entryIds,
+			long[] notEntryIds, boolean excludeZeroViewCount, Date publishDate,
+			Date expirationDate)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -177,8 +178,9 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 	}
 
 	public int countByOrEntryIds(
-			long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
-			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
+			long groupId, long[] classNameIds, long[] entryIds,
+			long[] notEntryIds, boolean excludeZeroViewCount, Date publishDate,
+			Date expirationDate)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -265,10 +267,11 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 	}
 
 	public List findByAndEntryIds(
-			long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
-			String orderByCol1, String orderByCol2, String orderByType1,
-			String orderByType2, boolean excludeZeroViewCount, Date publishDate,
-			Date expirationDate, int begin, int end)
+			long groupId, long[] classNameIds, long[] entryIds,
+			long[] notEntryIds, String orderByCol1, String orderByCol2,
+			String orderByType1, String orderByType2,
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
+			int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {
@@ -632,7 +635,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			qPos.add(classNameIds[i]);
 		}
 	}
-	
+
 	private void _setDates(
 		QueryPos qPos, Date publishDate, Date expirationDate) {
 

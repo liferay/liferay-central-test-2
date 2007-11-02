@@ -123,7 +123,7 @@
 <c:if test='<%= selectionStyle.equals("dynamic") %>'>
 	<tr>
 		<td>
-			<liferay-ui:message key="exclude-assets-with-zero-views" />
+			<liferay-ui:message key="exclude-assets-with-0-views" />
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="excludeZeroViewCount" defaultValue="<%= excludeZeroViewCount %>" />

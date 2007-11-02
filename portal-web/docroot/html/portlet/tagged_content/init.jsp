@@ -112,9 +112,8 @@ if (Validator.isNull(selectionStyle)) {
 	selectionStyle = "dynamic";
 }
 
-String classNameId = GetterUtil.getString(prefs.getValue("class-name-id", ""));
-long[] classNameIds = StringUtil.split(classNameId, 0L);
-
+long classNameId = GetterUtil.getLong(prefs.getValue("class-name-id", StringPool.BLANK));
+long[] classNameIds = new long[] {classNameId};
 String category = GetterUtil.getString(prefs.getValue("category", StringPool.BLANK));
 String[] entries = prefs.getValues("entries", new String[0]);
 String[] notEntries = prefs.getValues("not-entries", new String[0]);

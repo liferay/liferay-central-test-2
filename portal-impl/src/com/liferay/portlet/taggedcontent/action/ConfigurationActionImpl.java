@@ -198,7 +198,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ParamUtil.getString(req, "notEntries"));
 		boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
 
-		String classNameId = ParamUtil.getString(req, "classNameId");
+		long classNameId = ParamUtil.getLong(req, "classNameId");
 		String category = ParamUtil.getString(req, "category");
 		String displayStyle = ParamUtil.getString(req, "displayStyle");
 		String orderByColumn1 = ParamUtil.getString(req, "orderByColumn1");
@@ -218,7 +218,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValues("not-entries", notEntries);
 		prefs.setValue("and-operator", String.valueOf(andOperator));
 
-		prefs.setValue("class-name-id", classNameId);
+		prefs.setValue("class-name-id", String.valueOf(classNameId));
 		prefs.setValue("category", category);
 		prefs.setValue("display-style", displayStyle);
 		prefs.setValue("order-by-column-1", orderByColumn1);
