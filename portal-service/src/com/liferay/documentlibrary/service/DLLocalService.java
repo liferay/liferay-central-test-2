@@ -68,7 +68,7 @@ public interface DLLocalService {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			String properties, InputStream is)
-	throws PortalException, SystemException;
+		throws PortalException, SystemException;
 
 	public void validate(String fileName, InputStream is)
 		throws PortalException;

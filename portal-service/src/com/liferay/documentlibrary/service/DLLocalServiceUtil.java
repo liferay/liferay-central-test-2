@@ -118,4 +118,21 @@ public class DLLocalServiceUtil {
 			versionNumber, sourceFileName, properties, is);
 	}
 
+	public static void validate(String fileName, InputStream is)
+		throws PortalException {
+
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+
+		dlLocalService.validate(fileName, is);
+	}
+
+	public static void validate(
+			String fileName, String sourceFileName, InputStream is)
+		throws PortalException {
+
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+
+		dlLocalService.validate(fileName, sourceFileName, is);
+	}
+
 }
