@@ -217,11 +217,11 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
 			}
 
+			sql = _getDates(sql, publishDate, expirationDate);
+
 			if (groupId > 0) {
 				sql += " AND (TagsAsset.groupId = ?)";
 			}
-
-			sql = _getDates(sql, publishDate, expirationDate);
 
 			if (excludeZeroViewCount) {
 				sql += " AND (TagsAsset.viewCount > 0)";
