@@ -167,7 +167,7 @@ portletURL.setParameter("tabs1", tabs1);
 				// Status
 
 				String status = null;
-				
+
 				if (article.isExpired()) {
 					status = "expired";
 				}
