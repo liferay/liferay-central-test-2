@@ -120,7 +120,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		long categoryId = CompanyImpl.SYSTEM;
-		subject = "N/A";
+
+		if (Validator.isNull(subject)) {
+			subject = "N/A";
+		}
+
 		List files = new ArrayList();
 		boolean anonymous = false;
 		double priority = 0.0;
@@ -922,7 +926,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		long categoryId = CompanyImpl.SYSTEM;
-		subject = "N/A";
+
+		if (Validator.isNull(subject)) {
+			subject = "N/A";
+		}
+
 		List files = new ArrayList();
 		double priority = 0.0;
 		String[] tagsEntries = null;
