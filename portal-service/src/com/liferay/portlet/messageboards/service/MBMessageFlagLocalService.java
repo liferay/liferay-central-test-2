@@ -112,6 +112,16 @@ public interface MBMessageFlagLocalService {
 	public void setMBThreadFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadFinder mbThreadFinder);
 
+	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
+
+	public void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
+
 	public void afterPropertiesSet();
 
 	public void addReadFlags(long userId, java.util.List messages)

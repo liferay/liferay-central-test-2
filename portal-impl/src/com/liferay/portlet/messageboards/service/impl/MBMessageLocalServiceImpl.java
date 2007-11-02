@@ -22,11 +22,8 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
-import com.liferay.documentlibrary.service.DLServiceUtil;
-import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
@@ -44,18 +41,12 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.SubscriptionLocalServiceUtil;
-import com.liferay.portal.service.persistence.CompanyUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
@@ -72,22 +63,12 @@ import com.liferay.portlet.messageboards.model.impl.MBMessageDisplayImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.model.impl.MBTreeWalkerImpl;
-import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.jms.MBMessageProducer;
-import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 
 import java.io.IOException;
 
@@ -148,7 +129,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
-		MBCategoryLocalServiceUtil.getSystemCategory();
+		mbCategoryLocalService.getSystemCategory();
 
 		MBMessage message = addMessage(
 			userId, categoryId, threadId, parentMessageId, subject, body, files,
@@ -255,8 +236,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Message
 
-		User user = UserUtil.findByPrimaryKey(userId);
-		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+		User user = userPersistence.findByPrimaryKey(userId);
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			categoryId);
 		subject = ModelHintsUtil.trimString(
 			MBMessage.class.getName(), "subject", subject);
 		anonymous = user.isDefaultUser() ? true : anonymous;
@@ -264,11 +246,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		validate(subject, body);
 
-		long messageId = CounterLocalServiceUtil.increment();
+		long messageId = counterLocalService.increment();
 
 		logAddMessage(messageId, stopWatch, 1);
 
-		MBMessage message = MBMessageUtil.create(messageId);
+		MBMessage message = mbMessagePersistence.create(messageId);
 
 		message.setCompanyId(user.getCompanyId());
 		message.setUserId(user.getUserId());
@@ -278,7 +260,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Thread
 
-		MBMessage parentMessage = MBMessageUtil.fetchByPrimaryKey(
+		MBMessage parentMessage = mbMessagePersistence.fetchByPrimaryKey(
 			parentMessageId);
 
 		if (parentMessage == null) {
@@ -288,15 +270,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread thread = null;
 
 		if (threadId > 0) {
-			thread = MBThreadUtil.fetchByPrimaryKey(threadId);
+			thread = mbThreadPersistence.fetchByPrimaryKey(threadId);
 		}
 
 		if ((thread == null) ||
 			(parentMessageId == MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID)) {
 
-			threadId = CounterLocalServiceUtil.increment();
+			threadId = counterLocalService.increment();
 
-			thread = MBThreadUtil.create(threadId);
+			thread = mbThreadPersistence.create(threadId);
 
 			thread.setCategoryId(categoryId);
 			thread.setRootMessageId(messageId);
@@ -340,13 +322,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			try {
 				try {
-					DLServiceUtil.deleteDirectory(
+					dlService.deleteDirectory(
 						companyId, portletId, repositoryId, dirName);
 				}
 				catch (NoSuchDirectoryException nsde) {
 				}
 
-				DLServiceUtil.addDirectory(companyId, repositoryId, dirName);
+				dlService.addDirectory(companyId, repositoryId, dirName);
 
 				for (int i = 0; i < files.size(); i++) {
 					ObjectValuePair ovp = (ObjectValuePair)files.get(i);
@@ -355,7 +337,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					byte[] byteArray = (byte[])ovp.getValue();
 
 					try {
-						DLServiceUtil.addFile(
+						dlService.addFile(
 							companyId, portletId, groupId, repositoryId,
 							dirName + "/" + fileName, StringPool.BLANK,
 							byteArray);
@@ -373,8 +355,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Commit
 
-		MBThreadUtil.update(thread);
-		MBMessageUtil.update(message);
+		mbThreadPersistence.update(thread);
+		mbMessagePersistence.update(message);
 
 		logAddMessage(messageId, stopWatch, 4);
 
@@ -402,7 +384,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Statistics
 
 		if (!category.isDiscussion()) {
-			MBStatsUserLocalServiceUtil.updateStatsUser(
+			mbStatsUserLocalService.updateStatsUser(
 				category.getGroupId(), userId);
 		}
 
@@ -418,7 +400,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		category.setLastPostDate(now);
 
-		MBCategoryUtil.update(category);
+		mbCategoryPersistence.update(category);
 
 		logAddMessage(messageId, stopWatch, 8);
 
@@ -468,8 +450,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
-		MBMessage message = MBMessageUtil.findByPrimaryKey(messageId);
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			categoryId);
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
 		addMessageResources(
 			category, message, addCommunityPermissions, addGuestPermissions);
@@ -480,7 +463,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			message.getCompanyId(), category.getGroupId(), message.getUserId(),
 			MBMessage.class.getName(), message.getMessageId(),
 			false, addCommunityPermissions, addGuestPermissions);
@@ -501,8 +484,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
-		MBMessage message = MBMessageUtil.findByPrimaryKey(messageId);
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			categoryId);
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
 		addMessageResources(
 			category, message, communityPermissions, guestPermissions);
@@ -513,7 +497,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			message.getCompanyId(), category.getGroupId(), message.getUserId(),
 			MBMessage.class.getName(), message.getMessageId(),
 			communityPermissions, guestPermissions);
@@ -531,20 +515,20 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		try {
 			long classNameId = PortalUtil.getClassNameId(className);
 
-			MBDiscussion discussion =
-				MBDiscussionUtil.findByC_C(classNameId, classPK);
+			MBDiscussion discussion = mbDiscussionPersistence.findByC_C(
+				classNameId, classPK);
 
-			List messages = MBMessageUtil.findByT_P(
+			List messages = mbMessagePersistence.findByT_P(
 				discussion.getThreadId(),
 				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID, 0, 1);
 
 			if (messages.size() > 0) {
 				MBMessage message = (MBMessage)messages.get(0);
 
-				MBThreadLocalServiceUtil.deleteThread(message.getThreadId());
+				mbThreadLocalService.deleteThread(message.getThreadId());
 			}
 
-			MBDiscussionUtil.remove(discussion.getDiscussionId());
+			mbDiscussionPersistence.remove(discussion.getDiscussionId());
 		}
 		catch (NoSuchDiscussionException nsde) {
 		}
@@ -553,7 +537,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public void deleteMessage(long messageId)
 		throws PortalException, SystemException {
 
-		MBMessage message = MBMessageUtil.findByPrimaryKey(messageId);
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
 		deleteMessage(message);
 	}
@@ -580,7 +564,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String dirName = message.getAttachmentsDir();
 
 			try {
-				DLServiceUtil.deleteDirectory(
+				dlService.deleteDirectory(
 					companyId, portletId, repositoryId, dirName);
 			}
 			catch (NoSuchDirectoryException nsde) {
@@ -592,7 +576,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Thread
 
-		int count = MBMessageUtil.countByThreadId(message.getThreadId());
+		int count = mbMessagePersistence.countByThreadId(message.getThreadId());
 
 		if (count == 1) {
 
@@ -604,7 +588,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String dirName = message.getThreadAttachmentsDir();
 
 			try {
-				DLServiceUtil.deleteDirectory(
+				dlService.deleteDirectory(
 					companyId, portletId, repositoryId, dirName);
 			}
 			catch (NoSuchDirectoryException nsde) {
@@ -615,22 +599,22 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			// Subscriptions
 
-			SubscriptionLocalServiceUtil.deleteSubscriptions(
+			subscriptionLocalService.deleteSubscriptions(
 				message.getCompanyId(), MBThread.class.getName(),
 				message.getThreadId());
 
 			// Thread
 
-			MBThreadUtil.remove(message.getThreadId());
+			mbThreadPersistence.remove(message.getThreadId());
 		}
 		else if (count > 1) {
-			MBThread thread = MBThreadUtil.findByPrimaryKey(
+			MBThread thread = mbThreadPersistence.findByPrimaryKey(
 				message.getThreadId());
 
 			// Message is a root message
 
 			if (thread.getRootMessageId() == message.getMessageId()) {
-				List childrenMessages = MBMessageUtil.findByT_P(
+				List childrenMessages = mbMessagePersistence.findByT_P(
 					message.getThreadId(), message.getMessageId());
 
 				if (childrenMessages.size() > 1) {
@@ -643,18 +627,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					childMessage.setParentMessageId(
 						MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
-					MBMessageUtil.update(childMessage);
+					mbMessagePersistence.update(childMessage);
 
 					thread.setRootMessageId(childMessage.getMessageId());
 
-					MBThreadUtil.update(thread);
+					mbThreadPersistence.update(thread);
 				}
 			}
 
 			// Message is a child message
 
 			else {
-				List childrenMessages = MBMessageUtil.findByT_P(
+				List childrenMessages = mbMessagePersistence.findByT_P(
 					message.getThreadId(), message.getMessageId());
 
 				// Message has children messages
@@ -668,7 +652,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 						childMessage.setParentMessageId(
 							message.getParentMessageId());
 
-						MBMessageUtil.update(childMessage);
+						mbMessagePersistence.update(childMessage);
 					}
 				}
 			}
@@ -677,48 +661,49 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			thread.setMessageCount(count - 1);
 
-			MBThreadUtil.update(thread);
+			mbThreadPersistence.update(thread);
 		}
 
 		// Tags
 
-		TagsAssetLocalServiceUtil.deleteAsset(
+		tagsAssetLocalService.deleteAsset(
 			MBMessage.class.getName(), message.getMessageId());
 
 		// Message flags
 
-		MBMessageFlagUtil.removeByMessageId(message.getMessageId());
+		mbMessageFlagPersistence.removeByMessageId(message.getMessageId());
 
 		// Resources
 
 		if (!message.isDiscussion()) {
-			ResourceLocalServiceUtil.deleteResource(
+			resourceLocalService.deleteResource(
 				message.getCompanyId(), MBMessage.class.getName(),
 				ResourceImpl.SCOPE_INDIVIDUAL, message.getMessageId());
 		}
 
 		// Message
 
-		MBMessageUtil.remove(message.getPrimaryKey());
+		mbMessagePersistence.remove(message.getPrimaryKey());
 	}
 
 	public List getCategoryMessages(long categoryId, int begin, int end)
 		throws SystemException {
 
-		return MBMessageUtil.findByCategoryId(categoryId, begin, end);
+		return mbMessagePersistence.findByCategoryId(categoryId, begin, end);
 	}
 
 	public List getCategoryMessages(
 			long categoryId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return MBMessageUtil.findByCategoryId(categoryId, begin, end, obc);
+		return mbMessagePersistence.findByCategoryId(
+			categoryId, begin, end, obc);
 	}
 
 	public int getCategoryMessagesCount(long categoryId)
 		throws SystemException {
 
-		return MBMessageUtil.countByCategoryId(categoryId);
+		return mbMessagePersistence.countByCategoryId(categoryId);
 	}
 
 	public int getCategoriesMessagesCount(List categoryIds)
@@ -730,20 +715,20 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public List getCompanyMessages(long companyId, int begin, int end)
 		throws SystemException {
 
-		return MBMessageUtil.findByCompanyId(companyId, begin, end);
+		return mbMessagePersistence.findByCompanyId(companyId, begin, end);
 	}
 
 	public List getCompanyMessages(
 			long companyId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return MBMessageUtil.findByCompanyId(companyId, begin, end, obc);
+		return mbMessagePersistence.findByCompanyId(companyId, begin, end, obc);
 	}
 
 	public int getCompanyMessagesCount(long companyId)
 		throws SystemException {
 
-		return MBMessageUtil.countByCompanyId(companyId);
+		return mbMessagePersistence.countByCompanyId(companyId);
 	}
 
 	public MBMessageDisplay getDiscussionMessageDisplay(
@@ -755,10 +740,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBMessage message = null;
 
 		try {
-			MBDiscussion discussion = MBDiscussionUtil.findByC_C(
+			MBDiscussion discussion = mbDiscussionPersistence.findByC_C(
 				classNameId, classPK);
 
-			List messages = MBMessageUtil.findByT_P(
+			List messages = mbMessagePersistence.findByT_P(
 				discussion.getThreadId(),
 				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
@@ -770,15 +755,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			message = addDiscussionMessage(userId, subject, body);
 
-			long discussionId = CounterLocalServiceUtil.increment();
+			long discussionId = counterLocalService.increment();
 
-			MBDiscussion discussion = MBDiscussionUtil.create(discussionId);
+			MBDiscussion discussion = mbDiscussionPersistence.create(
+				discussionId);
 
 			discussion.setClassNameId(classNameId);
 			discussion.setClassPK(classPK);
 			discussion.setThreadId(message.getThreadId());
 
-			MBDiscussionUtil.update(discussion);
+			mbDiscussionPersistence.update(discussion);
 		}
 
 		return getMessageDisplay(message);
@@ -787,14 +773,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public int getDiscussionMessagesCount(long classNameId, long classPK)
 		throws SystemException {
 
-		MBDiscussion discussion = MBDiscussionUtil.fetchByC_C(
+		MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
 			classNameId, classPK);
 
 		if (discussion == null) {
 			return 0;
 		}
 
-		int count = MBMessageUtil.countByThreadId(discussion.getThreadId());
+		int count = mbMessagePersistence.countByThreadId(
+			discussion.getThreadId());
 
 		if (count >= 1) {
 			return count - 1;
@@ -824,7 +811,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public MBMessage getMessage(long messageId)
 		throws PortalException, SystemException {
 
-		return MBMessageUtil.findByPrimaryKey(messageId);
+		return mbMessagePersistence.findByPrimaryKey(messageId);
 	}
 
 	public MBMessageDisplay getMessageDisplay(long messageId)
@@ -838,21 +825,22 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public MBMessageDisplay getMessageDisplay(MBMessage message)
 		throws PortalException, SystemException {
 
-		MBCategory category = MBCategoryUtil.findByPrimaryKey(
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 			message.getCategoryId());
 
 		MBMessage parentMessage = null;
 
 		if (message.isReply()) {
-			parentMessage = MBMessageUtil.findByPrimaryKey(
+			parentMessage = mbMessagePersistence.findByPrimaryKey(
 				message.getParentMessageId());
 		}
 
-		MBThread thread = MBThreadUtil.findByPrimaryKey(message.getThreadId());
+		MBThread thread = mbThreadPersistence.findByPrimaryKey(
+			message.getThreadId());
 
 		thread.setViewCount(thread.getViewCount() + 1);
 
-		MBThreadUtil.update(thread);
+		mbThreadPersistence.update(thread);
 
 		MBTreeWalker treeWalker = new MBTreeWalkerImpl(message);
 
@@ -860,7 +848,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			new ThreadLastPostDateComparator(false);
 
 		MBThread[] prevAndNextThreads =
-			MBThreadUtil.findByCategoryId_PrevAndNext(
+			mbThreadPersistence.findByCategoryId_PrevAndNext(
 				message.getThreadId(), message.getCategoryId(), comparator);
 
 		MBThread previousThread = prevAndNextThreads[0];
@@ -869,7 +857,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread firstThread = null;
 
 		try {
-			firstThread = MBThreadUtil.findByCategoryId_First(
+			firstThread = mbThreadPersistence.findByCategoryId_First(
 				message.getCategoryId(), comparator);
 		}
 		catch (NoSuchThreadException nste) {
@@ -878,7 +866,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread lastThread = null;
 
 		try {
-			lastThread = MBThreadUtil.findByCategoryId_Last(
+			lastThread = mbThreadPersistence.findByCategoryId_Last(
 				message.getCategoryId(), comparator);
 		}
 		catch (NoSuchThreadException nste) {
@@ -900,7 +888,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public List getThreadMessages(long threadId, Comparator comparator)
 		throws SystemException {
 
-		List messages = MBMessageUtil.findByThreadId(threadId);
+		List messages = mbMessagePersistence.findByThreadId(threadId);
 
 		Collections.sort(messages, comparator);
 
@@ -908,24 +896,24 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public int getThreadMessagesCount(long threadId) throws SystemException {
-		return MBMessageUtil.countByThreadId(threadId);
+		return mbMessagePersistence.countByThreadId(threadId);
 	}
 
 	public void subscribeMessage(long userId, long messageId)
 		throws PortalException, SystemException {
 
-		MBMessage message = MBMessageUtil.findByPrimaryKey(messageId);
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
-		SubscriptionLocalServiceUtil.addSubscription(
+		subscriptionLocalService.addSubscription(
 			userId, MBThread.class.getName(), message.getThreadId());
 	}
 
 	public void unsubscribeMessage(long userId, long messageId)
 		throws PortalException, SystemException {
 
-		MBMessage message = MBMessageUtil.findByPrimaryKey(messageId);
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
-		SubscriptionLocalServiceUtil.deleteSubscription(
+		subscriptionLocalService.deleteSubscription(
 			userId, MBThread.class.getName(), message.getThreadId());
 	}
 
@@ -953,7 +941,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Message
 
-		MBMessage message = MBMessageUtil.findByPrimaryKey(messageId);
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
 		MBCategory category = getCategory(message, categoryId);
 		long oldCategoryId = message.getCategoryId();
@@ -974,13 +962,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			try {
 				try {
-					DLServiceUtil.deleteDirectory(
+					dlService.deleteDirectory(
 						companyId, portletId, repositoryId, dirName);
 				}
 				catch (NoSuchDirectoryException nsde) {
 				}
 
-				DLServiceUtil.addDirectory(companyId, repositoryId, dirName);
+				dlService.addDirectory(companyId, repositoryId, dirName);
 
 				for (int i = 0; i < files.size(); i++) {
 					ObjectValuePair ovp = (ObjectValuePair)files.get(i);
@@ -989,7 +977,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					byte[] byteArray = (byte[])ovp.getValue();
 
 					try {
-						DLServiceUtil.addFile(
+						dlService.addFile(
 							companyId, portletId, groupId, repositoryId,
 							dirName + "/" + fileName, StringPool.BLANK,
 							byteArray);
@@ -1010,7 +998,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setBody(body);
 		message.setAttachments((files.size() > 0 ? true : false));
 
-		MBMessageUtil.update(message);
+		mbMessagePersistence.update(message);
 
 		// Subscriptions
 
@@ -1018,25 +1006,26 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Thread
 
-		MBThread thread = MBThreadUtil.findByPrimaryKey(message.getThreadId());
+		MBThread thread = mbThreadPersistence.findByPrimaryKey(
+			message.getThreadId());
 
 		if (priority != MBThreadImpl.PRIORITY_NOT_GIVEN) {
 			thread.setPriority(priority);
 		}
 
-		MBThreadUtil.update(thread);
+		mbThreadPersistence.update(thread);
 
 		// Category
 
 		category.setLastPostDate(now);
 
-		MBCategoryUtil.update(category);
+		mbCategoryPersistence.update(category);
 
 		if (oldCategoryId != category.getCategoryId()) {
 
 			// Messages
 
-			Iterator itr = MBMessageUtil.findByC_T(
+			Iterator itr = mbMessagePersistence.findByC_T(
 				oldCategoryId, thread.getThreadId()).iterator();
 
 			while (itr.hasNext()) {
@@ -1044,7 +1033,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 				curMessage.setCategoryId(category.getCategoryId());
 
-				MBMessageUtil.update(curMessage);
+				mbMessagePersistence.update(curMessage);
 
 				// Lucene
 
@@ -1066,7 +1055,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			thread.setCategoryId(category.getCategoryId());
 
-			MBThreadUtil.update(thread);
+			mbThreadPersistence.update(thread);
 		}
 
 		// Tags
@@ -1096,16 +1085,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Message
 
-		MBMessage message = MBMessageUtil.findByPrimaryKey(messageId);
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
 		message.setCreateDate(createDate);
 		message.setModifiedDate(modifiedDate);
 
-		MBMessageUtil.update(message);
+		mbMessagePersistence.update(message);
 
 		// Thread
 
-		MBThread thread = MBThreadUtil.findByPrimaryKey(message.getThreadId());
+		MBThread thread = mbThreadPersistence.findByPrimaryKey(
+			message.getThreadId());
 
 		if (message.isAnonymous()) {
 			thread.setLastPostByUserId(0);
@@ -1116,26 +1106,26 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		thread.setLastPostDate(modifiedDate);
 
-		MBThreadUtil.update(thread);
+		mbThreadPersistence.update(thread);
 
 		// Category
 
-		MBCategory category = MBCategoryUtil.findByPrimaryKey(
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 			message.getCategoryId());
 
 		category.setLastPostDate(modifiedDate);
 
-		MBCategoryUtil.update(category);
+		mbCategoryPersistence.update(category);
 
 		// Statistics
 
-		MBStatsUser statsUser = MBStatsUserUtil.fetchByG_U(
+		MBStatsUser statsUser = mbStatsUserPersistence.fetchByG_U(
 			category.getGroupId(), message.getUserId());
 
 		if (statsUser != null) {
 			statsUser.setLastPostDate(modifiedDate);
 
-			MBStatsUserUtil.update(statsUser);
+			mbStatsUserPersistence.update(statsUser);
 		}
 
 		return message;
@@ -1144,11 +1134,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public MBMessage updateMessage(long messageId, String body)
 		throws PortalException, SystemException {
 
-		MBMessage message = MBMessageUtil.findByPrimaryKey(messageId);
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
 		message.setBody(body);
 
-		MBMessageUtil.update(message);
+		mbMessagePersistence.update(message);
 
 		return message;
 	}
@@ -1161,7 +1151,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return;
 		}
 
-		TagsAssetLocalServiceUtil.updateAsset(
+		tagsAssetLocalService.updateAsset(
 			userId, message.getCategory().getGroupId(),
 			MBMessage.class.getName(), message.getMessageId(), tagsEntries,
 			null, null, null, null, ContentTypes.TEXT_HTML,
@@ -1173,10 +1163,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (message.getCategoryId() != categoryId) {
-			MBCategory oldCategory = MBCategoryUtil.findByPrimaryKey(
+			MBCategory oldCategory = mbCategoryPersistence.findByPrimaryKey(
 				message.getCategoryId());
 
-			MBCategory newCategory = MBCategoryUtil.fetchByPrimaryKey(
+			MBCategory newCategory = mbCategoryPersistence.fetchByPrimaryKey(
 				categoryId);
 
 			if ((newCategory == null) ||
@@ -1186,7 +1176,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		return MBCategoryUtil.findByPrimaryKey(categoryId);
+		return mbCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
 	protected void logAddMessage(
@@ -1220,16 +1210,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				return;
 			}
 
-			Company company = CompanyUtil.findByPrimaryKey(
+			Company company = companyPersistence.findByPrimaryKey(
 				message.getCompanyId());
 
-			Group group = GroupLocalServiceUtil.getGroup(category.getGroupId());
+			Group group = groupPersistence.findByPrimaryKey(
+				category.getGroupId());
 
-			User user = UserUtil.findByPrimaryKey(message.getUserId());
+			User user = userPersistence.findByPrimaryKey(message.getUserId());
 
 			List categoryIds = new ArrayList();
 
-			MBCategoryLocalServiceUtil.getSubcategoryIds(
+			mbCategoryLocalService.getSubcategoryIds(
 				categoryIds, category.getGroupId(), category.getCategoryId());
 
 			categoryIds.add(new Long(category.getCategoryId()));
@@ -1438,7 +1429,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return;
 		}
 
-		BlogsEntry entry = BlogsEntryUtil.findByPrimaryKey(entryId);
+		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
 		String portalURL = PortalUtil.getPortalURL(themeDisplay);
 		String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
@@ -1446,8 +1437,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String blogsEntryURL =
 			portalURL + layoutURL + "/blogs/" + entry.getUrlTitle();
 
-		User blogsUser = UserUtil.findByPrimaryKey(entry.getUserId());
-		User commentsUser = UserUtil.findByPrimaryKey(userId);
+		User blogsUser = userPersistence.findByPrimaryKey(entry.getUserId());
+		User commentsUser = userPersistence.findByPrimaryKey(userId);
 
 		String fromName = PrefsPropsUtil.getString(
 			companyId, PropsUtil.ADMIN_EMAIL_FROM_NAME);
@@ -1511,7 +1502,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MailMessage mailMessage = new MailMessage(
 			from, to, subject, body, true);
 
-		MailServiceUtil.sendEmail(mailMessage);
+		mailService.sendEmail(mailMessage);
 	}
 
 	protected void validate(String subject, String body)

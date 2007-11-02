@@ -197,6 +197,30 @@ public class MBBanLocalServiceUtil {
 		mbBanLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setUserFinder(userFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 		mbBanLocalService.afterPropertiesSet();

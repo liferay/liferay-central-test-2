@@ -197,6 +197,66 @@ public class MBCategoryLocalServiceUtil {
 		mbCategoryLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.setResourceFinder(resourceFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getSubscriptionPersistence();
+	}
+
+	public static void setSubscriptionPersistence(
+		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.setSubscriptionPersistence(subscriptionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.setUserFinder(userFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 		mbCategoryLocalService.afterPropertiesSet();

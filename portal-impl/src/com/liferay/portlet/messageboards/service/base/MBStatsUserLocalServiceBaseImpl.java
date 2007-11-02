@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.messageboards.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
@@ -248,6 +253,22 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		this.mbThreadFinder = mbThreadFinder;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	public void afterPropertiesSet() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
@@ -324,6 +345,14 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		if (mbThreadFinder == null) {
 			mbThreadFinder = MBThreadFinderUtil.getFinder();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
 	}
 
 	protected MBBanLocalService mbBanLocalService;
@@ -345,4 +374,6 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	protected MBThreadLocalService mbThreadLocalService;
 	protected MBThreadPersistence mbThreadPersistence;
 	protected MBThreadFinder mbThreadFinder;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
 }

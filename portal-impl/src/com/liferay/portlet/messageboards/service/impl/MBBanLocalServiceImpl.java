@@ -22,19 +22,16 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.BannedUserException;
 import com.liferay.portlet.messageboards.NoSuchBanException;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.service.base.MBBanLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
 import com.liferay.portlet.messageboards.util.MBUtil;
 
 import java.util.Date;
@@ -54,16 +51,16 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 	public MBBan addBan(long userId, long plid, long banUserId)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
-		long banId = CounterLocalServiceUtil.increment();
+		long banId = counterLocalService.increment();
 
-		MBBan ban = MBBanUtil.fetchByG_B(groupId, banUserId);
+		MBBan ban = mbBanPersistence.fetchByG_B(groupId, banUserId);
 
 		if (ban == null) {
-			ban = MBBanUtil.create(banId);
+			ban = mbBanPersistence.create(banId);
 
 			ban.setGroupId(groupId);
 			ban.setCompanyId(user.getCompanyId());
@@ -75,7 +72,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 
 		ban.setModifiedDate(now);
 
-		MBBanUtil.update(ban);
+		mbBanPersistence.update(ban);
 
 		return ban;
 	}
@@ -94,18 +91,18 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
 		try {
-			MBBanUtil.removeByG_B(groupId, banUserId);
+			mbBanPersistence.removeByG_B(groupId, banUserId);
 		}
 		catch (NoSuchBanException nsbe) {
 		}
 	}
 
 	public void deleteBansByBanUserId(long banUserId) throws SystemException {
-		MBBanUtil.removeByBanUserId(banUserId);
+		mbBanPersistence.removeByBanUserId(banUserId);
 	}
 
 	public void deleteBansByGroupId(long groupId) throws SystemException {
-		MBBanUtil.removeByGroupId(groupId);
+		mbBanPersistence.removeByGroupId(groupId);
 	}
 
 	public void expireBans() throws SystemException {
@@ -114,7 +111,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		int expireInterval = GetterUtil.getInteger(PropsUtil.get(
 			PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL));
 
-		List bans = MBBanUtil.findAll();
+		List bans = mbBanPersistence.findAll();
 
 		for (int i = 0; i < bans.size(); i++) {
 			MBBan ban = (MBBan)bans.get(i);
@@ -128,7 +125,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 							ban.getBanUserId());
 				}
 
-				MBBanUtil.remove(ban);
+				mbBanPersistence.remove(ban);
 			}
 		}
 	}
@@ -136,17 +133,17 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 	public List getBans(long groupId, int start, int end)
 		throws SystemException {
 
-		return MBBanUtil.findByGroupId(groupId, start, end);
+		return mbBanPersistence.findByGroupId(groupId, start, end);
 	}
 
 	public int getBansCount(long groupId) throws SystemException {
-		return MBBanUtil.countByGroupId(groupId);
+		return mbBanPersistence.countByGroupId(groupId);
 	}
 
 	public boolean hasBan(long groupId, long banUserId)
 		throws SystemException {
 
-		if (MBBanUtil.fetchByG_B(groupId, banUserId) == null) {
+		if (mbBanPersistence.fetchByG_B(groupId, banUserId) == null) {
 			return false;
 		}
 		else {

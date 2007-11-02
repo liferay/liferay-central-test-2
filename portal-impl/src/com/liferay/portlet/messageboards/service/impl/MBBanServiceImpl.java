@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.model.MBBan;
-import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.base.MBBanServiceBaseImpl;
 
 /**
@@ -46,7 +45,7 @@ public class MBBanServiceImpl extends MBBanServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.MESSAGE_BOARDS,
 			ActionKeys.BAN_USER);
 
-		return MBBanLocalServiceUtil.addBan(getUserId(), plid, banUserId);
+		return mbBanLocalService.addBan(getUserId(), plid, banUserId);
 	}
 
 	public void deleteBan(long plid, long banUserId)
@@ -56,7 +55,7 @@ public class MBBanServiceImpl extends MBBanServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.MESSAGE_BOARDS,
 			ActionKeys.BAN_USER);
 
-		MBBanLocalServiceUtil.deleteBan(plid, banUserId);
+		mbBanLocalService.deleteBan(plid, banUserId);
 	}
 
 }

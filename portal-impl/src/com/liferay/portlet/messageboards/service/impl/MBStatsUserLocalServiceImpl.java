@@ -22,12 +22,10 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.service.base.MBStatsUserLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -44,27 +42,28 @@ public class MBStatsUserLocalServiceImpl
 	public void deleteStatsUserByGroupId(long groupId)
 		throws SystemException {
 
-		MBStatsUserUtil.removeByGroupId(groupId);
+		mbStatsUserPersistence.removeByGroupId(groupId);
 	}
 
 	public void deleteStatsUserByUserId(long userId) throws SystemException {
-		MBStatsUserUtil.removeByUserId(userId);
+		mbStatsUserPersistence.removeByUserId(userId);
 	}
 
 	public MBStatsUser getStatsUser(long groupId, long userId)
 		throws PortalException, SystemException {
 
-		MBStatsUser statsUser = MBStatsUserUtil.fetchByG_U(groupId, userId);
+		MBStatsUser statsUser = mbStatsUserPersistence.fetchByG_U(
+			groupId, userId);
 
 		if (statsUser == null) {
-			long statsUserId = CounterLocalServiceUtil.increment();
+			long statsUserId = counterLocalService.increment();
 
-			statsUser = MBStatsUserUtil.create(statsUserId);
+			statsUser = mbStatsUserPersistence.create(statsUserId);
 
 			statsUser.setGroupId(groupId);
 			statsUser.setUserId(userId);
 
-			MBStatsUserUtil.update(statsUser);
+			mbStatsUserPersistence.update(statsUser);
 		}
 
 		return statsUser;
@@ -73,11 +72,11 @@ public class MBStatsUserLocalServiceImpl
 	public List getStatsUsers(long groupId, int begin, int end)
 		throws SystemException {
 
-		return MBStatsUserUtil.findByG_M(groupId, 0, begin, end);
+		return mbStatsUserPersistence.findByG_M(groupId, 0, begin, end);
 	}
 
 	public int getStatsUsersCount(long groupId) throws SystemException {
-		return MBStatsUserUtil.countByG_M(groupId, 0);
+		return mbStatsUserPersistence.countByG_M(groupId, 0);
 	}
 
 	public void updateStatsUser(long groupId, long userId)
@@ -88,7 +87,7 @@ public class MBStatsUserLocalServiceImpl
 		statsUser.setMessageCount(statsUser.getMessageCount() + 1);
 		statsUser.setLastPostDate(new Date());
 
-		MBStatsUserUtil.update(statsUser);
+		mbStatsUserPersistence.update(statsUser);
 	}
 
 }

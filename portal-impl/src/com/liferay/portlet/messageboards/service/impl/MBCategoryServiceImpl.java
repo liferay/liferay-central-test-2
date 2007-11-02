@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.base.MBCategoryServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 
@@ -47,7 +46,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			getPermissionChecker(), plid, parentCategoryId,
 			ActionKeys.ADD_CATEGORY);
 
-		return MBCategoryLocalServiceUtil.addCategory(
+		return mbCategoryLocalService.addCategory(
 			getUserId(), plid, parentCategoryId, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -61,7 +60,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			getPermissionChecker(), plid, parentCategoryId,
 			ActionKeys.ADD_CATEGORY);
 
-		return MBCategoryLocalServiceUtil.addCategory(
+		return mbCategoryLocalService.addCategory(
 			getUserId(), plid, parentCategoryId, name, description,
 			communityPermissions, guestPermissions);
 	}
@@ -72,7 +71,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		MBCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.DELETE);
 
-		MBCategoryLocalServiceUtil.deleteCategory(categoryId);
+		mbCategoryLocalService.deleteCategory(categoryId);
 	}
 
 	public MBCategory getCategory(long categoryId)
@@ -81,7 +80,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		MBCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.VIEW);
 
-		return MBCategoryLocalServiceUtil.getCategory(categoryId);
+		return mbCategoryLocalService.getCategory(categoryId);
 	}
 
 	public void subscribeCategory(long categoryId)
@@ -90,7 +89,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		MBCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.SUBSCRIBE);
 
-		MBCategoryLocalServiceUtil.subscribeCategory(getUserId(), categoryId);
+		mbCategoryLocalService.subscribeCategory(getUserId(), categoryId);
 	}
 
 	public void unsubscribeCategory(long categoryId)
@@ -99,7 +98,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		MBCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.SUBSCRIBE);
 
-		MBCategoryLocalServiceUtil.unsubscribeCategory(getUserId(), categoryId);
+		mbCategoryLocalService.unsubscribeCategory(getUserId(), categoryId);
 	}
 
 	public MBCategory updateCategory(
@@ -110,7 +109,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		MBCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.UPDATE);
 
-		return MBCategoryLocalServiceUtil.updateCategory(
+		return mbCategoryLocalService.updateCategory(
 			categoryId, parentCategoryId, name, description,
 			mergeWithParentCategory);
 	}

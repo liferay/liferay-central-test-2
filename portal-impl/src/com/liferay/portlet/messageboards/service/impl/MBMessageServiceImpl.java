@@ -29,16 +29,12 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
-import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.base.MBMessageServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 import com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission;
@@ -82,7 +78,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			getPermissionChecker(), groupId, className, classPK,
 			ActionKeys.ADD_DISCUSSION);
 
-		return MBMessageLocalServiceUtil.addDiscussionMessage(
+		return mbMessageLocalService.addDiscussionMessage(
 			getUserId(), groupId, className, classPK, threadId, parentMessageId,
 			subject, body, themeDisplay);
 	}
@@ -109,7 +105,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
-		return MBMessageLocalServiceUtil.addMessage(
+		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
 			priority, tagsEntries, null, addCommunityPermissions,
 			addGuestPermissions);
@@ -138,7 +134,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
-		return MBMessageLocalServiceUtil.addMessage(
+		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
 			priority, tagsEntries, prefs, addCommunityPermissions,
 			addGuestPermissions);
@@ -167,7 +163,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
-		return MBMessageLocalServiceUtil.addMessage(
+		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
 			body, files, anonymous, priority, tagsEntries, null,
 			addCommunityPermissions, addGuestPermissions);
@@ -196,7 +192,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
-		return MBMessageLocalServiceUtil.addMessage(
+		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
 			body, files, anonymous, priority, tagsEntries, prefs,
 			addCommunityPermissions, addGuestPermissions);
@@ -224,7 +220,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
-		return MBMessageLocalServiceUtil.addMessage(
+		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
 			priority, tagsEntries, null, communityPermissions,
 			guestPermissions);
@@ -253,7 +249,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
-		return MBMessageLocalServiceUtil.addMessage(
+		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
 			priority, tagsEntries, prefs, communityPermissions,
 			guestPermissions);
@@ -282,7 +278,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
-		return MBMessageLocalServiceUtil.addMessage(
+		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
 			body, files, anonymous, priority, tagsEntries, null,
 			communityPermissions, guestPermissions);
@@ -311,7 +307,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
-		return MBMessageLocalServiceUtil.addMessage(
+		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
 			body, files, anonymous, priority, tagsEntries, prefs,
 			communityPermissions, guestPermissions);
@@ -325,7 +321,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			getPermissionChecker(), groupId, className, classPK,
 			ActionKeys.DELETE_DISCUSSION);
 
-		MBMessageLocalServiceUtil.deleteDiscussionMessage(messageId);
+		mbMessageLocalService.deleteDiscussionMessage(messageId);
 	}
 
 	public void deleteMessage(long messageId)
@@ -334,7 +330,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.DELETE);
 
-		MBMessageLocalServiceUtil.deleteMessage(messageId);
+		mbMessageLocalService.deleteMessage(messageId);
 	}
 
 	public String getCategoryMessagesRSS(
@@ -342,7 +338,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			String feedURL, String entryURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
-		MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+		MBCategory category = mbCategoryLocalService.getCategory(
 			categoryId);
 
 		String name = category.getName();
@@ -353,7 +349,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, false);
 
-		Iterator itr = MBMessageLocalServiceUtil.getCategoryMessages(
+		Iterator itr = mbMessageLocalService.getCategoryMessages(
 			categoryId, 0, _MAX_END, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
@@ -376,7 +372,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			String feedURL, String entryURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
-		Company company = CompanyUtil.findByPrimaryKey(companyId);
+		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		String name = company.getName();
 		String description = company.getName();
@@ -386,7 +382,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, false);
 
-		Iterator itr = MBMessageLocalServiceUtil.getCompanyMessages(
+		Iterator itr = mbMessageLocalService.getCompanyMessages(
 			companyId, 0, _MAX_END, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
@@ -417,7 +413,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, true);
 
-		Iterator itr = MBMessageLocalServiceUtil.getGroupMessages(
+		Iterator itr = mbMessageLocalService.getGroupMessages(
 			groupId, 0, _MAX_END, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
@@ -448,7 +444,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.VIEW);
 
-		return MBMessageLocalServiceUtil.getMessage(messageId);
+		return mbMessageLocalService.getMessage(messageId);
 	}
 
 	public MBMessageDisplay getMessageDisplay(long messageId)
@@ -457,7 +453,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.VIEW);
 
-		return MBMessageLocalServiceUtil.getMessageDisplay(messageId);
+		return mbMessageLocalService.getMessageDisplay(messageId);
 	}
 
 	public String getThreadMessagesRSS(
@@ -473,7 +469,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, true);
 
-		Iterator itr = MBMessageLocalServiceUtil.getThreadMessages(
+		Iterator itr = mbMessageLocalService.getThreadMessages(
 			threadId, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
@@ -504,7 +500,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.SUBSCRIBE);
 
-		MBMessageLocalServiceUtil.subscribeMessage(getUserId(), messageId);
+		mbMessageLocalService.subscribeMessage(getUserId(), messageId);
 	}
 
 	public void unsubscribeMessage(long messageId)
@@ -513,7 +509,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.SUBSCRIBE);
 
-		MBMessageLocalServiceUtil.unsubscribeMessage(getUserId(), messageId);
+		mbMessageLocalService.unsubscribeMessage(getUserId(), messageId);
 	}
 
 	public MBMessage updateDiscussionMessage(
@@ -525,7 +521,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			getPermissionChecker(), groupId, className, classPK,
 			ActionKeys.UPDATE_DISCUSSION);
 
-		return MBMessageLocalServiceUtil.updateDiscussionMessage(
+		return mbMessageLocalService.updateDiscussionMessage(
 			getUserId(), messageId, subject, body);
 	}
 
@@ -547,15 +543,15 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
+			MBMessage message = mbMessageLocalService.getMessage(messageId);
 
-			MBThread thread = MBThreadLocalServiceUtil.getThread(
+			MBThread thread = mbThreadLocalService.getThread(
 				message.getThreadId());
 
 			priority = thread.getPriority();
 		}
 
-		return MBMessageLocalServiceUtil.updateMessage(
+		return mbMessageLocalService.updateMessage(
 			getUserId(), messageId, categoryId, subject, body, files, priority,
 			tagsEntries, null);
 	}
@@ -579,15 +575,15 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
+			MBMessage message = mbMessageLocalService.getMessage(messageId);
 
-			MBThread thread = MBThreadLocalServiceUtil.getThread(
+			MBThread thread = mbThreadLocalService.getThread(
 				message.getThreadId());
 
 			priority = thread.getPriority();
 		}
 
-		return MBMessageLocalServiceUtil.updateMessage(
+		return mbMessageLocalService.updateMessage(
 			getUserId(), messageId, categoryId, subject, body, files, priority,
 			tagsEntries, prefs);
 	}

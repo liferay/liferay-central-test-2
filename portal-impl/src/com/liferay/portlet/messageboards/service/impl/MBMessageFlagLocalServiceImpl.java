@@ -22,16 +22,13 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageFlagLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 
 import java.util.Iterator;
 import java.util.List;
@@ -49,7 +46,7 @@ public class MBMessageFlagLocalServiceImpl
 	public void addReadFlags(long userId, List messages)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getUserById(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		if (user.isDefaultUser()) {
 			return;
@@ -60,37 +57,37 @@ public class MBMessageFlagLocalServiceImpl
 		while (itr.hasNext()) {
 			MBMessage message = (MBMessage)itr.next();
 
-			MBMessageFlag messageFlag = MBMessageFlagUtil.fetchByU_M(
+			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M(
 				userId, message.getMessageId());
 
 			if (messageFlag == null) {
-				long messageFlagId = CounterLocalServiceUtil.increment();
+				long messageFlagId = counterLocalService.increment();
 
-				messageFlag = MBMessageFlagUtil.create(messageFlagId);
+				messageFlag = mbMessageFlagPersistence.create(messageFlagId);
 
 				messageFlag.setUserId(userId);
 				messageFlag.setMessageId(message.getMessageId());
 				messageFlag.setFlag(MBMessageFlagImpl.READ_FLAG);
 
-				MBMessageFlagUtil.update(messageFlag);
+				mbMessageFlagPersistence.update(messageFlag);
 			}
 		}
 	}
 
 	public void deleteFlags(long userId) throws SystemException {
-		MBMessageFlagUtil.removeByUserId(userId);
+		mbMessageFlagPersistence.removeByUserId(userId);
 	}
 
 	public boolean hasReadFlag(long userId, long messageId)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getUserById(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		if (user.isDefaultUser()) {
 			return true;
 		}
 
-		MBMessageFlag messageFlag = MBMessageFlagUtil.fetchByU_M(
+		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M(
 			userId, messageId);
 
 		if (messageFlag != null) {

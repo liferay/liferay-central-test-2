@@ -197,6 +197,78 @@ public class MBThreadLocalServiceUtil {
 		mbThreadLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		mbThreadLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		mbThreadLocalService.setResourceFinder(resourceFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		mbThreadLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		mbThreadLocalService.setUserFinder(userFinder);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getTagsAssetPersistence();
+	}
+
+	public static void setTagsAssetPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		mbThreadLocalService.setTagsAssetPersistence(tagsAssetPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsAssetFinder getTagsAssetFinder() {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getTagsAssetFinder();
+	}
+
+	public static void setTagsAssetFinder(
+		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder) {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+		mbThreadLocalService.setTagsAssetFinder(tagsAssetFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 		mbThreadLocalService.afterPropertiesSet();

@@ -197,6 +197,150 @@ public class MBMessageLocalServiceUtil {
 		mbMessageLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
+	public static com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getCompanyPersistence();
+	}
+
+	public static void setCompanyPersistence(
+		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.setCompanyPersistence(companyPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getGroupPersistence();
+	}
+
+	public static void setGroupPersistence(
+		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.setGroupPersistence(groupPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.GroupFinder getGroupFinder() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getGroupFinder();
+	}
+
+	public static void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.setGroupFinder(groupFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.setResourceFinder(resourceFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getSubscriptionPersistence();
+	}
+
+	public static void setSubscriptionPersistence(
+		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.setSubscriptionPersistence(subscriptionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.setUserFinder(userFinder);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getBlogsEntryPersistence();
+	}
+
+	public static void setBlogsEntryPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.setBlogsEntryPersistence(blogsEntryPersistence);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder getBlogsEntryFinder() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getBlogsEntryFinder();
+	}
+
+	public static void setBlogsEntryFinder(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder blogsEntryFinder) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.setBlogsEntryFinder(blogsEntryFinder);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getTagsAssetPersistence();
+	}
+
+	public static void setTagsAssetPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.setTagsAssetPersistence(tagsAssetPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsAssetFinder getTagsAssetFinder() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getTagsAssetFinder();
+	}
+
+	public static void setTagsAssetFinder(
+		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+		mbMessageLocalService.setTagsAssetFinder(tagsAssetFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 		mbMessageLocalService.afterPropertiesSet();

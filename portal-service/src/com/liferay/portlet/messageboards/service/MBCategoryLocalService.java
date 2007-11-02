@@ -112,6 +112,31 @@ public interface MBCategoryLocalService {
 	public void setMBThreadFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadFinder mbThreadFinder);
 
+	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
+
+	public void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
+
+	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
+
+	public void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
+
+	public com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence();
+
+	public void setSubscriptionPersistence(
+		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence);
+
+	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
+
+	public void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(

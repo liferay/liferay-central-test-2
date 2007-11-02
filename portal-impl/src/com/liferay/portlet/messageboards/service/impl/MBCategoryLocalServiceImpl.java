@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
@@ -33,20 +32,13 @@ import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.SubscriptionLocalServiceUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.CategoryNameException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
-import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.base.MBCategoryLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.IndexerImpl;
 import com.liferay.util.lucene.HitsImpl;
@@ -109,16 +101,16 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		// Category
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		parentCategoryId = getParentCategoryId(groupId, parentCategoryId);
 		Date now = new Date();
 
 		validate(name);
 
-		long categoryId = CounterLocalServiceUtil.increment();
+		long categoryId = counterLocalService.increment();
 
-		MBCategory category = MBCategoryUtil.create(categoryId);
+		MBCategory category = mbCategoryPersistence.create(categoryId);
 
 		category.setGroupId(groupId);
 		category.setCompanyId(user.getCompanyId());
@@ -130,7 +122,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		category.setName(name);
 		category.setDescription(description);
 
-		MBCategoryUtil.update(category);
+		mbCategoryPersistence.update(category);
 
 		// Resources
 
@@ -154,7 +146,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			categoryId);
 
 		addCategoryResources(
 			category, addCommunityPermissions, addGuestPermissions);
@@ -165,7 +158,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			category.getCompanyId(), category.getGroupId(),
 			category.getUserId(), MBCategory.class.getName(),
 			category.getCategoryId(), false, addCommunityPermissions,
@@ -177,7 +170,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			categoryId);
 
 		addCategoryResources(category, communityPermissions, guestPermissions);
 	}
@@ -187,7 +181,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			category.getCompanyId(), category.getGroupId(),
 			category.getUserId(), MBCategory.class.getName(),
 			category.getCategoryId(), communityPermissions, guestPermissions);
@@ -196,7 +190,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	public void deleteCategories(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = MBCategoryUtil.findByG_P(
+		Iterator itr = mbCategoryPersistence.findByG_P(
 			groupId, MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID).iterator();
 
 		while (itr.hasNext()) {
@@ -209,7 +203,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	public void deleteCategory(long categoryId)
 		throws PortalException, SystemException {
 
-		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			categoryId);
 
 		deleteCategory(category);
 	}
@@ -219,7 +214,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		// Categories
 
-		Iterator itr = MBCategoryUtil.findByG_P(
+		Iterator itr = mbCategoryPersistence.findByG_P(
 			category.getGroupId(), category.getCategoryId()).iterator();
 
 		while (itr.hasNext()) {
@@ -243,47 +238,49 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		// Threads
 
-		MBThreadLocalServiceUtil.deleteThreads(category.getCategoryId());
+		mbThreadLocalService.deleteThreads(category.getCategoryId());
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			category.getCompanyId(), MBCategory.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, category.getCategoryId());
 
 		// Category
 
-		MBCategoryUtil.remove(category.getCategoryId());
+		mbCategoryPersistence.remove(category.getCategoryId());
 	}
 
 	public List getCategories(
 			long groupId, long parentCategoryId, int begin, int end)
 		throws SystemException {
 
-		return MBCategoryUtil.findByG_P(groupId, parentCategoryId, begin, end);
+		return mbCategoryPersistence.findByG_P(
+			groupId, parentCategoryId, begin, end);
 	}
 
 	public int getCategoriesCount(long groupId) throws SystemException {
-		return MBCategoryUtil.countByGroupId(groupId);
+		return mbCategoryPersistence.countByGroupId(groupId);
 	}
 
 	public int getCategoriesCount(long groupId, long parentCategoryId)
 		throws SystemException {
 
-		return MBCategoryUtil.countByG_P(groupId, parentCategoryId);
+		return mbCategoryPersistence.countByG_P(groupId, parentCategoryId);
 	}
 
 	public MBCategory getCategory(long categoryId)
 		throws PortalException, SystemException {
 
-		return MBCategoryUtil.findByPrimaryKey(categoryId);
+		return mbCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
 	public void getSubcategoryIds(
 			List categoryIds, long groupId, long categoryId)
 		throws SystemException {
 
-		Iterator itr = MBCategoryUtil.findByG_P(groupId, categoryId).iterator();
+		Iterator itr = mbCategoryPersistence.findByG_P(
+			groupId, categoryId).iterator();
 
 		while (itr.hasNext()) {
 			MBCategory category = (MBCategory)itr.next();
@@ -313,15 +310,16 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		long categoryId = CompanyImpl.SYSTEM;
 
-		MBCategory category = MBCategoryUtil.fetchByPrimaryKey(categoryId);
+		MBCategory category = mbCategoryPersistence.fetchByPrimaryKey(
+			categoryId);
 
 		if (category == null) {
-			category = MBCategoryUtil.create(categoryId);
+			category = mbCategoryPersistence.create(categoryId);
 
 			category.setCompanyId(CompanyImpl.SYSTEM);
 			category.setUserId(CompanyImpl.SYSTEM);
 
-			MBCategoryUtil.update(category);
+			mbCategoryPersistence.update(category);
 		}
 
 		return category;
@@ -335,7 +333,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator itr1 = MBCategoryUtil.findByCompanyId(
+			Iterator itr1 = mbCategoryPersistence.findByCompanyId(
 				companyId).iterator();
 
 			while (itr1.hasNext()) {
@@ -343,7 +341,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				long categoryId = category.getCategoryId();
 
-				Iterator itr2 = MBMessageUtil.findByCategoryId(
+				Iterator itr2 = mbMessagePersistence.findByCategoryId(
 					categoryId).iterator();
 
 				while (itr2.hasNext()) {
@@ -458,7 +456,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		// Category
 
-		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			categoryId);
 
 		parentCategoryId = getParentCategoryId(category, parentCategoryId);
 
@@ -469,7 +468,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		category.setName(name);
 		category.setDescription(description);
 
-		MBCategoryUtil.update(category);
+		mbCategoryPersistence.update(category);
 
 		// Merge categories
 
@@ -487,8 +486,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (parentCategoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
-			MBCategory parentCategory =
-				MBCategoryUtil.fetchByPrimaryKey(parentCategoryId);
+			MBCategory parentCategory = mbCategoryPersistence.fetchByPrimaryKey(
+				parentCategoryId);
 
 			if ((parentCategory == null) ||
 				(groupId != parentCategory.getGroupId())) {
@@ -512,8 +511,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			return category.getParentCategoryId();
 		}
 		else {
-			MBCategory parentCategory =
-				MBCategoryUtil.fetchByPrimaryKey(parentCategoryId);
+			MBCategory parentCategory = mbCategoryPersistence.fetchByPrimaryKey(
+				parentCategoryId);
 
 			if ((parentCategory == null) ||
 				(category.getGroupId() != parentCategory.getGroupId())) {
@@ -538,7 +537,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	protected void mergeCategories(MBCategory fromCategory, long toCategoryId)
 		throws PortalException, SystemException {
 
-		Iterator itr = MBCategoryUtil.findByG_P(
+		Iterator itr = mbCategoryPersistence.findByG_P(
 			fromCategory.getGroupId(), fromCategory.getCategoryId()).iterator();
 
 		while (itr.hasNext()) {
@@ -547,7 +546,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			mergeCategories(category, toCategoryId);
 		}
 
-		Iterator itr1 = MBThreadUtil.findByCategoryId(
+		Iterator itr1 = mbThreadPersistence.findByCategoryId(
 			fromCategory.getCategoryId()).iterator();
 
 		while (itr1.hasNext()) {
@@ -558,9 +557,9 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 			thread.setCategoryId(toCategoryId);
 
-			MBThreadUtil.update(thread);
+			mbThreadPersistence.update(thread);
 
-			Iterator itr2 = MBMessageUtil.findByThreadId(
+			Iterator itr2 = mbMessagePersistence.findByThreadId(
 				thread.getThreadId()).iterator();
 
 			while (itr2.hasNext()) {
@@ -571,7 +570,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				message.setCategoryId(toCategoryId);
 
-				MBMessageUtil.update(message);
+				mbMessagePersistence.update(message);
 
 				// Lucene
 
@@ -590,20 +589,20 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			}
 		}
 
-		MBCategoryUtil.remove(fromCategory.getCategoryId());
+		mbCategoryPersistence.remove(fromCategory.getCategoryId());
 	}
 
 	public void subscribeCategory(long userId, long categoryId)
 		throws PortalException, SystemException {
 
-		SubscriptionLocalServiceUtil.addSubscription(
+		subscriptionLocalService.addSubscription(
 			userId, MBCategory.class.getName(), categoryId);
 	}
 
 	public void unsubscribeCategory(long userId, long categoryId)
 		throws PortalException, SystemException {
 
-		SubscriptionLocalServiceUtil.deleteSubscription(
+		subscriptionLocalService.deleteSubscription(
 			userId, MBCategory.class.getName(), categoryId);
 	}
 
