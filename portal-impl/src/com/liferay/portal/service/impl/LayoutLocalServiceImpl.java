@@ -150,26 +150,26 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
-		Map localeNameMap = new HashMap();
+		Map localeNamesMap = new HashMap();
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
-		localeNameMap.put(defaultLocale, name);
+		localeNamesMap.put(defaultLocale, name);
 
 		return addLayout(
-			userId, groupId, privateLayout, parentLayoutId, localeNameMap,
+			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
 			new HashMap(), description, type, hidden, friendlyURL);
 	}
 
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
-			long parentLayoutId, Map localeNameMap, Map localeTitleMap,
+			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
 			String description, String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
 		return addLayout(
-			userId, groupId, privateLayout, parentLayoutId, localeNameMap,
-			localeTitleMap, description, type, hidden, friendlyURL,
+			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
+			localeTitlesMap, description, type, hidden, friendlyURL,
 			DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 	}
 
@@ -179,20 +179,20 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String type, boolean hidden, String friendlyURL, long dlFolderId)
 		throws PortalException, SystemException {
 
-		Map localeNameMap = new HashMap();
+		Map localeNamesMap = new HashMap();
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
-		localeNameMap.put(defaultLocale, name);
+		localeNamesMap.put(defaultLocale, name);
 
 		return addLayout(
-			userId, groupId, privateLayout, parentLayoutId, localeNameMap,
+			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
 			new HashMap(), description, type, hidden, friendlyURL, dlFolderId);
 	}
 
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
-			long parentLayoutId, Map localeNameMap, Map localeTitleMap,
+			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
 			String description, String type, boolean hidden, String friendlyURL,
 			long dlFolderId)
 		throws PortalException, SystemException {
@@ -226,7 +226,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setPriority(priority);
 		layout.setDlFolderId(dlFolderId);
 
-		setLocalizedAttributes(layout, localeNameMap, localeTitleMap);
+		setLocalizedAttributes(layout, localeNamesMap, localeTitlesMap);
 
 		LayoutUtil.update(layout);
 
@@ -1032,18 +1032,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
-			long parentLayoutId, Map localeNameMap, Map localeTitleMap,
+			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
 			String description, String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
 		return updateLayout(
-			groupId, privateLayout, layoutId, parentLayoutId, localeNameMap,
-			localeTitleMap, description, type, hidden, friendlyURL, null, null);
+			groupId, privateLayout, layoutId, parentLayoutId, localeNamesMap,
+			localeTitlesMap, description, type, hidden, friendlyURL, null,
+			null);
 	}
 
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
-			long parentLayoutId, Map localeNameMap, Map localeTitleMap,
+			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
 			String description, String type, boolean hidden, String friendlyURL,
 			Boolean iconImage, byte[] iconBytes)
 		throws PortalException, SystemException {
@@ -1075,7 +1076,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);
 
-		setLocalizedAttributes(layout, localeNameMap, localeTitleMap);
+		setLocalizedAttributes(layout, localeNamesMap, localeTitlesMap);
 
 		if (iconImage != null) {
 			layout.setIconImage(iconImage.booleanValue());
@@ -2739,13 +2740,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void setLocalizedAttributes(
-			Layout layout, Map localeNameMap, Map localeTitleMap) {
+		Layout layout, Map localeNamesMap, Map localeTitlesMap) {
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();
 
 		for (int i = 0; i < locales.length; i++) {
-			String name = (String)localeNameMap.get(locales[i]);
-			String title = (String)localeTitleMap.get(locales[i]);
+			String name = (String)localeNamesMap.get(locales[i]);
+			String title = (String)localeTitlesMap.get(locales[i]);
 
 			layout.setName(name, locales[i]);
 			layout.setTitle(title, locales[i]);

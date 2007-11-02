@@ -101,8 +101,8 @@ public class LocalizationUtil {
 	public static String getLocalization(
 		String xml, String requestedLanguageId, boolean useDefault) {
 
-		String defaultLanguageId =
-			LocaleUtil.toLanguageId(LocaleUtil.getDefault());
+		String defaultLanguageId = LocaleUtil.toLanguageId(
+			LocaleUtil.getDefault());
 
 		String value = StringPool.BLANK;
 

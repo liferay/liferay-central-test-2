@@ -609,9 +609,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 						<td>
 							<table class="liferay-table">
 							<tr>
-								<td>
-									<br />
-								</td>
+								<td></td>
 								<td>
 									<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
 								</td>
@@ -633,6 +631,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 										<%
 										}
 										%>
+
 									</select>
 								</td>
 							</tr>
@@ -644,6 +643,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<input id="<portlet:namespace />name_<%= defaultLanguageId %>" name="<portlet:namespace />name_<%= defaultLanguageId %>" size="30" type="text" value="<%= selLayout.getName(defaultLocale) %>" />
 								</td>
 								<td>
+
 									<%
 									for (int i = 0; i < locales.length; i++) {
 										if (locales[i].equals(defaultLocale)) {
@@ -658,7 +658,6 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									%>
 
 									<input id="<portlet:namespace />name_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onNameChanged();" />
-
 								</td>
 							</tr>
 							<tr>
@@ -669,6 +668,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= selLayout.getTitle(defaultLocale) %>" />
 								</td>
 								<td>
+
 									<%
 									for (int i = 0; i < locales.length; i++) {
 										if (locales[i].equals(defaultLocale)) {
@@ -683,7 +683,6 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									%>
 
 									<input id="<portlet:namespace />title_temp" size="30" type="text" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onTitleChanged();" />
-
 								</td>
 							</tr>
 							<tr>
@@ -847,6 +846,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									}
 
 									jQuery("#<portlet:namespace />name_" + lastLanguageId).attr("value", nameValue);
+
 									nameChanged = false;
 								}
 
@@ -858,22 +858,23 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									}
 
 									jQuery("#<portlet:namespace />title_" + lastLanguageId).attr("value", titleValue);
+
 									titleChanged = false;
 								}
 							}
 
-							var selLangId = "";
+							var selLanguageId = "";
 
 							for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
 								if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
-									selLangId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
+									selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
 
 									break;
 								}
 							}
 
-							if (selLangId != "") {
-								<portlet:namespace />updateLanguageTemps(selLangId);
+							if (selLanguageId != "") {
+								<portlet:namespace />updateLanguageTemps(selLanguageId);
 
 								jQuery("#<portlet:namespace />name_temp").show();
 								jQuery("#<portlet:namespace />title_temp").show();
@@ -883,7 +884,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 								jQuery("#<portlet:namespace />title_temp").hide();
 							}
 
-							lastLanguageId = selLangId;
+							lastLanguageId = selLanguageId;
 
 							return null;
 						}
@@ -903,14 +904,14 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									defaultTitleValue = "";
 								}
 
-								if (nameValue == null || nameValue == "") {
+								if ((nameValue == null) || (nameValue == "")) {
 									jQuery("#<portlet:namespace />name_temp").attr("value", defaultNameValue);
 								}
 								else {
 									jQuery("#<portlet:namespace />name_temp").attr("value", nameValue);
 								}
 
-								if (titleValue == null || titleValue == "") {
+								if ((titleValue == null) || (titleValue == "")) {
 									jQuery("#<portlet:namespace />title_temp").attr("value", defaultTitleValue);
 								}
 								else {

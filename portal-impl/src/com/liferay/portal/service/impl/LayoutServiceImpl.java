@@ -55,20 +55,20 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
-		Map localeNameMap = new HashMap();
+		Map localeNamesMap = new HashMap();
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
-		localeNameMap.put(defaultLocale, name);
+		localeNamesMap.put(defaultLocale, name);
 
 		return addLayout(
-			groupId, privateLayout, parentLayoutId, localeNameMap,
+			groupId, privateLayout, parentLayoutId, localeNamesMap,
 			new HashMap(), description, type, hidden, friendlyURL);
 	}
 
 	public Layout addLayout(
 			long groupId, boolean privateLayout, long parentLayoutId,
-			Map localeNameMap, Map localeTitleMap, String description,
+			Map localeNamesMap, Map localeTitlesMap, String description,
 			String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
@@ -76,8 +76,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		return LayoutLocalServiceUtil.addLayout(
-			getUserId(), groupId, privateLayout, parentLayoutId, localeNameMap,
-			localeTitleMap, description, type, hidden, friendlyURL);
+			getUserId(), groupId, privateLayout, parentLayoutId, localeNamesMap,
+			localeTitlesMap, description, type, hidden, friendlyURL);
 	}
 
 	public void deleteLayout(long plid)
@@ -155,7 +155,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
-			long parentLayoutId, Map localeNameMap, Map localeTitleMap,
+			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
 			String description, String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
@@ -164,13 +164,13 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateLayout(
-			groupId, privateLayout, layoutId, parentLayoutId, localeNameMap,
-			localeTitleMap, description, type, hidden, friendlyURL);
+			groupId, privateLayout, layoutId, parentLayoutId, localeNamesMap,
+			localeTitlesMap, description, type, hidden, friendlyURL);
 	}
 
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
-			long parentLayoutId, Map localeNameMap, Map localeTitleMap,
+			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
 			String description, String type, boolean hidden, String friendlyURL,
 			Boolean iconImage, byte[] iconBytes)
 		throws PortalException, SystemException {
@@ -180,8 +180,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateLayout(
-			groupId, privateLayout, layoutId, parentLayoutId, localeNameMap,
-			localeTitleMap, description, type, hidden, friendlyURL, iconImage,
+			groupId, privateLayout, layoutId, parentLayoutId, localeNamesMap,
+			localeTitlesMap, description, type, hidden, friendlyURL, iconImage,
 			iconBytes);
 	}
 

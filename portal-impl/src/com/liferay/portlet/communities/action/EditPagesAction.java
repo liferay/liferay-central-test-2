@@ -473,16 +473,17 @@ public class EditPagesAction extends PortletAction {
 		long copyLayoutId = ParamUtil.getLong(uploadReq, "copyLayoutId");
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();
-		Map localeNameMap = new HashMap();
-		Map localeTitleMap = new HashMap();
+
+		Map localeNamesMap = new HashMap();
+		Map localeTitlesMap = new HashMap();
 
 		for (int i = 0; i < locales.length; i++) {
 			String languageId = LocaleUtil.toLanguageId(locales[i]);
 
-			localeNameMap.put(
+			localeNamesMap.put(
 				locales[i],
 				ParamUtil.getString(uploadReq, "name_" + languageId));
-			localeTitleMap.put(
+			localeTitlesMap.put(
 				locales[i],
 				ParamUtil.getString(uploadReq, "title_" + languageId));
 		}
@@ -496,8 +497,8 @@ public class EditPagesAction extends PortletAction {
 					groupId, privateLayout, parentLayoutId);
 
 				Layout layout = LayoutServiceUtil.addLayout(
-					groupId, privateLayout, parentLayoutId, localeNameMap, localeTitleMap,
-					description, parentLayout.getType(),
+					groupId, privateLayout, parentLayoutId, localeNamesMap,
+					localeTitlesMap, description, parentLayout.getType(),
 					parentLayout.isHidden(), friendlyURL);
 
 				LayoutServiceUtil.updateLayout(
@@ -506,8 +507,8 @@ public class EditPagesAction extends PortletAction {
 			}
 			else {
 				Layout layout = LayoutServiceUtil.addLayout(
-					groupId, privateLayout, parentLayoutId, localeNameMap, localeTitleMap,
-					description, type, hidden, friendlyURL);
+					groupId, privateLayout, parentLayoutId, localeNamesMap,
+					localeTitlesMap, description, type, hidden, friendlyURL);
 
 				if (type.equals(LayoutImpl.TYPE_PORTLET)) {
 					LayoutTypePortlet layoutTypePortlet =
@@ -532,8 +533,8 @@ public class EditPagesAction extends PortletAction {
 
 			layout = LayoutServiceUtil.updateLayout(
 				groupId, privateLayout, layoutId, layout.getParentLayoutId(),
-				localeNameMap, localeTitleMap, description, type, hidden, friendlyURL,
-				Boolean.valueOf(iconImage), iconBytes);
+				localeNamesMap, localeTitlesMap, description, type, hidden,
+				friendlyURL, Boolean.valueOf(iconImage), iconBytes);
 
 			if (type.equals(LayoutImpl.TYPE_PORTLET)) {
 				if ((copyLayoutId > 0) &&
