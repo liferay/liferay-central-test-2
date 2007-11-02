@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.service.base.ReleaseLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.ReleaseUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -111,17 +110,18 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		Release release = null;
 
 		try {
-			release = ReleaseUtil.findByPrimaryKey(ReleaseImpl.DEFAULT_ID);
+			release = releasePersistence.findByPrimaryKey(
+				ReleaseImpl.DEFAULT_ID);
 		}
 		catch (NoSuchReleaseException nsre) {
-			release = ReleaseUtil.create(ReleaseImpl.DEFAULT_ID);
+			release = releasePersistence.create(ReleaseImpl.DEFAULT_ID);
 
 			Date now = new Date();
 
 			release.setCreateDate(now);
 			release.setModifiedDate(now);
 
-			ReleaseUtil.update(release);
+			releasePersistence.update(release);
 		}
 
 		return release;
@@ -137,7 +137,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		release.setBuildDate(ReleaseInfo.getBuildDate());
 		release.setVerified(verified);
 
-		ReleaseUtil.update(release);
+		releasePersistence.update(release);
 
 		return release;
 	}

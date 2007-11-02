@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
@@ -43,18 +42,8 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.base.PermissionLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
-import com.liferay.portal.service.persistence.OrgGroupPermissionUtil;
-import com.liferay.portal.service.persistence.OrganizationUtil;
-import com.liferay.portal.service.persistence.PermissionUtil;
-import com.liferay.portal.service.persistence.ResourceUtil;
-import com.liferay.portal.service.persistence.RoleUtil;
-import com.liferay.portal.service.persistence.UserGroupUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.comparator.PermissionComparator;
 
 import java.util.ArrayList;
@@ -78,19 +67,20 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long companyId, String actionId, long resourceId)
 		throws PortalException, SystemException {
 
-		Permission permission = PermissionUtil.fetchByA_R(actionId, resourceId);
+		Permission permission = permissionPersistence.fetchByA_R(
+			actionId, resourceId);
 
 		if (permission == null) {
-			long permissionId =	CounterLocalServiceUtil.increment(
+			long permissionId = counterLocalService.increment(
 				Permission.class.getName());
 
-			permission = PermissionUtil.create(permissionId);
+			permission = permissionPersistence.create(permissionId);
 
 			permission.setCompanyId(companyId);
 			permission.setActionId(actionId);
 			permission.setResourceId(resourceId);
 
-			PermissionUtil.update(permission);
+			permissionPersistence.update(permission);
 		}
 
 		return permission;
@@ -136,7 +126,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		permissions = getPermissions(
 			user.getCompanyId(), actionIds, resourceId);
 
-		UserUtil.addPermissions(userId, permissions);
+		userPersistence.addPermissions(userId, permissions);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -181,7 +171,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public long getLatestPermissionId()
 		throws PortalException, SystemException {
 
-		List list = PermissionUtil.findAll(0, 1, new PermissionComparator());
+		List list = permissionPersistence.findAll(
+			0, 1, new PermissionComparator());
 
 		if (list.size() == 0) {
 			return 0;
@@ -212,7 +203,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public List getRolePermissions(long roleId)
 		throws PortalException, SystemException {
 
-		return RoleUtil.getPermissions(roleId);
+		return rolePersistence.getPermissions(roleId);
 	}
 
 	public List getRolePermissions(long roleId, long resourceId)
@@ -242,7 +233,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		Permission permission = null;
 
 		try {
-			permission = PermissionUtil.findByA_R(actionId, resourceId);
+			permission = permissionPersistence.findByA_R(actionId, resourceId);
 		}
 		catch (NoSuchPermissionException nspe) {
 
@@ -252,7 +243,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return false;
 		}
 
-		return GroupUtil.containsPermission(
+		return groupPersistence.containsPermission(
 			groupId, permission.getPermissionId());
 	}
 
@@ -261,21 +252,20 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			String actionId)
 		throws PortalException, SystemException {
 
-		ResourceCode resourceCode =
-			ResourceCodeLocalServiceUtil.getResourceCode(
-				companyId, name, scope);
+		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
+			companyId, name, scope);
 
-		Iterator itr = ResourceUtil.findByCodeId(
+		Iterator itr = resourcePersistence.findByCodeId(
 			resourceCode.getCodeId()).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();
 
 			try {
-				Permission permission = PermissionUtil.findByA_R(
+				Permission permission = permissionPersistence.findByA_R(
 					actionId, resource.getResourceId());
 
-				if (RoleUtil.containsPermission(
+				if (rolePersistence.containsPermission(
 						roleId, permission.getPermissionId())) {
 
 					return true;
@@ -295,16 +285,16 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		try {
 			ResourceCode resourceCode =
-				ResourceCodeLocalServiceUtil.getResourceCode(
+				resourceCodeLocalService.getResourceCode(
 					companyId, name, scope);
 
-			Resource resource = ResourceUtil.findByC_P(
+			Resource resource = resourcePersistence.findByC_P(
 				resourceCode.getCodeId(), primKey);
 
-			Permission permission = PermissionUtil.findByA_R(
+			Permission permission = permissionPersistence.findByA_R(
 				actionId, resource.getResourceId());
 
-			return RoleUtil.containsPermission(
+			return rolePersistence.containsPermission(
 				roleId, permission.getPermissionId());
 		}
 		catch (NoSuchPermissionException nspe) {
@@ -322,7 +312,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		Permission permission = null;
 
 		try {
-			permission = PermissionUtil.findByA_R(actionId, resourceId);
+			permission = permissionPersistence.findByA_R(actionId, resourceId);
 		}
 		catch (NoSuchPermissionException nspe) {
 
@@ -332,7 +322,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return false;
 		}
 
-		return UserUtil.containsPermission(
+		return userPersistence.containsPermission(
 			userId, permission.getPermissionId());
 	}
 
@@ -421,7 +411,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long groupId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
-		Group group = GroupUtil.findByPrimaryKey(groupId);
+		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		Iterator itr = permissionFinder.findByG_R(
 			groupId, resourceId).iterator();
@@ -429,13 +419,13 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			Permission permission = (Permission)itr.next();
 
-			GroupUtil.removePermission(groupId, permission);
+			groupPersistence.removePermission(groupId, permission);
 		}
 
 		List permissions = getPermissions(
 			group.getCompanyId(), actionIds, resourceId);
 
-		GroupUtil.addPermissions(groupId, permissions);
+		groupPersistence.addPermissions(groupId, permissions);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -451,7 +441,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long organizationId = GetterUtil.getLong(classPK);
 
 			Organization organization =
-				OrganizationUtil.findByPrimaryKey(organizationId);
+				organizationPersistence.findByPrimaryKey(organizationId);
 
 			orgGroupPermissionFinder.removeByO_G_R(
 				organizationId, groupId, resourceId);
@@ -461,7 +451,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		else if (className.equals(UserGroup.class.getName())) {
 			long userGroupId = GetterUtil.getLong(classPK);
 
-			UserGroup userGroup = UserGroupUtil.findByPrimaryKey(userGroupId);
+			UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
+				userGroupId);
 
 			associatedGroupId = userGroup.getGroup().getGroupId();
 		}
@@ -475,16 +466,17 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		Organization organization =
-			OrganizationUtil.findByPrimaryKey(organizationId);
+			organizationPersistence.findByPrimaryKey(organizationId);
 
 		long orgGroupId = organization.getGroup().getGroupId();
 
-		Iterator itr = PermissionUtil.findByResourceId(resourceId).iterator();
+		Iterator itr = permissionPersistence.findByResourceId(
+			resourceId).iterator();
 
 		while (itr.hasNext()) {
 			Permission permission = (Permission)itr.next();
 
-			GroupUtil.removePermission(orgGroupId, permission);
+			groupPersistence.removePermission(orgGroupId, permission);
 		}
 
 		itr = getPermissions(
@@ -500,9 +492,9 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 				organizationId, groupId, permission.getPermissionId());
 
 			OrgGroupPermission orgGroupPermission =
-				OrgGroupPermissionUtil.create(pk);
+				orgGroupPermissionPersistence.create(pk);
 
-			OrgGroupPermissionUtil.update(orgGroupPermission);
+			orgGroupPermissionPersistence.update(orgGroupPermission);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -531,29 +523,29 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			throw new NoSuchPermissionException();
 		}
 
-		Resource resource = ResourceLocalServiceUtil.addResource(
+		Resource resource = resourceLocalService.addResource(
 			companyId, name, scope, primKey);
 
 		Permission permission = null;
 
 		try {
-			permission = PermissionUtil.findByA_R(
+			permission = permissionPersistence.findByA_R(
 				actionId, resource.getResourceId());
 		}
 		catch (NoSuchPermissionException nspe) {
-			long permissionId =	CounterLocalServiceUtil.increment(
+			long permissionId = counterLocalService.increment(
 				Permission.class.getName());
 
-			permission = PermissionUtil.create(permissionId);
+			permission = permissionPersistence.create(permissionId);
 
 			permission.setCompanyId(companyId);
 			permission.setActionId(actionId);
 			permission.setResourceId(resource.getResourceId());
 
-			PermissionUtil.update(permission);
+			permissionPersistence.update(permission);
 		}
 
-		RoleUtil.addPermission(roleId, permission);
+		rolePersistence.addPermission(roleId, permission);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -575,16 +567,16 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long roleId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
-		Role role = RoleUtil.findByPrimaryKey(roleId);
+		Role role = rolePersistence.findByPrimaryKey(roleId);
 
 		List permissions = permissionFinder.findByR_R(roleId, resourceId);
 
-		RoleUtil.removePermissions(roleId, permissions);
+		rolePersistence.removePermissions(roleId, permissions);
 
 		permissions = getPermissions(
 			role.getCompanyId(), actionIds, resourceId);
 
-		RoleUtil.addPermissions(roleId, permissions);
+		rolePersistence.addPermissions(roleId, permissions);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -597,12 +589,12 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		List permissions = permissionFinder.findByU_R(userId, resourceId);
 
-		UserUtil.removePermissions(userId, permissions);
+		userPersistence.removePermissions(userId, permissions);
 
 		permissions = getPermissions(
 			user.getCompanyId(), actionIds, resourceId);
 
-		UserUtil.addPermissions(userId, permissions);
+		userPersistence.addPermissions(userId, permissions);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -611,10 +603,10 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		throws SystemException, PortalException {
 
 		try {
-			Permission permission =
-				PermissionUtil.findByPrimaryKey(permissionId);
+			Permission permission = permissionPersistence.findByPrimaryKey(
+				permissionId);
 
-			RoleUtil.removePermission(roleId, permission);
+			rolePersistence.removePermission(roleId, permission);
 		}
 		catch (NoSuchPermissionException nspe) {
 		}
@@ -629,16 +621,16 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		try {
 			ResourceCode resourceCode =
-				ResourceCodeLocalServiceUtil.getResourceCode(
+				resourceCodeLocalService.getResourceCode(
 					companyId, name, scope);
 
-			Resource resource = ResourceUtil.findByC_P(
+			Resource resource = resourcePersistence.findByC_P(
 				resourceCode.getCodeId(), primKey);
 
-			Permission permission = PermissionUtil.findByA_R(
+			Permission permission = permissionPersistence.findByA_R(
 				actionId, resource.getResourceId());
 
-			RoleUtil.removePermission(roleId, permission);
+			rolePersistence.removePermission(roleId, permission);
 		}
 		catch (NoSuchPermissionException nspe) {
 		}
@@ -653,21 +645,20 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			String actionId)
 		throws PortalException, SystemException {
 
-		ResourceCode resourceCode =
-			ResourceCodeLocalServiceUtil.getResourceCode(
-				companyId, name, scope);
+		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
+			companyId, name, scope);
 
-		Iterator itr = ResourceUtil.findByCodeId(
+		Iterator itr = resourcePersistence.findByCodeId(
 			resourceCode.getCodeId()).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();
 
 			try {
-				Permission permission = PermissionUtil.findByA_R(
+				Permission permission = permissionPersistence.findByA_R(
 					actionId, resource.getResourceId());
 
-				RoleUtil.removePermission(roleId, permission);
+				rolePersistence.removePermission(roleId, permission);
 			}
 			catch (NoSuchPermissionException nspe) {
 			}
@@ -683,7 +674,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		List permissions = permissionFinder.findByU_A_R(
 			userId, actionIds, resourceId);
 
-		UserUtil.removePermissions(userId, permissions);
+		userPersistence.removePermissions(userId, permissions);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -717,8 +708,9 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		// Do not check unless the OrgGroupPermission intersection contains at
 		// least one permission
 
-		List orgGroupPermissions = OrgGroupPermissionUtil.findByPermissionId(
-			permission.getPermissionId());
+		List orgGroupPermissions =
+			orgGroupPermissionPersistence.findByPermissionId(
+				permission.getPermissionId());
 
 		if (orgGroupPermissions.size() == 0) {
 			return false;

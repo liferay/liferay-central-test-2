@@ -27,7 +27,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.service.base.PasswordPolicyRelLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.PasswordPolicyRelUtil;
 import com.liferay.portal.util.PortalUtil;
 
 /**
@@ -47,7 +46,7 @@ public class PasswordPolicyRelLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		PasswordPolicyRel passwordPolicyRel =
-			PasswordPolicyRelUtil.fetchByP_C_C(
+			passwordPolicyRelPersistence.fetchByP_C_C(
 				passwordPolicyId, classNameId, classPK);
 
 		if (passwordPolicyRel != null) {
@@ -58,20 +57,21 @@ public class PasswordPolicyRelLocalServiceImpl
 
 			// Ensure that models only have one password policy
 
-			PasswordPolicyRelUtil.removeByC_C(classNameId, classPK);
+			passwordPolicyRelPersistence.removeByC_C(classNameId, classPK);
 		}
 		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
 
 		long passwordPolicyRelId = counterLocalService.increment();
 
-		passwordPolicyRel = PasswordPolicyRelUtil.create(passwordPolicyRelId);
+		passwordPolicyRel = passwordPolicyRelPersistence.create(
+			passwordPolicyRelId);
 
 		passwordPolicyRel.setPasswordPolicyId(passwordPolicyId);
 		passwordPolicyRel.setClassNameId(classNameId);
 		passwordPolicyRel.setClassPK(classPK);
 
-		PasswordPolicyRelUtil.update(passwordPolicyRel);
+		passwordPolicyRelPersistence.update(passwordPolicyRel);
 
 		return passwordPolicyRel;
 	}
@@ -91,7 +91,7 @@ public class PasswordPolicyRelLocalServiceImpl
 		try {
 			long classNameId = PortalUtil.getClassNameId(className);
 
-			PasswordPolicyRelUtil.removeByC_C(classNameId, classPK);
+			passwordPolicyRelPersistence.removeByC_C(classNameId, classPK);
 		}
 		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
@@ -104,7 +104,7 @@ public class PasswordPolicyRelLocalServiceImpl
 		try {
 			long classNameId = PortalUtil.getClassNameId(className);
 
-			PasswordPolicyRelUtil.removeByP_C_C(
+			passwordPolicyRelPersistence.removeByP_C_C(
 				passwordPolicyId, classNameId, classPK);
 		}
 		catch (NoSuchPasswordPolicyRelException nsppre) {
@@ -126,7 +126,7 @@ public class PasswordPolicyRelLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return PasswordPolicyRelUtil.findByC_C(classNameId, classPK);
+		return passwordPolicyRelPersistence.findByC_C(classNameId, classPK);
 	}
 
 	public PasswordPolicyRel getPasswordPolicyRel(
@@ -135,7 +135,7 @@ public class PasswordPolicyRelLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return PasswordPolicyRelUtil.findByP_C_C(
+		return passwordPolicyRelPersistence.findByP_C_C(
 			passwordPolicyId, classNameId, classPK);
 	}
 
@@ -145,9 +145,11 @@ public class PasswordPolicyRelLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		if (PasswordPolicyRelUtil.fetchByP_C_C(
-				passwordPolicyId, classNameId, classPK) != null) {
+		PasswordPolicyRel passwordPolicyRel =
+			passwordPolicyRelPersistence.fetchByP_C_C(
+				passwordPolicyId, classNameId, classPK);
 
+		if (passwordPolicyRel != null) {
 			return true;
 		}
 		else {

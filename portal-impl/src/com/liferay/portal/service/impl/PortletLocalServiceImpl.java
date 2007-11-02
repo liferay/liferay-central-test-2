@@ -34,7 +34,6 @@ import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.PortletUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -369,12 +368,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		portletId = PortalUtil.getJsSafePortletName(portletId);
 
-		Portlet portlet = PortletUtil.fetchByC_P(companyId, portletId);
+		Portlet portlet = portletPersistence.fetchByC_P(companyId, portletId);
 
 		if (portlet == null) {
 			long id = counterLocalService.increment();
 
-			portlet = PortletUtil.create(id);
+			portlet = portletPersistence.create(id);
 
 			portlet.setCompanyId(companyId);
 			portlet.setPortletId(portletId);
@@ -383,7 +382,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		portlet.setRoles(roles);
 		portlet.setActive(active);
 
-		PortletUtil.update(portlet);
+		portletPersistence.update(portlet);
 
 		portlet = getPortletById(companyId, portletId);
 
@@ -453,7 +452,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletsPool.put(portlet.getPortletId(), portlet);
 			}
 
-			itr = PortletUtil.findByCompanyId(companyId).iterator();
+			itr = portletPersistence.findByCompanyId(companyId).iterator();
 
 			while (itr.hasNext()) {
 				Portlet portlet = (Portlet)itr.next();

@@ -38,11 +38,7 @@ import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
-import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.PasswordPolicyLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.PasswordPolicyUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.Date;
@@ -76,7 +72,7 @@ public class PasswordPolicyLocalServiceImpl
 
 		long passwordPolicyId = counterLocalService.increment();
 
-		PasswordPolicy passwordPolicy = PasswordPolicyUtil.create(
+		PasswordPolicy passwordPolicy = passwordPolicyPersistence.create(
 			passwordPolicyId);
 
 		passwordPolicy.setUserId(userId);
@@ -105,12 +101,12 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setRequireUnlock(lockoutDuration == 0);
 		passwordPolicy.setResetFailureCount(resetFailureCount);
 
-		PasswordPolicyUtil.update(passwordPolicy);
+		passwordPolicyPersistence.update(passwordPolicy);
 
 		// Resources
 
 		if (!user.isDefaultUser()) {
-			ResourceLocalServiceUtil.addResources(
+			resourceLocalService.addResources(
 				user.getCompanyId(), 0, userId, PasswordPolicy.class.getName(),
 				passwordPolicy.getPasswordPolicyId(), false, false, false);
 		}
@@ -125,14 +121,16 @@ public class PasswordPolicyLocalServiceImpl
 			PropsUtil.get(PropsUtil.PASSWORDS_DEFAULT_POLICY_NAME));
 
 		try {
-			PasswordPolicyUtil.findByC_N(companyId, defaultPasswordPolicyName);
+			passwordPolicyPersistence.findByC_N(
+				companyId, defaultPasswordPolicyName);
 		}
 		catch (NoSuchPasswordPolicyException nsppe) {
+			long defaultUserId = userLocalService.getDefaultUserId(companyId);
+
 			addPasswordPolicy(
-				UserLocalServiceUtil.getDefaultUserId(companyId), true,
-				defaultPasswordPolicyName, defaultPasswordPolicyName, true,
-				false, 0, false, true, 6, false, 6, false, 8640000, 86400, 0,
-				false, 3, 0, 600);
+				defaultUserId, true, defaultPasswordPolicyName,
+				defaultPasswordPolicyName, true, false, 0, false, true, 6,
+				false, 6, false, 8640000, 86400, 0, false, 3, 0, 600);
 		}
 	}
 
@@ -140,7 +138,7 @@ public class PasswordPolicyLocalServiceImpl
 		throws PortalException, SystemException {
 
 		PasswordPolicy passwordPolicy =
-			PasswordPolicyUtil.findByPrimaryKey(passwordPolicyId);
+			passwordPolicyPersistence.findByPrimaryKey(passwordPolicyId);
 
 		if (passwordPolicy.isDefaultPolicy()) {
 			throw new RequiredPasswordPolicyException();
@@ -148,14 +146,14 @@ public class PasswordPolicyLocalServiceImpl
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			passwordPolicy.getCompanyId(), PasswordPolicy.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL,
 			passwordPolicy.getPasswordPolicyId());
 
 		// Password policy
 
-		PasswordPolicyUtil.remove(passwordPolicyId);
+		passwordPolicyPersistence.remove(passwordPolicyId);
 	}
 
 	public PasswordPolicy getDefaultPasswordPolicy(long companyId)
@@ -165,13 +163,13 @@ public class PasswordPolicyLocalServiceImpl
 			return null;
 		}
 
-		return PasswordPolicyUtil.findByC_DP(companyId, true);
+		return passwordPolicyPersistence.findByC_DP(companyId, true);
 	}
 
 	public PasswordPolicy getPasswordPolicy(long passwordPolicyId)
 		throws PortalException, SystemException {
 
-		return PasswordPolicyUtil.findByPrimaryKey(passwordPolicyId);
+		return passwordPolicyPersistence.findByPrimaryKey(passwordPolicyId);
 	}
 
 	/**
@@ -203,7 +201,7 @@ public class PasswordPolicyLocalServiceImpl
 
 			try {
 				passwordPolicyRel =
-					PasswordPolicyRelLocalServiceUtil.getPasswordPolicyRel(
+					passwordPolicyRelLocalService.getPasswordPolicyRel(
 						Organization.class.getName(), organizationId);
 
 				return getPasswordPolicy(
@@ -233,7 +231,7 @@ public class PasswordPolicyLocalServiceImpl
 
 		try {
 			passwordPolicyRel =
-				PasswordPolicyRelLocalServiceUtil.getPasswordPolicyRel(
+				passwordPolicyRelLocalService.getPasswordPolicyRel(
 					User.class.getName(), userId);
 
 			return getPasswordPolicy(passwordPolicyRel.getPasswordPolicyId());
@@ -269,8 +267,9 @@ public class PasswordPolicyLocalServiceImpl
 
 		Date now = new Date();
 
-		PasswordPolicy passwordPolicy = PasswordPolicyUtil.findByPrimaryKey(
-			passwordPolicyId);
+		PasswordPolicy passwordPolicy =
+			passwordPolicyPersistence.findByPrimaryKey(
+				passwordPolicyId);
 
 		if (!passwordPolicy.getDefaultPolicy()) {
 			validate(passwordPolicyId, passwordPolicy.getCompanyId(), name);
@@ -298,7 +297,7 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setRequireUnlock(lockoutDuration == 0);
 		passwordPolicy.setResetFailureCount(resetFailureCount);
 
-		PasswordPolicyUtil.update(passwordPolicy);
+		passwordPolicyPersistence.update(passwordPolicy);
 
 		return passwordPolicy;
 	}
@@ -314,8 +313,8 @@ public class PasswordPolicyLocalServiceImpl
 		}
 
 		try {
-			PasswordPolicy passwordPolicy =
-				PasswordPolicyUtil.findByC_N(companyId, name);
+			PasswordPolicy passwordPolicy = passwordPolicyPersistence.findByC_N(
+				companyId, name);
 
 			if ((passwordPolicyId <= 0) ||
 				(passwordPolicy.getPasswordPolicyId() != passwordPolicyId)) {

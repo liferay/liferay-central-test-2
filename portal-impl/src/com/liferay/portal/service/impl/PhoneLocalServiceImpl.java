@@ -29,9 +29,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
-import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.base.PhoneLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.PhoneUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.format.PhoneNumberUtil;
 
@@ -67,7 +65,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 		long phoneId = counterLocalService.increment();
 
-		Phone phone = PhoneUtil.create(phoneId);
+		Phone phone = phonePersistence.create(phoneId);
 
 		phone.setCompanyId(user.getCompanyId());
 		phone.setUserId(user.getUserId());
@@ -81,7 +79,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		phone.setTypeId(typeId);
 		phone.setPrimary(primary);
 
-		PhoneUtil.update(phone);
+		phonePersistence.update(phone);
 
 		return phone;
 	}
@@ -89,7 +87,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 	public void deletePhone(long phoneId)
 		throws PortalException, SystemException {
 
-		PhoneUtil.remove(phoneId);
+		phonePersistence.remove(phoneId);
 	}
 
 	public void deletePhones(long companyId, String className, long classPK)
@@ -97,17 +95,17 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		PhoneUtil.removeByC_C_C(companyId, classNameId, classPK);
+		phonePersistence.removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Phone getPhone(long phoneId)
 		throws PortalException, SystemException {
 
-		return PhoneUtil.findByPrimaryKey(phoneId);
+		return phonePersistence.findByPrimaryKey(phoneId);
 	}
 
 	public List getPhones() throws SystemException {
-		return PhoneUtil.findAll();
+		return phonePersistence.findAll();
 	}
 
 	public List getPhones(long companyId, String className, long classPK)
@@ -115,7 +113,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return PhoneUtil.findByC_C_C(companyId, classNameId, classPK);
+		return phonePersistence.findByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Phone updatePhone(
@@ -128,7 +126,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 		validate(phoneId, 0, 0, 0, number, typeId, primary);
 
-		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
+		Phone phone = phonePersistence.findByPrimaryKey(phoneId);
 
 		phone.setModifiedDate(new Date());
 		phone.setNumber(number);
@@ -136,7 +134,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		phone.setTypeId(typeId);
 		phone.setPrimary(primary);
 
-		PhoneUtil.update(phone);
+		phonePersistence.update(phone);
 
 		return phone;
 	}
@@ -151,7 +149,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		}
 
 		if (phoneId > 0) {
-			Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
+			Phone phone = phonePersistence.findByPrimaryKey(phoneId);
 
 			companyId = phone.getCompanyId();
 			classNameId = phone.getClassNameId();
@@ -159,8 +157,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		}
 
 		try {
-			ListTypeServiceUtil.validate(
-				typeId, classNameId, ListTypeImpl.PHONE);
+			listTypeService.validate(typeId, classNameId, ListTypeImpl.PHONE);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);
@@ -178,7 +175,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		// id, class name, and class pk that also has primary set to true
 
 		if (primary) {
-			Iterator itr = PhoneUtil.findByC_C_C_P(
+			Iterator itr = phonePersistence.findByC_C_C_P(
 				companyId, classNameId, classPK, primary).iterator();
 
 			while (itr.hasNext()) {
@@ -189,7 +186,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 					phone.setPrimary(false);
 
-					PhoneUtil.update(phone);
+					phonePersistence.update(phone);
 				}
 			}
 		}

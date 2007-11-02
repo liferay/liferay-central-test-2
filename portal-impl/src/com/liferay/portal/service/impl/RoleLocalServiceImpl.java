@@ -38,13 +38,7 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portal.service.PermissionLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.GroupUtil;
-import com.liferay.portal.service.persistence.RoleUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.LinkedHashMap;
@@ -78,7 +72,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		long roleId = counterLocalService.increment();
 
-		Role role = RoleUtil.create(roleId);
+		Role role = rolePersistence.create(roleId);
 
 		role.setCompanyId(companyId);
 		role.setClassNameId(classNameId);
@@ -86,12 +80,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		role.setName(name);
 		role.setType(type);
 
-		RoleUtil.update(role);
+		rolePersistence.update(role);
 
 		// Resources
 
 		if (userId > 0) {
-			ResourceLocalServiceUtil.addResources(
+			resourceLocalService.addResources(
 				companyId, 0, userId, Role.class.getName(), role.getRoleId(),
 				false, false, false);
 		}
@@ -132,7 +126,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 					List actions = ResourceActionsUtil.getModelResourceActions(
 						Group.class.getName());
 
-					PermissionLocalServiceUtil.setRolePermissions(
+					permissionLocalService.setRolePermissions(
 						role.getRoleId(), role.getCompanyId(),
 						Group.class.getName(),
 						ResourceImpl.SCOPE_GROUP_TEMPLATE,
@@ -147,7 +141,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 						ActionKeys.UPDATE
 					};
 
-					PermissionLocalServiceUtil.setRolePermissions(
+					permissionLocalService.setRolePermissions(
 						role.getRoleId(), role.getCompanyId(),
 						Group.class.getName(),
 						ResourceImpl.SCOPE_GROUP_TEMPLATE,
@@ -177,7 +171,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 					List actions = ResourceActionsUtil.getModelResourceActions(
 						Group.class.getName());
 
-					PermissionLocalServiceUtil.setRolePermissions(
+					permissionLocalService.setRolePermissions(
 						role.getRoleId(), role.getCompanyId(),
 						Group.class.getName(),
 						ResourceImpl.SCOPE_GROUP_TEMPLATE,
@@ -191,7 +185,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public void deleteRole(long roleId)
 		throws PortalException, SystemException {
 
-		Role role = RoleUtil.findByPrimaryKey(roleId);
+		Role role = rolePersistence.findByPrimaryKey(roleId);
 
 		if (PortalUtil.isSystemRole(role.getName())) {
 			throw new RequiredRoleException();
@@ -200,7 +194,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		// Resources
 
 		if ((role.getClassNameId() <= 0) && (role.getClassPK() <= 0)) {
-			ResourceLocalServiceUtil.deleteResource(
+			resourceLocalService.deleteResource(
 				role.getCompanyId(), Role.class.getName(),
 				ResourceImpl.SCOPE_INDIVIDUAL, role.getRoleId());
 		}
@@ -208,13 +202,13 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		if ((role.getType() == RoleImpl.TYPE_COMMUNITY) ||
 			(role.getType() == RoleImpl.TYPE_ORGANIZATION)) {
 
-			UserGroupRoleLocalServiceUtil.deleteUserGroupRolesByRoleId(
+			userGroupRoleLocalService.deleteUserGroupRolesByRoleId(
 				role.getRoleId());
 		}
 
 		// Role
 
-		RoleUtil.remove(roleId);
+		rolePersistence.remove(roleId);
 
 		// Permission cache
 
@@ -226,13 +220,13 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(Group.class);
 
-		return RoleUtil.findByC_C_C(companyId, classNameId, groupId);
+		return rolePersistence.findByC_C_C(companyId, classNameId, groupId);
 	}
 
 	public List getGroupRoles(long groupId)
 		throws PortalException, SystemException {
 
-		return GroupUtil.getRoles(groupId);
+		return groupPersistence.getRoles(groupId);
 	}
 
 	public Map getResourceRoles(
@@ -243,7 +237,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public Role getRole(long roleId) throws PortalException, SystemException {
-		return RoleUtil.findByPrimaryKey(roleId);
+		return rolePersistence.findByPrimaryKey(roleId);
 	}
 
 	public Role getRole(long companyId, String name)
@@ -279,7 +273,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public List getUserRoles(long userId)
 		throws PortalException, SystemException {
 
-		return UserUtil.getRoles(userId);
+		return userPersistence.getRoles(userId);
 	}
 
 	/**
@@ -307,7 +301,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			}
 		}
 		else {
-			return UserUtil.containsRole(userId, role.getRoleId());
+			return userPersistence.containsRole(userId, role.getRoleId());
 		}
 	}
 
@@ -373,7 +367,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public void setUserRoles(long userId, long[] roleIds)
 		throws PortalException, SystemException {
 
-		UserUtil.setRoles(userId, roleIds);
+		userPersistence.setRoles(userId, roleIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -381,7 +375,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public Role updateRole(long roleId, String name)
 		throws PortalException, SystemException {
 
-		Role role = RoleUtil.findByPrimaryKey(roleId);
+		Role role = rolePersistence.findByPrimaryKey(roleId);
 
 		validate(roleId, role.getCompanyId(), name);
 
@@ -391,7 +385,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		role.setName(name);
 
-		RoleUtil.update(role);
+		rolePersistence.update(role);
 
 		return role;
 	}

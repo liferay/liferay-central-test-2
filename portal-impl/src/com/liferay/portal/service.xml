@@ -818,6 +818,10 @@
 			<finder-column name="actionId" />
 			<finder-column name="resourceId" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="PermissionUser" local-service="false" remote-service="false" />
 	<entity name="Phone" local-service="true" remote-service="true">
@@ -1077,6 +1081,10 @@
 			<finder-column name="name" />
 			<finder-column name="scope" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Role" local-service="true" remote-service="true">
 

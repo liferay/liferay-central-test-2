@@ -32,9 +32,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.impl.PortletImpl;
-import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.base.PortletPreferencesLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
@@ -54,7 +52,7 @@ public class PortletPreferencesLocalServiceImpl
 	public void deletePortletPreferences(long ownerId, int ownerType, long plid)
 		throws PortalException, SystemException {
 
-		PortletPreferencesUtil.removeByO_O_P(ownerId, ownerType, plid);
+		portletPreferencesPersistence.removeByO_O_P(ownerId, ownerType, plid);
 
 		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId, ownerType);
 	}
@@ -63,7 +61,7 @@ public class PortletPreferencesLocalServiceImpl
 			long ownerId, int ownerType, long plid, String portletId)
 		throws PortalException, SystemException {
 
-		PortletPreferencesUtil.removeByO_O_P_P(
+		portletPreferencesPersistence.removeByO_O_P_P(
 			ownerId, ownerType, plid, portletId);
 
 		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId, ownerType);
@@ -73,7 +71,7 @@ public class PortletPreferencesLocalServiceImpl
 			long companyId, String portletId)
 		throws PortalException, SystemException {
 
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+		Portlet portlet = portletLocalService.getPortletById(
 			companyId, portletId);
 
 		return PortletPreferencesSerializer.fromDefaultXML(
@@ -81,24 +79,25 @@ public class PortletPreferencesLocalServiceImpl
 	}
 
 	public List getPortletPreferences() throws SystemException {
-		return PortletPreferencesUtil.findAll();
+		return portletPreferencesPersistence.findAll();
 	}
 
 	public List getPortletPreferences(long plid) throws SystemException {
-		return PortletPreferencesUtil.findByPlid(plid);
+		return portletPreferencesPersistence.findByPlid(plid);
 	}
 
 	public List getPortletPreferences(long ownerId, int ownerType, long plid)
 		throws PortalException, SystemException {
 
-		return PortletPreferencesUtil.findByO_O_P(ownerId, ownerType, plid);
+		return portletPreferencesPersistence.findByO_O_P(
+			ownerId, ownerType, plid);
 	}
 
 	public PortletPreferences getPortletPreferences(
 			long ownerId, int ownerType, long plid, String portletId)
 		throws PortalException, SystemException {
 
-		return PortletPreferencesUtil.findByO_O_P_P(
+		return portletPreferencesPersistence.findByO_O_P_P(
 			ownerId, ownerType, plid, portletId);
 	}
 
@@ -139,17 +138,18 @@ public class PortletPreferencesLocalServiceImpl
 		if (prefs == null) {
 			PortletPreferences portletPreferences = null;
 
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			Portlet portlet = portletLocalService.getPortletById(
 				companyId, portletId);
 
 			try {
-				portletPreferences = PortletPreferencesUtil.findByO_O_P_P(
-					ownerId, ownerType, plid, portletId);
+				portletPreferences =
+					portletPreferencesPersistence.findByO_O_P_P(
+						ownerId, ownerType, plid, portletId);
 			}
 			catch (NoSuchPortletPreferencesException nsppe) {
 				long portletPreferencesId = counterLocalService.increment();
 
-				portletPreferences = PortletPreferencesUtil.create(
+				portletPreferences = portletPreferencesPersistence.create(
 					portletPreferencesId);
 
 				portletPreferences.setOwnerId(ownerId);
@@ -168,7 +168,7 @@ public class PortletPreferencesLocalServiceImpl
 
 				portletPreferences.setPreferences(defaultPreferences);
 
-				PortletPreferencesUtil.update(portletPreferences);
+				portletPreferencesPersistence.update(portletPreferences);
 			}
 
 			prefs = PortletPreferencesSerializer.fromXML(
@@ -189,13 +189,13 @@ public class PortletPreferencesLocalServiceImpl
 		PortletPreferences portletPreferences = null;
 
 		try {
-			portletPreferences = PortletPreferencesUtil.findByO_O_P_P(
+			portletPreferences = portletPreferencesPersistence.findByO_O_P_P(
 				ownerId, ownerType, plid, portletId);
 		}
 		catch (NoSuchPortletPreferencesException nsppe) {
 			long portletPreferencesId = counterLocalService.increment();
 
-			portletPreferences = PortletPreferencesUtil.create(
+			portletPreferences = portletPreferencesPersistence.create(
 				portletPreferencesId);
 
 			portletPreferences.setOwnerId(ownerId);
@@ -210,7 +210,7 @@ public class PortletPreferencesLocalServiceImpl
 
 		portletPreferences.setPreferences(xml);
 
-		PortletPreferencesUtil.update(portletPreferences);
+		portletPreferencesPersistence.update(portletPreferences);
 
 		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId, ownerType);
 

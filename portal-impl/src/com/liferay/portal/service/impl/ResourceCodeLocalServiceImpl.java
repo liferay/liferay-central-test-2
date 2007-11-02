@@ -22,13 +22,11 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.base.ResourceCodeLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.ResourceCodeUtil;
 import com.liferay.util.CollectionFactory;
 
 import java.util.Map;
@@ -46,7 +44,7 @@ public class ResourceCodeLocalServiceImpl
 	public ResourceCode getResourceCode(long codeId)
 		throws PortalException, SystemException {
 
-		return ResourceCodeUtil.findByPrimaryKey(codeId);
+		return resourceCodePersistence.findByPrimaryKey(codeId);
 	}
 
 	public ResourceCode getResourceCode(long companyId, String name, int scope)
@@ -60,20 +58,20 @@ public class ResourceCodeLocalServiceImpl
 		ResourceCode resourceCode = (ResourceCode)_resourceCodes.get(key);
 
 		if (resourceCode == null) {
-			resourceCode = ResourceCodeUtil.fetchByC_N_S(
+			resourceCode = resourceCodePersistence.fetchByC_N_S(
 				companyId, name, scope);
 
 			if (resourceCode == null) {
-				long codeId = CounterLocalServiceUtil.increment(
+				long codeId = counterLocalService.increment(
 					ResourceCode.class.getName());
 
-				resourceCode = ResourceCodeUtil.create(codeId);
+				resourceCode = resourceCodePersistence.create(codeId);
 
 				resourceCode.setCompanyId(companyId);
 				resourceCode.setName(name);
 				resourceCode.setScope(scope);
 
-				ResourceCodeUtil.update(resourceCode);
+				resourceCodePersistence.update(resourceCode);
 			}
 
 			_resourceCodes.put(key, resourceCode);

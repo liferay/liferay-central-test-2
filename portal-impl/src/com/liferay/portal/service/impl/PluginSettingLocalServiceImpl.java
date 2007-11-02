@@ -33,7 +33,6 @@ import com.liferay.portal.model.impl.PluginSettingImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.PluginSettingLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.PluginSettingUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import org.apache.commons.logging.Log;
@@ -71,7 +70,7 @@ public class PluginSettingLocalServiceImpl
 			long companyId, String pluginId, String pluginType)
 		throws PortalException, SystemException {
 
-		PluginSetting pluginSetting = PluginSettingUtil.fetchByC_I_T(
+		PluginSetting pluginSetting = pluginSettingPersistence.fetchByC_I_T(
 			companyId, pluginId, pluginType);
 
 		if (pluginSetting == null) {
@@ -135,13 +134,13 @@ public class PluginSettingLocalServiceImpl
 
 		pluginId = PortalUtil.getJsSafePortletName(pluginId);
 
-		PluginSetting pluginSetting = PluginSettingUtil.fetchByC_I_T(
+		PluginSetting pluginSetting = pluginSettingPersistence.fetchByC_I_T(
 			companyId, pluginId, pluginType);
 
 		if (pluginSetting == null) {
 			long pluginSettingId = counterLocalService.increment();
 
-			pluginSetting = PluginSettingUtil.create(pluginSettingId);
+			pluginSetting = pluginSettingPersistence.create(pluginSettingId);
 
 			pluginSetting.setCompanyId(companyId);
 			pluginSetting.setPluginId(pluginId);
@@ -151,7 +150,7 @@ public class PluginSettingLocalServiceImpl
 		pluginSetting.setRoles(roles);
 		pluginSetting.setActive(active);
 
-		PluginSettingUtil.update(pluginSetting);
+		pluginSettingPersistence.update(pluginSetting);
 
 		return pluginSetting;
 	}

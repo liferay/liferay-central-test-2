@@ -28,9 +28,7 @@ import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.pwd.PwdEncryptor;
-import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.base.PasswordTrackerLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.PasswordTrackerUtil;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -46,7 +44,7 @@ public class PasswordTrackerLocalServiceImpl
 	extends PasswordTrackerLocalServiceBaseImpl {
 
 	public void deletePasswordTrackers(long userId) throws SystemException {
-		PasswordTrackerUtil.removeByUserId(userId);
+		passwordTrackerPersistence.removeByUserId(userId);
 	}
 
 	public boolean isSameAsCurrentPassword(long userId, String newClearTextPwd)
@@ -81,7 +79,7 @@ public class PasswordTrackerLocalServiceImpl
 		throws PortalException, SystemException {
 
 		PasswordPolicy passwordPolicy =
-			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(userId);
+			passwordPolicyLocalService.getPasswordPolicyByUserId(userId);
 
 		if (!passwordPolicy.getHistory()) {
 			return true;
@@ -91,7 +89,8 @@ public class PasswordTrackerLocalServiceImpl
 
 		int historyCount = 1;
 
-		Iterator itr = PasswordTrackerUtil.findByUserId(userId).iterator();
+		Iterator itr = passwordTrackerPersistence.findByUserId(
+			userId).iterator();
 
 		while (itr.hasNext()) {
 			if (historyCount > passwordPolicy.getHistoryCount()) {
@@ -118,14 +117,14 @@ public class PasswordTrackerLocalServiceImpl
 
 		long passwordTrackerId = counterLocalService.increment();
 
-		PasswordTracker passwordTracker =
-			PasswordTrackerUtil.create(passwordTrackerId);
+		PasswordTracker passwordTracker = passwordTrackerPersistence.create(
+			passwordTrackerId);
 
 		passwordTracker.setUserId(userId);
 		passwordTracker.setCreateDate(new Date());
 		passwordTracker.setPassword(encPwd);
 
-		PasswordTrackerUtil.update(passwordTracker);
+		passwordTrackerPersistence.update(passwordTracker);
 	}
 
 }

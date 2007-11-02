@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.PasswordPolicy;
-import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.base.PasswordPolicyServiceBaseImpl;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
@@ -51,7 +50,7 @@ public class PasswordPolicyServiceImpl extends PasswordPolicyServiceBaseImpl {
 		PortalPermissionUtil.check(
 			getPermissionChecker(), ActionKeys.ADD_PASSWORD_POLICY);
 
-		return PasswordPolicyLocalServiceUtil.addPasswordPolicy(
+		return passwordPolicyLocalService.addPasswordPolicy(
 			getUserId(), false, name, description, changeable, changeRequired,
 			minAge, checkSyntax, allowDictionaryWords, minLength, history,
 			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,
@@ -64,7 +63,7 @@ public class PasswordPolicyServiceImpl extends PasswordPolicyServiceBaseImpl {
 		PasswordPolicyPermissionUtil.check(
 			getPermissionChecker(), passwordPolicyId, ActionKeys.DELETE);
 
-		PasswordPolicyLocalServiceUtil.deletePasswordPolicy(passwordPolicyId);
+		passwordPolicyLocalService.deletePasswordPolicy(passwordPolicyId);
 	}
 
 	public PasswordPolicy updatePasswordPolicy(
@@ -79,7 +78,7 @@ public class PasswordPolicyServiceImpl extends PasswordPolicyServiceBaseImpl {
 		PasswordPolicyPermissionUtil.check(
 			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
-		return PasswordPolicyLocalServiceUtil.updatePasswordPolicy(
+		return passwordPolicyLocalService.updatePasswordPolicy(
 			passwordPolicyId, name, description, changeable, changeRequired,
 			minAge, checkSyntax, allowDictionaryWords, minLength, history,
 			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,

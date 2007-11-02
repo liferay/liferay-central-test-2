@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.base.RoleServiceBaseImpl;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
@@ -49,7 +48,7 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 
 		PortalPermissionUtil.check(getPermissionChecker(), ActionKeys.ADD_ROLE);
 
-		return RoleLocalServiceUtil.addRole(
+		return roleLocalService.addRole(
 			user.getUserId(), user.getCompanyId(), name, type);
 	}
 
@@ -59,64 +58,63 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 		RolePermissionUtil.check(
 			getPermissionChecker(), roleId, ActionKeys.DELETE);
 
-		RoleLocalServiceUtil.deleteRole(roleId);
+		roleLocalService.deleteRole(roleId);
 	}
 
 	public Role getGroupRole(long companyId, long groupId)
 		throws PortalException, SystemException {
 
-		return RoleLocalServiceUtil.getGroupRole(companyId, groupId);
+		return roleLocalService.getGroupRole(companyId, groupId);
 	}
 
 	public List getGroupRoles(long groupId)
 		throws PortalException, SystemException {
 
-		return RoleLocalServiceUtil.getGroupRoles(groupId);
+		return roleLocalService.getGroupRoles(groupId);
 	}
 
 	public Role getRole(long roleId)
 		throws PortalException, SystemException {
 
-		return RoleLocalServiceUtil.getRole(roleId);
+		return roleLocalService.getRole(roleId);
 	}
 
 	public Role getRole(long companyId, String name)
 		throws PortalException, SystemException {
 
-		return RoleLocalServiceUtil.getRole(companyId, name);
+		return roleLocalService.getRole(companyId, name);
 	}
 
 	public List getUserGroupRoles(long userId, long groupId)
 		throws PortalException, SystemException {
 
-		return RoleLocalServiceUtil.getUserGroupRoles(userId, groupId);
+		return roleLocalService.getUserGroupRoles(userId, groupId);
 	}
 
 	public List getUserRelatedRoles(long userId, List groups)
 		throws PortalException, SystemException {
 
-		return RoleLocalServiceUtil.getUserRelatedRoles(userId, groups);
+		return roleLocalService.getUserRelatedRoles(userId, groups);
 	}
 
 	public List getUserRoles(long userId)
 		throws PortalException, SystemException {
 
-		return RoleLocalServiceUtil.getUserRoles(userId);
+		return roleLocalService.getUserRoles(userId);
 	}
 
 	public boolean hasUserRole(
 			long userId, long companyId, String name, boolean inherited)
 		throws PortalException, SystemException {
 
-		return RoleLocalServiceUtil.hasUserRole(
-			userId, companyId, name, inherited);
+		return roleLocalService.hasUserRole(userId, companyId, name, inherited);
 	}
 
 	public boolean hasUserRoles(
 			long userId, long companyId, String[] names, boolean inherited)
 		throws PortalException, SystemException {
 
-		return RoleLocalServiceUtil.hasUserRoles(
+		return roleLocalService.hasUserRoles(
 			userId, companyId, names, inherited);
 	}
 
@@ -126,7 +124,7 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 		RolePermissionUtil.check(
 			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		return RoleLocalServiceUtil.updateRole(roleId, name);
+		return roleLocalService.updateRole(roleId, name);
 	}
 
 }

@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Region;
 import com.liferay.portal.service.base.RegionServiceBaseImpl;
-import com.liferay.portal.service.persistence.RegionUtil;
 
 import java.util.List;
 
@@ -39,27 +38,27 @@ import java.util.List;
 public class RegionServiceImpl extends RegionServiceBaseImpl {
 
 	public List getRegions() throws SystemException {
-		return RegionUtil.findAll();
+		return regionPersistence.findAll();
 	}
 
 	public List getRegions(long countryId) throws SystemException {
-		return RegionUtil.findByCountryId(countryId);
+		return regionPersistence.findByCountryId(countryId);
 	}
 
 	public List getRegions(boolean active) throws SystemException {
-		return RegionUtil.findByActive(active);
+		return regionPersistence.findByActive(active);
 	}
 
 	public List getRegions(long countryId, boolean active)
 		throws SystemException {
 
-		return RegionUtil.findByC_A(countryId, active);
+		return regionPersistence.findByC_A(countryId, active);
 	}
 
 	public Region getRegion(long regionId)
 		throws PortalException, SystemException {
 
-		return RegionUtil.findByPrimaryKey(regionId);
+		return regionPersistence.findByPrimaryKey(regionId);
 	}
 
 }

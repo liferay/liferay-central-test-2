@@ -35,10 +35,6 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.PermissionLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.PermissionServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
@@ -62,7 +58,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 			long groupId, String actionId, long resourceId)
 		throws PortalException, SystemException {
 
-		return PermissionLocalServiceUtil.hasGroupPermission(
+		return permissionLocalService.hasGroupPermission(
 			groupId, actionId, resourceId);
 	}
 
@@ -70,7 +66,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 			long userId, String actionId, long resourceId)
 		throws PortalException, SystemException {
 
-		return PermissionLocalServiceUtil.hasUserPermission(
+		return permissionLocalService.hasUserPermission(
 			userId, actionId, resourceId);
 	}
 
@@ -79,7 +75,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 			PermissionCheckerBag permissionCheckerBag)
 		throws PortalException, SystemException {
 
-		return PermissionLocalServiceUtil.hasUserPermissions(
+		return permissionLocalService.hasUserPermissions(
 			userId, groupId, actionId, resourceIds, permissionCheckerBag);
 	}
 
@@ -89,7 +85,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
 
-		PermissionLocalServiceUtil.setGroupPermissions(
+		permissionLocalService.setGroupPermissions(
 			groupId, actionIds, resourceId);
 	}
 
@@ -100,7 +96,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
 
-		PermissionLocalServiceUtil.setGroupPermissions(
+		permissionLocalService.setGroupPermissions(
 			className, classPK, groupId, actionIds, resourceId);
 	}
 
@@ -111,7 +107,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
 
-		PermissionLocalServiceUtil.setOrgGroupPermissions(
+		permissionLocalService.setOrgGroupPermissions(
 			organizationId, groupId, actionIds, resourceId);
 	}
 
@@ -123,7 +119,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		checkPermission(
 			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
-		PermissionLocalServiceUtil.setRolePermission(
+		permissionLocalService.setRolePermission(
 			roleId, getUser().getCompanyId(), name, scope, primKey, actionId);
 	}
 
@@ -133,7 +129,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
 
-		PermissionLocalServiceUtil.setRolePermissions(
+		permissionLocalService.setRolePermissions(
 			roleId, actionIds, resourceId);
 	}
 
@@ -143,7 +139,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
 
-		PermissionLocalServiceUtil.setUserPermissions(
+		permissionLocalService.setUserPermissions(
 			userId, actionIds, resourceId);
 	}
 
@@ -154,7 +150,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		checkPermission(
 			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
-		PermissionLocalServiceUtil.unsetRolePermission(roleId, permissionId);
+		permissionLocalService.unsetRolePermission(roleId, permissionId);
 	}
 
 	public void unsetRolePermission(
@@ -165,7 +161,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		checkPermission(
 			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
-		PermissionLocalServiceUtil.unsetRolePermission(
+		permissionLocalService.unsetRolePermission(
 			roleId, getUser().getCompanyId(), name, scope, primKey, actionId);
 	}
 
@@ -176,7 +172,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		checkPermission(
 			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
-		PermissionLocalServiceUtil.unsetRolePermissions(
+		permissionLocalService.unsetRolePermissions(
 			roleId, getUser().getCompanyId(), name, scope, actionId);
 	}
 
@@ -186,7 +182,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
 
-		PermissionLocalServiceUtil.unsetUserPermissions(
+		permissionLocalService.unsetUserPermissions(
 			userId, actionIds, resourceId);
 	}
 
@@ -195,7 +191,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 			long resourceId)
 		throws PortalException, SystemException {
 
-		Resource resource = ResourceLocalServiceUtil.getResource(resourceId);
+		Resource resource = resourcePersistence.findByPrimaryKey(resourceId);
 
 		checkPermission(
 			permissionChecker, groupId, resource.getName(),
@@ -224,7 +220,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		else if (name.equals(Layout.class.getName())) {
 			long plid = GetterUtil.getLong(primKey);
 
-			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+			Layout layout = layoutPersistence.findByPrimaryKey(plid);
 
 			GroupPermissionUtil.check(
 				permissionChecker, layout.getGroupId(),
@@ -233,7 +229,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		else if (name.equals(User.class.getName())) {
 			long userId = GetterUtil.getLong(primKey);
 
-			User user = UserLocalServiceUtil.getUserById(userId);
+			User user = userPersistence.findByPrimaryKey(userId);
 
 			UserPermissionUtil.check(
 				permissionChecker, userId, user.getOrganizationIds(),

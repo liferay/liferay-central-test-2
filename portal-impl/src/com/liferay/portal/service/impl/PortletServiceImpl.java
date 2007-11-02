@@ -27,8 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.base.PortletServiceBaseImpl;
 
 /**
@@ -43,13 +41,13 @@ public class PortletServiceImpl extends PortletServiceBaseImpl {
 			long companyId, String portletId, String roles, boolean active)
 		throws PortalException, SystemException {
 
-		if (!RoleLocalServiceUtil.hasUserRole(
+		if (!roleLocalService.hasUserRole(
 				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}
 
-		return PortletLocalServiceUtil.updatePortlet(
+		return portletLocalService.updatePortlet(
 			companyId, portletId, roles, active);
 	}
 

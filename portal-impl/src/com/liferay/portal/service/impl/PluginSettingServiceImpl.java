@@ -27,8 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.PluginSettingLocalServiceUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.base.PluginSettingServiceBaseImpl;
 
 /**
@@ -44,13 +42,13 @@ public class PluginSettingServiceImpl extends PluginSettingServiceBaseImpl {
 			boolean active)
 		throws PortalException, SystemException {
 
-		if (!RoleLocalServiceUtil.hasUserRole(
+		if (!roleLocalService.hasUserRole(
 				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}
 
-		return PluginSettingLocalServiceUtil.updatePluginSetting(
+		return pluginSettingLocalService.updatePluginSetting(
 			companyId, pluginId, pluginType, roles, active);
 	}
 
