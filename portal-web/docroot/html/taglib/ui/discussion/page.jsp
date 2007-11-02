@@ -33,6 +33,7 @@
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
+<%@ page import="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl" %>
 
 <%
 String formName = namespace + request.getAttribute("liferay-ui:discussion:formName");
@@ -237,6 +238,13 @@ List messages = treeWalker.getMessages();
 
 				<div>
 					<%= LanguageUtil.format(pageContext, "posted-on-x", dateFormatDateTime.format(message.getModifiedDate())) %>
+					<liferay-ui:message key="in-reply-to"/>
+					<%
+						MBMessage parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
+					%>
+					<a href='<%= "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + parentMessage.getMessageId() + ");" %>'>
+					<%= parentMessage.getUserName() %>
+					</a>
 				</div>
 
 				<br />
