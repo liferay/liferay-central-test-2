@@ -82,6 +82,16 @@ public interface BlogsStatsUserLocalService {
 	public void setBlogsStatsUserFinder(
 		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder blogsStatsUserFinder);
 
+	public com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence();
+
+	public void setGroupPersistence(
+		com.liferay.portal.service.persistence.GroupPersistence groupPersistence);
+
+	public com.liferay.portal.service.persistence.GroupFinder getGroupFinder();
+
+	public void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder);
+
 	public void afterPropertiesSet();
 
 	public void deleteStatsUserByGroupId(long groupId)

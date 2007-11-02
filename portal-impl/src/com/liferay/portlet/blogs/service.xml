@@ -34,6 +34,12 @@
 		<finder name="ParentCategoryId" return-type="Collection">
 			<finder-column name="parentCategoryId" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="BlogsEntry" local-service="true" remote-service="true">
 
@@ -90,6 +96,17 @@
 			<finder-column name="companyId" />
 			<finder-column name="userId" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Company" />
+		<reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portal" entity="Organization" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
+		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<entity name="BlogsStatsUser" local-service="true" remote-service="false">
 
@@ -140,6 +157,11 @@
 			<finder-column name="companyId" />
 			<finder-column name="entryCount" comparator="!=" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Group" />
 	</entity>
 	<exceptions>
 		<exception>CategoryName</exception>

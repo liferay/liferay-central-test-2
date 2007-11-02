@@ -22,8 +22,29 @@
 
 package com.liferay.portlet.imagegallery.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.ResourceLocalService;
+import com.liferay.portal.service.ResourceLocalServiceFactory;
+import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.ResourceServiceFactory;
+import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.UserLocalServiceFactory;
+import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.persistence.ResourceFinder;
+import com.liferay.portal.service.persistence.ResourceFinderUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.ResourceUtil;
+import com.liferay.portal.service.persistence.UserFinder;
+import com.liferay.portal.service.persistence.UserFinderUtil;
+import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.IGImageLocalService;
@@ -99,6 +120,87 @@ public abstract class IGFolderLocalServiceBaseImpl
 		this.igImageFinder = igImageFinder;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
+	public ResourceLocalService getResourceLocalService() {
+		return resourceLocalService;
+	}
+
+	public void setResourceLocalService(
+		ResourceLocalService resourceLocalService) {
+		this.resourceLocalService = resourceLocalService;
+	}
+
+	public ResourceService getResourceService() {
+		return resourceService;
+	}
+
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourcePersistence getResourcePersistence() {
+		return resourcePersistence;
+	}
+
+	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
+		this.resourcePersistence = resourcePersistence;
+	}
+
+	public ResourceFinder getResourceFinder() {
+		return resourceFinder;
+	}
+
+	public void setResourceFinder(ResourceFinder resourceFinder) {
+		this.resourceFinder = resourceFinder;
+	}
+
+	public UserLocalService getUserLocalService() {
+		return userLocalService;
+	}
+
+	public void setUserLocalService(UserLocalService userLocalService) {
+		this.userLocalService = userLocalService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public UserPersistence getUserPersistence() {
+		return userPersistence;
+	}
+
+	public void setUserPersistence(UserPersistence userPersistence) {
+		this.userPersistence = userPersistence;
+	}
+
+	public UserFinder getUserFinder() {
+		return userFinder;
+	}
+
+	public void setUserFinder(UserFinder userFinder) {
+		this.userFinder = userFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (igFolderPersistence == null) {
 			igFolderPersistence = IGFolderUtil.getPersistence();
@@ -119,6 +221,46 @@ public abstract class IGFolderLocalServiceBaseImpl
 		if (igImageFinder == null) {
 			igImageFinder = IGImageFinderUtil.getFinder();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
+
+		if (resourceLocalService == null) {
+			resourceLocalService = ResourceLocalServiceFactory.getImpl();
+		}
+
+		if (resourceService == null) {
+			resourceService = ResourceServiceFactory.getImpl();
+		}
+
+		if (resourcePersistence == null) {
+			resourcePersistence = ResourceUtil.getPersistence();
+		}
+
+		if (resourceFinder == null) {
+			resourceFinder = ResourceFinderUtil.getFinder();
+		}
+
+		if (userLocalService == null) {
+			userLocalService = UserLocalServiceFactory.getImpl();
+		}
+
+		if (userService == null) {
+			userService = UserServiceFactory.getImpl();
+		}
+
+		if (userPersistence == null) {
+			userPersistence = UserUtil.getPersistence();
+		}
+
+		if (userFinder == null) {
+			userFinder = UserFinderUtil.getFinder();
+		}
 	}
 
 	protected IGFolderPersistence igFolderPersistence;
@@ -126,4 +268,14 @@ public abstract class IGFolderLocalServiceBaseImpl
 	protected IGImageService igImageService;
 	protected IGImagePersistence igImagePersistence;
 	protected IGImageFinder igImageFinder;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
+	protected ResourceLocalService resourceLocalService;
+	protected ResourceService resourceService;
+	protected ResourcePersistence resourcePersistence;
+	protected ResourceFinder resourceFinder;
+	protected UserLocalService userLocalService;
+	protected UserService userService;
+	protected UserPersistence userPersistence;
+	protected UserFinder userFinder;
 }

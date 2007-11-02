@@ -82,6 +82,71 @@ public interface BlogsEntryLocalService {
 	public void setBlogsStatsUserFinder(
 		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder blogsStatsUserFinder);
 
+	public com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence();
+
+	public void setCompanyPersistence(
+		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence);
+
+	public com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence();
+
+	public void setGroupPersistence(
+		com.liferay.portal.service.persistence.GroupPersistence groupPersistence);
+
+	public com.liferay.portal.service.persistence.GroupFinder getGroupFinder();
+
+	public void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder);
+
+	public com.liferay.portal.service.persistence.OrganizationPersistence getOrganizationPersistence();
+
+	public void setOrganizationPersistence(
+		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence);
+
+	public com.liferay.portal.service.persistence.OrganizationFinder getOrganizationFinder();
+
+	public void setOrganizationFinder(
+		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder);
+
+	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
+
+	public void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
+
+	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
+
+	public void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
+
+	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
+
+	public void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence();
+
+	public void setMBMessagePersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessageFinder getMBMessageFinder();
+
+	public void setMBMessageFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder);
+
+	public com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence();
+
+	public void setTagsAssetPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence);
+
+	public com.liferay.portlet.tags.service.persistence.TagsAssetFinder getTagsAssetFinder();
+
+	public void setTagsAssetFinder(
+		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,

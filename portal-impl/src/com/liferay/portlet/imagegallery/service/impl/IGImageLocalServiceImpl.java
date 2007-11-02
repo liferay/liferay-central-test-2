@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.imagegallery.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
@@ -33,18 +32,13 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
-import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
-import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ImageUtil;
 
@@ -101,17 +95,17 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Image
 
-			User user = UserUtil.findByPrimaryKey(userId);
-			IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
+			User user = userPersistence.findByPrimaryKey(userId);
+			IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
 			BufferedImage bufferedImage = ImageIO.read(file);
 			byte[] bytes = FileUtil.getBytes(file);
 			Date now = new Date();
 
 			validate(file, bytes);
 
-			long imageId = CounterLocalServiceUtil.increment();
+			long imageId = counterLocalService.increment();
 
-			IGImage image = IGImageUtil.create(imageId);
+			IGImage image = igImagePersistence.create(imageId);
 
 			image.setCompanyId(user.getCompanyId());
 			image.setUserId(user.getUserId());
@@ -119,10 +113,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.setModifiedDate(now);
 			image.setFolderId(folderId);
 			image.setDescription(description);
-			image.setSmallImageId(CounterLocalServiceUtil.increment());
-			image.setLargeImageId(CounterLocalServiceUtil.increment());
+			image.setSmallImageId(counterLocalService.increment());
+			image.setLargeImageId(counterLocalService.increment());
 
-			IGImageUtil.update(image);
+			igImagePersistence.update(image);
 
 			// Images
 
@@ -160,8 +154,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
-		IGImage image = IGImageUtil.findByPrimaryKey(imageId);
+		IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
+		IGImage image = igImagePersistence.findByPrimaryKey(imageId);
 
 		addImageResources(
 			folder, image, addCommunityPermissions, addGuestPermissions);
@@ -172,7 +166,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			image.getCompanyId(), folder.getGroupId(), image.getUserId(),
 			IGImage.class.getName(), image.getImageId(), false,
 			addCommunityPermissions, addGuestPermissions);
@@ -183,8 +177,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
-		IGImage image = IGImageUtil.findByPrimaryKey(imageId);
+		IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
+		IGImage image = igImagePersistence.findByPrimaryKey(imageId);
 
 		addImageResources(
 			folder, image, communityPermissions, guestPermissions);
@@ -195,7 +189,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			image.getCompanyId(), folder.getGroupId(), image.getUserId(),
 			IGImage.class.getName(), image.getImageId(), communityPermissions,
 			guestPermissions);
@@ -204,7 +198,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public void deleteImage(long imageId)
 		throws PortalException, SystemException {
 
-		IGImage image = IGImageUtil.findByPrimaryKey(imageId);
+		IGImage image = igImagePersistence.findByPrimaryKey(imageId);
 
 		deleteImage(image);
 	}
@@ -214,12 +208,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		// Tags
 
-		TagsAssetLocalServiceUtil.deleteAsset(
+		tagsAssetLocalService.deleteAsset(
 			IGImage.class.getName(), image.getImageId());
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			image.getCompanyId(), IGImage.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, image.getImageId());
 
@@ -230,13 +224,13 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		// Image
 
-		IGImageUtil.remove(image.getPrimaryKey());
+		igImagePersistence.remove(image.getPrimaryKey());
 	}
 
 	public void deleteImages(long folderId)
 		throws PortalException, SystemException {
 
-		Iterator itr = IGImageUtil.findByFolderId(folderId).iterator();
+		Iterator itr = igImagePersistence.findByFolderId(folderId).iterator();
 
 		while (itr.hasNext()) {
 			IGImage image = (IGImage)itr.next();
@@ -286,28 +280,28 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public IGImage getImage(long imageId)
 		throws PortalException, SystemException {
 
-		return IGImageUtil.findByPrimaryKey(imageId);
+		return igImagePersistence.findByPrimaryKey(imageId);
 	}
 
 	public List getImages(long folderId) throws SystemException {
-		return IGImageUtil.findByFolderId(folderId);
+		return igImagePersistence.findByFolderId(folderId);
 	}
 
 	public List getImages(long folderId, int begin, int end)
 		throws SystemException {
 
-		return IGImageUtil.findByFolderId(folderId, begin, end);
+		return igImagePersistence.findByFolderId(folderId, begin, end);
 	}
 
 	public List getImages(
 			long folderId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return IGImageUtil.findByFolderId(folderId, begin, end, obc);
+		return igImagePersistence.findByFolderId(folderId, begin, end, obc);
 	}
 
 	public int getImagesCount(long folderId) throws SystemException {
-		return IGImageUtil.countByFolderId(folderId);
+		return igImagePersistence.countByFolderId(folderId);
 	}
 
 	public List getNoAssetImages() throws SystemException {
@@ -323,7 +317,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Image
 
-			IGImage image = IGImageUtil.findByPrimaryKey(imageId);
+			IGImage image = igImagePersistence.findByPrimaryKey(imageId);
 
 			IGFolder folder = getFolder(image, folderId);
 
@@ -343,7 +337,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.setFolderId(folder.getFolderId());
 			image.setDescription(description);
 
-			IGImageUtil.update(image);
+			igImagePersistence.update(image);
 
 			// Images
 
@@ -374,7 +368,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			return;
 		}
 
-		TagsAssetLocalServiceUtil.updateAsset(
+		tagsAssetLocalService.updateAsset(
 			userId, image.getFolder().getGroupId(), IGImage.class.getName(),
 			image.getImageId(), tagsEntries, null, null, null, null,
 			largeImage.getType(), image.getDescription(),
@@ -386,10 +380,11 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (image.getFolderId() != folderId) {
-			IGFolder oldFolder = IGFolderUtil.findByPrimaryKey(
+			IGFolder oldFolder = igFolderPersistence.findByPrimaryKey(
 				image.getFolderId());
 
-			IGFolder newFolder = IGFolderUtil.fetchByPrimaryKey(folderId);
+			IGFolder newFolder = igFolderPersistence.fetchByPrimaryKey(
+				folderId);
 
 			if ((newFolder == null) ||
 				(oldFolder.getGroupId() != newFolder.getGroupId())) {
@@ -398,7 +393,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			}
 		}
 
-		return IGFolderUtil.findByPrimaryKey(folderId);
+		return igFolderPersistence.findByPrimaryKey(folderId);
 	}
 
 	protected void saveImages(

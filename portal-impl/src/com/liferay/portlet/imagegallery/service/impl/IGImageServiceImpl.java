@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.base.IGImageServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
 import com.liferay.portlet.imagegallery.service.permission.IGImagePermission;
@@ -50,7 +49,7 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 		IGFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_IMAGE);
 
-		return IGImageLocalServiceUtil.addImage(
+		return igImageLocalService.addImage(
 			getUserId(), folderId, description, file, contentType, tagsEntries,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -64,7 +63,7 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 		IGFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_IMAGE);
 
-		return IGImageLocalServiceUtil.addImage(
+		return igImageLocalService.addImage(
 			getUserId(), folderId, description, file, contentType, tagsEntries,
 			communityPermissions, guestPermissions);
 	}
@@ -75,7 +74,7 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 		IGImagePermission.check(
 			getPermissionChecker(), imageId, ActionKeys.DELETE);
 
-		IGImageLocalServiceUtil.deleteImage(imageId);
+		igImageLocalService.deleteImage(imageId);
 	}
 
 	public IGImage getImage(long imageId)
@@ -84,7 +83,7 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 		IGImagePermission.check(
 			getPermissionChecker(), imageId, ActionKeys.VIEW);
 
-		return IGImageLocalServiceUtil.getImage(imageId);
+		return igImageLocalService.getImage(imageId);
 	}
 
 	public IGImage updateImage(
@@ -95,7 +94,7 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 		IGImagePermission.check(
 			getPermissionChecker(), imageId, ActionKeys.UPDATE);
 
-		return IGImageLocalServiceUtil.updateImage(
+		return igImageLocalService.updateImage(
 			getUserId(), imageId, folderId, description, file, contentType,
 			tagsEntries);
 	}

@@ -101,6 +101,54 @@ public class IGFolderLocalServiceUtil {
 		igFolderLocalService.setIGImageFinder(igImageFinder);
 	}
 
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+		igFolderLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+		igFolderLocalService.setResourceFinder(resourceFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+		igFolderLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+		igFolderLocalService.setUserFinder(userFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 		igFolderLocalService.afterPropertiesSet();

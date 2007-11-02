@@ -22,21 +22,16 @@
 
 package com.liferay.portlet.blogs.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.blogs.CategoryNameException;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.service.base.BlogsCategoryLocalServiceBaseImpl;
-import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
-import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.blogs.util.Indexer;
 
 import java.io.IOException;
@@ -87,14 +82,14 @@ public class BlogsCategoryLocalServiceImpl
 
 		// Category
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
 		validate(name);
 
-		long categoryId = CounterLocalServiceUtil.increment();
+		long categoryId = counterLocalService.increment();
 
-		BlogsCategory category = BlogsCategoryUtil.create(categoryId);
+		BlogsCategory category = blogsCategoryPersistence.create(categoryId);
 
 		category.setCompanyId(user.getCompanyId());
 		category.setUserId(user.getUserId());
@@ -105,7 +100,7 @@ public class BlogsCategoryLocalServiceImpl
 		category.setName(name);
 		category.setDescription(description);
 
-		BlogsCategoryUtil.update(category);
+		blogsCategoryPersistence.update(category);
 
 		// Resources
 
@@ -129,7 +124,8 @@ public class BlogsCategoryLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		BlogsCategory category = BlogsCategoryUtil.findByPrimaryKey(categoryId);
+		BlogsCategory category = blogsCategoryPersistence.findByPrimaryKey(
+			categoryId);
 
 		addCategoryResources(
 			category, addCommunityPermissions, addGuestPermissions);
@@ -140,7 +136,7 @@ public class BlogsCategoryLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			category.getCompanyId(), 0, category.getUserId(),
 			BlogsCategory.class.getName(), category.getCategoryId(), false,
 			addCommunityPermissions, addGuestPermissions);
@@ -151,7 +147,8 @@ public class BlogsCategoryLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		BlogsCategory category = BlogsCategoryUtil.findByPrimaryKey(categoryId);
+		BlogsCategory category = blogsCategoryPersistence.findByPrimaryKey(
+			categoryId);
 
 		addCategoryResources(category, communityPermissions, guestPermissions);
 	}
@@ -161,7 +158,7 @@ public class BlogsCategoryLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			category.getCompanyId(), 0, category.getUserId(),
 			BlogsCategory.class.getName(), category.getCategoryId(),
 			communityPermissions, guestPermissions);
@@ -170,7 +167,8 @@ public class BlogsCategoryLocalServiceImpl
 	public void deleteCategory(long categoryId)
 		throws PortalException, SystemException {
 
-		BlogsCategory category = BlogsCategoryUtil.findByPrimaryKey(categoryId);
+		BlogsCategory category = blogsCategoryPersistence.findByPrimaryKey(
+			categoryId);
 
 		deleteCategory(category);
 	}
@@ -180,7 +178,7 @@ public class BlogsCategoryLocalServiceImpl
 
 		// Categories
 
-		Iterator itr = BlogsCategoryUtil.findByParentCategoryId(
+		Iterator itr = blogsCategoryPersistence.findByParentCategoryId(
 			category.getCategoryId()).iterator();
 
 		while (itr.hasNext()) {
@@ -191,7 +189,7 @@ public class BlogsCategoryLocalServiceImpl
 
 		// Entries
 
-		itr = BlogsEntryUtil.findByCategoryId(
+		itr = blogsEntryPersistence.findByCategoryId(
 			category.getCategoryId()).iterator();
 
 		while (itr.hasNext()) {
@@ -202,7 +200,7 @@ public class BlogsCategoryLocalServiceImpl
 
 			entry.setCategoryId(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
-			BlogsEntryUtil.update(entry);
+			blogsEntryPersistence.update(entry);
 
 			// Lucene
 
@@ -219,38 +217,39 @@ public class BlogsCategoryLocalServiceImpl
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			category.getCompanyId(), BlogsCategory.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, category.getCategoryId());
 
 		// Category
 
-		BlogsCategoryUtil.remove(category.getCategoryId());
+		blogsCategoryPersistence.remove(category.getCategoryId());
 	}
 
 	public List getCategories(long parentCategoryId, int begin, int end)
 		throws SystemException {
 
-		return BlogsCategoryUtil.findByParentCategoryId(
+		return blogsCategoryPersistence.findByParentCategoryId(
 			parentCategoryId, begin, end);
 	}
 
 	public int getCategoriesCount(long parentCategoryId)
 		throws SystemException {
 
-		return BlogsCategoryUtil.countByParentCategoryId(parentCategoryId);
+		return blogsCategoryPersistence.countByParentCategoryId(
+			parentCategoryId);
 	}
 
 	public BlogsCategory getCategory(long categoryId)
 		throws PortalException, SystemException {
 
-		return BlogsCategoryUtil.findByPrimaryKey(categoryId);
+		return blogsCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
 	public void getSubcategoryIds(List categoryIds, long categoryId)
 		throws SystemException {
 
-		Iterator itr = BlogsCategoryUtil.findByParentCategoryId(
+		Iterator itr = blogsCategoryPersistence.findByParentCategoryId(
 			categoryId).iterator();
 
 		while (itr.hasNext()) {
@@ -269,14 +268,15 @@ public class BlogsCategoryLocalServiceImpl
 
 		validate(name);
 
-		BlogsCategory category = BlogsCategoryUtil.findByPrimaryKey(categoryId);
+		BlogsCategory category = blogsCategoryPersistence.findByPrimaryKey(
+			categoryId);
 
 		category.setModifiedDate(new Date());
 		category.setParentCategoryId(parentCategoryId);
 		category.setName(name);
 		category.setDescription(description);
 
-		BlogsCategoryUtil.update(category);
+		blogsCategoryPersistence.update(category);
 
 		return category;
 	}

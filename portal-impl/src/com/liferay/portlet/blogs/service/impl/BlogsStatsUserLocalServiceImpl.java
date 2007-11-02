@@ -22,16 +22,12 @@
 
 package com.liferay.portlet.blogs.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.service.base.BlogsStatsUserLocalServiceBaseImpl;
-import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
-import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -48,35 +44,36 @@ public class BlogsStatsUserLocalServiceImpl
 	public void deleteStatsUserByGroupId(long groupId)
 		throws SystemException {
 
-		BlogsStatsUserUtil.removeByGroupId(groupId);
+		blogsStatsUserPersistence.removeByGroupId(groupId);
 	}
 
 	public void deleteStatsUserByUserId(long userId) throws SystemException {
-		BlogsStatsUserUtil.removeByUserId(userId);
+		blogsStatsUserPersistence.removeByUserId(userId);
 	}
 
 	public List getCompanyStatsUsers(
 			long companyId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return BlogsStatsUserUtil.findByC_E(companyId, 0, begin, end, obc);
+		return blogsStatsUserPersistence.findByC_E(
+			companyId, 0, begin, end, obc);
 	}
 
 	public int getCompanyStatsUsersCount(long companyId)
 		throws SystemException {
 
-		return BlogsStatsUserUtil.countByC_E(companyId, 0);
+		return blogsStatsUserPersistence.countByC_E(companyId, 0);
 	}
 
 	public List getGroupStatsUsers(
 			long groupId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return BlogsStatsUserUtil.findByG_E(groupId, 0, begin, end, obc);
+		return blogsStatsUserPersistence.findByG_E(groupId, 0, begin, end, obc);
 	}
 
 	public int getGroupStatsUsersCount(long groupId) throws SystemException {
-		return BlogsStatsUserUtil.countByG_E(groupId, 0);
+		return blogsStatsUserPersistence.countByG_E(groupId, 0);
 	}
 
 	public List getOrganizationStatsUsers(
@@ -96,21 +93,21 @@ public class BlogsStatsUserLocalServiceImpl
 	public BlogsStatsUser getStatsUser(long groupId, long userId)
 		throws PortalException, SystemException {
 
-		BlogsStatsUser statsUser = BlogsStatsUserUtil.fetchByG_U(
+		BlogsStatsUser statsUser = blogsStatsUserPersistence.fetchByG_U(
 			groupId, userId);
 
 		if (statsUser == null) {
-			Group group = GroupUtil.findByPrimaryKey(groupId);
+			Group group = groupPersistence.findByPrimaryKey(groupId);
 
-			long statsUserId = CounterLocalServiceUtil.increment();
+			long statsUserId = counterLocalService.increment();
 
-			statsUser = BlogsStatsUserUtil.create(statsUserId);
+			statsUser = blogsStatsUserPersistence.create(statsUserId);
 
 			statsUser.setCompanyId(group.getCompanyId());
 			statsUser.setGroupId(groupId);
 			statsUser.setUserId(userId);
 
-			BlogsStatsUserUtil.update(statsUser);
+			blogsStatsUserPersistence.update(statsUser);
 		}
 
 		return statsUser;
@@ -119,14 +116,14 @@ public class BlogsStatsUserLocalServiceImpl
 	public void updateStatsUser(long groupId, long userId, Date lastPostDate)
 		throws PortalException, SystemException {
 
-		int entryCount = BlogsEntryUtil.countByG_U(groupId, userId);
+		int entryCount = blogsEntryPersistence.countByG_U(groupId, userId);
 
 		BlogsStatsUser statsUser = getStatsUser(groupId, userId);
 
 		statsUser.setEntryCount(entryCount);
 		statsUser.setLastPostDate(lastPostDate);
 
-		BlogsStatsUserUtil.update(statsUser);
+		blogsStatsUserPersistence.update(statsUser);
 	}
 
 }

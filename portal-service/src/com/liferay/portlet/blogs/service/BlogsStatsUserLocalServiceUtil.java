@@ -126,6 +126,30 @@ public class BlogsStatsUserLocalServiceUtil {
 		blogsStatsUserLocalService.setBlogsStatsUserFinder(blogsStatsUserFinder);
 	}
 
+	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		return blogsStatsUserLocalService.getGroupPersistence();
+	}
+
+	public static void setGroupPersistence(
+		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+		blogsStatsUserLocalService.setGroupPersistence(groupPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.GroupFinder getGroupFinder() {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		return blogsStatsUserLocalService.getGroupFinder();
+	}
+
+	public static void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+		blogsStatsUserLocalService.setGroupFinder(groupFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
 		blogsStatsUserLocalService.afterPropertiesSet();

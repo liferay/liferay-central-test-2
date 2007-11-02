@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portlet.blogs.model.BlogsCategory;
-import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.base.BlogsCategoryServiceBaseImpl;
 import com.liferay.portlet.blogs.service.permission.BlogsCategoryPermission;
 
@@ -46,7 +45,7 @@ public class BlogsCategoryServiceImpl extends BlogsCategoryServiceBaseImpl {
 		BlogsCategoryPermission.check(
 			getPermissionChecker(), parentCategoryId, ActionKeys.ADD_CATEGORY);
 
-		return BlogsCategoryLocalServiceUtil.addCategory(
+		return blogsCategoryLocalService.addCategory(
 			getUserId(), parentCategoryId, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -59,7 +58,7 @@ public class BlogsCategoryServiceImpl extends BlogsCategoryServiceBaseImpl {
 		BlogsCategoryPermission.check(
 			getPermissionChecker(), parentCategoryId, ActionKeys.ADD_CATEGORY);
 
-		return BlogsCategoryLocalServiceUtil.addCategory(
+		return blogsCategoryLocalService.addCategory(
 			getUserId(), parentCategoryId, name, description,
 			communityPermissions, guestPermissions);
 	}
@@ -70,7 +69,7 @@ public class BlogsCategoryServiceImpl extends BlogsCategoryServiceBaseImpl {
 		BlogsCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.DELETE);
 
-		BlogsCategoryLocalServiceUtil.deleteCategory(categoryId);
+		blogsCategoryLocalService.deleteCategory(categoryId);
 	}
 
 	public BlogsCategory getCategory(long categoryId)
@@ -79,7 +78,7 @@ public class BlogsCategoryServiceImpl extends BlogsCategoryServiceBaseImpl {
 		BlogsCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.VIEW);
 
-		return BlogsCategoryLocalServiceUtil.getCategory(categoryId);
+		return blogsCategoryLocalService.getCategory(categoryId);
 	}
 
 	public BlogsCategory updateCategory(
@@ -90,7 +89,7 @@ public class BlogsCategoryServiceImpl extends BlogsCategoryServiceBaseImpl {
 		BlogsCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.UPDATE);
 
-		return BlogsCategoryLocalServiceUtil.updateCategory(
+		return blogsCategoryLocalService.updateCategory(
 			categoryId, parentCategoryId, name, description);
 	}
 

@@ -32,16 +32,11 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.service.persistence.CompanyUtil;
-import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
-import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.base.BlogsEntryServiceBaseImpl;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
 import com.liferay.util.Html;
@@ -81,7 +76,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.BLOGS,
 			ActionKeys.ADD_ENTRY);
 
-		return BlogsEntryLocalServiceUtil.addEntry(
+		return blogsEntryLocalService.addEntry(
 			getUserId(), plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			themeDisplay, tagsEntries, addCommunityPermissions,
@@ -100,7 +95,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.BLOGS,
 			ActionKeys.ADD_ENTRY);
 
-		return BlogsEntryLocalServiceUtil.addEntry(
+		return blogsEntryLocalService.addEntry(
 			getUserId(), plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			themeDisplay, tagsEntries, communityPermissions, guestPermissions);
@@ -112,7 +107,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		BlogsEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.DELETE);
 
-		BlogsEntryLocalServiceUtil.deleteEntry(entryId);
+		blogsEntryLocalService.deleteEntry(entryId);
 	}
 
 	public String getCategoryBlogsRSS(
@@ -120,13 +115,13 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
-		BlogsCategory category = BlogsCategoryLocalServiceUtil.getCategory(
+		BlogsCategory category = blogsCategoryLocalService.getCategory(
 			categoryId);
 
 		String name = category.getName();
 		String description = category.getDescription();
 
-		List blogsEntries = BlogsEntryLocalServiceUtil.getEntries(
+		List blogsEntries = blogsEntryLocalService.getEntries(
 			categoryId, 0, max);
 
 		Iterator itr = blogsEntries.iterator();
@@ -150,7 +145,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		List entries = new ArrayList();
 
-		Iterator itr = BlogsEntryLocalServiceUtil.getCompanyEntries(
+		Iterator itr = blogsEntryLocalService.getCompanyEntries(
 			companyId, 0, _MAX_END).iterator();
 
 		while (itr.hasNext() && (entries.size() < max)) {
@@ -171,7 +166,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
-		Company company = CompanyUtil.findByPrimaryKey(companyId);
+		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		String name = company.getName();
 
@@ -187,14 +182,13 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		BlogsEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.VIEW);
 
-		return BlogsEntryLocalServiceUtil.getEntry(entryId);
+		return blogsEntryLocalService.getEntry(entryId);
 	}
 
 	public BlogsEntry getEntry(long groupId, String urlTitle)
 		throws PortalException, SystemException {
 
-		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(
-			groupId, urlTitle);
+		BlogsEntry entry = blogsEntryLocalService.getEntry(groupId, urlTitle);
 
 		BlogsEntryPermission.check(
 			getPermissionChecker(), entry.getEntryId(), ActionKeys.VIEW);
@@ -207,7 +201,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		List entries = new ArrayList();
 
-		Iterator itr = BlogsEntryLocalServiceUtil.getGroupEntries(
+		Iterator itr = blogsEntryLocalService.getGroupEntries(
 			groupId, 0, _MAX_END).iterator();
 
 		while (itr.hasNext() && (entries.size() < max)) {
@@ -228,7 +222,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
-		Group group = GroupUtil.findByPrimaryKey(groupId);
+		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		String name = group.getDescriptiveName();
 
@@ -264,8 +258,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
-		Organization organization =
-			OrganizationLocalServiceUtil.getOrganization(organizationId);
+		Organization organization = organizationPersistence.findByPrimaryKey(
+			organizationId);
 
 		String name = organization.getName();
 
@@ -285,7 +279,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		BlogsEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
-		return BlogsEntryLocalServiceUtil.updateEntry(
+		return blogsEntryLocalService.updateEntry(
 			getUserId(), entryId, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, themeDisplay, tagsEntries);

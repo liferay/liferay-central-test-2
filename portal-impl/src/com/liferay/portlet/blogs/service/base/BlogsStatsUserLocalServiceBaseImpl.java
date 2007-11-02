@@ -22,8 +22,21 @@
 
 package com.liferay.portlet.blogs.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupLocalServiceFactory;
+import com.liferay.portal.service.GroupService;
+import com.liferay.portal.service.GroupServiceFactory;
+import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupFinderUtil;
+import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.GroupUtil;
 
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceFactory;
@@ -147,6 +160,54 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		this.blogsStatsUserFinder = blogsStatsUserFinder;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
+	public GroupLocalService getGroupLocalService() {
+		return groupLocalService;
+	}
+
+	public void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
+	}
+
+	public GroupService getGroupService() {
+		return groupService;
+	}
+
+	public void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
+	}
+
+	public GroupPersistence getGroupPersistence() {
+		return groupPersistence;
+	}
+
+	public void setGroupPersistence(GroupPersistence groupPersistence) {
+		this.groupPersistence = groupPersistence;
+	}
+
+	public GroupFinder getGroupFinder() {
+		return groupFinder;
+	}
+
+	public void setGroupFinder(GroupFinder groupFinder) {
+		this.groupFinder = groupFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (blogsCategoryLocalService == null) {
 			blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getImpl();
@@ -183,6 +244,30 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		if (blogsStatsUserFinder == null) {
 			blogsStatsUserFinder = BlogsStatsUserFinderUtil.getFinder();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
+
+		if (groupLocalService == null) {
+			groupLocalService = GroupLocalServiceFactory.getImpl();
+		}
+
+		if (groupService == null) {
+			groupService = GroupServiceFactory.getImpl();
+		}
+
+		if (groupPersistence == null) {
+			groupPersistence = GroupUtil.getPersistence();
+		}
+
+		if (groupFinder == null) {
+			groupFinder = GroupFinderUtil.getFinder();
+		}
 	}
 
 	protected BlogsCategoryLocalService blogsCategoryLocalService;
@@ -194,4 +279,10 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 	protected BlogsEntryFinder blogsEntryFinder;
 	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
 	protected BlogsStatsUserFinder blogsStatsUserFinder;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
+	protected GroupLocalService groupLocalService;
+	protected GroupService groupService;
+	protected GroupPersistence groupPersistence;
+	protected GroupFinder groupFinder;
 }

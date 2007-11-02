@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portlet.imagegallery.model.IGFolder;
-import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.base.IGFolderServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
 
@@ -47,7 +46,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			getPermissionChecker(), plid, parentFolderId,
 			ActionKeys.ADD_FOLDER);
 
-		return IGFolderLocalServiceUtil.addFolder(
+		return igFolderLocalService.addFolder(
 			getUserId(), plid, parentFolderId, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -61,7 +60,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			getPermissionChecker(), plid, parentFolderId,
 			ActionKeys.ADD_FOLDER);
 
-		return IGFolderLocalServiceUtil.addFolder(
+		return igFolderLocalService.addFolder(
 			getUserId(), plid, parentFolderId, name, description,
 			communityPermissions, guestPermissions);
 	}
@@ -72,7 +71,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 		IGFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.DELETE);
 
-		IGFolderLocalServiceUtil.deleteFolder(folderId);
+		igFolderLocalService.deleteFolder(folderId);
 	}
 
 	public IGFolder getFolder(long folderId)
@@ -81,7 +80,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 		IGFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.VIEW);
 
-		return IGFolderLocalServiceUtil.getFolder(folderId);
+		return igFolderLocalService.getFolder(folderId);
 	}
 
 	public IGFolder updateFolder(
@@ -92,7 +91,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 		IGFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.UPDATE);
 
-		return IGFolderLocalServiceUtil.updateFolder(
+		return igFolderLocalService.updateFolder(
 			folderId, parentFolderId, name, description, mergeWithParentFolder);
 	}
 
