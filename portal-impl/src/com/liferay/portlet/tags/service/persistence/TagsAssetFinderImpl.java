@@ -132,11 +132,11 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 				sm.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
+			sm.append("[$DATES$]");
+
 			if (groupId > 0) {
 				sm.append(" AND (TagsAsset.groupId = ?)");
 			}
-
-			sm.append("[$DATES$]");
 
 			String sql = sm.toString();
 
@@ -150,8 +150,8 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
-			_setGroupId(qPos, groupId);
 			_setDates(qPos, publishDate, expirationDate);
+			_setGroupId(qPos, groupId);
 
 			Iterator itr = q.list().iterator();
 
@@ -235,8 +235,8 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
-			_setGroupId(qPos, groupId);
 			_setDates(qPos, publishDate, expirationDate);
+			_setGroupId(qPos, groupId);
 
 			Iterator itr = q.list().iterator();
 
@@ -320,11 +320,11 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 				sm.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
+			sm.append("[$DATES$]");
+
 			if (groupId > 0) {
 				sm.append(" AND (TagsAsset.groupId = ?)");
 			}
-
-			sm.append("[$DATES$]");
 
 			sm.append(" ORDER BY TagsAsset.");
 			sm.append(orderByCol1);
@@ -352,8 +352,8 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
-			_setGroupId(qPos, groupId);
 			_setDates(qPos, publishDate, expirationDate);
+			_setGroupId(qPos, groupId);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
@@ -426,11 +426,11 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
 			}
 
+			sql = _getDates(sql, publishDate, expirationDate);
+
 			if (groupId > 0) {
 				sql += " AND (TagsAsset.groupId = ?)";
 			}
-
-			sql = _getDates(sql, publishDate, expirationDate);
 
 			if (excludeZeroViewCount) {
 				sql += " AND (TagsAsset.viewCount > 0)";
@@ -462,8 +462,8 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			_setEntryIds(qPos, entryIds);
 			_setEntryIds(qPos, notEntryIds);
-			_setGroupId(qPos, groupId);
 			_setDates(qPos, publishDate, expirationDate);
+			_setGroupId(qPos, groupId);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}

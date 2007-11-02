@@ -114,10 +114,10 @@ String[] entries = prefs.getValues("entries", new String[0]);
 String[] notEntries = prefs.getValues("not-entries", new String[0]);
 boolean andOperator = GetterUtil.getBoolean(prefs.getValue("and-operator", null), false);
 
-String displayStyle = GetterUtil.getString(prefs.getValue("display-style", "full-content"));
+String displayStyle = GetterUtil.getString(prefs.getValue("display-style", "abstracts"));
 
 if (Validator.isNull(displayStyle)) {
-	displayStyle = "full-content";
+	displayStyle = "abstracts";
 }
 
 String orderByColumn1 = GetterUtil.getString(prefs.getValue("order-by-column-1", "modifiedDate"));
