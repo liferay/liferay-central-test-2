@@ -97,6 +97,51 @@ public interface DLFileEntryLocalService {
 	public void setDLFolderPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence);
 
+	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
+
+	public void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
+
+	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
+
+	public void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
+
+	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
+
+	public void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence();
+
+	public void setMBMessagePersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessageFinder getMBMessageFinder();
+
+	public void setMBMessageFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder);
+
+	public com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence getRatingsStatsPersistence();
+
+	public void setRatingsStatsPersistence(
+		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence);
+
+	public com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence();
+
+	public void setTagsAssetPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence);
+
+	public com.liferay.portlet.tags.service.persistence.TagsAssetFinder getTagsAssetFinder();
+
+	public void setTagsAssetFinder(
+		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(

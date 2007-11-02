@@ -16,6 +16,10 @@
 	<target name="compile">
 		<mkdir dir="classes" />
 
+		<copy todir="classes">
+			<fileset dir="src" includes="**/service.xml" />
+		</copy>
+
 		<javac
 			classpathref="project.classpath"
 			compiler="${javac.compiler}"

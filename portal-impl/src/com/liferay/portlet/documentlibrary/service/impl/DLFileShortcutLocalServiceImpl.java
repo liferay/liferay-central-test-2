@@ -22,23 +22,17 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.base.DLFileShortcutLocalServiceBaseImpl;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -82,16 +76,17 @@ public class DLFileShortcutLocalServiceImpl
 
 		// File shortcut
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		folderId = getFolderId(user.getCompanyId(), folderId);
-		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
+		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
 		Date now = new Date();
 
 		validate(user, toFolderId, toName);
 
-		long fileShortcutId = CounterLocalServiceUtil.increment();
+		long fileShortcutId = counterLocalService.increment();
 
-		DLFileShortcut fileShortcut = DLFileShortcutUtil.create(fileShortcutId);
+		DLFileShortcut fileShortcut = dlFileShortcutPersistence.create(
+			fileShortcutId);
 
 		fileShortcut.setCompanyId(user.getCompanyId());
 		fileShortcut.setUserId(user.getUserId());
@@ -102,7 +97,7 @@ public class DLFileShortcutLocalServiceImpl
 		fileShortcut.setToFolderId(toFolderId);
 		fileShortcut.setToName(toName);
 
-		DLFileShortcutUtil.update(fileShortcut);
+		dlFileShortcutPersistence.update(fileShortcut);
 
 		// Resources
 
@@ -122,7 +117,7 @@ public class DLFileShortcutLocalServiceImpl
 
 		folder.setLastPostDate(fileShortcut.getModifiedDate());
 
-		DLFolderUtil.update(folder);
+		dlFolderPersistence.update(folder);
 
 		return fileShortcut;
 	}
@@ -132,8 +127,8 @@ public class DLFileShortcutLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		DLFileShortcut fileShortcut = DLFileShortcutUtil.findByPrimaryKey(
-			fileShortcutId);
+		DLFileShortcut fileShortcut =
+			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
 		DLFolder folder = fileShortcut.getFolder();
 
 		addFileShortcutResources(
@@ -145,7 +140,7 @@ public class DLFileShortcutLocalServiceImpl
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			fileShortcut.getCompanyId(), folder.getGroupId(),
 			fileShortcut.getUserId(), DLFileShortcut.class.getName(),
 			fileShortcut.getFileShortcutId(), false, addCommunityPermissions,
@@ -157,8 +152,8 @@ public class DLFileShortcutLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		DLFileShortcut fileShortcut = DLFileShortcutUtil.findByPrimaryKey(
-			fileShortcutId);
+		DLFileShortcut fileShortcut =
+			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
 		DLFolder folder = fileShortcut.getFolder();
 
 		addFileShortcutResources(
@@ -170,7 +165,7 @@ public class DLFileShortcutLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			fileShortcut.getCompanyId(), folder.getGroupId(),
 			fileShortcut.getUserId(), DLFileShortcut.class.getName(),
 			fileShortcut.getFileShortcutId(), communityPermissions,
@@ -180,7 +175,7 @@ public class DLFileShortcutLocalServiceImpl
 	public void deleteFileShortcut(long fileShortcutId)
 		throws PortalException, SystemException {
 
-		DLFileShortcutUtil.remove(fileShortcutId);
+		dlFileShortcutPersistence.remove(fileShortcutId);
 	}
 
 	public void deleteFileShortcut(DLFileShortcut fileShortcut)
@@ -188,19 +183,19 @@ public class DLFileShortcutLocalServiceImpl
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			fileShortcut.getCompanyId(), DLFileShortcut.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, fileShortcut.getFileShortcutId());
 
 		// File shortcut
 
-		DLFileShortcutUtil.remove(fileShortcut.getFileShortcutId());
+		dlFileShortcutPersistence.remove(fileShortcut.getFileShortcutId());
 	}
 
 	public void deleteFileShortcuts(long toFolderId, String toName)
 		throws PortalException, SystemException {
 
-		Iterator itr = DLFileShortcutUtil.findByTF_TN(
+		Iterator itr = dlFileShortcutPersistence.findByTF_TN(
 			toFolderId, toName).iterator();
 
 		while (itr.hasNext()) {
@@ -213,7 +208,7 @@ public class DLFileShortcutLocalServiceImpl
 	public DLFileShortcut getFileShortcut(long fileShortcutId)
 		throws PortalException, SystemException {
 
-		return DLFileShortcutUtil.findByPrimaryKey(fileShortcutId);
+		return dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
 	}
 
 	public DLFileShortcut updateFileShortcut(
@@ -223,26 +218,26 @@ public class DLFileShortcutLocalServiceImpl
 
 		// File shortcut
 
-		User user = UserUtil.findByPrimaryKey(userId);
-		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
+		User user = userPersistence.findByPrimaryKey(userId);
+		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
 
 		validate(user, toFolderId, toName);
 
-		DLFileShortcut fileShortcut = DLFileShortcutUtil.findByPrimaryKey(
-			fileShortcutId);
+		DLFileShortcut fileShortcut =
+			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
 
 		fileShortcut.setModifiedDate(new Date());
 		fileShortcut.setFolderId(folderId);
 		fileShortcut.setToFolderId(toFolderId);
 		fileShortcut.setToName(toName);
 
-		DLFileShortcutUtil.update(fileShortcut);
+		dlFileShortcutPersistence.update(fileShortcut);
 
 		// Folder
 
 		folder.setLastPostDate(fileShortcut.getModifiedDate());
 
-		DLFolderUtil.update(folder);
+		dlFolderPersistence.update(folder);
 
 		return fileShortcut;
 	}
@@ -252,7 +247,7 @@ public class DLFileShortcutLocalServiceImpl
 			String newToName)
 		throws PortalException, SystemException {
 
-		Iterator itr = DLFileShortcutUtil.findByTF_TN(
+		Iterator itr = dlFileShortcutPersistence.findByTF_TN(
 			oldToFolderId, oldToName).iterator();
 
 		while (itr.hasNext()) {
@@ -261,7 +256,7 @@ public class DLFileShortcutLocalServiceImpl
 			fileShortcut.setToFolderId(newToFolderId);
 			fileShortcut.setToName(newToName);
 
-			DLFileShortcutUtil.update(fileShortcut);
+			dlFileShortcutPersistence.update(fileShortcut);
 		}
 	}
 
@@ -273,7 +268,8 @@ public class DLFileShortcutLocalServiceImpl
 			// Ensure folder exists and belongs to the proper company
 
 			try {
-				DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
+				DLFolder folder = dlFolderPersistence.findByPrimaryKey(
+					folderId);
 
 				if (companyId != folder.getCompanyId()) {
 					folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
@@ -290,7 +286,7 @@ public class DLFileShortcutLocalServiceImpl
 	protected void validate(User user, long toFolderId, String toName)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
 			toFolderId, toName);
 
 		if (user.getCompanyId() != fileEntry.getCompanyId()) {

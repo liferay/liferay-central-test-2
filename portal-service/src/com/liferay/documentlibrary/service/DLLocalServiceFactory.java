@@ -36,6 +36,14 @@ public class DLLocalServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static DLLocalService getImpl() {
+		if (_impl == null) {
+			_impl = (DLLocalService)BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public void setService(DLLocalService service) {
 		_service = service;
 	}
@@ -51,7 +59,11 @@ public class DLLocalServiceFactory {
 	private static final String _FACTORY =
 		DLLocalServiceFactory.class.getName();
 
+	private static final String _IMPL =
+		DLLocalService.class.getName() + ".professional";
+
 	private static DLLocalServiceFactory _factory;
+	private static DLLocalService _impl;
 
 	private DLLocalService _service;
 

@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 
@@ -48,7 +47,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			getPermissionChecker(), plid, parentFolderId,
 			ActionKeys.ADD_FOLDER);
 
-		return DLFolderLocalServiceUtil.addFolder(
+		return dlFolderLocalService.addFolder(
 			getUserId(), plid, parentFolderId, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -62,7 +61,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			getPermissionChecker(), plid, parentFolderId,
 			ActionKeys.ADD_FOLDER);
 
-		return DLFolderLocalServiceUtil.addFolder(
+		return dlFolderLocalService.addFolder(
 			getUserId(), plid, parentFolderId, name, description,
 			communityPermissions, guestPermissions);
 	}
@@ -73,7 +72,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.DELETE);
 
-		DLFolderLocalServiceUtil.deleteFolder(folderId);
+		dlFolderLocalService.deleteFolder(folderId);
 	}
 
 	public DLFolder getFolder(long folderId)
@@ -82,7 +81,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.VIEW);
 
-		return DLFolderLocalServiceUtil.getFolder(folderId);
+		return dlFolderLocalService.getFolder(folderId);
 	}
 
 	public void reIndexSearch(long companyId)
@@ -94,7 +93,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		String[] ids = new String[] {String.valueOf(companyId)};
 
-		DLFolderLocalServiceUtil.reIndex(ids);
+		dlFolderLocalService.reIndex(ids);
 	}
 
 	public DLFolder updateFolder(
@@ -104,7 +103,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.UPDATE);
 
-		return DLFolderLocalServiceUtil.updateFolder(
+		return dlFolderLocalService.updateFolder(
 			folderId, parentFolderId, name, description);
 	}
 

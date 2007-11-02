@@ -5,12 +5,4 @@
 
 	<property name="deploy.dir" value="${app.server.lib.portal.dir}" />
 	<property name="jar.file" value="${ant.project.name}" />
-
-	<target name="compile">
-		<antcall target="build-common-java.compile" />
-
-		<copy todir="classes">
-			<fileset dir="src" includes="**/service.xml" />
-		</copy>
-	</target>
 </project>

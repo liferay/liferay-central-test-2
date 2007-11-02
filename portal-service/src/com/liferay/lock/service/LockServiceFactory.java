@@ -36,6 +36,14 @@ public class LockServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static LockService getImpl() {
+		if (_impl == null) {
+			_impl = (LockService)BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public void setService(LockService service) {
 		_service = service;
 	}
@@ -50,7 +58,11 @@ public class LockServiceFactory {
 
 	private static final String _FACTORY = LockServiceFactory.class.getName();
 
+	private static final String _IMPL =
+		LockService.class.getName() + ".professional";
+
 	private static LockServiceFactory _factory;
+	private static LockService _impl;
 
 	private LockService _service;
 

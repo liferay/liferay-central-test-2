@@ -161,6 +161,78 @@ public class DLFolderLocalServiceUtil {
 		dlFolderLocalService.setDLFolderPersistence(dlFolderPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.LayoutPersistence getLayoutPersistence() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getLayoutPersistence();
+	}
+
+	public static void setLayoutPersistence(
+		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setLayoutPersistence(layoutPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.LayoutFinder getLayoutFinder() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getLayoutFinder();
+	}
+
+	public static void setLayoutFinder(
+		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setLayoutFinder(layoutFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setResourceFinder(resourceFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setUserFinder(userFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 		dlFolderLocalService.afterPropertiesSet();

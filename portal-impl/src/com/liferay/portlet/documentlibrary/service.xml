@@ -46,6 +46,17 @@
 			<finder-column name="folderId" />
 			<finder-column name="name" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.documentlibrary" entity="DL" />
+		<reference package-path="com.liferay.lock" entity="Lock" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
+		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
+		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<entity name="DLFileEntryAndShortcut" local-service="false" remote-service="false" />
 	<entity name="DLFileRank" local-service="true" remote-service="false">
@@ -86,6 +97,10 @@
 			<finder-column name="folderId" />
 			<finder-column name="name" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="DLFileShortcut" local-service="true" remote-service="true">
 
@@ -116,6 +131,12 @@
 			<finder-column name="toFolderId" />
 			<finder-column name="toName" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="DLFileVersion" local-service="true" remote-service="false">
 
@@ -205,6 +226,14 @@
 			<finder-column name="parentFolderId" />
 			<finder-column name="name" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.documentlibrary" entity="DL" />
+		<reference package-path="com.liferay.portal" entity="Layout" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<exceptions>
 		<exception>FileShortcutPermission</exception>

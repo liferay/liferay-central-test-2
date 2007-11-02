@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portlet.documentlibrary.FileShortcutPermissionException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.base.DLFileShortcutServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileShortcutPermission;
@@ -58,7 +57,7 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 			throw new FileShortcutPermissionException();
 		}
 
-		return DLFileShortcutLocalServiceUtil.addFileShortcut(
+		return dlFileShortcutLocalService.addFileShortcut(
 			getUserId(), folderId, toFolderId, toName, addCommunityPermissions,
 			addGuestPermissions);
 	}
@@ -79,7 +78,7 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 			throw new FileShortcutPermissionException();
 		}
 
-		return DLFileShortcutLocalServiceUtil.addFileShortcut(
+		return dlFileShortcutLocalService.addFileShortcut(
 			getUserId(), folderId, toFolderId, toName, communityPermissions,
 			guestPermissions);
 	}
@@ -90,7 +89,7 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 		DLFileShortcutPermission.check(
 			getPermissionChecker(), fileShortcutId, ActionKeys.DELETE);
 
-		DLFileShortcutLocalServiceUtil.deleteFileShortcut(fileShortcutId);
+		dlFileShortcutLocalService.deleteFileShortcut(fileShortcutId);
 	}
 
 	public DLFileShortcut getFileShortcut(long fileShortcutId)
@@ -99,7 +98,7 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 		DLFileShortcutPermission.check(
 			getPermissionChecker(), fileShortcutId, ActionKeys.VIEW);
 
-		return DLFileShortcutLocalServiceUtil.getFileShortcut(fileShortcutId);
+		return dlFileShortcutLocalService.getFileShortcut(fileShortcutId);
 	}
 
 	public DLFileShortcut updateFileShortcut(
@@ -117,7 +116,7 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 			throw new FileShortcutPermissionException();
 		}
 
-		return DLFileShortcutLocalServiceUtil.updateFileShortcut(
+		return dlFileShortcutLocalService.updateFileShortcut(
 			getUserId(), fileShortcutId, folderId, toFolderId, toName);
 	}
 

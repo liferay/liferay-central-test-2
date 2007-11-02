@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.documentlibrary.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
@@ -209,6 +214,22 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		this.dlFolderPersistence = dlFolderPersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	public void afterPropertiesSet() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
@@ -269,6 +290,14 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		if (dlFolderPersistence == null) {
 			dlFolderPersistence = DLFolderUtil.getPersistence();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
 	}
 
 	protected DLFileEntryLocalService dlFileEntryLocalService;
@@ -286,4 +315,6 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	protected DLFolderLocalService dlFolderLocalService;
 	protected DLFolderService dlFolderService;
 	protected DLFolderPersistence dlFolderPersistence;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
 }
