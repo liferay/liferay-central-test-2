@@ -260,6 +260,10 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 			</c:otherwise>
 		</c:choose>
 
+		<c:if test='<%= tabs3.equals("page") %>'>
+			<portlet:namespace />updateLanguage();
+		</c:if>
+
 		submitForm(document.<portlet:namespace />fm);
 	}
 

@@ -106,6 +106,8 @@ public class LocalizationUtil {
 
 		String value = StringPool.BLANK;
 
+		String defaultValue = StringPool.BLANK;
+
 		try {
 			SAXReader reader = new SAXReader();
 
@@ -121,15 +123,17 @@ public class LocalizationUtil {
 				String languageId =
 					el.attributeValue("language-id", defaultLanguageId);
 
-				if (useDefault && languageId.equals(defaultLanguageId)) {
-					value = el.getText();
+				if (languageId.equals(defaultLanguageId)) {
+					defaultValue = el.getText();
 				}
 
 				if (languageId.equals(requestedLanguageId)) {
 					value = el.getText();
-
-					break;
 				}
+			}
+
+			if (useDefault && Validator.isNull(value)) {
+				value = defaultValue;
 			}
 		}
 		catch (Exception e) {
