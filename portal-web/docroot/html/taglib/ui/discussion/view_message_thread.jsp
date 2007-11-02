@@ -72,7 +72,7 @@ if (treeWalker.isOdd()) {
 			<b>
 		</c:if>
 
-		<%= StringUtil.shorten(message.getBody(), 80, StringPool.BLANK) %>
+		<%= StringUtil.shorten(message.getBody(), 50, StringPool.BLANK) %>
 
 		<c:if test="<%= !readFlag %>">
 			</b>

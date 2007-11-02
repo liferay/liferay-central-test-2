@@ -158,7 +158,7 @@ List messages = treeWalker.getMessages();
 		<br />
 	</c:if>
 
-	<%--<table border="0" cellpadding="4" cellspacing="0" class="taglib-discussion" width="100%">
+	<table border="0" cellpadding="4" cellspacing="0" class="taglib-discussion" width="100%">
 	<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
 		<td>
 			<liferay-ui:message key="threaded-replies" />
@@ -201,7 +201,7 @@ List messages = treeWalker.getMessages();
 
 	</table>
 
-	<br />--%>
+	<br />
 
 	<table class="liferay-table" width="100%">
 
@@ -243,7 +243,7 @@ List messages = treeWalker.getMessages();
 
 				<table class="liferay-table">
 				<tr>
-					<%--<c:if test="<%= themeDisplay.isSignedIn() && MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.ADD_DISCUSSION) %>">
+					<c:if test="<%= themeDisplay.isSignedIn() && MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.ADD_DISCUSSION) %>">
 						<td>
 
 							<%
@@ -252,7 +252,7 @@ List messages = treeWalker.getMessages();
 
 							<liferay-ui:icon image="reply" message="post-reply" url="<%= postReplyHREF %>" label="<%= true %>" />
 						</td>
-					</c:if>--%>
+					</c:if>
 
 					<c:if test="<%= i > 0 %>">
 
@@ -290,7 +290,7 @@ List messages = treeWalker.getMessages();
 				</table>
 
 				<table class="liferay-table">
-				<%--<tr id="<%= namespace %>postReplyForm<%= i %>" style="display: none;">
+				<tr id="<%= namespace %>postReplyForm<%= i %>" style="display: none;">
 					<td>
 						<br />
 
@@ -304,7 +304,7 @@ List messages = treeWalker.getMessages();
 
 						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= namespace %>postReplyForm<%= i %>').style.display = 'none'; void('');" />
 					</td>
-				</tr>--%>
+				</tr>
 
 				<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
 					<tr id="<%= namespace %>editForm<%= i %>" style="display: none;">
