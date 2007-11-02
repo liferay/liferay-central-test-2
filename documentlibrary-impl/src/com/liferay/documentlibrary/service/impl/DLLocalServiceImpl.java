@@ -60,45 +60,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			String fileName, String properties, InputStream is)
 		throws PortalException, SystemException {
 
-		if ((fileName.indexOf("\\\\") != -1) ||
-			(fileName.indexOf("//") != -1) ||
-			(fileName.indexOf(":") != -1) ||
-			(fileName.indexOf("*") != -1) ||
-			(fileName.indexOf("?") != -1) ||
-			(fileName.indexOf("\"") != -1) ||
-			(fileName.indexOf("<") != -1) ||
-			(fileName.indexOf(">") != -1) ||
-			(fileName.indexOf("|") != -1) ||
-			(fileName.indexOf("&") != -1) ||
-			(fileName.indexOf("[") != -1) ||
-			(fileName.indexOf("]") != -1) ||
-			(fileName.indexOf("'") != -1)) {
-
-			throw new FileNameException(fileName);
-		}
-
-		boolean validFileExtension = false;
-
-		String[] fileExtensions =
-			PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
-
-		for (int i = 0; i < fileExtensions.length; i++) {
-			if (StringPool.STAR.equals(fileExtensions[i]) ||
-				StringUtil.endsWith(fileName, fileExtensions[i])) {
-
-				validFileExtension = true;
-
-				break;
-			}
-		}
-
-		if (!validFileExtension) {
-			throw new FileNameException(fileName);
-		}
-
-		if (is == null) {
-			throw new FileSizeException(fileName);
-		}
+		validate(fileName, is);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -247,6 +209,50 @@ public class DLLocalServiceImpl implements DLLocalService {
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, properties, is);
+	}
+
+	public void validate(String fileName, InputStream is)
+		throws PortalException {
+
+		if ((fileName.indexOf("\\\\") != -1) ||
+			(fileName.indexOf("//") != -1) ||
+			(fileName.indexOf(":") != -1) ||
+			(fileName.indexOf("*") != -1) ||
+			(fileName.indexOf("?") != -1) ||
+			(fileName.indexOf("\"") != -1) ||
+			(fileName.indexOf("<") != -1) ||
+			(fileName.indexOf(">") != -1) ||
+			(fileName.indexOf("|") != -1) ||
+			(fileName.indexOf("&") != -1) ||
+			(fileName.indexOf("[") != -1) ||
+			(fileName.indexOf("]") != -1) ||
+			(fileName.indexOf("'") != -1)) {
+
+			throw new FileNameException(fileName);
+		}
+
+		boolean validFileExtension = false;
+
+		String[] fileExtensions =
+			PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
+
+		for (int i = 0; i < fileExtensions.length; i++) {
+			if (StringPool.STAR.equals(fileExtensions[i]) ||
+				StringUtil.endsWith(fileName, fileExtensions[i])) {
+
+				validFileExtension = true;
+
+				break;
+			}
+		}
+
+		if (!validFileExtension) {
+			throw new FileNameException(fileName);
+		}
+
+		if (is == null) {
+			throw new FileSizeException(fileName);
+		}
 	}
 
 }

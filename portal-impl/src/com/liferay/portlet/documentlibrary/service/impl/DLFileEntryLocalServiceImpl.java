@@ -198,11 +198,9 @@ public class DLFileEntryLocalServiceImpl
 			title = name;
 		}
 
-		name = getName(name);
+		dlLocalService.validate(name, is);
 
-		if (is == null) {
-			throw new FileSizeException();
-		}
+		name = getName(name);
 
 		if (dlLocalService.hasFile(user.getCompanyId(), folderId, name, 0)) {
 			throw new DuplicateFileException(name);
