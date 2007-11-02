@@ -251,6 +251,89 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
+import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory;
+import com.liferay.portlet.blogs.service.BlogsEntryService;
+import com.liferay.portlet.blogs.service.BlogsEntryServiceFactory;
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceFactory;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceFactory;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
+import com.liferay.portlet.calendar.service.CalEventLocalService;
+import com.liferay.portlet.calendar.service.CalEventLocalServiceFactory;
+import com.liferay.portlet.calendar.service.CalEventService;
+import com.liferay.portlet.calendar.service.CalEventServiceFactory;
+import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
+import com.liferay.portlet.calendar.service.persistence.CalEventFinderUtil;
+import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
+import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceFactory;
+import com.liferay.portlet.documentlibrary.service.DLFolderService;
+import com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceFactory;
+import com.liferay.portlet.imagegallery.service.IGFolderService;
+import com.liferay.portlet.imagegallery.service.IGFolderServiceFactory;
+import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
+import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
+import com.liferay.portlet.journal.service.JournalArticleLocalService;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceFactory;
+import com.liferay.portlet.journal.service.JournalArticleService;
+import com.liferay.portlet.journal.service.JournalArticleServiceFactory;
+import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
+import com.liferay.portlet.journal.service.persistence.JournalArticleFinderUtil;
+import com.liferay.portlet.journal.service.persistence.JournalArticlePersistence;
+import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
+import com.liferay.portlet.messageboards.service.MBBanLocalService;
+import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
+import com.liferay.portlet.messageboards.service.MBBanService;
+import com.liferay.portlet.messageboards.service.MBBanServiceFactory;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory;
+import com.liferay.portlet.messageboards.service.MBCategoryService;
+import com.liferay.portlet.messageboards.service.MBCategoryServiceFactory;
+import com.liferay.portlet.messageboards.service.MBStatsUserLocalService;
+import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory;
+import com.liferay.portlet.messageboards.service.persistence.MBBanPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder;
+import com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
+import com.liferay.portlet.polls.service.PollsQuestionLocalService;
+import com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory;
+import com.liferay.portlet.polls.service.PollsQuestionService;
+import com.liferay.portlet.polls.service.PollsQuestionServiceFactory;
+import com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence;
+import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
+import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
+import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
+import com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence;
+import com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil;
+import com.liferay.portlet.wiki.service.WikiNodeLocalService;
+import com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory;
+import com.liferay.portlet.wiki.service.WikiNodeService;
+import com.liferay.portlet.wiki.service.WikiNodeServiceFactory;
+import com.liferay.portlet.wiki.service.persistence.WikiNodePersistence;
+import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
+
 import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
@@ -1219,6 +1302,359 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 		this.counterService = counterService;
 	}
 
+	public BlogsEntryLocalService getBlogsEntryLocalService() {
+		return blogsEntryLocalService;
+	}
+
+	public void setBlogsEntryLocalService(
+		BlogsEntryLocalService blogsEntryLocalService) {
+		this.blogsEntryLocalService = blogsEntryLocalService;
+	}
+
+	public BlogsEntryService getBlogsEntryService() {
+		return blogsEntryService;
+	}
+
+	public void setBlogsEntryService(BlogsEntryService blogsEntryService) {
+		this.blogsEntryService = blogsEntryService;
+	}
+
+	public BlogsEntryPersistence getBlogsEntryPersistence() {
+		return blogsEntryPersistence;
+	}
+
+	public void setBlogsEntryPersistence(
+		BlogsEntryPersistence blogsEntryPersistence) {
+		this.blogsEntryPersistence = blogsEntryPersistence;
+	}
+
+	public BlogsEntryFinder getBlogsEntryFinder() {
+		return blogsEntryFinder;
+	}
+
+	public void setBlogsEntryFinder(BlogsEntryFinder blogsEntryFinder) {
+		this.blogsEntryFinder = blogsEntryFinder;
+	}
+
+	public BlogsStatsUserLocalService getBlogsStatsUserLocalService() {
+		return blogsStatsUserLocalService;
+	}
+
+	public void setBlogsStatsUserLocalService(
+		BlogsStatsUserLocalService blogsStatsUserLocalService) {
+		this.blogsStatsUserLocalService = blogsStatsUserLocalService;
+	}
+
+	public BlogsStatsUserPersistence getBlogsStatsUserPersistence() {
+		return blogsStatsUserPersistence;
+	}
+
+	public void setBlogsStatsUserPersistence(
+		BlogsStatsUserPersistence blogsStatsUserPersistence) {
+		this.blogsStatsUserPersistence = blogsStatsUserPersistence;
+	}
+
+	public BlogsStatsUserFinder getBlogsStatsUserFinder() {
+		return blogsStatsUserFinder;
+	}
+
+	public void setBlogsStatsUserFinder(
+		BlogsStatsUserFinder blogsStatsUserFinder) {
+		this.blogsStatsUserFinder = blogsStatsUserFinder;
+	}
+
+	public BookmarksFolderLocalService getBookmarksFolderLocalService() {
+		return bookmarksFolderLocalService;
+	}
+
+	public void setBookmarksFolderLocalService(
+		BookmarksFolderLocalService bookmarksFolderLocalService) {
+		this.bookmarksFolderLocalService = bookmarksFolderLocalService;
+	}
+
+	public BookmarksFolderService getBookmarksFolderService() {
+		return bookmarksFolderService;
+	}
+
+	public void setBookmarksFolderService(
+		BookmarksFolderService bookmarksFolderService) {
+		this.bookmarksFolderService = bookmarksFolderService;
+	}
+
+	public BookmarksFolderPersistence getBookmarksFolderPersistence() {
+		return bookmarksFolderPersistence;
+	}
+
+	public void setBookmarksFolderPersistence(
+		BookmarksFolderPersistence bookmarksFolderPersistence) {
+		this.bookmarksFolderPersistence = bookmarksFolderPersistence;
+	}
+
+	public CalEventLocalService getCalEventLocalService() {
+		return calEventLocalService;
+	}
+
+	public void setCalEventLocalService(
+		CalEventLocalService calEventLocalService) {
+		this.calEventLocalService = calEventLocalService;
+	}
+
+	public CalEventService getCalEventService() {
+		return calEventService;
+	}
+
+	public void setCalEventService(CalEventService calEventService) {
+		this.calEventService = calEventService;
+	}
+
+	public CalEventPersistence getCalEventPersistence() {
+		return calEventPersistence;
+	}
+
+	public void setCalEventPersistence(CalEventPersistence calEventPersistence) {
+		this.calEventPersistence = calEventPersistence;
+	}
+
+	public CalEventFinder getCalEventFinder() {
+		return calEventFinder;
+	}
+
+	public void setCalEventFinder(CalEventFinder calEventFinder) {
+		this.calEventFinder = calEventFinder;
+	}
+
+	public DLFolderLocalService getDLFolderLocalService() {
+		return dlFolderLocalService;
+	}
+
+	public void setDLFolderLocalService(
+		DLFolderLocalService dlFolderLocalService) {
+		this.dlFolderLocalService = dlFolderLocalService;
+	}
+
+	public DLFolderService getDLFolderService() {
+		return dlFolderService;
+	}
+
+	public void setDLFolderService(DLFolderService dlFolderService) {
+		this.dlFolderService = dlFolderService;
+	}
+
+	public DLFolderPersistence getDLFolderPersistence() {
+		return dlFolderPersistence;
+	}
+
+	public void setDLFolderPersistence(DLFolderPersistence dlFolderPersistence) {
+		this.dlFolderPersistence = dlFolderPersistence;
+	}
+
+	public IGFolderLocalService getIGFolderLocalService() {
+		return igFolderLocalService;
+	}
+
+	public void setIGFolderLocalService(
+		IGFolderLocalService igFolderLocalService) {
+		this.igFolderLocalService = igFolderLocalService;
+	}
+
+	public IGFolderService getIGFolderService() {
+		return igFolderService;
+	}
+
+	public void setIGFolderService(IGFolderService igFolderService) {
+		this.igFolderService = igFolderService;
+	}
+
+	public IGFolderPersistence getIGFolderPersistence() {
+		return igFolderPersistence;
+	}
+
+	public void setIGFolderPersistence(IGFolderPersistence igFolderPersistence) {
+		this.igFolderPersistence = igFolderPersistence;
+	}
+
+	public JournalArticleLocalService getJournalArticleLocalService() {
+		return journalArticleLocalService;
+	}
+
+	public void setJournalArticleLocalService(
+		JournalArticleLocalService journalArticleLocalService) {
+		this.journalArticleLocalService = journalArticleLocalService;
+	}
+
+	public JournalArticleService getJournalArticleService() {
+		return journalArticleService;
+	}
+
+	public void setJournalArticleService(
+		JournalArticleService journalArticleService) {
+		this.journalArticleService = journalArticleService;
+	}
+
+	public JournalArticlePersistence getJournalArticlePersistence() {
+		return journalArticlePersistence;
+	}
+
+	public void setJournalArticlePersistence(
+		JournalArticlePersistence journalArticlePersistence) {
+		this.journalArticlePersistence = journalArticlePersistence;
+	}
+
+	public JournalArticleFinder getJournalArticleFinder() {
+		return journalArticleFinder;
+	}
+
+	public void setJournalArticleFinder(
+		JournalArticleFinder journalArticleFinder) {
+		this.journalArticleFinder = journalArticleFinder;
+	}
+
+	public MBBanLocalService getMBBanLocalService() {
+		return mbBanLocalService;
+	}
+
+	public void setMBBanLocalService(MBBanLocalService mbBanLocalService) {
+		this.mbBanLocalService = mbBanLocalService;
+	}
+
+	public MBBanService getMBBanService() {
+		return mbBanService;
+	}
+
+	public void setMBBanService(MBBanService mbBanService) {
+		this.mbBanService = mbBanService;
+	}
+
+	public MBBanPersistence getMBBanPersistence() {
+		return mbBanPersistence;
+	}
+
+	public void setMBBanPersistence(MBBanPersistence mbBanPersistence) {
+		this.mbBanPersistence = mbBanPersistence;
+	}
+
+	public MBCategoryLocalService getMBCategoryLocalService() {
+		return mbCategoryLocalService;
+	}
+
+	public void setMBCategoryLocalService(
+		MBCategoryLocalService mbCategoryLocalService) {
+		this.mbCategoryLocalService = mbCategoryLocalService;
+	}
+
+	public MBCategoryService getMBCategoryService() {
+		return mbCategoryService;
+	}
+
+	public void setMBCategoryService(MBCategoryService mbCategoryService) {
+		this.mbCategoryService = mbCategoryService;
+	}
+
+	public MBCategoryPersistence getMBCategoryPersistence() {
+		return mbCategoryPersistence;
+	}
+
+	public void setMBCategoryPersistence(
+		MBCategoryPersistence mbCategoryPersistence) {
+		this.mbCategoryPersistence = mbCategoryPersistence;
+	}
+
+	public MBCategoryFinder getMBCategoryFinder() {
+		return mbCategoryFinder;
+	}
+
+	public void setMBCategoryFinder(MBCategoryFinder mbCategoryFinder) {
+		this.mbCategoryFinder = mbCategoryFinder;
+	}
+
+	public MBStatsUserLocalService getMBStatsUserLocalService() {
+		return mbStatsUserLocalService;
+	}
+
+	public void setMBStatsUserLocalService(
+		MBStatsUserLocalService mbStatsUserLocalService) {
+		this.mbStatsUserLocalService = mbStatsUserLocalService;
+	}
+
+	public MBStatsUserPersistence getMBStatsUserPersistence() {
+		return mbStatsUserPersistence;
+	}
+
+	public void setMBStatsUserPersistence(
+		MBStatsUserPersistence mbStatsUserPersistence) {
+		this.mbStatsUserPersistence = mbStatsUserPersistence;
+	}
+
+	public PollsQuestionLocalService getPollsQuestionLocalService() {
+		return pollsQuestionLocalService;
+	}
+
+	public void setPollsQuestionLocalService(
+		PollsQuestionLocalService pollsQuestionLocalService) {
+		this.pollsQuestionLocalService = pollsQuestionLocalService;
+	}
+
+	public PollsQuestionService getPollsQuestionService() {
+		return pollsQuestionService;
+	}
+
+	public void setPollsQuestionService(
+		PollsQuestionService pollsQuestionService) {
+		this.pollsQuestionService = pollsQuestionService;
+	}
+
+	public PollsQuestionPersistence getPollsQuestionPersistence() {
+		return pollsQuestionPersistence;
+	}
+
+	public void setPollsQuestionPersistence(
+		PollsQuestionPersistence pollsQuestionPersistence) {
+		this.pollsQuestionPersistence = pollsQuestionPersistence;
+	}
+
+	public ShoppingCartLocalService getShoppingCartLocalService() {
+		return shoppingCartLocalService;
+	}
+
+	public void setShoppingCartLocalService(
+		ShoppingCartLocalService shoppingCartLocalService) {
+		this.shoppingCartLocalService = shoppingCartLocalService;
+	}
+
+	public ShoppingCartPersistence getShoppingCartPersistence() {
+		return shoppingCartPersistence;
+	}
+
+	public void setShoppingCartPersistence(
+		ShoppingCartPersistence shoppingCartPersistence) {
+		this.shoppingCartPersistence = shoppingCartPersistence;
+	}
+
+	public WikiNodeLocalService getWikiNodeLocalService() {
+		return wikiNodeLocalService;
+	}
+
+	public void setWikiNodeLocalService(
+		WikiNodeLocalService wikiNodeLocalService) {
+		this.wikiNodeLocalService = wikiNodeLocalService;
+	}
+
+	public WikiNodeService getWikiNodeService() {
+		return wikiNodeService;
+	}
+
+	public void setWikiNodeService(WikiNodeService wikiNodeService) {
+		this.wikiNodeService = wikiNodeService;
+	}
+
+	public WikiNodePersistence getWikiNodePersistence() {
+		return wikiNodePersistence;
+	}
+
+	public void setWikiNodePersistence(WikiNodePersistence wikiNodePersistence) {
+		this.wikiNodePersistence = wikiNodePersistence;
+	}
+
 	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
@@ -1667,6 +2103,170 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 		if (counterService == null) {
 			counterService = CounterServiceFactory.getImpl();
 		}
+
+		if (blogsEntryLocalService == null) {
+			blogsEntryLocalService = BlogsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (blogsEntryService == null) {
+			blogsEntryService = BlogsEntryServiceFactory.getImpl();
+		}
+
+		if (blogsEntryPersistence == null) {
+			blogsEntryPersistence = BlogsEntryUtil.getPersistence();
+		}
+
+		if (blogsEntryFinder == null) {
+			blogsEntryFinder = BlogsEntryFinderUtil.getFinder();
+		}
+
+		if (blogsStatsUserLocalService == null) {
+			blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getImpl();
+		}
+
+		if (blogsStatsUserPersistence == null) {
+			blogsStatsUserPersistence = BlogsStatsUserUtil.getPersistence();
+		}
+
+		if (blogsStatsUserFinder == null) {
+			blogsStatsUserFinder = BlogsStatsUserFinderUtil.getFinder();
+		}
+
+		if (bookmarksFolderLocalService == null) {
+			bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getImpl();
+		}
+
+		if (bookmarksFolderService == null) {
+			bookmarksFolderService = BookmarksFolderServiceFactory.getImpl();
+		}
+
+		if (bookmarksFolderPersistence == null) {
+			bookmarksFolderPersistence = BookmarksFolderUtil.getPersistence();
+		}
+
+		if (calEventLocalService == null) {
+			calEventLocalService = CalEventLocalServiceFactory.getImpl();
+		}
+
+		if (calEventService == null) {
+			calEventService = CalEventServiceFactory.getImpl();
+		}
+
+		if (calEventPersistence == null) {
+			calEventPersistence = CalEventUtil.getPersistence();
+		}
+
+		if (calEventFinder == null) {
+			calEventFinder = CalEventFinderUtil.getFinder();
+		}
+
+		if (dlFolderLocalService == null) {
+			dlFolderLocalService = DLFolderLocalServiceFactory.getImpl();
+		}
+
+		if (dlFolderService == null) {
+			dlFolderService = DLFolderServiceFactory.getImpl();
+		}
+
+		if (dlFolderPersistence == null) {
+			dlFolderPersistence = DLFolderUtil.getPersistence();
+		}
+
+		if (igFolderLocalService == null) {
+			igFolderLocalService = IGFolderLocalServiceFactory.getImpl();
+		}
+
+		if (igFolderService == null) {
+			igFolderService = IGFolderServiceFactory.getImpl();
+		}
+
+		if (igFolderPersistence == null) {
+			igFolderPersistence = IGFolderUtil.getPersistence();
+		}
+
+		if (journalArticleLocalService == null) {
+			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
+		}
+
+		if (journalArticleService == null) {
+			journalArticleService = JournalArticleServiceFactory.getImpl();
+		}
+
+		if (journalArticlePersistence == null) {
+			journalArticlePersistence = JournalArticleUtil.getPersistence();
+		}
+
+		if (journalArticleFinder == null) {
+			journalArticleFinder = JournalArticleFinderUtil.getFinder();
+		}
+
+		if (mbBanLocalService == null) {
+			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
+		}
+
+		if (mbBanService == null) {
+			mbBanService = MBBanServiceFactory.getImpl();
+		}
+
+		if (mbBanPersistence == null) {
+			mbBanPersistence = MBBanUtil.getPersistence();
+		}
+
+		if (mbCategoryLocalService == null) {
+			mbCategoryLocalService = MBCategoryLocalServiceFactory.getImpl();
+		}
+
+		if (mbCategoryService == null) {
+			mbCategoryService = MBCategoryServiceFactory.getImpl();
+		}
+
+		if (mbCategoryPersistence == null) {
+			mbCategoryPersistence = MBCategoryUtil.getPersistence();
+		}
+
+		if (mbCategoryFinder == null) {
+			mbCategoryFinder = MBCategoryFinderUtil.getFinder();
+		}
+
+		if (mbStatsUserLocalService == null) {
+			mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getImpl();
+		}
+
+		if (mbStatsUserPersistence == null) {
+			mbStatsUserPersistence = MBStatsUserUtil.getPersistence();
+		}
+
+		if (pollsQuestionLocalService == null) {
+			pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getImpl();
+		}
+
+		if (pollsQuestionService == null) {
+			pollsQuestionService = PollsQuestionServiceFactory.getImpl();
+		}
+
+		if (pollsQuestionPersistence == null) {
+			pollsQuestionPersistence = PollsQuestionUtil.getPersistence();
+		}
+
+		if (shoppingCartLocalService == null) {
+			shoppingCartLocalService = ShoppingCartLocalServiceFactory.getImpl();
+		}
+
+		if (shoppingCartPersistence == null) {
+			shoppingCartPersistence = ShoppingCartUtil.getPersistence();
+		}
+
+		if (wikiNodeLocalService == null) {
+			wikiNodeLocalService = WikiNodeLocalServiceFactory.getImpl();
+		}
+
+		if (wikiNodeService == null) {
+			wikiNodeService = WikiNodeServiceFactory.getImpl();
+		}
+
+		if (wikiNodePersistence == null) {
+			wikiNodePersistence = WikiNodeUtil.getPersistence();
+		}
 	}
 
 	protected AccountLocalService accountLocalService;
@@ -1781,4 +2381,45 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	protected WebsitePersistence websitePersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected BlogsEntryLocalService blogsEntryLocalService;
+	protected BlogsEntryService blogsEntryService;
+	protected BlogsEntryPersistence blogsEntryPersistence;
+	protected BlogsEntryFinder blogsEntryFinder;
+	protected BlogsStatsUserLocalService blogsStatsUserLocalService;
+	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
+	protected BlogsStatsUserFinder blogsStatsUserFinder;
+	protected BookmarksFolderLocalService bookmarksFolderLocalService;
+	protected BookmarksFolderService bookmarksFolderService;
+	protected BookmarksFolderPersistence bookmarksFolderPersistence;
+	protected CalEventLocalService calEventLocalService;
+	protected CalEventService calEventService;
+	protected CalEventPersistence calEventPersistence;
+	protected CalEventFinder calEventFinder;
+	protected DLFolderLocalService dlFolderLocalService;
+	protected DLFolderService dlFolderService;
+	protected DLFolderPersistence dlFolderPersistence;
+	protected IGFolderLocalService igFolderLocalService;
+	protected IGFolderService igFolderService;
+	protected IGFolderPersistence igFolderPersistence;
+	protected JournalArticleLocalService journalArticleLocalService;
+	protected JournalArticleService journalArticleService;
+	protected JournalArticlePersistence journalArticlePersistence;
+	protected JournalArticleFinder journalArticleFinder;
+	protected MBBanLocalService mbBanLocalService;
+	protected MBBanService mbBanService;
+	protected MBBanPersistence mbBanPersistence;
+	protected MBCategoryLocalService mbCategoryLocalService;
+	protected MBCategoryService mbCategoryService;
+	protected MBCategoryPersistence mbCategoryPersistence;
+	protected MBCategoryFinder mbCategoryFinder;
+	protected MBStatsUserLocalService mbStatsUserLocalService;
+	protected MBStatsUserPersistence mbStatsUserPersistence;
+	protected PollsQuestionLocalService pollsQuestionLocalService;
+	protected PollsQuestionService pollsQuestionService;
+	protected PollsQuestionPersistence pollsQuestionPersistence;
+	protected ShoppingCartLocalService shoppingCartLocalService;
+	protected ShoppingCartPersistence shoppingCartPersistence;
+	protected WikiNodeLocalService wikiNodeLocalService;
+	protected WikiNodeService wikiNodeService;
+	protected WikiNodePersistence wikiNodePersistence;
 }

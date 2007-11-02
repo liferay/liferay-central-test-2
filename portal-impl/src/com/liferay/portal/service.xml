@@ -337,6 +337,19 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portlet.blogs" entity="BlogsEntry" />
+		<reference package-path="com.liferay.portlet.blogs" entity="BlogsStatsUser" />
+		<reference package-path="com.liferay.portlet.bookmarks" entity="BookmarksFolder" />
+		<reference package-path="com.liferay.portlet.calendar" entity="CalEvent" />
+		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFolder" />
+		<reference package-path="com.liferay.portlet.imagegallery" entity="IGFolder" />
+		<reference package-path="com.liferay.portlet.journal" entity="JournalArticle" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBBan" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBCategory" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBStatsUser" />
+		<reference package-path="com.liferay.portlet.polls" entity="PollsQuestion" />
+		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />
+		<reference package-path="com.liferay.portlet.wiki" entity="WikiNode" />
 	</entity>
 	<entity name="Image" local-service="true" remote-service="false">
 

@@ -27,8 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.base.CompanyServiceBaseImpl;
 
 import java.io.File;
@@ -48,7 +46,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
-		return CompanyLocalServiceUtil.addCompany(webId, virtualHost, mx);
+		return companyLocalService.addCompany(webId, virtualHost, mx);
 	}
 
 	public Company updateCompany(long companyId, String virtualHost, String mx)
@@ -58,8 +56,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
-		return CompanyLocalServiceUtil.updateCompany(
-			companyId, virtualHost, mx);
+		return companyLocalService.updateCompany(companyId, virtualHost, mx);
 	}
 
 	public Company updateCompany(
@@ -68,13 +65,13 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			String tickerSymbol, String industry, String type, String size)
 		throws PortalException, SystemException {
 
-		if (!RoleLocalServiceUtil.hasUserRole(
+		if (!roleLocalService.hasUserRole(
 				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}
 
-		return CompanyLocalServiceUtil.updateCompany(
+		return companyLocalService.updateCompany(
 			companyId, virtualHost, mx, name, legalName, legalId, legalType,
 			sicCode, tickerSymbol, industry, type, size);
 	}
@@ -83,26 +80,25 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			long companyId, String languageId, String timeZoneId)
 		throws PortalException, SystemException {
 
-		if (!RoleLocalServiceUtil.hasUserRole(
+		if (!roleLocalService.hasUserRole(
 				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}
 
-		CompanyLocalServiceUtil.updateDisplay(
-			companyId, languageId, timeZoneId);
+		companyLocalService.updateDisplay(companyId, languageId, timeZoneId);
 	}
 
 	public void updateLogo(long companyId, File file)
 		throws PortalException, SystemException {
 
-		if (!RoleLocalServiceUtil.hasUserRole(
+		if (!roleLocalService.hasUserRole(
 				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}
 
-		CompanyLocalServiceUtil.updateLogo(companyId, file);
+		companyLocalService.updateLogo(companyId, file);
 	}
 
 	public void updateSecurity(
@@ -111,13 +107,13 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			boolean strangersVerify, boolean communityLogo)
 		throws PortalException, SystemException {
 
-		if (!RoleLocalServiceUtil.hasUserRole(
+		if (!roleLocalService.hasUserRole(
 				getUserId(), companyId, RoleImpl.ADMINISTRATOR, true)) {
 
 			throw new PrincipalException();
 		}
 
-		CompanyLocalServiceUtil.updateSecurity(
+		companyLocalService.updateSecurity(
 			companyId, authType, autoLogin, sendPassword, strangers,
 			strangersWithMx, strangersVerify, communityLogo);
 	}

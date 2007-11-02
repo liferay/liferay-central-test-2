@@ -29,9 +29,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
-import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.base.EmailAddressLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.EmailAddressUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.rmi.RemoteException;
@@ -66,7 +64,8 @@ public class EmailAddressLocalServiceImpl
 
 		long emailAddressId = counterLocalService.increment();
 
-		EmailAddress emailAddress = EmailAddressUtil.create(emailAddressId);
+		EmailAddress emailAddress = emailAddressPersistence.create(
+			emailAddressId);
 
 		emailAddress.setCompanyId(user.getCompanyId());
 		emailAddress.setUserId(user.getUserId());
@@ -79,7 +78,7 @@ public class EmailAddressLocalServiceImpl
 		emailAddress.setTypeId(typeId);
 		emailAddress.setPrimary(primary);
 
-		EmailAddressUtil.update(emailAddress);
+		emailAddressPersistence.update(emailAddress);
 
 		return emailAddress;
 	}
@@ -87,7 +86,7 @@ public class EmailAddressLocalServiceImpl
 	public void deleteEmailAddress(long emailAddressId)
 		throws PortalException, SystemException {
 
-		EmailAddressUtil.remove(emailAddressId);
+		emailAddressPersistence.remove(emailAddressId);
 	}
 
 	public void deleteEmailAddresses(
@@ -96,17 +95,17 @@ public class EmailAddressLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		EmailAddressUtil.removeByC_C_C(companyId, classNameId, classPK);
+		emailAddressPersistence.removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public EmailAddress getEmailAddress(long emailAddressId)
 		throws PortalException, SystemException {
 
-		return EmailAddressUtil.findByPrimaryKey(emailAddressId);
+		return emailAddressPersistence.findByPrimaryKey(emailAddressId);
 	}
 
 	public List getEmailAddresses() throws SystemException {
-		return EmailAddressUtil.findAll();
+		return emailAddressPersistence.findAll();
 	}
 
 	public List getEmailAddresses(
@@ -115,7 +114,8 @@ public class EmailAddressLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return EmailAddressUtil.findByC_C_C(companyId, classNameId, classPK);
+		return emailAddressPersistence.findByC_C_C(
+			companyId, classNameId, classPK);
 	}
 
 	public EmailAddress updateEmailAddress(
@@ -124,15 +124,15 @@ public class EmailAddressLocalServiceImpl
 
 		validate(emailAddressId, 0, 0, 0, address, typeId, primary);
 
-		EmailAddress emailAddress =
-			EmailAddressUtil.findByPrimaryKey(emailAddressId);
+		EmailAddress emailAddress = emailAddressPersistence.findByPrimaryKey(
+			emailAddressId);
 
 		emailAddress.setModifiedDate(new Date());
 		emailAddress.setAddress(address);
 		emailAddress.setTypeId(typeId);
 		emailAddress.setPrimary(primary);
 
-		EmailAddressUtil.update(emailAddress);
+		emailAddressPersistence.update(emailAddress);
 
 		return emailAddress;
 	}
@@ -148,7 +148,8 @@ public class EmailAddressLocalServiceImpl
 
 		if (emailAddressId > 0) {
 			EmailAddress emailAddress =
-				EmailAddressUtil.findByPrimaryKey(emailAddressId);
+				emailAddressPersistence.findByPrimaryKey(
+					emailAddressId);
 
 			companyId = emailAddress.getCompanyId();
 			classNameId = emailAddress.getClassNameId();
@@ -156,7 +157,7 @@ public class EmailAddressLocalServiceImpl
 		}
 
 		try {
-			ListTypeServiceUtil.validate(
+			listTypeService.validate(
 				typeId, classNameId, ListTypeImpl.EMAIL_ADDRESS);
 		}
 		catch (RemoteException re) {
@@ -176,7 +177,7 @@ public class EmailAddressLocalServiceImpl
 		// true
 
 		if (primary) {
-			Iterator itr = EmailAddressUtil.findByC_C_C_P(
+			Iterator itr = emailAddressPersistence.findByC_C_C_P(
 				companyId, classNameId, classPK, primary).iterator();
 
 			while (itr.hasNext()) {
@@ -187,7 +188,7 @@ public class EmailAddressLocalServiceImpl
 
 					emailAddress.setPrimary(false);
 
-					EmailAddressUtil.update(emailAddress);
+					emailAddressPersistence.update(emailAddress);
 				}
 			}
 		}

@@ -31,9 +31,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
-import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.base.AddressLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.AddressUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.rmi.RemoteException;
@@ -68,7 +66,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 		long addressId = counterLocalService.increment();
 
-		Address address = AddressUtil.create(addressId);
+		Address address = addressPersistence.create(addressId);
 
 		address.setCompanyId(user.getCompanyId());
 		address.setUserId(user.getUserId());
@@ -88,7 +86,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		address.setMailing(mailing);
 		address.setPrimary(primary);
 
-		AddressUtil.update(address);
+		addressPersistence.update(address);
 
 		return address;
 	}
@@ -96,7 +94,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 	public void deleteAddress(long addressId)
 		throws PortalException, SystemException {
 
-		AddressUtil.remove(addressId);
+		addressPersistence.remove(addressId);
 	}
 
 	public void deleteAddresses(long companyId, String className, long classPK)
@@ -104,17 +102,17 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		AddressUtil.removeByC_C_C(companyId, classNameId, classPK);
+		addressPersistence.removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Address getAddress(long addressId)
 		throws PortalException, SystemException {
 
-		return AddressUtil.findByPrimaryKey(addressId);
+		return addressPersistence.findByPrimaryKey(addressId);
 	}
 
 	public List getAddresses() throws SystemException {
-		return AddressUtil.findAll();
+		return addressPersistence.findAll();
 	}
 
 	public List getAddresses(long companyId, String className, long classPK)
@@ -122,7 +120,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return AddressUtil.findByC_C_C(companyId, classNameId, classPK);
+		return addressPersistence.findByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Address updateAddress(
@@ -135,7 +133,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 			addressId, 0, 0, 0, street1, city, zip, regionId, countryId, typeId,
 			mailing, primary);
 
-		Address address = AddressUtil.findByPrimaryKey(addressId);
+		Address address = addressPersistence.findByPrimaryKey(addressId);
 
 		address.setModifiedDate(new Date());
 		address.setStreet1(street1);
@@ -149,7 +147,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		address.setMailing(mailing);
 		address.setPrimary(primary);
 
-		AddressUtil.update(address);
+		addressPersistence.update(address);
 
 		return address;
 	}
@@ -182,7 +180,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		}*/
 
 		if (addressId > 0) {
-			Address address = AddressUtil.findByPrimaryKey(addressId);
+			Address address = addressPersistence.findByPrimaryKey(addressId);
 
 			companyId = address.getCompanyId();
 			classNameId = address.getClassNameId();
@@ -190,8 +188,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		}
 
 		try {
-			ListTypeServiceUtil.validate(
-				typeId, classNameId, ListTypeImpl.ADDRESS);
+			listTypeService.validate(typeId, classNameId, ListTypeImpl.ADDRESS);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);
@@ -209,7 +206,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		// id, class name, and class pk that also has mailing set to true
 
 		if (mailing) {
-			Iterator itr = AddressUtil.findByC_C_C_M(
+			Iterator itr = addressPersistence.findByC_C_C_M(
 				companyId, classNameId, classPK, mailing).iterator();
 
 			while (itr.hasNext()) {
@@ -220,7 +217,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 					address.setMailing(false);
 
-					AddressUtil.update(address);
+					addressPersistence.update(address);
 				}
 			}
 		}
@@ -229,7 +226,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		// id, class name, and class pk that also has primary set to true
 
 		if (primary) {
-			Iterator itr = AddressUtil.findByC_C_C_P(
+			Iterator itr = addressPersistence.findByC_C_C_P(
 				companyId, classNameId, classPK, primary).iterator();
 
 			while (itr.hasNext()) {
@@ -240,7 +237,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 					address.setPrimary(false);
 
-					AddressUtil.update(address);
+					addressPersistence.update(address);
 				}
 			}
 		}

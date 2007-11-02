@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.AccountNameException;
 import com.liferay.portal.CompanyMxException;
 import com.liferay.portal.CompanyVirtualHostException;
@@ -54,17 +53,7 @@ import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.model.impl.RegionImpl;
 import com.liferay.portal.model.impl.RoleImpl;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.AccountUtil;
-import com.liferay.portal.service.persistence.CompanyUtil;
-import com.liferay.portal.service.persistence.ContactUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -104,7 +93,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		if ((Validator.isNull(webId)) ||
 			(webId.equals(CompanyImpl.DEFAULT_WEB_ID)) ||
-			(CompanyUtil.fetchByWebId(webId) != null)) {
+			(companyPersistence.fetchByWebId(webId) != null)) {
 
 			throw new CompanyWebIdException();
 		}
@@ -116,7 +105,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		company.setVirtualHost(virtualHost);
 		company.setMx(mx);
 
-		CompanyUtil.update(company);
+		companyPersistence.update(company);
 
 		// Lucene
 
@@ -140,7 +129,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		Date now = new Date();
 
-		Company company = CompanyUtil.fetchByWebId(webId);
+		Company company = companyPersistence.fetchByWebId(webId);
 
 		if (company == null) {
 			String virtualHost = webId;
@@ -161,7 +150,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			long companyId = counterLocalService.increment();
 
-			company = CompanyUtil.create(companyId);
+			company = companyPersistence.create(companyId);
 
 			try {
 				company.setKeyObj(Encryptor.generateKey());
@@ -174,7 +163,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			company.setVirtualHost(virtualHost);
 			company.setMx(mx);
 
-			CompanyUtil.update(company);
+			companyPersistence.update(company);
 
 			updateCompany(
 				companyId, virtualHost, mx, name, legalName, legalId, legalType,
@@ -183,11 +172,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			// Demo settings
 
 			if (webId.equals("liferay.net")) {
-				company = CompanyUtil.findByWebId(webId);
+				company = companyPersistence.findByWebId(webId);
 
 				company.setVirtualHost("demo.liferay.net");
 
-				CompanyUtil.update(company);
+				companyPersistence.update(company);
 
 				updateSecurity(
 					companyId, CompanyImpl.AUTH_TYPE_EA, true, true, true, true,
@@ -224,24 +213,24 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		User defaultUser = null;
 
 		try {
-			defaultUser = UserLocalServiceUtil.getDefaultUser(companyId);
+			defaultUser = userLocalService.getDefaultUser(companyId);
 
 			if (!defaultUser.isAgreedToTermsOfUse()) {
 				defaultUser.setAgreedToTermsOfUse(true);
 
-				UserUtil.update(defaultUser);
+				userPersistence.update(defaultUser);
 			}
 		}
 		catch (NoSuchUserException nsue) {
 			long userId = counterLocalService.increment();
 
-			defaultUser = UserUtil.create(userId);
+			defaultUser = userPersistence.create(userId);
 
 			defaultUser.setCompanyId(companyId);
 			defaultUser.setCreateDate(now);
 			defaultUser.setModifiedDate(now);
 			defaultUser.setDefaultUser(true);
-			defaultUser.setContactId(CounterLocalServiceUtil.increment());
+			defaultUser.setContactId(counterLocalService.increment());
 			defaultUser.setPassword("password");
 			defaultUser.setScreenName(String.valueOf(defaultUser.getUserId()));
 			defaultUser.setEmailAddress("default@" + company.getMx());
@@ -253,11 +242,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			defaultUser.setAgreedToTermsOfUse(true);
 			defaultUser.setActive(true);
 
-			UserUtil.update(defaultUser);
+			userPersistence.update(defaultUser);
 
 			// Contact
 
-			Contact defaultContact = ContactUtil.create(
+			Contact defaultContact = contactPersistence.create(
 				defaultUser.getContactId());
 
 			defaultContact.setCompanyId(defaultUser.getCompanyId());
@@ -274,32 +263,31 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			defaultContact.setMale(true);
 			defaultContact.setBirthday(now);
 
-			ContactUtil.update(defaultContact);
+			contactPersistence.update(defaultContact);
 		}
 
 		// System groups
 
-		GroupLocalServiceUtil.checkSystemGroups(companyId);
+		groupLocalService.checkSystemGroups(companyId);
 
 		// Default password policy
 
-		PasswordPolicyLocalServiceUtil.checkDefaultPasswordPolicy(companyId);
+		passwordPolicyLocalService.checkDefaultPasswordPolicy(companyId);
 
 		// System roles
 
-		RoleLocalServiceUtil.checkSystemRoles(companyId);
+		roleLocalService.checkSystemRoles(companyId);
 
 		// Default user must have the Guest role
 
-		Role guestRole = RoleLocalServiceUtil.getRole(
-			companyId, RoleImpl.GUEST);
+		Role guestRole = roleLocalService.getRole(companyId, RoleImpl.GUEST);
 
-		RoleLocalServiceUtil.setUserRoles(
+		roleLocalService.setUserRoles(
 			defaultUser.getUserId(), new long[] {guestRole.getRoleId()});
 
 		// Default admin
 
-		if (UserUtil.countByCompanyId(companyId) == 1) {
+		if (userPersistence.countByCompanyId(companyId) == 1) {
 			long creatorUserId = 0;
 			boolean autoPassword = false;
 			String password1 = PropsUtil.get(PropsUtil.DEFAULT_ADMIN_PASSWORD);
@@ -326,33 +314,33 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String jobTitle = StringPool.BLANK;
 			long[] organizationIds = new long[0];
 
-			User user = UserLocalServiceUtil.addUser(
+			User user = userLocalService.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,
 				autoScreenName, screenName, emailAddress, locale, firstName,
 				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
 				birthdayDay, birthdayYear, jobTitle, organizationIds, false);
 
-			Group guestGroup = GroupLocalServiceUtil.getGroup(
+			Group guestGroup = groupLocalService.getGroup(
 				companyId, GroupImpl.GUEST);
 
 			long[] groupIds = new long[] {guestGroup.getGroupId()};
 
-			GroupLocalServiceUtil.setUserGroups(user.getUserId(), groupIds);
+			groupLocalService.setUserGroups(user.getUserId(), groupIds);
 
-			Role adminRole = RoleLocalServiceUtil.getRole(
+			Role adminRole = roleLocalService.getRole(
 				companyId, RoleImpl.ADMINISTRATOR);
 
-			Role powerUserRole = RoleLocalServiceUtil.getRole(
+			Role powerUserRole = roleLocalService.getRole(
 				companyId, RoleImpl.POWER_USER);
 
 			long[] roleIds = new long[] {
 				adminRole.getRoleId(), powerUserRole.getRoleId()
 			};
 
-			RoleLocalServiceUtil.setUserRoles(user.getUserId(), roleIds);
+			roleLocalService.setUserRoles(user.getUserId(), roleIds);
 
 			Organization organization =
-				OrganizationLocalServiceUtil.addOrganization(
+				organizationLocalService.addOrganization(
 					user.getUserId(),
 					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID,
 					"Test Organization", OrganizationImpl.TYPE_REGULAR, true,
@@ -360,18 +348,18 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 					CountryImpl.DEFAULT_COUNTRY_ID,
 					ListTypeImpl.ORGANIZATION_STATUS_DEFAULT);
 
-			UserUtil.addOrganization(
+			userPersistence.addOrganization(
 				user.getUserId(), organization.getOrganizationId());
 
 			Organization location =
-				OrganizationLocalServiceUtil.addOrganization(
+				organizationLocalService.addOrganization(
 					user.getUserId(), organization.getOrganizationId(),
 					"Test Location", OrganizationImpl.TYPE_LOCATION, true,
 					RegionImpl.DEFAULT_REGION_ID,
 					CountryImpl.DEFAULT_COUNTRY_ID,
 					ListTypeImpl.ORGANIZATION_STATUS_DEFAULT);
 
-			UserUtil.addOrganization(
+			userPersistence.addOrganization(
 				user.getUserId(), location.getOrganizationId());
 		}
 
@@ -381,7 +369,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public void checkCompanyKey(long companyId)
 		throws PortalException, SystemException {
 
-		Company company = CompanyUtil.findByPrimaryKey(companyId);
+		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		if (company.getKeyObj() == null) {
 			try {
@@ -392,23 +380,23 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 		}
 
-		CompanyUtil.update(company);
+		companyPersistence.update(company);
 	}
 
 	public List getCompanies() throws SystemException {
-		return CompanyUtil.findAll();
+		return companyPersistence.findAll();
 	}
 
 	public Company getCompanyById(long companyId)
 		throws PortalException, SystemException {
 
-		return CompanyUtil.findByPrimaryKey(companyId);
+		return companyPersistence.findByPrimaryKey(companyId);
 	}
 
 	public Company getCompanyByMx(String mx)
 		throws PortalException, SystemException {
 
-		return CompanyUtil.findByMx(mx);
+		return companyPersistence.findByMx(mx);
 	}
 
 	public Company getCompanyByVirtualHost(String virtualHost)
@@ -416,13 +404,13 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		virtualHost = virtualHost.trim().toLowerCase();
 
-		return CompanyUtil.findByVirtualHost(virtualHost);
+		return companyPersistence.findByVirtualHost(virtualHost);
 	}
 
 	public Company getCompanyByWebId(String webId)
 		throws PortalException, SystemException {
 
-		return CompanyUtil.findByWebId(webId);
+		return companyPersistence.findByWebId(webId);
 	}
 
 	public Hits search(long companyId, String keywords)
@@ -491,7 +479,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		virtualHost = virtualHost.trim().toLowerCase();
 
-		Company company = CompanyUtil.findByPrimaryKey(companyId);
+		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		validate(company.getWebId(), virtualHost, mx);
 
@@ -501,7 +489,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			company.setMx(mx);
 		}
 
-		CompanyUtil.update(company);
+		companyPersistence.update(company);
 
 		return company;
 	}
@@ -517,7 +505,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		virtualHost = virtualHost.trim().toLowerCase();
 		Date now = new Date();
 
-		Company company = CompanyUtil.findByPrimaryKey(companyId);
+		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		validate(company.getWebId(), virtualHost, mx);
 		validate(name);
@@ -528,19 +516,20 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			company.setMx(mx);
 		}
 
-		CompanyUtil.update(company);
+		companyPersistence.update(company);
 
 		// Account
 
 		Account account = null;
 
 		try {
-			account = AccountUtil.findByPrimaryKey(company.getAccountId());
+			account = accountPersistence.findByPrimaryKey(
+				company.getAccountId());
 		}
 		catch (NoSuchAccountException nsae) {
 			long accountId = counterLocalService.increment();
 
-			account = AccountUtil.create(accountId);
+			account = accountPersistence.create(accountId);
 
 			account.setCreateDate(now);
 			account.setCompanyId(companyId);
@@ -549,7 +538,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			company.setAccountId(accountId);
 
-			CompanyUtil.update(company);
+			companyPersistence.update(company);
 		}
 
 		account.setModifiedDate(now);
@@ -563,7 +552,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		account.setType(type);
 		account.setSize(size);
 
-		AccountUtil.update(account);
+		accountPersistence.update(account);
 
 		return company;
 	}
@@ -572,18 +561,18 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			long companyId, String languageId, String timeZoneId)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getDefaultUser(companyId);
+		User user = userLocalService.getDefaultUser(companyId);
 
 		user.setLanguageId(languageId);
 		user.setTimeZoneId(timeZoneId);
 
-		UserUtil.update(user);
+		userPersistence.update(user);
 	}
 
 	public void updateLogo(long companyId, File file)
 		throws PortalException, SystemException {
 
-		Company company = CompanyUtil.findByPrimaryKey(companyId);
+		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		long logoId = company.getLogoId();
 
@@ -665,7 +654,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 
 			try {
-				LayoutSetLocalServiceUtil.getLayoutSet(virtualHost);
+				layoutSetLocalService.getLayoutSet(virtualHost);
 
 				throw new CompanyVirtualHostException();
 			}

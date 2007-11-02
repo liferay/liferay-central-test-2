@@ -26,12 +26,7 @@ import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Contact;
-import com.liferay.portal.service.AddressLocalServiceUtil;
-import com.liferay.portal.service.EmailAddressLocalServiceUtil;
-import com.liferay.portal.service.PhoneLocalServiceUtil;
-import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.service.base.ContactLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.ContactUtil;
 
 /**
  * <a href="ContactLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -44,14 +39,14 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 	public Contact getContact(long contactId)
 		throws PortalException, SystemException {
 
-		return ContactUtil.findByPrimaryKey(contactId);
+		return contactPersistence.findByPrimaryKey(contactId);
 	}
 
 	public void deleteContact(long contactId)
 		throws PortalException, SystemException {
 
 		try {
-			Contact contact = ContactUtil.findByPrimaryKey(contactId);
+			Contact contact = contactPersistence.findByPrimaryKey(contactId);
 
 			deleteContact(contact);
 		}
@@ -64,31 +59,31 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 
 		// Addresses
 
-		AddressLocalServiceUtil.deleteAddresses(
+		addressLocalService.deleteAddresses(
 			contact.getCompanyId(), Contact.class.getName(),
 			contact.getContactId());
 
 		// Email addresses
 
-		EmailAddressLocalServiceUtil.deleteEmailAddresses(
+		emailAddressLocalService.deleteEmailAddresses(
 			contact.getCompanyId(), Contact.class.getName(),
 			contact.getContactId());
 
 		// Phone
 
-		PhoneLocalServiceUtil.deletePhones(
+		phoneLocalService.deletePhones(
 			contact.getCompanyId(), Contact.class.getName(),
 			contact.getContactId());
 
 		// Website
 
-		WebsiteLocalServiceUtil.deleteWebsites(
+		websiteLocalService.deleteWebsites(
 			contact.getCompanyId(), Contact.class.getName(),
 			contact.getContactId());
 
 		// Contact
 
-		ContactUtil.remove(contact.getContactId());
+		contactPersistence.remove(contact.getContactId());
 	}
 
 }

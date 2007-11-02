@@ -677,6 +677,222 @@ public class GroupLocalServiceUtil {
 		groupLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getBlogsEntryPersistence();
+	}
+
+	public static void setBlogsEntryPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setBlogsEntryPersistence(blogsEntryPersistence);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder getBlogsEntryFinder() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getBlogsEntryFinder();
+	}
+
+	public static void setBlogsEntryFinder(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder blogsEntryFinder) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setBlogsEntryFinder(blogsEntryFinder);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence getBlogsStatsUserPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getBlogsStatsUserPersistence();
+	}
+
+	public static void setBlogsStatsUserPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setBlogsStatsUserPersistence(blogsStatsUserPersistence);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder getBlogsStatsUserFinder() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getBlogsStatsUserFinder();
+	}
+
+	public static void setBlogsStatsUserFinder(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder blogsStatsUserFinder) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setBlogsStatsUserFinder(blogsStatsUserFinder);
+	}
+
+	public static com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence getBookmarksFolderPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getBookmarksFolderPersistence();
+	}
+
+	public static void setBookmarksFolderPersistence(
+		com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence bookmarksFolderPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setBookmarksFolderPersistence(bookmarksFolderPersistence);
+	}
+
+	public static com.liferay.portlet.calendar.service.persistence.CalEventPersistence getCalEventPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getCalEventPersistence();
+	}
+
+	public static void setCalEventPersistence(
+		com.liferay.portlet.calendar.service.persistence.CalEventPersistence calEventPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setCalEventPersistence(calEventPersistence);
+	}
+
+	public static com.liferay.portlet.calendar.service.persistence.CalEventFinder getCalEventFinder() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getCalEventFinder();
+	}
+
+	public static void setCalEventFinder(
+		com.liferay.portlet.calendar.service.persistence.CalEventFinder calEventFinder) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setCalEventFinder(calEventFinder);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence getDLFolderPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getDLFolderPersistence();
+	}
+
+	public static void setDLFolderPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setDLFolderPersistence(dlFolderPersistence);
+	}
+
+	public static com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence getIGFolderPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getIGFolderPersistence();
+	}
+
+	public static void setIGFolderPersistence(
+		com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setIGFolderPersistence(igFolderPersistence);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getJournalArticlePersistence();
+	}
+
+	public static void setJournalArticlePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setJournalArticlePersistence(journalArticlePersistence);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalArticleFinder getJournalArticleFinder() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getJournalArticleFinder();
+	}
+
+	public static void setJournalArticleFinder(
+		com.liferay.portlet.journal.service.persistence.JournalArticleFinder journalArticleFinder) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setJournalArticleFinder(journalArticleFinder);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getMBBanPersistence();
+	}
+
+	public static void setMBBanPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setMBBanPersistence(mbBanPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence getMBCategoryPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getMBCategoryPersistence();
+	}
+
+	public static void setMBCategoryPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setMBCategoryPersistence(mbCategoryPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder getMBCategoryFinder() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getMBCategoryFinder();
+	}
+
+	public static void setMBCategoryFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder mbCategoryFinder) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setMBCategoryFinder(mbCategoryFinder);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence getMBStatsUserPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getMBStatsUserPersistence();
+	}
+
+	public static void setMBStatsUserPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setMBStatsUserPersistence(mbStatsUserPersistence);
+	}
+
+	public static com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getPollsQuestionPersistence();
+	}
+
+	public static void setPollsQuestionPersistence(
+		com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setPollsQuestionPersistence(pollsQuestionPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getShoppingCartPersistence();
+	}
+
+	public static void setShoppingCartPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence shoppingCartPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setShoppingCartPersistence(shoppingCartPersistence);
+	}
+
+	public static com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getWikiNodePersistence();
+	}
+
+	public static void setWikiNodePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+		groupLocalService.setWikiNodePersistence(wikiNodePersistence);
+	}
+
 	public static void afterPropertiesSet() {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 		groupLocalService.afterPropertiesSet();

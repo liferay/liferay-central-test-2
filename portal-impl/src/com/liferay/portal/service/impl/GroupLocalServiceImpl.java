@@ -49,31 +49,9 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.GroupUtil;
-import com.liferay.portal.service.persistence.RoleUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
-import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
-import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
-import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil;
-import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -125,7 +103,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			name = String.valueOf(groupId);
 		}
 
-		Group group = GroupUtil.create(groupId);
+		Group group = groupPersistence.create(groupId);
 
 		group.setCompanyId(user.getCompanyId());
 		group.setCreatorUserId(userId);
@@ -139,33 +117,33 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setFriendlyURL(friendlyURL);
 		group.setActive(active);
 
-		GroupUtil.update(group);
+		groupPersistence.update(group);
 
 		// Layout sets
 
-		LayoutSetLocalServiceUtil.addLayoutSet(groupId, true);
+		layoutSetLocalService.addLayoutSet(groupId, true);
 
-		LayoutSetLocalServiceUtil.addLayoutSet(groupId, false);
+		layoutSetLocalService.addLayoutSet(groupId, false);
 
 		if ((classNameId <= 0) && (classPK <= 0) && !user.isDefaultUser()) {
 
 			// Resources
 
-			ResourceLocalServiceUtil.addResources(
+			resourceLocalService.addResources(
 				group.getCompanyId(), 0, 0, Group.class.getName(),
 				group.getGroupId(), false, false, false);
 
 			// Community roles
 
-			Role role = RoleLocalServiceUtil.getRole(
+			Role role = roleLocalService.getRole(
 				group.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
 
-			UserGroupRoleLocalServiceUtil.addUserGroupRoles(
+			userGroupRoleLocalService.addUserGroupRoles(
 				userId, groupId, new long[] {role.getRoleId()});
 
 			// User
 
-			UserLocalServiceUtil.addGroupUsers(
+			userLocalService.addGroupUsers(
 				group.getGroupId(), new long[] {userId});
 		}
 		else if (className.equals(Organization.class.getName()) &&
@@ -173,7 +151,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			// Resources
 
-			ResourceLocalServiceUtil.addResources(
+			resourceLocalService.addResources(
 				group.getCompanyId(), 0, 0, Group.class.getName(),
 				group.getGroupId(), false, false, false);
 		}
@@ -184,7 +162,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public void addRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
-		RoleUtil.addGroups(roleId, groupIds);
+		rolePersistence.addGroups(roleId, groupIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -192,7 +170,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public void addUserGroups(long userId, long[] groupIds)
 		throws PortalException, SystemException {
 
-		UserUtil.addGroups(userId, groupIds);
+		userPersistence.addGroups(userId, groupIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -200,8 +178,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public void checkSystemGroups(long companyId)
 		throws PortalException, SystemException {
 
-		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
-			companyId);
+		long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
 		String[] systemGroups = PortalUtil.getSystemGroups();
 
@@ -224,7 +201,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 
 			if (group.getName().equals(GroupImpl.GUEST)) {
-				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+				LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
 					group.getGroupId(), false);
 
 				if (layoutSet.getPageCount() == 0) {
@@ -237,7 +214,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public void deleteGroup(long groupId)
 		throws PortalException, SystemException {
 
-		Group group = GroupUtil.findByPrimaryKey(groupId);
+		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		if (PortalUtil.isSystemGroup(group.getName())) {
 			throw new RequiredGroupException();
@@ -246,13 +223,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Layout sets
 
 		try {
-			LayoutSetLocalServiceUtil.deleteLayoutSet(groupId, true);
+			layoutSetLocalService.deleteLayoutSet(groupId, true);
 		}
 		catch (NoSuchLayoutSetException nslse) {
 		}
 
 		try {
-			LayoutSetLocalServiceUtil.deleteLayoutSet(groupId, false);
+			layoutSetLocalService.deleteLayoutSet(groupId, false);
 		}
 		catch (NoSuchLayoutSetException nslse) {
 		}
@@ -260,17 +237,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Role
 
 		try {
-			Role role = RoleLocalServiceUtil.getGroupRole(
+			Role role = roleLocalService.getGroupRole(
 				group.getCompanyId(), groupId);
 
-			RoleLocalServiceUtil.deleteRole(role.getRoleId());
+			roleLocalService.deleteRole(role.getRoleId());
 		}
 		catch (NoSuchRoleException nsre) {
 		}
 
 		// Group roles
 
-		UserGroupRoleLocalServiceUtil.deleteUserGroupRolesByGroupId(groupId);
+		userGroupRoleLocalService.deleteUserGroupRolesByGroupId(groupId);
 
 		// Membership requests
 
@@ -279,46 +256,46 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Blogs
 
-		BlogsEntryLocalServiceUtil.deleteEntries(groupId);
-		BlogsStatsUserLocalServiceUtil.deleteStatsUserByGroupId(groupId);
+		blogsEntryLocalService.deleteEntries(groupId);
+		blogsStatsUserLocalService.deleteStatsUserByGroupId(groupId);
 
 		// Bookmarks
 
-		BookmarksFolderLocalServiceUtil.deleteFolders(groupId);
+		bookmarksFolderLocalService.deleteFolders(groupId);
 
 		// Calendar
 
-		CalEventLocalServiceUtil.deleteEvents(groupId);
+		calEventLocalService.deleteEvents(groupId);
 
 		// Document library
 
-		DLFolderLocalServiceUtil.deleteFolders(groupId);
+		dlFolderLocalService.deleteFolders(groupId);
 
 		// Image gallery
 
-		IGFolderLocalServiceUtil.deleteFolders(groupId);
+		igFolderLocalService.deleteFolders(groupId);
 
 		// Journal
 
-		JournalArticleLocalServiceUtil.deleteArticles(groupId);
+		journalArticleLocalService.deleteArticles(groupId);
 
 		// Message boards
 
-		MBBanLocalServiceUtil.deleteBansByGroupId(groupId);
-		MBCategoryLocalServiceUtil.deleteCategories(groupId);
-		MBStatsUserLocalServiceUtil.deleteStatsUserByGroupId(groupId);
+		mbBanLocalService.deleteBansByGroupId(groupId);
+		mbCategoryLocalService.deleteCategories(groupId);
+		mbStatsUserLocalService.deleteStatsUserByGroupId(groupId);
 
 		// Polls
 
-		PollsQuestionLocalServiceUtil.deleteQuestions(groupId);
+		pollsQuestionLocalService.deleteQuestions(groupId);
 
 		// Shopping
 
-		ShoppingCartLocalServiceUtil.deleteGroupCarts(groupId);
+		shoppingCartLocalService.deleteGroupCarts(groupId);
 
 		// Wiki
 
-		WikiNodeLocalServiceUtil.deleteNodes(groupId);
+		wikiNodeLocalService.deleteNodes(groupId);
 
 		// Resources
 
@@ -328,7 +305,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();
 
-			ResourceLocalServiceUtil.deleteResource(resource);
+			resourceLocalService.deleteResource(resource);
 		}
 
 		String className = PortalUtil.getClassName(group.getClassNameId());
@@ -336,14 +313,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		if (((group.getClassNameId() <= 0) && (group.getClassPK() <= 0)) ||
 			(className.equals(Organization.class.getName()))) {
 
-			ResourceLocalServiceUtil.deleteResource(
+			resourceLocalService.deleteResource(
 				group.getCompanyId(), Group.class.getName(),
 				ResourceImpl.SCOPE_INDIVIDUAL, group.getGroupId());
 		}
 
 		// Group
 
-		GroupUtil.remove(groupId);
+		groupPersistence.remove(groupId);
 
 		// Permission cache
 
@@ -359,13 +336,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		friendlyURL = friendlyURL.toLowerCase();
 
-		return GroupUtil.findByC_F(companyId, friendlyURL);
+		return groupPersistence.findByC_F(companyId, friendlyURL);
 	}
 
 	public Group getGroup(long groupId)
 		throws PortalException, SystemException {
 
-		return GroupUtil.findByPrimaryKey(groupId);
+		return groupPersistence.findByPrimaryKey(groupId);
 	}
 
 	public Group getGroup(long companyId, String name)
@@ -379,7 +356,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(Organization.class);
 
-		return GroupUtil.findByC_C_C(companyId, classNameId, organizationId);
+		return groupPersistence.findByC_C_C(
+			companyId, classNameId, organizationId);
 	}
 
 	public List getOrganizationsGroups(List organizations)
@@ -401,13 +379,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public List getRoleGroups(long roleId)
 		throws PortalException, SystemException {
 
-		return RoleUtil.getGroups(roleId);
+		return rolePersistence.getGroups(roleId);
 	}
 
 	public Group getStagingGroup(long liveGroupId)
 		throws PortalException, SystemException {
 
-		return GroupUtil.findByLiveGroupId(liveGroupId);
+		return groupPersistence.findByLiveGroupId(liveGroupId);
 	}
 
 	public Group getUserGroup(long companyId, long userId)
@@ -415,7 +393,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(User.class);
 
-		return GroupUtil.findByC_C_C(companyId, classNameId, userId);
+		return groupPersistence.findByC_C_C(companyId, classNameId, userId);
 	}
 
 	public Group getUserGroupGroup(long companyId, long userGroupId)
@@ -423,13 +401,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(UserGroup.class);
 
-		return GroupUtil.findByC_C_C(companyId, classNameId, userGroupId);
+		return groupPersistence.findByC_C_C(
+			companyId, classNameId, userGroupId);
 	}
 
 	public List getUserGroups(long userId)
 		throws PortalException, SystemException {
 
-		return UserUtil.getGroups(userId);
+		return userPersistence.getGroups(userId);
 	}
 
 	public List getUserGroupsGroups(List userGroups)
@@ -451,7 +430,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public boolean hasRoleGroup(long roleId, long groupId)
 		throws PortalException, SystemException {
 
-		return RoleUtil.containsGroup(roleId, groupId);
+		return rolePersistence.containsGroup(roleId, groupId);
 	}
 
 	public boolean hasUserGroup(long userId, long groupId)
@@ -485,7 +464,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public void setRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
-		RoleUtil.setGroups(roleId, groupIds);
+		rolePersistence.setGroups(roleId, groupIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -493,7 +472,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public void setUserGroups(long userId, long[] groupIds)
 		throws PortalException, SystemException {
 
-		UserUtil.setGroups(userId, groupIds);
+		userPersistence.setGroups(userId, groupIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -501,7 +480,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public void unsetRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
-		RoleUtil.removeGroups(roleId, groupIds);
+		rolePersistence.removeGroups(roleId, groupIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -509,7 +488,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public void unsetUserGroups(long userId, long[] groupIds)
 		throws PortalException, SystemException {
 
-		UserUtil.removeGroups(userId, groupIds);
+		userPersistence.removeGroups(userId, groupIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -519,7 +498,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			String friendlyURL, boolean active)
 		throws PortalException, SystemException {
 
-		Group group = GroupUtil.findByPrimaryKey(groupId);
+		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		long classNameId = group.getClassNameId();
 		long classPK = group.getClassPK();
@@ -544,7 +523,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setFriendlyURL(friendlyURL);
 		group.setActive(active);
 
-		GroupUtil.update(group);
+		groupPersistence.update(group);
 
 		return group;
 	}
@@ -552,11 +531,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public Group updateGroup(long groupId, String typeSettings)
 		throws PortalException, SystemException {
 
-		Group group = GroupUtil.findByPrimaryKey(groupId);
+		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		group.setTypeSettings(typeSettings);
 
-		GroupUtil.update(group);
+		groupPersistence.update(group);
 
 		return group;
 	}
@@ -564,7 +543,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	protected void addDefaultLayouts(Group group)
 		throws PortalException, SystemException {
 
-		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
+		long defaultUserId = userLocalService.getDefaultUserId(
 			group.getCompanyId());
 		String name = PropsUtil.get(PropsUtil.DEFAULT_GUEST_LAYOUT_NAME);
 
@@ -576,7 +555,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		friendlyURL = friendlyURL.toLowerCase();
 
-		Layout layout = LayoutLocalServiceUtil.addLayout(
+		Layout layout = layoutLocalService.addLayout(
 			defaultUserId, group.getGroupId(), false,
 			LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
 			StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false, friendlyURL);
@@ -598,7 +577,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				0, StringUtil.split(portletIds), columnId, false);
 		}
 
-		LayoutLocalServiceUtil.updateLayout(
+		layoutLocalService.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
 	}
@@ -631,7 +610,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 
 			try {
-				Group group = GroupUtil.findByC_F(companyId, friendlyURL);
+				Group group = groupPersistence.findByC_F(
+					companyId, friendlyURL);
 
 				if ((groupId <= 0) || (group.getGroupId() != groupId)) {
 					throw new GroupFriendlyURLException(
@@ -647,7 +627,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				screenName = friendlyURL.substring(1, friendlyURL.length());
 			}
 
-			User user = UserUtil.fetchByC_SN(companyId, screenName);
+			User user = userPersistence.fetchByC_SN(companyId, screenName);
 
 			if (user != null) {
 				throw new GroupFriendlyURLException(

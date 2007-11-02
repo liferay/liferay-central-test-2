@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.service.base.CountryServiceBaseImpl;
-import com.liferay.portal.service.persistence.CountryUtil;
 
 import java.util.List;
 
@@ -39,17 +38,17 @@ import java.util.List;
 public class CountryServiceImpl extends CountryServiceBaseImpl {
 
 	public List getCountries() throws SystemException {
-		return CountryUtil.findAll();
+		return countryPersistence.findAll();
 	}
 
 	public List getCountries(boolean active) throws SystemException {
-		return CountryUtil.findByActive(active);
+		return countryPersistence.findByActive(active);
 	}
 
 	public Country getCountry(long countryId)
 		throws PortalException, SystemException {
 
-		return CountryUtil.findByPrimaryKey(countryId);
+		return countryPersistence.findByPrimaryKey(countryId);
 	}
 
 }

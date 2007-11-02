@@ -312,6 +312,96 @@ public interface GroupLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence();
+
+	public void setBlogsEntryPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence);
+
+	public com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder getBlogsEntryFinder();
+
+	public void setBlogsEntryFinder(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder blogsEntryFinder);
+
+	public com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence getBlogsStatsUserPersistence();
+
+	public void setBlogsStatsUserPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence);
+
+	public com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder getBlogsStatsUserFinder();
+
+	public void setBlogsStatsUserFinder(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder blogsStatsUserFinder);
+
+	public com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence getBookmarksFolderPersistence();
+
+	public void setBookmarksFolderPersistence(
+		com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence bookmarksFolderPersistence);
+
+	public com.liferay.portlet.calendar.service.persistence.CalEventPersistence getCalEventPersistence();
+
+	public void setCalEventPersistence(
+		com.liferay.portlet.calendar.service.persistence.CalEventPersistence calEventPersistence);
+
+	public com.liferay.portlet.calendar.service.persistence.CalEventFinder getCalEventFinder();
+
+	public void setCalEventFinder(
+		com.liferay.portlet.calendar.service.persistence.CalEventFinder calEventFinder);
+
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence getDLFolderPersistence();
+
+	public void setDLFolderPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence);
+
+	public com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence getIGFolderPersistence();
+
+	public void setIGFolderPersistence(
+		com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence();
+
+	public void setJournalArticlePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalArticleFinder getJournalArticleFinder();
+
+	public void setJournalArticleFinder(
+		com.liferay.portlet.journal.service.persistence.JournalArticleFinder journalArticleFinder);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence();
+
+	public void setMBBanPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence getMBCategoryPersistence();
+
+	public void setMBCategoryPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder getMBCategoryFinder();
+
+	public void setMBCategoryFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder mbCategoryFinder);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence getMBStatsUserPersistence();
+
+	public void setMBStatsUserPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence);
+
+	public com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence();
+
+	public void setPollsQuestionPersistence(
+		com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence);
+
+	public com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence();
+
+	public void setShoppingCartPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence shoppingCartPersistence);
+
+	public com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence();
+
+	public void setWikiNodePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portal.model.Group addGroup(long userId,

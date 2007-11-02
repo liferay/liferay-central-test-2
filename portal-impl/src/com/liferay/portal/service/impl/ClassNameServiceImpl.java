@@ -25,7 +25,6 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ClassName;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.base.ClassNameServiceBaseImpl;
 
 /**
@@ -39,13 +38,13 @@ public class ClassNameServiceImpl extends ClassNameServiceBaseImpl {
 	public ClassName getClassName(long classNameId)
 		throws PortalException, SystemException {
 
-		return ClassNameLocalServiceUtil.getClassName(classNameId);
+		return classNameLocalService.getClassName(classNameId);
 	}
 
 	public ClassName getClassName(String value)
 		throws PortalException, SystemException {
 
-		return ClassNameLocalServiceUtil.getClassName(value);
+		return classNameLocalService.getClassName(value);
 	}
 
 }

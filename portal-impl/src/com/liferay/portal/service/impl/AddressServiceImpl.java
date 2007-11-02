@@ -26,10 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Address;
-import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.base.AddressServiceBaseImpl;
 import com.liferay.portal.service.permission.CommonPermissionUtil;
-import com.liferay.portal.service.persistence.AddressUtil;
 
 import java.util.List;
 
@@ -51,7 +49,7 @@ public class AddressServiceImpl extends AddressServiceBaseImpl {
 		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
 
-		return AddressLocalServiceUtil.addAddress(
+		return addressLocalService.addAddress(
 			getUserId(), className, classPK, street1, street2, street3, city,
 			zip, regionId, countryId, typeId, mailing, primary);
 	}
@@ -59,19 +57,19 @@ public class AddressServiceImpl extends AddressServiceBaseImpl {
 	public void deleteAddress(long addressId)
 		throws PortalException, SystemException {
 
-		Address address = AddressUtil.findByPrimaryKey(addressId);
+		Address address = addressPersistence.findByPrimaryKey(addressId);
 
 		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), address.getClassNameId(),
 			address.getClassPK(), ActionKeys.UPDATE);
 
-		AddressLocalServiceUtil.deleteAddress(addressId);
+		addressLocalService.deleteAddress(addressId);
 	}
 
 	public Address getAddress(long addressId)
 		throws PortalException, SystemException {
 
-		Address address = AddressUtil.findByPrimaryKey(addressId);
+		Address address = addressPersistence.findByPrimaryKey(addressId);
 
 		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), address.getClassNameId(),
@@ -86,7 +84,7 @@ public class AddressServiceImpl extends AddressServiceBaseImpl {
 		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
-		return AddressLocalServiceUtil.getAddresses(
+		return addressLocalService.getAddresses(
 			getUser().getCompanyId(), className, classPK);
 	}
 
@@ -96,13 +94,13 @@ public class AddressServiceImpl extends AddressServiceBaseImpl {
 			boolean mailing, boolean primary)
 		throws PortalException, SystemException {
 
-		Address address = AddressUtil.findByPrimaryKey(addressId);
+		Address address = addressPersistence.findByPrimaryKey(addressId);
 
 		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), address.getClassNameId(),
 			address.getClassPK(), ActionKeys.UPDATE);
 
-		return AddressLocalServiceUtil.updateAddress(
+		return addressLocalService.updateAddress(
 			addressId, street1, street2, street3, city, zip, regionId,
 			countryId, typeId, mailing, primary);
 	}

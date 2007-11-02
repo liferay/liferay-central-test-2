@@ -29,7 +29,6 @@ import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.impl.ClassNameImpl;
 import com.liferay.portal.service.base.ClassNameLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.ClassNameUtil;
 import com.liferay.util.CollectionFactory;
 
 import java.util.List;
@@ -56,7 +55,7 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 	public ClassName getClassName(long classNameId)
 		throws PortalException, SystemException {
 
-		return ClassNameUtil.findByPrimaryKey(classNameId);
+		return classNamePersistence.findByPrimaryKey(classNameId);
 	}
 
 	public ClassName getClassName(String value)
@@ -72,16 +71,16 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 		ClassName classNameModel = (ClassName)_classNames.get(value);
 
 		if (classNameModel == null) {
-			classNameModel = ClassNameUtil.fetchByValue(value);
+			classNameModel = classNamePersistence.fetchByValue(value);
 
 			if (classNameModel == null) {
 				long classNameId = counterLocalService.increment();
 
-				classNameModel = ClassNameUtil.create(classNameId);
+				classNameModel = classNamePersistence.create(classNameId);
 
 				classNameModel.setValue(value);
 
-				ClassNameUtil.update(classNameModel);
+				classNamePersistence.update(classNameModel);
 			}
 
 			_classNames.put(value, classNameModel);
