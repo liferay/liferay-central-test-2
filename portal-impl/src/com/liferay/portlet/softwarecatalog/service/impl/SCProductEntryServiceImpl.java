@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
-import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPermission;
 
@@ -55,7 +54,7 @@ public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
 			ActionKeys.ADD_PRODUCT_ENTRY);
 
-		return SCProductEntryLocalServiceUtil.addProductEntry(
+		return scProductEntryLocalService.addProductEntry(
 			getUserId(), plid, name, type, tags, shortDescription,
 			longDescription, pageURL, author, repoGroupId, repoArtifactId,
 			licenseIds, thumbnails, fullImages, addCommunityPermissions,
@@ -74,7 +73,7 @@ public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
 			ActionKeys.ADD_PRODUCT_ENTRY);
 
-		return SCProductEntryLocalServiceUtil.addProductEntry(
+		return scProductEntryLocalService.addProductEntry(
 			getUserId(), plid, name, type, tags, shortDescription,
 			longDescription, pageURL, author, repoGroupId, repoArtifactId,
 			licenseIds, thumbnails, fullImages, communityPermissions,
@@ -87,7 +86,7 @@ public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productEntryId, ActionKeys.DELETE);
 
-		SCProductEntryLocalServiceUtil.deleteProductEntry(productEntryId);
+		scProductEntryLocalService.deleteProductEntry(productEntryId);
 	}
 
 	public SCProductEntry getProductEntry(long productEntryId)
@@ -96,7 +95,7 @@ public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productEntryId, ActionKeys.VIEW);
 
-		return SCProductEntryLocalServiceUtil.getProductEntry(productEntryId);
+		return scProductEntryLocalService.getProductEntry(productEntryId);
 	}
 
 	public SCProductEntry updateProductEntry(
@@ -109,7 +108,7 @@ public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productEntryId, ActionKeys.UPDATE);
 
-		return SCProductEntryLocalServiceUtil.updateProductEntry(
+		return scProductEntryLocalService.updateProductEntry(
 			productEntryId, name, type, tags, shortDescription, longDescription,
 			pageURL, author, repoGroupId, repoArtifactId, licenseIds,
 			thumbnails, fullImages);

@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
-import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.base.SCLicenseServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.permission.SCLicensePermission;
 
@@ -48,7 +47,7 @@ public class SCLicenseServiceImpl extends SCLicenseServiceBaseImpl {
 		PortalPermissionUtil.check(
 			getPermissionChecker(), ActionKeys.ADD_LICENSE);
 
-		return SCLicenseLocalServiceUtil.addLicense(
+		return scLicenseLocalService.addLicense(
 			name, url, openSource, active, recommended);
 	}
 
@@ -58,13 +57,13 @@ public class SCLicenseServiceImpl extends SCLicenseServiceBaseImpl {
 		SCLicensePermission.check(
 			getPermissionChecker(), licenseId, ActionKeys.DELETE);
 
-		SCLicenseLocalServiceUtil.deleteLicense(licenseId);
+		scLicenseLocalService.deleteLicense(licenseId);
 	}
 
 	public SCLicense getLicense(long licenseId)
 		throws PortalException, SystemException {
 
-		return SCLicenseLocalServiceUtil.getLicense(licenseId);
+		return scLicenseLocalService.getLicense(licenseId);
 	}
 
 	public SCLicense updateLicense(
@@ -75,7 +74,7 @@ public class SCLicenseServiceImpl extends SCLicenseServiceBaseImpl {
 		SCLicensePermission.check(
 			getPermissionChecker(), licenseId, ActionKeys.UPDATE);
 
-		return SCLicenseLocalServiceUtil.updateLicense(
+		return scLicenseLocalService.updateLicense(
 			licenseId, name, url, openSource, active, recommended);
 	}
 

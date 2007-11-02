@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.polls.model.PollsQuestion;
-import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
 import com.liferay.portlet.polls.service.base.PollsQuestionServiceBaseImpl;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
 
@@ -54,7 +53,7 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.POLLS,
 			ActionKeys.ADD_QUESTION);
 
-		return PollsQuestionLocalServiceUtil.addQuestion(
+		return pollsQuestionLocalService.addQuestion(
 			getUserId(), plid, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
 			expirationDateMinute, neverExpire, choices,
@@ -73,7 +72,7 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.POLLS,
 			ActionKeys.ADD_QUESTION);
 
-		return PollsQuestionLocalServiceUtil.addQuestion(
+		return pollsQuestionLocalService.addQuestion(
 			getUserId(), plid, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
 			expirationDateMinute, neverExpire, choices, communityPermissions,
@@ -86,7 +85,7 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 		PollsQuestionPermission.check(
 			getPermissionChecker(), questionId, ActionKeys.DELETE);
 
-		PollsQuestionLocalServiceUtil.deleteQuestion(questionId);
+		pollsQuestionLocalService.deleteQuestion(questionId);
 	}
 
 	public PollsQuestion getQuestion(long questionId)
@@ -95,7 +94,7 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 		PollsQuestionPermission.check(
 			getPermissionChecker(), questionId, ActionKeys.VIEW);
 
-		return PollsQuestionLocalServiceUtil.getQuestion(questionId);
+		return pollsQuestionLocalService.getQuestion(questionId);
 	}
 
 	public PollsQuestion updateQuestion(
@@ -108,7 +107,7 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 		PollsQuestionPermission.check(
 			getPermissionChecker(), questionId, ActionKeys.UPDATE);
 
-		return PollsQuestionLocalServiceUtil.updateQuestion(
+		return pollsQuestionLocalService.updateQuestion(
 			getUserId(), questionId, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
 			expirationDateMinute, neverExpire, choices);

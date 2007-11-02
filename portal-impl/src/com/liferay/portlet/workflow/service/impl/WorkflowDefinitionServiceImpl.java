@@ -24,7 +24,6 @@ package com.liferay.portlet.workflow.service.impl;
 
 import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
-import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -32,10 +31,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portlet.workflow.NoSuchDefinitionException;
 import com.liferay.portlet.workflow.model.WorkflowDefinition;
-import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
 import com.liferay.portlet.workflow.service.base.WorkflowDefinitionServiceBaseImpl;
 
 import java.rmi.RemoteException;
@@ -82,7 +79,7 @@ public class WorkflowDefinitionServiceImpl
 			User user = getUser();
 
 			long definitionId = GetterUtil.getLong(
-				WorkflowComponentServiceUtil.deploy(xml));
+				workflowComponentService.deploy(xml));
 
 			// File
 
@@ -94,13 +91,12 @@ public class WorkflowDefinitionServiceImpl
 			String fileName = dirName  + "/" + definitionId + ".xml";
 
 			try {
-				DLServiceUtil.addDirectory(
-					companyId, repositoryId, dirName);
+				dlService.addDirectory(companyId, repositoryId, dirName);
 			}
 			catch (DuplicateDirectoryException dde) {
 			}
 
-			DLServiceUtil.addFile(
+			dlService.addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
 				StringPool.BLANK, xml.getBytes());
 
@@ -130,7 +126,7 @@ public class WorkflowDefinitionServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			user.getCompanyId(), 0, user.getUserId(),
 			WorkflowDefinition.class.getName(), definitionId, false,
 			addCommunityPermissions, addGuestPermissions);
@@ -141,7 +137,7 @@ public class WorkflowDefinitionServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			user.getCompanyId(), 0, user.getUserId(),
 			WorkflowDefinition.class.getName(), definitionId,
 			communityPermissions, guestPermissions);
@@ -157,10 +153,10 @@ public class WorkflowDefinitionServiceImpl
 			String fileName = dirName  + "/" + definitionId + ".xml";
 
 			String xml = new String(
-				DLServiceUtil.getFile(companyId, repositoryId, fileName));
+				dlService.getFile(companyId, repositoryId, fileName));
 
 			WorkflowDefinition definition =
-				(WorkflowDefinition)WorkflowComponentServiceUtil.getDefinition(
+				(WorkflowDefinition)workflowComponentService.getDefinition(
 					definitionId);
 
 			definition.setXml(xml);

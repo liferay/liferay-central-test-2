@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.tags.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.json.JSONArrayWrapper;
@@ -31,18 +30,13 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.tags.DuplicateEntryException;
 import com.liferay.portlet.tags.EntryNameException;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsProperty;
-import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsEntryLocalServiceBaseImpl;
-import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
-import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
-import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.util.Autocomplete;
 import com.liferay.util.CollectionFactory;
@@ -70,7 +64,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public TagsEntry addEntry(long userId, String name, String[] properties)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 		name = name.trim().toLowerCase();
 
@@ -81,9 +75,9 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 				"A tag entry with the name " + name + " already exists");
 		}
 
-		long entryId = CounterLocalServiceUtil.increment();
+		long entryId = counterLocalService.increment();
 
-		TagsEntry entry = TagsEntryUtil.create(entryId);
+		TagsEntry entry = tagsEntryPersistence.create(entryId);
 
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());
@@ -92,7 +86,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		entry.setModifiedDate(now);
 		entry.setName(name);
 
-		TagsEntryUtil.update(entry);
+		tagsEntryPersistence.update(entry);
 
 		for (int i = 0; i < properties.length; i++) {
 			String[] property = StringUtil.split(
@@ -111,7 +105,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			}
 
 			if (Validator.isNotNull(key)) {
-				TagsPropertyLocalServiceUtil.addProperty(
+				tagsPropertyLocalService.addProperty(
 					userId, entryId, key, value);
 			}
 		}
@@ -123,7 +117,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
-		TagsEntry entry = TagsEntryUtil.findByPrimaryKey(entryId);
+		TagsEntry entry = tagsEntryPersistence.findByPrimaryKey(entryId);
 
 		deleteEntry(entry);
 	}
@@ -133,17 +127,17 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		// Properties
 
-		TagsPropertyLocalServiceUtil.deleteProperties(entry.getEntryId());
+		tagsPropertyLocalService.deleteProperties(entry.getEntryId());
 
 		// Entry
 
-		TagsEntryUtil.remove(entry.getEntryId());
+		tagsEntryPersistence.remove(entry.getEntryId());
 	}
 
 	public boolean hasEntry(long companyId, String name)
 		throws PortalException, SystemException {
 
-		if (TagsEntryUtil.fetchByC_N(companyId, name) == null) {
+		if (tagsEntryPersistence.fetchByC_N(companyId, name) == null) {
 			return false;
 		}
 		else {
@@ -154,11 +148,11 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public List getAssetEntries(long assetId)
 		throws PortalException, SystemException {
 
-		return TagsAssetUtil.getTagsEntries(assetId);
+		return tagsAssetPersistence.getTagsEntries(assetId);
 	}
 
 	public List getEntries() throws SystemException {
-		return TagsEntryUtil.findAll();
+		return tagsEntryPersistence.findAll();
 	}
 
 	public List getEntries(String className, long classPK)
@@ -166,26 +160,26 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		TagsAsset asset = TagsAssetUtil.fetchByC_C(classNameId, classPK);
+		TagsAsset asset = tagsAssetPersistence.fetchByC_C(classNameId, classPK);
 
 		if (asset == null) {
 			return new ArrayList();
 		}
 		else {
-			return TagsAssetUtil.getTagsEntries(asset.getAssetId());
+			return tagsAssetPersistence.getTagsEntries(asset.getAssetId());
 		}
 	}
 
 	public TagsEntry getEntry(long entryId)
 		throws PortalException, SystemException {
 
-		return TagsEntryUtil.findByPrimaryKey(entryId);
+		return tagsEntryPersistence.findByPrimaryKey(entryId);
 	}
 
 	public TagsEntry getEntry(long companyId, String name)
 		throws PortalException, SystemException {
 
-		return TagsEntryUtil.findByC_N(companyId, name);
+		return tagsEntryPersistence.findByC_N(companyId, name);
 	}
 
 	public long[] getEntryIds(long companyId, String[] names)
@@ -196,7 +190,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		for (int i = 0; i < names.length; i++) {
 			String name = names[i];
 
-			TagsEntry entry = TagsEntryUtil.fetchByC_N(companyId, name);
+			TagsEntry entry = tagsEntryPersistence.fetchByC_N(companyId, name);
 
 			if (entry != null) {
 				list.add(entry);
@@ -254,7 +248,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		validate(name);
 
-		TagsEntry entry = TagsEntryUtil.findByPrimaryKey(entryId);
+		TagsEntry entry = tagsEntryPersistence.findByPrimaryKey(entryId);
 
 		if (!entry.getName().equals(name)) {
 			if (hasEntry(entry.getCompanyId(), name)) {
@@ -265,7 +259,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		entry.setModifiedDate(new Date());
 		entry.setName(name);
 
-		TagsEntryUtil.update(entry);
+		tagsEntryPersistence.update(entry);
 
 		return entry;
 	}
@@ -276,7 +270,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		TagsEntry entry = updateEntry(entryId, name);
 
-		List curProperties = TagsPropertyUtil.findByEntryId(entryId);
+		List curProperties = tagsPropertyPersistence.findByEntryId(entryId);
 		Set keepProperties = CollectionFactory.getHashSet();
 
 		for (int i = 0; i < properties.length; i++) {
@@ -303,17 +297,17 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 			if (propertyId.longValue() == 0) {
 				if (Validator.isNotNull(key)) {
-					TagsPropertyLocalServiceUtil.addProperty(
+					tagsPropertyLocalService.addProperty(
 						userId, entryId, key, value);
 				}
 			}
 			else {
 				if (Validator.isNull(key)) {
-					TagsPropertyLocalServiceUtil.deleteProperty(
+					tagsPropertyLocalService.deleteProperty(
 						propertyId.longValue());
 				}
 				else {
-					TagsPropertyLocalServiceUtil.updateProperty(
+					tagsPropertyLocalService.updateProperty(
 						propertyId.longValue(), key, value);
 
 					keepProperties.add(new Long(propertyId.longValue()));
@@ -327,7 +321,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			TagsProperty property = (TagsProperty)itr.next();
 
 			if (!keepProperties.contains(new Long(property.getPropertyId()))) {
-				TagsPropertyLocalServiceUtil.deleteProperty(property);
+				tagsPropertyLocalService.deleteProperty(property);
 			}
 		}
 

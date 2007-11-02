@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.polls.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.polls.DuplicateVoteException;
@@ -32,9 +31,6 @@ import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.service.base.PollsVoteLocalServiceBaseImpl;
-import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
-import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
-import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -54,7 +50,7 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 
 		Date now = new Date();
 
-		PollsChoice choice = PollsChoiceUtil.findByPrimaryKey(choiceId);
+		PollsChoice choice = pollsChoicePersistence.findByPrimaryKey(choiceId);
 
 		if (choice.getQuestionId() != questionId) {
 			throw new NoSuchQuestionException();
@@ -62,7 +58,8 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 
 		// Question
 
-		PollsQuestion question = PollsQuestionUtil.findByPrimaryKey(questionId);
+		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
+			questionId);
 
 		if (question.isExpired()) {
 			throw new QuestionExpiredException();
@@ -70,26 +67,26 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 
 		question.setLastVoteDate(now);
 
-		PollsQuestionUtil.update(question);
+		pollsQuestionPersistence.update(question);
 
 		// Vote
 
-		PollsVote vote = PollsVoteUtil.fetchByQ_U(questionId, userId);
+		PollsVote vote = pollsVotePersistence.fetchByQ_U(questionId, userId);
 
 		if (vote != null) {
 			throw new DuplicateVoteException();
 		}
 		else {
-			long voteId = CounterLocalServiceUtil.increment();
+			long voteId = counterLocalService.increment();
 
-			vote = PollsVoteUtil.create(voteId);
+			vote = pollsVotePersistence.create(voteId);
 
 			vote.setUserId(userId);
 			vote.setQuestionId(questionId);
 			vote.setChoiceId(choiceId);
 			vote.setVoteDate(now);
 
-			PollsVoteUtil.update(vote);
+			pollsVotePersistence.update(vote);
 		}
 
 		return vote;
@@ -98,27 +95,27 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 	public List getChoiceVotes(long choiceId, int begin, int end)
 		throws SystemException {
 
-		return PollsVoteUtil.findByChoiceId(choiceId,  begin, end);
+		return pollsVotePersistence.findByChoiceId(choiceId,  begin, end);
 	}
 
 	public int getChoiceVotesCount(long choiceId) throws SystemException {
-		return PollsVoteUtil.countByChoiceId(choiceId);
+		return pollsVotePersistence.countByChoiceId(choiceId);
 	}
 
 	public PollsVote getVote(long questionId, long userId)
 		throws PortalException, SystemException {
 
-		return PollsVoteUtil.findByQ_U(questionId, userId);
+		return pollsVotePersistence.findByQ_U(questionId, userId);
 	}
 
 	public List getQuestionVotes(long questionId, int begin, int end)
 		throws SystemException {
 
-		return PollsVoteUtil.findByQuestionId(questionId, begin, end);
+		return pollsVotePersistence.findByQuestionId(questionId, begin, end);
 	}
 
 	public int getQuestionVotesCount(long questionId) throws SystemException {
-		return PollsVoteUtil.countByQuestionId(questionId);
+		return pollsVotePersistence.countByQuestionId(questionId);
 	}
 
 }

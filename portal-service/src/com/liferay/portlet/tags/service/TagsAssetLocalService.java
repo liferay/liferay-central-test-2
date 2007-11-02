@@ -97,6 +97,36 @@ public interface TagsAssetLocalService {
 	public void setTagsSourcePersistence(
 		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence);
 
+	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
+
+	public void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
+
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence();
+
+	public void setDLFileEntryPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence);
+
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder getDLFileEntryFinder();
+
+	public void setDLFileEntryFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder dlFileEntryFinder);
+
+	public com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence getJournalArticleResourcePersistence();
+
+	public void setJournalArticleResourcePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence);
+
+	public com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence getWikiPageResourcePersistence();
+
+	public void setWikiPageResourcePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence);
+
 	public void afterPropertiesSet();
 
 	public void deleteAsset(long assetId)

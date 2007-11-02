@@ -126,6 +126,30 @@ public class SCProductVersionLocalServiceUtil {
 		scProductVersionLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
+		return scProductVersionLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+		scProductVersionLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
+		return scProductVersionLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+		scProductVersionLocalService.setUserFinder(userFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
 		scProductVersionLocalService.afterPropertiesSet();

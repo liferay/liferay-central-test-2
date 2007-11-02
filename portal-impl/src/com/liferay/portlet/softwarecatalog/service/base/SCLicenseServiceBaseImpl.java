@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.softwarecatalog.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.service.impl.PrincipalBean;
 
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
@@ -179,6 +184,22 @@ public abstract class SCLicenseServiceBaseImpl extends PrincipalBean
 		this.scProductVersionPersistence = scProductVersionPersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	public void afterPropertiesSet() {
 		if (scLicenseLocalService == null) {
 			scLicenseLocalService = SCLicenseLocalServiceFactory.getImpl();
@@ -231,6 +252,14 @@ public abstract class SCLicenseServiceBaseImpl extends PrincipalBean
 		if (scProductVersionPersistence == null) {
 			scProductVersionPersistence = SCProductVersionUtil.getPersistence();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
 	}
 
 	protected SCLicenseLocalService scLicenseLocalService;
@@ -246,4 +275,6 @@ public abstract class SCLicenseServiceBaseImpl extends PrincipalBean
 	protected SCProductVersionLocalService scProductVersionLocalService;
 	protected SCProductVersionService scProductVersionService;
 	protected SCProductVersionPersistence scProductVersionPersistence;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
 }

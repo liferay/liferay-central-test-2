@@ -34,6 +34,13 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.blogs" entity="BlogsEntry" />
+		<reference package-path="com.liferay.portlet.blogs" entity="BlogsStatsUser" />
 	</entity>
 	<entity name="RatingsStats" local-service="true" remote-service="false">
 
@@ -55,5 +62,9 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 </service-builder>

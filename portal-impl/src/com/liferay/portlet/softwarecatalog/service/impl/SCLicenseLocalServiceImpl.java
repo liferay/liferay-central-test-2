@@ -22,15 +22,12 @@
 
 package com.liferay.portlet.softwarecatalog.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.softwarecatalog.LicenseNameException;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.service.base.SCLicenseLocalServiceBaseImpl;
-import com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil;
-import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
 
 import java.util.List;
 
@@ -50,9 +47,9 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 
 		validate(name);
 
-		long licenseId = CounterLocalServiceUtil.increment();
+		long licenseId = counterLocalService.increment();
 
-		SCLicense license = SCLicenseUtil.create(licenseId);
+		SCLicense license = scLicensePersistence.create(licenseId);
 
 		license.setName(name);
 		license.setUrl(url);
@@ -60,7 +57,7 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 		license.setActive(active);
 		license.setRecommended(recommended);
 
-		SCLicenseUtil.update(license);
+		scLicensePersistence.update(license);
 
 		return license;
 	}
@@ -68,50 +65,50 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 	public void deleteLicense(long licenseId)
 		throws PortalException, SystemException {
 
-		SCLicenseUtil.remove(licenseId);
+		scLicensePersistence.remove(licenseId);
 	}
 
 	public SCLicense getLicense(long licenseId)
 		throws PortalException, SystemException {
 
-		return SCLicenseUtil.findByPrimaryKey(licenseId);
+		return scLicensePersistence.findByPrimaryKey(licenseId);
 	}
 
 	public List getLicenses() throws SystemException {
-		return SCLicenseUtil.findAll();
+		return scLicensePersistence.findAll();
 	}
 
 	public List getLicenses(int begin, int end) throws SystemException {
-		return SCLicenseUtil.findAll(begin, end);
+		return scLicensePersistence.findAll(begin, end);
 	}
 
 	public List getLicenses(boolean active, boolean recommended)
 		throws SystemException {
 
-		return SCLicenseUtil.findByA_R(active, recommended);
+		return scLicensePersistence.findByA_R(active, recommended);
 	}
 
 	public List getLicenses(
 			boolean active, boolean recommended, int begin, int end)
 		throws SystemException {
 
-		return SCLicenseUtil.findByA_R(active, recommended, begin, end);
+		return scLicensePersistence.findByA_R(active, recommended, begin, end);
 	}
 
 	public int getLicensesCount() throws SystemException {
-		return SCLicenseUtil.countAll();
+		return scLicensePersistence.countAll();
 	}
 
 	public int getLicensesCount(boolean active, boolean recommended)
 		throws SystemException {
 
-		return SCLicenseUtil.countByA_R(active, recommended);
+		return scLicensePersistence.countByA_R(active, recommended);
 	}
 
 	public List getProductEntryLicenses(long productEntryId)
 		throws PortalException, SystemException {
 
-		return SCProductEntryUtil.getSCLicenses(productEntryId);
+		return scProductEntryPersistence.getSCLicenses(productEntryId);
 	}
 
 	public SCLicense updateLicense(
@@ -121,7 +118,7 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 
 		validate(name);
 
-		SCLicense license = SCLicenseUtil.findByPrimaryKey(licenseId);
+		SCLicense license = scLicensePersistence.findByPrimaryKey(licenseId);
 
 		license.setName(name);
 		license.setUrl(url);
@@ -129,7 +126,7 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 		license.setActive(active);
 		license.setRecommended(recommended);
 
-		SCLicenseUtil.update(license);
+		scLicensePersistence.update(license);
 
 		return license;
 	}

@@ -22,7 +22,20 @@
 
 package com.liferay.portlet.workflow.service.base;
 
+import com.liferay.documentlibrary.service.DLLocalService;
+import com.liferay.documentlibrary.service.DLLocalServiceFactory;
+import com.liferay.documentlibrary.service.DLService;
+import com.liferay.documentlibrary.service.DLServiceFactory;
+
+import com.liferay.portal.service.ResourceLocalService;
+import com.liferay.portal.service.ResourceLocalServiceFactory;
+import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.ResourceServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.ResourceFinder;
+import com.liferay.portal.service.persistence.ResourceFinderUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.ResourceUtil;
 
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory;
@@ -68,6 +81,55 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 		this.workflowTaskService = workflowTaskService;
 	}
 
+	public DLLocalService getDLLocalService() {
+		return dlLocalService;
+	}
+
+	public void setDLLocalService(DLLocalService dlLocalService) {
+		this.dlLocalService = dlLocalService;
+	}
+
+	public DLService getDLService() {
+		return dlService;
+	}
+
+	public void setDLService(DLService dlService) {
+		this.dlService = dlService;
+	}
+
+	public ResourceLocalService getResourceLocalService() {
+		return resourceLocalService;
+	}
+
+	public void setResourceLocalService(
+		ResourceLocalService resourceLocalService) {
+		this.resourceLocalService = resourceLocalService;
+	}
+
+	public ResourceService getResourceService() {
+		return resourceService;
+	}
+
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourcePersistence getResourcePersistence() {
+		return resourcePersistence;
+	}
+
+	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
+		this.resourcePersistence = resourcePersistence;
+	}
+
+	public ResourceFinder getResourceFinder() {
+		return resourceFinder;
+	}
+
+	public void setResourceFinder(ResourceFinder resourceFinder) {
+		this.resourceFinder = resourceFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (workflowComponentService == null) {
 			workflowComponentService = WorkflowComponentServiceFactory.getImpl();
@@ -80,9 +142,39 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 		if (workflowTaskService == null) {
 			workflowTaskService = WorkflowTaskServiceFactory.getImpl();
 		}
+
+		if (dlLocalService == null) {
+			dlLocalService = DLLocalServiceFactory.getImpl();
+		}
+
+		if (dlService == null) {
+			dlService = DLServiceFactory.getImpl();
+		}
+
+		if (resourceLocalService == null) {
+			resourceLocalService = ResourceLocalServiceFactory.getImpl();
+		}
+
+		if (resourceService == null) {
+			resourceService = ResourceServiceFactory.getImpl();
+		}
+
+		if (resourcePersistence == null) {
+			resourcePersistence = ResourceUtil.getPersistence();
+		}
+
+		if (resourceFinder == null) {
+			resourceFinder = ResourceFinderUtil.getFinder();
+		}
 	}
 
 	protected WorkflowComponentService workflowComponentService;
 	protected WorkflowInstanceService workflowInstanceService;
 	protected WorkflowTaskService workflowTaskService;
+	protected DLLocalService dlLocalService;
+	protected DLService dlService;
+	protected ResourceLocalService resourceLocalService;
+	protected ResourceService resourceService;
+	protected ResourcePersistence resourcePersistence;
+	protected ResourceFinder resourceFinder;
 }

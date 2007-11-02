@@ -22,8 +22,21 @@
 
 package com.liferay.portlet.softwarecatalog.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.UserLocalServiceFactory;
+import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.persistence.UserFinder;
+import com.liferay.portal.service.persistence.UserFinderUtil;
+import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory;
@@ -181,6 +194,54 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		this.scProductVersionPersistence = scProductVersionPersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
+	public UserLocalService getUserLocalService() {
+		return userLocalService;
+	}
+
+	public void setUserLocalService(UserLocalService userLocalService) {
+		this.userLocalService = userLocalService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public UserPersistence getUserPersistence() {
+		return userPersistence;
+	}
+
+	public void setUserPersistence(UserPersistence userPersistence) {
+		this.userPersistence = userPersistence;
+	}
+
+	public UserFinder getUserFinder() {
+		return userFinder;
+	}
+
+	public void setUserFinder(UserFinder userFinder) {
+		this.userFinder = userFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (scLicenseLocalService == null) {
 			scLicenseLocalService = SCLicenseLocalServiceFactory.getImpl();
@@ -229,6 +290,30 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		if (scProductVersionPersistence == null) {
 			scProductVersionPersistence = SCProductVersionUtil.getPersistence();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
+
+		if (userLocalService == null) {
+			userLocalService = UserLocalServiceFactory.getImpl();
+		}
+
+		if (userService == null) {
+			userService = UserServiceFactory.getImpl();
+		}
+
+		if (userPersistence == null) {
+			userPersistence = UserUtil.getPersistence();
+		}
+
+		if (userFinder == null) {
+			userFinder = UserFinderUtil.getFinder();
+		}
 	}
 
 	protected SCLicenseLocalService scLicenseLocalService;
@@ -243,4 +328,10 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 	protected SCProductScreenshotLocalService scProductScreenshotLocalService;
 	protected SCProductScreenshotPersistence scProductScreenshotPersistence;
 	protected SCProductVersionPersistence scProductVersionPersistence;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
+	protected UserLocalService userLocalService;
+	protected UserService userService;
+	protected UserPersistence userPersistence;
+	protected UserFinder userFinder;
 }

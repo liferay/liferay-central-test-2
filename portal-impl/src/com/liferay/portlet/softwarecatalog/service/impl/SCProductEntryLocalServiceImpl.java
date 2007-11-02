@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
@@ -37,12 +36,8 @@ import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.plugin.ModuleId;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.ProductEntryAuthorException;
 import com.liferay.portlet.softwarecatalog.ProductEntryLicenseException;
 import com.liferay.portlet.softwarecatalog.ProductEntryNameException;
@@ -55,12 +50,7 @@ import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
-import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil;
-import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryLocalServiceBaseImpl;
-import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
-import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotUtil;
-import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
 import com.liferay.portlet.softwarecatalog.util.Indexer;
 import com.liferay.util.Time;
 import com.liferay.util.lucene.HitsImpl;
@@ -139,7 +129,7 @@ public class SCProductEntryLocalServiceImpl
 
 		// Product entry
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		tags = getTags(tags);
 		Date now = new Date();
@@ -148,9 +138,10 @@ public class SCProductEntryLocalServiceImpl
 			name, type, shortDescription, pageURL, author, licenseIds,
 			thumbnails, fullImages);
 
-		long productEntryId = CounterLocalServiceUtil.increment();
+		long productEntryId = counterLocalService.increment();
 
-		SCProductEntry productEntry = SCProductEntryUtil.create(productEntryId);
+		SCProductEntry productEntry = scProductEntryPersistence.create(
+			productEntryId);
 
 		productEntry.setGroupId(groupId);
 		productEntry.setCompanyId(user.getCompanyId());
@@ -168,7 +159,7 @@ public class SCProductEntryLocalServiceImpl
 		productEntry.setRepoGroupId(repoGroupId);
 		productEntry.setRepoArtifactId(repoArtifactId);
 
-		SCProductEntryUtil.update(productEntry);
+		scProductEntryPersistence.update(productEntry);
 
 		// Resources
 
@@ -186,7 +177,7 @@ public class SCProductEntryLocalServiceImpl
 
 		// Licenses
 
-		SCProductEntryUtil.setSCLicenses(productEntryId, licenseIds);
+		scProductEntryPersistence.setSCLicenses(productEntryId, licenseIds);
 
 		// Product screenshots
 
@@ -213,8 +204,8 @@ public class SCProductEntryLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
-			productEntryId);
+		SCProductEntry productEntry =
+			scProductEntryPersistence.findByPrimaryKey(productEntryId);
 
 		addProductEntryResources(
 			productEntry, addCommunityPermissions, addGuestPermissions);
@@ -225,7 +216,7 @@ public class SCProductEntryLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			productEntry.getCompanyId(), productEntry.getGroupId(),
 			productEntry.getUserId(), SCProductEntry.class.getName(),
 			productEntry.getProductEntryId(), false, addCommunityPermissions,
@@ -237,8 +228,8 @@ public class SCProductEntryLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
-			productEntryId);
+		SCProductEntry productEntry =
+			scProductEntryPersistence.findByPrimaryKey(productEntryId);
 
 		addProductEntryResources(
 			productEntry, communityPermissions, guestPermissions);
@@ -249,7 +240,7 @@ public class SCProductEntryLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			productEntry.getCompanyId(), productEntry.getGroupId(),
 			productEntry.getUserId(), SCProductEntry.class.getName(),
 			productEntry.getProductEntryId(), communityPermissions,
@@ -259,8 +250,8 @@ public class SCProductEntryLocalServiceImpl
 	public void deleteProductEntry(long productEntryId)
 		throws PortalException, SystemException {
 
-		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
-			productEntryId);
+		SCProductEntry productEntry =
+			scProductEntryPersistence.findByPrimaryKey(productEntryId);
 
 		deleteProductEntry(productEntry);
 	}
@@ -281,58 +272,59 @@ public class SCProductEntryLocalServiceImpl
 
 		// Product screenshots
 
-		SCProductScreenshotLocalServiceUtil.deleteProductScreenshots(
+		scProductScreenshotLocalService.deleteProductScreenshots(
 			productEntry.getProductEntryId());
 
 		// Product versions
 
-		SCProductVersionLocalServiceUtil.deleteProductVersions(
+		scProductVersionLocalService.deleteProductVersions(
 			productEntry.getProductEntryId());
 
 		// Ratings
 
-		RatingsStatsLocalServiceUtil.deleteStats(
+		ratingsStatsLocalService.deleteStats(
 			SCProductEntry.class.getName(), productEntry.getProductEntryId());
 
 		// Message boards
 
-		MBMessageLocalServiceUtil.deleteDiscussionMessages(
+		mbMessageLocalService.deleteDiscussionMessages(
 			SCProductEntry.class.getName(), productEntry.getProductEntryId());
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			productEntry.getCompanyId(), SCProductEntry.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, productEntry.getProductEntryId());
 
 		// Product entry
 
-		SCProductEntryUtil.remove(productEntry);
+		scProductEntryPersistence.remove(productEntry);
 	}
 
 	public SCProductEntry getProductEntry(long productEntryId)
 		throws PortalException, SystemException {
 
-		return SCProductEntryUtil.findByPrimaryKey(productEntryId);
+		return scProductEntryPersistence.findByPrimaryKey(productEntryId);
 	}
 
 	public List getProductEntries(long groupId, int begin, int end)
 		throws SystemException {
 
-		return SCProductEntryUtil.findByGroupId(groupId, begin, end);
+		return scProductEntryPersistence.findByGroupId(groupId, begin, end);
 	}
 
 	public List getProductEntries(
 			long groupId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return SCProductEntryUtil.findByGroupId(groupId, begin, end, obc);
+		return scProductEntryPersistence.findByGroupId(
+			groupId, begin, end, obc);
 	}
 
 	public List getProductEntries(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
-		return SCProductEntryUtil.findByG_U(groupId, userId, begin, end);
+		return scProductEntryPersistence.findByG_U(groupId, userId, begin, end);
 	}
 
 	public List getProductEntries(
@@ -340,19 +332,20 @@ public class SCProductEntryLocalServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		return SCProductEntryUtil.findByG_U(groupId, userId, begin, end, obc);
+		return scProductEntryPersistence.findByG_U(
+			groupId, userId, begin, end, obc);
 	}
 
 	public int getProductEntriesCount(long groupId)
 		throws SystemException {
 
-		return SCProductEntryUtil.countByGroupId(groupId);
+		return scProductEntryPersistence.countByGroupId(groupId);
 	}
 
 	public int getProductEntriesCount(long groupId, long userId)
 		throws SystemException {
 
-		return SCProductEntryUtil.countByG_U(groupId, userId);
+		return scProductEntryPersistence.countByG_U(groupId, userId);
 	}
 
 	public String getRepositoryXML(
@@ -370,7 +363,7 @@ public class SCProductEntryLocalServiceImpl
 
 		populateSettingsElement(settingsEl, repoSettings);
 
-		List productEntries = SCProductEntryUtil.findByGroupId(groupId);
+		List productEntries = scProductEntryPersistence.findByGroupId(groupId);
 
 		Iterator itr = productEntries.iterator();
 
@@ -383,8 +376,9 @@ public class SCProductEntryLocalServiceImpl
 				continue;
 			}
 
-			List productVersions = SCProductVersionUtil.findByProductEntryId(
-				productEntry.getProductEntryId());
+			List productVersions =
+				scProductVersionPersistence.findByProductEntryId(
+					productEntry.getProductEntryId());
 
 			Iterator itr2 = productVersions.iterator();
 
@@ -423,7 +417,7 @@ public class SCProductEntryLocalServiceImpl
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator itr = SCProductEntryUtil.findByCompanyId(
+			Iterator itr = scProductEntryPersistence.findByCompanyId(
 				companyId).iterator();
 
 			while (itr.hasNext()) {
@@ -544,8 +538,8 @@ public class SCProductEntryLocalServiceImpl
 			name, type, shortDescription, pageURL, author, licenseIds,
 			thumbnails, fullImages);
 
-		SCProductEntry productEntry = SCProductEntryUtil.findByPrimaryKey(
-			productEntryId);
+		SCProductEntry productEntry =
+			scProductEntryPersistence.findByPrimaryKey(productEntryId);
 
 		productEntry.setModifiedDate(now);
 		productEntry.setName(name);
@@ -558,16 +552,16 @@ public class SCProductEntryLocalServiceImpl
 		productEntry.setRepoGroupId(repoGroupId);
 		productEntry.setRepoArtifactId(repoArtifactId);
 
-		SCProductEntryUtil.update(productEntry);
+		scProductEntryPersistence.update(productEntry);
 
 		// Licenses
 
-		SCProductEntryUtil.setSCLicenses(productEntryId, licenseIds);
+		scProductEntryPersistence.setSCLicenses(productEntryId, licenseIds);
 
 		// Product screenshots
 
 		if (thumbnails.size() == 0) {
-			SCProductScreenshotLocalServiceUtil.deleteProductScreenshots(
+			scProductScreenshotLocalService.deleteProductScreenshots(
 				productEntryId);
 		}
 		else {
@@ -578,7 +572,7 @@ public class SCProductEntryLocalServiceImpl
 
 		String version = StringPool.BLANK;
 
-		List productVersions = SCProductVersionUtil.findByProductEntryId(
+		List productVersions = scProductVersionPersistence.findByProductEntryId(
 			productEntryId, 0, 1);
 
 		if (productVersions.size() > 0) {
@@ -587,7 +581,7 @@ public class SCProductEntryLocalServiceImpl
 
 			productVersion.setModifiedDate(now);
 
-			SCProductVersionUtil.update(productVersion);
+			scProductVersionPersistence.update(productVersion);
 
 			version = productVersion.getVersion();
 		}
@@ -738,7 +732,7 @@ public class SCProductEntryLocalServiceImpl
 		long productEntryId = productEntry.getProductEntryId();
 
 		List productScreenshots =
-			SCProductScreenshotUtil.findByProductEntryId(productEntryId);
+			scProductScreenshotPersistence.findByProductEntryId(productEntryId);
 
 		if (thumbnails.size() < productScreenshots.size()) {
 			for (int i = thumbnails.size(); i < productScreenshots.size();
@@ -747,7 +741,7 @@ public class SCProductEntryLocalServiceImpl
 				SCProductScreenshot productScreenshot =
 					(SCProductScreenshot)productScreenshots.get(i);
 
-				SCProductScreenshotLocalServiceUtil.deleteProductScreenshot(
+				scProductScreenshotLocalService.deleteProductScreenshot(
 					productScreenshot);
 			}
 		}
@@ -759,15 +753,16 @@ public class SCProductEntryLocalServiceImpl
 			byte[] fullImage = (byte[])fullImages.get(i);
 
 			SCProductScreenshot productScreenshot =
-				SCProductScreenshotUtil.fetchByP_P(productEntryId, priority);
+				scProductScreenshotPersistence.fetchByP_P(
+					productEntryId, priority);
 
 			if (productScreenshot == null) {
-				long productScreenshotId = CounterLocalServiceUtil.increment();
+				long productScreenshotId = counterLocalService.increment();
 
-				long thumbnailId = CounterLocalServiceUtil.increment();
-				long fullImageId = CounterLocalServiceUtil.increment();
+				long thumbnailId = counterLocalService.increment();
+				long fullImageId = counterLocalService.increment();
 
-				productScreenshot = SCProductScreenshotUtil.create(
+				productScreenshot = scProductScreenshotPersistence.create(
 					productScreenshotId);
 
 				productScreenshot.setCompanyId(productEntry.getCompanyId());
@@ -777,7 +772,7 @@ public class SCProductEntryLocalServiceImpl
 				productScreenshot.setFullImageId(fullImageId);
 				productScreenshot.setPriority(priority);
 
-				SCProductScreenshotUtil.update(productScreenshot);
+				scProductScreenshotPersistence.update(productScreenshot);
 			}
 
 			ImageLocalUtil.updateImage(

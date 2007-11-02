@@ -52,6 +52,14 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileEntry" />
+		<reference package-path="com.liferay.portlet.journal" entity="JournalArticleResource" />
+		<reference package-path="com.liferay.portlet.wiki" entity="WikiPageResource" />
 	</entity>
 	<entity name="TagsEntry" local-service="true" remote-service="true">
 
@@ -87,6 +95,11 @@
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="TagsProperty" local-service="true" remote-service="true">
 
@@ -130,6 +143,11 @@
 			<finder-column name="entryId" />
 			<finder-column name="key" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="TagsPropertyKey" local-service="false" remote-service="false" />
 	<entity name="TagsSource" local-service="true" remote-service="true">

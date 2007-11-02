@@ -22,8 +22,33 @@
 
 package com.liferay.portlet.tags.service.base;
 
-import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.UserLocalServiceFactory;
+import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.UserFinder;
+import com.liferay.portal.service.persistence.UserFinderUtil;
+import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.service.persistence.UserUtil;
+
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderUtil;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
+import com.liferay.portlet.journal.service.JournalArticleResourceLocalService;
+import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory;
+import com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence;
+import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
@@ -55,6 +80,10 @@ import com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.service.persistence.TagsSourcePersistence;
 import com.liferay.portlet.tags.service.persistence.TagsSourceUtil;
+import com.liferay.portlet.wiki.service.WikiPageResourceLocalService;
+import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory;
+import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
+import com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
@@ -195,6 +224,124 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 		this.tagsSourcePersistence = tagsSourcePersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
+	public UserLocalService getUserLocalService() {
+		return userLocalService;
+	}
+
+	public void setUserLocalService(UserLocalService userLocalService) {
+		this.userLocalService = userLocalService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public UserPersistence getUserPersistence() {
+		return userPersistence;
+	}
+
+	public void setUserPersistence(UserPersistence userPersistence) {
+		this.userPersistence = userPersistence;
+	}
+
+	public UserFinder getUserFinder() {
+		return userFinder;
+	}
+
+	public void setUserFinder(UserFinder userFinder) {
+		this.userFinder = userFinder;
+	}
+
+	public DLFileEntryLocalService getDLFileEntryLocalService() {
+		return dlFileEntryLocalService;
+	}
+
+	public void setDLFileEntryLocalService(
+		DLFileEntryLocalService dlFileEntryLocalService) {
+		this.dlFileEntryLocalService = dlFileEntryLocalService;
+	}
+
+	public DLFileEntryService getDLFileEntryService() {
+		return dlFileEntryService;
+	}
+
+	public void setDLFileEntryService(DLFileEntryService dlFileEntryService) {
+		this.dlFileEntryService = dlFileEntryService;
+	}
+
+	public DLFileEntryPersistence getDLFileEntryPersistence() {
+		return dlFileEntryPersistence;
+	}
+
+	public void setDLFileEntryPersistence(
+		DLFileEntryPersistence dlFileEntryPersistence) {
+		this.dlFileEntryPersistence = dlFileEntryPersistence;
+	}
+
+	public DLFileEntryFinder getDLFileEntryFinder() {
+		return dlFileEntryFinder;
+	}
+
+	public void setDLFileEntryFinder(DLFileEntryFinder dlFileEntryFinder) {
+		this.dlFileEntryFinder = dlFileEntryFinder;
+	}
+
+	public JournalArticleResourceLocalService getJournalArticleResourceLocalService() {
+		return journalArticleResourceLocalService;
+	}
+
+	public void setJournalArticleResourceLocalService(
+		JournalArticleResourceLocalService journalArticleResourceLocalService) {
+		this.journalArticleResourceLocalService = journalArticleResourceLocalService;
+	}
+
+	public JournalArticleResourcePersistence getJournalArticleResourcePersistence() {
+		return journalArticleResourcePersistence;
+	}
+
+	public void setJournalArticleResourcePersistence(
+		JournalArticleResourcePersistence journalArticleResourcePersistence) {
+		this.journalArticleResourcePersistence = journalArticleResourcePersistence;
+	}
+
+	public WikiPageResourceLocalService getWikiPageResourceLocalService() {
+		return wikiPageResourceLocalService;
+	}
+
+	public void setWikiPageResourceLocalService(
+		WikiPageResourceLocalService wikiPageResourceLocalService) {
+		this.wikiPageResourceLocalService = wikiPageResourceLocalService;
+	}
+
+	public WikiPageResourcePersistence getWikiPageResourcePersistence() {
+		return wikiPageResourcePersistence;
+	}
+
+	public void setWikiPageResourcePersistence(
+		WikiPageResourcePersistence wikiPageResourcePersistence) {
+		this.wikiPageResourcePersistence = wikiPageResourcePersistence;
+	}
+
 	public void afterPropertiesSet() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
@@ -255,6 +402,62 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 		if (tagsSourcePersistence == null) {
 			tagsSourcePersistence = TagsSourceUtil.getPersistence();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
+
+		if (userLocalService == null) {
+			userLocalService = UserLocalServiceFactory.getImpl();
+		}
+
+		if (userService == null) {
+			userService = UserServiceFactory.getImpl();
+		}
+
+		if (userPersistence == null) {
+			userPersistence = UserUtil.getPersistence();
+		}
+
+		if (userFinder == null) {
+			userFinder = UserFinderUtil.getFinder();
+		}
+
+		if (dlFileEntryLocalService == null) {
+			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
+		}
+
+		if (dlFileEntryService == null) {
+			dlFileEntryService = DLFileEntryServiceFactory.getImpl();
+		}
+
+		if (dlFileEntryPersistence == null) {
+			dlFileEntryPersistence = DLFileEntryUtil.getPersistence();
+		}
+
+		if (dlFileEntryFinder == null) {
+			dlFileEntryFinder = DLFileEntryFinderUtil.getFinder();
+		}
+
+		if (journalArticleResourceLocalService == null) {
+			journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getImpl();
+		}
+
+		if (journalArticleResourcePersistence == null) {
+			journalArticleResourcePersistence = JournalArticleResourceUtil.getPersistence();
+		}
+
+		if (wikiPageResourceLocalService == null) {
+			wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getImpl();
+		}
+
+		if (wikiPageResourcePersistence == null) {
+			wikiPageResourcePersistence = WikiPageResourceUtil.getPersistence();
+		}
 	}
 
 	protected TagsAssetLocalService tagsAssetLocalService;
@@ -272,4 +475,18 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 	protected TagsSourceLocalService tagsSourceLocalService;
 	protected TagsSourceService tagsSourceService;
 	protected TagsSourcePersistence tagsSourcePersistence;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
+	protected UserLocalService userLocalService;
+	protected UserService userService;
+	protected UserPersistence userPersistence;
+	protected UserFinder userFinder;
+	protected DLFileEntryLocalService dlFileEntryLocalService;
+	protected DLFileEntryService dlFileEntryService;
+	protected DLFileEntryPersistence dlFileEntryPersistence;
+	protected DLFileEntryFinder dlFileEntryFinder;
+	protected JournalArticleResourceLocalService journalArticleResourceLocalService;
+	protected JournalArticleResourcePersistence journalArticleResourcePersistence;
+	protected WikiPageResourceLocalService wikiPageResourceLocalService;
+	protected WikiPageResourcePersistence wikiPageResourcePersistence;
 }

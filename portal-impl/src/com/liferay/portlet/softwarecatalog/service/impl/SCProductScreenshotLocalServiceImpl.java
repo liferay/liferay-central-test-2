@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductScreenshotLocalServiceBaseImpl;
-import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotUtil;
 
 import java.util.Iterator;
 import java.util.List;
@@ -48,13 +47,13 @@ public class SCProductScreenshotLocalServiceImpl
 		ImageLocalUtil.deleteImage(productScreenshot.getThumbnailId());
 		ImageLocalUtil.deleteImage(productScreenshot.getFullImageId());
 
-		SCProductScreenshotUtil.remove(productScreenshot);
+		scProductScreenshotPersistence.remove(productScreenshot);
 	}
 
 	public void deleteProductScreenshots(long productEntryId)
 		throws SystemException {
 
-		Iterator itr = SCProductScreenshotUtil.findByProductEntryId(
+		Iterator itr = scProductScreenshotPersistence.findByProductEntryId(
 			productEntryId).iterator();
 
 		while (itr.hasNext()) {
@@ -69,13 +68,15 @@ public class SCProductScreenshotLocalServiceImpl
 			long productEntryId, int priority)
 		throws PortalException, SystemException {
 
-		return SCProductScreenshotUtil.findByP_P(productEntryId, priority);
+		return scProductScreenshotPersistence.findByP_P(
+			productEntryId, priority);
 	}
 
 	public List getProductScreenshots(long productEntryId)
 		throws SystemException {
 
-		return SCProductScreenshotUtil.findByProductEntryId(productEntryId);
+		return scProductScreenshotPersistence.findByProductEntryId(
+			productEntryId);
 	}
 
 }

@@ -22,24 +22,16 @@
 
 package com.liferay.portlet.ratings.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
-import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil;
-import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
-import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
 import com.liferay.portlet.ratings.NoSuchEntryException;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
-import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.portlet.ratings.service.base.RatingsEntryLocalServiceBaseImpl;
-import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
-import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 
 import java.util.Date;
 
@@ -58,7 +50,8 @@ public class RatingsEntryLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return RatingsEntryUtil.findByU_C_C(userId, classNameId, classPK);
+		return ratingsEntryPersistence.findByU_C_C(
+			userId, classNameId, classPK);
 	}
 
 	public RatingsEntry updateEntry(
@@ -74,34 +67,35 @@ public class RatingsEntryLocalServiceImpl
 		RatingsEntry entry = null;
 
 		try {
-			entry = RatingsEntryUtil.findByU_C_C(userId, classNameId, classPK);
+			entry = ratingsEntryPersistence.findByU_C_C(
+				userId, classNameId, classPK);
 
 			oldScore = entry.getScore();
 
 			entry.setModifiedDate(now);
 			entry.setScore(score);
 
-			RatingsEntryUtil.update(entry);
+			ratingsEntryPersistence.update(entry);
 
 			// Stats
 
-			RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(
+			RatingsStats stats = ratingsStatsLocalService.getStats(
 				className, classPK);
 
 			stats.setTotalScore(stats.getTotalScore() - oldScore + score);
 			stats.setAverageScore(
 				stats.getTotalScore() / stats.getTotalEntries());
 
-			RatingsStatsUtil.update(stats);
+			ratingsStatsPersistence.update(stats);
 		}
 		catch (NoSuchEntryException nsee) {
 			newEntry = true;
 
-			User user = UserUtil.findByPrimaryKey(userId);
+			User user = userPersistence.findByPrimaryKey(userId);
 
-			long entryId = CounterLocalServiceUtil.increment();
+			long entryId = counterLocalService.increment();
 
-			entry = RatingsEntryUtil.create(entryId);
+			entry = ratingsEntryPersistence.create(entryId);
 
 			entry.setCompanyId(user.getCompanyId());
 			entry.setUserId(user.getUserId());
@@ -112,11 +106,11 @@ public class RatingsEntryLocalServiceImpl
 			entry.setClassPK(classPK);
 			entry.setScore(score);
 
-			RatingsEntryUtil.update(entry);
+			ratingsEntryPersistence.update(entry);
 
 			// Stats
 
-			RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(
+			RatingsStats stats = ratingsStatsLocalService.getStats(
 				className, classPK);
 
 			stats.setTotalEntries(stats.getTotalEntries() + 1);
@@ -124,16 +118,17 @@ public class RatingsEntryLocalServiceImpl
 			stats.setAverageScore(
 				stats.getTotalScore() / stats.getTotalEntries());
 
-			RatingsStatsUtil.update(stats);
+			ratingsStatsPersistence.update(stats);
 		}
 
 		// Blogs entry
 
 		if (className.equals(BlogsEntry.class.getName())) {
-			BlogsEntry blogsEntry = BlogsEntryUtil.findByPrimaryKey(classPK);
+			BlogsEntry blogsEntry = blogsEntryPersistence.findByPrimaryKey(
+				classPK);
 
 			BlogsStatsUser blogsStasUser =
-				BlogsStatsUserLocalServiceUtil.getStatsUser(
+				blogsStatsUserLocalService.getStatsUser(
 					blogsEntry.getGroupId(), blogsEntry.getUserId());
 
 			int ratingsTotalEntries = blogsStasUser.getRatingsTotalEntries();
@@ -154,7 +149,7 @@ public class RatingsEntryLocalServiceImpl
 			blogsStasUser.setRatingsTotalScore(ratingsTotalScore);
 			blogsStasUser.setRatingsAverageScore(ratingsAverageScore);
 
-			BlogsStatsUserUtil.update(blogsStasUser);
+			blogsStatsUserPersistence.update(blogsStasUser);
 		}
 
 		return entry;

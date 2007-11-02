@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.polls.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.service.impl.PrincipalBean;
 
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
@@ -113,6 +118,22 @@ public abstract class PollsVoteServiceBaseImpl extends PrincipalBean
 		this.pollsVotePersistence = pollsVotePersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	public void afterPropertiesSet() {
 		if (pollsChoiceLocalService == null) {
 			pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getImpl();
@@ -141,6 +162,14 @@ public abstract class PollsVoteServiceBaseImpl extends PrincipalBean
 		if (pollsVotePersistence == null) {
 			pollsVotePersistence = PollsVoteUtil.getPersistence();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
 	}
 
 	protected PollsChoiceLocalService pollsChoiceLocalService;
@@ -150,4 +179,6 @@ public abstract class PollsVoteServiceBaseImpl extends PrincipalBean
 	protected PollsQuestionPersistence pollsQuestionPersistence;
 	protected PollsVoteLocalService pollsVoteLocalService;
 	protected PollsVotePersistence pollsVotePersistence;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
 }

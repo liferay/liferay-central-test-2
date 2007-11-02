@@ -126,6 +126,54 @@ public class SCFrameworkVersionLocalServiceUtil {
 		scFrameworkVersionLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+		scFrameworkVersionLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+		scFrameworkVersionLocalService.setResourceFinder(resourceFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+		scFrameworkVersionLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+		scFrameworkVersionLocalService.setUserFinder(userFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
 		scFrameworkVersionLocalService.afterPropertiesSet();

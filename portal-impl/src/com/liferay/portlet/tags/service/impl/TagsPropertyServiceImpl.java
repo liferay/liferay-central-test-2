@@ -25,7 +25,6 @@ package com.liferay.portlet.tags.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.tags.model.TagsProperty;
-import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsPropertyServiceBaseImpl;
 
 import java.util.List;
@@ -41,39 +40,38 @@ public class TagsPropertyServiceImpl extends TagsPropertyServiceBaseImpl {
 	public TagsProperty addProperty(long entryId, String key, String value)
 		throws PortalException, SystemException {
 
-		return TagsPropertyLocalServiceUtil.addProperty(
+		return tagsPropertyLocalService.addProperty(
 			getUserId(), entryId, key, value);
 	}
 
 	public TagsProperty addProperty(String entryName, String key, String value)
 		throws PortalException, SystemException {
 
-		return TagsPropertyLocalServiceUtil.addProperty(
+		return tagsPropertyLocalService.addProperty(
 			getUserId(), entryName, key, value);
 	}
 
 	public void deleteProperty(long propertyId)
 		throws PortalException, SystemException {
 
-		TagsPropertyLocalServiceUtil.deleteProperty(propertyId);
+		tagsPropertyLocalService.deleteProperty(propertyId);
 	}
 
 	public List getProperties(long entryId) throws SystemException {
-		return TagsPropertyLocalServiceUtil.getProperties(entryId);
+		return tagsPropertyLocalService.getProperties(entryId);
 	}
 
 	public List getPropertyValues(long companyId, String key)
 		throws SystemException {
 
-		return TagsPropertyLocalServiceUtil.getPropertyValues(companyId, key);
+		return tagsPropertyLocalService.getPropertyValues(companyId, key);
 	}
 
 	public TagsProperty updateProperty(
 			long propertyId, String key, String value)
 		throws PortalException, SystemException {
 
-		return TagsPropertyLocalServiceUtil.updateProperty(
-			propertyId, key, value);
+		return tagsPropertyLocalService.updateProperty(propertyId, key, value);
 	}
 
 }

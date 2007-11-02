@@ -24,7 +24,6 @@ package com.liferay.portlet.workflow.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
 import com.liferay.portlet.workflow.service.base.WorkflowTaskServiceBaseImpl;
 
 import java.rmi.RemoteException;
@@ -43,7 +42,7 @@ public class WorkflowTaskServiceImpl extends WorkflowTaskServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		try {
-			return WorkflowComponentServiceUtil.updateTask(
+			return workflowComponentService.updateTask(
 				taskId, transition, parameterMap);
 		}
 		catch (RemoteException re) {

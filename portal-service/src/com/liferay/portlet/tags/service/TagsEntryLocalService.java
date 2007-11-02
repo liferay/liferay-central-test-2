@@ -97,6 +97,16 @@ public interface TagsEntryLocalService {
 	public void setTagsSourcePersistence(
 		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence);
 
+	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
+
+	public void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,

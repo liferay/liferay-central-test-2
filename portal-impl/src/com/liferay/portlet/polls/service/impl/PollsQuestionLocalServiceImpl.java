@@ -22,14 +22,11 @@
 
 package com.liferay.portlet.polls.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.polls.QuestionChoiceException;
 import com.liferay.portlet.polls.QuestionDescriptionException;
@@ -37,11 +34,7 @@ import com.liferay.portlet.polls.QuestionExpirationDateException;
 import com.liferay.portlet.polls.QuestionTitleException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
-import com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil;
 import com.liferay.portlet.polls.service.base.PollsQuestionLocalServiceBaseImpl;
-import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
-import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
-import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -115,7 +108,7 @@ public class PollsQuestionLocalServiceImpl
 
 		// Question
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
@@ -130,9 +123,9 @@ public class PollsQuestionLocalServiceImpl
 
 		validate(title, description, choices);
 
-		long questionId = CounterLocalServiceUtil.increment();
+		long questionId = counterLocalService.increment();
 
-		PollsQuestion question = PollsQuestionUtil.create(questionId);
+		PollsQuestion question = pollsQuestionPersistence.create(questionId);
 
 		question.setGroupId(groupId);
 		question.setCompanyId(user.getCompanyId());
@@ -144,7 +137,7 @@ public class PollsQuestionLocalServiceImpl
 		question.setDescription(description);
 		question.setExpirationDate(expirationDate);
 
-		PollsQuestionUtil.update(question);
+		pollsQuestionPersistence.update(question);
 
 		// Resources
 
@@ -168,7 +161,7 @@ public class PollsQuestionLocalServiceImpl
 			while (itr.hasNext()) {
 				PollsChoice choice = (PollsChoice)itr.next();
 
-				PollsChoiceLocalServiceUtil.addChoice(
+				pollsChoiceLocalService.addChoice(
 					questionId, choice.getName(), choice.getDescription());
 			}
 		}
@@ -181,7 +174,8 @@ public class PollsQuestionLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		PollsQuestion question = PollsQuestionUtil.findByPrimaryKey(questionId);
+		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
+			questionId);
 
 		addQuestionResources(
 			question, addCommunityPermissions, addGuestPermissions);
@@ -192,7 +186,7 @@ public class PollsQuestionLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			question.getCompanyId(), question.getGroupId(),
 			question.getUserId(), PollsQuestion.class.getName(),
 			question.getQuestionId(), false, addCommunityPermissions,
@@ -204,7 +198,8 @@ public class PollsQuestionLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		PollsQuestion question = PollsQuestionUtil.findByPrimaryKey(questionId);
+		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
+			questionId);
 
 		addQuestionResources(question, communityPermissions, guestPermissions);
 	}
@@ -214,7 +209,7 @@ public class PollsQuestionLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			question.getCompanyId(), question.getGroupId(),
 			question.getUserId(), PollsQuestion.class.getName(),
 			question.getQuestionId(), communityPermissions, guestPermissions);
@@ -223,7 +218,8 @@ public class PollsQuestionLocalServiceImpl
 	public void deleteQuestion(long questionId)
 		throws PortalException, SystemException {
 
-		PollsQuestion question = PollsQuestionUtil.findByPrimaryKey(questionId);
+		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
+			questionId);
 
 		deleteQuestion(question);
 	}
@@ -233,27 +229,28 @@ public class PollsQuestionLocalServiceImpl
 
 		// Votes
 
-		PollsVoteUtil.removeByQuestionId(question.getQuestionId());
+		pollsVotePersistence.removeByQuestionId(question.getQuestionId());
 
 		// Choices
 
-		PollsChoiceUtil.removeByQuestionId(question.getQuestionId());
+		pollsChoicePersistence.removeByQuestionId(question.getQuestionId());
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			question.getCompanyId(), PollsQuestion.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, question.getQuestionId());
 
 		// Question
 
-		PollsQuestionUtil.remove(question.getQuestionId());
+		pollsQuestionPersistence.remove(question.getQuestionId());
 	}
 
 	public void deleteQuestions(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = PollsQuestionUtil.findByGroupId(groupId).iterator();
+		Iterator itr = pollsQuestionPersistence.findByGroupId(
+			groupId).iterator();
 
 		while (itr.hasNext()) {
 			PollsQuestion question = (PollsQuestion)itr.next();
@@ -265,21 +262,21 @@ public class PollsQuestionLocalServiceImpl
 	public PollsQuestion getQuestion(long questionId)
 		throws PortalException, SystemException {
 
-		return PollsQuestionUtil.findByPrimaryKey(questionId);
+		return pollsQuestionPersistence.findByPrimaryKey(questionId);
 	}
 
 	public List getQuestions(long groupId) throws SystemException {
-		return PollsQuestionUtil.findByGroupId(groupId);
+		return pollsQuestionPersistence.findByGroupId(groupId);
 	}
 
 	public List getQuestions(long groupId, int begin, int end)
 		throws SystemException {
 
-		return PollsQuestionUtil.findByGroupId(groupId, begin, end);
+		return pollsQuestionPersistence.findByGroupId(groupId, begin, end);
 	}
 
 	public int getQuestionsCount(long groupId) throws SystemException {
-		return PollsQuestionUtil.countByGroupId(groupId);
+		return pollsQuestionPersistence.countByGroupId(groupId);
 	}
 
 	public PollsQuestion updateQuestion(
@@ -291,7 +288,7 @@ public class PollsQuestionLocalServiceImpl
 
 		// Question
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		Date expirationDate = null;
 
@@ -304,18 +301,20 @@ public class PollsQuestionLocalServiceImpl
 
 		validate(title, description, choices);
 
-		PollsQuestion question = PollsQuestionUtil.findByPrimaryKey(questionId);
+		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
+			questionId);
 
 		question.setModifiedDate(new Date());
 		question.setTitle(title);
 		question.setDescription(description);
 		question.setExpirationDate(expirationDate);
 
-		PollsQuestionUtil.update(question);
+		pollsQuestionPersistence.update(question);
 
 		// Choices
 
-		int oldChoicesCount = PollsChoiceUtil.countByQuestionId(questionId);
+		int oldChoicesCount = pollsChoicePersistence.countByQuestionId(
+			questionId);
 
 		if (oldChoicesCount != choices.size()) {
 			throw new QuestionChoiceException();
@@ -329,16 +328,16 @@ public class PollsQuestionLocalServiceImpl
 			String choiceName = choice.getName();
 			String choiceDescription = choice.getDescription();
 
-			choice = PollsChoiceUtil.fetchByQ_N(questionId, choiceName);
+			choice = pollsChoicePersistence.fetchByQ_N(questionId, choiceName);
 
 			if (choice == null) {
-				choice = PollsChoiceLocalServiceUtil.addChoice(
+				choice = pollsChoiceLocalService.addChoice(
 					questionId, choice.getName(), choice.getDescription());
 			}
 
 			choice.setDescription(choiceDescription);
 
-			PollsChoiceUtil.update(choice);
+			pollsChoicePersistence.update(choice);
 		}
 
 		return question;

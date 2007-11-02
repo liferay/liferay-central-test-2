@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
 import com.liferay.portlet.tags.model.TagsAssetType;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsAssetServiceBaseImpl;
 
 import java.util.Date;
@@ -45,43 +44,41 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 	public void deleteAsset(long assetId)
 		throws PortalException, SystemException {
 
-		TagsAssetLocalServiceUtil.deleteAsset(assetId);
+		tagsAssetLocalService.deleteAsset(assetId);
 	}
 
 	public TagsAsset getAsset(long assetId)
 		throws PortalException, SystemException {
 
-		return TagsAssetLocalServiceUtil.getAsset(assetId);
+		return tagsAssetLocalService.getAsset(assetId);
 	}
 
 	public TagsAssetType[] getAssetTypes(String languageId) {
-		return TagsAssetLocalServiceUtil.getAssetTypes(languageId);
+		return tagsAssetLocalService.getAssetTypes(languageId);
 	}
 
 	public TagsAssetDisplay[] getCompanyAssetDisplays(
 			long companyId, int begin, int end, String languageId)
 		throws PortalException, SystemException {
 
-		return TagsAssetLocalServiceUtil.getCompanyAssetDisplays(
+		return tagsAssetLocalService.getCompanyAssetDisplays(
 			companyId, begin, end, languageId);
 	}
 
 	public List getCompanyAssets(long companyId, int begin, int end)
 		throws SystemException {
 
-		return TagsAssetLocalServiceUtil.getCompanyAssets(
-			companyId, begin, end);
+		return tagsAssetLocalService.getCompanyAssets(companyId, begin, end);
 	}
 
 	public int getCompanyAssetsCount(long companyId) throws SystemException {
-		return TagsAssetLocalServiceUtil.getCompanyAssetsCount(companyId);
+		return tagsAssetLocalService.getCompanyAssetsCount(companyId);
 	}
 
 	public TagsAsset incrementViewCounter(String className, long classPK)
 		throws PortalException, SystemException {
 
-		return TagsAssetLocalServiceUtil.incrementViewCounter(
-			className, classPK);
+		return tagsAssetLocalService.incrementViewCounter(className, classPK);
 	}
 
 	public TagsAssetDisplay[] searchAssetDisplays(
@@ -89,7 +86,7 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 			String languageId, int begin, int end)
 		throws PortalException, SystemException {
 
-		return TagsAssetLocalServiceUtil.searchAssetDisplays(
+		return tagsAssetLocalService.searchAssetDisplays(
 			companyId, portletId, keywords, languageId, begin, end);
 	}
 
@@ -98,7 +95,7 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 			String languageId)
 		throws SystemException {
 
-		return TagsAssetLocalServiceUtil.searchAssetDisplaysCount(
+		return tagsAssetLocalService.searchAssetDisplaysCount(
 			companyId, portletId, keywords, languageId);
 	}
 
@@ -109,7 +106,7 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 			String url, int height, int width)
 		throws PortalException, SystemException {
 
-		return TagsAssetLocalServiceUtil.updateAsset(
+		return tagsAssetLocalService.updateAsset(
 			getUserId(), groupId, className, classPK, entryNames, startDate,
 			endDate, publishDate, expirationDate, mimeType, title, description,
 			summary, url, height, width);

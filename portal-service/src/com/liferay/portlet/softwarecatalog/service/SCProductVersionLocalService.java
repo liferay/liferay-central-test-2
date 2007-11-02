@@ -82,6 +82,16 @@ public interface SCProductVersionLocalService {
 	public void setSCProductVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence);
 
+	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
+
+	public void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(

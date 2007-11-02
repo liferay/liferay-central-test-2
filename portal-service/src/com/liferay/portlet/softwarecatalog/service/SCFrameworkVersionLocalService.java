@@ -82,6 +82,26 @@ public interface SCFrameworkVersionLocalService {
 	public void setSCProductVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence);
 
+	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
+
+	public void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
+
+	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
+
+	public void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
+
+	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
+
+	public void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(

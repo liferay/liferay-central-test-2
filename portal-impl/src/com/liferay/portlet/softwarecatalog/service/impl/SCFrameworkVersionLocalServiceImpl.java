@@ -22,19 +22,14 @@
 
 package com.liferay.portlet.softwarecatalog.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.softwarecatalog.FrameworkVersionNameException;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCFrameworkVersionLocalServiceBaseImpl;
-import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil;
-import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -82,16 +77,17 @@ public class SCFrameworkVersionLocalServiceImpl
 
 		// Framework version
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
 		validate(name);
 
-		long frameworkVersionId = CounterLocalServiceUtil.increment();
+		long frameworkVersionId = counterLocalService.increment();
 
-		SCFrameworkVersion frameworkVersion = SCFrameworkVersionUtil.create(
-			frameworkVersionId);
+		SCFrameworkVersion frameworkVersion =
+			scFrameworkVersionPersistence.create(
+				frameworkVersionId);
 
 		frameworkVersion.setGroupId(groupId);
 		frameworkVersion.setCompanyId(user.getCompanyId());
@@ -104,7 +100,7 @@ public class SCFrameworkVersionLocalServiceImpl
 		frameworkVersion.setActive(active);
 		frameworkVersion.setPriority(priority);
 
-		SCFrameworkVersionUtil.update(frameworkVersion);
+		scFrameworkVersionPersistence.update(frameworkVersion);
 
 		// Resources
 
@@ -129,7 +125,7 @@ public class SCFrameworkVersionLocalServiceImpl
 		throws PortalException, SystemException {
 
 		SCFrameworkVersion frameworkVersion =
-			SCFrameworkVersionUtil.findByPrimaryKey(frameworkVersionId);
+			scFrameworkVersionPersistence.findByPrimaryKey(frameworkVersionId);
 
 		addFrameworkVersionResources(
 			frameworkVersion, addCommunityPermissions, addGuestPermissions);
@@ -140,7 +136,7 @@ public class SCFrameworkVersionLocalServiceImpl
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			frameworkVersion.getCompanyId(), frameworkVersion.getGroupId(),
 			frameworkVersion.getUserId(), SCFrameworkVersion.class.getName(),
 			frameworkVersion.getFrameworkVersionId(), false,
@@ -153,7 +149,7 @@ public class SCFrameworkVersionLocalServiceImpl
 		throws PortalException, SystemException {
 
 		SCFrameworkVersion frameworkVersion =
-			SCFrameworkVersionUtil.findByPrimaryKey(frameworkVersionId);
+			scFrameworkVersionPersistence.findByPrimaryKey(frameworkVersionId);
 
 		addFrameworkVersionResources(
 			frameworkVersion, communityPermissions, guestPermissions);
@@ -164,7 +160,7 @@ public class SCFrameworkVersionLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			frameworkVersion.getCompanyId(), frameworkVersion.getGroupId(),
 			frameworkVersion.getUserId(), SCFrameworkVersion.class.getName(),
 			frameworkVersion.getFrameworkVersionId(), communityPermissions,
@@ -174,50 +170,53 @@ public class SCFrameworkVersionLocalServiceImpl
 	public void deleteFrameworkVersion(long frameworkVersionId)
 		throws PortalException, SystemException {
 
-		SCFrameworkVersionUtil.remove(frameworkVersionId);
+		scFrameworkVersionPersistence.remove(frameworkVersionId);
 	}
 
 	public SCFrameworkVersion getFrameworkVersion(long frameworkVersionId)
 		throws PortalException, SystemException {
 
-		return SCFrameworkVersionUtil.findByPrimaryKey(frameworkVersionId);
+		return scFrameworkVersionPersistence.findByPrimaryKey(
+			frameworkVersionId);
 	}
 
 	public List getFrameworkVersions(long groupId, int begin, int end)
 		throws SystemException {
 
-		return SCFrameworkVersionUtil.findByGroupId(groupId, begin, end);
+		return scFrameworkVersionPersistence.findByGroupId(groupId, begin, end);
 	}
 
 	public List getFrameworkVersions(long groupId, boolean active)
 		throws SystemException {
 
-		return SCFrameworkVersionUtil.findByG_A(groupId, active);
+		return scFrameworkVersionPersistence.findByG_A(groupId, active);
 	}
 
 	public List getFrameworkVersions(
 			long groupId, boolean active, int begin, int end)
 		throws SystemException {
 
-		return SCFrameworkVersionUtil.findByG_A(groupId, active, begin, end);
+		return scFrameworkVersionPersistence.findByG_A(
+			groupId, active, begin, end);
 	}
 
 	public int getFrameworkVersionsCount(long groupId)
 		throws SystemException {
 
-		return SCFrameworkVersionUtil.countByGroupId(groupId);
+		return scFrameworkVersionPersistence.countByGroupId(groupId);
 	}
 
 	public int getFrameworkVersionsCount(long groupId, boolean active)
 		throws SystemException {
 
-		return SCFrameworkVersionUtil.countByG_A(groupId, active);
+		return scFrameworkVersionPersistence.countByG_A(groupId, active);
 	}
 
 	public List getProductVersionFrameworkVersions(long productVersionId)
 		throws PortalException, SystemException {
 
-		return SCProductVersionUtil.getSCFrameworkVersions(productVersionId);
+		return scProductVersionPersistence.getSCFrameworkVersions(
+			productVersionId);
 	}
 
 	public SCFrameworkVersion updateFrameworkVersion(
@@ -228,14 +227,14 @@ public class SCFrameworkVersionLocalServiceImpl
 		validate(name);
 
 		SCFrameworkVersion frameworkVersion =
-			SCFrameworkVersionUtil.findByPrimaryKey(frameworkVersionId);
+			scFrameworkVersionPersistence.findByPrimaryKey(frameworkVersionId);
 
 		frameworkVersion.setName(name);
 		frameworkVersion.setUrl(url);
 		frameworkVersion.setActive(active);
 		frameworkVersion.setPriority(priority);
 
-		SCFrameworkVersionUtil.update(frameworkVersion);
+		scFrameworkVersionPersistence.update(frameworkVersion);
 
 		return frameworkVersion;
 	}

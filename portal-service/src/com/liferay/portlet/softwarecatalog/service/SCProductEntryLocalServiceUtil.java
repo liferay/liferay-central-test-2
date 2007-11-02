@@ -126,6 +126,90 @@ public class SCProductEntryLocalServiceUtil {
 		scProductEntryLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+		scProductEntryLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+		scProductEntryLocalService.setResourceFinder(resourceFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+		scProductEntryLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+		scProductEntryLocalService.setUserFinder(userFinder);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence() {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getMBMessagePersistence();
+	}
+
+	public static void setMBMessagePersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+		scProductEntryLocalService.setMBMessagePersistence(mbMessagePersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFinder getMBMessageFinder() {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getMBMessageFinder();
+	}
+
+	public static void setMBMessageFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+		scProductEntryLocalService.setMBMessageFinder(mbMessageFinder);
+	}
+
+	public static com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence getRatingsStatsPersistence() {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getRatingsStatsPersistence();
+	}
+
+	public static void setRatingsStatsPersistence(
+		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence) {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+		scProductEntryLocalService.setRatingsStatsPersistence(ratingsStatsPersistence);
+	}
+
 	public static void afterPropertiesSet() {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 		scProductEntryLocalService.afterPropertiesSet();

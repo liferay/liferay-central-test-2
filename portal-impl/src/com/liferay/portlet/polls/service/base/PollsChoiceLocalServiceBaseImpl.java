@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.polls.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
@@ -125,6 +130,22 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		this.pollsVotePersistence = pollsVotePersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	public void afterPropertiesSet() {
 		if (pollsChoicePersistence == null) {
 			pollsChoicePersistence = PollsChoiceUtil.getPersistence();
@@ -153,6 +174,14 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		if (pollsVotePersistence == null) {
 			pollsVotePersistence = PollsVoteUtil.getPersistence();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
 	}
 
 	protected PollsChoicePersistence pollsChoicePersistence;
@@ -162,4 +191,6 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 	protected PollsVoteLocalService pollsVoteLocalService;
 	protected PollsVoteService pollsVoteService;
 	protected PollsVotePersistence pollsVotePersistence;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
 }

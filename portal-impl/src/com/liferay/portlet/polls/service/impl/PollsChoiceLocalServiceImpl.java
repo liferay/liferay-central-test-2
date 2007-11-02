@@ -22,15 +22,12 @@
 
 package com.liferay.portlet.polls.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.polls.QuestionChoiceException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.service.base.PollsChoiceLocalServiceBaseImpl;
-import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
-import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 
 import java.util.List;
 
@@ -49,17 +46,17 @@ public class PollsChoiceLocalServiceImpl
 
 		validate(name, description);
 
-		PollsQuestionUtil.findByPrimaryKey(questionId);
+		pollsQuestionPersistence.findByPrimaryKey(questionId);
 
-		long choiceId = CounterLocalServiceUtil.increment();
+		long choiceId = counterLocalService.increment();
 
-		PollsChoice choice = PollsChoiceUtil.create(choiceId);
+		PollsChoice choice = pollsChoicePersistence.create(choiceId);
 
 		choice.setQuestionId(questionId);
 		choice.setName(name);
 		choice.setDescription(description);
 
-		PollsChoiceUtil.update(choice);
+		pollsChoicePersistence.update(choice);
 
 		return choice;
 	}
@@ -67,11 +64,11 @@ public class PollsChoiceLocalServiceImpl
 	public PollsChoice getChoice(long choiceId)
 		throws PortalException, SystemException {
 
-		return PollsChoiceUtil.findByPrimaryKey(choiceId);
+		return pollsChoicePersistence.findByPrimaryKey(choiceId);
 	}
 
 	public List getChoices(long questionId) throws SystemException {
-		return PollsChoiceUtil.findByQuestionId(questionId);
+		return pollsChoicePersistence.findByQuestionId(questionId);
 	}
 
 	protected void validate(String name, String description)

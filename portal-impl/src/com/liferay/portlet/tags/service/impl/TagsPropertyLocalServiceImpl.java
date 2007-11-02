@@ -22,18 +22,14 @@
 
 package com.liferay.portlet.tags.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.tags.PropertyKeyException;
 import com.liferay.portlet.tags.PropertyValueException;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsProperty;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsPropertyLocalServiceBaseImpl;
-import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.util.TagsUtil;
 
 import java.util.Date;
@@ -54,14 +50,14 @@ public class TagsPropertyLocalServiceImpl
 			long userId, long entryId, String key, String value)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
 		validate(key, value);
 
-		long propertyId = CounterLocalServiceUtil.increment();
+		long propertyId = counterLocalService.increment();
 
-		TagsProperty property = TagsPropertyUtil.create(propertyId);
+		TagsProperty property = tagsPropertyPersistence.create(propertyId);
 
 		property.setCompanyId(user.getCompanyId());
 		property.setUserId(user.getUserId());
@@ -72,7 +68,7 @@ public class TagsPropertyLocalServiceImpl
 		property.setKey(key);
 		property.setValue(value);
 
-		TagsPropertyUtil.update(property);
+		tagsPropertyPersistence.update(property);
 
 		return property;
 	}
@@ -81,9 +77,9 @@ public class TagsPropertyLocalServiceImpl
 			long userId, String entryName, String key, String value)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
-		TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(
+		TagsEntry entry = tagsEntryLocalService.getEntry(
 			user.getCompanyId(), entryName);
 
 		return addProperty(userId, entry.getEntryId(), key, value);
@@ -92,7 +88,8 @@ public class TagsPropertyLocalServiceImpl
 	public void deleteProperties(long entryId)
 		throws PortalException, SystemException {
 
-		Iterator itr = TagsPropertyUtil.findByEntryId(entryId).iterator();
+		Iterator itr = tagsPropertyPersistence.findByEntryId(
+			entryId).iterator();
 
 		while (itr.hasNext()) {
 			TagsProperty property = (TagsProperty)itr.next();
@@ -104,7 +101,8 @@ public class TagsPropertyLocalServiceImpl
 	public void deleteProperty(long propertyId)
 		throws PortalException, SystemException {
 
-		TagsProperty property = TagsPropertyUtil.findByPrimaryKey(propertyId);
+		TagsProperty property = tagsPropertyPersistence.findByPrimaryKey(
+			propertyId);
 
 		deleteProperty(property);
 	}
@@ -112,27 +110,27 @@ public class TagsPropertyLocalServiceImpl
 	public void deleteProperty(TagsProperty property)
 		throws PortalException, SystemException {
 
-		TagsPropertyUtil.remove(property.getPropertyId());
+		tagsPropertyPersistence.remove(property.getPropertyId());
 	}
 
 	public List getProperties() throws SystemException {
-		return TagsPropertyUtil.findAll();
+		return tagsPropertyPersistence.findAll();
 	}
 
 	public List getProperties(long entryId) throws SystemException {
-		return TagsPropertyUtil.findByEntryId(entryId);
+		return tagsPropertyPersistence.findByEntryId(entryId);
 	}
 
 	public TagsProperty getProperty(long propertyId)
 		throws PortalException, SystemException {
 
-		return TagsPropertyUtil.findByPrimaryKey(propertyId);
+		return tagsPropertyPersistence.findByPrimaryKey(propertyId);
 	}
 
 	public TagsProperty getProperty(long entryId, String key)
 		throws PortalException, SystemException {
 
-		return TagsPropertyUtil.findByE_K(entryId, key);
+		return tagsPropertyPersistence.findByE_K(entryId, key);
 	}
 
 	public String[] getPropertyKeys(long companyId) throws SystemException {
@@ -151,13 +149,14 @@ public class TagsPropertyLocalServiceImpl
 
 		validate(key, value);
 
-		TagsProperty property = TagsPropertyUtil.findByPrimaryKey(propertyId);
+		TagsProperty property = tagsPropertyPersistence.findByPrimaryKey(
+			propertyId);
 
 		property.setModifiedDate(new Date());
 		property.setKey(key);
 		property.setValue(value);
 
-		TagsPropertyUtil.update(property);
+		tagsPropertyPersistence.update(property);
 
 		return property;
 	}

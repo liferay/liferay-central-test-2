@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
-import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductVersionServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPermission;
 
@@ -52,7 +51,7 @@ public class SCProductVersionServiceImpl
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productEntryId, ActionKeys.UPDATE);
 
-		return SCProductVersionLocalServiceUtil.addProductVersion(
+		return scProductVersionLocalService.addProductVersion(
 			getUserId(), productEntryId, version, changeLog, downloadPageURL,
 			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
 			addCommunityPermissions, addGuestPermissions);
@@ -68,7 +67,7 @@ public class SCProductVersionServiceImpl
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productEntryId, ActionKeys.UPDATE);
 
-		return SCProductVersionLocalServiceUtil.addProductVersion(
+		return scProductVersionLocalService.addProductVersion(
 			getUserId(), productEntryId, version, changeLog, downloadPageURL,
 			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
 			communityPermissions, guestPermissions);
@@ -78,22 +77,20 @@ public class SCProductVersionServiceImpl
 		throws PortalException, SystemException {
 
 		SCProductVersion productVersion =
-			SCProductVersionLocalServiceUtil.getProductVersion(
-				productVersionId);
+			scProductVersionLocalService.getProductVersion(productVersionId);
 
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productVersion.getProductEntryId(),
 			ActionKeys.UPDATE);
 
-		SCProductVersionLocalServiceUtil.deleteProductVersion(productVersionId);
+		scProductVersionLocalService.deleteProductVersion(productVersionId);
 	}
 
 	public SCProductVersion getProductVersion(long productVersionId)
 		throws PortalException, SystemException {
 
 		SCProductVersion productVersion =
-			SCProductVersionLocalServiceUtil.getProductVersion(
-				productVersionId);
+			scProductVersionLocalService.getProductVersion(productVersionId);
 
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productVersion.getProductEntryId(),
@@ -108,7 +105,7 @@ public class SCProductVersionServiceImpl
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productEntryId, ActionKeys.VIEW);
 
-		return SCProductVersionLocalServiceUtil.getProductVersions(
+		return scProductVersionLocalService.getProductVersions(
 			productEntryId, begin, end);
 	}
 
@@ -118,7 +115,7 @@ public class SCProductVersionServiceImpl
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productEntryId, ActionKeys.VIEW);
 
-		return SCProductVersionLocalServiceUtil.getProductVersionsCount(
+		return scProductVersionLocalService.getProductVersionsCount(
 			productEntryId);
 	}
 
@@ -129,14 +126,13 @@ public class SCProductVersionServiceImpl
 		throws PortalException, SystemException {
 
 		SCProductVersion productVersion =
-			SCProductVersionLocalServiceUtil.getProductVersion(
-				productVersionId);
+			scProductVersionLocalService.getProductVersion(productVersionId);
 
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productVersion.getProductEntryId(),
 			ActionKeys.UPDATE);
 
-		return SCProductVersionLocalServiceUtil.updateProductVersion(
+		return scProductVersionLocalService.updateProductVersion(
 			productVersionId, version, changeLog, downloadPageURL,
 			directDownloadURL, repoStoreArtifact, frameworkVersionIds);
 	}

@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.workflow.jbi.WorkflowXMLUtil;
 import com.liferay.portlet.workflow.model.WorkflowInstance;
-import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
 import com.liferay.portlet.workflow.service.base.WorkflowInstanceServiceBaseImpl;
 
 import java.rmi.RemoteException;
@@ -48,7 +47,7 @@ public class WorkflowInstanceServiceImpl
 		throws PortalException, SystemException {
 
 		try {
-			String xml = WorkflowComponentServiceUtil.startWorkflow(
+			String xml = workflowComponentService.startWorkflow(
 				definitionId);
 
 			return WorkflowXMLUtil.parseInstance(xml);
@@ -68,7 +67,7 @@ public class WorkflowInstanceServiceImpl
 		throws PortalException, SystemException {
 
 		try {
-			WorkflowComponentServiceUtil.signalInstance(instanceId);
+			workflowComponentService.signalInstance(instanceId);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);
@@ -79,7 +78,7 @@ public class WorkflowInstanceServiceImpl
 		throws PortalException, SystemException {
 
 		try {
-			WorkflowComponentServiceUtil.signalToken(instanceId, tokenId);
+			workflowComponentService.signalToken(instanceId, tokenId);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);

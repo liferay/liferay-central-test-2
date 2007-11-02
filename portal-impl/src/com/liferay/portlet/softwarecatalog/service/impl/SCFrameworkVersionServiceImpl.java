@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
-import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.base.SCFrameworkVersionServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.permission.SCFrameworkVersionPermission;
 
@@ -54,7 +53,7 @@ public class SCFrameworkVersionServiceImpl
 			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
 			ActionKeys.ADD_FRAMEWORK_VERSION);
 
-		return SCFrameworkVersionLocalServiceUtil.addFrameworkVersion(
+		return scFrameworkVersionLocalService.addFrameworkVersion(
 			getUserId(), plid, name, url, active, priority,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -68,7 +67,7 @@ public class SCFrameworkVersionServiceImpl
 			getPermissionChecker(), plid, PortletKeys.SOFTWARE_CATALOG,
 			ActionKeys.ADD_FRAMEWORK_VERSION);
 
-		return SCFrameworkVersionLocalServiceUtil.addFrameworkVersion(
+		return scFrameworkVersionLocalService.addFrameworkVersion(
 			getUserId(), plid, name, url, active, priority,
 			communityPermissions, guestPermissions);
 	}
@@ -79,21 +78,21 @@ public class SCFrameworkVersionServiceImpl
 		SCFrameworkVersionPermission.check(
 			getPermissionChecker(), frameworkVersionId, ActionKeys.DELETE);
 
-		SCFrameworkVersionLocalServiceUtil.deleteFrameworkVersion(
+		scFrameworkVersionLocalService.deleteFrameworkVersion(
 			frameworkVersionId);
 	}
 
 	public SCFrameworkVersion getFrameworkVersion(long frameworkVersionId)
 		throws PortalException, SystemException {
 
-		return SCFrameworkVersionLocalServiceUtil.getFrameworkVersion(
+		return scFrameworkVersionLocalService.getFrameworkVersion(
 			frameworkVersionId);
 	}
 
 	public List getFrameworkVersions(long groupId, boolean active)
 		throws SystemException {
 
-		return SCFrameworkVersionLocalServiceUtil.getFrameworkVersions(
+		return scFrameworkVersionLocalService.getFrameworkVersions(
 			groupId, active);
 	}
 
@@ -101,7 +100,7 @@ public class SCFrameworkVersionServiceImpl
 			long groupId, boolean active, int begin, int end)
 		throws SystemException {
 
-		return SCFrameworkVersionLocalServiceUtil.getFrameworkVersions(
+		return scFrameworkVersionLocalService.getFrameworkVersions(
 			groupId, active, begin, end);
 	}
 
@@ -113,7 +112,7 @@ public class SCFrameworkVersionServiceImpl
 		SCFrameworkVersionPermission.check(
 			getPermissionChecker(), frameworkVersionId, ActionKeys.UPDATE);
 
-		return SCFrameworkVersionLocalServiceUtil.updateFrameworkVersion(
+		return scFrameworkVersionLocalService.updateFrameworkVersion(
 			frameworkVersionId, name, url, active, priority);
 	}
 

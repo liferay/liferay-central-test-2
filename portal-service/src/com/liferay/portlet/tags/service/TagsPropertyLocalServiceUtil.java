@@ -162,6 +162,30 @@ public class TagsPropertyLocalServiceUtil {
 		tagsPropertyLocalService.setTagsSourcePersistence(tagsSourcePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
+		return tagsPropertyLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+		tagsPropertyLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
+		return tagsPropertyLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+		tagsPropertyLocalService.setUserFinder(userFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 		tagsPropertyLocalService.afterPropertiesSet();

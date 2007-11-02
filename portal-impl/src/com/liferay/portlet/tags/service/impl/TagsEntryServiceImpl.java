@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.json.JSONArrayWrapper;
 import com.liferay.portlet.tags.model.TagsEntry;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsEntryServiceBaseImpl;
 
 import java.util.List;
@@ -42,39 +41,38 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 	public TagsEntry addEntry(String name)
 		throws PortalException, SystemException {
 
-		return TagsEntryLocalServiceUtil.addEntry(getUserId(), name);
+		return tagsEntryLocalService.addEntry(getUserId(), name);
 	}
 
 	public TagsEntry addEntry(String name, String[] properties)
 		throws PortalException, SystemException {
 
-		return TagsEntryLocalServiceUtil.addEntry(
-			getUserId(), name, properties);
+		return tagsEntryLocalService.addEntry(getUserId(), name, properties);
 	}
 
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
-		TagsEntryLocalServiceUtil.deleteEntry(entryId);
+		tagsEntryLocalService.deleteEntry(entryId);
 	}
 
 	public List getEntries(String className, long classPK)
 		throws PortalException, SystemException {
 
-		return TagsEntryLocalServiceUtil.getEntries(className, classPK);
+		return tagsEntryLocalService.getEntries(className, classPK);
 	}
 
 	public List search(long companyId, String name, String[] properties)
 		throws SystemException {
 
-		return TagsEntryLocalServiceUtil.search(companyId, name, properties);
+		return tagsEntryLocalService.search(companyId, name, properties);
 	}
 
 	public List search(
 		long companyId, String name, String[] properties, int begin, int end)
 		throws SystemException {
 
-		return TagsEntryLocalServiceUtil.search(
+		return tagsEntryLocalService.search(
 			companyId, name, properties, begin, end);
 	}
 
@@ -83,27 +81,26 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 			int end)
 		throws SystemException {
 
-		return TagsEntryLocalServiceUtil.searchAutocomplete(
+		return tagsEntryLocalService.searchAutocomplete(
 			companyId, name, properties, begin, end);
 	}
 
 	public int searchCount(long companyId, String name, String[] properties)
 		throws SystemException {
 
-		return TagsEntryLocalServiceUtil.searchCount(
-			companyId, name, properties);
+		return tagsEntryLocalService.searchCount(companyId, name, properties);
 	}
 
 	public TagsEntry updateEntry(long entryId, String name)
 		throws PortalException, SystemException {
 
-		return TagsEntryLocalServiceUtil.updateEntry(entryId, name);
+		return tagsEntryLocalService.updateEntry(entryId, name);
 	}
 
 	public TagsEntry updateEntry(long entryId, String name, String[] properties)
 		throws PortalException, SystemException {
 
-		return TagsEntryLocalServiceUtil.updateEntry(
+		return tagsEntryLocalService.updateEntry(
 			getUserId(), entryId, name, properties);
 	}
 

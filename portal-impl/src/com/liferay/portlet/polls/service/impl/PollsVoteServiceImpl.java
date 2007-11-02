@@ -22,13 +22,11 @@
 
 package com.liferay.portlet.polls.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portlet.polls.model.PollsVote;
-import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
 import com.liferay.portlet.polls.service.base.PollsVoteServiceBaseImpl;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
 
@@ -49,13 +47,13 @@ public class PollsVoteServiceImpl extends PollsVoteServiceBaseImpl {
 			userId = getUserId();
 		}
 		catch (PrincipalException pe) {
-			userId = CounterLocalServiceUtil.increment();
+			userId = counterLocalService.increment();
 		}
 
 		PollsQuestionPermission.check(
 			getPermissionChecker(), questionId, ActionKeys.ADD_VOTE);
 
-		return PollsVoteLocalServiceUtil.addVote(userId, questionId, choiceId);
+		return pollsVoteLocalService.addVote(userId, questionId, choiceId);
 	}
 
 }

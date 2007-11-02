@@ -161,6 +161,78 @@ public class TagsAssetLocalServiceUtil {
 		tagsAssetLocalService.setTagsSourcePersistence(tagsSourcePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+		tagsAssetLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+		tagsAssetLocalService.setUserFinder(userFinder);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getDLFileEntryPersistence();
+	}
+
+	public static void setDLFileEntryPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence) {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+		tagsAssetLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder getDLFileEntryFinder() {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getDLFileEntryFinder();
+	}
+
+	public static void setDLFileEntryFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder dlFileEntryFinder) {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+		tagsAssetLocalService.setDLFileEntryFinder(dlFileEntryFinder);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence getJournalArticleResourcePersistence() {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getJournalArticleResourcePersistence();
+	}
+
+	public static void setJournalArticleResourcePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence) {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+		tagsAssetLocalService.setJournalArticleResourcePersistence(journalArticleResourcePersistence);
+	}
+
+	public static com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence getWikiPageResourcePersistence() {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getWikiPageResourcePersistence();
+	}
+
+	public static void setWikiPageResourcePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence) {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+		tagsAssetLocalService.setWikiPageResourcePersistence(wikiPageResourcePersistence);
+	}
+
 	public static void afterPropertiesSet() {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 		tagsAssetLocalService.afterPropertiesSet();

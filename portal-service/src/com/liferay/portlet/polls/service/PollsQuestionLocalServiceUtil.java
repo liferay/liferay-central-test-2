@@ -102,6 +102,54 @@ public class PollsQuestionLocalServiceUtil {
 		pollsQuestionLocalService.setPollsVotePersistence(pollsVotePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		return pollsQuestionLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		return pollsQuestionLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.setResourceFinder(resourceFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		return pollsQuestionLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		return pollsQuestionLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.setUserFinder(userFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 		pollsQuestionLocalService.afterPropertiesSet();

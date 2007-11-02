@@ -22,15 +22,12 @@
 
 package com.liferay.portlet.ratings.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ratings.NoSuchStatsException;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.base.RatingsStatsLocalServiceBaseImpl;
-import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
-import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -51,19 +48,19 @@ public class RatingsStatsLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		try {
-			RatingsStatsUtil.removeByC_C(classNameId, classPK);
+			ratingsStatsPersistence.removeByC_C(classNameId, classPK);
 		}
 		catch (NoSuchStatsException nsse) {
 			_log.warn(nsse);
 		}
 
-		RatingsEntryUtil.removeByC_C(classNameId, classPK);
+		ratingsEntryPersistence.removeByC_C(classNameId, classPK);
 	}
 
 	public RatingsStats getStats(long statsId)
 		throws PortalException, SystemException {
 
-		return RatingsStatsUtil.findByPrimaryKey(statsId);
+		return ratingsStatsPersistence.findByPrimaryKey(statsId);
 	}
 
 	public RatingsStats getStats(String className, long classPK)
@@ -74,12 +71,12 @@ public class RatingsStatsLocalServiceImpl
 		RatingsStats stats = null;
 
 		try {
-			stats = RatingsStatsUtil.findByC_C(classNameId, classPK);
+			stats = ratingsStatsPersistence.findByC_C(classNameId, classPK);
 		}
 		catch (NoSuchStatsException nsse) {
-			long statsId = CounterLocalServiceUtil.increment();
+			long statsId = counterLocalService.increment();
 
-			stats = RatingsStatsUtil.create(statsId);
+			stats = ratingsStatsPersistence.create(statsId);
 
 			stats.setClassNameId(classNameId);
 			stats.setClassPK(classPK);
@@ -87,7 +84,7 @@ public class RatingsStatsLocalServiceImpl
 			stats.setTotalScore(0.0);
 			stats.setAverageScore(0.0);
 
-			RatingsStatsUtil.update(stats);
+			ratingsStatsPersistence.update(stats);
 		}
 
 		return stats;

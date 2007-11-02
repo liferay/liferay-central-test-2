@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.tags.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Document;
@@ -35,29 +34,22 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
 import com.liferay.portlet.tags.model.TagsAssetType;
 import com.liferay.portlet.tags.model.TagsEntry;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsAssetLocalServiceBaseImpl;
-import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
-import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 import com.liferay.portlet.tags.util.TagsAssetValidator;
 import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.lucene.HitsImpl;
 
@@ -84,7 +76,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	public void deleteAsset(long assetId)
 		throws PortalException, SystemException {
 
-		TagsAsset asset = TagsAssetUtil.findByPrimaryKey(assetId);
+		TagsAsset asset = tagsAssetPersistence.findByPrimaryKey(assetId);
 
 		deleteAsset(asset);
 	}
@@ -94,7 +86,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		TagsAsset asset = TagsAssetUtil.fetchByC_C(classNameId, classPK);
+		TagsAsset asset = tagsAssetPersistence.fetchByC_C(classNameId, classPK);
 
 		if (asset != null) {
 			deleteAsset(asset);
@@ -104,13 +96,13 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	public void deleteAsset(TagsAsset asset)
 		throws PortalException, SystemException {
 
-		TagsAssetUtil.remove(asset.getAssetId());
+		tagsAssetPersistence.remove(asset.getAssetId());
 	}
 
 	public TagsAsset getAsset(long assetId)
 		throws PortalException, SystemException {
 
-		return TagsAssetUtil.findByPrimaryKey(assetId);
+		return tagsAssetPersistence.findByPrimaryKey(assetId);
 	}
 
 	public TagsAsset getAsset(String className, long classPK)
@@ -118,7 +110,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return TagsAssetUtil.findByC_C(classNameId, classPK);
+		return tagsAssetPersistence.findByC_C(classNameId, classPK);
 	}
 
 	public TagsAssetType[] getAssetTypes(String languageId) {
@@ -276,11 +268,11 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	public List getCompanyAssets(long companyId, int begin, int end)
 		throws SystemException {
 
-		return TagsAssetUtil.findByCompanyId(companyId, begin, end);
+		return tagsAssetPersistence.findByCompanyId(companyId, begin, end);
 	}
 
 	public int getCompanyAssetsCount(long companyId) throws SystemException {
-		return TagsAssetUtil.countByCompanyId(companyId);
+		return tagsAssetPersistence.countByCompanyId(companyId);
 	}
 
 	public List getTopViewedAssets(
@@ -312,12 +304,12 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		TagsAsset asset = TagsAssetUtil.fetchByC_C(classNameId, classPK);
+		TagsAsset asset = tagsAssetPersistence.fetchByC_C(classNameId, classPK);
 
 		if (asset != null) {
 			asset.setViewCount(asset.getViewCount() + 1);
 
-			TagsAssetUtil.update(asset);
+			tagsAssetPersistence.update(asset);
 		}
 
 		return asset;
@@ -442,7 +434,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		// Asset
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		if (entryNames == null) {
@@ -454,12 +446,12 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		validate(className, entryNames);
 
-		TagsAsset asset = TagsAssetUtil.fetchByC_C(classNameId, classPK);
+		TagsAsset asset = tagsAssetPersistence.fetchByC_C(classNameId, classPK);
 
 		if (asset == null) {
-			long assetId = CounterLocalServiceUtil.increment();
+			long assetId = counterLocalService.increment();
 
-			asset = TagsAssetUtil.create(assetId);
+			asset = tagsAssetPersistence.create(assetId);
 
 			asset.setCompanyId(user.getCompanyId());
 			asset.setUserId(user.getUserId());
@@ -487,7 +479,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		asset.setHeight(height);
 		asset.setWidth(width);
 
-		TagsAssetUtil.update(asset);
+		tagsAssetPersistence.update(asset);
 
 		// Entries
 
@@ -496,13 +488,13 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		for (int i = 0; i < entryNames.length; i++) {
 			String name = entryNames[i].trim().toLowerCase();
 
-			TagsEntry entry = TagsEntryUtil.fetchByC_N(
+			TagsEntry entry = tagsEntryPersistence.fetchByC_N(
 				user.getCompanyId(), name);
 
 			if (entry == null) {
 				String defaultProperties = "0:category:no category";
 
-				TagsEntry newTagsEntry = TagsEntryLocalServiceUtil.addEntry(
+				TagsEntry newTagsEntry = tagsEntryLocalService.addEntry(
 					user.getUserId(), entryNames[i],
 					new String[] {defaultProperties});
 
@@ -513,7 +505,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			}
 		}
 
-		TagsAssetUtil.setTagsEntries(asset.getAssetId(), entries);
+		tagsAssetPersistence.setTagsEntries(asset.getAssetId(), entries);
 
 		return asset;
 	}
@@ -540,7 +532,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 				BlogsEntry.class.getName());
 			long classPK = entryId;
 
-			return TagsAssetUtil.findByC_C(classNameId, classPK);
+			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.BOOKMARKS)) {
 		}
@@ -548,14 +540,14 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			long folderId = GetterUtil.getLong(doc.get("repositoryId"));
 			String name = doc.get("path");
 
-			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+			DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
 				folderId, name);
 
 			long classNameId = PortalUtil.getClassNameId(
 				DLFileEntry.class.getName());
 			long classPK = fileEntry.getFileEntryId();
 
-			return TagsAssetUtil.findByC_C(classNameId, classPK);
+			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.IMAGE_GALLERY)) {
 		}
@@ -566,14 +558,14 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			double version = GetterUtil.getDouble(doc.get("version"));
 
 			long articleResourcePrimKey =
-				JournalArticleResourceLocalServiceUtil.
-					getArticleResourcePrimKey(groupId, articleId);
+				journalArticleResourceLocalService.getArticleResourcePrimKey(
+					groupId, articleId);
 
 			long classNameId = PortalUtil.getClassNameId(
 				JournalArticle.class.getName());
 			long classPK = articleResourcePrimKey;
 
-			return TagsAssetUtil.findByC_C(classNameId, classPK);
+			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.MESSAGE_BOARDS)) {
 			long messageId = GetterUtil.getLong(doc.get("messageId"));
@@ -582,21 +574,21 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 				MBMessage.class.getName());
 			long classPK = messageId;
 
-			return TagsAssetUtil.findByC_C(classNameId, classPK);
+			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.WIKI)) {
 			long nodeId = GetterUtil.getLong(doc.get("nodeId"));
 			String title = doc.get(LuceneFields.TITLE);
 
 			long pageResourcePrimKey =
-				WikiPageResourceLocalServiceUtil.getPageResourcePrimKey(
+				wikiPageResourceLocalService.getPageResourcePrimKey(
 					nodeId, title);
 
 			long classNameId = PortalUtil.getClassNameId(
 				WikiPage.class.getName());
 			long classPK = pageResourcePrimKey;
 
-			return TagsAssetUtil.findByC_C(classNameId, classPK);
+			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 
 		return null;
@@ -616,7 +608,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			String portletTitle = PortalUtil.getPortletTitle(
 				portletId, asset.getCompanyId(), languageId);
 
-			List tagsEntriesList = TagsAssetUtil.getTagsEntries(
+			List tagsEntriesList = tagsAssetPersistence.getTagsEntries(
 				asset.getAssetId());
 
 			String tagsEntries = ListUtil.toString(

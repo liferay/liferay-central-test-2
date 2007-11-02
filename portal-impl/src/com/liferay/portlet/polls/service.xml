@@ -31,6 +31,10 @@
 			<finder-column name="questionId" />
 			<finder-column name="name" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="PollsQuestion" local-service="true" remote-service="true">
 
@@ -68,6 +72,12 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="PollsVote" local-service="true" remote-service="true">
 
@@ -97,6 +107,10 @@
 			<finder-column name="questionId" />
 			<finder-column name="userId" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<exceptions>
 		<exception>DuplicateVote</exception>

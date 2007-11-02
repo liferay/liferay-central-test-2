@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.ratings.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
@@ -93,6 +98,22 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		this.ratingsStatsPersistence = ratingsStatsPersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	public void afterPropertiesSet() {
 		if (ratingsEntryLocalService == null) {
 			ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getImpl();
@@ -109,10 +130,20 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		if (ratingsStatsPersistence == null) {
 			ratingsStatsPersistence = RatingsStatsUtil.getPersistence();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
 	}
 
 	protected RatingsEntryLocalService ratingsEntryLocalService;
 	protected RatingsEntryService ratingsEntryService;
 	protected RatingsEntryPersistence ratingsEntryPersistence;
 	protected RatingsStatsPersistence ratingsStatsPersistence;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
 }
