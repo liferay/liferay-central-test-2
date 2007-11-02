@@ -73,9 +73,11 @@
 <%@ page import="com.liferay.portlet.tags.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.tags.NoSuchPropertyException" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsAssetType" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsProperty" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsAssetServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.util.TagsUtil" %>
@@ -109,6 +111,9 @@ String selectionStyle = prefs.getValue("selection-style", null);
 if (Validator.isNull(selectionStyle)) {
 	selectionStyle = "dynamic";
 }
+
+String classNameId = GetterUtil.getString(prefs.getValue("class-name-id", ""));
+long[] classNameIds = StringUtil.split(classNameId, 0L);
 
 String category = GetterUtil.getString(prefs.getValue("category", StringPool.BLANK));
 String[] entries = prefs.getValues("entries", new String[0]);

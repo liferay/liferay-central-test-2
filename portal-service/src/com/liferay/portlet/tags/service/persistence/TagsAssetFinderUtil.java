@@ -29,49 +29,51 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public class TagsAssetFinderUtil {
-	public static int countByAndEntryIds(long groupId, long[] entryIds,
-		long[] notEntryIds, boolean excludeZeroViewCount,
+	public static int countByAndEntryIds(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByAndEntryIds(groupId, entryIds, notEntryIds,
-			excludeZeroViewCount, publishDate, expirationDate);
+		return getFinder().countByAndEntryIds(groupId, classNameIds, entryIds,
+			notEntryIds, excludeZeroViewCount, publishDate, expirationDate);
 	}
 
-	public static int countByOrEntryIds(long groupId, long[] entryIds,
-		long[] notEntryIds, boolean excludeZeroViewCount,
+	public static int countByOrEntryIds(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByOrEntryIds(groupId, entryIds, notEntryIds,
-			excludeZeroViewCount, publishDate, expirationDate);
+		return getFinder().countByOrEntryIds(groupId, classNameIds, entryIds,
+			notEntryIds, excludeZeroViewCount, publishDate, expirationDate);
 	}
 
 	public static java.util.List findByAndEntryIds(long groupId,
-		long[] entryIds, long[] notEntryIds, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int begin,
-		int end) throws com.liferay.portal.SystemException {
-		return getFinder().findByAndEntryIds(groupId, entryIds, notEntryIds,
-			orderByCol1, orderByCol2, orderByType1, orderByType2,
+		long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		java.lang.String orderByCol1, java.lang.String orderByCol2,
+		java.lang.String orderByType1, java.lang.String orderByType2,
+		boolean excludeZeroViewCount, java.util.Date publishDate,
+		java.util.Date expirationDate, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByAndEntryIds(groupId, classNameIds, entryIds,
+			notEntryIds, orderByCol1, orderByCol2, orderByType1, orderByType2,
 			excludeZeroViewCount, publishDate, expirationDate, begin, end);
 	}
 
 	public static java.util.List findByOrEntryIds(long groupId,
-		long[] entryIds, long[] notEntryIds, java.util.Date publishDate,
-		java.util.Date expirationDate)
+		long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByOrEntryIds(groupId, entryIds, notEntryIds,
-			publishDate, expirationDate);
+		return getFinder().findByOrEntryIds(groupId, classNameIds, entryIds,
+			notEntryIds, publishDate, expirationDate);
 	}
 
 	public static java.util.List findByOrEntryIds(long groupId,
-		long[] entryIds, long[] notEntryIds, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int begin,
-		int end) throws com.liferay.portal.SystemException {
-		return getFinder().findByOrEntryIds(groupId, entryIds, notEntryIds,
-			orderByCol1, orderByCol2, orderByType1, orderByType2,
+		long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		java.lang.String orderByCol1, java.lang.String orderByCol2,
+		java.lang.String orderByType1, java.lang.String orderByType2,
+		boolean excludeZeroViewCount, java.util.Date publishDate,
+		java.util.Date expirationDate, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByOrEntryIds(groupId, classNameIds, entryIds,
+			notEntryIds, orderByCol1, orderByCol2, orderByType1, orderByType2,
 			excludeZeroViewCount, publishDate, expirationDate, begin, end);
 	}
 

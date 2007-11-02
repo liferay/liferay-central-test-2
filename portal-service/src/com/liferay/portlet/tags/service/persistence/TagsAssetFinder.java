@@ -29,30 +29,30 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public interface TagsAssetFinder {
-	public int countByAndEntryIds(long groupId, long[] entryIds,
-		long[] notEntryIds, boolean excludeZeroViewCount,
+	public int countByAndEntryIds(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException;
 
-	public int countByOrEntryIds(long groupId, long[] entryIds,
-		long[] notEntryIds, boolean excludeZeroViewCount,
+	public int countByOrEntryIds(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByAndEntryIds(long groupId, long[] entryIds,
-		long[] notEntryIds, java.lang.String orderByCol1,
+	public java.util.List findByAndEntryIds(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, java.lang.String orderByCol1,
 		java.lang.String orderByCol2, java.lang.String orderByType1,
 		java.lang.String orderByType2, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate, int begin,
 		int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByOrEntryIds(long groupId, long[] entryIds,
-		long[] notEntryIds, java.util.Date publishDate,
+	public java.util.List findByOrEntryIds(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, java.util.Date publishDate,
 		java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByOrEntryIds(long groupId, long[] entryIds,
-		long[] notEntryIds, java.lang.String orderByCol1,
+	public java.util.List findByOrEntryIds(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, java.lang.String orderByCol1,
 		java.lang.String orderByCol2, java.lang.String orderByType1,
 		java.lang.String orderByType2, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate, int begin,

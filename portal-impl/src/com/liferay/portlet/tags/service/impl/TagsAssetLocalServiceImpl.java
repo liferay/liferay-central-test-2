@@ -131,19 +131,19 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws SystemException {
 
 		return getAssets(
-			0, entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
-			null, begin, end);
+			0, new long[0], entryIds, notEntryIds, andOperator,
+			excludeZeroViewCount, null, null, begin, end);
 	}
 
 	public List getAssets(
-			long groupId, long[] entryIds, long[] notEntryIds,
-			boolean andOperator, boolean excludeZeroViewCount, int begin,
-			int end)
+			long groupId, long[] classNameIds, long[] entryIds,
+			long[] notEntryIds, boolean andOperator,
+			boolean excludeZeroViewCount, int begin, int end)
 		throws SystemException {
 
 		return getAssets(
-			groupId, entryIds, notEntryIds, andOperator, excludeZeroViewCount,
-			null, null, begin, end);
+			groupId, classNameIds, entryIds, notEntryIds, andOperator,
+			excludeZeroViewCount, null, null, begin, end);
 	}
 
 	public List getAssets(
@@ -153,25 +153,28 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws SystemException {
 
 		return getAssets(
-			0, entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
-			null, begin, end);
+			0, new long[0], entryIds, notEntryIds, andOperator,
+			excludeZeroViewCount, null, null, begin, end);
 	}
 
 	public List getAssets(
-			long groupId, long[] entryIds, long[] notEntryIds,
-			boolean andOperator, boolean excludeZeroViewCount, Date publishDate,
-			Date expirationDate, int begin, int end)
+			long groupId, long[] classNameIds, long[] entryIds,
+			long[] notEntryIds, boolean andOperator,
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
+			int begin, int end)
 		throws SystemException {
 
 		if (andOperator) {
 			return tagsAssetFinder.findByAndEntryIds(
-				groupId, entryIds, notEntryIds, null, null, null, null,
-				excludeZeroViewCount, publishDate, expirationDate, begin, end);
+				groupId, classNameIds, entryIds, notEntryIds, null, null, null,
+				null, excludeZeroViewCount, publishDate, expirationDate, begin,
+				end);
 		}
 		else {
 			return tagsAssetFinder.findByOrEntryIds(
-				groupId, entryIds, notEntryIds, null, null, null, null,
-				excludeZeroViewCount, publishDate, expirationDate, begin, end);
+				groupId, classNameIds, entryIds, notEntryIds, null, null, null,
+				null, excludeZeroViewCount, publishDate, expirationDate, begin,
+				end);
 		}
 	}
 
@@ -183,29 +186,29 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws SystemException {
 
 		return getAssets(
-			0, entryIds, notEntryIds, andOperator, excludeZeroViewCount,
-			publishDate, expirationDate, begin, end);
+			0, new long[0], entryIds, notEntryIds, andOperator,
+			excludeZeroViewCount, publishDate, expirationDate, begin, end);
 	}
 
 	public List getAssets(
-			long groupId, long[] entryIds, long[] notEntryIds,
-			boolean andOperator, String orderByCol1, String orderByCol2,
-			String orderByType1, String orderByType2,
+			long groupId, long[] classNameIds, long[] entryIds,
+			long[] notEntryIds, boolean andOperator, String orderByCol1,
+			String orderByCol2, String orderByType1, String orderByType2,
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
 			int begin, int end)
 		throws SystemException {
 
 		if (andOperator) {
 			return tagsAssetFinder.findByAndEntryIds(
-				groupId, entryIds, notEntryIds, orderByCol1, orderByCol2,
-				orderByType1, orderByType2, excludeZeroViewCount, publishDate,
-				expirationDate, begin, end);
+				groupId, classNameIds, entryIds, notEntryIds, orderByCol1,
+				orderByCol2, orderByType1, orderByType2, excludeZeroViewCount,
+				publishDate, expirationDate, begin, end);
 		}
 		else {
 			return tagsAssetFinder.findByOrEntryIds(
-				groupId, entryIds, notEntryIds, orderByCol1, orderByCol2,
-				orderByType1, orderByType2, excludeZeroViewCount, publishDate,
-				expirationDate, begin, end);
+				groupId, classNameIds, entryIds, notEntryIds, orderByCol1,
+				orderByCol2, orderByType1, orderByType2, excludeZeroViewCount,
+				publishDate, expirationDate, begin, end);
 		}
 	}
 
@@ -215,8 +218,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws SystemException {
 
 		return getAssetsCount(
-			0, entryIds, notEntryIds, andOperator, excludeZeroViewCount, null,
-			null);
+			0, new long[0], entryIds, notEntryIds, andOperator,
+			excludeZeroViewCount, null, null);
 	}
 
 	public int getAssetsCount(
@@ -225,8 +228,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws SystemException {
 
 		return getAssetsCount(
-			groupId, entryIds, notEntryIds, andOperator, excludeZeroViewCount,
-			null, null);
+			groupId, new long[0], entryIds, notEntryIds, andOperator,
+			excludeZeroViewCount, null, null);
 	}
 
 	public int getAssetsCount(
@@ -235,25 +238,25 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws SystemException {
 
 		return getAssetsCount(
-			0, entryIds, notEntryIds, andOperator, excludeZeroViewCount,
-			publishDate, expirationDate);
+			0, new long[0], entryIds, notEntryIds, andOperator,
+			excludeZeroViewCount, publishDate, expirationDate);
 	}
 
 	public int getAssetsCount(
-			long groupId, long[] entryIds, long[] notEntryIds,
-			boolean andOperator, boolean excludeZeroViewCount, Date publishDate,
-			Date expirationDate)
+			long groupId, long[] classNameIds, long[] entryIds,
+			long[] notEntryIds, boolean andOperator,
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
 		throws SystemException {
 
 		if (andOperator) {
 			return tagsAssetFinder.countByAndEntryIds(
-				groupId, entryIds, notEntryIds, excludeZeroViewCount,
-				publishDate, expirationDate);
+				groupId, classNameIds, entryIds, notEntryIds,
+				excludeZeroViewCount, publishDate, expirationDate);
 		}
 		else {
 			return tagsAssetFinder.countByOrEntryIds(
-				groupId, entryIds, notEntryIds, excludeZeroViewCount,
-				publishDate, expirationDate);
+				groupId, classNameIds, entryIds, notEntryIds,
+				excludeZeroViewCount, publishDate, expirationDate);
 		}
 	}
 
