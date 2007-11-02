@@ -53,14 +53,14 @@ public class ArticleSearch extends SearchContainer {
 
 	static {
 		headerNames.add("id");
-		headerNames.add("version");
 		headerNames.add("name");
+		headerNames.add("version");
 		headerNames.add("display-date");
 		headerNames.add("author");
 
 		orderableHeaders.put("id", "id");
-		orderableHeaders.put("version", "version");
 		orderableHeaders.put("name", "title");
+		orderableHeaders.put("version", "version");
 		orderableHeaders.put("modified-date", "modified-date");
 		orderableHeaders.put("display-date", "display-date");
 	}

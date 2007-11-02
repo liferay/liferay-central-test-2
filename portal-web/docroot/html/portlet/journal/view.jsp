@@ -106,7 +106,8 @@ portletURL.setParameter("tabs1", tabs1);
 
 		List headerNames = searchContainer.getHeaderNames();
 
-		headerNames.add(3, "modified-date");
+		headerNames.add(3, "status");
+		headerNames.add(4, "modified-date");
 		headerNames.add(StringPool.BLANK);
 
 		searchContainer.setRowChecker(new RowChecker(renderResponse));
@@ -155,13 +156,29 @@ portletURL.setParameter("tabs1", tabs1);
 
 				row.addText(article.getArticleId(), rowURL);
 
+				// Title
+
+				row.addText(article.getTitle(), rowURL);
+
 				// Version
 
 				row.addText(String.valueOf(article.getVersion()), rowURL);
 
-				// Title
+				// Status
 
-				row.addText(article.getTitle(), rowURL);
+				String status = null;
+				
+				if (article.isExpired()) {
+					status = "expired";
+				}
+				else if (article.isApproved()) {
+					status = "approved";
+				}
+				else {
+					status = "not-approved";
+				}
+
+				row.addText(LanguageUtil.get(pageContext, status), rowURL);
 
 				// Modified date
 

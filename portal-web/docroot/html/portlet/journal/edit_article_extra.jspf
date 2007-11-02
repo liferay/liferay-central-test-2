@@ -31,7 +31,80 @@
 	.liferay-table .journal-edit-article-extra tr td {
 		padding: 5px;
 	}
+
+	.journal-article-status-approved {
+		color: green;
+	}
+	.journal-article-status-not-approved {
+		color: orange;
+	}
+	.journal-article-status-expired {
+		color: red;
+	}
 </style>
+
+<table class="journal-edit-article-extra">
+<tr class="portlet-section-header">
+	<td>
+		<b><liferay-ui:message key="workflow" /></b>
+	</td>
+</tr>
+<tr>
+	<td>
+		<c:if test="<%= article != null %>">
+			<liferay-ui:message key="version" /><br />
+			<%= version %>
+			<nobr>
+				<liferay-ui:input-checkbox param="incrementVersion" defaultValue="<%= incrementVersion %>" disabled="<%= disableIncrementVersion %>" />
+
+				<liferay-ui:message key="increment-version-on-save" />
+			</nobr>
+		</c:if>
+
+		<br /><br />
+
+		<liferay-ui:message key="status" /><br />
+		<%
+			String status = null;
+			if (article == null) {
+				status = "new";
+			}
+			else if (article.isExpired()) {
+				status = "expired";
+			}
+			else if (article.isApproved()) {
+				status = "approved";
+			}
+			else {
+				status = "not-approved";
+			}
+
+		%>
+		<b class="journal-article-status journal-article-status-<%= status %>">
+			<liferay-ui:message key="<%= status %>" />
+		</b>
+
+		<br /><br />
+
+		<c:if test="<%= article != null %>">
+			<c:if test="<%= !article.isApproved() && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE) %>">
+				<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveArticle();" />
+			</c:if>
+
+			<c:if test="<%= !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
+				<input type="button" value="<liferay-ui:message key="expire" />" onClick="<portlet:namespace />expireArticle();" />
+			</c:if>
+
+			<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
+				<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteArticle();" />
+			</c:if>
+		</c:if>
+
+	</td>
+</tr>
+</table>
+
+<br />
 
 <table class="journal-edit-article-extra" width="100%">
 <tr class="portlet-section-header">

@@ -580,64 +580,6 @@ String[] availableLocales = null;
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="status" />
-			</td>
-			<td>
-				<c:choose>
-					<c:when test="<%= article == null %>">
-						<liferay-ui:message key="new" />
-					</c:when>
-					<c:otherwise>
-						<c:choose>
-							<c:when test="<%= article.isExpired() %>">
-								<liferay-ui:message key="expired" />
-							</c:when>
-							<c:when test="<%= article.isApproved() %>">
-								<liferay-ui:message key="approved" />
-							</c:when>
-							<c:otherwise>
-								<liferay-ui:message key="not-approved" />
-							</c:otherwise>
-						</c:choose>
-					</c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-
-		<c:if test="<%= article != null %>">
-			<tr>
-				<td colspan="2">
-					<br />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<liferay-ui:message key="version" />
-				</td>
-				<td>
-					<table class="liferay-table">
-					<tr>
-						<td>
-							<%= version %>
-						</td>
-						<td>
-							<liferay-ui:input-checkbox param="incrementVersion" defaultValue="<%= incrementVersion %>" disabled="<%= disableIncrementVersion %>" />
-
-							<liferay-ui:message key="increment-version" />
-						</td>
-					</tr>
-					</table>
-				</td>
-			</tr>
-		</c:if>
-
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
 				<liferay-ui:message key="name" />
 			</td>
 			<td>
@@ -868,10 +810,6 @@ String[] availableLocales = null;
 
 			<c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE) %>">
 				<input type="button" value="<liferay-ui:message key="save-and-approve" />" onClick="<portlet:namespace />saveAndApproveArticle();" />
-
-				<c:if test="<%= article != null %>">
-					<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveArticle();" />
-				</c:if>
 			</c:if>
 
 			<c:if test="<%= Validator.isNotNull(structureId) %>">
@@ -880,16 +818,6 @@ String[] availableLocales = null;
 
 			<c:if test="<%= structure != null %>">
 				<input type="button" value="<liferay-ui:message key="download" />" onClick="<portlet:namespace />downloadArticleContent();" />
-			</c:if>
-
-			<c:if test="<%= article != null %>">
-				<c:if test="<%= !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
-					<input type="button" value="<liferay-ui:message key="expire" />" onClick="<portlet:namespace />expireArticle();" />
-				</c:if>
-
-				<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
-					<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteArticle();" />
-				</c:if>
 			</c:if>
 
 			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
