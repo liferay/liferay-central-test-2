@@ -40,12 +40,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="MBMessageFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBMessageFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MBMessageFinder {
+public class MBMessageFinderImpl implements MBMessageFinder {
 
 	public static String COUNT_BY_CATEGORY_IDS =
 		MBMessageFinder.class.getName() + ".countByCategoryIds";
@@ -59,9 +59,7 @@ public class MBMessageFinder {
 	public static String FIND_BY_NO_ASSETS =
 		MBMessageFinder.class.getName() + ".findByNoAssets";
 
-	public static int countByCategoryIds(List categoryIds)
-		throws SystemException {
-
+	public int countByCategoryIds(List categoryIds) throws SystemException {
 		Session session = null;
 
 		try {
@@ -104,7 +102,7 @@ public class MBMessageFinder {
 		}
 	}
 
-	public static int countByGroupId(long groupId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -140,13 +138,13 @@ public class MBMessageFinder {
 		}
 	}
 
-	public static List findByGroupId(long groupId, int begin, int end)
+	public List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public static List findByGroupId(
+	public List findByGroupId(
 			long groupId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -177,7 +175,7 @@ public class MBMessageFinder {
 		}
 	}
 
-	public static List findByNoAssets() throws SystemException {
+	public List findByNoAssets() throws SystemException {
 		Session session = null;
 
 		try {
@@ -199,7 +197,7 @@ public class MBMessageFinder {
 		}
 	}
 
-	private static String _getCategoryIds(List categoryIds) {
+	private String _getCategoryIds(List categoryIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < categoryIds.size(); i++) {

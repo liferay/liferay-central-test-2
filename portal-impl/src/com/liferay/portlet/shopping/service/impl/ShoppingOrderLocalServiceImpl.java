@@ -74,7 +74,6 @@ import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceUtil;
 import com.liferay.portlet.shopping.service.base.ShoppingOrderLocalServiceBaseImpl;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil;
 import com.liferay.portlet.shopping.util.ShoppingPreferences;
@@ -383,7 +382,7 @@ public class ShoppingOrderLocalServiceImpl
 
 		OrderDateComparator obc = new OrderDateComparator(false);
 
-		return ShoppingOrderFinder.findByG_C_U_N_PPPS(
+		return shoppingOrderFinder.findByG_C_U_N_PPPS(
 			groupId, companyId, userId, number, billingFirstName,
 			billingLastName, billingEmailAddress, shippingFirstName,
 			shippingLastName, shippingEmailAddress, ppPaymentStatus,
@@ -398,7 +397,7 @@ public class ShoppingOrderLocalServiceImpl
 			String ppPaymentStatus, boolean andOperator)
 		throws PortalException, SystemException {
 
-		return ShoppingOrderFinder.countByG_C_U_N_PPPS(
+		return shoppingOrderFinder.countByG_C_U_N_PPPS(
 			groupId, companyId, userId, number, billingFirstName,
 			billingLastName, billingEmailAddress, shippingFirstName,
 			shippingLastName, shippingEmailAddress, ppPaymentStatus,

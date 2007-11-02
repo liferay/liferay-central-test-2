@@ -77,6 +77,30 @@ public class DLFolderLocalServiceUtil {
 		dlFolderLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
 	}
 
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder getDLFileEntryFinder() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getDLFileEntryFinder();
+	}
+
+	public static void setDLFileEntryFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder dlFileEntryFinder) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setDLFileEntryFinder(dlFileEntryFinder);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder getDLFileEntryAndShortcutFinder() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getDLFileEntryAndShortcutFinder();
+	}
+
+	public static void setDLFileEntryAndShortcutFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder dlFileEntryAndShortcutFinder) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setDLFileEntryAndShortcutFinder(dlFileEntryAndShortcutFinder);
+	}
+
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence getDLFileRankPersistence() {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -87,6 +111,18 @@ public class DLFolderLocalServiceUtil {
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 		dlFolderLocalService.setDLFileRankPersistence(dlFileRankPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder getDLFileRankFinder() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getDLFileRankFinder();
+	}
+
+	public static void setDLFileRankFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder dlFileRankFinder) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setDLFileRankFinder(dlFileRankFinder);
 	}
 
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence getDLFileShortcutPersistence() {

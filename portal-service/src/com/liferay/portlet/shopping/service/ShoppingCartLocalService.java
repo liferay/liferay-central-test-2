@@ -72,10 +72,20 @@ public interface ShoppingCartLocalService {
 	public void setShoppingCouponPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence shoppingCouponPersistence);
 
+	public com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder getShoppingCouponFinder();
+
+	public void setShoppingCouponFinder(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder shoppingCouponFinder);
+
 	public com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence getShoppingItemPersistence();
 
 	public void setShoppingItemPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence shoppingItemPersistence);
+
+	public com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder getShoppingItemFinder();
+
+	public void setShoppingItemFinder(
+		com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder shoppingItemFinder);
 
 	public com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence getShoppingItemFieldPersistence();
 
@@ -91,6 +101,11 @@ public interface ShoppingCartLocalService {
 
 	public void setShoppingOrderPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence shoppingOrderPersistence);
+
+	public com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder getShoppingOrderFinder();
+
+	public void setShoppingOrderFinder(
+		com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder shoppingOrderFinder);
 
 	public com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence getShoppingOrderItemPersistence();
 

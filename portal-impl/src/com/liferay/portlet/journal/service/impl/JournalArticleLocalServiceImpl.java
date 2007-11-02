@@ -74,7 +74,6 @@ import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.base.JournalArticleLocalServiceBaseImpl;
-import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
@@ -453,7 +452,7 @@ public class JournalArticleLocalServiceImpl
 	public void checkArticles() throws PortalException, SystemException {
 		Date now = new Date();
 
-		List articles = JournalArticleFinder.findByExpirationDate(
+		List articles = journalArticleFinder.findByExpirationDate(
 			Boolean.FALSE, now,
 			new Date(now.getTime() - CheckArticleJob.INTERVAL));
 
@@ -496,7 +495,7 @@ public class JournalArticleLocalServiceImpl
 			LayoutCacheUtil.clearCache(companyId);
 		}
 
-		articles = JournalArticleFinder.findByReviewDate(
+		articles = journalArticleFinder.findByReviewDate(
 			now, new Date(now.getTime() - CheckArticleJob.INTERVAL));
 
 		if (_log.isDebugEnabled()) {
@@ -1363,7 +1362,7 @@ public class JournalArticleLocalServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		return JournalArticleFinder.findByKeywords(
+		return journalArticleFinder.findByKeywords(
 			companyId, groupId, keywords, version, type, structureId,
 			templateId, displayDateGT, displayDateLT, approved, expired,
 			reviewDate, begin, end, obc);
@@ -1378,7 +1377,7 @@ public class JournalArticleLocalServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		return JournalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+		return journalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureId, templateId, displayDateGT, displayDateLT,
 			approved, expired, reviewDate, andOperator, begin, end, obc);
@@ -1393,7 +1392,7 @@ public class JournalArticleLocalServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		return JournalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+		return journalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureIds, templateIds, displayDateGT, displayDateLT,
 			approved, expired, reviewDate, andOperator, begin, end, obc);
@@ -1406,7 +1405,7 @@ public class JournalArticleLocalServiceImpl
 			Boolean expired, Date reviewDate)
 		throws SystemException {
 
-		return JournalArticleFinder.countByKeywords(
+		return journalArticleFinder.countByKeywords(
 			companyId, groupId, keywords, version, type, structureId,
 			templateId, displayDateGT, displayDateLT, approved, expired,
 			reviewDate);
@@ -1420,7 +1419,7 @@ public class JournalArticleLocalServiceImpl
 			Date reviewDate, boolean andOperator)
 		throws SystemException {
 
-		return JournalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+		return journalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureId, templateId, displayDateGT, displayDateLT,
 			approved, expired, reviewDate, andOperator);
@@ -1434,7 +1433,7 @@ public class JournalArticleLocalServiceImpl
 			Date reviewDate, boolean andOperator)
 		throws SystemException {
 
-		return JournalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+		return journalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureIds, templateIds, displayDateGT, displayDateLT,
 			approved, expired, reviewDate, andOperator);

@@ -44,16 +44,24 @@ import com.liferay.portlet.messageboards.service.MBThreadLocalService;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.persistence.MBBanPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder;
+import com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
+import com.liferay.portlet.messageboards.service.persistence.MBThreadFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 
@@ -129,6 +137,14 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		this.mbCategoryPersistence = mbCategoryPersistence;
 	}
 
+	public MBCategoryFinder getMBCategoryFinder() {
+		return mbCategoryFinder;
+	}
+
+	public void setMBCategoryFinder(MBCategoryFinder mbCategoryFinder) {
+		this.mbCategoryFinder = mbCategoryFinder;
+	}
+
 	public MBDiscussionPersistence getMBDiscussionPersistence() {
 		return mbDiscussionPersistence;
 	}
@@ -164,6 +180,14 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		this.mbMessagePersistence = mbMessagePersistence;
 	}
 
+	public MBMessageFinder getMBMessageFinder() {
+		return mbMessageFinder;
+	}
+
+	public void setMBMessageFinder(MBMessageFinder mbMessageFinder) {
+		this.mbMessageFinder = mbMessageFinder;
+	}
+
 	public MBMessageFlagLocalService getMBMessageFlagLocalService() {
 		return mbMessageFlagLocalService;
 	}
@@ -180,6 +204,14 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	public void setMBMessageFlagPersistence(
 		MBMessageFlagPersistence mbMessageFlagPersistence) {
 		this.mbMessageFlagPersistence = mbMessageFlagPersistence;
+	}
+
+	public MBMessageFlagFinder getMBMessageFlagFinder() {
+		return mbMessageFlagFinder;
+	}
+
+	public void setMBMessageFlagFinder(MBMessageFlagFinder mbMessageFlagFinder) {
+		this.mbMessageFlagFinder = mbMessageFlagFinder;
 	}
 
 	public MBStatsUserPersistence getMBStatsUserPersistence() {
@@ -208,6 +240,14 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		this.mbThreadPersistence = mbThreadPersistence;
 	}
 
+	public MBThreadFinder getMBThreadFinder() {
+		return mbThreadFinder;
+	}
+
+	public void setMBThreadFinder(MBThreadFinder mbThreadFinder) {
+		this.mbThreadFinder = mbThreadFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
@@ -233,6 +273,10 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 			mbCategoryPersistence = MBCategoryUtil.getPersistence();
 		}
 
+		if (mbCategoryFinder == null) {
+			mbCategoryFinder = MBCategoryFinderUtil.getFinder();
+		}
+
 		if (mbDiscussionPersistence == null) {
 			mbDiscussionPersistence = MBDiscussionUtil.getPersistence();
 		}
@@ -249,12 +293,20 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 			mbMessagePersistence = MBMessageUtil.getPersistence();
 		}
 
+		if (mbMessageFinder == null) {
+			mbMessageFinder = MBMessageFinderUtil.getFinder();
+		}
+
 		if (mbMessageFlagLocalService == null) {
 			mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getImpl();
 		}
 
 		if (mbMessageFlagPersistence == null) {
 			mbMessageFlagPersistence = MBMessageFlagUtil.getPersistence();
+		}
+
+		if (mbMessageFlagFinder == null) {
+			mbMessageFlagFinder = MBMessageFlagFinderUtil.getFinder();
 		}
 
 		if (mbStatsUserPersistence == null) {
@@ -268,6 +320,10 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		if (mbThreadPersistence == null) {
 			mbThreadPersistence = MBThreadUtil.getPersistence();
 		}
+
+		if (mbThreadFinder == null) {
+			mbThreadFinder = MBThreadFinderUtil.getFinder();
+		}
 	}
 
 	protected MBBanLocalService mbBanLocalService;
@@ -276,13 +332,17 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	protected MBCategoryLocalService mbCategoryLocalService;
 	protected MBCategoryService mbCategoryService;
 	protected MBCategoryPersistence mbCategoryPersistence;
+	protected MBCategoryFinder mbCategoryFinder;
 	protected MBDiscussionPersistence mbDiscussionPersistence;
 	protected MBMessageLocalService mbMessageLocalService;
 	protected MBMessageService mbMessageService;
 	protected MBMessagePersistence mbMessagePersistence;
+	protected MBMessageFinder mbMessageFinder;
 	protected MBMessageFlagLocalService mbMessageFlagLocalService;
 	protected MBMessageFlagPersistence mbMessageFlagPersistence;
+	protected MBMessageFlagFinder mbMessageFlagFinder;
 	protected MBStatsUserPersistence mbStatsUserPersistence;
 	protected MBThreadLocalService mbThreadLocalService;
 	protected MBThreadPersistence mbThreadPersistence;
+	protected MBThreadFinder mbThreadFinder;
 }

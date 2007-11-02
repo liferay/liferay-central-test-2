@@ -78,6 +78,30 @@ public class DLFileShortcutLocalServiceUtil {
 		dlFileShortcutLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
 	}
 
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder getDLFileEntryFinder() {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.getDLFileEntryFinder();
+	}
+
+	public static void setDLFileEntryFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder dlFileEntryFinder) {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+		dlFileShortcutLocalService.setDLFileEntryFinder(dlFileEntryFinder);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder getDLFileEntryAndShortcutFinder() {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.getDLFileEntryAndShortcutFinder();
+	}
+
+	public static void setDLFileEntryAndShortcutFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder dlFileEntryAndShortcutFinder) {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+		dlFileShortcutLocalService.setDLFileEntryAndShortcutFinder(dlFileEntryAndShortcutFinder);
+	}
+
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence getDLFileRankPersistence() {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
@@ -88,6 +112,18 @@ public class DLFileShortcutLocalServiceUtil {
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 		dlFileShortcutLocalService.setDLFileRankPersistence(dlFileRankPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder getDLFileRankFinder() {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.getDLFileRankFinder();
+	}
+
+	public static void setDLFileRankFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder dlFileRankFinder) {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+		dlFileShortcutLocalService.setDLFileRankFinder(dlFileRankFinder);
 	}
 
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence getDLFileShortcutPersistence() {

@@ -39,19 +39,17 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="ShoppingItemFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingItemFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingItemFinder {
+public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 
 	public static String COUNT_BY_CATEGORY_IDS =
 		ShoppingItemFinder.class.getName() + ".countByCategoryIds";
 
-	public static int countByCategoryIds(List categoryIds)
-		throws SystemException {
-
+	public int countByCategoryIds(List categoryIds) throws SystemException {
 		Session session = null;
 
 		try {
@@ -94,7 +92,7 @@ public class ShoppingItemFinder {
 		}
 	}
 
-	public static int countByFeatured(long groupId, long[] categoryIds)
+	public int countByFeatured(long groupId, long[] categoryIds)
 		throws SystemException {
 
 		Session session = null;
@@ -163,7 +161,7 @@ public class ShoppingItemFinder {
 		}
 	}
 
-	public static int countByKeywords(
+	public int countByKeywords(
 			long groupId, long[] categoryIds, String keywords)
 		throws SystemException {
 
@@ -237,7 +235,7 @@ public class ShoppingItemFinder {
 		}
 	}
 
-	public static int countBySale(long groupId, long[] categoryIds)
+	public int countBySale(long groupId, long[] categoryIds)
 		throws SystemException {
 
 		Session session = null;
@@ -306,8 +304,7 @@ public class ShoppingItemFinder {
 		}
 	}
 
-	public static List findByFeatured(
-			long groupId, long[] categoryIds, int numOfItems)
+	public List findByFeatured(long groupId, long[] categoryIds, int numOfItems)
 		throws SystemException {
 
 		int countByFeatured = countByFeatured(groupId, categoryIds);
@@ -369,7 +366,7 @@ public class ShoppingItemFinder {
 		}
 	}
 
-	public static List findByKeywords(
+	public List findByKeywords(
 			long groupId, long[] categoryIds, String keywords, int begin,
 			int end)
 		throws SystemException {
@@ -434,8 +431,7 @@ public class ShoppingItemFinder {
 		}
 	}
 
-	public static List findBySale(
-			long groupId, long[] categoryIds, int numOfItems)
+	public List findBySale(long groupId, long[] categoryIds, int numOfItems)
 		throws SystemException {
 
 		int countBySale = countBySale(groupId, categoryIds);
@@ -497,7 +493,7 @@ public class ShoppingItemFinder {
 		}
 	}
 
-	private static String _getCategoryIds(List categoryIds) {
+	private String _getCategoryIds(List categoryIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < categoryIds.size(); i++) {

@@ -41,6 +41,8 @@ import com.liferay.portlet.journal.service.JournalTemplateLocalService;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalTemplateService;
 import com.liferay.portlet.journal.service.JournalTemplateServiceFactory;
+import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
+import com.liferay.portlet.journal.service.persistence.JournalArticleFinderUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticlePersistence;
@@ -49,8 +51,12 @@ import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUti
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
+import com.liferay.portlet.journal.service.persistence.JournalStructureFinder;
+import com.liferay.portlet.journal.service.persistence.JournalStructureFinderUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructurePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
+import com.liferay.portlet.journal.service.persistence.JournalTemplateFinder;
+import com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 
@@ -80,6 +86,15 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 	public void setJournalArticlePersistence(
 		JournalArticlePersistence journalArticlePersistence) {
 		this.journalArticlePersistence = journalArticlePersistence;
+	}
+
+	public JournalArticleFinder getJournalArticleFinder() {
+		return journalArticleFinder;
+	}
+
+	public void setJournalArticleFinder(
+		JournalArticleFinder journalArticleFinder) {
+		this.journalArticleFinder = journalArticleFinder;
 	}
 
 	public JournalArticleImageLocalService getJournalArticleImageLocalService() {
@@ -163,6 +178,15 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 		this.journalStructurePersistence = journalStructurePersistence;
 	}
 
+	public JournalStructureFinder getJournalStructureFinder() {
+		return journalStructureFinder;
+	}
+
+	public void setJournalStructureFinder(
+		JournalStructureFinder journalStructureFinder) {
+		this.journalStructureFinder = journalStructureFinder;
+	}
+
 	public JournalTemplateLocalService getJournalTemplateLocalService() {
 		return journalTemplateLocalService;
 	}
@@ -190,6 +214,15 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 		this.journalTemplatePersistence = journalTemplatePersistence;
 	}
 
+	public JournalTemplateFinder getJournalTemplateFinder() {
+		return journalTemplateFinder;
+	}
+
+	public void setJournalTemplateFinder(
+		JournalTemplateFinder journalTemplateFinder) {
+		this.journalTemplateFinder = journalTemplateFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
@@ -197,6 +230,10 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 
 		if (journalArticlePersistence == null) {
 			journalArticlePersistence = JournalArticleUtil.getPersistence();
+		}
+
+		if (journalArticleFinder == null) {
+			journalArticleFinder = JournalArticleFinderUtil.getFinder();
 		}
 
 		if (journalArticleImageLocalService == null) {
@@ -235,6 +272,10 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 			journalStructurePersistence = JournalStructureUtil.getPersistence();
 		}
 
+		if (journalStructureFinder == null) {
+			journalStructureFinder = JournalStructureFinderUtil.getFinder();
+		}
+
 		if (journalTemplateLocalService == null) {
 			journalTemplateLocalService = JournalTemplateLocalServiceFactory.getImpl();
 		}
@@ -246,10 +287,15 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 		if (journalTemplatePersistence == null) {
 			journalTemplatePersistence = JournalTemplateUtil.getPersistence();
 		}
+
+		if (journalTemplateFinder == null) {
+			journalTemplateFinder = JournalTemplateFinderUtil.getFinder();
+		}
 	}
 
 	protected JournalArticleLocalService journalArticleLocalService;
 	protected JournalArticlePersistence journalArticlePersistence;
+	protected JournalArticleFinder journalArticleFinder;
 	protected JournalArticleImageLocalService journalArticleImageLocalService;
 	protected JournalArticleImagePersistence journalArticleImagePersistence;
 	protected JournalArticleResourceLocalService journalArticleResourceLocalService;
@@ -259,7 +305,9 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 	protected JournalStructureLocalService journalStructureLocalService;
 	protected JournalStructureService journalStructureService;
 	protected JournalStructurePersistence journalStructurePersistence;
+	protected JournalStructureFinder journalStructureFinder;
 	protected JournalTemplateLocalService journalTemplateLocalService;
 	protected JournalTemplateService journalTemplateService;
 	protected JournalTemplatePersistence journalTemplatePersistence;
+	protected JournalTemplateFinder journalTemplateFinder;
 }

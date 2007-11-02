@@ -56,7 +56,6 @@ import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
 import com.liferay.portlet.shopping.service.base.ShoppingItemLocalServiceBaseImpl;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.util.FileUtil;
@@ -506,14 +505,14 @@ public class ShoppingItemLocalServiceImpl
 	public int getCategoriesItemsCount(List categoryIds)
 		throws SystemException {
 
-		return ShoppingItemFinder.countByCategoryIds(categoryIds);
+		return shoppingItemFinder.countByCategoryIds(categoryIds);
 	}
 
 	public List getFeaturedItems(
 			long groupId, long categoryId, int numOfItems)
 		throws SystemException {
 
-		List featuredItems = ShoppingItemFinder.findByFeatured(
+		List featuredItems = shoppingItemFinder.findByFeatured(
 			groupId, new long[] {categoryId}, numOfItems);
 
 		if (featuredItems.size() == 0) {
@@ -530,7 +529,7 @@ public class ShoppingItemLocalServiceImpl
 					categoryIds[i] = childCategory.getCategoryId();
 				}
 
-				featuredItems = ShoppingItemFinder.findByFeatured(
+				featuredItems = shoppingItemFinder.findByFeatured(
 					groupId, categoryIds, numOfItems);
 			}
 		}
@@ -578,7 +577,7 @@ public class ShoppingItemLocalServiceImpl
 	public List getSaleItems(long groupId, long categoryId, int numOfItems)
 		throws SystemException {
 
-		List saleItems = ShoppingItemFinder.findBySale(
+		List saleItems = shoppingItemFinder.findBySale(
 			groupId, new long[] {categoryId}, numOfItems);
 
 		if (saleItems.size() == 0) {
@@ -595,7 +594,7 @@ public class ShoppingItemLocalServiceImpl
 					categoryIds[i] = childCategory.getCategoryId();
 				}
 
-				saleItems = ShoppingItemFinder.findBySale(
+				saleItems = shoppingItemFinder.findBySale(
 					groupId, categoryIds, numOfItems);
 			}
 		}
@@ -608,14 +607,14 @@ public class ShoppingItemLocalServiceImpl
 			int end)
 		throws SystemException {
 
-		return ShoppingItemFinder.findByKeywords(
+		return shoppingItemFinder.findByKeywords(
 			groupId, categoryIds, keywords, begin, end);
 	}
 
 	public int searchCount(long groupId, long[] categoryIds, String keywords)
 		throws SystemException {
 
-		return ShoppingItemFinder.countByKeywords(
+		return shoppingItemFinder.countByKeywords(
 			groupId, categoryIds, keywords);
 	}
 

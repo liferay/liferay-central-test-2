@@ -34,10 +34,8 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
@@ -155,13 +153,13 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public int getCategoriesThreadsCount(List categoryIds)
 		throws SystemException {
 
-		return MBThreadFinder.countByCategoryIds(categoryIds);
+		return mbThreadFinder.countByCategoryIds(categoryIds);
 	}
 
 	public List getGroupThreads(long groupId, int begin, int end)
 		throws SystemException {
 
-		return MBThreadFinder.findByGroupId(groupId, begin, end);
+		return mbThreadFinder.findByGroupId(groupId, begin, end);
 	}
 
 	public List getGroupThreads(long groupId, long userId, int begin, int end)
@@ -175,20 +173,20 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (userId <= 0) {
-			return MBThreadFinder.findByGroupId(groupId, begin, end);
+			return mbThreadFinder.findByGroupId(groupId, begin, end);
 		}
 		else {
 			if (subscribed) {
-				return MBThreadFinder.findByS_G_U(groupId, userId, begin, end);
+				return mbThreadFinder.findByS_G_U(groupId, userId, begin, end);
 			}
 			else {
-				return MBThreadFinder.findByG_U(groupId, userId, begin, end);
+				return mbThreadFinder.findByG_U(groupId, userId, begin, end);
 			}
 		}
 	}
 
 	public int getGroupThreadsCount(long groupId) throws SystemException {
-		return MBThreadFinder.countByGroupId(groupId);
+		return mbThreadFinder.countByGroupId(groupId);
 	}
 
 	public int getGroupThreadsCount(long groupId, long userId)
@@ -202,14 +200,14 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (userId <= 0) {
-			return MBThreadFinder.countByGroupId(groupId);
+			return mbThreadFinder.countByGroupId(groupId);
 		}
 		else {
 			if (subscribed) {
-				return MBThreadFinder.countByS_G_U(groupId, userId);
+				return mbThreadFinder.countByS_G_U(groupId, userId);
 			}
 			else {
-				return MBThreadFinder.countByG_U(groupId, userId);
+				return mbThreadFinder.countByG_U(groupId, userId);
 			}
 		}
 	}
@@ -240,7 +238,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 
 		int total = MBMessageUtil.countByThreadId(threadId);
-		int read = MBMessageFlagFinder.countByU_T(userId, threadId);
+		int read = mbMessageFlagFinder.countByU_T(userId, threadId);
 
 		if (total != read) {
 			return false;

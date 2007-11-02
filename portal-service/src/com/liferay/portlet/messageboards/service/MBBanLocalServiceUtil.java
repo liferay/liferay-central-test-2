@@ -89,6 +89,18 @@ public class MBBanLocalServiceUtil {
 		mbBanLocalService.setMBCategoryPersistence(mbCategoryPersistence);
 	}
 
+	public static com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder getMBCategoryFinder() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBCategoryFinder();
+	}
+
+	public static void setMBCategoryFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder mbCategoryFinder) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setMBCategoryFinder(mbCategoryFinder);
+	}
+
 	public static com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence getMBDiscussionPersistence() {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 
@@ -113,6 +125,18 @@ public class MBBanLocalServiceUtil {
 		mbBanLocalService.setMBMessagePersistence(mbMessagePersistence);
 	}
 
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFinder getMBMessageFinder() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBMessageFinder();
+	}
+
+	public static void setMBMessageFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setMBMessageFinder(mbMessageFinder);
+	}
+
 	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence getMBMessageFlagPersistence() {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 
@@ -123,6 +147,18 @@ public class MBBanLocalServiceUtil {
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 		mbBanLocalService.setMBMessageFlagPersistence(mbMessageFlagPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder getMBMessageFlagFinder() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBMessageFlagFinder();
+	}
+
+	public static void setMBMessageFlagFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder mbMessageFlagFinder) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setMBMessageFlagFinder(mbMessageFlagFinder);
 	}
 
 	public static com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence getMBStatsUserPersistence() {
@@ -147,6 +183,18 @@ public class MBBanLocalServiceUtil {
 		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 		mbBanLocalService.setMBThreadPersistence(mbThreadPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBThreadFinder getMBThreadFinder() {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBThreadFinder();
+	}
+
+	public static void setMBThreadFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBThreadFinder mbThreadFinder) {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+		mbBanLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
 	public static void afterPropertiesSet() {

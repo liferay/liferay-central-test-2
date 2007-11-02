@@ -78,6 +78,30 @@ public class DLFileVersionLocalServiceUtil {
 		dlFileVersionLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
 	}
 
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder getDLFileEntryFinder() {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.getDLFileEntryFinder();
+	}
+
+	public static void setDLFileEntryFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder dlFileEntryFinder) {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+		dlFileVersionLocalService.setDLFileEntryFinder(dlFileEntryFinder);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder getDLFileEntryAndShortcutFinder() {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.getDLFileEntryAndShortcutFinder();
+	}
+
+	public static void setDLFileEntryAndShortcutFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder dlFileEntryAndShortcutFinder) {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+		dlFileVersionLocalService.setDLFileEntryAndShortcutFinder(dlFileEntryAndShortcutFinder);
+	}
+
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence getDLFileRankPersistence() {
 		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
 
@@ -88,6 +112,18 @@ public class DLFileVersionLocalServiceUtil {
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence) {
 		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
 		dlFileVersionLocalService.setDLFileRankPersistence(dlFileRankPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder getDLFileRankFinder() {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.getDLFileRankFinder();
+	}
+
+	public static void setDLFileRankFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder dlFileRankFinder) {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+		dlFileVersionLocalService.setDLFileRankFinder(dlFileRankFinder);
 	}
 
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence getDLFileShortcutPersistence() {

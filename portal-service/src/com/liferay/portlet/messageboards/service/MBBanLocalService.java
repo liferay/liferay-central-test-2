@@ -67,6 +67,11 @@ public interface MBBanLocalService {
 	public void setMBCategoryPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence);
 
+	public com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder getMBCategoryFinder();
+
+	public void setMBCategoryFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder mbCategoryFinder);
+
 	public com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence getMBDiscussionPersistence();
 
 	public void setMBDiscussionPersistence(
@@ -77,10 +82,20 @@ public interface MBBanLocalService {
 	public void setMBMessagePersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence);
 
+	public com.liferay.portlet.messageboards.service.persistence.MBMessageFinder getMBMessageFinder();
+
+	public void setMBMessageFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder);
+
 	public com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence getMBMessageFlagPersistence();
 
 	public void setMBMessageFlagPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder getMBMessageFlagFinder();
+
+	public void setMBMessageFlagFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder mbMessageFlagFinder);
 
 	public com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence getMBStatsUserPersistence();
 
@@ -91,6 +106,11 @@ public interface MBBanLocalService {
 
 	public void setMBThreadPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBThreadFinder getMBThreadFinder();
+
+	public void setMBThreadFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBThreadFinder mbThreadFinder);
 
 	public void afterPropertiesSet();
 

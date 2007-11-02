@@ -22,65 +22,16 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
-
-import java.util.Iterator;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-
 /**
- * <a href="MBMessageFlagFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBCategoryFinder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MBMessageFlagFinder {
+public interface MBCategoryFinder {
+	public int countByS_G_U(long groupId, long userId)
+		throws com.liferay.portal.SystemException;
 
-	public static String COUNT_BY_T_U =
-		MBMessageFlagFinder.class.getName() + ".countByU_T";
-
-	public static int countByU_T(long threadId, long userId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_T_U);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(threadId);
-			qPos.add(userId);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
-
+	public java.util.List findByS_G_U(long groupId, long userId, int begin,
+		int end) throws com.liferay.portal.SystemException;
 }

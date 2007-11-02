@@ -45,12 +45,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="JournalArticleFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalArticleFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalArticleFinder {
+public class JournalArticleFinderImpl implements JournalArticleFinder {
 
 	public static String COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R =
 		JournalArticleFinder.class.getName() +
@@ -66,7 +66,7 @@ public class JournalArticleFinder {
 		JournalArticleFinder.class.getName() +
 			".findByC_G_A_V_T_D_C_T_S_T_D_A_E_R";
 
-	public static int countByKeywords(
+	public int countByKeywords(
 			long companyId, long groupId, String keywords, Double version,
 			String type, String structureId, String templateId,
 			Date displayDateGT, Date displayDateLT, Boolean approved,
@@ -96,7 +96,7 @@ public class JournalArticleFinder {
 			expired, reviewDate, andOperator);
 	}
 
-	public static int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
@@ -111,7 +111,7 @@ public class JournalArticleFinder {
 			expired, reviewDate, andOperator);
 	}
 
-	public static int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
@@ -127,7 +127,7 @@ public class JournalArticleFinder {
 			andOperator);
 	}
 
-	public static int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String[] articleIds, Double version,
 			String[] titles, String[] descriptions, String[] contents,
 			String type, String[] structureIds, String[] templateIds,
@@ -247,7 +247,7 @@ public class JournalArticleFinder {
 		}
 	}
 
-	public static List findByExpirationDate(
+	public List findByExpirationDate(
 			Boolean expired, Date expirationDateLT, Date expirationDateGT)
 		throws SystemException {
 
@@ -289,7 +289,7 @@ public class JournalArticleFinder {
 		}
 	}
 
-	public static List findByKeywords(
+	public List findByKeywords(
 			long companyId, long groupId, String keywords, Double version,
 			String type, String structureId, String templateId,
 			Date displayDateGT, Date displayDateLT, Boolean approved,
@@ -320,7 +320,7 @@ public class JournalArticleFinder {
 			expired, reviewDate, andOperator, begin, end, obc);
 	}
 
-	public static List findByReviewDate(Date reviewDateLT, Date reviewDateGT)
+	public List findByReviewDate(Date reviewDateLT, Date reviewDateGT)
 		throws SystemException {
 
 		Timestamp reviewDateLT_TS = CalendarUtil.getTimestamp(reviewDateLT);
@@ -351,7 +351,7 @@ public class JournalArticleFinder {
 		}
 	}
 
-	public static List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
@@ -367,7 +367,7 @@ public class JournalArticleFinder {
 			expired, reviewDate, andOperator, begin, end, obc);
 	}
 
-	public static List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
@@ -384,7 +384,7 @@ public class JournalArticleFinder {
 			andOperator, begin, end, obc);
 	}
 
-	public static List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String[] articleIds, Double version,
 			String[] titles, String[] descriptions, String[] contents,
 			String type, String[] structureIds, String[] templateIds,

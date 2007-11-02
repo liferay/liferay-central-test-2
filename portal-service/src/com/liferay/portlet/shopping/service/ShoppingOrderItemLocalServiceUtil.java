@@ -102,6 +102,18 @@ public class ShoppingOrderItemLocalServiceUtil {
 		shoppingOrderItemLocalService.setShoppingCouponPersistence(shoppingCouponPersistence);
 	}
 
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder getShoppingCouponFinder() {
+		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
+		return shoppingOrderItemLocalService.getShoppingCouponFinder();
+	}
+
+	public static void setShoppingCouponFinder(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder shoppingCouponFinder) {
+		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+		shoppingOrderItemLocalService.setShoppingCouponFinder(shoppingCouponFinder);
+	}
+
 	public static com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence getShoppingItemPersistence() {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
 
@@ -112,6 +124,18 @@ public class ShoppingOrderItemLocalServiceUtil {
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence shoppingItemPersistence) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
 		shoppingOrderItemLocalService.setShoppingItemPersistence(shoppingItemPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder getShoppingItemFinder() {
+		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
+		return shoppingOrderItemLocalService.getShoppingItemFinder();
+	}
+
+	public static void setShoppingItemFinder(
+		com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder shoppingItemFinder) {
+		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+		shoppingOrderItemLocalService.setShoppingItemFinder(shoppingItemFinder);
 	}
 
 	public static com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence getShoppingItemFieldPersistence() {
@@ -148,6 +172,18 @@ public class ShoppingOrderItemLocalServiceUtil {
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence shoppingOrderPersistence) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
 		shoppingOrderItemLocalService.setShoppingOrderPersistence(shoppingOrderPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder getShoppingOrderFinder() {
+		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
+		return shoppingOrderItemLocalService.getShoppingOrderFinder();
+	}
+
+	public static void setShoppingOrderFinder(
+		com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder shoppingOrderFinder) {
+		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+		shoppingOrderItemLocalService.setShoppingOrderFinder(shoppingOrderFinder);
 	}
 
 	public static com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence getShoppingOrderItemPersistence() {

@@ -41,12 +41,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="ShoppingOrderFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingOrderFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingOrderFinder {
+public class ShoppingOrderFinderImpl implements ShoppingOrderFinder {
 
 	public static String COUNT_BY_G_C_U_N_PPPS =
 		ShoppingOrderFinder.class.getName() + ".countByG_C_U_N_PPPS";
@@ -54,7 +54,7 @@ public class ShoppingOrderFinder {
 	public static String FIND_BY_G_C_U_N_PPPS =
 		ShoppingOrderFinder.class.getName() + ".findByG_C_U_N_PPPS";
 
-	public static int countByG_C_U_N_PPPS(
+	public int countByG_C_U_N_PPPS(
 			long groupId, long companyId, long userId, String number,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
@@ -133,7 +133,7 @@ public class ShoppingOrderFinder {
 		}
 	}
 
-	public static List findByG_C_U_N_PPPS(
+	public List findByG_C_U_N_PPPS(
 			long groupId, long companyId, long userId, String number,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,

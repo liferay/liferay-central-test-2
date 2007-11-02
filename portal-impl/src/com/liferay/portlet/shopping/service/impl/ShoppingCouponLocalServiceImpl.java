@@ -48,7 +48,6 @@ import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.service.base.ShoppingCouponLocalServiceBaseImpl;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.util.PwdGenerator;
@@ -170,7 +169,7 @@ public class ShoppingCouponLocalServiceImpl
 
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
-		return ShoppingCouponFinder.findByG_C_C_A_DT(
+		return shoppingCouponFinder.findByG_C_C_A_DT(
 			groupId, companyId, code, active, discountType, andOperator,
 			begin, end);
 	}
@@ -180,7 +179,7 @@ public class ShoppingCouponLocalServiceImpl
 			String discountType, boolean andOperator)
 		throws SystemException {
 
-		return ShoppingCouponFinder.countByG_C_C_A_DT(
+		return shoppingCouponFinder.countByG_C_C_A_DT(
 			groupId, companyId, code, active, discountType, andOperator);
 	}
 

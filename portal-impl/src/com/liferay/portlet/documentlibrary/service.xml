@@ -47,6 +47,7 @@
 			<finder-column name="name" />
 		</finder>
 	</entity>
+	<entity name="DLFileEntryAndShortcut" local-service="false" remote-service="false" />
 	<entity name="DLFileRank" local-service="true" remote-service="false">
 
 		<!-- PK fields -->

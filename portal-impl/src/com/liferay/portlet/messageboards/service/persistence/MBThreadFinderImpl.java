@@ -41,12 +41,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="MBThreadFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBThreadFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MBThreadFinder {
+public class MBThreadFinderImpl implements MBThreadFinder {
 
 	public static String COUNT_BY_CATEGORY_IDS =
 		MBThreadFinder.class.getName() + ".countByCategoryIds";
@@ -69,9 +69,7 @@ public class MBThreadFinder {
 	public static String FIND_BY_S_G_U =
 		MBThreadFinder.class.getName() + ".findByS_G_U";
 
-	public static int countByCategoryIds(List categoryIds)
-		throws SystemException {
-
+	public int countByCategoryIds(List categoryIds) throws SystemException {
 		Session session = null;
 
 		try {
@@ -114,7 +112,7 @@ public class MBThreadFinder {
 		}
 	}
 
-	public static int countByGroupId(long groupId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -150,9 +148,7 @@ public class MBThreadFinder {
 		}
 	}
 
-	public static int countByG_U(long groupId, long userId)
-		throws SystemException {
-
+	public int countByG_U(long groupId, long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -189,9 +185,7 @@ public class MBThreadFinder {
 		}
 	}
 
-	public static int countByS_G_U(long groupId, long userId)
-		throws SystemException {
-
+	public int countByS_G_U(long groupId, long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -229,7 +223,7 @@ public class MBThreadFinder {
 		}
 	}
 
-	public static List findByGroupId(long groupId, int begin, int end)
+	public List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -257,7 +251,7 @@ public class MBThreadFinder {
 		}
 	}
 
-	public static List findByG_U(long groupId, long userId, int begin, int end)
+	public List findByG_U(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -286,8 +280,7 @@ public class MBThreadFinder {
 		}
 	}
 
-	public static List findByS_G_U(
-			long groupId, long userId, int begin, int end)
+	public List findByS_G_U(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -317,7 +310,7 @@ public class MBThreadFinder {
 		}
 	}
 
-	private static String _getCategoryIds(List categoryIds) {
+	private String _getCategoryIds(List categoryIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < categoryIds.size(); i++) {

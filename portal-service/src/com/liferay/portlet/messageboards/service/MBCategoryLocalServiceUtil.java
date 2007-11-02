@@ -89,6 +89,18 @@ public class MBCategoryLocalServiceUtil {
 		mbCategoryLocalService.setMBCategoryPersistence(mbCategoryPersistence);
 	}
 
+	public static com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder getMBCategoryFinder() {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getMBCategoryFinder();
+	}
+
+	public static void setMBCategoryFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder mbCategoryFinder) {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.setMBCategoryFinder(mbCategoryFinder);
+	}
+
 	public static com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence getMBDiscussionPersistence() {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -113,6 +125,18 @@ public class MBCategoryLocalServiceUtil {
 		mbCategoryLocalService.setMBMessagePersistence(mbMessagePersistence);
 	}
 
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFinder getMBMessageFinder() {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getMBMessageFinder();
+	}
+
+	public static void setMBMessageFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.setMBMessageFinder(mbMessageFinder);
+	}
+
 	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence getMBMessageFlagPersistence() {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -123,6 +147,18 @@ public class MBCategoryLocalServiceUtil {
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 		mbCategoryLocalService.setMBMessageFlagPersistence(mbMessageFlagPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder getMBMessageFlagFinder() {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getMBMessageFlagFinder();
+	}
+
+	public static void setMBMessageFlagFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder mbMessageFlagFinder) {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.setMBMessageFlagFinder(mbMessageFlagFinder);
 	}
 
 	public static com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence getMBStatsUserPersistence() {
@@ -147,6 +183,18 @@ public class MBCategoryLocalServiceUtil {
 		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 		mbCategoryLocalService.setMBThreadPersistence(mbThreadPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBThreadFinder getMBThreadFinder() {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getMBThreadFinder();
+	}
+
+	public static void setMBThreadFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBThreadFinder mbThreadFinder) {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
 	public static void afterPropertiesSet() {

@@ -62,6 +62,11 @@ public interface JournalArticleLocalService {
 	public void setJournalArticlePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence);
 
+	public com.liferay.portlet.journal.service.persistence.JournalArticleFinder getJournalArticleFinder();
+
+	public void setJournalArticleFinder(
+		com.liferay.portlet.journal.service.persistence.JournalArticleFinder journalArticleFinder);
+
 	public com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence getJournalArticleImagePersistence();
 
 	public void setJournalArticleImagePersistence(
@@ -82,10 +87,20 @@ public interface JournalArticleLocalService {
 	public void setJournalStructurePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence);
 
+	public com.liferay.portlet.journal.service.persistence.JournalStructureFinder getJournalStructureFinder();
+
+	public void setJournalStructureFinder(
+		com.liferay.portlet.journal.service.persistence.JournalStructureFinder journalStructureFinder);
+
 	public com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence getJournalTemplatePersistence();
 
 	public void setJournalTemplatePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalTemplateFinder getJournalTemplateFinder();
+
+	public void setJournalTemplateFinder(
+		com.liferay.portlet.journal.service.persistence.JournalTemplateFinder journalTemplateFinder);
 
 	public void afterPropertiesSet();
 

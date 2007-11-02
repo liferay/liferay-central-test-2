@@ -905,9 +905,6 @@ public class ServiceBuilder {
 							_createPersistence(entity);
 							_createPersistenceUtil(entity);
 
-							_createFinder(entity);
-							_createFinderUtil(entity);
-
 							_createModelImpl(entity);
 							_createExtendedModelImpl(entity);
 
@@ -922,6 +919,9 @@ public class ServiceBuilder {
 								_createEJBPK(entity);
 							}
 						}
+
+						_createFinder(entity);
+						_createFinderUtil(entity);
 
 						if (entity.hasLocalService()) {
 							_createServiceBaseImpl(entity, _LOCAL);
@@ -5730,11 +5730,11 @@ public class ServiceBuilder {
 			if (tempEntity.hasColumns()) {
 				sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "Persistence;");
 				sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "Util;");
+			}
 
-				if (tempEntity.hasFinderClass()) {
-					sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "Finder;");
-					sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "FinderUtil;");
-				}
+			if (tempEntity.hasFinderClass()) {
+				sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "Finder;");
+				sm.append("import " + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "FinderUtil;");
 			}
 		}
 
@@ -5805,16 +5805,16 @@ public class ServiceBuilder {
 				sm.append("public void set" + tempEntity.getName() + "Persistence(" + tempEntity.getName() + "Persistence " + tempEntity.getVarName() + "Persistence) {");
 				sm.append("this." + tempEntity.getVarName() + "Persistence = " + tempEntity.getVarName() + "Persistence;");
 				sm.append("}");
+			}
 
-				if (tempEntity.hasFinderClass()) {
-					sm.append("public " + tempEntity.getName() + "Finder get" + tempEntity.getName() + "Finder() {");
-					sm.append("return " + tempEntity.getVarName() + "Finder;");
-					sm.append("}");
+			if (tempEntity.hasFinderClass()) {
+				sm.append("public " + tempEntity.getName() + "Finder get" + tempEntity.getName() + "Finder() {");
+				sm.append("return " + tempEntity.getVarName() + "Finder;");
+				sm.append("}");
 
-					sm.append("public void set" + tempEntity.getName() + "Finder(" + tempEntity.getName() + "Finder " + tempEntity.getVarName() + "Finder) {");
-					sm.append("this." + tempEntity.getVarName() + "Finder = " + tempEntity.getVarName() + "Finder;");
-					sm.append("}");
-				}
+				sm.append("public void set" + tempEntity.getName() + "Finder(" + tempEntity.getName() + "Finder " + tempEntity.getVarName() + "Finder) {");
+				sm.append("this." + tempEntity.getVarName() + "Finder = " + tempEntity.getVarName() + "Finder;");
+				sm.append("}");
 			}
 		}
 
@@ -5848,12 +5848,12 @@ public class ServiceBuilder {
 				sm.append("if (" + tempEntity.getVarName() + "Persistence == null) {");
 				sm.append(tempEntity.getVarName() + "Persistence = " + tempEntity.getName() + "Util.getPersistence();");
 				sm.append("}");
+			}
 
-				if (tempEntity.hasFinderClass()) {
-					sm.append("if (" + tempEntity.getVarName() + "Finder == null) {");
-					sm.append(tempEntity.getVarName() + "Finder = " + tempEntity.getName() + "FinderUtil.getFinder();");
-					sm.append("}");
-				}
+			if (tempEntity.hasFinderClass()) {
+				sm.append("if (" + tempEntity.getVarName() + "Finder == null) {");
+				sm.append(tempEntity.getVarName() + "Finder = " + tempEntity.getName() + "FinderUtil.getFinder();");
+				sm.append("}");
 			}
 		}
 
@@ -5881,10 +5881,10 @@ public class ServiceBuilder {
 
 			if (tempEntity.hasColumns()) {
 				sm.append("protected " + tempEntity.getName() + "Persistence " + tempEntity.getVarName() + "Persistence;");
+			}
 
-				if (tempEntity.hasFinderClass()) {
-					sm.append("protected " + tempEntity.getName() + "Finder " + tempEntity.getVarName() + "Finder;");
-				}
+			if (tempEntity.hasFinderClass()) {
+				sm.append("protected " + tempEntity.getName() + "Finder " + tempEntity.getVarName() + "Finder;");
 			}
 		}
 
@@ -6988,12 +6988,12 @@ public class ServiceBuilder {
 					sm.append("\t\t<property name=\"" + tempEntityName + "Persistence\">\n");
 					sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "PersistenceImpl\" />\n");
 					sm.append("\t\t</property>\n");
+				}
 
-					if (tempEntity.hasFinderClass()) {
-						sm.append("\t\t<property name=\"" + tempEntityName + "Finder\">\n");
-						sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "FinderImpl\" />\n");
-						sm.append("\t\t</property>\n");
-					}
+				if (tempEntity.hasFinderClass()) {
+					sm.append("\t\t<property name=\"" + tempEntityName + "Finder\">\n");
+					sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service.persistence." + tempEntity.getName() + "FinderImpl\" />\n");
+					sm.append("\t\t</property>\n");
 				}
 			}
 
@@ -7051,16 +7051,16 @@ public class ServiceBuilder {
 			sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service.persistence." + entity.getName() + "PersistenceImpl\" />\n");
 			sm.append("\t\t</property>\n");
 			sm.append("\t</bean>\n");
+		}
 
-			if (entity.hasFinderClass()) {
-				sm.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "FinderImpl\" class=\"" + entity.getFinderClass() + "\" lazy-init=\"true\" />\n");
+		if (entity.hasFinderClass()) {
+			sm.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "FinderImpl\" class=\"" + entity.getFinderClass() + "\" lazy-init=\"true\" />\n");
 
-				sm.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "FinderUtil\" class=\"" + _packagePath + ".service.persistence." + entity.getName() + "FinderUtil\" lazy-init=\"true\">\n");
-				sm.append("\t\t<property name=\"finder\">\n");
-				sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service.persistence." + entity.getName() + "FinderImpl\" />\n");
-				sm.append("\t\t</property>\n");
-				sm.append("\t</bean>\n");
-			}
+			sm.append("\t<bean id=\"" + _packagePath + ".service.persistence." + entity.getName() + "FinderUtil\" class=\"" + _packagePath + ".service.persistence." + entity.getName() + "FinderUtil\" lazy-init=\"true\">\n");
+			sm.append("\t\t<property name=\"finder\">\n");
+			sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service.persistence." + entity.getName() + "FinderImpl\" />\n");
+			sm.append("\t\t</property>\n");
+			sm.append("\t</bean>\n");
 		}
 	}
 

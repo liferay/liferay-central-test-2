@@ -41,13 +41,13 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="JournalTemplateFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalTemplateFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  *
  */
-public class JournalTemplateFinder {
+public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 
 	public static String COUNT_BY_C_G_T_S_N_D =
 		JournalTemplateFinder.class.getName() + ".countByC_G_T_S_N_D";
@@ -55,7 +55,7 @@ public class JournalTemplateFinder {
 	public static String FIND_BY_C_G_T_S_N_D =
 		JournalTemplateFinder.class.getName() + ".findByC_G_T_S_N_D";
 
-	public static int countByKeywords(
+	public int countByKeywords(
 			long companyId, long groupId, String keywords, String structureId,
 			String structureIdComparator)
 		throws SystemException {
@@ -79,7 +79,7 @@ public class JournalTemplateFinder {
 			names, descriptions, andOperator);
 	}
 
-	public static int countByC_G_T_S_N_D(
+	public int countByC_G_T_S_N_D(
 			long companyId, long groupId, String templateId, String structureId,
 			String structureIdComparator, String name, String description,
 			boolean andOperator)
@@ -91,7 +91,7 @@ public class JournalTemplateFinder {
 			new String[] {description}, andOperator);
 	}
 
-	public static int countByC_G_T_S_N_D(
+	public int countByC_G_T_S_N_D(
 			long companyId, long groupId, String[] templateIds,
 			String structureId, String structureIdComparator, String[] names,
 			String[] descriptions, boolean andOperator)
@@ -186,7 +186,7 @@ public class JournalTemplateFinder {
 		}
 	}
 
-	public static List findByKeywords(
+	public List findByKeywords(
 			long companyId, long groupId, String keywords, String structureId,
 			String structureIdComparator, int begin, int end,
 			OrderByComparator obc)
@@ -211,7 +211,7 @@ public class JournalTemplateFinder {
 			names, descriptions, andOperator, begin, end, obc);
 	}
 
-	public static List findByC_G_T_S_N_D(
+	public List findByC_G_T_S_N_D(
 			long companyId, long groupId, String templateId, String structureId,
 			String structureIdComparator, String name, String description,
 			boolean andOperator, int begin, int end, OrderByComparator obc)
@@ -223,7 +223,7 @@ public class JournalTemplateFinder {
 			new String[] {description}, andOperator, begin, end, obc);
 	}
 
-	public static List findByC_G_T_S_N_D(
+	public List findByC_G_T_S_N_D(
 			long companyId, long groupId, String[] templateIds,
 			String structureId, String structureIdComparator, String[] names,
 			String[] descriptions, boolean andOperator, int begin, int end,

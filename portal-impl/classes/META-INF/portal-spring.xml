@@ -2464,6 +2464,18 @@
 			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderImpl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderImpl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.professional" class="com.liferay.portlet.documentlibrary.service.impl.DLFileRankLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -2500,6 +2512,12 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderImpl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.professional" class="com.liferay.portlet.documentlibrary.service.impl.DLFileShortcutLocalServiceImpl" lazy-init="true" />
@@ -2861,6 +2879,12 @@
 			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticlePersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleFinderImpl" class="com.liferay.portlet.journal.service.persistence.JournalArticleFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleFinderUtil" class="com.liferay.portlet.journal.service.persistence.JournalArticleFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticleFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.professional" class="com.liferay.portlet.journal.service.impl.JournalArticleImageLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -3038,6 +3062,12 @@
 			<ref bean="com.liferay.portlet.journal.service.persistence.JournalStructurePersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructureFinderImpl" class="com.liferay.portlet.journal.service.persistence.JournalStructureFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructureFinderUtil" class="com.liferay.portlet.journal.service.persistence.JournalStructureFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalStructureFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalService.professional" class="com.liferay.portlet.journal.service.impl.JournalTemplateLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -3099,6 +3129,12 @@
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplateUtil" class="com.liferay.portlet.journal.service.persistence.JournalTemplateUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplateFinderImpl" class="com.liferay.portlet.journal.service.persistence.JournalTemplateFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil" class="com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalTemplateFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalService.professional" class="com.liferay.portlet.messageboards.service.impl.MBBanLocalServiceImpl" lazy-init="true" />
@@ -3227,6 +3263,12 @@
 			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderImpl" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderUtil" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistenceImpl" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -3303,6 +3345,12 @@
 			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinderImpl" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessageFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.professional" class="com.liferay.portlet.messageboards.service.impl.MBMessageFlagLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -3339,6 +3387,12 @@
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderImpl" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.professional" class="com.liferay.portlet.messageboards.service.impl.MBStatsUserLocalServiceImpl" lazy-init="true" />
@@ -3415,6 +3469,12 @@
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadUtil" class="com.liferay.portlet.messageboards.service.persistence.MBThreadUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinderImpl" class="com.liferay.portlet.messageboards.service.persistence.MBThreadFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinderUtil" class="com.liferay.portlet.messageboards.service.persistence.MBThreadFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBThreadFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalService.professional" class="com.liferay.portlet.polls.service.impl.PollsChoiceLocalServiceImpl" lazy-init="true" />
@@ -3846,6 +3906,12 @@
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinderImpl" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinderUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemLocalService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingItemLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -3907,6 +3973,12 @@
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFinderImpl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFinderUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingItemFieldLocalServiceImpl" lazy-init="true" />
@@ -4046,6 +4118,12 @@
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinderImpl" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinderUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.professional" class="com.liferay.portlet.shopping.service.impl.ShoppingOrderItemLocalServiceImpl" lazy-init="true" />

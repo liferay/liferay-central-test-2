@@ -48,8 +48,6 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
@@ -497,14 +495,14 @@ public class DLFileEntryLocalServiceImpl
 
 		folderIds.add(new Long(folderId));
 
-		return DLFileEntryAndShortcutFinder.findByFolderIds(
+		return dlFileEntryAndShortcutFinder.findByFolderIds(
 			folderIds, begin, end);
 	}
 
 	public List getFileEntriesAndShortcuts(List folderIds, int begin, int end)
 		throws SystemException {
 
-		return DLFileEntryAndShortcutFinder.findByFolderIds(
+		return dlFileEntryAndShortcutFinder.findByFolderIds(
 			folderIds, begin, end);
 	}
 
@@ -515,13 +513,13 @@ public class DLFileEntryLocalServiceImpl
 
 		folderIds.add(new Long(folderId));
 
-		return DLFileEntryAndShortcutFinder.countByFolderIds(folderIds);
+		return dlFileEntryAndShortcutFinder.countByFolderIds(folderIds);
 	}
 
 	public int getFileEntriesAndShortcutsCount(List folderIds)
 		throws SystemException {
 
-		return DLFileEntryAndShortcutFinder.countByFolderIds(folderIds);
+		return dlFileEntryAndShortcutFinder.countByFolderIds(folderIds);
 	}
 
 	public int getFileEntriesCount(long folderId) throws SystemException {
@@ -531,13 +529,13 @@ public class DLFileEntryLocalServiceImpl
 	public int getFoldersFileEntriesCount(List folderIds)
 		throws SystemException {
 
-		return DLFileEntryFinder.countByFolderIds(folderIds);
+		return dlFileEntryFinder.countByFolderIds(folderIds);
 	}
 
 	public List getGroupFileEntries(long groupId, int begin, int end)
 		throws SystemException {
 
-		return DLFileEntryFinder.findByGroupId(groupId, begin, end);
+		return dlFileEntryFinder.findByGroupId(groupId, begin, end);
 	}
 
 	public List getGroupFileEntries(
@@ -545,30 +543,30 @@ public class DLFileEntryLocalServiceImpl
 		throws SystemException {
 
 		if (userId <= 0) {
-			return DLFileEntryFinder.findByGroupId(groupId, begin, end);
+			return dlFileEntryFinder.findByGroupId(groupId, begin, end);
 		}
 		else {
-			return DLFileEntryFinder.findByG_U(groupId, userId, begin, end);
+			return dlFileEntryFinder.findByG_U(groupId, userId, begin, end);
 		}
 	}
 
 	public int getGroupFileEntriesCount(long groupId) throws SystemException {
-		return DLFileEntryFinder.countByGroupId(groupId);
+		return dlFileEntryFinder.countByGroupId(groupId);
 	}
 
 	public int getGroupFileEntriesCount(long groupId, long userId)
 		throws SystemException {
 
 		if (userId <= 0) {
-			return DLFileEntryFinder.countByGroupId(groupId);
+			return dlFileEntryFinder.countByGroupId(groupId);
 		}
 		else {
-			return DLFileEntryFinder.countByG_U(groupId, userId);
+			return dlFileEntryFinder.countByG_U(groupId, userId);
 		}
 	}
 
 	public List getNoAssetFileEntries() throws SystemException {
-		return DLFileEntryFinder.findByNoAssets();
+		return dlFileEntryFinder.findByNoAssets();
 	}
 
 	public DLFileEntry updateFileEntry(

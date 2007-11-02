@@ -39,13 +39,14 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="DLFileEntryAndShortcutFinder.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="DLFileEntryAndShortcutFinderImpl.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFileEntryAndShortcutFinder {
+public class DLFileEntryAndShortcutFinderImpl
+	implements DLFileEntryAndShortcutFinder {
 
 	public static String COUNT_BY_FOLDER_IDS =
 		DLFileEntryAndShortcutFinder.class.getName() + ".countByFolderIds";
@@ -53,7 +54,7 @@ public class DLFileEntryAndShortcutFinder {
 	public static String FIND_BY_FOLDER_IDS =
 		DLFileEntryAndShortcutFinder.class.getName() + ".findByFolderIds";
 
-	public static int countByFolderIds(List folderIds) throws SystemException {
+	public int countByFolderIds(List folderIds) throws SystemException {
 		Session session = null;
 
 		try {
@@ -108,7 +109,7 @@ public class DLFileEntryAndShortcutFinder {
 		}
 	}
 
-	public static List findByFolderIds(List folderIds, int begin, int end)
+	public List findByFolderIds(List folderIds, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -181,7 +182,7 @@ public class DLFileEntryAndShortcutFinder {
 		}
 	}
 
-	private static String _getFolderIds(List folderIds, String table) {
+	private String _getFolderIds(List folderIds, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < folderIds.size(); i++) {

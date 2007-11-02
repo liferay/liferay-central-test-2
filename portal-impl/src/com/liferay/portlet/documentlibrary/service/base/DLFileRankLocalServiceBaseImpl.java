@@ -40,8 +40,14 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderUtil;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence;
@@ -99,6 +105,23 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		this.dlFileEntryPersistence = dlFileEntryPersistence;
 	}
 
+	public DLFileEntryFinder getDLFileEntryFinder() {
+		return dlFileEntryFinder;
+	}
+
+	public void setDLFileEntryFinder(DLFileEntryFinder dlFileEntryFinder) {
+		this.dlFileEntryFinder = dlFileEntryFinder;
+	}
+
+	public DLFileEntryAndShortcutFinder getDLFileEntryAndShortcutFinder() {
+		return dlFileEntryAndShortcutFinder;
+	}
+
+	public void setDLFileEntryAndShortcutFinder(
+		DLFileEntryAndShortcutFinder dlFileEntryAndShortcutFinder) {
+		this.dlFileEntryAndShortcutFinder = dlFileEntryAndShortcutFinder;
+	}
+
 	public DLFileRankPersistence getDLFileRankPersistence() {
 		return dlFileRankPersistence;
 	}
@@ -106,6 +129,14 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	public void setDLFileRankPersistence(
 		DLFileRankPersistence dlFileRankPersistence) {
 		this.dlFileRankPersistence = dlFileRankPersistence;
+	}
+
+	public DLFileRankFinder getDLFileRankFinder() {
+		return dlFileRankFinder;
+	}
+
+	public void setDLFileRankFinder(DLFileRankFinder dlFileRankFinder) {
+		this.dlFileRankFinder = dlFileRankFinder;
 	}
 
 	public DLFileShortcutLocalService getDLFileShortcutLocalService() {
@@ -191,8 +222,20 @@ public abstract class DLFileRankLocalServiceBaseImpl
 			dlFileEntryPersistence = DLFileEntryUtil.getPersistence();
 		}
 
+		if (dlFileEntryFinder == null) {
+			dlFileEntryFinder = DLFileEntryFinderUtil.getFinder();
+		}
+
+		if (dlFileEntryAndShortcutFinder == null) {
+			dlFileEntryAndShortcutFinder = DLFileEntryAndShortcutFinderUtil.getFinder();
+		}
+
 		if (dlFileRankPersistence == null) {
 			dlFileRankPersistence = DLFileRankUtil.getPersistence();
+		}
+
+		if (dlFileRankFinder == null) {
+			dlFileRankFinder = DLFileRankFinderUtil.getFinder();
 		}
 
 		if (dlFileShortcutLocalService == null) {
@@ -231,7 +274,10 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	protected DLFileEntryService dlFileEntryService;
 	protected DLFileEntryPersistence dlFileEntryPersistence;
+	protected DLFileEntryFinder dlFileEntryFinder;
+	protected DLFileEntryAndShortcutFinder dlFileEntryAndShortcutFinder;
 	protected DLFileRankPersistence dlFileRankPersistence;
+	protected DLFileRankFinder dlFileRankFinder;
 	protected DLFileShortcutLocalService dlFileShortcutLocalService;
 	protected DLFileShortcutService dlFileShortcutService;
 	protected DLFileShortcutPersistence dlFileShortcutPersistence;

@@ -79,7 +79,6 @@ import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseI
 import com.liferay.portlet.messageboards.service.jms.MBMessageProducer;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
@@ -725,7 +724,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public int getCategoriesMessagesCount(List categoryIds)
 		throws SystemException {
 
-		return MBMessageFinder.countByCategoryIds(categoryIds);
+		return mbMessageFinder.countByCategoryIds(categoryIds);
 	}
 
 	public List getCompanyMessages(long companyId, int begin, int end)
@@ -808,18 +807,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public List getGroupMessages(long groupId, int begin, int end)
 		throws SystemException {
 
-		return MBMessageFinder.findByGroupId(groupId, begin, end);
+		return mbMessageFinder.findByGroupId(groupId, begin, end);
 	}
 
 	public List getGroupMessages(
 			long groupId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return MBMessageFinder.findByGroupId(groupId, begin, end, obc);
+		return mbMessageFinder.findByGroupId(groupId, begin, end, obc);
 	}
 
 	public int getGroupMessagesCount(long groupId) throws SystemException {
-		return MBMessageFinder.countByGroupId(groupId);
+		return mbMessageFinder.countByGroupId(groupId);
 	}
 
 	public MBMessage getMessage(long messageId)
@@ -891,7 +890,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public List getNoAssetMessages() throws SystemException {
-		return MBMessageFinder.findByNoAssets();
+		return mbMessageFinder.findByNoAssets();
 	}
 
 	public List getThreadMessages(long threadId) throws SystemException {

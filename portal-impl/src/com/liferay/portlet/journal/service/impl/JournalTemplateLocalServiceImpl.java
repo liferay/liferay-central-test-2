@@ -50,7 +50,6 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.base.JournalTemplateLocalServiceBaseImpl;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
-import com.liferay.portlet.journal.service.persistence.JournalTemplateFinder;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.FileUtil;
@@ -405,7 +404,7 @@ public class JournalTemplateLocalServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		return JournalTemplateFinder.findByKeywords(
+		return journalTemplateFinder.findByKeywords(
 			companyId, groupId, keywords, structureId, structureIdComparator,
 			begin, end, obc);
 	}
@@ -416,7 +415,7 @@ public class JournalTemplateLocalServiceImpl
 			boolean andOperator, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return JournalTemplateFinder.findByC_G_T_S_N_D(
+		return journalTemplateFinder.findByC_G_T_S_N_D(
 			companyId, groupId, templateId, structureId, structureIdComparator,
 			name, description, andOperator, begin, end, obc);
 	}
@@ -426,7 +425,7 @@ public class JournalTemplateLocalServiceImpl
 			String structureIdComparator)
 		throws SystemException {
 
-		return JournalTemplateFinder.countByKeywords(
+		return journalTemplateFinder.countByKeywords(
 			companyId, groupId, keywords, structureId, structureIdComparator);
 	}
 
@@ -436,7 +435,7 @@ public class JournalTemplateLocalServiceImpl
 			boolean andOperator)
 		throws SystemException {
 
-		return JournalTemplateFinder.countByC_G_T_S_N_D(
+		return journalTemplateFinder.countByC_G_T_S_N_D(
 			companyId, groupId, templateId, structureId, structureIdComparator,
 			name, description, andOperator);
 	}

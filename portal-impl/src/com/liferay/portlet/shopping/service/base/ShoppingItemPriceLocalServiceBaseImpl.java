@@ -52,14 +52,20 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
+import com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder;
+import com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinderUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil;
+import com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder;
+import com.liferay.portlet.shopping.service.persistence.ShoppingItemFinderUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
+import com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder;
+import com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinderUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence;
@@ -160,6 +166,15 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		this.shoppingCouponPersistence = shoppingCouponPersistence;
 	}
 
+	public ShoppingCouponFinder getShoppingCouponFinder() {
+		return shoppingCouponFinder;
+	}
+
+	public void setShoppingCouponFinder(
+		ShoppingCouponFinder shoppingCouponFinder) {
+		this.shoppingCouponFinder = shoppingCouponFinder;
+	}
+
 	public ShoppingItemLocalService getShoppingItemLocalService() {
 		return shoppingItemLocalService;
 	}
@@ -184,6 +199,14 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 	public void setShoppingItemPersistence(
 		ShoppingItemPersistence shoppingItemPersistence) {
 		this.shoppingItemPersistence = shoppingItemPersistence;
+	}
+
+	public ShoppingItemFinder getShoppingItemFinder() {
+		return shoppingItemFinder;
+	}
+
+	public void setShoppingItemFinder(ShoppingItemFinder shoppingItemFinder) {
+		this.shoppingItemFinder = shoppingItemFinder;
 	}
 
 	public ShoppingItemFieldLocalService getShoppingItemFieldLocalService() {
@@ -240,6 +263,14 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		this.shoppingOrderPersistence = shoppingOrderPersistence;
 	}
 
+	public ShoppingOrderFinder getShoppingOrderFinder() {
+		return shoppingOrderFinder;
+	}
+
+	public void setShoppingOrderFinder(ShoppingOrderFinder shoppingOrderFinder) {
+		this.shoppingOrderFinder = shoppingOrderFinder;
+	}
+
 	public ShoppingOrderItemLocalService getShoppingOrderItemLocalService() {
 		return shoppingOrderItemLocalService;
 	}
@@ -291,6 +322,10 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 			shoppingCouponPersistence = ShoppingCouponUtil.getPersistence();
 		}
 
+		if (shoppingCouponFinder == null) {
+			shoppingCouponFinder = ShoppingCouponFinderUtil.getFinder();
+		}
+
 		if (shoppingItemLocalService == null) {
 			shoppingItemLocalService = ShoppingItemLocalServiceFactory.getImpl();
 		}
@@ -301,6 +336,10 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 
 		if (shoppingItemPersistence == null) {
 			shoppingItemPersistence = ShoppingItemUtil.getPersistence();
+		}
+
+		if (shoppingItemFinder == null) {
+			shoppingItemFinder = ShoppingItemFinderUtil.getFinder();
 		}
 
 		if (shoppingItemFieldLocalService == null) {
@@ -327,6 +366,10 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 			shoppingOrderPersistence = ShoppingOrderUtil.getPersistence();
 		}
 
+		if (shoppingOrderFinder == null) {
+			shoppingOrderFinder = ShoppingOrderFinderUtil.getFinder();
+		}
+
 		if (shoppingOrderItemLocalService == null) {
 			shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getImpl();
 		}
@@ -344,15 +387,18 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 	protected ShoppingCouponLocalService shoppingCouponLocalService;
 	protected ShoppingCouponService shoppingCouponService;
 	protected ShoppingCouponPersistence shoppingCouponPersistence;
+	protected ShoppingCouponFinder shoppingCouponFinder;
 	protected ShoppingItemLocalService shoppingItemLocalService;
 	protected ShoppingItemService shoppingItemService;
 	protected ShoppingItemPersistence shoppingItemPersistence;
+	protected ShoppingItemFinder shoppingItemFinder;
 	protected ShoppingItemFieldLocalService shoppingItemFieldLocalService;
 	protected ShoppingItemFieldPersistence shoppingItemFieldPersistence;
 	protected ShoppingItemPricePersistence shoppingItemPricePersistence;
 	protected ShoppingOrderLocalService shoppingOrderLocalService;
 	protected ShoppingOrderService shoppingOrderService;
 	protected ShoppingOrderPersistence shoppingOrderPersistence;
+	protected ShoppingOrderFinder shoppingOrderFinder;
 	protected ShoppingOrderItemLocalService shoppingOrderItemLocalService;
 	protected ShoppingOrderItemPersistence shoppingOrderItemPersistence;
 }

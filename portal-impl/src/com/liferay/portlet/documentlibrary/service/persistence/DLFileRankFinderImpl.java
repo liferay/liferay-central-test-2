@@ -37,12 +37,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="DLFileRankFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLFileRankFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFileRankFinder {
+public class DLFileRankFinderImpl implements DLFileRankFinder {
 
 	public static String COUNT_BY_G_U =
 		DLFileRankFinder.class.getName() + ".countByG_U";
@@ -50,9 +50,7 @@ public class DLFileRankFinder {
 	public static String FIND_BY_G_U =
 		DLFileRankFinder.class.getName() + ".findByG_U";
 
-	public static int countByG_U(long groupId, long userId)
-		throws SystemException {
-
+	public int countByG_U(long groupId, long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -89,13 +87,11 @@ public class DLFileRankFinder {
 		}
 	}
 
-	public static List findByG_U(long groupId, long userId)
-		throws SystemException {
-
+	public List findByG_U(long groupId, long userId) throws SystemException {
 		return findByG_U(groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public static List findByG_U(long groupId, long userId, int begin, int end)
+	public List findByG_U(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;

@@ -28,7 +28,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.service.base.DLFileRankLocalServiceBaseImpl;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
 
 import java.util.Date;
@@ -55,13 +54,13 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	public List getFileRanks(long groupId, long userId)
 		throws SystemException {
 
-		return DLFileRankFinder.findByG_U(groupId, userId);
+		return dlFileRankFinder.findByG_U(groupId, userId);
 	}
 
 	public List getFileRanks(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
-		return DLFileRankFinder.findByG_U(groupId, userId, begin, end);
+		return dlFileRankFinder.findByG_U(groupId, userId, begin, end);
 	}
 
 	public DLFileRank updateFileRank(
@@ -87,8 +86,8 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
 		DLFileRankUtil.update(fileRank);
 
-		if (DLFileRankFinder.countByG_U(groupId, userId) > 5) {
-			List fileRanks = DLFileRankFinder.findByG_U(groupId, userId);
+		if (dlFileRankFinder.countByG_U(groupId, userId) > 5) {
+			List fileRanks = dlFileRankFinder.findByG_U(groupId, userId);
 
 			DLFileRank lastFileRank = (DLFileRank)fileRanks.get(
 				fileRanks.size() - 1);

@@ -41,12 +41,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="JournalStructureFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalStructureFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalStructureFinder {
+public class JournalStructureFinderImpl implements JournalStructureFinder {
 
 	public static String COUNT_BY_C_G_S_N_D =
 		JournalStructureFinder.class.getName() + ".countByC_G_S_N_D";
@@ -54,8 +54,7 @@ public class JournalStructureFinder {
 	public static String FIND_BY_C_G_S_N_D =
 		JournalStructureFinder.class.getName() + ".findByC_G_S_N_D";
 
-	public static int countByKeywords(
-			long companyId, long groupId, String keywords)
+	public int countByKeywords(long companyId, long groupId, String keywords)
 		throws SystemException {
 
 		String[] structureIds = null;
@@ -76,7 +75,7 @@ public class JournalStructureFinder {
 			companyId, groupId, structureIds, names, descriptions, andOperator);
 	}
 
-	public static int countByC_G_S_N_D(
+	public int countByC_G_S_N_D(
 			long companyId, long groupId, String structureId, String name,
 			String description, boolean andOperator)
 		throws SystemException {
@@ -86,7 +85,7 @@ public class JournalStructureFinder {
 			new String[] {description}, andOperator);
 	}
 
-	public static int countByC_G_S_N_D(
+	public int countByC_G_S_N_D(
 			long companyId, long groupId, String[] structureIds, String[] names,
 			String[] descriptions, boolean andOperator)
 		throws SystemException {
@@ -151,7 +150,7 @@ public class JournalStructureFinder {
 		}
 	}
 
-	public static List findByKeywords(
+	public List findByKeywords(
 			long companyId, long groupId, String keywords, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -175,7 +174,7 @@ public class JournalStructureFinder {
 			begin, end, obc);
 	}
 
-	public static List findByC_G_S_N_D(
+	public List findByC_G_S_N_D(
 			long companyId, long groupId, String structureId, String name,
 			String description, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
@@ -186,7 +185,7 @@ public class JournalStructureFinder {
 			new String[] {description}, andOperator, begin, end, obc);
 	}
 
-	public static List findByC_G_S_N_D(
+	public List findByC_G_S_N_D(
 			long companyId, long groupId, String[] structureIds, String[] names,
 			String[] descriptions, boolean andOperator, int begin, int end,
 			OrderByComparator obc)

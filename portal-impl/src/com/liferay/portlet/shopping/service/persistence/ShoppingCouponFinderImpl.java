@@ -20,14 +20,13 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.service.persistence;
+package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -39,28 +38,34 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="MBCategoryFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingCouponFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  *
  */
-public class MBCategoryFinder {
+public class ShoppingCouponFinderImpl implements ShoppingCouponFinder {
 
-	public static String COUNT_BY_S_G_U =
-		MBCategoryFinder.class.getName() + ".countByS_G_U";
+	public static String COUNT_BY_G_C_C_A_DT =
+		ShoppingCouponFinder.class.getName() + ".countByG_C_C_A_DT";
 
-	public static String FIND_BY_S_G_U =
-		MBCategoryFinder.class.getName() + ".findByS_G_U";
+	public static String FIND_BY_G_C_C_A_DT =
+		ShoppingCouponFinder.class.getName() + ".findByG_C_C_A_DT";
 
-	public static int countByS_G_U(long groupId, long userId)
+	public int countByG_C_C_A_DT(
+			long groupId, long companyId, String code, boolean active,
+			String discountType, boolean andOperator)
 		throws SystemException {
+
+		code = StringUtil.upperCase(code);
 
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C_C_A_DT);
+
+			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -68,9 +73,13 @@ public class MBCategoryFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(PortalUtil.getClassNameId(MBCategory.class.getName()));
 			qPos.add(groupId);
-			qPos.add(userId);
+			qPos.add(companyId);
+			qPos.add(code);
+			qPos.add(code);
+			qPos.add(active);
+			qPos.add(discountType);
+			qPos.add(discountType);
 
 			Iterator itr = q.list().iterator();
 
@@ -92,26 +101,35 @@ public class MBCategoryFinder {
 		}
 	}
 
-	public static List findByS_G_U(
-			long groupId, long userId, int begin, int end)
+	public List findByG_C_C_A_DT(
+			long groupId, long companyId, String code, boolean active,
+			String discountType, boolean andOperator, int begin, int end)
 		throws SystemException {
+
+		code = StringUtil.upperCase(code);
 
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_S_G_U);
+			String sql = CustomSQLUtil.get(FIND_BY_G_C_C_A_DT);
+
+			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("MBCategory", MBCategoryImpl.class);
+			q.addEntity("ShoppingCoupon", ShoppingCouponImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(PortalUtil.getClassNameId(MBCategory.class.getName()));
 			qPos.add(groupId);
-			qPos.add(userId);
+			qPos.add(companyId);
+			qPos.add(code);
+			qPos.add(code);
+			qPos.add(active);
+			qPos.add(discountType);
+			qPos.add(discountType);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
