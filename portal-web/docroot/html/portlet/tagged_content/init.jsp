@@ -115,11 +115,11 @@ if (Validator.isNull(selectionStyle)) {
 long classNameId = GetterUtil.getLong(prefs.getValue("class-name-id", StringPool.BLANK));
 long[] classNameIds = null;
 
-if (Validator.isNull(classNameId)) {
-	classNameIds = new long[0];
+if (classNameId > 0) {
+	classNameIds = new long[] {classNameId};
 }
 else {
-	classNameIds = new long[] {classNameId};
+	classNameIds = new long[0];
 }
 
 String category = GetterUtil.getString(prefs.getValue("category", StringPool.BLANK));
