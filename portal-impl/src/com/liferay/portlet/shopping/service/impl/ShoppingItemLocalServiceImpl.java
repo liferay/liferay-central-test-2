@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.shopping.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -32,9 +31,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
 import com.liferay.portlet.amazonrankings.util.AmazonRankingsUtil;
@@ -54,10 +51,6 @@ import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
 import com.liferay.portlet.shopping.service.base.ShoppingItemLocalServiceBaseImpl;
-import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Http;
 import com.liferay.util.PwdGenerator;
@@ -111,7 +104,8 @@ public class ShoppingItemLocalServiceImpl
 				double shipping = 0.0;
 				boolean useShippingFormula = true;
 
-				ShoppingItemPrice itemPrice = ShoppingItemPriceUtil.create(0);
+				ShoppingItemPrice itemPrice =
+					shoppingItemPricePersistence.create(0);
 
 				itemPrice.setMinQuantity(minQuantity);
 				itemPrice.setMaxQuantity(maxQuantity);
@@ -271,9 +265,9 @@ public class ShoppingItemLocalServiceImpl
 
 		// Item
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		ShoppingCategory category =
-			ShoppingCategoryUtil.findByPrimaryKey(categoryId);
+			shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 		sku = sku.trim().toUpperCase();
 
 		byte[] smallBytes = null;
@@ -295,9 +289,9 @@ public class ShoppingItemLocalServiceImpl
 			smallFile, smallBytes, mediumImage, mediumImageURL, mediumFile,
 			mediumBytes, largeImage, largeImageURL, largeFile, largeBytes);
 
-		long itemId = CounterLocalServiceUtil.increment();
+		long itemId = counterLocalService.increment();
 
-		ShoppingItem item = ShoppingItemUtil.create(itemId);
+		ShoppingItem item = shoppingItemPersistence.create(itemId);
 
 		item.setCompanyId(user.getCompanyId());
 		item.setUserId(user.getUserId());
@@ -343,30 +337,30 @@ public class ShoppingItemLocalServiceImpl
 		item.setFeatured(featured);
 		item.setSale((sale != null) ? sale.booleanValue() : false);
 		item.setSmallImage(smallImage);
-		item.setSmallImageId(CounterLocalServiceUtil.increment());
+		item.setSmallImageId(counterLocalService.increment());
 		item.setSmallImageURL(smallImageURL);
 		item.setMediumImage(mediumImage);
-		item.setMediumImageId(CounterLocalServiceUtil.increment());
+		item.setMediumImageId(counterLocalService.increment());
 		item.setMediumImageURL(mediumImageURL);
 		item.setLargeImage(largeImage);
-		item.setLargeImageId(CounterLocalServiceUtil.increment());
+		item.setLargeImageId(counterLocalService.increment());
 		item.setLargeImageURL(largeImageURL);
 
-		ShoppingItemUtil.update(item);
+		shoppingItemPersistence.update(item);
 
 		// Fields
 
 		for (int i = 0; i < itemFields.size(); i++) {
 			ShoppingItemField itemField = (ShoppingItemField)itemFields.get(i);
 
-			long itemFieldId = CounterLocalServiceUtil.increment();
+			long itemFieldId = counterLocalService.increment();
 
 			itemField.setItemFieldId(itemFieldId);
 			itemField.setItemId(itemId);
 			itemField.setName(checkItemField(itemField.getName()));
 			itemField.setValues(checkItemField(itemField.getValues()));
 
-			ShoppingItemFieldUtil.update(itemField);
+			shoppingItemFieldPersistence.update(itemField);
 		}
 
 		// Prices
@@ -376,12 +370,12 @@ public class ShoppingItemLocalServiceImpl
 
 			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
 
-			long itemPriceId = CounterLocalServiceUtil.increment();
+			long itemPriceId = counterLocalService.increment();
 
 			itemPrice.setItemPriceId(itemPriceId);
 			itemPrice.setItemId(itemId);
 
-			ShoppingItemPriceUtil.update(itemPrice);
+			shoppingItemPricePersistence.update(itemPrice);
 		}
 
 		// Images
@@ -413,7 +407,7 @@ public class ShoppingItemLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ShoppingItem item = ShoppingItemUtil.findByPrimaryKey(itemId);
+		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
 		ShoppingCategory category = item.getCategory();
 
 		addItemResources(
@@ -425,7 +419,7 @@ public class ShoppingItemLocalServiceImpl
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			item.getCompanyId(), category.getGroupId(), item.getUserId(),
 			ShoppingItem.class.getName(), item.getItemId(), false,
 			addCommunityPermissions, addGuestPermissions);
@@ -436,7 +430,7 @@ public class ShoppingItemLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ShoppingItem item = ShoppingItemUtil.findByPrimaryKey(itemId);
+		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
 		ShoppingCategory category = item.getCategory();
 
 		addItemResources(
@@ -448,7 +442,7 @@ public class ShoppingItemLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			item.getCompanyId(), category.getGroupId(), item.getUserId(),
 			ShoppingItem.class.getName(), item.getItemId(),
 			communityPermissions, guestPermissions);
@@ -457,7 +451,7 @@ public class ShoppingItemLocalServiceImpl
 	public void deleteItem(long itemId)
 		throws PortalException, SystemException {
 
-		ShoppingItem item = ShoppingItemUtil.findByPrimaryKey(itemId);
+		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
 
 		deleteItem(item);
 	}
@@ -467,11 +461,11 @@ public class ShoppingItemLocalServiceImpl
 
 		// Fields
 
-		ShoppingItemFieldUtil.removeByItemId(item.getItemId());
+		shoppingItemFieldPersistence.removeByItemId(item.getItemId());
 
 		// Prices
 
-		ShoppingItemPriceUtil.removeByItemId(item.getItemId());
+		shoppingItemPricePersistence.removeByItemId(item.getItemId());
 
 		// Images
 
@@ -481,19 +475,20 @@ public class ShoppingItemLocalServiceImpl
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			item.getCompanyId(), ShoppingItem.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, item.getItemId());
 
 		// Item
 
-		ShoppingItemUtil.remove(item.getItemId());
+		shoppingItemPersistence.remove(item.getItemId());
 	}
 
 	public void deleteItems(long categoryId)
 		throws PortalException, SystemException {
 
-		Iterator itr = ShoppingItemUtil.findByCategoryId(categoryId).iterator();
+		Iterator itr = shoppingItemPersistence.findByCategoryId(
+			categoryId).iterator();
 
 		while (itr.hasNext()) {
 			ShoppingItem item = (ShoppingItem)itr.next();
@@ -516,8 +511,8 @@ public class ShoppingItemLocalServiceImpl
 			groupId, new long[] {categoryId}, numOfItems);
 
 		if (featuredItems.size() == 0) {
-			List childCategories =
-				ShoppingCategoryUtil.findByG_P(groupId, categoryId);
+			List childCategories = shoppingCategoryPersistence.findByG_P(
+				groupId, categoryId);
 
 			if (childCategories.size() > 0) {
 				long[] categoryIds = new long[childCategories.size()];
@@ -540,38 +535,39 @@ public class ShoppingItemLocalServiceImpl
 	public ShoppingItem getItem(long itemId)
 		throws PortalException, SystemException {
 
-		return ShoppingItemUtil.findByPrimaryKey(itemId);
+		return shoppingItemPersistence.findByPrimaryKey(itemId);
 	}
 
 	public ShoppingItem getItem(long companyId, String sku)
 		throws PortalException, SystemException {
 
-		return ShoppingItemUtil.findByC_S(companyId, sku);
+		return shoppingItemPersistence.findByC_S(companyId, sku);
 	}
 
 	public List getItems(long categoryId) throws SystemException {
-		return ShoppingItemUtil.findByCategoryId(categoryId);
+		return shoppingItemPersistence.findByCategoryId(categoryId);
 	}
 
 	public List getItems(
 			long categoryId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return ShoppingItemUtil.findByCategoryId(categoryId, begin, end, obc);
+		return shoppingItemPersistence.findByCategoryId(
+			categoryId, begin, end, obc);
 	}
 
 	public ShoppingItem[] getItemsPrevAndNext(
 			long itemId, OrderByComparator obc)
 		throws PortalException, SystemException {
 
-		ShoppingItem item = ShoppingItemUtil.findByPrimaryKey(itemId);
+		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
 
-		return ShoppingItemUtil.findByCategoryId_PrevAndNext(
+		return shoppingItemPersistence.findByCategoryId_PrevAndNext(
 			item.getItemId(), item.getCategoryId(), obc);
 	}
 
 	public int getItemsCount(long categoryId) throws SystemException {
-		return ShoppingItemUtil.countByCategoryId(categoryId);
+		return shoppingItemPersistence.countByCategoryId(categoryId);
 	}
 
 	public List getSaleItems(long groupId, long categoryId, int numOfItems)
@@ -581,8 +577,8 @@ public class ShoppingItemLocalServiceImpl
 			groupId, new long[] {categoryId}, numOfItems);
 
 		if (saleItems.size() == 0) {
-			List childCategories =
-				ShoppingCategoryUtil.findByG_P(groupId, categoryId);
+			List childCategories = shoppingCategoryPersistence.findByG_P(
+				groupId, categoryId);
 
 			if (childCategories.size() > 0) {
 				long[] categoryIds = new long[childCategories.size()];
@@ -630,9 +626,9 @@ public class ShoppingItemLocalServiceImpl
 
 		// Item
 
-		ShoppingItem item = ShoppingItemUtil.findByPrimaryKey(itemId);
+		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		ShoppingCategory category = getCategory(item, categoryId);
 		sku = sku.trim().toUpperCase();
 
@@ -699,38 +695,38 @@ public class ShoppingItemLocalServiceImpl
 		item.setLargeImage(largeImage);
 		item.setLargeImageURL(largeImageURL);
 
-		ShoppingItemUtil.update(item);
+		shoppingItemPersistence.update(item);
 
 		// Fields
 
-		ShoppingItemFieldUtil.removeByItemId(itemId);
+		shoppingItemFieldPersistence.removeByItemId(itemId);
 
 		for (int i = 0; i < itemFields.size() && itemFields.size() > 0; i++) {
 			ShoppingItemField itemField = (ShoppingItemField)itemFields.get(i);
 
-			long itemFieldId = CounterLocalServiceUtil.increment();
+			long itemFieldId = counterLocalService.increment();
 
 			itemField.setItemFieldId(itemFieldId);
 			itemField.setItemId(itemId);
 			itemField.setName(checkItemField(itemField.getName()));
 			itemField.setValues(checkItemField(itemField.getValues()));
 
-			ShoppingItemFieldUtil.update(itemField);
+			shoppingItemFieldPersistence.update(itemField);
 		}
 
 		// Prices
 
-		ShoppingItemPriceUtil.removeByItemId(itemId);
+		shoppingItemPricePersistence.removeByItemId(itemId);
 
 		for (int i = 0; i < itemPrices.size() && itemPrices.size() > 1; i++) {
 			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
 
-			long itemPriceId = CounterLocalServiceUtil.increment();
+			long itemPriceId = counterLocalService.increment();
 
 			itemPrice.setItemPriceId(itemPriceId);
 			itemPrice.setItemId(itemId);
 
-			ShoppingItemPriceUtil.update(itemPrice);
+			shoppingItemPricePersistence.update(itemPrice);
 		}
 
 		// Images
@@ -780,10 +776,11 @@ public class ShoppingItemLocalServiceImpl
 
 		if (item.getCategoryId() != categoryId) {
 			ShoppingCategory oldCategory =
-				ShoppingCategoryUtil.findByPrimaryKey(item.getCategoryId());
+				shoppingCategoryPersistence.findByPrimaryKey(
+					item.getCategoryId());
 
 			ShoppingCategory newCategory =
-				ShoppingCategoryUtil.fetchByPrimaryKey(categoryId);
+				shoppingCategoryPersistence.fetchByPrimaryKey(categoryId);
 
 			if ((newCategory == null) ||
 				(oldCategory.getGroupId() != newCategory.getGroupId())) {
@@ -792,7 +789,7 @@ public class ShoppingItemLocalServiceImpl
 			}
 		}
 
-		return ShoppingCategoryUtil.findByPrimaryKey(categoryId);
+		return shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
 	protected void saveImages(
@@ -849,7 +846,8 @@ public class ShoppingItemLocalServiceImpl
 		}
 
 		try {
-			ShoppingItem item = ShoppingItemUtil.findByC_S(companyId, sku);
+			ShoppingItem item = shoppingItemPersistence.findByC_S(
+				companyId, sku);
 
 			if (itemId > 0) {
 				if (item.getItemId() != itemId) {

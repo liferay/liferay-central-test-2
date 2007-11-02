@@ -22,23 +22,17 @@
 
 package com.liferay.portlet.shopping.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.CategoryNameException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
-import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
 import com.liferay.portlet.shopping.service.base.ShoppingCategoryLocalServiceBaseImpl;
-import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,16 +82,17 @@ public class ShoppingCategoryLocalServiceImpl
 
 		// Category
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		parentCategoryId = getParentCategoryId(groupId, parentCategoryId);
 		Date now = new Date();
 
 		validate(name);
 
-		long categoryId = CounterLocalServiceUtil.increment();
+		long categoryId = counterLocalService.increment();
 
-		ShoppingCategory category = ShoppingCategoryUtil.create(categoryId);
+		ShoppingCategory category = shoppingCategoryPersistence.create(
+			categoryId);
 
 		category.setGroupId(groupId);
 		category.setCompanyId(user.getCompanyId());
@@ -109,7 +104,7 @@ public class ShoppingCategoryLocalServiceImpl
 		category.setName(name);
 		category.setDescription(description);
 
-		ShoppingCategoryUtil.update(category);
+		shoppingCategoryPersistence.update(category);
 
 		// Resources
 
@@ -134,7 +129,7 @@ public class ShoppingCategoryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		ShoppingCategory category =
-			ShoppingCategoryUtil.findByPrimaryKey(categoryId);
+			shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 
 		addCategoryResources(
 			category, addCommunityPermissions, addGuestPermissions);
@@ -145,7 +140,7 @@ public class ShoppingCategoryLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			category.getCompanyId(), category.getGroupId(),
 			category.getUserId(), ShoppingCategory.class.getName(),
 			category.getCategoryId(), false, addCommunityPermissions,
@@ -158,7 +153,7 @@ public class ShoppingCategoryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		ShoppingCategory category =
-			ShoppingCategoryUtil.findByPrimaryKey(categoryId);
+			shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 
 		addCategoryResources(category, communityPermissions, guestPermissions);
 	}
@@ -168,7 +163,7 @@ public class ShoppingCategoryLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			category.getCompanyId(), category.getGroupId(),
 			category.getUserId(), ShoppingCategory.class.getName(),
 			category.getCategoryId(), communityPermissions, guestPermissions);
@@ -178,7 +173,7 @@ public class ShoppingCategoryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		ShoppingCategory category =
-			ShoppingCategoryUtil.findByPrimaryKey(categoryId);
+			shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 
 		deleteCategory(category);
 	}
@@ -188,7 +183,7 @@ public class ShoppingCategoryLocalServiceImpl
 
 		// Categories
 
-		Iterator itr = ShoppingCategoryUtil.findByG_P(
+		Iterator itr = shoppingCategoryPersistence.findByG_P(
 			category.getGroupId(), category.getCategoryId()).iterator();
 
 		while (itr.hasNext()) {
@@ -199,48 +194,50 @@ public class ShoppingCategoryLocalServiceImpl
 
 		// Items
 
-		ShoppingItemLocalServiceUtil.deleteItems(category.getCategoryId());
+		shoppingItemLocalService.deleteItems(category.getCategoryId());
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			category.getCompanyId(), ShoppingCategory.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, category.getCategoryId());
 
 		// Category
 
-		ShoppingCategoryUtil.remove(category.getCategoryId());
+		shoppingCategoryPersistence.remove(category.getCategoryId());
 	}
 
 	public List getCategories(long groupId) throws SystemException {
-		return ShoppingCategoryUtil.findByGroupId(groupId);
+		return shoppingCategoryPersistence.findByGroupId(groupId);
 	}
 
 	public List getCategories(
 			long groupId, long parentCategoryId, int begin, int end)
 		throws SystemException {
 
-		return ShoppingCategoryUtil.findByG_P(
+		return shoppingCategoryPersistence.findByG_P(
 			groupId, parentCategoryId, begin, end);
 	}
 
 	public int getCategoriesCount(long groupId, long parentCategoryId)
 		throws SystemException {
 
-		return ShoppingCategoryUtil.countByG_P(groupId, parentCategoryId);
+		return shoppingCategoryPersistence.countByG_P(
+			groupId, parentCategoryId);
 	}
 
 	public ShoppingCategory getCategory(long categoryId)
 		throws PortalException, SystemException {
 
-		return ShoppingCategoryUtil.findByPrimaryKey(categoryId);
+		return shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
 	public ShoppingCategory getParentCategory(ShoppingCategory category)
 		throws PortalException, SystemException {
 
-		ShoppingCategory parentCategory = ShoppingCategoryUtil.findByPrimaryKey(
-			category.getParentCategoryId());
+		ShoppingCategory parentCategory =
+			shoppingCategoryPersistence.findByPrimaryKey(
+				category.getParentCategoryId());
 
 		return parentCategory;
 	}
@@ -249,7 +246,7 @@ public class ShoppingCategoryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return getParentCategories(
-			ShoppingCategoryUtil.findByPrimaryKey(categoryId));
+			shoppingCategoryPersistence.findByPrimaryKey(categoryId));
 	}
 
 	public List getParentCategories(ShoppingCategory category)
@@ -268,7 +265,7 @@ public class ShoppingCategoryLocalServiceImpl
 				break;
 			}
 
-			tempCategory = ShoppingCategoryUtil.findByPrimaryKey(
+			tempCategory = shoppingCategoryPersistence.findByPrimaryKey(
 				tempCategory.getParentCategoryId());
 		}
 
@@ -281,7 +278,7 @@ public class ShoppingCategoryLocalServiceImpl
 			List categoryIds, long groupId, long categoryId)
 		throws SystemException {
 
-		Iterator itr = ShoppingCategoryUtil.findByG_P(
+		Iterator itr = shoppingCategoryPersistence.findByG_P(
 			groupId, categoryId).iterator();
 
 		while (itr.hasNext()) {
@@ -302,7 +299,7 @@ public class ShoppingCategoryLocalServiceImpl
 		// Category
 
 		ShoppingCategory category =
-			ShoppingCategoryUtil.findByPrimaryKey(categoryId);
+			shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 
 		parentCategoryId = getParentCategoryId(category, parentCategoryId);
 
@@ -313,7 +310,7 @@ public class ShoppingCategoryLocalServiceImpl
 		category.setName(name);
 		category.setDescription(description);
 
-		ShoppingCategoryUtil.update(category);
+		shoppingCategoryPersistence.update(category);
 
 		// Merge categories
 
@@ -335,7 +332,7 @@ public class ShoppingCategoryLocalServiceImpl
 				ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
 
 			ShoppingCategory parentCategory =
-				ShoppingCategoryUtil.fetchByPrimaryKey(parentCategoryId);
+				shoppingCategoryPersistence.fetchByPrimaryKey(parentCategoryId);
 
 			if ((parentCategory == null) ||
 				(groupId != parentCategory.getGroupId())) {
@@ -363,7 +360,7 @@ public class ShoppingCategoryLocalServiceImpl
 		}
 		else {
 			ShoppingCategory parentCategory =
-				ShoppingCategoryUtil.fetchByPrimaryKey(parentCategoryId);
+				shoppingCategoryPersistence.fetchByPrimaryKey(parentCategoryId);
 
 			if ((parentCategory == null) ||
 				(category.getGroupId() != parentCategory.getGroupId())) {
@@ -389,7 +386,7 @@ public class ShoppingCategoryLocalServiceImpl
 			ShoppingCategory fromCategory, long toCategoryId)
 		throws PortalException, SystemException {
 
-		Iterator itr = ShoppingCategoryUtil.findByG_P(
+		Iterator itr = shoppingCategoryPersistence.findByG_P(
 			fromCategory.getGroupId(), fromCategory.getCategoryId()).iterator();
 
 		while (itr.hasNext()) {
@@ -398,7 +395,7 @@ public class ShoppingCategoryLocalServiceImpl
 			mergeCategories(category, toCategoryId);
 		}
 
-		itr = ShoppingItemUtil.findByCategoryId(
+		itr = shoppingItemPersistence.findByCategoryId(
 			fromCategory.getCategoryId()).iterator();
 
 		while (itr.hasNext()) {
@@ -409,10 +406,10 @@ public class ShoppingCategoryLocalServiceImpl
 
 			item.setCategoryId(toCategoryId);
 
-			ShoppingItemUtil.update(item);
+			shoppingItemPersistence.update(item);
 		}
 
-		ShoppingCategoryUtil.remove(fromCategory.getCategoryId());
+		shoppingCategoryPersistence.remove(fromCategory.getCategoryId());
 	}
 
 	protected void validate(String name) throws PortalException {

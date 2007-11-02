@@ -28,8 +28,6 @@ import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
 import com.liferay.portlet.shopping.service.base.ShoppingItemPriceLocalServiceBaseImpl;
-import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,14 +45,15 @@ public class ShoppingItemPriceLocalServiceImpl
 	public List getItemPrices(long itemId)
 		throws PortalException, SystemException {
 
-		ShoppingItem item = ShoppingItemUtil.findByPrimaryKey(itemId);
+		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
 
-		List itemPrices = ShoppingItemPriceUtil.findByItemId(itemId);
+		List itemPrices = shoppingItemPricePersistence.findByItemId(itemId);
 
 		if (itemPrices.size() == 0) {
 			itemPrices = new ArrayList();
 
-			ShoppingItemPrice itemPrice = ShoppingItemPriceUtil.create(0);
+			ShoppingItemPrice itemPrice = shoppingItemPricePersistence.create(
+				0);
 
 			itemPrice.setItemId(itemId);
 			itemPrice.setMinQuantity(item.getMinQuantity());

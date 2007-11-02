@@ -28,10 +28,8 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
-import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
 import com.liferay.portlet.shopping.service.base.ShoppingOrderServiceBaseImpl;
 import com.liferay.portlet.shopping.service.permission.ShoppingOrderPermission;
-import com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil;
 
 /**
  * <a href="ShoppingOrderServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -46,13 +44,13 @@ public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
 		throws PortalException, SystemException {
 
-		ShoppingOrder order = ShoppingOrderUtil.findByNumber(number);
+		ShoppingOrder order = shoppingOrderPersistence.findByNumber(number);
 
 		ShoppingOrderPermission.check(
 			getPermissionChecker(), plid, order.getOrderId(),
 			ActionKeys.UPDATE);
 
-		ShoppingOrderLocalServiceUtil.completeOrder(
+		shoppingOrderLocalService.completeOrder(
 			number, ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,
 			ppPayerEmail, false);
 	}
@@ -63,13 +61,13 @@ public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 		ShoppingOrderPermission.check(
 			getPermissionChecker(), plid, orderId, ActionKeys.DELETE);
 
-		ShoppingOrderLocalServiceUtil.deleteOrder(orderId);
+		shoppingOrderLocalService.deleteOrder(orderId);
 	}
 
 	public ShoppingOrder getOrder(long plid, long orderId)
 		throws PortalException, SystemException {
 
-		ShoppingOrder order = ShoppingOrderLocalServiceUtil.getOrder(orderId);
+		ShoppingOrder order = shoppingOrderLocalService.getOrder(orderId);
 
 		if (order.getUserId() == getUserId()) {
 			return order;
@@ -89,7 +87,7 @@ public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 		ShoppingOrderPermission.check(
 			getPermissionChecker(), plid, orderId, ActionKeys.UPDATE);
 
-		ShoppingOrderLocalServiceUtil.sendEmail(orderId, emailType);
+		shoppingOrderLocalService.sendEmail(orderId, emailType);
 	}
 
 	public ShoppingOrder updateOrder(
@@ -109,7 +107,7 @@ public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 		ShoppingOrderPermission.check(
 			getPermissionChecker(), plid, orderId, ActionKeys.UPDATE);
 
-		return ShoppingOrderLocalServiceUtil.updateOrder(
+		return shoppingOrderLocalService.updateOrder(
 			orderId, billingFirstName, billingLastName, billingEmailAddress,
 			billingCompany, billingStreet, billingCity, billingState,
 			billingZip, billingCountry, billingPhone, shipToBilling,
@@ -127,7 +125,7 @@ public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 		ShoppingOrderPermission.check(
 			getPermissionChecker(), plid, orderId, ActionKeys.UPDATE);
 
-		return ShoppingOrderLocalServiceUtil.updateOrder(
+		return shoppingOrderLocalService.updateOrder(
 			orderId, ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,
 			ppPayerEmail);
 	}

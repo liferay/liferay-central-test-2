@@ -22,14 +22,12 @@
 
 package com.liferay.portlet.shopping.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.CouponCodeException;
 import com.liferay.portlet.shopping.CouponDateException;
@@ -47,9 +45,6 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.service.base.ShoppingCouponLocalServiceBaseImpl;
-import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.util.PwdGenerator;
 
 import java.util.ArrayList;
@@ -78,7 +73,7 @@ public class ShoppingCouponLocalServiceImpl
 
 		// Coupon
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
 		code = code.trim().toUpperCase();
@@ -111,9 +106,9 @@ public class ShoppingCouponLocalServiceImpl
 			user.getCompanyId(), groupId, code, autoCode, name, description,
 			limitCategories, limitSkus);
 
-		long couponId = CounterLocalServiceUtil.increment();
+		long couponId = counterLocalService.increment();
 
-		ShoppingCoupon coupon = ShoppingCouponUtil.create(couponId);
+		ShoppingCoupon coupon = shoppingCouponPersistence.create(couponId);
 
 		coupon.setGroupId(groupId);
 		coupon.setCompanyId(user.getCompanyId());
@@ -133,7 +128,7 @@ public class ShoppingCouponLocalServiceImpl
 		coupon.setDiscount(discount);
 		coupon.setDiscountType(discountType);
 
-		ShoppingCouponUtil.update(coupon);
+		shoppingCouponPersistence.update(coupon);
 
 		return coupon;
 	}
@@ -141,17 +136,17 @@ public class ShoppingCouponLocalServiceImpl
 	public void deleteCoupon(long couponId)
 		throws PortalException, SystemException {
 
-		ShoppingCouponUtil.remove(couponId);
+		shoppingCouponPersistence.remove(couponId);
 	}
 
 	public void deleteCoupons(long groupId) throws SystemException {
-		ShoppingCouponUtil.removeByGroupId(groupId);
+		shoppingCouponPersistence.removeByGroupId(groupId);
 	}
 
 	public ShoppingCoupon getCoupon(long couponId)
 		throws PortalException, SystemException {
 
-		return ShoppingCouponUtil.findByPrimaryKey(couponId);
+		return shoppingCouponPersistence.findByPrimaryKey(couponId);
 	}
 
 	public ShoppingCoupon getCoupon(String code)
@@ -159,7 +154,7 @@ public class ShoppingCouponLocalServiceImpl
 
 		code = code.trim().toUpperCase();
 
-		return ShoppingCouponUtil.findByCode(code);
+		return shoppingCouponPersistence.findByCode(code);
 	}
 
 	public List search(
@@ -193,9 +188,10 @@ public class ShoppingCouponLocalServiceImpl
 			String discountType)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
-		ShoppingCoupon coupon = ShoppingCouponUtil.findByPrimaryKey(couponId);
+		ShoppingCoupon coupon = shoppingCouponPersistence.findByPrimaryKey(
+			couponId);
 
 		Date startDate = PortalUtil.getDate(
 			startDateMonth, startDateDay, startDateYear, startDateHour,
@@ -231,7 +227,7 @@ public class ShoppingCouponLocalServiceImpl
 		coupon.setDiscount(discount);
 		coupon.setDiscountType(discountType);
 
-		ShoppingCouponUtil.update(coupon);
+		shoppingCouponPersistence.update(coupon);
 
 		return coupon;
 	}
@@ -241,7 +237,7 @@ public class ShoppingCouponLocalServiceImpl
 			PwdGenerator.getPassword(PwdGenerator.KEY1 + PwdGenerator.KEY2, 8);
 
 		try {
-			ShoppingCouponUtil.findByCode(code);
+			shoppingCouponPersistence.findByCode(code);
 
 			return getCode();
 		}
@@ -265,7 +261,7 @@ public class ShoppingCouponLocalServiceImpl
 			}
 
 			try {
-				ShoppingCouponUtil.findByCode(code);
+				shoppingCouponPersistence.findByCode(code);
 
 				throw new DuplicateCouponCodeException();
 			}
@@ -298,7 +294,8 @@ public class ShoppingCouponLocalServiceImpl
 		for (int i = 0; i < categoryIds.length; i++) {
 			try {
 				ShoppingCategory category =
-					ShoppingCategoryUtil.findByPrimaryKey(categoryIds[i]);
+					shoppingCategoryPersistence.findByPrimaryKey(
+						categoryIds[i]);
 
 				if (category.getGroupId() != groupId) {
 					invalidCategoryIds.add(new Long(categoryIds[i]));
@@ -326,8 +323,8 @@ public class ShoppingCouponLocalServiceImpl
 
 		for (int i = 0; i < skus.length; i++) {
 			try {
-				ShoppingItem item =
-					ShoppingItemUtil.findByC_S(companyId, skus[i]);
+				ShoppingItem item = shoppingItemPersistence.findByC_S(
+					companyId, skus[i]);
 
 				ShoppingCategory category = item.getCategory();
 

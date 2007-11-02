@@ -22,13 +22,11 @@
 
 package com.liferay.portlet.shopping.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.shopping.CartMinQuantityException;
 import com.liferay.portlet.shopping.CouponActiveException;
@@ -44,9 +42,6 @@ import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingCartItemImpl;
 import com.liferay.portlet.shopping.service.base.ShoppingCartLocalServiceBaseImpl;
-import com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil;
-import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.portlet.shopping.util.ShoppingUtil;
 
 import java.util.ArrayList;
@@ -67,17 +62,17 @@ public class ShoppingCartLocalServiceImpl
 	extends ShoppingCartLocalServiceBaseImpl {
 
 	public void deleteGroupCarts(long groupId) throws SystemException {
-		ShoppingCartUtil.removeByGroupId(groupId);
+		shoppingCartPersistence.removeByGroupId(groupId);
 	}
 
 	public void deleteUserCarts(long userId) throws SystemException {
-		ShoppingCartUtil.removeByUserId(userId);
+		shoppingCartPersistence.removeByUserId(userId);
 	}
 
 	public ShoppingCart getCart(long userId, long groupId)
 		throws PortalException, SystemException {
 
-		return ShoppingCartUtil.findByG_U(groupId, userId);
+		return shoppingCartPersistence.findByG_U(groupId, userId);
 	}
 
 	public Map getItems(long groupId, String itemIds)
@@ -92,8 +87,8 @@ public class ShoppingCartLocalServiceImpl
 				long itemId = ShoppingUtil.getItemId(itemIdsArray[i]);
 				String fields = ShoppingUtil.getItemFields(itemIdsArray[i]);
 
-				ShoppingItem item =
-					ShoppingItemUtil.findByPrimaryKey(itemId);
+				ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(
+					itemId);
 
 				ShoppingCategory category = item.getCategory();
 
@@ -169,8 +164,8 @@ public class ShoppingCartLocalServiceImpl
 
 		for (int i = 0; i < couponCodesArray.length; i++) {
 			try {
-				ShoppingCoupon coupon =
-					ShoppingCouponUtil.findByCode(couponCodesArray[i]);
+				ShoppingCoupon coupon = shoppingCouponPersistence.findByCode(
+					couponCodesArray[i]);
 
 				if (coupon.getGroupId() != groupId) {
 					throw new NoSuchCouponException(couponCodesArray[i]);
@@ -194,13 +189,13 @@ public class ShoppingCartLocalServiceImpl
 			break;
 		}
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
 		ShoppingCart cart = null;
 
 		if (user.isDefaultUser()) {
-			cart = ShoppingCartUtil.create(0);
+			cart = shoppingCartPersistence.create(0);
 
 			cart.setGroupId(groupId);
 			cart.setCompanyId(user.getCompanyId());
@@ -210,12 +205,12 @@ public class ShoppingCartLocalServiceImpl
 		}
 		else {
 			try {
-				cart = ShoppingCartUtil.findByG_U(groupId, userId);
+				cart = shoppingCartPersistence.findByG_U(groupId, userId);
 			}
 			catch (NoSuchCartException nsce) {
-				long cartId = CounterLocalServiceUtil.increment();
+				long cartId = counterLocalService.increment();
 
-				cart = ShoppingCartUtil.create(cartId);
+				cart = shoppingCartPersistence.create(cartId);
 
 				cart.setGroupId(groupId);
 				cart.setCompanyId(user.getCompanyId());
@@ -232,7 +227,7 @@ public class ShoppingCartLocalServiceImpl
 		cart.setInsure(insure);
 
 		if (!user.isDefaultUser()) {
-			ShoppingCartUtil.update(cart);
+			shoppingCartPersistence.update(cart);
 		}
 
 		return cart;
@@ -247,7 +242,7 @@ public class ShoppingCartLocalServiceImpl
 			ShoppingItem item = null;
 
 			try {
-				item = ShoppingItemUtil.findByPrimaryKey(itemId);
+				item = shoppingItemPersistence.findByPrimaryKey(itemId);
 
 				ShoppingCategory category = item.getCategory();
 

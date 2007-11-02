@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portlet.shopping.model.ShoppingItem;
-import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
 import com.liferay.portlet.shopping.service.base.ShoppingItemServiceBaseImpl;
 import com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission;
 import com.liferay.portlet.shopping.service.permission.ShoppingItemPermission;
@@ -49,8 +48,7 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 		ShoppingCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.ADD_ITEM);
 
-		ShoppingItemLocalServiceUtil.addBookItems(
-			getUserId(), categoryId, isbns);
+		shoppingItemLocalService.addBookItems(getUserId(), categoryId, isbns);
 	}
 
 	public ShoppingItem addItem(
@@ -67,7 +65,7 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 		ShoppingCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.ADD_ITEM);
 
-		return ShoppingItemLocalServiceUtil.addItem(
+		return shoppingItemLocalService.addItem(
 			getUserId(), categoryId, sku, name, description, properties,
 			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
 			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
@@ -89,7 +87,7 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 		ShoppingCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.ADD_ITEM);
 
-		return ShoppingItemLocalServiceUtil.addItem(
+		return shoppingItemLocalService.addItem(
 			getUserId(), categoryId, sku, name, description, properties,
 			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
 			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
@@ -103,7 +101,7 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 		ShoppingItemPermission.check(
 			getPermissionChecker(), itemId, ActionKeys.DELETE);
 
-		ShoppingItemLocalServiceUtil.deleteItem(itemId);
+		shoppingItemLocalService.deleteItem(itemId);
 	}
 
 	public ShoppingItem getItem(long itemId)
@@ -112,7 +110,7 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 		ShoppingItemPermission.check(
 			getPermissionChecker(), itemId, ActionKeys.VIEW);
 
-		return ShoppingItemLocalServiceUtil.getItem(itemId);
+		return shoppingItemLocalService.getItem(itemId);
 	}
 
 	public ShoppingItem updateItem(
@@ -128,7 +126,7 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 		ShoppingItemPermission.check(
 			getPermissionChecker(), itemId, ActionKeys.UPDATE);
 
-		return ShoppingItemLocalServiceUtil.updateItem(
+		return shoppingItemLocalService.updateItem(
 			getUserId(), itemId, categoryId, sku, name, description, properties,
 			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
 			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,

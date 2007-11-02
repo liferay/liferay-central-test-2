@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
-import com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceUtil;
 import com.liferay.portlet.shopping.service.base.ShoppingCouponServiceBaseImpl;
 
 import java.util.List;
@@ -55,7 +54,7 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_COUPONS);
 
-		return ShoppingCouponLocalServiceUtil.addCoupon(
+		return shoppingCouponLocalService.addCoupon(
 			getUserId(), plid, code, autoCode, name, description,
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, endDateMonth, endDateDay, endDateYear, endDateHour,
@@ -70,7 +69,7 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_COUPONS);
 
-		ShoppingCouponLocalServiceUtil.deleteCoupon(couponId);
+		shoppingCouponLocalService.deleteCoupon(couponId);
 	}
 
 	public ShoppingCoupon getCoupon(long plid, long couponId)
@@ -80,7 +79,7 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_COUPONS);
 
-		return ShoppingCouponLocalServiceUtil.getCoupon(couponId);
+		return shoppingCouponLocalService.getCoupon(couponId);
 	}
 
 	public List search(
@@ -92,7 +91,7 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_COUPONS);
 
-		return ShoppingCouponLocalServiceUtil.search(
+		return shoppingCouponLocalService.search(
 			plid, companyId, code, active, discountType, andOperator, begin,
 			end);
 	}
@@ -111,7 +110,7 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.SHOPPING,
 			ActionKeys.MANAGE_COUPONS);
 
-		return ShoppingCouponLocalServiceUtil.updateCoupon(
+		return shoppingCouponLocalService.updateCoupon(
 			getUserId(), couponId, name, description, startDateMonth,
 			startDateDay, startDateYear, startDateHour, startDateMinute,
 			endDateMonth, endDateDay, endDateYear, endDateHour, endDateMinute,

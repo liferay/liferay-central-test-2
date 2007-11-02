@@ -22,8 +22,38 @@
 
 package com.liferay.portlet.shopping.service.base;
 
-import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.mail.service.MailService;
+import com.liferay.mail.service.MailServiceFactory;
+
+import com.liferay.portal.service.CompanyLocalService;
+import com.liferay.portal.service.CompanyLocalServiceFactory;
+import com.liferay.portal.service.CompanyService;
+import com.liferay.portal.service.CompanyServiceFactory;
+import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.UserLocalServiceFactory;
+import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.CompanyPersistence;
+import com.liferay.portal.service.persistence.CompanyUtil;
+import com.liferay.portal.service.persistence.UserFinder;
+import com.liferay.portal.service.persistence.UserFinderUtil;
+import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.service.persistence.UserUtil;
+
+import com.liferay.portlet.messageboards.service.MBMessageLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory;
+import com.liferay.portlet.messageboards.service.MBMessageService;
+import com.liferay.portlet.messageboards.service.MBMessageServiceFactory;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
@@ -275,6 +305,120 @@ public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean
 		this.shoppingOrderItemPersistence = shoppingOrderItemPersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
+	public MailService getMailService() {
+		return mailService;
+	}
+
+	public void setMailService(MailService mailService) {
+		this.mailService = mailService;
+	}
+
+	public CompanyLocalService getCompanyLocalService() {
+		return companyLocalService;
+	}
+
+	public void setCompanyLocalService(CompanyLocalService companyLocalService) {
+		this.companyLocalService = companyLocalService;
+	}
+
+	public CompanyService getCompanyService() {
+		return companyService;
+	}
+
+	public void setCompanyService(CompanyService companyService) {
+		this.companyService = companyService;
+	}
+
+	public CompanyPersistence getCompanyPersistence() {
+		return companyPersistence;
+	}
+
+	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
+		this.companyPersistence = companyPersistence;
+	}
+
+	public UserLocalService getUserLocalService() {
+		return userLocalService;
+	}
+
+	public void setUserLocalService(UserLocalService userLocalService) {
+		this.userLocalService = userLocalService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public UserPersistence getUserPersistence() {
+		return userPersistence;
+	}
+
+	public void setUserPersistence(UserPersistence userPersistence) {
+		this.userPersistence = userPersistence;
+	}
+
+	public UserFinder getUserFinder() {
+		return userFinder;
+	}
+
+	public void setUserFinder(UserFinder userFinder) {
+		this.userFinder = userFinder;
+	}
+
+	public MBMessageLocalService getMBMessageLocalService() {
+		return mbMessageLocalService;
+	}
+
+	public void setMBMessageLocalService(
+		MBMessageLocalService mbMessageLocalService) {
+		this.mbMessageLocalService = mbMessageLocalService;
+	}
+
+	public MBMessageService getMBMessageService() {
+		return mbMessageService;
+	}
+
+	public void setMBMessageService(MBMessageService mbMessageService) {
+		this.mbMessageService = mbMessageService;
+	}
+
+	public MBMessagePersistence getMBMessagePersistence() {
+		return mbMessagePersistence;
+	}
+
+	public void setMBMessagePersistence(
+		MBMessagePersistence mbMessagePersistence) {
+		this.mbMessagePersistence = mbMessagePersistence;
+	}
+
+	public MBMessageFinder getMBMessageFinder() {
+		return mbMessageFinder;
+	}
+
+	public void setMBMessageFinder(MBMessageFinder mbMessageFinder) {
+		this.mbMessageFinder = mbMessageFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (shoppingCartLocalService == null) {
 			shoppingCartLocalService = ShoppingCartLocalServiceFactory.getImpl();
@@ -363,6 +507,62 @@ public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean
 		if (shoppingOrderItemPersistence == null) {
 			shoppingOrderItemPersistence = ShoppingOrderItemUtil.getPersistence();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
+
+		if (mailService == null) {
+			mailService = MailServiceFactory.getImpl();
+		}
+
+		if (companyLocalService == null) {
+			companyLocalService = CompanyLocalServiceFactory.getImpl();
+		}
+
+		if (companyService == null) {
+			companyService = CompanyServiceFactory.getImpl();
+		}
+
+		if (companyPersistence == null) {
+			companyPersistence = CompanyUtil.getPersistence();
+		}
+
+		if (userLocalService == null) {
+			userLocalService = UserLocalServiceFactory.getImpl();
+		}
+
+		if (userService == null) {
+			userService = UserServiceFactory.getImpl();
+		}
+
+		if (userPersistence == null) {
+			userPersistence = UserUtil.getPersistence();
+		}
+
+		if (userFinder == null) {
+			userFinder = UserFinderUtil.getFinder();
+		}
+
+		if (mbMessageLocalService == null) {
+			mbMessageLocalService = MBMessageLocalServiceFactory.getImpl();
+		}
+
+		if (mbMessageService == null) {
+			mbMessageService = MBMessageServiceFactory.getImpl();
+		}
+
+		if (mbMessagePersistence == null) {
+			mbMessagePersistence = MBMessageUtil.getPersistence();
+		}
+
+		if (mbMessageFinder == null) {
+			mbMessageFinder = MBMessageFinderUtil.getFinder();
+		}
 	}
 
 	protected ShoppingCartLocalService shoppingCartLocalService;
@@ -387,4 +587,18 @@ public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean
 	protected ShoppingOrderFinder shoppingOrderFinder;
 	protected ShoppingOrderItemLocalService shoppingOrderItemLocalService;
 	protected ShoppingOrderItemPersistence shoppingOrderItemPersistence;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
+	protected MailService mailService;
+	protected CompanyLocalService companyLocalService;
+	protected CompanyService companyService;
+	protected CompanyPersistence companyPersistence;
+	protected UserLocalService userLocalService;
+	protected UserService userService;
+	protected UserPersistence userPersistence;
+	protected UserFinder userFinder;
+	protected MBMessageLocalService mbMessageLocalService;
+	protected MBMessageService mbMessageService;
+	protected MBMessagePersistence mbMessagePersistence;
+	protected MBMessageFinder mbMessageFinder;
 }

@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
-import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
 import com.liferay.portlet.shopping.service.base.ShoppingCategoryServiceBaseImpl;
 import com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission;
 
@@ -48,7 +47,7 @@ public class ShoppingCategoryServiceImpl
 			getPermissionChecker(), plid, parentCategoryId,
 			ActionKeys.ADD_CATEGORY);
 
-		return ShoppingCategoryLocalServiceUtil.addCategory(
+		return shoppingCategoryLocalService.addCategory(
 			getUserId(), plid, parentCategoryId, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -62,7 +61,7 @@ public class ShoppingCategoryServiceImpl
 			getPermissionChecker(), plid, parentCategoryId,
 			ActionKeys.ADD_CATEGORY);
 
-		return ShoppingCategoryLocalServiceUtil.addCategory(
+		return shoppingCategoryLocalService.addCategory(
 			getUserId(), plid, parentCategoryId, name, description,
 			communityPermissions, guestPermissions);
 	}
@@ -73,7 +72,7 @@ public class ShoppingCategoryServiceImpl
 		ShoppingCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.DELETE);
 
-		ShoppingCategoryLocalServiceUtil.deleteCategory(categoryId);
+		shoppingCategoryLocalService.deleteCategory(categoryId);
 	}
 
 	public ShoppingCategory getCategory(long categoryId)
@@ -82,7 +81,7 @@ public class ShoppingCategoryServiceImpl
 		ShoppingCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.VIEW);
 
-		return ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
+		return shoppingCategoryLocalService.getCategory(categoryId);
 	}
 
 	public ShoppingCategory updateCategory(
@@ -93,7 +92,7 @@ public class ShoppingCategoryServiceImpl
 		ShoppingCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.UPDATE);
 
-		return ShoppingCategoryLocalServiceUtil.updateCategory(
+		return shoppingCategoryLocalService.updateCategory(
 			categoryId, parentCategoryId, name, description,
 			mergeWithParentCategory);
 	}
