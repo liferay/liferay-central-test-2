@@ -312,6 +312,51 @@ public interface UserLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence getBlogsStatsUserPersistence();
+
+	public void setBlogsStatsUserPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence);
+
+	public com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder getBlogsStatsUserFinder();
+
+	public void setBlogsStatsUserFinder(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder blogsStatsUserFinder);
+
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence getDLFileRankPersistence();
+
+	public void setDLFileRankPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence);
+
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder getDLFileRankFinder();
+
+	public void setDLFileRankFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder dlFileRankFinder);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence();
+
+	public void setMBBanPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence getMBMessageFlagPersistence();
+
+	public void setMBMessageFlagPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder getMBMessageFlagFinder();
+
+	public void setMBMessageFlagFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder mbMessageFlagFinder);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence getMBStatsUserPersistence();
+
+	public void setMBStatsUserPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence);
+
+	public com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence();
+
+	public void setShoppingCartPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence shoppingCartPersistence);
+
 	public void afterPropertiesSet();
 
 	public void addGroupUsers(long groupId, long[] userIds)

@@ -35,12 +35,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.GroupUtil;
-import com.liferay.portal.service.persistence.UserGroupUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -56,7 +51,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
-		GroupUtil.addUserGroups(groupId, userGroupIds);
+		groupPersistence.addUserGroups(groupId, userGroupIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -71,7 +66,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		long userGroupId = counterLocalService.increment();
 
-		UserGroup userGroup = UserGroupUtil.create(userGroupId);
+		UserGroup userGroup = userGroupPersistence.create(userGroupId);
 
 		userGroup.setCompanyId(companyId);
 		userGroup.setParentUserGroupId(
@@ -79,17 +74,17 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		userGroup.setName(name);
 		userGroup.setDescription(description);
 
-		UserGroupUtil.update(userGroup);
+		userGroupPersistence.update(userGroup);
 
 		// Group
 
-		GroupLocalServiceUtil.addGroup(
+		groupLocalService.addGroup(
 			userId, UserGroup.class.getName(), userGroup.getUserGroupId(), null,
 			null, null, null, true);
 
 		// Resources
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			companyId, 0, userId, UserGroup.class.getName(),
 			userGroup.getUserGroupId(), false, false, false);
 
@@ -99,7 +94,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public void clearUserUserGroups(long userId)
 		throws PortalException, SystemException {
 
-		UserUtil.clearUserGroups(userId);
+		userPersistence.clearUserGroups(userId);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -107,9 +102,10 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public void deleteUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
-		UserGroup userGroup = UserGroupUtil.findByPrimaryKey(userGroupId);
+		UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
+			userGroupId);
 
-		if (UserGroupUtil.containsUsers(userGroup.getUserGroupId())) {
+		if (userGroupPersistence.containsUsers(userGroup.getUserGroupId())) {
 			throw new RequiredUserGroupException();
 		}
 
@@ -117,17 +113,17 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		Group group = userGroup.getGroup();
 
-		GroupLocalServiceUtil.deleteGroup(group.getGroupId());
+		groupLocalService.deleteGroup(group.getGroupId());
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			userGroup.getCompanyId(), UserGroup.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, userGroup.getUserGroupId());
 
 		// User Group
 
-		UserGroupUtil.remove(userGroupId);
+		userGroupPersistence.remove(userGroupId);
 
 		// Permission cache
 
@@ -137,7 +133,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public UserGroup getUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
-		return UserGroupUtil.findByPrimaryKey(userGroupId);
+		return userGroupPersistence.findByPrimaryKey(userGroupId);
 	}
 
 	public UserGroup getUserGroup(long companyId, String name)
@@ -149,19 +145,19 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public List getUserGroups(long companyId)
 		throws PortalException, SystemException {
 
-		return UserGroupUtil.findByCompanyId(companyId);
+		return userGroupPersistence.findByCompanyId(companyId);
 	}
 
 	public List getUserUserGroups(long userId)
 		throws PortalException, SystemException {
 
-		return UserUtil.getUserGroups(userId);
+		return userPersistence.getUserGroups(userId);
 	}
 
 	public boolean hasGroupUserGroup(long groupId, long userGroupId)
 		throws PortalException, SystemException {
 
-		return GroupUtil.containsUserGroup(groupId, userGroupId);
+		return groupPersistence.containsUserGroup(groupId, userGroupId);
 	}
 
 	public List search(
@@ -185,7 +181,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
-		GroupUtil.removeUserGroups(groupId, userGroupIds);
+		groupPersistence.removeUserGroups(groupId, userGroupIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -197,12 +193,13 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		validate(userGroupId, companyId, name);
 
-		UserGroup userGroup = UserGroupUtil.findByPrimaryKey(userGroupId);
+		UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
+			userGroupId);
 
 		userGroup.setName(name);
 		userGroup.setDescription(description);
 
-		UserGroupUtil.update(userGroup);
+		userGroupPersistence.update(userGroup);
 
 		return userGroup;
 	}

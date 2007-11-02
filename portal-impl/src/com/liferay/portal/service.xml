@@ -1284,6 +1284,13 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.mail" entity="Mail" />
+		<reference package-path="com.liferay.portlet.blogs" entity="BlogsStatsUser" />
+		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileRank" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBBan" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessageFlag" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBStatsUser" />
+		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />
 
 		<!-- Transactions -->
 
@@ -1447,6 +1454,10 @@
 		<finder name="UserTrackerId" return-type="Collection">
 			<finder-column name="userTrackerId" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Website" local-service="true" remote-service="true">
 

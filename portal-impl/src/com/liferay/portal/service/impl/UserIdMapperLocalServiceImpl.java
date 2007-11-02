@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.UserIdMapper;
 import com.liferay.portal.service.base.UserIdMapperLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.UserIdMapperUtil;
 
 import java.util.List;
 
@@ -41,36 +40,37 @@ public class UserIdMapperLocalServiceImpl
 	extends UserIdMapperLocalServiceBaseImpl {
 
 	public void deleteUserIdMappers(long userId) throws SystemException {
-		UserIdMapperUtil.removeByUserId(userId);
+		userIdMapperPersistence.removeByUserId(userId);
 	}
 
 	public UserIdMapper getUserIdMapper(long userId, String type)
 		throws PortalException, SystemException {
 
-		return UserIdMapperUtil.findByU_T(userId, type);
+		return userIdMapperPersistence.findByU_T(userId, type);
 	}
 
 	public UserIdMapper getUserIdMapperByExternalUserId(
 			String type, String externalUserId)
 		throws PortalException, SystemException {
 
-		return UserIdMapperUtil.findByT_E(type, externalUserId);
+		return userIdMapperPersistence.findByT_E(type, externalUserId);
 	}
 
 	public List getUserIdMappers(long userId) throws SystemException {
-		return UserIdMapperUtil.findByUserId(userId);
+		return userIdMapperPersistence.findByUserId(userId);
 	}
 
 	public UserIdMapper updateUserIdMapper(
 			long userId, String type, String description, String externalUserId)
 		throws PortalException, SystemException {
 
-		UserIdMapper userIdMapper = UserIdMapperUtil.fetchByU_T(userId, type);
+		UserIdMapper userIdMapper = userIdMapperPersistence.fetchByU_T(
+			userId, type);
 
 		if (userIdMapper == null) {
 			long userIdMapperId = counterLocalService.increment();
 
-			userIdMapper = UserIdMapperUtil.create(userIdMapperId);
+			userIdMapper = userIdMapperPersistence.create(userIdMapperId);
 		}
 
 		userIdMapper.setUserId(userId);
@@ -78,7 +78,7 @@ public class UserIdMapperLocalServiceImpl
 		userIdMapper.setDescription(description);
 		userIdMapper.setExternalUserId(externalUserId);
 
-		UserIdMapperUtil.update(userIdMapper);
+		userIdMapperPersistence.update(userIdMapper);
 
 		return userIdMapper;
 	}

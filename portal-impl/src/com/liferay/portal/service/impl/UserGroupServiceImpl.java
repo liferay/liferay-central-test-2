@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.base.UserGroupServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
@@ -50,8 +49,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		UserGroupLocalServiceUtil.addGroupUserGroups(
-			groupId, userGroupIds);
+		userGroupLocalService.addGroupUserGroups(groupId, userGroupIds);
 	}
 
 	public UserGroup addUserGroup(String name, String description)
@@ -62,7 +60,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 
 		User user = getUser();
 
-		return UserGroupLocalServiceUtil.addUserGroup(
+		return userGroupLocalService.addUserGroup(
 			user.getUserId(), user.getCompanyId(), name, description);
 	}
 
@@ -72,7 +70,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		UserGroupPermissionUtil.check(
 			getPermissionChecker(), userGroupId, ActionKeys.DELETE);
 
-		UserGroupLocalServiceUtil.deleteUserGroup(userGroupId);
+		userGroupLocalService.deleteUserGroup(userGroupId);
 	}
 
 	public UserGroup getUserGroup(long userGroupId)
@@ -88,13 +86,13 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
-		return UserGroupLocalServiceUtil.getUserGroup(userGroupId);
+		return userGroupLocalService.getUserGroup(userGroupId);
 	}
 
 	public UserGroup getUserGroup(String name)
 		throws PortalException, SystemException {
 
-		UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(
+		UserGroup userGroup = userGroupLocalService.getUserGroup(
 			getUser().getCompanyId(), name);
 
 		long userGroupId = userGroup.getUserGroupId();
@@ -115,7 +113,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	public List getUserUserGroups(long userId)
 		throws PortalException, SystemException {
 
-		return UserGroupLocalServiceUtil.getUserUserGroups(userId);
+		return userGroupLocalService.getUserUserGroups(userId);
 	}
 
 	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
@@ -124,8 +122,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		UserGroupLocalServiceUtil.unsetGroupUserGroups(
-			groupId, userGroupIds);
+		userGroupLocalService.unsetGroupUserGroups(groupId, userGroupIds);
 	}
 
 	public UserGroup updateUserGroup(
@@ -135,7 +132,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		UserGroupPermissionUtil.check(
 			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
 
-		return UserGroupLocalServiceUtil.updateUserGroup(
+		return userGroupLocalService.updateUserGroup(
 			getUser().getCompanyId(), userGroupId, name, description);
 	}
 

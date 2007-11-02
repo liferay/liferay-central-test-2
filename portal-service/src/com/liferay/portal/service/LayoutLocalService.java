@@ -323,7 +323,7 @@ public interface LayoutLocalService {
 
 	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
 		boolean privateLayout, long parentLayoutId,
-		java.util.Map localeNameMap, java.util.Map localeTitleMap,
+		java.util.Map localeNamesMap, java.util.Map localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
@@ -339,7 +339,7 @@ public interface LayoutLocalService {
 
 	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
 		boolean privateLayout, long parentLayoutId,
-		java.util.Map localeNameMap, java.util.Map localeTitleMap,
+		java.util.Map localeNamesMap, java.util.Map localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL, long dlFolderId)
 		throws com.liferay.portal.SystemException, 
@@ -419,7 +419,7 @@ public interface LayoutLocalService {
 
 	public com.liferay.portal.model.Layout updateLayout(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId,
-		java.util.Map localeNameMap, java.util.Map localeTitleMap,
+		java.util.Map localeNamesMap, java.util.Map localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
@@ -427,7 +427,7 @@ public interface LayoutLocalService {
 
 	public com.liferay.portal.model.Layout updateLayout(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId,
-		java.util.Map localeNameMap, java.util.Map localeTitleMap,
+		java.util.Map localeNamesMap, java.util.Map localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL, java.lang.Boolean iconImage,
 		byte[] iconBytes)

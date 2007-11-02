@@ -677,6 +677,114 @@ public class UserLocalServiceUtil {
 		userLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence getBlogsStatsUserPersistence() {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getBlogsStatsUserPersistence();
+	}
+
+	public static void setBlogsStatsUserPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence) {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.setBlogsStatsUserPersistence(blogsStatsUserPersistence);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder getBlogsStatsUserFinder() {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getBlogsStatsUserFinder();
+	}
+
+	public static void setBlogsStatsUserFinder(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder blogsStatsUserFinder) {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.setBlogsStatsUserFinder(blogsStatsUserFinder);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence getDLFileRankPersistence() {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getDLFileRankPersistence();
+	}
+
+	public static void setDLFileRankPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence) {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.setDLFileRankPersistence(dlFileRankPersistence);
+	}
+
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder getDLFileRankFinder() {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getDLFileRankFinder();
+	}
+
+	public static void setDLFileRankFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder dlFileRankFinder) {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.setDLFileRankFinder(dlFileRankFinder);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getMBBanPersistence();
+	}
+
+	public static void setMBBanPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence) {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.setMBBanPersistence(mbBanPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence getMBMessageFlagPersistence() {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getMBMessageFlagPersistence();
+	}
+
+	public static void setMBMessageFlagPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence) {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.setMBMessageFlagPersistence(mbMessageFlagPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder getMBMessageFlagFinder() {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getMBMessageFlagFinder();
+	}
+
+	public static void setMBMessageFlagFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder mbMessageFlagFinder) {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.setMBMessageFlagFinder(mbMessageFlagFinder);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence getMBStatsUserPersistence() {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getMBStatsUserPersistence();
+	}
+
+	public static void setMBStatsUserPersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence) {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.setMBStatsUserPersistence(mbStatsUserPersistence);
+	}
+
+	public static com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence() {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getShoppingCartPersistence();
+	}
+
+	public static void setShoppingCartPersistence(
+		com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence shoppingCartPersistence) {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+		userLocalService.setShoppingCartPersistence(shoppingCartPersistence);
+	}
+
 	public static void afterPropertiesSet() {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 		userLocalService.afterPropertiesSet();

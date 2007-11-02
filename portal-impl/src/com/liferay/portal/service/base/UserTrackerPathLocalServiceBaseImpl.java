@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.AccountLocalService;
@@ -1208,6 +1213,22 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		this.websitePersistence = websitePersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
@@ -1652,6 +1673,14 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		if (websitePersistence == null) {
 			websitePersistence = WebsiteUtil.getPersistence();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
 	}
 
 	protected AccountLocalService accountLocalService;
@@ -1765,4 +1794,6 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 	protected WebsiteLocalService websiteLocalService;
 	protected WebsiteService websiteService;
 	protected WebsitePersistence websitePersistence;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
 }

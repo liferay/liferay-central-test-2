@@ -25,7 +25,6 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.base.UserGroupRoleServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 
@@ -43,8 +42,7 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.ASSIGN_USERS);
 
-		UserGroupRoleLocalServiceUtil.addUserGroupRoles(
-			userId, groupId, roleIds);
+		userGroupRoleLocalService.addUserGroupRoles(userId, groupId, roleIds);
 	}
 
 	public void addUserGroupRoles(long[] userIds, long groupId, long roleId)
@@ -53,8 +51,7 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.ASSIGN_USERS);
 
-		UserGroupRoleLocalServiceUtil.addUserGroupRoles(
-			userIds, groupId, roleId);
+		userGroupRoleLocalService.addUserGroupRoles(userIds, groupId, roleId);
 	}
 
 	public void deleteUserGroupRoles(long userId, long groupId, long[] roleIds)
@@ -63,7 +60,7 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.ASSIGN_USERS);
 
-		UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(
+		userGroupRoleLocalService.deleteUserGroupRoles(
 			userId, groupId, roleIds);
 	}
 
@@ -73,7 +70,7 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.ASSIGN_USERS);
 
-		UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(
+		userGroupRoleLocalService.deleteUserGroupRoles(
 			userIds, groupId, roleId);
 	}
 

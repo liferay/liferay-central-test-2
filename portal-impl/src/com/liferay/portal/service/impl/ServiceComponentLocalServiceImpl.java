@@ -28,7 +28,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.service.base.ServiceComponentLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.ServiceComponentUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
@@ -73,13 +72,15 @@ public class ServiceComponentLocalServiceImpl
 		ServiceComponent serviceComponent = null;
 		ServiceComponent previousServiceComponent = null;
 
-		List serviceComponents = ServiceComponentUtil.findByBuildNamespace(
-			buildNamespace, 0, 1);
+		List serviceComponents =
+			serviceComponentPersistence.findByBuildNamespace(
+				buildNamespace, 0, 1);
 
 		if (serviceComponents.size() == 0) {
 			long serviceComponentId = counterLocalService.increment();
 
-			serviceComponent = ServiceComponentUtil.create(serviceComponentId);
+			serviceComponent = serviceComponentPersistence.create(
+				serviceComponentId);
 
 			serviceComponent.setBuildNamespace(buildNamespace);
 			serviceComponent.setBuildNumber(buildNumber);
@@ -93,8 +94,8 @@ public class ServiceComponentLocalServiceImpl
 
 				long serviceComponentId = counterLocalService.increment();
 
-				serviceComponent =
-					ServiceComponentUtil.create(serviceComponentId);
+				serviceComponent = serviceComponentPersistence.create(
+					serviceComponentId);
 
 				serviceComponent.setBuildNamespace(buildNamespace);
 				serviceComponent.setBuildNumber(buildNumber);
@@ -137,7 +138,7 @@ public class ServiceComponentLocalServiceImpl
 
 			serviceComponent.setData(dataXML);
 
-			ServiceComponentUtil.update(serviceComponent);
+			serviceComponentPersistence.update(serviceComponent);
 
 			upgradeDB(
 				portletClassLoader, buildNamespace, buildNumber,
@@ -276,20 +277,22 @@ public class ServiceComponentLocalServiceImpl
 		throws SystemException {
 
 		int serviceComponentsCount =
-			ServiceComponentUtil.countByBuildNamespace(buildNamespace);
+			serviceComponentPersistence.countByBuildNamespace(buildNamespace);
 
 		if (serviceComponentsCount < _MAX_SERVICE_COMPONENTS) {
 			return;
 		}
 
-		List serviceComponents = ServiceComponentUtil.findByBuildNamespace(
-			buildNamespace, _MAX_SERVICE_COMPONENTS, serviceComponentsCount);
+		List serviceComponents =
+			serviceComponentPersistence.findByBuildNamespace(
+				buildNamespace, _MAX_SERVICE_COMPONENTS,
+				serviceComponentsCount);
 
 		for (int i = 0; i < serviceComponents.size(); i++) {
 			ServiceComponent serviceComponent =
 				(ServiceComponent)serviceComponents.get(i);
 
-			ServiceComponentUtil.remove(serviceComponent);
+			serviceComponentPersistence.remove(serviceComponent);
 		}
 	}
 

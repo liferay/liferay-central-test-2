@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.service.base.WebsiteServiceBaseImpl;
 import com.liferay.portal.service.permission.CommonPermissionUtil;
-import com.liferay.portal.service.persistence.WebsiteUtil;
 
 import java.util.List;
 
@@ -55,7 +54,7 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 	public void deleteWebsite(long websiteId)
 		throws PortalException, SystemException {
 
-		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
+		Website website = websitePersistence.findByPrimaryKey(websiteId);
 
 		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), website.getClassNameId(),
@@ -67,7 +66,7 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 	public Website getWebsite(long websiteId)
 		throws PortalException, SystemException {
 
-		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
+		Website website = websitePersistence.findByPrimaryKey(websiteId);
 
 		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), website.getClassNameId(),
@@ -90,7 +89,7 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 			long websiteId, String url, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
-		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
+		Website website = websitePersistence.findByPrimaryKey(websiteId);
 
 		CommonPermissionUtil.checkPermission(
 			getPermissionChecker(), website.getClassNameId(),

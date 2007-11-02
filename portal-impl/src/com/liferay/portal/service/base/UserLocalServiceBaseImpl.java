@@ -27,6 +27,9 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.mail.service.MailService;
+import com.liferay.mail.service.MailServiceFactory;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.AccountLocalService;
@@ -250,6 +253,39 @@ import com.liferay.portal.service.persistence.UserTrackerUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
+
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderUtil;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
+import com.liferay.portlet.messageboards.service.MBBanLocalService;
+import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
+import com.liferay.portlet.messageboards.service.MBBanService;
+import com.liferay.portlet.messageboards.service.MBBanServiceFactory;
+import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceFactory;
+import com.liferay.portlet.messageboards.service.MBStatsUserLocalService;
+import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory;
+import com.liferay.portlet.messageboards.service.persistence.MBBanPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
+import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
+import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
+import com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence;
+import com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
@@ -1219,6 +1255,153 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		this.counterService = counterService;
 	}
 
+	public MailService getMailService() {
+		return mailService;
+	}
+
+	public void setMailService(MailService mailService) {
+		this.mailService = mailService;
+	}
+
+	public BlogsStatsUserLocalService getBlogsStatsUserLocalService() {
+		return blogsStatsUserLocalService;
+	}
+
+	public void setBlogsStatsUserLocalService(
+		BlogsStatsUserLocalService blogsStatsUserLocalService) {
+		this.blogsStatsUserLocalService = blogsStatsUserLocalService;
+	}
+
+	public BlogsStatsUserPersistence getBlogsStatsUserPersistence() {
+		return blogsStatsUserPersistence;
+	}
+
+	public void setBlogsStatsUserPersistence(
+		BlogsStatsUserPersistence blogsStatsUserPersistence) {
+		this.blogsStatsUserPersistence = blogsStatsUserPersistence;
+	}
+
+	public BlogsStatsUserFinder getBlogsStatsUserFinder() {
+		return blogsStatsUserFinder;
+	}
+
+	public void setBlogsStatsUserFinder(
+		BlogsStatsUserFinder blogsStatsUserFinder) {
+		this.blogsStatsUserFinder = blogsStatsUserFinder;
+	}
+
+	public DLFileRankLocalService getDLFileRankLocalService() {
+		return dlFileRankLocalService;
+	}
+
+	public void setDLFileRankLocalService(
+		DLFileRankLocalService dlFileRankLocalService) {
+		this.dlFileRankLocalService = dlFileRankLocalService;
+	}
+
+	public DLFileRankPersistence getDLFileRankPersistence() {
+		return dlFileRankPersistence;
+	}
+
+	public void setDLFileRankPersistence(
+		DLFileRankPersistence dlFileRankPersistence) {
+		this.dlFileRankPersistence = dlFileRankPersistence;
+	}
+
+	public DLFileRankFinder getDLFileRankFinder() {
+		return dlFileRankFinder;
+	}
+
+	public void setDLFileRankFinder(DLFileRankFinder dlFileRankFinder) {
+		this.dlFileRankFinder = dlFileRankFinder;
+	}
+
+	public MBBanLocalService getMBBanLocalService() {
+		return mbBanLocalService;
+	}
+
+	public void setMBBanLocalService(MBBanLocalService mbBanLocalService) {
+		this.mbBanLocalService = mbBanLocalService;
+	}
+
+	public MBBanService getMBBanService() {
+		return mbBanService;
+	}
+
+	public void setMBBanService(MBBanService mbBanService) {
+		this.mbBanService = mbBanService;
+	}
+
+	public MBBanPersistence getMBBanPersistence() {
+		return mbBanPersistence;
+	}
+
+	public void setMBBanPersistence(MBBanPersistence mbBanPersistence) {
+		this.mbBanPersistence = mbBanPersistence;
+	}
+
+	public MBMessageFlagLocalService getMBMessageFlagLocalService() {
+		return mbMessageFlagLocalService;
+	}
+
+	public void setMBMessageFlagLocalService(
+		MBMessageFlagLocalService mbMessageFlagLocalService) {
+		this.mbMessageFlagLocalService = mbMessageFlagLocalService;
+	}
+
+	public MBMessageFlagPersistence getMBMessageFlagPersistence() {
+		return mbMessageFlagPersistence;
+	}
+
+	public void setMBMessageFlagPersistence(
+		MBMessageFlagPersistence mbMessageFlagPersistence) {
+		this.mbMessageFlagPersistence = mbMessageFlagPersistence;
+	}
+
+	public MBMessageFlagFinder getMBMessageFlagFinder() {
+		return mbMessageFlagFinder;
+	}
+
+	public void setMBMessageFlagFinder(MBMessageFlagFinder mbMessageFlagFinder) {
+		this.mbMessageFlagFinder = mbMessageFlagFinder;
+	}
+
+	public MBStatsUserLocalService getMBStatsUserLocalService() {
+		return mbStatsUserLocalService;
+	}
+
+	public void setMBStatsUserLocalService(
+		MBStatsUserLocalService mbStatsUserLocalService) {
+		this.mbStatsUserLocalService = mbStatsUserLocalService;
+	}
+
+	public MBStatsUserPersistence getMBStatsUserPersistence() {
+		return mbStatsUserPersistence;
+	}
+
+	public void setMBStatsUserPersistence(
+		MBStatsUserPersistence mbStatsUserPersistence) {
+		this.mbStatsUserPersistence = mbStatsUserPersistence;
+	}
+
+	public ShoppingCartLocalService getShoppingCartLocalService() {
+		return shoppingCartLocalService;
+	}
+
+	public void setShoppingCartLocalService(
+		ShoppingCartLocalService shoppingCartLocalService) {
+		this.shoppingCartLocalService = shoppingCartLocalService;
+	}
+
+	public ShoppingCartPersistence getShoppingCartPersistence() {
+		return shoppingCartPersistence;
+	}
+
+	public void setShoppingCartPersistence(
+		ShoppingCartPersistence shoppingCartPersistence) {
+		this.shoppingCartPersistence = shoppingCartPersistence;
+	}
+
 	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
@@ -1667,6 +1850,74 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		if (counterService == null) {
 			counterService = CounterServiceFactory.getImpl();
 		}
+
+		if (mailService == null) {
+			mailService = MailServiceFactory.getImpl();
+		}
+
+		if (blogsStatsUserLocalService == null) {
+			blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getImpl();
+		}
+
+		if (blogsStatsUserPersistence == null) {
+			blogsStatsUserPersistence = BlogsStatsUserUtil.getPersistence();
+		}
+
+		if (blogsStatsUserFinder == null) {
+			blogsStatsUserFinder = BlogsStatsUserFinderUtil.getFinder();
+		}
+
+		if (dlFileRankLocalService == null) {
+			dlFileRankLocalService = DLFileRankLocalServiceFactory.getImpl();
+		}
+
+		if (dlFileRankPersistence == null) {
+			dlFileRankPersistence = DLFileRankUtil.getPersistence();
+		}
+
+		if (dlFileRankFinder == null) {
+			dlFileRankFinder = DLFileRankFinderUtil.getFinder();
+		}
+
+		if (mbBanLocalService == null) {
+			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
+		}
+
+		if (mbBanService == null) {
+			mbBanService = MBBanServiceFactory.getImpl();
+		}
+
+		if (mbBanPersistence == null) {
+			mbBanPersistence = MBBanUtil.getPersistence();
+		}
+
+		if (mbMessageFlagLocalService == null) {
+			mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getImpl();
+		}
+
+		if (mbMessageFlagPersistence == null) {
+			mbMessageFlagPersistence = MBMessageFlagUtil.getPersistence();
+		}
+
+		if (mbMessageFlagFinder == null) {
+			mbMessageFlagFinder = MBMessageFlagFinderUtil.getFinder();
+		}
+
+		if (mbStatsUserLocalService == null) {
+			mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getImpl();
+		}
+
+		if (mbStatsUserPersistence == null) {
+			mbStatsUserPersistence = MBStatsUserUtil.getPersistence();
+		}
+
+		if (shoppingCartLocalService == null) {
+			shoppingCartLocalService = ShoppingCartLocalServiceFactory.getImpl();
+		}
+
+		if (shoppingCartPersistence == null) {
+			shoppingCartPersistence = ShoppingCartUtil.getPersistence();
+		}
 	}
 
 	protected AccountLocalService accountLocalService;
@@ -1781,4 +2032,21 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	protected WebsitePersistence websitePersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected MailService mailService;
+	protected BlogsStatsUserLocalService blogsStatsUserLocalService;
+	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
+	protected BlogsStatsUserFinder blogsStatsUserFinder;
+	protected DLFileRankLocalService dlFileRankLocalService;
+	protected DLFileRankPersistence dlFileRankPersistence;
+	protected DLFileRankFinder dlFileRankFinder;
+	protected MBBanLocalService mbBanLocalService;
+	protected MBBanService mbBanService;
+	protected MBBanPersistence mbBanPersistence;
+	protected MBMessageFlagLocalService mbMessageFlagLocalService;
+	protected MBMessageFlagPersistence mbMessageFlagPersistence;
+	protected MBMessageFlagFinder mbMessageFlagFinder;
+	protected MBStatsUserLocalService mbStatsUserLocalService;
+	protected MBStatsUserPersistence mbStatsUserPersistence;
+	protected ShoppingCartLocalService shoppingCartLocalService;
+	protected ShoppingCartPersistence shoppingCartPersistence;
 }

@@ -29,7 +29,6 @@ import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.service.base.SubscriptionLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.SubscriptionUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.Date;
@@ -63,7 +62,8 @@ public class SubscriptionLocalServiceImpl
 
 		long subscriptionId = counterLocalService.increment();
 
-		Subscription subscription = SubscriptionUtil.create(subscriptionId);
+		Subscription subscription = subscriptionPersistence.create(
+			subscriptionId);
 
 		subscription.setCompanyId(user.getCompanyId());
 		subscription.setUserId(user.getUserId());
@@ -74,7 +74,7 @@ public class SubscriptionLocalServiceImpl
 		subscription.setClassPK(classPK);
 		subscription.setFrequency(frequency);
 
-		SubscriptionUtil.update(subscription);
+		subscriptionPersistence.update(subscription);
 
 		return subscription;
 	}
@@ -86,12 +86,12 @@ public class SubscriptionLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		SubscriptionUtil.removeByC_U_C_C(
+		subscriptionPersistence.removeByC_U_C_C(
 			user.getCompanyId(), userId, classNameId, classPK);
 	}
 
 	public void deleteSubscriptions(long userId) throws SystemException {
-		SubscriptionUtil.removeByUserId(userId);
+		subscriptionPersistence.removeByUserId(userId);
 	}
 
 	public void deleteSubscriptions(
@@ -100,7 +100,7 @@ public class SubscriptionLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		SubscriptionUtil.removeByC_C_C(companyId, classNameId, classPK);
+		subscriptionPersistence.removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Subscription getSubscription(
@@ -109,7 +109,7 @@ public class SubscriptionLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return SubscriptionUtil.findByC_U_C_C(
+		return subscriptionPersistence.findByC_U_C_C(
 			companyId, userId, classNameId, classPK);
 	}
 
@@ -119,7 +119,8 @@ public class SubscriptionLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return SubscriptionUtil.findByC_C_C(companyId, classNameId, classPK);
+		return subscriptionPersistence.findByC_C_C(
+			companyId, classNameId, classPK);
 	}
 
 	public boolean isSubscribed(
@@ -129,7 +130,7 @@ public class SubscriptionLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		try {
-			SubscriptionUtil.findByC_U_C_C(
+			subscriptionPersistence.findByC_U_C_C(
 				companyId, userId, classNameId, classPK);
 
 			return true;

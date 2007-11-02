@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.ListTypeImpl;
-import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.base.WebsiteLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
@@ -159,8 +158,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		}
 
 		try {
-			ListTypeServiceUtil.validate(
-				typeId, classNameId, ListTypeImpl.WEBSITE);
+			listTypeService.validate(typeId, classNameId, ListTypeImpl.WEBSITE);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);

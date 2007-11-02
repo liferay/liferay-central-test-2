@@ -146,8 +146,8 @@ public class LayoutServiceHttp {
 
 	public static com.liferay.portal.model.Layout addLayout(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
-		long parentLayoutId, java.util.Map localeNameMap,
-		java.util.Map localeTitleMap, java.lang.String description,
+		long parentLayoutId, java.util.Map localeNamesMap,
+		java.util.Map localeTitlesMap, java.lang.String description,
 		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -155,15 +155,15 @@ public class LayoutServiceHttp {
 			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = new BooleanWrapper(privateLayout);
 			Object paramObj2 = new LongWrapper(parentLayoutId);
-			Object paramObj3 = localeNameMap;
+			Object paramObj3 = localeNamesMap;
 
-			if (localeNameMap == null) {
+			if (localeNamesMap == null) {
 				paramObj3 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj4 = localeTitleMap;
+			Object paramObj4 = localeTitlesMap;
 
-			if (localeTitleMap == null) {
+			if (localeTitlesMap == null) {
 				paramObj4 = new NullWrapper("java.util.Map");
 			}
 
@@ -496,8 +496,8 @@ public class LayoutServiceHttp {
 
 	public static com.liferay.portal.model.Layout updateLayout(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
-		long layoutId, long parentLayoutId, java.util.Map localeNameMap,
-		java.util.Map localeTitleMap, java.lang.String description,
+		long layoutId, long parentLayoutId, java.util.Map localeNamesMap,
+		java.util.Map localeTitlesMap, java.lang.String description,
 		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -506,15 +506,15 @@ public class LayoutServiceHttp {
 			Object paramObj1 = new BooleanWrapper(privateLayout);
 			Object paramObj2 = new LongWrapper(layoutId);
 			Object paramObj3 = new LongWrapper(parentLayoutId);
-			Object paramObj4 = localeNameMap;
+			Object paramObj4 = localeNamesMap;
 
-			if (localeNameMap == null) {
+			if (localeNamesMap == null) {
 				paramObj4 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj5 = localeTitleMap;
+			Object paramObj5 = localeTitlesMap;
 
-			if (localeTitleMap == null) {
+			if (localeTitlesMap == null) {
 				paramObj5 = new NullWrapper("java.util.Map");
 			}
 
@@ -570,8 +570,8 @@ public class LayoutServiceHttp {
 
 	public static com.liferay.portal.model.Layout updateLayout(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
-		long layoutId, long parentLayoutId, java.util.Map localeNameMap,
-		java.util.Map localeTitleMap, java.lang.String description,
+		long layoutId, long parentLayoutId, java.util.Map localeNamesMap,
+		java.util.Map localeTitlesMap, java.lang.String description,
 		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
 		java.lang.Boolean iconImage, byte[] iconBytes)
 		throws com.liferay.portal.SystemException, 
@@ -581,15 +581,15 @@ public class LayoutServiceHttp {
 			Object paramObj1 = new BooleanWrapper(privateLayout);
 			Object paramObj2 = new LongWrapper(layoutId);
 			Object paramObj3 = new LongWrapper(parentLayoutId);
-			Object paramObj4 = localeNameMap;
+			Object paramObj4 = localeNamesMap;
 
-			if (localeNameMap == null) {
+			if (localeNamesMap == null) {
 				paramObj4 = new NullWrapper("java.util.Map");
 			}
 
-			Object paramObj5 = localeTitleMap;
+			Object paramObj5 = localeTitlesMap;
 
-			if (localeTitleMap == null) {
+			if (localeTitlesMap == null) {
 				paramObj5 = new NullWrapper("java.util.Map");
 			}
 

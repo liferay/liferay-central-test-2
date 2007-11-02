@@ -22,14 +22,12 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.service.base.UserTrackerLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.UserTrackerUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.Date;
@@ -54,7 +52,7 @@ public class UserTrackerLocalServiceImpl
 		if (GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.SESSION_TRACKER_PERSISTENCE_ENABLED))) {
 
-			long userTrackerId = CounterLocalServiceUtil.increment(
+			long userTrackerId = counterLocalService.increment(
 				UserTracker.class.getName());
 
 			UserTracker userTracker =
@@ -75,7 +73,7 @@ public class UserTrackerLocalServiceImpl
 			while (itr.hasNext()) {
 				UserTrackerPath userTrackerPath = (UserTrackerPath)itr.next();
 
-				long pathId = CounterLocalServiceUtil.increment(
+				long pathId = counterLocalService.increment(
 					UserTrackerPath.class.getName());
 
 				userTrackerPath.setUserTrackerPathId(pathId);
@@ -100,7 +98,7 @@ public class UserTrackerLocalServiceImpl
 
 		// User tracker
 
-		UserTrackerUtil.remove(userTrackerId);
+		userTrackerPersistence.remove(userTrackerId);
 	}
 
 	public List getUserTrackers(long companyId, int begin, int end)

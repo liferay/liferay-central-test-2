@@ -22,8 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.ContactBirthdayException;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactLastNameException;
@@ -82,33 +80,10 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
-import com.liferay.portal.service.ContactLocalServiceUtil;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
-import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
-import com.liferay.portal.service.PasswordTrackerLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
-import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.CompanyUtil;
-import com.liferay.portal.service.persistence.ContactUtil;
-import com.liferay.portal.service.persistence.GroupUtil;
-import com.liferay.portal.service.persistence.OrganizationUtil;
-import com.liferay.portal.service.persistence.RoleUtil;
-import com.liferay.portal.service.persistence.UserGroupUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
-import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 
@@ -145,19 +120,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void addGroupUsers(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		GroupUtil.addUsers(groupId, userIds);
+		groupPersistence.addUsers(groupId, userIds);
 
 		// Community roles
 
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Group group = groupPersistence.findByPrimaryKey(groupId);
 
-		Role role = RoleLocalServiceUtil.getRole(
+		Role role = roleLocalService.getRole(
 			group.getCompanyId(), RoleImpl.COMMUNITY_MEMBER);
 
 		for (int i = 0; i < userIds.length; i++) {
 			long userId = userIds[i];
 
-			UserGroupRoleLocalServiceUtil.addUserGroupRoles(
+			userGroupRoleLocalService.addUserGroupRoles(
 				userId, groupId, new long[] {role.getRoleId()});
 		}
 
@@ -169,14 +144,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
 		throws PortalException, SystemException {
 
-		PasswordPolicyRelLocalServiceUtil.addPasswordPolicyRels(
+		passwordPolicyRelLocalService.addPasswordPolicyRels(
 			passwordPolicyId, User.class.getName(), userIds);
 	}
 
 	public void addRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
-		RoleUtil.addUsers(roleId, userIds);
+		rolePersistence.addUsers(roleId, userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -184,7 +159,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		UserGroupUtil.addUsers(userGroupId, userIds);
+		userGroupPersistence.addUsers(userGroupId, userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -233,7 +208,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// User
 
-		Company company = CompanyUtil.findByPrimaryKey(companyId);
+		Company company = companyPersistence.findByPrimaryKey(companyId);
 		screenName = screenName.trim().toLowerCase();
 		emailAddress = emailAddress.trim().toLowerCase();
 		Date now = new Date();
@@ -278,13 +253,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			LanguageUtil.get(companyId, locale, "welcome") + ", " + fullName +
 				"!";
 
-		User user = UserUtil.create(userId);
+		User user = userPersistence.create(userId);
 
 		user.setCompanyId(companyId);
 		user.setCreateDate(now);
 		user.setModifiedDate(now);
 		user.setDefaultUser(false);
-		user.setContactId(CounterLocalServiceUtil.increment());
+		user.setContactId(counterLocalService.increment());
 		user.setPassword(PwdEncryptor.encrypt(password1));
 		user.setPasswordUnencrypted(password1);
 		user.setPasswordEncrypted(true);
@@ -296,7 +271,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setGreeting(greeting);
 		user.setActive(true);
 
-		UserUtil.update(user);
+		userPersistence.update(user);
 
 		// Resources
 
@@ -311,12 +286,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			//creatorUserName = user.getFullName();
 		}
 		else {
-			User creatorUser = UserUtil.findByPrimaryKey(creatorUserId);
+			User creatorUser = userPersistence.findByPrimaryKey(creatorUserId);
 
 			creatorUserName = creatorUser.getFullName();
 		}
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			companyId, 0, creatorUserId, User.class.getName(), user.getUserId(),
 			false, false, false);
 
@@ -324,7 +299,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (user.hasCompanyMx()) {
 			try {
-				MailServiceUtil.addUser(
+				mailService.addUser(
 					userId, password1, firstName, middleName, lastName,
 					emailAddress);
 			}
@@ -339,7 +314,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			birthdayMonth, birthdayDay, birthdayYear,
 			new ContactBirthdayException());
 
-		Contact contact = ContactUtil.create(user.getContactId());
+		Contact contact = contactPersistence.create(user.getContactId());
 
 		contact.setCompanyId(user.getCompanyId());
 		contact.setUserId(creatorUserId);
@@ -357,7 +332,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		contact.setBirthday(birthday);
 		contact.setJobTitle(jobTitle);
 
-		ContactUtil.update(contact);
+		contactPersistence.update(contact);
 
 		// Organization and location
 
@@ -365,7 +340,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Group
 
-		GroupLocalServiceUtil.addGroup(
+		groupLocalService.addGroup(
 			user.getUserId(), User.class.getName(), user.getUserId(), null,
 			null, null, null, true);
 
@@ -387,7 +362,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		UserUtil.setGroups(userId, groups);
+		userPersistence.setGroups(userId, groups);
 
 		// Default roles
 
@@ -407,7 +382,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		UserUtil.setRoles(userId, roles);
+		userPersistence.setRoles(userId, roles);
 
 		// Default user groups
 
@@ -427,7 +402,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		UserUtil.setUserGroups(userId, userGroups);
+		userPersistence.setUserGroups(userId, userGroups);
 
 		// Email
 
@@ -583,7 +558,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setLastFailedLoginDate(now);
 		user.setFailedLoginAttempts(++failedLoginAttempts);
 
-		UserUtil.update(user);
+		userPersistence.update(user);
 	}
 
 	public void checkLoginFailureByEmailAddress(
@@ -628,7 +603,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (graceLoginCount < passwordPolicy.getGraceLimit()) {
 				user.setGraceLoginCount(++graceLoginCount);
 
-				UserUtil.update(user);
+				userPersistence.update(user);
 			}
 			else {
 				throw new PasswordExpiredException();
@@ -640,7 +615,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (isPasswordExpiringSoon(user)) {
 			user.setPasswordReset(true);
 
-			UserUtil.update(user);
+			userPersistence.update(user);
 		}
 
 		// Check if user should be forced to change password on first login
@@ -659,7 +634,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 				user.setPasswordReset(passwordReset);
 
-				UserUtil.update(user);
+				userPersistence.update(user);
 			}
 		}
 	}
@@ -667,7 +642,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void clearUserGroupUsers(long userGroupId)
 		throws PortalException, SystemException {
 
-		UserGroupUtil.clearUsers(userGroupId);
+		userGroupPersistence.clearUsers(userGroupId);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -676,7 +651,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long companyId, String name, String password)
 		throws PortalException, SystemException {
 
-		Company company = CompanyUtil.findByPrimaryKey(companyId);
+		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		try {
 			name = Encryptor.decrypt(company.getKeyObj(), name);
@@ -702,7 +677,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (isPasswordExpired(user)) {
 				user.setPasswordReset(true);
 
-				UserUtil.update(user);
+				userPersistence.update(user);
 			}
 
 			return new KeyValuePair(name, password);
@@ -715,14 +690,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void deletePasswordPolicyUser(long passwordPolicyId, long userId)
 		throws PortalException, SystemException {
 
-		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRel(
+		passwordPolicyRelLocalService.deletePasswordPolicyRel(
 			passwordPolicyId, User.class.getName(), userId);
 	}
 
 	public void deleteRoleUser(long roleId, long userId)
 		throws PortalException, SystemException {
 
-		RoleUtil.removeUser(roleId, userId);
+		rolePersistence.removeUser(roleId, userId);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -740,7 +715,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		Group group = user.getGroup();
 
-		GroupLocalServiceUtil.deleteGroup(group.getGroupId());
+		groupLocalService.deleteGroup(group.getGroupId());
 
 		// Portrait
 
@@ -748,39 +723,39 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Password policy relation
 
-		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRel(
+		passwordPolicyRelLocalService.deletePasswordPolicyRel(
 			User.class.getName(), userId);
 
 		// Old passwords
 
-		PasswordTrackerLocalServiceUtil.deletePasswordTrackers(userId);
+		passwordTrackerLocalService.deletePasswordTrackers(userId);
 
 		// External user ids
 
-		UserIdMapperLocalServiceUtil.deleteUserIdMappers(userId);
+		userIdMapperLocalService.deleteUserIdMappers(userId);
 
 		// Blogs
 
-		BlogsStatsUserLocalServiceUtil.deleteStatsUserByUserId(userId);
+		blogsStatsUserLocalService.deleteStatsUserByUserId(userId);
 
 		// Document library
 
-		DLFileRankLocalServiceUtil.deleteFileRanks(userId);
+		dlFileRankLocalService.deleteFileRanks(userId);
 
 		// Message boards
 
-		MBBanLocalServiceUtil.deleteBansByBanUserId(userId);
-		MBMessageFlagLocalServiceUtil.deleteFlags(userId);
-		MBStatsUserLocalServiceUtil.deleteStatsUserByUserId(userId);
+		mbBanLocalService.deleteBansByBanUserId(userId);
+		mbMessageFlagLocalService.deleteFlags(userId);
+		mbStatsUserLocalService.deleteStatsUserByUserId(userId);
 
 		// Shopping cart
 
-		ShoppingCartLocalServiceUtil.deleteUserCarts(userId);
+		shoppingCartLocalService.deleteUserCarts(userId);
 
 		// Mail
 
 		try {
-			MailServiceUtil.deleteUser(userId);
+			mailService.deleteUser(userId);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);
@@ -788,21 +763,21 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Contact
 
-		ContactLocalServiceUtil.deleteContact(user.getContactId());
+		contactLocalService.deleteContact(user.getContactId());
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			user.getCompanyId(), User.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, user.getUserId());
 
 		// Group roles
 
-		UserGroupRoleLocalServiceUtil.deleteUserGroupRolesByUserId(userId);
+		userGroupRoleLocalService.deleteUserGroupRolesByUserId(userId);
 
 		// User
 
-		UserUtil.remove(userId);
+		userPersistence.remove(userId);
 
 		// Permission cache
 
@@ -816,7 +791,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		Company company = CompanyUtil.findByPrimaryKey(user.getCompanyId());
+		Company company = companyPersistence.findByPrimaryKey(user.getCompanyId());
 
 		try {
 			return Encryptor.encrypt(company.getKeyObj(), name);
@@ -829,13 +804,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public User getDefaultUser(long companyId)
 		throws PortalException, SystemException {
 
-		return UserUtil.findByC_DU(companyId, true);
+		return userPersistence.findByC_DU(companyId, true);
 	}
 
 	public long getDefaultUserId(long companyId)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByC_DU(companyId, true);
+		User user = userPersistence.findByC_DU(companyId, true);
 
 		return user.getUserId();
 	}
@@ -843,7 +818,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public List getGroupUsers(long groupId)
 		throws PortalException, SystemException {
 
-		return GroupUtil.getUsers(groupId);
+		return groupPersistence.getUsers(groupId);
 	}
 
 	public List getPermissionUsers(
@@ -894,19 +869,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public List getRoleUsers(long roleId)
 		throws PortalException, SystemException {
 
-		return RoleUtil.getUsers(roleId);
+		return rolePersistence.getUsers(roleId);
 	}
 
 	public List getUserGroupUsers(long userGroupId)
 		throws PortalException, SystemException {
 
-		return UserGroupUtil.getUsers(userGroupId);
+		return userGroupPersistence.getUsers(userGroupId);
 	}
 
 	public User getUserByContactId(long contactId)
 		throws PortalException, SystemException {
 
-		return UserUtil.findByContactId(contactId);
+		return userPersistence.findByContactId(contactId);
 	}
 
 	public User getUserByEmailAddress(long companyId, String emailAddress)
@@ -914,25 +889,25 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		emailAddress = emailAddress.trim().toLowerCase();
 
-		return UserUtil.findByC_EA(companyId, emailAddress);
+		return userPersistence.findByC_EA(companyId, emailAddress);
 	}
 
 	public User getUserById(long userId)
 		throws PortalException, SystemException {
 
-		return UserUtil.findByPrimaryKey(userId);
+		return userPersistence.findByPrimaryKey(userId);
 	}
 
 	public User getUserById(long companyId, long userId)
 		throws PortalException, SystemException {
 
-		return UserUtil.findByC_U(companyId, userId);
+		return userPersistence.findByC_U(companyId, userId);
 	}
 
 	public User getUserByPortraitId(long portraitId)
 		throws PortalException, SystemException {
 
-		return UserUtil.findByPortraitId(portraitId);
+		return userPersistence.findByPortraitId(portraitId);
 	}
 
 	public User getUserByScreenName(long companyId, String screenName)
@@ -940,7 +915,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		screenName = screenName.trim().toLowerCase();
 
-		return UserUtil.findByC_SN(companyId, screenName);
+		return userPersistence.findByC_SN(companyId, screenName);
 	}
 
 	public long getUserIdByEmailAddress(long companyId, String emailAddress)
@@ -948,7 +923,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		emailAddress = emailAddress.trim().toLowerCase();
 
-		User user = UserUtil.findByC_EA(companyId, emailAddress);
+		User user = userPersistence.findByC_EA(companyId, emailAddress);
 
 		return user.getUserId();
 	}
@@ -958,7 +933,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		screenName = screenName.trim().toLowerCase();
 
-		User user = UserUtil.findByC_SN(companyId, screenName);
+		User user = userPersistence.findByC_SN(companyId, screenName);
 
 		return user.getUserId();
 	}
@@ -966,26 +941,26 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public boolean hasGroupUser(long groupId, long userId)
 		throws PortalException, SystemException {
 
-		return GroupUtil.containsUser(groupId, userId);
+		return groupPersistence.containsUser(groupId, userId);
 	}
 
 	public boolean hasPasswordPolicyUser(long passwordPolicyId, long userId)
 		throws PortalException, SystemException {
 
-		return PasswordPolicyRelLocalServiceUtil.hasPasswordPolicyRel(
+		return passwordPolicyRelLocalService.hasPasswordPolicyRel(
 			passwordPolicyId, User.class.getName(), userId);
 	}
 
 	public boolean hasRoleUser(long roleId, long userId)
 		throws PortalException, SystemException {
 
-		return RoleUtil.containsUser(roleId, userId);
+		return rolePersistence.containsUser(roleId, userId);
 	}
 
 	public boolean hasUserGroupUser(long userGroupId, long userId)
 		throws PortalException, SystemException {
 
-		return UserGroupUtil.containsUser(userGroupId, userId);
+		return userGroupPersistence.containsUser(userGroupId, userId);
 	}
 
 	public boolean isPasswordExpired(User user)
@@ -999,7 +974,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (user.getPasswordModifiedDate() == null) {
 				user.setPasswordModifiedDate(now);
 
-				UserUtil.update(user);
+				userPersistence.update(user);
 			}
 
 			long passwordStartTime = user.getPasswordModifiedDate().getTime();
@@ -1027,7 +1002,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (user.getPasswordModifiedDate() == null) {
 				user.setPasswordModifiedDate(now);
 
-				UserUtil.update(user);
+				userPersistence.update(user);
 			}
 
 			long timeModified = user.getPasswordModifiedDate().getTime();
@@ -1107,9 +1082,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new UserEmailAddressException();
 		}
 
-		Company company = CompanyUtil.findByPrimaryKey(companyId);
+		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		User user = UserUtil.findByC_EA(companyId, emailAddress);
+		User user = userPersistence.findByC_EA(companyId, emailAddress);
 
 		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 
@@ -1126,7 +1101,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				passwordPolicy.getChangeable() &&
 				passwordPolicy.getChangeRequired());
 
-			UserUtil.update(user);
+			userPersistence.update(user);
 		}
 
 		try {
@@ -1204,7 +1179,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			MailMessage message = new MailMessage(
 				from, to, subject, body, true);
 
-			MailServiceUtil.sendEmail(message);
+			mailService.sendEmail(message);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -1214,7 +1189,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void setGroupUsers(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		GroupUtil.setUsers(groupId, userIds);
+		groupPersistence.setUsers(groupId, userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1222,7 +1197,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
-		RoleUtil.setUsers(roleId, userIds);
+		rolePersistence.setUsers(roleId, userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1230,7 +1205,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		UserGroupUtil.setUsers(userGroupId, userIds);
+		userGroupPersistence.setUsers(userGroupId, userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1238,9 +1213,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void unsetGroupUsers(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userIds, groupId);
+		userGroupRoleLocalService.deleteUserGroupRoles(userIds, groupId);
 
-		GroupUtil.removeUsers(groupId, userIds);
+		groupPersistence.removeUsers(groupId, userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1249,14 +1224,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long passwordPolicyId, long[] userIds)
 		throws PortalException, SystemException {
 
-		PasswordPolicyRelLocalServiceUtil.deletePasswordPolicyRels(
+		passwordPolicyRelLocalService.deletePasswordPolicyRels(
 			passwordPolicyId, User.class.getName(), userIds);
 	}
 
 	public void unsetRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
-		RoleUtil.removeUsers(roleId, userIds);
+		rolePersistence.removeUsers(roleId, userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1264,7 +1239,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		UserGroupUtil.removeUsers(userGroupId, userIds);
+		userGroupPersistence.removeUsers(userGroupId, userIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -1276,7 +1251,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setActive(active);
 
-		UserUtil.update(user);
+		userPersistence.update(user);
 
 		return user;
 	}
@@ -1289,7 +1264,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setAgreedToTermsOfUse(agreedToTermsOfUse);
 
-		UserUtil.update(user);
+		userPersistence.update(user);
 
 		return user;
 	}
@@ -1301,7 +1276,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setCreateDate(createDate);
 
-		UserUtil.update(user);
+		userPersistence.update(user);
 
 		return user;
 	}
@@ -1324,7 +1299,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setLastFailedLoginDate(null);
 		user.setFailedLoginAttempts(0);
 
-		UserUtil.update(user);
+		userPersistence.update(user);
 
 		return user;
 	}
@@ -1352,7 +1327,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setFailedLoginAttempts(0);
 		}
 
-		UserUtil.update(user);
+		userPersistence.update(user);
 
 		return user;
 	}
@@ -1397,10 +1372,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long userId, long[] organizationIds)
 		throws PortalException, SystemException {
 
-		UserUtil.clearOrganizations(userId);
+		userPersistence.clearOrganizations(userId);
 
 		for (int i = 0; i < organizationIds.length; i++) {
-			UserUtil.addOrganization(userId, organizationIds[i]);
+			userPersistence.addOrganization(userId, organizationIds[i]);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -1439,7 +1414,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (user.hasCompanyMx()) {
 			try {
-				MailServiceUtil.updatePassword(userId, password1);
+				mailService.updatePassword(userId, password1);
 			}
 			catch (RemoteException re) {
 				throw new SystemException(re);
@@ -1458,7 +1433,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		try {
-			UserUtil.update(user);
+			userPersistence.update(user);
 		}
 		catch (ModelListenerException mle) {
 			String msg = GetterUtil.getString(mle.getCause().getMessage());
@@ -1481,7 +1456,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setPasswordModified(false);
 		}
 
-		PasswordTrackerLocalServiceUtil.trackPassword(userId, oldEncPwd);
+		passwordTrackerLocalService.trackPassword(userId, oldEncPwd);
 
 		return user;
 	}
@@ -1500,7 +1475,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordReset(passwordReset);
 		user.setPasswordModifiedDate(passwordModifiedDate);
 
-		UserUtil.update(user);
+		userPersistence.update(user);
 
 		return user;
 	}
@@ -1512,7 +1487,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setPasswordReset(passwordReset);
 
-		UserUtil.update(user);
+		userPersistence.update(user);
 	}
 
 	public void updatePortrait(long userId, byte[] bytes)
@@ -1582,14 +1557,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		validate(userId, screenName, emailAddress, firstName, lastName, smsSn);
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		Company company = CompanyUtil.findByPrimaryKey(user.getCompanyId());
+		Company company = companyPersistence.findByPrimaryKey(
+			user.getCompanyId());
 
 		validateOrganizations(user.getCompanyId(), organizationIds);
 
 		user.setModifiedDate(now);
 
 		if (user.getContactId() <= 0) {
-			user.setContactId(CounterLocalServiceUtil.increment());
+			user.setContactId(counterLocalService.increment());
 		}
 
 		user.setScreenName(screenName);
@@ -1600,7 +1576,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			try {
 				if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
-					MailServiceUtil.addUser(
+					mailService.addUser(
 						userId, password, firstName, middleName, lastName,
 						emailAddress);
 				}
@@ -1610,7 +1586,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				else if (user.hasCompanyMx() &&
 						 user.hasCompanyMx(emailAddress)) {
 
-					MailServiceUtil.updateEmailAddress(userId, emailAddress);
+					mailService.updateEmailAddress(userId, emailAddress);
 				}
 
 				// test@liferay.com -> test@test.com
@@ -1618,7 +1594,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				else if (user.hasCompanyMx() &&
 						 !user.hasCompanyMx(emailAddress)) {
 
-					MailServiceUtil.deleteEmailAddress(userId);
+					mailService.deleteEmailAddress(userId);
 				}
 			}
 			catch (RemoteException re) {
@@ -1633,7 +1609,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setGreeting(greeting);
 		user.setComments(comments);
 
-		UserUtil.update(user);
+		userPersistence.update(user);
 
 		// Contact
 
@@ -1646,10 +1622,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Contact contact = null;
 
 		try {
-			contact = ContactUtil.findByPrimaryKey(contactId);
+			contact = contactPersistence.findByPrimaryKey(contactId);
 		}
 		catch (NoSuchContactException nsce) {
-			contact = ContactUtil.create(contactId);
+			contact = contactPersistence.create(contactId);
 
 			contact.setCompanyId(user.getCompanyId());
 			contact.setUserName(StringPool.BLANK);
@@ -1675,7 +1651,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		contact.setYmSn(ymSn);
 		contact.setJobTitle(jobTitle);
 
-		ContactUtil.update(contact);
+		contactPersistence.update(contact);
 
 		// Organization and location
 
@@ -1749,13 +1725,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		try {
 			if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
-				user = UserUtil.findByC_EA(companyId, login);
+				user = userPersistence.findByC_EA(companyId, login);
 			}
 			else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
-				user = UserUtil.findByC_SN(companyId, login);
+				user = userPersistence.findByC_SN(companyId, login);
 			}
 			else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
-				user = UserUtil.findByC_U(companyId, GetterUtil.getLong(login));
+				user = userPersistence.findByC_U(
+					companyId, GetterUtil.getLong(login));
 			}
 		}
 		catch (NoSuchUserException nsue) {
@@ -1773,7 +1750,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setPassword(PwdEncryptor.encrypt(user.getPassword()));
 			user.setPasswordEncrypted(true);
 
-			UserUtil.update(user);
+			userPersistence.update(user);
 		}
 
 		// Check password policy to see if the is account locked out or if the
@@ -1929,7 +1906,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		try {
 			long companyId = user.getCompanyId();
 
-			Company company = CompanyUtil.findByPrimaryKey(companyId);
+			Company company = companyPersistence.findByPrimaryKey(companyId);
 
 			String fromName = PrefsPropsUtil.getString(
 				companyId, PropsUtil.ADMIN_EMAIL_FROM_NAME);
@@ -1993,7 +1970,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			MailMessage message = new MailMessage(
 				from, to, subject, body, true);
 
-			MailServiceUtil.sendEmail(message);
+			mailService.sendEmail(message);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -2016,7 +1993,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (!user.isDefaultUser()) {
 			try {
 				if (!user.getEmailAddress().equalsIgnoreCase(emailAddress)) {
-					if (UserUtil.findByC_EA(
+					if (userPersistence.findByC_EA(
 							user.getCompanyId(), emailAddress) != null) {
 
 						throw new DuplicateUserEmailAddressException();
@@ -2061,8 +2038,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (!autoPassword) {
 			PasswordPolicy passwordPolicy =
-				PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(
-					companyId);
+				passwordPolicyLocalService.getDefaultPasswordPolicy(companyId);
 
 			PwdToolkitUtil.validate(
 				companyId, 0, password1, password2, passwordPolicy);
@@ -2071,7 +2047,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		validateEmailAddress(emailAddress);
 
 		try {
-			User user = UserUtil.findByC_EA(companyId, emailAddress);
+			User user = userPersistence.findByC_EA(companyId, emailAddress);
 
 			if (user != null) {
 				throw new DuplicateUserEmailAddressException();
@@ -2133,7 +2109,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long organizationId = organizationIds[i];
 
 			Organization organization =
-				OrganizationUtil.findByPrimaryKey(organizationId);
+				organizationPersistence.findByPrimaryKey(organizationId);
 
 			if (organization.isRegular()) {
 				regularOrganizations.add(organization);
@@ -2169,7 +2145,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				while (itr2.hasNext()) {
 					Organization organization = (Organization)itr2.next();
 
-					if (OrganizationLocalServiceUtil.isAncestor(
+					if (organizationLocalService.isAncestor(
 							location.getOrganizationId(),
 							organization.getOrganizationId())) {
 
@@ -2204,8 +2180,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		PasswordPolicy passwordPolicy =
-			PasswordPolicyLocalServiceUtil.getPasswordPolicyByUserId(
-				userId);
+			passwordPolicyLocalService.getPasswordPolicyByUserId(userId);
 
 		PwdToolkitUtil.validate(
 			companyId, userId, password1, password2, passwordPolicy);
@@ -2236,7 +2211,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		User user = UserUtil.fetchByC_SN(companyId, screenName);
+		User user = userPersistence.fetchByC_SN(companyId, screenName);
 
 		if (user != null) {
 			throw new DuplicateUserScreenNameException();
@@ -2244,7 +2219,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		String friendlyURL = StringPool.SLASH + screenName;
 
-		Group group = GroupUtil.fetchByC_F(companyId, friendlyURL);
+		Group group = groupPersistence.fetchByC_F(companyId, friendlyURL);
 
 		if (group != null) {
 			throw new DuplicateUserScreenNameException();

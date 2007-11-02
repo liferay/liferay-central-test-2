@@ -34,16 +34,11 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.UserServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
-import com.liferay.portal.service.persistence.CompanyUtil;
 
 import java.util.List;
 import java.util.Locale;
@@ -65,7 +60,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		if ((userIds != null) && (userIds.length > 0)) {
 			checkUpdatePermission(groupId, userIds);
 
-			UserLocalServiceUtil.addGroupUsers(groupId, userIds);
+			userLocalService.addGroupUsers(groupId, userIds);
 		}
 	}
 
@@ -75,7 +70,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		//PasswordPolicyPermissionUtil.check(
 		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
-		UserLocalServiceUtil.addPasswordPolicyUsers(passwordPolicyId, userIds);
+		userLocalService.addPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
 	public void addRoleUsers(long roleId, long[] userIds)
@@ -84,7 +79,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		RolePermissionUtil.check(
 			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		UserLocalServiceUtil.addRoleUsers(roleId, userIds);
+		userLocalService.addRoleUsers(roleId, userIds);
 	}
 
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
@@ -98,7 +93,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
-		UserLocalServiceUtil.addUserGroupUsers(userGroupId, userIds);
+		userLocalService.addUserGroupUsers(userGroupId, userIds);
 	}
 
 	/**
@@ -131,7 +126,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String jobTitle, long[] organizationIds, boolean sendEmail)
 		throws PortalException, SystemException {
 
-		Company company = CompanyUtil.findByPrimaryKey(companyId);
+		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		if (!company.isStrangers()) {
 			checkPermission(0, organizationIds, ActionKeys.ADD_USER);
@@ -153,7 +148,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		return UserLocalServiceUtil.addUser(
+		return userLocalService.addUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
@@ -165,7 +160,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		checkPermission(userId, ActionKeys.UPDATE);
 
-		UserLocalServiceUtil.deleteRoleUser(roleId, userId);
+		userLocalService.deleteRoleUser(roleId, userId);
 	}
 
 	public void deleteUser(long userId)
@@ -177,31 +172,31 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		checkPermission(userId, ActionKeys.DELETE);
 
-		UserLocalServiceUtil.deleteUser(userId);
+		userLocalService.deleteUser(userId);
 	}
 
 	public long getDefaultUserId(long companyId)
 		throws PortalException, SystemException {
 
-		return UserLocalServiceUtil.getDefaultUserId(companyId);
+		return userLocalService.getDefaultUserId(companyId);
 	}
 
 	public List getGroupUsers(long groupId)
 		throws PortalException, SystemException {
 
-		return UserLocalServiceUtil.getGroupUsers(groupId);
+		return userLocalService.getGroupUsers(groupId);
 	}
 
 	public List getRoleUsers(long roleId)
 		throws PortalException, SystemException {
 
-		return UserLocalServiceUtil.getRoleUsers(roleId);
+		return userLocalService.getRoleUsers(roleId);
 	}
 
 	public User getUserByEmailAddress(long companyId, String emailAddress)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getUserByEmailAddress(
+		User user = userLocalService.getUserByEmailAddress(
 			companyId, emailAddress);
 
 		checkPermission(user.getUserId(), ActionKeys.VIEW);
@@ -212,7 +207,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public User getUserById(long userId)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getUserById(userId);
+		User user = userLocalService.getUserById(userId);
 
 		checkPermission(user.getUserId(), ActionKeys.VIEW);
 
@@ -222,7 +217,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public User getUserByScreenName(long companyId, String screenName)
 		throws PortalException, SystemException {
 
-		User user = UserLocalServiceUtil.getUserByScreenName(
+		User user = userLocalService.getUserByScreenName(
 			companyId, screenName);
 
 		checkPermission(user.getUserId(), ActionKeys.VIEW);
@@ -233,13 +228,13 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public boolean hasGroupUser(long groupId, long userId)
 		throws PortalException, SystemException {
 
-		return UserLocalServiceUtil.hasGroupUser(groupId, userId);
+		return userLocalService.hasGroupUser(groupId, userId);
 	}
 
 	public boolean hasRoleUser(long roleId, long userId)
 		throws PortalException, SystemException {
 
-		return UserLocalServiceUtil.hasRoleUser(roleId, userId);
+		return userLocalService.hasRoleUser(roleId, userId);
 	}
 
 	public void setGroupUsers(long groupId, long[] userIds)
@@ -248,7 +243,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		UserLocalServiceUtil.setGroupUsers(groupId, userIds);
+		userLocalService.setGroupUsers(groupId, userIds);
 	}
 
 	public void setRoleUsers(long roleId, long[] userIds)
@@ -257,7 +252,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		RolePermissionUtil.check(
 			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		UserLocalServiceUtil.setRoleUsers(roleId, userIds);
+		userLocalService.setRoleUsers(roleId, userIds);
 	}
 
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
@@ -266,7 +261,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		UserGroupPermissionUtil.check(
 			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
 
-		UserLocalServiceUtil.setUserGroupUsers(userGroupId, userIds);
+		userLocalService.setUserGroupUsers(userGroupId, userIds);
 	}
 
 	public void unsetGroupUsers(long groupId, long[] userIds)
@@ -275,7 +270,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		if ((userIds != null) && (userIds.length > 0)) {
 			checkUnsetPermission(groupId, userIds);
 
-			UserLocalServiceUtil.unsetGroupUsers(groupId, userIds);
+			userLocalService.unsetGroupUsers(groupId, userIds);
 		}
 	}
 
@@ -285,8 +280,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		//PasswordPolicyPermissionUtil.check(
 		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
-		UserLocalServiceUtil.unsetPasswordPolicyUsers(
-			passwordPolicyId, userIds);
+		userLocalService.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
 	public void unsetRoleUsers(long roleId, long[] userIds)
@@ -295,7 +289,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		RolePermissionUtil.check(
 			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		UserLocalServiceUtil.unsetRoleUsers(roleId, userIds);
+		userLocalService.unsetRoleUsers(roleId, userIds);
 	}
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
@@ -309,7 +303,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
-		UserLocalServiceUtil.unsetUserGroupUsers(userGroupId, userIds);
+		userLocalService.unsetUserGroupUsers(userGroupId, userIds);
 	}
 
 	public User updateActive(long userId, boolean active)
@@ -321,7 +315,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		checkPermission(userId, ActionKeys.DELETE);
 
-		return UserLocalServiceUtil.updateActive(userId, active);
+		return userLocalService.updateActive(userId, active);
 	}
 
 	public User updateAgreedToTermsOfUse(
@@ -330,7 +324,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		checkPermission(userId, ActionKeys.UPDATE);
 
-		return UserLocalServiceUtil.updateAgreedToTermsOfUse(
+		return userLocalService.updateAgreedToTermsOfUse(
 			userId, agreedToTermsOfUse);
 	}
 
@@ -339,7 +333,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		checkPermission(userId, ActionKeys.DELETE);
 
-		return UserLocalServiceUtil.updateLockoutById(userId, lockout);
+		return userLocalService.updateLockoutById(userId, lockout);
 	}
 
 	/**
@@ -351,7 +345,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		checkPermission(userId, ActionKeys.UPDATE);
 
-		UserLocalServiceUtil.updateOrganizations(
+		userLocalService.updateOrganizations(
 			userId, organizationId, locationId);
 	}
 
@@ -360,7 +354,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		checkPermission(userId, ActionKeys.UPDATE);
 
-		UserLocalServiceUtil.updateOrganizations(userId, organizationIds);
+		userLocalService.updateOrganizations(userId, organizationIds);
 	}
 
 	public User updatePassword(
@@ -370,7 +364,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		checkPermission(userId, ActionKeys.UPDATE);
 
-		return UserLocalServiceUtil.updatePassword(
+		return userLocalService.updatePassword(
 			userId, password1, password2, passwordReset);
 	}
 
@@ -379,7 +373,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		checkPermission(userId, ActionKeys.UPDATE);
 
-		UserLocalServiceUtil.updatePortrait(userId, bytes);
+		userLocalService.updatePortrait(userId, bytes);
 	}
 
 	/**
@@ -426,7 +420,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 			if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
 				if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress)) {
-					Company company = CompanyUtil.findByPrimaryKey(
+					Company company = companyPersistence.findByPrimaryKey(
 						user.getCompanyId());
 
 					if (!company.isStrangersWithMx()) {
@@ -436,7 +430,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		return UserLocalServiceUtil.updateUser(
+		return userLocalService.updateUser(
 			userId, password, screenName, emailAddress, languageId, timeZoneId,
 			greeting, comments, firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
@@ -465,19 +459,19 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		User user = getUser();
 
-		Role ownerRole = RoleLocalServiceUtil.getRole(
+		Role ownerRole = roleLocalService.getRole(
 			user.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
 
-		if (!UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+		if (!userGroupRoleLocalService.hasUserGroupRole(
 				user.getUserId(), groupId, ownerRole.getRoleId())) {
 
-			Role adminRole = RoleLocalServiceUtil.getRole(
+			Role adminRole = roleLocalService.getRole(
 				user.getCompanyId(), RoleImpl.COMMUNITY_ADMINISTRATOR);
 
 			for (int i = 0; i < userIds.length; i++) {
-				if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+				if (userGroupRoleLocalService.hasUserGroupRole(
 						userIds[i], groupId, ownerRole.getRoleId()) ||
-					UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					userGroupRoleLocalService.hasUserGroupRole(
 						userIds[i], groupId, adminRole.getRoleId()) ) {
 
 					throw new PrincipalException();
@@ -504,7 +498,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long userId = getUserId();
 
 			if ((userIds.length == 1) && (userId == userIds[0])) {
-				Group group = GroupLocalServiceUtil.getGroup(groupId);
+				Group group = groupPersistence.findByPrimaryKey(groupId);
 
 				if (group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN)) {
 					hasPermission = true;
