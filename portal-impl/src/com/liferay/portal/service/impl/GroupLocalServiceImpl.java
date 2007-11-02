@@ -57,9 +57,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
-import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -212,7 +210,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			Group group = null;
 
 			try {
-				group = GroupFinder.findByC_N(companyId, systemGroups[i]);
+				group = groupFinder.findByC_N(companyId, systemGroups[i]);
 			}
 			catch (NoSuchGroupException nsge) {
 				String friendlyURL = null;
@@ -324,7 +322,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Resources
 
-		Iterator itr = ResourceFinder.findByC_P(
+		Iterator itr = resourceFinder.findByC_P(
 			group.getCompanyId(), String.valueOf(groupId)).iterator();
 
 		while (itr.hasNext()) {
@@ -373,7 +371,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public Group getGroup(long companyId, String name)
 		throws PortalException, SystemException {
 
-		return GroupFinder.findByC_N(companyId, name);
+		return groupFinder.findByC_N(companyId, name);
 	}
 
 	public Group getOrganizationGroup(long companyId, long organizationId)
@@ -459,7 +457,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public boolean hasUserGroup(long userId, long groupId)
 		throws SystemException {
 
-		if (GroupFinder.countByG_U(groupId, userId) > 0) {
+		if (groupFinder.countByG_U(groupId, userId) > 0) {
 			return true;
 		}
 		else {
@@ -472,7 +470,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			LinkedHashMap params, int begin, int end)
 		throws SystemException {
 
-		return GroupFinder.findByC_N_D(
+		return groupFinder.findByC_N_D(
 			companyId, name, description, params, begin, end);
 	}
 
@@ -481,7 +479,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			LinkedHashMap params)
 		throws SystemException {
 
-		return GroupFinder.countByC_N_D(companyId, name, description, params);
+		return groupFinder.countByC_N_D(companyId, name, description, params);
 	}
 
 	public void setRoleGroups(long roleId, long[] groupIds)
@@ -669,7 +667,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		try {
-			Group group = GroupFinder.findByC_N(companyId, name);
+			Group group = groupFinder.findByC_N(companyId, name);
 
 			if ((groupId <= 0) || (group.getGroupId() != groupId)) {
 				throw new DuplicateGroupException();

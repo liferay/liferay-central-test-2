@@ -97,6 +97,11 @@ public interface UserGroupLocalService {
 	public void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence);
 
+	public com.liferay.portal.service.persistence.GroupFinder getGroupFinder();
+
+	public void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder);
+
 	public com.liferay.portal.service.persistence.ImagePersistence getImagePersistence();
 
 	public void setImagePersistence(
@@ -106,6 +111,11 @@ public interface UserGroupLocalService {
 
 	public void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence);
+
+	public com.liferay.portal.service.persistence.LayoutFinder getLayoutFinder();
+
+	public void setLayoutFinder(
+		com.liferay.portal.service.persistence.LayoutFinder layoutFinder);
 
 	public com.liferay.portal.service.persistence.LayoutSetPersistence getLayoutSetPersistence();
 
@@ -127,10 +137,20 @@ public interface UserGroupLocalService {
 	public void setOrganizationPersistence(
 		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence);
 
+	public com.liferay.portal.service.persistence.OrganizationFinder getOrganizationFinder();
+
+	public void setOrganizationFinder(
+		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder);
+
 	public com.liferay.portal.service.persistence.OrgGroupPermissionPersistence getOrgGroupPermissionPersistence();
 
 	public void setOrgGroupPermissionPersistence(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence);
+
+	public com.liferay.portal.service.persistence.OrgGroupPermissionFinder getOrgGroupPermissionFinder();
+
+	public void setOrgGroupPermissionFinder(
+		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder);
 
 	public com.liferay.portal.service.persistence.OrgGroupRolePersistence getOrgGroupRolePersistence();
 
@@ -147,6 +167,11 @@ public interface UserGroupLocalService {
 	public void setPasswordPolicyPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence);
 
+	public com.liferay.portal.service.persistence.PasswordPolicyFinder getPasswordPolicyFinder();
+
+	public void setPasswordPolicyFinder(
+		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder);
+
 	public com.liferay.portal.service.persistence.PasswordPolicyRelPersistence getPasswordPolicyRelPersistence();
 
 	public void setPasswordPolicyRelPersistence(
@@ -161,6 +186,16 @@ public interface UserGroupLocalService {
 
 	public void setPermissionPersistence(
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence);
+
+	public com.liferay.portal.service.persistence.PermissionFinder getPermissionFinder();
+
+	public void setPermissionFinder(
+		com.liferay.portal.service.persistence.PermissionFinder permissionFinder);
+
+	public com.liferay.portal.service.persistence.PermissionUserFinder getPermissionUserFinder();
+
+	public void setPermissionUserFinder(
+		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder);
 
 	public com.liferay.portal.service.persistence.PhonePersistence getPhonePersistence();
 
@@ -182,6 +217,11 @@ public interface UserGroupLocalService {
 	public void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence);
 
+	public com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder();
+
+	public void setPortletPreferencesFinder(
+		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder);
+
 	public com.liferay.portal.service.persistence.RegionPersistence getRegionPersistence();
 
 	public void setRegionPersistence(
@@ -197,6 +237,11 @@ public interface UserGroupLocalService {
 	public void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
 
+	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
+
+	public void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
+
 	public com.liferay.portal.service.persistence.ResourceCodePersistence getResourceCodePersistence();
 
 	public void setResourceCodePersistence(
@@ -206,6 +251,11 @@ public interface UserGroupLocalService {
 
 	public void setRolePersistence(
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence);
+
+	public com.liferay.portal.service.persistence.RoleFinder getRoleFinder();
+
+	public void setRoleFinder(
+		com.liferay.portal.service.persistence.RoleFinder roleFinder);
 
 	public com.liferay.portal.service.persistence.ServiceComponentPersistence getServiceComponentPersistence();
 
@@ -222,10 +272,20 @@ public interface UserGroupLocalService {
 	public void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence);
 
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
+
 	public com.liferay.portal.service.persistence.UserGroupPersistence getUserGroupPersistence();
 
 	public void setUserGroupPersistence(
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence);
+
+	public com.liferay.portal.service.persistence.UserGroupFinder getUserGroupFinder();
+
+	public void setUserGroupFinder(
+		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder);
 
 	public com.liferay.portal.service.persistence.UserGroupRolePersistence getUserGroupRolePersistence();
 

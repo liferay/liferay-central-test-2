@@ -46,12 +46,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="UserGroupFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserGroupFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
  *
  */
-public class UserGroupFinder {
+public class UserGroupFinderImpl implements UserGroupFinder {
 
 	public static String COUNT_BY_C_N_D =
 		UserGroupFinder.class.getName() + ".countByC_N_D";
@@ -71,7 +71,7 @@ public class UserGroupFinder {
 	public static String JOIN_BY_USER_GROUPS_ROLES =
 		UserGroupFinder.class.getName() + ".joinByUserGroupsRoles";
 
-	public static int countByC_N_D(
+	public int countByC_N_D(
 			long companyId, String name, String description,
 			LinkedHashMap params)
 		throws SystemException {
@@ -122,7 +122,7 @@ public class UserGroupFinder {
 		}
 	}
 
-	public static UserGroup findByC_N(long companyId, String name)
+	public UserGroup findByC_N(long companyId, String name)
 		throws NoSuchUserGroupException, SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -182,7 +182,7 @@ public class UserGroupFinder {
 		}
 	}
 
-	public static List findByC_N_D(
+	public List findByC_N_D(
 			long companyId, String name, String description,
 			LinkedHashMap params, int begin, int end)
 		throws SystemException {
@@ -223,7 +223,7 @@ public class UserGroupFinder {
 		}
 	}
 
-	private static String _getJoin(LinkedHashMap params) {
+	private String _getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -246,7 +246,7 @@ public class UserGroupFinder {
 		return sm.toString();
 	}
 
-	private static String _getJoin(String key) {
+	private String _getJoin(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permissionsResourceId")) {
@@ -270,7 +270,7 @@ public class UserGroupFinder {
 		return join;
 	}
 
-	private static String _getWhere(LinkedHashMap params) {
+	private String _getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -293,7 +293,7 @@ public class UserGroupFinder {
 		return sm.toString();
 	}
 
-	private static String _getWhere(String key) {
+	private String _getWhere(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permissionsResourceId")) {
@@ -317,7 +317,7 @@ public class UserGroupFinder {
 		return join;
 	}
 
-	private static void _setJoin(QueryPos qPos, LinkedHashMap params) {
+	private void _setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 

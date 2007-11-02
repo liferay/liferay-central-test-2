@@ -52,7 +52,6 @@ import com.liferay.portlet.tags.model.TagsAssetType;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsAssetLocalServiceBaseImpl;
-import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 import com.liferay.portlet.tags.util.TagsAssetValidator;
@@ -173,12 +172,12 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (andOperator) {
-			return TagsAssetFinder.findByAndEntryIds(
+			return tagsAssetFinder.findByAndEntryIds(
 				groupId, entryIds, notEntryIds, null, null, null, null,
 				excludeZeroViewCount, publishDate, expirationDate, begin, end);
 		}
 		else {
-			return TagsAssetFinder.findByOrEntryIds(
+			return tagsAssetFinder.findByOrEntryIds(
 				groupId, entryIds, notEntryIds, null, null, null, null,
 				excludeZeroViewCount, publishDate, expirationDate, begin, end);
 		}
@@ -205,13 +204,13 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (andOperator) {
-			return TagsAssetFinder.findByAndEntryIds(
+			return tagsAssetFinder.findByAndEntryIds(
 				groupId, entryIds, notEntryIds, orderByCol1, orderByCol2,
 				orderByType1, orderByType2, excludeZeroViewCount, publishDate,
 				expirationDate, begin, end);
 		}
 		else {
-			return TagsAssetFinder.findByOrEntryIds(
+			return tagsAssetFinder.findByOrEntryIds(
 				groupId, entryIds, notEntryIds, orderByCol1, orderByCol2,
 				orderByType1, orderByType2, excludeZeroViewCount, publishDate,
 				expirationDate, begin, end);
@@ -255,12 +254,12 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (andOperator) {
-			return TagsAssetFinder.countByAndEntryIds(
+			return tagsAssetFinder.countByAndEntryIds(
 				groupId, entryIds, notEntryIds, excludeZeroViewCount,
 				publishDate, expirationDate);
 		}
 		else {
-			return TagsAssetFinder.countByOrEntryIds(
+			return tagsAssetFinder.countByOrEntryIds(
 				groupId, entryIds, notEntryIds, excludeZeroViewCount,
 				publishDate, expirationDate);
 		}
@@ -301,7 +300,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			classNameIds[i] = PortalUtil.getClassNameId(className[i]);
 		}
 
-		return TagsAssetFinder.findByViewCount(classNameIds, asc, begin, end);
+		return tagsAssetFinder.findByViewCount(classNameIds, asc, begin, end);
 	}
 
 	public TagsAsset incrementViewCounter(String className, long classPK)

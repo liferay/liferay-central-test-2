@@ -161,6 +161,18 @@ public class AddressLocalServiceUtil {
 		addressLocalService.setGroupPersistence(groupPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.GroupFinder getGroupFinder() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getGroupFinder();
+	}
+
+	public static void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.setGroupFinder(groupFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.ImagePersistence getImagePersistence() {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
@@ -183,6 +195,18 @@ public class AddressLocalServiceUtil {
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 		addressLocalService.setLayoutPersistence(layoutPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.LayoutFinder getLayoutFinder() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getLayoutFinder();
+	}
+
+	public static void setLayoutFinder(
+		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.setLayoutFinder(layoutFinder);
 	}
 
 	public static com.liferay.portal.service.persistence.LayoutSetPersistence getLayoutSetPersistence() {
@@ -233,6 +257,18 @@ public class AddressLocalServiceUtil {
 		addressLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.OrganizationFinder getOrganizationFinder() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getOrganizationFinder();
+	}
+
+	public static void setOrganizationFinder(
+		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.setOrganizationFinder(organizationFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.OrgGroupPermissionPersistence getOrgGroupPermissionPersistence() {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
@@ -243,6 +279,18 @@ public class AddressLocalServiceUtil {
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 		addressLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.OrgGroupPermissionFinder getOrgGroupPermissionFinder() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getOrgGroupPermissionFinder();
+	}
+
+	public static void setOrgGroupPermissionFinder(
+		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
 	public static com.liferay.portal.service.persistence.OrgGroupRolePersistence getOrgGroupRolePersistence() {
@@ -281,6 +329,18 @@ public class AddressLocalServiceUtil {
 		addressLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PasswordPolicyFinder getPasswordPolicyFinder() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getPasswordPolicyFinder();
+	}
+
+	public static void setPasswordPolicyFinder(
+		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.PasswordPolicyRelPersistence getPasswordPolicyRelPersistence() {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
@@ -315,6 +375,30 @@ public class AddressLocalServiceUtil {
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 		addressLocalService.setPermissionPersistence(permissionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PermissionFinder getPermissionFinder() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getPermissionFinder();
+	}
+
+	public static void setPermissionFinder(
+		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.setPermissionFinder(permissionFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.PermissionUserFinder getPermissionUserFinder() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getPermissionUserFinder();
+	}
+
+	public static void setPermissionUserFinder(
+		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
 	public static com.liferay.portal.service.persistence.PhonePersistence getPhonePersistence() {
@@ -365,6 +449,18 @@ public class AddressLocalServiceUtil {
 		addressLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getPortletPreferencesFinder();
+	}
+
+	public static void setPortletPreferencesFinder(
+		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.RegionPersistence getRegionPersistence() {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
@@ -401,6 +497,18 @@ public class AddressLocalServiceUtil {
 		addressLocalService.setResourcePersistence(resourcePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.setResourceFinder(resourceFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.ResourceCodePersistence getResourceCodePersistence() {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
@@ -423,6 +531,18 @@ public class AddressLocalServiceUtil {
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 		addressLocalService.setRolePersistence(rolePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.RoleFinder getRoleFinder() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getRoleFinder();
+	}
+
+	public static void setRoleFinder(
+		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.setRoleFinder(roleFinder);
 	}
 
 	public static com.liferay.portal.service.persistence.ServiceComponentPersistence getServiceComponentPersistence() {
@@ -461,6 +581,18 @@ public class AddressLocalServiceUtil {
 		addressLocalService.setUserPersistence(userPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.setUserFinder(userFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.UserGroupPersistence getUserGroupPersistence() {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
@@ -471,6 +603,18 @@ public class AddressLocalServiceUtil {
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 		addressLocalService.setUserGroupPersistence(userGroupPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserGroupFinder getUserGroupFinder() {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getUserGroupFinder();
+	}
+
+	public static void setUserGroupFinder(
+		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
 	public static com.liferay.portal.service.persistence.UserGroupRolePersistence getUserGroupRolePersistence() {

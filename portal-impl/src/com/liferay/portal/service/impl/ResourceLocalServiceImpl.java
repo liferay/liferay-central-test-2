@@ -41,7 +41,6 @@ import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrgGroupPermissionUtil;
 import com.liferay.portal.service.persistence.PermissionUtil;
-import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.comparator.ResourceComparator;
@@ -355,7 +354,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	public void deleteResources(String name)
 		throws PortalException, SystemException {
 
-		Iterator itr = ResourceFinder.findByName(name).iterator();
+		Iterator itr = resourceFinder.findByName(name).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();

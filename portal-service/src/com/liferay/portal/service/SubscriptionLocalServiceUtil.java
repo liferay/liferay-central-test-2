@@ -162,6 +162,18 @@ public class SubscriptionLocalServiceUtil {
 		subscriptionLocalService.setGroupPersistence(groupPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.GroupFinder getGroupFinder() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getGroupFinder();
+	}
+
+	public static void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.setGroupFinder(groupFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.ImagePersistence getImagePersistence() {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
@@ -184,6 +196,18 @@ public class SubscriptionLocalServiceUtil {
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 		subscriptionLocalService.setLayoutPersistence(layoutPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.LayoutFinder getLayoutFinder() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getLayoutFinder();
+	}
+
+	public static void setLayoutFinder(
+		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.setLayoutFinder(layoutFinder);
 	}
 
 	public static com.liferay.portal.service.persistence.LayoutSetPersistence getLayoutSetPersistence() {
@@ -234,6 +258,18 @@ public class SubscriptionLocalServiceUtil {
 		subscriptionLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.OrganizationFinder getOrganizationFinder() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getOrganizationFinder();
+	}
+
+	public static void setOrganizationFinder(
+		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.setOrganizationFinder(organizationFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.OrgGroupPermissionPersistence getOrgGroupPermissionPersistence() {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
@@ -244,6 +280,18 @@ public class SubscriptionLocalServiceUtil {
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 		subscriptionLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.OrgGroupPermissionFinder getOrgGroupPermissionFinder() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getOrgGroupPermissionFinder();
+	}
+
+	public static void setOrgGroupPermissionFinder(
+		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
 	public static com.liferay.portal.service.persistence.OrgGroupRolePersistence getOrgGroupRolePersistence() {
@@ -282,6 +330,18 @@ public class SubscriptionLocalServiceUtil {
 		subscriptionLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PasswordPolicyFinder getPasswordPolicyFinder() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getPasswordPolicyFinder();
+	}
+
+	public static void setPasswordPolicyFinder(
+		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.PasswordPolicyRelPersistence getPasswordPolicyRelPersistence() {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
@@ -316,6 +376,30 @@ public class SubscriptionLocalServiceUtil {
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 		subscriptionLocalService.setPermissionPersistence(permissionPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PermissionFinder getPermissionFinder() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getPermissionFinder();
+	}
+
+	public static void setPermissionFinder(
+		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.setPermissionFinder(permissionFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.PermissionUserFinder getPermissionUserFinder() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getPermissionUserFinder();
+	}
+
+	public static void setPermissionUserFinder(
+		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
 	public static com.liferay.portal.service.persistence.PhonePersistence getPhonePersistence() {
@@ -366,6 +450,18 @@ public class SubscriptionLocalServiceUtil {
 		subscriptionLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getPortletPreferencesFinder();
+	}
+
+	public static void setPortletPreferencesFinder(
+		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.RegionPersistence getRegionPersistence() {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
@@ -402,6 +498,18 @@ public class SubscriptionLocalServiceUtil {
 		subscriptionLocalService.setResourcePersistence(resourcePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.setResourceFinder(resourceFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.ResourceCodePersistence getResourceCodePersistence() {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
@@ -424,6 +532,18 @@ public class SubscriptionLocalServiceUtil {
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 		subscriptionLocalService.setRolePersistence(rolePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.RoleFinder getRoleFinder() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getRoleFinder();
+	}
+
+	public static void setRoleFinder(
+		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.setRoleFinder(roleFinder);
 	}
 
 	public static com.liferay.portal.service.persistence.ServiceComponentPersistence getServiceComponentPersistence() {
@@ -462,6 +582,18 @@ public class SubscriptionLocalServiceUtil {
 		subscriptionLocalService.setUserPersistence(userPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.setUserFinder(userFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.UserGroupPersistence getUserGroupPersistence() {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
@@ -472,6 +604,18 @@ public class SubscriptionLocalServiceUtil {
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 		subscriptionLocalService.setUserGroupPersistence(userGroupPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserGroupFinder getUserGroupFinder() {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getUserGroupFinder();
+	}
+
+	public static void setUserGroupFinder(
+		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+		subscriptionLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
 	public static com.liferay.portal.service.persistence.UserGroupRolePersistence getUserGroupRolePersistence() {

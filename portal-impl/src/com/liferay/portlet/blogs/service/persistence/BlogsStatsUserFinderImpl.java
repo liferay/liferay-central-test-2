@@ -20,13 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.tags.service.persistence;
+package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portlet.tags.model.TagsProperty;
-import com.liferay.portlet.tags.model.impl.TagsPropertyImpl;
+import com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -39,20 +41,30 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="TagsPropertyFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="BlogsStatsUserFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsPropertyFinder {
+public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 
-	public static String COUNT_BY_C_K =
-		TagsPropertyFinder.class.getName() + ".countByC_K";
+	public static String COUNT_BY_ORGANIZATION_IDS =
+		BlogsStatsUserFinder.class.getName() + ".countByOrganizationIds";
 
-	public static String FIND_BY_C_K =
-		TagsPropertyFinder.class.getName() + ".findByC_K";
+	public static String FIND_BY_ORGANIZATION_IDS =
+		BlogsStatsUserFinder.class.getName() + ".findByOrganizationIds";
 
-	public static int countByC_K(long companyId, String key)
+	public int countByOrganizationId(long organizationId)
+		throws SystemException {
+
+		List organizationIds = new ArrayList();
+
+		organizationIds.add(new Long(organizationId));
+
+		return countByOrganizationIds(organizationIds);
+	}
+
+	public int countByOrganizationIds(List organizationIds)
 		throws SystemException {
 
 		Session session = null;
@@ -60,7 +72,11 @@ public class TagsPropertyFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_K);
+			String sql = CustomSQLUtil.get(COUNT_BY_ORGANIZATION_IDS);
+
+			sql = StringUtil.replace(
+				sql, "[$ORGANIZATION_ID$]",
+				_getOrganizationIds(organizationIds));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -68,8 +84,11 @@ public class TagsPropertyFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(companyId);
-			qPos.add(key);
+			for (int i = 0; i < organizationIds.size(); i++) {
+				Long organizationId = (Long)organizationIds.get(i);
+
+				qPos.add(organizationId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -91,14 +110,19 @@ public class TagsPropertyFinder {
 		}
 	}
 
-	public static List findByC_K(long companyId, String key)
+	public List findByOrganizationId(
+			long organizationId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return findByC_K(companyId, key, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		List organizationIds = new ArrayList();
+
+		organizationIds.add(new Long(organizationId));
+
+		return findByOrganizationIds(organizationIds, begin, end, obc);
 	}
 
-	public static List findByC_K(
-			long companyId, String key, int begin, int end)
+	public List findByOrganizationIds(
+			List organizationIds, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		Session session = null;
@@ -106,34 +130,26 @@ public class TagsPropertyFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_K);
+			String sql = CustomSQLUtil.get(FIND_BY_ORGANIZATION_IDS);
+
+			sql = StringUtil.replace(
+				sql, "[$ORGANIZATION_ID$]",
+				_getOrganizationIds(organizationIds));
+			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("propertyValue", Hibernate.STRING);
+			q.addEntity("BlogsStatsUser", BlogsStatsUserImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(companyId);
-			qPos.add(key);
+			for (int i = 0; i < organizationIds.size(); i++) {
+				Long organizationId = (Long)organizationIds.get(i);
 
-			List list = new ArrayList();
-
-			Iterator itr = QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
-
-			while (itr.hasNext()) {
-				String value = (String)itr.next();
-
-				TagsProperty property = new TagsPropertyImpl();
-
-				property.setKey(key);
-				property.setValue(value);
-
-				list.add(property);
+				qPos.add(organizationId);
 			}
 
-			return list;
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -141,6 +157,20 @@ public class TagsPropertyFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
+	}
+
+	private String _getOrganizationIds(List organizationIds) {
+		StringMaker sm = new StringMaker();
+
+		for (int i = 0; i < organizationIds.size(); i++) {
+			sm.append("Users_Orgs.organizationId = ? ");
+
+			if ((i + 1) != organizationIds.size()) {
+				sm.append("OR ");
+			}
+		}
+
+		return sm.toString();
 	}
 
 }

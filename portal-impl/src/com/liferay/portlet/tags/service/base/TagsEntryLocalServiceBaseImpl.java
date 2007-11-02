@@ -38,10 +38,18 @@ import com.liferay.portlet.tags.service.TagsSourceLocalService;
 import com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsSourceService;
 import com.liferay.portlet.tags.service.TagsSourceServiceFactory;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
+import com.liferay.portlet.tags.service.persistence.TagsPropertyFinder;
+import com.liferay.portlet.tags.service.persistence.TagsPropertyFinderUtil;
+import com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder;
+import com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.service.persistence.TagsSourcePersistence;
@@ -95,6 +103,14 @@ public abstract class TagsEntryLocalServiceBaseImpl
 		this.tagsAssetPersistence = tagsAssetPersistence;
 	}
 
+	public TagsAssetFinder getTagsAssetFinder() {
+		return tagsAssetFinder;
+	}
+
+	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
+		this.tagsAssetFinder = tagsAssetFinder;
+	}
+
 	public TagsEntryPersistence getTagsEntryPersistence() {
 		return tagsEntryPersistence;
 	}
@@ -102,6 +118,14 @@ public abstract class TagsEntryLocalServiceBaseImpl
 	public void setTagsEntryPersistence(
 		TagsEntryPersistence tagsEntryPersistence) {
 		this.tagsEntryPersistence = tagsEntryPersistence;
+	}
+
+	public TagsEntryFinder getTagsEntryFinder() {
+		return tagsEntryFinder;
+	}
+
+	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
+		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
 	public TagsPropertyLocalService getTagsPropertyLocalService() {
@@ -128,6 +152,23 @@ public abstract class TagsEntryLocalServiceBaseImpl
 	public void setTagsPropertyPersistence(
 		TagsPropertyPersistence tagsPropertyPersistence) {
 		this.tagsPropertyPersistence = tagsPropertyPersistence;
+	}
+
+	public TagsPropertyFinder getTagsPropertyFinder() {
+		return tagsPropertyFinder;
+	}
+
+	public void setTagsPropertyFinder(TagsPropertyFinder tagsPropertyFinder) {
+		this.tagsPropertyFinder = tagsPropertyFinder;
+	}
+
+	public TagsPropertyKeyFinder getTagsPropertyKeyFinder() {
+		return tagsPropertyKeyFinder;
+	}
+
+	public void setTagsPropertyKeyFinder(
+		TagsPropertyKeyFinder tagsPropertyKeyFinder) {
+		this.tagsPropertyKeyFinder = tagsPropertyKeyFinder;
 	}
 
 	public TagsSourceLocalService getTagsSourceLocalService() {
@@ -169,8 +210,16 @@ public abstract class TagsEntryLocalServiceBaseImpl
 			tagsAssetPersistence = TagsAssetUtil.getPersistence();
 		}
 
+		if (tagsAssetFinder == null) {
+			tagsAssetFinder = TagsAssetFinderUtil.getFinder();
+		}
+
 		if (tagsEntryPersistence == null) {
 			tagsEntryPersistence = TagsEntryUtil.getPersistence();
+		}
+
+		if (tagsEntryFinder == null) {
+			tagsEntryFinder = TagsEntryFinderUtil.getFinder();
 		}
 
 		if (tagsPropertyLocalService == null) {
@@ -183,6 +232,14 @@ public abstract class TagsEntryLocalServiceBaseImpl
 
 		if (tagsPropertyPersistence == null) {
 			tagsPropertyPersistence = TagsPropertyUtil.getPersistence();
+		}
+
+		if (tagsPropertyFinder == null) {
+			tagsPropertyFinder = TagsPropertyFinderUtil.getFinder();
+		}
+
+		if (tagsPropertyKeyFinder == null) {
+			tagsPropertyKeyFinder = TagsPropertyKeyFinderUtil.getFinder();
 		}
 
 		if (tagsSourceLocalService == null) {
@@ -201,10 +258,14 @@ public abstract class TagsEntryLocalServiceBaseImpl
 	protected TagsAssetLocalService tagsAssetLocalService;
 	protected TagsAssetService tagsAssetService;
 	protected TagsAssetPersistence tagsAssetPersistence;
+	protected TagsAssetFinder tagsAssetFinder;
 	protected TagsEntryPersistence tagsEntryPersistence;
+	protected TagsEntryFinder tagsEntryFinder;
 	protected TagsPropertyLocalService tagsPropertyLocalService;
 	protected TagsPropertyService tagsPropertyService;
 	protected TagsPropertyPersistence tagsPropertyPersistence;
+	protected TagsPropertyFinder tagsPropertyFinder;
+	protected TagsPropertyKeyFinder tagsPropertyKeyFinder;
 	protected TagsSourceLocalService tagsSourceLocalService;
 	protected TagsSourceService tagsSourceService;
 	protected TagsSourcePersistence tagsSourcePersistence;

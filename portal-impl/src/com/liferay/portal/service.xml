@@ -819,6 +819,7 @@
 			<finder-column name="resourceId" />
 		</finder>
 	</entity>
+	<entity name="PermissionUser" local-service="false" remote-service="false" />
 	<entity name="Phone" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

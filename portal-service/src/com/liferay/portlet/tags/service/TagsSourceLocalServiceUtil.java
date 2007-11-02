@@ -77,6 +77,18 @@ public class TagsSourceLocalServiceUtil {
 		tagsSourceLocalService.setTagsAssetPersistence(tagsAssetPersistence);
 	}
 
+	public static com.liferay.portlet.tags.service.persistence.TagsAssetFinder getTagsAssetFinder() {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		return tagsSourceLocalService.getTagsAssetFinder();
+	}
+
+	public static void setTagsAssetFinder(
+		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder) {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+		tagsSourceLocalService.setTagsAssetFinder(tagsAssetFinder);
+	}
+
 	public static com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence() {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
 
@@ -89,6 +101,18 @@ public class TagsSourceLocalServiceUtil {
 		tagsSourceLocalService.setTagsEntryPersistence(tagsEntryPersistence);
 	}
 
+	public static com.liferay.portlet.tags.service.persistence.TagsEntryFinder getTagsEntryFinder() {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		return tagsSourceLocalService.getTagsEntryFinder();
+	}
+
+	public static void setTagsEntryFinder(
+		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder) {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+		tagsSourceLocalService.setTagsEntryFinder(tagsEntryFinder);
+	}
+
 	public static com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence getTagsPropertyPersistence() {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
 
@@ -99,6 +123,30 @@ public class TagsSourceLocalServiceUtil {
 		com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence tagsPropertyPersistence) {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
 		tagsSourceLocalService.setTagsPropertyPersistence(tagsPropertyPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsPropertyFinder getTagsPropertyFinder() {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		return tagsSourceLocalService.getTagsPropertyFinder();
+	}
+
+	public static void setTagsPropertyFinder(
+		com.liferay.portlet.tags.service.persistence.TagsPropertyFinder tagsPropertyFinder) {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+		tagsSourceLocalService.setTagsPropertyFinder(tagsPropertyFinder);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder getTagsPropertyKeyFinder() {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		return tagsSourceLocalService.getTagsPropertyKeyFinder();
+	}
+
+	public static void setTagsPropertyKeyFinder(
+		com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder tagsPropertyKeyFinder) {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+		tagsSourceLocalService.setTagsPropertyKeyFinder(tagsPropertyKeyFinder);
 	}
 
 	public static com.liferay.portlet.tags.service.persistence.TagsSourcePersistence getTagsSourcePersistence() {

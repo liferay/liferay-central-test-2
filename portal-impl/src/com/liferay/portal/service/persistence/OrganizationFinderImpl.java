@@ -46,13 +46,13 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="OrganizationFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrganizationFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  *
  */
-public class OrganizationFinder {
+public class OrganizationFinderImpl implements OrganizationFinder {
 
 	public static String COUNT_BY_C_PO_N_S_C_Z_R_C =
 		OrganizationFinder.class.getName() + ".countByC_PO_N_S_C_Z_R_C";
@@ -85,7 +85,7 @@ public class OrganizationFinder {
 	public static String JOIN_BY_ORG_GROUP_PERMISSION =
 		OrganizationFinder.class.getName() + ".joinByOrgGroupPermission";
 
-	public static int countByKeywords(
+	public int countByKeywords(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String keywords,
 			int type, Long regionId, Long countryId,
@@ -114,7 +114,7 @@ public class OrganizationFinder {
 			andOperator);
 	}
 
-	public static int countByC_PO_N_T_S_C_Z_R_C(
+	public int countByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String name, int type,
 			String street, String city, String zip, Long regionId,
@@ -128,7 +128,7 @@ public class OrganizationFinder {
 			params, andOperator);
 	}
 
-	public static int countByC_PO_N_T_S_C_Z_R_C(
+	public int countByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
 			int type, String[] streets, String[] cities, String[] zips,
@@ -260,7 +260,7 @@ public class OrganizationFinder {
 		}
 	}
 
-	public static List findByKeywords(
+	public List findByKeywords(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String keywords,
 			int type, Long regionId, Long countryId,
@@ -289,7 +289,7 @@ public class OrganizationFinder {
 			andOperator, begin, end, obc);
 	}
 
-	public static List findByC_PO_N_T_S_C_Z_R_C(
+	public List findByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String name, int type,
 			String street, String city, String zip, Long regionId,
@@ -304,7 +304,7 @@ public class OrganizationFinder {
 			params, andOperator, begin, end, obc);
 	}
 
-	public static List findByC_PO_N_T_S_C_Z_R_C(
+	public List findByC_PO_N_T_S_C_Z_R_C(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
 			int type, String[] streets, String[] cities, String[] zips,
@@ -441,7 +441,7 @@ public class OrganizationFinder {
 		}
 	}
 
-	private static int _countByPermissions(
+	private int _countByPermissions(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
 			int type, String[] streets, String[] cities, String[] zips,
@@ -616,7 +616,7 @@ public class OrganizationFinder {
 		}
 	}
 
-	private static List _findByPermissions(
+	private List _findByPermissions(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
 			int type, String[] streets, String[] cities, String[] zips,
@@ -795,7 +795,7 @@ public class OrganizationFinder {
 		}
 	}
 
-	private static String _getJoin(LinkedHashMap params) {
+	private String _getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -818,7 +818,7 @@ public class OrganizationFinder {
 		return sm.toString();
 	}
 
-	private static String _getJoin(String key) {
+	private String _getJoin(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("groupsPermissions")) {
@@ -851,7 +851,7 @@ public class OrganizationFinder {
 		return join;
 	}
 
-	private static String _getWhere(LinkedHashMap params) {
+	private String _getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -874,7 +874,7 @@ public class OrganizationFinder {
 		return sm.toString();
 	}
 
-	private static String _getWhere(String key) {
+	private String _getWhere(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("groupsPermissions")) {
@@ -912,7 +912,7 @@ public class OrganizationFinder {
 		return join;
 	}
 
-	private static void _setJoin(QueryPos qPos, LinkedHashMap params) {
+	private void _setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 

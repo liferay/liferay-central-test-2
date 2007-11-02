@@ -36,17 +36,17 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="OrgGroupPermissionFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrgGroupPermissionFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class OrgGroupPermissionFinder {
+public class OrgGroupPermissionFinderImpl implements OrgGroupPermissionFinder {
 
 	public static String FIND_BY_O_G_R =
 		OrgGroupPermissionFinder.class.getName() + ".findByO_G_R";
 
-	public static void removeByO_G_R(
+	public void removeByO_G_R(
 			long organizationId, long groupId, long resourceId)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 

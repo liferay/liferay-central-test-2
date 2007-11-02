@@ -131,6 +131,7 @@
 			<finder-column name="key" />
 		</finder>
 	</entity>
+	<entity name="TagsPropertyKey" local-service="false" remote-service="false" />
 	<entity name="TagsSource" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

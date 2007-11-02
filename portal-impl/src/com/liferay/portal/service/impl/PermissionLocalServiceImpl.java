@@ -47,11 +47,9 @@ import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.base.PermissionLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupUtil;
-import com.liferay.portal.service.persistence.OrgGroupPermissionFinder;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
 import com.liferay.portal.service.persistence.OrgGroupPermissionUtil;
 import com.liferay.portal.service.persistence.OrganizationUtil;
-import com.liferay.portal.service.persistence.PermissionFinder;
 import com.liferay.portal.service.persistence.PermissionUtil;
 import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.RoleUtil;
@@ -133,7 +131,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		List permissions = PermissionFinder.findByU_R(userId, resourceId);
+		List permissions = permissionFinder.findByU_R(userId, resourceId);
 
 		permissions = getPermissions(
 			user.getCompanyId(), actionIds, resourceId);
@@ -160,7 +158,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public List getGroupPermissions(long groupId, long resourceId)
 		throws SystemException {
 
-		return PermissionFinder.findByG_R(groupId, resourceId);
+		return permissionFinder.findByG_R(groupId, resourceId);
 	}
 
 	public List getGroupPermissions(
@@ -168,7 +166,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			String primKey)
 		throws SystemException {
 
-		return PermissionFinder.findByG_C_N_S_P(
+		return permissionFinder.findByG_C_N_S_P(
 			groupId, companyId, name, scope, primKey);
 	}
 
@@ -176,7 +174,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long organizationId, long groupId, long resourceId)
 		throws SystemException {
 
-		return PermissionFinder.findByO_G_R(
+		return permissionFinder.findByO_G_R(
 			organizationId, groupId, resourceId);
 	}
 
@@ -220,20 +218,20 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public List getRolePermissions(long roleId, long resourceId)
 		throws SystemException {
 
-		return PermissionFinder.findByR_R(roleId, resourceId);
+		return permissionFinder.findByR_R(roleId, resourceId);
 	}
 
 	public List getUserPermissions(long userId, long resourceId)
 		throws SystemException {
 
-		return PermissionFinder.findByU_R(userId, resourceId);
+		return permissionFinder.findByU_R(userId, resourceId);
 	}
 
 	public List getUserPermissions(
 			long userId, long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
-		return PermissionFinder.findByU_C_N_S_P(
+		return permissionFinder.findByU_C_N_S_P(
 			userId, companyId, name, scope, primKey);
 	}
 
@@ -361,7 +359,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return false;
 		}
 
-		List permissions = PermissionFinder.findByA_R(actionId, resourceIds);
+		List permissions = permissionFinder.findByA_R(actionId, resourceIds);
 
 		// Return false if there are no permissions
 
@@ -425,7 +423,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);
 
-		Iterator itr = PermissionFinder.findByG_R(
+		Iterator itr = permissionFinder.findByG_R(
 			groupId, resourceId).iterator();
 
 		while (itr.hasNext()) {
@@ -455,7 +453,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			Organization organization =
 				OrganizationUtil.findByPrimaryKey(organizationId);
 
-			OrgGroupPermissionFinder.removeByO_G_R(
+			orgGroupPermissionFinder.removeByO_G_R(
 				organizationId, groupId, resourceId);
 
 			associatedGroupId = organization.getGroup().getGroupId();
@@ -492,7 +490,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		itr = getPermissions(
 			organization.getCompanyId(), actionIds, resourceId).iterator();
 
-		OrgGroupPermissionFinder.removeByO_G_R(
+		orgGroupPermissionFinder.removeByO_G_R(
 			organizationId, groupId, resourceId);
 
 		while (itr.hasNext()) {
@@ -579,7 +577,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		Role role = RoleUtil.findByPrimaryKey(roleId);
 
-		List permissions = PermissionFinder.findByR_R(roleId, resourceId);
+		List permissions = permissionFinder.findByR_R(roleId, resourceId);
 
 		RoleUtil.removePermissions(roleId, permissions);
 
@@ -597,7 +595,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		List permissions = PermissionFinder.findByU_R(userId, resourceId);
+		List permissions = permissionFinder.findByU_R(userId, resourceId);
 
 		UserUtil.removePermissions(userId, permissions);
 
@@ -682,7 +680,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
-		List permissions = PermissionFinder.findByU_A_R(
+		List permissions = permissionFinder.findByU_A_R(
 			userId, actionIds, resourceId);
 
 		UserUtil.removePermissions(userId, permissions);
@@ -756,7 +754,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		// organization roles?
 
 		if (groups.size() > 0) {
-			if (PermissionFinder.countByGroupsRoles(permissions, groups) > 0) {
+			if (permissionFinder.countByGroupsRoles(permissions, groups) > 0) {
 				return true;
 			}
 		}
@@ -767,7 +765,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		// connected to one of the permissions?
 
 		if (groups.size() > 0) {
-			if (PermissionFinder.countByGroupsPermissions(
+			if (permissionFinder.countByGroupsPermissions(
 					permissions, groups) > 0) {
 
 				return true;
@@ -778,7 +776,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		// Is the user connected to one of the permissions via user roles?
 
-		if (PermissionFinder.countByUsersRoles(permissions, userId) > 0) {
+		if (permissionFinder.countByUsersRoles(permissions, userId) > 0) {
 			return true;
 		}
 
@@ -786,7 +784,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		// Is the user connected to one of the permissions via user group roles?
 
-		if (PermissionFinder.countByUserGroupRole(
+		if (permissionFinder.countByUserGroupRole(
 				permissions, userId, groupId) > 0) {
 
 			return true;
@@ -796,7 +794,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		// Is the user directly connected to one of the permissions?
 
-		if (PermissionFinder.countByUsersPermissions(permissions, userId) > 0) {
+		if (permissionFinder.countByUsersPermissions(permissions, userId) > 0) {
 			return true;
 		}
 
@@ -813,7 +811,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		// Call countByGroupsRoles, countByGroupsPermissions, countByUsersRoles,
 		// countByUserGroupRole, and countByUsersPermissions in one method
 
-		if (PermissionFinder.containsPermissions_2(
+		if (permissionFinder.containsPermissions_2(
 				permissions, userId, groups, groupId)) {
 
 			return true;
@@ -833,7 +831,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		// connected to one of the permissions?
 
 		if (groups.size() > 0) {
-			if (PermissionFinder.countByGroupsPermissions(
+			if (permissionFinder.countByGroupsPermissions(
 					permissions, groups) > 0) {
 
 				return true;
@@ -846,7 +844,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		// of the permissions?
 
 		if (roles.size() > 0) {
-			if (PermissionFinder.countByRolesPermissions(
+			if (permissionFinder.countByRolesPermissions(
 					permissions, roles) > 0) {
 
 				return true;
@@ -857,7 +855,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		// Is the user directly connected to one of the permissions?
 
-		if (PermissionFinder.countByUsersPermissions(permissions, userId) > 0) {
+		if (permissionFinder.countByUsersPermissions(permissions, userId) > 0) {
 			return true;
 		}
 
@@ -874,7 +872,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		// Call countByGroupsPermissions, countByRolesPermissions, and
 		// countByUsersPermissions in one method
 
-		if (PermissionFinder.containsPermissions_4(
+		if (permissionFinder.containsPermissions_4(
 				permissions, userId, groups, roles)) {
 
 			return true;

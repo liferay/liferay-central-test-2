@@ -75,10 +75,8 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
-import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.theme.ThemeLoader;
 import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.ContentUtil;
@@ -307,7 +305,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		String primKey = layout.getPlid() + PortletImpl.LAYOUT_SEPARATOR + "%";
 
-		Iterator itr = ResourceFinder.findByC_P(
+		Iterator itr = resourceFinder.findByC_P(
 			layout.getCompanyId(), primKey).iterator();
 
 		while (itr.hasNext()) {
@@ -644,7 +642,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String prefsValue)
 		throws SystemException {
 
-		List list = LayoutFinder.findByC_P_P(
+		List list = layoutFinder.findByC_P_P(
 			companyId, portletId, prefsKey, prefsValue);
 
 		return (LayoutReference[])list.toArray(new LayoutReference[0]);

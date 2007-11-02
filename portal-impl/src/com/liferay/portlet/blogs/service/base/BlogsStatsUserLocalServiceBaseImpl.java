@@ -36,8 +36,12 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceFactory;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
 import com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder;
+import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
 
@@ -117,6 +121,14 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		this.blogsEntryPersistence = blogsEntryPersistence;
 	}
 
+	public BlogsEntryFinder getBlogsEntryFinder() {
+		return blogsEntryFinder;
+	}
+
+	public void setBlogsEntryFinder(BlogsEntryFinder blogsEntryFinder) {
+		this.blogsEntryFinder = blogsEntryFinder;
+	}
+
 	public BlogsStatsUserPersistence getBlogsStatsUserPersistence() {
 		return blogsStatsUserPersistence;
 	}
@@ -124,6 +136,15 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 	public void setBlogsStatsUserPersistence(
 		BlogsStatsUserPersistence blogsStatsUserPersistence) {
 		this.blogsStatsUserPersistence = blogsStatsUserPersistence;
+	}
+
+	public BlogsStatsUserFinder getBlogsStatsUserFinder() {
+		return blogsStatsUserFinder;
+	}
+
+	public void setBlogsStatsUserFinder(
+		BlogsStatsUserFinder blogsStatsUserFinder) {
+		this.blogsStatsUserFinder = blogsStatsUserFinder;
 	}
 
 	public void afterPropertiesSet() {
@@ -151,8 +172,16 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 			blogsEntryPersistence = BlogsEntryUtil.getPersistence();
 		}
 
+		if (blogsEntryFinder == null) {
+			blogsEntryFinder = BlogsEntryFinderUtil.getFinder();
+		}
+
 		if (blogsStatsUserPersistence == null) {
 			blogsStatsUserPersistence = BlogsStatsUserUtil.getPersistence();
+		}
+
+		if (blogsStatsUserFinder == null) {
+			blogsStatsUserFinder = BlogsStatsUserFinderUtil.getFinder();
 		}
 	}
 
@@ -162,5 +191,7 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 	protected BlogsEntryLocalService blogsEntryLocalService;
 	protected BlogsEntryService blogsEntryService;
 	protected BlogsEntryPersistence blogsEntryPersistence;
+	protected BlogsEntryFinder blogsEntryFinder;
 	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
+	protected BlogsStatsUserFinder blogsStatsUserFinder;
 }

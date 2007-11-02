@@ -42,7 +42,6 @@ import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.PasswordPolicyLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.PasswordPolicyFinder;
 import com.liferay.portal.service.persistence.PasswordPolicyUtil;
 import com.liferay.portal.util.PropsUtil;
 
@@ -250,13 +249,13 @@ public class PasswordPolicyLocalServiceImpl
 	public List search(long companyId, String name, int begin, int end)
 		throws SystemException {
 
-		return PasswordPolicyFinder.findByC_N(companyId, name, begin, end);
+		return passwordPolicyFinder.findByC_N(companyId, name, begin, end);
 	}
 
 	public int searchCount(long companyId, String name)
 		throws SystemException {
 
-		return PasswordPolicyFinder.countByC_N(companyId, name);
+		return passwordPolicyFinder.countByC_N(companyId, name);
 	}
 
 	public PasswordPolicy updatePasswordPolicy(

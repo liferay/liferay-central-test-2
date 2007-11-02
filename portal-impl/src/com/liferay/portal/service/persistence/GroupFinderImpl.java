@@ -53,12 +53,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="GroupFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="GroupFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class GroupFinder {
+public class GroupFinderImpl implements GroupFinder {
 
 	public static String COUNT_BY_GROUP_ID =
 		GroupFinder.class.getName() + ".countByGroupId";
@@ -105,9 +105,7 @@ public class GroupFinder {
 	public static String JOIN_BY_USERS_GROUPS =
 		GroupFinder.class.getName() + ".joinByUsersGroups";
 
-	public static int countByG_U(long groupId, long userId)
-		throws SystemException {
-
+	public int countByG_U(long groupId, long userId) throws SystemException {
 		String finderSQL = Group.class.getName();
 		String[] finderClassNames = new String[] {
 			Group.class.getName(), "Groups_Orgs", "Groups_UserGroups",
@@ -167,7 +165,7 @@ public class GroupFinder {
 		}
 	}
 
-	public static int countByC_N_D(
+	public int countByC_N_D(
 			long companyId, String name, String description,
 			LinkedHashMap params)
 		throws SystemException {
@@ -227,7 +225,7 @@ public class GroupFinder {
 		}
 	}
 
-	public static Group findByC_N(long companyId, String name)
+	public Group findByC_N(long companyId, String name)
 		throws NoSuchGroupException, SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -293,7 +291,7 @@ public class GroupFinder {
 		}
 	}
 
-	public static List findByC_N_D(
+	public List findByC_N_D(
 			long companyId, String name, String description,
 			LinkedHashMap params, int begin, int end)
 		throws SystemException {
@@ -468,7 +466,7 @@ public class GroupFinder {
 		}
 	}
 
-	private static int _countByGroupId(
+	private int _countByGroupId(
 			Session session, long groupId, LinkedHashMap params)
 		throws SystemException {
 
@@ -499,7 +497,7 @@ public class GroupFinder {
 		return 0;
 	}
 
-	private static int _countByC_N_D(
+	private int _countByC_N_D(
 			Session session, long companyId, String name, String description,
 			LinkedHashMap params)
 		throws SystemException {
@@ -535,7 +533,7 @@ public class GroupFinder {
 		return 0;
 	}
 
-	private static String _getJoin(LinkedHashMap params) {
+	private String _getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -558,7 +556,7 @@ public class GroupFinder {
 		return sm.toString();
 	}
 
-	private static String _getJoin(String key) {
+	private String _getJoin(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("groupsOrgs")) {
@@ -597,7 +595,7 @@ public class GroupFinder {
 		return join;
 	}
 
-	private static String _getWhere(LinkedHashMap params) {
+	private String _getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -620,7 +618,7 @@ public class GroupFinder {
 		return sm.toString();
 	}
 
-	private static String _getWhere(String key, Object value) {
+	private String _getWhere(String key, Object value) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("active")) {
@@ -692,7 +690,7 @@ public class GroupFinder {
 		return join;
 	}
 
-	private static void _setJoin(QueryPos qPos, LinkedHashMap params) {
+	private void _setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 

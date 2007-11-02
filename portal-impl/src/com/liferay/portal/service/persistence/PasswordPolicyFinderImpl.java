@@ -23,48 +23,65 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.impl.PasswordPolicyImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
+import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="ResourceFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="PasswordPolicyFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Alexander Chow
  *
  */
-public class ResourceFinder {
+public class PasswordPolicyFinderImpl implements PasswordPolicyFinder {
 
-	public static String FIND_BY_NAME =
-		ResourceFinder.class.getName() + ".findByName";
+	public static String COUNT_BY_C_N =
+		PasswordPolicyFinder.class.getName() + ".countByC_N";
 
-	public static String FIND_BY_C_P =
-		ResourceFinder.class.getName() + ".findByC_P";
+	public static String FIND_BY_C_N =
+		PasswordPolicyFinder.class.getName() + ".findByC_N";
 
-	public static List findByName(String name) throws SystemException {
+	public int countByC_N(long companyId, String name) throws SystemException {
+		name = StringUtil.lowerCase(name);
+
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_NAME);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_N);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Resource_", ResourceImpl.class);
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(companyId);
+			qPos.add(name);
 			qPos.add(name);
 
-			return q.list();
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -74,26 +91,29 @@ public class ResourceFinder {
 		}
 	}
 
-	public static List findByC_P(long companyId, String primKey)
+	public List findByC_N(long companyId, String name, int begin, int end)
 		throws SystemException {
+
+		name = StringUtil.lowerCase(name);
 
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_P);
+			String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("Resource_", ResourceImpl.class);
+			q.addEntity("PasswordPolicy", PasswordPolicyImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(primKey);
+			qPos.add(name);
+			qPos.add(name);
 
-			return q.list();
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

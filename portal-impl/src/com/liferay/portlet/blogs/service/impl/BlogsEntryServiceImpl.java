@@ -44,7 +44,6 @@ import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.base.BlogsEntryServiceBaseImpl;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
-import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
 
@@ -244,7 +243,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		List entries = new ArrayList();
 
-		Iterator itr = BlogsEntryFinder.findByOrganizationId(
+		Iterator itr = blogsEntryFinder.findByOrganizationId(
 			organizationId, 0, _MAX_END).iterator();
 
 		while (itr.hasNext() && (entries.size() < max)) {

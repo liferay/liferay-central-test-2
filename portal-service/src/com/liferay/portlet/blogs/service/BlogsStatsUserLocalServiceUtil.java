@@ -90,6 +90,18 @@ public class BlogsStatsUserLocalServiceUtil {
 		blogsStatsUserLocalService.setBlogsEntryPersistence(blogsEntryPersistence);
 	}
 
+	public static com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder getBlogsEntryFinder() {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		return blogsStatsUserLocalService.getBlogsEntryFinder();
+	}
+
+	public static void setBlogsEntryFinder(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder blogsEntryFinder) {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+		blogsStatsUserLocalService.setBlogsEntryFinder(blogsEntryFinder);
+	}
+
 	public static com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence getBlogsStatsUserPersistence() {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
 
@@ -100,6 +112,18 @@ public class BlogsStatsUserLocalServiceUtil {
 		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence) {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
 		blogsStatsUserLocalService.setBlogsStatsUserPersistence(blogsStatsUserPersistence);
+	}
+
+	public static com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder getBlogsStatsUserFinder() {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		return blogsStatsUserLocalService.getBlogsStatsUserFinder();
+	}
+
+	public static void setBlogsStatsUserFinder(
+		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder blogsStatsUserFinder) {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+		blogsStatsUserLocalService.setBlogsStatsUserFinder(blogsStatsUserFinder);
 	}
 
 	public static void afterPropertiesSet() {

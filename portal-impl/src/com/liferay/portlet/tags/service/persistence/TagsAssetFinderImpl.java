@@ -46,12 +46,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="TagsAssetFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsAssetFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsAssetFinder {
+public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 	public static String COUNT_BY_AND_ENTRY_IDS =
 		TagsAssetFinder.class.getName() + ".countByAndEntryIds";
@@ -77,7 +77,7 @@ public class TagsAssetFinder {
 		"ASC", "DESC"
 	};
 
-	public static int countByAndEntryIds(
+	public int countByAndEntryIds(
 			long groupId, long[] entryIds, long[] notEntryIds,
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
 		throws SystemException {
@@ -173,7 +173,7 @@ public class TagsAssetFinder {
 		}
 	}
 
-	public static int countByOrEntryIds(
+	public int countByOrEntryIds(
 			long groupId, long[] entryIds, long[] notEntryIds,
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
 		throws SystemException {
@@ -258,7 +258,7 @@ public class TagsAssetFinder {
 		}
 	}
 
-	public static List findByAndEntryIds(
+	public List findByAndEntryIds(
 			long groupId, long[] entryIds, long[] notEntryIds,
 			String orderByCol1, String orderByCol2, String orderByType1,
 			String orderByType2, boolean excludeZeroViewCount, Date publishDate,
@@ -365,7 +365,7 @@ public class TagsAssetFinder {
 		}
 	}
 
-	public static List findByOrEntryIds(
+	public List findByOrEntryIds(
 			long groupId, long[] entryIds, long[] notEntryIds, Date publishDate,
 			Date expirationDate )
 		throws SystemException {
@@ -375,7 +375,7 @@ public class TagsAssetFinder {
 			publishDate, expirationDate, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public static List findByOrEntryIds(
+	public List findByOrEntryIds(
 			long groupId, long[] entryIds, long[] notEntryIds,
 			String orderByCol1, String orderByCol2, String orderByType1,
 			String orderByType2, boolean excludeZeroViewCount, Date publishDate,
@@ -475,7 +475,7 @@ public class TagsAssetFinder {
 		}
 	}
 
-	public static List findByViewCount(
+	public List findByViewCount(
 			long[] classNameId, boolean asc, int begin, int end)
 		throws SystemException {
 
@@ -532,7 +532,7 @@ public class TagsAssetFinder {
 		}
 	}
 
-	private static String _checkOrderByCol(String orderByCol) {
+	private String _checkOrderByCol(String orderByCol) {
 		if (orderByCol == null) {
 			return "modifiedDate";
 		}
@@ -546,7 +546,7 @@ public class TagsAssetFinder {
 		return "modifiedDate";
 	}
 
-	protected static String _checkOrderByType(String orderByType) {
+	private String _checkOrderByType(String orderByType) {
 		if (orderByType == null) {
 			return "DESC";
 		}
@@ -560,7 +560,7 @@ public class TagsAssetFinder {
 		return "DESC";
 	}
 
-	private static String _getDates(
+	private String _getDates(
 		String sql, Date publishDate, Date expirationDate) {
 
 		StringMaker sm = new StringMaker();
@@ -578,7 +578,7 @@ public class TagsAssetFinder {
 		return sql;
 	}
 
-	private static String _getEntryIds(long[] entryIds, String operator) {
+	private String _getEntryIds(long[] entryIds, String operator) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < entryIds.length; i++) {
@@ -594,7 +594,7 @@ public class TagsAssetFinder {
 		return sm.toString();
 	}
 
-	private static void _setDates(
+	private void _setDates(
 		QueryPos qPos, Date publishDate, Date expirationDate) {
 
 		if (publishDate != null) {
@@ -611,11 +611,11 @@ public class TagsAssetFinder {
 		}
 	}
 
-	private static void _setGroupId(QueryPos qPos, long groupId) {
+	private void _setGroupId(QueryPos qPos, long groupId) {
 		qPos.add(groupId);
 	}
 
-	private static void _setEntryIds(QueryPos qPos, long[] entryIds) {
+	private void _setEntryIds(QueryPos qPos, long[] entryIds) {
 		for (int i = 0; i < entryIds.length; i++) {
 			qPos.add(entryIds[i]);
 		}

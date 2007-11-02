@@ -62,15 +62,35 @@ public interface TagsAssetLocalService {
 	public void setTagsAssetPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence);
 
+	public com.liferay.portlet.tags.service.persistence.TagsAssetFinder getTagsAssetFinder();
+
+	public void setTagsAssetFinder(
+		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder);
+
 	public com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence();
 
 	public void setTagsEntryPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence);
 
+	public com.liferay.portlet.tags.service.persistence.TagsEntryFinder getTagsEntryFinder();
+
+	public void setTagsEntryFinder(
+		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder);
+
 	public com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence getTagsPropertyPersistence();
 
 	public void setTagsPropertyPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence tagsPropertyPersistence);
+
+	public com.liferay.portlet.tags.service.persistence.TagsPropertyFinder getTagsPropertyFinder();
+
+	public void setTagsPropertyFinder(
+		com.liferay.portlet.tags.service.persistence.TagsPropertyFinder tagsPropertyFinder);
+
+	public com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder getTagsPropertyKeyFinder();
+
+	public void setTagsPropertyKeyFinder(
+		com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder tagsPropertyKeyFinder);
 
 	public com.liferay.portlet.tags.service.persistence.TagsSourcePersistence getTagsSourcePersistence();
 

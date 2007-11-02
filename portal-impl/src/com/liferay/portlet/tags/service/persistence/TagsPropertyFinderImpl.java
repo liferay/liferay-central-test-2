@@ -20,16 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.persistence;
+package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.impl.PasswordPolicyImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.tags.model.TagsProperty;
+import com.liferay.portlet.tags.model.impl.TagsPropertyImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,30 +39,26 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="PasswordPolicyFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsPropertyFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PasswordPolicyFinder {
+public class TagsPropertyFinderImpl implements TagsPropertyFinder {
 
-	public static String COUNT_BY_C_N =
-		PasswordPolicyFinder.class.getName() + ".countByC_N";
+	public static String COUNT_BY_C_K =
+		TagsPropertyFinder.class.getName() + ".countByC_K";
 
-	public static String FIND_BY_C_N =
-		PasswordPolicyFinder.class.getName() + ".findByC_N";
+	public static String FIND_BY_C_K =
+		TagsPropertyFinder.class.getName() + ".findByC_K";
 
-	public static int countByC_N(long companyId, String name)
-		throws SystemException {
-
-		name = StringUtil.lowerCase(name);
-
+	public int countByC_K(long companyId, String key) throws SystemException {
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_N);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_K);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -70,8 +67,7 @@ public class PasswordPolicyFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(name);
-			qPos.add(name);
+			qPos.add(key);
 
 			Iterator itr = q.list().iterator();
 
@@ -93,30 +89,46 @@ public class PasswordPolicyFinder {
 		}
 	}
 
-	public static List findByC_N(
-			long companyId, String name, int begin, int end)
-		throws SystemException {
+	public List findByC_K(long companyId, String key) throws SystemException {
+		return findByC_K(companyId, key, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
 
-		name = StringUtil.lowerCase(name);
+	public List findByC_K(long companyId, String key, int begin, int end)
+		throws SystemException {
 
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_N);
+			String sql = CustomSQLUtil.get(FIND_BY_C_K);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("PasswordPolicy", PasswordPolicyImpl.class);
+			q.addScalar("propertyValue", Hibernate.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(name);
-			qPos.add(name);
+			qPos.add(key);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			List list = new ArrayList();
+
+			Iterator itr = QueryUtil.iterate(
+				q, HibernateUtil.getDialect(), begin, end);
+
+			while (itr.hasNext()) {
+				String value = (String)itr.next();
+
+				TagsProperty property = new TagsPropertyImpl();
+
+				property.setKey(key);
+				property.setValue(value);
+
+				list.add(property);
+			}
+
+			return list;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

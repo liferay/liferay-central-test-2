@@ -481,6 +481,12 @@
 			<ref bean="com.liferay.portal.service.persistence.GroupPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.GroupFinderImpl" class="com.liferay.portal.service.persistence.GroupFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.GroupFinderUtil" class="com.liferay.portal.service.persistence.GroupFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.GroupFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ImageLocalService.professional" class="com.liferay.portal.service.impl.ImageLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.ImageLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -580,6 +586,12 @@
 	<bean id="com.liferay.portal.service.persistence.LayoutUtil" class="com.liferay.portal.service.persistence.LayoutUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.LayoutPersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.LayoutFinderImpl" class="com.liferay.portal.service.persistence.LayoutFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.LayoutFinderUtil" class="com.liferay.portal.service.persistence.LayoutFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.LayoutFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutSetLocalService.professional" class="com.liferay.portal.service.impl.LayoutSetLocalServiceImpl" lazy-init="true" />
@@ -809,6 +821,12 @@
 			<ref bean="com.liferay.portal.service.persistence.OrganizationPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrganizationFinderImpl" class="com.liferay.portal.service.persistence.OrganizationFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.OrganizationFinderUtil" class="com.liferay.portal.service.persistence.OrganizationFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.OrganizationFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionPersistenceImpl" class="com.liferay.portal.service.persistence.OrgGroupPermissionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -820,6 +838,12 @@
 	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionUtil" class="com.liferay.portal.service.persistence.OrgGroupPermissionUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.OrgGroupPermissionPersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionFinderImpl" class="com.liferay.portal.service.persistence.OrgGroupPermissionFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionFinderUtil" class="com.liferay.portal.service.persistence.OrgGroupPermissionFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.OrgGroupPermissionFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrgGroupRolePersistenceImpl" class="com.liferay.portal.service.persistence.OrgGroupRolePersistenceImpl" lazy-init="true">
@@ -961,6 +985,12 @@
 			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.PasswordPolicyFinderImpl" class="com.liferay.portal.service.persistence.PasswordPolicyFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.PasswordPolicyFinderUtil" class="com.liferay.portal.service.persistence.PasswordPolicyFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalService.professional" class="com.liferay.portal.service.impl.PasswordPolicyRelLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -1098,6 +1128,18 @@
 	<bean id="com.liferay.portal.service.persistence.PermissionUtil" class="com.liferay.portal.service.persistence.PermissionUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.PermissionPersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PermissionFinderImpl" class="com.liferay.portal.service.persistence.PermissionFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.PermissionFinderUtil" class="com.liferay.portal.service.persistence.PermissionFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.PermissionFinderImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PermissionUserFinderImpl" class="com.liferay.portal.service.persistence.PermissionUserFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.PermissionUserFinderUtil" class="com.liferay.portal.service.persistence.PermissionUserFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.PermissionUserFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PhoneLocalService.professional" class="com.liferay.portal.service.impl.PhoneLocalServiceImpl" lazy-init="true" />
@@ -1352,6 +1394,12 @@
 			<ref bean="com.liferay.portal.service.persistence.PortletPreferencesPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.PortletPreferencesFinderImpl" class="com.liferay.portal.service.persistence.PortletPreferencesFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.PortletPreferencesFinderUtil" class="com.liferay.portal.service.persistence.PortletPreferencesFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.PortletPreferencesFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.RegionService.professional" class="com.liferay.portal.service.impl.RegionServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.RegionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -1491,6 +1539,12 @@
 			<ref bean="com.liferay.portal.service.persistence.ResourcePersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.ResourceFinderImpl" class="com.liferay.portal.service.persistence.ResourceFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.ResourceFinderUtil" class="com.liferay.portal.service.persistence.ResourceFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.ResourceFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ResourceCodeLocalService.professional" class="com.liferay.portal.service.impl.ResourceCodeLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.ResourceCodeLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -1590,6 +1644,12 @@
 	<bean id="com.liferay.portal.service.persistence.RoleUtil" class="com.liferay.portal.service.persistence.RoleUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.RolePersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.RoleFinderImpl" class="com.liferay.portal.service.persistence.RoleFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.RoleFinderUtil" class="com.liferay.portal.service.persistence.RoleFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.RoleFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ServiceComponentLocalService.professional" class="com.liferay.portal.service.impl.ServiceComponentLocalServiceImpl" lazy-init="true" />
@@ -1733,6 +1793,12 @@
 			<ref bean="com.liferay.portal.service.persistence.UserPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserFinderImpl" class="com.liferay.portal.service.persistence.UserFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.UserFinderUtil" class="com.liferay.portal.service.persistence.UserFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.UserFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.UserGroupLocalService.professional" class="com.liferay.portal.service.impl.UserGroupLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.UserGroupLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -1794,6 +1860,12 @@
 	<bean id="com.liferay.portal.service.persistence.UserGroupUtil" class="com.liferay.portal.service.persistence.UserGroupUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.UserGroupPersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserGroupFinderImpl" class="com.liferay.portal.service.persistence.UserGroupFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.persistence.UserGroupFinderUtil" class="com.liferay.portal.service.persistence.UserGroupFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portal.service.persistence.UserGroupFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.professional" class="com.liferay.portal.service.impl.UserGroupRoleLocalServiceImpl" lazy-init="true" />
@@ -2162,6 +2234,12 @@
 			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderImpl" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.professional" class="com.liferay.portlet.blogs.service.impl.BlogsStatsUserLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -2198,6 +2276,12 @@
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderImpl" class="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.professional" class="com.liferay.portlet.bookmarks.service.impl.BookmarksEntryLocalServiceImpl" lazy-init="true" />
@@ -4517,6 +4601,12 @@
 			<ref bean="com.liferay.portlet.tags.service.persistence.TagsAssetPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetFinderImpl" class="com.liferay.portlet.tags.service.persistence.TagsAssetFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil" class="com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsAssetFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.professional" class="com.liferay.portlet.tags.service.impl.TagsEntryLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -4580,6 +4670,12 @@
 			<ref bean="com.liferay.portlet.tags.service.persistence.TagsEntryPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryFinderImpl" class="com.liferay.portlet.tags.service.persistence.TagsEntryFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil" class="com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsEntryFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.professional" class="com.liferay.portlet.tags.service.impl.TagsPropertyLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -4641,6 +4737,18 @@
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyUtil" class="com.liferay.portlet.tags.service.persistence.TagsPropertyUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistenceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinderImpl" class="com.liferay.portlet.tags.service.persistence.TagsPropertyFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinderUtil" class="com.liferay.portlet.tags.service.persistence.TagsPropertyFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsPropertyFinderImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderImpl" class="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderUtil" class="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalService.professional" class="com.liferay.portlet.tags.service.impl.TagsSourceLocalServiceImpl" lazy-init="true" />

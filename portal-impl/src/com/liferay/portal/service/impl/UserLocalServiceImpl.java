@@ -95,14 +95,9 @@ import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.ContactUtil;
-import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrganizationUtil;
-import com.liferay.portal.service.persistence.PermissionUserFinder;
-import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
-import com.liferay.portal.service.persistence.UserFinder;
-import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -383,7 +378,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		for (int i = 0; i < defaultGroupNames.length; i++) {
 			try {
-				Group group = GroupFinder.findByC_N(
+				Group group = groupFinder.findByC_N(
 					companyId, defaultGroupNames[i]);
 
 				groups.add(group);
@@ -403,7 +398,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		for (int i = 0; i < defaultRoleNames.length; i++) {
 			try {
-				Role role = RoleFinder.findByC_N(
+				Role role = roleFinder.findByC_N(
 					companyId, defaultRoleNames[i]);
 
 				roles.add(role);
@@ -423,7 +418,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		for (int i = 0; i < defaultUserGroupNames.length; i++) {
 			try {
-				UserGroup userGroup = UserGroupFinder.findByC_N(
+				UserGroup userGroup = userGroupFinder.findByC_N(
 					companyId, defaultUserGroupNames[i]);
 
 				userGroups.add(userGroup);
@@ -859,16 +854,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		int orgGroupPermissionsCount =
-			PermissionUserFinder.countByOrgGroupPermissions(
+			permissionUserFinder.countByOrgGroupPermissions(
 				companyId, name, primKey, actionId);
 
 		if (orgGroupPermissionsCount > 0) {
-			return PermissionUserFinder.findByUserAndOrgGroupPermission(
+			return permissionUserFinder.findByUserAndOrgGroupPermission(
 				companyId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator, begin, end);
 		}
 		else {
-			return PermissionUserFinder.findByPermissionAndRole(
+			return permissionUserFinder.findByPermissionAndRole(
 				companyId, groupId, name, primKey, actionId, firstName,
 				middleName, lastName, emailAddress, andOperator, begin, end);
 		}
@@ -881,16 +876,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		int orgGroupPermissionsCount =
-			PermissionUserFinder.countByOrgGroupPermissions(
+			permissionUserFinder.countByOrgGroupPermissions(
 				companyId, name, primKey, actionId);
 
 		if (orgGroupPermissionsCount > 0) {
-			return PermissionUserFinder.countByUserAndOrgGroupPermission(
+			return permissionUserFinder.countByUserAndOrgGroupPermission(
 				companyId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator);
 		}
 		else {
-			return PermissionUserFinder.countByPermissionAndRole(
+			return permissionUserFinder.countByPermissionAndRole(
 				companyId, groupId, name, primKey, actionId, firstName,
 				middleName, lastName, emailAddress, andOperator);
 		}
@@ -1058,7 +1053,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			LinkedHashMap params, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return UserFinder.findByKeywords(
+		return userFinder.findByKeywords(
 			companyId, keywords, active, params, begin, end, obc);
 	}
 
@@ -1069,7 +1064,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			int end, OrderByComparator obc)
 		throws SystemException {
 
-		return UserFinder.findByC_FN_MN_LN_SN_EA_A(
+		return userFinder.findByC_FN_MN_LN_SN_EA_A(
 			companyId, firstName, middleName, lastName, screenName,
 			emailAddress, active, params, andSearch, begin, end, obc);
 	}
@@ -1079,7 +1074,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			LinkedHashMap params)
 		throws SystemException {
 
-		return UserFinder.countByKeywords(companyId, keywords, active, params);
+		return userFinder.countByKeywords(companyId, keywords, active, params);
 	}
 
 	public int searchCount(
@@ -1088,7 +1083,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			Boolean active, LinkedHashMap params, boolean andSearch)
 		throws SystemException {
 
-		return UserFinder.countByC_FN_MN_LN_SN_EA_A(
+		return userFinder.countByC_FN_MN_LN_SN_EA_A(
 			companyId, firstName, middleName, lastName, screenName,
 			emailAddress, active, params, andSearch);
 	}

@@ -33,8 +33,6 @@ import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsPropertyLocalServiceBaseImpl;
-import com.liferay.portlet.tags.service.persistence.TagsPropertyFinder;
-import com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.util.TagsUtil;
 
@@ -138,13 +136,13 @@ public class TagsPropertyLocalServiceImpl
 	}
 
 	public String[] getPropertyKeys(long companyId) throws SystemException {
-		return TagsPropertyKeyFinder.findByCompanyId(companyId);
+		return tagsPropertyKeyFinder.findByCompanyId(companyId);
 	}
 
 	public List getPropertyValues(long companyId, String key)
 		throws SystemException {
 
-		return TagsPropertyFinder.findByC_K(companyId, key);
+		return tagsPropertyFinder.findByC_K(companyId, key);
 	}
 
 	public TagsProperty updateProperty(

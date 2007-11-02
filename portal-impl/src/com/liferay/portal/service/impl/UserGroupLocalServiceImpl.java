@@ -39,7 +39,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupUtil;
-import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 
@@ -144,7 +143,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public UserGroup getUserGroup(long companyId, String name)
 		throws PortalException, SystemException {
 
-		return UserGroupFinder.findByC_N(companyId, name);
+		return userGroupFinder.findByC_N(companyId, name);
 	}
 
 	public List getUserGroups(long companyId)
@@ -170,7 +169,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			LinkedHashMap params, int begin, int end)
 		throws SystemException {
 
-		return UserGroupFinder.findByC_N_D(
+		return userGroupFinder.findByC_N_D(
 			companyId, name, description, params, begin, end);
 	}
 
@@ -179,7 +178,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			LinkedHashMap params)
 		throws SystemException {
 
-		return UserGroupFinder.countByC_N_D(
+		return userGroupFinder.countByC_N_D(
 			companyId, name, description, params);
 	}
 
@@ -219,7 +218,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		}
 
 		try {
-			UserGroup userGroup = UserGroupFinder.findByC_N(companyId, name);
+			UserGroup userGroup = userGroupFinder.findByC_N(companyId, name);
 
 			if (userGroup.getUserGroupId() != userGroupId) {
 				throw new DuplicateUserGroupException();

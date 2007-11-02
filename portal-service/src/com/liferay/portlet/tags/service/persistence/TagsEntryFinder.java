@@ -20,56 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.persistence;
-
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.impl.PortletPreferencesImpl;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
-
-import java.util.List;
-
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
+package com.liferay.portlet.tags.service.persistence;
 
 /**
- * <a href="PortletPreferencesFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsEntryFinder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletPreferencesFinder {
+public interface TagsEntryFinder {
+	public int countByC_N_P(long companyId, java.lang.String name,
+		java.lang.String[] properties)
+		throws com.liferay.portal.SystemException;
 
-	public static String FIND_BY_PORTLETID =
-		PortletPreferencesFinder.class.getName() + ".findByPortletId";
+	public java.util.List findByC_N_P(long companyId, java.lang.String name,
+		java.lang.String[] properties)
+		throws com.liferay.portal.SystemException;
 
-	public static List findByPortletId(String portletId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_PORTLETID);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("PortletPreferences", PortletPreferencesImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(portletId);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
-
+	public java.util.List findByC_N_P(long companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
+		throws com.liferay.portal.SystemException;
 }

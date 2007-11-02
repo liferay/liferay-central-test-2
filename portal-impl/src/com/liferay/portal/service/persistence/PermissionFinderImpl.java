@@ -43,12 +43,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="PermissionFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="PermissionFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PermissionFinder {
+public class PermissionFinderImpl implements PermissionFinder {
 
 	public static String COUNT_BY_GROUPS_PERMISSIONS =
 		PermissionFinder.class.getName() + ".countByGroupsPermissions";
@@ -92,7 +92,7 @@ public class PermissionFinder {
 	public static String FIND_BY_U_C_N_S_P =
 		PermissionFinder.class.getName() + ".findByU_C_N_S_P";
 
-	public static boolean containsPermissions_2(
+	public boolean containsPermissions_2(
 			List permissions, long userId, List groups, long groupId)
 		throws SystemException {
 
@@ -223,7 +223,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static boolean containsPermissions_4(
+	public boolean containsPermissions_4(
 			List permissions, long userId, List groups, List roles)
 		throws SystemException {
 
@@ -327,7 +327,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static int countByGroupsPermissions(List permissions, List groups)
+	public int countByGroupsPermissions(List permissions, List groups)
 		throws SystemException {
 
 		Session session = null;
@@ -373,7 +373,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static int countByGroupsRoles(List permissions, List groups)
+	public int countByGroupsRoles(List permissions, List groups)
 		throws SystemException {
 
 		Session session = null;
@@ -418,7 +418,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static int countByRolesPermissions(List permissions, List roles)
+	public int countByRolesPermissions(List permissions, List roles)
 		throws SystemException {
 
 		Session session = null;
@@ -463,8 +463,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static int countByUserGroupRole(
-			List permissions, long userId, long groupId)
+	public int countByUserGroupRole(List permissions, long userId, long groupId)
 		throws SystemException {
 
 		Session session = null;
@@ -508,7 +507,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static int countByUsersPermissions(List permissions, long userId)
+	public int countByUsersPermissions(List permissions, long userId)
 		throws SystemException {
 
 		Session session = null;
@@ -551,7 +550,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static int countByUsersRoles(List permissions, long userId)
+	public int countByUsersRoles(List permissions, long userId)
 		throws SystemException {
 
 		Session session = null;
@@ -594,7 +593,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByA_R(String actionId, long[] resourceIds)
+	public List findByA_R(String actionId, long[] resourceIds)
 		throws SystemException {
 
 		String finderClassName = Permission.class.getName();
@@ -649,7 +648,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByG_R(long groupId, long resourceId)
+	public List findByG_R(long groupId, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -678,9 +677,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByR_R(long roleId, long resourceId)
-		throws SystemException {
-
+	public List findByR_R(long roleId, long resourceId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -707,9 +704,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByU_R(long userId, long resourceId)
-		throws SystemException {
-
+	public List findByU_R(long userId, long resourceId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -736,8 +731,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByO_G_R(
-			long organizationId, long groupId, long resourceId)
+	public List findByO_G_R(long organizationId, long groupId, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -767,8 +761,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByU_A_R(
-			long userId, String[] actionIds, long resourceId)
+	public List findByU_A_R(long userId, String[] actionIds, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -800,7 +793,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByG_C_N_S_P(
+	public List findByG_C_N_S_P(
 			long groupId, long companyId, String name, int scope,
 			String primKey)
 		throws SystemException {
@@ -834,7 +827,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByU_C_N_S_P(
+	public List findByU_C_N_S_P(
 			long userId, long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
@@ -867,7 +860,7 @@ public class PermissionFinder {
 		}
 	}
 
-	private static String _getActionIds(String[] actionIds) {
+	private String _getActionIds(String[] actionIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < actionIds.length; i++) {
@@ -881,7 +874,7 @@ public class PermissionFinder {
 		return sm.toString();
 	}
 
-	private static String _getGroupIds(List groups, String table) {
+	private String _getGroupIds(List groups, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < groups.size(); i++) {
@@ -896,7 +889,7 @@ public class PermissionFinder {
 		return sm.toString();
 	}
 
-	private static String _getPermissionIds(List permissions, String table) {
+	private String _getPermissionIds(List permissions, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < permissions.size(); i++) {
@@ -911,7 +904,7 @@ public class PermissionFinder {
 		return sm.toString();
 	}
 
-	private static String _getResourceIds(long[] resourceIds) {
+	private String _getResourceIds(long[] resourceIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < resourceIds.length; i++) {
@@ -925,7 +918,7 @@ public class PermissionFinder {
 		return sm.toString();
 	}
 
-	private static String _getRoleIds(List roles, String table) {
+	private String _getRoleIds(List roles, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < roles.size(); i++) {
@@ -940,7 +933,7 @@ public class PermissionFinder {
 		return sm.toString();
 	}
 
-	private static void _setGroupIds(QueryPos qPos, List groups) {
+	private void _setGroupIds(QueryPos qPos, List groups) {
 		for (int i = 0; i < groups.size(); i++) {
 			Group group = (Group)groups.get(i);
 
@@ -948,7 +941,7 @@ public class PermissionFinder {
 		}
 	}
 
-	private static void _setPermissionIds(QueryPos qPos, List permissions) {
+	private void _setPermissionIds(QueryPos qPos, List permissions) {
 		for (int i = 0; i < permissions.size(); i++) {
 			Permission permission = (Permission)permissions.get(i);
 
@@ -956,7 +949,7 @@ public class PermissionFinder {
 		}
 	}
 
-	private static void _setResourceIds(QueryPos qPos, long[] resourceIds) {
+	private void _setResourceIds(QueryPos qPos, long[] resourceIds) {
 		for (int i = 0; i < resourceIds.length; i++) {
 			long resourceId = resourceIds[i];
 
@@ -964,7 +957,7 @@ public class PermissionFinder {
 		}
 	}
 
-	private static void _setRoleIds(QueryPos qPos, List roles) {
+	private void _setRoleIds(QueryPos qPos, List roles) {
 		for (int i = 0; i < roles.size(); i++) {
 			Role role = (Role)roles.get(i);
 

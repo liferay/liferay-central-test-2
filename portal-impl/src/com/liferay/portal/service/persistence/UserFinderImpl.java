@@ -44,13 +44,13 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="UserFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Jon Steer
  *
  */
-public class UserFinder {
+public class UserFinderImpl implements UserFinder {
 
 	public static String COUNT_BY_C_FN_MN_LN_SN_EA_A =
 		UserFinder.class.getName() + ".countByC_FN_MN_LN_SN_EA_A";
@@ -79,7 +79,7 @@ public class UserFinder {
 	public static String JOIN_BY_USERS_USER_GROUPS =
 		UserFinder.class.getName() + ".joinByUsersUserGroups";
 
-	public static int countByKeywords(
+	public int countByKeywords(
 			long companyId, String keywords, Boolean active,
 			LinkedHashMap params)
 		throws SystemException {
@@ -107,7 +107,7 @@ public class UserFinder {
 			emailAddresses, active, params, andOperator);
 	}
 
-	public static int countByC_FN_MN_LN_SN_EA_A(
+	public int countByC_FN_MN_LN_SN_EA_A(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
 			Boolean active, LinkedHashMap params, boolean andOperator)
@@ -119,7 +119,7 @@ public class UserFinder {
 			new String[] {emailAddress}, active, params, andOperator);
 	}
 
-	public static int countByC_FN_MN_LN_SN_EA_A(
+	public int countByC_FN_MN_LN_SN_EA_A(
 			long companyId, String[] firstNames, String[] middleNames,
 			String[] lastNames, String[] screenNames, String[] emailAddresses,
 			Boolean active, LinkedHashMap params, boolean andOperator)
@@ -201,7 +201,7 @@ public class UserFinder {
 		}
 	}
 
-	public static List findByKeywords(
+	public List findByKeywords(
 			long companyId, String keywords, Boolean active,
 			LinkedHashMap params, int begin, int end, OrderByComparator obc)
 		throws SystemException {
@@ -229,7 +229,7 @@ public class UserFinder {
 			emailAddresses, active, params, andOperator, begin, end, obc);
 	}
 
-	public static List findByC_FN_MN_LN_SN_EA_A(
+	public List findByC_FN_MN_LN_SN_EA_A(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
 			Boolean active, LinkedHashMap params, boolean andOperator,
@@ -243,7 +243,7 @@ public class UserFinder {
 			end, obc);
 	}
 
-	public static List findByC_FN_MN_LN_SN_EA_A(
+	public List findByC_FN_MN_LN_SN_EA_A(
 			long companyId, String[] firstNames, String[] middleNames,
 			String[] lastNames, String[] screenNames, String[] emailAddresses,
 			Boolean active, LinkedHashMap params, boolean andOperator,
@@ -317,7 +317,7 @@ public class UserFinder {
 		}
 	}
 
-	private static String _getJoin(LinkedHashMap params) {
+	private String _getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -340,7 +340,7 @@ public class UserFinder {
 		return sm.toString();
 	}
 
-	private static String _getJoin(String key) {
+	private String _getJoin(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permission")) {
@@ -376,7 +376,7 @@ public class UserFinder {
 		return join;
 	}
 
-	private static String _getWhere(LinkedHashMap params) {
+	private String _getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -399,7 +399,7 @@ public class UserFinder {
 		return sm.toString();
 	}
 
-	private static String _getWhere(String key) {
+	private String _getWhere(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permission")) {
@@ -435,7 +435,7 @@ public class UserFinder {
 		return join;
 	}
 
-	private static void _setJoin(QueryPos qPos, LinkedHashMap params) {
+	private void _setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 

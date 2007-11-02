@@ -41,7 +41,6 @@ import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
-import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.util.TagsUtil;
@@ -218,7 +217,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public List search(long companyId, String name, String[] properties)
 		throws SystemException {
 
-		return TagsEntryFinder.findByC_N_P(companyId, name, properties);
+		return tagsEntryFinder.findByC_N_P(companyId, name, properties);
 	}
 
 	public List search(
@@ -226,7 +225,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			int end)
 		throws SystemException {
 
-		return TagsEntryFinder.findByC_N_P(
+		return tagsEntryFinder.findByC_N_P(
 			companyId, name, properties, begin, end);
 	}
 
@@ -235,7 +234,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			int end)
 		throws SystemException {
 
-		List list = TagsEntryFinder.findByC_N_P(
+		List list = tagsEntryFinder.findByC_N_P(
 			companyId, name, properties, begin, end);
 
 		return new JSONArrayWrapper(
@@ -245,7 +244,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public int searchCount(long companyId, String name, String[] properties)
 		throws SystemException {
 
-		return TagsEntryFinder.countByC_N_P(companyId, name, properties);
+		return tagsEntryFinder.countByC_N_P(companyId, name, properties);
 	}
 
 	public TagsEntry updateEntry(long entryId, String name)

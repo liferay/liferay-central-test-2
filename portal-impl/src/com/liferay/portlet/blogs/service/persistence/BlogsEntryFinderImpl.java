@@ -40,12 +40,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="BlogsEntryFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="BlogsEntryFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsEntryFinder {
+public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 
 	public static String COUNT_BY_CATEGORY_IDS =
 		BlogsEntryFinder.class.getName() + ".countByCategoryIds";
@@ -59,9 +59,7 @@ public class BlogsEntryFinder {
 	public static String FIND_BY_NO_ASSETS =
 		BlogsEntryFinder.class.getName() + ".findByNoAssets";
 
-	public static int countByCategoryIds(List categoryIds)
-		throws SystemException {
-
+	public int countByCategoryIds(List categoryIds) throws SystemException {
 		Session session = null;
 
 		try {
@@ -104,7 +102,7 @@ public class BlogsEntryFinder {
 		}
 	}
 
-	public static int countByOrganizationId(long organizationId)
+	public int countByOrganizationId(long organizationId)
 		throws SystemException {
 
 		List organizationIds = new ArrayList();
@@ -114,7 +112,7 @@ public class BlogsEntryFinder {
 		return countByOrganizationIds(organizationIds);
 	}
 
-	public static int countByOrganizationIds(List organizationIds)
+	public int countByOrganizationIds(List organizationIds)
 		throws SystemException {
 
 		Session session = null;
@@ -160,8 +158,7 @@ public class BlogsEntryFinder {
 		}
 	}
 
-	public static List findByOrganizationId(
-			long organizationId, int begin, int end)
+	public List findByOrganizationId(long organizationId, int begin, int end)
 		throws SystemException {
 
 		List organizationIds = new ArrayList();
@@ -171,8 +168,7 @@ public class BlogsEntryFinder {
 		return findByOrganizationIds(organizationIds, begin, end);
 	}
 
-	public static List findByOrganizationIds(
-			List organizationIds, int begin, int end)
+	public List findByOrganizationIds(List organizationIds, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -208,7 +204,7 @@ public class BlogsEntryFinder {
 		}
 	}
 
-	public static List findByNoAssets() throws SystemException {
+	public List findByNoAssets() throws SystemException {
 		Session session = null;
 
 		try {
@@ -230,7 +226,7 @@ public class BlogsEntryFinder {
 		}
 	}
 
-	private static String _getCategoryIds(List categoryIds) {
+	private String _getCategoryIds(List categoryIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < categoryIds.size(); i++) {
@@ -244,7 +240,7 @@ public class BlogsEntryFinder {
 		return sm.toString();
 	}
 
-	private static String _getOrganizationIds(List organizationIds) {
+	private String _getOrganizationIds(List organizationIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < organizationIds.size(); i++) {

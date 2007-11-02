@@ -20,17 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.persistence;
+package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutReference;
-import com.liferay.portal.model.LayoutSoap;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,63 +36,81 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="LayoutFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsPropertyKeyFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LayoutFinder {
+public class TagsPropertyKeyFinderImpl implements TagsPropertyKeyFinder {
 
-	public static String FIND_BY_C_P_P =
-		LayoutFinder.class.getName() + ".findByC_P_P";
+	public static String COUNT_BY_COMPANYID =
+		TagsPropertyKeyFinder.class.getName() + ".countByCompanyId";
 
-	public static List findByC_P_P(
-			long companyId, String portletId, String prefsKey,
-			String prefsValue)
+	public static String FIND_BY_COMPANYID =
+		TagsPropertyKeyFinder.class.getName() + ".findByCompanyId";
+
+	public int countByCompanyId(long companyId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_COMPANYID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public String[] findByCompanyId(long companyId) throws SystemException {
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public String[] findByCompanyId(long companyId, int begin, int end)
 		throws SystemException {
-
-		String prefs =
-			"%<preference><name>" + prefsKey + "</name><value>" + prefsValue +
-				"</value>%";
 
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_P_P);
+			String sql = CustomSQLUtil.get(FIND_BY_COMPANYID);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("layoutPlid", Hibernate.LONG);
-			q.addScalar("prefsPortletId", Hibernate.STRING);
+			q.addScalar("propertyKey", Hibernate.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(portletId);
-			qPos.add(portletId + "_INSTANCE_%");
-			qPos.add(prefs);
 
-			List list = new ArrayList();
+			List list = QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 
-			Iterator itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Object[] array = (Object[])itr.next();
-
-				Long layoutPlid = (Long)array[0];
-				String prefsPortletId = (String)array[1];
-
-				Layout layout = LayoutUtil.findByPrimaryKey(
-					layoutPlid.longValue());
-
-				list.add(
-					new LayoutReference(
-						LayoutSoap.toSoapModel(layout), prefsPortletId));
-			}
-
-			return list;
+			return (String[])list.toArray(new String[0]);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

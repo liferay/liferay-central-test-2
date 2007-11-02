@@ -159,10 +159,14 @@ import com.liferay.portal.service.persistence.CountryPersistence;
 import com.liferay.portal.service.persistence.CountryUtil;
 import com.liferay.portal.service.persistence.EmailAddressPersistence;
 import com.liferay.portal.service.persistence.EmailAddressUtil;
+import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupFinderUtil;
 import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.ImagePersistence;
 import com.liferay.portal.service.persistence.ImageUtil;
+import com.liferay.portal.service.persistence.LayoutFinder;
+import com.liferay.portal.service.persistence.LayoutFinderUtil;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 import com.liferay.portal.service.persistence.LayoutSetUtil;
@@ -171,27 +175,39 @@ import com.liferay.portal.service.persistence.ListTypePersistence;
 import com.liferay.portal.service.persistence.ListTypeUtil;
 import com.liferay.portal.service.persistence.MembershipRequestPersistence;
 import com.liferay.portal.service.persistence.MembershipRequestUtil;
+import com.liferay.portal.service.persistence.OrgGroupPermissionFinder;
+import com.liferay.portal.service.persistence.OrgGroupPermissionFinderUtil;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPersistence;
 import com.liferay.portal.service.persistence.OrgGroupPermissionUtil;
 import com.liferay.portal.service.persistence.OrgGroupRolePersistence;
 import com.liferay.portal.service.persistence.OrgGroupRoleUtil;
 import com.liferay.portal.service.persistence.OrgLaborPersistence;
 import com.liferay.portal.service.persistence.OrgLaborUtil;
+import com.liferay.portal.service.persistence.OrganizationFinder;
+import com.liferay.portal.service.persistence.OrganizationFinderUtil;
 import com.liferay.portal.service.persistence.OrganizationPersistence;
 import com.liferay.portal.service.persistence.OrganizationUtil;
+import com.liferay.portal.service.persistence.PasswordPolicyFinder;
+import com.liferay.portal.service.persistence.PasswordPolicyFinderUtil;
 import com.liferay.portal.service.persistence.PasswordPolicyPersistence;
 import com.liferay.portal.service.persistence.PasswordPolicyRelPersistence;
 import com.liferay.portal.service.persistence.PasswordPolicyRelUtil;
 import com.liferay.portal.service.persistence.PasswordPolicyUtil;
 import com.liferay.portal.service.persistence.PasswordTrackerPersistence;
 import com.liferay.portal.service.persistence.PasswordTrackerUtil;
+import com.liferay.portal.service.persistence.PermissionFinder;
+import com.liferay.portal.service.persistence.PermissionFinderUtil;
 import com.liferay.portal.service.persistence.PermissionPersistence;
+import com.liferay.portal.service.persistence.PermissionUserFinder;
+import com.liferay.portal.service.persistence.PermissionUserFinderUtil;
 import com.liferay.portal.service.persistence.PermissionUtil;
 import com.liferay.portal.service.persistence.PhonePersistence;
 import com.liferay.portal.service.persistence.PhoneUtil;
 import com.liferay.portal.service.persistence.PluginSettingPersistence;
 import com.liferay.portal.service.persistence.PluginSettingUtil;
 import com.liferay.portal.service.persistence.PortletPersistence;
+import com.liferay.portal.service.persistence.PortletPreferencesFinder;
+import com.liferay.portal.service.persistence.PortletPreferencesFinderUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.PortletUtil;
@@ -201,14 +217,22 @@ import com.liferay.portal.service.persistence.ReleasePersistence;
 import com.liferay.portal.service.persistence.ReleaseUtil;
 import com.liferay.portal.service.persistence.ResourceCodePersistence;
 import com.liferay.portal.service.persistence.ResourceCodeUtil;
+import com.liferay.portal.service.persistence.ResourceFinder;
+import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.ResourceUtil;
+import com.liferay.portal.service.persistence.RoleFinder;
+import com.liferay.portal.service.persistence.RoleFinderUtil;
 import com.liferay.portal.service.persistence.RolePersistence;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.ServiceComponentPersistence;
 import com.liferay.portal.service.persistence.ServiceComponentUtil;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
 import com.liferay.portal.service.persistence.SubscriptionUtil;
+import com.liferay.portal.service.persistence.UserFinder;
+import com.liferay.portal.service.persistence.UserFinderUtil;
+import com.liferay.portal.service.persistence.UserGroupFinder;
+import com.liferay.portal.service.persistence.UserGroupFinderUtil;
 import com.liferay.portal.service.persistence.UserGroupPersistence;
 import com.liferay.portal.service.persistence.UserGroupRolePersistence;
 import com.liferay.portal.service.persistence.UserGroupRoleUtil;
@@ -435,6 +459,14 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		this.groupPersistence = groupPersistence;
 	}
 
+	public GroupFinder getGroupFinder() {
+		return groupFinder;
+	}
+
+	public void setGroupFinder(GroupFinder groupFinder) {
+		this.groupFinder = groupFinder;
+	}
+
 	public ImageLocalService getImageLocalService() {
 		return imageLocalService;
 	}
@@ -473,6 +505,14 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 
 	public void setLayoutPersistence(LayoutPersistence layoutPersistence) {
 		this.layoutPersistence = layoutPersistence;
+	}
+
+	public LayoutFinder getLayoutFinder() {
+		return layoutFinder;
+	}
+
+	public void setLayoutFinder(LayoutFinder layoutFinder) {
+		this.layoutFinder = layoutFinder;
 	}
 
 	public LayoutSetLocalService getLayoutSetLocalService() {
@@ -570,6 +610,14 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		this.organizationPersistence = organizationPersistence;
 	}
 
+	public OrganizationFinder getOrganizationFinder() {
+		return organizationFinder;
+	}
+
+	public void setOrganizationFinder(OrganizationFinder organizationFinder) {
+		this.organizationFinder = organizationFinder;
+	}
+
 	public OrgGroupPermissionPersistence getOrgGroupPermissionPersistence() {
 		return orgGroupPermissionPersistence;
 	}
@@ -577,6 +625,15 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	public void setOrgGroupPermissionPersistence(
 		OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		this.orgGroupPermissionPersistence = orgGroupPermissionPersistence;
+	}
+
+	public OrgGroupPermissionFinder getOrgGroupPermissionFinder() {
+		return orgGroupPermissionFinder;
+	}
+
+	public void setOrgGroupPermissionFinder(
+		OrgGroupPermissionFinder orgGroupPermissionFinder) {
+		this.orgGroupPermissionFinder = orgGroupPermissionFinder;
 	}
 
 	public OrgGroupRolePersistence getOrgGroupRolePersistence() {
@@ -640,6 +697,15 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		this.passwordPolicyPersistence = passwordPolicyPersistence;
 	}
 
+	public PasswordPolicyFinder getPasswordPolicyFinder() {
+		return passwordPolicyFinder;
+	}
+
+	public void setPasswordPolicyFinder(
+		PasswordPolicyFinder passwordPolicyFinder) {
+		this.passwordPolicyFinder = passwordPolicyFinder;
+	}
+
 	public PasswordPolicyRelLocalService getPasswordPolicyRelLocalService() {
 		return passwordPolicyRelLocalService;
 	}
@@ -700,6 +766,23 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	public void setPermissionPersistence(
 		PermissionPersistence permissionPersistence) {
 		this.permissionPersistence = permissionPersistence;
+	}
+
+	public PermissionFinder getPermissionFinder() {
+		return permissionFinder;
+	}
+
+	public void setPermissionFinder(PermissionFinder permissionFinder) {
+		this.permissionFinder = permissionFinder;
+	}
+
+	public PermissionUserFinder getPermissionUserFinder() {
+		return permissionUserFinder;
+	}
+
+	public void setPermissionUserFinder(
+		PermissionUserFinder permissionUserFinder) {
+		this.permissionUserFinder = permissionUserFinder;
 	}
 
 	public PhoneLocalService getPhoneLocalService() {
@@ -803,6 +886,15 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		this.portletPreferencesPersistence = portletPreferencesPersistence;
 	}
 
+	public PortletPreferencesFinder getPortletPreferencesFinder() {
+		return portletPreferencesFinder;
+	}
+
+	public void setPortletPreferencesFinder(
+		PortletPreferencesFinder portletPreferencesFinder) {
+		this.portletPreferencesFinder = portletPreferencesFinder;
+	}
+
 	public RegionService getRegionService() {
 		return regionService;
 	}
@@ -860,6 +952,14 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		this.resourcePersistence = resourcePersistence;
 	}
 
+	public ResourceFinder getResourceFinder() {
+		return resourceFinder;
+	}
+
+	public void setResourceFinder(ResourceFinder resourceFinder) {
+		this.resourceFinder = resourceFinder;
+	}
+
 	public ResourceCodePersistence getResourceCodePersistence() {
 		return resourceCodePersistence;
 	}
@@ -891,6 +991,14 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 
 	public void setRolePersistence(RolePersistence rolePersistence) {
 		this.rolePersistence = rolePersistence;
+	}
+
+	public RoleFinder getRoleFinder() {
+		return roleFinder;
+	}
+
+	public void setRoleFinder(RoleFinder roleFinder) {
+		this.roleFinder = roleFinder;
 	}
 
 	public ServiceComponentLocalService getServiceComponentLocalService() {
@@ -953,6 +1061,14 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		this.userPersistence = userPersistence;
 	}
 
+	public UserFinder getUserFinder() {
+		return userFinder;
+	}
+
+	public void setUserFinder(UserFinder userFinder) {
+		this.userFinder = userFinder;
+	}
+
 	public UserGroupLocalService getUserGroupLocalService() {
 		return userGroupLocalService;
 	}
@@ -977,6 +1093,14 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	public void setUserGroupPersistence(
 		UserGroupPersistence userGroupPersistence) {
 		this.userGroupPersistence = userGroupPersistence;
+	}
+
+	public UserGroupFinder getUserGroupFinder() {
+		return userGroupFinder;
+	}
+
+	public void setUserGroupFinder(UserGroupFinder userGroupFinder) {
+		this.userGroupFinder = userGroupFinder;
 	}
 
 	public UserGroupRoleLocalService getUserGroupRoleLocalService() {
@@ -1177,6 +1301,10 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 			groupPersistence = GroupUtil.getPersistence();
 		}
 
+		if (groupFinder == null) {
+			groupFinder = GroupFinderUtil.getFinder();
+		}
+
 		if (imageLocalService == null) {
 			imageLocalService = ImageLocalServiceFactory.getImpl();
 		}
@@ -1195,6 +1323,10 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 
 		if (layoutPersistence == null) {
 			layoutPersistence = LayoutUtil.getPersistence();
+		}
+
+		if (layoutFinder == null) {
+			layoutFinder = LayoutFinderUtil.getFinder();
 		}
 
 		if (layoutSetLocalService == null) {
@@ -1241,8 +1373,16 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 			organizationPersistence = OrganizationUtil.getPersistence();
 		}
 
+		if (organizationFinder == null) {
+			organizationFinder = OrganizationFinderUtil.getFinder();
+		}
+
 		if (orgGroupPermissionPersistence == null) {
 			orgGroupPermissionPersistence = OrgGroupPermissionUtil.getPersistence();
+		}
+
+		if (orgGroupPermissionFinder == null) {
+			orgGroupPermissionFinder = OrgGroupPermissionFinderUtil.getFinder();
 		}
 
 		if (orgGroupRolePersistence == null) {
@@ -1273,6 +1413,10 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 			passwordPolicyPersistence = PasswordPolicyUtil.getPersistence();
 		}
 
+		if (passwordPolicyFinder == null) {
+			passwordPolicyFinder = PasswordPolicyFinderUtil.getFinder();
+		}
+
 		if (passwordPolicyRelLocalService == null) {
 			passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getImpl();
 		}
@@ -1299,6 +1443,14 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 
 		if (permissionPersistence == null) {
 			permissionPersistence = PermissionUtil.getPersistence();
+		}
+
+		if (permissionFinder == null) {
+			permissionFinder = PermissionFinderUtil.getFinder();
+		}
+
+		if (permissionUserFinder == null) {
+			permissionUserFinder = PermissionUserFinderUtil.getFinder();
 		}
 
 		if (phoneLocalService == null) {
@@ -1349,6 +1501,10 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 			portletPreferencesPersistence = PortletPreferencesUtil.getPersistence();
 		}
 
+		if (portletPreferencesFinder == null) {
+			portletPreferencesFinder = PortletPreferencesFinderUtil.getFinder();
+		}
+
 		if (regionService == null) {
 			regionService = RegionServiceFactory.getImpl();
 		}
@@ -1377,6 +1533,10 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 			resourcePersistence = ResourceUtil.getPersistence();
 		}
 
+		if (resourceFinder == null) {
+			resourceFinder = ResourceFinderUtil.getFinder();
+		}
+
 		if (resourceCodePersistence == null) {
 			resourceCodePersistence = ResourceCodeUtil.getPersistence();
 		}
@@ -1391,6 +1551,10 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 
 		if (rolePersistence == null) {
 			rolePersistence = RoleUtil.getPersistence();
+		}
+
+		if (roleFinder == null) {
+			roleFinder = RoleFinderUtil.getFinder();
 		}
 
 		if (serviceComponentLocalService == null) {
@@ -1421,6 +1585,10 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 			userPersistence = UserUtil.getPersistence();
 		}
 
+		if (userFinder == null) {
+			userFinder = UserFinderUtil.getFinder();
+		}
+
 		if (userGroupLocalService == null) {
 			userGroupLocalService = UserGroupLocalServiceFactory.getImpl();
 		}
@@ -1431,6 +1599,10 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 
 		if (userGroupPersistence == null) {
 			userGroupPersistence = UserGroupUtil.getPersistence();
+		}
+
+		if (userGroupFinder == null) {
+			userGroupFinder = UserGroupFinderUtil.getFinder();
 		}
 
 		if (userGroupRoleLocalService == null) {
@@ -1505,11 +1677,13 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	protected GroupLocalService groupLocalService;
 	protected GroupService groupService;
 	protected GroupPersistence groupPersistence;
+	protected GroupFinder groupFinder;
 	protected ImageLocalService imageLocalService;
 	protected ImagePersistence imagePersistence;
 	protected LayoutLocalService layoutLocalService;
 	protected LayoutService layoutService;
 	protected LayoutPersistence layoutPersistence;
+	protected LayoutFinder layoutFinder;
 	protected LayoutSetLocalService layoutSetLocalService;
 	protected LayoutSetService layoutSetService;
 	protected LayoutSetPersistence layoutSetPersistence;
@@ -1521,7 +1695,9 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	protected OrganizationLocalService organizationLocalService;
 	protected OrganizationService organizationService;
 	protected OrganizationPersistence organizationPersistence;
+	protected OrganizationFinder organizationFinder;
 	protected OrgGroupPermissionPersistence orgGroupPermissionPersistence;
+	protected OrgGroupPermissionFinder orgGroupPermissionFinder;
 	protected OrgGroupRolePersistence orgGroupRolePersistence;
 	protected OrgLaborLocalService orgLaborLocalService;
 	protected OrgLaborService orgLaborService;
@@ -1529,6 +1705,7 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	protected PasswordPolicyLocalService passwordPolicyLocalService;
 	protected PasswordPolicyService passwordPolicyService;
 	protected PasswordPolicyPersistence passwordPolicyPersistence;
+	protected PasswordPolicyFinder passwordPolicyFinder;
 	protected PasswordPolicyRelLocalService passwordPolicyRelLocalService;
 	protected PasswordPolicyRelPersistence passwordPolicyRelPersistence;
 	protected PasswordTrackerLocalService passwordTrackerLocalService;
@@ -1536,6 +1713,8 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	protected PermissionLocalService permissionLocalService;
 	protected PermissionService permissionService;
 	protected PermissionPersistence permissionPersistence;
+	protected PermissionFinder permissionFinder;
+	protected PermissionUserFinder permissionUserFinder;
 	protected PhoneLocalService phoneLocalService;
 	protected PhoneService phoneService;
 	protected PhonePersistence phonePersistence;
@@ -1548,6 +1727,7 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	protected PortletPersistence portletPersistence;
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
 	protected PortletPreferencesPersistence portletPreferencesPersistence;
+	protected PortletPreferencesFinder portletPreferencesFinder;
 	protected RegionService regionService;
 	protected RegionPersistence regionPersistence;
 	protected ReleaseLocalService releaseLocalService;
@@ -1555,10 +1735,12 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;
+	protected ResourceFinder resourceFinder;
 	protected ResourceCodePersistence resourceCodePersistence;
 	protected RoleLocalService roleLocalService;
 	protected RoleService roleService;
 	protected RolePersistence rolePersistence;
+	protected RoleFinder roleFinder;
 	protected ServiceComponentLocalService serviceComponentLocalService;
 	protected ServiceComponentPersistence serviceComponentPersistence;
 	protected SubscriptionLocalService subscriptionLocalService;
@@ -1566,9 +1748,11 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;
+	protected UserFinder userFinder;
 	protected UserGroupLocalService userGroupLocalService;
 	protected UserGroupService userGroupService;
 	protected UserGroupPersistence userGroupPersistence;
+	protected UserGroupFinder userGroupFinder;
 	protected UserGroupRoleLocalService userGroupRoleLocalService;
 	protected UserGroupRoleService userGroupRoleService;
 	protected UserGroupRolePersistence userGroupRolePersistence;

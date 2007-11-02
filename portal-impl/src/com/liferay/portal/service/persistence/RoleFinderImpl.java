@@ -49,12 +49,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="RoleFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="RoleFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class RoleFinder {
+public class RoleFinderImpl implements RoleFinder {
 
 	public static String COUNT_BY_C_N_D_T =
 		RoleFinder.class.getName() + ".countByC_N_D_T";
@@ -89,9 +89,7 @@ public class RoleFinder {
 	public static String JOIN_BY_ROLES_PERMISSIONS =
 		RoleFinder.class.getName() + ".joinByRolesPermissions";
 
-	public static int countByR_U(long roleId, long userId)
-		throws SystemException {
-
+	public int countByR_U(long roleId, long userId) throws SystemException {
 		String finderSQL = Role.class.getName();
 		String[] finderClassNames = new String[] {
 			Group.class.getName(), Role.class.getName(), "Groups_Roles",
@@ -166,7 +164,7 @@ public class RoleFinder {
 		}
 	}
 
-	public static int countByC_N_D_T(
+	public int countByC_N_D_T(
 			long companyId, String name, String description, Integer type,
 			LinkedHashMap params)
 		throws SystemException {
@@ -225,7 +223,7 @@ public class RoleFinder {
 		}
 	}
 
-	public static List findByUserGroupRole(long userId, long groupId)
+	public List findByUserGroupRole(long userId, long groupId)
 		throws SystemException {
 
 		Session session = null;
@@ -254,7 +252,7 @@ public class RoleFinder {
 		}
 	}
 
-	public static Role findByC_N(long companyId, String name)
+	public Role findByC_N(long companyId, String name)
 		throws NoSuchRoleException, SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -314,15 +312,11 @@ public class RoleFinder {
 		}
 	}
 
-	public static List findByU_G(long userId, long groupId)
-		throws SystemException {
-
+	public List findByU_G(long userId, long groupId) throws SystemException {
 		return findByU_G(userId, new long[] {groupId});
 	}
 
-	public static List findByU_G(long userId, long[] groupIds)
-		throws SystemException {
-
+	public List findByU_G(long userId, long[] groupIds) throws SystemException {
 		Session session = null;
 
 		try {
@@ -352,9 +346,7 @@ public class RoleFinder {
 		}
 	}
 
-	public static List findByU_G(long userId, List groups)
-		throws SystemException {
-
+	public List findByU_G(long userId, List groups) throws SystemException {
 		long[] groupIds = new long[groups.size()];
 
 		for (int i = 0; i < groups.size(); i++) {
@@ -366,7 +358,7 @@ public class RoleFinder {
 		return findByU_G(userId, groupIds);
 	}
 
-	public static List findByC_N_D_T(
+	public List findByC_N_D_T(
 			long companyId, String name, String description, Integer type,
 			LinkedHashMap params, int begin, int end)
 		throws SystemException {
@@ -415,7 +407,7 @@ public class RoleFinder {
 		}
 	}
 
-	public static Map findByC_N_S_P(
+	public Map findByC_N_S_P(
 			long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
@@ -469,7 +461,7 @@ public class RoleFinder {
 		}
 	}
 
-	private static String _getGroupIds(long[] groupIds, String table) {
+	private String _getGroupIds(long[] groupIds, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < groupIds.length; i++) {
@@ -484,13 +476,13 @@ public class RoleFinder {
 		return sm.toString();
 	}
 
-	private static void _setGroupIds(QueryPos qPos, long[] groupIds) {
+	private void _setGroupIds(QueryPos qPos, long[] groupIds) {
 		for (int i = 0; i < groupIds.length; i++) {
 			qPos.add(groupIds[i]);
 		}
 	}
 
-	private static String _getJoin(LinkedHashMap params) {
+	private String _getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -513,7 +505,7 @@ public class RoleFinder {
 		return sm.toString();
 	}
 
-	private static String _getJoin(String key) {
+	private String _getJoin(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permissionsResourceId")) {
@@ -531,7 +523,7 @@ public class RoleFinder {
 		return join;
 	}
 
-	private static String _getWhere(LinkedHashMap params) {
+	private String _getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -554,7 +546,7 @@ public class RoleFinder {
 		return sm.toString();
 	}
 
-	private static String _getWhere(String key) {
+	private String _getWhere(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permissionsResourceId")) {
@@ -572,7 +564,7 @@ public class RoleFinder {
 		return join;
 	}
 
-	private static void _setJoin(QueryPos qPos, LinkedHashMap params) {
+	private void _setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 

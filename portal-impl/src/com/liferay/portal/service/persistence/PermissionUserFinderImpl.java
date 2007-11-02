@@ -39,12 +39,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="PermissionUserFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="PermissionUserFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
  *
  */
-public class PermissionUserFinder {
+public class PermissionUserFinderImpl implements PermissionUserFinder {
 
 	public static String COUNT_BY_ADMIN_ROLE =
 		PermissionUserFinder.class.getName() + ".countByAdminRole";
@@ -103,7 +103,7 @@ public class PermissionUserFinder {
 
 	public static int COUNT_USERS_TYPE_ROLE = 3;
 
-	public static int countByOrgGroupPermissions(
+	public int countByOrgGroupPermissions(
 			long companyId, String name, String primKey, String actionId)
 		throws SystemException {
 
@@ -145,7 +145,7 @@ public class PermissionUserFinder {
 		}
 	}
 
-	public static int countByPermissionAndRole(
+	public int countByPermissionAndRole(
 			long companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator)
@@ -156,40 +156,40 @@ public class PermissionUserFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			int count = countUsers(
+			int count = _countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ADMIN_ROLE), companyId,
 				groupId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator, COUNT_USERS_TYPE_ADMIN);
 
-			count += countUsers(
+			count += _countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_USER_PERMISSION), companyId,
 				groupId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator,
 				COUNT_USERS_TYPE_PERMISSION);
 
-			count += countUsers(
+			count += _countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_GROUP_PERMISSION),
 				companyId, groupId, name, primKey, actionId, firstName,
 				middleName, lastName, emailAddress, andOperator,
 				COUNT_USERS_TYPE_PERMISSION);
 
-			count += countUsers(
+			count += _countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ORG_PERMISSION), companyId,
 				groupId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator,
 				COUNT_USERS_TYPE_PERMISSION);
 
-			count += countUsers(
+			count += _countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_USER_ROLE), companyId,
 				groupId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator, COUNT_USERS_TYPE_ROLE);
 
-			count += countUsers(
+			count += _countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_GROUP_ROLE), companyId,
 				groupId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator, COUNT_USERS_TYPE_ROLE);
 
-			count += countUsers(
+			count += _countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ORG_ROLE), companyId,
 				groupId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator, COUNT_USERS_TYPE_ROLE);
@@ -204,7 +204,7 @@ public class PermissionUserFinder {
 		}
 	}
 
-	public static int countByUserAndOrgGroupPermission(
+	public int countByUserAndOrgGroupPermission(
 			long companyId, String name, String primKey, String actionId,
 			String firstName, String middleName, String lastName,
 			String emailAddress, boolean andOperator)
@@ -215,17 +215,17 @@ public class PermissionUserFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			int count = countUsers(
+			int count = _countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ADMIN_ROLE), companyId,
 				0, name, primKey, actionId, firstName, middleName, lastName,
 				emailAddress, andOperator, COUNT_USERS_TYPE_ADMIN);
 
-			count += countUsers(
+			count += _countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_USER_PERMISSION), companyId,
 				0, name, primKey, actionId, firstName, middleName, lastName,
 				emailAddress, andOperator, COUNT_USERS_TYPE_PERMISSION);
 
-			count += countUsers(
+			count += _countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ORG_GROUP_PERMISSION),
 				companyId, 0, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator,
@@ -241,60 +241,7 @@ public class PermissionUserFinder {
 		}
 	}
 
-	public static int countUsers(
-			Session session, String sql, long companyId, long groupId,
-			String name, String primKey, String actionId, String firstName,
-			String middleName, String lastName, String emailAddress,
-			boolean andOperator, int countUsersType)
-		throws SystemException {
-
-		sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
-
-		SQLQuery q = session.createSQLQuery(sql);
-
-		q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(companyId);
-
-		if (countUsersType != COUNT_USERS_TYPE_ADMIN) {
-			qPos.add(name);
-
-			if (countUsersType == COUNT_USERS_TYPE_PERMISSION) {
-				qPos.add(primKey);
-			}
-			else if (countUsersType == COUNT_USERS_TYPE_ROLE){
-				qPos.add(companyId);
-				qPos.add(groupId);
-			}
-
-			qPos.add(actionId);
-		}
-
-		qPos.add(firstName);
-		qPos.add(firstName);
-		qPos.add(middleName);
-		qPos.add(middleName);
-		qPos.add(lastName);
-		qPos.add(lastName);
-		qPos.add(emailAddress);
-		qPos.add(emailAddress);
-
-		Iterator itr = q.list().iterator();
-
-		if (itr.hasNext()) {
-			Long count = (Long)itr.next();
-
-			if (count != null) {
-				return count.intValue();
-			}
-		}
-
-		return 0;
-	}
-
-	public static List findByPermissionAndRole(
+	public List findByPermissionAndRole(
 			long companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator,
@@ -385,7 +332,7 @@ public class PermissionUserFinder {
 		}
 	}
 
-	public static List findByUserAndOrgGroupPermission(
+	public List findByUserAndOrgGroupPermission(
 			long companyId, String name, String primKey, String actionId,
 			String firstName, String middleName, String lastName,
 			String emailAddress, boolean andOperator, int begin, int end)
@@ -457,6 +404,59 @@ public class PermissionUserFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
+	}
+
+	private int _countUsers(
+			Session session, String sql, long companyId, long groupId,
+			String name, String primKey, String actionId, String firstName,
+			String middleName, String lastName, String emailAddress,
+			boolean andOperator, int countUsersType)
+		throws SystemException {
+
+		sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (countUsersType != COUNT_USERS_TYPE_ADMIN) {
+			qPos.add(name);
+
+			if (countUsersType == COUNT_USERS_TYPE_PERMISSION) {
+				qPos.add(primKey);
+			}
+			else if (countUsersType == COUNT_USERS_TYPE_ROLE){
+				qPos.add(companyId);
+				qPos.add(groupId);
+			}
+
+			qPos.add(actionId);
+		}
+
+		qPos.add(firstName);
+		qPos.add(firstName);
+		qPos.add(middleName);
+		qPos.add(middleName);
+		qPos.add(lastName);
+		qPos.add(lastName);
+		qPos.add(emailAddress);
+		qPos.add(emailAddress);
+
+		Iterator itr = q.list().iterator();
+
+		if (itr.hasNext()) {
+			Long count = (Long)itr.next();
+
+			if (count != null) {
+				return count.intValue();
+			}
+		}
+
+		return 0;
 	}
 
 }

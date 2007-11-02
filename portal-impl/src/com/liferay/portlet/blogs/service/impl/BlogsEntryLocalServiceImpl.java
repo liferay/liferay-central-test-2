@@ -52,7 +52,6 @@ import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
-import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
 import com.liferay.portlet.blogs.util.Indexer;
@@ -297,7 +296,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public int getCategoriesEntriesCount(List categoryIds)
 		throws SystemException {
 
-		return BlogsEntryFinder.countByCategoryIds(categoryIds);
+		return blogsEntryFinder.countByCategoryIds(categoryIds);
 	}
 
 	public List getCompanyEntries(long companyId, int begin, int end)
@@ -363,20 +362,20 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public List getNoAssetEntries() throws SystemException {
-		return BlogsEntryFinder.findByNoAssets();
+		return blogsEntryFinder.findByNoAssets();
 	}
 
 	public List getOrganizationEntries(long organizationId, int begin, int end)
 		throws SystemException {
 
-		return BlogsEntryFinder.findByOrganizationId(
+		return blogsEntryFinder.findByOrganizationId(
 			organizationId, begin, end);
 	}
 
 	public int getOrganizationEntriesCount(long organizationId)
 		throws SystemException {
 
-		return BlogsEntryFinder.countByOrganizationId(
+		return blogsEntryFinder.countByOrganizationId(
 			organizationId);
 	}
 

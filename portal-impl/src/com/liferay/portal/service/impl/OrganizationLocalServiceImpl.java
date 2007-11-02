@@ -52,7 +52,6 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupUtil;
-import com.liferay.portal.service.persistence.OrganizationFinder;
 import com.liferay.portal.service.persistence.OrganizationUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -418,7 +417,7 @@ public class OrganizationLocalServiceImpl
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
 
-		return OrganizationFinder.findByKeywords(
+		return organizationFinder.findByKeywords(
 			companyId, parentOrganizationId, parentOrganizationComparator,
 			keywords, type, regionId, countryId, params, begin, end,
 			obc);
@@ -486,7 +485,7 @@ public class OrganizationLocalServiceImpl
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
 
-		return OrganizationFinder.findByC_PO_N_T_S_C_Z_R_C(
+		return organizationFinder.findByC_PO_N_T_S_C_Z_R_C(
 			companyId, parentOrganizationId, parentOrganizationComparator,
 			name, type, street, city, zip, regionId, countryId, params,
 			andOperator, begin, end, obc);
@@ -522,7 +521,7 @@ public class OrganizationLocalServiceImpl
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
 
-		return OrganizationFinder.countByKeywords(
+		return organizationFinder.countByKeywords(
 			companyId, parentOrganizationId, parentOrganizationComparator,
 			keywords, type, regionId, countryId, params);
 	}
@@ -559,7 +558,7 @@ public class OrganizationLocalServiceImpl
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
 
-		return OrganizationFinder.countByC_PO_N_T_S_C_Z_R_C(
+		return organizationFinder.countByC_PO_N_T_S_C_Z_R_C(
 			companyId, parentOrganizationId, parentOrganizationComparator,
 			name, type, street, city, zip, regionId, countryId, params,
 			andOperator);

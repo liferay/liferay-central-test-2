@@ -43,7 +43,6 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupUtil;
-import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -109,7 +108,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		for (int i = 0; i < systemRoles.length; i++) {
 			try {
-				RoleFinder.findByC_N(companyId, systemRoles[i]);
+				roleFinder.findByC_N(companyId, systemRoles[i]);
 			}
 			catch (NoSuchRoleException nsre) {
 				addRole(0, companyId, systemRoles[i], RoleImpl.TYPE_REGULAR);
@@ -122,7 +121,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		for (int i = 0; i < systemCommunityRoles.length; i++) {
 			try {
-				RoleFinder.findByC_N(companyId, systemCommunityRoles[i]);
+				roleFinder.findByC_N(companyId, systemCommunityRoles[i]);
 			}
 			catch (NoSuchRoleException nsre) {
 				Role role = addRole(
@@ -165,7 +164,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		for (int i = 0; i < systemOrganizationRoles.length; i++) {
 			try {
-				RoleFinder.findByC_N(companyId, systemOrganizationRoles[i]);
+				roleFinder.findByC_N(companyId, systemOrganizationRoles[i]);
 			}
 			catch (NoSuchRoleException nsre) {
 				Role role = addRole(
@@ -240,7 +239,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
-		return RoleFinder.findByC_N_S_P(companyId, name, scope, primKey);
+		return roleFinder.findByC_N_S_P(companyId, name, scope, primKey);
 	}
 
 	public Role getRole(long roleId) throws PortalException, SystemException {
@@ -250,31 +249,31 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public Role getRole(long companyId, String name)
 		throws PortalException, SystemException {
 
-		return RoleFinder.findByC_N(companyId, name);
+		return roleFinder.findByC_N(companyId, name);
 	}
 
 	public List getUserGroupRoles(long userId, long groupId)
 		throws SystemException {
 
-		return RoleFinder.findByUserGroupRole(userId, groupId);
+		return roleFinder.findByUserGroupRole(userId, groupId);
 	}
 
 	public List getUserRelatedRoles(long userId, long groupId)
 		throws SystemException {
 
-		return RoleFinder.findByU_G(userId, groupId);
+		return roleFinder.findByU_G(userId, groupId);
 	}
 
 	public List getUserRelatedRoles(long userId, long[] groupIds)
 		throws SystemException {
 
-		return RoleFinder.findByU_G(userId, groupIds);
+		return roleFinder.findByU_G(userId, groupIds);
 	}
 
 	public List getUserRelatedRoles(long userId, List groups)
 		throws SystemException {
 
-		return RoleFinder.findByU_G(userId, groups);
+		return roleFinder.findByU_G(userId, groups);
 	}
 
 	public List getUserRoles(long userId)
@@ -297,10 +296,10 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			long userId, long companyId, String name, boolean inherited)
 		throws PortalException, SystemException {
 
-		Role role = RoleFinder.findByC_N(companyId, name);
+		Role role = roleFinder.findByC_N(companyId, name);
 
 		if (inherited) {
-			if (RoleFinder.countByR_U(role.getRoleId(), userId) > 0) {
+			if (roleFinder.countByR_U(role.getRoleId(), userId) > 0) {
 				return true;
 			}
 			else {
@@ -350,7 +349,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			LinkedHashMap params, int begin, int end)
 		throws SystemException {
 
-		return RoleFinder.findByC_N_D_T(
+		return roleFinder.findByC_N_D_T(
 			companyId, name, description, type, params, begin, end);
 	}
 
@@ -367,7 +366,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			LinkedHashMap params)
 		throws SystemException {
 
-		return RoleFinder.countByC_N_D_T(
+		return roleFinder.countByC_N_D_T(
 			companyId, name, description, type, params);
 	}
 
@@ -408,7 +407,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 
 		try {
-			Role role = RoleFinder.findByC_N(companyId, name);
+			Role role = roleFinder.findByC_N(companyId, name);
 
 			if (role.getRoleId() != roleId) {
 				throw new DuplicateRoleException();
