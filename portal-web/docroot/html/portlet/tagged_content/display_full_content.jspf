@@ -87,6 +87,7 @@
 		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, languageId, themeDisplay, false, articlePage, xmlRequest);
 
 		if (articleDisplay == null) {
+
 			// No version has been approved yet, the article should not be rendered
 
 			show = false;
