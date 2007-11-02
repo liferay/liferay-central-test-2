@@ -26,9 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.impl.ListTypeImpl;
-import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.base.OrgLaborLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.OrgLaborUtil;
 
 import java.rmi.RemoteException;
 
@@ -53,7 +51,7 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 
 		long orgLaborId = counterLocalService.increment();
 
-		OrgLabor orgLabor = OrgLaborUtil.create(orgLaborId);
+		OrgLabor orgLabor = orgLaborPersistence.create(orgLaborId);
 
 		orgLabor.setOrganizationId(organizationId);
 		orgLabor.setTypeId(typeId);
@@ -72,7 +70,7 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 		orgLabor.setSatOpen(satOpen);
 		orgLabor.setSatClose(satClose);
 
-		OrgLaborUtil.update(orgLabor);
+		orgLaborPersistence.update(orgLabor);
 
 		return orgLabor;
 	}
@@ -80,17 +78,17 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 	public void deleteOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
 
-		OrgLaborUtil.remove(orgLaborId);
+		orgLaborPersistence.remove(orgLaborId);
 	}
 
 	public OrgLabor getOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
 
-		return OrgLaborUtil.findByPrimaryKey(orgLaborId);
+		return orgLaborPersistence.findByPrimaryKey(orgLaborId);
 	}
 
 	public List getOrgLabors(long organizationId) throws SystemException {
-		return OrgLaborUtil.findByOrganizationId(organizationId);
+		return orgLaborPersistence.findByOrganizationId(organizationId);
 	}
 
 	public OrgLabor updateOrgLabor(
@@ -100,7 +98,7 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 			int satClose)
 		throws PortalException, SystemException {
 
-		OrgLabor orgLabor = OrgLaborUtil.findByPrimaryKey(orgLaborId);
+		OrgLabor orgLabor = orgLaborPersistence.findByPrimaryKey(orgLaborId);
 
 		orgLabor.setSunOpen(sunOpen);
 		orgLabor.setSunClose(sunClose);
@@ -117,7 +115,7 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 		orgLabor.setSatOpen(satOpen);
 		orgLabor.setSatClose(satClose);
 
-		OrgLaborUtil.update(orgLabor);
+		orgLaborPersistence.update(orgLabor);
 
 		return orgLabor;
 	}
@@ -126,8 +124,7 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		try {
-			ListTypeServiceUtil.validate(
-				typeId, ListTypeImpl.ORGANIZATION_SERVICE);
+			listTypeService.validate(typeId, ListTypeImpl.ORGANIZATION_SERVICE);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);

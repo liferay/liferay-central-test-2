@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.base.OrganizationServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
@@ -51,7 +50,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		OrganizationLocalServiceUtil.addGroupOrganizations(
+		organizationLocalService.addGroupOrganizations(
 			groupId, organizationIds);
 	}
 
@@ -62,7 +61,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		//PasswordPolicyPermissionUtil.check(
 		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
-		OrganizationLocalServiceUtil.addPasswordPolicyOrganizations(
+		organizationLocalService.addPasswordPolicyOrganizations(
 			passwordPolicyId, organizationIds);
 	}
 
@@ -97,7 +96,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 					"an organization with parent " + parentOrganizationId);
 		}
 
-		return OrganizationLocalServiceUtil.addOrganization(
+		return organizationLocalService.addOrganization(
 			getUserId(), parentOrganizationId, name, type, recursable,
 			regionId, countryId, statusId);
 	}
@@ -107,7 +106,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		checkPermission(organizationId, ActionKeys.DELETE);
 
-		OrganizationLocalServiceUtil.deleteOrganization(organizationId);
+		organizationLocalService.deleteOrganization(organizationId);
 	}
 
 	public Organization getOrganization(long organizationId)
@@ -115,19 +114,19 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		checkPermission(organizationId, ActionKeys.VIEW);
 
-		return OrganizationLocalServiceUtil.getOrganization(organizationId);
+		return organizationLocalService.getOrganization(organizationId);
 	}
 
 	public long getOrganizationId(long companyId, String name)
 		throws PortalException, SystemException {
 
-		return OrganizationLocalServiceUtil.getOrganizationId(companyId, name);
+		return organizationLocalService.getOrganizationId(companyId, name);
 	}
 
 	public List getUserOrganizations(long userId)
 		throws PortalException, SystemException {
 
-		return OrganizationLocalServiceUtil.getUserOrganizations(userId);
+		return organizationLocalService.getUserOrganizations(userId);
 	}
 
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
@@ -136,7 +135,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		OrganizationLocalServiceUtil.setGroupOrganizations(
+		organizationLocalService.setGroupOrganizations(
 			groupId, organizationIds);
 	}
 
@@ -146,7 +145,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		OrganizationLocalServiceUtil.unsetGroupOrganizations(
+		organizationLocalService.unsetGroupOrganizations(
 			groupId, organizationIds);
 	}
 
@@ -157,7 +156,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		//PasswordPolicyPermissionUtil.check(
 		//	getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
 
-		OrganizationLocalServiceUtil.unsetPasswordPolicyOrganizations(
+		organizationLocalService.unsetPasswordPolicyOrganizations(
 			passwordPolicyId, organizationIds);
 	}
 
@@ -185,7 +184,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		checkPermission(organizationId, ActionKeys.UPDATE);
 
-		return OrganizationLocalServiceUtil.updateOrganization(
+		return organizationLocalService.updateOrganization(
 			getUser().getCompanyId(), organizationId, parentOrganizationId,
 			name, type, recursable, regionId, countryId, statusId);
 	}
@@ -195,7 +194,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		checkPermission(organizationId, ActionKeys.UPDATE);
 
-		return OrganizationLocalServiceUtil.updateOrganization(
+		return organizationLocalService.updateOrganization(
 			organizationId, comments);
 	}
 

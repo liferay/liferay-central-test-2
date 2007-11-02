@@ -26,10 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.OrgLabor;
-import com.liferay.portal.service.OrgLaborLocalServiceUtil;
 import com.liferay.portal.service.base.OrgLaborServiceBaseImpl;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
-import com.liferay.portal.service.persistence.OrgLaborUtil;
 
 import java.util.List;
 
@@ -50,7 +48,7 @@ public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 
 		checkPermission(organizationId, ActionKeys.UPDATE);
 
-		return OrgLaborLocalServiceUtil.addOrgLabor(
+		return orgLaborLocalService.addOrgLabor(
 			organizationId, typeId, sunOpen, sunClose, monOpen, monClose,
 			tueOpen, tueClose, wedOpen, wedClose, thuOpen, thuClose, friOpen,
 			friClose, satOpen, satClose);
@@ -59,17 +57,17 @@ public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 	public void deleteOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
 
-		OrgLabor orgLabor = OrgLaborUtil.findByPrimaryKey(orgLaborId);
+		OrgLabor orgLabor = orgLaborPersistence.findByPrimaryKey(orgLaborId);
 
 		checkPermission(orgLabor.getOrganizationId(), ActionKeys.UPDATE);
 
-		OrgLaborLocalServiceUtil.deleteOrgLabor(orgLaborId);
+		orgLaborLocalService.deleteOrgLabor(orgLaborId);
 	}
 
 	public OrgLabor getOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
 
-		OrgLabor orgLabor = OrgLaborUtil.findByPrimaryKey(orgLaborId);
+		OrgLabor orgLabor = orgLaborPersistence.findByPrimaryKey(orgLaborId);
 
 		checkPermission(orgLabor.getOrganizationId(), ActionKeys.VIEW);
 
@@ -81,7 +79,7 @@ public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 
 		checkPermission(organizationId, ActionKeys.VIEW);
 
-		return OrgLaborLocalServiceUtil.getOrgLabors(organizationId);
+		return orgLaborLocalService.getOrgLabors(organizationId);
 	}
 
 	public OrgLabor updateOrgLabor(
@@ -91,11 +89,11 @@ public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 			int satClose)
 		throws PortalException, SystemException {
 
-		OrgLabor orgLabor = OrgLaborUtil.findByPrimaryKey(orgLaborId);
+		OrgLabor orgLabor = orgLaborPersistence.findByPrimaryKey(orgLaborId);
 
 		checkPermission(orgLabor.getOrganizationId(), ActionKeys.UPDATE);
 
-		return OrgLaborLocalServiceUtil.updateOrgLabor(
+		return orgLaborLocalService.updateOrgLabor(
 			orgLaborId, sunOpen, sunClose, monOpen, monClose, tueOpen, tueClose,
 			wedOpen, wedClose, thuOpen, thuClose, friOpen, friClose, satOpen,
 			satClose);
