@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalStructure;
-import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.base.JournalStructureServiceBaseImpl;
 import com.liferay.portlet.journal.service.permission.JournalStructurePermission;
 
@@ -51,7 +50,7 @@ public class JournalStructureServiceImpl
 			getPermissionChecker(), plid, PortletKeys.JOURNAL,
 			ActionKeys.ADD_STRUCTURE);
 
-		return JournalStructureLocalServiceUtil.addStructure(
+		return journalStructureLocalService.addStructure(
 			getUserId(), structureId, autoStructureId, plid, name, description,
 			xsd, addCommunityPermissions, addGuestPermissions);
 	}
@@ -66,7 +65,7 @@ public class JournalStructureServiceImpl
 			getPermissionChecker(), plid, PortletKeys.JOURNAL,
 			ActionKeys.ADD_STRUCTURE);
 
-		return JournalStructureLocalServiceUtil.addStructure(
+		return journalStructureLocalService.addStructure(
 			getUserId(), structureId, autoStructureId, plid, name, description,
 			xsd, communityPermissions, guestPermissions);
 	}
@@ -77,7 +76,7 @@ public class JournalStructureServiceImpl
 		JournalStructurePermission.check(
 			getPermissionChecker(), groupId, structureId, ActionKeys.DELETE);
 
-		JournalStructureLocalServiceUtil.deleteStructure(groupId, structureId);
+		journalStructureLocalService.deleteStructure(groupId, structureId);
 	}
 
 	public JournalStructure getStructure(long groupId, String structureId)
@@ -86,8 +85,7 @@ public class JournalStructureServiceImpl
 		JournalStructurePermission.check(
 			getPermissionChecker(), groupId, structureId, ActionKeys.VIEW);
 
-		return JournalStructureLocalServiceUtil.getStructure(
-			groupId, structureId);
+		return journalStructureLocalService.getStructure(groupId, structureId);
 	}
 
 	public JournalStructure updateStructure(
@@ -98,7 +96,7 @@ public class JournalStructureServiceImpl
 		JournalStructurePermission.check(
 			getPermissionChecker(), groupId, structureId, ActionKeys.UPDATE);
 
-		return JournalStructureLocalServiceUtil.updateStructure(
+		return journalStructureLocalService.updateStructure(
 			groupId, structureId, name, description, xsd);
 	}
 

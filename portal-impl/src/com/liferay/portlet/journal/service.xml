@@ -82,6 +82,18 @@
 			<finder-column name="articleId" />
 			<finder-column name="approved" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.mail" entity="Mail" />
+		<reference package-path="com.liferay.portal" entity="Company" />
+		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
+		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
+		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<entity name="JournalArticleImage" uuid="true" local-service="true" remote-service="false">
 
@@ -121,6 +133,10 @@
 			<finder-column name="elName" />
 			<finder-column name="languageId" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="JournalArticleResource" local-service="true" remote-service="false">
 
@@ -142,6 +158,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="JournalContentSearch" local-service="true" remote-service="false">
 
@@ -197,6 +217,13 @@
 			<finder-column name="portletId" />
 			<finder-column name="articleId" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portal" entity="Layout" />
+		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
 	</entity>
 	<entity name="JournalStructure" uuid="true" local-service="true" remote-service="true">
 
@@ -241,6 +268,12 @@
 			<finder-column name="groupId" />
 			<finder-column name="structureId" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="JournalTemplate" uuid="true" local-service="true" remote-service="true">
 
@@ -294,6 +327,12 @@
 			<finder-column name="groupId" />
 			<finder-column name="structureId" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<exceptions>
 		<exception>ArticleContent</exception>

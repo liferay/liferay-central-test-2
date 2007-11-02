@@ -22,8 +22,35 @@
 
 package com.liferay.portlet.journal.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupLocalServiceFactory;
+import com.liferay.portal.service.GroupService;
+import com.liferay.portal.service.GroupServiceFactory;
+import com.liferay.portal.service.LayoutLocalService;
+import com.liferay.portal.service.LayoutLocalServiceFactory;
+import com.liferay.portal.service.LayoutService;
+import com.liferay.portal.service.LayoutServiceFactory;
+import com.liferay.portal.service.PortletPreferencesLocalService;
+import com.liferay.portal.service.PortletPreferencesLocalServiceFactory;
+import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupFinderUtil;
+import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.GroupUtil;
+import com.liferay.portal.service.persistence.LayoutFinder;
+import com.liferay.portal.service.persistence.LayoutFinderUtil;
+import com.liferay.portal.service.persistence.LayoutPersistence;
+import com.liferay.portal.service.persistence.LayoutUtil;
+import com.liferay.portal.service.persistence.PortletPreferencesFinder;
+import com.liferay.portal.service.persistence.PortletPreferencesFinderUtil;
+import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
+import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
@@ -237,6 +264,113 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		this.journalTemplateFinder = journalTemplateFinder;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
+	public GroupLocalService getGroupLocalService() {
+		return groupLocalService;
+	}
+
+	public void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
+	}
+
+	public GroupService getGroupService() {
+		return groupService;
+	}
+
+	public void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
+	}
+
+	public GroupPersistence getGroupPersistence() {
+		return groupPersistence;
+	}
+
+	public void setGroupPersistence(GroupPersistence groupPersistence) {
+		this.groupPersistence = groupPersistence;
+	}
+
+	public GroupFinder getGroupFinder() {
+		return groupFinder;
+	}
+
+	public void setGroupFinder(GroupFinder groupFinder) {
+		this.groupFinder = groupFinder;
+	}
+
+	public LayoutLocalService getLayoutLocalService() {
+		return layoutLocalService;
+	}
+
+	public void setLayoutLocalService(LayoutLocalService layoutLocalService) {
+		this.layoutLocalService = layoutLocalService;
+	}
+
+	public LayoutService getLayoutService() {
+		return layoutService;
+	}
+
+	public void setLayoutService(LayoutService layoutService) {
+		this.layoutService = layoutService;
+	}
+
+	public LayoutPersistence getLayoutPersistence() {
+		return layoutPersistence;
+	}
+
+	public void setLayoutPersistence(LayoutPersistence layoutPersistence) {
+		this.layoutPersistence = layoutPersistence;
+	}
+
+	public LayoutFinder getLayoutFinder() {
+		return layoutFinder;
+	}
+
+	public void setLayoutFinder(LayoutFinder layoutFinder) {
+		this.layoutFinder = layoutFinder;
+	}
+
+	public PortletPreferencesLocalService getPortletPreferencesLocalService() {
+		return portletPreferencesLocalService;
+	}
+
+	public void setPortletPreferencesLocalService(
+		PortletPreferencesLocalService portletPreferencesLocalService) {
+		this.portletPreferencesLocalService = portletPreferencesLocalService;
+	}
+
+	public PortletPreferencesPersistence getPortletPreferencesPersistence() {
+		return portletPreferencesPersistence;
+	}
+
+	public void setPortletPreferencesPersistence(
+		PortletPreferencesPersistence portletPreferencesPersistence) {
+		this.portletPreferencesPersistence = portletPreferencesPersistence;
+	}
+
+	public PortletPreferencesFinder getPortletPreferencesFinder() {
+		return portletPreferencesFinder;
+	}
+
+	public void setPortletPreferencesFinder(
+		PortletPreferencesFinder portletPreferencesFinder) {
+		this.portletPreferencesFinder = portletPreferencesFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
@@ -305,6 +439,58 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		if (journalTemplateFinder == null) {
 			journalTemplateFinder = JournalTemplateFinderUtil.getFinder();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
+
+		if (groupLocalService == null) {
+			groupLocalService = GroupLocalServiceFactory.getImpl();
+		}
+
+		if (groupService == null) {
+			groupService = GroupServiceFactory.getImpl();
+		}
+
+		if (groupPersistence == null) {
+			groupPersistence = GroupUtil.getPersistence();
+		}
+
+		if (groupFinder == null) {
+			groupFinder = GroupFinderUtil.getFinder();
+		}
+
+		if (layoutLocalService == null) {
+			layoutLocalService = LayoutLocalServiceFactory.getImpl();
+		}
+
+		if (layoutService == null) {
+			layoutService = LayoutServiceFactory.getImpl();
+		}
+
+		if (layoutPersistence == null) {
+			layoutPersistence = LayoutUtil.getPersistence();
+		}
+
+		if (layoutFinder == null) {
+			layoutFinder = LayoutFinderUtil.getFinder();
+		}
+
+		if (portletPreferencesLocalService == null) {
+			portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getImpl();
+		}
+
+		if (portletPreferencesPersistence == null) {
+			portletPreferencesPersistence = PortletPreferencesUtil.getPersistence();
+		}
+
+		if (portletPreferencesFinder == null) {
+			portletPreferencesFinder = PortletPreferencesFinderUtil.getFinder();
+		}
 	}
 
 	protected JournalArticleLocalService journalArticleLocalService;
@@ -324,4 +510,17 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 	protected JournalTemplateService journalTemplateService;
 	protected JournalTemplatePersistence journalTemplatePersistence;
 	protected JournalTemplateFinder journalTemplateFinder;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
+	protected GroupLocalService groupLocalService;
+	protected GroupService groupService;
+	protected GroupPersistence groupPersistence;
+	protected GroupFinder groupFinder;
+	protected LayoutLocalService layoutLocalService;
+	protected LayoutService layoutService;
+	protected LayoutPersistence layoutPersistence;
+	protected LayoutFinder layoutFinder;
+	protected PortletPreferencesLocalService portletPreferencesLocalService;
+	protected PortletPreferencesPersistence portletPreferencesPersistence;
+	protected PortletPreferencesFinder portletPreferencesFinder;
 }

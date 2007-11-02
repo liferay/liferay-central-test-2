@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -31,8 +30,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.DuplicateStructureIdException;
 import com.liferay.portlet.journal.NoSuchStructureException;
@@ -44,9 +41,6 @@ import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.service.base.JournalStructureLocalServiceBaseImpl;
-import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
-import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
-import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 
 import java.io.IOException;
@@ -123,7 +117,7 @@ public class JournalStructureLocalServiceImpl
 
 		// Structure
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		structureId = structureId.trim().toUpperCase();
 		Date now = new Date();
 
@@ -141,12 +135,12 @@ public class JournalStructureLocalServiceImpl
 			groupId, structureId, autoStructureId, name, description, xsd);
 
 		if (autoStructureId) {
-			structureId = String.valueOf(CounterLocalServiceUtil.increment());
+			structureId = String.valueOf(counterLocalService.increment());
 		}
 
-		long id = CounterLocalServiceUtil.increment();
+		long id = counterLocalService.increment();
 
-		JournalStructure structure = JournalStructureUtil.create(id);
+		JournalStructure structure = journalStructurePersistence.create(id);
 
 		structure.setGroupId(groupId);
 		structure.setCompanyId(user.getCompanyId());
@@ -159,7 +153,7 @@ public class JournalStructureLocalServiceImpl
 		structure.setDescription(description);
 		structure.setXsd(xsd);
 
-		JournalStructureUtil.update(structure);
+		journalStructurePersistence.update(structure);
 
 		// Resources
 
@@ -183,7 +177,7 @@ public class JournalStructureLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		JournalStructure structure = JournalStructureUtil.findByG_S(
+		JournalStructure structure = journalStructurePersistence.findByG_S(
 			groupId, structureId);
 
 		addStructureResources(
@@ -195,7 +189,7 @@ public class JournalStructureLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			structure.getCompanyId(), structure.getGroupId(),
 			structure.getUserId(), JournalStructure.class.getName(),
 			structure.getId(), false, addCommunityPermissions,
@@ -207,7 +201,7 @@ public class JournalStructureLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		JournalStructure structure = JournalStructureUtil.findByG_S(
+		JournalStructure structure = journalStructurePersistence.findByG_S(
 			groupId, structureId);
 
 		addStructureResources(
@@ -219,7 +213,7 @@ public class JournalStructureLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			structure.getCompanyId(), structure.getGroupId(),
 			structure.getUserId(), JournalStructure.class.getName(),
 			structure.getId(), communityPermissions, guestPermissions);
@@ -228,7 +222,7 @@ public class JournalStructureLocalServiceImpl
 	public void checkNewLine(long groupId, String structureId)
 		throws PortalException, SystemException {
 
-		JournalStructure structure = JournalStructureUtil.findByG_S(
+		JournalStructure structure = journalStructurePersistence.findByG_S(
 			groupId, structureId);
 
 		String xsd = structure.getXsd();
@@ -241,7 +235,7 @@ public class JournalStructureLocalServiceImpl
 
 			structure.setXsd(xsd);
 
-			JournalStructureUtil.update(structure);
+			journalStructurePersistence.update(structure);
 		}
 	}
 
@@ -250,7 +244,7 @@ public class JournalStructureLocalServiceImpl
 
 		structureId = structureId.trim().toUpperCase();
 
-		JournalStructure structure = JournalStructureUtil.findByG_S(
+		JournalStructure structure = journalStructurePersistence.findByG_S(
 			groupId, structureId);
 
 		deleteStructure(structure);
@@ -259,13 +253,13 @@ public class JournalStructureLocalServiceImpl
 	public void deleteStructure(JournalStructure structure)
 		throws PortalException, SystemException {
 
-		if (JournalArticleUtil.countByG_S(
+		if (journalArticlePersistence.countByG_S(
 				structure.getGroupId(), structure.getStructureId()) > 0) {
 
 			throw new RequiredStructureException();
 		}
 
-		if (JournalTemplateUtil.countByG_S(
+		if (journalTemplatePersistence.countByG_S(
 				structure.getGroupId(), structure.getStructureId()) > 0) {
 
 			throw new RequiredStructureException();
@@ -273,19 +267,19 @@ public class JournalStructureLocalServiceImpl
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			structure.getCompanyId(), JournalStructure.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, structure.getId());
 
 		// Structure
 
-		JournalStructureUtil.remove(structure.getPrimaryKey());
+		journalStructurePersistence.remove(structure.getPrimaryKey());
 	}
 
 	public JournalStructure getStructure(long id)
 		throws PortalException, SystemException {
 
-		return JournalStructureUtil.findByPrimaryKey(id);
+		return journalStructurePersistence.findByPrimaryKey(id);
 	}
 
 	public JournalStructure getStructure(long groupId, String structureId)
@@ -299,7 +293,7 @@ public class JournalStructureLocalServiceImpl
 					"required since 4.2.0. Please update all custom code and " +
 						"data that references structures without a group id.");
 
-			List structures = JournalStructureUtil.findByStructureId(
+			List structures = journalStructurePersistence.findByStructureId(
 				structureId);
 
 			if (structures.size() == 0) {
@@ -312,26 +306,26 @@ public class JournalStructureLocalServiceImpl
 			}
 		}
 		else {
-			return JournalStructureUtil.findByG_S(groupId, structureId);
+			return journalStructurePersistence.findByG_S(groupId, structureId);
 		}
 	}
 
 	public List getStructures() throws SystemException {
-		return JournalStructureUtil.findAll();
+		return journalStructurePersistence.findAll();
 	}
 
 	public List getStructures(long groupId) throws SystemException {
-		return JournalStructureUtil.findByGroupId(groupId);
+		return journalStructurePersistence.findByGroupId(groupId);
 	}
 
 	public List getStructures(long groupId, int begin, int end)
 		throws SystemException {
 
-		return JournalStructureUtil.findByGroupId(groupId, begin, end);
+		return journalStructurePersistence.findByGroupId(groupId, begin, end);
 	}
 
 	public int getStructuresCount(long groupId) throws SystemException {
-		return JournalStructureUtil.countByGroupId(groupId);
+		return journalStructurePersistence.countByGroupId(groupId);
 	}
 
 	public List search(
@@ -389,7 +383,7 @@ public class JournalStructureLocalServiceImpl
 
 		validate(name, description, xsd);
 
-		JournalStructure structure = JournalStructureUtil.findByG_S(
+		JournalStructure structure = journalStructurePersistence.findByG_S(
 			groupId, structureId);
 
 		structure.setModifiedDate(new Date());
@@ -397,7 +391,7 @@ public class JournalStructureLocalServiceImpl
 		structure.setDescription(description);
 		structure.setXsd(xsd);
 
-		JournalStructureUtil.update(structure);
+		journalStructurePersistence.update(structure);
 
 		return structure;
 	}
@@ -416,7 +410,7 @@ public class JournalStructureLocalServiceImpl
 			}
 
 			try {
-				JournalStructureUtil.findByG_S(groupId, structureId);
+				journalStructurePersistence.findByG_S(groupId, structureId);
 
 				throw new DuplicateStructureIdException();
 			}

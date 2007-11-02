@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -32,9 +31,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
@@ -49,8 +46,6 @@ import com.liferay.portlet.journal.TemplateXslException;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.base.JournalTemplateLocalServiceBaseImpl;
-import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
-import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.FileUtil;
 
@@ -133,7 +128,7 @@ public class JournalTemplateLocalServiceImpl
 
 		// Template
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		templateId = templateId.trim().toUpperCase();
 		Date now = new Date();
 
@@ -167,12 +162,12 @@ public class JournalTemplateLocalServiceImpl
 			smallImage, smallImageURL, smallFile, smallBytes);
 
 		if (autoTemplateId) {
-			templateId = String.valueOf(CounterLocalServiceUtil.increment());
+			templateId = String.valueOf(counterLocalService.increment());
 		}
 
-		long id = CounterLocalServiceUtil.increment();
+		long id = counterLocalService.increment();
 
-		JournalTemplate template = JournalTemplateUtil.create(id);
+		JournalTemplate template = journalTemplatePersistence.create(id);
 
 		template.setGroupId(groupId);
 		template.setCompanyId(user.getCompanyId());
@@ -187,10 +182,10 @@ public class JournalTemplateLocalServiceImpl
 		template.setXsl(xsl);
 		template.setLangType(langType);
 		template.setSmallImage(smallImage);
-		template.setSmallImageId(CounterLocalServiceUtil.increment());
+		template.setSmallImageId(counterLocalService.increment());
 		template.setSmallImageURL(smallImageURL);
 
-		JournalTemplateUtil.update(template);
+		journalTemplatePersistence.update(template);
 
 		// Small image
 
@@ -219,7 +214,7 @@ public class JournalTemplateLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		JournalTemplate template = JournalTemplateUtil.findByG_T(
+		JournalTemplate template = journalTemplatePersistence.findByG_T(
 			groupId, templateId);
 
 		addTemplateResources(
@@ -231,7 +226,7 @@ public class JournalTemplateLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			template.getCompanyId(), template.getGroupId(),
 			template.getUserId(), JournalTemplate.class.getName(),
 			template.getId(), false, addCommunityPermissions,
@@ -243,7 +238,7 @@ public class JournalTemplateLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		JournalTemplate template = JournalTemplateUtil.findByG_T(
+		JournalTemplate template = journalTemplatePersistence.findByG_T(
 			groupId, templateId);
 
 		addTemplateResources(template, communityPermissions, guestPermissions);
@@ -254,7 +249,7 @@ public class JournalTemplateLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			template.getCompanyId(), template.getGroupId(),
 			template.getUserId(), JournalTemplate.class.getName(),
 			template.getId(), communityPermissions, guestPermissions);
@@ -263,7 +258,7 @@ public class JournalTemplateLocalServiceImpl
 	public void checkNewLine(long groupId, String templateId)
 		throws PortalException, SystemException {
 
-		JournalTemplate template = JournalTemplateUtil.findByG_T(
+		JournalTemplate template = journalTemplatePersistence.findByG_T(
 			groupId, templateId);
 
 		String xsl = template.getXsl();
@@ -276,7 +271,7 @@ public class JournalTemplateLocalServiceImpl
 
 			template.setXsl(xsl);
 
-			JournalTemplateUtil.update(template);
+			journalTemplatePersistence.update(template);
 		}
 	}
 
@@ -285,7 +280,7 @@ public class JournalTemplateLocalServiceImpl
 
 		templateId = templateId.trim().toUpperCase();
 
-		JournalTemplate template = JournalTemplateUtil.findByG_T(
+		JournalTemplate template = journalTemplatePersistence.findByG_T(
 			groupId, templateId);
 
 		deleteTemplate(template);
@@ -294,7 +289,7 @@ public class JournalTemplateLocalServiceImpl
 	public void deleteTemplate(JournalTemplate template)
 		throws PortalException, SystemException {
 
-		if (JournalArticleUtil.countByG_T(
+		if (journalArticlePersistence.countByG_T(
 				template.getGroupId(), template.getTemplateId()) > 0) {
 
 			throw new RequiredTemplateException();
@@ -306,38 +301,39 @@ public class JournalTemplateLocalServiceImpl
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			template.getCompanyId(), JournalTemplate.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, template.getId());
 
 		// Template
 
-		JournalTemplateUtil.remove(template.getPrimaryKey());
+		journalTemplatePersistence.remove(template.getPrimaryKey());
 	}
 
 	public List getStructureTemplates(long groupId, String structureId)
 		throws SystemException {
 
-		return JournalTemplateUtil.findByG_S(groupId, structureId);
+		return journalTemplatePersistence.findByG_S(groupId, structureId);
 	}
 
 	public List getStructureTemplates(
 			long groupId, String structureId, int begin, int end)
 		throws SystemException {
 
-		return JournalTemplateUtil.findByG_S(groupId, structureId, begin, end);
+		return journalTemplatePersistence.findByG_S(
+			groupId, structureId, begin, end);
 	}
 
 	public int getStructureTemplatesCount(long groupId, String structureId)
 		throws SystemException {
 
-		return JournalTemplateUtil.countByG_S(groupId, structureId);
+		return journalTemplatePersistence.countByG_S(groupId, structureId);
 	}
 
 	public JournalTemplate getTemplate(long id)
 		throws PortalException, SystemException {
 
-		return JournalTemplateUtil.findByPrimaryKey(id);
+		return journalTemplatePersistence.findByPrimaryKey(id);
 	}
 
 	public JournalTemplate getTemplate(long groupId, String templateId)
@@ -351,7 +347,8 @@ public class JournalTemplateLocalServiceImpl
 					"required since 4.2.0. Please update all custom code and " +
 						"data that references templates without a group id.");
 
-			List templates = JournalTemplateUtil.findByTemplateId(templateId);
+			List templates = journalTemplatePersistence.findByTemplateId(
+				templateId);
 
 			if (templates.size() == 0) {
 				throw new NoSuchTemplateException(
@@ -363,26 +360,26 @@ public class JournalTemplateLocalServiceImpl
 			}
 		}
 		else {
-			return JournalTemplateUtil.findByG_T(groupId, templateId);
+			return journalTemplatePersistence.findByG_T(groupId, templateId);
 		}
 	}
 
 	public List getTemplates() throws SystemException {
-		return JournalTemplateUtil.findAll();
+		return journalTemplatePersistence.findAll();
 	}
 
 	public List getTemplates(long groupId) throws SystemException {
-		return JournalTemplateUtil.findByGroupId(groupId);
+		return journalTemplatePersistence.findByGroupId(groupId);
 	}
 
 	public List getTemplates(long groupId, int begin, int end)
 		throws SystemException {
 
-		return JournalTemplateUtil.findByGroupId(groupId, begin, end);
+		return journalTemplatePersistence.findByGroupId(groupId, begin, end);
 	}
 
 	public int getTemplatesCount(long groupId) throws SystemException {
-		return JournalTemplateUtil.countByGroupId(groupId);
+		return journalTemplatePersistence.countByGroupId(groupId);
 	}
 
 	public boolean hasTemplate(long groupId, String templateId)
@@ -479,7 +476,7 @@ public class JournalTemplateLocalServiceImpl
 			name, description, xsl, smallImage, smallImageURL, smallFile,
 			smallBytes);
 
-		JournalTemplate template = JournalTemplateUtil.findByG_T(
+		JournalTemplate template = journalTemplatePersistence.findByG_T(
 			groupId, templateId);
 
 		template.setModifiedDate(new Date());
@@ -502,7 +499,7 @@ public class JournalTemplateLocalServiceImpl
 		template.setSmallImage(smallImage);
 		template.setSmallImageURL(smallImageURL);
 
-		JournalTemplateUtil.update(template);
+		journalTemplatePersistence.update(template);
 
 		// Small image
 
@@ -542,7 +539,7 @@ public class JournalTemplateLocalServiceImpl
 			}
 
 			try {
-				JournalTemplateUtil.findByG_T(groupId, templateId);
+				journalTemplatePersistence.findByG_T(groupId, templateId);
 
 				throw new DuplicateTemplateIdException();
 			}

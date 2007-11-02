@@ -102,6 +102,36 @@ public interface JournalContentSearchLocalService {
 	public void setJournalTemplateFinder(
 		com.liferay.portlet.journal.service.persistence.JournalTemplateFinder journalTemplateFinder);
 
+	public com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence();
+
+	public void setGroupPersistence(
+		com.liferay.portal.service.persistence.GroupPersistence groupPersistence);
+
+	public com.liferay.portal.service.persistence.GroupFinder getGroupFinder();
+
+	public void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder);
+
+	public com.liferay.portal.service.persistence.LayoutPersistence getLayoutPersistence();
+
+	public void setLayoutPersistence(
+		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence);
+
+	public com.liferay.portal.service.persistence.LayoutFinder getLayoutFinder();
+
+	public void setLayoutFinder(
+		com.liferay.portal.service.persistence.LayoutFinder layoutFinder);
+
+	public com.liferay.portal.service.persistence.PortletPreferencesPersistence getPortletPreferencesPersistence();
+
+	public void setPortletPreferencesPersistence(
+		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence);
+
+	public com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder();
+
+	public void setPortletPreferencesFinder(
+		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder);
+
 	public void afterPropertiesSet();
 
 	public void checkContentSearches(long companyId)

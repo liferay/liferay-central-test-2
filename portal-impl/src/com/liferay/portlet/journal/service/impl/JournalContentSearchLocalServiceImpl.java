@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
@@ -31,14 +30,9 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.impl.PortletImpl;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.service.base.JournalContentSearchLocalServiceBaseImpl;
-import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
@@ -69,7 +63,7 @@ public class JournalContentSearchLocalServiceImpl
 
 		List layouts = new ArrayList();
 
-		List groups = GroupLocalServiceUtil.search(
+		List groups = groupLocalService.search(
 			companyId, null, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (int i = 0; i < groups.size(); i++) {
@@ -80,14 +74,14 @@ public class JournalContentSearchLocalServiceImpl
 			deleteOwnerContentSearches(group.getGroupId(), true);
 
 			layouts.addAll(
-				LayoutLocalServiceUtil.getLayouts(group.getGroupId(), true));
+				layoutLocalService.getLayouts(group.getGroupId(), true));
 
 			// Public layouts
 
 			deleteOwnerContentSearches(group.getGroupId(), false);
 
 			layouts.addAll(
-				LayoutLocalServiceUtil.getLayouts(group.getGroupId(), false));
+				layoutLocalService.getLayouts(group.getGroupId(), false));
 		}
 
 		for (int i = 0; i < layouts.size(); i++) {
@@ -105,7 +99,7 @@ public class JournalContentSearchLocalServiceImpl
 
 				if (rootPortletId.equals(PortletKeys.JOURNAL_CONTENT)) {
 					PortletPreferences prefs =
-						PortletPreferencesLocalServiceUtil.getPreferences(
+						portletPreferencesLocalService.getPreferences(
 							layout.getCompanyId(),
 							PortletKeys.PREFS_OWNER_ID_DEFAULT,
 							PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
@@ -129,38 +123,38 @@ public class JournalContentSearchLocalServiceImpl
 			String portletId, String articleId)
 		throws PortalException, SystemException {
 
-		JournalContentSearchUtil.removeByG_P_L_P_A(
+		journalContentSearchPersistence.removeByG_P_L_P_A(
 			groupId, privateLayout, layoutId, portletId, articleId);
 	}
 
 	public void deleteArticleContentSearches(long groupId, String articleId)
 		throws SystemException {
 
-		JournalContentSearchUtil.removeByG_A(groupId, articleId);
+		journalContentSearchPersistence.removeByG_A(groupId, articleId);
 	}
 
 	public void deleteLayoutContentSearches(
 			long groupId, boolean privateLayout, long layoutId)
 		throws SystemException {
 
-		JournalContentSearchUtil.removeByG_P_L(
+		journalContentSearchPersistence.removeByG_P_L(
 			groupId, privateLayout, layoutId);
 	}
 
 	public void deleteOwnerContentSearches(long groupId, boolean privateLayout)
 		throws SystemException {
 
-		JournalContentSearchUtil.removeByG_P(groupId, privateLayout);
+		journalContentSearchPersistence.removeByG_P(groupId, privateLayout);
 	}
 
 	public List getArticleContentSearches() throws SystemException {
-		return JournalContentSearchUtil.findAll();
+		return journalContentSearchPersistence.findAll();
 	}
 
 	public List getArticleContentSearches(long groupId, String articleId)
 		throws SystemException {
 
-		return JournalContentSearchUtil.findByG_A(groupId, articleId);
+		return journalContentSearchPersistence.findByG_A(groupId, articleId);
 	}
 
 	public List getLayoutIds(
@@ -169,7 +163,7 @@ public class JournalContentSearchLocalServiceImpl
 
 		List layoutIds = new ArrayList();
 
-		Iterator itr = JournalContentSearchUtil.findByG_P_A(
+		Iterator itr = journalContentSearchPersistence.findByG_P_A(
 			groupId, privateLayout, articleId).iterator();
 
 		while (itr.hasNext()) {
@@ -186,7 +180,7 @@ public class JournalContentSearchLocalServiceImpl
 			long groupId, boolean privateLayout, String articleId)
 		throws SystemException {
 
-		return JournalContentSearchUtil.countByG_P_A(
+		return journalContentSearchPersistence.countByG_P_A(
 			groupId, privateLayout, articleId);
 	}
 
@@ -205,20 +199,21 @@ public class JournalContentSearchLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (purge) {
-			JournalContentSearchUtil.removeByG_P_L_P(
+			journalContentSearchPersistence.removeByG_P_L_P(
 				groupId, privateLayout, layoutId, portletId);
 		}
 
-		Group group = GroupUtil.findByPrimaryKey(groupId);
+		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		JournalContentSearch contentSearch =
-			JournalContentSearchUtil.fetchByG_P_L_P_A(
+			journalContentSearchPersistence.fetchByG_P_L_P_A(
 				groupId, privateLayout, layoutId, portletId, articleId);
 
 		if (contentSearch == null) {
-			long contentSearchId = CounterLocalServiceUtil.increment();
+			long contentSearchId = counterLocalService.increment();
 
-			contentSearch = JournalContentSearchUtil.create(contentSearchId);
+			contentSearch = journalContentSearchPersistence.create(
+				contentSearchId);
 
 			contentSearch.setGroupId(groupId);
 			contentSearch.setCompanyId(group.getCompanyId());
@@ -228,7 +223,7 @@ public class JournalContentSearchLocalServiceImpl
 			contentSearch.setArticleId(articleId);
 		}
 
-		JournalContentSearchUtil.update(contentSearch);
+		journalContentSearchPersistence.update(contentSearch);
 
 		return contentSearch;
 	}
@@ -238,7 +233,7 @@ public class JournalContentSearchLocalServiceImpl
 			String portletId, String[] articleIds)
 		throws PortalException, SystemException {
 
-		JournalContentSearchUtil.removeByG_P_L_P(
+		journalContentSearchPersistence.removeByG_P_L_P(
 			groupId, privateLayout, layoutId, portletId);
 
 		List contentSearches = new ArrayList();

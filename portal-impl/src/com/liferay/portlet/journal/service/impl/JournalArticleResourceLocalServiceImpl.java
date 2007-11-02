@@ -22,12 +22,10 @@
 
 package com.liferay.portlet.journal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.service.base.JournalArticleResourceLocalServiceBaseImpl;
-import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
 
 import java.util.List;
 
@@ -44,38 +42,39 @@ public class JournalArticleResourceLocalServiceImpl
 	public void deleteArticleResource(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		JournalArticleResourceUtil.removeByG_A(groupId, articleId);
+		journalArticleResourcePersistence.removeByG_A(groupId, articleId);
 	}
 
 	public JournalArticleResource getArticleResource(long articleResourceId)
 		throws PortalException, SystemException {
 
-		return JournalArticleResourceUtil.findByPrimaryKey(articleResourceId);
+		return journalArticleResourcePersistence.findByPrimaryKey(
+			articleResourceId);
 	}
 
 	public long getArticleResourcePrimKey(long groupId, String articleId)
 		throws PortalException, SystemException {
 
 		JournalArticleResource articleResource =
-			JournalArticleResourceUtil.fetchByG_A(groupId, articleId);
+			journalArticleResourcePersistence.fetchByG_A(groupId, articleId);
 
 		if (articleResource == null) {
-			long articleResourcePrimKey = CounterLocalServiceUtil.increment();
+			long articleResourcePrimKey = counterLocalService.increment();
 
-			articleResource = JournalArticleResourceUtil.create(
+			articleResource = journalArticleResourcePersistence.create(
 				articleResourcePrimKey);
 
 			articleResource.setGroupId(groupId);
 			articleResource.setArticleId(articleId);
 
-			JournalArticleResourceUtil.update(articleResource);
+			journalArticleResourcePersistence.update(articleResource);
 		}
 
 		return articleResource.getResourcePrimKey();
 	}
 
 	public List getArticleResources(long groupId) throws SystemException {
-		return JournalArticleResourceUtil.findByGroupId(groupId);
+		return journalArticleResourcePersistence.findByGroupId(groupId);
 	}
 
 }

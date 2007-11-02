@@ -30,10 +30,8 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.base.JournalArticleServiceBaseImpl;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
-import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -67,7 +65,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.JOURNAL,
 			ActionKeys.ADD_ARTICLE);
 
-		return JournalArticleLocalServiceUtil.addArticle(
+		return journalArticleLocalService.addArticle(
 			getUserId(), articleId, autoArticleId, plid, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
@@ -97,7 +95,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.JOURNAL,
 			ActionKeys.ADD_ARTICLE);
 
-		return JournalArticleLocalServiceUtil.addArticle(
+		return journalArticleLocalService.addArticle(
 			getUserId(), articleId, autoArticleId, plid, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
@@ -119,7 +117,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.JOURNAL,
 			ActionKeys.APPROVE_ARTICLE);
 
-		return JournalArticleLocalServiceUtil.approveArticle(
+		return journalArticleLocalService.approveArticle(
 			user.getUserId(), groupId, articleId, version, articleURL, prefs);
 	}
 
@@ -130,7 +128,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		JournalArticlePermission.check(
 			getPermissionChecker(), groupId, articleId, ActionKeys.VIEW);
 
-		return JournalArticleLocalServiceUtil.getArticle(
+		return journalArticleLocalService.getArticle(
 			groupId, articleId, version);
 	}
 
@@ -142,7 +140,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		JournalArticlePermission.check(
 			getPermissionChecker(), groupId, articleId, ActionKeys.VIEW);
 
-		return JournalArticleLocalServiceUtil.getArticleContent(
+		return journalArticleLocalService.getArticleContent(
 			groupId, articleId, languageId, themeDisplay);
 	}
 
@@ -154,7 +152,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		JournalArticlePermission.check(
 			getPermissionChecker(), groupId, articleId, ActionKeys.VIEW);
 
-		return JournalArticleLocalServiceUtil.getArticleContent(
+		return journalArticleLocalService.getArticleContent(
 			groupId, articleId, version, languageId, themeDisplay);
 	}
 
@@ -166,7 +164,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		JournalArticlePermission.check(
 			getPermissionChecker(), groupId, articleId, ActionKeys.DELETE);
 
-		JournalArticleLocalServiceUtil.deleteArticle(
+		journalArticleLocalService.deleteArticle(
 			groupId, articleId, version, articleURL, prefs);
 	}
 
@@ -178,14 +176,15 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		JournalArticlePermission.check(
 			getPermissionChecker(), groupId, articleId, ActionKeys.EXPIRE);
 
-		JournalArticleLocalServiceUtil.expireArticle(
+		journalArticleLocalService.expireArticle(
 			groupId, articleId, version, articleURL, prefs);
 	}
 
 	public void removeArticleLocale(long companyId, String languageId)
 		throws PortalException, SystemException {
 
-		Iterator itr = JournalArticleUtil.findByCompanyId(companyId).iterator();
+		Iterator itr = journalArticlePersistence.findByCompanyId(
+			companyId).iterator();
 
 		while (itr.hasNext()) {
 			JournalArticle article = (JournalArticle)itr.next();
@@ -203,7 +202,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		JournalArticlePermission.check(
 			getPermissionChecker(), groupId, articleId, ActionKeys.UPDATE);
 
-		return JournalArticleLocalServiceUtil.removeArticleLocale(
+		return journalArticleLocalService.removeArticleLocale(
 			groupId, articleId, version, languageId);
 	}
 
@@ -224,7 +223,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		JournalArticlePermission.check(
 			getPermissionChecker(), groupId, articleId, ActionKeys.UPDATE);
 
-		return JournalArticleLocalServiceUtil.updateArticle(
+		return journalArticleLocalService.updateArticle(
 			getUserId(), groupId, articleId, version, incrementVersion, title,
 			description, content, type, structureId, templateId,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
@@ -242,7 +241,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		JournalArticlePermission.check(
 			getPermissionChecker(), groupId, articleId, ActionKeys.UPDATE);
 
-		return JournalArticleLocalServiceUtil.updateContent(
+		return journalArticleLocalService.updateContent(
 			groupId, articleId, version, content);
 	}
 

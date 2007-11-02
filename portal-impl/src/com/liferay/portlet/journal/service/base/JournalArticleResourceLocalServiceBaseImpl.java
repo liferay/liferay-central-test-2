@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.journal.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
@@ -237,6 +242,22 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		this.journalTemplateFinder = journalTemplateFinder;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	public void afterPropertiesSet() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
@@ -305,6 +326,14 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		if (journalTemplateFinder == null) {
 			journalTemplateFinder = JournalTemplateFinderUtil.getFinder();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
 	}
 
 	protected JournalArticleLocalService journalArticleLocalService;
@@ -324,4 +353,6 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 	protected JournalTemplateService journalTemplateService;
 	protected JournalTemplatePersistence journalTemplatePersistence;
 	protected JournalTemplateFinder journalTemplateFinder;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
 }
