@@ -73,4 +73,7 @@ public interface DLLocalService {
 	public void validate(String fileName, InputStream is)
 		throws PortalException;
 
+	public void validate(String fileName, String sourceFileName, InputStream is)
+		throws PortalException;
+
 }

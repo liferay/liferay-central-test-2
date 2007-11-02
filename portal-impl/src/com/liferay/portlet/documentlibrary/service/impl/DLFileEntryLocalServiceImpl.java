@@ -626,6 +626,8 @@ public class DLFileEntryLocalServiceImpl
 			title = name;
 		}
 
+		dlLocalService.validate(name, sourceFileName, is);
+
 		DLFileEntry fileEntry = dlFileEntryPersistence.findByF_N(
 			folderId, name);
 

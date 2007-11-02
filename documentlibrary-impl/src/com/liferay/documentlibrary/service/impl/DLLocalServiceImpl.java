@@ -177,32 +177,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			String properties, InputStream is)
 		throws PortalException, SystemException {
 
-		int pos = fileName.lastIndexOf(StringPool.PERIOD);
-
-		if (pos != -1) {
-			String fileNameExtension =
-				fileName.substring(pos, fileName.length());
-
-			pos = sourceFileName.lastIndexOf(StringPool.PERIOD);
-
-			if (pos == -1) {
-				throw new SourceFileNameException(sourceFileName);
-			}
-			else {
-				String sourceFileNameExtension =
-					sourceFileName.substring(pos, sourceFileName.length());
-
-				if (!fileNameExtension.equalsIgnoreCase(
-						sourceFileNameExtension)) {
-
-					throw new SourceFileNameException(sourceFileName);
-				}
-			}
-		}
-
-		if (is == null) {
-			throw new FileSizeException(fileName);
-		}
+		validate(fileName, sourceFileName, is);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -248,6 +223,37 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		if (!validFileExtension) {
 			throw new FileNameException(fileName);
+		}
+
+		if (is == null) {
+			throw new FileSizeException(fileName);
+		}
+	}
+
+	public void validate(String fileName, String sourceFileName, InputStream is)
+		throws PortalException {
+
+		int pos = fileName.lastIndexOf(StringPool.PERIOD);
+
+		if (pos != -1) {
+			String fileNameExtension =
+				fileName.substring(pos, fileName.length());
+
+			pos = sourceFileName.lastIndexOf(StringPool.PERIOD);
+
+			if (pos == -1) {
+				throw new SourceFileNameException(sourceFileName);
+			}
+			else {
+				String sourceFileNameExtension =
+					sourceFileName.substring(pos, sourceFileName.length());
+
+				if (!fileNameExtension.equalsIgnoreCase(
+						sourceFileNameExtension)) {
+
+					throw new SourceFileNameException(sourceFileName);
+				}
+			}
 		}
 
 		if (is == null) {
