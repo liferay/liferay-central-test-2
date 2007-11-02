@@ -2066,6 +2066,7 @@ post-reply=지점 대답
 post=지점
 posted-as-a-reply-to=as a reply to {0}.
 posted-by=곁에 배치하는
+posted-on-x-in-reply-to-x=Posted on {0} in reply to {1}.
 posted-on-x=Posted on {0}.
 posts=지점
 pound=파운드

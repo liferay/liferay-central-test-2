@@ -1996,6 +1996,7 @@ post-reply=Svara
 post=Skicka
 posted-as-a-reply-to=Skicka som svar till: <a href="{0}">Meddelande #{1}</a> av {2}.
 posted-by=Skickad av
+posted-on-x-in-reply-to-x=Posted on {0} in reply to {1}.
 posted-on-x=Posted on {0}.
 posts=Inlägg
 pound=Pund

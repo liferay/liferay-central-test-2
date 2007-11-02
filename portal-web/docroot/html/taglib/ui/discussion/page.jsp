@@ -33,7 +33,6 @@
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
-<%@ page import="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl" %>
 
 <%
 String formName = namespace + request.getAttribute("liferay-ui:discussion:formName");
@@ -237,14 +236,29 @@ List messages = treeWalker.getMessages();
 				<br />
 
 				<div>
-					<%= LanguageUtil.format(pageContext, "posted-on-x", dateFormatDateTime.format(message.getModifiedDate())) %>
-					<liferay-ui:message key="in-reply-to"/>
-					<%
-						MBMessage parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
-					%>
-					<a href='<%= "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + parentMessage.getMessageId() + ");" %>'>
-					<%= parentMessage.getUserName() %>
-					</a>
+					<c:choose>
+						<c:when test="<%= message.getParentMessageId() == rootMessage.getMessageId() %>">
+							<%= LanguageUtil.format(pageContext, "posted-on-x", dateFormatDateTime.format(message.getModifiedDate())) %>
+						</c:when>
+						<c:otherwise>
+
+							<%
+							MBMessage parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
+
+							StringMaker sm = new StringMaker();
+
+							sm.append("<a href=\"javascript: ");
+							sm.append(renderResponse.getNamespace());
+							sm.append("scrollIntoView('");
+							sm.append(parentMessage.getMessageId());
+							sm.append("');\">");
+							sm.append(parentMessage.getUserName());
+							sm.append("</a>");
+							%>
+
+							<%= LanguageUtil.format(pageContext, "posted-on-x-in-reply-to-x", new Object[] {dateFormatDateTime.format(message.getModifiedDate()), sm.toString()}) %>
+						</c:otherwise>
+					</c:choose>
 				</div>
 
 				<br />

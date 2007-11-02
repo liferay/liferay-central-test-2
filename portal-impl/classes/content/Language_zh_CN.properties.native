@@ -2067,6 +2067,7 @@ post-reply=回复
 post=贴入
 posted-as-a-reply-to=作为回复: <a href="{0}">Message #{1}</a> by {2}.
 posted-by=创建者
+posted-on-x-in-reply-to-x=Posted on {0} in reply to {1}.
 posted-on-x=Posted on {0}.
 posts=帖子
 pound=磅

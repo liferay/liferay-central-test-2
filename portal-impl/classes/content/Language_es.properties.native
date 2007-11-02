@@ -2067,6 +2067,7 @@ post-reply=Responder
 post=Mensaje
 posted-as-a-reply-to=en respuesta a {0}.
 posted-by=Enviado por
+posted-on-x-in-reply-to-x=Posted on {0} in reply to {1}.
 posted-on-x=Posted on {0}.
 posts=Mensajes
 pound=Libra

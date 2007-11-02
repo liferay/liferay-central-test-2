@@ -2067,6 +2067,7 @@ post-reply=Plaats antwoord
 post=Plaats
 posted-as-a-reply-to=als een antwoord op {0}.
 posted-by=Geplaatst door
+posted-on-x-in-reply-to-x=Posted on {0} in reply to {1}.
 posted-on-x=Posted on {0}.
 posts=berichten
 pound=Pond

@@ -2067,6 +2067,7 @@ post-reply=Antwort posten
 post=Posten
 posted-as-a-reply-to=als Antwort auf {0}.
 posted-by=Gepostet von
+posted-on-x-in-reply-to-x=Posted on {0} in reply to {1}.
 posted-on-x=Posted on {0}.
 posts=Nachrichten
 pound=Pfund

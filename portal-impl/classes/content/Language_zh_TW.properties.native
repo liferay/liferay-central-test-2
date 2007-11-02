@@ -2067,6 +2067,7 @@ post-reply=崗位回復
 post=貼入
 posted-as-a-reply-to=as a reply to {0}.
 posted-by=貼入
+posted-on-x-in-reply-to-x=Posted on {0} in reply to {1}.
 posted-on-x=Posted on {0}.
 posts=崗位
 pound=磅

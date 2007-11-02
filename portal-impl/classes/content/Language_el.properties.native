@@ -2065,6 +2065,7 @@ post-reply=Μετα απάντηση
 post=Αποστολή
 posted-as-a-reply-to=as a reply to {0}.
 posted-by=Ταχυδρομημένος από
+posted-on-x-in-reply-to-x=Posted on {0} in reply to {1}.
 posted-on-x=Posted on {0}.
 posts=Θέσεις
 pound=λίρα

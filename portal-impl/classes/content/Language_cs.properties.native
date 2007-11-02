@@ -1017,6 +1017,7 @@ post-new-thread=Odešli nové vlákno
 post=Odešli
 posted-as-a-reply-to=as a reply to {0}.
 posted-by=Odesláno od
+posted-on-x-in-reply-to-x=Posted on {0} in reply to {1}.
 posted-on-x=Posted on {0}.
 pound=Pound
 preferences=Preference

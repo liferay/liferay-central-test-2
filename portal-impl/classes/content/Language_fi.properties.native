@@ -1937,6 +1937,7 @@ post-reply=Vastaa
 post=Post
 posted-as-a-reply-to=vastauksena {0}:aan.
 posted-by=Lähettäjä
+posted-on-x-in-reply-to-x=Posted on {0} in reply to {1}.
 posted-on-x=Posted on {0}.
 posts=Viestejä
 pound=Pauna

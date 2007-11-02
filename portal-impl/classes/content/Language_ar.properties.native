@@ -1755,6 +1755,7 @@ post-reply=أرسل رد
 post=أرسل
 posted-as-a-reply-to=على شكل رد على {0}.
 posted-by=مرسلة من
+posted-on-x-in-reply-to-x=Posted on {0} in reply to {1}.
 posted-on-x=Posted on {0}.
 posts=المشاركات
 pound=رطل
