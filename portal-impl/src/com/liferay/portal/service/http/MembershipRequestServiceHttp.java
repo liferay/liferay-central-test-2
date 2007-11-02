@@ -110,7 +110,7 @@ public class MembershipRequestServiceHttp {
 		}
 	}
 
-	public static void deleteByGroupIdAndStatus(HttpPrincipal httpPrincipal,
+	public static void deleteMembershipRequests(HttpPrincipal httpPrincipal,
 		long groupId, int statusId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -118,7 +118,7 @@ public class MembershipRequestServiceHttp {
 			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = new IntegerWrapper(statusId);
 			MethodWrapper methodWrapper = new MethodWrapper(MembershipRequestServiceUtil.class.getName(),
-					"deleteByGroupIdAndStatus",
+					"deleteMembershipRequests",
 					new Object[] { paramObj0, paramObj1 });
 
 			try {

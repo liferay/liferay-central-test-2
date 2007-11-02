@@ -284,7 +284,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		// Restricted number of petitions
 
 		if (tabs1.equals("communities-owned")) {
-			int pendingRequests = MembershipRequestLocalServiceUtil.count(group.getGroupId(), MembershipRequestImpl.STATUS_PENDING);
+			int pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestImpl.STATUS_PENDING);
 
 			if (group.getType().equals(GroupImpl.TYPE_COMMUNITY_RESTRICTED)) {
 				row.addText(Integer.toString(pendingRequests));

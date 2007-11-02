@@ -252,6 +252,29 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceFactory;
+import com.liferay.portlet.documentlibrary.service.DLFolderService;
+import com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceFactory;
+import com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence;
+import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory;
+import com.liferay.portlet.messageboards.service.MBMessageService;
+import com.liferay.portlet.messageboards.service.MBMessageServiceFactory;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -1216,6 +1239,101 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
+	public DLFolderLocalService getDLFolderLocalService() {
+		return dlFolderLocalService;
+	}
+
+	public void setDLFolderLocalService(
+		DLFolderLocalService dlFolderLocalService) {
+		this.dlFolderLocalService = dlFolderLocalService;
+	}
+
+	public DLFolderService getDLFolderService() {
+		return dlFolderService;
+	}
+
+	public void setDLFolderService(DLFolderService dlFolderService) {
+		this.dlFolderService = dlFolderService;
+	}
+
+	public DLFolderPersistence getDLFolderPersistence() {
+		return dlFolderPersistence;
+	}
+
+	public void setDLFolderPersistence(DLFolderPersistence dlFolderPersistence) {
+		this.dlFolderPersistence = dlFolderPersistence;
+	}
+
+	public JournalContentSearchLocalService getJournalContentSearchLocalService() {
+		return journalContentSearchLocalService;
+	}
+
+	public void setJournalContentSearchLocalService(
+		JournalContentSearchLocalService journalContentSearchLocalService) {
+		this.journalContentSearchLocalService = journalContentSearchLocalService;
+	}
+
+	public JournalContentSearchPersistence getJournalContentSearchPersistence() {
+		return journalContentSearchPersistence;
+	}
+
+	public void setJournalContentSearchPersistence(
+		JournalContentSearchPersistence journalContentSearchPersistence) {
+		this.journalContentSearchPersistence = journalContentSearchPersistence;
+	}
+
+	public MBMessageLocalService getMBMessageLocalService() {
+		return mbMessageLocalService;
+	}
+
+	public void setMBMessageLocalService(
+		MBMessageLocalService mbMessageLocalService) {
+		this.mbMessageLocalService = mbMessageLocalService;
+	}
+
+	public MBMessageService getMBMessageService() {
+		return mbMessageService;
+	}
+
+	public void setMBMessageService(MBMessageService mbMessageService) {
+		this.mbMessageService = mbMessageService;
+	}
+
+	public MBMessagePersistence getMBMessagePersistence() {
+		return mbMessagePersistence;
+	}
+
+	public void setMBMessagePersistence(
+		MBMessagePersistence mbMessagePersistence) {
+		this.mbMessagePersistence = mbMessagePersistence;
+	}
+
+	public MBMessageFinder getMBMessageFinder() {
+		return mbMessageFinder;
+	}
+
+	public void setMBMessageFinder(MBMessageFinder mbMessageFinder) {
+		this.mbMessageFinder = mbMessageFinder;
+	}
+
+	public RatingsStatsLocalService getRatingsStatsLocalService() {
+		return ratingsStatsLocalService;
+	}
+
+	public void setRatingsStatsLocalService(
+		RatingsStatsLocalService ratingsStatsLocalService) {
+		this.ratingsStatsLocalService = ratingsStatsLocalService;
+	}
+
+	public RatingsStatsPersistence getRatingsStatsPersistence() {
+		return ratingsStatsPersistence;
+	}
+
+	public void setRatingsStatsPersistence(
+		RatingsStatsPersistence ratingsStatsPersistence) {
+		this.ratingsStatsPersistence = ratingsStatsPersistence;
+	}
+
 	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
@@ -1668,6 +1786,50 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 		if (counterService == null) {
 			counterService = CounterServiceFactory.getImpl();
 		}
+
+		if (dlFolderLocalService == null) {
+			dlFolderLocalService = DLFolderLocalServiceFactory.getImpl();
+		}
+
+		if (dlFolderService == null) {
+			dlFolderService = DLFolderServiceFactory.getImpl();
+		}
+
+		if (dlFolderPersistence == null) {
+			dlFolderPersistence = DLFolderUtil.getPersistence();
+		}
+
+		if (journalContentSearchLocalService == null) {
+			journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getImpl();
+		}
+
+		if (journalContentSearchPersistence == null) {
+			journalContentSearchPersistence = JournalContentSearchUtil.getPersistence();
+		}
+
+		if (mbMessageLocalService == null) {
+			mbMessageLocalService = MBMessageLocalServiceFactory.getImpl();
+		}
+
+		if (mbMessageService == null) {
+			mbMessageService = MBMessageServiceFactory.getImpl();
+		}
+
+		if (mbMessagePersistence == null) {
+			mbMessagePersistence = MBMessageUtil.getPersistence();
+		}
+
+		if (mbMessageFinder == null) {
+			mbMessageFinder = MBMessageFinderUtil.getFinder();
+		}
+
+		if (ratingsStatsLocalService == null) {
+			ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getImpl();
+		}
+
+		if (ratingsStatsPersistence == null) {
+			ratingsStatsPersistence = RatingsStatsUtil.getPersistence();
+		}
 	}
 
 	protected AccountLocalService accountLocalService;
@@ -1783,4 +1945,15 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 	protected WebsitePersistence websitePersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected DLFolderLocalService dlFolderLocalService;
+	protected DLFolderService dlFolderService;
+	protected DLFolderPersistence dlFolderPersistence;
+	protected JournalContentSearchLocalService journalContentSearchLocalService;
+	protected JournalContentSearchPersistence journalContentSearchPersistence;
+	protected MBMessageLocalService mbMessageLocalService;
+	protected MBMessageService mbMessageService;
+	protected MBMessagePersistence mbMessagePersistence;
+	protected MBMessageFinder mbMessageFinder;
+	protected RatingsStatsLocalService ratingsStatsLocalService;
+	protected RatingsStatsPersistence ratingsStatsPersistence;
 }

@@ -702,16 +702,16 @@ public class MembershipRequestLocalServiceUtil {
 		return membershipRequestLocalService.getMembershipRequest(membershipRequestId);
 	}
 
-	public static void deleteByGroupId(long groupId)
+	public static void deleteMembershipRequests(long groupId)
 		throws com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-		membershipRequestLocalService.deleteByGroupId(groupId);
+		membershipRequestLocalService.deleteMembershipRequests(groupId);
 	}
 
-	public static void deleteByGroupIdAndStatus(long groupId, int statusId)
+	public static void deleteMembershipRequests(long groupId, int statusId)
 		throws com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-		membershipRequestLocalService.deleteByGroupIdAndStatus(groupId, statusId);
+		membershipRequestLocalService.deleteMembershipRequests(groupId, statusId);
 	}
 
 	public static java.util.List search(long groupId, int status, int begin,
@@ -721,11 +721,11 @@ public class MembershipRequestLocalServiceUtil {
 		return membershipRequestLocalService.search(groupId, status, begin, end);
 	}
 
-	public static int count(long groupId, int status)
+	public static int searchCount(long groupId, int status)
 		throws com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 
-		return membershipRequestLocalService.count(groupId, status);
+		return membershipRequestLocalService.searchCount(groupId, status);
 	}
 
 	public static void updateStatus(long replierUserId,

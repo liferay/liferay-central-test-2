@@ -677,6 +677,66 @@ public class LayoutLocalServiceUtil {
 		layoutLocalService.setWebsitePersistence(websitePersistence);
 	}
 
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence getDLFolderPersistence() {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getDLFolderPersistence();
+	}
+
+	public static void setDLFolderPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence) {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.setDLFolderPersistence(dlFolderPersistence);
+	}
+
+	public static com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence getJournalContentSearchPersistence() {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getJournalContentSearchPersistence();
+	}
+
+	public static void setJournalContentSearchPersistence(
+		com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence) {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.setJournalContentSearchPersistence(journalContentSearchPersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence() {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getMBMessagePersistence();
+	}
+
+	public static void setMBMessagePersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.setMBMessagePersistence(mbMessagePersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFinder getMBMessageFinder() {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getMBMessageFinder();
+	}
+
+	public static void setMBMessageFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.setMBMessageFinder(mbMessageFinder);
+	}
+
+	public static com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence getRatingsStatsPersistence() {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getRatingsStatsPersistence();
+	}
+
+	public static void setRatingsStatsPersistence(
+		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence) {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+		layoutLocalService.setRatingsStatsPersistence(ratingsStatsPersistence);
+	}
+
 	public static void afterPropertiesSet() {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 		layoutLocalService.afterPropertiesSet();

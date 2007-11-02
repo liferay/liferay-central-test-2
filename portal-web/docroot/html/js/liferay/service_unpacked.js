@@ -356,9 +356,9 @@ Liferay.Service.Portal.MembershipRequest = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	deleteByGroupIdAndStatus: function(params, callback) {
+	deleteMembershipRequests: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteByGroupIdAndStatus";
+		params.serviceMethodName = "deleteMembershipRequests";
 
 		return Liferay.Service.ajax(params, callback);
 	},

@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.base.GroupServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
@@ -52,7 +51,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		PortalPermissionUtil.check(
 			getPermissionChecker(), ActionKeys.ADD_COMMUNITY);
 
-		return GroupLocalServiceUtil.addGroup(
+		return groupLocalService.addGroup(
 			getUserId(), null, 0, name, description, type, friendlyURL, active);
 	}
 
@@ -64,7 +63,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), liveGroupId, ActionKeys.UPDATE);
 
-		return GroupLocalServiceUtil.addGroup(
+		return groupLocalService.addGroup(
 			getUserId(), null, 0, liveGroupId, name, description, type,
 			friendlyURL, active);
 	}
@@ -75,7 +74,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		RolePermissionUtil.check(
 			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		GroupLocalServiceUtil.addRoleGroups(roleId, groupIds);
+		groupLocalService.addRoleGroups(roleId, groupIds);
 	}
 
 	public void deleteGroup(long groupId)
@@ -84,37 +83,37 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.DELETE);
 
-		GroupLocalServiceUtil.deleteGroup(groupId);
+		groupLocalService.deleteGroup(groupId);
 	}
 
 	public Group getGroup(long groupId)
 		throws PortalException, SystemException {
 
-		return GroupLocalServiceUtil.getGroup(groupId);
+		return groupLocalService.getGroup(groupId);
 	}
 
 	public Group getGroup(long companyId, String name)
 		throws PortalException, SystemException {
 
-		return GroupLocalServiceUtil.getGroup(companyId, name);
+		return groupLocalService.getGroup(companyId, name);
 	}
 
 	public List getOrganizationsGroups(List organizations)
 		throws PortalException, SystemException {
 
-		return GroupLocalServiceUtil.getOrganizationsGroups(organizations);
+		return groupLocalService.getOrganizationsGroups(organizations);
 	}
 
 	public List getUserGroupsGroups(List userGroups)
 		throws PortalException, SystemException {
 
-		return GroupLocalServiceUtil.getUserGroupsGroups(userGroups);
+		return groupLocalService.getUserGroupsGroups(userGroups);
 	}
 
 	public boolean hasUserGroup(long userId, long groupId)
 		throws SystemException {
 
-		return GroupLocalServiceUtil.hasUserGroup(userId, groupId);
+		return groupLocalService.hasUserGroup(userId, groupId);
 	}
 
 	public List search(
@@ -124,7 +123,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 		LinkedHashMap paramsObj = MapUtil.toLinkedHashMap(params);
 
-		return GroupLocalServiceUtil.search(
+		return groupLocalService.search(
 			companyId, name, description, paramsObj, begin, end);
 	}
 
@@ -134,7 +133,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 		LinkedHashMap paramsObj = MapUtil.toLinkedHashMap(params);
 
-		return GroupLocalServiceUtil.searchCount(
+		return groupLocalService.searchCount(
 			companyId, name, description, paramsObj);
 	}
 
@@ -144,7 +143,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		RolePermissionUtil.check(
 			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		GroupLocalServiceUtil.setRoleGroups(roleId, groupIds);
+		groupLocalService.setRoleGroups(roleId, groupIds);
 	}
 
 	public void unsetRoleGroups(long roleId, long[] groupIds)
@@ -153,7 +152,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		RolePermissionUtil.check(
 			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		GroupLocalServiceUtil.unsetRoleGroups(roleId, groupIds);
+		groupLocalService.unsetRoleGroups(roleId, groupIds);
 	}
 
 	public Group updateGroup(
@@ -164,7 +163,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		return GroupLocalServiceUtil.updateGroup(
+		return groupLocalService.updateGroup(
 			groupId, name, description, type, friendlyURL, active);
 	}
 
@@ -174,7 +173,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		return GroupLocalServiceUtil.updateGroup(groupId, typeSettings);
+		return groupLocalService.updateGroup(groupId, typeSettings);
 	}
 
 }

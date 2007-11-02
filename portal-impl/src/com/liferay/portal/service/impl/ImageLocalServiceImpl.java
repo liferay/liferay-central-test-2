@@ -27,7 +27,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.base.ImageLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.ImageUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -43,7 +42,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 	public void deleteImage(long imageId) throws SystemException {
 		try {
 			if (imageId > 0) {
-				ImageUtil.remove(imageId);
+				imagePersistence.remove(imageId);
 			}
 		}
 		catch (NoSuchImageException nsie) {
@@ -53,19 +52,19 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 	public Image getImage(long imageId)
 		throws PortalException, SystemException {
 
-		return ImageUtil.findByPrimaryKey(imageId);
+		return imagePersistence.findByPrimaryKey(imageId);
 	}
 
 	public List getImages() throws SystemException {
-		return ImageUtil.findAll();
+		return imagePersistence.findAll();
 	}
 
 	public List getImages(int begin, int end) throws SystemException {
-		return ImageUtil.findAll(begin, end);
+		return imagePersistence.findAll(begin, end);
 	}
 
 	public List getImagesBySize(int size) throws SystemException {
-		return ImageUtil.findBySize(size);
+		return imagePersistence.findBySize(size);
 	}
 
 	public Image updateImage(
@@ -73,10 +72,10 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 			int size)
 		throws SystemException {
 
-		Image image = ImageUtil.fetchByPrimaryKey(imageId);
+		Image image = imagePersistence.fetchByPrimaryKey(imageId);
 
 		if (image == null) {
-			image = ImageUtil.create(imageId);
+			image = imagePersistence.create(imageId);
 		}
 
 		image.setModifiedDate(new Date());
@@ -86,7 +85,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		image.setWidth(width);
 		image.setSize(size);
 
-		ImageUtil.update(image);
+		imagePersistence.update(image);
 
 		return image;
 	}

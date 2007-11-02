@@ -27,8 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.ThemeImpl;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutSetServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 
@@ -49,8 +47,7 @@ public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
-		LayoutSetLocalServiceUtil.updateLogo(
-			groupId, privateLayout, logo, file);
+		layoutSetLocalService.updateLogo(groupId, privateLayout, logo, file);
 	}
 
 	public LayoutSet updateLookAndFeel(
@@ -61,10 +58,10 @@ public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
-		PluginSettingLocalServiceUtil.checkPermission(
+		pluginSettingLocalService.checkPermission(
 			getUserId(), themeId, ThemeImpl.PLUGIN_TYPE);
 
-		return LayoutSetLocalServiceUtil.updateLookAndFeel(
+		return layoutSetLocalService.updateLookAndFeel(
 			groupId, privateLayout, themeId, colorSchemeId, css, wapTheme);
 	}
 
@@ -75,7 +72,7 @@ public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
-		return LayoutSetLocalServiceUtil.updateVirtualHost(
+		return layoutSetLocalService.updateVirtualHost(
 			groupId, privateLayout, virtualHost);
 	}
 

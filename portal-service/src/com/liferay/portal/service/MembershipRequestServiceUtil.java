@@ -58,11 +58,11 @@ public class MembershipRequestServiceUtil {
 		return membershipRequestService.addMembershipRequest(groupId, comments);
 	}
 
-	public static void deleteByGroupIdAndStatus(long groupId, int statusId)
+	public static void deleteMembershipRequests(long groupId, int statusId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MembershipRequestService membershipRequestService = MembershipRequestServiceFactory.getService();
-		membershipRequestService.deleteByGroupIdAndStatus(groupId, statusId);
+		membershipRequestService.deleteMembershipRequests(groupId, statusId);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest getMembershipRequest(

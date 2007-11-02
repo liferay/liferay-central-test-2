@@ -312,6 +312,31 @@ public interface LayoutLocalService {
 	public void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence getDLFolderPersistence();
+
+	public void setDLFolderPersistence(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence getJournalContentSearchPersistence();
+
+	public void setJournalContentSearchPersistence(
+		com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence();
+
+	public void setMBMessagePersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessageFinder getMBMessageFinder();
+
+	public void setMBMessageFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder);
+
+	public com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence getRatingsStatsPersistence();
+
+	public void setRatingsStatsPersistence(
+		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,

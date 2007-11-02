@@ -85,7 +85,7 @@ searchContainer.setHeaderNames(headerNames);
 
 List results = MembershipRequestLocalServiceUtil.search(group.getGroupId(), statusId, searchContainer.getStart(), searchContainer.getEnd());
 
-int total = MembershipRequestLocalServiceUtil.count(group.getGroupId(), statusId);
+int total = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), statusId);
 
 searchContainer.setTotal(total);
 

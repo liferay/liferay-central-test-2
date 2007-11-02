@@ -22,8 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.MembershipRequestCommentsException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -38,14 +36,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.MembershipRequestImpl;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.GroupServiceUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.base.MembershipRequestLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.MembershipRequestUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.RoleNames;
@@ -60,8 +51,8 @@ import java.util.List;
 import javax.mail.internet.InternetAddress;
 
 /**
- * <a href="MembershipRequestLocalServiceImpl.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="MembershipRequestLocalServiceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Jorge Ferrer
  *
@@ -70,27 +61,27 @@ public class MembershipRequestLocalServiceImpl
 	extends MembershipRequestLocalServiceBaseImpl {
 
 	public MembershipRequest addMembershipRequest(
-		long userId, long groupId, String comments)
+			long userId, long groupId, String comments)
 		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		Date now = new Date();
 
 		validate(comments);
 
-		User user = UserUtil.findByPrimaryKey(userId);
-		Date now = new Date();
-
-		long requestId = CounterLocalServiceUtil.increment();
+		long membershipRequestId = counterLocalService.increment();
 
 		MembershipRequest membershipRequest =
-			MembershipRequestUtil.create(requestId);
+			membershipRequestPersistence.create(membershipRequestId);
 
 		membershipRequest.setCompanyId(user.getCompanyId());
 		membershipRequest.setUserId(userId);
+		membershipRequest.setCreateDate(now);
 		membershipRequest.setGroupId(groupId);
 		membershipRequest.setComments(comments);
-		membershipRequest.setCreateDate(now);
 		membershipRequest.setStatusId(MembershipRequestImpl.STATUS_PENDING);
 
-		MembershipRequestUtil.update(membershipRequest);
+		membershipRequestPersistence.update(membershipRequest);
 
 		notifyCommunityAdministrators(membershipRequest);
 
@@ -99,53 +90,56 @@ public class MembershipRequestLocalServiceImpl
 
 	public MembershipRequest getMembershipRequest(long membershipRequestId)
 		throws PortalException, SystemException {
-		return MembershipRequestUtil.findByPrimaryKey(membershipRequestId);
+
+		return membershipRequestPersistence.findByPrimaryKey(
+			membershipRequestId);
 	}
 
-	public void deleteByGroupId(long groupId) throws SystemException {
-		MembershipRequestUtil.removeByGroupId(groupId);
+	public void deleteMembershipRequests(long groupId) throws SystemException {
+		membershipRequestPersistence.removeByGroupId(groupId);
 	}
 
-	public void deleteByGroupIdAndStatus(long groupId, int statusId)
+	public void deleteMembershipRequests(long groupId, int statusId)
 		throws SystemException {
-		MembershipRequestUtil.removeByG_S(groupId, statusId);
+
+		membershipRequestPersistence.removeByG_S(groupId, statusId);
 	}
 
 	public List search(long groupId, int status, int begin, int end)
 		throws SystemException {
-		return MembershipRequestUtil.findByG_S(groupId, status, begin, end);
+
+		return membershipRequestPersistence.findByG_S(
+			groupId, status, begin, end);
 	}
 
-	public int count(long groupId, int status)
-		throws SystemException {
-		return MembershipRequestUtil.countByG_S(groupId, status);
+	public int searchCount(long groupId, int status) throws SystemException {
+		return membershipRequestPersistence.countByG_S(groupId, status);
 	}
 
 	public void updateStatus(
-		long replierUserId, long membershipRequestId, String replyComments,
-		int statusId)
+			long replierUserId, long membershipRequestId, String replyComments,
+			int statusId)
 		throws PortalException, SystemException {
-
-		MembershipRequest membershipRequest =
-			getMembershipRequest(membershipRequestId);
 
 		validate(replyComments);
 
-		Date now = new Date();
+		MembershipRequest membershipRequest =
+			membershipRequestPersistence.findByPrimaryKey(
+				membershipRequestId);
+
+		membershipRequest.setReplyComments(replyComments);
+		membershipRequest.setReplyDate(new Date());
+		membershipRequest.setReplierUserId(replierUserId);
+		membershipRequest.setStatusId(statusId);
+
+		membershipRequestPersistence.update(membershipRequest);
 
 		if (statusId == MembershipRequestImpl.STATUS_APPROVED) {
 			long[] addUserIds = new long[] {membershipRequest.getUserId()};
 
-			UserLocalServiceUtil.addGroupUsers(
+			userLocalService.addGroupUsers(
 				membershipRequest.getGroupId(), addUserIds);
 		}
-
-		membershipRequest.setStatusId(statusId);
-		membershipRequest.setReplyComments(replyComments);
-		membershipRequest.setReplyDate(now);
-		membershipRequest.setReplierUserId(replierUserId);
-
-		MembershipRequestUtil.update(membershipRequest);
 
 		notify(
 			membershipRequest.getUserId(), membershipRequest,
@@ -153,61 +147,19 @@ public class MembershipRequestLocalServiceImpl
 			PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REPLY_BODY);
 	}
 
-	protected void validate(String comments)
-		throws PortalException, SystemException {
-
-		if ((Validator.isNull(comments)) || (Validator.isNumber(comments))) {
-
-			throw new MembershipRequestCommentsException();
-		}
-	}
-
-	protected void notifyCommunityAdministrators(
-		MembershipRequest membershipRequest)
-		throws PortalException, SystemException {
-
-		List administrators = new UniqueList();
-
-		Role roleCommunityAdmin = RoleLocalServiceUtil.getRole(
-			membershipRequest.getCompanyId(),
-			RoleNames.COMMUNITY_ADMINISTRATOR);
-
-		List communityAdmins =
-			UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroupAndRole(
-				membershipRequest.getGroupId(), roleCommunityAdmin.getRoleId());
-
-		administrators.addAll(communityAdmins);
-
-		Role roleCommunityOwner = RoleLocalServiceUtil.getRole(
-			membershipRequest.getCompanyId(),
-			RoleNames.COMMUNITY_OWNER);
-
-		List communityOwners =
-			UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroupAndRole(
-				membershipRequest.getGroupId(), roleCommunityOwner.getRoleId());
-
-		administrators.addAll(communityOwners);
-
-		// TODO: Should we add users that have MANAGE permission in the group?
-
-		for (Iterator it = administrators.iterator(); it.hasNext();) {
-			UserGroupRole userGroupRole = (UserGroupRole) it.next();
-
-			notify(
-				userGroupRole.getUserId(), membershipRequest,
-				PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT,
-				PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_BODY);
-		}
-	}
-
 	protected void notify(
-		long userId, MembershipRequest membershipRequest,
-		String subjectProperty, String bodyProperty)
+			long userId, MembershipRequest membershipRequest,
+			String subjectProperty, String bodyProperty)
 		throws PortalException, SystemException {
 
 		try {
-			Group group = GroupServiceUtil.getGroup(
+			Company company = companyPersistence.findByPrimaryKey(
+				membershipRequest.getCompanyId());
+
+			Group group = groupPersistence.findByPrimaryKey(
 				membershipRequest.getGroupId());
+
+			User user = userPersistence.findByPrimaryKey(userId);
 
 			String fromName = PrefsPropsUtil.getString(
 				membershipRequest.getCompanyId(),
@@ -216,10 +168,6 @@ public class MembershipRequestLocalServiceImpl
 			String fromAddress = PrefsPropsUtil.getString(
 				membershipRequest.getCompanyId(),
 				PropsUtil.COMMUNITIES_EMAIL_FROM_ADDRESS);
-
-			User user = UserLocalServiceUtil.getUserById(userId);
-			Company company = CompanyLocalServiceUtil.getCompanyById(
-				membershipRequest.getCompanyId());
 
 			String toName = user.getFullName();
 			String toAddress = user.getEmailAddress();
@@ -230,14 +178,16 @@ public class MembershipRequestLocalServiceImpl
 			String body = PrefsPropsUtil.getContent(
 				membershipRequest.getCompanyId(), bodyProperty);
 
-			String statusKey;
+			String statusKey = null;
 
 			if (membershipRequest.getStatusId() ==
 					MembershipRequestImpl.STATUS_APPROVED) {
+
 				statusKey = "approved";
 			}
 			else if (membershipRequest.getStatusId() ==
-					MembershipRequestImpl.STATUS_DENIED) {
+						MembershipRequestImpl.STATUS_DENIED) {
+
 				statusKey = "denied";
 			}
 			else {
@@ -251,12 +201,12 @@ public class MembershipRequestLocalServiceImpl
 					"[$COMPANY_ID$]",
 					"[$COMPANY_MX$]",
 					"[$COMPANY_NAME$]",
-					"[$FROM_NAME$]",
 					"[$FROM_ADDRESS$]",
+					"[$FROM_NAME$]",
 					"[$PORTAL_URL$]",
 					"[$STATUS$]",
 					"[$TO_NAME$]",
-					"[$USER_EMAIL$]",
+					"[$USER_ADDRESS$]",
 					"[$USER_NAME$]",
 				},
 				new String[] {
@@ -264,8 +214,8 @@ public class MembershipRequestLocalServiceImpl
 					String.valueOf(company.getCompanyId()),
 					company.getMx(),
 					company.getName(),
-					fromName,
 					fromAddress,
+					fromName,
 					company.getVirtualHost(),
 					LanguageUtil.get(user.getLocale(), statusKey),
 					toName,
@@ -281,13 +231,13 @@ public class MembershipRequestLocalServiceImpl
 					"[$COMPANY_ID$]",
 					"[$COMPANY_MX$]",
 					"[$COMPANY_NAME$]",
-					"[$FROM_NAME$]",
 					"[$FROM_ADDRESS$]",
+					"[$FROM_NAME$]",
 					"[$PORTAL_URL$]",
 					"[$REPLY_COMMENTS$]",
 					"[$STATUS$]",
 					"[$TO_NAME$]",
-					"[$USER_EMAIL$]",
+					"[$USER_ADDRESS$]",
 					"[$USER_NAME$]",
 				},
 				new String[] {
@@ -296,8 +246,8 @@ public class MembershipRequestLocalServiceImpl
 					String.valueOf(company.getCompanyId()),
 					company.getMx(),
 					company.getName(),
-					fromName,
 					fromAddress,
+					fromName,
 					company.getVirtualHost(),
 					membershipRequest.getReplyComments(),
 					LanguageUtil.get(user.getLocale(), statusKey),
@@ -306,8 +256,6 @@ public class MembershipRequestLocalServiceImpl
 					user.getFullName()
 				});
 
-			// TODO: Should we implement a JMS Producer/Consumer?
-
 			InternetAddress from = new InternetAddress(fromAddress, fromName);
 
 			InternetAddress to = new InternetAddress(toAddress, toName);
@@ -315,10 +263,55 @@ public class MembershipRequestLocalServiceImpl
 			MailMessage message = new MailMessage(
 				from, to, subject, body, true);
 
-			MailServiceUtil.sendEmail(message);
+			mailService.sendEmail(message);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
+		}
+	}
+
+	protected void notifyCommunityAdministrators(
+			MembershipRequest membershipRequest)
+		throws PortalException, SystemException {
+
+		List admins = new UniqueList();
+
+		Role communityAdminRole = roleLocalService.getRole(
+			membershipRequest.getCompanyId(),
+			RoleNames.COMMUNITY_ADMINISTRATOR);
+
+		List communityAdmins =
+			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
+				membershipRequest.getGroupId(), communityAdminRole.getRoleId());
+
+		admins.addAll(communityAdmins);
+
+		Role communityOwnerRole = roleLocalService.getRole(
+			membershipRequest.getCompanyId(), RoleNames.COMMUNITY_OWNER);
+
+		List communityOwners =
+			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
+				membershipRequest.getGroupId(), communityOwnerRole.getRoleId());
+
+		admins.addAll(communityOwners);
+
+		Iterator itr = admins.iterator();
+
+		while (itr.hasNext()) {
+			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
+			notify(
+				userGroupRole.getUserId(), membershipRequest,
+				PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT,
+				PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_BODY);
+		}
+	}
+
+	protected void validate(String comments)
+		throws PortalException, SystemException {
+
+		if ((Validator.isNull(comments)) || (Validator.isNumber(comments))) {
+			throw new MembershipRequestCommentsException();
 		}
 	}
 

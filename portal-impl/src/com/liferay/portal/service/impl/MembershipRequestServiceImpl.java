@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.MembershipRequest;
-import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
 import com.liferay.portal.service.base.MembershipRequestServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 
@@ -39,40 +38,42 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 public class MembershipRequestServiceImpl
 	extends MembershipRequestServiceBaseImpl {
 
-public MembershipRequest addMembershipRequest(long groupId, String comments)
+	public MembershipRequest addMembershipRequest(long groupId, String comments)
 		throws PortalException, SystemException {
-		return MembershipRequestLocalServiceUtil.addMembershipRequest(
+
+		return membershipRequestLocalService.addMembershipRequest(
 			getUserId(), groupId, comments);
 	}
 
-	public void deleteByGroupIdAndStatus(long groupId, int statusId)
+	public void deleteMembershipRequests(long groupId, int statusId)
 		throws PortalException, SystemException {
+
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.ASSIGN_USERS);
 
-		MembershipRequestLocalServiceUtil.deleteByGroupIdAndStatus(
+		membershipRequestLocalService.deleteMembershipRequests(
 			groupId, statusId);
 	}
 
 	public MembershipRequest getMembershipRequest(long membershipRequestId)
 		throws SystemException, PortalException {
-		return MembershipRequestLocalServiceUtil.getMembershipRequest(
+
+		return membershipRequestLocalService.getMembershipRequest(
 			membershipRequestId);
 	}
 
 	public void updateStatus(
-		long membershipRequestId, String reviewComments,
-		int statusId)
+			long membershipRequestId, String reviewComments, int statusId)
 		throws PortalException, SystemException {
 
 		MembershipRequest membershipRequest =
-			getMembershipRequest(membershipRequestId);
+			membershipRequestPersistence.findByPrimaryKey(membershipRequestId);
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), membershipRequest.getGroupId(),
 			ActionKeys.ASSIGN_USERS);
 
-		MembershipRequestLocalServiceUtil.updateStatus(
+		membershipRequestLocalService.updateStatus(
 			getUserId(), membershipRequestId, reviewComments, statusId);
 	}
 

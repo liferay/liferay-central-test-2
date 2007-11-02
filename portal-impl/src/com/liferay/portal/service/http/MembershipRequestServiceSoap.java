@@ -91,10 +91,10 @@ public class MembershipRequestServiceSoap {
 		}
 	}
 
-	public static void deleteByGroupIdAndStatus(long groupId, int statusId)
+	public static void deleteMembershipRequests(long groupId, int statusId)
 		throws RemoteException {
 		try {
-			MembershipRequestServiceUtil.deleteByGroupIdAndStatus(groupId,
+			MembershipRequestServiceUtil.deleteMembershipRequests(groupId,
 				statusId);
 		}
 		catch (Exception e) {

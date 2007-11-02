@@ -54,7 +54,7 @@ public interface MembershipRequestService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteByGroupIdAndStatus(long groupId, int statusId)
+	public void deleteMembershipRequests(long groupId, int statusId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

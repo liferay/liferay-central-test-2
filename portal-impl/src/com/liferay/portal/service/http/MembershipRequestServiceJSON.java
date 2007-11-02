@@ -78,10 +78,10 @@ public class MembershipRequestServiceJSON {
 		return MembershipRequestJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteByGroupIdAndStatus(long groupId, int statusId)
+	public static void deleteMembershipRequests(long groupId, int statusId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		MembershipRequestServiceUtil.deleteByGroupIdAndStatus(groupId, statusId);
+		MembershipRequestServiceUtil.deleteMembershipRequests(groupId, statusId);
 	}
 
 	public static JSONObject getMembershipRequest(long membershipRequestId)

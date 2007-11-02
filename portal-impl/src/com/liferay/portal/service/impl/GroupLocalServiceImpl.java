@@ -51,7 +51,6 @@ import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
@@ -275,7 +274,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Membership requests
 
-		MembershipRequestLocalServiceUtil.deleteByGroupId(group.getGroupId());
+		membershipRequestLocalService.deleteMembershipRequests(
+			group.getGroupId());
 
 		// Blogs
 

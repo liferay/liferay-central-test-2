@@ -324,16 +324,16 @@ public interface MembershipRequestLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteByGroupId(long groupId)
+	public void deleteMembershipRequests(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteByGroupIdAndStatus(long groupId, int statusId)
+	public void deleteMembershipRequests(long groupId, int statusId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List search(long groupId, int status, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int count(long groupId, int status)
+	public int searchCount(long groupId, int status)
 		throws com.liferay.portal.SystemException;
 
 	public void updateStatus(long replierUserId, long membershipRequestId,
