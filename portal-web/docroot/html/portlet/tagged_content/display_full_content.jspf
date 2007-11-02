@@ -80,18 +80,13 @@
 		<%
 		JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
 
-		JournalArticleDisplay articleDisplay = null;
+		String languageId = LanguageUtil.getLanguageId(request);
+		int articlePage = ParamUtil.getInteger(request, "page", 1);
+		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
-		try {
-			double latestApprovedVersion = JournalArticleLocalServiceUtil.getLatestVersion(articleResource.getGroupId(), articleResource.getArticleId(), Boolean.TRUE);
-			String languageId = LanguageUtil.getLanguageId(request);
-			int articlePage = ParamUtil.getInteger(request, "page", 1);
-			String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
+		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, languageId, themeDisplay, false, articlePage, xmlRequest);
 
-			articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(articleResource.getGroupId(), articleResource.getArticleId(), latestApprovedVersion, null, languageId, articlePage, themeDisplay, xmlRequest);
-		}
-		catch (NoSuchArticleException nsae) {
-
+		if (articleDisplay == null) {
 			// No version has been approved yet, the article should not be rendered
 
 			show = false;
