@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.wiki.model.WikiNode;
-import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.base.WikiNodeServiceBaseImpl;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 
@@ -50,7 +49,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.WIKI,
 			ActionKeys.ADD_NODE);
 
-		return WikiNodeLocalServiceUtil.addNode(
+		return wikiNodeLocalService.addNode(
 			getUserId(), plid, name, description, addCommunityPermissions,
 			addGuestPermissions);
 	}
@@ -64,7 +63,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.WIKI,
 			ActionKeys.ADD_NODE);
 
-		return WikiNodeLocalServiceUtil.addNode(
+		return wikiNodeLocalService.addNode(
 			getUserId(), plid, name, description, communityPermissions,
 			guestPermissions);
 	}
@@ -75,7 +74,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.DELETE);
 
-		WikiNodeLocalServiceUtil.deleteNode(nodeId);
+		wikiNodeLocalService.deleteNode(nodeId);
 	}
 
 	public WikiNode getNode(long nodeId)
@@ -84,7 +83,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.VIEW);
 
-		return WikiNodeLocalServiceUtil.getNode(nodeId);
+		return wikiNodeLocalService.getNode(nodeId);
 	}
 
 	public WikiNode updateNode(long nodeId, String name, String description)
@@ -93,7 +92,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.UPDATE);
 
-		return WikiNodeLocalServiceUtil.updateNode(nodeId, name, description);
+		return wikiNodeLocalService.updateNode(nodeId, name, description);
 	}
 
 }

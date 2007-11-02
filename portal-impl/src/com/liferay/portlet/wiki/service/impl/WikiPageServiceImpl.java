@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.base.WikiPageServiceBaseImpl;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
@@ -45,7 +44,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.ADD_PAGE);
 
-		return WikiPageLocalServiceUtil.addPage(getUserId(), nodeId, title);
+		return wikiPageLocalService.addPage(getUserId(), nodeId, title);
 	}
 
 	public void deletePage(long nodeId, String title)
@@ -54,7 +53,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.DELETE);
 
-		WikiPageLocalServiceUtil.deletePage(nodeId, title);
+		wikiPageLocalService.deletePage(nodeId, title);
 	}
 
 	public WikiPage getPage(long nodeId, String title)
@@ -63,7 +62,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.VIEW);
 
-		return WikiPageLocalServiceUtil.getPage(nodeId, title);
+		return wikiPageLocalService.getPage(nodeId, title);
 	}
 
 	public WikiPage getPage(long nodeId, String title, double version)
@@ -72,7 +71,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.VIEW);
 
-		return WikiPageLocalServiceUtil.getPage(nodeId, title, version);
+		return wikiPageLocalService.getPage(nodeId, title, version);
 	}
 
 	public WikiPage revertPage(long nodeId, String title, double version)
@@ -81,7 +80,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
-		return WikiPageLocalServiceUtil.revertPage(
+		return wikiPageLocalService.revertPage(
 			getUserId(), nodeId, title, version);
 	}
 
@@ -93,7 +92,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
-		return WikiPageLocalServiceUtil.updatePage(
+		return wikiPageLocalService.updatePage(
 			getUserId(), nodeId, title, content, format, tagsEntries);
 	}
 

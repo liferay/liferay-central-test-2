@@ -113,6 +113,54 @@ public class WikiNodeLocalServiceUtil {
 		wikiNodeLocalService.setWikiPageResourcePersistence(wikiPageResourcePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+		wikiNodeLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+		wikiNodeLocalService.setResourceFinder(resourceFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+		wikiNodeLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+		wikiNodeLocalService.setUserFinder(userFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 		wikiNodeLocalService.afterPropertiesSet();

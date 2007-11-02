@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
-import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.calendar.service.base.CalEventServiceBaseImpl;
 import com.liferay.portlet.calendar.service.permission.CalEventPermission;
 
@@ -58,7 +57,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.CALENDAR,
 			ActionKeys.ADD_EVENT);
 
-		return CalEventLocalServiceUtil.addEvent(
+		return calEventLocalService.addEvent(
 			getUserId(), plid, title, description, startDateMonth, startDateDay,
 			startDateYear, startDateHour, startDateMinute, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay,
@@ -82,7 +81,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.CALENDAR,
 			ActionKeys.ADD_EVENT);
 
-		return CalEventLocalServiceUtil.addEvent(
+		return calEventLocalService.addEvent(
 			getUserId(), plid, title, description, startDateMonth, startDateDay,
 			startDateYear, startDateHour, startDateMinute, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay,
@@ -97,7 +96,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		CalEventPermission.check(
 			getPermissionChecker(), eventId, ActionKeys.DELETE);
 
-		CalEventLocalServiceUtil.deleteEvent(eventId);
+		calEventLocalService.deleteEvent(eventId);
 	}
 
 	public File exportEvent(long eventId)
@@ -106,7 +105,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		CalEventPermission.check(
 			getPermissionChecker(), eventId, ActionKeys.VIEW);
 
-		return CalEventLocalServiceUtil.exportEvent(getUserId(), eventId);
+		return calEventLocalService.exportEvent(getUserId(), eventId);
 	}
 
 	public File exportGroupEvents(long plid, String fileName)
@@ -116,7 +115,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.CALENDAR,
 			ActionKeys.EXPORT_ALL_EVENTS);
 
-		return CalEventLocalServiceUtil.exportGroupEvents(
+		return calEventLocalService.exportGroupEvents(
 			getUserId(), plid, fileName);
 	}
 
@@ -126,7 +125,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		CalEventPermission.check(
 			getPermissionChecker(), eventId, ActionKeys.VIEW);
 
-		return CalEventLocalServiceUtil.getEvent(eventId);
+		return calEventLocalService.getEvent(eventId);
 	}
 
 	public void importICal4j(long plid, File file)
@@ -136,7 +135,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			getPermissionChecker(), plid, PortletKeys.CALENDAR,
 			ActionKeys.ADD_EVENT);
 
-		CalEventLocalServiceUtil.importICal4j(getUserId(), plid, file);
+		calEventLocalService.importICal4j(getUserId(), plid, file);
 	}
 
 	public CalEvent updateEvent(
@@ -152,7 +151,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		CalEventPermission.check(
 			getPermissionChecker(), eventId, ActionKeys.UPDATE);
 
-		return CalEventLocalServiceUtil.updateEvent(
+		return calEventLocalService.updateEvent(
 			getUserId(), eventId, title, description, startDateMonth,
 			startDateDay, startDateYear, startDateHour, startDateMinute,
 			endDateMonth, endDateDay, endDateYear, durationHour, durationMinute,

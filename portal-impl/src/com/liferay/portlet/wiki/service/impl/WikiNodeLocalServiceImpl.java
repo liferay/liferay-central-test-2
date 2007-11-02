@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.wiki.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
@@ -32,16 +31,11 @@ import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.base.WikiNodeLocalServiceBaseImpl;
-import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
-import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.portlet.wiki.util.Indexer;
 import com.liferay.util.lucene.HitsImpl;
 
@@ -100,15 +94,15 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		// Node
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
 		validate(name);
 
-		long nodeId = CounterLocalServiceUtil.increment();
+		long nodeId = counterLocalService.increment();
 
-		WikiNode node = WikiNodeUtil.create(nodeId);
+		WikiNode node = wikiNodePersistence.create(nodeId);
 
 		node.setGroupId(groupId);
 		node.setCompanyId(user.getCompanyId());
@@ -119,7 +113,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		node.setName(name);
 		node.setDescription(description);
 
-		WikiNodeUtil.update(node);
+		wikiNodePersistence.update(node);
 
 		// Resources
 
@@ -142,7 +136,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		WikiNode node = WikiNodeUtil.findByPrimaryKey(nodeId);
+		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 
 		addNodeResources(node, addCommunityPermissions, addGuestPermissions);
 	}
@@ -152,7 +146,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			node.getCompanyId(), node.getGroupId(),	node.getUserId(),
 			WikiNode.class.getName(), node.getNodeId(), false,
 			addCommunityPermissions, addGuestPermissions);
@@ -163,7 +157,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		WikiNode node = WikiNodeUtil.findByPrimaryKey(nodeId);
+		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 
 		addNodeResources(node, communityPermissions, guestPermissions);
 	}
@@ -173,7 +167,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			node.getCompanyId(), node.getGroupId(),	node.getUserId(),
 			WikiNode.class.getName(), node.getNodeId(), communityPermissions,
 			guestPermissions);
@@ -182,7 +176,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	public void deleteNode(long nodeId)
 		throws PortalException, SystemException {
 
-		WikiNode node = WikiNodeUtil.findByPrimaryKey(nodeId);
+		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 
 		deleteNode(node);
 	}
@@ -204,23 +198,23 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		// Pages
 
-		WikiPageLocalServiceUtil.deletePages(node.getNodeId());
+		wikiPageLocalService.deletePages(node.getNodeId());
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			node.getCompanyId(), WikiNode.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, node.getNodeId());
 
 		// Node
 
-		WikiNodeUtil.remove(node.getNodeId());
+		wikiNodePersistence.remove(node.getNodeId());
 	}
 
 	public void deleteNodes(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = WikiNodeUtil.findByGroupId(groupId).iterator();
+		Iterator itr = wikiNodePersistence.findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
 			WikiNode node = (WikiNode)itr.next();
@@ -232,21 +226,21 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	public WikiNode getNode(long nodeId)
 		throws PortalException, SystemException {
 
-		return WikiNodeUtil.findByPrimaryKey(nodeId);
+		return wikiNodePersistence.findByPrimaryKey(nodeId);
 	}
 
 	public List getNodes(long groupId) throws SystemException {
-		return WikiNodeUtil.findByGroupId(groupId);
+		return wikiNodePersistence.findByGroupId(groupId);
 	}
 
 	public List getNodes(long groupId, int begin, int end)
 		throws SystemException {
 
-		return WikiNodeUtil.findByGroupId(groupId, begin, end);
+		return wikiNodePersistence.findByGroupId(groupId, begin, end);
 	}
 
 	public int getNodesCount(long groupId) throws SystemException {
-		return WikiNodeUtil.countByGroupId(groupId);
+		return wikiNodePersistence.countByGroupId(groupId);
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
@@ -257,14 +251,16 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator itr1 = WikiNodeUtil.findByCompanyId(companyId).iterator();
+			Iterator itr1 = wikiNodePersistence.findByCompanyId(
+				companyId).iterator();
 
 			while (itr1.hasNext()) {
 				WikiNode node = (WikiNode)itr1.next();
 
 				long nodeId = node.getNodeId();
 
-				Iterator itr2 = WikiPageUtil.findByNodeId(nodeId).iterator();
+				Iterator itr2 = wikiPagePersistence.findByNodeId(
+					nodeId).iterator();
 
 				while (itr2.hasNext()) {
 					WikiPage page = (WikiPage)itr2.next();
@@ -364,13 +360,13 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		validate(name);
 
-		WikiNode node = WikiNodeUtil.findByPrimaryKey(nodeId);
+		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 
 		node.setModifiedDate(new Date());
 		node.setName(name);
 		node.setDescription(description);
 
-		WikiNodeUtil.update(node);
+		wikiNodePersistence.update(node);
 
 		return node;
 	}

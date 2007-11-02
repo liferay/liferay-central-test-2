@@ -36,6 +36,14 @@ public class MailServiceFactory {
 		return _getFactory()._service;
 	}
 
+	public static MailService getImpl() {
+		if (_impl == null) {
+			_impl = (MailService)BeanLocatorUtil.locate(_IMPL);
+		}
+
+		return _impl;
+	}
+
 	public static MailService getTxImpl() {
 		if (_txImpl == null) {
 			_txImpl = (MailService)BeanLocatorUtil.locate(_TX_IMPL);
@@ -58,10 +66,14 @@ public class MailServiceFactory {
 
 	private static final String _FACTORY = MailServiceFactory.class.getName();
 
+	private static final String _IMPL =
+		MailService.class.getName() + ".professional";
+
 	private static final String _TX_IMPL =
 		MailService.class.getName() + ".transaction";
 
 	private static MailServiceFactory _factory;
+	private static MailService _impl;
 	private static MailService _txImpl;
 
 	private MailService _service;

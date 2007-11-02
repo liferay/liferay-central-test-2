@@ -89,6 +89,90 @@ public class CalEventLocalServiceUtil {
 		calEventLocalService.setCalEventFinder(calEventFinder);
 	}
 
+	public static com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence() {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.getCompanyPersistence();
+	}
+
+	public static void setCompanyPersistence(
+		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.setCompanyPersistence(companyPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PortletPreferencesPersistence getPortletPreferencesPersistence() {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.getPortletPreferencesPersistence();
+	}
+
+	public static void setPortletPreferencesPersistence(
+		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder() {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.getPortletPreferencesFinder();
+	}
+
+	public static void setPortletPreferencesFinder(
+		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.setResourceFinder(resourceFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+		calEventLocalService.setUserFinder(userFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 		calEventLocalService.afterPropertiesSet();

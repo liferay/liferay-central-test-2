@@ -113,6 +113,102 @@ public class WikiPageLocalServiceUtil {
 		wikiPageLocalService.setWikiPageResourcePersistence(wikiPageResourcePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getResourcePersistence();
+	}
+
+	public static void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.setResourcePersistence(resourcePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.setResourceFinder(resourceFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getUserPersistence();
+	}
+
+	public static void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.setUserFinder(userFinder);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getMBMessagePersistence();
+	}
+
+	public static void setMBMessagePersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.setMBMessagePersistence(mbMessagePersistence);
+	}
+
+	public static com.liferay.portlet.messageboards.service.persistence.MBMessageFinder getMBMessageFinder() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getMBMessageFinder();
+	}
+
+	public static void setMBMessageFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.setMBMessageFinder(mbMessageFinder);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getTagsAssetPersistence();
+	}
+
+	public static void setTagsAssetPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.setTagsAssetPersistence(tagsAssetPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsAssetFinder getTagsAssetFinder() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getTagsAssetFinder();
+	}
+
+	public static void setTagsAssetFinder(
+		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.setTagsAssetFinder(tagsAssetFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 		wikiPageLocalService.afterPropertiesSet();

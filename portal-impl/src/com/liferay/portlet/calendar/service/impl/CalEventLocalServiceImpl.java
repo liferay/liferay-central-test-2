@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.calendar.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -46,10 +44,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.persistence.CompanyUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -61,7 +55,6 @@ import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
-import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
 import com.liferay.portlet.calendar.util.CalUtil;
 import com.liferay.util.Time;
 import com.liferay.util.cal.CalendarUtil;
@@ -200,7 +193,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Event
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
@@ -248,9 +241,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			title, startDateMonth, startDateDay, startDateYear, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay);
 
-		long eventId = CounterLocalServiceUtil.increment();
+		long eventId = counterLocalService.increment();
 
-		CalEvent event = CalEventUtil.create(eventId);
+		CalEvent event = calEventPersistence.create(eventId);
 
 		event.setUuid(uuid);
 		event.setGroupId(groupId);
@@ -274,7 +267,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setFirstReminder(firstReminder);
 		event.setSecondReminder(secondReminder);
 
-		CalEventUtil.update(event);
+		calEventPersistence.update(event);
 
 		// Resources
 
@@ -301,7 +294,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		CalEvent event = CalEventUtil.findByPrimaryKey(eventId);
+		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
 
 		addEventResources(
 			event, addCommunityPermissions, addGuestPermissions);
@@ -312,7 +305,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			event.getCompanyId(), event.getGroupId(), event.getUserId(),
 			CalEvent.class.getName(), event.getEventId(), false,
 			addCommunityPermissions, addGuestPermissions);
@@ -323,7 +316,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		CalEvent event = CalEventUtil.findByPrimaryKey(eventId);
+		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
 
 		addEventResources(event, communityPermissions, guestPermissions);
 	}
@@ -333,7 +326,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			event.getCompanyId(), event.getGroupId(), event.getUserId(),
 			CalEvent.class.getName(), event.getEventId(), communityPermissions,
 			guestPermissions);
@@ -345,7 +338,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			CalEvent event = (CalEvent)itr.next();
 
-			User user = UserUtil.findByPrimaryKey(event.getUserId());
+			User user = userPersistence.findByPrimaryKey(event.getUserId());
 
 			Calendar now = CalendarFactoryUtil.getCalendar(
 				user.getTimeZone(), user.getLocale());
@@ -385,7 +378,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	public void deleteEvent(long eventId)
 		throws PortalException, SystemException {
 
-		CalEvent event = CalEventUtil.findByPrimaryKey(eventId);
+		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
 
 		deleteEvent(event);
 	}
@@ -399,19 +392,19 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			event.getCompanyId(), CalEvent.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, event.getEventId());
 
 		// Event
 
-		CalEventUtil.remove(event.getEventId());
+		calEventPersistence.remove(event.getEventId());
 	}
 
 	public void deleteEvents(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = CalEventUtil.findByGroupId(groupId).iterator();
+		Iterator itr = calEventPersistence.findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
 			CalEvent event = (CalEvent)itr.next();
@@ -425,7 +418,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		List events = new ArrayList();
 
-		CalEvent event = CalEventUtil.findByPrimaryKey(eventId);
+		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
 
 		events.add(event);
 
@@ -437,7 +430,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
-		List events = CalEventUtil.findByGroupId(groupId);
+		List events = calEventPersistence.findByGroupId(groupId);
 
 		return exportICal4j(toICalCalendar(userId, events), fileName);
 	}
@@ -445,17 +438,17 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	public CalEvent getEvent(long eventId)
 		throws PortalException, SystemException {
 
-		return CalEventUtil.findByPrimaryKey(eventId);
+		return calEventPersistence.findByPrimaryKey(eventId);
 	}
 
 	public List getEvents(long groupId, String type, int begin, int end)
 		throws SystemException {
 
 		if (Validator.isNull(type)) {
-			return CalEventUtil.findByGroupId(groupId, begin, end);
+			return calEventPersistence.findByGroupId(groupId, begin, end);
 		}
 		else {
-			return CalEventUtil.findByG_T(groupId, type, begin, end);
+			return calEventPersistence.findByG_T(groupId, type, begin, end);
 		}
 	}
 
@@ -511,7 +504,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 						event.setRecurrence(Base64.objectToString(recurrence));
 
-						event = CalEventUtil.update(event);
+						event = calEventPersistence.update(event);
 
 						recurrence = event.getRecurrenceObj();
 					}
@@ -562,10 +555,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (Validator.isNull(type)) {
-			return CalEventUtil.countByGroupId(groupId);
+			return calEventPersistence.countByGroupId(groupId);
 		}
 		else {
-			return CalEventUtil.countByG_T(groupId, type);
+			return calEventPersistence.countByG_T(groupId, type);
 		}
 	}
 
@@ -577,7 +570,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		List events = (List)eventsPool.get(key);
 
 		if (events == null) {
-			events = CalEventUtil.findByG_R(groupId, true);
+			events = calEventPersistence.findByG_R(groupId, true);
 
 			eventsPool.put(key, events);
 		}
@@ -640,7 +633,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			String remindBy, int firstReminder, int secondReminder)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		Locale locale = null;
 		TimeZone timeZone = null;
@@ -686,7 +679,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			title, startDateMonth, startDateDay, startDateYear, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay);
 
-		CalEvent event = CalEventUtil.findByPrimaryKey(eventId);
+		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
 
 		event.setModifiedDate(new Date());
 		event.setTitle(title);
@@ -704,7 +697,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setFirstReminder(firstReminder);
 		event.setSecondReminder(secondReminder);
 
-		CalEventUtil.update(event);
+		calEventPersistence.update(event);
 
 		CalEventLocalUtil.clearEventsPool(event.getGroupId());
 
@@ -898,10 +891,11 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			String portletId = PortletKeys.CALENDAR;
 
 			PortletPreferences prefs =
-				PortletPreferencesLocalServiceUtil.getPreferences(
+				portletPreferencesLocalService.getPreferences(
 					event.getCompanyId(), ownerId, ownerType, plid, portletId);
 
-			Company company = CompanyUtil.findByPrimaryKey(user.getCompanyId());
+			Company company = companyPersistence.findByPrimaryKey(
+				user.getCompanyId());
 
 			Contact contact = user.getContact();
 
@@ -981,7 +975,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				MailMessage message = new MailMessage(
 					from, to, subject, body, true);
 
-				MailServiceUtil.sendEmail(message);
+				mailService.sendEmail(message);
 			}
 			else if (remindBy.equals(CalEventImpl.REMIND_BY_AIM) &&
 					 Validator.isNotNull(contact.getAimSn())) {
@@ -1054,7 +1048,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		props.add(Version.VERSION_2_0);
 		props.add(CalScale.GREGORIAN);
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		TimeZone timeZone = user.getTimeZone();
 
 		List components = iCal.getComponents();
@@ -1243,7 +1237,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	protected TimeZone toTimeZone(long userId, VTimeZone vTimeZone)
 		throws SystemException, NoSuchUserException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		TimeZone timeZone = user.getTimeZone();
 

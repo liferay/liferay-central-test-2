@@ -22,12 +22,10 @@
 
 package com.liferay.portlet.wiki.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.base.WikiPageResourceLocalServiceBaseImpl;
-import com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil;
 
 /**
  * <a href="WikiPageResourceLocalServiceImpl.java.html"><b><i>View Source</i>
@@ -42,30 +40,31 @@ public class WikiPageResourceLocalServiceImpl
 	public void deletePageResource(long nodeId, String title)
 		throws PortalException, SystemException {
 
-		WikiPageResourceUtil.removeByN_T(nodeId, title);
+		wikiPageResourcePersistence.removeByN_T(nodeId, title);
 	}
 
 	public WikiPageResource getPageResource(long pageResourceId)
 		throws PortalException, SystemException {
 
-		return WikiPageResourceUtil.findByPrimaryKey(pageResourceId);
+		return wikiPageResourcePersistence.findByPrimaryKey(pageResourceId);
 	}
 
 	public long getPageResourcePrimKey(long nodeId, String title)
 		throws PortalException, SystemException {
 
-		WikiPageResource pageResource = WikiPageResourceUtil.fetchByN_T(
+		WikiPageResource pageResource = wikiPageResourcePersistence.fetchByN_T(
 			nodeId, title);
 
 		if (pageResource == null) {
-			long pageResourcePrimKey = CounterLocalServiceUtil.increment();
+			long pageResourcePrimKey = counterLocalService.increment();
 
-			pageResource = WikiPageResourceUtil.create(pageResourcePrimKey);
+			pageResource = wikiPageResourcePersistence.create(
+				pageResourcePrimKey);
 
 			pageResource.setNodeId(nodeId);
 			pageResource.setTitle(title);
 
-			WikiPageResourceUtil.update(pageResource);
+			wikiPageResourcePersistence.update(pageResource);
 		}
 
 		return pageResource.getResourcePrimKey();

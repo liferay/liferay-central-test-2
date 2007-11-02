@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.wiki.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -30,20 +29,13 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
-import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 import com.liferay.portlet.wiki.service.base.WikiPageLocalServiceBaseImpl;
-import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
-import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.portlet.wiki.util.Indexer;
 import com.liferay.portlet.wiki.util.NodeFilter;
 import com.liferay.portlet.wiki.util.WikiUtil;
@@ -80,18 +72,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Page
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
 		validate(title);
 
-		long pageId = CounterLocalServiceUtil.increment();
+		long pageId = counterLocalService.increment();
 
 		long resourcePrimKey =
-			WikiPageResourceLocalServiceUtil.getPageResourcePrimKey(
-				nodeId, title);
+			wikiPageResourceLocalService.getPageResourcePrimKey(nodeId, title);
 
-		WikiPage page = WikiPageUtil.create(pageId);
+		WikiPage page = wikiPagePersistence.create(pageId);
 
 		page.setResourcePrimKey(resourcePrimKey);
 		page.setCompanyId(user.getCompanyId());
@@ -104,7 +95,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setFormat(WikiPageImpl.DEFAULT_FORMAT);
 		page.setHead(true);
 
-		WikiPageUtil.update(page);
+		wikiPagePersistence.update(page);
 
 		// Resources
 
@@ -118,7 +109,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		WikiNode node = WikiNodeUtil.findByPrimaryKey(nodeId);
+		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 		WikiPage page = getPage(nodeId, title);
 
 		addPageResources(
@@ -130,7 +121,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addResources(
+		resourceLocalService.addResources(
 			page.getCompanyId(), node.getGroupId(),	page.getUserId(),
 			WikiPage.class.getName(), page.getResourcePrimKey(), false,
 			addCommunityPermissions, addGuestPermissions);
@@ -141,7 +132,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		WikiNode node = WikiNodeUtil.findByPrimaryKey(nodeId);
+		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 		WikiPage page = getPage(nodeId, title);
 
 		addPageResources(node, page, communityPermissions, guestPermissions);
@@ -152,7 +143,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		ResourceLocalServiceUtil.addModelResources(
+		resourceLocalService.addModelResources(
 			page.getCompanyId(), node.getGroupId(),	page.getUserId(),
 			WikiPage.class.getName(), page.getResourcePrimKey(),
 			communityPermissions, guestPermissions);
@@ -161,7 +152,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public void deletePage(long nodeId, String title)
 		throws PortalException, SystemException {
 
-		List pages = WikiPageUtil.findByN_T_H(nodeId, title, true, 0, 1);
+		List pages = wikiPagePersistence.findByN_T_H(nodeId, title, true, 0, 1);
 
 		if (pages.size() > 0) {
 			WikiPage page = (WikiPage)pages.iterator().next();
@@ -185,34 +176,34 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Tags
 
-		TagsAssetLocalServiceUtil.deleteAsset(
+		tagsAssetLocalService.deleteAsset(
 			WikiPage.class.getName(), page.getResourcePrimKey());
 
 		// Message boards
 
-		MBMessageLocalServiceUtil.deleteDiscussionMessages(
+		mbMessageLocalService.deleteDiscussionMessages(
 			WikiPage.class.getName(), page.getResourcePrimKey());
 
 		// Resources
 
-		ResourceLocalServiceUtil.deleteResource(
+		resourceLocalService.deleteResource(
 			page.getCompanyId(), WikiPage.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, page.getResourcePrimKey());
 
 		// Resource
 
-		WikiPageResourceLocalServiceUtil.deletePageResource(
+		wikiPageResourceLocalService.deletePageResource(
 			page.getNodeId(), page.getTitle());
 
 		// All versions
 
-		WikiPageUtil.removeByN_T(page.getNodeId(), page.getTitle());
+		wikiPagePersistence.removeByN_T(page.getNodeId(), page.getTitle());
 	}
 
 	public void deletePages(long nodeId)
 		throws PortalException, SystemException {
 
-		Iterator itr = WikiPageUtil.findByN_H(nodeId, true).iterator();
+		Iterator itr = wikiPagePersistence.findByN_H(nodeId, true).iterator();
 
 		while (itr.hasNext()) {
 			WikiPage page = (WikiPage)itr.next();
@@ -228,7 +219,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public List getLinks(long nodeId, String title) throws SystemException {
 		List links = new ArrayList();
 
-		List pages = WikiPageUtil.findByN_H(nodeId, true);
+		List pages = wikiPagePersistence.findByN_H(nodeId, true);
 
 		for (int i = 0; i < pages.size(); i++) {
 			WikiPage page = (WikiPage)pages.get(i);
@@ -257,7 +248,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public List getOrphans(long nodeId) throws SystemException {
 		List pageTitles = new ArrayList();
 
-		List pages = WikiPageUtil.findByN_H(nodeId, true);
+		List pages = wikiPagePersistence.findByN_H(nodeId, true);
 
 		for (int i = 0; i < pages.size(); i++) {
 			WikiPage page = (WikiPage)pages.get(i);
@@ -310,7 +301,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public WikiPage getPage(long nodeId, String title)
 		throws PortalException, SystemException {
 
-		List pages = WikiPageUtil.findByN_T_H(nodeId, title, true, 0, 1);
+		List pages = wikiPagePersistence.findByN_T_H(nodeId, title, true, 0, 1);
 
 		if (pages.size() > 0) {
 			return (WikiPage)pages.iterator().next();
@@ -329,7 +320,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			page = getPage(nodeId, title);
 		}
 		else {
-			page = WikiPageUtil.findByN_T_V(nodeId, title, version);
+			page = wikiPagePersistence.findByN_T_V(nodeId, title, version);
 		}
 
 		return page;
@@ -338,21 +329,21 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public List getPages(long nodeId, int begin, int end)
 		throws SystemException {
 
-		return WikiPageUtil.findByNodeId(
+		return wikiPagePersistence.findByNodeId(
 			nodeId, begin, end, new PageCreateDateComparator(false));
 	}
 
 	public List getPages(long nodeId, String title, int begin, int end)
 		throws SystemException {
 
-		return WikiPageUtil.findByN_T(
+		return wikiPagePersistence.findByN_T(
 			nodeId, title, begin, end, new PageCreateDateComparator(false));
 	}
 
 	public List getPages(long nodeId, boolean head, int begin, int end)
 		throws SystemException {
 
-		return WikiPageUtil.findByN_H(
+		return wikiPagePersistence.findByN_H(
 			nodeId, head, begin, end, new PageCreateDateComparator(false));
 	}
 
@@ -360,31 +351,31 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			long nodeId, String title, boolean head, int begin, int end)
 		throws SystemException {
 
-		return WikiPageUtil.findByN_T_H(
+		return wikiPagePersistence.findByN_T_H(
 			nodeId, title, head, begin, end,
 			new PageCreateDateComparator(false));
 	}
 
 	public int getPagesCount(long nodeId) throws SystemException {
-		return WikiPageUtil.countByNodeId(nodeId);
+		return wikiPagePersistence.countByNodeId(nodeId);
 	}
 
 	public int getPagesCount(long nodeId, String title)
 		throws SystemException {
 
-		return WikiPageUtil.countByN_T(nodeId, title);
+		return wikiPagePersistence.countByN_T(nodeId, title);
 	}
 
 	public int getPagesCount(long nodeId, boolean head)
 		throws SystemException {
 
-		return WikiPageUtil.countByN_H(nodeId, head);
+		return wikiPagePersistence.countByN_H(nodeId, head);
 	}
 
 	public int getPagesCount(long nodeId, String title, boolean head)
 		throws SystemException {
 
-		return WikiPageUtil.countByN_T_H(nodeId, title, head);
+		return wikiPagePersistence.countByN_T_H(nodeId, title, head);
 	}
 
 	public List getRecentChanges(long nodeId, int begin, int end)
@@ -424,7 +415,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Page
 
-		User user = UserUtil.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
 		validate(nodeId, content, format);
@@ -435,14 +426,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		page.setHead(false);
 
-		WikiPageUtil.update(page);
+		wikiPagePersistence.update(page);
 
 		double oldVersion = page.getVersion();
 		double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
 
-		long pageId = CounterLocalServiceUtil.increment();
+		long pageId = counterLocalService.increment();
 
-		page = WikiPageUtil.create(pageId);
+		page = wikiPagePersistence.create(pageId);
 
 		page.setResourcePrimKey(resourcePrimKey);
 		page.setCompanyId(user.getCompanyId());
@@ -456,15 +447,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setFormat(format);
 		page.setHead(true);
 
-		WikiPageUtil.update(page);
+		wikiPagePersistence.update(page);
 
 		// Node
 
-		WikiNode node = WikiNodeUtil.findByPrimaryKey(nodeId);
+		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 
 		node.setLastPostDate(now);
 
-		WikiNodeUtil.update(node);
+		wikiNodePersistence.update(node);
 
 		// Tags
 
@@ -487,7 +478,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			long userId, WikiPage page, String[] tagsEntries)
 		throws PortalException, SystemException {
 
-		TagsAssetLocalServiceUtil.updateAsset(
+		tagsAssetLocalService.updateAsset(
 			userId, page.getNode().getGroupId(), WikiPage.class.getName(),
 			page.getResourcePrimKey(), tagsEntries, null, null, null, null,
 			ContentTypes.TEXT_HTML, page.getTitle(), page.getTitle(),
