@@ -24,6 +24,7 @@ package com.liferay.util.servlet;
 
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.BufferedOutputStream;
@@ -33,6 +34,7 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -101,24 +103,7 @@ public class ServletResponseUtil {
 			String contentType)
 		throws IOException {
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Sending file of type " + contentType);
-		}
-
-		// LEP-2201
-
-		if (Validator.isNotNull(contentType)) {
-			res.setContentType(contentType);
-		}
-
-		res.setHeader(HttpHeaders.CACHE_CONTROL, HttpHeaders.PUBLIC);
-		res.setHeader(HttpHeaders.PRAGMA, HttpHeaders.PUBLIC);
-
-		if (Validator.isNotNull(fileName)) {
-			res.setHeader(
-				HttpHeaders.CONTENT_DISPOSITION,
-				"attachment; filename=\"" + fileName + "\"");
-		}
+		setHeaders(res, fileName, contentType);
 
 		write(res, byteArray);
 	}
@@ -135,24 +120,7 @@ public class ServletResponseUtil {
 			String contentType)
 		throws IOException {
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Sending file of type " + contentType);
-		}
-
-		// LEP-2201
-
-		if (Validator.isNotNull(contentType)) {
-			res.setContentType(contentType);
-		}
-
-		res.setHeader(HttpHeaders.CACHE_CONTROL, HttpHeaders.PUBLIC);
-		res.setHeader(HttpHeaders.PRAGMA, HttpHeaders.PUBLIC);
-
-		if (Validator.isNotNull(fileName)) {
-			res.setHeader(
-				HttpHeaders.CONTENT_DISPOSITION,
-				"attachment; filename=\"" + fileName + "\"");
-		}
+		setHeaders(res, fileName, contentType);
 
 		write(res, is);
 	}
@@ -219,6 +187,54 @@ public class ServletResponseUtil {
 		}
 		finally {
 			cleanUp(os, is);
+		}
+	}
+
+	protected static void setHeaders(
+			HttpServletResponse res, String fileName, String contentType)
+		throws IOException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Sending file of type " + contentType);
+		}
+
+		// LEP-2201
+
+		if (Validator.isNotNull(contentType)) {
+			res.setContentType(contentType);
+		}
+
+		res.setHeader(HttpHeaders.CACHE_CONTROL, HttpHeaders.PUBLIC);
+		res.setHeader(HttpHeaders.PRAGMA, HttpHeaders.PUBLIC);
+
+		if (Validator.isNotNull(fileName)) {
+			String contentDisposition =
+				"attachment; filename=\"" + fileName + "\"";
+
+			// If necessary for non-ASCII characters, follow RFC 2183 and 2184.
+			// However, not all browsers support RFC 2184.  LEP-3127
+
+			try {
+				URLCodec codec = new URLCodec("UTF-8");
+
+				String encodedFileName =
+					StringUtil.replace(codec.encode(fileName), "+", "%20");
+
+				String escapedSpacesFileName =
+					StringUtil.replace(fileName, " ", "%20");
+
+				if (!escapedSpacesFileName.equals(encodedFileName)) {
+					contentDisposition =
+						"attachment; filename*=UTF-8''" + encodedFileName;
+				}
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e);
+				}
+			}
+
+			res.setHeader(HttpHeaders.CONTENT_DISPOSITION, contentDisposition);
 		}
 	}
 
