@@ -35,6 +35,7 @@ import java.io.OutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.net.URLCodec;
+import org.apache.commons.lang.CharUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -211,19 +212,26 @@ public class ServletResponseUtil {
 			String contentDisposition =
 				"attachment; filename=\"" + fileName + "\"";
 
-			// If necessary for non-ASCII characters, follow RFC 2183 and 2184.
+			// If necessary for non-ASCII characters, encode based on RFC 2184.
 			// However, not all browsers support RFC 2184.  LEP-3127
 
+			boolean ascii = true;
+
+			for (int i = 0; i < fileName.length(); i++) {
+				if (!CharUtils.isAscii(fileName.charAt(i))) {
+					ascii = false;
+
+					break;
+				}
+			}
+
 			try {
-				URLCodec codec = new URLCodec("UTF-8");
+				if (!ascii) {
+					URLCodec codec = new URLCodec("UTF-8");
 
-				String encodedFileName =
-					StringUtil.replace(codec.encode(fileName), "+", "%20");
+					String encodedFileName =
+						StringUtil.replace(codec.encode(fileName), "+", "%20");
 
-				String escapedSpacesFileName =
-					StringUtil.replace(fileName, " ", "%20");
-
-				if (!escapedSpacesFileName.equals(encodedFileName)) {
 					contentDisposition =
 						"attachment; filename*=UTF-8''" + encodedFileName;
 				}
