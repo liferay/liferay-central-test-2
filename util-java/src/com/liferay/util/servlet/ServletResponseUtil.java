@@ -213,7 +213,7 @@ public class ServletResponseUtil {
 				"attachment; filename=\"" + fileName + "\"";
 
 			// If necessary for non-ASCII characters, encode based on RFC 2184.
-			// However, not all browsers support RFC 2184.  LEP-3127
+			// However, not all browsers support RFC 2184. See LEP-3127.
 
 			boolean ascii = true;
 
