@@ -25,17 +25,15 @@ package com.liferay.portal.servlet.taglib.ui;
 import com.germinus.easyconf.Filter;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.servlet.PortalIncludeUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.HttpUtil;
 
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -52,34 +50,30 @@ public class SocialBookmarkTagUtil {
 
 	public static void doEndTag(
 			String page, String type, String url, String title, String target,
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+			PageContext pageContext)
 		throws JspException {
 
 		try {
+			HttpServletRequest req =
+				(HttpServletRequest)pageContext.getRequest();
+
 			req.setAttribute("liferay-ui:social-bookmark:type", type);
 			req.setAttribute("liferay-ui:social-bookmark:url", url);
 			req.setAttribute("liferay-ui:social-bookmark:title", title);
 			req.setAttribute("liferay-ui:social-bookmark:target", target);
 
-			try {
-				String[] socialTypes = PropsUtil.getArray(
-					PropsUtil.SOCIAL_BOOKMARK_TYPES);
+			String[] socialTypes = PropsUtil.getArray(
+				PropsUtil.SOCIAL_BOOKMARK_TYPES);
 
-				if (!ArrayUtil.contains(socialTypes, type)) {
-					return;
-				}
-
-				String postUrl = _getPostUrl(type, url, title);
-
-				req.setAttribute("liferay-ui:social-bookmark:postUrl", postUrl);
-			}
-			catch (Exception e) {
-				throw new JspTagException(e.toString());
+			if (!ArrayUtil.contains(socialTypes, type)) {
+				return;
 			}
 
-			RequestDispatcher rd = ctx.getRequestDispatcher(page);
+			String postUrl = _getPostUrl(type, url, title);
 
-			rd.include(req, res);
+			req.setAttribute("liferay-ui:social-bookmark:postUrl", postUrl);
+
+			PortalIncludeUtil.include(pageContext, page);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

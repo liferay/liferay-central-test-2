@@ -67,9 +67,7 @@ public class SocialBookmarkTag extends TagSupport {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				_TAG_CLASS, _TAG_DO_END_METHOD,
 				new Object[] {
-					_PAGE, type, url, title, targetWrapper,
-					pageContext.getServletContext(), pageContext.getRequest(),
-					pageContext.getResponse()
+					_PAGE, type, url, title, targetWrapper, pageContext
 				});
 
 			returnObj = MethodInvoker.invoke(methodWrapper);
@@ -91,7 +89,7 @@ public class SocialBookmarkTag extends TagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
-			doTag(_url, _type, _title, _target, pageContext);
+			doTag(_type, _url, _title, _target, pageContext);
 		}
 		catch (Exception e) {
 			if (e instanceof JspException) {

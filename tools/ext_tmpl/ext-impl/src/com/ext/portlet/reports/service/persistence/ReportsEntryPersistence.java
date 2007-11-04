@@ -18,8 +18,8 @@ public interface ReportsEntryPersistence {
         throws com.liferay.portal.SystemException;
 
     public com.ext.portlet.reports.model.ReportsEntry update(
-        com.ext.portlet.reports.model.ReportsEntry reportsEntry,
-        boolean saveOrUpdate) throws com.liferay.portal.SystemException;
+        com.ext.portlet.reports.model.ReportsEntry reportsEntry, boolean merge)
+        throws com.liferay.portal.SystemException;
 
     public com.ext.portlet.reports.model.ReportsEntry findByPrimaryKey(
         java.lang.String entryId)

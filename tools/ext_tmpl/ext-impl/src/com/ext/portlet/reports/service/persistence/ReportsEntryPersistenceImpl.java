@@ -94,15 +94,15 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     }
 
     public ReportsEntry update(
-        com.ext.portlet.reports.model.ReportsEntry reportsEntry,
-        boolean saveOrUpdate) throws SystemException {
+        com.ext.portlet.reports.model.ReportsEntry reportsEntry, boolean merge)
+        throws SystemException {
         Session session = null;
 
         try {
             session = openSession();
 
-            if (saveOrUpdate) {
-                session.saveOrUpdate(reportsEntry);
+            if (merge) {
+                session.merge(reportsEntry);
             } else {
                 if (reportsEntry.isNew()) {
                     session.save(reportsEntry);

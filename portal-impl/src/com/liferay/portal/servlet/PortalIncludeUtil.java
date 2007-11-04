@@ -20,17 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.taglib.util;
+package com.liferay.portal.servlet;
+
+import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.util.WebKeys;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 
 /**
  * <a href="PortalIncludeUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated This class has been repackaged at
- * <code>com.liferay.portal.servlet</code>.
- *
  */
-public class PortalIncludeUtil
-	extends com.liferay.portal.servlet.PortalIncludeUtil {
+public class PortalIncludeUtil {
+
+	public static void include(PageContext pageContext, String path)
+		throws IOException, ServletException {
+
+		String s = toString(pageContext, path);
+
+		pageContext.getOut().print(s);
+	}
+
+	public static String toString(PageContext pageContext, String path)
+		throws IOException, ServletException {
+
+		HttpServletRequest req = (HttpServletRequest)pageContext.getRequest();
+		HttpServletResponse res =
+			(HttpServletResponse)pageContext.getResponse();
+
+		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
+
+		StringServletResponse stringServletRes = new StringServletResponse(res);
+
+		RequestDispatcher rd = ctx.getRequestDispatcher(path);
+
+		rd.include(req, stringServletRes);
+
+		return stringServletRes.getString();
+	}
+
 }

@@ -88,8 +88,8 @@ public class ReportsEntryUtil {
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry update(
-        com.ext.portlet.reports.model.ReportsEntry reportsEntry,
-        boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+        com.ext.portlet.reports.model.ReportsEntry reportsEntry, boolean merge)
+        throws com.liferay.portal.SystemException {
         ModelListener listener = _getListener();
         boolean isNew = reportsEntry.isNew();
 
@@ -101,7 +101,7 @@ public class ReportsEntryUtil {
             }
         }
 
-        reportsEntry = getPersistence().update(reportsEntry, saveOrUpdate);
+        reportsEntry = getPersistence().update(reportsEntry, merge);
 
         if (listener != null) {
             if (isNew) {
