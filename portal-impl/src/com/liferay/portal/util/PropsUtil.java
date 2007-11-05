@@ -528,6 +528,10 @@ public class PropsUtil {
 	public static final String DEFAULT_USER_LAYOUT_TEMPLATE_ID = "default.user.layout.template.id";
 
 	public static final String DEFAULT_USER_LAYOUT_COLUMN = "default.user.layout.column-";
+	
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_LAR = "default.user.private.layout.lar";
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_LAR = "default.user.public.layout.lar";
 
 	// Default Admin
 

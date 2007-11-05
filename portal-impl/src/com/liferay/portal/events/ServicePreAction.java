@@ -28,6 +28,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
@@ -85,10 +86,14 @@ import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.servlet.SessionErrors;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.TimeZone;
 
@@ -148,35 +153,67 @@ public class ServicePreAction extends Action {
 
 		Group userGroup = user.getGroup();
 
-		String name = PropsUtil.get(PropsUtil.DEFAULT_USER_LAYOUT_NAME);
+		String privateLARName = PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_LAR);
 
-		Layout layout = LayoutLocalServiceUtil.addLayout(
-			user.getUserId(), userGroup.getGroupId(), true,
-			LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
-			StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false, StringPool.BLANK);
+		boolean doDefaultPrivateLayout = true;
 
-		LayoutTypePortlet layoutTypePortlet =
-			(LayoutTypePortlet)layout.getLayoutType();
+		if (Validator.isNotNull(privateLARName)) {
+			try {
+				File privateLAR = new File(privateLARName);
 
-		String layoutTemplateId = PropsUtil.get(
-			PropsUtil.DEFAULT_USER_LAYOUT_TEMPLATE_ID);
+				_importLayouts(user.getUserId(), userGroup.getGroupId(), true, privateLAR);
 
-		layoutTypePortlet.setLayoutTemplateId(0, layoutTemplateId, false);
-
-		for (int i = 0; i < 10; i++) {
-			String columnId = "column-" + i;
-			String portletIds = PropsUtil.get(
-				PropsUtil.DEFAULT_USER_LAYOUT_COLUMN + i);
-
-			String[] portletIdsArray = StringUtil.split(portletIds);
-
-			layoutTypePortlet.addPortletIds(
-				0, portletIdsArray, columnId, false);
+				doDefaultPrivateLayout = false;
+			}
+			catch (Exception e) {
+				_log.debug("addDefaultLayouts for {" + privateLARName + "}", e);
+			}
 		}
 
-		LayoutLocalServiceUtil.updateLayout(
-			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
-			layout.getTypeSettings());
+		if (doDefaultPrivateLayout) {
+			String name = PropsUtil.get(PropsUtil.DEFAULT_USER_LAYOUT_NAME);
+
+			Layout layout = LayoutLocalServiceUtil.addLayout(
+				user.getUserId(), userGroup.getGroupId(), true,
+				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
+				StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false, StringPool.BLANK);
+
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			String layoutTemplateId = PropsUtil.get(
+				PropsUtil.DEFAULT_USER_LAYOUT_TEMPLATE_ID);
+
+			layoutTypePortlet.setLayoutTemplateId(0, layoutTemplateId, false);
+
+			for (int i = 0; i < 10; i++) {
+				String columnId = "column-" + i;
+				String portletIds = PropsUtil.get(
+					PropsUtil.DEFAULT_USER_LAYOUT_COLUMN + i);
+
+				String[] portletIdsArray = StringUtil.split(portletIds);
+
+				layoutTypePortlet.addPortletIds(
+					0, portletIdsArray, columnId, false);
+			}
+
+			LayoutLocalServiceUtil.updateLayout(
+				layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
+				layout.getTypeSettings());
+		}
+
+		String publicLARName = PropsUtil.get(PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_LAR);
+
+		if (Validator.isNotNull(publicLARName)) {
+			try {
+				File publicLAR = new File(publicLARName);
+
+				_importLayouts(user.getUserId(), userGroup.getGroupId(), false, publicLAR);
+			}
+			catch (Exception e) {
+				_log.debug("addDefaultLayouts for {" + publicLARName + "}", e);
+			}
+		}
 	}
 
 	protected void deleteDefaultLayouts(User user)
@@ -1165,6 +1202,32 @@ public class ServicePreAction extends Action {
 		// Fix state
 
 		fixState(req, themeDisplay);
+	}
+
+	protected void _importLayouts(
+			long userId, long groupId, boolean privateLayout, File lar)
+		throws PortalException, SystemException {
+
+		Map parameterMap = new HashMap();
+
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_PERMISSIONS, Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_PORTLET_DATA,
+			Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES,
+			Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_TAGS, Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_THEME, Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.MERGE_DATA, Boolean.FALSE.toString());
+
+		LayoutLocalServiceUtil.importLayouts(
+			userId, groupId, privateLayout, parameterMap,
+			lar);
 	}
 
 	private static final String _PATH_PORTAL_LAYOUT = "/portal/layout";
