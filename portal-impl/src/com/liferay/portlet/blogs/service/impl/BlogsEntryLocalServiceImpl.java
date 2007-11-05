@@ -25,6 +25,7 @@ package com.liferay.portlet.blogs.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -392,10 +393,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				(Validator.isDigit(oldChar))) {
 
 			}
-			else if ((oldChar == ' ') || (oldChar == '-') || (oldChar == ',') ||
-					 (oldChar == '/') || (oldChar == '\\') ||
-					 (oldChar == '\'') || (oldChar == '\"')) {
-
+			else if (ArrayUtil.contains(_URL_TITLE_REPLACE_CHARS, oldChar)) {
 				newChar = '_';
 			}
 			else {
@@ -709,6 +707,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			throw new EntryContentException();
 		}
 	}
+
+	private static final char[] _URL_TITLE_REPLACE_CHARS = new char[] {
+		' ',  '.',  '-',  ',',  '/',  '\\',  '\'',  '\"'
+	};
 
 	private static Log _log =
 		LogFactory.getLog(BlogsEntryLocalServiceImpl.class);
