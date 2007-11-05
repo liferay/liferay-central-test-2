@@ -25,7 +25,7 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.taglib.util.PortalIncludeUtil;
+import com.liferay.portal.servlet.PortalIncludeUtil;
 import com.liferay.util.Html;
 import com.liferay.util.servlet.SessionErrors;
 

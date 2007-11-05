@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.taglib.util.PortalIncludeUtil;
+import com.liferay.portal.servlet.PortalIncludeUtil;
 import com.liferay.util.Html;
 
 import java.util.List;

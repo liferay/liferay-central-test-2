@@ -26,7 +26,7 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.taglib.util.PortalIncludeUtil;
+import com.liferay.portal.servlet.PortalIncludeUtil;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;

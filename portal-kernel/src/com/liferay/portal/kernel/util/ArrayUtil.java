@@ -233,13 +233,103 @@ public class ArrayUtil {
 			array2, 0, combinedArray, array1.length, array2.length);
 	}
 
-	public static boolean contains(Object[] array, Object obj) {
+	public static boolean contains(boolean[] array, boolean value) {
 		if (array == null) {
 			return false;
 		}
 		else {
 			for (int i = 0; i < array.length; i++) {
-				if (obj.equals(array[i])) {
+				if (value == array[i]) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
+	public static boolean contains(char[] array, char value) {
+		if (array == null) {
+			return false;
+		}
+		else {
+			for (int i = 0; i < array.length; i++) {
+				if (value == array[i]) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
+	public static boolean contains(double[] array, double value) {
+		if (array == null) {
+			return false;
+		}
+		else {
+			for (int i = 0; i < array.length; i++) {
+				if (value == array[i]) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
+	public static boolean contains(long[] array, long value) {
+		if (array == null) {
+			return false;
+		}
+		else {
+			for (int i = 0; i < array.length; i++) {
+				if (value == array[i]) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
+	public static boolean contains(int[] array, int value) {
+		if (array == null) {
+			return false;
+		}
+		else {
+			for (int i = 0; i < array.length; i++) {
+				if (value == array[i]) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
+	public static boolean contains(short[] array, short value) {
+		if (array == null) {
+			return false;
+		}
+		else {
+			for (int i = 0; i < array.length; i++) {
+				if (value == array[i]) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
+	public static boolean contains(Object[] array, Object value) {
+		if ((array == null) || (value == null)) {
+			return false;
+		}
+		else {
+			for (int i = 0; i < array.length; i++) {
+				if (value.equals(array[i])) {
 					return true;
 				}
 			}

@@ -135,8 +135,32 @@ public class ArrayUtil_IW {
 		ArrayUtil.combine(array1, array2, combinedArray);
 	}
 
-	public boolean contains(java.lang.Object[] array, java.lang.Object obj) {
-		return ArrayUtil.contains(array, obj);
+	public boolean contains(boolean[] array, boolean value) {
+		return ArrayUtil.contains(array, value);
+	}
+
+	public boolean contains(char[] array, char value) {
+		return ArrayUtil.contains(array, value);
+	}
+
+	public boolean contains(double[] array, double value) {
+		return ArrayUtil.contains(array, value);
+	}
+
+	public boolean contains(long[] array, long value) {
+		return ArrayUtil.contains(array, value);
+	}
+
+	public boolean contains(int[] array, int value) {
+		return ArrayUtil.contains(array, value);
+	}
+
+	public boolean contains(short[] array, short value) {
+		return ArrayUtil.contains(array, value);
+	}
+
+	public boolean contains(java.lang.Object[] array, java.lang.Object value) {
+		return ArrayUtil.contains(array, value);
 	}
 
 	public java.lang.String[] distinct(java.lang.String[] array) {
