@@ -558,7 +558,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			long groupId = GetterUtil.getLong(
 				doc.get(LuceneFields.GROUP_ID));
 			String articleId = doc.get("articleId");
-			double version = GetterUtil.getDouble(doc.get("version"));
+			//double version = GetterUtil.getDouble(doc.get("version"));
 
 			long articleResourcePrimKey =
 				journalArticleResourceLocalService.getArticleResourcePrimKey(

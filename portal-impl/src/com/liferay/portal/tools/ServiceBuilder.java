@@ -1738,12 +1738,6 @@ public class ServiceBuilder {
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
-				String p0Name = "";
-
-				if (parameters.length > 0) {
-					p0Name = parameters[0].getName();
-				}
-
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
@@ -5227,12 +5221,6 @@ public class ServiceBuilder {
 				sm.append("public static " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
-
-				String p0Name = "";
-
-				if (parameters.length > 0) {
-					p0Name = parameters[0].getName();
-				}
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
