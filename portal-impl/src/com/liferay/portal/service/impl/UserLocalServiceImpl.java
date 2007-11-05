@@ -791,7 +791,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		Company company = companyPersistence.findByPrimaryKey(user.getCompanyId());
+		Company company = companyPersistence.findByPrimaryKey(
+			user.getCompanyId());
 
 		try {
 			return Encryptor.encrypt(company.getKeyObj(), name);

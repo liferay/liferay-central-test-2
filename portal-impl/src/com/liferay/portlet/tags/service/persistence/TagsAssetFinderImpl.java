@@ -383,16 +383,17 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		throws SystemException {
 
 		return findByOrEntryIds(
-			groupId, classNameIds, entryIds, notEntryIds, null, null, null, null,
-			false, publishDate, expirationDate, QueryUtil.ALL_POS,
+			groupId, classNameIds, entryIds, notEntryIds, null, null, null,
+			null, false, publishDate, expirationDate, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 	}
 
 	public List findByOrEntryIds(
-			long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
-			String orderByCol1, String orderByCol2, String orderByType1,
-			String orderByType2, boolean excludeZeroViewCount, Date publishDate,
-			Date expirationDate, int begin, int end)
+			long groupId, long[] classNameIds, long[] entryIds,
+			long[] notEntryIds, String orderByCol1, String orderByCol2,
+			String orderByType1, String orderByType2,
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
+			int begin, int end)
 		throws SystemException {
 
 		if (entryIds.length == 0) {

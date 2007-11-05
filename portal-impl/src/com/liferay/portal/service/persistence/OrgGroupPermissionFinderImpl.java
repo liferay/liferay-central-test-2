@@ -36,7 +36,8 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="OrgGroupPermissionFinderImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrgGroupPermissionFinderImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *

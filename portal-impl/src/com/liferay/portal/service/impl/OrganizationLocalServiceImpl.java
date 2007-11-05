@@ -655,7 +655,8 @@ public class OrganizationLocalServiceImpl
 
 			try {
 				Organization parentOrganization =
-					organizationPersistence.findByPrimaryKey(parentOrganizationId);
+					organizationPersistence.findByPrimaryKey(
+						parentOrganizationId);
 
 				if (companyId != parentOrganization.getCompanyId()) {
 					parentOrganizationId =
@@ -692,7 +693,8 @@ public class OrganizationLocalServiceImpl
 
 			try {
 				Organization parentOrganization =
-					organizationPersistence.findByPrimaryKey(parentOrganizationId);
+					organizationPersistence.findByPrimaryKey(
+						parentOrganizationId);
 
 				if ((companyId != parentOrganization.getCompanyId()) ||
 					(parentOrganizationId == organizationId) ||

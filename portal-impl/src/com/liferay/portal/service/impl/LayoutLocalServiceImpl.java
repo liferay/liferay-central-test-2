@@ -132,7 +132,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
-			long parentLayoutId, String name, String title,	String description,
+			long parentLayoutId, String name, String title, String description,
 			String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 

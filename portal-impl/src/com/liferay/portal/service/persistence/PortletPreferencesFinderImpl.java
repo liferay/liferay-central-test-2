@@ -34,7 +34,8 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="PortletPreferencesFinderImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletPreferencesFinderImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *

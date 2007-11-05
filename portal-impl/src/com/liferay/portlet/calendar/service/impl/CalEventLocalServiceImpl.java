@@ -151,10 +151,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addEvent(
-			uuid, userId, plid, title, description, startDateMonth, startDateDay,
-			startDateYear, startDateHour, startDateMinute, endDateMonth,
-			endDateDay, endDateYear, durationHour, durationMinute, allDay,
-			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			uuid, userId, plid, title, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, durationHour, durationMinute,
+			allDay, timeZoneSensitive, type, repeating, recurrence, remindBy,
 			firstReminder, secondReminder, new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}

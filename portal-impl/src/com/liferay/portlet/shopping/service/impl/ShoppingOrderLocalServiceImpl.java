@@ -174,7 +174,8 @@ public class ShoppingOrderLocalServiceImpl
 	public void deleteOrder(long orderId)
 		throws PortalException, SystemException {
 
-		ShoppingOrder order = shoppingOrderPersistence.findByPrimaryKey(orderId);
+		ShoppingOrder order = shoppingOrderPersistence.findByPrimaryKey(
+			orderId);
 
 		deleteOrder(order);
 	}
@@ -396,7 +397,8 @@ public class ShoppingOrderLocalServiceImpl
 	public void sendEmail(long orderId, String emailType)
 		throws PortalException, SystemException {
 
-		ShoppingOrder order = shoppingOrderPersistence.findByPrimaryKey(orderId);
+		ShoppingOrder order = shoppingOrderPersistence.findByPrimaryKey(
+			orderId);
 
 		sendEmail(order, emailType);
 	}
@@ -600,7 +602,8 @@ public class ShoppingOrderLocalServiceImpl
 			int ccExpMonth, int ccExpYear, String ccVerNumber, String comments)
 		throws PortalException, SystemException {
 
-		ShoppingOrder order = shoppingOrderPersistence.findByPrimaryKey(orderId);
+		ShoppingOrder order = shoppingOrderPersistence.findByPrimaryKey(
+			orderId);
 
 		ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(
 			order.getCompanyId(), order.getGroupId());
@@ -670,7 +673,8 @@ public class ShoppingOrderLocalServiceImpl
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
 		throws PortalException, SystemException {
 
-		ShoppingOrder order = shoppingOrderPersistence.findByPrimaryKey(orderId);
+		ShoppingOrder order = shoppingOrderPersistence.findByPrimaryKey(
+			orderId);
 
 		order.setModifiedDate(new Date());
 		order.setPpTxnId(ppTxnId);
