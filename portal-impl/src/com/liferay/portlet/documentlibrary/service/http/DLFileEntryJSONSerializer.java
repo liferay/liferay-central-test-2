@@ -52,6 +52,7 @@ import java.util.List;
 public class DLFileEntryJSONSerializer {
 	public static JSONObject toJSONObject(DLFileEntry model) {
 		JSONObject jsonObj = new JSONObject();
+		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "fileEntryId", model.getFileEntryId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "userId", model.getUserId());

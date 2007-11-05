@@ -61,6 +61,34 @@ public interface DLFileShortcutPersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut fetchByPrimaryKey(
 		long fileShortcutId) throws com.liferay.portal.SystemException;
 
+	public java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByUuid_PrevAndNext(
+		long fileShortcutId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
+
 	public java.util.List findByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;
 
@@ -132,6 +160,9 @@ public interface DLFileShortcutPersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;
 
@@ -139,6 +170,9 @@ public interface DLFileShortcutPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
 
 	public int countByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;

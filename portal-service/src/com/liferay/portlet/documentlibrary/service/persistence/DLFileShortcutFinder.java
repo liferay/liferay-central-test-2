@@ -23,31 +23,13 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 /**
- * <a href="DLFileEntryFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLFileShortcutFinder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DLFileEntryFinder {
-	public int countByFolderIds(java.util.List folderIds)
-		throws com.liferay.portal.SystemException;
-
-	public int countByGroupId(long groupId)
-		throws com.liferay.portal.SystemException;
-
-	public int countByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByGroupId(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByNoAssets()
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByG_U(long groupId, long userId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByUuid_G(
+public interface DLFileShortcutFinder {
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_G(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 }

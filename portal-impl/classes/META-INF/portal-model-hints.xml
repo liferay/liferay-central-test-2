@@ -665,6 +665,7 @@
 		<field name="secondReminder" type="int" />
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileEntry">
+		<field name="uuid" type="String" />
 		<field name="fileEntryId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -701,6 +702,7 @@
 		</field>
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileShortcut">
+		<field name="uuid" type="String" />
 		<field name="fileShortcutId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -727,6 +729,7 @@
 		<field name="size" type="int" />
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFolder">
+		<field name="uuid" type="String" />
 		<field name="folderId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />

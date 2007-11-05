@@ -57,6 +57,7 @@ import java.util.Date;
 public class DLFileShortcutModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "DLFileShortcut";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "fileShortcutId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
@@ -67,11 +68,14 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 			{ "toFolderId", new Integer(Types.BIGINT) },
 			{ "toName", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table DLFileShortcut (fileShortcutId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFolderId LONG,toName VARCHAR(300) null)";
+	public static String TABLE_SQL_CREATE = "create table DLFileShortcut (uuid_ VARCHAR(75) null,fileShortcutId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFolderId LONG,toName VARCHAR(300) null)";
 	public static String TABLE_SQL_DROP = "drop table DLFileShortcut";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileShortcut"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileShortcut.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileShortcut.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -94,6 +98,16 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_fileShortcutId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getFileShortcutId() {
@@ -208,6 +222,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		DLFileShortcutImpl clone = new DLFileShortcutImpl();
+		clone.setUuid(getUuid());
 		clone.setFileShortcutId(getFileShortcutId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -268,6 +283,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _fileShortcutId;
 	private long _companyId;
 	private long _userId;

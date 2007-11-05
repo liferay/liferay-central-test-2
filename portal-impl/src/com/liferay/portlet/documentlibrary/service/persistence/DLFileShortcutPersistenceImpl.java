@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
@@ -64,6 +65,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
 		dlFileShortcut.setNew(true);
 		dlFileShortcut.setPrimaryKey(fileShortcutId);
+
+		String uuid = PortalUUIDUtil.generate();
+		dlFileShortcut.setUuid(uuid);
 
 		return dlFileShortcut;
 	}
@@ -177,6 +181,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 	public DLFileShortcut updateImpl(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
 		boolean merge) throws SystemException {
+		if (Validator.isNull(dlFileShortcut.getUuid())) {
+			String uuid = PortalUUIDUtil.generate();
+			dlFileShortcut.setUuid(uuid);
+		}
+
 		Session session = null;
 
 		try {
@@ -232,6 +241,216 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 			return (DLFileShortcut)session.get(DLFileShortcutImpl.class,
 				new Long(fileShortcutId));
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByUuid(String uuid) throws SystemException {
+		String finderClassName = DLFileShortcut.class.getName();
+		String finderMethodName = "findByUuid";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { uuid };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public List findByUuid(String uuid, int begin, int end)
+		throws SystemException {
+		return findByUuid(uuid, begin, end, null);
+	}
+
+	public List findByUuid(String uuid, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		String finderClassName = DLFileShortcut.class.getName();
+		String finderMethodName = "findByUuid";
+		String[] finderParams = new String[] {
+				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				uuid, String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public DLFileShortcut findByUuid_First(String uuid, OrderByComparator obc)
+		throws NoSuchFileShortcutException, SystemException {
+		List list = findByUuid(uuid, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No DLFileShortcut exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFileShortcutException(msg.toString());
+		}
+		else {
+			return (DLFileShortcut)list.get(0);
+		}
+	}
+
+	public DLFileShortcut findByUuid_Last(String uuid, OrderByComparator obc)
+		throws NoSuchFileShortcutException, SystemException {
+		int count = countByUuid(uuid);
+		List list = findByUuid(uuid, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No DLFileShortcut exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFileShortcutException(msg.toString());
+		}
+		else {
+			return (DLFileShortcut)list.get(0);
+		}
+	}
+
+	public DLFileShortcut[] findByUuid_PrevAndNext(long fileShortcutId,
+		String uuid, OrderByComparator obc)
+		throws NoSuchFileShortcutException, SystemException {
+		DLFileShortcut dlFileShortcut = findByPrimaryKey(fileShortcutId);
+		int count = countByUuid(uuid);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
+			if (uuid == null) {
+				query.append("uuid_ IS NULL");
+			}
+			else {
+				query.append("uuid_ = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (uuid != null) {
+				q.setString(queryPos++, uuid);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					dlFileShortcut);
+			DLFileShortcut[] array = new DLFileShortcutImpl[3];
+			array[0] = (DLFileShortcut)objArray[0];
+			array[1] = (DLFileShortcut)objArray[1];
+			array[2] = (DLFileShortcut)objArray[2];
+
+			return array;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -754,6 +973,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByUuid(String uuid) throws SystemException {
+		Iterator itr = findByUuid(uuid).iterator();
+
+		while (itr.hasNext()) {
+			DLFileShortcut dlFileShortcut = (DLFileShortcut)itr.next();
+			remove(dlFileShortcut);
+		}
+	}
+
 	public void removeByFolderId(long folderId) throws SystemException {
 		Iterator itr = findByFolderId(folderId).iterator();
 
@@ -778,6 +1006,69 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			remove((DLFileShortcut)itr.next());
+		}
+	}
+
+	public int countByUuid(String uuid) throws SystemException {
+		String finderClassName = DLFileShortcut.class.getName();
+		String finderMethodName = "countByUuid";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { uuid };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -63,6 +64,9 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 
 	public static String FIND_BY_G_U =
 		DLFileEntryFinder.class.getName() + ".findByG_U";
+
+	public static String FIND_BY_UUID_G =
+		DLFileEntryFinder.class.getName() + ".findByUuid_G";
 
 	public int countByFolderIds(List folderIds) throws SystemException {
 		Session session = null;
@@ -250,6 +254,42 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			qPos.add(userId);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public DLFileEntry findByUuid_G(String uuid, long groupId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("DLFileEntry", DLFileEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(uuid);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (DLFileEntry)list.get(0);
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

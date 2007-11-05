@@ -53,7 +53,19 @@ public class DLFileShortcutLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addFileShortcut(
-			userId, folderId, toFolderId, toName,
+			null, userId, folderId, toFolderId, toName,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public DLFileShortcut addFileShortcut(
+			String uuid, long userId, long folderId, long toFolderId,
+			String toName, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addFileShortcut(
+			uuid, userId, folderId, toFolderId, toName,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
@@ -64,14 +76,15 @@ public class DLFileShortcutLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addFileShortcut(
-			userId, folderId, toFolderId, toName, null, null,
+			null, userId, folderId, toFolderId, toName, null, null,
 			communityPermissions, guestPermissions);
 	}
 
 	public DLFileShortcut addFileShortcut(
-			long userId, long folderId, long toFolderId, String toName,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			String uuid, long userId, long folderId, long toFolderId,
+			String toName, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// File shortcut
@@ -88,6 +101,7 @@ public class DLFileShortcutLocalServiceImpl
 		DLFileShortcut fileShortcut = dlFileShortcutPersistence.create(
 			fileShortcutId);
 
+		fileShortcut.setUuid(uuid);
 		fileShortcut.setCompanyId(user.getCompanyId());
 		fileShortcut.setUserId(user.getUserId());
 		fileShortcut.setUserName(user.getFullName());

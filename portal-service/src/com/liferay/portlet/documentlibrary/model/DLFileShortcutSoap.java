@@ -48,6 +48,7 @@ import java.util.List;
 public class DLFileShortcutSoap implements Serializable {
 	public static DLFileShortcutSoap toSoapModel(DLFileShortcut model) {
 		DLFileShortcutSoap soapModel = new DLFileShortcutSoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setFileShortcutId(model.getFileShortcutId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -81,6 +82,14 @@ public class DLFileShortcutSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setFileShortcutId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getFileShortcutId() {
@@ -155,6 +164,7 @@ public class DLFileShortcutSoap implements Serializable {
 		_toName = toName;
 	}
 
+	private String _uuid;
 	private long _fileShortcutId;
 	private long _companyId;
 	private long _userId;

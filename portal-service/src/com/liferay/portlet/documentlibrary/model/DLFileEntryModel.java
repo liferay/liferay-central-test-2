@@ -51,6 +51,10 @@ public interface DLFileEntryModel extends BaseModel {
 
 	public void setPrimaryKey(long pk);
 
+	public String getUuid();
+
+	public void setUuid(String uuid);
+
 	public long getFileEntryId();
 
 	public void setFileEntryId(long fileEntryId);

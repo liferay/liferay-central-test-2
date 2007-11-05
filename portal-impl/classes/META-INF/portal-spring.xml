@@ -2667,6 +2667,12 @@
 			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderImpl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.professional" class="com.liferay.portlet.documentlibrary.service.impl.DLFileVersionLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

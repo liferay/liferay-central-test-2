@@ -52,6 +52,7 @@ import java.util.List;
 public class DLFileShortcutJSONSerializer {
 	public static JSONObject toJSONObject(DLFileShortcut model) {
 		JSONObject jsonObj = new JSONObject();
+		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "fileShortcutId", model.getFileShortcutId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "userId", model.getUserId());

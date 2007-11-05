@@ -43,6 +43,7 @@ create index IX_25D734CD on Country (active_);
 
 create index IX_24A846D1 on DLFileEntry (folderId);
 create index IX_8F6C75D0 on DLFileEntry (folderId, name);
+create index IX_64F0FE40 on DLFileEntry (uuid_);
 
 create index IX_CE705D48 on DLFileRank (companyId, userId, folderId, name);
 create index IX_40B56512 on DLFileRank (folderId, name);
@@ -50,6 +51,7 @@ create index IX_EED06670 on DLFileRank (userId);
 
 create index IX_E56EC6AD on DLFileShortcut (folderId);
 create index IX_CA2708A2 on DLFileShortcut (toFolderId, toName);
+create index IX_4831EBE4 on DLFileShortcut (uuid_);
 
 create index IX_9CD91DB6 on DLFileVersion (folderId, name);
 create index IX_6C5E6512 on DLFileVersion (folderId, name, version);
@@ -58,6 +60,8 @@ create index IX_A74DB14C on DLFolder (companyId);
 create index IX_F2EA1ACE on DLFolder (groupId);
 create index IX_49C37475 on DLFolder (groupId, parentFolderId);
 create index IX_51556082 on DLFolder (parentFolderId, name);
+create index IX_CBC408D8 on DLFolder (uuid_);
+create index IX_3CC1DED2 on DLFolder (uuid_, groupId);
 
 create index IX_1BB072CA on EmailAddress (companyId);
 create index IX_49D2DEC4 on EmailAddress (companyId, classNameId);

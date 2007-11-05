@@ -57,6 +57,7 @@ import java.util.Date;
 public class DLFolderModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "DLFolder";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "folderId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
@@ -69,11 +70,14 @@ public class DLFolderModelImpl extends BaseModelImpl {
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static String TABLE_SQL_CREATE = "create table DLFolder (folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(100) null,description STRING null,lastPostDate DATE null)";
+	public static String TABLE_SQL_CREATE = "create table DLFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(100) null,description STRING null,lastPostDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table DLFolder";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFolder"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFolder.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFolder.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -99,6 +103,16 @@ public class DLFolderModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_folderId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getFolderId() {
@@ -242,6 +256,7 @@ public class DLFolderModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		DLFolderImpl clone = new DLFolderImpl();
+		clone.setUuid(getUuid());
 		clone.setFolderId(getFolderId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -317,6 +332,7 @@ public class DLFolderModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _folderId;
 	private long _groupId;
 	private long _companyId;

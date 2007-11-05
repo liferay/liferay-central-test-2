@@ -62,7 +62,19 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addFolder(
-			userId, plid, parentFolderId, name, description,
+			null, userId, plid, parentFolderId, name, description,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public DLFolder addFolder(
+			String uuid, long userId, long plid, long parentFolderId,
+			String name, String description, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addFolder(
+			uuid, userId, plid, parentFolderId, name, description,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
@@ -74,13 +86,13 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addFolder(
-			userId, plid, parentFolderId, name, description, null, null,
+			null, userId, plid, parentFolderId, name, description, null, null,
 			communityPermissions, guestPermissions);
 	}
 
 	public DLFolder addFolder(
-			long userId, long plid, long parentFolderId, String name,
-			String description, Boolean addCommunityPermissions,
+			String uuid, long userId, long plid, long parentFolderId,
+			String name, String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -88,14 +100,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
 		return addFolderToGroup(
-			userId, groupId, parentFolderId, name, description,
+			uuid, userId, groupId, parentFolderId, name, description,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions);
 	}
 
 	public DLFolder addFolderToGroup(
-			long userId, long groupId, long parentFolderId, String name,
-			String description, Boolean addCommunityPermissions,
+			String uuid, long userId, long groupId, long parentFolderId,
+			String name, String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -112,6 +124,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		DLFolder folder = dlFolderPersistence.create(folderId);
 
+		folder.setUuid(uuid);
 		folder.setGroupId(groupId);
 		folder.setCompanyId(user.getCompanyId());
 		folder.setUserId(user.getUserId());

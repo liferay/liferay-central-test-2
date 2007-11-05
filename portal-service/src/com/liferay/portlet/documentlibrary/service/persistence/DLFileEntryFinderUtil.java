@@ -59,6 +59,12 @@ public class DLFileEntryFinderUtil {
 		return getFinder().findByG_U(groupId, userId, begin, end);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByUuid_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByUuid_G(uuid, groupId);
+	}
+
 	public static DLFileEntryFinder getFinder() {
 		return _getUtil()._finder;
 	}

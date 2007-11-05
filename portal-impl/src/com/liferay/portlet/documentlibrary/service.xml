@@ -3,7 +3,7 @@
 
 <service-builder package-path="com.liferay.portlet.documentlibrary">
 	<namespace>DL</namespace>
-	<entity name="DLFileEntry" local-service="true" remote-service="true">
+	<entity name="DLFileEntry" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -102,7 +102,7 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
-	<entity name="DLFileShortcut" local-service="true" remote-service="true">
+	<entity name="DLFileShortcut" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -178,7 +178,7 @@
 			<finder-column name="version" />
 		</finder>
 	</entity>
-	<entity name="DLFolder" local-service="true" remote-service="true">
+	<entity name="DLFolder" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

@@ -137,6 +137,18 @@ public class DLFileRankLocalServiceUtil {
 		dlFileRankLocalService.setDLFileShortcutPersistence(dlFileShortcutPersistence);
 	}
 
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder getDLFileShortcutFinder() {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.getDLFileShortcutFinder();
+	}
+
+	public static void setDLFileShortcutFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder dlFileShortcutFinder) {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+		dlFileRankLocalService.setDLFileShortcutFinder(dlFileShortcutFinder);
+	}
+
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence getDLFileVersionPersistence() {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
 

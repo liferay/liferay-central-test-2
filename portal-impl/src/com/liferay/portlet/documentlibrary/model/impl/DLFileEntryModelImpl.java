@@ -57,6 +57,7 @@ import java.util.Date;
 public class DLFileEntryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "DLFileEntry";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "fileEntryId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
@@ -74,11 +75,14 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 			{ "readCount", new Integer(Types.INTEGER) },
 			{ "extraSettings", new Integer(Types.CLOB) }
 		};
-	public static String TABLE_SQL_CREATE = "create table DLFileEntry (fileEntryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(300) null,title VARCHAR(300) null,description STRING null,version DOUBLE,size_ INTEGER,readCount INTEGER,extraSettings TEXT null)";
+	public static String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(300) null,title VARCHAR(300) null,description STRING null,version DOUBLE,size_ INTEGER,readCount INTEGER,extraSettings TEXT null)";
 	public static String TABLE_SQL_DROP = "drop table DLFileEntry";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -113,6 +117,16 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_fileEntryId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getFileEntryId() {
@@ -323,6 +337,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		DLFileEntryImpl clone = new DLFileEntryImpl();
+		clone.setUuid(getUuid());
 		clone.setFileEntryId(getFileEntryId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -402,6 +417,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _fileEntryId;
 	private long _companyId;
 	private long _userId;

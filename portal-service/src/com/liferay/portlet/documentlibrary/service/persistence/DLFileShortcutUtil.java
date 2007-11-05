@@ -77,6 +77,46 @@ public class DLFileShortcutUtil {
 		return getPersistence().fetchByPrimaryKey(fileShortcutId);
 	}
 
+	public static java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid);
+	}
+
+	public static java.util.List findByUuid(java.lang.String uuid, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end);
+	}
+
+	public static java.util.List findByUuid(java.lang.String uuid, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
+		return getPersistence().findByUuid_First(uuid, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
+		return getPersistence().findByUuid_Last(uuid, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByUuid_PrevAndNext(
+		long fileShortcutId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
+		return getPersistence().findByUuid_PrevAndNext(fileShortcutId, uuid, obc);
+	}
+
 	public static java.util.List findByFolderId(long folderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId);
@@ -188,6 +228,11 @@ public class DLFileShortcutUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByUuid(uuid);
+	}
+
 	public static void removeByFolderId(long folderId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByFolderId(folderId);
@@ -200,6 +245,11 @@ public class DLFileShortcutUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUuid(uuid);
 	}
 
 	public static int countByFolderId(long folderId)

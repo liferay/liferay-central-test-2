@@ -134,6 +134,20 @@
 				DLFileEntry.modifiedDate DESC
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByUuid_G">
+		<![CDATA[
+			SELECT
+				{DLFileEntry.*}
+			FROM
+				DLFileEntry
+			INNER JOIN
+				DLFolder ON
+					(DLFolder.folderId = DLFileEntry.folderId)
+			WHERE
+				(DLFolder.groupId = ?) AND
+				(DLFileEntry.uuid_ = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.countByG_U">
 		<![CDATA[
 			SELECT
@@ -162,6 +176,20 @@
 				(DLFileRank.userId = ?)
 			ORDER BY
 				DLFileRank.createDate DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder.findByUuid_G">
+		<![CDATA[
+			SELECT
+				{DLFileShortcut.*}
+			FROM
+				DLFileShortcut
+			INNER JOIN
+				DLFolder ON
+					(DLFolder.folderId = DLFileShortcut.folderId)
+			WHERE
+				(DLFolder.groupId = ?) AND
+				(DLFileShortcut.uuid_ = ?)
 		]]>
 	</sql>
 </custom-sql>

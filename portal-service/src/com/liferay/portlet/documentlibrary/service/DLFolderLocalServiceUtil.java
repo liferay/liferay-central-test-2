@@ -137,6 +137,18 @@ public class DLFolderLocalServiceUtil {
 		dlFolderLocalService.setDLFileShortcutPersistence(dlFileShortcutPersistence);
 	}
 
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder getDLFileShortcutFinder() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getDLFileShortcutFinder();
+	}
+
+	public static void setDLFileShortcutFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder dlFileShortcutFinder) {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+		dlFolderLocalService.setDLFileShortcutFinder(dlFileShortcutFinder);
+	}
+
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence getDLFileVersionPersistence() {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
@@ -251,6 +263,19 @@ public class DLFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
+		java.lang.String uuid, long userId, long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.addFolder(uuid, userId, plid,
+			parentFolderId, name, description, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -263,8 +288,8 @@ public class DLFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long userId, long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String uuid, long userId, long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -273,14 +298,14 @@ public class DLFolderLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
-		return dlFolderLocalService.addFolder(userId, plid, parentFolderId,
-			name, description, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+		return dlFolderLocalService.addFolder(uuid, userId, plid,
+			parentFolderId, name, description, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolderToGroup(
-		long userId, long groupId, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String uuid, long userId, long groupId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -289,7 +314,7 @@ public class DLFolderLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
-		return dlFolderLocalService.addFolderToGroup(userId, groupId,
+		return dlFolderLocalService.addFolderToGroup(uuid, userId, groupId,
 			parentFolderId, name, description, addCommunityPermissions,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}

@@ -87,6 +87,11 @@ public interface DLFolderLocalService {
 	public void setDLFileShortcutPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence);
 
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder getDLFileShortcutFinder();
+
+	public void setDLFileShortcutFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder dlFileShortcutFinder);
+
 	public com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence getDLFileVersionPersistence();
 
 	public void setDLFileVersionPersistence(
@@ -137,6 +142,13 @@ public interface DLFolderLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
+		java.lang.String uuid, long userId, long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -144,8 +156,8 @@ public interface DLFolderLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long userId, long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String uuid, long userId, long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -154,8 +166,8 @@ public interface DLFolderLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolderToGroup(
-		long userId, long groupId, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String uuid, long userId, long groupId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,

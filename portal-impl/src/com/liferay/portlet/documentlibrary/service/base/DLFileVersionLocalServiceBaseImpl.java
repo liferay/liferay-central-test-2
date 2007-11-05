@@ -50,6 +50,8 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence;
@@ -176,6 +178,15 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		this.dlFileShortcutPersistence = dlFileShortcutPersistence;
 	}
 
+	public DLFileShortcutFinder getDLFileShortcutFinder() {
+		return dlFileShortcutFinder;
+	}
+
+	public void setDLFileShortcutFinder(
+		DLFileShortcutFinder dlFileShortcutFinder) {
+		this.dlFileShortcutFinder = dlFileShortcutFinder;
+	}
+
 	public DLFileVersionPersistence getDLFileVersionPersistence() {
 		return dlFileVersionPersistence;
 	}
@@ -255,6 +266,10 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 			dlFileShortcutPersistence = DLFileShortcutUtil.getPersistence();
 		}
 
+		if (dlFileShortcutFinder == null) {
+			dlFileShortcutFinder = DLFileShortcutFinderUtil.getFinder();
+		}
+
 		if (dlFileVersionPersistence == null) {
 			dlFileVersionPersistence = DLFileVersionUtil.getPersistence();
 		}
@@ -283,6 +298,7 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 	protected DLFileShortcutLocalService dlFileShortcutLocalService;
 	protected DLFileShortcutService dlFileShortcutService;
 	protected DLFileShortcutPersistence dlFileShortcutPersistence;
+	protected DLFileShortcutFinder dlFileShortcutFinder;
 	protected DLFileVersionPersistence dlFileVersionPersistence;
 	protected DLFolderLocalService dlFolderLocalService;
 	protected DLFolderService dlFolderService;

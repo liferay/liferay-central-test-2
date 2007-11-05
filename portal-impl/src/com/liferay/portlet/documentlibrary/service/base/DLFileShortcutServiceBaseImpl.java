@@ -70,6 +70,8 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence;
@@ -172,6 +174,15 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 	public void setDLFileShortcutPersistence(
 		DLFileShortcutPersistence dlFileShortcutPersistence) {
 		this.dlFileShortcutPersistence = dlFileShortcutPersistence;
+	}
+
+	public DLFileShortcutFinder getDLFileShortcutFinder() {
+		return dlFileShortcutFinder;
+	}
+
+	public void setDLFileShortcutFinder(
+		DLFileShortcutFinder dlFileShortcutFinder) {
+		this.dlFileShortcutFinder = dlFileShortcutFinder;
 	}
 
 	public DLFileVersionLocalService getDLFileVersionLocalService() {
@@ -339,6 +350,10 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 			dlFileShortcutPersistence = DLFileShortcutUtil.getPersistence();
 		}
 
+		if (dlFileShortcutFinder == null) {
+			dlFileShortcutFinder = DLFileShortcutFinderUtil.getFinder();
+		}
+
 		if (dlFileVersionLocalService == null) {
 			dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getImpl();
 		}
@@ -410,6 +425,7 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 	protected DLFileRankFinder dlFileRankFinder;
 	protected DLFileShortcutLocalService dlFileShortcutLocalService;
 	protected DLFileShortcutPersistence dlFileShortcutPersistence;
+	protected DLFileShortcutFinder dlFileShortcutFinder;
 	protected DLFileVersionLocalService dlFileVersionLocalService;
 	protected DLFileVersionPersistence dlFileVersionPersistence;
 	protected DLFolderLocalService dlFolderLocalService;

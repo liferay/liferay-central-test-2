@@ -87,6 +87,11 @@ public interface DLFileRankLocalService {
 	public void setDLFileShortcutPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence);
 
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder getDLFileShortcutFinder();
+
+	public void setDLFileShortcutFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder dlFileShortcutFinder);
+
 	public com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence getDLFileVersionPersistence();
 
 	public void setDLFileVersionPersistence(

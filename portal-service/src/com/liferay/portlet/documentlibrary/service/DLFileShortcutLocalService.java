@@ -87,6 +87,11 @@ public interface DLFileShortcutLocalService {
 	public void setDLFileShortcutPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence);
 
+	public com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder getDLFileShortcutFinder();
+
+	public void setDLFileShortcutFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder dlFileShortcutFinder);
+
 	public com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence getDLFileVersionPersistence();
 
 	public void setDLFileVersionPersistence(
@@ -126,6 +131,13 @@ public interface DLFileShortcutLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
+		java.lang.String uuid, long userId, long folderId, long toFolderId,
+		java.lang.String toName, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		long userId, long folderId, long toFolderId, java.lang.String toName,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -133,8 +145,8 @@ public interface DLFileShortcutLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long userId, long folderId, long toFolderId, java.lang.String toName,
-		java.lang.Boolean addCommunityPermissions,
+		java.lang.String uuid, long userId, long folderId, long toFolderId,
+		java.lang.String toName, java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

@@ -61,6 +61,34 @@ public interface DLFileEntryPersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByPrimaryKey(
 		long fileEntryId) throws com.liferay.portal.SystemException;
 
+	public java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByUuid_PrevAndNext(
+		long fileEntryId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+
 	public java.util.List findByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;
 
@@ -113,6 +141,9 @@ public interface DLFileEntryPersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;
 
@@ -121,6 +152,9 @@ public interface DLFileEntryPersistence {
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
 
 	public int countByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;

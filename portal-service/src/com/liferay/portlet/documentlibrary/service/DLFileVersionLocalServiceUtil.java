@@ -138,6 +138,18 @@ public class DLFileVersionLocalServiceUtil {
 		dlFileVersionLocalService.setDLFileShortcutPersistence(dlFileShortcutPersistence);
 	}
 
+	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder getDLFileShortcutFinder() {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.getDLFileShortcutFinder();
+	}
+
+	public static void setDLFileShortcutFinder(
+		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder dlFileShortcutFinder) {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+		dlFileVersionLocalService.setDLFileShortcutFinder(dlFileShortcutFinder);
+	}
+
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence getDLFileVersionPersistence() {
 		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
 

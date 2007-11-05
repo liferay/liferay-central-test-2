@@ -48,6 +48,7 @@ import java.util.List;
 public class DLFileEntrySoap implements Serializable {
 	public static DLFileEntrySoap toSoapModel(DLFileEntry model) {
 		DLFileEntrySoap soapModel = new DLFileEntrySoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setFileEntryId(model.getFileEntryId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -88,6 +89,14 @@ public class DLFileEntrySoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setFileEntryId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getFileEntryId() {
@@ -218,6 +227,7 @@ public class DLFileEntrySoap implements Serializable {
 		_extraSettings = extraSettings;
 	}
 
+	private String _uuid;
 	private long _fileEntryId;
 	private long _companyId;
 	private long _userId;
