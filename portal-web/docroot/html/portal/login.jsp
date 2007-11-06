@@ -89,7 +89,8 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 		<c:when test='<%= tabs1.equals("already-registered") %>'>
 			var username = document.fm1.login;
 			var password = document.fm1.password;
-			if ( !username.value.length && !password.value.length ) {
+
+			if (!username.value.length && !password.value.length) {
 				Liferay.Util.focusFormField(username);
 			}
 		</c:when>
