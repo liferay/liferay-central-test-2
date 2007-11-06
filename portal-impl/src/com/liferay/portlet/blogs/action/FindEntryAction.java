@@ -131,10 +131,9 @@ public class FindEntryAction extends Action {
 
 		long groupId = entry.getGroupId();
 		boolean privateLayout = false;
-		long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
 
 		List layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, parentLayoutId);
+			groupId, privateLayout);
 
 		for (int i = 0; i < layouts.size(); i++) {
 			Layout layout = (Layout)layouts.get(i);
