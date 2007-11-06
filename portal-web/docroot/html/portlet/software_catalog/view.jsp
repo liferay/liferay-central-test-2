@@ -52,8 +52,6 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/software_catalog/view");
 portletURL.setParameter("tabs1", tabs1);
-//portletURL.setParameter("keywords", keywords);
-//portletURL.setParameter("type", type);
 %>
 
 <form action="<%= portletURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
@@ -69,6 +67,8 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("products") %>'>
 
 		<%
+		portletURL.setParameter("type", type);
+
 		String orderByCol = ParamUtil.getString(request, "orderByCol");
 		String orderByType = ParamUtil.getString(request, "orderByType");
 
