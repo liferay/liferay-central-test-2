@@ -1,5 +1,11 @@
 alter table CalEvent add uuid_ VARCHAR(75) null;
 
+alter table DLFileEntry add uuid_ VARCHAR(75) null;
+
+alter table DLFileShortcut add uuid_ VARCHAR(75) null;
+
+alter table DLFolder add uuid_ VARCHAR(75) null;
+
 alter table JournalArticle add uuid_ VARCHAR(75) null;
 
 alter table JournalArticleImage add uuid_ VARCHAR(75) null;
