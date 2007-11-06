@@ -83,7 +83,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_enableExport, _enableRanksExport, _enableShortcutsExport
+			_enableExport, _enableShortcutsExport, _enableRanksExport
 		};
 	}
 
@@ -91,7 +91,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_enableImport, _enableRanksImport, _enableShortcutsImport
+			_enableImport, _enableShortcutsImport, _enableRanksImport
 		};
 	}
 
@@ -102,8 +102,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		Map parameterMap = context.getParameterMap();
 
-		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_DL_DATA, false);
+		boolean exportData = MapUtil.getBoolean(parameterMap, _EXPORT_DL_DATA);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -118,11 +117,11 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			return null;
 		}
 
-		boolean exportRanks = MapUtil.getBoolean(
-			parameterMap, _EXPORT_DL_RANKS, false);
-
 		boolean exportShortcuts = MapUtil.getBoolean(
-			parameterMap, _EXPORT_DL_SHORTCUTS, false);
+			parameterMap, _EXPORT_DL_SHORTCUTS);
+
+		boolean exportRanks = MapUtil.getBoolean(
+			parameterMap, _EXPORT_DL_RANKS);
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
@@ -279,8 +278,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		Map parameterMap = context.getParameterMap();
 
-		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_DL_DATA, false);
+		boolean importData = MapUtil.getBoolean(parameterMap, _IMPORT_DL_DATA);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -296,13 +294,13 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		boolean mergeData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.MERGE_DATA, false);
-
-		boolean importRanks = MapUtil.getBoolean(
-			parameterMap, _IMPORT_DL_RANKS, false);
+			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
 
 		boolean importShortcuts = MapUtil.getBoolean(
-			parameterMap, _IMPORT_DL_SHORTCUTS, false);
+			parameterMap, _IMPORT_DL_SHORTCUTS);
+
+		boolean importRanks = MapUtil.getBoolean(
+			parameterMap, _IMPORT_DL_RANKS);
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
@@ -632,17 +630,17 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 	private static final String _IMPORT_DL_DATA =
 		"import-" + PortletKeys.DOCUMENT_LIBRARY + "-data";
 
-	private static final String _EXPORT_DL_RANKS =
-		"export-" + PortletKeys.DOCUMENT_LIBRARY + "-ranks";
-
-	private static final String _IMPORT_DL_RANKS =
-		"import-" + PortletKeys.DOCUMENT_LIBRARY + "-ranks";
-
 	private static final String _EXPORT_DL_SHORTCUTS =
 		"export-" + PortletKeys.DOCUMENT_LIBRARY + "-shortcuts";
 
 	private static final String _IMPORT_DL_SHORTCUTS =
 		"import-" + PortletKeys.DOCUMENT_LIBRARY + "-shortcuts";
+
+	private static final String _EXPORT_DL_RANKS =
+		"export-" + PortletKeys.DOCUMENT_LIBRARY + "-ranks";
+
+	private static final String _IMPORT_DL_RANKS =
+		"import-" + PortletKeys.DOCUMENT_LIBRARY + "-ranks";
 
 	private static final String _ZIP_FOLDER = "document-library/";
 
@@ -652,17 +650,17 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 	private static final PortletDataHandlerBoolean _enableImport =
 		new PortletDataHandlerBoolean(_IMPORT_DL_DATA, true, null);
 
-	private static final PortletDataHandlerBoolean _enableRanksExport =
-		new PortletDataHandlerBoolean(_EXPORT_DL_RANKS, true, null);
-
-	private static final PortletDataHandlerBoolean _enableRanksImport =
-		new PortletDataHandlerBoolean(_IMPORT_DL_RANKS, true, null);
-
 	private static final PortletDataHandlerBoolean _enableShortcutsExport =
 		new PortletDataHandlerBoolean(_EXPORT_DL_SHORTCUTS, true, null);
 
 	private static final PortletDataHandlerBoolean _enableShortcutsImport =
 		new PortletDataHandlerBoolean(_IMPORT_DL_SHORTCUTS, true, null);
+
+	private static final PortletDataHandlerBoolean _enableRanksExport =
+		new PortletDataHandlerBoolean(_EXPORT_DL_RANKS, true, null);
+
+	private static final PortletDataHandlerBoolean _enableRanksImport =
+		new PortletDataHandlerBoolean(_IMPORT_DL_RANKS, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(DLPortletDataHandlerImpl.class);
