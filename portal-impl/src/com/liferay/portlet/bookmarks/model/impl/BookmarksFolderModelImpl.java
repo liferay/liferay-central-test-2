@@ -57,6 +57,7 @@ import java.util.Date;
 public class BookmarksFolderModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "BookmarksFolder";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "folderId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
@@ -67,11 +68,14 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table BookmarksFolder (folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(75) null,description STRING null)";
+	public static String TABLE_SQL_CREATE = "create table BookmarksFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(75) null,description STRING null)";
 	public static String TABLE_SQL_DROP = "drop table BookmarksFolder";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksFolder"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksFolder.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksFolder.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -94,6 +98,16 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_folderId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getFolderId() {
@@ -207,6 +221,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		BookmarksFolderImpl clone = new BookmarksFolderImpl();
+		clone.setUuid(getUuid());
 		clone.setFolderId(getFolderId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -280,6 +295,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _folderId;
 	private long _groupId;
 	private long _companyId;

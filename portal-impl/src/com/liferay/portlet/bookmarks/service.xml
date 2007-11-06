@@ -3,7 +3,7 @@
 
 <service-builder package-path="com.liferay.portlet.bookmarks">
 	<namespace>Bookmarks</namespace>
-	<entity name="BookmarksEntry" local-service="true" remote-service="true">
+	<entity name="BookmarksEntry" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -45,7 +45,7 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
-	<entity name="BookmarksFolder" local-service="true" remote-service="true">
+	<entity name="BookmarksFolder" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

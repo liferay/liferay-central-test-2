@@ -77,10 +77,20 @@ public interface BookmarksFolderLocalService {
 	public void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
 
+	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
+
+	public void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
+
 	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
 
 	public void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
 
 	public void afterPropertiesSet();
 
@@ -92,6 +102,13 @@ public interface BookmarksFolderLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
+		java.lang.String uuid, long userId, long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -99,8 +116,8 @@ public interface BookmarksFolderLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
-		long userId, long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String uuid, long userId, long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,

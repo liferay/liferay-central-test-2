@@ -51,6 +51,10 @@ public interface BookmarksEntryModel extends BaseModel {
 
 	public void setPrimaryKey(long pk);
 
+	public String getUuid();
+
+	public void setUuid(String uuid);
+
 	public long getEntryId();
 
 	public void setEntryId(long entryId);

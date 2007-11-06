@@ -58,7 +58,19 @@ public class BookmarksEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addEntry(
-			userId, folderId, name, url, comments, tagsEntries,
+			null, userId, folderId, name, url, comments, tagsEntries,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public BookmarksEntry addEntry(
+			String uuid, long userId, long folderId, String name, String url,
+			String comments, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addEntry(
+			uuid, userId, folderId, name, url, comments, tagsEntries,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
@@ -70,12 +82,12 @@ public class BookmarksEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addEntry(
-			userId, folderId, name, url, comments, tagsEntries, null, null,
+			null, userId, folderId, name, url, comments, tagsEntries, null, null,
 			communityPermissions, guestPermissions);
 	}
 
 	public BookmarksEntry addEntry(
-			long userId, long folderId, String name, String url,
+			String uuid, long userId, long folderId, String name, String url,
 			String comments, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
@@ -99,6 +111,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		BookmarksEntry entry = bookmarksEntryPersistence.create(entryId);
 
+		entry.setUuid(uuid);
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());
 		entry.setCreateDate(now);

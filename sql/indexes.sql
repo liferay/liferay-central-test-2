@@ -21,9 +21,12 @@ create index IX_82254C25 on BlogsStatsUser (groupId, userId);
 create index IX_BB51F1D9 on BlogsStatsUser (userId);
 
 create index IX_443BDC38 on BookmarksEntry (folderId);
+create index IX_B670BA39 on BookmarksEntry (uuid_);
 
 create index IX_7F703619 on BookmarksFolder (groupId);
 create index IX_967799C0 on BookmarksFolder (groupId, parentFolderId);
+create index IX_451E7AE3 on BookmarksFolder (uuid_);
+create index IX_DC2F8927 on BookmarksFolder (uuid_, groupId);
 
 create index IX_12EE4898 on CalEvent (groupId);
 create index IX_4FDDD2BF on CalEvent (groupId, repeating);

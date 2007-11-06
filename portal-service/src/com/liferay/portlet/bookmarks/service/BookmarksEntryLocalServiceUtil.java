@@ -114,6 +114,18 @@ public class BookmarksEntryLocalServiceUtil {
 		bookmarksEntryLocalService.setResourcePersistence(resourcePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+		bookmarksEntryLocalService.setResourceFinder(resourceFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -126,6 +138,18 @@ public class BookmarksEntryLocalServiceUtil {
 		bookmarksEntryLocalService.setUserPersistence(userPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+		bookmarksEntryLocalService.setUserFinder(userFinder);
+	}
+
 	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
@@ -136,6 +160,18 @@ public class BookmarksEntryLocalServiceUtil {
 		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 		bookmarksEntryLocalService.setTagsAssetPersistence(tagsAssetPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsAssetFinder getTagsAssetFinder() {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.getTagsAssetFinder();
+	}
+
+	public static void setTagsAssetFinder(
+		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder) {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+		bookmarksEntryLocalService.setTagsAssetFinder(tagsAssetFinder);
 	}
 
 	public static void afterPropertiesSet() {
@@ -157,6 +193,20 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
+		java.lang.String uuid, long userId, long folderId,
+		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.addEntry(uuid, userId, folderId,
+			name, url, comments, tagsEntries, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries,
@@ -171,8 +221,8 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		long userId, long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
+		java.lang.String uuid, long userId, long folderId,
+		java.lang.String name, java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
@@ -182,8 +232,8 @@ public class BookmarksEntryLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
-		return bookmarksEntryLocalService.addEntry(userId, folderId, name, url,
-			comments, tagsEntries, addCommunityPermissions,
+		return bookmarksEntryLocalService.addEntry(uuid, userId, folderId,
+			name, url, comments, tagsEntries, addCommunityPermissions,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 

@@ -606,6 +606,7 @@
 		<id name="entryId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="createDate" />
@@ -622,6 +623,7 @@
 		<id name="folderId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />

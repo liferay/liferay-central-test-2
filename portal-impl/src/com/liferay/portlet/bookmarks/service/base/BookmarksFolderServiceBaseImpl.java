@@ -36,8 +36,12 @@ import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.ResourceFinder;
+import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.ResourceUtil;
+import com.liferay.portal.service.persistence.UserFinder;
+import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
@@ -160,6 +164,14 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 		this.resourcePersistence = resourcePersistence;
 	}
 
+	public ResourceFinder getResourceFinder() {
+		return resourceFinder;
+	}
+
+	public void setResourceFinder(ResourceFinder resourceFinder) {
+		this.resourceFinder = resourceFinder;
+	}
+
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -182,6 +194,14 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 
 	public void setUserPersistence(UserPersistence userPersistence) {
 		this.userPersistence = userPersistence;
+	}
+
+	public UserFinder getUserFinder() {
+		return userFinder;
+	}
+
+	public void setUserFinder(UserFinder userFinder) {
+		this.userFinder = userFinder;
 	}
 
 	public void afterPropertiesSet() {
@@ -229,6 +249,10 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 			resourcePersistence = ResourceUtil.getPersistence();
 		}
 
+		if (resourceFinder == null) {
+			resourceFinder = ResourceFinderUtil.getFinder();
+		}
+
 		if (userLocalService == null) {
 			userLocalService = UserLocalServiceFactory.getImpl();
 		}
@@ -239,6 +263,10 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 
 		if (userPersistence == null) {
 			userPersistence = UserUtil.getPersistence();
+		}
+
+		if (userFinder == null) {
+			userFinder = UserFinderUtil.getFinder();
 		}
 	}
 
@@ -253,7 +281,9 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;
+	protected ResourceFinder resourceFinder;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;
+	protected UserFinder userFinder;
 }

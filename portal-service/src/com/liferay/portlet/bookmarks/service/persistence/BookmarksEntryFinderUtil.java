@@ -59,6 +59,12 @@ public class BookmarksEntryFinderUtil {
 		return getFinder().findByG_U(groupId, userId, begin, end);
 	}
 
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByUuid_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByUuid_G(uuid, groupId);
+	}
+
 	public static BookmarksEntryFinder getFinder() {
 		return _getUtil()._finder;
 	}

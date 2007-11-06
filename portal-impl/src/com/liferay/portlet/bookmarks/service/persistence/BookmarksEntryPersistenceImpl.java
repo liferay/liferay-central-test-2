@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
@@ -64,6 +65,9 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		BookmarksEntry bookmarksEntry = new BookmarksEntryImpl();
 		bookmarksEntry.setNew(true);
 		bookmarksEntry.setPrimaryKey(entryId);
+
+		String uuid = PortalUUIDUtil.generate();
+		bookmarksEntry.setUuid(uuid);
 
 		return bookmarksEntry;
 	}
@@ -176,6 +180,11 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 	public BookmarksEntry updateImpl(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
 		boolean merge) throws SystemException {
+		if (Validator.isNull(bookmarksEntry.getUuid())) {
+			String uuid = PortalUUIDUtil.generate();
+			bookmarksEntry.setUuid(uuid);
+		}
+
 		Session session = null;
 
 		try {
@@ -230,6 +239,228 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 			return (BookmarksEntry)session.get(BookmarksEntryImpl.class,
 				new Long(entryId));
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByUuid(String uuid) throws SystemException {
+		String finderClassName = BookmarksEntry.class.getName();
+		String finderMethodName = "findByUuid";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { uuid };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("folderId ASC").append(", ");
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public List findByUuid(String uuid, int begin, int end)
+		throws SystemException {
+		return findByUuid(uuid, begin, end, null);
+	}
+
+	public List findByUuid(String uuid, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		String finderClassName = BookmarksEntry.class.getName();
+		String finderMethodName = "findByUuid";
+		String[] finderParams = new String[] {
+				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				uuid, String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+				else {
+					query.append("ORDER BY ");
+					query.append("folderId ASC").append(", ");
+					query.append("name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public BookmarksEntry findByUuid_First(String uuid, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		List list = findByUuid(uuid, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No BookmarksEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return (BookmarksEntry)list.get(0);
+		}
+	}
+
+	public BookmarksEntry findByUuid_Last(String uuid, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		int count = countByUuid(uuid);
+		List list = findByUuid(uuid, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No BookmarksEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return (BookmarksEntry)list.get(0);
+		}
+	}
+
+	public BookmarksEntry[] findByUuid_PrevAndNext(long entryId, String uuid,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		BookmarksEntry bookmarksEntry = findByPrimaryKey(entryId);
+		int count = countByUuid(uuid);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+
+			if (uuid == null) {
+				query.append("uuid_ IS NULL");
+			}
+			else {
+				query.append("uuid_ = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("folderId ASC").append(", ");
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (uuid != null) {
+				q.setString(queryPos++, uuid);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					bookmarksEntry);
+			BookmarksEntry[] array = new BookmarksEntryImpl[3];
+			array[0] = (BookmarksEntry)objArray[0];
+			array[1] = (BookmarksEntry)objArray[1];
+			array[2] = (BookmarksEntry)objArray[2];
+
+			return array;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -537,6 +768,15 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByUuid(String uuid) throws SystemException {
+		Iterator itr = findByUuid(uuid).iterator();
+
+		while (itr.hasNext()) {
+			BookmarksEntry bookmarksEntry = (BookmarksEntry)itr.next();
+			remove(bookmarksEntry);
+		}
+	}
+
 	public void removeByFolderId(long folderId) throws SystemException {
 		Iterator itr = findByFolderId(folderId).iterator();
 
@@ -551,6 +791,69 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			remove((BookmarksEntry)itr.next());
+		}
+	}
+
+	public int countByUuid(String uuid) throws SystemException {
+		String finderClassName = BookmarksEntry.class.getName();
+		String finderMethodName = "countByUuid";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { uuid };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

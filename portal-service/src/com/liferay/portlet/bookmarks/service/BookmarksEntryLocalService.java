@@ -77,21 +77,44 @@ public interface BookmarksEntryLocalService {
 	public void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
 
+	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
+
+	public void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
+
 	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
 
 	public void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
 
 	public com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence();
 
 	public void setTagsAssetPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence);
 
+	public com.liferay.portlet.tags.service.persistence.TagsAssetFinder getTagsAssetFinder();
+
+	public void setTagsAssetFinder(
+		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
+		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
+		java.lang.String uuid, long userId, long folderId,
+		java.lang.String name, java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
@@ -107,8 +130,8 @@ public interface BookmarksEntryLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		long userId, long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
+		java.lang.String uuid, long userId, long folderId,
+		java.lang.String name, java.lang.String url, java.lang.String comments,
 		java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,

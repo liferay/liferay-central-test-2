@@ -55,6 +55,8 @@ public class UpgradeUUID extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
+		upgradeTable("BookmarksEntry", "entryId");
+		upgradeTable("BookmarksFolder", "folderId");
 		upgradeTable("DLFileEntry", "fileEntryId");
 		upgradeTable("DLFileShortcut", "fileShortcutId");
 		upgradeTable("DLFolder", "folderId");

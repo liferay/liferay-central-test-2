@@ -48,6 +48,7 @@ import java.util.List;
 public class BookmarksEntrySoap implements Serializable {
 	public static BookmarksEntrySoap toSoapModel(BookmarksEntry model) {
 		BookmarksEntrySoap soapModel = new BookmarksEntrySoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setEntryId(model.getEntryId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -83,6 +84,14 @@ public class BookmarksEntrySoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setEntryId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getEntryId() {
@@ -173,6 +182,7 @@ public class BookmarksEntrySoap implements Serializable {
 		_priority = priority;
 	}
 
+	private String _uuid;
 	private long _entryId;
 	private long _companyId;
 	private long _userId;

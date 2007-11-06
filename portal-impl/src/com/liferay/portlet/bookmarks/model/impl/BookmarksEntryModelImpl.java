@@ -57,6 +57,7 @@ import java.util.Date;
 public class BookmarksEntryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "BookmarksEntry";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "entryId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
@@ -69,11 +70,14 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 			{ "visits", new Integer(Types.INTEGER) },
 			{ "priority", new Integer(Types.INTEGER) }
 		};
-	public static String TABLE_SQL_CREATE = "create table BookmarksEntry (entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(300) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
+	public static String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(300) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table BookmarksEntry";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -99,6 +103,16 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_entryId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getEntryId() {
@@ -238,6 +252,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		BookmarksEntryImpl clone = new BookmarksEntryImpl();
+		clone.setUuid(getUuid());
 		clone.setEntryId(getEntryId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -313,6 +328,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _entryId;
 	private long _companyId;
 	private long _userId;

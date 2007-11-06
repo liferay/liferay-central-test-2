@@ -48,6 +48,7 @@ import java.util.List;
 public class BookmarksFolderSoap implements Serializable {
 	public static BookmarksFolderSoap toSoapModel(BookmarksFolder model) {
 		BookmarksFolderSoap soapModel = new BookmarksFolderSoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setFolderId(model.getFolderId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -81,6 +82,14 @@ public class BookmarksFolderSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setFolderId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getFolderId() {
@@ -155,6 +164,7 @@ public class BookmarksFolderSoap implements Serializable {
 		_description = description;
 	}
 
+	private String _uuid;
 	private long _folderId;
 	private long _groupId;
 	private long _companyId;

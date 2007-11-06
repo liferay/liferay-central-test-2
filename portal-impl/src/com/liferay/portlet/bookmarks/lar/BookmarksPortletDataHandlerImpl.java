@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
@@ -35,9 +36,9 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
@@ -99,8 +100,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_BOOKMARKS_DATA,
-			_enableExport.getDefaultState());
+			parameterMap, _EXPORT_BOOKMARKS_DATA);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -200,8 +200,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_BOOKMARKS_DATA,
-			_enableImport.getDefaultState());
+			parameterMap, _IMPORT_BOOKMARKS_DATA);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -215,6 +214,9 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		if (!importData) {
 			return null;
 		}
+
+		boolean mergeData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
@@ -243,7 +245,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BookmarksFolder folder = (BookmarksFolder)itr.next();
 
-				importFolder(context, folderPKs, folder);
+				importFolder(context, mergeData, folderPKs, folder);
 			}
 
 			// Entries
@@ -262,7 +264,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BookmarksEntry entry = (BookmarksEntry)itr.next();
 
-				importEntry(context, folderPKs, entry);
+				importEntry(context, mergeData, folderPKs, entry);
 			}
 
 			// No special modification to the incoming portlet preferences
@@ -276,51 +278,50 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importEntry(
-			PortletDataContext context, Map folderPKs, BookmarksEntry entry)
+			PortletDataContext context, boolean mergeData, Map folderPKs,
+			BookmarksEntry entry)
 		throws Exception {
 
 		Long folderId = (Long)folderPKs.get(new Long(entry.getFolderId()));
 
-		boolean newParentFolder = false;
-
 		if (folderId == null) {
 			folderId = new Long(entry.getFolderId());
-		}
-		else {
-			newParentFolder = true;
 		}
 
 		String[] tagsEntries = context.getTagsEntries(
 			BookmarksEntry.class, entry.getPrimaryKeyObj());
 
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		BookmarksEntry existingEntry = null;
+
 		try {
-			if (folderId.longValue() !=
-					BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			BookmarksFolderUtil.findByPrimaryKey(folderId.longValue());
 
-				BookmarksFolderUtil.findByPrimaryKey(folderId.longValue());
+			if (mergeData) {
+				existingEntry = BookmarksEntryFinderUtil.findByUuid_G(
+					entry.getUuid(), context.getGroupId());
+
+				if (existingEntry == null) {
+					existingEntry = BookmarksEntryLocalServiceUtil.addEntry(
+						entry.getUuid(), entry.getUserId(),
+						folderId.longValue(), entry.getName(),
+						entry.getUrl(), entry.getComments(), tagsEntries,
+						addCommunityPermissions, addGuestPermissions);
+				}
+				else {
+					existingEntry = BookmarksEntryLocalServiceUtil.updateEntry(
+						entry.getUserId(), existingEntry.getEntryId(),
+						folderId.longValue(), entry.getName(), entry.getUrl(),
+						entry.getComments(), tagsEntries);
+				}
 			}
-
-			if ((BookmarksEntryUtil.fetchByPrimaryKey(
-					entry.getPrimaryKey()) == null) ||
-				newParentFolder) {
-
-				boolean addCommunityPermissions = true;
-				boolean addGuestPermissions = true;
-
-				BookmarksEntryLocalServiceUtil.addEntry(
+			else {
+				existingEntry = BookmarksEntryLocalServiceUtil.addEntry(
 					entry.getUserId(), folderId.longValue(), entry.getName(),
 					entry.getUrl(), entry.getComments(), tagsEntries,
 					addCommunityPermissions, addGuestPermissions);
-			}
-			else {
-				entry.setFolderId(folderId.longValue());
-
-				BookmarksEntryUtil.update(entry, true);
-
-				TagsAssetLocalServiceUtil.updateAsset(
-					entry.getUserId(), entry.getFolder().getGroupId(),
-					BookmarksEntry.class.getName(), entry.getPrimaryKey(),
-					tagsEntries);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
@@ -331,11 +332,9 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importFolder(
-			PortletDataContext context, Map folderPKs, BookmarksFolder folder)
+			PortletDataContext context, boolean mergeData, Map folderPKs,
+			BookmarksFolder folder)
 		throws Exception {
-
-		BookmarksFolder existingFolder = BookmarksFolderUtil.fetchByPrimaryKey(
-			folder.getPrimaryKey());
 
 		Long parentFolderId = (Long)folderPKs.get(
 			new Long(folder.getParentFolderId()));
@@ -343,6 +342,13 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		if (parentFolderId == null) {
 			parentFolderId = new Long(folder.getParentFolderId());
 		}
+
+		long plid = context.getPlid();
+
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		BookmarksFolder existingFolder = null;
 
 		try {
 			if (parentFolderId.longValue() !=
@@ -352,28 +358,34 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 					parentFolderId.longValue());
 			}
 
-			if ((existingFolder == null) ||
-				(existingFolder.getGroupId() != context.getGroupId())) {
+			if (mergeData) {
+				existingFolder = BookmarksFolderUtil.fetchByUUID_G(
+					folder.getUuid(), context.getGroupId());
 
-				long plid = context.getPlid();
-
-				boolean addCommunityPermissions = true;
-				boolean addGuestPermissions = true;
-
-				BookmarksFolder newFolder =
-					BookmarksFolderLocalServiceUtil.addFolder(
-						folder.getUserId(), plid, parentFolderId.longValue(),
-						folder.getName(), folder.getDescription(),
-						addCommunityPermissions, addGuestPermissions);
-
-				folderPKs.put(
-					folder.getPrimaryKeyObj(), newFolder.getPrimaryKeyObj());
+				if (existingFolder == null) {
+					existingFolder = BookmarksFolderLocalServiceUtil.addFolder(
+						folder.getUuid(), folder.getUserId(), plid,
+						parentFolderId.longValue(), folder.getName(),
+						folder.getDescription(), addCommunityPermissions,
+						addGuestPermissions);
+				}
+				else {
+					existingFolder =
+						BookmarksFolderLocalServiceUtil.updateFolder(
+							existingFolder.getFolderId(),
+							parentFolderId.longValue(), folder.getName(),
+							folder.getDescription(), false);
+				}
 			}
 			else {
-				folder.setParentFolderId(parentFolderId.longValue());
-
-				BookmarksFolderUtil.update(folder, true);
+				existingFolder = BookmarksFolderLocalServiceUtil.addFolder(
+					folder.getUserId(), plid, parentFolderId.longValue(),
+					folder.getName(), folder.getDescription(),
+					addCommunityPermissions, addGuestPermissions);
 			}
+
+			folderPKs.put(
+				folder.getPrimaryKeyObj(), existingFolder.getPrimaryKeyObj());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(

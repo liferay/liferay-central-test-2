@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -60,6 +61,9 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 
 	public static String FIND_BY_NO_ASSETS =
 		BookmarksEntryFinder.class.getName() + ".findByNoAssets";
+
+	public static String FIND_BY_UUID_G =
+		BookmarksEntryFinder.class.getName() + ".findByUuid_G";
 
 	public static String FIND_BY_G_U =
 		BookmarksEntryFinder.class.getName() + ".findByG_U";
@@ -250,6 +254,42 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			qPos.add(userId);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public BookmarksEntry findByUuid_G(String uuid, long groupId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("BookmarksEntry", BookmarksEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(uuid);
+			qPos.add(groupId);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (BookmarksEntry)list.get(0);
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

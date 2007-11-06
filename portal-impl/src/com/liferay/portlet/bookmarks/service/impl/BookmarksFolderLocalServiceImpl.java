@@ -56,7 +56,19 @@ public class BookmarksFolderLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addFolder(
-			userId, plid, parentFolderId, name, description,
+			null, userId, plid, parentFolderId, name, description,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public BookmarksFolder addFolder(
+			String uuid, long userId, long plid, long parentFolderId,
+			String name, String description, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addFolder(
+			uuid, userId, plid, parentFolderId, name, description,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
@@ -68,13 +80,13 @@ public class BookmarksFolderLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addFolder(
-			userId, plid, parentFolderId, name, description, null, null,
+			null, userId, plid, parentFolderId, name, description, null, null,
 			communityPermissions, guestPermissions);
 	}
 
 	public BookmarksFolder addFolder(
-			long userId, long plid, long parentFolderId, String name,
-			String description, Boolean addCommunityPermissions,
+			String uuid, long userId, long plid, long parentFolderId,
+			String name, String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -92,6 +104,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		BookmarksFolder folder = bookmarksFolderPersistence.create(folderId);
 
+		folder.setUuid(uuid);
 		folder.setGroupId(groupId);
 		folder.setCompanyId(user.getCompanyId());
 		folder.setUserId(user.getUserId());

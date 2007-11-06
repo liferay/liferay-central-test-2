@@ -114,6 +114,18 @@ public class BookmarksFolderLocalServiceUtil {
 		bookmarksFolderLocalService.setResourcePersistence(resourcePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ResourceFinder getResourceFinder() {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+
+		return bookmarksFolderLocalService.getResourceFinder();
+	}
+
+	public static void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+		bookmarksFolderLocalService.setResourceFinder(resourceFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -124,6 +136,18 @@ public class BookmarksFolderLocalServiceUtil {
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 		bookmarksFolderLocalService.setUserPersistence(userPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.UserFinder getUserFinder() {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+
+		return bookmarksFolderLocalService.getUserFinder();
+	}
+
+	public static void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder) {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+		bookmarksFolderLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
@@ -145,6 +169,19 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
+		java.lang.String uuid, long userId, long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+
+		return bookmarksFolderLocalService.addFolder(uuid, userId, plid,
+			parentFolderId, name, description, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -158,8 +195,8 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
-		long userId, long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String uuid, long userId, long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -168,7 +205,7 @@ public class BookmarksFolderLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
-		return bookmarksFolderLocalService.addFolder(userId, plid,
+		return bookmarksFolderLocalService.addFolder(uuid, userId, plid,
 			parentFolderId, name, description, addCommunityPermissions,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}

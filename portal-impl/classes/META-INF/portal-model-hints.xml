@@ -603,6 +603,7 @@
 		<field name="ratingsAverageScore" type="double" />
 	</model>
 	<model name="com.liferay.portlet.bookmarks.model.BookmarksEntry">
+		<field name="uuid" type="String" />
 		<field name="entryId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -624,6 +625,7 @@
 		</field>
 	</model>
 	<model name="com.liferay.portlet.bookmarks.model.BookmarksFolder">
+		<field name="uuid" type="String" />
 		<field name="folderId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />

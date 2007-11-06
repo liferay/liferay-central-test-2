@@ -37,8 +37,12 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.persistence.ResourceFinder;
+import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.ResourceUtil;
+import com.liferay.portal.service.persistence.UserFinder;
+import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
@@ -57,6 +61,8 @@ import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
 import com.liferay.portlet.tags.service.TagsAssetServiceFactory;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
+import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 
@@ -169,6 +175,14 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		this.resourcePersistence = resourcePersistence;
 	}
 
+	public ResourceFinder getResourceFinder() {
+		return resourceFinder;
+	}
+
+	public void setResourceFinder(ResourceFinder resourceFinder) {
+		this.resourceFinder = resourceFinder;
+	}
+
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -191,6 +205,14 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 
 	public void setUserPersistence(UserPersistence userPersistence) {
 		this.userPersistence = userPersistence;
+	}
+
+	public UserFinder getUserFinder() {
+		return userFinder;
+	}
+
+	public void setUserFinder(UserFinder userFinder) {
+		this.userFinder = userFinder;
 	}
 
 	public TagsAssetLocalService getTagsAssetLocalService() {
@@ -217,6 +239,14 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	public void setTagsAssetPersistence(
 		TagsAssetPersistence tagsAssetPersistence) {
 		this.tagsAssetPersistence = tagsAssetPersistence;
+	}
+
+	public TagsAssetFinder getTagsAssetFinder() {
+		return tagsAssetFinder;
+	}
+
+	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
+		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
 	public void afterPropertiesSet() {
@@ -260,6 +290,10 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 			resourcePersistence = ResourceUtil.getPersistence();
 		}
 
+		if (resourceFinder == null) {
+			resourceFinder = ResourceFinderUtil.getFinder();
+		}
+
 		if (userLocalService == null) {
 			userLocalService = UserLocalServiceFactory.getImpl();
 		}
@@ -270,6 +304,10 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 
 		if (userPersistence == null) {
 			userPersistence = UserUtil.getPersistence();
+		}
+
+		if (userFinder == null) {
+			userFinder = UserFinderUtil.getFinder();
 		}
 
 		if (tagsAssetLocalService == null) {
@@ -283,6 +321,10 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		if (tagsAssetPersistence == null) {
 			tagsAssetPersistence = TagsAssetUtil.getPersistence();
 		}
+
+		if (tagsAssetFinder == null) {
+			tagsAssetFinder = TagsAssetFinderUtil.getFinder();
+		}
 	}
 
 	protected BookmarksEntryPersistence bookmarksEntryPersistence;
@@ -295,10 +337,13 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;
+	protected ResourceFinder resourceFinder;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;
+	protected UserFinder userFinder;
 	protected TagsAssetLocalService tagsAssetLocalService;
 	protected TagsAssetService tagsAssetService;
 	protected TagsAssetPersistence tagsAssetPersistence;
+	protected TagsAssetFinder tagsAssetFinder;
 }

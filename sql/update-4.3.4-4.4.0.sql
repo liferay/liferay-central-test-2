@@ -1,3 +1,7 @@
+alter table BookmarksEntry add uuid_ VARCHAR(75) null;
+
+alter table BookmarksFolder add uuid_ VARCHAR(75) null;
+
 alter table CalEvent add uuid_ VARCHAR(75) null;
 
 alter table DLFileEntry add uuid_ VARCHAR(75) null;

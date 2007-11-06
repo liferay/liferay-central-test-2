@@ -52,6 +52,7 @@ import java.util.List;
 public class BookmarksEntryJSONSerializer {
 	public static JSONObject toJSONObject(BookmarksEntry model) {
 		JSONObject jsonObj = new JSONObject();
+		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "entryId", model.getEntryId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "userId", model.getUserId());

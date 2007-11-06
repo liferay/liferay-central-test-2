@@ -77,6 +77,59 @@ public class BookmarksFolderUtil {
 		return getPersistence().fetchByPrimaryKey(folderId);
 	}
 
+	public static java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid);
+	}
+
+	public static java.util.List findByUuid(java.lang.String uuid, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end);
+	}
+
+	public static java.util.List findByUuid(java.lang.String uuid, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolder findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException {
+		return getPersistence().findByUuid_First(uuid, obc);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolder findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException {
+		return getPersistence().findByUuid_Last(uuid, obc);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolder[] findByUuid_PrevAndNext(
+		long folderId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException {
+		return getPersistence().findByUuid_PrevAndNext(folderId, uuid, obc);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolder findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException {
+		return getPersistence().findByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolder fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId);
+	}
+
 	public static java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
@@ -186,6 +239,17 @@ public class BookmarksFolderUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByUuid(uuid);
+	}
+
+	public static void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException {
+		getPersistence().removeByUUID_G(uuid, groupId);
+	}
+
 	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByGroupId(groupId);
@@ -198,6 +262,16 @@ public class BookmarksFolderUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUuid(uuid);
+	}
+
+	public static int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
 	public static int countByGroupId(long groupId)
