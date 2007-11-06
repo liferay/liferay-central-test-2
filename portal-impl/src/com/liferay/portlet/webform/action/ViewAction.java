@@ -101,7 +101,7 @@ public class ViewAction extends PortletAction {
 
 		List fieldValues = new ArrayList();
 
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 1; i <= _MAX_FIELDS; i++) {
 			fieldValues.add(req.getParameter("field" + i));
 		}
 
@@ -233,7 +233,7 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected boolean validate(List fieldValues, PortletPreferences prefs) {
-		for (int i = 1; i < 10; i++) {
+		for (int i = 1; i < _MAX_FIELDS; i++) {
 			String fieldLabel = prefs.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 			boolean fieldOptional = GetterUtil.getBoolean(
@@ -249,6 +249,8 @@ public class ViewAction extends PortletAction {
 
 		return true;
 	}
+
+	private static final int _MAX_FIELDS = 50;
 
 	private static Log _log = LogFactory.getLog(ViewAction.class);
 
