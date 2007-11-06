@@ -85,8 +85,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_CALENDAR_DATA,
-			_enableExport.getDefaultState());
+			parameterMap, _EXPORT_CALENDAR_DATA);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -151,8 +150,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_CALENDAR_DATA,
-			_enableImport.getDefaultState());
+			parameterMap, _IMPORT_CALENDAR_DATA);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -166,6 +164,9 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		if (!importData) {
 			return null;
 		}
+
+		boolean mergeData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
@@ -192,7 +193,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				CalEvent event = (CalEvent) itr.next();
 
-				importEvent(context, event);
+				importEvent(context, mergeData, event);
 			}
 
 			// No special modification to the incoming portlet preferences
@@ -205,14 +206,9 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected void importEvent(PortletDataContext context, CalEvent event)
+	protected void importEvent(
+			PortletDataContext context, boolean mergeData, CalEvent event)
 		throws Exception {
-
-		Map parameterMap = context.getParameterMap();
-
-		boolean mergeData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.MERGE_DATA,
-			_enableExport.getDefaultState());
 
 		long plid = context.getPlid();
 
@@ -255,8 +251,10 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
+		CalEvent existingEvent = null;
+
 		if (mergeData) {
-			CalEvent existingEvent = CalEventUtil.fetchByUUID_G(
+			existingEvent = CalEventUtil.fetchByUUID_G(
 				event.getUuid(), context.getGroupId());
 
 			if (existingEvent == null) {
@@ -273,10 +271,16 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 					addGuestPermissions);
 			}
 			else {
-				event.setGroupId(existingEvent.getGroupId());
-				event.setPrimaryKey(existingEvent.getPrimaryKey());
-
-				CalEventUtil.update(event, true);
+				CalEventLocalServiceUtil.updateEvent(
+					event.getUserId(), existingEvent.getEventId(),
+					event.getTitle(), event.getDescription(), startDateMonth,
+					startDateDay, startDateYear, startDateHour, startDateMinute,
+					endDateMonth, endDateDay, endDateYear,
+					event.getDurationHour(), event.getDurationMinute(),
+					event.getAllDay(), event.getTimeZoneSensitive(),
+					event.getType(), event.getRepeating(),
+					event.getRecurrenceObj(), event.getRemindBy(),
+					event.getFirstReminder(), event.getSecondReminder());
 			}
 		}
 		else {
