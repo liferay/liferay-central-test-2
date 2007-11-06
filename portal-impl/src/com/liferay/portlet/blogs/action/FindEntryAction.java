@@ -157,6 +157,14 @@ public class FindEntryAction extends Action {
 			}
 		}
 
+		if (plid == 0) {
+			if (layouts.size() > 0) {
+				Layout layout = (Layout)layouts.get(0);
+
+				plid = layout.getPlid();
+			}
+		}
+
 		return plid;
 	}
 
