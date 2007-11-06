@@ -34,10 +34,14 @@ import com.liferay.portal.util.PropsUtil;
 public class HookFactory {
 
 	public static Hook getInstance() {
+		if (_hook == null) {
+			_hook = (Hook)InstancePool.get(
+				PropsUtil.get(PropsUtil.DL_HOOK_IMPL));
+		}
+
 		return _hook;
 	}
 
-	private static Hook _hook = (Hook)InstancePool.get(
-		PropsUtil.get(PropsUtil.DL_HOOK_IMPL));
+	private static Hook _hook = null;
 
 }
