@@ -103,7 +103,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_DL_DATA, _enableExport.getDefaultState());
+			parameterMap, _EXPORT_DL_DATA, false);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -119,12 +119,10 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		boolean exportRanks = MapUtil.getBoolean(
-			parameterMap, _EXPORT_DL_RANKS,
-			_enableRanksExport.getDefaultState());
+			parameterMap, _EXPORT_DL_RANKS, false);
 
 		boolean exportShortcuts = MapUtil.getBoolean(
-			parameterMap, _EXPORT_DL_SHORTCUTS,
-			_enableShortcutsExport.getDefaultState());
+			parameterMap, _EXPORT_DL_SHORTCUTS, false);
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
@@ -282,7 +280,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_DL_DATA, _enableImport.getDefaultState());
+			parameterMap, _IMPORT_DL_DATA, false);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -301,12 +299,10 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			parameterMap, PortletDataHandlerKeys.MERGE_DATA, false);
 
 		boolean importRanks = MapUtil.getBoolean(
-			parameterMap, _IMPORT_DL_RANKS,
-			_enableRanksImport.getDefaultState());
+			parameterMap, _IMPORT_DL_RANKS, false);
 
 		boolean importShortcuts = MapUtil.getBoolean(
-			parameterMap, _IMPORT_DL_SHORTCUTS,
-			_enableShortcutsImport.getDefaultState());
+			parameterMap, _IMPORT_DL_SHORTCUTS, false);
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
