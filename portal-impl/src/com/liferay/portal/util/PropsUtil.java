@@ -1133,6 +1133,10 @@ public class PropsUtil {
 
 	public static final String TRANSLATOR_DEFAULT_LANGUAGES = "translator.default.languages";
 
+	// Web Form Portlet
+
+	public static final String WEB_FORM_PORTLET_MAX_FIELDS = "web.form.portlet.max.fields";
+
 	// Wiki Portlet
 
 	public static final String WIKI_CLASSIC_SYNTAX_HELP_URL = "wiki.classic.syntax.help.url";

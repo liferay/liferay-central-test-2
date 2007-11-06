@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.FileUtil;
@@ -250,7 +251,8 @@ public class ViewAction extends PortletAction {
 		return true;
 	}
 
-	private static final int _MAX_FIELDS = 50;
+	private static final int _MAX_FIELDS = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.WEB_FORM_PORTLET_MAX_FIELDS));
 
 	private static Log _log = LogFactory.getLog(ViewAction.class);
 
