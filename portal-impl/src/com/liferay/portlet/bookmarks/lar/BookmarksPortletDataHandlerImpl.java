@@ -304,21 +304,21 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 					entry.getUuid(), context.getGroupId());
 
 				if (existingEntry == null) {
-					existingEntry = BookmarksEntryLocalServiceUtil.addEntry(
+					BookmarksEntryLocalServiceUtil.addEntry(
 						entry.getUuid(), entry.getUserId(),
 						folderId.longValue(), entry.getName(),
 						entry.getUrl(), entry.getComments(), tagsEntries,
 						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
-					existingEntry = BookmarksEntryLocalServiceUtil.updateEntry(
+					BookmarksEntryLocalServiceUtil.updateEntry(
 						entry.getUserId(), existingEntry.getEntryId(),
 						folderId.longValue(), entry.getName(), entry.getUrl(),
 						entry.getComments(), tagsEntries);
 				}
 			}
 			else {
-				existingEntry = BookmarksEntryLocalServiceUtil.addEntry(
+				BookmarksEntryLocalServiceUtil.addEntry(
 					entry.getUserId(), folderId.longValue(), entry.getName(),
 					entry.getUrl(), entry.getComments(), tagsEntries,
 					addCommunityPermissions, addGuestPermissions);
