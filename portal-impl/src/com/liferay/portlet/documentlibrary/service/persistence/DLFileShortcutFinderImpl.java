@@ -61,8 +61,8 @@ public class DLFileShortcutFinderImpl implements DLFileShortcutFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(groupId);
 			qPos.add(uuid);
+			qPos.add(groupId);
 
 			List list = q.list();
 

@@ -40,8 +40,10 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 import com.liferay.util.CollectionFactory;
@@ -81,14 +83,16 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_enableExport, _enableRanksExport, _enableShortcutsExport };
+			_enableExport, _enableRanksExport, _enableShortcutsExport
+		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_enableImport, _enableRanksImport, _enableShortcutsImport };
+			_enableImport, _enableRanksImport, _enableShortcutsImport
+		};
 	}
 
 	public String exportData(
@@ -99,8 +103,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_DL_DATA,
-			_enableExport.getDefaultState());
+			parameterMap, _EXPORT_DL_DATA, _enableExport.getDefaultState());
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -279,8 +282,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_DL_DATA,
-			_enableImport.getDefaultState());
+			parameterMap, _IMPORT_DL_DATA, _enableImport.getDefaultState());
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -361,7 +363,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			// Shortcuts
 
 			if (importShortcuts) {
-
 				el = root.element("documentlibrary-shortcuts").element("list");
 
 				tempDoc = DocumentHelper.createDocument();
@@ -384,7 +385,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			// Ranks
 
 			if (importRanks) {
-
 				el = root.element("documentlibrary-ranks").element("list");
 
 				tempDoc = DocumentHelper.createDocument();
@@ -439,9 +439,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			DLFolderUtil.findByPrimaryKey(folderId.longValue());
 
 			if (mergeData) {
-				existingEntry =
-					DLFileEntryLocalServiceUtil.getDLFileEntryFinder().
-						findByUuid_G(entry.getUuid(), context.getGroupId());
+				existingEntry = DLFileEntryFinderUtil.findByUuid_G(
+					entry.getUuid(), context.getGroupId());
 
 				if (existingEntry == null) {
 					existingEntry = DLFileEntryLocalServiceUtil.addFileEntry(
@@ -561,12 +560,10 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			DLFileRankLocalServiceUtil.updateFileRank(
 				context.getGroupId(), context.getCompanyId(), rank.getUserId(),
 				folderId.longValue(), name);
-
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
-				"Could not find the folder for rank " +
-					rank.getFileRankId());
+				"Could not find the folder for rank " + rank.getFileRankId());
 		}
 	}
 
@@ -603,8 +600,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (mergeData) {
 				DLFileShortcut existingShortcut =
-					DLFileShortcutLocalServiceUtil.getDLFileShortcutFinder()
-						.findByUuid_G(shortcut.getUuid(), context.getGroupId());
+					DLFileShortcutFinderUtil.findByUuid_G(
+						shortcut.getUuid(), context.getGroupId());
 
 				if (existingShortcut == null) {
 					DLFileShortcutLocalServiceUtil.addFileShortcut(

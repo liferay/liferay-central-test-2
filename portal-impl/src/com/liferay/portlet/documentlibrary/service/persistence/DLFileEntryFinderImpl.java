@@ -62,11 +62,11 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 	public static String FIND_BY_NO_ASSETS =
 		DLFileEntryFinder.class.getName() + ".findByNoAssets";
 
-	public static String FIND_BY_G_U =
-		DLFileEntryFinder.class.getName() + ".findByG_U";
-
 	public static String FIND_BY_UUID_G =
 		DLFileEntryFinder.class.getName() + ".findByUuid_G";
+
+	public static String FIND_BY_G_U =
+		DLFileEntryFinder.class.getName() + ".findByG_U";
 
 	public int countByFolderIds(List folderIds) throws SystemException {
 		Session session = null;
@@ -279,8 +279,8 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(groupId);
 			qPos.add(uuid);
+			qPos.add(groupId);
 
 			List list = q.list();
 
