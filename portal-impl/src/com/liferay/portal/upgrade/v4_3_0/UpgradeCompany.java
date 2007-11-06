@@ -67,12 +67,22 @@ public class UpgradeCompany extends UpgradeProcess {
 
 		String[] webIds = WebIdUtil.getWebIds();
 
+		long[] companyIds = new long[webIds.length];
+
 		for (int i = 0; i < webIds.length; i++) {
 			String webId = webIds[i];
 
 			long companyId = upgradeWebId(webId);
 
+			companyIds[i] = companyId;
+
 			companyIdMapper.mapValue(webId, new Long(companyId));
+		}
+
+		// Delay checking of Lucene and Document Library. See LEP-3492.
+
+		for (int i = 0; i < companyIds.length; i++) {
+			long companyId = companyIds[i];
 
 			LuceneUtil.checkLuceneDir(companyId);
 
