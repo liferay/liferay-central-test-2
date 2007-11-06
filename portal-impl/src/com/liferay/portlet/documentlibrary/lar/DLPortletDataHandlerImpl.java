@@ -439,7 +439,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				if (existingEntry == null) {
 					existingEntry = DLFileEntryLocalServiceUtil.addFileEntry(
 						entry.getUuid(), entry.getUserId(),
-						folderId.longValue(),  entry.getName(),
+						folderId.longValue(), entry.getName(),
 						entry.getTitle(), entry.getDescription(), tagsEntries,
 						entry.getExtraSettings(), byteArray,
 						addCommunityPermissions, addGuestPermissions);
