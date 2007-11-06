@@ -55,16 +55,20 @@ import java.sql.Types;
 public class PollsChoiceModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PollsChoice";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "choiceId", new Integer(Types.BIGINT) },
 			{ "questionId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) }
 		};
-	public static String TABLE_SQL_CREATE = "create table PollsChoice (choiceId LONG not null primary key,questionId LONG,name VARCHAR(75) null,description VARCHAR(1000) null)";
+	public static String TABLE_SQL_CREATE = "create table PollsChoice (uuid_ VARCHAR(75) null,choiceId LONG not null primary key,questionId LONG,name VARCHAR(75) null,description VARCHAR(1000) null)";
 	public static String TABLE_SQL_DROP = "drop table PollsChoice";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsChoice"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.polls.model.PollsChoice.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsChoice.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -87,6 +91,16 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_choiceId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getChoiceId() {
@@ -144,6 +158,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PollsChoiceImpl clone = new PollsChoiceImpl();
+		clone.setUuid(getUuid());
 		clone.setChoiceId(getChoiceId());
 		clone.setQuestionId(getQuestionId());
 		clone.setName(getName());
@@ -211,6 +226,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _choiceId;
 	private long _questionId;
 	private String _name;

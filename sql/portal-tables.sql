@@ -704,6 +704,7 @@ create table PluginSetting (
 );
 
 create table PollsChoice (
+	uuid_ VARCHAR(75) null,
 	choiceId LONG not null primary key,
 	questionId LONG,
 	name VARCHAR(75) null,
@@ -711,6 +712,7 @@ create table PollsChoice (
 );
 
 create table PollsQuestion (
+	uuid_ VARCHAR(75) null,
 	questionId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,

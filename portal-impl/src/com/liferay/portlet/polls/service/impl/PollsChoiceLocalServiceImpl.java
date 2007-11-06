@@ -44,6 +44,13 @@ public class PollsChoiceLocalServiceImpl
 			long questionId, String name, String description)
 		throws PortalException, SystemException {
 
+		return addChoice(null, questionId, name, description);
+	}
+
+	public PollsChoice addChoice(
+			String uuid, long questionId, String name, String description)
+		throws PortalException, SystemException {
+
 		validate(name, description);
 
 		pollsQuestionPersistence.findByPrimaryKey(questionId);
@@ -52,6 +59,7 @@ public class PollsChoiceLocalServiceImpl
 
 		PollsChoice choice = pollsChoicePersistence.create(choiceId);
 
+		choice.setUuid(uuid);
 		choice.setQuestionId(questionId);
 		choice.setName(name);
 		choice.setDescription(description);
@@ -69,6 +77,25 @@ public class PollsChoiceLocalServiceImpl
 
 	public List getChoices(long questionId) throws SystemException {
 		return pollsChoicePersistence.findByQuestionId(questionId);
+	}
+
+	public PollsChoice updateChoice(
+			long choiceId, long questionId, String name, String description)
+		throws PortalException, SystemException {
+
+		validate(name, description);
+
+		pollsQuestionPersistence.findByPrimaryKey(questionId);
+
+		PollsChoice choice = pollsChoicePersistence.findByPrimaryKey(choiceId);
+
+		choice.setQuestionId(questionId);
+		choice.setName(name);
+		choice.setDescription(description);
+
+		pollsChoicePersistence.update(choice);
+
+		return choice;
 	}
 
 	protected void validate(String name, String description)

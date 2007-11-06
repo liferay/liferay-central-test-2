@@ -47,6 +47,7 @@ import java.util.List;
 public class PollsChoiceSoap implements Serializable {
 	public static PollsChoiceSoap toSoapModel(PollsChoice model) {
 		PollsChoiceSoap soapModel = new PollsChoiceSoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setChoiceId(model.getChoiceId());
 		soapModel.setQuestionId(model.getQuestionId());
 		soapModel.setName(model.getName());
@@ -75,6 +76,14 @@ public class PollsChoiceSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setChoiceId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getChoiceId() {
@@ -109,6 +118,7 @@ public class PollsChoiceSoap implements Serializable {
 		_description = description;
 	}
 
+	private String _uuid;
 	private long _choiceId;
 	private long _questionId;
 	private String _name;

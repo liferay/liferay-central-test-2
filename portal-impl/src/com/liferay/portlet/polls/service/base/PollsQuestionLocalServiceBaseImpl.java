@@ -53,6 +53,8 @@ import com.liferay.portlet.polls.service.PollsVoteLocalService;
 import com.liferay.portlet.polls.service.PollsVoteLocalServiceFactory;
 import com.liferay.portlet.polls.service.PollsVoteService;
 import com.liferay.portlet.polls.service.PollsVoteServiceFactory;
+import com.liferay.portlet.polls.service.persistence.PollsChoiceFinder;
+import com.liferay.portlet.polls.service.persistence.PollsChoiceFinderUtil;
 import com.liferay.portlet.polls.service.persistence.PollsChoicePersistence;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence;
@@ -99,6 +101,14 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 	public void setPollsChoicePersistence(
 		PollsChoicePersistence pollsChoicePersistence) {
 		this.pollsChoicePersistence = pollsChoicePersistence;
+	}
+
+	public PollsChoiceFinder getPollsChoiceFinder() {
+		return pollsChoiceFinder;
+	}
+
+	public void setPollsChoiceFinder(PollsChoiceFinder pollsChoiceFinder) {
+		this.pollsChoiceFinder = pollsChoiceFinder;
 	}
 
 	public PollsQuestionPersistence getPollsQuestionPersistence() {
@@ -226,6 +236,10 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 			pollsChoicePersistence = PollsChoiceUtil.getPersistence();
 		}
 
+		if (pollsChoiceFinder == null) {
+			pollsChoiceFinder = PollsChoiceFinderUtil.getFinder();
+		}
+
 		if (pollsQuestionPersistence == null) {
 			pollsQuestionPersistence = PollsQuestionUtil.getPersistence();
 		}
@@ -285,6 +299,7 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 
 	protected PollsChoiceLocalService pollsChoiceLocalService;
 	protected PollsChoicePersistence pollsChoicePersistence;
+	protected PollsChoiceFinder pollsChoiceFinder;
 	protected PollsQuestionPersistence pollsQuestionPersistence;
 	protected PollsVoteLocalService pollsVoteLocalService;
 	protected PollsVoteService pollsVoteService;

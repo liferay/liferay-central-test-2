@@ -20,52 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.polls.model;
-
-import com.liferay.portal.model.BaseModel;
+package com.liferay.portlet.polls.service.persistence;
 
 /**
- * <a href="PollsChoiceModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>PollsChoice</code> table
- * in the database.
- * </p>
+ * <a href="PollsChoiceFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.polls.service.model.PollsChoice
- * @see com.liferay.portlet.polls.service.model.impl.PollsChoiceImpl
- * @see com.liferay.portlet.polls.service.model.impl.PollsChoiceModelImpl
- *
  */
-public interface PollsChoiceModel extends BaseModel {
-	public long getPrimaryKey();
+public class PollsChoiceFinderUtil {
+	public static com.liferay.portlet.polls.model.PollsChoice findByUuid_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByUuid_G(uuid, groupId);
+	}
 
-	public void setPrimaryKey(long pk);
+	public static PollsChoiceFinder getFinder() {
+		return _getUtil()._finder;
+	}
 
-	public String getUuid();
+	public void setFinder(PollsChoiceFinder finder) {
+		_finder = finder;
+	}
 
-	public void setUuid(String uuid);
+	private static PollsChoiceFinderUtil _getUtil() {
+		if (_util == null) {
+			_util = (PollsChoiceFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+		}
 
-	public long getChoiceId();
+		return _util;
+	}
 
-	public void setChoiceId(long choiceId);
-
-	public long getQuestionId();
-
-	public void setQuestionId(long questionId);
-
-	public String getName();
-
-	public void setName(String name);
-
-	public String getDescription();
-
-	public void setDescription(String description);
+	private static final String _UTIL = PollsChoiceFinderUtil.class.getName();
+	private static PollsChoiceFinderUtil _util;
+	private PollsChoiceFinder _finder;
 }

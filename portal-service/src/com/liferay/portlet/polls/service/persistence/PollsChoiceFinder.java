@@ -20,52 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.polls.model;
-
-import com.liferay.portal.model.BaseModel;
+package com.liferay.portlet.polls.service.persistence;
 
 /**
- * <a href="PollsChoiceModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>PollsChoice</code> table
- * in the database.
- * </p>
+ * <a href="PollsChoiceFinder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.polls.service.model.PollsChoice
- * @see com.liferay.portlet.polls.service.model.impl.PollsChoiceImpl
- * @see com.liferay.portlet.polls.service.model.impl.PollsChoiceModelImpl
- *
  */
-public interface PollsChoiceModel extends BaseModel {
-	public long getPrimaryKey();
-
-	public void setPrimaryKey(long pk);
-
-	public String getUuid();
-
-	public void setUuid(String uuid);
-
-	public long getChoiceId();
-
-	public void setChoiceId(long choiceId);
-
-	public long getQuestionId();
-
-	public void setQuestionId(long questionId);
-
-	public String getName();
-
-	public void setName(String name);
-
-	public String getDescription();
-
-	public void setDescription(String description);
+public interface PollsChoiceFinder {
+	public com.liferay.portlet.polls.model.PollsChoice findByUuid_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException;
 }

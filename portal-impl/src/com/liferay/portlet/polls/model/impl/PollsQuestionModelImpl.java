@@ -58,6 +58,7 @@ import java.util.Date;
 public class PollsQuestionModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "PollsQuestion";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "questionId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
@@ -70,11 +71,14 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
 			{ "lastVoteDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static String TABLE_SQL_CREATE = "create table PollsQuestion (questionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(500) null,description STRING null,expirationDate DATE null,lastVoteDate DATE null)";
+	public static String TABLE_SQL_CREATE = "create table PollsQuestion (uuid_ VARCHAR(75) null,questionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(500) null,description STRING null,expirationDate DATE null,lastVoteDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table PollsQuestion";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -100,6 +104,16 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_questionId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getQuestionId() {
@@ -246,6 +260,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		PollsQuestionImpl clone = new PollsQuestionImpl();
+		clone.setUuid(getUuid());
 		clone.setQuestionId(getQuestionId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -307,6 +322,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _questionId;
 	private long _groupId;
 	private long _companyId;

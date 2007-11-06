@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -40,6 +41,7 @@ import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil;
 import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
 import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
+import com.liferay.portlet.polls.service.persistence.PollsChoiceFinderUtil;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
@@ -79,13 +81,17 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_enableExport};
+		return new PortletDataHandlerControl[] {
+			_enableExport, _enableVotesExport
+		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] {_enableImport};
+		return new PortletDataHandlerControl[] {
+			_enableImport, _enableVotesImport
+		};
 	}
 
 	public String exportData(
@@ -96,7 +102,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_POLLS_DATA, _enableExport.getDefaultState());
+			parameterMap, _EXPORT_POLLS_DATA);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -110,6 +116,9 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		if (!exportData) {
 			return null;
 		}
+
+		boolean exportVotes = MapUtil.getBoolean(
+			parameterMap, _EXPORT_POLLS_VOTES);
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
@@ -147,10 +156,12 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 					choices.addAll(questionChoices);
 
-					List questionVotes = PollsVoteUtil.findByQuestionId(
-						question.getQuestionId());
+					if (exportVotes) {
+						List questionVotes = PollsVoteUtil.findByQuestionId(
+							question.getQuestionId());
 
-					votes.addAll(questionVotes);
+						votes.addAll(questionVotes);
+					}
 				}
 			}
 
@@ -221,7 +232,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_POLLS_DATA, _enableImport.getDefaultState());
+			parameterMap, _IMPORT_POLLS_DATA);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -235,6 +246,12 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		if (!importData) {
 			return null;
 		}
+
+		boolean mergeData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
+
+		boolean importVotes = MapUtil.getBoolean(
+			parameterMap, _IMPORT_POLLS_VOTES);
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
@@ -263,7 +280,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				PollsQuestion question = (PollsQuestion)itr.next();
 
-				importQuestion(context, questionPKs, question);
+				importQuestion(context, mergeData, questionPKs, question);
 			}
 
 			// Choices
@@ -284,26 +301,30 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				PollsChoice choice = (PollsChoice)itr.next();
 
-				importChoice(context, questionPKs, choicePKs, choice);
+				importChoice(
+					context, mergeData, questionPKs, choicePKs, choice);
 			}
 
 			// Votes
 
-			el = root.element("poll-votes").element("list");
+			if (importVotes) {
+				el = root.element("poll-votes").element("list");
 
-			tempDoc = DocumentHelper.createDocument();
+				tempDoc = DocumentHelper.createDocument();
 
-			tempDoc.content().add(el.createCopy());
+				tempDoc.content().add(el.createCopy());
 
-			List votes = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+				List votes = (List)xStream.fromXML(
+					XMLFormatter.toString(tempDoc));
 
-			itr = votes.iterator();
+				itr = votes.iterator();
 
-			while (itr.hasNext()) {
-				PollsVote vote = (PollsVote)itr.next();
+				while (itr.hasNext()) {
+					PollsVote vote = (PollsVote)itr.next();
 
-				importVote(context, questionPKs, choicePKs, vote);
+					importVote(
+						context, questionPKs, choicePKs, vote);
+				}
 			}
 
 			// No special modification to the incoming portlet preferences
@@ -317,41 +338,45 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importChoice(
-			PortletDataContext context, Map questionPKs, Map choicePKs,
-			PollsChoice choice)
+			PortletDataContext context, boolean mergeData, Map questionPKs,
+			Map choicePKs, PollsChoice choice)
 		throws Exception {
 
 		Long questionId = (Long)questionPKs.get(
 			new Long(choice.getQuestionId()));
 
-		boolean newParentQuestion = false;
-
 		if (questionId == null) {
 			questionId = new Long(choice.getQuestionId());
 		}
-		else {
-			newParentQuestion = true;
-		}
+
+		PollsChoice existingChoice = null;
 
 		try {
 			PollsQuestionUtil.findByPrimaryKey(questionId.longValue());
 
-			if ((PollsChoiceUtil.fetchByPrimaryKey(
-					choice.getPrimaryKey()) == null) ||
-				newParentQuestion) {
+			if (mergeData) {
+				existingChoice = PollsChoiceFinderUtil.findByUuid_G(
+					choice.getUuid(), context.getGroupId());
 
-				PollsChoice newChoice = PollsChoiceLocalServiceUtil.addChoice(
-					questionId.longValue(), choice.getName(),
-					choice.getDescription());
-
-				choicePKs.put(
-					choice.getPrimaryKeyObj(), newChoice.getPrimaryKeyObj());
+				if (existingChoice == null) {
+					existingChoice = PollsChoiceLocalServiceUtil.addChoice(
+						choice.getUuid(), questionId.longValue(),
+						choice.getName(),choice.getDescription());
+				}
+				else {
+					existingChoice = PollsChoiceLocalServiceUtil.updateChoice(
+						existingChoice.getChoiceId(), questionId.longValue(),
+						choice.getName(), choice.getDescription());
+				}
 			}
 			else {
-				choice.setQuestionId(questionId.longValue());
-
-				PollsChoiceUtil.update(choice, true);
+				existingChoice = PollsChoiceLocalServiceUtil.addChoice(
+					questionId.longValue(), choice.getName(),
+					choice.getDescription());
 			}
+
+			choicePKs.put(
+				choice.getPrimaryKeyObj(), existingChoice.getPrimaryKeyObj());
 		}
 		catch (NoSuchQuestionException nsqe) {
 			_log.error(
@@ -361,55 +386,69 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importQuestion(
-			PortletDataContext context, Map questionPKs, PollsQuestion question)
+			PortletDataContext context, boolean mergeData, Map questionPKs,
+			PollsQuestion question)
 		throws SystemException, PortalException {
 
-		PollsQuestion existingQuestion =
-			PollsQuestionUtil.fetchByPrimaryKey(question.getPrimaryKey());
+		long plid = context.getPlid();
 
-		if ((existingQuestion == null) ||
-			(existingQuestion.getGroupId() != context.getGroupId())) {
+		Date expirationDate = question.getExpirationDate();
 
-			long plid = context.getPlid();
+		int expirationMonth = 0;
+		int expirationDay = 0;
+		int expirationYear = 0;
+		int expirationHour = 0;
+		int expirationMinute = 0;
+		boolean neverExpire = true;
 
-			Date expirationDate = question.getExpirationDate();
+		if (expirationDate != null) {
+			Calendar expirationCal = CalendarFactoryUtil.getCalendar();
 
-			int expirationMonth = 0;
-			int expirationDay = 0;
-			int expirationYear = 0;
-			int expirationHour = 0;
-			int expirationMinute = 0;
-			boolean neverExpire = true;
+			expirationCal.setTime(expirationDate);
 
-			if (expirationDate != null) {
-				Calendar expirationCal = CalendarFactoryUtil.getCalendar();
+			expirationMonth = expirationCal.get(Calendar.MONTH);
+			expirationDay = expirationCal.get(Calendar.DATE);
+			expirationYear = expirationCal.get(Calendar.YEAR);
+			expirationHour = expirationCal.get(Calendar.HOUR);
+			expirationMinute = expirationCal.get(Calendar.MINUTE);
+			neverExpire = false;
+		}
 
-				expirationCal.setTime(expirationDate);
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
 
-				expirationMonth = expirationCal.get(Calendar.MONTH);
-				expirationDay = expirationCal.get(Calendar.DATE);
-				expirationYear = expirationCal.get(Calendar.YEAR);
-				expirationHour = expirationCal.get(Calendar.HOUR);
-				expirationMinute = expirationCal.get(Calendar.MINUTE);
-				neverExpire = false;
+		PollsQuestion existingQuestion = null;
+
+		if (mergeData) {
+			existingQuestion =  PollsQuestionUtil.fetchByUUID_G(
+				question.getUuid(), context.getGroupId());
+
+			if (existingQuestion == null) {
+				existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
+					question.getUuid(), question.getUserId(), plid,
+					question.getTitle(), question.getDescription(),
+					expirationMonth, expirationDay, expirationYear,
+					expirationHour, expirationMinute, neverExpire,
+					addCommunityPermissions, addGuestPermissions);
 			}
-
-			boolean addCommunityPermissions = true;
-			boolean addGuestPermissions = true;
-
-			PollsQuestion newQuestion =
-				PollsQuestionLocalServiceUtil.addQuestion(
-					question.getUserId(), plid, question.getTitle(),
-					question.getDescription(), expirationMonth, expirationDay,
-					expirationYear, expirationHour, expirationMinute,
-					neverExpire, addCommunityPermissions, addGuestPermissions);
-
-			questionPKs.put(
-				question.getPrimaryKeyObj(), newQuestion.getPrimaryKeyObj());
+			else {
+				existingQuestion = PollsQuestionLocalServiceUtil.updateQuestion(
+					question.getUserId(), existingQuestion.getQuestionId(),
+					question.getTitle(), question.getDescription(),
+					expirationMonth, expirationDay, expirationYear,
+					expirationHour, expirationMinute, neverExpire);
+			}
 		}
 		else {
-			PollsQuestionUtil.update(question, true);
+			existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
+				question.getUserId(), plid, question.getTitle(),
+				question.getDescription(), expirationMonth, expirationDay,
+				expirationYear, expirationHour, expirationMinute,
+				neverExpire, addCommunityPermissions, addGuestPermissions);
 		}
+
+		questionPKs.put(
+			question.getPrimaryKeyObj(), existingQuestion.getPrimaryKeyObj());
 	}
 
 	protected void importVote(
@@ -420,44 +459,22 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		Long questionId = (Long)questionPKs.get(
 			new Long(vote.getQuestionId()));
 
-		boolean newParentQuestion = false;
-
 		if (questionId == null) {
 			questionId = new Long(vote.getQuestionId());
-		}
-		else {
-			newParentQuestion = true;
 		}
 
 		Long choiceId = (Long)choicePKs.get(new Long(vote.getChoiceId()));
 
-		boolean newParentChoice = false;
-
 		if (choiceId == null) {
 			choiceId = new Long(vote.getChoiceId());
-		}
-		else {
-			newParentChoice = true;
 		}
 
 		try {
 			PollsQuestionUtil.findByPrimaryKey(questionId.longValue());
 			PollsChoiceUtil.findByPrimaryKey(choiceId.longValue());
 
-			if ((PollsChoiceUtil.fetchByPrimaryKey(
-					vote.getPrimaryKey()) == null) ||
-				newParentChoice || newParentQuestion) {
-
-				PollsVoteLocalServiceUtil.addVote(
-					vote.getPrimaryKey(), questionId.longValue(),
-					choiceId.longValue());
-			}
-			else {
-				vote.setQuestionId(questionId.longValue());
-				vote.setChoiceId(choiceId.longValue());
-
-				PollsVoteUtil.update(vote, true);
-			}
+			PollsVoteLocalServiceUtil.addVote(
+				vote.getUserId(), questionId.longValue(), choiceId.longValue());
 		}
 		catch (NoSuchQuestionException nsqe) {
 			_log.error(
@@ -475,11 +492,23 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	private static final String _IMPORT_POLLS_DATA =
 		"import-" + PortletKeys.POLLS + "-data";
 
+	private static final String _EXPORT_POLLS_VOTES =
+		"export-" + PortletKeys.POLLS + "-votes";
+
+	private static final String _IMPORT_POLLS_VOTES =
+		"import-" + PortletKeys.POLLS + "-votes";
+
 	private static final PortletDataHandlerBoolean _enableExport =
 		new PortletDataHandlerBoolean(_EXPORT_POLLS_DATA, true, null);
 
 	private static final PortletDataHandlerBoolean _enableImport =
 		new PortletDataHandlerBoolean(_IMPORT_POLLS_DATA, true, null);
+
+	private static final PortletDataHandlerBoolean _enableVotesExport =
+		new PortletDataHandlerBoolean(_EXPORT_POLLS_VOTES, true, null);
+
+	private static final PortletDataHandlerBoolean _enableVotesImport =
+		new PortletDataHandlerBoolean(_IMPORT_POLLS_VOTES, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(PollsPortletDataHandlerImpl.class);

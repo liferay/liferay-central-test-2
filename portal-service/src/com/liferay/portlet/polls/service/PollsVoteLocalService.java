@@ -62,6 +62,11 @@ public interface PollsVoteLocalService {
 	public void setPollsChoicePersistence(
 		com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence);
 
+	public com.liferay.portlet.polls.service.persistence.PollsChoiceFinder getPollsChoiceFinder();
+
+	public void setPollsChoiceFinder(
+		com.liferay.portlet.polls.service.persistence.PollsChoiceFinder pollsChoiceFinder);
+
 	public com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence();
 
 	public void setPollsQuestionPersistence(

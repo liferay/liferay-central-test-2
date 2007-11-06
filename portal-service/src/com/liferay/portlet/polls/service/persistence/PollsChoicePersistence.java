@@ -59,6 +59,34 @@ public interface PollsChoicePersistence {
 	public com.liferay.portlet.polls.model.PollsChoice fetchByPrimaryKey(
 		long choiceId) throws com.liferay.portal.SystemException;
 
+	public java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.polls.model.PollsChoice findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.polls.model.PollsChoice findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.polls.model.PollsChoice[] findByUuid_PrevAndNext(
+		long choiceId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portlet.polls.NoSuchChoiceException, 
+			com.liferay.portal.SystemException;
+
 	public java.util.List findByQuestionId(long questionId)
 		throws com.liferay.portal.SystemException;
 
@@ -111,6 +139,9 @@ public interface PollsChoicePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByQuestionId(long questionId)
 		throws com.liferay.portal.SystemException;
 
@@ -119,6 +150,9 @@ public interface PollsChoicePersistence {
 			com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
 
 	public int countByQuestionId(long questionId)
 		throws com.liferay.portal.SystemException;

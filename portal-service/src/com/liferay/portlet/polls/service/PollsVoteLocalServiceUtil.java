@@ -77,6 +77,18 @@ public class PollsVoteLocalServiceUtil {
 		pollsVoteLocalService.setPollsChoicePersistence(pollsChoicePersistence);
 	}
 
+	public static com.liferay.portlet.polls.service.persistence.PollsChoiceFinder getPollsChoiceFinder() {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+
+		return pollsVoteLocalService.getPollsChoiceFinder();
+	}
+
+	public static void setPollsChoiceFinder(
+		com.liferay.portlet.polls.service.persistence.PollsChoiceFinder pollsChoiceFinder) {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+		pollsVoteLocalService.setPollsChoiceFinder(pollsChoiceFinder);
+	}
+
 	public static com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence() {
 		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
 

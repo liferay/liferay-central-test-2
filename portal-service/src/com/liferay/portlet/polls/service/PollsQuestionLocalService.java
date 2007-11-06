@@ -62,6 +62,11 @@ public interface PollsQuestionLocalService {
 	public void setPollsChoicePersistence(
 		com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence);
 
+	public com.liferay.portlet.polls.service.persistence.PollsChoiceFinder getPollsChoiceFinder();
+
+	public void setPollsChoiceFinder(
+		com.liferay.portlet.polls.service.persistence.PollsChoiceFinder pollsChoiceFinder);
+
 	public com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence();
 
 	public void setPollsQuestionPersistence(
@@ -104,6 +109,15 @@ public interface PollsQuestionLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
+		java.lang.String uuid, long userId, long plid, java.lang.String title,
+		java.lang.String description, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
@@ -123,7 +137,7 @@ public interface PollsQuestionLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, long plid, java.lang.String title,
+		java.lang.String uuid, long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices,
@@ -184,6 +198,14 @@ public interface PollsQuestionLocalService {
 
 	public int getQuestionsCount(long groupId)
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
+		long userId, long questionId, java.lang.String title,
+		java.lang.String description, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
 		long userId, long questionId, java.lang.String title,

@@ -3605,6 +3605,12 @@
 			<ref bean="com.liferay.portlet.polls.service.persistence.PollsChoicePersistenceImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoiceFinderImpl" class="com.liferay.portlet.polls.service.persistence.PollsChoiceFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoiceFinderUtil" class="com.liferay.portlet.polls.service.persistence.PollsChoiceFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.polls.service.persistence.PollsChoiceFinderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionLocalService.professional" class="com.liferay.portlet.polls.service.impl.PollsQuestionLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

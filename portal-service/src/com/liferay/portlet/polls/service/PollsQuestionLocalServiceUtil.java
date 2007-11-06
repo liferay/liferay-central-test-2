@@ -78,6 +78,18 @@ public class PollsQuestionLocalServiceUtil {
 		pollsQuestionLocalService.setPollsChoicePersistence(pollsChoicePersistence);
 	}
 
+	public static com.liferay.portlet.polls.service.persistence.PollsChoiceFinder getPollsChoiceFinder() {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		return pollsQuestionLocalService.getPollsChoiceFinder();
+	}
+
+	public static void setPollsChoiceFinder(
+		com.liferay.portlet.polls.service.persistence.PollsChoiceFinder pollsChoiceFinder) {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+		pollsQuestionLocalService.setPollsChoiceFinder(pollsChoiceFinder);
+	}
+
 	public static com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence() {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
@@ -172,6 +184,22 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
+		java.lang.String uuid, long userId, long plid, java.lang.String title,
+		java.lang.String description, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		return pollsQuestionLocalService.addQuestion(uuid, userId, plid, title,
+			description, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
@@ -205,7 +233,7 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
-		long userId, long plid, java.lang.String title,
+		java.lang.String uuid, long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, boolean neverExpire, java.util.List choices,
@@ -217,7 +245,7 @@ public class PollsQuestionLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
-		return pollsQuestionLocalService.addQuestion(userId, plid, title,
+		return pollsQuestionLocalService.addQuestion(uuid, userId, plid, title,
 			description, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, choices, addCommunityPermissions, addGuestPermissions,
@@ -314,6 +342,21 @@ public class PollsQuestionLocalServiceUtil {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
 		return pollsQuestionLocalService.getQuestionsCount(groupId);
+	}
+
+	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
+		long userId, long questionId, java.lang.String title,
+		java.lang.String description, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		return pollsQuestionLocalService.updateQuestion(userId, questionId,
+			title, description, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(

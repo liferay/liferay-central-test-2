@@ -31,6 +31,10 @@ create table MembershipRequest (
 	statusId INTEGER
 );
 
+alter table PollsChoice add uuid_ VARCHAR(75) null;
+
+alter table PollsQuestion add uuid_ VARCHAR(75) null;
+
 alter table TagsAsset add groupId LONG;
 alter table TagsAsset add priority DOUBLE;
 alter table TagsAsset add viewCount INTEGER;

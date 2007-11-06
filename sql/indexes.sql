@@ -204,8 +204,11 @@ create index IX_7171B2E8 on PluginSetting (companyId, pluginId, pluginType);
 
 create index IX_EC370F10 on PollsChoice (questionId);
 create index IX_D76DD2CF on PollsChoice (questionId, name);
+create index IX_6660B399 on PollsChoice (uuid_);
 
 create index IX_9FF342EA on PollsQuestion (groupId);
+create index IX_51F087F4 on PollsQuestion (uuid_);
+create index IX_F3C9F36 on PollsQuestion (uuid_, groupId);
 
 create index IX_D5DF7B54 on PollsVote (choiceId);
 create index IX_12112599 on PollsVote (questionId);

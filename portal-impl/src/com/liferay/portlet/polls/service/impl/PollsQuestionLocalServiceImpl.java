@@ -59,7 +59,23 @@ public class PollsQuestionLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addQuestion(
-			userId, plid, title, description, expirationDateMonth,
+			null, userId, plid, title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, null,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public PollsQuestion addQuestion(
+			String uuid, long userId, long plid, String title,
+			String description, int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addQuestion(
+			uuid, userId, plid, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
 			expirationDateMinute, neverExpire, null,
 			Boolean.valueOf(addCommunityPermissions),
@@ -75,7 +91,7 @@ public class PollsQuestionLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addQuestion(
-			userId, plid, title, description, expirationDateMonth,
+			null, userId, plid, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
 			expirationDateMinute, neverExpire, choices,
 			Boolean.valueOf(addCommunityPermissions),
@@ -91,15 +107,15 @@ public class PollsQuestionLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addQuestion(
-			userId, plid, title, description, expirationDateMonth,
+			null, userId, plid, title, description, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
 			expirationDateMinute, neverExpire, choices, null, null,
 			communityPermissions, guestPermissions);
 	}
 
 	public PollsQuestion addQuestion(
-			long userId, long plid, String title, String description,
-			int expirationDateMonth, int expirationDateDay,
+			String uuid, long userId, long plid, String title,
+			String description, int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire, List choices,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
@@ -127,6 +143,7 @@ public class PollsQuestionLocalServiceImpl
 
 		PollsQuestion question = pollsQuestionPersistence.create(questionId);
 
+		question.setUuid(uuid);
 		question.setGroupId(groupId);
 		question.setCompanyId(user.getCompanyId());
 		question.setUserId(user.getUserId());
@@ -283,6 +300,19 @@ public class PollsQuestionLocalServiceImpl
 			long userId, long questionId, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire)
+		throws PortalException, SystemException {
+
+		return updateQuestion(
+			userId, questionId, title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, null);
+	}
+
+	public PollsQuestion updateQuestion(
+			long userId, long questionId, String title, String description,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire, List choices)
 		throws PortalException, SystemException {
 
@@ -313,31 +343,35 @@ public class PollsQuestionLocalServiceImpl
 
 		// Choices
 
-		int oldChoicesCount = pollsChoicePersistence.countByQuestionId(
-			questionId);
+		if (choices != null) {
+			int oldChoicesCount = pollsChoicePersistence.countByQuestionId(
+				questionId);
 
-		if (oldChoicesCount != choices.size()) {
-			throw new QuestionChoiceException();
-		}
-
-		Iterator itr = choices.iterator();
-
-		while (itr.hasNext()) {
-			PollsChoice choice = (PollsChoice)itr.next();
-
-			String choiceName = choice.getName();
-			String choiceDescription = choice.getDescription();
-
-			choice = pollsChoicePersistence.fetchByQ_N(questionId, choiceName);
-
-			if (choice == null) {
-				choice = pollsChoiceLocalService.addChoice(
-					questionId, choice.getName(), choice.getDescription());
+			if (oldChoicesCount != choices.size()) {
+				throw new QuestionChoiceException();
 			}
 
-			choice.setDescription(choiceDescription);
+			Iterator itr = choices.iterator();
 
-			pollsChoicePersistence.update(choice);
+			while (itr.hasNext()) {
+				PollsChoice choice = (PollsChoice)itr.next();
+
+				String choiceName = choice.getName();
+				String choiceDescription = choice.getDescription();
+
+				choice = pollsChoicePersistence.fetchByQ_N(
+					questionId, choiceName);
+
+				if (choice == null) {
+					pollsChoiceLocalService.addChoice(
+						questionId, choiceName, choiceDescription);
+				}
+				else {
+					pollsChoiceLocalService.updateChoice(
+						choice.getChoiceId(), questionId, choiceName,
+						choiceDescription);
+				}
+			}
 		}
 
 		return question;
