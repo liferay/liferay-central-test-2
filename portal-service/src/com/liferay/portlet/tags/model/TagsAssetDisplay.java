@@ -210,6 +210,22 @@ public class TagsAssetDisplay implements Serializable {
 		_width = width;
 	}
 
+	public double getPriority() {
+		return _priority;
+	}
+
+	public void setPriority(double priority) {
+		_priority = priority;
+	}
+
+	public int getViewCount() {
+		return _viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		_viewCount = viewCount;
+	}
+
 	public String getTagsEntries() {
 		return _tagsEntries;
 	}
@@ -240,6 +256,8 @@ public class TagsAssetDisplay implements Serializable {
 	private String _url;
 	private int _height;
 	private int _width;
+	private double _priority;
+	private int _viewCount;
 	private String _tagsEntries;
 
 }

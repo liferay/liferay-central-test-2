@@ -641,6 +641,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			assetDisplay.setUrl(asset.getUrl());
 			assetDisplay.setHeight(asset.getHeight());
 			assetDisplay.setWidth(asset.getWidth());
+			assetDisplay.setPriority(asset.getPriority());
+			assetDisplay.setViewCount(asset.getViewCount());
 			assetDisplay.setTagsEntries(tagsEntries);
 
 			assetDisplays[i] = assetDisplay;

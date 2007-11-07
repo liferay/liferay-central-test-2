@@ -344,6 +344,8 @@ public class JSONServiceAction extends JSONAction {
 		JSONUtil.put(jsonObj, "url", assetDisplay.getUrl());
 		JSONUtil.put(jsonObj, "height", assetDisplay.getHeight());
 		JSONUtil.put(jsonObj, "width", assetDisplay.getWidth());
+		JSONUtil.put(jsonObj, "priority", assetDisplay.getPriority());
+		JSONUtil.put(jsonObj, "viewCount", assetDisplay.getViewCount());
 		JSONUtil.put(jsonObj, "tagsEntries", assetDisplay.getTagsEntries());
 
 		return jsonObj;
