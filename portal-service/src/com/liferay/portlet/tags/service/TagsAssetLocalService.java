@@ -261,6 +261,17 @@ public interface TagsAssetLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.tags.model.TagsAsset updateAsset(long userId,
+		long groupId, java.lang.String className, long classPK,
+		java.lang.String[] entryNames, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url, int height, int width,
+		java.lang.Integer priority)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void validate(java.lang.String className,
 		java.lang.String[] entryNames)
 		throws com.liferay.portal.PortalException;

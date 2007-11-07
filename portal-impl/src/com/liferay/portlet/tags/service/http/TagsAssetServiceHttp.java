@@ -526,5 +526,120 @@ public class TagsAssetServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
+		long classPK, java.lang.String[] entryNames, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url, int height, int width,
+		int priority)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj1 = className;
+
+			if (className == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new LongWrapper(classPK);
+			Object paramObj3 = entryNames;
+
+			if (entryNames == null) {
+				paramObj3 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj4 = startDate;
+
+			if (startDate == null) {
+				paramObj4 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj5 = endDate;
+
+			if (endDate == null) {
+				paramObj5 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj6 = publishDate;
+
+			if (publishDate == null) {
+				paramObj6 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj7 = expirationDate;
+
+			if (expirationDate == null) {
+				paramObj7 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj8 = mimeType;
+
+			if (mimeType == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = title;
+
+			if (title == null) {
+				paramObj9 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj10 = description;
+
+			if (description == null) {
+				paramObj10 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj11 = summary;
+
+			if (summary == null) {
+				paramObj11 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj12 = url;
+
+			if (url == null) {
+				paramObj12 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj13 = new IntegerWrapper(height);
+			Object paramObj14 = new IntegerWrapper(width);
+			Object paramObj15 = new IntegerWrapper(priority);
+			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
+					"updateAsset",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.tags.model.TagsAsset)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(TagsAssetServiceHttp.class);
 }
