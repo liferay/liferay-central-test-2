@@ -968,7 +968,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							String name = ParamUtil.getString(request, "name");
 							String type = ParamUtil.getString(request, "type");
 							boolean hidden = ParamUtil.getBoolean(request, "hidden");
-							
+
 							Locale defaultLocale = LocaleUtil.getDefault();
 							String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 							%>
