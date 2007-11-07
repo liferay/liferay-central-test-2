@@ -191,6 +191,16 @@ public class DLLocalServiceImpl implements DLLocalService {
 			versionNumber, sourceFileName, properties, is);
 	}
 
+	public void validate(String fileName, File file) throws PortalException {
+		validate(fileName);
+
+		if ((FILE_MAX_SIZE > 0) &&
+			((file == null) || (file.length() > FILE_MAX_SIZE))) {
+
+			throw new FileSizeException(fileName);
+		}
+	}
+
 	public void validate(String fileName, byte[] byteArray)
 		throws PortalException {
 
@@ -198,16 +208,6 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		if ((FILE_MAX_SIZE > 0) &&
 			((byteArray == null) || (byteArray.length > FILE_MAX_SIZE))) {
-
-			throw new FileSizeException(fileName);
-		}
-	}
-
-	public void validate(String fileName, File file) throws PortalException {
-		validate(fileName);
-
-		if ((FILE_MAX_SIZE > 0) &&
-			((file == null) || (file.length() > FILE_MAX_SIZE))) {
 
 			throw new FileSizeException(fileName);
 		}

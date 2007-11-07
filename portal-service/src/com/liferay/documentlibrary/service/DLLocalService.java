@@ -71,10 +71,10 @@ public interface DLLocalService {
 			String properties, InputStream is)
 		throws PortalException, SystemException;
 
+	public void validate(String fileName, File file) throws PortalException;
+
 	public void validate(String fileName, byte[] byteArray)
 		throws PortalException;
-
-	public void validate(String fileName, File file) throws PortalException;
 
 	public void validate(String fileName, InputStream is)
 		throws PortalException;

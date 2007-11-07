@@ -119,20 +119,20 @@ public class DLLocalServiceUtil {
 			versionNumber, sourceFileName, properties, is);
 	}
 
-	public static void validate(String fileName, byte[] byteArray)
-		throws PortalException {
-
-		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
-
-		dlLocalService.validate(fileName, byteArray);
-	}
-
 	public static void validate(String fileName, File file)
 		throws PortalException {
 
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
 
 		dlLocalService.validate(fileName, file);
+	}
+
+	public static void validate(String fileName, byte[] byteArray)
+		throws PortalException {
+
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+
+		dlLocalService.validate(fileName, byteArray);
 	}
 
 	public static void validate(String fileName, InputStream is)
