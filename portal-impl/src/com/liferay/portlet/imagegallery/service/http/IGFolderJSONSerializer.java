@@ -52,6 +52,7 @@ import java.util.List;
 public class IGFolderJSONSerializer {
 	public static JSONObject toJSONObject(IGFolder model) {
 		JSONObject jsonObj = new JSONObject();
+		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "folderId", model.getFolderId());
 		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());

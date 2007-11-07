@@ -48,6 +48,7 @@ import java.util.List;
 public class IGImageSoap implements Serializable {
 	public static IGImageSoap toSoapModel(IGImage model) {
 		IGImageSoap soapModel = new IGImageSoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setImageId(model.getImageId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -81,6 +82,14 @@ public class IGImageSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setImageId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getImageId() {
@@ -155,6 +164,7 @@ public class IGImageSoap implements Serializable {
 		_largeImageId = largeImageId;
 	}
 
+	private String _uuid;
 	private long _imageId;
 	private long _companyId;
 	private long _userId;

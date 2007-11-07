@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -60,6 +61,9 @@ public class IGImageFinderImpl implements IGImageFinder {
 
 	public static String FIND_BY_NO_ASSETS =
 		IGImageFinder.class.getName() + ".findByNoAssets";
+
+	public static String FIND_BY_UUID_G =
+		IGImageFinder.class.getName() + ".findByUuid_G";
 
 	public static String FIND_BY_G_U =
 		IGImageFinder.class.getName() + ".findByG_U";
@@ -223,6 +227,42 @@ public class IGImageFinderImpl implements IGImageFinder {
 			q.addEntity("IGImage", IGImageImpl.class);
 
 			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public IGImage findByUuid_G(String uuid, long groupId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("IGImage", IGImageImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(uuid);
+			qPos.add(groupId);
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return (IGImage)list.get(0);
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

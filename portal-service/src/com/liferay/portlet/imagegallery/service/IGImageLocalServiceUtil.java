@@ -209,6 +209,20 @@ public class IGImageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
+		java.lang.String uuid, long userId, long folderId,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.addImage(uuid, userId, folderId,
+			description, file, contentType, tagsEntries,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
 		long userId, long folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,
 		java.lang.String[] tagsEntries,
@@ -224,9 +238,9 @@ public class IGImageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long userId, long folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries,
+		java.lang.String uuid, long userId, long folderId,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -235,9 +249,10 @@ public class IGImageLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
-		return igImageLocalService.addImage(userId, folderId, description,
-			file, contentType, tagsEntries, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
+		return igImageLocalService.addImage(uuid, userId, folderId,
+			description, file, contentType, tagsEntries,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void addImageResources(long folderId, long imageId,

@@ -44,6 +44,10 @@ public interface IGImageFinder {
 	public java.util.List findByNoAssets()
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage findByUuid_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List findByG_U(long groupId, long userId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 }

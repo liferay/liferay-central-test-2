@@ -70,6 +70,20 @@
 				))
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.findByUuid_G">
+		<![CDATA[
+			SELECT
+				DISTINCT {IGImage.*}
+			FROM
+				IGImage
+			INNER JOIN
+				IGFolder ON
+					(IGFolder.folderId = IGImage.folderId)
+			WHERE
+			    (IGImage.uuid_ = ?) AND
+				(IGFolder.groupId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.findByG_U">
 		<![CDATA[
 			SELECT

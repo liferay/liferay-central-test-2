@@ -68,7 +68,19 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addImage(
-			userId, folderId, description, file, contentType, tagsEntries,
+			null, userId, folderId, description, file, contentType, tagsEntries,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public IGImage addImage(
+			String uuid, long userId, long folderId, String description,
+			File file, String contentType, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addImage(
+			uuid, userId, folderId, description, file, contentType, tagsEntries,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
@@ -80,13 +92,13 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addImage(
-			userId, folderId, description, file, contentType, tagsEntries,
+			null, userId, folderId, description, file, contentType, tagsEntries,
 			null, null, communityPermissions, guestPermissions);
 	}
 
 	public IGImage addImage(
-			long userId, long folderId, String description, File file,
-			String contentType, String[] tagsEntries,
+			String uuid, long userId, long folderId, String description,
+			File file, String contentType, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -107,6 +119,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			IGImage image = igImagePersistence.create(imageId);
 
+			image.setUuid(uuid);
 			image.setCompanyId(user.getCompanyId());
 			image.setUserId(user.getUserId());
 			image.setCreateDate(now);

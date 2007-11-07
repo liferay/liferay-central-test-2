@@ -183,6 +183,19 @@ public class IGFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
+		java.lang.String uuid, long userId, long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.addFolder(uuid, userId, plid,
+			parentFolderId, name, description, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -195,8 +208,8 @@ public class IGFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
-		long userId, long plid, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String uuid, long userId, long plid, long parentFolderId,
+		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -205,14 +218,14 @@ public class IGFolderLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
-		return igFolderLocalService.addFolder(userId, plid, parentFolderId,
-			name, description, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+		return igFolderLocalService.addFolder(uuid, userId, plid,
+			parentFolderId, name, description, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolderToGroup(
-		long userId, long groupId, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		java.lang.String uuid, long userId, long groupId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -221,7 +234,7 @@ public class IGFolderLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
-		return igFolderLocalService.addFolderToGroup(userId, groupId,
+		return igFolderLocalService.addFolderToGroup(uuid, userId, groupId,
 			parentFolderId, name, description, addCommunityPermissions,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}

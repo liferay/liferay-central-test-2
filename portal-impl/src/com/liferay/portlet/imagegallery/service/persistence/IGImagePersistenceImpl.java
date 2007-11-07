@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
@@ -64,6 +65,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 		IGImage igImage = new IGImageImpl();
 		igImage.setNew(true);
 		igImage.setPrimaryKey(imageId);
+
+		String uuid = PortalUUIDUtil.generate();
+		igImage.setUuid(uuid);
 
 		return igImage;
 	}
@@ -174,6 +178,11 @@ public class IGImagePersistenceImpl extends BasePersistence
 	public IGImage updateImpl(
 		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
 		throws SystemException {
+		if (Validator.isNull(igImage.getUuid())) {
+			String uuid = PortalUUIDUtil.generate();
+			igImage.setUuid(uuid);
+		}
+
 		Session session = null;
 
 		try {
@@ -225,6 +234,224 @@ public class IGImagePersistenceImpl extends BasePersistence
 			session = openSession();
 
 			return (IGImage)session.get(IGImageImpl.class, new Long(imageId));
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByUuid(String uuid) throws SystemException {
+		String finderClassName = IGImage.class.getName();
+		String finderMethodName = "findByUuid";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { uuid };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+				query.append("ORDER BY ");
+				query.append("imageId ASC");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				List list = q.list();
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public List findByUuid(String uuid, int begin, int end)
+		throws SystemException {
+		return findByUuid(uuid, begin, end, null);
+	}
+
+	public List findByUuid(String uuid, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		String finderClassName = IGImage.class.getName();
+		String finderMethodName = "findByUuid";
+		String[] finderParams = new String[] {
+				String.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				uuid, String.valueOf(begin), String.valueOf(end),
+				String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+				else {
+					query.append("ORDER BY ");
+					query.append("imageId ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public IGImage findByUuid_First(String uuid, OrderByComparator obc)
+		throws NoSuchImageException, SystemException {
+		List list = findByUuid(uuid, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No IGImage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchImageException(msg.toString());
+		}
+		else {
+			return (IGImage)list.get(0);
+		}
+	}
+
+	public IGImage findByUuid_Last(String uuid, OrderByComparator obc)
+		throws NoSuchImageException, SystemException {
+		int count = countByUuid(uuid);
+		List list = findByUuid(uuid, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No IGImage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("uuid=");
+			msg.append(uuid);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchImageException(msg.toString());
+		}
+		else {
+			return (IGImage)list.get(0);
+		}
+	}
+
+	public IGImage[] findByUuid_PrevAndNext(long imageId, String uuid,
+		OrderByComparator obc) throws NoSuchImageException, SystemException {
+		IGImage igImage = findByPrimaryKey(imageId);
+		int count = countByUuid(uuid);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
+			if (uuid == null) {
+				query.append("uuid_ IS NULL");
+			}
+			else {
+				query.append("uuid_ = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("imageId ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+
+			if (uuid != null) {
+				q.setString(queryPos++, uuid);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
+			IGImage[] array = new IGImageImpl[3];
+			array[0] = (IGImage)objArray[0];
+			array[1] = (IGImage)objArray[1];
+			array[2] = (IGImage)objArray[2];
+
+			return array;
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -526,6 +753,15 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByUuid(String uuid) throws SystemException {
+		Iterator itr = findByUuid(uuid).iterator();
+
+		while (itr.hasNext()) {
+			IGImage igImage = (IGImage)itr.next();
+			remove(igImage);
+		}
+	}
+
 	public void removeByFolderId(long folderId) throws SystemException {
 		Iterator itr = findByFolderId(folderId).iterator();
 
@@ -540,6 +776,69 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 		while (itr.hasNext()) {
 			remove((IGImage)itr.next());
+		}
+	}
+
+	public int countByUuid(String uuid) throws SystemException {
+		String finderClassName = IGImage.class.getName();
+		String finderMethodName = "countByUuid";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { uuid };
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
+				if (uuid == null) {
+					query.append("uuid_ IS NULL");
+				}
+				else {
+					query.append("uuid_ = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+
+				if (uuid != null) {
+					q.setString(queryPos++, uuid);
+				}
+
+				Long count = null;
+				Iterator itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = (Long)itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

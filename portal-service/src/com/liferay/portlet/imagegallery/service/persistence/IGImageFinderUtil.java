@@ -54,6 +54,12 @@ public class IGImageFinderUtil {
 		return getFinder().findByNoAssets();
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage findByUuid_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByUuid_G(uuid, groupId);
+	}
+
 	public static java.util.List findByG_U(long groupId, long userId,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getFinder().findByG_U(groupId, userId, begin, end);

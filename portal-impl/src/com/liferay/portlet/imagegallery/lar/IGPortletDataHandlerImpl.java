@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -38,8 +39,8 @@ import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
+import com.liferay.portlet.imagegallery.service.persistence.IGImageFinderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
@@ -92,9 +93,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 		Map parameterMap = context.getParameterMap();
 
-		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_IG_DATA,
-			_enableExport.getDefaultState());
+		boolean exportData = MapUtil.getBoolean(parameterMap, _EXPORT_IG_DATA);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -221,8 +220,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 		Map parameterMap = context.getParameterMap();
 
-		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_IG_DATA, _enableImport.getDefaultState());
+		boolean importData = MapUtil.getBoolean(parameterMap, _IMPORT_IG_DATA);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -236,6 +234,9 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		if (!importData) {
 			return null;
 		}
+
+		boolean mergeData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
@@ -264,7 +265,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				IGFolder folder = (IGFolder)itr.next();
 
-				importFolder(context, folderPKs, folder);
+				importFolder(context, mergeData, folderPKs, folder);
 			}
 
 			// Images
@@ -304,7 +305,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				IGImage igImage = (IGImage)itr.next();
 
-				importIGImage(context, folderPKs, imagesPKs, igImage);
+				importIGImage(
+					context, mergeData, folderPKs, imagesPKs, igImage);
 			}
 
 			// No special modification to the incoming portlet preferences
@@ -318,11 +320,9 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importFolder(
-			PortletDataContext context, Map folderPKs, IGFolder folder)
+			PortletDataContext context, boolean mergeData, Map folderPKs,
+			IGFolder folder)
 		throws Exception {
-
-		IGFolder existingFolder = IGFolderUtil.fetchByPrimaryKey(
-			folder.getPrimaryKey());
 
 		Long parentFolderId = (Long)folderPKs.get(
 			new Long(folder.getParentFolderId()));
@@ -331,6 +331,13 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			parentFolderId = new Long(folder.getParentFolderId());
 		}
 
+		long plid = context.getPlid();
+
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		IGFolder existingFolder = null;
+
 		try {
 			if (parentFolderId.longValue() !=
 					IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
@@ -338,28 +345,33 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				IGFolderUtil.findByPrimaryKey(parentFolderId.longValue());
 			}
 
-			if ((existingFolder == null) ||
-				(existingFolder.getGroupId() != context.getGroupId())) {
+			if (mergeData) {
+				existingFolder = IGFolderUtil.fetchByUUID_G(
+					folder.getUuid(), context.getGroupId());
 
-				long plid = context.getPlid();
-
-				boolean addCommunityPermissions = true;
-				boolean addGuestPermissions = true;
-
-				IGFolder newFolder =
-					IGFolderLocalServiceUtil.addFolder(
-						folder.getUserId(), plid, parentFolderId.longValue(),
-						folder.getName(), folder.getDescription(),
-						addCommunityPermissions, addGuestPermissions);
-
-				folderPKs.put(
-					folder.getPrimaryKeyObj(), newFolder.getPrimaryKeyObj());
+				if (existingFolder == null) {
+					existingFolder = IGFolderLocalServiceUtil.addFolder(
+						folder.getUuid(), folder.getUserId(), plid,
+						parentFolderId.longValue(), folder.getName(),
+						folder.getDescription(), addCommunityPermissions,
+						addGuestPermissions);
+				}
+				else {
+					existingFolder = IGFolderLocalServiceUtil.updateFolder(
+						existingFolder.getFolderId(),
+						parentFolderId.longValue(), folder.getName(),
+						folder.getDescription(), false);
+				}
 			}
 			else {
-				folder.setParentFolderId(parentFolderId.longValue());
-
-				IGFolderUtil.update(folder, true);
+				existingFolder = IGFolderLocalServiceUtil.addFolder(
+					folder.getUserId(), plid, parentFolderId.longValue(),
+					folder.getName(), folder.getDescription(),
+					addCommunityPermissions, addGuestPermissions);
 			}
+
+			folderPKs.put(
+				folder.getPrimaryKeyObj(), existingFolder.getPrimaryKeyObj());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -369,66 +381,66 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importIGImage(
-			PortletDataContext context, Map folderPKs, Map imagesPKs,
-			IGImage igImage)
+			PortletDataContext context, boolean mergeData, Map folderPKs,
+			Map imagesPKs, IGImage igImage)
 		throws Exception {
 
 		Long folderId = (Long)folderPKs.get(new Long(igImage.getFolderId()));
 
-		boolean newParentFolder = false;
-
 		if (folderId == null) {
 			folderId = new Long(igImage.getFolderId());
 		}
+
+		Image image = (Image)imagesPKs.get(new Long(igImage.getLargeImageId()));
+
+		File imageFile = null;
+
+		if (image == null) {
+			_log.error(
+				"Could not find image for IG image " + igImage.getImageId());
+			return;
+		}
 		else {
-			newParentFolder = true;
+			imageFile = new File(
+				igImage.getDescription() + "." + image.getType());
+
+			FileUtil.write(imageFile, image.getTextObj());
 		}
 
 		String[] tagsEntries = context.getTagsEntries(
 			IGImage.class, igImage.getPrimaryKeyObj());
 
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		IGImage existingImage = null;
+
 		try {
-			if (folderId.longValue() != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-				IGFolderUtil.findByPrimaryKey(folderId.longValue());
-			}
+			IGFolderUtil.findByPrimaryKey(folderId.longValue());
 
-			if ((IGImageUtil.fetchByPrimaryKey(
-					igImage.getPrimaryKey()) == null) ||
-				newParentFolder) {
+			if (mergeData) {
+				existingImage = IGImageFinderUtil.findByUuid_G(
+					igImage.getUuid(), context.getGroupId());
 
-				Image image = (Image)imagesPKs.get(
-					new Long(igImage.getLargeImageId()));
-
-				if (image != null) {
-					File file = new File(
-						igImage.getDescription() + "." + image.getType());
-
-					FileUtil.write(file, image.getTextObj());
-
-					boolean addCommunityPermissions = true;
-					boolean addGuestPermissions = true;
-
+				if (existingImage == null) {
 					IGImageLocalServiceUtil.addImage(
-						igImage.getUserId(), folderId.longValue(),
-						igImage.getDescription(), file, image.getType(),
-					    tagsEntries, addCommunityPermissions,
-					    addGuestPermissions);
+						igImage.getUuid(), igImage.getUserId(),
+						folderId.longValue(), igImage.getDescription(),
+						imageFile, image.getType(), tagsEntries,
+						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
-					_log.error(
-						"Could not find image for IG image " +
-							igImage.getImageId());
+					IGImageLocalServiceUtil.updateImage(
+						igImage.getUserId(), existingImage.getImageId(),
+						folderId.longValue(), igImage.getDescription(),
+						imageFile, image.getType(), tagsEntries);
 				}
 			}
 			else {
-				igImage.setFolderId(folderId.longValue());
-
-				IGImageUtil.update(igImage, true);
-
-				TagsAssetLocalServiceUtil.updateAsset(
-					igImage.getUserId(), igImage.getFolder().getGroupId(),
-					IGImage.class.getName(), igImage.getPrimaryKey(),
-					tagsEntries);
+				IGImageLocalServiceUtil.addImage(
+					igImage.getUserId(), folderId.longValue(),
+					igImage.getDescription(), imageFile, image.getType(),
+					tagsEntries, addCommunityPermissions, addGuestPermissions);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
@@ -450,7 +462,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	private static final PortletDataHandlerBoolean _enableImport =
 		new PortletDataHandlerBoolean(_IMPORT_IG_DATA, true, null);
 
-	private static Log _log =
-		LogFactory.getLog(IGPortletDataHandlerImpl.class);
+	private static Log _log = LogFactory.getLog(IGPortletDataHandlerImpl.class);
 
 }

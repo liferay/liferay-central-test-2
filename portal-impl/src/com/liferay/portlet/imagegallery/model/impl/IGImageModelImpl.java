@@ -56,6 +56,7 @@ import java.util.Date;
 public class IGImageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "IGImage";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "imageId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
@@ -66,11 +67,14 @@ public class IGImageModelImpl extends BaseModelImpl {
 			{ "smallImageId", new Integer(Types.BIGINT) },
 			{ "largeImageId", new Integer(Types.BIGINT) }
 		};
-	public static String TABLE_SQL_CREATE = "create table IGImage (imageId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,description STRING null,smallImageId LONG,largeImageId LONG)";
+	public static String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,description STRING null,smallImageId LONG,largeImageId LONG)";
 	public static String TABLE_SQL_DROP = "drop table IGImage";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage.description"),
 			XSS_ALLOW_BY_MODEL);
@@ -90,6 +94,16 @@ public class IGImageModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_imageId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getImageId() {
@@ -197,6 +211,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		IGImageImpl clone = new IGImageImpl();
+		clone.setUuid(getUuid());
 		clone.setImageId(getImageId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -263,6 +278,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _imageId;
 	private long _companyId;
 	private long _userId;

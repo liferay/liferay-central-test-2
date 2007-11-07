@@ -52,6 +52,7 @@ import java.util.List;
 public class IGImageJSONSerializer {
 	public static JSONObject toJSONObject(IGImage model) {
 		JSONObject jsonObj = new JSONObject();
+		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "imageId", model.getImageId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "userId", model.getUserId());

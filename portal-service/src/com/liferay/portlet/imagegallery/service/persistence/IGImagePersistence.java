@@ -59,6 +59,34 @@ public interface IGImagePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByPrimaryKey(
 		long imageId) throws com.liferay.portal.SystemException;
 
+	public java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage[] findByUuid_PrevAndNext(
+		long imageId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
 	public java.util.List findByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;
 
@@ -102,10 +130,16 @@ public interface IGImagePersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
 
 	public int countByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;

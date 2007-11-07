@@ -62,6 +62,8 @@ public class UpgradeUUID extends UpgradeProcess {
 		upgradeTable("DLFileShortcut", "fileShortcutId");
 		upgradeTable("DLFolder", "folderId");
 		upgradeTable("CalEvent", "eventId");
+		upgradeTable("IGFolder", "folderId");
+		upgradeTable("IGImage", "imageId");
 		upgradeTable("JournalArticle", "id_");
 		//upgradeTable("JournalArticleImage", "id_");
 		upgradeTable("JournalStructure", "id_");

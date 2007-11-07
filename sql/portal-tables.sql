@@ -325,6 +325,7 @@ create table Groups_UserGroups (
 );
 
 create table IGFolder (
+	uuid_ VARCHAR(75) null,
 	folderId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -337,6 +338,7 @@ create table IGFolder (
 );
 
 create table IGImage (
+	uuid_ VARCHAR(75) null,
 	imageId LONG not null primary key,
 	companyId LONG,
 	userId LONG,

@@ -75,6 +75,7 @@ public abstract class IGFolderLocalServiceBaseImpl
 	public IGFolder addIGFolder(IGFolder model) throws SystemException {
 		IGFolder igFolder = new IGFolderImpl();
 		igFolder.setNew(true);
+		igFolder.setUuid(model.getUuid());
 		igFolder.setFolderId(model.getFolderId());
 		igFolder.setGroupId(model.getGroupId());
 		igFolder.setCompanyId(model.getCompanyId());
@@ -102,6 +103,7 @@ public abstract class IGFolderLocalServiceBaseImpl
 	public IGFolder updateIGFolder(IGFolder model) throws SystemException {
 		IGFolder igFolder = new IGFolderImpl();
 		igFolder.setNew(false);
+		igFolder.setUuid(model.getUuid());
 		igFolder.setFolderId(model.getFolderId());
 		igFolder.setGroupId(model.getGroupId());
 		igFolder.setCompanyId(model.getCompanyId());
