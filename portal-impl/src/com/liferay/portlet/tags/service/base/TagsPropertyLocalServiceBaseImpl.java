@@ -38,6 +38,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.tags.model.TagsProperty;
+import com.liferay.portlet.tags.model.impl.TagsPropertyImpl;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
@@ -80,15 +82,49 @@ import java.util.List;
  */
 public abstract class TagsPropertyLocalServiceBaseImpl
 	implements TagsPropertyLocalService, InitializingBean {
+	public TagsProperty addTagsProperty(TagsProperty model)
+		throws SystemException {
+		TagsProperty tagsProperty = new TagsPropertyImpl();
+		tagsProperty.setNew(true);
+		tagsProperty.setPropertyId(model.getPropertyId());
+		tagsProperty.setCompanyId(model.getCompanyId());
+		tagsProperty.setUserId(model.getUserId());
+		tagsProperty.setUserName(model.getUserName());
+		tagsProperty.setCreateDate(model.getCreateDate());
+		tagsProperty.setModifiedDate(model.getModifiedDate());
+		tagsProperty.setEntryId(model.getEntryId());
+		tagsProperty.setKey(model.getKey());
+		tagsProperty.setValue(model.getValue());
+
+		return tagsPropertyPersistence.update(tagsProperty);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return TagsPropertyUtil.findWithDynamicQuery(queryInitializer);
+		return tagsPropertyPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return TagsPropertyUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return tagsPropertyPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public TagsProperty updateTagsProperty(TagsProperty model)
+		throws SystemException {
+		TagsProperty tagsProperty = new TagsPropertyImpl();
+		tagsProperty.setNew(false);
+		tagsProperty.setPropertyId(model.getPropertyId());
+		tagsProperty.setCompanyId(model.getCompanyId());
+		tagsProperty.setUserId(model.getUserId());
+		tagsProperty.setUserName(model.getUserName());
+		tagsProperty.setCreateDate(model.getCreateDate());
+		tagsProperty.setModifiedDate(model.getModifiedDate());
+		tagsProperty.setEntryId(model.getEntryId());
+		tagsProperty.setKey(model.getKey());
+		tagsProperty.setValue(model.getValue());
+
+		return tagsPropertyPersistence.update(tagsProperty);
 	}
 
 	public TagsAssetLocalService getTagsAssetLocalService() {

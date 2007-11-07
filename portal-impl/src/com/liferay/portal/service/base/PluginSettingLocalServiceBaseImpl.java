@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.PluginSetting;
+import com.liferay.portal.model.impl.PluginSettingImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -263,15 +265,43 @@ import java.util.List;
  */
 public abstract class PluginSettingLocalServiceBaseImpl
 	implements PluginSettingLocalService, InitializingBean {
+	public PluginSetting addPluginSetting(PluginSetting model)
+		throws SystemException {
+		PluginSetting pluginSetting = new PluginSettingImpl();
+		pluginSetting.setNew(true);
+		pluginSetting.setPluginSettingId(model.getPluginSettingId());
+		pluginSetting.setCompanyId(model.getCompanyId());
+		pluginSetting.setPluginId(model.getPluginId());
+		pluginSetting.setPluginType(model.getPluginType());
+		pluginSetting.setRoles(model.getRoles());
+		pluginSetting.setActive(model.getActive());
+
+		return pluginSettingPersistence.update(pluginSetting);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return PluginSettingUtil.findWithDynamicQuery(queryInitializer);
+		return pluginSettingPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return PluginSettingUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return pluginSettingPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public PluginSetting updatePluginSetting(PluginSetting model)
+		throws SystemException {
+		PluginSetting pluginSetting = new PluginSettingImpl();
+		pluginSetting.setNew(false);
+		pluginSetting.setPluginSettingId(model.getPluginSettingId());
+		pluginSetting.setCompanyId(model.getCompanyId());
+		pluginSetting.setPluginId(model.getPluginId());
+		pluginSetting.setPluginType(model.getPluginType());
+		pluginSetting.setRoles(model.getRoles());
+		pluginSetting.setActive(model.getActive());
+
+		return pluginSettingPersistence.update(pluginSetting);
 	}
 
 	public AccountLocalService getAccountLocalService() {

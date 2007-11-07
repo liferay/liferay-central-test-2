@@ -60,6 +60,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.service.CalEventLocalService;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceFactory;
 import com.liferay.portlet.calendar.service.CalEventService;

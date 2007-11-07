@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.PortletPreferences;
+import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -265,15 +267,43 @@ import java.util.List;
  */
 public abstract class PortletPreferencesLocalServiceBaseImpl
 	implements PortletPreferencesLocalService, InitializingBean {
+	public PortletPreferences addPortletPreferences(PortletPreferences model)
+		throws SystemException {
+		PortletPreferences portletPreferences = new PortletPreferencesImpl();
+		portletPreferences.setNew(true);
+		portletPreferences.setPortletPreferencesId(model.getPortletPreferencesId());
+		portletPreferences.setOwnerId(model.getOwnerId());
+		portletPreferences.setOwnerType(model.getOwnerType());
+		portletPreferences.setPlid(model.getPlid());
+		portletPreferences.setPortletId(model.getPortletId());
+		portletPreferences.setPreferences(model.getPreferences());
+
+		return portletPreferencesPersistence.update(portletPreferences);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return PortletPreferencesUtil.findWithDynamicQuery(queryInitializer);
+		return portletPreferencesPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return PortletPreferencesUtil.findWithDynamicQuery(queryInitializer,
+		return portletPreferencesPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public PortletPreferences updatePortletPreferences(PortletPreferences model)
+		throws SystemException {
+		PortletPreferences portletPreferences = new PortletPreferencesImpl();
+		portletPreferences.setNew(false);
+		portletPreferences.setPortletPreferencesId(model.getPortletPreferencesId());
+		portletPreferences.setOwnerId(model.getOwnerId());
+		portletPreferences.setOwnerType(model.getOwnerType());
+		portletPreferences.setPlid(model.getPlid());
+		portletPreferences.setPortletId(model.getPortletId());
+		portletPreferences.setPreferences(model.getPreferences());
+
+		return portletPreferencesPersistence.update(portletPreferences);
 	}
 
 	public AccountLocalService getAccountLocalService() {

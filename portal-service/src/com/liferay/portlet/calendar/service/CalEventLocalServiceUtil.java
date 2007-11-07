@@ -49,6 +49,14 @@ package com.liferay.portlet.calendar.service;
  *
  */
 public class CalEventLocalServiceUtil {
+	public static com.liferay.portlet.calendar.model.CalEvent addCalEvent(
+		com.liferay.portlet.calendar.model.CalEvent model)
+		throws com.liferay.portal.SystemException {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.addCalEvent(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class CalEventLocalServiceUtil {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
 		return calEventLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent updateCalEvent(
+		com.liferay.portlet.calendar.model.CalEvent model)
+		throws com.liferay.portal.SystemException {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.updateCalEvent(model);
 	}
 
 	public static com.liferay.portlet.calendar.service.persistence.CalEventPersistence getCalEventPersistence() {

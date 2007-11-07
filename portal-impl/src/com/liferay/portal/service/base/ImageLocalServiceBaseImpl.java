@@ -24,6 +24,8 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.Image;
+import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -260,14 +262,43 @@ import java.util.List;
  */
 public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	InitializingBean {
+	public Image addImage(Image model) throws SystemException {
+		Image image = new ImageImpl();
+		image.setNew(true);
+		image.setImageId(model.getImageId());
+		image.setModifiedDate(model.getModifiedDate());
+		image.setText(model.getText());
+		image.setType(model.getType());
+		image.setHeight(model.getHeight());
+		image.setWidth(model.getWidth());
+		image.setSize(model.getSize());
+
+		return imagePersistence.update(image);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return ImageUtil.findWithDynamicQuery(queryInitializer);
+		return imagePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return ImageUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return imagePersistence.findWithDynamicQuery(queryInitializer, begin,
+			end);
+	}
+
+	public Image updateImage(Image model) throws SystemException {
+		Image image = new ImageImpl();
+		image.setNew(false);
+		image.setImageId(model.getImageId());
+		image.setModifiedDate(model.getModifiedDate());
+		image.setText(model.getText());
+		image.setType(model.getType());
+		image.setHeight(model.getHeight());
+		image.setWidth(model.getWidth());
+		image.setSize(model.getSize());
+
+		return imagePersistence.update(image);
 	}
 
 	public AccountLocalService getAccountLocalService() {

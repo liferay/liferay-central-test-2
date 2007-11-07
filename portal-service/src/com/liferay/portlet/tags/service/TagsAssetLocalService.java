@@ -49,6 +49,10 @@ package com.liferay.portlet.tags.service;
  *
  */
 public interface TagsAssetLocalService {
+	public com.liferay.portlet.tags.model.TagsAsset addTagsAsset(
+		com.liferay.portlet.tags.model.TagsAsset model)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -56,6 +60,10 @@ public interface TagsAssetLocalService {
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsAsset updateTagsAsset(
+		com.liferay.portlet.tags.model.TagsAsset model)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence();
 

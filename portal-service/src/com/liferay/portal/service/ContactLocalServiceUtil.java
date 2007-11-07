@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class ContactLocalServiceUtil {
+	public static com.liferay.portal.model.Contact addContact(
+		com.liferay.portal.model.Contact model)
+		throws com.liferay.portal.SystemException {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		return contactLocalService.addContact(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class ContactLocalServiceUtil {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 
 		return contactLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.Contact updateContact(
+		com.liferay.portal.model.Contact model)
+		throws com.liferay.portal.SystemException {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		return contactLocalService.updateContact(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

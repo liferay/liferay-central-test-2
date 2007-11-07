@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceFactory;
@@ -78,15 +80,55 @@ import java.util.List;
  */
 public abstract class BookmarksEntryLocalServiceBaseImpl
 	implements BookmarksEntryLocalService, InitializingBean {
+	public BookmarksEntry addBookmarksEntry(BookmarksEntry model)
+		throws SystemException {
+		BookmarksEntry bookmarksEntry = new BookmarksEntryImpl();
+		bookmarksEntry.setNew(true);
+		bookmarksEntry.setUuid(model.getUuid());
+		bookmarksEntry.setEntryId(model.getEntryId());
+		bookmarksEntry.setCompanyId(model.getCompanyId());
+		bookmarksEntry.setUserId(model.getUserId());
+		bookmarksEntry.setCreateDate(model.getCreateDate());
+		bookmarksEntry.setModifiedDate(model.getModifiedDate());
+		bookmarksEntry.setFolderId(model.getFolderId());
+		bookmarksEntry.setName(model.getName());
+		bookmarksEntry.setUrl(model.getUrl());
+		bookmarksEntry.setComments(model.getComments());
+		bookmarksEntry.setVisits(model.getVisits());
+		bookmarksEntry.setPriority(model.getPriority());
+
+		return bookmarksEntryPersistence.update(bookmarksEntry);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return BookmarksEntryUtil.findWithDynamicQuery(queryInitializer);
+		return bookmarksEntryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return BookmarksEntryUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return bookmarksEntryPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public BookmarksEntry updateBookmarksEntry(BookmarksEntry model)
+		throws SystemException {
+		BookmarksEntry bookmarksEntry = new BookmarksEntryImpl();
+		bookmarksEntry.setNew(false);
+		bookmarksEntry.setUuid(model.getUuid());
+		bookmarksEntry.setEntryId(model.getEntryId());
+		bookmarksEntry.setCompanyId(model.getCompanyId());
+		bookmarksEntry.setUserId(model.getUserId());
+		bookmarksEntry.setCreateDate(model.getCreateDate());
+		bookmarksEntry.setModifiedDate(model.getModifiedDate());
+		bookmarksEntry.setFolderId(model.getFolderId());
+		bookmarksEntry.setName(model.getName());
+		bookmarksEntry.setUrl(model.getUrl());
+		bookmarksEntry.setComments(model.getComments());
+		bookmarksEntry.setVisits(model.getVisits());
+		bookmarksEntry.setPriority(model.getPriority());
+
+		return bookmarksEntryPersistence.update(bookmarksEntry);
 	}
 
 	public BookmarksEntryPersistence getBookmarksEntryPersistence() {

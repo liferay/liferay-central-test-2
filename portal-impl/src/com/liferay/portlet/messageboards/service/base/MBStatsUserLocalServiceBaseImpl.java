@@ -30,6 +30,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.messageboards.model.MBStatsUser;
+import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -82,14 +84,41 @@ import java.util.List;
  */
 public abstract class MBStatsUserLocalServiceBaseImpl
 	implements MBStatsUserLocalService, InitializingBean {
+	public MBStatsUser addMBStatsUser(MBStatsUser model)
+		throws SystemException {
+		MBStatsUser mbStatsUser = new MBStatsUserImpl();
+		mbStatsUser.setNew(true);
+		mbStatsUser.setStatsUserId(model.getStatsUserId());
+		mbStatsUser.setGroupId(model.getGroupId());
+		mbStatsUser.setUserId(model.getUserId());
+		mbStatsUser.setMessageCount(model.getMessageCount());
+		mbStatsUser.setLastPostDate(model.getLastPostDate());
+
+		return mbStatsUserPersistence.update(mbStatsUser);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return MBStatsUserUtil.findWithDynamicQuery(queryInitializer);
+		return mbStatsUserPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return MBStatsUserUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return mbStatsUserPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public MBStatsUser updateMBStatsUser(MBStatsUser model)
+		throws SystemException {
+		MBStatsUser mbStatsUser = new MBStatsUserImpl();
+		mbStatsUser.setNew(false);
+		mbStatsUser.setStatsUserId(model.getStatsUserId());
+		mbStatsUser.setGroupId(model.getGroupId());
+		mbStatsUser.setUserId(model.getUserId());
+		mbStatsUser.setMessageCount(model.getMessageCount());
+		mbStatsUser.setLastPostDate(model.getLastPostDate());
+
+		return mbStatsUserPersistence.update(mbStatsUser);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

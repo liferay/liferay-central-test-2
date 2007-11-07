@@ -68,6 +68,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceFactory;
 import com.liferay.portlet.blogs.service.BlogsCategoryService;
@@ -114,14 +116,54 @@ import java.util.List;
  */
 public abstract class BlogsEntryLocalServiceBaseImpl
 	implements BlogsEntryLocalService, InitializingBean {
+	public BlogsEntry addBlogsEntry(BlogsEntry model) throws SystemException {
+		BlogsEntry blogsEntry = new BlogsEntryImpl();
+		blogsEntry.setNew(true);
+		blogsEntry.setEntryId(model.getEntryId());
+		blogsEntry.setGroupId(model.getGroupId());
+		blogsEntry.setCompanyId(model.getCompanyId());
+		blogsEntry.setUserId(model.getUserId());
+		blogsEntry.setUserName(model.getUserName());
+		blogsEntry.setCreateDate(model.getCreateDate());
+		blogsEntry.setModifiedDate(model.getModifiedDate());
+		blogsEntry.setCategoryId(model.getCategoryId());
+		blogsEntry.setTitle(model.getTitle());
+		blogsEntry.setUrlTitle(model.getUrlTitle());
+		blogsEntry.setContent(model.getContent());
+		blogsEntry.setDisplayDate(model.getDisplayDate());
+
+		return blogsEntryPersistence.update(blogsEntry);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return BlogsEntryUtil.findWithDynamicQuery(queryInitializer);
+		return blogsEntryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return BlogsEntryUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return blogsEntryPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public BlogsEntry updateBlogsEntry(BlogsEntry model)
+		throws SystemException {
+		BlogsEntry blogsEntry = new BlogsEntryImpl();
+		blogsEntry.setNew(false);
+		blogsEntry.setEntryId(model.getEntryId());
+		blogsEntry.setGroupId(model.getGroupId());
+		blogsEntry.setCompanyId(model.getCompanyId());
+		blogsEntry.setUserId(model.getUserId());
+		blogsEntry.setUserName(model.getUserName());
+		blogsEntry.setCreateDate(model.getCreateDate());
+		blogsEntry.setModifiedDate(model.getModifiedDate());
+		blogsEntry.setCategoryId(model.getCategoryId());
+		blogsEntry.setTitle(model.getTitle());
+		blogsEntry.setUrlTitle(model.getUrlTitle());
+		blogsEntry.setContent(model.getContent());
+		blogsEntry.setDisplayDate(model.getDisplayDate());
+
+		return blogsEntryPersistence.update(blogsEntry);
 	}
 
 	public BlogsCategoryLocalService getBlogsCategoryLocalService() {

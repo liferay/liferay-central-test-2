@@ -24,6 +24,8 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -258,14 +260,83 @@ import java.util.List;
  */
 public abstract class ContactLocalServiceBaseImpl implements ContactLocalService,
 	InitializingBean {
+	public Contact addContact(Contact model) throws SystemException {
+		Contact contact = new ContactImpl();
+		contact.setNew(true);
+		contact.setContactId(model.getContactId());
+		contact.setCompanyId(model.getCompanyId());
+		contact.setUserId(model.getUserId());
+		contact.setUserName(model.getUserName());
+		contact.setCreateDate(model.getCreateDate());
+		contact.setModifiedDate(model.getModifiedDate());
+		contact.setAccountId(model.getAccountId());
+		contact.setParentContactId(model.getParentContactId());
+		contact.setFirstName(model.getFirstName());
+		contact.setMiddleName(model.getMiddleName());
+		contact.setLastName(model.getLastName());
+		contact.setPrefixId(model.getPrefixId());
+		contact.setSuffixId(model.getSuffixId());
+		contact.setMale(model.getMale());
+		contact.setBirthday(model.getBirthday());
+		contact.setSmsSn(model.getSmsSn());
+		contact.setAimSn(model.getAimSn());
+		contact.setIcqSn(model.getIcqSn());
+		contact.setJabberSn(model.getJabberSn());
+		contact.setMsnSn(model.getMsnSn());
+		contact.setSkypeSn(model.getSkypeSn());
+		contact.setYmSn(model.getYmSn());
+		contact.setEmployeeStatusId(model.getEmployeeStatusId());
+		contact.setEmployeeNumber(model.getEmployeeNumber());
+		contact.setJobTitle(model.getJobTitle());
+		contact.setJobClass(model.getJobClass());
+		contact.setHoursOfOperation(model.getHoursOfOperation());
+
+		return contactPersistence.update(contact);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return ContactUtil.findWithDynamicQuery(queryInitializer);
+		return contactPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return ContactUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return contactPersistence.findWithDynamicQuery(queryInitializer, begin,
+			end);
+	}
+
+	public Contact updateContact(Contact model) throws SystemException {
+		Contact contact = new ContactImpl();
+		contact.setNew(false);
+		contact.setContactId(model.getContactId());
+		contact.setCompanyId(model.getCompanyId());
+		contact.setUserId(model.getUserId());
+		contact.setUserName(model.getUserName());
+		contact.setCreateDate(model.getCreateDate());
+		contact.setModifiedDate(model.getModifiedDate());
+		contact.setAccountId(model.getAccountId());
+		contact.setParentContactId(model.getParentContactId());
+		contact.setFirstName(model.getFirstName());
+		contact.setMiddleName(model.getMiddleName());
+		contact.setLastName(model.getLastName());
+		contact.setPrefixId(model.getPrefixId());
+		contact.setSuffixId(model.getSuffixId());
+		contact.setMale(model.getMale());
+		contact.setBirthday(model.getBirthday());
+		contact.setSmsSn(model.getSmsSn());
+		contact.setAimSn(model.getAimSn());
+		contact.setIcqSn(model.getIcqSn());
+		contact.setJabberSn(model.getJabberSn());
+		contact.setMsnSn(model.getMsnSn());
+		contact.setSkypeSn(model.getSkypeSn());
+		contact.setYmSn(model.getYmSn());
+		contact.setEmployeeStatusId(model.getEmployeeStatusId());
+		contact.setEmployeeNumber(model.getEmployeeNumber());
+		contact.setJobTitle(model.getJobTitle());
+		contact.setJobClass(model.getJobClass());
+		contact.setHoursOfOperation(model.getHoursOfOperation());
+
+		return contactPersistence.update(contact);
 	}
 
 	public AccountLocalService getAccountLocalService() {

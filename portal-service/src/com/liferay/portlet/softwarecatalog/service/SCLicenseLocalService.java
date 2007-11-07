@@ -49,6 +49,10 @@ package com.liferay.portlet.softwarecatalog.service;
  *
  */
 public interface SCLicenseLocalService {
+	public com.liferay.portlet.softwarecatalog.model.SCLicense addSCLicense(
+		com.liferay.portlet.softwarecatalog.model.SCLicense model)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -56,6 +60,10 @@ public interface SCLicenseLocalService {
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCLicense updateSCLicense(
+		com.liferay.portlet.softwarecatalog.model.SCLicense model)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence();
 

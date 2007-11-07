@@ -49,6 +49,10 @@ package com.liferay.portlet.imagegallery.service;
  *
  */
 public interface IGImageLocalService {
+	public com.liferay.portlet.imagegallery.model.IGImage addIGImage(
+		com.liferay.portlet.imagegallery.model.IGImage model)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -56,6 +60,10 @@ public interface IGImageLocalService {
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage updateIGImage(
+		com.liferay.portlet.imagegallery.model.IGImage model)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence getIGFolderPersistence();
 

@@ -49,6 +49,14 @@ package com.liferay.portlet.imagegallery.service;
  *
  */
 public class IGImageLocalServiceUtil {
+	public static com.liferay.portlet.imagegallery.model.IGImage addIGImage(
+		com.liferay.portlet.imagegallery.model.IGImage model)
+		throws com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.addIGImage(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class IGImageLocalServiceUtil {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
 		return igImageLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImage updateIGImage(
+		com.liferay.portlet.imagegallery.model.IGImage model)
+		throws com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.updateIGImage(model);
 	}
 
 	public static com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence getIGFolderPersistence() {

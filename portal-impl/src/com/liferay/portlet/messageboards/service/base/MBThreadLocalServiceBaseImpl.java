@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -106,14 +108,45 @@ import java.util.List;
  */
 public abstract class MBThreadLocalServiceBaseImpl
 	implements MBThreadLocalService, InitializingBean {
+	public MBThread addMBThread(MBThread model) throws SystemException {
+		MBThread mbThread = new MBThreadImpl();
+		mbThread.setNew(true);
+		mbThread.setThreadId(model.getThreadId());
+		mbThread.setCategoryId(model.getCategoryId());
+		mbThread.setRootMessageId(model.getRootMessageId());
+		mbThread.setMessageCount(model.getMessageCount());
+		mbThread.setViewCount(model.getViewCount());
+		mbThread.setLastPostByUserId(model.getLastPostByUserId());
+		mbThread.setLastPostDate(model.getLastPostDate());
+		mbThread.setPriority(model.getPriority());
+
+		return mbThreadPersistence.update(mbThread);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return MBThreadUtil.findWithDynamicQuery(queryInitializer);
+		return mbThreadPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return MBThreadUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return mbThreadPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public MBThread updateMBThread(MBThread model) throws SystemException {
+		MBThread mbThread = new MBThreadImpl();
+		mbThread.setNew(false);
+		mbThread.setThreadId(model.getThreadId());
+		mbThread.setCategoryId(model.getCategoryId());
+		mbThread.setRootMessageId(model.getRootMessageId());
+		mbThread.setMessageCount(model.getMessageCount());
+		mbThread.setViewCount(model.getViewCount());
+		mbThread.setLastPostByUserId(model.getLastPostByUserId());
+		mbThread.setLastPostDate(model.getLastPostDate());
+		mbThread.setPriority(model.getPriority());
+
+		return mbThreadPersistence.update(mbThread);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

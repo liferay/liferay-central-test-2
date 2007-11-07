@@ -24,6 +24,8 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.UserGroupRole;
+import com.liferay.portal.model.impl.UserGroupRoleImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -258,15 +260,37 @@ import java.util.List;
  */
 public abstract class UserGroupRoleLocalServiceBaseImpl
 	implements UserGroupRoleLocalService, InitializingBean {
+	public UserGroupRole addUserGroupRole(UserGroupRole model)
+		throws SystemException {
+		UserGroupRole userGroupRole = new UserGroupRoleImpl();
+		userGroupRole.setNew(true);
+		userGroupRole.setUserId(model.getUserId());
+		userGroupRole.setGroupId(model.getGroupId());
+		userGroupRole.setRoleId(model.getRoleId());
+
+		return userGroupRolePersistence.update(userGroupRole);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return UserGroupRoleUtil.findWithDynamicQuery(queryInitializer);
+		return userGroupRolePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return UserGroupRoleUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return userGroupRolePersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public UserGroupRole updateUserGroupRole(UserGroupRole model)
+		throws SystemException {
+		UserGroupRole userGroupRole = new UserGroupRoleImpl();
+		userGroupRole.setNew(false);
+		userGroupRole.setUserId(model.getUserId());
+		userGroupRole.setGroupId(model.getGroupId());
+		userGroupRole.setRoleId(model.getRoleId());
+
+		return userGroupRolePersistence.update(userGroupRole);
 	}
 
 	public AccountLocalService getAccountLocalService() {

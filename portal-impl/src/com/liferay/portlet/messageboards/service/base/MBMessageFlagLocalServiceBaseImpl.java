@@ -38,6 +38,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.messageboards.model.MBMessageFlag;
+import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -90,15 +92,39 @@ import java.util.List;
  */
 public abstract class MBMessageFlagLocalServiceBaseImpl
 	implements MBMessageFlagLocalService, InitializingBean {
+	public MBMessageFlag addMBMessageFlag(MBMessageFlag model)
+		throws SystemException {
+		MBMessageFlag mbMessageFlag = new MBMessageFlagImpl();
+		mbMessageFlag.setNew(true);
+		mbMessageFlag.setMessageFlagId(model.getMessageFlagId());
+		mbMessageFlag.setUserId(model.getUserId());
+		mbMessageFlag.setMessageId(model.getMessageId());
+		mbMessageFlag.setFlag(model.getFlag());
+
+		return mbMessageFlagPersistence.update(mbMessageFlag);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return MBMessageFlagUtil.findWithDynamicQuery(queryInitializer);
+		return mbMessageFlagPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return MBMessageFlagUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return mbMessageFlagPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public MBMessageFlag updateMBMessageFlag(MBMessageFlag model)
+		throws SystemException {
+		MBMessageFlag mbMessageFlag = new MBMessageFlagImpl();
+		mbMessageFlag.setNew(false);
+		mbMessageFlag.setMessageFlagId(model.getMessageFlagId());
+		mbMessageFlag.setUserId(model.getUserId());
+		mbMessageFlag.setMessageId(model.getMessageId());
+		mbMessageFlag.setFlag(model.getFlag());
+
+		return mbMessageFlagPersistence.update(mbMessageFlag);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

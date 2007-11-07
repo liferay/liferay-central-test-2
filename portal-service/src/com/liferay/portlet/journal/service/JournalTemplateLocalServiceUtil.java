@@ -49,6 +49,14 @@ package com.liferay.portlet.journal.service;
  *
  */
 public class JournalTemplateLocalServiceUtil {
+	public static com.liferay.portlet.journal.model.JournalTemplate addJournalTemplate(
+		com.liferay.portlet.journal.model.JournalTemplate model)
+		throws com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		return journalTemplateLocalService.addJournalTemplate(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class JournalTemplateLocalServiceUtil {
 
 		return journalTemplateLocalService.dynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalTemplate updateJournalTemplate(
+		com.liferay.portlet.journal.model.JournalTemplate model)
+		throws com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		return journalTemplateLocalService.updateJournalTemplate(model);
 	}
 
 	public static com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence() {

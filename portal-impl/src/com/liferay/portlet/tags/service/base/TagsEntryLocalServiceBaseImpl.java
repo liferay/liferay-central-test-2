@@ -38,6 +38,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
@@ -80,14 +82,43 @@ import java.util.List;
  */
 public abstract class TagsEntryLocalServiceBaseImpl
 	implements TagsEntryLocalService, InitializingBean {
+	public TagsEntry addTagsEntry(TagsEntry model) throws SystemException {
+		TagsEntry tagsEntry = new TagsEntryImpl();
+		tagsEntry.setNew(true);
+		tagsEntry.setEntryId(model.getEntryId());
+		tagsEntry.setCompanyId(model.getCompanyId());
+		tagsEntry.setUserId(model.getUserId());
+		tagsEntry.setUserName(model.getUserName());
+		tagsEntry.setCreateDate(model.getCreateDate());
+		tagsEntry.setModifiedDate(model.getModifiedDate());
+		tagsEntry.setName(model.getName());
+
+		return tagsEntryPersistence.update(tagsEntry);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return TagsEntryUtil.findWithDynamicQuery(queryInitializer);
+		return tagsEntryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return TagsEntryUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return tagsEntryPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public TagsEntry updateTagsEntry(TagsEntry model) throws SystemException {
+		TagsEntry tagsEntry = new TagsEntryImpl();
+		tagsEntry.setNew(false);
+		tagsEntry.setEntryId(model.getEntryId());
+		tagsEntry.setCompanyId(model.getCompanyId());
+		tagsEntry.setUserId(model.getUserId());
+		tagsEntry.setUserName(model.getUserName());
+		tagsEntry.setCreateDate(model.getCreateDate());
+		tagsEntry.setModifiedDate(model.getModifiedDate());
+		tagsEntry.setName(model.getName());
+
+		return tagsEntryPersistence.update(tagsEntry);
 	}
 
 	public TagsAssetLocalService getTagsAssetLocalService() {

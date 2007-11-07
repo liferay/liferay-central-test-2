@@ -30,6 +30,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.polls.model.PollsChoice;
+import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;
 import com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory;
@@ -60,14 +62,41 @@ import java.util.List;
  */
 public abstract class PollsChoiceLocalServiceBaseImpl
 	implements PollsChoiceLocalService, InitializingBean {
+	public PollsChoice addPollsChoice(PollsChoice model)
+		throws SystemException {
+		PollsChoice pollsChoice = new PollsChoiceImpl();
+		pollsChoice.setNew(true);
+		pollsChoice.setUuid(model.getUuid());
+		pollsChoice.setChoiceId(model.getChoiceId());
+		pollsChoice.setQuestionId(model.getQuestionId());
+		pollsChoice.setName(model.getName());
+		pollsChoice.setDescription(model.getDescription());
+
+		return pollsChoicePersistence.update(pollsChoice);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return PollsChoiceUtil.findWithDynamicQuery(queryInitializer);
+		return pollsChoicePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return PollsChoiceUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return pollsChoicePersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public PollsChoice updatePollsChoice(PollsChoice model)
+		throws SystemException {
+		PollsChoice pollsChoice = new PollsChoiceImpl();
+		pollsChoice.setNew(false);
+		pollsChoice.setUuid(model.getUuid());
+		pollsChoice.setChoiceId(model.getChoiceId());
+		pollsChoice.setQuestionId(model.getQuestionId());
+		pollsChoice.setName(model.getName());
+		pollsChoice.setDescription(model.getDescription());
+
+		return pollsChoicePersistence.update(pollsChoice);
 	}
 
 	public PollsChoicePersistence getPollsChoicePersistence() {

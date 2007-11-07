@@ -44,10 +44,10 @@ public interface BookmarksEntryFinder {
 	public java.util.List findByNoAssets()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_U(long groupId, long userId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByUuid_G(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByG_U(long groupId, long userId, int begin,
+		int end) throws com.liferay.portal.SystemException;
 }

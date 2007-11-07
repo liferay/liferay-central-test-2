@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -263,14 +265,39 @@ import java.util.List;
  */
 public abstract class PortletLocalServiceBaseImpl implements PortletLocalService,
 	InitializingBean {
+	public Portlet addPortlet(Portlet model) throws SystemException {
+		Portlet portlet = new PortletImpl();
+		portlet.setNew(true);
+		portlet.setId(model.getId());
+		portlet.setCompanyId(model.getCompanyId());
+		portlet.setPortletId(model.getPortletId());
+		portlet.setRoles(model.getRoles());
+		portlet.setActive(model.getActive());
+
+		return portletPersistence.update(portlet);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return PortletUtil.findWithDynamicQuery(queryInitializer);
+		return portletPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return PortletUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return portletPersistence.findWithDynamicQuery(queryInitializer, begin,
+			end);
+	}
+
+	public Portlet updatePortlet(Portlet model) throws SystemException {
+		Portlet portlet = new PortletImpl();
+		portlet.setNew(false);
+		portlet.setId(model.getId());
+		portlet.setCompanyId(model.getCompanyId());
+		portlet.setPortletId(model.getPortletId());
+		portlet.setRoles(model.getRoles());
+		portlet.setActive(model.getActive());
+
+		return portletPersistence.update(portlet);
 	}
 
 	public AccountLocalService getAccountLocalService() {

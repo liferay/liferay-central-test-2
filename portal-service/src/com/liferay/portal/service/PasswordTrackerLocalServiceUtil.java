@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class PasswordTrackerLocalServiceUtil {
+	public static com.liferay.portal.model.PasswordTracker addPasswordTracker(
+		com.liferay.portal.model.PasswordTracker model)
+		throws com.liferay.portal.SystemException {
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+
+		return passwordTrackerLocalService.addPasswordTracker(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class PasswordTrackerLocalServiceUtil {
 
 		return passwordTrackerLocalService.dynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public static com.liferay.portal.model.PasswordTracker updatePasswordTracker(
+		com.liferay.portal.model.PasswordTracker model)
+		throws com.liferay.portal.SystemException {
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+
+		return passwordTrackerLocalService.updatePasswordTracker(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

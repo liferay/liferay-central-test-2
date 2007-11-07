@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class UserIdMapperLocalServiceUtil {
+	public static com.liferay.portal.model.UserIdMapper addUserIdMapper(
+		com.liferay.portal.model.UserIdMapper model)
+		throws com.liferay.portal.SystemException {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		return userIdMapperLocalService.addUserIdMapper(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class UserIdMapperLocalServiceUtil {
 
 		return userIdMapperLocalService.dynamicQuery(queryInitializer, begin,
 			end);
+	}
+
+	public static com.liferay.portal.model.UserIdMapper updateUserIdMapper(
+		com.liferay.portal.model.UserIdMapper model)
+		throws com.liferay.portal.SystemException {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		return userIdMapperLocalService.updateUserIdMapper(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

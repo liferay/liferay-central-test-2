@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class ResourceCodeLocalServiceUtil {
+	public static com.liferay.portal.model.ResourceCode addResourceCode(
+		com.liferay.portal.model.ResourceCode model)
+		throws com.liferay.portal.SystemException {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		return resourceCodeLocalService.addResourceCode(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class ResourceCodeLocalServiceUtil {
 
 		return resourceCodeLocalService.dynamicQuery(queryInitializer, begin,
 			end);
+	}
+
+	public static com.liferay.portal.model.ResourceCode updateResourceCode(
+		com.liferay.portal.model.ResourceCode model)
+		throws com.liferay.portal.SystemException {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		return resourceCodeLocalService.updateResourceCode(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

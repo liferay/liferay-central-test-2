@@ -49,6 +49,14 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public class DLFolderLocalServiceUtil {
+	public static com.liferay.portlet.documentlibrary.model.DLFolder addDLFolder(
+		com.liferay.portlet.documentlibrary.model.DLFolder model)
+		throws com.liferay.portal.SystemException {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.addDLFolder(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class DLFolderLocalServiceUtil {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
 		return dlFolderLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolder updateDLFolder(
+		com.liferay.portlet.documentlibrary.model.DLFolder model)
+		throws com.liferay.portal.SystemException {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.updateDLFolder(model);
 	}
 
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {

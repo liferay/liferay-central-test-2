@@ -54,6 +54,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory;
@@ -118,14 +120,65 @@ import java.util.List;
  */
 public abstract class DLFileEntryLocalServiceBaseImpl
 	implements DLFileEntryLocalService, InitializingBean {
+	public DLFileEntry addDLFileEntry(DLFileEntry model)
+		throws SystemException {
+		DLFileEntry dlFileEntry = new DLFileEntryImpl();
+		dlFileEntry.setNew(true);
+		dlFileEntry.setUuid(model.getUuid());
+		dlFileEntry.setFileEntryId(model.getFileEntryId());
+		dlFileEntry.setCompanyId(model.getCompanyId());
+		dlFileEntry.setUserId(model.getUserId());
+		dlFileEntry.setUserName(model.getUserName());
+		dlFileEntry.setVersionUserId(model.getVersionUserId());
+		dlFileEntry.setVersionUserName(model.getVersionUserName());
+		dlFileEntry.setCreateDate(model.getCreateDate());
+		dlFileEntry.setModifiedDate(model.getModifiedDate());
+		dlFileEntry.setFolderId(model.getFolderId());
+		dlFileEntry.setName(model.getName());
+		dlFileEntry.setTitle(model.getTitle());
+		dlFileEntry.setDescription(model.getDescription());
+		dlFileEntry.setVersion(model.getVersion());
+		dlFileEntry.setSize(model.getSize());
+		dlFileEntry.setReadCount(model.getReadCount());
+		dlFileEntry.setExtraSettings(model.getExtraSettings());
+
+		return dlFileEntryPersistence.update(dlFileEntry);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return DLFileEntryUtil.findWithDynamicQuery(queryInitializer);
+		return dlFileEntryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return DLFileEntryUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return dlFileEntryPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public DLFileEntry updateDLFileEntry(DLFileEntry model)
+		throws SystemException {
+		DLFileEntry dlFileEntry = new DLFileEntryImpl();
+		dlFileEntry.setNew(false);
+		dlFileEntry.setUuid(model.getUuid());
+		dlFileEntry.setFileEntryId(model.getFileEntryId());
+		dlFileEntry.setCompanyId(model.getCompanyId());
+		dlFileEntry.setUserId(model.getUserId());
+		dlFileEntry.setUserName(model.getUserName());
+		dlFileEntry.setVersionUserId(model.getVersionUserId());
+		dlFileEntry.setVersionUserName(model.getVersionUserName());
+		dlFileEntry.setCreateDate(model.getCreateDate());
+		dlFileEntry.setModifiedDate(model.getModifiedDate());
+		dlFileEntry.setFolderId(model.getFolderId());
+		dlFileEntry.setName(model.getName());
+		dlFileEntry.setTitle(model.getTitle());
+		dlFileEntry.setDescription(model.getDescription());
+		dlFileEntry.setVersion(model.getVersion());
+		dlFileEntry.setSize(model.getSize());
+		dlFileEntry.setReadCount(model.getReadCount());
+		dlFileEntry.setExtraSettings(model.getExtraSettings());
+
+		return dlFileEntryPersistence.update(dlFileEntry);
 	}
 
 	public DLFileEntryPersistence getDLFileEntryPersistence() {

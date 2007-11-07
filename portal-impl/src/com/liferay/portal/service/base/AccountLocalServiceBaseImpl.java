@@ -24,6 +24,8 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.Account;
+import com.liferay.portal.model.impl.AccountImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressLocalServiceFactory;
@@ -258,14 +260,61 @@ import java.util.List;
  */
 public abstract class AccountLocalServiceBaseImpl implements AccountLocalService,
 	InitializingBean {
+	public Account addAccount(Account model) throws SystemException {
+		Account account = new AccountImpl();
+		account.setNew(true);
+		account.setAccountId(model.getAccountId());
+		account.setCompanyId(model.getCompanyId());
+		account.setUserId(model.getUserId());
+		account.setUserName(model.getUserName());
+		account.setCreateDate(model.getCreateDate());
+		account.setModifiedDate(model.getModifiedDate());
+		account.setParentAccountId(model.getParentAccountId());
+		account.setName(model.getName());
+		account.setLegalName(model.getLegalName());
+		account.setLegalId(model.getLegalId());
+		account.setLegalType(model.getLegalType());
+		account.setSicCode(model.getSicCode());
+		account.setTickerSymbol(model.getTickerSymbol());
+		account.setIndustry(model.getIndustry());
+		account.setType(model.getType());
+		account.setSize(model.getSize());
+
+		return accountPersistence.update(account);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return AccountUtil.findWithDynamicQuery(queryInitializer);
+		return accountPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return AccountUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return accountPersistence.findWithDynamicQuery(queryInitializer, begin,
+			end);
+	}
+
+	public Account updateAccount(Account model) throws SystemException {
+		Account account = new AccountImpl();
+		account.setNew(false);
+		account.setAccountId(model.getAccountId());
+		account.setCompanyId(model.getCompanyId());
+		account.setUserId(model.getUserId());
+		account.setUserName(model.getUserName());
+		account.setCreateDate(model.getCreateDate());
+		account.setModifiedDate(model.getModifiedDate());
+		account.setParentAccountId(model.getParentAccountId());
+		account.setName(model.getName());
+		account.setLegalName(model.getLegalName());
+		account.setLegalId(model.getLegalId());
+		account.setLegalType(model.getLegalType());
+		account.setSicCode(model.getSicCode());
+		account.setTickerSymbol(model.getTickerSymbol());
+		account.setIndustry(model.getIndustry());
+		account.setType(model.getType());
+		account.setSize(model.getSize());
+
+		return accountPersistence.update(account);
 	}
 
 	public AccountPersistence getAccountPersistence() {

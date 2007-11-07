@@ -52,6 +52,8 @@ import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
+import com.liferay.portlet.ratings.model.RatingsEntry;
+import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
@@ -72,15 +74,49 @@ import java.util.List;
  */
 public abstract class RatingsEntryLocalServiceBaseImpl
 	implements RatingsEntryLocalService, InitializingBean {
+	public RatingsEntry addRatingsEntry(RatingsEntry model)
+		throws SystemException {
+		RatingsEntry ratingsEntry = new RatingsEntryImpl();
+		ratingsEntry.setNew(true);
+		ratingsEntry.setEntryId(model.getEntryId());
+		ratingsEntry.setCompanyId(model.getCompanyId());
+		ratingsEntry.setUserId(model.getUserId());
+		ratingsEntry.setUserName(model.getUserName());
+		ratingsEntry.setCreateDate(model.getCreateDate());
+		ratingsEntry.setModifiedDate(model.getModifiedDate());
+		ratingsEntry.setClassNameId(model.getClassNameId());
+		ratingsEntry.setClassPK(model.getClassPK());
+		ratingsEntry.setScore(model.getScore());
+
+		return ratingsEntryPersistence.update(ratingsEntry);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return RatingsEntryUtil.findWithDynamicQuery(queryInitializer);
+		return ratingsEntryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return RatingsEntryUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return ratingsEntryPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public RatingsEntry updateRatingsEntry(RatingsEntry model)
+		throws SystemException {
+		RatingsEntry ratingsEntry = new RatingsEntryImpl();
+		ratingsEntry.setNew(false);
+		ratingsEntry.setEntryId(model.getEntryId());
+		ratingsEntry.setCompanyId(model.getCompanyId());
+		ratingsEntry.setUserId(model.getUserId());
+		ratingsEntry.setUserName(model.getUserName());
+		ratingsEntry.setCreateDate(model.getCreateDate());
+		ratingsEntry.setModifiedDate(model.getModifiedDate());
+		ratingsEntry.setClassNameId(model.getClassNameId());
+		ratingsEntry.setClassPK(model.getClassPK());
+		ratingsEntry.setScore(model.getScore());
+
+		return ratingsEntryPersistence.update(ratingsEntry);
 	}
 
 	public RatingsEntryPersistence getRatingsEntryPersistence() {

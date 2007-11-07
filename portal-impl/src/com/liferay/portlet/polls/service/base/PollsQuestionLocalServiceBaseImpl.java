@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.polls.model.PollsQuestion;
+import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 import com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;
@@ -74,15 +76,55 @@ import java.util.List;
  */
 public abstract class PollsQuestionLocalServiceBaseImpl
 	implements PollsQuestionLocalService, InitializingBean {
+	public PollsQuestion addPollsQuestion(PollsQuestion model)
+		throws SystemException {
+		PollsQuestion pollsQuestion = new PollsQuestionImpl();
+		pollsQuestion.setNew(true);
+		pollsQuestion.setUuid(model.getUuid());
+		pollsQuestion.setQuestionId(model.getQuestionId());
+		pollsQuestion.setGroupId(model.getGroupId());
+		pollsQuestion.setCompanyId(model.getCompanyId());
+		pollsQuestion.setUserId(model.getUserId());
+		pollsQuestion.setUserName(model.getUserName());
+		pollsQuestion.setCreateDate(model.getCreateDate());
+		pollsQuestion.setModifiedDate(model.getModifiedDate());
+		pollsQuestion.setTitle(model.getTitle());
+		pollsQuestion.setDescription(model.getDescription());
+		pollsQuestion.setExpirationDate(model.getExpirationDate());
+		pollsQuestion.setLastVoteDate(model.getLastVoteDate());
+
+		return pollsQuestionPersistence.update(pollsQuestion);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return PollsQuestionUtil.findWithDynamicQuery(queryInitializer);
+		return pollsQuestionPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return PollsQuestionUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return pollsQuestionPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public PollsQuestion updatePollsQuestion(PollsQuestion model)
+		throws SystemException {
+		PollsQuestion pollsQuestion = new PollsQuestionImpl();
+		pollsQuestion.setNew(false);
+		pollsQuestion.setUuid(model.getUuid());
+		pollsQuestion.setQuestionId(model.getQuestionId());
+		pollsQuestion.setGroupId(model.getGroupId());
+		pollsQuestion.setCompanyId(model.getCompanyId());
+		pollsQuestion.setUserId(model.getUserId());
+		pollsQuestion.setUserName(model.getUserName());
+		pollsQuestion.setCreateDate(model.getCreateDate());
+		pollsQuestion.setModifiedDate(model.getModifiedDate());
+		pollsQuestion.setTitle(model.getTitle());
+		pollsQuestion.setDescription(model.getDescription());
+		pollsQuestion.setExpirationDate(model.getExpirationDate());
+		pollsQuestion.setLastVoteDate(model.getLastVoteDate());
+
+		return pollsQuestionPersistence.update(pollsQuestion);
 	}
 
 	public PollsChoiceLocalService getPollsChoiceLocalService() {

@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.model.impl.PasswordPolicyImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -263,15 +265,83 @@ import java.util.List;
  */
 public abstract class PasswordPolicyLocalServiceBaseImpl
 	implements PasswordPolicyLocalService, InitializingBean {
+	public PasswordPolicy addPasswordPolicy(PasswordPolicy model)
+		throws SystemException {
+		PasswordPolicy passwordPolicy = new PasswordPolicyImpl();
+		passwordPolicy.setNew(true);
+		passwordPolicy.setPasswordPolicyId(model.getPasswordPolicyId());
+		passwordPolicy.setCompanyId(model.getCompanyId());
+		passwordPolicy.setUserId(model.getUserId());
+		passwordPolicy.setUserName(model.getUserName());
+		passwordPolicy.setCreateDate(model.getCreateDate());
+		passwordPolicy.setModifiedDate(model.getModifiedDate());
+		passwordPolicy.setDefaultPolicy(model.getDefaultPolicy());
+		passwordPolicy.setName(model.getName());
+		passwordPolicy.setDescription(model.getDescription());
+		passwordPolicy.setChangeable(model.getChangeable());
+		passwordPolicy.setChangeRequired(model.getChangeRequired());
+		passwordPolicy.setMinAge(model.getMinAge());
+		passwordPolicy.setCheckSyntax(model.getCheckSyntax());
+		passwordPolicy.setAllowDictionaryWords(model.getAllowDictionaryWords());
+		passwordPolicy.setMinLength(model.getMinLength());
+		passwordPolicy.setHistory(model.getHistory());
+		passwordPolicy.setHistoryCount(model.getHistoryCount());
+		passwordPolicy.setExpireable(model.getExpireable());
+		passwordPolicy.setMaxAge(model.getMaxAge());
+		passwordPolicy.setWarningTime(model.getWarningTime());
+		passwordPolicy.setGraceLimit(model.getGraceLimit());
+		passwordPolicy.setLockout(model.getLockout());
+		passwordPolicy.setMaxFailure(model.getMaxFailure());
+		passwordPolicy.setLockoutDuration(model.getLockoutDuration());
+		passwordPolicy.setRequireUnlock(model.getRequireUnlock());
+		passwordPolicy.setResetFailureCount(model.getResetFailureCount());
+
+		return passwordPolicyPersistence.update(passwordPolicy);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return PasswordPolicyUtil.findWithDynamicQuery(queryInitializer);
+		return passwordPolicyPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return PasswordPolicyUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return passwordPolicyPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public PasswordPolicy updatePasswordPolicy(PasswordPolicy model)
+		throws SystemException {
+		PasswordPolicy passwordPolicy = new PasswordPolicyImpl();
+		passwordPolicy.setNew(false);
+		passwordPolicy.setPasswordPolicyId(model.getPasswordPolicyId());
+		passwordPolicy.setCompanyId(model.getCompanyId());
+		passwordPolicy.setUserId(model.getUserId());
+		passwordPolicy.setUserName(model.getUserName());
+		passwordPolicy.setCreateDate(model.getCreateDate());
+		passwordPolicy.setModifiedDate(model.getModifiedDate());
+		passwordPolicy.setDefaultPolicy(model.getDefaultPolicy());
+		passwordPolicy.setName(model.getName());
+		passwordPolicy.setDescription(model.getDescription());
+		passwordPolicy.setChangeable(model.getChangeable());
+		passwordPolicy.setChangeRequired(model.getChangeRequired());
+		passwordPolicy.setMinAge(model.getMinAge());
+		passwordPolicy.setCheckSyntax(model.getCheckSyntax());
+		passwordPolicy.setAllowDictionaryWords(model.getAllowDictionaryWords());
+		passwordPolicy.setMinLength(model.getMinLength());
+		passwordPolicy.setHistory(model.getHistory());
+		passwordPolicy.setHistoryCount(model.getHistoryCount());
+		passwordPolicy.setExpireable(model.getExpireable());
+		passwordPolicy.setMaxAge(model.getMaxAge());
+		passwordPolicy.setWarningTime(model.getWarningTime());
+		passwordPolicy.setGraceLimit(model.getGraceLimit());
+		passwordPolicy.setLockout(model.getLockout());
+		passwordPolicy.setMaxFailure(model.getMaxFailure());
+		passwordPolicy.setLockoutDuration(model.getLockoutDuration());
+		passwordPolicy.setRequireUnlock(model.getRequireUnlock());
+		passwordPolicy.setResetFailureCount(model.getResetFailureCount());
+
+		return passwordPolicyPersistence.update(passwordPolicy);
 	}
 
 	public AccountLocalService getAccountLocalService() {

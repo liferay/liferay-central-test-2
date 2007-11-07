@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class PermissionLocalServiceUtil {
+	public static com.liferay.portal.model.Permission addPermission(
+		com.liferay.portal.model.Permission model)
+		throws com.liferay.portal.SystemException {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.addPermission(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class PermissionLocalServiceUtil {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
 		return permissionLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.Permission updatePermission(
+		com.liferay.portal.model.Permission model)
+		throws com.liferay.portal.SystemException {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.updatePermission(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

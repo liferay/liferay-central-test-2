@@ -59,6 +59,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
@@ -103,14 +105,53 @@ import java.util.List;
  */
 public abstract class DLFolderLocalServiceBaseImpl
 	implements DLFolderLocalService, InitializingBean {
+	public DLFolder addDLFolder(DLFolder model) throws SystemException {
+		DLFolder dlFolder = new DLFolderImpl();
+		dlFolder.setNew(true);
+		dlFolder.setUuid(model.getUuid());
+		dlFolder.setFolderId(model.getFolderId());
+		dlFolder.setGroupId(model.getGroupId());
+		dlFolder.setCompanyId(model.getCompanyId());
+		dlFolder.setUserId(model.getUserId());
+		dlFolder.setUserName(model.getUserName());
+		dlFolder.setCreateDate(model.getCreateDate());
+		dlFolder.setModifiedDate(model.getModifiedDate());
+		dlFolder.setParentFolderId(model.getParentFolderId());
+		dlFolder.setName(model.getName());
+		dlFolder.setDescription(model.getDescription());
+		dlFolder.setLastPostDate(model.getLastPostDate());
+
+		return dlFolderPersistence.update(dlFolder);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return DLFolderUtil.findWithDynamicQuery(queryInitializer);
+		return dlFolderPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return DLFolderUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return dlFolderPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public DLFolder updateDLFolder(DLFolder model) throws SystemException {
+		DLFolder dlFolder = new DLFolderImpl();
+		dlFolder.setNew(false);
+		dlFolder.setUuid(model.getUuid());
+		dlFolder.setFolderId(model.getFolderId());
+		dlFolder.setGroupId(model.getGroupId());
+		dlFolder.setCompanyId(model.getCompanyId());
+		dlFolder.setUserId(model.getUserId());
+		dlFolder.setUserName(model.getUserName());
+		dlFolder.setCreateDate(model.getCreateDate());
+		dlFolder.setModifiedDate(model.getModifiedDate());
+		dlFolder.setParentFolderId(model.getParentFolderId());
+		dlFolder.setName(model.getName());
+		dlFolder.setDescription(model.getDescription());
+		dlFolder.setLastPostDate(model.getLastPostDate());
+
+		return dlFolderPersistence.update(dlFolder);
 	}
 
 	public DLFileEntryLocalService getDLFileEntryLocalService() {

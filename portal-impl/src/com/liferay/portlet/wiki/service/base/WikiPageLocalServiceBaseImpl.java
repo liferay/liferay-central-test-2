@@ -62,6 +62,8 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
 import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
+import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory;
 import com.liferay.portlet.wiki.service.WikiNodeService;
@@ -90,14 +92,53 @@ import java.util.List;
  */
 public abstract class WikiPageLocalServiceBaseImpl
 	implements WikiPageLocalService, InitializingBean {
+	public WikiPage addWikiPage(WikiPage model) throws SystemException {
+		WikiPage wikiPage = new WikiPageImpl();
+		wikiPage.setNew(true);
+		wikiPage.setPageId(model.getPageId());
+		wikiPage.setResourcePrimKey(model.getResourcePrimKey());
+		wikiPage.setCompanyId(model.getCompanyId());
+		wikiPage.setUserId(model.getUserId());
+		wikiPage.setUserName(model.getUserName());
+		wikiPage.setCreateDate(model.getCreateDate());
+		wikiPage.setNodeId(model.getNodeId());
+		wikiPage.setTitle(model.getTitle());
+		wikiPage.setVersion(model.getVersion());
+		wikiPage.setContent(model.getContent());
+		wikiPage.setFormat(model.getFormat());
+		wikiPage.setHead(model.getHead());
+
+		return wikiPagePersistence.update(wikiPage);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return WikiPageUtil.findWithDynamicQuery(queryInitializer);
+		return wikiPagePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return WikiPageUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return wikiPagePersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public WikiPage updateWikiPage(WikiPage model) throws SystemException {
+		WikiPage wikiPage = new WikiPageImpl();
+		wikiPage.setNew(false);
+		wikiPage.setPageId(model.getPageId());
+		wikiPage.setResourcePrimKey(model.getResourcePrimKey());
+		wikiPage.setCompanyId(model.getCompanyId());
+		wikiPage.setUserId(model.getUserId());
+		wikiPage.setUserName(model.getUserName());
+		wikiPage.setCreateDate(model.getCreateDate());
+		wikiPage.setNodeId(model.getNodeId());
+		wikiPage.setTitle(model.getTitle());
+		wikiPage.setVersion(model.getVersion());
+		wikiPage.setContent(model.getContent());
+		wikiPage.setFormat(model.getFormat());
+		wikiPage.setHead(model.getHead());
+
+		return wikiPagePersistence.update(wikiPage);
 	}
 
 	public WikiNodeLocalService getWikiNodeLocalService() {

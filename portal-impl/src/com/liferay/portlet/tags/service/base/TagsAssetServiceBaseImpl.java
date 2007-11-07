@@ -49,6 +49,8 @@ import com.liferay.portlet.journal.service.JournalArticleResourceLocalService;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
+import com.liferay.portlet.tags.model.TagsAsset;
+import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;

@@ -49,6 +49,10 @@ package com.liferay.portal.service;
  *
  */
 public interface ResourceLocalService {
+	public com.liferay.portal.model.Resource addResource(
+		com.liferay.portal.model.Resource model)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -56,6 +60,10 @@ public interface ResourceLocalService {
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Resource updateResource(
+		com.liferay.portal.model.Resource model)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
 

@@ -49,6 +49,10 @@ package com.liferay.portal.service;
  *
  */
 public interface GroupLocalService {
+	public com.liferay.portal.model.Group addGroup(
+		com.liferay.portal.model.Group model)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -56,6 +60,10 @@ public interface GroupLocalService {
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group updateGroup(
+		com.liferay.portal.model.Group model)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
 

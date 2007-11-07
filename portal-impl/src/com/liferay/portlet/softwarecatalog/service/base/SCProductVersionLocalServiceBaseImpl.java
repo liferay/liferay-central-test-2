@@ -38,6 +38,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
+import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
@@ -76,15 +78,55 @@ import java.util.List;
  */
 public abstract class SCProductVersionLocalServiceBaseImpl
 	implements SCProductVersionLocalService, InitializingBean {
+	public SCProductVersion addSCProductVersion(SCProductVersion model)
+		throws SystemException {
+		SCProductVersion scProductVersion = new SCProductVersionImpl();
+		scProductVersion.setNew(true);
+		scProductVersion.setProductVersionId(model.getProductVersionId());
+		scProductVersion.setCompanyId(model.getCompanyId());
+		scProductVersion.setUserId(model.getUserId());
+		scProductVersion.setUserName(model.getUserName());
+		scProductVersion.setCreateDate(model.getCreateDate());
+		scProductVersion.setModifiedDate(model.getModifiedDate());
+		scProductVersion.setProductEntryId(model.getProductEntryId());
+		scProductVersion.setVersion(model.getVersion());
+		scProductVersion.setChangeLog(model.getChangeLog());
+		scProductVersion.setDownloadPageURL(model.getDownloadPageURL());
+		scProductVersion.setDirectDownloadURL(model.getDirectDownloadURL());
+		scProductVersion.setRepoStoreArtifact(model.getRepoStoreArtifact());
+
+		return scProductVersionPersistence.update(scProductVersion);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return SCProductVersionUtil.findWithDynamicQuery(queryInitializer);
+		return scProductVersionPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return SCProductVersionUtil.findWithDynamicQuery(queryInitializer,
+		return scProductVersionPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public SCProductVersion updateSCProductVersion(SCProductVersion model)
+		throws SystemException {
+		SCProductVersion scProductVersion = new SCProductVersionImpl();
+		scProductVersion.setNew(false);
+		scProductVersion.setProductVersionId(model.getProductVersionId());
+		scProductVersion.setCompanyId(model.getCompanyId());
+		scProductVersion.setUserId(model.getUserId());
+		scProductVersion.setUserName(model.getUserName());
+		scProductVersion.setCreateDate(model.getCreateDate());
+		scProductVersion.setModifiedDate(model.getModifiedDate());
+		scProductVersion.setProductEntryId(model.getProductEntryId());
+		scProductVersion.setVersion(model.getVersion());
+		scProductVersion.setChangeLog(model.getChangeLog());
+		scProductVersion.setDownloadPageURL(model.getDownloadPageURL());
+		scProductVersion.setDirectDownloadURL(model.getDirectDownloadURL());
+		scProductVersion.setRepoStoreArtifact(model.getRepoStoreArtifact());
+
+		return scProductVersionPersistence.update(scProductVersion);
 	}
 
 	public SCLicenseLocalService getSCLicenseLocalService() {

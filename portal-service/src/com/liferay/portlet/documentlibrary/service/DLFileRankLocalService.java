@@ -49,6 +49,10 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public interface DLFileRankLocalService {
+	public com.liferay.portlet.documentlibrary.model.DLFileRank addDLFileRank(
+		com.liferay.portlet.documentlibrary.model.DLFileRank model)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -56,6 +60,10 @@ public interface DLFileRankLocalService {
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileRank updateDLFileRank(
+		com.liferay.portlet.documentlibrary.model.DLFileRank model)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence();
 

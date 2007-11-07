@@ -30,6 +30,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.journal.model.JournalArticleResource;
+import com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
@@ -78,15 +80,37 @@ import java.util.List;
  */
 public abstract class JournalArticleResourceLocalServiceBaseImpl
 	implements JournalArticleResourceLocalService, InitializingBean {
+	public JournalArticleResource addJournalArticleResource(
+		JournalArticleResource model) throws SystemException {
+		JournalArticleResource journalArticleResource = new JournalArticleResourceImpl();
+		journalArticleResource.setNew(true);
+		journalArticleResource.setResourcePrimKey(model.getResourcePrimKey());
+		journalArticleResource.setGroupId(model.getGroupId());
+		journalArticleResource.setArticleId(model.getArticleId());
+
+		return journalArticleResourcePersistence.update(journalArticleResource);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return JournalArticleResourceUtil.findWithDynamicQuery(queryInitializer);
+		return journalArticleResourcePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return JournalArticleResourceUtil.findWithDynamicQuery(queryInitializer,
+		return journalArticleResourcePersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public JournalArticleResource updateJournalArticleResource(
+		JournalArticleResource model) throws SystemException {
+		JournalArticleResource journalArticleResource = new JournalArticleResourceImpl();
+		journalArticleResource.setNew(false);
+		journalArticleResource.setResourcePrimKey(model.getResourcePrimKey());
+		journalArticleResource.setGroupId(model.getGroupId());
+		journalArticleResource.setArticleId(model.getArticleId());
+
+		return journalArticleResourcePersistence.update(journalArticleResource);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

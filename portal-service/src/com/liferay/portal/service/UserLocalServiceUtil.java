@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class UserLocalServiceUtil {
+	public static com.liferay.portal.model.User addUser(
+		com.liferay.portal.model.User model)
+		throws com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.addUser(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class UserLocalServiceUtil {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.User updateUser(
+		com.liferay.portal.model.User model)
+		throws com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.updateUser(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

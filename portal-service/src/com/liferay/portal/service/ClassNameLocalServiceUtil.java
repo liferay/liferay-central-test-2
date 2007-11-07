@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class ClassNameLocalServiceUtil {
+	public static com.liferay.portal.model.ClassName addClassName(
+		com.liferay.portal.model.ClassName model)
+		throws com.liferay.portal.SystemException {
+		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
+
+		return classNameLocalService.addClassName(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class ClassNameLocalServiceUtil {
 		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
 
 		return classNameLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.ClassName updateClassName(
+		com.liferay.portal.model.ClassName model)
+		throws com.liferay.portal.SystemException {
+		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
+
+		return classNameLocalService.updateClassName(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

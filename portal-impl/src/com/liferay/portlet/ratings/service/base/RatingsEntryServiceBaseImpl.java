@@ -51,6 +51,8 @@ import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
+import com.liferay.portlet.ratings.model.RatingsEntry;
+import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceFactory;
 import com.liferay.portlet.ratings.service.RatingsEntryService;

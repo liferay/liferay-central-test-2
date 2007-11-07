@@ -49,6 +49,14 @@ package com.liferay.portlet.tags.service;
  *
  */
 public class TagsEntryLocalServiceUtil {
+	public static com.liferay.portlet.tags.model.TagsEntry addTagsEntry(
+		com.liferay.portlet.tags.model.TagsEntry model)
+		throws com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.addTagsEntry(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class TagsEntryLocalServiceUtil {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntry updateTagsEntry(
+		com.liferay.portlet.tags.model.TagsEntry model)
+		throws com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.updateTagsEntry(model);
 	}
 
 	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {

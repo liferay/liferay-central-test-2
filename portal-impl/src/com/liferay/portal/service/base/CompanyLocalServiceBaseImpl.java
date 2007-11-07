@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -263,14 +265,43 @@ import java.util.List;
  */
 public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService,
 	InitializingBean {
+	public Company addCompany(Company model) throws SystemException {
+		Company company = new CompanyImpl();
+		company.setNew(true);
+		company.setCompanyId(model.getCompanyId());
+		company.setAccountId(model.getAccountId());
+		company.setWebId(model.getWebId());
+		company.setKey(model.getKey());
+		company.setVirtualHost(model.getVirtualHost());
+		company.setMx(model.getMx());
+		company.setLogoId(model.getLogoId());
+
+		return companyPersistence.update(company);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return CompanyUtil.findWithDynamicQuery(queryInitializer);
+		return companyPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return CompanyUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return companyPersistence.findWithDynamicQuery(queryInitializer, begin,
+			end);
+	}
+
+	public Company updateCompany(Company model) throws SystemException {
+		Company company = new CompanyImpl();
+		company.setNew(false);
+		company.setCompanyId(model.getCompanyId());
+		company.setAccountId(model.getAccountId());
+		company.setWebId(model.getWebId());
+		company.setKey(model.getKey());
+		company.setVirtualHost(model.getVirtualHost());
+		company.setMx(model.getMx());
+		company.setLogoId(model.getLogoId());
+
+		return companyPersistence.update(company);
 	}
 
 	public AccountLocalService getAccountLocalService() {

@@ -38,6 +38,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.messageboards.model.MBBan;
+import com.liferay.portlet.messageboards.model.impl.MBBanImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory;
@@ -88,14 +90,45 @@ import java.util.List;
  */
 public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	InitializingBean {
+	public MBBan addMBBan(MBBan model) throws SystemException {
+		MBBan mbBan = new MBBanImpl();
+		mbBan.setNew(true);
+		mbBan.setBanId(model.getBanId());
+		mbBan.setGroupId(model.getGroupId());
+		mbBan.setCompanyId(model.getCompanyId());
+		mbBan.setUserId(model.getUserId());
+		mbBan.setUserName(model.getUserName());
+		mbBan.setCreateDate(model.getCreateDate());
+		mbBan.setModifiedDate(model.getModifiedDate());
+		mbBan.setBanUserId(model.getBanUserId());
+
+		return mbBanPersistence.update(mbBan);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return MBBanUtil.findWithDynamicQuery(queryInitializer);
+		return mbBanPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return MBBanUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return mbBanPersistence.findWithDynamicQuery(queryInitializer, begin,
+			end);
+	}
+
+	public MBBan updateMBBan(MBBan model) throws SystemException {
+		MBBan mbBan = new MBBanImpl();
+		mbBan.setNew(false);
+		mbBan.setBanId(model.getBanId());
+		mbBan.setGroupId(model.getGroupId());
+		mbBan.setCompanyId(model.getCompanyId());
+		mbBan.setUserId(model.getUserId());
+		mbBan.setUserName(model.getUserName());
+		mbBan.setCreateDate(model.getCreateDate());
+		mbBan.setModifiedDate(model.getModifiedDate());
+		mbBan.setBanUserId(model.getBanUserId());
+
+		return mbBanPersistence.update(mbBan);
 	}
 
 	public MBBanPersistence getMBBanPersistence() {

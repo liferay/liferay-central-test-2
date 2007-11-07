@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class RoleLocalServiceUtil {
+	public static com.liferay.portal.model.Role addRole(
+		com.liferay.portal.model.Role model)
+		throws com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		return roleLocalService.addRole(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class RoleLocalServiceUtil {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.Role updateRole(
+		com.liferay.portal.model.Role model)
+		throws com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		return roleLocalService.updateRole(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.Subscription;
+import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -265,15 +267,49 @@ import java.util.List;
  */
 public abstract class SubscriptionLocalServiceBaseImpl
 	implements SubscriptionLocalService, InitializingBean {
+	public Subscription addSubscription(Subscription model)
+		throws SystemException {
+		Subscription subscription = new SubscriptionImpl();
+		subscription.setNew(true);
+		subscription.setSubscriptionId(model.getSubscriptionId());
+		subscription.setCompanyId(model.getCompanyId());
+		subscription.setUserId(model.getUserId());
+		subscription.setUserName(model.getUserName());
+		subscription.setCreateDate(model.getCreateDate());
+		subscription.setModifiedDate(model.getModifiedDate());
+		subscription.setClassNameId(model.getClassNameId());
+		subscription.setClassPK(model.getClassPK());
+		subscription.setFrequency(model.getFrequency());
+
+		return subscriptionPersistence.update(subscription);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return SubscriptionUtil.findWithDynamicQuery(queryInitializer);
+		return subscriptionPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return SubscriptionUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return subscriptionPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public Subscription updateSubscription(Subscription model)
+		throws SystemException {
+		Subscription subscription = new SubscriptionImpl();
+		subscription.setNew(false);
+		subscription.setSubscriptionId(model.getSubscriptionId());
+		subscription.setCompanyId(model.getCompanyId());
+		subscription.setUserId(model.getUserId());
+		subscription.setUserName(model.getUserName());
+		subscription.setCreateDate(model.getCreateDate());
+		subscription.setModifiedDate(model.getModifiedDate());
+		subscription.setClassNameId(model.getClassNameId());
+		subscription.setClassPK(model.getClassPK());
+		subscription.setFrequency(model.getFrequency());
+
+		return subscriptionPersistence.update(subscription);
 	}
 
 	public AccountLocalService getAccountLocalService() {

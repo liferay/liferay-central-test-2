@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.UserIdMapper;
+import com.liferay.portal.model.impl.UserIdMapperImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -265,15 +267,41 @@ import java.util.List;
  */
 public abstract class UserIdMapperLocalServiceBaseImpl
 	implements UserIdMapperLocalService, InitializingBean {
+	public UserIdMapper addUserIdMapper(UserIdMapper model)
+		throws SystemException {
+		UserIdMapper userIdMapper = new UserIdMapperImpl();
+		userIdMapper.setNew(true);
+		userIdMapper.setUserIdMapperId(model.getUserIdMapperId());
+		userIdMapper.setUserId(model.getUserId());
+		userIdMapper.setType(model.getType());
+		userIdMapper.setDescription(model.getDescription());
+		userIdMapper.setExternalUserId(model.getExternalUserId());
+
+		return userIdMapperPersistence.update(userIdMapper);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return UserIdMapperUtil.findWithDynamicQuery(queryInitializer);
+		return userIdMapperPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return UserIdMapperUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return userIdMapperPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public UserIdMapper updateUserIdMapper(UserIdMapper model)
+		throws SystemException {
+		UserIdMapper userIdMapper = new UserIdMapperImpl();
+		userIdMapper.setNew(false);
+		userIdMapper.setUserIdMapperId(model.getUserIdMapperId());
+		userIdMapper.setUserId(model.getUserId());
+		userIdMapper.setType(model.getType());
+		userIdMapper.setDescription(model.getDescription());
+		userIdMapper.setExternalUserId(model.getExternalUserId());
+
+		return userIdMapperPersistence.update(userIdMapper);
 	}
 
 	public AccountLocalService getAccountLocalService() {

@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceFactory;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
@@ -70,15 +72,51 @@ import java.util.List;
  */
 public abstract class BookmarksFolderLocalServiceBaseImpl
 	implements BookmarksFolderLocalService, InitializingBean {
+	public BookmarksFolder addBookmarksFolder(BookmarksFolder model)
+		throws SystemException {
+		BookmarksFolder bookmarksFolder = new BookmarksFolderImpl();
+		bookmarksFolder.setNew(true);
+		bookmarksFolder.setUuid(model.getUuid());
+		bookmarksFolder.setFolderId(model.getFolderId());
+		bookmarksFolder.setGroupId(model.getGroupId());
+		bookmarksFolder.setCompanyId(model.getCompanyId());
+		bookmarksFolder.setUserId(model.getUserId());
+		bookmarksFolder.setCreateDate(model.getCreateDate());
+		bookmarksFolder.setModifiedDate(model.getModifiedDate());
+		bookmarksFolder.setParentFolderId(model.getParentFolderId());
+		bookmarksFolder.setName(model.getName());
+		bookmarksFolder.setDescription(model.getDescription());
+
+		return bookmarksFolderPersistence.update(bookmarksFolder);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return BookmarksFolderUtil.findWithDynamicQuery(queryInitializer);
+		return bookmarksFolderPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return BookmarksFolderUtil.findWithDynamicQuery(queryInitializer,
+		return bookmarksFolderPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public BookmarksFolder updateBookmarksFolder(BookmarksFolder model)
+		throws SystemException {
+		BookmarksFolder bookmarksFolder = new BookmarksFolderImpl();
+		bookmarksFolder.setNew(false);
+		bookmarksFolder.setUuid(model.getUuid());
+		bookmarksFolder.setFolderId(model.getFolderId());
+		bookmarksFolder.setGroupId(model.getGroupId());
+		bookmarksFolder.setCompanyId(model.getCompanyId());
+		bookmarksFolder.setUserId(model.getUserId());
+		bookmarksFolder.setCreateDate(model.getCreateDate());
+		bookmarksFolder.setModifiedDate(model.getModifiedDate());
+		bookmarksFolder.setParentFolderId(model.getParentFolderId());
+		bookmarksFolder.setName(model.getName());
+		bookmarksFolder.setDescription(model.getDescription());
+
+		return bookmarksFolderPersistence.update(bookmarksFolder);
 	}
 
 	public BookmarksEntryLocalService getBookmarksEntryLocalService() {

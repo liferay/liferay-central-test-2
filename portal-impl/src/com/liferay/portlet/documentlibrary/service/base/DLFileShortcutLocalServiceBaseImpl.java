@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
@@ -90,15 +92,51 @@ import java.util.List;
  */
 public abstract class DLFileShortcutLocalServiceBaseImpl
 	implements DLFileShortcutLocalService, InitializingBean {
+	public DLFileShortcut addDLFileShortcut(DLFileShortcut model)
+		throws SystemException {
+		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
+		dlFileShortcut.setNew(true);
+		dlFileShortcut.setUuid(model.getUuid());
+		dlFileShortcut.setFileShortcutId(model.getFileShortcutId());
+		dlFileShortcut.setCompanyId(model.getCompanyId());
+		dlFileShortcut.setUserId(model.getUserId());
+		dlFileShortcut.setUserName(model.getUserName());
+		dlFileShortcut.setCreateDate(model.getCreateDate());
+		dlFileShortcut.setModifiedDate(model.getModifiedDate());
+		dlFileShortcut.setFolderId(model.getFolderId());
+		dlFileShortcut.setToFolderId(model.getToFolderId());
+		dlFileShortcut.setToName(model.getToName());
+
+		return dlFileShortcutPersistence.update(dlFileShortcut);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return DLFileShortcutUtil.findWithDynamicQuery(queryInitializer);
+		return dlFileShortcutPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return DLFileShortcutUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return dlFileShortcutPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public DLFileShortcut updateDLFileShortcut(DLFileShortcut model)
+		throws SystemException {
+		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
+		dlFileShortcut.setNew(false);
+		dlFileShortcut.setUuid(model.getUuid());
+		dlFileShortcut.setFileShortcutId(model.getFileShortcutId());
+		dlFileShortcut.setCompanyId(model.getCompanyId());
+		dlFileShortcut.setUserId(model.getUserId());
+		dlFileShortcut.setUserName(model.getUserName());
+		dlFileShortcut.setCreateDate(model.getCreateDate());
+		dlFileShortcut.setModifiedDate(model.getModifiedDate());
+		dlFileShortcut.setFolderId(model.getFolderId());
+		dlFileShortcut.setToFolderId(model.getToFolderId());
+		dlFileShortcut.setToName(model.getToName());
+
+		return dlFileShortcutPersistence.update(dlFileShortcut);
 	}
 
 	public DLFileEntryLocalService getDLFileEntryLocalService() {

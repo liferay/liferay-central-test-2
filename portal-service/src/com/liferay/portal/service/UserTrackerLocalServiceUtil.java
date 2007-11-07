@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class UserTrackerLocalServiceUtil {
+	public static com.liferay.portal.model.UserTracker addUserTracker(
+		com.liferay.portal.model.UserTracker model)
+		throws com.liferay.portal.SystemException {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.addUserTracker(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class UserTrackerLocalServiceUtil {
 		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 
 		return userTrackerLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.UserTracker updateUserTracker(
+		com.liferay.portal.model.UserTracker model)
+		throws com.liferay.portal.SystemException {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.updateUserTracker(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

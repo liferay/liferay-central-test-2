@@ -49,6 +49,14 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public class MBStatsUserLocalServiceUtil {
+	public static com.liferay.portlet.messageboards.model.MBStatsUser addMBStatsUser(
+		com.liferay.portlet.messageboards.model.MBStatsUser model)
+		throws com.liferay.portal.SystemException {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		return mbStatsUserLocalService.addMBStatsUser(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class MBStatsUserLocalServiceUtil {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 
 		return mbStatsUserLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
+		com.liferay.portlet.messageboards.model.MBStatsUser model)
+		throws com.liferay.portal.SystemException {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		return mbStatsUserLocalService.updateMBStatsUser(model);
 	}
 
 	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {

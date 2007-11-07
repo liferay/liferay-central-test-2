@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -263,14 +265,42 @@ import java.util.List;
  */
 public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 	InitializingBean {
+	public Role addRole(Role model) throws SystemException {
+		Role role = new RoleImpl();
+		role.setNew(true);
+		role.setRoleId(model.getRoleId());
+		role.setCompanyId(model.getCompanyId());
+		role.setClassNameId(model.getClassNameId());
+		role.setClassPK(model.getClassPK());
+		role.setName(model.getName());
+		role.setDescription(model.getDescription());
+		role.setType(model.getType());
+
+		return rolePersistence.update(role);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return RoleUtil.findWithDynamicQuery(queryInitializer);
+		return rolePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return RoleUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return rolePersistence.findWithDynamicQuery(queryInitializer, begin, end);
+	}
+
+	public Role updateRole(Role model) throws SystemException {
+		Role role = new RoleImpl();
+		role.setNew(false);
+		role.setRoleId(model.getRoleId());
+		role.setCompanyId(model.getCompanyId());
+		role.setClassNameId(model.getClassNameId());
+		role.setClassPK(model.getClassPK());
+		role.setName(model.getName());
+		role.setDescription(model.getDescription());
+		role.setType(model.getType());
+
+		return rolePersistence.update(role);
 	}
 
 	public AccountLocalService getAccountLocalService() {

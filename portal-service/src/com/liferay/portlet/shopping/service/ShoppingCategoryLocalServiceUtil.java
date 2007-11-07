@@ -49,6 +49,14 @@ package com.liferay.portlet.shopping.service;
  *
  */
 public class ShoppingCategoryLocalServiceUtil {
+	public static com.liferay.portlet.shopping.model.ShoppingCategory addShoppingCategory(
+		com.liferay.portlet.shopping.model.ShoppingCategory model)
+		throws com.liferay.portal.SystemException {
+		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
+		return shoppingCategoryLocalService.addShoppingCategory(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class ShoppingCategoryLocalServiceUtil {
 
 		return shoppingCategoryLocalService.dynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCategory updateShoppingCategory(
+		com.liferay.portlet.shopping.model.ShoppingCategory model)
+		throws com.liferay.portal.SystemException {
+		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
+		return shoppingCategoryLocalService.updateShoppingCategory(model);
 	}
 
 	public static com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence() {

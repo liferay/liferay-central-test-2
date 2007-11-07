@@ -49,6 +49,10 @@ package com.liferay.portlet.shopping.service;
  *
  */
 public interface ShoppingItemLocalService {
+	public com.liferay.portlet.shopping.model.ShoppingItem addShoppingItem(
+		com.liferay.portlet.shopping.model.ShoppingItem model)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -56,6 +60,10 @@ public interface ShoppingItemLocalService {
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.shopping.model.ShoppingItem updateShoppingItem(
+		com.liferay.portlet.shopping.model.ShoppingItem model)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence();
 

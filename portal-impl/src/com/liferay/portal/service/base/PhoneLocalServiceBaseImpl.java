@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.Phone;
+import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -263,14 +265,53 @@ import java.util.List;
  */
 public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	InitializingBean {
+	public Phone addPhone(Phone model) throws SystemException {
+		Phone phone = new PhoneImpl();
+		phone.setNew(true);
+		phone.setPhoneId(model.getPhoneId());
+		phone.setCompanyId(model.getCompanyId());
+		phone.setUserId(model.getUserId());
+		phone.setUserName(model.getUserName());
+		phone.setCreateDate(model.getCreateDate());
+		phone.setModifiedDate(model.getModifiedDate());
+		phone.setClassNameId(model.getClassNameId());
+		phone.setClassPK(model.getClassPK());
+		phone.setNumber(model.getNumber());
+		phone.setExtension(model.getExtension());
+		phone.setTypeId(model.getTypeId());
+		phone.setPrimary(model.getPrimary());
+
+		return phonePersistence.update(phone);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return PhoneUtil.findWithDynamicQuery(queryInitializer);
+		return phonePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return PhoneUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return phonePersistence.findWithDynamicQuery(queryInitializer, begin,
+			end);
+	}
+
+	public Phone updatePhone(Phone model) throws SystemException {
+		Phone phone = new PhoneImpl();
+		phone.setNew(false);
+		phone.setPhoneId(model.getPhoneId());
+		phone.setCompanyId(model.getCompanyId());
+		phone.setUserId(model.getUserId());
+		phone.setUserName(model.getUserName());
+		phone.setCreateDate(model.getCreateDate());
+		phone.setModifiedDate(model.getModifiedDate());
+		phone.setClassNameId(model.getClassNameId());
+		phone.setClassPK(model.getClassPK());
+		phone.setNumber(model.getNumber());
+		phone.setExtension(model.getExtension());
+		phone.setTypeId(model.getTypeId());
+		phone.setPrimary(model.getPrimary());
+
+		return phonePersistence.update(phone);
 	}
 
 	public AccountLocalService getAccountLocalService() {

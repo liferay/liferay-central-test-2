@@ -49,6 +49,14 @@ package com.liferay.portlet.ratings.service;
  *
  */
 public class RatingsStatsLocalServiceUtil {
+	public static com.liferay.portlet.ratings.model.RatingsStats addRatingsStats(
+		com.liferay.portlet.ratings.model.RatingsStats model)
+		throws com.liferay.portal.SystemException {
+		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
+
+		return ratingsStatsLocalService.addRatingsStats(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class RatingsStatsLocalServiceUtil {
 
 		return ratingsStatsLocalService.dynamicQuery(queryInitializer, begin,
 			end);
+	}
+
+	public static com.liferay.portlet.ratings.model.RatingsStats updateRatingsStats(
+		com.liferay.portlet.ratings.model.RatingsStats model)
+		throws com.liferay.portal.SystemException {
+		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
+
+		return ratingsStatsLocalService.updateRatingsStats(model);
 	}
 
 	public static com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence getRatingsEntryPersistence() {

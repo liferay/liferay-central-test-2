@@ -49,6 +49,14 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public class MBBanLocalServiceUtil {
+	public static com.liferay.portlet.messageboards.model.MBBan addMBBan(
+		com.liferay.portlet.messageboards.model.MBBan model)
+		throws com.liferay.portal.SystemException {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.addMBBan(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class MBBanLocalServiceUtil {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 
 		return mbBanLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBBan updateMBBan(
+		com.liferay.portlet.messageboards.model.MBBan model)
+		throws com.liferay.portal.SystemException {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.updateMBBan(model);
 	}
 
 	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {

@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -263,15 +265,51 @@ import java.util.List;
  */
 public abstract class OrganizationLocalServiceBaseImpl
 	implements OrganizationLocalService, InitializingBean {
+	public Organization addOrganization(Organization model)
+		throws SystemException {
+		Organization organization = new OrganizationImpl();
+		organization.setNew(true);
+		organization.setOrganizationId(model.getOrganizationId());
+		organization.setCompanyId(model.getCompanyId());
+		organization.setParentOrganizationId(model.getParentOrganizationId());
+		organization.setName(model.getName());
+		organization.setLocation(model.getLocation());
+		organization.setRecursable(model.getRecursable());
+		organization.setRegionId(model.getRegionId());
+		organization.setCountryId(model.getCountryId());
+		organization.setStatusId(model.getStatusId());
+		organization.setComments(model.getComments());
+
+		return organizationPersistence.update(organization);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return OrganizationUtil.findWithDynamicQuery(queryInitializer);
+		return organizationPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return OrganizationUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return organizationPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public Organization updateOrganization(Organization model)
+		throws SystemException {
+		Organization organization = new OrganizationImpl();
+		organization.setNew(false);
+		organization.setOrganizationId(model.getOrganizationId());
+		organization.setCompanyId(model.getCompanyId());
+		organization.setParentOrganizationId(model.getParentOrganizationId());
+		organization.setName(model.getName());
+		organization.setLocation(model.getLocation());
+		organization.setRecursable(model.getRecursable());
+		organization.setRegionId(model.getRegionId());
+		organization.setCountryId(model.getCountryId());
+		organization.setStatusId(model.getStatusId());
+		organization.setComments(model.getComments());
+
+		return organizationPersistence.update(organization);
 	}
 
 	public AccountLocalService getAccountLocalService() {

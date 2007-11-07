@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.PasswordTracker;
+import com.liferay.portal.model.impl.PasswordTrackerImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -265,15 +267,39 @@ import java.util.List;
  */
 public abstract class PasswordTrackerLocalServiceBaseImpl
 	implements PasswordTrackerLocalService, InitializingBean {
+	public PasswordTracker addPasswordTracker(PasswordTracker model)
+		throws SystemException {
+		PasswordTracker passwordTracker = new PasswordTrackerImpl();
+		passwordTracker.setNew(true);
+		passwordTracker.setPasswordTrackerId(model.getPasswordTrackerId());
+		passwordTracker.setUserId(model.getUserId());
+		passwordTracker.setCreateDate(model.getCreateDate());
+		passwordTracker.setPassword(model.getPassword());
+
+		return passwordTrackerPersistence.update(passwordTracker);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return PasswordTrackerUtil.findWithDynamicQuery(queryInitializer);
+		return passwordTrackerPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return PasswordTrackerUtil.findWithDynamicQuery(queryInitializer,
+		return passwordTrackerPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public PasswordTracker updatePasswordTracker(PasswordTracker model)
+		throws SystemException {
+		PasswordTracker passwordTracker = new PasswordTrackerImpl();
+		passwordTracker.setNew(false);
+		passwordTracker.setPasswordTrackerId(model.getPasswordTrackerId());
+		passwordTracker.setUserId(model.getUserId());
+		passwordTracker.setCreateDate(model.getCreateDate());
+		passwordTracker.setPassword(model.getPassword());
+
+		return passwordTrackerPersistence.update(passwordTracker);
 	}
 
 	public AccountLocalService getAccountLocalService() {

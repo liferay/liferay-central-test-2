@@ -30,6 +30,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.ratings.model.impl.RatingsStatsImpl;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceFactory;
 import com.liferay.portlet.ratings.service.RatingsEntryService;
@@ -52,15 +54,43 @@ import java.util.List;
  */
 public abstract class RatingsStatsLocalServiceBaseImpl
 	implements RatingsStatsLocalService, InitializingBean {
+	public RatingsStats addRatingsStats(RatingsStats model)
+		throws SystemException {
+		RatingsStats ratingsStats = new RatingsStatsImpl();
+		ratingsStats.setNew(true);
+		ratingsStats.setStatsId(model.getStatsId());
+		ratingsStats.setClassNameId(model.getClassNameId());
+		ratingsStats.setClassPK(model.getClassPK());
+		ratingsStats.setTotalEntries(model.getTotalEntries());
+		ratingsStats.setTotalScore(model.getTotalScore());
+		ratingsStats.setAverageScore(model.getAverageScore());
+
+		return ratingsStatsPersistence.update(ratingsStats);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return RatingsStatsUtil.findWithDynamicQuery(queryInitializer);
+		return ratingsStatsPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return RatingsStatsUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return ratingsStatsPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public RatingsStats updateRatingsStats(RatingsStats model)
+		throws SystemException {
+		RatingsStats ratingsStats = new RatingsStatsImpl();
+		ratingsStats.setNew(false);
+		ratingsStats.setStatsId(model.getStatsId());
+		ratingsStats.setClassNameId(model.getClassNameId());
+		ratingsStats.setClassPK(model.getClassPK());
+		ratingsStats.setTotalEntries(model.getTotalEntries());
+		ratingsStats.setTotalScore(model.getTotalScore());
+		ratingsStats.setAverageScore(model.getAverageScore());
+
+		return ratingsStatsPersistence.update(ratingsStats);
 	}
 
 	public RatingsEntryLocalService getRatingsEntryLocalService() {

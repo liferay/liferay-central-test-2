@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.UserTracker;
+import com.liferay.portal.model.impl.UserTrackerImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -265,14 +267,47 @@ import java.util.List;
  */
 public abstract class UserTrackerLocalServiceBaseImpl
 	implements UserTrackerLocalService, InitializingBean {
+	public UserTracker addUserTracker(UserTracker model)
+		throws SystemException {
+		UserTracker userTracker = new UserTrackerImpl();
+		userTracker.setNew(true);
+		userTracker.setUserTrackerId(model.getUserTrackerId());
+		userTracker.setCompanyId(model.getCompanyId());
+		userTracker.setUserId(model.getUserId());
+		userTracker.setModifiedDate(model.getModifiedDate());
+		userTracker.setSessionId(model.getSessionId());
+		userTracker.setRemoteAddr(model.getRemoteAddr());
+		userTracker.setRemoteHost(model.getRemoteHost());
+		userTracker.setUserAgent(model.getUserAgent());
+
+		return userTrackerPersistence.update(userTracker);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return UserTrackerUtil.findWithDynamicQuery(queryInitializer);
+		return userTrackerPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return UserTrackerUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return userTrackerPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public UserTracker updateUserTracker(UserTracker model)
+		throws SystemException {
+		UserTracker userTracker = new UserTrackerImpl();
+		userTracker.setNew(false);
+		userTracker.setUserTrackerId(model.getUserTrackerId());
+		userTracker.setCompanyId(model.getCompanyId());
+		userTracker.setUserId(model.getUserId());
+		userTracker.setModifiedDate(model.getModifiedDate());
+		userTracker.setSessionId(model.getSessionId());
+		userTracker.setRemoteAddr(model.getRemoteAddr());
+		userTracker.setRemoteHost(model.getRemoteHost());
+		userTracker.setUserAgent(model.getUserAgent());
+
+		return userTrackerPersistence.update(userTracker);
 	}
 
 	public AccountLocalService getAccountLocalService() {

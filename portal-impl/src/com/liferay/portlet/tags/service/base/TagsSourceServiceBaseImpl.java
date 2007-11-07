@@ -24,6 +24,8 @@ package com.liferay.portlet.tags.service.base;
 
 import com.liferay.portal.service.impl.PrincipalBean;
 
+import com.liferay.portlet.tags.model.TagsSource;
+import com.liferay.portlet.tags.model.impl.TagsSourceImpl;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;

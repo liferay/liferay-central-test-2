@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class PasswordPolicyRelLocalServiceUtil {
+	public static com.liferay.portal.model.PasswordPolicyRel addPasswordPolicyRel(
+		com.liferay.portal.model.PasswordPolicyRel model)
+		throws com.liferay.portal.SystemException {
+		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
+
+		return passwordPolicyRelLocalService.addPasswordPolicyRel(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class PasswordPolicyRelLocalServiceUtil {
 
 		return passwordPolicyRelLocalService.dynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public static com.liferay.portal.model.PasswordPolicyRel updatePasswordPolicyRel(
+		com.liferay.portal.model.PasswordPolicyRel model)
+		throws com.liferay.portal.SystemException {
+		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
+
+		return passwordPolicyRelLocalService.updatePasswordPolicyRel(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

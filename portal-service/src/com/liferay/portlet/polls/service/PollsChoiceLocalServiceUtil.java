@@ -49,6 +49,14 @@ package com.liferay.portlet.polls.service;
  *
  */
 public class PollsChoiceLocalServiceUtil {
+	public static com.liferay.portlet.polls.model.PollsChoice addPollsChoice(
+		com.liferay.portlet.polls.model.PollsChoice model)
+		throws com.liferay.portal.SystemException {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
+		return pollsChoiceLocalService.addPollsChoice(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class PollsChoiceLocalServiceUtil {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
 
 		return pollsChoiceLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portlet.polls.model.PollsChoice updatePollsChoice(
+		com.liferay.portlet.polls.model.PollsChoice model)
+		throws com.liferay.portal.SystemException {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
+		return pollsChoiceLocalService.updatePollsChoice(model);
 	}
 
 	public static com.liferay.portlet.polls.service.persistence.PollsChoicePersistence getPollsChoicePersistence() {

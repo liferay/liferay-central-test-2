@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class ResourceLocalServiceUtil {
+	public static com.liferay.portal.model.Resource addResource(
+		com.liferay.portal.model.Resource model)
+		throws com.liferay.portal.SystemException {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.addResource(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class ResourceLocalServiceUtil {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
 		return resourceLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.Resource updateResource(
+		com.liferay.portal.model.Resource model)
+		throws com.liferay.portal.SystemException {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.updateResource(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

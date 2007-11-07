@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.PasswordPolicyRel;
+import com.liferay.portal.model.impl.PasswordPolicyRelImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -265,15 +267,39 @@ import java.util.List;
  */
 public abstract class PasswordPolicyRelLocalServiceBaseImpl
 	implements PasswordPolicyRelLocalService, InitializingBean {
+	public PasswordPolicyRel addPasswordPolicyRel(PasswordPolicyRel model)
+		throws SystemException {
+		PasswordPolicyRel passwordPolicyRel = new PasswordPolicyRelImpl();
+		passwordPolicyRel.setNew(true);
+		passwordPolicyRel.setPasswordPolicyRelId(model.getPasswordPolicyRelId());
+		passwordPolicyRel.setPasswordPolicyId(model.getPasswordPolicyId());
+		passwordPolicyRel.setClassNameId(model.getClassNameId());
+		passwordPolicyRel.setClassPK(model.getClassPK());
+
+		return passwordPolicyRelPersistence.update(passwordPolicyRel);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return PasswordPolicyRelUtil.findWithDynamicQuery(queryInitializer);
+		return passwordPolicyRelPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return PasswordPolicyRelUtil.findWithDynamicQuery(queryInitializer,
+		return passwordPolicyRelPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public PasswordPolicyRel updatePasswordPolicyRel(PasswordPolicyRel model)
+		throws SystemException {
+		PasswordPolicyRel passwordPolicyRel = new PasswordPolicyRelImpl();
+		passwordPolicyRel.setNew(false);
+		passwordPolicyRel.setPasswordPolicyRelId(model.getPasswordPolicyRelId());
+		passwordPolicyRel.setPasswordPolicyId(model.getPasswordPolicyId());
+		passwordPolicyRel.setClassNameId(model.getClassNameId());
+		passwordPolicyRel.setClassPK(model.getClassPK());
+
+		return passwordPolicyRelPersistence.update(passwordPolicyRel);
 	}
 
 	public AccountLocalService getAccountLocalService() {

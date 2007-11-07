@@ -25,6 +25,8 @@ package com.liferay.portlet.shopping.service.base;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.shopping.model.ShoppingItemField;
+import com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
@@ -83,15 +85,41 @@ import java.util.List;
  */
 public abstract class ShoppingItemFieldLocalServiceBaseImpl
 	implements ShoppingItemFieldLocalService, InitializingBean {
+	public ShoppingItemField addShoppingItemField(ShoppingItemField model)
+		throws SystemException {
+		ShoppingItemField shoppingItemField = new ShoppingItemFieldImpl();
+		shoppingItemField.setNew(true);
+		shoppingItemField.setItemFieldId(model.getItemFieldId());
+		shoppingItemField.setItemId(model.getItemId());
+		shoppingItemField.setName(model.getName());
+		shoppingItemField.setValues(model.getValues());
+		shoppingItemField.setDescription(model.getDescription());
+
+		return shoppingItemFieldPersistence.update(shoppingItemField);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return ShoppingItemFieldUtil.findWithDynamicQuery(queryInitializer);
+		return shoppingItemFieldPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return ShoppingItemFieldUtil.findWithDynamicQuery(queryInitializer,
+		return shoppingItemFieldPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public ShoppingItemField updateShoppingItemField(ShoppingItemField model)
+		throws SystemException {
+		ShoppingItemField shoppingItemField = new ShoppingItemFieldImpl();
+		shoppingItemField.setNew(false);
+		shoppingItemField.setItemFieldId(model.getItemFieldId());
+		shoppingItemField.setItemId(model.getItemId());
+		shoppingItemField.setName(model.getName());
+		shoppingItemField.setValues(model.getValues());
+		shoppingItemField.setDescription(model.getDescription());
+
+		return shoppingItemFieldPersistence.update(shoppingItemField);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

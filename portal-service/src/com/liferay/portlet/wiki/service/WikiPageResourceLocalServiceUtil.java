@@ -49,6 +49,14 @@ package com.liferay.portlet.wiki.service;
  *
  */
 public class WikiPageResourceLocalServiceUtil {
+	public static com.liferay.portlet.wiki.model.WikiPageResource addWikiPageResource(
+		com.liferay.portlet.wiki.model.WikiPageResource model)
+		throws com.liferay.portal.SystemException {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
+		return wikiPageResourceLocalService.addWikiPageResource(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class WikiPageResourceLocalServiceUtil {
 
 		return wikiPageResourceLocalService.dynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageResource updateWikiPageResource(
+		com.liferay.portlet.wiki.model.WikiPageResource model)
+		throws com.liferay.portal.SystemException {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
+		return wikiPageResourceLocalService.updateWikiPageResource(model);
 	}
 
 	public static com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence() {

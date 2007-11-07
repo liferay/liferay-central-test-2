@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.UserTrackerPath;
+import com.liferay.portal.model.impl.UserTrackerPathImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -265,15 +267,39 @@ import java.util.List;
  */
 public abstract class UserTrackerPathLocalServiceBaseImpl
 	implements UserTrackerPathLocalService, InitializingBean {
+	public UserTrackerPath addUserTrackerPath(UserTrackerPath model)
+		throws SystemException {
+		UserTrackerPath userTrackerPath = new UserTrackerPathImpl();
+		userTrackerPath.setNew(true);
+		userTrackerPath.setUserTrackerPathId(model.getUserTrackerPathId());
+		userTrackerPath.setUserTrackerId(model.getUserTrackerId());
+		userTrackerPath.setPath(model.getPath());
+		userTrackerPath.setPathDate(model.getPathDate());
+
+		return userTrackerPathPersistence.update(userTrackerPath);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return UserTrackerPathUtil.findWithDynamicQuery(queryInitializer);
+		return userTrackerPathPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return UserTrackerPathUtil.findWithDynamicQuery(queryInitializer,
+		return userTrackerPathPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public UserTrackerPath updateUserTrackerPath(UserTrackerPath model)
+		throws SystemException {
+		UserTrackerPath userTrackerPath = new UserTrackerPathImpl();
+		userTrackerPath.setNew(false);
+		userTrackerPath.setUserTrackerPathId(model.getUserTrackerPathId());
+		userTrackerPath.setUserTrackerId(model.getUserTrackerId());
+		userTrackerPath.setPath(model.getPath());
+		userTrackerPath.setPathDate(model.getPathDate());
+
+		return userTrackerPathPersistence.update(userTrackerPath);
 	}
 
 	public AccountLocalService getAccountLocalService() {

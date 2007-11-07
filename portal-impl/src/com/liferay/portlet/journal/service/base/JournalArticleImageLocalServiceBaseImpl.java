@@ -30,6 +30,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.journal.model.JournalArticleImage;
+import com.liferay.portlet.journal.model.impl.JournalArticleImageImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceFactory;
@@ -78,15 +80,47 @@ import java.util.List;
  */
 public abstract class JournalArticleImageLocalServiceBaseImpl
 	implements JournalArticleImageLocalService, InitializingBean {
+	public JournalArticleImage addJournalArticleImage(JournalArticleImage model)
+		throws SystemException {
+		JournalArticleImage journalArticleImage = new JournalArticleImageImpl();
+		journalArticleImage.setNew(true);
+		journalArticleImage.setUuid(model.getUuid());
+		journalArticleImage.setArticleImageId(model.getArticleImageId());
+		journalArticleImage.setGroupId(model.getGroupId());
+		journalArticleImage.setArticleId(model.getArticleId());
+		journalArticleImage.setVersion(model.getVersion());
+		journalArticleImage.setElName(model.getElName());
+		journalArticleImage.setLanguageId(model.getLanguageId());
+		journalArticleImage.setTempImage(model.getTempImage());
+
+		return journalArticleImagePersistence.update(journalArticleImage);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return JournalArticleImageUtil.findWithDynamicQuery(queryInitializer);
+		return journalArticleImagePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return JournalArticleImageUtil.findWithDynamicQuery(queryInitializer,
+		return journalArticleImagePersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public JournalArticleImage updateJournalArticleImage(
+		JournalArticleImage model) throws SystemException {
+		JournalArticleImage journalArticleImage = new JournalArticleImageImpl();
+		journalArticleImage.setNew(false);
+		journalArticleImage.setUuid(model.getUuid());
+		journalArticleImage.setArticleImageId(model.getArticleImageId());
+		journalArticleImage.setGroupId(model.getGroupId());
+		journalArticleImage.setArticleId(model.getArticleId());
+		journalArticleImage.setVersion(model.getVersion());
+		journalArticleImage.setElName(model.getElName());
+		journalArticleImage.setLanguageId(model.getLanguageId());
+		journalArticleImage.setTempImage(model.getTempImage());
+
+		return journalArticleImagePersistence.update(journalArticleImage);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

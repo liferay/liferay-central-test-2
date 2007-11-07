@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class PhoneLocalServiceUtil {
+	public static com.liferay.portal.model.Phone addPhone(
+		com.liferay.portal.model.Phone model)
+		throws com.liferay.portal.SystemException {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
+		return phoneLocalService.addPhone(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class PhoneLocalServiceUtil {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
 		return phoneLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.Phone updatePhone(
+		com.liferay.portal.model.Phone model)
+		throws com.liferay.portal.SystemException {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
+		return phoneLocalService.updatePhone(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

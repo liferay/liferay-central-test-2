@@ -80,6 +80,8 @@ import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -138,14 +140,55 @@ import java.util.List;
  */
 public abstract class MBMessageLocalServiceBaseImpl
 	implements MBMessageLocalService, InitializingBean {
+	public MBMessage addMBMessage(MBMessage model) throws SystemException {
+		MBMessage mbMessage = new MBMessageImpl();
+		mbMessage.setNew(true);
+		mbMessage.setMessageId(model.getMessageId());
+		mbMessage.setCompanyId(model.getCompanyId());
+		mbMessage.setUserId(model.getUserId());
+		mbMessage.setUserName(model.getUserName());
+		mbMessage.setCreateDate(model.getCreateDate());
+		mbMessage.setModifiedDate(model.getModifiedDate());
+		mbMessage.setCategoryId(model.getCategoryId());
+		mbMessage.setThreadId(model.getThreadId());
+		mbMessage.setParentMessageId(model.getParentMessageId());
+		mbMessage.setSubject(model.getSubject());
+		mbMessage.setBody(model.getBody());
+		mbMessage.setAttachments(model.getAttachments());
+		mbMessage.setAnonymous(model.getAnonymous());
+
+		return mbMessagePersistence.update(mbMessage);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return MBMessageUtil.findWithDynamicQuery(queryInitializer);
+		return mbMessagePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return MBMessageUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return mbMessagePersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public MBMessage updateMBMessage(MBMessage model) throws SystemException {
+		MBMessage mbMessage = new MBMessageImpl();
+		mbMessage.setNew(false);
+		mbMessage.setMessageId(model.getMessageId());
+		mbMessage.setCompanyId(model.getCompanyId());
+		mbMessage.setUserId(model.getUserId());
+		mbMessage.setUserName(model.getUserName());
+		mbMessage.setCreateDate(model.getCreateDate());
+		mbMessage.setModifiedDate(model.getModifiedDate());
+		mbMessage.setCategoryId(model.getCategoryId());
+		mbMessage.setThreadId(model.getThreadId());
+		mbMessage.setParentMessageId(model.getParentMessageId());
+		mbMessage.setSubject(model.getSubject());
+		mbMessage.setBody(model.getBody());
+		mbMessage.setAttachments(model.getAttachments());
+		mbMessage.setAnonymous(model.getAnonymous());
+
+		return mbMessagePersistence.update(mbMessage);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

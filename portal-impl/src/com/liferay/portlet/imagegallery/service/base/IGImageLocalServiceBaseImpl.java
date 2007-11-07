@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceFactory;
 import com.liferay.portlet.imagegallery.service.IGFolderService;
@@ -78,14 +80,47 @@ import java.util.List;
  */
 public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService,
 	InitializingBean {
+	public IGImage addIGImage(IGImage model) throws SystemException {
+		IGImage igImage = new IGImageImpl();
+		igImage.setNew(true);
+		igImage.setImageId(model.getImageId());
+		igImage.setCompanyId(model.getCompanyId());
+		igImage.setUserId(model.getUserId());
+		igImage.setCreateDate(model.getCreateDate());
+		igImage.setModifiedDate(model.getModifiedDate());
+		igImage.setFolderId(model.getFolderId());
+		igImage.setDescription(model.getDescription());
+		igImage.setSmallImageId(model.getSmallImageId());
+		igImage.setLargeImageId(model.getLargeImageId());
+
+		return igImagePersistence.update(igImage);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return IGImageUtil.findWithDynamicQuery(queryInitializer);
+		return igImagePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return IGImageUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return igImagePersistence.findWithDynamicQuery(queryInitializer, begin,
+			end);
+	}
+
+	public IGImage updateIGImage(IGImage model) throws SystemException {
+		IGImage igImage = new IGImageImpl();
+		igImage.setNew(false);
+		igImage.setImageId(model.getImageId());
+		igImage.setCompanyId(model.getCompanyId());
+		igImage.setUserId(model.getUserId());
+		igImage.setCreateDate(model.getCreateDate());
+		igImage.setModifiedDate(model.getModifiedDate());
+		igImage.setFolderId(model.getFolderId());
+		igImage.setDescription(model.getDescription());
+		igImage.setSmallImageId(model.getSmallImageId());
+		igImage.setLargeImageId(model.getLargeImageId());
+
+		return igImagePersistence.update(igImage);
 	}
 
 	public IGFolderLocalService getIGFolderLocalService() {

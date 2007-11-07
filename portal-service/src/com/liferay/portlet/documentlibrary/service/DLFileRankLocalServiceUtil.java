@@ -49,6 +49,14 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public class DLFileRankLocalServiceUtil {
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank addDLFileRank(
+		com.liferay.portlet.documentlibrary.model.DLFileRank model)
+		throws com.liferay.portal.SystemException {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.addDLFileRank(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class DLFileRankLocalServiceUtil {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
 
 		return dlFileRankLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateDLFileRank(
+		com.liferay.portlet.documentlibrary.model.DLFileRank model)
+		throws com.liferay.portal.SystemException {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.updateDLFileRank(model);
 	}
 
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {

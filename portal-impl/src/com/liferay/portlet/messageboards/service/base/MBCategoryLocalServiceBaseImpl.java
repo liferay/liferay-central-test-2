@@ -50,6 +50,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -100,14 +102,52 @@ import java.util.List;
  */
 public abstract class MBCategoryLocalServiceBaseImpl
 	implements MBCategoryLocalService, InitializingBean {
+	public MBCategory addMBCategory(MBCategory model) throws SystemException {
+		MBCategory mbCategory = new MBCategoryImpl();
+		mbCategory.setNew(true);
+		mbCategory.setCategoryId(model.getCategoryId());
+		mbCategory.setGroupId(model.getGroupId());
+		mbCategory.setCompanyId(model.getCompanyId());
+		mbCategory.setUserId(model.getUserId());
+		mbCategory.setUserName(model.getUserName());
+		mbCategory.setCreateDate(model.getCreateDate());
+		mbCategory.setModifiedDate(model.getModifiedDate());
+		mbCategory.setParentCategoryId(model.getParentCategoryId());
+		mbCategory.setName(model.getName());
+		mbCategory.setDescription(model.getDescription());
+		mbCategory.setLastPostDate(model.getLastPostDate());
+
+		return mbCategoryPersistence.update(mbCategory);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return MBCategoryUtil.findWithDynamicQuery(queryInitializer);
+		return mbCategoryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return MBCategoryUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return mbCategoryPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public MBCategory updateMBCategory(MBCategory model)
+		throws SystemException {
+		MBCategory mbCategory = new MBCategoryImpl();
+		mbCategory.setNew(false);
+		mbCategory.setCategoryId(model.getCategoryId());
+		mbCategory.setGroupId(model.getGroupId());
+		mbCategory.setCompanyId(model.getCompanyId());
+		mbCategory.setUserId(model.getUserId());
+		mbCategory.setUserName(model.getUserName());
+		mbCategory.setCreateDate(model.getCreateDate());
+		mbCategory.setModifiedDate(model.getModifiedDate());
+		mbCategory.setParentCategoryId(model.getParentCategoryId());
+		mbCategory.setName(model.getName());
+		mbCategory.setDescription(model.getDescription());
+		mbCategory.setLastPostDate(model.getLastPostDate());
+
+		return mbCategoryPersistence.update(mbCategory);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

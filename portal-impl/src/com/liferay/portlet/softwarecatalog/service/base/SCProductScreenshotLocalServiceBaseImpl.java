@@ -25,6 +25,8 @@ package com.liferay.portlet.softwarecatalog.service.base;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
+import com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
@@ -65,15 +67,45 @@ import java.util.List;
  */
 public abstract class SCProductScreenshotLocalServiceBaseImpl
 	implements SCProductScreenshotLocalService, InitializingBean {
+	public SCProductScreenshot addSCProductScreenshot(SCProductScreenshot model)
+		throws SystemException {
+		SCProductScreenshot scProductScreenshot = new SCProductScreenshotImpl();
+		scProductScreenshot.setNew(true);
+		scProductScreenshot.setProductScreenshotId(model.getProductScreenshotId());
+		scProductScreenshot.setCompanyId(model.getCompanyId());
+		scProductScreenshot.setGroupId(model.getGroupId());
+		scProductScreenshot.setProductEntryId(model.getProductEntryId());
+		scProductScreenshot.setThumbnailId(model.getThumbnailId());
+		scProductScreenshot.setFullImageId(model.getFullImageId());
+		scProductScreenshot.setPriority(model.getPriority());
+
+		return scProductScreenshotPersistence.update(scProductScreenshot);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return SCProductScreenshotUtil.findWithDynamicQuery(queryInitializer);
+		return scProductScreenshotPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return SCProductScreenshotUtil.findWithDynamicQuery(queryInitializer,
+		return scProductScreenshotPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public SCProductScreenshot updateSCProductScreenshot(
+		SCProductScreenshot model) throws SystemException {
+		SCProductScreenshot scProductScreenshot = new SCProductScreenshotImpl();
+		scProductScreenshot.setNew(false);
+		scProductScreenshot.setProductScreenshotId(model.getProductScreenshotId());
+		scProductScreenshot.setCompanyId(model.getCompanyId());
+		scProductScreenshot.setGroupId(model.getGroupId());
+		scProductScreenshot.setProductEntryId(model.getProductEntryId());
+		scProductScreenshot.setThumbnailId(model.getThumbnailId());
+		scProductScreenshot.setFullImageId(model.getFullImageId());
+		scProductScreenshot.setPriority(model.getPriority());
+
+		return scProductScreenshotPersistence.update(scProductScreenshot);
 	}
 
 	public SCLicenseLocalService getSCLicenseLocalService() {

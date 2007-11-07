@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.journal.model.JournalStructure;
+import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
@@ -92,15 +94,55 @@ import java.util.List;
  */
 public abstract class JournalStructureLocalServiceBaseImpl
 	implements JournalStructureLocalService, InitializingBean {
+	public JournalStructure addJournalStructure(JournalStructure model)
+		throws SystemException {
+		JournalStructure journalStructure = new JournalStructureImpl();
+		journalStructure.setNew(true);
+		journalStructure.setUuid(model.getUuid());
+		journalStructure.setId(model.getId());
+		journalStructure.setGroupId(model.getGroupId());
+		journalStructure.setCompanyId(model.getCompanyId());
+		journalStructure.setUserId(model.getUserId());
+		journalStructure.setUserName(model.getUserName());
+		journalStructure.setCreateDate(model.getCreateDate());
+		journalStructure.setModifiedDate(model.getModifiedDate());
+		journalStructure.setStructureId(model.getStructureId());
+		journalStructure.setName(model.getName());
+		journalStructure.setDescription(model.getDescription());
+		journalStructure.setXsd(model.getXsd());
+
+		return journalStructurePersistence.update(journalStructure);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return JournalStructureUtil.findWithDynamicQuery(queryInitializer);
+		return journalStructurePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return JournalStructureUtil.findWithDynamicQuery(queryInitializer,
+		return journalStructurePersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public JournalStructure updateJournalStructure(JournalStructure model)
+		throws SystemException {
+		JournalStructure journalStructure = new JournalStructureImpl();
+		journalStructure.setNew(false);
+		journalStructure.setUuid(model.getUuid());
+		journalStructure.setId(model.getId());
+		journalStructure.setGroupId(model.getGroupId());
+		journalStructure.setCompanyId(model.getCompanyId());
+		journalStructure.setUserId(model.getUserId());
+		journalStructure.setUserName(model.getUserName());
+		journalStructure.setCreateDate(model.getCreateDate());
+		journalStructure.setModifiedDate(model.getModifiedDate());
+		journalStructure.setStructureId(model.getStructureId());
+		journalStructure.setName(model.getName());
+		journalStructure.setDescription(model.getDescription());
+		journalStructure.setXsd(model.getXsd());
+
+		return journalStructurePersistence.update(journalStructure);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

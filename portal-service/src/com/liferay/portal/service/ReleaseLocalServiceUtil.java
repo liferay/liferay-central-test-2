@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class ReleaseLocalServiceUtil {
+	public static com.liferay.portal.model.Release addRelease(
+		com.liferay.portal.model.Release model)
+		throws com.liferay.portal.SystemException {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		return releaseLocalService.addRelease(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class ReleaseLocalServiceUtil {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 
 		return releaseLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.Release updateRelease(
+		com.liferay.portal.model.Release model)
+		throws com.liferay.portal.SystemException {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		return releaseLocalService.updateRelease(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

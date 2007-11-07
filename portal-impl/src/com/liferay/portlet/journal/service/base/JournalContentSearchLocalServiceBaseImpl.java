@@ -52,6 +52,8 @@ import com.liferay.portal.service.persistence.PortletPreferencesFinderUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 
+import com.liferay.portlet.journal.model.JournalContentSearch;
+import com.liferay.portlet.journal.model.impl.JournalContentSearchImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
@@ -100,15 +102,45 @@ import java.util.List;
  */
 public abstract class JournalContentSearchLocalServiceBaseImpl
 	implements JournalContentSearchLocalService, InitializingBean {
+	public JournalContentSearch addJournalContentSearch(
+		JournalContentSearch model) throws SystemException {
+		JournalContentSearch journalContentSearch = new JournalContentSearchImpl();
+		journalContentSearch.setNew(true);
+		journalContentSearch.setContentSearchId(model.getContentSearchId());
+		journalContentSearch.setGroupId(model.getGroupId());
+		journalContentSearch.setCompanyId(model.getCompanyId());
+		journalContentSearch.setPrivateLayout(model.getPrivateLayout());
+		journalContentSearch.setLayoutId(model.getLayoutId());
+		journalContentSearch.setPortletId(model.getPortletId());
+		journalContentSearch.setArticleId(model.getArticleId());
+
+		return journalContentSearchPersistence.update(journalContentSearch);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return JournalContentSearchUtil.findWithDynamicQuery(queryInitializer);
+		return journalContentSearchPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return JournalContentSearchUtil.findWithDynamicQuery(queryInitializer,
+		return journalContentSearchPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public JournalContentSearch updateJournalContentSearch(
+		JournalContentSearch model) throws SystemException {
+		JournalContentSearch journalContentSearch = new JournalContentSearchImpl();
+		journalContentSearch.setNew(false);
+		journalContentSearch.setContentSearchId(model.getContentSearchId());
+		journalContentSearch.setGroupId(model.getGroupId());
+		journalContentSearch.setCompanyId(model.getCompanyId());
+		journalContentSearch.setPrivateLayout(model.getPrivateLayout());
+		journalContentSearch.setLayoutId(model.getLayoutId());
+		journalContentSearch.setPortletId(model.getPortletId());
+		journalContentSearch.setArticleId(model.getArticleId());
+
+		return journalContentSearchPersistence.update(journalContentSearch);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

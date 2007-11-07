@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class EmailAddressLocalServiceUtil {
+	public static com.liferay.portal.model.EmailAddress addEmailAddress(
+		com.liferay.portal.model.EmailAddress model)
+		throws com.liferay.portal.SystemException {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		return emailAddressLocalService.addEmailAddress(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class EmailAddressLocalServiceUtil {
 
 		return emailAddressLocalService.dynamicQuery(queryInitializer, begin,
 			end);
+	}
+
+	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
+		com.liferay.portal.model.EmailAddress model)
+		throws com.liferay.portal.SystemException {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		return emailAddressLocalService.updateEmailAddress(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

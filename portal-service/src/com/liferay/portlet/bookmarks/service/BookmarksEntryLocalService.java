@@ -49,6 +49,10 @@ package com.liferay.portlet.bookmarks.service;
  *
  */
 public interface BookmarksEntryLocalService {
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry addBookmarksEntry(
+		com.liferay.portlet.bookmarks.model.BookmarksEntry model)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -56,6 +60,10 @@ public interface BookmarksEntryLocalService {
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateBookmarksEntry(
+		com.liferay.portlet.bookmarks.model.BookmarksEntry model)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence getBookmarksEntryPersistence();
 

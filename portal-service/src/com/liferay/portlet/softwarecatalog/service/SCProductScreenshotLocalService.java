@@ -49,6 +49,10 @@ package com.liferay.portlet.softwarecatalog.service;
  *
  */
 public interface SCProductScreenshotLocalService {
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot addSCProductScreenshot(
+		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot model)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -56,6 +60,10 @@ public interface SCProductScreenshotLocalService {
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot updateSCProductScreenshot(
+		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot model)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence();
 

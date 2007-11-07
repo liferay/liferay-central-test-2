@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.impl.ResourceCodeImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -265,15 +267,39 @@ import java.util.List;
  */
 public abstract class ResourceCodeLocalServiceBaseImpl
 	implements ResourceCodeLocalService, InitializingBean {
+	public ResourceCode addResourceCode(ResourceCode model)
+		throws SystemException {
+		ResourceCode resourceCode = new ResourceCodeImpl();
+		resourceCode.setNew(true);
+		resourceCode.setCodeId(model.getCodeId());
+		resourceCode.setCompanyId(model.getCompanyId());
+		resourceCode.setName(model.getName());
+		resourceCode.setScope(model.getScope());
+
+		return resourceCodePersistence.update(resourceCode);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return ResourceCodeUtil.findWithDynamicQuery(queryInitializer);
+		return resourceCodePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return ResourceCodeUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return resourceCodePersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public ResourceCode updateResourceCode(ResourceCode model)
+		throws SystemException {
+		ResourceCode resourceCode = new ResourceCodeImpl();
+		resourceCode.setNew(false);
+		resourceCode.setCodeId(model.getCodeId());
+		resourceCode.setCompanyId(model.getCompanyId());
+		resourceCode.setName(model.getName());
+		resourceCode.setScope(model.getScope());
+
+		return resourceCodePersistence.update(resourceCode);
 	}
 
 	public AccountLocalService getAccountLocalService() {

@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class OrgLaborLocalServiceUtil {
+	public static com.liferay.portal.model.OrgLabor addOrgLabor(
+		com.liferay.portal.model.OrgLabor model)
+		throws com.liferay.portal.SystemException {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		return orgLaborLocalService.addOrgLabor(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class OrgLaborLocalServiceUtil {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 
 		return orgLaborLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
+		com.liferay.portal.model.OrgLabor model)
+		throws com.liferay.portal.SystemException {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		return orgLaborLocalService.updateOrgLabor(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

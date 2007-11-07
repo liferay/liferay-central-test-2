@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -263,14 +265,38 @@ import java.util.List;
  */
 public abstract class PermissionLocalServiceBaseImpl
 	implements PermissionLocalService, InitializingBean {
+	public Permission addPermission(Permission model) throws SystemException {
+		Permission permission = new PermissionImpl();
+		permission.setNew(true);
+		permission.setPermissionId(model.getPermissionId());
+		permission.setCompanyId(model.getCompanyId());
+		permission.setActionId(model.getActionId());
+		permission.setResourceId(model.getResourceId());
+
+		return permissionPersistence.update(permission);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return PermissionUtil.findWithDynamicQuery(queryInitializer);
+		return permissionPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return PermissionUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return permissionPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public Permission updatePermission(Permission model)
+		throws SystemException {
+		Permission permission = new PermissionImpl();
+		permission.setNew(false);
+		permission.setPermissionId(model.getPermissionId());
+		permission.setCompanyId(model.getCompanyId());
+		permission.setActionId(model.getActionId());
+		permission.setResourceId(model.getResourceId());
+
+		return permissionPersistence.update(permission);
 	}
 
 	public AccountLocalService getAccountLocalService() {

@@ -49,6 +49,14 @@ package com.liferay.portlet.imagegallery.service;
  *
  */
 public class IGFolderLocalServiceUtil {
+	public static com.liferay.portlet.imagegallery.model.IGFolder addIGFolder(
+		com.liferay.portlet.imagegallery.model.IGFolder model)
+		throws com.liferay.portal.SystemException {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.addIGFolder(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class IGFolderLocalServiceUtil {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
 		return igFolderLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGFolder updateIGFolder(
+		com.liferay.portlet.imagegallery.model.IGFolder model)
+		throws com.liferay.portal.SystemException {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.updateIGFolder(model);
 	}
 
 	public static com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence getIGFolderPersistence() {

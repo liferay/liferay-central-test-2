@@ -30,6 +30,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.wiki.model.WikiPageResource;
+import com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory;
 import com.liferay.portlet.wiki.service.WikiNodeService;
@@ -60,15 +62,37 @@ import java.util.List;
  */
 public abstract class WikiPageResourceLocalServiceBaseImpl
 	implements WikiPageResourceLocalService, InitializingBean {
+	public WikiPageResource addWikiPageResource(WikiPageResource model)
+		throws SystemException {
+		WikiPageResource wikiPageResource = new WikiPageResourceImpl();
+		wikiPageResource.setNew(true);
+		wikiPageResource.setResourcePrimKey(model.getResourcePrimKey());
+		wikiPageResource.setNodeId(model.getNodeId());
+		wikiPageResource.setTitle(model.getTitle());
+
+		return wikiPageResourcePersistence.update(wikiPageResource);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return WikiPageResourceUtil.findWithDynamicQuery(queryInitializer);
+		return wikiPageResourcePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return WikiPageResourceUtil.findWithDynamicQuery(queryInitializer,
+		return wikiPageResourcePersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public WikiPageResource updateWikiPageResource(WikiPageResource model)
+		throws SystemException {
+		WikiPageResource wikiPageResource = new WikiPageResourceImpl();
+		wikiPageResource.setNew(false);
+		wikiPageResource.setResourcePrimKey(model.getResourcePrimKey());
+		wikiPageResource.setNodeId(model.getNodeId());
+		wikiPageResource.setTitle(model.getTitle());
+
+		return wikiPageResourcePersistence.update(wikiPageResource);
 	}
 
 	public WikiNodeLocalService getWikiNodeLocalService() {

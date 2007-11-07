@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class LayoutSetLocalServiceUtil {
+	public static com.liferay.portal.model.LayoutSet addLayoutSet(
+		com.liferay.portal.model.LayoutSet model)
+		throws com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		return layoutSetLocalService.addLayoutSet(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class LayoutSetLocalServiceUtil {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
 		return layoutSetLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.LayoutSet updateLayoutSet(
+		com.liferay.portal.model.LayoutSet model)
+		throws com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		return layoutSetLocalService.updateLayoutSet(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

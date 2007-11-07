@@ -49,6 +49,14 @@ package com.liferay.portlet.softwarecatalog.service;
  *
  */
 public class SCProductEntryLocalServiceUtil {
+	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addSCProductEntry(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry model)
+		throws com.liferay.portal.SystemException {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.addSCProductEntry(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class SCProductEntryLocalServiceUtil {
 
 		return scProductEntryLocalService.dynamicQuery(queryInitializer, begin,
 			end);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry updateSCProductEntry(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry model)
+		throws com.liferay.portal.SystemException {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.updateSCProductEntry(model);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence() {

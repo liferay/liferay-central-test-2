@@ -49,6 +49,14 @@ package com.liferay.portlet.bookmarks.service;
  *
  */
 public class BookmarksEntryLocalServiceUtil {
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addBookmarksEntry(
+		com.liferay.portlet.bookmarks.model.BookmarksEntry model)
+		throws com.liferay.portal.SystemException {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.addBookmarksEntry(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class BookmarksEntryLocalServiceUtil {
 
 		return bookmarksEntryLocalService.dynamicQuery(queryInitializer, begin,
 			end);
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateBookmarksEntry(
+		com.liferay.portlet.bookmarks.model.BookmarksEntry model)
+		throws com.liferay.portal.SystemException {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.updateBookmarksEntry(model);
 	}
 
 	public static com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence getBookmarksEntryPersistence() {

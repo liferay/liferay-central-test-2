@@ -49,6 +49,14 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public class DLFileVersionLocalServiceUtil {
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion addDLFileVersion(
+		com.liferay.portlet.documentlibrary.model.DLFileVersion model)
+		throws com.liferay.portal.SystemException {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.addDLFileVersion(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class DLFileVersionLocalServiceUtil {
 
 		return dlFileVersionLocalService.dynamicQuery(queryInitializer, begin,
 			end);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateDLFileVersion(
+		com.liferay.portlet.documentlibrary.model.DLFileVersion model)
+		throws com.liferay.portal.SystemException {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.updateDLFileVersion(model);
 	}
 
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {

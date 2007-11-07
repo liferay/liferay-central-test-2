@@ -49,6 +49,14 @@ package com.liferay.portlet.softwarecatalog.service;
  *
  */
 public class SCProductVersionLocalServiceUtil {
+	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion addSCProductVersion(
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion model)
+		throws com.liferay.portal.SystemException {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
+		return scProductVersionLocalService.addSCProductVersion(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class SCProductVersionLocalServiceUtil {
 
 		return scProductVersionLocalService.dynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion updateSCProductVersion(
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion model)
+		throws com.liferay.portal.SystemException {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
+		return scProductVersionLocalService.updateSCProductVersion(model);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence() {

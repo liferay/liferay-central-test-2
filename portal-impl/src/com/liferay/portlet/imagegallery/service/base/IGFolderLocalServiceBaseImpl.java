@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.IGImageLocalService;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceFactory;
@@ -70,14 +72,47 @@ import java.util.List;
  */
 public abstract class IGFolderLocalServiceBaseImpl
 	implements IGFolderLocalService, InitializingBean {
+	public IGFolder addIGFolder(IGFolder model) throws SystemException {
+		IGFolder igFolder = new IGFolderImpl();
+		igFolder.setNew(true);
+		igFolder.setFolderId(model.getFolderId());
+		igFolder.setGroupId(model.getGroupId());
+		igFolder.setCompanyId(model.getCompanyId());
+		igFolder.setUserId(model.getUserId());
+		igFolder.setCreateDate(model.getCreateDate());
+		igFolder.setModifiedDate(model.getModifiedDate());
+		igFolder.setParentFolderId(model.getParentFolderId());
+		igFolder.setName(model.getName());
+		igFolder.setDescription(model.getDescription());
+
+		return igFolderPersistence.update(igFolder);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return IGFolderUtil.findWithDynamicQuery(queryInitializer);
+		return igFolderPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return IGFolderUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return igFolderPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public IGFolder updateIGFolder(IGFolder model) throws SystemException {
+		IGFolder igFolder = new IGFolderImpl();
+		igFolder.setNew(false);
+		igFolder.setFolderId(model.getFolderId());
+		igFolder.setGroupId(model.getGroupId());
+		igFolder.setCompanyId(model.getCompanyId());
+		igFolder.setUserId(model.getUserId());
+		igFolder.setCreateDate(model.getCreateDate());
+		igFolder.setModifiedDate(model.getModifiedDate());
+		igFolder.setParentFolderId(model.getParentFolderId());
+		igFolder.setName(model.getName());
+		igFolder.setDescription(model.getDescription());
+
+		return igFolderPersistence.update(igFolder);
 	}
 
 	public IGFolderPersistence getIGFolderPersistence() {

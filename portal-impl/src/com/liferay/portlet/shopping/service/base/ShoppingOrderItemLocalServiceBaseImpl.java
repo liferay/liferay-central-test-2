@@ -25,6 +25,8 @@ package com.liferay.portlet.shopping.service.base;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.shopping.model.ShoppingOrderItem;
+import com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
@@ -83,15 +85,51 @@ import java.util.List;
  */
 public abstract class ShoppingOrderItemLocalServiceBaseImpl
 	implements ShoppingOrderItemLocalService, InitializingBean {
+	public ShoppingOrderItem addShoppingOrderItem(ShoppingOrderItem model)
+		throws SystemException {
+		ShoppingOrderItem shoppingOrderItem = new ShoppingOrderItemImpl();
+		shoppingOrderItem.setNew(true);
+		shoppingOrderItem.setOrderItemId(model.getOrderItemId());
+		shoppingOrderItem.setOrderId(model.getOrderId());
+		shoppingOrderItem.setItemId(model.getItemId());
+		shoppingOrderItem.setSku(model.getSku());
+		shoppingOrderItem.setName(model.getName());
+		shoppingOrderItem.setDescription(model.getDescription());
+		shoppingOrderItem.setProperties(model.getProperties());
+		shoppingOrderItem.setPrice(model.getPrice());
+		shoppingOrderItem.setQuantity(model.getQuantity());
+		shoppingOrderItem.setShippedDate(model.getShippedDate());
+
+		return shoppingOrderItemPersistence.update(shoppingOrderItem);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return ShoppingOrderItemUtil.findWithDynamicQuery(queryInitializer);
+		return shoppingOrderItemPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return ShoppingOrderItemUtil.findWithDynamicQuery(queryInitializer,
+		return shoppingOrderItemPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public ShoppingOrderItem updateShoppingOrderItem(ShoppingOrderItem model)
+		throws SystemException {
+		ShoppingOrderItem shoppingOrderItem = new ShoppingOrderItemImpl();
+		shoppingOrderItem.setNew(false);
+		shoppingOrderItem.setOrderItemId(model.getOrderItemId());
+		shoppingOrderItem.setOrderId(model.getOrderId());
+		shoppingOrderItem.setItemId(model.getItemId());
+		shoppingOrderItem.setSku(model.getSku());
+		shoppingOrderItem.setName(model.getName());
+		shoppingOrderItem.setDescription(model.getDescription());
+		shoppingOrderItem.setProperties(model.getProperties());
+		shoppingOrderItem.setPrice(model.getPrice());
+		shoppingOrderItem.setQuantity(model.getQuantity());
+		shoppingOrderItem.setShippedDate(model.getShippedDate());
+
+		return shoppingOrderItemPersistence.update(shoppingOrderItem);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

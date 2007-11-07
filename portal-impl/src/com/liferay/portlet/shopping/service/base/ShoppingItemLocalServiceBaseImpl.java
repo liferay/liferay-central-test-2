@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.shopping.model.ShoppingItem;
+import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
@@ -102,15 +104,97 @@ import java.util.List;
  */
 public abstract class ShoppingItemLocalServiceBaseImpl
 	implements ShoppingItemLocalService, InitializingBean {
+	public ShoppingItem addShoppingItem(ShoppingItem model)
+		throws SystemException {
+		ShoppingItem shoppingItem = new ShoppingItemImpl();
+		shoppingItem.setNew(true);
+		shoppingItem.setItemId(model.getItemId());
+		shoppingItem.setCompanyId(model.getCompanyId());
+		shoppingItem.setUserId(model.getUserId());
+		shoppingItem.setUserName(model.getUserName());
+		shoppingItem.setCreateDate(model.getCreateDate());
+		shoppingItem.setModifiedDate(model.getModifiedDate());
+		shoppingItem.setCategoryId(model.getCategoryId());
+		shoppingItem.setSku(model.getSku());
+		shoppingItem.setName(model.getName());
+		shoppingItem.setDescription(model.getDescription());
+		shoppingItem.setProperties(model.getProperties());
+		shoppingItem.setFields(model.getFields());
+		shoppingItem.setFieldsQuantities(model.getFieldsQuantities());
+		shoppingItem.setMinQuantity(model.getMinQuantity());
+		shoppingItem.setMaxQuantity(model.getMaxQuantity());
+		shoppingItem.setPrice(model.getPrice());
+		shoppingItem.setDiscount(model.getDiscount());
+		shoppingItem.setTaxable(model.getTaxable());
+		shoppingItem.setShipping(model.getShipping());
+		shoppingItem.setUseShippingFormula(model.getUseShippingFormula());
+		shoppingItem.setRequiresShipping(model.getRequiresShipping());
+		shoppingItem.setStockQuantity(model.getStockQuantity());
+		shoppingItem.setFeatured(model.getFeatured());
+		shoppingItem.setSale(model.getSale());
+		shoppingItem.setSmallImage(model.getSmallImage());
+		shoppingItem.setSmallImageId(model.getSmallImageId());
+		shoppingItem.setSmallImageURL(model.getSmallImageURL());
+		shoppingItem.setMediumImage(model.getMediumImage());
+		shoppingItem.setMediumImageId(model.getMediumImageId());
+		shoppingItem.setMediumImageURL(model.getMediumImageURL());
+		shoppingItem.setLargeImage(model.getLargeImage());
+		shoppingItem.setLargeImageId(model.getLargeImageId());
+		shoppingItem.setLargeImageURL(model.getLargeImageURL());
+
+		return shoppingItemPersistence.update(shoppingItem);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return ShoppingItemUtil.findWithDynamicQuery(queryInitializer);
+		return shoppingItemPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return ShoppingItemUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return shoppingItemPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public ShoppingItem updateShoppingItem(ShoppingItem model)
+		throws SystemException {
+		ShoppingItem shoppingItem = new ShoppingItemImpl();
+		shoppingItem.setNew(false);
+		shoppingItem.setItemId(model.getItemId());
+		shoppingItem.setCompanyId(model.getCompanyId());
+		shoppingItem.setUserId(model.getUserId());
+		shoppingItem.setUserName(model.getUserName());
+		shoppingItem.setCreateDate(model.getCreateDate());
+		shoppingItem.setModifiedDate(model.getModifiedDate());
+		shoppingItem.setCategoryId(model.getCategoryId());
+		shoppingItem.setSku(model.getSku());
+		shoppingItem.setName(model.getName());
+		shoppingItem.setDescription(model.getDescription());
+		shoppingItem.setProperties(model.getProperties());
+		shoppingItem.setFields(model.getFields());
+		shoppingItem.setFieldsQuantities(model.getFieldsQuantities());
+		shoppingItem.setMinQuantity(model.getMinQuantity());
+		shoppingItem.setMaxQuantity(model.getMaxQuantity());
+		shoppingItem.setPrice(model.getPrice());
+		shoppingItem.setDiscount(model.getDiscount());
+		shoppingItem.setTaxable(model.getTaxable());
+		shoppingItem.setShipping(model.getShipping());
+		shoppingItem.setUseShippingFormula(model.getUseShippingFormula());
+		shoppingItem.setRequiresShipping(model.getRequiresShipping());
+		shoppingItem.setStockQuantity(model.getStockQuantity());
+		shoppingItem.setFeatured(model.getFeatured());
+		shoppingItem.setSale(model.getSale());
+		shoppingItem.setSmallImage(model.getSmallImage());
+		shoppingItem.setSmallImageId(model.getSmallImageId());
+		shoppingItem.setSmallImageURL(model.getSmallImageURL());
+		shoppingItem.setMediumImage(model.getMediumImage());
+		shoppingItem.setMediumImageId(model.getMediumImageId());
+		shoppingItem.setMediumImageURL(model.getMediumImageURL());
+		shoppingItem.setLargeImage(model.getLargeImage());
+		shoppingItem.setLargeImageId(model.getLargeImageId());
+		shoppingItem.setLargeImageURL(model.getLargeImageURL());
+
+		return shoppingItemPersistence.update(shoppingItem);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

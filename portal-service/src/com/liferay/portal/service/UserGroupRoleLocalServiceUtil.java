@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class UserGroupRoleLocalServiceUtil {
+	public static com.liferay.portal.model.UserGroupRole addUserGroupRole(
+		com.liferay.portal.model.UserGroupRole model)
+		throws com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		return userGroupRoleLocalService.addUserGroupRole(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class UserGroupRoleLocalServiceUtil {
 
 		return userGroupRoleLocalService.dynamicQuery(queryInitializer, begin,
 			end);
+	}
+
+	public static com.liferay.portal.model.UserGroupRole updateUserGroupRole(
+		com.liferay.portal.model.UserGroupRole model)
+		throws com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		return userGroupRoleLocalService.updateUserGroupRole(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

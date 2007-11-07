@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class WebsiteLocalServiceUtil {
+	public static com.liferay.portal.model.Website addWebsite(
+		com.liferay.portal.model.Website model)
+		throws com.liferay.portal.SystemException {
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+
+		return websiteLocalService.addWebsite(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class WebsiteLocalServiceUtil {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
 		return websiteLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.Website updateWebsite(
+		com.liferay.portal.model.Website model)
+		throws com.liferay.portal.SystemException {
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+
+		return websiteLocalService.updateWebsite(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

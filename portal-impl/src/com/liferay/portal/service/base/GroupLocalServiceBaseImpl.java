@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -346,14 +348,55 @@ import java.util.List;
  */
 public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	InitializingBean {
+	public Group addGroup(Group model) throws SystemException {
+		Group group = new GroupImpl();
+		group.setNew(true);
+		group.setGroupId(model.getGroupId());
+		group.setCompanyId(model.getCompanyId());
+		group.setCreatorUserId(model.getCreatorUserId());
+		group.setClassNameId(model.getClassNameId());
+		group.setClassPK(model.getClassPK());
+		group.setParentGroupId(model.getParentGroupId());
+		group.setLiveGroupId(model.getLiveGroupId());
+		group.setName(model.getName());
+		group.setDescription(model.getDescription());
+		group.setType(model.getType());
+		group.setTypeSettings(model.getTypeSettings());
+		group.setFriendlyURL(model.getFriendlyURL());
+		group.setActive(model.getActive());
+
+		return groupPersistence.update(group);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return GroupUtil.findWithDynamicQuery(queryInitializer);
+		return groupPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return GroupUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return groupPersistence.findWithDynamicQuery(queryInitializer, begin,
+			end);
+	}
+
+	public Group updateGroup(Group model) throws SystemException {
+		Group group = new GroupImpl();
+		group.setNew(false);
+		group.setGroupId(model.getGroupId());
+		group.setCompanyId(model.getCompanyId());
+		group.setCreatorUserId(model.getCreatorUserId());
+		group.setClassNameId(model.getClassNameId());
+		group.setClassPK(model.getClassPK());
+		group.setParentGroupId(model.getParentGroupId());
+		group.setLiveGroupId(model.getLiveGroupId());
+		group.setName(model.getName());
+		group.setDescription(model.getDescription());
+		group.setType(model.getType());
+		group.setTypeSettings(model.getTypeSettings());
+		group.setFriendlyURL(model.getFriendlyURL());
+		group.setActive(model.getActive());
+
+		return groupPersistence.update(group);
 	}
 
 	public AccountLocalService getAccountLocalService() {

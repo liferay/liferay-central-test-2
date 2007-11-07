@@ -25,6 +25,8 @@ package com.liferay.portlet.documentlibrary.service.base;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
@@ -71,15 +73,49 @@ import java.util.List;
  */
 public abstract class DLFileVersionLocalServiceBaseImpl
 	implements DLFileVersionLocalService, InitializingBean {
+	public DLFileVersion addDLFileVersion(DLFileVersion model)
+		throws SystemException {
+		DLFileVersion dlFileVersion = new DLFileVersionImpl();
+		dlFileVersion.setNew(true);
+		dlFileVersion.setFileVersionId(model.getFileVersionId());
+		dlFileVersion.setCompanyId(model.getCompanyId());
+		dlFileVersion.setUserId(model.getUserId());
+		dlFileVersion.setUserName(model.getUserName());
+		dlFileVersion.setCreateDate(model.getCreateDate());
+		dlFileVersion.setFolderId(model.getFolderId());
+		dlFileVersion.setName(model.getName());
+		dlFileVersion.setVersion(model.getVersion());
+		dlFileVersion.setSize(model.getSize());
+
+		return dlFileVersionPersistence.update(dlFileVersion);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return DLFileVersionUtil.findWithDynamicQuery(queryInitializer);
+		return dlFileVersionPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return DLFileVersionUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return dlFileVersionPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public DLFileVersion updateDLFileVersion(DLFileVersion model)
+		throws SystemException {
+		DLFileVersion dlFileVersion = new DLFileVersionImpl();
+		dlFileVersion.setNew(false);
+		dlFileVersion.setFileVersionId(model.getFileVersionId());
+		dlFileVersion.setCompanyId(model.getCompanyId());
+		dlFileVersion.setUserId(model.getUserId());
+		dlFileVersion.setUserName(model.getUserName());
+		dlFileVersion.setCreateDate(model.getCreateDate());
+		dlFileVersion.setFolderId(model.getFolderId());
+		dlFileVersion.setName(model.getName());
+		dlFileVersion.setVersion(model.getVersion());
+		dlFileVersion.setSize(model.getSize());
+
+		return dlFileVersionPersistence.update(dlFileVersion);
 	}
 
 	public DLFileEntryLocalService getDLFileEntryLocalService() {

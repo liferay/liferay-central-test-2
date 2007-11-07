@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -263,15 +265,53 @@ import java.util.List;
  */
 public abstract class EmailAddressLocalServiceBaseImpl
 	implements EmailAddressLocalService, InitializingBean {
+	public EmailAddress addEmailAddress(EmailAddress model)
+		throws SystemException {
+		EmailAddress emailAddress = new EmailAddressImpl();
+		emailAddress.setNew(true);
+		emailAddress.setEmailAddressId(model.getEmailAddressId());
+		emailAddress.setCompanyId(model.getCompanyId());
+		emailAddress.setUserId(model.getUserId());
+		emailAddress.setUserName(model.getUserName());
+		emailAddress.setCreateDate(model.getCreateDate());
+		emailAddress.setModifiedDate(model.getModifiedDate());
+		emailAddress.setClassNameId(model.getClassNameId());
+		emailAddress.setClassPK(model.getClassPK());
+		emailAddress.setAddress(model.getAddress());
+		emailAddress.setTypeId(model.getTypeId());
+		emailAddress.setPrimary(model.getPrimary());
+
+		return emailAddressPersistence.update(emailAddress);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return EmailAddressUtil.findWithDynamicQuery(queryInitializer);
+		return emailAddressPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return EmailAddressUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return emailAddressPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public EmailAddress updateEmailAddress(EmailAddress model)
+		throws SystemException {
+		EmailAddress emailAddress = new EmailAddressImpl();
+		emailAddress.setNew(false);
+		emailAddress.setEmailAddressId(model.getEmailAddressId());
+		emailAddress.setCompanyId(model.getCompanyId());
+		emailAddress.setUserId(model.getUserId());
+		emailAddress.setUserName(model.getUserName());
+		emailAddress.setCreateDate(model.getCreateDate());
+		emailAddress.setModifiedDate(model.getModifiedDate());
+		emailAddress.setClassNameId(model.getClassNameId());
+		emailAddress.setClassPK(model.getClassPK());
+		emailAddress.setAddress(model.getAddress());
+		emailAddress.setTypeId(model.getTypeId());
+		emailAddress.setPrimary(model.getPrimary());
+
+		return emailAddressPersistence.update(emailAddress);
 	}
 
 	public AccountLocalService getAccountLocalService() {

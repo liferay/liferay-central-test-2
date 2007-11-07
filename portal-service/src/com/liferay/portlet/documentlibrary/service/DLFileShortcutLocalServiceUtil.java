@@ -49,6 +49,14 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public class DLFileShortcutLocalServiceUtil {
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addDLFileShortcut(
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut model)
+		throws com.liferay.portal.SystemException {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.addDLFileShortcut(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class DLFileShortcutLocalServiceUtil {
 
 		return dlFileShortcutLocalService.dynamicQuery(queryInitializer, begin,
 			end);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateDLFileShortcut(
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut model)
+		throws com.liferay.portal.SystemException {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.updateDLFileShortcut(model);
 	}
 
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {

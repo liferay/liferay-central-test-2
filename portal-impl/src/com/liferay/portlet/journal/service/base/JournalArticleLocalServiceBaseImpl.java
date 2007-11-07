@@ -61,6 +61,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
@@ -127,15 +129,83 @@ import java.util.List;
  */
 public abstract class JournalArticleLocalServiceBaseImpl
 	implements JournalArticleLocalService, InitializingBean {
+	public JournalArticle addJournalArticle(JournalArticle model)
+		throws SystemException {
+		JournalArticle journalArticle = new JournalArticleImpl();
+		journalArticle.setNew(true);
+		journalArticle.setUuid(model.getUuid());
+		journalArticle.setId(model.getId());
+		journalArticle.setResourcePrimKey(model.getResourcePrimKey());
+		journalArticle.setGroupId(model.getGroupId());
+		journalArticle.setCompanyId(model.getCompanyId());
+		journalArticle.setUserId(model.getUserId());
+		journalArticle.setUserName(model.getUserName());
+		journalArticle.setCreateDate(model.getCreateDate());
+		journalArticle.setModifiedDate(model.getModifiedDate());
+		journalArticle.setArticleId(model.getArticleId());
+		journalArticle.setVersion(model.getVersion());
+		journalArticle.setTitle(model.getTitle());
+		journalArticle.setDescription(model.getDescription());
+		journalArticle.setContent(model.getContent());
+		journalArticle.setType(model.getType());
+		journalArticle.setStructureId(model.getStructureId());
+		journalArticle.setTemplateId(model.getTemplateId());
+		journalArticle.setDisplayDate(model.getDisplayDate());
+		journalArticle.setApproved(model.getApproved());
+		journalArticle.setApprovedByUserId(model.getApprovedByUserId());
+		journalArticle.setApprovedByUserName(model.getApprovedByUserName());
+		journalArticle.setApprovedDate(model.getApprovedDate());
+		journalArticle.setExpired(model.getExpired());
+		journalArticle.setExpirationDate(model.getExpirationDate());
+		journalArticle.setReviewDate(model.getReviewDate());
+		journalArticle.setIndexable(model.getIndexable());
+
+		return journalArticlePersistence.update(journalArticle);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return JournalArticleUtil.findWithDynamicQuery(queryInitializer);
+		return journalArticlePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return JournalArticleUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return journalArticlePersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public JournalArticle updateJournalArticle(JournalArticle model)
+		throws SystemException {
+		JournalArticle journalArticle = new JournalArticleImpl();
+		journalArticle.setNew(false);
+		journalArticle.setUuid(model.getUuid());
+		journalArticle.setId(model.getId());
+		journalArticle.setResourcePrimKey(model.getResourcePrimKey());
+		journalArticle.setGroupId(model.getGroupId());
+		journalArticle.setCompanyId(model.getCompanyId());
+		journalArticle.setUserId(model.getUserId());
+		journalArticle.setUserName(model.getUserName());
+		journalArticle.setCreateDate(model.getCreateDate());
+		journalArticle.setModifiedDate(model.getModifiedDate());
+		journalArticle.setArticleId(model.getArticleId());
+		journalArticle.setVersion(model.getVersion());
+		journalArticle.setTitle(model.getTitle());
+		journalArticle.setDescription(model.getDescription());
+		journalArticle.setContent(model.getContent());
+		journalArticle.setType(model.getType());
+		journalArticle.setStructureId(model.getStructureId());
+		journalArticle.setTemplateId(model.getTemplateId());
+		journalArticle.setDisplayDate(model.getDisplayDate());
+		journalArticle.setApproved(model.getApproved());
+		journalArticle.setApprovedByUserId(model.getApprovedByUserId());
+		journalArticle.setApprovedByUserName(model.getApprovedByUserName());
+		journalArticle.setApprovedDate(model.getApprovedDate());
+		journalArticle.setExpired(model.getExpired());
+		journalArticle.setExpirationDate(model.getExpirationDate());
+		journalArticle.setReviewDate(model.getReviewDate());
+		journalArticle.setIndexable(model.getIndexable());
+
+		return journalArticlePersistence.update(journalArticle);
 	}
 
 	public JournalArticlePersistence getJournalArticlePersistence() {

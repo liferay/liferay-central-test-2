@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class PortletPreferencesLocalServiceUtil {
+	public static com.liferay.portal.model.PortletPreferences addPortletPreferences(
+		com.liferay.portal.model.PortletPreferences model)
+		throws com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		return portletPreferencesLocalService.addPortletPreferences(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class PortletPreferencesLocalServiceUtil {
 
 		return portletPreferencesLocalService.dynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public static com.liferay.portal.model.PortletPreferences updatePortletPreferences(
+		com.liferay.portal.model.PortletPreferences model)
+		throws com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		return portletPreferencesLocalService.updatePortletPreferences(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

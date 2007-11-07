@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.shopping.model.ShoppingCategory;
+import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
@@ -102,15 +104,51 @@ import java.util.List;
  */
 public abstract class ShoppingCategoryLocalServiceBaseImpl
 	implements ShoppingCategoryLocalService, InitializingBean {
+	public ShoppingCategory addShoppingCategory(ShoppingCategory model)
+		throws SystemException {
+		ShoppingCategory shoppingCategory = new ShoppingCategoryImpl();
+		shoppingCategory.setNew(true);
+		shoppingCategory.setCategoryId(model.getCategoryId());
+		shoppingCategory.setGroupId(model.getGroupId());
+		shoppingCategory.setCompanyId(model.getCompanyId());
+		shoppingCategory.setUserId(model.getUserId());
+		shoppingCategory.setUserName(model.getUserName());
+		shoppingCategory.setCreateDate(model.getCreateDate());
+		shoppingCategory.setModifiedDate(model.getModifiedDate());
+		shoppingCategory.setParentCategoryId(model.getParentCategoryId());
+		shoppingCategory.setName(model.getName());
+		shoppingCategory.setDescription(model.getDescription());
+
+		return shoppingCategoryPersistence.update(shoppingCategory);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return ShoppingCategoryUtil.findWithDynamicQuery(queryInitializer);
+		return shoppingCategoryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return ShoppingCategoryUtil.findWithDynamicQuery(queryInitializer,
+		return shoppingCategoryPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public ShoppingCategory updateShoppingCategory(ShoppingCategory model)
+		throws SystemException {
+		ShoppingCategory shoppingCategory = new ShoppingCategoryImpl();
+		shoppingCategory.setNew(false);
+		shoppingCategory.setCategoryId(model.getCategoryId());
+		shoppingCategory.setGroupId(model.getGroupId());
+		shoppingCategory.setCompanyId(model.getCompanyId());
+		shoppingCategory.setUserId(model.getUserId());
+		shoppingCategory.setUserName(model.getUserName());
+		shoppingCategory.setCreateDate(model.getCreateDate());
+		shoppingCategory.setModifiedDate(model.getModifiedDate());
+		shoppingCategory.setParentCategoryId(model.getParentCategoryId());
+		shoppingCategory.setName(model.getName());
+		shoppingCategory.setDescription(model.getDescription());
+
+		return shoppingCategoryPersistence.update(shoppingCategory);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

@@ -45,6 +45,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.blogs.model.BlogsCategory;
+import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceFactory;
 import com.liferay.portlet.blogs.service.BlogsCategoryService;

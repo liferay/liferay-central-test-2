@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiPageLocalService;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory;
@@ -74,14 +76,49 @@ import java.util.List;
  */
 public abstract class WikiNodeLocalServiceBaseImpl
 	implements WikiNodeLocalService, InitializingBean {
+	public WikiNode addWikiNode(WikiNode model) throws SystemException {
+		WikiNode wikiNode = new WikiNodeImpl();
+		wikiNode.setNew(true);
+		wikiNode.setNodeId(model.getNodeId());
+		wikiNode.setGroupId(model.getGroupId());
+		wikiNode.setCompanyId(model.getCompanyId());
+		wikiNode.setUserId(model.getUserId());
+		wikiNode.setUserName(model.getUserName());
+		wikiNode.setCreateDate(model.getCreateDate());
+		wikiNode.setModifiedDate(model.getModifiedDate());
+		wikiNode.setName(model.getName());
+		wikiNode.setDescription(model.getDescription());
+		wikiNode.setLastPostDate(model.getLastPostDate());
+
+		return wikiNodePersistence.update(wikiNode);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return WikiNodeUtil.findWithDynamicQuery(queryInitializer);
+		return wikiNodePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return WikiNodeUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return wikiNodePersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public WikiNode updateWikiNode(WikiNode model) throws SystemException {
+		WikiNode wikiNode = new WikiNodeImpl();
+		wikiNode.setNew(false);
+		wikiNode.setNodeId(model.getNodeId());
+		wikiNode.setGroupId(model.getGroupId());
+		wikiNode.setCompanyId(model.getCompanyId());
+		wikiNode.setUserId(model.getUserId());
+		wikiNode.setUserName(model.getUserName());
+		wikiNode.setCreateDate(model.getCreateDate());
+		wikiNode.setModifiedDate(model.getModifiedDate());
+		wikiNode.setName(model.getName());
+		wikiNode.setDescription(model.getDescription());
+		wikiNode.setLastPostDate(model.getLastPostDate());
+
+		return wikiNodePersistence.update(wikiNode);
 	}
 
 	public WikiNodePersistence getWikiNodePersistence() {

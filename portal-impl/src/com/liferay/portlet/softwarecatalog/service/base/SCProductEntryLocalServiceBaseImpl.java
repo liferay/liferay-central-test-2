@@ -58,6 +58,8 @@ import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
+import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
+import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
@@ -96,15 +98,63 @@ import java.util.List;
  */
 public abstract class SCProductEntryLocalServiceBaseImpl
 	implements SCProductEntryLocalService, InitializingBean {
+	public SCProductEntry addSCProductEntry(SCProductEntry model)
+		throws SystemException {
+		SCProductEntry scProductEntry = new SCProductEntryImpl();
+		scProductEntry.setNew(true);
+		scProductEntry.setProductEntryId(model.getProductEntryId());
+		scProductEntry.setGroupId(model.getGroupId());
+		scProductEntry.setCompanyId(model.getCompanyId());
+		scProductEntry.setUserId(model.getUserId());
+		scProductEntry.setUserName(model.getUserName());
+		scProductEntry.setCreateDate(model.getCreateDate());
+		scProductEntry.setModifiedDate(model.getModifiedDate());
+		scProductEntry.setName(model.getName());
+		scProductEntry.setType(model.getType());
+		scProductEntry.setTags(model.getTags());
+		scProductEntry.setShortDescription(model.getShortDescription());
+		scProductEntry.setLongDescription(model.getLongDescription());
+		scProductEntry.setPageURL(model.getPageURL());
+		scProductEntry.setAuthor(model.getAuthor());
+		scProductEntry.setRepoGroupId(model.getRepoGroupId());
+		scProductEntry.setRepoArtifactId(model.getRepoArtifactId());
+
+		return scProductEntryPersistence.update(scProductEntry);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return SCProductEntryUtil.findWithDynamicQuery(queryInitializer);
+		return scProductEntryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return SCProductEntryUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return scProductEntryPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public SCProductEntry updateSCProductEntry(SCProductEntry model)
+		throws SystemException {
+		SCProductEntry scProductEntry = new SCProductEntryImpl();
+		scProductEntry.setNew(false);
+		scProductEntry.setProductEntryId(model.getProductEntryId());
+		scProductEntry.setGroupId(model.getGroupId());
+		scProductEntry.setCompanyId(model.getCompanyId());
+		scProductEntry.setUserId(model.getUserId());
+		scProductEntry.setUserName(model.getUserName());
+		scProductEntry.setCreateDate(model.getCreateDate());
+		scProductEntry.setModifiedDate(model.getModifiedDate());
+		scProductEntry.setName(model.getName());
+		scProductEntry.setType(model.getType());
+		scProductEntry.setTags(model.getTags());
+		scProductEntry.setShortDescription(model.getShortDescription());
+		scProductEntry.setLongDescription(model.getLongDescription());
+		scProductEntry.setPageURL(model.getPageURL());
+		scProductEntry.setAuthor(model.getAuthor());
+		scProductEntry.setRepoGroupId(model.getRepoGroupId());
+		scProductEntry.setRepoArtifactId(model.getRepoArtifactId());
+
+		return scProductEntryPersistence.update(scProductEntry);
 	}
 
 	public SCLicenseLocalService getSCLicenseLocalService() {

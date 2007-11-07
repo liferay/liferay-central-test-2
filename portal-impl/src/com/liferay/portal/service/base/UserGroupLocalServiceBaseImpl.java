@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -263,14 +265,39 @@ import java.util.List;
  */
 public abstract class UserGroupLocalServiceBaseImpl
 	implements UserGroupLocalService, InitializingBean {
+	public UserGroup addUserGroup(UserGroup model) throws SystemException {
+		UserGroup userGroup = new UserGroupImpl();
+		userGroup.setNew(true);
+		userGroup.setUserGroupId(model.getUserGroupId());
+		userGroup.setCompanyId(model.getCompanyId());
+		userGroup.setParentUserGroupId(model.getParentUserGroupId());
+		userGroup.setName(model.getName());
+		userGroup.setDescription(model.getDescription());
+
+		return userGroupPersistence.update(userGroup);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return UserGroupUtil.findWithDynamicQuery(queryInitializer);
+		return userGroupPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return UserGroupUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return userGroupPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public UserGroup updateUserGroup(UserGroup model) throws SystemException {
+		UserGroup userGroup = new UserGroupImpl();
+		userGroup.setNew(false);
+		userGroup.setUserGroupId(model.getUserGroupId());
+		userGroup.setCompanyId(model.getCompanyId());
+		userGroup.setParentUserGroupId(model.getParentUserGroupId());
+		userGroup.setName(model.getName());
+		userGroup.setDescription(model.getDescription());
+
+		return userGroupPersistence.update(userGroup);
 	}
 
 	public AccountLocalService getAccountLocalService() {

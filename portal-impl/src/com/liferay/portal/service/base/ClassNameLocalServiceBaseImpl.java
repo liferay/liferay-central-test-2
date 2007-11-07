@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.ClassName;
+import com.liferay.portal.model.impl.ClassNameImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -263,14 +265,33 @@ import java.util.List;
  */
 public abstract class ClassNameLocalServiceBaseImpl
 	implements ClassNameLocalService, InitializingBean {
+	public ClassName addClassName(ClassName model) throws SystemException {
+		ClassName className = new ClassNameImpl();
+		className.setNew(true);
+		className.setClassNameId(model.getClassNameId());
+		className.setValue(model.getValue());
+
+		return classNamePersistence.update(className);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return ClassNameUtil.findWithDynamicQuery(queryInitializer);
+		return classNamePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return ClassNameUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return classNamePersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public ClassName updateClassName(ClassName model) throws SystemException {
+		ClassName className = new ClassNameImpl();
+		className.setNew(false);
+		className.setClassNameId(model.getClassNameId());
+		className.setValue(model.getValue());
+
+		return classNamePersistence.update(className);
 	}
 
 	public AccountLocalService getAccountLocalService() {

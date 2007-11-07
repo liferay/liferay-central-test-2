@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class AddressLocalServiceUtil {
+	public static com.liferay.portal.model.Address addAddress(
+		com.liferay.portal.model.Address model)
+		throws com.liferay.portal.SystemException {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.addAddress(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class AddressLocalServiceUtil {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
 		return addressLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.Address updateAddress(
+		com.liferay.portal.model.Address model)
+		throws com.liferay.portal.SystemException {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.updateAddress(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

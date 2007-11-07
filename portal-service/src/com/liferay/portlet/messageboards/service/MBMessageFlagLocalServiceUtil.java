@@ -49,6 +49,14 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public class MBMessageFlagLocalServiceUtil {
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag addMBMessageFlag(
+		com.liferay.portlet.messageboards.model.MBMessageFlag model)
+		throws com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.addMBMessageFlag(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class MBMessageFlagLocalServiceUtil {
 
 		return mbMessageFlagLocalService.dynamicQuery(queryInitializer, begin,
 			end);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag updateMBMessageFlag(
+		com.liferay.portlet.messageboards.model.MBMessageFlag model)
+		throws com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.updateMBMessageFlag(model);
 	}
 
 	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {

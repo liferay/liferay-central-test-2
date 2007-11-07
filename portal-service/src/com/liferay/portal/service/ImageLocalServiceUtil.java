@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class ImageLocalServiceUtil {
+	public static com.liferay.portal.model.Image addImage(
+		com.liferay.portal.model.Image model)
+		throws com.liferay.portal.SystemException {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		return imageLocalService.addImage(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class ImageLocalServiceUtil {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 
 		return imageLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.Image updateImage(
+		com.liferay.portal.model.Image model)
+		throws com.liferay.portal.SystemException {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		return imageLocalService.updateImage(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

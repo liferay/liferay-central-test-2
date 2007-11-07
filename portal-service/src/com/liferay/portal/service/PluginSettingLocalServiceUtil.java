@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class PluginSettingLocalServiceUtil {
+	public static com.liferay.portal.model.PluginSetting addPluginSetting(
+		com.liferay.portal.model.PluginSetting model)
+		throws com.liferay.portal.SystemException {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.addPluginSetting(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class PluginSettingLocalServiceUtil {
 
 		return pluginSettingLocalService.dynamicQuery(queryInitializer, begin,
 			end);
+	}
+
+	public static com.liferay.portal.model.PluginSetting updatePluginSetting(
+		com.liferay.portal.model.PluginSetting model)
+		throws com.liferay.portal.SystemException {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.updatePluginSetting(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

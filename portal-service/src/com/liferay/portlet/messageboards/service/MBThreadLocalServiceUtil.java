@@ -49,6 +49,14 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public class MBThreadLocalServiceUtil {
+	public static com.liferay.portlet.messageboards.model.MBThread addMBThread(
+		com.liferay.portlet.messageboards.model.MBThread model)
+		throws com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.addMBThread(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class MBThreadLocalServiceUtil {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
 		return mbThreadLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread updateMBThread(
+		com.liferay.portlet.messageboards.model.MBThread model)
+		throws com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.updateMBThread(model);
 	}
 
 	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {

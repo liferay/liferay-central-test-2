@@ -30,6 +30,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
+import com.liferay.portlet.softwarecatalog.model.SCLicense;
+import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
@@ -68,14 +70,41 @@ import java.util.List;
  */
 public abstract class SCLicenseLocalServiceBaseImpl
 	implements SCLicenseLocalService, InitializingBean {
+	public SCLicense addSCLicense(SCLicense model) throws SystemException {
+		SCLicense scLicense = new SCLicenseImpl();
+		scLicense.setNew(true);
+		scLicense.setLicenseId(model.getLicenseId());
+		scLicense.setName(model.getName());
+		scLicense.setUrl(model.getUrl());
+		scLicense.setOpenSource(model.getOpenSource());
+		scLicense.setActive(model.getActive());
+		scLicense.setRecommended(model.getRecommended());
+
+		return scLicensePersistence.update(scLicense);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return SCLicenseUtil.findWithDynamicQuery(queryInitializer);
+		return scLicensePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return SCLicenseUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return scLicensePersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public SCLicense updateSCLicense(SCLicense model) throws SystemException {
+		SCLicense scLicense = new SCLicenseImpl();
+		scLicense.setNew(false);
+		scLicense.setLicenseId(model.getLicenseId());
+		scLicense.setName(model.getName());
+		scLicense.setUrl(model.getUrl());
+		scLicense.setOpenSource(model.getOpenSource());
+		scLicense.setActive(model.getActive());
+		scLicense.setRecommended(model.getRecommended());
+
+		return scLicensePersistence.update(scLicense);
 	}
 
 	public SCLicensePersistence getSCLicensePersistence() {

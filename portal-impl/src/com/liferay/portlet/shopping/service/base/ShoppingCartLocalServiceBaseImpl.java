@@ -38,6 +38,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.shopping.model.ShoppingCart;
+import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceFactory;
@@ -96,15 +98,53 @@ import java.util.List;
  */
 public abstract class ShoppingCartLocalServiceBaseImpl
 	implements ShoppingCartLocalService, InitializingBean {
+	public ShoppingCart addShoppingCart(ShoppingCart model)
+		throws SystemException {
+		ShoppingCart shoppingCart = new ShoppingCartImpl();
+		shoppingCart.setNew(true);
+		shoppingCart.setCartId(model.getCartId());
+		shoppingCart.setGroupId(model.getGroupId());
+		shoppingCart.setCompanyId(model.getCompanyId());
+		shoppingCart.setUserId(model.getUserId());
+		shoppingCart.setUserName(model.getUserName());
+		shoppingCart.setCreateDate(model.getCreateDate());
+		shoppingCart.setModifiedDate(model.getModifiedDate());
+		shoppingCart.setItemIds(model.getItemIds());
+		shoppingCart.setCouponCodes(model.getCouponCodes());
+		shoppingCart.setAltShipping(model.getAltShipping());
+		shoppingCart.setInsure(model.getInsure());
+
+		return shoppingCartPersistence.update(shoppingCart);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return ShoppingCartUtil.findWithDynamicQuery(queryInitializer);
+		return shoppingCartPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return ShoppingCartUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return shoppingCartPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public ShoppingCart updateShoppingCart(ShoppingCart model)
+		throws SystemException {
+		ShoppingCart shoppingCart = new ShoppingCartImpl();
+		shoppingCart.setNew(false);
+		shoppingCart.setCartId(model.getCartId());
+		shoppingCart.setGroupId(model.getGroupId());
+		shoppingCart.setCompanyId(model.getCompanyId());
+		shoppingCart.setUserId(model.getUserId());
+		shoppingCart.setUserName(model.getUserName());
+		shoppingCart.setCreateDate(model.getCreateDate());
+		shoppingCart.setModifiedDate(model.getModifiedDate());
+		shoppingCart.setItemIds(model.getItemIds());
+		shoppingCart.setCouponCodes(model.getCouponCodes());
+		shoppingCart.setAltShipping(model.getAltShipping());
+		shoppingCart.setInsure(model.getInsure());
+
+		return shoppingCartPersistence.update(shoppingCart);
 	}
 
 	public ShoppingCartPersistence getShoppingCartPersistence() {

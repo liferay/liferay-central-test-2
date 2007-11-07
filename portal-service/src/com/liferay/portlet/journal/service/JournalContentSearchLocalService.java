@@ -49,6 +49,10 @@ package com.liferay.portlet.journal.service;
  *
  */
 public interface JournalContentSearchLocalService {
+	public com.liferay.portlet.journal.model.JournalContentSearch addJournalContentSearch(
+		com.liferay.portlet.journal.model.JournalContentSearch model)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -56,6 +60,10 @@ public interface JournalContentSearchLocalService {
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalContentSearch updateJournalContentSearch(
+		com.liferay.portlet.journal.model.JournalContentSearch model)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence();
 

@@ -49,6 +49,14 @@ package com.liferay.portal.service;
  *
  */
 public class PortletLocalServiceUtil {
+	public static com.liferay.portal.model.Portlet addPortlet(
+		com.liferay.portal.model.Portlet model)
+		throws com.liferay.portal.SystemException {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		return portletLocalService.addPortlet(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -63,6 +71,14 @@ public class PortletLocalServiceUtil {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
 		return portletLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static com.liferay.portal.model.Portlet updatePortlet(
+		com.liferay.portal.model.Portlet model)
+		throws com.liferay.portal.SystemException {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		return portletLocalService.updatePortlet(model);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

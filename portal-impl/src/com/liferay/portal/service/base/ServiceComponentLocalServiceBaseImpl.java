@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.ServiceComponent;
+import com.liferay.portal.model.impl.ServiceComponentImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -265,15 +267,41 @@ import java.util.List;
  */
 public abstract class ServiceComponentLocalServiceBaseImpl
 	implements ServiceComponentLocalService, InitializingBean {
+	public ServiceComponent addServiceComponent(ServiceComponent model)
+		throws SystemException {
+		ServiceComponent serviceComponent = new ServiceComponentImpl();
+		serviceComponent.setNew(true);
+		serviceComponent.setServiceComponentId(model.getServiceComponentId());
+		serviceComponent.setBuildNamespace(model.getBuildNamespace());
+		serviceComponent.setBuildNumber(model.getBuildNumber());
+		serviceComponent.setBuildDate(model.getBuildDate());
+		serviceComponent.setData(model.getData());
+
+		return serviceComponentPersistence.update(serviceComponent);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return ServiceComponentUtil.findWithDynamicQuery(queryInitializer);
+		return serviceComponentPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return ServiceComponentUtil.findWithDynamicQuery(queryInitializer,
+		return serviceComponentPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public ServiceComponent updateServiceComponent(ServiceComponent model)
+		throws SystemException {
+		ServiceComponent serviceComponent = new ServiceComponentImpl();
+		serviceComponent.setNew(false);
+		serviceComponent.setServiceComponentId(model.getServiceComponentId());
+		serviceComponent.setBuildNamespace(model.getBuildNamespace());
+		serviceComponent.setBuildNumber(model.getBuildNumber());
+		serviceComponent.setBuildDate(model.getBuildDate());
+		serviceComponent.setData(model.getData());
+
+		return serviceComponentPersistence.update(serviceComponent);
 	}
 
 	public AccountLocalService getAccountLocalService() {

@@ -32,6 +32,8 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.MembershipRequest;
+import com.liferay.portal.model.impl.MembershipRequestImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -266,15 +268,51 @@ import java.util.List;
  */
 public abstract class MembershipRequestLocalServiceBaseImpl
 	implements MembershipRequestLocalService, InitializingBean {
+	public MembershipRequest addMembershipRequest(MembershipRequest model)
+		throws SystemException {
+		MembershipRequest membershipRequest = new MembershipRequestImpl();
+		membershipRequest.setNew(true);
+		membershipRequest.setMembershipRequestId(model.getMembershipRequestId());
+		membershipRequest.setCompanyId(model.getCompanyId());
+		membershipRequest.setUserId(model.getUserId());
+		membershipRequest.setCreateDate(model.getCreateDate());
+		membershipRequest.setGroupId(model.getGroupId());
+		membershipRequest.setComments(model.getComments());
+		membershipRequest.setReplyComments(model.getReplyComments());
+		membershipRequest.setReplyDate(model.getReplyDate());
+		membershipRequest.setReplierUserId(model.getReplierUserId());
+		membershipRequest.setStatusId(model.getStatusId());
+
+		return membershipRequestPersistence.update(membershipRequest);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return MembershipRequestUtil.findWithDynamicQuery(queryInitializer);
+		return membershipRequestPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return MembershipRequestUtil.findWithDynamicQuery(queryInitializer,
+		return membershipRequestPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public MembershipRequest updateMembershipRequest(MembershipRequest model)
+		throws SystemException {
+		MembershipRequest membershipRequest = new MembershipRequestImpl();
+		membershipRequest.setNew(false);
+		membershipRequest.setMembershipRequestId(model.getMembershipRequestId());
+		membershipRequest.setCompanyId(model.getCompanyId());
+		membershipRequest.setUserId(model.getUserId());
+		membershipRequest.setCreateDate(model.getCreateDate());
+		membershipRequest.setGroupId(model.getGroupId());
+		membershipRequest.setComments(model.getComments());
+		membershipRequest.setReplyComments(model.getReplyComments());
+		membershipRequest.setReplyDate(model.getReplyDate());
+		membershipRequest.setReplierUserId(model.getReplierUserId());
+		membershipRequest.setStatusId(model.getStatusId());
+
+		return membershipRequestPersistence.update(membershipRequest);
 	}
 
 	public AccountLocalService getAccountLocalService() {

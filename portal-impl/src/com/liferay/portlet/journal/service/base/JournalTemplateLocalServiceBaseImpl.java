@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
@@ -92,15 +94,65 @@ import java.util.List;
  */
 public abstract class JournalTemplateLocalServiceBaseImpl
 	implements JournalTemplateLocalService, InitializingBean {
+	public JournalTemplate addJournalTemplate(JournalTemplate model)
+		throws SystemException {
+		JournalTemplate journalTemplate = new JournalTemplateImpl();
+		journalTemplate.setNew(true);
+		journalTemplate.setUuid(model.getUuid());
+		journalTemplate.setId(model.getId());
+		journalTemplate.setGroupId(model.getGroupId());
+		journalTemplate.setCompanyId(model.getCompanyId());
+		journalTemplate.setUserId(model.getUserId());
+		journalTemplate.setUserName(model.getUserName());
+		journalTemplate.setCreateDate(model.getCreateDate());
+		journalTemplate.setModifiedDate(model.getModifiedDate());
+		journalTemplate.setTemplateId(model.getTemplateId());
+		journalTemplate.setStructureId(model.getStructureId());
+		journalTemplate.setName(model.getName());
+		journalTemplate.setDescription(model.getDescription());
+		journalTemplate.setXsl(model.getXsl());
+		journalTemplate.setLangType(model.getLangType());
+		journalTemplate.setSmallImage(model.getSmallImage());
+		journalTemplate.setSmallImageId(model.getSmallImageId());
+		journalTemplate.setSmallImageURL(model.getSmallImageURL());
+
+		return journalTemplatePersistence.update(journalTemplate);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return JournalTemplateUtil.findWithDynamicQuery(queryInitializer);
+		return journalTemplatePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return JournalTemplateUtil.findWithDynamicQuery(queryInitializer,
+		return journalTemplatePersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public JournalTemplate updateJournalTemplate(JournalTemplate model)
+		throws SystemException {
+		JournalTemplate journalTemplate = new JournalTemplateImpl();
+		journalTemplate.setNew(false);
+		journalTemplate.setUuid(model.getUuid());
+		journalTemplate.setId(model.getId());
+		journalTemplate.setGroupId(model.getGroupId());
+		journalTemplate.setCompanyId(model.getCompanyId());
+		journalTemplate.setUserId(model.getUserId());
+		journalTemplate.setUserName(model.getUserName());
+		journalTemplate.setCreateDate(model.getCreateDate());
+		journalTemplate.setModifiedDate(model.getModifiedDate());
+		journalTemplate.setTemplateId(model.getTemplateId());
+		journalTemplate.setStructureId(model.getStructureId());
+		journalTemplate.setName(model.getName());
+		journalTemplate.setDescription(model.getDescription());
+		journalTemplate.setXsl(model.getXsl());
+		journalTemplate.setLangType(model.getLangType());
+		journalTemplate.setSmallImage(model.getSmallImage());
+		journalTemplate.setSmallImageId(model.getSmallImageId());
+		journalTemplate.setSmallImageURL(model.getSmallImageURL());
+
+		return journalTemplatePersistence.update(journalTemplate);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

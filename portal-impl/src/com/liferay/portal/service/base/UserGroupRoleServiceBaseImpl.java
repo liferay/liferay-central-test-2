@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service.base;
 
+import com.liferay.portal.model.UserGroupRole;
+import com.liferay.portal.model.impl.UserGroupRoleImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;

@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
+import com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory;
@@ -84,15 +86,53 @@ import java.util.List;
  */
 public abstract class SCFrameworkVersionLocalServiceBaseImpl
 	implements SCFrameworkVersionLocalService, InitializingBean {
+	public SCFrameworkVersion addSCFrameworkVersion(SCFrameworkVersion model)
+		throws SystemException {
+		SCFrameworkVersion scFrameworkVersion = new SCFrameworkVersionImpl();
+		scFrameworkVersion.setNew(true);
+		scFrameworkVersion.setFrameworkVersionId(model.getFrameworkVersionId());
+		scFrameworkVersion.setGroupId(model.getGroupId());
+		scFrameworkVersion.setCompanyId(model.getCompanyId());
+		scFrameworkVersion.setUserId(model.getUserId());
+		scFrameworkVersion.setUserName(model.getUserName());
+		scFrameworkVersion.setCreateDate(model.getCreateDate());
+		scFrameworkVersion.setModifiedDate(model.getModifiedDate());
+		scFrameworkVersion.setName(model.getName());
+		scFrameworkVersion.setUrl(model.getUrl());
+		scFrameworkVersion.setActive(model.getActive());
+		scFrameworkVersion.setPriority(model.getPriority());
+
+		return scFrameworkVersionPersistence.update(scFrameworkVersion);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return SCFrameworkVersionUtil.findWithDynamicQuery(queryInitializer);
+		return scFrameworkVersionPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return SCFrameworkVersionUtil.findWithDynamicQuery(queryInitializer,
+		return scFrameworkVersionPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
+	}
+
+	public SCFrameworkVersion updateSCFrameworkVersion(SCFrameworkVersion model)
+		throws SystemException {
+		SCFrameworkVersion scFrameworkVersion = new SCFrameworkVersionImpl();
+		scFrameworkVersion.setNew(false);
+		scFrameworkVersion.setFrameworkVersionId(model.getFrameworkVersionId());
+		scFrameworkVersion.setGroupId(model.getGroupId());
+		scFrameworkVersion.setCompanyId(model.getCompanyId());
+		scFrameworkVersion.setUserId(model.getUserId());
+		scFrameworkVersion.setUserName(model.getUserName());
+		scFrameworkVersion.setCreateDate(model.getCreateDate());
+		scFrameworkVersion.setModifiedDate(model.getModifiedDate());
+		scFrameworkVersion.setName(model.getName());
+		scFrameworkVersion.setUrl(model.getUrl());
+		scFrameworkVersion.setActive(model.getActive());
+		scFrameworkVersion.setPriority(model.getPriority());
+
+		return scFrameworkVersionPersistence.update(scFrameworkVersion);
 	}
 
 	public SCLicenseLocalService getSCLicenseLocalService() {

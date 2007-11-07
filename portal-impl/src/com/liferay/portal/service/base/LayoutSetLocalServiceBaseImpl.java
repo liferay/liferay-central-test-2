@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.impl.LayoutSetImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -263,14 +265,55 @@ import java.util.List;
  */
 public abstract class LayoutSetLocalServiceBaseImpl
 	implements LayoutSetLocalService, InitializingBean {
+	public LayoutSet addLayoutSet(LayoutSet model) throws SystemException {
+		LayoutSet layoutSet = new LayoutSetImpl();
+		layoutSet.setNew(true);
+		layoutSet.setLayoutSetId(model.getLayoutSetId());
+		layoutSet.setGroupId(model.getGroupId());
+		layoutSet.setCompanyId(model.getCompanyId());
+		layoutSet.setPrivateLayout(model.getPrivateLayout());
+		layoutSet.setLogo(model.getLogo());
+		layoutSet.setLogoId(model.getLogoId());
+		layoutSet.setThemeId(model.getThemeId());
+		layoutSet.setColorSchemeId(model.getColorSchemeId());
+		layoutSet.setWapThemeId(model.getWapThemeId());
+		layoutSet.setWapColorSchemeId(model.getWapColorSchemeId());
+		layoutSet.setCss(model.getCss());
+		layoutSet.setPageCount(model.getPageCount());
+		layoutSet.setVirtualHost(model.getVirtualHost());
+
+		return layoutSetPersistence.update(layoutSet);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return LayoutSetUtil.findWithDynamicQuery(queryInitializer);
+		return layoutSetPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return LayoutSetUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return layoutSetPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public LayoutSet updateLayoutSet(LayoutSet model) throws SystemException {
+		LayoutSet layoutSet = new LayoutSetImpl();
+		layoutSet.setNew(false);
+		layoutSet.setLayoutSetId(model.getLayoutSetId());
+		layoutSet.setGroupId(model.getGroupId());
+		layoutSet.setCompanyId(model.getCompanyId());
+		layoutSet.setPrivateLayout(model.getPrivateLayout());
+		layoutSet.setLogo(model.getLogo());
+		layoutSet.setLogoId(model.getLogoId());
+		layoutSet.setThemeId(model.getThemeId());
+		layoutSet.setColorSchemeId(model.getColorSchemeId());
+		layoutSet.setWapThemeId(model.getWapThemeId());
+		layoutSet.setWapColorSchemeId(model.getWapColorSchemeId());
+		layoutSet.setCss(model.getCss());
+		layoutSet.setPageCount(model.getPageCount());
+		layoutSet.setVirtualHost(model.getVirtualHost());
+
+		return layoutSetPersistence.update(layoutSet);
 	}
 
 	public AccountLocalService getAccountLocalService() {

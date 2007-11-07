@@ -24,6 +24,8 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.model.Release;
+import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -260,14 +262,41 @@ import java.util.List;
  */
 public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService,
 	InitializingBean {
+	public Release addRelease(Release model) throws SystemException {
+		Release release = new ReleaseImpl();
+		release.setNew(true);
+		release.setReleaseId(model.getReleaseId());
+		release.setCreateDate(model.getCreateDate());
+		release.setModifiedDate(model.getModifiedDate());
+		release.setBuildNumber(model.getBuildNumber());
+		release.setBuildDate(model.getBuildDate());
+		release.setVerified(model.getVerified());
+
+		return releasePersistence.update(release);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return ReleaseUtil.findWithDynamicQuery(queryInitializer);
+		return releasePersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return ReleaseUtil.findWithDynamicQuery(queryInitializer, begin, end);
+		return releasePersistence.findWithDynamicQuery(queryInitializer, begin,
+			end);
+	}
+
+	public Release updateRelease(Release model) throws SystemException {
+		Release release = new ReleaseImpl();
+		release.setNew(false);
+		release.setReleaseId(model.getReleaseId());
+		release.setCreateDate(model.getCreateDate());
+		release.setModifiedDate(model.getModifiedDate());
+		release.setBuildNumber(model.getBuildNumber());
+		release.setBuildDate(model.getBuildDate());
+		release.setVerified(model.getVerified());
+
+		return releasePersistence.update(release);
 	}
 
 	public AccountLocalService getAccountLocalService() {
