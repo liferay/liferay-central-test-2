@@ -322,8 +322,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 				while (itr.hasNext()) {
 					PollsVote vote = (PollsVote)itr.next();
 
-					importVote(
-						context, questionPKs, choicePKs, vote);
+					importVote(context, questionPKs, choicePKs, vote);
 				}
 			}
 
