@@ -5671,6 +5671,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createServiceBaseImpl(Entity entity, int sessionType) throws IOException {
+		List columnList = entity.getColumnList();
 		List referenceList = _mergeReferenceList(entity.getReferenceList());
 
 		StringMaker sm = new StringMaker();
@@ -5688,7 +5689,8 @@ public class ServiceBuilder {
 		}
 
 		if (entity.hasColumns()) {
-			sm.append("import " + _packagePath + ".service.persistence." + entity.getName() + "Util;");
+			sm.append("import " + _packagePath + ".model." + entity.getName() + ";");
+			sm.append("import " + _packagePath + ".model.impl." + entity.getName() + "Impl;");
 			sm.append("import com.liferay.portal.SystemException;");
 			sm.append("import com.liferay.portal.kernel.dao.DynamicQueryInitializer;");
 			sm.append("import java.util.List;");
@@ -5740,12 +5742,38 @@ public class ServiceBuilder {
 		// Methods
 
 		if ((sessionType == _LOCAL) && entity.hasColumns()) {
+			sm.append("public " + entity.getName() + " add" + entity.getName() + "(" + entity.getName() + " model) throws SystemException {");
+			sm.append(entity.getName() + " " + entity.getVarName() + " = new " + entity.getName() + "Impl();");
+			sm.append(entity.getVarName() + ".setNew(true);");
+
+			for (int i = 0; i < columnList.size(); i++) {
+				EntityColumn col = (EntityColumn)columnList.get(i);
+
+				sm.append(entity.getVarName() + ".set" + col.getMethodName() + "(model.get" + col.getMethodName() + "());");
+			}
+
+			sm.append("return " + entity.getVarName() + "Persistence.update(" + entity.getVarName() + ");");
+			sm.append("}");
+
 			sm.append("public List dynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {");
-			sm.append("return " + entity.getName() + "Util.findWithDynamicQuery(queryInitializer);");
+			sm.append("return " + entity.getVarName() + "Persistence.findWithDynamicQuery(queryInitializer);");
 			sm.append("}");
 
 			sm.append("public List dynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {");
-			sm.append("return " + entity.getName() + "Util.findWithDynamicQuery(queryInitializer, begin, end);");
+			sm.append("return " + entity.getVarName() + "Persistence.findWithDynamicQuery(queryInitializer, begin, end);");
+			sm.append("}");
+
+			sm.append("public " + entity.getName() + " update" + entity.getName() + "(" + entity.getName() + " model) throws SystemException {");
+			sm.append(entity.getName() + " " + entity.getVarName() + " = new " + entity.getName() + "Impl();");
+			sm.append(entity.getVarName() + ".setNew(false);");
+
+			for (int i = 0; i < columnList.size(); i++) {
+				EntityColumn col = (EntityColumn)columnList.get(i);
+
+				sm.append(entity.getVarName() + ".set" + col.getMethodName() + "(model.get" + col.getMethodName() + "());");
+			}
+
+			sm.append("return " + entity.getVarName() + "Persistence.update(" + entity.getVarName() + ");");
 			sm.append("}");
 		}
 
