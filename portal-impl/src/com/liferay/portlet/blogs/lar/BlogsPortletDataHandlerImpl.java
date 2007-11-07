@@ -256,9 +256,9 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				}
 				else {
 					TagsAssetLocalServiceUtil.updateAsset(
-							entry.getUserId(), entry.getGroupId(),
-							BlogsEntry.class.getName(), entry.getPrimaryKey(),
-							tagsEntries);
+						entry.getUserId(), entry.getGroupId(),
+						BlogsEntry.class.getName(), entry.getPrimaryKey(),
+						tagsEntries);
 
 					BlogsEntryUtil.update(entry, true);
 				}
