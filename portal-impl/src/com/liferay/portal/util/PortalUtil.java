@@ -1948,7 +1948,7 @@ public class PortalUtil {
 		}
 
 		if (_portalLibDir.startsWith("file:/")) {
-			_portalLibDir = _portalLibDir.substring(6, _portalLibDir.length());
+			_portalLibDir = _portalLibDir.substring(5, _portalLibDir.length());
 		}
 
 		if (_log.isInfoEnabled()) {
