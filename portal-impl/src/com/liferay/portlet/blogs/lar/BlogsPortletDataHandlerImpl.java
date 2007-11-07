@@ -95,7 +95,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean exportData = MapUtil.getBoolean(
-			parameterMap, _EXPORT_BLOGS_DATA, _enableExport.getDefaultState());
+			parameterMap, _EXPORT_BLOGS_DATA);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -167,8 +167,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 					if (context.addPrimaryKey(
 							BlogsStatsUser.class,
-							statsUser.getPrimaryKeyObj())
-						) {
+							statsUser.getPrimaryKeyObj())) {
 
 						itr.remove();
 					}
@@ -282,9 +281,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, boolean mergeData, BlogsEntry entry)
 		throws Exception {
 
-		String[] tagsEntries = context.getTagsEntries(
-			BlogsEntry.class, entry.getPrimaryKeyObj());
-
 		long plid = context.getPlid();
 
 		Calendar displayDateCal = CalendarFactoryUtil.getCalendar();
@@ -298,6 +294,9 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		int displayDateMinute = displayDateCal.get(Calendar.MINUTE);
 
 		ThemeDisplay themeDisplay = null;
+		String[] tagsEntries = context.getTagsEntries(
+			BlogsEntry.class, entry.getPrimaryKeyObj());
+
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
