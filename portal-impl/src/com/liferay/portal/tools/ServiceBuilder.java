@@ -5671,7 +5671,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createServiceBaseImpl(Entity entity, int sessionType) throws IOException {
-		List columnList = entity.getColumnList();
+		List regularColList = entity.getRegularColList();
 		List referenceList = _mergeReferenceList(entity.getReferenceList());
 
 		StringMaker sm = new StringMaker();
@@ -5746,8 +5746,8 @@ public class ServiceBuilder {
 			sm.append(entity.getName() + " " + entity.getVarName() + " = new " + entity.getName() + "Impl();");
 			sm.append(entity.getVarName() + ".setNew(true);");
 
-			for (int i = 0; i < columnList.size(); i++) {
-				EntityColumn col = (EntityColumn)columnList.get(i);
+			for (int i = 0; i < regularColList.size(); i++) {
+				EntityColumn col = (EntityColumn)regularColList.get(i);
 
 				sm.append(entity.getVarName() + ".set" + col.getMethodName() + "(model.get" + col.getMethodName() + "());");
 			}
@@ -5767,8 +5767,8 @@ public class ServiceBuilder {
 			sm.append(entity.getName() + " " + entity.getVarName() + " = new " + entity.getName() + "Impl();");
 			sm.append(entity.getVarName() + ".setNew(false);");
 
-			for (int i = 0; i < columnList.size(); i++) {
-				EntityColumn col = (EntityColumn)columnList.get(i);
+			for (int i = 0; i < regularColList.size(); i++) {
+				EntityColumn col = (EntityColumn)regularColList.get(i);
 
 				sm.append(entity.getVarName() + ".set" + col.getMethodName() + "(model.get" + col.getMethodName() + "());");
 			}
