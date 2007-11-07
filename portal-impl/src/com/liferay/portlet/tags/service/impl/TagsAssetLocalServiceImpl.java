@@ -352,6 +352,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			BooleanQuery searchQuery = new BooleanQuery();
 
 			if (Validator.isNotNull(keywords)) {
+				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
 				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
 			}
 

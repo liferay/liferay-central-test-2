@@ -522,6 +522,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 			BooleanQuery searchQuery = new BooleanQuery();
 
+			LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
 			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
 
 			BooleanQuery fullQuery = new BooleanQuery();

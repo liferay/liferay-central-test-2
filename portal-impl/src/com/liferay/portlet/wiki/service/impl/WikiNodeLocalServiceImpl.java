@@ -337,6 +337,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 			BooleanQuery searchQuery = new BooleanQuery();
 
+			LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
 			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
 
 			BooleanQuery fullQuery = new BooleanQuery();
