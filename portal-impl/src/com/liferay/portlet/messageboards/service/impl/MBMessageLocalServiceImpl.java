@@ -288,6 +288,21 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setRootMessageId(messageId);
 		}
 
+		thread.setMessageCount(thread.getMessageCount() + 1);
+
+		if (anonymous) {
+			thread.setLastPostByUserId(0);
+		}
+		else {
+			thread.setLastPostByUserId(userId);
+		}
+
+		thread.setLastPostDate(now);
+
+		if (priority != MBThreadImpl.PRIORITY_NOT_GIVEN) {
+			thread.setPriority(priority);
+		}
+
 		logAddMessage(messageId, stopWatch, 2);
 
 		// Message
@@ -338,23 +353,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			catch (RemoteException re) {
 				throw new SystemException(re);
 			}
-		}
-
-		// Thread
-
-		thread.setMessageCount(thread.getMessageCount() + 1);
-
-		if (anonymous) {
-			thread.setLastPostByUserId(0);
-		}
-		else {
-			thread.setLastPostByUserId(userId);
-		}
-
-		thread.setLastPostDate(now);
-
-		if (priority != MBThreadImpl.PRIORITY_NOT_GIVEN) {
-			thread.setPriority(priority);
 		}
 
 		logAddMessage(messageId, stopWatch, 3);
