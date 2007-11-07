@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 
+import java.io.File;
 import java.io.InputStream;
 
 /**
@@ -69,6 +70,11 @@ public interface DLLocalService {
 			String fileName, double versionNumber, String sourceFileName,
 			String properties, InputStream is)
 		throws PortalException, SystemException;
+
+	public void validate(String fileName, byte[] byteArray)
+		throws PortalException;
+
+	public void validate(String fileName, File file) throws PortalException;
 
 	public void validate(String fileName, InputStream is)
 		throws PortalException;

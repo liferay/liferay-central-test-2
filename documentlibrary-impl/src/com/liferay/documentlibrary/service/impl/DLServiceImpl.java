@@ -23,7 +23,7 @@
 package com.liferay.documentlibrary.service.impl;
 
 import com.liferay.documentlibrary.DirectoryNameException;
-import com.liferay.documentlibrary.FileSizeException;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLService;
 import com.liferay.documentlibrary.util.Hook;
 import com.liferay.documentlibrary.util.HookFactory;
@@ -31,8 +31,6 @@ import com.liferay.documentlibrary.util.Indexer;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.PropsUtil;
 
 import java.io.File;
 
@@ -50,9 +48,6 @@ public class DLServiceImpl implements DLService {
 	public static final String[] GROUP_NAME_ARRAY = new String[] { GROUP_NAME };
 
 	public static final String VERSION = "_VERSION_";
-
-	public static final long FILE_MAX_SIZE = GetterUtil.getLong(
-		PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE));
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
@@ -85,11 +80,7 @@ public class DLServiceImpl implements DLService {
 			String fileName, String properties, File file)
 		throws PortalException, SystemException {
 
-		if ((FILE_MAX_SIZE > 0) &&
-			((file == null) || (file.length() > FILE_MAX_SIZE))) {
-
-			throw new FileSizeException(fileName);
-		}
+		DLLocalServiceUtil.validate(fileName, file);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -103,11 +94,7 @@ public class DLServiceImpl implements DLService {
 			String fileName, String properties, byte[] byteArray)
 		throws PortalException, SystemException {
 
-		if ((FILE_MAX_SIZE > 0) &&
-			((byteArray == null) || (byteArray.length > FILE_MAX_SIZE))) {
-
-			throw new FileSizeException(fileName);
-		}
+		DLLocalServiceUtil.validate(fileName, byteArray);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -199,11 +186,7 @@ public class DLServiceImpl implements DLService {
 			String properties, File file)
 		throws PortalException, SystemException {
 
-		if ((FILE_MAX_SIZE > 0) &&
-			((file == null) || (file.length() > FILE_MAX_SIZE))) {
-
-			throw new FileSizeException(fileName);
-		}
+		DLLocalServiceUtil.validate(fileName, file);
 
 		Hook hook = HookFactory.getInstance();
 
@@ -218,11 +201,7 @@ public class DLServiceImpl implements DLService {
 			String properties, byte[] byteArray)
 		throws PortalException, SystemException {
 
-		if ((FILE_MAX_SIZE > 0) &&
-			((byteArray == null) || (byteArray.length > FILE_MAX_SIZE))) {
-
-			throw new FileSizeException(fileName);
-		}
+		DLLocalServiceUtil.validate(fileName, byteArray);
 
 		Hook hook = HookFactory.getInstance();
 

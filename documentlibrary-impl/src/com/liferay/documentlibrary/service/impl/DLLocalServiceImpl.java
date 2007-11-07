@@ -31,6 +31,7 @@ import com.liferay.documentlibrary.util.HookFactory;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -39,6 +40,7 @@ import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.lucene.HitsImpl;
 
+import java.io.File;
 import java.io.InputStream;
 
 import org.apache.lucene.index.Term;
@@ -54,6 +56,9 @@ import org.apache.lucene.search.TermQuery;
  *
  */
 public class DLLocalServiceImpl implements DLLocalService {
+
+	public static final long FILE_MAX_SIZE = GetterUtil.getLong(
+		PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE));
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
@@ -186,9 +191,39 @@ public class DLLocalServiceImpl implements DLLocalService {
 			versionNumber, sourceFileName, properties, is);
 	}
 
+	public void validate(String fileName, byte[] byteArray)
+		throws PortalException {
+
+		validate(fileName);
+
+		if ((FILE_MAX_SIZE > 0) &&
+			((byteArray == null) || (byteArray.length > FILE_MAX_SIZE))) {
+
+			throw new FileSizeException(fileName);
+		}
+	}
+
+	public void validate(String fileName, File file) throws PortalException {
+		validate(fileName);
+
+		if ((FILE_MAX_SIZE > 0) &&
+			((file == null) || (file.length() > FILE_MAX_SIZE))) {
+
+			throw new FileSizeException(fileName);
+		}
+	}
+
 	public void validate(String fileName, InputStream is)
 		throws PortalException {
 
+		validate(fileName);
+
+		if (is == null) {
+			throw new FileSizeException(fileName);
+		}
+	}
+
+	public void validate(String fileName) throws PortalException {
 		if ((fileName.indexOf("\\\\") != -1) ||
 			(fileName.indexOf("//") != -1) ||
 			(fileName.indexOf(":") != -1) ||
@@ -223,10 +258,6 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		if (!validFileExtension) {
 			throw new FileNameException(fileName);
-		}
-
-		if (is == null) {
-			throw new FileSizeException(fileName);
 		}
 	}
 
