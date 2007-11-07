@@ -26,8 +26,11 @@ import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
@@ -192,6 +195,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		long userId = themeDisplay.getUserId();
+
 		String[] entries = StringUtil.split(
 			ParamUtil.getString(req, "entries"));
 		String[] notEntries = StringUtil.split(
@@ -233,6 +241,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
 		prefs.setValue("metadata-fields", medatadaFields);
+
+		TagsEntryLocalServiceUtil.checkEntries(userId, entries);
+		TagsEntryLocalServiceUtil.checkEntries(userId, notEntries);
 	}
 
 	protected void updateManualSettings(

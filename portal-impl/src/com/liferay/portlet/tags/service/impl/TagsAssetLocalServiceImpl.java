@@ -517,17 +517,12 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 				user.getCompanyId(), name);
 
 			if (entry == null) {
-				String defaultProperties = "0:category:no category";
-
-				TagsEntry newTagsEntry = tagsEntryLocalService.addEntry(
+				entry = tagsEntryLocalService.addEntry(
 					user.getUserId(), entryNames[i],
-					new String[] {defaultProperties});
+					TagsEntryLocalServiceImpl.DEFAULT_PROPERTIES);
+			}
 
-				entries.add(newTagsEntry);
-			}
-			else {
-				entries.add(entry);
-			}
+			entries.add(entry);
 		}
 
 		tagsAssetPersistence.setTagsEntries(asset.getAssetId(), entries);

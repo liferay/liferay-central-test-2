@@ -55,6 +55,10 @@ import java.util.Set;
  */
 public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
+	public static String[] DEFAULT_PROPERTIES = new String[] {
+		"0:category:no category"
+	};
+
 	public TagsEntry addEntry(long userId, String name)
 		throws PortalException, SystemException {
 
@@ -112,6 +116,23 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		return entry;
 
+	}
+
+	public void checkEntries(long userId, String[] names)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		for (int i = 0; i < names.length; i++) {
+			String name = names[i].trim().toLowerCase();
+
+			TagsEntry entry = tagsEntryPersistence.fetchByC_N(
+				user.getCompanyId(), name);
+
+			if (entry == null) {
+				addEntry(userId, names[i], DEFAULT_PROPERTIES);
+			}
+		}
 	}
 
 	public void deleteEntry(long entryId)

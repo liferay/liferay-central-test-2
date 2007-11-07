@@ -224,6 +224,13 @@ public class TagsEntryLocalServiceUtil {
 		return tagsEntryLocalService.addEntry(userId, name, properties);
 	}
 
+	public static void checkEntries(long userId, java.lang.String[] names)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+		tagsEntryLocalService.checkEntries(userId, names);
+	}
+
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -330,7 +330,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 							html += '</div>';
 
 							if (entries.length == 0) {
-								html += 'no-tags-found';
+								html += Liferay.Language.get('no-tags-found');
 							}
 
 							searchResultsDiv.html(html);
