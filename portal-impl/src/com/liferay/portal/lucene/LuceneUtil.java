@@ -382,6 +382,17 @@ public class LuceneUtil {
 	private void _deleteFile(long companyId) {
 		String path = _getPath(companyId);
 
+		try {
+			Directory directory = FSDirectory.getDirectory(path, false);
+
+			directory.close();
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Could not close directory " + path);
+			}
+		}
+
 		FileUtil.deltree(path);
 	}
 
