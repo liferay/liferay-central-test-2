@@ -506,7 +506,7 @@ public class SCProductEntryLocalServiceImpl
 			if (Validator.isNotNull(type)) {
 				BooleanQuery searchQuery = new BooleanQuery();
 
-				LuceneUtil.addExactTerm(searchQuery, "type", type);
+				LuceneUtil.addRequiredTerm(searchQuery, "type", type);
 
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}

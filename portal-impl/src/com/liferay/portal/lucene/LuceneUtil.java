@@ -104,7 +104,7 @@ public class LuceneUtil {
 			BooleanQuery booleanQuery, String field, String text)
 		throws ParseException {
 
-		text = KeywordsUtil.escape(text);
+		//text = KeywordsUtil.escape(text);
 
 		Query query = new TermQuery(new Term(field, text));
 
@@ -173,7 +173,7 @@ public class LuceneUtil {
 	public static void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, String text) {
 
-		text = KeywordsUtil.escape(text);
+		//text = KeywordsUtil.escape(text);
 
 		Term term = new Term(field, text);
 		TermQuery termQuery = new TermQuery(term);
