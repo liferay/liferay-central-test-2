@@ -308,10 +308,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			resourceLocalService.deleteResource(resource);
 		}
 
-		String className = PortalUtil.getClassName(group.getClassNameId());
+		long organizationClassNameId = PortalUtil.getClassNameId(
+			Organization.class.getName());
 
 		if (((group.getClassNameId() <= 0) && (group.getClassPK() <= 0)) ||
-			(className.equals(Organization.class.getName()))) {
+			(group.getClassNameId() == organizationClassNameId)) {
 
 			resourceLocalService.deleteResource(
 				group.getCompanyId(), Group.class.getName(),
