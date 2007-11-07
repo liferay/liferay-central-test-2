@@ -398,6 +398,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		if (image == null) {
 			_log.error(
 				"Could not find image for IG image " + igImage.getImageId());
+
 			return;
 		}
 		else {
