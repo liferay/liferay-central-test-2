@@ -968,6 +968,9 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							String name = ParamUtil.getString(request, "name");
 							String type = ParamUtil.getString(request, "type");
 							boolean hidden = ParamUtil.getBoolean(request, "hidden");
+							
+							Locale defaultLocale = LocaleUtil.getDefault();
+							String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 							%>
 
 							<liferay-ui:message key="add-child-pages" />
@@ -980,7 +983,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<liferay-ui:message key="name" />
 								</td>
 								<td>
-									<input name="<portlet:namespace />name" size="30" type="text" value="<%= name %>" />
+									<input name="<portlet:namespace />name_<%= defaultLanguageId %>" size="30" type="text" value="<%= name %>" />
 								</td>
 							</tr>
 							<tr>
@@ -1036,7 +1039,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 							<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 								<script type="text/javascript">
-									Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
+									Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name_<%= defaultLanguageId %>);
 								</script>
 							</c:if>
 						</c:when>
