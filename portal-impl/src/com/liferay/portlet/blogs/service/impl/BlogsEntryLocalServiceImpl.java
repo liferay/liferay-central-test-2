@@ -87,7 +87,22 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addEntry(
-			userId, plid, categoryId, title, content, displayDateMonth,
+			null, userId, plid, categoryId, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			themeDisplay, tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public BlogsEntry addEntry(
+			String uuid, long userId, long plid, long categoryId, String title,
+			String content, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			ThemeDisplay themeDisplay, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addEntry(
+			uuid, userId, plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			themeDisplay, tagsEntries, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
@@ -102,14 +117,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addEntry(
-			userId, plid, categoryId, title, content, displayDateMonth,
+			null, userId, plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			themeDisplay, tagsEntries, null, null, communityPermissions,
 			guestPermissions);
 	}
 
 	public BlogsEntry addEntry(
-			long userId, long plid, long categoryId, String title,
+			String uuid, long userId, long plid, long categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			ThemeDisplay themeDisplay, String[] tagsEntries,
@@ -135,6 +150,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		BlogsEntry entry = blogsEntryPersistence.create(entryId);
 
+		entry.setUuid(uuid);
 		entry.setGroupId(groupId);
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());

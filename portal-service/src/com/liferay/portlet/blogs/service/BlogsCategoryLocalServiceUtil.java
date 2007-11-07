@@ -49,14 +49,6 @@ package com.liferay.portlet.blogs.service;
  *
  */
 public class BlogsCategoryLocalServiceUtil {
-	public static com.liferay.portlet.blogs.model.BlogsCategory addBlogsCategory(
-		com.liferay.portlet.blogs.model.BlogsCategory model)
-		throws com.liferay.portal.SystemException {
-		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
-
-		return blogsCategoryLocalService.addBlogsCategory(model);
-	}
-
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -72,14 +64,6 @@ public class BlogsCategoryLocalServiceUtil {
 
 		return blogsCategoryLocalService.dynamicQuery(queryInitializer, begin,
 			end);
-	}
-
-	public static com.liferay.portlet.blogs.model.BlogsCategory updateBlogsCategory(
-		com.liferay.portlet.blogs.model.BlogsCategory model)
-		throws com.liferay.portal.SystemException {
-		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
-
-		return blogsCategoryLocalService.updateBlogsCategory(model);
 	}
 
 	public static com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence getBlogsCategoryPersistence() {

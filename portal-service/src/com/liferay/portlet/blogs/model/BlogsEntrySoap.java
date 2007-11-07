@@ -48,6 +48,7 @@ import java.util.List;
 public class BlogsEntrySoap implements Serializable {
 	public static BlogsEntrySoap toSoapModel(BlogsEntry model) {
 		BlogsEntrySoap soapModel = new BlogsEntrySoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setEntryId(model.getEntryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -84,6 +85,14 @@ public class BlogsEntrySoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setEntryId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getEntryId() {
@@ -182,6 +191,7 @@ public class BlogsEntrySoap implements Serializable {
 		_displayDate = displayDate;
 	}
 
+	private String _uuid;
 	private long _entryId;
 	private long _groupId;
 	private long _companyId;

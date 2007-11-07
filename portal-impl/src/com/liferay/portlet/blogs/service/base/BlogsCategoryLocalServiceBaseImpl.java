@@ -46,8 +46,6 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
-import com.liferay.portlet.blogs.model.BlogsCategory;
-import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory;
@@ -78,49 +76,15 @@ import java.util.List;
  */
 public abstract class BlogsCategoryLocalServiceBaseImpl
 	implements BlogsCategoryLocalService, InitializingBean {
-	public BlogsCategory addBlogsCategory(BlogsCategory model)
-		throws SystemException {
-		BlogsCategory blogsCategory = new BlogsCategoryImpl();
-		blogsCategory.setNew(true);
-		blogsCategory.setCategoryId(model.getCategoryId());
-		blogsCategory.setCompanyId(model.getCompanyId());
-		blogsCategory.setUserId(model.getUserId());
-		blogsCategory.setUserName(model.getUserName());
-		blogsCategory.setCreateDate(model.getCreateDate());
-		blogsCategory.setModifiedDate(model.getModifiedDate());
-		blogsCategory.setParentCategoryId(model.getParentCategoryId());
-		blogsCategory.setName(model.getName());
-		blogsCategory.setDescription(model.getDescription());
-
-		return blogsCategoryPersistence.update(blogsCategory);
-	}
-
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return blogsCategoryPersistence.findWithDynamicQuery(queryInitializer);
+		return BlogsCategoryUtil.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return blogsCategoryPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
-	}
-
-	public BlogsCategory updateBlogsCategory(BlogsCategory model)
-		throws SystemException {
-		BlogsCategory blogsCategory = new BlogsCategoryImpl();
-		blogsCategory.setNew(false);
-		blogsCategory.setCategoryId(model.getCategoryId());
-		blogsCategory.setCompanyId(model.getCompanyId());
-		blogsCategory.setUserId(model.getUserId());
-		blogsCategory.setUserName(model.getUserName());
-		blogsCategory.setCreateDate(model.getCreateDate());
-		blogsCategory.setModifiedDate(model.getModifiedDate());
-		blogsCategory.setParentCategoryId(model.getParentCategoryId());
-		blogsCategory.setName(model.getName());
-		blogsCategory.setDescription(model.getDescription());
-
-		return blogsCategoryPersistence.update(blogsCategory);
+		return BlogsCategoryUtil.findWithDynamicQuery(queryInitializer, begin,
+			end);
 	}
 
 	public BlogsCategoryPersistence getBlogsCategoryPersistence() {

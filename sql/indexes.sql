@@ -13,6 +13,8 @@ create index IX_8CACE77B on BlogsEntry (companyId, userId);
 create index IX_81A50303 on BlogsEntry (groupId);
 create index IX_DB780A20 on BlogsEntry (groupId, urlTitle);
 create index IX_C07CA83D on BlogsEntry (groupId, userId);
+create index IX_69157A4D on BlogsEntry (uuid_);
+create index IX_1B1040FD on BlogsEntry (uuid_, groupId);
 
 create index IX_90CDA39A on BlogsStatsUser (companyId, entryCount);
 create index IX_43840EEB on BlogsStatsUser (groupId);

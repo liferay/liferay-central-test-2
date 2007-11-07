@@ -572,6 +572,7 @@
 		</field>
 	</model>
 	<model name="com.liferay.portlet.blogs.model.BlogsEntry">
+		<field name="uuid" type="String" />
 		<field name="entryId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />

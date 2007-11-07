@@ -51,6 +51,7 @@ create table BlogsCategory (
 );
 
 create table BlogsEntry (
+	uuid_ VARCHAR(75) null,
 	entryId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,

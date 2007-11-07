@@ -41,7 +41,7 @@
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
-	<entity name="BlogsEntry" local-service="true" remote-service="true">
+	<entity name="BlogsEntry" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

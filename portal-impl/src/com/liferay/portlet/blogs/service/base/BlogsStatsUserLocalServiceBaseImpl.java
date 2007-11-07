@@ -38,8 +38,6 @@ import com.liferay.portal.service.persistence.GroupFinderUtil;
 import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.GroupUtil;
 
-import com.liferay.portlet.blogs.model.BlogsStatsUser;
-import com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceFactory;
 import com.liferay.portlet.blogs.service.BlogsCategoryService;
@@ -72,49 +70,15 @@ import java.util.List;
  */
 public abstract class BlogsStatsUserLocalServiceBaseImpl
 	implements BlogsStatsUserLocalService, InitializingBean {
-	public BlogsStatsUser addBlogsStatsUser(BlogsStatsUser model)
-		throws SystemException {
-		BlogsStatsUser blogsStatsUser = new BlogsStatsUserImpl();
-		blogsStatsUser.setNew(true);
-		blogsStatsUser.setStatsUserId(model.getStatsUserId());
-		blogsStatsUser.setGroupId(model.getGroupId());
-		blogsStatsUser.setCompanyId(model.getCompanyId());
-		blogsStatsUser.setUserId(model.getUserId());
-		blogsStatsUser.setEntryCount(model.getEntryCount());
-		blogsStatsUser.setLastPostDate(model.getLastPostDate());
-		blogsStatsUser.setRatingsTotalEntries(model.getRatingsTotalEntries());
-		blogsStatsUser.setRatingsTotalScore(model.getRatingsTotalScore());
-		blogsStatsUser.setRatingsAverageScore(model.getRatingsAverageScore());
-
-		return blogsStatsUserPersistence.update(blogsStatsUser);
-	}
-
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return blogsStatsUserPersistence.findWithDynamicQuery(queryInitializer);
+		return BlogsStatsUserUtil.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return blogsStatsUserPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
-	}
-
-	public BlogsStatsUser updateBlogsStatsUser(BlogsStatsUser model)
-		throws SystemException {
-		BlogsStatsUser blogsStatsUser = new BlogsStatsUserImpl();
-		blogsStatsUser.setNew(false);
-		blogsStatsUser.setStatsUserId(model.getStatsUserId());
-		blogsStatsUser.setGroupId(model.getGroupId());
-		blogsStatsUser.setCompanyId(model.getCompanyId());
-		blogsStatsUser.setUserId(model.getUserId());
-		blogsStatsUser.setEntryCount(model.getEntryCount());
-		blogsStatsUser.setLastPostDate(model.getLastPostDate());
-		blogsStatsUser.setRatingsTotalEntries(model.getRatingsTotalEntries());
-		blogsStatsUser.setRatingsTotalScore(model.getRatingsTotalScore());
-		blogsStatsUser.setRatingsAverageScore(model.getRatingsAverageScore());
-
-		return blogsStatsUserPersistence.update(blogsStatsUser);
+		return BlogsStatsUserUtil.findWithDynamicQuery(queryInitializer, begin,
+			end);
 	}
 
 	public BlogsCategoryLocalService getBlogsCategoryLocalService() {

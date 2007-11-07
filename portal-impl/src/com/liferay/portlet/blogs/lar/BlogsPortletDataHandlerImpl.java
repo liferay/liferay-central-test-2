@@ -22,12 +22,15 @@
 
 package com.liferay.portlet.blogs.lar;
 
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -37,7 +40,6 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -45,6 +47,7 @@ import com.thoughtworks.xstream.XStream;
 
 import java.io.StringReader;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -71,13 +74,17 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {_enableExport};
+		return new PortletDataHandlerControl[] {
+			_enableExport, _enableStatsExport
+		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] {_enableImport};
+		return new PortletDataHandlerControl[] {
+			_enableImport, _enableStatsImport
+		};
 	}
 
 	public String exportData(
@@ -102,6 +109,9 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		if (!exportData) {
 			return null;
 		}
+
+		boolean exportStats = MapUtil.getBoolean(
+			parameterMap, _EXPORT_BLOGS_STATS);
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
@@ -144,18 +154,24 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Stats users
 
-			List statsUsers = BlogsStatsUserUtil.findByGroupId(
-				context.getGroupId());
+			List statsUsers = new ArrayList();
 
-			itr = statsUsers.iterator();
+			if (exportStats) {
+				statsUsers = BlogsStatsUserUtil.findByGroupId(
+					context.getGroupId());
 
-			while (itr.hasNext()) {
-				BlogsStatsUser statsUser = (BlogsStatsUser)itr.next();
+				itr = statsUsers.iterator();
 
-				if (context.addPrimaryKey(
-						BlogsStatsUser.class, statsUser.getPrimaryKeyObj())) {
+				while (itr.hasNext()) {
+					BlogsStatsUser statsUser = (BlogsStatsUser)itr.next();
 
-					itr.remove();
+					if (context.addPrimaryKey(
+							BlogsStatsUser.class,
+							statsUser.getPrimaryKeyObj())
+						) {
+
+						itr.remove();
+					}
 				}
 			}
 
@@ -197,6 +213,12 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			return null;
 		}
 
+		boolean mergeData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
+
+		boolean importStats = MapUtil.getBoolean(
+			parameterMap, _IMPORT_BLOGS_STATS);
+
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -222,79 +244,27 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				BlogsEntry entry = (BlogsEntry)itr.next();
 
-				String[] tagsEntries = context.getTagsEntries(
-					BlogsEntry.class, entry.getPrimaryKeyObj());
-
-				BlogsEntry existingEntry = BlogsEntryUtil.fetchByPrimaryKey(
-					entry.getPrimaryKey());
-
-				if ((existingEntry == null) ||
-					(existingEntry.getGroupId() != context.getGroupId())) {
-
-					long plid = context.getPlid();
-
-					Calendar displayDateCal = CalendarFactoryUtil.getCalendar();
-
-					displayDateCal.setTime(entry.getDisplayDate());
-
-					int displayDateMonth = displayDateCal.get(Calendar.MONTH);
-					int displayDateDay = displayDateCal.get(Calendar.DATE);
-					int displayDateYear = displayDateCal.get(Calendar.YEAR);
-					int displayDateHour = displayDateCal.get(Calendar.HOUR);
-					int displayDateMinute = displayDateCal.get(Calendar.MINUTE);
-
-					ThemeDisplay themeDisplay = null;
-					boolean addCommunityPermissions = true;
-					boolean addGuestPermissions = true;
-
-					BlogsEntryLocalServiceUtil.addEntry(
-						entry.getUserId(), plid, entry.getCategoryId(),
-						entry.getTitle(), entry.getContent(), displayDateMonth,
-						displayDateDay, displayDateYear, displayDateHour,
-						displayDateMinute, themeDisplay, tagsEntries,
-						addCommunityPermissions, addGuestPermissions);
-				}
-				else {
-					TagsAssetLocalServiceUtil.updateAsset(
-						entry.getUserId(), entry.getGroupId(),
-						BlogsEntry.class.getName(), entry.getPrimaryKey(),
-						tagsEntries);
-
-					BlogsEntryUtil.update(entry, true);
-				}
+				importEntry(context, mergeData, entry);
 			}
 
 			// Stats users
 
-			el = root.element("blog-stats-users").element("list");
+			if (importStats) {
+				el = root.element("blog-stats-users").element("list");
 
-			tempDoc = DocumentHelper.createDocument();
+				tempDoc = DocumentHelper.createDocument();
 
-			tempDoc.content().add(el.createCopy());
+				tempDoc.content().add(el.createCopy());
 
-			List statsUsers = (List) xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+				List statsUsers = (List) xStream.fromXML(
+					XMLFormatter.toString(tempDoc));
 
-			itr = statsUsers.iterator();
+				itr = statsUsers.iterator();
 
-			while (itr.hasNext()) {
-				BlogsStatsUser statsUser = (BlogsStatsUser)itr.next();
+				while (itr.hasNext()) {
+					BlogsStatsUser statsUser = (BlogsStatsUser)itr.next();
 
-				BlogsStatsUser existingStatsUser =
-					BlogsStatsUserUtil.fetchByPrimaryKey(
-						statsUser.getPrimaryKey());
-
-				if ((existingStatsUser == null) ||
-					(existingStatsUser.getGroupId() != context.getGroupId())) {
-
-					long groupId = context.getGroupId();
-
-					BlogsStatsUserLocalServiceUtil.updateStatsUser(
-						groupId, statsUser.getUserId(),
-						statsUser.getLastPostDate());
-				}
-				else {
-					BlogsStatsUserUtil.update(statsUser, true);
+					importStatsUser(context, statsUser);
 				}
 			}
 
@@ -308,17 +278,104 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	protected void importEntry(
+			PortletDataContext context, boolean mergeData, BlogsEntry entry)
+		throws Exception {
+
+		String[] tagsEntries = context.getTagsEntries(
+			BlogsEntry.class, entry.getPrimaryKeyObj());
+
+		long plid = context.getPlid();
+
+		Calendar displayDateCal = CalendarFactoryUtil.getCalendar();
+
+		displayDateCal.setTime(entry.getDisplayDate());
+
+		int displayDateMonth = displayDateCal.get(Calendar.MONTH);
+		int displayDateDay = displayDateCal.get(Calendar.DATE);
+		int displayDateYear = displayDateCal.get(Calendar.YEAR);
+		int displayDateHour = displayDateCal.get(Calendar.HOUR);
+		int displayDateMinute = displayDateCal.get(Calendar.MINUTE);
+
+		ThemeDisplay themeDisplay = null;
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		BlogsEntry existingEntry = null;
+
+		if (mergeData) {
+			existingEntry = BlogsEntryUtil.fetchByUUID_G(
+				entry.getUuid(), context.getGroupId());
+
+			if (existingEntry == null) {
+				BlogsEntryLocalServiceUtil.addEntry(
+					entry.getUuid(), entry.getUserId(), plid,
+					entry.getCategoryId(), entry.getTitle(), entry.getContent(),
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, themeDisplay,
+					tagsEntries, addCommunityPermissions, addGuestPermissions);
+			}
+			else {
+				BlogsEntryLocalServiceUtil.updateEntry(
+					entry.getUserId(), existingEntry.getEntryId(),
+					entry.getCategoryId(), entry.getTitle(), entry.getContent(),
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, themeDisplay,
+					tagsEntries);
+			}
+		}
+		else {
+			BlogsEntryLocalServiceUtil.addEntry(
+				entry.getUserId(), plid, entry.getCategoryId(),
+				entry.getTitle(), entry.getContent(), displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, themeDisplay, tagsEntries,
+				addCommunityPermissions, addGuestPermissions);
+		}
+	}
+
+	protected void importStatsUser(
+			PortletDataContext context, BlogsStatsUser statsUser)
+		throws Exception {
+
+		try {
+			UserUtil.findByPrimaryKey(statsUser.getUserId());
+
+			long groupId = context.getGroupId();
+
+			BlogsStatsUserLocalServiceUtil.updateStatsUser(
+				groupId, statsUser.getUserId(), statsUser.getLastPostDate());
+		}
+		catch (NoSuchUserException nsue) {
+			_log.error(
+				"Could not find the user for stats " +
+					statsUser.getStatsUserId());
+		}
+	}
+
 	private static final String _EXPORT_BLOGS_DATA =
 		"export-" + PortletKeys.BLOGS + "-data";
 
 	private static final String _IMPORT_BLOGS_DATA =
 		"import-" + PortletKeys.BLOGS + "-data";
 
+	private static final String _EXPORT_BLOGS_STATS =
+		"export-" + PortletKeys.BLOGS + "-stats";
+
+	private static final String _IMPORT_BLOGS_STATS =
+		"import-" + PortletKeys.BLOGS + "-stats";
+
 	private static final PortletDataHandlerBoolean _enableExport =
 		new PortletDataHandlerBoolean(_EXPORT_BLOGS_DATA, true, null);
 
 	private static final PortletDataHandlerBoolean _enableImport =
 		new PortletDataHandlerBoolean(_IMPORT_BLOGS_DATA, true, null);
+
+	private static final PortletDataHandlerBoolean _enableStatsExport =
+		new PortletDataHandlerBoolean(_EXPORT_BLOGS_STATS, true, null);
+
+	private static final PortletDataHandlerBoolean _enableStatsImport =
+		new PortletDataHandlerBoolean(_IMPORT_BLOGS_STATS, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(BlogsPortletDataHandlerImpl.class);
