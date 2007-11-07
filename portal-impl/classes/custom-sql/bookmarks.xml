@@ -70,6 +70,20 @@
 				))
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.findByUuid_G">
+		<![CDATA[
+			SELECT
+				DISTINCT {BookmarksEntry.*}
+			FROM
+				BookmarksEntry
+			INNER JOIN
+				BookmarksFolder ON
+					(BookmarksFolder.folderId = BookmarksEntry.folderId)
+			WHERE
+				(BookmarksEntry.uuid_ = ?) AND
+				(BookmarksFolder.groupId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.findByG_U">
 		<![CDATA[
 			SELECT
@@ -84,20 +98,6 @@
 				(BookmarksEntry.userId = ?)
 			ORDER BY
 				BookmarksEntry.modifiedDate DESC
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.findByUuid_G">
-		<![CDATA[
-			SELECT
-				DISTINCT {BookmarksEntry.*}
-			FROM
-				BookmarksEntry
-			INNER JOIN
-				BookmarksFolder ON
-					(BookmarksFolder.folderId = BookmarksEntry.folderId)
-			WHERE
-				(BookmarksEntry.uuid_ = ?) AND
-				(BookmarksFolder.groupId = ?)
 		]]>
 	</sql>
 </custom-sql>

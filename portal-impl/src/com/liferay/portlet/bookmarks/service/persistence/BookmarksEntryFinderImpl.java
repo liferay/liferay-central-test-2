@@ -234,35 +234,6 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		}
 	}
 
-	public List findByG_U(long groupId, long userId, int begin, int end)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_U);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("BookmarksEntry", BookmarksEntryImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(userId);
-
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
-
 	public BookmarksEntry findByUuid_G(String uuid, long groupId)
 		throws SystemException {
 
@@ -290,6 +261,35 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			else {
 				return (BookmarksEntry)list.get(0);
 			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public List findByG_U(long groupId, long userId, int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_U);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("BookmarksEntry", BookmarksEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
