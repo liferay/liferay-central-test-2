@@ -210,6 +210,8 @@
 
 		<action path="/bookmarks/open_entry" type="com.liferay.portlet.bookmarks.action.OpenEntryAction" />
 
+		<action path="/bookmarks/search" forward="portlet.bookmarks.search" />
+
 		<action path="/bookmarks/select_folder" type="com.liferay.portlet.bookmarks.action.EditFolderAction">
 			<forward name="portlet.bookmarks.edit_folder" path="portlet.bookmarks.select_folder" />
 			<forward name="portlet.bookmarks.error" path="portlet.bookmarks.error" />

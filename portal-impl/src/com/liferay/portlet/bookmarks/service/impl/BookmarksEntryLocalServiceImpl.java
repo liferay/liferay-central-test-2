@@ -33,6 +33,9 @@ import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBaseImpl;
+import com.liferay.portlet.bookmarks.util.Indexer;
+
+import java.io.IOException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -40,6 +43,9 @@ import java.net.URL;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BookmarksEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -141,6 +147,17 @@ public class BookmarksEntryLocalServiceImpl
 
 		updateTagsAsset(userId, entry, tagsEntries);
 
+		// Lucene
+
+		try {
+			Indexer.addEntry(
+				entry.getCompanyId(), folder.getGroupId(), folderId, entryId,
+				name, url, comments);
+		}
+		catch (IOException ioe) {
+			_log.error("Indexing " + entryId, ioe);
+		}
+
 		return entry;
 	}
 
@@ -218,6 +235,15 @@ public class BookmarksEntryLocalServiceImpl
 
 	public void deleteEntry(BookmarksEntry entry)
 		throws PortalException, SystemException {
+
+		// Lucene
+
+		try {
+			Indexer.deleteEntry(entry.getCompanyId(), entry.getEntryId());
+		}
+		catch (IOException ioe) {
+			_log.error("Deleting index " + entry.getEntryId(), ioe);
+		}
 
 		// Tags
 
@@ -345,6 +371,17 @@ public class BookmarksEntryLocalServiceImpl
 
 		updateTagsAsset(userId, entry, tagsEntries);
 
+		// Lucene
+
+		try {
+			Indexer.updateEntry(
+				entry.getCompanyId(), folder.getGroupId(), entry.getFolderId(),
+				entry.getEntryId(), name, url, comments);
+		}
+		catch (IOException ioe) {
+			_log.error("Indexing " + entryId, ioe);
+		}
+
 		return entry;
 	}
 
@@ -393,5 +430,8 @@ public class BookmarksEntryLocalServiceImpl
 			}
 		}
 	}
+
+	private static Log _log =
+		LogFactory.getLog(BookmarksEntryLocalServiceImpl.class);
 
 }

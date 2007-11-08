@@ -39,7 +39,13 @@ portletURL.setParameter("struts_action", "/bookmarks/view");
 portletURL.setParameter("folderId", String.valueOf(folderId));
 %>
 
-<form method="post" name="<portlet:namespace />">
+<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/bookmarks/search" /></liferay-portlet:renderURL>
+
+<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURLParams varImpl="searchURL" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+<input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
 
 <liferay-ui:tabs
 	names="folders,my-entries,recent-entries"
@@ -162,10 +168,24 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			resultRows.add(row);
 		}
+
+		boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, plid.longValue(), folderId, ActionKeys.ADD_FOLDER);
 		%>
 
-		<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, plid.longValue(), folderId, ActionKeys.ADD_FOLDER) %>">
-			<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" /><br />
+		<c:if test="<%= showAddFolderButton || (results.size() > 0) %>">
+			<div>
+				<c:if test="<%= results.size() > 0 %>">
+					<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
+
+					<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
+
+					<input type="submit" value="<liferay-ui:message key="search-entries" />" />
+				</c:if>
+
+				<c:if test="<%= showAddFolderButton %>">
+					<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
+				</c:if>
+			</div>
 
 			<c:if test="<%= results.size() > 0 %>">
 				<br />
@@ -174,8 +194,24 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<c:if test="<%= folder != null %>">
+		<c:if test="<%= (folder != null) && (showAddFolderButton || (results.size() > 0)) %>">
 			<br />
+		</c:if>
+
+		</form>
+
+		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+			<script type="text/javascript">
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
+			</script>
+		</c:if>
+
+		<c:if test="<%= folder != null %>">
+			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
+			<liferay-portlet:renderURLParams varImpl="searchURL" />
+			<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+			<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+			<input name="<portlet:namespace />searchFolderId" type="hidden" value="<%= folderId %>" />
 
 			<liferay-ui:tabs names="entries" />
 
@@ -286,10 +322,24 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 				resultRows.add(row);
 			}
+
+			boolean showAddEntryButton = BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_ENTRY);
 			%>
 
-			<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_ENTRY) %>">
-				<input type="button" value="<liferay-ui:message key="add-entry" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" /><br />
+			<c:if test="<%= showAddEntryButton || (results.size() > 0) %>">
+				<div>
+					<c:if test="<%= results.size() > 0 %>">
+						<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
+
+						<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
+
+						<input type="submit" value="<liferay-ui:message key="search-entries" />" />
+					</c:if>
+
+					<c:if test="<%= showAddEntryButton %>">
+						<input type="button" value="<liferay-ui:message key="add-entry" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
+					</c:if>
+				</div>
 
 				<c:if test="<%= results.size() > 0 %>">
 					<br />
@@ -297,9 +347,16 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		</c:if>
 
-		</form>
+			</form>
+
+			<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+				<script type="text/javascript">
+					Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
+					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
+				</script>
+			</c:if>
+		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-entries") || tabs1.equals("recent-entries") %>'>
 

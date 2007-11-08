@@ -319,6 +319,21 @@ public class BookmarksFolderLocalServiceUtil {
 		bookmarksFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
 	}
 
+	public static void reIndex(java.lang.String[] ids)
+		throws com.liferay.portal.SystemException {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+		bookmarksFolderLocalService.reIndex(ids);
+	}
+
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, long[] folderIds, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+
+		return bookmarksFolderLocalService.search(companyId, groupId,
+			folderIds, keywords);
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentFolder)

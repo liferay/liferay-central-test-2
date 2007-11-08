@@ -124,6 +124,32 @@ public interface BookmarksFolderPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
+	public java.util.List findByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByCompanyId(long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByCompanyId(long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder findByCompanyId_First(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder findByCompanyId_Last(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder[] findByCompanyId_PrevAndNext(
+		long folderId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.bookmarks.NoSuchFolderException;
+
 	public java.util.List findByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
@@ -179,6 +205,9 @@ public interface BookmarksFolderPersistence {
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
@@ -191,6 +220,9 @@ public interface BookmarksFolderPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_P(long groupId, long parentFolderId)

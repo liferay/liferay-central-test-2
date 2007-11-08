@@ -198,6 +198,10 @@
 		<put name="portlet_content" value="/portlet/bookmarks/error.jsp" />
 	</definition>
 
+	<definition name="portlet.bookmarks.search" extends="portlet.bookmarks">
+		<put name="portlet_content" value="/portlet/bookmarks/search.jsp" />
+	</definition>
+
 	<definition name="portlet.bookmarks.select_folder" extends="portlet.bookmarks">
 		<put name="portlet_content" value="/portlet/bookmarks/select_folder.jsp" />
 	</definition>
