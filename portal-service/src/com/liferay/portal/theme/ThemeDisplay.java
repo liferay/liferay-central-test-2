@@ -601,6 +601,14 @@ public class ThemeDisplay implements Serializable {
 		_urlCreateAccount = urlCreateAccount;
 	}
 
+	public String getURLCurrent() {
+		return _urlCurrent;
+	}
+
+	public void setURLCurrent(String urlCurrent) {
+		_urlCurrent = urlCurrent;
+	}
+
 	public String getURLHome() {
 		return _urlHome;
 	}
@@ -806,6 +814,7 @@ public class ThemeDisplay implements Serializable {
 		_showSignOutIcon = false;
 		_urlAddContent = StringPool.BLANK;
 		_urlCreateAccount = null;
+		_urlCurrent = StringPool.BLANK;
 		_urlHome = StringPool.BLANK;
 		_urlLayoutTemplates = StringPool.BLANK;
 		_urlMyAccount = null;
@@ -884,6 +893,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _showSignOutIcon;
 	private String _urlAddContent = StringPool.BLANK;
 	private transient PortletURL _urlCreateAccount = null;
+	private String _urlCurrent = StringPool.BLANK;
 	private String _urlHome = StringPool.BLANK;
 	private String _urlLayoutTemplates = StringPool.BLANK;
 	private transient PortletURL _urlMyAccount = null;

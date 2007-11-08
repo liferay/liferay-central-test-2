@@ -33,7 +33,7 @@ for (int i = 0; i < allAssetTypes.length; i++) {
 	}
 }
 
-PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, assetTypes, entries, (PortletURLImpl)currentURLObj);
+PortletURL[] urls = getAddURLs(request, entries, assetTypes);
 %>
 
 <c:if test="<%= urls.length > 0 %>">
@@ -56,18 +56,7 @@ PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, assetTy
 		while (itr.hasNext()) {
 			TagsAssetType assetType = (TagsAssetType)itr.next();
 
-			PortletURLImpl redirectURLObj = (PortletURLImpl)currentURLObj;
-
-			if (selectionStyle.equals("manual")) {
-				redirectURLObj = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, themeDisplay.getPlid(), false);
-
-				redirectURLObj.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-				redirectURLObj.setParameter("redirect", currentURL);
-				redirectURLObj.setParameter("backURL", currentURL);
-				redirectURLObj.setParameter("portletResource", portletId);
-			}
-
-			PortletURL url = getAddURL(assetType.getClassName(), permissionChecker, request, themeDisplay, entries, redirectURLObj);
+			PortletURL url = getAddURL(request, entries, assetType.getClassName());
 
 			if (url != null) {
 		%>
@@ -83,40 +72,44 @@ PortletURL[] urls = getAddURLs(permissionChecker, request, themeDisplay, assetTy
 </c:if>
 
 <%!
-public PortletURL getAddURL(String assetType, PermissionChecker permissionChecker, HttpServletRequest request, ThemeDisplay themeDisplay, String[] entries, PortletURLImpl currentURLObj) throws Exception {
+public PortletURL getAddURL(HttpServletRequest req, String[] entries, String assetType) throws Exception {
+	ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+	PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
+
 	PortletURL addURL = null;
 
 	if (assetType.equals(BlogsEntry.class.getName())) {
 		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
-			addURL = new PortletURLImpl(request, PortletKeys.BLOGS, themeDisplay.getPlid(), false);
+			addURL = new PortletURLImpl(req, PortletKeys.BLOGS, themeDisplay.getPlid(), false);
 
 			addURL.setParameter("struts_action", "/blogs/edit_entry");
 		}
 	}
 	else if (assetType.equals(BookmarksEntry.class.getName())) {
 		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.BOOKMARKS, ActionKeys.ADD_ENTRY)) {
-			addURL = new PortletURLImpl(request, PortletKeys.BOOKMARKS, themeDisplay.getPlid(), false);
+			addURL = new PortletURLImpl(req, PortletKeys.BOOKMARKS, themeDisplay.getPlid(), false);
 
 			addURL.setParameter("struts_action", "/bookmarks/edit_entry");
 		}
 	}
 	else if (assetType.equals(DLFileEntry.class.getName())) {
 		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.DOCUMENT_LIBRARY, ActionKeys.ADD_ENTRY)) {
-			addURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, themeDisplay.getPlid(), false);
+			addURL = new PortletURLImpl(req, PortletKeys.DOCUMENT_LIBRARY, themeDisplay.getPlid(), false);
 
 			addURL.setParameter("struts_action", "/document_library/edit_file_entry");
 		}
 	}
 	else if (assetType.equals(IGImage.class.getName())) {
 		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.IMAGE_GALLERY, ActionKeys.ADD_IMAGE)) {
-			addURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, themeDisplay.getPlid(), false);
+			addURL = new PortletURLImpl(req, PortletKeys.IMAGE_GALLERY, themeDisplay.getPlid(), false);
 
 			addURL.setParameter("struts_action", "/image_gallery/edit_image");
 		}
 	}
 	else if (assetType.equals(JournalArticle.class.getName())) {
 		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE)) {
-			addURL = new PortletURLImpl(request, PortletKeys.JOURNAL, themeDisplay.getPlid(), false);
+			addURL = new PortletURLImpl(req, PortletKeys.JOURNAL, themeDisplay.getPlid(), false);
 
 			addURL.setParameter("struts_action", "/journal/edit_article");
 			addURL.setParameter("groupId", String.valueOf(themeDisplay.getLayout().getGroupId()));
@@ -129,9 +122,10 @@ public PortletURL getAddURL(String assetType, PermissionChecker permissionChecke
 		addURL.setWindowState(WindowState.MAXIMIZED);
 		addURL.setPortletMode(PortletMode.VIEW);
 
-		addURL.setParameter("redirect", currentURLObj.toString());
+		addURL.setParameter("redirect", themeDisplay.getURLCurrent());
+		addURL.setParameter("backURL", themeDisplay.getURLCurrent());
 
-		String referringPortletResource = currentURLObj.getParameter("portletResource");
+		String referringPortletResource = ParamUtil.getString(req, "portletResource");
 
 		if (Validator.isNotNull(referringPortletResource)) {
 			addURL.setParameter("referringPortletResource", referringPortletResource);
@@ -144,7 +138,7 @@ public PortletURL getAddURL(String assetType, PermissionChecker permissionChecke
 	return addURL;
 }
 
-public PortletURL[] getAddURLs(PermissionChecker permissionChecker, HttpServletRequest request, ThemeDisplay themeDisplay, List assetTypes, String[] entries, PortletURLImpl currentURLObj) throws Exception {
+public PortletURL[] getAddURLs(HttpServletRequest req, String[] entries, List assetTypes) throws Exception {
 	List urls = new ArrayList();
 
 	Iterator itr = assetTypes.iterator();
@@ -152,7 +146,7 @@ public PortletURL[] getAddURLs(PermissionChecker permissionChecker, HttpServletR
 	while (itr.hasNext()) {
 		TagsAssetType assetType = (TagsAssetType)itr.next();
 
-		PortletURL url = getAddURL(assetType.getClassName(), permissionChecker, request, themeDisplay, entries, currentURLObj);
+		PortletURL url = getAddURL(req, entries, assetType.getClassName());
 
 		if (url != null) {
 			urls.add(url);
