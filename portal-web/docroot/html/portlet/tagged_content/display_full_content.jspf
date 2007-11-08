@@ -97,60 +97,56 @@
 		<c:if test="<%= articleDisplay != null %>">
 			<h3 class="journal-content-title"><%= title %></h3>
 
-			<c:choose>
-				<c:when test="<%= articleDisplay.isPaginate() %>">
-					<c:if test="<%= showAvailableLocales %>">
+			<c:if test="<%= showAvailableLocales %>">
 
-						<%
-						String[] availableLocales = articleDisplay.getAvailableLocales();
-						%>
+				<%
+				String[] availableLocales = articleDisplay.getAvailableLocales();
+				%>
 
-						<c:if test="<%= availableLocales.length > 0 %>">
-							<div>
-								<br />
+				<c:if test="<%= availableLocales.length > 0 %>">
+					<div>
+						<br />
 
-								<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
-							</div>
-						</c:if>
-					</c:if>
+						<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
+					</div>
+				</c:if>
+			</c:if>
 
-					<%= articleDisplay.getContent() %>
+			<%= articleDisplay.getContent() %>
 
-					<%
-					String pageRedirect = ParamUtil.getString(request, "redirect");
+			<c:if test="<%= articleDisplay.isPaginate() %>">
 
-					if (Validator.isNull(pageRedirect)) {
-						pageRedirect = currentURL;
-					}
+				<%
+				String pageRedirect = ParamUtil.getString(request, "redirect");
 
-					int cur = ParamUtil.getInteger(request, "cur");
+				if (Validator.isNull(pageRedirect)) {
+					pageRedirect = currentURL;
+				}
 
-					PortletURL articlePageURL = renderResponse.createRenderURL();
+				int cur = ParamUtil.getInteger(request, "cur");
 
-					articlePageURL.setParameter("struts_action", "/tagged_content/view_content");
-					articlePageURL.setParameter("redirect", pageRedirect);
-					articlePageURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
-					articlePageURL.setParameter("cur", String.valueOf(cur));
-					%>
+				PortletURL articlePageURL = renderResponse.createRenderURL();
 
-					<br />
+				articlePageURL.setParameter("struts_action", "/tagged_content/view_content");
+				articlePageURL.setParameter("redirect", pageRedirect);
+				articlePageURL.setParameter("assetId", String.valueOf(asset.getAssetId()));
+				articlePageURL.setParameter("cur", String.valueOf(cur));
+				%>
 
-					<liferay-ui:page-iterator
-						curParam="<%= "page" %>"
-						curValue="<%= articleDisplay.getCurrentPage() %>"
-						delta="<%= 1 %>"
-						maxPages="<%= 25 %>"
-						total="<%= articleDisplay.getNumberOfPages() %>"
-						type="article"
-						url="<%= articlePageURL.toString() %>"
-					/>
+				<br />
 
-					<br />
-				</c:when>
-				<c:otherwise>
-					<%= articleDisplay.getContent() %>
-				</c:otherwise>
-			</c:choose>
+				<liferay-ui:page-iterator
+					curParam="<%= "page" %>"
+					curValue="<%= articleDisplay.getCurrentPage() %>"
+					delta="<%= 1 %>"
+					maxPages="<%= 25 %>"
+					total="<%= articleDisplay.getNumberOfPages() %>"
+					type="article"
+					url="<%= articlePageURL.toString() %>"
+				/>
+
+				<br />
+			</c:if>
 		</c:if>
 	</c:when>
 	<c:when test="<%= className.equals(MBMessage.class.getName()) %>">
