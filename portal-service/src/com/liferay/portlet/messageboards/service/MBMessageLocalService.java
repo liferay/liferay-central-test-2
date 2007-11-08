@@ -180,6 +180,16 @@ public interface MBMessageLocalService {
 	public void setTagsAssetFinder(
 		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder);
 
+	public com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence();
+
+	public void setTagsEntryPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence);
+
+	public com.liferay.portlet.tags.service.persistence.TagsEntryFinder getTagsEntryFinder();
+
+	public void setTagsEntryFinder(
+		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(

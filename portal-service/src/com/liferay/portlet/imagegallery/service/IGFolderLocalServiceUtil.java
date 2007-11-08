@@ -165,6 +165,30 @@ public class IGFolderLocalServiceUtil {
 		igFolderLocalService.setUserFinder(userFinder);
 	}
 
+	public static com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence() {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getTagsEntryPersistence();
+	}
+
+	public static void setTagsEntryPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+		igFolderLocalService.setTagsEntryPersistence(tagsEntryPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsEntryFinder getTagsEntryFinder() {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getTagsEntryFinder();
+	}
+
+	public static void setTagsEntryFinder(
+		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder) {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+		igFolderLocalService.setTagsEntryFinder(tagsEntryFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 		igFolderLocalService.afterPropertiesSet();

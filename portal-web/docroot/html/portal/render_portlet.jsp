@@ -567,16 +567,22 @@ else if (portletDisplay.isModePrint()) {
 	urlBack = urlPrint.toString();
 }
 else if (portletDisplay.isStateMax()) {
-	if (portletDisplay.getId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
+	//if (portletDisplay.getId().equals(PortletKeys.PORTLET_CONFIGURATION)) {
 		/*String portletResource = ParamUtil.getString(request, "portletResource");
 
 		urlMax.setAnchor(false);
 
 		urlBack = urlMax.toString() + "#p_" + portletResource;*/
 
-		urlBack = ParamUtil.getString(renderRequestImpl, "backURL");
-	}
-	else {
+		//urlBack = ParamUtil.getString(renderRequestImpl, "backURL");
+	//}
+	//else {
+	//	urlBack = urlMax.toString();
+	//}
+
+	urlBack = ParamUtil.getString(renderRequestImpl, "backURL");
+
+	if (Validator.isNull(urlBack)) {
 		urlBack = urlMax.toString();
 	}
 }

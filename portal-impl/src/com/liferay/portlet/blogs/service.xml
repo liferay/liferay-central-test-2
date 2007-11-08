@@ -40,6 +40,7 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.tags" entity="TagsEntry" />
 	</entity>
 	<entity name="BlogsEntry" uuid="true" local-service="true" remote-service="true">
 
@@ -107,6 +108,7 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
+		<reference package-path="com.liferay.portlet.tags" entity="TagsEntry" />
 	</entity>
 	<entity name="BlogsStatsUser" local-service="true" remote-service="false">
 

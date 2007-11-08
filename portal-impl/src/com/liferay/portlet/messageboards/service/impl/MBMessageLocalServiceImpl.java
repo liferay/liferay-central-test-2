@@ -427,7 +427,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				Indexer.addMessage(
 					message.getCompanyId(), category.getGroupId(),
 					user.getFullName(), category.getCategoryId(), threadId,
-					messageId, subject, body);
+					messageId, subject, body, tagsEntries);
 			}
 		}
 		catch (IOException ioe) {
@@ -1047,11 +1047,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 				try {
 					if (!category.isDiscussion()) {
+						String[] curTagsEntries =
+							tagsEntryLocalService.getEntryNames(
+								MBMessage.class.getName(),
+								curMessage.getMessageId());
+
 						Indexer.updateMessage(
 							curMessage.getCompanyId(), category.getGroupId(),
 							curMessage.getUserName(), category.getCategoryId(),
 							curMessage.getThreadId(), curMessage.getMessageId(),
-							curMessage.getSubject(), curMessage.getBody());
+							curMessage.getSubject(), curMessage.getBody(),
+							curTagsEntries);
 					}
 				}
 				catch (IOException ioe) {
@@ -1077,7 +1083,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				Indexer.updateMessage(
 					message.getCompanyId(), category.getGroupId(),
 					message.getUserName(), category.getCategoryId(),
-					message.getThreadId(), messageId, subject, body);
+					message.getThreadId(), messageId, subject, body,
+					tagsEntries);
 			}
 		}
 		catch (IOException ioe) {

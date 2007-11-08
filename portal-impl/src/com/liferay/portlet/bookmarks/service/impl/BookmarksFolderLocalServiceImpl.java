@@ -38,7 +38,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.util.Indexer;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
@@ -310,9 +309,8 @@ public class BookmarksFolderLocalServiceImpl
 					String content = entry.getUrl();
 					String description = entry.getComments();
 
-					String[] tagsEntries =
-						TagsEntryLocalServiceUtil.getEntryNames(
-							BookmarksEntry.class.getName(), entryId);
+					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+						BookmarksEntry.class.getName(), entryId);
 
 					try {
 						Document doc = Indexer.getAddEntryDocument(

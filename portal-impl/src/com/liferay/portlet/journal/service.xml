@@ -94,6 +94,7 @@
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
+		<reference package-path="com.liferay.portlet.tags" entity="TagsEntry" />
 	</entity>
 	<entity name="JournalArticleImage" uuid="true" local-service="true" remote-service="false">
 

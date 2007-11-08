@@ -177,6 +177,30 @@ public class WikiNodeLocalServiceUtil {
 		wikiNodeLocalService.setUserFinder(userFinder);
 	}
 
+	public static com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence() {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getTagsEntryPersistence();
+	}
+
+	public static void setTagsEntryPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+		wikiNodeLocalService.setTagsEntryPersistence(tagsEntryPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsEntryFinder getTagsEntryFinder() {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getTagsEntryFinder();
+	}
+
+	public static void setTagsEntryFinder(
+		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder) {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+		wikiNodeLocalService.setTagsEntryFinder(tagsEntryFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 		wikiNodeLocalService.afterPropertiesSet();

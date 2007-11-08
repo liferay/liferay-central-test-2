@@ -166,6 +166,30 @@ public class BookmarksFolderLocalServiceUtil {
 		bookmarksFolderLocalService.setUserFinder(userFinder);
 	}
 
+	public static com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence() {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+
+		return bookmarksFolderLocalService.getTagsEntryPersistence();
+	}
+
+	public static void setTagsEntryPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+		bookmarksFolderLocalService.setTagsEntryPersistence(tagsEntryPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsEntryFinder getTagsEntryFinder() {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+
+		return bookmarksFolderLocalService.getTagsEntryFinder();
+	}
+
+	public static void setTagsEntryFinder(
+		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder) {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+		bookmarksFolderLocalService.setTagsEntryFinder(tagsEntryFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 		bookmarksFolderLocalService.afterPropertiesSet();

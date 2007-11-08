@@ -465,7 +465,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		try {
 			Indexer.updatePage(
-				node.getCompanyId(), node.getGroupId(), nodeId, title, content);
+				node.getCompanyId(), node.getGroupId(), nodeId, title, content,
+				tagsEntries);
 		}
 		catch (IOException ioe) {
 			_log.error("Indexing " + page.getPrimaryKey(), ioe);

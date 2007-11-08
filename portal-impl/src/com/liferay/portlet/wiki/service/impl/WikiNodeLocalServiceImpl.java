@@ -269,9 +269,13 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 					String title = page.getTitle();
 					String content = page.getContent();
 
+					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+						WikiPage.class.getName(), page.getResourcePrimKey());
+
 					try {
 						Document doc = Indexer.getAddPageDocument(
-							companyId, groupId, nodeId, title, content);
+							companyId, groupId, nodeId, title, content,
+							tagsEntries);
 
 						writer.addDocument(doc);
 					}
@@ -336,6 +340,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			if (Validator.isNotNull(keywords)) {
 				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
 				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+				LuceneUtil.addTerm(
+					searchQuery, LuceneFields.TAG_ENTRY, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();

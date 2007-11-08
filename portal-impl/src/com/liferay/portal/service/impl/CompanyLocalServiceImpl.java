@@ -456,6 +456,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
 				LuceneUtil.addTerm(
 					searchQuery, LuceneFields.DESCRIPTION, keywords);
+				LuceneUtil.addTerm(
+					searchQuery, LuceneFields.TAG_ENTRY, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();

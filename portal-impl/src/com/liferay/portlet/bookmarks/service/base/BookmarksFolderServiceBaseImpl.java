@@ -60,6 +60,14 @@ import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersisten
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalService;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory;
+import com.liferay.portlet.tags.service.TagsEntryService;
+import com.liferay.portlet.tags.service.TagsEntryServiceFactory;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
+import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
+import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
@@ -206,6 +214,40 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
+	public TagsEntryLocalService getTagsEntryLocalService() {
+		return tagsEntryLocalService;
+	}
+
+	public void setTagsEntryLocalService(
+		TagsEntryLocalService tagsEntryLocalService) {
+		this.tagsEntryLocalService = tagsEntryLocalService;
+	}
+
+	public TagsEntryService getTagsEntryService() {
+		return tagsEntryService;
+	}
+
+	public void setTagsEntryService(TagsEntryService tagsEntryService) {
+		this.tagsEntryService = tagsEntryService;
+	}
+
+	public TagsEntryPersistence getTagsEntryPersistence() {
+		return tagsEntryPersistence;
+	}
+
+	public void setTagsEntryPersistence(
+		TagsEntryPersistence tagsEntryPersistence) {
+		this.tagsEntryPersistence = tagsEntryPersistence;
+	}
+
+	public TagsEntryFinder getTagsEntryFinder() {
+		return tagsEntryFinder;
+	}
+
+	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
+		this.tagsEntryFinder = tagsEntryFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (bookmarksEntryLocalService == null) {
 			bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getImpl();
@@ -270,6 +312,22 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 		if (userFinder == null) {
 			userFinder = UserFinderUtil.getFinder();
 		}
+
+		if (tagsEntryLocalService == null) {
+			tagsEntryLocalService = TagsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (tagsEntryService == null) {
+			tagsEntryService = TagsEntryServiceFactory.getImpl();
+		}
+
+		if (tagsEntryPersistence == null) {
+			tagsEntryPersistence = TagsEntryUtil.getPersistence();
+		}
+
+		if (tagsEntryFinder == null) {
+			tagsEntryFinder = TagsEntryFinderUtil.getFinder();
+		}
 	}
 
 	protected BookmarksEntryLocalService bookmarksEntryLocalService;
@@ -288,4 +346,8 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
+	protected TagsEntryLocalService tagsEntryLocalService;
+	protected TagsEntryService tagsEntryService;
+	protected TagsEntryPersistence tagsEntryPersistence;
+	protected TagsEntryFinder tagsEntryFinder;
 }

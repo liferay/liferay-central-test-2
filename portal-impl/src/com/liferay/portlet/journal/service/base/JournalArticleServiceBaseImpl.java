@@ -113,10 +113,18 @@ import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
 import com.liferay.portlet.tags.service.TagsAssetServiceFactory;
+import com.liferay.portlet.tags.service.TagsEntryLocalService;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory;
+import com.liferay.portlet.tags.service.TagsEntryService;
+import com.liferay.portlet.tags.service.TagsEntryServiceFactory;
 import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
 import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
+import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
+import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
@@ -507,6 +515,40 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
+	public TagsEntryLocalService getTagsEntryLocalService() {
+		return tagsEntryLocalService;
+	}
+
+	public void setTagsEntryLocalService(
+		TagsEntryLocalService tagsEntryLocalService) {
+		this.tagsEntryLocalService = tagsEntryLocalService;
+	}
+
+	public TagsEntryService getTagsEntryService() {
+		return tagsEntryService;
+	}
+
+	public void setTagsEntryService(TagsEntryService tagsEntryService) {
+		this.tagsEntryService = tagsEntryService;
+	}
+
+	public TagsEntryPersistence getTagsEntryPersistence() {
+		return tagsEntryPersistence;
+	}
+
+	public void setTagsEntryPersistence(
+		TagsEntryPersistence tagsEntryPersistence) {
+		this.tagsEntryPersistence = tagsEntryPersistence;
+	}
+
+	public TagsEntryFinder getTagsEntryFinder() {
+		return tagsEntryFinder;
+	}
+
+	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
+		this.tagsEntryFinder = tagsEntryFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
@@ -683,6 +725,22 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 		if (tagsAssetFinder == null) {
 			tagsAssetFinder = TagsAssetFinderUtil.getFinder();
 		}
+
+		if (tagsEntryLocalService == null) {
+			tagsEntryLocalService = TagsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (tagsEntryService == null) {
+			tagsEntryService = TagsEntryServiceFactory.getImpl();
+		}
+
+		if (tagsEntryPersistence == null) {
+			tagsEntryPersistence = TagsEntryUtil.getPersistence();
+		}
+
+		if (tagsEntryFinder == null) {
+			tagsEntryFinder = TagsEntryFinderUtil.getFinder();
+		}
 	}
 
 	protected JournalArticleLocalService journalArticleLocalService;
@@ -729,4 +787,8 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 	protected TagsAssetService tagsAssetService;
 	protected TagsAssetPersistence tagsAssetPersistence;
 	protected TagsAssetFinder tagsAssetFinder;
+	protected TagsEntryLocalService tagsEntryLocalService;
+	protected TagsEntryService tagsEntryService;
+	protected TagsEntryPersistence tagsEntryPersistence;
+	protected TagsEntryFinder tagsEntryFinder;
 }

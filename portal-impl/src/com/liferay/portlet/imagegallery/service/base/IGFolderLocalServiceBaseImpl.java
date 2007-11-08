@@ -59,6 +59,14 @@ import com.liferay.portlet.imagegallery.service.persistence.IGImageFinder;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageFinderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalService;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory;
+import com.liferay.portlet.tags.service.TagsEntryService;
+import com.liferay.portlet.tags.service.TagsEntryServiceFactory;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
+import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
+import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
@@ -238,6 +246,40 @@ public abstract class IGFolderLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
+	public TagsEntryLocalService getTagsEntryLocalService() {
+		return tagsEntryLocalService;
+	}
+
+	public void setTagsEntryLocalService(
+		TagsEntryLocalService tagsEntryLocalService) {
+		this.tagsEntryLocalService = tagsEntryLocalService;
+	}
+
+	public TagsEntryService getTagsEntryService() {
+		return tagsEntryService;
+	}
+
+	public void setTagsEntryService(TagsEntryService tagsEntryService) {
+		this.tagsEntryService = tagsEntryService;
+	}
+
+	public TagsEntryPersistence getTagsEntryPersistence() {
+		return tagsEntryPersistence;
+	}
+
+	public void setTagsEntryPersistence(
+		TagsEntryPersistence tagsEntryPersistence) {
+		this.tagsEntryPersistence = tagsEntryPersistence;
+	}
+
+	public TagsEntryFinder getTagsEntryFinder() {
+		return tagsEntryFinder;
+	}
+
+	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
+		this.tagsEntryFinder = tagsEntryFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (igFolderPersistence == null) {
 			igFolderPersistence = IGFolderUtil.getPersistence();
@@ -298,6 +340,22 @@ public abstract class IGFolderLocalServiceBaseImpl
 		if (userFinder == null) {
 			userFinder = UserFinderUtil.getFinder();
 		}
+
+		if (tagsEntryLocalService == null) {
+			tagsEntryLocalService = TagsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (tagsEntryService == null) {
+			tagsEntryService = TagsEntryServiceFactory.getImpl();
+		}
+
+		if (tagsEntryPersistence == null) {
+			tagsEntryPersistence = TagsEntryUtil.getPersistence();
+		}
+
+		if (tagsEntryFinder == null) {
+			tagsEntryFinder = TagsEntryFinderUtil.getFinder();
+		}
 	}
 
 	protected IGFolderPersistence igFolderPersistence;
@@ -315,4 +373,8 @@ public abstract class IGFolderLocalServiceBaseImpl
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
+	protected TagsEntryLocalService tagsEntryLocalService;
+	protected TagsEntryService tagsEntryService;
+	protected TagsEntryPersistence tagsEntryPersistence;
+	protected TagsEntryFinder tagsEntryFinder;
 }

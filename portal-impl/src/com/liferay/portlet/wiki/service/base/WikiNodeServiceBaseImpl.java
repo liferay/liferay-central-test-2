@@ -45,6 +45,14 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.tags.service.TagsEntryLocalService;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory;
+import com.liferay.portlet.tags.service.TagsEntryService;
+import com.liferay.portlet.tags.service.TagsEntryServiceFactory;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
+import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
+import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
@@ -224,6 +232,40 @@ public abstract class WikiNodeServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
+	public TagsEntryLocalService getTagsEntryLocalService() {
+		return tagsEntryLocalService;
+	}
+
+	public void setTagsEntryLocalService(
+		TagsEntryLocalService tagsEntryLocalService) {
+		this.tagsEntryLocalService = tagsEntryLocalService;
+	}
+
+	public TagsEntryService getTagsEntryService() {
+		return tagsEntryService;
+	}
+
+	public void setTagsEntryService(TagsEntryService tagsEntryService) {
+		this.tagsEntryService = tagsEntryService;
+	}
+
+	public TagsEntryPersistence getTagsEntryPersistence() {
+		return tagsEntryPersistence;
+	}
+
+	public void setTagsEntryPersistence(
+		TagsEntryPersistence tagsEntryPersistence) {
+		this.tagsEntryPersistence = tagsEntryPersistence;
+	}
+
+	public TagsEntryFinder getTagsEntryFinder() {
+		return tagsEntryFinder;
+	}
+
+	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
+		this.tagsEntryFinder = tagsEntryFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (wikiNodeLocalService == null) {
 			wikiNodeLocalService = WikiNodeLocalServiceFactory.getImpl();
@@ -296,6 +338,22 @@ public abstract class WikiNodeServiceBaseImpl extends PrincipalBean
 		if (userFinder == null) {
 			userFinder = UserFinderUtil.getFinder();
 		}
+
+		if (tagsEntryLocalService == null) {
+			tagsEntryLocalService = TagsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (tagsEntryService == null) {
+			tagsEntryService = TagsEntryServiceFactory.getImpl();
+		}
+
+		if (tagsEntryPersistence == null) {
+			tagsEntryPersistence = TagsEntryUtil.getPersistence();
+		}
+
+		if (tagsEntryFinder == null) {
+			tagsEntryFinder = TagsEntryFinderUtil.getFinder();
+		}
 	}
 
 	protected WikiNodeLocalService wikiNodeLocalService;
@@ -316,4 +374,8 @@ public abstract class WikiNodeServiceBaseImpl extends PrincipalBean
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
+	protected TagsEntryLocalService tagsEntryLocalService;
+	protected TagsEntryService tagsEntryService;
+	protected TagsEntryPersistence tagsEntryPersistence;
+	protected TagsEntryFinder tagsEntryFinder;
 }

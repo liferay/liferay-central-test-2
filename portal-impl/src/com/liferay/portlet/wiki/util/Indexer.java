@@ -59,7 +59,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addPage(
 			long companyId, long groupId, long nodeId, String title,
-			String content)
+			String content, String[] tagsEntries)
 		throws IOException {
 
 		try {
@@ -69,7 +69,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 
 		Document doc = getAddPageDocument(
-			companyId, groupId, nodeId, title, content);
+			companyId, groupId, nodeId, title, content, tagsEntries);
 
 		IndexWriter writer = null;
 
@@ -143,34 +143,33 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getAddPageDocument(
 		long companyId, long groupId, long nodeId, String title,
-		String content) {
+		String content, String[] tagsEntries) {
 
 		content = Html.stripHtml(content);
 
 		Document doc = new Document();
 
-		doc.add(
-			LuceneFields.getKeyword(
-				LuceneFields.UID,
-				LuceneFields.getUID(PORTLET_ID, nodeId, title)));
+		LuceneUtil.addKeyword(
+			doc, LuceneFields.UID,
+			LuceneFields.getUID(PORTLET_ID, nodeId, title));
 
-		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+		LuceneUtil.addKeyword(doc, LuceneFields.COMPANY_ID, companyId);
+		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, PORTLET_ID);
+		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
 
-		doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
-		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+		LuceneUtil.addText(doc, LuceneFields.TITLE, title);
+		LuceneUtil.addText(doc, LuceneFields.CONTENT, content);
 
-		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+		LuceneUtil.addModifiedDate(doc);
 
-		doc.add(LuceneFields.getKeyword("nodeId", nodeId));
+		LuceneUtil.addKeyword(doc, "nodeId", nodeId);
 
 		return doc;
 	}
 
 	public static void updatePage(
 			long companyId, long groupId, long nodeId, String title,
-			String content)
+			String content, String[] tagsEntries)
 		throws IOException {
 
 		try {
@@ -179,7 +178,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		catch (IOException ioe) {
 		}
 
-		addPage(companyId, groupId, nodeId, title, content);
+		addPage(companyId, groupId, nodeId, title, content, tagsEntries);
 	}
 
 	public DocumentSummary getDocumentSummary(

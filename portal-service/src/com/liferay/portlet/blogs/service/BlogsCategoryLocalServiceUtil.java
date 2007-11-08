@@ -49,6 +49,14 @@ package com.liferay.portlet.blogs.service;
  *
  */
 public class BlogsCategoryLocalServiceUtil {
+	public static com.liferay.portlet.blogs.model.BlogsCategory addBlogsCategory(
+		com.liferay.portlet.blogs.model.BlogsCategory model)
+		throws com.liferay.portal.SystemException {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+
+		return blogsCategoryLocalService.addBlogsCategory(model);
+	}
+
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -64,6 +72,14 @@ public class BlogsCategoryLocalServiceUtil {
 
 		return blogsCategoryLocalService.dynamicQuery(queryInitializer, begin,
 			end);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsCategory updateBlogsCategory(
+		com.liferay.portlet.blogs.model.BlogsCategory model)
+		throws com.liferay.portal.SystemException {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+
+		return blogsCategoryLocalService.updateBlogsCategory(model);
 	}
 
 	public static com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence getBlogsCategoryPersistence() {
@@ -172,6 +188,30 @@ public class BlogsCategoryLocalServiceUtil {
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
 		blogsCategoryLocalService.setUserFinder(userFinder);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence() {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+
+		return blogsCategoryLocalService.getTagsEntryPersistence();
+	}
+
+	public static void setTagsEntryPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.setTagsEntryPersistence(tagsEntryPersistence);
+	}
+
+	public static com.liferay.portlet.tags.service.persistence.TagsEntryFinder getTagsEntryFinder() {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+
+		return blogsCategoryLocalService.getTagsEntryFinder();
+	}
+
+	public static void setTagsEntryFinder(
+		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder) {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.setTagsEntryFinder(tagsEntryFinder);
 	}
 
 	public static void afterPropertiesSet() {

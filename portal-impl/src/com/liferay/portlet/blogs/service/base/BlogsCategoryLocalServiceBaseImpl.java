@@ -46,6 +46,8 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.blogs.model.BlogsCategory;
+import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory;
@@ -63,6 +65,14 @@ import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalService;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory;
+import com.liferay.portlet.tags.service.TagsEntryService;
+import com.liferay.portlet.tags.service.TagsEntryServiceFactory;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
+import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
+import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
+import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
@@ -76,15 +86,49 @@ import java.util.List;
  */
 public abstract class BlogsCategoryLocalServiceBaseImpl
 	implements BlogsCategoryLocalService, InitializingBean {
+	public BlogsCategory addBlogsCategory(BlogsCategory model)
+		throws SystemException {
+		BlogsCategory blogsCategory = new BlogsCategoryImpl();
+		blogsCategory.setNew(true);
+		blogsCategory.setCategoryId(model.getCategoryId());
+		blogsCategory.setCompanyId(model.getCompanyId());
+		blogsCategory.setUserId(model.getUserId());
+		blogsCategory.setUserName(model.getUserName());
+		blogsCategory.setCreateDate(model.getCreateDate());
+		blogsCategory.setModifiedDate(model.getModifiedDate());
+		blogsCategory.setParentCategoryId(model.getParentCategoryId());
+		blogsCategory.setName(model.getName());
+		blogsCategory.setDescription(model.getDescription());
+
+		return blogsCategoryPersistence.update(blogsCategory);
+	}
+
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
 		throws SystemException {
-		return BlogsCategoryUtil.findWithDynamicQuery(queryInitializer);
+		return blogsCategoryPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
 	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws SystemException {
-		return BlogsCategoryUtil.findWithDynamicQuery(queryInitializer, begin,
-			end);
+		return blogsCategoryPersistence.findWithDynamicQuery(queryInitializer,
+			begin, end);
+	}
+
+	public BlogsCategory updateBlogsCategory(BlogsCategory model)
+		throws SystemException {
+		BlogsCategory blogsCategory = new BlogsCategoryImpl();
+		blogsCategory.setNew(false);
+		blogsCategory.setCategoryId(model.getCategoryId());
+		blogsCategory.setCompanyId(model.getCompanyId());
+		blogsCategory.setUserId(model.getUserId());
+		blogsCategory.setUserName(model.getUserName());
+		blogsCategory.setCreateDate(model.getCreateDate());
+		blogsCategory.setModifiedDate(model.getModifiedDate());
+		blogsCategory.setParentCategoryId(model.getParentCategoryId());
+		blogsCategory.setName(model.getName());
+		blogsCategory.setDescription(model.getDescription());
+
+		return blogsCategoryPersistence.update(blogsCategory);
 	}
 
 	public BlogsCategoryPersistence getBlogsCategoryPersistence() {
@@ -238,6 +282,40 @@ public abstract class BlogsCategoryLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
+	public TagsEntryLocalService getTagsEntryLocalService() {
+		return tagsEntryLocalService;
+	}
+
+	public void setTagsEntryLocalService(
+		TagsEntryLocalService tagsEntryLocalService) {
+		this.tagsEntryLocalService = tagsEntryLocalService;
+	}
+
+	public TagsEntryService getTagsEntryService() {
+		return tagsEntryService;
+	}
+
+	public void setTagsEntryService(TagsEntryService tagsEntryService) {
+		this.tagsEntryService = tagsEntryService;
+	}
+
+	public TagsEntryPersistence getTagsEntryPersistence() {
+		return tagsEntryPersistence;
+	}
+
+	public void setTagsEntryPersistence(
+		TagsEntryPersistence tagsEntryPersistence) {
+		this.tagsEntryPersistence = tagsEntryPersistence;
+	}
+
+	public TagsEntryFinder getTagsEntryFinder() {
+		return tagsEntryFinder;
+	}
+
+	public void setTagsEntryFinder(TagsEntryFinder tagsEntryFinder) {
+		this.tagsEntryFinder = tagsEntryFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (blogsCategoryPersistence == null) {
 			blogsCategoryPersistence = BlogsCategoryUtil.getPersistence();
@@ -310,6 +388,22 @@ public abstract class BlogsCategoryLocalServiceBaseImpl
 		if (userFinder == null) {
 			userFinder = UserFinderUtil.getFinder();
 		}
+
+		if (tagsEntryLocalService == null) {
+			tagsEntryLocalService = TagsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (tagsEntryService == null) {
+			tagsEntryService = TagsEntryServiceFactory.getImpl();
+		}
+
+		if (tagsEntryPersistence == null) {
+			tagsEntryPersistence = TagsEntryUtil.getPersistence();
+		}
+
+		if (tagsEntryFinder == null) {
+			tagsEntryFinder = TagsEntryFinderUtil.getFinder();
+		}
 	}
 
 	protected BlogsCategoryPersistence blogsCategoryPersistence;
@@ -330,4 +424,8 @@ public abstract class BlogsCategoryLocalServiceBaseImpl
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
+	protected TagsEntryLocalService tagsEntryLocalService;
+	protected TagsEntryService tagsEntryService;
+	protected TagsEntryPersistence tagsEntryPersistence;
+	protected TagsEntryFinder tagsEntryFinder;
 }

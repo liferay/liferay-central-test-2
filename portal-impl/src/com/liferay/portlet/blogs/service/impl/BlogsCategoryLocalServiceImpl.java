@@ -205,10 +205,13 @@ public class BlogsCategoryLocalServiceImpl
 			// Lucene
 
 			try {
+				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+					BlogsEntry.class.getName(), entry.getEntryId());
+
 				Indexer.updateEntry(
 					entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
 					category.getCategoryId(), entry.getEntryId(),
-					entry.getTitle(), entry.getContent());
+					entry.getTitle(), entry.getContent(), tagsEntries);
 			}
 			catch (IOException ioe) {
 				_log.error("Indexing " + entry.getEntryId(), ioe);

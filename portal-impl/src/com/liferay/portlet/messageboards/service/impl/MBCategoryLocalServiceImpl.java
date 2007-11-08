@@ -40,7 +40,6 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.base.MBCategoryLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.util.Indexer;
-import com.liferay.portlet.messageboards.util.IndexerImpl;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;
@@ -354,10 +353,13 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 					String title = message.getSubject();
 					String content = message.getBody();
 
+					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+						MBMessage.class.getName(), messageId);
+
 					try {
-						Document doc = IndexerImpl.getAddMessageDocument(
+						Document doc = Indexer.getAddMessageDocument(
 							companyId, groupId, userName, categoryId, threadId,
-							messageId, title, content);
+							messageId, title, content, tagsEntries);
 
 						writer.addDocument(doc);
 					}
@@ -398,7 +400,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.PORTLET_ID, IndexerImpl.PORTLET_ID);
+				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
 
 			if (groupId > 0) {
 				LuceneUtil.addRequiredTerm(
@@ -430,6 +432,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 					searchQuery, LuceneFields.USER_NAME, keywords);
 				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
 				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+				LuceneUtil.addTerm(
+					searchQuery, LuceneFields.TAG_ENTRY, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();
@@ -578,11 +582,17 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				try {
 					if (!fromCategory.isDiscussion()) {
+						String[] tagsEntries =
+							tagsEntryLocalService.getEntryNames(
+								MBMessage.class.getName(),
+								message.getMessageId());
+
 						Indexer.updateMessage(
 							message.getCompanyId(), fromCategory.getGroupId(),
 							message.getUserName(), toCategoryId,
 							message.getThreadId(), message.getMessageId(),
-							message.getSubject(), message.getBody());
+							message.getSubject(), message.getBody(),
+							tagsEntries);
 					}
 				}
 				catch (IOException ioe) {

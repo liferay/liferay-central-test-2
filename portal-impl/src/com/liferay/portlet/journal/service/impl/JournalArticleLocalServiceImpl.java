@@ -68,7 +68,6 @@ import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.lucene.HitsImpl;
@@ -397,7 +396,7 @@ public class JournalArticleLocalServiceImpl
 
 		try {
 			if (article.isIndexable()) {
-				String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
+				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 					JournalArticle.class.getName(), article.getId());
 
 				Indexer.updateArticle(
@@ -1203,9 +1202,8 @@ public class JournalArticleLocalServiceImpl
 					String type = article.getType();
 					Date displayDate = article.getDisplayDate();
 
-					String[] tagsEntries =
-						TagsEntryLocalServiceUtil.getEntryNames(
-							JournalArticle.class.getName(), id);
+					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+						JournalArticle.class.getName(), id);
 
 					try {
 						org.apache.lucene.document.Document doc =

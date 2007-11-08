@@ -38,7 +38,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
@@ -327,9 +326,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 					long imageId = image.getImageId();
 					String description = image.getDescription();
 
-					String[] tagsEntries =
-						TagsEntryLocalServiceUtil.getEntryNames(
-							IGImage.class.getName(), imageId);
+					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+						IGImage.class.getName(), imageId);
 
 					try {
 						Document doc = Indexer.getAddImageDocument(

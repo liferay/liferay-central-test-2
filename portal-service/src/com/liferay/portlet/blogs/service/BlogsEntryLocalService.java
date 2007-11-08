@@ -49,6 +49,10 @@ package com.liferay.portlet.blogs.service;
  *
  */
 public interface BlogsEntryLocalService {
+	public com.liferay.portlet.blogs.model.BlogsEntry addBlogsEntry(
+		com.liferay.portlet.blogs.model.BlogsEntry model)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -56,6 +60,10 @@ public interface BlogsEntryLocalService {
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.blogs.model.BlogsEntry updateBlogsEntry(
+		com.liferay.portlet.blogs.model.BlogsEntry model)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence getBlogsCategoryPersistence();
 
@@ -146,6 +154,16 @@ public interface BlogsEntryLocalService {
 
 	public void setTagsAssetFinder(
 		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder);
+
+	public com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence();
+
+	public void setTagsEntryPersistence(
+		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence);
+
+	public com.liferay.portlet.tags.service.persistence.TagsEntryFinder getTagsEntryFinder();
+
+	public void setTagsEntryFinder(
+		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder);
 
 	public void afterPropertiesSet();
 

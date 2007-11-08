@@ -25,51 +25,58 @@ package com.liferay.portlet.messageboards.util;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lucene.LuceneFields;
-import com.liferay.portlet.messageboards.service.jms.IndexProducer;
+import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.util.Html;
 
 import java.io.IOException;
 
 import javax.portlet.PortletURL;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.Hits;
+import org.apache.lucene.search.Searcher;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Harry Mark
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
+	public static final String PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
+
 	public static void addMessage(
 			long companyId, long groupId, String userName, long categoryId,
-			long threadId, long messageId, String title, String content)
+			long threadId, long messageId, String title, String content,
+			String[] tagsEntries)
 		throws IOException {
 
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(
-				IndexerImpl.class.getName(), "addMessage",
-				new Object[] {
-					new LongWrapper(companyId), new LongWrapper(groupId),
-					userName, new LongWrapper(categoryId),
-					new LongWrapper(threadId), new LongWrapper(messageId),
-					title, content
-				});
+		Document doc = getAddMessageDocument(
+			companyId, groupId, userName, categoryId, threadId, messageId,
+			title, content, tagsEntries);
 
-			IndexProducer.produce(methodWrapper);
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
+
+			writer.addDocument(doc);
 		}
-		catch (Exception e) {
-			if (e instanceof IOException) {
-				throw (IOException)e;
-			}
-			else {
-				_log.error(e);
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
 			}
 		}
 	}
@@ -77,72 +84,105 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void deleteMessage(long companyId, long messageId)
 		throws IOException {
 
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(
-				IndexerImpl.class.getName(), "deleteMessage",
-				new Object[] {
-					new LongWrapper(companyId), new LongWrapper(messageId)
-				});
-
-			IndexProducer.produce(methodWrapper);
-		}
-		catch (Exception e) {
-			if (e instanceof IOException) {
-				throw (IOException)e;
-			}
-			else {
-				_log.error(e);
-			}
-		}
+		LuceneUtil.deleteDocuments(
+			companyId,
+			new Term(
+				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, messageId)));
 	}
 
 	public static void deleteMessages(long companyId, long threadId)
 		throws IOException, ParseException {
 
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(
-				IndexerImpl.class.getName(), "deleteMessages",
-				new Object[] {
-					new LongWrapper(companyId), new LongWrapper(threadId)
-				});
+		BooleanQuery booleanQuery = new BooleanQuery();
 
-			IndexProducer.produce(methodWrapper);
-		}
-		catch (Exception e) {
-			if (e instanceof IOException) {
-				throw (IOException)e;
+		LuceneUtil.addRequiredTerm(
+			booleanQuery, LuceneFields.PORTLET_ID, PORTLET_ID);
+
+		LuceneUtil.addRequiredTerm(booleanQuery, "threadId", threadId);
+
+		Searcher searcher = LuceneUtil.getSearcher(companyId);
+
+		try {
+			Hits hits = searcher.search(booleanQuery);
+
+			if (hits.length() > 0) {
+				IndexReader reader = null;
+
+				try {
+					LuceneUtil.acquireLock(companyId);
+
+					reader = LuceneUtil.getReader(companyId);
+
+					for (int i = 0; i < hits.length(); i++) {
+						Document doc = hits.doc(i);
+
+						Field field = doc.getField(LuceneFields.UID);
+
+						reader.deleteDocuments(
+							new Term(LuceneFields.UID, field.stringValue()));
+					}
+				}
+				finally {
+					if (reader != null) {
+						reader.close();
+					}
+
+					LuceneUtil.releaseLock(companyId);
+				}
 			}
-			else {
-				_log.error(e);
-			}
 		}
+		finally {
+			LuceneUtil.closeSearcher(searcher);
+		}
+	}
+
+	public static Document getAddMessageDocument(
+		long companyId, long groupId, String userName, long categoryId,
+		long threadId, long messageId, String title, String content,
+		String[] tagsEntries) {
+
+		content = Html.stripHtml(content);
+
+		Document doc = new Document();
+
+		LuceneUtil.addKeyword(
+			doc, LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, messageId));
+
+		LuceneUtil.addKeyword(doc, LuceneFields.COMPANY_ID, companyId);
+		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, PORTLET_ID);
+		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
+		LuceneUtil.addKeyword(doc, LuceneFields.USER_NAME, userName);
+
+		LuceneUtil.addText(doc, LuceneFields.USER_NAME, userName);
+		LuceneUtil.addText(doc, LuceneFields.TITLE, title);
+		LuceneUtil.addText(doc, LuceneFields.CONTENT, content);
+
+		LuceneUtil.addModifiedDate(doc);
+
+		LuceneUtil.addKeyword(doc, "categoryId", categoryId);
+		LuceneUtil.addKeyword(doc, "threadId", threadId);
+		LuceneUtil.addKeyword(doc, "messageId", messageId);
+
+		LuceneUtil.addKeyword(doc, LuceneFields.TAG_ENTRY, tagsEntries);
+
+		return doc;
 	}
 
 	public static void updateMessage(
 			long companyId, long groupId, String userName, long categoryId,
-			long threadId, long messageId, String title, String content)
+			long threadId, long messageId, String title, String content,
+			String[] tagsEntries)
 		throws IOException {
 
 		try {
-			MethodWrapper methodWrapper = new MethodWrapper(
-				IndexerImpl.class.getName(), "updateMessage",
-				new Object[] {
-					new LongWrapper(companyId), new LongWrapper(groupId),
-					userName, new LongWrapper(categoryId),
-					new LongWrapper(threadId), new LongWrapper(messageId),
-					title, content
-				});
+			deleteMessage(companyId, messageId);
+		}
+		catch (IOException ioe) {
+		}
 
-			IndexProducer.produce(methodWrapper);
-		}
-		catch (Exception e) {
-			if (e instanceof IOException) {
-				throw (IOException)e;
-			}
-			else {
-				_log.error(e);
-			}
-		}
+		addMessage(
+			companyId, groupId, userName, categoryId, threadId, messageId,
+			title, content, tagsEntries);
 	}
 
 	public DocumentSummary getDocumentSummary(
@@ -170,9 +210,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public void reIndex(String[] ids) throws SearchException {
-		IndexerImpl.reIndex(ids);
+		try {
+			MBCategoryLocalServiceUtil.reIndex(ids);
+		}
+		catch (Exception e) {
+			throw new SearchException(e);
+		}
 	}
-
-	private static Log _log = LogFactory.getLog(Indexer.class);
 
 }
