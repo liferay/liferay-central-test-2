@@ -46,7 +46,7 @@ import org.apache.lucene.index.Term;
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
-	public static final String PORTLET_ID = PortletKeys.BOOKMARKS;
+	public static final String PORTLET_ID = PortletKeys.IMAGE_GALLERY;
 
 	public static void addImage(
 			long companyId, long groupId, long folderId, long imageId,
