@@ -12,6 +12,10 @@ alter table DLFileShortcut add uuid_ VARCHAR(75) null;
 
 alter table DLFolder add uuid_ VARCHAR(75) null;
 
+alter table IGFolder add uuid_ VARCHAR(75) null;
+
+alter table IGImage add uuid_ VARCHAR(75) null;
+
 alter table JournalArticle add uuid_ VARCHAR(75) null;
 
 alter table JournalArticleImage add uuid_ VARCHAR(75) null;
