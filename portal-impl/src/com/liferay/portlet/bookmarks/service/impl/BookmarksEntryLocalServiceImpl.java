@@ -152,7 +152,7 @@ public class BookmarksEntryLocalServiceImpl
 		try {
 			Indexer.addEntry(
 				entry.getCompanyId(), folder.getGroupId(), folderId, entryId,
-				name, url, comments);
+				name, url, comments, tagsEntries);
 		}
 		catch (IOException ioe) {
 			_log.error("Indexing " + entryId, ioe);
@@ -376,7 +376,7 @@ public class BookmarksEntryLocalServiceImpl
 		try {
 			Indexer.updateEntry(
 				entry.getCompanyId(), folder.getGroupId(), entry.getFolderId(),
-				entry.getEntryId(), name, url, comments);
+				entry.getEntryId(), name, url, comments, tagsEntries);
 		}
 		catch (IOException ioe) {
 			_log.error("Indexing " + entryId, ioe);

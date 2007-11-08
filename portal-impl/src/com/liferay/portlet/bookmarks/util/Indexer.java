@@ -50,11 +50,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addEntry(
 			long companyId, long groupId, long folderId, long entryId,
-			String title, String content, String description)
+			String title, String content, String description,
+			String[] tagsEntries)
 		throws IOException {
 
 		Document doc = getAddEntryDocument(
-			companyId, groupId, folderId, entryId, title, content, description);
+			companyId, groupId, folderId, entryId, title, content, description,
+			tagsEntries);
 
 		IndexWriter writer = null;
 
@@ -81,33 +83,35 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getAddEntryDocument(
 		long companyId, long groupId, long folderId, long entryId, String title,
-		String content, String description) {
+		String content, String description, String[] tagsEntries) {
 
 		Document doc = new Document();
 
-		doc.add(
-			LuceneFields.getKeyword(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, entryId)));
+		LuceneUtil.addKeyword(
+			doc, LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, entryId));
 
-		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+		LuceneUtil.addKeyword(doc, LuceneFields.COMPANY_ID, companyId);
+		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, PORTLET_ID);
+		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
 
-		doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
-		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
-		doc.add(LuceneFields.getText(LuceneFields.DESCRIPTION, description));
+		LuceneUtil.addText(doc, LuceneFields.TITLE, title);
+		LuceneUtil.addText(doc, LuceneFields.CONTENT, content);
+		LuceneUtil.addText(doc, LuceneFields.DESCRIPTION, description);
 
-		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+		LuceneUtil.addModifiedDate(doc);
 
-		doc.add(LuceneFields.getKeyword("folderId", folderId));
-		doc.add(LuceneFields.getKeyword("entryId", entryId));
+		LuceneUtil.addKeyword(doc, "folderId", folderId);
+		LuceneUtil.addKeyword(doc, "entryId", entryId);
+
+		LuceneUtil.addKeyword(doc, LuceneFields.TAG_ENTRY, tagsEntries);
 
 		return doc;
 	}
 
 	public static void updateEntry(
 			long companyId, long groupId, long folderId, long entryId,
-			String title, String content, String description)
+			String title, String content, String description,
+			String[] tagsEntries)
 		throws IOException {
 
 		try {
@@ -117,7 +121,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 
 		addEntry(
-			companyId, groupId, folderId, entryId, title, content, description);
+			companyId, groupId, folderId, entryId, title, content, description,
+			tagsEntries);
 	}
 
 	public DocumentSummary getDocumentSummary(

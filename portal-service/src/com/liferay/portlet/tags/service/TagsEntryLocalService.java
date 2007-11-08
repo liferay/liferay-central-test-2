@@ -154,6 +154,10 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getEntries(long classNameId, long classPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.tags.model.TagsEntry getEntry(long entryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -164,6 +168,18 @@ public interface TagsEntryLocalService {
 			com.liferay.portal.PortalException;
 
 	public long[] getEntryIds(long companyId, java.lang.String[] names)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.lang.String[] getEntryNames()
+		throws com.liferay.portal.SystemException;
+
+	public java.lang.String[] getEntryNames(java.lang.String className,
+		long classPK)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public java.lang.String[] getEntryNames(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

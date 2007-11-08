@@ -62,12 +62,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addArticle(
 			long companyId, long groupId, String articleId, double version,
 			String title, String description, String content, String type,
-			Date displayDate)
+			Date displayDate, String[] tagsEntries)
 		throws IOException {
 
 		Document doc = getAddArticleDocument(
 			companyId, groupId, articleId, version, title, description, content,
-			type, displayDate);
+			type, displayDate, tagsEntries);
 
 		IndexWriter writer = null;
 
@@ -95,7 +95,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static Document getAddArticleDocument(
 		long companyId, long groupId, String articleId, double version,
 		String title, String description, String content, String type,
-		Date displayDate) {
+		Date displayDate, String[] tagsEntries) {
 
 		if ((content != null) &&
 			((content.indexOf("<dynamic-content>") != -1) ||
@@ -116,25 +116,23 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		Document doc = new Document();
 
-		doc.add(
-			LuceneFields.getKeyword(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, articleId)));
+		LuceneUtil.addKeyword(
+			doc, LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, articleId));
 
-		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+		LuceneUtil.addKeyword(doc, LuceneFields.COMPANY_ID, companyId);
+		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, PORTLET_ID);
+		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
 
-		doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
-		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
-		doc.add(LuceneFields.getText(LuceneFields.DESCRIPTION, description));
+		LuceneUtil.addText(doc, LuceneFields.TITLE, title);
+		LuceneUtil.addText(doc, LuceneFields.CONTENT, content);
+		LuceneUtil.addText(doc, LuceneFields.DESCRIPTION, description);
 
-		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+		LuceneUtil.addModifiedDate(doc);
 
-		doc.add(LuceneFields.getKeyword("articleId", articleId));
-		doc.add(
-			LuceneFields.getKeyword("version", Double.toString(version)));
-		doc.add(LuceneFields.getKeyword("type", type));
-		doc.add(LuceneFields.getDate("displayDate", displayDate));
+		LuceneUtil.addKeyword(doc, "articleId", articleId);
+		LuceneUtil.addKeyword(doc, "version", version);
+		LuceneUtil.addKeyword(doc, "type", type);
+		LuceneUtil.addDate(doc, "displayDate", displayDate);
 
 		return doc;
 	}
@@ -142,7 +140,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void updateArticle(
 			long companyId, long groupId, String articleId, double version,
 			String title, String description, String content, String type,
-			Date displayDate)
+			Date displayDate, String[] tagsEntries)
 		throws IOException {
 
 		try {
@@ -153,7 +151,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		addArticle(
 			companyId, groupId, articleId, version, title, description, content,
-			type, displayDate);
+			type, displayDate, tagsEntries);
 	}
 
 	public DocumentSummary getDocumentSummary(

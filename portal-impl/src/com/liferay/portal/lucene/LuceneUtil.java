@@ -43,6 +43,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -52,6 +53,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.WhitespaceAnalyzer;
+import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
@@ -93,11 +95,15 @@ public class LuceneUtil {
 		}
 	}
 
+	public static void addDate(Document doc, String field, Date value) {
+		doc.add(LuceneFields.getDate(field, value));
+	}
+
 	public static void addExactTerm(
-			BooleanQuery booleanQuery, String field, long number)
+			BooleanQuery booleanQuery, String field, long value)
 		throws ParseException {
 
-		addExactTerm(booleanQuery, field, String.valueOf(number));
+		addExactTerm(booleanQuery, field, String.valueOf(value));
 	}
 
 	public static void addExactTerm(
@@ -111,11 +117,56 @@ public class LuceneUtil {
 		booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 	}
 
+	public static void addKeyword(Document doc, String field, double value) {
+		addKeyword(doc, field, String.valueOf(value));
+	}
+
+	public static void addKeyword(Document doc, String field, long value) {
+		addKeyword(doc, field, String.valueOf(value));
+	}
+
+	public static void addKeyword(Document doc, String field, String value) {
+		if (Validator.isNotNull(value)) {
+			doc.add(LuceneFields.getKeyword(field, value));
+		}
+	}
+
+	public static void addKeyword(Document doc, String field, String[] values) {
+		if (values == null) {
+			return;
+		}
+
+		for (int i = 0; i < values.length; i++) {
+			addKeyword(doc, field, values[i]);
+		}
+	}
+
+	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, long value) {
+
+		addRequiredTerm(booleanQuery, field, String.valueOf(value));
+	}
+
+	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, String text) {
+
+		//text = KeywordsUtil.escape(text);
+
+		Term term = new Term(field, text);
+		TermQuery termQuery = new TermQuery(term);
+
+		booleanQuery.add(termQuery, BooleanClause.Occur.MUST);
+	}
+
+	public static void addModifiedDate(Document doc) {
+		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+	}
+
 	public static void addTerm(
-			BooleanQuery booleanQuery, String field, long number)
+			BooleanQuery booleanQuery, String field, long value)
 		throws ParseException {
 
-		addTerm(booleanQuery, field, String.valueOf(number));
+		addTerm(booleanQuery, field, String.valueOf(value));
 	}
 
 	public static void addTerm(
@@ -164,21 +215,14 @@ public class LuceneUtil {
 		}
 	}
 
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, long number) {
-
-		addRequiredTerm(booleanQuery, field, String.valueOf(number));
+	public static void addText(Document doc, String field, long value) {
+		addText(doc, field, String.valueOf(value));
 	}
 
-	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, String text) {
-
-		//text = KeywordsUtil.escape(text);
-
-		Term term = new Term(field, text);
-		TermQuery termQuery = new TermQuery(term);
-
-		booleanQuery.add(termQuery, BooleanClause.Occur.MUST);
+	public static void addText(Document doc, String field, String value) {
+		if (Validator.isNotNull(value)) {
+			doc.add(LuceneFields.getText(field, value));
+		}
 	}
 
 	public static void checkLuceneDir(long companyId) {

@@ -48,6 +48,7 @@ import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.util.Indexer;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
 import com.liferay.util.lucene.HitsImpl;
@@ -192,7 +193,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		try {
 			Indexer.addEntry(
 				entry.getCompanyId(), entry.getGroupId(), userId, categoryId,
-				entryId, title, content);
+				entryId, title, content, tagsEntries);
 		}
 		catch (IOException ioe) {
 			_log.error("Indexing " + entryId, ioe);
@@ -447,10 +448,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				String title = entry.getTitle();
 				String content = entry.getContent();
 
+				String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
+					BlogsEntry.class.getName(), entryId);
+
 				try {
 					Document doc = Indexer.getAddEntryDocument(
 						companyId, groupId, userId, categoryId, entryId, title,
-						content);
+						content, tagsEntries);
 
 					writer.addDocument(doc);
 				}
@@ -521,6 +525,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			if (Validator.isNotNull(keywords)) {
 				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
 				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+				LuceneUtil.addTerm(
+					searchQuery, LuceneFields.TAG_ENTRY, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();
@@ -594,7 +600,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		try {
 			Indexer.updateEntry(
 				entry.getCompanyId(), entry.getGroupId(), userId, categoryId,
-				entryId, title, content);
+				entryId, title, content, tagsEntries);
 		}
 		catch (IOException ioe) {
 			_log.error("Indexing " + entryId, ioe);

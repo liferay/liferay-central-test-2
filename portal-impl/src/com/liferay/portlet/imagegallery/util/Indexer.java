@@ -50,11 +50,11 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addImage(
 			long companyId, long groupId, long folderId, long imageId,
-			String description)
+			String description, String[] tagsEntries)
 		throws IOException {
 
 		Document doc = getAddImageDocument(
-			companyId, groupId, folderId, imageId, description);
+			companyId, groupId, folderId, imageId, description, tagsEntries);
 
 		IndexWriter writer = null;
 
@@ -81,31 +81,32 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getAddImageDocument(
 		long companyId, long groupId, long folderId, long imageId,
-		String description) {
+		String description, String[] tagsEntries) {
 
 		Document doc = new Document();
 
-		doc.add(
-			LuceneFields.getKeyword(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, imageId)));
+		LuceneUtil.addKeyword(
+			doc, LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, imageId));
 
-		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+		LuceneUtil.addKeyword(doc, LuceneFields.COMPANY_ID, companyId);
+		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, PORTLET_ID);
+		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
 
-		doc.add(LuceneFields.getText(LuceneFields.DESCRIPTION, description));
+		LuceneUtil.addText(doc, LuceneFields.DESCRIPTION, description);
 
-		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+		LuceneUtil.addModifiedDate(doc);
 
-		doc.add(LuceneFields.getKeyword("folderId", folderId));
-		doc.add(LuceneFields.getKeyword("imageId", imageId));
+		LuceneUtil.addKeyword(doc, "folderId", folderId);
+		LuceneUtil.addKeyword(doc, "imageId", imageId);
+
+		LuceneUtil.addKeyword(doc, LuceneFields.TAG_ENTRY, tagsEntries);
 
 		return doc;
 	}
 
 	public static void updateImage(
 			long companyId, long groupId, long folderId, long imageId,
-			String description)
+			String description, String[] tagsEntries)
 		throws IOException {
 
 		try {
@@ -114,7 +115,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		catch (IOException ioe) {
 		}
 
-		addImage(companyId, groupId, folderId, imageId, description);
+		addImage(
+			companyId, groupId, folderId, imageId, description, tagsEntries);
 	}
 
 	public DocumentSummary getDocumentSummary(

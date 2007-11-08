@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -69,6 +68,7 @@ import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.lucene.HitsImpl;
@@ -397,12 +397,15 @@ public class JournalArticleLocalServiceImpl
 
 		try {
 			if (article.isIndexable()) {
+				String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
+					JournalArticle.class.getName(), article.getId());
+
 				Indexer.updateArticle(
 					article.getCompanyId(), article.getGroupId(),
 					article.getArticleId(), article.getVersion(),
 					article.getTitle(), article.getDescription(),
 					article.getContent(), article.getType(),
-					article.getDisplayDate());
+					article.getDisplayDate(), tagsEntries);
 			}
 		}
 		catch (IOException ioe) {
@@ -1189,21 +1192,27 @@ public class JournalArticleLocalServiceImpl
 			while (itr.hasNext()) {
 				JournalArticle article = (JournalArticle)itr.next();
 
-				long groupId = article.getGroupId();
-				String articleId = article.getArticleId();
-				double version = article.getVersion();
-				String title = article.getTitle();
-				String description = article.getDescription();
-				String content = article.getContent();
-				String type = article.getType();
-				Date displayDate = article.getDisplayDate();
-
 				if (article.isApproved() && article.isIndexable()) {
+					long id = article.getId();
+					long groupId = article.getGroupId();
+					String articleId = article.getArticleId();
+					double version = article.getVersion();
+					String title = article.getTitle();
+					String description = article.getDescription();
+					String content = article.getContent();
+					String type = article.getType();
+					Date displayDate = article.getDisplayDate();
+
+					String[] tagsEntries =
+						TagsEntryLocalServiceUtil.getEntryNames(
+							JournalArticle.class.getName(), id);
+
 					try {
 						org.apache.lucene.document.Document doc =
 							Indexer.getAddArticleDocument(
 								companyId, groupId, articleId, version, title,
-								description, content, type, displayDate);
+								description, content, type, displayDate,
+								tagsEntries);
 
 						writer.addDocument(doc);
 					}
@@ -1255,19 +1264,14 @@ public class JournalArticleLocalServiceImpl
 		return article;
 	}
 
-	public Hits search(
-			long companyId, long groupId, String title, String description,
-			String content, String type)
+	public Hits search(long companyId, long groupId, String keywords)
 		throws SystemException {
 
-		return search(
-			companyId, groupId, title, description, content, type,
-			"displayDate");
+		return search(companyId, groupId, keywords, "displayDate");
 	}
 
 	public Hits search(
-			long companyId, long groupId, String title, String description,
-			String content, String type, String sortField)
+			long companyId, long groupId, String keywords, String sortField)
 		throws SystemException {
 
 		Searcher searcher = null;
@@ -1287,21 +1291,11 @@ public class JournalArticleLocalServiceImpl
 
 			BooleanQuery searchQuery = new BooleanQuery();
 
-			if (Validator.isNotNull(title)) {
-				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, title);
-			}
-
-			if (Validator.isNotNull(content)) {
-				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, content);
-			}
-
-			if (Validator.isNotNull(description)) {
+			if (Validator.isNotNull(keywords)) {
+				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
+				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
 				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.DESCRIPTION, description);
-			}
-
-			if (Validator.isNotNull(type)) {
-				LuceneUtil.addRequiredTerm(searchQuery, "type", type);
+					searchQuery, LuceneFields.DESCRIPTION, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();
@@ -1334,16 +1328,6 @@ public class JournalArticleLocalServiceImpl
 			return hits;
 		}
 		catch (Exception e) {
-			StringMaker sm = new StringMaker();
-
-			sm.append(title);
-			sm.append(StringPool.SPACE);
-			sm.append(content);
-			sm.append(StringPool.SPACE);
-			sm.append(description);
-
-			String keywords = sm.toString();
-
 			return LuceneUtil.closeSearcher(searcher, keywords, e);
 		}
 	}
@@ -1556,7 +1540,7 @@ public class JournalArticleLocalServiceImpl
 						article.getArticleId(), article.getVersion(),
 						article.getTitle(), article.getDescription(),
 						article.getContent(), article.getType(),
-						article.getDisplayDate());
+						article.getDisplayDate(), tagsEntries);
 				}
 				else {
 					Indexer.deleteArticle(

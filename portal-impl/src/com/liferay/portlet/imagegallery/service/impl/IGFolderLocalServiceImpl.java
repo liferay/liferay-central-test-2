@@ -38,6 +38,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
@@ -326,9 +327,14 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 					long imageId = image.getImageId();
 					String description = image.getDescription();
 
+					String[] tagsEntries =
+						TagsEntryLocalServiceUtil.getEntryNames(
+							IGImage.class.getName(), imageId);
+
 					try {
 						Document doc = Indexer.getAddImageDocument(
-							companyId, groupId, folderId, imageId, description);
+							companyId, groupId, folderId, imageId, description,
+							tagsEntries);
 
 						writer.addDocument(doc);
 					}
@@ -394,6 +400,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			if (Validator.isNotNull(keywords)) {
 				LuceneUtil.addTerm(
 					searchQuery, LuceneFields.DESCRIPTION, keywords);
+				LuceneUtil.addTerm(
+					searchQuery, LuceneFields.TAG_ENTRY, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();

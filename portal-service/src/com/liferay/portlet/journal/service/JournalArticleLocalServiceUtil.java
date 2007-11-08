@@ -913,23 +913,20 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type)
+		long groupId, java.lang.String keywords)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
-		return journalArticleLocalService.search(companyId, groupId, title,
-			description, content, type);
+		return journalArticleLocalService.search(companyId, groupId, keywords);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type,
-		java.lang.String sortField) throws com.liferay.portal.SystemException {
+		long groupId, java.lang.String keywords, java.lang.String sortField)
+		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
-		return journalArticleLocalService.search(companyId, groupId, title,
-			description, content, type, sortField);
+		return journalArticleLocalService.search(companyId, groupId, keywords,
+			sortField);
 	}
 
 	public static java.util.List search(long companyId, long groupId,

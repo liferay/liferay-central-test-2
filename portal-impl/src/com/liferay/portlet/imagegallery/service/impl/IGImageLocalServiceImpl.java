@@ -39,6 +39,7 @@ import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
+import com.liferay.portlet.imagegallery.util.Indexer;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ImageUtil;
 
@@ -52,6 +53,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="IGImageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -155,6 +159,17 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			updateTagsAsset(userId, image, tagsEntries);
 
+			// Lucene
+
+			try {
+				Indexer.addImage(
+					image.getCompanyId(), folder.getGroupId(), folderId,
+					imageId, description, tagsEntries);
+			}
+			catch (IOException ioe) {
+				_log.error("Indexing " + imageId, ioe);
+			}
+
 			return image;
 		}
 		catch (IOException ioe) {
@@ -218,6 +233,15 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public void deleteImage(IGImage image)
 		throws PortalException, SystemException {
+
+		// Lucene
+
+		try {
+			Indexer.deleteImage(image.getCompanyId(), image.getImageId());
+		}
+		catch (IOException ioe) {
+			_log.error("Deleting index " + image.getImageId(), ioe);
+		}
 
 		// Tags
 
@@ -364,6 +388,17 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			updateTagsAsset(userId, image, tagsEntries);
 
+			// Lucene
+
+			try {
+				Indexer.updateImage(
+					image.getCompanyId(), folder.getGroupId(),
+					folder.getFolderId(), imageId, description, tagsEntries);
+			}
+			catch (IOException ioe) {
+				_log.error("Indexing " + imageId, ioe);
+			}
+
 			return image;
 		}
 		catch (IOException ioe) {
@@ -488,5 +523,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			throw new ImageSizeException();
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(IGImageLocalServiceImpl.class);
 
 }

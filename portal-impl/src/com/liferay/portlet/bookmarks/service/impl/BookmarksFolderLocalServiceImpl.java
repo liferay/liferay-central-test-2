@@ -38,6 +38,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.util.Indexer;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
@@ -309,10 +310,14 @@ public class BookmarksFolderLocalServiceImpl
 					String content = entry.getUrl();
 					String description = entry.getComments();
 
+					String[] tagsEntries =
+						TagsEntryLocalServiceUtil.getEntryNames(
+							BookmarksEntry.class.getName(), entryId);
+
 					try {
 						Document doc = Indexer.getAddEntryDocument(
 							companyId, groupId, folderId, entryId, title,
-							content, description);
+							content, description, tagsEntries);
 
 						writer.addDocument(doc);
 					}
@@ -380,6 +385,8 @@ public class BookmarksFolderLocalServiceImpl
 				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
 				LuceneUtil.addTerm(
 					searchQuery, LuceneFields.DESCRIPTION, keywords);
+				LuceneUtil.addTerm(
+					searchQuery, LuceneFields.TAG_ENTRY, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();

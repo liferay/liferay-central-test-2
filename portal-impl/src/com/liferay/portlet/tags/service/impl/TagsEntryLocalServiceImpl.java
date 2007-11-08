@@ -40,6 +40,7 @@ import com.liferay.portlet.tags.service.base.TagsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.util.Autocomplete;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -181,6 +182,12 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
+		return getEntries(classNameId, classPK);
+	}
+
+	public List getEntries(long classNameId, long classPK)
+		throws PortalException, SystemException {
+
 		TagsAsset asset = tagsAssetPersistence.fetchByC_C(classNameId, classPK);
 
 		if (asset == null) {
@@ -227,6 +234,22 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 
 		return entryIds;
+	}
+
+	public String[] getEntryNames() throws SystemException {
+		return getEntryNames(getEntries());
+	}
+
+	public String[] getEntryNames(String className, long classPK)
+		throws PortalException, SystemException {
+
+		return getEntryNames(getEntries(className, classPK));
+	}
+
+	public String[] getEntryNames(long classNameId, long classPK)
+		throws PortalException, SystemException {
+
+		return getEntryNames(getEntries(classNameId, classPK));
 	}
 
 	public List search(long companyId, String name, String[] properties)
@@ -347,6 +370,10 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 
 		return entry;
+	}
+
+	protected String[] getEntryNames(List entries) {
+		return StringUtil.split(ListUtil.toString(entries, "name"));
 	}
 
 	protected void validate(String name)
