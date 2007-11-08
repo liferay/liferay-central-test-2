@@ -570,6 +570,8 @@
 			<forward name="portlet.image_gallery.error" path="portlet.image_gallery.error" />
 		</action>
 
+		<action path="/image_gallery/search" forward="portlet.image_gallery.search" />
+
 		<action path="/image_gallery/select_folder" type="com.liferay.portlet.imagegallery.action.EditFolderAction">
 			<forward name="portlet.image_gallery.edit_folder" path="portlet.image_gallery.select_folder" />
 			<forward name="portlet.image_gallery.error" path="portlet.image_gallery.error" />

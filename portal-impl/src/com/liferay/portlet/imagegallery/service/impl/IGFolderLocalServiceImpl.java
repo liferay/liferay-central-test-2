@@ -24,7 +24,11 @@ package com.liferay.portlet.imagegallery.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.lucene.LuceneFields;
+import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -33,11 +37,23 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
+import com.liferay.portlet.imagegallery.util.Indexer;
+import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.Term;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.Searcher;
+import org.apache.lucene.search.TermQuery;
 
 /**
  * <a href="IGFolderLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -284,6 +300,121 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		}
 	}
 
+	public void reIndex(String[] ids) throws SystemException {
+		long companyId = GetterUtil.getLong(ids[0]);
+
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
+
+			Iterator itr1 = igFolderPersistence.findByCompanyId(
+				companyId).iterator();
+
+			while (itr1.hasNext()) {
+				IGFolder folder = (IGFolder)itr1.next();
+
+				long folderId = folder.getFolderId();
+
+				Iterator itr2 = igImagePersistence.findByFolderId(
+					folderId).iterator();
+
+				while (itr2.hasNext()) {
+					IGImage image = (IGImage)itr2.next();
+
+					long groupId = folder.getGroupId();
+					long imageId = image.getImageId();
+					String description = image.getDescription();
+
+					try {
+						Document doc = Indexer.getAddImageDocument(
+							companyId, groupId, folderId, imageId, description);
+
+						writer.addDocument(doc);
+					}
+					catch (Exception e1) {
+						_log.error("Reindexing " + imageId, e1);
+					}
+				}
+			}
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e2) {
+			throw new SystemException(e2);
+		}
+		finally {
+			try {
+				if (writer != null) {
+					LuceneUtil.write(companyId);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+	}
+
+	public Hits search(
+			long companyId, long groupId, long[] folderIds, String keywords)
+		throws SystemException {
+
+		Searcher searcher = null;
+
+		try {
+			HitsImpl hits = new HitsImpl();
+
+			BooleanQuery contextQuery = new BooleanQuery();
+
+			LuceneUtil.addRequiredTerm(
+				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
+
+			if (groupId > 0) {
+				LuceneUtil.addRequiredTerm(
+					contextQuery, LuceneFields.GROUP_ID, groupId);
+			}
+
+			if ((folderIds != null) && (folderIds.length > 0)) {
+				BooleanQuery folderIdsQuery = new BooleanQuery();
+
+				for (int i = 0; i < folderIds.length; i++) {
+					Term term = new Term(
+						"folderId", String.valueOf(folderIds[i]));
+					TermQuery termQuery = new TermQuery(term);
+
+					folderIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
+				}
+
+				contextQuery.add(folderIdsQuery, BooleanClause.Occur.MUST);
+			}
+
+			BooleanQuery searchQuery = new BooleanQuery();
+
+			if (Validator.isNotNull(keywords)) {
+				LuceneUtil.addTerm(
+					searchQuery, LuceneFields.DESCRIPTION, keywords);
+			}
+
+			BooleanQuery fullQuery = new BooleanQuery();
+
+			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+
+			if (searchQuery.clauses().size() > 0) {
+				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+			}
+
+			searcher = LuceneUtil.getSearcher(companyId);
+
+			hits.recordHits(searcher.search(fullQuery), searcher);
+
+			return hits;
+		}
+		catch (Exception e) {
+			return LuceneUtil.closeSearcher(searcher, keywords, e);
+		}
+	}
+
 	public IGFolder updateFolder(
 			long folderId, long parentFolderId, String name, String description,
 			boolean mergeWithParentFolder)
@@ -401,5 +532,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			throw new FolderNameException();
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(IGFolderLocalServiceImpl.class);
 
 }

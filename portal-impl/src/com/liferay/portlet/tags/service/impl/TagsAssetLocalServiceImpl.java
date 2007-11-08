@@ -39,7 +39,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.tags.model.TagsAsset;
@@ -354,6 +356,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			if (Validator.isNotNull(keywords)) {
 				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
 				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+				LuceneUtil.addTerm(
+					searchQuery, LuceneFields.DESCRIPTION, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();
@@ -556,6 +560,13 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.BOOKMARKS)) {
+			long entryId = GetterUtil.getLong(doc.get("entryId"));
+
+			long classNameId = PortalUtil.getClassNameId(
+				BookmarksEntry.class.getName());
+			long classPK = entryId;
+
+			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 			long folderId = GetterUtil.getLong(doc.get("repositoryId"));
@@ -571,6 +582,13 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.IMAGE_GALLERY)) {
+			long imageId = GetterUtil.getLong(doc.get("imageId"));
+
+			long classNameId = PortalUtil.getClassNameId(
+				IGImage.class.getName());
+			long classPK = imageId;
+
+			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.JOURNAL)) {
 			long groupId = GetterUtil.getLong(

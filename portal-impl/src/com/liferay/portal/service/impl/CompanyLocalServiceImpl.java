@@ -429,10 +429,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		try {
 			HitsImpl hits = new HitsImpl();
 
-			if (Validator.isNull(keywords)) {
-				return hits;
-			}
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
@@ -455,13 +451,20 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			BooleanQuery searchQuery = new BooleanQuery();
 
-			LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
-			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+			if (Validator.isNotNull(keywords)) {
+				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
+				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+				LuceneUtil.addTerm(
+					searchQuery, LuceneFields.DESCRIPTION, keywords);
+			}
 
 			BooleanQuery fullQuery = new BooleanQuery();
 
 			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
-			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+
+			if (searchQuery.clauses().size() > 0) {
+				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+			}
 
 			searcher = LuceneUtil.getSearcher(companyId);
 

@@ -1275,12 +1275,6 @@ public class JournalArticleLocalServiceImpl
 		try {
 			HitsImpl hits = new HitsImpl();
 
-			if ((Validator.isNull(title)) && (Validator.isNull(content)) &&
-				(Validator.isNull(type))) {
-
-				return hits;
-			}
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
@@ -1293,10 +1287,18 @@ public class JournalArticleLocalServiceImpl
 
 			BooleanQuery searchQuery = new BooleanQuery();
 
-			LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, title);
-			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, content);
-			LuceneUtil.addTerm(
-				searchQuery, LuceneFields.DESCRIPTION, description);
+			if (Validator.isNotNull(title)) {
+				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, title);
+			}
+
+			if (Validator.isNotNull(content)) {
+				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, content);
+			}
+
+			if (Validator.isNotNull(description)) {
+				LuceneUtil.addTerm(
+					searchQuery, LuceneFields.DESCRIPTION, description);
+			}
 
 			if (Validator.isNotNull(type)) {
 				LuceneUtil.addRequiredTerm(searchQuery, "type", type);
@@ -1305,7 +1307,10 @@ public class JournalArticleLocalServiceImpl
 			BooleanQuery fullQuery = new BooleanQuery();
 
 			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
-			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+
+			if (searchQuery.clauses().size() > 0) {
+				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+			}
 
 			searcher = LuceneUtil.getSearcher(companyId);
 

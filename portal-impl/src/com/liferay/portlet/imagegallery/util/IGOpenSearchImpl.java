@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
@@ -20,16 +19,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/image_gallery/init.jsp" %>
+package com.liferay.portlet.imagegallery.util;
 
-<%
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.search.HitsOpenSearchImpl;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 
-IGImage image = (IGImage)row.getObject();
-%>
+/**
+ * <a href="IGOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class IGOpenSearchImpl extends HitsOpenSearchImpl {
 
-<a href="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getLargeImageId()) %>" target="_blank">
-<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getSmallImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getSmallImageId()) %>" title="<%= image.getDescription() %>" />
-</a>
+	public static final String SEARCH_PATH = "/c/image_gallery/open_search";
+
+	public static final String TITLE = "Liferay Image Gallery Search: ";
+
+	public Hits getHits(long companyId, String keywords) throws Exception {
+		return IGFolderLocalServiceUtil.search(companyId, 0, null, keywords);
+	}
+
+	public String getSearchPath() {
+		return SEARCH_PATH;
+	}
+
+	public String getTitle(String keywords) {
+		return TITLE + keywords;
+	}
+
+}

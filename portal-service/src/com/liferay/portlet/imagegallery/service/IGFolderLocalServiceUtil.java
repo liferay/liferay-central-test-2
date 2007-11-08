@@ -345,6 +345,21 @@ public class IGFolderLocalServiceUtil {
 		igFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
 	}
 
+	public static void reIndex(java.lang.String[] ids)
+		throws com.liferay.portal.SystemException {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+		igFolderLocalService.reIndex(ids);
+	}
+
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, long[] folderIds, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.search(companyId, groupId, folderIds,
+			keywords);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentFolder)
