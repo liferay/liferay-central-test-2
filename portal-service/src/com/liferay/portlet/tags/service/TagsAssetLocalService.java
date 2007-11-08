@@ -115,6 +115,26 @@ public interface TagsAssetLocalService {
 	public void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder);
 
+	public com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence();
+
+	public void setBlogsEntryPersistence(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence);
+
+	public com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder getBlogsEntryFinder();
+
+	public void setBlogsEntryFinder(
+		com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder blogsEntryFinder);
+
+	public com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence getBookmarksEntryPersistence();
+
+	public void setBookmarksEntryPersistence(
+		com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence bookmarksEntryPersistence);
+
+	public com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder getBookmarksEntryFinder();
+
+	public void setBookmarksEntryFinder(
+		com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder bookmarksEntryFinder);
+
 	public com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence();
 
 	public void setDLFileEntryPersistence(
@@ -125,10 +145,40 @@ public interface TagsAssetLocalService {
 	public void setDLFileEntryFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder dlFileEntryFinder);
 
+	public com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence();
+
+	public void setJournalArticlePersistence(
+		com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence);
+
+	public com.liferay.portlet.journal.service.persistence.JournalArticleFinder getJournalArticleFinder();
+
+	public void setJournalArticleFinder(
+		com.liferay.portlet.journal.service.persistence.JournalArticleFinder journalArticleFinder);
+
 	public com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence getJournalArticleResourcePersistence();
 
 	public void setJournalArticleResourcePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence();
+
+	public void setMBMessagePersistence(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence);
+
+	public com.liferay.portlet.messageboards.service.persistence.MBMessageFinder getMBMessageFinder();
+
+	public void setMBMessageFinder(
+		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder);
+
+	public com.liferay.portlet.wiki.service.persistence.WikiPagePersistence getWikiPagePersistence();
+
+	public void setWikiPagePersistence(
+		com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence);
+
+	public com.liferay.portlet.wiki.service.persistence.WikiPageFinder getWikiPageFinder();
+
+	public void setWikiPageFinder(
+		com.liferay.portlet.wiki.service.persistence.WikiPageFinder wikiPageFinder);
 
 	public com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence getWikiPageResourcePersistence();
 
@@ -265,7 +315,8 @@ public interface TagsAssetLocalService {
 		java.util.Date endDate, java.util.Date publishDate,
 		java.util.Date expirationDate, java.lang.String mimeType,
 		java.lang.String title, java.lang.String description,
-		java.lang.String summary, java.lang.String url, int height, int width)
+		java.lang.String summary, java.lang.String url, int height, int width,
+		java.lang.Integer priority)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -276,7 +327,7 @@ public interface TagsAssetLocalService {
 		java.util.Date expirationDate, java.lang.String mimeType,
 		java.lang.String title, java.lang.String description,
 		java.lang.String summary, java.lang.String url, int height, int width,
-		java.lang.Integer priority)
+		java.lang.Integer priority, boolean sync)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

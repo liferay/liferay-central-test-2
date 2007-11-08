@@ -1609,7 +1609,7 @@ public class JournalArticleLocalServiceImpl
 				article.getResourcePrimKey(), tagsEntries, null, null,
 				article.getDisplayDate(), article.getExpirationDate(),
 				ContentTypes.TEXT_HTML, article.getTitle(),
-				article.getDescription(), article.getDescription(), null, 0, 0);
+				article.getDescription(), null, null, 0, 0, null, false);
 		}
 	}
 

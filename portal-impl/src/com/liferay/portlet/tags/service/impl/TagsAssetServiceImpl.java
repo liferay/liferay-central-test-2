@@ -103,26 +103,13 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 			long groupId, String className, long classPK, String[] entryNames,
 			Date startDate, Date endDate, Date publishDate, Date expirationDate,
 			String mimeType, String title, String description, String summary,
-			String url, int height, int width)
+			String url, int height, int width, Integer priority)
 		throws PortalException, SystemException {
 
 		return tagsAssetLocalService.updateAsset(
 			getUserId(), groupId, className, classPK, entryNames, startDate,
 			endDate, publishDate, expirationDate, mimeType, title, description,
-			summary, url, height, width);
-	}
-
-	public TagsAsset updateAsset(
-			long groupId, String className, long classPK, String[] entryNames,
-			Date startDate, Date endDate, Date publishDate, Date expirationDate,
-			String mimeType, String title, String description, String summary,
-			String url, int height, int width, int priority)
-		throws PortalException, SystemException {
-
-		return tagsAssetLocalService.updateAsset(
-			getUserId(), groupId, className, classPK, entryNames, startDate,
-			endDate, publishDate, expirationDate, mimeType, title, description,
-			summary, url, height, width, new Integer(priority));
+			summary, url, height, width, priority);
 	}
 
 }

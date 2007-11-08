@@ -809,7 +809,7 @@ public class DLFileEntryLocalServiceImpl
 			userId, fileEntry.getFolder().getGroupId(),
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
 			tagsEntries, null, null, null, null, mimeType, fileEntry.getTitle(),
-			fileEntry.getDescription(), fileEntry.getDescription(), null, 0, 0);
+			fileEntry.getDescription(), null, null, 0, 0, null, false);
 	}
 
 	protected long getFolderId(long companyId, long folderId)

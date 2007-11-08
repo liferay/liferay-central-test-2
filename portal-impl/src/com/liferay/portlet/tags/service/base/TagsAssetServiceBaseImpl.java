@@ -37,6 +37,22 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory;
+import com.liferay.portlet.blogs.service.BlogsEntryService;
+import com.liferay.portlet.blogs.service.BlogsEntryServiceFactory;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceFactory;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderUtil;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
@@ -45,10 +61,26 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
+import com.liferay.portlet.journal.service.JournalArticleLocalService;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalService;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory;
+import com.liferay.portlet.journal.service.JournalArticleService;
+import com.liferay.portlet.journal.service.JournalArticleServiceFactory;
+import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
+import com.liferay.portlet.journal.service.persistence.JournalArticleFinderUtil;
+import com.liferay.portlet.journal.service.persistence.JournalArticlePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
+import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory;
+import com.liferay.portlet.messageboards.service.MBMessageService;
+import com.liferay.portlet.messageboards.service.MBMessageServiceFactory;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil;
+import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
@@ -82,10 +114,18 @@ import com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.service.persistence.TagsSourcePersistence;
 import com.liferay.portlet.tags.service.persistence.TagsSourceUtil;
+import com.liferay.portlet.wiki.service.WikiPageLocalService;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalService;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory;
+import com.liferay.portlet.wiki.service.WikiPageService;
+import com.liferay.portlet.wiki.service.WikiPageServiceFactory;
+import com.liferay.portlet.wiki.service.persistence.WikiPageFinder;
+import com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil;
+import com.liferay.portlet.wiki.service.persistence.WikiPagePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil;
+import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
@@ -274,6 +314,76 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
+	public BlogsEntryLocalService getBlogsEntryLocalService() {
+		return blogsEntryLocalService;
+	}
+
+	public void setBlogsEntryLocalService(
+		BlogsEntryLocalService blogsEntryLocalService) {
+		this.blogsEntryLocalService = blogsEntryLocalService;
+	}
+
+	public BlogsEntryService getBlogsEntryService() {
+		return blogsEntryService;
+	}
+
+	public void setBlogsEntryService(BlogsEntryService blogsEntryService) {
+		this.blogsEntryService = blogsEntryService;
+	}
+
+	public BlogsEntryPersistence getBlogsEntryPersistence() {
+		return blogsEntryPersistence;
+	}
+
+	public void setBlogsEntryPersistence(
+		BlogsEntryPersistence blogsEntryPersistence) {
+		this.blogsEntryPersistence = blogsEntryPersistence;
+	}
+
+	public BlogsEntryFinder getBlogsEntryFinder() {
+		return blogsEntryFinder;
+	}
+
+	public void setBlogsEntryFinder(BlogsEntryFinder blogsEntryFinder) {
+		this.blogsEntryFinder = blogsEntryFinder;
+	}
+
+	public BookmarksEntryLocalService getBookmarksEntryLocalService() {
+		return bookmarksEntryLocalService;
+	}
+
+	public void setBookmarksEntryLocalService(
+		BookmarksEntryLocalService bookmarksEntryLocalService) {
+		this.bookmarksEntryLocalService = bookmarksEntryLocalService;
+	}
+
+	public BookmarksEntryService getBookmarksEntryService() {
+		return bookmarksEntryService;
+	}
+
+	public void setBookmarksEntryService(
+		BookmarksEntryService bookmarksEntryService) {
+		this.bookmarksEntryService = bookmarksEntryService;
+	}
+
+	public BookmarksEntryPersistence getBookmarksEntryPersistence() {
+		return bookmarksEntryPersistence;
+	}
+
+	public void setBookmarksEntryPersistence(
+		BookmarksEntryPersistence bookmarksEntryPersistence) {
+		this.bookmarksEntryPersistence = bookmarksEntryPersistence;
+	}
+
+	public BookmarksEntryFinder getBookmarksEntryFinder() {
+		return bookmarksEntryFinder;
+	}
+
+	public void setBookmarksEntryFinder(
+		BookmarksEntryFinder bookmarksEntryFinder) {
+		this.bookmarksEntryFinder = bookmarksEntryFinder;
+	}
+
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}
@@ -308,6 +418,42 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 		this.dlFileEntryFinder = dlFileEntryFinder;
 	}
 
+	public JournalArticleLocalService getJournalArticleLocalService() {
+		return journalArticleLocalService;
+	}
+
+	public void setJournalArticleLocalService(
+		JournalArticleLocalService journalArticleLocalService) {
+		this.journalArticleLocalService = journalArticleLocalService;
+	}
+
+	public JournalArticleService getJournalArticleService() {
+		return journalArticleService;
+	}
+
+	public void setJournalArticleService(
+		JournalArticleService journalArticleService) {
+		this.journalArticleService = journalArticleService;
+	}
+
+	public JournalArticlePersistence getJournalArticlePersistence() {
+		return journalArticlePersistence;
+	}
+
+	public void setJournalArticlePersistence(
+		JournalArticlePersistence journalArticlePersistence) {
+		this.journalArticlePersistence = journalArticlePersistence;
+	}
+
+	public JournalArticleFinder getJournalArticleFinder() {
+		return journalArticleFinder;
+	}
+
+	public void setJournalArticleFinder(
+		JournalArticleFinder journalArticleFinder) {
+		this.journalArticleFinder = journalArticleFinder;
+	}
+
 	public JournalArticleResourceLocalService getJournalArticleResourceLocalService() {
 		return journalArticleResourceLocalService;
 	}
@@ -324,6 +470,73 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 	public void setJournalArticleResourcePersistence(
 		JournalArticleResourcePersistence journalArticleResourcePersistence) {
 		this.journalArticleResourcePersistence = journalArticleResourcePersistence;
+	}
+
+	public MBMessageLocalService getMBMessageLocalService() {
+		return mbMessageLocalService;
+	}
+
+	public void setMBMessageLocalService(
+		MBMessageLocalService mbMessageLocalService) {
+		this.mbMessageLocalService = mbMessageLocalService;
+	}
+
+	public MBMessageService getMBMessageService() {
+		return mbMessageService;
+	}
+
+	public void setMBMessageService(MBMessageService mbMessageService) {
+		this.mbMessageService = mbMessageService;
+	}
+
+	public MBMessagePersistence getMBMessagePersistence() {
+		return mbMessagePersistence;
+	}
+
+	public void setMBMessagePersistence(
+		MBMessagePersistence mbMessagePersistence) {
+		this.mbMessagePersistence = mbMessagePersistence;
+	}
+
+	public MBMessageFinder getMBMessageFinder() {
+		return mbMessageFinder;
+	}
+
+	public void setMBMessageFinder(MBMessageFinder mbMessageFinder) {
+		this.mbMessageFinder = mbMessageFinder;
+	}
+
+	public WikiPageLocalService getWikiPageLocalService() {
+		return wikiPageLocalService;
+	}
+
+	public void setWikiPageLocalService(
+		WikiPageLocalService wikiPageLocalService) {
+		this.wikiPageLocalService = wikiPageLocalService;
+	}
+
+	public WikiPageService getWikiPageService() {
+		return wikiPageService;
+	}
+
+	public void setWikiPageService(WikiPageService wikiPageService) {
+		this.wikiPageService = wikiPageService;
+	}
+
+	public WikiPagePersistence getWikiPagePersistence() {
+		return wikiPagePersistence;
+	}
+
+	public void setWikiPagePersistence(WikiPagePersistence wikiPagePersistence) {
+		this.wikiPagePersistence = wikiPagePersistence;
+	}
+
+	public WikiPageFinder getWikiPageFinder() {
+		return wikiPageFinder;
+	}
+
+	public void setWikiPageFinder(WikiPageFinder wikiPageFinder) {
+		this.wikiPageFinder = wikiPageFinder;
 	}
 
 	public WikiPageResourceLocalService getWikiPageResourceLocalService() {
@@ -429,6 +642,38 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 			userFinder = UserFinderUtil.getFinder();
 		}
 
+		if (blogsEntryLocalService == null) {
+			blogsEntryLocalService = BlogsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (blogsEntryService == null) {
+			blogsEntryService = BlogsEntryServiceFactory.getImpl();
+		}
+
+		if (blogsEntryPersistence == null) {
+			blogsEntryPersistence = BlogsEntryUtil.getPersistence();
+		}
+
+		if (blogsEntryFinder == null) {
+			blogsEntryFinder = BlogsEntryFinderUtil.getFinder();
+		}
+
+		if (bookmarksEntryLocalService == null) {
+			bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getImpl();
+		}
+
+		if (bookmarksEntryService == null) {
+			bookmarksEntryService = BookmarksEntryServiceFactory.getImpl();
+		}
+
+		if (bookmarksEntryPersistence == null) {
+			bookmarksEntryPersistence = BookmarksEntryUtil.getPersistence();
+		}
+
+		if (bookmarksEntryFinder == null) {
+			bookmarksEntryFinder = BookmarksEntryFinderUtil.getFinder();
+		}
+
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}
@@ -445,12 +690,60 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 			dlFileEntryFinder = DLFileEntryFinderUtil.getFinder();
 		}
 
+		if (journalArticleLocalService == null) {
+			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
+		}
+
+		if (journalArticleService == null) {
+			journalArticleService = JournalArticleServiceFactory.getImpl();
+		}
+
+		if (journalArticlePersistence == null) {
+			journalArticlePersistence = JournalArticleUtil.getPersistence();
+		}
+
+		if (journalArticleFinder == null) {
+			journalArticleFinder = JournalArticleFinderUtil.getFinder();
+		}
+
 		if (journalArticleResourceLocalService == null) {
 			journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getImpl();
 		}
 
 		if (journalArticleResourcePersistence == null) {
 			journalArticleResourcePersistence = JournalArticleResourceUtil.getPersistence();
+		}
+
+		if (mbMessageLocalService == null) {
+			mbMessageLocalService = MBMessageLocalServiceFactory.getImpl();
+		}
+
+		if (mbMessageService == null) {
+			mbMessageService = MBMessageServiceFactory.getImpl();
+		}
+
+		if (mbMessagePersistence == null) {
+			mbMessagePersistence = MBMessageUtil.getPersistence();
+		}
+
+		if (mbMessageFinder == null) {
+			mbMessageFinder = MBMessageFinderUtil.getFinder();
+		}
+
+		if (wikiPageLocalService == null) {
+			wikiPageLocalService = WikiPageLocalServiceFactory.getImpl();
+		}
+
+		if (wikiPageService == null) {
+			wikiPageService = WikiPageServiceFactory.getImpl();
+		}
+
+		if (wikiPagePersistence == null) {
+			wikiPagePersistence = WikiPageUtil.getPersistence();
+		}
+
+		if (wikiPageFinder == null) {
+			wikiPageFinder = WikiPageFinderUtil.getFinder();
 		}
 
 		if (wikiPageResourceLocalService == null) {
@@ -483,12 +776,32 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
+	protected BlogsEntryLocalService blogsEntryLocalService;
+	protected BlogsEntryService blogsEntryService;
+	protected BlogsEntryPersistence blogsEntryPersistence;
+	protected BlogsEntryFinder blogsEntryFinder;
+	protected BookmarksEntryLocalService bookmarksEntryLocalService;
+	protected BookmarksEntryService bookmarksEntryService;
+	protected BookmarksEntryPersistence bookmarksEntryPersistence;
+	protected BookmarksEntryFinder bookmarksEntryFinder;
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	protected DLFileEntryService dlFileEntryService;
 	protected DLFileEntryPersistence dlFileEntryPersistence;
 	protected DLFileEntryFinder dlFileEntryFinder;
+	protected JournalArticleLocalService journalArticleLocalService;
+	protected JournalArticleService journalArticleService;
+	protected JournalArticlePersistence journalArticlePersistence;
+	protected JournalArticleFinder journalArticleFinder;
 	protected JournalArticleResourceLocalService journalArticleResourceLocalService;
 	protected JournalArticleResourcePersistence journalArticleResourcePersistence;
+	protected MBMessageLocalService mbMessageLocalService;
+	protected MBMessageService mbMessageService;
+	protected MBMessagePersistence mbMessagePersistence;
+	protected MBMessageFinder mbMessageFinder;
+	protected WikiPageLocalService wikiPageLocalService;
+	protected WikiPageService wikiPageService;
+	protected WikiPagePersistence wikiPagePersistence;
+	protected WikiPageFinder wikiPageFinder;
 	protected WikiPageResourceLocalService wikiPageResourceLocalService;
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
 }

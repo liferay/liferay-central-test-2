@@ -384,9 +384,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		tagsAssetLocalService.updateAsset(
 			userId, image.getFolder().getGroupId(), IGImage.class.getName(),
 			image.getImageId(), tagsEntries, null, null, null, null,
-			largeImage.getType(), image.getDescription(),
-			image.getDescription(), image.getDescription(), null,
-			largeImage.getHeight(), largeImage.getWidth());
+			largeImage.getType(), null, image.getDescription(), null, null,
+			largeImage.getHeight(), largeImage.getWidth(), null, false);
 	}
 
 	protected IGFolder getFolder(IGImage image, long folderId)

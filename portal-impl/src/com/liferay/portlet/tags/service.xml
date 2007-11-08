@@ -57,8 +57,13 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.blogs" entity="BlogsEntry" />
+		<reference package-path="com.liferay.portlet.bookmarks" entity="BookmarksEntry" />
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileEntry" />
+		<reference package-path="com.liferay.portlet.journal" entity="JournalArticle" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalArticleResource" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
+		<reference package-path="com.liferay.portlet.wiki" entity="WikiPage" />
 		<reference package-path="com.liferay.portlet.wiki" entity="WikiPageResource" />
 	</entity>
 	<entity name="TagsEntry" local-service="true" remote-service="true">

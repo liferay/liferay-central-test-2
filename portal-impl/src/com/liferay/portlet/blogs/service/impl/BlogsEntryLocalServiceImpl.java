@@ -614,8 +614,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		tagsAssetLocalService.updateAsset(
 			userId, entry.getGroupId(), BlogsEntry.class.getName(),
 			entry.getEntryId(), tagsEntries, null, null, null, null,
-			ContentTypes.TEXT_HTML, entry.getTitle(), entry.getTitle(),
-			entry.getTitle(), null, 0, 0);
+			ContentTypes.TEXT_HTML, entry.getTitle(), null, null, null, 0, 0,
+			null);
 	}
 
 	protected long getCategoryId(long companyId, long categoryId)

@@ -393,7 +393,7 @@ public class BookmarksEntryLocalServiceImpl
 			userId, entry.getFolder().getGroupId(),
 			BookmarksEntry.class.getName(), entry.getEntryId(), tagsEntries,
 			null, null, null, null, ContentTypes.TEXT_PLAIN, entry.getName(),
-			entry.getComments(), entry.getComments(), entry.getUrl(), 0, 0);
+			entry.getComments(), null, entry.getUrl(), 0, 0, null, false);
 	}
 
 	protected BookmarksFolder getFolder(BookmarksEntry entry, long folderId)

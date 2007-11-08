@@ -429,21 +429,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		return updateAsset(
 			userId, groupId, className, classPK, entryNames, null, null, null,
-			null, null, null, null, null, null, 0, 0);
-	}
-
-	public TagsAsset updateAsset(
-			long userId, long groupId, String className, long classPK,
-			String[] entryNames, Date startDate, Date endDate, Date publishDate,
-			Date expirationDate, String mimeType, String title,
-			String description, String summary, String url, int height,
-			int width)
-		throws PortalException, SystemException {
-
-		return updateAsset(
-			userId, groupId, className, classPK, entryNames, startDate, endDate,
-			publishDate, expirationDate, mimeType, title, description, summary,
-			url, height, width, null);
+			null, null, null, null, null, null, 0, 0, null);
 	}
 
 	public TagsAsset updateAsset(
@@ -452,6 +438,20 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			Date expirationDate, String mimeType, String title,
 			String description, String summary, String url, int height,
 			int width, Integer priority)
+		throws PortalException, SystemException {
+
+		return updateAsset(
+			userId, groupId, className, classPK, entryNames, startDate,
+			endDate, publishDate, expirationDate, mimeType, title, description,
+			summary, url, height, width, priority, true);
+	}
+
+	public TagsAsset updateAsset(
+			long userId, long groupId, String className, long classPK,
+			String[] entryNames, Date startDate, Date endDate, Date publishDate,
+			Date expirationDate, String mimeType, String title,
+			String description, String summary, String url, int height,
+			int width, Integer priority, boolean sync)
 		throws PortalException, SystemException {
 
 		// Asset
@@ -531,6 +531,62 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		}
 
 		tagsAssetPersistence.setTagsEntries(asset.getAssetId(), entries);
+
+		// Synchronize
+
+		if (!sync) {
+			return asset;
+		}
+
+		if (className.equals(BlogsEntry.class.getName())) {
+			BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(classPK);
+
+			entry.setTitle(title);
+
+			blogsEntryPersistence.update(entry);
+		}
+		else if (className.equals(BookmarksEntry.class.getName())) {
+			BookmarksEntry entry = bookmarksEntryPersistence.findByPrimaryKey(
+				classPK);
+
+			entry.setName(title);
+			entry.setComments(description);
+			entry.setUrl(url);
+
+			bookmarksEntryPersistence.update(entry);
+		}
+		else if (className.equals(DLFileEntry.class.getName())) {
+			DLFileEntry fileEntry = dlFileEntryPersistence.findByPrimaryKey(
+				classPK);
+
+			fileEntry.setTitle(title);
+			fileEntry.setDescription(description);
+
+			dlFileEntryPersistence.update(fileEntry);
+		}
+		else if (className.equals(JournalArticle.class.getName())) {
+			JournalArticle article = journalArticlePersistence.findByPrimaryKey(
+				classPK);
+
+			article.setTitle(title);
+			article.setDescription(description);
+
+			journalArticlePersistence.update(article);
+		}
+		else if (className.equals(MBMessage.class.getName())) {
+			MBMessage message = mbMessagePersistence.findByPrimaryKey(classPK);
+
+			message.setSubject(title);
+
+			mbMessagePersistence.update(message);
+		}
+		else if (className.equals(WikiPage.class.getName())) {
+			WikiPage page = wikiPagePersistence.findByPrimaryKey(classPK);
+
+			page.setTitle(title);
+
+			wikiPagePersistence.update(page);
+		}
 
 		return asset;
 	}

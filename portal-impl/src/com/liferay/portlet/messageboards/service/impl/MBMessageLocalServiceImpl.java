@@ -1163,8 +1163,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			userId, message.getCategory().getGroupId(),
 			MBMessage.class.getName(), message.getMessageId(), tagsEntries,
 			null, null, null, null, ContentTypes.TEXT_HTML,
-			message.getSubject(), message.getSubject(), message.getSubject(),
-			null, 0, 0);
+			message.getSubject(), null, null, null, 0, 0, null, false);
 	}
 
 	protected MBCategory getCategory(MBMessage message, long categoryId)
