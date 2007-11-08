@@ -87,7 +87,9 @@ public class StartupAction extends SimpleAction {
 				PortalJNDIUtil.getMailSession();
 			}
 			catch (Exception e) {
-				_log.error(e, e);
+				if (_log.isWarnEnabled()) {
+					_log.warn(e.getMessage());
+				}
 			}
 
 			// Disable database caching before upgrade
