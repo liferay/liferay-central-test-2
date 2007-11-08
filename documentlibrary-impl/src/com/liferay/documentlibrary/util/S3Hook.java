@@ -86,7 +86,8 @@ public class S3Hook extends BaseHook {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, InputStream is)
+			String fileName, String properties, String[] tagsEntries,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		try {
@@ -100,7 +101,7 @@ public class S3Hook extends BaseHook {
 
 			Indexer.addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				properties);
+				properties, tagsEntries);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -302,7 +303,7 @@ public class S3Hook extends BaseHook {
 				String fileName = (String)itr.next();
 
 				try {
-					Document doc = IndexerImpl.getAddFileDocument(
+					Document doc = Indexer.getAddFileDocument(
 						companyId, portletId, groupId, repositoryId, fileName);
 
 					writer.addDocument(doc);
@@ -333,7 +334,7 @@ public class S3Hook extends BaseHook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, InputStream is)
+			String properties, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException {
 
 		try {
@@ -347,7 +348,7 @@ public class S3Hook extends BaseHook {
 
 			Indexer.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				properties);
+				properties, tagsEntries);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

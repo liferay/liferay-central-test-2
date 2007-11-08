@@ -22,24 +22,42 @@
 
 package com.liferay.documentlibrary.util;
 
-import com.liferay.documentlibrary.service.jms.IndexProducer;
-import com.liferay.portal.kernel.search.Document;
+import com.liferay.documentlibrary.service.impl.DLServiceImpl;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.lucene.LuceneFields;
+import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import java.io.IOException;
+import java.io.InputStream;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Properties;
 
 import javax.portlet.PortletURL;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.Term;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Harry Mark
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -49,49 +67,42 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			String fileName)
 		throws IOException {
 
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(
-				IndexerImpl.class.getName(), "addFile",
-				new Object[] {
-					new LongWrapper(companyId), portletId,
-					new LongWrapper(groupId), new LongWrapper(repositoryId),
-					fileName
-				});
+		Document doc = getAddFileDocument(
+			companyId, portletId, groupId, repositoryId, fileName);
 
-			IndexProducer.produce(methodWrapper);
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
+
+			writer.addDocument(doc);
 		}
-		catch (Exception e) {
-			if (e instanceof IOException) {
-				throw (IOException)e;
-			}
-			else {
-				_log.error(e);
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
 			}
 		}
 	}
 
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties)
+			String fileName, String properties, String[] tagsEntries)
 		throws IOException {
 
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(
-				IndexerImpl.class.getName(), "addFile",
-				new Object[] {
-					new LongWrapper(companyId), portletId,
-					new LongWrapper(groupId), new LongWrapper(repositoryId),
-					fileName, properties
-				});
+		Document doc = getAddFileDocument(
+			companyId, portletId, groupId, repositoryId, fileName, properties,
+			tagsEntries);
 
-			IndexProducer.produce(methodWrapper);
+		IndexWriter writer = null;
+
+		try {
+			writer = LuceneUtil.getWriter(companyId);
+
+			writer.addDocument(doc);
 		}
-		catch (Exception e) {
-			if (e instanceof IOException) {
-				throw (IOException)e;
-			}
-			else {
-				_log.error(e);
+		finally {
+			if (writer != null) {
+				LuceneUtil.write(companyId);
 			}
 		}
 	}
@@ -101,60 +112,186 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			String fileName)
 		throws IOException {
 
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(
-				IndexerImpl.class.getName(), "deleteFile",
-				new Object[] {
-					new LongWrapper(companyId), portletId,
-					new LongWrapper(repositoryId), fileName
-				});
+		LuceneUtil.deleteDocuments(
+			companyId,
+			new Term(
+				LuceneFields.UID,
+				LuceneFields.getUID(portletId, repositoryId, fileName)));
+	}
 
-			IndexProducer.produce(methodWrapper);
+	public static Document getAddFileDocument(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName)
+		throws IOException {
+
+		try {
+			DLFileEntry fileEntry = null;
+
+			try {
+				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+					repositoryId, fileName);
+			}
+			catch (NoSuchFileEntryException nsfe) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"File " + fileName + " in repository " +
+							repositoryId + " exists in the JCR but does " +
+								"not exist in the database");
+				}
+
+				return null;
+			}
+
+			StringMaker sm = new StringMaker();
+
+			sm.append(fileEntry.getTitle());
+			sm.append(StringPool.SPACE);
+			sm.append(fileEntry.getDescription());
+			sm.append(StringPool.SPACE);
+
+			Properties extraSettingsProps =
+				fileEntry.getExtraSettingsProperties();
+
+			Iterator itr =
+				(Iterator)extraSettingsProps.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry entry = (Map.Entry)itr.next();
+
+				String value = GetterUtil.getString(
+					(String)entry.getValue());
+
+				sm.append(value);
+			}
+
+			String properties = sm.toString();
+
+			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+			return getAddFileDocument(
+				companyId, portletId, groupId, repositoryId, fileName,
+				properties, tagsEntries);
+		}
+		catch (PortalException pe) {
+			throw new IOException(pe.getMessage());
+		}
+		catch (SystemException se) {
+			throw new IOException(se.getMessage());
+		}
+	}
+
+	public static Document getAddFileDocument(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String properties, String[] tagsEntries)
+		throws IOException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Indexing document " + companyId + " " + portletId + " " +
+					groupId + " " + repositoryId + " " + fileName);
+		}
+
+		String fileExt = StringPool.BLANK;
+
+		int fileExtVersionPos = fileName.indexOf(DLServiceImpl.VERSION);
+
+		if (fileExtVersionPos != -1) {
+			int fileExtPos = fileName.lastIndexOf(
+				StringPool.PERIOD, fileExtVersionPos);
+
+			if (fileExtPos != -1) {
+				fileExt = fileName.substring(fileExtPos, fileExtVersionPos);
+			}
+		}
+		else {
+			int fileExtPos = fileName.lastIndexOf(StringPool.PERIOD);
+
+			if (fileExtPos != -1) {
+				fileExt = fileName.substring(fileExtPos, fileName.length());
+			}
+		}
+
+		InputStream is = null;
+
+		try {
+			Hook hook = HookFactory.getInstance();
+
+			is = hook.getFileAsStream(companyId, repositoryId, fileName);
 		}
 		catch (Exception e) {
-			if (e instanceof IOException) {
-				throw (IOException)e;
-			}
-			else {
-				_log.error(e);
-			}
 		}
+
+		if (is == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Document " + companyId + " " + portletId + " " + groupId +
+						" " + repositoryId + " " + fileName +
+							" does not have any content");
+			}
+
+			return null;
+		}
+
+		Document doc = new Document();
+
+		LuceneUtil.addKeyword(
+			doc, LuceneFields.UID,
+			LuceneFields.getUID(portletId, repositoryId, fileName));
+
+		LuceneUtil.addKeyword(doc, LuceneFields.COMPANY_ID, companyId);
+		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, portletId);
+		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
+
+		doc.add(LuceneFields.getFile(LuceneFields.CONTENT, is, fileExt));
+
+		if (Validator.isNotNull(properties)) {
+			LuceneUtil.addText(doc, LuceneFields.PROPERTIES, properties);
+		}
+
+		LuceneUtil.addModifiedDate(doc);
+
+		LuceneUtil.addKeyword(doc, "repositoryId", repositoryId);
+		LuceneUtil.addKeyword(doc, "path", fileName);
+
+		LuceneUtil.addKeyword(doc, LuceneFields.TAG_ENTRY, tagsEntries);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Document " + companyId + " " + portletId + " " + groupId +
+					" " + repositoryId + " " + fileName +
+						" indexed successfully");
+		}
+
+		return doc;
 	}
 
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties)
+			String fileName, String properties, String[] tagsEntries)
 		throws IOException {
 
 		try {
-			MethodWrapper methodWrapper = new MethodWrapper(
-				IndexerImpl.class.getName(), "updateFile",
-				new Object[] {
-					new LongWrapper(companyId), portletId,
-					new LongWrapper(groupId), new LongWrapper(repositoryId),
-					fileName, properties
-				});
+			deleteFile(companyId, portletId, repositoryId, fileName);
+		}
+		catch (IOException ioe) {
+		}
 
-			IndexProducer.produce(methodWrapper);
-		}
-		catch (Exception e) {
-			if (e instanceof IOException) {
-				throw (IOException)e;
-			}
-			else {
-				_log.error(e);
-			}
-		}
+		addFile(
+			companyId, portletId, groupId, repositoryId, fileName, properties,
+			tagsEntries);
 	}
 
 	public DocumentSummary getDocumentSummary(
-		Document doc, PortletURL portletURL) {
+		com.liferay.portal.kernel.search.Document doc, PortletURL portletURL) {
 
 		return null;
 	}
 
 	public void reIndex(String[] ids) throws SearchException {
-		IndexerImpl.reIndex(ids);
+		Hook hook = HookFactory.getInstance();
+
+		hook.reIndex(ids);
 	}
 
 	private static Log _log = LogFactory.getLog(Indexer.class);

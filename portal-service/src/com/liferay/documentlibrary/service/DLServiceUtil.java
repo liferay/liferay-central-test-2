@@ -48,26 +48,27 @@ public class DLServiceUtil {
 
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, File file)
+			String fileName, String properties, String[] tagsEntries, File file)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
 
 		dlService.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
-			file);
+			tagsEntries, file);
 	}
 
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, byte[] byteArray)
+			String fileName, String properties, String[] tagsEntries,
+			byte[] byteArray)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
 
 		dlService.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
-			byteArray);
+			tagsEntries, byteArray);
 	}
 
 	public static void deleteDirectory(
@@ -149,27 +150,27 @@ public class DLServiceUtil {
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, File file)
+			String properties, String[] tagsEntries, File file)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
 
 		dlService.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, properties, file);
+			versionNumber, sourceFileName, properties, tagsEntries, file);
 	}
 
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, byte[] byteArray)
+			String properties, String[] tagsEntries, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
 
 		dlService.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, properties, byteArray);
+			versionNumber, sourceFileName, properties, tagsEntries, byteArray);
 	}
 
 	public static void updateFile(

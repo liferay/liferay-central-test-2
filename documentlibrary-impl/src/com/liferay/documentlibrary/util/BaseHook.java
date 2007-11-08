@@ -54,7 +54,8 @@ public abstract class BaseHook implements Hook {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, File file)
+			String fileName, String properties, String[] tagsEntries,
+			File file)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -64,7 +65,7 @@ public abstract class BaseHook implements Hook {
 
 			addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				properties, is);
+				properties, tagsEntries, is);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException(fileName);
@@ -83,7 +84,8 @@ public abstract class BaseHook implements Hook {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, byte[] byteArray)
+			String fileName, String properties, String[] tagsEntries,
+			byte[] byteArray)
 		throws PortalException, SystemException {
 
 		InputStream is = new ByteArrayInputStream(byteArray);
@@ -91,7 +93,7 @@ public abstract class BaseHook implements Hook {
 		try {
 			addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				properties, is);
+				properties, tagsEntries, is);
 		}
 		finally {
 			try {
@@ -105,7 +107,8 @@ public abstract class BaseHook implements Hook {
 
 	public abstract void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, InputStream is)
+			String fileName, String properties, String[] tagsEntries,
+			InputStream is)
 		throws PortalException, SystemException;
 
 	public abstract void checkRoot(long companyId) throws SystemException;
@@ -194,7 +197,7 @@ public abstract class BaseHook implements Hook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, File file)
+			String properties, String[] tagsEntries, File file)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -204,7 +207,7 @@ public abstract class BaseHook implements Hook {
 
 			updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				versionNumber, sourceFileName, properties, is);
+				versionNumber, sourceFileName, properties, tagsEntries, is);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException(fileName);
@@ -224,7 +227,7 @@ public abstract class BaseHook implements Hook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, byte[] byteArray)
+			String properties, String[] tagsEntries, byte[] byteArray)
 		throws PortalException, SystemException {
 
 		InputStream is = new ByteArrayInputStream(byteArray);
@@ -232,7 +235,7 @@ public abstract class BaseHook implements Hook {
 		try {
 			updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				versionNumber, sourceFileName, properties, is);
+				versionNumber, sourceFileName, properties, tagsEntries, is);
 		}
 		finally {
 			try {
@@ -247,7 +250,7 @@ public abstract class BaseHook implements Hook {
 	public abstract void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, InputStream is)
+			String properties, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException;
 
 	public abstract void updateFile(

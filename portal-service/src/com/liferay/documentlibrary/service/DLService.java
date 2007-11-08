@@ -42,12 +42,13 @@ public interface DLService {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, File file)
+			String fileName, String properties, String[] tagsEntries, File file)
 		throws PortalException, RemoteException, SystemException;
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, byte[] byteArray)
+			String fileName, String properties, String[] tagsEntries,
+			byte[] byteArray)
 		throws PortalException, RemoteException, SystemException;
 
 	public void deleteDirectory(
@@ -85,13 +86,13 @@ public interface DLService {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, File file)
+			String properties, String[] tagsEntries, File file)
 		throws PortalException, RemoteException, SystemException;
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, byte[] byteArray)
+			String properties, String[] tagsEntries, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException;
 
 	public void updateFile(

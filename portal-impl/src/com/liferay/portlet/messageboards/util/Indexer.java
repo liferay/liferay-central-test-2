@@ -151,7 +151,6 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		LuceneUtil.addKeyword(doc, LuceneFields.COMPANY_ID, companyId);
 		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, PORTLET_ID);
 		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
-		LuceneUtil.addKeyword(doc, LuceneFields.USER_NAME, userName);
 
 		LuceneUtil.addText(doc, LuceneFields.USER_NAME, userName);
 		LuceneUtil.addText(doc, LuceneFields.TITLE, title);

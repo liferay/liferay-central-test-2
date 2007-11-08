@@ -77,7 +77,7 @@ public class DLServiceImpl implements DLService {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, File file)
+			String fileName, String properties, String[] tagsEntries, File file)
 		throws PortalException, SystemException {
 
 		DLLocalServiceUtil.validate(fileName, file);
@@ -86,12 +86,13 @@ public class DLServiceImpl implements DLService {
 
 		hook.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
-			file);
+			tagsEntries, file);
 	}
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, byte[] byteArray)
+			String fileName, String properties, String[] tagsEntries,
+			byte[] byteArray)
 		throws PortalException, SystemException {
 
 		DLLocalServiceUtil.validate(fileName, byteArray);
@@ -100,7 +101,7 @@ public class DLServiceImpl implements DLService {
 
 		hook.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
-			byteArray);
+			tagsEntries, byteArray);
 	}
 
 	public void deleteDirectory(
@@ -183,7 +184,7 @@ public class DLServiceImpl implements DLService {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, File file)
+			String properties, String[] tagsEntries, File file)
 		throws PortalException, SystemException {
 
 		DLLocalServiceUtil.validate(fileName, file);
@@ -192,13 +193,13 @@ public class DLServiceImpl implements DLService {
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, properties, file);
+			versionNumber, sourceFileName, properties, tagsEntries, file);
 	}
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, byte[] byteArray)
+			String properties, String[] tagsEntries, byte[] byteArray)
 		throws PortalException, SystemException {
 
 		DLLocalServiceUtil.validate(fileName, byteArray);
@@ -207,7 +208,7 @@ public class DLServiceImpl implements DLService {
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, properties, byteArray);
+			versionNumber, sourceFileName, properties, tagsEntries, byteArray);
 	}
 
 	public void updateFile(

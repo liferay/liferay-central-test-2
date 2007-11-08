@@ -359,6 +359,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 				LuceneUtil.addTerm(
 					searchQuery, LuceneFields.DESCRIPTION, keywords);
 				LuceneUtil.addTerm(
+					searchQuery, LuceneFields.PROPERTIES, keywords);
+				LuceneUtil.addTerm(
 					searchQuery, LuceneFields.TAG_ENTRY, keywords);
 			}
 

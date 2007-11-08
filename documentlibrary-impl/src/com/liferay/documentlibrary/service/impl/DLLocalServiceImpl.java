@@ -62,7 +62,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, InputStream is)
+			String fileName, String properties, String[] tagsEntries,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		validate(fileName, is);
@@ -71,7 +72,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		hook.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
-			is);
+			tagsEntries, is);
 	}
 
 	public void checkRoot(long companyId) throws SystemException {
@@ -157,6 +158,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
 				LuceneUtil.addTerm(
 					searchQuery, LuceneFields.PROPERTIES, keywords);
+				LuceneUtil.addTerm(
+					searchQuery, LuceneFields.TAG_ENTRY, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();
@@ -181,7 +184,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, InputStream is)
+			String properties, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException {
 
 		validate(fileName, sourceFileName, is);
@@ -190,7 +193,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, properties, is);
+			versionNumber, sourceFileName, properties, tagsEntries, is);
 	}
 
 	public void validate(String fileName, File file) throws PortalException {

@@ -78,7 +78,8 @@ public class FileSystemHook extends BaseHook {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, InputStream is)
+			String fileName, String properties, String[] tagsEntries,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		try {
@@ -92,8 +93,8 @@ public class FileSystemHook extends BaseHook {
 			FileUtil.write(fileNameVersionFile, is);
 
 			Indexer.addFile(
-				companyId, portletId, groupId, repositoryId, properties,
-				fileName);
+				companyId, portletId, groupId, repositoryId, fileName,
+				properties, tagsEntries);
 		}
 		catch (IOException ioe) {
 			throw new SystemException();
@@ -268,7 +269,7 @@ public class FileSystemHook extends BaseHook {
 				String fileName = fileNames[i];
 
 				try {
-					Document doc = IndexerImpl.getAddFileDocument(
+					Document doc = Indexer.getAddFileDocument(
 						companyId, portletId, groupId, repositoryId, fileName);
 
 					writer.addDocument(doc);
@@ -296,7 +297,7 @@ public class FileSystemHook extends BaseHook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, InputStream is)
+			String properties, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException {
 
 		try {
@@ -310,8 +311,8 @@ public class FileSystemHook extends BaseHook {
 			FileUtil.write(fileNameVersionFile, is);
 
 			Indexer.updateFile(
-				companyId, portletId, groupId, repositoryId, properties,
-				fileName);
+				companyId, portletId, groupId, repositoryId, fileName,
+				properties, tagsEntries);
 		}
 		catch (IOException ioe) {
 			throw new SystemException();

@@ -116,7 +116,8 @@ public class JCRHook extends BaseHook {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, InputStream is)
+			String fileName, String properties, String[] tagsEntries,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		Session session = null;
@@ -153,7 +154,7 @@ public class JCRHook extends BaseHook {
 
 				Indexer.addFile(
 					companyId, portletId, groupId, repositoryId, fileName,
-					properties);
+					properties, tagsEntries);
 			}
 		}
 		catch (IOException ioe) {
@@ -546,7 +547,7 @@ public class JCRHook extends BaseHook {
 						JCRConstants.NT_FILE)) {
 
 					try {
-						Document doc = IndexerImpl.getAddFileDocument(
+						Document doc = Indexer.getAddFileDocument(
 							companyId, portletId, groupId, repositoryId,
 							node.getName());
 
@@ -585,7 +586,7 @@ public class JCRHook extends BaseHook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, InputStream is)
+			String properties, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException {
 
 		String versionLabel = String.valueOf(versionNumber);
@@ -616,7 +617,7 @@ public class JCRHook extends BaseHook {
 
 			Indexer.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
-				properties);
+				properties, tagsEntries);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

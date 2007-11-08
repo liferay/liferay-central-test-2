@@ -39,14 +39,15 @@ public class DLLocalServiceUtil {
 
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String properties, InputStream is)
+			String fileName, String properties, String[] tagsEntries,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
 
 		dlLocalService.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
-			is);
+			tagsEntries, is);
 	}
 
 	public static void checkRoot(long companyId) throws SystemException {
@@ -109,14 +110,14 @@ public class DLLocalServiceUtil {
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, InputStream is)
+			String properties, String[] tagsEntries, InputStream is)
 		throws PortalException, SystemException {
 
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
 
 		dlLocalService.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, properties, is);
+			versionNumber, sourceFileName, properties, tagsEntries, is);
 	}
 
 	public static void validate(String fileName, File file)
