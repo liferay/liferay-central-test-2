@@ -198,6 +198,26 @@ public class UserServiceJSON {
 		return UserJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static long getUserIdByEmailAddress(long companyId,
+		java.lang.String emailAddress)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		long returnValue = UserServiceUtil.getUserIdByEmailAddress(companyId,
+				emailAddress);
+
+		return returnValue;
+	}
+
+	public static long getUserIdByScreenName(long companyId,
+		java.lang.String screenName)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		long returnValue = UserServiceUtil.getUserIdByScreenName(companyId,
+				screenName);
+
+		return returnValue;
+	}
+
 	public static boolean hasGroupUser(long groupId, long userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {

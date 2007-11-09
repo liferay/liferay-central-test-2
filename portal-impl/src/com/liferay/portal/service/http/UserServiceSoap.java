@@ -273,6 +273,34 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static long getUserIdByEmailAddress(long companyId,
+		java.lang.String emailAddress) throws RemoteException {
+		try {
+			long returnValue = UserServiceUtil.getUserIdByEmailAddress(companyId,
+					emailAddress);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static long getUserIdByScreenName(long companyId,
+		java.lang.String screenName) throws RemoteException {
+		try {
+			long returnValue = UserServiceUtil.getUserIdByScreenName(companyId,
+					screenName);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static boolean hasGroupUser(long groupId, long userId)
 		throws RemoteException {
 		try {

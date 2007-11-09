@@ -225,6 +225,22 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return user;
 	}
 
+	public long getUserIdByEmailAddress(long companyId, String emailAddress)
+		throws PortalException, SystemException {
+
+		User user = getUserByEmailAddress(companyId, emailAddress);
+
+		return user.getUserId();
+	}
+
+	public long getUserIdByScreenName(long companyId, String screenName)
+		throws PortalException, SystemException {
+
+		User user = getUserByScreenName(companyId, screenName);
+
+		return user.getUserId();
+	}
+
 	public boolean hasGroupUser(long groupId, long userId)
 		throws PortalException, SystemException {
 

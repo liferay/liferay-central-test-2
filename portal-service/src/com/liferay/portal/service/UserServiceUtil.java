@@ -182,6 +182,24 @@ public class UserServiceUtil {
 		return userService.getUserByScreenName(companyId, screenName);
 	}
 
+	public static long getUserIdByEmailAddress(long companyId,
+		java.lang.String emailAddress)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		UserService userService = UserServiceFactory.getService();
+
+		return userService.getUserIdByEmailAddress(companyId, emailAddress);
+	}
+
+	public static long getUserIdByScreenName(long companyId,
+		java.lang.String screenName)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		UserService userService = UserServiceFactory.getService();
+
+		return userService.getUserIdByScreenName(companyId, screenName);
+	}
+
 	public static boolean hasGroupUser(long groupId, long userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

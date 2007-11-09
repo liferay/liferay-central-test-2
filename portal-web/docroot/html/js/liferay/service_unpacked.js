@@ -887,6 +887,20 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getUserIdByEmailAddress: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getUserIdByEmailAddress";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getUserIdByScreenName: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getUserIdByScreenName";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	hasGroupUser: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "hasGroupUser";
