@@ -218,22 +218,19 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			List priorities = new ArrayList();
 
 			for (int j = 0; j < 10; j++) {
-				String name =
-					ParamUtil.getString(
-						req, "priorityName" + j + "_" + languageId);
-				String image =
-					ParamUtil.getString(
-						req, "priorityImage" + j + "_" + languageId);
-				double value =
-					ParamUtil.getDouble(
-						req, "priorityValue" + j + "_" + languageId);
+				String name = ParamUtil.getString(
+					req, "priorityName" + j + "_" + languageId);
+				String image = ParamUtil.getString(
+					req, "priorityImage" + j + "_" + languageId);
+				double value = ParamUtil.getDouble(
+					req, "priorityValue" + j + "_" + languageId);
 
 				if (Validator.isNotNull(name) || Validator.isNotNull(image) ||
 					(value != 0.0)) {
 
 					priorities.add(
 						name + StringPool.COMMA + image + StringPool.COMMA +
-						value);
+							value);
 				}
 			}
 

@@ -146,7 +146,7 @@ public class LocalizationUtil {
 	}
 
 	public static String getPrefsValue(
-			PortletPreferences prefs, String key, String languageId) {
+		PortletPreferences prefs, String key, String languageId) {
 
 		return getPrefsValue(prefs, key, languageId, true);
 	}

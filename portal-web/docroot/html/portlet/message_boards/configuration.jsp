@@ -419,9 +419,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
 			</td>
 			<td>
-				<br/>
-			</td>
-			<td>
 				<liferay-ui:message key="localized-language" />:
 
 				<select id="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage();">
@@ -500,9 +497,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 				%>
 
 				</table>
-			</td>
-			<td>
-				<br/>
 			</td>
 			<td>
 				<table id="<portlet:namespace />localized-priorities-table" class="liferay-table" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %>>
