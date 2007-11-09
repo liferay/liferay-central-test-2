@@ -66,7 +66,7 @@ public class JSONUtil {
 
 			long time = value.getTime() / Time.SECOND;
 
-			put(jsonObj, key, time);
+			put(jsonObj, key, String.valueOf(time));
 		}
 	}
 
