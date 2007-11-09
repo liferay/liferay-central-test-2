@@ -195,6 +195,23 @@ public class MBMessageServiceUtil {
 		mbMessageService.deleteMessage(messageId);
 	}
 
+	public static java.util.List getCategoryMessages(long categoryId,
+		int begin, int end)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+		return mbMessageService.getCategoryMessages(categoryId, begin, end);
+	}
+
+	public static int getCategoryMessagesCount(long categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+		return mbMessageService.getCategoryMessagesCount(categoryId);
+	}
+
 	public static java.lang.String getCategoryMessagesRSS(long categoryId,
 		int max, java.lang.String type, double version,
 		java.lang.String feedURL, java.lang.String entryURL,

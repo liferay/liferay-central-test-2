@@ -72,6 +72,14 @@ public interface MBCategoryService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public java.util.List getCategories(long groupId, long parentCategoryId,
+		int begin, int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public int getCategoriesCount(long groupId, long parentCategoryId)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public void subscribeCategory(long categoryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

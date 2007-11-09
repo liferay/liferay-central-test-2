@@ -1638,6 +1638,20 @@ Liferay.Service.MB.MBCategory = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getCategories: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCategories";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCategoriesCount: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCategoriesCount";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	subscribeCategory: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "subscribeCategory";
@@ -1680,6 +1694,20 @@ Liferay.Service.MB.MBMessage = {
 	deleteMessage: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "deleteMessage";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCategoryMessages: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCategoryMessages";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCategoryMessagesCount: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCategoryMessagesCount";
 
 		return Liferay.Service.ajax(params, callback);
 	},

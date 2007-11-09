@@ -24,6 +24,7 @@ package com.liferay.portlet.messageboards.service.http;
 
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -105,6 +106,24 @@ public class MBCategoryServiceJSON {
 		com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.getCategory(categoryId);
 
 		return MBCategoryJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONArray getCategories(long groupId, long parentCategoryId,
+		int begin, int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		java.util.List returnValue = MBCategoryServiceUtil.getCategories(groupId,
+				parentCategoryId, begin, end);
+
+		return MBCategoryJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static int getCategoriesCount(long groupId, long parentCategoryId)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		int returnValue = MBCategoryServiceUtil.getCategoriesCount(groupId,
+				parentCategoryId);
+
+		return returnValue;
 	}
 
 	public static void subscribeCategory(long categoryId)

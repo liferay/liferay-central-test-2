@@ -136,6 +136,35 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategorySoap[] getCategories(
+		long groupId, long parentCategoryId, int begin, int end)
+		throws RemoteException {
+		try {
+			java.util.List returnValue = MBCategoryServiceUtil.getCategories(groupId,
+					parentCategoryId, begin, end);
+
+			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCategoriesCount(long groupId, long parentCategoryId)
+		throws RemoteException {
+		try {
+			int returnValue = MBCategoryServiceUtil.getCategoriesCount(groupId,
+					parentCategoryId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void subscribeCategory(long categoryId)
 		throws RemoteException {
 		try {

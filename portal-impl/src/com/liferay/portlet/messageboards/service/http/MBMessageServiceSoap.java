@@ -178,6 +178,33 @@ public class MBMessageServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageSoap[] getCategoryMessages(
+		long categoryId, int begin, int end) throws RemoteException {
+		try {
+			java.util.List returnValue = MBMessageServiceUtil.getCategoryMessages(categoryId,
+					begin, end);
+
+			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCategoryMessagesCount(long categoryId)
+		throws RemoteException {
+		try {
+			int returnValue = MBMessageServiceUtil.getCategoryMessagesCount(categoryId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap getMessage(
 		long messageId) throws RemoteException {
 		try {

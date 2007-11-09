@@ -24,6 +24,7 @@ package com.liferay.portlet.messageboards.service.http;
 
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -137,6 +138,24 @@ public class MBMessageServiceJSON {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		MBMessageServiceUtil.deleteMessage(messageId);
+	}
+
+	public static JSONArray getCategoryMessages(long categoryId, int begin,
+		int end)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		java.util.List returnValue = MBMessageServiceUtil.getCategoryMessages(categoryId,
+				begin, end);
+
+		return MBMessageJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static int getCategoryMessagesCount(long categoryId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		int returnValue = MBMessageServiceUtil.getCategoryMessagesCount(categoryId);
+
+		return returnValue;
 	}
 
 	public static JSONObject getMessage(long messageId)

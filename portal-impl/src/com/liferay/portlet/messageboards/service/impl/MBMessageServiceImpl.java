@@ -333,6 +333,33 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		mbMessageLocalService.deleteMessage(messageId);
 	}
 
+	public List getCategoryMessages(long categoryId, int begin, int end)
+		throws PortalException, SystemException {
+
+		List messages = new ArrayList();
+
+		Iterator itr = mbMessageLocalService.getCategoryMessages(
+			categoryId, begin, end).iterator();
+
+		while (itr.hasNext()) {
+			MBMessage message = (MBMessage)itr.next();
+
+			if (MBMessagePermission.contains(
+					getPermissionChecker(), message, ActionKeys.VIEW)) {
+
+				messages.add(message);
+			}
+		}
+
+		return messages;
+	}
+
+	public int getCategoryMessagesCount(long categoryId)
+		throws PortalException, SystemException {
+
+		return mbMessageLocalService.getCategoryMessagesCount(categoryId);
+	}
+
 	public String getCategoryMessagesRSS(
 			long categoryId, int max, String type, double version,
 			String feedURL, String entryURL, PortletPreferences prefs)

@@ -89,6 +89,23 @@ public class MBCategoryServiceUtil {
 		return mbCategoryService.getCategory(categoryId);
 	}
 
+	public static java.util.List getCategories(long groupId,
+		long parentCategoryId, int begin, int end)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
+
+		return mbCategoryService.getCategories(groupId, parentCategoryId,
+			begin, end);
+	}
+
+	public static int getCategoriesCount(long groupId, long parentCategoryId)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
+
+		return mbCategoryService.getCategoriesCount(groupId, parentCategoryId);
+	}
+
 	public static void subscribeCategory(long categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
