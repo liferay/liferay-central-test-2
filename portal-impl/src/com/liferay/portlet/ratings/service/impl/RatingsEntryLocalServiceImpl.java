@@ -34,6 +34,7 @@ import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.base.RatingsEntryLocalServiceBaseImpl;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="RatingsEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -52,6 +53,14 @@ public class RatingsEntryLocalServiceImpl
 
 		return ratingsEntryPersistence.findByU_C_C(
 			userId, classNameId, classPK);
+	}
+
+	public List getEntries(String className, long classPK)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return ratingsEntryPersistence.findByC_C(classNameId, classPK);
 	}
 
 	public RatingsEntry updateEntry(

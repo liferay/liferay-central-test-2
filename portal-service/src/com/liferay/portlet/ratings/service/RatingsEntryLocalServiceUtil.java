@@ -192,6 +192,15 @@ public class RatingsEntryLocalServiceUtil {
 		return ratingsEntryLocalService.getEntry(userId, className, classPK);
 	}
 
+	public static java.util.List getEntries(java.lang.String className,
+		long classPK)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
+		return ratingsEntryLocalService.getEntries(className, classPK);
+	}
+
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
 		long userId, java.lang.String className, long classPK, double score)
 		throws com.liferay.portal.PortalException, 

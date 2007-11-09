@@ -74,6 +74,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
+import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portlet.PortletPreferencesImpl;
@@ -86,6 +87,8 @@ import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.Time;
 import com.liferay.util.xml.XMLFormatter;
+
+import com.thoughtworks.xstream.XStream;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -351,6 +354,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.EXPORT_PORTLET_DATA);
 		boolean exportPortletPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES);
+		boolean exportRatings = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.EXPORT_RATINGS);
 		boolean exportTags = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_TAGS);
 		boolean exportTheme = MapUtil.getBoolean(
@@ -512,6 +517,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				layoutCache, companyId, groupId, portletIds, rolesEl);
 		}
 
+		// Ratings
+
+		if (exportRatings) {
+			exportRatings(context, root);
+		}
+
 		// Tags
 
 		if (exportTags) {
@@ -662,6 +673,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.IMPORT_PORTLET_DATA);
 		boolean importPortletPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES);
+		boolean importRatings = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.IMPORT_RATINGS);
 		boolean importTags = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_TAGS);
 		boolean importTheme = MapUtil.getBoolean(
@@ -775,6 +788,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layoutSetLocalService.updateLookAndFeel(
 			groupId, privateLayout, themeId, colorSchemeId, StringPool.BLANK,
 			wapTheme);
+
+		// Ratings
+
+		if (importRatings) {
+			importRatings(context, root);
+		}
 
 		// Tags
 
@@ -1772,6 +1791,42 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return el;
 	}
 
+	protected void exportRatings(PortletDataContext context, Element root)
+		throws SystemException {
+
+		try {
+			SAXReader reader = SAXReaderFactory.getInstance();
+
+			XStream xStream = new XStream();
+
+			Map ratingsEntriesMap = context.getRatingsEntries();
+
+			Iterator itr = ratingsEntriesMap.keySet().iterator();
+
+				while (itr.hasNext()) {
+					String key = (String)itr.next();
+
+					String[] ratingsEntry = key.split(StringPool.POUND);
+
+					Element el = root.addElement("ratings");
+
+					el.addAttribute("class-name", ratingsEntry[0]);
+					el.addAttribute("class-pk", ratingsEntry[1]);
+
+					List ratingsEntries = (List)ratingsEntriesMap.get(key);
+
+					String xml = xStream.toXML(ratingsEntries);
+
+					Document tempDoc = reader.read(new StringReader(xml));
+
+					el.content().add(tempDoc.getRootElement().createCopy());
+				}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
 	protected void exportTags(PortletDataContext context, Element root) {
 		Map tagsEntries = context.getTagsEntries();
 
@@ -1788,8 +1843,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			el.addAttribute("class-pk", tagsEntry[1]);
 			el.addAttribute(
 				"entries",
-				StringUtil.merge(
-					context.getTagsEntries(tagsEntry[0], tagsEntry[1]), ","));
+				StringUtil.merge((String[])tagsEntries.get(key), ","));
 		}
 	}
 
@@ -2535,6 +2589,40 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					groupLocalService.addRoleGroups(role.getRoleId(), groupIds);
 				}
 			}
+		}
+	}
+
+	protected void importRatings(PortletDataContext context, Element root)
+		throws PortalException, SystemException {
+
+		try {
+			XStream xStream = new XStream();
+
+			Iterator itr = root.elements("ratings").iterator();
+
+			while (itr.hasNext()) {
+				Element el = (Element)itr.next();
+
+				String className = GetterUtil.getString(
+					el.attributeValue("class-name"));
+				long classPK = GetterUtil.getLong(
+					el.attributeValue("class-pk"));
+
+				Element entriesListEl = el.element("list");
+
+				Document tempDoc = DocumentHelper.createDocument();
+
+				tempDoc.content().add(entriesListEl.createCopy());
+
+				List entries = (List)xStream.fromXML(
+					XMLFormatter.toString(tempDoc));
+
+				context.addRatingsEntries(
+					className, new Long(classPK), entries);
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 

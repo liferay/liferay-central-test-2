@@ -139,6 +139,9 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
+					context.addRatingsEntries(
+						BlogsEntry.class, entry.getPrimaryKeyObj());
+
 					context.addTagsEntries(
 						BlogsEntry.class, entry.getPrimaryKeyObj());
 				}
@@ -307,7 +310,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				entry.getUuid(), context.getGroupId());
 
 			if (existingEntry == null) {
-				BlogsEntryLocalServiceUtil.addEntry(
+				existingEntry = BlogsEntryLocalServiceUtil.addEntry(
 					entry.getUuid(), entry.getUserId(), plid,
 					entry.getCategoryId(), entry.getTitle(), entry.getContent(),
 					displayDateMonth, displayDateDay, displayDateYear,
@@ -315,7 +318,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 					tagsEntries, addCommunityPermissions, addGuestPermissions);
 			}
 			else {
-				BlogsEntryLocalServiceUtil.updateEntry(
+				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
 					entry.getUserId(), existingEntry.getEntryId(),
 					entry.getCategoryId(), entry.getTitle(), entry.getContent(),
 					displayDateMonth, displayDateDay, displayDateYear,
@@ -324,13 +327,17 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 		else {
-			BlogsEntryLocalServiceUtil.addEntry(
+			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
 				entry.getUserId(), plid, entry.getCategoryId(),
 				entry.getTitle(), entry.getContent(), displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
 				displayDateMinute, themeDisplay, tagsEntries,
 				addCommunityPermissions, addGuestPermissions);
 		}
+
+		context.importRatingsEntries(
+			BlogsEntry.class, entry.getPrimaryKeyObj(),
+			existingEntry.getPrimaryKeyObj());
 	}
 
 	protected void importStatsUser(

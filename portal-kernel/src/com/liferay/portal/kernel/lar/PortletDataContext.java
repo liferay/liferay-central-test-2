@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.zip.ZipWriter;
 
 import java.io.Serializable;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -61,6 +62,19 @@ public interface PortletDataContext extends Serializable {
 	public boolean addPrimaryKey(Class classObj, Object primaryKey);
 
 	public boolean hasPrimaryKey(Class classObj, Object primaryKey);
+
+	public Map getRatingsEntries();
+
+	public void addRatingsEntries(Class classObj, Object primaryKey)
+		throws PortalException, SystemException;
+
+	public void addRatingsEntries(
+			String className, Object primaryKey, List entries)
+		throws PortalException, SystemException;
+
+	public void importRatingsEntries(
+			Class classObj, Object primaryKey, Object newPrimaryKey)
+		throws PortalException, SystemException;
 
 	public String[] getTagsEntries(Class classObj, Object primaryKey);
 

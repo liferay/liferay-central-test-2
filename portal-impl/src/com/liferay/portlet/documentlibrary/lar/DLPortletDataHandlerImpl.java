@@ -192,6 +192,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
+					context.addRatingsEntries(
+						DLFileEntry.class, entry.getPrimaryKeyObj());
+
 					context.addTagsEntries(
 						DLFileEntry.class, entry.getPrimaryKeyObj());
 
@@ -462,6 +465,10 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			}
 
 			entryNames.put(entry.getName(), existingEntry.getName());
+
+			context.importRatingsEntries(
+				DLFileEntry.class, entry.getPrimaryKeyObj(),
+				existingEntry.getPrimaryKeyObj());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(

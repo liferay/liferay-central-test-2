@@ -25,13 +25,17 @@ package com.liferay.portal.lar;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portlet.ratings.model.RatingsEntry;
+import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
+import com.liferay.util.MapUtil;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -115,6 +119,57 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
 	}
 
+	public Map getRatingsEntries() {
+		return _ratingsEntriesMap;
+	}
+
+	public void addRatingsEntries(Class classObj, Object primaryKey)
+		throws PortalException, SystemException {
+
+		List entries = RatingsEntryLocalServiceUtil.getEntries(
+			classObj.getName(), ((Long)primaryKey).longValue());
+
+		if (entries != null && entries.size() > 0) {
+			_ratingsEntriesMap.put(
+				getPrimaryKeyString(classObj, primaryKey), entries);
+		}
+	}
+
+	public void addRatingsEntries(
+			String className, Object primaryKey, List entries)
+		throws PortalException, SystemException {
+
+		_ratingsEntriesMap.put(
+			getPrimaryKeyString(className, primaryKey), entries);
+	}
+
+	public void importRatingsEntries(
+			Class classObj, Object primaryKey, Object newPrimaryKey)
+		throws PortalException, SystemException {
+
+		boolean importRatings = MapUtil.getBoolean(
+			_parameterMap, PortletDataHandlerKeys.IMPORT_RATINGS);
+
+		if (!importRatings) {
+			return;
+		}
+
+		List entries = (List)_ratingsEntriesMap.get(
+			getPrimaryKeyString(classObj, primaryKey));
+
+		if (entries != null) {
+			Iterator itr = entries.iterator();
+
+			while (itr.hasNext()) {
+				RatingsEntry entry = (RatingsEntry)itr.next();
+
+				RatingsEntryLocalServiceUtil.updateEntry(
+					entry.getUserId(), classObj.getName(),
+					((Long)newPrimaryKey).longValue(), entry.getScore());
+			}
+		}
+	}
+
 	public String[] getTagsEntries(Class classObj, Object primaryKey) {
 		return (String[])_tagsEntriesMap.get(
 			getPrimaryKeyString(classObj, primaryKey));
@@ -188,6 +243,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private long _groupId;
 	private long _plid;
 	private Map _parameterMap;
+	private Map _ratingsEntriesMap = new HashMap();
 	private Map _tagsEntriesMap = new HashMap();
 	private Set _primaryKeys;
 	private ZipReader _zipReader;
