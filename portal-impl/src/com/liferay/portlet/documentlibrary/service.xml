@@ -222,12 +222,12 @@
 			<finder-column name="groupId" />
 			<finder-column name="parentFolderId" />
 		</finder>
-		<finder name="G_P_N" return-type="DLFolder">
-			<finder-column name="groupId" />
+		<finder name="P_N" return-type="Collection">
 			<finder-column name="parentFolderId" />
 			<finder-column name="name" />
 		</finder>
-		<finder name="P_N" return-type="Collection">
+		<finder name="G_P_N" return-type="DLFolder">
+			<finder-column name="groupId" />
 			<finder-column name="parentFolderId" />
 			<finder-column name="name" />
 		</finder>

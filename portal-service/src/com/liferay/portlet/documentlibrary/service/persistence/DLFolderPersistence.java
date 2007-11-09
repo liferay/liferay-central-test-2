@@ -178,15 +178,6 @@ public interface DLFolderPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_N(
-		long groupId, long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.documentlibrary.NoSuchFolderException;
-
-	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
-		long groupId, long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List findByP_N(long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
@@ -214,6 +205,15 @@ public interface DLFolderPersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFolderException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -248,13 +248,13 @@ public interface DLFolderPersistence {
 	public void removeByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByP_N(long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByG_P_N(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
-
-	public void removeByP_N(long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
@@ -273,11 +273,11 @@ public interface DLFolderPersistence {
 	public int countByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByG_P_N(long groupId, long parentFolderId,
-		java.lang.String name) throws com.liferay.portal.SystemException;
-
 	public int countByP_N(long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
+
+	public int countByG_P_N(long groupId, long parentFolderId,
+		java.lang.String name) throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
 }

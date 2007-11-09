@@ -24,8 +24,8 @@ package com.liferay.portal.upgrade.v4_4_0.util;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <a href="DLFolderNameColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -51,7 +51,7 @@ public class DLFolderNameColumnImpl extends BaseUpgradeColumnImpl {
 		while (_distinctNames.contains(_getTriplet(newName))) {
 			_counter++;
 
-			newName = newName + " " + _counter;
+			newName = newName + StringPool.SPACE + _counter;
 		}
 
 		_distinctNames.add(_getTriplet(newName));
@@ -60,13 +60,20 @@ public class DLFolderNameColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	private String _getTriplet(String name) {
-		return _groupIdColumn.getOldValue() +
-			"_" + _parentFolderIdColumn.getOldValue() + "_" + name;
+		StringMaker sm = new StringMaker();
+
+		sm.append(_groupIdColumn.getOldValue());
+		sm.append(StringPool.UNDERLINE);
+		sm.append_parentFolderIdColumn.getOldValue());
+		sm.append(StringPool.UNDERLINE);
+		sm.append(StringPool.name);
+
+		return sm.toString();
 	}
 
-	private int _counter = 0;
-	private List _distinctNames = new ArrayList();
 	private TempUpgradeColumnImpl _groupIdColumn;
 	private TempUpgradeColumnImpl _parentFolderIdColumn;
+	private int _counter = 0;
+	private Set _distinctNames = new HashSet();
 
 }

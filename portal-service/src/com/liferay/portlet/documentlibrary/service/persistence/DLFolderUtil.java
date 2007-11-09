@@ -249,19 +249,6 @@ public class DLFolderUtil {
 			parentFolderId, obc);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_N(
-		long groupId, long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.documentlibrary.NoSuchFolderException {
-		return getPersistence().findByG_P_N(groupId, parentFolderId, name);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
-		long groupId, long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_P_N(groupId, parentFolderId, name);
-	}
-
 	public static java.util.List findByP_N(long parentFolderId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
 		return getPersistence().findByP_N(parentFolderId, name);
@@ -303,6 +290,19 @@ public class DLFolderUtil {
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		return getPersistence().findByP_N_PrevAndNext(folderId, parentFolderId,
 			name, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFolderException {
+		return getPersistence().findByG_P_N(groupId, parentFolderId, name);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_P_N(groupId, parentFolderId, name);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -360,16 +360,16 @@ public class DLFolderUtil {
 		getPersistence().removeByG_P(groupId, parentFolderId);
 	}
 
+	public static void removeByP_N(long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByP_N(parentFolderId, name);
+	}
+
 	public static void removeByG_P_N(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException {
 		getPersistence().removeByG_P_N(groupId, parentFolderId, name);
-	}
-
-	public static void removeByP_N(long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByP_N(parentFolderId, name);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -401,14 +401,14 @@ public class DLFolderUtil {
 		return getPersistence().countByG_P(groupId, parentFolderId);
 	}
 
-	public static int countByG_P_N(long groupId, long parentFolderId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
-		return getPersistence().countByG_P_N(groupId, parentFolderId, name);
-	}
-
 	public static int countByP_N(long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByP_N(parentFolderId, name);
+	}
+
+	public static int countByG_P_N(long groupId, long parentFolderId,
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_P_N(groupId, parentFolderId, name);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

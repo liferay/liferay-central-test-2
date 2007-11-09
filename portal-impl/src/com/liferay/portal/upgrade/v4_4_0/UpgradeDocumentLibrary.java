@@ -59,10 +59,12 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		TempUpgradeColumnImpl groupIdColumn =
 			new TempUpgradeColumnImpl("groupId");
+
 		TempUpgradeColumnImpl parentFolderIdColumn =
 			new TempUpgradeColumnImpl("parentFolderId");
-		BaseUpgradeColumnImpl dlFolderNameColumn =
-			new DLFolderNameColumnImpl(groupIdColumn, parentFolderIdColumn);
+
+		BaseUpgradeColumnImpl dlFolderNameColumn = new DLFolderNameColumnImpl(
+			groupIdColumn, parentFolderIdColumn);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			DLFolderModelImpl.TABLE_NAME, DLFolderModelImpl.TABLE_COLUMNS,
