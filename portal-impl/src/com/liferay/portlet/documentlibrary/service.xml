@@ -227,7 +227,7 @@
 			<finder-column name="parentFolderId" />
 			<finder-column name="name" />
 		</finder>
-		<finder name="P_N" return-type="DLFolder">
+		<finder name="P_N" return-type="Collection">
 			<finder-column name="parentFolderId" />
 			<finder-column name="name" />
 		</finder>

@@ -187,14 +187,33 @@ public interface DLFolderPersistence {
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFolder findByP_N(
-		long parentFolderId, java.lang.String name)
+	public java.util.List findByP_N(long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByP_N(long parentFolderId, java.lang.String name,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByP_N(long parentFolderId, java.lang.String name,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFolder findByP_N_First(
+		long parentFolderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByP_N(
-		long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.SystemException;
+	public com.liferay.portlet.documentlibrary.model.DLFolder findByP_N_Last(
+		long parentFolderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFolderException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFolder[] findByP_N_PrevAndNext(
+		long folderId, long parentFolderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	public java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -235,8 +254,7 @@ public interface DLFolderPersistence {
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	public void removeByP_N(long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.documentlibrary.NoSuchFolderException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 

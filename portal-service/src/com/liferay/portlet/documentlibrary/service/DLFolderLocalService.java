@@ -226,7 +226,7 @@ public interface DLFolderLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
-		long parentFolderId, java.lang.String name)
+		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

@@ -1267,35 +1267,10 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public DLFolder findByP_N(long parentFolderId, String name)
-		throws NoSuchFolderException, SystemException {
-		DLFolder dlFolder = fetchByP_N(parentFolderId, name);
-
-		if (dlFolder == null) {
-			StringMaker msg = new StringMaker();
-			msg.append("No DLFolder exists with the key ");
-			msg.append(StringPool.OPEN_CURLY_BRACE);
-			msg.append("parentFolderId=");
-			msg.append(parentFolderId);
-			msg.append(", ");
-			msg.append("name=");
-			msg.append(name);
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchFolderException(msg.toString());
-		}
-
-		return dlFolder;
-	}
-
-	public DLFolder fetchByP_N(long parentFolderId, String name)
+	public List findByP_N(long parentFolderId, String name)
 		throws SystemException {
 		String finderClassName = DLFolder.class.getName();
-		String finderMethodName = "fetchByP_N";
+		String finderMethodName = "findByP_N";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName()
 			};
@@ -1339,12 +1314,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				FinderCache.putResult(finderClassName, finderMethodName,
 					finderParams, finderArgs, list);
 
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return (DLFolder)list.get(0);
-				}
+				return list;
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -1354,14 +1324,187 @@ public class DLFolderPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			List list = (List)result;
+			return (List)result;
+		}
+	}
 
-			if (list.size() == 0) {
-				return null;
+	public List findByP_N(long parentFolderId, String name, int begin, int end)
+		throws SystemException {
+		return findByP_N(parentFolderId, name, begin, end, null);
+	}
+
+	public List findByP_N(long parentFolderId, String name, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		String finderClassName = DLFolder.class.getName();
+		String finderMethodName = "findByP_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName(),
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(parentFolderId), name, String.valueOf(begin),
+				String.valueOf(end), String.valueOf(obc)
+			};
+		Object result = FinderCache.getResult(finderClassName,
+				finderMethodName, finderParams, finderArgs, getSessionFactory());
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+				query.append(
+					"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+				query.append("parentFolderId = ?");
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+				else {
+					query.append("ORDER BY ");
+					query.append("parentFolderId ASC").append(", ");
+					query.append("name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+				int queryPos = 0;
+				q.setLong(queryPos++, parentFolderId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
+
+				List list = QueryUtil.list(q, getDialect(), begin, end);
+				FinderCache.putResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List)result;
+		}
+	}
+
+	public DLFolder findByP_N_First(long parentFolderId, String name,
+		OrderByComparator obc) throws NoSuchFolderException, SystemException {
+		List list = findByP_N(parentFolderId, name, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No DLFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("parentFolderId=");
+			msg.append(parentFolderId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFolderException(msg.toString());
+		}
+		else {
+			return (DLFolder)list.get(0);
+		}
+	}
+
+	public DLFolder findByP_N_Last(long parentFolderId, String name,
+		OrderByComparator obc) throws NoSuchFolderException, SystemException {
+		int count = countByP_N(parentFolderId, name);
+		List list = findByP_N(parentFolderId, name, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+			msg.append("No DLFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("parentFolderId=");
+			msg.append(parentFolderId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFolderException(msg.toString());
+		}
+		else {
+			return (DLFolder)list.get(0);
+		}
+	}
+
+	public DLFolder[] findByP_N_PrevAndNext(long folderId, long parentFolderId,
+		String name, OrderByComparator obc)
+		throws NoSuchFolderException, SystemException {
+		DLFolder dlFolder = findByPrimaryKey(folderId);
+		int count = countByP_N(parentFolderId, name);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+			query.append(
+				"FROM com.liferay.portlet.documentlibrary.model.DLFolder WHERE ");
+			query.append("parentFolderId = ?");
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
 			}
 			else {
-				return (DLFolder)list.get(0);
+				query.append("name = ?");
 			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("parentFolderId ASC").append(", ");
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			int queryPos = 0;
+			q.setLong(queryPos++, parentFolderId);
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, dlFolder);
+			DLFolder[] array = new DLFolderImpl[3];
+			array[0] = (DLFolder)objArray[0];
+			array[1] = (DLFolder)objArray[1];
+			array[2] = (DLFolder)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -1520,9 +1663,13 @@ public class DLFolderPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByP_N(long parentFolderId, String name)
-		throws NoSuchFolderException, SystemException {
-		DLFolder dlFolder = findByP_N(parentFolderId, name);
-		remove(dlFolder);
+		throws SystemException {
+		Iterator itr = findByP_N(parentFolderId, name).iterator();
+
+		while (itr.hasNext()) {
+			DLFolder dlFolder = (DLFolder)itr.next();
+			remove(dlFolder);
+		}
 	}
 
 	public void removeAll() throws SystemException {

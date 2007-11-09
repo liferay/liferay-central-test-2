@@ -407,12 +407,12 @@ public class DLFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
-		long parentFolderId, java.lang.String name)
+		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
-		return dlFolderLocalService.getFolder(parentFolderId, name);
+		return dlFolderLocalService.getFolder(groupId, parentFolderId, name);
 	}
 
 	public static java.util.List getFolders(long companyId)

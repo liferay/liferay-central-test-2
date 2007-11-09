@@ -302,10 +302,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		return dlFolderPersistence.findByPrimaryKey(folderId);
 	}
 
-	public DLFolder getFolder(long parentFolderId, String name)
+	public DLFolder getFolder(long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
-		return dlFolderPersistence.findByP_N(parentFolderId, name);
+		return dlFolderPersistence.findByG_P_N(groupId, parentFolderId, name);
 	}
 
 	public List getFolders(long companyId) throws SystemException {
