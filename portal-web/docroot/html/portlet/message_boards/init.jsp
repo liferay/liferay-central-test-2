@@ -64,9 +64,14 @@
 <%
 PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(request, portletDisplay.getId(), false, true);
 
-String languageId = ParamUtil.getString(request, "languageId", themeDisplay.getLanguageId());
+String currentLanguageId = LanguageUtil.getLanguageId(request);
+Locale currentLocale = LocaleUtil.fromLanguageId(currentLanguageId);
+Locale defaultLocale = LocaleUtil.getDefault();
+String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
-String[] priorities = LocalizationUtil.getPrefsValues(portletSetup, "priorities", languageId);
+Locale[] locales = LanguageUtil.getAvailableLocales();
+
+String[] priorities = LocalizationUtil.getPrefsValues(portletSetup, "priorities", currentLanguageId);
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

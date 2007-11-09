@@ -22,9 +22,11 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -37,6 +39,7 @@ import com.liferay.util.servlet.SessionMessages;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -207,67 +210,80 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		List priorities = new ArrayList();
+		Locale[] locales = LanguageUtil.getAvailableLocales();
 
-		for (int i = 0; i < 10; i++) {
-			String name = ParamUtil.getString(req, "priorityName" + i);
-			String image = ParamUtil.getString(req, "priorityImage" + i);
-			double value = ParamUtil.getDouble(req, "priorityValue" + i);
+		for (int i = 0; i < locales.length; i++) {
+			String languageId = LocaleUtil.toLanguageId(locales[i]);
 
-			if (Validator.isNotNull(name) || Validator.isNotNull(image) ||
-				(value != 0.0)) {
+			List priorities = new ArrayList();
 
-				priorities.add(
-					name + StringPool.COMMA + image + StringPool.COMMA + value);
+			for (int j = 0; j < 10; j++) {
+				String name =
+					ParamUtil.getString(
+						req, "priorityName" + j + "_" + languageId);
+				String image =
+					ParamUtil.getString(
+						req, "priorityImage" + j + "_" + languageId);
+				double value =
+					ParamUtil.getDouble(
+						req, "priorityValue" + j + "_" + languageId);
+
+				if (Validator.isNotNull(name) || Validator.isNotNull(image) ||
+					(value != 0.0)) {
+
+					priorities.add(
+						name + StringPool.COMMA + image + StringPool.COMMA +
+						value);
+				}
 			}
+
+			LocalizationUtil.setPrefsValues(
+				prefs, "priorities", languageId,
+				(String[])priorities.toArray(new String[0]));
 		}
-
-		String languageId = ParamUtil.getString(req, "languageId");
-
-		LocalizationUtil.setPrefsValues(
-			prefs, "priorities", languageId,
-			(String[])priorities.toArray(new String[0]));
 	}
 
 	protected void updateUserRanks(ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		// Sort ranks by posts
+		Locale[] locales = LanguageUtil.getAvailableLocales();
 
-		String[] ranks = StringUtil.split(
-			ParamUtil.getString(req, "ranks"), StringPool.NEW_LINE);
+		for (int i = 0; i < locales.length; i++) {
+			String languageId = LocaleUtil.toLanguageId(locales[i]);
 
-		Map map = new TreeMap();
+			String[] ranks = StringUtil.split(
+				ParamUtil.getString(req, "ranks_" + languageId),
+				StringPool.NEW_LINE);
 
-		for (int i = 0; i < ranks.length; i++) {
-			String[] kvp = StringUtil.split(ranks[i], StringPool.EQUAL);
+			Map map = new TreeMap();
 
-			String kvpName = kvp[0];
-			Integer kvpPosts = new Integer(GetterUtil.getInteger(kvp[1]));
+			for (int j = 0; j < ranks.length; j++) {
+				String[] kvp = StringUtil.split(ranks[j], StringPool.EQUAL);
 
-			map.put(kvpPosts, kvpName);
+				String kvpName = kvp[0];
+				Integer kvpPosts = new Integer(GetterUtil.getInteger(kvp[1]));
+
+				map.put(kvpPosts, kvpName);
+			}
+
+			ranks = new String[map.size()];
+
+			int count = 0;
+
+			Iterator itr = map.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry entry = (Map.Entry)itr.next();
+
+				Integer kvpPosts = (Integer)entry.getKey();
+				String kvpName = (String)entry.getValue();
+
+				ranks[count++] =
+					kvpName + StringPool.EQUAL + kvpPosts.toString();
+			}
+
+			LocalizationUtil.setPrefsValues(prefs, "ranks", languageId, ranks);
 		}
-
-		ranks = new String[map.size()];
-
-		int count = 0;
-
-		Iterator itr = map.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			Integer kvpPosts = (Integer)entry.getKey();
-			String kvpName = (String)entry.getValue();
-
-			ranks[count++] = kvpName + StringPool.EQUAL + kvpPosts.toString();
-		}
-
-		// Set ranks
-
-		String languageId = ParamUtil.getString(req, "languageId");
-
-		LocalizationUtil.setPrefsValues(prefs, "ranks", languageId, ranks);
 	}
 
 }

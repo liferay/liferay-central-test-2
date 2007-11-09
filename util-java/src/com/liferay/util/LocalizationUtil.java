@@ -146,13 +146,20 @@ public class LocalizationUtil {
 	}
 
 	public static String getPrefsValue(
-		PortletPreferences prefs, String key, String languageId) {
+			PortletPreferences prefs, String key, String languageId) {
+
+		return getPrefsValue(prefs, key, languageId, true);
+	}
+
+	public static String getPrefsValue(
+		PortletPreferences prefs, String key, String languageId,
+		boolean useDefault) {
 
 		String localizedKey = _getPrefsKey(key, languageId);
 
 		String value = prefs.getValue(localizedKey, StringPool.BLANK);
 
-		if (Validator.isNull(value)) {
+		if (useDefault && Validator.isNull(value)) {
 			value = prefs.getValue(key, StringPool.BLANK);
 		}
 
@@ -162,11 +169,18 @@ public class LocalizationUtil {
 	public static String[] getPrefsValues(
 		PortletPreferences prefs, String key, String languageId) {
 
+		return getPrefsValues(prefs, key, languageId, true);
+	}
+
+	public static String[] getPrefsValues(
+		PortletPreferences prefs, String key, String languageId,
+		boolean useDefault) {
+
 		String localizedKey = _getPrefsKey(key, languageId);
 
 		String[] values = prefs.getValues(localizedKey, new String[0]);
 
-		if (Validator.isNull(values)) {
+		if (useDefault && Validator.isNull(values)) {
 			values = prefs.getValues(key, new String[0]);
 		}
 

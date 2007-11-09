@@ -75,12 +75,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 	}
 	%>
 
-	function <portlet:namespace />getLanguageId() {
-		self.location = '<%= portletURL %>&<portlet:namespace />languageId=' + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
+	function <portlet:namespace />save() {
+		<c:if test='<%= tabs2.equals("user-ranks") || tabs2.equals("thread-priorities") %>'>
+			<portlet:namespace />updateLanguage();
+		</c:if>
+
+		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />save(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
@@ -412,101 +416,410 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<table class="liferay-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="name" />
+				<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
 			</td>
 			<td>
-				<liferay-ui:message key="image" />
+				<br/>
 			</td>
 			<td>
-				<liferay-ui:message key="priority" />
+				<liferay-ui:message key="localized-language" />:
+
+				<select id="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage();">
+					<option value="" />
+
+					<%
+					for (int i = 0; i < locales.length; i++) {
+						if (locales[i].equals(defaultLocale)) {
+							continue;
+						}
+					%>
+
+						<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+
+					<%
+					}
+					%>
+
+				</select>
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<table class="liferay-table">
+				<tr>
+					<td>
+						<liferay-ui:message key="name" />
+					</td>
+					<td>
+						<liferay-ui:message key="image" />
+					</td>
+					<td>
+						<liferay-ui:message key="priority" />
+					</td>
+				</tr>
 
-		<%
-		priorities = LocalizationUtil.getPrefsValues(prefs, "priorities", languageId);
+				<%
+				priorities = LocalizationUtil.getPrefsValues(prefs, "priorities", defaultLanguageId);
 
-		for (int i = 0; i < 10; i++) {
-			String name = StringPool.BLANK;
-			String image = StringPool.BLANK;
-			String value = StringPool.BLANK;
+				for (int i = 0; i < 10; i++) {
+					String name = StringPool.BLANK;
+					String image = StringPool.BLANK;
+					String value = StringPool.BLANK;
 
-			if (priorities.length > i) {
-				String[] priority = StringUtil.split(priorities[i]);
+					if (priorities.length > i) {
+						String[] priority = StringUtil.split(priorities[i]);
 
-				try {
-					name = priority[0];
-					image = priority[1];
-					value = priority[2];
+						try {
+							name = priority[0];
+							image = priority[1];
+							value = priority[2];
+						}
+						catch (Exception e) {
+						}
+
+						if (Validator.isNull(name) && Validator.isNull(image)) {
+							value = StringPool.BLANK;
+						}
+					}
+				%>
+
+					<tr>
+						<td>
+							<input name="<portlet:namespace />priorityName<%= i %>_<%= defaultLanguageId %>" size="15" type="text" value="<%= name %>" />
+						</td>
+						<td>
+							<input name="<portlet:namespace />priorityImage<%= i %>_<%= defaultLanguageId %>" size="40" type="text" value="<%= image %>" />
+						</td>
+						<td>
+							<input name="<portlet:namespace />priorityValue<%= i %>_<%= defaultLanguageId %>" size="4" type="text" value="<%= value %>" />
+						</td>
+					</tr>
+
+				<%
 				}
-				catch (Exception e) {
+				%>
+
+				</table>
+			</td>
+			<td>
+				<br/>
+			</td>
+			<td>
+				<table id="<portlet:namespace />localized-priorities-table" class="liferay-table" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %>>
+				<tr>
+					<td>
+						<liferay-ui:message key="name" />
+					</td>
+					<td>
+						<liferay-ui:message key="image" />
+					</td>
+					<td>
+						<liferay-ui:message key="priority" />
+					</td>
+				</tr>
+
+				<%
+				for (int i = 0; i < 10; i++) {
+				%>
+
+					<tr>
+						<td>
+							<input id="<portlet:namespace />priorityName<%= i %>_temp" name="<portlet:namespace />priorityName<%= i %>_temp" size="15" type="text" onChange="<portlet:namespace />onChanged();" />
+						</td>
+						<td>
+							<input id="<portlet:namespace />priorityImage<%= i %>_temp" name="<portlet:namespace />priorityImage<%= i %>_temp" size="40" type="text" onChange="<portlet:namespace />onChanged();" />
+						</td>
+						<td>
+							<input id="<portlet:namespace />priorityValue<%= i %>_temp" name="<portlet:namespace />priorityValue<%= i %>_temp" size="4" type="text" onChange="<portlet:namespace />onChanged();" />
+						</td>
+					</tr>
+
+				<%
 				}
+				%>
 
-				if (Validator.isNull(name) && Validator.isNull(image)) {
-					value = StringPool.BLANK;
+				</table>
+
+				<%
+				for (int i = 0; i < locales.length; i++) {
+					if (locales[i].equals(defaultLocale)) {
+						continue;
+					}
+
+					String[] tempPriorities = LocalizationUtil.getPrefsValues(prefs, "priorities", LocaleUtil.toLanguageId(locales[i]));
+
+					for (int j = 0; j < 10; j++) {
+						String name = StringPool.BLANK;
+						String image = StringPool.BLANK;
+						String value = StringPool.BLANK;
+
+						if (tempPriorities.length > j) {
+							String[] priority = StringUtil.split(tempPriorities[j]);
+
+							try {
+								name = priority[0];
+								image = priority[1];
+								value = priority[2];
+							}
+							catch (Exception e) {
+							}
+
+							if (Validator.isNull(name) && Validator.isNull(image)) {
+								value = StringPool.BLANK;
+							}
+						}
+
+				%>
+
+						<input id="<portlet:namespace />priorityName<%= j %>_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />priorityName<%= j %>_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= name %>" />
+						<input id="<portlet:namespace />priorityImage<%= j %>_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />priorityImage<%= j %>_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= image %>" />
+						<input id="<portlet:namespace />priorityValue<%= j %>_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />priorityValue<%= j %>_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= value %>" />
+
+				<%
+					}
 				}
-			}
-		%>
+				%>
 
-			<tr>
-				<td>
-					<input name="<portlet:namespace />priorityName<%= i %>" size="20" type="text" value="<%= name %>" />
-				</td>
-				<td>
-					<input name="<portlet:namespace />priorityImage<%= i %>" size="50" type="text" value="<%= image %>" />
-				</td>
-				<td>
-					<input name="<portlet:namespace />priorityValue<%= i %>" size="4" type="text" value="<%= value %>" />
-				</td>
-			</tr>
-
-		<%
-		}
-		%>
-
+			</td>
+		</tr>
 		</table>
 
-		<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />getLanguageId();">
+		<script type="text/javascript">
+			var changed = false;
+			var lastLanguageId = "<%= currentLanguageId %>";
 
-			<%
-			Locale[] locales = LanguageUtil.getAvailableLocales();
-
-			for (int i = 0; i < locales.length; i++) {
-			%>
-
-				<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
-
-			<%
+			function <portlet:namespace />onChanged() {
+				changed = true;
 			}
-			%>
 
-		</select>
+			function <portlet:namespace />updateLanguage() {
+				if (lastLanguageId != "<%= defaultLanguageId %>") {
+					if (changed) {
+						for (var i = 0; i < 10; i++) {
+							var priorityName = jQuery("#<portlet:namespace />priorityName" + i + "_temp").attr("value");
+							var priorityImage = jQuery("#<portlet:namespace />priorityImage" + i + "_temp").attr("value");
+							var priorityValue = jQuery("#<portlet:namespace />priorityValue" + i + "_temp").attr("value");
 
-		<br />
+							if (priorityName == null) {
+								priorityName = "";
+							}
+
+							jQuery("#<portlet:namespace />priorityName" + i + "_" + lastLanguageId).attr("value", priorityName);
+
+							if (priorityImage == null) {
+								priorityImage = "";
+							}
+
+							jQuery("#<portlet:namespace />priorityImage" + i + "_" + lastLanguageId).attr("value", priorityImage);
+
+							if (priorityValue == null) {
+								priorityValue = "";
+							}
+
+							jQuery("#<portlet:namespace />priorityValue" + i + "_" + lastLanguageId).attr("value", priorityValue);
+						}
+
+						changed = false;
+					}
+				}
+
+				var selLanguageId = "";
+
+				for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
+					if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
+						selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
+
+						break;
+					}
+				}
+
+				if (selLanguageId != "") {
+					<portlet:namespace />updateLanguageTemps(selLanguageId);
+
+					jQuery("#<portlet:namespace />localized-priorities-table").show();
+				}
+				else {
+					jQuery("#<portlet:namespace />localized-priorities-table").hide();
+				}
+
+				lastLanguageId = selLanguageId;
+
+				return null;
+			}
+
+			function <portlet:namespace />updateLanguageTemps(lang) {
+				if (lang != "<%= defaultLanguageId %>") {
+					for (var i = 0; i < 10; i++) {
+						var priorityName = jQuery("#<portlet:namespace />priorityName" + i + "_" + lang).attr("value");
+						var priorityImage = jQuery("#<portlet:namespace />priorityImage" + i + "_" + lang).attr("value");
+						var priorityValue = jQuery("#<portlet:namespace />priorityValue" + i + "_" + lang).attr("value");
+
+						var defaultName = jQuery("#<portlet:namespace />priorityName" + i + "_" + "<%= defaultLanguageId %>").attr("value");
+						var defaultImage = jQuery("#<portlet:namespace />priorityImage" + i + "_" + "<%= defaultLanguageId %>").attr("value");
+						var defaultValue = jQuery("#<portlet:namespace />priorityValue" + i + "_" + "<%= defaultLanguageId %>").attr("value");
+
+						if (defaultName == null) {
+							defaultName = "";
+						}
+
+						if (defaultImage == null) {
+							defaultImage = "";
+						}
+
+						if (defaultValue == null) {
+							defaultValue = "";
+						}
+
+						if ((priorityName == null) || (priorityName == "")) {
+							jQuery("#<portlet:namespace />priorityName" + i + "_temp").attr("value", defaultName);
+						}
+						else {
+							jQuery("#<portlet:namespace />priorityName" + i + "_temp").attr("value", priorityName);
+						}
+
+						if ((priorityImage == null) || (priorityImage == "")) {
+							jQuery("#<portlet:namespace />priorityImage" + i + "_temp").attr("value", defaultImage);
+						}
+						else {
+							jQuery("#<portlet:namespace />priorityImage" + i + "_temp").attr("value", priorityImage);
+						}
+
+						if ((priorityValue == null) || (priorityValue == "")) {
+							jQuery("#<portlet:namespace />priorityValue" + i + "_temp").attr("value", defaultValue);
+						}
+						else {
+							jQuery("#<portlet:namespace />priorityValue" + i + "_temp").attr("value", priorityValue);
+						}
+					}
+				}
+			}
+
+			<portlet:namespace />updateLanguageTemps(lastLanguageId);
+		</script>
 	</c:when>
 	<c:when test='<%= tabs2.equals("user-ranks") %>'>
 		<liferay-ui:message key="enter-rank-and-minimum-post-pairs-per-line" />
 
 		<br /><br />
 
-		<textarea class="liferay-textarea" name="<portlet:namespace />ranks"><%= StringUtil.merge(LocalizationUtil.getPrefsValues(prefs, "ranks", languageId), StringPool.NEW_LINE) %></textarea><br />
+		<table class="liferay-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
+			</td>
+			<td>
+				<liferay-ui:message key="localized-language" />:
 
-		<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />getLanguageId();">
+				<select id="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage();">
+					<option value="" />
 
-			<%
-			Locale[] locales = LanguageUtil.getAvailableLocales();
+					<%
+					for (int i = 0; i < locales.length; i++) {
+						if (locales[i].equals(defaultLocale)) {
+							continue;
+						}
+					%>
 
-			for (int i = 0; i < locales.length; i++) {
-			%>
+						<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
 
-				<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+					<%
+					}
+					%>
 
-			<%
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<textarea class="liferay-textarea" id="<portlet:namespace />ranks_<%= defaultLanguageId %>" name="<portlet:namespace />ranks_<%= defaultLanguageId %>"><%= StringUtil.merge(LocalizationUtil.getPrefsValues(prefs, "ranks", defaultLanguageId), StringPool.NEW_LINE) %></textarea>
+			</td>
+			<td>
+
+				<%
+				for (int i = 0; i < locales.length; i++) {
+					if (locales[i].equals(defaultLocale)) {
+						continue;
+					}
+				%>
+
+					<input id="<portlet:namespace />ranks_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />ranks_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value='<%= StringUtil.merge(LocalizationUtil.getPrefsValues(prefs, "ranks", LocaleUtil.toLanguageId(locales[i]), false), StringPool.NEW_LINE) %>' />
+
+				<%
+				}
+				%>
+
+				<textarea class="liferay-textarea" id="<portlet:namespace />ranks_temp" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %> onChange="<portlet:namespace />onRanksChanged();"></textarea>
+			</td>
+		</tr>
+		</table>
+
+		<script type="text/javascript">
+			var ranksChanged = false;
+			var lastLanguageId = "<%= currentLanguageId %>";
+
+			function <portlet:namespace />onRanksChanged() {
+				ranksChanged = true;
 			}
-			%>
 
-		</select>
+			function <portlet:namespace />updateLanguage() {
+				if (lastLanguageId != "<%= defaultLanguageId %>") {
+					if (ranksChanged) {
+						var ranksValue = jQuery("#<portlet:namespace />ranks_temp").attr("value");
 
-		<br />
+						if (ranksValue == null) {
+							ranksValue = "";
+						}
+
+						jQuery("#<portlet:namespace />ranks_" + lastLanguageId).attr("value", ranksValue);
+
+						ranksChanged = false;
+					}
+				}
+
+				var selLanguageId = "";
+
+				for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
+					if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
+						selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
+
+						break;
+					}
+				}
+
+				if (selLanguageId != "") {
+					<portlet:namespace />updateLanguageTemps(selLanguageId);
+
+					jQuery("#<portlet:namespace />ranks_temp").show();
+				}
+				else {
+					jQuery("#<portlet:namespace />ranks_temp").hide();
+				}
+
+				lastLanguageId = selLanguageId;
+
+				return null;
+			}
+
+			function <portlet:namespace />updateLanguageTemps(lang) {
+				if (lang != "<%= defaultLanguageId %>") {
+					var ranksValue = jQuery("#<portlet:namespace />ranks_" + lang).attr("value");
+					var defaultRanksValue = jQuery("#<portlet:namespace />ranks_<%= defaultLanguageId %>").attr("value");
+
+					if (defaultRanksValue == null) {
+						defaultRanksValue = "";
+					}
+
+					if ((ranksValue == null) || (ranksValue == "")) {
+						jQuery("#<portlet:namespace />ranks_temp").attr("value", defaultRanksValue);
+					}
+					else {
+						jQuery("#<portlet:namespace />ranks_temp").attr("value", ranksValue);
+					}
+				}
+			}
+
+			<portlet:namespace />updateLanguageTemps(lastLanguageId);
+		</script>
 	</c:when>
 	<c:when test='<%= tabs2.equals("display-settings") %>'>
 		<table class="liferay-table">
