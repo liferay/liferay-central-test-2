@@ -71,6 +71,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 />
 
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
+<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-folder-name" />
 
 <c:if test="<%= parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID %>">
 	<div class="breadcrumbs">

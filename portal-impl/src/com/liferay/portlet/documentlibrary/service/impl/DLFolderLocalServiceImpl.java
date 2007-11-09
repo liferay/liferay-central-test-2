@@ -37,7 +37,9 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.FolderNameException;
+import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl;
@@ -118,7 +120,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		parentFolderId = getParentFolderId(groupId, parentFolderId);
 		Date now = new Date();
 
-		validate(name);
+		validate(groupId, parentFolderId, name);
 
 		long folderId = counterLocalService.increment();
 
@@ -393,7 +395,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		parentFolderId = getParentFolderId(folder, parentFolderId);
 
-		validate(name);
+		validate(folder.getGroupId(), parentFolderId, name);
 
 		folder.setModifiedDate(new Date());
 		folder.setParentFolderId(parentFolderId);
@@ -480,11 +482,21 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validate(String name) throws PortalException {
+	protected void validate(long groupId, long parentFolderId, String name)
+		throws PortalException, SystemException {
+
 		if ((Validator.isNull(name)) || (name.indexOf("\\\\") != -1) ||
 			(name.indexOf("//") != -1)) {
 
 			throw new FolderNameException();
+		}
+
+		try {
+			dlFolderPersistence.findByG_P_N(groupId, parentFolderId, name);
+
+			throw new DuplicateFolderNameException();
+		}
+		catch (NoSuchFolderException nsfe) {
 		}
 	}
 

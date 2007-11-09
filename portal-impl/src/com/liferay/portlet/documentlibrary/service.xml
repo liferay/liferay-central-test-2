@@ -222,6 +222,11 @@
 			<finder-column name="groupId" />
 			<finder-column name="parentFolderId" />
 		</finder>
+		<finder name="G_P_N" return-type="DLFolder">
+			<finder-column name="groupId" />
+			<finder-column name="parentFolderId" />
+			<finder-column name="name" />
+		</finder>
 		<finder name="P_N" return-type="DLFolder">
 			<finder-column name="parentFolderId" />
 			<finder-column name="name" />
@@ -236,6 +241,7 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<exceptions>
+		<exception>DuplicateFolderName</exception>
 		<exception>FileShortcutPermission</exception>
 		<exception>FolderName</exception>
 	</exceptions>

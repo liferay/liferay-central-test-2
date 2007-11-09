@@ -20,38 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portlet.documentlibrary;
 
-import com.liferay.portal.upgrade.v4_4_0.UpgradeDocumentLibrary;
-import com.liferay.portal.upgrade.v4_4_0.UpgradeSchema;
-import com.liferay.portal.upgrade.v4_4_0.UpgradeTags;
-import com.liferay.portal.upgrade.v4_4_0.UpgradeUUID;
-import com.liferay.portal.util.ReleaseInfo;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="UpgradeProcess_4_4_0.java.html"><b><i>View Source</i></b></a>
+ * <a href="DuplicateFolderNameException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeProcess_4_4_0 extends UpgradeProcess {
+public class DuplicateFolderNameException extends PortalException {
 
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_4_4_0_BUILD_NUMBER;
+	public DuplicateFolderNameException() {
+		super();
 	}
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		upgrade(new UpgradeDocumentLibrary());
-		upgrade(new UpgradeSchema());
-		upgrade(new UpgradeUUID());
-		upgrade(new UpgradeTags());
+	public DuplicateFolderNameException(String msg) {
+		super(msg);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_4_4_0.class);
+	public DuplicateFolderNameException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public DuplicateFolderNameException(Throwable cause) {
+		super(cause);
+	}
 
 }

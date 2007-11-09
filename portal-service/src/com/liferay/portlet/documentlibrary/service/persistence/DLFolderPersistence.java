@@ -178,6 +178,15 @@ public interface DLFolderPersistence {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFolderException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFolder findByP_N(
 		long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
@@ -220,6 +229,11 @@ public interface DLFolderPersistence {
 	public void removeByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByG_P_N(long groupId, long parentFolderId,
+		java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFolderException;
+
 	public void removeByP_N(long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -240,6 +254,9 @@ public interface DLFolderPersistence {
 
 	public int countByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
+
+	public int countByG_P_N(long groupId, long parentFolderId,
+		java.lang.String name) throws com.liferay.portal.SystemException;
 
 	public int countByP_N(long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
