@@ -144,7 +144,7 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 <c:if test="<%= portlets != null %>">
 
 	<%
-	Set footerPortalCssPaths = CollectionFactory.getHashSet();
+	Set footerPortalCssPaths = new LinkedHashSet();
 
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
@@ -167,7 +167,7 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 		}
 	}
 
-	Set footerPortletCssPaths = CollectionFactory.getHashSet();
+	Set footerPortletCssPaths = new LinkedHashSet();
 
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
@@ -190,7 +190,7 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 		}
 	}
 
-	Set footerPortalJavaScriptPaths = CollectionFactory.getHashSet();
+	Set footerPortalJavaScriptPaths = new LinkedHashSet();
 
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
@@ -213,7 +213,7 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 		}
 	}
 
-	Set footerPortletJavaScriptPaths = CollectionFactory.getHashSet();
+	Set footerPortletJavaScriptPaths = new LinkedHashSet();
 
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
