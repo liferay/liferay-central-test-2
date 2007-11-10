@@ -27,6 +27,9 @@
 <portlet:defineObjects />
 
 <%
+WindowState windowState = renderRequest.getWindowState();
+PortletMode portletMode = renderRequest.getPortletMode();
+
 PortletURL currentURLObj = PortletURLUtil.getCurrent(renderRequest, renderResponse);
 
 //String currentURL = currentURLObj.toString();

@@ -121,7 +121,19 @@ for (int i = 0; i < results.size(); i++) {
 
 	resultRows.add(row);
 }
+
+boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, plid.longValue(), folderId, ActionKeys.ADD_FOLDER);
 %>
+
+<c:if test="<%= showAddFolderButton %>">
+	<div>
+		<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
+	</div>
+
+	<c:if test="<%= results.size() > 0 %>">
+		<br />
+	</c:if>
+</c:if>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 

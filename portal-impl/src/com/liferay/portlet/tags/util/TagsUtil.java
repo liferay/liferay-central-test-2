@@ -33,6 +33,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.tags.NoSuchEntryException;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
@@ -89,10 +90,18 @@ public class TagsUtil {
 
 		String result = s;
 
-		if (entryName != null) {
-			TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(
-				companyId, entryName);
+		TagsEntry entry = null;
 
+		if (entryName != null) {
+			try {
+				entry = TagsEntryLocalServiceUtil.getEntry(
+					companyId, entryName);
+			}
+			catch (NoSuchEntryException nsee) {
+			}
+		}
+
+		if (entry != null) {
 			List properties = TagsPropertyLocalServiceUtil.getProperties(
 				entry.getEntryId());
 
