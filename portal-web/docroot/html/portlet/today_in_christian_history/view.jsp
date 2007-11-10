@@ -31,7 +31,7 @@ List events = TICHUtil.getEvents();
 <c:choose>
 	<c:when test="<%= events != null %>">
 		<c:choose>
-			<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
+			<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
 
 				<%
 				Event event = (Event)events.get(Randomizer.getInstance().nextInt(events.size()));

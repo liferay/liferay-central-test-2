@@ -112,7 +112,7 @@ int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 
 </form>
 
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />number);
 	</script>

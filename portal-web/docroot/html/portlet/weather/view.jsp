@@ -74,7 +74,7 @@ for (int i = 0; i < zips.length; i++) {
 
 </form>
 
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.where);
 	</script>

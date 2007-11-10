@@ -56,7 +56,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	searchContainer="<%= searchContainer %>"
 />
 
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 	<%
 	GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();

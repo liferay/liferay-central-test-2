@@ -35,7 +35,7 @@ iframeSrc += (String)request.getAttribute(WebKeys.IFRAME_SRC);
 
 String iframeHeight = heightNormal;
 
-if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
+if (windowState.equals(WindowState.MAXIMIZED)) {
 	iframeHeight = heightMaximized;
 }
 %>

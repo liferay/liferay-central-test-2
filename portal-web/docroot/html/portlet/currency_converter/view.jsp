@@ -91,7 +91,7 @@ decimalFormat.setMinimumFractionDigits(2);
 <br /><br />
 
 <c:choose>
-	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
+	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
 		<table border="1" cellpadding="3" cellspacing="0" width="100%">
 		<tr class="portlet-section-header">
 			<td>
@@ -206,7 +206,7 @@ decimalFormat.setMinimumFractionDigits(2);
 
 </form>
 
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />number);
 	</script>

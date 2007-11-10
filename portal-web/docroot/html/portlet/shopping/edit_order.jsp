@@ -30,8 +30,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER);
 
 long orderId = BeanParamUtil.getLong(order, request, "orderId");
-
-WindowState windowState = renderRequest.getWindowState();
 %>
 
 <script type="text/javascript">

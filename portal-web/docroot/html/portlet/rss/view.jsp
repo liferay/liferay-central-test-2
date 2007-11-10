@@ -28,8 +28,6 @@
 String url = ParamUtil.getString(request, "url");
 String title = StringPool.BLANK;
 boolean hide = false;
-
-WindowState windowState = renderRequest.getWindowState();
 %>
 
 <c:choose>

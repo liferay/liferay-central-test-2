@@ -58,7 +58,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer="<%= searchContainer %>"
 		/>
 
-		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 			<%
 			DefinitionSearchTerms searchTerms = (DefinitionSearchTerms)searchContainer.getSearchTerms();
@@ -134,7 +134,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer="<%= searchContainer %>"
 		/>
 
-		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 			<%
 			InstanceSearchTerms searchTerms = (InstanceSearchTerms)searchContainer.getSearchTerms();
@@ -230,7 +230,7 @@ portletURL.setParameter("tabs1", tabs1);
 			searchContainer="<%= searchContainer %>"
 		/>
 
-		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 			<%
 			TaskSearchTerms searchTerms = (TaskSearchTerms)searchContainer.getSearchTerms();

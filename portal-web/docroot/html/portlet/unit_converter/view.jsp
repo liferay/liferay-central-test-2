@@ -283,7 +283,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 
 </form>
 
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />fromValue);
 	</script>

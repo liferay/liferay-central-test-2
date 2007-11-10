@@ -141,7 +141,7 @@ String portletURLString = portletURL.toString();
 			searchContainer="<%= searchContainer %>"
 		/>
 
-		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 			<%
 			UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
@@ -375,7 +375,7 @@ String portletURLString = portletURL.toString();
 				searchContainer="<%= searchContainer %>"
 		/>
 
-		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 			<%
 			OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
@@ -538,7 +538,7 @@ String portletURLString = portletURL.toString();
 			searchContainer="<%= searchContainer %>"
 		/>
 
-		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 			<%
 			UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
@@ -614,7 +614,7 @@ String portletURLString = portletURL.toString();
 			searchContainer="<%= searchContainer %>"
 		/>
 
-		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 			<%
 			RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
@@ -697,7 +697,7 @@ String portletURLString = portletURL.toString();
 			/>
 		</c:if>
 
-		<c:if test="<%= !passwordPolicyEnabled && renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		<c:if test="<%= !passwordPolicyEnabled && windowState.equals(WindowState.MAXIMIZED) %>">
 
 			<%
 			PasswordPolicySearchTerms searchTerms = (PasswordPolicySearchTerms)searchContainer.getSearchTerms();

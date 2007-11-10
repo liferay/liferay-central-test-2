@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/invitation/init.jsp" %>
 
 <c:choose>
-	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
+	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
 		<liferay-ui:success key="invitationSent" message="your-invitations-have-been-sent" />
 
 		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/invitation/view"/></portlet:renderURL>">

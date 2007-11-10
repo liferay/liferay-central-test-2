@@ -104,7 +104,7 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 	<%
 	boolean showButtons = false;
 
-	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && !renderRequest.getWindowState().equals(LiferayWindowState.POP_UP)) {
+	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && !windowState.equals(LiferayWindowState.POP_UP)) {
 		showButtons = true;
 	}
 	%>
@@ -136,7 +136,7 @@ if (displayTerms.getParentOrganizationId() > 0) {
 	<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
 </c:if>
 
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);

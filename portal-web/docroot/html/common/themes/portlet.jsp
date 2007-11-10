@@ -57,10 +57,6 @@ if (portletDecorateObj != null) {
 	request.removeAttribute(WebKeys.PORTLET_DECORATE);
 }
 
-//if (!renderRequest.getWindowState().equals(WindowState.NORMAL)) {
-//	portletDecorate = true;
-//}
-
 // Portlet title
 
 String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, themeDisplay.getLanguageId());

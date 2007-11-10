@@ -48,7 +48,7 @@ numberFormat.setMinimumIntegerDigits(2);
 <br /><br />
 
 <c:choose>
-	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
+	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
 		<html:link page="/admin/view?windowState=maximized&portletMode=view&actionURL=0"><liferay-ui:message key="more" /></html:link> &raquo;
 	</c:when>
 	<c:otherwise>

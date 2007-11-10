@@ -164,7 +164,7 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 	<input type="button" value="<liferay-ui:message key="search-articles" />" onclick="submitForm(document.<portlet:namespace />fm, '<%= portletURL.toString() %>')" />
 </div>
 
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.ARTICLE_ID %>);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);

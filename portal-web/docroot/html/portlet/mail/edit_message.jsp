@@ -228,7 +228,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 			ccFinder = new RecipientSelector("<portlet:namespace />cc");
 			bccFinder = new RecipientSelector("<portlet:namespace />bcc");
 
-			<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />to);
 			</c:if>
 		}

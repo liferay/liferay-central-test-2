@@ -40,7 +40,7 @@ portletURL.setParameter("tabs1", tabs1);
 	url="<%= portletURL.toString() %>"
 />
 
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<c:choose>
 		<c:when test='<%= tabs1.equals("larger") %>'>
 			<table class="liferay-table">

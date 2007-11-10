@@ -226,7 +226,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					searchContainer="<%= searchContainer %>"
 				/>
 
-				<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+				<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 					<%
 					RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();

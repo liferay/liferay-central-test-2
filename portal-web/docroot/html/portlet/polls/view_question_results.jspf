@@ -64,7 +64,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 			int votesPixelWidth = 35;
 
-			if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
+			if (windowState.equals(WindowState.MAXIMIZED)) {
 				votesPixelWidth = 100;
 			}
 

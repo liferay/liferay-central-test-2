@@ -100,7 +100,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 </form>
 
-<c:if test='<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) && (tabs1.equals("dns-lookup") || tabs1.equals("whois")) %>'>
+<c:if test='<%= windowState.equals(WindowState.MAXIMIZED) && (tabs1.equals("dns-lookup") || tabs1.equals("whois")) %>'>
 	<script type="text/javascript">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />domain);
 	</script>

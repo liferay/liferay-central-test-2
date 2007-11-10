@@ -199,7 +199,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			</form>
 
-			<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 				<script type="text/javascript">
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
 				</script>
@@ -318,7 +318,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			</form>
 
-			<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 				<script type="text/javascript">
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);

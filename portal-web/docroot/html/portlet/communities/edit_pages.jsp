@@ -824,7 +824,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deletePage();" />
 
 					<script type="text/javascript">
-						<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+						<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 							Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name_<%= defaultLanguageId %>);
 						</c:if>
 
@@ -1037,7 +1037,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 							<input type="submit" value="<liferay-ui:message key="add-page" />" /><br />
 
-							<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+							<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 								<script type="text/javascript">
 									Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name_<%= defaultLanguageId %>);
 								</script>

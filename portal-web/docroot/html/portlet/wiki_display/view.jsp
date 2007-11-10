@@ -71,11 +71,6 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 </c:if>
 
 <c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
-
-	<%
-	WindowState windowState = renderRequest.getWindowState();
-	%>
-
 	<c:choose>
 		<c:when test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 

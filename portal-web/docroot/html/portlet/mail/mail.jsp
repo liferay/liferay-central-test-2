@@ -67,7 +67,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 </style>
 
 <c:choose>
-	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
+	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
 
 		<%
 		boolean mailServerExists = true;

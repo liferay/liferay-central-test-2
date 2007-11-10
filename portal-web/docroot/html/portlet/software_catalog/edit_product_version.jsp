@@ -196,7 +196,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		}
 	}
 
-	<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />version);
 	</c:if>
 

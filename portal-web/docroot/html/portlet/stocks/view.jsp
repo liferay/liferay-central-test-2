@@ -27,7 +27,7 @@
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/stocks/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
 <c:choose>
-	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
+	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
 		<table class="liferay-table">
 
 		<%
@@ -211,7 +211,7 @@
 
 </form>
 
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />symbol);
 	</script>

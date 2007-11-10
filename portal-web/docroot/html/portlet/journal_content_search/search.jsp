@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/journal_content_search/init.jsp" %>
 
 <c:choose>
-	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+	<c:when test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 
 		<%
 		String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
@@ -135,7 +135,7 @@
 
 		</form>
 
-		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 			<script type="text/javascript">
 				if (document.<portlet:namespace />fm.<portlet:namespace />keywords) {
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);

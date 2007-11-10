@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/reverend_fun/init.jsp" %>
 
 <c:choose>
-	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.NORMAL) %>">
+	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
 		<table class="liferay-table">
 		<tr>
 			<td>

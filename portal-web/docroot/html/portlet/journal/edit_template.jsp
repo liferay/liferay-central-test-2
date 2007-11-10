@@ -349,7 +349,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 </form>
 
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
 		<c:choose>
 			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID)) %>">

@@ -33,7 +33,7 @@ List newsList = NewsUtil.getNews(prefs);
 <table border="0" cellpadding="0" cellspacing="0">
 
 <c:choose>
-	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) && Validator.isNotNull(url) %>">
+	<c:when test="<%= windowState.equals(WindowState.MAXIMIZED) && Validator.isNotNull(url) %>">
 
 		<%
 		int i = 0;
