@@ -42,6 +42,7 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.util.FileUtil;
@@ -114,8 +115,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			Object model = resource.getModel();
 
-			String[] destinationArray =
-				WebDAVUtil.getPathArray(destination, true);
+			String[] destinationArray = WebDAVUtil.getPathArray(
+				destination, true);
 
 			if (model instanceof DLFolder) {
 				DLFolder folder = (DLFolder)model;
@@ -232,7 +233,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String[] pathArray = webDavReq.getPathArray();
 
 			long parentFolderId = getParentFolderId(pathArray);
-
 			String name = WebDAVUtil.getEntryName(pathArray);
 
 			try {
@@ -302,8 +302,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			Object model = resource.getModel();
 
-			String[] destinationArray =
-				WebDAVUtil.getPathArray(destination, true);
+			String[] destinationArray = WebDAVUtil.getPathArray(
+				destination, true);
 
 			if (model instanceof DLFolder) {
 				DLFolder folder = (DLFolder)model;
@@ -446,32 +446,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return fileEntries;
 	}
 
-	protected List getFolders(WebDAVRequest webDavReq, long parentFolderId)
-		throws Exception {
-
-		List folders = new ArrayList();
-
-		long groupId = webDavReq.getGroupId();
-		long plid = getPlid(groupId);
-
-		Iterator itr = DLFolderServiceUtil.getFolders(
-			groupId, plid, parentFolderId).iterator();
-
-		while (itr.hasNext()) {
-			DLFolder folder = (DLFolder)itr.next();
-
-			Resource resource = toResource(webDavReq, folder, true);
-
-			folders.add(resource);
-		}
-
-		return folders;
-	}
-
-	protected long getParentFolderId(String[] pathArray) throws Exception {
-		return getFolderId(pathArray, true);
-	}
-
 	protected long getFolderId(String[] pathArray) throws Exception {
 		return getFolderId(pathArray, false);
 	}
@@ -506,6 +480,41 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 
 		return folderId;
+	}
+
+	protected List getFolders(WebDAVRequest webDavReq, long parentFolderId)
+		throws Exception {
+
+		List folders = new ArrayList();
+
+		long plid = getPlid(webDavReq.getGroupId());
+		long groupId = webDavReq.getGroupId();
+
+		DLFolderPermission.check(
+			webDavReq.getPermissionChecker(), plid, parentFolderId,
+			ActionKeys.VIEW);
+
+		Iterator itr = DLFolderLocalServiceUtil.getFolders(
+			groupId, parentFolderId).iterator();
+
+		while (itr.hasNext()) {
+			DLFolder folder = (DLFolder)itr.next();
+
+			if (DLFolderPermission.contains(
+					webDavReq.getPermissionChecker(), folder,
+					ActionKeys.VIEW)) {
+
+				Resource resource = toResource(webDavReq, folder, true);
+
+				folders.add(resource);
+			}
+		}
+
+		return folders;
+	}
+
+	protected long getParentFolderId(String[] pathArray) throws Exception {
+		return getFolderId(pathArray, true);
 	}
 
 	protected Resource toResource(

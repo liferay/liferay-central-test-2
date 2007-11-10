@@ -161,7 +161,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 				}
 			}
 
-			sb.insert(0, PortalUtil.getPortletGroupId(layout));
+			sb.insert(0, layout.getGroupId());
 			sb.insert(0, StringPool.SLASH);
 			%>
 

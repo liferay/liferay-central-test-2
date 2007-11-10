@@ -91,8 +91,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	public DLFolder getFolder(long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
-		DLFolder folder =
-			dlFolderLocalService.getFolder(groupId, parentFolderId, name);
+		DLFolder folder = dlFolderLocalService.getFolder(
+			groupId, parentFolderId, name);
 
 		DLFolderPermission.check(
 			getPermissionChecker(), folder, ActionKeys.VIEW);
@@ -106,30 +106,6 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		DLFolder folder = getFolder(groupId, parentFolderId, name);
 
 		return folder.getFolderId();
-	}
-
-	public List getFolders(long groupId, long plid, long parentFolderId)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), plid, parentFolderId, ActionKeys.VIEW);
-
-		List folders = new ArrayList();
-
-		Iterator itr =
-			dlFolderLocalService.getFolders(groupId, parentFolderId).iterator();
-
-		while (itr.hasNext()) {
-			DLFolder folder = (DLFolder)itr.next();
-
-			if (DLFolderPermission.contains(
-					getPermissionChecker(), folder, ActionKeys.VIEW)) {
-
-				folders.add(folder);
-			}
-		}
-
-		return folders;
 	}
 
 	public void reIndexSearch(long companyId)

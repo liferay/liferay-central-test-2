@@ -164,20 +164,6 @@ public class DLFolderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap[] getFolders(
-		long groupId, long plid, long parentFolderId) throws RemoteException {
-		try {
-			java.util.List returnValue = DLFolderServiceUtil.getFolders(groupId,
-					plid, parentFolderId);
-
-			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void reIndexSearch(long companyId) throws RemoteException {
 		try {
 			DLFolderServiceUtil.reIndexSearch(companyId);

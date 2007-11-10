@@ -1451,13 +1451,6 @@ Liferay.Service.DL.DLFolder = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getFolders: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getFolders";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	reIndexSearch: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "reIndexSearch";

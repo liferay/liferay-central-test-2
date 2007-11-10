@@ -24,7 +24,6 @@ package com.liferay.portlet.documentlibrary.service.http;
 
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -126,16 +125,6 @@ public class DLFolderServiceJSON {
 				parentFolderId, name);
 
 		return returnValue;
-	}
-
-	public static JSONArray getFolders(long groupId, long plid,
-		long parentFolderId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
-		java.util.List returnValue = DLFolderServiceUtil.getFolders(groupId,
-				plid, parentFolderId);
-
-		return DLFolderJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static void reIndexSearch(long companyId)

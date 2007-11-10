@@ -81,6 +81,15 @@ public class WebDAVUtil {
 		return destination;
 	}
 
+	public static String getEntryName(String[] pathArray) {
+		if (pathArray.length <= 2) {
+			return StringPool.BLANK;
+		}
+		else {
+			return pathArray[pathArray.length - 1];
+		}
+	}
+
 	public static long getGroupId(String path) {
 		return getGroupId(path, false);
 	}
@@ -102,15 +111,6 @@ public class WebDAVUtil {
 		String[] pathArray = getPathArray(path);
 
 		return getGroupId(pathArray);
-	}
-
-	public static String getEntryName(String[] pathArray) {
-		if (pathArray.length <= 2) {
-			return StringPool.BLANK;
-		}
-		else {
-			return pathArray[pathArray.length - 1];
-		}
 	}
 
 	public static String[] getPathArray(String path) {
