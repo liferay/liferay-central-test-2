@@ -27,7 +27,7 @@
 				width: ${company_logo_width}px;
 			}
 
-			#ie6_png_fix()
+			#ie6_png_fix ()
 		</style>
 	#end
 </head>
