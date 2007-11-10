@@ -42,6 +42,7 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.util.FileUtil;
 import com.liferay.util.PwdGenerator;
@@ -132,6 +133,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 			else {
 				DLFileEntry fileEntry = (DLFileEntry)model;
+
+				DLFileEntryPermission.check(
+					webDavReq.getPermissionChecker(), fileEntry,
+					ActionKeys.VIEW);
 
 				String[] pathArray = webDavReq.getPathArray();
 				long userId = webDavReq.getUserId();
@@ -247,6 +252,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					DLFileEntry fileEntry =
 						DLFileEntryLocalServiceUtil.getFileEntry(
 							parentFolderId, name);
+
+					DLFileEntryPermission.check(
+						webDavReq.getPermissionChecker(), fileEntry,
+						ActionKeys.VIEW);
 
 					return toResource(webDavReq, fileEntry, false);
 				}
@@ -412,15 +421,26 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		List fileEntries = new ArrayList();
 
+		long plid = getPlid(webDavReq.getGroupId());
+
+		DLFolderPermission.check(
+			webDavReq.getPermissionChecker(), plid, parentFolderId,
+			ActionKeys.VIEW);
+
 		Iterator itr = DLFileEntryLocalServiceUtil.getFileEntries(
 			parentFolderId).iterator();
 
 		while (itr.hasNext()) {
 			DLFileEntry fileEntry = (DLFileEntry)itr.next();
 
-			Resource resource = toResource(webDavReq, fileEntry, true);
+			if (DLFileEntryPermission.contains(
+					webDavReq.getPermissionChecker(), fileEntry,
+					ActionKeys.VIEW)) {
 
-			fileEntries.add(resource);
+				Resource resource = toResource(webDavReq, fileEntry, true);
+
+				fileEntries.add(resource);
+			}
 		}
 
 		return fileEntries;
