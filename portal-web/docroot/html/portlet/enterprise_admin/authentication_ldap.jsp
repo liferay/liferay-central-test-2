@@ -23,6 +23,21 @@
 %>
 
 <script type="text/javascript">
+	<portlet:namespace/>testSettings = function(type) {
+		var popup = Liferay.Popup({modal: true,width:500});
+  		var url = "";
+
+  		if (type == "ldapConnection") {
+  			url = "<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="type" value="ldapConnection" /><portlet:param name="struts_action" value="/enterprise_admin/test_settings" /></portlet:renderURL>";
+		} else if (type == "ldapGroups") {
+  			url = "<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="type" value="ldapGroups" /><portlet:param name="struts_action" value="/enterprise_admin/test_settings" /></portlet:renderURL>";
+		} else if (type == "ldapUsers") {
+  			url = "<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="type" value="ldapUsers" /><portlet:param name="struts_action" value="/enterprise_admin/test_settings" /></portlet:renderURL>";
+		}
+
+		AjaxUtil.update(url, popup);
+	}
+
 	function <portlet:namespace />updateDefaultLdap() {
 		var baseProviderURL = "";
 		var baseDN = "";
@@ -80,6 +95,10 @@
 <table class="liferay-table">
 <tr>
 	<td>
+			<input type="button" value="<liferay-ui:message key="Test LDAP Connection" />" onClick="<portlet:namespace/>testSettings('ldapConnection');" />
+			<input type="button" value="<liferay-ui:message key="Test Groups" />" onClick="<portlet:namespace />testSettings('ldapGroups');" />
+			<input type="button" value="<liferay-ui:message key="Test Users" />" onClick="<portlet:namespace />testSettings('ldapUsers');" />
+
 		<liferay-ui:tabs
 			names="connection-settings"
 			param="tabs1"
