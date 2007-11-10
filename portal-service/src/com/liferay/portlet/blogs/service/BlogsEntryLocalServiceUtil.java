@@ -273,6 +273,18 @@ public class BlogsEntryLocalServiceUtil {
 		blogsEntryLocalService.setMBMessageFinder(mbMessageFinder);
 	}
 
+	public static com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence getRatingsStatsPersistence() {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getRatingsStatsPersistence();
+	}
+
+	public static void setRatingsStatsPersistence(
+		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence) {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+		blogsEntryLocalService.setRatingsStatsPersistence(ratingsStatsPersistence);
+	}
+
 	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 

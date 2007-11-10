@@ -145,6 +145,11 @@ public interface BlogsEntryLocalService {
 	public void setMBMessageFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder);
 
+	public com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence getRatingsStatsPersistence();
+
+	public void setRatingsStatsPersistence(
+		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence);
+
 	public com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence();
 
 	public void setTagsAssetPersistence(

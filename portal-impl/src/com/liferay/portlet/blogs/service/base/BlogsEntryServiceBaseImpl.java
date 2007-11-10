@@ -96,6 +96,10 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
@@ -408,6 +412,24 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 		this.mbMessageFinder = mbMessageFinder;
 	}
 
+	public RatingsStatsLocalService getRatingsStatsLocalService() {
+		return ratingsStatsLocalService;
+	}
+
+	public void setRatingsStatsLocalService(
+		RatingsStatsLocalService ratingsStatsLocalService) {
+		this.ratingsStatsLocalService = ratingsStatsLocalService;
+	}
+
+	public RatingsStatsPersistence getRatingsStatsPersistence() {
+		return ratingsStatsPersistence;
+	}
+
+	public void setRatingsStatsPersistence(
+		RatingsStatsPersistence ratingsStatsPersistence) {
+		this.ratingsStatsPersistence = ratingsStatsPersistence;
+	}
+
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -613,6 +635,14 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 			mbMessageFinder = MBMessageFinderUtil.getFinder();
 		}
 
+		if (ratingsStatsLocalService == null) {
+			ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getImpl();
+		}
+
+		if (ratingsStatsPersistence == null) {
+			ratingsStatsPersistence = RatingsStatsUtil.getPersistence();
+		}
+
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}
@@ -680,6 +710,8 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 	protected MBMessageService mbMessageService;
 	protected MBMessagePersistence mbMessagePersistence;
 	protected MBMessageFinder mbMessageFinder;
+	protected RatingsStatsLocalService ratingsStatsLocalService;
+	protected RatingsStatsPersistence ratingsStatsPersistence;
 	protected TagsAssetLocalService tagsAssetLocalService;
 	protected TagsAssetService tagsAssetService;
 	protected TagsAssetPersistence tagsAssetPersistence;
