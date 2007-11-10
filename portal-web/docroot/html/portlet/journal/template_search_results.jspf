@@ -37,10 +37,10 @@ searchContainer.setTotal(total);
 List results = null;
 
 if (searchTerms.isAdvancedSearch()) {
-	results = JournalTemplateLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getTemplateId(), searchTerms.getStructureId(), StringPool.EQUAL, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
+	results = JournalTemplateLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getTemplateId(), searchTerms.getStructureId(), searchTerms.getStructureIdComparator(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
 }
 else {
-	results = JournalTemplateLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getKeywords(), searchTerms.getStructureId(), StringPool.EQUAL, searchContainer.getStart(), searchContainer.getEnd(), null);
+	results = JournalTemplateLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getKeywords(), searchTerms.getStructureId(), searchTerms.getStructureIdComparator(), searchContainer.getStart(), searchContainer.getEnd(), null);
 }
 
 searchContainer.setResults(results);

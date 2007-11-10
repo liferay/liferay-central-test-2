@@ -129,6 +129,24 @@ if (structure != null) {
 
 String templateId = BeanParamUtil.getString(article, request, "templateId");
 
+if ((structure == null) && Validator.isNotNull(templateId)) {
+	JournalTemplate template = null;
+
+	try {
+		template = JournalTemplateLocalServiceUtil.getTemplate(groupId, templateId);
+
+		structureId = template.getStructureId();
+
+		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
+
+		structureName = structure.getName();
+
+		templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
+	}
+	catch (NoSuchTemplateException nste) {
+	}
+}
+
 String languageId = LanguageUtil.getLanguageId(request);
 
 String defaultLanguageId = ParamUtil.getString(request, "defaultLanguageId");
@@ -413,6 +431,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 
 	function <portlet:namespace />removeStructure() {
 		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
+		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = "";
 		document.<portlet:namespace />fm1.<portlet:namespace />content.value = "";
 		submitForm(document.<portlet:namespace />fm1);
 	}
