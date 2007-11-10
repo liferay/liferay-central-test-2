@@ -73,6 +73,37 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
+		<liferay-ui:message key="webdav-url" />
+
+		<%
+		StringBuffer sb = new StringBuffer();
+
+		if (folder != null) {
+			DLFolder curFolder = folder;
+
+			while (true) {
+				sb.insert(0, curFolder.getName());
+				sb.insert(0, StringPool.SLASH);
+
+				if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+					break;
+				}
+				else {
+					curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+				}
+			}
+		}
+
+		sb.insert(0, PortalUtil.getPortletGroupId(layout));
+		sb.insert(0, StringPool.SLASH);
+		%>
+
+		<liferay-ui:input-resource
+			url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/document_library/" + company.getCompanyId() + sb.toString() %>'
+		/>
+
+		<br /><br />
+
 		<c:if test="<%= showSubfolders %>">
 			<c:if test="<%= showBreadcrumbs && (folder != null) %>">
 				<div class="breadcrumbs">

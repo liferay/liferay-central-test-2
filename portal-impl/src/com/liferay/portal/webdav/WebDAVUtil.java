@@ -53,6 +53,14 @@ public class WebDAVUtil {
 	}
 
 	public static long getCompanyId(String path) {
+		return getCompanyId(path, false);
+	}
+
+	public static long getCompanyId(String path, boolean fixPath) {
+		if (fixPath) {
+			path = fixPath(path);
+		}
+
 		String[] pathArray = getPathArray(path);
 
 		if (pathArray.length <= 0) {
@@ -74,8 +82,10 @@ public class WebDAVUtil {
 	}
 
 	public static long getGroupId(String path) {
-		String[] pathArray = getPathArray(path);
+		return getGroupId(path, false);
+	}
 
+	public static long getGroupId(String[] pathArray) {
 		if (pathArray.length <= 1) {
 			return 0;
 		}
@@ -84,7 +94,34 @@ public class WebDAVUtil {
 		}
 	}
 
+	public static long getGroupId(String path, boolean fixPath) {
+		if (fixPath) {
+			path = fixPath(path);
+		}
+
+		String[] pathArray = getPathArray(path);
+
+		return getGroupId(pathArray);
+	}
+
+	public static String getEntryName(String[] pathArray) {
+		if (pathArray.length <= 2) {
+			return StringPool.BLANK;
+		}
+		else {
+			return pathArray[pathArray.length - 1];
+		}
+	}
+
 	public static String[] getPathArray(String path) {
+		return getPathArray(path, false);
+	}
+
+	public static String[] getPathArray(String path, boolean fixPath) {
+		if (fixPath) {
+			path = fixPath(path);
+		}
+
 		if (path.startsWith(StringPool.SLASH)) {
 			path = path.substring(1, path.length());
 		}
@@ -105,6 +142,14 @@ public class WebDAVUtil {
 	}
 
 	public static boolean isGroupPath(String path) {
+		return isGroupPath(path, false);
+	}
+
+	public static boolean isGroupPath(String path, boolean fixPath) {
+		if (fixPath) {
+			path = fixPath(path);
+		}
+
 		String[] pathArray = getPathArray(path);
 
 		if (pathArray.length == 2) {

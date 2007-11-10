@@ -24,6 +24,7 @@ package com.liferay.portlet.documentlibrary.service.http;
 
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -105,6 +106,36 @@ public class DLFolderServiceJSON {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.getFolder(folderId);
 
 		return DLFolderJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject getFolder(long groupId, long parentFolderId,
+		java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.getFolder(groupId,
+				parentFolderId, name);
+
+		return DLFolderJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static long getFolderId(long groupId, long parentFolderId,
+		java.lang.String name)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		long returnValue = DLFolderServiceUtil.getFolderId(groupId,
+				parentFolderId, name);
+
+		return returnValue;
+	}
+
+	public static JSONArray getFolders(long groupId, long plid,
+		long parentFolderId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		java.util.List returnValue = DLFolderServiceUtil.getFolders(groupId,
+				plid, parentFolderId);
+
+		return DLFolderJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static void reIndexSearch(long companyId)

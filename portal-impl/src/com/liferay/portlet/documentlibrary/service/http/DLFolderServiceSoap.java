@@ -135,6 +135,49 @@ public class DLFolderServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap getFolder(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.getFolder(groupId,
+					parentFolderId, name);
+
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static long getFolderId(long groupId, long parentFolderId,
+		java.lang.String name) throws RemoteException {
+		try {
+			long returnValue = DLFolderServiceUtil.getFolderId(groupId,
+					parentFolderId, name);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap[] getFolders(
+		long groupId, long plid, long parentFolderId) throws RemoteException {
+		try {
+			java.util.List returnValue = DLFolderServiceUtil.getFolders(groupId,
+					plid, parentFolderId);
+
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void reIndexSearch(long companyId) throws RemoteException {
 		try {
 			DLFolderServiceUtil.reIndexSearch(companyId);

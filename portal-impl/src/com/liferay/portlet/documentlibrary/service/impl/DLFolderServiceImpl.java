@@ -30,6 +30,10 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * <a href="DLFolderServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -82,6 +86,50 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			getPermissionChecker(), folderId, ActionKeys.VIEW);
 
 		return dlFolderLocalService.getFolder(folderId);
+	}
+
+	public DLFolder getFolder(long groupId, long parentFolderId, String name)
+		throws PortalException, SystemException {
+
+		DLFolder folder =
+			dlFolderLocalService.getFolder(groupId, parentFolderId, name);
+
+		DLFolderPermission.check(
+			getPermissionChecker(), folder, ActionKeys.VIEW);
+
+		return folder;
+	}
+
+	public long getFolderId(long groupId, long parentFolderId, String name)
+		throws PortalException, SystemException {
+
+		DLFolder folder = getFolder(groupId, parentFolderId, name);
+
+		return folder.getFolderId();
+	}
+
+	public List getFolders(long groupId, long plid, long parentFolderId)
+		throws PortalException, SystemException {
+
+		DLFolderPermission.check(
+			getPermissionChecker(), plid, parentFolderId, ActionKeys.VIEW);
+
+		List folders = new ArrayList();
+
+		Iterator itr =
+			dlFolderLocalService.getFolders(groupId, parentFolderId).iterator();
+
+		while (itr.hasNext()) {
+			DLFolder folder = (DLFolder)itr.next();
+
+			if (DLFolderPermission.contains(
+					getPermissionChecker(), folder, ActionKeys.VIEW)) {
+
+				folders.add(folder);
+			}
+		}
+
+		return folders;
 	}
 
 	public void reIndexSearch(long companyId)
