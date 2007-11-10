@@ -1803,24 +1803,24 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			Iterator itr = ratingsEntriesMap.keySet().iterator();
 
-				while (itr.hasNext()) {
-					String key = (String)itr.next();
+			while (itr.hasNext()) {
+				String key = (String)itr.next();
 
-					String[] ratingsEntry = key.split(StringPool.POUND);
+				String[] ratingsEntry = key.split(StringPool.POUND);
 
-					Element el = root.addElement("ratings");
+				Element el = root.addElement("ratings");
 
-					el.addAttribute("class-name", ratingsEntry[0]);
-					el.addAttribute("class-pk", ratingsEntry[1]);
+				el.addAttribute("class-name", ratingsEntry[0]);
+				el.addAttribute("class-pk", ratingsEntry[1]);
 
-					List ratingsEntries = (List)ratingsEntriesMap.get(key);
+				List ratingsEntries = (List)ratingsEntriesMap.get(key);
 
-					String xml = xStream.toXML(ratingsEntries);
+				String xml = xStream.toXML(ratingsEntries);
 
-					Document tempDoc = reader.read(new StringReader(xml));
+				Document tempDoc = reader.read(new StringReader(xml));
 
-					el.content().add(tempDoc.getRootElement().createCopy());
-				}
+				el.content().add(tempDoc.getRootElement().createCopy());
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

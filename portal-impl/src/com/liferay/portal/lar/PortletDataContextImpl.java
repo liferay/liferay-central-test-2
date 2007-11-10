@@ -129,7 +129,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		List entries = RatingsEntryLocalServiceUtil.getEntries(
 			classObj.getName(), ((Long)primaryKey).longValue());
 
-		if (entries != null && entries.size() > 0) {
+		if ((entries != null) && (entries.size() > 0)) {
 			_ratingsEntriesMap.put(
 				getPrimaryKeyString(classObj, primaryKey), entries);
 		}
