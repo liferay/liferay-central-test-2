@@ -14300,9 +14300,18 @@ Liferay.Util = {
 	},
 
 	focusFormField: function(el) {
+		var interacting = false;
+
+		jQuery(document).one(
+			'click',
+			function() {
+				interacting = true;	
+			}
+		);
+
 		jQuery(
 			function() {
-				if (el && (el.offsetHeight != 0)) {
+				if (el && (el.offsetHeight != 0) && !interacting) {
 					var elObj = jQuery(el);
 
 					jQuery('input').trigger('blur');
