@@ -24,19 +24,4 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<%
-
-%>
-
-<table class="liferay-table">
-<tr>
-	<td>
-		Test LDAP Groups
-	</td>
-</tr>
-<tr>
-	<td>
-		<input type="button" value="<liferay-ui:message key="Close" />" onClick="Liferay.Popup.close(this);" />
-	</td>
-</tr>
-</table>
+<liferay-ui:message key="test-ldap-groups" />

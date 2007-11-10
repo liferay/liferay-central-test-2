@@ -531,12 +531,11 @@
 
 		<action path="/enterprise_admin/select_organization" forward="portlet.enterprise_admin.select_organization" />
 
-		<action path="/enterprise_admin/test_settings" type="com.liferay.portlet.enterpriseadmin.action.TestSettingsAction">
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-			<forward name="portlet.enterprise_admin.test_settings_ldap_connection" path="portlet.enterprise_admin.test_settings_ldap_connection" />
-			<forward name="portlet.enterprise_admin.test_settings_ldap_groups" path="portlet.enterprise_admin.test_settings_ldap_groups" />
-			<forward name="portlet.enterprise_admin.test_settings_ldap_users" path="portlet.enterprise_admin.test_settings_ldap_users" />
-		</action>
+		<action path="/enterprise_admin/test_ldap_connection" forward="portlet.enterprise_admin.test_ldap_connection" />
+
+		<action path="/enterprise_admin/test_ldap_groups" forward="portlet.enterprise_admin.test_ldap_groups" />
+
+		<action path="/enterprise_admin/test_ldap_users" forward="portlet.enterprise_admin.test_ldap_users" />
 
 		<action path="/enterprise_admin/view" forward="portlet.enterprise_admin.view" />
 

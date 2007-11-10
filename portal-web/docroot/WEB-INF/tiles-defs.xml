@@ -455,16 +455,16 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/select_organization.jsp" />
 	</definition>
 
-	<definition name="portlet.enterprise_admin.test_settings_ldap_connection" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/test_settings_ldap_connection.jsp" />
+	<definition name="portlet.enterprise_admin.test_ldap_connection" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/test_ldap_connection.jsp" />
 	</definition>
 
-	<definition name="portlet.enterprise_admin.test_settings_ldap_groups" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/test_settings_ldap_groups.jsp" />
+	<definition name="portlet.enterprise_admin.test_ldap_groups" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/test_ldap_groups.jsp" />
 	</definition>
 
-	<definition name="portlet.enterprise_admin.test_settings_ldap_users" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/test_settings_ldap_users.jsp" />
+	<definition name="portlet.enterprise_admin.test_ldap_users" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/test_ldap_users.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.view" extends="portlet.enterprise_admin">

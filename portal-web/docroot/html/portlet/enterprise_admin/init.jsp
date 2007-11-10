@@ -110,6 +110,8 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserUserGroupChecker" %>
 
+<%@ page import="javax.naming.ldap.LdapContext" %>
+
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "users");
 

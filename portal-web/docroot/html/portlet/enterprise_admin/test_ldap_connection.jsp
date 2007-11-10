@@ -25,23 +25,14 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-boolean success = (PortalLDAPUtil.getContext(themeDisplay.getCompanyId()) != null);
+LdapContext ldapContext = PortalLDAPUtil.getContext(themeDisplay.getCompanyId());
 %>
 
-<table class="liferay-table">
-<tr>
-	<td>
-<c:if test="<%= success %>">
-		Liferay has successfully connected to the LDAP Server.
-</c:if>
-<c:if test="<%= !success %>">
-		Liferay has failed to connect to the LDAP Server.  Please check your configuration and verify that the LDAP Server is running.
-</c:if>
-	</td>
-</tr>
-<tr>
-	<td>
-		<input type="button" value="<liferay-ui:message key="Close" />" onClick="Liferay.Popup.close(this);" />
-	</td>
-</tr>
-</table>
+<c:choose>
+	<c:when test="<%= ldapContext != null %>">
+		<liferay-ui:message key="liferay-has-successfully-connected-to-the-ldap-server" />
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:message key="liferay-has-failed-to-connect-to-the-ldap-server" />
+	</c:otherwise>
+</c:choose>
