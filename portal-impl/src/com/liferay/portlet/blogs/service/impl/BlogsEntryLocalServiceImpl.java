@@ -284,6 +284,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		tagsAssetLocalService.deleteAsset(
 			BlogsEntry.class.getName(), entry.getEntryId());
 
+		// Ratings
+
+		ratingsStatsLocalService.deleteStats(
+			BlogsEntry.class.getName(), entry.getEntryId());
+
 		// Message boards
 
 		mbMessageLocalService.deleteDiscussionMessages(
