@@ -103,6 +103,7 @@ public class ServiceBuilder {
 			String apiDir = args[5];
 			String implDir = "src";
 			String jsonFileName = args[6];
+			String remotingFileName = "../tunnel-web/docroot/WEB-INF/remoting-servlet.xml";
 			String sqlDir = "../sql";
 			String sqlFileName = "portal-tables.sql";
 			boolean autoNamespaceTables = false;
@@ -116,11 +117,11 @@ public class ServiceBuilder {
 
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
-				springDataSourceFileName, apiDir, implDir, jsonFileName, sqlDir,
-				sqlFileName, autoNamespaceTables, baseModelImplPackage,
-				basePersistencePackage, beanLocatorUtilPackage,
-				principalBeanPackage, propsUtilPackage, springHibernatePackage,
-				springUtilPackage);
+				springDataSourceFileName, apiDir, implDir, jsonFileName,
+				remotingFileName, sqlDir, sqlFileName, autoNamespaceTables,
+				baseModelImplPackage, basePersistencePackage,
+				beanLocatorUtilPackage, principalBeanPackage, propsUtilPackage,
+				springHibernatePackage, springUtilPackage);
 		}
 		else if (args.length == 0) {
 			String fileName = System.getProperty("service.input.file");
@@ -131,6 +132,7 @@ public class ServiceBuilder {
 			String apiDir = System.getProperty("service.api.dir");
 			String implDir = System.getProperty("service.impl.dir");
 			String jsonFileName = System.getProperty("service.json.file");
+			String remotingFileName = System.getProperty("service.remoting.file");
 			String sqlDir = System.getProperty("service.sql.dir");
 			String sqlFileName = System.getProperty("service.sql.file");
 			boolean autoNamespaceTables = GetterUtil.getBoolean(System.getProperty("service.auto.namespace.tables"));
@@ -144,11 +146,11 @@ public class ServiceBuilder {
 
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
-				springDataSourceFileName, apiDir, implDir, jsonFileName, sqlDir,
-				sqlFileName, autoNamespaceTables, baseModelImplPackage,
-				basePersistencePackage, beanLocatorUtilPackage,
-				principalBeanPackage, propsUtilPackage, springHibernatePackage,
-				springUtilPackage);
+				springDataSourceFileName, apiDir, implDir, jsonFileName,
+				remotingFileName, sqlDir, sqlFileName, autoNamespaceTables,
+				baseModelImplPackage, basePersistencePackage,
+				beanLocatorUtilPackage, principalBeanPackage, propsUtilPackage,
+				springHibernatePackage, springUtilPackage);
 		}
 
 		if (serviceBuilder == null) {
@@ -161,6 +163,7 @@ public class ServiceBuilder {
 				"\t-Dservice.api.dir=${project.dir}/portal-service/src\n" +
 				"\t-Dservice.impl.dir=src\n" +
 				"\t-Dservice.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js\n" +
+				"\t-Dservice.remoting.file=${project.dir}/tunnel-web/docroot/WEB-INF/remoting-servlet.xml\n" +
 				"\t-Dservice.sql.dir=../sql\n" +
 				"\t-Dservice.sql.file=portal-tables.sql\n" +
 				"\t-Dservice.base.model.impl.package=com.liferay.portal.model.impl\n" +
@@ -481,30 +484,31 @@ public class ServiceBuilder {
 	public ServiceBuilder(
 		String fileName, String hbmFileName, String modelHintsFileName,
 		String springFileName, String springDataSourceFileName, String apiDir,
-		String implDir, String jsonFileName, String sqlDir, String sqlFileName,
-		boolean autoNamespaceTables, String baseModelImplPackage,
-		String basePersistencePackage, String beanLocatorUtilPackage,
-		String principalBeanPackage, String propsUtilPackage,
-		String springHibernatePackage, String springUtilPackage) {
+		String implDir, String jsonFileName, String remotingFileName,
+		String sqlDir, String sqlFileName, boolean autoNamespaceTables,
+		String baseModelImplPackage, String basePersistencePackage,
+		String beanLocatorUtilPackage, String principalBeanPackage,
+		String propsUtilPackage, String springHibernatePackage,
+		String springUtilPackage) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, modelHintsFileName, springFileName,
-			springDataSourceFileName, apiDir, implDir, jsonFileName, sqlDir,
-			sqlFileName, autoNamespaceTables, baseModelImplPackage,
-			basePersistencePackage, beanLocatorUtilPackage,
-			principalBeanPackage, propsUtilPackage, springHibernatePackage,
-			springUtilPackage, true);
+			springDataSourceFileName, apiDir, implDir, jsonFileName,
+			remotingFileName, sqlDir, sqlFileName, autoNamespaceTables,
+			baseModelImplPackage, basePersistencePackage,
+			beanLocatorUtilPackage, principalBeanPackage, propsUtilPackage,
+			springHibernatePackage, springUtilPackage, true);
 	}
 
 	public ServiceBuilder(
 		String fileName, String hbmFileName, String modelHintsFileName,
 		String springFileName, String springDataSourceFileName, String apiDir,
-		String implDir, String jsonFileName, String sqlDir, String sqlFileName,
-		boolean autoNamespaceTables, String baseModelImplPackage,
-		String basePersistencePackage, String beanLocatorUtilPackage,
-		String principalBeanPackage, String propsUtilPackage,
-		String springHibernatePackage, String springUtilPackage,
-		boolean build) {
+		String implDir, String jsonFileName, String remotingFileName,
+		String sqlDir, String sqlFileName, boolean autoNamespaceTables,
+		String baseModelImplPackage, String basePersistencePackage,
+		String beanLocatorUtilPackage, String principalBeanPackage,
+		String propsUtilPackage, String springHibernatePackage,
+		String springUtilPackage, boolean build) {
 
 		try {
 			_badTableNames = ServiceBuilder.getBadTableNames();
@@ -517,6 +521,7 @@ public class ServiceBuilder {
 			_apiDir = apiDir;
 			_implDir = implDir;
 			_jsonFileName = jsonFileName;
+			_remotingFileName = remotingFileName;
 			_sqlDir = sqlDir;
 			_sqlFileName = sqlFileName;
 			_autoNamespaceTables = autoNamespaceTables;
@@ -958,6 +963,9 @@ public class ServiceBuilder {
 
 				if (Validator.isNotNull(_jsonFileName)) {
 					_createJSONJS();
+				}
+
+				if (Validator.isNotNull(_remotingFileName)) {
 					_createRemotingXML();
 				}
 
@@ -1022,7 +1030,7 @@ public class ServiceBuilder {
 			ServiceBuilder serviceBuilder = new ServiceBuilder(
 				refFileName, _hbmFileName, _modelHintsFileName, _springFileName,
 				_springDataSourceFileName, _apiDir, _implDir, _jsonFileName,
-				_sqlDir, _sqlFileName, _autoNamespaceTables,
+				_remotingFileName, _sqlDir, _sqlFileName, _autoNamespaceTables,
 				_baseModelImplPackage, _basePersistencePackage,
 				_beanLocatorUtilPackage, _principalBeanPackage,
 				_propsUtilPackage, _springHibernatePackage, _springUtilPackage,
@@ -5503,13 +5511,7 @@ public class ServiceBuilder {
 			}
 		}
 
-		File outputFile = new File(
-			"../tunnel-web/docroot/WEB-INF/remoting-servlet.xml");
-
-		if (!outputFile.exists()) {
-			outputFile = new File(
-				"../ext-web/docroot/WEB-INF/remoting-servlet-ext.xml");
-		}
+		File outputFile = new File(_remotingFileName);
 
 		if (!outputFile.exists()) {
 			return;
@@ -7875,6 +7877,7 @@ public class ServiceBuilder {
 	private String _apiDir;
 	private String _implDir;
 	private String _jsonFileName;
+	private String _remotingFileName;
 	private String _sqlDir;
 	private String _sqlFileName;
 	private boolean _autoNamespaceTables;

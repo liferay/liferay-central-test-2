@@ -475,6 +475,7 @@
 			<jvmarg value="-Dservice.api.dir=${project.dir}/portal-service/src" />
 			<jvmarg value="-Dservice.impl.dir=src" />
 			<jvmarg value="-Dservice.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js" />
+			<jvmarg value="-Dservice.remoting.file=${project.dir}/tunnel-web/docroot/WEB-INF/remoting-servlet.xml" />
 			<jvmarg value="-Dservice.sql.dir=../sql" />
 			<jvmarg value="-Dservice.sql.file=portal-tables.sql" />
 			<jvmarg value="-Dservice.base.model.impl.package=com.liferay.portal.model.impl" />
