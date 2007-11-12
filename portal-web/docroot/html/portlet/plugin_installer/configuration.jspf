@@ -45,6 +45,8 @@
 	</td>
 	<td>
 		<input name="<portlet:namespace />destDir" size="75" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR) %>" />
+
+		<liferay-ui:icon-help message='<%= LanguageUtil.format(pageContext, "plugins-will-be-deployed-to-x-if-this-field-is-left-blank", DeployUtil.getAutoDeployServerDestDir()) %>' />
 	</td>
 </tr>
 <tr>
@@ -265,3 +267,9 @@ String tomcatLibDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_
 <br />
 
 <input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveDeployConfiguration();" />
+
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />deployDir);
+	</script>
+</c:if>

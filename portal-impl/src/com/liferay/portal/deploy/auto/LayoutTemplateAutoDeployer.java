@@ -22,6 +22,7 @@
 
 package com.liferay.portal.deploy.auto;
 
+import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.tools.LayoutTemplateDeployer;
@@ -48,7 +49,7 @@ public class LayoutTemplateAutoDeployer
 		try {
 			baseDir = PrefsPropsUtil.getString(
 				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
-			destDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR);
+			destDir = DeployUtil.getAutoDeployDestDir();
 			appServerType = ServerDetector.getServerId();
 			jbossPrefix = PrefsPropsUtil.getString(
 				PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX);

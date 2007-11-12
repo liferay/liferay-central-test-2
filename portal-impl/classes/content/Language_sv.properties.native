@@ -1961,6 +1961,7 @@ plugin-packages-with-updates-ignored=Tilläggspaket med uppdateringar ingnoreras
 plugin-repositories=Lagringsplater för plug-in
 plugin-repository=Lagringsplats för plug-in
 plugin=Plug-in
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 plugins=Plug-ins
 polish=Polsk
 pool=Pool

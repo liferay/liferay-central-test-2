@@ -2057,6 +2057,7 @@ plugin-packages-with-updates-ignored=I pacchetti plugin con gli aggiornamenti ha
 plugin-repositories=Archivi di Plugin
 plugin-repository=Archivio di Plugin
 plugin=Plugin
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 plugins=Plugin
 polish=Polacco
 pool=Stagno

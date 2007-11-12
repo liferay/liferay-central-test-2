@@ -1729,6 +1729,7 @@ plugin-does-not-have-a-valid-url=لا يوجد رابط تشعبي صحيح لل
 plugin-name=إسم المكون المقبسي
 plugin-repositories=مستودعات المكون المقبسي
 plugin-repository=مستودع المكون المقبسي
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 plugins=المكونات المقبسية
 polish=بولندي
 pool=حوض

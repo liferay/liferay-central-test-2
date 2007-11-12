@@ -23,6 +23,7 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.comm.CommLink;
+import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
@@ -143,8 +144,7 @@ public class GlobalStartupAction extends SimpleAction {
 
 				File deployDir = new File(
 					PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR));
-				File destDir = new File(
-					PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR));
+				File destDir = new File(DeployUtil.getAutoDeployDestDir());
 				long interval = PrefsPropsUtil.getLong(
 					PropsUtil.AUTO_DEPLOY_INTERVAL);
 				int blacklistThreshold = PrefsPropsUtil.getInteger(

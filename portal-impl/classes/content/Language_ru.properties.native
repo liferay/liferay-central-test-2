@@ -1377,6 +1377,7 @@ please-select-an-organization-and-location=Пожалуста выберите �
 please-sign-in-or-create-an-account-to-continue=Пожалуста войдите или {0}создайте{1} профиль для продолжения.
 please-sign-in-to-continue=Пожалуста войдите для продолжения.
 please-upgrade-your-browser-to-use-this-feature=Пожалуста обновите ваш браузер, чтобы использовать эту возможность.
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 polish=Польский
 pop-info=POP Info
 portal-properties=Свойства портала

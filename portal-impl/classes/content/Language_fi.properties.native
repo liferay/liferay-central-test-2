@@ -1904,6 +1904,7 @@ plugin-name=Plugin nimi
 plugin-repositories=Plugin varastot
 plugin-repository=Plugin varasto
 plugin=Plugin
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 plugins=Pluginit
 polish=puolalainen
 pool=Pooli

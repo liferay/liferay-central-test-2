@@ -49,7 +49,7 @@ public class PortletAutoDeployer
 		try {
 			baseDir = PrefsPropsUtil.getString(
 				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
-			destDir = PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR);
+			destDir = DeployUtil.getAutoDeployDestDir();
 			appServerType = ServerDetector.getServerId();
 			portletTaglibDTD = DeployUtil.getResourcePath(
 				"liferay-portlet.tld");

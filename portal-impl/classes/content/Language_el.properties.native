@@ -2055,6 +2055,7 @@ plugin-packages-with-updates-ignored=Συσκευασίες Plugin με τις �
 plugin-repositories=Αποθήκες Plugin
 plugin-repository=Αποθήκη Plugin
 plugin=Plugin
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 plugins=Plugins
 polish=Πολωνικά
 pool=Λίμνη

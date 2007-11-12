@@ -89,6 +89,8 @@ public class PropsUtil {
 
 	public static final String AUTO_DEPLOY_DEST_DIR = "auto.deploy.dest.dir";
 
+	public static final String AUTO_DEPLOY_DEFAULT_DEST_DIR = "auto.deploy.default.dest.dir";
+
 	public static final String AUTO_DEPLOY_INTERVAL = "auto.deploy.interval";
 
 	public static final String AUTO_DEPLOY_BLACKLIST_THRESHOLD = "auto.deploy.blacklist.threshold";

@@ -2053,6 +2053,7 @@ plugin-packages-with-updates-ignored=更新が付いている差込式のパッ�
 plugin-repositories=差込式の貯蔵場所
 plugin-repository=差込式の貯蔵場所
 plugin=差込式
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 plugins=Plugins
 polish=光沢
 pool=プール

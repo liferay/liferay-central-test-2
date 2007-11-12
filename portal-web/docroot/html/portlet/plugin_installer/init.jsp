@@ -28,6 +28,7 @@
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.DocumentComparator" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portal.deploy.DeployUtil" %>
 <%@ page import="com.liferay.portal.plugin.PluginPackageException" %>
 <%@ page import="com.liferay.portal.plugin.PluginPackageImpl" %>
 <%@ page import="com.liferay.portal.plugin.PluginPackageUtil" %>

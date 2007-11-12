@@ -99,6 +99,7 @@ please-complete-your-order=Please {0}complete{1} your order.
 please-email-all-questions-to=Please email all questions to {0}.
 please-enter-a-friendly-url-that-does-not-conflict-with-the-keyword-x=Please enter a friendly url that does not conflict with the keyword <b>{0}</b>.
 please-sign-in-or-create-an-account-to-continue=Please sign in or {0}create{1} an account to continue.
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 portlet-x-does-not-have-an-indexer-class-configured=Portlet {0} does not have an indexer class configured.
 posted-as-a-reply-to=as a reply to {0}.
 posted-on-x-in-reply-to-x=Posted on {0} in reply to {1}.

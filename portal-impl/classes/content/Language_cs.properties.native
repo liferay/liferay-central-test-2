@@ -1000,6 +1000,7 @@ please-select-an-option=Vyberte možnost.
 please-sign-in-or-create-an-account-to-continue=Prosím přihlašte se nebo se {0}zaregistujte{1} pro pokračování.
 please-sign-in-to-continue=Prosím přihlašte se pro pokračování.
 please-upgrade-your-browser-to-use-this-feature=Prosím použijte novější brovser pro použití těchto funkcionalit.
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 polish=Polsky
 pop-info=POP Info
 portal-properties=Vlastnosti portálu

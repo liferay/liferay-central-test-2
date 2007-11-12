@@ -2057,6 +2057,7 @@ plugin-packages-with-updates-ignored=Plugins cuyas actualizaciones serán ignora
 plugin-repositories=Repositorios de plugins
 plugin-repository=Repositorio de plugins
 plugin=Plugin
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 plugins=Plugins
 polish=Polaco
 pool=pool

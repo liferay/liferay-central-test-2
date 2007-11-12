@@ -22,6 +22,12 @@
 
 package com.liferay.portal.deploy;
 
+import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
 
@@ -37,6 +43,32 @@ import java.io.OutputStream;
  *
  */
 public class DeployUtil {
+
+	public static String getAutoDeployDestDir() throws Exception {
+		String destDir = PrefsPropsUtil.getString(
+			PropsUtil.AUTO_DEPLOY_DEST_DIR);
+
+		if (Validator.isNull(destDir)) {
+			destDir = getAutoDeployServerDestDir();
+		}
+
+		return destDir;
+	}
+
+	public static String getAutoDeployServerDestDir() throws Exception {
+		String destDir = PrefsPropsUtil.getString(
+			"auto.deploy." + ServerDetector.getServerId() + ".dest.dir");
+
+		if (Validator.isNull(destDir)) {
+			destDir = PrefsPropsUtil.getString(
+				PropsUtil.AUTO_DEPLOY_DEFAULT_DEST_DIR);
+		}
+
+		destDir = StringUtil.replace(
+			destDir, StringPool.BACK_SLASH, StringPool.SLASH);
+
+		return destDir;
+	}
 
 	public static String getResourcePath(String resource)
 		throws Exception {

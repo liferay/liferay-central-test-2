@@ -2056,6 +2056,7 @@ plugin-packages-with-updates-ignored=묵살되는 갱신에 플러그 접속식 
 plugin-repositories=플러그 접속식 창고
 plugin-repository=플러그 접속식 창고
 plugin=플러그 접속식
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 plugins=Plugins
 polish=광택
 pool=수영장

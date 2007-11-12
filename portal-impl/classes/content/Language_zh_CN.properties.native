@@ -2057,6 +2057,7 @@ plugin-packages-with-updates-ignored=插入式包裹以更新忽略了
 plugin-repositories=插入式贮藏库
 plugin-repository=插入式贮藏库
 plugin=插入式
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 plugins=Plugins
 polish=波兰语
 pool=水池

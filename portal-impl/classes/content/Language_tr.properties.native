@@ -694,6 +694,7 @@ please-enter-valid-choices=Lütfen geçerli seçenekleri giriniz.
 please-enter-valid-content=Lütfen geçerli içerik giriniz.
 please-select-an-option=Lütfen geçerli seçeneği seçiniz.
 please-sign-in-or-create-an-account-to-continue=Please sign in or {0}create{1} an account to continue.
+plugins-will-be-deployed-to-x-if-this-field-is-left-blank=Plugins will be deployed to <i>{0}</i> if this field is left blank.
 polish=Lehçe
 portal-url=Portal adresi
 portlet-name=Portlet İsmi
