@@ -1978,11 +1978,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String resourceName, String resourcePrimKey, Element parentEl)
 		throws PortalException, SystemException {
 
-		Element userPermissionsEl = DocumentHelper.createElement(
-			"user-permissions");
-
-		List users = layoutCache.getGroupUsers(groupId);
-
 		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
@@ -1990,6 +1985,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			stopWatch.start();
 		}
+
+		Element userPermissionsEl = DocumentHelper.createElement(
+			"user-permissions");
+
+		List users = layoutCache.getGroupUsers(groupId);
 
 		for (int i = 0; i < users.size(); i++) {
 			User user = (User)users.get(i);
@@ -2019,16 +2019,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"getUserPermissions for {" + resourceName + ", " +
-					resourcePrimKey + "}, for " +
-						users.size() + " users takes " +
-							stopWatch.getTime() + " ms");
-		}
-
 		if (!userPermissionsEl.elements().isEmpty()) {
 			parentEl.add(userPermissionsEl);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Export user permissions for {" + resourceName + ", " +
+					resourcePrimKey + "} with " + users.size() +
+						" users takes " + stopWatch.getTime() + " ms");
 		}
 	}
 
