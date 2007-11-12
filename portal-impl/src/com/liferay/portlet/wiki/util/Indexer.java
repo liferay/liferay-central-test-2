@@ -164,6 +164,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		LuceneUtil.addKeyword(doc, "nodeId", nodeId);
 
+		LuceneUtil.addKeyword(doc, LuceneFields.TAG_ENTRY, tagsEntries);
+
 		return doc;
 	}
 
