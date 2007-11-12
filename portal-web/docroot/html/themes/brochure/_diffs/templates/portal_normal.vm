@@ -19,6 +19,8 @@
 				height: ${company_logo_height}px;
 				width: ${company_logo_width}px;
 			}
+
+			#ie6_png_fix()
 		</style>
 	#end
 </head>
@@ -31,7 +33,7 @@ $theme.include($top_messages_include)
 	<div id="banner">
 		<div id="banner-inner">
 			<h1 class="logo">
-				<a href="$company_url">$company_name</a>
+				<a class="png" href="$company_url">$company_name</a>
 			</h1>
 
 			<div id="page-search">
