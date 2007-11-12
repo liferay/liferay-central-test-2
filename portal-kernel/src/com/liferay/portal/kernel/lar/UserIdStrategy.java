@@ -32,10 +32,11 @@ import com.liferay.portal.SystemException;
  */
 public interface UserIdStrategy {
 
+	public static final String ALWAYS_CURRENT_USER_ID =
+		"ALWAYS_CURRENT_USER_ID";
+
+	public static final String CURRENT_USER_ID = "CURRENT_USER_ID";
+
 	public long getUserId(String userUuid) throws SystemException;
-
-	public static final String ALWAYS_CURRENT_USER_ID = "alwaysCurrentUserId";
-
-	public static final String CURRENT_USER_ID = "currentUserId";
 
 }

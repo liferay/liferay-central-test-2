@@ -24,7 +24,7 @@ package com.liferay.portal.lar;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 
@@ -39,14 +39,13 @@ import java.util.List;
  */
 public class CurrentUserIdStrategy implements UserIdStrategy {
 
-	public CurrentUserIdStrategy(User currentUser) {
-		_currentUser = currentUser;
+	public CurrentUserIdStrategy(User user) {
+		_user = user;
 	}
 
 	public long getUserId(String userUuid) throws SystemException {
-
-		if (StringPool.BLANK.equals(userUuid)) {
-			return _currentUser.getUserId();
+		if (Validator.isNull(userUuid)) {
+			return _user.getUserId();
 		}
 
 		List users = UserUtil.findByUuid(userUuid);
@@ -59,10 +58,10 @@ public class CurrentUserIdStrategy implements UserIdStrategy {
 			return user.getUserId();
 		}
 		else {
-			return _currentUser.getUserId();
+			return _user.getUserId();
 		}
 	}
 
-	private User _currentUser;
+	private User _user;
 
 }

@@ -34,14 +34,14 @@ import com.liferay.portal.model.User;
  */
 public class AlwaysCurrentUserIdStrategy implements UserIdStrategy {
 
-	public AlwaysCurrentUserIdStrategy(User currentUser) {
-		_currentUser = currentUser;
+	public AlwaysCurrentUserIdStrategy(User user) {
+		_user = user;
 	}
 
 	public long getUserId(String userUuid) throws SystemException {
-		return _currentUser.getUserId();
+		return _user.getUserId();
 	}
 
-	private User _currentUser;
+	private User _user;
 
 }

@@ -286,14 +286,13 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			BookmarksEntry entry)
 		throws Exception {
 
+		long userId = context.getUserId(entry.getUserUuid());
+
 		Long folderId = (Long)folderPKs.get(new Long(entry.getFolderId()));
 
 		if (folderId == null) {
 			folderId = new Long(entry.getFolderId());
 		}
-
-		long userId = context.getUserIdStrategy().getUserId(
-			entry.getUserUuid());
 
 		String[] tagsEntries = context.getTagsEntries(
 			BookmarksEntry.class, entry.getPrimaryKeyObj());
@@ -343,17 +342,15 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			BookmarksFolder folder)
 		throws Exception {
 
+		long userId = context.getUserId(folder.getUserUuid());
+		long plid = context.getPlid();
+
 		Long parentFolderId = (Long)folderPKs.get(
 			new Long(folder.getParentFolderId()));
 
 		if (parentFolderId == null) {
 			parentFolderId = new Long(folder.getParentFolderId());
 		}
-
-		long userId = context.getUserIdStrategy().getUserId(
-			folder.getUserUuid());
-
-		long plid = context.getPlid();
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;

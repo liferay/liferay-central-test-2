@@ -1564,15 +1564,15 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<legend><liferay-ui:message key="user-id-strategy" /></legend>
 
 									<div>
-										<input checked id="<portlet:namespace />currentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.CURRENT_USER_ID%>" />
+										<input checked name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.CURRENT_USER_ID%>" />
 
-										<label for="<portlet:namespace />currentUserId"><liferay-ui:message key="if-user-doesnt-exist-use-the-current-user" /></label>
+										<label for="<portlet:namespace />currentUserId"><liferay-ui:message key="if-a-user-id-does-not-exist,-then-use-my-user-id" /></label>
 									</div>
 
 									<div>
-										<input id="<portlet:namespace />alwaysCurrentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.ALWAYS_CURRENT_USER_ID%>" />
+										<input name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.ALWAYS_CURRENT_USER_ID%>" />
 
-										<label for="<portlet:namespace />alwaysCurrentUserId"><liferay-ui:message key="always-use-the-current-user" /></label>
+										<label for="<portlet:namespace />alwaysCurrentUserId"><liferay-ui:message key="always-use-my-user-id" /></label>
 									</div>
 								</fieldset>
 

@@ -91,6 +91,8 @@ public interface PortletDataContext extends Serializable {
 
 	public UserIdStrategy getUserIdStrategy() throws SystemException;
 
+	public long getUserId(String userUuid) throws SystemException;
+
 	public ZipReader getZipReader();
 
 	public ZipWriter getZipWriter();

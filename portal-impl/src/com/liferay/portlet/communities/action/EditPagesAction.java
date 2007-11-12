@@ -308,13 +308,13 @@ public class EditPagesAction extends PortletAction {
 
 		parameterMap.put(
 			PortletDataHandlerKeys.EXPORT_PERMISSIONS, Boolean.TRUE.toString());
-		
+
 		// In the staging environment do not export user permissions because
 		// the processing cost is too high.
 		parameterMap.put(
 			PortletDataHandlerKeys.EXPORT_USER_PERMISSIONS,
 			Boolean.FALSE.toString());
-		
+
 		parameterMap.put(
 			PortletDataHandlerKeys.EXPORT_PORTLET_DATA,
 			Boolean.TRUE.toString());

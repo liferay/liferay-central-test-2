@@ -224,6 +224,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _userIdStrategy;
 	}
 
+	public long getUserId(String userUuid) throws SystemException {
+		return _userIdStrategy.getUserId(userUuid);
+	}
+
 	public ZipReader getZipReader() {
 		return _zipReader;
 	}

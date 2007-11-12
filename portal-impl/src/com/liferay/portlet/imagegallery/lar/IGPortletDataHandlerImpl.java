@@ -324,14 +324,14 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			IGFolder folder)
 		throws Exception {
 
+		long plid = context.getPlid();
+
 		Long parentFolderId = (Long)folderPKs.get(
 			new Long(folder.getParentFolderId()));
 
 		if (parentFolderId == null) {
 			parentFolderId = new Long(folder.getParentFolderId());
 		}
-
-		long plid = context.getPlid();
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
