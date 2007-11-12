@@ -133,6 +133,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 			classObj.getName(), ((Long)primaryKey).longValue());
 
 		if ((entries != null) && (entries.size() > 0)) {
+			Iterator itr = entries.iterator();
+
+			while (itr.hasNext()) {
+				RatingsEntry entry = (RatingsEntry)itr.next();
+
+				entry.setUserUuid(entry.getUserUuid());
+			}
+
 			_ratingsEntriesMap.put(
 				getPrimaryKeyString(classObj, primaryKey), entries);
 		}
@@ -166,8 +174,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 			while (itr.hasNext()) {
 				RatingsEntry entry = (RatingsEntry)itr.next();
 
+				long userId = getUserId(entry.getUserUuid());
+
 				RatingsEntryLocalServiceUtil.updateEntry(
-					entry.getUserId(), classObj.getName(),
+					userId, classObj.getName(),
 					((Long)newPrimaryKey).longValue(), entry.getScore());
 			}
 		}

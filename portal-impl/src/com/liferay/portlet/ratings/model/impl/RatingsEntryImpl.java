@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.ratings.model.impl;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
 /**
@@ -35,5 +37,15 @@ public class RatingsEntryImpl
 
 	public RatingsEntryImpl() {
 	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
+	private String _userUuid;
 
 }

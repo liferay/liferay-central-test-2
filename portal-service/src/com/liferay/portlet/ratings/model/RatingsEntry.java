@@ -48,4 +48,8 @@ package com.liferay.portlet.ratings.model;
  *
  */
 public interface RatingsEntry extends RatingsEntryModel {
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
 }
