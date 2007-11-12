@@ -101,10 +101,6 @@
 	);
 </script>
 
-<liferay-ui:error key="ldapAuthentication" message="failed-to-bind-to-the-ldap-server-with-given-values" />
-
-<liferay-ui:tabs names="connection-settings" />
-
 <table class="liferay-table">
 <tr>
 	<td>
@@ -126,9 +122,9 @@
 
 <br />
 
-<liferay-ui:message key="the-ldap-url-format-is" />
+<liferay-ui:tabs names="connection-settings" />
 
-<br /><br />
+<liferay-ui:error key="ldapAuthentication" message="failed-to-bind-to-the-ldap-server-with-given-values" />
 
 <table class="liferay-table">
 <tr style="display: none;">
@@ -175,11 +171,12 @@
 	</td>
 </tr>
 <tr>
-	<td>
+	<td width="125">
 		<liferay-ui:message key="base-provider-url" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />baseProviderURL" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_PROVIDER_URL)) %>' />
+		<liferay-ui:icon-help message="the-ldap-url-format-is" />
 	</td>
 </tr>
 <tr>
@@ -188,6 +185,7 @@
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />baseDN" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_DN)) %>' />
+		<liferay-ui:icon-help message="the-ldap-url-format-is" />
 	</td>
 </tr>
 <tr>
@@ -206,42 +204,109 @@
 		<input class="liferay-input-text" name="<portlet:namespace />credentials" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_CREDENTIALS)) %>' />
 	</td>
 </tr>
+<tr>
+	<td colspan="2">
+		<br />
+		<input type="button" value="<liferay-ui:message key="test-ldap-connection" />" onClick="<portlet:namespace/>testSettings('ldapConnection');" />
+	</td>
+</tr>
 </table>
 
 <br />
 
-<liferay-ui:message key="enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user" />
+<liferay-ui:tabs names="users" />
 
-<br /><br />
-
-<textarea class="liferay-textarea" name="<portlet:namespace />searchFilter"><%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_SEARCH_FILTER)) %></textarea>
-
-<br /><br />
-
-<br /><br />
-
-<liferay-ui:message key="if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay" />
-
-<br /><br />
-
-<textarea class="liferay-textarea" name="<portlet:namespace />userMappings"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_MAPPINGS)) %></textarea>
-
-<br /><br />
-
+<table class="liferay-table">
+<tr>
+	<td width="125">
+		<liferay-ui:message key="users-dn" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />usersDn" type="text" value='<%= ParamUtil.getString(request, "usersDn", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USERS_DN)) %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="authentication-search-filter" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />searchFilter" type="text" value='<%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_SEARCH_FILTER)) %>' />
+		<liferay-ui:icon-help message="enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="import-search-filter" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />importUserSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importUserSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER)) %>' />
+	</td>
+</tr>
+<tr valign="top">
+	<td>
+		<liferay-ui:message key="user-mapping" />
+	</td>
+	<td>
+		<textarea class="liferay-textarea" name="<portlet:namespace />userMappings"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_MAPPINGS)) %></textarea>
+		<liferay-ui:icon-help message="if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="user-default-object-classes" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />userDefaultObjectClasses" type="text" value='<%= ParamUtil.getString(request, "userDefaultObjectClasses", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES)) %>' />
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br />
+		<input type="button" value="<liferay-ui:message key="test-ldap-users" />" onClick="<portlet:namespace />testSettings('ldapUsers');" />
+	</td>
+</tr>
+</table>
 
 <br />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateLdap');" />
+<liferay-ui:tabs names="groups" />
 
-<input type="button" value="<liferay-ui:message key="test-ldap-connection" />" onClick="<portlet:namespace/>testSettings('ldapConnection');" />
+<table class="liferay-table">
+<tr>
+	<td width="125">
+		<liferay-ui:message key="groups-dn" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />groupsDn" type="text" value='<%= ParamUtil.getString(request, "groupsDn", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUPS_DN)) %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="import-search-filter" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />importGroupSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importGroupSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER)) %>' />
+	</td>
+</tr>
+<tr valign="top">
+	<td>
+		<liferay-ui:message key="group-mapping" />
+	</td>
+	<td>
+		<textarea class="liferay-textarea" name="<portlet:namespace />groupMappings"><%= ParamUtil.getString(request, "groupMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUP_MAPPINGS)) %></textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br />
+		<input type="button" value="<liferay-ui:message key="test-ldap-groups" />" onClick="<portlet:namespace />testSettings('ldapGroups');" />
+	</td>
+</tr>
+</table>
 
-<input type="button" value="<liferay-ui:message key="test-ldap-groups" />" onClick="<portlet:namespace />testSettings('ldapGroups');" />
+<br />
 
-<input type="button" value="<liferay-ui:message key="test-ldap-users" />" onClick="<portlet:namespace />testSettings('ldapUsers');" />
-
-<br /><br />
-
-<liferay-ui:tabs names="import-settings" />
+<liferay-ui:tabs names="import-export-settings" />
 
 <table class="liferay-table">
 <tr>
@@ -253,81 +318,42 @@
 	</td>
 </tr>
 <tbody id="<portlet:namespace />importEnabledSettings">
-	<tr>
-		<td>
-			<liferay-ui:message key="import-on-startup-enabled" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="importOnStartup" defaultValue='<%= ParamUtil.getBoolean(request, "importOnStartup", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_IMPORT_ON_STARTUP)) %>' />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="import-interval" />
-		</td>
-		<td>
+<tr>
+	<td>
+		<liferay-ui:message key="import-on-startup-enabled" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="importOnStartup" defaultValue='<%= ParamUtil.getBoolean(request, "importOnStartup", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_IMPORT_ON_STARTUP)) %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="import-interval" />
+	</td>
+	<td>
 
-			<%
-			long importInterval = ParamUtil.getLong(request, "importInterval", PrefsPropsUtil.getLong(company.getCompanyId(), PropsUtil.LDAP_IMPORT_INTERVAL));
-			%>
+		<%
+		long importInterval = ParamUtil.getLong(request, "importInterval", PrefsPropsUtil.getLong(company.getCompanyId(), PropsUtil.LDAP_IMPORT_INTERVAL));
+		%>
 
-			<select name="<portlet:namespace />importInterval">
-				<option value="0" <%= (importInterval == 0) ? " selected " : "" %>><liferay-ui:message key="disabled" /></option>
-				<option value="5" <%= (importInterval == 5) ? " selected " : "" %>>5 <liferay-ui:message key="minutes" /></option>
-				<option value="10" <%= (importInterval == 10) ? " selected " : "" %>>10 <liferay-ui:message key="minutes" /></option>
-				<option value="30" <%= (importInterval == 30) ? " selected " : "" %>>30 <liferay-ui:message key="minutes" /></option>
-				<option value="60" <%= (importInterval == 60) ? " selected " : "" %>>1 <liferay-ui:message key="hour" /></option>
-				<option value="120" <%= (importInterval == 120) ? " selected " : "" %>>2 <liferay-ui:message key="hours" /></option>
-				<option value="180" <%= (importInterval == 180) ? " selected " : "" %>>3 <liferay-ui:message key="hours" /></option>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="import-user-search-filter" />
-		</td>
-		<td>
-			<input class="liferay-input-text" name="<portlet:namespace />importUserSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importUserSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER)) %>' />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="import-group-search-filter" />
-		</td>
-		<td>
-			<input class="liferay-input-text" name="<portlet:namespace />importGroupSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importGroupSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER)) %>' />
-		</td>
-	</tr>
+		<select name="<portlet:namespace />importInterval">
+			<option value="0" <%= (importInterval == 0) ? " selected " : "" %>><liferay-ui:message key="disabled" /></option>
+			<option value="5" <%= (importInterval == 5) ? " selected " : "" %>>5 <liferay-ui:message key="minutes" /></option>
+			<option value="10" <%= (importInterval == 10) ? " selected " : "" %>>10 <liferay-ui:message key="minutes" /></option>
+			<option value="30" <%= (importInterval == 30) ? " selected " : "" %>>30 <liferay-ui:message key="minutes" /></option>
+			<option value="60" <%= (importInterval == 60) ? " selected " : "" %>>1 <liferay-ui:message key="hour" /></option>
+			<option value="120" <%= (importInterval == 120) ? " selected " : "" %>>2 <liferay-ui:message key="hours" /></option>
+			<option value="180" <%= (importInterval == 180) ? " selected " : "" %>>3 <liferay-ui:message key="hours" /></option>
+		</select>
+	</td>
+</tr>
 </tbody>
-</table>
-
-<br />
-
-<liferay-ui:tabs names="export-settings" />
-
-<table class="liferay-table">
 <tr>
 	<td>
 		<liferay-ui:message key="export-enabled" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="exportEnabled" defaultValue='<%= ParamUtil.getBoolean(request, "exportEnabled", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_EXPORT_ENABLED)) %>' />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="users-dn" />
-	</td>
-	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />usersDn" type="text" value='<%= ParamUtil.getString(request, "usersDn", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USERS_DN)) %>' />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="user-default-object-classes" />
-	</td>
-	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />userDefaultObjectClasses" type="text" value='<%= ParamUtil.getString(request, "userDefaultObjectClasses", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES)) %>' />
 	</td>
 </tr>
 </table>
@@ -346,3 +372,7 @@
 	</td>
 </tr>
 </table>
+
+<br />
+
+<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveSettings('updateLdap');" />
