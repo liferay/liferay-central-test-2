@@ -467,6 +467,7 @@
 		<default-hints>
 			<hint name="display-width">150</hint>
 		</default-hints>
+		<field name="uuid" type="String" />
 		<field name="userId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="createDate" type="Date" />

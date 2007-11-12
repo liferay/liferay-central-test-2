@@ -56,6 +56,7 @@ import java.util.Date;
 public class UserModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "User_";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
@@ -85,10 +86,13 @@ public class UserModelImpl extends BaseModelImpl {
 			{ "agreedToTermsOfUse", new Integer(Types.BOOLEAN) },
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table User_ (userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(75) null,comments STRING null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
+	public static String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(75) null,comments STRING null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table User_";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User"), XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.User.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User.password"),
 			XSS_ALLOW_BY_MODEL);
@@ -132,6 +136,16 @@ public class UserModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_userId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getUserId() {
@@ -528,6 +542,7 @@ public class UserModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		UserImpl clone = new UserImpl();
+		clone.setUuid(getUuid());
 		clone.setUserId(getUserId());
 		clone.setCompanyId(getCompanyId());
 		clone.setCreateDate(getCreateDate());
@@ -607,6 +622,7 @@ public class UserModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _userId;
 	private long _companyId;
 	private Date _createDate;

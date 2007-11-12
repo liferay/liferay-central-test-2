@@ -304,6 +304,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	public User addUser(User model) throws SystemException {
 		User user = new UserImpl();
 		user.setNew(true);
+		user.setUuid(model.getUuid());
 		user.setUserId(model.getUserId());
 		user.setCompanyId(model.getCompanyId());
 		user.setCreateDate(model.getCreateDate());
@@ -349,6 +350,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	public User updateUser(User model) throws SystemException {
 		User user = new UserImpl();
 		user.setNew(false);
+		user.setUuid(model.getUuid());
 		user.setUserId(model.getUserId());
 		user.setCompanyId(model.getCompanyId());
 		user.setCreateDate(model.getCreateDate());

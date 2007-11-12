@@ -1232,7 +1232,7 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
-	<entity name="User" local-service="true" remote-service="true">
+	<entity name="User" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

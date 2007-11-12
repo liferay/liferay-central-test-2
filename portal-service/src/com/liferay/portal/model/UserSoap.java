@@ -48,6 +48,7 @@ import java.util.List;
 public class UserSoap implements Serializable {
 	public static UserSoap toSoapModel(User model) {
 		UserSoap soapModel = new UserSoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setCreateDate(model.getCreateDate());
@@ -100,6 +101,14 @@ public class UserSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setUserId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getUserId() {
@@ -350,6 +359,7 @@ public class UserSoap implements Serializable {
 		_active = active;
 	}
 
+	private String _uuid;
 	private long _userId;
 	private long _companyId;
 	private Date _createDate;

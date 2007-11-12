@@ -74,6 +74,46 @@ public class UserUtil {
 		return getPersistence().fetchByPrimaryKey(userId);
 	}
 
+	public static java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid);
+	}
+
+	public static java.util.List findByUuid(java.lang.String uuid, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end);
+	}
+
+	public static java.util.List findByUuid(java.lang.String uuid, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.User findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserException {
+		return getPersistence().findByUuid_First(uuid, obc);
+	}
+
+	public static com.liferay.portal.model.User findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserException {
+		return getPersistence().findByUuid_Last(uuid, obc);
+	}
+
+	public static com.liferay.portal.model.User[] findByUuid_PrevAndNext(
+		long userId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserException {
+		return getPersistence().findByUuid_PrevAndNext(userId, uuid, obc);
+	}
+
 	public static java.util.List findByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
@@ -257,6 +297,11 @@ public class UserUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByUuid(uuid);
+	}
+
 	public static void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByCompanyId(companyId);
@@ -306,6 +351,11 @@ public class UserUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUuid(uuid);
 	}
 
 	public static int countByCompanyId(long companyId)

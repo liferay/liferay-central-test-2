@@ -52,6 +52,7 @@ import java.util.List;
 public class UserJSONSerializer {
 	public static JSONObject toJSONObject(User model) {
 		JSONObject jsonObj = new JSONObject();
+		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "userId", model.getUserId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
 		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());

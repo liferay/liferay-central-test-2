@@ -462,6 +462,7 @@
 		<id name="userId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />

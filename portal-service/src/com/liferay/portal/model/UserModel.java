@@ -51,6 +51,10 @@ public interface UserModel extends BaseModel {
 
 	public void setPrimaryKey(long pk);
 
+	public String getUuid();
+
+	public void setUuid(String uuid);
+
 	public long getUserId();
 
 	public void setUserId(long userId);

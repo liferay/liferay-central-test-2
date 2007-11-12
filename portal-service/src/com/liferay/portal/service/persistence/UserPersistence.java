@@ -58,6 +58,34 @@ public interface UserPersistence {
 	public com.liferay.portal.model.User fetchByPrimaryKey(long userId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List findByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByUuid(java.lang.String uuid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.User findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserException;
+
+	public com.liferay.portal.model.User findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserException;
+
+	public com.liferay.portal.model.User[] findByUuid_PrevAndNext(long userId,
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserException;
+
 	public java.util.List findByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
@@ -175,6 +203,9 @@ public interface UserPersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
@@ -206,6 +237,9 @@ public interface UserPersistence {
 			com.liferay.portal.NoSuchUserException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
 
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;

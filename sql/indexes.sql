@@ -334,6 +334,7 @@ create index IX_C5806019 on User_ (companyId, screenName);
 create index IX_9782AD88 on User_ (companyId, userId);
 create index IX_5ADBE171 on User_ (contactId);
 create index IX_A18034A4 on User_ (portraitId);
+create index IX_E0422BDA on User_ (uuid_);
 
 create index LIFERAY_003 on Users_Permissions (permissionId);
 
