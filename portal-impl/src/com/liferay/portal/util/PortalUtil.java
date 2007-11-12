@@ -85,6 +85,7 @@ import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.UserAttributes;
 import com.liferay.portlet.wsrp.URLGeneratorImpl;
+import com.liferay.util.BeanUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Encryptor;
 import com.liferay.util.Http;
@@ -1428,6 +1429,25 @@ public class PortalUtil {
 
 	public static String getUserPassword(RenderRequest req) {
 		return getUserPassword(getHttpServletRequest(req));
+	}
+
+	public static String getUserValue(
+			long userId, String param, String defaultValue)
+		throws SystemException {
+
+		if (Validator.isNotNull(defaultValue)) {
+			return defaultValue;
+		}
+		else {
+			try {
+				User user = UserLocalServiceUtil.getUserById(userId);
+
+				return BeanUtil.getString(user, param, defaultValue);
+			}
+			catch (PortalException pe) {
+				return StringPool.BLANK;
+			}
+		}
 	}
 
 	public static boolean isLayoutFriendliable(Layout layout) {

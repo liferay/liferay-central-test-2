@@ -22,11 +22,8 @@
 
 package com.liferay.portlet.bookmarks.model.impl;
 
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
@@ -46,6 +43,14 @@ public class BookmarksEntryImpl
 	public BookmarksEntryImpl() {
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public BookmarksFolder getFolder() {
 		BookmarksFolder folder = null;
 
@@ -61,28 +66,8 @@ public class BookmarksEntryImpl
 		return folder;
 	}
 
-	public String getUserUuid() throws SystemException {
-
-		if (_userUuid != null) {
-			return _userUuid;
-		}
-		else {
-			try {
-				User user = UserUtil.findByPrimaryKey(getUserId());
-
-				return user.getUuid();
-			}
-			catch (NoSuchUserException e) {
-				return StringPool.BLANK;
-			}
-		}
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
-	}
+	private static Log _log = LogFactory.getLog(BookmarksEntryImpl.class);
 
 	private String _userUuid;
-	private static Log _log = LogFactory.getLog(BookmarksEntryImpl.class);
 
 }

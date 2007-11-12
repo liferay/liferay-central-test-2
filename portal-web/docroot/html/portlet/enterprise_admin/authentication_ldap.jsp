@@ -152,21 +152,21 @@
 	<td colspan="2">
 		<select name="<portlet:namespace />passwordEncryptionAlgorithm">
 			<option value=""></option>
-		
+
 			<%
 			String passwordEncryptionAlgorithm = PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
-		
+
 			String[] algorithmTypes = PropsUtil.getArray(PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM_TYPES);
-		
+
 			for (int i = 0; i < algorithmTypes.length; i++) {
 			%>
-		
+
 				<option <%= passwordEncryptionAlgorithm.equals(algorithmTypes[i]) ? "selected" : "" %> value="<%= algorithmTypes[i] %>"><%= algorithmTypes[i] %></option>
-		
+
 			<%
 			}
 			%>
-		
+
 		</select>
 	</td>
 </tr>
