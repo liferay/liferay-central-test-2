@@ -52,10 +52,14 @@ if (availablePluginPackage != null) {
 		<portlet:param name="deploymentContext" value="<%= pluginPackage.getContext() %>" />
 	</portlet:actionURL>
 
+	<%
+	String jsUpdateURL = "javascript: " + uploadProgressId + ".startProgress(); self.location = '" + updateURL + "';";
+	%>
+
 	<liferay-ui:icon
 		image="download"
 		message="update"
-		url='<%= "javascript: " + uploadProgressId + ".startProgress(); self.location = '" + updateURL + "';" %>'
+		url="<%= jsUpdateURL %>"
 	/>
 
 	<c:choose>
