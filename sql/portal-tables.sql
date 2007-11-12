@@ -1153,6 +1153,7 @@ create table TagsSource (
 );
 
 create table User_ (
+	uuid_ VARCHAR(75) null,
 	userId LONG not null primary key,
 	companyId LONG,
 	createDate DATE null,

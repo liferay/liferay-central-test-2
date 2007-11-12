@@ -49,4 +49,9 @@ package com.liferay.portlet.bookmarks.model;
  */
 public interface BookmarksEntry extends BookmarksEntryModel {
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder getFolder();
+
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
 }

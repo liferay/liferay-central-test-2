@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.bookmarks.model.impl;
 
+import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 
 /**
@@ -46,5 +51,28 @@ public class BookmarksFolderImpl
 			return false;
 		}
 	}
+
+	public String getUserUuid() throws SystemException {
+
+		if (_userUuid != null) {
+			return _userUuid;
+		}
+		else {
+			try {
+				User user = UserUtil.findByPrimaryKey(getUserId());
+
+				return user.getUuid();
+			}
+			catch (NoSuchUserException e) {
+				return StringPool.BLANK;
+			}
+		}
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
+	private String _userUuid;
 
 }

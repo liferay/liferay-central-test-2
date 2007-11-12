@@ -144,6 +144,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
+					folder.setUserUuid(folder.getUserUuid());
+
 					List folderEntries = BookmarksEntryUtil.findByFolderId(
 						folder.getFolderId());
 
@@ -172,6 +174,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
+					entry.setUserUuid(entry.getUserUuid());
+
 					context.addTagsEntries(
 						BookmarksEntry.class, entry.getPrimaryKeyObj());
 				}
@@ -288,6 +292,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			folderId = new Long(entry.getFolderId());
 		}
 
+		long userId = context.getUserId(entry.getUserUuid());
+
 		String[] tagsEntries = context.getTagsEntries(
 			BookmarksEntry.class, entry.getPrimaryKeyObj());
 
@@ -305,21 +311,21 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingEntry == null) {
 					BookmarksEntryLocalServiceUtil.addEntry(
-						entry.getUuid(), entry.getUserId(),
-						folderId.longValue(), entry.getName(),
-						entry.getUrl(), entry.getComments(), tagsEntries,
-						addCommunityPermissions, addGuestPermissions);
+						entry.getUuid(), userId, folderId.longValue(),
+						entry.getName(), entry.getUrl(), entry.getComments(),
+						tagsEntries, addCommunityPermissions,
+						addGuestPermissions);
 				}
 				else {
 					BookmarksEntryLocalServiceUtil.updateEntry(
-						entry.getUserId(), existingEntry.getEntryId(),
+						userId, existingEntry.getEntryId(),
 						folderId.longValue(), entry.getName(), entry.getUrl(),
 						entry.getComments(), tagsEntries);
 				}
 			}
 			else {
 				BookmarksEntryLocalServiceUtil.addEntry(
-					entry.getUserId(), folderId.longValue(), entry.getName(),
+					userId, folderId.longValue(), entry.getName(),
 					entry.getUrl(), entry.getComments(), tagsEntries,
 					addCommunityPermissions, addGuestPermissions);
 			}
@@ -343,6 +349,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			parentFolderId = new Long(folder.getParentFolderId());
 		}
 
+		long userId = context.getUserId(folder.getUserUuid());
+
 		long plid = context.getPlid();
 
 		boolean addCommunityPermissions = true;
@@ -364,7 +372,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingFolder == null) {
 					existingFolder = BookmarksFolderLocalServiceUtil.addFolder(
-						folder.getUuid(), folder.getUserId(), plid,
+						folder.getUuid(), userId, plid,
 						parentFolderId.longValue(), folder.getName(),
 						folder.getDescription(), addCommunityPermissions,
 						addGuestPermissions);
@@ -379,9 +387,9 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			}
 			else {
 				existingFolder = BookmarksFolderLocalServiceUtil.addFolder(
-					folder.getUserId(), plid, parentFolderId.longValue(),
-					folder.getName(), folder.getDescription(),
-					addCommunityPermissions, addGuestPermissions);
+					userId, plid, parentFolderId.longValue(), folder.getName(),
+					folder.getDescription(), addCommunityPermissions,
+					addGuestPermissions);
 			}
 
 			folderPKs.put(
