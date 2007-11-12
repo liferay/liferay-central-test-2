@@ -122,14 +122,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
 	}
 
-	public UserIdStrategy getUserIdStrategy() {
-		return _userIdStrategy;
-	}
-
-	public void setUserIdStrategy(UserIdStrategy userIdStrategy) {
-		_userIdStrategy = userIdStrategy;
-	}
-
 	public Map getRatingsEntries() {
 		return _ratingsEntriesMap;
 	}
@@ -228,8 +220,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_tagsEntriesMap.put(getPrimaryKeyString(className, classPK), values);
 	}
 
-	public long getUserId(String userUuid) throws SystemException {
-		return _userIdStrategy.getUserId(userUuid);
+	public UserIdStrategy getUserIdStrategy() {
+		return _userIdStrategy;
 	}
 
 	public ZipReader getZipReader() {

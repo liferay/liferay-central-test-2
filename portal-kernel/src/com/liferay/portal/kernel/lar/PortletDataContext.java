@@ -55,8 +55,6 @@ public interface PortletDataContext extends Serializable {
 
 	public void setPlid(long plid);
 
-	public long getUserId(String userUuid) throws SystemException;
-
 	public Map getParameterMap();
 
 	public Set getPrimaryKeys();
@@ -90,6 +88,8 @@ public interface PortletDataContext extends Serializable {
 	public void addTagsEntries(
 			String className, Object classPK, String[] values)
 		throws PortalException, SystemException;
+
+	public UserIdStrategy getUserIdStrategy() throws SystemException;
 
 	public ZipReader getZipReader();
 

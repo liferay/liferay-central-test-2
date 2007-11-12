@@ -292,7 +292,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			folderId = new Long(entry.getFolderId());
 		}
 
-		long userId = context.getUserId(entry.getUserUuid());
+		long userId = context.getUserIdStrategy().getUserId(
+			entry.getUserUuid());
 
 		String[] tagsEntries = context.getTagsEntries(
 			BookmarksEntry.class, entry.getPrimaryKeyObj());
@@ -349,7 +350,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			parentFolderId = new Long(folder.getParentFolderId());
 		}
 
-		long userId = context.getUserId(folder.getUserUuid());
+		long userId = context.getUserIdStrategy().getUserId(
+			folder.getUserUuid());
 
 		long plid = context.getPlid();
 
