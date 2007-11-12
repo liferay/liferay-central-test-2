@@ -331,11 +331,11 @@ public class PropsUtil {
 
 	public static final String LDAP_AUTH_METHOD = "ldap.auth.method";
 
-	public static final String LDAP_AUTH_SEARCH_FILTER = "ldap.auth.search.filter";
-
 	public static final String LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM = "ldap.auth.password.encryption.algorithm";
 
 	public static final String LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM_TYPES = "ldap.auth.password.encryption.algorithm.types";
+
+	public static final String LDAP_AUTH_SEARCH_FILTER = "ldap.auth.search.filter";
 
 	public static final String LDAP_USERS_DN = "ldap.users.dn";
 

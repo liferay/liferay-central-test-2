@@ -54,10 +54,9 @@
 		var searchFilter = "";
 		var userMappings = "";
 
-		var ldapType = document.<portlet:namespace />fm.<portlet:namespace />defaultLdap.selectedIndex;
+		var ldapType = Liferay.Util.getSelectedRadioValue(document.<portlet:namespace />fm.<portlet:namespace />defaultLdap);
 
-		if (ldapType == 1) {
-			// Default Apache DS settings
+		if (ldapType == "apache") {
 			baseProviderURL = "ldap://localhost:10389";
 			baseDN = "dc=example,dc=com";
 			principal = "uid=admin,ou=system";
@@ -65,8 +64,7 @@
 			searchFilter = "(mail=@email_address@)";
 			userMappings = "screenName=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
 		}
-		else if (ldapType == 3) {
-			// Default Microsoft Active Directory settings
+		else if (ldapType == "microsoft") {
 			baseProviderURL = "ldap://localhost:389";
 			baseDN = "dc=example,dc=com";
 			principal = "admin";
@@ -74,8 +72,7 @@
 			searchFilter = "(&(objectCategory=person)(sAMAccountName=@user_id@))";
 			userMappings = "fullName=cn\nscreenName=sAMAccountName\nemailAddress=userprincipalname";
 		}
-		else if (ldapType == 4) {
-			// Default Novel eDirectory settings
+		else if (ldapType == "novell") {
 			url = "ldap://localhost:389";
 			baseDN = "";
 			principal = "cn=admin,ou=test";
@@ -84,14 +81,12 @@
 			userMappings = "screenName=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
 		}
 
-		if ((ldapType >= 1) && (ldapType <= 4)) {
-			document.<portlet:namespace />fm.<portlet:namespace />baseProviderURL.value = baseProviderURL;
-			document.<portlet:namespace />fm.<portlet:namespace />baseDN.value = baseDN;
-			document.<portlet:namespace />fm.<portlet:namespace />principal.value = principal;
-			document.<portlet:namespace />fm.<portlet:namespace />credentials.value = credentials;
-			document.<portlet:namespace />fm.<portlet:namespace />searchFilter.value = searchFilter;
-			document.<portlet:namespace />fm.<portlet:namespace />userMappings.value = userMappings;
-		}
+		document.<portlet:namespace />fm.<portlet:namespace />baseProviderURL.value = baseProviderURL;
+		document.<portlet:namespace />fm.<portlet:namespace />baseDN.value = baseDN;
+		document.<portlet:namespace />fm.<portlet:namespace />principal.value = principal;
+		document.<portlet:namespace />fm.<portlet:namespace />credentials.value = credentials;
+		document.<portlet:namespace />fm.<portlet:namespace />searchFilter.value = searchFilter;
+		document.<portlet:namespace />fm.<portlet:namespace />userMappings.value = userMappings;
 	}
 
 	jQuery(
@@ -100,6 +95,8 @@
 		}
 	);
 </script>
+
+<liferay-ui:error key="ldapAuthentication" message="failed-to-bind-to-the-ldap-server-with-given-values" />
 
 <table class="liferay-table">
 <tr>
@@ -122,60 +119,47 @@
 
 <br />
 
-<liferay-ui:tabs names="connection-settings" />
-
-<liferay-ui:error key="ldapAuthentication" message="failed-to-bind-to-the-ldap-server-with-given-values" />
+<liferay-ui:tabs names="default-values" />
 
 <table class="liferay-table">
-<tr style="display: none;">
-	<td>
-		<select name="<portlet:namespace />defaultLdap">
-			<option></option>
-			<option>Apache Directory Server</option>
-			<option>Fedora Directory Server</option>
-			<option>Microsoft Active Directory Server</option>
-			<option>Novell eDirectory</option>
-			<option>OpenLDAP</option>
-			<option>Other or Unknown Directory Server</option>
-		</select>
-	</td>
-	<td>
-		<input type="button" value="<liferay-ui:message key="reset-values" />" onClick="<portlet:namespace />updateDefaultLdap();" />
-	</td>
-</tr>
-<tr style="display: none;">
-	<td colspan="2">
-		<liferay-ui:message key="enter-the-encryption-algorithm-used-for-passwords-stored-in-the-ldap-server" />
-	</td>
-</tr>
-<tr style="display: none;">
-	<td colspan="2">
-		<select name="<portlet:namespace />passwordEncryptionAlgorithm">
-			<option value=""></option>
-
-			<%
-			String passwordEncryptionAlgorithm = PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
-
-			String[] algorithmTypes = PropsUtil.getArray(PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM_TYPES);
-
-			for (int i = 0; i < algorithmTypes.length; i++) {
-			%>
-
-				<option <%= passwordEncryptionAlgorithm.equals(algorithmTypes[i]) ? "selected" : "" %> value="<%= algorithmTypes[i] %>"><%= algorithmTypes[i] %></option>
-
-			<%
-			}
-			%>
-
-		</select>
-	</td>
-</tr>
 <tr>
-	<td width="125">
+	<td>
+		<input name="<portlet:namespace />defaultLdap" type="radio" value="apache"> Apache Directory Server
+	</td>
+	<td>
+		<input name="<portlet:namespace />defaultLdap" type="radio" value="fedora"> Fedora Directory Server
+	</td>
+	<td>
+		<input name="<portlet:namespace />defaultLdap" type="radio" value="microsoft"> Microsoft Active Directory Server
+	</td>
+	<td>
+		<input name="<portlet:namespace />defaultLdap" type="radio" value="novell"> Novell eDirectory
+	</td>
+	<td>
+		<input name="<portlet:namespace />defaultLdap" type="radio" value="open"> OpenLDAP
+	</td>
+	<td>
+		<input name="<portlet:namespace />defaultLdap" type="radio" value="other"> <liferay-ui:message key="other-directory-server" />
+	</td>
+</tr>
+</table>
+
+<br />
+
+<input type="button" value="<liferay-ui:message key="reset-values" />" onClick="<portlet:namespace />updateDefaultLdap();" />
+
+<br /><br />
+
+<liferay-ui:tabs names="connection" />
+
+<table class="liferay-table">
+<tr>
+	<td>
 		<liferay-ui:message key="base-provider-url" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />baseProviderURL" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_PROVIDER_URL)) %>' />
+
 		<liferay-ui:icon-help message="the-ldap-url-format-is" />
 	</td>
 </tr>
@@ -185,6 +169,7 @@
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />baseDN" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_BASE_DN)) %>' />
+
 		<liferay-ui:icon-help message="the-ldap-url-format-is" />
 	</td>
 </tr>
@@ -204,21 +189,19 @@
 		<input class="liferay-input-text" name="<portlet:namespace />credentials" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_SECURITY_CREDENTIALS)) %>' />
 	</td>
 </tr>
-<tr>
-	<td colspan="2">
-		<br />
-		<input type="button" value="<liferay-ui:message key="test-ldap-connection" />" onClick="<portlet:namespace/>testSettings('ldapConnection');" />
-	</td>
-</tr>
 </table>
 
 <br />
+
+<input type="button" value="<liferay-ui:message key="test-ldap-connection" />" onClick="<portlet:namespace/>testSettings('ldapConnection');" />
+
+<br /><br />
 
 <liferay-ui:tabs names="users" />
 
 <table class="liferay-table">
 <tr>
-	<td width="125">
+	<td>
 		<liferay-ui:message key="users-dn" />
 	</td>
 	<td>
@@ -231,6 +214,7 @@
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />searchFilter" type="text" value='<%= ParamUtil.getString(request, "searchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_SEARCH_FILTER)) %>' />
+
 		<liferay-ui:icon-help message="enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user" />
 	</td>
 </tr>
@@ -242,12 +226,13 @@
 		<input class="liferay-input-text" name="<portlet:namespace />importUserSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importUserSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER)) %>' />
 	</td>
 </tr>
-<tr valign="top">
+<tr>
 	<td>
 		<liferay-ui:message key="user-mapping" />
 	</td>
 	<td>
 		<textarea class="liferay-textarea" name="<portlet:namespace />userMappings"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_MAPPINGS)) %></textarea>
+
 		<liferay-ui:icon-help message="if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay" />
 	</td>
 </tr>
@@ -259,21 +244,19 @@
 		<input class="liferay-input-text" name="<portlet:namespace />userDefaultObjectClasses" type="text" value='<%= ParamUtil.getString(request, "userDefaultObjectClasses", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES)) %>' />
 	</td>
 </tr>
-<tr>
-	<td colspan="2">
-		<br />
-		<input type="button" value="<liferay-ui:message key="test-ldap-users" />" onClick="<portlet:namespace />testSettings('ldapUsers');" />
-	</td>
-</tr>
 </table>
 
 <br />
+
+<input type="button" value="<liferay-ui:message key="test-ldap-users" />" onClick="<portlet:namespace />testSettings('ldapUsers');" />
+
+<br /><br />
 
 <liferay-ui:tabs names="groups" />
 
 <table class="liferay-table">
 <tr>
-	<td width="125">
+	<td>
 		<liferay-ui:message key="groups-dn" />
 	</td>
 	<td>
@@ -288,7 +271,7 @@
 		<input class="liferay-input-text" name="<portlet:namespace />importGroupSearchFilter" type="text" value='<%= ParamUtil.getString(request, "importGroupSearchFilter", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER)) %>' />
 	</td>
 </tr>
-<tr valign="top">
+<tr>
 	<td>
 		<liferay-ui:message key="group-mapping" />
 	</td>
@@ -296,17 +279,15 @@
 		<textarea class="liferay-textarea" name="<portlet:namespace />groupMappings"><%= ParamUtil.getString(request, "groupMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUP_MAPPINGS)) %></textarea>
 	</td>
 </tr>
-<tr>
-	<td colspan="2">
-		<br />
-		<input type="button" value="<liferay-ui:message key="test-ldap-groups" />" onClick="<portlet:namespace />testSettings('ldapGroups');" />
-	</td>
-</tr>
 </table>
 
 <br />
 
-<liferay-ui:tabs names="import-export-settings" />
+<input type="button" value="<liferay-ui:message key="test-ldap-groups" />" onClick="<portlet:namespace />testSettings('ldapGroups');" />
+
+<br /><br />
+
+<liferay-ui:tabs names="import-export" />
 
 <table class="liferay-table">
 <tr>
@@ -318,35 +299,35 @@
 	</td>
 </tr>
 <tbody id="<portlet:namespace />importEnabledSettings">
-<tr>
-	<td>
-		<liferay-ui:message key="import-on-startup-enabled" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="importOnStartup" defaultValue='<%= ParamUtil.getBoolean(request, "importOnStartup", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_IMPORT_ON_STARTUP)) %>' />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="import-interval" />
-	</td>
-	<td>
+	<tr>
+		<td>
+			<liferay-ui:message key="import-on-startup-enabled" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="importOnStartup" defaultValue='<%= ParamUtil.getBoolean(request, "importOnStartup", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_IMPORT_ON_STARTUP)) %>' />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="import-interval" />
+		</td>
+		<td>
 
-		<%
-		long importInterval = ParamUtil.getLong(request, "importInterval", PrefsPropsUtil.getLong(company.getCompanyId(), PropsUtil.LDAP_IMPORT_INTERVAL));
-		%>
+			<%
+			long importInterval = ParamUtil.getLong(request, "importInterval", PrefsPropsUtil.getLong(company.getCompanyId(), PropsUtil.LDAP_IMPORT_INTERVAL));
+			%>
 
-		<select name="<portlet:namespace />importInterval">
-			<option value="0" <%= (importInterval == 0) ? " selected " : "" %>><liferay-ui:message key="disabled" /></option>
-			<option value="5" <%= (importInterval == 5) ? " selected " : "" %>>5 <liferay-ui:message key="minutes" /></option>
-			<option value="10" <%= (importInterval == 10) ? " selected " : "" %>>10 <liferay-ui:message key="minutes" /></option>
-			<option value="30" <%= (importInterval == 30) ? " selected " : "" %>>30 <liferay-ui:message key="minutes" /></option>
-			<option value="60" <%= (importInterval == 60) ? " selected " : "" %>>1 <liferay-ui:message key="hour" /></option>
-			<option value="120" <%= (importInterval == 120) ? " selected " : "" %>>2 <liferay-ui:message key="hours" /></option>
-			<option value="180" <%= (importInterval == 180) ? " selected " : "" %>>3 <liferay-ui:message key="hours" /></option>
-		</select>
-	</td>
-</tr>
+			<select name="<portlet:namespace />importInterval">
+				<option value="0" <%= (importInterval == 0) ? " selected " : "" %>><liferay-ui:message key="disabled" /></option>
+				<option value="5" <%= (importInterval == 5) ? " selected " : "" %>>5 <liferay-ui:message key="minutes" /></option>
+				<option value="10" <%= (importInterval == 10) ? " selected " : "" %>>10 <liferay-ui:message key="minutes" /></option>
+				<option value="30" <%= (importInterval == 30) ? " selected " : "" %>>30 <liferay-ui:message key="minutes" /></option>
+				<option value="60" <%= (importInterval == 60) ? " selected " : "" %>>1 <liferay-ui:message key="hour" /></option>
+				<option value="120" <%= (importInterval == 120) ? " selected " : "" %>>2 <liferay-ui:message key="hours" /></option>
+				<option value="180" <%= (importInterval == 180) ? " selected " : "" %>>3 <liferay-ui:message key="hours" /></option>
+			</select>
+		</td>
+	</tr>
 </tbody>
 <tr>
 	<td>
