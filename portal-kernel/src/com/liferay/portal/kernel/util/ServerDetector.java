@@ -66,7 +66,7 @@ public class ServerDetector {
 		"/com/sun/enterprise/cli/framework/CLIMain.class";
 
 	public static final String TOMCAT_CLASS =
-		"/org/apache/catalina/startup/Bootstrap.class";
+		"/org/apache/catalina/startup/Embedded.class";
 
 	public static final String WEBLOGIC_CLASS = "/weblogic/Server.class";
 
