@@ -2942,6 +2942,7 @@ user-id=Utilisateur
 user-import-search-filter=Filtre De Recherche D'Importation D'Utilisateur
 user-name-and-image=Nom et image d'utilisateur
 user-name=Nom D'Utilisateur
+user-permissions=Permissions D'Utilisateur
 user-portrait=Portrait D'Utilisateur
 user-profile=Profil D'Utilisateur
 user-ranks=Rangs D'Utilisateur

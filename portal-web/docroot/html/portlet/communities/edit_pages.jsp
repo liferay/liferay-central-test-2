@@ -1432,6 +1432,12 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 							</div>
 
 							<div>
+								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_USER_PERMISSIONS %>" defaultValue="<%= false %>" />
+
+								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_USER_PERMISSIONS %>Checkbox"><liferay-ui:message key="user-permissions" /></label>
+							</div>
+
+							<div>
 								<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_RATINGS %>" defaultValue="<%= false %>" />
 
 								<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_RATINGS %>Checkbox"><liferay-ui:message key="ratings" /></label>
@@ -1522,6 +1528,12 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
 
 									<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>Checkbox"><liferay-ui:message key="permissions" /></label>
+								</div>
+
+								<div>
+									<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS %>" defaultValue="<%= false %>" />
+
+									<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS %>Checkbox"><liferay-ui:message key="user-permissions" /></label>
 								</div>
 
 								<div>

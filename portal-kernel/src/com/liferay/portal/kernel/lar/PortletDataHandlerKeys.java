@@ -25,7 +25,7 @@ package com.liferay.portal.kernel.lar;
 /**
  * <a href="PortletDataHandlerKeys.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class PortletDataHandlerKeys {
@@ -46,6 +46,9 @@ public class PortletDataHandlerKeys {
 
 	public static final String EXPORT_THEME = "EXPORT_THEME";
 
+	public static final String EXPORT_USER_PERMISSIONS =
+		"EXPORT_USER_PERMISSIONS";
+
 	public static final String IMPORT_PERMISSIONS = "IMPORT_PERMISSIONS";
 
 	public static final String IMPORT_PORTLET_DATA = "IMPORT_PORTLET_DATA";
@@ -58,6 +61,9 @@ public class PortletDataHandlerKeys {
 	public static final String IMPORT_TAGS = "IMPORT_TAGS";
 
 	public static final String IMPORT_THEME = "IMPORT_THEME";
+
+	public static final String IMPORT_USER_PERMISSIONS =
+		"IMPORT_USER_PERMISSIONS";
 
 	public static final String MERGE_DATA = "MERGE_DATA";
 

@@ -353,6 +353,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		boolean exportPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_PERMISSIONS);
+		boolean exportUserPermissions = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.EXPORT_USER_PERMISSIONS);
 		boolean exportPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_PORTLET_DATA);
 		boolean exportPortletPreferences = MapUtil.getBoolean(
@@ -366,6 +368,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Export permissions " + exportPermissions);
+			_log.debug("Export user permissions " + exportUserPermissions);
 			_log.debug("Export portlet data " + exportPortletData);
 			_log.debug(
 				"Export portlet preferences " + exportPortletPreferences);
@@ -450,7 +453,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			if (exportPermissions) {
 				exportLayoutPermissions(
 					layoutCache, companyId, groupId, guestGroup, layout,
-					permissionsEl);
+					permissionsEl, exportUserPermissions);
 			}
 
 			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
@@ -491,7 +494,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				if (exportPermissions) {
 					exportPortletPermissions(
 						layoutCache, companyId, groupId, guestGroup,
-						layout, layoutTypePortlet, portletIds, permissionsEl);
+						layout, layoutTypePortlet, portletIds, permissionsEl,
+						exportUserPermissions);
 				}
 			}
 		}
@@ -672,6 +676,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		boolean importPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_PERMISSIONS);
+		boolean importUserPermissions = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS);
 		boolean importPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_PORTLET_DATA);
 		boolean importPortletPreferences = MapUtil.getBoolean(
@@ -687,6 +693,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Import permissions " + importPermissions);
+			_log.debug("Import user permissions " + importUserPermissions);
 			_log.debug("Import portlet data " + importPortletData);
 			_log.debug(
 				"Import portlet preferences " + importPortletPreferences);
@@ -920,7 +927,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			if (importPermissions) {
 				importLayoutPermissions(
 					layoutCache, companyId, groupId, guestGroup, layout,
-					permissionsEl);
+					permissionsEl, importUserPermissions);
 			}
 
 			// The order of the import is important. You must always import
@@ -945,7 +952,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			if (importPermissions) {
 				importPortletPermissions(
 					layoutCache, companyId, groupId, guestGroup, layout,
-					permissionsEl);
+					permissionsEl, importUserPermissions);
 			}
 		}
 
@@ -1500,7 +1507,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected void exportLayoutPermissions(
 			LayoutCache layoutCache, long companyId, long groupId,
-			Group guestGroup, Layout layout, Element permissionsEl)
+			Group guestGroup, Layout layout, Element permissionsEl,
+			boolean exportUserPermissions)
 		throws PortalException, SystemException {
 
 		String resourceName = Layout.class.getName();
@@ -1516,9 +1524,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				resourcePrimKey, permissionsEl, "guest-actions");
 		}
 
-		exportUserPermissions(
-			layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-			permissionsEl);
+		if (exportUserPermissions) {
+			exportUserPermissions(
+				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
+				permissionsEl);
+		}
 
 		exportInheritedPermissions(
 			layoutCache, companyId, resourceName, resourcePrimKey,
@@ -1638,7 +1648,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, Layout layout,
 			LayoutTypePortlet layoutTypePortlet, Set portletIds,
-			Element permissionsEl)
+			Element permissionsEl, boolean exportUserPermissions)
 		throws PortalException, SystemException {
 
 		Iterator itr = layoutTypePortlet.getPortletIds().iterator();
@@ -1669,9 +1679,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 						resourcePrimKey, portletEl, "guest-actions");
 				}
 
-				exportUserPermissions(
-					layoutCache, companyId, groupId, resourceName,
-					resourcePrimKey, portletEl);
+				if (exportUserPermissions) {
+					exportUserPermissions(
+						layoutCache, companyId, groupId, resourceName,
+						resourcePrimKey, portletEl);
+				}
 
 				exportInheritedPermissions(
 					layoutCache, companyId, resourceName, resourcePrimKey,
@@ -1971,13 +1983,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		List users = layoutCache.getGroupUsers(groupId);
 
+		StopWatch stopWatch = null;
+
+		if (_log.isDebugEnabled()) {
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
+
 		for (int i = 0; i < users.size(); i++) {
 			User user = (User)users.get(i);
 
 			String emailAddress = user.getEmailAddress();
 
 			Element userActionsEl =
-				userPermissionsEl.addElement("user-actions");
+				DocumentHelper.createElement("user-actions");
 
 			List permissions = permissionLocalService.getUserPermissions(
 				user.getUserId(), companyId, resourceName,
@@ -1993,12 +2013,18 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				actionKeyEl.addText(action);
 			}
 
-			if (userActionsEl.elements().isEmpty()) {
-				userPermissionsEl.remove(userActionsEl);
-			}
-			else {
+			if (!userActionsEl.elements().isEmpty()) {
 				userActionsEl.addAttribute("email-address", emailAddress);
+				userPermissionsEl.add(userActionsEl);
 			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"getUserPermissions for {" + resourceName + ", " +
+					resourcePrimKey + "}, for " +
+						users.size() + " users takes " +
+							stopWatch.getTime() + " ms");
 		}
 
 		if (!userPermissionsEl.elements().isEmpty()) {
@@ -2281,7 +2307,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected void importLayoutPermissions(
 			LayoutCache layoutCache, long companyId, long groupId,
-			Group guestGroup, Layout layout, Element permissionsEl)
+			Group guestGroup, Layout layout, Element permissionsEl,
+			boolean importUserPermissions)
 		throws PortalException, SystemException {
 
 		String resourceName = Layout.class.getName();
@@ -2297,9 +2324,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				resourcePrimKey, permissionsEl, "guest-actions", false);
 		}
 
-		importUserPermissions(
-			layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-			permissionsEl, false);
+		if (importUserPermissions) {
+			importUserPermissions(
+				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
+				permissionsEl, false);
+		}
 
 		importInheritedPermissions(
 			layoutCache, companyId, resourceName, resourcePrimKey,
@@ -2423,7 +2452,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected void importPortletPermissions(
 			LayoutCache layoutCache, long companyId, long groupId,
-			Group guestGroup, Layout layout, Element permissionsEl)
+			Group guestGroup, Layout layout, Element permissionsEl,
+			boolean importUserPermissions)
 		throws PortalException, SystemException {
 
 		Iterator itr = permissionsEl.elements("portlet").iterator();
@@ -2459,9 +2489,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 						"guest-actions", true);
 				}
 
-				importUserPermissions(
-					layoutCache, companyId, groupId, resourceName,
-					resourcePrimKey, portletEl, true);
+				if (importUserPermissions) {
+					importUserPermissions(
+						layoutCache, companyId, groupId, resourceName,
+						resourcePrimKey, portletEl, true);
+				}
 
 				importInheritedPermissions(
 					layoutCache, companyId, resourceName, resourcePrimKey,

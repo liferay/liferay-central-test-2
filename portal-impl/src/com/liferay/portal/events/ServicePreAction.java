@@ -375,6 +375,9 @@ public class ServicePreAction extends Action {
 		parameterMap.put(
 			PortletDataHandlerKeys.IMPORT_PERMISSIONS, Boolean.TRUE.toString());
 		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS,
+			Boolean.FALSE.toString());
+		parameterMap.put(
 			PortletDataHandlerKeys.IMPORT_PORTLET_DATA,
 			Boolean.TRUE.toString());
 		parameterMap.put(
