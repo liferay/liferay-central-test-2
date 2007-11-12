@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.zip.ZipReader;
@@ -59,12 +60,13 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public PortletDataContextImpl(
 		long companyId, long groupId, Map parameterMap, Set primaryKeys,
-		ZipReader zipReader) {
+		UserIdStrategy userIdStrategy, ZipReader zipReader) {
 
 		_companyId = companyId;
 		_groupId = groupId;
 		_parameterMap = parameterMap;
 		_primaryKeys = primaryKeys;
+		_userIdStrategy = userIdStrategy;
 		_zipReader = zipReader;
 		_zipWriter = null;
 	}
@@ -77,6 +79,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_groupId = groupId;
 		_parameterMap = parameterMap;
 		_primaryKeys = primaryKeys;
+		_userIdStrategy = null;
 		_zipReader = null;
 		_zipWriter = zipWriter;
 	}
@@ -117,6 +120,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public boolean hasPrimaryKey(Class classObj, Object primaryKey) {
 		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
+	}
+
+	public UserIdStrategy getUserIdStrategy() {
+		return _userIdStrategy;
+	}
+
+	public void setUserIdStrategy(UserIdStrategy userIdStrategy) {
+		_userIdStrategy = userIdStrategy;
 	}
 
 	public Map getRatingsEntries() {
@@ -217,6 +228,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_tagsEntriesMap.put(getPrimaryKeyString(className, classPK), values);
 	}
 
+	public long getUserId(String userUuid) throws SystemException {
+		return _userIdStrategy.getUserId(userUuid);
+	}
+
 	public ZipReader getZipReader() {
 		return _zipReader;
 	}
@@ -246,6 +261,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map _ratingsEntriesMap = new HashMap();
 	private Map _tagsEntriesMap = new HashMap();
 	private Set _primaryKeys;
+	private UserIdStrategy _userIdStrategy;
 	private ZipReader _zipReader;
 	private ZipWriter _zipWriter;
 

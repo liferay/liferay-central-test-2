@@ -1548,6 +1548,22 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<label for="<portlet:namespace /><%= PortletDataHandlerKeys.MERGE_DATA %>Checkbox"><liferay-ui:message key="merge-data" /></label>
 								</div>
 
+								<fieldset>
+									<legend><liferay-ui:message key="user-id-strategy" /></legend>
+
+									<div>
+										<input checked id="<portlet:namespace />currentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.CURRENT_USER_ID%>" />
+
+										<label for="<portlet:namespace />currentUserId"><liferay-ui:message key="if-user-doesnt-exist-use-the-current-user" /></label>
+									</div>
+
+									<div>
+										<input id="<portlet:namespace />alwaysCurrentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.ALWAYS_CURRENT_USER_ID%>" />
+
+										<label for="<portlet:namespace />alwaysCurrentUserId"><liferay-ui:message key="always-use-the-current-user" /></label>
+									</div>
+								</fieldset>
+
 								<%
 								itr1 = portletsList.iterator();
 

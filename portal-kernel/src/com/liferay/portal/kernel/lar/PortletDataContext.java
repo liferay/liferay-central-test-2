@@ -55,6 +55,8 @@ public interface PortletDataContext extends Serializable {
 
 	public void setPlid(long plid);
 
+	public long getUserId(String userUuid) throws SystemException;
+
 	public Map getParameterMap();
 
 	public Set getPrimaryKeys();

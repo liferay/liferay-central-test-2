@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -47,6 +48,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.lar.AlwaysCurrentUserIdStrategy;
+import com.liferay.portal.lar.CurrentUserIdStrategy;
 import com.liferay.portal.lar.PortletDataContextImpl;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -679,6 +682,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.IMPORT_TAGS);
 		boolean importTheme = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_THEME);
+		String userIdStrategy = MapUtil.getString(
+			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Import permissions " + importPermissions);
@@ -703,11 +708,24 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		long companyId = layoutSet.getCompanyId();
 
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		// UserId strategy
+
+		UserIdStrategy strategy = null;
+
+		if (UserIdStrategy.ALWAYS_CURRENT_USER_ID.equals(userIdStrategy)) {
+			strategy = new AlwaysCurrentUserIdStrategy(user);
+		}
+		else if (UserIdStrategy.CURRENT_USER_ID.equals(userIdStrategy)) {
+			strategy = new CurrentUserIdStrategy(user);
+		}
+
 		ZipReader zipReader = new ZipReader(is);
 
 		PortletDataContext context = new PortletDataContextImpl(
 			companyId, groupId, parameterMap, CollectionFactory.getHashSet(),
-			zipReader);
+			strategy, zipReader);
 
 		Group guestGroup = groupLocalService.getGroup(
 			companyId, GroupImpl.GUEST);
@@ -802,8 +820,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		// Layouts
-
-		User user = userPersistence.findByPrimaryKey(userId);
 
 		Set newLayoutIds = CollectionFactory.getHashSet();
 

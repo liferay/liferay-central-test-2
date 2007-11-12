@@ -46,6 +46,7 @@
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerChoice" %>
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerControl" %>
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerKeys" %>
+<%@ page import="com.liferay.portal.kernel.lar.UserIdStrategy" %>
 <%@ page import="com.liferay.portal.plugin.PluginUtil" %>
 <%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
 <%@ page import="com.liferay.portal.service.permission.GroupPermissionUtil" %>

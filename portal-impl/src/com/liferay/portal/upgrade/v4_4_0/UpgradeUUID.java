@@ -70,6 +70,7 @@ public class UpgradeUUID extends UpgradeProcess {
 		upgradeTable("JournalTemplate", "id_");
 		upgradeTable("PollsChoice", "choiceId");
 		upgradeTable("PollsQuestion", "questionId");
+		upgradeTable("User_", "userId");
 	}
 
 	protected void upgradeTable(String tableName, String pkColName)
