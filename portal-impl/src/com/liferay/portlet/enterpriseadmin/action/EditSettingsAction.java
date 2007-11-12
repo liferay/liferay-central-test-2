@@ -259,6 +259,7 @@ public class EditSettingsAction extends PortletAction {
 		String passwordEncryptionAlgorithm = ParamUtil.getString(
 			req, "passwordEncryptionAlgorithm");
 		String userMappings = ParamUtil.getString(req, "userMappings");
+		String groupMappings = ParamUtil.getString(req, "groupMappings");
 		boolean importEnabled = ParamUtil.getBoolean(req, "importEnabled");
 		boolean importOnStartup = ParamUtil.getBoolean(req, "importOnStartup");
 		long importInterval = ParamUtil.getLong(req, "importInterval");
@@ -268,6 +269,7 @@ public class EditSettingsAction extends PortletAction {
 			req, "importGroupSearchFilter");
 		boolean exportEnabled = ParamUtil.getBoolean(req, "exportEnabled");
 		String usersDn = ParamUtil.getString(req, "usersDn");
+		String groupsDn = ParamUtil.getString(req, "groupsDn");
 		String userDefaultObjectClasses = ParamUtil.getString(
 			req, "userDefaultObjectClasses");
 		boolean passwordPolicyEnabled = ParamUtil.getBoolean(
@@ -314,6 +316,7 @@ public class EditSettingsAction extends PortletAction {
 			PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM,
 			passwordEncryptionAlgorithm);
 		prefs.setValue(PropsUtil.LDAP_USER_MAPPINGS, userMappings);
+		prefs.setValue(PropsUtil.LDAP_GROUP_MAPPINGS, groupMappings);
 		prefs.setValue(
 			PropsUtil.LDAP_IMPORT_ENABLED, String.valueOf(importEnabled));
 		prefs.setValue(
@@ -327,6 +330,7 @@ public class EditSettingsAction extends PortletAction {
 		prefs.setValue(
 			PropsUtil.LDAP_EXPORT_ENABLED, String.valueOf(exportEnabled));
 		prefs.setValue(PropsUtil.LDAP_USERS_DN, usersDn);
+		prefs.setValue(PropsUtil.LDAP_GROUPS_DN, groupsDn);
 		prefs.setValue(
 			PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES,
 			userDefaultObjectClasses);
