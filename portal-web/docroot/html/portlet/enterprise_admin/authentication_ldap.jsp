@@ -57,6 +57,7 @@
 		var ldapType = document.<portlet:namespace />fm.<portlet:namespace />defaultLdap.selectedIndex;
 
 		if (ldapType == 1) {
+			// Default Apache DS settings
 			baseProviderURL = "ldap://localhost:10389";
 			baseDN = "dc=example,dc=com";
 			principal = "uid=admin,ou=system";
@@ -64,7 +65,8 @@
 			searchFilter = "(mail=@email_address@)";
 			userMappings = "screenName=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
 		}
-		else if (ldapType == 2) {
+		else if (ldapType == 3) {
+			// Default Microsoft Active Directory settings
 			baseProviderURL = "ldap://localhost:389";
 			baseDN = "dc=example,dc=com";
 			principal = "admin";
@@ -72,7 +74,8 @@
 			searchFilter = "(&(objectCategory=person)(sAMAccountName=@user_id@))";
 			userMappings = "fullName=cn\nscreenName=sAMAccountName\nemailAddress=userprincipalname";
 		}
-		else if (ldapType == 3) {
+		else if (ldapType == 4) {
+			// Default Novel eDirectory settings
 			url = "ldap://localhost:389";
 			baseDN = "";
 			principal = "cn=admin,ou=test";
@@ -81,7 +84,7 @@
 			userMappings = "screenName=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
 		}
 
-		if ((ldapType >= 1) && (ldapType <= 3)) {
+		if ((ldapType >= 1) && (ldapType <= 4)) {
 			document.<portlet:namespace />fm.<portlet:namespace />baseProviderURL.value = baseProviderURL;
 			document.<portlet:namespace />fm.<portlet:namespace />baseDN.value = baseDN;
 			document.<portlet:namespace />fm.<portlet:namespace />principal.value = principal;
@@ -128,6 +131,49 @@
 <br /><br />
 
 <table class="liferay-table">
+<tr style="display: none;">
+	<td>
+		<select name="<portlet:namespace />defaultLdap">
+			<option></option>
+			<option>Apache Directory Server</option>
+			<option>Fedora Directory Server</option>
+			<option>Microsoft Active Directory Server</option>
+			<option>Novell eDirectory</option>
+			<option>OpenLDAP</option>
+			<option>Other or Unknown Directory Server</option>
+		</select>
+	</td>
+	<td>
+		<input type="button" value="<liferay-ui:message key="reset-values" />" onClick="<portlet:namespace />updateDefaultLdap();" />
+	</td>
+</tr>
+<tr style="display: none;">
+	<td colspan="2">
+		<liferay-ui:message key="enter-the-encryption-algorithm-used-for-passwords-stored-in-the-ldap-server" />
+	</td>
+</tr>
+<tr style="display: none;">
+	<td colspan="2">
+		<select name="<portlet:namespace />passwordEncryptionAlgorithm">
+			<option value=""></option>
+		
+			<%
+			String passwordEncryptionAlgorithm = PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
+		
+			String[] algorithmTypes = PropsUtil.getArray(PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM_TYPES);
+		
+			for (int i = 0; i < algorithmTypes.length; i++) {
+			%>
+		
+				<option <%= passwordEncryptionAlgorithm.equals(algorithmTypes[i]) ? "selected" : "" %> value="<%= algorithmTypes[i] %>"><%= algorithmTypes[i] %></option>
+		
+			<%
+			}
+			%>
+		
+		</select>
+	</td>
+</tr>
 <tr>
 	<td>
 		<liferay-ui:message key="base-provider-url" />
@@ -172,29 +218,6 @@
 
 <br /><br />
 
-<liferay-ui:message key="enter-the-encryption-algorithm-used-for-passwords-stored-in-the-ldap-server" />
-
-<br /><br />
-
-<select name="<portlet:namespace />passwordEncryptionAlgorithm">
-	<option value=""></option>
-
-	<%
-	String passwordEncryptionAlgorithm = PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
-
-	String[] algorithmTypes = PropsUtil.getArray(PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM_TYPES);
-
-	for (int i = 0; i < algorithmTypes.length; i++) {
-	%>
-
-		<option <%= passwordEncryptionAlgorithm.equals(algorithmTypes[i]) ? "selected" : "" %> value="<%= algorithmTypes[i] %>"><%= algorithmTypes[i] %></option>
-
-	<%
-	}
-	%>
-
-</select>
-
 <br /><br />
 
 <liferay-ui:message key="if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay" />
@@ -205,21 +228,6 @@
 
 <br /><br />
 
-<table class="liferay-table">
-<tr>
-	<td>
-		<select name="<portlet:namespace />defaultLdap">
-			<option></option>
-			<option>Apache Directory Server</option>
-			<option>Microsoft Active Directory Server</option>
-			<option>Novell eDirectory</option>
-		</select>
-	</td>
-	<td>
-		<input type="button" value="<liferay-ui:message key="reset-values" />" onClick="<portlet:namespace />updateDefaultLdap();" />
-	</td>
-</tr>
-</table>
 
 <br />
 
