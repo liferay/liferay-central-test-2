@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -139,6 +138,8 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
+					entry.setUserUuid(entry.getUserUuid());
+
 					context.addRatingsEntries(
 						BlogsEntry.class, entry.getPrimaryKeyObj());
 
@@ -173,6 +174,9 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 							statsUser.getPrimaryKeyObj())) {
 
 						itr.remove();
+					}
+					else {
+						statsUser.setUserUuid(statsUser.getUserUuid());
 					}
 				}
 			}
@@ -284,6 +288,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, boolean mergeData, BlogsEntry entry)
 		throws Exception {
 
+		long userId = context.getUserId(entry.getUserUuid());
 		long plid = context.getPlid();
 
 		Calendar displayDateCal = CalendarFactoryUtil.getCalendar();
@@ -311,28 +316,27 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (existingEntry == null) {
 				existingEntry = BlogsEntryLocalServiceUtil.addEntry(
-					entry.getUuid(), entry.getUserId(), plid,
-					entry.getCategoryId(), entry.getTitle(), entry.getContent(),
-					displayDateMonth, displayDateDay, displayDateYear,
-					displayDateHour, displayDateMinute, themeDisplay,
-					tagsEntries, addCommunityPermissions, addGuestPermissions);
+					entry.getUuid(), userId, plid, entry.getCategoryId(),
+					entry.getTitle(), entry.getContent(), displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, themeDisplay, tagsEntries,
+					addCommunityPermissions, addGuestPermissions);
 			}
 			else {
 				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
-					entry.getUserId(), existingEntry.getEntryId(),
-					entry.getCategoryId(), entry.getTitle(), entry.getContent(),
-					displayDateMonth, displayDateDay, displayDateYear,
-					displayDateHour, displayDateMinute, themeDisplay,
-					tagsEntries);
+					userId, existingEntry.getEntryId(), entry.getCategoryId(),
+					entry.getTitle(), entry.getContent(), displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, themeDisplay, tagsEntries);
 			}
 		}
 		else {
 			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
-				entry.getUserId(), plid, entry.getCategoryId(),
-				entry.getTitle(), entry.getContent(), displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, themeDisplay, tagsEntries,
-				addCommunityPermissions, addGuestPermissions);
+				userId, plid, entry.getCategoryId(), entry.getTitle(),
+				entry.getContent(), displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				themeDisplay, tagsEntries, addCommunityPermissions,
+				addGuestPermissions);
 		}
 
 		context.importRatingsEntries(
@@ -345,12 +349,11 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		try {
-			UserUtil.findByPrimaryKey(statsUser.getUserId());
-
 			long groupId = context.getGroupId();
+			long userId = context.getUserId(statsUser.getUserUuid());
 
 			BlogsStatsUserLocalServiceUtil.updateStatsUser(
-				groupId, statsUser.getUserId(), statsUser.getLastPostDate());
+				groupId, userId, statsUser.getLastPostDate());
 		}
 		catch (NoSuchUserException nsue) {
 			_log.error(
