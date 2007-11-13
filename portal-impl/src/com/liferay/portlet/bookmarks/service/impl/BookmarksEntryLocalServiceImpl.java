@@ -88,8 +88,8 @@ public class BookmarksEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addEntry(
-			null, userId, folderId, name, url, comments, tagsEntries, null, null,
-			communityPermissions, guestPermissions);
+			null, userId, folderId, name, url, comments, tagsEntries, null,
+			null, communityPermissions, guestPermissions);
 	}
 
 	public BookmarksEntry addEntry(
