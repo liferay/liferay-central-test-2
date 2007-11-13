@@ -10,7 +10,6 @@ var Tree = new Class({
 		instance.tree = null;
 		instance.treeHTML = '';
 		instance.treeId = params.treeId;
-		
 		instance.selectable = params.selectable || false;
 		instance.selectedNodes = params.selectedNodes || '';
 
@@ -39,7 +38,7 @@ var Tree = new Class({
 				var plid = node.objId;
 
 				instance.treeHTML += '<li class="tree-item" id="_branchId_' + plid + '" rel="_nodeId_' + node.id + '">';
-				
+
 				if (instance.selectable) {
 					if (isNodeSelected) {
 						instance.treeHTML += instance.generateImage({
@@ -54,7 +53,7 @@ var Tree = new Class({
 						});
 					}
 				}
-				
+
 				instance.treeHTML += '<a href="' + node.href + '">';
 				instance.treeHTML += instance.generateImage(icons.page);
 				instance.treeHTML += '<span>' + node.name + '</span>';
@@ -95,8 +94,8 @@ var Tree = new Class({
 			if (openNodes != null) {
 				instance.setOpenNodes();
 			}
-			
-			if (instance.selectable && selectedNodes != null) {
+
+			if (instance.selectable && (selectedNodes != null)) {
 				instance.setSelectedNodes();
 			}
 
@@ -222,9 +221,10 @@ var Tree = new Class({
 			if (instance.selectable) {
 				jQuery('li.tree-item', treeEl).each(
 					function() {
-						instance._fixParentsOfSelected(this);	
+						instance._fixParentsOfSelected(this);
 					}
 				);
+
 				jQuery('img.select-state', treeEl).click(
 					function() {
 						instance.select(this);
@@ -325,7 +325,7 @@ var Tree = new Class({
 
 		return false;
 	},
-	
+
 	isNodeSelected: function(node) {
 		var instance = this;
 
@@ -337,7 +337,7 @@ var Tree = new Class({
 
 		return false;
 	},
-	
+
 	select: function(obj) {
 		var instance = this;
 
@@ -350,7 +350,7 @@ var Tree = new Class({
 			var currentLi = obj.parentNode;
 
 			var nodeId = currentLi.getAttribute('rel').replace(/_nodeId_/, '');
-			
+
 			if (instance._hasSelectedChildren(currentLi)) {
 				if (obj.getAttribute("src") == icons.checked) {
 					obj.src = icons.childChecked;
@@ -359,14 +359,15 @@ var Tree = new Class({
 					obj.src = icons.checked;
 					selectedNode = true;
 				}
-			} else if (obj.getAttribute("src") == icons.checked) {
+			}
+			else if (obj.getAttribute("src") == icons.checked) {
 				obj.src = icons.checkbox;
 			}
 			else {
 				obj.src = icons.checked;
 				selectedNode = true;
 			}
-			
+
 			instance._fixParentsOfSelected(currentLi);
 
 			jQuery.ajax(
@@ -436,37 +437,37 @@ var Tree = new Class({
 			);
 		}
 	},
-	
+
 	_fixParentsOfSelected: function(currentLi) {
 		var instance = this;
-		
+
 		var parentLi = currentLi.parentNode.parentNode;
-		
-		if (parentLi.nodeName == 'LI' && parentLi.className != 'root-container') {
+
+		if ((parentLi.nodeName == 'LI') && (parentLi.className != 'root-container')) {
 			var icons = instance.icons;
 			var img = jQuery("> img.select-state", parentLi)[0];
 
 			if (instance._hasSelectedChildren(parentLi)) {
 				if (img.getAttribute("src") == icons.checkbox) {
 					img.src = icons.childChecked;
-				}				
+				}
 			}
 			else if (img.getAttribute("src") != icons.checked) {
 				img.src = icons.checkbox;
 			}
-			
+
 			instance._fixParentsOfSelected(parentLi);
 		}
 	},
-	
+
 	_hasSelectedChildren: function(currentLi) {
 		var checkedChildren = jQuery('> ul > li > img.select-state[@src*=checked]', currentLi);
-		var checkedCheckedChildren = jQuery('> ul > li > img.select-state[@src*=child-checked]', currentLi);
+		var checkedCheckedChildren = jQuery('> ul > li > img.select-state[@src*=child_checked]', currentLi);
 
 		if (checkedChildren.size() > 0 || checkedCheckedChildren.size() > 0) {
 			return true;
 		}
-		
+
 		return false;
 	},
 
@@ -507,6 +508,7 @@ var Tree = new Class({
 			else if (type == 'delete') {
 				var tabLayoutId = obj[0]._LFR_layoutId;
 				var treeBranch = tree.find('li[@rel=_nodeId_' + tabLayoutId + ']');
+
 				treeBranch.remove();
 			}
 		}
