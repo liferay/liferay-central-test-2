@@ -408,6 +408,154 @@ public class PortalLDAPUtil {
 		return userGroup;
 	}
 
+	public static User importLDAPUser(
+			long companyId, LdapContext ctx, Attributes attrs, String password,
+			boolean importGroupMembership)
+		throws Exception {
+
+		Properties userMappings = getUserMappings(companyId);
+
+		LogUtil.debug(_log, userMappings);
+
+		User defaultUser = UserLocalServiceUtil.getDefaultUser(companyId);
+
+		boolean autoPassword = false;
+		boolean updatePassword = true;
+
+		if (password.equals(StringPool.BLANK)) {
+			autoPassword = true;
+			updatePassword = false;
+		}
+
+		long creatorUserId = 0;
+		boolean passwordReset = false;
+		boolean autoScreenName = false;
+		String screenName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("screenName")).toLowerCase();
+		String emailAddress = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("emailAddress"));
+		Locale locale = defaultUser.getLocale();
+		String firstName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("firstName"));
+		String middleName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("middleName"));
+		String lastName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("lastName"));
+
+		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
+			String fullName = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("fullName"));
+
+			String[] names = LDAPUtil.splitFullName(fullName);
+
+			firstName = names[0];
+			middleName = names[1];
+			lastName = names[2];
+		}
+
+		int prefixId = 0;
+		int suffixId = 0;
+		boolean male = true;
+		int birthdayMonth = Calendar.JANUARY;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("jobTitle"));
+		long[] organizationIds = new long[0];
+		boolean sendEmail = false;
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Screen name " + screenName + " and email address " +
+					emailAddress);
+		}
+
+		if (Validator.isNull(screenName) || Validator.isNull(emailAddress)) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Cannot add user because screen name and email address " +
+						"are required");
+			}
+
+			return null;
+		}
+
+		User user = null;
+
+		try {
+			user = UserLocalServiceUtil.getUserByEmailAddress(
+				companyId, emailAddress);
+
+			Contact contact = user.getContact();
+
+			Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
+
+			birthdayCal.setTime(contact.getBirthday());
+
+			birthdayMonth = birthdayCal.get(Calendar.MONTH);
+			birthdayDay = birthdayCal.get(Calendar.DATE);
+			birthdayYear = birthdayCal.get(Calendar.YEAR);
+
+			// User exists so update user information
+
+			if (updatePassword) {
+				user = UserLocalServiceUtil.updatePassword(
+					user.getUserId(), password, password, passwordReset,
+					true);
+			}
+
+			user = UserLocalServiceUtil.updateUser(
+				user.getUserId(), password, screenName, emailAddress,
+				user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
+				user.getComments(), firstName, middleName, lastName,
+				contact.getPrefixId(), contact.getSuffixId(), contact.getMale(),
+				birthdayMonth, birthdayDay, birthdayYear, contact.getSmsSn(),
+				contact.getAimSn(), contact.getIcqSn(), contact.getJabberSn(),
+				contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn(),
+				jobTitle, user.getOrganization().getOrganizationId(),
+				user.getLocation().getOrganizationId());
+		}
+		catch (NoSuchUserException nsue) {
+
+			// User does not exist so create
+
+		}
+
+		if (user == null) {
+			try {
+				user = UserLocalServiceUtil.addUser(
+					creatorUserId, companyId, autoPassword, password, password,
+					autoScreenName, screenName, emailAddress, locale, firstName,
+					middleName, lastName, prefixId, suffixId, male,
+					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+					organizationIds, sendEmail);
+			}
+			catch (Exception e){
+				_log.error(
+					"Problem adding user with screen name " + screenName +
+						" and email address " + emailAddress,
+					e);
+			}
+		}
+
+		// Import user groups and membership
+
+		if (importGroupMembership && (user != null)) {
+			String userMappingsGroup = userMappings.getProperty("group");
+
+			if (userMappingsGroup != null) {
+				Attribute attr = attrs.get(userMappingsGroup);
+
+				if (attr != null){
+					_importGroupsAndMembershipFromLDAPUser(
+						companyId, ctx, user.getUserId(), attr);
+				}
+			}
+		}
+
+		return user;
+	}
+
 	public static boolean isAuthEnabled(long companyId)
 		throws PortalException, SystemException {
 
@@ -565,155 +713,6 @@ public class PortalLDAPUtil {
 					userGroup.getUserGroupId(), new long[] {userId});
 			}
 		}
-	}
-
-	public static User importLDAPUser(
-			long companyId, LdapContext ctx, Attributes attrs, String password,
-			boolean importGroupMembership)
-		throws Exception {
-
-		Properties userMappings = getUserMappings(companyId);
-
-		LogUtil.debug(_log, userMappings);
-
-		User defaultUser = UserLocalServiceUtil.getDefaultUser(companyId);
-
-		boolean autoPassword = false;
-		boolean updatePassword = true;
-
-		if (password.equals(StringPool.BLANK)) {
-			autoPassword = true;
-			updatePassword = false;
-		}
-
-		long creatorUserId = 0;
-		boolean passwordReset = false;
-		boolean autoScreenName = false;
-		Locale locale = defaultUser.getLocale();
-		String firstName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("firstName"));
-		String middleName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("middleName"));
-		String lastName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("lastName"));
-
-		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
-			String fullName = LDAPUtil.getAttributeValue(
-				attrs, userMappings.getProperty("fullName"));
-
-			String[] names = LDAPUtil.splitFullName(fullName);
-
-			firstName = names[0];
-			middleName = names[1];
-			lastName = names[2];
-		}
-
-		String screenName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("screenName")).toLowerCase();
-		String emailAddress = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("emailAddress"));
-
-		int prefixId = 0;
-		int suffixId = 0;
-		boolean male = true;
-		int birthdayMonth = Calendar.JANUARY;
-		int birthdayDay = 1;
-		int birthdayYear = 1970;
-		String jobTitle = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("jobTitle"));
-		long[] organizationIds = new long[0];
-		boolean sendEmail = false;
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Screen name " + screenName + " and email address " +
-					emailAddress);
-		}
-
-		if (Validator.isNull(screenName) || Validator.isNull(emailAddress)) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Cannot add user because screen name and email address " +
-						"are required");
-			}
-
-			return null;
-		}
-
-		User user = null;
-
-		try {
-			user = UserLocalServiceUtil.getUserByEmailAddress(
-				companyId, emailAddress);
-
-			Contact contact = user.getContact();
-
-			Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
-
-			birthdayCal.setTime(contact.getBirthday());
-
-			birthdayMonth = birthdayCal.get(Calendar.MONTH);
-			birthdayDay = birthdayCal.get(Calendar.DATE);
-			birthdayYear = birthdayCal.get(Calendar.YEAR);
-
-			// User exists so update user information
-
-			if (updatePassword) {
-				user = UserLocalServiceUtil.updatePassword(
-					user.getUserId(), password, password, passwordReset,
-					true);
-			}
-
-			user = UserLocalServiceUtil.updateUser(
-				user.getUserId(), password, screenName, emailAddress,
-				user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
-				user.getComments(), firstName, middleName, lastName,
-				contact.getPrefixId(), contact.getSuffixId(), contact.getMale(),
-				birthdayMonth, birthdayDay, birthdayYear, contact.getSmsSn(),
-				contact.getAimSn(), contact.getIcqSn(), contact.getJabberSn(),
-				contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn(),
-				jobTitle, user.getOrganization().getOrganizationId(),
-				user.getLocation().getOrganizationId());
-		}
-		catch (NoSuchUserException nsue) {
-
-			// User does not exist so create
-
-		}
-
-		if (user == null) {
-			try {
-				user = UserLocalServiceUtil.addUser(
-					creatorUserId, companyId, autoPassword, password, password,
-					autoScreenName, screenName, emailAddress, locale, firstName,
-					middleName, lastName, prefixId, suffixId, male,
-					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-					organizationIds, sendEmail);
-			}
-			catch (Exception e){
-				_log.error(
-					"Problem adding user with screen name " + screenName +
-						" and email address " + emailAddress,
-					e);
-			}
-		}
-
-		// Import user groups and membership
-
-		if (importGroupMembership && (user != null)) {
-			String userMappingsGroup = userMappings.getProperty("group");
-
-			if (userMappingsGroup != null) {
-				Attribute attr = attrs.get(userMappingsGroup);
-
-				if (attr != null){
-					_importGroupsAndMembershipFromLDAPUser(
-						companyId, ctx, user.getUserId(), attr);
-				}
-			}
-		}
-
-		return user;
 	}
 
 	private static void _importUsersAndMembershipFromLDAPGroup(
