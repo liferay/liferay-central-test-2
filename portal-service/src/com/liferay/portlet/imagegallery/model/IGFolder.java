@@ -48,10 +48,10 @@ package com.liferay.portlet.imagegallery.model;
  *
  */
 public interface IGFolder extends IGFolderModel {
-	public boolean isRoot();
-
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.SystemException;
 
 	public void setUserUuid(java.lang.String userUuid);
+
+	public boolean isRoot();
 }

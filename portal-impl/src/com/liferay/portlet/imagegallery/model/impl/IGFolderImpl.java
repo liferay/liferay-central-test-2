@@ -39,6 +39,14 @@ public class IGFolderImpl extends IGFolderModelImpl implements IGFolder {
 	public IGFolderImpl() {
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public boolean isRoot() {
 		if (getParentFolderId() == DEFAULT_PARENT_FOLDER_ID) {
 			return true;
@@ -46,14 +54,6 @@ public class IGFolderImpl extends IGFolderModelImpl implements IGFolder {
 		else {
 			return false;
 		}
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	private String _userUuid;

@@ -42,6 +42,14 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 	public IGImageImpl() {
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public IGFolder getFolder() {
 		IGFolder folder = null;
 
@@ -55,14 +63,6 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 		}
 
 		return folder;
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	private static Log _log = LogFactory.getLog(IGImageImpl.class);
