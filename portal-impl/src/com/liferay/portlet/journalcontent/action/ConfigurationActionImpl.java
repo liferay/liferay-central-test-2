@@ -26,15 +26,12 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -55,66 +52,53 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletConfig config, ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-			if (!cmd.equals(Constants.UPDATE)) {
-				return;
-			}
-
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-			long groupId = ParamUtil.getLong(req, "groupId");
-			String articleId = ParamUtil.getString(
-				req, "articleId").toUpperCase();
-			String templateId = ParamUtil.getString(
-				req, "templateId").toUpperCase();
-
-			String languageId = LanguageUtil.getLanguageId(req);
-
-			boolean disableCaching = ParamUtil.getBoolean(
-				req, "disableCaching");
-
-			String content = JournalContentUtil.getContent(
-				groupId, articleId, templateId, languageId, themeDisplay,
-				disableCaching);
-
-			if (Validator.isNull(content)) {
-				throw new NoSuchArticleException();
-			}
-
-			boolean showAvailableLocales = ParamUtil.getBoolean(
-				req, "showAvailableLocales");
-			boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
-			boolean enableComments = ParamUtil.getBoolean(
-				req, "enableComments");
-
-			String portletResource = ParamUtil.getString(
-				req, "portletResource");
-
-			PortletPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortletSetup(
-					req, portletResource, true, true);
-
-			prefs.setValue("group-id", String.valueOf(groupId));
-			prefs.setValue("article-id", articleId);
-			prefs.setValue("template-id", templateId);
-			prefs.setValue("disable-caching", String.valueOf(disableCaching));
-			prefs.setValue(
-				"show-available-locales", String.valueOf(showAvailableLocales));
-			prefs.setValue("enable-ratings", String.valueOf(enableRatings));
-			prefs.setValue("enable-comments", String.valueOf(enableComments));
-
-			prefs.store();
-
-			updateContentSearch(req, portletResource, articleId);
-
-			res.sendRedirect(ParamUtil.getString(req, "redirect"));
+		if (!cmd.equals(Constants.UPDATE)) {
+			return;
 		}
-		catch (NoSuchArticleException nsae) {
-			SessionErrors.add(req, nsae.getClass().getName());
-		}
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		long groupId = ParamUtil.getLong(req, "groupId");
+		String articleId = ParamUtil.getString(req, "articleId").toUpperCase();
+		String templateId = ParamUtil.getString(
+			req, "templateId").toUpperCase();
+
+		String languageId = LanguageUtil.getLanguageId(req);
+
+		boolean disableCaching = ParamUtil.getBoolean(req, "disableCaching");
+
+		String content = JournalContentUtil.getContent(
+			groupId, articleId, templateId, languageId, themeDisplay,
+			disableCaching);
+
+		boolean showAvailableLocales = ParamUtil.getBoolean(
+			req, "showAvailableLocales");
+		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
+		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
+
+		String portletResource = ParamUtil.getString(req, "portletResource");
+
+		PortletPreferences prefs =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portletResource, true, true);
+
+		prefs.setValue("group-id", String.valueOf(groupId));
+		prefs.setValue("article-id", articleId);
+		prefs.setValue("template-id", templateId);
+		prefs.setValue("disable-caching", String.valueOf(disableCaching));
+		prefs.setValue(
+			"show-available-locales", String.valueOf(showAvailableLocales));
+		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
+		prefs.setValue("enable-comments", String.valueOf(enableComments));
+
+		prefs.store();
+
+		updateContentSearch(req, portletResource, articleId);
+
+		res.sendRedirect(ParamUtil.getString(req, "redirect"));
 	}
 
 	public String render(
