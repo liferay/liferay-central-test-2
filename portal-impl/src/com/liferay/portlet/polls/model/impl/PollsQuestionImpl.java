@@ -40,6 +40,14 @@ public class PollsQuestionImpl
 	public PollsQuestionImpl() {
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public boolean isExpired() {
 		Date expirationDate = getExpirationDate();
 
@@ -49,14 +57,6 @@ public class PollsQuestionImpl
 		else {
 			return false;
 		}
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	private String _userUuid;

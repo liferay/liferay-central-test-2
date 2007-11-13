@@ -40,16 +40,16 @@ public class PollsVoteImpl extends PollsVoteModelImpl implements PollsVote {
 	public PollsVoteImpl() {
 	}
 
-	public PollsChoice getChoice() throws PortalException, SystemException {
-		return PollsChoiceLocalServiceUtil.getChoice(getChoiceId());
-	}
-
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public PollsChoice getChoice() throws PortalException, SystemException {
+		return PollsChoiceLocalServiceUtil.getChoice(getChoiceId());
 	}
 
 	private String _userUuid;
