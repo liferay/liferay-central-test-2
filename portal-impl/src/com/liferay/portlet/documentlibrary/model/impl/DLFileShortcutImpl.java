@@ -43,6 +43,14 @@ public class DLFileShortcutImpl
 	public DLFileShortcutImpl() {
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public DLFolder getFolder() {
 		DLFolder folder = null;
 
@@ -56,14 +64,6 @@ public class DLFileShortcutImpl
 		}
 
 		return folder;
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	private static Log _log = LogFactory.getLog(DLFileShortcutImpl.class);

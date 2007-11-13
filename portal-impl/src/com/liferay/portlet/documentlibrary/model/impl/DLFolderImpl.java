@@ -44,6 +44,14 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 	public DLFolderImpl() {
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public boolean isRoot() {
 		if (getParentFolderId() == DEFAULT_PARENT_FOLDER_ID) {
 			return true;
@@ -82,14 +90,6 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 		path = path.substring(1, path.length());
 
 		return StringUtil.split(path, StringPool.SLASH);
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	private String _userUuid;

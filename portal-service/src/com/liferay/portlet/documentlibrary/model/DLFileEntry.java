@@ -48,6 +48,11 @@ package com.liferay.portlet.documentlibrary.model;
  *
  */
 public interface DLFileEntry extends DLFileEntryModel {
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
+
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
 
 	public java.lang.String getTitleWithExtension();
@@ -62,9 +67,4 @@ public interface DLFileEntry extends DLFileEntryModel {
 		java.util.Properties extraSettingsProperties);
 
 	public java.lang.String getLuceneProperties();
-
-	public java.lang.String getUserUuid()
-		throws com.liferay.portal.SystemException;
-
-	public void setUserUuid(java.lang.String userUuid);
 }
