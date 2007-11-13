@@ -284,7 +284,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(entry.getUserUuid());
-
 		long folderId = MapUtil.getLong(
 			folderPKs, entry.getFolderId(), entry.getFolderId());
 
@@ -337,7 +336,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		long userId = context.getUserId(folder.getUserUuid());
 		long plid = context.getPlid();
-
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 

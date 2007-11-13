@@ -327,7 +327,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 		long userId = context.getUserId(folder.getUserUuid());
 		long plid = context.getPlid();
-
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
@@ -338,7 +337,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 		try {
 			if (parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-
 				IGFolderUtil.findByPrimaryKey(parentFolderId);
 			}
 
@@ -381,7 +379,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(igImage.getUserUuid());
-
 		long folderId = MapUtil.getLong(
 			folderPKs, igImage.getFolderId(), igImage.getFolderId());
 

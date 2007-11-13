@@ -453,10 +453,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(vote.getUserUuid());
-
 		long questionId = MapUtil.getLong(
 			questionPKs, vote.getQuestionId(), vote.getQuestionId());
-
 		long choiceId = MapUtil.getLong(
 			choicePKs, vote.getChoiceId(), vote.getChoiceId());
 

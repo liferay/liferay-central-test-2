@@ -423,7 +423,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(entry.getUserUuid());
-
 		long folderId = MapUtil.getLong(
 			folderPKs, entry.getFolderId(), entry.getFolderId());
 
@@ -488,7 +487,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		long userId = context.getUserId(folder.getUserUuid());
 		long plid = context.getPlid();
-
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
@@ -499,7 +497,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		try {
 			if (parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-
 				DLFolderUtil.findByPrimaryKey(parentFolderId);
 			}
 
@@ -542,7 +539,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(rank.getUserUuid());
-
 		long folderId = MapUtil.getLong(
 			folderPKs, rank.getFolderId(), rank.getFolderId());
 
@@ -571,13 +567,10 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(shortcut.getUserUuid());
-
 		long folderId = MapUtil.getLong(
 			folderPKs, shortcut.getFolderId(), shortcut.getFolderId());
-
 		long toFolderId = MapUtil.getLong(
 			folderPKs, shortcut.getToFolderId(), shortcut.getToFolderId());
-
 		String toName = MapUtil.getString(
 			entryNames, shortcut.getToName(), shortcut.getToName());
 

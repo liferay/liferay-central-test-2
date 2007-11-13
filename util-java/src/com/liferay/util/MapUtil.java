@@ -61,10 +61,10 @@ public class MapUtil {
 	}
 
 	public static long getLong(Map map, long key, long defaultValue) {
-		Long longKey = new Long(key);
+		Long keyObj = new Long(key);
 
-		if (map.containsKey(longKey)) {
-			Object value = map.get(longKey);
+		if (map.containsKey(keyObj)) {
+			Object value = map.get(keyObj);
 
 			if (value instanceof Long) {
 				return ((Long)value).longValue();
