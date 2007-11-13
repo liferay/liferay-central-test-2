@@ -424,11 +424,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		long userId = context.getUserId(entry.getUserUuid());
 
-		Long folderId = (Long)folderPKs.get(new Long(entry.getFolderId()));
-
-		if (folderId == null) {
-			folderId = new Long(entry.getFolderId());
-		}
+		long folderId = MapUtil.getLong(
+			folderPKs, entry.getFolderId(), entry.getFolderId());
 
 		String[] tagsEntries = context.getTagsEntries(
 			DLFileEntry.class, entry.getPrimaryKeyObj());
@@ -442,7 +439,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		DLFileEntry existingEntry = null;
 
 		try {
-			DLFolderUtil.findByPrimaryKey(folderId.longValue());
+			DLFolderUtil.findByPrimaryKey(folderId);
 
 			if (mergeData) {
 				existingEntry = DLFileEntryFinderUtil.findByUuid_G(
@@ -450,25 +447,23 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingEntry == null) {
 					existingEntry = DLFileEntryLocalServiceUtil.addFileEntry(
-						entry.getUuid(), userId, folderId.longValue(),
-						entry.getName(), entry.getTitle(),
-						entry.getDescription(), tagsEntries,
-						entry.getExtraSettings(), byteArray,
+						entry.getUuid(), userId, folderId, entry.getName(),
+						entry.getTitle(), entry.getDescription(),
+						tagsEntries, entry.getExtraSettings(), byteArray,
 						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
 					existingEntry = DLFileEntryLocalServiceUtil.updateFileEntry(
-						userId, existingEntry.getFolderId(),
-						folderId.longValue(), existingEntry.getName(),
-						entry.getName(), entry.getTitle(),
-						entry.getDescription(), tagsEntries,
+						userId, existingEntry.getFolderId(), folderId,
+						existingEntry.getName(), entry.getName(),
+						entry.getTitle(), entry.getDescription(), tagsEntries,
 						entry.getExtraSettings(), byteArray);
 				}
 			}
 			else {
 				existingEntry = DLFileEntryLocalServiceUtil.addFileEntry(
-					userId, folderId.longValue(), entry.getName(),
-					entry.getTitle(), entry.getDescription(), tagsEntries,
+					userId, folderId, entry.getName(), entry.getTitle(),
+					entry.getDescription(), tagsEntries,
 					entry.getExtraSettings(), byteArray,
 					addCommunityPermissions, addGuestPermissions);
 			}
@@ -494,12 +489,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		long userId = context.getUserId(folder.getUserUuid());
 		long plid = context.getPlid();
 
-		Long parentFolderId = (Long)folderPKs.get(
-			new Long(folder.getParentFolderId()));
-
-		if (parentFolderId == null) {
-			parentFolderId = new Long(folder.getParentFolderId());
-		}
+		long parentFolderId = MapUtil.getLong(
+			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -507,10 +498,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		DLFolder existingFolder = null;
 
 		try {
-			if (parentFolderId.longValue() !=
-					DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			if (parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 
-				DLFolderUtil.findByPrimaryKey(parentFolderId.longValue());
+				DLFolderUtil.findByPrimaryKey(parentFolderId);
 			}
 
 			if (mergeData) {
@@ -519,21 +509,19 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingFolder == null) {
 					existingFolder = DLFolderLocalServiceUtil.addFolder(
-						folder.getUuid(), userId, plid,
-						parentFolderId.longValue(), folder.getName(),
-						folder.getDescription(), addCommunityPermissions,
-						addGuestPermissions);
+						folder.getUuid(), userId, plid, parentFolderId,
+						folder.getName(), folder.getDescription(),
+						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
 					existingFolder = DLFolderLocalServiceUtil.updateFolder(
-						existingFolder.getFolderId(),
-						parentFolderId.longValue(), folder.getName(),
-						folder.getDescription());
+						existingFolder.getFolderId(), parentFolderId,
+						folder.getName(), folder.getDescription());
 				}
 			}
 			else {
 				existingFolder = DLFolderLocalServiceUtil.addFolder(
-					userId, plid, parentFolderId.longValue(), folder.getName(),
+					userId, plid, parentFolderId, folder.getName(),
 					folder.getDescription(), addCommunityPermissions,
 					addGuestPermissions);
 			}
@@ -555,11 +543,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		long userId = context.getUserId(rank.getUserUuid());
 
-		Long folderId = (Long)folderPKs.get(new Long(rank.getFolderId()));
-
-		if (folderId == null) {
-			folderId = new Long(rank.getFolderId());
-		}
+		long folderId = MapUtil.getLong(
+			folderPKs, rank.getFolderId(), rank.getFolderId());
 
 		String name = (String)folderPKs.get(rank.getName());
 
@@ -568,11 +553,11 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		try {
-			DLFolderUtil.findByPrimaryKey(folderId.longValue());
+			DLFolderUtil.findByPrimaryKey(folderId);
 
 			DLFileRankLocalServiceUtil.updateFileRank(
-				context.getGroupId(), context.getCompanyId(), userId,
-				folderId.longValue(), name);
+				context.getGroupId(), context.getCompanyId(), userId, folderId,
+				name);
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -587,31 +572,21 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		long userId = context.getUserId(shortcut.getUserUuid());
 
-		Long folderId = (Long)folderPKs.get(new Long(shortcut.getFolderId()));
+		long folderId = MapUtil.getLong(
+			folderPKs, shortcut.getFolderId(), shortcut.getFolderId());
 
-		if (folderId == null) {
-			folderId = new Long(shortcut.getFolderId());
-		}
+		long toFolderId = MapUtil.getLong(
+			folderPKs, shortcut.getToFolderId(), shortcut.getToFolderId());
 
-		Long toFolderId = (Long)folderPKs.get(
-			new Long(shortcut.getToFolderId()));
-
-		if (toFolderId == null) {
-			toFolderId = new Long(shortcut.getToFolderId());
-		}
-
-		String toName = (String)entryNames.get(shortcut.getToName());
-
-		if (toName == null) {
-			toName = shortcut.getToName();
-		}
+		String toName = MapUtil.getString(
+			entryNames, shortcut.getToName(), shortcut.getToName());
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
 		try {
-			DLFolderUtil.findByPrimaryKey(folderId.longValue());
-			DLFolderUtil.findByPrimaryKey(toFolderId.longValue());
+			DLFolderUtil.findByPrimaryKey(folderId);
+			DLFolderUtil.findByPrimaryKey(toFolderId);
 
 			if (mergeData) {
 				DLFileShortcut existingShortcut =
@@ -620,20 +595,19 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingShortcut == null) {
 					DLFileShortcutLocalServiceUtil.addFileShortcut(
-						shortcut.getUuid(), userId, folderId.longValue(),
-						toFolderId.longValue(), toName, addCommunityPermissions,
-						addGuestPermissions);
+						shortcut.getUuid(), userId, folderId, toFolderId,
+						toName, addCommunityPermissions, addGuestPermissions);
 				}
 				else {
 					DLFileShortcutLocalServiceUtil.updateFileShortcut(
-						userId, existingShortcut.getFileShortcutId(),
-						folderId.longValue(), toFolderId.longValue(), toName);
+						userId, existingShortcut.getFileShortcutId(), folderId,
+						toFolderId, toName);
 				}
 			}
 			else {
 				DLFileShortcutLocalServiceUtil.addFileShortcut(
-					userId, folderId.longValue(), toFolderId.longValue(),
-					toName, addCommunityPermissions, addGuestPermissions);
+					userId, folderId, toFolderId, toName,
+					addCommunityPermissions, addGuestPermissions);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {

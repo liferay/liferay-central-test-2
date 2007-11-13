@@ -56,6 +56,24 @@ public class MapUtil {
 			getString(map, key, String.valueOf(defaultValue)), defaultValue);
 	}
 
+	public static long getLong(Map map, long key) {
+		return getLong(map, key, GetterUtil.DEFAULT_LONG);
+	}
+
+	public static long getLong(Map map, long key, long defaultValue) {
+		Long longKey = new Long(key);
+
+		if (map.containsKey(longKey)) {
+			Object value = map.get(longKey);
+
+			if (value instanceof Long) {
+				return ((Long)value).longValue();
+			}
+		}
+
+		return defaultValue;
+	}
+
 	public static String getString(Map map, String key) {
 		return getString(map, key, GetterUtil.DEFAULT_STRING);
 	}

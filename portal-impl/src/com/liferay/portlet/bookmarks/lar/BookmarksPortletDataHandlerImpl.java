@@ -285,11 +285,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		long userId = context.getUserId(entry.getUserUuid());
 
-		Long folderId = (Long)folderPKs.get(new Long(entry.getFolderId()));
-
-		if (folderId == null) {
-			folderId = new Long(entry.getFolderId());
-		}
+		long folderId = MapUtil.getLong(
+			folderPKs, entry.getFolderId(), entry.getFolderId());
 
 		String[] tagsEntries = context.getTagsEntries(
 			BookmarksEntry.class, entry.getPrimaryKeyObj());
@@ -300,7 +297,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		BookmarksEntry existingEntry = null;
 
 		try {
-			BookmarksFolderUtil.findByPrimaryKey(folderId.longValue());
+			BookmarksFolderUtil.findByPrimaryKey(folderId);
 
 			if (mergeData) {
 				existingEntry = BookmarksEntryFinderUtil.findByUuid_G(
@@ -308,23 +305,22 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingEntry == null) {
 					BookmarksEntryLocalServiceUtil.addEntry(
-						entry.getUuid(), userId, folderId.longValue(),
-						entry.getName(), entry.getUrl(), entry.getComments(),
-						tagsEntries, addCommunityPermissions,
-						addGuestPermissions);
+						entry.getUuid(), userId, folderId, entry.getName(),
+						entry.getUrl(), entry.getComments(), tagsEntries,
+						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
 					BookmarksEntryLocalServiceUtil.updateEntry(
-						userId, existingEntry.getEntryId(),
-						folderId.longValue(), entry.getName(), entry.getUrl(),
-						entry.getComments(), tagsEntries);
+						userId, existingEntry.getEntryId(), folderId,
+						entry.getName(), entry.getUrl(), entry.getComments(),
+						tagsEntries);
 				}
 			}
 			else {
 				BookmarksEntryLocalServiceUtil.addEntry(
-					userId, folderId.longValue(), entry.getName(),
-					entry.getUrl(), entry.getComments(), tagsEntries,
-					addCommunityPermissions, addGuestPermissions);
+					userId, folderId, entry.getName(), entry.getUrl(),
+					entry.getComments(), tagsEntries, addCommunityPermissions,
+					addGuestPermissions);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
@@ -342,12 +338,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		long userId = context.getUserId(folder.getUserUuid());
 		long plid = context.getPlid();
 
-		Long parentFolderId = (Long)folderPKs.get(
-			new Long(folder.getParentFolderId()));
-
-		if (parentFolderId == null) {
-			parentFolderId = new Long(folder.getParentFolderId());
-		}
+		long parentFolderId = MapUtil.getLong(
+			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -355,11 +347,10 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		BookmarksFolder existingFolder = null;
 
 		try {
-			if (parentFolderId.longValue() !=
+			if (parentFolderId !=
 					BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 
-				BookmarksFolderUtil.findByPrimaryKey(
-					parentFolderId.longValue());
+				BookmarksFolderUtil.findByPrimaryKey(parentFolderId);
 			}
 
 			if (mergeData) {
@@ -368,22 +359,20 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingFolder == null) {
 					existingFolder = BookmarksFolderLocalServiceUtil.addFolder(
-						folder.getUuid(), userId, plid,
-						parentFolderId.longValue(), folder.getName(),
-						folder.getDescription(), addCommunityPermissions,
-						addGuestPermissions);
+						folder.getUuid(), userId, plid, parentFolderId,
+						folder.getName(), folder.getDescription(),
+						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
 					existingFolder =
 						BookmarksFolderLocalServiceUtil.updateFolder(
-							existingFolder.getFolderId(),
-							parentFolderId.longValue(), folder.getName(),
-							folder.getDescription(), false);
+							existingFolder.getFolderId(), parentFolderId,
+							folder.getName(), folder.getDescription(), false);
 				}
 			}
 			else {
 				existingFolder = BookmarksFolderLocalServiceUtil.addFolder(
-					userId, plid, parentFolderId.longValue(), folder.getName(),
+					userId, plid, parentFolderId, folder.getName(),
 					folder.getDescription(), addCommunityPermissions,
 					addGuestPermissions);
 			}

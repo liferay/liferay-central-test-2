@@ -343,17 +343,13 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			Map choicePKs, PollsChoice choice)
 		throws Exception {
 
-		Long questionId = (Long)questionPKs.get(
-			new Long(choice.getQuestionId()));
-
-		if (questionId == null) {
-			questionId = new Long(choice.getQuestionId());
-		}
+		long questionId = MapUtil.getLong(
+			questionPKs, choice.getQuestionId(), choice.getQuestionId());
 
 		PollsChoice existingChoice = null;
 
 		try {
-			PollsQuestionUtil.findByPrimaryKey(questionId.longValue());
+			PollsQuestionUtil.findByPrimaryKey(questionId);
 
 			if (mergeData) {
 				existingChoice = PollsChoiceFinderUtil.findByUuid_G(
@@ -361,19 +357,18 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingChoice == null) {
 					existingChoice = PollsChoiceLocalServiceUtil.addChoice(
-						choice.getUuid(), questionId.longValue(),
-						choice.getName(), choice.getDescription());
+						choice.getUuid(), questionId, choice.getName(),
+						choice.getDescription());
 				}
 				else {
 					existingChoice = PollsChoiceLocalServiceUtil.updateChoice(
-						existingChoice.getChoiceId(), questionId.longValue(),
+						existingChoice.getChoiceId(), questionId,
 						choice.getName(), choice.getDescription());
 				}
 			}
 			else {
 				existingChoice = PollsChoiceLocalServiceUtil.addChoice(
-					questionId.longValue(), choice.getName(),
-					choice.getDescription());
+					questionId, choice.getName(), choice.getDescription());
 			}
 
 			choicePKs.put(
@@ -459,25 +454,18 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		long userId = context.getUserId(vote.getUserUuid());
 
-		Long questionId = (Long)questionPKs.get(
-			new Long(vote.getQuestionId()));
+		long questionId = MapUtil.getLong(
+			questionPKs, vote.getQuestionId(), vote.getQuestionId());
 
-		if (questionId == null) {
-			questionId = new Long(vote.getQuestionId());
-		}
-
-		Long choiceId = (Long)choicePKs.get(new Long(vote.getChoiceId()));
-
-		if (choiceId == null) {
-			choiceId = new Long(vote.getChoiceId());
-		}
+		long choiceId = MapUtil.getLong(
+			choicePKs, vote.getChoiceId(), vote.getChoiceId());
 
 		try {
-			PollsQuestionUtil.findByPrimaryKey(questionId.longValue());
-			PollsChoiceUtil.findByPrimaryKey(choiceId.longValue());
+			PollsQuestionUtil.findByPrimaryKey(questionId);
+			PollsChoiceUtil.findByPrimaryKey(choiceId);
 
 			PollsVoteLocalServiceUtil.addVote(
-				userId, questionId.longValue(), choiceId.longValue());
+				userId, questionId, choiceId);
 		}
 		catch (NoSuchQuestionException nsqe) {
 			_log.error(

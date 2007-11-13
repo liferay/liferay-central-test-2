@@ -328,12 +328,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		long userId = context.getUserId(folder.getUserUuid());
 		long plid = context.getPlid();
 
-		Long parentFolderId = (Long)folderPKs.get(
-			new Long(folder.getParentFolderId()));
-
-		if (parentFolderId == null) {
-			parentFolderId = new Long(folder.getParentFolderId());
-		}
+		long parentFolderId = MapUtil.getLong(
+			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -341,10 +337,9 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		IGFolder existingFolder = null;
 
 		try {
-			if (parentFolderId.longValue() !=
-					IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			if (parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 
-				IGFolderUtil.findByPrimaryKey(parentFolderId.longValue());
+				IGFolderUtil.findByPrimaryKey(parentFolderId);
 			}
 
 			if (mergeData) {
@@ -353,21 +348,19 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingFolder == null) {
 					existingFolder = IGFolderLocalServiceUtil.addFolder(
-						folder.getUuid(), userId, plid,
-						parentFolderId.longValue(), folder.getName(),
-						folder.getDescription(), addCommunityPermissions,
-						addGuestPermissions);
+						folder.getUuid(), userId, plid, parentFolderId,
+						folder.getName(), folder.getDescription(),
+						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
 					existingFolder = IGFolderLocalServiceUtil.updateFolder(
-						existingFolder.getFolderId(),
-						parentFolderId.longValue(), folder.getName(),
-						folder.getDescription(), false);
+						existingFolder.getFolderId(), parentFolderId,
+						folder.getName(), folder.getDescription(), false);
 				}
 			}
 			else {
 				existingFolder = IGFolderLocalServiceUtil.addFolder(
-					userId, plid, parentFolderId.longValue(), folder.getName(),
+					userId, plid, parentFolderId, folder.getName(),
 					folder.getDescription(), addCommunityPermissions,
 					addGuestPermissions);
 			}
@@ -389,11 +382,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 		long userId = context.getUserId(igImage.getUserUuid());
 
-		Long folderId = (Long)folderPKs.get(new Long(igImage.getFolderId()));
-
-		if (folderId == null) {
-			folderId = new Long(igImage.getFolderId());
-		}
+		long folderId = MapUtil.getLong(
+			folderPKs, igImage.getFolderId(), igImage.getFolderId());
 
 		Image image = (Image)imagesPKs.get(new Long(igImage.getLargeImageId()));
 
@@ -421,7 +411,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		IGImage existingImage = null;
 
 		try {
-			IGFolderUtil.findByPrimaryKey(folderId.longValue());
+			IGFolderUtil.findByPrimaryKey(folderId);
 
 			if (mergeData) {
 				existingImage = IGImageFinderUtil.findByUuid_G(
@@ -429,23 +419,23 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingImage == null) {
 					IGImageLocalServiceUtil.addImage(
-						igImage.getUuid(), userId, folderId.longValue(),
+						igImage.getUuid(), userId, folderId,
 						igImage.getDescription(), imageFile, image.getType(),
 						tagsEntries, addCommunityPermissions,
 						addGuestPermissions);
 				}
 				else {
 					IGImageLocalServiceUtil.updateImage(
-						userId, existingImage.getImageId(),
-						folderId.longValue(), igImage.getDescription(),
-						imageFile, image.getType(), tagsEntries);
+						userId, existingImage.getImageId(), folderId,
+						igImage.getDescription(), imageFile,
+						image.getType(), tagsEntries);
 				}
 			}
 			else {
 				IGImageLocalServiceUtil.addImage(
-					userId, folderId.longValue(), igImage.getDescription(),
-					imageFile, image.getType(), tagsEntries,
-					addCommunityPermissions, addGuestPermissions);
+					userId, folderId, igImage.getDescription(), imageFile,
+					image.getType(), tagsEntries, addCommunityPermissions,
+					addGuestPermissions);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
