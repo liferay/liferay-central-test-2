@@ -336,7 +336,8 @@ public class PortalLDAPUtil {
 					SearchResult result = (SearchResult)enu.next();
 
 					importLDAPUser(
-						companyId, ctx, result.getAttributes(), true);
+						companyId, ctx, result.getAttributes(),
+						StringPool.BLANK, true);
 				}
 			}
 			else if (importMethod.equals(IMPORT_BY_GROUP)) {
@@ -405,62 +406,6 @@ public class PortalLDAPUtil {
 		}
 
 		return userGroup;
-	}
-
-	public static User importLDAPUser(
-			long companyId, LdapContext ctx, Attributes attrs,
-			boolean importGroupMembership)
-		throws Exception {
-
-		// Import used on interval import
-
-		Properties userMappings = getUserMappings(companyId);
-
-		LogUtil.debug(_log, userMappings);
-
-		boolean autoPassword = true;
-		String password = StringPool.BLANK;
-		String screenName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("screenName")).toLowerCase();
-		String emailAddress = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("emailAddress"));
-
-		User user = _importLDAPUser(
-			companyId, ctx, attrs, userMappings, autoPassword, password,
-			screenName, emailAddress, false, importGroupMembership);
-
-		return user;
-	}
-
-	public static User importLDAPUser(
-			long companyId, LdapContext ctx, Attributes attrs,
-			String emailAddress, String screenName, String password,
-			boolean importGroupMembership)
-		throws Exception {
-
-		// Import used on user login
-
-		Properties userMappings = getUserMappings(companyId);
-
-		LogUtil.debug(_log, userMappings);
-
-		boolean autoPassword = false;
-
-		if (Validator.isNull(screenName)) {
-			screenName = LDAPUtil.getAttributeValue(
-				attrs, userMappings.getProperty("screenName")).toLowerCase();
-		}
-
-		if (Validator.isNull(emailAddress)) {
-			emailAddress = LDAPUtil.getAttributeValue(
-				attrs, userMappings.getProperty("emailAddress"));
-		}
-
-		User user = _importLDAPUser(
-			companyId, ctx, attrs, userMappings, autoPassword, password,
-			screenName, emailAddress, true, importGroupMembership);
-
-		return user;
 	}
 
 	public static boolean isAuthEnabled(long companyId)
@@ -622,16 +567,24 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	private static User _importLDAPUser(
-			long companyId, LdapContext ctx, Attributes attrs,
-			Properties userMappings, boolean autoPassword, String password,
-			String screenName, String emailAddress, boolean updatePassword,
+	public static User importLDAPUser(
+			long companyId, LdapContext ctx, Attributes attrs, String password,
 			boolean importGroupMembership)
 		throws Exception {
+
+		Properties userMappings = getUserMappings(companyId);
 
 		LogUtil.debug(_log, userMappings);
 
 		User defaultUser = UserLocalServiceUtil.getDefaultUser(companyId);
+
+		boolean autoPassword = false;
+		boolean updatePassword = true;
+
+		if (password.equals(StringPool.BLANK)) {
+			autoPassword = true;
+			updatePassword = false;
+		}
 
 		long creatorUserId = 0;
 		boolean passwordReset = false;
@@ -654,6 +607,11 @@ public class PortalLDAPUtil {
 			middleName = names[1];
 			lastName = names[2];
 		}
+
+		String screenName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("screenName")).toLowerCase();
+		String emailAddress = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("emailAddress"));
 
 		int prefixId = 0;
 		int suffixId = 0;
@@ -807,7 +765,8 @@ public class PortalLDAPUtil {
 							"Adding user " + emailAddress + " at " + userDN);
 					}
 
-					user = importLDAPUser(companyId, ctx, userAttrs, false);
+					user = importLDAPUser(
+						companyId, ctx, userAttrs, StringPool.BLANK, false);
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
