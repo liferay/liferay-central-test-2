@@ -125,6 +125,9 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 					itr.remove();
 				}
+				else {
+					event.setUserUuid(event.getUserUuid());
+				}
 			}
 
 			String xml = xStream.toXML(events);
@@ -196,9 +199,6 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 				importEvent(context, mergeData, event);
 			}
 
-			// No special modification to the incoming portlet preferences
-			// needed
-
 			return null;
 		}
 		catch (Exception e) {
@@ -210,6 +210,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, boolean mergeData, CalEvent event)
 		throws Exception {
 
+		long userId = context.getUserId(event.getUserUuid());
 		long plid = context.getPlid();
 
 		Date startDate = event.getStartDate();
@@ -259,7 +260,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (existingEvent == null) {
 				CalEventLocalServiceUtil.addEvent(
-					event.getUuid(), event.getUserId(), plid, event.getTitle(),
+					event.getUuid(), userId, plid, event.getTitle(),
 					event.getDescription(), startDateMonth, startDateDay,
 					startDateYear, startDateHour, startDateMinute, endDateMonth,
 					endDateDay, endDateYear, event.getDurationHour(),
@@ -272,26 +273,25 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			}
 			else {
 				CalEventLocalServiceUtil.updateEvent(
-					event.getUserId(), existingEvent.getEventId(),
-					event.getTitle(), event.getDescription(), startDateMonth,
-					startDateDay, startDateYear, startDateHour, startDateMinute,
-					endDateMonth, endDateDay, endDateYear,
-					event.getDurationHour(), event.getDurationMinute(),
-					event.getAllDay(), event.getTimeZoneSensitive(),
-					event.getType(), event.getRepeating(),
-					event.getRecurrenceObj(), event.getRemindBy(),
-					event.getFirstReminder(), event.getSecondReminder());
+					userId, existingEvent.getEventId(), event.getTitle(),
+					event.getDescription(), startDateMonth, startDateDay,
+					startDateYear, startDateHour, startDateMinute, endDateMonth,
+					endDateDay, endDateYear, event.getDurationHour(),
+					event.getDurationMinute(), event.getAllDay(),
+					event.getTimeZoneSensitive(), event.getType(),
+					event.getRepeating(), event.getRecurrenceObj(),
+					event.getRemindBy(), event.getFirstReminder(),
+					event.getSecondReminder());
 			}
 		}
 		else {
 			CalEventLocalServiceUtil.addEvent(
-				event.getUserId(), plid, event.getTitle(),
-				event.getDescription(), startDateMonth, startDateDay,
-				startDateYear, startDateHour, startDateMinute, endDateMonth,
-				endDateDay, endDateYear, event.getDurationHour(),
-				event.getDurationMinute(), event.getAllDay(),
-				event.getTimeZoneSensitive(), event.getType(),
-				event.getRepeating(), event.getRecurrenceObj(),
+				userId, plid, event.getTitle(), event.getDescription(),
+				startDateMonth, startDateDay, startDateYear, startDateHour, 
+				startDateMinute, endDateMonth, endDateDay, endDateYear,
+				event.getDurationHour(), event.getDurationMinute(),
+				event.getAllDay(), event.getTimeZoneSensitive(),
+				event.getType(), event.getRepeating(), event.getRecurrenceObj(),
 				event.getRemindBy(), event.getFirstReminder(),
 				event.getSecondReminder(), addCommunityPermissions,
 				addGuestPermissions);

@@ -54,4 +54,9 @@ public interface CalEvent extends CalEventModel {
 
 	public void setRecurrenceObj(
 		com.liferay.portal.kernel.cal.Recurrence recurrenceObj);
+
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
 }
