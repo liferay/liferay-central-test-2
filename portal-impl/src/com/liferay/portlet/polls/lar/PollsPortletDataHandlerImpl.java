@@ -157,6 +157,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 					choices.addAll(questionChoices);
 
 					if (exportVotes) {
+						question.setUserUuid(question.getUserUuid());
+
 						List questionVotes = PollsVoteUtil.findByQuestionId(
 							question.getQuestionId());
 
@@ -206,6 +208,9 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 						PollsVote.class, vote.getPrimaryKeyObj())) {
 
 					itr.remove();
+				}
+				else {
+					vote.setUserUuid(vote.getUserUuid());
 				}
 			}
 
@@ -357,7 +362,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 				if (existingChoice == null) {
 					existingChoice = PollsChoiceLocalServiceUtil.addChoice(
 						choice.getUuid(), questionId.longValue(),
-						choice.getName(),choice.getDescription());
+						choice.getName(), choice.getDescription());
 				}
 				else {
 					existingChoice = PollsChoiceLocalServiceUtil.updateChoice(
@@ -386,6 +391,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			PollsQuestion question)
 		throws SystemException, PortalException {
 
+		long userId = context.getUserId(question.getUserUuid());
 		long plid = context.getPlid();
 
 		Date expirationDate = question.getExpirationDate();
@@ -421,15 +427,14 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (existingQuestion == null) {
 				existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
-					question.getUuid(), question.getUserId(), plid,
-					question.getTitle(), question.getDescription(),
-					expirationMonth, expirationDay, expirationYear,
-					expirationHour, expirationMinute, neverExpire,
-					addCommunityPermissions, addGuestPermissions);
+					question.getUuid(), userId, plid, question.getTitle(),
+					question.getDescription(), expirationMonth, expirationDay,
+					expirationYear, expirationHour, expirationMinute,
+					neverExpire, addCommunityPermissions, addGuestPermissions);
 			}
 			else {
 				existingQuestion = PollsQuestionLocalServiceUtil.updateQuestion(
-					question.getUserId(), existingQuestion.getQuestionId(),
+					userId, existingQuestion.getQuestionId(),
 					question.getTitle(), question.getDescription(),
 					expirationMonth, expirationDay, expirationYear,
 					expirationHour, expirationMinute, neverExpire);
@@ -437,10 +442,10 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 		else {
 			existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
-				question.getUserId(), plid, question.getTitle(),
-				question.getDescription(), expirationMonth, expirationDay,
-				expirationYear, expirationHour, expirationMinute,
-				neverExpire, addCommunityPermissions, addGuestPermissions);
+				userId, plid, question.getTitle(), question.getDescription(),
+				expirationMonth, expirationDay, expirationYear, expirationHour,
+				expirationMinute, neverExpire, addCommunityPermissions,
+				addGuestPermissions);
 		}
 
 		questionPKs.put(
@@ -451,6 +456,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, Map questionPKs, Map choicePKs,
 			PollsVote vote)
 		throws Exception {
+
+		long userId = context.getUserId(vote.getUserUuid());
 
 		Long questionId = (Long)questionPKs.get(
 			new Long(vote.getQuestionId()));
@@ -470,7 +477,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			PollsChoiceUtil.findByPrimaryKey(choiceId.longValue());
 
 			PollsVoteLocalServiceUtil.addVote(
-				vote.getUserId(), questionId.longValue(), choiceId.longValue());
+				userId, questionId.longValue(), choiceId.longValue());
 		}
 		catch (NoSuchQuestionException nsqe) {
 			_log.error(
