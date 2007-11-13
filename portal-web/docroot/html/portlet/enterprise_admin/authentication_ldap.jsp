@@ -27,7 +27,7 @@
 		var popup = Liferay.Popup(
 			{
 				modal: true,
-				width: 500
+				width: 600
 			}
 		);
 

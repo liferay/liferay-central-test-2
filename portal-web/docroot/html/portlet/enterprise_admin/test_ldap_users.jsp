@@ -22,6 +22,88 @@
  */
 %>
 
+<%@ page import="javax.naming.NamingEnumeration" %>
+<%@ page import="javax.naming.directory.Attribute" %>
+<%@ page import="javax.naming.directory.Attributes" %>
+<%@ page import="javax.naming.directory.SearchResult" %>
+<%@ page import="com.liferay.util.ldap.LDAPUtil" %>
+
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
+<%
+LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId());
+
+if (ctx == null) {
+	return;
+}
+
+NamingEnumeration enu = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ctx);
+Properties userMappings = PortalLDAPUtil.getUserMappings(themeDisplay.getCompanyId());
+
+
+%>
+
 <liferay-ui:message key="test-ldap-users" />
+
+<br /><br />
+
+A small list of users has been displayed for your to review.
+
+<br /><br />
+
+<table class="liferay-table">
+
+<%
+// Loop through all LDAP users
+
+int counter = 0;
+
+while (enu.hasMore()) {
+	SearchResult result = (SearchResult)enu.next();
+	Attributes attrs = result.getAttributes();
+	
+	String screenName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("screenName")).toLowerCase();
+	String emailAddress = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("emailAddress"));		
+	String firstName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("firstName"));
+	String lastName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("lastName"));
+	String jobTitle = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("jobTitle"));
+	Attribute attribute = attrs.get(userMappings.getProperty("group"));
+
+	if (counter == 0) {
+%>
+		<tr>
+			<th></th>
+			<th>Screen Name</th>
+			<th>Email Address</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Job Title</th>
+			<th>Group</th>
+		</tr>
+<%		
+	}
+
+	counter++;
+%>
+		<tr>
+			<td><%= counter %></td>
+			<td><%= screenName %></td>
+			<td><%= emailAddress %></td>
+			<td><%= firstName %></td>
+			<td><%= lastName %></td>
+			<td><%= jobTitle %></td>
+			<td><%= (attribute == null) ? "0" : attribute.size() %></td>
+		</tr>
+<%		
+	if (counter == 20) {
+		break;
+	}
+}
+
+if (counter == 0) {
+%>
+		<tr><th colspan="6">No Users Found</td></tr>
+<%
+}
+%>
+</table>

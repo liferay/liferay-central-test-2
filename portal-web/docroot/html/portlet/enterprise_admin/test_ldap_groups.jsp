@@ -22,6 +22,78 @@
  */
 %>
 
+<%@ page import="javax.naming.NamingEnumeration" %>
+<%@ page import="javax.naming.directory.Attribute" %>
+<%@ page import="javax.naming.directory.Attributes" %>
+<%@ page import="javax.naming.directory.SearchResult" %>
+<%@ page import="com.liferay.util.ldap.LDAPUtil" %>
+
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
+<%
+LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId());
+
+if (ctx == null) {
+	return;
+}
+
+NamingEnumeration enu = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ctx);
+Properties groupMappings = PortalLDAPUtil.getGroupMappings(themeDisplay.getCompanyId());
+
+%>
+
 <liferay-ui:message key="test-ldap-groups" />
+
+<br /><br />
+
+A small list of groups has been displayed for your to review.
+
+<br /><br />
+
+<table class="liferay-table">
+
+<%
+// Loop through all LDAP groups
+
+int counter = 0;
+
+while (enu.hasMore()) {
+	SearchResult result = (SearchResult)enu.next();
+	Attributes attrs = result.getAttributes();
+
+	String name = LDAPUtil.getAttributeValue(attrs, groupMappings.getProperty("groupName")).toLowerCase();
+	String description = LDAPUtil.getAttributeValue(attrs, groupMappings.getProperty("description"));
+	Attribute attribute = attrs.get(groupMappings.getProperty("user"));
+
+	if (counter == 0) {
+%>
+		<tr>
+			<th></th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Members</th>
+		</tr>
+<%
+	}
+
+	counter++;
+%>
+		<tr>
+			<td><%= counter %></td>
+			<td><%= name %></td>
+			<td><%= description %></td>
+			<td><%= (attribute == null) ? "0" : attribute.size() %></td>
+		</tr>
+<%
+	if (counter == 20) {
+		break;
+	}
+}
+
+if (counter == 0) {
+%>
+		<tr><th colspan="6">No Groups Found</td></tr>
+<%
+}
+%>
+</table>
