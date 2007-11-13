@@ -735,6 +735,7 @@ city-state=Città, Stato
 city=Città
 class=Classe
 classic-wiki=Wiki Classico
+classic=Classico
 clear-all=Elimina Tutti
 clear-cache=Pulisci Cache
 clear-content-cached-across-the-cluster=Pulisci il contenuto nella cache su tutti i cluster.

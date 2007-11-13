@@ -735,6 +735,7 @@ city-state=Ciudad, Estado
 city=Ciudad
 class=Clase
 classic-wiki=Wiki clásico
+classic=Clásico
 clear-all=Limpiar todo
 clear-cache=Vaciar caché
 clear-content-cached-across-the-cluster=Contenido claro depositado a través del racimo.

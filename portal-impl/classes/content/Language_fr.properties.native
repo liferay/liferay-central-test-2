@@ -735,6 +735,7 @@ city-state=Ville/Région
 city=Ville
 class=Classe
 classic-wiki=langage Wiki
+classic=Classique
 clear-all=Tout effacer
 clear-cache=Cachette Claire
 clear-content-cached-across-the-cluster=Contenu clair caché à travers le faisceau.

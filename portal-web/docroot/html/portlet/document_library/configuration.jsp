@@ -68,10 +68,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 <table class="liferay-table">
 <tr>
 	<td>
-		<liferay-ui:message key="default" />
+		<liferay-ui:message key="classic" />
 	</td>
 	<td>
-		<input <%= (DLUtil.DEFAULT_VIEW.equals(folderDisplayStyle)) ? "checked" : "" %> name="<portlet:namespace />folderDisplayStyle" type="radio" value="<%= DLUtil.DEFAULT_VIEW %>" />
+		<input <%= folderDisplayStyle.equals("classic") ? "checked" : "" %> name="<portlet:namespace />folderDisplayStyle" type="radio" value="classic" />
 	</td>
 </tr>
 <tr>
@@ -79,7 +79,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<liferay-ui:message key="tree-view" />
 	</td>
 	<td>
-		<input <%= (DLUtil.TREE_VIEW.equals(folderDisplayStyle)) ? "checked" : "" %> name="<portlet:namespace />folderDisplayStyle" type="radio" value="<%= DLUtil.TREE_VIEW %>" />
+		<input <%= folderDisplayStyle.equals("tree") ? "checked" : "" %> name="<portlet:namespace />folderDisplayStyle" type="radio" value="tree" />
 	</td>
 </tr>
 </table>

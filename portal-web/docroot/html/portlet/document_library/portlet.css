@@ -16,54 +16,54 @@
 
 /* This CSS sets the default styles for the windows explorer display style. */
 
-.dl-col-folders {
+.document-library-col-folders {
 	left: 45%;
 	line-height: 20px;
 	overflow: hidden;
 	position: absolute;
 }
 
-.dl-col-documents {
+.document-library-col-documents {
 	left: 65%;
 	line-height: 20px;
 	overflow: hidden;
 	position: absolute;
 }
 
-.dl-col-name {
+.document-library-col-name {
 	left: 12px;
 	line-height: 20px;
 	position: absolute;
 }
 
-.dl-folder-image {
+.document-library-folder-image {
 	cursor: pointer;
 	padding-top: 2px;
 	vertical-align: bottom;
 }
 
-.dl-expand-image {
+.document-library-expand-image {
 	cursor: pointer;
 	padding-top: 2px;
 	vertical-align: length;
 }
 
-.ie .dl-folder-image,.ie .dl-expand-image {
+.ie .document-library-folder-image,.ie .document-library-expand-image {
 	vertical-align: middle;
 }
 
-.dl-header {
+.document-library-header {
 	background-color: #E6E6E6;
 	font-weight: bold;
 	line-height: 20px;
 	height: 20px;
 }
 
-.dl-list-item {
+.document-library-list-item {
 	padding: 8px 0 0 20px;
 }
 
-.dl-top-row {
+.document-library-top-row {
 	border-bottom: 1px solid #E6E6E6;
 	padding: 5px 0 8px 0;
 }

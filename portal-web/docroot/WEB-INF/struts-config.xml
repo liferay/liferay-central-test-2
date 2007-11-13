@@ -359,7 +359,11 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
+		<action path="/document_library/folder_action_ajax" forward="/portlet/document_library/folder_action_ajax.jsp" />
+
 		<action path="/document_library/get_file" type="com.liferay.portlet.documentlibrary.action.GetFileAction" />
+
+		<action path="/document_library/get_folders" type="com.liferay.portlet.documentlibrary.action.GetFoldersAction" />
 
 		<action path="/document_library/rate_file_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
@@ -392,10 +396,6 @@
 			<forward name="portlet.document_library.edit_file_shortcut" path="portlet.document_library.edit_file_shortcut" />
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
-
-		<action path="/document_library/get_folders" type="com.liferay.portlet.documentlibrary.action.GetFoldersAction" />
-
-		<action path="/document_library/icon_menu" forward="/portlet/document_library/ajax_folder_action.jsp" />
 
 		<!-- Document Library Display -->
 

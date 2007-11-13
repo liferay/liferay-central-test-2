@@ -79,7 +79,7 @@ if (rootFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 	}
 }
 
-String folderDisplayStyle = PrefsParamUtil.getString(prefs, request, "folderDisplayStyle", DLUtil.DEFAULT_VIEW);
+String folderDisplayStyle = PrefsParamUtil.getString(prefs, request, "folderDisplayStyle", "classic");
 
 boolean showBreadcrumbs = PrefsParamUtil.getBoolean(prefs, request, "showBreadcrumbs", true);
 boolean showFoldersSearch = PrefsParamUtil.getBoolean(prefs, request, "showFoldersSearch", true);

@@ -733,6 +733,7 @@ city-state=都市, 国家
 city=都市
 class=クラス
 classic-wiki=古典的なWiki
+classic=古典的
 clear-all=すべてを取り除きなさい
 clear-cache=明確な隠し場所
 clear-content-cached-across-the-cluster=集りを渡って貯蔵される明確な内容。

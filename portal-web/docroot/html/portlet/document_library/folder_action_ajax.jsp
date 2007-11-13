@@ -25,13 +25,11 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-DLFolder curFolder = null;
+String redirect = ParamUtil.getString(request, "ajaxRedirect");
 
 long folderId = ParamUtil.getLong(request, "folderId");
 
-curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
-
-currentURL = ParamUtil.getString(request, "ajaxRedirect");
+DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
 %>
 
-<%@ include file="/html/portlet/document_library/default_folder_action.jspf" %>
+<%@ include file="/html/portlet/document_library/folder_action_common.jsp" %>

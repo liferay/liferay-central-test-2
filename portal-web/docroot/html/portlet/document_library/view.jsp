@@ -80,7 +80,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		</c:if>
 
 		<c:choose>
-			<c:when test="<%= DLUtil.DEFAULT_VIEW.equals(folderDisplayStyle) %>">
+			<c:when test='<%= folderDisplayStyle.equals("classic") %>'>
 				<c:if test="<%= showSubfolders %>">
 
 					<%
@@ -178,7 +178,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					</c:if>
 				</c:if>
 			</c:when>
-			<c:when test="<%= DLUtil.TREE_VIEW.equals(folderDisplayStyle) %>">
+			<c:otherwise>
 
 				<%
 				List folders = DLFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), folderId);
@@ -204,10 +204,11 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				</c:if>
 
 				<c:if test="<%= folders.size() > 0 %>">
-					<link type="text/css" rel="stylesheet" href="/html/portlet/document_library/dl.css">
+					<link type="text/css" rel="stylesheet" href="<%= themeDisplay.getPathContext() %>/html/portlet/document_library/portlet.css">
+
 					<style type="text/css">
 
-						/* This CSS fixes the display of the liferay-actions-menu button. It must be included in view.jsp to work correctly in the Freeform layout on IE6 */
+						/* This CSS fixes the display of the liferay-actions-menu button. It must be included in view.jsp to work correctly in the Freeform layout on IE6. */
 
 						.lfr-actions {
 							display: inline;
@@ -224,10 +225,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					<br />
 
 					<ul>
-						<li class="dl-header">
-							<span class="dl-col-name"><%= LanguageUtil.get(locale, "name") %></span>
-							<span class="dl-col-folders"><%= LanguageUtil.get(locale, "folders") %></span>
-							<span class="dl-col-documents"><%= LanguageUtil.get(locale, "documents") %></span>
+						<li class="document-library-header">
+							<span class="document-library-col-name"><liferay-ui:message key="name" /></span>
+							<span class="document-library-col-folders"><liferay-ui:message key="num-of-folders" /></span>
+							<span class="document-library-col-documents"><liferay-ui:message key="num-of-documents" /></span>
 						</li>
 
 						<%
@@ -235,10 +236,12 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 						folderURL.setParameter("struts_action", "/document_library/view");
 
-						DLFolder curFolder = null;
-
 						for (int i = 0; i < folders.size(); i++) {
-							curFolder = (DLFolder)folders.get(i);
+							DLFolder curFolder = (DLFolder)folders.get(i);
+
+							ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
+
+							request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW, row);
 
 							List subfolderIds = new ArrayList();
 
@@ -252,14 +255,18 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 							folderURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 						%>
 
-						<li class="dl-top-row">
-							<img border="0" class="dl-expand-image" height="9" hspace="0" id="<portlet:namespace />expand-image-<%= curFolder.getFolderId() %>" onclick="<portlet:namespace />getFolders(this.id);" src="/html/portlet/document_library/plus.gif" vspace="0" width="9" />
-							<img border="0" class="dl-folder-image" height="16" hspace="0" id="<portlet:namespace />folder-image-<%= curFolder.getFolderId() %>" onclick="<portlet:namespace />getFolders(this.id);" src="/html/js/editor/fckeditor/editor/filemanager/browser/default/images/Folder.gif" vspace="0" width="16" />
-							<a href="<%= folderURL %>"><%= curFolder.getName() %></a>
-							<span class="dl-col-folders"><%= foldersCount %></span>
-							<span class="dl-col-documents"><%= fileEntriesCount %></span>
+						<li class="document-library-top-row">
+							<img border="0" class="document-library-expand-image" hspace="0" id="<portlet:namespace />expand-image-<%= curFolder.getFolderId() %>" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/plus.png" vspace="0" />
 
-							<%@ include file="/html/portlet/document_library/default_folder_action.jspf" %>
+							<img border="0" class="document-library-folder-image" hspace="0" id="<portlet:namespace />folder-image-<%= curFolder.getFolderId() %>" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder.png" vspace="0" />
+
+							<a href="<%= folderURL %>"><%= curFolder.getName() %></a>
+
+							<span class="document-library-col-folders"><%= foldersCount %></span>
+
+							<span class="document-library-col-documents"><%= fileEntriesCount %></span>
+
+							<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
 						</li>
 
 						<%
@@ -273,14 +280,98 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 					actionMenuURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 
-					actionMenuURL.setParameter("struts_action", "/document_library/icon_menu");
+					actionMenuURL.setParameter("struts_action", "/document_library/folder_action_ajax");
 					actionMenuURL.setParameter("folderId", "");
 
 					folderURL.setParameter("folderId", "");
 					%>
 
-					<%@ include file="/html/portlet/document_library/dl_js.jspf" %>
+					<script type="text/javascript">
+						function <portlet:namespace />getFolders(imageId) {
+							var folderId = imageId.substr(imageId.lastIndexOf('-') + 1);
 
+							var expandImage = jQuery('#<portlet:namespace />expand-image-' + folderId);
+							var folderImage = jQuery('#<portlet:namespace />folder-image-' + folderId);
+
+							jQuery.getJSON(
+								themeDisplay.getPathMain() + '/document_library/get_folders',
+								{groupId: '<%= portletGroupId %>', folderId: '"' + folderId + '"'},
+								function(json) {
+									if (json.length > 0) {
+										var ulId = '<portlet:namespace />ul-' + json[0].parentFolderId;
+
+										expandImage.parent('li').append('<ul id="' + ulId + '"></ul>');
+
+										var ul = jQuery('#' + ulId);
+										var folderURL = '<%= folderURL %>';
+										var actionMenuURL = '<%= actionMenuURL %>';
+
+										for (var i = 0; i < json.length; i++) {
+											ul.append(
+												'<li class="document-library-list-item">' +
+													'<img border="0" class="document-library-expand-image" hspace="0" id="<portlet:namespace />expand-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/plus.png" vspace="0" />\n' +
+													'<img border="0" class="document-library-folder-image" hspace="0" id="<portlet:namespace />folder-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder.png" vspace="0" />\n' +
+													'<a href="' + folderURL + json[i].folderId + '">' + json[i].name + '</a>\n' +
+													'<span class="document-library-col-folders">' + json[i].subFoldersCount + '</span>\n' +
+													'<span class="document-library-col-documents">' + json[i].fileEntriesCount + '</span>\n' +
+													'<span id="span-' + json[i].folderId + '"></span>' +
+												'</li>'
+											);
+
+											jQuery('#span-' + json[i].folderId).load(actionMenuURL + json[i].folderId + '&<portlet:namespace />ajaxRedirect=' + folderURL, function() {
+												new Liferay.Menu(
+													{
+														trigger: '.lfr-trigger',
+														button: '.lfr-actions'
+													}
+												);
+											});
+										}
+									}
+
+									if (jQuery.browser.msie) {
+
+										// Must create a new element to change the onclick attribute for IE
+
+										expandImage.after(document.createElement('<img border="0" class="document-library-expand-image" hspace="0" id="<portlet:namespace />expand-image-' + folderId + '" onclick="<portlet:namespace />toggle(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/minus.png" vspace="0" />'));
+										expandImage.remove();
+
+										folderImage.after(document.createElement('<img border="0" class="document-library-folder-image" hspace="0" id="<portlet:namespace />folder-image-' + folderId + '" onclick="<portlet:namespace />toggle(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder_open.png" vspace="0" />'));
+										folderImage.remove();
+									}
+									else {
+										expandImage.attr("src", "<%= themeDisplay.getPathThemeImages() %>/trees/minus.png");
+										expandImage.attr("onclick", "<portlet:namespace />toggle(this.id);");
+
+										folderImage.attr("src", "<%= themeDisplay.getPathThemeImages() %>/common/folder_open.png");
+										folderImage.attr("onclick", "<portlet:namespace />toggle(this.id);");
+									}
+								}
+							);
+						}
+
+						function <portlet:namespace />toggle(imageId) {
+							var folderId = imageId.substr(imageId.lastIndexOf('-') + 1);
+
+							var selId = document.getElementById('<portlet:namespace />ul-' + folderId);
+
+							if (selId != null) {
+								var expandImage = jQuery('#<portlet:namespace />expand-image-' + folderId);
+								var folderImage = jQuery('#<portlet:namespace />folder-image-' + folderId);
+
+								if (selId.style.display == '') {
+									selId.style.display = 'none';
+									expandImage.attr('src', '<%= themeDisplay.getPathThemeImages() %>/trees/plus.png');
+									folderImage.attr('src', '<%= themeDisplay.getPathThemeImages() %>/common/folder.png');
+								}
+								else {
+									selId.style.display = '';
+									expandImage.attr('src', '<%= themeDisplay.getPathThemeImages() %>/trees/minus.png');
+									folderImage.attr('src', '<%= themeDisplay.getPathThemeImages() %>/common/folder_open.png');
+								}
+							}
+						}
+					</script>
 				</c:if>
 
 				<c:if test="<%= showAddFolderButton || showCurFolderSearch || (folders.size() > 0) %>">
@@ -288,8 +379,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				</c:if>
 
 				</form>
-
-			</c:when>
+			</c:otherwise>
 		</c:choose>
 
 		<table class="liferay-table">

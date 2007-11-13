@@ -735,6 +735,7 @@ city-state=城市, 州
 city=城市
 class=类
 classic-wiki=传统Wiki
+classic=经典
 clear-all=清除所有
 clear-cache=清除缓冲区
 clear-content-cached-across-the-cluster=清除各集群缓冲区的内容。
