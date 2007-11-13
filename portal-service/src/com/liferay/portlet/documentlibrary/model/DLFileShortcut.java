@@ -49,4 +49,9 @@ package com.liferay.portlet.documentlibrary.model;
  */
 public interface DLFileShortcut extends DLFileShortcutModel {
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
+
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
 }

@@ -22,11 +22,13 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
@@ -144,8 +146,17 @@ public class DLFileEntryImpl
 		return sm.toString();
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	private static Log _log = LogFactory.getLog(DLFileEntryImpl.class);
 
 	private Properties _extraSettingsProperties = null;
+	private String _userUuid;
 
 }

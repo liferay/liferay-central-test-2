@@ -62,4 +62,9 @@ public interface DLFileEntry extends DLFileEntryModel {
 		java.util.Properties extraSettingsProperties);
 
 	public java.lang.String getLuceneProperties();
+
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
 }

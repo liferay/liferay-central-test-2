@@ -154,6 +154,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
+					folder.setUserUuid(folder.getUserUuid());
+
 					List folderEntries = DLFileEntryUtil.findByFolderId(
 						folder.getFolderId());
 
@@ -192,6 +194,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
+					entry.setUserUuid(entry.getUserUuid());
+
 					context.addRatingsEntries(
 						DLFileEntry.class, entry.getPrimaryKeyObj());
 
@@ -235,6 +239,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 					itr.remove();
 				}
+				else {
+					shortcut.setUserUuid(shortcut.getUserUuid());
+				}
 			}
 
 			xml = xStream.toXML(shortcuts);
@@ -256,6 +263,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 						DLFileRank.class, rank.getPrimaryKeyObj())) {
 
 					itr.remove();
+				}
+				else {
+					rank.setUserUuid(rank.getUserUuid());
 				}
 			}
 
@@ -412,6 +422,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			Map entryNames, DLFileEntry entry)
 		throws Exception {
 
+		long userId = context.getUserId(entry.getUserUuid());
+
 		Long folderId = (Long)folderPKs.get(new Long(entry.getFolderId()));
 
 		if (folderId == null) {
@@ -438,15 +450,15 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingEntry == null) {
 					existingEntry = DLFileEntryLocalServiceUtil.addFileEntry(
-						entry.getUuid(), entry.getUserId(),
-						folderId.longValue(), entry.getName(),
-						entry.getTitle(), entry.getDescription(), tagsEntries,
+						entry.getUuid(), userId, folderId.longValue(),
+						entry.getName(), entry.getTitle(),
+						entry.getDescription(), tagsEntries,
 						entry.getExtraSettings(), byteArray,
 						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
 					existingEntry = DLFileEntryLocalServiceUtil.updateFileEntry(
-						entry.getUserId(), existingEntry.getFolderId(),
+						userId, existingEntry.getFolderId(),
 						folderId.longValue(), existingEntry.getName(),
 						entry.getName(), entry.getTitle(),
 						entry.getDescription(), tagsEntries,
@@ -455,7 +467,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			}
 			else {
 				existingEntry = DLFileEntryLocalServiceUtil.addFileEntry(
-					entry.getUserId(), folderId.longValue(), entry.getName(),
+					userId, folderId.longValue(), entry.getName(),
 					entry.getTitle(), entry.getDescription(), tagsEntries,
 					entry.getExtraSettings(), byteArray,
 					addCommunityPermissions, addGuestPermissions);
@@ -479,6 +491,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			DLFolder folder)
 		throws Exception {
 
+		long userId = context.getUserId(folder.getUserUuid());
 		long plid = context.getPlid();
 
 		Long parentFolderId = (Long)folderPKs.get(
@@ -506,7 +519,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingFolder == null) {
 					existingFolder = DLFolderLocalServiceUtil.addFolder(
-						folder.getUuid(), folder.getUserId(), plid,
+						folder.getUuid(), userId, plid,
 						parentFolderId.longValue(), folder.getName(),
 						folder.getDescription(), addCommunityPermissions,
 						addGuestPermissions);
@@ -520,9 +533,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			}
 			else {
 				existingFolder = DLFolderLocalServiceUtil.addFolder(
-					folder.getUserId(), plid, parentFolderId.longValue(),
-					folder.getName(), folder.getDescription(),
-					addCommunityPermissions, addGuestPermissions);
+					userId, plid, parentFolderId.longValue(), folder.getName(),
+					folder.getDescription(), addCommunityPermissions,
+					addGuestPermissions);
 			}
 
 			folderPKs.put(
@@ -540,6 +553,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			DLFileRank rank)
 		throws Exception {
 
+		long userId = context.getUserId(rank.getUserUuid());
+
 		Long folderId = (Long)folderPKs.get(new Long(rank.getFolderId()));
 
 		if (folderId == null) {
@@ -556,7 +571,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			DLFolderUtil.findByPrimaryKey(folderId.longValue());
 
 			DLFileRankLocalServiceUtil.updateFileRank(
-				context.getGroupId(), context.getCompanyId(), rank.getUserId(),
+				context.getGroupId(), context.getCompanyId(), userId,
 				folderId.longValue(), name);
 		}
 		catch (NoSuchFolderException nsfe) {
@@ -569,6 +584,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, boolean mergeData, Map folderPKs,
 			Map entryNames, DLFileShortcut shortcut)
 		throws Exception {
+
+		long userId = context.getUserId(shortcut.getUserUuid());
 
 		Long folderId = (Long)folderPKs.get(new Long(shortcut.getFolderId()));
 
@@ -603,22 +620,20 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingShortcut == null) {
 					DLFileShortcutLocalServiceUtil.addFileShortcut(
-						shortcut.getUuid(), shortcut.getUserId(),
-						folderId.longValue(), toFolderId.longValue(),
-						toName, addCommunityPermissions, addGuestPermissions);
+						shortcut.getUuid(), userId, folderId.longValue(),
+						toFolderId.longValue(), toName, addCommunityPermissions,
+						addGuestPermissions);
 				}
 				else {
 					DLFileShortcutLocalServiceUtil.updateFileShortcut(
-						shortcut.getUserId(),
-						existingShortcut.getFileShortcutId(),
+						userId, existingShortcut.getFileShortcutId(),
 						folderId.longValue(), toFolderId.longValue(), toName);
 				}
 			}
 			else {
 				DLFileShortcutLocalServiceUtil.addFileShortcut(
-					shortcut.getUserId(), folderId.longValue(),
-					toFolderId.longValue(), toName, addCommunityPermissions,
-					addGuestPermissions);
+					userId, folderId.longValue(), toFolderId.longValue(),
+					toName, addCommunityPermissions, addGuestPermissions);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {

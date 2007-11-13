@@ -57,4 +57,9 @@ public interface DLFolder extends DLFolderModel {
 	public java.lang.String[] getPathArray()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
 }
