@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.imagegallery.model.impl;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 
 /**
@@ -45,5 +47,15 @@ public class IGFolderImpl extends IGFolderModelImpl implements IGFolder {
 			return false;
 		}
 	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
+	private String _userUuid;
 
 }

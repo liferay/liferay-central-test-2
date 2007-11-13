@@ -136,6 +136,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
+					folder.setUserUuid(folder.getUserUuid());
+
 					List folderIGImages = IGImageUtil.findByFolderId(
 						folder.getFolderId());
 
@@ -166,6 +168,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 					itr.remove();
 				}
 				else {
+					igImage.setUserUuid(igImage.getUserUuid());
+
 					Image largeImage = ImageUtil.fetchByPrimaryKey(
 						igImage.getLargeImageId());
 
@@ -321,6 +325,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			IGFolder folder)
 		throws Exception {
 
+		long userId = context.getUserId(folder.getUserUuid());
 		long plid = context.getPlid();
 
 		Long parentFolderId = (Long)folderPKs.get(
@@ -348,7 +353,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingFolder == null) {
 					existingFolder = IGFolderLocalServiceUtil.addFolder(
-						folder.getUuid(), folder.getUserId(), plid,
+						folder.getUuid(), userId, plid,
 						parentFolderId.longValue(), folder.getName(),
 						folder.getDescription(), addCommunityPermissions,
 						addGuestPermissions);
@@ -362,9 +367,9 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			}
 			else {
 				existingFolder = IGFolderLocalServiceUtil.addFolder(
-					folder.getUserId(), plid, parentFolderId.longValue(),
-					folder.getName(), folder.getDescription(),
-					addCommunityPermissions, addGuestPermissions);
+					userId, plid, parentFolderId.longValue(), folder.getName(),
+					folder.getDescription(), addCommunityPermissions,
+					addGuestPermissions);
 			}
 
 			folderPKs.put(
@@ -381,6 +386,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, boolean mergeData, Map folderPKs,
 			Map imagesPKs, IGImage igImage)
 		throws Exception {
+
+		long userId = context.getUserId(igImage.getUserUuid());
 
 		Long folderId = (Long)folderPKs.get(new Long(igImage.getFolderId()));
 
@@ -422,23 +429,23 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (existingImage == null) {
 					IGImageLocalServiceUtil.addImage(
-						igImage.getUuid(), igImage.getUserId(),
-						folderId.longValue(), igImage.getDescription(),
-						imageFile, image.getType(), tagsEntries,
-						addCommunityPermissions, addGuestPermissions);
+						igImage.getUuid(), userId, folderId.longValue(),
+						igImage.getDescription(), imageFile, image.getType(),
+						tagsEntries, addCommunityPermissions,
+						addGuestPermissions);
 				}
 				else {
 					IGImageLocalServiceUtil.updateImage(
-						igImage.getUserId(), existingImage.getImageId(),
+						userId, existingImage.getImageId(),
 						folderId.longValue(), igImage.getDescription(),
 						imageFile, image.getType(), tagsEntries);
 				}
 			}
 			else {
 				IGImageLocalServiceUtil.addImage(
-					igImage.getUserId(), folderId.longValue(),
-					igImage.getDescription(), imageFile, image.getType(),
-					tagsEntries, addCommunityPermissions, addGuestPermissions);
+					userId, folderId.longValue(), igImage.getDescription(),
+					imageFile, image.getType(), tagsEntries,
+					addCommunityPermissions, addGuestPermissions);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
