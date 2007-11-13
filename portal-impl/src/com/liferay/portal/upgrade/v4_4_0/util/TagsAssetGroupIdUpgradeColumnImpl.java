@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_4_0.util;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.util.PortalUtil;
@@ -79,6 +81,9 @@ public class TagsAssetGroupIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			try {
 				newGroupId = new Long(
 					getGroupId(className, classPK.longValue()));
+			}
+			catch (PortalException pe) {
+				throw new StagnantRowException(pe.getMessage(), pe);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
