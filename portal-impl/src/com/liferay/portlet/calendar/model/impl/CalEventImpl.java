@@ -71,6 +71,14 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 	public CalEventImpl() {
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public void setRecurrence(String recurrence) {
 		_recurrenceObj = null;
 
@@ -142,16 +150,8 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 
 		super.setRecurrence(Base64.objectToString(recurrenceObj));
 	}
-	
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
 
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
-	}
-
-	private Recurrence _recurrenceObj = null;
 	private String _userUuid;
+	private Recurrence _recurrenceObj = null;
 
 }

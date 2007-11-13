@@ -271,9 +271,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				importEntry(context, mergeData, folderPKs, entry);
 			}
 
-			// No special modification to the incoming portlet preferences
-			// needed
-
 			return null;
 		}
 		catch (Exception e) {

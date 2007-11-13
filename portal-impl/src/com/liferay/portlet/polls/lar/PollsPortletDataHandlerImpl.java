@@ -326,9 +326,6 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 				}
 			}
 
-			// No special modification to the incoming portlet preferences
-			// needed
-
 			return null;
 		}
 		catch (Exception e) {

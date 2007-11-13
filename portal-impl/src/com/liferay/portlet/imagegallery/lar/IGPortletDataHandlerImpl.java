@@ -309,9 +309,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 					context, mergeData, folderPKs, imagesPKs, igImage);
 			}
 
-			// No special modification to the incoming portlet preferences
-			// needed
-
 			return null;
 		}
 		catch (Exception e) {
