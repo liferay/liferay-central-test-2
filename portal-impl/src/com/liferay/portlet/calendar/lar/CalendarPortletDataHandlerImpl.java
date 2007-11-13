@@ -287,7 +287,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		else {
 			CalEventLocalServiceUtil.addEvent(
 				userId, plid, event.getTitle(), event.getDescription(),
-				startDateMonth, startDateDay, startDateYear, startDateHour, 
+				startDateMonth, startDateDay, startDateYear, startDateHour,
 				startDateMinute, endDateMonth, endDateDay, endDateYear,
 				event.getDurationHour(), event.getDurationMinute(),
 				event.getAllDay(), event.getTimeZoneSensitive(),
