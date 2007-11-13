@@ -512,8 +512,7 @@ public class PortalLDAPUtil {
 				birthdayMonth, birthdayDay, birthdayYear, contact.getSmsSn(),
 				contact.getAimSn(), contact.getIcqSn(), contact.getJabberSn(),
 				contact.getMsnSn(), contact.getSkypeSn(), contact.getYmSn(),
-				jobTitle, user.getOrganization().getOrganizationId(),
-				user.getLocation().getOrganizationId());
+				jobTitle, user.getOrganizationIds());
 		}
 		catch (NoSuchUserException nsue) {
 
