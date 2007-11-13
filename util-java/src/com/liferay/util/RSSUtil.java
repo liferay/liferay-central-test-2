@@ -47,9 +47,9 @@ public class RSSUtil {
 
 	public static final double[] ATOM_VERSIONS = new double[] {0.3, 1.0};
 
-	public static final String DEFAULT_TYPE = RSS;
+	public static final String DEFAULT_TYPE = ATOM;
 
-	public static final double DEFAULT_VERSION = 2.0;
+	public static final double DEFAULT_VERSION = 1.0;
 
 	public static String export(SyndFeed feed)
 		throws FeedException, IOException {
