@@ -27,7 +27,7 @@
 <html>
 <head>
 	<title></title>
-	<meta content="0; url=<%= PortalUtil.getPathMain() %>" http-equiv="refresh">
+	<meta content="0; url=<%= PortalUtil.getPathMain() %>" http-equiv="refresh" />
 </head>
 
 <body onload="javascript:location.replace('<%= PortalUtil.getPathMain() %>')">
