@@ -2109,14 +2109,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		for (int i = 0; i < organizationIds.length; i++) {
 			long organizationId = organizationIds[i];
 
-			Organization organization =
-				organizationPersistence.findByPrimaryKey(organizationId);
+			if (organizationId != 0) {
+				Organization organization =
+					organizationPersistence.findByPrimaryKey(organizationId);
 
-			if (organization.isRegular()) {
-				regularOrganizations.add(organization);
-			}
-			else {
-				locations.add(organization);
+				if (organization.isRegular()) {
+					regularOrganizations.add(organization);
+				}
+				else {
+					locations.add(organization);
+				}
 			}
 		}
 
