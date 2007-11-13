@@ -36,7 +36,7 @@ if (ctx == null) {
 	return;
 }
 
-NamingEnumeration enu = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ctx);
+NamingEnumeration enu = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ctx, 20);
 
 Properties userMappings = PortalLDAPUtil.getUserMappings(themeDisplay.getCompanyId());
 %>
@@ -124,9 +124,6 @@ while (enu.hasMore()) {
 	</tr>
 
 <%
-	if (counter == 20) {
-		break;
-	}
 }
 
 if (counter == 0) {

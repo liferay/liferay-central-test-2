@@ -36,7 +36,7 @@ if (ctx == null) {
 	return;
 }
 
-NamingEnumeration enu = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ctx);
+NamingEnumeration enu = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ctx, 20);
 
 Properties groupMappings = PortalLDAPUtil.getGroupMappings(themeDisplay.getCompanyId());
 %>
@@ -103,9 +103,6 @@ while (enu.hasMore()) {
 	</tr>
 
 <%
-	if (counter == 20) {
-		break;
-	}
 }
 
 if (counter == 0) {

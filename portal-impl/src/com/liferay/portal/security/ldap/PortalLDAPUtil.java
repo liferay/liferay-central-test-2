@@ -220,7 +220,8 @@ public class PortalLDAPUtil {
 		return groupMappings;
 	}
 
-	public static NamingEnumeration getGroups(long companyId, LdapContext ctx)
+	public static NamingEnumeration getGroups(
+			long companyId, LdapContext ctx, int maxResults)
 		throws Exception {
 
 		String groupDN = PrefsPropsUtil.getString(
@@ -228,7 +229,7 @@ public class PortalLDAPUtil {
 		String groupFilter = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER);
 		SearchControls cons = new SearchControls(
-			SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
+			SearchControls.SUBTREE_SCOPE, maxResults, 0, null, false, false);
 
 		return ctx.search(groupDN, groupFilter, cons);
 	}
@@ -272,7 +273,8 @@ public class PortalLDAPUtil {
 		return userMappings;
 	}
 
-	public static NamingEnumeration getUsers(long companyId, LdapContext ctx)
+	public static NamingEnumeration getUsers(
+			long companyId, LdapContext ctx, int maxResults)
 		throws Exception {
 
 		String userDN = PrefsPropsUtil.getString(
@@ -280,7 +282,7 @@ public class PortalLDAPUtil {
 		String userFilter = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
 		SearchControls cons = new SearchControls(
-			SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
+			SearchControls.SUBTREE_SCOPE, maxResults, 0, null, false, false);
 
 		return ctx.search(userDN, userFilter, cons);
 	}
@@ -326,7 +328,7 @@ public class PortalLDAPUtil {
 				companyId, PropsUtil.LDAP_IMPORT_METHOD);
 
 			if (importMethod.equals(IMPORT_BY_USER)) {
-				NamingEnumeration enu = getUsers(companyId, ctx);
+				NamingEnumeration enu = getUsers(companyId, ctx, 0);
 
 				// Loop through all LDAP users
 
@@ -338,7 +340,7 @@ public class PortalLDAPUtil {
 				}
 			}
 			else if (importMethod.equals(IMPORT_BY_GROUP)) {
-				NamingEnumeration enu = getGroups(companyId, ctx);
+				NamingEnumeration enu = getGroups(companyId, ctx, 0);
 
 				// Loop through all LDAP groups
 
