@@ -2109,7 +2109,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		for (int i = 0; i < organizationIds.length; i++) {
 			long organizationId = organizationIds[i];
 
-			if (organizationId != 0) {
+			if (organizationId > 0) {
 				Organization organization =
 					organizationPersistence.findByPrimaryKey(organizationId);
 
