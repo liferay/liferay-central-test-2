@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -111,7 +112,18 @@ public class EditEntryAction extends PortletAction {
 				redirect = newRedirect;
 			}
 
-			sendRedirect(req, res, redirect);
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			LayoutTypePortlet layoutTypePortlet =
+				themeDisplay.getLayoutTypePortlet();
+
+			if (layoutTypePortlet.hasPortletId(config.getPortletName())) {
+				sendRedirect(req, res, redirect);
+			}
+			else {
+				res.sendRedirect(redirect);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchCategoryException ||

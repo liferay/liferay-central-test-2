@@ -26,15 +26,25 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
 
+import java.util.Map;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -104,6 +114,23 @@ public class AssetPublisherUtil {
 		prefs.setValues("manual-entries", manualEntries);
 	}
 
+	public static void addRecentFolderId(
+		PortletRequest req, String className, long classPK) {
+
+		_getRecentFolderIds(req).put(className, new Long(classPK));
+	}
+
+	public static long getRecentFolderId(PortletRequest req, String className) {
+		Long classPK = (Long)_getRecentFolderIds(req).get(className);
+
+		if (classPK == null) {
+			return 0;
+		}
+		else {
+			return classPK.longValue();
+		}
+	}
+
 	private static String _assetConfiguration(String assetType, long assetId) {
 		String xml = null;
 
@@ -126,6 +153,28 @@ public class AssetPublisherUtil {
 		}
 
 		return xml;
+	}
+
+	private static Map _getRecentFolderIds(PortletRequest req) {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		HttpSession ses = httpReq.getSession();
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String key =
+			AssetPublisherUtil.class + "_" + themeDisplay.getPortletGroupId();
+
+		Map recentFolderIds = (Map)ses.getAttribute(key);
+
+		if (recentFolderIds == null) {
+			recentFolderIds = CollectionFactory.getHashMap();
+		}
+
+		ses.setAttribute(key, recentFolderIds);
+
+		return recentFolderIds;
 	}
 
 	private static Log _log = LogFactory.getLog(AssetPublisherUtil.class);

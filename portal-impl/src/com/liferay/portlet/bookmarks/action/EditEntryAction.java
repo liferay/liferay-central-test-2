@@ -25,8 +25,11 @@ package com.liferay.portlet.bookmarks.action;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
@@ -69,7 +72,20 @@ public class EditEntryAction extends PortletAction {
 				deleteEntry(req);
 			}
 
-			sendRedirect(req, res);
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			LayoutTypePortlet layoutTypePortlet =
+				themeDisplay.getLayoutTypePortlet();
+
+			if (layoutTypePortlet.hasPortletId(config.getPortletName())) {
+				sendRedirect(req, res);
+			}
+			else {
+				String redirect = ParamUtil.getString(req, "redirect");
+
+				res.sendRedirect(redirect);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchEntryException ||
@@ -158,6 +174,9 @@ public class EditEntryAction extends PortletAction {
 			BookmarksEntryServiceUtil.updateEntry(
 				entryId, folderId, name, url, comments, tagsEntries);
 		}
+
+		AssetPublisherUtil.addRecentFolderId(
+			req, BookmarksEntry.class.getName(), folderId);
 	}
 
 }

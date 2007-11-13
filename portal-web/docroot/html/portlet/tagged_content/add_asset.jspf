@@ -33,7 +33,7 @@ for (int i = 0; i < allAssetTypes.length; i++) {
 	}
 }
 
-PortletURL[] urls = getAddURLs(request, entries, assetTypes);
+PortletURL[] urls = getAddURLs(renderRequest, entries, assetTypes);
 %>
 
 <c:if test="<%= urls.length > 0 %>">
@@ -56,7 +56,7 @@ PortletURL[] urls = getAddURLs(request, entries, assetTypes);
 		while (itr.hasNext()) {
 			TagsAssetType assetType = (TagsAssetType)itr.next();
 
-			PortletURL url = getAddURL(request, entries, assetType.getClassName());
+			PortletURL url = getAddURL(renderRequest, entries, assetType.getClassName());
 
 			if (url != null) {
 		%>
@@ -72,7 +72,9 @@ PortletURL[] urls = getAddURLs(request, entries, assetTypes);
 </c:if>
 
 <%!
-public PortletURL getAddURL(HttpServletRequest req, String[] entries, String assetType) throws Exception {
+public PortletURL getAddURL(RenderRequest req, String[] entries, String assetType) throws Exception {
+	RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+
 	ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 	PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
@@ -81,35 +83,38 @@ public PortletURL getAddURL(HttpServletRequest req, String[] entries, String ass
 
 	if (assetType.equals(BlogsEntry.class.getName())) {
 		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
-			addURL = new PortletURLImpl(req, PortletKeys.BLOGS, themeDisplay.getPlid(), false);
+			addURL = new PortletURLImpl(reqImpl, PortletKeys.BLOGS, themeDisplay.getPlid(), false);
 
 			addURL.setParameter("struts_action", "/blogs/edit_entry");
 		}
 	}
 	else if (assetType.equals(BookmarksEntry.class.getName())) {
 		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.BOOKMARKS, ActionKeys.ADD_ENTRY)) {
-			addURL = new PortletURLImpl(req, PortletKeys.BOOKMARKS, themeDisplay.getPlid(), false);
+			addURL = new PortletURLImpl(reqImpl, PortletKeys.BOOKMARKS, themeDisplay.getPlid(), false);
 
 			addURL.setParameter("struts_action", "/bookmarks/edit_entry");
+			addURL.setParameter("folderId", String.valueOf(AssetPublisherUtil.getRecentFolderId(req, BookmarksEntry.class.getName())));
 		}
 	}
 	else if (assetType.equals(DLFileEntry.class.getName())) {
 		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.DOCUMENT_LIBRARY, ActionKeys.ADD_ENTRY)) {
-			addURL = new PortletURLImpl(req, PortletKeys.DOCUMENT_LIBRARY, themeDisplay.getPlid(), false);
+			addURL = new PortletURLImpl(reqImpl, PortletKeys.DOCUMENT_LIBRARY, themeDisplay.getPlid(), false);
 
 			addURL.setParameter("struts_action", "/document_library/edit_file_entry");
+			addURL.setParameter("folderId", String.valueOf(AssetPublisherUtil.getRecentFolderId(req, DLFileEntry.class.getName())));
 		}
 	}
 	else if (assetType.equals(IGImage.class.getName())) {
 		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.IMAGE_GALLERY, ActionKeys.ADD_IMAGE)) {
-			addURL = new PortletURLImpl(req, PortletKeys.IMAGE_GALLERY, themeDisplay.getPlid(), false);
+			addURL = new PortletURLImpl(reqImpl, PortletKeys.IMAGE_GALLERY, themeDisplay.getPlid(), false);
 
 			addURL.setParameter("struts_action", "/image_gallery/edit_image");
+			addURL.setParameter("folderId", String.valueOf(AssetPublisherUtil.getRecentFolderId(req, IGImage.class.getName())));
 		}
 	}
 	else if (assetType.equals(JournalArticle.class.getName())) {
 		if (PortletPermissionUtil.contains(permissionChecker, themeDisplay.getPlid(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE)) {
-			addURL = new PortletURLImpl(req, PortletKeys.JOURNAL, themeDisplay.getPlid(), false);
+			addURL = new PortletURLImpl(reqImpl, PortletKeys.JOURNAL, themeDisplay.getPlid(), false);
 
 			addURL.setParameter("struts_action", "/journal/edit_article");
 			addURL.setParameter("groupId", String.valueOf(themeDisplay.getLayout().getGroupId()));
@@ -138,7 +143,7 @@ public PortletURL getAddURL(HttpServletRequest req, String[] entries, String ass
 	return addURL;
 }
 
-public PortletURL[] getAddURLs(HttpServletRequest req, String[] entries, List assetTypes) throws Exception {
+public PortletURL[] getAddURLs(RenderRequest req, String[] entries, List assetTypes) throws Exception {
 	List urls = new ArrayList();
 
 	Iterator itr = assetTypes.iterator();

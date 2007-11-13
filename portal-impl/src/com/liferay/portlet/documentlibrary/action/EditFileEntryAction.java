@@ -244,6 +244,9 @@ public class EditFileEntryAction extends PortletAction {
 				sourceFileName, title, description, tagsEntries, extraSettings,
 				file);
 		}
+
+		AssetPublisherUtil.addRecentFolderId(
+			req, DLFileEntry.class.getName(), folderId);
 	}
 
 }

@@ -185,6 +185,9 @@ public class EditImageAction extends PortletAction {
 			IGImageServiceUtil.updateImage(
 				imageId, folderId, description, file, contentType, tagsEntries);
 		}
+
+		AssetPublisherUtil.addRecentFolderId(
+			req, IGImage.class.getName(), folderId);
 	}
 
 }
