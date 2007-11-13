@@ -36,7 +36,7 @@ if (ctx == null) {
 	return;
 }
 
-NamingEnumeration enu = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ctx, 20);
+NamingEnumeration enu = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ctx, SearchContainer.DEFAULT_DELTA);
 
 Properties userMappings = PortalLDAPUtil.getUserMappings(themeDisplay.getCompanyId());
 %>
@@ -45,7 +45,7 @@ Properties userMappings = PortalLDAPUtil.getUserMappings(themeDisplay.getCompany
 
 <br /><br />
 
-A small list of users has been displayed for your to review.
+<liferay-ui:message key="a-subset-of-users-has-been-displayed-for-you-to-review" />
 
 <br /><br />
 
@@ -74,22 +74,22 @@ while (enu.hasMore()) {
 				#
 			</th>
 			<th>
-				Screen Name
+				<liferay-ui:message key="screen-name" />
 			</th>
 			<th>
-				Email Address
+				<liferay-ui:message key="email-address" />
 			</th>
 			<th>
-				First Name
+				<liferay-ui:message key="first-name" />
 			</th>
 			<th>
-				Last Name
+				<liferay-ui:message key="last-name" />
 			</th>
 			<th>
-				Job Title
+				<liferay-ui:message key="job-title" />
 			</th>
 			<th>
-				Group
+				<liferay-ui:message key="group" />
 			</th>
 		</tr>
 
@@ -130,8 +130,8 @@ if (counter == 0) {
 %>
 
 	<tr>
-		<td colspan="6">
-			No Users Found
+		<td colspan="7">
+			<liferay-ui:message key="no-users-were-found" />
 		</td>
 	</tr>
 

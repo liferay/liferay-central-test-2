@@ -36,7 +36,7 @@ if (ctx == null) {
 	return;
 }
 
-NamingEnumeration enu = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ctx, 20);
+NamingEnumeration enu = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ctx, SearchContainer.DEFAULT_DELTA);
 
 Properties groupMappings = PortalLDAPUtil.getGroupMappings(themeDisplay.getCompanyId());
 %>
@@ -45,7 +45,7 @@ Properties groupMappings = PortalLDAPUtil.getGroupMappings(themeDisplay.getCompa
 
 <br /><br />
 
-A small list of groups has been displayed for your to review.
+<liferay-ui:message key="a-subset-of-groups-has-been-displayed-for-you-to-review" />
 
 <br /><br />
 
@@ -71,13 +71,13 @@ while (enu.hasMore()) {
 				#
 			</th>
 			<th>
-				Name
+				<liferay-ui:message key="name" />
 			</th>
 			<th>
-				Description
+				<liferay-ui:message key="description" />
 			</th>
 			<th>
-				Members
+				<liferay-ui:message key="members" />
 			</th>
 		</tr>
 
@@ -109,8 +109,8 @@ if (counter == 0) {
 %>
 
 	<tr>
-		<td colspan="6">
-			No Groups Found
+		<td colspan="4">
+			<liferay-ui:message key="no-groups-were-found" />
 		</td>
 	</tr>
 
