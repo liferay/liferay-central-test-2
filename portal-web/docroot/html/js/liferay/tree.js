@@ -10,6 +10,9 @@ var Tree = new Class({
 		instance.tree = null;
 		instance.treeHTML = '';
 		instance.treeId = params.treeId;
+		
+		instance.selectable = params.selectable || false;
+		instance.selectedNodes = params.selectedNodes || '';
 
 		Liferay.Publisher.register('tree');
 
@@ -31,10 +34,27 @@ var Tree = new Class({
 				var ls = (node.ls == 1) ? true : false;
 				var hasChildNode = instance.hasChildNode(node.id);
 				var isNodeOpen = instance.isNodeOpen(node.id);
+				var isNodeSelected = instance.isNodeSelected(node.id);
 
 				var plid = node.objId;
 
 				instance.treeHTML += '<li class="tree-item" id="_branchId_' + plid + '" rel="_nodeId_' + node.id + '">';
+				
+				if (instance.selectable) {
+					if (isNodeSelected) {
+						instance.treeHTML += instance.generateImage({
+							src: icons.checked,
+							className: 'select-state'
+						});
+					}
+					else {
+						instance.treeHTML += instance.generateImage({
+							src: icons.checkbox,
+							className: 'select-state'
+						});
+					}
+				}
+				
 				instance.treeHTML += '<a href="' + node.href + '">';
 				instance.treeHTML += instance.generateImage(icons.page);
 				instance.treeHTML += '<span>' + node.name + '</span>';
@@ -66,6 +86,7 @@ var Tree = new Class({
 		var instance = this;
 		var icons = instance.icons;
 		var openNodes = instance.openNodes;
+		var selectedNodes = instance.selectedNodes;
 		var outputEl = jQuery(instance.outputId);
 
 		var recursedNodes = [];
@@ -73,6 +94,10 @@ var Tree = new Class({
 		if (instance.nodes.length > 0) {
 			if (openNodes != null) {
 				instance.setOpenNodes();
+			}
+			
+			if (instance.selectable && selectedNodes != null) {
+				instance.setSelectedNodes();
 			}
 
 			var node = instance.nodes[0];
@@ -192,6 +217,21 @@ var Tree = new Class({
 				}
 			);
 
+			// Enable selectable
+
+			if (instance.selectable) {
+				jQuery('li.tree-item', treeEl).each(
+					function() {
+						instance._fixParentsOfSelected(this);	
+					}
+				);
+				jQuery('img.select-state', treeEl).click(
+					function() {
+						instance.select(this);
+					}
+				);
+			}
+
 			// Set drop zones
 
 			var droppableLinks = jQuery('li a', treeEl).not('#lfr-collapse, #lfr-expand');
@@ -285,6 +325,62 @@ var Tree = new Class({
 
 		return false;
 	},
+	
+	isNodeSelected: function(node) {
+		var instance = this;
+
+		for (i = 0; i < instance.selectedNodes.length; i++) {
+			if (instance.selectedNodes[i] == node) {
+				return true;
+			}
+		}
+
+		return false;
+	},
+	
+	select: function(obj) {
+		var instance = this;
+
+		if (obj.src.indexOf('spacer') < 0) {
+			var icons = instance.icons;
+			var treeIdSelected = instance.treeId + "Selected";
+
+			var selectedNode = false;
+
+			var currentLi = obj.parentNode;
+
+			var nodeId = currentLi.getAttribute('rel').replace(/_nodeId_/, '');
+			
+			if (instance._hasSelectedChildren(currentLi)) {
+				if (obj.getAttribute("src") == icons.checked) {
+					obj.src = icons.childChecked;
+				}
+				else {
+					obj.src = icons.checked;
+					selectedNode = true;
+				}
+			} else if (obj.getAttribute("src") == icons.checked) {
+				obj.src = icons.checkbox;
+			}
+			else {
+				obj.src = icons.checked;
+				selectedNode = true;
+			}
+			
+			instance._fixParentsOfSelected(currentLi);
+
+			jQuery.ajax(
+				{
+					url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
+					data: {
+						nodeId: nodeId,
+						openNode: selectedNode,
+						treeId: treeIdSelected
+					}
+				}
+			);
+		}
+	},
 
 	setOpenNodes: function() {
 		var instance = this;
@@ -292,6 +388,15 @@ var Tree = new Class({
 
 		if (openNodes != null) {
 			instance.openNodes = openNodes.split(',');
+		}
+	},
+
+	setSelectedNodes: function() {
+		var instance = this;
+		var selectedNodes = instance.selectedNodes;
+
+		if (selectedNodes != null) {
+			instance.selectedNodes = selectedNodes.split(',');
 		}
 	},
 
@@ -330,6 +435,39 @@ var Tree = new Class({
 				}
 			);
 		}
+	},
+	
+	_fixParentsOfSelected: function(currentLi) {
+		var instance = this;
+		
+		var parentLi = currentLi.parentNode.parentNode;
+		
+		if (parentLi.nodeName == 'LI' && parentLi.className != 'root-container') {
+			var icons = instance.icons;
+			var img = jQuery("> img.select-state", parentLi)[0];
+
+			if (instance._hasSelectedChildren(parentLi)) {
+				if (img.getAttribute("src") == icons.checkbox) {
+					img.src = icons.childChecked;
+				}				
+			}
+			else if (img.getAttribute("src") != icons.checked) {
+				img.src = icons.checkbox;
+			}
+			
+			instance._fixParentsOfSelected(parentLi);
+		}
+	},
+	
+	_hasSelectedChildren: function(currentLi) {
+		var checkedChildren = jQuery('> ul > li > img.select-state[@src*=checked]', currentLi);
+		var checkedCheckedChildren = jQuery('> ul > li > img.select-state[@src*=child-checked]', currentLi);
+
+		if (checkedChildren.size() > 0 || checkedCheckedChildren.size() > 0) {
+			return true;
+		}
+		
+		return false;
 	},
 
 	_navigationCallback: function(obj, type) {
