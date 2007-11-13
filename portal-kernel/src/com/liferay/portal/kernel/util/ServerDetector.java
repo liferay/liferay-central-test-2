@@ -65,7 +65,10 @@ public class ServerDetector {
 	public static final String SUN8_CLASS =
 		"/com/sun/enterprise/cli/framework/CLIMain.class";
 
-	public static final String TOMCAT_CLASS =
+	public static final String TOMCAT_BOOTSTRAP_CLASS =
+		"/org/apache/catalina/startup/Bootstrap.class";
+
+	public static final String TOMCAT_EMBEDDED_CLASS =
 		"/org/apache/catalina/startup/Embedded.class";
 
 	public static final String WEBLOGIC_CLASS = "/weblogic/Server.class";
@@ -279,7 +282,11 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._tomcat == null) {
-			sd._tomcat = _detect(TOMCAT_CLASS);
+			sd._tomcat = _detect(TOMCAT_BOOTSTRAP_CLASS);
+		}
+
+		if (sd._tomcat == null) {
+			sd._tomcat = _detect(TOMCAT_EMBEDDED_CLASS);
 		}
 
 		return sd._tomcat.booleanValue();
