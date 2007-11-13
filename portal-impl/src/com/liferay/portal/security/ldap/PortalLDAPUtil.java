@@ -220,6 +220,19 @@ public class PortalLDAPUtil {
 		return groupMappings;
 	}
 
+	public static NamingEnumeration getGroups(long companyId, LdapContext ctx)
+		throws Exception {
+	
+		String groupDN = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_GROUPS_DN);
+		String groupFilter = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER);
+		SearchControls cons = new SearchControls(
+			SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
+	
+		return ctx.search(groupDN, groupFilter, cons);
+	}
+	
 	public static Binding getUser(long companyId, String screenName)
 		throws Exception {
 
@@ -257,6 +270,19 @@ public class PortalLDAPUtil {
 		LogUtil.debug(_log, userMappings);
 
 		return userMappings;
+	}
+
+	public static NamingEnumeration getUsers(long companyId, LdapContext ctx)
+		throws Exception {
+
+		String userDN = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_USERS_DN);
+		String userFilter = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
+		SearchControls cons = new SearchControls(
+			SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
+
+		return ctx.search(userDN, userFilter, cons);
 	}
 
 	public static String getUsersDN(long companyId) throws Exception {
@@ -299,19 +325,8 @@ public class PortalLDAPUtil {
 			String importMethod = PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_IMPORT_METHOD);
 
-			String userDN = PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_USERS_DN);
-			String groupDN = PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_GROUPS_DN);
-			String userFilter = PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
-			String groupFilter = PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER);
-			SearchControls cons = new SearchControls(
-				SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
-
 			if (importMethod.equals(IMPORT_BY_USER)) {
-				NamingEnumeration enu = ctx.search(userDN, userFilter, cons);
+				NamingEnumeration enu = getUsers(companyId, ctx);
 
 				// Loop through all LDAP users
 
@@ -323,7 +338,7 @@ public class PortalLDAPUtil {
 				}
 			}
 			else if (importMethod.equals(IMPORT_BY_GROUP)) {
-				NamingEnumeration enu = ctx.search(groupDN, groupFilter, cons);
+				NamingEnumeration enu = getGroups(companyId, ctx);
 
 				// Loop through all LDAP groups
 
