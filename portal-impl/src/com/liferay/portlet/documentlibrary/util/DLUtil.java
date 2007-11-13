@@ -237,6 +237,10 @@ public class DLUtil {
 
 	private static final String _DEFAULT_FILE_EXTENSION = "page";
 
+	public static final String DEFAULT_VIEW = "0";
+
+	public static final String TREE_VIEW = "1";
+
 	private static DLUtil _instance = new DLUtil();
 
 	private Set _fileExtensions;

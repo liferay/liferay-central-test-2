@@ -1,0 +1,69 @@
+/* This CSS makes all the content scroll correctly when using position:absolute. */
+
+.portlet-content-container {
+	position: relative;
+}
+
+.ie .portlet-content-container {
+	height: 1%;
+}
+
+/* This CSS overrides the styles for the Actions button. */
+
+.lfr-actions.visible {
+	position: absolute;
+}
+
+/* This CSS sets the default styles for the windows explorer display style. */
+
+.dl-col-folders {
+	left: 45%;
+	line-height: 20px;
+	overflow: hidden;
+	position: absolute;
+}
+
+.dl-col-documents {
+	left: 65%;
+	line-height: 20px;
+	overflow: hidden;
+	position: absolute;
+}
+
+.dl-col-name {
+	left: 12px;
+	line-height: 20px;
+	position: absolute;
+}
+
+.dl-folder-image {
+	cursor: pointer;
+	padding-top: 2px;
+	vertical-align: bottom;
+}
+
+.dl-expand-image {
+	cursor: pointer;
+	padding-top: 2px;
+	vertical-align: length;
+}
+
+.ie .dl-folder-image,.ie .dl-expand-image {
+	vertical-align: middle;
+}
+
+.dl-header {
+	background-color: #E6E6E6;
+	font-weight: bold;
+	line-height: 20px;
+	height: 20px;
+}
+
+.dl-list-item {
+	padding: 8px 0 0 20px;
+}
+
+.dl-top-row {
+	border-bottom: 1px solid #E6E6E6;
+	padding: 5px 0 8px 0;
+}
