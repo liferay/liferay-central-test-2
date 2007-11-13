@@ -47,13 +47,15 @@
 			winHeight = document.body.clientHeight;
 		}
 
-		var iFrame = document.getElementById('iframe');
-
 		// The value 139 here is derived (tab_height * num_tab_levels) +
 		// height_of_banner + bottom_spacer. 139 just happend to work in
 		// this instance in IE and Firefox at the time.
 
-		iFrame.style.height = (winHeight - 139);
+		//var iFrame = document.getElementById('iframe');
+
+		//iFrame.style.height = (winHeight - 139);
+
+		jQuery("iframe").attr("height", winHeight - 139);
 	}
 
 	window.onresize = resizeIframe;
