@@ -107,6 +107,7 @@
 
 	<%
 	String login = LoginAction.getLogin(request, "login", company);
+	String passwordParam = SessionParameters.get(request, "password");
 	String password = StringPool.BLANK;
 	boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 	%>
@@ -125,17 +126,22 @@
 
 		<div class="ctrl-holder">
 			<label for="login"><liferay-ui:message key="login" /></label>
+
 			<input class="liferay-input-text" id="login" name="login" type="text" value="<%= login %>" />
 		</div>
 
 		<div class="ctrl-holder">
-			<label for='<%= SessionParameters.get(request, "password") %>'><liferay-ui:message key="password" /></label>
-			<input class="liferay-input-text" id="<%= SessionParameters.get(request, "password") %>" name="<%= SessionParameters.get(request, "password") %>" type="password" value="<%= password %>" />
+			<label for='<%= passwordParam %>'><liferay-ui:message key="password" /></label>
+
+			<input class="liferay-input-text" id="<%= passwordParam %>" name="<%= passwordParam %>" type="password" value="<%= password %>" />
+
+			<span id="passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
 		</div>
 
 		<c:if test="<%= company.isAutoLogin() && !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.SESSION_DISABLED)) %>">
 			<div class="ctrl-holder inline-label">
 				<label for="rememberMeCheckbox"><liferay-ui:message key="remember-me" /></label>
+
 				<input <%= rememberMe ? "checked=\"checked\"" : "" %> id="rememberMeCheckbox" type="checkbox" />
 			</div>
 		</c:if>
@@ -155,6 +161,7 @@
 
 			<div class="ctrl-holder">
 				<label for="openId"><liferay-ui:message key="open-id" /></label>
+
 				<input class="openid_login" id="openId" name="openId" style="width: 150px;" type="text" />
 			</div>
 
@@ -170,6 +177,12 @@
 <script type="text/javascript">
 	jQuery(
 		function() {
+			jQuery('#<%= passwordParam %>').keypress(
+				function(event) {
+					Liferay.Util.showCapsLock(event, 'passwordCapsLockSpan');
+				}
+			);
+
 			jQuery('#rememberMeCheckbox').click(
 				function() {
 					var checked = 'off';

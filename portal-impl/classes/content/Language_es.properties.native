@@ -672,6 +672,7 @@ calendar-of-events=Agenda de eventos
 call=Llamada
 cancel=Cancelar
 cannot-be-found=No se pudo encontrar {0}.
+caps-lock-is-on=La cerradura de casquillos está encendido.
 cart=Cesta de la compra
 cas=CAS
 categories=Categorías

@@ -672,6 +672,7 @@ calendar-of-events=Ημερολόγιο των γεγονότων
 call=Κλήση
 cancel=Άκυρο
 cannot-be-found=το{0} δεν μπορεί να βρεθεί
+caps-lock-is-on=Η κλειδαριά καλυμμάτων είναι ανοικτή.
 cart=Καλάθι
 cas=CAS
 categories=Κατηγορίες

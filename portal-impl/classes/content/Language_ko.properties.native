@@ -672,6 +672,7 @@ calendar-of-events=행사 일정표
 call=외침
 cancel=취소
 cannot-be-found={0} cannot be found.
+caps-lock-is-on=대문자 록은 켜져있는다.
 cart=손수레
 cas=CAS
 categories=종류
