@@ -222,17 +222,17 @@ public class PortalLDAPUtil {
 
 	public static NamingEnumeration getGroups(long companyId, LdapContext ctx)
 		throws Exception {
-	
+
 		String groupDN = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_GROUPS_DN);
 		String groupFilter = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER);
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
-	
+
 		return ctx.search(groupDN, groupFilter, cons);
 	}
-	
+
 	public static Binding getUser(long companyId, String screenName)
 		throws Exception {
 

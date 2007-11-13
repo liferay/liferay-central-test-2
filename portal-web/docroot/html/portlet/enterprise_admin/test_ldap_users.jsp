@@ -61,9 +61,9 @@ int counter = 0;
 while (enu.hasMore()) {
 	SearchResult result = (SearchResult)enu.next();
 	Attributes attrs = result.getAttributes();
-	
+
 	String screenName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("screenName")).toLowerCase();
-	String emailAddress = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("emailAddress"));		
+	String emailAddress = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("emailAddress"));
 	String firstName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("firstName"));
 	String lastName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("lastName"));
 	String jobTitle = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("jobTitle"));
@@ -80,7 +80,7 @@ while (enu.hasMore()) {
 			<th>Job Title</th>
 			<th>Group</th>
 		</tr>
-<%		
+<%
 	}
 
 	counter++;
@@ -94,7 +94,7 @@ while (enu.hasMore()) {
 			<td><%= jobTitle %></td>
 			<td><%= (attribute == null) ? "0" : attribute.size() %></td>
 		</tr>
-<%		
+<%
 	if (counter == 20) {
 		break;
 	}
