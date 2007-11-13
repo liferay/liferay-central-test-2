@@ -27,8 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -39,7 +37,6 @@ import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryServiceBaseImpl;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
-import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
 
 import com.sun.syndication.feed.synd.SyndContent;
@@ -321,8 +318,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 				link += "entryId=" + entry.getEntryId();
 			}
 
-			String firstLine = StringUtil.shorten(
-				Html.stripHtml(entry.getContent()), 200, StringPool.BLANK);
+			String value = entry.getContent();
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
@@ -333,8 +329,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 			SyndContent syndContent = new SyndContentImpl();
 
-			syndContent.setType(ContentTypes.TEXT_PLAIN);
-			syndContent.setValue(firstLine);
+			syndContent.setType(ContentTypes.TEXT_HTML);
+			syndContent.setValue(value);
 
 			syndEntry.setDescription(syndContent);
 
