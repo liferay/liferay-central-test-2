@@ -109,7 +109,12 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserUserGroupChecker" %>
+<%@ page import="com.liferay.util.ldap.LDAPUtil" %>
 
+<%@ page import="javax.naming.NamingEnumeration" %>
+<%@ page import="javax.naming.directory.Attribute" %>
+<%@ page import="javax.naming.directory.Attributes" %>
+<%@ page import="javax.naming.directory.SearchResult" %>
 <%@ page import="javax.naming.ldap.LdapContext" %>
 
 <%
