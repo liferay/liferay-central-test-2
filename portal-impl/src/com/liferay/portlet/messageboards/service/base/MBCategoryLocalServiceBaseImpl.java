@@ -113,6 +113,7 @@ public abstract class MBCategoryLocalServiceBaseImpl
 	public MBCategory addMBCategory(MBCategory model) throws SystemException {
 		MBCategory mbCategory = new MBCategoryImpl();
 		mbCategory.setNew(true);
+		mbCategory.setUuid(model.getUuid());
 		mbCategory.setCategoryId(model.getCategoryId());
 		mbCategory.setGroupId(model.getGroupId());
 		mbCategory.setCompanyId(model.getCompanyId());
@@ -143,6 +144,7 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		throws SystemException {
 		MBCategory mbCategory = new MBCategoryImpl();
 		mbCategory.setNew(false);
+		mbCategory.setUuid(model.getUuid());
 		mbCategory.setCategoryId(model.getCategoryId());
 		mbCategory.setGroupId(model.getGroupId());
 		mbCategory.setCompanyId(model.getCompanyId());

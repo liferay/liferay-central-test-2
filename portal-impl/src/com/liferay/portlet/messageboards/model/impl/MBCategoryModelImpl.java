@@ -57,6 +57,7 @@ import java.util.Date;
 public class MBCategoryModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBCategory";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "categoryId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
@@ -69,11 +70,14 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static String TABLE_SQL_CREATE = "create table MBCategory (categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,description STRING null,lastPostDate DATE null)";
+	public static String TABLE_SQL_CREATE = "create table MBCategory (uuid_ VARCHAR(75) null,categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,description STRING null,lastPostDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table MBCategory";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBCategory"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.messageboards.model.MBCategory.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBCategory.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -99,6 +103,16 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_categoryId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getCategoryId() {
@@ -242,6 +256,7 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		MBCategoryImpl clone = new MBCategoryImpl();
+		clone.setUuid(getUuid());
 		clone.setCategoryId(getCategoryId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
@@ -317,6 +332,7 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _categoryId;
 	private long _groupId;
 	private long _companyId;

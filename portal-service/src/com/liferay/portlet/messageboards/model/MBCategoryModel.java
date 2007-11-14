@@ -51,6 +51,10 @@ public interface MBCategoryModel extends BaseModel {
 
 	public void setPrimaryKey(long pk);
 
+	public String getUuid();
+
+	public void setUuid(String uuid);
+
 	public long getCategoryId();
 
 	public void setCategoryId(long categoryId);

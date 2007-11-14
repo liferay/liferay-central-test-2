@@ -75,7 +75,19 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addCategory(
-			userId, plid, parentCategoryId, name, description,
+			null, userId, plid, parentCategoryId, name, description,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public MBCategory addCategory(
+			String uuid, long userId, long plid, long parentCategoryId,
+			String name, String description, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addCategory(
+			uuid, userId, plid, parentCategoryId, name, description,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
@@ -87,13 +99,13 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addCategory(
-			userId, plid, parentCategoryId, name, description, null, null,
+			null, userId, plid, parentCategoryId, name, description, null, null,
 			communityPermissions, guestPermissions);
 	}
 
 	public MBCategory addCategory(
-			long userId, long plid, long parentCategoryId, String name,
-			String description, Boolean addCommunityPermissions,
+			String uuid, long userId, long plid, long parentCategoryId,
+			String name, String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -111,6 +123,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		MBCategory category = mbCategoryPersistence.create(categoryId);
 
+		category.setUuid(uuid);
 		category.setGroupId(groupId);
 		category.setCompanyId(user.getCompanyId());
 		category.setUserId(user.getUserId());

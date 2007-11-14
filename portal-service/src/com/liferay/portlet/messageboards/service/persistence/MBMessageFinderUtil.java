@@ -55,6 +55,12 @@ public class MBMessageFinderUtil {
 		return getFinder().findByNoAssets();
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessage findByUuid_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByUuid_G(uuid, groupId);
+	}
+
 	public static MBMessageFinder getFinder() {
 		return _getUtil()._finder;
 	}

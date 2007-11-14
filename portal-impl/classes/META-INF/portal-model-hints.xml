@@ -899,6 +899,7 @@
 		<field name="banUserId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBCategory">
+		<field name="uuid" type="String" />
 		<field name="categoryId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
@@ -920,6 +921,7 @@
 		<field name="threadId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBMessage">
+		<field name="uuid" type="String" />
 		<field name="messageId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />

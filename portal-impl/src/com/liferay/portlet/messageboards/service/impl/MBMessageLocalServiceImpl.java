@@ -190,9 +190,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		long parentMessageId = 0;
 
 		return addMessage(
-			userId, categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, priority, tagsEntries, prefs, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
+			null, userId, categoryId, threadId, parentMessageId, subject, body,
+			files, anonymous, priority, tagsEntries, prefs,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
 	}
 
 	public MBMessage addMessage(
@@ -203,8 +204,23 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addMessage(
-			userId, categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, priority, tagsEntries, prefs,
+			null, userId, categoryId, threadId, parentMessageId, subject, body,
+			files, anonymous, priority, tagsEntries, prefs,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public MBMessage addMessage(
+			String uuid, long userId, long categoryId, long threadId,
+			long parentMessageId, String subject, String body, List files,
+			boolean anonymous, double priority, String[] tagsEntries,
+			PortletPreferences prefs, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addMessage(
+			uuid, userId, categoryId, threadId, parentMessageId, subject, body,
+			files, anonymous, priority, tagsEntries, prefs,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
@@ -217,17 +233,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addMessage(
-			userId, categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, priority, tagsEntries, prefs, null, null,
+			null, userId, categoryId, threadId, parentMessageId, subject, body,
+			files, anonymous, priority, tagsEntries, prefs, null, null,
 			communityPermissions, guestPermissions);
 	}
 
 	public MBMessage addMessage(
-			long userId, long categoryId, long threadId, long parentMessageId,
-			String subject, String body, List files, boolean anonymous,
-			double priority, String[] tagsEntries, PortletPreferences prefs,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			String uuid, long userId, long categoryId, long threadId,
+			long parentMessageId, String subject, String body, List files,
+			boolean anonymous, double priority, String[] tagsEntries,
+			PortletPreferences prefs, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -256,6 +273,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = mbMessagePersistence.create(messageId);
 
+		message.setUuid(uuid);
 		message.setCompanyId(user.getCompanyId());
 		message.setUserId(user.getUserId());
 		message.setUserName(user.getFullName());

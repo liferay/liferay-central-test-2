@@ -24,6 +24,10 @@ alter table JournalStructure add uuid_ VARCHAR(75) null;
 
 alter table JournalTemplate add uuid_ VARCHAR(75) null;
 
+alter table MBCategory add uuid_ VARCHAR(75) null;
+
+alter table MBMessage add uuid_ VARCHAR(75) null;
+
 create table MembershipRequest (
 	membershipRequestId LONG not null primary key,
 	companyId LONG,

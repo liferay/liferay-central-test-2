@@ -46,7 +46,7 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
-	<entity name="MBCategory" local-service="true" remote-service="true">
+	<entity name="MBCategory" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -118,7 +118,7 @@
 			<finder-column name="classPK" />
 		</finder>
 	</entity>
-	<entity name="MBMessage" local-service="true" remote-service="true">
+	<entity name="MBMessage" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

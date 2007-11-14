@@ -51,6 +51,10 @@ public interface MBMessageModel extends BaseModel {
 
 	public void setPrimaryKey(long pk);
 
+	public String getUuid();
+
+	public void setUuid(String uuid);
+
 	public long getMessageId();
 
 	public void setMessageId(long messageId);

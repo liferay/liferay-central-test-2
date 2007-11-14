@@ -68,6 +68,8 @@ public class UpgradeUUID extends UpgradeProcess {
 		//upgradeTable("JournalArticleImage", "id_");
 		upgradeTable("JournalStructure", "id_");
 		upgradeTable("JournalTemplate", "id_");
+		upgradeTable("MBCategory", "categoryId");
+		upgradeTable("MBMessage", "messageId");
 		upgradeTable("PollsChoice", "choiceId");
 		upgradeTable("PollsQuestion", "questionId");
 		upgradeTable("User_", "userId");

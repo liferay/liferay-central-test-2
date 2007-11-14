@@ -56,9 +56,22 @@ public interface MBMessage extends MBMessageModel {
 
 	public boolean isDiscussion();
 
+	public double getPriority()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void setPriority(double priority);
+
 	public java.lang.String getThreadAttachmentsDir();
 
 	public java.lang.String getAttachmentsDir();
 
+	public void setAttachmentsDir(java.lang.String attachmentsDir);
+
 	public java.lang.String getBody(boolean translated);
+
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
 }

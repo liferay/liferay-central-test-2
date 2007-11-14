@@ -58,6 +58,7 @@ import java.util.Date;
 public class MBMessageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "MBMessage";
 	public static Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "messageId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
@@ -72,11 +73,14 @@ public class MBMessageModelImpl extends BaseModelImpl {
 			{ "attachments", new Integer(Types.BOOLEAN) },
 			{ "anonymous", new Integer(Types.BOOLEAN) }
 		};
-	public static String TABLE_SQL_CREATE = "create table MBMessage (messageId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN)";
+	public static String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table MBMessage";
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage"),
 			XSS_ALLOW);
+	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.uuid"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.userName"),
 			XSS_ALLOW_BY_MODEL);
@@ -102,6 +106,16 @@ public class MBMessageModelImpl extends BaseModelImpl {
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_messageId);
+	}
+
+	public String getUuid() {
+		return GetterUtil.getString(_uuid);
+	}
+
+	public void setUuid(String uuid) {
+		if ((uuid != null) && (uuid != _uuid)) {
+			_uuid = uuid;
+		}
 	}
 
 	public long getMessageId() {
@@ -270,6 +284,7 @@ public class MBMessageModelImpl extends BaseModelImpl {
 
 	public Object clone() {
 		MBMessageImpl clone = new MBMessageImpl();
+		clone.setUuid(getUuid());
 		clone.setMessageId(getMessageId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -345,6 +360,7 @@ public class MBMessageModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
+	private String _uuid;
 	private long _messageId;
 	private long _companyId;
 	private long _userId;

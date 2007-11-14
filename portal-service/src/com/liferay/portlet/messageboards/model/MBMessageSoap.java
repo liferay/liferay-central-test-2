@@ -48,6 +48,7 @@ import java.util.List;
 public class MBMessageSoap implements Serializable {
 	public static MBMessageSoap toSoapModel(MBMessage model) {
 		MBMessageSoap soapModel = new MBMessageSoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setMessageId(model.getMessageId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -85,6 +86,14 @@ public class MBMessageSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setMessageId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getMessageId() {
@@ -199,6 +208,7 @@ public class MBMessageSoap implements Serializable {
 		_anonymous = anonymous;
 	}
 
+	private String _uuid;
 	private long _messageId;
 	private long _companyId;
 	private long _userId;

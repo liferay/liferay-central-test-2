@@ -48,6 +48,11 @@ package com.liferay.portlet.messageboards.model;
  *
  */
 public interface MBCategory extends MBCategoryModel {
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
+
 	public boolean isRoot();
 
 	public boolean isDiscussion();

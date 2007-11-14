@@ -48,6 +48,7 @@ import java.util.List;
 public class MBCategorySoap implements Serializable {
 	public static MBCategorySoap toSoapModel(MBCategory model) {
 		MBCategorySoap soapModel = new MBCategorySoap();
+		soapModel.setUuid(model.getUuid());
 		soapModel.setCategoryId(model.getCategoryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -83,6 +84,14 @@ public class MBCategorySoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setCategoryId(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getCategoryId() {
@@ -173,6 +182,7 @@ public class MBCategorySoap implements Serializable {
 		_lastPostDate = lastPostDate;
 	}
 
+	private String _uuid;
 	private long _categoryId;
 	private long _groupId;
 	private long _companyId;

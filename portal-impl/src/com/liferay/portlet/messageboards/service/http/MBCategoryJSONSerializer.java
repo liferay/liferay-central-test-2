@@ -52,6 +52,7 @@ import java.util.List;
 public class MBCategoryJSONSerializer {
 	public static JSONObject toJSONObject(MBCategory model) {
 		JSONObject jsonObj = new JSONObject();
+		JSONUtil.put(jsonObj, "uuid", model.getUuid());
 		JSONUtil.put(jsonObj, "categoryId", model.getCategoryId());
 		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
 		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());

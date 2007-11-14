@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBBan;
 
 /**
@@ -34,5 +36,24 @@ public class MBBanImpl extends MBBanModelImpl implements MBBan {
 
 	public MBBanImpl() {
 	}
+
+	public String getBanUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getBanUserId(), "uuid", _banUserUuid);
+	}
+
+	public void setBanUserUuid(String banUserUuid) {
+		_banUserUuid = banUserUuid;
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
+	private String _banUserUuid;
+	private String _userUuid;
 
 }

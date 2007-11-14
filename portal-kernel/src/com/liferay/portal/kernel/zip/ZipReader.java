@@ -25,6 +25,8 @@ package com.liferay.portal.kernel.zip;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +34,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -78,6 +82,25 @@ public class ZipReader implements Serializable {
 				byte[] byteArray = bam.toByteArray();
 
 				_entries.put(currentName, byteArray);
+
+				int pos = currentName.lastIndexOf(StringPool.SLASH);
+
+				String folderPath = StringPool.BLANK;
+				String fileName = currentName;
+
+				if (pos > 0) {
+					folderPath = currentName.substring(0, pos + 1);
+					fileName = currentName.substring(pos + 1);
+				}
+
+				List files = (List)_folderEntries.get(folderPath);
+
+				if (files == null) {
+					files = new ArrayList();
+					_folderEntries.put(folderPath, files);
+				}
+
+				files.add(new ObjectValuePair(fileName, byteArray));
 			}
 		}
 		catch (IOException ioe) {
@@ -113,12 +136,17 @@ public class ZipReader implements Serializable {
 		return (byte[])_entries.get(name);
 	}
 
+	public Map getFolderEntries() {
+		return _folderEntries;
+	}
+
 	private static final int _BUFFER = 2048;
 
 	private static Log _log = LogFactoryUtil.getLog(ZipReader.class);
 
 	private ZipInputStream _zis;
 	private Map _entries = new LinkedHashMap();
+	private Map _folderEntries = new LinkedHashMap();
 	private byte[] _data = new byte[_BUFFER];
 
 }

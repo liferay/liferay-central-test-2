@@ -48,4 +48,8 @@ package com.liferay.portlet.messageboards.model;
  *
  */
 public interface MBMessageFlag extends MBMessageFlagModel {
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
 }

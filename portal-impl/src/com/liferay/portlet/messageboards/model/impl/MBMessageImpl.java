@@ -22,10 +22,14 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
 
 import org.apache.commons.logging.Log;
@@ -85,12 +89,31 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		}
 	}
 
+	public double getPriority() throws PortalException, SystemException {
+		if (_priority == -1) {
+			_priority = MBThreadLocalServiceUtil.getThread(getThreadId()).
+				getPriority();
+		}
+		return _priority;
+	}
+
+	public void setPriority(double priority) {
+		_priority = priority;
+	}
+
 	public String getThreadAttachmentsDir() {
 		return "messageboards/" + getThreadId();
 	}
 
 	public String getAttachmentsDir() {
-		return "messageboards/" + getThreadId() + "/" + getMessageId();
+		if (_attachmentDirs == null) {
+			_attachmentDirs = getThreadAttachmentsDir() + "/" + getMessageId();
+		}
+		return _attachmentDirs;
+	}
+
+	public void setAttachmentsDir(String attachmentsDir) {
+		_attachmentDirs = attachmentsDir;
 	}
 
 	public String getBody(boolean translated) {
@@ -102,6 +125,18 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		}
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	private static Log _log = LogFactory.getLog(MBMessageImpl.class);
+
+	private double _priority = -1;
+	private String _attachmentDirs;
+	private String _userUuid;
 
 }

@@ -224,6 +224,7 @@
 		<open-search-class>com.liferay.portlet.messageboards.util.MBOpenSearchImpl</open-search-class>
 		<scheduler-class>com.liferay.portlet.messageboards.job.Scheduler</scheduler-class>
 		<friendly-url-mapper-class>com.liferay.portlet.messageboards.MBFriendlyURLMapper</friendly-url-mapper-class>
+		<portlet-data-handler-class>com.liferay.portlet.messageboards.lar.MBPortletDataHandlerImpl</portlet-data-handler-class>
 		<smtp-message-listener-class>com.liferay.portlet.messageboards.smtp.MessageListenerImpl</smtp-message-listener-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>

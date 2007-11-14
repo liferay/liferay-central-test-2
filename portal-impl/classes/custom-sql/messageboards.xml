@@ -100,6 +100,20 @@
 				))
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByUuid_G">
+		<![CDATA[
+			SELECT
+				DISTINCT {MBMessage.*}
+			FROM
+				MBMessage
+			INNER JOIN
+				MBCategory ON
+					(MBCategory.categoryId = MBMessage.categoryId)
+			WHERE
+				(MBMessage.uuid_ = ?) AND
+				(MBCategory.groupId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByCategoryIds">
 		<![CDATA[
 			SELECT

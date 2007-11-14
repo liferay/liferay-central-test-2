@@ -510,6 +510,7 @@ create table MBBan (
 );
 
 create table MBCategory (
+	uuid_ VARCHAR(75) null,
 	categoryId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -531,6 +532,7 @@ create table MBDiscussion (
 );
 
 create table MBMessage (
+	uuid_ VARCHAR(75) null,
 	messageId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
