@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -45,8 +45,6 @@ import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
-import java.io.StringReader;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -60,7 +58,6 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="BookmarksPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
@@ -116,8 +113,6 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
 			Document doc = DocumentHelper.createDocument();
@@ -157,7 +152,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element el = root.addElement("bookmark-folders");
 
-			Document tempDoc = reader.read(new StringReader(xml));
+			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -185,7 +180,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("bookmark-entries");
 
-			tempDoc = reader.read(new StringReader(xml));
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -223,11 +218,9 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
-			Document doc = reader.read(new StringReader(data));
+			Document doc = PortalUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 

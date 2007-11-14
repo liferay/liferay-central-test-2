@@ -24,17 +24,14 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.SAXReaderFactory;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.xml.XMLFormatter;
-
-import java.io.StringReader;
 
 import java.util.Iterator;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="WebXML23Converter.java.html"><b><i>View Source</i></b></a>
@@ -57,9 +54,7 @@ public class WebXML23Converter {
 		try {
 			String webXML24 = FileUtil.read(input);
 
-			SAXReader reader = SAXReaderFactory.getInstance(false);
-
-			Document doc = reader.read(new StringReader(webXML24));
+			Document doc = PortalUtil.readDocumentFromXML(webXML24);
 
 			Element root = doc.getRootElement();
 

@@ -175,6 +175,13 @@ public class PortalUtil_IW {
 	}
 
 	public java.lang.String getLayoutURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		return PortalUtil.getLayoutURL(themeDisplay);
+	}
+
+	public java.lang.String getLayoutURL(
 		com.liferay.portal.model.Layout layout,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
@@ -274,6 +281,15 @@ public class PortalUtil_IW {
 
 	public java.lang.String getPathMain() {
 		return PortalUtil.getPathMain();
+	}
+
+	public java.lang.String getPortalLibDir() {
+		return PortalUtil.getPortalLibDir();
+	}
+
+	public java.lang.String getPortalURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+		return PortalUtil.getPortalURL(themeDisplay);
 	}
 
 	public java.lang.String getPortalURL(
@@ -422,6 +438,10 @@ public class PortalUtil_IW {
 		return PortalUtil.getSystemGroups();
 	}
 
+	public java.lang.String[] getSystemOrganizationRoles() {
+		return PortalUtil.getSystemOrganizationRoles();
+	}
+
 	public java.lang.String[] getSystemRoles() {
 		return PortalUtil.getSystemRoles();
 	}
@@ -513,6 +533,12 @@ public class PortalUtil_IW {
 		return PortalUtil.getUserPassword(req);
 	}
 
+	public java.lang.String getUserValue(long userId, java.lang.String param,
+		java.lang.String defaultValue)
+		throws com.liferay.portal.SystemException {
+		return PortalUtil.getUserValue(userId, param, defaultValue);
+	}
+
 	public boolean isLayoutFriendliable(com.liferay.portal.model.Layout layout) {
 		return PortalUtil.isLayoutFriendliable(layout);
 	}
@@ -545,6 +571,47 @@ public class PortalUtil_IW {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		return PortalUtil.isUpdateAvailable();
+	}
+
+	public org.dom4j.Document readDocumentFromFile(java.io.File file)
+		throws org.dom4j.DocumentException {
+		return PortalUtil.readDocumentFromFile(file);
+	}
+
+	public org.dom4j.Document readDocumentFromFile(java.io.File file,
+		boolean validate) throws org.dom4j.DocumentException {
+		return PortalUtil.readDocumentFromFile(file, validate);
+	}
+
+	public org.dom4j.Document readDocumentFromStream(java.io.InputStream is)
+		throws org.dom4j.DocumentException {
+		return PortalUtil.readDocumentFromStream(is);
+	}
+
+	public org.dom4j.Document readDocumentFromStream(java.io.InputStream is,
+		boolean validate) throws org.dom4j.DocumentException {
+		return PortalUtil.readDocumentFromStream(is, validate);
+	}
+
+	public org.dom4j.Document readDocumentFromURL(java.lang.String url)
+		throws org.dom4j.DocumentException, java.io.IOException {
+		return PortalUtil.readDocumentFromURL(url);
+	}
+
+	public org.dom4j.Document readDocumentFromURL(java.lang.String url,
+		boolean validate)
+		throws org.dom4j.DocumentException, java.io.IOException {
+		return PortalUtil.readDocumentFromURL(url, validate);
+	}
+
+	public org.dom4j.Document readDocumentFromXML(java.lang.String xml)
+		throws org.dom4j.DocumentException {
+		return PortalUtil.readDocumentFromXML(xml);
+	}
+
+	public org.dom4j.Document readDocumentFromXML(java.lang.String xml,
+		boolean validate) throws org.dom4j.DocumentException {
+		return PortalUtil.readDocumentFromXML(xml, validate);
 	}
 
 	public void renderPage(com.liferay.portal.kernel.util.StringMaker sm,

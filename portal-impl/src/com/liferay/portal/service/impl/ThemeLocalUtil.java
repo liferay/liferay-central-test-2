@@ -42,12 +42,10 @@ import com.liferay.portal.theme.ThemeGroupId;
 import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ReleaseInfo;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.ContextReplace;
 import com.liferay.util.ListUtil;
 import com.liferay.util.Version;
-import com.liferay.util.xml.XMLSafeReader;
 
 import java.io.IOException;
 
@@ -67,7 +65,6 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="ThemeLocalUtil.java.html"><b><i>View Source</i></b></a>
@@ -423,9 +420,7 @@ public class ThemeLocalUtil {
 			return themeIds;
 		}
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(new XMLSafeReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml, true);
 
 		Element root = doc.getRootElement();
 

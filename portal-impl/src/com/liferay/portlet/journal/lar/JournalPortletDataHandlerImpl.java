@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -45,8 +45,6 @@ import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
-import java.io.StringReader;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +57,6 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="JournalPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
@@ -128,8 +125,6 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
 			Document doc = DocumentHelper.createDocument();
@@ -161,7 +156,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element el = root.addElement("articles");
 
-			Document tempDoc = reader.read(new StringReader(xml));
+			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -186,7 +181,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			xml = xStream.toXML(obj);
 
-			tempDoc = reader.read(new StringReader(xml));
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el = root.addElement("structures");
 
@@ -215,7 +210,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("templates");
 
-			tempDoc = reader.read(new StringReader(xml));
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -254,11 +249,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			JournalCreationStrategy creationStrategy =
 				JournalCreationStrategyFactory.getInstance();
 
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
-			Document doc = reader.read(new StringReader(data));
+			Document doc = PortalUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 

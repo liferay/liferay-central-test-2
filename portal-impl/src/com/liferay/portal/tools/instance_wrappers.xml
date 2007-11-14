@@ -7,11 +7,11 @@
 	/>
 	<instance-wrapper
 		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/util/PrefsPropsUtil.java"
+		src-file="com/liferay/portal/util/PortalUtil.java"
 	/>
 	<instance-wrapper
 		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/util/PropsUtil.java"
+		src-file="com/liferay/portal/util/PrefsPropsUtil.java"
 	/>
 	<instance-wrapper
 		parent-dir="../portal-impl/src"

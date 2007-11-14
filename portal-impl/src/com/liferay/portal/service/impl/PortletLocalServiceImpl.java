@@ -38,11 +38,9 @@ import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.ListUtil;
-import com.liferay.util.xml.XMLSafeReader;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -65,7 +63,6 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
-import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 /**
@@ -498,9 +495,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return portletIds;
 		}
 
-		SAXReader reader = SAXReaderFactory.getInstance(false);
-
-		Document doc = reader.read(new XMLSafeReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
@@ -761,9 +756,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				"com/liferay/portal/deploy/dependencies/liferay-display.xml");
 		}
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(new XMLSafeReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml, true);
 
 		Element root = doc.getRootElement();
 
@@ -828,9 +821,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return liferayPortletIds;
 		}
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(new XMLSafeReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml, true);
 
 		Element root = doc.getRootElement();
 
@@ -1142,9 +1133,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return servletURLPatterns;
 		}
 
-		SAXReader reader = SAXReaderFactory.getInstance(false);
-
-		Document doc = reader.read(new XMLSafeReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 

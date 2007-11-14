@@ -77,7 +77,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portlet.PortletPreferencesImpl;
@@ -1823,8 +1822,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws SystemException {
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
 			Map ratingsEntriesMap = context.getRatingsEntries();
@@ -1845,7 +1842,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 				String xml = xStream.toXML(ratingsEntries);
 
-				Document tempDoc = reader.read(new StringReader(xml));
+				Document tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 				el.content().add(tempDoc.getRootElement().createCopy());
 			}

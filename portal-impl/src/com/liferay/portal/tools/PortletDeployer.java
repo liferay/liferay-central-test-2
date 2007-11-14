@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.TextFormatter;
 import com.liferay.util.xml.XMLFormatter;
@@ -47,7 +46,6 @@ import java.util.Properties;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="PortletDeployer.java.html"><b><i>View Source</i></b></a>
@@ -142,11 +140,9 @@ public class PortletDeployer extends BaseDeployer {
 
 		StringMaker sm = new StringMaker();
 
-		SAXReader reader = SAXReaderFactory.getInstance(false);
-
 		// Add wrappers for portlets
 
-		Document doc = reader.read(portletXML);
+		Document doc = PortalUtil.readDocumentFromFile(portletXML);
 
 		Element root = doc.getRootElement();
 
@@ -187,9 +183,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// Make sure there is a company id specified
 
-		reader = SAXReaderFactory.getInstance(false);
-
-		doc = reader.read(webXML);
+		doc = PortalUtil.readDocumentFromFile(webXML);
 
 		root = doc.getRootElement();
 
@@ -413,9 +407,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// portlet.xml
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(portletXML);
+		Document doc = PortalUtil.readDocumentFromFile(portletXML, true);
 
 		Element root = doc.getRootElement();
 
@@ -442,9 +434,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// faces-config.xml
 
-		reader = SAXReaderFactory.getInstance();
-
-		doc = reader.read(facesXML);
+		doc = PortalUtil.readDocumentFromFile(facesXML, true);
 
 		root = doc.getRootElement();
 

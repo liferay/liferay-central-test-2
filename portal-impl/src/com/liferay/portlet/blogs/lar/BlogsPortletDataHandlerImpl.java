@@ -31,8 +31,8 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
@@ -43,8 +43,6 @@ import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
-
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -60,7 +58,6 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="BlogsPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
@@ -113,8 +110,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			parameterMap, _EXPORT_BLOGS_STATS);
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
 			Document doc = DocumentHelper.createDocument();
@@ -152,7 +147,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element el = root.addElement("blog-entries");
 
-			Document tempDoc = reader.read(new StringReader(xml));
+			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -185,7 +180,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("blog-stats-users");
 
-			tempDoc = reader.read(new StringReader(xml));
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -226,11 +221,9 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			parameterMap, _IMPORT_BLOGS_STATS);
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
-			Document doc = reader.read(new StringReader(data));
+			Document doc = PortalUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 

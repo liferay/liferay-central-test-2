@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
@@ -38,8 +38,6 @@ import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
-
-import java.io.StringReader;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -55,7 +53,6 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="CalendarPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
@@ -101,8 +98,6 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
 			Document doc = DocumentHelper.createDocument();
@@ -134,7 +129,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element el = root.addElement("calendar-events");
 
-			Document tempDoc = reader.read(new StringReader(xml));
+			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -172,11 +167,9 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
-			Document doc = reader.read(new StringReader(data));
+			Document doc = PortalUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 

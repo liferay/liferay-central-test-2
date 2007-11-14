@@ -54,7 +54,6 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
@@ -65,7 +64,6 @@ import com.liferay.util.servlet.EncryptedServletRequest;
 import com.liferay.util.servlet.ProtectedServletRequest;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -88,7 +86,6 @@ import org.apache.struts.tiles.TilesUtilImpl;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="MainServlet.java.html"><b><i>View Source</i></b></a>
@@ -573,9 +570,7 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void checkWebSettings(String xml) throws DocumentException {
-		SAXReader reader = SAXReaderFactory.getInstance(false);
-
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 

@@ -25,13 +25,12 @@ package com.liferay.portal.theme;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 
 import java.io.File;
-import java.io.StringReader;
 
 import java.util.Map;
 
@@ -42,7 +41,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="ThemeLoader.java.html"><b><i>View Source</i></b></a>
@@ -127,9 +125,7 @@ public class ThemeLoader {
 		_ctx = ctx;
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
-			Document doc = reader.read(new StringReader(xmls[0]));
+			Document doc = PortalUtil.readDocumentFromXML(xmls[0], true);
 
 			Element root = doc.getRootElement();
 

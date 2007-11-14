@@ -94,8 +94,11 @@ import com.liferay.util.JS;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.UploadPortletRequest;
 import com.liferay.util.servlet.UploadServletRequest;
+import com.liferay.util.xml.XMLSafeReader;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.net.URL;
 
@@ -140,6 +143,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.io.SAXReader;
 
 import org.hibernate.util.FastHashMap;
 
@@ -1490,6 +1497,63 @@ public class PortalUtil {
 		throws PortalException, SystemException {
 
 		return PluginPackageUtil.isUpdateAvailable();
+	}
+
+	public static Document readDocumentFromFile(File file)
+		throws DocumentException {
+
+		return readDocumentFromFile(file, false);
+	}
+
+	public static Document readDocumentFromFile(File file, boolean validate)
+		throws DocumentException {
+
+		SAXReader reader = SAXReaderFactory.getInstance(validate);
+
+		return reader.read(file);
+	}
+
+	public static Document readDocumentFromStream(InputStream is)
+		throws DocumentException {
+
+		return readDocumentFromStream(is, false);
+	}
+
+	public static Document readDocumentFromStream(
+			InputStream is, boolean validate)
+		throws DocumentException {
+
+		SAXReader reader = SAXReaderFactory.getInstance(validate);
+
+		return reader.read(is);
+	}
+
+	public static Document readDocumentFromURL(String url)
+		throws DocumentException, IOException {
+
+		return readDocumentFromURL(url, false);
+	}
+
+	public static Document readDocumentFromURL(String url, boolean validate)
+		throws DocumentException, IOException {
+
+		SAXReader reader = SAXReaderFactory.getInstance(validate);
+
+		return reader.read(new URL(url));
+	}
+
+	public static Document readDocumentFromXML(String xml)
+		throws DocumentException {
+
+		return readDocumentFromXML(xml, false);
+	}
+
+	public static Document readDocumentFromXML(String xml, boolean validate)
+		throws DocumentException {
+
+		SAXReader reader = SAXReaderFactory.getInstance(validate);
+
+		return reader.read(new XMLSafeReader(xml));
 	}
 
 	public static void renderPage(

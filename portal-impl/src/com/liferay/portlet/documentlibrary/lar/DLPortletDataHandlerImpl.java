@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -54,7 +54,6 @@ import com.liferay.util.xml.XMLFormatter;
 import com.thoughtworks.xstream.XStream;
 
 import java.io.InputStream;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -69,7 +68,6 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="DLPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
@@ -124,8 +122,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			parameterMap, _EXPORT_DL_RANKS);
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
 			Document doc = DocumentHelper.createDocument();
@@ -175,7 +171,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element el = root.addElement("documentlibrary-folders");
 
-			Document tempDoc = reader.read(new StringReader(xml));
+			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -223,7 +219,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("documentlibrary-entries");
 
-			tempDoc = reader.read(new StringReader(xml));
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -248,7 +244,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("documentlibrary-shortcuts");
 
-			tempDoc = reader.read(new StringReader(xml));
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -273,7 +269,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("documentlibrary-ranks");
 
-			tempDoc = reader.read(new StringReader(xml));
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -316,11 +312,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			parameterMap, _IMPORT_DL_RANKS);
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
-			Document doc = reader.read(new StringReader(data));
+			Document doc = PortalUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 

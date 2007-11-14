@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Http;
 import com.liferay.util.License;
@@ -51,7 +50,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +64,6 @@ import org.apache.oro.io.GlobFilenameFilter;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="BaseDeployer.java.html"><b><i>View Source</i></b></a>
@@ -1028,9 +1025,7 @@ public class BaseDeployer {
 
 				File file = new File(srcDir + "/WEB-INF/" + files[i]);
 
-				SAXReader reader = SAXReaderFactory.getInstance(false);
-
-				Document doc = reader.read(file);
+				Document doc = PortalUtil.readDocumentFromFile(file);
 
 				String content = XMLFormatter.toString(
 					doc, XMLFormatter.INDENT, true);
@@ -1049,9 +1044,7 @@ public class BaseDeployer {
 
 		File geronimoWebXml = new File(srcFile + "/WEB-INF/geronimo-web.xml");
 
-		SAXReader reader = SAXReaderFactory.getInstance(false);
-
-		Document doc = reader.read(geronimoWebXml);
+		Document doc = PortalUtil.readDocumentFromFile(geronimoWebXml);
 
 		Element root = doc.getRootElement();
 
@@ -1088,9 +1081,7 @@ public class BaseDeployer {
 
 		double webXmlVersion = 2.3;
 
-		SAXReader reader = SAXReaderFactory.getInstance(false);
-
-		Document webXmlDoc = reader.read(new StringReader(content));
+		Document webXmlDoc = PortalUtil.readDocumentFromXML(content);
 
 		Element webXmlRoot = webXmlDoc.getRootElement();
 

@@ -30,8 +30,8 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -49,7 +49,6 @@ import com.liferay.util.xml.XMLFormatter;
 import com.thoughtworks.xstream.XStream;
 
 import java.io.File;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -64,7 +63,6 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="IGPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
@@ -109,8 +107,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
 			Document doc = DocumentHelper.createDocument();
@@ -149,7 +145,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element el = root.addElement("ig-folders");
 
-			Document tempDoc = reader.read(new StringReader(xml));
+			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -184,7 +180,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("ig-images");
 
-			tempDoc = reader.read(new StringReader(xml));
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -206,7 +202,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("images");
 
-			tempDoc = reader.read(new StringReader(xml));
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -243,11 +239,9 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
-			Document doc = reader.read(new StringReader(data));
+			Document doc = PortalUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 

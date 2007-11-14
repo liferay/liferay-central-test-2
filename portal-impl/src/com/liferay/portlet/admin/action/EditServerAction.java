@@ -37,7 +37,6 @@ import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebKeys;
@@ -68,7 +67,6 @@ import org.apache.struts.action.ActionMapping;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="EditServerAction.java.html"><b><i>View Source</i></b></a>
@@ -166,10 +164,8 @@ public class EditServerAction extends PortletAction {
 
 		// Struts
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(ctx.getResource(
-			"/WEB-INF/struts-config.xml"));
+		Document doc = PortalUtil.readDocumentFromStream(
+			ctx.getResourceAsStream("/WEB-INF/struts-config.xml"));
 
 		Element root = doc.getRootElement();
 
@@ -219,9 +215,8 @@ public class EditServerAction extends PortletAction {
 
 		// Tiles
 
-		reader = SAXReaderFactory.getInstance();
-
-		doc = reader.read(ctx.getResource("/WEB-INF/tiles-defs.xml"));
+		doc = PortalUtil.readDocumentFromStream(
+			ctx.getResourceAsStream("/WEB-INF/tiles-defs.xml"));
 
 		root = doc.getRootElement();
 

@@ -32,15 +32,14 @@ import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.impl.LayoutTemplateImpl;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.layoutconfiguration.util.velocity.InitColumnProcessor;
 import com.liferay.util.Http;
 import com.liferay.util.ListUtil;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringReader;
 import java.io.StringWriter;
 
 import java.util.ArrayList;
@@ -62,7 +61,6 @@ import org.apache.velocity.app.Velocity;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="LayoutTemplateLocalUtil.java.html"><b><i>View Source</i></b></a>
@@ -509,9 +507,7 @@ public class LayoutTemplateLocalUtil {
 			return layoutTemplateIds;
 		}
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml, true);
 
 		Element root = doc.getRootElement();
 

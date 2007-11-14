@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
-import com.liferay.portal.util.SAXReaderFactory;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.TextFormatter;
 import com.liferay.util.Time;
@@ -533,9 +533,8 @@ public class ServiceBuilder {
 			_springHibernatePackage = springHibernatePackage;
 			_springUtilPackage = springUtilPackage;
 
-			SAXReader reader = SAXReaderFactory.getInstance();
-
-			Document doc = reader.read(new File(fileName));
+			Document doc = PortalUtil.readDocumentFromFile(
+				new File(fileName), true);
 
 			Element root = doc.getRootElement();
 
@@ -5476,9 +5475,8 @@ public class ServiceBuilder {
 	private void _createRemotingXML() throws Exception {
 		StringMaker sm = new StringMaker();
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(new File(_springFileName));
+		Document doc = PortalUtil.readDocumentFromFile(
+			new File(_springFileName), true);
 
 		Iterator itr = doc.getRootElement().elements("bean").iterator();
 

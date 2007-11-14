@@ -35,10 +35,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
 import com.liferay.util.License;
@@ -47,7 +47,6 @@ import com.liferay.util.Time;
 import com.liferay.util.Version;
 import com.liferay.util.XSSUtil;
 import com.liferay.util.lucene.HitsImpl;
-import com.liferay.util.xml.XMLSafeReader;
 
 import java.io.IOException;
 
@@ -86,7 +85,6 @@ import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="PluginPackageUtil.java.html"><b><i>View Source</i></b></a>
@@ -477,9 +475,7 @@ public class PluginPackageUtil {
 	public static PluginPackage readPluginPackageXml(String xml)
 		throws DocumentException {
 
-		SAXReader reader = SAXReaderFactory.getInstance(false);
-
-		Document doc = reader.read(new XMLSafeReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
@@ -936,9 +932,7 @@ public class PluginPackageUtil {
 			return pluginPackageRepository;
 		}
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(new XMLSafeReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 

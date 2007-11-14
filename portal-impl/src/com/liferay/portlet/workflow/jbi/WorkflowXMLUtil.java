@@ -25,14 +25,12 @@ package com.liferay.portlet.workflow.jbi;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.SAXReaderFactory;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.workflow.model.WorkflowDefinition;
 import com.liferay.portlet.workflow.model.WorkflowInstance;
 import com.liferay.portlet.workflow.model.WorkflowTask;
 import com.liferay.portlet.workflow.model.WorkflowTaskFormElement;
 import com.liferay.portlet.workflow.model.WorkflowToken;
-
-import java.io.StringReader;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,7 +48,6 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="WorkflowXMLUtil.java.html"><b><i>View Source</i></b></a>
@@ -83,9 +80,7 @@ public class WorkflowXMLUtil {
 	public static WorkflowDefinition parseDefinition(String xml)
 		throws DocumentException, ParseException {
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
@@ -128,9 +123,7 @@ public class WorkflowXMLUtil {
 	public static Map parseErrors(String xml) throws DocumentException {
 		Map errors = new LinkedHashMap();
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
@@ -151,9 +144,7 @@ public class WorkflowXMLUtil {
 	public static WorkflowInstance parseInstance(String xml)
 		throws DocumentException, ParseException {
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
@@ -218,9 +209,7 @@ public class WorkflowXMLUtil {
 	public static List parseList(String xml, String name)
 		throws DocumentException, ParseException {
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = PortalUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
@@ -251,9 +240,7 @@ public class WorkflowXMLUtil {
 		throws DocumentException {
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
-			Document doc = reader.read(new StringReader(xml));
+			Document doc = PortalUtil.readDocumentFromXML(xml);
 
 			Element root = doc.getRootElement();
 

@@ -23,7 +23,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.SAXReaderFactory;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Html;
 import com.liferay.util.xml.XMLFormatter;
@@ -32,12 +32,10 @@ import com.liferay.util.xml.descriptor.WebXML23Descriptor;
 import com.liferay.util.xml.descriptor.WebXML24Descriptor;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="WebXMLBuilder.java.html"><b><i>View Source</i></b></a>
@@ -65,9 +63,7 @@ public class WebXMLBuilder {
 
 		double version = 2.3;
 
-		SAXReader reader = SAXReaderFactory.getInstance(false);
-
-		Document doc = reader.read(new StringReader(webXML));
+		Document doc = PortalUtil.readDocumentFromXML(webXML);
 
 		Element root = doc.getRootElement();
 
