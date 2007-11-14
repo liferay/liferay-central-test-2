@@ -37,14 +37,6 @@ public class MBBanImpl extends MBBanModelImpl implements MBBan {
 	public MBBanImpl() {
 	}
 
-	public String getBanUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getBanUserId(), "uuid", _banUserUuid);
-	}
-
-	public void setBanUserUuid(String banUserUuid) {
-		_banUserUuid = banUserUuid;
-	}
-
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
@@ -53,7 +45,15 @@ public class MBBanImpl extends MBBanModelImpl implements MBBan {
 		_userUuid = userUuid;
 	}
 
-	private String _banUserUuid;
+	public String getBanUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getBanUserId(), "uuid", _banUserUuid);
+	}
+
+	public void setBanUserUuid(String banUserUuid) {
+		_banUserUuid = banUserUuid;
+	}
+
 	private String _userUuid;
+	private String _banUserUuid;
 
 }

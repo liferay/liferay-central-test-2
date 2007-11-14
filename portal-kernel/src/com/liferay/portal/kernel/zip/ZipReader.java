@@ -97,6 +97,7 @@ public class ZipReader implements Serializable {
 
 				if (files == null) {
 					files = new ArrayList();
+
 					_folderEntries.put(folderPath, files);
 				}
 

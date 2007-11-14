@@ -33,8 +33,8 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
@@ -60,8 +60,6 @@ import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
-import java.io.StringReader;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -75,7 +73,6 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="MBPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
@@ -137,8 +134,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			parameterMap, _EXPORT_MESSAGE_BOARDS_FLAGS);
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
 			Document doc = DocumentHelper.createDocument();
@@ -178,7 +173,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element el = root.addElement("message-board-categories");
 
-			Document tempDoc = reader.read(new StringReader(xml));
+			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -198,7 +193,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				}
 				else {
 					message.setUserUuid(message.getUserUuid());
-
 					message.setPriority(message.getPriority());
 
 					context.addTagsEntries(
@@ -243,7 +237,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("message-board-messages");
 
-			tempDoc = reader.read(new StringReader(xml));
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -268,7 +262,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("message-board-flags");
 
-			tempDoc = reader.read(new StringReader(xml));
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -301,7 +295,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("message-board-bans");
 
-			tempDoc = reader.read(new StringReader(xml));
+			tempDoc = PortalUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -348,11 +342,9 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			parameterMap, _IMPORT_MESSAGE_BOARDS_FLAGS);
 
 		try {
-			SAXReader reader = SAXReaderFactory.getInstance();
-
 			XStream xStream = new XStream();
 
-			Document doc = reader.read(new StringReader(data));
+			Document doc = PortalUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 
@@ -539,6 +531,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		try {
 			List messages = new ArrayList();
+
 			messages.add(MBMessageUtil.findByPrimaryKey(messageId));
 
 			MBMessageFlagLocalServiceUtil.addReadFlags(userId, messages);
@@ -575,6 +568,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				_log.error(
 					"Could not find attachments for message " +
 						message.getMessageId());
+
 				files = new ArrayList();
 			}
 		}

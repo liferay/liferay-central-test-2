@@ -40,6 +40,14 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 	public MBCategoryImpl() {
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public boolean isRoot() {
 		if (getParentCategoryId() == DEFAULT_PARENT_CATEGORY_ID) {
 			return true;
@@ -56,14 +64,6 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 		else {
 			return false;
 		}
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	private String _userUuid;

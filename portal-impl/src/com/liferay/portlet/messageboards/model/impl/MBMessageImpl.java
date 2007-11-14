@@ -48,6 +48,14 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	public MBMessageImpl() {
 	}
 
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
 	public MBCategory getCategory() {
 		if (getCategoryId() == CompanyImpl.SYSTEM) {
 			return null;
@@ -125,18 +133,10 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		}
 	}
 
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
-	}
-
 	private static Log _log = LogFactory.getLog(MBMessageImpl.class);
 
+	private String _userUuid;
 	private double _priority = -1;
 	private String _attachmentDirs;
-	private String _userUuid;
 
 }
