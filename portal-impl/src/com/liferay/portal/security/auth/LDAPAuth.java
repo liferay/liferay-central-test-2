@@ -228,7 +228,8 @@ public class LDAPAuth implements Authenticator {
 
 				LogUtil.debug(_log, userMappings);
 
-				Attribute userPassword = attrs.get("userPassword");
+				Attribute userPassword = attrs.get(
+					PortalLDAPUtil.USER_MAPPING_PASSWORD);
 
 				LDAPAuthResult ldapAuthResult = authenticate(
 					ctx, env, result, baseDN, userPassword, companyId,
