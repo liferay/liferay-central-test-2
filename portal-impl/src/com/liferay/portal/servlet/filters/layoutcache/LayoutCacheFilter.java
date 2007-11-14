@@ -289,10 +289,14 @@ public class LayoutCacheFilter implements Filter, PortalInitable {
 			}
 		}
 		catch (NoSuchLayoutException nsle) {
-			_log.warn(nsle);
+			if (_log.isWarnEnabled() {
+				_log.warn(nsle);
+			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			if (_log.isWarnEnabled() {
+				_log.error(e);
+			}
 
 			return 0;
 		}
