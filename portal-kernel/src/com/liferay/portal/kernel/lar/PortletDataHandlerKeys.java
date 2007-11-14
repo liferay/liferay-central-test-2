@@ -49,6 +49,9 @@ public class PortletDataHandlerKeys {
 
 	public static final String EXPORT_THEME = "EXPORT_THEME";
 
+	public static final String IMPORT_DELETE_MISSING_LAYOUTS =
+		"IMPORT_DELETE_MISSING_LAYOUTS";
+
 	public static final String IMPORT_PERMISSIONS = "IMPORT_PERMISSIONS";
 
 	public static final String IMPORT_USER_PERMISSIONS =

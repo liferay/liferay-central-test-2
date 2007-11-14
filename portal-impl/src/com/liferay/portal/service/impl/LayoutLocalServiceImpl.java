@@ -350,6 +350,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			long groupId, boolean privateLayout, Map parameterMap)
 		throws PortalException, SystemException {
 
+		return exportLayouts(groupId, privateLayout, null, parameterMap);
+	}
+
+	public byte[] exportLayouts(
+			long groupId, boolean privateLayout, long[] layoutIds,
+			Map parameterMap)
+		throws PortalException, SystemException {
+
 		boolean exportPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_PERMISSIONS);
 		boolean exportUserPermissions = MapUtil.getBoolean(
@@ -419,7 +427,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Set portletIds = new LinkedHashSet();
 
-		Iterator itr = getLayouts(groupId, privateLayout).iterator();
+		List layouts;
+
+		if ((layoutIds == null) || (layoutIds.length == 0)) {
+			layouts = getLayouts(groupId, privateLayout);
+		}
+		else {
+			layouts = getLayouts(groupId, privateLayout, layoutIds);
+		}
+
+		Iterator itr = layouts.iterator();
 
 		while (itr.hasNext()) {
 			Layout layout = (Layout)itr.next();
@@ -642,6 +659,20 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			groupId, privateLayout, parentLayoutId, begin, end);
 	}
 
+	public List getLayouts(
+		long groupId, boolean privateLayout, long[] layoutIds)
+		throws PortalException, SystemException{
+
+		List layouts = new ArrayList();
+
+		for (int i = 0; i < layoutIds.length; i++) {
+			Layout layout = getLayout(groupId, privateLayout, layoutIds[i]);
+			layouts.add(layout);
+		}
+
+		return layouts;
+	}
+
 	public LayoutReference[] getLayouts(
 			long companyId, String portletId, String prefsKey,
 			String prefsValue)
@@ -689,6 +720,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.IMPORT_THEME);
 		String userIdStrategy = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
+		boolean deleteMissingLayouts = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
+			Boolean.TRUE.booleanValue());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Import permissions " + importPermissions);
@@ -977,7 +1011,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Delete missing layouts
 
-		deleteMissingLayouts(groupId, privateLayout, newLayoutIds);
+		if (deleteMissingLayouts) {
+			deleteMissingLayouts(groupId, privateLayout, newLayoutIds);
+		}
 
 		// Page count
 

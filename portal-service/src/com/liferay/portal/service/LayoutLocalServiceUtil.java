@@ -853,6 +853,16 @@ public class LayoutLocalServiceUtil {
 			parameterMap);
 	}
 
+	public static byte[] exportLayouts(long groupId, boolean privateLayout,
+		long[] layoutIds, java.util.Map parameterMap)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.exportLayouts(groupId, privateLayout,
+			layoutIds, parameterMap);
+	}
+
 	public static long getDefaultPlid(long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
@@ -919,6 +929,15 @@ public class LayoutLocalServiceUtil {
 
 		return layoutLocalService.getLayouts(groupId, privateLayout,
 			parentLayoutId, begin, end);
+	}
+
+	public static java.util.List getLayouts(long groupId,
+		boolean privateLayout, long[] layoutIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getLayouts(groupId, privateLayout, layoutIds);
 	}
 
 	public static com.liferay.portal.model.LayoutReference[] getLayouts(

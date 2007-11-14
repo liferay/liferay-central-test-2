@@ -314,6 +314,21 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			getGroupId(), isPrivateLayout(), getLayoutId());
 	}
 
+	public List getAllChildren() throws PortalException, SystemException {
+		List allChildren = new ArrayList();
+
+		Iterator it = getChildren().iterator();
+
+		while (it.hasNext()) {
+			Layout child = (Layout) it.next();
+
+			allChildren.add(child);
+			allChildren.addAll(child.getChildren());
+		}
+
+		return allChildren;
+	}
+
 	public List getChildren(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 

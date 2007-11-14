@@ -41,6 +41,11 @@
 			<li class="page-settings">
 				<a href="$page_settings_url">$page_settings_text</a>
 			</li>
+			#if ($show_publish_to_live)
+				<li class="page-settings">
+					<a href="$publish_to_live_url">$publish_to_live_text</a>
+				</li>
+			#end
 		#end
 
 		#if ($is_signed_in)

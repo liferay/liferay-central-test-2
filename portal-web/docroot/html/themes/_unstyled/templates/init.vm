@@ -98,6 +98,13 @@
 	#set ($page_settings_url = $theme_display.getURLPageSettings().toString())
 #end
 
+#set ($show_publish_to_live = $theme_display.getLayout().getGroup().isStagingGroup())
+
+#if ($show_publish_to_live)
+	#set ($publish_to_live_text = $languageUtil.get($company_id, $locale, "publish-to-live") + "...")
+	#set ($publish_to_live_url = $theme_display.getURLPublishToLive().toString())
+#end
+
 #set ($show_sign_in = $theme_display.isShowSignInIcon())
 
 #if ($show_sign_in)

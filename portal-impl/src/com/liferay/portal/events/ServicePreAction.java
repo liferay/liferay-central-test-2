@@ -1202,6 +1202,30 @@ public class ServicePreAction extends Action {
 				pageSettingsURL.setParameter("selPlid", String.valueOf(plid));
 
 				themeDisplay.setURLPageSettings(pageSettingsURL);
+
+				PortletURL publishToLiveURL = new PortletURLImpl(
+					req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
+
+				publishToLiveURL.setWindowState(WindowState.MAXIMIZED);
+				publishToLiveURL.setPortletMode(PortletMode.VIEW);
+
+				publishToLiveURL.setParameter(
+					"struts_action", "/layout_management/edit_pages");
+
+				if (layout.isPrivateLayout()) {
+					publishToLiveURL.setParameter("tabs2", "private");
+				}
+				else {
+					publishToLiveURL.setParameter("tabs2", "public");
+				}
+
+				publishToLiveURL.setParameter("redirect", currentURL);
+				publishToLiveURL.setParameter(
+					"groupId", String.valueOf(portletGroupId));
+				publishToLiveURL.setParameter("selPlid", String.valueOf(plid));
+				publishToLiveURL.setParameter("cmd", "publish_to_live");
+
+				themeDisplay.setURLPublishToLive(publishToLiveURL);
 			}
 
 			String myAccountNamespace = PortalUtil.getPortletNamespace(
