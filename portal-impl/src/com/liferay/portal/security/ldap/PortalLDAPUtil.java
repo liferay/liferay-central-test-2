@@ -74,33 +74,9 @@ import javax.naming.ldap.LdapContext;
  */
 public class PortalLDAPUtil {
 
-	public static final String GROUP_MAPPING_GROUP_NAME = "groupName";
-
-	public static final String GROUP_MAPPING_DESCRIPTION = "description";
-
-	public static final String GROUP_MAPPING_USER = "user";
-
 	public static final String IMPORT_BY_USER = "user";
 
 	public static final String IMPORT_BY_GROUP = "group";
-
-	public static final String USER_MAPPING_SCREEN_NAME = "screenName";
-
-	public static final String USER_MAPPING_PASSWORD = "password";
-
-	public static final String USER_MAPPING_EMAIL_ADDRESS = "emailAddress";
-
-	public static final String USER_MAPPING_FIRST_NAME = "firstName";
-
-	public static final String USER_MAPPING_MIDDLE_NAME = "middleName";
-
-	public static final String USER_MAPPING_LAST_NAME = "lastName";
-
-	public static final String USER_MAPPING_FULL_NAME = "displayName";
-
-	public static final String USER_MAPPING_JOB_TITLE = "jobTitle";
-
-	public static final String USER_MAPPING_GROUP = "group";
 
 	public static void exportToLDAP(Contact contact) throws Exception {
 		long companyId = contact.getCompanyId();
@@ -120,9 +96,8 @@ public class PortalLDAPUtil {
 		User user = UserLocalServiceUtil.getUserById(contact.getUserId());
 
 		String name =
-			userMappings.getProperty(PortalLDAPUtil.USER_MAPPING_SCREEN_NAME) +
-				StringPool.EQUAL + user.getScreenName() + StringPool.COMMA +
-				getUsersDN(companyId);
+			userMappings.getProperty("screenName") + StringPool.EQUAL +
+				user.getScreenName() + StringPool.COMMA + getUsersDN(companyId);
 
 		if (!hasUser(companyId, user.getScreenName())) {
 			LDAPUser ldapUser = (LDAPUser)Class.forName(
@@ -136,13 +111,9 @@ public class PortalLDAPUtil {
 			Modifications mods = Modifications.getInstance();
 
 			mods.addItem(
-				userMappings.getProperty(
-					PortalLDAPUtil.USER_MAPPING_FIRST_NAME),
-				contact.getFirstName());
+				userMappings.getProperty("firstName"), contact.getFirstName());
 			mods.addItem(
-				userMappings.getProperty(
-					PortalLDAPUtil.USER_MAPPING_LAST_NAME),
-				contact.getLastName());
+				userMappings.getProperty("lastName"), contact.getLastName());
 
 			ModificationItem[] modItems = mods.getItems();
 
@@ -166,9 +137,8 @@ public class PortalLDAPUtil {
 		Properties userMappings = getUserMappings(companyId);
 
 		String name =
-			userMappings.getProperty(PortalLDAPUtil.USER_MAPPING_SCREEN_NAME) +
-				StringPool.EQUAL + user.getScreenName() + StringPool.COMMA +
-				getUsersDN(companyId);
+			userMappings.getProperty("screenName") + StringPool.EQUAL +
+				user.getScreenName() + StringPool.COMMA + getUsersDN(companyId);
 
 		if (!hasUser(companyId, user.getScreenName())) {
 			LDAPUser ldapUser = (LDAPUser)Class.forName(
@@ -185,14 +155,12 @@ public class PortalLDAPUtil {
 				Validator.isNotNull(user.getPasswordUnencrypted())) {
 
 				mods.addItem(
-					userMappings.getProperty(
-						PortalLDAPUtil.USER_MAPPING_PASSWORD),
+					userMappings.getProperty("password"),
 					user.getPasswordUnencrypted());
 			}
 
 			mods.addItem(
-				userMappings.getProperty(
-					PortalLDAPUtil.USER_MAPPING_EMAIL_ADDRESS),
+				userMappings.getProperty("emailAddress"),
 				user.getEmailAddress());
 
 			ModificationItem[] modItems = mods.getItems();
@@ -279,9 +247,8 @@ public class PortalLDAPUtil {
 
 		String name = getUsersDN(companyId);
 		String filter =
-			"(" +
-			userMappings.getProperty(PortalLDAPUtil.USER_MAPPING_SCREEN_NAME) +
-			"=" + screenName + ")";
+			"(" + userMappings.getProperty("screenName") + "=" +
+				screenName + ")";
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
@@ -406,11 +373,9 @@ public class PortalLDAPUtil {
 		LogUtil.debug(_log, groupMappings);
 
 		String name = LDAPUtil.getAttributeValue(
-			attrs, groupMappings.getProperty(
-				PortalLDAPUtil.GROUP_MAPPING_GROUP_NAME)).toLowerCase();
+			attrs, groupMappings.getProperty("groupName")).toLowerCase();
 		String description = LDAPUtil.getAttributeValue(
-			attrs, groupMappings.getProperty(
-				PortalLDAPUtil.GROUP_MAPPING_DESCRIPTION));
+			attrs, groupMappings.getProperty("description"));
 
 		long creatorUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
@@ -432,8 +397,7 @@ public class PortalLDAPUtil {
 		// Import users and membership
 
 		if (importGroupMembership && (userGroup != null)) {
-			Attribute attr = attrs.get(
-				groupMappings.getProperty(PortalLDAPUtil.GROUP_MAPPING_USER));
+			Attribute attr = attrs.get(groupMappings.getProperty("user"));
 
 			if (attr != null){
 				_importUsersAndMembershipFromLDAPGroup(
@@ -467,26 +431,20 @@ public class PortalLDAPUtil {
 		boolean passwordReset = false;
 		boolean autoScreenName = false;
 		String screenName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty(
-				PortalLDAPUtil.USER_MAPPING_SCREEN_NAME)).toLowerCase();
+			attrs, userMappings.getProperty("screenName")).toLowerCase();
 		String emailAddress = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty(
-				PortalLDAPUtil.USER_MAPPING_EMAIL_ADDRESS));
+			attrs, userMappings.getProperty("emailAddress"));
 		Locale locale = defaultUser.getLocale();
 		String firstName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty(
-				PortalLDAPUtil.USER_MAPPING_FIRST_NAME));
+			attrs, userMappings.getProperty("firstName"));
 		String middleName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty(
-				PortalLDAPUtil.USER_MAPPING_MIDDLE_NAME));
+			attrs, userMappings.getProperty("middleName"));
 		String lastName = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty(
-				PortalLDAPUtil.USER_MAPPING_LAST_NAME));
+			attrs, userMappings.getProperty("lastName"));
 
 		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
 			String fullName = LDAPUtil.getAttributeValue(
-				attrs, userMappings.getProperty(
-					PortalLDAPUtil.USER_MAPPING_FULL_NAME));
+				attrs, userMappings.getProperty("fullName"));
 
 			String[] names = LDAPUtil.splitFullName(fullName);
 
@@ -502,8 +460,7 @@ public class PortalLDAPUtil {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty(
-				PortalLDAPUtil.USER_MAPPING_JOB_TITLE));
+			attrs, userMappings.getProperty("jobTitle"));
 		long[] organizationIds = new long[0];
 		boolean sendEmail = false;
 
@@ -583,8 +540,7 @@ public class PortalLDAPUtil {
 		// Import user groups and membership
 
 		if (importGroupMembership && (user != null)) {
-			String userMappingsGroup = userMappings.getProperty(
-				PortalLDAPUtil.USER_MAPPING_GROUP);
+			String userMappingsGroup = userMappings.getProperty("group");
 
 			if (userMappingsGroup != null) {
 				Attribute attr = attrs.get(userMappingsGroup);
@@ -716,11 +672,9 @@ public class PortalLDAPUtil {
 			UserGroup userGroup = null;
 
 			String groupName = LDAPUtil.getAttributeValue(
-				groupAttrs, groupMappings.getProperty(
-					PortalLDAPUtil.GROUP_MAPPING_GROUP_NAME));
+				groupAttrs, groupMappings.getProperty("groupName"));
 			String description = LDAPUtil.getAttributeValue(
-				groupAttrs, groupMappings.getProperty(
-					PortalLDAPUtil.GROUP_MAPPING_DESCRIPTION));
+				groupAttrs, groupMappings.getProperty("description"));
 
 			try {
 				userGroup = UserGroupLocalServiceUtil.getUserGroup(
@@ -796,8 +750,7 @@ public class PortalLDAPUtil {
 			User user = null;
 
 			String emailAddress = LDAPUtil.getAttributeValue(
-				userAttrs, userMappings.getProperty(
-					PortalLDAPUtil.USER_MAPPING_EMAIL_ADDRESS));
+				userAttrs, userMappings.getProperty("emailAddress"));
 
 			try {
 				user = UserLocalServiceUtil.getUserByEmailAddress(
