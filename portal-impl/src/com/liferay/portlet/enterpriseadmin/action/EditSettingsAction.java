@@ -60,6 +60,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditSettingsAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Scott Lee
  *
  */
 public class EditSettingsAction extends PortletAction {
@@ -256,12 +257,28 @@ public class EditSettingsAction extends PortletAction {
 		String principal = ParamUtil.getString(req, "principal");
 		String credentials = ParamUtil.getString(req, "credentials");
 		String searchFilter = ParamUtil.getString(req, "searchFilter");
-		String usersDn = ParamUtil.getString(req, "usersDn");
+		String usersDN = ParamUtil.getString(req, "usersDN");
 		String userDefaultObjectClasses = ParamUtil.getString(
 			req, "userDefaultObjectClasses");
-		String userMappings = ParamUtil.getString(req, "userMappings");
-		String groupsDn = ParamUtil.getString(req, "groupsDn");
-		String groupMappings = ParamUtil.getString(req, "groupMappings");
+
+		String userMappings =
+			"screenName=" + ParamUtil.getString(req, "userMappingScreenName") +
+			"\npassword=" + ParamUtil.getString(req, "userMappingPassword") +
+			"\nemailAddress=" + 
+			ParamUtil.getString(req, "userMappingEmailAddress") +
+			"\nfirstName=" + ParamUtil.getString(req, "userMappingFirstName") +
+			"\nlastName=" + ParamUtil.getString(req, "userMappingLastName") +
+			"\njobTitle=" + ParamUtil.getString(req, "userMappingJobTitle") +
+			"\ngroup=" + ParamUtil.getString(req, "userMappingGroup");
+
+		String groupsDN = ParamUtil.getString(req, "groupsDN");
+
+		String groupMappings =
+			"groupName=" + ParamUtil.getString(req, "groupMappingGroupName") +
+			"\ndescription=" + 
+			ParamUtil.getString(req, "groupMappingDescription") +
+			"\nuser=" + ParamUtil.getString(req, "groupMappingUser");
+
 		boolean importEnabled = ParamUtil.getBoolean(req, "importEnabled");
 		boolean importOnStartup = ParamUtil.getBoolean(req, "importOnStartup");
 		long importInterval = ParamUtil.getLong(req, "importInterval");
@@ -310,12 +327,12 @@ public class EditSettingsAction extends PortletAction {
 		prefs.setValue(PropsUtil.LDAP_SECURITY_PRINCIPAL, principal);
 		prefs.setValue(PropsUtil.LDAP_SECURITY_CREDENTIALS, credentials);
 		prefs.setValue(PropsUtil.LDAP_AUTH_SEARCH_FILTER, searchFilter);
-		prefs.setValue(PropsUtil.LDAP_USERS_DN, usersDn);
+		prefs.setValue(PropsUtil.LDAP_USERS_DN, usersDN);
 		prefs.setValue(
 			PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES,
 			userDefaultObjectClasses);
 		prefs.setValue(PropsUtil.LDAP_USER_MAPPINGS, userMappings);
-		prefs.setValue(PropsUtil.LDAP_GROUPS_DN, groupsDn);
+		prefs.setValue(PropsUtil.LDAP_GROUPS_DN, groupsDN);
 		prefs.setValue(PropsUtil.LDAP_GROUP_MAPPINGS, groupMappings);
 		prefs.setValue(
 			PropsUtil.LDAP_IMPORT_ENABLED, String.valueOf(importEnabled));

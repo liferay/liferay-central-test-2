@@ -22,6 +22,92 @@
  */
 %>
 
+<%
+String userMappings = ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_MAPPINGS));
+
+System.out.println(userMappings);
+
+String[] userMappingArray = userMappings.split("\n");
+
+String userMappingScreenName = "";
+String userMappingPassword = "";
+String userMappingEmailAddress = "";
+String userMappingFirstName = "";
+String userMappingLastName = "";
+String userMappingJobTitle = "";
+String userMappingGroup = "";
+
+for (int i = 0 ; i < userMappingArray.length ; i++) {
+
+	if (userMappingArray[i].indexOf("=") == -1) {
+		continue;
+	}
+
+	String mapping[] = userMappingArray[i].split("=");
+
+	if (mapping.length != 2) {
+		continue;
+	}
+
+	if (mapping[0].equals("screenName")) {
+		userMappingScreenName = mapping[1];
+	}
+	else if (mapping[0].equals("password")) {
+		userMappingPassword = mapping[1];
+	}
+	else if (mapping[0].equals("emailAddress")) {
+		userMappingEmailAddress = mapping[1];
+	}
+	else if (mapping[0].equals("firstName")) {
+		userMappingFirstName = mapping[1];
+	}
+	else if (mapping[0].equals("lastName")) {
+		userMappingLastName = mapping[1];
+	}
+	else if (mapping[0].equals("jobTitle")) {
+		userMappingJobTitle = mapping[1];
+	}
+	else if (mapping[0].equals("group")) {
+		userMappingGroup = mapping[1];
+	}
+
+	mapping[1] = "";
+}
+
+String groupMappings = ParamUtil.getString(request, "groupMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUP_MAPPINGS));
+
+System.out.println(groupMappings);
+
+String[] groupMappingArray = groupMappings.split("\n");
+
+String groupMappingGroupName = "";
+String groupMappingDescription = "";
+String groupMappingUser = "";
+
+for (int i = 0 ; i < groupMappingArray.length ; i++) {
+
+	if (userMappingArray[i].indexOf("=") == -1) {
+		continue;
+	}
+
+	String mapping[] = groupMappingArray[i].split("=");
+
+	if (mapping.length != 2) {
+		continue;
+	}
+
+	if (mapping[0].equals("groupName")) {
+		groupMappingGroupName = mapping[1];
+	}
+	else if (mapping[0].equals("description")) {
+		groupMappingDescription = mapping[1];
+	}
+	else if (mapping[0].equals("user")) {
+		groupMappingUser = mapping[1];
+	}
+}
+%>
+
 <script type="text/javascript">
 	<portlet:namespace/>testSettings = function(type) {
 		var popup = Liferay.Popup(
@@ -85,8 +171,10 @@
 		document.<portlet:namespace />fm.<portlet:namespace />baseDN.value = baseDN;
 		document.<portlet:namespace />fm.<portlet:namespace />principal.value = principal;
 		document.<portlet:namespace />fm.<portlet:namespace />credentials.value = credentials;
+		document.<portlet:namespace />fm.<portlet:namespace />usersDN.value = baseDN;
+		document.<portlet:namespace />fm.<portlet:namespace />groupsDN.value = baseDN;
 		document.<portlet:namespace />fm.<portlet:namespace />searchFilter.value = searchFilter;
-		document.<portlet:namespace />fm.<portlet:namespace />userMappings.value = userMappings;
+		//document.<portlet:namespace />fm.<portlet:namespace />userMappings.value = userMappings;
 	}
 
 	jQuery(
@@ -205,7 +293,7 @@
 		<liferay-ui:message key="users-dn" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />usersDn" type="text" value='<%= ParamUtil.getString(request, "usersDn", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USERS_DN)) %>' />
+		<input class="liferay-input-text" name="<portlet:namespace />usersDN" type="text" value='<%= ParamUtil.getString(request, "usersDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USERS_DN)) %>' />
 	</td>
 </tr>
 <tr>
@@ -228,20 +316,71 @@
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="user-mapping" />
-	</td>
-	<td>
-		<textarea class="liferay-textarea" name="<portlet:namespace />userMappings"><%= ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_MAPPINGS)) %></textarea>
-
-		<liferay-ui:icon-help message="if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay" />
-	</td>
-</tr>
-<tr>
-	<td>
 		<liferay-ui:message key="user-default-object-classes" />
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />userDefaultObjectClasses" type="text" value='<%= ParamUtil.getString(request, "userDefaultObjectClasses", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES)) %>' />
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br /><liferay-ui:message key="user-mapping" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="screen-name" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />userMappingScreenName" type="text" value='<%= userMappingScreenName %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="password" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />userMappingPassword" type="text" value='<%= userMappingPassword %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="email-address" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />userMappingEmailAddress" type="text" value='<%= userMappingEmailAddress %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="first-name" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />userMappingFirstName" type="text" value='<%= userMappingFirstName %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="last-name" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />userMappingLastName" type="text" value='<%= userMappingLastName %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="job-title" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />userMappingJobTitle" type="text" value='<%= userMappingJobTitle %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="group" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />userMappingGroup" type="text" value='<%= userMappingGroup %>' />
 	</td>
 </tr>
 </table>
@@ -260,7 +399,7 @@
 		<liferay-ui:message key="groups-dn" />
 	</td>
 	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />groupsDn" type="text" value='<%= ParamUtil.getString(request, "groupsDn", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUPS_DN)) %>' />
+		<input class="liferay-input-text" name="<portlet:namespace />groupsDN" type="text" value='<%= ParamUtil.getString(request, "groupsDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUPS_DN)) %>' />
 	</td>
 </tr>
 <tr>
@@ -272,11 +411,32 @@
 	</td>
 </tr>
 <tr>
+	<td colspan="2">
+		<br /><liferay-ui:message key="group-mapping" />
+	</td>
+</tr>
+<tr>
 	<td>
-		<liferay-ui:message key="group-mapping" />
+		<liferay-ui:message key="group-name" />
 	</td>
 	<td>
-		<textarea class="liferay-textarea" name="<portlet:namespace />groupMappings"><%= ParamUtil.getString(request, "groupMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUP_MAPPINGS)) %></textarea>
+		<input class="liferay-input-text" name="<portlet:namespace />groupMappingGroupName" type="text" value='<%= groupMappingGroupName %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="description" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />groupMappingDescription" type="text" value='<%= groupMappingDescription %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="user" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />groupMappingUser" type="text" value='<%= groupMappingUser %>' />
 	</td>
 </tr>
 </table>
