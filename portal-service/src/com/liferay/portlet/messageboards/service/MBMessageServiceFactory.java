@@ -83,7 +83,7 @@ public class MBMessageServiceFactory {
 
 	private static final String _FACTORY = MBMessageServiceFactory.class.getName();
 	private static final String _IMPL = MBMessageService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = MBMessageService.class.getName() +
 		".transaction";
 	private static MBMessageServiceFactory _factory;

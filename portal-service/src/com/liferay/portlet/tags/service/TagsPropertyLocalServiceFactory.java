@@ -83,7 +83,7 @@ public class TagsPropertyLocalServiceFactory {
 
 	private static final String _FACTORY = TagsPropertyLocalServiceFactory.class.getName();
 	private static final String _IMPL = TagsPropertyLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = TagsPropertyLocalService.class.getName() +
 		".transaction";
 	private static TagsPropertyLocalServiceFactory _factory;

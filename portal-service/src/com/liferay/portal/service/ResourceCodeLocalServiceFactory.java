@@ -83,7 +83,7 @@ public class ResourceCodeLocalServiceFactory {
 
 	private static final String _FACTORY = ResourceCodeLocalServiceFactory.class.getName();
 	private static final String _IMPL = ResourceCodeLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = ResourceCodeLocalService.class.getName() +
 		".transaction";
 	private static ResourceCodeLocalServiceFactory _factory;

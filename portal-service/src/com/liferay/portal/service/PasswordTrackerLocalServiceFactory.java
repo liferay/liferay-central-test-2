@@ -83,7 +83,7 @@ public class PasswordTrackerLocalServiceFactory {
 
 	private static final String _FACTORY = PasswordTrackerLocalServiceFactory.class.getName();
 	private static final String _IMPL = PasswordTrackerLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = PasswordTrackerLocalService.class.getName() +
 		".transaction";
 	private static PasswordTrackerLocalServiceFactory _factory;

@@ -83,7 +83,7 @@ public class MBCategoryLocalServiceFactory {
 
 	private static final String _FACTORY = MBCategoryLocalServiceFactory.class.getName();
 	private static final String _IMPL = MBCategoryLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = MBCategoryLocalService.class.getName() +
 		".transaction";
 	private static MBCategoryLocalServiceFactory _factory;

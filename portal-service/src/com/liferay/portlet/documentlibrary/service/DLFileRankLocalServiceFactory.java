@@ -83,7 +83,7 @@ public class DLFileRankLocalServiceFactory {
 
 	private static final String _FACTORY = DLFileRankLocalServiceFactory.class.getName();
 	private static final String _IMPL = DLFileRankLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = DLFileRankLocalService.class.getName() +
 		".transaction";
 	private static DLFileRankLocalServiceFactory _factory;

@@ -83,7 +83,7 @@ public class LayoutServiceFactory {
 
 	private static final String _FACTORY = LayoutServiceFactory.class.getName();
 	private static final String _IMPL = LayoutService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = LayoutService.class.getName() +
 		".transaction";
 	private static LayoutServiceFactory _factory;

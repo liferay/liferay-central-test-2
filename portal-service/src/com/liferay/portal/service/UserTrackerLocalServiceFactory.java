@@ -83,7 +83,7 @@ public class UserTrackerLocalServiceFactory {
 
 	private static final String _FACTORY = UserTrackerLocalServiceFactory.class.getName();
 	private static final String _IMPL = UserTrackerLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = UserTrackerLocalService.class.getName() +
 		".transaction";
 	private static UserTrackerLocalServiceFactory _factory;

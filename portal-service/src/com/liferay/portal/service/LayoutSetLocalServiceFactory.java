@@ -83,7 +83,7 @@ public class LayoutSetLocalServiceFactory {
 
 	private static final String _FACTORY = LayoutSetLocalServiceFactory.class.getName();
 	private static final String _IMPL = LayoutSetLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = LayoutSetLocalService.class.getName() +
 		".transaction";
 	private static LayoutSetLocalServiceFactory _factory;

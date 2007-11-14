@@ -83,7 +83,7 @@ public class IGFolderLocalServiceFactory {
 
 	private static final String _FACTORY = IGFolderLocalServiceFactory.class.getName();
 	private static final String _IMPL = IGFolderLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = IGFolderLocalService.class.getName() +
 		".transaction";
 	private static IGFolderLocalServiceFactory _factory;

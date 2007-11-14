@@ -83,7 +83,7 @@ public class CalEventLocalServiceFactory {
 
 	private static final String _FACTORY = CalEventLocalServiceFactory.class.getName();
 	private static final String _IMPL = CalEventLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = CalEventLocalService.class.getName() +
 		".transaction";
 	private static CalEventLocalServiceFactory _factory;

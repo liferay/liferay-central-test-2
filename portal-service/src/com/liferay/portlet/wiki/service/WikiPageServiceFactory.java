@@ -83,7 +83,7 @@ public class WikiPageServiceFactory {
 
 	private static final String _FACTORY = WikiPageServiceFactory.class.getName();
 	private static final String _IMPL = WikiPageService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = WikiPageService.class.getName() +
 		".transaction";
 	private static WikiPageServiceFactory _factory;

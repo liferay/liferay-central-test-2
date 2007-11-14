@@ -69,7 +69,7 @@ public class CounterLocalServiceFactory {
 		CounterLocalServiceFactory.class.getName();
 
 	private static final String _IMPL =
-		CounterLocalService.class.getName() + ".professional";
+		CounterLocalService.class.getName() + ".impl";
 
 	private static final String _TX_IMPL =
 		CounterLocalService.class.getName() + ".transaction";

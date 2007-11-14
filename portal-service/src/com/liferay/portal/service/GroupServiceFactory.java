@@ -82,8 +82,7 @@ public class GroupServiceFactory {
 	}
 
 	private static final String _FACTORY = GroupServiceFactory.class.getName();
-	private static final String _IMPL = GroupService.class.getName() +
-		".professional";
+	private static final String _IMPL = GroupService.class.getName() + ".impl";
 	private static final String _TX_IMPL = GroupService.class.getName() +
 		".transaction";
 	private static GroupServiceFactory _factory;

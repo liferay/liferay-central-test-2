@@ -2,13 +2,13 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-	<bean id="com.ext.portlet.reports.service.ReportsEntryService.professional" class="com.ext.portlet.reports.service.impl.ReportsEntryServiceImpl" lazy-init="true" />
+	<bean id="com.ext.portlet.reports.service.ReportsEntryService.impl" class="com.ext.portlet.reports.service.impl.ReportsEntryServiceImpl" lazy-init="true" />
 	<bean id="com.ext.portlet.reports.service.ReportsEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.ext.portlet.reports.service.ReportsEntryService.professional" />
+			<ref bean="com.ext.portlet.reports.service.ReportsEntryService.impl" />
 		</property>
 		<property name="transactionAttributes">
 			<props>

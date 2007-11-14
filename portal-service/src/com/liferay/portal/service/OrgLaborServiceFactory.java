@@ -83,7 +83,7 @@ public class OrgLaborServiceFactory {
 
 	private static final String _FACTORY = OrgLaborServiceFactory.class.getName();
 	private static final String _IMPL = OrgLaborService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = OrgLaborService.class.getName() +
 		".transaction";
 	private static OrgLaborServiceFactory _factory;

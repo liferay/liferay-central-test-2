@@ -83,7 +83,7 @@ public class ReleaseLocalServiceFactory {
 
 	private static final String _FACTORY = ReleaseLocalServiceFactory.class.getName();
 	private static final String _IMPL = ReleaseLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = ReleaseLocalService.class.getName() +
 		".transaction";
 	private static ReleaseLocalServiceFactory _factory;

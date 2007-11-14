@@ -83,7 +83,7 @@ public class BookmarksEntryLocalServiceFactory {
 
 	private static final String _FACTORY = BookmarksEntryLocalServiceFactory.class.getName();
 	private static final String _IMPL = BookmarksEntryLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = BookmarksEntryLocalService.class.getName() +
 		".transaction";
 	private static BookmarksEntryLocalServiceFactory _factory;

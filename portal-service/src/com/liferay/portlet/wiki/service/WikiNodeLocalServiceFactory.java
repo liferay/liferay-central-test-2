@@ -83,7 +83,7 @@ public class WikiNodeLocalServiceFactory {
 
 	private static final String _FACTORY = WikiNodeLocalServiceFactory.class.getName();
 	private static final String _IMPL = WikiNodeLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = WikiNodeLocalService.class.getName() +
 		".transaction";
 	private static WikiNodeLocalServiceFactory _factory;

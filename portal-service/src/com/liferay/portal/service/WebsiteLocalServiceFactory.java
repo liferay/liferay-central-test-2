@@ -83,7 +83,7 @@ public class WebsiteLocalServiceFactory {
 
 	private static final String _FACTORY = WebsiteLocalServiceFactory.class.getName();
 	private static final String _IMPL = WebsiteLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = WebsiteLocalService.class.getName() +
 		".transaction";
 	private static WebsiteLocalServiceFactory _factory;

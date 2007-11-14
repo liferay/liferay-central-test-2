@@ -83,7 +83,7 @@ public class MBMessageFlagLocalServiceFactory {
 
 	private static final String _FACTORY = MBMessageFlagLocalServiceFactory.class.getName();
 	private static final String _IMPL = MBMessageFlagLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = MBMessageFlagLocalService.class.getName() +
 		".transaction";
 	private static MBMessageFlagLocalServiceFactory _factory;

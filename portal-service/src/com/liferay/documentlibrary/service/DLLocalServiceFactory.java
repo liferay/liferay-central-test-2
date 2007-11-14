@@ -60,7 +60,7 @@ public class DLLocalServiceFactory {
 		DLLocalServiceFactory.class.getName();
 
 	private static final String _IMPL =
-		DLLocalService.class.getName() + ".professional";
+		DLLocalService.class.getName() + ".impl";
 
 	private static DLLocalServiceFactory _factory;
 	private static DLLocalService _impl;

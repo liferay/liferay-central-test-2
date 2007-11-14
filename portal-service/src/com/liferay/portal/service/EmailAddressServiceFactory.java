@@ -83,7 +83,7 @@ public class EmailAddressServiceFactory {
 
 	private static final String _FACTORY = EmailAddressServiceFactory.class.getName();
 	private static final String _IMPL = EmailAddressService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = EmailAddressService.class.getName() +
 		".transaction";
 	private static EmailAddressServiceFactory _factory;

@@ -83,7 +83,7 @@ public class DLFolderServiceFactory {
 
 	private static final String _FACTORY = DLFolderServiceFactory.class.getName();
 	private static final String _IMPL = DLFolderService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = DLFolderService.class.getName() +
 		".transaction";
 	private static DLFolderServiceFactory _factory;

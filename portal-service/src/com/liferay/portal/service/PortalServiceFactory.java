@@ -83,7 +83,7 @@ public class PortalServiceFactory {
 
 	private static final String _FACTORY = PortalServiceFactory.class.getName();
 	private static final String _IMPL = PortalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = PortalService.class.getName() +
 		".transaction";
 	private static PortalServiceFactory _factory;

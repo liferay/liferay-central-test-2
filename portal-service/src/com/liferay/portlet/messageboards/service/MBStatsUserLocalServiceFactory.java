@@ -83,7 +83,7 @@ public class MBStatsUserLocalServiceFactory {
 
 	private static final String _FACTORY = MBStatsUserLocalServiceFactory.class.getName();
 	private static final String _IMPL = MBStatsUserLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = MBStatsUserLocalService.class.getName() +
 		".transaction";
 	private static MBStatsUserLocalServiceFactory _factory;

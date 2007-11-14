@@ -83,7 +83,7 @@ public class JournalArticleServiceFactory {
 
 	private static final String _FACTORY = JournalArticleServiceFactory.class.getName();
 	private static final String _IMPL = JournalArticleService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = JournalArticleService.class.getName() +
 		".transaction";
 	private static JournalArticleServiceFactory _factory;

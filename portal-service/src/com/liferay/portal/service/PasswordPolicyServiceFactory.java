@@ -83,7 +83,7 @@ public class PasswordPolicyServiceFactory {
 
 	private static final String _FACTORY = PasswordPolicyServiceFactory.class.getName();
 	private static final String _IMPL = PasswordPolicyService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = PasswordPolicyService.class.getName() +
 		".transaction";
 	private static PasswordPolicyServiceFactory _factory;

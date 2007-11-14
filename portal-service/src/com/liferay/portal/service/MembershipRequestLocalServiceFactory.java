@@ -83,7 +83,7 @@ public class MembershipRequestLocalServiceFactory {
 
 	private static final String _FACTORY = MembershipRequestLocalServiceFactory.class.getName();
 	private static final String _IMPL = MembershipRequestLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = MembershipRequestLocalService.class.getName() +
 		".transaction";
 	private static MembershipRequestLocalServiceFactory _factory;

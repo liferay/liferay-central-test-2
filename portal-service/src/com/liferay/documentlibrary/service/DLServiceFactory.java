@@ -58,8 +58,7 @@ public class DLServiceFactory {
 
 	private static final String _FACTORY = DLServiceFactory.class.getName();
 
-	private static final String _IMPL =
-		DLService.class.getName() + ".professional";
+	private static final String _IMPL = DLService.class.getName() + ".impl";
 
 	private static DLServiceFactory _factory;
 	private static DLService _impl;

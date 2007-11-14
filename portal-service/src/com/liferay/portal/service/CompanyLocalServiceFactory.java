@@ -83,7 +83,7 @@ public class CompanyLocalServiceFactory {
 
 	private static final String _FACTORY = CompanyLocalServiceFactory.class.getName();
 	private static final String _IMPL = CompanyLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = CompanyLocalService.class.getName() +
 		".transaction";
 	private static CompanyLocalServiceFactory _factory;

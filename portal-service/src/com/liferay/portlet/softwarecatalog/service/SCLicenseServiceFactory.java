@@ -83,7 +83,7 @@ public class SCLicenseServiceFactory {
 
 	private static final String _FACTORY = SCLicenseServiceFactory.class.getName();
 	private static final String _IMPL = SCLicenseService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = SCLicenseService.class.getName() +
 		".transaction";
 	private static SCLicenseServiceFactory _factory;

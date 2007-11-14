@@ -83,7 +83,7 @@ public class UserGroupRoleServiceFactory {
 
 	private static final String _FACTORY = UserGroupRoleServiceFactory.class.getName();
 	private static final String _IMPL = UserGroupRoleService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = UserGroupRoleService.class.getName() +
 		".transaction";
 	private static UserGroupRoleServiceFactory _factory;

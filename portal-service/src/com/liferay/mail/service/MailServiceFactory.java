@@ -66,8 +66,7 @@ public class MailServiceFactory {
 
 	private static final String _FACTORY = MailServiceFactory.class.getName();
 
-	private static final String _IMPL =
-		MailService.class.getName() + ".professional";
+	private static final String _IMPL = MailService.class.getName() + ".impl";
 
 	private static final String _TX_IMPL =
 		MailService.class.getName() + ".transaction";

@@ -83,7 +83,7 @@ public class DLFileEntryLocalServiceFactory {
 
 	private static final String _FACTORY = DLFileEntryLocalServiceFactory.class.getName();
 	private static final String _IMPL = DLFileEntryLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = DLFileEntryLocalService.class.getName() +
 		".transaction";
 	private static DLFileEntryLocalServiceFactory _factory;

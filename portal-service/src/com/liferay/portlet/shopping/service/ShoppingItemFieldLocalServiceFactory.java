@@ -83,7 +83,7 @@ public class ShoppingItemFieldLocalServiceFactory {
 
 	private static final String _FACTORY = ShoppingItemFieldLocalServiceFactory.class.getName();
 	private static final String _IMPL = ShoppingItemFieldLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = ShoppingItemFieldLocalService.class.getName() +
 		".transaction";
 	private static ShoppingItemFieldLocalServiceFactory _factory;

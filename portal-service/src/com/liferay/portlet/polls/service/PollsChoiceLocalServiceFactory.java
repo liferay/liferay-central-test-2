@@ -83,7 +83,7 @@ public class PollsChoiceLocalServiceFactory {
 
 	private static final String _FACTORY = PollsChoiceLocalServiceFactory.class.getName();
 	private static final String _IMPL = PollsChoiceLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = PollsChoiceLocalService.class.getName() +
 		".transaction";
 	private static PollsChoiceLocalServiceFactory _factory;

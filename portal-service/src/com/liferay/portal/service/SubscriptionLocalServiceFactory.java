@@ -83,7 +83,7 @@ public class SubscriptionLocalServiceFactory {
 
 	private static final String _FACTORY = SubscriptionLocalServiceFactory.class.getName();
 	private static final String _IMPL = SubscriptionLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = SubscriptionLocalService.class.getName() +
 		".transaction";
 	private static SubscriptionLocalServiceFactory _factory;

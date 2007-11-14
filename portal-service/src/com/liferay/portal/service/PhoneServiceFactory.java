@@ -82,8 +82,7 @@ public class PhoneServiceFactory {
 	}
 
 	private static final String _FACTORY = PhoneServiceFactory.class.getName();
-	private static final String _IMPL = PhoneService.class.getName() +
-		".professional";
+	private static final String _IMPL = PhoneService.class.getName() + ".impl";
 	private static final String _TX_IMPL = PhoneService.class.getName() +
 		".transaction";
 	private static PhoneServiceFactory _factory;

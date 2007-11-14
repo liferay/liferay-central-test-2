@@ -83,7 +83,7 @@ public class TagsSourceServiceFactory {
 
 	private static final String _FACTORY = TagsSourceServiceFactory.class.getName();
 	private static final String _IMPL = TagsSourceService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = TagsSourceService.class.getName() +
 		".transaction";
 	private static TagsSourceServiceFactory _factory;

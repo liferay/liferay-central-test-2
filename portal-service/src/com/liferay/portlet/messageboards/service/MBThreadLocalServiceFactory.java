@@ -83,7 +83,7 @@ public class MBThreadLocalServiceFactory {
 
 	private static final String _FACTORY = MBThreadLocalServiceFactory.class.getName();
 	private static final String _IMPL = MBThreadLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = MBThreadLocalService.class.getName() +
 		".transaction";
 	private static MBThreadLocalServiceFactory _factory;

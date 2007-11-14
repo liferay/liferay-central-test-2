@@ -82,8 +82,7 @@ public class RoleServiceFactory {
 	}
 
 	private static final String _FACTORY = RoleServiceFactory.class.getName();
-	private static final String _IMPL = RoleService.class.getName() +
-		".professional";
+	private static final String _IMPL = RoleService.class.getName() + ".impl";
 	private static final String _TX_IMPL = RoleService.class.getName() +
 		".transaction";
 	private static RoleServiceFactory _factory;

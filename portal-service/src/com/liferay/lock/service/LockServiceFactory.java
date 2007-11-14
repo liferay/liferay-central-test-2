@@ -58,8 +58,7 @@ public class LockServiceFactory {
 
 	private static final String _FACTORY = LockServiceFactory.class.getName();
 
-	private static final String _IMPL =
-		LockService.class.getName() + ".professional";
+	private static final String _IMPL = LockService.class.getName() + ".impl";
 
 	private static LockServiceFactory _factory;
 	private static LockService _impl;

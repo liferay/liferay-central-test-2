@@ -83,7 +83,7 @@ public class SCFrameworkVersionLocalServiceFactory {
 
 	private static final String _FACTORY = SCFrameworkVersionLocalServiceFactory.class.getName();
 	private static final String _IMPL = SCFrameworkVersionLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = SCFrameworkVersionLocalService.class.getName() +
 		".transaction";
 	private static SCFrameworkVersionLocalServiceFactory _factory;

@@ -83,7 +83,7 @@ public class UserIdMapperLocalServiceFactory {
 
 	private static final String _FACTORY = UserIdMapperLocalServiceFactory.class.getName();
 	private static final String _IMPL = UserIdMapperLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = UserIdMapperLocalService.class.getName() +
 		".transaction";
 	private static UserIdMapperLocalServiceFactory _factory;

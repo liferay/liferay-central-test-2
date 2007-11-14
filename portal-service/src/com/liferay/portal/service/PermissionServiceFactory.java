@@ -83,7 +83,7 @@ public class PermissionServiceFactory {
 
 	private static final String _FACTORY = PermissionServiceFactory.class.getName();
 	private static final String _IMPL = PermissionService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = PermissionService.class.getName() +
 		".transaction";
 	private static PermissionServiceFactory _factory;

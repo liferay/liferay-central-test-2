@@ -83,7 +83,7 @@ public class RegionServiceFactory {
 
 	private static final String _FACTORY = RegionServiceFactory.class.getName();
 	private static final String _IMPL = RegionService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = RegionService.class.getName() +
 		".transaction";
 	private static RegionServiceFactory _factory;

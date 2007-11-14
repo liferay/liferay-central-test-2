@@ -83,7 +83,7 @@ public class AddressServiceFactory {
 
 	private static final String _FACTORY = AddressServiceFactory.class.getName();
 	private static final String _IMPL = AddressService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = AddressService.class.getName() +
 		".transaction";
 	private static AddressServiceFactory _factory;

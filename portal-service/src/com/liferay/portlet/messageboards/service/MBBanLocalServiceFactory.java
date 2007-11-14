@@ -83,7 +83,7 @@ public class MBBanLocalServiceFactory {
 
 	private static final String _FACTORY = MBBanLocalServiceFactory.class.getName();
 	private static final String _IMPL = MBBanLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = MBBanLocalService.class.getName() +
 		".transaction";
 	private static MBBanLocalServiceFactory _factory;

@@ -83,7 +83,7 @@ public class JournalStructureLocalServiceFactory {
 
 	private static final String _FACTORY = JournalStructureLocalServiceFactory.class.getName();
 	private static final String _IMPL = JournalStructureLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = JournalStructureLocalService.class.getName() +
 		".transaction";
 	private static JournalStructureLocalServiceFactory _factory;

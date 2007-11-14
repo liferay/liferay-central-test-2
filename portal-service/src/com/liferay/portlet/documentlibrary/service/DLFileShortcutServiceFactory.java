@@ -83,7 +83,7 @@ public class DLFileShortcutServiceFactory {
 
 	private static final String _FACTORY = DLFileShortcutServiceFactory.class.getName();
 	private static final String _IMPL = DLFileShortcutService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = DLFileShortcutService.class.getName() +
 		".transaction";
 	private static DLFileShortcutServiceFactory _factory;

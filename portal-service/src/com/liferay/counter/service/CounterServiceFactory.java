@@ -68,7 +68,7 @@ public class CounterServiceFactory {
 		CounterServiceFactory.class.getName();
 
 	private static final String _IMPL =
-		CounterService.class.getName() + ".professional";
+		CounterService.class.getName() + ".impl";
 
 	private static final String _TX_IMPL =
 		CounterService.class.getName() + ".transaction";

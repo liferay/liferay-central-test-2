@@ -83,7 +83,7 @@ public class ShoppingOrderServiceFactory {
 
 	private static final String _FACTORY = ShoppingOrderServiceFactory.class.getName();
 	private static final String _IMPL = ShoppingOrderService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = ShoppingOrderService.class.getName() +
 		".transaction";
 	private static ShoppingOrderServiceFactory _factory;

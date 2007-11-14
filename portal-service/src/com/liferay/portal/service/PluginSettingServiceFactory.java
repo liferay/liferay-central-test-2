@@ -83,7 +83,7 @@ public class PluginSettingServiceFactory {
 
 	private static final String _FACTORY = PluginSettingServiceFactory.class.getName();
 	private static final String _IMPL = PluginSettingService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = PluginSettingService.class.getName() +
 		".transaction";
 	private static PluginSettingServiceFactory _factory;

@@ -83,7 +83,7 @@ public class SCProductEntryLocalServiceFactory {
 
 	private static final String _FACTORY = SCProductEntryLocalServiceFactory.class.getName();
 	private static final String _IMPL = SCProductEntryLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = SCProductEntryLocalService.class.getName() +
 		".transaction";
 	private static SCProductEntryLocalServiceFactory _factory;

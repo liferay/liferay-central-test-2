@@ -83,7 +83,7 @@ public class SCProductVersionServiceFactory {
 
 	private static final String _FACTORY = SCProductVersionServiceFactory.class.getName();
 	private static final String _IMPL = SCProductVersionService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = SCProductVersionService.class.getName() +
 		".transaction";
 	private static SCProductVersionServiceFactory _factory;

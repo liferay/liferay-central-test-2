@@ -83,7 +83,7 @@ public class PermissionLocalServiceFactory {
 
 	private static final String _FACTORY = PermissionLocalServiceFactory.class.getName();
 	private static final String _IMPL = PermissionLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = PermissionLocalService.class.getName() +
 		".transaction";
 	private static PermissionLocalServiceFactory _factory;

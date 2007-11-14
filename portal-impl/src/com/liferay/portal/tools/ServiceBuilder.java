@@ -5960,7 +5960,7 @@ public class ServiceBuilder {
 		// Fields
 
 		sm.append("private static final String _FACTORY = " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.class.getName();");
-		sm.append("private static final String _IMPL = " + entity.getName() + _getSessionTypeName(sessionType) + "Service.class.getName() + \".professional\";");
+		sm.append("private static final String _IMPL = " + entity.getName() + _getSessionTypeName(sessionType) + "Service.class.getName() + \".impl\";");
 		sm.append("private static final String _TX_IMPL = " + entity.getName() + _getSessionTypeName(sessionType) + "Service.class.getName() + \".transaction\";");
 
 		sm.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory _factory;");
@@ -6958,7 +6958,7 @@ public class ServiceBuilder {
 		List referenceList = _mergeReferenceList(entity.getReferenceList());
 		List txRequiredList = entity.getTxRequiredList();
 
-		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" class=\"" + _packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl\" lazy-init=\"true\"");
+		sm.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.impl\" class=\"" + _packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl\" lazy-init=\"true\"");
 
 		if (true) {
 			sm.append(" />\n");
@@ -6982,20 +6982,20 @@ public class ServiceBuilder {
 				if (entity.equals(tempEntity)) {
 					if ((sessionType == _REMOTE) && tempEntity.hasLocalService()) {
 						sm.append("\t\t<property name=\"" + tempEntityName + "LocalService\">\n");
-						sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalService.professional\" />\n");
+						sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalService.impl\" />\n");
 						sm.append("\t\t</property>\n");
 					}
 				}
 				else {
 					if (tempEntity.hasLocalService()) {
 						sm.append("\t\t<property name=\"" + tempEntityName + "LocalService\">\n");
-						sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalService.professional\" />\n");
+						sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "LocalService.impl\" />\n");
 						sm.append("\t\t</property>\n");
 					}
 
 					if (tempEntity.hasRemoteService()) {
 						sm.append("\t\t<property name=\"" + tempEntityName + "Service\">\n");
-						sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "Service.professional\" />\n");
+						sm.append("\t\t\t<ref bean=\"" + tempEntity.getPackagePath() + ".service." + tempEntity.getName() + "Service.impl\" />\n");
 						sm.append("\t\t</property>\n");
 					}
 				}
@@ -7021,7 +7021,7 @@ public class ServiceBuilder {
 		sm.append("\t\t\t<ref bean=\"" + entity.getTXManager() + "\" />\n");
 		sm.append("\t\t</property>\n");
 		sm.append("\t\t<property name=\"target\">\n");
-		sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" />\n");
+		sm.append("\t\t\t<ref bean=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.impl\" />\n");
 		sm.append("\t\t</property>\n");
 		sm.append("\t\t<property name=\"transactionAttributes\">\n");
 		sm.append("\t\t\t<props>\n");

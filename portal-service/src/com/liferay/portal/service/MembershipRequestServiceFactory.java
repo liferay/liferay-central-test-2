@@ -83,7 +83,7 @@ public class MembershipRequestServiceFactory {
 
 	private static final String _FACTORY = MembershipRequestServiceFactory.class.getName();
 	private static final String _IMPL = MembershipRequestService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = MembershipRequestService.class.getName() +
 		".transaction";
 	private static MembershipRequestServiceFactory _factory;

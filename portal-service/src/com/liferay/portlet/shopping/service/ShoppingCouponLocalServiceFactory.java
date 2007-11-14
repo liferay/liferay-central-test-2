@@ -83,7 +83,7 @@ public class ShoppingCouponLocalServiceFactory {
 
 	private static final String _FACTORY = ShoppingCouponLocalServiceFactory.class.getName();
 	private static final String _IMPL = ShoppingCouponLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = ShoppingCouponLocalService.class.getName() +
 		".transaction";
 	private static ShoppingCouponLocalServiceFactory _factory;

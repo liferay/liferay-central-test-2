@@ -83,7 +83,7 @@ public class ImageLocalServiceFactory {
 
 	private static final String _FACTORY = ImageLocalServiceFactory.class.getName();
 	private static final String _IMPL = ImageLocalService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = ImageLocalService.class.getName() +
 		".transaction";
 	private static ImageLocalServiceFactory _factory;

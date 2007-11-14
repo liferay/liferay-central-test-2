@@ -83,7 +83,7 @@ public class PortletServiceFactory {
 
 	private static final String _FACTORY = PortletServiceFactory.class.getName();
 	private static final String _IMPL = PortletService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = PortletService.class.getName() +
 		".transaction";
 	private static PortletServiceFactory _factory;

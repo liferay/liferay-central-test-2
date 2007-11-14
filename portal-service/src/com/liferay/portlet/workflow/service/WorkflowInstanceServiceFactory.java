@@ -83,7 +83,7 @@ public class WorkflowInstanceServiceFactory {
 
 	private static final String _FACTORY = WorkflowInstanceServiceFactory.class.getName();
 	private static final String _IMPL = WorkflowInstanceService.class.getName() +
-		".professional";
+		".impl";
 	private static final String _TX_IMPL = WorkflowInstanceService.class.getName() +
 		".transaction";
 	private static WorkflowInstanceServiceFactory _factory;
