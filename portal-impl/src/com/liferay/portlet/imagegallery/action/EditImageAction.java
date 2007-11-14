@@ -24,6 +24,7 @@ package com.liferay.portlet.imagegallery.action;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -38,6 +39,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
+import com.liferay.util.FileUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 
@@ -137,6 +139,29 @@ public class EditImageAction extends PortletAction {
 		IGImageServiceUtil.deleteImage(imageId);
 	}
 
+	protected String getContentType(UploadPortletRequest uploadReq, File file) {
+		String contentType = GetterUtil.getString(
+			uploadReq.getContentType("file"));
+
+		if (contentType.equals("application/octet-stream")) {
+			String ext = GetterUtil.getString(
+				FileUtil.getExtension(file.getName())).toLowerCase();
+
+			if (Validator.isNotNull(ext)) {
+				if (ext.equals("jpg")) {
+					ext = "jpeg";
+				}
+				else if (ext.equals("tif")) {
+					ext = "tiff";
+				}
+
+				contentType = "image/" + ext;
+			}
+		}
+
+		return contentType;
+	}
+
 	protected void updateImage(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq =
 			PortalUtil.getUploadPortletRequest(req);
@@ -151,7 +176,23 @@ public class EditImageAction extends PortletAction {
 		}
 
 		File file = uploadReq.getFile("file");
-		String contentType = uploadReq.getContentType("file");
+		String contentType = getContentType(uploadReq, file);
+
+		if (contentType.equals("application/octet-stream")) {
+			String ext = GetterUtil.getString(
+				FileUtil.getExtension(file.getName())).toLowerCase();
+
+			if (Validator.isNotNull(ext)) {
+				if (ext.equals("jpg")) {
+					ext = "jpeg";
+				}
+				else if (ext.equals("tif")) {
+					ext = "tiff";
+				}
+
+				contentType = "image/" + ext;
+			}
+		}
 
 		String[] tagsEntries = StringUtil.split(
 			ParamUtil.getString(uploadReq, "tagsEntries"));
