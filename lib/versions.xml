@@ -1202,6 +1202,28 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/jai_codec.jar</file-name>
+		<version>1.1.3</version>
+		<project-name>Java Advanced Imaging</project-name>
+		<project-url>http://java.sun.com/javase/technologies/desktop/media/jai</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/jai_core.jar</file-name>
+		<version>1.1.3</version>
+		<project-name>Java Advanced Imaging</project-name>
+		<project-url>http://java.sun.com/javase/technologies/desktop/media/jai</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/jaxen.jar</file-name>
 		<version>1.1b4</version>
 		<project-name>Jaxen</project-name>

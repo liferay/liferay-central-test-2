@@ -43,7 +43,10 @@ import com.liferay.portlet.imagegallery.util.Indexer;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ImageUtil;
 
-import java.awt.image.BufferedImage;
+import com.sun.media.jai.codec.ImageCodec;
+import com.sun.media.jai.codec.ImageEncoder;
+
+import java.awt.image.RenderedImage;
 
 import java.io.File;
 import java.io.IOException;
@@ -113,7 +116,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			User user = userPersistence.findByPrimaryKey(userId);
 			IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
-			BufferedImage bufferedImage = ImageIO.read(file);
+			RenderedImage renderedImage = ImageUtil.read(
+				file).getRenderedImage();
 			byte[] bytes = FileUtil.getBytes(file);
 			Date now = new Date();
 
@@ -138,7 +142,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			// Images
 
 			saveImages(
-				image.getLargeImageId(), bufferedImage, image.getSmallImageId(),
+				image.getLargeImageId(), renderedImage, image.getSmallImageId(),
 				file, bytes, contentType);
 
 			// Resources
@@ -358,12 +362,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			IGFolder folder = getFolder(image, folderId);
 
-			BufferedImage bufferedImage = null;
+			RenderedImage renderedImage = null;
 			byte[] bytes = null;
 
 			if (file != null) {
 				if (file.exists()) {
-					bufferedImage = ImageIO.read(file);
+					renderedImage = ImageUtil.read(file).getRenderedImage();
 					bytes = FileUtil.getBytes(file);
 				}
 
@@ -378,9 +382,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Images
 
-			if (bufferedImage != null) {
+			if (renderedImage != null) {
 				saveImages(
-					image.getLargeImageId(), bufferedImage,
+					image.getLargeImageId(), renderedImage,
 					image.getSmallImageId(), file, bytes, contentType);
 			}
 
@@ -444,7 +448,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	protected void saveImages(
-			long largeImageId, BufferedImage bufferedImage, long smallImageId,
+			long largeImageId, RenderedImage renderedImage, long smallImageId,
 			File file, byte[] bytes, String contentType)
 		throws SystemException {
 
@@ -462,12 +466,18 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			int thumbnailMaxWidth = GetterUtil.getInteger(
 				PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_WIDTH));
 
-			BufferedImage thumbnail = ImageUtil.scale(
-				bufferedImage, thumbnailMaxHeight, thumbnailMaxWidth);
+			RenderedImage thumbnail = ImageUtil.scale(
+				renderedImage, thumbnailMaxHeight, thumbnailMaxWidth);
 
 			ByteArrayMaker bam = new ByteArrayMaker();
 
-			if (contentType.indexOf("gif") != -1) {
+			if (contentType.indexOf("bmp") != -1) {
+				ImageEncoder encoder = ImageCodec.createImageEncoder(
+					"BMP", bam, null);
+
+				encoder.encode(thumbnail);
+			}
+			else if (contentType.indexOf("gif") != -1) {
 				ImageUtil.encodeGIF(thumbnail, bam);
 			}
 			else if (contentType.indexOf("jpg") != -1 ||
@@ -477,6 +487,12 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			}
 			else if (contentType.indexOf("png") != -1) {
 				ImageIO.write(thumbnail, "png", bam);
+			}
+			else if (contentType.indexOf("tif") != -1) {
+				ImageEncoder encoder = ImageCodec.createImageEncoder(
+					"TIFF", bam, null);
+
+				encoder.encode(thumbnail);
 			}
 
 			ImageLocalUtil.updateImage(smallImageId, bam.toByteArray());

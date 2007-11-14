@@ -20,50 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
+package com.liferay.util;
 
-import com.liferay.portal.kernel.util.Base64;
-import com.liferay.portal.model.Image;
-import com.liferay.util.ImageUtil;
+import java.awt.image.RenderedImage;
 
 /**
- * <a href="ImageImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImageBag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ImageImpl extends ImageModelImpl implements Image {
+public class ImageBag {
 
-	public static final String TYPE_BMP = ImageUtil.TYPE_BMP;
-
-	public static final String TYPE_GIF = ImageUtil.TYPE_GIF;
-
-	public static final String TYPE_JPEG = ImageUtil.TYPE_JPEG;
-
-	public static final String TYPE_PNG = ImageUtil.TYPE_PNG;
-
-	public static final String TYPE_TIFF = ImageUtil.TYPE_TIFF;
-
-	public static final String TYPE_NOT_AVAILABLE =
-		ImageUtil.TYPE_NOT_AVAILABLE;
-
-	public ImageImpl() {
+	public ImageBag(RenderedImage renderedImage, String type) {
+		_renderedImage = renderedImage;
+		_type = type;
 	}
 
-	public byte[] getTextObj() {
-		if (_textObj == null) {
-			_textObj = (byte[])Base64.stringToObject(getText());
-		}
-
-		return _textObj;
+	public RenderedImage getRenderedImage() {
+		return _renderedImage;
 	}
 
-	public void setTextObj(byte[] textObj) {
-		_textObj = textObj;
-
-		super.setText(Base64.objectToString(textObj));
+	public String getType() {
+		return _type;
 	}
 
-	private byte[] _textObj;
+	private RenderedImage _renderedImage;
+	private String _type;
 
 }

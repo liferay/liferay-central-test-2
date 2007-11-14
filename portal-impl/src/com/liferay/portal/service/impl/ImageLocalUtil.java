@@ -29,25 +29,17 @@ import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
+import com.liferay.util.ImageBag;
+import com.liferay.util.ImageUtil;
 
-import com.sun.imageio.plugins.gif.GIFImageReader;
-import com.sun.imageio.plugins.jpeg.JPEGImageReader;
-import com.sun.imageio.plugins.png.PNGImageReader;
+import java.awt.image.RenderedImage;
 
-import java.awt.image.BufferedImage;
-
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Arrays;
-import java.util.Iterator;
-
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.MemoryCacheImageInputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -258,55 +250,24 @@ public class ImageLocalUtil {
 	}
 
 	private Image _getImage(InputStream is, byte[] bytes) throws IOException {
-		MemoryCacheImageInputStream mcis = null;
-
 		try {
-			if (is == null) {
-				is = new ByteArrayInputStream(bytes);
-			}
-			else {
-				try {
-					bytes = FileUtil.getBytes(is);
-				}
-				finally {
-					is.close();
-				}
-
-				is = new ByteArrayInputStream(bytes);
+			if (is != null) {
+				bytes = FileUtil.getBytes(is);
 			}
 
-			mcis = new MemoryCacheImageInputStream(is);
+			ImageBag imageBag = ImageUtil.read(bytes);
 
-			String type = ImageImpl.TYPE_NOT_AVAILABLE;
+			RenderedImage renderedImage = imageBag.getRenderedImage();
+			String type = imageBag.getType();
 
-			Iterator itr = ImageIO.getImageReaders(mcis);
-
-			while (itr.hasNext()) {
-				ImageReader reader = (ImageReader)itr.next();
-
-				if (reader instanceof GIFImageReader) {
-					type = ImageImpl.TYPE_GIF;
-				}
-				else if (reader instanceof JPEGImageReader) {
-					type = ImageImpl.TYPE_JPEG;
-				}
-				else if (reader instanceof PNGImageReader) {
-					type = ImageImpl.TYPE_PNG;
-				}
-
-				reader.dispose();
-			}
-
-			BufferedImage bufferedImage = ImageIO.read(mcis);
-
-			if (bufferedImage == null) {
+			if (renderedImage == null) {
 				throw new IOException(
-					"Unable to retreive buffered image from input stream " +
+					"Unable to retreive rendered image from input stream " +
 						"with type " + type);
 			}
 
-			int height = bufferedImage.getHeight();
-			int width = bufferedImage.getWidth();
+			int height = renderedImage.getHeight();
+			int width = renderedImage.getWidth();
 			int size = bytes.length;
 
 			Image image = new ImageImpl();
@@ -323,17 +284,6 @@ public class ImageLocalUtil {
 			if (is != null) {
 				try {
 					is.close();
-				}
-				catch (IOException ioe) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(ioe);
-					}
-				}
-			}
-
-			if (mcis != null) {
-				try {
-					mcis.close();
 				}
 				catch (IOException ioe) {
 					if (_log.isWarnEnabled()) {
