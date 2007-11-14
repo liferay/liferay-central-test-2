@@ -451,8 +451,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected void importBan(
-			PortletDataContext context, MBBan ban)
+	protected void importBan(PortletDataContext context, MBBan ban)
 		throws Exception {
 
 		long userId = context.getUserId(ban.getUserUuid());
