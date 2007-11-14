@@ -50,8 +50,9 @@ public class RowChecker {
 		this(res, ALIGN, VALIGN, FORM_NAME, ALL_ROW_IDS, ROW_IDS);
 	}
 
-	public RowChecker(RenderResponse res, String align, String valign, 
-			String formName, String allRowsId, String rowId) {
+	public RowChecker(
+		RenderResponse res, String align, String valign, String formName,
+		String allRowsId, String rowId) {
 
 		_align = align;
 		_valign = valign;
@@ -68,7 +69,7 @@ public class RowChecker {
 		return _align;
 	}
 
-	public String getVAlign() {
+	public String getValign() {
 		return _valign;
 	}
 
