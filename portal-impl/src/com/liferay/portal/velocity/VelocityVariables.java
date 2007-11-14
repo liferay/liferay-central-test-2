@@ -62,6 +62,7 @@ import com.liferay.portal.util.SessionClicks_IW;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLFactory;
+import com.liferay.util.Html_IW;
 import com.liferay.util.HttpUtil_IW;
 
 import java.util.Iterator;
@@ -108,6 +109,10 @@ public class VelocityVariables {
 		// Getter util
 
 		vc.put("getterUtil", GetterUtil_IW.getInstance());
+
+		// Html util
+
+		vc.put("htmlUtil", Html_IW.getInstance());
 
 		// Http util
 

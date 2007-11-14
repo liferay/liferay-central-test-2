@@ -51,6 +51,10 @@
 	/>
 	<instance-wrapper
 		parent-dir="../util-java/src"
+		src-file="com/liferay/util/Html.java"
+	/>
+	<instance-wrapper
+		parent-dir="../util-java/src"
 		src-file="com/liferay/util/HttpUtil.java"
 	/>
 </instance-wrappers>
