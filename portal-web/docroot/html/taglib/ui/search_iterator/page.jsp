@@ -187,7 +187,7 @@ if (rowChecker != null) {
 				allRowsIsChecked = false;
 			}
 
-			row.addText(0, rowChecker.getRowCheckBox(rowIsChecked, row.getPrimaryKey()));
+			row.addText(0, rowChecker.getAlign(), rowChecker.getVAlign(), rowChecker.getRowCheckBox(rowIsChecked, row.getPrimaryKey()));
 		}
 	%>
 

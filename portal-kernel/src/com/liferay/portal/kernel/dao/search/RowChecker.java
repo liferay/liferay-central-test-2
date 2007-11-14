@@ -36,6 +36,10 @@ import javax.portlet.RenderResponse;
  */
 public class RowChecker {
 
+	public static final String ALIGN = "left";
+
+	public static final String VALIGN = "middle";
+
 	public static final String FORM_NAME = "fm";
 
 	public static final String ALL_ROW_IDS = "allRowIds";
@@ -43,12 +47,14 @@ public class RowChecker {
 	public static final String ROW_IDS = "rowIds";
 
 	public RowChecker(RenderResponse res) {
-		this(res, FORM_NAME, ALL_ROW_IDS, ROW_IDS);
+		this(res, ALIGN, VALIGN, FORM_NAME, ALL_ROW_IDS, ROW_IDS);
 	}
 
-	public RowChecker(RenderResponse res, String formName, String allRowsId,
-					  String rowId) {
+	public RowChecker(RenderResponse res, String align, String valign, 
+			String formName, String allRowsId, String rowId) {
 
+		_align = align;
+		_valign = valign;
 		_formName = res.getNamespace() + formName;
 
 		if (Validator.isNotNull(allRowsId)) {
@@ -56,6 +62,14 @@ public class RowChecker {
 		}
 
 		_rowId = res.getNamespace() + rowId;
+	}
+
+	public String getAlign() {
+		return _align;
+	}
+
+	public String getVAlign() {
+		return _valign;
 	}
 
 	public String getFormName() {
@@ -125,6 +139,8 @@ public class RowChecker {
 		return false;
 	}
 
+	private String _align;
+	private String _valign;
 	private String _formName;
 	private String _allRowsId;
 	private String _rowId;
