@@ -207,7 +207,13 @@ public class Html {
 				}
 			}
 
-			x = text.indexOf(">", y) + 1;
+			x = text.indexOf(">", y);
+
+			if (x == -1) {
+				break;
+			}
+
+			x++;
 
 			if (x < y) {
 
