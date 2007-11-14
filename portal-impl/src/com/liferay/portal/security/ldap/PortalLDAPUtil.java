@@ -101,7 +101,7 @@ public class PortalLDAPUtil {
 	public static final String USER_MAPPING_JOB_TITLE = "jobTitle";
 
 	public static final String USER_MAPPING_GROUP = "group";
-	
+
 	public static void exportToLDAP(Contact contact) throws Exception {
 		long companyId = contact.getCompanyId();
 
@@ -120,8 +120,8 @@ public class PortalLDAPUtil {
 		User user = UserLocalServiceUtil.getUserById(contact.getUserId());
 
 		String name =
-			userMappings.getProperty(PortalLDAPUtil.USER_MAPPING_SCREEN_NAME) + 
-				StringPool.EQUAL + user.getScreenName() + StringPool.COMMA + 
+			userMappings.getProperty(PortalLDAPUtil.USER_MAPPING_SCREEN_NAME) +
+				StringPool.EQUAL + user.getScreenName() + StringPool.COMMA +
 				getUsersDN(companyId);
 
 		if (!hasUser(companyId, user.getScreenName())) {
@@ -137,11 +137,11 @@ public class PortalLDAPUtil {
 
 			mods.addItem(
 				userMappings.getProperty(
-					PortalLDAPUtil.USER_MAPPING_FIRST_NAME), 
+					PortalLDAPUtil.USER_MAPPING_FIRST_NAME),
 				contact.getFirstName());
 			mods.addItem(
 				userMappings.getProperty(
-					PortalLDAPUtil.USER_MAPPING_LAST_NAME), 
+					PortalLDAPUtil.USER_MAPPING_LAST_NAME),
 				contact.getLastName());
 
 			ModificationItem[] modItems = mods.getItems();
@@ -166,8 +166,8 @@ public class PortalLDAPUtil {
 		Properties userMappings = getUserMappings(companyId);
 
 		String name =
-			userMappings.getProperty(PortalLDAPUtil.USER_MAPPING_SCREEN_NAME) + 
-				StringPool.EQUAL + user.getScreenName() + StringPool.COMMA + 
+			userMappings.getProperty(PortalLDAPUtil.USER_MAPPING_SCREEN_NAME) +
+				StringPool.EQUAL + user.getScreenName() + StringPool.COMMA +
 				getUsersDN(companyId);
 
 		if (!hasUser(companyId, user.getScreenName())) {
@@ -279,8 +279,8 @@ public class PortalLDAPUtil {
 
 		String name = getUsersDN(companyId);
 		String filter =
-			"(" + 
-			userMappings.getProperty(PortalLDAPUtil.USER_MAPPING_SCREEN_NAME) + 
+			"(" +
+			userMappings.getProperty(PortalLDAPUtil.USER_MAPPING_SCREEN_NAME) +
 			"=" + screenName + ")";
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
