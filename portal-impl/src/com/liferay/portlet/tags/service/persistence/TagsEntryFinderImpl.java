@@ -64,7 +64,7 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_N_P);
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(properties));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(properties));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -72,7 +72,7 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setJoin(qPos, properties);
+			setJoin(qPos, properties);
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(name);
@@ -116,7 +116,7 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_N_P);
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(properties));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(properties));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -124,7 +124,7 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setJoin(qPos, properties);
+			setJoin(qPos, properties);
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(name);
@@ -139,7 +139,7 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 		}
 	}
 
-	private String _getJoin(String[] properties) {
+	protected String getJoin(String[] properties) {
 		if (properties.length == 0) {
 			return StringPool.BLANK;
 		}
@@ -162,7 +162,7 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 		}
 	}
 
-	private void _setJoin(QueryPos qPos, String[] properties) {
+	protected void setJoin(QueryPos qPos, String[] properties) {
 		for (int i = 0; i < properties.length; i++) {
 			String[] property = StringUtil.split(
 				properties[i], StringPool.COLON);

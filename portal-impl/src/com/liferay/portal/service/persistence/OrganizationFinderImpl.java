@@ -148,7 +148,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			if (Validator.isNotNull(groupId) &&
 					Validator.isNotNull(resourceId)) {
 
-				return _countByPermissions(
+				return countByPermissions(
 					companyId, parentOrganizationId,
 					parentOrganizationComparator, names, type, streets,
 					cities, zips, regionId, countryId, resourceId.longValue(),
@@ -192,16 +192,15 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 				zips);
 
 			if (regionId == null) {
-				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
 			}
 
 			if (countryId == null) {
-				sql = StringUtil.replace(
-					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, COUNTRY_ID_SQL, StringPool.BLANK);
 			}
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
-			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 			sql = StringUtil.replace(
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
 				parentOrganizationComparator);
@@ -213,7 +212,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setJoin(qPos, params);
+			setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(parentOrganizationId);
 
@@ -324,7 +323,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			if (Validator.isNotNull(groupId) &&
 					Validator.isNotNull(resourceId)) {
 
-				return _findByPermissions(
+				return findByPermissions(
 					companyId, parentOrganizationId,
 					parentOrganizationComparator, names, type, streets,
 					cities, zips, regionId, countryId, resourceId.longValue(),
@@ -368,16 +367,15 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 				zips);
 
 			if (regionId == null) {
-				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
 			}
 
 			if (countryId == null) {
-				sql = StringUtil.replace(
-					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, COUNTRY_ID_SQL, StringPool.BLANK);
 			}
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
-			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 			sql = StringUtil.replace(
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
 				parentOrganizationComparator);
@@ -390,7 +388,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setJoin(qPos, params);
+			setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(parentOrganizationId);
 
@@ -441,7 +439,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		}
 	}
 
-	private int _countByPermissions(
+	protected int countByPermissions(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
 			int type, String[] streets, String[] cities, String[] zips,
@@ -470,18 +468,17 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			String sql = sm.toString();
 
 			if (regionId == null) {
-				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
 			}
 
 			if (countryId == null) {
-				sql = StringUtil.replace(
-					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, COUNTRY_ID_SQL, StringPool.BLANK);
 			}
 
 			sql = StringUtil.replace(
-				sql, "[$JOIN$]", _getJoin("groupsPermissions"));
+				sql, "[$JOIN$]", getJoin("groupsPermissions"));
 			sql = StringUtil.replace(
-				sql, "[$WHERE$]", _getWhere("groupsPermissions"));
+				sql, "[$WHERE$]", getWhere("groupsPermissions"));
 
 			sm = new StringMaker();
 
@@ -501,18 +498,17 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			sql = sm.toString();
 
 			if (regionId == null) {
-				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
 			}
 
 			if (countryId == null) {
-				sql = StringUtil.replace(
-					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, COUNTRY_ID_SQL, StringPool.BLANK);
 			}
 
 			sql = StringUtil.replace(
-				sql, "[$JOIN$]", _getJoin("orgGroupPermission"));
+				sql, "[$JOIN$]", getJoin("orgGroupPermission"));
 			sql = StringUtil.replace(
-				sql, "[$WHERE$]", _getWhere("orgGroupPermission"));
+				sql, "[$WHERE$]", getWhere("orgGroupPermission"));
 			sql = StringUtil.replace(
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
 				parentOrganizationComparator);
@@ -546,12 +542,11 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 				zips);
 
 			if (regionId == null) {
-				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
 			}
 
 			if (countryId == null) {
-				sql = StringUtil.replace(
-					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, COUNTRY_ID_SQL, StringPool.BLANK);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -616,7 +611,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		}
 	}
 
-	private List _findByPermissions(
+	protected List findByPermissions(
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String[] names,
 			int type, String[] streets, String[] cities, String[] zips,
@@ -645,18 +640,17 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			String sql = sm.toString();
 
 			if (regionId == null) {
-				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
 			}
 
 			if (countryId == null) {
-				sql = StringUtil.replace(
-					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, COUNTRY_ID_SQL, StringPool.BLANK);
 			}
 
 			sql = StringUtil.replace(
-				sql, "[$JOIN$]", _getJoin("groupsPermissions"));
+				sql, "[$JOIN$]", getJoin("groupsPermissions"));
 			sql = StringUtil.replace(
-				sql, "[$WHERE$]", _getWhere("groupsPermissions"));
+				sql, "[$WHERE$]", getWhere("groupsPermissions"));
 
 			sm = new StringMaker();
 
@@ -676,18 +670,17 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			sql = sm.toString();
 
 			if (regionId == null) {
-				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
 			}
 
 			if (countryId == null) {
-				sql = StringUtil.replace(
-					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, COUNTRY_ID_SQL, StringPool.BLANK);
 			}
 
 			sql = StringUtil.replace(
-				sql, "[$JOIN$]", _getJoin("orgGroupPermission"));
+				sql, "[$JOIN$]", getJoin("orgGroupPermission"));
 			sql = StringUtil.replace(
-				sql, "[$WHERE$]", _getWhere("orgGroupPermission"));
+				sql, "[$WHERE$]", getWhere("orgGroupPermission"));
 			sql = StringUtil.replace(
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
 				parentOrganizationComparator);
@@ -721,12 +714,11 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 				zips);
 
 			if (regionId == null) {
-				sql = StringUtil.replace(sql, _REGION_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
 			}
 
 			if (countryId == null) {
-				sql = StringUtil.replace(
-					sql, _COUNTRY_ID_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, COUNTRY_ID_SQL, StringPool.BLANK);
 			}
 
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
@@ -795,7 +787,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		}
 	}
 
-	private String _getJoin(LinkedHashMap params) {
+	protected String getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -811,14 +803,14 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(_getJoin(key));
+				sm.append(getJoin(key));
 			}
 		}
 
 		return sm.toString();
 	}
 
-	private String _getJoin(String key) {
+	protected String getJoin(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("groupsPermissions")) {
@@ -851,7 +843,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		return join;
 	}
 
-	private String _getWhere(LinkedHashMap params) {
+	protected String getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -867,14 +859,14 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(_getWhere(key));
+				sm.append(getWhere(key));
 			}
 		}
 
 		return sm.toString();
 	}
 
-	private String _getWhere(String key) {
+	protected String getWhere(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("groupsPermissions")) {
@@ -912,7 +904,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		return join;
 	}
 
-	private void _setJoin(QueryPos qPos, LinkedHashMap params) {
+	protected void setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 
@@ -939,11 +931,11 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		}
 	}
 
-	private static String _COUNTRY_ID_SQL =
+	protected static String COUNTRY_ID_SQL =
 		"((Organization_.countryId = ?) OR (Address.countryId = ?)) " +
 			"[$AND_OR_CONNECTOR$]";
 
-	private static String _REGION_ID_SQL =
+	protected static String REGION_ID_SQL =
 		"((Organization_.regionId = ?) OR (Address.regionId = ?)) " +
 			"[$AND_OR_CONNECTOR$]";
 

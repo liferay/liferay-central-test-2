@@ -77,7 +77,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 			String sql = CustomSQLUtil.get(COUNT_BY_FOLDER_IDS);
 
 			sql = StringUtil.replace(
-				sql, "[$FOLDER_ID$]", _getFolderIds(folderIds));
+				sql, "[$FOLDER_ID$]", getFolderIds(folderIds));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -301,7 +301,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 		}
 	}
 
-	private String _getFolderIds(List folderIds) {
+	protected String getFolderIds(List folderIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < folderIds.size(); i++) {

@@ -68,7 +68,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 			String sql = CustomSQLUtil.get(COUNT_BY_CATEGORY_IDS);
 
 			sql = StringUtil.replace(
-				sql, "[$CATEGORY_ID$]", _getCategoryIds(categoryIds));
+				sql, "[$CATEGORY_ID$]", getCategoryIds(categoryIds));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -124,7 +124,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$ORGANIZATION_ID$]",
-				_getOrganizationIds(organizationIds));
+				getOrganizationIds(organizationIds));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -180,7 +180,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$ORGANIZATION_ID$]",
-				_getOrganizationIds(organizationIds));
+				getOrganizationIds(organizationIds));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -226,7 +226,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 		}
 	}
 
-	private String _getCategoryIds(List categoryIds) {
+	protected String getCategoryIds(List categoryIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < categoryIds.size(); i++) {
@@ -240,7 +240,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 		return sm.toString();
 	}
 
-	private String _getOrganizationIds(List organizationIds) {
+	protected String getOrganizationIds(List organizationIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < organizationIds.size(); i++) {

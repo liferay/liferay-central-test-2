@@ -156,40 +156,40 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			int count = _countUsers(
+			int count = countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ADMIN_ROLE), companyId,
 				groupId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator, COUNT_USERS_TYPE_ADMIN);
 
-			count += _countUsers(
+			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_USER_PERMISSION), companyId,
 				groupId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator,
 				COUNT_USERS_TYPE_PERMISSION);
 
-			count += _countUsers(
+			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_GROUP_PERMISSION),
 				companyId, groupId, name, primKey, actionId, firstName,
 				middleName, lastName, emailAddress, andOperator,
 				COUNT_USERS_TYPE_PERMISSION);
 
-			count += _countUsers(
+			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ORG_PERMISSION), companyId,
 				groupId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator,
 				COUNT_USERS_TYPE_PERMISSION);
 
-			count += _countUsers(
+			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_USER_ROLE), companyId,
 				groupId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator, COUNT_USERS_TYPE_ROLE);
 
-			count += _countUsers(
+			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_GROUP_ROLE), companyId,
 				groupId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator, COUNT_USERS_TYPE_ROLE);
 
-			count += _countUsers(
+			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ORG_ROLE), companyId,
 				groupId, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator, COUNT_USERS_TYPE_ROLE);
@@ -215,17 +215,17 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			int count = _countUsers(
+			int count = countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ADMIN_ROLE), companyId,
 				0, name, primKey, actionId, firstName, middleName, lastName,
 				emailAddress, andOperator, COUNT_USERS_TYPE_ADMIN);
 
-			count += _countUsers(
+			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_USER_PERMISSION), companyId,
 				0, name, primKey, actionId, firstName, middleName, lastName,
 				emailAddress, andOperator, COUNT_USERS_TYPE_PERMISSION);
 
-			count += _countUsers(
+			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ORG_GROUP_PERMISSION),
 				companyId, 0, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator,
@@ -406,7 +406,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		}
 	}
 
-	private int _countUsers(
+	protected int countUsers(
 			Session session, String sql, long companyId, long groupId,
 			String name, String primKey, String actionId, String firstName,
 			String middleName, String lastName, String emailAddress,

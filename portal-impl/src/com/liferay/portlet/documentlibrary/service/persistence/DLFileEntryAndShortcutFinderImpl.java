@@ -64,10 +64,10 @@ public class DLFileEntryAndShortcutFinderImpl
 
 			sql = StringUtil.replace(
 				sql, "[$FILE_ENTRY_FOLDER_ID$]",
-				_getFolderIds(folderIds, "DLFileEntry"));
+				getFolderIds(folderIds, "DLFileEntry"));
 			sql = StringUtil.replace(
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
-				_getFolderIds(folderIds, "DLFileShortcut"));
+				getFolderIds(folderIds, "DLFileShortcut"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -121,10 +121,10 @@ public class DLFileEntryAndShortcutFinderImpl
 
 			sql = StringUtil.replace(
 				sql, "[$FILE_ENTRY_FOLDER_ID$]",
-				_getFolderIds(folderIds, "DLFileEntry"));
+				getFolderIds(folderIds, "DLFileEntry"));
 			sql = StringUtil.replace(
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
-				_getFolderIds(folderIds, "DLFileShortcut"));
+				getFolderIds(folderIds, "DLFileShortcut"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -182,7 +182,7 @@ public class DLFileEntryAndShortcutFinderImpl
 		}
 	}
 
-	private String _getFolderIds(List folderIds, String table) {
+	protected String getFolderIds(List folderIds, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < folderIds.size(); i++) {

@@ -114,9 +114,9 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 				sql = StringUtil.replace(
 					sql, "[$PERMISSION_IDS$]",
-					_getPermissionIds(permissions, "Roles_Permissions"));
+					getPermissionIds(permissions, "Roles_Permissions"));
 				sql = StringUtil.replace(
-					sql, "[$GROUP_IDS$]", _getGroupIds(groups, "Groups_Roles"));
+					sql, "[$GROUP_IDS$]", getGroupIds(groups, "Groups_Roles"));
 
 				sm = new StringMaker();
 
@@ -130,10 +130,10 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 				sql = StringUtil.replace(
 					sql, "[$PERMISSION_IDS$]",
-					_getPermissionIds(permissions, "Groups_Permissions"));
+					getPermissionIds(permissions, "Groups_Permissions"));
 				sql = StringUtil.replace(
 					sql, "[$GROUP_IDS$]",
-					_getGroupIds(groups, "Groups_Permissions"));
+					getGroupIds(groups, "Groups_Permissions"));
 
 				sm = new StringMaker();
 
@@ -150,7 +150,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Roles_Permissions"));
+				getPermissionIds(permissions, "Roles_Permissions"));
 
 			sm = new StringMaker();
 
@@ -164,7 +164,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Roles_Permissions"));
+				getPermissionIds(permissions, "Roles_Permissions"));
 
 			sm = new StringMaker();
 
@@ -178,7 +178,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Users_Permissions"));
+				getPermissionIds(permissions, "Users_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -187,20 +187,20 @@ public class PermissionFinderImpl implements PermissionFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (groups.size() > 0) {
-				_setPermissionIds(qPos, permissions);
-				_setGroupIds(qPos, groups);
-				_setPermissionIds(qPos, permissions);
-				_setGroupIds(qPos, groups);
+				setPermissionIds(qPos, permissions);
+				setGroupIds(qPos, groups);
+				setPermissionIds(qPos, permissions);
+				setGroupIds(qPos, groups);
 			}
 
-			_setPermissionIds(qPos, permissions);
+			setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
 			qPos.add(groupId);
-			_setPermissionIds(qPos, permissions);
+			setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
-			_setPermissionIds(qPos, permissions);
+			setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
 			Iterator itr = q.list().iterator();
@@ -245,10 +245,10 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 				sql = StringUtil.replace(
 					sql, "[$PERMISSION_IDS$]",
-					_getPermissionIds(permissions, "Groups_Permissions"));
+					getPermissionIds(permissions, "Groups_Permissions"));
 				sql = StringUtil.replace(
 					sql, "[$GROUP_IDS$]",
-					_getGroupIds(groups, "Groups_Permissions"));
+					getGroupIds(groups, "Groups_Permissions"));
 
 				sm = new StringMaker();
 
@@ -266,10 +266,10 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 				sql = StringUtil.replace(
 					sql, "[$PERMISSION_IDS$]",
-					_getPermissionIds(permissions, "Roles_Permissions"));
+					getPermissionIds(permissions, "Roles_Permissions"));
 				sql = StringUtil.replace(
 					sql, "[$ROLE_IDS$]",
-					_getRoleIds(roles, "Roles_Permissions"));
+					getRoleIds(roles, "Roles_Permissions"));
 
 				sm = new StringMaker();
 
@@ -286,7 +286,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Users_Permissions"));
+				getPermissionIds(permissions, "Users_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -295,16 +295,16 @@ public class PermissionFinderImpl implements PermissionFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (groups.size() > 0) {
-				_setPermissionIds(qPos, permissions);
-				_setGroupIds(qPos, groups);
+				setPermissionIds(qPos, permissions);
+				setGroupIds(qPos, groups);
 			}
 
 			if (roles.size() > 0) {
-				_setPermissionIds(qPos, permissions);
-				_setRoleIds(qPos, roles);
+				setPermissionIds(qPos, permissions);
+				setRoleIds(qPos, roles);
 			}
 
-			_setPermissionIds(qPos, permissions);
+			setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
 			Iterator itr = q.list().iterator();
@@ -339,10 +339,10 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Groups_Permissions"));
+				getPermissionIds(permissions, "Groups_Permissions"));
 			sql = StringUtil.replace(
 				sql, "[$GROUP_IDS$]",
-				_getGroupIds(groups, "Groups_Permissions"));
+				getGroupIds(groups, "Groups_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -350,8 +350,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setPermissionIds(qPos, permissions);
-			_setGroupIds(qPos, groups);
+			setPermissionIds(qPos, permissions);
+			setGroupIds(qPos, groups);
 
 			Iterator itr = q.list().iterator();
 
@@ -385,9 +385,9 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Roles_Permissions"));
+				getPermissionIds(permissions, "Roles_Permissions"));
 			sql = StringUtil.replace(
-				sql, "[$GROUP_IDS$]", _getGroupIds(groups, "Groups_Roles"));
+				sql, "[$GROUP_IDS$]", getGroupIds(groups, "Groups_Roles"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -395,8 +395,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setPermissionIds(qPos, permissions);
-			_setGroupIds(qPos, groups);
+			setPermissionIds(qPos, permissions);
+			setGroupIds(qPos, groups);
 
 			Iterator itr = q.list().iterator();
 
@@ -430,9 +430,9 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Roles_Permissions"));
+				getPermissionIds(permissions, "Roles_Permissions"));
 			sql = StringUtil.replace(
-				sql, "[$ROLE_IDS$]", _getRoleIds(roles, "Roles_Permissions"));
+				sql, "[$ROLE_IDS$]", getRoleIds(roles, "Roles_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -440,8 +440,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setPermissionIds(qPos, permissions);
-			_setRoleIds(qPos, roles);
+			setPermissionIds(qPos, permissions);
+			setRoleIds(qPos, roles);
 
 			Iterator itr = q.list().iterator();
 
@@ -475,7 +475,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Roles_Permissions"));
+				getPermissionIds(permissions, "Roles_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -484,7 +484,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
-			_setPermissionIds(qPos, permissions);
+			setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
 			Iterator itr = q.list().iterator();
@@ -519,7 +519,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Users_Permissions"));
+				getPermissionIds(permissions, "Users_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -527,7 +527,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setPermissionIds(qPos, permissions);
+			setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
 			Iterator itr = q.list().iterator();
@@ -562,7 +562,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Roles_Permissions"));
+				getPermissionIds(permissions, "Roles_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -570,7 +570,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setPermissionIds(qPos, permissions);
+			setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
 			Iterator itr = q.list().iterator();
@@ -617,7 +617,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 				String sql = CustomSQLUtil.get(FIND_BY_A_R);
 
 				sql = StringUtil.replace(
-					sql, "[$RESOURCE_IDS$]", _getResourceIds(resourceIds));
+					sql, "[$RESOURCE_IDS$]", getResourceIds(resourceIds));
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -626,7 +626,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				qPos.add(actionId);
-				_setResourceIds(qPos, resourceIds);
+				setResourceIds(qPos, resourceIds);
 
 				List list = q.list();
 
@@ -772,7 +772,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_U_R);
 
 			sql = StringUtil.replace(
-				sql, "[$ACTION_IDS$]", _getActionIds(actionIds));
+				sql, "[$ACTION_IDS$]", getActionIds(actionIds));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -860,7 +860,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	private String _getActionIds(String[] actionIds) {
+	protected String getActionIds(String[] actionIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < actionIds.length; i++) {
@@ -874,7 +874,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		return sm.toString();
 	}
 
-	private String _getGroupIds(List groups, String table) {
+	protected String getGroupIds(List groups, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < groups.size(); i++) {
@@ -889,7 +889,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		return sm.toString();
 	}
 
-	private String _getPermissionIds(List permissions, String table) {
+	protected String getPermissionIds(List permissions, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < permissions.size(); i++) {
@@ -904,7 +904,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		return sm.toString();
 	}
 
-	private String _getResourceIds(long[] resourceIds) {
+	protected String getResourceIds(long[] resourceIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < resourceIds.length; i++) {
@@ -918,7 +918,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		return sm.toString();
 	}
 
-	private String _getRoleIds(List roles, String table) {
+	protected String getRoleIds(List roles, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < roles.size(); i++) {
@@ -933,7 +933,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		return sm.toString();
 	}
 
-	private void _setGroupIds(QueryPos qPos, List groups) {
+	protected void setGroupIds(QueryPos qPos, List groups) {
 		for (int i = 0; i < groups.size(); i++) {
 			Group group = (Group)groups.get(i);
 
@@ -941,7 +941,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	private void _setPermissionIds(QueryPos qPos, List permissions) {
+	protected void setPermissionIds(QueryPos qPos, List permissions) {
 		for (int i = 0; i < permissions.size(); i++) {
 			Permission permission = (Permission)permissions.get(i);
 
@@ -949,7 +949,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	private void _setResourceIds(QueryPos qPos, long[] resourceIds) {
+	protected void setResourceIds(QueryPos qPos, long[] resourceIds) {
 		for (int i = 0; i < resourceIds.length; i++) {
 			long resourceId = resourceIds[i];
 
@@ -957,7 +957,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	private void _setRoleIds(QueryPos qPos, List roles) {
+	protected void setRoleIds(QueryPos qPos, List roles) {
 		for (int i = 0; i < roles.size(); i++) {
 			Role role = (Role)roles.get(i);
 

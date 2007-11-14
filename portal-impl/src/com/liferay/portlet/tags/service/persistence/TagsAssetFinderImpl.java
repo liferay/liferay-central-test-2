@@ -139,11 +139,11 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 				sm.append(" AND (TagsAsset.groupId = ?)");
 			}
 
-			sm.append(_getClassNameIds(classNameIds));
+			sm.append(getClassNameIds(classNameIds));
 
 			String sql = sm.toString();
 
-			sql = _getDates(sql, publishDate, expirationDate);
+			sql = getDates(sql, publishDate, expirationDate);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -151,11 +151,11 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setEntryIds(qPos, entryIds);
-			_setEntryIds(qPos, notEntryIds);
-			_setDates(qPos, publishDate, expirationDate);
-			_setGroupId(qPos, groupId);
-			_setClassNamedIds(qPos, classNameIds);
+			setEntryIds(qPos, entryIds);
+			setEntryIds(qPos, notEntryIds);
+			setDates(qPos, publishDate, expirationDate);
+			setGroupId(qPos, groupId);
+			setClassNamedIds(qPos, classNameIds);
 
 			Iterator itr = q.list().iterator();
 
@@ -195,7 +195,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			String sql = CustomSQLUtil.get(COUNT_BY_OR_ENTRY_IDS);
 
 			sql = StringUtil.replace(
-				sql, "[$ENTRY_ID$]", _getEntryIds(entryIds, StringPool.EQUAL));
+				sql, "[$ENTRY_ID$]", getEntryIds(entryIds, StringPool.EQUAL));
 
 			if (notEntryIds.length > 0) {
 				StringMaker sm = new StringMaker();
@@ -222,13 +222,13 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
 			}
 
-			sql = _getDates(sql, publishDate, expirationDate);
+			sql = getDates(sql, publishDate, expirationDate);
 
 			if (groupId > 0) {
 				sql += " AND (TagsAsset.groupId = ?)";
 			}
 
-			sql += _getClassNameIds(classNameIds);
+			sql += getClassNameIds(classNameIds);
 
 			if (excludeZeroViewCount) {
 				sql += " AND (TagsAsset.viewCount > 0)";
@@ -240,11 +240,11 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setEntryIds(qPos, entryIds);
-			_setEntryIds(qPos, notEntryIds);
-			_setDates(qPos, publishDate, expirationDate);
-			_setGroupId(qPos, groupId);
-			_setClassNamedIds(qPos, classNameIds);
+			setEntryIds(qPos, entryIds);
+			setEntryIds(qPos, notEntryIds);
+			setDates(qPos, publishDate, expirationDate);
+			setGroupId(qPos, groupId);
+			setClassNamedIds(qPos, classNameIds);
 
 			Iterator itr = q.list().iterator();
 
@@ -278,10 +278,10 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			return new ArrayList();
 		}
 
-		orderByCol1 = _checkOrderByCol(orderByCol1);
-		orderByCol2 = _checkOrderByCol(orderByCol2);
-		orderByType1 = _checkOrderByType(orderByType1);
-		orderByType2 = _checkOrderByType(orderByType2);
+		orderByCol1 = checkOrderByCol(orderByCol1);
+		orderByCol2 = checkOrderByCol(orderByCol2);
+		orderByType1 = checkOrderByType(orderByType1);
+		orderByType2 = checkOrderByType(orderByType2);
 
 		Session session = null;
 
@@ -335,7 +335,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 				sm.append(" AND (TagsAsset.groupId = ?)");
 			}
 
-			sm.append(_getClassNameIds(classNameIds));
+			sm.append(getClassNameIds(classNameIds));
 
 			sm.append(" ORDER BY TagsAsset.");
 			sm.append(orderByCol1);
@@ -353,7 +353,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			String sql = sm.toString();
 
-			sql = _getDates(sql, publishDate, expirationDate);
+			sql = getDates(sql, publishDate, expirationDate);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -361,11 +361,11 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setEntryIds(qPos, entryIds);
-			_setEntryIds(qPos, notEntryIds);
-			_setDates(qPos, publishDate, expirationDate);
-			_setGroupId(qPos, groupId);
-			_setClassNamedIds(qPos, classNameIds);
+			setEntryIds(qPos, entryIds);
+			setEntryIds(qPos, notEntryIds);
+			setDates(qPos, publishDate, expirationDate);
+			setGroupId(qPos, groupId);
+			setClassNamedIds(qPos, classNameIds);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
@@ -400,10 +400,10 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			return new ArrayList();
 		}
 
-		orderByCol1 = _checkOrderByCol(orderByCol1);
-		orderByCol2 = _checkOrderByCol(orderByCol2);
-		orderByType1 = _checkOrderByType(orderByType1);
-		orderByType2 = _checkOrderByType(orderByType2);
+		orderByCol1 = checkOrderByCol(orderByCol1);
+		orderByCol2 = checkOrderByCol(orderByCol2);
+		orderByType1 = checkOrderByType(orderByType1);
+		orderByType2 = checkOrderByType(orderByType2);
 
 		Session session = null;
 
@@ -413,7 +413,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_OR_ENTRY_IDS);
 
 			sql = StringUtil.replace(
-				sql, "[$ENTRY_ID$]", _getEntryIds(entryIds, StringPool.EQUAL));
+				sql, "[$ENTRY_ID$]", getEntryIds(entryIds, StringPool.EQUAL));
 
 			if (notEntryIds.length > 0) {
 				StringMaker sm = new StringMaker();
@@ -440,13 +440,13 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 					sql, "[$NOT_ENTRY_ID$]", StringPool.BLANK);
 			}
 
-			sql = _getDates(sql, publishDate, expirationDate);
+			sql = getDates(sql, publishDate, expirationDate);
 
 			if (groupId > 0) {
 				sql += " AND (TagsAsset.groupId = ?)";
 			}
 
-			sql += _getClassNameIds(classNameIds);
+			sql += getClassNameIds(classNameIds);
 
 			if (excludeZeroViewCount) {
 				sql += " AND (TagsAsset.viewCount > 0)";
@@ -476,11 +476,11 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setEntryIds(qPos, entryIds);
-			_setEntryIds(qPos, notEntryIds);
-			_setDates(qPos, publishDate, expirationDate);
-			_setGroupId(qPos, groupId);
-			_setClassNamedIds(qPos, classNameIds);
+			setEntryIds(qPos, entryIds);
+			setEntryIds(qPos, notEntryIds);
+			setDates(qPos, publishDate, expirationDate);
+			setGroupId(qPos, groupId);
+			setClassNamedIds(qPos, classNameIds);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
@@ -549,7 +549,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		}
 	}
 
-	private String _checkOrderByCol(String orderByCol) {
+	protected String checkOrderByCol(String orderByCol) {
 		if (orderByCol == null) {
 			return "modifiedDate";
 		}
@@ -563,7 +563,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		return "modifiedDate";
 	}
 
-	private String _checkOrderByType(String orderByType) {
+	protected String checkOrderByType(String orderByType) {
 		if (orderByType == null) {
 			return "DESC";
 		}
@@ -577,7 +577,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		return "DESC";
 	}
 
-	private String _getClassNameIds(long[] classNameIds) {
+	protected String getClassNameIds(long[] classNameIds) {
 		StringMaker sm = new StringMaker();
 
 		if (classNameIds.length > 0) {
@@ -597,7 +597,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		return sm.toString();
 	}
 
-	private String _getDates(
+	protected String getDates(
 		String sql, Date publishDate, Date expirationDate) {
 
 		StringMaker sm = new StringMaker();
@@ -615,7 +615,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		return sql;
 	}
 
-	private String _getEntryIds(long[] entryIds, String operator) {
+	protected String getEntryIds(long[] entryIds, String operator) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < entryIds.length; i++) {
@@ -631,13 +631,13 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		return sm.toString();
 	}
 
-	private void _setClassNamedIds(QueryPos qPos, long[] classNameIds) {
+	protected void setClassNamedIds(QueryPos qPos, long[] classNameIds) {
 		for (int i = 0; i < classNameIds.length; i++) {
 			qPos.add(classNameIds[i]);
 		}
 	}
 
-	private void _setDates(
+	protected void setDates(
 		QueryPos qPos, Date publishDate, Date expirationDate) {
 
 		if (publishDate != null) {
@@ -654,11 +654,11 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		}
 	}
 
-	private void _setGroupId(QueryPos qPos, long groupId) {
+	protected void setGroupId(QueryPos qPos, long groupId) {
 		qPos.add(groupId);
 	}
 
-	private void _setEntryIds(QueryPos qPos, long[] entryIds) {
+	protected void setEntryIds(QueryPos qPos, long[] entryIds) {
 		for (int i = 0; i < entryIds.length; i++) {
 			qPos.add(entryIds[i]);
 		}

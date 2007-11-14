@@ -183,8 +183,8 @@ public class RoleFinderImpl implements RoleFinder {
 				sql = StringUtil.replace(sql, "AND (Role_.type_ = ?)", "");
 			}
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
-			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -192,7 +192,7 @@ public class RoleFinderImpl implements RoleFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setJoin(qPos, params);
+			setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(name);
@@ -325,7 +325,7 @@ public class RoleFinderImpl implements RoleFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_U_G);
 
 			sql = StringUtil.replace(
-				sql, "[$GROUP_IDS$]", _getGroupIds(groupIds, "Groups_Roles"));
+				sql, "[$GROUP_IDS$]", getGroupIds(groupIds, "Groups_Roles"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -334,7 +334,7 @@ public class RoleFinderImpl implements RoleFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(userId);
-			_setGroupIds(qPos, groupIds);
+			setGroupIds(qPos, groupIds);
 
 			return q.list();
 		}
@@ -377,8 +377,8 @@ public class RoleFinderImpl implements RoleFinder {
 				sql = StringUtil.replace(sql, "AND (Role_.type_ = ?)", "");
 			}
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
-			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -386,7 +386,7 @@ public class RoleFinderImpl implements RoleFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setJoin(qPos, params);
+			setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(name);
@@ -461,7 +461,7 @@ public class RoleFinderImpl implements RoleFinder {
 		}
 	}
 
-	private String _getGroupIds(long[] groupIds, String table) {
+	protected String getGroupIds(long[] groupIds, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < groupIds.length; i++) {
@@ -476,13 +476,13 @@ public class RoleFinderImpl implements RoleFinder {
 		return sm.toString();
 	}
 
-	private void _setGroupIds(QueryPos qPos, long[] groupIds) {
+	protected void setGroupIds(QueryPos qPos, long[] groupIds) {
 		for (int i = 0; i < groupIds.length; i++) {
 			qPos.add(groupIds[i]);
 		}
 	}
 
-	private String _getJoin(LinkedHashMap params) {
+	protected String getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -498,14 +498,14 @@ public class RoleFinderImpl implements RoleFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(_getJoin(key));
+				sm.append(getJoin(key));
 			}
 		}
 
 		return sm.toString();
 	}
 
-	private String _getJoin(String key) {
+	protected String getJoin(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permissionsResourceId")) {
@@ -523,7 +523,7 @@ public class RoleFinderImpl implements RoleFinder {
 		return join;
 	}
 
-	private String _getWhere(LinkedHashMap params) {
+	protected String getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -539,14 +539,14 @@ public class RoleFinderImpl implements RoleFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(_getWhere(key));
+				sm.append(getWhere(key));
 			}
 		}
 
 		return sm.toString();
 	}
 
-	private String _getWhere(String key) {
+	protected String getWhere(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permissionsResourceId")) {
@@ -564,7 +564,7 @@ public class RoleFinderImpl implements RoleFinder {
 		return join;
 	}
 
-	private void _setJoin(QueryPos qPos, LinkedHashMap params) {
+	protected void setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 

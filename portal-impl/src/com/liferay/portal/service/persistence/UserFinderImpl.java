@@ -155,11 +155,11 @@ public class UserFinderImpl implements UserFinder {
 				emailAddresses);
 
 			if (active == null) {
-				sql = StringUtil.replace(sql, _ACTIVE_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, ACTIVE_SQL, StringPool.BLANK);
 			}
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
-			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -168,7 +168,7 @@ public class UserFinderImpl implements UserFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setJoin(qPos, params);
+			setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(false);
 			qPos.add(firstNames, 2);
@@ -280,11 +280,11 @@ public class UserFinderImpl implements UserFinder {
 				emailAddresses);
 
 			if (active == null) {
-				sql = StringUtil.replace(sql, _ACTIVE_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, ACTIVE_SQL, StringPool.BLANK);
 			}
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
-			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
@@ -294,7 +294,7 @@ public class UserFinderImpl implements UserFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setJoin(qPos, params);
+			setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(false);
 			qPos.add(firstNames, 2);
@@ -317,7 +317,7 @@ public class UserFinderImpl implements UserFinder {
 		}
 	}
 
-	private String _getJoin(LinkedHashMap params) {
+	protected String getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -333,14 +333,14 @@ public class UserFinderImpl implements UserFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(_getJoin(key));
+				sm.append(getJoin(key));
 			}
 		}
 
 		return sm.toString();
 	}
 
-	private String _getJoin(String key) {
+	protected String getJoin(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permission")) {
@@ -376,7 +376,7 @@ public class UserFinderImpl implements UserFinder {
 		return join;
 	}
 
-	private String _getWhere(LinkedHashMap params) {
+	protected String getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -392,14 +392,14 @@ public class UserFinderImpl implements UserFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(_getWhere(key));
+				sm.append(getWhere(key));
 			}
 		}
 
 		return sm.toString();
 	}
 
-	private String _getWhere(String key) {
+	protected String getWhere(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permission")) {
@@ -435,7 +435,7 @@ public class UserFinderImpl implements UserFinder {
 		return join;
 	}
 
-	private void _setJoin(QueryPos qPos, LinkedHashMap params) {
+	protected void setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 
@@ -480,6 +480,6 @@ public class UserFinderImpl implements UserFinder {
 		}
 	}
 
-	private static String _ACTIVE_SQL = "AND (User_.active_ = ?)";
+	protected static String ACTIVE_SQL = "AND (User_.active_ = ?)";
 
 }

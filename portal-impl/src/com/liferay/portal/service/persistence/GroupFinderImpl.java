@@ -143,9 +143,9 @@ public class GroupFinderImpl implements GroupFinder {
 			try {
 				session = HibernateUtil.openSession();
 
-				int count = _countByGroupId(session, groupId, params1);
-				count += _countByGroupId(session, groupId, params2);
-				count += _countByGroupId(session, groupId, params3);
+				int count = countByGroupId(session, groupId, params1);
+				count += countByGroupId(session, groupId, params2);
+				count += countByGroupId(session, groupId, params3);
 
 				FinderCache.putResult(
 					finderSQL, finderClassNames, finderMethodName, finderParams,
@@ -204,14 +204,14 @@ public class GroupFinderImpl implements GroupFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			int count = _countByC_N_D(
+			int count = countByC_N_D(
 				session, companyId, name, description, params1);
 
 			if (Validator.isNotNull(userId)) {
-				count += _countByC_N_D(
+				count += countByC_N_D(
 					session, companyId, name, description, params2);
 
-				count += _countByC_N_D(
+				count += countByC_N_D(
 					session, companyId, name, description, params3);
 			}
 
@@ -333,8 +333,8 @@ public class GroupFinderImpl implements GroupFinder {
 
 		String sql = sm.toString();
 
-		sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params1));
-		sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params1));
+		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params1));
+		sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params1));
 
 		sm = new StringMaker();
 
@@ -349,8 +349,8 @@ public class GroupFinderImpl implements GroupFinder {
 
 			sql = sm.toString();
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params2));
-			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params2));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params2));
+			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params2));
 
 			sm = new StringMaker();
 
@@ -362,8 +362,8 @@ public class GroupFinderImpl implements GroupFinder {
 
 			sql = sm.toString();
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params3));
-			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params3));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params3));
+			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params3));
 
 			sm = new StringMaker();
 
@@ -412,7 +412,7 @@ public class GroupFinderImpl implements GroupFinder {
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				_setJoin(qPos, params1);
+				setJoin(qPos, params1);
 				qPos.add(companyId);
 				qPos.add(name);
 				qPos.add(name);
@@ -420,14 +420,14 @@ public class GroupFinderImpl implements GroupFinder {
 				qPos.add(description);
 
 				if (Validator.isNotNull(userId)) {
-					_setJoin(qPos, params2);
+					setJoin(qPos, params2);
 					qPos.add(companyId);
 					qPos.add(name);
 					qPos.add(name);
 					qPos.add(description);
 					qPos.add(description);
 
-					_setJoin(qPos, params3);
+					setJoin(qPos, params3);
 					qPos.add(companyId);
 					qPos.add(name);
 					qPos.add(name);
@@ -466,14 +466,14 @@ public class GroupFinderImpl implements GroupFinder {
 		}
 	}
 
-	private int _countByGroupId(
+	protected int countByGroupId(
 			Session session, long groupId, LinkedHashMap params)
 		throws SystemException {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
 
-		sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
-		sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
+		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+		sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -481,7 +481,7 @@ public class GroupFinderImpl implements GroupFinder {
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		_setJoin(qPos, params);
+		setJoin(qPos, params);
 		qPos.add(groupId);
 
 		Iterator itr = q.list().iterator();
@@ -497,15 +497,15 @@ public class GroupFinderImpl implements GroupFinder {
 		return 0;
 	}
 
-	private int _countByC_N_D(
+	protected int countByC_N_D(
 			Session session, long companyId, String name, String description,
 			LinkedHashMap params)
 		throws SystemException {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
 
-		sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
-		sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
+		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+		sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -513,7 +513,7 @@ public class GroupFinderImpl implements GroupFinder {
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		_setJoin(qPos, params);
+		setJoin(qPos, params);
 		qPos.add(companyId);
 		qPos.add(name);
 		qPos.add(name);
@@ -533,7 +533,7 @@ public class GroupFinderImpl implements GroupFinder {
 		return 0;
 	}
 
-	private String _getJoin(LinkedHashMap params) {
+	protected String getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -549,14 +549,14 @@ public class GroupFinderImpl implements GroupFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(_getJoin(key));
+				sm.append(getJoin(key));
 			}
 		}
 
 		return sm.toString();
 	}
 
-	private String _getJoin(String key) {
+	protected String getJoin(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("groupsOrgs")) {
@@ -595,7 +595,7 @@ public class GroupFinderImpl implements GroupFinder {
 		return join;
 	}
 
-	private String _getWhere(LinkedHashMap params) {
+	protected String getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -611,14 +611,14 @@ public class GroupFinderImpl implements GroupFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(_getWhere(key, value));
+				sm.append(getWhere(key, value));
 			}
 		}
 
 		return sm.toString();
 	}
 
-	private String _getWhere(String key, Object value) {
+	protected String getWhere(String key, Object value) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("active")) {
@@ -690,7 +690,7 @@ public class GroupFinderImpl implements GroupFinder {
 		return join;
 	}
 
-	private void _setJoin(QueryPos qPos, LinkedHashMap params) {
+	protected void setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 

@@ -58,7 +58,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			String sql = CustomSQLUtil.get(COUNT_BY_CATEGORY_IDS);
 
 			sql = StringUtil.replace(
-				sql, "[$CATEGORY_ID$]", _getCategoryIds(categoryIds));
+				sql, "[$CATEGORY_ID$]", getCategoryIds(categoryIds));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -493,7 +493,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		}
 	}
 
-	private String _getCategoryIds(List categoryIds) {
+	protected String getCategoryIds(List categoryIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < categoryIds.size(); i++) {

@@ -76,7 +76,7 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$ORGANIZATION_ID$]",
-				_getOrganizationIds(organizationIds));
+				getOrganizationIds(organizationIds));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -134,7 +134,7 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 
 			sql = StringUtil.replace(
 				sql, "[$ORGANIZATION_ID$]",
-				_getOrganizationIds(organizationIds));
+				getOrganizationIds(organizationIds));
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -159,7 +159,7 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 		}
 	}
 
-	private String _getOrganizationIds(List organizationIds) {
+	protected String getOrganizationIds(List organizationIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < organizationIds.size(); i++) {

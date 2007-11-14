@@ -86,8 +86,8 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
-			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -95,7 +95,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setJoin(qPos, params);
+			setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(name);
@@ -197,8 +197,8 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_N_D);
 
-			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
-			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -206,7 +206,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setJoin(qPos, params);
+			setJoin(qPos, params);
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(name);
@@ -223,7 +223,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 		}
 	}
 
-	private String _getJoin(LinkedHashMap params) {
+	protected String getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -239,14 +239,14 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(_getJoin(key));
+				sm.append(getJoin(key));
 			}
 		}
 
 		return sm.toString();
 	}
 
-	private String _getJoin(String key) {
+	protected String getJoin(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permissionsResourceId")) {
@@ -270,7 +270,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 		return join;
 	}
 
-	private String _getWhere(LinkedHashMap params) {
+	protected String getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -286,14 +286,14 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(_getWhere(key));
+				sm.append(getWhere(key));
 			}
 		}
 
 		return sm.toString();
 	}
 
-	private String _getWhere(String key) {
+	protected String getWhere(String key) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("permissionsResourceId")) {
@@ -317,7 +317,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 		return join;
 	}
 
-	private void _setJoin(QueryPos qPos, LinkedHashMap params) {
+	protected void setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 
