@@ -32,6 +32,7 @@ String[] userMappingArray = userMappings.split("\n");
 String userMappingScreenName = "";
 String userMappingPassword = "";
 String userMappingEmailAddress = "";
+String userMappingFullName = "";
 String userMappingFirstName = "";
 String userMappingLastName = "";
 String userMappingJobTitle = "";
@@ -57,6 +58,9 @@ for (int i = 0 ; i < userMappingArray.length ; i++) {
 	}
 	else if (mapping[0].equals("emailAddress")) {
 		userMappingEmailAddress = mapping[1];
+	}
+	else if (mapping[0].equals("fullName")) {
+		userMappingFullName = mapping[1];
 	}
 	else if (mapping[0].equals("firstName")) {
 		userMappingFirstName = mapping[1];
@@ -148,7 +152,15 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			principal = "uid=admin,ou=system";
 			credentials = "secret";
 			searchFilter = "(mail=@email_address@)";
-			userMappings = "screenName=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
+
+			userMappingScreenName = "cn";
+			userMappingPassword = "userPassword";
+			userMappingEmailAddress = "mail";
+			userMappingFullName = "";
+			userMappingFirstName = "givenName";
+			userMappingLastName = "sn";
+			userMappingJobTitle = "title";
+			userMappingGroup = "";
 		}
 		else if (ldapType == "microsoft") {
 			baseProviderURL = "ldap://localhost:389";
@@ -156,7 +168,15 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			principal = "admin";
 			credentials = "secret";
 			searchFilter = "(&(objectCategory=person)(sAMAccountName=@user_id@))";
-			userMappings = "fullName=cn\nscreenName=sAMAccountName\nemailAddress=userprincipalname";
+			
+			userMappingScreenName = "sAMAccountName";
+			userMappingPassword = "";
+			userMappingEmailAddress = "userprincipalname";
+			userMappingFullName = "cn";
+			userMappingFirstName = "";
+			userMappingLastName = "";
+			userMappingJobTitle = "";
+			userMappingGroup = "";
 		}
 		else if (ldapType == "novell") {
 			url = "ldap://localhost:389";
@@ -164,7 +184,31 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			principal = "cn=admin,ou=test";
 			credentials = "secret";
 			searchFilter = "(mail=@email_address@)";
-			userMappings = "screenName=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
+
+			userMappingScreenName = "cn";
+			userMappingPassword = "userPassword";
+			userMappingEmailAddress = "mail";
+			userMappingFullName = "";
+			userMappingFirstName = "givenName";
+			userMappingLastName = "sn";
+			userMappingJobTitle = "title";
+			userMappingGroup = "";
+		}
+		else {
+			url = "";
+			baseDN = "";
+			principal = "";
+			credentials = "";
+			searchFilter = "";
+
+			userMappingScreenName = "";
+			userMappingPassword = "";
+			userMappingEmailAddress = "";
+			userMappingFullName = "";
+			userMappingFirstName = "";
+			userMappingLastName = "";
+			userMappingJobTitle = "";
+			userMappingGroup = "";
 		}
 
 		document.<portlet:namespace />fm.<portlet:namespace />baseProviderURL.value = baseProviderURL;
@@ -174,7 +218,15 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		document.<portlet:namespace />fm.<portlet:namespace />usersDN.value = baseDN;
 		document.<portlet:namespace />fm.<portlet:namespace />groupsDN.value = baseDN;
 		document.<portlet:namespace />fm.<portlet:namespace />searchFilter.value = searchFilter;
-		//document.<portlet:namespace />fm.<portlet:namespace />userMappings.value = userMappings;
+
+		document.<portlet:namespace />fm.<portlet:namespace />userMappingScreenName.value = userMappingScreenName;
+		document.<portlet:namespace />fm.<portlet:namespace />userMappingPassword.value = userMappingPassword;
+		document.<portlet:namespace />fm.<portlet:namespace />userMappingEmailAddress.value = userMappingEmailAddress;
+		document.<portlet:namespace />fm.<portlet:namespace />userMappingFullName.value = userMappingFullName;
+		document.<portlet:namespace />fm.<portlet:namespace />userMappingFirstName.value = userMappingFirstName;
+		document.<portlet:namespace />fm.<portlet:namespace />userMappingLastName.value = userMappingLastName;
+		document.<portlet:namespace />fm.<portlet:namespace />userMappingJobTitle.value = userMappingJobTitle;
+		document.<portlet:namespace />fm.<portlet:namespace />userMappingGroup.value = userMappingGroup;
 	}
 
 	jQuery(
@@ -349,6 +401,14 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 	</td>
 	<td>
 		<input class="liferay-input-text" name="<portlet:namespace />userMappingEmailAddress" type="text" value='<%= userMappingEmailAddress %>' />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="full-name" />
+	</td>
+	<td>
+		<input class="liferay-input-text" name="<portlet:namespace />userMappingFullName" type="text" value='<%= userMappingFullName %>' />
 	</td>
 </tr>
 <tr>

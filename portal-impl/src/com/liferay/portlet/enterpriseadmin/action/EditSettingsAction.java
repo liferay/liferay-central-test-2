@@ -266,6 +266,7 @@ public class EditSettingsAction extends PortletAction {
 			"\npassword=" + ParamUtil.getString(req, "userMappingPassword") +
 			"\nemailAddress=" + 
 			ParamUtil.getString(req, "userMappingEmailAddress") +
+			"\nfullName=" + ParamUtil.getString(req, "userMappingFullName") +
 			"\nfirstName=" + ParamUtil.getString(req, "userMappingFirstName") +
 			"\nlastName=" + ParamUtil.getString(req, "userMappingLastName") +
 			"\njobTitle=" + ParamUtil.getString(req, "userMappingJobTitle") +
