@@ -327,42 +327,26 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							focus="<%= false %>"
 						/>
 
+						<br />
+
+						<liferay-ui:message key="include-tags-specified-in-the-url" />
+
+						<liferay-ui:input-checkbox param="mergeUrlTags" defaultValue="<%= mergeUrlTags %>" />
+
 						<br /><br />
 
-						<table class="liferay-table">
-						<tr>
-							<td>
-								<liferay-ui:message key="include-tags-from-the-url" />
-							</td>
-							<td>
-								<liferay-ui:input-checkbox param="mergeUrlTags" defaultValue="<%= mergeUrlTags %>" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<liferay-ui:message key="include-tags-specified-by-the-user" />
-							</td>
-							<td>
-								<liferay-ui:input-checkbox param="mergeUserTags " defaultValue="<%= mergeUserTags %>" />
-							</td>
-						</tr>
-							<tr>
-								<td>
-									&nbsp;
-								</td>
-							</tr>
-						<tr>
-							<td>
-								<liferay-ui:message key="search-operator" />
-							</td>
-							<td>
-								<select name="<portlet:namespace />andOperator">
-									<option <%= andOperator ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-									<option <%= !andOperator ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-								</select>
-							</td>
-						</tr>
-						</table>
+						<liferay-ui:message key="include-tags-specified-in-the-users-my-global-tags-and-my-community-tags-portlets" />
+
+						<liferay-ui:input-checkbox param="mergeUserTags " defaultValue="<%= mergeUserTags %>" />
+
+						<br /><br />
+
+						<liferay-ui:message key="search-operator" />
+
+						<select name="<portlet:namespace />andOperator">
+							<option <%= andOperator ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
+							<option <%= !andOperator ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
+						</select>
 					</liferay-ui:section>
 					<liferay-ui:section>
 						<%@ include file="/html/portlet/tagged_content/display_settings.jspf" %>
