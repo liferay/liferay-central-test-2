@@ -169,6 +169,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if ((className.equals(BlogsEntry.class.getName())) &&
 			(themeDisplay != null)) {
+
 			try {
 				sendBlogsCommentsEmail(userId, classPK, message, themeDisplay);
 			}

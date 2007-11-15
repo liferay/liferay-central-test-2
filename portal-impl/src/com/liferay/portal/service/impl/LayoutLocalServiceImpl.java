@@ -358,8 +358,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map parameterMap)
 		throws PortalException, SystemException {
 
-		boolean exportComments = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.EXPORT_COMMENTS);
 		boolean exportPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_PERMISSIONS);
 		boolean exportUserPermissions = MapUtil.getBoolean(
@@ -368,6 +366,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.EXPORT_PORTLET_DATA);
 		boolean exportPortletPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES);
+		boolean exportComments = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.EXPORT_COMMENTS);
 		boolean exportRatings = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_RATINGS);
 		boolean exportTags = MapUtil.getBoolean(
@@ -518,12 +518,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		// Comments
-
-		if (exportComments) {
-			exportComments(context, root);
-		}
-
 		// Portlet preferences
 
 		if (exportPortletPreferences) {
@@ -546,6 +540,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		if (exportPermissions) {
 			exportPortletRoles(
 				layoutCache, companyId, groupId, portletIds, rolesEl);
+		}
+
+		// Comments
+
+		if (exportComments) {
+			exportComments(context, root);
 		}
 
 		// Ratings
@@ -716,8 +716,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		boolean deleteMissingLayouts = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
 			Boolean.TRUE.booleanValue());
-		boolean importComments = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.IMPORT_COMMENTS);
 		boolean importPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_PERMISSIONS);
 		boolean importUserPermissions = MapUtil.getBoolean(
@@ -726,6 +724,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.IMPORT_PORTLET_DATA);
 		boolean importPortletPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES);
+		boolean importComments = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.IMPORT_COMMENTS);
 		boolean importRatings = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_RATINGS);
 		boolean importTags = MapUtil.getBoolean(

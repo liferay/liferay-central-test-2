@@ -469,6 +469,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			context.importComments(
 				DLFileEntry.class, entry.getPrimaryKeyObj(),
 				existingEntry.getPrimaryKeyObj(), context.getGroupId());
+
 			context.importRatingsEntries(
 				DLFileEntry.class, entry.getPrimaryKeyObj(),
 				existingEntry.getPrimaryKeyObj());

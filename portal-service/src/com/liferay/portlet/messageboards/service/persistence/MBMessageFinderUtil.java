@@ -39,11 +39,6 @@ public class MBMessageFinderUtil {
 		return getFinder().countByGroupId(groupId);
 	}
 
-	public static java.util.List findByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_C(classNameId, classPK);
-	}
-	
 	public static java.util.List findByGroupId(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByGroupId(groupId, begin, end);
@@ -64,6 +59,11 @@ public class MBMessageFinderUtil {
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByUuid_G(uuid, groupId);
+	}
+
+	public static java.util.List findByC_C(long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByC_C(classNameId, classPK);
 	}
 
 	public static MBMessageFinder getFinder() {

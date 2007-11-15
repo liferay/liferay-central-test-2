@@ -1482,7 +1482,8 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 									<liferay-ui:message key="what-would-you-like-to-export" />
 
 									<fieldset>
-										<legend><b>Portal Data</b></legend>
+										<legend><b><liferay-ui:message key="portal-data" /></b></legend>
+
 										<div>
 											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
 
@@ -1506,11 +1507,11 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /> (<%= LanguageUtil.get(pageContext, "all-pages-will-use-the-exported-theme") %>)</label>
 										</div>
-
 									</fieldset>
 
 									<fieldset>
-										<legend><b>Portlet Data</b></legend>
+										<legend><b><liferay-ui:message key="portlet-data" /></b></legend>
+
 										<div>
 											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
 
@@ -1555,6 +1556,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 													<fieldset>
 														<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
+
 														<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
 													</fieldset>
 
@@ -1566,6 +1568,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 												<fieldset>
 													<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
+
 													<span class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "error-initializing-export-controls") %></span>
 												</fieldset>
 
@@ -1573,6 +1576,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 											}
 										}
 										%>
+
 									</fieldset>
 
 									<br />
@@ -1594,7 +1598,8 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 										<liferay-ui:message key="what-would-you-like-to-import" />
 
 										<fieldset>
-											<legend><b>Portal Data</b></legend>
+											<legend><b><liferay-ui:message key="portal-data" /></b></legend>
+
 											<div>
 												<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
 
@@ -1621,7 +1626,8 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 										</fieldset>
 
 										<fieldset>
-											<legend><b>Portlet Data</b></legend>
+											<legend><b><liferay-ui:message key="portlet-data" /></b></legend>
+
 											<div>
 												<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
 
@@ -1668,44 +1674,46 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 												</div>
 											</fieldset>
 
-										<%
-										itr1 = portletsList.iterator();
+											<%
+											itr1 = portletsList.iterator();
 
-										while (itr1.hasNext()) {
-											Portlet curPortlet = (Portlet)itr1.next();
+											while (itr1.hasNext()) {
+												Portlet curPortlet = (Portlet)itr1.next();
 
-											PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
+												PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
 
-											PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
+												PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
 
-											ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
+												ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
 
-											try {
-												PortletDataHandlerControl[] controls = portletDataHandler.getImportControls();
+												try {
+													PortletDataHandlerControl[] controls = portletDataHandler.getImportControls();
 
-												if (controls != null) {
-										%>
+													if (controls != null) {
+											%>
+
+														<fieldset>
+															<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
+
+															<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
+														</fieldset>
+
+											<%
+													}
+												}
+												catch (PortletDataException pde) {
+												%>
 
 													<fieldset>
 														<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
-														<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
+
+														<span class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "error-initializing-import-controls") %></span>
 													</fieldset>
 
-										<%
+											<%
 												}
 											}
-											catch (PortletDataException pde) {
 											%>
-
-												<fieldset>
-													<legend><b><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></b></legend>
-													<span class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "error-initializing-import-controls") %></span>
-												</fieldset>
-
-										<%
-											}
-										}
-										%>
 
 										</fieldset>
 

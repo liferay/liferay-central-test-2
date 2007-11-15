@@ -70,26 +70,6 @@
 				(MBMessage.threadId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByC_C">
-		<![CDATA[
-			SELECT
-				{MBMessage.*}
-			FROM
-				MBMessage
-			INNER JOIN
-				MBThread ON
-					(MBThread.threadId = MBMessage.threadId)
-			INNER JOIN
-				MBDiscussion ON
-					(MBDiscussion.threadId = MBThread.threadId)
-			WHERE
-				(MBDiscussion.classNameId = ?) AND
-				(MBDiscussion.classPK = ?)
-			ORDER BY
-				MBMessage.createDate ASC,
-				MBMessage.messageId ASC
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByGroupId">
 		<![CDATA[
 			SELECT
@@ -132,6 +112,26 @@
 			WHERE
 				(MBMessage.uuid_ = ?) AND
 				(MBCategory.groupId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.findByC_C">
+		<![CDATA[
+			SELECT
+				{MBMessage.*}
+			FROM
+				MBMessage
+			INNER JOIN
+				MBThread ON
+					(MBThread.threadId = MBMessage.threadId)
+			INNER JOIN
+				MBDiscussion ON
+					(MBDiscussion.threadId = MBThread.threadId)
+			WHERE
+				(MBDiscussion.classNameId = ?) AND
+				(MBDiscussion.classPK = ?)
+			ORDER BY
+				MBMessage.createDate ASC,
+				MBMessage.messageId ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByCategoryIds">

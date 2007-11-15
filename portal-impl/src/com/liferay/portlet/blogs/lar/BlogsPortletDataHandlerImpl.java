@@ -65,13 +65,13 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] { _enableExport };
+		return new PortletDataHandlerControl[] {_enableExport};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] { _enableImport };
+		return new PortletDataHandlerControl[] {_enableImport};
 	}
 
 	public String exportData(
@@ -266,6 +266,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		context.importComments(
 			BlogsEntry.class, entry.getPrimaryKeyObj(),
 			existingEntry.getPrimaryKeyObj(), context.getGroupId());
+
 		context.importRatingsEntries(
 			BlogsEntry.class, entry.getPrimaryKeyObj(),
 			existingEntry.getPrimaryKeyObj());
