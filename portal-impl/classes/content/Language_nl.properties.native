@@ -1391,6 +1391,8 @@ in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-su
 inactive-user=Inactieve gebruiker
 inactive=Inactief
 inch=Inch
+include-all-children-pages=Omvat alle kinderenpagina's.
+include-ancestor-pages-if-necessary=Omvat indien nodig voorvaderpagina's.
 include-artifact-in-repository=Omvat Artefact in Bewaarplaats
 include-original-text=Sluit orginele teksten bij
 include=Omvat
@@ -1925,6 +1927,7 @@ please-be-patient-as-this-process-can-take-up-to-several-minutes=Geduld a.u.b. D
 please-be-patient-while-uploading-your-file=Geduld a.u.b. Het uploaden van uw bestand kan enkele minuten duren.
 please-be-patient=Geduld a.u.b. Dit proces kan enkele minuten duren.
 please-change-your-password=Gelieve te veranderen uw wachtwoord.
+please-choose-the-scope-of-the-pages-to-publish=Gelieve te kiezen het toepassingsgebied van de te publiceren pagina's.
 please-complete-all-fields=Gelieve te voltooien alle gebieden.
 please-complete-your-order=Gelieve uw order {0}af te handelen{1}.
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=Raadpleeg uw beheerder omdat u geen geconfigureerde pagina's hebt.

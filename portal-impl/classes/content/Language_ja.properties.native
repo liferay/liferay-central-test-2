@@ -1388,6 +1388,8 @@ in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-su
 inactive-user=不活性ユーザー
 inactive=不活性
 inch=インチ
+include-all-children-pages=子供のページすべてを含みなさい。
+include-ancestor-pages-if-necessary=祖先のページを必要ならば含みなさい。
 include-artifact-in-repository=貯蔵場所で人工物を含めなさい
 include-original-text=原本を含みなさい
 include=含みなさい
@@ -1921,6 +1923,7 @@ please-be-patient-as-this-process-can-take-up-to-several-minutes=このプロセ
 please-be-patient-while-uploading-your-file=あなたのファイルをアップロードしている間忍耐強いがありなさ
 please-be-patient=忍耐強いがありなさい。これは数分を取るかもしれない。
 please-change-your-password=パスワードを変えなさい。
+please-choose-the-scope-of-the-pages-to-publish=出版するためにページの規模を選びなさい。
 please-complete-all-fields=分野すべてを完了しなさい。
 please-complete-your-order=Please {0}complete{1} your order.
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=あなたがどのページをも形成してもらわないので管理者に連絡し

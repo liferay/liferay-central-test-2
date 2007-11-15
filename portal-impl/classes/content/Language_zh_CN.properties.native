@@ -1391,6 +1391,8 @@ in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-su
 inactive-user=非活动中用户
 inactive=非活动中
 inch=英寸
+include-all-children-pages=包括所有儿童页。
+include-ancestor-pages-if-necessary=包括祖先页如果需要。
 include-artifact-in-repository=包括人工制品在贮藏库里
 include-original-text=包含原始内文
 include=包括
@@ -1925,6 +1927,7 @@ please-be-patient-as-this-process-can-take-up-to-several-minutes=请耐心稍后
 please-be-patient-while-uploading-your-file=请耐心稍后上载文件。这也许需要几分钟。
 please-be-patient=请耐心稍后。这也许需要几分钟。
 please-change-your-password=请改变您的密码。
+please-choose-the-scope-of-the-pages-to-publish=请选择页的范围出版。
 please-complete-all-fields=请完成所有领域。
 please-complete-your-order=请 {0}完成{1}您的订单.
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=请与管理员联系, 因为您没有被配置到任何页。

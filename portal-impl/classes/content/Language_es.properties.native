@@ -1391,6 +1391,8 @@ in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-su
 inactive-user=Usuario inactivo
 inactive=Inactivo
 inch=Pulgada
+include-all-children-pages=Incluya todas las páginas de los niños.
+include-ancestor-pages-if-necessary=Incluya las páginas del antepasado en caso de necesidad.
 include-artifact-in-repository=Incluir en el repositorio
 include-original-text=Incluir el texto original
 include=Incluir
@@ -1925,6 +1927,7 @@ please-be-patient-as-this-process-can-take-up-to-several-minutes=Este proceso pu
 please-be-patient-while-uploading-your-file=Por favor espere mientras se envía su archivo. Esto puede tardar varios minutos.
 please-be-patient=Por favor sea paciente. Esta operación puede tardar varios minutos.
 please-change-your-password=Por favor, cambie su contraseña.
+please-choose-the-scope-of-the-pages-to-publish=Elija por favor el alcance de las páginas para publicar.
 please-complete-all-fields=Por favor, rellene todos los campos.
 please-complete-your-order=Por favor {0}complete{1} su pedido.
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=Por favor, póngase en contacto con el administrador: no tiene ningúna página configurada.

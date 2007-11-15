@@ -1391,6 +1391,8 @@ in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-su
 inactive-user=Utilisateur inactif
 inactive=Inactif
 inch=Pouce
+include-all-children-pages=Incluez toutes les pages d'enfants.
+include-ancestor-pages-if-necessary=Incluez les pages d'ancêtre au besoin.
 include-artifact-in-repository=Incluez l'objet façonné dans le dépôt
 include-original-text=Inclure le texte original
 include=Incluez
@@ -1925,6 +1927,7 @@ please-be-patient-as-this-process-can-take-up-to-several-minutes=Veuillez être 
 please-be-patient-while-uploading-your-file=Veuillez patienter pendant le téléchargement de votre fichier. Cela peut prendre plusieurs minutes.
 please-be-patient=Veuillez patienter. Cela peut prendre plusieurs minutes.
 please-change-your-password=Veuillez changer votre mot de passe.
+please-choose-the-scope-of-the-pages-to-publish=Veuillez choisir la portée des pages pour éditer.
 please-complete-all-fields=Veuillez accomplir tous les champs.
 please-complete-your-order=Veuillez {0}compléter{1} votre commande.
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=Veuillez contacter l'administrateur pour lui signaler qu'aucune de vos pages ne sont configurées.

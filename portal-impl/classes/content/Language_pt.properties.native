@@ -1391,6 +1391,8 @@ in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-su
 inactive-user=Usuário Inativo
 inactive=Inativo
 inch=Polegada
+include-all-children-pages=Inclua todas as páginas das crianças.
+include-ancestor-pages-if-necessary=Inclua páginas do antepassado se necessário.
 include-artifact-in-repository=Inclua o artifact no repositório
 include-original-text=Inclua O Texto Original
 include=Inclua
@@ -1925,6 +1927,7 @@ please-be-patient-as-this-process-can-take-up-to-several-minutes=Seja por favor 
 please-be-patient-while-uploading-your-file=Seja por favor paciente ao uploading sua lima. Isto pode fazer exame de diversos minutos.
 please-be-patient=Seja por favor paciente. Isto pode fazer exame de diversos minutos.
 please-change-your-password=Mude por favor sua senha.
+please-choose-the-scope-of-the-pages-to-publish=Escolha por favor o espaço das páginas publicar.
 please-complete-all-fields=Termine por favor todos os campos.
 please-complete-your-order=Please {0}complete{1} your order.
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=Contate por favor o administrador porque você não tem nenhumas páginas configuraradas.

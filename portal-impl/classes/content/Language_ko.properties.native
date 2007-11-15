@@ -1390,6 +1390,8 @@ in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-su
 inactive-user=비활동성 사용자
 inactive=비활동성
 inch=인치
+include-all-children-pages=모든 아이들 페이지를 포함하십시요.
+include-ancestor-pages-if-necessary=조상 페이지를 필요하다면 포함하십시요.
 include-artifact-in-repository=창고안에 인공물을 포함하십시요
 include-original-text=원래 원본을 포함하십시요
 include=포함하십시요
@@ -1924,6 +1926,7 @@ please-be-patient-as-this-process-can-take-up-to-several-minutes=이 과정이 �
 please-be-patient-while-uploading-your-file=너의 파일을 올려주기하고 있는 동안 제발 참을성이 있으십시요
 please-be-patient=제발 참을성이 있으십시요 있으십시요.  이것은 몇몇 분을 가지
 please-change-your-password=자신의 암호를 변화하십시요.
+please-choose-the-scope-of-the-pages-to-publish=간행하기 위하여 페이지의 범위를 선택하십시요.
 please-complete-all-fields=모든 분야를 완료하십시요.
 please-complete-your-order=Please {0}complete{1} your order.
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=너가 어떤 페이지를 형성해 달라고 하지 않기 때문에 제발 행정

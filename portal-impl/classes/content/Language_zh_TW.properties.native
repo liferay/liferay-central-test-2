@@ -1391,6 +1391,8 @@ in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-su
 inactive-user=非活動中用戶
 inactive=非活動中
 inch=英寸
+include-all-children-pages=包括所有兒童頁。
+include-ancestor-pages-if-necessary=包括祖先頁如果需要。
 include-artifact-in-repository=包括人工製品在貯藏庫裡
 include-original-text=包含原始內文
 include=包括
@@ -1925,6 +1927,7 @@ please-be-patient-as-this-process-can-take-up-to-several-minutes=請耐心稍後
 please-be-patient-while-uploading-your-file=請耐心稍後上載文件。這也許需要幾分鐘。
 please-be-patient=請耐心稍後。這也許需要幾分鐘。
 please-change-your-password=請改變您的密碼。
+please-choose-the-scope-of-the-pages-to-publish=請選擇頁的範圍出版。
 please-complete-all-fields=請完成所有領域。
 please-complete-your-order=請 {0}完成{1}您的訂單.
 please-contact-the-administrator-because-you-do-not-have-any-pages-configured=請與管理員聯繫, 因為您沒有被配置到任何頁。
