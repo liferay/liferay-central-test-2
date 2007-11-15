@@ -157,7 +157,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean importData = MapUtil.getBoolean(
-			parameterMap, _IMPORT_BLOGS_DATA, _enableImport.getDefaultState());
+			parameterMap, _IMPORT_BLOGS_DATA);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
