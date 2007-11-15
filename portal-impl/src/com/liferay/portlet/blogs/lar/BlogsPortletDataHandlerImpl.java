@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.blogs.lar;
 
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
@@ -34,17 +33,13 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
-import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -70,17 +65,13 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {
-			_enableExport, _enableStatsExport
-		};
+		return new PortletDataHandlerControl[] { _enableExport };
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] {
-			_enableImport, _enableStatsImport
-		};
+		return new PortletDataHandlerControl[] { _enableImport };
 	}
 
 	public String exportData(
@@ -105,9 +96,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		if (!exportData) {
 			return null;
 		}
-
-		boolean exportStats = MapUtil.getBoolean(
-			parameterMap, _EXPORT_BLOGS_STATS);
 
 		try {
 			XStream xStream = new XStream();
@@ -154,39 +142,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
-			// Stats users
-
-			List statsUsers = new ArrayList();
-
-			if (exportStats) {
-				statsUsers = BlogsStatsUserUtil.findByGroupId(
-					context.getGroupId());
-
-				itr = statsUsers.iterator();
-
-				while (itr.hasNext()) {
-					BlogsStatsUser statsUser = (BlogsStatsUser)itr.next();
-
-					if (context.addPrimaryKey(
-							BlogsStatsUser.class,
-							statsUser.getPrimaryKeyObj())) {
-
-						itr.remove();
-					}
-					else {
-						statsUser.setUserUuid(statsUser.getUserUuid());
-					}
-				}
-			}
-
-			xml = xStream.toXML(statsUsers);
-
-			el = root.addElement("blog-stats-users");
-
-			tempDoc = PortalUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
 			return XMLFormatter.toString(doc);
 		}
 		catch (Exception e) {
@@ -220,9 +175,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		boolean mergeData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
 
-		boolean importStats = MapUtil.getBoolean(
-			parameterMap, _IMPORT_BLOGS_STATS);
-
 		try {
 			XStream xStream = new XStream();
 
@@ -247,27 +199,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				BlogsEntry entry = (BlogsEntry)itr.next();
 
 				importEntry(context, mergeData, entry);
-			}
-
-			// Stats users
-
-			if (importStats) {
-				el = root.element("blog-stats-users").element("list");
-
-				tempDoc = DocumentHelper.createDocument();
-
-				tempDoc.content().add(el.createCopy());
-
-				List statsUsers = (List) xStream.fromXML(
-					XMLFormatter.toString(tempDoc));
-
-				itr = statsUsers.iterator();
-
-				while (itr.hasNext()) {
-					BlogsStatsUser statsUser = (BlogsStatsUser)itr.next();
-
-					importStatsUser(context, statsUser);
-				}
 			}
 
 			return null;
@@ -340,47 +271,17 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			existingEntry.getPrimaryKeyObj());
 	}
 
-	protected void importStatsUser(
-			PortletDataContext context, BlogsStatsUser statsUser)
-		throws Exception {
-
-		try {
-			long groupId = context.getGroupId();
-			long userId = context.getUserId(statsUser.getUserUuid());
-
-			BlogsStatsUserLocalServiceUtil.updateStatsUser(
-				groupId, userId, statsUser.getLastPostDate());
-		}
-		catch (NoSuchUserException nsue) {
-			_log.error(
-				"Could not find the user for stats " +
-					statsUser.getStatsUserId());
-		}
-	}
-
 	private static final String _EXPORT_BLOGS_DATA =
 		"export-" + PortletKeys.BLOGS + "-data";
 
 	private static final String _IMPORT_BLOGS_DATA =
 		"import-" + PortletKeys.BLOGS + "-data";
 
-	private static final String _EXPORT_BLOGS_STATS =
-		"export-" + PortletKeys.BLOGS + "-stats";
-
-	private static final String _IMPORT_BLOGS_STATS =
-		"import-" + PortletKeys.BLOGS + "-stats";
-
 	private static final PortletDataHandlerBoolean _enableExport =
 		new PortletDataHandlerBoolean(_EXPORT_BLOGS_DATA, true, null);
 
 	private static final PortletDataHandlerBoolean _enableImport =
 		new PortletDataHandlerBoolean(_IMPORT_BLOGS_DATA, true, null);
-
-	private static final PortletDataHandlerBoolean _enableStatsExport =
-		new PortletDataHandlerBoolean(_EXPORT_BLOGS_STATS, true, null);
-
-	private static final PortletDataHandlerBoolean _enableStatsImport =
-		new PortletDataHandlerBoolean(_IMPORT_BLOGS_STATS, true, null);
 
 	private static Log _log =
 		LogFactory.getLog(BlogsPortletDataHandlerImpl.class);
