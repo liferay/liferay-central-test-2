@@ -209,6 +209,37 @@ public class PortalLDAPUtil {
 		return ctx;
 	}
 
+	public static LdapContext getContext(
+			String baseDN, String baseUrl, String pricipal, String credentials) 
+		throws Exception {
+
+		Properties env = new Properties();
+
+		env.put(Context.INITIAL_CONTEXT_FACTORY, baseDN);
+		env.put(Context.PROVIDER_URL, baseUrl);
+		env.put(Context.SECURITY_PRINCIPAL, pricipal);
+		env.put(Context.SECURITY_CREDENTIALS, credentials);
+
+		LogUtil.debug(_log, env);
+
+		LdapContext ctx = null;
+
+		try {
+			ctx = new InitialLdapContext(env, null);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Failed to bind to the LDAP server");
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(e);
+			}
+		}
+
+		return ctx;
+	}
+
 	public static Properties getGroupMappings(long companyId)
 		throws Exception {
 
@@ -228,6 +259,17 @@ public class PortalLDAPUtil {
 			companyId, PropsUtil.LDAP_GROUPS_DN);
 		String groupFilter = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER);
+		SearchControls cons = new SearchControls(
+			SearchControls.SUBTREE_SCOPE, maxResults, 0, null, false, false);
+
+		return ctx.search(groupDN, groupFilter, cons);
+	}
+
+	public static NamingEnumeration getGroups(
+			long companyId, LdapContext ctx, int maxResults, String groupDN, 
+			String groupFilter)
+		throws Exception {
+
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, maxResults, 0, null, false, false);
 
@@ -281,6 +323,17 @@ public class PortalLDAPUtil {
 			companyId, PropsUtil.LDAP_USERS_DN);
 		String userFilter = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
+		SearchControls cons = new SearchControls(
+			SearchControls.SUBTREE_SCOPE, maxResults, 0, null, false, false);
+
+		return ctx.search(userDN, userFilter, cons);
+	}
+
+	public static NamingEnumeration getUsers(
+			long companyId, LdapContext ctx, int maxResults, String userDN, 
+			String userFilter)
+		throws Exception {
+
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, maxResults, 0, null, false, false);
 
