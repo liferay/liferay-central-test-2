@@ -35,14 +35,6 @@
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="target" />
-	</td>
-	<td>
-		<input class="liferay-input-text" name="TypeSettingsProperties(target)" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(target)" />" />
-	</td>
-</tr>
-<tr>
-	<td>
 		<liferay-ui:message key="description" />
 	</td>
 	<td>
