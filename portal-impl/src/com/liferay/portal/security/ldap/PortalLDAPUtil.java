@@ -170,24 +170,28 @@ public class PortalLDAPUtil {
 	}
 
 	public static LdapContext getContext(long companyId) throws Exception {
+		return getContext(
+			companyId, PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_BASE_PROVIDER_URL),
+			PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_SECURITY_PRINCIPAL),
+			PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_SECURITY_CREDENTIALS));
+	}
+
+	public static LdapContext getContext(
+			long companyId, String baseUrl, String pricipal, String credentials)
+		throws Exception {
+
 		Properties env = new Properties();
 
 		env.put(
 			Context.INITIAL_CONTEXT_FACTORY,
 			PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_FACTORY_INITIAL));
-		env.put(
-			Context.PROVIDER_URL,
-			PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_BASE_PROVIDER_URL));
-		env.put(
-			Context.SECURITY_PRINCIPAL,
-			PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_SECURITY_PRINCIPAL));
-		env.put(
-			Context.SECURITY_CREDENTIALS,
-			PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_SECURITY_CREDENTIALS));
+		env.put(Context.PROVIDER_URL, baseUrl);
+		env.put(Context.SECURITY_PRINCIPAL, pricipal);
+		env.put(Context.SECURITY_CREDENTIALS, credentials);
 
 		LogUtil.debug(_log, env);
 
@@ -228,6 +232,15 @@ public class PortalLDAPUtil {
 			companyId, PropsUtil.LDAP_GROUPS_DN);
 		String groupFilter = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER);
+
+		return getGroups(companyId, ctx, maxResults, groupDN, groupFilter);
+	}
+
+	public static NamingEnumeration getGroups(
+			long companyId, LdapContext ctx, int maxResults, String groupDN,
+			String groupFilter)
+		throws Exception {
+
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, maxResults, 0, null, false, false);
 
@@ -281,6 +294,15 @@ public class PortalLDAPUtil {
 			companyId, PropsUtil.LDAP_USERS_DN);
 		String userFilter = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
+
+		return getUsers(companyId, ctx, maxResults, userDN, userFilter);
+	}
+
+	public static NamingEnumeration getUsers(
+			long companyId, LdapContext ctx, int maxResults, String userDN,
+			String userFilter)
+		throws Exception {
+
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, maxResults, 0, null, false, false);
 
