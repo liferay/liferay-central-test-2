@@ -1025,12 +1025,20 @@ public class BaseDeployer {
 
 				File file = new File(srcDir + "/WEB-INF/" + files[i]);
 
-				Document doc = PortalUtil.readDocumentFromFile(file);
+				try {
+					Document doc = PortalUtil.readDocumentFromFile(file);
 
-				String content = XMLFormatter.toString(
-					doc, XMLFormatter.INDENT, true);
+					String content = XMLFormatter.toString(
+						doc, XMLFormatter.INDENT, true);
 
-				FileUtil.write(file, content);
+					FileUtil.write(file, content);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to format " + file + ": " + e.getMessage());
+					}
+				}
 			}
 		}
 	}
