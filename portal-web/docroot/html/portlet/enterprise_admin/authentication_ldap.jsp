@@ -25,8 +25,6 @@
 <%
 String userMappings = ParamUtil.getString(request, "userMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USER_MAPPINGS));
 
-System.out.println(userMappings);
-
 String[] userMappingArray = userMappings.split("\n");
 
 String userMappingScreenName = "";
@@ -79,8 +77,6 @@ for (int i = 0 ; i < userMappingArray.length ; i++) {
 }
 
 String groupMappings = ParamUtil.getString(request, "groupMappings", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUP_MAPPINGS));
-
-System.out.println(groupMappings);
 
 String[] groupMappingArray = groupMappings.split("\n");
 
@@ -168,7 +164,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			principal = "admin";
 			credentials = "secret";
 			searchFilter = "(&(objectCategory=person)(sAMAccountName=@user_id@))";
-			
+
 			userMappingScreenName = "sAMAccountName";
 			userMappingPassword = "";
 			userMappingEmailAddress = "userprincipalname";

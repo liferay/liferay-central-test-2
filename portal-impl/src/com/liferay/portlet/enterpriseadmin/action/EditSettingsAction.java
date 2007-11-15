@@ -264,7 +264,7 @@ public class EditSettingsAction extends PortletAction {
 		String userMappings =
 			"screenName=" + ParamUtil.getString(req, "userMappingScreenName") +
 			"\npassword=" + ParamUtil.getString(req, "userMappingPassword") +
-			"\nemailAddress=" + 
+			"\nemailAddress=" +
 			ParamUtil.getString(req, "userMappingEmailAddress") +
 			"\nfullName=" + ParamUtil.getString(req, "userMappingFullName") +
 			"\nfirstName=" + ParamUtil.getString(req, "userMappingFirstName") +
@@ -276,7 +276,7 @@ public class EditSettingsAction extends PortletAction {
 
 		String groupMappings =
 			"groupName=" + ParamUtil.getString(req, "groupMappingGroupName") +
-			"\ndescription=" + 
+			"\ndescription=" +
 			ParamUtil.getString(req, "groupMappingDescription") +
 			"\nuser=" + ParamUtil.getString(req, "groupMappingUser");
 
