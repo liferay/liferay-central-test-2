@@ -317,10 +317,10 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	public List getAllChildren() throws PortalException, SystemException {
 		List allChildren = new ArrayList();
 
-		Iterator it = getChildren().iterator();
+		Iterator itr = getChildren().iterator();
 
-		while (it.hasNext()) {
-			Layout child = (Layout) it.next();
+		while (itr.hasNext()) {
+			Layout child = (Layout)itr.next();
 
 			allChildren.add(child);
 			allChildren.addAll(child.getChildren());

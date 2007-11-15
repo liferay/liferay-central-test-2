@@ -308,7 +308,7 @@ public class EditPagesAction extends PortletAction {
 			long targetGroupId, boolean targetPrivateLayout)
 		throws Exception{
 
-		Map parameterMap = _getPublishParameters();
+		Map parameterMap = getPublishParameters();
 
 		byte[] data = LayoutLocalServiceUtil.exportLayouts(
 			sourceGroupId, sourcePrivateLayout, parameterMap);
@@ -387,12 +387,84 @@ public class EditPagesAction extends PortletAction {
 		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
+	protected List getMissingParents(Layout layout, long targetGroupId)
+		throws PortalException, SystemException {
+
+		List missingParents = new ArrayList();
+
+		long parentLayoutId = layout.getParentLayoutId();
+
+		while (parentLayoutId > 0) {
+			try {
+				LayoutLocalServiceUtil.getLayout(
+					targetGroupId, layout.isPrivateLayout(), parentLayoutId);
+
+				// If one parent is found all others are assumed to exist
+
+				break;
+			}
+			catch (NoSuchLayoutException nsle) {
+				Layout parent = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					parentLayoutId);
+
+				missingParents.add(parent);
+
+				parentLayoutId = parent.getParentLayoutId();
+			}
+		}
+
+		return missingParents;
+	}
+
+	protected Map getPublishParameters() {
+		Map parameterMap = new HashMap();
+
+		parameterMap.put(
+			PortletDataHandlerKeys.EXPORT_PERMISSIONS, Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.EXPORT_USER_PERMISSIONS,
+			Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.EXPORT_PORTLET_DATA,
+			Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES,
+			Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.EXPORT_TAGS, Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.EXPORT_THEME, Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
+			Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_PERMISSIONS, Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS,
+			Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_PORTLET_DATA,
+			Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES,
+			Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_TAGS, Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_THEME, Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.MERGE_DATA, Boolean.TRUE.toString());
+
+		return parameterMap;
+	}
+
 	protected void publishLayout(
 			long creatorUserId, long plid, long targetGroupId,
 			boolean includeChildren)
 		throws Exception{
 
-		Map parameterMap = _getPublishParameters();
+		Map parameterMap = getPublishParameters();
 
 		parameterMap.put(
 			PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
@@ -404,20 +476,20 @@ public class EditPagesAction extends PortletAction {
 
 		layouts.add(layout);
 
-		layouts.addAll(_getMissingParentIds(layout, targetGroupId));
+		layouts.addAll(getMissingParents(layout, targetGroupId));
 
 		if (includeChildren) {
 			layouts.addAll(layout.getAllChildren());
 		}
 
-		Iterator iterator = layouts.iterator();
+		Iterator itr = layouts.iterator();
 
 		long[] layoutIds = new long[layouts.size()];
 
-		for (int i = 0; iterator.hasNext(); i++) {
-			Layout itLayout = (Layout) iterator.next();
+		for (int i = 0; itr.hasNext(); i++) {
+			Layout curLayout = (Layout)itr.next();
 
-			layoutIds[i] = itLayout.getLayoutId();
+			layoutIds[i] = curLayout.getLayoutId();
 		}
 
 		byte[] data = LayoutLocalServiceUtil.exportLayouts(
@@ -435,10 +507,6 @@ public class EditPagesAction extends PortletAction {
 		User user = PortalUtil.getUser(req);
 
 		String tabs2 = ParamUtil.getString(req, "tabs2");
-		String scope = ParamUtil.getString(req, "scope");
-
-		boolean includeChildren =
-			ParamUtil.getBoolean(req, "include-children", false);
 
 		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
 
@@ -456,19 +524,22 @@ public class EditPagesAction extends PortletAction {
 					stagingGroup.getLiveGroupId());
 		}
 
-		if (scope.equals("all-pages")) {
+		String scope = ParamUtil.getString(req, "scope");
+
+		if (scope.equals("allPages")) {
 			copyLayouts(
 				user.getUserId(), stagingGroup.getGroupId(), privateLayout,
 				stagingGroup.getLiveGroupId(), privateLayout);
 		}
-		else if (scope.equals("current-page")) {
+		else if (scope.equals("currentPage")) {
 			long selPlid = ParamUtil.getLong(
 				req, "selPlid", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+			boolean includeChildren = ParamUtil.getBoolean(
+				req, "includeChildren");
 
 			publishLayout(
 				user.getUserId(), selPlid, stagingGroup.getLiveGroupId(),
 				includeChildren);
-
 		}
 	}
 
@@ -789,77 +860,6 @@ public class EditPagesAction extends PortletAction {
 		GroupServiceUtil.updateGroup(
 			groupId, group.getName(), group.getDescription(), group.getType(),
 			friendlyURL, group.isActive());
-	}
-
-	private List _getMissingParentIds(Layout layout, long targetGroupId)
-		throws PortalException, SystemException {
-
-		long parentLayoutId = layout.getParentLayoutId();
-
-		List missingParents = new ArrayList();
-
-		while (parentLayoutId > 0) {
-			try {
-				LayoutLocalServiceUtil.getLayout(
-					targetGroupId, layout.isPrivateLayout(), parentLayoutId);
-
-				// If one parent is found all others are assumed to exist
-
-				break;
-			}
-			catch (NoSuchLayoutException e) {
-				Layout parent = LayoutLocalServiceUtil.getLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					parentLayoutId);
-
-				missingParents.add(parent);
-
-				parentLayoutId = parent.getParentLayoutId();
-			}
-		}
-
-		return missingParents;
-	}
-
-	private Map _getPublishParameters() {
-		Map parameterMap = new HashMap();
-
-		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_PERMISSIONS, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_USER_PERMISSIONS,
-			Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_PORTLET_DATA,
-			Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES,
-			Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_TAGS, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.EXPORT_THEME, Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
-			Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_PERMISSIONS, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS,
-			Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_PORTLET_DATA,
-			Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES,
-			Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_TAGS, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.IMPORT_THEME, Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.MERGE_DATA, Boolean.TRUE.toString());
-		return parameterMap;
 	}
 
 	private static Log _log = LogFactory.getLog(EditPagesAction.class);

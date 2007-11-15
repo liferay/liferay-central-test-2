@@ -427,7 +427,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Set portletIds = new LinkedHashSet();
 
-		List layouts;
+		List layouts = null;
 
 		if ((layoutIds == null) || (layoutIds.length == 0)) {
 			layouts = getLayouts(groupId, privateLayout);
@@ -660,13 +660,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public List getLayouts(
-		long groupId, boolean privateLayout, long[] layoutIds)
+			long groupId, boolean privateLayout, long[] layoutIds)
 		throws PortalException, SystemException{
 
 		List layouts = new ArrayList();
 
 		for (int i = 0; i < layoutIds.length; i++) {
 			Layout layout = getLayout(groupId, privateLayout, layoutIds[i]);
+
 			layouts.add(layout);
 		}
 
@@ -704,6 +705,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			InputStream is)
 		throws PortalException, SystemException {
 
+		boolean deleteMissingLayouts = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
+			Boolean.TRUE.booleanValue());
 		boolean importPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_PERMISSIONS);
 		boolean importUserPermissions = MapUtil.getBoolean(
@@ -720,9 +724,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.IMPORT_THEME);
 		String userIdStrategy = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
-		boolean deleteMissingLayouts = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
-			Boolean.TRUE.booleanValue());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Import permissions " + importPermissions);

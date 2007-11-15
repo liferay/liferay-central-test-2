@@ -641,20 +641,20 @@ public class ThemeDisplay implements Serializable {
 		_urlPageSettings = urlPageSettings;
 	}
 
-	public PortletURL getURLPublishToLive() {
-		return _urlPublishToLive;
-	}
-
-	public void setURLPublishToLive(PortletURL urlPublishToLive) {
-		_urlPublishToLive = urlPublishToLive;
-	}
-
 	public String getURLPortal() {
 		return _urlPortal;
 	}
 
 	public void setURLPortal(String urlPortal) {
 		_urlPortal = urlPortal;
+	}
+
+	public PortletURL getURLPublishToLive() {
+		return _urlPublishToLive;
+	}
+
+	public void setURLPublishToLive(PortletURL urlPublishToLive) {
+		_urlPublishToLive = urlPublishToLive;
 	}
 
 	public String getURLSignIn() {
@@ -828,6 +828,7 @@ public class ThemeDisplay implements Serializable {
 		_urlMyAccount = null;
 		_urlPageSettings = null;
 		_urlPortal = StringPool.BLANK;
+		_urlPublishToLive = null;
 		_urlSignIn = StringPool.BLANK;
 		_urlSignOut = StringPool.BLANK;
 		_urlUpdateManager = null;
@@ -906,8 +907,8 @@ public class ThemeDisplay implements Serializable {
 	private String _urlLayoutTemplates = StringPool.BLANK;
 	private transient PortletURL _urlMyAccount = null;
 	private transient PortletURL _urlPageSettings = null;
-	private transient PortletURL _urlPublishToLive = null;
 	private String _urlPortal = StringPool.BLANK;
+	private transient PortletURL _urlPublishToLive = null;
 	private String _urlSignIn = StringPool.BLANK;
 	private String _urlSignOut = StringPool.BLANK;
 	private transient PortletURL _urlUpdateManager = null;

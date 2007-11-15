@@ -30,7 +30,7 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "public");
 String tabs3 = ParamUtil.getString(request, "tabs3", "page");
 String tabs4 = ParamUtil.getString(request, "tabs4");
 
-String cmd = ParamUtil.getString(request, Constants.CMD, "");
+String cmd = ParamUtil.getString(request, Constants.CMD);
 
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
@@ -239,10 +239,9 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 	function <portlet:namespace />publishToLive(render) {
 		if (render) {
-		    document.<portlet:namespace />fm.action = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /></portlet:renderURL>';
+		    document.<portlet:namespace />fm.action = '<%= portletURL.toString() %>';
 		}
 
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= currentURL %>";
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "publish_to_live";
 		submitForm(document.<portlet:namespace />fm);
 	}
@@ -339,7 +338,6 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 <input name="<portlet:namespace />tabs4" type="hidden" value="<%= tabs4 %>">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />tabs4=<%= tabs4 %>&<portlet:namespace />selPlid=<%= selPlid %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="">
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
 <input name="<portlet:namespace />liveGroupId" type="hidden" value="<%= liveGroupId %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
@@ -392,18 +390,24 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 </c:if>
 
 <c:if test='<%= tabs1.equals("staging") %>'>
-	<table class="liferay-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="activate-staging" />
-		</td>
-		<td>
-			<input <%= (stagingGroup != null) ? "checked" : "" %> name="<portlet:namespace />activateStaging" type="checkbox" onClick="<portlet:namespace />updateStagingState();">
-		</td>
-	</tr>
-	</table>
+	<c:choose>
+		<c:when test="<%= layout.getGroup().isStagingGroup() && layout.getGroup().getLiveGroupId() == liveGroupId %>">
+		</c:when>
+		<c:otherwise>
+			<table class="liferay-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="activate-staging" />
+				</td>
+				<td>
+					<input <%= (stagingGroup != null) ? "checked" : "" %> name="<portlet:namespace />activateStaging" type="checkbox" onClick="<portlet:namespace />updateStagingState();">
+				</td>
+			</tr>
+			</table>
 
-	<br />
+			<br />
+		</c:otherwise>
+	</c:choose>
 </c:if>
 
 <c:if test="<%= (group != null) %>">
@@ -415,47 +419,54 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 	<c:choose>
 		<c:when test='<%= cmd.equals("publish_to_live") %>'>
+			<liferay-ui:message key="please-choose-the-scope-of-the-pages-to-publish" />
+
 			<fieldset>
-				<legend><liferay-ui:message key="scope"/></legend>
+				<legend><liferay-ui:message key="scope" /></legend>
+
 				<div>
-					<input name="<portlet:namespace />scope" id="<portlet:namespace />scope_all_pages" type="radio" value="all-pages" <%= (selLayout == null) ? "checked":"" %>>
-					<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages"/></label>
+					<input <%= (selLayout == null) ? "checked":"" %> id="<portlet:namespace />scopeAllPages"  name="<portlet:namespace />scope" type="radio" value="allPages">
+
+					<label for="<portlet:namespace />scopeAllPages"><liferay-ui:message key="all-pages" /></label>
 				</div>
+
 				<c:if test="<%= selLayout != null %>">
 					<div>
-						<input name="<portlet:namespace />scope" id="<portlet:namespace />scope_current_page" type="radio" value="current-page" checked>
-						<label for="<portlet:namespace />scope_current_page"><liferay-ui:message key="current-page"/> (<%= selLayout.getName(locale) %>)</label>
+						<input checked id="<portlet:namespace />scopeCurrentPage" name="<portlet:namespace />scope" type="radio" value="currentPage">
+
+						<label for="<portlet:namespace />scopeCurrentPage"><liferay-ui:message key="current-page" /> (<%= selLayout.getName(locale) %>)</label>
+
 						<c:if test="<%= selLayout.getChildren().size() > 0 %>">
 							<div style="margin-left: 15px">
-								<input name="<portlet:namespace />include-ancestors" type="checkbox" value="1" disabled checked>
-								<label for="<portlet:namespace />include-ancestors"><liferay-ui:message key="include-ancestor-pages-if-necessary"/></label>
+								<input checked disabled name="<portlet:namespace />includeAncestors" type="checkbox" value="1">
 
-								<br/>
+								<label for="<portlet:namespace />includeAncestors"><liferay-ui:message key="include-ancestor-pages-if-necessary" /></label>
 
-								<input name="<portlet:namespace />include-children" type="checkbox" value="1">
-								<label for="<portlet:namespace />include-children"><liferay-ui:message key="include-all-children-pages"/></label>
+								<br />
+
+								<input name="<portlet:namespace />includeChildren" type="checkbox" value="1">
+
+								<label for="<portlet:namespace />includeChildren"><liferay-ui:message key="include-all-children-pages" /></label>
 							</div>
 						</c:if>
 					</div>
 				</c:if>
 			</fieldset>
 
-			<br/>
+			<br />
 
 			<input type="button" value="<liferay-ui:message key="publish-to-live" />"  onClick="<portlet:namespace />publishToLive(false);" />
 
-			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
-
+			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="history.back();" />
 		</c:when>
 		<c:otherwise>
-
 			<c:choose>
 				<c:when test='<%= tabs1.equals("staging") %>'>
 					<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || !selGroup.isStagingGroup()) && (pagesCount > 0)  %>">
 						<input type="button" value="<liferay-ui:message key="view-pages" />"  onClick="var stagingGroupWindow = window.open('<%= viewPagesURL%>'); void(''); stagingGroupWindow.focus();" />
 					</c:if>
 
-					<input type="button" value="<liferay-ui:message key="publish-to-live" />..."  onClick="<portlet:namespace />publishToLive(true);" />
+					<input type="button" value="<liferay-ui:message key="publish-to-live" />"  onClick="<portlet:namespace />publishToLive(true);" />
 
 					<input type="button" value="<liferay-ui:message key="copy-from-live" />"  onClick="<portlet:namespace />copyFromLive();" />
 
@@ -501,7 +512,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 					%>
 
 					<c:choose>
-				<c:when test="<%= selLayout != null %>">
+						<c:when test="<%= selLayout != null %>">
 							<%= LanguageUtil.get(pageContext, "edit-" + (privateLayout ? "private" : "public") + "-page") %>: <a href="<%= breadcrumbURL.toString() %>"><%= rootNodeName %></a> &raquo; <liferay-ui:breadcrumb selLayout="<%= selLayout %>" selLayoutParam="selPlid" portletURL="<%= breadcrumbURL %>" />
 						</c:when>
 						<c:otherwise>
@@ -1288,7 +1299,7 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 											<br /><br />
 
-											<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '', '<%= sectionParam %>', '<%= sectionName %>');"/>
+											<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '', '<%= sectionParam %>', '<%= sectionName %>');" />
 										</liferay-ui:section>
 									</liferay-ui:tabs>
 								</c:when>
@@ -1814,7 +1825,6 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 				</td>
 			</tr>
 			</table>
-
 		</c:otherwise>
 	</c:choose>
 </c:if>
