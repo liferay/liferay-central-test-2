@@ -265,7 +265,7 @@ public class EditSettingsAction extends PortletAction {
 			"screenName=" + ParamUtil.getString(req, "userMappingScreenName") +
 			"\npassword=" + ParamUtil.getString(req, "userMappingPassword") +
 			"\nemailAddress=" +
-			ParamUtil.getString(req, "userMappingEmailAddress") +
+				ParamUtil.getString(req, "userMappingEmailAddress") +
 			"\nfullName=" + ParamUtil.getString(req, "userMappingFullName") +
 			"\nfirstName=" + ParamUtil.getString(req, "userMappingFirstName") +
 			"\nlastName=" + ParamUtil.getString(req, "userMappingLastName") +
@@ -277,7 +277,7 @@ public class EditSettingsAction extends PortletAction {
 		String groupMappings =
 			"groupName=" + ParamUtil.getString(req, "groupMappingGroupName") +
 			"\ndescription=" +
-			ParamUtil.getString(req, "groupMappingDescription") +
+				ParamUtil.getString(req, "groupMappingDescription") +
 			"\nuser=" + ParamUtil.getString(req, "groupMappingUser");
 
 		boolean importEnabled = ParamUtil.getBoolean(req, "importEnabled");

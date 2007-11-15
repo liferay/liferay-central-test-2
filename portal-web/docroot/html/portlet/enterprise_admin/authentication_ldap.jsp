@@ -27,17 +27,16 @@ String userMappings = ParamUtil.getString(request, "userMappings", PrefsPropsUti
 
 String[] userMappingArray = userMappings.split("\n");
 
-String userMappingScreenName = "";
-String userMappingPassword = "";
-String userMappingEmailAddress = "";
-String userMappingFullName = "";
-String userMappingFirstName = "";
-String userMappingLastName = "";
-String userMappingJobTitle = "";
-String userMappingGroup = "";
+String userMappingScreenName = StringPool.BLANK;
+String userMappingPassword = StringPool.BLANK;
+String userMappingEmailAddress = StringPool.BLANK;
+String userMappingFullName = StringPool.BLANK;
+String userMappingFirstName = StringPool.BLANK;
+String userMappingLastName = StringPool.BLANK;
+String userMappingJobTitle = StringPool.BLANK;
+String userMappingGroup = StringPool.BLANK;
 
 for (int i = 0 ; i < userMappingArray.length ; i++) {
-
 	if (userMappingArray[i].indexOf("=") == -1) {
 		continue;
 	}
@@ -80,12 +79,11 @@ String groupMappings = ParamUtil.getString(request, "groupMappings", PrefsPropsU
 
 String[] groupMappingArray = groupMappings.split("\n");
 
-String groupMappingGroupName = "";
-String groupMappingDescription = "";
-String groupMappingUser = "";
+String groupMappingGroupName = StringPool.BLANK;
+String groupMappingDescription = StringPool.BLANK;
+String groupMappingUser = StringPool.BLANK;
 
 for (int i = 0 ; i < groupMappingArray.length ; i++) {
-
 	if (userMappingArray[i].indexOf("=") == -1) {
 		continue;
 	}
@@ -138,7 +136,14 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		var principal = "";
 		var credentials = "";
 		var searchFilter = "";
-		var userMappings = "";
+		var userMappingScreenName = "";
+		var userMappingPassword = "";
+		var userMappingEmailAddress = "";
+		var userMappingFullName = "";
+		var userMappingFirstName = "";
+		var userMappingLastName = "";
+		var userMappingJobTitle = "";
+		var userMappingGroup = "";
 
 		var ldapType = Liferay.Util.getSelectedRadioValue(document.<portlet:namespace />fm.<portlet:namespace />defaultLdap);
 
@@ -148,7 +153,6 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			principal = "uid=admin,ou=system";
 			credentials = "secret";
 			searchFilter = "(mail=@email_address@)";
-
 			userMappingScreenName = "cn";
 			userMappingPassword = "userPassword";
 			userMappingEmailAddress = "mail";
@@ -164,7 +168,6 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			principal = "admin";
 			credentials = "secret";
 			searchFilter = "(&(objectCategory=person)(sAMAccountName=@user_id@))";
-
 			userMappingScreenName = "sAMAccountName";
 			userMappingPassword = "";
 			userMappingEmailAddress = "userprincipalname";
@@ -180,7 +183,6 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			principal = "cn=admin,ou=test";
 			credentials = "secret";
 			searchFilter = "(mail=@email_address@)";
-
 			userMappingScreenName = "cn";
 			userMappingPassword = "userPassword";
 			userMappingEmailAddress = "mail";
@@ -188,22 +190,6 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			userMappingFirstName = "givenName";
 			userMappingLastName = "sn";
 			userMappingJobTitle = "title";
-			userMappingGroup = "";
-		}
-		else {
-			url = "";
-			baseDN = "";
-			principal = "";
-			credentials = "";
-			searchFilter = "";
-
-			userMappingScreenName = "";
-			userMappingPassword = "";
-			userMappingEmailAddress = "";
-			userMappingFullName = "";
-			userMappingFirstName = "";
-			userMappingLastName = "";
-			userMappingJobTitle = "";
 			userMappingGroup = "";
 		}
 
@@ -214,7 +200,6 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		document.<portlet:namespace />fm.<portlet:namespace />usersDN.value = baseDN;
 		document.<portlet:namespace />fm.<portlet:namespace />groupsDN.value = baseDN;
 		document.<portlet:namespace />fm.<portlet:namespace />searchFilter.value = searchFilter;
-
 		document.<portlet:namespace />fm.<portlet:namespace />userMappingScreenName.value = userMappingScreenName;
 		document.<portlet:namespace />fm.<portlet:namespace />userMappingPassword.value = userMappingPassword;
 		document.<portlet:namespace />fm.<portlet:namespace />userMappingEmailAddress.value = userMappingEmailAddress;
@@ -372,7 +357,9 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 </tr>
 <tr>
 	<td colspan="2">
-		<br /><liferay-ui:message key="user-mapping" />
+		<br />
+
+		<b><liferay-ui:message key="user-mapping" /></b>
 	</td>
 </tr>
 <tr>
@@ -468,7 +455,9 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 </tr>
 <tr>
 	<td colspan="2">
-		<br /><liferay-ui:message key="group-mapping" />
+		<br />
+
+		<b><liferay-ui:message key="group-mapping" /></b>
 	</td>
 </tr>
 <tr>

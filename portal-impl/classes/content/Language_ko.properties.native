@@ -1284,6 +1284,7 @@ greeting=인사
 group-id=그룹 식별
 group-import-search-filter=그룹 수입품 수색 여과기
 group-mapping=그룹 지도로 나타냄
+group-name=그룹 이름
 group=그룹
 groups-and-roles=그룹과 역할
 groups-dn=그룹DN

@@ -1285,6 +1285,7 @@ greeting=Saludo
 group-id=Grupo (group id)
 group-import-search-filter=Filtro de búsqueda para importación de grupos
 group-mapping=El Traz Del Grupo
+group-name=Nombre De Grupo
 group=Grupo
 groups-and-roles=Grupos y roles
 groups-dn=Grupos Dn

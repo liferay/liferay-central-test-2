@@ -1285,6 +1285,7 @@ greeting=问候
 group-id=小组身份证
 group-import-search-filter=小组进口查寻过滤器
 group-mapping=小组映射
+group-name=组名
 group=群组
 groups-and-roles=群组和角色
 groups-dn=小组DN

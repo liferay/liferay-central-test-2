@@ -1285,6 +1285,7 @@ greeting=Cumprimento
 group-id=Grupo Id
 group-import-search-filter=Filtro Da Busca Da Importação Do Grupo
 group-mapping=Traçar Do Grupo
+group-name=Nome De Grupo
 group=Grupo
 groups-and-roles=Grupos e papéis
 groups-dn=Grupos Dn

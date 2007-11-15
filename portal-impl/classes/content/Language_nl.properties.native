@@ -1285,6 +1285,7 @@ greeting=Groet
 group-id=Identiteitskaart van de groep
 group-import-search-filter=De Filter van het Onderzoek van de Invoer van de groep
 group-mapping=De Afbeelding van de groep
+group-name=De Naam van de groep
 group=Groep
 groups-and-roles=Groepen en Rollen
 groups-dn=Groepen DN

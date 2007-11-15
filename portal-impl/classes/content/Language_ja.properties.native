@@ -1282,6 +1282,7 @@ greeting=挨拶
 group-id=グループID
 group-import-search-filter=グループの輸入の調査フィルター
 group-mapping=グループの地図を描くこと
+group-name=グループ名
 group=グループ
 groups-and-roles=グループと役割
 groups-dn=グループDN

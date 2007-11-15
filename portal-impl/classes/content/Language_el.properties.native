@@ -1284,6 +1284,7 @@ greeting=Χαιρετισμός
 group-id=Ταυτότητα ομάδας
 group-import-search-filter=Φίλτρο αναζήτησης εισαγωγών ομάδας
 group-mapping=Χαρτογράφηση ομάδας
+group-name=Όνομα ομάδας
 group=Ομάδα
 groups-and-roles=Ομάδες και Ρόλοι
 groups-dn=Ομάδες DN
