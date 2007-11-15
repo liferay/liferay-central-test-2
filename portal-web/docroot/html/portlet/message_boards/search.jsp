@@ -86,6 +86,8 @@ List headerNames = new ArrayList();
 headerNames.add("#");
 headerNames.add("category");
 headerNames.add("message");
+headerNames.add("thread-posts");
+headerNames.add("thread-views");
 headerNames.add("score");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-messages-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
@@ -117,12 +119,14 @@ try {
 
 		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-		// Category and message
+		// Category, thread, and message
 
 		long categoryId = GetterUtil.getLong(doc.get("categoryId"));
+		long curThreadId = GetterUtil.getLong(doc.get("threadId"));
 		long messageId = GetterUtil.getLong(doc.get("messageId"));
 
 		MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+		MBThread thread = MBThreadLocalServiceUtil.getThread(curThreadId);
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
 		PortletURL rowURL = renderResponse.createRenderURL();
@@ -135,6 +139,8 @@ try {
 
 		row.addText(category.getName(), rowURL);
 		row.addText(message.getSubject(), rowURL);
+		row.addText(String.valueOf(thread.getMessageCount()), rowURL);
+		row.addText(String.valueOf(thread.getViewCount()), rowURL);
 
 		// Score
 
