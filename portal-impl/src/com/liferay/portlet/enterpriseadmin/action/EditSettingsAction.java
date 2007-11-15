@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.servlet.filters.sso.cas.CASFilter;
@@ -37,14 +38,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ldap.LDAPUtil;
 import com.liferay.util.servlet.SessionErrors;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
-import java.util.Properties;
-
-import javax.naming.Context;
-import javax.naming.ldap.InitialLdapContext;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -97,7 +90,7 @@ public class EditSettingsAction extends PortletAction {
 			updateEmails(req, prefs);
 		}
 		else if (cmd.equals("updateLdap")) {
-			updateLdap(req, prefs);
+			updateLdap(req, companyId, prefs);
 		}
 		else if (cmd.equals("updateMailHostNames")) {
 			updateMailHostNames(req, prefs);
@@ -247,7 +240,8 @@ public class EditSettingsAction extends PortletAction {
 		}
 	}
 
-	protected void updateLdap(ActionRequest req, PortletPreferences prefs)
+	protected void updateLdap(
+			ActionRequest req, long companyId, PortletPreferences prefs)
 		throws Exception {
 
 		boolean enabled = ParamUtil.getBoolean(req, "enabled");
@@ -293,26 +287,11 @@ public class EditSettingsAction extends PortletAction {
 
 		try {
 			if (enabled) {
-				Properties env = new Properties();
+				String fullProviderURL = LDAPUtil.getFullProviderURL(
+					baseProviderURL, baseDN);
 
-				env.put(
-					Context.INITIAL_CONTEXT_FACTORY,
-					PrefsPropsUtil.getString(PropsUtil.LDAP_FACTORY_INITIAL));
-				env.put(
-					Context.PROVIDER_URL,
-					LDAPUtil.getFullProviderURL(baseProviderURL, baseDN));
-				env.put(Context.SECURITY_PRINCIPAL, principal);
-				env.put(Context.SECURITY_CREDENTIALS, credentials);
-
-				if (_log.isDebugEnabled()) {
-					StringWriter sw = new StringWriter();
-
-					env.list(new PrintWriter(sw));
-
-					_log.debug(sw.getBuffer().toString());
-				}
-
-				new InitialLdapContext(env, null);
+				PortalLDAPUtil.getContext(
+					companyId, fullProviderURL, principal, credentials);
 			}
 		}
 		catch (Exception e) {

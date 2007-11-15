@@ -170,17 +170,19 @@ public class PortalLDAPUtil {
 	}
 
 	public static LdapContext getContext(long companyId) throws Exception {
-		return getContext(
-			companyId, PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_BASE_PROVIDER_URL),
-			PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_SECURITY_PRINCIPAL),
-			PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_SECURITY_CREDENTIALS));
+		String baseProviderURL = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_BASE_PROVIDER_URL);
+		String pricipal = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_SECURITY_PRINCIPAL);
+		String credentials = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_SECURITY_CREDENTIALS);
+
+		return getContext(companyId, baseProviderURL, pricipal, credentials);
 	}
 
 	public static LdapContext getContext(
-			long companyId, String baseUrl, String pricipal, String credentials)
+			long companyId, String providerURL, String pricipal,
+			String credentials)
 		throws Exception {
 
 		Properties env = new Properties();
@@ -189,7 +191,7 @@ public class PortalLDAPUtil {
 			Context.INITIAL_CONTEXT_FACTORY,
 			PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_FACTORY_INITIAL));
-		env.put(Context.PROVIDER_URL, baseUrl);
+		env.put(Context.PROVIDER_URL, providerURL);
 		env.put(Context.SECURITY_PRINCIPAL, pricipal);
 		env.put(Context.SECURITY_CREDENTIALS, credentials);
 
