@@ -28,25 +28,27 @@
 
 // Merge URL tags
 
-String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
+if (mergeUrlTags) {
+	String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
 
-String titleEntry = null;
+	String titleEntry = null;
 
-if ((compilerEntries != null) && (compilerEntries.length > 0)) {
-	String[] newEntries = ArrayUtil.append(entries, compilerEntries);
+	if ((compilerEntries != null) && (compilerEntries.length > 0)) {
+		String[] newEntries = ArrayUtil.append(entries, compilerEntries);
 
-	entries = newEntries;
+		entries = newEntries;
 
-	titleEntry = compilerEntries[compilerEntries.length - 1];
+		titleEntry = compilerEntries[compilerEntries.length - 1];
+	}
+
+	String portletTitle = portletDisplay.getTitle();
+
+	portletTitle = TagsUtil.substitutePropertyVariables(company.getCompanyId(), titleEntry, portletTitle);
+
+	renderResponse.setTitle(portletTitle);
 }
 
-String portletTitle = portletDisplay.getTitle();
-
-portletTitle = TagsUtil.substitutePropertyVariables(company.getCompanyId(), titleEntry, portletTitle);
-
-renderResponse.setTitle(portletTitle);
-
-if (themeDisplay.isSignedIn()) {
+if (mergeUserTags && themeDisplay.isSignedIn()) {
 
 	// Merge my global tags
 

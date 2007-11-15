@@ -327,9 +327,30 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							focus="<%= false %>"
 						/>
 
-						<br />
+						<br /><br />
 
 						<table class="liferay-table">
+						<tr>
+							<td>
+								<liferay-ui:message key="include-tags-from-the-url" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="mergeUrlTags" defaultValue="<%= mergeUrlTags %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="include-tags-specified-by-the-user" />
+							</td>
+							<td>
+								<liferay-ui:input-checkbox param="mergeUserTags " defaultValue="<%= mergeUserTags %>" />
+							</td>
+						</tr>
+							<tr>
+								<td>
+									&nbsp;
+								</td>
+							</tr>
 						<tr>
 							<td>
 								<liferay-ui:message key="search-operator" />
