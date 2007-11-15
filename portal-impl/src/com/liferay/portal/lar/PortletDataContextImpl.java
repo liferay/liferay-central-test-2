@@ -31,11 +31,14 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
 
 import java.util.HashMap;
@@ -120,6 +123,85 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public boolean hasPrimaryKey(Class classObj, Object primaryKey) {
 		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
+	}
+
+	public Map getComments() {
+		return _commentsMap;
+	}
+
+	public void addComments(Class classObj, Object primaryKey)
+		throws PortalException, SystemException {
+
+		List messages = MBMessageLocalServiceUtil.getMessages(
+			classObj.getName(), ((Long)primaryKey).longValue());
+
+		if ((messages != null) && (messages.size() > 0)) {
+			Iterator itr = messages.iterator();
+
+			while (itr.hasNext()) {
+				MBMessage message = (MBMessage)itr.next();
+
+				message.setUserUuid(message.getUserUuid());
+			}
+
+			_commentsMap.put(
+				getPrimaryKeyString(classObj, primaryKey), messages);
+		}
+	}
+
+	public void addComments(String className, Object primaryKey, List messages)
+		throws PortalException, SystemException {
+
+		_commentsMap.put(
+			getPrimaryKeyString(className, primaryKey), messages);
+	}
+
+	public void importComments(
+			Class classObj, Object primaryKey, Object newPrimaryKey,
+			long groupId)
+		throws PortalException, SystemException {
+
+		boolean importComments = MapUtil.getBoolean(
+			_parameterMap, PortletDataHandlerKeys.IMPORT_COMMENTS);
+
+		if (!importComments) {
+			return;
+		}
+
+		Map messagePKs = CollectionFactory.getHashMap();
+		Map threadPKs = CollectionFactory.getHashMap();
+
+		List messages = (List)_commentsMap.get(
+			getPrimaryKeyString(classObj, primaryKey));
+
+		if (messages != null) {
+			Iterator itr = messages.iterator();
+
+			while (itr.hasNext()) {
+				MBMessage message = (MBMessage)itr.next();
+
+				long userId = getUserId(message.getUserUuid());
+				long parentMessageId = MapUtil.getLong(
+					messagePKs, message.getParentMessageId(),
+					message.getParentMessageId());
+				long threadId = MapUtil.getLong(
+					threadPKs, message.getThreadId(), message.getThreadId());
+
+				MBMessage newMessage =
+					MBMessageLocalServiceUtil.addDiscussionMessage(
+						userId, groupId, classObj.getName(),
+						((Long)newPrimaryKey).longValue(), threadId,
+						parentMessageId, message.getSubject(),
+						message.getBody());
+
+				messagePKs.put(
+					message.getPrimaryKeyObj(),
+					newMessage.getPrimaryKeyObj());
+				threadPKs.put(
+					new Long(message.getThreadId()),
+					new Long(newMessage.getThreadId()));
+			}
+		}
 	}
 
 	public Map getRatingsEntries() {
@@ -263,6 +345,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private long _companyId;
 	private long _groupId;
 	private long _plid;
+	private Map _commentsMap = new HashMap();
 	private Map _parameterMap;
 	private Map _ratingsEntriesMap = new HashMap();
 	private Map _tagsEntriesMap = new HashMap();

@@ -115,6 +115,33 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
 			long userId, long groupId, String className, long classPK,
+			long threadId, long parentMessageId, String subject, String body)
+		throws PortalException, SystemException {
+
+		ThemeDisplay themeDisplay = null;
+
+		MBMessage message = addDiscussionMessage(
+			userId, groupId, className, classPK, threadId, parentMessageId,
+			subject, body, themeDisplay);
+
+		if (parentMessageId == MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
+			long discussionId = counterLocalService.increment();
+
+			MBDiscussion discussion = mbDiscussionPersistence.create(
+				discussionId);
+
+			discussion.setClassNameId(PortalUtil.getClassNameId(className));
+			discussion.setClassPK(classPK);
+			discussion.setThreadId(message.getThreadId());
+
+			mbDiscussionPersistence.update(discussion);
+		}
+
+		return message;
+	}
+
+	public MBMessage addDiscussionMessage(
+			long userId, long groupId, String className, long classPK,
 			long threadId, long parentMessageId, String subject, String body,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -140,7 +167,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			anonymous, priority, tagsEntries, prefs, addCommunityPermissions,
 			addGuestPermissions);
 
-		if (className.equals(BlogsEntry.class.getName())) {
+		if ((className.equals(BlogsEntry.class.getName())) &&
+			(themeDisplay != null)) {
 			try {
 				sendBlogsCommentsEmail(userId, classPK, message, themeDisplay);
 			}
@@ -834,6 +862,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return mbMessagePersistence.findByPrimaryKey(messageId);
+	}
+
+	public List getMessages(String className, long classPK)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return mbMessageFinder.findByC_C(classNameId, classPK);
 	}
 
 	public MBMessageDisplay getMessageDisplay(long messageId)

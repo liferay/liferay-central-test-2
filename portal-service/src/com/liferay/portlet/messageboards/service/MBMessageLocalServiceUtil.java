@@ -398,6 +398,18 @@ public class MBMessageLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, long groupId, java.lang.String className, long classPK,
 		long threadId, long parentMessageId, java.lang.String subject,
+		java.lang.String body)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.addDiscussionMessage(userId, groupId,
+			className, classPK, threadId, parentMessageId, subject, body);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
+		long userId, long groupId, java.lang.String className, long classPK,
+		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
@@ -718,6 +730,15 @@ public class MBMessageLocalServiceUtil {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.getMessage(messageId);
+	}
+
+	public static java.util.List getMessages(java.lang.String className,
+		long classPK)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getMessages(className, classPK);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(

@@ -358,6 +358,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map parameterMap)
 		throws PortalException, SystemException {
 
+		boolean exportComments = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.EXPORT_COMMENTS);
 		boolean exportPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_PERMISSIONS);
 		boolean exportUserPermissions = MapUtil.getBoolean(
@@ -514,6 +516,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 						exportUserPermissions);
 				}
 			}
+		}
+
+		// Comments
+
+		if (exportComments) {
+			exportComments(context, root);
 		}
 
 		// Portlet preferences
@@ -708,6 +716,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		boolean deleteMissingLayouts = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_DELETE_MISSING_LAYOUTS,
 			Boolean.TRUE.booleanValue());
+		boolean importComments = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.IMPORT_COMMENTS);
 		boolean importPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_PERMISSIONS);
 		boolean importUserPermissions = MapUtil.getBoolean(
@@ -847,6 +857,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layoutSetLocalService.updateLookAndFeel(
 			groupId, privateLayout, themeId, colorSchemeId, StringPool.BLANK,
 			wapTheme);
+
+		// Comments
+
+		if (importComments) {
+			importComments(context, root);
+		}
 
 		// Ratings
 
@@ -1424,6 +1440,40 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Layout set
 
 		layoutSetLocalService.updatePageCount(groupId, privateLayout);
+	}
+
+	protected void exportComments(PortletDataContext context, Element root)
+		throws SystemException {
+
+		try {
+			XStream xStream = new XStream();
+
+			Map commentsMap = context.getComments();
+
+			Iterator itr = commentsMap.keySet().iterator();
+
+			while (itr.hasNext()) {
+				String key = (String)itr.next();
+
+				String[] comment = key.split(StringPool.POUND);
+
+				Element el = root.addElement("comments");
+
+				el.addAttribute("class-name", comment[0]);
+				el.addAttribute("class-pk", comment[1]);
+
+				List messages = (List)commentsMap.get(key);
+
+				String xml = xStream.toXML(messages);
+
+				Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+
+				el.content().add(tempDoc.getRootElement().createCopy());
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	protected Element exportGroupPermissions(
@@ -2219,6 +2269,39 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return false;
+	}
+
+	protected void importComments(PortletDataContext context, Element root)
+		throws PortalException, SystemException {
+
+		try {
+			XStream xStream = new XStream();
+
+			Iterator itr = root.elements("comments").iterator();
+
+			while (itr.hasNext()) {
+				Element el = (Element)itr.next();
+
+				String className = GetterUtil.getString(
+					el.attributeValue("class-name"));
+				long classPK = GetterUtil.getLong(
+					el.attributeValue("class-pk"));
+
+				Element messagesListEl = el.element("list");
+
+				Document tempDoc = DocumentHelper.createDocument();
+
+				tempDoc.content().add(messagesListEl.createCopy());
+
+				List messages = (List)xStream.fromXML(
+					XMLFormatter.toString(tempDoc));
+
+				context.addComments(className, new Long(classPK), messages);
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	protected void importGroupPermissions(

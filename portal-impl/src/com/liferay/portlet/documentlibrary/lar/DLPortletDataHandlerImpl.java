@@ -192,6 +192,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				else {
 					entry.setUserUuid(entry.getUserUuid());
 
+					context.addComments(
+						DLFileEntry.class, entry.getPrimaryKeyObj());
+
 					context.addRatingsEntries(
 						DLFileEntry.class, entry.getPrimaryKeyObj());
 
@@ -463,6 +466,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			entryNames.put(entry.getName(), existingEntry.getName());
 
+			context.importComments(
+				DLFileEntry.class, entry.getPrimaryKeyObj(),
+				existingEntry.getPrimaryKeyObj(), context.getGroupId());
 			context.importRatingsEntries(
 				DLFileEntry.class, entry.getPrimaryKeyObj(),
 				existingEntry.getPrimaryKeyObj());

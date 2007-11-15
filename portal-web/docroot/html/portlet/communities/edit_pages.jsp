@@ -1468,29 +1468,29 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 									<fieldset>
 										<legend><b>Portal Data</b></legend>
-									<div>
-										<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
+										<div>
+											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
 
-										<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>Checkbox"><liferay-ui:message key="portlet-preferences" /></label>
-									</div>
+											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES %>Checkbox"><liferay-ui:message key="portlet-preferences" /></label>
+										</div>
 
-									<div>
-										<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
+										<div>
+											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
 
-										<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>Checkbox"><liferay-ui:message key="permissions" /></label>
-									</div>
+											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PERMISSIONS %>Checkbox"><liferay-ui:message key="permissions" /></label>
+										</div>
 
-									<div>
-										<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_USER_PERMISSIONS %>" defaultValue="<%= false %>" />
+										<div>
+											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_USER_PERMISSIONS %>" defaultValue="<%= false %>" />
 
-										<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_USER_PERMISSIONS %>Checkbox"><liferay-ui:message key="user-permissions" /></label>
-									</div>
+											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_USER_PERMISSIONS %>Checkbox"><liferay-ui:message key="user-permissions" /></label>
+										</div>
 
-									<div>
-										<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_THEME %>" defaultValue="<%= false %>" />
+										<div>
+											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_THEME %>" defaultValue="<%= false %>" />
 
-										<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /> (<%= LanguageUtil.get(pageContext, "all-pages-will-use-the-exported-theme") %>)</label>
-									</div>
+											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /> (<%= LanguageUtil.get(pageContext, "all-pages-will-use-the-exported-theme") %>)</label>
+										</div>
 
 									</fieldset>
 
@@ -1500,6 +1500,12 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
 
 											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_PORTLET_DATA %>Checkbox"><liferay-ui:message key="portlet-data" /></label>
+										</div>
+
+										<div>
+											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.EXPORT_COMMENTS %>" defaultValue="<%= false %>" />
+
+											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.EXPORT_COMMENTS %>Checkbox"><liferay-ui:message key="comments" /></label>
 										</div>
 
 										<div>
@@ -1572,69 +1578,80 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 										<liferay-ui:message key="what-would-you-like-to-import" />
 
-										<div>
-											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
-
-											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES %>Checkbox"><liferay-ui:message key="portlet-preferences" /></label>
-										</div>
-
-										<div>
-											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
-
-											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PORTLET_DATA %>Checkbox"><liferay-ui:message key="portlet-data" /></label>
-										</div>
-
-										<div>
-											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
-
-											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>Checkbox"><liferay-ui:message key="permissions" /></label>
-										</div>
-
-										<div>
-											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS %>" defaultValue="<%= false %>" />
-
-											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS %>Checkbox"><liferay-ui:message key="user-permissions" /></label>
-										</div>
-
-										<div>
-											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_RATINGS %>" defaultValue="<%= false %>" />
-
-											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_RATINGS %>Checkbox"><liferay-ui:message key="ratings" /></label>
-										</div>
-
-										<div>
-											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_TAGS %>" defaultValue="<%= false %>" />
-
-											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_TAGS %>Checkbox"><liferay-ui:message key="tags" /></label>
-										</div>
-
-										<div>
-											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_THEME %>" defaultValue="<%= false %>" />
-
-											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /></label>
-										</div>
-
-										<div>
-											<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.MERGE_DATA %>" defaultValue="<%= false %>" />
-
-											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.MERGE_DATA %>Checkbox"><liferay-ui:message key="merge-data" /></label>
-										</div>
-
 										<fieldset>
-											<legend><liferay-ui:message key="user-id-strategy" /></legend>
-
+											<legend><b>Portal Data</b></legend>
 											<div>
-												<input checked id="<portlet:namespace />currentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.CURRENT_USER_ID%>" />
+												<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES %>" defaultValue="<%= false %>" />
 
-												<label for="<portlet:namespace />currentUserId"><liferay-ui:message key="if-a-user-id-does-not-exist,-then-use-my-user-id" /></label>
+												<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES %>Checkbox"><liferay-ui:message key="portlet-preferences" /></label>
 											</div>
 
 											<div>
-												<input id="<portlet:namespace />alwaysCurrentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.ALWAYS_CURRENT_USER_ID%>" />
+												<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>" defaultValue="<%= false %>" />
 
-												<label for="<portlet:namespace />alwaysCurrentUserId"><liferay-ui:message key="always-use-my-user-id" /></label>
+												<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PERMISSIONS %>Checkbox"><liferay-ui:message key="permissions" /></label>
+											</div>
+
+											<div>
+												<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS %>" defaultValue="<%= false %>" />
+
+												<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_USER_PERMISSIONS %>Checkbox"><liferay-ui:message key="user-permissions" /></label>
+											</div>
+
+											<div>
+												<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_THEME %>" defaultValue="<%= false %>" />
+
+												<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_THEME %>Checkbox"><liferay-ui:message key="root-theme" /></label>
 											</div>
 										</fieldset>
+
+										<fieldset>
+											<legend><b>Portlet Data</b></legend>
+											<div>
+												<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_PORTLET_DATA %>" defaultValue="<%= false %>" />
+
+												<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_PORTLET_DATA %>Checkbox"><liferay-ui:message key="portlet-data" /></label>
+											</div>
+
+											<div>
+												<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.MERGE_DATA %>" defaultValue="<%= false %>" />
+
+												<label for="<portlet:namespace /><%= PortletDataHandlerKeys.MERGE_DATA %>Checkbox"><liferay-ui:message key="merge-data" /></label>
+											</div>
+
+											<div>
+												<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_COMMENTS %>" defaultValue="<%= false %>" />
+
+												<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_COMMENTS %>Checkbox"><liferay-ui:message key="comments" /></label>
+											</div>
+
+											<div>
+												<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_RATINGS %>" defaultValue="<%= false %>" />
+
+												<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_RATINGS %>Checkbox"><liferay-ui:message key="ratings" /></label>
+											</div>
+
+											<div>
+												<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.IMPORT_TAGS %>" defaultValue="<%= false %>" />
+
+												<label for="<portlet:namespace /><%= PortletDataHandlerKeys.IMPORT_TAGS %>Checkbox"><liferay-ui:message key="tags" /></label>
+											</div>
+
+											<fieldset>
+												<legend><liferay-ui:message key="user-id-strategy" /></legend>
+
+												<div>
+													<input checked id="<portlet:namespace />currentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.CURRENT_USER_ID%>" />
+
+													<label for="<portlet:namespace />currentUserId"><liferay-ui:message key="if-a-user-id-does-not-exist,-then-use-my-user-id" /></label>
+												</div>
+
+												<div>
+													<input id="<portlet:namespace />alwaysCurrentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.ALWAYS_CURRENT_USER_ID%>" />
+
+													<label for="<portlet:namespace />alwaysCurrentUserId"><liferay-ui:message key="always-use-my-user-id" /></label>
+												</div>
+											</fieldset>
 
 										<%
 										itr1 = portletsList.iterator();
@@ -1674,6 +1691,8 @@ viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 											}
 										}
 										%>
+
+										</fieldset>
 
 										<br />
 

@@ -63,6 +63,19 @@ public interface PortletDataContext extends Serializable {
 
 	public boolean hasPrimaryKey(Class classObj, Object primaryKey);
 
+	public Map getComments();
+
+	public void addComments(Class classObj, Object primaryKey)
+		throws PortalException, SystemException;
+
+	public void addComments(String className, Object primaryKey, List messages)
+		throws PortalException, SystemException;
+
+	public void importComments(
+			Class classObj, Object primaryKey, Object newPrimaryKey,
+			long groupId)
+		throws PortalException, SystemException;
+
 	public Map getRatingsEntries();
 
 	public void addRatingsEntries(Class classObj, Object primaryKey)

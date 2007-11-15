@@ -135,6 +135,9 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				else {
 					entry.setUserUuid(entry.getUserUuid());
 
+					context.addComments(
+						BlogsEntry.class, entry.getPrimaryKeyObj());
+
 					context.addRatingsEntries(
 						BlogsEntry.class, entry.getPrimaryKeyObj());
 
@@ -329,6 +332,9 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				addGuestPermissions);
 		}
 
+		context.importComments(
+			BlogsEntry.class, entry.getPrimaryKeyObj(),
+			existingEntry.getPrimaryKeyObj(), context.getGroupId());
 		context.importRatingsEntries(
 			BlogsEntry.class, entry.getPrimaryKeyObj(),
 			existingEntry.getPrimaryKeyObj());

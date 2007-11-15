@@ -54,6 +54,9 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 	public static String COUNT_BY_GROUP_ID =
 		MBMessageFinder.class.getName() + ".countByGroupId";
 
+	public static String FIND_BY_C_C =
+		MBMessageFinder.class.getName() + ".findByC_C";
+
 	public static String FIND_BY_GROUP_ID =
 		MBMessageFinder.class.getName() + ".findByGroupId";
 
@@ -133,6 +136,37 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public List findByC_C(long classNameId, long classPK)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_C_C);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("MBMessage", MBMessageImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(classNameId);
+			qPos.add(classPK);
+
+			return QueryUtil.list(
+				q, HibernateUtil.getDialect(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -30,6 +30,8 @@ package com.liferay.portal.kernel.lar;
  */
 public class PortletDataHandlerKeys {
 
+	public static final String EXPORT_COMMENTS = "EXPORT_COMMENTS";
+
 	public static final String EXPORT_PERMISSIONS = "EXPORT_PERMISSIONS";
 
 	public static final String EXPORT_USER_PERMISSIONS =
@@ -48,6 +50,8 @@ public class PortletDataHandlerKeys {
 		"EXPORT_SELECTED_LAYOUTS";
 
 	public static final String EXPORT_THEME = "EXPORT_THEME";
+
+	public static final String IMPORT_COMMENTS = "IMPORT_COMMENTS";
 
 	public static final String IMPORT_DELETE_MISSING_LAYOUTS =
 		"IMPORT_DELETE_MISSING_LAYOUTS";
