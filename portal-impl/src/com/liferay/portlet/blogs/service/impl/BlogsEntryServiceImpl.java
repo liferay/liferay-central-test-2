@@ -111,11 +111,14 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		blogsEntryLocalService.deleteEntry(entryId);
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public String getCategoryBlogsRSS(
 			long categoryId, int max, String type, double version,
 			String feedURL, String entryURL)
 		throws PortalException, SystemException {
+
 		return getOrganizationEntriesRSS(
 			categoryId, max, type, version, RSSUtil.DISPLAY_STYLE_FULL_CONTENT,
 			feedURL, entryURL);
@@ -240,11 +243,14 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return entries;
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public String getGroupEntriesRSS(
 			long groupId, int max, String type, double version,
 			String feedURL, String entryURL)
 		throws PortalException, SystemException {
+
 		return getGroupEntriesRSS(
 			groupId, max, type, version, RSSUtil.DISPLAY_STYLE_FULL_CONTENT,
 			feedURL, entryURL);
@@ -287,11 +293,14 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return entries;
 	}
 
-	/** @deprecated */
+	/**
+	 * @deprecated
+	 */
 	public String getOrganizationEntriesRSS(
 			long organizationId, int max, String type, double version,
 			String feedURL, String entryURL)
 		throws PortalException, SystemException {
+
 		return getOrganizationEntriesRSS(
 			organizationId, max, type, version,
 			RSSUtil.DISPLAY_STYLE_FULL_CONTENT, feedURL, entryURL);
@@ -374,7 +383,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			}
 			else if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
 				value = StringUtil.shorten(
-					Html.stripHtml(entry.getContent()), _FEED_ABSTRACT_LENGTH,
+					Html.stripHtml(entry.getContent()), _RSS_ABSTRACT_LENGTH,
 					StringPool.BLANK);
 			}
 
@@ -388,7 +397,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			if (value != null) {
 				SyndContent syndContent = new SyndContentImpl();
 
-				syndContent.setType(ContentTypes.TEXT_HTML.toLowerCase());
+				syndContent.setType(ContentTypes.TEXT_HTML);
 				syndContent.setValue(value);
 
 				syndEntry.setDescription(syndContent);
@@ -410,7 +419,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	private static final int _MAX_END = 200;
 
-	private static final int _FEED_ABSTRACT_LENGTH = GetterUtil.getInteger(
-		PropsUtil.get(PropsUtil.BLOGS_FEED_ABSTRACT_LENGTH), 200);
+	private static final int _RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.BLOGS_RSS_ABSTRACT_LENGTH));
 
 }

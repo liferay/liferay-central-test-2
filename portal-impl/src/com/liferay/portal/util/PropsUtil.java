@@ -837,15 +837,15 @@ public class PropsUtil {
 
 	// Blogs Portlet
 
-	public static final String BLOGS_ABSTRACT_LENGTH = "blogs.abstract.length";
-
-	public static final String BLOGS_FEED_ABSTRACT_LENGTH = "blogs.feed.abstract.length";
-
 	public static final String BLOGS_EMAIL_COMMENTS_ADDED_ENABLED = "blogs.email.comments.added.enabled";
 
 	public static final String BLOGS_EMAIL_COMMENTS_ADDED_SUBJECT = "blogs.email.comments.added.subject";
 
 	public static final String BLOGS_EMAIL_COMMENTS_ADDED_BODY = "blogs.email.comments.added.body";
+
+	public static final String BLOGS_PAGE_ABSTRACT_LENGTH = "blogs.page.abstract.length";
+
+	public static final String BLOGS_RSS_ABSTRACT_LENGTH = "blogs.rss.abstract.length";
 
 	// Calendar Portlet
 

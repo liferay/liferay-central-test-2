@@ -53,12 +53,12 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
-		int delta = ParamUtil.getInteger(req, "delta");
-		String displayStyle = ParamUtil.getString(req, "displayStyle");
+		int pageDelta = ParamUtil.getInteger(req, "pageDelta");
+		String pageDisplayStyle = ParamUtil.getString(req, "pageDisplayStyle");
 
-		int feedDelta = ParamUtil.getInteger(req, "feedDelta");
-		String feedDisplayStyle = ParamUtil.getString(req, "feedDisplayStyle");
-		String feedFormat = ParamUtil.getString(req, "feedFormat");
+		int rssDelta = ParamUtil.getInteger(req, "rssDelta");
+		String rssDisplayStyle = ParamUtil.getString(req, "rssDisplayStyle");
+		String rssFormat = ParamUtil.getString(req, "rssFormat");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
@@ -66,12 +66,12 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, portletResource, true, true);
 
-		prefs.setValue("delta", String.valueOf(delta));
-		prefs.setValue("display-style", displayStyle);
+		prefs.setValue("page-delta", String.valueOf(pageDelta));
+		prefs.setValue("page-display-style", pageDisplayStyle);
 
-		prefs.setValue("feed-delta", String.valueOf(feedDelta));
-		prefs.setValue("feed-display-style", feedDisplayStyle);
-		prefs.setValue("feed-format", feedFormat);
+		prefs.setValue("rss-delta", String.valueOf(rssDelta));
+		prefs.setValue("rss-display-style", rssDisplayStyle);
+		prefs.setValue("rss-format", rssFormat);
 
 		prefs.store();
 

@@ -117,48 +117,30 @@
 			<br />
 		</td>
 	</tr>
-	<c:choose>
-		<c:when test="<%= displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>">
-			<tr>
-				<td>
-					<%= StringUtil.shorten(Html.stripHtml(entry.getContent()), abstractLength, "...") %>
+	<tr>
+		<td>
+			<c:choose>
+				<c:when test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>">
+					<%= StringUtil.shorten(Html.stripHtml(entry.getContent()), pageAbstractLength) %>
 
 					<br/>
 
 					 <a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more"/> &raquo;</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<br />
-				</td>
-			</tr>
-		</c:when>
-		<c:when test="<%= displayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>">
-			<tr>
-				<td>
+				</c:when>
+				<c:when test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>">
 					<%= entry.getContent() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<br />
-				</td>
-			</tr>
-		</c:when>
-		<c:when test="<%= displayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>">
-			<tr>
-				<td>
-					 <a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more"/> &raquo;</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<br />
-				</td>
-			</tr>
-		</c:when>
-	</c:choose>
+				</c:when>
+				<c:when test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>">
+					<a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more"/> &raquo;</a>
+				</c:when>
+			</c:choose>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<br />
+		</td>
+	</tr>
 	<tr>
 		<td>
 			<portlet:renderURL var="bookmarkURL">

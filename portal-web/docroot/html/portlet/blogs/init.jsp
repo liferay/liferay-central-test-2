@@ -48,27 +48,24 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
 }
 
-int abstractLength = GetterUtil.getInteger(PropsUtil.get(PropsUtil.BLOGS_ABSTRACT_LENGTH), 400);
+int pageDelta = GetterUtil.getInteger(prefs.getValue("page-delta", StringPool.BLANK));
+String pageDisplayStyle = prefs.getValue("page-display-style", "full-content");
+int pageAbstractLength = GetterUtil.getInteger(PropsUtil.get(PropsUtil.BLOGS_PAGE_ABSTRACT_LENGTH));
 
-int delta = GetterUtil.getInteger(prefs.getValue("delta", StringPool.BLANK), 5);
+int rssDelta = GetterUtil.getInteger(prefs.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
+String rssDisplayStyle = prefs.getValue("rss-display-style", "full-content");
+String rssFormat = prefs.getValue("rss-format", "atom10");
 
-String displayStyle = prefs.getValue("display-style", "full-content");
+String rssFormatType = RSSUtil.DEFAULT_TYPE;
+double rssFormatVersion = RSSUtil.DEFAULT_VERSION;
 
-int feedDelta = GetterUtil.getInteger(prefs.getValue("feed-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
-
-String feedDisplayStyle = prefs.getValue("feed-display-style", "full-content");
-String feedFormat = prefs.getValue("feed-format", "atom10");
-
-String feedFormatType = RSSUtil.DEFAULT_TYPE;
-String feedFormatVersion = String.valueOf(RSSUtil.DEFAULT_VERSION);
-
-if (feedFormat.equals("rss10")) {
-	feedFormatType = RSSUtil.RSS;
-	feedFormatVersion = "1.0";
+if (rssFormat.equals("rss10")) {
+	rssFormatType = RSSUtil.RSS;
+	rssFormatVersion = 1.0;
 }
-else if (feedFormat.equals("atom10")) {
-	feedFormatType = RSSUtil.ATOM;
-	feedFormatVersion = "1.0";
+else if (rssFormat.equals("atom10")) {
+	rssFormatType = RSSUtil.ATOM;
+	rssFormatVersion = 1.0;
 }
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

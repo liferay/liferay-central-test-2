@@ -40,7 +40,7 @@ portletURL.setParameter("struts_action", "/blogs/view");
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(layout.getGroupId()) %>" />
 
 <%
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, pageDelta, portletURL, null, null);
 
 int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue());
 

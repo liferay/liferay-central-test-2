@@ -27,105 +27,107 @@
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
+<liferay-ui:message key="set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss" />
+
 <fieldset>
-	<legend><liferay-ui:message key="view"/></legend>
+	<legend><liferay-ui:message key="page" /></legend>
+
 	<table class="liferay-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="maximum-items-to-display" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />delta">
-					<option <%= (delta == 1) ? "selected" : "" %> value="1">1</option>
-					<option <%= (delta == 2) ? "selected" : "" %> value="2">2</option>
-					<option <%= (delta == 3) ? "selected" : "" %> value="3">3</option>
-					<option <%= (delta == 4) ? "selected" : "" %> value="4">4</option>
-					<option <%= (delta == 5) ? "selected" : "" %> value="5">5</option>
-					<option <%= (delta == 10) ? "selected" : "" %> value="10">10</option>
-					<option <%= (delta == 15) ? "selected" : "" %> value="15">15</option>
-					<option <%= (delta == 20) ? "selected" : "" %> value="20">20</option>
-					<option <%= (delta == 25) ? "selected" : "" %> value="25">25</option>
-					<option <%= (delta == 30) ? "selected" : "" %> value="30">30</option>
-					<option <%= (delta == 40) ? "selected" : "" %> value="40">40</option>
-					<option <%= (delta == 50) ? "selected" : "" %> value="50">50</option>
-					<option <%= (delta == 60) ? "selected" : "" %> value="60">60</option>
-					<option <%= (delta == 70) ? "selected" : "" %> value="70">70</option>
-					<option <%= (delta == 80) ? "selected" : "" %> value="80">80</option>
-					<option <%= (delta == 90) ? "selected" : "" %> value="90">90</option>
-					<option <%= (delta == 100) ? "selected" : "" %> value="100">100</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="display-style" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />displayStyle">
-					<option <%= (displayStyle.equals("full-content")) ? "selected" : "" %> value="full-content"><liferay-ui:message key="full-content"/></option>
-					<option <%= (displayStyle.equals("abstract")) ? "selected" : "" %> value="abstract"><liferay-ui:message key="abstract"/></option>
-					<option <%= (displayStyle.equals("title")) ? "selected" : "" %> value="title"><liferay-ui:message key="title"/></option>
-				</select>
-			</td>
-		</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="maximum-items-to-display" />
+		</td>
+		<td>
+			<select name="<portlet:namespace />pageDelta">
+				<option <%= (pageDelta == 1) ? "selected" : "" %> value="1">1</option>
+				<option <%= (pageDelta == 2) ? "selected" : "" %> value="2">2</option>
+				<option <%= (pageDelta == 3) ? "selected" : "" %> value="3">3</option>
+				<option <%= (pageDelta == 4) ? "selected" : "" %> value="4">4</option>
+				<option <%= (pageDelta == 5) ? "selected" : "" %> value="5">5</option>
+				<option <%= (pageDelta == 10) ? "selected" : "" %> value="10">10</option>
+				<option <%= (pageDelta == 15) ? "selected" : "" %> value="15">15</option>
+				<option <%= (pageDelta == 20) ? "selected" : "" %> value="20">20</option>
+				<option <%= (pageDelta == 25) ? "selected" : "" %> value="25">25</option>
+				<option <%= (pageDelta == 30) ? "selected" : "" %> value="30">30</option>
+				<option <%= (pageDelta == 40) ? "selected" : "" %> value="40">40</option>
+				<option <%= (pageDelta == 50) ? "selected" : "" %> value="50">50</option>
+				<option <%= (pageDelta == 60) ? "selected" : "" %> value="60">60</option>
+				<option <%= (pageDelta == 70) ? "selected" : "" %> value="70">70</option>
+				<option <%= (pageDelta == 80) ? "selected" : "" %> value="80">80</option>
+				<option <%= (pageDelta == 90) ? "selected" : "" %> value="90">90</option>
+				<option <%= (pageDelta == 100) ? "selected" : "" %> value="100">100</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="display-style" />
+		</td>
+		<td>
+			<select name="<portlet:namespace />pageDisplayStyle">
+				<option <%= (pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>"><liferay-ui:message key="full-content" /></option>
+				<option <%= (pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>"><liferay-ui:message key="abstract" /></option>
+				<option <%= (pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_TITLE %>"><liferay-ui:message key="title" /></option>
+			</select>
+		</td>
+	</tr>
 	</table>
 </fieldset>
 
-<br />
-
 <fieldset>
-	<legend><liferay-ui:message key="feed"/></legend>
+	<legend><liferay-ui:message key="rss" /></legend>
+
 	<table class="liferay-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="maximum-items-to-display" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />feedDelta">
-					<option <%= (feedDelta == 1) ? "selected" : "" %> value="1">1</option>
-					<option <%= (feedDelta == 2) ? "selected" : "" %> value="2">2</option>
-					<option <%= (feedDelta == 3) ? "selected" : "" %> value="3">3</option>
-					<option <%= (feedDelta == 4) ? "selected" : "" %> value="4">4</option>
-					<option <%= (feedDelta == 5) ? "selected" : "" %> value="5">5</option>
-					<option <%= (feedDelta == 10) ? "selected" : "" %> value="10">10</option>
-					<option <%= (feedDelta == 15) ? "selected" : "" %> value="15">15</option>
-					<option <%= (feedDelta == 20) ? "selected" : "" %> value="20">20</option>
-					<option <%= (feedDelta == 25) ? "selected" : "" %> value="25">25</option>
-					<option <%= (feedDelta == 30) ? "selected" : "" %> value="30">30</option>
-					<option <%= (feedDelta == 40) ? "selected" : "" %> value="40">40</option>
-					<option <%= (feedDelta == 50) ? "selected" : "" %> value="50">50</option>
-					<option <%= (feedDelta == 60) ? "selected" : "" %> value="60">60</option>
-					<option <%= (feedDelta == 70) ? "selected" : "" %> value="70">70</option>
-					<option <%= (feedDelta == 80) ? "selected" : "" %> value="80">80</option>
-					<option <%= (feedDelta == 90) ? "selected" : "" %> value="90">90</option>
-					<option <%= (feedDelta == 100) ? "selected" : "" %> value="100">100</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="display-style" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />feedDisplayStyle">
-					<option <%= (feedDisplayStyle.equals("full-content")) ? "selected" : "" %> value="full-content"><liferay-ui:message key="full-content"/></option>
-					<option <%= (feedDisplayStyle.equals("abstract")) ? "selected" : "" %> value="abstract"><liferay-ui:message key="abstract"/></option>
-					<option <%= (feedDisplayStyle.equals("title")) ? "selected" : "" %> value="title"><liferay-ui:message key="title"/></option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="format" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />feedFormat">
-					<option <%= (feedFormat.equals("rss10")) ? "selected" : "" %> value="rss10">RSS 1.0</option>
-					<option <%= (feedFormat.equals("rss20")) ? "selected" : "" %> value="rss20">RSS 2.0</option>
-					<option <%= (feedFormat.equals("atom10")) ? "selected" : "" %> value="atom10">Atom 1.0</option>
-				</select>
-			</td>
-		</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="maximum-items-to-display" />
+		</td>
+		<td>
+			<select name="<portlet:namespace />rssDelta">
+				<option <%= (rssDelta == 1) ? "selected" : "" %> value="1">1</option>
+				<option <%= (rssDelta == 2) ? "selected" : "" %> value="2">2</option>
+				<option <%= (rssDelta == 3) ? "selected" : "" %> value="3">3</option>
+				<option <%= (rssDelta == 4) ? "selected" : "" %> value="4">4</option>
+				<option <%= (rssDelta == 5) ? "selected" : "" %> value="5">5</option>
+				<option <%= (rssDelta == 10) ? "selected" : "" %> value="10">10</option>
+				<option <%= (rssDelta == 15) ? "selected" : "" %> value="15">15</option>
+				<option <%= (rssDelta == 20) ? "selected" : "" %> value="20">20</option>
+				<option <%= (rssDelta == 25) ? "selected" : "" %> value="25">25</option>
+				<option <%= (rssDelta == 30) ? "selected" : "" %> value="30">30</option>
+				<option <%= (rssDelta == 40) ? "selected" : "" %> value="40">40</option>
+				<option <%= (rssDelta == 50) ? "selected" : "" %> value="50">50</option>
+				<option <%= (rssDelta == 60) ? "selected" : "" %> value="60">60</option>
+				<option <%= (rssDelta == 70) ? "selected" : "" %> value="70">70</option>
+				<option <%= (rssDelta == 80) ? "selected" : "" %> value="80">80</option>
+				<option <%= (rssDelta == 90) ? "selected" : "" %> value="90">90</option>
+				<option <%= (rssDelta == 100) ? "selected" : "" %> value="100">100</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="display-style" />
+		</td>
+		<td>
+			<select name="<portlet:namespace />rssDisplayStyle">
+				<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>"><liferay-ui:message key="full-content" /></option>
+				<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>"><liferay-ui:message key="abstract" /></option>
+				<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_TITLE %>"><liferay-ui:message key="title" /></option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="format" />
+		</td>
+		<td>
+			<select name="<portlet:namespace />rssFormat">
+				<option <%= (rssFormat.equals("rss10")) ? "selected" : "" %> value="rss10">RSS 1.0</option>
+				<option <%= (rssFormat.equals("rss20")) ? "selected" : "" %> value="rss20">RSS 2.0</option>
+				<option <%= (rssFormat.equals("atom10")) ? "selected" : "" %> value="atom10">Atom 1.0</option>
+			</select>
+		</td>
+	</tr>
 	</table>
 </fieldset>
 
@@ -134,9 +136,3 @@
 <input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
 </form>
-
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />hangmanWordList);
-	</script>
-</c:if>
