@@ -155,6 +155,8 @@ public class LDAPAuth implements Authenticator {
 				companyId, userId, emailAddress, FAILURE);
 		}
 
+		//  Process LDAP auth search filter
+
 		String filter = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_AUTH_SEARCH_FILTER);
 

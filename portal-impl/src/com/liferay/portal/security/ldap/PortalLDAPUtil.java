@@ -215,6 +215,69 @@ public class PortalLDAPUtil {
 		return ctx;
 	}
 
+	public static UserGroup getGroup(
+			long companyId, LdapContext ctx, String fullGroupDN, boolean create)
+		throws Exception {
+
+		Properties groupMappings = getGroupMappings(companyId);
+
+		UserGroup userGroup = null;
+		Attributes attr = null;
+
+		// Find group in LDAP
+
+		try {
+			attr = ctx.getAttributes(fullGroupDN);
+		}
+		catch (NameNotFoundException nnfe) {
+			_log.error(
+				"LDAP group not found with fullGroupDN " + fullGroupDN);
+
+			_log.error(nnfe, nnfe);
+
+			return null;
+		}
+
+		// Find corresponding portal user group
+
+		String groupName = LDAPUtil.getAttributeValue(
+				attr, groupMappings.getProperty("groupName"));
+
+		try {
+			userGroup = UserGroupLocalServiceUtil.getUserGroup(
+				companyId, groupName);
+		}
+		catch (NoSuchUserGroupException nsuge) {
+			if (create) {
+				try {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Adding user group to portal " + fullGroupDN);
+					}
+
+					long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
+						companyId);
+					String description = LDAPUtil.getAttributeValue(
+							attr, groupMappings.getProperty("description"));
+
+					userGroup = UserGroupLocalServiceUtil.addUserGroup(
+						defaultUserId, companyId, groupName, description);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Could not create user group " + fullGroupDN);
+					}
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(e, e);
+					}
+				}
+			}
+		}
+
+		return userGroup;
+	}
+
 	public static Properties getGroupMappings(long companyId)
 		throws Exception {
 
@@ -277,6 +340,64 @@ public class PortalLDAPUtil {
 		else {
 			return null;
 		}
+	}
+
+	public static User getUser(
+			long companyId, LdapContext ctx, String fullUserDN, boolean create)
+		throws Exception {
+
+		Properties userMappings = getUserMappings(companyId);
+
+		User user = null;
+		Attributes attr = null;
+
+		// Find user in LDAP
+
+		try {
+			attr = ctx.getAttributes(fullUserDN);
+		}
+		catch (NameNotFoundException nnfe) {
+			_log.error(
+				"LDAP user not found with fullUserDN " + fullUserDN);
+
+			_log.error(nnfe, nnfe);
+
+			return null;
+		}
+
+		// Find corresponding portal user
+
+		String emailAddress = LDAPUtil.getAttributeValue(
+				attr, userMappings.getProperty("emailAddress"));
+
+		try {
+			user = UserLocalServiceUtil.getUserByEmailAddress(
+				companyId, emailAddress);
+		}
+		catch (NoSuchUserException nsue) {
+			if (create) {
+				try {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Adding user to portal " + fullUserDN);
+					}
+
+					user = importLDAPUser(
+						companyId, ctx, attr, StringPool.BLANK, false);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Could not create user " + fullUserDN);
+					}
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(e, e);
+					}
+				}
+			}
+		}
+
+		return user;
 	}
 
 	public static Properties getUserMappings(long companyId) throws Exception {
@@ -661,75 +782,23 @@ public class PortalLDAPUtil {
 			long companyId, LdapContext ctx, long userId, Attribute attr)
 		throws Exception {
 
-		Properties groupMappings = getGroupMappings(companyId);
-
 		// Remove all user group membership from user
 
 		UserGroupLocalServiceUtil.clearUserUserGroups(userId);
 
-		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
-			companyId);
-
 		for (int i = 0; i < attr.size(); i++) {
 
-			// Get LDAP group
+			// Get LDAP user or create if does not exist in portal
 
-			Attributes groupAttrs = null;
-
-			String groupDN = (String)attr.get(i);
-
-			try {
-				groupAttrs = ctx.getAttributes(groupDN);
-			}
-			catch (NameNotFoundException nnfe) {
-				_log.error(
-					"Trying to import nonexistent LDAP group that was " +
-						"referenced from LDAP user with groupDN " + groupDN);
-
-				_log.error(nnfe, nnfe);
-
-				continue;
-			}
-
-			// Get portal user group corresponding to LDAP group
-
-			UserGroup userGroup = null;
-
-			String groupName = LDAPUtil.getAttributeValue(
-				groupAttrs, groupMappings.getProperty("groupName"));
-			String description = LDAPUtil.getAttributeValue(
-				groupAttrs, groupMappings.getProperty("description"));
-
-			try {
-				userGroup = UserGroupLocalServiceUtil.getUserGroup(
-					companyId, groupName);
-			}
-			catch (NoSuchUserGroupException nsuge) {
-				try {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Adding user group" + groupName + " at " + groupDN);
-					}
-
-					userGroup = UserGroupLocalServiceUtil.addUserGroup(
-						defaultUserId, companyId, groupName, description);
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn("Could not create user group " + groupName);
-					}
-
-					if (_log.isDebugEnabled()) {
-						_log.debug(e);
-					}
-				}
-			}
+			UserGroup userGroup = getGroup(
+				companyId, ctx, (String)attr.get(i), true);
 
 			// Add user to user group
 
 			if (userGroup != null) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Adding " + userId + " to group " + groupName);
+					_log.debug("Adding " + userId + " to group " +
+						userGroup.getUserGroupId());
 				}
 
 				UserLocalServiceUtil.addUserGroupUsers(
@@ -742,64 +811,15 @@ public class PortalLDAPUtil {
 			long companyId, LdapContext ctx, long userGroupId, Attribute attr)
 		throws Exception {
 
-		Properties userMappings = getUserMappings(companyId);
-
 		// Remove all user membership from user group
 
 		UserLocalServiceUtil.clearUserGroupUsers(userGroupId);
 
 		for (int i = 0; i < attr.size(); i++) {
 
-			// Get LDAP user
+			// Get LDAP user or create if does not exist in portal
 
-			Attributes userAttrs = null;
-
-			String userDN = (String)attr.get(i);
-
-			try {
-				userAttrs = ctx.getAttributes(userDN);
-			}
-			catch (NameNotFoundException nnfe) {
-				_log.error(
-					"Trying to import nonexistent LDAP user that was " +
-						"referenced from LDAP group with userDN " + userDN);
-
-				_log.error(nnfe, nnfe);
-
-				continue;
-			}
-
-			// Get portal user corresponding to LDAP user
-
-			User user = null;
-
-			String emailAddress = LDAPUtil.getAttributeValue(
-				userAttrs, userMappings.getProperty("emailAddress"));
-
-			try {
-				user = UserLocalServiceUtil.getUserByEmailAddress(
-					companyId, emailAddress);
-			}
-			catch (NoSuchUserException nsue) {
-				try {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Adding user " + emailAddress + " at " + userDN);
-					}
-
-					user = importLDAPUser(
-						companyId, ctx, userAttrs, StringPool.BLANK, false);
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn("Could not create user " + userDN);
-					}
-
-					if (_log.isDebugEnabled()) {
-						_log.debug(e, e);
-					}
-				}
-			}
+			User user = getUser(companyId, ctx, (String)attr.get(i), true);
 
 			// Add user to user group
 
