@@ -414,8 +414,7 @@ public class PortalLDAPUtil {
 		}
 		catch (NoSuchUserGroupException nsuge) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Adding user group to portal " + groupName);
+				_log.debug("Adding user group to portal " + groupName);
 			}
 
 			long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
@@ -525,6 +524,7 @@ public class PortalLDAPUtil {
 		User user = null;
 
 		try {
+
 			// Find corresponding portal user
 
 			user = UserLocalServiceUtil.getUserByEmailAddress(
@@ -567,8 +567,7 @@ public class PortalLDAPUtil {
 		if (user == null) {
 			try {
 				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Adding user to portal " + emailAddress);
+					_log.debug("Adding user to portal " + emailAddress);
 				}
 
 				user = UserLocalServiceUtil.addUser(
@@ -695,10 +694,11 @@ public class PortalLDAPUtil {
 			// Find group in LDAP
 
 			String fullGroupDN = (String)attr.get(i);
-			Attributes groupAttr = null;
+
+			Attributes groupAttrs = null;
 
 			try {
-				groupAttr = ctx.getAttributes(fullGroupDN);
+				groupAttrs = ctx.getAttributes(fullGroupDN);
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error(
@@ -710,14 +710,15 @@ public class PortalLDAPUtil {
 			}
 
 			UserGroup userGroup = importLDAPGroup(
-				companyId, ctx, groupAttr, false);
+				companyId, ctx, groupAttrs, false);
 
 			// Add user to user group
 
 			if (userGroup != null) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Adding " + userId + " to group " +
-						userGroup.getUserGroupId());
+					_log.debug(
+						"Adding " + userId + " to group " +
+							userGroup.getUserGroupId());
 				}
 
 				UserLocalServiceUtil.addUserGroupUsers(
@@ -736,15 +737,14 @@ public class PortalLDAPUtil {
 
 		for (int i = 0; i < attr.size(); i++) {
 
-			// Get LDAP user or create if does not exist in portal
-
-			String fullUserDN = (String)attr.get(i);
-			Attributes userAttr = null;
-
 			// Find user in LDAP
 
+			String fullUserDN = (String)attr.get(i);
+
+			Attributes userAttrs = null;
+
 			try {
-				userAttr = ctx.getAttributes(fullUserDN);
+				userAttrs = ctx.getAttributes(fullUserDN);
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error(
@@ -756,7 +756,7 @@ public class PortalLDAPUtil {
 			}
 
 			User user = importLDAPUser(
-				companyId, ctx, userAttr, StringPool.BLANK, false);
+				companyId, ctx, userAttrs, StringPool.BLANK, false);
 
 			// Add user to user group
 

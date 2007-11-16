@@ -113,7 +113,6 @@ public class CASAutoLogin implements AutoLogin {
 		throws PortalException, SystemException {
 
 		try {
-
 			String baseDN = PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_BASE_DN);
 
