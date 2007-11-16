@@ -267,7 +267,7 @@ public class PortletInvokerImpl implements PortletInvoker {
 			companyId, GroupImpl.GUEST);
 
 		long plid = LayoutLocalServiceUtil.getDefaultPlid(
-			group.getGroupId(), true);
+			group.getGroupId(), false);
 
 		return LayoutLocalServiceUtil.getLayout(plid);
 	}
