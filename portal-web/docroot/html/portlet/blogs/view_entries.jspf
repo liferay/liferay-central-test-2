@@ -56,7 +56,11 @@ for (int i = 0; i < results.size(); i++) {
 <%
 }
 
-String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/blogs/rss?max=" + rssDelta + "&type=" + rssFormatType + "&version=" + rssFormatVersion + "&displayStyle=" + rssDisplayStyle;
+String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/blogs/rss";
+
+if ((rssDelta != 20) || !rssFormat.equals("rss20")) {
+	rssURL += "?max=" + rssDelta + "&type=" + rssFormatType + "&version=" + rssFormatVersion + "&displayStyle=" + rssDisplayStyle;
+}
 %>
 
 <liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
