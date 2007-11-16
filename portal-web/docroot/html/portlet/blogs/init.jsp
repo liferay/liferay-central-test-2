@@ -54,7 +54,7 @@ int pageAbstractLength = GetterUtil.getInteger(PropsUtil.get(PropsUtil.BLOGS_PAG
 
 int rssDelta = GetterUtil.getInteger(prefs.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String rssDisplayStyle = prefs.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
-String rssFormat = prefs.getValue("rss-format", "rss20");
+String rssFormat = prefs.getValue("rss-format", "atom10");
 
 String rssFormatType = RSSUtil.DEFAULT_TYPE;
 double rssFormatVersion = RSSUtil.DEFAULT_VERSION;
@@ -62,6 +62,10 @@ double rssFormatVersion = RSSUtil.DEFAULT_VERSION;
 if (rssFormat.equals("rss10")) {
 	rssFormatType = RSSUtil.RSS;
 	rssFormatVersion = 1.0;
+}
+else if (rssFormat.equals("rss20")) {
+	rssFormatType = RSSUtil.RSS;
+	rssFormatVersion = 2.0;
 }
 else if (rssFormat.equals("atom10")) {
 	rssFormatType = RSSUtil.ATOM;
