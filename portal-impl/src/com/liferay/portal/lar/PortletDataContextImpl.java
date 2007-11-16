@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.model.Layout;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
@@ -132,20 +133,25 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public void addComments(Class classObj, Object primaryKey)
 		throws PortalException, SystemException {
 
-		List messages = MBMessageLocalServiceUtil.getMessages(
-			classObj.getName(), ((Long)primaryKey).longValue());
+		boolean exportComments = MapUtil.getBoolean(
+			_parameterMap, PortletDataHandlerKeys.EXPORT_COMMENTS);
 
-		if ((messages != null) && (messages.size() > 0)) {
-			Iterator itr = messages.iterator();
+		if ((exportComments) || (classObj == Layout.class)) {
+			List messages = MBMessageLocalServiceUtil.getMessages(
+				classObj.getName(), ((Long)primaryKey).longValue());
 
-			while (itr.hasNext()) {
-				MBMessage message = (MBMessage)itr.next();
+			if ((messages != null) && (messages.size() > 0)) {
+				Iterator itr = messages.iterator();
 
-				message.setUserUuid(message.getUserUuid());
+				while (itr.hasNext()) {
+					MBMessage message = (MBMessage)itr.next();
+
+					message.setUserUuid(message.getUserUuid());
+				}
+
+				_commentsMap.put(
+					getPrimaryKeyString(classObj, primaryKey), messages);
 			}
-
-			_commentsMap.put(
-				getPrimaryKeyString(classObj, primaryKey), messages);
 		}
 	}
 
@@ -164,42 +170,41 @@ public class PortletDataContextImpl implements PortletDataContext {
 		boolean importComments = MapUtil.getBoolean(
 			_parameterMap, PortletDataHandlerKeys.IMPORT_COMMENTS);
 
-		if (!importComments) {
-			return;
-		}
+		if ((importComments) || (classObj == Layout.class)) {
+			Map messagePKs = CollectionFactory.getHashMap();
+			Map threadPKs = CollectionFactory.getHashMap();
 
-		Map messagePKs = CollectionFactory.getHashMap();
-		Map threadPKs = CollectionFactory.getHashMap();
+			List messages = (List)_commentsMap.get(
+				getPrimaryKeyString(classObj, primaryKey));
 
-		List messages = (List)_commentsMap.get(
-			getPrimaryKeyString(classObj, primaryKey));
+			if (messages != null) {
+				Iterator itr = messages.iterator();
 
-		if (messages != null) {
-			Iterator itr = messages.iterator();
+				while (itr.hasNext()) {
+					MBMessage message = (MBMessage)itr.next();
 
-			while (itr.hasNext()) {
-				MBMessage message = (MBMessage)itr.next();
+					long userId = getUserId(message.getUserUuid());
+					long parentMessageId = MapUtil.getLong(
+						messagePKs, message.getParentMessageId(),
+						message.getParentMessageId());
+					long threadId = MapUtil.getLong(
+						threadPKs, message.getThreadId(),
+						message.getThreadId());
 
-				long userId = getUserId(message.getUserUuid());
-				long parentMessageId = MapUtil.getLong(
-					messagePKs, message.getParentMessageId(),
-					message.getParentMessageId());
-				long threadId = MapUtil.getLong(
-					threadPKs, message.getThreadId(), message.getThreadId());
+					MBMessage newMessage =
+						MBMessageLocalServiceUtil.addDiscussionMessage(
+							userId, groupId, classObj.getName(),
+							((Long)newPrimaryKey).longValue(), threadId,
+							parentMessageId, message.getSubject(),
+							message.getBody());
 
-				MBMessage newMessage =
-					MBMessageLocalServiceUtil.addDiscussionMessage(
-						userId, groupId, classObj.getName(),
-						((Long)newPrimaryKey).longValue(), threadId,
-						parentMessageId, message.getSubject(),
-						message.getBody());
-
-				messagePKs.put(
-					message.getPrimaryKeyObj(),
-					newMessage.getPrimaryKeyObj());
-				threadPKs.put(
-					new Long(message.getThreadId()),
-					new Long(newMessage.getThreadId()));
+					messagePKs.put(
+						message.getPrimaryKeyObj(),
+						newMessage.getPrimaryKeyObj());
+					threadPKs.put(
+						new Long(message.getThreadId()),
+						new Long(newMessage.getThreadId()));
+				}
 			}
 		}
 	}
@@ -211,20 +216,25 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public void addRatingsEntries(Class classObj, Object primaryKey)
 		throws PortalException, SystemException {
 
-		List entries = RatingsEntryLocalServiceUtil.getEntries(
-			classObj.getName(), ((Long)primaryKey).longValue());
+		boolean exportRatings = MapUtil.getBoolean(
+			_parameterMap, PortletDataHandlerKeys.EXPORT_RATINGS);
 
-		if ((entries != null) && (entries.size() > 0)) {
-			Iterator itr = entries.iterator();
+		if ((exportRatings) || (classObj == Layout.class)) {
+			List entries = RatingsEntryLocalServiceUtil.getEntries(
+				classObj.getName(), ((Long)primaryKey).longValue());
 
-			while (itr.hasNext()) {
-				RatingsEntry entry = (RatingsEntry)itr.next();
+			if ((entries != null) && (entries.size() > 0)) {
+				Iterator itr = entries.iterator();
 
-				entry.setUserUuid(entry.getUserUuid());
+				while (itr.hasNext()) {
+					RatingsEntry entry = (RatingsEntry)itr.next();
+
+					entry.setUserUuid(entry.getUserUuid());
+				}
+
+				_ratingsEntriesMap.put(
+					getPrimaryKeyString(classObj, primaryKey), entries);
 			}
-
-			_ratingsEntriesMap.put(
-				getPrimaryKeyString(classObj, primaryKey), entries);
 		}
 	}
 
@@ -243,24 +253,22 @@ public class PortletDataContextImpl implements PortletDataContext {
 		boolean importRatings = MapUtil.getBoolean(
 			_parameterMap, PortletDataHandlerKeys.IMPORT_RATINGS);
 
-		if (!importRatings) {
-			return;
-		}
+		if ((importRatings) || (classObj == Layout.class)) {
+			List entries = (List)_ratingsEntriesMap.get(
+				getPrimaryKeyString(classObj, primaryKey));
 
-		List entries = (List)_ratingsEntriesMap.get(
-			getPrimaryKeyString(classObj, primaryKey));
+			if (entries != null) {
+				Iterator itr = entries.iterator();
 
-		if (entries != null) {
-			Iterator itr = entries.iterator();
+				while (itr.hasNext()) {
+					RatingsEntry entry = (RatingsEntry)itr.next();
 
-			while (itr.hasNext()) {
-				RatingsEntry entry = (RatingsEntry)itr.next();
+					long userId = getUserId(entry.getUserUuid());
 
-				long userId = getUserId(entry.getUserUuid());
-
-				RatingsEntryLocalServiceUtil.updateEntry(
-					userId, classObj.getName(),
-					((Long)newPrimaryKey).longValue(), entry.getScore());
+					RatingsEntryLocalServiceUtil.updateEntry(
+						userId, classObj.getName(),
+						((Long)newPrimaryKey).longValue(), entry.getScore());
+				}
 			}
 		}
 	}

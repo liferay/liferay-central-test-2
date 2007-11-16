@@ -999,6 +999,7 @@
 		<portlet-name>107</portlet-name>
 		<icon>/html/portlet/page_comments/icon.png</icon>
 		<struts-path>page_comments</struts-path>
+		<portlet-data-handler-class>com.liferay.portlet.pagecomments.lar.PageCommentsPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1009,6 +1010,7 @@
 		<portlet-name>108</portlet-name>
 		<icon>/html/portlet/page_ratings/icon.png</icon>
 		<struts-path>page_ratings</struts-path>
+		<portlet-data-handler-class>com.liferay.portlet.pageratings.lar.PageRatingsPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>

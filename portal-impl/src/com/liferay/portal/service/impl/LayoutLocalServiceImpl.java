@@ -366,10 +366,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.EXPORT_PORTLET_DATA);
 		boolean exportPortletPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES);
-		boolean exportComments = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.EXPORT_COMMENTS);
-		boolean exportRatings = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.EXPORT_RATINGS);
 		boolean exportTags = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.EXPORT_TAGS);
 		boolean exportTheme = MapUtil.getBoolean(
@@ -442,6 +438,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		while (itr.hasNext()) {
 			Layout layout = (Layout)itr.next();
+
+			context.setPlid(layout.getPlid());
 
 			Element layoutEl = root.addElement("layout");
 
@@ -544,15 +542,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Comments
 
-		if (exportComments) {
-			exportComments(context, root);
-		}
+		exportComments(context, root);
 
 		// Ratings
 
-		if (exportRatings) {
-			exportRatings(context, root);
-		}
+		exportRatings(context, root);
 
 		// Tags
 
@@ -724,10 +718,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.IMPORT_PORTLET_DATA);
 		boolean importPortletPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES);
-		boolean importComments = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.IMPORT_COMMENTS);
-		boolean importRatings = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.IMPORT_RATINGS);
 		boolean importTags = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IMPORT_TAGS);
 		boolean importTheme = MapUtil.getBoolean(
@@ -860,15 +850,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Comments
 
-		if (importComments) {
-			importComments(context, root);
-		}
+		importComments(context, root);
 
 		// Ratings
 
-		if (importRatings) {
-			importRatings(context, root);
-		}
+		importRatings(context, root);
 
 		// Tags
 

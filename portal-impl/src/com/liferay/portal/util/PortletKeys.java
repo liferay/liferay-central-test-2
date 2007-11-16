@@ -84,6 +84,10 @@ public class PortletKeys {
 
 	public static final String ORGANIZATION_ADMIN = "80";
 
+	public static final String PAGE_COMMENTS = "107";
+
+	public static final String PAGE_RATINGS = "108";
+
 	public static final String PLUGIN_INSTALLER = "111";
 
 	public static final String POLLS = "25";
