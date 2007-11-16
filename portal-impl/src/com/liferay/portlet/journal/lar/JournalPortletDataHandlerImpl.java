@@ -204,6 +204,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 					itr.remove();
 				}
+				else {
+					template.setXsl(
+						template.getXsl().replaceAll("\n", "\\\\n"));
+				}
 			}
 
 			xml = xStream.toXML(obj);
@@ -403,6 +407,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			while (itr.hasNext()) {
 				JournalTemplate template = (JournalTemplate)itr.next();
 
+				template.setXsl(template.getXsl().replaceAll("\\\\n", "\n"));
 				template.setGroupId(context.getGroupId());
 
 				if (JournalTemplateUtil.fetchByPrimaryKey(
