@@ -216,27 +216,12 @@ public class PortalLDAPUtil {
 	}
 
 	public static UserGroup getGroup(
-			long companyId, LdapContext ctx, String fullGroupDN, boolean create)
+			long companyId, LdapContext ctx, Attributes attr, boolean create)
 		throws Exception {
 
 		Properties groupMappings = getGroupMappings(companyId);
 
 		UserGroup userGroup = null;
-		Attributes attr = null;
-
-		// Find group in LDAP
-
-		try {
-			attr = ctx.getAttributes(fullGroupDN);
-		}
-		catch (NameNotFoundException nnfe) {
-			_log.error(
-				"LDAP group not found with fullGroupDN " + fullGroupDN);
-
-			_log.error(nnfe, nnfe);
-
-			return null;
-		}
 
 		// Find corresponding portal user group
 
@@ -252,7 +237,7 @@ public class PortalLDAPUtil {
 				try {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"Adding user group to portal " + fullGroupDN);
+							"Adding user group to portal " + groupName);
 					}
 
 					long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
@@ -265,7 +250,7 @@ public class PortalLDAPUtil {
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
-						_log.warn("Could not create user group " + fullGroupDN);
+						_log.warn("Could not create user group " + groupName);
 					}
 
 					if (_log.isDebugEnabled()) {
@@ -343,27 +328,12 @@ public class PortalLDAPUtil {
 	}
 
 	public static User getUser(
-			long companyId, LdapContext ctx, String fullUserDN, boolean create)
+			long companyId, LdapContext ctx, Attributes attr, boolean create)
 		throws Exception {
 
 		Properties userMappings = getUserMappings(companyId);
 
 		User user = null;
-		Attributes attr = null;
-
-		// Find user in LDAP
-
-		try {
-			attr = ctx.getAttributes(fullUserDN);
-		}
-		catch (NameNotFoundException nnfe) {
-			_log.error(
-				"LDAP user not found with fullUserDN " + fullUserDN);
-
-			_log.error(nnfe, nnfe);
-
-			return null;
-		}
 
 		// Find corresponding portal user
 
@@ -379,7 +349,7 @@ public class PortalLDAPUtil {
 				try {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"Adding user to portal " + fullUserDN);
+							"Adding user to portal " + emailAddress);
 					}
 
 					user = importLDAPUser(
@@ -387,7 +357,7 @@ public class PortalLDAPUtil {
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
-						_log.warn("Could not create user " + fullUserDN);
+						_log.warn("Could not create user " + emailAddress);
 					}
 
 					if (_log.isDebugEnabled()) {
@@ -788,10 +758,25 @@ public class PortalLDAPUtil {
 
 		for (int i = 0; i < attr.size(); i++) {
 
-			// Get LDAP user or create if does not exist in portal
+			// Find group in LDAP
+
+			String fullGroupDN = (String)attr.get(i);
+			Attributes groupAttr = null;
+
+			try {
+				groupAttr = ctx.getAttributes(fullGroupDN);
+			}
+			catch (NameNotFoundException nnfe) {
+				_log.error(
+					"LDAP group not found with fullGroupDN " + fullGroupDN);
+
+				_log.error(nnfe, nnfe);
+
+				continue;
+			}
 
 			UserGroup userGroup = getGroup(
-				companyId, ctx, (String)attr.get(i), true);
+				companyId, ctx, groupAttr, true);
 
 			// Add user to user group
 
@@ -819,7 +804,24 @@ public class PortalLDAPUtil {
 
 			// Get LDAP user or create if does not exist in portal
 
-			User user = getUser(companyId, ctx, (String)attr.get(i), true);
+			String fullUserDN = (String)attr.get(i);
+			Attributes userAttr = null;
+
+			// Find user in LDAP
+
+			try {
+				userAttr = ctx.getAttributes(fullUserDN);
+			}
+			catch (NameNotFoundException nnfe) {
+				_log.error(
+					"LDAP user not found with fullUserDN " + fullUserDN);
+
+				_log.error(nnfe, nnfe);
+
+				continue;
+			}
+
+			User user = getUser(companyId, ctx, userAttr, true);
 
 			// Add user to user group
 
