@@ -36,6 +36,40 @@
 <%@ page import="com.liferay.portlet.blogs.util.BlogsUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 
+<%@ page import="com.liferay.util.Html" %>
+<%@ page import="com.liferay.util.RSSUtil" %>
+
 <%
+PortletPreferences prefs = renderRequest.getPreferences();
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource, true, true);
+}
+
+int abstractLength = GetterUtil.getInteger(PropsUtil.get(PropsUtil.BLOGS_ABSTRACT_LENGTH), 400);
+
+int delta = GetterUtil.getInteger(prefs.getValue("delta", StringPool.BLANK), 5);
+
+String displayStyle = prefs.getValue("display-style", "full-content");
+
+int feedDelta = GetterUtil.getInteger(prefs.getValue("feed-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
+
+String feedDisplayStyle = prefs.getValue("feed-display-style", "full-content");
+String feedFormat = prefs.getValue("feed-format", "atom10");
+
+String feedFormatType = RSSUtil.DEFAULT_TYPE;
+String feedFormatVersion = String.valueOf(RSSUtil.DEFAULT_VERSION);
+
+if (feedFormat.equals("rss10")) {
+	feedFormatType = RSSUtil.RSS;
+	feedFormatVersion = "1.0";
+}
+else if (feedFormat.equals("atom10")) {
+	feedFormatType = RSSUtil.ATOM;
+	feedFormatVersion = "1.0";
+}
+
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

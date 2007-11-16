@@ -114,6 +114,8 @@ public class RSSAction extends PortletAction {
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
 			req, "version", RSSUtil.DEFAULT_VERSION);
+		String displayStyle = ParamUtil.getString(
+			req, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 		String feedURL =
 			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
@@ -128,7 +130,8 @@ public class RSSAction extends PortletAction {
 
 			try {
 				rss = BlogsEntryServiceUtil.getCompanyEntriesRSS(
-					companyId, max, type, version, feedURL, entryURL);
+					companyId, max, type, version, displayStyle, feedURL,
+					entryURL);
 			}
 			catch (NoSuchCompanyException nsce) {
 				if (_log.isWarnEnabled()) {
@@ -143,7 +146,8 @@ public class RSSAction extends PortletAction {
 
 			try {
 				rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
-					groupId, max, type, version, feedURL, entryURL);
+					groupId, max, type, version, displayStyle, feedURL,
+					entryURL);
 			}
 			catch (NoSuchGroupException nsge) {
 				if (_log.isWarnEnabled()) {
@@ -156,7 +160,8 @@ public class RSSAction extends PortletAction {
 
 			try {
 				rss = BlogsEntryServiceUtil.getOrganizationEntriesRSS(
-					organizationId, max, type, version, feedURL, entryURL);
+					organizationId, max, type, version, displayStyle, feedURL,
+					entryURL);
 			}
 			catch (NoSuchOrganizationException nsge) {
 				if (_log.isWarnEnabled()) {
@@ -171,7 +176,8 @@ public class RSSAction extends PortletAction {
 
 			try {
 				rss = BlogsEntryServiceUtil.getCategoryBlogsRSS(
-					categoryId, max, type, version, feedURL, entryURL);
+					categoryId, max, type, version, displayStyle, feedURL,
+					entryURL);
 			}
 			catch (NoSuchCategoryException nsce) {
 				if (_log.isWarnEnabled()) {
@@ -188,7 +194,8 @@ public class RSSAction extends PortletAction {
 
 			try {
 				rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
-					groupId, max, type, version, feedURL, entryURL);
+					groupId, max, type, version, displayStyle, feedURL,
+					entryURL);
 			}
 			catch (NoSuchGroupException nsge) {
 				if (_log.isWarnEnabled()) {

@@ -837,6 +837,10 @@ public class PropsUtil {
 
 	// Blogs Portlet
 
+	public static final String BLOGS_ABSTRACT_LENGTH = "blogs.abstract.length";
+
+	public static final String BLOGS_FEED_ABSTRACT_LENGTH = "blogs.feed.abstract.length";
+
 	public static final String BLOGS_EMAIL_COMMENTS_ADDED_ENABLED = "blogs.email.comments.added.enabled";
 
 	public static final String BLOGS_EMAIL_COMMENTS_ADDED_SUBJECT = "blogs.email.comments.added.subject";

@@ -376,6 +376,7 @@
 		<portlet-name>33</portlet-name>
 		<icon>/html/portlet/blogs/icon.png</icon>
 		<struts-path>blogs</struts-path>
+		<configuration-action-class>com.liferay.portlet.blogs.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.blogs.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.blogs.util.BlogsOpenSearchImpl</open-search-class>
 		<friendly-url-mapper-class>com.liferay.portlet.blogs.BlogsFriendlyURLMapper</friendly-url-mapper-class>

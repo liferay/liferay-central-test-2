@@ -56,7 +56,7 @@ for (int i = 0; i < results.size(); i++) {
 <%
 }
 
-String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/blogs/rss";
+String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + "/blogs/rss?" + renderResponse.getNamespace() + "type=" + feedFormatType + "&" + renderResponse.getNamespace() + "version="+feedFormatVersion+"&" +  renderResponse.getNamespace() + "displayStyle="+feedDisplayStyle+"&" + renderResponse.getNamespace() + "max=" + feedDelta;
 %>
 
 <liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />

@@ -117,16 +117,48 @@
 			<br />
 		</td>
 	</tr>
-	<tr>
-		<td>
-			<%= entry.getContent() %>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<br />
-		</td>
-	</tr>
+	<c:choose>
+		<c:when test="<%= displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>">
+			<tr>
+				<td>
+					<%= StringUtil.shorten(Html.stripHtml(entry.getContent()), abstractLength, "...") %>
+
+					<br/>
+
+					 <a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more"/> &raquo;</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br />
+				</td>
+			</tr>
+		</c:when>
+		<c:when test="<%= displayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>">
+			<tr>
+				<td>
+					<%= entry.getContent() %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br />
+				</td>
+			</tr>
+		</c:when>
+		<c:when test="<%= displayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>">
+			<tr>
+				<td>
+					 <a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more"/> &raquo;</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br />
+				</td>
+			</tr>
+		</c:when>
+	</c:choose>
 	<tr>
 		<td>
 			<portlet:renderURL var="bookmarkURL">

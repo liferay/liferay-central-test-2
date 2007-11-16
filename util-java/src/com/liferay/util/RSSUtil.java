@@ -51,6 +51,12 @@ public class RSSUtil {
 
 	public static final double DEFAULT_VERSION = 2.0;
 
+	public static final String DISPLAY_STYLE_ABSTRACT = "abstract";
+
+	public static final String DISPLAY_STYLE_FULL_CONTENT = "full-content";
+
+	public static final String DISPLAY_STYLE_TITLE = "title";
+
 	public static String export(SyndFeed feed)
 		throws FeedException, IOException {
 

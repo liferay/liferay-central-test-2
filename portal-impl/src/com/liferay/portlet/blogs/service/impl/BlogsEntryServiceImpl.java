@@ -27,16 +27,20 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryServiceBaseImpl;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
+import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
 
 import com.sun.syndication.feed.synd.SyndContent;
@@ -107,9 +111,19 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		blogsEntryLocalService.deleteEntry(entryId);
 	}
 
+	/** @deprecated */
 	public String getCategoryBlogsRSS(
 			long categoryId, int max, String type, double version,
 			String feedURL, String entryURL)
+		throws PortalException, SystemException {
+		return getOrganizationEntriesRSS(
+			categoryId, max, type, version, RSSUtil.DISPLAY_STYLE_FULL_CONTENT,
+			feedURL, entryURL);
+	}
+
+	public String getCategoryBlogsRSS(
+			long categoryId, int max, String type, double version,
+			String displayStyle, String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
 		BlogsCategory category = blogsCategoryLocalService.getCategory(
@@ -134,7 +148,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		}
 
 		return exportToRSS(
-			name, description, type, version, feedURL, entryURL, blogsEntries);
+			name, description, type, version, displayStyle, feedURL, entryURL,
+			blogsEntries);
 	}
 
 	public List getCompanyEntries(long companyId, int max)
@@ -162,6 +177,16 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			long companyId, int max, String type, double version,
 			String feedURL, String entryURL)
 		throws PortalException, SystemException {
+		return getCompanyEntriesRSS(
+			companyId, max, type, version, RSSUtil.DISPLAY_STYLE_FULL_CONTENT,
+			feedURL, entryURL);
+
+	}
+
+	public String getCompanyEntriesRSS(
+			long companyId, int max, String type, double version,
+			String displayStyle, String feedURL, String entryURL)
+		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
@@ -170,7 +195,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		List blogsEntries = getCompanyEntries(companyId, max);
 
 		return exportToRSS(
-			name, null, type, version, feedURL, entryURL, blogsEntries);
+			name, null, type, version, displayStyle, feedURL, entryURL,
+			blogsEntries);
 	}
 
 	public BlogsEntry getEntry(long entryId)
@@ -214,9 +240,19 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return entries;
 	}
 
+	/** @deprecated */
 	public String getGroupEntriesRSS(
 			long groupId, int max, String type, double version,
 			String feedURL, String entryURL)
+		throws PortalException, SystemException {
+		return getGroupEntriesRSS(
+			groupId, max, type, version, RSSUtil.DISPLAY_STYLE_FULL_CONTENT,
+			feedURL, entryURL);
+	}
+
+	public String getGroupEntriesRSS(
+			long groupId, int max, String type, double version,
+			String displayStyle, String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
@@ -226,7 +262,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		List blogsEntries = getGroupEntries(groupId, max);
 
 		return exportToRSS(
-			name, null, type, version, feedURL, entryURL, blogsEntries);
+			name, null, type, version, displayStyle, feedURL, entryURL,
+			blogsEntries);
 	}
 
 	public List getOrganizationEntries(long organizationId, int max)
@@ -250,9 +287,19 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return entries;
 	}
 
+	/** @deprecated */
 	public String getOrganizationEntriesRSS(
 			long organizationId, int max, String type, double version,
 			String feedURL, String entryURL)
+		throws PortalException, SystemException {
+		return getOrganizationEntriesRSS(
+			organizationId, max, type, version,
+			RSSUtil.DISPLAY_STYLE_FULL_CONTENT, feedURL, entryURL);
+	}
+
+	public String getOrganizationEntriesRSS(
+			long organizationId, int max, String type, double version,
+			String displayStyle, String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
 		Organization organization = organizationPersistence.findByPrimaryKey(
@@ -263,7 +310,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		List blogsEntries = getOrganizationEntries(organizationId, max);
 
 		return exportToRSS(
-			name, null, type, version, feedURL, entryURL, blogsEntries);
+			name, null, type, version, displayStyle, feedURL, entryURL,
+			blogsEntries);
 	}
 
 	public BlogsEntry updateEntry(
@@ -284,7 +332,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	protected String exportToRSS(
 			String name, String description, String type, double version,
-			String feedURL, String entryURL, List blogsEntries)
+			String displayStyle, String feedURL, String entryURL,
+			List blogsEntries)
 		throws SystemException {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
@@ -318,7 +367,16 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 				link += "entryId=" + entry.getEntryId();
 			}
 
-			String value = entry.getContent();
+			String value = null;
+
+			if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
+				value = entry.getContent();
+			}
+			else if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
+				value = StringUtil.shorten(
+					Html.stripHtml(entry.getContent()), _FEED_ABSTRACT_LENGTH,
+					StringPool.BLANK);
+			}
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
@@ -327,12 +385,14 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			syndEntry.setLink(link);
 			syndEntry.setPublishedDate(entry.getCreateDate());
 
-			SyndContent syndContent = new SyndContentImpl();
+			if (value != null) {
+				SyndContent syndContent = new SyndContentImpl();
 
-			syndContent.setType(ContentTypes.TEXT_HTML);
-			syndContent.setValue(value);
+				syndContent.setType(ContentTypes.TEXT_HTML.toLowerCase());
+				syndContent.setValue(value);
 
-			syndEntry.setDescription(syndContent);
+				syndEntry.setDescription(syndContent);
+			}
 
 			entries.add(syndEntry);
 		}
@@ -349,5 +409,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	}
 
 	private static final int _MAX_END = 200;
+
+	private static final int _FEED_ABSTRACT_LENGTH = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.BLOGS_FEED_ABSTRACT_LENGTH), 200);
 
 }
