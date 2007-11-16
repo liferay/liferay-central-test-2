@@ -65,13 +65,13 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] { _enableExport };
+		return new PortletDataHandlerControl[] {_enableExport};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] { _enableImport };
+		return new PortletDataHandlerControl[] {_enableImport};
 	}
 
 	public String exportData(

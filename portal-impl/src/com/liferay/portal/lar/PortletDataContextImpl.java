@@ -136,23 +136,26 @@ public class PortletDataContextImpl implements PortletDataContext {
 		boolean exportComments = MapUtil.getBoolean(
 			_parameterMap, PortletDataHandlerKeys.EXPORT_COMMENTS);
 
-		if ((exportComments) || (classObj == Layout.class)) {
-			List messages = MBMessageLocalServiceUtil.getMessages(
-				classObj.getName(), ((Long)primaryKey).longValue());
-
-			if ((messages != null) && (messages.size() > 0)) {
-				Iterator itr = messages.iterator();
-
-				while (itr.hasNext()) {
-					MBMessage message = (MBMessage)itr.next();
-
-					message.setUserUuid(message.getUserUuid());
-				}
-
-				_commentsMap.put(
-					getPrimaryKeyString(classObj, primaryKey), messages);
-			}
+		if (!exportComments && (classObj != Layout.class)) {
+			return;
 		}
+
+		List messages = MBMessageLocalServiceUtil.getMessages(
+			classObj.getName(), ((Long)primaryKey).longValue());
+
+		if (messages.size() == 0) {
+			return;
+		}
+
+		Iterator itr = messages.iterator();
+
+		while (itr.hasNext()) {
+			MBMessage message = (MBMessage)itr.next();
+
+			message.setUserUuid(message.getUserUuid());
+		}
+
+		_commentsMap.put(getPrimaryKeyString(classObj, primaryKey), messages);
 	}
 
 	public void addComments(String className, Object primaryKey, List messages)
@@ -170,42 +173,43 @@ public class PortletDataContextImpl implements PortletDataContext {
 		boolean importComments = MapUtil.getBoolean(
 			_parameterMap, PortletDataHandlerKeys.IMPORT_COMMENTS);
 
-		if ((importComments) || (classObj == Layout.class)) {
-			Map messagePKs = CollectionFactory.getHashMap();
-			Map threadPKs = CollectionFactory.getHashMap();
+		if (!importComments && (classObj != Layout.class)) {
+			return;
+		}
 
-			List messages = (List)_commentsMap.get(
-				getPrimaryKeyString(classObj, primaryKey));
+		Map messagePKs = CollectionFactory.getHashMap();
+		Map threadPKs = CollectionFactory.getHashMap();
 
-			if (messages != null) {
-				Iterator itr = messages.iterator();
+		List messages = (List)_commentsMap.get(
+			getPrimaryKeyString(classObj, primaryKey));
 
-				while (itr.hasNext()) {
-					MBMessage message = (MBMessage)itr.next();
+		if (messages == null) {
+			return;
+		}
 
-					long userId = getUserId(message.getUserUuid());
-					long parentMessageId = MapUtil.getLong(
-						messagePKs, message.getParentMessageId(),
-						message.getParentMessageId());
-					long threadId = MapUtil.getLong(
-						threadPKs, message.getThreadId(),
-						message.getThreadId());
+		Iterator itr = messages.iterator();
 
-					MBMessage newMessage =
-						MBMessageLocalServiceUtil.addDiscussionMessage(
-							userId, groupId, classObj.getName(),
-							((Long)newPrimaryKey).longValue(), threadId,
-							parentMessageId, message.getSubject(),
-							message.getBody());
+		while (itr.hasNext()) {
+			MBMessage message = (MBMessage)itr.next();
 
-					messagePKs.put(
-						message.getPrimaryKeyObj(),
-						newMessage.getPrimaryKeyObj());
-					threadPKs.put(
-						new Long(message.getThreadId()),
-						new Long(newMessage.getThreadId()));
-				}
-			}
+			long userId = getUserId(message.getUserUuid());
+			long parentMessageId = MapUtil.getLong(
+				messagePKs, message.getParentMessageId(),
+				message.getParentMessageId());
+			long threadId = MapUtil.getLong(
+				threadPKs, message.getThreadId(), message.getThreadId());
+
+			MBMessage newMessage =
+				MBMessageLocalServiceUtil.addDiscussionMessage(
+					userId, groupId, classObj.getName(),
+					((Long)newPrimaryKey).longValue(), threadId,
+					parentMessageId, message.getSubject(), message.getBody());
+
+			messagePKs.put(
+				message.getPrimaryKeyObj(), newMessage.getPrimaryKeyObj());
+			threadPKs.put(
+				new Long(message.getThreadId()),
+				new Long(newMessage.getThreadId()));
 		}
 	}
 
@@ -219,23 +223,27 @@ public class PortletDataContextImpl implements PortletDataContext {
 		boolean exportRatings = MapUtil.getBoolean(
 			_parameterMap, PortletDataHandlerKeys.EXPORT_RATINGS);
 
-		if ((exportRatings) || (classObj == Layout.class)) {
-			List entries = RatingsEntryLocalServiceUtil.getEntries(
-				classObj.getName(), ((Long)primaryKey).longValue());
-
-			if ((entries != null) && (entries.size() > 0)) {
-				Iterator itr = entries.iterator();
-
-				while (itr.hasNext()) {
-					RatingsEntry entry = (RatingsEntry)itr.next();
-
-					entry.setUserUuid(entry.getUserUuid());
-				}
-
-				_ratingsEntriesMap.put(
-					getPrimaryKeyString(classObj, primaryKey), entries);
-			}
+		if (!exportRatings && (classObj != Layout.class)) {
+			return;
 		}
+
+		List entries = RatingsEntryLocalServiceUtil.getEntries(
+			classObj.getName(), ((Long)primaryKey).longValue());
+
+		if (entries.size() == 0) {
+			return;
+		}
+
+		Iterator itr = entries.iterator();
+
+		while (itr.hasNext()) {
+			RatingsEntry entry = (RatingsEntry)itr.next();
+
+			entry.setUserUuid(entry.getUserUuid());
+		}
+
+		_ratingsEntriesMap.put(
+			getPrimaryKeyString(classObj, primaryKey), entries);
 	}
 
 	public void addRatingsEntries(
@@ -253,23 +261,27 @@ public class PortletDataContextImpl implements PortletDataContext {
 		boolean importRatings = MapUtil.getBoolean(
 			_parameterMap, PortletDataHandlerKeys.IMPORT_RATINGS);
 
-		if ((importRatings) || (classObj == Layout.class)) {
-			List entries = (List)_ratingsEntriesMap.get(
-				getPrimaryKeyString(classObj, primaryKey));
+		if (!importRatings && (classObj != Layout.class)) {
+			return;
+		}
 
-			if (entries != null) {
-				Iterator itr = entries.iterator();
+		List entries = (List)_ratingsEntriesMap.get(
+			getPrimaryKeyString(classObj, primaryKey));
 
-				while (itr.hasNext()) {
-					RatingsEntry entry = (RatingsEntry)itr.next();
+		if (entries == null) {
+			return;
+		}
 
-					long userId = getUserId(entry.getUserUuid());
+		Iterator itr = entries.iterator();
 
-					RatingsEntryLocalServiceUtil.updateEntry(
-						userId, classObj.getName(),
-						((Long)newPrimaryKey).longValue(), entry.getScore());
-				}
-			}
+		while (itr.hasNext()) {
+			RatingsEntry entry = (RatingsEntry)itr.next();
+
+			long userId = getUserId(entry.getUserUuid());
+
+			RatingsEntryLocalServiceUtil.updateEntry(
+				userId, classObj.getName(), ((Long)newPrimaryKey).longValue(),
+				entry.getScore());
 		}
 	}
 

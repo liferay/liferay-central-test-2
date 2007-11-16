@@ -39,7 +39,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="PageRatingsPortletDataHandlerImpl .java.html"><b><i>View Source</i></b></a>
+ * <a href="PageRatingsPortletDataHandlerImpl.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Bruno Farache
  *
@@ -49,13 +50,13 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] { _enableExport };
+		return new PortletDataHandlerControl[] {_enableExport};
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException{
 
-		return new PortletDataHandlerControl[] { _enableImport };
+		return new PortletDataHandlerControl[] {_enableImport};
 	}
 
 	public String exportData(
