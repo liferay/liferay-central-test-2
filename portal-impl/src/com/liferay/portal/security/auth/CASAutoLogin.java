@@ -33,13 +33,18 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.ldap.LDAPUtil;
 
 import edu.yale.its.tp.cas.client.filter.CASFilter;
 
+import java.util.Properties;
+
 import javax.naming.Binding;
+import javax.naming.Context;
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
+import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -113,14 +118,41 @@ public class CASAutoLogin implements AutoLogin {
 		throws PortalException, SystemException {
 
 		try {
+			Properties env = new Properties();
+
+			String baseProviderURL = PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_BASE_PROVIDER_URL);
 
 			String baseDN = PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_BASE_DN);
 
-			LdapContext ctx = PortalLDAPUtil.getContext(companyId);
+			env.put(
+				Context.INITIAL_CONTEXT_FACTORY,
+				PrefsPropsUtil.getString(
+					companyId, PropsUtil.LDAP_FACTORY_INITIAL));
+			env.put(
+				Context.PROVIDER_URL,
+				LDAPUtil.getFullProviderURL(baseProviderURL, baseDN));
+			env.put(
+				Context.SECURITY_PRINCIPAL,
+				PrefsPropsUtil.getString(
+					companyId, PropsUtil.LDAP_SECURITY_PRINCIPAL));
+			env.put(
+				Context.SECURITY_CREDENTIALS,
+				PrefsPropsUtil.getString(
+					companyId, PropsUtil.LDAP_SECURITY_CREDENTIALS));
 
-			if (ctx == null) {
-				throw new SystemException("Failed to bind to the LDAP server");
+			LdapContext ctx = null;
+
+			try {
+				ctx = new InitialLdapContext(env, null);
+			}
+			catch (Exception e) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Failed to bind to the LDAP server", e);
+				}
+
+				throw new SystemException(e);
 			}
 
 			String filter = PrefsPropsUtil.getString(
@@ -146,7 +178,7 @@ public class CASAutoLogin implements AutoLogin {
 			SearchControls cons = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
-			NamingEnumeration enu = ctx.search(baseDN, filter, cons);
+			NamingEnumeration enu = ctx.search(StringPool.BLANK, filter, cons);
 
 			if (enu.hasMore()) {
 				if (_log.isDebugEnabled()) {
