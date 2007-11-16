@@ -39,7 +39,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
-import com.liferay.util.ldap.LDAPUtil;
 
 import java.util.Map;
 import java.util.Properties;
@@ -277,7 +276,7 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected LDAPAuthResult authenticate(
-			LdapContext ctx, SearchResult result, String baseDN, 
+			LdapContext ctx, SearchResult result, String baseDN,
 			Attribute userPassword, long companyId, String emailAddress,
 			String screenName, long userId, String password)
 		throws Exception {

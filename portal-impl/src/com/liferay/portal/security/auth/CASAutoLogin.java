@@ -33,18 +33,13 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.ldap.LDAPUtil;
 
 import edu.yale.its.tp.cas.client.filter.CASFilter;
 
-import java.util.Properties;
-
 import javax.naming.Binding;
-import javax.naming.Context;
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
-import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
 
 import javax.servlet.http.HttpServletRequest;
