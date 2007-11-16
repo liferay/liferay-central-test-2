@@ -27,7 +27,6 @@ import com.liferay.portal.PasswordExpiredException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -39,7 +38,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
-import com.liferay.util.ldap.LDAPUtil;
 
 import java.util.Map;
 import java.util.Properties;
@@ -147,45 +145,17 @@ public class LDAPAuth implements Authenticator {
 			return SUCCESS;
 		}
 
-		Properties env = new Properties();
-
-		String baseProviderURL = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_BASE_PROVIDER_URL);
-
 		String baseDN = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_BASE_DN);
 
-		env.put(
-			Context.INITIAL_CONTEXT_FACTORY,
-			PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_FACTORY_INITIAL));
-		env.put(
-			Context.PROVIDER_URL,
-			LDAPUtil.getFullProviderURL(baseProviderURL, baseDN));
-		env.put(
-			Context.SECURITY_PRINCIPAL,
-			PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_SECURITY_PRINCIPAL));
-		env.put(
-			Context.SECURITY_CREDENTIALS,
-			PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_SECURITY_CREDENTIALS));
+		LdapContext ctx = PortalLDAPUtil.getContext(companyId);
 
-		LogUtil.debug(_log, env);
-
-		LdapContext ctx = null;
-
-		try {
-			ctx = new InitialLdapContext(env, null);
-		}
-		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Failed to bind to the LDAP server");
-			}
-
+		if (ctx == null) {
 			return authenticateRequired(
 				companyId, userId, emailAddress, FAILURE);
 		}
+
+		//  Process LDAP auth search filter
 
 		String filter = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_AUTH_SEARCH_FILTER);
@@ -212,7 +182,7 @@ public class LDAPAuth implements Authenticator {
 			SearchControls cons = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
-			NamingEnumeration enu = ctx.search(StringPool.BLANK, filter, cons);
+			NamingEnumeration enu = ctx.search(baseDN, filter, cons);
 
 			if (enu.hasMore()) {
 				if (_log.isDebugEnabled()) {
@@ -221,18 +191,16 @@ public class LDAPAuth implements Authenticator {
 
 				SearchResult result = (SearchResult)enu.next();
 
-				Attributes attrs = ctx.getAttributes(result.getName());
+				String fullUserDN = result.getName();
 
-				Properties userMappings =
-					PortalLDAPUtil.getUserMappings(companyId);
+				if (result.isRelative()) {
+					fullUserDN = fullUserDN + StringPool.COMMA + baseDN;
+				}
 
-				LogUtil.debug(_log, userMappings);
-
-				Attribute userPassword = attrs.get("userPassword");
+				Attributes attrs = ctx.getAttributes(fullUserDN);
 
 				LDAPAuthResult ldapAuthResult = authenticate(
-					ctx, env, result, baseDN, userPassword, companyId,
-					emailAddress, screenName, userId, password);
+					ctx, companyId, attrs, fullUserDN, password);
 
 				// Process LDAP failure codes
 
@@ -301,9 +269,8 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected LDAPAuthResult authenticate(
-			LdapContext ctx, Properties env, SearchResult result, String baseDN,
-			Attribute userPassword, long companyId, String emailAddress,
-			String screenName, long userId, String password)
+			LdapContext ctx, long companyId, Attributes attrs, String userDN,
+			String password)
 		throws Exception {
 
 		LDAPAuthResult ldapAuthResult = new LDAPAuthResult();
@@ -315,10 +282,9 @@ public class LDAPAuth implements Authenticator {
 		String authMethod = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_AUTH_METHOD);
 
-		String userDN = result.getName() + StringPool.COMMA + baseDN;
-
 		if (authMethod.equals(AUTH_METHOD_BIND)) {
 			try {
+				Properties env = (Properties)ctx.getEnvironment();
 
 				env.put(Context.SECURITY_PRINCIPAL, userDN);
 				env.put(Context.SECURITY_CREDENTIALS, password);
@@ -342,6 +308,8 @@ public class LDAPAuth implements Authenticator {
 			}
 		}
 		else if (authMethod.equals(AUTH_METHOD_PASSWORD_COMPARE)) {
+			Attribute userPassword = attrs.get("userPassword");
+
 			if (userPassword != null) {
 				String ldapPassword = new String((byte[])userPassword.get());
 
@@ -367,7 +335,7 @@ public class LDAPAuth implements Authenticator {
 					_log.error(
 						"LDAP password " + ldapPassword +
 							" does not match with given password " +
-								encryptedPassword + " for user id " + userId);
+								encryptedPassword + " for userDN " + userDN);
 				}
 			}
 		}

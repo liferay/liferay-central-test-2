@@ -396,26 +396,44 @@ public class PortalLDAPUtil {
 
 		LogUtil.debug(_log, groupMappings);
 
-		String name = LDAPUtil.getAttributeValue(
+		String groupName = LDAPUtil.getAttributeValue(
 			attrs, groupMappings.getProperty("groupName")).toLowerCase();
 		String description = LDAPUtil.getAttributeValue(
 			attrs, groupMappings.getProperty("description"));
-
-		long creatorUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
 		// Get or create user group
 
 		UserGroup userGroup = null;
 
 		try {
-			userGroup = UserGroupLocalServiceUtil.getUserGroup(companyId, name);
+			userGroup = UserGroupLocalServiceUtil.getUserGroup(
+				companyId, groupName);
 
 			UserGroupLocalServiceUtil.updateUserGroup(
-				companyId, userGroup.getUserGroupId(), name, description);
+				companyId, userGroup.getUserGroupId(), groupName, description);
 		}
 		catch (NoSuchUserGroupException nsuge) {
-			userGroup = UserGroupLocalServiceUtil.addUserGroup(
-				creatorUserId, companyId, name, description);
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Adding user group to portal " + groupName);
+			}
+
+			long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
+				companyId);
+
+			try {
+				userGroup = UserGroupLocalServiceUtil.addUserGroup(
+					defaultUserId, companyId, groupName, description);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Could not create user group " + groupName);
+				}
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(e, e);
+				}
+			}
 		}
 
 		// Import users and membership
@@ -507,6 +525,8 @@ public class PortalLDAPUtil {
 		User user = null;
 
 		try {
+			// Find corresponding portal user
+
 			user = UserLocalServiceUtil.getUserByEmailAddress(
 				companyId, emailAddress);
 
@@ -546,6 +566,11 @@ public class PortalLDAPUtil {
 
 		if (user == null) {
 			try {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Adding user to portal " + emailAddress);
+				}
+
 				user = UserLocalServiceUtil.addUser(
 					creatorUserId, companyId, autoPassword, password, password,
 					autoScreenName, screenName, emailAddress, locale, firstName,
@@ -661,75 +686,38 @@ public class PortalLDAPUtil {
 			long companyId, LdapContext ctx, long userId, Attribute attr)
 		throws Exception {
 
-		Properties groupMappings = getGroupMappings(companyId);
-
 		// Remove all user group membership from user
 
 		UserGroupLocalServiceUtil.clearUserUserGroups(userId);
 
-		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
-			companyId);
-
 		for (int i = 0; i < attr.size(); i++) {
 
-			// Get LDAP group
+			// Find group in LDAP
 
-			Attributes groupAttrs = null;
-
-			String groupDN = (String)attr.get(i);
+			String fullGroupDN = (String)attr.get(i);
+			Attributes groupAttr = null;
 
 			try {
-				groupAttrs = ctx.getAttributes(groupDN);
+				groupAttr = ctx.getAttributes(fullGroupDN);
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error(
-					"Trying to import nonexistent LDAP group that was " +
-						"referenced from LDAP user with groupDN " + groupDN);
+					"LDAP group not found with fullGroupDN " + fullGroupDN);
 
 				_log.error(nnfe, nnfe);
 
 				continue;
 			}
 
-			// Get portal user group corresponding to LDAP group
-
-			UserGroup userGroup = null;
-
-			String groupName = LDAPUtil.getAttributeValue(
-				groupAttrs, groupMappings.getProperty("groupName"));
-			String description = LDAPUtil.getAttributeValue(
-				groupAttrs, groupMappings.getProperty("description"));
-
-			try {
-				userGroup = UserGroupLocalServiceUtil.getUserGroup(
-					companyId, groupName);
-			}
-			catch (NoSuchUserGroupException nsuge) {
-				try {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Adding user group" + groupName + " at " + groupDN);
-					}
-
-					userGroup = UserGroupLocalServiceUtil.addUserGroup(
-						defaultUserId, companyId, groupName, description);
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn("Could not create user group " + groupName);
-					}
-
-					if (_log.isDebugEnabled()) {
-						_log.debug(e);
-					}
-				}
-			}
+			UserGroup userGroup = importLDAPGroup(
+				companyId, ctx, groupAttr, false);
 
 			// Add user to user group
 
 			if (userGroup != null) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Adding " + userId + " to group " + groupName);
+					_log.debug("Adding " + userId + " to group " +
+						userGroup.getUserGroupId());
 				}
 
 				UserLocalServiceUtil.addUserGroupUsers(
@@ -742,64 +730,33 @@ public class PortalLDAPUtil {
 			long companyId, LdapContext ctx, long userGroupId, Attribute attr)
 		throws Exception {
 
-		Properties userMappings = getUserMappings(companyId);
-
 		// Remove all user membership from user group
 
 		UserLocalServiceUtil.clearUserGroupUsers(userGroupId);
 
 		for (int i = 0; i < attr.size(); i++) {
 
-			// Get LDAP user
+			// Get LDAP user or create if does not exist in portal
 
-			Attributes userAttrs = null;
+			String fullUserDN = (String)attr.get(i);
+			Attributes userAttr = null;
 
-			String userDN = (String)attr.get(i);
+			// Find user in LDAP
 
 			try {
-				userAttrs = ctx.getAttributes(userDN);
+				userAttr = ctx.getAttributes(fullUserDN);
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error(
-					"Trying to import nonexistent LDAP user that was " +
-						"referenced from LDAP group with userDN " + userDN);
+					"LDAP user not found with fullUserDN " + fullUserDN);
 
 				_log.error(nnfe, nnfe);
 
 				continue;
 			}
 
-			// Get portal user corresponding to LDAP user
-
-			User user = null;
-
-			String emailAddress = LDAPUtil.getAttributeValue(
-				userAttrs, userMappings.getProperty("emailAddress"));
-
-			try {
-				user = UserLocalServiceUtil.getUserByEmailAddress(
-					companyId, emailAddress);
-			}
-			catch (NoSuchUserException nsue) {
-				try {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Adding user " + emailAddress + " at " + userDN);
-					}
-
-					user = importLDAPUser(
-						companyId, ctx, userAttrs, StringPool.BLANK, false);
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn("Could not create user " + userDN);
-					}
-
-					if (_log.isDebugEnabled()) {
-						_log.debug(e, e);
-					}
-				}
-			}
+			User user = importLDAPUser(
+				companyId, ctx, userAttr, StringPool.BLANK, false);
 
 			// Add user to user group
 
