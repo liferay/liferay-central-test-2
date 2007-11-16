@@ -35,6 +35,7 @@ import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.Constants;
@@ -432,6 +433,10 @@ public class EditPagesAction extends PortletAction {
 			PortletDataHandlerKeys.EXPORT_PORTLET_PREFERENCES,
 			Boolean.TRUE.toString());
 		parameterMap.put(
+			PortletDataHandlerKeys.EXPORT_COMMENTS, Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.EXPORT_RATINGS, Boolean.TRUE.toString());
+		parameterMap.put(
 			PortletDataHandlerKeys.EXPORT_TAGS, Boolean.TRUE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.EXPORT_THEME, Boolean.FALSE.toString());
@@ -450,12 +455,20 @@ public class EditPagesAction extends PortletAction {
 			PortletDataHandlerKeys.IMPORT_PORTLET_PREFERENCES,
 			Boolean.TRUE.toString());
 		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_COMMENTS, Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.IMPORT_RATINGS, Boolean.TRUE.toString());
+		parameterMap.put(
 			PortletDataHandlerKeys.IMPORT_TAGS, Boolean.TRUE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.IMPORT_THEME, Boolean.FALSE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.MERGE_DATA, Boolean.TRUE.toString());
-
+		parameterMap.put(
+			PortletDataHandlerKeys.STAGING, Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_ID_STRATEGY,
+			UserIdStrategy.CURRENT_USER_ID);
 		return parameterMap;
 	}
 

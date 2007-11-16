@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.util.MapUtil;
@@ -68,6 +69,8 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean exportData = MapUtil.getBoolean(
 			parameterMap, _EXPORT_PAGE_RATINGS_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -78,7 +81,7 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!exportData) {
+		if (!exportData && !staging) {
 			return null;
 		}
 
@@ -102,6 +105,8 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean importData = MapUtil.getBoolean(
 			parameterMap, _IMPORT_PAGE_RATINGS_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -112,7 +117,7 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!importData) {
+		if (!importData && !staging) {
 			return null;
 		}
 

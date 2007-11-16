@@ -92,6 +92,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean exportData = MapUtil.getBoolean(parameterMap, _EXPORT_IG_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -102,7 +104,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!exportData) {
+		if (!exportData && !staging) {
 			return null;
 		}
 
@@ -221,6 +223,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		Map parameterMap = context.getParameterMap();
 
 		boolean importData = MapUtil.getBoolean(parameterMap, _IMPORT_IG_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -231,7 +235,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!importData) {
+		if (!importData && !staging) {
 			return null;
 		}
 

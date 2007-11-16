@@ -98,6 +98,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean exportData = MapUtil.getBoolean(
 			parameterMap, _EXPORT_BOOKMARKS_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -108,7 +110,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!exportData) {
+		if (!exportData && !staging) {
 			return null;
 		}
 
@@ -200,6 +202,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean importData = MapUtil.getBoolean(
 			parameterMap, _IMPORT_BOOKMARKS_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -210,7 +214,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!importData) {
+		if (!importData && !staging) {
 			return null;
 		}
 

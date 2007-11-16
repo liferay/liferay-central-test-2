@@ -83,6 +83,8 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean exportData = MapUtil.getBoolean(
 			parameterMap, _EXPORT_CALENDAR_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -93,7 +95,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!exportData) {
+		if (!exportData && !staging) {
 			return null;
 		}
 
@@ -149,6 +151,8 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean importData = MapUtil.getBoolean(
 			parameterMap, _IMPORT_CALENDAR_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -159,7 +163,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!importData) {
+		if (!importData && !staging) {
 			return null;
 		}
 

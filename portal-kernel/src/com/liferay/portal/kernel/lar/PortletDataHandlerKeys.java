@@ -74,6 +74,8 @@ public class PortletDataHandlerKeys {
 
 	public static final String MERGE_DATA = "MERGE_DATA";
 
+	public static final String STAGING = "STAGING";
+
 	public static final String USER_ID_STRATEGY = "USER_ID_STRATEGY";
 
 }

@@ -100,6 +100,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean exportData = MapUtil.getBoolean(
 			parameterMap, _EXPORT_POLLS_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -110,7 +112,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!exportData) {
+		if (!exportData && !staging) {
 			return null;
 		}
 
@@ -233,6 +235,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean importData = MapUtil.getBoolean(
 			parameterMap, _IMPORT_POLLS_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -243,7 +247,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!importData) {
+		if (!importData && !staging) {
 			return null;
 		}
 

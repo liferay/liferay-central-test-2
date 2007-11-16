@@ -110,6 +110,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean exportData = MapUtil.getBoolean(
 			parameterMap, _EXPORT_MESSAGE_BOARDS_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (exportData) {
@@ -120,7 +122,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!exportData) {
+		if (!exportData && !staging) {
 			return null;
 		}
 
@@ -315,6 +317,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean importData = MapUtil.getBoolean(
 			parameterMap, _IMPORT_MESSAGE_BOARDS_DATA);
+		boolean staging = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.STAGING);
 
 		if (_log.isDebugEnabled()) {
 			if (importData) {
@@ -325,7 +329,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 
-		if (!importData) {
+		if (!importData && !staging) {
 			return null;
 		}
 
