@@ -128,10 +128,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean exportAttachments = MapUtil.getBoolean(
 			parameterMap, _EXPORT_MESSAGE_BOARDS_ATTACHMENTS);
-
 		boolean exportBans = MapUtil.getBoolean(
 			parameterMap, _EXPORT_MESSAGE_BOARDS_BANS);
-
 		boolean exportFlags = MapUtil.getBoolean(
 			parameterMap, _EXPORT_MESSAGE_BOARDS_FLAGS);
 
@@ -335,13 +333,10 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean mergeData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
-
 		boolean importAttachments = MapUtil.getBoolean(
 			parameterMap, _IMPORT_MESSAGE_BOARDS_ATTACHMENTS);
-
 		boolean importBans = MapUtil.getBoolean(
 			parameterMap, _IMPORT_MESSAGE_BOARDS_BANS);
-
 		boolean importFlags = MapUtil.getBoolean(
 			parameterMap, _IMPORT_MESSAGE_BOARDS_FLAGS);
 

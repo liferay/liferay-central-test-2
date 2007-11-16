@@ -253,7 +253,6 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean mergeData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
-
 		boolean importVotes = MapUtil.getBoolean(
 			parameterMap, _IMPORT_POLLS_VOTES);
 

@@ -469,6 +469,7 @@ public class EditPagesAction extends PortletAction {
 		parameterMap.put(
 			PortletDataHandlerKeys.USER_ID_STRATEGY,
 			UserIdStrategy.CURRENT_USER_ID);
+
 		return parameterMap;
 	}
 

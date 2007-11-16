@@ -119,7 +119,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean exportShortcuts = MapUtil.getBoolean(
 			parameterMap, _EXPORT_DL_SHORTCUTS);
-
 		boolean exportRanks = MapUtil.getBoolean(
 			parameterMap, _EXPORT_DL_RANKS);
 
@@ -311,10 +310,8 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		boolean mergeData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.MERGE_DATA);
-
 		boolean importShortcuts = MapUtil.getBoolean(
 			parameterMap, _IMPORT_DL_SHORTCUTS);
-
 		boolean importRanks = MapUtil.getBoolean(
 			parameterMap, _IMPORT_DL_RANKS);
 
