@@ -27,7 +27,6 @@ import com.liferay.portal.PasswordExpiredException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -198,16 +197,8 @@ public class LDAPAuth implements Authenticator {
 
 				Attributes attrs = ctx.getAttributes(fullUserDN);
 
-				Properties userMappings =
-					PortalLDAPUtil.getUserMappings(companyId);
-
-				LogUtil.debug(_log, userMappings);
-
-				Attribute userPassword = attrs.get("userPassword");
-
 				LDAPAuthResult ldapAuthResult = authenticate(
-					ctx, result, baseDN, userPassword, companyId,
-					emailAddress, screenName, userId, password);
+					ctx, companyId, attrs, fullUserDN, password);
 
 				// Process LDAP failure codes
 
@@ -276,9 +267,8 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected LDAPAuthResult authenticate(
-			LdapContext ctx, SearchResult result, String baseDN,
-			Attribute userPassword, long companyId, String emailAddress,
-			String screenName, long userId, String password)
+			LdapContext ctx, long companyId, Attributes attrs, String userDN,
+			String password)
 		throws Exception {
 
 		LDAPAuthResult ldapAuthResult = new LDAPAuthResult();
@@ -289,8 +279,6 @@ public class LDAPAuth implements Authenticator {
 
 		String authMethod = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_AUTH_METHOD);
-
-		String userDN = result.getName() + StringPool.COMMA + baseDN;
 
 		if (authMethod.equals(AUTH_METHOD_BIND)) {
 			try {
@@ -318,6 +306,8 @@ public class LDAPAuth implements Authenticator {
 			}
 		}
 		else if (authMethod.equals(AUTH_METHOD_PASSWORD_COMPARE)) {
+			Attribute userPassword = attrs.get("userPassword");
+
 			if (userPassword != null) {
 				String ldapPassword = new String((byte[])userPassword.get());
 
@@ -343,7 +333,7 @@ public class LDAPAuth implements Authenticator {
 					_log.error(
 						"LDAP password " + ldapPassword +
 							" does not match with given password " +
-								encryptedPassword + " for user id " + userId);
+								encryptedPassword + " for userDN " + userDN);
 				}
 			}
 		}
