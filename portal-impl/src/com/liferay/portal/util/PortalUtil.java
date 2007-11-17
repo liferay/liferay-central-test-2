@@ -103,6 +103,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import java.rmi.RemoteException;
+
 import java.security.Key;
 
 import java.util.Arrays;
@@ -219,7 +220,8 @@ public class PortalUtil {
 		}
 	}
 
-	public static String createSecureProxyURL(String url, Key key, boolean secure) {
+	public static String createSecureProxyURL(
+		String url, Key key, boolean secure) {
 
 		// Use this method to fetch external content that may not be available
 		// in secure mode. See how the Weather portlet fetches images.

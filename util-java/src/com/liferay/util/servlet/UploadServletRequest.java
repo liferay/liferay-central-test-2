@@ -265,7 +265,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 		}
 		else {
 			return null;
-		}		
+		}
 	}
 
 	public void cleanUp() {

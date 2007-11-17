@@ -154,10 +154,10 @@ public class UploadPortletRequest extends HttpServletRequestWrapper {
 			return true;
 		}
 		else {
-			return formField.booleanValue();			
+			return formField.booleanValue();
 		}
 	}
-	
+
 	public void cleanUp() {
 		_req.cleanUp();
 	}

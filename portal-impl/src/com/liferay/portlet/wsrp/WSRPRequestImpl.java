@@ -22,8 +22,19 @@
 
 package com.liferay.portlet.wsrp;
 
+import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.wsrp.util.WSRPUtil;
+import com.liferay.util.CollectionFactory;
+import com.liferay.util.FileUtil;
+import com.liferay.util.servlet.UploadPortletRequest;
+
 import java.io.File;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -36,6 +47,7 @@ import java.util.Set;
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 
 import oasis.names.tc.wsrp.v1.types.ClientData;
@@ -55,16 +67,6 @@ import org.apache.wsrp4j.util.Constants;
 import org.apache.wsrp4j.util.LocaleHelper;
 import org.apache.wsrp4j.util.Modes;
 import org.apache.wsrp4j.util.WindowStates;
-
-import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.wsrp.util.WSRPUtil;
-import com.liferay.util.CollectionFactory;
-import com.liferay.util.FileUtil;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 /**
  * <a href="WSRPRequestImpl.java.html"> <b><i>View Source</i></b></a>
@@ -288,60 +290,60 @@ public class WSRPRequestImpl extends GenericWSRPBaseRequestImpl implements
 
 		ArrayList formParams = new ArrayList();
 		ArrayList uploadContexts = new ArrayList();
-		
-		HttpServletRequest httpReq = 
+
+		HttpServletRequest httpReq =
 			PortalUtil.getHttpServletRequest(_portletRequest);
-		
+
 		String contentType = httpReq.getContentType();
-		
+
 		if (contentType != null &&
 				contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA) &&
 				!renderPhase) {
 
 			// process file uploads
-			
+
 			ActionRequest actionRequest = (ActionRequest)_portletRequest;
-			
-			UploadPortletRequest upr = 
+
+			UploadPortletRequest upr =
 				PortalUtil.getUploadPortletRequest(actionRequest);
-			
-			Enumeration paramNames = 
+
+			Enumeration paramNames =
 				upr.getParameterNames();
-			
+
 			while (paramNames.hasMoreElements()) {
 				String name = (String)paramNames.nextElement();
-				
+
 				if (_isReservedParameter(name)) {
 					continue;
 				}
-				
+
 				if (upr.isFormField(name)) {
 					_addFormField(formParams, name, upr.getParameterValues(name));
 				}
 				else {
 					UploadContext uploadContext = new UploadContext();
-					
+
 					String partContentType = upr.getContentType(name);
 
 					uploadContext.setMimeType(partContentType);
-					
+
 					StringMaker sm = new StringMaker();
-					
+
 					sm.append("form-data; ");
 					sm.append("name=");
-					sm.append(name); 
+					sm.append(name);
 					sm.append("; filename=");
 					sm.append(upr.getFileName(name));
-					
+
 					NamedString[] mimeAttributes = {new NamedString()};
 					mimeAttributes[0].setName("Content-Disposition");
 					mimeAttributes[0].setValue(sm.toString());
-	
+
 					uploadContext.setMimeAttributes(mimeAttributes);
-					
+
 					File file = upr.getFile(name);
 					byte[] fileBytes = null;
-					
+
 					try {
 						fileBytes = FileUtil.getBytes(file);
 					}
@@ -349,13 +351,13 @@ public class WSRPRequestImpl extends GenericWSRPBaseRequestImpl implements
 						throw new IllegalStateException(
 								"Error reading multi-part file", e);
 					}
-					
+
 					if (fileBytes == null) {
 						continue;
 					}
-					
+
 					uploadContext.setUploadData(fileBytes);
-					
+
 					uploadContexts.add(uploadContext);
 				}
 			}
@@ -365,14 +367,14 @@ public class WSRPRequestImpl extends GenericWSRPBaseRequestImpl implements
 		}
 
 		int formParamsSize = formParams.size();
-		
+
 		if (formParamsSize > 0) {
 			_formParameters = new NamedString[formParamsSize];
 			formParams.toArray(_formParameters);
 		}
 
 		int uploadContextsSize = uploadContexts.size();
-		
+
 		if (uploadContextsSize > 0) {
 			_uploadContexts = new UploadContext[uploadContextsSize];
 			uploadContexts.toArray(_uploadContexts);
@@ -382,9 +384,9 @@ public class WSRPRequestImpl extends GenericWSRPBaseRequestImpl implements
 			_logger.exit(Logger.TRACE_HIGH, MN);
 		}
 	}
-	
+
 	private void _addFormFields(List formParams) {
-		Enumeration paramNames = 
+		Enumeration paramNames =
 			_portletRequest.getParameterNames();
 
 		while (paramNames.hasMoreElements()) {
@@ -408,9 +410,9 @@ public class WSRPRequestImpl extends GenericWSRPBaseRequestImpl implements
 
 			formParams.add(paramPair);
 		}
-	
+
 	}
-	
+
 	private boolean _isReservedParameter(String name) {
 		if (Constants.isWsrpURLParam(name)
 				|| name.equals(WSRPProxyPortlet.NAVIGATIONAL_STATE)
@@ -432,7 +434,7 @@ public class WSRPRequestImpl extends GenericWSRPBaseRequestImpl implements
 	private NamedString[] _formParameters = null;
 
 	private String _interactionState = null;
-	
+
 	private UploadContext[] _uploadContexts = null;
 
 	private String _currentMode = null;

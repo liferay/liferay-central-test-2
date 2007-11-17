@@ -22,7 +22,13 @@
 
 package com.liferay.portlet.wsrp;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.util.Encryptor;
+import com.liferay.util.axis.SimpleHTTPSender;
+
 import java.security.Key;
+
 import java.util.Iterator;
 import java.util.Map;
 
@@ -36,11 +42,6 @@ import org.apache.wsrp4j.producer.util.Base64;
 import org.apache.wsrp4j.util.Constants;
 import org.apache.wsrp4j.util.Modes;
 import org.apache.wsrp4j.util.WindowStates;
-
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.util.Encryptor;
-import com.liferay.util.axis.SimpleHTTPSender;
 
 /**
  * <a href="URLGeneratorImpl.java.html"><b><i>View Source</i></b></a>
@@ -68,7 +69,7 @@ public class URLGeneratorImpl implements URLGenerator {
 				byte[] paramValueBytes = Encryptor.encryptRaw(key, paramValue);
 
 				paramValue = Base64.encode(paramValueBytes);
-				
+
 				url.append(paramValue);
 			}
 			catch (Exception e) {
@@ -308,7 +309,7 @@ public class URLGeneratorImpl implements URLGenerator {
 	private RenderResponse _renderResponse = null;
 
 	private Map _consumerParameters = null;
-	
+
 	private Key _key = null;
 
 }

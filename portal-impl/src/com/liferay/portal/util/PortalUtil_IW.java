@@ -594,13 +594,13 @@ public class PortalUtil_IW {
 	}
 
 	public org.dom4j.Document readDocumentFromURL(java.lang.String url)
-		throws java.io.IOException, org.dom4j.DocumentException {
+		throws org.dom4j.DocumentException, java.io.IOException {
 		return PortalUtil.readDocumentFromURL(url);
 	}
 
 	public org.dom4j.Document readDocumentFromURL(java.lang.String url,
 		boolean validate)
-		throws java.io.IOException, org.dom4j.DocumentException {
+		throws org.dom4j.DocumentException, java.io.IOException {
 		return PortalUtil.readDocumentFromURL(url, validate);
 	}
 
@@ -666,7 +666,7 @@ public class PortalUtil_IW {
 	}
 
 	public void storePreferences(javax.portlet.PortletPreferences prefs)
-		throws javax.portlet.ValidatorException, java.io.IOException {
+		throws java.io.IOException, javax.portlet.ValidatorException {
 		PortalUtil.storePreferences(prefs);
 	}
 
