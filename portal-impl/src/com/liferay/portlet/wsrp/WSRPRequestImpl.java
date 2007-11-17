@@ -349,7 +349,7 @@ public class WSRPRequestImpl extends GenericWSRPBaseRequestImpl implements
 					}
 					catch (IOException e) {
 						throw new IllegalStateException(
-								"Error reading multi-part file", e);
+							"Error reading multi-part file");
 					}
 
 					if (fileBytes == null) {
