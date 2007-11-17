@@ -41,17 +41,15 @@ public class Html {
 			return null;
 		}
 
+		// escape using XSS recommendations from
+		// http://www.owasp.org/index.php/Cross_Site_Scripting#How_to_Protect_Yourself
+
 		StringMaker sm = new StringMaker(text.length());
 
 		for (int i = 0; i < text.length(); i++) {
 			char c = text.charAt(i);
 
 			switch (c) {
-				case '&':
-					sm.append("&amp;");
-
-					break;
-
 				case '<':
 					sm.append("&lt;");
 
@@ -62,7 +60,12 @@ public class Html {
 
 					break;
 
-				case '\"':
+				case '&':
+					sm.append("&amp;");
+
+					break;
+
+				case '"':
 					sm.append("&#034;");
 
 					break;
@@ -72,8 +75,38 @@ public class Html {
 
 					break;
 
-				case ',':
-					sm.append("&#044;");
+				case '(':
+					sm.append("&#040;");
+
+					break;
+
+				case ')':
+					sm.append("&#041;");
+
+					break;
+
+				case '#':
+					sm.append("&#035;");
+
+					break;
+
+				case '%':
+					sm.append("&#037;");
+
+					break;
+
+				case ';':
+					sm.append("&#059;");
+
+					break;
+
+				case '+':
+					sm.append("&#043;");
+
+					break;
+
+				case '-':
+					sm.append("&#045;");
 
 					break;
 
@@ -100,12 +133,16 @@ public class Html {
 
 		text = StringUtil.replace(text, "&lt;", "<");
 		text = StringUtil.replace(text, "&gt;", ">");
+		text = StringUtil.replace(text, "&amp;", "&");
 		text = StringUtil.replace(text, "&#034;", "\"");
-		text = StringUtil.replace(text, "&#038;", "&");
-		text = StringUtil.replace(text, "&#042;", "*");
-		text = StringUtil.replace(text, "&#047;", "/");
-		text = StringUtil.replace(text, "&#058;", ":");
-		text = StringUtil.replace(text, "&#063;", "?");
+		text = StringUtil.replace(text, "&#039;", "'");
+		text = StringUtil.replace(text, "&#040;", "(");
+		text = StringUtil.replace(text, "&#041;", ")");
+		text = StringUtil.replace(text, "&#035;", "#");
+		text = StringUtil.replace(text, "&#037;", "%");
+		text = StringUtil.replace(text, "&#059;", ";");
+		text = StringUtil.replace(text, "&#043;", "+");
+		text = StringUtil.replace(text, "&#045;", "-");
 
 		return text;
 	}
