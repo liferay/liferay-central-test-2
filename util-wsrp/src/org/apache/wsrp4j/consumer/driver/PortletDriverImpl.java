@@ -349,7 +349,7 @@ public class PortletDriverImpl implements PortletDriver {
 		interactionParams.setInteractionState(actionRequest
 				.getInteractionState());
 		interactionParams.setFormParameters(actionRequest.getFormParameters());
-		interactionParams.setUploadContexts(null);
+		interactionParams.setUploadContexts(actionRequest.getUploadContexts());
 		interactionParams.setExtensions(null);
 
 		return interactionParams;

@@ -17,6 +17,7 @@
 package org.apache.wsrp4j.consumer;
 
 import oasis.names.tc.wsrp.v1.types.NamedString;
+import oasis.names.tc.wsrp.v1.types.UploadContext;
 
 /**
  * This is the abstraction for a interaction request at a integrated
@@ -37,4 +38,6 @@ public interface InteractionRequest extends WSRPBaseRequest {
 	 * @return Array of name/value pairs
 	 **/
 	public NamedString[] getFormParameters();
+	
+	public UploadContext[] getUploadContexts();
 }

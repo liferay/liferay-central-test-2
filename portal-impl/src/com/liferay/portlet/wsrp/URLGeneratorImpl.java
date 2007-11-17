@@ -22,14 +22,10 @@
 
 package com.liferay.portlet.wsrp;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.util.axis.SimpleHTTPSender;
-
+import java.security.Key;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.portlet.PortletConfig;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderResponse;
@@ -37,10 +33,14 @@ import javax.portlet.WindowState;
 
 import org.apache.wsrp4j.consumer.URLGenerator;
 import org.apache.wsrp4j.producer.util.Base64;
-import org.apache.wsrp4j.producer.util.ObjectSerializer;
 import org.apache.wsrp4j.util.Constants;
 import org.apache.wsrp4j.util.Modes;
 import org.apache.wsrp4j.util.WindowStates;
+
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.util.Encryptor;
+import com.liferay.util.axis.SimpleHTTPSender;
 
 /**
  * <a href="URLGeneratorImpl.java.html"><b><i>View Source</i></b></a>
@@ -50,7 +50,7 @@ import org.apache.wsrp4j.util.WindowStates;
  */
 public class URLGeneratorImpl implements URLGenerator {
 
-	public static String getResourceProxyURL(Map params) {
+	public static String getResourceProxyURL(Map params, Key key) {
 		StringMaker url = new StringMaker();
 
 		url.append("/wsrp/resource_proxy/get");
@@ -63,8 +63,12 @@ public class URLGeneratorImpl implements URLGenerator {
 			url.append(Constants.PARAMS_START);
 			url.append("url");
 			url.append(Constants.EQUALS);
+
 			try {
-				paramValue = Base64.encode(ObjectSerializer.serialize(paramValue));
+				byte[] paramValueBytes = Encryptor.encryptRaw(key, paramValue);
+
+				paramValue = Base64.encode(paramValueBytes);
+				
 				url.append(paramValue);
 			}
 			catch (Exception e) {
@@ -73,8 +77,11 @@ public class URLGeneratorImpl implements URLGenerator {
 		}
 
 		String cookie = SimpleHTTPSender.getCurrentCookie();
+
 		try {
-			cookie = Base64.encode(ObjectSerializer.serialize(cookie));
+			byte[] cookieBytes = Encryptor.encryptRaw(key, cookie);
+
+			cookie = Base64.encode(cookieBytes);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -89,29 +96,9 @@ public class URLGeneratorImpl implements URLGenerator {
 
 	}
 
-	public static URLGenerator getInstance(RenderResponse response,
-			PortletConfig config) {
-		if (response == null) {
-			throw new IllegalArgumentException("response must not be null");
-		}
-		if (config == null) {
-			throw new IllegalArgumentException("config must not be null");
-		}
-
-		if (_instance == null) {
-
-			_instance = new URLGeneratorImpl(response);
-
-		}
-		else {
-			_instance.setRenderResponse(response);
-		}
-
-		return _instance;
-	}
-
-	private URLGeneratorImpl(RenderResponse response) {
-		this._renderResponse = response;
+	public URLGeneratorImpl(RenderResponse response, Key key) {
+		_renderResponse = response;
+		_key = key;
 	}
 
 	public void setRenderResponse(RenderResponse response) {
@@ -243,7 +230,7 @@ public class URLGeneratorImpl implements URLGenerator {
 	}
 
 	public String getResourceURL(Map params) {
-		return getResourceProxyURL(params);
+		return getResourceProxyURL(params, _key);
 	}
 
 	public String getNamespacedToken(String token) {
@@ -321,5 +308,7 @@ public class URLGeneratorImpl implements URLGenerator {
 	private RenderResponse _renderResponse = null;
 
 	private Map _consumerParameters = null;
+	
+	private Key _key = null;
 
 }

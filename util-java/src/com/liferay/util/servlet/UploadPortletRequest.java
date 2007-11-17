@@ -143,6 +143,21 @@ public class UploadPortletRequest extends HttpServletRequestWrapper {
 		return parameterValues;
 	}
 
+	public boolean isFormField(String name) {
+		Boolean formField = _req.isFormField(_namespace + name);
+
+		if (formField == null) {
+			formField = _req.isFormField(name);
+		}
+
+		if (formField == null) {
+			return true;
+		}
+		else {
+			return formField.booleanValue();			
+		}
+	}
+	
 	public void cleanUp() {
 		_req.cleanUp();
 	}

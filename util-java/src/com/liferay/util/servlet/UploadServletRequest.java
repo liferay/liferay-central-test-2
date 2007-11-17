@@ -257,6 +257,17 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 		return _params;
 	}
 
+	public Boolean isFormField(String name) {
+		LiferayFileItem[] fileItems = (LiferayFileItem[])_params.get(name);
+
+		if ((fileItems != null) && (fileItems.length > 0)) {
+			return new Boolean(fileItems[0].isFormField());
+		}
+		else {
+			return null;
+		}		
+	}
+
 	public void cleanUp() {
 		if ((_params != null) && !_params.isEmpty()) {
 			Iterator itr = _params.values().iterator();

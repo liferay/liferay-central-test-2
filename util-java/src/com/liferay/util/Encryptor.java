@@ -120,7 +120,7 @@ public class Encryptor {
 		return (Provider)providerClass.newInstance();
 	}
 
-	public static String decrypt(Key key, String encryptedString)
+	public static String decryptRaw(Key key, byte[] encryptedBytes)
 		throws EncryptorException {
 
 		try {
@@ -129,7 +129,6 @@ public class Encryptor {
 			Cipher cipher = Cipher.getInstance(key.getAlgorithm());
 			cipher.init(Cipher.DECRYPT_MODE, key);
 
-			byte[] encryptedBytes = Base64.decode(encryptedString);
 			byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
 
 			String decryptedString = new String(decryptedBytes, ENCODING);
@@ -141,6 +140,14 @@ public class Encryptor {
 		}
 	}
 
+	public static String decrypt(Key key, String encryptedString)
+		throws EncryptorException {
+
+		byte[] encryptedBytes = Base64.decode(encryptedString);
+		
+		return decryptRaw(key, encryptedBytes);
+	}
+	
 	public static String digest(String text) {
 		return Digester.digest(text);
 	}
@@ -149,9 +156,9 @@ public class Encryptor {
 		return Digester.digest(algorithm, text);
 	}
 
-	public static String encrypt(Key key, String plainText)
+	public static byte[] encryptRaw(Key key, String plainText)
 		throws EncryptorException {
-
+		
 		try {
 			Security.addProvider(getProvider());
 
@@ -162,13 +169,20 @@ public class Encryptor {
 			byte[] decryptedBytes = plainText.getBytes(ENCODING);
 			byte[] encryptedBytes = cipher.doFinal(decryptedBytes);
 
-			String encryptedString = Base64.encode(encryptedBytes);
-
-			return encryptedString;
+			return encryptedBytes;
 		}
 		catch (Exception e) {
 			throw new EncryptorException(e);
 		}
+		
+	}
+	
+	public static String encrypt(Key key, String plainText)
+		throws EncryptorException {
+		
+		byte[] encryptedBytes = encryptRaw(key, plainText);
+		
+		return Base64.encode(encryptedBytes);
 	}
 
 	private static Log _log = LogFactory.getLog(Encryptor.class);

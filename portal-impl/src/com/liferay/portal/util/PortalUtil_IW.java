@@ -43,8 +43,8 @@ public class PortalUtil_IW {
 	}
 
 	public java.lang.String createSecureProxyURL(java.lang.String url,
-		boolean secure) {
-		return PortalUtil.createSecureProxyURL(url, secure);
+		java.security.Key key, boolean secure) {
+		return PortalUtil.createSecureProxyURL(url, key, secure);
 	}
 
 	public java.lang.String getCDNHost() {
@@ -594,13 +594,13 @@ public class PortalUtil_IW {
 	}
 
 	public org.dom4j.Document readDocumentFromURL(java.lang.String url)
-		throws org.dom4j.DocumentException, java.io.IOException {
+		throws java.io.IOException, org.dom4j.DocumentException {
 		return PortalUtil.readDocumentFromURL(url);
 	}
 
 	public org.dom4j.Document readDocumentFromURL(java.lang.String url,
 		boolean validate)
-		throws org.dom4j.DocumentException, java.io.IOException {
+		throws java.io.IOException, org.dom4j.DocumentException {
 		return PortalUtil.readDocumentFromURL(url, validate);
 	}
 
@@ -666,7 +666,7 @@ public class PortalUtil_IW {
 	}
 
 	public void storePreferences(javax.portlet.PortletPreferences prefs)
-		throws java.io.IOException, javax.portlet.ValidatorException {
+		throws javax.portlet.ValidatorException, java.io.IOException {
 		PortalUtil.storePreferences(prefs);
 	}
 

@@ -22,20 +22,8 @@
 
 package com.liferay.portlet.wsrp;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.wsrp.util.WSRPUtil;
-import com.liferay.portlet.StrutsPortlet;
-import com.liferay.util.servlet.SessionMessages;
-
 import java.io.IOException;
-
 import java.security.Principal;
-
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -86,6 +74,18 @@ import org.apache.wsrp4j.exception.WSRPXHelper;
 import org.apache.wsrp4j.log.LogManager;
 import org.apache.wsrp4j.log.Logger;
 import org.apache.wsrp4j.util.ParameterChecker;
+
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.wsrp.util.WSRPUtil;
+import com.liferay.portlet.StrutsPortlet;
+import com.liferay.util.servlet.SessionMessages;
 
 /**
  * <a href="WSRPProxyPortlet.java.html"><b><i>View Source</i></b></a>
@@ -175,7 +175,7 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 			PortletDriver portletDriver = _consumerEnv
 					.getPortletDriverRegistry().getPortletDriver(portlet);
 			InteractionRequest actionRequest = new WSRPRequestImpl(
-					windowSession, request);
+					windowSession, request, false);
 
 			// do the actual call and check the response from the producer
 			BlockingInteractionResponse response = null;
@@ -317,13 +317,23 @@ public class WSRPProxyPortlet extends StrutsPortlet {
 			PortletDriver portletDriver = _consumerEnv
 					.getPortletDriverRegistry().getPortletDriver(portlet);
 			MarkupRequest markupRequest = new WSRPRequestImpl(windowSession,
-					request);
+					request, true);
 
 			// feed the url generator with the current response
 			synchronized (_urlGenLock) {
 				// update url generator
-				URLGenerator urlGenerator = URLGeneratorImpl.getInstance(
-						renderResponse, getPortletConfig());
+
+				Company company = null;
+				
+				try {
+					company = PortalUtil.getCompany(request);
+				}
+				catch (Exception e) {
+					throw new PortletException(e); 
+				}
+				
+				URLGenerator urlGenerator = new URLGeneratorImpl(
+						renderResponse, company.getKeyObj());
 				URLTemplateComposer templateComposer = _consumerEnv
 						.getTemplateComposer();
 				if (templateComposer != null) {
