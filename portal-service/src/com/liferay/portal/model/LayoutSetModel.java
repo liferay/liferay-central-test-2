@@ -104,4 +104,6 @@ public interface LayoutSetModel extends BaseModel {
 	public String getVirtualHost();
 
 	public void setVirtualHost(String virtualHost);
+
+	public LayoutSet toEscapedModel();
 }

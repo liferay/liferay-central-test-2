@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -64,15 +68,6 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table PortletPreferences (portletPreferencesId LONG not null primary key,ownerId LONG,ownerType INTEGER,plid LONG,portletId VARCHAR(200) null,preferences TEXT null)";
 	public static String TABLE_SQL_DROP = "drop table PortletPreferences";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PortletPreferences"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_PORTLETID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PortletPreferences.portletId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PREFERENCES = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PortletPreferences.preferences"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PortletPreferencesModel"));
 
@@ -140,10 +135,6 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 				((portletId != null) && (_portletId == null)) ||
 				((portletId != null) && (_portletId != null) &&
 				!portletId.equals(_portletId))) {
-			if (!XSS_ALLOW_PORTLETID) {
-				portletId = XSSUtil.strip(portletId);
-			}
-
 			_portletId = portletId;
 		}
 	}
@@ -157,12 +148,26 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 				((preferences != null) && (_preferences == null)) ||
 				((preferences != null) && (_preferences != null) &&
 				!preferences.equals(_preferences))) {
-			if (!XSS_ALLOW_PREFERENCES) {
-				preferences = XSSUtil.strip(preferences);
-			}
-
 			_preferences = preferences;
 		}
+	}
+
+	public PortletPreferences toEscapedModel() {
+		PortletPreferences model = new PortletPreferencesImpl();
+		model.setPortletPreferencesId(getPortletPreferencesId());
+		model.setOwnerId(getOwnerId());
+		model.setOwnerType(getOwnerType());
+		model.setPlid(getPlid());
+		model.setPortletId(Html.escape(getPortletId()));
+		model.setPreferences(Html.escape(getPreferences()));
+
+		if (true) {
+			model = (PortletPreferences)Proxy.newProxyInstance(PortletPreferences.class.getClassLoader(),
+					new Class[] { PortletPreferences.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

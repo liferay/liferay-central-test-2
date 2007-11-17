@@ -22,14 +22,18 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -65,11 +69,6 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table PasswordTracker (passwordTrackerId LONG not null primary key,userId LONG,createDate DATE null,password_ VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table PasswordTracker";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PasswordTracker"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PasswordTracker.password"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PasswordTrackerModel"));
 
@@ -130,12 +129,24 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 				((password != null) && (_password == null)) ||
 				((password != null) && (_password != null) &&
 				!password.equals(_password))) {
-			if (!XSS_ALLOW_PASSWORD) {
-				password = XSSUtil.strip(password);
-			}
-
 			_password = password;
 		}
+	}
+
+	public PasswordTracker toEscapedModel() {
+		PasswordTracker model = new PasswordTrackerImpl();
+		model.setPasswordTrackerId(getPasswordTrackerId());
+		model.setUserId(getUserId());
+		model.setCreateDate(getCreateDate());
+		model.setPassword(Html.escape(getPassword()));
+
+		if (true) {
+			model = (PasswordTracker)Proxy.newProxyInstance(PasswordTracker.class.getClassLoader(),
+					new Class[] { PasswordTracker.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

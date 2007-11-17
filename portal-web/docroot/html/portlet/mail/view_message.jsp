@@ -52,7 +52,7 @@ boolean header = ParamUtil.getBoolean(request, "header");
 				<liferay-ui:message key="from" />:&nbsp;
 			</td>
 			<td>
-				<%= Html.escape(InternetAddressUtil.toString(from), false) %>
+				<%= Html.escape(InternetAddressUtil.toString(from)) %>
 			</td>
 		</tr>
 
@@ -62,7 +62,7 @@ boolean header = ParamUtil.getBoolean(request, "header");
 					<liferay-ui:message key="to" />:&nbsp;
 				</td>
 				<td>
-					<%= Html.escape(InternetAddressUtil.toString(to), false) %>
+					<%= Html.escape(InternetAddressUtil.toString(to)) %>
 				</td>
 			</tr>
 		</c:if>
@@ -73,7 +73,7 @@ boolean header = ParamUtil.getBoolean(request, "header");
 					<liferay-ui:message key="cc" />:&nbsp;
 				</td>
 				<td>
-					<%= Html.escape(InternetAddressUtil.toString(cc), false) %>
+					<%= Html.escape(InternetAddressUtil.toString(cc)) %>
 				</td>
 			</tr>
 		</c:if>
@@ -84,7 +84,7 @@ boolean header = ParamUtil.getBoolean(request, "header");
 					<liferay-ui:message key="bcc" />:&nbsp;
 				</td>
 				<td>
-					<%= Html.escape(InternetAddressUtil.toString(bcc), false) %>
+					<%= Html.escape(InternetAddressUtil.toString(bcc)) %>
 				</td>
 			</tr>
 		</c:if>

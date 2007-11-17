@@ -78,4 +78,6 @@ public interface TagsEntryModel extends BaseModel {
 	public String getName();
 
 	public void setName(String name);
+
+	public TagsEntry toEscapedModel();
 }

@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -77,30 +82,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(300) null,title VARCHAR(300) null,description STRING null,version DOUBLE,size_ INTEGER,readCount INTEGER,extraSettings TEXT null)";
 	public static String TABLE_SQL_DROP = "drop table DLFileEntry";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.uuid"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_VERSIONUSERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.versionUserName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.title"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.description"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_EXTRASETTINGS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.extraSettings"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileEntryModel"));
 
@@ -168,10 +149,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -195,10 +172,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 				((versionUserName != null) && (_versionUserName == null)) ||
 				((versionUserName != null) && (_versionUserName != null) &&
 				!versionUserName.equals(_versionUserName))) {
-			if (!XSS_ALLOW_VERSIONUSERNAME) {
-				versionUserName = XSSUtil.strip(versionUserName);
-			}
-
 			_versionUserName = versionUserName;
 		}
 	}
@@ -247,10 +220,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -263,10 +232,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 		if (((title == null) && (_title != null)) ||
 				((title != null) && (_title == null)) ||
 				((title != null) && (_title != null) && !title.equals(_title))) {
-			if (!XSS_ALLOW_TITLE) {
-				title = XSSUtil.strip(title);
-			}
-
 			_title = title;
 		}
 	}
@@ -280,10 +245,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
 	}
@@ -327,12 +288,37 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 				((extraSettings != null) && (_extraSettings == null)) ||
 				((extraSettings != null) && (_extraSettings != null) &&
 				!extraSettings.equals(_extraSettings))) {
-			if (!XSS_ALLOW_EXTRASETTINGS) {
-				extraSettings = XSSUtil.strip(extraSettings);
-			}
-
 			_extraSettings = extraSettings;
 		}
+	}
+
+	public DLFileEntry toEscapedModel() {
+		DLFileEntry model = new DLFileEntryImpl();
+		model.setUuid(Html.escape(getUuid()));
+		model.setFileEntryId(getFileEntryId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setVersionUserId(getVersionUserId());
+		model.setVersionUserName(Html.escape(getVersionUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setFolderId(getFolderId());
+		model.setName(Html.escape(getName()));
+		model.setTitle(Html.escape(getTitle()));
+		model.setDescription(Html.escape(getDescription()));
+		model.setVersion(getVersion());
+		model.setSize(getSize());
+		model.setReadCount(getReadCount());
+		model.setExtraSettings(Html.escape(getExtraSettings()));
+
+		if (true) {
+			model = (DLFileEntry)Proxy.newProxyInstance(DLFileEntry.class.getClassLoader(),
+					new Class[] { DLFileEntry.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

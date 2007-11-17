@@ -22,14 +22,18 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Address;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -78,26 +82,6 @@ public class AddressModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Address (addressId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,street1 VARCHAR(75) null,street2 VARCHAR(75) null,street3 VARCHAR(75) null,city VARCHAR(75) null,zip VARCHAR(75) null,regionId LONG,countryId LONG,typeId INTEGER,mailing BOOLEAN,primary_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Address";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Address"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Address.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_STREET1 = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Address.street1"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_STREET2 = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Address.street2"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_STREET3 = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Address.street3"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CITY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Address.city"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ZIP = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Address.zip"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.AddressModel"));
 
@@ -155,10 +139,6 @@ public class AddressModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -218,10 +198,6 @@ public class AddressModelImpl extends BaseModelImpl {
 				((street1 != null) && (_street1 == null)) ||
 				((street1 != null) && (_street1 != null) &&
 				!street1.equals(_street1))) {
-			if (!XSS_ALLOW_STREET1) {
-				street1 = XSSUtil.strip(street1);
-			}
-
 			_street1 = street1;
 		}
 	}
@@ -235,10 +211,6 @@ public class AddressModelImpl extends BaseModelImpl {
 				((street2 != null) && (_street2 == null)) ||
 				((street2 != null) && (_street2 != null) &&
 				!street2.equals(_street2))) {
-			if (!XSS_ALLOW_STREET2) {
-				street2 = XSSUtil.strip(street2);
-			}
-
 			_street2 = street2;
 		}
 	}
@@ -252,10 +224,6 @@ public class AddressModelImpl extends BaseModelImpl {
 				((street3 != null) && (_street3 == null)) ||
 				((street3 != null) && (_street3 != null) &&
 				!street3.equals(_street3))) {
-			if (!XSS_ALLOW_STREET3) {
-				street3 = XSSUtil.strip(street3);
-			}
-
 			_street3 = street3;
 		}
 	}
@@ -268,10 +236,6 @@ public class AddressModelImpl extends BaseModelImpl {
 		if (((city == null) && (_city != null)) ||
 				((city != null) && (_city == null)) ||
 				((city != null) && (_city != null) && !city.equals(_city))) {
-			if (!XSS_ALLOW_CITY) {
-				city = XSSUtil.strip(city);
-			}
-
 			_city = city;
 		}
 	}
@@ -284,10 +248,6 @@ public class AddressModelImpl extends BaseModelImpl {
 		if (((zip == null) && (_zip != null)) ||
 				((zip != null) && (_zip == null)) ||
 				((zip != null) && (_zip != null) && !zip.equals(_zip))) {
-			if (!XSS_ALLOW_ZIP) {
-				zip = XSSUtil.strip(zip);
-			}
-
 			_zip = zip;
 		}
 	}
@@ -348,6 +308,36 @@ public class AddressModelImpl extends BaseModelImpl {
 		if (primary != _primary) {
 			_primary = primary;
 		}
+	}
+
+	public Address toEscapedModel() {
+		Address model = new AddressImpl();
+		model.setAddressId(getAddressId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setClassNameId(getClassNameId());
+		model.setClassPK(getClassPK());
+		model.setStreet1(Html.escape(getStreet1()));
+		model.setStreet2(Html.escape(getStreet2()));
+		model.setStreet3(Html.escape(getStreet3()));
+		model.setCity(Html.escape(getCity()));
+		model.setZip(Html.escape(getZip()));
+		model.setRegionId(getRegionId());
+		model.setCountryId(getCountryId());
+		model.setTypeId(getTypeId());
+		model.setMailing(getMailing());
+		model.setPrimary(getPrimary());
+
+		if (true) {
+			model = (Address)Proxy.newProxyInstance(Address.class.getClassLoader(),
+					new Class[] { Address.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

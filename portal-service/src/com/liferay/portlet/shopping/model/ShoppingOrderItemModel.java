@@ -90,4 +90,6 @@ public interface ShoppingOrderItemModel extends BaseModel {
 	public Date getShippedDate();
 
 	public void setShippedDate(Date shippedDate);
+
+	public ShoppingOrderItem toEscapedModel();
 }

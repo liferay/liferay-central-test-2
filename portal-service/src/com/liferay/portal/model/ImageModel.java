@@ -78,4 +78,6 @@ public interface ImageModel extends BaseModel {
 	public int getSize();
 
 	public void setSize(int size);
+
+	public Image toEscapedModel();
 }

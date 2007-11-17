@@ -22,11 +22,16 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.portlet.messageboards.model.MBMessageFlag;
+
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -60,9 +65,6 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table MBMessageFlag (messageFlagId LONG not null primary key,userId LONG,messageId LONG,flag INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table MBMessageFlag";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBMessageFlag"),
-			XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBMessageFlagModel"));
 
@@ -119,6 +121,22 @@ public class MBMessageFlagModelImpl extends BaseModelImpl {
 		if (flag != _flag) {
 			_flag = flag;
 		}
+	}
+
+	public MBMessageFlag toEscapedModel() {
+		MBMessageFlag model = new MBMessageFlagImpl();
+		model.setMessageFlagId(getMessageFlagId());
+		model.setUserId(getUserId());
+		model.setMessageId(getMessageId());
+		model.setFlag(getFlag());
+
+		if (true) {
+			model = (MBMessageFlag)Proxy.newProxyInstance(MBMessageFlag.class.getClassLoader(),
+					new Class[] { MBMessageFlag.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

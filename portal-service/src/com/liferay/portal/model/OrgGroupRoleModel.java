@@ -61,4 +61,6 @@ public interface OrgGroupRoleModel extends BaseModel {
 	public long getRoleId();
 
 	public void setRoleId(long roleId);
+
+	public OrgGroupRole toEscapedModel();
 }

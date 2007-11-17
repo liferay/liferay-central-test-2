@@ -56,4 +56,6 @@ public interface ClassNameModel extends BaseModel {
 	public String getValue();
 
 	public void setValue(String value);
+
+	public ClassName toEscapedModel();
 }

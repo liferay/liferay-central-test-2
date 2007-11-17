@@ -74,4 +74,6 @@ public interface PluginSettingModel extends BaseModel {
 	public boolean isActive();
 
 	public void setActive(boolean active);
+
+	public PluginSetting toEscapedModel();
 }

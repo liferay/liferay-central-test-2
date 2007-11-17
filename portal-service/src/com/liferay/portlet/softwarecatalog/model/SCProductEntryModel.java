@@ -114,4 +114,6 @@ public interface SCProductEntryModel extends BaseModel {
 	public String getRepoArtifactId();
 
 	public void setRepoArtifactId(String repoArtifactId);
+
+	public SCProductEntry toEscapedModel();
 }

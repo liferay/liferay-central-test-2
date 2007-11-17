@@ -78,4 +78,6 @@ public interface CountryModel extends BaseModel {
 	public boolean isActive();
 
 	public void setActive(boolean active);
+
+	public Country toEscapedModel();
 }

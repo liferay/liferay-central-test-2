@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -64,14 +68,6 @@ public class RoleModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Role_ (roleId LONG not null primary key,companyId LONG,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table Role_";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Role"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Role.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Role.description"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.RoleModel"));
 
@@ -138,10 +134,6 @@ public class RoleModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -155,10 +147,6 @@ public class RoleModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
 	}
@@ -171,6 +159,24 @@ public class RoleModelImpl extends BaseModelImpl {
 		if (type != _type) {
 			_type = type;
 		}
+	}
+
+	public Role toEscapedModel() {
+		Role model = new RoleImpl();
+		model.setRoleId(getRoleId());
+		model.setCompanyId(getCompanyId());
+		model.setClassNameId(getClassNameId());
+		model.setClassPK(getClassPK());
+		model.setName(Html.escape(getName()));
+		model.setDescription(Html.escape(getDescription()));
+		model.setType(getType());
+
+		if (true) {
+			model = (Role)Proxy.newProxyInstance(Role.class.getClassLoader(),
+					new Class[] { Role.class }, new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

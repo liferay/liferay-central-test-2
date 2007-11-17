@@ -124,4 +124,6 @@ public interface ShoppingCouponModel extends BaseModel {
 	public String getDiscountType();
 
 	public void setDiscountType(String discountType);
+
+	public ShoppingCoupon toEscapedModel();
 }

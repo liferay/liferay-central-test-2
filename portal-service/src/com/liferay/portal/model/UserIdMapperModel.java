@@ -68,4 +68,6 @@ public interface UserIdMapperModel extends BaseModel {
 	public String getExternalUserId();
 
 	public void setExternalUserId(String externalUserId);
+
+	public UserIdMapper toEscapedModel();
 }

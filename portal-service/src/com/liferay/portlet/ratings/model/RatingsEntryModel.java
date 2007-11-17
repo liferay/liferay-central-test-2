@@ -86,4 +86,6 @@ public interface RatingsEntryModel extends BaseModel {
 	public double getScore();
 
 	public void setScore(double score);
+
+	public RatingsEntry toEscapedModel();
 }

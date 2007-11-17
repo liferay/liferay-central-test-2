@@ -96,4 +96,6 @@ public interface ShoppingCartModel extends BaseModel {
 	public boolean isInsure();
 
 	public void setInsure(boolean insure);
+
+	public ShoppingCart toEscapedModel();
 }

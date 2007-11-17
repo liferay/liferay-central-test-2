@@ -102,4 +102,6 @@ public interface GroupModel extends BaseModel {
 	public boolean isActive();
 
 	public void setActive(boolean active);
+
+	public Group toEscapedModel();
 }

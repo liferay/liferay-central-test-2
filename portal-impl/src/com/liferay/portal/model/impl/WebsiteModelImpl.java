@@ -22,14 +22,18 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -71,14 +75,6 @@ public class WebsiteModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Website (websiteId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,url STRING null,typeId INTEGER,primary_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Website";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Website"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Website.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_URL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Website.url"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.WebsiteModel"));
 
@@ -136,10 +132,6 @@ public class WebsiteModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -198,10 +190,6 @@ public class WebsiteModelImpl extends BaseModelImpl {
 		if (((url == null) && (_url != null)) ||
 				((url != null) && (_url == null)) ||
 				((url != null) && (_url != null) && !url.equals(_url))) {
-			if (!XSS_ALLOW_URL) {
-				url = XSSUtil.strip(url);
-			}
-
 			_url = url;
 		}
 	}
@@ -228,6 +216,29 @@ public class WebsiteModelImpl extends BaseModelImpl {
 		if (primary != _primary) {
 			_primary = primary;
 		}
+	}
+
+	public Website toEscapedModel() {
+		Website model = new WebsiteImpl();
+		model.setWebsiteId(getWebsiteId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setClassNameId(getClassNameId());
+		model.setClassPK(getClassPK());
+		model.setUrl(Html.escape(getUrl()));
+		model.setTypeId(getTypeId());
+		model.setPrimary(getPrimary());
+
+		if (true) {
+			model = (Website)Proxy.newProxyInstance(Website.class.getClassLoader(),
+					new Class[] { Website.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

@@ -100,4 +100,6 @@ public interface SCProductVersionModel extends BaseModel {
 	public boolean isRepoStoreArtifact();
 
 	public void setRepoStoreArtifact(boolean repoStoreArtifact);
+
+	public SCProductVersion toEscapedModel();
 }

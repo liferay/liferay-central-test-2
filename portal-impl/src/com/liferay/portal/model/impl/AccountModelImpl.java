@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Account;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -76,38 +80,6 @@ public class AccountModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Account_ (accountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentAccountId LONG,name VARCHAR(75) null,legalName VARCHAR(75) null,legalId VARCHAR(75) null,legalType VARCHAR(75) null,sicCode VARCHAR(75) null,tickerSymbol VARCHAR(75) null,industry VARCHAR(75) null,type_ VARCHAR(75) null,size_ VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table Account_";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LEGALNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.legalName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LEGALID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.legalId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LEGALTYPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.legalType"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SICCODE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.sicCode"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TICKERSYMBOL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.tickerSymbol"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_INDUSTRY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.industry"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.type"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SIZE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Account.size"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.AccountModel"));
 
@@ -165,10 +137,6 @@ public class AccountModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -217,10 +185,6 @@ public class AccountModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -234,10 +198,6 @@ public class AccountModelImpl extends BaseModelImpl {
 				((legalName != null) && (_legalName == null)) ||
 				((legalName != null) && (_legalName != null) &&
 				!legalName.equals(_legalName))) {
-			if (!XSS_ALLOW_LEGALNAME) {
-				legalName = XSSUtil.strip(legalName);
-			}
-
 			_legalName = legalName;
 		}
 	}
@@ -251,10 +211,6 @@ public class AccountModelImpl extends BaseModelImpl {
 				((legalId != null) && (_legalId == null)) ||
 				((legalId != null) && (_legalId != null) &&
 				!legalId.equals(_legalId))) {
-			if (!XSS_ALLOW_LEGALID) {
-				legalId = XSSUtil.strip(legalId);
-			}
-
 			_legalId = legalId;
 		}
 	}
@@ -268,10 +224,6 @@ public class AccountModelImpl extends BaseModelImpl {
 				((legalType != null) && (_legalType == null)) ||
 				((legalType != null) && (_legalType != null) &&
 				!legalType.equals(_legalType))) {
-			if (!XSS_ALLOW_LEGALTYPE) {
-				legalType = XSSUtil.strip(legalType);
-			}
-
 			_legalType = legalType;
 		}
 	}
@@ -285,10 +237,6 @@ public class AccountModelImpl extends BaseModelImpl {
 				((sicCode != null) && (_sicCode == null)) ||
 				((sicCode != null) && (_sicCode != null) &&
 				!sicCode.equals(_sicCode))) {
-			if (!XSS_ALLOW_SICCODE) {
-				sicCode = XSSUtil.strip(sicCode);
-			}
-
 			_sicCode = sicCode;
 		}
 	}
@@ -302,10 +250,6 @@ public class AccountModelImpl extends BaseModelImpl {
 				((tickerSymbol != null) && (_tickerSymbol == null)) ||
 				((tickerSymbol != null) && (_tickerSymbol != null) &&
 				!tickerSymbol.equals(_tickerSymbol))) {
-			if (!XSS_ALLOW_TICKERSYMBOL) {
-				tickerSymbol = XSSUtil.strip(tickerSymbol);
-			}
-
 			_tickerSymbol = tickerSymbol;
 		}
 	}
@@ -319,10 +263,6 @@ public class AccountModelImpl extends BaseModelImpl {
 				((industry != null) && (_industry == null)) ||
 				((industry != null) && (_industry != null) &&
 				!industry.equals(_industry))) {
-			if (!XSS_ALLOW_INDUSTRY) {
-				industry = XSSUtil.strip(industry);
-			}
-
 			_industry = industry;
 		}
 	}
@@ -335,10 +275,6 @@ public class AccountModelImpl extends BaseModelImpl {
 		if (((type == null) && (_type != null)) ||
 				((type != null) && (_type == null)) ||
 				((type != null) && (_type != null) && !type.equals(_type))) {
-			if (!XSS_ALLOW_TYPE) {
-				type = XSSUtil.strip(type);
-			}
-
 			_type = type;
 		}
 	}
@@ -351,12 +287,36 @@ public class AccountModelImpl extends BaseModelImpl {
 		if (((size == null) && (_size != null)) ||
 				((size != null) && (_size == null)) ||
 				((size != null) && (_size != null) && !size.equals(_size))) {
-			if (!XSS_ALLOW_SIZE) {
-				size = XSSUtil.strip(size);
-			}
-
 			_size = size;
 		}
+	}
+
+	public Account toEscapedModel() {
+		Account model = new AccountImpl();
+		model.setAccountId(getAccountId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setParentAccountId(getParentAccountId());
+		model.setName(Html.escape(getName()));
+		model.setLegalName(Html.escape(getLegalName()));
+		model.setLegalId(Html.escape(getLegalId()));
+		model.setLegalType(Html.escape(getLegalType()));
+		model.setSicCode(Html.escape(getSicCode()));
+		model.setTickerSymbol(Html.escape(getTickerSymbol()));
+		model.setIndustry(Html.escape(getIndustry()));
+		model.setType(Html.escape(getType()));
+		model.setSize(Html.escape(getSize()));
+
+		if (true) {
+			model = (Account)Proxy.newProxyInstance(Account.class.getClassLoader(),
+					new Class[] { Account.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

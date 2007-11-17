@@ -98,4 +98,6 @@ public interface PollsQuestionModel extends BaseModel {
 	public Date getLastVoteDate();
 
 	public void setLastVoteDate(Date lastVoteDate);
+
+	public PollsQuestion toEscapedModel();
 }

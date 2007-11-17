@@ -86,4 +86,6 @@ public interface DLFileVersionModel extends BaseModel {
 	public int getSize();
 
 	public void setSize(int size);
+
+	public DLFileVersion toEscapedModel();
 }

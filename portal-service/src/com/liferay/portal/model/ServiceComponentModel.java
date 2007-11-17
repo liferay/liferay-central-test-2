@@ -68,4 +68,6 @@ public interface ServiceComponentModel extends BaseModel {
 	public String getData();
 
 	public void setData(String data);
+
+	public ServiceComponent toEscapedModel();
 }

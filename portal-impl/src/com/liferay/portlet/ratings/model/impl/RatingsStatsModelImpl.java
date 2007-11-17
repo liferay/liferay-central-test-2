@@ -22,11 +22,16 @@
 
 package com.liferay.portlet.ratings.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.portlet.ratings.model.RatingsStats;
+
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -62,9 +67,6 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table RatingsStats (statsId LONG not null primary key,classNameId LONG,classPK LONG,totalEntries INTEGER,totalScore DOUBLE,averageScore DOUBLE)";
 	public static String TABLE_SQL_DROP = "drop table RatingsStats";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.ratings.model.RatingsStats"),
-			XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.ratings.model.RatingsStatsModel"));
 
@@ -141,6 +143,24 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 		if (averageScore != _averageScore) {
 			_averageScore = averageScore;
 		}
+	}
+
+	public RatingsStats toEscapedModel() {
+		RatingsStats model = new RatingsStatsImpl();
+		model.setStatsId(getStatsId());
+		model.setClassNameId(getClassNameId());
+		model.setClassPK(getClassPK());
+		model.setTotalEntries(getTotalEntries());
+		model.setTotalScore(getTotalScore());
+		model.setAverageScore(getAverageScore());
+
+		if (true) {
+			model = (RatingsStats)Proxy.newProxyInstance(RatingsStats.class.getClassLoader(),
+					new Class[] { RatingsStats.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

@@ -257,6 +257,7 @@ public class ServiceBuilder {
 		String[] checkImports = new String[] {
 			"com.liferay.portal.PortalException",
 			"com.liferay.portal.SystemException",
+			"com.liferay.portal.kernel.bean.ReadOnlyBeanHandler",
 			"com.liferay.portal.kernel.dao.DynamicQueryInitializer",
 			"com.liferay.portal.kernel.log.Log",
 			"com.liferay.portal.kernel.log.LogFactoryUtil",
@@ -280,11 +281,12 @@ public class ServiceBuilder {
 			"com.liferay.portal.spring.hibernate.FinderCache",
 			"com.liferay.portal.spring.hibernate.HibernateUtil",
 			"com.liferay.portal.util.PropsUtil",
+			"com.liferay.util.Html",
 			"com.liferay.util.JSONUtil",
-			"com.liferay.util.XSSUtil",
 			"com.liferay.util.dao.hibernate.QueryPos",
 			"com.liferay.util.dao.hibernate.QueryUtil",
 			"java.io.Serializable",
+			"java.lang.reflect.Proxy",
 			"java.rmi.RemoteException",
 			"java.sql.ResultSet",
 			"java.sql.SQLException",
@@ -2210,6 +2212,10 @@ public class ServiceBuilder {
 			sm.append("public void set" + col.getMethodName() + "(" + colType + " " + col.getName() + ");");
 		}
 
+		// To escaped model method
+
+		sm.append("public " + entity.getName() + " toEscapedModel();");
+
 		// Interface close brace
 
 		sm.append("}");
@@ -2375,12 +2381,15 @@ public class ServiceBuilder {
 			sm.append("import " + _packagePath + ".service.persistence." + entity.getName() + "PK;");
 		}
 
+		sm.append("import " + _packagePath + ".model." + entity.getName() + ";");
 		sm.append("import " + _baseModelImplPackage + ".BaseModelImpl;");
 		sm.append("import " + _propsUtilPackage + ".PropsUtil;");
+		sm.append("import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;");
 		sm.append("import com.liferay.portal.kernel.util.DateUtil;");
 		sm.append("import com.liferay.portal.kernel.util.GetterUtil;");
-		sm.append("import com.liferay.util.XSSUtil;");
+		sm.append("import com.liferay.util.Html;");
 		sm.append("import java.io.Serializable;");
+		sm.append("import java.lang.reflect.Proxy;");
 		sm.append("import java.sql.Types;");
 		sm.append("import java.util.Date;");
 
@@ -2417,16 +2426,6 @@ public class ServiceBuilder {
 		sm.append("public static String TABLE_SQL_CREATE = \"" + createTableSQL + "\";");
 
 		sm.append("public static String TABLE_SQL_DROP = \"drop table " + entity.getTable() + "\";");
-
-		sm.append("public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "\"), XSS_ALLOW);");
-
-		for (int i = 0; i < regularColList.size(); i++) {
-			EntityColumn col = (EntityColumn)regularColList.get(i);
-
-			if (col.getType().equals("String")) {
-				sm.append("public static boolean XSS_ALLOW_" + col.getName().toUpperCase() + " = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "." + col.getName() + "\"), XSS_ALLOW_BY_MODEL);");
-			}
-		}
 
 		sm.append("public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(\"lock.expiration.time." + _packagePath + ".model." + entity.getName() + "Model\"));");
 
@@ -2562,19 +2561,48 @@ public class ServiceBuilder {
 				}
 
 				sm.append(") {");
-
-				if (colType.equals("String")) {
-					sm.append("if (!XSS_ALLOW_" + col.getName().toUpperCase() + ") {");
-					sm.append(col.getName() + " = XSSUtil.strip(" + col.getName() + ");");
-					sm.append("}");
-				}
-
 				sm.append("_" + col.getName() + " = " + col.getName() + ";");
 				sm.append("}");
 			}
 
 			sm.append("}");
 		}
+
+		// To escaped model method
+
+		sm.append("public " + entity.getName() + " toEscapedModel() {");
+		sm.append(entity.getName() + " model = new " + entity.getName() + "Impl();");
+
+		for (int i = 0; i < regularColList.size(); i++) {
+			EntityColumn col = (EntityColumn)regularColList.get(i);
+
+			String colType = col.getType();
+
+			sm.append("model.set" + col.getMethodName() + "(");
+
+			if (col.getEJBName() == null) {
+				if (colType.equals("String")) {
+					sm.append("Html.escape(");
+				}
+
+				sm.append("get" + col.getMethodName() + "()");
+
+				if (colType.equals("String")) {
+					sm.append(")");
+				}
+			}
+			else {
+				sm.append("(" + col.getEJBName() + ")get" + col.getMethodName() + "().clone()");
+			}
+
+			sm.append(");");
+		}
+
+		sm.append("if (true) {");
+		sm.append("model = (" + entity.getName() + ")Proxy.newProxyInstance(" + entity.getName() + ".class.getClassLoader(), new Class[] {" + entity.getName() + ".class}, new ReadOnlyBeanHandler(model));");
+		sm.append("}");
+		sm.append("return model;");
+		sm.append("}");
 
 		// Clone method
 
@@ -5428,8 +5456,6 @@ public class ServiceBuilder {
 		sm.append("public static final String HIBERNATE_CONFIGS = \"hibernate.configs\";");
 
 		sm.append("public static final String VALUE_OBJECT_FINDER_CACHE_ENABLED = \"value.object.finder.cache.enabled\";");
-
-		sm.append("public static final String XSS_ALLOW = \"xss.allow\";");
 
 		// Methods
 

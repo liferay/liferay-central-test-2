@@ -64,4 +64,6 @@ public interface TagsSourceModel extends BaseModel {
 	public String getAcronym();
 
 	public void setAcronym(String acronym);
+
+	public TagsSource toEscapedModel();
 }

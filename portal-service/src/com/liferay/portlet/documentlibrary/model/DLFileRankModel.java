@@ -74,4 +74,6 @@ public interface DLFileRankModel extends BaseModel {
 	public String getName();
 
 	public void setName(String name);
+
+	public DLFileRank toEscapedModel();
 }

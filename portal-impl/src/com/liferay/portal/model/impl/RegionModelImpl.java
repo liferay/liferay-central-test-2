@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Region;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -62,14 +66,6 @@ public class RegionModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Region (regionId LONG not null primary key,countryId LONG,regionCode VARCHAR(75) null,name VARCHAR(75) null,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Region";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Region"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_REGIONCODE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Region.regionCode"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Region.name"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.RegionModel"));
 
@@ -117,10 +113,6 @@ public class RegionModelImpl extends BaseModelImpl {
 				((regionCode != null) && (_regionCode == null)) ||
 				((regionCode != null) && (_regionCode != null) &&
 				!regionCode.equals(_regionCode))) {
-			if (!XSS_ALLOW_REGIONCODE) {
-				regionCode = XSSUtil.strip(regionCode);
-			}
-
 			_regionCode = regionCode;
 		}
 	}
@@ -133,10 +125,6 @@ public class RegionModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -153,6 +141,22 @@ public class RegionModelImpl extends BaseModelImpl {
 		if (active != _active) {
 			_active = active;
 		}
+	}
+
+	public Region toEscapedModel() {
+		Region model = new RegionImpl();
+		model.setRegionId(getRegionId());
+		model.setCountryId(getCountryId());
+		model.setRegionCode(Html.escape(getRegionCode()));
+		model.setName(Html.escape(getName()));
+		model.setActive(getActive());
+
+		if (true) {
+			model = (Region)Proxy.newProxyInstance(Region.class.getClassLoader(),
+					new Class[] { Region.class }, new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

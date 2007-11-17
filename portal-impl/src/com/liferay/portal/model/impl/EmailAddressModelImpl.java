@@ -22,14 +22,18 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -72,14 +76,6 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table EmailAddress (emailAddressId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,address VARCHAR(75) null,typeId INTEGER,primary_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table EmailAddress";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.EmailAddress"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.EmailAddress.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ADDRESS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.EmailAddress.address"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.EmailAddressModel"));
 
@@ -137,10 +133,6 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -200,10 +192,6 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 				((address != null) && (_address == null)) ||
 				((address != null) && (_address != null) &&
 				!address.equals(_address))) {
-			if (!XSS_ALLOW_ADDRESS) {
-				address = XSSUtil.strip(address);
-			}
-
 			_address = address;
 		}
 	}
@@ -230,6 +218,29 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 		if (primary != _primary) {
 			_primary = primary;
 		}
+	}
+
+	public EmailAddress toEscapedModel() {
+		EmailAddress model = new EmailAddressImpl();
+		model.setEmailAddressId(getEmailAddressId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setClassNameId(getClassNameId());
+		model.setClassPK(getClassPK());
+		model.setAddress(Html.escape(getAddress()));
+		model.setTypeId(getTypeId());
+		model.setPrimary(getPrimary());
+
+		if (true) {
+			model = (EmailAddress)Proxy.newProxyInstance(EmailAddress.class.getClassLoader(),
+					new Class[] { EmailAddress.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

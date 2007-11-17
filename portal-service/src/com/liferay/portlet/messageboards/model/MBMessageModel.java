@@ -110,4 +110,6 @@ public interface MBMessageModel extends BaseModel {
 	public boolean isAnonymous();
 
 	public void setAnonymous(boolean anonymous);
+
+	public MBMessage toEscapedModel();
 }

@@ -70,4 +70,6 @@ public interface MBStatsUserModel extends BaseModel {
 	public Date getLastPostDate();
 
 	public void setLastPostDate(Date lastPostDate);
+
+	public MBStatsUser toEscapedModel();
 }

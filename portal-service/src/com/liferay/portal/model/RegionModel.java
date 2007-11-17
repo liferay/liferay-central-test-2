@@ -70,4 +70,6 @@ public interface RegionModel extends BaseModel {
 	public boolean isActive();
 
 	public void setActive(boolean active);
+
+	public Region toEscapedModel();
 }

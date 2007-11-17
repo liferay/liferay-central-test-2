@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.shopping.model.ShoppingItem;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -93,36 +98,6 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table ShoppingItem (itemId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,sku VARCHAR(75) null,name VARCHAR(200) null,description STRING null,properties STRING null,fields_ BOOLEAN,fieldsQuantities STRING null,minQuantity INTEGER,maxQuantity INTEGER,price DOUBLE,discount DOUBLE,taxable BOOLEAN,shipping DOUBLE,useShippingFormula BOOLEAN,requiresShipping BOOLEAN,stockQuantity INTEGER,featured_ BOOLEAN,sale_ BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null,mediumImage BOOLEAN,mediumImageId LONG,mediumImageURL VARCHAR(75) null,largeImage BOOLEAN,largeImageId LONG,largeImageURL VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table ShoppingItem";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SKU = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.sku"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.description"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PROPERTIES = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.properties"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FIELDSQUANTITIES = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.fieldsQuantities"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SMALLIMAGEURL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.smallImageURL"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_MEDIUMIMAGEURL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.mediumImageURL"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LARGEIMAGEURL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem.largeImageURL"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingItemModel"));
 
@@ -180,10 +155,6 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -232,10 +203,6 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 		if (((sku == null) && (_sku != null)) ||
 				((sku != null) && (_sku == null)) ||
 				((sku != null) && (_sku != null) && !sku.equals(_sku))) {
-			if (!XSS_ALLOW_SKU) {
-				sku = XSSUtil.strip(sku);
-			}
-
 			_sku = sku;
 		}
 	}
@@ -248,10 +215,6 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -265,10 +228,6 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
 	}
@@ -282,10 +241,6 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 				((properties != null) && (_properties == null)) ||
 				((properties != null) && (_properties != null) &&
 				!properties.equals(_properties))) {
-			if (!XSS_ALLOW_PROPERTIES) {
-				properties = XSSUtil.strip(properties);
-			}
-
 			_properties = properties;
 		}
 	}
@@ -313,10 +268,6 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 				((fieldsQuantities != null) && (_fieldsQuantities == null)) ||
 				((fieldsQuantities != null) && (_fieldsQuantities != null) &&
 				!fieldsQuantities.equals(_fieldsQuantities))) {
-			if (!XSS_ALLOW_FIELDSQUANTITIES) {
-				fieldsQuantities = XSSUtil.strip(fieldsQuantities);
-			}
-
 			_fieldsQuantities = fieldsQuantities;
 		}
 	}
@@ -484,10 +435,6 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 				((smallImageURL != null) && (_smallImageURL == null)) ||
 				((smallImageURL != null) && (_smallImageURL != null) &&
 				!smallImageURL.equals(_smallImageURL))) {
-			if (!XSS_ALLOW_SMALLIMAGEURL) {
-				smallImageURL = XSSUtil.strip(smallImageURL);
-			}
-
 			_smallImageURL = smallImageURL;
 		}
 	}
@@ -525,10 +472,6 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 				((mediumImageURL != null) && (_mediumImageURL == null)) ||
 				((mediumImageURL != null) && (_mediumImageURL != null) &&
 				!mediumImageURL.equals(_mediumImageURL))) {
-			if (!XSS_ALLOW_MEDIUMIMAGEURL) {
-				mediumImageURL = XSSUtil.strip(mediumImageURL);
-			}
-
 			_mediumImageURL = mediumImageURL;
 		}
 	}
@@ -566,12 +509,53 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 				((largeImageURL != null) && (_largeImageURL == null)) ||
 				((largeImageURL != null) && (_largeImageURL != null) &&
 				!largeImageURL.equals(_largeImageURL))) {
-			if (!XSS_ALLOW_LARGEIMAGEURL) {
-				largeImageURL = XSSUtil.strip(largeImageURL);
-			}
-
 			_largeImageURL = largeImageURL;
 		}
+	}
+
+	public ShoppingItem toEscapedModel() {
+		ShoppingItem model = new ShoppingItemImpl();
+		model.setItemId(getItemId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setCategoryId(getCategoryId());
+		model.setSku(Html.escape(getSku()));
+		model.setName(Html.escape(getName()));
+		model.setDescription(Html.escape(getDescription()));
+		model.setProperties(Html.escape(getProperties()));
+		model.setFields(getFields());
+		model.setFieldsQuantities(Html.escape(getFieldsQuantities()));
+		model.setMinQuantity(getMinQuantity());
+		model.setMaxQuantity(getMaxQuantity());
+		model.setPrice(getPrice());
+		model.setDiscount(getDiscount());
+		model.setTaxable(getTaxable());
+		model.setShipping(getShipping());
+		model.setUseShippingFormula(getUseShippingFormula());
+		model.setRequiresShipping(getRequiresShipping());
+		model.setStockQuantity(getStockQuantity());
+		model.setFeatured(getFeatured());
+		model.setSale(getSale());
+		model.setSmallImage(getSmallImage());
+		model.setSmallImageId(getSmallImageId());
+		model.setSmallImageURL(Html.escape(getSmallImageURL()));
+		model.setMediumImage(getMediumImage());
+		model.setMediumImageId(getMediumImageId());
+		model.setMediumImageURL(Html.escape(getMediumImageURL()));
+		model.setLargeImage(getLargeImage());
+		model.setLargeImageId(getLargeImageId());
+		model.setLargeImageURL(Html.escape(getLargeImageURL()));
+
+		if (true) {
+			model = (ShoppingItem)Proxy.newProxyInstance(ShoppingItem.class.getClassLoader(),
+					new Class[] { ShoppingItem.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

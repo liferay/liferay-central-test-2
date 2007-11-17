@@ -116,4 +116,6 @@ public interface OrgLaborModel extends BaseModel {
 	public int getSatClose();
 
 	public void setSatClose(int satClose);
+
+	public OrgLabor toEscapedModel();
 }

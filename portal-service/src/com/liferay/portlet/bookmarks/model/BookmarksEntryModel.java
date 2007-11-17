@@ -98,4 +98,6 @@ public interface BookmarksEntryModel extends BaseModel {
 	public int getPriority();
 
 	public void setPriority(int priority);
+
+	public BookmarksEntry toEscapedModel();
 }

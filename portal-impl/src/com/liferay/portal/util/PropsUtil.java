@@ -695,10 +695,6 @@ public class PropsUtil {
 
 	public static final String LAST_MODIFIED_PATHS = "last.modified.paths";
 
-	// XSS (Cross Site Scripting)
-
-	public static final String XSS_ALLOW = "xss.allow";
-
 	// Communication Link
 
 	public static final String COMM_LINK_PROPERTIES = "comm.link.properties";

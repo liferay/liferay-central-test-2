@@ -34,9 +34,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
  */
 public abstract class BaseModelImpl implements BaseModel {
 
-	public static boolean XSS_ALLOW = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.XSS_ALLOW));
-
 	public BaseModelImpl() {
 	}
 

@@ -144,4 +144,6 @@ public interface CalEventModel extends BaseModel {
 	public int getSecondReminder();
 
 	public void setSecondReminder(int secondReminder);
+
+	public CalEvent toEscapedModel();
 }

@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.journal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -86,39 +91,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title VARCHAR(100) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,approved BOOLEAN,approvedByUserId LONG,approvedByUserName VARCHAR(75) null,approvedDate DATE null,expired BOOLEAN,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table JournalArticle";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.uuid"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ARTICLEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.articleId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.title"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.description"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CONTENT = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.content"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.type"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_STRUCTUREID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.structureId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TEMPLATEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.templateId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_APPROVEDBYUSERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.approvedByUserName"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleModel"));
 
@@ -206,10 +178,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -249,10 +217,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 				((articleId != null) && (_articleId == null)) ||
 				((articleId != null) && (_articleId != null) &&
 				!articleId.equals(_articleId))) {
-			if (!XSS_ALLOW_ARTICLEID) {
-				articleId = XSSUtil.strip(articleId);
-			}
-
 			_articleId = articleId;
 		}
 	}
@@ -275,10 +239,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		if (((title == null) && (_title != null)) ||
 				((title != null) && (_title == null)) ||
 				((title != null) && (_title != null) && !title.equals(_title))) {
-			if (!XSS_ALLOW_TITLE) {
-				title = XSSUtil.strip(title);
-			}
-
 			_title = title;
 		}
 	}
@@ -292,10 +252,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
 	}
@@ -309,10 +265,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 				((content != null) && (_content == null)) ||
 				((content != null) && (_content != null) &&
 				!content.equals(_content))) {
-			if (!XSS_ALLOW_CONTENT) {
-				content = XSSUtil.strip(content);
-			}
-
 			_content = content;
 		}
 	}
@@ -325,10 +277,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		if (((type == null) && (_type != null)) ||
 				((type != null) && (_type == null)) ||
 				((type != null) && (_type != null) && !type.equals(_type))) {
-			if (!XSS_ALLOW_TYPE) {
-				type = XSSUtil.strip(type);
-			}
-
 			_type = type;
 		}
 	}
@@ -342,10 +290,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 				((structureId != null) && (_structureId == null)) ||
 				((structureId != null) && (_structureId != null) &&
 				!structureId.equals(_structureId))) {
-			if (!XSS_ALLOW_STRUCTUREID) {
-				structureId = XSSUtil.strip(structureId);
-			}
-
 			_structureId = structureId;
 		}
 	}
@@ -359,10 +303,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 				((templateId != null) && (_templateId == null)) ||
 				((templateId != null) && (_templateId != null) &&
 				!templateId.equals(_templateId))) {
-			if (!XSS_ALLOW_TEMPLATEID) {
-				templateId = XSSUtil.strip(templateId);
-			}
-
 			_templateId = templateId;
 		}
 	}
@@ -413,10 +353,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 				((approvedByUserName != null) && (_approvedByUserName == null)) ||
 				((approvedByUserName != null) && (_approvedByUserName != null) &&
 				!approvedByUserName.equals(_approvedByUserName))) {
-			if (!XSS_ALLOW_APPROVEDBYUSERNAME) {
-				approvedByUserName = XSSUtil.strip(approvedByUserName);
-			}
-
 			_approvedByUserName = approvedByUserName;
 		}
 	}
@@ -486,6 +422,44 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 		if (indexable != _indexable) {
 			_indexable = indexable;
 		}
+	}
+
+	public JournalArticle toEscapedModel() {
+		JournalArticle model = new JournalArticleImpl();
+		model.setUuid(Html.escape(getUuid()));
+		model.setId(getId());
+		model.setResourcePrimKey(getResourcePrimKey());
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setArticleId(Html.escape(getArticleId()));
+		model.setVersion(getVersion());
+		model.setTitle(Html.escape(getTitle()));
+		model.setDescription(Html.escape(getDescription()));
+		model.setContent(Html.escape(getContent()));
+		model.setType(Html.escape(getType()));
+		model.setStructureId(Html.escape(getStructureId()));
+		model.setTemplateId(Html.escape(getTemplateId()));
+		model.setDisplayDate(getDisplayDate());
+		model.setApproved(getApproved());
+		model.setApprovedByUserId(getApprovedByUserId());
+		model.setApprovedByUserName(Html.escape(getApprovedByUserName()));
+		model.setApprovedDate(getApprovedDate());
+		model.setExpired(getExpired());
+		model.setExpirationDate(getExpirationDate());
+		model.setReviewDate(getReviewDate());
+		model.setIndexable(getIndexable());
+
+		if (true) {
+			model = (JournalArticle)Proxy.newProxyInstance(JournalArticle.class.getClassLoader(),
+					new Class[] { JournalArticle.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

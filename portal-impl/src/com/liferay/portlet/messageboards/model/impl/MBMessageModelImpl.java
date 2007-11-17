@@ -22,14 +22,19 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.messageboards.model.MBMessage;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -75,21 +80,6 @@ public class MBMessageModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table MBMessage";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.uuid"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SUBJECT = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.subject"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BODY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage.body"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBMessageModel"));
 
@@ -157,10 +147,6 @@ public class MBMessageModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -230,10 +216,6 @@ public class MBMessageModelImpl extends BaseModelImpl {
 				((subject != null) && (_subject == null)) ||
 				((subject != null) && (_subject != null) &&
 				!subject.equals(_subject))) {
-			if (!XSS_ALLOW_SUBJECT) {
-				subject = XSSUtil.strip(subject);
-			}
-
 			_subject = subject;
 		}
 	}
@@ -246,10 +228,6 @@ public class MBMessageModelImpl extends BaseModelImpl {
 		if (((body == null) && (_body != null)) ||
 				((body != null) && (_body == null)) ||
 				((body != null) && (_body != null) && !body.equals(_body))) {
-			if (!XSS_ALLOW_BODY) {
-				body = XSSUtil.strip(body);
-			}
-
 			_body = body;
 		}
 	}
@@ -280,6 +258,32 @@ public class MBMessageModelImpl extends BaseModelImpl {
 		if (anonymous != _anonymous) {
 			_anonymous = anonymous;
 		}
+	}
+
+	public MBMessage toEscapedModel() {
+		MBMessage model = new MBMessageImpl();
+		model.setUuid(Html.escape(getUuid()));
+		model.setMessageId(getMessageId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setCategoryId(getCategoryId());
+		model.setThreadId(getThreadId());
+		model.setParentMessageId(getParentMessageId());
+		model.setSubject(Html.escape(getSubject()));
+		model.setBody(Html.escape(getBody()));
+		model.setAttachments(getAttachments());
+		model.setAnonymous(getAnonymous());
+
+		if (true) {
+			model = (MBMessage)Proxy.newProxyInstance(MBMessage.class.getClassLoader(),
+					new Class[] { MBMessage.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

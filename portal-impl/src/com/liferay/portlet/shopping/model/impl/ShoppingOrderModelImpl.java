@@ -22,14 +22,19 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.shopping.model.ShoppingOrder;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -112,108 +117,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table ShoppingOrder (orderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,number_ VARCHAR(75) null,tax DOUBLE,shipping DOUBLE,altShipping VARCHAR(75) null,requiresShipping BOOLEAN,insure BOOLEAN,insurance DOUBLE,couponCodes VARCHAR(75) null,couponDiscount DOUBLE,billingFirstName VARCHAR(75) null,billingLastName VARCHAR(75) null,billingEmailAddress VARCHAR(75) null,billingCompany VARCHAR(75) null,billingStreet VARCHAR(75) null,billingCity VARCHAR(75) null,billingState VARCHAR(75) null,billingZip VARCHAR(75) null,billingCountry VARCHAR(75) null,billingPhone VARCHAR(75) null,shipToBilling BOOLEAN,shippingFirstName VARCHAR(75) null,shippingLastName VARCHAR(75) null,shippingEmailAddress VARCHAR(75) null,shippingCompany VARCHAR(75) null,shippingStreet VARCHAR(75) null,shippingCity VARCHAR(75) null,shippingState VARCHAR(75) null,shippingZip VARCHAR(75) null,shippingCountry VARCHAR(75) null,shippingPhone VARCHAR(75) null,ccName VARCHAR(75) null,ccType VARCHAR(75) null,ccNumber VARCHAR(75) null,ccExpMonth INTEGER,ccExpYear INTEGER,ccVerNumber VARCHAR(75) null,comments STRING null,ppTxnId VARCHAR(75) null,ppPaymentStatus VARCHAR(75) null,ppPaymentGross DOUBLE,ppReceiverEmail VARCHAR(75) null,ppPayerEmail VARCHAR(75) null,sendOrderEmail BOOLEAN,sendShippingEmail BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table ShoppingOrder";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NUMBER = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.number"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ALTSHIPPING = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.altShipping"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COUPONCODES = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.couponCodes"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGFIRSTNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingFirstName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGLASTNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingLastName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGEMAILADDRESS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingEmailAddress"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGCOMPANY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingCompany"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGSTREET = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingStreet"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGCITY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingCity"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGSTATE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingState"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGZIP = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingZip"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGCOUNTRY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingCountry"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_BILLINGPHONE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.billingPhone"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGFIRSTNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingFirstName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGLASTNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingLastName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGEMAILADDRESS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingEmailAddress"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGCOMPANY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingCompany"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGSTREET = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingStreet"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGCITY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingCity"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGSTATE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingState"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGZIP = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingZip"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGCOUNTRY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingCountry"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHIPPINGPHONE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.shippingPhone"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CCNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ccName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CCTYPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ccType"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CCNUMBER = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ccNumber"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CCVERNUMBER = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ccVerNumber"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.comments"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PPTXNID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ppTxnId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PPPAYMENTSTATUS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ppPaymentStatus"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PPRECEIVEREMAIL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ppReceiverEmail"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PPPAYEREMAIL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.ppPayerEmail"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingOrderModel"));
 
@@ -281,10 +184,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -324,10 +223,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((number != null) && (_number == null)) ||
 				((number != null) && (_number != null) &&
 				!number.equals(_number))) {
-			if (!XSS_ALLOW_NUMBER) {
-				number = XSSUtil.strip(number);
-			}
-
 			_number = number;
 		}
 	}
@@ -361,10 +256,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((altShipping != null) && (_altShipping == null)) ||
 				((altShipping != null) && (_altShipping != null) &&
 				!altShipping.equals(_altShipping))) {
-			if (!XSS_ALLOW_ALTSHIPPING) {
-				altShipping = XSSUtil.strip(altShipping);
-			}
-
 			_altShipping = altShipping;
 		}
 	}
@@ -416,10 +307,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((couponCodes != null) && (_couponCodes == null)) ||
 				((couponCodes != null) && (_couponCodes != null) &&
 				!couponCodes.equals(_couponCodes))) {
-			if (!XSS_ALLOW_COUPONCODES) {
-				couponCodes = XSSUtil.strip(couponCodes);
-			}
-
 			_couponCodes = couponCodes;
 		}
 	}
@@ -443,10 +330,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((billingFirstName != null) && (_billingFirstName == null)) ||
 				((billingFirstName != null) && (_billingFirstName != null) &&
 				!billingFirstName.equals(_billingFirstName))) {
-			if (!XSS_ALLOW_BILLINGFIRSTNAME) {
-				billingFirstName = XSSUtil.strip(billingFirstName);
-			}
-
 			_billingFirstName = billingFirstName;
 		}
 	}
@@ -460,10 +343,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((billingLastName != null) && (_billingLastName == null)) ||
 				((billingLastName != null) && (_billingLastName != null) &&
 				!billingLastName.equals(_billingLastName))) {
-			if (!XSS_ALLOW_BILLINGLASTNAME) {
-				billingLastName = XSSUtil.strip(billingLastName);
-			}
-
 			_billingLastName = billingLastName;
 		}
 	}
@@ -479,10 +358,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((billingEmailAddress != null) &&
 				(_billingEmailAddress != null) &&
 				!billingEmailAddress.equals(_billingEmailAddress))) {
-			if (!XSS_ALLOW_BILLINGEMAILADDRESS) {
-				billingEmailAddress = XSSUtil.strip(billingEmailAddress);
-			}
-
 			_billingEmailAddress = billingEmailAddress;
 		}
 	}
@@ -496,10 +371,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((billingCompany != null) && (_billingCompany == null)) ||
 				((billingCompany != null) && (_billingCompany != null) &&
 				!billingCompany.equals(_billingCompany))) {
-			if (!XSS_ALLOW_BILLINGCOMPANY) {
-				billingCompany = XSSUtil.strip(billingCompany);
-			}
-
 			_billingCompany = billingCompany;
 		}
 	}
@@ -513,10 +384,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((billingStreet != null) && (_billingStreet == null)) ||
 				((billingStreet != null) && (_billingStreet != null) &&
 				!billingStreet.equals(_billingStreet))) {
-			if (!XSS_ALLOW_BILLINGSTREET) {
-				billingStreet = XSSUtil.strip(billingStreet);
-			}
-
 			_billingStreet = billingStreet;
 		}
 	}
@@ -530,10 +397,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((billingCity != null) && (_billingCity == null)) ||
 				((billingCity != null) && (_billingCity != null) &&
 				!billingCity.equals(_billingCity))) {
-			if (!XSS_ALLOW_BILLINGCITY) {
-				billingCity = XSSUtil.strip(billingCity);
-			}
-
 			_billingCity = billingCity;
 		}
 	}
@@ -547,10 +410,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((billingState != null) && (_billingState == null)) ||
 				((billingState != null) && (_billingState != null) &&
 				!billingState.equals(_billingState))) {
-			if (!XSS_ALLOW_BILLINGSTATE) {
-				billingState = XSSUtil.strip(billingState);
-			}
-
 			_billingState = billingState;
 		}
 	}
@@ -564,10 +423,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((billingZip != null) && (_billingZip == null)) ||
 				((billingZip != null) && (_billingZip != null) &&
 				!billingZip.equals(_billingZip))) {
-			if (!XSS_ALLOW_BILLINGZIP) {
-				billingZip = XSSUtil.strip(billingZip);
-			}
-
 			_billingZip = billingZip;
 		}
 	}
@@ -581,10 +436,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((billingCountry != null) && (_billingCountry == null)) ||
 				((billingCountry != null) && (_billingCountry != null) &&
 				!billingCountry.equals(_billingCountry))) {
-			if (!XSS_ALLOW_BILLINGCOUNTRY) {
-				billingCountry = XSSUtil.strip(billingCountry);
-			}
-
 			_billingCountry = billingCountry;
 		}
 	}
@@ -598,10 +449,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((billingPhone != null) && (_billingPhone == null)) ||
 				((billingPhone != null) && (_billingPhone != null) &&
 				!billingPhone.equals(_billingPhone))) {
-			if (!XSS_ALLOW_BILLINGPHONE) {
-				billingPhone = XSSUtil.strip(billingPhone);
-			}
-
 			_billingPhone = billingPhone;
 		}
 	}
@@ -629,10 +476,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((shippingFirstName != null) && (_shippingFirstName == null)) ||
 				((shippingFirstName != null) && (_shippingFirstName != null) &&
 				!shippingFirstName.equals(_shippingFirstName))) {
-			if (!XSS_ALLOW_SHIPPINGFIRSTNAME) {
-				shippingFirstName = XSSUtil.strip(shippingFirstName);
-			}
-
 			_shippingFirstName = shippingFirstName;
 		}
 	}
@@ -646,10 +489,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((shippingLastName != null) && (_shippingLastName == null)) ||
 				((shippingLastName != null) && (_shippingLastName != null) &&
 				!shippingLastName.equals(_shippingLastName))) {
-			if (!XSS_ALLOW_SHIPPINGLASTNAME) {
-				shippingLastName = XSSUtil.strip(shippingLastName);
-			}
-
 			_shippingLastName = shippingLastName;
 		}
 	}
@@ -665,10 +504,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((shippingEmailAddress != null) &&
 				(_shippingEmailAddress != null) &&
 				!shippingEmailAddress.equals(_shippingEmailAddress))) {
-			if (!XSS_ALLOW_SHIPPINGEMAILADDRESS) {
-				shippingEmailAddress = XSSUtil.strip(shippingEmailAddress);
-			}
-
 			_shippingEmailAddress = shippingEmailAddress;
 		}
 	}
@@ -682,10 +517,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((shippingCompany != null) && (_shippingCompany == null)) ||
 				((shippingCompany != null) && (_shippingCompany != null) &&
 				!shippingCompany.equals(_shippingCompany))) {
-			if (!XSS_ALLOW_SHIPPINGCOMPANY) {
-				shippingCompany = XSSUtil.strip(shippingCompany);
-			}
-
 			_shippingCompany = shippingCompany;
 		}
 	}
@@ -699,10 +530,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((shippingStreet != null) && (_shippingStreet == null)) ||
 				((shippingStreet != null) && (_shippingStreet != null) &&
 				!shippingStreet.equals(_shippingStreet))) {
-			if (!XSS_ALLOW_SHIPPINGSTREET) {
-				shippingStreet = XSSUtil.strip(shippingStreet);
-			}
-
 			_shippingStreet = shippingStreet;
 		}
 	}
@@ -716,10 +543,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((shippingCity != null) && (_shippingCity == null)) ||
 				((shippingCity != null) && (_shippingCity != null) &&
 				!shippingCity.equals(_shippingCity))) {
-			if (!XSS_ALLOW_SHIPPINGCITY) {
-				shippingCity = XSSUtil.strip(shippingCity);
-			}
-
 			_shippingCity = shippingCity;
 		}
 	}
@@ -733,10 +556,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((shippingState != null) && (_shippingState == null)) ||
 				((shippingState != null) && (_shippingState != null) &&
 				!shippingState.equals(_shippingState))) {
-			if (!XSS_ALLOW_SHIPPINGSTATE) {
-				shippingState = XSSUtil.strip(shippingState);
-			}
-
 			_shippingState = shippingState;
 		}
 	}
@@ -750,10 +569,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((shippingZip != null) && (_shippingZip == null)) ||
 				((shippingZip != null) && (_shippingZip != null) &&
 				!shippingZip.equals(_shippingZip))) {
-			if (!XSS_ALLOW_SHIPPINGZIP) {
-				shippingZip = XSSUtil.strip(shippingZip);
-			}
-
 			_shippingZip = shippingZip;
 		}
 	}
@@ -767,10 +582,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((shippingCountry != null) && (_shippingCountry == null)) ||
 				((shippingCountry != null) && (_shippingCountry != null) &&
 				!shippingCountry.equals(_shippingCountry))) {
-			if (!XSS_ALLOW_SHIPPINGCOUNTRY) {
-				shippingCountry = XSSUtil.strip(shippingCountry);
-			}
-
 			_shippingCountry = shippingCountry;
 		}
 	}
@@ -784,10 +595,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((shippingPhone != null) && (_shippingPhone == null)) ||
 				((shippingPhone != null) && (_shippingPhone != null) &&
 				!shippingPhone.equals(_shippingPhone))) {
-			if (!XSS_ALLOW_SHIPPINGPHONE) {
-				shippingPhone = XSSUtil.strip(shippingPhone);
-			}
-
 			_shippingPhone = shippingPhone;
 		}
 	}
@@ -801,10 +608,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((ccName != null) && (_ccName == null)) ||
 				((ccName != null) && (_ccName != null) &&
 				!ccName.equals(_ccName))) {
-			if (!XSS_ALLOW_CCNAME) {
-				ccName = XSSUtil.strip(ccName);
-			}
-
 			_ccName = ccName;
 		}
 	}
@@ -818,10 +621,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((ccType != null) && (_ccType == null)) ||
 				((ccType != null) && (_ccType != null) &&
 				!ccType.equals(_ccType))) {
-			if (!XSS_ALLOW_CCTYPE) {
-				ccType = XSSUtil.strip(ccType);
-			}
-
 			_ccType = ccType;
 		}
 	}
@@ -835,10 +634,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((ccNumber != null) && (_ccNumber == null)) ||
 				((ccNumber != null) && (_ccNumber != null) &&
 				!ccNumber.equals(_ccNumber))) {
-			if (!XSS_ALLOW_CCNUMBER) {
-				ccNumber = XSSUtil.strip(ccNumber);
-			}
-
 			_ccNumber = ccNumber;
 		}
 	}
@@ -872,10 +667,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((ccVerNumber != null) && (_ccVerNumber == null)) ||
 				((ccVerNumber != null) && (_ccVerNumber != null) &&
 				!ccVerNumber.equals(_ccVerNumber))) {
-			if (!XSS_ALLOW_CCVERNUMBER) {
-				ccVerNumber = XSSUtil.strip(ccVerNumber);
-			}
-
 			_ccVerNumber = ccVerNumber;
 		}
 	}
@@ -889,10 +680,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((comments != null) && (_comments == null)) ||
 				((comments != null) && (_comments != null) &&
 				!comments.equals(_comments))) {
-			if (!XSS_ALLOW_COMMENTS) {
-				comments = XSSUtil.strip(comments);
-			}
-
 			_comments = comments;
 		}
 	}
@@ -906,10 +693,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((ppTxnId != null) && (_ppTxnId == null)) ||
 				((ppTxnId != null) && (_ppTxnId != null) &&
 				!ppTxnId.equals(_ppTxnId))) {
-			if (!XSS_ALLOW_PPTXNID) {
-				ppTxnId = XSSUtil.strip(ppTxnId);
-			}
-
 			_ppTxnId = ppTxnId;
 		}
 	}
@@ -923,10 +706,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((ppPaymentStatus != null) && (_ppPaymentStatus == null)) ||
 				((ppPaymentStatus != null) && (_ppPaymentStatus != null) &&
 				!ppPaymentStatus.equals(_ppPaymentStatus))) {
-			if (!XSS_ALLOW_PPPAYMENTSTATUS) {
-				ppPaymentStatus = XSSUtil.strip(ppPaymentStatus);
-			}
-
 			_ppPaymentStatus = ppPaymentStatus;
 		}
 	}
@@ -950,10 +729,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((ppReceiverEmail != null) && (_ppReceiverEmail == null)) ||
 				((ppReceiverEmail != null) && (_ppReceiverEmail != null) &&
 				!ppReceiverEmail.equals(_ppReceiverEmail))) {
-			if (!XSS_ALLOW_PPRECEIVEREMAIL) {
-				ppReceiverEmail = XSSUtil.strip(ppReceiverEmail);
-			}
-
 			_ppReceiverEmail = ppReceiverEmail;
 		}
 	}
@@ -967,10 +742,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 				((ppPayerEmail != null) && (_ppPayerEmail == null)) ||
 				((ppPayerEmail != null) && (_ppPayerEmail != null) &&
 				!ppPayerEmail.equals(_ppPayerEmail))) {
-			if (!XSS_ALLOW_PPPAYEREMAIL) {
-				ppPayerEmail = XSSUtil.strip(ppPayerEmail);
-			}
-
 			_ppPayerEmail = ppPayerEmail;
 		}
 	}
@@ -1001,6 +772,69 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 		if (sendShippingEmail != _sendShippingEmail) {
 			_sendShippingEmail = sendShippingEmail;
 		}
+	}
+
+	public ShoppingOrder toEscapedModel() {
+		ShoppingOrder model = new ShoppingOrderImpl();
+		model.setOrderId(getOrderId());
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setNumber(Html.escape(getNumber()));
+		model.setTax(getTax());
+		model.setShipping(getShipping());
+		model.setAltShipping(Html.escape(getAltShipping()));
+		model.setRequiresShipping(getRequiresShipping());
+		model.setInsure(getInsure());
+		model.setInsurance(getInsurance());
+		model.setCouponCodes(Html.escape(getCouponCodes()));
+		model.setCouponDiscount(getCouponDiscount());
+		model.setBillingFirstName(Html.escape(getBillingFirstName()));
+		model.setBillingLastName(Html.escape(getBillingLastName()));
+		model.setBillingEmailAddress(Html.escape(getBillingEmailAddress()));
+		model.setBillingCompany(Html.escape(getBillingCompany()));
+		model.setBillingStreet(Html.escape(getBillingStreet()));
+		model.setBillingCity(Html.escape(getBillingCity()));
+		model.setBillingState(Html.escape(getBillingState()));
+		model.setBillingZip(Html.escape(getBillingZip()));
+		model.setBillingCountry(Html.escape(getBillingCountry()));
+		model.setBillingPhone(Html.escape(getBillingPhone()));
+		model.setShipToBilling(getShipToBilling());
+		model.setShippingFirstName(Html.escape(getShippingFirstName()));
+		model.setShippingLastName(Html.escape(getShippingLastName()));
+		model.setShippingEmailAddress(Html.escape(getShippingEmailAddress()));
+		model.setShippingCompany(Html.escape(getShippingCompany()));
+		model.setShippingStreet(Html.escape(getShippingStreet()));
+		model.setShippingCity(Html.escape(getShippingCity()));
+		model.setShippingState(Html.escape(getShippingState()));
+		model.setShippingZip(Html.escape(getShippingZip()));
+		model.setShippingCountry(Html.escape(getShippingCountry()));
+		model.setShippingPhone(Html.escape(getShippingPhone()));
+		model.setCcName(Html.escape(getCcName()));
+		model.setCcType(Html.escape(getCcType()));
+		model.setCcNumber(Html.escape(getCcNumber()));
+		model.setCcExpMonth(getCcExpMonth());
+		model.setCcExpYear(getCcExpYear());
+		model.setCcVerNumber(Html.escape(getCcVerNumber()));
+		model.setComments(Html.escape(getComments()));
+		model.setPpTxnId(Html.escape(getPpTxnId()));
+		model.setPpPaymentStatus(Html.escape(getPpPaymentStatus()));
+		model.setPpPaymentGross(getPpPaymentGross());
+		model.setPpReceiverEmail(Html.escape(getPpReceiverEmail()));
+		model.setPpPayerEmail(Html.escape(getPpPayerEmail()));
+		model.setSendOrderEmail(getSendOrderEmail());
+		model.setSendShippingEmail(getSendShippingEmail());
+
+		if (true) {
+			model = (ShoppingOrder)Proxy.newProxyInstance(ShoppingOrder.class.getClassLoader(),
+					new Class[] { ShoppingOrder.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

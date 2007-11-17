@@ -126,4 +126,6 @@ public interface AddressModel extends BaseModel {
 	public boolean isPrimary();
 
 	public void setPrimary(boolean primary);
+
+	public Address toEscapedModel();
 }

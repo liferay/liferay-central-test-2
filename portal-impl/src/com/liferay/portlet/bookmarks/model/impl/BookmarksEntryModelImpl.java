@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.bookmarks.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -72,21 +77,6 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(300) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table BookmarksEntry";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.uuid"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_URL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.url"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry.comments"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.bookmarks.model.BookmarksEntryModel"));
 
@@ -189,10 +179,6 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -205,10 +191,6 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 		if (((url == null) && (_url != null)) ||
 				((url != null) && (_url == null)) ||
 				((url != null) && (_url != null) && !url.equals(_url))) {
-			if (!XSS_ALLOW_URL) {
-				url = XSSUtil.strip(url);
-			}
-
 			_url = url;
 		}
 	}
@@ -222,10 +204,6 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 				((comments != null) && (_comments == null)) ||
 				((comments != null) && (_comments != null) &&
 				!comments.equals(_comments))) {
-			if (!XSS_ALLOW_COMMENTS) {
-				comments = XSSUtil.strip(comments);
-			}
-
 			_comments = comments;
 		}
 	}
@@ -248,6 +226,30 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 		if (priority != _priority) {
 			_priority = priority;
 		}
+	}
+
+	public BookmarksEntry toEscapedModel() {
+		BookmarksEntry model = new BookmarksEntryImpl();
+		model.setUuid(Html.escape(getUuid()));
+		model.setEntryId(getEntryId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setFolderId(getFolderId());
+		model.setName(Html.escape(getName()));
+		model.setUrl(Html.escape(getUrl()));
+		model.setComments(Html.escape(getComments()));
+		model.setVisits(getVisits());
+		model.setPriority(getPriority());
+
+		if (true) {
+			model = (BookmarksEntry)Proxy.newProxyInstance(BookmarksEntry.class.getClassLoader(),
+					new Class[] { BookmarksEntry.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

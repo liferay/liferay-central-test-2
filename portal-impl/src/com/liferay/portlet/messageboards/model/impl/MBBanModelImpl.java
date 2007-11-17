@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.messageboards.model.MBBan;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -67,12 +72,6 @@ public class MBBanModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table MBBan (banId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,banUserId LONG)";
 	public static String TABLE_SQL_DROP = "drop table MBBan";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBBan"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBBan.userName"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBBanModel"));
 
@@ -140,10 +139,6 @@ public class MBBanModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -182,6 +177,25 @@ public class MBBanModelImpl extends BaseModelImpl {
 		if (banUserId != _banUserId) {
 			_banUserId = banUserId;
 		}
+	}
+
+	public MBBan toEscapedModel() {
+		MBBan model = new MBBanImpl();
+		model.setBanId(getBanId());
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setBanUserId(getBanUserId());
+
+		if (true) {
+			model = (MBBan)Proxy.newProxyInstance(MBBan.class.getClassLoader(),
+					new Class[] { MBBan.class }, new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

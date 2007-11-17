@@ -102,7 +102,7 @@ public class BBCodeUtil {
 	};
 
 	public static String getHTML(String bbcode) {
-		String html = Html.escape(bbcode, false);
+		String html = Html.escape(bbcode);
 
 		html = StringUtil.replace(html, _BBCODE_TAGS, _HTML_TAGS);
 
@@ -121,7 +121,7 @@ public class BBCodeUtil {
 			String postTag = html.substring(tag.getEndPos());
 
 			String code = tag.getElement().replaceAll("\t", "    ");
-			String[] lines = Html.escape(code, false).split("\\n");
+			String[] lines = Html.escape(code).split("\\n");
 			int digits = Integer.toString(lines.length + 1).length();
 
 			sm = new StringMaker(preTag);

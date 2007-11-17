@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -68,14 +72,6 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,name VARCHAR(100) null,location BOOLEAN,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";
 	public static String TABLE_SQL_DROP = "drop table Organization_";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Organization"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Organization.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Organization.comments"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrganizationModel"));
 
@@ -132,10 +128,6 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -207,12 +199,30 @@ public class OrganizationModelImpl extends BaseModelImpl {
 				((comments != null) && (_comments == null)) ||
 				((comments != null) && (_comments != null) &&
 				!comments.equals(_comments))) {
-			if (!XSS_ALLOW_COMMENTS) {
-				comments = XSSUtil.strip(comments);
-			}
-
 			_comments = comments;
 		}
+	}
+
+	public Organization toEscapedModel() {
+		Organization model = new OrganizationImpl();
+		model.setOrganizationId(getOrganizationId());
+		model.setCompanyId(getCompanyId());
+		model.setParentOrganizationId(getParentOrganizationId());
+		model.setName(Html.escape(getName()));
+		model.setLocation(getLocation());
+		model.setRecursable(getRecursable());
+		model.setRegionId(getRegionId());
+		model.setCountryId(getCountryId());
+		model.setStatusId(getStatusId());
+		model.setComments(Html.escape(getComments()));
+
+		if (true) {
+			model = (Organization)Proxy.newProxyInstance(Organization.class.getClassLoader(),
+					new Class[] { Organization.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

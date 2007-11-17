@@ -102,4 +102,6 @@ public interface BlogsEntryModel extends BaseModel {
 	public Date getDisplayDate();
 
 	public void setDisplayDate(Date displayDate);
+
+	public BlogsEntry toEscapedModel();
 }

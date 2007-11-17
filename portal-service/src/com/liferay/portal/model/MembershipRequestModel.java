@@ -90,4 +90,6 @@ public interface MembershipRequestModel extends BaseModel {
 	public int getStatusId();
 
 	public void setStatusId(int statusId);
+
+	public MembershipRequest toEscapedModel();
 }

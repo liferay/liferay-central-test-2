@@ -45,7 +45,6 @@ import com.liferay.util.License;
 import com.liferay.util.Screenshot;
 import com.liferay.util.Time;
 import com.liferay.util.Version;
-import com.liferay.util.XSSUtil;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;
@@ -1001,7 +1000,7 @@ public class PluginPackageUtil {
 	}
 
 	private static String _readHtml(String text) {
-		return XSSUtil.strip(GetterUtil.getString(text));
+		return GetterUtil.getString(text);
 	}
 
 	private static List _readLicenseList(Element parent, String childTagName) {

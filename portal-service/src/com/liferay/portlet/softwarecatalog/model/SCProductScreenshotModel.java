@@ -76,4 +76,6 @@ public interface SCProductScreenshotModel extends BaseModel {
 	public int getPriority();
 
 	public void setPriority(int priority);
+
+	public SCProductScreenshot toEscapedModel();
 }

@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.UserIdMapper;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -63,17 +67,6 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table UserIdMapper (userIdMapperId LONG not null primary key,userId LONG,type_ VARCHAR(75) null,description VARCHAR(75) null,externalUserId VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table UserIdMapper";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserIdMapper"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserIdMapper.type"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserIdMapper.description"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_EXTERNALUSERID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserIdMapper.externalUserId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserIdMapperModel"));
 
@@ -120,10 +113,6 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 		if (((type == null) && (_type != null)) ||
 				((type != null) && (_type == null)) ||
 				((type != null) && (_type != null) && !type.equals(_type))) {
-			if (!XSS_ALLOW_TYPE) {
-				type = XSSUtil.strip(type);
-			}
-
 			_type = type;
 		}
 	}
@@ -137,10 +126,6 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
 	}
@@ -154,12 +139,25 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 				((externalUserId != null) && (_externalUserId == null)) ||
 				((externalUserId != null) && (_externalUserId != null) &&
 				!externalUserId.equals(_externalUserId))) {
-			if (!XSS_ALLOW_EXTERNALUSERID) {
-				externalUserId = XSSUtil.strip(externalUserId);
-			}
-
 			_externalUserId = externalUserId;
 		}
+	}
+
+	public UserIdMapper toEscapedModel() {
+		UserIdMapper model = new UserIdMapperImpl();
+		model.setUserIdMapperId(getUserIdMapperId());
+		model.setUserId(getUserId());
+		model.setType(Html.escape(getType()));
+		model.setDescription(Html.escape(getDescription()));
+		model.setExternalUserId(Html.escape(getExternalUserId()));
+
+		if (true) {
+			model = (UserIdMapper)Proxy.newProxyInstance(UserIdMapper.class.getClassLoader(),
+					new Class[] { UserIdMapper.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

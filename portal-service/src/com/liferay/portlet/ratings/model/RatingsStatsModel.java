@@ -72,4 +72,6 @@ public interface RatingsStatsModel extends BaseModel {
 	public double getAverageScore();
 
 	public void setAverageScore(double averageScore);
+
+	public RatingsStats toEscapedModel();
 }

@@ -96,4 +96,6 @@ public interface EmailAddressModel extends BaseModel {
 	public boolean isPrimary();
 
 	public void setPrimary(boolean primary);
+
+	public EmailAddress toEscapedModel();
 }

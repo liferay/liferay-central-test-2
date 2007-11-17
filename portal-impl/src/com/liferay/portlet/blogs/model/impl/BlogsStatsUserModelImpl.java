@@ -22,11 +22,16 @@
 
 package com.liferay.portlet.blogs.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.portlet.blogs.model.BlogsStatsUser;
+
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -67,9 +72,6 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table BlogsStatsUser (statsUserId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,entryCount INTEGER,lastPostDate DATE null,ratingsTotalEntries INTEGER,ratingsTotalScore DOUBLE,ratingsAverageScore DOUBLE)";
 	public static String TABLE_SQL_DROP = "drop table BlogsStatsUser";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.blogs.model.BlogsStatsUser"),
-			XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.blogs.model.BlogsStatsUserModel"));
 
@@ -179,6 +181,27 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl {
 		if (ratingsAverageScore != _ratingsAverageScore) {
 			_ratingsAverageScore = ratingsAverageScore;
 		}
+	}
+
+	public BlogsStatsUser toEscapedModel() {
+		BlogsStatsUser model = new BlogsStatsUserImpl();
+		model.setStatsUserId(getStatsUserId());
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setEntryCount(getEntryCount());
+		model.setLastPostDate(getLastPostDate());
+		model.setRatingsTotalEntries(getRatingsTotalEntries());
+		model.setRatingsTotalScore(getRatingsTotalScore());
+		model.setRatingsAverageScore(getRatingsAverageScore());
+
+		if (true) {
+			model = (BlogsStatsUser)Proxy.newProxyInstance(BlogsStatsUser.class.getClassLoader(),
+					new Class[] { BlogsStatsUser.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

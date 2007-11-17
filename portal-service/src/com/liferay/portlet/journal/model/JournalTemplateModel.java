@@ -120,4 +120,6 @@ public interface JournalTemplateModel extends BaseModel {
 	public String getSmallImageURL();
 
 	public void setSmallImageURL(String smallImageURL);
+
+	public JournalTemplate toEscapedModel();
 }

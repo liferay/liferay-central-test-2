@@ -64,4 +64,6 @@ public interface MBMessageFlagModel extends BaseModel {
 	public int getFlag();
 
 	public void setFlag(int flag);
+
+	public MBMessageFlag toEscapedModel();
 }

@@ -114,4 +114,6 @@ public interface AccountModel extends BaseModel {
 	public String getSize();
 
 	public void setSize(String size);
+
+	public Account toEscapedModel();
 }

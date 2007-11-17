@@ -142,4 +142,6 @@ public interface LayoutModel extends BaseModel {
 	public long getDlFolderId();
 
 	public void setDlFolderId(long dlFolderId);
+
+	public Layout toEscapedModel();
 }

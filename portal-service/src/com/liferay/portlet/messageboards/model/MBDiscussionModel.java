@@ -64,4 +64,6 @@ public interface MBDiscussionModel extends BaseModel {
 	public long getThreadId();
 
 	public void setThreadId(long threadId);
+
+	public MBDiscussion toEscapedModel();
 }

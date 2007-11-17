@@ -22,12 +22,16 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -60,9 +64,6 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table OrgGroupPermission (organizationId LONG not null,groupId LONG not null,permissionId LONG not null,primary key (organizationId, groupId, permissionId))";
 	public static String TABLE_SQL_DROP = "drop table OrgGroupPermission";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.OrgGroupPermission"),
-			XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgGroupPermissionModel"));
 
@@ -111,6 +112,21 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 		if (permissionId != _permissionId) {
 			_permissionId = permissionId;
 		}
+	}
+
+	public OrgGroupPermission toEscapedModel() {
+		OrgGroupPermission model = new OrgGroupPermissionImpl();
+		model.setOrganizationId(getOrganizationId());
+		model.setGroupId(getGroupId());
+		model.setPermissionId(getPermissionId());
+
+		if (true) {
+			model = (OrgGroupPermission)Proxy.newProxyInstance(OrgGroupPermission.class.getClassLoader(),
+					new Class[] { OrgGroupPermission.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

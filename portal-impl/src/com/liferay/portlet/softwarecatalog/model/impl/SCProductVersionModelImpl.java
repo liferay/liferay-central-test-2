@@ -22,14 +22,19 @@
 
 package com.liferay.portlet.softwarecatalog.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -73,24 +78,6 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table SCProductVersion (productVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productEntryId LONG,version VARCHAR(75) null,changeLog STRING null,downloadPageURL STRING null,directDownloadURL STRING null,repoStoreArtifact BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table SCProductVersion";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductVersion"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductVersion.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_VERSION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductVersion.version"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CHANGELOG = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductVersion.changeLog"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DOWNLOADPAGEURL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductVersion.downloadPageURL"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DIRECTDOWNLOADURL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductVersion.directDownloadURL"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductVersionModel"));
 
@@ -148,10 +135,6 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -201,10 +184,6 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 				((version != null) && (_version == null)) ||
 				((version != null) && (_version != null) &&
 				!version.equals(_version))) {
-			if (!XSS_ALLOW_VERSION) {
-				version = XSSUtil.strip(version);
-			}
-
 			_version = version;
 		}
 	}
@@ -218,10 +197,6 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 				((changeLog != null) && (_changeLog == null)) ||
 				((changeLog != null) && (_changeLog != null) &&
 				!changeLog.equals(_changeLog))) {
-			if (!XSS_ALLOW_CHANGELOG) {
-				changeLog = XSSUtil.strip(changeLog);
-			}
-
 			_changeLog = changeLog;
 		}
 	}
@@ -235,10 +210,6 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 				((downloadPageURL != null) && (_downloadPageURL == null)) ||
 				((downloadPageURL != null) && (_downloadPageURL != null) &&
 				!downloadPageURL.equals(_downloadPageURL))) {
-			if (!XSS_ALLOW_DOWNLOADPAGEURL) {
-				downloadPageURL = XSSUtil.strip(downloadPageURL);
-			}
-
 			_downloadPageURL = downloadPageURL;
 		}
 	}
@@ -252,10 +223,6 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 				((directDownloadURL != null) && (_directDownloadURL == null)) ||
 				((directDownloadURL != null) && (_directDownloadURL != null) &&
 				!directDownloadURL.equals(_directDownloadURL))) {
-			if (!XSS_ALLOW_DIRECTDOWNLOADURL) {
-				directDownloadURL = XSSUtil.strip(directDownloadURL);
-			}
-
 			_directDownloadURL = directDownloadURL;
 		}
 	}
@@ -272,6 +239,30 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 		if (repoStoreArtifact != _repoStoreArtifact) {
 			_repoStoreArtifact = repoStoreArtifact;
 		}
+	}
+
+	public SCProductVersion toEscapedModel() {
+		SCProductVersion model = new SCProductVersionImpl();
+		model.setProductVersionId(getProductVersionId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setProductEntryId(getProductEntryId());
+		model.setVersion(Html.escape(getVersion()));
+		model.setChangeLog(Html.escape(getChangeLog()));
+		model.setDownloadPageURL(Html.escape(getDownloadPageURL()));
+		model.setDirectDownloadURL(Html.escape(getDirectDownloadURL()));
+		model.setRepoStoreArtifact(getRepoStoreArtifact());
+
+		if (true) {
+			model = (SCProductVersion)Proxy.newProxyInstance(SCProductVersion.class.getClassLoader(),
+					new Class[] { SCProductVersion.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

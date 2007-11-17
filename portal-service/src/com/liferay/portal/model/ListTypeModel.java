@@ -60,4 +60,6 @@ public interface ListTypeModel extends BaseModel {
 	public String getType();
 
 	public void setType(String type);
+
+	public ListType toEscapedModel();
 }

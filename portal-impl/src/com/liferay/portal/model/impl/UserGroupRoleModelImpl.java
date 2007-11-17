@@ -22,12 +22,16 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -60,8 +64,6 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table UserGroupRole (userId LONG not null,groupId LONG not null,roleId LONG not null,primary key (userId, groupId, roleId))";
 	public static String TABLE_SQL_DROP = "drop table UserGroupRole";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserGroupRole"), XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserGroupRoleModel"));
 
@@ -110,6 +112,21 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 		if (roleId != _roleId) {
 			_roleId = roleId;
 		}
+	}
+
+	public UserGroupRole toEscapedModel() {
+		UserGroupRole model = new UserGroupRoleImpl();
+		model.setUserId(getUserId());
+		model.setGroupId(getGroupId());
+		model.setRoleId(getRoleId());
+
+		if (true) {
+			model = (UserGroupRole)Proxy.newProxyInstance(UserGroupRole.class.getClassLoader(),
+					new Class[] { UserGroupRole.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

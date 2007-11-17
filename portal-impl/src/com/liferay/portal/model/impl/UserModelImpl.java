@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -88,38 +92,6 @@ public class UserModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(75) null,comments STRING null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table User_";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.uuid"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.password"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SCREENNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.screenName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_EMAILADDRESS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.emailAddress"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LANGUAGEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.languageId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TIMEZONEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.timeZoneId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_GREETING = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.greeting"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.comments"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LOGINIP = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.loginIP"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LASTLOGINIP = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.User.lastLoginIP"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserModel"));
 
@@ -227,10 +199,6 @@ public class UserModelImpl extends BaseModelImpl {
 				((password != null) && (_password == null)) ||
 				((password != null) && (_password != null) &&
 				!password.equals(_password))) {
-			if (!XSS_ALLOW_PASSWORD) {
-				password = XSSUtil.strip(password);
-			}
-
 			_password = password;
 		}
 	}
@@ -297,10 +265,6 @@ public class UserModelImpl extends BaseModelImpl {
 				((screenName != null) && (_screenName == null)) ||
 				((screenName != null) && (_screenName != null) &&
 				!screenName.equals(_screenName))) {
-			if (!XSS_ALLOW_SCREENNAME) {
-				screenName = XSSUtil.strip(screenName);
-			}
-
 			_screenName = screenName;
 		}
 	}
@@ -314,10 +278,6 @@ public class UserModelImpl extends BaseModelImpl {
 				((emailAddress != null) && (_emailAddress == null)) ||
 				((emailAddress != null) && (_emailAddress != null) &&
 				!emailAddress.equals(_emailAddress))) {
-			if (!XSS_ALLOW_EMAILADDRESS) {
-				emailAddress = XSSUtil.strip(emailAddress);
-			}
-
 			_emailAddress = emailAddress;
 		}
 	}
@@ -341,10 +301,6 @@ public class UserModelImpl extends BaseModelImpl {
 				((languageId != null) && (_languageId == null)) ||
 				((languageId != null) && (_languageId != null) &&
 				!languageId.equals(_languageId))) {
-			if (!XSS_ALLOW_LANGUAGEID) {
-				languageId = XSSUtil.strip(languageId);
-			}
-
 			_languageId = languageId;
 		}
 	}
@@ -358,10 +314,6 @@ public class UserModelImpl extends BaseModelImpl {
 				((timeZoneId != null) && (_timeZoneId == null)) ||
 				((timeZoneId != null) && (_timeZoneId != null) &&
 				!timeZoneId.equals(_timeZoneId))) {
-			if (!XSS_ALLOW_TIMEZONEID) {
-				timeZoneId = XSSUtil.strip(timeZoneId);
-			}
-
 			_timeZoneId = timeZoneId;
 		}
 	}
@@ -375,10 +327,6 @@ public class UserModelImpl extends BaseModelImpl {
 				((greeting != null) && (_greeting == null)) ||
 				((greeting != null) && (_greeting != null) &&
 				!greeting.equals(_greeting))) {
-			if (!XSS_ALLOW_GREETING) {
-				greeting = XSSUtil.strip(greeting);
-			}
-
 			_greeting = greeting;
 		}
 	}
@@ -392,10 +340,6 @@ public class UserModelImpl extends BaseModelImpl {
 				((comments != null) && (_comments == null)) ||
 				((comments != null) && (_comments != null) &&
 				!comments.equals(_comments))) {
-			if (!XSS_ALLOW_COMMENTS) {
-				comments = XSSUtil.strip(comments);
-			}
-
 			_comments = comments;
 		}
 	}
@@ -422,10 +366,6 @@ public class UserModelImpl extends BaseModelImpl {
 				((loginIP != null) && (_loginIP == null)) ||
 				((loginIP != null) && (_loginIP != null) &&
 				!loginIP.equals(_loginIP))) {
-			if (!XSS_ALLOW_LOGINIP) {
-				loginIP = XSSUtil.strip(loginIP);
-			}
-
 			_loginIP = loginIP;
 		}
 	}
@@ -452,10 +392,6 @@ public class UserModelImpl extends BaseModelImpl {
 				((lastLoginIP != null) && (_lastLoginIP == null)) ||
 				((lastLoginIP != null) && (_lastLoginIP != null) &&
 				!lastLoginIP.equals(_lastLoginIP))) {
-			if (!XSS_ALLOW_LASTLOGINIP) {
-				lastLoginIP = XSSUtil.strip(lastLoginIP);
-			}
-
 			_lastLoginIP = lastLoginIP;
 		}
 	}
@@ -538,6 +474,46 @@ public class UserModelImpl extends BaseModelImpl {
 		if (active != _active) {
 			_active = active;
 		}
+	}
+
+	public User toEscapedModel() {
+		User model = new UserImpl();
+		model.setUuid(Html.escape(getUuid()));
+		model.setUserId(getUserId());
+		model.setCompanyId(getCompanyId());
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setDefaultUser(getDefaultUser());
+		model.setContactId(getContactId());
+		model.setPassword(Html.escape(getPassword()));
+		model.setPasswordEncrypted(getPasswordEncrypted());
+		model.setPasswordReset(getPasswordReset());
+		model.setPasswordModifiedDate(getPasswordModifiedDate());
+		model.setGraceLoginCount(getGraceLoginCount());
+		model.setScreenName(Html.escape(getScreenName()));
+		model.setEmailAddress(Html.escape(getEmailAddress()));
+		model.setPortraitId(getPortraitId());
+		model.setLanguageId(Html.escape(getLanguageId()));
+		model.setTimeZoneId(Html.escape(getTimeZoneId()));
+		model.setGreeting(Html.escape(getGreeting()));
+		model.setComments(Html.escape(getComments()));
+		model.setLoginDate(getLoginDate());
+		model.setLoginIP(Html.escape(getLoginIP()));
+		model.setLastLoginDate(getLastLoginDate());
+		model.setLastLoginIP(Html.escape(getLastLoginIP()));
+		model.setLastFailedLoginDate(getLastFailedLoginDate());
+		model.setFailedLoginAttempts(getFailedLoginAttempts());
+		model.setLockout(getLockout());
+		model.setLockoutDate(getLockoutDate());
+		model.setAgreedToTermsOfUse(getAgreedToTermsOfUse());
+		model.setActive(getActive());
+
+		if (true) {
+			model = (User)Proxy.newProxyInstance(User.class.getClassLoader(),
+					new Class[] { User.class }, new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

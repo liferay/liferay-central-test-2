@@ -200,4 +200,6 @@ public interface ShoppingItemModel extends BaseModel {
 	public String getLargeImageURL();
 
 	public void setLargeImageURL(String largeImageURL);
+
+	public ShoppingItem toEscapedModel();
 }

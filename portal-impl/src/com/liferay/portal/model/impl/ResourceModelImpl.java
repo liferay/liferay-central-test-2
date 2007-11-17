@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -61,11 +65,6 @@ public class ResourceModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Resource_ (resourceId LONG not null primary key,codeId LONG,primKey VARCHAR(300) null)";
 	public static String TABLE_SQL_DROP = "drop table Resource_";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Resource"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_PRIMKEY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Resource.primKey"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ResourceModel"));
 
@@ -113,12 +112,23 @@ public class ResourceModelImpl extends BaseModelImpl {
 				((primKey != null) && (_primKey == null)) ||
 				((primKey != null) && (_primKey != null) &&
 				!primKey.equals(_primKey))) {
-			if (!XSS_ALLOW_PRIMKEY) {
-				primKey = XSSUtil.strip(primKey);
-			}
-
 			_primKey = primKey;
 		}
+	}
+
+	public Resource toEscapedModel() {
+		Resource model = new ResourceImpl();
+		model.setResourceId(getResourceId());
+		model.setCodeId(getCodeId());
+		model.setPrimKey(Html.escape(getPrimKey()));
+
+		if (true) {
+			model = (Resource)Proxy.newProxyInstance(Resource.class.getClassLoader(),
+					new Class[] { Resource.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

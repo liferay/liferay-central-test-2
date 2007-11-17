@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.wiki.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.wiki.model.WikiPage;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -72,20 +77,6 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table WikiPage (pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table WikiPage";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.wiki.model.WikiPage"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.title"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CONTENT = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.content"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FORMAT = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.wiki.model.WikiPage.format"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiPageModel"));
 
@@ -153,10 +144,6 @@ public class WikiPageModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -192,10 +179,6 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		if (((title == null) && (_title != null)) ||
 				((title != null) && (_title == null)) ||
 				((title != null) && (_title != null) && !title.equals(_title))) {
-			if (!XSS_ALLOW_TITLE) {
-				title = XSSUtil.strip(title);
-			}
-
 			_title = title;
 		}
 	}
@@ -219,10 +202,6 @@ public class WikiPageModelImpl extends BaseModelImpl {
 				((content != null) && (_content == null)) ||
 				((content != null) && (_content != null) &&
 				!content.equals(_content))) {
-			if (!XSS_ALLOW_CONTENT) {
-				content = XSSUtil.strip(content);
-			}
-
 			_content = content;
 		}
 	}
@@ -236,10 +215,6 @@ public class WikiPageModelImpl extends BaseModelImpl {
 				((format != null) && (_format == null)) ||
 				((format != null) && (_format != null) &&
 				!format.equals(_format))) {
-			if (!XSS_ALLOW_FORMAT) {
-				format = XSSUtil.strip(format);
-			}
-
 			_format = format;
 		}
 	}
@@ -256,6 +231,30 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		if (head != _head) {
 			_head = head;
 		}
+	}
+
+	public WikiPage toEscapedModel() {
+		WikiPage model = new WikiPageImpl();
+		model.setPageId(getPageId());
+		model.setResourcePrimKey(getResourcePrimKey());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setNodeId(getNodeId());
+		model.setTitle(Html.escape(getTitle()));
+		model.setVersion(getVersion());
+		model.setContent(Html.escape(getContent()));
+		model.setFormat(Html.escape(getFormat()));
+		model.setHead(getHead());
+
+		if (true) {
+			model = (WikiPage)Proxy.newProxyInstance(WikiPage.class.getClassLoader(),
+					new Class[] { WikiPage.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

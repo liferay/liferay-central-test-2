@@ -78,4 +78,6 @@ public interface JournalContentSearchModel extends BaseModel {
 	public String getArticleId();
 
 	public void setArticleId(String articleId);
+
+	public JournalContentSearch toEscapedModel();
 }

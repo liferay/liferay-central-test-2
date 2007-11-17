@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -69,15 +74,6 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(300) null,version DOUBLE,size_ INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table DLFileVersion";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileVersion"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileVersion.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileVersion.name"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileVersionModel"));
 
@@ -135,10 +131,6 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -174,10 +166,6 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -200,6 +188,27 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 		if (size != _size) {
 			_size = size;
 		}
+	}
+
+	public DLFileVersion toEscapedModel() {
+		DLFileVersion model = new DLFileVersionImpl();
+		model.setFileVersionId(getFileVersionId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setFolderId(getFolderId());
+		model.setName(Html.escape(getName()));
+		model.setVersion(getVersion());
+		model.setSize(getSize());
+
+		if (true) {
+			model = (DLFileVersion)Proxy.newProxyInstance(DLFileVersion.class.getClassLoader(),
+					new Class[] { DLFileVersion.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

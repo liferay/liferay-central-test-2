@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -70,23 +74,6 @@ public class GroupModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ VARCHAR(75) null,typeSettings STRING null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Group_";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Group"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Group.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Group.description"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Group.type"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPESETTINGS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Group.typeSettings"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FRIENDLYURL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Group.friendlyURL"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.GroupModel"));
 
@@ -183,10 +170,6 @@ public class GroupModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -200,10 +183,6 @@ public class GroupModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
 	}
@@ -216,10 +195,6 @@ public class GroupModelImpl extends BaseModelImpl {
 		if (((type == null) && (_type != null)) ||
 				((type != null) && (_type == null)) ||
 				((type != null) && (_type != null) && !type.equals(_type))) {
-			if (!XSS_ALLOW_TYPE) {
-				type = XSSUtil.strip(type);
-			}
-
 			_type = type;
 		}
 	}
@@ -233,10 +208,6 @@ public class GroupModelImpl extends BaseModelImpl {
 				((typeSettings != null) && (_typeSettings == null)) ||
 				((typeSettings != null) && (_typeSettings != null) &&
 				!typeSettings.equals(_typeSettings))) {
-			if (!XSS_ALLOW_TYPESETTINGS) {
-				typeSettings = XSSUtil.strip(typeSettings);
-			}
-
 			_typeSettings = typeSettings;
 		}
 	}
@@ -250,10 +221,6 @@ public class GroupModelImpl extends BaseModelImpl {
 				((friendlyURL != null) && (_friendlyURL == null)) ||
 				((friendlyURL != null) && (_friendlyURL != null) &&
 				!friendlyURL.equals(_friendlyURL))) {
-			if (!XSS_ALLOW_FRIENDLYURL) {
-				friendlyURL = XSSUtil.strip(friendlyURL);
-			}
-
 			_friendlyURL = friendlyURL;
 		}
 	}
@@ -270,6 +237,30 @@ public class GroupModelImpl extends BaseModelImpl {
 		if (active != _active) {
 			_active = active;
 		}
+	}
+
+	public Group toEscapedModel() {
+		Group model = new GroupImpl();
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setCreatorUserId(getCreatorUserId());
+		model.setClassNameId(getClassNameId());
+		model.setClassPK(getClassPK());
+		model.setParentGroupId(getParentGroupId());
+		model.setLiveGroupId(getLiveGroupId());
+		model.setName(Html.escape(getName()));
+		model.setDescription(Html.escape(getDescription()));
+		model.setType(Html.escape(getType()));
+		model.setTypeSettings(Html.escape(getTypeSettings()));
+		model.setFriendlyURL(Html.escape(getFriendlyURL()));
+		model.setActive(getActive());
+
+		if (true) {
+			model = (Group)Proxy.newProxyInstance(Group.class.getClassLoader(),
+					new Class[] { Group.class }, new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

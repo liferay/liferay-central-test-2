@@ -60,4 +60,6 @@ public interface WikiPageResourceModel extends BaseModel {
 	public String getTitle();
 
 	public void setTitle(String title);
+
+	public WikiPageResource toEscapedModel();
 }

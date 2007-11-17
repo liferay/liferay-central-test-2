@@ -98,4 +98,6 @@ public interface JournalStructureModel extends BaseModel {
 	public String getXsd();
 
 	public void setXsd(String xsd);
+
+	public JournalStructure toEscapedModel();
 }

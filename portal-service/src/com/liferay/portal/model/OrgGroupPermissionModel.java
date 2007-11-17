@@ -61,4 +61,6 @@ public interface OrgGroupPermissionModel extends BaseModel {
 	public long getPermissionId();
 
 	public void setPermissionId(long permissionId);
+
+	public OrgGroupPermission toEscapedModel();
 }

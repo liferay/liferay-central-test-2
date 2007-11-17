@@ -68,4 +68,6 @@ public interface ShoppingItemFieldModel extends BaseModel {
 	public String getDescription();
 
 	public void setDescription(String description);
+
+	public ShoppingItemField toEscapedModel();
 }

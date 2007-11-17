@@ -22,12 +22,17 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.portlet.messageboards.model.MBThread;
+
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -67,9 +72,6 @@ public class MBThreadModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE)";
 	public static String TABLE_SQL_DROP = "drop table MBThread";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBThread"),
-			XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBThreadModel"));
 
@@ -169,6 +171,26 @@ public class MBThreadModelImpl extends BaseModelImpl {
 		if (priority != _priority) {
 			_priority = priority;
 		}
+	}
+
+	public MBThread toEscapedModel() {
+		MBThread model = new MBThreadImpl();
+		model.setThreadId(getThreadId());
+		model.setCategoryId(getCategoryId());
+		model.setRootMessageId(getRootMessageId());
+		model.setMessageCount(getMessageCount());
+		model.setViewCount(getViewCount());
+		model.setLastPostByUserId(getLastPostByUserId());
+		model.setLastPostDate(getLastPostDate());
+		model.setPriority(getPriority());
+
+		if (true) {
+			model = (MBThread)Proxy.newProxyInstance(MBThread.class.getClassLoader(),
+					new Class[] { MBThread.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

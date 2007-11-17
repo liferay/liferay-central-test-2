@@ -22,14 +22,19 @@
 
 package com.liferay.portlet.softwarecatalog.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -77,39 +82,6 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table SCProductEntry (productEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,tags VARCHAR(300) null,shortDescription STRING null,longDescription STRING null,pageURL STRING null,author VARCHAR(75) null,repoGroupId VARCHAR(75) null,repoArtifactId VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table SCProductEntry";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.type"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TAGS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.tags"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SHORTDESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.shortDescription"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LONGDESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.longDescription"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PAGEURL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.pageURL"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_AUTHOR = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.author"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_REPOGROUPID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.repoGroupId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_REPOARTIFACTID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductEntry.repoArtifactId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductEntryModel"));
 
@@ -177,10 +149,6 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -219,10 +187,6 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -235,10 +199,6 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 		if (((type == null) && (_type != null)) ||
 				((type != null) && (_type == null)) ||
 				((type != null) && (_type != null) && !type.equals(_type))) {
-			if (!XSS_ALLOW_TYPE) {
-				type = XSSUtil.strip(type);
-			}
-
 			_type = type;
 		}
 	}
@@ -251,10 +211,6 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 		if (((tags == null) && (_tags != null)) ||
 				((tags != null) && (_tags == null)) ||
 				((tags != null) && (_tags != null) && !tags.equals(_tags))) {
-			if (!XSS_ALLOW_TAGS) {
-				tags = XSSUtil.strip(tags);
-			}
-
 			_tags = tags;
 		}
 	}
@@ -268,10 +224,6 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 				((shortDescription != null) && (_shortDescription == null)) ||
 				((shortDescription != null) && (_shortDescription != null) &&
 				!shortDescription.equals(_shortDescription))) {
-			if (!XSS_ALLOW_SHORTDESCRIPTION) {
-				shortDescription = XSSUtil.strip(shortDescription);
-			}
-
 			_shortDescription = shortDescription;
 		}
 	}
@@ -285,10 +237,6 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 				((longDescription != null) && (_longDescription == null)) ||
 				((longDescription != null) && (_longDescription != null) &&
 				!longDescription.equals(_longDescription))) {
-			if (!XSS_ALLOW_LONGDESCRIPTION) {
-				longDescription = XSSUtil.strip(longDescription);
-			}
-
 			_longDescription = longDescription;
 		}
 	}
@@ -302,10 +250,6 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 				((pageURL != null) && (_pageURL == null)) ||
 				((pageURL != null) && (_pageURL != null) &&
 				!pageURL.equals(_pageURL))) {
-			if (!XSS_ALLOW_PAGEURL) {
-				pageURL = XSSUtil.strip(pageURL);
-			}
-
 			_pageURL = pageURL;
 		}
 	}
@@ -319,10 +263,6 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 				((author != null) && (_author == null)) ||
 				((author != null) && (_author != null) &&
 				!author.equals(_author))) {
-			if (!XSS_ALLOW_AUTHOR) {
-				author = XSSUtil.strip(author);
-			}
-
 			_author = author;
 		}
 	}
@@ -336,10 +276,6 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 				((repoGroupId != null) && (_repoGroupId == null)) ||
 				((repoGroupId != null) && (_repoGroupId != null) &&
 				!repoGroupId.equals(_repoGroupId))) {
-			if (!XSS_ALLOW_REPOGROUPID) {
-				repoGroupId = XSSUtil.strip(repoGroupId);
-			}
-
 			_repoGroupId = repoGroupId;
 		}
 	}
@@ -353,12 +289,36 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 				((repoArtifactId != null) && (_repoArtifactId == null)) ||
 				((repoArtifactId != null) && (_repoArtifactId != null) &&
 				!repoArtifactId.equals(_repoArtifactId))) {
-			if (!XSS_ALLOW_REPOARTIFACTID) {
-				repoArtifactId = XSSUtil.strip(repoArtifactId);
-			}
-
 			_repoArtifactId = repoArtifactId;
 		}
+	}
+
+	public SCProductEntry toEscapedModel() {
+		SCProductEntry model = new SCProductEntryImpl();
+		model.setProductEntryId(getProductEntryId());
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setName(Html.escape(getName()));
+		model.setType(Html.escape(getType()));
+		model.setTags(Html.escape(getTags()));
+		model.setShortDescription(Html.escape(getShortDescription()));
+		model.setLongDescription(Html.escape(getLongDescription()));
+		model.setPageURL(Html.escape(getPageURL()));
+		model.setAuthor(Html.escape(getAuthor()));
+		model.setRepoGroupId(Html.escape(getRepoGroupId()));
+		model.setRepoArtifactId(Html.escape(getRepoArtifactId()));
+
+		if (true) {
+			model = (SCProductEntry)Proxy.newProxyInstance(SCProductEntry.class.getClassLoader(),
+					new Class[] { SCProductEntry.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

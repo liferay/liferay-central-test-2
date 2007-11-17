@@ -86,4 +86,6 @@ public interface TagsPropertyModel extends BaseModel {
 	public String getValue();
 
 	public void setValue(String value);
+
+	public TagsProperty toEscapedModel();
 }

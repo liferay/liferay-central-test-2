@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -62,11 +66,6 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table ResourceCode (codeId LONG not null primary key,companyId LONG,name VARCHAR(300) null,scope INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table ResourceCode";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.ResourceCode"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.ResourceCode.name"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ResourceCodeModel"));
 
@@ -113,10 +112,6 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -129,6 +124,22 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 		if (scope != _scope) {
 			_scope = scope;
 		}
+	}
+
+	public ResourceCode toEscapedModel() {
+		ResourceCode model = new ResourceCodeImpl();
+		model.setCodeId(getCodeId());
+		model.setCompanyId(getCompanyId());
+		model.setName(Html.escape(getName()));
+		model.setScope(getScope());
+
+		if (true) {
+			model = (ResourceCode)Proxy.newProxyInstance(ResourceCode.class.getClassLoader(),
+					new Class[] { ResourceCode.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

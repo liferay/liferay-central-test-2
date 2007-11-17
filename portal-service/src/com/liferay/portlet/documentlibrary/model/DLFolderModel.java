@@ -98,4 +98,6 @@ public interface DLFolderModel extends BaseModel {
 	public Date getLastPostDate();
 
 	public void setLastPostDate(Date lastPostDate);
+
+	public DLFolder toEscapedModel();
 }

@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.shopping.model.ShoppingCart;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -71,18 +76,6 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table ShoppingCart (cartId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,itemIds STRING null,couponCodes VARCHAR(75) null,altShipping INTEGER,insure BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table ShoppingCart";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ITEMIDS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.itemIds"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COUPONCODES = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCart.couponCodes"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCartModel"));
 
@@ -150,10 +143,6 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -193,10 +182,6 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 				((itemIds != null) && (_itemIds == null)) ||
 				((itemIds != null) && (_itemIds != null) &&
 				!itemIds.equals(_itemIds))) {
-			if (!XSS_ALLOW_ITEMIDS) {
-				itemIds = XSSUtil.strip(itemIds);
-			}
-
 			_itemIds = itemIds;
 		}
 	}
@@ -210,10 +195,6 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 				((couponCodes != null) && (_couponCodes == null)) ||
 				((couponCodes != null) && (_couponCodes != null) &&
 				!couponCodes.equals(_couponCodes))) {
-			if (!XSS_ALLOW_COUPONCODES) {
-				couponCodes = XSSUtil.strip(couponCodes);
-			}
-
 			_couponCodes = couponCodes;
 		}
 	}
@@ -240,6 +221,29 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 		if (insure != _insure) {
 			_insure = insure;
 		}
+	}
+
+	public ShoppingCart toEscapedModel() {
+		ShoppingCart model = new ShoppingCartImpl();
+		model.setCartId(getCartId());
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setItemIds(Html.escape(getItemIds()));
+		model.setCouponCodes(Html.escape(getCouponCodes()));
+		model.setAltShipping(getAltShipping());
+		model.setInsure(getInsure());
+
+		if (true) {
+			model = (ShoppingCart)Proxy.newProxyInstance(ShoppingCart.class.getClassLoader(),
+					new Class[] { ShoppingCart.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

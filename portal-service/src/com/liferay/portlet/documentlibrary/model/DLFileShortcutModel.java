@@ -90,4 +90,6 @@ public interface DLFileShortcutModel extends BaseModel {
 	public String getToName();
 
 	public void setToName(String toName);
+
+	public DLFileShortcut toEscapedModel();
 }

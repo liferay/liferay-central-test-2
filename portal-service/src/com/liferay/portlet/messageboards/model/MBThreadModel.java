@@ -82,4 +82,6 @@ public interface MBThreadModel extends BaseModel {
 	public double getPriority();
 
 	public void setPriority(double priority);
+
+	public MBThread toEscapedModel();
 }

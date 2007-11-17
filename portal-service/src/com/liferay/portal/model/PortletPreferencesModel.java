@@ -72,4 +72,6 @@ public interface PortletPreferencesModel extends BaseModel {
 	public String getPreferences();
 
 	public void setPreferences(String preferences);
+
+	public PortletPreferences toEscapedModel();
 }

@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -62,14 +66,6 @@ public class PortletModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Portlet (id_ LONG not null primary key,companyId LONG,portletId VARCHAR(200) null,roles STRING null,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Portlet";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Portlet"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_PORTLETID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Portlet.portletId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ROLES = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Portlet.roles"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PortletModel"));
 
@@ -117,10 +113,6 @@ public class PortletModelImpl extends BaseModelImpl {
 				((portletId != null) && (_portletId == null)) ||
 				((portletId != null) && (_portletId != null) &&
 				!portletId.equals(_portletId))) {
-			if (!XSS_ALLOW_PORTLETID) {
-				portletId = XSSUtil.strip(portletId);
-			}
-
 			_portletId = portletId;
 		}
 	}
@@ -133,10 +125,6 @@ public class PortletModelImpl extends BaseModelImpl {
 		if (((roles == null) && (_roles != null)) ||
 				((roles != null) && (_roles == null)) ||
 				((roles != null) && (_roles != null) && !roles.equals(_roles))) {
-			if (!XSS_ALLOW_ROLES) {
-				roles = XSSUtil.strip(roles);
-			}
-
 			_roles = roles;
 		}
 	}
@@ -153,6 +141,23 @@ public class PortletModelImpl extends BaseModelImpl {
 		if (active != _active) {
 			_active = active;
 		}
+	}
+
+	public Portlet toEscapedModel() {
+		Portlet model = new PortletImpl();
+		model.setId(getId());
+		model.setCompanyId(getCompanyId());
+		model.setPortletId(Html.escape(getPortletId()));
+		model.setRoles(Html.escape(getRoles()));
+		model.setActive(getActive());
+
+		if (true) {
+			model = (Portlet)Proxy.newProxyInstance(Portlet.class.getClassLoader(),
+					new Class[] { Portlet.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

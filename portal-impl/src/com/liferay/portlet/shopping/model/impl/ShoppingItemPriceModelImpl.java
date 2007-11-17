@@ -22,11 +22,16 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.portlet.shopping.model.ShoppingItemPrice;
+
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -66,9 +71,6 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table ShoppingItemPrice (itemPriceId LONG not null primary key,itemId LONG,minQuantity INTEGER,maxQuantity INTEGER,price DOUBLE,discount DOUBLE,taxable BOOLEAN,shipping DOUBLE,useShippingFormula BOOLEAN,status INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table ShoppingItemPrice";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemPrice"),
-			XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingItemPriceModel"));
 
@@ -193,6 +195,28 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 		if (status != _status) {
 			_status = status;
 		}
+	}
+
+	public ShoppingItemPrice toEscapedModel() {
+		ShoppingItemPrice model = new ShoppingItemPriceImpl();
+		model.setItemPriceId(getItemPriceId());
+		model.setItemId(getItemId());
+		model.setMinQuantity(getMinQuantity());
+		model.setMaxQuantity(getMaxQuantity());
+		model.setPrice(getPrice());
+		model.setDiscount(getDiscount());
+		model.setTaxable(getTaxable());
+		model.setShipping(getShipping());
+		model.setUseShippingFormula(getUseShippingFormula());
+		model.setStatus(getStatus());
+
+		if (true) {
+			model = (ShoppingItemPrice)Proxy.newProxyInstance(ShoppingItemPrice.class.getClassLoader(),
+					new Class[] { ShoppingItemPrice.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

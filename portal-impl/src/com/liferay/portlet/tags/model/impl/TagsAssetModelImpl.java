@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.tags.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.tags.model.TagsAsset;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -82,26 +87,6 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(300) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table TagsAsset";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsAsset"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_MIMETYPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.mimeType"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.title"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.description"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SUMMARY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.summary"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_URL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsAsset.url"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.tags.model.TagsAssetModel"));
 
@@ -169,10 +154,6 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -284,10 +265,6 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 				((mimeType != null) && (_mimeType == null)) ||
 				((mimeType != null) && (_mimeType != null) &&
 				!mimeType.equals(_mimeType))) {
-			if (!XSS_ALLOW_MIMETYPE) {
-				mimeType = XSSUtil.strip(mimeType);
-			}
-
 			_mimeType = mimeType;
 		}
 	}
@@ -300,10 +277,6 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		if (((title == null) && (_title != null)) ||
 				((title != null) && (_title == null)) ||
 				((title != null) && (_title != null) && !title.equals(_title))) {
-			if (!XSS_ALLOW_TITLE) {
-				title = XSSUtil.strip(title);
-			}
-
 			_title = title;
 		}
 	}
@@ -317,10 +290,6 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
 	}
@@ -334,10 +303,6 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 				((summary != null) && (_summary == null)) ||
 				((summary != null) && (_summary != null) &&
 				!summary.equals(_summary))) {
-			if (!XSS_ALLOW_SUMMARY) {
-				summary = XSSUtil.strip(summary);
-			}
-
 			_summary = summary;
 		}
 	}
@@ -350,10 +315,6 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		if (((url == null) && (_url != null)) ||
 				((url != null) && (_url == null)) ||
 				((url != null) && (_url != null) && !url.equals(_url))) {
-			if (!XSS_ALLOW_URL) {
-				url = XSSUtil.strip(url);
-			}
-
 			_url = url;
 		}
 	}
@@ -396,6 +357,40 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 		if (viewCount != _viewCount) {
 			_viewCount = viewCount;
 		}
+	}
+
+	public TagsAsset toEscapedModel() {
+		TagsAsset model = new TagsAssetImpl();
+		model.setAssetId(getAssetId());
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setClassNameId(getClassNameId());
+		model.setClassPK(getClassPK());
+		model.setStartDate(getStartDate());
+		model.setEndDate(getEndDate());
+		model.setPublishDate(getPublishDate());
+		model.setExpirationDate(getExpirationDate());
+		model.setMimeType(Html.escape(getMimeType()));
+		model.setTitle(Html.escape(getTitle()));
+		model.setDescription(Html.escape(getDescription()));
+		model.setSummary(Html.escape(getSummary()));
+		model.setUrl(Html.escape(getUrl()));
+		model.setHeight(getHeight());
+		model.setWidth(getWidth());
+		model.setPriority(getPriority());
+		model.setViewCount(getViewCount());
+
+		if (true) {
+			model = (TagsAsset)Proxy.newProxyInstance(TagsAsset.class.getClassLoader(),
+					new Class[] { TagsAsset.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

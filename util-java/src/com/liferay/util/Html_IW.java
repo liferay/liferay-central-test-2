@@ -37,11 +37,6 @@ public class Html_IW {
 		return Html.escape(text);
 	}
 
-	public java.lang.String escape(java.lang.String text,
-		boolean stripBlankSpaces) {
-		return Html.escape(text, stripBlankSpaces);
-	}
-
 	public java.lang.String formatTo(java.lang.String text) {
 		return Html.formatTo(text);
 	}

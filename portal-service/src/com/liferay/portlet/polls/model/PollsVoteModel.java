@@ -70,4 +70,6 @@ public interface PollsVoteModel extends BaseModel {
 	public Date getVoteDate();
 
 	public void setVoteDate(Date voteDate);
+
+	public PollsVote toEscapedModel();
 }

@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -63,15 +67,6 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table ServiceComponent (serviceComponentId LONG not null primary key,buildNamespace VARCHAR(75) null,buildNumber LONG,buildDate LONG,data_ TEXT null)";
 	public static String TABLE_SQL_DROP = "drop table ServiceComponent";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.ServiceComponent"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_BUILDNAMESPACE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.ServiceComponent.buildNamespace"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DATA = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.ServiceComponent.data"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ServiceComponentModel"));
 
@@ -109,10 +104,6 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 				((buildNamespace != null) && (_buildNamespace == null)) ||
 				((buildNamespace != null) && (_buildNamespace != null) &&
 				!buildNamespace.equals(_buildNamespace))) {
-			if (!XSS_ALLOW_BUILDNAMESPACE) {
-				buildNamespace = XSSUtil.strip(buildNamespace);
-			}
-
 			_buildNamespace = buildNamespace;
 		}
 	}
@@ -145,12 +136,25 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 		if (((data == null) && (_data != null)) ||
 				((data != null) && (_data == null)) ||
 				((data != null) && (_data != null) && !data.equals(_data))) {
-			if (!XSS_ALLOW_DATA) {
-				data = XSSUtil.strip(data);
-			}
-
 			_data = data;
 		}
+	}
+
+	public ServiceComponent toEscapedModel() {
+		ServiceComponent model = new ServiceComponentImpl();
+		model.setServiceComponentId(getServiceComponentId());
+		model.setBuildNamespace(Html.escape(getBuildNamespace()));
+		model.setBuildNumber(getBuildNumber());
+		model.setBuildDate(getBuildDate());
+		model.setData(Html.escape(getData()));
+
+		if (true) {
+			model = (ServiceComponent)Proxy.newProxyInstance(ServiceComponent.class.getClassLoader(),
+					new Class[] { ServiceComponent.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

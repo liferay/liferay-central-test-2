@@ -100,4 +100,6 @@ public interface PhoneModel extends BaseModel {
 	public boolean isPrimary();
 
 	public void setPrimary(boolean primary);
+
+	public Phone toEscapedModel();
 }

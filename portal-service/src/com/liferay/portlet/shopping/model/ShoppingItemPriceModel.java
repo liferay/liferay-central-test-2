@@ -92,4 +92,6 @@ public interface ShoppingItemPriceModel extends BaseModel {
 	public int getStatus();
 
 	public void setStatus(int status);
+
+	public ShoppingItemPrice toEscapedModel();
 }

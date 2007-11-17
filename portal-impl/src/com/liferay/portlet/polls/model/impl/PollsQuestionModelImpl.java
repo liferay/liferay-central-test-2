@@ -22,14 +22,19 @@
 
 package com.liferay.portlet.polls.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.polls.model.PollsQuestion;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -73,21 +78,6 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table PollsQuestion (uuid_ VARCHAR(75) null,questionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(500) null,description STRING null,expirationDate DATE null,lastVoteDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table PollsQuestion";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion.uuid"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion.title"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion.description"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.polls.model.PollsQuestionModel"));
 
@@ -165,10 +155,6 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -207,10 +193,6 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 		if (((title == null) && (_title != null)) ||
 				((title != null) && (_title == null)) ||
 				((title != null) && (_title != null) && !title.equals(_title))) {
-			if (!XSS_ALLOW_TITLE) {
-				title = XSSUtil.strip(title);
-			}
-
 			_title = title;
 		}
 	}
@@ -224,10 +206,6 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
 	}
@@ -256,6 +234,30 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 				!lastVoteDate.equals(_lastVoteDate))) {
 			_lastVoteDate = lastVoteDate;
 		}
+	}
+
+	public PollsQuestion toEscapedModel() {
+		PollsQuestion model = new PollsQuestionImpl();
+		model.setUuid(Html.escape(getUuid()));
+		model.setQuestionId(getQuestionId());
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setTitle(Html.escape(getTitle()));
+		model.setDescription(Html.escape(getDescription()));
+		model.setExpirationDate(getExpirationDate());
+		model.setLastVoteDate(getLastVoteDate());
+
+		if (true) {
+			model = (PollsQuestion)Proxy.newProxyInstance(PollsQuestion.class.getClassLoader(),
+					new Class[] { PollsQuestion.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

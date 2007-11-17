@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.imagegallery.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.imagegallery.model.IGImage;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -69,15 +74,6 @@ public class IGImageModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,description STRING null,smallImageId LONG,largeImageId LONG)";
 	public static String TABLE_SQL_DROP = "drop table IGImage";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage.uuid"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage.description"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.imagegallery.model.IGImageModel"));
 
@@ -181,10 +177,6 @@ public class IGImageModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
 	}
@@ -207,6 +199,28 @@ public class IGImageModelImpl extends BaseModelImpl {
 		if (largeImageId != _largeImageId) {
 			_largeImageId = largeImageId;
 		}
+	}
+
+	public IGImage toEscapedModel() {
+		IGImage model = new IGImageImpl();
+		model.setUuid(Html.escape(getUuid()));
+		model.setImageId(getImageId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setFolderId(getFolderId());
+		model.setDescription(Html.escape(getDescription()));
+		model.setSmallImageId(getSmallImageId());
+		model.setLargeImageId(getLargeImageId());
+
+		if (true) {
+			model = (IGImage)Proxy.newProxyInstance(IGImage.class.getClassLoader(),
+					new Class[] { IGImage.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

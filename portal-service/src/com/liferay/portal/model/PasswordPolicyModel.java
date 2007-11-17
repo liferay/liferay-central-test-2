@@ -172,4 +172,6 @@ public interface PasswordPolicyModel extends BaseModel {
 	public long getResetFailureCount();
 
 	public void setResetFailureCount(long resetFailureCount);
+
+	public PasswordPolicy toEscapedModel();
 }

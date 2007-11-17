@@ -66,4 +66,6 @@ public interface PasswordTrackerModel extends BaseModel {
 	public String getPassword();
 
 	public void setPassword(String password);
+
+	public PasswordTracker toEscapedModel();
 }

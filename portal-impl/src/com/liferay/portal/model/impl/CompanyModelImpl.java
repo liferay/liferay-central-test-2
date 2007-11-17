@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -64,20 +68,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,logoId LONG)";
 	public static String TABLE_SQL_DROP = "drop table Company";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Company"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_WEBID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Company.webId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_KEY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Company.key"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_VIRTUALHOST = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Company.virtualHost"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_MX = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Company.mx"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.CompanyModel"));
 
@@ -124,10 +114,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 		if (((webId == null) && (_webId != null)) ||
 				((webId != null) && (_webId == null)) ||
 				((webId != null) && (_webId != null) && !webId.equals(_webId))) {
-			if (!XSS_ALLOW_WEBID) {
-				webId = XSSUtil.strip(webId);
-			}
-
 			_webId = webId;
 		}
 	}
@@ -140,10 +126,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 		if (((key == null) && (_key != null)) ||
 				((key != null) && (_key == null)) ||
 				((key != null) && (_key != null) && !key.equals(_key))) {
-			if (!XSS_ALLOW_KEY) {
-				key = XSSUtil.strip(key);
-			}
-
 			_key = key;
 		}
 	}
@@ -157,10 +139,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 				((virtualHost != null) && (_virtualHost == null)) ||
 				((virtualHost != null) && (_virtualHost != null) &&
 				!virtualHost.equals(_virtualHost))) {
-			if (!XSS_ALLOW_VIRTUALHOST) {
-				virtualHost = XSSUtil.strip(virtualHost);
-			}
-
 			_virtualHost = virtualHost;
 		}
 	}
@@ -172,10 +150,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 	public void setMx(String mx) {
 		if (((mx == null) && (_mx != null)) || ((mx != null) && (_mx == null)) ||
 				((mx != null) && (_mx != null) && !mx.equals(_mx))) {
-			if (!XSS_ALLOW_MX) {
-				mx = XSSUtil.strip(mx);
-			}
-
 			_mx = mx;
 		}
 	}
@@ -188,6 +162,25 @@ public class CompanyModelImpl extends BaseModelImpl {
 		if (logoId != _logoId) {
 			_logoId = logoId;
 		}
+	}
+
+	public Company toEscapedModel() {
+		Company model = new CompanyImpl();
+		model.setCompanyId(getCompanyId());
+		model.setAccountId(getAccountId());
+		model.setWebId(Html.escape(getWebId()));
+		model.setKey(Html.escape(getKey()));
+		model.setVirtualHost(Html.escape(getVirtualHost()));
+		model.setMx(Html.escape(getMx()));
+		model.setLogoId(getLogoId());
+
+		if (true) {
+			model = (Company)Proxy.newProxyInstance(Company.class.getClassLoader(),
+					new Class[] { Company.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

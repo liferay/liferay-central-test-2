@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -69,14 +73,6 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Subscription (subscriptionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,frequency VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table Subscription";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Subscription"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Subscription.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FREQUENCY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Subscription.frequency"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.SubscriptionModel"));
 
@@ -134,10 +130,6 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -197,12 +189,29 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 				((frequency != null) && (_frequency == null)) ||
 				((frequency != null) && (_frequency != null) &&
 				!frequency.equals(_frequency))) {
-			if (!XSS_ALLOW_FREQUENCY) {
-				frequency = XSSUtil.strip(frequency);
-			}
-
 			_frequency = frequency;
 		}
+	}
+
+	public Subscription toEscapedModel() {
+		Subscription model = new SubscriptionImpl();
+		model.setSubscriptionId(getSubscriptionId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setClassNameId(getClassNameId());
+		model.setClassPK(getClassPK());
+		model.setFrequency(Html.escape(getFrequency()));
+
+		if (true) {
+			model = (Subscription)Proxy.newProxyInstance(Subscription.class.getClassLoader(),
+					new Class[] { Subscription.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

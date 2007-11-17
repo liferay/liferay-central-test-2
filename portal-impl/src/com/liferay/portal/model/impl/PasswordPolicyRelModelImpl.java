@@ -22,11 +22,15 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -60,9 +64,6 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table PasswordPolicyRel (passwordPolicyRelId LONG not null primary key,passwordPolicyId LONG,classNameId LONG,classPK LONG)";
 	public static String TABLE_SQL_DROP = "drop table PasswordPolicyRel";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PasswordPolicyRel"),
-			XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PasswordPolicyRelModel"));
 
@@ -119,6 +120,22 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 		if (classPK != _classPK) {
 			_classPK = classPK;
 		}
+	}
+
+	public PasswordPolicyRel toEscapedModel() {
+		PasswordPolicyRel model = new PasswordPolicyRelImpl();
+		model.setPasswordPolicyRelId(getPasswordPolicyRelId());
+		model.setPasswordPolicyId(getPasswordPolicyId());
+		model.setClassNameId(getClassNameId());
+		model.setClassPK(getClassPK());
+
+		if (true) {
+			model = (PasswordPolicyRel)Proxy.newProxyInstance(PasswordPolicyRel.class.getClassLoader(),
+					new Class[] { PasswordPolicyRel.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

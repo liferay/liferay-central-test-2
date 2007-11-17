@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -70,18 +75,6 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table DLFileShortcut (uuid_ VARCHAR(75) null,fileShortcutId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFolderId LONG,toName VARCHAR(300) null)";
 	public static String TABLE_SQL_DROP = "drop table DLFileShortcut";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileShortcut"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileShortcut.uuid"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileShortcut.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TONAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileShortcut.toName"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileShortcutModel"));
 
@@ -149,10 +142,6 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -212,12 +201,30 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 				((toName != null) && (_toName == null)) ||
 				((toName != null) && (_toName != null) &&
 				!toName.equals(_toName))) {
-			if (!XSS_ALLOW_TONAME) {
-				toName = XSSUtil.strip(toName);
-			}
-
 			_toName = toName;
 		}
+	}
+
+	public DLFileShortcut toEscapedModel() {
+		DLFileShortcut model = new DLFileShortcutImpl();
+		model.setUuid(Html.escape(getUuid()));
+		model.setFileShortcutId(getFileShortcutId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setFolderId(getFolderId());
+		model.setToFolderId(getToFolderId());
+		model.setToName(Html.escape(getToName()));
+
+		if (true) {
+			model = (DLFileShortcut)Proxy.newProxyInstance(DLFileShortcut.class.getClassLoader(),
+					new Class[] { DLFileShortcut.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

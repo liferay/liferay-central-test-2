@@ -92,4 +92,6 @@ public interface OrganizationModel extends BaseModel {
 	public String getComments();
 
 	public void setComments(String comments);
+
+	public Organization toEscapedModel();
 }

@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -64,11 +68,6 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table UserTrackerPath (userTrackerPathId LONG not null primary key,userTrackerId LONG,path_ STRING null,pathDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table UserTrackerPath";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserTrackerPath"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_PATH = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserTrackerPath.path"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserTrackerPathModel"));
 
@@ -115,10 +114,6 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 		if (((path == null) && (_path != null)) ||
 				((path != null) && (_path == null)) ||
 				((path != null) && (_path != null) && !path.equals(_path))) {
-			if (!XSS_ALLOW_PATH) {
-				path = XSSUtil.strip(path);
-			}
-
 			_path = path;
 		}
 	}
@@ -134,6 +129,22 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 				!pathDate.equals(_pathDate))) {
 			_pathDate = pathDate;
 		}
+	}
+
+	public UserTrackerPath toEscapedModel() {
+		UserTrackerPath model = new UserTrackerPathImpl();
+		model.setUserTrackerPathId(getUserTrackerPathId());
+		model.setUserTrackerId(getUserTrackerId());
+		model.setPath(Html.escape(getPath()));
+		model.setPathDate(getPathDate());
+
+		if (true) {
+			model = (UserTrackerPath)Proxy.newProxyInstance(UserTrackerPath.class.getClassLoader(),
+					new Class[] { UserTrackerPath.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

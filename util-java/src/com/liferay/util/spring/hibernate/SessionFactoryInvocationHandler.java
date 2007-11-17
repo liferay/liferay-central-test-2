@@ -55,7 +55,9 @@ public class SessionFactoryInvocationHandler implements InvocationHandler {
 	public Object invoke(Object proxy, Method method, Object[] args)
 		throws Throwable {
 
-		if (method.getName().equals("getCurrentSession")) {
+		String methodName = method.getName();
+
+		if (methodName.equals("getCurrentSession")) {
 			try {
 				Session session = (Session)SessionFactoryUtils.doGetSession(
 					(SessionFactory)proxy, false);
@@ -66,12 +68,12 @@ public class SessionFactoryInvocationHandler implements InvocationHandler {
 				throw new HibernateException(ise.getMessage());
 			}
 		}
-		else if (method.getName().equals("openSession")) {
+		else if (methodName.equals("openSession")) {
 			Session session = (Session)method.invoke(_sessionFactory, args);
 
 			return wrapLiferaySession(session);
 		}
-		else if (method.getName().equals("equals")) {
+		else if (methodName.equals("equals")) {
 			if (proxy == args[0]) {
 				return Boolean.TRUE;
 			}
@@ -79,7 +81,7 @@ public class SessionFactoryInvocationHandler implements InvocationHandler {
 				return Boolean.FALSE;
 			}
 		}
-		else if (method.getName().equals("hashCode")) {
+		else if (methodName.equals("hashCode")) {
 			return new Integer(hashCode());
 		}
 

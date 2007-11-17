@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.tags.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.tags.model.TagsProperty;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -69,18 +74,6 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table TagsProperty (propertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,entryId LONG,key_ VARCHAR(75) null,value VARCHAR(300) null)";
 	public static String TABLE_SQL_DROP = "drop table TagsProperty";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsProperty"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsProperty.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_KEY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsProperty.key"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_VALUE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsProperty.value"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.tags.model.TagsPropertyModel"));
 
@@ -138,10 +131,6 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -190,10 +179,6 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 		if (((key == null) && (_key != null)) ||
 				((key != null) && (_key == null)) ||
 				((key != null) && (_key != null) && !key.equals(_key))) {
-			if (!XSS_ALLOW_KEY) {
-				key = XSSUtil.strip(key);
-			}
-
 			_key = key;
 		}
 	}
@@ -206,12 +191,29 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 		if (((value == null) && (_value != null)) ||
 				((value != null) && (_value == null)) ||
 				((value != null) && (_value != null) && !value.equals(_value))) {
-			if (!XSS_ALLOW_VALUE) {
-				value = XSSUtil.strip(value);
-			}
-
 			_value = value;
 		}
+	}
+
+	public TagsProperty toEscapedModel() {
+		TagsProperty model = new TagsPropertyImpl();
+		model.setPropertyId(getPropertyId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setEntryId(getEntryId());
+		model.setKey(Html.escape(getKey()));
+		model.setValue(Html.escape(getValue()));
+
+		if (true) {
+			model = (TagsProperty)Proxy.newProxyInstance(TagsProperty.class.getClassLoader(),
+					new Class[] { TagsProperty.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

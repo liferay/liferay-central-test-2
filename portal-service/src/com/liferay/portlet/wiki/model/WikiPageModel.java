@@ -100,4 +100,6 @@ public interface WikiPageModel extends BaseModel {
 	public boolean isHead();
 
 	public void setHead(boolean head);
+
+	public WikiPage toEscapedModel();
 }

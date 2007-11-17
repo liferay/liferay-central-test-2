@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.shopping.model.ShoppingItemField;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -63,18 +68,6 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table ShoppingItemField (itemFieldId LONG not null primary key,itemId LONG,name VARCHAR(75) null,values_ STRING null,description STRING null)";
 	public static String TABLE_SQL_DROP = "drop table ShoppingItemField";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemField"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemField.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_VALUES = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemField.values"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemField.description"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingItemFieldModel"));
 
@@ -121,10 +114,6 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -138,10 +127,6 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 				((values != null) && (_values == null)) ||
 				((values != null) && (_values != null) &&
 				!values.equals(_values))) {
-			if (!XSS_ALLOW_VALUES) {
-				values = XSSUtil.strip(values);
-			}
-
 			_values = values;
 		}
 	}
@@ -155,12 +140,25 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
+	}
+
+	public ShoppingItemField toEscapedModel() {
+		ShoppingItemField model = new ShoppingItemFieldImpl();
+		model.setItemFieldId(getItemFieldId());
+		model.setItemId(getItemId());
+		model.setName(Html.escape(getName()));
+		model.setValues(Html.escape(getValues()));
+		model.setDescription(Html.escape(getDescription()));
+
+		if (true) {
+			model = (ShoppingItemField)Proxy.newProxyInstance(ShoppingItemField.class.getClassLoader(),
+					new Class[] { ShoppingItemField.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

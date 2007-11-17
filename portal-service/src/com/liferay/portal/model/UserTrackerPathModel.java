@@ -66,4 +66,6 @@ public interface UserTrackerPathModel extends BaseModel {
 	public Date getPathDate();
 
 	public void setPathDate(Date pathDate);
+
+	public UserTrackerPath toEscapedModel();
 }

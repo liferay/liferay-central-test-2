@@ -82,4 +82,6 @@ public interface UserTrackerModel extends BaseModel {
 	public String getUserAgent();
 
 	public void setUserAgent(String userAgent);
+
+	public UserTracker toEscapedModel();
 }

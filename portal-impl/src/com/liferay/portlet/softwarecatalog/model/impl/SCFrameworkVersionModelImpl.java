@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.softwarecatalog.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -71,18 +76,6 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table SCFrameworkVersion (frameworkVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,url STRING null,active_ BOOLEAN,priority INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table SCFrameworkVersion";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_URL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion.url"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionModel"));
 
@@ -150,10 +143,6 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -192,10 +181,6 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -208,10 +193,6 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 		if (((url == null) && (_url != null)) ||
 				((url != null) && (_url == null)) ||
 				((url != null) && (_url != null) && !url.equals(_url))) {
-			if (!XSS_ALLOW_URL) {
-				url = XSSUtil.strip(url);
-			}
-
 			_url = url;
 		}
 	}
@@ -238,6 +219,29 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 		if (priority != _priority) {
 			_priority = priority;
 		}
+	}
+
+	public SCFrameworkVersion toEscapedModel() {
+		SCFrameworkVersion model = new SCFrameworkVersionImpl();
+		model.setFrameworkVersionId(getFrameworkVersionId());
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setName(Html.escape(getName()));
+		model.setUrl(Html.escape(getUrl()));
+		model.setActive(getActive());
+		model.setPriority(getPriority());
+
+		if (true) {
+			model = (SCFrameworkVersion)Proxy.newProxyInstance(SCFrameworkVersion.class.getClassLoader(),
+					new Class[] { SCFrameworkVersion.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

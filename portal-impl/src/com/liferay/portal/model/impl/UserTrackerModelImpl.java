@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -68,20 +72,6 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table UserTracker (userTrackerId LONG not null primary key,companyId LONG,userId LONG,modifiedDate DATE null,sessionId VARCHAR(200) null,remoteAddr VARCHAR(75) null,remoteHost VARCHAR(75) null,userAgent VARCHAR(200) null)";
 	public static String TABLE_SQL_DROP = "drop table UserTracker";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserTracker"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_SESSIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserTracker.sessionId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_REMOTEADDR = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserTracker.remoteAddr"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_REMOTEHOST = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserTracker.remoteHost"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERAGENT = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.UserTracker.userAgent"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserTrackerModel"));
 
@@ -152,10 +142,6 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 				((sessionId != null) && (_sessionId == null)) ||
 				((sessionId != null) && (_sessionId != null) &&
 				!sessionId.equals(_sessionId))) {
-			if (!XSS_ALLOW_SESSIONID) {
-				sessionId = XSSUtil.strip(sessionId);
-			}
-
 			_sessionId = sessionId;
 		}
 	}
@@ -169,10 +155,6 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 				((remoteAddr != null) && (_remoteAddr == null)) ||
 				((remoteAddr != null) && (_remoteAddr != null) &&
 				!remoteAddr.equals(_remoteAddr))) {
-			if (!XSS_ALLOW_REMOTEADDR) {
-				remoteAddr = XSSUtil.strip(remoteAddr);
-			}
-
 			_remoteAddr = remoteAddr;
 		}
 	}
@@ -186,10 +168,6 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 				((remoteHost != null) && (_remoteHost == null)) ||
 				((remoteHost != null) && (_remoteHost != null) &&
 				!remoteHost.equals(_remoteHost))) {
-			if (!XSS_ALLOW_REMOTEHOST) {
-				remoteHost = XSSUtil.strip(remoteHost);
-			}
-
 			_remoteHost = remoteHost;
 		}
 	}
@@ -203,12 +181,28 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 				((userAgent != null) && (_userAgent == null)) ||
 				((userAgent != null) && (_userAgent != null) &&
 				!userAgent.equals(_userAgent))) {
-			if (!XSS_ALLOW_USERAGENT) {
-				userAgent = XSSUtil.strip(userAgent);
-			}
-
 			_userAgent = userAgent;
 		}
+	}
+
+	public UserTracker toEscapedModel() {
+		UserTracker model = new UserTrackerImpl();
+		model.setUserTrackerId(getUserTrackerId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setModifiedDate(getModifiedDate());
+		model.setSessionId(Html.escape(getSessionId()));
+		model.setRemoteAddr(Html.escape(getRemoteAddr()));
+		model.setRemoteHost(Html.escape(getRemoteHost()));
+		model.setUserAgent(Html.escape(getUserAgent()));
+
+		if (true) {
+			model = (UserTracker)Proxy.newProxyInstance(UserTracker.class.getClassLoader(),
+					new Class[] { UserTracker.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

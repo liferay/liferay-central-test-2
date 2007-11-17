@@ -60,4 +60,6 @@ public interface JournalArticleResourceModel extends BaseModel {
 	public String getArticleId();
 
 	public void setArticleId(String articleId);
+
+	public JournalArticleResource toEscapedModel();
 }

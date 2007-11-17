@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -64,17 +68,6 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table PluginSetting (pluginSettingId LONG not null primary key,companyId LONG,pluginId VARCHAR(75) null,pluginType VARCHAR(75) null,roles STRING null,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table PluginSetting";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PluginSetting"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_PLUGINID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PluginSetting.pluginId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PLUGINTYPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PluginSetting.pluginType"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ROLES = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.PluginSetting.roles"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PluginSettingModel"));
 
@@ -122,10 +115,6 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 				((pluginId != null) && (_pluginId == null)) ||
 				((pluginId != null) && (_pluginId != null) &&
 				!pluginId.equals(_pluginId))) {
-			if (!XSS_ALLOW_PLUGINID) {
-				pluginId = XSSUtil.strip(pluginId);
-			}
-
 			_pluginId = pluginId;
 		}
 	}
@@ -139,10 +128,6 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 				((pluginType != null) && (_pluginType == null)) ||
 				((pluginType != null) && (_pluginType != null) &&
 				!pluginType.equals(_pluginType))) {
-			if (!XSS_ALLOW_PLUGINTYPE) {
-				pluginType = XSSUtil.strip(pluginType);
-			}
-
 			_pluginType = pluginType;
 		}
 	}
@@ -155,10 +140,6 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 		if (((roles == null) && (_roles != null)) ||
 				((roles != null) && (_roles == null)) ||
 				((roles != null) && (_roles != null) && !roles.equals(_roles))) {
-			if (!XSS_ALLOW_ROLES) {
-				roles = XSSUtil.strip(roles);
-			}
-
 			_roles = roles;
 		}
 	}
@@ -175,6 +156,24 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 		if (active != _active) {
 			_active = active;
 		}
+	}
+
+	public PluginSetting toEscapedModel() {
+		PluginSetting model = new PluginSettingImpl();
+		model.setPluginSettingId(getPluginSettingId());
+		model.setCompanyId(getCompanyId());
+		model.setPluginId(Html.escape(getPluginId()));
+		model.setPluginType(Html.escape(getPluginType()));
+		model.setRoles(Html.escape(getRoles()));
+		model.setActive(getActive());
+
+		if (true) {
+			model = (PluginSetting)Proxy.newProxyInstance(PluginSetting.class.getClassLoader(),
+					new Class[] { PluginSetting.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

@@ -96,4 +96,6 @@ public interface SCFrameworkVersionModel extends BaseModel {
 	public int getPriority();
 
 	public void setPriority(int priority);
+
+	public SCFrameworkVersion toEscapedModel();
 }

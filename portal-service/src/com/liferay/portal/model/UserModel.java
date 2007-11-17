@@ -178,4 +178,6 @@ public interface UserModel extends BaseModel {
 	public boolean isActive();
 
 	public void setActive(boolean active);
+
+	public User toEscapedModel();
 }

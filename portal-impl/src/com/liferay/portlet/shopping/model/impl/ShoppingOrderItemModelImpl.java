@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.shopping.model.ShoppingOrderItem;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -70,24 +75,6 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table ShoppingOrderItem (orderItemId LONG not null primary key,orderId LONG,itemId VARCHAR(75) null,sku VARCHAR(75) null,name VARCHAR(200) null,description STRING null,properties STRING null,price DOUBLE,quantity INTEGER,shippedDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table ShoppingOrderItem";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ITEMID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem.itemId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SKU = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem.sku"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem.description"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PROPERTIES = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem.properties"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingOrderItemModel"));
 
@@ -135,10 +122,6 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 				((itemId != null) && (_itemId == null)) ||
 				((itemId != null) && (_itemId != null) &&
 				!itemId.equals(_itemId))) {
-			if (!XSS_ALLOW_ITEMID) {
-				itemId = XSSUtil.strip(itemId);
-			}
-
 			_itemId = itemId;
 		}
 	}
@@ -151,10 +134,6 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 		if (((sku == null) && (_sku != null)) ||
 				((sku != null) && (_sku == null)) ||
 				((sku != null) && (_sku != null) && !sku.equals(_sku))) {
-			if (!XSS_ALLOW_SKU) {
-				sku = XSSUtil.strip(sku);
-			}
-
 			_sku = sku;
 		}
 	}
@@ -167,10 +146,6 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -184,10 +159,6 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
 	}
@@ -201,10 +172,6 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 				((properties != null) && (_properties == null)) ||
 				((properties != null) && (_properties != null) &&
 				!properties.equals(_properties))) {
-			if (!XSS_ALLOW_PROPERTIES) {
-				properties = XSSUtil.strip(properties);
-			}
-
 			_properties = properties;
 		}
 	}
@@ -240,6 +207,28 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 				!shippedDate.equals(_shippedDate))) {
 			_shippedDate = shippedDate;
 		}
+	}
+
+	public ShoppingOrderItem toEscapedModel() {
+		ShoppingOrderItem model = new ShoppingOrderItemImpl();
+		model.setOrderItemId(getOrderItemId());
+		model.setOrderId(getOrderId());
+		model.setItemId(Html.escape(getItemId()));
+		model.setSku(Html.escape(getSku()));
+		model.setName(Html.escape(getName()));
+		model.setDescription(Html.escape(getDescription()));
+		model.setProperties(Html.escape(getProperties()));
+		model.setPrice(getPrice());
+		model.setQuantity(getQuantity());
+		model.setShippedDate(getShippedDate());
+
+		if (true) {
+			model = (ShoppingOrderItem)Proxy.newProxyInstance(ShoppingOrderItem.class.getClassLoader(),
+					new Class[] { ShoppingOrderItem.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

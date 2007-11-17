@@ -64,4 +64,6 @@ public interface PasswordPolicyRelModel extends BaseModel {
 	public long getClassPK();
 
 	public void setClassPK(long classPK);
+
+	public PasswordPolicyRel toEscapedModel();
 }

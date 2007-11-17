@@ -76,4 +76,6 @@ public interface CompanyModel extends BaseModel {
 	public long getLogoId();
 
 	public void setLogoId(long logoId);
+
+	public Company toEscapedModel();
 }

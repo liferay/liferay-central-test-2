@@ -22,14 +22,19 @@
 
 package com.liferay.portlet.blogs.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -74,24 +79,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,displayDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table BlogsEntry";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.uuid"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.title"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_URLTITLE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.urlTitle"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CONTENT = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry.content"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.blogs.model.BlogsEntryModel"));
 
@@ -169,10 +156,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -221,10 +204,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		if (((title == null) && (_title != null)) ||
 				((title != null) && (_title == null)) ||
 				((title != null) && (_title != null) && !title.equals(_title))) {
-			if (!XSS_ALLOW_TITLE) {
-				title = XSSUtil.strip(title);
-			}
-
 			_title = title;
 		}
 	}
@@ -238,10 +217,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 				((urlTitle != null) && (_urlTitle == null)) ||
 				((urlTitle != null) && (_urlTitle != null) &&
 				!urlTitle.equals(_urlTitle))) {
-			if (!XSS_ALLOW_URLTITLE) {
-				urlTitle = XSSUtil.strip(urlTitle);
-			}
-
 			_urlTitle = urlTitle;
 		}
 	}
@@ -255,10 +230,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 				((content != null) && (_content == null)) ||
 				((content != null) && (_content != null) &&
 				!content.equals(_content))) {
-			if (!XSS_ALLOW_CONTENT) {
-				content = XSSUtil.strip(content);
-			}
-
 			_content = content;
 		}
 	}
@@ -274,6 +245,31 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 				!displayDate.equals(_displayDate))) {
 			_displayDate = displayDate;
 		}
+	}
+
+	public BlogsEntry toEscapedModel() {
+		BlogsEntry model = new BlogsEntryImpl();
+		model.setUuid(Html.escape(getUuid()));
+		model.setEntryId(getEntryId());
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setCategoryId(getCategoryId());
+		model.setTitle(Html.escape(getTitle()));
+		model.setUrlTitle(Html.escape(getUrlTitle()));
+		model.setContent(Html.escape(getContent()));
+		model.setDisplayDate(getDisplayDate());
+
+		if (true) {
+			model = (BlogsEntry)Proxy.newProxyInstance(BlogsEntry.class.getClassLoader(),
+					new Class[] { BlogsEntry.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

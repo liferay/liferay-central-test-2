@@ -78,4 +78,6 @@ public interface SCLicenseModel extends BaseModel {
 	public boolean isRecommended();
 
 	public void setRecommended(boolean recommended);
+
+	public SCLicense toEscapedModel();
 }

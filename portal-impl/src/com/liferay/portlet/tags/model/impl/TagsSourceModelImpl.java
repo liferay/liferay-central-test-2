@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.tags.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.tags.model.TagsSource;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -62,15 +67,6 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table TagsSource (sourceId LONG not null primary key,parentSourceId LONG,name VARCHAR(75) null,acronym VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table TagsSource";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsSource"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsSource.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ACRONYM = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.tags.model.TagsSource.acronym"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.tags.model.TagsSourceModel"));
 
@@ -117,10 +113,6 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -134,12 +126,24 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 				((acronym != null) && (_acronym == null)) ||
 				((acronym != null) && (_acronym != null) &&
 				!acronym.equals(_acronym))) {
-			if (!XSS_ALLOW_ACRONYM) {
-				acronym = XSSUtil.strip(acronym);
-			}
-
 			_acronym = acronym;
 		}
+	}
+
+	public TagsSource toEscapedModel() {
+		TagsSource model = new TagsSourceImpl();
+		model.setSourceId(getSourceId());
+		model.setParentSourceId(getParentSourceId());
+		model.setName(Html.escape(getName()));
+		model.setAcronym(Html.escape(getAcronym()));
+
+		if (true) {
+			model = (TagsSource)Proxy.newProxyInstance(TagsSource.class.getClassLoader(),
+					new Class[] { TagsSource.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

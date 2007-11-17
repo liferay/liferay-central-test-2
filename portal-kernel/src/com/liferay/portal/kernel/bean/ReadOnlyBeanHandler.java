@@ -20,39 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.bean;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.lang.Object;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
- * <a href="XSSUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ReadOnlyBeanHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Clarence Shen
  *
  */
-public class XSSUtil {
+public class ReadOnlyBeanHandler implements InvocationHandler {
 
-	public static final String XSS_REGEXP_PATTERN = GetterUtil.getString(
-		SystemProperties.get(XSSUtil.class.getName() + ".regexp.pattern"));
+	public ReadOnlyBeanHandler(Object bean) {
+		_bean = bean;
+	}
 
-	public static final Pattern XSS_PATTERN =
-		Pattern.compile(XSS_REGEXP_PATTERN);
+	public Object invoke(Object proxy, Method method, Object[] args)
+		throws Throwable {
 
-	public static String strip(String text) {
-		if (text == null) {
-			return null;
+		if (method.getName().startsWith("set")) {
+			throw new IllegalAccessException(
+				"Setter methods cannot be called on a read only bean");
 		}
 
-		CharSequence sequence = text.subSequence(0, text.length());
-
-		Matcher matcher = XSS_PATTERN.matcher(sequence);
-
-		return matcher.replaceAll(StringPool.BLANK);
+		try {
+			return method.invoke(_bean, args);
+		}
+		catch (InvocationTargetException ite) {
+			throw ite.getTargetException();
+		}
 	}
+
+	private Object _bean;
 
 }

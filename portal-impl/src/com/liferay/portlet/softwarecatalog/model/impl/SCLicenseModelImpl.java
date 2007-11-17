@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.softwarecatalog.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.softwarecatalog.model.SCLicense;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -64,15 +69,6 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table SCLicense (licenseId LONG not null primary key,name VARCHAR(75) null,url STRING null,openSource BOOLEAN,active_ BOOLEAN,recommended BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table SCLicense";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCLicense"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCLicense.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_URL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCLicense.url"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCLicenseModel"));
 
@@ -109,10 +105,6 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -125,10 +117,6 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 		if (((url == null) && (_url != null)) ||
 				((url != null) && (_url == null)) ||
 				((url != null) && (_url != null) && !url.equals(_url))) {
-			if (!XSS_ALLOW_URL) {
-				url = XSSUtil.strip(url);
-			}
-
 			_url = url;
 		}
 	}
@@ -173,6 +161,24 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 		if (recommended != _recommended) {
 			_recommended = recommended;
 		}
+	}
+
+	public SCLicense toEscapedModel() {
+		SCLicense model = new SCLicenseImpl();
+		model.setLicenseId(getLicenseId());
+		model.setName(Html.escape(getName()));
+		model.setUrl(Html.escape(getUrl()));
+		model.setOpenSource(getOpenSource());
+		model.setActive(getActive());
+		model.setRecommended(getRecommended());
+
+		if (true) {
+			model = (SCLicense)Proxy.newProxyInstance(SCLicense.class.getClassLoader(),
+					new Class[] { SCLicense.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

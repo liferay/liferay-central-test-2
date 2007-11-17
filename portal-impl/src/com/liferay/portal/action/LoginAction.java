@@ -57,7 +57,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CookieUtil;
 import com.liferay.util.Encryptor;
-import com.liferay.util.XSSUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 import com.liferay.util.servlet.SessionParameters;
@@ -106,8 +105,6 @@ public class LoginAction extends Action {
 				login = "@" + company.getMx();
 			}
 		}
-
-		login = XSSUtil.strip(login);
 
 		return login;
 	}

@@ -86,4 +86,6 @@ public interface SubscriptionModel extends BaseModel {
 	public String getFrequency();
 
 	public void setFrequency(String frequency);
+
+	public Subscription toEscapedModel();
 }

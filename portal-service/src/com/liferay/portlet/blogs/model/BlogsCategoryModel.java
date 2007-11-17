@@ -86,4 +86,6 @@ public interface BlogsCategoryModel extends BaseModel {
 	public String getDescription();
 
 	public void setDescription(String description);
+
+	public BlogsCategory toEscapedModel();
 }

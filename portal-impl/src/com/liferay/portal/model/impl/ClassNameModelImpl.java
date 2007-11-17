@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -60,11 +64,6 @@ public class ClassNameModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table ClassName_ (classNameId LONG not null primary key,value VARCHAR(200) null)";
 	public static String TABLE_SQL_DROP = "drop table ClassName_";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.ClassName"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_VALUE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.ClassName.value"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ClassNameModel"));
 
@@ -101,12 +100,22 @@ public class ClassNameModelImpl extends BaseModelImpl {
 		if (((value == null) && (_value != null)) ||
 				((value != null) && (_value == null)) ||
 				((value != null) && (_value != null) && !value.equals(_value))) {
-			if (!XSS_ALLOW_VALUE) {
-				value = XSSUtil.strip(value);
-			}
-
 			_value = value;
 		}
+	}
+
+	public ClassName toEscapedModel() {
+		ClassName model = new ClassNameImpl();
+		model.setClassNameId(getClassNameId());
+		model.setValue(Html.escape(getValue()));
+
+		if (true) {
+			model = (ClassName)Proxy.newProxyInstance(ClassName.class.getClassLoader(),
+					new Class[] { ClassName.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

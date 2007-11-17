@@ -118,4 +118,6 @@ public interface DLFileEntryModel extends BaseModel {
 	public String getExtraSettings();
 
 	public void setExtraSettings(String extraSettings);
+
+	public DLFileEntry toEscapedModel();
 }

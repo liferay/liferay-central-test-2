@@ -22,11 +22,15 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -73,8 +77,6 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table OrgLabor (orgLaborId LONG not null primary key,organizationId LONG,typeId INTEGER,sunOpen INTEGER,sunClose INTEGER,monOpen INTEGER,monClose INTEGER,tueOpen INTEGER,tueClose INTEGER,wedOpen INTEGER,wedClose INTEGER,thuOpen INTEGER,thuClose INTEGER,friOpen INTEGER,friClose INTEGER,satOpen INTEGER,satClose INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table OrgLabor";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.OrgLabor"), XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgLaborModel"));
 
@@ -261,6 +263,35 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 		if (satClose != _satClose) {
 			_satClose = satClose;
 		}
+	}
+
+	public OrgLabor toEscapedModel() {
+		OrgLabor model = new OrgLaborImpl();
+		model.setOrgLaborId(getOrgLaborId());
+		model.setOrganizationId(getOrganizationId());
+		model.setTypeId(getTypeId());
+		model.setSunOpen(getSunOpen());
+		model.setSunClose(getSunClose());
+		model.setMonOpen(getMonOpen());
+		model.setMonClose(getMonClose());
+		model.setTueOpen(getTueOpen());
+		model.setTueClose(getTueClose());
+		model.setWedOpen(getWedOpen());
+		model.setWedClose(getWedClose());
+		model.setThuOpen(getThuOpen());
+		model.setThuClose(getThuClose());
+		model.setFriOpen(getFriOpen());
+		model.setFriClose(getFriClose());
+		model.setSatOpen(getSatOpen());
+		model.setSatClose(getSatClose());
+
+		if (true) {
+			model = (OrgLabor)Proxy.newProxyInstance(OrgLabor.class.getClassLoader(),
+					new Class[] { OrgLabor.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

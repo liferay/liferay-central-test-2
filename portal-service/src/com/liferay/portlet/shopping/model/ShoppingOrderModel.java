@@ -264,4 +264,6 @@ public interface ShoppingOrderModel extends BaseModel {
 	public boolean isSendShippingEmail();
 
 	public void setSendShippingEmail(boolean sendShippingEmail);
+
+	public ShoppingOrder toEscapedModel();
 }

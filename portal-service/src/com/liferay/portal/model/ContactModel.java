@@ -160,4 +160,6 @@ public interface ContactModel extends BaseModel {
 	public String getHoursOfOperation();
 
 	public void setHoursOfOperation(String hoursOfOperation);
+
+	public Contact toEscapedModel();
 }

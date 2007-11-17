@@ -22,11 +22,16 @@
 
 package com.liferay.portlet.softwarecatalog.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
+
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -63,9 +68,6 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table SCProductScreenshot (productScreenshotId LONG not null primary key,companyId LONG,groupId LONG,productEntryId LONG,thumbnailId LONG,fullImageId LONG,priority INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table SCProductScreenshot";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarecatalog.model.SCProductScreenshot"),
-			XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductScreenshotModel"));
 
@@ -152,6 +154,25 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 		if (priority != _priority) {
 			_priority = priority;
 		}
+	}
+
+	public SCProductScreenshot toEscapedModel() {
+		SCProductScreenshot model = new SCProductScreenshotImpl();
+		model.setProductScreenshotId(getProductScreenshotId());
+		model.setCompanyId(getCompanyId());
+		model.setGroupId(getGroupId());
+		model.setProductEntryId(getProductEntryId());
+		model.setThumbnailId(getThumbnailId());
+		model.setFullImageId(getFullImageId());
+		model.setPriority(getPriority());
+
+		if (true) {
+			model = (SCProductScreenshot)Proxy.newProxyInstance(SCProductScreenshot.class.getClassLoader(),
+					new Class[] { SCProductScreenshot.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -87,56 +91,6 @@ public class ContactModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Contact_ (contactId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,accountId LONG,parentContactId LONG,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,prefixId INTEGER,suffixId INTEGER,male BOOLEAN,birthday DATE null,smsSn VARCHAR(75) null,aimSn VARCHAR(75) null,icqSn VARCHAR(75) null,jabberSn VARCHAR(75) null,msnSn VARCHAR(75) null,skypeSn VARCHAR(75) null,ymSn VARCHAR(75) null,employeeStatusId VARCHAR(75) null,employeeNumber VARCHAR(75) null,jobTitle VARCHAR(100) null,jobClass VARCHAR(75) null,hoursOfOperation VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table Contact_";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FIRSTNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.firstName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_MIDDLENAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.middleName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LASTNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.lastName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SMSSN = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.smsSn"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_AIMSN = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.aimSn"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ICQSN = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.icqSn"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_JABBERSN = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.jabberSn"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_MSNSN = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.msnSn"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SKYPESN = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.skypeSn"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_YMSN = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.ymSn"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_EMPLOYEESTATUSID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.employeeStatusId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_EMPLOYEENUMBER = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.employeeNumber"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_JOBTITLE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.jobTitle"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_JOBCLASS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.jobClass"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_HOURSOFOPERATION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.hoursOfOperation"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ContactModel"));
 
@@ -194,10 +148,6 @@ public class ContactModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -257,10 +207,6 @@ public class ContactModelImpl extends BaseModelImpl {
 				((firstName != null) && (_firstName == null)) ||
 				((firstName != null) && (_firstName != null) &&
 				!firstName.equals(_firstName))) {
-			if (!XSS_ALLOW_FIRSTNAME) {
-				firstName = XSSUtil.strip(firstName);
-			}
-
 			_firstName = firstName;
 		}
 	}
@@ -274,10 +220,6 @@ public class ContactModelImpl extends BaseModelImpl {
 				((middleName != null) && (_middleName == null)) ||
 				((middleName != null) && (_middleName != null) &&
 				!middleName.equals(_middleName))) {
-			if (!XSS_ALLOW_MIDDLENAME) {
-				middleName = XSSUtil.strip(middleName);
-			}
-
 			_middleName = middleName;
 		}
 	}
@@ -291,10 +233,6 @@ public class ContactModelImpl extends BaseModelImpl {
 				((lastName != null) && (_lastName == null)) ||
 				((lastName != null) && (_lastName != null) &&
 				!lastName.equals(_lastName))) {
-			if (!XSS_ALLOW_LASTNAME) {
-				lastName = XSSUtil.strip(lastName);
-			}
-
 			_lastName = lastName;
 		}
 	}
@@ -354,10 +292,6 @@ public class ContactModelImpl extends BaseModelImpl {
 		if (((smsSn == null) && (_smsSn != null)) ||
 				((smsSn != null) && (_smsSn == null)) ||
 				((smsSn != null) && (_smsSn != null) && !smsSn.equals(_smsSn))) {
-			if (!XSS_ALLOW_SMSSN) {
-				smsSn = XSSUtil.strip(smsSn);
-			}
-
 			_smsSn = smsSn;
 		}
 	}
@@ -370,10 +304,6 @@ public class ContactModelImpl extends BaseModelImpl {
 		if (((aimSn == null) && (_aimSn != null)) ||
 				((aimSn != null) && (_aimSn == null)) ||
 				((aimSn != null) && (_aimSn != null) && !aimSn.equals(_aimSn))) {
-			if (!XSS_ALLOW_AIMSN) {
-				aimSn = XSSUtil.strip(aimSn);
-			}
-
 			_aimSn = aimSn;
 		}
 	}
@@ -386,10 +316,6 @@ public class ContactModelImpl extends BaseModelImpl {
 		if (((icqSn == null) && (_icqSn != null)) ||
 				((icqSn != null) && (_icqSn == null)) ||
 				((icqSn != null) && (_icqSn != null) && !icqSn.equals(_icqSn))) {
-			if (!XSS_ALLOW_ICQSN) {
-				icqSn = XSSUtil.strip(icqSn);
-			}
-
 			_icqSn = icqSn;
 		}
 	}
@@ -403,10 +329,6 @@ public class ContactModelImpl extends BaseModelImpl {
 				((jabberSn != null) && (_jabberSn == null)) ||
 				((jabberSn != null) && (_jabberSn != null) &&
 				!jabberSn.equals(_jabberSn))) {
-			if (!XSS_ALLOW_JABBERSN) {
-				jabberSn = XSSUtil.strip(jabberSn);
-			}
-
 			_jabberSn = jabberSn;
 		}
 	}
@@ -419,10 +341,6 @@ public class ContactModelImpl extends BaseModelImpl {
 		if (((msnSn == null) && (_msnSn != null)) ||
 				((msnSn != null) && (_msnSn == null)) ||
 				((msnSn != null) && (_msnSn != null) && !msnSn.equals(_msnSn))) {
-			if (!XSS_ALLOW_MSNSN) {
-				msnSn = XSSUtil.strip(msnSn);
-			}
-
 			_msnSn = msnSn;
 		}
 	}
@@ -436,10 +354,6 @@ public class ContactModelImpl extends BaseModelImpl {
 				((skypeSn != null) && (_skypeSn == null)) ||
 				((skypeSn != null) && (_skypeSn != null) &&
 				!skypeSn.equals(_skypeSn))) {
-			if (!XSS_ALLOW_SKYPESN) {
-				skypeSn = XSSUtil.strip(skypeSn);
-			}
-
 			_skypeSn = skypeSn;
 		}
 	}
@@ -452,10 +366,6 @@ public class ContactModelImpl extends BaseModelImpl {
 		if (((ymSn == null) && (_ymSn != null)) ||
 				((ymSn != null) && (_ymSn == null)) ||
 				((ymSn != null) && (_ymSn != null) && !ymSn.equals(_ymSn))) {
-			if (!XSS_ALLOW_YMSN) {
-				ymSn = XSSUtil.strip(ymSn);
-			}
-
 			_ymSn = ymSn;
 		}
 	}
@@ -469,10 +379,6 @@ public class ContactModelImpl extends BaseModelImpl {
 				((employeeStatusId != null) && (_employeeStatusId == null)) ||
 				((employeeStatusId != null) && (_employeeStatusId != null) &&
 				!employeeStatusId.equals(_employeeStatusId))) {
-			if (!XSS_ALLOW_EMPLOYEESTATUSID) {
-				employeeStatusId = XSSUtil.strip(employeeStatusId);
-			}
-
 			_employeeStatusId = employeeStatusId;
 		}
 	}
@@ -486,10 +392,6 @@ public class ContactModelImpl extends BaseModelImpl {
 				((employeeNumber != null) && (_employeeNumber == null)) ||
 				((employeeNumber != null) && (_employeeNumber != null) &&
 				!employeeNumber.equals(_employeeNumber))) {
-			if (!XSS_ALLOW_EMPLOYEENUMBER) {
-				employeeNumber = XSSUtil.strip(employeeNumber);
-			}
-
 			_employeeNumber = employeeNumber;
 		}
 	}
@@ -503,10 +405,6 @@ public class ContactModelImpl extends BaseModelImpl {
 				((jobTitle != null) && (_jobTitle == null)) ||
 				((jobTitle != null) && (_jobTitle != null) &&
 				!jobTitle.equals(_jobTitle))) {
-			if (!XSS_ALLOW_JOBTITLE) {
-				jobTitle = XSSUtil.strip(jobTitle);
-			}
-
 			_jobTitle = jobTitle;
 		}
 	}
@@ -520,10 +418,6 @@ public class ContactModelImpl extends BaseModelImpl {
 				((jobClass != null) && (_jobClass == null)) ||
 				((jobClass != null) && (_jobClass != null) &&
 				!jobClass.equals(_jobClass))) {
-			if (!XSS_ALLOW_JOBCLASS) {
-				jobClass = XSSUtil.strip(jobClass);
-			}
-
 			_jobClass = jobClass;
 		}
 	}
@@ -537,12 +431,47 @@ public class ContactModelImpl extends BaseModelImpl {
 				((hoursOfOperation != null) && (_hoursOfOperation == null)) ||
 				((hoursOfOperation != null) && (_hoursOfOperation != null) &&
 				!hoursOfOperation.equals(_hoursOfOperation))) {
-			if (!XSS_ALLOW_HOURSOFOPERATION) {
-				hoursOfOperation = XSSUtil.strip(hoursOfOperation);
-			}
-
 			_hoursOfOperation = hoursOfOperation;
 		}
+	}
+
+	public Contact toEscapedModel() {
+		Contact model = new ContactImpl();
+		model.setContactId(getContactId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setAccountId(getAccountId());
+		model.setParentContactId(getParentContactId());
+		model.setFirstName(Html.escape(getFirstName()));
+		model.setMiddleName(Html.escape(getMiddleName()));
+		model.setLastName(Html.escape(getLastName()));
+		model.setPrefixId(getPrefixId());
+		model.setSuffixId(getSuffixId());
+		model.setMale(getMale());
+		model.setBirthday(getBirthday());
+		model.setSmsSn(Html.escape(getSmsSn()));
+		model.setAimSn(Html.escape(getAimSn()));
+		model.setIcqSn(Html.escape(getIcqSn()));
+		model.setJabberSn(Html.escape(getJabberSn()));
+		model.setMsnSn(Html.escape(getMsnSn()));
+		model.setSkypeSn(Html.escape(getSkypeSn()));
+		model.setYmSn(Html.escape(getYmSn()));
+		model.setEmployeeStatusId(Html.escape(getEmployeeStatusId()));
+		model.setEmployeeNumber(Html.escape(getEmployeeNumber()));
+		model.setJobTitle(Html.escape(getJobTitle()));
+		model.setJobClass(Html.escape(getJobClass()));
+		model.setHoursOfOperation(Html.escape(getHoursOfOperation()));
+
+		if (true) {
+			model = (Contact)Proxy.newProxyInstance(Contact.class.getClassLoader(),
+					new Class[] { Contact.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

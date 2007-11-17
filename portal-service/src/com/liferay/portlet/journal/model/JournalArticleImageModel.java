@@ -82,4 +82,6 @@ public interface JournalArticleImageModel extends BaseModel {
 	public boolean isTempImage();
 
 	public void setTempImage(boolean tempImage);
+
+	public JournalArticleImage toEscapedModel();
 }

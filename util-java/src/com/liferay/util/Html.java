@@ -36,21 +36,9 @@ import com.liferay.portal.kernel.util.StringUtil;
  */
 public class Html {
 
-	public static final String AMPERSAND = "&amp;";
-
 	public static String escape(String text) {
-		return escape(text, true);
-	}
-
-	public static String escape(String text, boolean stripBlankSpaces) {
 		if (text == null) {
 			return null;
-		}
-
-		int pos = text.indexOf("& ");
-
-		if (pos != -1) {
-			text = StringUtil.replace(text, "& ", "&amp; ");
 		}
 
 		StringMaker sm = new StringMaker(text.length());
@@ -59,6 +47,11 @@ public class Html {
 			char c = text.charAt(i);
 
 			switch (c) {
+				case '&':
+					sm.append("&amp;");
+
+					break;
+
 				case '<':
 					sm.append("&lt;");
 
@@ -69,43 +62,25 @@ public class Html {
 
 					break;
 
-				case '\'':
-					sm.append("&#39;");
+				case '\"':
+					sm.append("&#034;");
 
 					break;
 
-				case '\"':
-					sm.append("&quot;");
+				case '\'':
+					sm.append("&#039;");
 
 					break;
 
 				case ',':
-					sm.append("&#44;");
+					sm.append("&#044;");
 
 					break;
 
-				case '\r':
-					if (stripBlankSpaces) {
-						break;
-					}
-
-				case '\n':
-					if (stripBlankSpaces) {
-						break;
-					}
-
-				case '\t':
-					if (stripBlankSpaces) {
-						break;
-					}
-
 				default:
-					if (((int)c) > 255) {
-						sm.append("&#").append(((int)c)).append(";");
-					}
-					else {
-						sm.append(c);
-					}
+					sm.append(c);
+
+					break;
 			}
 		}
 
@@ -113,7 +88,7 @@ public class Html {
 	}
 
 	public static String formatTo(String text) {
-		return Html.escape(text, true);
+		return escape(text);
 	}
 
 	public static String formatFrom(String text) {
@@ -125,12 +100,12 @@ public class Html {
 
 		text = StringUtil.replace(text, "&lt;", "<");
 		text = StringUtil.replace(text, "&gt;", ">");
-		text = StringUtil.replace(text, "&#34;", "\"");
-		text = StringUtil.replace(text, "&#38;", "&");
-		text = StringUtil.replace(text, "&#42;", "*");
-		text = StringUtil.replace(text, "&#47;", "/");
-		text = StringUtil.replace(text, "&#58;", ":");
-		text = StringUtil.replace(text, "&#63;", "?");
+		text = StringUtil.replace(text, "&#034;", "\"");
+		text = StringUtil.replace(text, "&#038;", "&");
+		text = StringUtil.replace(text, "&#042;", "*");
+		text = StringUtil.replace(text, "&#047;", "/");
+		text = StringUtil.replace(text, "&#058;", ":");
+		text = StringUtil.replace(text, "&#063;", "?");
 
 		return text;
 	}

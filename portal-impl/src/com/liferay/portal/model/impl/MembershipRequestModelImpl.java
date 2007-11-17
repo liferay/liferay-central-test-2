@@ -22,14 +22,18 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -71,15 +75,6 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table MembershipRequest (membershipRequestId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,groupId LONG,comments STRING null,replyComments STRING null,replyDate DATE null,replierUserId LONG,statusId INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table MembershipRequest";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.MembershipRequest"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.MembershipRequest.comments"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_REPLYCOMMENTS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.MembershipRequest.replyComments"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.MembershipRequestModel"));
 
@@ -160,10 +155,6 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 				((comments != null) && (_comments == null)) ||
 				((comments != null) && (_comments != null) &&
 				!comments.equals(_comments))) {
-			if (!XSS_ALLOW_COMMENTS) {
-				comments = XSSUtil.strip(comments);
-			}
-
 			_comments = comments;
 		}
 	}
@@ -177,10 +168,6 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 				((replyComments != null) && (_replyComments == null)) ||
 				((replyComments != null) && (_replyComments != null) &&
 				!replyComments.equals(_replyComments))) {
-			if (!XSS_ALLOW_REPLYCOMMENTS) {
-				replyComments = XSSUtil.strip(replyComments);
-			}
-
 			_replyComments = replyComments;
 		}
 	}
@@ -216,6 +203,28 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 		if (statusId != _statusId) {
 			_statusId = statusId;
 		}
+	}
+
+	public MembershipRequest toEscapedModel() {
+		MembershipRequest model = new MembershipRequestImpl();
+		model.setMembershipRequestId(getMembershipRequestId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setCreateDate(getCreateDate());
+		model.setGroupId(getGroupId());
+		model.setComments(Html.escape(getComments()));
+		model.setReplyComments(Html.escape(getReplyComments()));
+		model.setReplyDate(getReplyDate());
+		model.setReplierUserId(getReplierUserId());
+		model.setStatusId(getStatusId());
+
+		if (true) {
+			model = (MembershipRequest)Proxy.newProxyInstance(MembershipRequest.class.getClassLoader(),
+					new Class[] { MembershipRequest.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

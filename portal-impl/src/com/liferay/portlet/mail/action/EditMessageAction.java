@@ -179,9 +179,7 @@ public class EditMessageAction extends PortletAction {
 				}
 
 				String[] recipients = new String[] {
-					Html.escape(to, false),
-					Html.escape(cc, false),
-					StringPool.BLANK
+					Html.escape(to), Html.escape(cc), StringPool.BLANK
 				};
 
 				req.setAttribute(WebKeys.MAIL_MESSAGE_ORIGINAL_ID,
@@ -208,11 +206,11 @@ public class EditMessageAction extends PortletAction {
 			MailMessage mailMessage = MailUtil.getMessage(httpReq, messageId);
 
 			String to = Html.escape(
-				InternetAddressUtil.toString(mailMessage.getTo()), false);
+				InternetAddressUtil.toString(mailMessage.getTo()));
 			String cc = Html.escape(
-				InternetAddressUtil.toString(mailMessage.getCc()), false);
+				InternetAddressUtil.toString(mailMessage.getCc()));
 			String bcc = Html.escape(
-				InternetAddressUtil.toString(mailMessage.getBcc()), false);
+				InternetAddressUtil.toString(mailMessage.getBcc()));
 
 			String[] recipients = new String[] {to, cc, bcc};
 

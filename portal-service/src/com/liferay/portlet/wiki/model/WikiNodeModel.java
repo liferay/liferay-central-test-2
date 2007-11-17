@@ -90,4 +90,6 @@ public interface WikiNodeModel extends BaseModel {
 	public Date getLastPostDate();
 
 	public void setLastPostDate(Date lastPostDate);
+
+	public WikiNode toEscapedModel();
 }

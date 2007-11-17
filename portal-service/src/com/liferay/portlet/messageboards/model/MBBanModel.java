@@ -82,4 +82,6 @@ public interface MBBanModel extends BaseModel {
 	public long getBanUserId();
 
 	public void setBanUserId(long banUserId);
+
+	public MBBan toEscapedModel();
 }

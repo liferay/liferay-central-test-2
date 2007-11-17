@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.journal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.journal.model.JournalArticleResource;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -61,12 +66,6 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table JournalArticleResource (resourcePrimKey LONG not null primary key,groupId LONG,articleId VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table JournalArticleResource";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticleResource"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_ARTICLEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticleResource.articleId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleResourceModel"));
 
@@ -114,12 +113,23 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 				((articleId != null) && (_articleId == null)) ||
 				((articleId != null) && (_articleId != null) &&
 				!articleId.equals(_articleId))) {
-			if (!XSS_ALLOW_ARTICLEID) {
-				articleId = XSSUtil.strip(articleId);
-			}
-
 			_articleId = articleId;
 		}
+	}
+
+	public JournalArticleResource toEscapedModel() {
+		JournalArticleResource model = new JournalArticleResourceImpl();
+		model.setResourcePrimKey(getResourcePrimKey());
+		model.setGroupId(getGroupId());
+		model.setArticleId(Html.escape(getArticleId()));
+
+		if (true) {
+			model = (JournalArticleResource)Proxy.newProxyInstance(JournalArticleResource.class.getClassLoader(),
+					new Class[] { JournalArticleResource.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

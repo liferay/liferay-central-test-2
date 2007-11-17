@@ -22,14 +22,19 @@
 
 package com.liferay.portlet.calendar.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.calendar.model.CalEvent;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -83,30 +88,6 @@ public class CalEventModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table CalEvent (uuid_ VARCHAR(75) null,eventId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,durationHour INTEGER,durationMinute INTEGER,allDay BOOLEAN,timeZoneSensitive BOOLEAN,type_ VARCHAR(75) null,repeating BOOLEAN,recurrence TEXT null,remindBy VARCHAR(75) null,firstReminder INTEGER,secondReminder INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table CalEvent";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.calendar.model.CalEvent"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.uuid"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_USERNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.userName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.title"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.description"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.type"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_RECURRENCE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.recurrence"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_REMINDBY = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.calendar.model.CalEvent.remindBy"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.calendar.model.CalEventModel"));
 
@@ -184,10 +165,6 @@ public class CalEventModelImpl extends BaseModelImpl {
 				((userName != null) && (_userName == null)) ||
 				((userName != null) && (_userName != null) &&
 				!userName.equals(_userName))) {
-			if (!XSS_ALLOW_USERNAME) {
-				userName = XSSUtil.strip(userName);
-			}
-
 			_userName = userName;
 		}
 	}
@@ -226,10 +203,6 @@ public class CalEventModelImpl extends BaseModelImpl {
 		if (((title == null) && (_title != null)) ||
 				((title != null) && (_title == null)) ||
 				((title != null) && (_title != null) && !title.equals(_title))) {
-			if (!XSS_ALLOW_TITLE) {
-				title = XSSUtil.strip(title);
-			}
-
 			_title = title;
 		}
 	}
@@ -243,10 +216,6 @@ public class CalEventModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
 	}
@@ -333,10 +302,6 @@ public class CalEventModelImpl extends BaseModelImpl {
 		if (((type == null) && (_type != null)) ||
 				((type != null) && (_type == null)) ||
 				((type != null) && (_type != null) && !type.equals(_type))) {
-			if (!XSS_ALLOW_TYPE) {
-				type = XSSUtil.strip(type);
-			}
-
 			_type = type;
 		}
 	}
@@ -364,10 +329,6 @@ public class CalEventModelImpl extends BaseModelImpl {
 				((recurrence != null) && (_recurrence == null)) ||
 				((recurrence != null) && (_recurrence != null) &&
 				!recurrence.equals(_recurrence))) {
-			if (!XSS_ALLOW_RECURRENCE) {
-				recurrence = XSSUtil.strip(recurrence);
-			}
-
 			_recurrence = recurrence;
 		}
 	}
@@ -381,10 +342,6 @@ public class CalEventModelImpl extends BaseModelImpl {
 				((remindBy != null) && (_remindBy == null)) ||
 				((remindBy != null) && (_remindBy != null) &&
 				!remindBy.equals(_remindBy))) {
-			if (!XSS_ALLOW_REMINDBY) {
-				remindBy = XSSUtil.strip(remindBy);
-			}
-
 			_remindBy = remindBy;
 		}
 	}
@@ -407,6 +364,40 @@ public class CalEventModelImpl extends BaseModelImpl {
 		if (secondReminder != _secondReminder) {
 			_secondReminder = secondReminder;
 		}
+	}
+
+	public CalEvent toEscapedModel() {
+		CalEvent model = new CalEventImpl();
+		model.setUuid(Html.escape(getUuid()));
+		model.setEventId(getEventId());
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setUserId(getUserId());
+		model.setUserName(Html.escape(getUserName()));
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setTitle(Html.escape(getTitle()));
+		model.setDescription(Html.escape(getDescription()));
+		model.setStartDate(getStartDate());
+		model.setEndDate(getEndDate());
+		model.setDurationHour(getDurationHour());
+		model.setDurationMinute(getDurationMinute());
+		model.setAllDay(getAllDay());
+		model.setTimeZoneSensitive(getTimeZoneSensitive());
+		model.setType(Html.escape(getType()));
+		model.setRepeating(getRepeating());
+		model.setRecurrence(Html.escape(getRecurrence()));
+		model.setRemindBy(Html.escape(getRemindBy()));
+		model.setFirstReminder(getFirstReminder());
+		model.setSecondReminder(getSecondReminder());
+
+		if (true) {
+			model = (CalEvent)Proxy.newProxyInstance(CalEvent.class.getClassLoader(),
+					new Class[] { CalEvent.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

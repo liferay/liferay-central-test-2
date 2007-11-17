@@ -70,4 +70,6 @@ public interface PortletModel extends BaseModel {
 	public boolean isActive();
 
 	public void setActive(boolean active);
+
+	public Portlet toEscapedModel();
 }

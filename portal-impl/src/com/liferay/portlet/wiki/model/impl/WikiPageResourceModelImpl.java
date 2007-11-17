@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.wiki.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.wiki.model.WikiPageResource;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -61,12 +66,6 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table WikiPageResource (resourcePrimKey LONG not null primary key,nodeId LONG,title VARCHAR(75) null)";
 	public static String TABLE_SQL_DROP = "drop table WikiPageResource";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.wiki.model.WikiPageResource"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.wiki.model.WikiPageResource.title"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiPageResourceModel"));
 
@@ -113,12 +112,23 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 		if (((title == null) && (_title != null)) ||
 				((title != null) && (_title == null)) ||
 				((title != null) && (_title != null) && !title.equals(_title))) {
-			if (!XSS_ALLOW_TITLE) {
-				title = XSSUtil.strip(title);
-			}
-
 			_title = title;
 		}
+	}
+
+	public WikiPageResource toEscapedModel() {
+		WikiPageResource model = new WikiPageResourceImpl();
+		model.setResourcePrimKey(getResourcePrimKey());
+		model.setNodeId(getNodeId());
+		model.setTitle(Html.escape(getTitle()));
+
+		if (true) {
+			model = (WikiPageResource)Proxy.newProxyInstance(WikiPageResource.class.getClassLoader(),
+					new Class[] { WikiPageResource.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

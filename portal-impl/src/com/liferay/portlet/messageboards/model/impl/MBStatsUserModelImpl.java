@@ -22,11 +22,16 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.portlet.messageboards.model.MBStatsUser;
+
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -63,9 +68,6 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table MBStatsUser (statsUserId LONG not null primary key,groupId LONG,userId LONG,messageCount INTEGER,lastPostDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table MBStatsUser";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBStatsUser"),
-			XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBStatsUserModel"));
 
@@ -135,6 +137,23 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 				!lastPostDate.equals(_lastPostDate))) {
 			_lastPostDate = lastPostDate;
 		}
+	}
+
+	public MBStatsUser toEscapedModel() {
+		MBStatsUser model = new MBStatsUserImpl();
+		model.setStatsUserId(getStatsUserId());
+		model.setGroupId(getGroupId());
+		model.setUserId(getUserId());
+		model.setMessageCount(getMessageCount());
+		model.setLastPostDate(getLastPostDate());
+
+		if (true) {
+			model = (MBStatsUser)Proxy.newProxyInstance(MBStatsUser.class.getClassLoader(),
+					new Class[] { MBStatsUser.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

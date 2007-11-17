@@ -61,4 +61,6 @@ public interface UserGroupRoleModel extends BaseModel {
 	public long getRoleId();
 
 	public void setRoleId(long roleId);
+
+	public UserGroupRole toEscapedModel();
 }

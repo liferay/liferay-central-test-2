@@ -138,4 +138,6 @@ public interface TagsAssetModel extends BaseModel {
 	public int getViewCount();
 
 	public void setViewCount(int viewCount);
+
+	public TagsAsset toEscapedModel();
 }

@@ -22,11 +22,15 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -64,8 +68,6 @@ public class ReleaseModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Release_";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Release"), XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ReleaseModel"));
 
@@ -155,6 +157,24 @@ public class ReleaseModelImpl extends BaseModelImpl {
 		if (verified != _verified) {
 			_verified = verified;
 		}
+	}
+
+	public Release toEscapedModel() {
+		Release model = new ReleaseImpl();
+		model.setReleaseId(getReleaseId());
+		model.setCreateDate(getCreateDate());
+		model.setModifiedDate(getModifiedDate());
+		model.setBuildNumber(getBuildNumber());
+		model.setBuildDate(getBuildDate());
+		model.setVerified(getVerified());
+
+		if (true) {
+			model = (Release)Proxy.newProxyInstance(Release.class.getClassLoader(),
+					new Class[] { Release.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

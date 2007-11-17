@@ -60,4 +60,6 @@ public interface ResourceModel extends BaseModel {
 	public String getPrimKey();
 
 	public void setPrimKey(String primKey);
+
+	public Resource toEscapedModel();
 }

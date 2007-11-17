@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -62,11 +66,6 @@ public class PermissionModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Permission_ (permissionId LONG not null primary key,companyId LONG,actionId VARCHAR(75) null,resourceId LONG)";
 	public static String TABLE_SQL_DROP = "drop table Permission_";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Permission"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_ACTIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Permission.actionId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PermissionModel"));
 
@@ -114,10 +113,6 @@ public class PermissionModelImpl extends BaseModelImpl {
 				((actionId != null) && (_actionId == null)) ||
 				((actionId != null) && (_actionId != null) &&
 				!actionId.equals(_actionId))) {
-			if (!XSS_ALLOW_ACTIONID) {
-				actionId = XSSUtil.strip(actionId);
-			}
-
 			_actionId = actionId;
 		}
 	}
@@ -130,6 +125,22 @@ public class PermissionModelImpl extends BaseModelImpl {
 		if (resourceId != _resourceId) {
 			_resourceId = resourceId;
 		}
+	}
+
+	public Permission toEscapedModel() {
+		Permission model = new PermissionImpl();
+		model.setPermissionId(getPermissionId());
+		model.setCompanyId(getCompanyId());
+		model.setActionId(Html.escape(getActionId()));
+		model.setResourceId(getResourceId());
+
+		if (true) {
+			model = (Permission)Proxy.newProxyInstance(Permission.class.getClassLoader(),
+					new Class[] { Permission.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

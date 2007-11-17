@@ -64,4 +64,6 @@ public interface PermissionModel extends BaseModel {
 	public long getResourceId();
 
 	public void setResourceId(long resourceId);
+
+	public Permission toEscapedModel();
 }

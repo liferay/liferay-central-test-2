@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -66,14 +70,6 @@ public class ImageModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Image (imageId LONG not null primary key,modifiedDate DATE null,text_ TEXT null,type_ VARCHAR(75) null,height INTEGER,width INTEGER,size_ INTEGER)";
 	public static String TABLE_SQL_DROP = "drop table Image";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Image"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_TEXT = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Image.text"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Image.type"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ImageModel"));
 
@@ -123,10 +119,6 @@ public class ImageModelImpl extends BaseModelImpl {
 		if (((text == null) && (_text != null)) ||
 				((text != null) && (_text == null)) ||
 				((text != null) && (_text != null) && !text.equals(_text))) {
-			if (!XSS_ALLOW_TEXT) {
-				text = XSSUtil.strip(text);
-			}
-
 			_text = text;
 		}
 	}
@@ -139,10 +131,6 @@ public class ImageModelImpl extends BaseModelImpl {
 		if (((type == null) && (_type != null)) ||
 				((type != null) && (_type == null)) ||
 				((type != null) && (_type != null) && !type.equals(_type))) {
-			if (!XSS_ALLOW_TYPE) {
-				type = XSSUtil.strip(type);
-			}
-
 			_type = type;
 		}
 	}
@@ -175,6 +163,24 @@ public class ImageModelImpl extends BaseModelImpl {
 		if (size != _size) {
 			_size = size;
 		}
+	}
+
+	public Image toEscapedModel() {
+		Image model = new ImageImpl();
+		model.setImageId(getImageId());
+		model.setModifiedDate(getModifiedDate());
+		model.setText(Html.escape(getText()));
+		model.setType(Html.escape(getType()));
+		model.setHeight(getHeight());
+		model.setWidth(getWidth());
+		model.setSize(getSize());
+
+		if (true) {
+			model = (Image)Proxy.newProxyInstance(Image.class.getClassLoader(),
+					new Class[] { Image.class }, new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

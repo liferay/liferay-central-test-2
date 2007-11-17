@@ -72,7 +72,7 @@ public class MailContent {
 			String body = GetterUtil.getString(_plainBody);
 
 			if (Validator.isNotNull(body)) {
-				body = Html.escape(body, false);
+				body = Html.escape(body);
 				body = StringUtil.replace(body, "\t", "    ");
 				body = StringUtil.replace(body, "  ", " &nbsp;");
 				body = StringUtil.replace(body, "\n", "<BR />");

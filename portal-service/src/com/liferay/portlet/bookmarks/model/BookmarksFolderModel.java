@@ -90,4 +90,6 @@ public interface BookmarksFolderModel extends BaseModel {
 	public String getDescription();
 
 	public void setDescription(String description);
+
+	public BookmarksFolder toEscapedModel();
 }

@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Country;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -64,23 +68,6 @@ public class CountryModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Country (countryId LONG not null primary key,name VARCHAR(75) null,a2 VARCHAR(75) null,a3 VARCHAR(75) null,number_ VARCHAR(75) null,idd_ VARCHAR(75) null,active_ BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table Country";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Country"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Country.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_A2 = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Country.a2"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_A3 = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Country.a3"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_NUMBER = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Country.number"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_IDD = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Country.idd"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.CountryModel"));
 
@@ -117,10 +104,6 @@ public class CountryModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -132,10 +115,6 @@ public class CountryModelImpl extends BaseModelImpl {
 	public void setA2(String a2) {
 		if (((a2 == null) && (_a2 != null)) || ((a2 != null) && (_a2 == null)) ||
 				((a2 != null) && (_a2 != null) && !a2.equals(_a2))) {
-			if (!XSS_ALLOW_A2) {
-				a2 = XSSUtil.strip(a2);
-			}
-
 			_a2 = a2;
 		}
 	}
@@ -147,10 +126,6 @@ public class CountryModelImpl extends BaseModelImpl {
 	public void setA3(String a3) {
 		if (((a3 == null) && (_a3 != null)) || ((a3 != null) && (_a3 == null)) ||
 				((a3 != null) && (_a3 != null) && !a3.equals(_a3))) {
-			if (!XSS_ALLOW_A3) {
-				a3 = XSSUtil.strip(a3);
-			}
-
 			_a3 = a3;
 		}
 	}
@@ -164,10 +139,6 @@ public class CountryModelImpl extends BaseModelImpl {
 				((number != null) && (_number == null)) ||
 				((number != null) && (_number != null) &&
 				!number.equals(_number))) {
-			if (!XSS_ALLOW_NUMBER) {
-				number = XSSUtil.strip(number);
-			}
-
 			_number = number;
 		}
 	}
@@ -180,10 +151,6 @@ public class CountryModelImpl extends BaseModelImpl {
 		if (((idd == null) && (_idd != null)) ||
 				((idd != null) && (_idd == null)) ||
 				((idd != null) && (_idd != null) && !idd.equals(_idd))) {
-			if (!XSS_ALLOW_IDD) {
-				idd = XSSUtil.strip(idd);
-			}
-
 			_idd = idd;
 		}
 	}
@@ -200,6 +167,25 @@ public class CountryModelImpl extends BaseModelImpl {
 		if (active != _active) {
 			_active = active;
 		}
+	}
+
+	public Country toEscapedModel() {
+		Country model = new CountryImpl();
+		model.setCountryId(getCountryId());
+		model.setName(Html.escape(getName()));
+		model.setA2(Html.escape(getA2()));
+		model.setA3(Html.escape(getA3()));
+		model.setNumber(Html.escape(getNumber()));
+		model.setIdd(Html.escape(getIdd()));
+		model.setActive(getActive());
+
+		if (true) {
+			model = (Country)Proxy.newProxyInstance(Country.class.getClassLoader(),
+					new Class[] { Country.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

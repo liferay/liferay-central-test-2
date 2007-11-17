@@ -160,4 +160,6 @@ public interface JournalArticleModel extends BaseModel {
 	public boolean isIndexable();
 
 	public void setIndexable(boolean indexable);
+
+	public JournalArticle toEscapedModel();
 }

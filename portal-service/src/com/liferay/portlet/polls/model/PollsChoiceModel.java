@@ -68,4 +68,6 @@ public interface PollsChoiceModel extends BaseModel {
 	public String getDescription();
 
 	public void setDescription(String description);
+
+	public PollsChoice toEscapedModel();
 }

@@ -86,4 +86,6 @@ public interface BlogsStatsUserModel extends BaseModel {
 	public double getRatingsAverageScore();
 
 	public void setRatingsAverageScore(double ratingsAverageScore);
+
+	public BlogsStatsUser toEscapedModel();
 }

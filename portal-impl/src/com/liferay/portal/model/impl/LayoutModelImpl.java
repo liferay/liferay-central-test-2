@@ -22,13 +22,17 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -79,41 +83,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table Layout (plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,description STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(100) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,dlFolderId LONG)";
 	public static String TABLE_SQL_DROP = "drop table Layout";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.name"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.title"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.description"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.type"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPESETTINGS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.typeSettings"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_FRIENDLYURL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.friendlyURL"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_THEMEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.themeId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_COLORSCHEMEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.colorSchemeId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_WAPTHEMEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.wapThemeId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_WAPCOLORSCHEMEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.wapColorSchemeId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_CSS = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Layout.css"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.LayoutModel"));
 
@@ -204,10 +173,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 		if (((name == null) && (_name != null)) ||
 				((name != null) && (_name == null)) ||
 				((name != null) && (_name != null) && !name.equals(_name))) {
-			if (!XSS_ALLOW_NAME) {
-				name = XSSUtil.strip(name);
-			}
-
 			_name = name;
 		}
 	}
@@ -220,10 +185,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 		if (((title == null) && (_title != null)) ||
 				((title != null) && (_title == null)) ||
 				((title != null) && (_title != null) && !title.equals(_title))) {
-			if (!XSS_ALLOW_TITLE) {
-				title = XSSUtil.strip(title);
-			}
-
 			_title = title;
 		}
 	}
@@ -237,10 +198,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 				((description != null) && (_description == null)) ||
 				((description != null) && (_description != null) &&
 				!description.equals(_description))) {
-			if (!XSS_ALLOW_DESCRIPTION) {
-				description = XSSUtil.strip(description);
-			}
-
 			_description = description;
 		}
 	}
@@ -253,10 +210,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 		if (((type == null) && (_type != null)) ||
 				((type != null) && (_type == null)) ||
 				((type != null) && (_type != null) && !type.equals(_type))) {
-			if (!XSS_ALLOW_TYPE) {
-				type = XSSUtil.strip(type);
-			}
-
 			_type = type;
 		}
 	}
@@ -270,10 +223,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 				((typeSettings != null) && (_typeSettings == null)) ||
 				((typeSettings != null) && (_typeSettings != null) &&
 				!typeSettings.equals(_typeSettings))) {
-			if (!XSS_ALLOW_TYPESETTINGS) {
-				typeSettings = XSSUtil.strip(typeSettings);
-			}
-
 			_typeSettings = typeSettings;
 		}
 	}
@@ -301,10 +250,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 				((friendlyURL != null) && (_friendlyURL == null)) ||
 				((friendlyURL != null) && (_friendlyURL != null) &&
 				!friendlyURL.equals(_friendlyURL))) {
-			if (!XSS_ALLOW_FRIENDLYURL) {
-				friendlyURL = XSSUtil.strip(friendlyURL);
-			}
-
 			_friendlyURL = friendlyURL;
 		}
 	}
@@ -342,10 +287,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 				((themeId != null) && (_themeId == null)) ||
 				((themeId != null) && (_themeId != null) &&
 				!themeId.equals(_themeId))) {
-			if (!XSS_ALLOW_THEMEID) {
-				themeId = XSSUtil.strip(themeId);
-			}
-
 			_themeId = themeId;
 		}
 	}
@@ -359,10 +300,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 				((colorSchemeId != null) && (_colorSchemeId == null)) ||
 				((colorSchemeId != null) && (_colorSchemeId != null) &&
 				!colorSchemeId.equals(_colorSchemeId))) {
-			if (!XSS_ALLOW_COLORSCHEMEID) {
-				colorSchemeId = XSSUtil.strip(colorSchemeId);
-			}
-
 			_colorSchemeId = colorSchemeId;
 		}
 	}
@@ -376,10 +313,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 				((wapThemeId != null) && (_wapThemeId == null)) ||
 				((wapThemeId != null) && (_wapThemeId != null) &&
 				!wapThemeId.equals(_wapThemeId))) {
-			if (!XSS_ALLOW_WAPTHEMEID) {
-				wapThemeId = XSSUtil.strip(wapThemeId);
-			}
-
 			_wapThemeId = wapThemeId;
 		}
 	}
@@ -393,10 +326,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 				((wapColorSchemeId != null) && (_wapColorSchemeId == null)) ||
 				((wapColorSchemeId != null) && (_wapColorSchemeId != null) &&
 				!wapColorSchemeId.equals(_wapColorSchemeId))) {
-			if (!XSS_ALLOW_WAPCOLORSCHEMEID) {
-				wapColorSchemeId = XSSUtil.strip(wapColorSchemeId);
-			}
-
 			_wapColorSchemeId = wapColorSchemeId;
 		}
 	}
@@ -409,10 +338,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 		if (((css == null) && (_css != null)) ||
 				((css != null) && (_css == null)) ||
 				((css != null) && (_css != null) && !css.equals(_css))) {
-			if (!XSS_ALLOW_CSS) {
-				css = XSSUtil.strip(css);
-			}
-
 			_css = css;
 		}
 	}
@@ -435,6 +360,39 @@ public class LayoutModelImpl extends BaseModelImpl {
 		if (dlFolderId != _dlFolderId) {
 			_dlFolderId = dlFolderId;
 		}
+	}
+
+	public Layout toEscapedModel() {
+		Layout model = new LayoutImpl();
+		model.setPlid(getPlid());
+		model.setGroupId(getGroupId());
+		model.setCompanyId(getCompanyId());
+		model.setPrivateLayout(getPrivateLayout());
+		model.setLayoutId(getLayoutId());
+		model.setParentLayoutId(getParentLayoutId());
+		model.setName(Html.escape(getName()));
+		model.setTitle(Html.escape(getTitle()));
+		model.setDescription(Html.escape(getDescription()));
+		model.setType(Html.escape(getType()));
+		model.setTypeSettings(Html.escape(getTypeSettings()));
+		model.setHidden(getHidden());
+		model.setFriendlyURL(Html.escape(getFriendlyURL()));
+		model.setIconImage(getIconImage());
+		model.setIconImageId(getIconImageId());
+		model.setThemeId(Html.escape(getThemeId()));
+		model.setColorSchemeId(Html.escape(getColorSchemeId()));
+		model.setWapThemeId(Html.escape(getWapThemeId()));
+		model.setWapColorSchemeId(Html.escape(getWapColorSchemeId()));
+		model.setCss(Html.escape(getCss()));
+		model.setPriority(getPriority());
+		model.setDlFolderId(getDlFolderId());
+
+		if (true) {
+			model = (Layout)Proxy.newProxyInstance(Layout.class.getClassLoader(),
+					new Class[] { Layout.class }, new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

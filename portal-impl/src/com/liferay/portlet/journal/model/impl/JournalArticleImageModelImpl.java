@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.journal.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.XSSUtil;
+import com.liferay.portlet.journal.model.JournalArticleImage;
+
+import com.liferay.util.Html;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -66,21 +71,6 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table JournalArticleImage (uuid_ VARCHAR(75) null,articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
 	public static String TABLE_SQL_DROP = "drop table JournalArticleImage";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticleImage"),
-			XSS_ALLOW);
-	public static boolean XSS_ALLOW_UUID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticleImage.uuid"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ARTICLEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticleImage.articleId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ELNAME = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticleImage.elName"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_LANGUAGEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticleImage.languageId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleImageModel"));
 
@@ -138,10 +128,6 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 				((articleId != null) && (_articleId == null)) ||
 				((articleId != null) && (_articleId != null) &&
 				!articleId.equals(_articleId))) {
-			if (!XSS_ALLOW_ARTICLEID) {
-				articleId = XSSUtil.strip(articleId);
-			}
-
 			_articleId = articleId;
 		}
 	}
@@ -165,10 +151,6 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 				((elName != null) && (_elName == null)) ||
 				((elName != null) && (_elName != null) &&
 				!elName.equals(_elName))) {
-			if (!XSS_ALLOW_ELNAME) {
-				elName = XSSUtil.strip(elName);
-			}
-
 			_elName = elName;
 		}
 	}
@@ -182,10 +164,6 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 				((languageId != null) && (_languageId == null)) ||
 				((languageId != null) && (_languageId != null) &&
 				!languageId.equals(_languageId))) {
-			if (!XSS_ALLOW_LANGUAGEID) {
-				languageId = XSSUtil.strip(languageId);
-			}
-
 			_languageId = languageId;
 		}
 	}
@@ -202,6 +180,26 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 		if (tempImage != _tempImage) {
 			_tempImage = tempImage;
 		}
+	}
+
+	public JournalArticleImage toEscapedModel() {
+		JournalArticleImage model = new JournalArticleImageImpl();
+		model.setUuid(Html.escape(getUuid()));
+		model.setArticleImageId(getArticleImageId());
+		model.setGroupId(getGroupId());
+		model.setArticleId(Html.escape(getArticleId()));
+		model.setVersion(getVersion());
+		model.setElName(Html.escape(getElName()));
+		model.setLanguageId(Html.escape(getLanguageId()));
+		model.setTempImage(getTempImage());
+
+		if (true) {
+			model = (JournalArticleImage)Proxy.newProxyInstance(JournalArticleImage.class.getClassLoader(),
+					new Class[] { JournalArticleImage.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

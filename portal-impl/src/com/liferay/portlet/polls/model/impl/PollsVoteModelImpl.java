@@ -22,11 +22,16 @@
 
 package com.liferay.portlet.polls.model.impl;
 
+import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.portlet.polls.model.PollsVote;
+
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -63,9 +68,6 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 		};
 	public static String TABLE_SQL_CREATE = "create table PollsVote (voteId LONG not null primary key,userId LONG,questionId LONG,choiceId LONG,voteDate DATE null)";
 	public static String TABLE_SQL_DROP = "drop table PollsVote";
-	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.polls.model.PollsVote"),
-			XSS_ALLOW);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.polls.model.PollsVoteModel"));
 
@@ -135,6 +137,23 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 				!voteDate.equals(_voteDate))) {
 			_voteDate = voteDate;
 		}
+	}
+
+	public PollsVote toEscapedModel() {
+		PollsVote model = new PollsVoteImpl();
+		model.setVoteId(getVoteId());
+		model.setUserId(getUserId());
+		model.setQuestionId(getQuestionId());
+		model.setChoiceId(getChoiceId());
+		model.setVoteDate(getVoteDate());
+
+		if (true) {
+			model = (PollsVote)Proxy.newProxyInstance(PollsVote.class.getClassLoader(),
+					new Class[] { PollsVote.class },
+					new ReadOnlyBeanHandler(model));
+		}
+
+		return model;
 	}
 
 	public Object clone() {

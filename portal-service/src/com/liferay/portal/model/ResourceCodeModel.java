@@ -64,4 +64,6 @@ public interface ResourceCodeModel extends BaseModel {
 	public int getScope();
 
 	public void setScope(int scope);
+
+	public ResourceCode toEscapedModel();
 }
