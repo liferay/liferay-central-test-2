@@ -43,6 +43,9 @@ public interface LayoutTypePortlet extends LayoutType {
 	public void setLayoutTemplateId(
 		long userId, String newLayoutTemplateId, boolean checkPermission);
 
+	public void addNestedLayoutTemplate(
+		LayoutTemplate layoutTemplate, String containerId);
+
 	public int getNumOfColumns();
 
 	public List getAllPortlets(String columnId) throws SystemException;

@@ -16987,11 +16987,13 @@ Liferay.Portlet = {
 	findIndex: function(portlet) {
 		var index = -1;
 
-		jQuery(".portlet-boundary", portlet.parentNode).each(function(i) {
-			if (this == portlet) {
-				index = i;
+		jQuery("> .portlet-boundary", portlet.parentNode).each(
+			function(i) {
+				if (this == portlet) {
+					index = i;
+				}
 			}
-		});
+		);
 
 		return index;
 	},
@@ -17613,7 +17615,6 @@ Liferay.ColorPicker = new Class({
 	};
 
 	lib.Columns.extendNativeFunctionObject({
-
 		init: function(options) {
 			var instance = this;
 
@@ -17685,14 +17686,21 @@ Liferay.ColorPicker = new Class({
 			var data, quadrant, rt = null;
 
 			jColumns.each(function(i) {
-
 				quadrant = coord.insideObjectData(instance._cache.columnData[i]);
 
 				if (quadrant) {
-					data = instance._cache.columnData[i];
-					data.quadrant = quadrant;
-					rt = this;
-					return false;
+					if (data) {
+						if (instance._cache.columnData[i].nwOffset.insideObjectData(data) && instance._cache.columnData[i].seOffset.insideObjectData(data)) {
+							data = instance._cache.columnData[i];
+							data.quadrant = quadrant;
+							rt = this;
+						}
+					}
+					else {
+						data = instance._cache.columnData[i];
+						data.quadrant = quadrant;
+						rt = this;
+					}
 				}
 			});
 
@@ -17711,7 +17719,7 @@ Liferay.ColorPicker = new Class({
 			var jPortlets = instance._cache.portlets[scope.id];
 
 			if (!jPortlets) {
-				jPortlets = jQuery(instance._portlets, scope);
+				jPortlets = jQuery("> " + instance._portlets, scope);
 				instance._cache.portlets[scope.id] = jPortlets;
 				instance._cache.portletData[scope.id] = [];
 				instance._cache.portletList[scope.id] = new LinkedList();

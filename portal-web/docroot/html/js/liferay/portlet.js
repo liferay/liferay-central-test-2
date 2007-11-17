@@ -95,11 +95,13 @@ Liferay.Portlet = {
 	findIndex: function(portlet) {
 		var index = -1;
 
-		jQuery(".portlet-boundary", portlet.parentNode).each(function(i) {
-			if (this == portlet) {
-				index = i;
+		jQuery("> .portlet-boundary", portlet.parentNode).each(
+			function(i) {
+				if (this == portlet) {
+					index = i;
+				}
 			}
-		});
+		);
 
 		return index;
 	},

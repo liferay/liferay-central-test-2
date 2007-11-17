@@ -4,7 +4,6 @@
 	};
 
 	lib.Columns.extendNativeFunctionObject({
-
 		init: function(options) {
 			var instance = this;
 
@@ -76,14 +75,21 @@
 			var data, quadrant, rt = null;
 
 			jColumns.each(function(i) {
-
 				quadrant = coord.insideObjectData(instance._cache.columnData[i]);
 
 				if (quadrant) {
-					data = instance._cache.columnData[i];
-					data.quadrant = quadrant;
-					rt = this;
-					return false;
+					if (data) {
+						if (instance._cache.columnData[i].nwOffset.insideObjectData(data) && instance._cache.columnData[i].seOffset.insideObjectData(data)) {
+							data = instance._cache.columnData[i];
+							data.quadrant = quadrant;
+							rt = this;
+						}
+					}
+					else {
+						data = instance._cache.columnData[i];
+						data.quadrant = quadrant;
+						rt = this;
+					}
 				}
 			});
 
@@ -102,7 +108,7 @@
 			var jPortlets = instance._cache.portlets[scope.id];
 
 			if (!jPortlets) {
-				jPortlets = jQuery(instance._portlets, scope);
+				jPortlets = jQuery("> " + instance._portlets, scope);
 				instance._cache.portlets[scope.id] = jPortlets;
 				instance._cache.portletData[scope.id] = [];
 				instance._cache.portletList[scope.id] = new LinkedList();
