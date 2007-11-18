@@ -82,6 +82,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/compiler/ecj.jar</file-name>
+		<version>3.3.1.1</version>
+		<project-name>Eclpse JDT Core Batch Compiler</project-name>
+		<project-url>http://www.eclipse.org/jdt/core/index.php</project-url>
+		<licenses>
+			<license>
+				<license-name>Eclipse Public License Version 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/derby.jar</file-name>
 		<version>10.1.1.0</version>
 		<project-name>Derby</project-name>
