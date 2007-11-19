@@ -127,7 +127,7 @@
 		<div class="ctrl-holder">
 			<label for="login"><liferay-ui:message key="login" /></label>
 
-			<input class="liferay-input-text" id="login" name="login" type="text" value="<%= login %>" />
+			<input class="liferay-input-text" id="login" name="login" type="text" value="<%= Html.escape(login) %>" />
 		</div>
 
 		<div class="ctrl-holder">
