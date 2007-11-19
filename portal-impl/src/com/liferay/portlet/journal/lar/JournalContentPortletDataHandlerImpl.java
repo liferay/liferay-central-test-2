@@ -324,8 +324,8 @@ public class JournalContentPortletDataHandlerImpl
 
 		tempDoc.content().add(el.createCopy());
 
-		JournalArticle article =
-			(JournalArticle)xStream.fromXML(tempDoc.asXML());
+		JournalArticle article = (JournalArticle)xStream.fromXML(
+			tempDoc.asXML());
 
 		article.setGroupId(context.getGroupId());
 
