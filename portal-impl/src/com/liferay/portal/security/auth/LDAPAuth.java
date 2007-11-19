@@ -248,6 +248,9 @@ public class LDAPAuth implements Authenticator {
 				throw e;
 			}
 		}
+		finally {
+			ctx.close();
+		}
 
 		return SUCCESS;
 	}

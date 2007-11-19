@@ -121,6 +121,8 @@ public class PortalLDAPUtil {
 
 			ctx.modifyAttributes(name, modItems);
 		}
+
+		ctx.close();
 	}
 
 	public static void exportToLDAP(User user) throws Exception {
@@ -169,6 +171,8 @@ public class PortalLDAPUtil {
 
 			ctx.modifyAttributes(name, modItems);
 		}
+
+		ctx.close();
 	}
 
 	public static String getAuthSearchFilter(
@@ -296,6 +300,8 @@ public class PortalLDAPUtil {
 			SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
 		NamingEnumeration enu = ctx.search(baseDN, filter, cons);
+
+		ctx.close();
 
 		if (enu.hasMore()) {
 			Binding binding = (Binding)enu.next();
