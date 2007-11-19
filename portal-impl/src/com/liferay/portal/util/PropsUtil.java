@@ -337,15 +337,11 @@ public class PropsUtil {
 
 	public static final String LDAP_AUTH_SEARCH_FILTER = "ldap.auth.search.filter";
 
-	public static final String LDAP_USERS_DN = "ldap.users.dn";
-
 	public static final String LDAP_USER_IMPL = "ldap.user.impl";
 
 	public static final String LDAP_USER_DEFAULT_OBJECT_CLASSES = "ldap.user.default.object.classes";
 
 	public static final String LDAP_USER_MAPPINGS = "ldap.user.mappings";
-
-	public static final String LDAP_GROUPS_DN = "ldap.groups.dn";
 
 	public static final String LDAP_GROUP_MAPPINGS = "ldap.group.mappings";
 
@@ -362,6 +358,10 @@ public class PropsUtil {
 	public static final String LDAP_IMPORT_METHOD = "ldap.import.method";
 
 	public static final String LDAP_EXPORT_ENABLED = "ldap.export.enabled";
+
+	public static final String LDAP_USERS_DN = "ldap.users.dn";
+
+	public static final String LDAP_GROUPS_DN = "ldap.groups.dn";
 
 	public static final String LDAP_PASSWORD_POLICY_ENABLED = "ldap.password.policy.enabled";
 
