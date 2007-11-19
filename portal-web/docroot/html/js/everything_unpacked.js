@@ -16373,18 +16373,24 @@ jQuery.fn.xySize = function() {
 			jBg.fadeTo("normal", 0.5);
 
 			if (false) {
-				// jQuery Draggable is slow.  Use Liferay Drag (lDrag)
-				jPopup.Draggable({
-					handle: jPopup.find(".popup-header")[0],
-					zIndex: Liferay.zIndex.ALERT + 1
-				});
+
+				// jQuery Draggable is slow
+
+				jPopup.Draggable(
+					{
+						handle: jPopup.find(".popup-header")[0],
+						zIndex: Liferay.zIndex.ALERT + 1
+					}
+				);
 			}
 			else {
-				jPopup.lDrag({
-					handle: jPopup.find(".popup-header")[0],
-					threshold: 2,
-					dragClass: "drag-indicator"
-				});
+				jPopup.lDrag(
+					{
+						handle: jPopup.find(".popup-header")[0],
+						threshold: 2,
+						dragClass: "drag-indicator"
+					}
+				);
 			}
 
 			if (noCenter) {
@@ -16410,9 +16416,13 @@ jQuery.fn.xySize = function() {
 			message.height = "";
 			iframe.src = url;
 			iframe.frameBorder = 0;
-			if (msgWidth) iframe.style.width = "100%";
+
+			if (msgWidth) {
+				iframe.style.width = "100%";
+			}
 
 			message.appendChild(iframe);
+
 			if (!options.noCenter) {
 				$.Popup.center(msgHeight, msgWidth);
 			}
@@ -16422,20 +16432,31 @@ jQuery.fn.xySize = function() {
 
 		center : function(height, width) {
 			var jPopup = jQuery("#alert-messages .popup:last");
+			var jBackground = jQuery(".alert-background");
+
+			jBackground.css(
+				{
+					top: (Viewport.scroll().y)
+				}
+			);
 
 			if (!jPopup[0].alertOptions.noCenter) {
-				jPopup.css({
-					top: (Viewport.scroll().y + (Viewport.frame().y/2 - jPopup.height()/2)) + "px",
-					left: (Viewport.scroll().x + (Viewport.frame().x/2 - jPopup.width()/2)) + "px"
-				});
+				jPopup.css(
+					{
+						top: (Viewport.scroll().y + (Viewport.frame().y/2 - jPopup.height()/2)) + "px",
+						left: (Viewport.scroll().x + (Viewport.frame().x/2 - jPopup.width()/2)) + "px"
+					}
+				);
 			}
 		},
 
 	    resize: function() {
-			jQuery("#alert-messages .alert-background").css({
-				height: Viewport.page().y + "px",
-				width: Viewport.page().x + "px"
-			});
+			jQuery("#alert-messages .alert-background").css(
+				{
+					height: Viewport.page().y + "px",
+					width: Viewport.page().x + "px"
+				}
+			);
 	    },
 
 	    resizeIframe: function(options) {
