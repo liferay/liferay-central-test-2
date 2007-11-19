@@ -49,7 +49,6 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -277,7 +276,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
-			return XMLFormatter.toString(doc);
+			return doc.asXML();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -333,8 +332,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			Map folderPKs = CollectionFactory.getHashMap();
 
-			List folders = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List folders = (List)xStream.fromXML(tempDoc.asXML());
 
 			Iterator itr = folders.iterator();
 
@@ -354,8 +352,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			Map entryNames = CollectionFactory.getHashMap();
 
-			List entries = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List entries = (List)xStream.fromXML(tempDoc.asXML());
 
 			itr = entries.iterator();
 
@@ -374,8 +371,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 				tempDoc.content().add(el.createCopy());
 
-				List shortcuts = (List)xStream.fromXML(
-					XMLFormatter.toString(tempDoc));
+				List shortcuts = (List)xStream.fromXML(tempDoc.asXML());
 
 				itr = shortcuts.iterator();
 
@@ -396,8 +392,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 				tempDoc.content().add(el.createCopy());
 
-				List ranks = (List)xStream.fromXML(
-					XMLFormatter.toString(tempDoc));
+				List ranks = (List)xStream.fromXML(tempDoc.asXML());
 
 				itr = ranks.iterator();
 

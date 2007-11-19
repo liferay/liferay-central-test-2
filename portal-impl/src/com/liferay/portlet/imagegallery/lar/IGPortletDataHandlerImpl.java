@@ -44,7 +44,6 @@ import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -208,7 +207,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
-			return XMLFormatter.toString(doc);
+			return doc.asXML();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -259,8 +258,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			Map folderPKs = CollectionFactory.getHashMap();
 
-			List folders = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List folders = (List)xStream.fromXML(tempDoc.asXML());
 
 			Iterator itr = folders.iterator();
 
@@ -280,8 +278,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			Map imagesPKs = CollectionFactory.getHashMap();
 
-			List images = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List images = (List)xStream.fromXML(tempDoc.asXML());
 
 			itr = images.iterator();
 
@@ -299,8 +296,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List igImages = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List igImages = (List)xStream.fromXML(tempDoc.asXML());
 
 			itr = igImages.iterator();
 

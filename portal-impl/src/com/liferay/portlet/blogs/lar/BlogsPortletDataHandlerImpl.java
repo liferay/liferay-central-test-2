@@ -36,7 +36,6 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -144,7 +143,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
-			return XMLFormatter.toString(doc);
+			return doc.asXML();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -194,8 +193,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List entries = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List entries = (List)xStream.fromXML(tempDoc.asXML());
 
 			Iterator itr = entries.iterator();
 

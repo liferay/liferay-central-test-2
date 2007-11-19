@@ -48,7 +48,6 @@ import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -242,7 +241,7 @@ public class JournalContentPortletDataHandlerImpl
 					}
 				}
 
-				return XMLFormatter.toString(doc);
+				return doc.asXML();
 			}
 			else {
 				return StringPool.BLANK;
@@ -326,7 +325,7 @@ public class JournalContentPortletDataHandlerImpl
 		tempDoc.content().add(el.createCopy());
 
 		JournalArticle article =
-			(JournalArticle)xStream.fromXML(XMLFormatter.toString(tempDoc));
+			(JournalArticle)xStream.fromXML(tempDoc.asXML());
 
 		article.setGroupId(context.getGroupId());
 
@@ -406,7 +405,7 @@ public class JournalContentPortletDataHandlerImpl
 			tempDoc.content().add(el.createCopy());
 
 			JournalStructure structure = (JournalStructure)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+				tempDoc.asXML());
 
 			structure.setGroupId(context.getGroupId());
 
@@ -459,7 +458,7 @@ public class JournalContentPortletDataHandlerImpl
 			tempDoc.content().add(el.createCopy());
 
 			JournalTemplate template = (JournalTemplate)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+				tempDoc.asXML());
 
 			template.setGroupId(context.getGroupId());
 

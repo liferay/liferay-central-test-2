@@ -41,7 +41,6 @@ import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -214,7 +213,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
-			return XMLFormatter.toString(doc);
+			return doc.asXML();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -263,8 +262,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List articles = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List articles = (List)xStream.fromXML(tempDoc.asXML());
 
 			Iterator itr = articles.iterator();
 
@@ -340,8 +338,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List structures = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List structures = (List)xStream.fromXML(tempDoc.asXML());
 
 			itr = structures.iterator();
 
@@ -395,8 +392,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List templates = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List templates = (List)xStream.fromXML(tempDoc.asXML());
 
 			itr = templates.iterator();
 

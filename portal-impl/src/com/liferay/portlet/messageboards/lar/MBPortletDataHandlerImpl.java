@@ -56,7 +56,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -299,7 +298,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
-			return XMLFormatter.toString(doc);
+			return doc.asXML();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -358,8 +357,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			Map categoryPKs = CollectionFactory.getHashMap();
 
-			List categories = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List categories = (List)xStream.fromXML(tempDoc.asXML());
 
 			Iterator itr = categories.iterator();
 
@@ -380,8 +378,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			Map messagePKs = CollectionFactory.getHashMap();
 			Map threadPKs = CollectionFactory.getHashMap();
 
-			List messages = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List messages = (List)xStream.fromXML(tempDoc.asXML());
 
 			itr = messages.iterator();
 
@@ -402,8 +399,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 				tempDoc.content().add(el.createCopy());
 
-				List flags = (List)xStream.fromXML(
-					XMLFormatter.toString(tempDoc));
+				List flags = (List)xStream.fromXML(tempDoc.asXML());
 
 				itr = flags.iterator();
 
@@ -423,8 +419,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 				tempDoc.content().add(el.createCopy());
 
-				List bans = (List)xStream.fromXML(
-					XMLFormatter.toString(tempDoc));
+				List bans = (List)xStream.fromXML(tempDoc.asXML());
 
 				itr = bans.iterator();
 

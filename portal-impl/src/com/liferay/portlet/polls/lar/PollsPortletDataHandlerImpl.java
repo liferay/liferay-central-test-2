@@ -47,7 +47,6 @@ import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -219,7 +218,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
-			return XMLFormatter.toString(doc);
+			return doc.asXML();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -273,8 +272,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			Map questionPKs = CollectionFactory.getHashMap();
 
-			List questions = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List questions = (List)xStream.fromXML(tempDoc.asXML());
 
 			Iterator itr = questions.iterator();
 
@@ -294,8 +292,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			Map choicePKs = CollectionFactory.getHashMap();
 
-			List choices = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List choices = (List)xStream.fromXML(tempDoc.asXML());
 
 			itr = choices.iterator();
 
@@ -315,8 +312,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 				tempDoc.content().add(el.createCopy());
 
-				List votes = (List)xStream.fromXML(
-					XMLFormatter.toString(tempDoc));
+				List votes = (List)xStream.fromXML(tempDoc.asXML());
 
 				itr = votes.iterator();
 

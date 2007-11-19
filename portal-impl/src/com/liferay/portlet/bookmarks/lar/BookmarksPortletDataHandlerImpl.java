@@ -41,7 +41,6 @@ import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -186,7 +185,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
-			return XMLFormatter.toString(doc);
+			return doc.asXML();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -238,8 +237,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			Map folderPKs = CollectionFactory.getHashMap();
 
-			List folders = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List folders = (List)xStream.fromXML(tempDoc.asXML());
 
 			Iterator itr = folders.iterator();
 
@@ -257,8 +255,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List entries = (List)xStream.fromXML(
-				XMLFormatter.toString(tempDoc));
+			List entries = (List)xStream.fromXML(tempDoc.asXML());
 
 			itr = entries.iterator();
 

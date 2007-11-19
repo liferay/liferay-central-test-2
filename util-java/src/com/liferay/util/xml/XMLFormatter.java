@@ -135,7 +135,8 @@ public class XMLFormatter {
 				content.substring(x, content.length());
 		}
 
-		content = StringUtil.replace(content, "\n\n\n", "\n\n");
+		// LEP-4257
+		//content = StringUtil.replace(content, "\n\n\n", "\n\n");
 
 		if (content.endsWith("\n\n")) {
 			content = content.substring(0, content.length() - 2);
