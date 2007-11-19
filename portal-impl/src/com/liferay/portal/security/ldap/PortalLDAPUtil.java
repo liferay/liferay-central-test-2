@@ -38,6 +38,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -554,8 +555,17 @@ public class PortalLDAPUtil {
 
 			// Find corresponding portal user
 
-			user = UserLocalServiceUtil.getUserByEmailAddress(
-				companyId, emailAddress);
+			String authType = PrefsPropsUtil.getString(
+				companyId, PropsUtil.COMPANY_SECURITY_AUTH_TYPE);
+
+			if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+				user = UserLocalServiceUtil.getUserByScreenName(
+					companyId, screenName);
+			}
+			else {
+				user = UserLocalServiceUtil.getUserByEmailAddress(
+					companyId, emailAddress);
+			}
 
 			Contact contact = user.getContact();
 
