@@ -185,6 +185,9 @@
 
 		center : function(height, width) {
 			var jPopup = jQuery("#alert-messages .popup:last");
+			var jBackground = jQuery(".alert-background");
+
+			jBackground.css({ top: (Viewport.scroll().y) });
 
 			if (!jPopup[0].alertOptions.noCenter) {
 				jPopup.css({
