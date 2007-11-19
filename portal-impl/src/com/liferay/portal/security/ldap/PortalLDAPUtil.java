@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
@@ -169,6 +170,36 @@ public class PortalLDAPUtil {
 		}
 	}
 
+	public static String getAuthSearchFilter(
+			long companyId, String emailAddress, String screenName,
+			String userId)
+		throws PortalException, SystemException {
+
+		String filter = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_AUTH_SEARCH_FILTER);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Search filter before transformation " + filter);
+		}
+
+		filter = StringUtil.replace(
+			filter,
+			new String[] {
+
+				"@company_id@", "@email_address@", "@screen_name@", "@user_id@"
+			},
+			new String[] {
+				String.valueOf(companyId), emailAddress, screenName,
+				userId
+			});
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Search filter after transformation " + filter);
+		}
+
+		return filter;
+	}
+
 	public static LdapContext getContext(long companyId) throws Exception {
 		String baseProviderURL = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_BASE_PROVIDER_URL);
@@ -258,12 +289,8 @@ public class PortalLDAPUtil {
 			return null;
 		}
 
-		Properties userMappings = getUserMappings(companyId);
-
 		String name = getUsersDN(companyId);
-		String filter =
-			"(" + userMappings.getProperty("screenName") + "=" +
-				screenName + ")";
+		String filter = getAuthSearchFilter(companyId, "*", screenName, "*");
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 

@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
@@ -157,26 +156,8 @@ public class LDAPAuth implements Authenticator {
 
 		//  Process LDAP auth search filter
 
-		String filter = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_AUTH_SEARCH_FILTER);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Search filter before transformation " + filter);
-		}
-
-		filter = StringUtil.replace(
-			filter,
-			new String[] {
-				"@company_id@", "@email_address@", "@screen_name@", "@user_id@"
-			},
-			new String[] {
-				String.valueOf(companyId), emailAddress, screenName,
-				String.valueOf(userId)
-			});
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Search filter after transformation " + filter);
-		}
+		String filter = PortalLDAPUtil.getAuthSearchFilter(
+			companyId, emailAddress, screenName, String.valueOf(userId));
 
 		try {
 			SearchControls cons = new SearchControls(
