@@ -47,10 +47,6 @@ import java.util.StringTokenizer;
  */
 public class StringUtil {
 
-    public static boolean isEmpty(final String s) {
-        return (s == null) || s.length() == 0 || s.equals("");
-    }
-    
     public static String add(String s, String add) {
 		return add(s, add, StringPool.COMMA);
 	}
@@ -306,6 +302,15 @@ public class StringUtil {
 		}
 
 		return sm.toString();
+	}
+
+	public static boolean isEmpty(final String s) {
+		if ((s == null) || (s.length() == 0) || s.equals(StringPool.BLANK)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public static String lowerCase(String s) {
