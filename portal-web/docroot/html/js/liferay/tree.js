@@ -33,7 +33,7 @@ var Tree = new Class({
 				var ls = (node.ls == 1) ? true : false;
 				var hasChildNode = instance.hasChildNode(node.id);
 				var isNodeOpen = instance.isNodeOpen(node.id);
-				var isNodeSelected = instance.isNodeSelected(node.id);
+				var isNodeSelected = instance.isNodeSelected(node.objId);
 
 				var plid = node.objId;
 
@@ -349,7 +349,7 @@ var Tree = new Class({
 
 			var currentLi = obj.parentNode;
 
-			var nodeId = currentLi.getAttribute('rel').replace(/_nodeId_/, '');
+			var branchId = currentLi.getAttribute('id').replace(/_branchId_/, '');
 
 			if (instance._hasSelectedChildren(currentLi)) {
 				if (obj.getAttribute("src") == icons.checked) {
@@ -374,7 +374,7 @@ var Tree = new Class({
 				{
 					url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
 					data: {
-						nodeId: nodeId,
+						nodeId: branchId,
 						openNode: selectedNode,
 						treeId: treeIdSelected
 					}
