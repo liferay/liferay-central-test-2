@@ -41,8 +41,9 @@ public class Html {
 			return null;
 		}
 
-		// escape using XSS recommendations from
-		// http://www.owasp.org/index.php/Cross_Site_Scripting#How_to_Protect_Yourself
+		// Escape using XSS recommendations from
+		// http://www.owasp.org/index.php/Cross_Site_Scripting
+		// #How_to_Protect_Yourself
 
 		StringMaker sm = new StringMaker(text.length());
 
