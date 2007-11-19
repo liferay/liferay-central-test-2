@@ -260,23 +260,23 @@ public class PortalLDAPUtil {
 			long companyId, LdapContext ctx, int maxResults)
 		throws Exception {
 
-		String groupDN = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_GROUPS_DN);
+		String baseDN = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_BASE_DN);
 		String groupFilter = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER);
 
-		return getGroups(companyId, ctx, maxResults, groupDN, groupFilter);
+		return getGroups(companyId, ctx, maxResults, baseDN, groupFilter);
 	}
 
 	public static NamingEnumeration getGroups(
-			long companyId, LdapContext ctx, int maxResults, String groupDN,
+			long companyId, LdapContext ctx, int maxResults, String baseDN,
 			String groupFilter)
 		throws Exception {
 
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, maxResults, 0, null, false, false);
 
-		return ctx.search(groupDN, groupFilter, cons);
+		return ctx.search(baseDN, groupFilter, cons);
 	}
 
 	public static Binding getUser(long companyId, String screenName)
@@ -288,12 +288,13 @@ public class PortalLDAPUtil {
 			return null;
 		}
 
-		String name = getUsersDN(companyId);
+		String baseDN = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_BASE_DN);
 		String filter = getAuthSearchFilter(companyId, "*", screenName, "*");
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
-		NamingEnumeration enu = ctx.search(name, filter, cons);
+		NamingEnumeration enu = ctx.search(baseDN, filter, cons);
 
 		if (enu.hasMore()) {
 			Binding binding = (Binding)enu.next();
@@ -318,23 +319,23 @@ public class PortalLDAPUtil {
 			long companyId, LdapContext ctx, int maxResults)
 		throws Exception {
 
-		String userDN = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_USERS_DN);
+		String baseDN = PrefsPropsUtil.getString(
+			companyId, PropsUtil.LDAP_BASE_DN);
 		String userFilter = PrefsPropsUtil.getString(
 			companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
 
-		return getUsers(companyId, ctx, maxResults, userDN, userFilter);
+		return getUsers(companyId, ctx, maxResults, baseDN, userFilter);
 	}
 
 	public static NamingEnumeration getUsers(
-			long companyId, LdapContext ctx, int maxResults, String userDN,
+			long companyId, LdapContext ctx, int maxResults, String baseDN,
 			String userFilter)
 		throws Exception {
 
 		SearchControls cons = new SearchControls(
 			SearchControls.SUBTREE_SCOPE, maxResults, 0, null, false, false);
 
-		return ctx.search(userDN, userFilter, cons);
+		return ctx.search(baseDN, userFilter, cons);
 	}
 
 	public static String getUsersDN(long companyId) throws Exception {

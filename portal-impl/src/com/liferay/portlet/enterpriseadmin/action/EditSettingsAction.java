@@ -251,7 +251,6 @@ public class EditSettingsAction extends PortletAction {
 		String principal = ParamUtil.getString(req, "principal");
 		String credentials = ParamUtil.getString(req, "credentials");
 		String searchFilter = ParamUtil.getString(req, "searchFilter");
-		String usersDN = ParamUtil.getString(req, "usersDN");
 		String userDefaultObjectClasses = ParamUtil.getString(
 			req, "userDefaultObjectClasses");
 
@@ -265,8 +264,6 @@ public class EditSettingsAction extends PortletAction {
 			"\nlastName=" + ParamUtil.getString(req, "userMappingLastName") +
 			"\njobTitle=" + ParamUtil.getString(req, "userMappingJobTitle") +
 			"\ngroup=" + ParamUtil.getString(req, "userMappingGroup");
-
-		String groupsDN = ParamUtil.getString(req, "groupsDN");
 
 		String groupMappings =
 			"groupName=" + ParamUtil.getString(req, "groupMappingGroupName") +
@@ -282,6 +279,8 @@ public class EditSettingsAction extends PortletAction {
 		String importGroupSearchFilter = ParamUtil.getString(
 			req, "importGroupSearchFilter");
 		boolean exportEnabled = ParamUtil.getBoolean(req, "exportEnabled");
+		String usersDN = ParamUtil.getString(req, "usersDN");
+		String groupsDN = ParamUtil.getString(req, "groupsDN");
 		boolean passwordPolicyEnabled = ParamUtil.getBoolean(
 			req, "passwordPolicyEnabled");
 
@@ -307,12 +306,10 @@ public class EditSettingsAction extends PortletAction {
 		prefs.setValue(PropsUtil.LDAP_SECURITY_PRINCIPAL, principal);
 		prefs.setValue(PropsUtil.LDAP_SECURITY_CREDENTIALS, credentials);
 		prefs.setValue(PropsUtil.LDAP_AUTH_SEARCH_FILTER, searchFilter);
-		prefs.setValue(PropsUtil.LDAP_USERS_DN, usersDN);
 		prefs.setValue(
 			PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES,
 			userDefaultObjectClasses);
 		prefs.setValue(PropsUtil.LDAP_USER_MAPPINGS, userMappings);
-		prefs.setValue(PropsUtil.LDAP_GROUPS_DN, groupsDN);
 		prefs.setValue(PropsUtil.LDAP_GROUP_MAPPINGS, groupMappings);
 		prefs.setValue(
 			PropsUtil.LDAP_IMPORT_ENABLED, String.valueOf(importEnabled));
@@ -326,6 +323,8 @@ public class EditSettingsAction extends PortletAction {
 			PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER, importGroupSearchFilter);
 		prefs.setValue(
 			PropsUtil.LDAP_EXPORT_ENABLED, String.valueOf(exportEnabled));
+		prefs.setValue(PropsUtil.LDAP_USERS_DN, usersDN);
+		prefs.setValue(PropsUtil.LDAP_GROUPS_DN, groupsDN);
 		prefs.setValue(
 			PropsUtil.LDAP_PASSWORD_POLICY_ENABLED,
 			String.valueOf(passwordPolicyEnabled));
