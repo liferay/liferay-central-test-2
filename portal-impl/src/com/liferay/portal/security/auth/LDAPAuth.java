@@ -172,11 +172,12 @@ public class LDAPAuth implements Authenticator {
 
 				SearchResult result = (SearchResult)enu.next();
 
-				String fullUserDN = StringPool.BLANK;
+				String fullUserDN = null;
 
 				if (Validator.isNull(baseDN)) {
 					fullUserDN = result.getName();
-				} else {
+				}
+				else {
 					fullUserDN = result.getName() + StringPool.COMMA + baseDN;
 				}
 
