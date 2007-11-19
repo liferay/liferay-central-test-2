@@ -213,6 +213,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 	jQuery(
 		function() {
 			Liferay.Util.toggleBoxes('<portlet:namespace />importEnabledCheckbox', '<portlet:namespace />importEnabledSettings');
+			Liferay.Util.toggleBoxes('<portlet:namespace />exportEnabledCheckbox', '<portlet:namespace />exportEnabledSettings');
 		}
 	);
 </script>
@@ -323,14 +324,6 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<liferay-ui:message key="users-dn" />
-	</td>
-	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />usersDN" type="text" value='<%= ParamUtil.getString(request, "usersDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USERS_DN)) %>' />
-	</td>
-</tr>
-<tr>
-	<td>
 		<liferay-ui:message key="authentication-search-filter" />
 	</td>
 	<td>
@@ -439,14 +432,6 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 <table class="liferay-table">
 <tr>
 	<td>
-		<liferay-ui:message key="groups-dn" />
-	</td>
-	<td>
-		<input class="liferay-input-text" name="<portlet:namespace />groupsDN" type="text" value='<%= ParamUtil.getString(request, "groupsDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUPS_DN)) %>' />
-	</td>
-</tr>
-<tr>
-	<td>
 		<liferay-ui:message key="import-search-filter" />
 	</td>
 	<td>
@@ -542,6 +527,24 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<liferay-ui:input-checkbox param="exportEnabled" defaultValue='<%= ParamUtil.getBoolean(request, "exportEnabled", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.LDAP_EXPORT_ENABLED)) %>' />
 	</td>
 </tr>
+<tbody id="<portlet:namespace />exportEnabledSettings">
+	<tr>
+		<td>
+			<liferay-ui:message key="users-dn" />
+		</td>
+		<td>
+			<input class="liferay-input-text" name="<portlet:namespace />usersDN" type="text" value='<%= ParamUtil.getString(request, "usersDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_USERS_DN)) %>' />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="groups-dn" />
+		</td>
+		<td>
+			<input class="liferay-input-text" name="<portlet:namespace />groupsDN" type="text" value='<%= ParamUtil.getString(request, "groupsDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.LDAP_GROUPS_DN)) %>' />
+		</td>
+</tr>
+</tbody>
 </table>
 
 <br />
