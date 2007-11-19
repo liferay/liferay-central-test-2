@@ -22,6 +22,7 @@
 
 package com.liferay.portal.spring.servlet;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -30,7 +31,6 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.spring.context.LazyWebApplicationContext;
 
 import java.io.IOException;
@@ -92,7 +92,7 @@ public class RemotingServlet extends DispatcherServlet {
 			if (remoteUser != null) {
 				PrincipalThreadLocal.setName(remoteUser);
 
-				long userId = PortalUtil.getUserId(req);
+				long userId = GetterUtil.getLong(remoteUser);
 
 				User user = UserLocalServiceUtil.getUserById(userId);
 
