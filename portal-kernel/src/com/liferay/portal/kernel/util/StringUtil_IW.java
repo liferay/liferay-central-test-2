@@ -101,10 +101,6 @@ public class StringUtil_IW {
 		return StringUtil.highlight(s, keywords, highlight1, highlight2);
 	}
 
-	public boolean isEmpty(java.lang.String s) {
-		return StringUtil.isEmpty(s);
-	}
-
 	public java.lang.String lowerCase(java.lang.String s) {
 		return StringUtil.lowerCase(s);
 	}

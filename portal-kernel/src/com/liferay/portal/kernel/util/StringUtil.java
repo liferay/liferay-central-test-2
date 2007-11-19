@@ -304,15 +304,6 @@ public class StringUtil {
 		return sm.toString();
 	}
 
-	public static boolean isEmpty(final String s) {
-		if ((s == null) || (s.length() == 0) || s.equals(StringPool.BLANK)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	public static String lowerCase(String s) {
 		if (s == null) {
 			return null;
