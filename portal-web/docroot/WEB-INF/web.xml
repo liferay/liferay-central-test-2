@@ -450,6 +450,11 @@
 		<servlet-class>com.liferay.portal.servlet.SoftwareCatalogServlet</servlet-class>
 		<load-on-startup>12</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>DisplayChart</servlet-name>
+		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
+		<load-on-startup>13</load-on-startup>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
 		<url-pattern>/c/*</url-pattern>
@@ -493,6 +498,10 @@
 	<servlet-mapping>
 		<servlet-name>SoftwareCatalogServlet</servlet-name>
 		<url-pattern>/software_catalog/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DisplayChart</servlet-name>
+		<url-pattern>/display_chart/*</url-pattern>
 	</servlet-mapping>
 	<session-config>
 		<session-timeout>30</session-timeout>

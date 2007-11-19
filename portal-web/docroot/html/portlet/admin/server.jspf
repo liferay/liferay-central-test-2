@@ -199,72 +199,6 @@ numberFormat.setMinimumIntegerDigits(2);
 
 						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-						<%--
-						Map currentLoggerNames = new TreeMap();
-
-						Enumeration enu = LogManager.getCurrentLoggers();
-
-						while (enu.hasMoreElements()) {
-							Logger logger = (Logger)enu.nextElement();
-
-							currentLoggerNames.put(logger.getName(), logger);
-						}
-						%>
-
-						<table border="0" cellpadding="4" cellspacing="0" width="100%">
-
-						<%
-						int counter = 0;
-
-						Iterator itr = currentLoggerNames.entrySet().iterator();
-
-						while (itr.hasNext()) {
-							Map.Entry entry = (Map.Entry)itr.next();
-
-							String name = (String)entry.getKey();
-							Logger logger = (Logger)entry.getValue();
-						%>
-
-							<c:if test="<%= logger.getLevel() != null %>">
-
-								<%
-								String className = "portlet-section-body";
-								String classHoverName = "portlet-section-body-hover";
-
-								if (MathUtil.isEven(counter++)) {
-									className = "portlet-section-alternate";
-									classHoverName = "portlet-section-alternate-hover";
-								}
-								%>
-
-								<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-									<td>
-										<%= name %>
-									</td>
-									<td>
-										<select class="form-button" name="<portlet:namespace />logLevel<%= name %>">
-
-											<%
-											for (int i = 0; i < Levels.ALL_LEVELS.length; i++) {
-											%>
-
-												<option <%= logger.getLevel().equals(Levels.ALL_LEVELS[i]) ? "selected" : "" %> value="<%= Levels.ALL_LEVELS[i] %>"><%= Levels.ALL_LEVELS[i] %></option>
-
-											<%
-											}
-											%>
-
-										</select>
-									</td>
-								</tr>
-							</c:if>
-
-						<%
-						}
-						%>
-
-						</table>--%>
-
 						<br />
 
 						<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveServer('updateLogLevels');" />
@@ -399,6 +333,31 @@ numberFormat.setMinimumIntegerDigits(2);
 				numberFormat = NumberFormat.getInstance(locale);
 				%>
 
+				<div>
+
+					<%
+					DefaultValueDataset dataset = new DefaultValueDataset(runtime.freeMemory() * 100 / runtime.totalMemory());
+
+					MeterPlot plot = _getMeterPlot(dataset, pageContext);
+
+					JFreeChart chart = _getChart(LanguageUtil.get(pageContext, "free-memory") + " / " + LanguageUtil.get(pageContext, "total-memory"), plot);
+					%>
+
+					<img border="0" src="<%= themeDisplay.getPathContext() %>/display_chart?filename=<%= ServletUtilities.saveChartAsPNG(chart, 280, 180, null, null) %>" />
+
+					<%
+					dataset = new DefaultValueDataset(runtime.freeMemory() * 100 / runtime.maxMemory());
+
+					plot = _getMeterPlot(dataset, pageContext);
+
+					chart = _getChart(LanguageUtil.get(pageContext, "free-memory") + " / " + LanguageUtil.get(pageContext, "maximum-memory"), plot);
+					%>
+
+					<img border="0" src="<%= themeDisplay.getPathContext() %>/display_chart?filename=<%= ServletUtilities.saveChartAsPNG(chart, 280, 180, null, null) %>" />
+				</div>
+
+				<br />
+
 				<table class="liferay-table">
 				<tr>
 					<td>
@@ -427,6 +386,8 @@ numberFormat.setMinimumIntegerDigits(2);
 				</table>
 
 				<br />
+
+				<liferay-ui:tabs names="actions" />
 
 				<table class="liferay-table">
 				<tr>
@@ -466,3 +427,40 @@ numberFormat.setMinimumIntegerDigits(2);
 		</c:choose>
 	</c:otherwise>
 </c:choose>
+
+<%!
+private JFreeChart _getChart(String title, MeterPlot plot) {
+	JFreeChart chart = new JFreeChart(title, new Font(null, Font.PLAIN, 13), plot, true);
+
+	chart.setBackgroundPaint(Color.white);
+
+	chart.removeLegend();
+
+	return chart;
+}
+
+private MeterPlot _getMeterPlot(DefaultValueDataset dataset, PageContext pageContext) {
+	MeterPlot plot = new MeterPlot(dataset);
+
+	plot.setDialBackgroundPaint(Color.white);
+	plot.setDialShape(DialShape.PIE);
+	plot.setDialOutlinePaint(Color.gray);
+	plot.setTickLabelFont(new Font(null, Font.PLAIN, 10));
+	plot.setTickLabelPaint(Color.darkGray);
+	plot.setTickLabelsVisible(true);
+	plot.setTickPaint(Color.lightGray);
+	plot.setTickSize(5D);
+	plot.setMeterAngle(180);
+	plot.setNeedlePaint(Color.darkGray);
+	plot.setRange(new Range(0.0D, 100D));
+	plot.setValueFont(new Font(null, Font.PLAIN, 10));
+	plot.setValuePaint(Color.black);
+	plot.setUnits("%");
+
+	plot.addInterval(new MeterInterval(LanguageUtil.get(pageContext, "normal"), new Range(0.0D, 75D), Color.lightGray, new BasicStroke(2.0F), new Color(0, 255, 0, 64)));
+	plot.addInterval(new MeterInterval(LanguageUtil.get(pageContext, "warning"), new Range(75D, 90D), Color.lightGray, new BasicStroke(2.0F), new Color(255, 255, 0, 64)));
+	plot.addInterval(new MeterInterval(LanguageUtil.get(pageContext, "critical"), new Range(90D, 100D), Color.lightGray, new BasicStroke(2.0F), new Color(255, 0, 0, 128)));
+
+	return plot;
+}
+%>
