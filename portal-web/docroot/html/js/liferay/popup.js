@@ -243,6 +243,15 @@
 	    	}
 
 	    	$.Popup.resize();
+	    },
+
+	    update: function(link, url) {
+	    	var jLink = jQuery(link);
+
+			jLink.empty();
+			jLink.append("<div class=\"loading-animation\"></div>");
+
+	    	AjaxUtil.update(url, jLink);
 	    }
 	});
 })(Liferay);
