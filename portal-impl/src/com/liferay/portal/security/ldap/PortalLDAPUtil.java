@@ -185,7 +185,6 @@ public class PortalLDAPUtil {
 		filter = StringUtil.replace(
 			filter,
 			new String[] {
-
 				"@company_id@", "@email_address@", "@screen_name@", "@user_id@"
 			},
 			new String[] {
