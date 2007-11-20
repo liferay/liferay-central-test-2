@@ -51,6 +51,7 @@
 
 			var modal = options.modal;
 			var myMessage = options.message;
+			var myMessageId = options.messageId;
 			var msgHeight = options.height;
 			var msgWidth = options.width;
 			var noCenter = options.noCenter;
@@ -78,6 +79,10 @@
 
 			var jPopup = jAlertMsgs.find(".popup:last");
 			var jMessage = jPopup.find(".popup-message");
+
+			if (myMessageId) {
+				jMessage.attr("id", myMessageId);
+			}
 
 			jPopup.find(".popup-close").click(function() {
 				$.Popup.close(this);
@@ -251,7 +256,7 @@
 			jLink.empty();
 			jLink.append("<div class=\"loading-animation\"></div>");
 
-	    	AjaxUtil.update(url, jLink);
+	    	AjaxUtil.update(url, jLink[0]);
 	    }
 	});
 })(Liferay);
