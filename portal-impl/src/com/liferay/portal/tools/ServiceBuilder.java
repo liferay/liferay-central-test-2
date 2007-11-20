@@ -2866,16 +2866,26 @@ public class ServiceBuilder {
 	private String _formatXML(String xml)
 		throws DocumentException, IOException {
 
+		String doctype = null;
+
 		int x = xml.indexOf("<!DOCTYPE");
 
 		if (x != -1) {
 			int y = xml.indexOf(">", x) + 1;
 
-			xml = xml.substring(0, x) + "\n" + xml.substring(y, xml.length());
+			doctype = xml.substring(x, y);
+
+			xml = xml.substring(0, x) + "\n" + xml.substring(y);
 		}
 
 		xml = XMLFormatter.toString(xml);
 		xml = StringUtil.replace(xml, "\"/>", "\" />");
+
+		if (Validator.isNotNull(doctype)) {
+			x = xml.indexOf("?>") + 2;
+
+			xml = xml.substring(0, x) + "\n" + doctype + xml.substring(x);
+		}
 
 		return xml;
 	}
