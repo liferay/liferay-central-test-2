@@ -24,7 +24,7 @@ package com.liferay.portlet.blogs.service;
 
 
 /**
- * <a href="BlogsStatsUserServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="BlogsStatsUserLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,21 @@ package com.liferay.portlet.blogs.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portlet.blogs.BlogsStatsUserService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portlet.blogs.service.BlogsStatsUserLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.blogs.BlogsStatsUserServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.blogs.service.BlogsStatsUserService
- * @see com.liferay.portlet.blogs.service.BlogsStatsUserServiceFactory
+ * @see com.liferay.portlet.blogs.service.BlogsStatsUserLocalService
+ * @see com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory
  *
  */
 public class BlogsStatsUserLocalServiceUtil {

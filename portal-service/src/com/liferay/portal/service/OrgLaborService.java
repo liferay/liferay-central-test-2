@@ -33,15 +33,13 @@ package com.liferay.portal.service;
  *
  * <p>
  * This interface defines the service. The default implementation is
- * <code>com.liferay.portal.service.impl.OrgLaborServiceImpl</code>. Modify
- * methods in that class and rerun ServiceBuilder to populate this class and all
- * other generated classes.
+ * <code>com.liferay.portal.service.impl.OrgLaborServiceImpl</code>.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
  * </p>
  *
  * <p>
- * This is a remote service. Methods of this service are expected to have
- * security checks based on the propagated JAAS credentials because this service
- * can be accessed remotely.
+ * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
  * @author Brian Wing Shun Chan

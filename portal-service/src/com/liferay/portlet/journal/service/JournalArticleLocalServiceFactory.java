@@ -24,7 +24,7 @@ package com.liferay.portlet.journal.service;
 
 
 /**
- * <a href="JournalArticleServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalArticleLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,10 +33,10 @@ package com.liferay.portlet.journal.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>com.liferay.portlet.journal.service.JournalArticleService</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>com.liferay.portlet.journal.service.JournalArticleLocalService</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -46,8 +46,8 @@ package com.liferay.portlet.journal.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.journal.service.JournalArticleService
- * @see com.liferay.portlet.journal.service.JournalArticleServiceUtil
+ * @see com.liferay.portlet.journal.service.JournalArticleLocalService
+ * @see com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil
  *
  */
 public class JournalArticleLocalServiceFactory {

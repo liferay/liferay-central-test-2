@@ -24,7 +24,7 @@ package com.liferay.portlet.wiki.service;
 
 
 /**
- * <a href="WikiPageService.java.html"><b><i>View Source</i></b></a>
+ * <a href="WikiPageLocalService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,19 @@ package com.liferay.portlet.wiki.service;
  *
  * <p>
  * This interface defines the service. The default implementation is
- * <code>com.liferay.portlet.wiki.service.impl.WikiPageServiceImpl</code>. Modify
- * methods in that class and rerun ServiceBuilder to populate this class and all
- * other generated classes.
+ * <code>com.liferay.portlet.wiki.service.impl.WikiPageLocalServiceImpl</code>.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
  * </p>
  *
  * <p>
- * This is a remote service. Methods of this service are expected to have
- * security checks based on the propagated JAAS credentials because this service
- * can be accessed remotely.
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.WikiPageServiceFactory
- * @see com.liferay.portlet.wiki.service.WikiPageServiceUtil
+ * @see com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory
+ * @see com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil
  *
  */
 public interface WikiPageLocalService {

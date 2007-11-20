@@ -24,7 +24,7 @@ package com.liferay.portlet.shopping.service;
 
 
 /**
- * <a href="ShoppingItemFieldServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingItemFieldLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,21 @@ package com.liferay.portlet.shopping.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portlet.shopping.ShoppingItemFieldService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.shopping.ShoppingItemFieldServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.shopping.service.ShoppingItemFieldService
- * @see com.liferay.portlet.shopping.service.ShoppingItemFieldServiceFactory
+ * @see com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService
+ * @see com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceFactory
  *
  */
 public class ShoppingItemFieldLocalServiceUtil {

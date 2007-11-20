@@ -24,7 +24,7 @@ package com.liferay.portlet.calendar.service;
 
 
 /**
- * <a href="CalEventServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="CalEventLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,21 @@ package com.liferay.portlet.calendar.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portlet.calendar.CalEventService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portlet.calendar.service.CalEventLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.calendar.CalEventServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portlet.calendar.service.CalEventLocalServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.calendar.service.CalEventService
- * @see com.liferay.portlet.calendar.service.CalEventServiceFactory
+ * @see com.liferay.portlet.calendar.service.CalEventLocalService
+ * @see com.liferay.portlet.calendar.service.CalEventLocalServiceFactory
  *
  */
 public class CalEventLocalServiceUtil {

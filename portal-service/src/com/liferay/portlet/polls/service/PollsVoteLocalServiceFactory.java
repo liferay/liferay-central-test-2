@@ -24,7 +24,7 @@ package com.liferay.portlet.polls.service;
 
 
 /**
- * <a href="PollsVoteServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="PollsVoteLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,10 +33,10 @@ package com.liferay.portlet.polls.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>com.liferay.portlet.polls.service.PollsVoteService</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>com.liferay.portlet.polls.service.PollsVoteLocalService</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -46,8 +46,8 @@ package com.liferay.portlet.polls.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.polls.service.PollsVoteService
- * @see com.liferay.portlet.polls.service.PollsVoteServiceUtil
+ * @see com.liferay.portlet.polls.service.PollsVoteLocalService
+ * @see com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil
  *
  */
 public class PollsVoteLocalServiceFactory {

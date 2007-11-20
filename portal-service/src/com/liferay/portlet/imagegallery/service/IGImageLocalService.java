@@ -24,7 +24,7 @@ package com.liferay.portlet.imagegallery.service;
 
 
 /**
- * <a href="IGImageService.java.html"><b><i>View Source</i></b></a>
+ * <a href="IGImageLocalService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,19 @@ package com.liferay.portlet.imagegallery.service;
  *
  * <p>
  * This interface defines the service. The default implementation is
- * <code>com.liferay.portlet.imagegallery.service.impl.IGImageServiceImpl</code>. Modify
- * methods in that class and rerun ServiceBuilder to populate this class and all
- * other generated classes.
+ * <code>com.liferay.portlet.imagegallery.service.impl.IGImageLocalServiceImpl</code>.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
  * </p>
  *
  * <p>
- * This is a remote service. Methods of this service are expected to have
- * security checks based on the propagated JAAS credentials because this service
- * can be accessed remotely.
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.imagegallery.service.IGImageServiceFactory
- * @see com.liferay.portlet.imagegallery.service.IGImageServiceUtil
+ * @see com.liferay.portlet.imagegallery.service.IGImageLocalServiceFactory
+ * @see com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil
  *
  */
 public interface IGImageLocalService {

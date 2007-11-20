@@ -24,7 +24,7 @@ package com.liferay.portal.service;
 
 
 /**
- * <a href="PasswordPolicyServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PasswordPolicyLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,21 @@ package com.liferay.portal.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portal.PasswordPolicyService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portal.service.PasswordPolicyLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.PasswordPolicyServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portal.service.PasswordPolicyLocalServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.PasswordPolicyService
- * @see com.liferay.portal.service.PasswordPolicyServiceFactory
+ * @see com.liferay.portal.service.PasswordPolicyLocalService
+ * @see com.liferay.portal.service.PasswordPolicyLocalServiceFactory
  *
  */
 public class PasswordPolicyLocalServiceUtil {

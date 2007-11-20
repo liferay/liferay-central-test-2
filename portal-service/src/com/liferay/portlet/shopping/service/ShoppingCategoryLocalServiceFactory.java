@@ -24,7 +24,7 @@ package com.liferay.portlet.shopping.service;
 
 
 /**
- * <a href="ShoppingCategoryServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingCategoryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,10 +33,10 @@ package com.liferay.portlet.shopping.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>com.liferay.portlet.shopping.service.ShoppingCategoryService</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>com.liferay.portlet.shopping.service.ShoppingCategoryLocalService</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -46,8 +46,8 @@ package com.liferay.portlet.shopping.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.shopping.service.ShoppingCategoryService
- * @see com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil
+ * @see com.liferay.portlet.shopping.service.ShoppingCategoryLocalService
+ * @see com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil
  *
  */
 public class ShoppingCategoryLocalServiceFactory {

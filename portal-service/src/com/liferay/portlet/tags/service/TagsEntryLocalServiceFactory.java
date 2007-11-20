@@ -24,7 +24,7 @@ package com.liferay.portlet.tags.service;
 
 
 /**
- * <a href="TagsEntryServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsEntryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,10 +33,10 @@ package com.liferay.portlet.tags.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>com.liferay.portlet.tags.service.TagsEntryService</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>com.liferay.portlet.tags.service.TagsEntryLocalService</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -46,8 +46,8 @@ package com.liferay.portlet.tags.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.TagsEntryService
- * @see com.liferay.portlet.tags.service.TagsEntryServiceUtil
+ * @see com.liferay.portlet.tags.service.TagsEntryLocalService
+ * @see com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil
  *
  */
 public class TagsEntryLocalServiceFactory {

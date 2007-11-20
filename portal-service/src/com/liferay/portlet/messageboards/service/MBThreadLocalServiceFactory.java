@@ -24,7 +24,7 @@ package com.liferay.portlet.messageboards.service;
 
 
 /**
- * <a href="MBThreadServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBThreadLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,10 +33,10 @@ package com.liferay.portlet.messageboards.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>com.liferay.portlet.messageboards.service.MBThreadService</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>com.liferay.portlet.messageboards.service.MBThreadLocalService</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -46,8 +46,8 @@ package com.liferay.portlet.messageboards.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.MBThreadService
- * @see com.liferay.portlet.messageboards.service.MBThreadServiceUtil
+ * @see com.liferay.portlet.messageboards.service.MBThreadLocalService
+ * @see com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil
  *
  */
 public class MBThreadLocalServiceFactory {

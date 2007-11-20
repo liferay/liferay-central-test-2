@@ -24,7 +24,7 @@ package com.liferay.portal.service;
 
 
 /**
- * <a href="EmailAddressServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="EmailAddressLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,10 +33,10 @@ package com.liferay.portal.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>com.liferay.portal.service.EmailAddressService</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>com.liferay.portal.service.EmailAddressLocalService</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -46,8 +46,8 @@ package com.liferay.portal.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.EmailAddressService
- * @see com.liferay.portal.service.EmailAddressServiceUtil
+ * @see com.liferay.portal.service.EmailAddressLocalService
+ * @see com.liferay.portal.service.EmailAddressLocalServiceUtil
  *
  */
 public class EmailAddressLocalServiceFactory {

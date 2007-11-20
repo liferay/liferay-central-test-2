@@ -24,7 +24,7 @@ package com.liferay.portlet.calendar.service;
 
 
 /**
- * <a href="CalEventServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="CalEventLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,10 +33,10 @@ package com.liferay.portlet.calendar.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>com.liferay.portlet.calendar.service.CalEventService</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>com.liferay.portlet.calendar.service.CalEventLocalService</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -46,8 +46,8 @@ package com.liferay.portlet.calendar.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.calendar.service.CalEventService
- * @see com.liferay.portlet.calendar.service.CalEventServiceUtil
+ * @see com.liferay.portlet.calendar.service.CalEventLocalService
+ * @see com.liferay.portlet.calendar.service.CalEventLocalServiceUtil
  *
  */
 public class CalEventLocalServiceFactory {

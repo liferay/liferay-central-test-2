@@ -24,7 +24,7 @@ package com.liferay.portlet.tags.service;
 
 
 /**
- * <a href="TagsEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsEntryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,21 @@ package com.liferay.portlet.tags.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portlet.tags.TagsEntryService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portlet.tags.service.TagsEntryLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.tags.TagsEntryServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.TagsEntryService
- * @see com.liferay.portlet.tags.service.TagsEntryServiceFactory
+ * @see com.liferay.portlet.tags.service.TagsEntryLocalService
+ * @see com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory
  *
  */
 public class TagsEntryLocalServiceUtil {

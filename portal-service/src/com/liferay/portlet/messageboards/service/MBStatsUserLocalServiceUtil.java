@@ -24,7 +24,7 @@ package com.liferay.portlet.messageboards.service;
 
 
 /**
- * <a href="MBStatsUserServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBStatsUserLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,21 @@ package com.liferay.portlet.messageboards.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portlet.messageboards.MBStatsUserService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portlet.messageboards.service.MBStatsUserLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.messageboards.MBStatsUserServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.MBStatsUserService
- * @see com.liferay.portlet.messageboards.service.MBStatsUserServiceFactory
+ * @see com.liferay.portlet.messageboards.service.MBStatsUserLocalService
+ * @see com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory
  *
  */
 public class MBStatsUserLocalServiceUtil {

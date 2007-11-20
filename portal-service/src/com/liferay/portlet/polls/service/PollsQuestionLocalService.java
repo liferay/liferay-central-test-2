@@ -24,7 +24,7 @@ package com.liferay.portlet.polls.service;
 
 
 /**
- * <a href="PollsQuestionService.java.html"><b><i>View Source</i></b></a>
+ * <a href="PollsQuestionLocalService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,19 @@ package com.liferay.portlet.polls.service;
  *
  * <p>
  * This interface defines the service. The default implementation is
- * <code>com.liferay.portlet.polls.service.impl.PollsQuestionServiceImpl</code>. Modify
- * methods in that class and rerun ServiceBuilder to populate this class and all
- * other generated classes.
+ * <code>com.liferay.portlet.polls.service.impl.PollsQuestionLocalServiceImpl</code>.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
  * </p>
  *
  * <p>
- * This is a remote service. Methods of this service are expected to have
- * security checks based on the propagated JAAS credentials because this service
- * can be accessed remotely.
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.polls.service.PollsQuestionServiceFactory
- * @see com.liferay.portlet.polls.service.PollsQuestionServiceUtil
+ * @see com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory
+ * @see com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil
  *
  */
 public interface PollsQuestionLocalService {

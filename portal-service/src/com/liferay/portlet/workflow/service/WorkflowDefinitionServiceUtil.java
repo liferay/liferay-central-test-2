@@ -33,15 +33,15 @@ package com.liferay.portlet.workflow.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portlet.workflow.WorkflowDefinitionService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portlet.workflow.service.WorkflowDefinitionService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.workflow.WorkflowDefinitionServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan

@@ -24,7 +24,7 @@ package com.liferay.portlet.messageboards.service;
 
 
 /**
- * <a href="MBCategoryServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBCategoryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,21 @@ package com.liferay.portlet.messageboards.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portlet.messageboards.MBCategoryService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portlet.messageboards.service.MBCategoryLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.messageboards.MBCategoryServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.MBCategoryService
- * @see com.liferay.portlet.messageboards.service.MBCategoryServiceFactory
+ * @see com.liferay.portlet.messageboards.service.MBCategoryLocalService
+ * @see com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory
  *
  */
 public class MBCategoryLocalServiceUtil {

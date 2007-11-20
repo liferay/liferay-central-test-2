@@ -24,7 +24,7 @@ package com.liferay.portlet.wiki.service;
 
 
 /**
- * <a href="WikiPageServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="WikiPageLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,21 @@ package com.liferay.portlet.wiki.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portlet.wiki.WikiPageService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portlet.wiki.service.WikiPageLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.wiki.WikiPageServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.WikiPageService
- * @see com.liferay.portlet.wiki.service.WikiPageServiceFactory
+ * @see com.liferay.portlet.wiki.service.WikiPageLocalService
+ * @see com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory
  *
  */
 public class WikiPageLocalServiceUtil {

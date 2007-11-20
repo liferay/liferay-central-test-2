@@ -24,7 +24,7 @@ package com.liferay.portal.service;
 
 
 /**
- * <a href="UserIdMapperService.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserIdMapperLocalService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,19 @@ package com.liferay.portal.service;
  *
  * <p>
  * This interface defines the service. The default implementation is
- * <code>com.liferay.portal.service.impl.UserIdMapperServiceImpl</code>. Modify
- * methods in that class and rerun ServiceBuilder to populate this class and all
- * other generated classes.
+ * <code>com.liferay.portal.service.impl.UserIdMapperLocalServiceImpl</code>.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
  * </p>
  *
  * <p>
- * This is a remote service. Methods of this service are expected to have
- * security checks based on the propagated JAAS credentials because this service
- * can be accessed remotely.
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.UserIdMapperServiceFactory
- * @see com.liferay.portal.service.UserIdMapperServiceUtil
+ * @see com.liferay.portal.service.UserIdMapperLocalServiceFactory
+ * @see com.liferay.portal.service.UserIdMapperLocalServiceUtil
  *
  */
 public interface UserIdMapperLocalService {

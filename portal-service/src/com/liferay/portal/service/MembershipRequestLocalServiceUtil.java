@@ -24,7 +24,7 @@ package com.liferay.portal.service;
 
 
 /**
- * <a href="MembershipRequestServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="MembershipRequestLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,21 @@ package com.liferay.portal.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portal.MembershipRequestService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portal.service.MembershipRequestLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.MembershipRequestServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portal.service.MembershipRequestLocalServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.MembershipRequestService
- * @see com.liferay.portal.service.MembershipRequestServiceFactory
+ * @see com.liferay.portal.service.MembershipRequestLocalService
+ * @see com.liferay.portal.service.MembershipRequestLocalServiceFactory
  *
  */
 public class MembershipRequestLocalServiceUtil {

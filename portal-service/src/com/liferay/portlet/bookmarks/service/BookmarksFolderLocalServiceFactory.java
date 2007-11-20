@@ -24,7 +24,7 @@ package com.liferay.portlet.bookmarks.service;
 
 
 /**
- * <a href="BookmarksFolderServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="BookmarksFolderLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,10 +33,10 @@ package com.liferay.portlet.bookmarks.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>com.liferay.portlet.bookmarks.service.BookmarksFolderService</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -46,8 +46,8 @@ package com.liferay.portlet.bookmarks.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.bookmarks.service.BookmarksFolderService
- * @see com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil
+ * @see com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService
+ * @see com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil
  *
  */
 public class BookmarksFolderLocalServiceFactory {

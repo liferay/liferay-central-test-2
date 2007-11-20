@@ -24,7 +24,7 @@ package com.liferay.portlet.messageboards.service;
 
 
 /**
- * <a href="MBMessageService.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBMessageLocalService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,19 @@ package com.liferay.portlet.messageboards.service;
  *
  * <p>
  * This interface defines the service. The default implementation is
- * <code>com.liferay.portlet.messageboards.service.impl.MBMessageServiceImpl</code>. Modify
- * methods in that class and rerun ServiceBuilder to populate this class and all
- * other generated classes.
+ * <code>com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl</code>.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
  * </p>
  *
  * <p>
- * This is a remote service. Methods of this service are expected to have
- * security checks based on the propagated JAAS credentials because this service
- * can be accessed remotely.
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.MBMessageServiceFactory
- * @see com.liferay.portlet.messageboards.service.MBMessageServiceUtil
+ * @see com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory
+ * @see com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil
  *
  */
 public interface MBMessageLocalService {

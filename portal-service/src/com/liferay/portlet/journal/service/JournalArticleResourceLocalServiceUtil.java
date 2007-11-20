@@ -24,7 +24,7 @@ package com.liferay.portlet.journal.service;
 
 
 /**
- * <a href="JournalArticleResourceServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalArticleResourceLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,21 @@ package com.liferay.portlet.journal.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portlet.journal.JournalArticleResourceService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portlet.journal.service.JournalArticleResourceLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.journal.JournalArticleResourceServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.journal.service.JournalArticleResourceService
- * @see com.liferay.portlet.journal.service.JournalArticleResourceServiceFactory
+ * @see com.liferay.portlet.journal.service.JournalArticleResourceLocalService
+ * @see com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory
  *
  */
 public class JournalArticleResourceLocalServiceUtil {

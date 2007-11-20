@@ -24,7 +24,7 @@ package com.liferay.portlet.wiki.service;
 
 
 /**
- * <a href="WikiPageServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="WikiPageLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,10 +33,10 @@ package com.liferay.portlet.wiki.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>com.liferay.portlet.wiki.service.WikiPageService</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>com.liferay.portlet.wiki.service.WikiPageLocalService</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -46,8 +46,8 @@ package com.liferay.portlet.wiki.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.WikiPageService
- * @see com.liferay.portlet.wiki.service.WikiPageServiceUtil
+ * @see com.liferay.portlet.wiki.service.WikiPageLocalService
+ * @see com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil
  *
  */
 public class WikiPageLocalServiceFactory {

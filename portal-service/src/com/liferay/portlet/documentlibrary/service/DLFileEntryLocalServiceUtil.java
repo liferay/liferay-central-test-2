@@ -24,7 +24,7 @@ package com.liferay.portlet.documentlibrary.service;
 
 
 /**
- * <a href="DLFileEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLFileEntryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,21 @@ package com.liferay.portlet.documentlibrary.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portlet.documentlibrary.DLFileEntryService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.documentlibrary.DLFileEntryServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.DLFileEntryService
- * @see com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory
+ * @see com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService
+ * @see com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory
  *
  */
 public class DLFileEntryLocalServiceUtil {

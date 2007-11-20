@@ -24,7 +24,7 @@ package com.liferay.portlet.softwarecatalog.service;
 
 
 /**
- * <a href="SCFrameworkVersionServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCFrameworkVersionLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,10 +33,10 @@ package com.liferay.portlet.softwarecatalog.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -46,8 +46,8 @@ package com.liferay.portlet.softwarecatalog.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService
- * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil
+ * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService
+ * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil
  *
  */
 public class SCFrameworkVersionLocalServiceFactory {

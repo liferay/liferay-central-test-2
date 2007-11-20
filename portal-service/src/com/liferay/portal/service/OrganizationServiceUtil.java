@@ -33,15 +33,15 @@ package com.liferay.portal.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portal.OrganizationService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portal.service.OrganizationService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.OrganizationServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portal.service.OrganizationServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan

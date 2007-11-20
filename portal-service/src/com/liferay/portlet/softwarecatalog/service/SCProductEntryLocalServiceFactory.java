@@ -24,7 +24,7 @@ package com.liferay.portlet.softwarecatalog.service;
 
 
 /**
- * <a href="SCProductEntryServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCProductEntryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,10 +33,10 @@ package com.liferay.portlet.softwarecatalog.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>com.liferay.portlet.softwarecatalog.service.SCProductEntryService</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -46,8 +46,8 @@ package com.liferay.portlet.softwarecatalog.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryService
- * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil
+ * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService
+ * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil
  *
  */
 public class SCProductEntryLocalServiceFactory {

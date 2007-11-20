@@ -24,7 +24,7 @@ package com.liferay.portlet.polls.service;
 
 
 /**
- * <a href="PollsChoiceServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PollsChoiceLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,21 +33,21 @@ package com.liferay.portlet.polls.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>com.liferay.portlet.polls.PollsChoiceService</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>com.liferay.portlet.polls.service.PollsChoiceLocalService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.polls.PollsChoiceServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.polls.service.PollsChoiceService
- * @see com.liferay.portlet.polls.service.PollsChoiceServiceFactory
+ * @see com.liferay.portlet.polls.service.PollsChoiceLocalService
+ * @see com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory
  *
  */
 public class PollsChoiceLocalServiceUtil {

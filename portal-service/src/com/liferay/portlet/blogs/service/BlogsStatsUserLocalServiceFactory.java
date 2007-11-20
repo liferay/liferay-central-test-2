@@ -24,7 +24,7 @@ package com.liferay.portlet.blogs.service;
 
 
 /**
- * <a href="BlogsStatsUserServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="BlogsStatsUserLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,10 +33,10 @@ package com.liferay.portlet.blogs.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>com.liferay.portlet.blogs.service.BlogsStatsUserService</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>com.liferay.portlet.blogs.service.BlogsStatsUserLocalService</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -46,8 +46,8 @@ package com.liferay.portlet.blogs.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.blogs.service.BlogsStatsUserService
- * @see com.liferay.portlet.blogs.service.BlogsStatsUserServiceUtil
+ * @see com.liferay.portlet.blogs.service.BlogsStatsUserLocalService
+ * @see com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil
  *
  */
 public class BlogsStatsUserLocalServiceFactory {
