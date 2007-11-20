@@ -119,3 +119,9 @@ if (counter == 0) {
 %>
 
 </table>
+
+<%
+if (ctx != null) {
+	ctx.close();
+}
+%>

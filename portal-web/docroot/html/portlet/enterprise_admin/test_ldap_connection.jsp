@@ -25,14 +25,20 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-LdapContext ldapContext = PortalLDAPUtil.getContext(themeDisplay.getCompanyId());
+LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId());
 %>
 
 <c:choose>
-	<c:when test="<%= ldapContext != null %>">
+	<c:when test="<%= ctx != null %>">
 		<liferay-ui:message key="liferay-has-successfully-connected-to-the-ldap-server" />
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:message key="liferay-has-failed-to-connect-to-the-ldap-server" />
 	</c:otherwise>
 </c:choose>
+
+<%
+if (ctx != null) {
+	ctx.close();
+}
+%>
