@@ -1,7 +1,7 @@
 package ${packagePath}.service;
 
 /**
- * <a href="${entity.name}ServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="${entity.name}${sessionTypeName}ServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -10,21 +10,21 @@ package ${packagePath}.service;
  *
  * <p>
  * This class provides static methods for the
- * <code>${packagePath}.${entity.name}Service</code> bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * <code>${packagePath}.service.${entity.name}${sessionTypeName}Service</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>${packagePath}.${entity.name}ServiceFactory</code> is responsible for
- * the lookup of the bean.
+ * <code>${packagePath}.service.${entity.name}${sessionTypeName}ServiceFactory</code>
+ * is responsible for the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see ${packagePath}.service.${entity.name}Service
- * @see ${packagePath}.service.${entity.name}ServiceFactory
+ * @see ${packagePath}.service.${entity.name}${sessionTypeName}Service
+ * @see ${packagePath}.service.${entity.name}${sessionTypeName}ServiceFactory
  *
  */
 public class ${entity.name}${sessionTypeName}ServiceUtil {

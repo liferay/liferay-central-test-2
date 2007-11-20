@@ -1,7 +1,7 @@
 package ${packagePath}.service;
 
 /**
- * <a href="${entity.name}ServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="${entity.name}${sessionTypeName}ServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -10,10 +10,10 @@ package ${packagePath}.service;
  *
  * <p>
  * This class is responsible for the lookup of the implementation for
- * <code>${packagePath}.service.${entity.name}Service</code>. Spring manages the
- * lookup and lifecycle of the beans. This means you can modify the Spring
- * configuration files to return a different implementation or to inject
- * additional behavior.
+ * <code>${packagePath}.service.${entity.name}${sessionTypeName}Service</code>.
+ * Spring manages the lookup and lifecycle of the beans. This means you can
+ * modify the Spring configuration files to return a different implementation or
+ * to inject additional behavior.
  * </p>
  *
  * <p>
@@ -23,8 +23,8 @@ package ${packagePath}.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see ${packagePath}.service.${entity.name}Service
- * @see ${packagePath}.service.${entity.name}ServiceUtil
+ * @see ${packagePath}.service.${entity.name}${sessionTypeName}Service
+ * @see ${packagePath}.service.${entity.name}${sessionTypeName}ServiceUtil
  *
  */
 public class ${entity.name}${sessionTypeName}ServiceFactory {
@@ -40,7 +40,6 @@ public class ${entity.name}${sessionTypeName}ServiceFactory {
 
 		return _impl;
 	}
-
 
 	public static ${entity.name}${sessionTypeName}Service getTxImpl() {
 		if (_txImpl == null) {

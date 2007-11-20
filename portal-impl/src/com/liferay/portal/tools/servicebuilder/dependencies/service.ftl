@@ -1,7 +1,7 @@
 package ${packagePath}.service;
 
 /**
- * <a href="${entity.name}Service.java.html"><b><i>View Source</i></b></a>
+ * <a href="${entity.name}${sessionTypeName}Service.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -10,21 +10,19 @@ package ${packagePath}.service;
  *
  * <p>
  * This interface defines the service. The default implementation is
- * <code>${packagePath}.service.impl.${entity.name}ServiceImpl</code>. Modify
- * methods in that class and rerun ServiceBuilder to populate this class and all
- * other generated classes.
+ * <code>${packagePath}.service.impl.${entity.name}${sessionTypeName}ServiceImpl</code>.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
  * </p>
  *
  * <p>
- * This is a remote service. Methods of this service are expected to have
- * security checks based on the propagated JAAS credentials because this service
- * can be accessed remotely.
+ * ${serviceComments}
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see ${packagePath}.service.${entity.name}ServiceFactory
- * @see ${packagePath}.service.${entity.name}ServiceUtil
+ * @see ${packagePath}.service.${entity.name}${sessionTypeName}ServiceFactory
+ * @see ${packagePath}.service.${entity.name}${sessionTypeName}ServiceUtil
  *
  */
 public interface ${entity.name}${sessionTypeName}Service {
