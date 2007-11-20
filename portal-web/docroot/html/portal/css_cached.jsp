@@ -570,7 +570,6 @@ ul.gamma .tree-item-hover {
 	background-color: #ffc;
 }
 
-
 .liferay-upload-container .file-uploading .cancel-button {
 	top: 0;
 }

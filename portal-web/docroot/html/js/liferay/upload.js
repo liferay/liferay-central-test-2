@@ -12,7 +12,7 @@ Liferay.Upload = new Class({
 	 */
 	initialize: function(params) {
 		var instance = this;
-		
+
 		params = params || {};
 
 		instance._container = jQuery(params.container);
@@ -22,7 +22,8 @@ Liferay.Upload = new Class({
 		instance._allowedFileTypes = params.allowedFileTypes;
 		instance._uploadFile = params.uploadFile;
 
-		//Language keys
+		// Language keys
+
 		instance._browseText = Liferay.Language.get('browse-you-can-select-multiple-files');
 		instance._cancelUploadsText = Liferay.Language.get('cancel-all-uploads');
 		instance._cancelFileText = Liferay.Language.get('cancel-upload');
@@ -33,7 +34,7 @@ Liferay.Upload = new Class({
 		instance._uploadsCompleteText = Liferay.Language.get('all-uploads-complete');
 		instance._uploadStatusText = Liferay.Language.get('uploading-file-x-of-x', ['[$POS$]','[$TOTAL$]']);
 		instance._uploadFilesText = Liferay.Language.get('upload-files');
-		
+
 		if (instance._fallbackContainer.length) {
 			instance._useFallbackText = Liferay.Language.get('use-the-classic-uploader');
 			instance._useNewUploaderText = Liferay.Language.get('use-the-new-uploader');
@@ -42,20 +43,20 @@ Liferay.Upload = new Class({
 		instance._setupCallbacks();
 		instance._setupUploader();
 	},
-	
+
 	 fileAdded: function(file, listLength) {
 		var instance = this;
 
 		var listingFiles = instance._fileList;
 		var listingUl = listingFiles.find('ul');
-		if(!listingUl.length) {
-		
+
+		if (!listingUl.length) {
 			instance._listInfo.append('<h4>' + instance._fileListText + '</h4>');
 			listingFiles.append('<ul></ul>');
-			
+
 			instance._uploadTarget.append(instance._clearUploadsButton);
 			instance._clearUploadsButton.hide();
-			
+
 			instance._cancelButton.click(
 				function() {
 					instance.cancelUploads();
@@ -63,30 +64,32 @@ Liferay.Upload = new Class({
 				}
 			);
 		}
+
 		instance._cancelButton.show();
 		instance._uploadButton.show();
-		
+
 		listingFiles = listingFiles.find('ul');
 
 		var fileId = instance._namespace(file.id);
 		var fileName = file.name;
-		
-		var li = jQuery('<li class="upload-file" id="' + fileId + '">'
-						+ '<span class="file-title">' + fileName + '</span>'
-						+ '<span class="progress-bar">'
-							+ '<span class="progress" id="' + fileId + 'progress"></span>'
-						+'</span>'
-						+ '<a class="liferay-button cancel-button" href="javascript: ;" id="' + fileId+ 'cancelButton">' + instance._cancelFileText + '</a>'
-						+ '</li>');
-		
+
+		var li = jQuery(
+			'<li class="upload-file" id="' + fileId + '">' +
+				'<span class="file-title">' + fileName + '</span>' +
+				'<span class="progress-bar">' +
+					'<span class="progress" id="' + fileId + 'progress"></span>' +
+				'</span>' +
+				'<a class="liferay-button cancel-button" href="javascript: ;" id="' + fileId+ 'cancelButton">' + instance._cancelFileText + '</a>' +
+			'</li>');
+
 		li.find('.cancel-button').click(
 			function() {
 				instance._uploader.cancelFile(file.id);
 			}
 		);
-		
+
 		var uploadedFiles = listingFiles.find('.upload-complete');
-		
+
 		uploadedFiles = uploadedFiles.filter(':first');
 
 		if (uploadedFiles.length) {
@@ -95,37 +98,43 @@ Liferay.Upload = new Class({
 		else {
 			listingFiles.append(li);
 		}
-		
+
 		instance._updateList(listLength);
 	},
-	
+
 	fileCancelled: function(file, listLength) {
 		var instance = this;
 
 		var fileId = instance._namespace(file.id);
 		var fileName = file.name;
 		var li = jQuery('#' + fileId);
+
 		instance._updateList(listLength);
 
 		li.fadeOut('slow');
 	},
-	
+
 	flashLoaded: function() {
 		var instance = this;
+
 		instance._setupControls();
 	},
-	
-	
+
 	uploadStart: function(file, position, listLength) {
 		var instance = this;
-		var currentListText =  instance._uploadStatusText.replace('[$POS$]', position).replace('[$TOTAL$]', listLength);
+
+		var currentListText = instance._uploadStatusText.replace('[$POS$]', position).replace('[$TOTAL$]', listLength);
 		var fileId = instance._namespace(file.id);
+
 		instance._updateList(listLength, currentListText);
+
 		var li = jQuery('#' + fileId);
+
 		li.addClass('file-uploading');
+
 		return true;
 	},
-	
+
 	uploadProgress: function(file, bytesLoaded) {
 		var instance = this;
 		var fileId = instance._namespace(file.id);
@@ -134,19 +143,22 @@ Liferay.Upload = new Class({
 
 		progress.style.width = percent + '%';
 	},
-	
+
 	uploadError: function(errno) {
+
 		// SWFUpload.debug(errno);
+
 	},
-	
+
 	fileUploadComplete: function(file) {
 		var instance = this;
 
 		var fileId = instance._namespace(file.id);
 		var li = jQuery('#' + fileId);
+
 		li.removeClass('file-uploading').addClass('upload-complete');
 	},
-	
+
 	cancelUploads: function() {
 		var instance = this;
 
@@ -154,22 +166,22 @@ Liferay.Upload = new Class({
 		instance._uploadButton.hide();
 		instance._cancelButton.hide();
 	},
-	
+
 	uploadsComplete: function(file) {
 		var instance = this;
-		
+
 		instance._cancelButton.hide();
 		instance._updateList(0, instance._uploadsCompleteText);
 		instance._uploadButton.hide();
-		
+
 		if (instance._clearUploadsButton.is(':hidden')) {
 			instance._clearUploadsButton.show();
 		}
 	},
-	
+
 	_clearUploads: function() {
 		var instance = this;
-		
+
 		var completeUploads = instance._fileList.find('.upload-complete');
 
 		completeUploads.fadeOut('slow',
@@ -177,21 +189,24 @@ Liferay.Upload = new Class({
 				jQuery(this).remove();
 			}
 		);
+
 		instance._clearUploadsButton.hide();
 	},
 
 	_namespace: function(txt) {
 		var instance = this;
-		
+
 		txt = txt || '';
+
 		return instance._namespaceId + txt;
-		
+
 	},
 
 	_setupCallbacks: function() {
 		var instance = this;
-		
-		//Global callback references
+
+		// Global callback references
+
 		instance._cancelUploads = instance._namespace('cancelUploads');
 		instance._fileAdded = instance._namespace('fileAdded');
 		instance._fileCancelled = instance._namespace('fileCancelled');
@@ -202,48 +217,49 @@ Liferay.Upload = new Class({
 		instance._fileUploadComplete = instance._namespace('fileUploadComplete');
 		instance._uploadsComplete = instance._namespace('uploadsComplete');
 		instance._uploadsCancelled = instance._namespace('uploadsCancelled');
-		
-		//Global swfUpload var
+
+		// Global swfUpload var
+
 		instance._swfUpload = instance._namespace('cancelUploads');
-		
+
 		window[instance._cancelUploads] = function() {
 			instance.cancelUploads.apply(instance, arguments);
 		};
-		
+
 		window[instance._fileAdded] = function() {
 			instance.fileAdded.apply(instance, arguments);
 		};
-		
+
 		window[instance._fileCancelled] = function() {
 			instance.fileCancelled.apply(instance, arguments);
 		};
-		
+
 		window[instance._uploadStart] = function() {
 			instance.uploadStart.apply(instance, arguments);
 		};
-		
+
 		window[instance._uploadProgress] = function() {
 			instance.uploadProgress.apply(instance, arguments);
 		};
-		
+
 		window[instance._uploadError] = function() {
 			instance.uploadError.apply(instance, arguments);
 		};
-		
+
 		window[instance._fileUploadComplete] = function() {
 			instance.fileUploadComplete.apply(instance, arguments);
 		};
-		
+
 		window[instance._uploadsComplete] = function() {
 			instance.uploadsComplete.apply(instance, arguments);
 		};
-		
+
 		window[instance._flashLoaded] = function() {
 			instance.flashLoaded.apply(instance, arguments);
 		};
-		
+
 	},
-	
+
 	_setupControls: function() {
 		var instance = this;
 
@@ -256,19 +272,19 @@ Liferay.Upload = new Class({
 		instance._fileList = jQuery('<div id="' + instance._fileListId + '" class="upload-list"></div>');
 		instance._cancelButton = jQuery('<a class="liferay-button cancel-uploads" href="javascript: ;">' + instance._cancelUploadsText + '</a>');
 		instance._clearUploadsButton = jQuery('<a class="liferay-button clear-uploads" href="javascript: ;">' + instance._clearRecentUploadsText + '</a>');
-		
+
 		instance._browseButton = jQuery('<a class="liferay-button browse-button" href="javascript: ;">' + instance._browseText + '</a>');
 		instance._uploadButton = jQuery('<a class="liferay-button upload-button" href="javascript: ;">' + instance._uploadFilesText + '</a>');
-		
+
 		instance._container.prepend([instance._uploadTarget[0], instance._listInfo[0], instance._fileList[0]]);
 		instance._uploadTarget.append([instance._browseButton[0], instance._uploadButton[0], instance._cancelButton[0]]);
-		
+
 		instance._clearUploadsButton.click(
 			function() {
 				instance._clearUploads();
 			}
 		);
-		
+
 		instance._browseButton.click(
 			function() {
 				instance._uploader.browse();
@@ -280,30 +296,32 @@ Liferay.Upload = new Class({
 				instance._uploader.upload();
 			}
 		);
-		
+
 		instance._uploadButton.hide();
 		instance._cancelButton.hide();
-		
+
 		if (instance._fallbackContainer.length) {
 			instance._useFallbackButton = jQuery('<a class="use-fallback using-new-uploader" href="javascript: ;">' + instance._useFallbackText + '</a>');
 			instance._fallbackContainer.after(instance._useFallbackButton);
-			
+
 			instance._useFallbackButton.click(
 				function() {
 					var fallback = jQuery(this);
 					var newUploaderClass = 'using-new-uploader';
 					var fallbackClass = 'using-classic-uploader';
+
 					if (fallback.is('.' + newUploaderClass)) {
 						instance._container.hide();
 						instance._fallbackContainer.show();
+
 						fallback.text(instance._useNewUploaderText);
 						fallback.removeClass(newUploaderClass).addClass(fallbackClass);
+
 						if (!instance._fallbackIframe) {
 							instance._fallbackIframe = instance._fallbackContainer.find('iframe[@id$=-iframe]');
-							
+
 							instance._fallbackIframe.height(300);
 						}
-						
 					}
 					else {
 						instance._container.show();
@@ -311,18 +329,18 @@ Liferay.Upload = new Class({
 						fallback.text(instance._useFallbackText);
 						fallback.removeClass(fallbackClass).addClass(newUploaderClass);
 					}
-					console.log(instance._fallbackContainer);
 				}
 			);
 		}
 	},
-	
-	
+
+
 	_setupUploader: function() {
 		var instance = this;
-		
+
 		if (instance._allowedFileTypes.indexOf('*') == -1) {
 			var fileTypes = instance._allowedFileTypes.split(',');
+
 			fileTypes = jQuery.map(
 				fileTypes,
 				function(value, key) {
@@ -333,6 +351,7 @@ Liferay.Upload = new Class({
 					return fileType;
 				}
 			);
+
 			instance._allowedFileTypes = fileTypes.join(';');
 		}
 
@@ -363,12 +382,13 @@ Liferay.Upload = new Class({
 
 		window[instance._swfUpload] = instance._uploader;
 	},
-	
+
 	_updateList: function(listLength, message) {
 		var instance = this;
 
 		var infoTitle = instance._listInfo.find('h4');
 		var listText = '';
+
 		if (!message) {
 			listText = instance._fileListPendingText;
 			listText = listText.replace(/\d+/g, listLength);

@@ -139,11 +139,11 @@ String uploadProgressId = "igImageUploadProgress";
 	jQuery(
 		function() {
 			new Liferay.Upload({
-				allowedFileTypes: '<%=GetterUtil.getString(PropsUtil.get(PropsUtil.IG_IMAGE_EXTENSIONS)) %>',
+				allowedFileTypes: '<%= GetterUtil.getString(PropsUtil.get(PropsUtil.IG_IMAGE_EXTENSIONS)) %>',
 				container: '#<portlet:namespace />fileUpload',
-				fileDescription: '<%=GetterUtil.getString(PropsUtil.get(PropsUtil.IG_IMAGE_EXTENSIONS)) %>',
+				fileDescription: '<%= GetterUtil.getString(PropsUtil.get(PropsUtil.IG_IMAGE_EXTENSIONS)) %>',
 				fallbackContainer: '#<portlet:namespace />fallback',
-				maxFileSize: <%=GetterUtil.getInteger(PropsUtil.get(PropsUtil.IG_IMAGE_MAX_SIZE))%>,
+				maxFileSize: <%= GetterUtil.getInteger(PropsUtil.get(PropsUtil.IG_IMAGE_MAX_SIZE)) %>,
 				namespace: '<portlet:namespace />',
 				uploadFile: '<portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="struts_action" value="/image_gallery/edit_image" /></portlet:actionURL>'
 			});
@@ -152,10 +152,11 @@ String uploadProgressId = "igImageUploadProgress";
 </script>
 
 <div class="liferay-upload-container" id="<portlet:namespace />fileUpload"></div>
+
 <div class="liferay-fallback" id="<portlet:namespace />fallback">
-<liferay-ui:upload-progress
-	id="<%= uploadProgressId %>"
-	iframeSrc="<%= uploadProgressURL %>"
-	redirect="<%= redirect %>"
-/>
+	<liferay-ui:upload-progress
+		id="<%= uploadProgressId %>"
+		iframeSrc="<%= uploadProgressURL %>"
+		redirect="<%= redirect %>"
+	/>
 </div>
