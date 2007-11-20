@@ -495,6 +495,104 @@ ul.gamma .tree-item-hover {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/trees/collapse_all.png) no-repeat 0 50%;
 }
 
+/* ---------- Uploader ---------- */
+
+.liferay-upload-container {
+	margin-bottom: 1em;
+	width: 450px;
+}
+
+.liferay-upload-container .upload-target a {
+	float: left;
+	margin-right: 15px;
+}
+
+.liferay-upload-container a.browse-button {
+	background-image: url(<%=themeDisplay.getPathThemeImages()%>/dock/add_content.png);
+	background-repeat: no-repeat;
+}
+
+.liferay-upload-container a.upload-button {
+	background-image: url(<%=themeDisplay.getPathThemeImages()%>/common/top.png);
+	background-repeat: no-repeat;
+}
+
+.liferay-upload-container a.clear-uploads {
+	background-image: url(<%=themeDisplay.getPathThemeImages()%>/portlet/refresh.png);
+	background-repeat: no-repeat;
+}
+
+.liferay-upload-container a.cancel-uploads {
+	background-image: url(<%=themeDisplay.getPathThemeImages()%>/common/close.png);
+	background-repeat: no-repeat;
+	float: right;
+	margin-right: 0;
+}
+
+.liferay-upload-container .upload-file {
+	background: #f0faf0 url(<%=themeDisplay.getPathThemeImages()%>/document_library/jpg.png) no-repeat 5px 50%;
+	border-bottom: 1px solid #ccc;
+	display: block;
+	font-weight: bold;
+	margin-bottom: 1px;
+	padding: 5px;
+	padding-left: 25px;
+	position: relative;
+}
+
+.liferay-upload-container .upload-list-info {
+	margin: 5px 0;
+}
+
+.liferay-upload-container .upload-list-info h4 {
+	font-size: 1.3em;
+}
+
+.liferay-upload-container .cancel-button {
+	background-image: url(<%=themeDisplay.getPathThemeImages()%>/common/delete.png);
+	background-repeat: no-repeat;
+	position: absolute;
+	right: 5px;
+}
+
+.liferay-upload-container .upload-complete {
+	background-color: #E8EEF7;
+	background-image: url(<%=themeDisplay.getPathThemeImages()%>/dock/my_place_current.png);
+	font-weight: normal;
+	opacity: 0.6;
+}
+
+.liferay-upload-container .upload-complete .cancel-button {
+	display: none;
+}
+
+.liferay-upload-container .file-uploading {
+	background-color: #ffc;
+}
+
+
+.liferay-upload-container .file-uploading .cancel-button {
+	top: 0;
+}
+
+.liferay-upload-container .progress-bar {
+	background: #fff;
+	border: 1px solid #83a8d9;
+	display: none;
+	height: 15px;
+}
+
+.liferay-upload-container .progress {
+	background: #8db2e3 url(<%=themeDisplay.getPathThemeImages()%>/progress_bar/complete_gradient.png) repeat-y 100% 0;
+	display: block;
+	height: 15px;
+	width: 0;
+}
+
+.liferay-upload-container .file-uploading .progress-bar {
+	display: block;
+}
+
 /* ---------- Portal ---------- */
 
 /* ---------- Portal login ---------- */
@@ -615,6 +713,27 @@ ul.gamma .tree-item-hover {
 .breadcrumbs {
 	margin-bottom: 10px;
 	margin-left: 0px;
+}
+
+.js .liferay-fallback {
+	display: none;
+}
+
+.liferay-button {
+	background: url() no-repeat 0 50%;
+	padding: 2px 0 2px 20px;
+}
+
+.float-container:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.ie .float-container {
+	height: 1%;
 }
 
 .liferay-table {
