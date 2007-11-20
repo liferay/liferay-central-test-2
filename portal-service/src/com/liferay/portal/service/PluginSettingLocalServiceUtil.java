@@ -22,30 +22,32 @@
 
 package com.liferay.portal.service;
 
+
 /**
- * <a href="PluginSettingLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PluginSettingServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.PluginSettingLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.PluginSettingService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.PluginSettingLocalServiceFactory</code> is responsible
- * for the lookup of the bean.
+ * <code>com.liferay.portal.PluginSettingServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.PluginSettingLocalService
- * @see com.liferay.portal.service.PluginSettingLocalServiceFactory
+ * @see com.liferay.portal.service.PluginSettingService
+ * @see com.liferay.portal.service.PluginSettingServiceFactory
  *
  */
 public class PluginSettingLocalServiceUtil {
@@ -91,6 +93,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setAccountPersistence(
 		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setAccountPersistence(accountPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setAddressPersistence(
 		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setAddressPersistence(addressPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setClassNamePersistence(
 		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setClassNamePersistence(classNamePersistence);
 	}
 
@@ -127,6 +132,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setCompanyPersistence(
 		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setCompanyPersistence(companyPersistence);
 	}
 
@@ -139,6 +145,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setContactPersistence(
 		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setContactPersistence(contactPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setCountryPersistence(
 		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setCountryPersistence(countryPersistence);
 	}
 
@@ -163,6 +171,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setEmailAddressPersistence(
 		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
@@ -175,6 +184,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setGroupPersistence(groupPersistence);
 	}
 
@@ -187,6 +197,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setGroupFinder(groupFinder);
 	}
 
@@ -199,6 +210,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setImagePersistence(
 		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setImagePersistence(imagePersistence);
 	}
 
@@ -211,6 +223,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setLayoutPersistence(layoutPersistence);
 	}
 
@@ -223,6 +236,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setLayoutFinder(
 		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setLayoutFinder(layoutFinder);
 	}
 
@@ -235,6 +249,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setLayoutSetPersistence(
 		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setLayoutSetPersistence(layoutSetPersistence);
 	}
 
@@ -247,6 +262,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setListTypePersistence(listTypePersistence);
 	}
 
@@ -259,6 +275,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setMembershipRequestPersistence(
 		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
 	}
 
@@ -271,6 +288,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setOrganizationPersistence(
 		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
@@ -283,6 +301,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setOrganizationFinder(
 		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setOrganizationFinder(organizationFinder);
 	}
 
@@ -295,6 +314,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setOrgGroupPermissionPersistence(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
 	}
 
@@ -307,6 +327,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setOrgGroupPermissionFinder(
 		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
@@ -319,6 +340,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setOrgGroupRolePersistence(
 		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
 	}
 
@@ -331,6 +353,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setOrgLaborPersistence(
 		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setOrgLaborPersistence(orgLaborPersistence);
 	}
 
@@ -343,6 +366,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setPasswordPolicyPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
@@ -355,6 +379,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setPasswordPolicyFinder(
 		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
 	}
 
@@ -367,6 +392,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setPasswordPolicyRelPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
 	}
 
@@ -379,6 +405,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setPasswordTrackerPersistence(
 		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
 	}
 
@@ -391,6 +418,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setPermissionPersistence(
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setPermissionPersistence(permissionPersistence);
 	}
 
@@ -403,6 +431,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setPermissionFinder(
 		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setPermissionFinder(permissionFinder);
 	}
 
@@ -415,6 +444,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setPermissionUserFinder(
 		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
@@ -427,6 +457,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setPhonePersistence(
 		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setPhonePersistence(phonePersistence);
 	}
 
@@ -439,6 +470,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setPluginSettingPersistence(
 		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setPluginSettingPersistence(pluginSettingPersistence);
 	}
 
@@ -451,6 +483,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setPortletPersistence(
 		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setPortletPersistence(portletPersistence);
 	}
 
@@ -463,6 +496,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
@@ -475,6 +509,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setPortletPreferencesFinder(
 		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
@@ -487,6 +522,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setRegionPersistence(
 		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setRegionPersistence(regionPersistence);
 	}
 
@@ -499,6 +535,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setReleasePersistence(
 		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setReleasePersistence(releasePersistence);
 	}
 
@@ -511,6 +548,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -523,6 +561,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -535,6 +574,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setResourceCodePersistence(
 		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setResourceCodePersistence(resourceCodePersistence);
 	}
 
@@ -547,6 +587,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setRolePersistence(
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setRolePersistence(rolePersistence);
 	}
 
@@ -559,6 +600,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setRoleFinder(
 		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setRoleFinder(roleFinder);
 	}
 
@@ -571,6 +613,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setServiceComponentPersistence(
 		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
@@ -583,6 +626,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setSubscriptionPersistence(
 		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
@@ -595,6 +639,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -607,6 +652,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setUserFinder(userFinder);
 	}
 
@@ -619,6 +665,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setUserGroupPersistence(
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setUserGroupPersistence(userGroupPersistence);
 	}
 
@@ -631,6 +678,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setUserGroupFinder(
 		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
@@ -643,6 +691,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setUserGroupRolePersistence(
 		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
 	}
 
@@ -655,6 +704,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setUserIdMapperPersistence(
 		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
 	}
 
@@ -667,6 +717,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setUserTrackerPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setUserTrackerPersistence(userTrackerPersistence);
 	}
 
@@ -679,6 +730,7 @@ public class PluginSettingLocalServiceUtil {
 	public static void setUserTrackerPathPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
@@ -691,17 +743,20 @@ public class PluginSettingLocalServiceUtil {
 	public static void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.setWebsitePersistence(websitePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.afterPropertiesSet();
 	}
 
 	public static void checkPermission(long userId, java.lang.String pluginId,
 		java.lang.String pluginType) throws com.liferay.portal.PortalException {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
 		pluginSettingLocalService.checkPermission(userId, pluginId, pluginType);
 	}
 

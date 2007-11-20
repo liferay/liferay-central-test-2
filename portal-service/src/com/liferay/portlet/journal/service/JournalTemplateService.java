@@ -22,24 +22,26 @@
 
 package com.liferay.portlet.journal.service;
 
+
 /**
  * <a href="JournalTemplateService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This interface defines the service. The default implementation is <code>com.liferay.portlet.journal.service.impl.JournalTemplateServiceImpl</code>.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
+ * This interface defines the service. The default implementation is
+ * <code>com.liferay.portlet.journal.service.impl.JournalTemplateServiceImpl</code>. Modify
+ * methods in that class and rerun ServiceBuilder to populate this class and all
+ * other generated classes.
  * </p>
  *
  * <p>
- * This is a remote service. Methods of this service are expected to have security
- * checks based on the propagated JAAS credentials because this service can be accessed
- * remotely.
+ * This is a remote service. Methods of this service are expected to have
+ * security checks based on the propagated JAAS credentials because this service
+ * can be accessed remotely.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -56,8 +58,8 @@ public interface JournalTemplateService {
 		java.lang.String langType, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		java.lang.String templateId, boolean autoTemplateId, long plid,
@@ -67,17 +69,17 @@ public interface JournalTemplateService {
 		java.lang.String smallImageURL, java.io.File smallFile,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public void deleteTemplate(long groupId, java.lang.String templateId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
 		long groupId, java.lang.String templateId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
 		long groupId, java.lang.String templateId,
@@ -85,6 +87,6 @@ public interface JournalTemplateService {
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="JournalArticleResourceSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.journal.service.http.JournalArticleResourceServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.journal.service.http.JournalArticleResourceServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ public class JournalArticleResourceSoap implements Serializable {
 	public static JournalArticleResourceSoap toSoapModel(
 		JournalArticleResource model) {
 		JournalArticleResourceSoap soapModel = new JournalArticleResourceSoap();
+
 		soapModel.setResourcePrimKey(model.getResourcePrimKey());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setArticleId(model.getArticleId());
@@ -60,6 +62,7 @@ public class JournalArticleResourceSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			JournalArticleResource model = (JournalArticleResource)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

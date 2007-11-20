@@ -22,30 +22,32 @@
 
 package com.liferay.portal.service;
 
+
 /**
- * <a href="PermissionLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PermissionServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.PermissionLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.PermissionService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.PermissionLocalServiceFactory</code> is responsible
- * for the lookup of the bean.
+ * <code>com.liferay.portal.PermissionServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.PermissionLocalService
- * @see com.liferay.portal.service.PermissionLocalServiceFactory
+ * @see com.liferay.portal.service.PermissionService
+ * @see com.liferay.portal.service.PermissionServiceFactory
  *
  */
 public class PermissionLocalServiceUtil {
@@ -90,6 +92,7 @@ public class PermissionLocalServiceUtil {
 	public static void setAccountPersistence(
 		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setAccountPersistence(accountPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class PermissionLocalServiceUtil {
 	public static void setAddressPersistence(
 		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setAddressPersistence(addressPersistence);
 	}
 
@@ -114,6 +118,7 @@ public class PermissionLocalServiceUtil {
 	public static void setClassNamePersistence(
 		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setClassNamePersistence(classNamePersistence);
 	}
 
@@ -126,6 +131,7 @@ public class PermissionLocalServiceUtil {
 	public static void setCompanyPersistence(
 		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setCompanyPersistence(companyPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class PermissionLocalServiceUtil {
 	public static void setContactPersistence(
 		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setContactPersistence(contactPersistence);
 	}
 
@@ -150,6 +157,7 @@ public class PermissionLocalServiceUtil {
 	public static void setCountryPersistence(
 		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setCountryPersistence(countryPersistence);
 	}
 
@@ -162,6 +170,7 @@ public class PermissionLocalServiceUtil {
 	public static void setEmailAddressPersistence(
 		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
@@ -174,6 +183,7 @@ public class PermissionLocalServiceUtil {
 	public static void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setGroupPersistence(groupPersistence);
 	}
 
@@ -186,6 +196,7 @@ public class PermissionLocalServiceUtil {
 	public static void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setGroupFinder(groupFinder);
 	}
 
@@ -198,6 +209,7 @@ public class PermissionLocalServiceUtil {
 	public static void setImagePersistence(
 		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setImagePersistence(imagePersistence);
 	}
 
@@ -210,6 +222,7 @@ public class PermissionLocalServiceUtil {
 	public static void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setLayoutPersistence(layoutPersistence);
 	}
 
@@ -222,6 +235,7 @@ public class PermissionLocalServiceUtil {
 	public static void setLayoutFinder(
 		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setLayoutFinder(layoutFinder);
 	}
 
@@ -234,6 +248,7 @@ public class PermissionLocalServiceUtil {
 	public static void setLayoutSetPersistence(
 		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setLayoutSetPersistence(layoutSetPersistence);
 	}
 
@@ -246,6 +261,7 @@ public class PermissionLocalServiceUtil {
 	public static void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setListTypePersistence(listTypePersistence);
 	}
 
@@ -258,6 +274,7 @@ public class PermissionLocalServiceUtil {
 	public static void setMembershipRequestPersistence(
 		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
 	}
 
@@ -270,6 +287,7 @@ public class PermissionLocalServiceUtil {
 	public static void setOrganizationPersistence(
 		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
@@ -282,6 +300,7 @@ public class PermissionLocalServiceUtil {
 	public static void setOrganizationFinder(
 		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setOrganizationFinder(organizationFinder);
 	}
 
@@ -294,6 +313,7 @@ public class PermissionLocalServiceUtil {
 	public static void setOrgGroupPermissionPersistence(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
 	}
 
@@ -306,6 +326,7 @@ public class PermissionLocalServiceUtil {
 	public static void setOrgGroupPermissionFinder(
 		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
@@ -318,6 +339,7 @@ public class PermissionLocalServiceUtil {
 	public static void setOrgGroupRolePersistence(
 		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
 	}
 
@@ -330,6 +352,7 @@ public class PermissionLocalServiceUtil {
 	public static void setOrgLaborPersistence(
 		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setOrgLaborPersistence(orgLaborPersistence);
 	}
 
@@ -342,6 +365,7 @@ public class PermissionLocalServiceUtil {
 	public static void setPasswordPolicyPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
@@ -354,6 +378,7 @@ public class PermissionLocalServiceUtil {
 	public static void setPasswordPolicyFinder(
 		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
 	}
 
@@ -366,6 +391,7 @@ public class PermissionLocalServiceUtil {
 	public static void setPasswordPolicyRelPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
 	}
 
@@ -378,6 +404,7 @@ public class PermissionLocalServiceUtil {
 	public static void setPasswordTrackerPersistence(
 		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
 	}
 
@@ -390,6 +417,7 @@ public class PermissionLocalServiceUtil {
 	public static void setPermissionPersistence(
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setPermissionPersistence(permissionPersistence);
 	}
 
@@ -402,6 +430,7 @@ public class PermissionLocalServiceUtil {
 	public static void setPermissionFinder(
 		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setPermissionFinder(permissionFinder);
 	}
 
@@ -414,6 +443,7 @@ public class PermissionLocalServiceUtil {
 	public static void setPermissionUserFinder(
 		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
@@ -426,6 +456,7 @@ public class PermissionLocalServiceUtil {
 	public static void setPhonePersistence(
 		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setPhonePersistence(phonePersistence);
 	}
 
@@ -438,6 +469,7 @@ public class PermissionLocalServiceUtil {
 	public static void setPluginSettingPersistence(
 		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setPluginSettingPersistence(pluginSettingPersistence);
 	}
 
@@ -450,6 +482,7 @@ public class PermissionLocalServiceUtil {
 	public static void setPortletPersistence(
 		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setPortletPersistence(portletPersistence);
 	}
 
@@ -462,6 +495,7 @@ public class PermissionLocalServiceUtil {
 	public static void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
@@ -474,6 +508,7 @@ public class PermissionLocalServiceUtil {
 	public static void setPortletPreferencesFinder(
 		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
@@ -486,6 +521,7 @@ public class PermissionLocalServiceUtil {
 	public static void setRegionPersistence(
 		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setRegionPersistence(regionPersistence);
 	}
 
@@ -498,6 +534,7 @@ public class PermissionLocalServiceUtil {
 	public static void setReleasePersistence(
 		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setReleasePersistence(releasePersistence);
 	}
 
@@ -510,6 +547,7 @@ public class PermissionLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -522,6 +560,7 @@ public class PermissionLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -534,6 +573,7 @@ public class PermissionLocalServiceUtil {
 	public static void setResourceCodePersistence(
 		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setResourceCodePersistence(resourceCodePersistence);
 	}
 
@@ -546,6 +586,7 @@ public class PermissionLocalServiceUtil {
 	public static void setRolePersistence(
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setRolePersistence(rolePersistence);
 	}
 
@@ -558,6 +599,7 @@ public class PermissionLocalServiceUtil {
 	public static void setRoleFinder(
 		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setRoleFinder(roleFinder);
 	}
 
@@ -570,6 +612,7 @@ public class PermissionLocalServiceUtil {
 	public static void setServiceComponentPersistence(
 		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
@@ -582,6 +625,7 @@ public class PermissionLocalServiceUtil {
 	public static void setSubscriptionPersistence(
 		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
@@ -594,6 +638,7 @@ public class PermissionLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -606,6 +651,7 @@ public class PermissionLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setUserFinder(userFinder);
 	}
 
@@ -618,6 +664,7 @@ public class PermissionLocalServiceUtil {
 	public static void setUserGroupPersistence(
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setUserGroupPersistence(userGroupPersistence);
 	}
 
@@ -630,6 +677,7 @@ public class PermissionLocalServiceUtil {
 	public static void setUserGroupFinder(
 		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
@@ -642,6 +690,7 @@ public class PermissionLocalServiceUtil {
 	public static void setUserGroupRolePersistence(
 		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
 	}
 
@@ -654,6 +703,7 @@ public class PermissionLocalServiceUtil {
 	public static void setUserIdMapperPersistence(
 		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
 	}
 
@@ -666,6 +716,7 @@ public class PermissionLocalServiceUtil {
 	public static void setUserTrackerPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setUserTrackerPersistence(userTrackerPersistence);
 	}
 
@@ -678,6 +729,7 @@ public class PermissionLocalServiceUtil {
 	public static void setUserTrackerPathPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
@@ -690,11 +742,13 @@ public class PermissionLocalServiceUtil {
 	public static void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setWebsitePersistence(websitePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.afterPropertiesSet();
 	}
 
@@ -723,6 +777,7 @@ public class PermissionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.addUserPermissions(userId, actionIds, resourceId);
 	}
 
@@ -864,6 +919,7 @@ public class PermissionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setGroupPermissions(groupId, actionIds,
 			resourceId);
 	}
@@ -874,6 +930,7 @@ public class PermissionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setGroupPermissions(className, classPK, groupId,
 			actionIds, resourceId);
 	}
@@ -883,6 +940,7 @@ public class PermissionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setOrgGroupPermissions(organizationId, groupId,
 			actionIds, resourceId);
 	}
@@ -893,6 +951,7 @@ public class PermissionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setRolePermission(roleId, companyId, name,
 			scope, primKey, actionId);
 	}
@@ -903,6 +962,7 @@ public class PermissionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setRolePermissions(roleId, companyId, name,
 			scope, primKey, actionIds);
 	}
@@ -912,6 +972,7 @@ public class PermissionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setRolePermissions(roleId, actionIds, resourceId);
 	}
 
@@ -920,6 +981,7 @@ public class PermissionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.setUserPermissions(userId, actionIds, resourceId);
 	}
 
@@ -927,6 +989,7 @@ public class PermissionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.unsetRolePermission(roleId, permissionId);
 	}
 
@@ -936,6 +999,7 @@ public class PermissionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.unsetRolePermission(roleId, companyId, name,
 			scope, primKey, actionId);
 	}
@@ -945,6 +1009,7 @@ public class PermissionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.unsetRolePermissions(roleId, companyId, name,
 			scope, actionId);
 	}
@@ -954,6 +1019,7 @@ public class PermissionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
 		permissionLocalService.unsetUserPermissions(userId, actionIds,
 			resourceId);
 	}

@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.shopping.service;
 
+
 /**
- * <a href="ShoppingOrderItemLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingOrderItemServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.shopping.ShoppingOrderItemService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.shopping.ShoppingOrderItemServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService
- * @see com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceFactory
+ * @see com.liferay.portlet.shopping.service.ShoppingOrderItemService
+ * @see com.liferay.portlet.shopping.service.ShoppingOrderItemServiceFactory
  *
  */
 public class ShoppingOrderItemLocalServiceUtil {
@@ -91,6 +93,7 @@ public class ShoppingOrderItemLocalServiceUtil {
 	public static void setShoppingCartPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence shoppingCartPersistence) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
 		shoppingOrderItemLocalService.setShoppingCartPersistence(shoppingCartPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class ShoppingOrderItemLocalServiceUtil {
 	public static void setShoppingCategoryPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence shoppingCategoryPersistence) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
 		shoppingOrderItemLocalService.setShoppingCategoryPersistence(shoppingCategoryPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class ShoppingOrderItemLocalServiceUtil {
 	public static void setShoppingCouponPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence shoppingCouponPersistence) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
 		shoppingOrderItemLocalService.setShoppingCouponPersistence(shoppingCouponPersistence);
 	}
 
@@ -127,6 +132,7 @@ public class ShoppingOrderItemLocalServiceUtil {
 	public static void setShoppingCouponFinder(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder shoppingCouponFinder) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
 		shoppingOrderItemLocalService.setShoppingCouponFinder(shoppingCouponFinder);
 	}
 
@@ -139,6 +145,7 @@ public class ShoppingOrderItemLocalServiceUtil {
 	public static void setShoppingItemPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence shoppingItemPersistence) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
 		shoppingOrderItemLocalService.setShoppingItemPersistence(shoppingItemPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class ShoppingOrderItemLocalServiceUtil {
 	public static void setShoppingItemFinder(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder shoppingItemFinder) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
 		shoppingOrderItemLocalService.setShoppingItemFinder(shoppingItemFinder);
 	}
 
@@ -163,6 +171,7 @@ public class ShoppingOrderItemLocalServiceUtil {
 	public static void setShoppingItemFieldPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence shoppingItemFieldPersistence) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
 		shoppingOrderItemLocalService.setShoppingItemFieldPersistence(shoppingItemFieldPersistence);
 	}
 
@@ -175,6 +184,7 @@ public class ShoppingOrderItemLocalServiceUtil {
 	public static void setShoppingItemPricePersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence shoppingItemPricePersistence) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
 		shoppingOrderItemLocalService.setShoppingItemPricePersistence(shoppingItemPricePersistence);
 	}
 
@@ -187,6 +197,7 @@ public class ShoppingOrderItemLocalServiceUtil {
 	public static void setShoppingOrderPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence shoppingOrderPersistence) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
 		shoppingOrderItemLocalService.setShoppingOrderPersistence(shoppingOrderPersistence);
 	}
 
@@ -199,6 +210,7 @@ public class ShoppingOrderItemLocalServiceUtil {
 	public static void setShoppingOrderFinder(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder shoppingOrderFinder) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
 		shoppingOrderItemLocalService.setShoppingOrderFinder(shoppingOrderFinder);
 	}
 
@@ -211,11 +223,13 @@ public class ShoppingOrderItemLocalServiceUtil {
 	public static void setShoppingOrderItemPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence shoppingOrderItemPersistence) {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
 		shoppingOrderItemLocalService.setShoppingOrderItemPersistence(shoppingOrderItemPersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
 		shoppingOrderItemLocalService.afterPropertiesSet();
 	}
 

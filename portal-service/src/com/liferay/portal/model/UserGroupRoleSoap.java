@@ -33,12 +33,13 @@ import java.util.List;
  * <a href="UserGroupRoleSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.UserGroupRoleServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.UserGroupRoleServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -49,6 +50,7 @@ import java.util.List;
 public class UserGroupRoleSoap implements Serializable {
 	public static UserGroupRoleSoap toSoapModel(UserGroupRole model) {
 		UserGroupRoleSoap soapModel = new UserGroupRoleSoap();
+
 		soapModel.setUserId(model.getUserId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setRoleId(model.getRoleId());
@@ -61,6 +63,7 @@ public class UserGroupRoleSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			UserGroupRole model = (UserGroupRole)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

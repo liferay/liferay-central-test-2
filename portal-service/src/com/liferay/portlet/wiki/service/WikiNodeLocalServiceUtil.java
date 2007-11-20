@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.wiki.service;
 
+
 /**
- * <a href="WikiNodeLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="WikiNodeServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.wiki.service.WikiNodeLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.wiki.WikiNodeService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory</code> is
- * responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.wiki.WikiNodeServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.WikiNodeLocalService
- * @see com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory
+ * @see com.liferay.portlet.wiki.service.WikiNodeService
+ * @see com.liferay.portlet.wiki.service.WikiNodeServiceFactory
  *
  */
 public class WikiNodeLocalServiceUtil {
@@ -90,6 +92,7 @@ public class WikiNodeLocalServiceUtil {
 	public static void setWikiNodePersistence(
 		com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence) {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.setWikiNodePersistence(wikiNodePersistence);
 	}
 
@@ -102,6 +105,7 @@ public class WikiNodeLocalServiceUtil {
 	public static void setWikiPagePersistence(
 		com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence) {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.setWikiPagePersistence(wikiPagePersistence);
 	}
 
@@ -114,6 +118,7 @@ public class WikiNodeLocalServiceUtil {
 	public static void setWikiPageFinder(
 		com.liferay.portlet.wiki.service.persistence.WikiPageFinder wikiPageFinder) {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.setWikiPageFinder(wikiPageFinder);
 	}
 
@@ -126,6 +131,7 @@ public class WikiNodeLocalServiceUtil {
 	public static void setWikiPageResourcePersistence(
 		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence) {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.setWikiPageResourcePersistence(wikiPageResourcePersistence);
 	}
 
@@ -138,6 +144,7 @@ public class WikiNodeLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -150,6 +157,7 @@ public class WikiNodeLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -162,6 +170,7 @@ public class WikiNodeLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -174,6 +183,7 @@ public class WikiNodeLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.setUserFinder(userFinder);
 	}
 
@@ -186,6 +196,7 @@ public class WikiNodeLocalServiceUtil {
 	public static void setTagsEntryPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.setTagsEntryPersistence(tagsEntryPersistence);
 	}
 
@@ -198,11 +209,13 @@ public class WikiNodeLocalServiceUtil {
 	public static void setTagsEntryFinder(
 		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder) {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.setTagsEntryFinder(tagsEntryFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.afterPropertiesSet();
 	}
 
@@ -249,6 +262,7 @@ public class WikiNodeLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.addNodeResources(nodeId, addCommunityPermissions,
 			addGuestPermissions);
 	}
@@ -259,6 +273,7 @@ public class WikiNodeLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.addNodeResources(node, addCommunityPermissions,
 			addGuestPermissions);
 	}
@@ -269,6 +284,7 @@ public class WikiNodeLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.addNodeResources(nodeId, communityPermissions,
 			guestPermissions);
 	}
@@ -280,6 +296,7 @@ public class WikiNodeLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.addNodeResources(node, communityPermissions,
 			guestPermissions);
 	}
@@ -288,6 +305,7 @@ public class WikiNodeLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.deleteNode(nodeId);
 	}
 
@@ -295,6 +313,7 @@ public class WikiNodeLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.deleteNode(node);
 	}
 
@@ -302,6 +321,7 @@ public class WikiNodeLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.deleteNodes(groupId);
 	}
 
@@ -337,6 +357,7 @@ public class WikiNodeLocalServiceUtil {
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
 		wikiNodeLocalService.reIndex(ids);
 	}
 

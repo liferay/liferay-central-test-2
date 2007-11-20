@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.tags.service;
 
+
 /**
- * <a href="TagsPropertyLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsPropertyServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.tags.service.TagsPropertyLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.tags.TagsPropertyService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.tags.service.TagsPropertyLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.tags.TagsPropertyServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.TagsPropertyLocalService
- * @see com.liferay.portlet.tags.service.TagsPropertyLocalServiceFactory
+ * @see com.liferay.portlet.tags.service.TagsPropertyService
+ * @see com.liferay.portlet.tags.service.TagsPropertyServiceFactory
  *
  */
 public class TagsPropertyLocalServiceUtil {
@@ -91,6 +93,7 @@ public class TagsPropertyLocalServiceUtil {
 	public static void setTagsAssetPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.setTagsAssetPersistence(tagsAssetPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class TagsPropertyLocalServiceUtil {
 	public static void setTagsAssetFinder(
 		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder) {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.setTagsAssetFinder(tagsAssetFinder);
 	}
 
@@ -115,6 +119,7 @@ public class TagsPropertyLocalServiceUtil {
 	public static void setTagsEntryPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.setTagsEntryPersistence(tagsEntryPersistence);
 	}
 
@@ -127,6 +132,7 @@ public class TagsPropertyLocalServiceUtil {
 	public static void setTagsEntryFinder(
 		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder) {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.setTagsEntryFinder(tagsEntryFinder);
 	}
 
@@ -139,6 +145,7 @@ public class TagsPropertyLocalServiceUtil {
 	public static void setTagsPropertyPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence tagsPropertyPersistence) {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.setTagsPropertyPersistence(tagsPropertyPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class TagsPropertyLocalServiceUtil {
 	public static void setTagsPropertyFinder(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyFinder tagsPropertyFinder) {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.setTagsPropertyFinder(tagsPropertyFinder);
 	}
 
@@ -163,6 +171,7 @@ public class TagsPropertyLocalServiceUtil {
 	public static void setTagsPropertyKeyFinder(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder tagsPropertyKeyFinder) {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.setTagsPropertyKeyFinder(tagsPropertyKeyFinder);
 	}
 
@@ -175,6 +184,7 @@ public class TagsPropertyLocalServiceUtil {
 	public static void setTagsSourcePersistence(
 		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence) {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.setTagsSourcePersistence(tagsSourcePersistence);
 	}
 
@@ -187,6 +197,7 @@ public class TagsPropertyLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -199,11 +210,13 @@ public class TagsPropertyLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.afterPropertiesSet();
 	}
 
@@ -231,6 +244,7 @@ public class TagsPropertyLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.deleteProperties(entryId);
 	}
 
@@ -238,6 +252,7 @@ public class TagsPropertyLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.deleteProperty(propertyId);
 	}
 
@@ -246,6 +261,7 @@ public class TagsPropertyLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
 		tagsPropertyLocalService.deleteProperty(property);
 	}
 

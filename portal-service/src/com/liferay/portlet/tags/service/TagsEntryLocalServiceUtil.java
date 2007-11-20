@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.tags.service;
 
+
 /**
- * <a href="TagsEntryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.tags.service.TagsEntryLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.tags.TagsEntryService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory</code> is
- * responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.tags.TagsEntryServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.TagsEntryLocalService
- * @see com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory
+ * @see com.liferay.portlet.tags.service.TagsEntryService
+ * @see com.liferay.portlet.tags.service.TagsEntryServiceFactory
  *
  */
 public class TagsEntryLocalServiceUtil {
@@ -90,6 +92,7 @@ public class TagsEntryLocalServiceUtil {
 	public static void setTagsAssetPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.setTagsAssetPersistence(tagsAssetPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class TagsEntryLocalServiceUtil {
 	public static void setTagsAssetFinder(
 		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder) {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.setTagsAssetFinder(tagsAssetFinder);
 	}
 
@@ -114,6 +118,7 @@ public class TagsEntryLocalServiceUtil {
 	public static void setTagsEntryPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.setTagsEntryPersistence(tagsEntryPersistence);
 	}
 
@@ -126,6 +131,7 @@ public class TagsEntryLocalServiceUtil {
 	public static void setTagsEntryFinder(
 		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder) {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.setTagsEntryFinder(tagsEntryFinder);
 	}
 
@@ -138,6 +144,7 @@ public class TagsEntryLocalServiceUtil {
 	public static void setTagsPropertyPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence tagsPropertyPersistence) {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.setTagsPropertyPersistence(tagsPropertyPersistence);
 	}
 
@@ -150,6 +157,7 @@ public class TagsEntryLocalServiceUtil {
 	public static void setTagsPropertyFinder(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyFinder tagsPropertyFinder) {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.setTagsPropertyFinder(tagsPropertyFinder);
 	}
 
@@ -162,6 +170,7 @@ public class TagsEntryLocalServiceUtil {
 	public static void setTagsPropertyKeyFinder(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder tagsPropertyKeyFinder) {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.setTagsPropertyKeyFinder(tagsPropertyKeyFinder);
 	}
 
@@ -174,6 +183,7 @@ public class TagsEntryLocalServiceUtil {
 	public static void setTagsSourcePersistence(
 		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence) {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.setTagsSourcePersistence(tagsSourcePersistence);
 	}
 
@@ -186,6 +196,7 @@ public class TagsEntryLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -198,11 +209,13 @@ public class TagsEntryLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.afterPropertiesSet();
 	}
 
@@ -228,6 +241,7 @@ public class TagsEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.checkEntries(userId, names);
 	}
 
@@ -235,6 +249,7 @@ public class TagsEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.deleteEntry(entryId);
 	}
 
@@ -243,6 +258,7 @@ public class TagsEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
 		tagsEntryLocalService.deleteEntry(entry);
 	}
 

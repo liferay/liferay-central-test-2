@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+
 /**
- * <a href="DLFolderLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLFolderServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.documentlibrary.service.DLFolderLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.documentlibrary.DLFolderService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.documentlibrary.DLFolderServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.DLFolderLocalService
- * @see com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceFactory
+ * @see com.liferay.portlet.documentlibrary.service.DLFolderService
+ * @see com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory
  *
  */
 public class DLFolderLocalServiceUtil {
@@ -90,6 +92,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setDLFileEntryPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setDLFileEntryFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder dlFileEntryFinder) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setDLFileEntryFinder(dlFileEntryFinder);
 	}
 
@@ -114,6 +118,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setDLFileEntryAndShortcutFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder dlFileEntryAndShortcutFinder) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setDLFileEntryAndShortcutFinder(dlFileEntryAndShortcutFinder);
 	}
 
@@ -126,6 +131,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setDLFileRankPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setDLFileRankPersistence(dlFileRankPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setDLFileRankFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder dlFileRankFinder) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setDLFileRankFinder(dlFileRankFinder);
 	}
 
@@ -150,6 +157,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setDLFileShortcutPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setDLFileShortcutPersistence(dlFileShortcutPersistence);
 	}
 
@@ -162,6 +170,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setDLFileShortcutFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder dlFileShortcutFinder) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setDLFileShortcutFinder(dlFileShortcutFinder);
 	}
 
@@ -174,6 +183,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setDLFileVersionPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence dlFileVersionPersistence) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setDLFileVersionPersistence(dlFileVersionPersistence);
 	}
 
@@ -186,6 +196,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setDLFolderPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setDLFolderPersistence(dlFolderPersistence);
 	}
 
@@ -198,6 +209,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setLayoutPersistence(layoutPersistence);
 	}
 
@@ -210,6 +222,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setLayoutFinder(
 		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setLayoutFinder(layoutFinder);
 	}
 
@@ -222,6 +235,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -234,6 +248,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -246,6 +261,7 @@ public class DLFolderLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -258,11 +274,13 @@ public class DLFolderLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.afterPropertiesSet();
 	}
 
@@ -340,6 +358,7 @@ public class DLFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.addFolderResources(folderId,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -350,6 +369,7 @@ public class DLFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.addFolderResources(folder,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -360,6 +380,7 @@ public class DLFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.addFolderResources(folderId, communityPermissions,
 			guestPermissions);
 	}
@@ -371,6 +392,7 @@ public class DLFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.addFolderResources(folder, communityPermissions,
 			guestPermissions);
 	}
@@ -379,6 +401,7 @@ public class DLFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.deleteFolder(folderId);
 	}
 
@@ -387,6 +410,7 @@ public class DLFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.deleteFolder(folder);
 	}
 
@@ -394,6 +418,7 @@ public class DLFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.deleteFolders(groupId);
 	}
 
@@ -447,12 +472,14 @@ public class DLFolderLocalServiceUtil {
 	public static void getSubfolderIds(java.util.List folderIds, long groupId,
 		long folderId) throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
 	}
 
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
 		dlFolderLocalService.reIndex(ids);
 	}
 

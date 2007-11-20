@@ -22,30 +22,32 @@
 
 package com.liferay.portal.service;
 
+
 /**
- * <a href="ContactLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ContactServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.ContactLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.ContactService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.ContactLocalServiceFactory</code> is responsible
- * for the lookup of the bean.
+ * <code>com.liferay.portal.ContactServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.ContactLocalService
- * @see com.liferay.portal.service.ContactLocalServiceFactory
+ * @see com.liferay.portal.service.ContactService
+ * @see com.liferay.portal.service.ContactServiceFactory
  *
  */
 public class ContactLocalServiceUtil {
@@ -90,6 +92,7 @@ public class ContactLocalServiceUtil {
 	public static void setAccountPersistence(
 		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setAccountPersistence(accountPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class ContactLocalServiceUtil {
 	public static void setAddressPersistence(
 		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setAddressPersistence(addressPersistence);
 	}
 
@@ -114,6 +118,7 @@ public class ContactLocalServiceUtil {
 	public static void setClassNamePersistence(
 		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setClassNamePersistence(classNamePersistence);
 	}
 
@@ -126,6 +131,7 @@ public class ContactLocalServiceUtil {
 	public static void setCompanyPersistence(
 		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setCompanyPersistence(companyPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class ContactLocalServiceUtil {
 	public static void setContactPersistence(
 		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setContactPersistence(contactPersistence);
 	}
 
@@ -150,6 +157,7 @@ public class ContactLocalServiceUtil {
 	public static void setCountryPersistence(
 		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setCountryPersistence(countryPersistence);
 	}
 
@@ -162,6 +170,7 @@ public class ContactLocalServiceUtil {
 	public static void setEmailAddressPersistence(
 		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
@@ -174,6 +183,7 @@ public class ContactLocalServiceUtil {
 	public static void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setGroupPersistence(groupPersistence);
 	}
 
@@ -186,6 +196,7 @@ public class ContactLocalServiceUtil {
 	public static void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setGroupFinder(groupFinder);
 	}
 
@@ -198,6 +209,7 @@ public class ContactLocalServiceUtil {
 	public static void setImagePersistence(
 		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setImagePersistence(imagePersistence);
 	}
 
@@ -210,6 +222,7 @@ public class ContactLocalServiceUtil {
 	public static void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setLayoutPersistence(layoutPersistence);
 	}
 
@@ -222,6 +235,7 @@ public class ContactLocalServiceUtil {
 	public static void setLayoutFinder(
 		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setLayoutFinder(layoutFinder);
 	}
 
@@ -234,6 +248,7 @@ public class ContactLocalServiceUtil {
 	public static void setLayoutSetPersistence(
 		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setLayoutSetPersistence(layoutSetPersistence);
 	}
 
@@ -246,6 +261,7 @@ public class ContactLocalServiceUtil {
 	public static void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setListTypePersistence(listTypePersistence);
 	}
 
@@ -258,6 +274,7 @@ public class ContactLocalServiceUtil {
 	public static void setMembershipRequestPersistence(
 		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
 	}
 
@@ -270,6 +287,7 @@ public class ContactLocalServiceUtil {
 	public static void setOrganizationPersistence(
 		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
@@ -282,6 +300,7 @@ public class ContactLocalServiceUtil {
 	public static void setOrganizationFinder(
 		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setOrganizationFinder(organizationFinder);
 	}
 
@@ -294,6 +313,7 @@ public class ContactLocalServiceUtil {
 	public static void setOrgGroupPermissionPersistence(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
 	}
 
@@ -306,6 +326,7 @@ public class ContactLocalServiceUtil {
 	public static void setOrgGroupPermissionFinder(
 		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
@@ -318,6 +339,7 @@ public class ContactLocalServiceUtil {
 	public static void setOrgGroupRolePersistence(
 		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
 	}
 
@@ -330,6 +352,7 @@ public class ContactLocalServiceUtil {
 	public static void setOrgLaborPersistence(
 		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setOrgLaborPersistence(orgLaborPersistence);
 	}
 
@@ -342,6 +365,7 @@ public class ContactLocalServiceUtil {
 	public static void setPasswordPolicyPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
@@ -354,6 +378,7 @@ public class ContactLocalServiceUtil {
 	public static void setPasswordPolicyFinder(
 		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
 	}
 
@@ -366,6 +391,7 @@ public class ContactLocalServiceUtil {
 	public static void setPasswordPolicyRelPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
 	}
 
@@ -378,6 +404,7 @@ public class ContactLocalServiceUtil {
 	public static void setPasswordTrackerPersistence(
 		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
 	}
 
@@ -390,6 +417,7 @@ public class ContactLocalServiceUtil {
 	public static void setPermissionPersistence(
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setPermissionPersistence(permissionPersistence);
 	}
 
@@ -402,6 +430,7 @@ public class ContactLocalServiceUtil {
 	public static void setPermissionFinder(
 		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setPermissionFinder(permissionFinder);
 	}
 
@@ -414,6 +443,7 @@ public class ContactLocalServiceUtil {
 	public static void setPermissionUserFinder(
 		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
@@ -426,6 +456,7 @@ public class ContactLocalServiceUtil {
 	public static void setPhonePersistence(
 		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setPhonePersistence(phonePersistence);
 	}
 
@@ -438,6 +469,7 @@ public class ContactLocalServiceUtil {
 	public static void setPluginSettingPersistence(
 		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setPluginSettingPersistence(pluginSettingPersistence);
 	}
 
@@ -450,6 +482,7 @@ public class ContactLocalServiceUtil {
 	public static void setPortletPersistence(
 		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setPortletPersistence(portletPersistence);
 	}
 
@@ -462,6 +495,7 @@ public class ContactLocalServiceUtil {
 	public static void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
@@ -474,6 +508,7 @@ public class ContactLocalServiceUtil {
 	public static void setPortletPreferencesFinder(
 		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
@@ -486,6 +521,7 @@ public class ContactLocalServiceUtil {
 	public static void setRegionPersistence(
 		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setRegionPersistence(regionPersistence);
 	}
 
@@ -498,6 +534,7 @@ public class ContactLocalServiceUtil {
 	public static void setReleasePersistence(
 		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setReleasePersistence(releasePersistence);
 	}
 
@@ -510,6 +547,7 @@ public class ContactLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -522,6 +560,7 @@ public class ContactLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -534,6 +573,7 @@ public class ContactLocalServiceUtil {
 	public static void setResourceCodePersistence(
 		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setResourceCodePersistence(resourceCodePersistence);
 	}
 
@@ -546,6 +586,7 @@ public class ContactLocalServiceUtil {
 	public static void setRolePersistence(
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setRolePersistence(rolePersistence);
 	}
 
@@ -558,6 +599,7 @@ public class ContactLocalServiceUtil {
 	public static void setRoleFinder(
 		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setRoleFinder(roleFinder);
 	}
 
@@ -570,6 +612,7 @@ public class ContactLocalServiceUtil {
 	public static void setServiceComponentPersistence(
 		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
@@ -582,6 +625,7 @@ public class ContactLocalServiceUtil {
 	public static void setSubscriptionPersistence(
 		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
@@ -594,6 +638,7 @@ public class ContactLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -606,6 +651,7 @@ public class ContactLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setUserFinder(userFinder);
 	}
 
@@ -618,6 +664,7 @@ public class ContactLocalServiceUtil {
 	public static void setUserGroupPersistence(
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setUserGroupPersistence(userGroupPersistence);
 	}
 
@@ -630,6 +677,7 @@ public class ContactLocalServiceUtil {
 	public static void setUserGroupFinder(
 		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
@@ -642,6 +690,7 @@ public class ContactLocalServiceUtil {
 	public static void setUserGroupRolePersistence(
 		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
 	}
 
@@ -654,6 +703,7 @@ public class ContactLocalServiceUtil {
 	public static void setUserIdMapperPersistence(
 		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
 	}
 
@@ -666,6 +716,7 @@ public class ContactLocalServiceUtil {
 	public static void setUserTrackerPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setUserTrackerPersistence(userTrackerPersistence);
 	}
 
@@ -678,6 +729,7 @@ public class ContactLocalServiceUtil {
 	public static void setUserTrackerPathPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
@@ -690,11 +742,13 @@ public class ContactLocalServiceUtil {
 	public static void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.setWebsitePersistence(websitePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.afterPropertiesSet();
 	}
 
@@ -710,6 +764,7 @@ public class ContactLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.deleteContact(contactId);
 	}
 
@@ -717,6 +772,7 @@ public class ContactLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
 		contactLocalService.deleteContact(contact);
 	}
 }

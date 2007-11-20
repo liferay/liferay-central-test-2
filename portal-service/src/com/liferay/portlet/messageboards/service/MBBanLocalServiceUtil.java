@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.messageboards.service;
 
+
 /**
- * <a href="MBBanLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBBanServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.messageboards.service.MBBanLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.messageboards.MBBanService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.messageboards.MBBanServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.MBBanLocalService
- * @see com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory
+ * @see com.liferay.portlet.messageboards.service.MBBanService
+ * @see com.liferay.portlet.messageboards.service.MBBanServiceFactory
  *
  */
 public class MBBanLocalServiceUtil {
@@ -90,6 +92,7 @@ public class MBBanLocalServiceUtil {
 	public static void setMBBanPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setMBBanPersistence(mbBanPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class MBBanLocalServiceUtil {
 	public static void setMBCategoryPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setMBCategoryPersistence(mbCategoryPersistence);
 	}
 
@@ -114,6 +118,7 @@ public class MBBanLocalServiceUtil {
 	public static void setMBCategoryFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder mbCategoryFinder) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setMBCategoryFinder(mbCategoryFinder);
 	}
 
@@ -126,6 +131,7 @@ public class MBBanLocalServiceUtil {
 	public static void setMBDiscussionPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence mbDiscussionPersistence) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setMBDiscussionPersistence(mbDiscussionPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class MBBanLocalServiceUtil {
 	public static void setMBMessagePersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setMBMessagePersistence(mbMessagePersistence);
 	}
 
@@ -150,6 +157,7 @@ public class MBBanLocalServiceUtil {
 	public static void setMBMessageFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setMBMessageFinder(mbMessageFinder);
 	}
 
@@ -162,6 +170,7 @@ public class MBBanLocalServiceUtil {
 	public static void setMBMessageFlagPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setMBMessageFlagPersistence(mbMessageFlagPersistence);
 	}
 
@@ -174,6 +183,7 @@ public class MBBanLocalServiceUtil {
 	public static void setMBMessageFlagFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder mbMessageFlagFinder) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setMBMessageFlagFinder(mbMessageFlagFinder);
 	}
 
@@ -186,6 +196,7 @@ public class MBBanLocalServiceUtil {
 	public static void setMBStatsUserPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setMBStatsUserPersistence(mbStatsUserPersistence);
 	}
 
@@ -198,6 +209,7 @@ public class MBBanLocalServiceUtil {
 	public static void setMBThreadPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setMBThreadPersistence(mbThreadPersistence);
 	}
 
@@ -210,6 +222,7 @@ public class MBBanLocalServiceUtil {
 	public static void setMBThreadFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadFinder mbThreadFinder) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
@@ -222,6 +235,7 @@ public class MBBanLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -234,11 +248,13 @@ public class MBBanLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.afterPropertiesSet();
 	}
 
@@ -255,6 +271,7 @@ public class MBBanLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.checkBan(groupId, banUserId);
 	}
 
@@ -262,23 +279,27 @@ public class MBBanLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.deleteBan(plid, banUserId);
 	}
 
 	public static void deleteBansByBanUserId(long banUserId)
 		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.deleteBansByBanUserId(banUserId);
 	}
 
 	public static void deleteBansByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.deleteBansByGroupId(groupId);
 	}
 
 	public static void expireBans() throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
 		mbBanLocalService.expireBans();
 	}
 

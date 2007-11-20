@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="ShoppingOrderItemSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.shopping.service.http.ShoppingOrderItemServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.shopping.service.http.ShoppingOrderItemServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class ShoppingOrderItemSoap implements Serializable {
 	public static ShoppingOrderItemSoap toSoapModel(ShoppingOrderItem model) {
 		ShoppingOrderItemSoap soapModel = new ShoppingOrderItemSoap();
+
 		soapModel.setOrderItemId(model.getOrderItemId());
 		soapModel.setOrderId(model.getOrderId());
 		soapModel.setItemId(model.getItemId());
@@ -67,6 +69,7 @@ public class ShoppingOrderItemSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			ShoppingOrderItem model = (ShoppingOrderItem)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.journal.service;
 
+
 /**
- * <a href="JournalArticleResourceLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalArticleResourceServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.journal.service.JournalArticleResourceLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.journal.JournalArticleResourceService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.journal.JournalArticleResourceServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.journal.service.JournalArticleResourceLocalService
- * @see com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory
+ * @see com.liferay.portlet.journal.service.JournalArticleResourceService
+ * @see com.liferay.portlet.journal.service.JournalArticleResourceServiceFactory
  *
  */
 public class JournalArticleResourceLocalServiceUtil {
@@ -91,6 +93,7 @@ public class JournalArticleResourceLocalServiceUtil {
 	public static void setJournalArticlePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence) {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
 		journalArticleResourceLocalService.setJournalArticlePersistence(journalArticlePersistence);
 	}
 
@@ -103,6 +106,7 @@ public class JournalArticleResourceLocalServiceUtil {
 	public static void setJournalArticleFinder(
 		com.liferay.portlet.journal.service.persistence.JournalArticleFinder journalArticleFinder) {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
 		journalArticleResourceLocalService.setJournalArticleFinder(journalArticleFinder);
 	}
 
@@ -115,6 +119,7 @@ public class JournalArticleResourceLocalServiceUtil {
 	public static void setJournalArticleImagePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence journalArticleImagePersistence) {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
 		journalArticleResourceLocalService.setJournalArticleImagePersistence(journalArticleImagePersistence);
 	}
 
@@ -127,6 +132,7 @@ public class JournalArticleResourceLocalServiceUtil {
 	public static void setJournalArticleResourcePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence) {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
 		journalArticleResourceLocalService.setJournalArticleResourcePersistence(journalArticleResourcePersistence);
 	}
 
@@ -139,6 +145,7 @@ public class JournalArticleResourceLocalServiceUtil {
 	public static void setJournalContentSearchPersistence(
 		com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence) {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
 		journalArticleResourceLocalService.setJournalContentSearchPersistence(journalContentSearchPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class JournalArticleResourceLocalServiceUtil {
 	public static void setJournalStructurePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence) {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
 		journalArticleResourceLocalService.setJournalStructurePersistence(journalStructurePersistence);
 	}
 
@@ -163,6 +171,7 @@ public class JournalArticleResourceLocalServiceUtil {
 	public static void setJournalStructureFinder(
 		com.liferay.portlet.journal.service.persistence.JournalStructureFinder journalStructureFinder) {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
 		journalArticleResourceLocalService.setJournalStructureFinder(journalStructureFinder);
 	}
 
@@ -175,6 +184,7 @@ public class JournalArticleResourceLocalServiceUtil {
 	public static void setJournalTemplatePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence) {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
 		journalArticleResourceLocalService.setJournalTemplatePersistence(journalTemplatePersistence);
 	}
 
@@ -187,11 +197,13 @@ public class JournalArticleResourceLocalServiceUtil {
 	public static void setJournalTemplateFinder(
 		com.liferay.portlet.journal.service.persistence.JournalTemplateFinder journalTemplateFinder) {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
 		journalArticleResourceLocalService.setJournalTemplateFinder(journalTemplateFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
 		journalArticleResourceLocalService.afterPropertiesSet();
 	}
 
@@ -200,6 +212,7 @@ public class JournalArticleResourceLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
 		journalArticleResourceLocalService.deleteArticleResource(groupId,
 			articleId);
 	}

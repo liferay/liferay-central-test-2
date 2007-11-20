@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.polls.service;
 
+
 /**
- * <a href="PollsChoiceLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PollsChoiceServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.polls.service.PollsChoiceLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.polls.PollsChoiceService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.polls.PollsChoiceServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.polls.service.PollsChoiceLocalService
- * @see com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory
+ * @see com.liferay.portlet.polls.service.PollsChoiceService
+ * @see com.liferay.portlet.polls.service.PollsChoiceServiceFactory
  *
  */
 public class PollsChoiceLocalServiceUtil {
@@ -90,6 +92,7 @@ public class PollsChoiceLocalServiceUtil {
 	public static void setPollsChoicePersistence(
 		com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence) {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
 		pollsChoiceLocalService.setPollsChoicePersistence(pollsChoicePersistence);
 	}
 
@@ -102,6 +105,7 @@ public class PollsChoiceLocalServiceUtil {
 	public static void setPollsChoiceFinder(
 		com.liferay.portlet.polls.service.persistence.PollsChoiceFinder pollsChoiceFinder) {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
 		pollsChoiceLocalService.setPollsChoiceFinder(pollsChoiceFinder);
 	}
 
@@ -114,6 +118,7 @@ public class PollsChoiceLocalServiceUtil {
 	public static void setPollsQuestionPersistence(
 		com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence) {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
 		pollsChoiceLocalService.setPollsQuestionPersistence(pollsQuestionPersistence);
 	}
 
@@ -126,11 +131,13 @@ public class PollsChoiceLocalServiceUtil {
 	public static void setPollsVotePersistence(
 		com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence) {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
 		pollsChoiceLocalService.setPollsVotePersistence(pollsVotePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
 		pollsChoiceLocalService.afterPropertiesSet();
 	}
 

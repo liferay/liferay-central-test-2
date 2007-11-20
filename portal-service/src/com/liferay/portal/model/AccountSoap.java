@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="AccountSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.AccountServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.AccountServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class AccountSoap implements Serializable {
 	public static AccountSoap toSoapModel(Account model) {
 		AccountSoap soapModel = new AccountSoap();
+
 		soapModel.setAccountId(model.getAccountId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -73,6 +75,7 @@ public class AccountSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			Account model = (Account)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

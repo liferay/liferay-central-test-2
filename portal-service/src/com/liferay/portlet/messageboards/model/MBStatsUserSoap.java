@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="MBStatsUserSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.messageboards.service.http.MBStatsUserServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.messageboards.service.http.MBStatsUserServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class MBStatsUserSoap implements Serializable {
 	public static MBStatsUserSoap toSoapModel(MBStatsUser model) {
 		MBStatsUserSoap soapModel = new MBStatsUserSoap();
+
 		soapModel.setStatsUserId(model.getStatsUserId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setUserId(model.getUserId());
@@ -62,6 +64,7 @@ public class MBStatsUserSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			MBStatsUser model = (MBStatsUser)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

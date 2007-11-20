@@ -22,12 +22,13 @@
 
 package com.liferay.portlet.shopping.model;
 
+
 /**
  * <a href="ShoppingOrder.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>

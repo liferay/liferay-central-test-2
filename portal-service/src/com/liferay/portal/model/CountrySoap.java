@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="CountrySoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.CountryServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.CountryServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,6 +48,7 @@ import java.util.List;
 public class CountrySoap implements Serializable {
 	public static CountrySoap toSoapModel(Country model) {
 		CountrySoap soapModel = new CountrySoap();
+
 		soapModel.setCountryId(model.getCountryId());
 		soapModel.setName(model.getName());
 		soapModel.setA2(model.getA2());
@@ -63,6 +65,7 @@ public class CountrySoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			Country model = (Country)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -22,30 +22,32 @@
 
 package com.liferay.portal.service;
 
+
 /**
- * <a href="UserIdMapperLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserIdMapperServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.UserIdMapperLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.UserIdMapperService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.UserIdMapperLocalServiceFactory</code> is responsible
- * for the lookup of the bean.
+ * <code>com.liferay.portal.UserIdMapperServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.UserIdMapperLocalService
- * @see com.liferay.portal.service.UserIdMapperLocalServiceFactory
+ * @see com.liferay.portal.service.UserIdMapperService
+ * @see com.liferay.portal.service.UserIdMapperServiceFactory
  *
  */
 public class UserIdMapperLocalServiceUtil {
@@ -91,6 +93,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setAccountPersistence(
 		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setAccountPersistence(accountPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setAddressPersistence(
 		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setAddressPersistence(addressPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setClassNamePersistence(
 		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setClassNamePersistence(classNamePersistence);
 	}
 
@@ -127,6 +132,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setCompanyPersistence(
 		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setCompanyPersistence(companyPersistence);
 	}
 
@@ -139,6 +145,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setContactPersistence(
 		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setContactPersistence(contactPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setCountryPersistence(
 		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setCountryPersistence(countryPersistence);
 	}
 
@@ -163,6 +171,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setEmailAddressPersistence(
 		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
@@ -175,6 +184,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setGroupPersistence(groupPersistence);
 	}
 
@@ -187,6 +197,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setGroupFinder(groupFinder);
 	}
 
@@ -199,6 +210,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setImagePersistence(
 		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setImagePersistence(imagePersistence);
 	}
 
@@ -211,6 +223,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setLayoutPersistence(layoutPersistence);
 	}
 
@@ -223,6 +236,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setLayoutFinder(
 		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setLayoutFinder(layoutFinder);
 	}
 
@@ -235,6 +249,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setLayoutSetPersistence(
 		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setLayoutSetPersistence(layoutSetPersistence);
 	}
 
@@ -247,6 +262,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setListTypePersistence(listTypePersistence);
 	}
 
@@ -259,6 +275,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setMembershipRequestPersistence(
 		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
 	}
 
@@ -271,6 +288,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setOrganizationPersistence(
 		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
@@ -283,6 +301,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setOrganizationFinder(
 		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setOrganizationFinder(organizationFinder);
 	}
 
@@ -295,6 +314,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setOrgGroupPermissionPersistence(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
 	}
 
@@ -307,6 +327,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setOrgGroupPermissionFinder(
 		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
@@ -319,6 +340,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setOrgGroupRolePersistence(
 		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
 	}
 
@@ -331,6 +353,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setOrgLaborPersistence(
 		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setOrgLaborPersistence(orgLaborPersistence);
 	}
 
@@ -343,6 +366,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setPasswordPolicyPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
@@ -355,6 +379,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setPasswordPolicyFinder(
 		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
 	}
 
@@ -367,6 +392,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setPasswordPolicyRelPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
 	}
 
@@ -379,6 +405,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setPasswordTrackerPersistence(
 		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
 	}
 
@@ -391,6 +418,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setPermissionPersistence(
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setPermissionPersistence(permissionPersistence);
 	}
 
@@ -403,6 +431,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setPermissionFinder(
 		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setPermissionFinder(permissionFinder);
 	}
 
@@ -415,6 +444,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setPermissionUserFinder(
 		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
@@ -427,6 +457,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setPhonePersistence(
 		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setPhonePersistence(phonePersistence);
 	}
 
@@ -439,6 +470,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setPluginSettingPersistence(
 		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setPluginSettingPersistence(pluginSettingPersistence);
 	}
 
@@ -451,6 +483,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setPortletPersistence(
 		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setPortletPersistence(portletPersistence);
 	}
 
@@ -463,6 +496,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
@@ -475,6 +509,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setPortletPreferencesFinder(
 		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
@@ -487,6 +522,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setRegionPersistence(
 		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setRegionPersistence(regionPersistence);
 	}
 
@@ -499,6 +535,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setReleasePersistence(
 		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setReleasePersistence(releasePersistence);
 	}
 
@@ -511,6 +548,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -523,6 +561,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -535,6 +574,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setResourceCodePersistence(
 		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setResourceCodePersistence(resourceCodePersistence);
 	}
 
@@ -547,6 +587,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setRolePersistence(
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setRolePersistence(rolePersistence);
 	}
 
@@ -559,6 +600,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setRoleFinder(
 		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setRoleFinder(roleFinder);
 	}
 
@@ -571,6 +613,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setServiceComponentPersistence(
 		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
@@ -583,6 +626,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setSubscriptionPersistence(
 		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
@@ -595,6 +639,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -607,6 +652,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setUserFinder(userFinder);
 	}
 
@@ -619,6 +665,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setUserGroupPersistence(
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setUserGroupPersistence(userGroupPersistence);
 	}
 
@@ -631,6 +678,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setUserGroupFinder(
 		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
@@ -643,6 +691,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setUserGroupRolePersistence(
 		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
 	}
 
@@ -655,6 +704,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setUserIdMapperPersistence(
 		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
 	}
 
@@ -667,6 +717,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setUserTrackerPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setUserTrackerPersistence(userTrackerPersistence);
 	}
 
@@ -679,6 +730,7 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setUserTrackerPathPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
@@ -691,17 +743,20 @@ public class UserIdMapperLocalServiceUtil {
 	public static void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.setWebsitePersistence(websitePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.afterPropertiesSet();
 	}
 
 	public static void deleteUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
 		userIdMapperLocalService.deleteUserIdMappers(userId);
 	}
 

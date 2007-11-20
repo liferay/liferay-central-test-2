@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.messageboards.service;
 
+
 /**
- * <a href="MBThreadLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBThreadServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.messageboards.service.MBThreadLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.messageboards.MBThreadService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.messageboards.service.MBThreadLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.messageboards.MBThreadServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.MBThreadLocalService
- * @see com.liferay.portlet.messageboards.service.MBThreadLocalServiceFactory
+ * @see com.liferay.portlet.messageboards.service.MBThreadService
+ * @see com.liferay.portlet.messageboards.service.MBThreadServiceFactory
  *
  */
 public class MBThreadLocalServiceUtil {
@@ -90,6 +92,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setMBBanPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setMBBanPersistence(mbBanPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setMBCategoryPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setMBCategoryPersistence(mbCategoryPersistence);
 	}
 
@@ -114,6 +118,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setMBCategoryFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder mbCategoryFinder) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setMBCategoryFinder(mbCategoryFinder);
 	}
 
@@ -126,6 +131,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setMBDiscussionPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence mbDiscussionPersistence) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setMBDiscussionPersistence(mbDiscussionPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setMBMessagePersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setMBMessagePersistence(mbMessagePersistence);
 	}
 
@@ -150,6 +157,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setMBMessageFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setMBMessageFinder(mbMessageFinder);
 	}
 
@@ -162,6 +170,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setMBMessageFlagPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setMBMessageFlagPersistence(mbMessageFlagPersistence);
 	}
 
@@ -174,6 +183,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setMBMessageFlagFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder mbMessageFlagFinder) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setMBMessageFlagFinder(mbMessageFlagFinder);
 	}
 
@@ -186,6 +196,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setMBStatsUserPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setMBStatsUserPersistence(mbStatsUserPersistence);
 	}
 
@@ -198,6 +209,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setMBThreadPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setMBThreadPersistence(mbThreadPersistence);
 	}
 
@@ -210,6 +222,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setMBThreadFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadFinder mbThreadFinder) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
@@ -222,6 +235,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -234,6 +248,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -246,6 +261,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -258,6 +274,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setUserFinder(userFinder);
 	}
 
@@ -270,6 +287,7 @@ public class MBThreadLocalServiceUtil {
 	public static void setTagsAssetPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setTagsAssetPersistence(tagsAssetPersistence);
 	}
 
@@ -282,11 +300,13 @@ public class MBThreadLocalServiceUtil {
 	public static void setTagsAssetFinder(
 		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder) {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.setTagsAssetFinder(tagsAssetFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.afterPropertiesSet();
 	}
 
@@ -294,6 +314,7 @@ public class MBThreadLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.deleteThread(threadId);
 	}
 
@@ -302,6 +323,7 @@ public class MBThreadLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.deleteThread(thread);
 	}
 
@@ -309,6 +331,7 @@ public class MBThreadLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
 		mbThreadLocalService.deleteThreads(categoryId);
 	}
 

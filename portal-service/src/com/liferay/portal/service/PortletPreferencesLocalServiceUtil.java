@@ -22,30 +22,32 @@
 
 package com.liferay.portal.service;
 
+
 /**
- * <a href="PortletPreferencesLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletPreferencesServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.PortletPreferencesLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.PortletPreferencesService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.PortletPreferencesLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portal.PortletPreferencesServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.PortletPreferencesLocalService
- * @see com.liferay.portal.service.PortletPreferencesLocalServiceFactory
+ * @see com.liferay.portal.service.PortletPreferencesService
+ * @see com.liferay.portal.service.PortletPreferencesServiceFactory
  *
  */
 public class PortletPreferencesLocalServiceUtil {
@@ -91,6 +93,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setAccountPersistence(
 		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setAccountPersistence(accountPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setAddressPersistence(
 		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setAddressPersistence(addressPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setClassNamePersistence(
 		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setClassNamePersistence(classNamePersistence);
 	}
 
@@ -127,6 +132,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setCompanyPersistence(
 		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setCompanyPersistence(companyPersistence);
 	}
 
@@ -139,6 +145,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setContactPersistence(
 		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setContactPersistence(contactPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setCountryPersistence(
 		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setCountryPersistence(countryPersistence);
 	}
 
@@ -163,6 +171,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setEmailAddressPersistence(
 		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
@@ -175,6 +184,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setGroupPersistence(groupPersistence);
 	}
 
@@ -187,6 +197,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setGroupFinder(groupFinder);
 	}
 
@@ -199,6 +210,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setImagePersistence(
 		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setImagePersistence(imagePersistence);
 	}
 
@@ -211,6 +223,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setLayoutPersistence(layoutPersistence);
 	}
 
@@ -223,6 +236,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setLayoutFinder(
 		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setLayoutFinder(layoutFinder);
 	}
 
@@ -235,6 +249,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setLayoutSetPersistence(
 		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setLayoutSetPersistence(layoutSetPersistence);
 	}
 
@@ -247,6 +262,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setListTypePersistence(listTypePersistence);
 	}
 
@@ -259,6 +275,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setMembershipRequestPersistence(
 		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
 	}
 
@@ -271,6 +288,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setOrganizationPersistence(
 		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
@@ -283,6 +301,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setOrganizationFinder(
 		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setOrganizationFinder(organizationFinder);
 	}
 
@@ -295,6 +314,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setOrgGroupPermissionPersistence(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
 	}
 
@@ -307,6 +327,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setOrgGroupPermissionFinder(
 		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
@@ -319,6 +340,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setOrgGroupRolePersistence(
 		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
 	}
 
@@ -331,6 +353,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setOrgLaborPersistence(
 		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setOrgLaborPersistence(orgLaborPersistence);
 	}
 
@@ -343,6 +366,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setPasswordPolicyPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
@@ -355,6 +379,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setPasswordPolicyFinder(
 		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
 	}
 
@@ -367,6 +392,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setPasswordPolicyRelPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
 	}
 
@@ -379,6 +405,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setPasswordTrackerPersistence(
 		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
 	}
 
@@ -391,6 +418,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setPermissionPersistence(
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setPermissionPersistence(permissionPersistence);
 	}
 
@@ -403,6 +431,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setPermissionFinder(
 		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setPermissionFinder(permissionFinder);
 	}
 
@@ -415,6 +444,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setPermissionUserFinder(
 		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
@@ -427,6 +457,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setPhonePersistence(
 		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setPhonePersistence(phonePersistence);
 	}
 
@@ -439,6 +470,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setPluginSettingPersistence(
 		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setPluginSettingPersistence(pluginSettingPersistence);
 	}
 
@@ -451,6 +483,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setPortletPersistence(
 		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setPortletPersistence(portletPersistence);
 	}
 
@@ -463,6 +496,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
@@ -475,6 +509,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setPortletPreferencesFinder(
 		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
@@ -487,6 +522,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setRegionPersistence(
 		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setRegionPersistence(regionPersistence);
 	}
 
@@ -499,6 +535,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setReleasePersistence(
 		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setReleasePersistence(releasePersistence);
 	}
 
@@ -511,6 +548,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -523,6 +561,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -535,6 +574,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setResourceCodePersistence(
 		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setResourceCodePersistence(resourceCodePersistence);
 	}
 
@@ -547,6 +587,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setRolePersistence(
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setRolePersistence(rolePersistence);
 	}
 
@@ -559,6 +600,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setRoleFinder(
 		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setRoleFinder(roleFinder);
 	}
 
@@ -571,6 +613,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setServiceComponentPersistence(
 		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
@@ -583,6 +626,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setSubscriptionPersistence(
 		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
@@ -595,6 +639,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -607,6 +652,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setUserFinder(userFinder);
 	}
 
@@ -619,6 +665,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setUserGroupPersistence(
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setUserGroupPersistence(userGroupPersistence);
 	}
 
@@ -631,6 +678,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setUserGroupFinder(
 		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
@@ -643,6 +691,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setUserGroupRolePersistence(
 		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
 	}
 
@@ -655,6 +704,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setUserIdMapperPersistence(
 		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
 	}
 
@@ -667,6 +717,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setUserTrackerPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setUserTrackerPersistence(userTrackerPersistence);
 	}
 
@@ -679,6 +730,7 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setUserTrackerPathPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
@@ -691,11 +743,13 @@ public class PortletPreferencesLocalServiceUtil {
 	public static void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.setWebsitePersistence(websitePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.afterPropertiesSet();
 	}
 
@@ -704,6 +758,7 @@ public class PortletPreferencesLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.deletePortletPreferences(ownerId,
 			ownerType, plid);
 	}
@@ -713,6 +768,7 @@ public class PortletPreferencesLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
 		portletPreferencesLocalService.deletePortletPreferences(ownerId,
 			ownerType, plid, portletId);
 	}

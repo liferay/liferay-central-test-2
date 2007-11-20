@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="ResourceSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.ResourceServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.ResourceServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,6 +48,7 @@ import java.util.List;
 public class ResourceSoap implements Serializable {
 	public static ResourceSoap toSoapModel(Resource model) {
 		ResourceSoap soapModel = new ResourceSoap();
+
 		soapModel.setResourceId(model.getResourceId());
 		soapModel.setCodeId(model.getCodeId());
 		soapModel.setPrimKey(model.getPrimKey());
@@ -59,6 +61,7 @@ public class ResourceSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			Resource model = (Resource)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

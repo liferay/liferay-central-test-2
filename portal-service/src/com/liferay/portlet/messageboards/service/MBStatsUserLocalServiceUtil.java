@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.messageboards.service;
 
+
 /**
- * <a href="MBStatsUserLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBStatsUserServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.messageboards.service.MBStatsUserLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.messageboards.MBStatsUserService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.messageboards.MBStatsUserServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.MBStatsUserLocalService
- * @see com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory
+ * @see com.liferay.portlet.messageboards.service.MBStatsUserService
+ * @see com.liferay.portlet.messageboards.service.MBStatsUserServiceFactory
  *
  */
 public class MBStatsUserLocalServiceUtil {
@@ -90,6 +92,7 @@ public class MBStatsUserLocalServiceUtil {
 	public static void setMBBanPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence) {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.setMBBanPersistence(mbBanPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class MBStatsUserLocalServiceUtil {
 	public static void setMBCategoryPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence) {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.setMBCategoryPersistence(mbCategoryPersistence);
 	}
 
@@ -114,6 +118,7 @@ public class MBStatsUserLocalServiceUtil {
 	public static void setMBCategoryFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder mbCategoryFinder) {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.setMBCategoryFinder(mbCategoryFinder);
 	}
 
@@ -126,6 +131,7 @@ public class MBStatsUserLocalServiceUtil {
 	public static void setMBDiscussionPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence mbDiscussionPersistence) {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.setMBDiscussionPersistence(mbDiscussionPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class MBStatsUserLocalServiceUtil {
 	public static void setMBMessagePersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.setMBMessagePersistence(mbMessagePersistence);
 	}
 
@@ -150,6 +157,7 @@ public class MBStatsUserLocalServiceUtil {
 	public static void setMBMessageFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.setMBMessageFinder(mbMessageFinder);
 	}
 
@@ -162,6 +170,7 @@ public class MBStatsUserLocalServiceUtil {
 	public static void setMBMessageFlagPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence) {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.setMBMessageFlagPersistence(mbMessageFlagPersistence);
 	}
 
@@ -174,6 +183,7 @@ public class MBStatsUserLocalServiceUtil {
 	public static void setMBMessageFlagFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder mbMessageFlagFinder) {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.setMBMessageFlagFinder(mbMessageFlagFinder);
 	}
 
@@ -186,6 +196,7 @@ public class MBStatsUserLocalServiceUtil {
 	public static void setMBStatsUserPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence) {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.setMBStatsUserPersistence(mbStatsUserPersistence);
 	}
 
@@ -198,6 +209,7 @@ public class MBStatsUserLocalServiceUtil {
 	public static void setMBThreadPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence) {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.setMBThreadPersistence(mbThreadPersistence);
 	}
 
@@ -210,23 +222,27 @@ public class MBStatsUserLocalServiceUtil {
 	public static void setMBThreadFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadFinder mbThreadFinder) {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.afterPropertiesSet();
 	}
 
 	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.deleteStatsUserByGroupId(groupId);
 	}
 
 	public static void deleteStatsUserByUserId(long userId)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.deleteStatsUserByUserId(userId);
 	}
 
@@ -257,6 +273,7 @@ public class MBStatsUserLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
 		mbStatsUserLocalService.updateStatsUser(groupId, userId);
 	}
 }

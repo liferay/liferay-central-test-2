@@ -22,30 +22,32 @@
 
 package com.liferay.portal.service;
 
+
 /**
- * <a href="UserTrackerPathLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserTrackerPathServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.UserTrackerPathLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.UserTrackerPathService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.UserTrackerPathLocalServiceFactory</code> is
- * responsible for the lookup of the bean.
+ * <code>com.liferay.portal.UserTrackerPathServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.UserTrackerPathLocalService
- * @see com.liferay.portal.service.UserTrackerPathLocalServiceFactory
+ * @see com.liferay.portal.service.UserTrackerPathService
+ * @see com.liferay.portal.service.UserTrackerPathServiceFactory
  *
  */
 public class UserTrackerPathLocalServiceUtil {
@@ -91,6 +93,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setAccountPersistence(
 		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setAccountPersistence(accountPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setAddressPersistence(
 		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setAddressPersistence(addressPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setClassNamePersistence(
 		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setClassNamePersistence(classNamePersistence);
 	}
 
@@ -127,6 +132,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setCompanyPersistence(
 		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setCompanyPersistence(companyPersistence);
 	}
 
@@ -139,6 +145,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setContactPersistence(
 		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setContactPersistence(contactPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setCountryPersistence(
 		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setCountryPersistence(countryPersistence);
 	}
 
@@ -163,6 +171,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setEmailAddressPersistence(
 		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
@@ -175,6 +184,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setGroupPersistence(groupPersistence);
 	}
 
@@ -187,6 +197,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setGroupFinder(groupFinder);
 	}
 
@@ -199,6 +210,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setImagePersistence(
 		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setImagePersistence(imagePersistence);
 	}
 
@@ -211,6 +223,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setLayoutPersistence(layoutPersistence);
 	}
 
@@ -223,6 +236,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setLayoutFinder(
 		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setLayoutFinder(layoutFinder);
 	}
 
@@ -235,6 +249,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setLayoutSetPersistence(
 		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setLayoutSetPersistence(layoutSetPersistence);
 	}
 
@@ -247,6 +262,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setListTypePersistence(listTypePersistence);
 	}
 
@@ -259,6 +275,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setMembershipRequestPersistence(
 		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
 	}
 
@@ -271,6 +288,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setOrganizationPersistence(
 		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
@@ -283,6 +301,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setOrganizationFinder(
 		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setOrganizationFinder(organizationFinder);
 	}
 
@@ -295,6 +314,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setOrgGroupPermissionPersistence(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
 	}
 
@@ -307,6 +327,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setOrgGroupPermissionFinder(
 		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
@@ -319,6 +340,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setOrgGroupRolePersistence(
 		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
 	}
 
@@ -331,6 +353,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setOrgLaborPersistence(
 		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setOrgLaborPersistence(orgLaborPersistence);
 	}
 
@@ -343,6 +366,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setPasswordPolicyPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
@@ -355,6 +379,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setPasswordPolicyFinder(
 		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
 	}
 
@@ -367,6 +392,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setPasswordPolicyRelPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
 	}
 
@@ -379,6 +405,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setPasswordTrackerPersistence(
 		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
 	}
 
@@ -391,6 +418,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setPermissionPersistence(
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setPermissionPersistence(permissionPersistence);
 	}
 
@@ -403,6 +431,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setPermissionFinder(
 		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setPermissionFinder(permissionFinder);
 	}
 
@@ -415,6 +444,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setPermissionUserFinder(
 		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
@@ -427,6 +457,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setPhonePersistence(
 		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setPhonePersistence(phonePersistence);
 	}
 
@@ -439,6 +470,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setPluginSettingPersistence(
 		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setPluginSettingPersistence(pluginSettingPersistence);
 	}
 
@@ -451,6 +483,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setPortletPersistence(
 		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setPortletPersistence(portletPersistence);
 	}
 
@@ -463,6 +496,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
@@ -475,6 +509,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setPortletPreferencesFinder(
 		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
@@ -487,6 +522,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setRegionPersistence(
 		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setRegionPersistence(regionPersistence);
 	}
 
@@ -499,6 +535,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setReleasePersistence(
 		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setReleasePersistence(releasePersistence);
 	}
 
@@ -511,6 +548,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -523,6 +561,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -535,6 +574,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setResourceCodePersistence(
 		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setResourceCodePersistence(resourceCodePersistence);
 	}
 
@@ -547,6 +587,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setRolePersistence(
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setRolePersistence(rolePersistence);
 	}
 
@@ -559,6 +600,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setRoleFinder(
 		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setRoleFinder(roleFinder);
 	}
 
@@ -571,6 +613,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setServiceComponentPersistence(
 		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
@@ -583,6 +626,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setSubscriptionPersistence(
 		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
@@ -595,6 +639,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -607,6 +652,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setUserFinder(userFinder);
 	}
 
@@ -619,6 +665,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setUserGroupPersistence(
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setUserGroupPersistence(userGroupPersistence);
 	}
 
@@ -631,6 +678,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setUserGroupFinder(
 		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
@@ -643,6 +691,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setUserGroupRolePersistence(
 		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
 	}
 
@@ -655,6 +704,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setUserIdMapperPersistence(
 		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
 	}
 
@@ -667,6 +717,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setUserTrackerPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setUserTrackerPersistence(userTrackerPersistence);
 	}
 
@@ -679,6 +730,7 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setUserTrackerPathPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
@@ -691,11 +743,13 @@ public class UserTrackerPathLocalServiceUtil {
 	public static void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.setWebsitePersistence(websitePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
 		userTrackerPathLocalService.afterPropertiesSet();
 	}
 

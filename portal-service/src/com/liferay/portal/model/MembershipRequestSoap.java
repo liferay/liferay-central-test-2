@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="MembershipRequestSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.MembershipRequestServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.MembershipRequestServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class MembershipRequestSoap implements Serializable {
 	public static MembershipRequestSoap toSoapModel(MembershipRequest model) {
 		MembershipRequestSoap soapModel = new MembershipRequestSoap();
+
 		soapModel.setMembershipRequestId(model.getMembershipRequestId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -67,6 +69,7 @@ public class MembershipRequestSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			MembershipRequest model = (MembershipRequest)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

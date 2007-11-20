@@ -22,30 +22,32 @@
 
 package com.liferay.portal.service;
 
+
 /**
- * <a href="EmailAddressLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="EmailAddressServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.EmailAddressLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.EmailAddressService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.EmailAddressLocalServiceFactory</code> is responsible
- * for the lookup of the bean.
+ * <code>com.liferay.portal.EmailAddressServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.EmailAddressLocalService
- * @see com.liferay.portal.service.EmailAddressLocalServiceFactory
+ * @see com.liferay.portal.service.EmailAddressService
+ * @see com.liferay.portal.service.EmailAddressServiceFactory
  *
  */
 public class EmailAddressLocalServiceUtil {
@@ -91,6 +93,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setAccountPersistence(
 		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setAccountPersistence(accountPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setAddressPersistence(
 		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setAddressPersistence(addressPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setClassNamePersistence(
 		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setClassNamePersistence(classNamePersistence);
 	}
 
@@ -127,6 +132,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setCompanyPersistence(
 		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setCompanyPersistence(companyPersistence);
 	}
 
@@ -139,6 +145,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setContactPersistence(
 		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setContactPersistence(contactPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setCountryPersistence(
 		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setCountryPersistence(countryPersistence);
 	}
 
@@ -163,6 +171,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setEmailAddressPersistence(
 		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
@@ -175,6 +184,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setGroupPersistence(groupPersistence);
 	}
 
@@ -187,6 +197,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setGroupFinder(groupFinder);
 	}
 
@@ -199,6 +210,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setImagePersistence(
 		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setImagePersistence(imagePersistence);
 	}
 
@@ -211,6 +223,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setLayoutPersistence(layoutPersistence);
 	}
 
@@ -223,6 +236,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setLayoutFinder(
 		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setLayoutFinder(layoutFinder);
 	}
 
@@ -235,6 +249,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setLayoutSetPersistence(
 		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setLayoutSetPersistence(layoutSetPersistence);
 	}
 
@@ -247,6 +262,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setListTypePersistence(listTypePersistence);
 	}
 
@@ -259,6 +275,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setMembershipRequestPersistence(
 		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
 	}
 
@@ -271,6 +288,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setOrganizationPersistence(
 		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
@@ -283,6 +301,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setOrganizationFinder(
 		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setOrganizationFinder(organizationFinder);
 	}
 
@@ -295,6 +314,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setOrgGroupPermissionPersistence(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
 	}
 
@@ -307,6 +327,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setOrgGroupPermissionFinder(
 		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
@@ -319,6 +340,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setOrgGroupRolePersistence(
 		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
 	}
 
@@ -331,6 +353,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setOrgLaborPersistence(
 		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setOrgLaborPersistence(orgLaborPersistence);
 	}
 
@@ -343,6 +366,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setPasswordPolicyPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
@@ -355,6 +379,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setPasswordPolicyFinder(
 		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
 	}
 
@@ -367,6 +392,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setPasswordPolicyRelPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
 	}
 
@@ -379,6 +405,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setPasswordTrackerPersistence(
 		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
 	}
 
@@ -391,6 +418,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setPermissionPersistence(
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setPermissionPersistence(permissionPersistence);
 	}
 
@@ -403,6 +431,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setPermissionFinder(
 		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setPermissionFinder(permissionFinder);
 	}
 
@@ -415,6 +444,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setPermissionUserFinder(
 		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
@@ -427,6 +457,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setPhonePersistence(
 		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setPhonePersistence(phonePersistence);
 	}
 
@@ -439,6 +470,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setPluginSettingPersistence(
 		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setPluginSettingPersistence(pluginSettingPersistence);
 	}
 
@@ -451,6 +483,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setPortletPersistence(
 		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setPortletPersistence(portletPersistence);
 	}
 
@@ -463,6 +496,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
@@ -475,6 +509,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setPortletPreferencesFinder(
 		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
@@ -487,6 +522,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setRegionPersistence(
 		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setRegionPersistence(regionPersistence);
 	}
 
@@ -499,6 +535,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setReleasePersistence(
 		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setReleasePersistence(releasePersistence);
 	}
 
@@ -511,6 +548,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -523,6 +561,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -535,6 +574,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setResourceCodePersistence(
 		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setResourceCodePersistence(resourceCodePersistence);
 	}
 
@@ -547,6 +587,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setRolePersistence(
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setRolePersistence(rolePersistence);
 	}
 
@@ -559,6 +600,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setRoleFinder(
 		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setRoleFinder(roleFinder);
 	}
 
@@ -571,6 +613,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setServiceComponentPersistence(
 		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
@@ -583,6 +626,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setSubscriptionPersistence(
 		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
@@ -595,6 +639,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -607,6 +652,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setUserFinder(userFinder);
 	}
 
@@ -619,6 +665,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setUserGroupPersistence(
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setUserGroupPersistence(userGroupPersistence);
 	}
 
@@ -631,6 +678,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setUserGroupFinder(
 		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
@@ -643,6 +691,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setUserGroupRolePersistence(
 		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
 	}
 
@@ -655,6 +704,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setUserIdMapperPersistence(
 		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
 	}
 
@@ -667,6 +717,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setUserTrackerPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setUserTrackerPersistence(userTrackerPersistence);
 	}
 
@@ -679,6 +730,7 @@ public class EmailAddressLocalServiceUtil {
 	public static void setUserTrackerPathPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
@@ -691,11 +743,13 @@ public class EmailAddressLocalServiceUtil {
 	public static void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.setWebsitePersistence(websitePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.afterPropertiesSet();
 	}
 
@@ -714,6 +768,7 @@ public class EmailAddressLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.deleteEmailAddress(emailAddressId);
 	}
 
@@ -721,6 +776,7 @@ public class EmailAddressLocalServiceUtil {
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
 		emailAddressLocalService.deleteEmailAddresses(companyId, className,
 			classPK);
 	}

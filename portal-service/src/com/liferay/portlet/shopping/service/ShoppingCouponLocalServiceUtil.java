@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.shopping.service;
 
+
 /**
- * <a href="ShoppingCouponLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingCouponServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.shopping.service.ShoppingCouponLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.shopping.ShoppingCouponService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.shopping.ShoppingCouponServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.shopping.service.ShoppingCouponLocalService
- * @see com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceFactory
+ * @see com.liferay.portlet.shopping.service.ShoppingCouponService
+ * @see com.liferay.portlet.shopping.service.ShoppingCouponServiceFactory
  *
  */
 public class ShoppingCouponLocalServiceUtil {
@@ -91,6 +93,7 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setShoppingCartPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence shoppingCartPersistence) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setShoppingCartPersistence(shoppingCartPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setShoppingCategoryPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence shoppingCategoryPersistence) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setShoppingCategoryPersistence(shoppingCategoryPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setShoppingCouponPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence shoppingCouponPersistence) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setShoppingCouponPersistence(shoppingCouponPersistence);
 	}
 
@@ -127,6 +132,7 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setShoppingCouponFinder(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder shoppingCouponFinder) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setShoppingCouponFinder(shoppingCouponFinder);
 	}
 
@@ -139,6 +145,7 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setShoppingItemPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence shoppingItemPersistence) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setShoppingItemPersistence(shoppingItemPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setShoppingItemFinder(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder shoppingItemFinder) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setShoppingItemFinder(shoppingItemFinder);
 	}
 
@@ -163,6 +171,7 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setShoppingItemFieldPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence shoppingItemFieldPersistence) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setShoppingItemFieldPersistence(shoppingItemFieldPersistence);
 	}
 
@@ -175,6 +184,7 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setShoppingItemPricePersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence shoppingItemPricePersistence) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setShoppingItemPricePersistence(shoppingItemPricePersistence);
 	}
 
@@ -187,6 +197,7 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setShoppingOrderPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence shoppingOrderPersistence) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setShoppingOrderPersistence(shoppingOrderPersistence);
 	}
 
@@ -199,6 +210,7 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setShoppingOrderFinder(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder shoppingOrderFinder) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setShoppingOrderFinder(shoppingOrderFinder);
 	}
 
@@ -211,6 +223,7 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setShoppingOrderItemPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence shoppingOrderItemPersistence) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setShoppingOrderItemPersistence(shoppingOrderItemPersistence);
 	}
 
@@ -223,6 +236,7 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -235,11 +249,13 @@ public class ShoppingCouponLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.afterPropertiesSet();
 	}
 
@@ -267,12 +283,14 @@ public class ShoppingCouponLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.deleteCoupon(couponId);
 	}
 
 	public static void deleteCoupons(long groupId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
 		shoppingCouponLocalService.deleteCoupons(groupId);
 	}
 

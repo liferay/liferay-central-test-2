@@ -22,23 +22,25 @@
 
 package com.liferay.portal.service;
 
+
 /**
  * <a href="LayoutServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.LayoutService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.LayoutService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.LayoutServiceFactory</code> is responsible for
+ * <code>com.liferay.portal.LayoutServiceFactory</code> is responsible for
  * the lookup of the bean.
  * </p>
  *
@@ -79,6 +81,7 @@ public class LayoutServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
+
 		layoutService.deleteLayout(plid);
 	}
 
@@ -87,6 +90,7 @@ public class LayoutServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
+
 		layoutService.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
@@ -124,6 +128,7 @@ public class LayoutServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
+
 		layoutService.importLayouts(groupId, privateLayout, parameterMap, file);
 	}
 
@@ -132,6 +137,7 @@ public class LayoutServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
+
 		layoutService.setLayouts(groupId, privateLayout, parentLayoutId,
 			layoutIds);
 	}

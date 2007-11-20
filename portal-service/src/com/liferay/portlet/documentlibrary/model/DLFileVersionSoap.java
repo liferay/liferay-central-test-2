@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="DLFileVersionSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.documentlibrary.service.http.DLFileVersionServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.documentlibrary.service.http.DLFileVersionServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class DLFileVersionSoap implements Serializable {
 	public static DLFileVersionSoap toSoapModel(DLFileVersion model) {
 		DLFileVersionSoap soapModel = new DLFileVersionSoap();
+
 		soapModel.setFileVersionId(model.getFileVersionId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -66,6 +68,7 @@ public class DLFileVersionSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			DLFileVersion model = (DLFileVersion)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

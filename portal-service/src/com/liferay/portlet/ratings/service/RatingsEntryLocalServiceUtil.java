@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.ratings.service;
 
+
 /**
- * <a href="RatingsEntryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="RatingsEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.ratings.service.RatingsEntryLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.ratings.RatingsEntryService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.ratings.service.RatingsEntryLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.ratings.RatingsEntryServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.ratings.service.RatingsEntryLocalService
- * @see com.liferay.portlet.ratings.service.RatingsEntryLocalServiceFactory
+ * @see com.liferay.portlet.ratings.service.RatingsEntryService
+ * @see com.liferay.portlet.ratings.service.RatingsEntryServiceFactory
  *
  */
 public class RatingsEntryLocalServiceUtil {
@@ -91,6 +93,7 @@ public class RatingsEntryLocalServiceUtil {
 	public static void setRatingsEntryPersistence(
 		com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence ratingsEntryPersistence) {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
 		ratingsEntryLocalService.setRatingsEntryPersistence(ratingsEntryPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class RatingsEntryLocalServiceUtil {
 	public static void setRatingsStatsPersistence(
 		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence) {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
 		ratingsEntryLocalService.setRatingsStatsPersistence(ratingsStatsPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class RatingsEntryLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
 		ratingsEntryLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -127,6 +132,7 @@ public class RatingsEntryLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
 		ratingsEntryLocalService.setUserFinder(userFinder);
 	}
 
@@ -139,6 +145,7 @@ public class RatingsEntryLocalServiceUtil {
 	public static void setBlogsEntryPersistence(
 		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence) {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
 		ratingsEntryLocalService.setBlogsEntryPersistence(blogsEntryPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class RatingsEntryLocalServiceUtil {
 	public static void setBlogsEntryFinder(
 		com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder blogsEntryFinder) {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
 		ratingsEntryLocalService.setBlogsEntryFinder(blogsEntryFinder);
 	}
 
@@ -163,6 +171,7 @@ public class RatingsEntryLocalServiceUtil {
 	public static void setBlogsStatsUserPersistence(
 		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence) {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
 		ratingsEntryLocalService.setBlogsStatsUserPersistence(blogsStatsUserPersistence);
 	}
 
@@ -175,11 +184,13 @@ public class RatingsEntryLocalServiceUtil {
 	public static void setBlogsStatsUserFinder(
 		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder blogsStatsUserFinder) {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
 		ratingsEntryLocalService.setBlogsStatsUserFinder(blogsStatsUserFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
 		ratingsEntryLocalService.afterPropertiesSet();
 	}
 

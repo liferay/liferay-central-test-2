@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="AddressSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.AddressServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.AddressServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class AddressSoap implements Serializable {
 	public static AddressSoap toSoapModel(Address model) {
 		AddressSoap soapModel = new AddressSoap();
+
 		soapModel.setAddressId(model.getAddressId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -75,6 +77,7 @@ public class AddressSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			Address model = (Address)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

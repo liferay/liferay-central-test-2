@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+
 /**
- * <a href="DLFileRankLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLFileRankServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.documentlibrary.service.DLFileRankLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.documentlibrary.DLFileRankService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.documentlibrary.DLFileRankServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.DLFileRankLocalService
- * @see com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory
+ * @see com.liferay.portlet.documentlibrary.service.DLFileRankService
+ * @see com.liferay.portlet.documentlibrary.service.DLFileRankServiceFactory
  *
  */
 public class DLFileRankLocalServiceUtil {
@@ -90,6 +92,7 @@ public class DLFileRankLocalServiceUtil {
 	public static void setDLFileEntryPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence) {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
 		dlFileRankLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class DLFileRankLocalServiceUtil {
 	public static void setDLFileEntryFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder dlFileEntryFinder) {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
 		dlFileRankLocalService.setDLFileEntryFinder(dlFileEntryFinder);
 	}
 
@@ -114,6 +118,7 @@ public class DLFileRankLocalServiceUtil {
 	public static void setDLFileEntryAndShortcutFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder dlFileEntryAndShortcutFinder) {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
 		dlFileRankLocalService.setDLFileEntryAndShortcutFinder(dlFileEntryAndShortcutFinder);
 	}
 
@@ -126,6 +131,7 @@ public class DLFileRankLocalServiceUtil {
 	public static void setDLFileRankPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence) {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
 		dlFileRankLocalService.setDLFileRankPersistence(dlFileRankPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class DLFileRankLocalServiceUtil {
 	public static void setDLFileRankFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder dlFileRankFinder) {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
 		dlFileRankLocalService.setDLFileRankFinder(dlFileRankFinder);
 	}
 
@@ -150,6 +157,7 @@ public class DLFileRankLocalServiceUtil {
 	public static void setDLFileShortcutPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence) {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
 		dlFileRankLocalService.setDLFileShortcutPersistence(dlFileShortcutPersistence);
 	}
 
@@ -162,6 +170,7 @@ public class DLFileRankLocalServiceUtil {
 	public static void setDLFileShortcutFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder dlFileShortcutFinder) {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
 		dlFileRankLocalService.setDLFileShortcutFinder(dlFileShortcutFinder);
 	}
 
@@ -174,6 +183,7 @@ public class DLFileRankLocalServiceUtil {
 	public static void setDLFileVersionPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence dlFileVersionPersistence) {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
 		dlFileRankLocalService.setDLFileVersionPersistence(dlFileVersionPersistence);
 	}
 
@@ -186,23 +196,27 @@ public class DLFileRankLocalServiceUtil {
 	public static void setDLFolderPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence) {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
 		dlFileRankLocalService.setDLFolderPersistence(dlFolderPersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
 		dlFileRankLocalService.afterPropertiesSet();
 	}
 
 	public static void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
 		dlFileRankLocalService.deleteFileRanks(userId);
 	}
 
 	public static void deleteFileRanks(long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
 		dlFileRankLocalService.deleteFileRanks(folderId, name);
 	}
 

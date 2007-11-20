@@ -22,24 +22,26 @@
 
 package com.liferay.portal.service;
 
+
 /**
  * <a href="OrganizationServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.OrganizationService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.OrganizationService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.OrganizationServiceFactory</code> is responsible
- * for the lookup of the bean.
+ * <code>com.liferay.portal.OrganizationServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -54,6 +56,7 @@ public class OrganizationServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
+
 		organizationService.addGroupOrganizations(groupId, organizationIds);
 	}
 
@@ -62,6 +65,7 @@ public class OrganizationServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
+
 		organizationService.addPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}
@@ -92,6 +96,7 @@ public class OrganizationServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
+
 		organizationService.deleteOrganization(organizationId);
 	}
 
@@ -125,6 +130,7 @@ public class OrganizationServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
+
 		organizationService.setGroupOrganizations(groupId, organizationIds);
 	}
 
@@ -133,6 +139,7 @@ public class OrganizationServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
+
 		organizationService.unsetGroupOrganizations(groupId, organizationIds);
 	}
 
@@ -141,6 +148,7 @@ public class OrganizationServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
+
 		organizationService.unsetPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}

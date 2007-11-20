@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="UserTrackerPathSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.UserTrackerPathServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.UserTrackerPathServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class UserTrackerPathSoap implements Serializable {
 	public static UserTrackerPathSoap toSoapModel(UserTrackerPath model) {
 		UserTrackerPathSoap soapModel = new UserTrackerPathSoap();
+
 		soapModel.setUserTrackerPathId(model.getUserTrackerPathId());
 		soapModel.setUserTrackerId(model.getUserTrackerId());
 		soapModel.setPath(model.getPath());
@@ -61,6 +63,7 @@ public class UserTrackerPathSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			UserTrackerPath model = (UserTrackerPath)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

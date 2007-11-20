@@ -33,12 +33,13 @@ import java.util.List;
  * <a href="OrgGroupPermissionSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.OrgGroupPermissionServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.OrgGroupPermissionServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -49,6 +50,7 @@ import java.util.List;
 public class OrgGroupPermissionSoap implements Serializable {
 	public static OrgGroupPermissionSoap toSoapModel(OrgGroupPermission model) {
 		OrgGroupPermissionSoap soapModel = new OrgGroupPermissionSoap();
+
 		soapModel.setOrganizationId(model.getOrganizationId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setPermissionId(model.getPermissionId());
@@ -61,6 +63,7 @@ public class OrgGroupPermissionSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			OrgGroupPermission model = (OrgGroupPermission)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

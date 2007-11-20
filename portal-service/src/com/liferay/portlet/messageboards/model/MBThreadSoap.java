@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="MBThreadSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.messageboards.service.http.MBThreadServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.messageboards.service.http.MBThreadServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class MBThreadSoap implements Serializable {
 	public static MBThreadSoap toSoapModel(MBThread model) {
 		MBThreadSoap soapModel = new MBThreadSoap();
+
 		soapModel.setThreadId(model.getThreadId());
 		soapModel.setCategoryId(model.getCategoryId());
 		soapModel.setRootMessageId(model.getRootMessageId());
@@ -65,6 +67,7 @@ public class MBThreadSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			MBThread model = (MBThread)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

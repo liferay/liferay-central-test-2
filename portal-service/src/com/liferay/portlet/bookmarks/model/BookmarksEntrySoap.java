@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="BookmarksEntrySoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.bookmarks.service.http.BookmarksEntryServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.bookmarks.service.http.BookmarksEntryServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class BookmarksEntrySoap implements Serializable {
 	public static BookmarksEntrySoap toSoapModel(BookmarksEntry model) {
 		BookmarksEntrySoap soapModel = new BookmarksEntrySoap();
+
 		soapModel.setUuid(model.getUuid());
 		soapModel.setEntryId(model.getEntryId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -69,6 +71,7 @@ public class BookmarksEntrySoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			BookmarksEntry model = (BookmarksEntry)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -22,24 +22,26 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+
 /**
  * <a href="DLFileEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.documentlibrary.service.DLFileEntryService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.documentlibrary.DLFileEntryService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.documentlibrary.DLFileEntryServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -82,6 +84,7 @@ public class DLFileEntryServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+
 		dlFileEntryService.deleteFileEntry(folderId, name);
 	}
 
@@ -90,6 +93,7 @@ public class DLFileEntryServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+
 		dlFileEntryService.deleteFileEntry(folderId, name, version);
 	}
 
@@ -106,6 +110,7 @@ public class DLFileEntryServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+
 		dlFileEntryService.lockFileEntry(folderId, name);
 	}
 
@@ -113,6 +118,7 @@ public class DLFileEntryServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+
 		dlFileEntryService.unlockFileEntry(folderId, name);
 	}
 

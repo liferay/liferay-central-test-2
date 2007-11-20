@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+
 /**
- * <a href="DLFileEntryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLFileEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.documentlibrary.DLFileEntryService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.documentlibrary.DLFileEntryServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService
- * @see com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory
+ * @see com.liferay.portlet.documentlibrary.service.DLFileEntryService
+ * @see com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory
  *
  */
 public class DLFileEntryLocalServiceUtil {
@@ -90,6 +92,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setDLFileEntryPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setDLFileEntryFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder dlFileEntryFinder) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setDLFileEntryFinder(dlFileEntryFinder);
 	}
 
@@ -114,6 +118,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setDLFileEntryAndShortcutFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder dlFileEntryAndShortcutFinder) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setDLFileEntryAndShortcutFinder(dlFileEntryAndShortcutFinder);
 	}
 
@@ -126,6 +131,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setDLFileRankPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setDLFileRankPersistence(dlFileRankPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setDLFileRankFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder dlFileRankFinder) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setDLFileRankFinder(dlFileRankFinder);
 	}
 
@@ -150,6 +157,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setDLFileShortcutPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setDLFileShortcutPersistence(dlFileShortcutPersistence);
 	}
 
@@ -162,6 +170,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setDLFileShortcutFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder dlFileShortcutFinder) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setDLFileShortcutFinder(dlFileShortcutFinder);
 	}
 
@@ -174,6 +183,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setDLFileVersionPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence dlFileVersionPersistence) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setDLFileVersionPersistence(dlFileVersionPersistence);
 	}
 
@@ -186,6 +196,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setDLFolderPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setDLFolderPersistence(dlFolderPersistence);
 	}
 
@@ -198,6 +209,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -210,6 +222,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -222,6 +235,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -234,6 +248,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setUserFinder(userFinder);
 	}
 
@@ -246,6 +261,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setMBMessagePersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setMBMessagePersistence(mbMessagePersistence);
 	}
 
@@ -258,6 +274,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setMBMessageFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setMBMessageFinder(mbMessageFinder);
 	}
 
@@ -270,6 +287,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setRatingsStatsPersistence(
 		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setRatingsStatsPersistence(ratingsStatsPersistence);
 	}
 
@@ -282,6 +300,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setTagsAssetPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setTagsAssetPersistence(tagsAssetPersistence);
 	}
 
@@ -294,11 +313,13 @@ public class DLFileEntryLocalServiceUtil {
 	public static void setTagsAssetFinder(
 		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder) {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.setTagsAssetFinder(tagsAssetFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.afterPropertiesSet();
 	}
 
@@ -439,6 +460,7 @@ public class DLFileEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.addFileEntryResources(folderId, name,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -450,6 +472,7 @@ public class DLFileEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.addFileEntryResources(folder, fileEntry,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -460,6 +483,7 @@ public class DLFileEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.addFileEntryResources(folderId, name,
 			communityPermissions, guestPermissions);
 	}
@@ -472,6 +496,7 @@ public class DLFileEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.addFileEntryResources(folder, fileEntry,
 			communityPermissions, guestPermissions);
 	}
@@ -480,6 +505,7 @@ public class DLFileEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.deleteFileEntries(folderId);
 	}
 
@@ -487,6 +513,7 @@ public class DLFileEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.deleteFileEntry(folderId, name);
 	}
 
@@ -495,6 +522,7 @@ public class DLFileEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.deleteFileEntry(folderId, name, version);
 	}
 
@@ -503,6 +531,7 @@ public class DLFileEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.deleteFileEntry(fileEntry);
 	}
 
@@ -687,6 +716,7 @@ public class DLFileEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
 		dlFileEntryLocalService.updateTagsAsset(userId, fileEntry, tagsEntries);
 	}
 }

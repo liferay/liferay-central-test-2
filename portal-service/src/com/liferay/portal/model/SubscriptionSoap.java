@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="SubscriptionSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.SubscriptionServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.SubscriptionServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class SubscriptionSoap implements Serializable {
 	public static SubscriptionSoap toSoapModel(Subscription model) {
 		SubscriptionSoap soapModel = new SubscriptionSoap();
+
 		soapModel.setSubscriptionId(model.getSubscriptionId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -66,6 +68,7 @@ public class SubscriptionSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			Subscription model = (Subscription)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

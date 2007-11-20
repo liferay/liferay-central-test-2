@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.messageboards.service;
 
+
 /**
- * <a href="MBCategoryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBCategoryServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.messageboards.service.MBCategoryLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.messageboards.MBCategoryService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.messageboards.MBCategoryServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.MBCategoryLocalService
- * @see com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory
+ * @see com.liferay.portlet.messageboards.service.MBCategoryService
+ * @see com.liferay.portlet.messageboards.service.MBCategoryServiceFactory
  *
  */
 public class MBCategoryLocalServiceUtil {
@@ -90,6 +92,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setMBBanPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setMBBanPersistence(mbBanPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setMBCategoryPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setMBCategoryPersistence(mbCategoryPersistence);
 	}
 
@@ -114,6 +118,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setMBCategoryFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder mbCategoryFinder) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setMBCategoryFinder(mbCategoryFinder);
 	}
 
@@ -126,6 +131,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setMBDiscussionPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence mbDiscussionPersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setMBDiscussionPersistence(mbDiscussionPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setMBMessagePersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setMBMessagePersistence(mbMessagePersistence);
 	}
 
@@ -150,6 +157,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setMBMessageFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setMBMessageFinder(mbMessageFinder);
 	}
 
@@ -162,6 +170,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setMBMessageFlagPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setMBMessageFlagPersistence(mbMessageFlagPersistence);
 	}
 
@@ -174,6 +183,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setMBMessageFlagFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder mbMessageFlagFinder) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setMBMessageFlagFinder(mbMessageFlagFinder);
 	}
 
@@ -186,6 +196,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setMBStatsUserPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setMBStatsUserPersistence(mbStatsUserPersistence);
 	}
 
@@ -198,6 +209,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setMBThreadPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setMBThreadPersistence(mbThreadPersistence);
 	}
 
@@ -210,6 +222,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setMBThreadFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadFinder mbThreadFinder) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
@@ -222,6 +235,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -234,6 +248,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -246,6 +261,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setSubscriptionPersistence(
 		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
@@ -258,6 +274,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -270,6 +287,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setUserFinder(userFinder);
 	}
 
@@ -282,6 +300,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void setTagsEntryPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setTagsEntryPersistence(tagsEntryPersistence);
 	}
 
@@ -294,11 +313,13 @@ public class MBCategoryLocalServiceUtil {
 	public static void setTagsEntryFinder(
 		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder) {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.setTagsEntryFinder(tagsEntryFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.afterPropertiesSet();
 	}
 
@@ -362,6 +383,7 @@ public class MBCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.addCategoryResources(categoryId,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -372,6 +394,7 @@ public class MBCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.addCategoryResources(category,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -382,6 +405,7 @@ public class MBCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.addCategoryResources(categoryId,
 			communityPermissions, guestPermissions);
 	}
@@ -393,6 +417,7 @@ public class MBCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.addCategoryResources(category,
 			communityPermissions, guestPermissions);
 	}
@@ -401,6 +426,7 @@ public class MBCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.deleteCategories(groupId);
 	}
 
@@ -408,6 +434,7 @@ public class MBCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.deleteCategory(categoryId);
 	}
 
@@ -416,6 +443,7 @@ public class MBCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.deleteCategory(category);
 	}
 
@@ -456,6 +484,7 @@ public class MBCategoryLocalServiceUtil {
 		long groupId, long categoryId)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.getSubcategoryIds(categoryIds, groupId,
 			categoryId);
 	}
@@ -488,6 +517,7 @@ public class MBCategoryLocalServiceUtil {
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.reIndex(ids);
 	}
 
@@ -515,6 +545,7 @@ public class MBCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.subscribeCategory(userId, categoryId);
 	}
 
@@ -522,6 +553,7 @@ public class MBCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
 		mbCategoryLocalService.unsubscribeCategory(userId, categoryId);
 	}
 }

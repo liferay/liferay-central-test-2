@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="OrganizationSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.OrganizationServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.OrganizationServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,6 +48,7 @@ import java.util.List;
 public class OrganizationSoap implements Serializable {
 	public static OrganizationSoap toSoapModel(Organization model) {
 		OrganizationSoap soapModel = new OrganizationSoap();
+
 		soapModel.setOrganizationId(model.getOrganizationId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setParentOrganizationId(model.getParentOrganizationId());
@@ -66,6 +68,7 @@ public class OrganizationSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			Organization model = (Organization)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

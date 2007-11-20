@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+
 /**
- * <a href="DLFileShortcutLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLFileShortcutServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.documentlibrary.DLFileShortcutService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.documentlibrary.DLFileShortcutServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService
- * @see com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceFactory
+ * @see com.liferay.portlet.documentlibrary.service.DLFileShortcutService
+ * @see com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory
  *
  */
 public class DLFileShortcutLocalServiceUtil {
@@ -91,6 +93,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setDLFileEntryPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setDLFileEntryFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder dlFileEntryFinder) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setDLFileEntryFinder(dlFileEntryFinder);
 	}
 
@@ -115,6 +119,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setDLFileEntryAndShortcutFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder dlFileEntryAndShortcutFinder) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setDLFileEntryAndShortcutFinder(dlFileEntryAndShortcutFinder);
 	}
 
@@ -127,6 +132,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setDLFileRankPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence dlFileRankPersistence) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setDLFileRankPersistence(dlFileRankPersistence);
 	}
 
@@ -139,6 +145,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setDLFileRankFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder dlFileRankFinder) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setDLFileRankFinder(dlFileRankFinder);
 	}
 
@@ -151,6 +158,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setDLFileShortcutPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence dlFileShortcutPersistence) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setDLFileShortcutPersistence(dlFileShortcutPersistence);
 	}
 
@@ -163,6 +171,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setDLFileShortcutFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder dlFileShortcutFinder) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setDLFileShortcutFinder(dlFileShortcutFinder);
 	}
 
@@ -175,6 +184,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setDLFileVersionPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence dlFileVersionPersistence) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setDLFileVersionPersistence(dlFileVersionPersistence);
 	}
 
@@ -187,6 +197,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setDLFolderPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setDLFolderPersistence(dlFolderPersistence);
 	}
 
@@ -199,6 +210,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -211,6 +223,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -223,6 +236,7 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -235,11 +249,13 @@ public class DLFileShortcutLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.afterPropertiesSet();
 	}
 
@@ -299,6 +315,7 @@ public class DLFileShortcutLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.addFileShortcutResources(fileShortcutId,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -310,6 +327,7 @@ public class DLFileShortcutLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.addFileShortcutResources(folder,
 			fileShortcut, addCommunityPermissions, addGuestPermissions);
 	}
@@ -320,6 +338,7 @@ public class DLFileShortcutLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.addFileShortcutResources(fileShortcutId,
 			communityPermissions, guestPermissions);
 	}
@@ -332,6 +351,7 @@ public class DLFileShortcutLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.addFileShortcutResources(folder,
 			fileShortcut, communityPermissions, guestPermissions);
 	}
@@ -340,6 +360,7 @@ public class DLFileShortcutLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.deleteFileShortcut(fileShortcutId);
 	}
 
@@ -348,6 +369,7 @@ public class DLFileShortcutLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.deleteFileShortcut(fileShortcut);
 	}
 
@@ -356,6 +378,7 @@ public class DLFileShortcutLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.deleteFileShortcuts(toFolderId, toName);
 	}
 
@@ -385,6 +408,7 @@ public class DLFileShortcutLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
 		dlFileShortcutLocalService.updateFileShortcuts(oldToFolderId,
 			oldToName, newToFolderId, newToName);
 	}

@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+
 /**
- * <a href="SCFrameworkVersionLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCFrameworkVersionServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.softwarecatalog.SCFrameworkVersionService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.softwarecatalog.SCFrameworkVersionServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService
- * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory
+ * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService
+ * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory
  *
  */
 public class SCFrameworkVersionLocalServiceUtil {
@@ -91,6 +93,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 	public static void setSCLicensePersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence) {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.setSCLicensePersistence(scLicensePersistence);
 	}
 
@@ -103,6 +106,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 	public static void setSCFrameworkVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence) {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.setSCFrameworkVersionPersistence(scFrameworkVersionPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 	public static void setSCProductEntryPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence) {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.setSCProductEntryPersistence(scProductEntryPersistence);
 	}
 
@@ -127,6 +132,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 	public static void setSCProductScreenshotPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence) {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.setSCProductScreenshotPersistence(scProductScreenshotPersistence);
 	}
 
@@ -139,6 +145,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 	public static void setSCProductVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence) {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -163,6 +171,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -175,6 +184,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -187,11 +197,13 @@ public class SCFrameworkVersionLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.afterPropertiesSet();
 	}
 
@@ -241,6 +253,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.addFrameworkVersionResources(frameworkVersionId,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -251,6 +264,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.addFrameworkVersionResources(frameworkVersion,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -261,6 +275,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.addFrameworkVersionResources(frameworkVersionId,
 			communityPermissions, guestPermissions);
 	}
@@ -272,6 +287,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.addFrameworkVersionResources(frameworkVersion,
 			communityPermissions, guestPermissions);
 	}
@@ -280,6 +296,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
 		scFrameworkVersionLocalService.deleteFrameworkVersion(frameworkVersionId);
 	}
 

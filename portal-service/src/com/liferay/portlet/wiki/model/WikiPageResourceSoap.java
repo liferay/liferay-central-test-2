@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="WikiPageResourceSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.wiki.service.http.WikiPageResourceServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.wiki.service.http.WikiPageResourceServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,6 +48,7 @@ import java.util.List;
 public class WikiPageResourceSoap implements Serializable {
 	public static WikiPageResourceSoap toSoapModel(WikiPageResource model) {
 		WikiPageResourceSoap soapModel = new WikiPageResourceSoap();
+
 		soapModel.setResourcePrimKey(model.getResourcePrimKey());
 		soapModel.setNodeId(model.getNodeId());
 		soapModel.setTitle(model.getTitle());
@@ -59,6 +61,7 @@ public class WikiPageResourceSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			WikiPageResource model = (WikiPageResource)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

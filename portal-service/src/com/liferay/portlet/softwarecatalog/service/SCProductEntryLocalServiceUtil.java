@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+
 /**
- * <a href="SCProductEntryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCProductEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.softwarecatalog.SCProductEntryService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.softwarecatalog.SCProductEntryServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService
- * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceFactory
+ * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryService
+ * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory
  *
  */
 public class SCProductEntryLocalServiceUtil {
@@ -91,6 +93,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void setSCLicensePersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence) {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.setSCLicensePersistence(scLicensePersistence);
 	}
 
@@ -103,6 +106,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void setSCFrameworkVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence) {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.setSCFrameworkVersionPersistence(scFrameworkVersionPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void setSCProductEntryPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence) {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.setSCProductEntryPersistence(scProductEntryPersistence);
 	}
 
@@ -127,6 +132,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void setSCProductScreenshotPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence) {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.setSCProductScreenshotPersistence(scProductScreenshotPersistence);
 	}
 
@@ -139,6 +145,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void setSCProductVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence) {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -163,6 +171,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -175,6 +184,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -187,6 +197,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.setUserFinder(userFinder);
 	}
 
@@ -199,6 +210,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void setMBMessagePersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.setMBMessagePersistence(mbMessagePersistence);
 	}
 
@@ -211,6 +223,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void setMBMessageFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.setMBMessageFinder(mbMessageFinder);
 	}
 
@@ -223,11 +236,13 @@ public class SCProductEntryLocalServiceUtil {
 	public static void setRatingsStatsPersistence(
 		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence) {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.setRatingsStatsPersistence(ratingsStatsPersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.afterPropertiesSet();
 	}
 
@@ -295,6 +310,7 @@ public class SCProductEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.addProductEntryResources(productEntryId,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -305,6 +321,7 @@ public class SCProductEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.addProductEntryResources(productEntry,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -315,6 +332,7 @@ public class SCProductEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.addProductEntryResources(productEntryId,
 			communityPermissions, guestPermissions);
 	}
@@ -326,6 +344,7 @@ public class SCProductEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.addProductEntryResources(productEntry,
 			communityPermissions, guestPermissions);
 	}
@@ -334,6 +353,7 @@ public class SCProductEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.deleteProductEntry(productEntryId);
 	}
 
@@ -342,6 +362,7 @@ public class SCProductEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.deleteProductEntry(productEntry);
 	}
 
@@ -415,6 +436,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
 		scProductEntryLocalService.reIndex(ids);
 	}
 

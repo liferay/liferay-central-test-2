@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="MBMessageFlagSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.messageboards.service.http.MBMessageFlagServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.messageboards.service.http.MBMessageFlagServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,6 +48,7 @@ import java.util.List;
 public class MBMessageFlagSoap implements Serializable {
 	public static MBMessageFlagSoap toSoapModel(MBMessageFlag model) {
 		MBMessageFlagSoap soapModel = new MBMessageFlagSoap();
+
 		soapModel.setMessageFlagId(model.getMessageFlagId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setMessageId(model.getMessageId());
@@ -60,6 +62,7 @@ public class MBMessageFlagSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			MBMessageFlag model = (MBMessageFlag)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

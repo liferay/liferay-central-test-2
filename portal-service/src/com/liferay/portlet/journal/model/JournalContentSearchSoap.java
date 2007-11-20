@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="JournalContentSearchSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.journal.service.http.JournalContentSearchServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.journal.service.http.JournalContentSearchServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ public class JournalContentSearchSoap implements Serializable {
 	public static JournalContentSearchSoap toSoapModel(
 		JournalContentSearch model) {
 		JournalContentSearchSoap soapModel = new JournalContentSearchSoap();
+
 		soapModel.setContentSearchId(model.getContentSearchId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -64,6 +66,7 @@ public class JournalContentSearchSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			JournalContentSearch model = (JournalContentSearch)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

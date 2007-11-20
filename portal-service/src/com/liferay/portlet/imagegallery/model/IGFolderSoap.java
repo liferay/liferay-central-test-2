@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="IGFolderSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.imagegallery.service.http.IGFolderServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.imagegallery.service.http.IGFolderServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class IGFolderSoap implements Serializable {
 	public static IGFolderSoap toSoapModel(IGFolder model) {
 		IGFolderSoap soapModel = new IGFolderSoap();
+
 		soapModel.setUuid(model.getUuid());
 		soapModel.setFolderId(model.getFolderId());
 		soapModel.setGroupId(model.getGroupId());
@@ -67,6 +69,7 @@ public class IGFolderSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			IGFolder model = (IGFolder)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

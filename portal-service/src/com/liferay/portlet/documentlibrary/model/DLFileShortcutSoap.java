@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="DLFileShortcutSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.documentlibrary.service.http.DLFileShortcutServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.documentlibrary.service.http.DLFileShortcutServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class DLFileShortcutSoap implements Serializable {
 	public static DLFileShortcutSoap toSoapModel(DLFileShortcut model) {
 		DLFileShortcutSoap soapModel = new DLFileShortcutSoap();
+
 		soapModel.setUuid(model.getUuid());
 		soapModel.setFileShortcutId(model.getFileShortcutId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -67,6 +69,7 @@ public class DLFileShortcutSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			DLFileShortcut model = (DLFileShortcut)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -22,30 +22,32 @@
 
 package com.liferay.portal.service;
 
+
 /**
- * <a href="PhoneLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PhoneServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.PhoneLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.PhoneService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.PhoneLocalServiceFactory</code> is responsible
- * for the lookup of the bean.
+ * <code>com.liferay.portal.PhoneServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.PhoneLocalService
- * @see com.liferay.portal.service.PhoneLocalServiceFactory
+ * @see com.liferay.portal.service.PhoneService
+ * @see com.liferay.portal.service.PhoneServiceFactory
  *
  */
 public class PhoneLocalServiceUtil {
@@ -90,6 +92,7 @@ public class PhoneLocalServiceUtil {
 	public static void setAccountPersistence(
 		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setAccountPersistence(accountPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class PhoneLocalServiceUtil {
 	public static void setAddressPersistence(
 		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setAddressPersistence(addressPersistence);
 	}
 
@@ -114,6 +118,7 @@ public class PhoneLocalServiceUtil {
 	public static void setClassNamePersistence(
 		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setClassNamePersistence(classNamePersistence);
 	}
 
@@ -126,6 +131,7 @@ public class PhoneLocalServiceUtil {
 	public static void setCompanyPersistence(
 		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setCompanyPersistence(companyPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class PhoneLocalServiceUtil {
 	public static void setContactPersistence(
 		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setContactPersistence(contactPersistence);
 	}
 
@@ -150,6 +157,7 @@ public class PhoneLocalServiceUtil {
 	public static void setCountryPersistence(
 		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setCountryPersistence(countryPersistence);
 	}
 
@@ -162,6 +170,7 @@ public class PhoneLocalServiceUtil {
 	public static void setEmailAddressPersistence(
 		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
@@ -174,6 +183,7 @@ public class PhoneLocalServiceUtil {
 	public static void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setGroupPersistence(groupPersistence);
 	}
 
@@ -186,6 +196,7 @@ public class PhoneLocalServiceUtil {
 	public static void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setGroupFinder(groupFinder);
 	}
 
@@ -198,6 +209,7 @@ public class PhoneLocalServiceUtil {
 	public static void setImagePersistence(
 		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setImagePersistence(imagePersistence);
 	}
 
@@ -210,6 +222,7 @@ public class PhoneLocalServiceUtil {
 	public static void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setLayoutPersistence(layoutPersistence);
 	}
 
@@ -222,6 +235,7 @@ public class PhoneLocalServiceUtil {
 	public static void setLayoutFinder(
 		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setLayoutFinder(layoutFinder);
 	}
 
@@ -234,6 +248,7 @@ public class PhoneLocalServiceUtil {
 	public static void setLayoutSetPersistence(
 		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setLayoutSetPersistence(layoutSetPersistence);
 	}
 
@@ -246,6 +261,7 @@ public class PhoneLocalServiceUtil {
 	public static void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setListTypePersistence(listTypePersistence);
 	}
 
@@ -258,6 +274,7 @@ public class PhoneLocalServiceUtil {
 	public static void setMembershipRequestPersistence(
 		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
 	}
 
@@ -270,6 +287,7 @@ public class PhoneLocalServiceUtil {
 	public static void setOrganizationPersistence(
 		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
@@ -282,6 +300,7 @@ public class PhoneLocalServiceUtil {
 	public static void setOrganizationFinder(
 		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setOrganizationFinder(organizationFinder);
 	}
 
@@ -294,6 +313,7 @@ public class PhoneLocalServiceUtil {
 	public static void setOrgGroupPermissionPersistence(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
 	}
 
@@ -306,6 +326,7 @@ public class PhoneLocalServiceUtil {
 	public static void setOrgGroupPermissionFinder(
 		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
@@ -318,6 +339,7 @@ public class PhoneLocalServiceUtil {
 	public static void setOrgGroupRolePersistence(
 		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
 	}
 
@@ -330,6 +352,7 @@ public class PhoneLocalServiceUtil {
 	public static void setOrgLaborPersistence(
 		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setOrgLaborPersistence(orgLaborPersistence);
 	}
 
@@ -342,6 +365,7 @@ public class PhoneLocalServiceUtil {
 	public static void setPasswordPolicyPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
@@ -354,6 +378,7 @@ public class PhoneLocalServiceUtil {
 	public static void setPasswordPolicyFinder(
 		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
 	}
 
@@ -366,6 +391,7 @@ public class PhoneLocalServiceUtil {
 	public static void setPasswordPolicyRelPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
 	}
 
@@ -378,6 +404,7 @@ public class PhoneLocalServiceUtil {
 	public static void setPasswordTrackerPersistence(
 		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
 	}
 
@@ -390,6 +417,7 @@ public class PhoneLocalServiceUtil {
 	public static void setPermissionPersistence(
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setPermissionPersistence(permissionPersistence);
 	}
 
@@ -402,6 +430,7 @@ public class PhoneLocalServiceUtil {
 	public static void setPermissionFinder(
 		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setPermissionFinder(permissionFinder);
 	}
 
@@ -414,6 +443,7 @@ public class PhoneLocalServiceUtil {
 	public static void setPermissionUserFinder(
 		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
@@ -426,6 +456,7 @@ public class PhoneLocalServiceUtil {
 	public static void setPhonePersistence(
 		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setPhonePersistence(phonePersistence);
 	}
 
@@ -438,6 +469,7 @@ public class PhoneLocalServiceUtil {
 	public static void setPluginSettingPersistence(
 		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setPluginSettingPersistence(pluginSettingPersistence);
 	}
 
@@ -450,6 +482,7 @@ public class PhoneLocalServiceUtil {
 	public static void setPortletPersistence(
 		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setPortletPersistence(portletPersistence);
 	}
 
@@ -462,6 +495,7 @@ public class PhoneLocalServiceUtil {
 	public static void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
@@ -474,6 +508,7 @@ public class PhoneLocalServiceUtil {
 	public static void setPortletPreferencesFinder(
 		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
@@ -486,6 +521,7 @@ public class PhoneLocalServiceUtil {
 	public static void setRegionPersistence(
 		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setRegionPersistence(regionPersistence);
 	}
 
@@ -498,6 +534,7 @@ public class PhoneLocalServiceUtil {
 	public static void setReleasePersistence(
 		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setReleasePersistence(releasePersistence);
 	}
 
@@ -510,6 +547,7 @@ public class PhoneLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -522,6 +560,7 @@ public class PhoneLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -534,6 +573,7 @@ public class PhoneLocalServiceUtil {
 	public static void setResourceCodePersistence(
 		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setResourceCodePersistence(resourceCodePersistence);
 	}
 
@@ -546,6 +586,7 @@ public class PhoneLocalServiceUtil {
 	public static void setRolePersistence(
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setRolePersistence(rolePersistence);
 	}
 
@@ -558,6 +599,7 @@ public class PhoneLocalServiceUtil {
 	public static void setRoleFinder(
 		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setRoleFinder(roleFinder);
 	}
 
@@ -570,6 +612,7 @@ public class PhoneLocalServiceUtil {
 	public static void setServiceComponentPersistence(
 		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
@@ -582,6 +625,7 @@ public class PhoneLocalServiceUtil {
 	public static void setSubscriptionPersistence(
 		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
@@ -594,6 +638,7 @@ public class PhoneLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -606,6 +651,7 @@ public class PhoneLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setUserFinder(userFinder);
 	}
 
@@ -618,6 +664,7 @@ public class PhoneLocalServiceUtil {
 	public static void setUserGroupPersistence(
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setUserGroupPersistence(userGroupPersistence);
 	}
 
@@ -630,6 +677,7 @@ public class PhoneLocalServiceUtil {
 	public static void setUserGroupFinder(
 		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
@@ -642,6 +690,7 @@ public class PhoneLocalServiceUtil {
 	public static void setUserGroupRolePersistence(
 		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
 	}
 
@@ -654,6 +703,7 @@ public class PhoneLocalServiceUtil {
 	public static void setUserIdMapperPersistence(
 		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
 	}
 
@@ -666,6 +716,7 @@ public class PhoneLocalServiceUtil {
 	public static void setUserTrackerPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setUserTrackerPersistence(userTrackerPersistence);
 	}
 
@@ -678,6 +729,7 @@ public class PhoneLocalServiceUtil {
 	public static void setUserTrackerPathPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
@@ -690,11 +742,13 @@ public class PhoneLocalServiceUtil {
 	public static void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.setWebsitePersistence(websitePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.afterPropertiesSet();
 	}
 
@@ -713,12 +767,14 @@ public class PhoneLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.deletePhone(phoneId);
 	}
 
 	public static void deletePhones(long companyId, java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
 		phoneLocalService.deletePhones(companyId, className, classPK);
 	}
 

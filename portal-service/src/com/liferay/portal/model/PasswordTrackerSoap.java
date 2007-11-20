@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="PasswordTrackerSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.PasswordTrackerServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.PasswordTrackerServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class PasswordTrackerSoap implements Serializable {
 	public static PasswordTrackerSoap toSoapModel(PasswordTracker model) {
 		PasswordTrackerSoap soapModel = new PasswordTrackerSoap();
+
 		soapModel.setPasswordTrackerId(model.getPasswordTrackerId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setCreateDate(model.getCreateDate());
@@ -61,6 +63,7 @@ public class PasswordTrackerSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			PasswordTracker model = (PasswordTracker)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

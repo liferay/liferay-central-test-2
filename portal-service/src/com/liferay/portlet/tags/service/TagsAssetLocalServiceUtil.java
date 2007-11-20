@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.tags.service;
 
+
 /**
- * <a href="TagsAssetLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsAssetServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.tags.service.TagsAssetLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.tags.TagsAssetService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory</code> is
- * responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.tags.TagsAssetServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.TagsAssetLocalService
- * @see com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory
+ * @see com.liferay.portlet.tags.service.TagsAssetService
+ * @see com.liferay.portlet.tags.service.TagsAssetServiceFactory
  *
  */
 public class TagsAssetLocalServiceUtil {
@@ -90,6 +92,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setTagsAssetPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setTagsAssetPersistence(tagsAssetPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setTagsAssetFinder(
 		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setTagsAssetFinder(tagsAssetFinder);
 	}
 
@@ -114,6 +118,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setTagsEntryPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setTagsEntryPersistence(tagsEntryPersistence);
 	}
 
@@ -126,6 +131,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setTagsEntryFinder(
 		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setTagsEntryFinder(tagsEntryFinder);
 	}
 
@@ -138,6 +144,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setTagsPropertyPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence tagsPropertyPersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setTagsPropertyPersistence(tagsPropertyPersistence);
 	}
 
@@ -150,6 +157,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setTagsPropertyFinder(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyFinder tagsPropertyFinder) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setTagsPropertyFinder(tagsPropertyFinder);
 	}
 
@@ -162,6 +170,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setTagsPropertyKeyFinder(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder tagsPropertyKeyFinder) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setTagsPropertyKeyFinder(tagsPropertyKeyFinder);
 	}
 
@@ -174,6 +183,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setTagsSourcePersistence(
 		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setTagsSourcePersistence(tagsSourcePersistence);
 	}
 
@@ -186,6 +196,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -198,6 +209,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setUserFinder(userFinder);
 	}
 
@@ -210,6 +222,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setBlogsEntryPersistence(
 		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setBlogsEntryPersistence(blogsEntryPersistence);
 	}
 
@@ -222,6 +235,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setBlogsEntryFinder(
 		com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder blogsEntryFinder) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setBlogsEntryFinder(blogsEntryFinder);
 	}
 
@@ -234,6 +248,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setBookmarksEntryPersistence(
 		com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence bookmarksEntryPersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setBookmarksEntryPersistence(bookmarksEntryPersistence);
 	}
 
@@ -246,6 +261,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setBookmarksEntryFinder(
 		com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder bookmarksEntryFinder) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setBookmarksEntryFinder(bookmarksEntryFinder);
 	}
 
@@ -258,6 +274,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setDLFileEntryPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence dlFileEntryPersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setDLFileEntryPersistence(dlFileEntryPersistence);
 	}
 
@@ -270,6 +287,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setDLFileEntryFinder(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder dlFileEntryFinder) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setDLFileEntryFinder(dlFileEntryFinder);
 	}
 
@@ -282,6 +300,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setJournalArticlePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setJournalArticlePersistence(journalArticlePersistence);
 	}
 
@@ -294,6 +313,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setJournalArticleFinder(
 		com.liferay.portlet.journal.service.persistence.JournalArticleFinder journalArticleFinder) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setJournalArticleFinder(journalArticleFinder);
 	}
 
@@ -306,6 +326,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setJournalArticleResourcePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setJournalArticleResourcePersistence(journalArticleResourcePersistence);
 	}
 
@@ -318,6 +339,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setMBMessagePersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setMBMessagePersistence(mbMessagePersistence);
 	}
 
@@ -330,6 +352,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setMBMessageFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setMBMessageFinder(mbMessageFinder);
 	}
 
@@ -342,6 +365,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setWikiPagePersistence(
 		com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setWikiPagePersistence(wikiPagePersistence);
 	}
 
@@ -354,6 +378,7 @@ public class TagsAssetLocalServiceUtil {
 	public static void setWikiPageFinder(
 		com.liferay.portlet.wiki.service.persistence.WikiPageFinder wikiPageFinder) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setWikiPageFinder(wikiPageFinder);
 	}
 
@@ -366,11 +391,13 @@ public class TagsAssetLocalServiceUtil {
 	public static void setWikiPageResourcePersistence(
 		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence) {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.setWikiPageResourcePersistence(wikiPageResourcePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.afterPropertiesSet();
 	}
 
@@ -378,6 +405,7 @@ public class TagsAssetLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.deleteAsset(assetId);
 	}
 
@@ -385,6 +413,7 @@ public class TagsAssetLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.deleteAsset(className, classPK);
 	}
 
@@ -393,6 +422,7 @@ public class TagsAssetLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.deleteAsset(asset);
 	}
 
@@ -661,6 +691,7 @@ public class TagsAssetLocalServiceUtil {
 		java.lang.String[] entryNames)
 		throws com.liferay.portal.PortalException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
 		tagsAssetLocalService.validate(className, entryNames);
 	}
 }

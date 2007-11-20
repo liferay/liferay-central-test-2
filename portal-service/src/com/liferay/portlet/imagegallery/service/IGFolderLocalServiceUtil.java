@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.imagegallery.service;
 
+
 /**
- * <a href="IGFolderLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="IGFolderServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.imagegallery.service.IGFolderLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.imagegallery.IGFolderService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.imagegallery.service.IGFolderLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.imagegallery.IGFolderServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.imagegallery.service.IGFolderLocalService
- * @see com.liferay.portlet.imagegallery.service.IGFolderLocalServiceFactory
+ * @see com.liferay.portlet.imagegallery.service.IGFolderService
+ * @see com.liferay.portlet.imagegallery.service.IGFolderServiceFactory
  *
  */
 public class IGFolderLocalServiceUtil {
@@ -90,6 +92,7 @@ public class IGFolderLocalServiceUtil {
 	public static void setIGFolderPersistence(
 		com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence) {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.setIGFolderPersistence(igFolderPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class IGFolderLocalServiceUtil {
 	public static void setIGImagePersistence(
 		com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence) {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.setIGImagePersistence(igImagePersistence);
 	}
 
@@ -114,6 +118,7 @@ public class IGFolderLocalServiceUtil {
 	public static void setIGImageFinder(
 		com.liferay.portlet.imagegallery.service.persistence.IGImageFinder igImageFinder) {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.setIGImageFinder(igImageFinder);
 	}
 
@@ -126,6 +131,7 @@ public class IGFolderLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -138,6 +144,7 @@ public class IGFolderLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -150,6 +157,7 @@ public class IGFolderLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -162,6 +170,7 @@ public class IGFolderLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.setUserFinder(userFinder);
 	}
 
@@ -174,6 +183,7 @@ public class IGFolderLocalServiceUtil {
 	public static void setTagsEntryPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.setTagsEntryPersistence(tagsEntryPersistence);
 	}
 
@@ -186,11 +196,13 @@ public class IGFolderLocalServiceUtil {
 	public static void setTagsEntryFinder(
 		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder) {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.setTagsEntryFinder(tagsEntryFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.afterPropertiesSet();
 	}
 
@@ -268,6 +280,7 @@ public class IGFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.addFolderResources(folderId,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -278,6 +291,7 @@ public class IGFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.addFolderResources(folder,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -288,6 +302,7 @@ public class IGFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.addFolderResources(folderId, communityPermissions,
 			guestPermissions);
 	}
@@ -299,6 +314,7 @@ public class IGFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.addFolderResources(folder, communityPermissions,
 			guestPermissions);
 	}
@@ -307,6 +323,7 @@ public class IGFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.deleteFolder(folderId);
 	}
 
@@ -315,6 +332,7 @@ public class IGFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.deleteFolder(folder);
 	}
 
@@ -322,6 +340,7 @@ public class IGFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.deleteFolders(groupId);
 	}
 
@@ -366,12 +385,14 @@ public class IGFolderLocalServiceUtil {
 	public static void getSubfolderIds(java.util.List folderIds, long groupId,
 		long folderId) throws com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
 	}
 
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
 		igFolderLocalService.reIndex(ids);
 	}
 

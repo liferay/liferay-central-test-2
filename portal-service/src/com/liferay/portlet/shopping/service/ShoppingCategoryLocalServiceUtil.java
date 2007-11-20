@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.shopping.service;
 
+
 /**
- * <a href="ShoppingCategoryLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingCategoryServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.shopping.service.ShoppingCategoryLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.shopping.ShoppingCategoryService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.shopping.ShoppingCategoryServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.shopping.service.ShoppingCategoryLocalService
- * @see com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceFactory
+ * @see com.liferay.portlet.shopping.service.ShoppingCategoryService
+ * @see com.liferay.portlet.shopping.service.ShoppingCategoryServiceFactory
  *
  */
 public class ShoppingCategoryLocalServiceUtil {
@@ -91,6 +93,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setShoppingCartPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence shoppingCartPersistence) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setShoppingCartPersistence(shoppingCartPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setShoppingCategoryPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence shoppingCategoryPersistence) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setShoppingCategoryPersistence(shoppingCategoryPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setShoppingCouponPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence shoppingCouponPersistence) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setShoppingCouponPersistence(shoppingCouponPersistence);
 	}
 
@@ -127,6 +132,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setShoppingCouponFinder(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder shoppingCouponFinder) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setShoppingCouponFinder(shoppingCouponFinder);
 	}
 
@@ -139,6 +145,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setShoppingItemPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence shoppingItemPersistence) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setShoppingItemPersistence(shoppingItemPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setShoppingItemFinder(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder shoppingItemFinder) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setShoppingItemFinder(shoppingItemFinder);
 	}
 
@@ -163,6 +171,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setShoppingItemFieldPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence shoppingItemFieldPersistence) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setShoppingItemFieldPersistence(shoppingItemFieldPersistence);
 	}
 
@@ -175,6 +184,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setShoppingItemPricePersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence shoppingItemPricePersistence) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setShoppingItemPricePersistence(shoppingItemPricePersistence);
 	}
 
@@ -187,6 +197,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setShoppingOrderPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence shoppingOrderPersistence) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setShoppingOrderPersistence(shoppingOrderPersistence);
 	}
 
@@ -199,6 +210,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setShoppingOrderFinder(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder shoppingOrderFinder) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setShoppingOrderFinder(shoppingOrderFinder);
 	}
 
@@ -211,6 +223,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setShoppingOrderItemPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence shoppingOrderItemPersistence) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setShoppingOrderItemPersistence(shoppingOrderItemPersistence);
 	}
 
@@ -223,6 +236,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -235,6 +249,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -247,6 +262,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -259,11 +275,13 @@ public class ShoppingCategoryLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.afterPropertiesSet();
 	}
 
@@ -314,6 +332,7 @@ public class ShoppingCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.addCategoryResources(categoryId,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -324,6 +343,7 @@ public class ShoppingCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.addCategoryResources(category,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -334,6 +354,7 @@ public class ShoppingCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.addCategoryResources(categoryId,
 			communityPermissions, guestPermissions);
 	}
@@ -345,6 +366,7 @@ public class ShoppingCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.addCategoryResources(category,
 			communityPermissions, guestPermissions);
 	}
@@ -353,6 +375,7 @@ public class ShoppingCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.deleteCategory(categoryId);
 	}
 
@@ -361,6 +384,7 @@ public class ShoppingCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.deleteCategory(category);
 	}
 
@@ -427,6 +451,7 @@ public class ShoppingCategoryLocalServiceUtil {
 		long groupId, long categoryId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
 		shoppingCategoryLocalService.getSubcategoryIds(categoryIds, groupId,
 			categoryId);
 	}

@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.tags.service;
 
+
 /**
- * <a href="TagsSourceLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsSourceServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.tags.service.TagsSourceLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.tags.TagsSourceService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory</code> is
- * responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.tags.TagsSourceServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.TagsSourceLocalService
- * @see com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory
+ * @see com.liferay.portlet.tags.service.TagsSourceService
+ * @see com.liferay.portlet.tags.service.TagsSourceServiceFactory
  *
  */
 public class TagsSourceLocalServiceUtil {
@@ -90,6 +92,7 @@ public class TagsSourceLocalServiceUtil {
 	public static void setTagsAssetPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence) {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
 		tagsSourceLocalService.setTagsAssetPersistence(tagsAssetPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class TagsSourceLocalServiceUtil {
 	public static void setTagsAssetFinder(
 		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder) {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
 		tagsSourceLocalService.setTagsAssetFinder(tagsAssetFinder);
 	}
 
@@ -114,6 +118,7 @@ public class TagsSourceLocalServiceUtil {
 	public static void setTagsEntryPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence) {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
 		tagsSourceLocalService.setTagsEntryPersistence(tagsEntryPersistence);
 	}
 
@@ -126,6 +131,7 @@ public class TagsSourceLocalServiceUtil {
 	public static void setTagsEntryFinder(
 		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder) {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
 		tagsSourceLocalService.setTagsEntryFinder(tagsEntryFinder);
 	}
 
@@ -138,6 +144,7 @@ public class TagsSourceLocalServiceUtil {
 	public static void setTagsPropertyPersistence(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence tagsPropertyPersistence) {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
 		tagsSourceLocalService.setTagsPropertyPersistence(tagsPropertyPersistence);
 	}
 
@@ -150,6 +157,7 @@ public class TagsSourceLocalServiceUtil {
 	public static void setTagsPropertyFinder(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyFinder tagsPropertyFinder) {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
 		tagsSourceLocalService.setTagsPropertyFinder(tagsPropertyFinder);
 	}
 
@@ -162,6 +170,7 @@ public class TagsSourceLocalServiceUtil {
 	public static void setTagsPropertyKeyFinder(
 		com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder tagsPropertyKeyFinder) {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
 		tagsSourceLocalService.setTagsPropertyKeyFinder(tagsPropertyKeyFinder);
 	}
 
@@ -174,11 +183,13 @@ public class TagsSourceLocalServiceUtil {
 	public static void setTagsSourcePersistence(
 		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence) {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
 		tagsSourceLocalService.setTagsSourcePersistence(tagsSourcePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
 		tagsSourceLocalService.afterPropertiesSet();
 	}
 }

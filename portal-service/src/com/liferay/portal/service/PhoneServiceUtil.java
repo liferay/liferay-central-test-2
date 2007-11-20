@@ -22,23 +22,25 @@
 
 package com.liferay.portal.service;
 
+
 /**
  * <a href="PhoneServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.PhoneService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.PhoneService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.PhoneServiceFactory</code> is responsible for
+ * <code>com.liferay.portal.PhoneServiceFactory</code> is responsible for
  * the lookup of the bean.
  * </p>
  *
@@ -64,6 +66,7 @@ public class PhoneServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PhoneService phoneService = PhoneServiceFactory.getService();
+
 		phoneService.deletePhone(phoneId);
 	}
 

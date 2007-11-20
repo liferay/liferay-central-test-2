@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.blogs.service;
 
+
 /**
- * <a href="BlogsStatsUserLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="BlogsStatsUserServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.blogs.service.BlogsStatsUserLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.blogs.BlogsStatsUserService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.blogs.BlogsStatsUserServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.blogs.service.BlogsStatsUserLocalService
- * @see com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory
+ * @see com.liferay.portlet.blogs.service.BlogsStatsUserService
+ * @see com.liferay.portlet.blogs.service.BlogsStatsUserServiceFactory
  *
  */
 public class BlogsStatsUserLocalServiceUtil {
@@ -91,6 +93,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	public static void setBlogsCategoryPersistence(
 		com.liferay.portlet.blogs.service.persistence.BlogsCategoryPersistence blogsCategoryPersistence) {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
 		blogsStatsUserLocalService.setBlogsCategoryPersistence(blogsCategoryPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	public static void setBlogsEntryPersistence(
 		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence) {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
 		blogsStatsUserLocalService.setBlogsEntryPersistence(blogsEntryPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	public static void setBlogsEntryFinder(
 		com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder blogsEntryFinder) {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
 		blogsStatsUserLocalService.setBlogsEntryFinder(blogsEntryFinder);
 	}
 
@@ -127,6 +132,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	public static void setBlogsStatsUserPersistence(
 		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence) {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
 		blogsStatsUserLocalService.setBlogsStatsUserPersistence(blogsStatsUserPersistence);
 	}
 
@@ -139,6 +145,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	public static void setBlogsStatsUserFinder(
 		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder blogsStatsUserFinder) {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
 		blogsStatsUserLocalService.setBlogsStatsUserFinder(blogsStatsUserFinder);
 	}
 
@@ -151,6 +158,7 @@ public class BlogsStatsUserLocalServiceUtil {
 	public static void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
 		blogsStatsUserLocalService.setGroupPersistence(groupPersistence);
 	}
 
@@ -163,23 +171,27 @@ public class BlogsStatsUserLocalServiceUtil {
 	public static void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
 		blogsStatsUserLocalService.setGroupFinder(groupFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
 		blogsStatsUserLocalService.afterPropertiesSet();
 	}
 
 	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
 		blogsStatsUserLocalService.deleteStatsUserByGroupId(groupId);
 	}
 
 	public static void deleteStatsUserByUserId(long userId)
 		throws com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
 		blogsStatsUserLocalService.deleteStatsUserByUserId(userId);
 	}
 
@@ -246,6 +258,7 @@ public class BlogsStatsUserLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
 		blogsStatsUserLocalService.updateStatsUser(groupId, userId, lastPostDate);
 	}
 }

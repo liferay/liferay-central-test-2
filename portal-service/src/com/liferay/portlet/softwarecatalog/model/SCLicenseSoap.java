@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="SCLicenseSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.softwarecatalog.service.http.SCLicenseServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.softwarecatalog.service.http.SCLicenseServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,6 +48,7 @@ import java.util.List;
 public class SCLicenseSoap implements Serializable {
 	public static SCLicenseSoap toSoapModel(SCLicense model) {
 		SCLicenseSoap soapModel = new SCLicenseSoap();
+
 		soapModel.setLicenseId(model.getLicenseId());
 		soapModel.setName(model.getName());
 		soapModel.setUrl(model.getUrl());
@@ -62,6 +64,7 @@ public class SCLicenseSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			SCLicense model = (SCLicense)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

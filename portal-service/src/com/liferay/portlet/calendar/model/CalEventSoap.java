@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="CalEventSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.calendar.service.http.CalEventServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.calendar.service.http.CalEventServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class CalEventSoap implements Serializable {
 	public static CalEventSoap toSoapModel(CalEvent model) {
 		CalEventSoap soapModel = new CalEventSoap();
+
 		soapModel.setUuid(model.getUuid());
 		soapModel.setEventId(model.getEventId());
 		soapModel.setGroupId(model.getGroupId());
@@ -79,6 +81,7 @@ public class CalEventSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			CalEvent model = (CalEvent)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

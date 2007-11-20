@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="WebsiteSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.WebsiteServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.WebsiteServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class WebsiteSoap implements Serializable {
 	public static WebsiteSoap toSoapModel(Website model) {
 		WebsiteSoap soapModel = new WebsiteSoap();
+
 		soapModel.setWebsiteId(model.getWebsiteId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -68,6 +70,7 @@ public class WebsiteSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			Website model = (Website)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

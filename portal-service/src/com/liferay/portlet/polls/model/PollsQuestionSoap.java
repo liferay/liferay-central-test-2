@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="PollsQuestionSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.polls.service.http.PollsQuestionServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.polls.service.http.PollsQuestionServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class PollsQuestionSoap implements Serializable {
 	public static PollsQuestionSoap toSoapModel(PollsQuestion model) {
 		PollsQuestionSoap soapModel = new PollsQuestionSoap();
+
 		soapModel.setUuid(model.getUuid());
 		soapModel.setQuestionId(model.getQuestionId());
 		soapModel.setGroupId(model.getGroupId());
@@ -69,6 +71,7 @@ public class PollsQuestionSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			PollsQuestion model = (PollsQuestion)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

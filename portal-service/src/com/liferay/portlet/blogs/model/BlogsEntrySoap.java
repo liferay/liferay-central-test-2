@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="BlogsEntrySoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.blogs.service.http.BlogsEntryServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.blogs.service.http.BlogsEntryServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class BlogsEntrySoap implements Serializable {
 	public static BlogsEntrySoap toSoapModel(BlogsEntry model) {
 		BlogsEntrySoap soapModel = new BlogsEntrySoap();
+
 		soapModel.setUuid(model.getUuid());
 		soapModel.setEntryId(model.getEntryId());
 		soapModel.setGroupId(model.getGroupId());
@@ -70,6 +72,7 @@ public class BlogsEntrySoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			BlogsEntry model = (BlogsEntry)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

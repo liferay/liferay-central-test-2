@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.calendar.service;
 
+
 /**
- * <a href="CalEventLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="CalEventServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.calendar.service.CalEventLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.calendar.CalEventService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.calendar.service.CalEventLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.calendar.CalEventServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.calendar.service.CalEventLocalService
- * @see com.liferay.portlet.calendar.service.CalEventLocalServiceFactory
+ * @see com.liferay.portlet.calendar.service.CalEventService
+ * @see com.liferay.portlet.calendar.service.CalEventServiceFactory
  *
  */
 public class CalEventLocalServiceUtil {
@@ -90,6 +92,7 @@ public class CalEventLocalServiceUtil {
 	public static void setCalEventPersistence(
 		com.liferay.portlet.calendar.service.persistence.CalEventPersistence calEventPersistence) {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.setCalEventPersistence(calEventPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class CalEventLocalServiceUtil {
 	public static void setCalEventFinder(
 		com.liferay.portlet.calendar.service.persistence.CalEventFinder calEventFinder) {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.setCalEventFinder(calEventFinder);
 	}
 
@@ -114,6 +118,7 @@ public class CalEventLocalServiceUtil {
 	public static void setCompanyPersistence(
 		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.setCompanyPersistence(companyPersistence);
 	}
 
@@ -126,6 +131,7 @@ public class CalEventLocalServiceUtil {
 	public static void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class CalEventLocalServiceUtil {
 	public static void setPortletPreferencesFinder(
 		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
@@ -150,6 +157,7 @@ public class CalEventLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -162,6 +170,7 @@ public class CalEventLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -174,6 +183,7 @@ public class CalEventLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -186,11 +196,13 @@ public class CalEventLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.afterPropertiesSet();
 	}
 
@@ -293,6 +305,7 @@ public class CalEventLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.addEventResources(eventId,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -303,6 +316,7 @@ public class CalEventLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.addEventResources(event, addCommunityPermissions,
 			addGuestPermissions);
 	}
@@ -313,6 +327,7 @@ public class CalEventLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.addEventResources(eventId, communityPermissions,
 			guestPermissions);
 	}
@@ -324,6 +339,7 @@ public class CalEventLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.addEventResources(event, communityPermissions,
 			guestPermissions);
 	}
@@ -332,6 +348,7 @@ public class CalEventLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.checkEvents();
 	}
 
@@ -339,6 +356,7 @@ public class CalEventLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.deleteEvent(eventId);
 	}
 
@@ -347,6 +365,7 @@ public class CalEventLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.deleteEvent(event);
 	}
 
@@ -354,6 +373,7 @@ public class CalEventLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.deleteEvents(groupId);
 	}
 
@@ -437,6 +457,7 @@ public class CalEventLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
 		calEventLocalService.importICal4j(userId, plid, file);
 	}
 

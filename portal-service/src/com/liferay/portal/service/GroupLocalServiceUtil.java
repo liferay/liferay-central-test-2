@@ -22,30 +22,32 @@
 
 package com.liferay.portal.service;
 
+
 /**
- * <a href="GroupLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="GroupServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.GroupLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.GroupService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.GroupLocalServiceFactory</code> is responsible
- * for the lookup of the bean.
+ * <code>com.liferay.portal.GroupServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.GroupLocalService
- * @see com.liferay.portal.service.GroupLocalServiceFactory
+ * @see com.liferay.portal.service.GroupService
+ * @see com.liferay.portal.service.GroupServiceFactory
  *
  */
 public class GroupLocalServiceUtil {
@@ -90,6 +92,7 @@ public class GroupLocalServiceUtil {
 	public static void setAccountPersistence(
 		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setAccountPersistence(accountPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class GroupLocalServiceUtil {
 	public static void setAddressPersistence(
 		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setAddressPersistence(addressPersistence);
 	}
 
@@ -114,6 +118,7 @@ public class GroupLocalServiceUtil {
 	public static void setClassNamePersistence(
 		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setClassNamePersistence(classNamePersistence);
 	}
 
@@ -126,6 +131,7 @@ public class GroupLocalServiceUtil {
 	public static void setCompanyPersistence(
 		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setCompanyPersistence(companyPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class GroupLocalServiceUtil {
 	public static void setContactPersistence(
 		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setContactPersistence(contactPersistence);
 	}
 
@@ -150,6 +157,7 @@ public class GroupLocalServiceUtil {
 	public static void setCountryPersistence(
 		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setCountryPersistence(countryPersistence);
 	}
 
@@ -162,6 +170,7 @@ public class GroupLocalServiceUtil {
 	public static void setEmailAddressPersistence(
 		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
@@ -174,6 +183,7 @@ public class GroupLocalServiceUtil {
 	public static void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setGroupPersistence(groupPersistence);
 	}
 
@@ -186,6 +196,7 @@ public class GroupLocalServiceUtil {
 	public static void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setGroupFinder(groupFinder);
 	}
 
@@ -198,6 +209,7 @@ public class GroupLocalServiceUtil {
 	public static void setImagePersistence(
 		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setImagePersistence(imagePersistence);
 	}
 
@@ -210,6 +222,7 @@ public class GroupLocalServiceUtil {
 	public static void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setLayoutPersistence(layoutPersistence);
 	}
 
@@ -222,6 +235,7 @@ public class GroupLocalServiceUtil {
 	public static void setLayoutFinder(
 		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setLayoutFinder(layoutFinder);
 	}
 
@@ -234,6 +248,7 @@ public class GroupLocalServiceUtil {
 	public static void setLayoutSetPersistence(
 		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setLayoutSetPersistence(layoutSetPersistence);
 	}
 
@@ -246,6 +261,7 @@ public class GroupLocalServiceUtil {
 	public static void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setListTypePersistence(listTypePersistence);
 	}
 
@@ -258,6 +274,7 @@ public class GroupLocalServiceUtil {
 	public static void setMembershipRequestPersistence(
 		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
 	}
 
@@ -270,6 +287,7 @@ public class GroupLocalServiceUtil {
 	public static void setOrganizationPersistence(
 		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
@@ -282,6 +300,7 @@ public class GroupLocalServiceUtil {
 	public static void setOrganizationFinder(
 		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setOrganizationFinder(organizationFinder);
 	}
 
@@ -294,6 +313,7 @@ public class GroupLocalServiceUtil {
 	public static void setOrgGroupPermissionPersistence(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
 	}
 
@@ -306,6 +326,7 @@ public class GroupLocalServiceUtil {
 	public static void setOrgGroupPermissionFinder(
 		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
@@ -318,6 +339,7 @@ public class GroupLocalServiceUtil {
 	public static void setOrgGroupRolePersistence(
 		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
 	}
 
@@ -330,6 +352,7 @@ public class GroupLocalServiceUtil {
 	public static void setOrgLaborPersistence(
 		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setOrgLaborPersistence(orgLaborPersistence);
 	}
 
@@ -342,6 +365,7 @@ public class GroupLocalServiceUtil {
 	public static void setPasswordPolicyPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
@@ -354,6 +378,7 @@ public class GroupLocalServiceUtil {
 	public static void setPasswordPolicyFinder(
 		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
 	}
 
@@ -366,6 +391,7 @@ public class GroupLocalServiceUtil {
 	public static void setPasswordPolicyRelPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
 	}
 
@@ -378,6 +404,7 @@ public class GroupLocalServiceUtil {
 	public static void setPasswordTrackerPersistence(
 		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
 	}
 
@@ -390,6 +417,7 @@ public class GroupLocalServiceUtil {
 	public static void setPermissionPersistence(
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPermissionPersistence(permissionPersistence);
 	}
 
@@ -402,6 +430,7 @@ public class GroupLocalServiceUtil {
 	public static void setPermissionFinder(
 		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPermissionFinder(permissionFinder);
 	}
 
@@ -414,6 +443,7 @@ public class GroupLocalServiceUtil {
 	public static void setPermissionUserFinder(
 		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
@@ -426,6 +456,7 @@ public class GroupLocalServiceUtil {
 	public static void setPhonePersistence(
 		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPhonePersistence(phonePersistence);
 	}
 
@@ -438,6 +469,7 @@ public class GroupLocalServiceUtil {
 	public static void setPluginSettingPersistence(
 		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPluginSettingPersistence(pluginSettingPersistence);
 	}
 
@@ -450,6 +482,7 @@ public class GroupLocalServiceUtil {
 	public static void setPortletPersistence(
 		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPortletPersistence(portletPersistence);
 	}
 
@@ -462,6 +495,7 @@ public class GroupLocalServiceUtil {
 	public static void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
@@ -474,6 +508,7 @@ public class GroupLocalServiceUtil {
 	public static void setPortletPreferencesFinder(
 		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
@@ -486,6 +521,7 @@ public class GroupLocalServiceUtil {
 	public static void setRegionPersistence(
 		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setRegionPersistence(regionPersistence);
 	}
 
@@ -498,6 +534,7 @@ public class GroupLocalServiceUtil {
 	public static void setReleasePersistence(
 		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setReleasePersistence(releasePersistence);
 	}
 
@@ -510,6 +547,7 @@ public class GroupLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -522,6 +560,7 @@ public class GroupLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -534,6 +573,7 @@ public class GroupLocalServiceUtil {
 	public static void setResourceCodePersistence(
 		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setResourceCodePersistence(resourceCodePersistence);
 	}
 
@@ -546,6 +586,7 @@ public class GroupLocalServiceUtil {
 	public static void setRolePersistence(
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setRolePersistence(rolePersistence);
 	}
 
@@ -558,6 +599,7 @@ public class GroupLocalServiceUtil {
 	public static void setRoleFinder(
 		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setRoleFinder(roleFinder);
 	}
 
@@ -570,6 +612,7 @@ public class GroupLocalServiceUtil {
 	public static void setServiceComponentPersistence(
 		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
@@ -582,6 +625,7 @@ public class GroupLocalServiceUtil {
 	public static void setSubscriptionPersistence(
 		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
@@ -594,6 +638,7 @@ public class GroupLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -606,6 +651,7 @@ public class GroupLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setUserFinder(userFinder);
 	}
 
@@ -618,6 +664,7 @@ public class GroupLocalServiceUtil {
 	public static void setUserGroupPersistence(
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setUserGroupPersistence(userGroupPersistence);
 	}
 
@@ -630,6 +677,7 @@ public class GroupLocalServiceUtil {
 	public static void setUserGroupFinder(
 		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
@@ -642,6 +690,7 @@ public class GroupLocalServiceUtil {
 	public static void setUserGroupRolePersistence(
 		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
 	}
 
@@ -654,6 +703,7 @@ public class GroupLocalServiceUtil {
 	public static void setUserIdMapperPersistence(
 		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
 	}
 
@@ -666,6 +716,7 @@ public class GroupLocalServiceUtil {
 	public static void setUserTrackerPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setUserTrackerPersistence(userTrackerPersistence);
 	}
 
@@ -678,6 +729,7 @@ public class GroupLocalServiceUtil {
 	public static void setUserTrackerPathPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
@@ -690,6 +742,7 @@ public class GroupLocalServiceUtil {
 	public static void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setWebsitePersistence(websitePersistence);
 	}
 
@@ -702,6 +755,7 @@ public class GroupLocalServiceUtil {
 	public static void setBlogsEntryPersistence(
 		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setBlogsEntryPersistence(blogsEntryPersistence);
 	}
 
@@ -714,6 +768,7 @@ public class GroupLocalServiceUtil {
 	public static void setBlogsEntryFinder(
 		com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder blogsEntryFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setBlogsEntryFinder(blogsEntryFinder);
 	}
 
@@ -726,6 +781,7 @@ public class GroupLocalServiceUtil {
 	public static void setBlogsStatsUserPersistence(
 		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setBlogsStatsUserPersistence(blogsStatsUserPersistence);
 	}
 
@@ -738,6 +794,7 @@ public class GroupLocalServiceUtil {
 	public static void setBlogsStatsUserFinder(
 		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder blogsStatsUserFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setBlogsStatsUserFinder(blogsStatsUserFinder);
 	}
 
@@ -750,6 +807,7 @@ public class GroupLocalServiceUtil {
 	public static void setBookmarksFolderPersistence(
 		com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence bookmarksFolderPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setBookmarksFolderPersistence(bookmarksFolderPersistence);
 	}
 
@@ -762,6 +820,7 @@ public class GroupLocalServiceUtil {
 	public static void setCalEventPersistence(
 		com.liferay.portlet.calendar.service.persistence.CalEventPersistence calEventPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setCalEventPersistence(calEventPersistence);
 	}
 
@@ -774,6 +833,7 @@ public class GroupLocalServiceUtil {
 	public static void setCalEventFinder(
 		com.liferay.portlet.calendar.service.persistence.CalEventFinder calEventFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setCalEventFinder(calEventFinder);
 	}
 
@@ -786,6 +846,7 @@ public class GroupLocalServiceUtil {
 	public static void setDLFolderPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setDLFolderPersistence(dlFolderPersistence);
 	}
 
@@ -798,6 +859,7 @@ public class GroupLocalServiceUtil {
 	public static void setIGFolderPersistence(
 		com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setIGFolderPersistence(igFolderPersistence);
 	}
 
@@ -810,6 +872,7 @@ public class GroupLocalServiceUtil {
 	public static void setJournalArticlePersistence(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setJournalArticlePersistence(journalArticlePersistence);
 	}
 
@@ -822,6 +885,7 @@ public class GroupLocalServiceUtil {
 	public static void setJournalArticleFinder(
 		com.liferay.portlet.journal.service.persistence.JournalArticleFinder journalArticleFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setJournalArticleFinder(journalArticleFinder);
 	}
 
@@ -834,6 +898,7 @@ public class GroupLocalServiceUtil {
 	public static void setMBBanPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setMBBanPersistence(mbBanPersistence);
 	}
 
@@ -846,6 +911,7 @@ public class GroupLocalServiceUtil {
 	public static void setMBCategoryPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setMBCategoryPersistence(mbCategoryPersistence);
 	}
 
@@ -858,6 +924,7 @@ public class GroupLocalServiceUtil {
 	public static void setMBCategoryFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder mbCategoryFinder) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setMBCategoryFinder(mbCategoryFinder);
 	}
 
@@ -870,6 +937,7 @@ public class GroupLocalServiceUtil {
 	public static void setMBStatsUserPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setMBStatsUserPersistence(mbStatsUserPersistence);
 	}
 
@@ -882,6 +950,7 @@ public class GroupLocalServiceUtil {
 	public static void setPollsQuestionPersistence(
 		com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setPollsQuestionPersistence(pollsQuestionPersistence);
 	}
 
@@ -894,6 +963,7 @@ public class GroupLocalServiceUtil {
 	public static void setShoppingCartPersistence(
 		com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence shoppingCartPersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setShoppingCartPersistence(shoppingCartPersistence);
 	}
 
@@ -906,11 +976,13 @@ public class GroupLocalServiceUtil {
 	public static void setWikiNodePersistence(
 		com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setWikiNodePersistence(wikiNodePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.afterPropertiesSet();
 	}
 
@@ -942,6 +1014,7 @@ public class GroupLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.addRoleGroups(roleId, groupIds);
 	}
 
@@ -949,6 +1022,7 @@ public class GroupLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.addUserGroups(userId, groupIds);
 	}
 
@@ -956,6 +1030,7 @@ public class GroupLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.checkSystemGroups(companyId);
 	}
 
@@ -963,6 +1038,7 @@ public class GroupLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.deleteGroup(groupId);
 	}
 
@@ -1098,6 +1174,7 @@ public class GroupLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setRoleGroups(roleId, groupIds);
 	}
 
@@ -1105,6 +1182,7 @@ public class GroupLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.setUserGroups(userId, groupIds);
 	}
 
@@ -1112,6 +1190,7 @@ public class GroupLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.unsetRoleGroups(roleId, groupIds);
 	}
 
@@ -1119,6 +1198,7 @@ public class GroupLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
 		groupLocalService.unsetUserGroups(userId, groupIds);
 	}
 

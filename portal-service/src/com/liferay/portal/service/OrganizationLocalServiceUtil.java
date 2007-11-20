@@ -22,30 +22,32 @@
 
 package com.liferay.portal.service;
 
+
 /**
- * <a href="OrganizationLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrganizationServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.OrganizationLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.OrganizationService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.OrganizationLocalServiceFactory</code> is responsible
- * for the lookup of the bean.
+ * <code>com.liferay.portal.OrganizationServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.OrganizationLocalService
- * @see com.liferay.portal.service.OrganizationLocalServiceFactory
+ * @see com.liferay.portal.service.OrganizationService
+ * @see com.liferay.portal.service.OrganizationServiceFactory
  *
  */
 public class OrganizationLocalServiceUtil {
@@ -91,6 +93,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setAccountPersistence(
 		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setAccountPersistence(accountPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setAddressPersistence(
 		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setAddressPersistence(addressPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setClassNamePersistence(
 		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setClassNamePersistence(classNamePersistence);
 	}
 
@@ -127,6 +132,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setCompanyPersistence(
 		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setCompanyPersistence(companyPersistence);
 	}
 
@@ -139,6 +145,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setContactPersistence(
 		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setContactPersistence(contactPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setCountryPersistence(
 		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setCountryPersistence(countryPersistence);
 	}
 
@@ -163,6 +171,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setEmailAddressPersistence(
 		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
@@ -175,6 +184,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setGroupPersistence(groupPersistence);
 	}
 
@@ -187,6 +197,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setGroupFinder(groupFinder);
 	}
 
@@ -199,6 +210,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setImagePersistence(
 		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setImagePersistence(imagePersistence);
 	}
 
@@ -211,6 +223,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setLayoutPersistence(layoutPersistence);
 	}
 
@@ -223,6 +236,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setLayoutFinder(
 		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setLayoutFinder(layoutFinder);
 	}
 
@@ -235,6 +249,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setLayoutSetPersistence(
 		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setLayoutSetPersistence(layoutSetPersistence);
 	}
 
@@ -247,6 +262,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setListTypePersistence(listTypePersistence);
 	}
 
@@ -259,6 +275,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setMembershipRequestPersistence(
 		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
 	}
 
@@ -271,6 +288,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setOrganizationPersistence(
 		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
@@ -283,6 +301,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setOrganizationFinder(
 		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setOrganizationFinder(organizationFinder);
 	}
 
@@ -295,6 +314,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setOrgGroupPermissionPersistence(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
 	}
 
@@ -307,6 +327,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setOrgGroupPermissionFinder(
 		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
@@ -319,6 +340,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setOrgGroupRolePersistence(
 		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
 	}
 
@@ -331,6 +353,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setOrgLaborPersistence(
 		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setOrgLaborPersistence(orgLaborPersistence);
 	}
 
@@ -343,6 +366,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setPasswordPolicyPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
@@ -355,6 +379,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setPasswordPolicyFinder(
 		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
 	}
 
@@ -367,6 +392,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setPasswordPolicyRelPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
 	}
 
@@ -379,6 +405,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setPasswordTrackerPersistence(
 		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
 	}
 
@@ -391,6 +418,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setPermissionPersistence(
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setPermissionPersistence(permissionPersistence);
 	}
 
@@ -403,6 +431,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setPermissionFinder(
 		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setPermissionFinder(permissionFinder);
 	}
 
@@ -415,6 +444,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setPermissionUserFinder(
 		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
@@ -427,6 +457,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setPhonePersistence(
 		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setPhonePersistence(phonePersistence);
 	}
 
@@ -439,6 +470,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setPluginSettingPersistence(
 		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setPluginSettingPersistence(pluginSettingPersistence);
 	}
 
@@ -451,6 +483,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setPortletPersistence(
 		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setPortletPersistence(portletPersistence);
 	}
 
@@ -463,6 +496,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
@@ -475,6 +509,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setPortletPreferencesFinder(
 		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
@@ -487,6 +522,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setRegionPersistence(
 		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setRegionPersistence(regionPersistence);
 	}
 
@@ -499,6 +535,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setReleasePersistence(
 		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setReleasePersistence(releasePersistence);
 	}
 
@@ -511,6 +548,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -523,6 +561,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -535,6 +574,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setResourceCodePersistence(
 		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setResourceCodePersistence(resourceCodePersistence);
 	}
 
@@ -547,6 +587,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setRolePersistence(
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setRolePersistence(rolePersistence);
 	}
 
@@ -559,6 +600,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setRoleFinder(
 		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setRoleFinder(roleFinder);
 	}
 
@@ -571,6 +613,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setServiceComponentPersistence(
 		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
@@ -583,6 +626,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setSubscriptionPersistence(
 		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
@@ -595,6 +639,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -607,6 +652,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setUserFinder(userFinder);
 	}
 
@@ -619,6 +665,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setUserGroupPersistence(
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setUserGroupPersistence(userGroupPersistence);
 	}
 
@@ -631,6 +678,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setUserGroupFinder(
 		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
@@ -643,6 +691,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setUserGroupRolePersistence(
 		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
 	}
 
@@ -655,6 +704,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setUserIdMapperPersistence(
 		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
 	}
 
@@ -667,6 +717,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setUserTrackerPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setUserTrackerPersistence(userTrackerPersistence);
 	}
 
@@ -679,6 +730,7 @@ public class OrganizationLocalServiceUtil {
 	public static void setUserTrackerPathPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
@@ -691,11 +743,13 @@ public class OrganizationLocalServiceUtil {
 	public static void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setWebsitePersistence(websitePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.afterPropertiesSet();
 	}
 
@@ -704,6 +758,7 @@ public class OrganizationLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.addGroupOrganizations(groupId, organizationIds);
 	}
 
@@ -725,6 +780,7 @@ public class OrganizationLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.addOrganizationResources(userId, organization);
 	}
 
@@ -733,6 +789,7 @@ public class OrganizationLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.addPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}
@@ -741,6 +798,7 @@ public class OrganizationLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.deleteOrganization(organizationId);
 	}
 
@@ -749,6 +807,7 @@ public class OrganizationLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.deleteOrganization(organization);
 	}
 
@@ -1012,6 +1071,7 @@ public class OrganizationLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.setGroupOrganizations(groupId, organizationIds);
 	}
 
@@ -1020,6 +1080,7 @@ public class OrganizationLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.unsetGroupOrganizations(groupId,
 			organizationIds);
 	}
@@ -1029,6 +1090,7 @@ public class OrganizationLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
 		organizationLocalService.unsetPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}

@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.wiki.service;
 
+
 /**
- * <a href="WikiPageResourceLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="WikiPageResourceServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.wiki.service.WikiPageResourceLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.wiki.WikiPageResourceService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.wiki.WikiPageResourceServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.WikiPageResourceLocalService
- * @see com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory
+ * @see com.liferay.portlet.wiki.service.WikiPageResourceService
+ * @see com.liferay.portlet.wiki.service.WikiPageResourceServiceFactory
  *
  */
 public class WikiPageResourceLocalServiceUtil {
@@ -91,6 +93,7 @@ public class WikiPageResourceLocalServiceUtil {
 	public static void setWikiNodePersistence(
 		com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence) {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
 		wikiPageResourceLocalService.setWikiNodePersistence(wikiNodePersistence);
 	}
 
@@ -103,6 +106,7 @@ public class WikiPageResourceLocalServiceUtil {
 	public static void setWikiPagePersistence(
 		com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence) {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
 		wikiPageResourceLocalService.setWikiPagePersistence(wikiPagePersistence);
 	}
 
@@ -115,6 +119,7 @@ public class WikiPageResourceLocalServiceUtil {
 	public static void setWikiPageFinder(
 		com.liferay.portlet.wiki.service.persistence.WikiPageFinder wikiPageFinder) {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
 		wikiPageResourceLocalService.setWikiPageFinder(wikiPageFinder);
 	}
 
@@ -127,11 +132,13 @@ public class WikiPageResourceLocalServiceUtil {
 	public static void setWikiPageResourcePersistence(
 		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence) {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
 		wikiPageResourceLocalService.setWikiPageResourcePersistence(wikiPageResourcePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
 		wikiPageResourceLocalService.afterPropertiesSet();
 	}
 
@@ -139,6 +146,7 @@ public class WikiPageResourceLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
 		wikiPageResourceLocalService.deletePageResource(nodeId, title);
 	}
 

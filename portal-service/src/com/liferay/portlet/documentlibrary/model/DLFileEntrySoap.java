@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="DLFileEntrySoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.documentlibrary.service.http.DLFileEntryServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.documentlibrary.service.http.DLFileEntryServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class DLFileEntrySoap implements Serializable {
 	public static DLFileEntrySoap toSoapModel(DLFileEntry model) {
 		DLFileEntrySoap soapModel = new DLFileEntrySoap();
+
 		soapModel.setUuid(model.getUuid());
 		soapModel.setFileEntryId(model.getFileEntryId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -74,6 +76,7 @@ public class DLFileEntrySoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			DLFileEntry model = (DLFileEntry)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

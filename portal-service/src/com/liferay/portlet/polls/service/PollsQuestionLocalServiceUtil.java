@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.polls.service;
 
+
 /**
- * <a href="PollsQuestionLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PollsQuestionServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.polls.service.PollsQuestionLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.polls.PollsQuestionService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.polls.PollsQuestionServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.polls.service.PollsQuestionLocalService
- * @see com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory
+ * @see com.liferay.portlet.polls.service.PollsQuestionService
+ * @see com.liferay.portlet.polls.service.PollsQuestionServiceFactory
  *
  */
 public class PollsQuestionLocalServiceUtil {
@@ -91,6 +93,7 @@ public class PollsQuestionLocalServiceUtil {
 	public static void setPollsChoicePersistence(
 		com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence) {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.setPollsChoicePersistence(pollsChoicePersistence);
 	}
 
@@ -103,6 +106,7 @@ public class PollsQuestionLocalServiceUtil {
 	public static void setPollsChoiceFinder(
 		com.liferay.portlet.polls.service.persistence.PollsChoiceFinder pollsChoiceFinder) {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.setPollsChoiceFinder(pollsChoiceFinder);
 	}
 
@@ -115,6 +119,7 @@ public class PollsQuestionLocalServiceUtil {
 	public static void setPollsQuestionPersistence(
 		com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence) {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.setPollsQuestionPersistence(pollsQuestionPersistence);
 	}
 
@@ -127,6 +132,7 @@ public class PollsQuestionLocalServiceUtil {
 	public static void setPollsVotePersistence(
 		com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence) {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.setPollsVotePersistence(pollsVotePersistence);
 	}
 
@@ -139,6 +145,7 @@ public class PollsQuestionLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -151,6 +158,7 @@ public class PollsQuestionLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -163,6 +171,7 @@ public class PollsQuestionLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -175,11 +184,13 @@ public class PollsQuestionLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.afterPropertiesSet();
 	}
 
@@ -273,6 +284,7 @@ public class PollsQuestionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.addQuestionResources(questionId,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -283,6 +295,7 @@ public class PollsQuestionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.addQuestionResources(question,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -293,6 +306,7 @@ public class PollsQuestionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.addQuestionResources(questionId,
 			communityPermissions, guestPermissions);
 	}
@@ -304,6 +318,7 @@ public class PollsQuestionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.addQuestionResources(question,
 			communityPermissions, guestPermissions);
 	}
@@ -312,6 +327,7 @@ public class PollsQuestionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.deleteQuestion(questionId);
 	}
 
@@ -320,6 +336,7 @@ public class PollsQuestionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.deleteQuestion(question);
 	}
 
@@ -327,6 +344,7 @@ public class PollsQuestionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
 		pollsQuestionLocalService.deleteQuestions(groupId);
 	}
 

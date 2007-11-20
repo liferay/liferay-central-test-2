@@ -214,9 +214,9 @@ public class TagsAssetUtil {
 		return getPersistence().containsTagsEntry(pk, tagsEntryPK);
 	}
 
-	public static boolean containsTagsEntrys(long pk)
+	public static boolean containsTagsEntries(long pk)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().containsTagsEntrys(pk);
+		return getPersistence().containsTagsEntries(pk);
 	}
 
 	public static void addTagsEntry(long pk, long tagsEntryPK)

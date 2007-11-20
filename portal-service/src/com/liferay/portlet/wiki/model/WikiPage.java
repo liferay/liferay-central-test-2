@@ -22,17 +22,18 @@
 
 package com.liferay.portlet.wiki.model;
 
+
 /**
  * <a href="WikiPage.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This interface is a model that represents the <code>WikiPage</code> table in
- * the database.
+ * This interface is a model that represents the <code>WikiPage</code> table
+ * in the database.
  * </p>
  *
  * <p>

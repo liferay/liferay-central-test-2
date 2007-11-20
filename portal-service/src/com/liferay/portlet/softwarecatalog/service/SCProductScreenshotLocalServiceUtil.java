@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+
 /**
- * <a href="SCProductScreenshotLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCProductScreenshotServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.softwarecatalog.SCProductScreenshotService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.softwarecatalog.SCProductScreenshotServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService
- * @see com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory
+ * @see com.liferay.portlet.softwarecatalog.service.SCProductScreenshotService
+ * @see com.liferay.portlet.softwarecatalog.service.SCProductScreenshotServiceFactory
  *
  */
 public class SCProductScreenshotLocalServiceUtil {
@@ -91,6 +93,7 @@ public class SCProductScreenshotLocalServiceUtil {
 	public static void setSCLicensePersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence) {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
 		scProductScreenshotLocalService.setSCLicensePersistence(scLicensePersistence);
 	}
 
@@ -103,6 +106,7 @@ public class SCProductScreenshotLocalServiceUtil {
 	public static void setSCFrameworkVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence) {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
 		scProductScreenshotLocalService.setSCFrameworkVersionPersistence(scFrameworkVersionPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class SCProductScreenshotLocalServiceUtil {
 	public static void setSCProductEntryPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence) {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
 		scProductScreenshotLocalService.setSCProductEntryPersistence(scProductEntryPersistence);
 	}
 
@@ -127,6 +132,7 @@ public class SCProductScreenshotLocalServiceUtil {
 	public static void setSCProductScreenshotPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence) {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
 		scProductScreenshotLocalService.setSCProductScreenshotPersistence(scProductScreenshotPersistence);
 	}
 
@@ -139,11 +145,13 @@ public class SCProductScreenshotLocalServiceUtil {
 	public static void setSCProductVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence) {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
 		scProductScreenshotLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
 		scProductScreenshotLocalService.afterPropertiesSet();
 	}
 
@@ -151,12 +159,14 @@ public class SCProductScreenshotLocalServiceUtil {
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot productScreenshot)
 		throws com.liferay.portal.SystemException {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
 		scProductScreenshotLocalService.deleteProductScreenshot(productScreenshot);
 	}
 
 	public static void deleteProductScreenshots(long productEntryId)
 		throws com.liferay.portal.SystemException {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
 		scProductScreenshotLocalService.deleteProductScreenshots(productEntryId);
 	}
 

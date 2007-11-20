@@ -22,30 +22,32 @@
 
 package com.liferay.portal.service;
 
+
 /**
- * <a href="OrgLaborLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrgLaborServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.OrgLaborLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.OrgLaborService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.OrgLaborLocalServiceFactory</code> is responsible
- * for the lookup of the bean.
+ * <code>com.liferay.portal.OrgLaborServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.OrgLaborLocalService
- * @see com.liferay.portal.service.OrgLaborLocalServiceFactory
+ * @see com.liferay.portal.service.OrgLaborService
+ * @see com.liferay.portal.service.OrgLaborServiceFactory
  *
  */
 public class OrgLaborLocalServiceUtil {
@@ -90,6 +92,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setAccountPersistence(
 		com.liferay.portal.service.persistence.AccountPersistence accountPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setAccountPersistence(accountPersistence);
 	}
 
@@ -102,6 +105,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setAddressPersistence(
 		com.liferay.portal.service.persistence.AddressPersistence addressPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setAddressPersistence(addressPersistence);
 	}
 
@@ -114,6 +118,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setClassNamePersistence(
 		com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setClassNamePersistence(classNamePersistence);
 	}
 
@@ -126,6 +131,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setCompanyPersistence(
 		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setCompanyPersistence(companyPersistence);
 	}
 
@@ -138,6 +144,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setContactPersistence(
 		com.liferay.portal.service.persistence.ContactPersistence contactPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setContactPersistence(contactPersistence);
 	}
 
@@ -150,6 +157,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setCountryPersistence(
 		com.liferay.portal.service.persistence.CountryPersistence countryPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setCountryPersistence(countryPersistence);
 	}
 
@@ -162,6 +170,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setEmailAddressPersistence(
 		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
@@ -174,6 +183,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setGroupPersistence(
 		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setGroupPersistence(groupPersistence);
 	}
 
@@ -186,6 +196,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setGroupFinder(
 		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setGroupFinder(groupFinder);
 	}
 
@@ -198,6 +209,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setImagePersistence(
 		com.liferay.portal.service.persistence.ImagePersistence imagePersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setImagePersistence(imagePersistence);
 	}
 
@@ -210,6 +222,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setLayoutPersistence(
 		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setLayoutPersistence(layoutPersistence);
 	}
 
@@ -222,6 +235,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setLayoutFinder(
 		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setLayoutFinder(layoutFinder);
 	}
 
@@ -234,6 +248,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setLayoutSetPersistence(
 		com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setLayoutSetPersistence(layoutSetPersistence);
 	}
 
@@ -246,6 +261,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setListTypePersistence(
 		com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setListTypePersistence(listTypePersistence);
 	}
 
@@ -258,6 +274,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setMembershipRequestPersistence(
 		com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setMembershipRequestPersistence(membershipRequestPersistence);
 	}
 
@@ -270,6 +287,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setOrganizationPersistence(
 		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setOrganizationPersistence(organizationPersistence);
 	}
 
@@ -282,6 +300,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setOrganizationFinder(
 		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setOrganizationFinder(organizationFinder);
 	}
 
@@ -294,6 +313,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setOrgGroupPermissionPersistence(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setOrgGroupPermissionPersistence(orgGroupPermissionPersistence);
 	}
 
@@ -306,6 +326,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setOrgGroupPermissionFinder(
 		com.liferay.portal.service.persistence.OrgGroupPermissionFinder orgGroupPermissionFinder) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setOrgGroupPermissionFinder(orgGroupPermissionFinder);
 	}
 
@@ -318,6 +339,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setOrgGroupRolePersistence(
 		com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setOrgGroupRolePersistence(orgGroupRolePersistence);
 	}
 
@@ -330,6 +352,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setOrgLaborPersistence(
 		com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setOrgLaborPersistence(orgLaborPersistence);
 	}
 
@@ -342,6 +365,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setPasswordPolicyPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setPasswordPolicyPersistence(passwordPolicyPersistence);
 	}
 
@@ -354,6 +378,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setPasswordPolicyFinder(
 		com.liferay.portal.service.persistence.PasswordPolicyFinder passwordPolicyFinder) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setPasswordPolicyFinder(passwordPolicyFinder);
 	}
 
@@ -366,6 +391,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setPasswordPolicyRelPersistence(
 		com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setPasswordPolicyRelPersistence(passwordPolicyRelPersistence);
 	}
 
@@ -378,6 +404,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setPasswordTrackerPersistence(
 		com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setPasswordTrackerPersistence(passwordTrackerPersistence);
 	}
 
@@ -390,6 +417,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setPermissionPersistence(
 		com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setPermissionPersistence(permissionPersistence);
 	}
 
@@ -402,6 +430,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setPermissionFinder(
 		com.liferay.portal.service.persistence.PermissionFinder permissionFinder) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setPermissionFinder(permissionFinder);
 	}
 
@@ -414,6 +443,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setPermissionUserFinder(
 		com.liferay.portal.service.persistence.PermissionUserFinder permissionUserFinder) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setPermissionUserFinder(permissionUserFinder);
 	}
 
@@ -426,6 +456,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setPhonePersistence(
 		com.liferay.portal.service.persistence.PhonePersistence phonePersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setPhonePersistence(phonePersistence);
 	}
 
@@ -438,6 +469,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setPluginSettingPersistence(
 		com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setPluginSettingPersistence(pluginSettingPersistence);
 	}
 
@@ -450,6 +482,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setPortletPersistence(
 		com.liferay.portal.service.persistence.PortletPersistence portletPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setPortletPersistence(portletPersistence);
 	}
 
@@ -462,6 +495,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setPortletPreferencesPersistence(
 		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
 	}
 
@@ -474,6 +508,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setPortletPreferencesFinder(
 		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
@@ -486,6 +521,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setRegionPersistence(
 		com.liferay.portal.service.persistence.RegionPersistence regionPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setRegionPersistence(regionPersistence);
 	}
 
@@ -498,6 +534,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setReleasePersistence(
 		com.liferay.portal.service.persistence.ReleasePersistence releasePersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setReleasePersistence(releasePersistence);
 	}
 
@@ -510,6 +547,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setResourcePersistence(
 		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setResourcePersistence(resourcePersistence);
 	}
 
@@ -522,6 +560,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setResourceFinder(resourceFinder);
 	}
 
@@ -534,6 +573,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setResourceCodePersistence(
 		com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setResourceCodePersistence(resourceCodePersistence);
 	}
 
@@ -546,6 +586,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setRolePersistence(
 		com.liferay.portal.service.persistence.RolePersistence rolePersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setRolePersistence(rolePersistence);
 	}
 
@@ -558,6 +599,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setRoleFinder(
 		com.liferay.portal.service.persistence.RoleFinder roleFinder) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setRoleFinder(roleFinder);
 	}
 
@@ -570,6 +612,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setServiceComponentPersistence(
 		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
@@ -582,6 +625,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setSubscriptionPersistence(
 		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
@@ -594,6 +638,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -606,6 +651,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setUserFinder(userFinder);
 	}
 
@@ -618,6 +664,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setUserGroupPersistence(
 		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setUserGroupPersistence(userGroupPersistence);
 	}
 
@@ -630,6 +677,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setUserGroupFinder(
 		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setUserGroupFinder(userGroupFinder);
 	}
 
@@ -642,6 +690,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setUserGroupRolePersistence(
 		com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setUserGroupRolePersistence(userGroupRolePersistence);
 	}
 
@@ -654,6 +703,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setUserIdMapperPersistence(
 		com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setUserIdMapperPersistence(userIdMapperPersistence);
 	}
 
@@ -666,6 +716,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setUserTrackerPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setUserTrackerPersistence(userTrackerPersistence);
 	}
 
@@ -678,6 +729,7 @@ public class OrgLaborLocalServiceUtil {
 	public static void setUserTrackerPathPersistence(
 		com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setUserTrackerPathPersistence(userTrackerPathPersistence);
 	}
 
@@ -690,11 +742,13 @@ public class OrgLaborLocalServiceUtil {
 	public static void setWebsitePersistence(
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence) {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.setWebsitePersistence(websitePersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.afterPropertiesSet();
 	}
 
@@ -716,6 +770,7 @@ public class OrgLaborLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
 		orgLaborLocalService.deleteOrgLabor(orgLaborId);
 	}
 

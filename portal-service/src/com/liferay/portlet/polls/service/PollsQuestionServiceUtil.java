@@ -22,24 +22,26 @@
 
 package com.liferay.portlet.polls.service;
 
+
 /**
  * <a href="PollsQuestionServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.polls.service.PollsQuestionService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.polls.PollsQuestionService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.polls.service.PollsQuestionServiceFactory</code> is
- * responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.polls.PollsQuestionServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -85,6 +87,7 @@ public class PollsQuestionServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
+
 		pollsQuestionService.deleteQuestion(questionId);
 	}
 

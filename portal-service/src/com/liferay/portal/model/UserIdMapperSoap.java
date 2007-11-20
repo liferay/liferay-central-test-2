@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="UserIdMapperSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.UserIdMapperServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.UserIdMapperServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,6 +48,7 @@ import java.util.List;
 public class UserIdMapperSoap implements Serializable {
 	public static UserIdMapperSoap toSoapModel(UserIdMapper model) {
 		UserIdMapperSoap soapModel = new UserIdMapperSoap();
+
 		soapModel.setUserIdMapperId(model.getUserIdMapperId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setType(model.getType());
@@ -61,6 +63,7 @@ public class UserIdMapperSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			UserIdMapper model = (UserIdMapper)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

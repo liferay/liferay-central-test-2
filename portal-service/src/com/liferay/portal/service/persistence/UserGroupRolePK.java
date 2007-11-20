@@ -77,6 +77,7 @@ public class UserGroupRolePK implements Comparable, Serializable {
 		}
 
 		UserGroupRolePK pk = (UserGroupRolePK)obj;
+
 		int value = 0;
 
 		if (userId < pk.userId) {
@@ -154,20 +155,25 @@ public class UserGroupRolePK implements Comparable, Serializable {
 
 	public String toString() {
 		StringMaker sm = new StringMaker();
+
 		sm.append(StringPool.OPEN_CURLY_BRACE);
+
 		sm.append("userId");
 		sm.append(StringPool.EQUAL);
 		sm.append(userId);
+
 		sm.append(StringPool.COMMA);
 		sm.append(StringPool.SPACE);
 		sm.append("groupId");
 		sm.append(StringPool.EQUAL);
 		sm.append(groupId);
+
 		sm.append(StringPool.COMMA);
 		sm.append(StringPool.SPACE);
 		sm.append("roleId");
 		sm.append(StringPool.EQUAL);
 		sm.append(roleId);
+
 		sm.append(StringPool.CLOSE_CURLY_BRACE);
 
 		return sm.toString();

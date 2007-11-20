@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="CompanySoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.CompanyServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.CompanyServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,6 +48,7 @@ import java.util.List;
 public class CompanySoap implements Serializable {
 	public static CompanySoap toSoapModel(Company model) {
 		CompanySoap soapModel = new CompanySoap();
+
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setAccountId(model.getAccountId());
 		soapModel.setWebId(model.getWebId());
@@ -63,6 +65,7 @@ public class CompanySoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			Company model = (Company)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

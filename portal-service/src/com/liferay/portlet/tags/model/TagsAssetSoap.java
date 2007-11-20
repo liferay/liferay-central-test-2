@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="TagsAssetSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.tags.service.http.TagsAssetServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.tags.service.http.TagsAssetServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class TagsAssetSoap implements Serializable {
 	public static TagsAssetSoap toSoapModel(TagsAsset model) {
 		TagsAssetSoap soapModel = new TagsAssetSoap();
+
 		soapModel.setAssetId(model.getAssetId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -79,6 +81,7 @@ public class TagsAssetSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			TagsAsset model = (TagsAsset)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

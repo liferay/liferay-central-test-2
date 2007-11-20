@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+
 /**
- * <a href="SCProductVersionLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCProductVersionServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.softwarecatalog.SCProductVersionService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.softwarecatalog.SCProductVersionServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService
- * @see com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceFactory
+ * @see com.liferay.portlet.softwarecatalog.service.SCProductVersionService
+ * @see com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceFactory
  *
  */
 public class SCProductVersionLocalServiceUtil {
@@ -91,6 +93,7 @@ public class SCProductVersionLocalServiceUtil {
 	public static void setSCLicensePersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence) {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
 		scProductVersionLocalService.setSCLicensePersistence(scLicensePersistence);
 	}
 
@@ -103,6 +106,7 @@ public class SCProductVersionLocalServiceUtil {
 	public static void setSCFrameworkVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence) {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
 		scProductVersionLocalService.setSCFrameworkVersionPersistence(scFrameworkVersionPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class SCProductVersionLocalServiceUtil {
 	public static void setSCProductEntryPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence) {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
 		scProductVersionLocalService.setSCProductEntryPersistence(scProductEntryPersistence);
 	}
 
@@ -127,6 +132,7 @@ public class SCProductVersionLocalServiceUtil {
 	public static void setSCProductScreenshotPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence) {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
 		scProductVersionLocalService.setSCProductScreenshotPersistence(scProductScreenshotPersistence);
 	}
 
@@ -139,6 +145,7 @@ public class SCProductVersionLocalServiceUtil {
 	public static void setSCProductVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence) {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
 		scProductVersionLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
 	}
 
@@ -151,6 +158,7 @@ public class SCProductVersionLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
 		scProductVersionLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -163,11 +171,13 @@ public class SCProductVersionLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
 		scProductVersionLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
 		scProductVersionLocalService.afterPropertiesSet();
 	}
 
@@ -226,6 +236,7 @@ public class SCProductVersionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
 		scProductVersionLocalService.deleteProductVersion(productVersionId);
 	}
 
@@ -234,6 +245,7 @@ public class SCProductVersionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
 		scProductVersionLocalService.deleteProductVersion(productVersion);
 	}
 
@@ -241,6 +253,7 @@ public class SCProductVersionLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
 		scProductVersionLocalService.deleteProductVersions(productEntryId);
 	}
 

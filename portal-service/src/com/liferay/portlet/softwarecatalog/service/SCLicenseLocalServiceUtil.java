@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+
 /**
- * <a href="SCLicenseLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCLicenseServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.softwarecatalog.SCLicenseService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.softwarecatalog.SCLicenseServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService
- * @see com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory
+ * @see com.liferay.portlet.softwarecatalog.service.SCLicenseService
+ * @see com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory
  *
  */
 public class SCLicenseLocalServiceUtil {
@@ -90,6 +92,7 @@ public class SCLicenseLocalServiceUtil {
 	public static void setSCLicensePersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence) {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
 		scLicenseLocalService.setSCLicensePersistence(scLicensePersistence);
 	}
 
@@ -102,6 +105,7 @@ public class SCLicenseLocalServiceUtil {
 	public static void setSCFrameworkVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence) {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
 		scLicenseLocalService.setSCFrameworkVersionPersistence(scFrameworkVersionPersistence);
 	}
 
@@ -114,6 +118,7 @@ public class SCLicenseLocalServiceUtil {
 	public static void setSCProductEntryPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence) {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
 		scLicenseLocalService.setSCProductEntryPersistence(scProductEntryPersistence);
 	}
 
@@ -126,6 +131,7 @@ public class SCLicenseLocalServiceUtil {
 	public static void setSCProductScreenshotPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence) {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
 		scLicenseLocalService.setSCProductScreenshotPersistence(scProductScreenshotPersistence);
 	}
 
@@ -138,11 +144,13 @@ public class SCLicenseLocalServiceUtil {
 	public static void setSCProductVersionPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence) {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
 		scLicenseLocalService.setSCProductVersionPersistence(scProductVersionPersistence);
 	}
 
 	public static void afterPropertiesSet() {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
 		scLicenseLocalService.afterPropertiesSet();
 	}
 
@@ -161,6 +169,7 @@ public class SCLicenseLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
 		scLicenseLocalService.deleteLicense(licenseId);
 	}
 

@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="SCFrameworkVersionSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.softwarecatalog.service.http.SCFrameworkVersionServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.softwarecatalog.service.http.SCFrameworkVersionServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class SCFrameworkVersionSoap implements Serializable {
 	public static SCFrameworkVersionSoap toSoapModel(SCFrameworkVersion model) {
 		SCFrameworkVersionSoap soapModel = new SCFrameworkVersionSoap();
+
 		soapModel.setFrameworkVersionId(model.getFrameworkVersionId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -68,6 +70,7 @@ public class SCFrameworkVersionSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			SCFrameworkVersion model = (SCFrameworkVersion)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="ReleaseSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.ReleaseServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.ReleaseServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class ReleaseSoap implements Serializable {
 	public static ReleaseSoap toSoapModel(Release model) {
 		ReleaseSoap soapModel = new ReleaseSoap();
+
 		soapModel.setReleaseId(model.getReleaseId());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
@@ -63,6 +65,7 @@ public class ReleaseSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			Release model = (Release)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

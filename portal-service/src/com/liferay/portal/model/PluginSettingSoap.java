@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="PluginSettingSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.PluginSettingServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.PluginSettingServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,6 +48,7 @@ import java.util.List;
 public class PluginSettingSoap implements Serializable {
 	public static PluginSettingSoap toSoapModel(PluginSetting model) {
 		PluginSettingSoap soapModel = new PluginSettingSoap();
+
 		soapModel.setPluginSettingId(model.getPluginSettingId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setPluginId(model.getPluginId());
@@ -62,6 +64,7 @@ public class PluginSettingSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			PluginSetting model = (PluginSetting)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

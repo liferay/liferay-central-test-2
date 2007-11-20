@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="SCProductScreenshotSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.softwarecatalog.service.http.SCProductScreenshotServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.softwarecatalog.service.http.SCProductScreenshotServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,6 +48,7 @@ import java.util.List;
 public class SCProductScreenshotSoap implements Serializable {
 	public static SCProductScreenshotSoap toSoapModel(SCProductScreenshot model) {
 		SCProductScreenshotSoap soapModel = new SCProductScreenshotSoap();
+
 		soapModel.setProductScreenshotId(model.getProductScreenshotId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setGroupId(model.getGroupId());
@@ -63,6 +65,7 @@ public class SCProductScreenshotSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			SCProductScreenshot model = (SCProductScreenshot)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

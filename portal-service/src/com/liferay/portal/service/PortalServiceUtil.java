@@ -22,23 +22,25 @@
 
 package com.liferay.portal.service;
 
+
 /**
  * <a href="PortalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portal.service.PortalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portal.PortalService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portal.service.PortalServiceFactory</code> is responsible for
+ * <code>com.liferay.portal.PortalServiceFactory</code> is responsible for
  * the lookup of the bean.
  * </p>
  *
@@ -51,6 +53,7 @@ package com.liferay.portal.service;
 public class PortalServiceUtil {
 	public static void test() throws java.rmi.RemoteException {
 		PortalService portalService = PortalServiceFactory.getService();
+
 		portalService.test();
 	}
 }

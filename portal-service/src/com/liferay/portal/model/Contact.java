@@ -22,22 +22,23 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Contact.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This interface is a model that represents the <code>Contact_</code> table in
- * the database.
+ * This interface is a model that represents the <code>Contact</code> table
+ * in the database.
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.ContactImpl</code> and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize <code>com.liferay.portal.service.model.impl.ContactImpl</code>
+ * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,5 +49,8 @@ package com.liferay.portal.model;
  *
  */
 public interface Contact extends ContactModel {
+	public java.lang.String getFullName(java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName);
+
 	public java.lang.String getFullName();
 }

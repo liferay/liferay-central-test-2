@@ -22,22 +22,23 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Layout.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This interface is a model that represents the <code>Layout</code> table in the
- * database.
+ * This interface is a model that represents the <code>Layout</code> table
+ * in the database.
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.LayoutImpl</code> and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize <code>com.liferay.portal.service.model.impl.LayoutImpl</code>
+ * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,11 @@ package com.liferay.portal.model;
  *
  */
 public interface Layout extends LayoutModel {
+	public int validateFriendlyURL(java.lang.String friendlyURL);
+
+	public void validateFriendlyURLKeyword(java.lang.String friendlyURL)
+		throws com.liferay.portal.LayoutFriendlyURLException;
+
 	public com.liferay.portal.model.Group getGroup();
 
 	public boolean isShared();

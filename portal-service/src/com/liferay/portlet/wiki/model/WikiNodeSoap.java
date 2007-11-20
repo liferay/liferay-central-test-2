@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="WikiNodeSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portlet.wiki.service.http.WikiNodeServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portlet.wiki.service.http.WikiNodeServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class WikiNodeSoap implements Serializable {
 	public static WikiNodeSoap toSoapModel(WikiNode model) {
 		WikiNodeSoap soapModel = new WikiNodeSoap();
+
 		soapModel.setNodeId(model.getNodeId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -67,6 +69,7 @@ public class WikiNodeSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			WikiNode model = (WikiNode)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -22,24 +22,26 @@
 
 package com.liferay.portlet.messageboards.service;
 
+
 /**
- * <a href="MBThreadLocalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBThreadService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This interface defines the service. The default implementation is <code>com.liferay.portlet.messageboards.service.impl.MBThreadLocalServiceImpl</code>.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
+ * This interface defines the service. The default implementation is
+ * <code>com.liferay.portlet.messageboards.service.impl.MBThreadServiceImpl</code>. Modify
+ * methods in that class and rerun ServiceBuilder to populate this class and all
+ * other generated classes.
  * </p>
  *
  * <p>
- * This is a local service. Methods of this service will not have security checks
- * based on the propagated JAAS credentials because this service can only be accessed
- * from within the same VM.
+ * This is a remote service. Methods of this service are expected to have
+ * security checks based on the propagated JAAS credentials because this service
+ * can be accessed remotely.
  * </p>
  *
  * @author Brian Wing Shun Chan

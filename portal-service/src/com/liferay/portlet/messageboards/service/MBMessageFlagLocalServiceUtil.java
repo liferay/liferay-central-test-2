@@ -22,30 +22,32 @@
 
 package com.liferay.portlet.messageboards.service;
 
+
 /**
- * <a href="MBMessageFlagLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBMessageFlagServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class provides static methods for the <code>com.liferay.portlet.messageboards.service.MBMessageFlagLocalService</code>
- * bean. The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.messageboards.MBMessageFlagService</code> bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * <p>
- * <code>com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
+ * <code>com.liferay.portlet.messageboards.MBMessageFlagServiceFactory</code> is responsible for
+ * the lookup of the bean.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.MBMessageFlagLocalService
- * @see com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceFactory
+ * @see com.liferay.portlet.messageboards.service.MBMessageFlagService
+ * @see com.liferay.portlet.messageboards.service.MBMessageFlagServiceFactory
  *
  */
 public class MBMessageFlagLocalServiceUtil {
@@ -91,6 +93,7 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setMBBanPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setMBBanPersistence(mbBanPersistence);
 	}
 
@@ -103,6 +106,7 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setMBCategoryPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setMBCategoryPersistence(mbCategoryPersistence);
 	}
 
@@ -115,6 +119,7 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setMBCategoryFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder mbCategoryFinder) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setMBCategoryFinder(mbCategoryFinder);
 	}
 
@@ -127,6 +132,7 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setMBDiscussionPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence mbDiscussionPersistence) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setMBDiscussionPersistence(mbDiscussionPersistence);
 	}
 
@@ -139,6 +145,7 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setMBMessagePersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setMBMessagePersistence(mbMessagePersistence);
 	}
 
@@ -151,6 +158,7 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setMBMessageFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setMBMessageFinder(mbMessageFinder);
 	}
 
@@ -163,6 +171,7 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setMBMessageFlagPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setMBMessageFlagPersistence(mbMessageFlagPersistence);
 	}
 
@@ -175,6 +184,7 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setMBMessageFlagFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder mbMessageFlagFinder) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setMBMessageFlagFinder(mbMessageFlagFinder);
 	}
 
@@ -187,6 +197,7 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setMBStatsUserPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setMBStatsUserPersistence(mbStatsUserPersistence);
 	}
 
@@ -199,6 +210,7 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setMBThreadPersistence(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setMBThreadPersistence(mbThreadPersistence);
 	}
 
@@ -211,6 +223,7 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setMBThreadFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadFinder mbThreadFinder) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
@@ -223,6 +236,7 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setUserPersistence(
 		com.liferay.portal.service.persistence.UserPersistence userPersistence) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setUserPersistence(userPersistence);
 	}
 
@@ -235,11 +249,13 @@ public class MBMessageFlagLocalServiceUtil {
 	public static void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder) {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.setUserFinder(userFinder);
 	}
 
 	public static void afterPropertiesSet() {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.afterPropertiesSet();
 	}
 
@@ -247,12 +263,14 @@ public class MBMessageFlagLocalServiceUtil {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.addReadFlags(userId, messages);
 	}
 
 	public static void deleteFlags(long userId)
 		throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
 		mbMessageFlagLocalService.deleteFlags(userId);
 	}
 

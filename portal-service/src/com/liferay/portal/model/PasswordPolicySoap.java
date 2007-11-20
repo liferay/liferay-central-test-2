@@ -32,12 +32,13 @@ import java.util.List;
  * <a href="PasswordPolicySoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.PasswordPolicyServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.PasswordPolicyServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,6 +49,7 @@ import java.util.List;
 public class PasswordPolicySoap implements Serializable {
 	public static PasswordPolicySoap toSoapModel(PasswordPolicy model) {
 		PasswordPolicySoap soapModel = new PasswordPolicySoap();
+
 		soapModel.setPasswordPolicyId(model.getPasswordPolicyId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -83,6 +85,7 @@ public class PasswordPolicySoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			PasswordPolicy model = (PasswordPolicy)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -31,12 +31,13 @@ import java.util.List;
  * <a href="RegionSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * ServiceBuilder generated this class. Modifications in this class will be overwritten
- * the next time is generated.
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
  * </p>
  *
  * <p>
- * This class is used by <code>com.liferay.portal.service.http.RegionServiceSoap</code>.
+ * This class is used by
+ * <code>com.liferay.portal.service.http.RegionServiceSoap</code>.
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,6 +48,7 @@ import java.util.List;
 public class RegionSoap implements Serializable {
 	public static RegionSoap toSoapModel(Region model) {
 		RegionSoap soapModel = new RegionSoap();
+
 		soapModel.setRegionId(model.getRegionId());
 		soapModel.setCountryId(model.getCountryId());
 		soapModel.setRegionCode(model.getRegionCode());
@@ -61,6 +63,7 @@ public class RegionSoap implements Serializable {
 
 		for (int i = 0; i < models.size(); i++) {
 			Region model = (Region)models.get(i);
+
 			soapModels.add(toSoapModel(model));
 		}
 
