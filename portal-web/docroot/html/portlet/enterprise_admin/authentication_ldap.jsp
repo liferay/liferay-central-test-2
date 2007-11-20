@@ -136,6 +136,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		var principal = "";
 		var credentials = "";
 		var searchFilter = "";
+		var importUserSearchFilter = "";
 		var userMappingScreenName = "";
 		var userMappingPassword = "";
 		var userMappingEmailAddress = "";
@@ -144,6 +145,10 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		var userMappingLastName = "";
 		var userMappingJobTitle = "";
 		var userMappingGroup = "";
+		var importGroupSearchFilter = "";
+		var groupMappingGroupName = "";
+		var groupMappingDescription = "";
+		var groupMappingUser = "";
 
 		var ldapType = Liferay.Util.getSelectedRadioValue(document.<portlet:namespace />fm.<portlet:namespace />defaultLdap);
 
@@ -153,14 +158,39 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			principal = "uid=admin,ou=system";
 			credentials = "secret";
 			searchFilter = "(mail=@email_address@)";
+			importUserSearchFilter = "(objectClass=person)";
 			userMappingScreenName = "cn";
 			userMappingPassword = "userPassword";
 			userMappingEmailAddress = "mail";
 			userMappingFullName = "";
 			userMappingFirstName = "givenName";
 			userMappingLastName = "sn";
+			userMappingJobTitle = "";
+			userMappingGroup = "";
+			importGroupSearchFilter = "";
+			groupMappingGroupName = "";
+			groupMappingDescription = "";
+			groupMappingUser = "";
+		}
+		else if (ldapType == "fedora") {
+			baseProviderURL = "ldap://localhost:19389";
+			baseDN = "dc=localdomain";
+			principal = "cn=Directory Manager";
+			credentials = "";
+			searchFilter = "(mail=@email_address@)";
+			importUserSearchFilter = "(objectClass=inetOrgPerson)";
+			userMappingScreenName = "uid";
+			userMappingPassword = "userPassword";
+			userMappingEmailAddress = "mail";
+			userMappingFullName = "cn";
+			userMappingFirstName = "givenName";
+			userMappingLastName = "sn";
 			userMappingJobTitle = "title";
 			userMappingGroup = "";
+			importGroupSearchFilter = "";
+			groupMappingGroupName = "";
+			groupMappingDescription = "";
+			groupMappingUser = "";
 		}
 		else if (ldapType == "microsoft") {
 			baseProviderURL = "ldap://localhost:389";
@@ -168,14 +198,19 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			principal = "admin";
 			credentials = "secret";
 			searchFilter = "(&(objectCategory=person)(sAMAccountName=@user_id@))";
+			importUserSearchFilter = "(objectClass=person)";
 			userMappingScreenName = "sAMAccountName";
-			userMappingPassword = "";
+			userMappingPassword = "userPassword";
 			userMappingEmailAddress = "userprincipalname";
 			userMappingFullName = "cn";
-			userMappingFirstName = "";
-			userMappingLastName = "";
+			userMappingFirstName = "givenName";
+			userMappingLastName = "sn";
 			userMappingJobTitle = "";
-			userMappingGroup = "";
+			userMappingGroup = "memberOf";
+			importGroupSearchFilter = "(objectClass=group)";
+			groupMappingGroupName = "cn";
+			groupMappingDescription = "sAMAccountName";
+			groupMappingUser = "member";
 		}
 		else if (ldapType == "novell") {
 			url = "ldap://localhost:389";
@@ -183,6 +218,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			principal = "cn=admin,ou=test";
 			credentials = "secret";
 			searchFilter = "(mail=@email_address@)";
+			importUserSearchFilter = "";
 			userMappingScreenName = "cn";
 			userMappingPassword = "userPassword";
 			userMappingEmailAddress = "mail";
@@ -191,15 +227,38 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			userMappingLastName = "sn";
 			userMappingJobTitle = "title";
 			userMappingGroup = "";
+			importGroupSearchFilter = "";
+			groupMappingGroupName = "";
+			groupMappingDescription = "";
+			groupMappingUser = "";
+		}
+		else if (ldapType == "open") {
+			url = "ldap://localhost:389";
+			baseDN = "dc=example,dc=com";
+			principal = "cn=admin,ou=test";
+			credentials = "secret";
+			searchFilter = "(mail=@email_address@)";
+			importUserSearchFilter = "(objectClass=inetOrgPerson)";
+			userMappingScreenName = "cn";
+			userMappingPassword = "userPassword";
+			userMappingEmailAddress = "mail";
+			userMappingFullName = "";
+			userMappingFirstName = "givenName";
+			userMappingLastName = "sn";
+			userMappingJobTitle = "title";
+			userMappingGroup = "";
+			importGroupSearchFilter = "(objectClass=groupOfUniqueNames)";
+			groupMappingGroupName = "cn";
+			groupMappingDescription = "description";
+			groupMappingUser = "uniqueMember";
 		}
 
 		document.<portlet:namespace />fm.<portlet:namespace />baseProviderURL.value = baseProviderURL;
 		document.<portlet:namespace />fm.<portlet:namespace />baseDN.value = baseDN;
 		document.<portlet:namespace />fm.<portlet:namespace />principal.value = principal;
 		document.<portlet:namespace />fm.<portlet:namespace />credentials.value = credentials;
-		document.<portlet:namespace />fm.<portlet:namespace />usersDN.value = baseDN;
-		document.<portlet:namespace />fm.<portlet:namespace />groupsDN.value = baseDN;
 		document.<portlet:namespace />fm.<portlet:namespace />searchFilter.value = searchFilter;
+		document.<portlet:namespace />fm.<portlet:namespace />importUserSearchFilter.value = importUserSearchFilter;
 		document.<portlet:namespace />fm.<portlet:namespace />userMappingScreenName.value = userMappingScreenName;
 		document.<portlet:namespace />fm.<portlet:namespace />userMappingPassword.value = userMappingPassword;
 		document.<portlet:namespace />fm.<portlet:namespace />userMappingEmailAddress.value = userMappingEmailAddress;
@@ -208,6 +267,12 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		document.<portlet:namespace />fm.<portlet:namespace />userMappingLastName.value = userMappingLastName;
 		document.<portlet:namespace />fm.<portlet:namespace />userMappingJobTitle.value = userMappingJobTitle;
 		document.<portlet:namespace />fm.<portlet:namespace />userMappingGroup.value = userMappingGroup;
+		document.<portlet:namespace />fm.<portlet:namespace />importGroupSearchFilter.value = importGroupSearchFilter;
+		document.<portlet:namespace />fm.<portlet:namespace />groupMappingGroupName.value = groupMappingGroupName;
+		document.<portlet:namespace />fm.<portlet:namespace />groupMappingDescription.value = groupMappingDescription;
+		document.<portlet:namespace />fm.<portlet:namespace />groupMappingUser.value = groupMappingUser;
+		document.<portlet:namespace />fm.<portlet:namespace />usersDN.value = baseDN;
+		document.<portlet:namespace />fm.<portlet:namespace />groupsDN.value = baseDN;
 	}
 
 	jQuery(
