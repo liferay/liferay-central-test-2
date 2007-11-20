@@ -1298,7 +1298,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			}
 
 			public List get${tempEntity.names}(${entity.PKClassName} pk, int begin, int end, OrderByComparator obc) throws ${noSuchEntity}Exception, SystemException {
-				String finderClassName = "${column.mappingTable}";
+				String finderClassName =
+					<#if column.mappingTable??>
+						"${column.mappingTable}"
+					<#else>
+						${tempEntity.packagePath}.model.${tempEntity.name}.class.getName()
+					</#if>
+
+					;
 				String finderMethodName = "get${tempEntity.names}";
 				String[] finderParams = new String[] {
 					<#if entity.hasPrimitivePK()>
@@ -1385,7 +1392,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			}
 
 			public int get${tempEntity.names}Size(${entity.PKClassName} pk) throws SystemException {
-				String finderClassName = "${column.mappingTable}";
+				String finderClassName =
+					<#if column.mappingTable??>
+						"${column.mappingTable}"
+					<#else>
+						${tempEntity.packagePath}.model.${tempEntity.name}.class.getName()
+					</#if>
+
+					;
 				String finderMethodName = "get${tempEntity.names}Size";
 				String[] finderParams = new String[] {
 					<#if entity.hasPrimitivePK()>
@@ -1457,7 +1471,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			}
 
 			public boolean contains${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
-				String finderClassName = "${column.mappingTable}";
+				String finderClassName =
+					<#if column.mappingTable??>
+						"${column.mappingTable}"
+					<#else>
+						${tempEntity.packagePath}.model.${tempEntity.name}.class.getName()
+					</#if>
+
+					;
 				String finderMethodName = "contains${tempEntity.names}";
 				String[] finderParams = new String[] {
 					<#if entity.hasPrimitivePK()>
@@ -1700,9 +1721,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 
 				contains${tempEntity.name} = new Contains${tempEntity.name}(this);
-				add${tempEntity.name} = new Add${tempEntity.name}(this);
-				clear${tempEntity.names} = new Clear${tempEntity.names}(this);
-				remove${tempEntity.name} = new Remove${tempEntity.name}(this);
+
+				<#if column.isMappingManyToMany()>
+					add${tempEntity.name} = new Add${tempEntity.name}(this);
+					clear${tempEntity.names} = new Clear${tempEntity.names}(this);
+					remove${tempEntity.name} = new Remove${tempEntity.name}(this);
+				</#if>
 			</#if>
 		</#list>
 	}
@@ -1712,9 +1736,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 
 			protected Contains${tempEntity.name} contains${tempEntity.name};
-			protected Add${tempEntity.name} add${tempEntity.name};
-			protected Clear${tempEntity.names} clear${tempEntity.names};
-			protected Remove${tempEntity.name} remove${tempEntity.name};
+
+			<#if column.isMappingManyToMany()>
+				protected Add${tempEntity.name} add${tempEntity.name};
+				protected Clear${tempEntity.names} clear${tempEntity.names};
+				protected Remove${tempEntity.name} remove${tempEntity.name};
+			</#if>
 		</#if>
 	</#list>
 

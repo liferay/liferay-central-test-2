@@ -1,23 +1,53 @@
 package ${packagePath}.service.persistence;
 
 public class ${entity.name}Util {
-<#list methods as method >
-	<#if !method.isConstructor() && method.isPublic() >
-	public static ${method.returns.value}${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
-		<#list method.parameters as parameter>
-		${parameter.type.value}${serviceBuilder.getDimensions("${parameter.type.dimensions}")} ${parameter.name}<#if parameter_has_next>,</#if>
-		</#list>
-	)
-		<#list method.exceptions as exception>
-			<#if exception_index == 0> throws </#if>${exception.value}<#if exception_has_next>,</#if>
-		</#list>{
-		<#if method.returns.value != "void">
-		return
+
+	<#list methods as method>
+		<#if !method.isConstructor() && method.isPublic()>
+			public static ${method.returns.value}${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
+
+			<#list method.parameters as parameter>
+				${parameter.type.value}${serviceBuilder.getDimensions("${parameter.type.dimensions}")} ${parameter.name}
+
+				<#if parameter_has_next>
+					,
+				</#if>
+			</#list>
+
+			)
+
+			<#list method.exceptions as exception>
+				<#if exception_index == 0>
+					throws
+				</#if>
+
+				${exception.value}
+
+				<#if exception_has_next>
+					,
+				</#if>
+			</#list>
+
+			{
+				<#if method.returns.value != "void">
+					return
+				</#if>
+
+				getPersistence().${method.name}(
+
+				<#list method.parameters as parameter>
+					${parameter.name}
+
+					<#if parameter_has_next>
+						,
+					</#if>
+				</#list>
+
+				);
+			}
 		</#if>
-			getPersistence().${method.name}(<#list method.parameters as parameter>${parameter.name}<#if parameter_has_next>,</#if></#list>);
-	}
-	</#if>
-</#list>
+	</#list>
+
 	public static ${entity.name}Persistence getPersistence() {
 		return _getUtil()._persistence;
 	}
@@ -35,7 +65,9 @@ public class ${entity.name}Util {
 	}
 
 	private static final String _UTIL = ${entity.name}Util.class.getName();
+
 	private static ${entity.name}Util _util;
+
 	private ${entity.name}Persistence _persistence;
 
 }
