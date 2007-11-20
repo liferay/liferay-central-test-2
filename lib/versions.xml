@@ -1049,6 +1049,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/freemarker.jar</file-name>
+		<version>2.3.10</version>
+		<project-name>FreeMarker</project-name>
+		<project-url>http://www.freemarker.org</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/friki.jar</file-name>
 		<version>2.1.1</version>
 		<project-name>Friki</project-name>

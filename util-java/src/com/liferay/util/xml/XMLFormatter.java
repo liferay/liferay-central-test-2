@@ -121,20 +121,6 @@ public class XMLFormatter {
 
 		String content = bam.toString(ENCODING);
 
-		/*content = StringUtil.replace(
-			content,
-			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
-			"<?xml version=\"1.0\"?>");*/
-
-		int x = content.indexOf("<!DOCTYPE");
-
-		if (x != -1) {
-			x = content.indexOf(">", x) + 1;
-
-			content = content.substring(0, x) + "\n" +
-				content.substring(x, content.length());
-		}
-
 		// LEP-4257
 
 		//content = StringUtil.replace(content, "\n\n\n", "\n\n");
